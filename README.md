@@ -50,9 +50,9 @@ Samples are designed to illustrate functionality you'll need to implement to bui
 [outgoing-webhook#cs]:csharp/outgoing-webhook
 [outgoing-webhook#ts]:nodejs/outgoing-webhook
 
-[link-unfurl#cs]:csharp/link-unfurl
+[link-unfurl#cs]:csharp/link-unfurling
 
-[tab-sso#ts]:nodejs/tab-sso
+[tab-sso#ts]:nodejs/tabs-sso
 
 [proactive-msg#cs]:csharp/link-unfurl
 
