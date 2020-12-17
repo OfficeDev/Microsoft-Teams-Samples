@@ -10,7 +10,7 @@ To use the samples, clone this GitHub repository using Git.
     cd Microsoft-Teams-Samples
 ```
 
-## Sample lists
+## Samples list
 
 Samples are designed to illustrate functionality you'll need to implement to build great Teams apps!
 
