@@ -1,0 +1,13 @@
+﻿html(lang="en")
+  head
+    title Github-connector
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js")
+  body
+    p To add GitHub connector Sign in using your github account.
+    form
+      input(type='button', value='Sign in', onclick="javascript:window.location='https://outlook.office.com/connectors/Connect?state=' + window.location.href + '&app_id=96fd3531-952c-4bb1-bfaf-926e8e42f193&callback_url=#{serviceUrl}/config'")
+
+    

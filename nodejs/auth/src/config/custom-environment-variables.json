@@ -1,0 +1,20 @@
+{
+    "app": {
+        "baseUri": "BASE_URI",
+        "appId": "MICROSOFT_APP_ID",
+        "appPassword": "MICROSOFT_APP_PASSWORD"
+    },
+    "bot": {
+        "appId": "MICROSOFT_APP_ID",
+        "appPassword": "MICROSOFT_APP_PASSWORD"
+    },
+    "azureAD": {
+        "connectionName": "AZUREAD_CONNECTIONNAME"
+    },
+    "linkedIn": {
+        "connectionName": "LINKEDIN_CONNECTIONNAME"
+    },
+    "google": {
+        "connectionName": "GOOGLE_CONNECTIONNAME"
+    }
+}

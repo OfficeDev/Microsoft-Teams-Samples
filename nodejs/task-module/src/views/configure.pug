@@ -1,0 +1,14 @@
+extends layout.pug
+
+block content
+  div(class='font-semibold font-title') Configure your app here
+  p
+    div
+      label(for='tabChoice')
+      | Select the tab you would like to see:
+      | 
+      select#tabChoice(name='tabChoice')
+        option(value='' selected=true) (Select a tab)
+        option(value='first') First
+        option(value='second') Second
+        option(value='taskmodule') Task Module Demo

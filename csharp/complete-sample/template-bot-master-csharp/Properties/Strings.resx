@@ -1,0 +1,861 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="QuizAnswerNo" xml:space="preserve">
+    <value>Wrong Choice</value>
+  </data>
+  <data name="QuizAnswerYes" xml:space="preserve">
+    <value>You are Right</value>
+  </data>
+  <data name="HelpCaptionAtMention" xml:space="preserve">
+    <value>At Mention</value>
+  </data>
+  <data name="PlayGameChoice1" xml:space="preserve">
+    <value>choice1</value>
+  </data>
+  <data name="PlayGameChoice2" xml:space="preserve">
+    <value>choice2</value>
+  </data>
+  <data name="HelpCaptionDialogFlow" xml:space="preserve">
+    <value>Dialog Flow</value>
+  </data>
+  <data name="DialogFlowStep1" xml:space="preserve">
+    <value>This is step1 in Root Dialog</value>
+  </data>
+  <data name="DialogFlowStep2" xml:space="preserve">
+    <value>This is step2 in Root Dialog</value>
+  </data>
+  <data name="DialogFlowStep3" xml:space="preserve">
+    <value>This is step3 in Root Dialog After triggering the Hello Dialog</value>
+  </data>
+  <data name="HelpCaptionFetchRoster" xml:space="preserve">
+    <value>Fetch Members</value>
+  </data>
+  <data name="cmdFetchRoster" xml:space="preserve">
+    <value>names</value>
+  </data>
+  <data name="HelpTitle" xml:space="preserve">
+    <value>Template Options</value>
+  </data>
+  <data name="OptionNo" xml:space="preserve">
+    <value>no</value>
+  </data>
+  <data name="OptionYes" xml:space="preserve">
+    <value>yes</value>
+  </data>
+  <data name="payloadrosterOptionValue" xml:space="preserve">
+    <value>payload roster</value>
+  </data>
+  <data name="HelpCaptionPlayGame" xml:space="preserve">
+    <value>Play Game</value>
+  </data>
+  <data name="PlayGameFailMsg" xml:space="preserve">
+    <value>Awwww man! I'm still in the prototype phase.</value>
+  </data>
+  <data name="PromptInvalidMsg" xml:space="preserve">
+    <value>Ooops, what you choose is not a valid option, please try again!!</value>
+  </data>
+  <data name="PlayGameReplyMsg" xml:space="preserve">
+    <value>Did you pick,</value>
+  </data>
+  <data name="PlayGameStartMsg" xml:space="preserve">
+    <value>Let's play a game! You pick a button, and I will repeat it.</value>
+  </data>
+  <data name="PlayGameThanksMsg" xml:space="preserve">
+    <value>Yay!!!! What a fun game!</value>
+  </data>
+  <data name="PlayGamePromptForName" xml:space="preserve">
+    <value>Hi!  I'm a bot.  What is your name?</value>
+  </data>
+  <data name="PlayGameAnswerForName" xml:space="preserve">
+    <value>Hi! Nice to meet you </value>
+  </data>
+  <data name="Quiz1Question" xml:space="preserve">
+    <value>Question 1</value>
+  </data>
+  <data name="Quiz2Question" xml:space="preserve">
+    <value>Question 2</value>
+  </data>
+  <data name="Quiz1ThanksTitleMsg" xml:space="preserve">
+    <value>Thanks for Completing Quiz 1</value>
+  </data>
+  <data name="cmdRunQuiz" xml:space="preserve">
+    <value>quiz</value>
+  </data>
+  <data name="QuizThanksTitleMsg" xml:space="preserve">
+    <value>Thanks for playing fun quiz!!</value>
+  </data>
+  <data name="QuizTitleWelcomeMsg" xml:space="preserve">
+    <value>Hi, Welcome to the fun quiz. Let's get started..</value>
+  </data>
+  <data name="HelpCaptionRosterPayload" xml:space="preserve">
+    <value>Fetch Roster Payload</value>
+  </data>
+  <data name="cmdRosterPayload" xml:space="preserve">
+    <value>roster</value>
+  </data>
+  <data name="RosterTitle" xml:space="preserve">
+    <value>Here are the user information</value>
+  </data>
+  <data name="RosterWelcomeMsgTitle" xml:space="preserve">
+    <value>Processing the request for roster api user information!!</value>
+  </data>
+  <data name="cmdRunAtMentionDialog" xml:space="preserve">
+    <value>at mention</value>
+  </data>
+  <data name="cmdDialogFlow" xml:space="preserve">
+    <value>dialog flow</value>
+  </data>
+  <data name="cmdPrompt" xml:space="preserve">
+    <value>prompt</value>
+  </data>
+  <data name="HelpCaptionRunQuiz" xml:space="preserve">
+    <value>RunQuiz</value>
+  </data>
+  <data name="cmdHelloDialog" xml:space="preserve">
+    <value>hi</value>
+  </data>
+  <data name="HelloDialogMsg" xml:space="preserve">
+    <value>This is Hello Dialog</value>
+  </data>
+  <data name="ThanksRosterTitleMsg" xml:space="preserve">
+    <value>Thanks for searching the Roster Api.</value>
+  </data>
+  <data name="HelpCaptionHelloDialog" xml:space="preserve">
+    <value>Hello Dialog</value>
+  </data>
+  <data name="PlayGameWrongChoice" xml:space="preserve">
+    <value>Wrong Choice</value>
+  </data>
+  <data name="NullException" xml:space="preserve">
+    <value> is Null</value>
+  </data>
+  <data name="CaptionChatButton" xml:space="preserve">
+    <value>Chat</value>
+  </data>
+  <data name="CaptionInvokeHelloDailog" xml:space="preserve">
+    <value>Invoke Hello Dialog</value>
+  </data>
+  <data name="CaptionInvokeMultiDailog" xml:space="preserve">
+    <value>Invoke Multi Dialog</value>
+  </data>
+  <data name="cmdFetchLastDialog" xml:space="preserve">
+    <value>last dialog</value>
+  </data>
+  <data name="cmdMultiDialog1" xml:space="preserve">
+    <value>multi dialog 1</value>
+  </data>
+  <data name="cmdMultiDialog2" xml:space="preserve">
+    <value>multi dialog 2</value>
+  </data>
+  <data name="cmdSend1on1ConversationDialog" xml:space="preserve">
+    <value>send message to 1:1</value>
+  </data>
+  <data name="HelpCaptionFetchLastDialog" xml:space="preserve">
+    <value>Fetch Last Dialog</value>
+  </data>
+  <data name="HelpCaptionMultiDialog1" xml:space="preserve">
+    <value>Begin Multi Dailog 1</value>
+  </data>
+  <data name="HelpCaptionMultiDialog2" xml:space="preserve">
+    <value>Begin Multi Dialog 2</value>
+  </data>
+  <data name="HelpCaptionSend1on1Conversation" xml:space="preserve">
+    <value>Send 1:1 Message</value>
+  </data>
+  <data name="LastDialogAtMentionDialog" xml:space="preserve">
+    <value>AtMentionDialog</value>
+  </data>
+  <data name="LastDialogBeginDialog" xml:space="preserve">
+    <value>BeginDialog</value>
+  </data>
+  <data name="LastDialogErrorMsg" xml:space="preserve">
+    <value>Error finding last executed dialog</value>
+  </data>
+  <data name="LastDialogFetchPayloadRosterDialog" xml:space="preserve">
+    <value>FetchPayloadRosterDialog</value>
+  </data>
+  <data name="LastDialogFetchRosterDialog" xml:space="preserve">
+    <value>FetchRosterDialog</value>
+  </data>
+  <data name="LastDialogGameDialog" xml:space="preserve">
+    <value>GameDialog</value>
+  </data>
+  <data name="LastDialogHelpDialog" xml:space="preserve">
+    <value>HelpDialog</value>
+  </data>
+  <data name="LastDialogKey" xml:space="preserve">
+    <value>DialogId</value>
+  </data>
+  <data name="LastDialogMultiDialog1" xml:space="preserve">
+    <value>MultiDialog1</value>
+  </data>
+  <data name="LastDialogMultiDialog2" xml:space="preserve">
+    <value>MultiDialog2</value>
+  </data>
+  <data name="LastDialogPromptMsg" xml:space="preserve">
+    <value>Last response was from dialog: </value>
+  </data>
+  <data name="LastDialogQuiz1Dialog" xml:space="preserve">
+    <value>Quiz1 Dialog</value>
+  </data>
+  <data name="LastDialogQuiz2Dialog" xml:space="preserve">
+    <value>Quiz2 Dialog</value>
+  </data>
+  <data name="LastDialogQuizDialog" xml:space="preserve">
+    <value>Quiz Dialog</value>
+  </data>
+  <data name="MultiDialogCardSubTitle" xml:space="preserve">
+    <value>Multi Dialog Card Sub Title.</value>
+  </data>
+  <data name="MultiDialogCardText" xml:space="preserve">
+    <value>Multi Dialog Card Text</value>
+  </data>
+  <data name="MultiDialogCardTitle" xml:space="preserve">
+    <value>Multi Dialog Card Title.</value>
+  </data>
+  <data name="cmdSetupMessage" xml:space="preserve">
+    <value>setup text message</value>
+  </data>
+  <data name="cmdUpdateMessage" xml:space="preserve">
+    <value>update text message</value>
+  </data>
+  <data name="ErrorTextMessageUpdate" xml:space="preserve">
+    <value>Please setup card message using "setup text message" command before updating card.</value>
+  </data>
+  <data name="HelpCaptionSetupMessage" xml:space="preserve">
+    <value>Setup Message</value>
+  </data>
+  <data name="HelpCaptionUpdateMessage" xml:space="preserve">
+    <value>Update Message</value>
+  </data>
+  <data name="LastDialogSend1on1Dialog" xml:space="preserve">
+    <value>Send 1:1 Dialog</value>
+  </data>
+  <data name="LastDialogSetupMessasge" xml:space="preserve">
+    <value>SetupTextMessageDialog</value>
+  </data>
+  <data name="LastDialogUpdateMessasge" xml:space="preserve">
+    <value>UpdateLastTextMessageDialog</value>
+  </data>
+  <data name="Send1on1ConfirmMsg" xml:space="preserve">
+    <value>1:1 Message sent</value>
+  </data>
+  <data name="Send1on1Prompt" xml:space="preserve">
+    <value>Hey! I am Bot, How's going!!</value>
+  </data>
+  <data name="SetupMessagePrompt" xml:space="preserve">
+    <value>Message set to be updated</value>
+  </data>
+  <data name="SetUpMsgKey" xml:space="preserve">
+    <value>SetUpMsgKey</value>
+  </data>
+  <data name="UpdateMessageConfirmation" xml:space="preserve">
+    <value>Message updated - see above</value>
+  </data>
+  <data name="UpdateMessagePrompt" xml:space="preserve">
+    <value>This message has been updated</value>
+  </data>
+  <data name="UpdateCardMessageConfirmation" xml:space="preserve">
+    <value>Card updated - see above</value>
+  </data>
+  <data name="LastDialogSetupUpdateCard" xml:space="preserve">
+    <value>SetupUpdateCardMsgDialog</value>
+  </data>
+  <data name="LastDialogFetchDiaog" xml:space="preserve">
+    <value>FetchLastDialogName</value>
+  </data>
+  <data name="cmdUpdateCard" xml:space="preserve">
+    <value>setup card message</value>
+  </data>
+  <data name="HelpCaptionUpdateCard" xml:space="preserve">
+    <value>Update Card</value>
+  </data>
+  <data name="LastDialogHelloDialog" xml:space="preserve">
+    <value>HelloDialog</value>
+  </data>
+  <data name="cmdDisplayCards" xml:space="preserve">
+    <value>display cards</value>
+  </data>
+  <data name="cmdNoDisplayCards" xml:space="preserve">
+    <value>no</value>
+  </data>
+  <data name="DisplayCardHeroCard" xml:space="preserve">
+    <value>Hero Card</value>
+  </data>
+  <data name="DisplayCardO365ConnectorCardDefault" xml:space="preserve">
+    <value>Connector Card</value>
+  </data>
+  <data name="DisplayCardO365ConnectorCard2" xml:space="preserve">
+    <value>Connector Card 2</value>
+  </data>
+  <data name="DisplayCardO365ConnectorCard3" xml:space="preserve">
+    <value>Connector Card 3</value>
+  </data>
+  <data name="DisplayCardPromptText" xml:space="preserve">
+    <value>What card you would like to test?</value>
+  </data>
+  <data name="DisplayCardsPromptChoiceTitle" xml:space="preserve">
+    <value>Do you want to test another card?</value>
+  </data>
+  <data name="DisplayCardsThanksMsg" xml:space="preserve">
+    <value>Hope you liked the Cards!!</value>
+  </data>
+  <data name="DisplayCardThumbnailCard" xml:space="preserve">
+    <value>Thumbnail Card</value>
+  </data>
+  <data name="HelpCaptionDisplayCards" xml:space="preserve">
+    <value>Choose Cards</value>
+  </data>
+  <data name="cmdDeepLink" xml:space="preserve">
+    <value>deep link</value>
+  </data>
+  <data name="DeepLinkCard1To1ButtonCaption" xml:space="preserve">
+    <value>Static Tab Deep Link</value>
+  </data>
+  <data name="DeepLinkCard1To1Title" xml:space="preserve">
+    <value>Please click below to navigate static tab</value>
+  </data>
+  <data name="HelpCaptionDeepLink" xml:space="preserve">
+    <value>Tab Example</value>
+  </data>
+  <data name="AuthSampleCardTitle" xml:space="preserve">
+    <value>Please Clicked below any OAuth 2.0 Samples (Bot Command - "auth")</value>
+  </data>
+  <data name="cmdAuthSampleDialog" xml:space="preserve">
+    <value>auth</value>
+  </data>
+  <data name="DeepLinkCardConfigButtonCaption" xml:space="preserve">
+    <value>Config Tab Deep Link</value>
+  </data>
+  <data name="DeepLinkCardConfigTitle" xml:space="preserve">
+    <value>Please click below to navigate config tab</value>
+  </data>
+  <data name="FBAuthCardCaption" xml:space="preserve">
+    <value>Facebook Auth</value>
+  </data>
+  <data name="FBAuthCardValue" xml:space="preserve">
+    <value>fblogin</value>
+  </data>
+  <data name="HelpCaptionAuthSample" xml:space="preserve">
+    <value>Auth Sample</value>
+  </data>
+  <data name="OAuthCallbackMessage" xml:space="preserve">
+    <value>Please paste 12345 magic number in Bot to validate</value>
+  </data>
+  <data name="OAuthCallbackUserPrompt" xml:space="preserve">
+    <value>Please copy and paste the number returned after logging in.</value>
+  </data>
+  <data name="VSTSAuthCardCaption" xml:space="preserve">
+    <value>VSTS Auth</value>
+  </data>
+  <data name="VSTSAuthCardValue" xml:space="preserve">
+    <value>vstslogin</value>
+  </data>
+  <data name="FBLginSuccessPromptLogoutInfo" xml:space="preserve">
+    <value>To logged out from Facebook, use command 'fblogout'</value>
+  </data>
+  <data name="FBLoginSuccessPrompt" xml:space="preserve">
+    <value>You are logged in as:</value>
+  </data>
+  <data name="AuthCallbackResumeError" xml:space="preserve">
+    <value>Cannot resume!</value>
+  </data>
+  <data name="FBAuthDeserializeError" xml:space="preserve">
+    <value>Unable to deserialize the Facebook response.</value>
+  </data>
+  <data name="AuthMagicNumberNotMacthed" xml:space="preserve">
+    <value>Entered numbered is not valid!, please login again.</value>
+  </data>
+  <data name="FBCardButtonCaption" xml:space="preserve">
+    <value>Go to User Profile</value>
+  </data>
+  <data name="FBLoginCardButtonCaption" xml:space="preserve">
+    <value>Login to Facebook!</value>
+  </data>
+  <data name="FBLoginCardPrompt" xml:space="preserve">
+    <value>You need to authorize me</value>
+  </data>
+  <data name="FBLoginSessionExistsPrompt" xml:space="preserve">
+    <value>You are already logged in, Enjoy your login session!!</value>
+  </data>
+  <data name="FBLoginTitle" xml:space="preserve">
+    <value>Please login in using this card</value>
+  </data>
+  <data name="FBLogoutPrompt" xml:space="preserve">
+    <value>To logged out from Facebook, use command 'fblogout'</value>
+  </data>
+  <data name="MessageActivity" xml:space="preserve">
+    <value>message</value>
+  </data>
+  <data name="VSTSAuthTokenKey" xml:space="preserve">
+    <value>VSTSAuthToken</value>
+  </data>
+  <data name="VSTSCallbackAuthError" xml:space="preserve">
+    <value>There is some internal error!!</value>
+  </data>
+  <data name="DisplayCardErrorMsg" xml:space="preserve">
+    <value>Failed with message:</value>
+  </data>
+  <data name="FBSuccessfulLogoutLoginPrompt" xml:space="preserve">
+    <value>To login again, use command 'fblogin'!</value>
+  </data>
+  <data name="FBSuccessfulLogoutPrompt" xml:space="preserve">
+    <value>You are logged out from Facebook acount!</value>
+  </data>
+  <data name="HeroCardButtonCaption" xml:space="preserve">
+    <value>Get Started</value>
+  </data>
+  <data name="HeroCardImageUrl" xml:space="preserve">
+    <value>https://sec.ch9.ms/ch9/7ff5/e07cfef0-aa3b-40bb-9baa-7c9ef8ff7ff5/buildreactionbotframework_960.jpg</value>
+  </data>
+  <data name="HeroCardSubTitle" xml:space="preserve">
+    <value>Your bots — wherever your users are talking</value>
+  </data>
+  <data name="HeroCardTextMsg" xml:space="preserve">
+    <value>Build and connect intelligent bots to interact with your users naturally wherever they are, from text/sms to Skype, Slack, Office 365 mail and other popular services.</value>
+  </data>
+  <data name="HeroCardTitle" xml:space="preserve">
+    <value>BotFramework Hero Card</value>
+  </data>
+  <data name="LastDialogFacebookDialog" xml:space="preserve">
+    <value>SimpleFacebookAuthDialog</value>
+  </data>
+  <data name="LastDialogVSTSDialog" xml:space="preserve">
+    <value>VSTSAuthDialog</value>
+  </data>
+  <data name="O365V1Section1" xml:space="preserve">
+    <value>This is the text1</value>
+  </data>
+  <data name="O365V1Section2" xml:space="preserve">
+    <value>This is the text2</value>
+  </data>
+  <data name="O365V1Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="O365V2ActivityTitle" xml:space="preserve">
+    <value>Batch upload for TAX data on db-srv-hr1 aborted due to timeout. (ref324)</value>
+  </data>
+  <data name="O365V2Fact1Key" xml:space="preserve">
+    <value>Receive Time</value>
+  </data>
+  <data name="O365V2Fact1Value" xml:space="preserve">
+    <value>2016-05-30T16:50:02.503Z</value>
+  </data>
+  <data name="O365V2Fact2Key" xml:space="preserve">
+    <value>Node</value>
+  </data>
+  <data name="O365V2Fact2Value" xml:space="preserve">
+    <value>omi10svr</value>
+  </data>
+  <data name="O365V2Fact3Key" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="O365V2Fact3Value" xml:space="preserve">
+    <value>job</value>
+  </data>
+  <data name="O365V2Fact4Key" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="O365V2Fact4Value" xml:space="preserve">
+    <value>medium</value>
+  </data>
+  <data name="O365V2themecolor" xml:space="preserve">
+    <value>fe9a13</value>
+  </data>
+  <data name="O365V2Title" xml:space="preserve">
+    <value>**New major event on omi10svr**</value>
+  </data>
+  <data name="O365V3ActivitySubtitle" xml:space="preserve">
+    <value>9/13/2016, 11:46am</value>
+  </data>
+  <data name="O365V3ActivityTitle" xml:space="preserve">
+    <value>Miguel Garcia</value>
+  </data>
+  <data name="O365V3Fact1Key" xml:space="preserve">
+    <value>Repository</value>
+  </data>
+  <data name="O365V3Fact1Value" xml:space="preserve">
+    <value>mgarcia\\test</value>
+  </data>
+  <data name="O365V3Fact2Key" xml:space="preserve">
+    <value>Issue #:</value>
+  </data>
+  <data name="O365V3Fact2Value" xml:space="preserve">
+    <value>176715375</value>
+  </data>
+  <data name="O365V3ImageUrl" xml:space="preserve">
+    <value>http://connectorsdemo.azurewebsites.net/images/MSC12_Oscar_002.jpg</value>
+  </data>
+  <data name="O365V3Summary" xml:space="preserve">
+    <value>Issue 176715375</value>
+  </data>
+  <data name="O365V3Text" xml:space="preserve">
+    <value>There is a problem with Push notifications, they don't seem to be picked up by the connector.</value>
+  </data>
+  <data name="O365V3ThemeColor" xml:space="preserve">
+    <value>0078D7</value>
+  </data>
+  <data name="O365V3Title" xml:space="preserve">
+    <value>Issue opened: Push notifications not working</value>
+  </data>
+  <data name="ThumbnailCardButtonCaption" xml:space="preserve">
+    <value>Get Started</value>
+  </data>
+  <data name="ThumbnailCardImageUrl" xml:space="preserve">
+    <value>https://sec.ch9.ms/ch9/7ff5/e07cfef0-aa3b-40bb-9baa-7c9ef8ff7ff5/buildreactionbotframework_960.jpg</value>
+  </data>
+  <data name="ThumbnailCardSubTitle" xml:space="preserve">
+    <value>Your bots — wherever your users are talking</value>
+  </data>
+  <data name="ThumbnailCardTextMsg" xml:space="preserve">
+    <value>Build and connect intelligent bots to interact with your users naturally wherever they are, from text/sms to Skype, Slack, Office 365 mail and other popular services.</value>
+  </data>
+  <data name="ThumbnailCardTitle" xml:space="preserve">
+    <value>BotFramework Thumbnail Card</value>
+  </data>
+  <data name="VSTSApiIssue" xml:space="preserve">
+    <value>Issue:</value>
+  </data>
+  <data name="VSTSApiRequestError" xml:space="preserve">
+    <value>Request Issue:</value>
+  </data>
+  <data name="VSTSGetWorkItemCardButtonCaption" xml:space="preserve">
+    <value>Go to Work Item</value>
+  </data>
+  <data name="VSTSGetWorkItemLoginPrompt" xml:space="preserve">
+    <value>I'm sorry. In order to use this functionality you must log in.</value>
+  </data>
+  <data name="VSTSGetWorkItemPrompt" xml:space="preserve">
+    <value>What is the id of the work item you are looking for?</value>
+  </data>
+  <data name="VSTSLoginCardButtonCaption" xml:space="preserve">
+    <value>Login to VSTS!</value>
+  </data>
+  <data name="VSTSLoginCardTitle" xml:space="preserve">
+    <value>You need to authorize me</value>
+  </data>
+  <data name="VSTSLoginSessionExistsPrompt" xml:space="preserve">
+    <value>You are already logged in VSTS, Enjoy your login session!!</value>
+  </data>
+  <data name="VSTSLoginSuccessPrompt" xml:space="preserve">
+    <value>You are successfully logged-in!!</value>
+  </data>
+  <data name="VSTSLoginTitle" xml:space="preserve">
+    <value>Please login in using this card</value>
+  </data>
+  <data name="VSTSlogoutPrompt" xml:space="preserve">
+    <value>To logged out from VSTS, use command 'vstslogout'</value>
+  </data>
+  <data name="VSTSSuccessfulLogoutLoginPrompt" xml:space="preserve">
+    <value>To login again, use command 'vstslogin'!</value>
+  </data>
+  <data name="VSTSSuccessfulLogoutPrompt" xml:space="preserve">
+    <value>You are logged out from VSTS acount!</value>
+  </data>
+  <data name="LastDialogConnectorCard" xml:space="preserve">
+    <value>O365ConnectorCardDailog</value>
+  </data>
+  <data name="LastDialogDeepLinkStaticTabDialog" xml:space="preserve">
+    <value>DeepLinkStaticTabDialog</value>
+  </data>
+  <data name="LastDialogDisplayCardsDialog" xml:space="preserve">
+    <value>DisplayCardsDialog</value>
+  </data>
+  <data name="LastDialogHeroCard" xml:space="preserve">
+    <value>HeroCardDialog</value>
+  </data>
+  <data name="LastDialogThumbnailCard" xml:space="preserve">
+    <value>ThumbnailcardDailog</value>
+  </data>
+  <data name="cmdLocalTime" xml:space="preserve">
+    <value>localtime</value>
+  </data>
+  <data name="cmdValueMessageBack" xml:space="preserve">
+    <value>msgback</value>
+  </data>
+  <data name="HelpLocalTimeZone" xml:space="preserve">
+    <value>Local Time</value>
+  </data>
+  <data name="LastDialogMessageBackDialog" xml:space="preserve">
+    <value>Message Back Dailog</value>
+  </data>
+  <data name="LocalTimeZonePrompt" xml:space="preserve">
+    <value>Here is Local Time - </value>
+  </data>
+  <data name="MessageBackCardButtonCaption" xml:space="preserve">
+    <value>Message Back</value>
+  </data>
+  <data name="MessageBackDisplayedText" xml:space="preserve">
+    <value>This is Displayed Text for Message Back</value>
+  </data>
+  <data name="MessageBackPayloadText" xml:space="preserve">
+    <value>This is Message Back PayLoad Text.</value>
+  </data>
+  <data name="UTCTimeZonePrompt" xml:space="preserve">
+    <value>Here is UTC time -</value>
+  </data>
+  <data name="ComposeExtensionCardTypeKeyword" xml:space="preserve">
+    <value>composeExtensionCardType</value>
+  </data>
+  <data name="ComposeExtensionInitialRunText" xml:space="preserve">
+    <value>This Compose Extension is used as Compose Extension Sample. To change your settings either enter the work 'settings' or change your settings on the settings menu option.To reset your configuration, simply enter the word 'reset'.</value>
+  </data>
+  <data name="ComposeExtensionNoUserData" xml:space="preserve">
+    <value>ERROR: No user data</value>
+  </data>
+  <data name="ComposeExtensionResetKeyword" xml:space="preserve">
+    <value>reset</value>
+  </data>
+  <data name="ComposeExtensionResetText" xml:space="preserve">
+    <value>Your compose extension state has been reset.</value>
+  </data>
+  <data name="ComposeExtensionSettingKeyword" xml:space="preserve">
+    <value>setting</value>
+  </data>
+  <data name="ComposeExtensionSettingsKeyword" xml:space="preserve">
+    <value>settings</value>
+  </data>
+  <data name="manifestInitialRun" xml:space="preserve">
+    <value>initialRun</value>
+  </data>
+  <data name="manifestParameterName" xml:space="preserve">
+    <value>query</value>
+  </data>
+  <data name="ComposeExtensionQuerySettingUrl" xml:space="preserve">
+    <value>composeextension/querysettingurl</value>
+  </data>
+  <data name="DisplayCardO365ConnectorActionableCardDefault" xml:space="preserve">
+    <value>Connector Card Actions</value>
+  </data>
+  <data name="cmdO365ConnectorCardActionableMessages" xml:space="preserve">
+    <value>Actionable Card</value>
+  </data>
+  <data name="LastDialogActionableMessageDialog" xml:space="preserve">
+    <value>ActionableMessageCardDialog</value>
+  </data>
+  <data name="LastDialogConnectorCardDialog" xml:space="preserve">
+    <value>ConnectorCardDialog</value>
+  </data>
+  <data name="TenantLevelDeniedAccess" xml:space="preserve">
+    <value>MS Teams: Attempted access from a different Office 365 tenant: message rejected</value>
+  </data>
+  <data name="DisplayCardO365ConnectorActionableCard2" xml:space="preserve">
+    <value>Connector Card Actions 2</value>
+  </data>
+  <data name="LastDialogPopUpSignIn" xml:space="preserve">
+    <value>PopUpSignInDialog</value>
+  </data>
+  <data name="cmdPopUpSignIn" xml:space="preserve">
+    <value>signin</value>
+  </data>
+  <data name="HelpCaptionPopUpSignIn" xml:space="preserve">
+    <value>Popup Sign-In</value>
+  </data>
+  <data name="PopUpSignInCardButtonTitle" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="PopUpSignInCardTitle" xml:space="preserve">
+    <value>Please click below for Popup Sign-In experience</value>
+  </data>
+  <data name="cmdMessageBack" xml:space="preserve">
+    <value>msgback</value>
+  </data>
+  <data name="HelpCaptionMessageBack" xml:space="preserve">
+    <value>Message Back</value>
+  </data>
+  <data name="MessageBackTitleMsg" xml:space="preserve">
+    <value>This is Message Back example</value>
+  </data>
+  <data name="TenantConfigStaticValue" xml:space="preserve">
+    <value>#PleaseSetTenantInformation</value>
+  </data>
+  <data name="InvokeRequestJsonKey" xml:space="preserve">
+    <value>invokeKey</value>
+  </data>
+  <data name="LikeMessage" xml:space="preserve">
+    <value>Message Liked!!</value>
+  </data>
+  <data name="RemoveLike" xml:space="preserve">
+    <value>Like Removed!!</value>
+  </data>
+  <data name="BotWelcomeMessage" xml:space="preserve">
+    <value>Hello, I'm your new bot!</value>
+  </data>
+  <data name="BeginDialog" xml:space="preserve">
+    <value>Hello, welcome to begin dialog</value>
+  </data>
+  <data name="BeginDialogEnd" xml:space="preserve">
+    <value>Begin dialog end</value>
+  </data>
+  <data name="DisplayCardMsgTitle" xml:space="preserve">
+    <value>Please select any card</value>
+  </data>
+  <data name="QuizDialogBeginTitle" xml:space="preserve">
+    <value>Begin quiz dialog</value>
+  </data>
+  <data name="DefaultDialogTitleMsg" xml:space="preserve">
+    <value>Please choose options to play with Sample App.</value>
+  </data>
+  <data name="EndDialogTitleMsg" xml:space="preserve">
+    <value>Thanks for using Sample App</value>
+  </data>
+  <data name="cmdGetTeamInfo" xml:space="preserve">
+    <value>team info</value>
+  </data>
+  <data name="HelpCaptionTeamInfo" xml:space="preserve">
+    <value>Team Info</value>
+  </data>
+  <data name="LastDialogFetchTeamInfoDialog" xml:space="preserve">
+    <value>FetchTeamInfoDialog</value>
+  </data>
+  <data name="TeamInfo1To1ConversationError" xml:space="preserve">
+    <value>This command only works in channels</value>
+  </data>
+  <data name="UpdateCardButtonCaption" xml:space="preserve">
+    <value>Update Card</value>
+  </data>
+  <data name="SetupCardSubTitle" xml:space="preserve">
+    <value>Subtitle</value>
+  </data>
+  <data name="SetUpCardTitle" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="UpdatedCardButtonCaption" xml:space="preserve">
+    <value>MSDN</value>
+  </data>
+  <data name="UpdatedCardSubTitle" xml:space="preserve">
+    <value>This card is updated now</value>
+  </data>
+  <data name="UpdatedCardTitle" xml:space="preserve">
+    <value>Updated card </value>
+  </data>
+  <data name="NoMsgToUpdate" xml:space="preserve">
+    <value>No message to update.</value>
+  </data>
+  <data name="ErrorUpdatingCard" xml:space="preserve">
+    <value>Error updating card message: </value>
+  </data>
+  <data name="DisplayCardAdaptiveCard" xml:space="preserve">
+    <value>Adaptive Card</value>
+  </data>
+  <data name="LastDialogAdaptiveCard" xml:space="preserve">
+    <value>AdaptiveCardDialog</value>
+  </data>
+</root>

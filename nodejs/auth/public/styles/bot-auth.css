@@ -1,0 +1,28 @@
+html, body, div.surface, div.panel {
+    height: 100%;
+    margin: 0;
+}
+
+div.panel {
+    padding: 15px;
+}
+
+@media screen { 
+  html, body {
+    font: 16px sans-serif;
+    background: #fff;
+    padding: 3px;
+    color: #000;
+    margin: 0;
+  }
+
+  .instruction-text {
+    margin: 32px;
+    text-align: center;
+  }
+
+  .verification-code {
+    font-weight: 600;
+    font-size: 2rem;
+  }
+}
