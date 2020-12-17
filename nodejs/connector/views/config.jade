@@ -1,0 +1,28 @@
+﻿doctype html
+body(onload='selection()')
+form#selectform(action='config', method='post')
+  | Logged in as #{user.displayName}.
+  br
+  br
+  | Select a Repository :
+  br
+  br
+  select.selectpicker(data-style='btn-info', name='selectpicker', id='selectpicker')
+  script(type='text/javascript').
+    function selection(){
+    var xmlHttp = new XMLHttpRequest();
+    var repoList = document.getElementById("selectpicker");
+    xmlHttp.open("GET", "https://api.github.com/user/repos", false);
+    xmlHttp.setRequestHeader('Authorization', 'Bearer #{user.accessToken}');
+    xmlHttp.send();
+    var result = JSON.parse(xmlHttp.responseText);
+    for(var i =0;i<result.length;i++) {
+      var option = document.createElement("option");
+      option.text = result[i].name;
+      option.value = result[i].name;
+      repoList.add(option);
+    }
+    }
+  br
+  br
+  input(type='submit', value='Submit')

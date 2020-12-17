@@ -1,0 +1,11 @@
+{
+    "app": {
+        "baseUri": "",
+        "appId": ""
+    },
+    "bot": {
+        "botId": "",
+        "botPassword": ""
+    },
+    "storage": "memory"
+}

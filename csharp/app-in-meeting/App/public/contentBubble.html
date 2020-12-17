@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Meeting Token App</title>
+</head>
+
+<body style="width: 250px;height: 100px;display: grid;">
+
+    <div style="color: white;flex-flow: column;text-align: center;">Current Token</div>
+
+    <h2 id="current-token"
+        style="color: white;flex-flow: column;align-content: center;justify-content: center;text-align: center;">N/A
+    </h2>
+
+    <h3 id="current-user"
+        style="color: white;flex-flow: column;align-content: center;justify-content: center;text-align: center;">
+        N/A
+    </h3>
+
+    <script>
+        (function () {
+            const urlParams = new URLSearchParams(decodeURIComponent(window.location.search));
+            const values = urlParams.values();
+            const current = values.next().value;
+            const userName = values.next().value;
+            document.getElementById("current-token").innerText = current;
+            document.getElementById("current-user").innerText = userName;
+        })()
+    </script>
+
+</body>
+
+</html>

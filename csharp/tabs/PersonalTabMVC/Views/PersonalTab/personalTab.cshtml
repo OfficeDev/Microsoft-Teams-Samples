@@ -1,0 +1,63 @@
+﻿
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<body>
+
+    <script>
+        //add call to microsoftTeams here.gi
+    </script>
+
+    @{
+        <section style="width: 100%; display: table">
+            <div style="display:table-row">
+                <div style="width: auto; display:table-cell;">
+
+                    <div id="gray" style="display:none;"><h3 style="color:#6364a5">@ViewBag.Gray</h3></div>
+
+                </div>
+
+                <div style="display: table-cell">
+
+                    <div id="red" style="display:none;"><h3 style="color:#6364a5">@ViewBag.Red</h3></div>
+
+                </div>
+
+            </div>
+        </section>
+    }
+
+    <script>
+        let gr = document.getElementById("gray").style;
+        let rd = document.getElementById("red").style;
+
+        const colorClickGray = () => {
+            gr.display = "block";
+            rd.display = "none";
+        }
+
+        const colorClickRed = () => {
+            rd.display = "block";
+            gr.display = "none";
+        }
+
+</script>
+
+    <button onclick="(document.getElementById('icon').src='/images/iconGray.png'); colorClickGray()">Select Gray</button>
+
+    <img id="icon" src="~/images/teamsIcon.png" alt="icon" style="width:100px" />
+
+    <button onclick="(document.getElementById('icon').src='/images/iconRed.png'); colorClickRed()">Select Red</button>
+
+    <p>
+        <h2 style="color:#6364a5">This is your personal tab</h2>
+        <br />
+        <br />
+    </p>
+</body>
+</html>

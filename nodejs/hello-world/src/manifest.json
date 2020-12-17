@@ -1,0 +1,78 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.3/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.3",
+    "version": "1.0.0",
+    "id": "00000000-0000-0000-0000-000000000000",
+    "packageName": "com.contoso.helloworld",
+    "developer": {
+        "name": "Contoso",
+        "websiteUrl": "https://www.microsoft.com",
+        "privacyUrl": "https://www.microsoft.com/privacy",
+        "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+    },
+    "name": {
+        "short": "Hello World",
+        "full": "Hello World App for Microsoft Teams"
+    },
+    "description": {
+        "short": "Hello World App for Microsoft Teams",
+        "full": "This sample app provides a very simple app for Microsoft Teams. You can extend this to add more content and capabilities."
+    },
+    "icons": {
+        "outline": "contoso20x20.png",
+        "color": "contoso96x96.png"
+    },
+    "accentColor": "#60A18E",
+    "staticTabs": [
+        {
+            "entityId": "com.contoso.helloworld.hellotab",
+            "name": "Hello Tab",
+            "contentUrl": "https://yourteamsapp.ngrok.io/hello",
+            "scopes": [
+                "personal"
+            ]
+        }
+    ],
+    "configurableTabs": [
+        {
+            "configurationUrl": "https://yourteamsapp.ngrok.io/configure",
+            "canUpdateConfiguration": true,
+            "scopes": [
+                "team"
+            ]
+        }
+    ],
+    "bots": [
+        {
+            "botId": "00000000-0000-0000-0000-000000000000",
+            "needsChannelSelector": false,
+            "isNotificationOnly": false,
+            "scopes": [
+                "team",
+                "personal"
+            ]
+        }
+    ],
+    "composeExtensions": [
+        {
+            "botId": "00000000-0000-0000-0000-000000000000",
+            "commands": [
+                {
+                    "id": "getRandomText",
+                    "description": "Gets some random text and images that you can insert in messages for fun.",
+                    "title": "Get some random text for fun",
+                    "initialRun": true,
+                    "parameters": [
+                        {
+                            "name": "cardTitle",
+                            "description": "Card title to use",
+                            "title": "Card title"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "permissions": [],
+    "validDomains": []
+}

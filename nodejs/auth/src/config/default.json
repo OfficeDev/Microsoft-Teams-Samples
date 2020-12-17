@@ -1,0 +1,22 @@
+{
+    "app": {
+        "baseUri": "https://example.com",
+        "appId": "<app_id>"
+    },
+    "bot": {
+        "appId": "<app_id>",
+        "appPassword": "<app_password>"
+    },
+    "azureAD": {
+        "connectionName": ""
+    },
+    "linkedIn": {
+        "connectionName": ""
+    },
+    "google": {
+        "connectionName": ""
+    },
+    "storage": "memory",
+    "features": {
+    }
+}

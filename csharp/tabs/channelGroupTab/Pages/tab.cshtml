@@ -1,0 +1,92 @@
+﻿@page "/tab"
+
+@using ChannelGroupTab
+
+@{
+    Layout = "_Layout";
+}
+
+<script>
+    //initialize microsoftTeams in _Layout page
+
+    let saveGray = () => {
+        microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
+            microsoftTeams.settings.setSettings({
+                websiteUrl: "replace with ngrok address",
+                contentUrl: "replace with ngrok address/gray",
+                entityId: "grayIconTab",
+                suggestedDisplayName: "MyNewTab",
+                removeUrl: ""
+            });
+            saveEvent.notifySuccess();
+        });
+    }
+    let saveRed = () => {
+        microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
+            microsoftTeams.settings.setSettings({
+                websiteUrl: "replace with ngrok address",
+                contentUrl: "replace with ngrok address/red",
+                entityId: "redIconTab",
+                suggestedDisplayName: "MyNewTab",
+                removeUrl: ""
+            });
+            saveEvent.notifySuccess();
+        });
+    }
+</script>
+
+@{
+    <section style="width: 100%; display: table">
+        <div style="display:table-row">
+            <div style="width: auto; display:table-cell;">
+                @{ Tab gray = new Tab();
+                    string g = ($"{@gray.GetColor()} gray!'");
+                    <div id="gray" style="display:none;">@g</div>
+                }
+            </div>
+
+            <div style="display: table-cell">
+                @{ Tab red = new Tab();
+                    string r = ($"{@red.GetColor()} red!'");
+                    <div id="red" style="display:none;">@r</div>
+                }
+
+            </div>
+
+        </div>
+    </section>
+}
+
+<script>
+    let gr = document.getElementById("gray").style;
+    let rd = document.getElementById("red").style;
+    let dis = document.getElementsByClassName("disappear").style;
+
+    const colorClickGray = () => {
+        gr.display = "block";
+        rd.display = "none";
+        microsoftTeams.settings.setValidityState(true);
+        $(".disappear").remove();
+        saveGray()
+    }
+
+    const colorClickRed = () => {
+        rd.display = "block";
+        gr.display = "none";
+        microsoftTeams.settings.setValidityState(true);
+        $(".disappear").remove();
+        saveRed();
+    }
+</script>
+
+<p>
+    <h2 class="disappear" style="color:#6364a5">Configure your tab:</h2>
+    <br />
+    <br />
+</p>
+
+<button class="disappear" onclick="(document.getElementById('icon').src = '/images/iconGray.png'); colorClickGray()">Select Gray</button>
+
+<img id="icon" src="/images/teamsIcon.png" alt="icon" style="width:100px" />
+
+<button class="disappear" onclick="(document.getElementById('icon').src = '/images/iconRed.png'); colorClickRed()">Select Red</button>

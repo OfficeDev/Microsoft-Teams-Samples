@@ -1,0 +1,182 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.5",
+  "version": "1.5",
+  "id": "<<REGISTERED_BOT_ID>>",
+  "packageName": "com.Template.microsoftteams",
+  "developer": {
+    "name": "Bot Template",
+    "websiteUrl": "https://dev.botframework.com",
+    "privacyUrl": "https://privacy.microsoft.com/en-us/privacystatement",
+    "termsOfUseUrl": "https://www.botframework.com/Content/Microsoft-Bot-Framework-Preview-Online-Services-Agreement.htm"
+  },
+  "name": {
+    "short": "Bot Template",
+    "full": "Bot Template"
+  },
+  "description": {
+    "short": "Bot Template - a template for creating a bot",
+    "full": "The Bot Template is meant to create an environment in which to easily create a bot."
+  },
+  "icons": {
+    "outline": "bot_blue.png",
+    "color": "bot_blue.png"
+  },
+  "accentColor": "#0079bf",
+  "configurableTabs": [
+    {
+      "configurationUrl": "<<BASE_URI>>/tab/tabConfig/index.html",
+      "canUpdateConfiguration": false,
+      "scopes": [ "team", "groupchat" ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "contentUrl": "<<BASE_URI>>/loading",
+      "entityId": "1on1test123",
+      "name": "Bot Info",
+      "scopes": [
+        "team",
+        "personal"
+      ]
+    },
+    {
+      "contentUrl": "<<BASE_URI>>/tab-auth/simple",
+      "entityId": "simpleAuth",
+      "name": "Simple Auth",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "contentUrl": "<<BASE_URI>>/tab-auth/silent",
+      "entityId": "silentAuth",
+      "name": "Silent Auth",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "<<REGISTERED_BOT_ID>>",
+      "scopes": [ "team", "personal", "groupchat" ],
+      "commandLists": [
+        {
+          "scopes": [
+            "team"
+          ],
+          "commands": [
+            {
+              "title": "hello",
+              "description": "Runs the simplest hello dialog"
+            },
+            {
+              "title": "multi dialog 2",
+              "description": "Displays a card with invoke buttons"
+            },
+            {
+              "title": "roster",
+              "description": "Fetches the full roster payload for the current conversation"
+            },
+            {
+              "title": "names",
+              "description": "Lists the names of the users for the current conversation"
+            },
+            {
+              "title": "last dialog",
+              "description": "Shows which dialog sent the last message"
+            },
+            {
+              "title": "send message to 1:1",
+              "description": "Send the user a 1:1 message"
+            },
+            {
+              "title": "setup text message",
+              "description": "Sets up a text message that can be updated"
+            },
+            {
+              "title": "update text message",
+              "description": "Updates a text message once it is setup to be updated"
+            },
+            {
+              "title": "setup card message",
+              "description": "Sets up a card that can be updated"
+            }
+          ]
+        },
+        {
+          "scopes": [
+            "personal"
+          ],
+          "commands": [
+            {
+              "title": "hello",
+              "description": "Runs the simplest hello dialog"
+            },
+            {
+              "title": "multi dialog 2",
+              "description": "Displays a card with invoke buttons"
+            },
+            {
+              "title": "roster",
+              "description": "Fetches the full roster payload for the current conversation"
+            },
+            {
+              "title": "names",
+              "description": "Lists the names of the users for the current conversation"
+            },
+            {
+              "title": "last dialog",
+              "description": "Shows which dialog sent the last message"
+            },
+            {
+              "title": "send message to 1:1",
+              "description": "Send the user a 1:1 message"
+            },
+            {
+              "title": "setup text message",
+              "description": "Sets up a text message that can be updated"
+            },
+            {
+              "title": "update text message",
+              "description": "Updates a text message once it is setup to be updated"
+            },
+            {
+              "title": "setup card message",
+              "description": "Sets up a card that can be updated"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "<<REGISTERED_BOT_ID>>",
+      "canUpdateConfiguration": true,
+      "commands": [
+        {
+          "id": "search123",
+          "description": "Find a card",
+          "title": "Search",
+          "initialRun": true,
+          "parameters": [
+            {
+              "title": "query123",
+              "name": "query",
+              "description": "Search string"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "<<BASE_URI_DOMAIN>>"
+  ]
+}

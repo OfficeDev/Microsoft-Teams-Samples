@@ -1,0 +1,42 @@
+{
+  "name": "msteams-nodejs-hello-world",
+  "version": "1.0.0",
+  "description": "Microsoft Teams Hello World sample app written in ES6 with Bot Framework v4 SDK",
+  "scripts": {
+    "start": "nodemon --exec babel-node src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OfficeDev/msteams-samples-hello-world-nodejs.git"
+  },
+  "author": "Microsoft Corp.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OfficeDev/msteams-samples-hello-world-nodejs/issues"
+  },
+  "homepage": "https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-nodejs",
+  "dependencies": {
+    "@babel/polyfill": "^7.8.7",
+    "botbuilder": "^4.8.0",
+    "config": "^1.28.1",
+    "core-js": "^2.6.11",
+    "dotenv": "^8.2.0",
+    "express": "^4.16.2",
+    "faker": "^4.1.0",
+    "path": "^0.12.7",
+    "restify": "^8.5.1",
+    "send": "^0.17.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/register": "^7.9.0",
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-zip": "^5.0.1",
+    "nodemon": "^2.0.3"
+  }
+}

@@ -1,0 +1,53 @@
+{
+    // Use IntelliSense to learn about possible Node.js debug attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Attach by Process ID",
+            "processId": "${command:PickProcess}"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch - Teams Debug",
+            "program": "${workspaceRoot}/src/app.ts",
+            "cwd": "${workspaceRoot}/build/src",
+            "preLaunchTask": "build",
+            "sourceMaps": true,
+            "outFiles": [ "${workspaceRoot}/build/**/*.js" ]
+        },
+        {
+            "name": "Attach to Teams",
+            "type": "chrome",
+            "request": "launch",
+            "port": 9222,
+            "runtimeExecutable": "C:/Users/billb/AppData/Local/Microsoft/Teams/Update.exe --processStart 'Teams.exe'",
+            "cwd": "{workspaceRoot}/build/src",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch - Fiddler (only works when running Fiddler)",
+            "program": "${workspaceRoot}/src/app.ts",
+            "cwd": "${workspaceRoot}/build/src",
+            "preLaunchTask": "build",
+            "sourceMaps": true,
+            "outFiles": [ "${workspaceRoot}/build/**/*.js" ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch (no build)",
+            "program": "${workspaceRoot}/build/src/app.js",
+            "cwd": "${workspaceRoot}/build/src",
+            "sourceMaps": true,
+            "outFiles": [ "${workspaceRoot}/build/src/**/*.js" ]
+        }
+    ]
+}

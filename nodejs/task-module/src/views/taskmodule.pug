@@ -1,0 +1,65 @@
+//- Copyright (c) Microsoft Corporation
+//- All rights reserved.
+//-
+//- MIT License:
+//- Permission is hereby granted, free of charge, to any person obtaining
+//- a copy of this software and associated documentation files (the
+//- "Software"), to deal in the Software without restriction, including
+//- without limitation the rights to use, copy, modify, merge, publish,
+//- distribute, sublicense, and/or sell copies of the Software, and to
+//- permit persons to whom the Software is furnished to do so, subject to
+//- the following conditions:
+//-
+//- The above copyright notice and this permission notice shall be
+//- included in all copies or substantial portions of the Software.
+//-
+//- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+//- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+//- MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+//- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+//- LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+//- OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+//- WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//-
+//-
+
+extends layout.pug
+
+block content
+  div(class='font-semibold font-title') Microsoft Teams Task Modules Demo
+  p A task module allows Teams app developers to create one or more custom, modal experiences with custom code or <a src="https://adaptivecards.io">Adaptive cards</a> for their users, particularly useful for initiating and/or completing tasks using a GUI that does not litter a Teams conversation with superfluous, intermediate task completion information.
+  p Let's try it out!
+    div(id="buttons" style="text-align: center; margin-left: auto; margin-right: auto")
+      button(class="taskModuleButton button-primary" id="YouTube") YouTube
+      div <a id="dlYouTube" target="_blank")>Deep Link</a>
+      p
+      button(class="taskModuleButton button-primary" id="PowerApp") PowerApp
+      div <a id="dlPowerApps" target="_blank")>Deep Link</a>
+      p
+      button(class="taskModuleButton button-primary" id="customform") Custom Form
+      div
+        <a id="dlCustomForm" target="_blank")>Deep Link</a>
+        pre(id="customFormResults" style="white-space: pre-wrap; display: none")
+      p
+      button(class="taskModuleButton button-primary" id="adaptivecard1") Adaptive Card (results &rarr; tab)
+      div
+        <a id="dlAdaptiveCard1" class="deepLinkWarning" target="_blank")>Deep Link</a>
+        pre(id="adaptiveResults" style="white-space: pre-wrap; display: none")
+      p
+      button(class="taskModuleButton button-primary" id="adaptivecard2") Adaptive Card (results &rarr; bot)
+      div
+        <a id="dlAdaptiveCard2" class="deepLinkWarning" target="_blank")>Deep Link</a>
+  script.
+    // Wire up event handler for the click event
+    var deepLinks = document.getElementsByClassName("deepLinkWarning");
+    for (var i = 0; i < deepLinks.length; i++) {
+      deepLinks[i].onmousedown = deepLinkAlert;
+    };
+    // If the left button is clicked, show an error message
+    function deepLinkAlert(event) {
+      if (event.which === 1) {
+        event.stopPropagation();
+        // event.preventDefault();
+        alert("The deep link URL is too long to be used from the browser address bar, but on most browsers, it will work from within an anchor tag (<a>) or a button.");
+      }
+    }

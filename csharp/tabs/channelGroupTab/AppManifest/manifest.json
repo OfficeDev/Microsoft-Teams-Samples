@@ -1,0 +1,39 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.5",
+  "id": "1aaaaaaa-2bbb-3333-4ccc-5ddddddddddd",
+  "version": "1.0.0",
+  "packageName": "com.custom.tab",
+  "developer": {
+    "name": "Contoso",
+    "websiteUrl": "https://ToDo",
+    "privacyUrl": "https://ToDo/privacy",
+    "termsOfUseUrl": "https://ToDo/tou",
+    "mpnId": ""
+  },
+  "name": {
+    "short": "Tab",
+    "full": "ChannelGroupTab"
+  },
+  "description": {
+    "short": "short description here",
+    "full": "full description here"
+  },
+  "icons": {
+    "outline": "icon-outline.png",
+    "color": "icon-color.png"
+  },
+  "accentColor": "#D85028",
+  "configurableTabs": [],
+  "staticTabs": [],
+  "bots": [],
+  "connectors": [],
+  "composeExtensions": [],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "toDo.ngrok.io"
+  ]
+}

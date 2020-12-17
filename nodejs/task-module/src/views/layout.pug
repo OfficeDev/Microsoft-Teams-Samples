@@ -1,0 +1,23 @@
+doctype html
+html(lang='en')
+  head
+    style.
+      body {
+        margin: 0;
+      }
+
+    title Microsoft Teams Task Module Sample App
+    link(rel='stylesheet', type='text/css', href='/styles/msteams-16.css')
+    link(rel='stylesheet', type='text/css', href='/styles/custom.css')
+    // script(src='/scripts/MicrosoftTeams.js')
+    // script(src='/scripts/TaskModuleTab.js')
+    script(src='/scripts/bundle.js') // bundled version of the above files
+    script.
+      let appId = "#{appId}";
+    block scripts
+
+  body(class='theme-light')
+    // span(id="appId" style="display: none") #{appId}
+    div(class='surface')
+      div(class='panel')
+        block content
