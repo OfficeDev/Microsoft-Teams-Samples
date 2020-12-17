@@ -1,14 +1,66 @@
-# Project
+# Microsoft Teams Samples
+##### [Click here to find out what's new with Microsoft Teams Platform](https://docs.microsoft.com/microsoftteams/platform/whats-new)
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+## Getting the samples
 
-As the maintainer of this project, please make a few updates:
+To use the samples, clone this GitHub repository using Git.
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+```bash
+    git clone https://github.com/OfficeDev/microsoft-teams-samples.git
+    cd Microsoft-Teams-Samples
+```
+
+## Sample lists
+
+Samples are designed to illustrate functionality you'll need to implement to build great Teams apps!
+
+|    | Sample Name        | Description                                                                      | C#    | TypeScript   |
+|:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|
+|1|Hello World            | Microsoft Teams hello world sample app.                                                               |[C#][hello-world#cs]     |[TypeScript][hello-world#ts]
+|2|Tabs                    | Basic example tab apps for Microsoft Teams                                                               |[C#][tab#cs]     |
+|3|Bots                   | All the bots samples for Microsoft Team are hosted in [Bot Framework repo][bf].          | |
+|4|Messaging Extensions    | All the bots samples for Microsoft Team are hosted in [Bot Framework repo][bf].  | |
+|5|Connectors             | Sample Office 365 Connector generating notifications to teams channel.                              |[C#][connector#cs]       |[TypeScript][connector#ts]
+|6|Apps in Meetings        | Microsoft Teams meeting extensibility sample: token passing |[C#][app-in-meeting#cs]     |
+|7|Outgoing Webhooks       | Samples to create "Custom Bots" to be used in Microsoft Teams.                                        |[C#][outgoing-webhook#cs]|[TypeScript][outgoing-webhook#ts]
+|8|Link unfurling         | Sample of Link Unfurling in Teams.                                      |[C#][link-unfurl#cs]        |
+|9|Task Modules            | Sample app showing off the Teams Task Module, a way to invoke custom code from a bot, a tab, or both! |[C#][task-module#cs]     |[TypeScript][task-module#ts]
+|10|Authentication         | Sample illustrating seamless inline authentication for Microsoft Teams apps.                      | | [TypeScript][auth#ts]
+|11|Tab SSO                | Microsoft Teams sample app for tabs Azure AD SSO                                      | | [TypeScript][tab-sso#ts]
+|12|Proactive Messaging    | Sample to highlight solutions to two challenges with building proactive messaging apps in Microsoft Teams.                                      |[C#][proactive-msg#cs]        |
+|13|Complete Samples       | A template for building complex bots (SDK V3) for Microsoft Teams.                                      |[C#][complete#cs]        |[TypeScript][complete#ts]
+
+
+[hello-world#cs]:csharp/hello-world
+[hello-world#ts]:nodejs/hello-world
+
+[tab#cs]:csharp/tabs
+
+[connector#cs]:csharp/connector
+[connector#ts]:nodejs/connector
+
+[auth#ts]:nodejs/auth
+
+[task-module#cs]:csharp/task-module
+[task-module#ts]:nodejs/task-module
+
+[complete#cs]:csharp/complete-sample
+[complete#ts]:nodejs/complete-sample
+
+[outgoing-webhook#cs]:csharp/outgoing-webhook
+[outgoing-webhook#ts]:nodejs/outgoing-webhook
+
+[link-unfurl#cs]:csharp/link-unfurl
+
+[tab-sso#ts]:nodejs/tab-sso
+
+[proactive-msg#cs]:csharp/link-unfurl
+
+[app-in-meeting#cs]:csharp/app-in-meeting
+
+[bf]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
+
+
 
 ## Contributing
 
