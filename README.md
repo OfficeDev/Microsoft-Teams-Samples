@@ -18,9 +18,9 @@ Samples are designed to illustrate functionality you'll need to implement to bui
 |:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|
 |1|Hello World            | Microsoft Teams hello world sample app.                                                               |[C#][hello-world#cs]     |[TypeScript][hello-world#ts]
 |2|Tabs                    | Basic example tab apps for Microsoft Teams                                                               |[C#][tab#cs]     |
-|3|Bots                   | All the bots samples for Microsoft Team are hosted in [Bot Framework repo][bf].          | |
-|4|Messaging Extensions    | All the bots samples for Microsoft Team are hosted in [Bot Framework repo][bf].  | |
-|5|Connectors             | Sample Office 365 Connector generating notifications to teams channel.                              |[C#][connector#cs]       |[TypeScript][connector#ts]
+|3|Bots                   | All the bots samples for Microsoft Teams are hosted in [Bot Framework repo][bf].          | |
+|4|Messaging Extensions    | All the Messaging Extensions samples for Microsoft Teams are hosted in [Bot Framework repo][bf].  | |
+|5|Connectors             | Sample Office 365 Connector which generates change notifications.                              |[C#][connector#cs]       |[TypeScript][connector#ts]
 |6|Apps in Meetings        | Microsoft Teams meeting extensibility sample: token passing |[C#][app-in-meeting#cs]     |
 |7|Outgoing Webhooks       | Samples to create "Custom Bots" to be used in Microsoft Teams.                                        |[C#][outgoing-webhook#cs]|[TypeScript][outgoing-webhook#ts]
 |8|Link unfurling         | Sample of Link Unfurling in Teams.                                      |[C#][link-unfurl#cs]        |
