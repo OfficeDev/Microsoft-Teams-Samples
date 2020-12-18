@@ -54,7 +54,7 @@ Samples are designed to illustrate functionality you'll need to implement to bui
 
 [tab-sso#ts]:nodejs/tabs-sso
 
-[proactive-msg#cs]:csharp/link-unfurl
+[proactive-msg#cs]:csharp/proactive-messaging
 
 [app-in-meeting#cs]:csharp/app-in-meeting
 
