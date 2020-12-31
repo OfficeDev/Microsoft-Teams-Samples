@@ -108,7 +108,7 @@
 
 [msgext-link-unfurl#cs]:csharp/msgext-link-unfurling-reddit
 
-[tab-sso#ts]:nodejs/tab-sso
+[tab-sso#ts]:nodejs/tabs-sso
 
 [bot-proactive-msg#cs]:csharp/bot-proactive-messaging
 
