@@ -4,8 +4,8 @@
 
 ## [Getting Started - Samples and Tutorials](https://docs.microsoft.com/microsoftteams/platform/tutorials/get-started-dotnet-app-studio)
 
-|    | Sample Name        | Description                                                                      | C#    | TypeScript   |
-|:--:|:-------------------|:----------------------------------------------------------------------------------------------|:--------|:-------------|
+|    | Sample Name        | Description                                                                                                                | C#    | TypeScript   |
+|:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|
 |1|Hello World            | Microsoft Teams hello world sample app.                                          |[View][app-hello-world#cs]     |[View][app-hello-world#ts]
 
 
@@ -23,7 +23,7 @@
 |1|Apps in Meetings       | Microsoft Teams meeting extensibility sample: token passing |[View][mtgext-token-app#cs]     |
 
 ## [Teams bot samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
->[!NOTE]
+>NOTE:
 >Visit the [Bot Framework Samples repository][botframework] to view Microsoft Bot Framework v4 SDK task-focused samples for C#, JavaScript, TypeScript, and Python.
 
 
@@ -44,7 +44,7 @@
 |1|Proactive Messaging   | Sample to highlight solutions to two challenges with building proactive messaging apps in Microsoft Teams.                                      |[View][bot-proactive-msg#cs]        |
 
 ## [Messaging Extensions samples](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) (using the v4 SDK)
->[!NOTE]
+>NOTE:
 >Visit the [Bot Framework Samples repository][botframework] to view Microsoft Bot Framework v4 SDK task-focused samples for C#, JavaScript, TypeScript, and Python.
 
 
