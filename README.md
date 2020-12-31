@@ -5,13 +5,13 @@
 ## [Getting Started - Samples and Tutorials](https://docs.microsoft.com/microsoftteams/platform/tutorials/get-started-dotnet-app-studio)
 
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   |
-|:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|
-|1|Hello World            | Microsoft Teams hello world sample app.          |[View][app-hello-world#cs]     |[View][app-hello-world#ts]
+|:--:|:-------------------|:----------------------------------------------------------------------------------------------|:--------|:-------------|
+|1|Hello World            | Microsoft Teams hello world sample app.                                          |[View][app-hello-world#cs]     |[View][app-hello-world#ts]
 
 
 ## [Tabs samples](https://docs.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   |
-|:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|
+|:--:|:-------------------|:----------------------------------------------------------------------------------------------|:--------|:-------------|
 |1|Personal tabs            | Sample app showing custom personal Tab with ASP. NET Core                      |[MVC][personal-tab#cs#mvc], [Razor][personal-tab#cs#razor]     | [Yeoman Generator](https://docs.microsoft.com/microsoftteams/platform/tabs/quickstarts/create-personal-tab-node-yeoman#generate-your-project) |
 |2|Channel and group tabs   | Basic example tab apps for Microsoft Teams                                    |[MVC][group-channel-tab#cs#mvc], [Razor][group-channel-tab#cs#razor]     | [Yeoman Generator](https://docs.microsoft.com/microsoftteams/platform/tabs/quickstarts/create-channel-group-tab-node-yeoman#generate-your-project) |
 |3|Tab SSO               | Microsoft Teams sample app for tabs Azure AD SSO                                      | | [View][tab-sso#ts] ,[Teams Toolkit](https://docs.microsoft.com/microsoftteams/platform/toolkit/visual-studio-code-tab-sso)
@@ -19,7 +19,7 @@
 ## [Apps in Meetings samples](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings)
 
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   |
-|:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|
+|:--:|:-------------------|:----------------------------------------------------------------------------------------------|:--------|:-------------|
 |1|Apps in Meetings       | Microsoft Teams meeting extensibility sample: token passing |[View][mtgext-token-app#cs]     |
 
 ## [Teams bot samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
@@ -60,14 +60,14 @@
 
 |    | Sample Name | Description | .NET Core | JavaScript | Python |
 |:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|:-------------|
-|1|Link unfurling demo of Reddit        | Sample of Link Unfurling in Teams.                                      |[View][msgext-link-unfurl#cs]        |
+|1|Link unfurling demo of Reddit        | Messaging Extension with Link Unfurling Samples for Reddit Links                              |[View][msgext-link-unfurl#cs]        |
 
 
 ## [Webhooks and Connectors samples](https://docs.microsoft.com/microsoftteams/platform/webhooks-and-connectors/what-are-webhooks-and-connectors)
 
 
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   |
-|:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|
+|:--:|:-------------------|:-------------------------------------------------------------------------------------------------|:--------|:-------------|
 |1|Connectors             | Sample Office 365 Connector generating notifications to teams channel.                              |[View][connector#cs]       |[View][connector#ts]
 |2|Outgoing Webhooks      | Samples to create "Custom Bots" to be used in Microsoft Teams.                                        |[View][outgoing-webhook#cs]|[View][outgoing-webhook#ts]
 
@@ -75,7 +75,7 @@
 ## Samples with multiple entry points
 
 |    | Sample Name       | Description                                                                      | C#    | TypeScript   |
-|:--:|:------------------|:---------------------------------------------------------------------------------|:--------|:-------------|
+|:--:|:------------------|:---------------------------------------------------------------------------------------------------|:--------|:-------------|
 |1|Task Modules          | Sample app showing off the Teams Task Module, a way to invoke custom code from a bot, a tab, or both! |[View][app-task-module#cs]     |[View][app-task-module#ts]
 |2|Authentication        | Sample illustrating seamless inline authentication for Microsoft Teams apps.                      | | [View][app-auth#ts]
 |3|Complete Samples      | A template for building complex bots (SDK V3) for Microsoft Teams.                                      |[View][app-complete#cs]        |[View][app-complete#ts]
