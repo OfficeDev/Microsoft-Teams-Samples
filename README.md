@@ -60,7 +60,7 @@
 
 |    | Sample Name | Description | .NET Core | JavaScript | Python |
 |:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|:-------------|
-|1|Link unfurling demo of Reddit        | Sample of Link Unfurling in Teams.                                      |[View][link-unfurl#cs]        |
+|1|Link unfurling demo of Reddit        | Sample of Link Unfurling in Teams.                                      |[View][msgext-link-unfurl#cs]        |
 
 
 ## [Webhooks and Connectors samples](https://docs.microsoft.com/microsoftteams/platform/webhooks-and-connectors/what-are-webhooks-and-connectors)
