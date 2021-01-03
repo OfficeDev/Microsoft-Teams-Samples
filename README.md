@@ -69,7 +69,8 @@
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   |
 |:--:|:-------------------|:-------------------------------------------------------------------------------------------------|:--------|:-------------|
 |1|Connectors             | Sample Office 365 Connector generating notifications to teams channel.                              |[View][connector#cs]       |[View][connector#ts]
-|2|Outgoing Webhooks      | Samples to create "Custom Bots" to be used in Microsoft Teams.                                        |[View][outgoing-webhook#cs]|[View][outgoing-webhook#ts]
+|2|Generic connectors sample | Sample code for a generic connector that's easy to customize for any system which supports webhooks.   |    |[View][connector-generic#ts]
+|3|Outgoing Webhooks      | Samples to create "Custom Bots" to be used in Microsoft Teams.                                        |[View][outgoing-webhook#cs]|[View][outgoing-webhook#ts]
 
 
 ## Samples with multiple entry points
@@ -94,6 +95,7 @@
 
 [connector#cs]:csharp/connector-todo-notification
 [connector#ts]:nodejs/connector-github-notification
+[connector-generic#ts]:nodejs/connector-generic
 
 [app-auth#ts]:nodejs/app-auth
 

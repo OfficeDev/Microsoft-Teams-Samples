@@ -1,0 +1,21 @@
+{
+  "name": "connectersample",
+  "version": "1.0.0",
+  "main": "app.js",
+  "dependencies": {
+    "async": "^2.3.0",
+    "body-parser": "^1.17.1",
+    "config": "^1.26.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.2",
+    "express-partials": "^0.3.0",
+    "express-session": "^1.15.2",
+    "jade": "^1.11.0",
+    "jquery": "^3.2.1",
+    "method-override": "^2.3.8",
+    "passport": "^0.3.2"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

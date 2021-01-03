@@ -1,0 +1,67 @@
+doctype html
+
+html(lang="en")
+  head
+    title Notify Me - Microsoft Teams
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel="stylesheet")
+    link(href="/custom/css/msteams-app.css", rel="stylesheet") 
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js")
+    script(src="https://statics.teams.microsoft.com/sdk/v1.0/js/MicrosoftTeams.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+    script(src="/custom/js/theme.js")
+    script(src="/custom/js/connectorTabConfig.js")
+  body
+    script.
+        microsoftTeams.initialize();
+
+        microsoftTeams.getContext(function (context) {
+            TeamsTheme.fix(context);
+        });
+
+        microsoftTeams.settings.registerOnSaveHandler(function(saveEvent) {
+            microsoftTeams.settings.setSettings({
+              entityId: "bing",
+              contentUrl: "[ngrokURL]/connectorconfig",
+              configName: "bing"
+            });
+            saveEvent.notifySuccess();
+        });
+        
+        microsoftTeams.settings.registerOnRemoveHandler(function (removeEvent) {
+            alert("remove");
+        });
+
+    div.settings-container
+        div.settings-section
+        div.section-caption 1. Get the incoming webhook URL for your Connector.
+        div.form-field-title 
+            div Each time a unique webhook Url for a channel is created, which can be accessed through Teams client SDK (getSettings). Copy the following URL to save it to the Clipboard. You'll need this URL when you configure the connector.
+        p(style='white-space:pre;')
+        div.form-group
+            input#webhook(type='text' readonly)
+            button.ts-btn.ts-btn-primary(type='button', onclick='copyWebhookToClipborad()') Copy Text
+        div.section-caption 2. Instructions.
+        div.form-field-title 
+            div  a) Get the user authenticated using Teams client SDK, if needed, before displaying the webhook URL. Like below
+        p(style='white-space:pre;')
+            img.connector-img(src='/custom/assets/login.png')
+            div  b) Provide a configuration experience to the user and save it in your database. Like below
+        p(style='white-space:pre;')
+            img.connector-img(src='/custom/assets/config.png') 
+        div.form-field-title 
+            div  c) The above url can be stored in your database/service to send any notification to that particular channel. It can be quickly tested using Curl/Postman by <a href="https://docs.microsoft.com/microsoftteams/platform/webhooks-and-connectors/how-to/connectors-using#post-a-message-to-the-webhook-using-curl">posting any connector card</a> from <a href="https://messagecardplayground.azurewebsites.net/">Card Playground</a>
+    
+    script(type='text/javascript').                                            
+        function copyWebhookToClipborad() {
+            var copyText = document.getElementById("webhook");
+            copyText.select();
+            document.execCommand("copy");
+            if(copyText.value.length<=0)
+            {
+                alert("Some Error");
+            }
+        }
+
