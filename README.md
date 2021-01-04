@@ -82,39 +82,39 @@
 |3|Complete Samples      | A template for building complex bots (SDK V3) for Microsoft Teams.                                      |[View][app-complete#cs]        |[View][app-complete#ts]
 
 
-[app-hello-world#cs]:csharp/app-hello-world
-[app-hello-world#ts]:nodejs/app-hello-world
+[app-hello-world#cs]:samples/app-hello-world/csharp
+[app-hello-world#ts]:samples/app-hello-world/nodejs
 
 
-[personal-tab#cs#razor]:csharp/tab-personal-razor
-[personal-tab#cs#mvc]:csharp/tab-personal-mvc
+[personal-tab#cs#razor]:samples/tab-personal/razor-csharp
+[personal-tab#cs#mvc]:samples/tab-personal/mvc-csharp
 
-[group-channel-tab#cs#razor]:csharp/tab-channel-group-razor
-[group-channel-tab#cs#mvc]:csharp/tab-channel-group-mvc
+[group-channel-tab#cs#razor]:samples/tab-channel-group/razor-csharp
+[group-channel-tab#cs#mvc]:samples/tab-channel-group/mvc-csharp
 
 
-[connector#cs]:csharp/connector-todo-notification
-[connector#ts]:nodejs/connector-github-notification
-[connector-generic#ts]:nodejs/connector-generic
+[connector#cs]:samples/connector-todo-notification/csharp
+[connector#ts]:samples/connector-github-notification/nodejs
+[connector-generic#ts]:samples/connector-generic/nodejs
 
-[app-auth#ts]:nodejs/app-auth
+[app-auth#ts]:samples/app-auth/nodejs
 
-[app-task-module#cs]:csharp/app-task-module
-[app-task-module#ts]:nodejs/app-task-module
+[app-task-module#cs]:samples/app-task-module/csharp
+[app-task-module#ts]:samples/app-task-module/nodejs
 
-[app-complete#cs]:csharp/app-complete-sample
-[app-complete#ts]:nodejs/app-complete-sample
+[app-complete#cs]:samples/app-complete-sample/csharp
+[app-complete#ts]:samples/app-complete-sample/nodejs
 
-[outgoing-webhook#cs]:csharp/outgoing-webhook
-[outgoing-webhook#ts]:nodejs/outgoing-webhook
+[outgoing-webhook#cs]:samples/outgoing-webhook/csharp
+[outgoing-webhook#ts]:samples/outgoing-webhook/nodejs
 
-[msgext-link-unfurl#cs]:csharp/msgext-link-unfurling-reddit
+[msgext-link-unfurl#cs]:samples/msgext-link-unfurling-reddit/csharp
 
-[tab-sso#ts]:nodejs/tabs-sso
+[tab-sso#ts]:samples/tabs-sso/nodejs
 
-[bot-proactive-msg#cs]:csharp/bot-proactive-messaging
+[bot-proactive-msg#cs]:samples/bot-proactive-messaging/csharp
 
-[mtgext-token-app#cs]:csharp/mtgext-token-app
+[mtgext-token-app#cs]:samples/mtgext-token-app/csharp
 
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 
