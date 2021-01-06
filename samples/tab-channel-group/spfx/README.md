@@ -33,7 +33,8 @@ Starting with the SharePoint Framework v1.8, you can implement your Microsoft Te
 1) Clone this repository
 
     ```bash
-    git clone https://github.com/Trinetra-MSFT/Teams-SPFx-Tab.git
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    cd samples/tab-channel-group/spfx
     ```
 
 1) If you are using Visual Code
@@ -41,9 +42,11 @@ Starting with the SharePoint Framework v1.8, you can implement your Microsoft Te
    - File -> Open Folder -> Project/Solution
    
 1) Ensure that you are at the solution folder
-1) in the command-line run:
-1) **npm install**
-1) **gulp serve**
+1) In the Visual Studio code terminal run following commands one by one:
+```bash
+    npm install
+    gulp serve
+```
 
 ## Package and deploy your web part to SharePoint
 
