@@ -6,18 +6,21 @@
 
 ## [Getting Started - Samples and Tutorials](https://docs.microsoft.com/microsoftteams/platform/tutorials/get-started-dotnet-app-studio)
 
-|    | Sample Name        | Description                                                                                                                | C#    | TypeScript   |
+|    | Sample Name        | Description                                                                                                                | C#    | TypeScript   
 |:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|
 |1|Hello World            | Microsoft Teams hello world sample app.                                          |[View][app-hello-world#cs]     |[View][app-hello-world#ts]
 
-
 ## [Tabs samples](https://docs.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
-|    | Sample Name        | Description                                                                      | C#    | TypeScript   |
-|:--:|:-------------------|:----------------------------------------------------------------------------------------------|:--------|:-------------|
+|    | Sample Name        | Description                                                                      | C#    | TypeScript   | JavaScript
+|:--:|:-------------------|:----------------------------------------------------------------------------------------------|:--------|:-------------|:---------
 |1|Personal tabs            | Sample app showing custom personal Tab with ASP. NET Core                      |[MVC][personal-tab#cs#mvc], [Razor][personal-tab#cs#razor]     | [Yeoman Generator](https://docs.microsoft.com/microsoftteams/platform/tabs/quickstarts/create-personal-tab-node-yeoman#generate-your-project) |
-|2|Channel and group tabs   | Sample app showing custom group and channel Tab with ASP. NET Core                                    |[MVC][group-channel-tab#cs#mvc], [Razor][group-channel-tab#cs#razor]     | [Yeoman Generator](https://docs.microsoft.com/microsoftteams/platform/tabs/quickstarts/create-channel-group-tab-node-yeoman#generate-your-project) |
-|3|SPFx Tab | Sample app showing Microsoft Teams tabs using SharePoint Framework                                    |   | [View][group-channel-tab#ts#spfx] |
-|4|Tab SSO               | Microsoft Teams sample app for tabs Azure AD SSO                                      | | [View][tab-sso#ts] ,[Teams Toolkit](https://docs.microsoft.com/microsoftteams/platform/toolkit/visual-studio-code-tab-sso)
+|2|Personal tab quick-start| Sample personal tab quick-start app.                                            |                               |[View][personal-tab-quickstart#ts]|[View][personal-tab-quickstart#js]
+|3|Personal tab with SSO quick-start| Sample personal tab with SSO hello world app.                          |                               |[View][personal-tab-sso-quickstart#ts]|[View][personal-tab-sso-quickstart#js]
+|4|Channel and group tabs   | Sample app showing custom group and channel Tab with ASP. NET Core                                    |[MVC][group-channel-tab#cs#mvc], [Razor][group-channel-tab#cs#razor]     | [Yeoman Generator](https://docs.microsoft.com/microsoftteams/platform/tabs/quickstarts/create-channel-group-tab-node-yeoman#generate-your-project) |
+|5|Channel and group tab quick-start| Sample channel and group tab hello world app.                          |                               |[View][group-tab-quickstart#ts]|[View][group-tab-quickstart#js]
+|6|Channel and group tab with SSO quick-start| Sample channel and group tab with SSO hello world app.        |                               |[View][group-tab-sso-quickstart#ts]|[View][group-tab-sso-quickstart#js]
+|7|SPFx Tab | Sample app showing Microsoft Teams tabs using SharePoint Framework                                    |   | [View][group-channel-tab#ts#spfx] |
+|8|Tab SSO               | Microsoft Teams sample app for tabs Azure AD SSO                                      | | [View][tab-sso#ts] ,[Teams Toolkit](https://docs.microsoft.com/microsoftteams/platform/toolkit/visual-studio-code-tab-sso)
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
@@ -79,6 +82,14 @@
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
+[personal-tab-quickstart#ts]:samples/tab-personal-quickstart/ts
+[personal-tab-quickstart#js]:samples/tab-personal-quickstart/js
+[personal-tab-sso-quickstart#ts]:samples/tab-personal-sso-quickstart/ts
+[personal-tab-sso-quickstart#js]:samples/tab-personal-sso-quickstart/js
+[group-tab-quickstart#ts]:samples/tab-channel-group-quickstart/ts
+[group-tab-quickstart#js]:samples/tab-channel-group-quickstart/js
+[group-tab-sso-quickstart#ts]:samples/tab-channel-group-sso-quickstart/ts
+[group-tab-sso-quickstart#js]:samples/tab-channel-group-sso-quickstart/js
 
 [personal-tab#cs#razor]:samples/tab-personal/razor-csharp
 [personal-tab#cs#mvc]:samples/tab-personal/mvc-csharp
