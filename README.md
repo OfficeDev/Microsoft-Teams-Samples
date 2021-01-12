@@ -6,10 +6,13 @@
 
 ## [Getting Started - Samples and Tutorials](https://docs.microsoft.com/microsoftteams/platform/tutorials/get-started-dotnet-app-studio)
 
-|    | Sample Name        | Description                                                                                                                | C#    | TypeScript   |
-|:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|
+|    | Sample Name        | Description                                                                                                                | C#    | TypeScript   | JavaScript
+|:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|:----------|
 |1|Hello World            | Microsoft Teams hello world sample app.                                          |[View][app-hello-world#cs]     |[View][app-hello-world#ts]
-
+|2|Personal tab| Sample personal tab hello world app.                                            |                               |[View][personal-tab-quickstart#ts]|[View][personal-tab-quickstart#js]
+|3|Personal tab with SSO| Sample personal tab with SSO hello world app.                          |                               |[View][personal-tab-sso-quickstart#ts]|[View][personal-tab-sso-quickstart#js]
+|4|Channel and group tab| Sample channel and group tab hello world app.                          |                               |[View][group-tab-quickstart#ts]|[View][group-tab-quickstart#js]
+|5|Channel and group tab with SSO| Sample channel and group tab with SSO hello world app.        |                               |[View][group-tab-sso-quickstart#ts]|[View][group-tab-sso-quickstart#js]
 
 ## [Tabs samples](https://docs.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   |
@@ -79,6 +82,14 @@
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
+[personal-tab-quickstart#ts]:samples/tab-personal-quickstart/ts
+[personal-tab-quickstart#js]:samples/tab-personal-quickstart/js
+[personal-tab-sso-quickstart#ts]:samples/tab-personal-sso-quickstart/ts
+[personal-tab-sso-quickstart#js]:samples/tab-personal-sso-quickstart/js
+[group-tab-quickstart#ts]:samples/tab-channel-group-quickstart/ts
+[group-tab-quickstart#js]:samples/tab-channel-group-quickstart/js
+[group-tab-sso-quickstart#ts]:samples/tab-channel-group-sso-quickstart/ts
+[group-tab-sso-quickstart#js]:samples/tab-channel-group-sso-quickstart/js
 
 [personal-tab#cs#razor]:samples/tab-personal/razor-csharp
 [personal-tab#cs#mvc]:samples/tab-personal/mvc-csharp
