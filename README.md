@@ -119,7 +119,7 @@
 
 [bot-proactive-msg#cs]:samples/bot-proactive-messaging/csharp
 
-[meetings-token-app#cs]:samples/mtgext-token-app/csharp
+[meetings-token-app#cs]:samples/meetings-token-app/csharp
 
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 
