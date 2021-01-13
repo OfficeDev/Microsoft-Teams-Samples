@@ -77,7 +77,7 @@
 |1|Task Modules          | Sample app showing off the Teams Task Module, a way to invoke custom code from a bot, a tab, or both! |[View][app-task-module#cs]     |[View][app-task-module#ts]
 |2|Authentication        | Sample illustrating seamless inline authentication for Microsoft Teams apps.                      | | [View][app-auth#ts]
 |3|Complete Samples      | A template for building complex bots (SDK V3) for Microsoft Teams.                                      |[View][app-complete#cs]        |[View][app-complete#ts]
-|4|Meetings Extensibility | Microsoft Teams meeting extensibility sample: token passing |[View][mtgext-token-app#cs]     |
+|4|Meetings Extensibility | Microsoft Teams meeting extensibility sample: token passing |[View][meetings-token-app#cs]     |
 
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
@@ -119,7 +119,7 @@
 
 [bot-proactive-msg#cs]:samples/bot-proactive-messaging/csharp
 
-[mtgext-token-app#cs]:samples/mtgext-token-app/csharp
+[meetings-token-app#cs]:samples/mtgext-token-app/csharp
 
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 
