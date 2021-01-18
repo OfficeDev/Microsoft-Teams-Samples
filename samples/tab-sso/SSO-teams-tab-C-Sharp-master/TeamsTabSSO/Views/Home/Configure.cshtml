@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "Configure";
+}
+
+
+<head>
+    <script src='https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js'></script>
+</head>
+<body>
+    <h1>Tab SSO Authentication</h1>
+    <div id="divError" style="display: none"></div>
+    <button onclick="requestConsent()" id="consent" style="display:none;">Authenticate</button>
+    <div id="divGraphProfile" style="display: none"></div>
+
+    <script>
+        microsoftTeams.initialize();
+
+        microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
+            microsoftTeams.settings.setSettings({
+                websiteUrl: "<<Your base url>>",
+                contentUrl: "<<Your base url>>"+"/Home/Index",                
+                entityId: "Configure",
+                suggestedDisplayName: "Configure"
+            });
+            saveEvent.notifySuccess();
+        });
+
+        microsoftTeams.settings.setValidityState(true);
+    </script>
+</body>
