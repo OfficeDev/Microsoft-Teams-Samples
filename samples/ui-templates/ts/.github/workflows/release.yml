@@ -1,0 +1,93 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Release
+
+on:
+  pull_request:
+    branches: [main]
+
+    tags:
+      # Build on every tag in the form v1.2.3-something.4
+      - "v*"
+
+defaults:
+  run:
+    shell: bash # Run everything using bash
+
+jobs:
+  build:
+    name: Build
+    runs-on: macos-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - name: Setup NodeJS 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+
+      - name: Set up build environment
+        run: |
+          yarn
+
+      - name: Build app package
+        run: |
+          yarn package
+        env:
+          HOSTNAME: ${{ secrets.HOSTNAME }}
+          APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
+          PACKAGE_NAME: ${{ secrets.PACKAGE_NAME }}
+
+      - name: Save app package
+        uses: actions/upload-artifact@v1
+        with:
+          name: microsoft-teams-app-sample.zip
+          path: ./package/microsoft-teams-app-sample.zip
+
+  prepare_release:
+    name: Prepare release draft
+    runs-on: macos-latest
+    # Make sure (and wait until) the builds have succeeded
+    needs: [build]
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+      - name: Setup NodeJS 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+
+      - name: Get app version
+        uses: nyaayaya/package-version@v1
+        with:
+          path: "package.json"
+          follow-symlinks: "false"
+
+      - name: Get app package
+        uses: actions/download-artifact@v1
+        with:
+          name: microsoft-teams-app-sample.zip
+          path: .
+
+      - name: Create a new release draft
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ env.PACKAGE_VERSION }}
+          release_name: Release ${{ github.ref }}
+          body: ""
+          draft: true
+
+      - name: Upload app package
+        uses: actions/upload-release-asset@v1.0.1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./microsoft-teams-app-sample.zip
+          asset_name: microsoft-teams-app-sample.zip
+          asset_content_type: application/zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
