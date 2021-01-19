@@ -14,7 +14,7 @@ extensions:
   createdDate: "12/8/2020 5:06:47 PM"
 ---
 
-# Deploying the Microsoft Teams Sample App
+# Deploying the Microsoft Teams UI Templates Sample App
 
 <img align="right" width="400" src="https://i.ibb.co/xSLQP14/app-sample.png" />
 
@@ -35,8 +35,8 @@ To use the Teams Sample App, you need to host it somewhere. We'll focus on deplo
 Open a terminal and clone the Teams Sample App repository.
 
 ```bash
-git clone https://github.com/OfficeDev/microsoft-teams-app-sample <your-app-name>
-cd <your-app-name>
+git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+cd Microsoft-Teams-Samples/samples/tab-ui-templates/ts
 yarn install
 ```
 
