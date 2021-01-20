@@ -14,13 +14,13 @@ extensions:
   createdDate: "12/8/2020 5:06:47 PM"
 ---
 
-# Deploying the Microsoft Teams UI Templates Sample App
+# Deploying the Microsoft Teams UI templates sample app
 
 <img align="right" width="400" src="https://i.ibb.co/xSLQP14/app-sample.png" />
 
-The Teams Sample App can help you better understand how apps should look and behave in Microsoft Teams. The app includes examples of tested, high-quality UI templates that work across common Teams use cases (such as dashboards or forms).
+This sample app can help you better understand how apps should look and behave in Microsoft Teams. The app includes examples of tested, high-quality UI templates that work across common Teams use cases (such as dashboards or forms).
 
-To use the Teams Sample App, you need to host it somewhere. We'll focus on deploying the app to a local web server since that's the fastest way to get started.
+To use the sample app, you need to host it somewhere. We'll focus on deploying the app to a local web server since that's the fastest way to get started.
 
 (If you want to make it easier for others to use the app, consider deploying to [Microsoft Azure](https://azure.microsoft.com/get-started/web-app/) or another hosting service.)
 
@@ -32,7 +32,7 @@ To use the Teams Sample App, you need to host it somewhere. We'll focus on deplo
 
 ## Set up your app project
 
-Open a terminal and clone the Teams Sample App repository.
+Open a terminal and clone the sample app repository.
 
 ```bash
 git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
