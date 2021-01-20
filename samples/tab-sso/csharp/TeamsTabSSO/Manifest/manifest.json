@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
   "manifestVersion": "1.5",
   "version": "1.0.1",
-  "id": "08a2cf0c-23ef-4436-bf56-8b0b99bc482d",
+  "id": "{new GUID for this Teams app - not the Azure AD App ID}",
   "packageName": "com.contoso.teamsauthsso",
   "developer": {
     "name": "Microsoft",
@@ -27,13 +27,13 @@
     {
       "entityId": "auth",
       "name": "Auth",
-      "contentUrl": "https://2737771c40aa.ngrok.io/Home/Index",
+      "contentUrl": "https://{ngrokSubdomain}.ngrok.io/Home/Index",
       "scopes": [ "personal" ]
     }
   ],
   "configurableTabs": [
     {
-      "configurationUrl": "https://2737771c40aa.ngrok.io/Home/ConfigTab",
+      "configurationUrl": "https://{ngrokSubdomain}.ngrok.io/Home/ConfigTab",
       "canUpdateConfiguration": true,
       "scopes": [
         "team"
@@ -42,10 +42,10 @@
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "*.ngrok.io"
+    "{ngrokSubdomain}.ngrok.io"
   ],
   "webApplicationInfo": {
-    "id": "e04bb40d-d042-4a85-81b5-59add72af1dd",
-    "resource": "api://2737771c40aa.ngrok.io/e04bb40d-d042-4a85-81b5-59add72af1dd"
+    "id": "{Azure AD AppId}",
+    "resource": "api://{ngrokSubdomain}.ngrok.io/{Azure AD AppId}"
   }
 }
