@@ -22,7 +22,6 @@ class TabConfig extends React.Component {
       microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
 
         const baseUrl = `https://${window.location.hostname}:${window.location.port}`;
-        console.log (baseUrl);
         microsoftTeams.settings.setSettings({
           "suggestedDisplayName": "My Tab",
           "entityId": "Test",
