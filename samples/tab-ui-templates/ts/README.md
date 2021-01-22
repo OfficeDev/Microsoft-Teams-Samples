@@ -74,13 +74,13 @@ You can find the app source code in `./src`:
 2. Open a browser and verify that all of the following URLs load:
    - **Required Teams app pages**:
      - About: [http://localhost:3000](http://localhost:3000)
-     - Privacy: [http://localhost:3000/privacy](http://localhost:3000/privacy)
-     - Terms of use: [http://localhost:3000/termsofuse](http://localhost:3000/termsofuse)
+     - Privacy: [http://localhost:3000/privacy](http://localhost:3000/#/privacy)
+     - Terms of use: [http://localhost:3000/termsofuse](http://localhost:3000/#/termsofuse)
    - **Sample app tabs**:
-     - [http://localhost:3000/welcome](http://localhost:3000/welcome)
-     - [http://localhost:3000/dashboard](http://localhost:3000/dashboard)
-     - [http://localhost:3000/list](http://localhost:3000/list)
-     - [http://localhost:3000/board](http://localhost:3000/board)
+     - [http://localhost:3000/#/welcome](http://localhost:3000/#/welcome)
+     - [http://localhost:3000/#/dashboard](http://localhost:3000/#/dashboard)
+     - [http://localhost:3000/#/list](http://localhost:3000/#/list)
+     - [http://localhost:3000/#/board](http://localhost:3000/#/board)
 
 ## Set up a secure tunnel to the app
 
