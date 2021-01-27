@@ -130,7 +130,6 @@ task("manifest", series("generate-manifest", "schema-validation", "zip"));
 
 task("start-ngrok", (cb) => {
   log("[NGROK] starting ngrok...");
-  log(process.env.PORT);
   const ngrok = require("ngrok");
 
   const conf = {
