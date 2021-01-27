@@ -130,12 +130,13 @@ task("manifest", series("generate-manifest", "schema-validation", "zip"));
 
 task("start-ngrok", (cb) => {
   log("[NGROK] starting ngrok...");
+  log(process.env.PORT);
   const ngrok = require("ngrok");
 
   const conf = {
     subdomain: process.env.NGROK_SUBDOMAIN,
     region: process.env.NGROK_REGION,
-    addr: process.env.PORT,
+    addr: process.env.PORT !== undefined ? process.env.PORT : '3000',
     authtoken: process.env.NGROK_AUTH,
   };
 
