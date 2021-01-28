@@ -1,0 +1,47 @@
+﻿
+<div class="col-md-8">
+    <section id="configSection">
+        <div>
+            <h2>Please Sign In:</h2>
+            <!-- Login button -->
+            <button onclick="loginV1()">Sign In</button>
+        </div>
+
+    </section>
+</div>
+
+<script src="@("https://unpkg.com/@microsoft/teams-js@1.3.3/dist/MicrosoftTeams.min.js")"></script>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha384-VC7EHu0lDzZyFfmjTPJq+DFyIn8TUGAJbEtpXquazFVr00Q/OOx//RjiZ9yU9+9m" crossorigin="anonymous"></script>
+<script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js" integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT" crossorigin="anonymous"></script>
+<script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js" integrity="sha384-BIOS/65fbAsb2XiCCSTlZSTTl0ZgqkOU522dpyk5meOnN2EOQ3uH+QpqEtoAtmBn" crossorigin="anonymous"></script>
+
+
+<script type="text/javascript">
+
+    microsoftTeams.initialize();
+
+    function loginV1() {
+        login(window.location.origin + "/AuthStart");
+    }
+
+    function login(url) {
+        microsoftTeams.authentication.authenticate({
+            url: url,
+            width: 600,
+            height: 535,
+            successCallback: function (result) {
+                console.log("Login succeeded: " + result);
+
+                let data = localStorage.getItem(result);
+                localStorage.removeItem(result);
+                window.location.href = "@Url.Action("Success", "Home")";
+            },
+            failureCallback: function (reason) {
+                console.log("Login failed: " + reason);
+                handleAuthError(reason);
+                window.location.href = "@Url.Action("Failed", "Home")";
+            }
+        });
+    }
+</script>

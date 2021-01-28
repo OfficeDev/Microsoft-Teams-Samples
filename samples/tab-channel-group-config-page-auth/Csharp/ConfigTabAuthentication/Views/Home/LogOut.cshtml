@@ -1,0 +1,30 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>LogOut</title>
+</head>
+<body>
+    <div class="col-md-8">
+        <section>
+            <div>
+                <h2>Your are completely Logged Out...</h2>
+            </div>
+        </section>
+    </div>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js" integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT" crossorigin="anonymous">
+
+    </script>
+    <script type="text/javascript">
+        microsoftTeams.initialize();
+
+        // Get the tab context, and use the information to navigate to Azure AD login page
+        microsoftTeams.getContext(function (context) {
+            window.location.assign(window.location.origin + "/.auth/logout?post_logout_redirect_uri=" + window.location.origin + "/LogOut");
+        });
+
+        microsoftTeams.authentication.notifySuccess(null, window.location.origin + "/LogOut");
+    </script>
+</body>
+</html>
