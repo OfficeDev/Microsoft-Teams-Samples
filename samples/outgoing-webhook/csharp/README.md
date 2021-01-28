@@ -38,12 +38,13 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 
 1) Clone the repository
-    git clone https://github.com/RamaMohanaChary/microsoft-teams-sample-outgoing-webhook-master
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
 
 2) If you are using Visual Studio
     - Launch Visual Studio
     - File -> Open -> Project/Solution
-    - Navigate to `microsoft-teams-sample-outgoing-webhook-master` folder
+    - Navigate to `outgoing-webhook` folder
+    - Navigate to `CSharp` folder
     - Select `WebhookSampleBot.sln` file
     - Press `F5` to run the project
 
