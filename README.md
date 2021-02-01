@@ -82,6 +82,7 @@
 |2|Authentication        | Sample illustrating seamless inline authentication for Microsoft Teams apps.                      | | [View][app-auth#ts]
 |3|Complete Samples      | A template for building complex bots (SDK V3) for Microsoft Teams.                                      |[View][app-complete#cs]        |[View][app-complete#ts]
 |4|Meetings Extensibility | Microsoft Teams meeting extensibility sample: token passing |[View][meetings-token-app#cs]     |
+|5|Teams App Localization | Microsoft Teams app localization using Bot and Tab |[View]()     |
 
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
