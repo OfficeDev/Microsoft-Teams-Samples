@@ -51,12 +51,8 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
-4)  __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your tab earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-5) Run your tab, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
+4) Run your tab, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
 
  
