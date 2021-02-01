@@ -43,8 +43,7 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
 2) If you are using Visual Studio
     - Launch Visual Studio
     - File -> Open -> Project/Solution
-    - Navigate to `outgoing-webhook` folder
-    - Navigate to `CSharp` folder
+    - Navigate to `samples/outgoing-webhook/csharp` folder
     - Select `WebhookSampleBot.sln` file
     - Press `F5` to run the project
 
