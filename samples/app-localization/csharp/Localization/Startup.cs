@@ -45,7 +45,7 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
                 Options.SupportedCultures = culturSupported;
                 Options.SupportedUICultures = culturSupported;
                 Options.FallBackToParentCultures = false;
-            });            
+            });
 
             services.AddControllers();
             services.AddMvc()
@@ -58,7 +58,7 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-            services.AddTransient<IBot, MessageExtension>();
+            services.AddTransient<IBot, LocalizerBot>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

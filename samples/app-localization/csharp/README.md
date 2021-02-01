@@ -10,13 +10,13 @@ This sample illustrates how to implement localization for Teams App.
 1) Clone the repository
 
     ```bash
-    git clone https://github.com/msft-teams/tools.git
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
 2) If you are using Visual Studio
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `Localization` folder
+  - Navigate to `app-localization\csharp` folder
   - Select `Localization.csproj` file
 
 3) Run ngrok - point to port 44374
