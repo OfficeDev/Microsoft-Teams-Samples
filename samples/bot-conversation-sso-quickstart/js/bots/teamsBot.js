@@ -3,7 +3,7 @@
 
 const { DialogBot } = require('./dialogBot');
 const { tokenExchangeOperationName } = require('botbuilder');
-const { SsoOauthHelpler } = require('../ssoOauthHelpler');
+const { SsoOAuthHelpler } = require('../SsoOAuthHelpler');
 
 class TeamsBot extends DialogBot {
     /**
@@ -14,7 +14,7 @@ class TeamsBot extends DialogBot {
      */
     constructor(conversationState, userState, dialog) {
         super(conversationState, userState, dialog);
-        this._ssoOauthHelper = new SsoOauthHelpler(process.env.connectionName, conversationState);
+        this._ssoOAuthHelper = new SsoOAuthHelpler(process.env.connectionName, conversationState);
 
         this.onMembersAdded(async (context, next) => {
             const membersAdded = context.activity.membersAdded;
@@ -39,7 +39,7 @@ class TeamsBot extends DialogBot {
         if (context.activity && context.activity.name === tokenExchangeOperationName) {
             // The Token Exchange Helper will attempt the exchange, and if successful, it will cache the result
             // in TurnState.  This is then read by TokenExchangeOAuthPrompt, and processed accordingly.
-            if (!await this._ssoOauthHelper.ShouldProcessTokenExchange(context)) {
+            if (!await this._ssoOAuthHelper.shouldProcessTokenExchange(context)) {
                 // If the token is not exchangeable, do not process this activity further.
                 // (The Token Exchange Helper will send the appropriate response if the token is not exchangeable)
                 return;

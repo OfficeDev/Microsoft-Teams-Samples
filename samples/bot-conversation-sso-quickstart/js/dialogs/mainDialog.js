@@ -8,7 +8,7 @@ const CONFIRM_PROMPT = 'ConfirmPrompt';
 const MAIN_DIALOG = 'MainDialog';
 const MAIN_WATERFALL_DIALOG = 'MainWaterfallDialog';
 const OAUTH_PROMPT = 'OAuthPrompt';
-const { SsoOauthPrompt } = require('./ssoOauthPrompt');
+const { SsoOAuthPrompt } = require('./ssoOAuthPrompt');
 const { SimpleGraphClient } = require('../simpleGraphClient');
 const { polyfills } = require('isomorphic-fetch');
 
@@ -16,7 +16,7 @@ class MainDialog extends LogoutDialog {
     constructor() {
         super(MAIN_DIALOG, process.env.connectionName);
 
-        this.addDialog(new SsoOauthPrompt(OAUTH_PROMPT, {
+        this.addDialog(new SsoOAuthPrompt(OAUTH_PROMPT, {
             connectionName: process.env.connectionName,
             text: 'Please Sign In',
             title: 'Sign In',

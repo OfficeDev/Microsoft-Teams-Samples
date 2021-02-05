@@ -19,7 +19,6 @@
         "@microsoft/microsoft-graph-client": "^2.2.1",
         "botbuilder": "~4.11.0",
         "botbuilder-dialogs": "~4.11.0",
-        "crypto": "^1.0.1",
         "dotenv": "^8.2.0",
         "isomorphic-fetch": "^3.0.0",
         "restify": "~8.5.1"

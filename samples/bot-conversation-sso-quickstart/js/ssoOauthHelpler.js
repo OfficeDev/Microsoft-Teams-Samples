@@ -1,6 +1,6 @@
 const { StatusCodes, ActivityTypes, tokenExchangeOperationName } = require('botbuilder');
 
-class SsoOauthHelpler {
+class SsoOAuthHelpler {
     constructor(oAuthConnectName, storage) {
         this.oAuthConnectName = oAuthConnectName;
         this.storage = storage;
@@ -13,7 +13,7 @@ class SsoOauthHelpler {
     /// </summary>
     /// <param name="turnContext"><see cref="ITurnContext"/> for this specific activity.</param>
     /// <returns>True if the bot should continue processing this TokenExchange request.</returns>
-    async ShouldProcessTokenExchange(turnContext) {
+    async shouldProcessTokenExchange(turnContext) {
         if (turnContext.activity.name !== tokenExchangeOperationName) {
             throw new Error("Only 'signin/tokenExchange' invoke activities can be procssed by TokenExchangeHelper.");
         }
@@ -66,7 +66,7 @@ class SsoOauthHelpler {
             // If token exchange failed for any reason, tokenExchangeResponse above stays null , and hence we send back a failure invoke response to the caller.
         }
 
-        if (tokenExchangeResponse === null || !tokenExchangeResponse.token) {
+        if (!tokenExchangeResponse || !tokenExchangeResponse.token) {
             // The token could not be exchanged (which could be due to a consent requirement)
             // Notify the sender that PreconditionFailed so they can respond accordingly.
             await turnContext.sendActivity(
@@ -113,4 +113,4 @@ class SsoOauthHelpler {
     }
 }
 
-exports.SsoOauthHelpler = SsoOauthHelpler;
+exports.SsoOAuthHelpler = SsoOAuthHelpler;

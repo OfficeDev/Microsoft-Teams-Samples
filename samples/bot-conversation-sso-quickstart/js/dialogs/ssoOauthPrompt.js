@@ -12,14 +12,14 @@ class TokenExchangeInvokeResponse {
     }
 }
 
-class SsoOauthPrompt extends OAuthPrompt {
+class SsoOAuthPrompt extends OAuthPrompt {
     async continueDialog(dialogContext) {
         // If the token was successfully exchanged already, it should be cached in TurnState along with the TokenExchangeInvokeRequest
         const cachedTokenResponse = dialogContext.context.turnState.tokenResponse;
 
-        if (cachedTokenResponse != null) {
+        if (cachedTokenResponse) {
             const tokenExchangeRequest = dialogContext.context.turnState.tokenExchangeInvokeRequest;
-            if (tokenExchangeRequest == null) {
+            if (!tokenExchangeRequest) {
                 throw new Error('TokenResponse is present in TurnState, but TokenExchangeInvokeRequest is missing.');
             }
 
@@ -55,4 +55,4 @@ class SsoOauthPrompt extends OAuthPrompt {
     }
 }
 
-exports.SsoOauthPrompt = SsoOauthPrompt;
+exports.SsoOAuthPrompt = SsoOAuthPrompt;

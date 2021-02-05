@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 const { TeamsActivityHandler } = require('botbuilder');
-
 class DialogBot extends TeamsActivityHandler {
     /**
      *
