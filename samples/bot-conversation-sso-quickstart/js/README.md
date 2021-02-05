@@ -1,4 +1,4 @@
-# Teams Auth Bot
+# Bots/Messaging Extension
 
 Bot Framework v4 bot using Teams authentication
 

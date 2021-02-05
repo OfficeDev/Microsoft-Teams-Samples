@@ -36,7 +36,6 @@ class TeamsBot extends DialogBot {
     }
 
     async onSignInInvoke(context) {
-        console.log("fyt signin invoke");
         if (context.activity && context.activity.name === tokenExchangeOperationName) {
             // The Token Exchange Helper will attempt the exchange, and if successful, it will cache the result
             // in TurnState.  This is then read by TokenExchangeOAuthPrompt, and processed accordingly.
