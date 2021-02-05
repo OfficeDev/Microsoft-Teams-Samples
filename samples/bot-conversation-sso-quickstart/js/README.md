@@ -162,7 +162,7 @@ Under the root of this sample folder, build and run by commands:
 Navigate to your Bot Channels Registration created in step2.2, click "Microsoft Teams" channel, then you can interact with the bot in Teams web or client:
 ![Teams Channel](sso_media/TeamsChannel.png)
 
-You can interact with this bot by sending it a message. The bot will respond by asking for your consent, by this consent the Bot will exchange an SSO token on behalf of you, then making a call to the Graph API on your behalf and returning the results.
+You can interact with this bot by sending it a message. The bot will respond by asking for your consent, by this consent the Bot will exchange an SSO token, then making a call to the Graph API on your behalf and returning the results. It will keep you loggined unless you send a message "logout". 
 
 ## Deploy the bot to Azure
 
