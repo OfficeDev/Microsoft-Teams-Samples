@@ -31,7 +31,6 @@
 
     microsoftTeams.initialize();
 
-
     microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
         var radios = document.getElementsByName('notificationType');
 
@@ -44,8 +43,8 @@
 
         microsoftTeams.settings.setSettings({
             entityId: eventType,
-            contentUrl: window.location.origin + "/Setup",
-            configName: eventType
+            contentUrl: window.location.origin + "/RSCSetup",
+            configName: eventType            
         });
         saveEvent.notifySuccess();
     });

@@ -18,7 +18,7 @@ This sample illustrates how to grant consent through app manifest
 
 - Clone the repository 
    ```bash
-   git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+   git clone https://github.com/VaraPrasad-MSFT/RSCWithGraphAPI.git
    ```
 
 - If you are using Visual Studio

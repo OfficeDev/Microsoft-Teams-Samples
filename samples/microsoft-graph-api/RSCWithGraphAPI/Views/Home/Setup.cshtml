@@ -6,7 +6,7 @@
             <h4>RSC consent demo list of channels in team</h4>
             <br />
             <br />
-            <input type="radio" name="getChannels" value="Get Channels" onclick="loginV1()"> Get the list of channels
+            <button type="button" name="getChannels" value="Get Channels" onclick="login()"> Get the list of channels</button>
             <br />
             <br />
             <br />
@@ -17,6 +17,7 @@
             <div id="listChannels">
 
             </div>
+         
         </div>
 
     </section>
@@ -62,12 +63,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
 <script src="@("https://unpkg.com/@microsoft/teams-js@1.3.3/dist/MicrosoftTeams.min.js")"></script>
-<script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha384-VC7EHu0lDzZyFfmjTPJq+DFyIn8TUGAJbEtpXquazFVr00Q/OOx//RjiZ9yU9+9m" crossorigin="anonymous"></script>
 <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js" integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT" crossorigin="anonymous"></script>
-<script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js" integrity="sha384-BIOS/65fbAsb2XiCCSTlZSTTl0ZgqkOU522dpyk5meOnN2EOQ3uH+QpqEtoAtmBn" crossorigin="anonymous"></script>
+
 <style>
     .result {
         color: red;
@@ -84,63 +82,38 @@
 <script type="text/javascript">
 
     microsoftTeams.initialize();
-
-    function loginV1() {
-        login(window.location.origin + "/AuthStart");
-    }
-
-    function login(url) {
+  
+    function login() {
         getAccessToken();
     }
 
     function getAccessToken() {
-
-        $.ajax({
-            url: "/Home/GetToken",
-            "method": "GET",
-            "datatype": "json",
-            success: function (response) {
-                console.log(response);
-                var radios = document.getElementsByName('getChannels');
-                if (radios[0].checked) {
-                    GetChannels(response);
-                    return;
-                }
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-            },
-        });
+        
+        microsoftTeams.initialize();
+        microsoftTeams.getContext(function (context) {
+           var tenantId = context.tid;
+            var groupId = context.groupId;
+          
 
 
+            $.ajax({
+                url: '@Url.Action("GetChannelsList", "Home")',
+                type: "GET",
+                dataType: "json",
+                data: { tenantId: tenantId, groupId: groupId },
+                success: function (response) {
+                    console.log(response);
+                    ListChannels(response);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                },
+            });
+
+        })
     }
 
-    function GetChannels(result) {
-        var accessToken = result[0];
-        var teamid = result[1];
-
-        $.ajax({
-            url: "https://graph.microsoft.com/v1.0/teams/" + teamid + "/channels",
-            type: "GET",
-            beforeSend: function (request) {
-                request.setRequestHeader("Authorization", "Bearer " + accessToken);
-            },
-            success: function (profile) {
-                console.log(profile);
-                ListChannels(profile.value);
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-            },
-        });
-    }
-
-    function ListChannels(profile) {
-        let channelData = new Array();
-
-        for (var i = 0; i < profile.length; i++) {
-            channelData[i] = profile[i].displayName;
-        }
+    function ListChannels(channelData) {
 
         $("#showList").show();
         $.each(channelData, function (idx, value) {
@@ -152,6 +125,4 @@
     $(window).on('load', function () {
         $('#myModal').modal('show');
     });
-
-
 </script>
