@@ -22,6 +22,7 @@
 |7|SPFx Tab | Sample app showing Microsoft Teams tabs using SharePoint Framework                                    |   | [View][group-channel-tab#ts#spfx] |
 |8|Tab SSO               | Microsoft Teams sample app for tabs Azure AD SSO                                      | | [View][tab-sso#ts] ,[Teams Toolkit](https://docs.microsoft.com/microsoftteams/platform/toolkit/visual-studio-code-tab-sso)
 |9|Config Tab Authentication               | Microsoft Teams sample app for config tabs Azure AD authentication | [View]()                       | | 
+=======
 
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
@@ -124,6 +125,7 @@
 [msgext-search-quickstart#js]:samples/msgext-search-quickstart/js
 
 [tab-sso#ts]:samples/tabs-sso/nodejs
+[tab-sso#cs]:samples/tab-sso/csharp
 
 [bot-proactive-msg#cs]:samples/bot-proactive-messaging/csharp
 [bot-conversation-quickstart#js]:samples/bot-conversation-quickstart/js

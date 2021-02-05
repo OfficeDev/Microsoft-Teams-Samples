@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const fetch = require('node-fetch');
-const express = require('express');
-const jwt_decode = require('jwt-decode');
+import fetch from 'node-fetch';
+import * as express from 'express';
+import jwt_decode, { JwtPayload } from 'jwt-decode';
 
 const app = express();
 
@@ -12,7 +12,7 @@ const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
 const graphScopes = 'https://graph.microsoft.com/' + process.env.GRAPH_SCOPES;
 
-let handleQueryError = function (err) {
+let handleQueryError = function (err: string) {
     console.log("handleQueryError called: ", err);
     return new Response(JSON.stringify({
         code: 400,
@@ -22,7 +22,8 @@ let handleQueryError = function (err) {
 
 app.get('/getGraphAccessToken', async (req,res) => {
 
-    let tenantId = jwt_decode(req.query.ssoToken)['tid']; //Get the tenant ID from the decoded token
+    const ssoToken = req.query.ssoToken as string;
+    let tenantId = jwt_decode<JwtPayload>(ssoToken)['tid']; //Get the tenant ID from the decoded token
     let accessTokenEndpoint = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`;
 
     //Create your access token query parameters
@@ -31,25 +32,25 @@ app.get('/getGraphAccessToken', async (req,res) => {
         grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
         client_id: clientId,
         client_secret: clientSecret,
-        assertion: req.query.ssoToken,
+        assertion: req.query.ssoToken as string,
         scope: graphScopes,
         requested_token_use: "on_behalf_of",
     };
 
-    accessTokenQueryParams = new URLSearchParams(accessTokenQueryParams).toString();
+    let body = new URLSearchParams(accessTokenQueryParams).toString();
 
     let accessTokenReqOptions = {
         method:'POST',
         headers: {
             Accept: "application/json",
             "Content-Type": "application/x-www-form-urlencoded"},
-        body: accessTokenQueryParams
+        body: body
     };
 
     let response = await fetch(accessTokenEndpoint,accessTokenReqOptions).catch(handleQueryError);
 
     let data = await response.json();
-    console.log("Response data: ",data);
+    console.log(`${data.token_type} token received`);
     if(!response.ok) {
         if( (data.error === 'invalid_grant') || (data.error === 'interaction_required') ) {
             //This is expected if it's the user's first time running the app ( user must consent ) or the admin requires MFA
