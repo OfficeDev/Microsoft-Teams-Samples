@@ -1,13 +1,11 @@
 ﻿
-<div class="col-md-8">
-    <section id="configSection">
-        <div>
-            <h2>Please Sign In:</h2>
-            <!-- Login button -->
-            <button onclick="loginV1()">Sign In</button>
-        </div>
-
-    </section>
+<div >
+    <div>
+        <span>To add a Tab please Sign In:</span>
+        <!-- Login button -->
+        <button onclick="loginV1()">Sign In</button>
+    </div>
+    
 </div>
 
 <script src="@("https://unpkg.com/@microsoft/teams-js@1.3.3/dist/MicrosoftTeams.min.js")"></script>
@@ -35,13 +33,34 @@
 
                 let data = localStorage.getItem(result);
                 localStorage.removeItem(result);
-                window.location.href = "@Url.Action("Success", "Home")";
+
+                let tokenResult = JSON.parse(data);
+                getUserProfile(tokenResult.accessToken);
+
+                window.location.href = "@Url.Action("Success", "Authentication")";
             },
             failureCallback: function (reason) {
                 console.log("Login failed: " + reason);
                 handleAuthError(reason);
-                window.location.href = "@Url.Action("Failed", "Home")";
+                window.location.href = "@Url.Action("Failed", "Authentication")";
             }
+        });
+    }
+
+   //Get the user's profile information from Microsoft Graph
+    function getUserProfile(accessToken) {
+        $.ajax({
+            url: "https://graph.microsoft.com/v1.0/me/",
+            beforeSend: function (request) {
+                request.setRequestHeader("Authorization", "Bearer " + accessToken);
+            },
+            success: function (profile) {
+                localStorage.setItem("displayName", profile.displayName);
+                console.log("User name is " + profile.displayName);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+            },
         });
     }
 </script>
