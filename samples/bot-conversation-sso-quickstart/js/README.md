@@ -114,9 +114,11 @@ ngrok http -host-header=rewrite 3978
 Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
 - For the "_Messaging endpoint_", use the current `https` URL you were given by running ngrok. Append with the path `/api/messages`:
 - For "Microsoft App ID and password", click "Create New", fill in the AppId and client secret you created in step1.1 and step 1.2:
-![Create Bot Channels Registration 2](sso_media/CreateBot.png)
-</br>
-![Create Bot Channels Registration 3](sso_media/CreateBot2.png)
+    ![Create Bot Channels Registration](sso_media/CreateBot.png)
+
+    ![Create Bot Channels Registration2](sso_media/CreateBot2.png)
+
+
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
 
@@ -128,7 +130,7 @@ Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/az
     
 - Switch to the "Settings" blade and click "Add Setting" under the OAuth Connection Settings section
 
-    ![Add OAuth Settings](sso_media/AddOAuth.png)
+    ![Add OAuth Settings](sso_media/AddOauth.png)
 
 - Fill out the Connection Setting form
 
