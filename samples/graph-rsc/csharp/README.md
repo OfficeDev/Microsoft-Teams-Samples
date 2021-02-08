@@ -44,7 +44,8 @@ This sample illustrates you can use [Resource Specific Consent (RSC)](https://do
 
 1. [Upload app manifest file](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#load-your-package-into-teams) (zip file) to your team
     ![](RSCDemo/Images/Picture1.png)
-    ![](RSCDemo/Images/Picture2.png)
+
+    ![](RSCDemo/Images/Picture2.Png)
 
 
 
