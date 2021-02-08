@@ -74,6 +74,12 @@
 |2|Generic connectors sample | Sample code for a generic connector that's easy to customize for any system which supports webhooks.   |    |[View][connector-generic#ts]
 |3|Outgoing Webhooks      | Samples to create "Custom Bots" to be used in Microsoft Teams.                                        |[View][outgoing-webhook#cs]|[View][outgoing-webhook#ts]
 
+## [Graph APIs](https://docs.microsoft.com/graph/teams-concept-overview)
+
+|    | Sample Name        | Description                                                                      | C#    | TypeScript   |
+|:--:|:-------------------|:-------------------------------------------------------------------------------------------------|:--------|:-------------|
+|1|Resource Specific Consent (RSC) | This sample illustrates you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs. .                              |[View][graph#rsc#cs]       |
+
 
 ## Scenario specific samples
 
@@ -130,6 +136,8 @@
 [bot-conversation-sso-quickstart#js]:samples/bot-conversation-sso-quickstart/js
 
 [meetings-token-app#cs]:samples/meetings-token-app/csharp
+
+[graph#rsc#cs]:samples/graph-rsc/csharp
 
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 
