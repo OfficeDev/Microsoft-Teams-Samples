@@ -25,7 +25,7 @@
   "accentColor": "#5558AF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://YourNgrok.ngrok.io/ConfigureTab",
+      "configurationUrl": "https://[Your Ngrok Domain]/ConfigureTab",
       "canUpdateConfiguration": true,
       "scopes": [
         "team"
@@ -40,7 +40,7 @@
     "*.ngrok.io"
   ],
   "webApplicationInfo": {
-    "id": "<<Your Bot Id>>",
+    "id": "<<Your Microsoft APP Id>>",
     "resource": "https://RscBasedStoreApp",
     "applicationPermissions": [
       "TeamSettings.Read.Group",
