@@ -111,7 +111,7 @@ ngrok http -host-header=rewrite 3978
 
 #### 2.2. Create new Bot Channel Registration resource in Azure
 
-Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
+Create [Bot Channels registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
 - For the "_Messaging endpoint_", use the current `https` URL you were given by running ngrok. Append with the path `/api/messages`:
 - For "Microsoft App ID and password", click "Create New", fill in the AppId and client secret you created in step1.1 and step 1.2:
     ![Create Bot Channels Registration](sso_media/CreateBot.png)

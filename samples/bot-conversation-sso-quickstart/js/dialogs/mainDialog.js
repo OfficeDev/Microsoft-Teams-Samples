@@ -26,8 +26,8 @@ class MainDialog extends LogoutDialog {
         this.addDialog(new WaterfallDialog(MAIN_WATERFALL_DIALOG, [
             this.promptStep.bind(this),
             this.loginStep.bind(this),
-            this.displayTokenPhase1.bind(this),
-            this.displayTokenPhase2.bind(this)
+            this.ensureOAuth.bind(this),
+            this.displayToken.bind(this)
         ]));
 
         this.initialDialogId = MAIN_WATERFALL_DIALOG;
@@ -72,7 +72,7 @@ class MainDialog extends LogoutDialog {
         return await stepContext.endDialog();
     }
 
-    async displayTokenPhase1(stepContext) {
+    async ensureOAuth(stepContext) {
         await stepContext.context.sendActivity('Thank you.');
 
         const result = stepContext.result;
@@ -90,7 +90,7 @@ class MainDialog extends LogoutDialog {
         return await stepContext.endDialog();
     }
 
-    async displayTokenPhase2(stepContext) {
+    async displayToken(stepContext) {
         const tokenResponse = stepContext.result;
         if (tokenResponse && tokenResponse.token) {
             await stepContext.context.sendActivity(`Here is your token ${tokenResponse.token}`);
