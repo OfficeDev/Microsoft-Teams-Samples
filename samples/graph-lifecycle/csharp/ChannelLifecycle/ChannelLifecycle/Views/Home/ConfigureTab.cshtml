@@ -1,0 +1,38 @@
+﻿
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+<script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js"></script>
+
+<script type="text/javascript">
+
+    function onClick() {
+        microsoftTeams.settings.setValidityState(true);
+    }
+
+    microsoftTeams.initialize();
+
+    microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
+        var radios = document.getElementsByName('notificationType');
+
+        microsoftTeams.settings.setSettings({
+            entityId: 'ChannelLifecycleDemo',
+            contentUrl: window.location.origin + "/Index?tenantId={tid}&groupId={groupId}&channelId={channelId}",
+            configName: 'ChannelLifecycleDemo'
+        });
+        saveEvent.notifySuccess();
+    });
+</script>
+<div class="col-md-8">
+    <section id="configSection">
+
+
+        <div id="divConfig">           
+            <br />
+            <form id="configForm">
+                <input type="radio" name="notificationType" value="Create" onclick="onClick()"> Add Channel lifecycle tab
+            </form>
+        </div>
+
+
+        <div id="divError" style="display: none"></div>
+    </section>
+</div>
