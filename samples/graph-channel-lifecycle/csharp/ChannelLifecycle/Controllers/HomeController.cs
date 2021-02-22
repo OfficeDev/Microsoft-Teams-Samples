@@ -19,11 +19,11 @@ namespace ChannelLifecycle.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IConfiguration _configuration;       
-     
+        private readonly IConfiguration _configuration;
+
         public HomeController(IConfiguration configuration)
         {
-            _configuration = configuration;           
+            _configuration = configuration;
         }
 
         /// <summary>
@@ -31,13 +31,13 @@ namespace ChannelLifecycle.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("Index")]
-        public async Task<IActionResult> Index(string tenantId,string groupId,string channelId)
-        {                       
+        public async Task<IActionResult> Index(string tenantId, string groupId, string channelId)
+        {
             var result = await GetChannelsList(tenantId, groupId);
 
             ChannelViewModel viewModel = new ChannelViewModel();
             List<ChannelModel> list = new List<ChannelModel>();
-            foreach(var res in result)
+            foreach (var res in result)
             {
                 var channelModel = new ChannelModel();
                 channelModel.ChannelId = res.Id;
@@ -50,39 +50,39 @@ namespace ChannelLifecycle.Controllers
             viewModel.TenantId = tenantId;
             viewModel.GroupId = groupId;
             viewModel.channelList = list;
-           
+
             return View(viewModel);
         }
 
         [HttpGet]
         [Route("CreateTab")]
-        public async Task CreateTab(string tenantId,string teamId,string channelId)
+        public async Task CreateTab(string tenantId, string teamId, string channelId)
         {
             string token = await GetToken(tenantId);
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
 
             var appsInstalled = await graphClient.Teams[teamId].InstalledApps.Request().Expand("teamsAppDefinition").GetAsync();
-            var teamsAppId = appsInstalled.Where(o => o.TeamsAppDefinition.DisplayName == "Channel Lifecycle").Select(o=>o.TeamsAppDefinition.TeamsAppId).FirstOrDefault();
+            var teamsAppId = appsInstalled.Where(o => o.TeamsAppDefinition.DisplayName == "Channel Lifecycle").Select(o => o.TeamsAppDefinition.TeamsAppId).FirstOrDefault();
 
-                var teamsTab = new TeamsTab
+            var teamsTab = new TeamsTab
+            {
+                DisplayName = "My Tab",
+                Configuration = new TeamsTabConfiguration
                 {
-                    DisplayName = "My Tab",
-                    Configuration = new TeamsTabConfiguration
-                    {
-                        EntityId = "2DCA2E6C7A10415CAF6B8AB66123125",
-                        ContentUrl = _configuration["BaseUri"]+"/TestTab",
-                        WebsiteUrl = _configuration["BaseUri"] + "/TestTab"
-                    },
-                    AdditionalData = new Dictionary<string, object>()
+                    EntityId = "2DCA2E6C7A10415CAF6B8AB66123125",
+                    ContentUrl = _configuration["BaseUri"] + "/TestTab",
+                    WebsiteUrl = _configuration["BaseUri"] + "/TestTab"
+                },
+                AdditionalData = new Dictionary<string, object>()
                         {
                             {"teamsApp@odata.bind", "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/"+teamsAppId }
                         }
-                };
+            };
 
-                var result = await graphClient.Teams[teamId].Channels[channelId].Tabs
-                      .Request()
-                      .AddAsync(teamsTab);
-          
+            var result = await graphClient.Teams[teamId].Channels[channelId].Tabs
+                  .Request()
+                  .AddAsync(teamsTab);
+
         }
 
         /// <summary>
@@ -194,7 +194,7 @@ namespace ChannelLifecycle.Controllers
                 .Request()
                 .DeleteAsync();
 
-            return "Succesfully deleted";
+            return "Successfully deleted";
         }
 
         /// <summary>
