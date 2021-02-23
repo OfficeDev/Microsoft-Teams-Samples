@@ -21,7 +21,7 @@ This sample show sthe [Channel](https://docs.microsoft.com/en-us/graph/api/resou
   
 - Clone the repository 
    ```bash
-   git clone https://github.com/VaraPrasad-MSFT/ChannelLifecycle.git
+   git clone https://github.com/OfficeDev/microsoft-teams-samples.git
    ```
 
 - Build your solution
