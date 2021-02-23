@@ -79,6 +79,7 @@
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   |
 |:--:|:-------------------|:-------------------------------------------------------------------------------------------------|:--------|:-------------|
 |1|Resource Specific Consent (RSC) | This sample illustrates you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs. .                              |[View][graph#rsc#cs]       |
+|2|Graph API Channel Life Cycle | This sample illustrates you can use [Graph API Channel Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-beta) to call Graph APIs. .                              |[View](graph#lifecycle#cs)       |
 
 
 ## Scenario specific samples
