@@ -1,0 +1,52 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.8",
+    "version": "1.0.0",
+    "id": "<<MICROSOFT-APP-ID>>",
+    "packageName": "com.microsoftteams.app",
+    "developer": {
+        "name": "Microsoft",
+        "websiteUrl": "https://microsoft.com",
+        "privacyUrl": "https://microsoft.com/privacy",
+        "termsOfUseUrl": "https://microsoft.com/termsofuse"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "<<YOUR APP NAME IN SHORT>>",
+        "full": "<<YOUR APP NAME>>"
+    },
+    "description": {
+        "short": "<<YOUR APP DESCRIPTION IN SHORT>>",
+        "full": "<<YOUR APP DESCRIPTION>>"
+    },
+    "accentColor": "#FFFFFF",
+    "bots": [
+      {
+        "botId": "<<MICROSOFT-APP-ID>>",
+        "scopes": [
+          "personal",
+          "team",
+          "groupchat"
+        ],
+        "supportsFiles": false,
+        "isNotificationOnly": false
+      }
+    ],
+    "composeExtensions": [
+      {
+        "botId": "<<MICROSOFT-APP-ID>>",
+        "canUpdateConfiguration": true,
+        "commands": []
+      }
+    ],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "teams.microsoft.com"
+    ]
+}
