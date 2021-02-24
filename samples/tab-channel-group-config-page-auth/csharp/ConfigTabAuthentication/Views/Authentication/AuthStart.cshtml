@@ -39,7 +39,7 @@
         microsoftTeams.getContext(function (context) {
             // ADAL.js configuration
             let config = {
-                clientId: '@ViewBag.ClientId',
+                clientId: '@ViewBag.AuthStartClientId',
                 redirectUri: window.location.origin + "/AuthEnd",       // This should be in the list of redirect uris for the AAD app
                 cacheLocation: "localStorage",
                 navigateToLoginRequestUrl: false,

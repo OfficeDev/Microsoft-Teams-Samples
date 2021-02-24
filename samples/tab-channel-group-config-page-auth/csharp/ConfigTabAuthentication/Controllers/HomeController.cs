@@ -37,10 +37,29 @@ namespace TabAuthentication.Controllers
             return View();
         }
 
-        [Route("ConfigureTab")]
-        public IActionResult ConfigureTab()
+        [Route("SimpleSetUp")]
+        public IActionResult SimpleSetUp()
+        {
+            return View();
+        }
+
+        [Route("ChooseAuth")]
+        public IActionResult ChooseAuth()
+        {
+            return View();
+        }
+
+        [Route("SilentConfigureTab")]
+        public IActionResult SilentConfigureTab()
         {
             ViewBag.ClientId = Configuration["ClientId"].ToString();
+            return View();
+        }
+
+        [Route("SimpleConfigureTab")]
+        public IActionResult SimpleConfigureTab()
+        {
+            ViewBag.ClientId = Configuration["SimpleClientId"].ToString();
             return View();
         }
 
@@ -87,7 +106,6 @@ namespace TabAuthentication.Controllers
 
                 value = JToken.Parse(jwtPayload).ToString(Formatting.Indented);
             }
-
             return value;
         }
     }

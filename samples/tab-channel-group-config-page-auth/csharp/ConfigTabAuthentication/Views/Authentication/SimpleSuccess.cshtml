@@ -29,7 +29,7 @@
     };
 
     function logoutV1() {
-        signOut(window.location.origin + "/Logout");
+        signOut(window.location.origin + "/SimpleLogout");
     }
 
     function signOut(url) {
@@ -39,18 +39,18 @@
             height: 535,
             successCallback: function (result) {
                 console.log("Logout succeeded: " + result);
-                window.location.href = "@Url.Action("SilentConfigureTab", "Home")";
+                window.location.href = "@Url.Action("ChooseAuth", "Home")";
                 microsoftTeams.settings.setValidityState(false);
             },
             failureCallback: function (reason) {
                 console.log("Logout failed: " + reason);
                 handleAuthError(reason);
-                window.location.href = "@Url.Action("Failed", "Authentication")";
+                window.location.href = "@Url.Action("SimpleFailed", "Authentication")";
             }
         });
     }
 
-    
+
 
     function onClick() {
         microsoftTeams.settings.setValidityState(true);
@@ -69,7 +69,7 @@
 
         microsoftTeams.settings.setSettings({
             entityId: eventType,
-            contentUrl: window.location.origin + "/Setup",
+            contentUrl: window.location.origin + "/SimpleSetup",
             configName: eventType
         });
         saveEvent.notifySuccess();

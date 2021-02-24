@@ -10,7 +10,6 @@ namespace TabAuthentication.Controllers
     {
 
         private readonly ILogger<AuthenticationController> _logger;
-
         private readonly IConfiguration Configuration;
 
         public AuthenticationController(ILogger<AuthenticationController> logger, IConfiguration configuration)
@@ -23,19 +22,51 @@ namespace TabAuthentication.Controllers
             return View();
         }
 
-        [Route("AuthStart")]
-        public ActionResult AuthStart()
+        [Route("SimpleAuthStart")]
+        public ActionResult SimpleAuthStart()
         {
-            ViewBag.ClientId = Configuration["ClientId"].ToString();
+            ViewBag.ClientId = Configuration["SimpleClientId"].ToString();
             ViewBag.ResponseType = Configuration["ResponseType"].ToString();
             ViewBag.ResponseMode = Configuration["ResponseMode"].ToString();
             ViewBag.Resource = Configuration["Resource"].ToString();
             return View();
         }
 
+        [Route("SimpleAuthEnd")]
+        public ActionResult SimpleAuthEnd()
+        {
+            return View();
+        }
+
+        [Route("SimpleSuccess")]
+        public ActionResult SimpleSuccess()
+        {
+            return View();
+        }
+
+        [Route("SimpleFailed")]
+        public ActionResult SimpleFailed()
+        {
+            return View();
+        }
+
+        [Route("SimpleLogOut")]
+        public IActionResult SimpleLogOut()
+        {
+            return View();
+        }
+
+        [Route("AuthStart")]
+        public ActionResult AuthStart()
+        {
+            ViewBag.AuthStartClientId = Configuration["ClientId"].ToString();
+            return View();
+        }
+
         [Route("AuthEnd")]
         public ActionResult AuthEnd()
         {
+            ViewBag.AuthEndClientId = Configuration["ClientId"].ToString();
             return View();
         }
 
