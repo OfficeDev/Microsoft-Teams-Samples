@@ -2,7 +2,7 @@
     "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
     "manifestVersion": "1.8",
     "version": "1.0.0",
-    "id": "b746052e-b051-46da-b740-6708433bf87b",
+    "id": "<<Your Microsoft App Id>>",
     "packageName": "com.microsoft.com.testapp",
     "developer": {
         "name": "https://dev.botframework.com",
@@ -25,7 +25,7 @@
     "accentColor": "#FFFFFF",
     "configurableTabs": [
         {
-            "configurationUrl": "https://9fdfc1371003.ngrok.io/configure",
+            "configurationUrl": "https://yourNgrok.ngrok.io/configure",
             "canUpdateConfiguration": true,
             "scopes": [
                 "team",
@@ -46,7 +46,7 @@
     ],
     "bots": [
         {
-            "botId": "",
+            "botId": "<<Your Microsoft App Id>>",
             "scopes": [
                 "personal",
                 "team",
@@ -61,7 +61,7 @@
         "messageTeamMembers"
     ],
     "validDomains": [
-       "dev.botframework.com",
+        "dev.botframework.com",
         "*.ngrok.io"
     ]
 }
