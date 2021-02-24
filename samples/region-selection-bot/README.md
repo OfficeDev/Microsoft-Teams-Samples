@@ -2,7 +2,7 @@
 
 Bot Framework v4 echo bot sample.
 
-This bot has been created using [Bot Framework](https://dev.botframework.com), for the domain or region selection for the app using Card Bot and Cards.
+This bot has been created using [Bot Framework](https://dev.botframework.com), for the region selection for the app's data center using Bot and Tab.
 
 ## Prerequisites
 

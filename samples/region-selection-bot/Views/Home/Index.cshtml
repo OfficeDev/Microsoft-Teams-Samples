@@ -3,28 +3,29 @@
 <html>
 <head>
     <script src='https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js'></script>
-    <script type="text/javascript" src="/Scripts/teamsapp.js"></script>
+    @*<script type="text/javascript" src="/Scripts/teamsapp.js"></script>*@
+    <script type="text/javascript" src="~/Scripts/teamsapp.js"></script>
 </head>
 <body>
 
     <div class="font-semibold font-title">
-        <h3>Welcome to Domain Selection App!</h3>
+        <h3>Welcome to Region Selection App!</h3>
     </div>
 
     <p>
         <div>
-            This will help you to choose your domain and region.
+            This will help you to choose your data center's Region.
         </div>
     </p>
 
     <p>
         <div>
-            <label for="domainChoice">Select the Domain you would like to set: </label>
+            <label for="domainChoice">Select the data center Region you would like to set: </label>
             <select id="domainChoice" name="domainChoice">
-                <option value="" selected="selected">(Select a domain)</option>
+                <option value="" selected="selected">(Select a region)</option>
                 @foreach (var item in Model.regionDomains)
                 {
-                    <option value="@item.domain">@(  item.country + " - " + item.domain)</option>
+                    <option value="@item.region">@(  item.country + " - " + item.region)</option>
                 }
             </select>
         </div>

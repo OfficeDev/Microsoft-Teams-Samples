@@ -16,7 +16,7 @@ namespace Microsoft.BotBuilderSamples.Controllers
         public ActionResult Index()
         {
             //get the Json filepath  
-            string file = Path.GetFullPath("ConfigData/RegionDomains.json");
+            string file = Path.GetFullPath("ConfigData/Regions.json");
             //deserialize JSON from file  
             string Json = System.IO.File.ReadAllText(file);
             var domainlist = JsonSerializer.Deserialize<Rootobject>(Json);

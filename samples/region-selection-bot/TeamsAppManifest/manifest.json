@@ -1,0 +1,67 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.8",
+    "version": "1.0.0",
+    "id": "b746052e-b051-46da-b740-6708433bf87b",
+    "packageName": "com.microsoft.com.testapp",
+    "developer": {
+        "name": "https://dev.botframework.com",
+        "websiteUrl": "https://dev.botframework.com",
+        "privacyUrl": "https://dev.botframework.com/privacy",
+        "termsOfUseUrl": "https://dev.botframework.com/terms"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "RegionSelectionApp",
+        "full": "It will help to select Data center's Region"
+    },
+    "description": {
+        "short": "RegionSelection App",
+        "full": "Data Center's Region Selection Bot and Tab Application"
+    },
+    "accentColor": "#FFFFFF",
+    "configurableTabs": [
+        {
+            "configurationUrl": "https://9fdfc1371003.ngrok.io/configure",
+            "canUpdateConfiguration": true,
+            "scopes": [
+                "team",
+                "groupchat"
+            ],
+            "context": [
+                "channelTab",
+                "privateChatTab",
+                "meetingSidePanel",
+                "meetingDetailsTab",
+                "meetingChatTab"
+            ],
+            "supportedSharePointHosts": [
+                "sharePointFullPage",
+                "sharePointWebPart"
+            ]
+        }
+    ],
+    "bots": [
+        {
+            "botId": "",
+            "scopes": [
+                "personal",
+                "team",
+                "groupchat"
+            ],
+            "supportsFiles": false,
+            "isNotificationOnly": false
+        }
+    ],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+       "dev.botframework.com",
+        "*.ngrok.io"
+    ]
+}
