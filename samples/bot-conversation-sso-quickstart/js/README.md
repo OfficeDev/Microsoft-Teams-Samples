@@ -38,7 +38,8 @@ This step will create an AAD app, it will be reused wherever it needs AAD throug
 
 - Click "New Registration" on the upper left corner
 
-- Fill out name and select third option for supported account type and click "Register":
+- Fill out name and select third option for supported account type 
+- Set Redirect Uri to "https://token.botframework.com/.auth/web/redirect" and click "Register":
 
     ![App Registration Organization](sso_media/AppRegistration.png)
 
@@ -161,8 +162,9 @@ Under the root of this sample folder, build and run by commands:
 
 ## Interacting with the bot in Teams
 
-Navigate to your Bot Channels Registration created in step2.2, click "Microsoft Teams" channel, then you can interact with the bot in Teams web or client:
-![Teams Channel](sso_media/TeamsChannel.png)
+- **Edit** the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{TODO: MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+- **Zip** up the contents of the `appPackage/` folder to create a `manifest.zip`
+- **Upload** the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
 You can interact with this bot by sending it a message. The bot will respond by asking for your consent, by this consent the Bot will exchange an SSO token, then making a call to the Graph API on your behalf and returning the results. It will keep you loggined unless you send a message "logout". 
 

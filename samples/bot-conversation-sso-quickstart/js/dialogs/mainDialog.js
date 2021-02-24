@@ -11,6 +11,7 @@ const OAUTH_PROMPT = 'OAuthPrompt';
 const { SsoOAuthPrompt } = require('./ssoOAuthPrompt');
 const { SimpleGraphClient } = require('../simpleGraphClient');
 const { polyfills } = require('isomorphic-fetch');
+const { CardFactory, MessageFactory } = require('botbuilder-core');
 
 class MainDialog extends LogoutDialog {
     constructor() {
@@ -66,7 +67,10 @@ class MainDialog extends LogoutDialog {
             const client = new SimpleGraphClient(tokenResponse.token);
             const me = await client.getMe();
             const title = me ? me.jobTitle : 'UnKnown';
-            await stepContext.context.sendActivity(`You're logged in as ${me.displayName} (${me.userPrincipalName}); you job title is: ${title}`);
+            await stepContext.context.sendActivity(`You're logged in as ${me.displayName} (${me.userPrincipalName}); your job title is: ${title}; your photo is: `);
+            const photoBase64 = await client.GetPhotoAsync(tokenResponse.token);
+            const card = CardFactory.thumbnailCard("", CardFactory.images([photoBase64]));
+            await stepContext.context.sendActivity({attachments: [card]});
             return await stepContext.prompt(CONFIRM_PROMPT, 'Would you like to view your token?');
         }
         return await stepContext.endDialog();
