@@ -79,6 +79,7 @@
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   |
 |:--:|:-------------------|:-------------------------------------------------------------------------------------------------|:--------|:-------------|
 |1|Resource Specific Consent (RSC) | This sample illustrates you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs. .                              |[View][graph#rsc#cs]       |
+|1|Tab Activity Feed | This sample illustrates you can use Microsoft Graph Activity Feed notification API to trigger notification from Tab. .                              |[View][graph#activity#feed#cs]      |
 
 
 ## Scenario specific samples
@@ -138,6 +139,7 @@
 [meetings-token-app#cs]:samples/meetings-token-app/csharp
 
 [graph#rsc#cs]:samples/graph-rsc/csharp
+[graph#activity#feed#cs]:samples/graph-activity-feed/csharp
 
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 
