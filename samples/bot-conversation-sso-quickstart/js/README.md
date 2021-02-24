@@ -22,12 +22,6 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
 
-### 0. Clone the repository
-
-```bash
-git clone https://github.com/Microsoft/botbuilder-samples.git
-```
-
 ### 1. Create and configure AAD app
 
 #### 1.1 Create AAD app for SSO
