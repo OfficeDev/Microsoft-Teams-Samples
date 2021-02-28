@@ -16,11 +16,11 @@ using Microsoft.BotBuilderSamples.Models;
 
 namespace Microsoft.BotBuilderSamples.Bots
 {
-    public class DomainSelectionTab : ActivityHandler
+    public class RegionSelectionBot : ActivityHandler
     {
         private readonly BotState _userState;
 
-        public DomainSelectionTab(UserState userState)
+        public RegionSelectionBot(UserState userState)
         {
             _userState = userState;
         }
