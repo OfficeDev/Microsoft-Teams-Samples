@@ -6,10 +6,14 @@
   "body": [
     {
       "type": "TextBlock",
-      "text": "Welcome to Content Bubble!",
+      "text": "Provide your Feedback!",
       "wrap": true
     },
-
+    {
+      "type": "TextBlock",
+      "text": "Continue with WFH for next 3 months?",
+      "wrap": true
+    },
     {
       "type": "Input.ChoiceSet",
       "id": "myReview",
@@ -19,31 +23,25 @@
       "value": "1",
       "choices": [
         {
-          "title": "Approve 5% dividend payment to shareholders",
-          "value": "Approve 5% dividend payment to shareholders"
+          "title": "Yes",
+          "value": "yes"
         },
         {
-          "title": "Increase research budget by 10%",
-          "value": "Increase research budget by 10%"
-        },
-        {
-          "title": "Continue with WFH for next 3 months",
-          "value": "Continue with WFH for next 3 months"
+          "title": "No",
+          "value": "no"
         }
 
       ]
     }
-
-
   ],
 
   "actions": [
     {
       "type": "Action.Submit",
       "id": "submit",
-      "title": "Push Agenda",
+      "title": "Submit",
       "data": {
-        "action": "inputselector"
+        "action": "Continue with WFH for next 3 months"
 
       }
     }
