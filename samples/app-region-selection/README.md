@@ -1,6 +1,6 @@
 ﻿# EchoBot
 
-Bot Framework v4 echo bot sample.
+Bot Framework v4 Region Selection sample.
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), for the region selection for the app's data center using Bot and Tab.
 
@@ -23,7 +23,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), f
 
 - Run the bot from a terminal or from Visual Studio:
 
-  A) From a terminal, navigate to `samples/csharp_dotnetcore/DomainSelectionBot`
+  A) From a terminal, navigate to `samples/csharp_dotnetcore/RegionSelectionBot`
 
   ```bash
   # run the bot
@@ -52,7 +52,12 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), f
 
 ## Interacting with the bot
 
-Enter text in the emulator.  The text will be echoed back by the bot.
+Install the Region Selection App manifest in Microsoft Teams. @mention the region selection bot to start the conversation.
+
+## Interacting with Region Selection Tab
+
+Set up the region selection app as a Tab in channel
+Select the region from the configuration page and click on save
 
 ## Deploy the bot to Azure
 
