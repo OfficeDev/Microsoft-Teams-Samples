@@ -37,6 +37,7 @@ namespace TabAuthentication.Controllers
             return View();
         }
 
+
         [Route("SimpleSetUp")]
         public IActionResult SimpleSetUp()
         {
@@ -93,8 +94,6 @@ namespace TabAuthentication.Controllers
             if (readableToken == true)
             {
                 var token = jwtHandler.ReadJwtToken(jwtInput);
-
-                //Extract the payload of the JWT
                 var claims = token.Claims;
                 var jwtPayload = "{";
                 foreach (Claim c in claims)

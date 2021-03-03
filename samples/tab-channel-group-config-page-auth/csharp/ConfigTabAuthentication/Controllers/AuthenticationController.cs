@@ -10,6 +10,7 @@ namespace TabAuthentication.Controllers
     {
 
         private readonly ILogger<AuthenticationController> _logger;
+
         private readonly IConfiguration Configuration;
 
         public AuthenticationController(ILogger<AuthenticationController> logger, IConfiguration configuration)

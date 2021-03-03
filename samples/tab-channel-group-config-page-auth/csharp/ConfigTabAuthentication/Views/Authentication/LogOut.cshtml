@@ -23,7 +23,6 @@
         microsoftTeams.getContext(function (context) {
             window.location.assign(window.location.origin + "/.auth/logout?post_logout_redirect_uri=" + window.location.origin + "/LogOut");
         });
-
         microsoftTeams.authentication.notifySuccess(null, window.location.origin + "/LogOut");
     </script>
 </body>

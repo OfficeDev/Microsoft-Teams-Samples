@@ -47,10 +47,14 @@
             <div><b>UPN:</b> <span id="profileUpn" /></div>
             <div><b>Object id:</b> <span id="profileObjectId" /></div>
         </div>
+        <div style="height: 50px">
+        </div>
+        <div id="divSilentSignOut" style="display: none">
+            <button onclick="SilentLogout()">Sign Out</button>
+        </div>
     </p>
 
     <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha384-VC7EHu0lDzZyFfmjTPJq+DFyIn8TUGAJbEtpXquazFVr00Q/OOx//RjiZ9yU9+9m" crossorigin="anonymous"></script>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js" integrity="sha384-SNENyRfvDvybst1u0LawETYF6L5yMx5Ya1dIqWoG4UDTZ/5UAMB15h37ktdBbyFh" crossorigin="anonymous"></script>
     <!-- Check before upgrading your ADAL version, as this sample depends on an internal function to authenticate silently -->
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.15/js/adal.min.js" integrity="sha384-lIk8T3uMxKqXQVVfFbiw0K/Nq+kt1P3NtGt/pNexiDby2rKU6xnDY8p16gIwKqgI" crossorigin="anonymous"></script>
     <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js"></script>
@@ -121,6 +125,8 @@
         function login() {
             $("#divError").text("").css({ display: "none" });
             $("#divProfile").css({ display: "none" });
+            $("#divSilentSignOut").css({ display: "none" });
+            
 
             microsoftTeams.authentication.authenticate({
                 url: window.location.origin + "/AuthStart",
@@ -148,6 +154,7 @@
 
                     $("#divError").text(reason).css({ display: "" });
                     $("#divProfile").css({ display: "none" });
+                    $("#divSilentSignOut").css({ display: "none" });
                 }
             });
         }
@@ -165,14 +172,18 @@
                     $("#profileUpn").text(token.upn);
                     $("#profileObjectId").text(token.oid);
                     $("#divProfile").css({ display: "" });
+                    $("#divSilentSignOut").css({ display: "" });
                     $("#divError").css({ display: "none" });
                     microsoftTeams.settings.setValidityState(true);
+
+                    localStorage.setItem("displayName", token.name);
 
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                     $("#divError").text(errorThrown).css({ display: "" });
                     $("#divProfile").css({ display: "none" });
+                    $("#divSilentSignOut").css({ display: "none" });
                 },
             });
         }
@@ -188,6 +199,29 @@
             });
             saveEvent.notifySuccess();
         });
+
+    function SilentLogout() {
+        SignOut(window.location.origin + "/Logout");
+    }
+
+    function SignOut(url) {
+        microsoftTeams.authentication.authenticate({
+            url: url,
+            width: 600,
+            height: 535,
+            successCallback: function (result) {
+                console.log("Logout succeeded: " + result);
+                window.location.href = "@Url.Action("ChooseAuth", "Home")";
+                microsoftTeams.settings.setValidityState(false);
+            },
+            failureCallback: function (reason) {
+                console.log("Logout failed: " + reason);
+                handleAuthError(reason);
+                window.location.href = "@Url.Action("Failed", "Authentication")";
+            }
+        });
+    }
+
     </script>
 </body>
 </html>

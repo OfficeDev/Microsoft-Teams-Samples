@@ -1,0 +1,56 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.8",
+    "version": "1.0.0",
+    "id": "<<Your Microsoft App Id>>",
+    "packageName": "contoso.com",
+    "developer": {
+        "name": "contoso",
+        "websiteUrl": "https://www.teams.com",
+        "privacyUrl": "https://www.teams.com/privacy",
+        "termsOfUseUrl": "https://www.teams.com/termsofuse"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "config-tab-auth",
+        "full": "config-tab-auth"
+    },
+    "description": {
+        "short": "AAD and silent authentiction in configurable tab",
+        "full": "This app demonstrates the AAD and silent authentiction in configurable tab"
+    },
+    "accentColor": "#FFFFFF",
+    "configurableTabs": [
+        {
+            "configurationUrl": "https://xxxxxx.ngrok.io/ChooseAuth",
+            "canUpdateConfiguration": true,
+            "scopes": [
+                "team"
+            ],
+            "context": [
+                "channelTab"
+            ]
+        }
+    ],
+    "staticTabs": [
+        {
+            "entityId": "BothSilentandSimple",
+            "name": "BothSilentandSimple",
+            "contentUrl": "https://xxxxxx.ngrok.io/ChooseAuth",
+            "websiteUrl": "https://xxxxxx.ngrok.io/ChooseAuth",
+            "scopes": [
+                "personal"
+            ]
+        }
+    ],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "*.ngrok.io"
+    ]
+}
