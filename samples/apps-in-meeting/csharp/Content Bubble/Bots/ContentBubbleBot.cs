@@ -23,6 +23,8 @@ namespace Content_Bubble_Bot
 
             if (turnContext.Activity.Value == null)
             {
+                await FetchTask(turnContext);
+
                 var path = "./Cards/adaptive.json";
                 var adaptiveCardJson = File.ReadAllText(path);
                 var adaptiveCardAttachment = new Attachment
@@ -37,71 +39,23 @@ namespace Content_Bubble_Bot
 
             else
             {
-
                 string selectedoption = string.Empty;
                 JToken commandToken = JToken.Parse(turnContext.Activity.Value.ToString());
                 string command = commandToken["action"].Value<string>();
 
-                if (command.ToLowerInvariant() == "inputselector" || command == Constants.FirstTitle || command == Constants.SecondTitle || command == Constants.ThirdTitle)
+                if (command.ToLowerInvariant() == "inputselector")
                 {
                     selectedoption = commandToken["myReview"].Value<string>();
                 }
 
-                if (selectedoption == Constants.FirstTitle)
+                if (selectedoption == "Yes")
                 {
-                    await FetchTaskFirst(turnContext);
-
-                    var path = "./Cards/AdaptiveFirstTitle.json";
-                    var adaptiveCardJson = File.ReadAllText(path);
-                    var adaptiveCardAttachment = new Attachment
-                    {
-                        ContentType = AdaptiveCard.ContentType,
-                        Content = JsonConvert.DeserializeObject(adaptiveCardJson),
-                    };
-
-                    await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardAttachment));
-
-
+                    await turnContext.SendActivityAsync("Sure.. Please check out this link: [Apps in Teams meetings](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings#:~:text=Post%2Dmeeting%20app%20experience&text=%E2%9C%94%20Permissioned%20users%20can%20add%20apps%20from%20the%20tab%20gallery,than%20ten%20polls%20or%20surveys.)");
                 }
-                else if (selectedoption == Constants.SecondTitle)
+                else
                 {
-                    await FetchTaskSecond(turnContext);
+                    await turnContext.SendActivityAsync("We'll provide more interesting topics.. Thank you!");
 
-                    var path = "./Cards/AdaptiveSecondTitle.json";
-                    var adaptiveCardJson = File.ReadAllText(path);
-                    var adaptiveCardAttachment = new Attachment
-                    {
-                        ContentType = AdaptiveCard.ContentType,
-                        Content = JsonConvert.DeserializeObject(adaptiveCardJson),
-                    };
-
-                    await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardAttachment));
-
-
-                }
-                else if (selectedoption == Constants.ThirdTitle)
-                {
-                    await FetchTaskThird(turnContext);
-
-                    var path = "./Cards/AdaptiveThirdTitle.json";
-                    var adaptiveCardJson = File.ReadAllText(path);
-                    var adaptiveCardAttachment = new Attachment
-                    {
-                        ContentType = AdaptiveCard.ContentType,
-                        Content = JsonConvert.DeserializeObject(adaptiveCardJson),
-                    };
-
-                    await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardAttachment));
-                }
-
-                else if (selectedoption == "yes")
-                {
-                    await turnContext.SendActivityAsync(turnContext.Activity.From.Name + " : " + "**Yes** for " + "'" + command + "'");
-                }
-
-                else if (selectedoption == "no")
-                {
-                    await turnContext.SendActivityAsync(turnContext.Activity.From.Name + " : " + "**No** for " + "'" + command + "'");
                 }
             }
         }
@@ -119,26 +73,22 @@ namespace Content_Bubble_Bot
 
         protected override async Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
-
             var replyJson = JObject.Parse(taskModuleRequest.Data.ToString());
             var reply = Convert.ToString(replyJson["userValue"]);
-            var title = Convert.ToString(replyJson["title"]);
             if (reply == "yes")
             {
-
-                await turnContext.SendActivityAsync(turnContext.Activity.From.Name + " : " + "**Yes** for " + "'" + title + "'");
+                await turnContext.SendActivityAsync("Sure.. Please check out this link: [Apps in Teams meetings](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings#:~:text=Post%2Dmeeting%20app%20experience&text=%E2%9C%94%20Permissioned%20users%20can%20add%20apps%20from%20the%20tab%20gallery,than%20ten%20polls%20or%20surveys.)");
             }
             else
             {
-                await turnContext.SendActivityAsync(turnContext.Activity.From.Name + " : " + "**No** for " + "'" + title + "'");
-
+                await turnContext.SendActivityAsync("We'll provide more interesting topics.. Thank you!");
             }
             return null;
         }
 
-        public async static Task FetchTaskFirst(ITurnContext turnContext)
+        public async static Task FetchTask(ITurnContext turnContext)
         {
-            Activity activity = MessageFactory.Text("**Please provide your valuable feedback**");
+            Activity activity = MessageFactory.Text("Hello");
 
             activity.ChannelData = new TeamsChannelData
             {
@@ -146,44 +96,7 @@ namespace Content_Bubble_Bot
                 {
                     AlertInMeeting = true,
 
-                    ExternalResourceUrl = "https://teams.microsoft.com/l/bubble/<<APP-ID>>?url=<<BASE-URL>>/FirstPage&height=<HEIGHT>&width=<WIDTH>&title=ContentBubble&completionBotId=<<BOT-ID>>"
-                }
-            };
-            await turnContext.SendActivityAsync(activity).ConfigureAwait(false);
-        }
-
-
-        public async static Task FetchTaskSecond(ITurnContext turnContext)
-        {
-
-
-            Activity activity = MessageFactory.Text("**Please provide your valuable feedback**");
-
-            activity.ChannelData = new TeamsChannelData
-            {
-                Notification = new NotificationInfo()
-                {
-                    AlertInMeeting = true,
-
-                    ExternalResourceUrl = "https://teams.microsoft.com/l/bubble/<<APP-ID>>?url=<<BASE-URL>>/SecondPage&height=<Height>&width=<WIDTH>&title=ContentBubble&completionBotId=<<BOT-ID>>"
-                }
-            };
-            await turnContext.SendActivityAsync(activity).ConfigureAwait(false);
-        }
-
-
-        public async static Task FetchTaskThird(ITurnContext turnContext)
-        {
-
-            Activity activity = MessageFactory.Text("**Please provide your valuable feedback**");
-
-            activity.ChannelData = new TeamsChannelData
-            {
-                Notification = new NotificationInfo()
-                {
-                    AlertInMeeting = true,
-
-                    ExternalResourceUrl = "https://teams.microsoft.com/l/bubble/<<APP-ID>>?url=<<BASE-URL>>/ThirdPage&height=<HEIGHT>&width=<WIDTH>&title=ContentBubble&completionBotId=<<BOT-ID>>"
+                    ExternalResourceUrl = "https://teams.microsoft.com/l/bubble/<APP-ID>?url=<URL>&height=<Height>&width=<Width>&title=<Title>&completionBotId=<BOT-ID>"
                 }
             };
             await turnContext.SendActivityAsync(activity).ConfigureAwait(false);
