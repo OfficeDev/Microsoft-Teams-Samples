@@ -81,7 +81,6 @@
 |1|Resource Specific Consent (RSC) | This sample illustrates you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs. .                              |[View][graph#rsc#cs]       |
 
 
-
 ## Scenario specific samples
 
 |    | Sample Name       | Description                                                                      | C#    | TypeScript   |
@@ -90,7 +89,6 @@
 |2|Authentication        | Sample illustrating seamless inline authentication for Microsoft Teams apps.                      | | [View][app-auth#ts]
 |3|Complete Samples      | A template for building complex bots (SDK V3) for Microsoft Teams.                                      |[View][app-complete#cs]        |[View][app-complete#ts]
 |4|Meetings Extensibility | Microsoft Teams meeting extensibility sample: token passing |[View][meetings-token-app#cs]     |
-|5|Content Bubble Meetings Extensibility Bot | Microsoft Teams meeting extensibility Content Bubble sample: token passing |[View][apps-in-meeting#cs]     |
 
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
@@ -138,8 +136,6 @@
 [bot-conversation-sso-quickstart#js]:samples/bot-conversation-sso-quickstart/js
 
 [meetings-token-app#cs]:samples/meetings-token-app/csharp
-
-[apps-in-meeting#cs]:samples/apps-in-meeting/csharp
 
 [graph#rsc#cs]:samples/graph-rsc/csharp
 
