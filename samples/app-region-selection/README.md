@@ -1,4 +1,4 @@
-﻿# EchoBot
+﻿# Region Selection App
 
 Bot Framework v4 Region Selection sample.
 
@@ -23,7 +23,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), f
 
 - Run the bot from a terminal or from Visual Studio:
 
-  A) From a terminal, navigate to `samples/csharp_dotnetcore/RegionSelectionBot`
+  A) From a terminal, navigate to `samples/app-region-selection/RegionSelectionApp`
 
   ```bash
   # run the bot
@@ -34,8 +34,8 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), f
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/csharp_dotnetcore/DomainSelectionBot` folder
-  - Select `EchoBot.csproj` file
+  - Navigate to `samples/app-region-selection/RegionSelectionApp` folder
+  - Select `RegionSelectionApp.sln` file
   - Press `F5` to run the project
 
 ## Testing the bot using Bot Framework Emulator
@@ -44,11 +44,12 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), f
 
 - Install the latest Bot Framework Emulator from [here](https://github.com/Microsoft/BotFramework-Emulator/releases)
 
-### Connect to the bot using Bot Framework Emulator
+### This is specific to Microsoft Teams
 
-- Launch Bot Framework Emulator
-- File -> Open Bot
-- Enter a Bot URL of `http://localhost:3978/api/messages`
+ - **Edit** the `manifest.json` contained in the `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere*      you,see the placeholder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Add** the ngrok domain to the valid domains array in the manifest. 
+    - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
+    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 ## Interacting with the bot
 
@@ -61,16 +62,10 @@ Select the region from the configuration page and click on save
 
 ## Deploy the bot to Azure
 
-To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
+To learn more about deploying a bot to Azure, see [Build a Bot with Microsoft Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/build-your-first-app/build-bot) for a complete list of deployment instructions.
 
 ## Further reading
+- [Overview for Microsoft Teams App](https://docs.microsoft.com/en-us/microsoftteams/platform/build-your-first-app/build-first-app-overview)
+- [Build a Configurable Tab for Microsoft Teams App](https://docs.microsoft.com/en-us/microsoftteams/platform/build-your-first-app/build-channel-tab)
+- [Build a Bot](https://docs.microsoft.com/en-us/microsoftteams/platform/build-your-first-app/build-bot)
 
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
-- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
-- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
-- [.NET Core CLI tools](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x)
-- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
-- [Azure Portal](https://portal.azure.com)
-- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
