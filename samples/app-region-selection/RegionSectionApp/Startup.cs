@@ -41,13 +41,6 @@ namespace Microsoft.BotBuilderSamples
             services.AddTransient<IBot, RegionSelectionTab>();
 
             services.AddMvcCore();
-                //.AddJsonFormatters(jsonOptions =>
-                //{
-                //    jsonOptions.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
-                //})
-                //.AddAuthorization(options => {
-                //            });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
