@@ -1,0 +1,65 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.8",
+    "version": "1.0.0",
+    "id": "<<Your Microsoft App Id>>",
+    "packageName": "com.microsoft.teams.devapp",
+    "developer": {
+        "name": "Microsoft",
+        "websiteUrl": "https://www.microsoft.com",
+        "privacyUrl": "https://www.microsoft.com/privacy",
+        "termsOfUseUrl": "https://www.microsoft.com/terms"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "SPFx Bot App",
+        "full": "This is SPFx Bot App"
+    },
+    "description": {
+        "short": "SPFx app for Microsoft Teams",
+        "full": "This app will save conversation data to sharepoint list"
+    },
+    "accentColor": "#FFFFFF",
+    "staticTabs": [
+        {
+            "entityId": "conversations",
+            "scopes": [
+                "personal"
+            ]
+        },
+        {
+            "entityId": "about",
+            "scopes": [
+                "personal"
+            ]
+        }
+    ],
+    "bots": [
+        {
+            "botId": "<<Your Microsoft App Id>>",
+            "scopes": [
+                "personal",
+                "team",
+                "groupchat"
+            ],
+            "supportsFiles": false,
+            "isNotificationOnly": false
+        }
+    ],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "xxxxx.sharepoint.com",
+        "*.ngrok.io",
+        "token.botframework.com"
+    ],
+    "webApplicationInfo": {
+        "id": "00000003-0000-0ff1-ce00-000000000000",
+        "resource": "https://xxxxxxxx.sharepoint.com"
+    }
+}
