@@ -18,7 +18,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), f
 - Clone the repository
 
     ```bash
-    git clone https://github.com/Microsoft/botbuilder-samples.git
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
 - Run the bot from a terminal or from Visual Studio:
