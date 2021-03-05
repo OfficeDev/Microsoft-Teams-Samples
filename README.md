@@ -90,6 +90,7 @@
 |2|Authentication        | Sample illustrating seamless inline authentication for Microsoft Teams apps.                      | | [View][app-auth#ts]
 |3|Complete Samples      | A template for building complex bots (SDK V3) for Microsoft Teams.                                      |[View][app-complete#cs]        |[View][app-complete#ts]
 |4|Meetings Extensibility | Microsoft Teams meeting extensibility sample: token passing |[View][meetings-token-app#cs]     |
+|5|Meeting Content Bubble Bot | Microsoft Teams meeting extensibility sample for iteracting with Content Bubble Bot in-meeting |[View][meetings-content-bubble#cs]     |
 
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
@@ -137,6 +138,7 @@
 [bot-conversation-sso-quickstart#js]:samples/bot-conversation-sso-quickstart/js
 
 [meetings-token-app#cs]:samples/meetings-token-app/csharp
+[meetings-content-bubble#cs]:samples/meetings-content-bubble/csharp
 
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#lifecycle#cs]:samples/graph-channel-lifecycle/csharp
