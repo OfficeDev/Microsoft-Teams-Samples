@@ -3,7 +3,7 @@
   "manifestVersion": "1.8",
   "version": "1.0.0",
   "id": "<<MICROSOFT-APP-ID>>",
-  "packageName": "com.microsoftteams.app",
+  "packageName": "com.microsoft.teams.samples",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://microsoft.com",
@@ -15,12 +15,12 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "<<YOUR APP NAME IN SHORT>>",
-    "full": "<<YOUR APP NAME>>"
+    "short": "Content Bubble Demo",
+    "full": "Content Bubble Demo"
   },
   "description": {
-    "short": "<<YOUR APP DESCRIPTION IN SHORT>>",
-    "full": "<<YOUR APP DESCRIPTION>>"
+    "short": "Content bubble demo",
+    "full": " Sample app to demo how content bubble works."
   },
   "accentColor": "#FFFFFF",
   "bots": [
@@ -39,7 +39,5 @@
     "identity",
     "messageTeamMembers"
   ],
-  "validDomains": [
-    ""
-  ]
+  "validDomains": [ "*.ngrok.io" ]
 }

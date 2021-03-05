@@ -9,6 +9,8 @@ namespace Content_Bubble_Bot.Pages
 {
     public class ContentBubbleModel : PageModel
     {
+        [FromQuery(Name = "topic")]
+        public string Topic { get; set; }
         public void OnGet()
         {
         }
