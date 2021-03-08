@@ -71,14 +71,6 @@ Azure AD, like most identity providers, does not allow its content to be placed 
 4) Setup your API permissions. This is what your application is allowed to request permission to access.
    - Visit Manage > API Permissions
    - Make sure you have the following Graph permissions enabled: email, offline_access, openid, profile, and User.Read.
-   - Our SSO flow will give you access to the first 4 permissions, and we will have to exchange the token server-side to get an elevated token for the profile permission              (for example, if we want access to the user's profile photo).
-          
-5) Expose an API that will give the Teams desktop, web and mobile clients access to the permissions above
-   - Visit Manage > Expose an API
-   - Add a scope and give it a scope name of access_as_user. Your API url should look like this: api://contoso.ngrok.io/{appID}/access_as_user. In the "who can consent"               step, enable it for "Admins and users". Make sure the state is set to "enabled".
-   - Next, add two client applications. This is for the Teams desktop/mobile clients and the web client.
-      - 5e3ce6c0-2b1f-4285-8d4b-75ee78787346
-      - 1fec8e78-bce4-4aaf-ab1b-5451cc387264
 
 6)  __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your tab earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
