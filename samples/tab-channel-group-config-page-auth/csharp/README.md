@@ -58,26 +58,21 @@ Azure AD, like most identity providers, does not allow its content to be placed 
 
 1) Set your application URI to the same URI you've created in Ngrok.
    - Ex: api://contoso.ngrok.io/{appId} using the application ID that was assigned to your app
-          
-2) Setup your redirect URIs. This will allow Azure AD to return authentication results to the correct URI.
-   - Visit Manage > Authentication.
-   - Create a redirect URI in the format of: https://contoso.ngrok.io/auth/auth-end.
-   - Enable Implicit Grant by selecting Access Tokens and ID Tokens.
-          
-3) Setup a client secret. You will need this when you exchange the token for more API permissions from your backend.
+                    
+2) Setup a client secret. You will need this when you exchange the token for more API permissions from your backend.
    - Visit Manage > Certificates & secrets
    - Create a new client secret.
           
-4) Setup your API permissions. This is what your application is allowed to request permission to access.
+3) Setup your API permissions. This is what your application is allowed to request permission to access.
    - Visit Manage > API Permissions
    - Make sure you have the following Graph permissions enabled: email, offline_access, openid, profile, and User.Read.
 
-6)  __*This step is specific to Teams.*__
+4)  __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your tab earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-7) Run your tab, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
+5) Run your tab, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
 
  
