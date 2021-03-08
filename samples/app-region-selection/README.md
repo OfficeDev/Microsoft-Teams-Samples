@@ -43,6 +43,8 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), f
 [Bot Framework Emulator](https://github.com/microsoft/botframework-emulator) is a desktop application that allows bot developers to test and debug their bots on localhost or running remotely through a tunnel.
 
 - Install the latest Bot Framework Emulator from [here](https://github.com/Microsoft/BotFramework-Emulator/releases)
+- Put the `Microsoft App Id` and `Microsoft-App-Password` and `message endpoint` in Bot configuration
+- Connect your Bot with Emulator, Ping the Bot to start the conversation
 
 ### This is specific to Microsoft Teams
 
@@ -54,11 +56,15 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), f
 ## Interacting with the bot
 
 Install the Region Selection App manifest in Microsoft Teams. @mention the region selection bot to start the conversation.
+- Bot sends an Adaptive card in chat
+- Select the region from the card
+- bot sets the sets the selected region and notify user in chat
 
 ## Interacting with Region Selection Tab
 
-Set up the region selection app as a Tab in channel
-Select the region from the configuration page and click on save
+- Set up the region selection app as a Tab in channel
+- Select the region from the configuration page and click on save
+- Tab will display the selected region
 
 ## Deploy the bot to Azure
 
