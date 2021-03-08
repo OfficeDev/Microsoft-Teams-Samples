@@ -58,7 +58,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), f
 Install the Region Selection App manifest in Microsoft Teams. @mention the region selection bot to start the conversation.
 - Bot sends an Adaptive card in chat
 - Select the region from the card
-- bot sets the sets the selected region and notify user in chat
+- bot sets the selected region and notify user in chat
 
 ## Interacting with Region Selection Tab
 
