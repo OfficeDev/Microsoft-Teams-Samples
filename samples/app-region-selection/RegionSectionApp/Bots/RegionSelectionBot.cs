@@ -1,18 +1,15 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.BotBuilderSamples.Models;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Microsoft.BotBuilderSamples.Bots
 {
@@ -46,6 +43,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                     break;
 
                 case "no":
+                case "cancel":
                     await WelcomeCardAsync(turnContext, cancellationToken);
                     break;
 
@@ -67,8 +65,8 @@ namespace Microsoft.BotBuilderSamples.Bots
                     if (didBotWelcomeUser.DidUserSelectedDomain == true)
                     {
                         didBotWelcomeUser.DidUserSelectedDomain = false;
-                        didBotWelcomeUser.selectedRegion = string.Empty;
-                        didBotWelcomeUser.selectedDomain = string.Empty;
+                        didBotWelcomeUser.SelectedRegion = string.Empty;
+                        didBotWelcomeUser.SelectedDomain = string.Empty;
                     }
 
                     await SendWelcomeIntroCardAsync(turnContext, cancellationToken);
@@ -91,36 +89,34 @@ namespace Microsoft.BotBuilderSamples.Bots
             var didBotWelcomeUser = await welcomeUserStateAccessor.GetAsync(turnContext, () => new WelcomeUserState(), cancellationToken);
             if (didBotWelcomeUser.DidUserSelectedDomain == true)
             {
-                domain = didBotWelcomeUser.selectedDomain;
-                region = didBotWelcomeUser.selectedRegion;
+                domain = didBotWelcomeUser.SelectedDomain;
+                region = didBotWelcomeUser.SelectedRegion;
             }
             else
             {
-                var data = getDefaultInfo(turnContext);
+                var data = GetDefaultInfo(turnContext);
 
                 domain = data.domain;
                 region = data.region;
             }
             string welcomeMsg = $"Your default Region is {region}.";
 
-            var domainButtonlist = new List<CardAction> {
-                new CardAction(ActionTypes.MessageBack,"Yes",null,"Yes","Yes","https://docs.microsoft.com/en-us/azure/bot-service/?view=azure-bot-service-4.0"),
-                new CardAction( ActionTypes.MessageBack,"No", null,"No","No","https://docs.microsoft.com/en-us/azure/bot-service/?view=azure-bot-service-4.0"),
-            };
-
             var card = new HeroCard
             {
                 Title = "Welcome to Region Selection App!",
                 Subtitle = "This will help you to choose your data center's region.",
                 Text = welcomeMsg + " Would you like to change region?",
-                Buttons = domainButtonlist,
+                Buttons = new List<CardAction> {
+                    new CardAction(ActionTypes.MessageBack,"Yes",null,"Yes","Yes"),
+                    new CardAction( ActionTypes.MessageBack,"No", null,"No","No")
+                }
             };
 
             var response = MessageFactory.Attachment(card.ToAttachment());
             await turnContext.SendActivityAsync(response, cancellationToken);
         }
 
-        private (string region, string domain) getDefaultInfo(ITurnContext turnContext)
+        private (string region, string domain) GetDefaultInfo(ITurnContext turnContext)
         {
             string serviceUrl = turnContext.Activity.ServiceUrl;
             string _domain = serviceUrl.Substring(serviceUrl.LastIndexOf(".")).Trim('/');
@@ -129,7 +125,7 @@ namespace Microsoft.BotBuilderSamples.Bots
             return (_region, _domain);
         }
 
-        private (string region, string domain) getSelectedInfo(string text)
+        private (string region, string domain) GetSelectedInfo(string text)
         {
             string selectedDomain = string.Empty;
             string selectedRegion = string.Empty;
@@ -154,10 +150,10 @@ namespace Microsoft.BotBuilderSamples.Bots
         private async Task SendDomainListsCardAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
 
-            //get the Json filepath  
+            // get the Json file path  
             string file = Path.GetFullPath("ConfigData/Regions.json");
 
-            //deserialize JSON from file  
+            // deserialize JSON from file  
             string Json = System.IO.File.ReadAllText(file);
 
             var regionButtonlist = JsonSerializer.Deserialize<Rootobject>(Json).regionDomains.Select(c =>
@@ -190,19 +186,19 @@ namespace Microsoft.BotBuilderSamples.Bots
             string regionName = string.Empty;
 
             // Reset with new domain
-            var data = getSelectedInfo(turnContext.Activity.Text);
+            var data = GetSelectedInfo(turnContext.Activity.Text);
             domainName = data.domain;
             regionName = data.region;
 
             if (string.IsNullOrEmpty(domainName) && didBotWelcomeUser.DidUserSelectedDomain)
             {
-                domainName = didBotWelcomeUser.selectedDomain;
-                regionName = didBotWelcomeUser.selectedRegion;
+                domainName = didBotWelcomeUser.SelectedDomain;
+                regionName = didBotWelcomeUser.SelectedRegion;
             }
 
             if (string.IsNullOrEmpty(domainName))
             {
-                var defaultData = getDefaultInfo(turnContext);
+                var defaultData = GetDefaultInfo(turnContext);
                 domainName = defaultData.domain;
                 regionName = defaultData.region;
             }
@@ -216,8 +212,8 @@ namespace Microsoft.BotBuilderSamples.Bots
 
             //Save any state changes.
             didBotWelcomeUser.DidUserSelectedDomain = true;
-            didBotWelcomeUser.selectedDomain = domainName;
-            didBotWelcomeUser.selectedRegion = regionName;
+            didBotWelcomeUser.SelectedDomain = domainName;
+            didBotWelcomeUser.SelectedRegion = regionName;
 
             await _userState.SaveChangesAsync(turnContext, cancellationToken: cancellationToken);
 
@@ -238,7 +234,7 @@ namespace Microsoft.BotBuilderSamples.Bots
 
             var card = new HeroCard
             {
-                Text = $"Hi { userName }, You have already selected your data center region and that is { didBotWelcomeUser.selectedRegion} " +
+                Text = $"Hi { userName }, You have already selected your data center region and that is { didBotWelcomeUser.SelectedRegion} " +
                 $"Would you like to change this ?",
                 Buttons = domainButtonlist,
             };
