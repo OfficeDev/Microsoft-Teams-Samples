@@ -96,6 +96,20 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 - Enter the values in Adaptive Card and click on Save button.
 - Bot will save the card data in SharePoint List.
 
+### Screenshots
+**Upload the custom app in Teams**
+
+![image](https://user-images.githubusercontent.com/50989436/109759882-c36f3480-7c13-11eb-9a38-e69d2c7139e7.png)
+
+**Interaction with the Bot**
+
+![image](https://user-images.githubusercontent.com/50989436/109759972-eb5e9800-7c13-11eb-9246-e8fa02fbef64.png)
+
+**Ping the Bot**
+
+![image](https://user-images.githubusercontent.com/50989436/109760014-fe716800-7c13-11eb-932d-9c692d4a67ae.png)
+
+
 ## Further reading
 - [Conversational bots in teams](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots)
 - [Conversation Basics](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/conversation-basics?tabs=dotnet)
