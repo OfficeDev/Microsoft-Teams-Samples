@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System.IO;
 
-namespace Microsoft.BotBuilderSamples.SpfxBot.Repositories
+namespace Microsoft.BotBuilderSamples.SPListBot.Repositories
 {
     public class SettingsConfig
     {
@@ -13,10 +13,12 @@ namespace Microsoft.BotBuilderSamples.SpfxBot.Repositories
             _appSettings = GetCurrentSettings(Key);
             return _appSettings.AppSettingValue;
         }
+
         public SettingsConfig(IConfiguration config, string Key)
         {
             this.AppSettingValue = config.GetValue<string>(Key);
         }
+
         // Get a valued stored in the appsettings.
         // Pass in a key like TestArea:TestKey to get TestValue
         public static SettingsConfig GetCurrentSettings(string Key)

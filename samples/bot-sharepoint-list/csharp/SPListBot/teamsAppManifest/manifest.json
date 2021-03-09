@@ -15,28 +15,14 @@
         "outline": "outline.png"
     },
     "name": {
-        "short": "SPFx Bot App",
-        "full": "This is SPFx Bot App"
+        "short": "SPListBot",
+        "full": "SharePoint List Bot"
     },
-    "description": {
-        "short": "SPFx app for Microsoft Teams",
-        "full": "This app will save conversation data to sharepoint list"
-    },
+  "description": {
+    "short": "SharePoint Bot app for Microsoft Teams",
+    "full": "This app will save conversation data to sharepoint list"
+  },
     "accentColor": "#FFFFFF",
-    "staticTabs": [
-        {
-            "entityId": "conversations",
-            "scopes": [
-                "personal"
-            ]
-        },
-        {
-            "entityId": "about",
-            "scopes": [
-                "personal"
-            ]
-        }
-    ],
     "bots": [
         {
             "botId": "<<Your Microsoft App Id>>",
@@ -55,11 +41,6 @@
     ],
     "validDomains": [
         "xxxxx.sharepoint.com",
-        "*.ngrok.io",
         "token.botframework.com"
-    ],
-    "webApplicationInfo": {
-        "id": "00000003-0000-0ff1-ce00-000000000000",
-        "resource": "https://xxxxxxxx.sharepoint.com"
-    }
+    ]
 }

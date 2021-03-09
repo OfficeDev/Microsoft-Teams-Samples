@@ -5,7 +5,7 @@
   "body": [
     {
       "type": "TextBlock",
-      "text": "Hi, SPFx Bot is Sharepoint enabled, below details will save at sharepoint list.",
+      "text": "Hi, This Bot is Sharepoint enabled and details will save at sharepoint list.",
       "wrap": true
     },
     {

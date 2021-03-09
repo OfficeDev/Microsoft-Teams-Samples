@@ -3,12 +3,12 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Microsoft.BotBuilderSamples.SpfxBot.Models;
+using Microsoft.BotBuilderSamples.SPListBot.Models;
 using System.Net.Http;
 using System.IO;
 using System.Net;
 
-namespace Microsoft.BotBuilderSamples.SpfxBot.Repositories
+namespace Microsoft.BotBuilderSamples.SPListBot.Repositories
 {
     public class SharepointRepository
     {
@@ -40,6 +40,7 @@ namespace Microsoft.BotBuilderSamples.SpfxBot.Repositories
             accessToken = JsonConvert.DeserializeObject<SharepointRepository.TokenResponse>(responseBody).access_token;
             return accessToken;
         }
+
         public static async Task<bool> WriteConversationToSPList(Values body)
         {
             try
@@ -83,6 +84,7 @@ namespace Microsoft.BotBuilderSamples.SpfxBot.Repositories
 
             return true;
         }
+
         public class TokenResponse
         {
             public string access_token { get; set; }

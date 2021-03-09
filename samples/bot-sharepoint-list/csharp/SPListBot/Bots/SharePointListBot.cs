@@ -9,12 +9,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
-using Microsoft.BotBuilderSamples.SpfxBot.Models;
+using Microsoft.BotBuilderSamples.SPListBot.Models;
 using Newtonsoft.Json;
 
-namespace Microsoft.BotBuilderSamples.SpfxBot.Bots
+namespace Microsoft.BotBuilderSamples.SPListBot.Bots
 {
-    public class SpfxBot : ActivityHandler
+    public class SharePointListBot : ActivityHandler
     {
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
@@ -26,6 +26,7 @@ namespace Microsoft.BotBuilderSamples.SpfxBot.Bots
                 }
             }
         }
+
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             // Save any state changes that might have occurred during the turn.
@@ -43,20 +44,22 @@ namespace Microsoft.BotBuilderSamples.SpfxBot.Bots
                 await SendInfoFormAsync(turnContext, cancellationToken);
             }
         }
+
         private async Task WelcomeCardAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
             string username = turnContext.Activity.From.Name;
 
             var card = new HeroCard
             {
-                Title = $"Hi " + username + ",  Welcome to the SPFx Bot",
-                Subtitle = $"SPFx Bot is to save conversations at Sharepoint.",
+                Title = $"Hi " + username + ",  Welcome to the teams Bot using SharePoint List",
+                Subtitle = $"SharePoint List Bot is to save conversations at Sharepoint List.",
                 Text = @"Type anything to start ... "
             };
 
             var response = MessageFactory.Attachment(card.ToAttachment());
             await turnContext.SendActivityAsync(response, cancellationToken);
         }
+
         private async Task SendInfoFormAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
             // combine path for cross platform support
@@ -72,6 +75,7 @@ namespace Microsoft.BotBuilderSamples.SpfxBot.Bots
             var response = MessageFactory.Attachment(adaptiveCardAttachment);
             await turnContext.SendActivityAsync(response, cancellationToken);
         }
+
         private async Task SaveData(ITurnContext turnContext)
         {
             var _data = JsonConvert.SerializeObject(turnContext.Activity.Value);

@@ -6,7 +6,7 @@ using Microsoft.Bot.Builder.TraceExtensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace Microsoft.BotBuilderSamples.SpfxBot
+namespace Microsoft.BotBuilderSamples.SPListBot
 {
     public class AdapterWithErrorHandler : BotFrameworkHttpAdapter
     {

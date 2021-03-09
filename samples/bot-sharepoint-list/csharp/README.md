@@ -1,6 +1,6 @@
-﻿# SPFx Bot using Sharepoint List
+﻿# SPListBot
 
-Bot Framework v4 echo bot sample.
+Bot Framework v4 SPListBot sample.
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that accepts input from the user and save it into sharepoint's List.
 
@@ -34,8 +34,8 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/bot-sharepoint-list` folder
-  - Select `SpfxBotApp.sln` file
+  - Navigate to `samples/bot-sharepoint-list/csharp` folder
+  - Select `SPListBot.csproj` file
   - Press `F5` to run the project
 
   # Step 1: Know your Tenant ID and Resource ID
