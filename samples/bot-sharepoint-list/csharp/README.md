@@ -38,7 +38,13 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
   - Select `SPListBot.csproj` file
   - Press `F5` to run the project
 
-  # Step 1: Know your Tenant ID and Resource ID
+  # Step 1: Register a new app
+
+    You need to register a new addin/app in your Sharepoint site, this will generate a ClientID and a Client Secret,  which we will use to authenticate. Lets see how to do it.
+
+    Go to `_layouts/15/appregnew.aspx` under the SP Online site which you want to use as document repository.
+
+  # Step 2: Know your Tenant ID and Resource ID
 
     It is very important to know your tenant ID for triggering any kind of service calls.
     You can get your Tenant ID, Resource Id by following below points:
@@ -46,11 +52,6 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
     2. You will see Site Collection App Permissions under site settings.
     3. You can check your any App and get the Tenant Id and Resource Id from `App Identifier`. The   part after "@" is your `tenant ID` and the part before @ is `Resource ID`.
 
-  # Step 2: Register a new app
-
-    You need to register a new addin/app in your Sharepoint site, this will generate a ClientID and a Client Secret,  which we will use to authenticate. Lets see how to do it.
-
-    Go to `_layouts/15/appregnew.aspx` under the SP Online site which you want to use as document repository.
 
   # Step 3: Update your appSetting.json
 
