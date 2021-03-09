@@ -1,16 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.BotBuilderSamples.SPListBot.Models;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Microsoft.BotBuilderSamples.SPListBot.Bots
 {
@@ -52,7 +50,7 @@ namespace Microsoft.BotBuilderSamples.SPListBot.Bots
             var card = new HeroCard
             {
                 Title = $"Hi " + username + ",  Welcome to the teams Bot using SharePoint List",
-                Subtitle = $"SharePoint List Bot is to save conversations at Sharepoint List.",
+                Subtitle = $"SharePoint List Bot is to save conversations at SharePoint List.",
                 Text = @"Type anything to start ... "
             };
 

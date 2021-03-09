@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Microsoft.BotBuilderSamples.SPListBot.Models
 {
@@ -18,7 +15,6 @@ namespace Microsoft.BotBuilderSamples.SPListBot.Models
         public string Address { get; set; }
         public string Description { get; set; }
         public DateTime Created { get; set; }
-
         public object ServerRedirectedEmbedUri { get; set; }
         public string ServerRedirectedEmbedUrl { get; set; }
         public string ContentTypeId { get; set; }
