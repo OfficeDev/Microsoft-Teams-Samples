@@ -41,10 +41,10 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
   # Step 1: Know your Tenant ID and Resource ID
 
     It is very important to know your tenant ID for triggering any kind of service calls.
-    You can get your the Tenant ID in following ways:
-    1. Using Powershell
-    2. Making a call to "_vti_bin/client.svc"
-    3. This is the most easiest way browse "/_layouts/15/appprincipals.aspx"
+    You can get your Tenant ID, Resource Id by following below points:
+    1. Navigate to `https//{SharePointDomain}/_layouts/15/appprincipals.aspx`
+    2. You will see Site Collection App Permissions under site settings.
+    3. You can check your any App and get the Tenant Id and Resource Id from `App Identifier`. The   part after "@" is your `tenant ID` and the part before @ is `Resource ID`.
 
   # Step 2: Register a new app
 
@@ -88,6 +88,12 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 - Go to teams and do `Upload a Custom App` 
 - Add the Bot to Microsoft Teams
 - Start the conversation with Bot
+
+### Interaction with the Bot
+- Ping the bot in 1:1 or channel scope
+- Bot will send an Adaptive card having two fields name and address.
+- Enter the values in Adaptive Card and click on Save button.
+- Bot will save the card data in SharePoint List.
 
 ## Further reading
 - [Conversational bots in teams](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots)
