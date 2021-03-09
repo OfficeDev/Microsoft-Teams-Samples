@@ -77,7 +77,7 @@ namespace Microsoft.BotBuilderSamples.SPListBot.Repositories
 
                 HttpWebResponse itemResponse = (HttpWebResponse)itemRequest.GetResponse();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

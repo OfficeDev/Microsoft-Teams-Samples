@@ -20,7 +20,7 @@
     },
   "description": {
     "short": "SharePoint Bot app for Microsoft Teams",
-    "full": "This app will save conversation data to sharepoint list"
+    "full": "This app will save conversation data to SharePoint list"
   },
     "accentColor": "#FFFFFF",
     "bots": [
@@ -38,9 +38,5 @@
     "permissions": [
         "identity",
         "messageTeamMembers"
-    ],
-    "validDomains": [
-        "xxxxx.sharepoint.com",
-        "token.botframework.com"
     ]
 }
