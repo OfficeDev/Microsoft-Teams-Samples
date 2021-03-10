@@ -156,9 +156,17 @@ Create [Bot Channels registration resource](https://docs.microsoft.com/en-us/azu
    Update the `appsettings.json` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the MicrosoftAppId is the AppId created in step 1.1, the MicrosoftAppPassword is referred to as the "client secret" in step1.2 and you can always create a new client secret anytime.)
 
 ### 5. Run your bot sample
-Under the root of this sample folder, build and run by commands:
-- `npm install`
-- `npm start`
+- Clone the repository
+    ```
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+- If you are using Visual Studio
+    - Launch Visual Studio
+    - File -> Open -> Project/Solution
+    - Navigate to `samples/bot-conversation-sso-quickstart/csharp_dotnetcore` folder
+    - Select `TeamsAuth.csproj` file
+    - Press `F5` to run this project
 
 ### 6. Configure and run the Teams app
 - **Using App Studio**
