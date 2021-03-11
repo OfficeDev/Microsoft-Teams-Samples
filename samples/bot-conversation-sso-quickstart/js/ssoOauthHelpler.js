@@ -87,7 +87,7 @@ class SsoOAuthHelpler {
 
             return false;
         } else {
-            // Store response in TurnState, so the TokenExchangeOAuthPrompt can use it, and not have to do the exchange again.
+            // Store response in TurnState, so the SsoOAuthPrompt can use it, and not have to do the exchange again.
             turnContext.turnState.tokenExchangeInvokeRequest = tokenExchangeRequest;
             turnContext.turnState.tokenResponse = tokenExchangeResponse;
         }
