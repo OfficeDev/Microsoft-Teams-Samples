@@ -51,42 +51,19 @@ namespace TabAuthentication.Controllers
             return View();
         }
 
-        [Route("SimpleLogOut")]
-        public IActionResult SimpleLogOut()
-        {
-            return View();
-        }
-
-        [Route("AuthStart")]
-        public ActionResult AuthStart()
+        [Route("SilentAuthStart")]
+        public ActionResult SilentAuthStart()
         {
             ViewBag.AuthStartClientId = Configuration["ClientId"].ToString();
             return View();
         }
 
-        [Route("AuthEnd")]
-        public ActionResult AuthEnd()
+        [Route("SilentAuthEnd")]
+        public ActionResult SilentAuthEnd()
         {
             ViewBag.AuthEndClientId = Configuration["ClientId"].ToString();
             return View();
         }
 
-        [Route("Success")]
-        public ActionResult Success()
-        {
-            return View();
-        }
-
-        [Route("Failed")]
-        public ActionResult Failed()
-        {
-            return View();
-        }
-
-        [Route("LogOut")]
-        public IActionResult LogOut()
-        {
-            return View();
-        }
     }
 }

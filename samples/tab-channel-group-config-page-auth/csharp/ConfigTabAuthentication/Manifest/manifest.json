@@ -2,7 +2,7 @@
     "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
     "manifestVersion": "1.8",
     "version": "1.0.0",
-    "id": "<<Your Microsoft App Id>>",
+    "id": "2133b039-46a8-452a-b7ab-cb5bbc3ee7e6",
     "packageName": "contoso.com",
     "developer": {
         "name": "contoso",
@@ -15,35 +15,47 @@
         "outline": "outline.png"
     },
     "name": {
-        "short": "config-tab-auth",
-        "full": "config-tab-auth"
+        "short": "Both Silent and Simple",
+        "full": "Both Silent and Simple"
     },
     "description": {
-        "short": "AAD and silent authentiction in configurable tab",
-        "full": "This app demonstrates the AAD and silent authentiction in configurable tab"
+        "short": "Both Silent and Simple",
+        "full": "Both Silent and Simple"
     },
     "accentColor": "#FFFFFF",
     "configurableTabs": [
-        {
-            "configurationUrl": "https://xxxxxx.ngrok.io/ChooseAuth",
-            "canUpdateConfiguration": true,
-            "scopes": [
-                "team"
-            ],
-            "context": [
-                "channelTab"
-            ]
-        }
+      {
+        "configurationUrl": "https://d624f4f277fb.ngrok.io/ChooseAuth",
+        "canUpdateConfiguration": true,
+        "scopes": [
+          "team"
+        ],
+        "context": [
+          "channelTab"
+        ]
+      }
     ],
     "staticTabs": [
+      {
+        "entityId": "BothSilentandSimple",
+        "name": "BothSilentandSimple",
+        "contentUrl": "https://d624f4f277fb.ngrok.io/ChooseAuth",
+        "websiteUrl": "https://d624f4f277fb.ngrok.io/ChooseAuth",
+        "scopes": [
+          "personal"
+        ]
+      }
+    ],
+    "bots": [
         {
-            "entityId": "BothSilentandSimple",
-            "name": "BothSilentandSimple",
-            "contentUrl": "https://xxxxxx.ngrok.io/ChooseAuth",
-            "websiteUrl": "https://xxxxxx.ngrok.io/ChooseAuth",
+            "botId": "72272b60-1a3a-4f2b-9c4b-6ab9680ee9de",
             "scopes": [
-                "personal"
-            ]
+                "personal",
+                "team",
+                "groupchat"
+            ],
+            "supportsFiles": false,
+            "isNotificationOnly": false
         }
     ],
     "permissions": [

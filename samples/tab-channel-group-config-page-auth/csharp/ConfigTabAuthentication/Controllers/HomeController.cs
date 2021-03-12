@@ -31,12 +31,6 @@ namespace TabAuthentication.Controllers
             return View();
         }
 
-        [Route("SetUp")]
-        public IActionResult SetUp()
-        {
-            return View();
-        }
-
 
         [Route("SimpleSetUp")]
         public IActionResult SimpleSetUp()
@@ -62,7 +56,7 @@ namespace TabAuthentication.Controllers
         {
             ViewBag.ClientId = Configuration["SimpleClientId"].ToString();
             return View();
-        }
+        }   
 
         public IActionResult Privacy()
         {
@@ -94,6 +88,20 @@ namespace TabAuthentication.Controllers
             if (readableToken == true)
             {
                 var token = jwtHandler.ReadJwtToken(jwtInput);
+
+                //Extract the headers of the JWT
+                //var headers = token.Header;
+                //var jwtHeader = "{";
+
+                //foreach (var h in headers)
+                //{
+                //    jwtHeader += '"' + h.Key + "\":\"" + h.Value + "\",";
+                //}
+
+                //jwtHeader += "}";
+                //decode = "Header:\r\n" + JToken.Parse(jwtHeader).ToString(Formatting.Indented);
+
+                //Extract the payload of the JWT
                 var claims = token.Claims;
                 var jwtPayload = "{";
                 foreach (Claim c in claims)
@@ -105,6 +113,7 @@ namespace TabAuthentication.Controllers
 
                 value = JToken.Parse(jwtPayload).ToString(Formatting.Indented);
             }
+
             return value;
         }
     }

@@ -27,6 +27,8 @@
     </div>
 </p>
 <script src="~/library/MicrosoftTeams.min.js"></script>
+<script src="~/library/MicrosoftTeams.min1.js"></script>
+<script src="~/library/adal.min.js"></script>
 <script type="text/javascript">
         microsoftTeams.initialize();
 
@@ -169,9 +171,26 @@
         });
 
     function SilentLogout() {
-        localStorage.clear();
-        window.location.href = "@Url.Action("ChooseAuth", "Home")";
+        SignOut(window.location.origin + "/Logout");
     }
 
+    function SignOut(url) {
+        microsoftTeams.authentication.authenticate({
+            url: url,
+            width: 600,
+            height: 535,
+            successCallback: function (result) {
+                console.log("Logout succeeded: " + result);
+                window.location.href = "@Url.Action("ChooseAuth", "Home")";
+                microsoftTeams.settings.setValidityState(false);
+            },
+            failureCallback: function (reason) {
+                console.log("Logout failed: " + reason);
+                handleAuthError(reason);
+                window.location.href = "@Url.Action("SimpleFailed", "Authentication")";
+            }
+        });
+    }
 
 </script>
+
