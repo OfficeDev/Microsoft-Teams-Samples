@@ -153,12 +153,20 @@ Create [Bot Channels registration resource](https://docs.microsoft.com/en-us/azu
 
 ### 4. Configure bot sample
 
-   Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the MicrosoftAppId is the AppId created in step 1.1, the MicrosoftAppPassword is referred to as the "client secret" in step1.2 and you can always create a new client secret anytime.)
+   Update the `appsettings.json` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the MicrosoftAppId is the AppId created in step 1.1, the MicrosoftAppPassword is referred to as the "client secret" in step1.2 and you can always create a new client secret anytime.)
 
 ### 5. Run your bot sample
-Under the root of this sample folder, build and run by commands:
-- `npm install`
-- `npm start`
+- Clone the repository
+    ```
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+- If you are using Visual Studio
+    - Launch Visual Studio
+    - File -> Open -> Project/Solution
+    - Navigate to `samples/bot-conversation-sso-quickstart/csharp_dotnetcore` folder
+    - Select `TeamsAuth.csproj` file
+    - Press `F5` to run this project
 
 ### 6. Configure and run the Teams app
 - **Using App Studio**
@@ -169,7 +177,7 @@ Under the root of this sample folder, build and run by commands:
     - Open *Test and distribute*, then select *Install*.
 
 - **Manually update the manifest.json**
-    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{TODO: MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `appsettings.json` file) *everywhere* you see the place holder string `{TODO: MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). The `ConnectionName` is the name of OAuth Connection you configured in step3.
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
