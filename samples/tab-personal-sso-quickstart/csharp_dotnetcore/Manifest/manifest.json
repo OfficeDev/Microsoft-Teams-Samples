@@ -1,0 +1,42 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.5",
+  "version": "1.0.1",
+  "id": "fa38ec08-6062-42a0-9f63-366d6bf159e8",
+  "packageName": "com.contoso.teamsauthsso",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Teams Auth SSO",
+    "full": "Teams Auth SSO"
+  },
+  "description": {
+    "short": "Teams Auth SSO app",
+    "full": "The Teams Auth SSO app"
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
+  "staticTabs": [
+    {
+      "entityId": "auth",
+      "name": "Auth",
+      "contentUrl": "https://689d83963b99.ngrok.io/Home/Index",
+      "scopes": [ "personal" ]
+    }
+  ],
+  "permissions": [ "identity", "messageTeamMembers" ],
+  "validDomains": [
+    "689d83963b99.ngrok.io"
+  ],
+  "webApplicationInfo": {
+    "id": "fa38ec08-6062-42a0-9f63-366d6bf159e8",
+    "resource": "api://689d83963b99.ngrok.io/fa38ec08-6062-42a0-9f63-366d6bf159e8"
+  }
+}
