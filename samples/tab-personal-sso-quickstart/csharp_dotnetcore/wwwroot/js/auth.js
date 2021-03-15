@@ -95,6 +95,7 @@ function getServerSideToken(clientSideToken) {
                         accessToken = responseJson;
                         console.log("Exchanged token: " + accessToken);
                         getUserInfo(context.userPrincipalName);
+                        GetPhotoAsync(accessToken);
                     }
                 });
         });
@@ -145,27 +146,18 @@ function getUserInfo(principalName) {
 // Gets the user's photo
 function GetPhotoAsync(token) {
     let graphPhotoEndpoint = 'https://graph.microsoft.com/v1.0/me/photos/240x240/$value';
-    let request = new XMLHttpRequest();
+    let request = new XMLHttpRequest();  
+    request.open("GET", graphPhotoEndpoint, true);
     request.setRequestHeader("Authorization", `Bearer ${token}`);
     request.setRequestHeader("Content-Type", "image/png");
-    //$.ajax({
-    //    url: graphPhotoEndpoint,
-    //    type: "GET",
-    //    beforeSend: function (request) {
-    //        request.setRequestHeader("Authorization", `Bearer ${token}`);
-    //        request.setRequestHeader("Content-Type", "image/png");
-    //    },
-    //    success: function(
-    //});
-
-    let response = await fetch(graphPhotoEndpoint, graphRequestParams).catch(this.unhandledFetchError);
-    if (!response.ok) {
-        console.error("ERROR: ", response);
-    }
-
-    let imageBuffer = await response.arrayBuffer().catch(this.unhandledFetchError); //Get image data as raw binary data
-
-    //Convert binary data to an image URL and set the url in state
-    const imageUri = 'data:image/png;base64,' + Buffer.from(imageBuffer).toString('base64');
-    return imageUri;
+    request.responseType = "blob";
+    request.onload = function (oEvent) {
+        let imageBlob = request.response;
+        if (imageBlob) {       
+            let urlCreater = window.URL || window.webkitURL;
+            let imgUrl = urlCreater.createObjectURL(imageBlob);
+            $("#userPhoto").attr('src', imgUrl);
+            $("#userPhoto").show();
+        }
+    };
 }

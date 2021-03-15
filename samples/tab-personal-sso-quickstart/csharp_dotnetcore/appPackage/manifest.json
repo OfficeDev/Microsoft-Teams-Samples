@@ -27,16 +27,16 @@
     {
       "entityId": "auth",
       "name": "Auth",
-      "contentUrl": "https://689d83963b99.ngrok.io/Home/Index",
+      "contentUrl": "https://5bc254477ba4.ngrok.io/Home/Index",
       "scopes": [ "personal" ]
     }
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "689d83963b99.ngrok.io"
+    "*.ngrok.io"
   ],
   "webApplicationInfo": {
     "id": "fa38ec08-6062-42a0-9f63-366d6bf159e8",
-    "resource": "api://689d83963b99.ngrok.io/fa38ec08-6062-42a0-9f63-366d6bf159e8"
+    "resource": "api://5bc254477ba4.ngrok.io/fa38ec08-6062-42a0-9f63-366d6bf159e8"
   }
 }
