@@ -83,6 +83,8 @@
 |3|Complete Samples      | A template for building complex bots (SDK V3) for Microsoft Teams.                                      |[View][app-complete#cs]        |[View][app-complete#ts]
 |4|Meetings Extensibility | Microsoft Teams meeting extensibility sample: token passing |[View][meetings-token-app#cs]     |
 
+|5|Region Selection App: This app contains a bot and Tab which is helpful to set the region |[View][region-selection-app#cs]     |
+
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
@@ -128,6 +130,7 @@
 [bot-conversation-sso-quickstart#js]:samples/bot-conversation-sso-quickstart/js
 
 [meetings-token-app#cs]:samples/meetings-token-app/csharp
+[region-selection-app#cs]: samples/region-selection-bot/csharp  
 
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 
