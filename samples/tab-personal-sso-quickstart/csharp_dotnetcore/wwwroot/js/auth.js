@@ -29,6 +29,7 @@ function requestConsent() {
         accessToken = data.accessToken;
         microsoftTeams.getContext((context) => {
             getUserInfo(context.userPrincipalName);
+            getPhotoAsync(accessToken);
         });
     });
 }
@@ -95,7 +96,7 @@ function getServerSideToken(clientSideToken) {
                         accessToken = responseJson;
                         console.log("Exchanged token: " + accessToken);
                         getUserInfo(context.userPrincipalName);
-                        GetPhotoAsync(accessToken);
+                        getPhotoAsync(accessToken);
                     }
                 });
         });
@@ -144,20 +145,21 @@ function getUserInfo(principalName) {
 }
 
 // Gets the user's photo
-function GetPhotoAsync(token) {
+function getPhotoAsync(token) {
     let graphPhotoEndpoint = 'https://graph.microsoft.com/v1.0/me/photos/240x240/$value';
-    let request = new XMLHttpRequest();  
+    let request = new XMLHttpRequest();
     request.open("GET", graphPhotoEndpoint, true);
     request.setRequestHeader("Authorization", `Bearer ${token}`);
     request.setRequestHeader("Content-Type", "image/png");
     request.responseType = "blob";
     request.onload = function (oEvent) {
         let imageBlob = request.response;
-        if (imageBlob) {       
+        if (imageBlob) {
             let urlCreater = window.URL || window.webkitURL;
             let imgUrl = urlCreater.createObjectURL(imageBlob);
             $("#userPhoto").attr('src', imgUrl);
             $("#userPhoto").show();
         }
     };
+    request.send();
 }
