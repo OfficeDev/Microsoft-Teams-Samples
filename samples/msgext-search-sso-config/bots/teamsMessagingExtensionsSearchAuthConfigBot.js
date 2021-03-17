@@ -63,7 +63,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
 
             return {
                 composeExtension: {
-                    type: 'auth',
+                    type: 'silentAuth',
                     suggestedActions: {
                         actions: [
                             {
@@ -165,7 +165,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
 
                 return {
                     composeExtension: {
-                        type: 'auth',
+                        type: 'silentAuth',
                         suggestedActions: {
                             actions: [
                                 {
@@ -401,7 +401,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
         if (!tokenExchangeResponse || !tokenExchangeResponse.token) {
             return false;
         }
-        console.log('Exchanged token: ' + tokenExchangeResponse);
+        console.log('Exchanged token: ' + tokenExchangeResponse.token);
         return true;
     }
 }
