@@ -15,7 +15,7 @@
 |:--:|:-------------------|:----------------------------------------------------------------------------------------------|:--------|:-------------|:---------
 |1|Personal tabs            | Sample app showing custom personal Tab with ASP. NET Core                      |[MVC][personal-tab#cs#mvc], [Razor][personal-tab#cs#razor]     | [Yeoman Generator](https://docs.microsoft.com/microsoftteams/platform/tabs/quickstarts/create-personal-tab-node-yeoman#generate-your-project) |
 |2|Personal tab quick-start| Sample personal tab quick-start app.                                            |                               |[View][personal-tab-quickstart#ts]|[View][personal-tab-quickstart#js]
-|3|Personal tab with SSO quick-start| Sample personal tab with SSO hello world app.                          |                               |[View][personal-tab-sso-quickstart#ts]|[View][personal-tab-sso-quickstart#js]
+|3|Personal tab with SSO quick-start| Sample personal tab with SSO hello world app.                          |[View][personal-tab-sso-quickstart#csharp]|[View][personal-tab-sso-quickstart#ts]|[View][personal-tab-sso-quickstart#js]
 |4|Channel and group tabs   | Sample app showing custom group and channel Tab with ASP. NET Core                                    |[MVC][group-channel-tab#cs#mvc], [Razor][group-channel-tab#cs#razor]     | [Yeoman Generator](https://docs.microsoft.com/microsoftteams/platform/tabs/quickstarts/create-channel-group-tab-node-yeoman#generate-your-project) |
 |5|Channel and group tab quick-start| Sample channel and group tab hello world app.                          |                               |[View][group-tab-quickstart#ts]|[View][group-tab-quickstart#js]
 |6|Channel and group tab with SSO quick-start| Sample channel and group tab with SSO hello world app.        |                               |[View][group-tab-sso-quickstart#ts]|[View][group-tab-sso-quickstart#js]
@@ -98,6 +98,7 @@
 [personal-tab-quickstart#ts]:samples/tab-personal-quickstart/ts
 [personal-tab-quickstart#js]:samples/tab-personal-quickstart/js
 [personal-tab-sso-quickstart#ts]:samples/tab-personal-sso-quickstart/ts
+[personal-tab-sso-quickstart#csharp]:samples/tab-personal-sso-quickstart/csharp_dotnetcore
 [personal-tab-sso-quickstart#js]:samples/tab-personal-sso-quickstart/js
 [group-tab-quickstart#ts]:samples/tab-channel-group-quickstart/ts
 [group-tab-quickstart#js]:samples/tab-channel-group-quickstart/js
