@@ -18,7 +18,7 @@
 |3|Personal tab with SSO quick-start| Sample personal tab with SSO hello world app.                          |                               |[View][personal-tab-sso-quickstart#ts]|[View][personal-tab-sso-quickstart#js]
 |4|Channel and group tabs   | Sample app showing custom group and channel Tab with ASP. NET Core                                    |[MVC][group-channel-tab#cs#mvc], [Razor][group-channel-tab#cs#razor]     | [Yeoman Generator](https://docs.microsoft.com/microsoftteams/platform/tabs/quickstarts/create-channel-group-tab-node-yeoman#generate-your-project) |
 |5|Channel and group tab quick-start| Sample channel and group tab hello world app.                          |                               |[View][group-tab-quickstart#ts]|[View][group-tab-quickstart#js]
-|6|Channel and group tab with SSO quick-start| Sample channel and group tab with SSO hello world app.        |                               |[View][group-tab-sso-quickstart#ts]|[View][group-tab-sso-quickstart#js]
+|6|Channel and group tab with SSO quick-start| Sample channel and group tab with SSO hello world app.        |[View][group-tab-sso-quickstart#csharp]|[View][group-tab-sso-quickstart#ts]|[View][group-tab-sso-quickstart#js]
 |7|SPFx Tab | Sample app showing Microsoft Teams tabs using SharePoint Framework                                    |   | [View][group-channel-tab#ts#spfx] |
 |8|Tab SSO               | Microsoft Teams sample app for tabs Azure AD SSO                                      | [View][tab-sso#cs] | [View][tab-sso#ts] ,[Teams Toolkit](https://docs.microsoft.com/microsoftteams/platform/toolkit/visual-studio-code-tab-sso)
 
@@ -103,6 +103,7 @@
 [group-tab-quickstart#js]:samples/tab-channel-group-quickstart/js
 [group-tab-sso-quickstart#ts]:samples/tab-channel-group-sso-quickstart/ts
 [group-tab-sso-quickstart#js]:samples/tab-channel-group-sso-quickstart/js
+[group-tab-sso-quickstart#csharp]:samples/tab-channel-group-sso-quickstart/csharp_dotnetcore
 
 [personal-tab#cs#razor]:samples/tab-personal/razor-csharp
 [personal-tab#cs#mvc]:samples/tab-personal/mvc-csharp
