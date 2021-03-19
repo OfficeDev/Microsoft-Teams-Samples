@@ -92,12 +92,20 @@ Add the following Ids as authorized clients for your application
 
 - Navigate to "API permissions" blade on the left hand side
 
-- Add any user delegated permissions that your app will need to downstream APIs, (like Microsoft Graph)
+- Add any user delegated permissions that your app will need to downstream APIs. This quick start only requires User.Read.
 
     ![Add Permissions](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/image013.png)
 
+#### 1.6. Enable implicit grant
+
+- Navigate to "Authentication"
+
+- Check the *Access tokens* and *ID tokens* boxes..
+
+
 
 ### 2. Setup bot in Azure Bot Service
+
 #### 2.1. Run ngrok - point to port 3978
 
 ```bash
@@ -113,10 +121,8 @@ Create [Bot Channels registration resource](https://docs.microsoft.com/en-us/azu
 
     ![Create Bot Channels Registration2](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/CreateBot2.png)
 
-
+- After you select *Create*, it will take a few moments for your bot service to be provisioned. Once you see a notification indicating the validation process is complete, navigate back to *Home > Bot Services* to find your bot. You may have to refresh the page to see your bot listed.
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
-
 
 ### 3. Setup Bot Service Connection (TokenStore)
 
@@ -149,22 +155,25 @@ Create [Bot Channels registration resource](https://docs.microsoft.com/en-us/azu
 
    Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the MicrosoftAppId is the AppId created in step 1.1, the MicrosoftAppPassword is referred to as the "client secret" in step1.2 and you can always create a new client secret anytime.)
 
-### 5. Run your bot
+### 5. Run your bot sample
 Under the root of this sample folder, build and run by commands:
 - `npm install`
 - `npm start`
 
-## Interacting with the bot in Teams
+### 6. Configure and run the Teams app
+- **Using App Studio**
+    - Open your app in App Studio's manifest editor.
+    - Open the *Bots* page under *Capabilities*.
+    - Choose *Setup*, then choose the existing bot option. Enter your AAD app registration ID from step 1.1. Select any of the scopes you wish to have the bot be installed.
+    - Open *Domains and permissions* from under *Finish*. Enter the same ID from the step above in *AAD App ID*, then and append it to "api://botid-" and enter the URI into *Single-Sign-On*.
+    - Open *Test and distribute*, then select *Install*.
 
-- **Edit** the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{TODO: MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-- **Zip** up the contents of the `appPackage/` folder to create a `manifest.zip`
-- **Upload** the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
+- **Manually update the manifest.json**
+    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{TODO: MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
+    - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
 You can interact with this bot by sending it a message. The bot will respond by asking for your consent, by this consent the Bot will exchange an SSO token, then making a call to the Graph API on your behalf and returning the results. It will keep you loggined unless you send a message "logout". 
-
-## Deploy the bot to Azure
-
-To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 
 ## Further reading
 
