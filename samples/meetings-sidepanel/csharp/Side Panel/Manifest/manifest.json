@@ -1,0 +1,60 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
+  "manifestVersion": "devPreview",
+  "version": "1.0.0",
+  "id": "<<Microsoft-App-ID>>",
+  "packageName": "com.microsoft.teams.sample.meetingtoken",
+
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://dev.botframework.com",
+    "privacyUrl": "https://privacy.microsoft.com",
+    "termsOfUseUrl": "https://www.microsoft.com/en-us/legal/intellectualproperty/copyright/default.aspx"
+  },
+  "name": {
+    "short": "Side Panel"
+  },
+  "description": {
+    "short": "Side Panel",
+    "full": "Side Panel for Meeting Extensibility"
+  },
+  "icons": {
+    "outline": "icon-outline.png",
+    "color": "icon-color.png"
+  },
+  "accentColor": "#ffffff",
+  "configurableTabs": [
+    {
+      "configurationUrl": "<<Bot-EndPoint-URL>>/Home/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "groupchat",
+        "team"
+      ],
+      "meetingSurfaces": [
+        "sidePanel"
+      ],
+      "context": [
+        "meetingSidePanel"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "<<Bot-EndPoint-URL>>"
+  ],
+  "bots": [
+    {
+      "botId": "<<Microsoft-App-ID>>",
+      "scopes": [
+        "groupchat"
+      ],
+      "needsChannelSelector": false,
+      "isNotificationOnly": false,
+      "supportsFiles": false
+    }
+  ]
+}

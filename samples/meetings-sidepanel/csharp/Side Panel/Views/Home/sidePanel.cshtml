@@ -1,0 +1,211 @@
+﻿@model List<SidePanel.Models.TaskInfo>
+
+@{ ViewData["Title"] = "sidePanel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/chatSidePanel.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+    <title>Agenda</title>
+
+    <style>
+        p {
+            font-family: Lato;
+        }
+
+        .agendaTitle {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 15px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        #agendaButton {
+            font-weight: bold;
+            background-color: #efef;
+            font-size: 18px;
+            margin: 15px;
+            border: 1px solid #e5e5e5;
+            border-radius: 10px;
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        #agendaInput {
+            margin: 15px;
+            width: 200px;
+            height: 30px;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        #addAgendaButton {
+            width: 70px;
+            background-color: #efef;
+            font-size: 16px;
+            border: 1px solid #e5e5e5;
+            border-radius: 10px;
+            margin-left: 15px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        #agendaList {
+            font-size: 18px;
+            font-family: segoe "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            margin: 15px;
+            padding-bottom: 5px;
+        }
+
+        #meetingOrganizer{
+            display: none;
+        }
+        .list {
+            padding: 5px;
+            border: 1px dotted;
+        }
+
+        li {
+            padding: 5px;
+            border: 1px dotted;
+        }
+
+        #publishAgendaButton {
+            border: 1px solid #e5e5e5;
+            border-radius: 10px;
+            margin: 15px;
+            font-size: 16px;
+            background-color: #efef;
+            padding: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            display: none;
+        }
+    </style>
+</head>
+
+<body style="color:white; background-color:#201f1f">
+
+    <div class="agendaTitle">
+        Agenda for today
+    </div>
+    <div id="meetingOrganizer">
+        <div id="agendaButtonDiv">
+            <button id="agendaButton" onclick="showAgendaInput()">Add New Agenda Item</button>
+        </div>
+        <div id="agendaInputDiv" style="display:none">
+            <input type="text" id="agendaInput"><br>
+            <button id="addAgendaButton" onclick="closeAgendaInput()">Add</button>
+        </div>
+    </div>
+    <div id="list">
+        <ol type="1" id="agendaList">
+
+            @await Html.PartialAsync("SidePanelParticalView", Model)
+
+        </ol>
+    </div>
+
+    <button id="publishAgendaButton">Publish Agenda</button>
+
+    <script type="text/javascript">
+
+        //Default Action On View Render
+        microsoftTeams.initialize();
+        var userId = "";
+        window.onload = function () {
+            microsoftTeams.getContext(function (context) {
+                userId = context.userObjectId;
+                $.ajax({
+                    type: 'GET',
+                    url: '/GetRole',
+                    dataType: 'json',
+                    data: { userId: userId },
+                    success: function (response) {
+                        console.log(response);
+                        RoleFunction(response);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log("textStatus: " + textStatus + ", errorThrown:" + response);
+                    },
+                });
+            })
+        }
+
+        //Enabling Organizer Tools
+        function RoleFunction(response) {
+            if (response === true) {
+                document.getElementById("meetingOrganizer").style.display = "block";
+                document.getElementById("publishAgendaButton").style.display = "block";
+            }
+            else {
+                document.getElementById("meetingOrganizer").style.display = "none";
+                document.getElementById("publishAgendaButton").style.display = "none";
+            }
+        }
+
+        //Toggle Agenda Add Button/Agenda Text Input
+        function showAgendaInput() {
+            document.getElementById("agendaInputDiv").style.display = "block";
+            document.getElementById("agendaButtonDiv").style.display = "none";
+            document.getElementById("agendaInput").focus();
+            event.preventDefault();
+        }
+
+        //Publish the Agenda to the Chat Conversation
+        $("#publishAgendaButton").on('click', function (e) {
+            $.ajax({
+                type: 'GET',
+                url: '/SendAgenda',
+                dataType: 'json',
+                success: function (response) {
+                    console.log(response);
+                    console.log("Agenda Published to Chat");
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + response);
+                },
+            });
+            console.log("Publish Button Hit");
+            event.preventDefault();
+        })
+
+        //On Click of Add Button Add the Agenda Point to the List
+        $("#addAgendaButton").on('click', function (e) {
+            document.getElementById("agendaInputDiv").style.display = "none";
+            document.getElementById("agendaButtonDiv").style.display = "block";
+            var newAgendaItem = $("#agendaInput").val();
+            if (newAgendaItem != "") {
+                e.preventDefault();
+                let taskInfo = {
+                    title: newAgendaItem
+                };
+                $.ajax({
+                    type: 'GET',
+                    url: '/AddNewAgendaPoint',
+                    dataType: 'json',
+                    data: taskInfo,
+                    success: function (response) {
+                        console.log(response);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    },
+                });
+                document.getElementById("agendaInput").value = '';
+            }
+            event.preventDefault();
+        })
+    </script>
+
+</body>
+</html>
