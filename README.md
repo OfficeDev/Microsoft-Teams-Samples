@@ -15,10 +15,10 @@
 |:--:|:-------------------|:----------------------------------------------------------------------------------------------|:--------|:-------------|:---------
 |1|Personal tabs            | Sample app showing custom personal Tab with ASP. NET Core                      |[MVC][personal-tab#cs#mvc], [Razor][personal-tab#cs#razor]     | [Yeoman Generator](https://docs.microsoft.com/microsoftteams/platform/tabs/quickstarts/create-personal-tab-node-yeoman#generate-your-project) |
 |2|Personal tab quick-start| Sample personal tab quick-start app.                                            |                               |[View][personal-tab-quickstart#ts]|[View][personal-tab-quickstart#js]
-|3|Personal tab with SSO quick-start| Sample personal tab with SSO hello world app.                          |                               |[View][personal-tab-sso-quickstart#ts]|[View][personal-tab-sso-quickstart#js]
+|3|Personal tab with SSO quick-start| Sample personal tab with SSO hello world app.                          |[View][personal-tab-sso-quickstart#csharp]|[View][personal-tab-sso-quickstart#ts]|[View][personal-tab-sso-quickstart#js]
 |4|Channel and group tabs   | Sample app showing custom group and channel Tab with ASP. NET Core                                    |[MVC][group-channel-tab#cs#mvc], [Razor][group-channel-tab#cs#razor]     | [Yeoman Generator](https://docs.microsoft.com/microsoftteams/platform/tabs/quickstarts/create-channel-group-tab-node-yeoman#generate-your-project) |
 |5|Channel and group tab quick-start| Sample channel and group tab hello world app.                          |                               |[View][group-tab-quickstart#ts]|[View][group-tab-quickstart#js]
-|6|Channel and group tab with SSO quick-start| Sample channel and group tab with SSO hello world app.        |                               |[View][group-tab-sso-quickstart#ts]|[View][group-tab-sso-quickstart#js]
+|6|Channel and group tab with SSO quick-start| Sample channel and group tab with SSO hello world app.        |[View][group-tab-sso-quickstart#csharp]|[View][group-tab-sso-quickstart#ts]|[View][group-tab-sso-quickstart#js]
 |7|SPFx Tab | Sample app showing Microsoft Teams tabs using SharePoint Framework                                    |   | [View][group-channel-tab#ts#spfx] |
 |8|Tab SSO               | Microsoft Teams sample app for tabs Azure AD SSO                                      | [View][tab-sso#cs] | [View][tab-sso#ts] ,[Teams Toolkit](https://docs.microsoft.com/microsoftteams/platform/toolkit/visual-studio-code-tab-sso)
 
@@ -30,7 +30,7 @@
 |    | Sample Name | Description | .NET Core | JavaScript | Python |
 |:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|:-------------|
 |1| Teams Conversation Bot quick-start | Messaging and conversation event handling hello world. | | [View][bot-conversation-quickstart#js]|| 
-|2| Teams Conversation Bot SSO quick-start | Messaging and conversation event handling hello world with SSO. | | [View][bot-conversation-sso-quickstart#js]|| 
+|2| Teams Conversation Bot SSO quick-start | Messaging and conversation event handling hello world with SSO. | [View][bot-conversation-sso-quickstart#csharp_dotnetcore] | [View][bot-conversation-sso-quickstart#js]|| 
 |3| Teams Conversation Bot | Messaging and conversation event handling. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/57.teams-conversation-bot)| [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/javascript_nodejs/57.teams-conversation-bot)| [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/python/57.teams-conversation-bot) | 
 |4| Message Reactions | Demonstrates how to create a simple bot that responds to Message Reactions | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/25.message-reaction)  |  [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/javascript_nodejs/25.message-reaction) |
 |5| Authentication with OAuthPrompt| Authentication and basic messaging in Bot Framework v4. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/46.teams-auth)| [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/javascript_nodejs/46.teams-auth)| [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/python/46.teams-auth) | 
@@ -90,6 +90,7 @@
 |2|Authentication        | Sample illustrating seamless inline authentication for Microsoft Teams apps.                      | | [View][app-auth#ts]
 |3|Complete Samples      | A template for building complex bots (SDK V3) for Microsoft Teams.                                      |[View][app-complete#cs]        |[View][app-complete#ts]
 |4|Meetings Extensibility | Microsoft Teams meeting extensibility sample: token passing |[View][meetings-token-app#cs]     |
+|5|Meeting Content Bubble Bot | Microsoft Teams meeting extensibility sample for iteracting with Content Bubble Bot in-meeting |[View][meetings-content-bubble#cs]    |[View][meetings-content-bubble#js]
 
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
@@ -97,11 +98,13 @@
 [personal-tab-quickstart#ts]:samples/tab-personal-quickstart/ts
 [personal-tab-quickstart#js]:samples/tab-personal-quickstart/js
 [personal-tab-sso-quickstart#ts]:samples/tab-personal-sso-quickstart/ts
+[personal-tab-sso-quickstart#csharp]:samples/tab-personal-sso-quickstart/csharp_dotnetcore
 [personal-tab-sso-quickstart#js]:samples/tab-personal-sso-quickstart/js
 [group-tab-quickstart#ts]:samples/tab-channel-group-quickstart/ts
 [group-tab-quickstart#js]:samples/tab-channel-group-quickstart/js
 [group-tab-sso-quickstart#ts]:samples/tab-channel-group-sso-quickstart/ts
 [group-tab-sso-quickstart#js]:samples/tab-channel-group-sso-quickstart/js
+[group-tab-sso-quickstart#csharp]:samples/tab-channel-group-sso-quickstart/csharp_dotnetcore
 
 [personal-tab#cs#razor]:samples/tab-personal/razor-csharp
 [personal-tab#cs#mvc]:samples/tab-personal/mvc-csharp
@@ -135,8 +138,11 @@
 [bot-proactive-msg#cs]:samples/bot-proactive-messaging/csharp
 [bot-conversation-quickstart#js]:samples/bot-conversation-quickstart/js
 [bot-conversation-sso-quickstart#js]:samples/bot-conversation-sso-quickstart/js
+[bot-conversation-sso-quickstart#csharp_dotnetcore]:samples/bot-conversation-sso-quickstart/csharp_dotnetcore
 
 [meetings-token-app#cs]:samples/meetings-token-app/csharp
+[meetings-content-bubble#cs]:samples/meetings-content-bubble/csharp
+[meetings-content-bubble#js]:samples/meetings-content-bubble/nodejs
 
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#lifecycle#cs]:samples/graph-channel-lifecycle/csharp
