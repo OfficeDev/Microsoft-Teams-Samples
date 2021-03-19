@@ -66,7 +66,6 @@ Install the Region Selection App manifest in Microsoft Teams. @mention the regio
 ## Interacting with Region Selection Tab
 
 - Set up the region selection app as a Tab in channel
-
 ![image](https://user-images.githubusercontent.com/50989436/108982548-ef3e6780-76b3-11eb-8133-7578a121dac9.png)
 - Select the region from the configuration page and click on save
 ![image](https://user-images.githubusercontent.com/50989436/108982582-f796a280-76b3-11eb-815e-c3c51e5c54a3.png)
