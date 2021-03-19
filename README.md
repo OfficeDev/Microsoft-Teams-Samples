@@ -142,7 +142,7 @@
 [bot-conversation-sso-quickstart#csharp_dotnetcore]:samples/bot-conversation-sso-quickstart/csharp_dotnetcore
 
 [meetings-token-app#cs]:samples/meetings-token-app/csharp
-[region-selection-app#cs]: samples/region-selection-bot/csharp  
+[region-selection-app#cs]: samples/app-region-selection/csharp  
 [meetings-content-bubble#cs]:samples/meetings-content-bubble/csharp
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#lifecycle#cs]:samples/graph-channel-lifecycle/csharp
