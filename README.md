@@ -91,8 +91,7 @@
 |3|Complete Samples      | A template for building complex bots (SDK V3) for Microsoft Teams.                                      |[View][app-complete#cs]        |[View][app-complete#ts]
 |4|Meetings Extensibility | Microsoft Teams meeting extensibility sample: token passing |[View][meetings-token-app#cs]     |
 |5|Meeting Content Bubble Bot | Microsoft Teams meeting extensibility sample for iteracting with Content Bubble Bot in-meeting |[View][meetings-content-bubble#cs]     |
-
-|5|Region Selection App: This app contains a bot and Tab which is helpful to set the region |[View][region-selection-app#cs]     |
+|6|Region Selection App | This app contains a bot and Tab which is helpful to set the region |[View][region-selection-app#cs]     |
 
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
