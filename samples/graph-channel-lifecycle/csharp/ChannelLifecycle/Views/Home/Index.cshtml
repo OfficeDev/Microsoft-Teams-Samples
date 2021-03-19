@@ -1,0 +1,257 @@
+﻿@model ChannelLifecycle.Models.ChannelViewModel
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<h4>Channel lifecycle demo</h4>
+
+
+<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#createChannelModal">Create Channel</button>
+<button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#updateChannelModal">Update Channel</button>
+<button type="button" class="btn btn-outline-info" id="btngetChannel">Get Channel</button>
+<button type="button" class="btn btn-outline-danger" onclick="DeleteChannel()">Delete Channel</button>
+<button type="button" class="btn btn-outline-primary" id="createTab">Create Tab</button>
+<br />
+<br />
+<!-- simple popup for create channel -->
+<div class="modal fade" id="createChannelModal" tabindex="-1" role="dialog" aria-labelledby="createChannelModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createChannelLabel">Create Channel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Name</label>
+                    <input type="email" class="form-control" id="txtchannelName" aria-describedby="emailHelp" placeholder="Channel name">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Description</label>
+                    <input type="email" class="form-control" id="txtchannelDesc" aria-describedby="emailHelp" placeholder="Enter Description">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="btnCreateChannel">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--simple popup for update channel -->
+<div class="modal fade" id="updateChannelModal" tabindex="-1" role="dialog" aria-labelledby="updateChannelModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateChannelLabel">Update Channel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Channel Name</label>
+                    <input type="email" class="form-control" id="txtnewName" aria-describedby="emailHelp" placeholder="New Channel name">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Description</label>
+                    <input type="email" class="form-control" id="txtnewDesc" aria-describedby="emailHelp" placeholder="Enter Description">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="btnUpdateChannel">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- simple popup for get channel -->
+<div class="modal fade" id="getChannelModal" tabindex="-1" role="dialog" aria-labelledby="getChannelModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="getChannelLabel">Create Channel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalbody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <h5>List of channels:</h5>
+    @foreach (var item in Model.channelList) {
+    <p>
+        Channel Name :  @Html.DisplayFor(modelItem => item.ChannelName)<br />
+        Descriptopn :  @Html.DisplayFor(modelItem => item.ChannelDesc)
+    </p>
+    }
+       
+    <br /><br />
+    <h5>List of members:</h5>
+    @foreach(var item in Model.Members){
+    @Html.DisplayFor(modelItem => item)  <br />
+    }
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        microsoftTeams.initialize();
+
+        $("#btnCreateChannel").on('click', function (e) {
+            microsoftTeams.getContext(function (context) {
+                var tenantId = context.tid;
+                var teamId = context.groupId;
+                var cName = $("#txtchannelName").val();
+                var cDesc = $("#txtchannelDesc").val();
+                e.preventDefault();
+                $("#createChannelModal").modal('toggle');
+                $('.modal-backdrop').removeClass('modal-backdrop');
+                $('.fade').removeClass('fade');
+                $('.in').removeClass('in');
+
+                $.ajax({
+                    url: '@Url.Action("CreateChannel", "Home")',
+                    type: "GET",
+                    dataType: "json",
+                    data: { tenantId: tenantId, teamId: teamId, channelName: cName, channelDesc: cDesc },
+                    success: function (response) {
+                        console.log(response);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    },
+                });
+            })
+        })
+
+        $("#btnUpdateChannel").on('click', function (e) {
+            microsoftTeams.getContext(function (context) {
+                var tenantId = context.tid;
+                var teamId = context.groupId;
+                var channelId = context.channelId;
+
+                var cName = $("#txtnewName").val();
+                var cDesc = $("#txtnewDesc").val();
+                e.preventDefault();
+                $("#updateChannelModal").modal('toggle');
+                $('.modal-backdrop').removeClass('modal-backdrop');
+                $('.fade').removeClass('fade');
+                $('.in').removeClass('in');
+
+                $.ajax({
+                    url: '@Url.Action("UpdateChannel", "Home")',
+                    type: "GET",
+                    dataType: "json",
+                    data: { tenantId: tenantId, teamId: teamId, channelId: channelId, channelName: cName, channelDesc: cDesc },
+                    success: function (response) {
+                        console.log(response);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    },
+                });
+            })
+        })
+
+        $("#btngetChannel").on('click', function (e) {
+            microsoftTeams.getContext(function (context) {
+                var tenantId = context.tid;
+                var teamId = context.groupId;
+                var channelId = context.channelId;
+                e.preventDefault();
+
+                $.ajax({
+                    url: '@Url.Action("GetChannel", "Home")',
+                    type: "GET",
+                    dataType: "json",
+                    data: { tenantId: tenantId, teamId: teamId, channelId: channelId },
+                    success: function (response) {
+                        $('#getChannelModal').modal('show');
+                        $('#modalbody').html(response[0] + "\n" + response[1] + "\n" + response[2]);
+                        console.log(response);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    },
+                });
+            })
+        })
+
+        $("#createTab").on('click', function (e) {
+            microsoftTeams.getContext(function (context) {
+                var tenantId = context.tid;
+                var teamId = context.groupId;
+                var channelId = context.channelId;
+
+                $.ajax({
+                    url: '@Url.Action("GetToken", "Home")',
+                    "method": "GET",
+                    "datatype": "json",
+                    data: { tenantId: tenantId },
+                    success: function (response) {
+                        console.log(response);
+                        CreateTab(tenantId, teamId, channelId);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    },
+                });
+            });
+        });
+    });
+
+    function DeleteChannel(e) {
+        alert("This channel is deleting..")
+        microsoftTeams.initialize();
+        microsoftTeams.getContext(function (context) {
+            var tenantId = context.tid;
+            var teamId = context.groupId;
+            var channelId = context.channelId;
+
+            $.ajax({
+                url: '@Url.Action("DeleteChannel", "Home")',
+                type: "GET",
+                dataType: "json",
+                data: { tenantId: tenantId, teamId: teamId, channelId: channelId },
+                success: function (response) {
+                    console.log(response);
+                    displayMessage(response, teamId, channelId);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                },
+            });
+        })
+    }
+
+    function CreateTab(tenantId, teamId, channelId) {
+        debugger;
+         $.ajax({
+                url: '@Url.Action("CreateTab", "Home")',
+                type: "GET",
+                dataType: "json",
+                data: { tenantId: tenantId, teamId: teamId, channelId: channelId },
+                success: function (response) {
+                    console.log(response);                    
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                },
+            });
+    }
+</script>
