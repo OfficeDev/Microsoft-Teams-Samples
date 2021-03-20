@@ -171,26 +171,10 @@
         });
 
     function SilentLogout() {
-        SignOut(window.location.origin + "/Logout");
+	    localStorage.clear();
+        window.location.href = "@Url.Action("ChooseAuth", "Home")";
     }
 
-    function SignOut(url) {
-        microsoftTeams.authentication.authenticate({
-            url: url,
-            width: 600,
-            height: 535,
-            successCallback: function (result) {
-                console.log("Logout succeeded: " + result);
-                window.location.href = "@Url.Action("ChooseAuth", "Home")";
-                microsoftTeams.settings.setValidityState(false);
-            },
-            failureCallback: function (reason) {
-                console.log("Logout failed: " + reason);
-                handleAuthError(reason);
-                window.location.href = "@Url.Action("SimpleFailed", "Authentication")";
-            }
-        });
-    }
-
+    
 </script>
 
