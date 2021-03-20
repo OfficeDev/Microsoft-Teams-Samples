@@ -4,6 +4,7 @@
 const {TeamsActivityHandler, MessageFactory, CardFactory } = require('botbuilder');
 const{contentBubbleTitles}=require('../models/contentbubbleTitle');
 const AdaptiveCard = require('../resources/adaptiveCard.json');
+const templateJson = require('../resources/QuestionTemplate.json');
 var ACData = require("adaptivecards-templating");
 
 class ContentBubbleBot extends TeamsActivityHandler {
@@ -53,50 +54,7 @@ class ContentBubbleBot extends TeamsActivityHandler {
     }
 
     createQuestionAdaptiveCard(myText){
-    var templatePayload = {
-      "type": "AdaptiveCard",
-      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-      "version": "1.0",
-      "body": [
-        {
-          "type": "TextBlock",
-          "text": "Provide your Feedback!",
-          "wrap": true
-        },
-        {
-          "type": "TextBlock",
-          "text": "${name}",
-          "wrap": true
-        },
-        {
-          "type": "Input.ChoiceSet",
-           "id": "myReview",
-            "style": "expanded",
-            "isMultiSelect": false,
-            "wrap": true,
-             "value": "1",
-             "choices": [
-               {
-                 "title": "Yes",
-                  "value": "yes"
-                },
-                {
-                  "title": "No",
-                  "value": "no"
-                }
-              ]
-            }
-          ],
-          "actions": [
-            {
-              "type": "Action.Submit",
-              "title": "Submit",
-              "data": {
-                "action": "${name}"
-              }
-            }
-          ]
-        };
+    var templatePayload = templateJson;
         var template = new ACData.Template(templatePayload);
         var cardPayload = template.expand({
           $root: {
