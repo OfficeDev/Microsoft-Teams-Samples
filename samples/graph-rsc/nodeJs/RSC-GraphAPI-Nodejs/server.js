@@ -3,13 +3,11 @@ const bodyparser = require('body-parser');
 const env = require('dotenv')
 const path = require('path');
 
-
 const auth = require('./auth');
 const indexRouter = require('./routes/index');
 require('isomorphic-fetch');
 
 const app = express();
-
 
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
