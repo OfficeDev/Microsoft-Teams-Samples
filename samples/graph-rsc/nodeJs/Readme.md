@@ -16,7 +16,7 @@ This sample illustrates you can use [Resource Specific Consent](https://docs.mic
     git clone https://github.com/Microsoft/botbuilder-samples.git
     ```
 
-1) In a terminal, navigate to `samples/graph-rsc/RSC-GraphAPI-NodeJS`
+1) In a terminal, navigate to `samples/graph-rsc/nodejs/RSC-GraphAPI-NodeJS`
 
 1) Install modules
 
