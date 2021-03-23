@@ -44,12 +44,12 @@ This sample illustrates you can use [Resource Specific Consent](https://docs.mic
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-   ![](https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/VaraPrasad/RSCGraphNodeJs/samples/graph-rsc/nodeJs/RSC-GraphAPI-Nodejs/Images/image1.png)
+   ![](./RSC-GraphAPI-Nodejs/Images/image1.png)
 
 
-   ![](https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/VaraPrasad/RSCGraphNodeJs/samples/graph-rsc/nodeJs/RSC-GraphAPI-Nodejs/Images/image2.png)
+   ![](./RSC-GraphAPI-Nodejs/Images/image2.png)
 
 
-   ![](https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/VaraPrasad/RSCGraphNodeJs/samples/graph-rsc/nodeJs/RSC-GraphAPI-Nodejs/Images/image3.png)
+   ![](./RSC-GraphAPI-Nodejs/Images/image3.png)
 
 
