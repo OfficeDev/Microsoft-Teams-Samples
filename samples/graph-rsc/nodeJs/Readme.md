@@ -13,10 +13,10 @@ This sample illustrates you can use [Resource Specific Consent](https://docs.mic
 1) Clone the repository
 
     ```bash
-    git clone https://github.com/Microsoft/botbuilder-samples.git
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/graph-rsc/nodejs/RSC-GraphAPI-NodeJS`
+1) In a terminal, navigate to `samples/graph-rsc/nodejs`
 
 1) Install modules
 
@@ -44,12 +44,12 @@ This sample illustrates you can use [Resource Specific Consent](https://docs.mic
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-   ![](./RSC-GraphAPI-Nodejs/Images/image1.PNG)
+   ![](./Images/image1.PNG)
 
 
-   ![](./RSC-GraphAPI-Nodejs/Images/image2.PNG)
+   ![](./Images/image2.PNG)
 
 
-   ![](./RSC-GraphAPI-Nodejs/Images/image3.PNG)
+   ![](./Images/image3.PNG)
 
 
