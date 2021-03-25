@@ -1,0 +1,44 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.8",
+    "version": "1.0.0",
+    "id": "<<App_Id>>",
+    "packageName": "com.microsoft.teams.extension",
+    "developer": {
+        "name": "Teams App, Inc.",
+        "websiteUrl": "<<Website URL>>",
+        "privacyUrl": "<<Privacy URL>>",
+        "termsOfUseUrl": "<<Termsofuse>>"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "TeamsTabGraphToolKit",
+        "full": ""
+    },
+    "description": {
+        "short": "Short description for Personal App.",
+        "full": "Full description of Personal App."
+    },
+    "accentColor": "#FFFFFF",
+    "staticTabs": [
+        {
+            "entityId": "index",
+            "name": "Personal Tab",
+            "contentUrl": "https://<<YourDomain>>/tab",
+            "websiteUrl": "https://<<YourDomain>>/tab",
+            "scopes": [
+                "personal"
+            ]
+        }
+    ],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "<<YourDomain>>"
+    ]
+}
