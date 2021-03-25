@@ -1,0 +1,12 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "isCreatingSolution": true,
+    "environment": "spo",
+    "version": "1.12.0",
+    "libraryName": "sp-fx-ms-tool-kit",
+    "libraryId": "3457ba71-9e65-488a-93b6-61b589a122df",
+    "packageManager": "npm",
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}
