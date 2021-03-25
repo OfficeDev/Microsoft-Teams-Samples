@@ -4,8 +4,13 @@
 const {
     TeamsActivityHandler,
     CardFactory,
-    ActionTypes,
+    ActionTypes
 } = require('botbuilder');
+
+const {
+    ExtendedUserTokenProvider
+} = require('botbuilder-core')
+
 const axios = require('axios');
 const querystring = require('querystring');
 const { SimpleGraphClient } = require('..\\simpleGraphClient.js');
@@ -63,7 +68,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
 
             return {
                 composeExtension: {
-                    type: 'silentAuth',
+                    type: 'auth',
                     suggestedActions: {
                         actions: [
                             {
@@ -142,7 +147,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
             ''
         );
 
-        if (userSettings && userSettings.includes('email')) {
+        if (!userSettings || userSettings.includes('profile')) {
             // When the Bot Service Auth flow completes, the query.State will contain a magic code used for verification.
             const magicCode =
                 query.state && Number.isInteger(Number(query.state))
@@ -179,36 +184,13 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
                 };
             }
 
-            // The user is signed in, so use the token to create a Graph Clilent and search their email
+            // The user is signed in, so use the token to create a Graph Clilent and show profile
+            console.log(tokenResponse.token);
             const graphClient = new SimpleGraphClient(tokenResponse.token);
-            const messages = await graphClient.searchMailInbox(searchQuery);
-
-            // Here we construct a ThumbnailCard for every attachment, and provide a HeroCard which will be
-            // displayed if the user selects that item.
-            messages.value.forEach((msg) => {
-                const heroCard = CardFactory.heroCard(
-                    msg.from.emailAddress.address,
-                    msg.body.content,
-                    null,
-                    null,
-                    { subtitle: msg.subject }
-                );
-                const preview = CardFactory.thumbnailCard(
-                    msg.from.emailAddress.address,
-                    `${msg.subject} <br />  ${msg.bodyPreview.substring(
-                        0,
-                        100
-                    )}`,
-                    [
-                        'https://raw.githubusercontent.com/microsoft/botbuilder-samples/master/docs/media/OutlookLogo.jpg',
-                    ]
-                );
-                attachments.push({
-                    contentType: heroCard.contentType,
-                    content: heroCard.content,
-                    preview: preview
-                });
-            });
+            const profile = await graphClient.GetMyProfile();
+            const userPhoto = await graphClient.GetPhotoAsync(tokenResponse.token);
+            const thumbnailCard = CardFactory.thumbnailCard(profile.displayName, CardFactory.images([userPhoto]));
+            attachments.push(thumbnailCard);
         } else {
             const response = await axios.get(
                 `http://registry.npmjs.com/-/v1/search?${querystring.stringify({
@@ -359,28 +341,23 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
     }
 
     async onInvokeActivity(context) {
-        console.log('fyt, onInvoke, '+ context.activity.name);
+        console.log('onInvoke, ' + context.activity.name);
         const valueObj = context.activity.value;
         if (valueObj.authentication) {
-            console.log('fyt, onInvoke, has authentication');
             const authObj = valueObj.authentication;
             if (authObj.token) {
-                console.log('fyt, onInvoke, has token');
                 // If the token is NOT exchangeable, then do NOT deduplicate requests.
-                if (await tokenIsExchangeable(context)) {
+                if (await this.tokenIsExchangeable(context)) {
                     return await super.onInvokeActivity(context);
                 }
                 else {
                     const response = {
                         status: 412
                     };
-                    console.log('fyt can not exchange token, 412');
                     return response;
                 }
             }
-            console.log('fyt, onInvoke, noToken');
         }
-        console.log('fyt no authentication, run super.onInvoke()');
         return await super.onInvokeActivity(context);
     }
 
@@ -389,18 +366,22 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
         try {
             const valueObj = context.activity.value;
             const tokenExchangeRequest = valueObj.authentication;
+            console.log("tokenExchangeRequest.token: " + tokenExchangeRequest.token);
+
             tokenExchangeResponse = await context.adapter.exchangeToken(context,
                 process.env.connectionName,
                 context.activity.from.id,
                 { token: tokenExchangeRequest.token });
+            console.log('tokenExchangeResponse: ' + JSON.stringify(tokenExchangeResponse));
         } catch (err) {
-            console.log('fyt tokenExchange error: ' + err);
+            console.log('tokenExchange error: ' + err);
             // Ignore Exceptions
             // If token exchange failed for any reason, tokenExchangeResponse above stays null , and hence we send back a failure invoke response to the caller.
         }
         if (!tokenExchangeResponse || !tokenExchangeResponse.token) {
             return false;
         }
+
         console.log('Exchanged token: ' + tokenExchangeResponse.token);
         return true;
     }

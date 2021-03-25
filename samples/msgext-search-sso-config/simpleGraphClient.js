@@ -30,8 +30,7 @@ class SimpleGraphClient {
     async searchMailInbox(searchQuery) {
         // Searches the user's mail Inbox using the Microsoft Graph API
         return await this.graphClient
-            .api('me/mailfolders/inbox/messages')
-            .search(searchQuery)
+            .api(`me/messages?$search=\"${searchQuery}\"`)
             .get();
     }
     async GetMyProfile() {

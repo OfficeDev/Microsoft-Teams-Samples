@@ -1,9 +1,9 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.5",
-  "version": "1.0.0",
-  "id": "d9dd7f95-ce59-4c16-abf2-378569eee647",
-  "packageName": "com.microsoft.teams.sample",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.8",
+  "version": "1.0.2",
+  "id": "{TODO: MicrosoftAppId}",
+  "packageName": "com.microsoft.teams.samples.msgExt",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://dev.botframework.com",
@@ -15,8 +15,8 @@
     "outline": "icon-outline.png"
   },
   "name": {
-    "short": "Messaging Extension Auth",
-    "full": "ME Auth for Search, Action and link unfurling"
+    "short": "Messaging Extension SSO",
+    "full": "ME SSO for Search, Action and link unfurling"
   },
   "description": {
     "short": "ME Authentication for Search, Action and Link unfurling",
@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "composeExtensions": [
     {
-      "botId": "d9dd7f95-ce59-4c16-abf2-378569eee647",
+      "botId": "{TODO: MicrosoftAppId}",
       "canUpdateConfiguration": true,
       "commands": [
         {
@@ -110,7 +110,7 @@
     "*.botframework.com"
   ],
   "webApplicationInfo": {
-    "id": "d9dd7f95-ce59-4c16-abf2-378569eee647",
-    "resource": "api://botid-d9dd7f95-ce59-4c16-abf2-378569eee647"
+    "id": "{TODO: MicrosoftAppId}",
+    "resource": "api://{TODO: SiteUrlDomain}/botid-{TODO: MicrosoftAppId}/{TODO: MicrosoftAppId}"
   }
 }
