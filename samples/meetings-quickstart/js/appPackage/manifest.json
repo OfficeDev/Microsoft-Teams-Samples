@@ -1,0 +1,48 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.8",
+    "version": "1.0.0",
+    "id": "38536ecf-4247-456c-bb49-7c391d039f2a",
+    "packageName": "com.microsoft.teams.extension",
+    "developer": {
+        "name": "Teams App, Inc.",
+        "websiteUrl": "https://contoso.ngrok.io",
+        "privacyUrl": "https://contoso.ngrok.io/privacy",
+        "termsOfUseUrl": "https://contoso.ngrok.io/termsofuse"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "mytabssoappdeleteme",
+        "full": ""
+    },
+    "description": {
+        "short": "Short description for Personal Tab SSO.",
+        "full": "Full description of Personal Tab SSO."
+    },
+    "accentColor": "#FFFFFF",
+    "staticTabs": [
+        {
+            "entityId": "index",
+            "name": "Personal Tab",
+            "contentUrl": "https://contoso.ngrok.io/tab",
+            "websiteUrl": "https://contoso.ngrok.io/tab",
+            "scopes": [
+                "personal"
+            ]
+        }
+    ],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "contoso.ngrok.io"
+    ],
+    "webApplicationInfo": {
+        "id": "de8849cd-4126-4f74-9c8b-1004b1d3a458",
+        "resource": "api://contoso.ngrok.io/de8849cd-4126-4f74-9c8b-1004b1d3a458"
+    }
+}
