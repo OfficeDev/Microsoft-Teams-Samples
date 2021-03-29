@@ -14,12 +14,15 @@ const { BotActivityHandler } = require('./botActivityHandler');
 const botActivityHandler = new BotActivityHandler();
 let meetingInfoRepository = require('./meetingInfoRepository');
 
-//Define constants
+//SSO constants
+const graphScopes = 'https://graph.microsoft.com/' + process.env.GRAPH_SCOPES;
+
+//In-meeting dialog constants
 const dialogWidth = 280;
 const dialogHeight = 180;
 const dialogTitle = "Test in-meeting dialog"
-const dialogUrl = process.env.REACT_APP_BASE_URL + "/dialog";
-const graphScopes = 'https://graph.microsoft.com/' + process.env.GRAPH_SCOPES;
+const dialogUrl = process.env.REACT_APP_BASE_URL + "/dialog"; //The view for your in-meeting dialog ( see Dialog.js in src/components )
+
 const externalResourceUrl = `https://teams.microsoft.com/l/bubble/${process.env.TEAMS_APP_ID}?url=${dialogUrl}&height=${dialogHeight}&width=${dialogWidth}&title=${dialogTitle}&completionBotId=${process.env.BotId}`;
 
 //Generic error handler for fetch() calls
@@ -113,14 +116,18 @@ app.post('/api/messages', (req, res) => {
     });
 });
 
+//Get a user's meeting role information
 app.get('/getParticipantInfo', async (req,res) => {
    
     let participantId = jwt_decode(req.query.ssoToken)['oid']; //Get the participant ID from the decoded token
     let tenantId = jwt_decode(req.query.ssoToken)['tid']; //Get the tenant ID from the decoded token
     let meetingId = req.query.meetingId;
-    let conversationReference = meetingInfoRepository.getConversationReference(req.query.conversationId);
+    let conversationReference = meetingInfoRepository.getConversationReference(req.query.conversationId); //Look up the conversation reference object by conversation Id
 
     adapter.continueConversation(conversationReference, async(context)=>{
+        //Retrieve info using BF SDK
+        //https://docs.microsoft.com/en-us/javascript/api/botbuilder/teamsinfo?view=botbuilder-ts-latest#getMeetingParticipant_TurnContext__string__string__string_
+
         let participantInfo = await TeamsInfo.getMeetingParticipant(context,meetingId,participantId,tenantId);
         console.log("Got role info: ",participantInfo);
         res.send(participantInfo);

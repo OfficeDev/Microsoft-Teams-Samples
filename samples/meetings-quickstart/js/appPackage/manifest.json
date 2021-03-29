@@ -1,48 +1,63 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.8",
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.7/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.7",
     "version": "1.0.0",
-    "id": "38536ecf-4247-456c-bb49-7c391d039f2a",
+    "id": "{TODO}",
     "packageName": "com.microsoft.teams.extension",
     "developer": {
-        "name": "Teams App, Inc.",
-        "websiteUrl": "https://contoso.ngrok.io",
-        "privacyUrl": "https://contoso.ngrok.io/privacy",
-        "termsOfUseUrl": "https://contoso.ngrok.io/termsofuse"
+      "name": "Teams App, Inc.",
+      "websiteUrl": "https://contoso.ngrok.io",
+      "privacyUrl": "https://contoso.ngrok.io/privacy",
+      "termsOfUseUrl": "https://contoso.ngrok.io/termsofuse"
     },
     "icons": {
-        "color": "color.png",
-        "outline": "outline.png"
+      "color": "color.png",
+      "outline": "outline.png"
     },
     "name": {
-        "short": "mytabssoappdeleteme",
-        "full": ""
+      "short": "Meeting App",
+      "full": "Meeting App"
     },
     "description": {
-        "short": "Short description for Personal Tab SSO.",
-        "full": "Full description of Personal Tab SSO."
+      "short": "Short description for Meeting App.",
+      "full": "Full description of Meeting App."
     },
-    "accentColor": "#FFFFFF",
-    "staticTabs": [
-        {
-            "entityId": "index",
-            "name": "Personal Tab",
-            "contentUrl": "https://contoso.ngrok.io/tab",
-            "websiteUrl": "https://contoso.ngrok.io/tab",
-            "scopes": [
-                "personal"
-            ]
-        }
+    "accentColor": "",
+    "configurableTabs": [
+      {
+        "configurationUrl": "{TODO}",
+        "canUpdateConfiguration": false,
+        "scopes": [
+          "groupchat"
+        ],
+        "context": [
+          "meetingChatTab",
+          "meetingDetailsTab",
+          "meetingSidePanel"
+        ]
+      }
+    ],
+    "bots": [
+      {
+        "botId": "{TODO}",
+        "scopes": [
+          "personal",
+          "groupchat",
+          "team"
+        ],
+        "supportsFiles": false,
+        "isNotificationOnly": true
+      }
     ],
     "permissions": [
-        "identity",
-        "messageTeamMembers"
+      "identity",
+      "messageTeamMembers"
     ],
     "validDomains": [
-        "contoso.ngrok.io"
+        "{TODO}"
     ],
     "webApplicationInfo": {
-        "id": "de8849cd-4126-4f74-9c8b-1004b1d3a458",
-        "resource": "api://contoso.ngrok.io/de8849cd-4126-4f74-9c8b-1004b1d3a458"
+      "id": "{TODO}",
+      "resource": "{TODO}"
     }
-}
+  }

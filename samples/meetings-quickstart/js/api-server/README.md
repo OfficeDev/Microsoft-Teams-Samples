@@ -11,7 +11,12 @@ The API server is used to exchange the access token provided by Teams to get a t
 
 ## Update the env files
 
-- In the *api-server* directory, open the *.env* file and update the *CLIENT_ID* and *CLIENT_SECRET* variables with the client ID and secret from your Azure AD app registration. If you requested additional Graph permissions from the default *User.Read*, append them, space separated, to the GRAPH_SCOPES key.
+- In the *api-server* directory, open the *.env* file and update all the fields marked 'TODO':
+  - CLIENT_ID, CLIENT_SECRET = Azure App Registration ID and secret
+  - BotId = Bot Framework bot ID
+  - BotPassword = Bot Framework bot password
+  - REACT_APP_BASE_URL = The URL from which your app will be served
+  - TEAMS_APP_ID = The Teams app ID in your manifest.
 
 ## Build and Run
 

@@ -43,8 +43,8 @@ class TabConfig extends React.Component {
         <div>
           <h1>Meeting App</h1>
           <div>
-            This is where you will add your tab configuration options the user
-            can choose when the tab is added to your team/group chat.            
+            This is where you will add your meeting configuration options the organizer
+            can choose when the app is added to a meeting.            
           </div>
         </div>
       );

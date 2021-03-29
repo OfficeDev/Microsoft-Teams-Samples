@@ -1,6 +1,6 @@
-# Tabs
+# Meeting Apps
 
-Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are scoped to a single user. They can be pinned to the left navigation bar for easy access.
+Meeting apps are Teams-aware webpages embedded in Microsoft Teams. They are scoped to group and teams. Add a meeting to an app from its installation page.
 
 ## Prerequisites
 -  [NodeJS](https://nodejs.org/en/)
@@ -29,7 +29,15 @@ In the root directory, execute:
 `npm start`
 
 ## Deploy to Teams
-Start debugging the project by hitting the `F5` key or click the debug icon in Visual Studio Code and click the `Start Debugging` green arrow button.
+* Update your backend service (api-server folder) first before trying to install the app
+
+- Schedule a meeting.
+- Edit the scheduled meeting.
+- Press the '+' button, then select 'Manage apps'.
+- Select the 'Upload custom app' from the bottom right corner.
+- Choose the app package ( you can download from App Studio or build it yourself in the appPackage folder ).
+- Once you see it in a meeting's list of managed apps, press the '+' again to add it to a meeting.
+- Join the meeting an open the app to see it in action. 
 
 ### NOTE: First time debug step
 On the first time running and debugging your app you need allow the localhost certificate.  After starting debugging when Chrome is launched and you have installed your app it will fail to load.

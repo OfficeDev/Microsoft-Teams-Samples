@@ -8,8 +8,7 @@ import { Avatar, Loader, Button, Label } from '@fluentui/react-northstar';
 import  MediaQuery from 'react-responsive';
 
 /**
- * The 'PersonalTab' component renders the main tab content
- * of your app.
+ * The 'Meeting App' component renders the content of your app.
  */
 class Tab extends React.Component {
   constructor(props){
@@ -125,6 +124,8 @@ class Tab extends React.Component {
     //Check to see if a Graph access token is now in state AND that it didn't exist previously
     if((prevState.graphAccessToken === "") && (this.state.graphAccessToken !== "")){
       this.callGraphFromClient();
+
+      //Check to see if this app is running in the context of a meeting, and get the user's meeting role information.
       if(this.state.context['meetingId']){
           this.getParticipantInfo();
       }
@@ -157,12 +158,14 @@ class Tab extends React.Component {
     })
   }
 
+  // Fetch the user's meeting role information to diplay it in the app
   getParticipantInfo = async () => {
     let ssoToken = this.state.ssoToken;
     let chatId = this.state.context['chatId'];
     let meetingId = this.state.context['meetingId'];
     let userObjectId = this.state.context['userObjectId'];
 
+    //Request must be sent from the BotFramework service, so send it to the api-server to make the Bot Framework REST request
     let serverURL = `${process.env.REACT_APP_BASE_URL}/getParticipantInfo?ssoToken=${ssoToken}&conversationId=${chatId}&aadObjectId=${userObjectId}&meetingId=${meetingId}`;
 
     let response = await fetch(serverURL).catch(this.unhandledFetchError); //This calls getGraphAccessToken route in /api-server/app.js
@@ -177,7 +180,10 @@ class Tab extends React.Component {
 
   }
 
+  // Display an in-meeting dialog (popup)
   displayInMeetingDialog(){
+
+    //In-meeting dialogs are triggered via the BotFramework SDK. Send the requst to the api-server.
     let serverURL = `${process.env.REACT_APP_BASE_URL}/inMeetingDialog?conversationId=${this.state.context.chatId}`;
     fetch(serverURL).catch(this.unhandledFetchError);
   }
