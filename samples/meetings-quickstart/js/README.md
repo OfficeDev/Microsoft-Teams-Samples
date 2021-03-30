@@ -31,7 +31,7 @@ In the root directory, execute:
 ## Deploy to Teams
 * Update your backend service (api-server folder) first before trying to install the app
 
-- Schedule a meeting.
+- Schedule a meeting with at least one other participant.
 - Edit the scheduled meeting.
 - Press the '+' button, then select 'Manage apps'.
 - Select the 'Upload custom app' from the bottom right corner.
