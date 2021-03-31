@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
   "manifestVersion": "1.8",
   "version": "1.0.0",
-  "id": "f0a1c0e8-92a5-4519-a67d-5ffe54293cbf",
+  "id": "<<app id>>",
   "packageName": "com.teams.RSC",
   "developer": {
     "name": "Microsoft",
@@ -25,7 +25,7 @@
   "accentColor": "#5558AF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://b1b7795eb1ec.ngrok.io/configure",
+      "configurationUrl": "https://yourngrok.ngrok.io/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team"
@@ -40,7 +40,7 @@
     "*.ngrok.io"
   ],
   "webApplicationInfo": {
-    "id": "f0a1c0e8-92a5-4519-a67d-5ffe54293cbf",
+    "id": "<<app id>>",
     "resource": "https://RscBasedStoreApp",
     "applicationPermissions": [
       "TeamSettings.Read.Group",

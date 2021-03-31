@@ -5,9 +5,8 @@ var Q = require('q');
 // The auth module object.
 var auth = {};
 
-auth.getAccessToken = function () {
+auth.getAccessToken = function (tenantId) {
     var deferred = Q.defer();
-    
     var requestParams = {
       grant_type: 'client_credentials',
       client_id: process.env.ClientId,  
@@ -15,7 +14,7 @@ auth.getAccessToken = function () {
       scope: 'https://graph.microsoft.com/.default'
     };
   
-    var url = "https://login.microsoftonline.com/"+process.env.tenantId+"/oauth2/v2.0/token";
+    var url = "https://login.microsoftonline.com/"+ tenantId+"/oauth2/v2.0/token";
     request.post({ url: url, form: requestParams }, function (err, response, body) {
       var parsedBody = JSON.parse(body);
   

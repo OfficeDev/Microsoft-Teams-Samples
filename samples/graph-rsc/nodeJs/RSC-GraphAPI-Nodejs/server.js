@@ -10,7 +10,7 @@ require('isomorphic-fetch');
 
 const app = express();
 
-
+app.use(express.static(__dirname + '/Styles'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 app.set('views', __dirname);
@@ -25,14 +25,15 @@ app.use('/',indexRouter);
   });
 
   app.get('/rscdemo', function(req, res) {   
-    auth.getAccessToken().then(async function (token) {
+    var tenantId=req.url.split('=')[1];
+    auth.getAccessToken(tenantId).then(async function (token) {
       console.log("token from js file : "+ token);
      res.render('./views/rscdemo',{token:JSON.stringify(token)});
     });
    
   });
 
-app.listen(3978 ||3000, function () {
-  console.log('Example app listening on port 3978!');
+app.listen(3978 ||3978, function () {
+  console.log('app listening on port 3333!');
 });
 
