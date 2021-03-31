@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "_Layout";
+}
+<h1 id="message"></h1>
+<script type="text/javascript">
+    var message = document.getElementById("message");
+
+    if (window.parent === window.self) {
+        message.innerText = 'Teams client host not found.';
+    } else {
+        if (microsoftTeams) {
+            // Initialize the Microsoft Teams SDK
+            microsoftTeams.initialize(window);
+
+            // Get the current Teams context for the tab
+            microsoftTeams.getContext((context) => {
+                message.innerText = 'Congratulations ' + context.upn + '! This is the tab you made :-)';
+            });
+        }
+    }
+</script>
+
+
+
