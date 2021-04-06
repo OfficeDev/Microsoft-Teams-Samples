@@ -22,7 +22,6 @@
 |7|SPFx Tab | Sample app showing Microsoft Teams tabs using SharePoint Framework                                    |   | [View][group-channel-tab#ts#spfx] |
 |8|Tab SSO               | Microsoft Teams sample app for tabs Azure AD SSO                                      | | [View][tab-sso#ts] ,[Teams Toolkit](https://docs.microsoft.com/microsoftteams/platform/toolkit/visual-studio-code-tab-sso)
 |9|Config Tab Authentication               | Microsoft Teams sample app for config tabs Azure AD authentication | [View]()                       | | 
-=======
 
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
@@ -81,9 +80,9 @@
 
 ## [Graph APIs](https://docs.microsoft.com/graph/teams-concept-overview)
 
-|    | Sample Name        | Description                                                                      | C#    | TypeScript   |
+|    | Sample Name        | Description                                                                      | C#    | JavaScript   |
 |:--:|:-------------------|:-------------------------------------------------------------------------------------------------|:--------|:-------------|
-|1|Resource Specific Consent (RSC) | This sample illustrates how you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs. .                              |[View][graph#rsc#cs]       |
+|1|Resource Specific Consent (RSC) | This sample illustrates how you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs. .                              |[View][graph#rsc#cs]       | [View][graph#rsc#js]
 |2|Graph API Channel Life Cycle | This sample illustrates how you can use [Graph API Channel Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-beta) to call Graph APIs. .                              |[View][graph#lifecycle#cs]       |
 
 
@@ -152,6 +151,7 @@
 [meetings-content-bubble#cs]:samples/meetings-content-bubble/csharp
 [meetings-content-bubble#js]:samples/meetings-content-bubble/nodejs
 [graph#rsc#cs]:samples/graph-rsc/csharp
+[graph#rsc#js]:samples/graph-rsc/nodejs
 [graph#lifecycle#cs]:samples/graph-channel-lifecycle/csharp
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 
