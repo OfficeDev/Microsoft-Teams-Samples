@@ -151,7 +151,7 @@
 [meetings-content-bubble#cs]:samples/meetings-content-bubble/csharp
 [meetings-content-bubble#js]:samples/meetings-content-bubble/nodejs
 [graph#rsc#cs]:samples/graph-rsc/csharp
-[graph#rsc#js]:samples/graph-rsc/nodejs
+[graph#rsc#js]:samples/graph-rsc/nodeJs
 [graph#lifecycle#cs]:samples/graph-channel-lifecycle/csharp
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 
