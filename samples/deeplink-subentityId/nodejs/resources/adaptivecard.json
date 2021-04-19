@@ -1,0 +1,32 @@
+{
+    "type": "AdaptiveCard",
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.0",
+    "body": [
+      {
+        "type": "TextBlock",
+        "text": "Hey Olo Brockhouse! Please click on below buttons to navigate to a tab!",
+        "wrap": true
+      }
+      
+    ],
+    "actions": [
+        {
+        "type": "Action.OpenUrl",
+        "title": "topic1",
+        "url":"${Task1DeepLink}"
+      },
+
+      {
+        "type": "Action.OpenUrl",
+        "title": "topic2",
+        "url":"${Task2DeepLink}"
+      },
+
+      {
+       "type": "Action.OpenUrl",
+        "title": "topic3",
+        "url":"${TaskDeepLink}"
+      }
+    ]
+  }

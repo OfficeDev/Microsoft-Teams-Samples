@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.5",
+  "version": "1.0",
+  "id": "<<Your-Microsoft-App-Id>>",
+  "packageName": "com.microsoft.teams.samples.searchExtension",
+  "developer": {
+    "name": "Microsoft Corp",
+    "websiteUrl": "https://example.azurewebsites.net",
+    "privacyUrl": "https://example.azurewebsites.net/privacy",
+    "termsOfUseUrl": "https://example.azurewebsites.net/termsofuse"
+  },
+  "name": {
+    "short": "Deep Link Bot-node",
+    "full": "Bot for Deep linking to tab"
+  },
+  "description": {
+    "short": "DeepLinkBot for Microsoft Teams",
+    "full": "This sample DeepLink app which demos to navigate to required item in tab."
+  },
+  "icons": {
+    "outline": "icon-outline.png",
+    "color": "icon-color.png"
+  },
+  "accentColor": "#abcdef",
+
+   "staticTabs": [
+    {
+      "contentUrl": "https://yourngrok.ngrok.io/DeepLink.html",
+      "websiteUrl": "https://yourngrok.ngrok.io",
+      "entityId": "com.contoso.DeeplLinkBot.help",
+      "name": "Deep Link Tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "<<Your-Microsoft-App-Id>>",
+      "scopes": [
+        "personal",
+        "team"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.ngrok.io"
+  ]
+}
