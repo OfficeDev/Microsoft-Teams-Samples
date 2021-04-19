@@ -1,0 +1,29 @@
+﻿
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+<script src="~/library/MicrosoftTeams.min.js"></script>
+<script src="~/library/MicrosoftTeams.min1.js"></script>
+<script src="~/library/adal.min.js"></script>
+<script type="text/javascript">
+    microsoftTeams.initialize();
+
+        // ADAL.js configuration
+        let config = {
+            clientId: '@ViewBag.AuthEndClientId',
+            redirectUri: window.location.origin + "/SilentAuthEnd",       // This should be in the list of redirect uris for the AAD app
+            cacheLocation: "localStorage",
+            navigateToLoginRequestUrl: false,
+        };
+        let authContext = new AuthenticationContext(config);
+
+        if (authContext.isCallback(window.location.hash)) {
+            authContext.handleWindowCallback(window.location.hash);
+            // Only call notifySuccess or notifyFailure if this page is in the authentication popup
+            if (window.opener) {
+                if (authContext.getCachedUser()) {
+                    microsoftTeams.authentication.notifySuccess();
+                } else {
+                    microsoftTeams.authentication.notifyFailure(authContext.getLoginError());
+                }
+            }
+        }
+</script>

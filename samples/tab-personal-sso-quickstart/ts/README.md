@@ -7,6 +7,17 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
 
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
+## ngrok
+
+Teams needs to access your tab from a publically accessible URL. If you are running your app in localhost, you will need to use a tunneling service like ngrok.
+
+-  Run ngrok and point it to localhost:
+-  `ngrok http https://localhost:3000`
+
+Note: It may be worth purchasing a basic subscription to ngrok so you can get a fixed subdomain ( see the --subdomain ngrok parameter)
+
+**IMPORTANT**: If you don't have a paid subscription to ngrok, you will need to update your Azure AD app registration application ID URI and redirect URL ( See steps 5 and 13 [here](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso#steps) ) everytime you restart ngrok.
+
 ## Build and Run
 
 In the project directory, execute:
@@ -25,6 +36,7 @@ On the first time running and debugging your app you need allow the localhost ce
 - Navigate to `https://localhost:3000/tab`
 - Click the `Advanced` button
 - Select the `Continue to localhost`
+- You may also need to enable popups in the browser to see the auth consent page.
 
 ### NOTE: Debugging
 Ensure you have the Debugger for Chrome/Edge extension installed for Visual Studio Code from the marketplace.
