@@ -94,11 +94,11 @@ namespace TabActivityFeed.Controllers
                     .Build();
                 UsernamePasswordProvider authenticationProvider = new UsernamePasswordProvider(publicClientApplication, scopes);
                 GraphServiceClient graphClientChat = new GraphServiceClient(authenticationProvider);
-                string password = _configuration["Password"];
+                string password = "<<Your Password>>";
                 System.Security.SecureString passWordSecureString = new System.Security.SecureString();
                 foreach (char c in password.ToCharArray()) passWordSecureString.AppendChar(c);
                 User me = await graphClientChat.Me.Request()
-                             .WithUsernamePassword(_configuration["UserName"], passWordSecureString)
+                             .WithUsernamePassword("<<Your Username>>", passWordSecureString)
                              .GetAsync();
 
                 var chatMessage = new ChatMessage
@@ -217,11 +217,11 @@ namespace TabActivityFeed.Controllers
                     .Build();
                 UsernamePasswordProvider authenticationProvider = new UsernamePasswordProvider(publicClientApplication, scopes);
                 GraphServiceClient graphClientChat = new GraphServiceClient(authenticationProvider);
-                string password = _configuration["Password"];
+                string password = "<<Your Password>>";
                 System.Security.SecureString passWordSecureString = new System.Security.SecureString();
                 foreach (char c in password.ToCharArray()) passWordSecureString.AppendChar(c);
                 User me = await graphClientChat.Me.Request()
-                             .WithUsernamePassword(_configuration["UserName"], passWordSecureString)
+                             .WithUsernamePassword("<<Your Username>>", passWordSecureString)
                              .GetAsync();
 
                 var chatMessage = new ChatMessage
@@ -284,11 +284,11 @@ namespace TabActivityFeed.Controllers
                     .Build();
                 UsernamePasswordProvider authenticationProvider = new UsernamePasswordProvider(publicClientApplication, scopes);
                 GraphServiceClient graphClientChat = new GraphServiceClient(authenticationProvider);
-                string password = _configuration["Password"];
+                string password ="<<Your Password>>";
                 System.Security.SecureString passWordSecureString = new System.Security.SecureString();
                 foreach (char c in password.ToCharArray()) passWordSecureString.AppendChar(c);
                 User me = await graphClientChat.Me.Request()
-                             .WithUsernamePassword(_configuration["UserName"], passWordSecureString)
+                             .WithUsernamePassword("<<Your Username>>", passWordSecureString)
                              .GetAsync();
                 var Card = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
                 {
@@ -421,11 +421,11 @@ namespace TabActivityFeed.Controllers
                     .Build();
                 UsernamePasswordProvider authenticationProvider = new UsernamePasswordProvider(publicClientApplication, scopes);
                 GraphServiceClient graphClientChat = new GraphServiceClient(authenticationProvider);
-                string password = _configuration["Password"];
+                string password = "<<Your Password>>"];
                 System.Security.SecureString passWordSecureString = new System.Security.SecureString();
                 foreach (char c in password.ToCharArray()) passWordSecureString.AppendChar(c);
                 User me = await graphClientChat.Me.Request()
-                             .WithUsernamePassword(_configuration["UserName"], passWordSecureString)
+                             .WithUsernamePassword("<<Your Username>>", passWordSecureString)
                              .GetAsync();
 
                 var chatMessage = new ChatMessage
@@ -488,11 +488,11 @@ namespace TabActivityFeed.Controllers
                     .Build();
                 UsernamePasswordProvider authenticationProvider = new UsernamePasswordProvider(publicClientApplication, scopes);
                 GraphServiceClient graphClientChat = new GraphServiceClient(authenticationProvider);
-                string password = _configuration["Password"];
+                string password = "<<Your Password>>";
                 System.Security.SecureString passWordSecureString = new System.Security.SecureString();
                 foreach (char c in password.ToCharArray()) passWordSecureString.AppendChar(c);
                 User me = await graphClientChat.Me.Request()
-                             .WithUsernamePassword(_configuration["UserName"], passWordSecureString)
+                             .WithUsernamePassword("<<Your Username>>", passWordSecureString)
                              .GetAsync();
                 var Card = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
                 {
@@ -618,11 +618,11 @@ namespace TabActivityFeed.Controllers
                     .Build();
                 UsernamePasswordProvider authenticationProvider = new UsernamePasswordProvider(publicClientApplication, scopes);
                 GraphServiceClient graphClientChat = new GraphServiceClient(authenticationProvider);
-                string password = _configuration["Password"];
+                string password = "<<Your Password>>";
                 System.Security.SecureString passWordSecureString = new System.Security.SecureString();
                 foreach (char c in password.ToCharArray()) passWordSecureString.AppendChar(c);
                 User me = await graphClientChat.Me.Request()
-                             .WithUsernamePassword(_configuration["UserName"], passWordSecureString)
+                             .WithUsernamePassword("<<Your Username>>", passWordSecureString)
                              .GetAsync();
                 var Card = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
                 {

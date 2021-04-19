@@ -72,9 +72,5 @@
         "templateText": "Here is the {reservationId} with {currentSlot}"
       }
     ]
-  },
-  "webApplicationInfo": {
-    "id": "<<Your Microsoft App Id>>",
-    "resource": "<<Your Resource URL>>"
   }
 }
