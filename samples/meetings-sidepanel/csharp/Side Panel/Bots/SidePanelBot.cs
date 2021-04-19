@@ -86,5 +86,11 @@ namespace Microsoft.BotBuilderSamples.Bots
                 }
             }
         }
+
+        protected override async Task OnConversationUpdateActivityAsync(ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
+        {
+            HomeController.serviceUrl = turnContext.Activity.ServiceUrl;
+            await base.OnConversationUpdateActivityAsync(turnContext, cancellationToken);
+        }
     }
 }

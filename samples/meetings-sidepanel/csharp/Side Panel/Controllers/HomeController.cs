@@ -16,6 +16,7 @@ namespace SidePanel.Controllers
         public static string conversationId;
         public static string meetingOrganizerId;
         public static string userName;
+        public static string serviceUrl;
         public static List<TaskInfo> taskInfoData = new List<TaskInfo>();
         private readonly IConfiguration _configuration;
 
@@ -65,7 +66,7 @@ namespace SidePanel.Controllers
 
         //Add New Agenda Point to the Agenda List
         [Route("AddNewAgendaPoint")]
-        public List<TaskInfo> AddNewAgendaPoint(TaskInfo? taskInfo)
+        public List<TaskInfo> AddNewAgendaPoint(TaskInfo taskInfo)
         {
             var tData = new TaskInfo
             {
@@ -81,7 +82,6 @@ namespace SidePanel.Controllers
         {
             string appId = _configuration["MicrosoftAppId"];
             string appSecret = _configuration["MicrosoftAppPassword"];
-            var serviceUrl = _configuration["ServiceUrl"];
             using var connector = new ConnectorClient(new Uri(serviceUrl), appId, appSecret);
             MicrosoftAppCredentials.TrustServiceUrl(serviceUrl, DateTime.MaxValue);
             var replyActivity = new Activity();
@@ -119,12 +119,12 @@ namespace SidePanel.Controllers
         [Route("GetRole")]
         public bool GetRole(string userId)
         {
-            if(userId == meetingOrganizerId)
+            if (userId == meetingOrganizerId)
             {
                 return true;
             }
             else
-            return false;
+                return false;
         }
     }
 }

@@ -37,7 +37,7 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
 3. Run ngrok - point to port 3978
    ```ngrok http -host-header=rewrite 3978```
 4. Create a new Bot by following steps mentioned in [Build a bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots?view=msteams-client-js-latest#build--a-bot-for-teams-with-the-microsoft-bot-framework) documentation.
-5. Go to appsettings.json and add ```MicrosoftAppId```, ```MicrosoftAppPassword```, ```BaseUrl``` and ```ServiceUrl``` information.
+5. Go to appsettings.json and add ```MicrosoftAppId```, ```MicrosoftAppPassword``` and ```BaseUrl``` information.
 6. Update the manifest.json file with ```Microsoft-App-ID``` and ```BaseUrl``` value.
 7. Run your app, either from Visual Studio with ```F5``` or using ```dotnet run``` in the appropriate folder.
 8. [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
