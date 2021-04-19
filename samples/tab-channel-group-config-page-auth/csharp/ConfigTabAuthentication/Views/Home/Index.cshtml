@@ -1,0 +1,25 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <table>
+        <tr>
+            <td id="greetingMsgSetup">
+                
+            </td>
+        </tr>
+    </table>
+</div>
+<script type="text/javascript">
+
+    microsoftTeams.initialize();
+    window.onload = function () {
+
+        if (localStorage.getItem("displayName") !== null) {
+            document.getElementById("greetingMsgSetup").innerHTML = `Welcome ${localStorage.getItem("displayName")}...`;
+        }
+        else {
+            document.getElementById("greetingMsgSetup").innerHTML = `Welcome...`
+        }
+    };
+</script>

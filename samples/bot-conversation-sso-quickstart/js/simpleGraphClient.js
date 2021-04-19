@@ -33,6 +33,29 @@ class SimpleGraphClient {
                 return res;
             });
     }
+
+    // Gets the user's photo
+    async GetPhotoAsync(token) {
+        let graphPhotoEndpoint = 'https://graph.microsoft.com/v1.0/me/photos/240x240/$value';
+        let graphRequestParams = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'image/png',
+                "authorization": "bearer " + token
+            }            
+        }
+
+        let response = await fetch(graphPhotoEndpoint, graphRequestParams).catch(this.unhandledFetchError);
+        if (!response.ok) {
+            console.error("ERROR: ", response);
+        }
+
+        let imageBuffer = await response.arrayBuffer().catch(this.unhandledFetchError); //Get image data as raw binary data
+
+        //Convert binary data to an image URL and set the url in state
+        const imageUri = 'data:image/png;base64,' + Buffer.from(imageBuffer).toString('base64');
+        return imageUri;
+    }
 }
 
 exports.SimpleGraphClient = SimpleGraphClient;

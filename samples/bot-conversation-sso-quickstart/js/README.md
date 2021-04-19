@@ -22,12 +22,6 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
 
-### 0. Clone the repository
-
-```bash
-git clone https://github.com/Microsoft/botbuilder-samples.git
-```
-
 ### 1. Create and configure AAD app
 
 #### 1.1 Create AAD app for SSO
@@ -38,18 +32,19 @@ This step will create an AAD app, it will be reused wherever it needs AAD throug
 
 - Click "New Registration" on the upper left corner
 
-- Fill out name and select third option for supported account type and click "Register":
+- Fill out name and select third option for supported account type 
+- Set Redirect Uri to "https://token.botframework.com/.auth/web/redirect" and click "Register":
 
-    ![App Registration Organization](sso_media/AppRegistration.png)
+    ![App Registration Organization](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AppRegistration.png)
 
 - Navigate to the AAD app you just created, _copy and paste the Application ID(will referred as **AppId** in this document) somewhere safe_. You'll need it in a future step:
-    ![Save Application ID](sso_media/AppId.png)
+    ![Save Application ID](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AppId.png)
 
 #### 1.2 Create Client Secret
 
 - Navigate to the "Certificates & secrets" blade and add a client secret by clicking "New Client Secret"
 
-    ![New Secret](sso_media/ClientSecret.png)
+    ![New Secret](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/ClientSecret.png)
 </br>
 
 - _Copy and paste the secret somewhere safe_. You'll need it in a future step
@@ -59,7 +54,7 @@ This step will create an AAD app, it will be reused wherever it needs AAD throug
 - Click "_Expose an API_" in the left rail
 
     - Update your application ID URL to include your bot id - api://botid-<AppId>, where <AppId> is the id of the bot that will be making the SSO request and found in your Teams Application Manifest, which is the same you create and saved in step1.1:
-    ![Application ID URI](sso_media/AppIdUri.png)
+    ![Application ID URI](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AppIdUri.png)
 
     - Click "_Add a scope_"
 
@@ -81,7 +76,7 @@ This step will create an AAD app, it will be reused wherever it needs AAD throug
 
         - Select Add scope (Note: The domain part of the Scope name displayed just below the text field should automatically match the Application ID URI set in the previous step, with /access_as_user appended to the end)
 
-        ![Add Scope](sso_media/CreateScope.png)
+        ![Add Scope](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/CreateScope.png)
 
 #### 1.4. Authorize client applications
 
@@ -91,18 +86,26 @@ Add the following Ids as authorized clients for your application
 
 - 5e3ce6c0-2b1f-4285-8d4b-75ee78787346 (Teams web application)
 
-    ![Add Client Application](sso_media/AddClient.png)
+    ![Add Client Application](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AddClient.png)
 
 #### 1.5. Add any necessary API permissions for downstream calls
 
 - Navigate to "API permissions" blade on the left hand side
 
-- Add any user delegated permissions that your app will need to downstream APIs, (like Microsoft Graph)
+- Add any user delegated permissions that your app will need to downstream APIs. This quick start only requires User.Read.
 
-    ![Add Permissions](sso_media/image013.png)
+    ![Add Permissions](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/image013.png)
+
+#### 1.6. Enable implicit grant
+
+- Navigate to "Authentication"
+
+- Check the *Access tokens* and *ID tokens* boxes..
+
 
 
 ### 2. Setup bot in Azure Bot Service
+
 #### 2.1. Run ngrok - point to port 3978
 
 ```bash
@@ -114,14 +117,12 @@ ngrok http -host-header=rewrite 3978
 Create [Bot Channels registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
 - For the "_Messaging endpoint_", use the current `https` URL you were given by running ngrok. Append with the path `/api/messages`:
 - For "Microsoft App ID and password", click "Create New", fill in the AppId and client secret you created in step1.1 and step 1.2:
-    ![Create Bot Channels Registration](sso_media/CreateBot.png)
+    ![Create Bot Channels Registration](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/CreateBot.png)
 
-    ![Create Bot Channels Registration2](sso_media/CreateBot2.png)
+    ![Create Bot Channels Registration2](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/CreateBot2.png)
 
-
+- After you select *Create*, it will take a few moments for your bot service to be provisioned. Once you see a notification indicating the validation process is complete, navigate back to *Home > Bot Services* to find your bot. You may have to refresh the page to see your bot listed.
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
-
 
 ### 3. Setup Bot Service Connection (TokenStore)
 
@@ -130,7 +131,7 @@ Create [Bot Channels registration resource](https://docs.microsoft.com/en-us/azu
     
 - Switch to the "Settings" blade and click "Add Setting" under the OAuth Connection Settings section
 
-    ![Add OAuth Settings](sso_media/AddOauth.png)
+    ![Add OAuth Settings](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AddOauth.png)
 
 - Fill out the Connection Setting form
 
@@ -148,27 +149,31 @@ Create [Bot Channels registration resource](https://docs.microsoft.com/en-us/azu
 
     - Click "Save"
 
-    ![SSO Connection Settings](sso_media/image017.png)
+    ![SSO Connection Settings](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/image017.png)
 
 ### 4. Configure bot sample
 
    Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the MicrosoftAppId is the AppId created in step 1.1, the MicrosoftAppPassword is referred to as the "client secret" in step1.2 and you can always create a new client secret anytime.)
 
-### 5. Run your bot
+### 5. Run your bot sample
 Under the root of this sample folder, build and run by commands:
 - `npm install`
 - `npm start`
 
-## Interacting with the bot in Teams
+### 6. Configure and run the Teams app
+- **Using App Studio**
+    - Open your app in App Studio's manifest editor.
+    - Open the *Bots* page under *Capabilities*.
+    - Choose *Setup*, then choose the existing bot option. Enter your AAD app registration ID from step 1.1. Select any of the scopes you wish to have the bot be installed.
+    - Open *Domains and permissions* from under *Finish*. Enter the same ID from the step above in *AAD App ID*, then and append it to "api://botid-" and enter the URI into *Single-Sign-On*.
+    - Open *Test and distribute*, then select *Install*.
 
-Navigate to your Bot Channels Registration created in step2.2, click "Microsoft Teams" channel, then you can interact with the bot in Teams web or client:
-![Teams Channel](sso_media/TeamsChannel.png)
+- **Manually update the manifest.json**
+    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{TODO: MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
+    - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
 You can interact with this bot by sending it a message. The bot will respond by asking for your consent, by this consent the Bot will exchange an SSO token, then making a call to the Graph API on your behalf and returning the results. It will keep you loggined unless you send a message "logout". 
-
-## Deploy the bot to Azure
-
-To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 
 ## Further reading
 
