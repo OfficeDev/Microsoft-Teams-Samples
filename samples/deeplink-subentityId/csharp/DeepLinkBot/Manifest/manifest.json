@@ -1,0 +1,79 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.9",
+  "version": "1.0.0",
+  "id": "MICROSOFT-APP-ID",
+  "packageName": "com.microsoft.teams.sample.deeplinkapp",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://dev.botframework.com",
+    "privacyUrl": "https://privacy.microsoft.com",
+    "termsOfUseUrl": "https://www.microsoft.com/en-us/legal/intellectualproperty/copyright/default.aspx"
+  },
+  "name": {
+    "short": "DeepLink Bot"
+  },
+  "description": {
+    "short": "DeepLink Bot",
+    "full": "DeepLink Bot for channel and static tabs"
+  },
+  "icons": {
+    "outline": "icon-outline.png",
+    "color": "icon-color.png"
+  },
+  "accentColor": "#ffffff",
+  "configurableTabs": [
+    {
+      "configurationUrl": "BASE-URL/Configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "groupchat",
+        "team"
+      ]
+    }
+  ],
+
+  "staticTabs": [
+    {
+      "contentUrl": "BASE-URL/DeepLink",
+      "websiteUrl": "BASE-URL",
+      "entityId": "com.contoso.DeeplLinkBot.help",
+      "name": "Deep Link Tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "9be6f25ac8c7.ngrok.io"
+  ],
+  "bots": [
+    {
+      "botId": "MICROSOFT-APP-ID",
+      "scopes": [
+        "groupchat"
+      ],
+      "needsChannelSelector": false,
+      "isNotificationOnly": false,
+      "supportsFiles": false,
+      "commandLists": [
+        {
+          "scopes": [
+            "groupchat",
+            "team"
+          ],
+          "commands": [
+            {
+              "title": "reset",
+              "description": "reset the settings for the bot in the service"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+﻿<script src='https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js'></script>
+
+<h2>Click on save to configure the tab.</h2>
+<script>
+    microsoftTeams.initialize();
+  
+    microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
+            microsoftTeams.settings.setSettings({
+                contentUrl: `${window.location.origin}/DeepLinkChannel`,
+                entityId: "DeepLinkApp",
+                suggestedDisplayName: "DeepLink App",
+                websiteUrl: `${window.location.origin}/DeepLinkChannel`,
+            });
+            saveEvent.notifySuccess();
+        });
+ 
+    microsoftTeams.settings.setValidityState(true);
+ 
+</script>
