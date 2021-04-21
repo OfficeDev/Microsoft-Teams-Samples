@@ -51,7 +51,7 @@ You can find the app source code in `./src`:
 - `.env`: Contains the app configurations. When you create the app package, the manifest is dynamically populated with values from this file.
 
   > [!NOTE]
-  > The `.env` file is excluded from source control. If you're deploying to Azure, make sure that you include the `.env` configurations as application settings in your Azure web app (except the `PORT` variable, which is used for local testing and debugging).
+  > The `.env` file is excluded from source control, so please create your own based on the .env.sample file. Be sure to insert your ngrok or other https-enabled host name in the HOSTNAME value. If you're deploying to Azure, make sure that you include the `.env` configurations as application settings in your Azure web app (except the `PORT` variable, which is used for local testing and debugging).
 
 ## Run the app
 

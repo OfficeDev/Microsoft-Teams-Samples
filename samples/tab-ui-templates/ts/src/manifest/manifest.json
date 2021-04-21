@@ -7,8 +7,8 @@
   "developer": {
     "name": "Alexander Katrukhin",
     "websiteUrl": "https://{{HOSTNAME}}",
-    "privacyUrl": "https://{{HOSTNAME}}/privacy.html",
-    "termsOfUseUrl": "https://{{HOSTNAME}}/tou.html"
+    "privacyUrl": "https://{{HOSTNAME}}/#/privacy.html",
+    "termsOfUseUrl": "https://{{HOSTNAME}}/#/tou.html"
   },
   "name": {
     "short": "Teams Sample App",
@@ -28,25 +28,25 @@
     {
       "entityId": "sample.app.welcome",
       "name": "Welcome",
-      "contentUrl": "https://{{HOSTNAME}}/welcome",
+      "contentUrl": "https://{{HOSTNAME}}/#/welcome",
       "scopes": ["personal"]
     },
     {
       "entityId": "sample.app.dashboard",
       "name": "Dashboard",
-      "contentUrl": "https://{{HOSTNAME}}/dashboard",
+      "contentUrl": "https://{{HOSTNAME}}/#/dashboard",
       "scopes": ["personal"]
     },
     {
       "entityId": "sample.app.list",
       "name": "List",
-      "contentUrl": "https://{{HOSTNAME}}/list",
+      "contentUrl": "https://{{HOSTNAME}}/#/list",
       "scopes": ["personal"]
     },
     {
       "entityId": "sample.app.boards",
       "name": "Task boards",
-      "contentUrl": "https://{{HOSTNAME}}/board",
+      "contentUrl": "https://{{HOSTNAME}}/#/board",
       "scopes": ["personal"]
     }
   ],
