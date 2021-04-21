@@ -10,21 +10,22 @@
 
     <script>
         microsoftTeams.initialize();
+        
     </script>
     
 <table style="margin-left:50px;">
-  
+        
     @foreach (var item in Model)
-    {
+    {       
         <tr style="font-family:'Segoe UI';font-size:20px">
-
-            <td>
-                @Html.ActionLink("Topic " + item.ID, "Detail", new { id = item.ID })
-            </td>         
+             <td>                             
+                 @Html.ActionLink(item.linkTitle, "Detail", new { id = item.ID })   
+            </td>
         </tr>
         <tr></tr>
         <tr></tr>
     }
-</table>   
+</table>
+    
 </body>
 </html>

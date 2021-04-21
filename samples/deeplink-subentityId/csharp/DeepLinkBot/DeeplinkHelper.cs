@@ -6,7 +6,6 @@ namespace Microsoft.BotBuilderSamples.Bots
 {
     public class DeeplinkHelper
     {
-              
         static Dictionary<string, string> task1Values = new Dictionary<string, string>
             {
                 {"subEntityId","topic1" }
@@ -14,9 +13,9 @@ namespace Microsoft.BotBuilderSamples.Bots
         static string jsoncontext1 = JsonConvert.SerializeObject(task1Values);
         public static string task1Context = HttpUtility.UrlEncode(jsoncontext1);
 
-        public static string Task1Deeplink { get; set; } =
+        public static string Task1Deeplink { get; set; } = 
 
-          $"https://teams.microsoft.com/l/entity/YOUR-MICROSOFT-APPID/ENTITY-ID?context=" + task1Context;
+          $"https://teams.microsoft.com/l/entity/MICROSOFT-APP-ID/com.contoso.DeeplLinkBot.help?context=" + task1Context;
 
 
         static Dictionary<string, string> task2Values = new Dictionary<string, string>
@@ -28,7 +27,7 @@ namespace Microsoft.BotBuilderSamples.Bots
         public static string task2Context = HttpUtility.UrlEncode(jsoncontext2);
 
         public static string Task2Deeplink { get; set; } =
-          $"https://teams.microsoft.com/l/entity/YOUR-MICROSOFT-APPID/ENTITY-ID?context=" + task2Context;
+          $"https://teams.microsoft.com/l/entity/MICROSOFT-APP-ID/com.contoso.DeeplLinkBot.help?context=" + task2Context;
 
 
         static Dictionary<string, string> task3Values = new Dictionary<string, string>
@@ -38,7 +37,7 @@ namespace Microsoft.BotBuilderSamples.Bots
         static string jsoncontext3 = JsonConvert.SerializeObject(task3Values);
         public static string task3Context = HttpUtility.UrlEncode(jsoncontext3);
         public static string Task3Deeplink { get; set; } =
-         $"https://teams.microsoft.com/l/entity/YOUR-MICROSOFT-APPID/ENTITY-ID?context=" + task3Context;
+         $"https://teams.microsoft.com/l/entity/MICROSOFT-APP-ID/com.contoso.DeeplLinkBot.help?context=" + task3Context;
 
     }
 }

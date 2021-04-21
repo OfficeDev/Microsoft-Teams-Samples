@@ -1,55 +1,79 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.3/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.3",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.9",
   "version": "1.0.0",
-  "id": "YOUR-MICROSOFT-APP-ID",
-  "packageName": "com.microsoft.deeplinkbot",
+  "id": "MICROSOFT-APP-ID",
+  "packageName": "com.microsoft.teams.sample.deeplinkapp",
   "developer": {
     "name": "Microsoft",
-    "websiteUrl": "https://www.microsoft.com",
-    "privacyUrl": "https://www.microsoft.com/privacy",
-    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+    "websiteUrl": "https://dev.botframework.com",
+    "privacyUrl": "https://privacy.microsoft.com",
+    "termsOfUseUrl": "https://www.microsoft.com/en-us/legal/intellectualproperty/copyright/default.aspx"
   },
   "name": {
-    "short": "Deep Link Bot",
-    "full": "Bot for Deep linking to tab"
+    "short": "DeepLink Bot"
   },
   "description": {
-    "short": "DeepLinkBot for Microsoft Teams",
-    "full": "This sample DeepLink app which demos to navigate to required item in tab."
+    "short": "DeepLink Bot",
+    "full": "DeepLink Bot for channel and static tabs"
   },
   "icons": {
-    "outline": "outline.png",
-    "color": "color.png"
+    "outline": "icon-outline.png",
+    "color": "icon-color.png"
   },
-  "accentColor": "#60A18E",
-
-  "staticTabs": [
+  "accentColor": "#ffffff",
+  "configurableTabs": [
     {
-      "contentUrl": "YOUR-WEB-URL",
-      "websiteUrl": "YOUR-BASE-URL",
-      "entityId": "ENTITY-ID",
-      "name": "TAB NAME",
+      "configurationUrl": "BASE-URL/Configure",
+      "canUpdateConfiguration": true,
       "scopes": [
-        "personal"
+        "groupchat",
+        "team"
       ]
     }
   ],
-  "bots": [
-    {
-      "botId": "YOUR-MICROSOFT-APP-ID",
-      "needsChannelSelector": false,
-      "isNotificationOnly": false,
-      "scopes": [
-        "personal",
-        "team"
-      ]
 
+  "staticTabs": [
+    {
+      "contentUrl": "BASE-URL/DeepLink",
+      "websiteUrl": "BASE-URL",
+      "entityId": "com.contoso.DeeplLinkBot.help",
+      "name": "Deep Link Tab",
+      "scopes": [
+        "personal"
+      ]
     }
   ],
   "permissions": [
     "identity",
     "messageTeamMembers"
   ],
-  "validDomains": [ "" ]
+  "validDomains": [
+    "9be6f25ac8c7.ngrok.io"
+  ],
+  "bots": [
+    {
+      "botId": "MICROSOFT-APP-ID",
+      "scopes": [
+        "groupchat"
+      ],
+      "needsChannelSelector": false,
+      "isNotificationOnly": false,
+      "supportsFiles": false,
+      "commandLists": [
+        {
+          "scopes": [
+            "groupchat",
+            "team"
+          ],
+          "commands": [
+            {
+              "title": "reset",
+              "description": "reset the settings for the bot in the service"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

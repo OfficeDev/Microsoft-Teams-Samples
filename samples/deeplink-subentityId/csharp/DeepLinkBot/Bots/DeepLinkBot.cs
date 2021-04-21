@@ -8,16 +8,26 @@ using System.Threading.Tasks;
 using AdaptiveCards;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
+using Microsoft.BotBuilderSamples.Controllers;
 
 namespace Microsoft.BotBuilderSamples.Bots
 {
     public class DeepLinkBot : ActivityHandler
     {
+        public static string channelID = "";
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
-        {
-            var attachment = AdaptiveDeepLinkCard(turnContext.Activity.From.Name);
-
-            await turnContext.SendActivityAsync(MessageFactory.Attachment(attachment), cancellationToken);
+        {            
+            if (turnContext.Activity.Conversation.ConversationType=="channel")
+            {
+                 channelID = turnContext.Activity.Conversation.Id.Split(';')[0];
+                var attachment = AdaptiveDeepLinkCardChannel(turnContext.Activity.From.Name);
+                await turnContext.SendActivityAsync(MessageFactory.Attachment(attachment), cancellationToken);
+            }
+            else
+            {
+                var attachment = AdaptiveDeepLinkCard(turnContext.Activity.From.Name);
+                await turnContext.SendActivityAsync(MessageFactory.Attachment(attachment), cancellationToken);
+            }           
         }
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
@@ -58,12 +68,12 @@ namespace Microsoft.BotBuilderSamples.Bots
                                          Width=AdaptiveColumnWidth.Auto,
                                          Items=new List<AdaptiveElement>()
                                          {
-                                             new AdaptiveTextBlock(){Text="Topic1",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
+                                             new AdaptiveTextBlock(){Text="Bots in Teams",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
                                          },
                                            SelectAction = new AdaptiveOpenUrlAction()
                                          {
                                              Url=new Uri(DeeplinkHelper.Task1Deeplink),
-                                             Title = "Topic1"
+                                             Title = "Bots in Teams"
                                          }
                                     }
                                 }
@@ -77,12 +87,12 @@ namespace Microsoft.BotBuilderSamples.Bots
                                          Width=AdaptiveColumnWidth.Auto,
                                          Items=new List<AdaptiveElement>()
                                          {
-                                             new AdaptiveTextBlock(){Text="Topic2",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
+                                             new AdaptiveTextBlock(){Text="Bot Frawework SDK",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
                                          },
                                            SelectAction = new AdaptiveOpenUrlAction()
                                          {
                                              Url=new Uri(DeeplinkHelper.Task2Deeplink),
-                                             Title = "Topic2"
+                                             Title = "Bot Frawework SDK"
                                          }
                                     }
                                 }
@@ -96,12 +106,12 @@ namespace Microsoft.BotBuilderSamples.Bots
                                          Width=AdaptiveColumnWidth.Auto,
                                          Items=new List<AdaptiveElement>()
                                          {
-                                             new AdaptiveTextBlock(){Text="Topic3",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
+                                             new AdaptiveTextBlock(){Text="Teams Apps",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
                                          },
                                            SelectAction = new AdaptiveOpenUrlAction()
                                          {
                                              Url=new Uri(DeeplinkHelper.Task3Deeplink),
-                                             Title = "Topic3"
+                                             Title = "Teams Apps"
                                          }
                                     }
                                 }
@@ -118,5 +128,94 @@ namespace Microsoft.BotBuilderSamples.Bots
             };
             return acard;
         }
+
+
+        public static Attachment AdaptiveDeepLinkCardChannel(string userName)
+        {
+            var DeepLinkCard = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
+            {
+                Body = new List<AdaptiveElement>()
+                {
+                    new AdaptiveContainer
+                    {
+                        Items=new List<AdaptiveElement>()
+                        {
+                            new AdaptiveTextBlock()
+                            {
+                                Text=$"Hey {userName}! Please click on below buttons to navigate to a tab!",
+                                Size=AdaptiveTextSize.Large,
+                                Wrap=true
+                            },
+
+                            new AdaptiveColumnSet()
+                            {
+                                Columns=new List<AdaptiveColumn>()
+                                {
+                                   new AdaptiveColumn()
+                                    {
+                                         Width=AdaptiveColumnWidth.Auto,
+                                         Items=new List<AdaptiveElement>()
+                                         {
+                                             new AdaptiveTextBlock(){Text="Bots in Teams",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
+                                         },
+                                           SelectAction = new AdaptiveOpenUrlAction()
+                                         {
+                                             Url=new Uri(DeepLinkHelperChannel.Task1Deeplink),
+                                             Title = "Bots in Teams"
+                                         }
+                                    }
+                                }
+                            },
+                             new AdaptiveColumnSet()
+                            {
+                                Columns=new List<AdaptiveColumn>()
+                                {
+                                   new AdaptiveColumn()
+                                    {
+                                         Width=AdaptiveColumnWidth.Auto,
+                                         Items=new List<AdaptiveElement>()
+                                         {
+                                             new AdaptiveTextBlock(){Text="Bot Frawework SDK",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
+                                         },
+                                           SelectAction = new AdaptiveOpenUrlAction()
+                                         {
+                                             Url=new Uri(DeepLinkHelperChannel.Task2Deeplink),
+                                             Title = "Bot Frawework SDK"
+                                         }
+                                    }
+                                }
+                            },
+                               new AdaptiveColumnSet()
+                            {
+                                Columns=new List<AdaptiveColumn>()
+                                {
+                                   new AdaptiveColumn()
+                                    {
+                                         Width=AdaptiveColumnWidth.Auto,
+                                         Items=new List<AdaptiveElement>()
+                                         {
+                                             new AdaptiveTextBlock(){Text="Teams Apps",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
+                                         },
+                                           SelectAction = new AdaptiveOpenUrlAction()
+                                         {
+                                             Url=new Uri(DeepLinkHelperChannel.Task3Deeplink),
+                                             Title = "Teams Apps"
+                                         }
+                                    }
+                                }
+                            }
+                        }
+                    }
+             }
+            };
+
+            var acard = new Attachment()
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = DeepLinkCard
+            };
+            return acard;
+        }
+
     }
 }
