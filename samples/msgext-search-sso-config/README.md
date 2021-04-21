@@ -16,7 +16,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 the Teams service needs to call into the bot.
 
 ### 1. Setup for Bot SSO
-Refer to [Bot SSO Setup document](../../../BotSSOSetup.md).
+Refer to [Bot SSO Setup document](../../../samples/bot-conversation-sso-quickstart/BotSSOSetup.md).
 
 ### 2. Configure this sample
 
