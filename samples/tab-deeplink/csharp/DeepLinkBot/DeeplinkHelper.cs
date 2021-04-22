@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Web;
 
@@ -6,6 +7,11 @@ namespace Microsoft.BotBuilderSamples.Bots
 {
     public class DeeplinkHelper
     {
+        public static IConfiguration _configuration;
+        public DeeplinkHelper(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         static Dictionary<string, string> task1Values = new Dictionary<string, string>
             {
                 {"subEntityId","topic1" }
@@ -15,7 +21,7 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         public static string Task1Deeplink { get; set; } = 
 
-          $"https://teams.microsoft.com/l/entity/MICROSOFT-APP-ID/com.contoso.DeeplLinkBot.help?context=" + task1Context;
+          $"https://teams.microsoft.com/l/entity/" + _configuration["MicrosoftAppId"] + "/com.contoso.DeeplLinkBot.help?context=" + task1Context;
 
 
         static Dictionary<string, string> task2Values = new Dictionary<string, string>
@@ -27,8 +33,7 @@ namespace Microsoft.BotBuilderSamples.Bots
         public static string task2Context = HttpUtility.UrlEncode(jsoncontext2);
 
         public static string Task2Deeplink { get; set; } =
-          $"https://teams.microsoft.com/l/entity/MICROSOFT-APP-ID/com.contoso.DeeplLinkBot.help?context=" + task2Context;
-
+          $"https://teams.microsoft.com/l/entity/" + _configuration["MicrosoftAppId"] + "/com.contoso.DeeplLinkBot.help?context=" + task2Context;
 
         static Dictionary<string, string> task3Values = new Dictionary<string, string>
             {
@@ -37,7 +42,7 @@ namespace Microsoft.BotBuilderSamples.Bots
         static string jsoncontext3 = JsonConvert.SerializeObject(task3Values);
         public static string task3Context = HttpUtility.UrlEncode(jsoncontext3);
         public static string Task3Deeplink { get; set; } =
-         $"https://teams.microsoft.com/l/entity/MICROSOFT-APP-ID/com.contoso.DeeplLinkBot.help?context=" + task3Context;
+         $"https://teams.microsoft.com/l/entity/" + _configuration["MicrosoftAppId"] + "/com.contoso.DeeplLinkBot.help?context=" + task3Context;
 
     }
 }

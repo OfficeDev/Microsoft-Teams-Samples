@@ -1,57 +1,66 @@
-﻿using System.Text;
+﻿using Microsoft.Extensions.Configuration;
+using System;
+using System.Text;
 using System.Web;
 
 namespace Microsoft.BotBuilderSamples.Bots
 {
     public class DeepLinkHelperChannel
     {
+        public static IConfiguration _configuration;
+        public DeepLinkHelperChannel(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+       
         public static string channelID = DeepLinkBot.channelID;
+        public static string entityId = "DeepLinkApp";
+        static string task1DeepLinkURL = GetDeepLinkToTabTask1(_configuration["MicrosoftAppId"],channelID, entityId);
 
-        static string task1Values =>  task1Json();
-        static string task1Json()
+        public static string Task1Deeplink { get; set; } = task1DeepLinkURL;
+
+        static string task2DeepLinkURL = GetDeepLinkToTabTask2(_configuration["MicrosoftAppId"], channelID, entityId);
+        public static string Task2Deeplink { get; set; } = task2DeepLinkURL;
+
+        static string task3DeepLinkURL = GetDeepLinkToTabTask3(_configuration["MicrosoftAppId"], channelID, entityId);
+        public static string Task3Deeplink { get; set; } = task3DeepLinkURL;
+
+
+        public static string GetDeepLinkToTabTask1(string appID, string channelID, string entityId)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("{");
             sb.Append("\"subEntityId\":\"bot1\",");
-            sb.Append("\"channelId\":\""+channelID+"\"");
+            sb.Append("\"channelId\":\"" + channelID + "\"");
             sb.Append("}");
-            return sb.ToString();
+            string channelContext = sb.ToString();
+            string deepLinkURL = $"https://teams.microsoft.com/l/entity/" + appID + "/" + entityId + "?webUrl={HttpUtility.UrlEncode(" + _configuration["BaseURL"]+"/DeepLinkChannel" + ")}&label=Topic1&context=";
+            string channelDeepLink = deepLinkURL + HttpUtility.UrlEncode(channelContext);
+            return channelDeepLink;
         }
-        
-        public static string task1Context = HttpUtility.UrlEncode(task1Values);
-        public static string Task1Deeplink { get; set; } =
-
-          $"https://teams.microsoft.com/l/entity/MICROSOFT-APP-ID/DeepLinkApp?webUrl={HttpUtility.UrlEncode("BASE-URL/DeepLinkChannel")}&label=Topic1&context="+task1Context ;
-
-        static string task2Values = task2Json();
-        static string task2Json()
+        public static string GetDeepLinkToTabTask2(string appID, string channelID, string entityId)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("{");
             sb.Append("\"subEntityId\":\"bot2\",");
             sb.Append("\"channelId\":\"" + channelID + "\"");
             sb.Append("}");
-            return sb.ToString();
+            string channelContext = sb.ToString();
+            string deepLinkURL = $"https://teams.microsoft.com/l/entity/" + appID + "/" + entityId + "?webUrl={HttpUtility.UrlEncode(" + _configuration["BaseURL"]+"/DeepLinkChannel" + ")}&label=Topic1&context=";
+            string channelDeepLink = deepLinkURL + HttpUtility.UrlEncode(channelContext);
+            return channelDeepLink;
         }
-
-        public static string task2Context = HttpUtility.UrlEncode(task2Values);
-        public static string Task2Deeplink { get; set; } =
-          $"https://teams.microsoft.com/l/entity/MICROSOFT-APP-ID/DeepLinkApp?webUrl={HttpUtility.UrlEncode("BASE-URL/DeepLinkChannel")}&label=Topic2&context=" + task2Context;
-
-        static string task3Values = task3Json();
-        static string task3Json()
-
+        public static string GetDeepLinkToTabTask3(string appID, string channelID, string entityId)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("{");
             sb.Append("\"subEntityId\":\"bot3\",");
             sb.Append("\"channelId\":\"" + channelID + "\"");
             sb.Append("}");
-            return sb.ToString();
+            string channelContext = sb.ToString();
+            string deepLinkURL = $"https://teams.microsoft.com/l/entity/" + appID + "/" + entityId + "?webUrl={HttpUtility.UrlEncode(" + _configuration["BaseURL"]+"/DeepLinkChannel" + ")}&label=Topic1&context=";
+            string channelDeepLink = deepLinkURL + HttpUtility.UrlEncode(channelContext);
+            return channelDeepLink;
         }
-        public static string task3Context = HttpUtility.UrlEncode(task3Values);
-        public static string Task3Deeplink { get; set; } =
-         $"https://teams.microsoft.com/l/entity/MICROSOFT-APP-ID/DeepLinkApp?webUrl={HttpUtility.UrlEncode("BASE-URL/DeepLinkChannel")}&label=Topic3&context="+task3Context ;
-
     }
 }

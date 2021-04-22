@@ -6,7 +6,6 @@
     <script>
         microsoftTeams.initialize();         
         microsoftTeams.getContext(function (context) {            
-            console.log(context);
             if (context.subEntityId === "bot1") {
                
                 document.getElementById("taskDiv").innerHTML = "Bots in Teams:";
