@@ -7,7 +7,7 @@ namespace Microsoft.BotBuilderSamples.Bots
     {
         public static string channelID = DeepLinkBot.channelID;
 
-        static string task1Values = task1Json();
+        static string task1Values =>  task1Json();
         static string task1Json()
         {
             StringBuilder sb = new StringBuilder();
