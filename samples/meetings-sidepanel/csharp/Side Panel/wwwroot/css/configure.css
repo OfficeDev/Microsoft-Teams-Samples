@@ -46,11 +46,11 @@ header {
     vertical-align: middle;
 }
 
-    .header-inner-container::after {
-        content: "";
-        clear: both;
-        display: table;
-    }
+.header-inner-container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
 
 a {
     text-decoration: none;

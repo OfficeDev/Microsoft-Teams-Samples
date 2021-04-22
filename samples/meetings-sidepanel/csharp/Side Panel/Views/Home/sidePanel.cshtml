@@ -1,24 +1,8 @@
 ﻿@model List<SidePanel.Models.TaskInfo>
 
-@{ ViewData["Title"] = "sidePanel";
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <link rel="stylesheet" href="~/css/sidePanel.css">
-    <script src="~/js/signalr/dist/browser/signalr.js"></script>
-    <script src="~/js/chatSidePanel.js"></script>
-    <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
-    <title>Agenda</title>
-</head>
-
-<body>
 
     <div class="agendaTitle">
         Agenda for today
@@ -39,7 +23,6 @@
 
         </ol>
     </div>
-
     <button id="publishAgendaButton">Publish Agenda</button>
 
     <script type="text/javascript">
@@ -50,11 +33,13 @@
         window.onload = function () {
             microsoftTeams.getContext(function (context) {
                 userId = context.userObjectId;
+                var meetingId = context.meetingId;
+                var tenantId = context.tid;
                 $.ajax({
                     type: 'GET',
-                    url: '/GetRole',
+                    url: '/Home/IsOrganizer',
                     dataType: 'json',
-                    data: { userId: userId },
+                    data: { userId: userId, meetingId: meetingId, tenantId: tenantId },
                     success: function (response) {
                         console.log(response);
                         RoleFunction(response);
@@ -90,7 +75,7 @@
         $("#publishAgendaButton").on('click', function (e) {
             $.ajax({
                 type: 'GET',
-                url: '/SendAgenda',
+                url: '/Home/SendAgenda',
                 dataType: 'json',
                 success: function (response) {
                     console.log(response);
@@ -100,7 +85,6 @@
                     console.log("textStatus: " + textStatus + ", errorThrown:" + response);
                 },
             });
-            console.log("Publish Button Hit");
             event.preventDefault();
         })
 
@@ -116,7 +100,7 @@
                 };
                 $.ajax({
                     type: 'GET',
-                    url: '/AddNewAgendaPoint',
+                    url: '/Home/AddNewAgendaPoint',
                     dataType: 'json',
                     data: taskInfo,
                     success: function (response) {
@@ -131,6 +115,3 @@
             event.preventDefault();
         })
     </script>
-
-</body>
-</html>

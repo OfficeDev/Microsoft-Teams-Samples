@@ -2,6 +2,6 @@
 {
     public class TaskInfo
     {
-        public string title { get; set; }
+        public string Title { get; set; }
     }
 }

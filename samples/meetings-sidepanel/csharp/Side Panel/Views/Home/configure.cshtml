@@ -1,16 +1,8 @@
-﻿@{
-    ViewData["Title"] = "configure";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
+﻿<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Side Panel Config page</title>
-    <link rel="stylesheet" href="~/css/configure.css">
+    <link rel="stylesheet" href="~/css/Configure.css">
 </head>
 
 <body>
@@ -35,10 +27,7 @@
                     websiteUrl: `${window.location.origin}/Home/SidePanel`,
                 });
                 saveEvent.notifySuccess();
-                // microsoftTeams.appInitialization.notifyAppLoaded();
             });
             microsoftTeams.settings.setValidityState(true);
     </script>
 </body>
-
-</html>

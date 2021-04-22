@@ -25,7 +25,7 @@
   "accentColor": "#ffffff",
   "configurableTabs": [
     {
-      "configurationUrl": "<<Bot-EndPoint-URL>>/Home/configure",
+      "configurationUrl": "<<Your_Domain_URL>>/Home/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "groupchat",
@@ -44,7 +44,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "<<Bot-EndPoint-URL>>"
+    "<<Your_Domain_URL>>"
   ],
   "bots": [
     {
