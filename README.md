@@ -116,7 +116,7 @@
 [group-channel-tab#cs#razor]:samples/tab-channel-group/razor-csharp
 [group-channel-tab#cs#mvc]:samples/tab-channel-group/mvc-csharp
 [group-channel-tab#ts#spfx]:samples/tab-channel-group/spfx
-[deeplink-subentityId#cs]:samples/deeplink-subentityId/csharp
+[deeplink-subentityId#cs]:samples/tab-deeplink/csharp
 
 [connector#cs]:samples/connector-todo-notification/csharp
 [connector#ts]:samples/connector-github-notification/nodejs
