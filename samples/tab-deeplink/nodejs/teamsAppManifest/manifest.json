@@ -1,0 +1,68 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.9",
+  "version": "1.0",
+  "id": "<<Your_Microsoft_AppId>>",
+  "packageName": "com.microsoft.teams.sample.deeplink",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "<<Your_Website_URL>>",
+    "privacyUrl": "<<Your_Privacy_URL>>",
+    "termsOfUseUrl": "<<Your_termsOfUse_URL>>"
+  },
+  "name": {
+    "short": "DeepLink Bot"
+  },
+  "description": {
+    "short": "DeepLink Bot",
+    "full": "DeepLink Bot for channel and static tabs"
+  },
+  "icons": {
+    "outline": "icon-outline.png",
+    "color": "icon-color.png"
+  },
+  "accentColor": "#ffffff",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://<<Your_Domain_URL>>/Configure.html",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "groupchat",
+        "team"
+      ]      
+    }
+  ],
+
+  "staticTabs": [
+    {
+      "contentUrl": "https://<<Your_Domain_URL>>/DeepLink.html",
+      "websiteUrl": "https://<<Your_Domain_URL>>",
+      "entityId": "com.contoso.DeeplLinkBot.help",
+      "name": "Deep Link Tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "<<Your_Domain_URL>>"
+  ],
+  "bots": [
+    {
+      "botId": "<<Your_Microsoft_AppId>>",
+      "scopes": [
+        "groupchat",
+        "personal",
+        "team"
+      ],
+   
+      "isNotificationOnly": false,
+      "supportsFiles": false
+      
+    }
+  ]
+}
