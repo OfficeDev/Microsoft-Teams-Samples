@@ -1,6 +1,6 @@
 ﻿# App Installation
 
-This sample show sthe [Apps](https://docs.microsoft.com/en-us/graph/api/resources/teamsappinstallation?view=graph-rest-1.0) life cycle which includes create, update delete Apps
+This sample app demonstarte the installation lifecycle for Teams [Apps](https://docs.microsoft.com/en-us/graph/api/resources/teamsappinstallation?view=graph-rest-1.0) which includes create, update delete Apps
 
 ## Prerequisites
 
@@ -21,14 +21,14 @@ This sample show sthe [Apps](https://docs.microsoft.com/en-us/graph/api/resource
   
 - Clone the repository 
    ```bash
-   git clone https://github.com/
+   git clone https://github.com/OfficeDev/microsoft-teams-samples.git
    ```
 
 - Build your solution
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `AppInstallation` folder
+  - Navigate to `samples/graph-app-installation-lifecycle/csharp/AppInstallation` folder
   - Select `AppInstallation.csproj` file
   - Press `F5` to run the project
 

@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="../Styles/index.css" />
 
 <button type="button" class="btn btn-outline-info" id="btngetUserApps">Get User Apps</button>
-<button type="button" class="btn btn-outline-info" id="btnAddApp">Add App</button>
+<button type="button" class="btn btn-outline-info" id="btnAddApp">Add Polly App</button>
 
 <div class="modal fade" id="getAppModal" tabindex="-1" role="dialog" aria-labelledby="getAppModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -60,6 +60,7 @@
                 <tr>
                <td>Sr No.</td> 
                 <td>Name</td>
+                <td>Distribution Method</td>
                 <td>Info</td>
                 <td>Update</td>
                 <td>Delete</td>
@@ -72,7 +73,8 @@
                 <tr style="padding:1px">
                  <td>@Count</td>
                 <td>@item.AppName</td>
-                <td><button type="button" class="btn btn-outline-success btngetApp" data-app-itemid="@item.AppId">Get App</button></td>
+                <td>@item.AppDistributionMethod</td>
+                <td><button type="button" class="btn btn-outline-success btngetApp" data-app-itemid="@item.AppId">Get Info</button></td>
                 <td><button type="button" class="btn btn-outline-success btnUpgradeApp" data-app-itemid="@item.AppId">Update</button></td>
                 <td><button type="button" class="btn btn-outline-info btndeleteApp" data-app-itemid="@item.AppId" data-app-itemname="@item.AppName">Delete</button></td>
                 </tr>
@@ -88,16 +90,13 @@
         var teamAppInstallationId = '';
 
             $(".btngetApp").on('click', function (e) {
-                microsoftTeams.getContext(function (context) {
-                    var tenantId = context.tid;
-                    var teamId = context.groupId;
                     e.preventDefault();
                     var appId = $(e.currentTarget).attr('data-app-itemid');
                     $.ajax({
                         url: '@Url.Action("GetAppInfo", "Home")',
                         type: "GET",
                         dataType: "json",
-                        data: { tenantId: tenantId, teamId: teamId, appId: appId},
+                        data: { appId: appId},
                         success: function (response) {
                              $("#getAppModal").modal('show');
                             var html = `<span>Name: ${response[0]} </span> </br> <span>Description: ${response[1]} </span>`;
@@ -107,7 +106,6 @@
                             console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                         },
                     });
-                })
             });
 
             $("#btngetUserApps").on('click', function (e) {
@@ -119,7 +117,7 @@
                         url: '@Url.Action("UserIndex", "Home")',
                         type: "GET",
                         dataType: "json",
-                        data: { tenantId: tenantId, userID: userId},
+                        data: {userID: userId},
                         success: function (response) {
                              bindUserData(response);
                         },
@@ -131,16 +129,13 @@
             });
 
             $(".btnUpgradeApp").on('click', function (e) {
-                microsoftTeams.getContext(function (context) {
-                    var tenantId = context.tid;
-                    var teamId = context.groupId;
                     e.preventDefault();
                     var appId = $(e.currentTarget).attr('data-app-itemid');
                     $.ajax({
                         url: '@Url.Action("UpgradeApp", "Home")',
                         type: "POST",
                         dataType: "json",
-                        data: { tenantId: tenantId, teamId: teamId, appId: appId},
+                        data: {appId: appId},
                         success: function (response) {
                             console.log(response);
                         },
@@ -148,29 +143,21 @@
                             console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                         },
                     });
-                })
             });
             $(".btndeleteApp").on('click', function (e) {
-                microsoftTeams.getContext(function (context) {
-                    var tenantId = context.tid;
-                    var teamId = context.groupId;
                     e.preventDefault();
                     teamAppInstallationId = $(e.currentTarget).attr('data-app-itemid');
                     var appName = $(e.currentTarget).attr('data-app-itemname');
                      $("#deleteAppModal").modal('show');
-                });
             });
 
             $("#btndelApp").on('click', function (e) {
                 e.preventDefault();
-                microsoftTeams.getContext(function (context) {
-                    var tenantId = context.tid;
-                    var teamId = context.groupId;
                         $.ajax({
                             url: '@Url.Action("DeleteApp", "Home")',
                             type: "DELETE",
                             dataType: "json",
-                            data: { tenantId: tenantId, teamId: teamId, appId: teamAppInstallationId},
+                            data: {appId: teamAppInstallationId},
                             success: function (response) {
                                 console.log(resopnse);
                                 console.log("Deleted");
@@ -179,19 +166,14 @@
                                 console.log(textstatus.responseText);
                             }
                         });
-                    });
             });
 
             $("#btnAddApp").on('click', function (e) {
-                microsoftTeams.getContext(function (context) {
-                    var tenantId = context.tid;
-                    var teamId = context.groupId;
                     e.preventDefault();
                     $.ajax({
                         url: '@Url.Action("AddApp", "Home")',
                         type: "POST",
                         dataType: "json",
-                        data: { tenantId: tenantId, teamId: teamId},
                         success: function (response) {
                             console.log(response);
                         },
@@ -199,18 +181,17 @@
                             console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                         },
                     });
-                })
             });
 
             function bindUserData (data) {
                 $("#userAppModal").modal('show');
-                var html = "<table border='1'> <thead> <tr> <td>Sr No.</td><td> Name</td>";
+                var html = "<table border='1'> <thead> <tr><td> Name</td><td>Distribution Method</td>";
                     html+= "<td>Info</td> <td>Upgrade</td> <td>Delete</td </tr> </thead> <tbody>";
                 for(var i = 0; i< data.length; i++){
-                    html += `<tr><td>${i+1}</td><td>${data[i].Name} </td>`
-                    html+= `<td><button type="button" class="btn btn-outline-success btnUsergetApp" data-app-itemid="${data[i].Id}">Get App</button></td>`;
-                    html+= `<td><button type="button" class="btn btn-outline-success btnUserUpgradeApp" data-app-itemid="${data[i].Id}">Upgrde App</button></td>`;
-                    html+= `<td><button type="button" class="btn btn-outline-success btnUserDeleteApp" data-app-itemid="${data[i].Id}">Delete App</button></td>`;
+                    html += `<tr><td>${data[i].Name} </td> <td>${data[i].DistributionMethod}</td>`
+                    html+= `<td><button type="button" class="btn btn-outline-success btnUsergetApp" data-app-itemid="${data[i].Id}">Get Info</button></td>`;
+                    html+= `<td><button type="button" class="btn btn-outline-success btnUserUpgradeApp" data-app-itemid="${data[i].Id}">Upgrde</button></td>`;
+                    html+= `<td><button type="button" class="btn btn-outline-success btnUserDeleteApp" data-app-itemid="${data[i].Id}">Delete</button></td>`;
                     html+='</tr>';
                 }
                 html+= "</tbody> </table>";
@@ -218,15 +199,12 @@
 
                 $(".btnUsergetApp").on('click', function (e) {
                 e.preventDefault();
-                microsoftTeams.getContext(function (context) {
-                    var tenantId = context.tid;
-                    var userId = context.userObjectId;
                     var appId = $(e.currentTarget).attr('data-app-itemid');
                     $.ajax({
                         url: '@Url.Action("GetUserAppInfo", "Home")',
                         type: "GET",
                         dataType: "json",
-                        data: { tenantId: tenantId, appId: appId, userID: userId},
+                        data: {appId: appId},
                         success: function (response) {
                              $("#getAppModal").modal('show');
                             var html = `<span>Name: ${response[0]} </span> </br> <span>Description: ${response[1]} </span>`;
@@ -236,20 +214,16 @@
                             console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                         },
                     });
-                });
             });
 
             $(".btnUserDeleteApp").on('click', function (e) {
                 e.preventDefault();
-                microsoftTeams.getContext(function (context) {
-                    var tenantId = context.tid;
-                    var userId = context.userObjectId;
                     var appId = $(e.currentTarget).attr('data-app-itemid');
                         $.ajax({
                             url: '@Url.Action("DeleteUserApp", "Home")',
                             type: "DELETE",
                             dataType: "json",
-                            data: { tenantId: tenantId, appId: appId, userID: userId},
+                            data: {appId: appId},
                             success: function (response) {
                                 console.log(resopnse);
                                 console.log("Deleted");
@@ -258,7 +232,6 @@
                                 console.log(textstatus.responseText);
                             }
                         });
-                    });
                 });
 
                 $(".btnUserUpgradeApp").on('click', function (e) {
@@ -271,7 +244,7 @@
                         url: '@Url.Action("UpgradeUserApp", "Home")',
                         type: "POST",
                         dataType: "json",
-                        data: { tenantId: tenantId, appId: appId, userID:userId},
+                        data: {appId: appId},
                         success: function (response) {
                             console.log(response);
                         },

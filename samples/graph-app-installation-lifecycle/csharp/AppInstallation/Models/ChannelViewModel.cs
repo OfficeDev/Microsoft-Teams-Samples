@@ -21,6 +21,7 @@ namespace AppInstallation.Models
         public string AppId { get; set; }
         public string AppName { get; set; }
         public string AppDesc { get; set; }
+        public string AppDistributionMethod { get; set; }
 
     }
 }

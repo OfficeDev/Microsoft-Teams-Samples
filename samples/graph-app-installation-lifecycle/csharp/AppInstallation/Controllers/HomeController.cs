@@ -13,6 +13,10 @@ namespace AppInstallation.Controllers
 {
     public class HomeController : BaseController
     {
+        public static string TenantId;
+        public static string TeamId;
+        public static string UserId;
+
         public HomeController(IConfiguration configuration) : base(configuration)
         {
         }
@@ -31,20 +35,23 @@ namespace AppInstallation.Controllers
         [Route("Index")]
         public async Task<IActionResult> Index (string tenantId, string teamId)
         {
+            TenantId = tenantId;
+            TeamId = teamId;
+
             string token = await GetToken(tenantId);
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
-            var model = await GetApps(tenantId, teamId, graphClient);
+            var model = await GetApps(teamId, graphClient);
 
             return View(model);
         }
 
         [HttpGet]
         [Route("GetAppInfo")]
-        public async Task<List<string>> GetAppInfo(string tenantId, string teamId, string appId)
+        public async Task<List<string>> GetAppInfo(string appId)
         {
-            string token = await GetToken(tenantId);
+            string token = await GetToken(TenantId);
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
-            var teamsAppInstallation = await graphClient.Teams[teamId]
+            var teamsAppInstallation = await graphClient.Teams[TeamId]
                 .InstalledApps[appId]
                 .Request()
                 .Expand("teamsAppDefinition")
@@ -56,19 +63,21 @@ namespace AppInstallation.Controllers
             };
         }
 
-        private async Task<AppViewModel> GetApps(string tenantId, string teamId, GraphServiceClient graphClient)
+        private async Task<AppViewModel> GetApps(string teamId, GraphServiceClient graphClient)
         {
             AppViewModel viewModel = new AppViewModel();
             List<AppModel> list = new List<AppModel>();
+            
             var installedApps = await graphClient.Teams[teamId].InstalledApps
                 .Request()
-                .Expand("teamsAppDefinition")
+                .Expand("teamsAppDefinition, teamsApp")
                 .GetAsync();
-            foreach (var res in installedApps.ToList().Take(10))
+            foreach (var res in installedApps.ToList())
             {
                 var channelModel = new AppModel();
                 channelModel.AppId = res.Id;
                 channelModel.AppName = res.TeamsAppDefinition.DisplayName;
+                channelModel.AppDistributionMethod = res.TeamsApp.DistributionMethod.ToString();
                 list.Add(channelModel);
             }
 
@@ -78,11 +87,11 @@ namespace AppInstallation.Controllers
         }
         [HttpDelete]
         [Route("DeleteApp")]
-        public async Task<string> DeleteApp(string tenantId, string teamId, string appId)
+        public async Task<string> DeleteApp (string appId)
         {
-            string token = await GetToken(tenantId);
+            string token = await GetToken(TenantId);
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
-            await graphClient.Teams[teamId].InstalledApps[appId]
+            await graphClient.Teams[TeamId].InstalledApps[appId]
                 .Request()
                 .DeleteAsync();
             return "Deleted Successfully";
@@ -90,11 +99,11 @@ namespace AppInstallation.Controllers
 
         [HttpPost]
         [Route("UpgradeApp")]
-        public async Task<string> UpgradeApp(string tenantId, string teamId, string appId)
+        public async Task<string> UpgradeApp(string appId)
         {
-            string token = await GetToken(tenantId);
+            string token = await GetToken(TenantId);
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
-            await graphClient.Teams[teamId].InstalledApps[appId]
+            await graphClient.Teams[TeamId].InstalledApps[appId]
                 .Upgrade()
                 .Request()
                 .PostAsync();
@@ -103,22 +112,21 @@ namespace AppInstallation.Controllers
 
         [HttpPost]
         [Route("AddApp")]
-        public async Task<string> AddApp(string tenantId, string teamId)
+        public async Task<string> AddApp()
         {
-            string token = await GetToken(tenantId);
+            string token = await GetToken(TenantId);
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
 
-            var appsInstalled = await graphClient.Teams[teamId].InstalledApps.Request().Expand("teamsAppDefinition").GetAsync();
-            var teamsAppId = appsInstalled.Where(o => o.TeamsAppDefinition.DisplayName == "App Installation").Select(o => o.TeamsAppDefinition.TeamsAppId).FirstOrDefault();
+            string PollyAppId = "1542629c-01b3-4a6d-8f76-1938b779e48d";
             var teamsAppInstallation = new TeamsAppInstallation
             {
                 AdditionalData = new Dictionary<string, object>()
                 {
-                    {"teamsApp@odata.bind", "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/" + teamsAppId}
+                    {"teamsApp@odata.bind", "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/" + PollyAppId}
                 }
             };
-
-            await graphClient.Teams[teamId].InstalledApps
+            // Adding Polly App
+            await graphClient.Teams[TeamId].InstalledApps
                 .Request()
                 .AddAsync(teamsAppInstallation);
             return "Added Successfully";
@@ -126,20 +134,22 @@ namespace AppInstallation.Controllers
 
         [HttpGet]
         [Route("UserIndex")]
-        public async Task<IActionResult> UserIndex(string tenantId, string userID)
+        public async Task<IActionResult> UserIndex(string userID)
         {
-            string token = await GetToken(tenantId);
+            UserId = userID;
+            string token = await GetToken(TenantId);
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
-            var installedApps = await graphClient.Users[userID].Teamwork.InstalledApps
+            var installedApps = await graphClient.Users[UserId].Teamwork.InstalledApps
                             .Request()
-                            .Expand("teamsAppDefinition")
+                            .Expand("teamsAppDefinition, teamsApp")
                             .GetAsync();
             List<Dictionary<string, string>> list = new List<Dictionary<string, string>>();
-            foreach (var res in installedApps.ToList().Take(10))
+            foreach (var res in installedApps.ToList())
             {
                 Dictionary<string, string> model = new Dictionary<string, string> {
                     { "Name", res.TeamsAppDefinition.DisplayName},
-                    {"Id", res.Id }
+                    {"Id", res.Id },
+                    {"DistributionMethod", res.TeamsApp.DistributionMethod.ToString() }
                 };
                 list.Add(model);
             }
@@ -148,11 +158,11 @@ namespace AppInstallation.Controllers
         }
         [HttpGet]
         [Route("GetUserAppInfo")]
-        public async Task<List<string>> GetUserAppInfo(string tenantId, string appId, string userID)
+        public async Task<List<string>> GetUserAppInfo(string appId)
        {
-            string token = await GetToken(tenantId);
+            string token = await GetToken(TenantId);
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
-            var teamsAppInstallation = await graphClient.Users[userID].Teamwork
+            var teamsAppInstallation = await graphClient.Users[UserId].Teamwork
                 .InstalledApps[appId]
                 .Request()
                 .Expand("teamsAppDefinition")
@@ -165,11 +175,11 @@ namespace AppInstallation.Controllers
         }
         [HttpDelete]
         [Route("DeleteUserApp")]
-        public async Task<string> DeleteUserApp(string tenantId, string appId, string userID)
+        public async Task<string> DeleteUserApp(string appId)
         {
-            string token = await GetToken(tenantId);
+            string token = await GetToken(TenantId);
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
-            await graphClient.Users[userID].Teamwork.InstalledApps[appId]
+            await graphClient.Users[UserId].Teamwork.InstalledApps[appId]
                 .Request()
                 .DeleteAsync();
             return "Deleted Successfully";
@@ -177,11 +187,11 @@ namespace AppInstallation.Controllers
 
         [HttpPost]
         [Route("UpgradeUserApp")]
-        public async Task<string> UpgradeUserApp(string tenantId, string appId, string userID)
+        public async Task<string> UpgradeUserApp(string appId)
         {
-            string token = await GetToken(tenantId);
+            string token = await GetToken(TenantId);
             GraphServiceClient graphClient = GetAuthenticatedClient(token);
-            await graphClient.Users[userID].Teamwork.InstalledApps[appId]
+            await graphClient.Users[UserId].Teamwork.InstalledApps[appId]
                 .Upgrade()
                 .Request()
                 .PostAsync();
