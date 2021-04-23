@@ -38,13 +38,5 @@
   ],
   "validDomains": [
     "*.ngrok.io"
-  ],
-  "webApplicationInfo": {
-    "id": "<<Your Microsoft App Id>>",
-    "resource": "https://RscBasedStoreApp",
-    "applicationPermissions": [
-      "TeamsTab.Read.Group",
-      "TeamsTab.ReadWrite.Group"
-    ]
-  }
+  ]
 }
