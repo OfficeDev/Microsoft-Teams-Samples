@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Content Bubble</title>
+    <style>
+        .login {
+            text-align: center;
+        }
+        button{
+            border-radius:12px;
+            display: inline-block;
+            width: 74px;
+            height: 29px;
+            font-size: medium;
+            text-align: center;
+            align-items: center;
+        }
+    </style>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.5.2/js/MicrosoftTeams.min.js" asp-append-version="true"></script>
+    </head>
+    <body>
+        <script>
+            microsoftTeams.initialize();
+            function validateForm() {
+                var contentInfo = {
+                    myValue: document.forms["contentForm"]["option"].value,
+                    title: "<%= question %>"
+                }
+                microsoftTeams.tasks.submitTask(contentInfo, "<<APP_ID>>");
+                return true;
+            }
+        </script>
+        <div class="login" style="color:aliceblue;font-family:'Segoe UI';text-align: left;">
+            <form id="contentForm">
+                <h4> Provide your Feedback!</h4>
+                <h4 id="test"><%= question %></h4>
+                <input type="radio" id="yes" name="option" value="yes" ><label for="yes">Yes</label><br>
+                <input type="radio" id="no" name="option" value="no" ><label for="no">No</label><br>
+                <button type="submit" value="Submit" onclick="validateForm()">Submit</button>
+            </form>
+        </div>
+    </body>
+</html>

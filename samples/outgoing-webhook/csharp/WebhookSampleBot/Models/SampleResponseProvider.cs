@@ -7,6 +7,7 @@ namespace WebhookSampleBot.Models
     using System.Diagnostics;
     using System.Linq;
     using Microsoft.Bot.Connector;
+    using AdaptiveCards;
 
     /// <summary>
     /// Provider of sample responses based on triggers contained in input string.
@@ -21,8 +22,30 @@ namespace WebhookSampleBot.Models
         /// <summary>
         /// Dictionary that maps trigger words with their handers.
         /// </summary>
-        private static readonly Dictionary<string, Func<string, List<Attachment>>> TriggerHandler 
+        private static readonly Dictionary<string, Func<string, List<Attachment>>> TriggerHandler
             = SampleResponseProvider.InitializeTriggerHandler();
+
+        /// <summary>
+        /// Builds and returns an AdaptiveCard with an image.
+        /// </summary>
+        /// <returns></returns>
+        private static Attachment GetAdaptiveCardAttachment()
+        {
+            var Card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
+            {
+                Body = new List<AdaptiveElement>()
+                {
+                    new AdaptiveImage(){Url=new Uri("https://c.s-microsoft.com/en-us/CMSImages/DesktopContent-04_UPDATED.png?version=43c80870-99dd-7fb1-48c0-59aced085ab6")},
+                    new AdaptiveTextBlock(){Text="Sample image for Adaptive Card.."}
+                }
+            };
+
+            return new Attachment()
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = Card
+            };
+        }
 
         /// <summary>
         /// Gets the response.
@@ -81,10 +104,10 @@ namespace WebhookSampleBot.Models
         /// Initializes the trigger handler with a method for each trigger word.
         /// </summary>
         /// <returns>The fully initialized trigger handler.</returns>
-        private static Dictionary<string, Func<string, List<Attachment>>>  InitializeTriggerHandler()
+        private static Dictionary<string, Func<string, List<Attachment>>> InitializeTriggerHandler()
         {
 
-            return  new Dictionary<string, Func<string, List<Attachment>>>(StringComparer.InvariantCultureIgnoreCase)
+            return new Dictionary<string, Func<string, List<Attachment>>>(StringComparer.InvariantCultureIgnoreCase)
             {
                 {
                     TriggerIs(SampleResponseProvider.EverythingTrigger),
@@ -99,6 +122,14 @@ namespace WebhookSampleBot.Models
                             }
                         }
                         return results;
+                    }
+                },
+                {
+                    TriggerIs("adaptivecard"),
+                    (input) => new List<Attachment>()
+                    {
+                        // Calling Adaptive Card with Image.
+                        GetAdaptiveCardAttachment()
                     }
                 },
                 {
@@ -169,7 +200,7 @@ namespace WebhookSampleBot.Models
                                 if (thumbnailCard != null)
                                 {
                                     thumbnailCard.Tap = new CardAction() { Title = "Open URL", Type = ActionTypes.OpenUrl, Value = "http://microsoft.com" };
-                                }   
+                                }
                             }
                         }
                         else
@@ -188,7 +219,7 @@ namespace WebhookSampleBot.Models
                                 if (heroCard != null)
                                 {
                                     heroCard.Tap = new CardAction() { Title = "Open URL", Type = ActionTypes.OpenUrl, Value = "http://microsoft.com" };
-                                }   
+                                }
                             }
                         }
                         return new List<Attachment>() {card};
@@ -293,7 +324,7 @@ namespace WebhookSampleBot.Models
 
                         var attachments = new List<Attachment>();
 
-                        for (var i = 0; i < 3; i++) 
+                        for (var i = 0; i < 3; i++)
                         {
                             attachments.Add(card);
                         }
@@ -443,6 +474,8 @@ namespace WebhookSampleBot.Models
         {
             return keyword;
         }
+
+
 
         /// <summary>
         /// Builds and returns a <see cref="HeroCard"/> attachment using the supplied info

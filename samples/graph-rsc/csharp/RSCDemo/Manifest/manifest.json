@@ -1,0 +1,61 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.8",
+  "version": "1.0.0",
+  "id": "<<Your Microsoft APP Id>>",
+  "packageName": "com.teams.RSC",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "RSC-GraphAPI ",
+    "full": "RSC with Graph API"
+  },
+  "description": {
+    "short": "RSC with Graph API",
+    "full": "Resource-specific consent (RSC) is a Microsoft Teams and Microsoft Graph API integration that enables your app to use API endpoints to manage specific teams within an organization"
+  },
+  "accentColor": "#5558AF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://[Your Ngrok Domain]/ConfigureTab",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.ngrok.io"
+  ],
+  "webApplicationInfo": {
+    "id": "<<Your Microsoft APP Id>>",
+    "resource": "https://RscBasedStoreApp",
+    "applicationPermissions": [
+      "TeamSettings.Read.Group",
+      "ChannelMessage.Read.Group",
+      "TeamSettings.Edit.Group",
+      "ChannelSettings.ReadWrite.Group",
+      "Channel.Create.Group",
+      "Channel.Delete.Group",
+      "TeamsApp.Read.Group",
+      "TeamsTab.Read.Group",
+      "TeamsTab.Create.Group",
+      "TeamsTab.ReadWrite.Group",
+      "TeamsTab.Delete.Group",
+      "Member.Read.Group",
+      "Owner.Read.Group"
+    ]
+  }
+}

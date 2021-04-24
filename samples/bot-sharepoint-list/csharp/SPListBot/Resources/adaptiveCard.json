@@ -1,0 +1,41 @@
+﻿{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Hi, This Bot is Sharepoint enabled and details will save at sharepoint list.",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "Name",
+      "wrap": true
+    },
+    {
+      "type": "Input.Text",
+      "id": "Name",
+      "placeholder": "Please enter your Name"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Address",
+      "wrap": true
+    },
+    {
+      "type": "Input.Text",
+      "id": "Address",
+      "placeholder": "Please enter your Address"
+    },
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.Submit",
+          "title": "Save Details"
+        }
+      ]
+    }
+  ]
+}
