@@ -120,10 +120,4 @@
   <data name="Hello World" xml:space="preserve">
     <value>Bonjour le monde</value>
   </data>
-  <data name="Microsoft Teams is a persistent chat-based collaboration platform complete with document sharing, online meetings, and many more extremely useful features for business communications. Having an excellent team space is key to being able to make creative decisions and communicate with one another." xml:space="preserve">
-    <value>Microsoft Teams est une plate-forme de collaboration permanente basée sur le chat avec partage de documents, réunions en ligne et bien d'autres fonctionnalités extrêmement utiles pour les communications professionnelles. Avoir un excellent espace d'équipe est essentiel pour pouvoir prendre des décisions créatives et communiquer les uns avec les autres.</value>
-  </data>
-  <data name="Welcome to Microsoft Teams Hello World sample app (C#)" xml:space="preserve">
-    <value>Bienvenido a la aplicación de muestra Hello World de Microsoft Teams (C #)</value>
-  </data>
 </root>

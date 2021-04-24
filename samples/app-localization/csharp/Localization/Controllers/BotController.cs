@@ -3,13 +3,12 @@
 //
 // Generated with Bot Builder V4 SDK Template for Visual Studio EchoBot v4.6.2
 
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
-using Microsoft.Extensions.Localization;
+using System.Threading.Tasks;
 
-namespace Microsoft.Teams.Samples.HelloWorld.Web.Controllers
+namespace Localization.Controllers
 {
     // This ASP Controller is created to handle a request. Dependency Injection will provide the Adapter and IBot
     // implementation at runtime. Multiple different IBot implementations running at different endpoints can be
@@ -20,15 +19,12 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web.Controllers
     {
         private readonly IBotFrameworkHttpAdapter Adapter;
         private readonly IBot Bot;
-        private readonly IStringLocalizer<BotController> _localizer;
 
-        public BotController(IBotFrameworkHttpAdapter adapter, IBot bot, IStringLocalizer<BotController> localizer)
+        public BotController(IBotFrameworkHttpAdapter adapter, IBot bot)
         {
             Adapter = adapter;
             Bot = bot;
-            _localizer = localizer;
-           
-        }        
+        }
 
         [HttpPost]
         public async Task PostAsync()

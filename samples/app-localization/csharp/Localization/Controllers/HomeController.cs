@@ -9,30 +9,8 @@ namespace Microsoft.Teams.Samples.HelloWorld.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IStringLocalizer<HomeController> _localizer;
-
-        public HomeController(IStringLocalizer<HomeController> localizer)
-        {
-            _localizer = localizer;
-        }
-
         [Route("")]
         public ActionResult Index()
-        {
-            return View();
-        }
-
-        
-
-        [Route("hello")]
-        public ActionResult Hello()
-        {
-            return View("Index");
-        }
-
-
-        [Route("configure")]
-        public ActionResult Configure()
         {
             return View();
         }

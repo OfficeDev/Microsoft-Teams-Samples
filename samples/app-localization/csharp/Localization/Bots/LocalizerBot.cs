@@ -1,17 +1,12 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Bot.Builder;
-using Microsoft.Bot.Schema;
+﻿using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
-using Microsoft.Bot.Schema.Teams;
-using Newtonsoft.Json.Linq;
-using System.Linq;
-using System;
-using System.Collections.Generic;
-using Bogus;
+using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Localization;
+using System.Globalization;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace Localization
+namespace Localization.Bots
 {
     public class LocalizerBot : TeamsActivityHandler
     {
@@ -24,12 +19,10 @@ namespace Localization
 
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            turnContext.Activity.RemoveRecipientMention();
-            var text = turnContext.Activity.Text.Trim();
+            // Set the current culture.
+            CultureInfo.CurrentUICulture = new CultureInfo(turnContext.Activity.Locale, false);
 
-            var replyText = $"You said:" + _localizer[text];
-            await turnContext.SendActivityAsync(MessageFactory.Text(replyText, replyText), cancellationToken);
+            await turnContext.SendActivityAsync(MessageFactory.Text(_localizer["Hello"]), cancellationToken);
         }
-
     }
 }

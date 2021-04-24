@@ -120,10 +120,4 @@
   <data name="Hello World" xml:space="preserve">
     <value>नमस्ते दुनिया</value>
   </data>
-  <data name="Microsoft Teams is a persistent chat-based collaboration platform complete with document sharing, online meetings, and many more extremely useful features for business communications. Having an excellent team space is key to being able to make creative decisions and communicate with one another." xml:space="preserve">
-    <value>माइक्रोसॉफ्ट टीम एक साझा चैट-आधारित सहयोग प्लेटफ़ॉर्म है जो दस्तावेज़ साझाकरण, ऑनलाइन मीटिंग और व्यावसायिक संचार के लिए कई और अधिक उपयोगी सुविधाओं के साथ पूरा होता है। एक उत्कृष्ट टीम स्पेस होने के नाते रचनात्मक निर्णय लेने और एक दूसरे के साथ संवाद करने में सक्षम होने के लिए महत्वपूर्ण है।</value>
-  </data>
-  <data name="Welcome to Microsoft Teams Hello World sample app (C#)" xml:space="preserve">
-    <value>माइक्रोसॉफ्ट टीम में आपका स्वागत है नमस्ते विश्व नमूना ऐप (C #)</value>
-  </data>
 </root>

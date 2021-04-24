@@ -118,18 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Hello" xml:space="preserve">
-    <value>¡Hola, cómo estas hoy!</value>
-  </data>
-  <data name="Help" xml:space="preserve">
-    <value>Hola, ¿cómo puedo ayudarte hoy?</value>
-  </data>
-  <data name="Hi" xml:space="preserve">
-    <value>¡Hola, cómo estas hoy!</value>
-  </data>
-  <data name="Microsoft Teams is a persistent chat-based collaboration platform complete with document sharing, online meetings, and many more extremely useful features for business communications. Having an excellent team space is key to being able to make creative decisions and communicate with one another." xml:space="preserve">
-    <value>El equipo de Microsoft es una plataforma de colaboración compartida basada en chat con muchas más funciones útiles para compartir documentos, reuniones en línea y comunicaciones comerciales. Ser un excelente espacio para equipos es clave para tomar decisiones creativas y poder comunicarse entre sí.</value>
-  </data>
-  <data name="Welcome to Microsoft Teams Hello World sample app (C#)" xml:space="preserve">
-    <value>Bienvenido a la aplicación de muestra Hello World de Microsoft Team (C #)</value>
+    <value>Hola</value>
   </data>
 </root>
