@@ -8,30 +8,27 @@ namespace Microsoft.BotBuilderSamples.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IConfiguration _configuraion;
+        public readonly IConfiguration _configuration;
         public HomeController(IConfiguration configuration)
         {
-            _configuraion = configuration;
+            _configuration = configuration;
         }
+        public string channelID = DeepLinkBot.channelID;
+        public string entityIdChannel = "<<Channel-Entity-ID>>";
+        public string entityIdTab = "<<PersonalBot-Entity-ID>>";
+        public string teamsUrl = "https://teams.microsoft.com/l/entity/";
+
         public static List<DeepLinksModel> deeplinks = new List<DeepLinksModel>();
         public DeepLinksModel task1Link;
         public DeepLinksModel task2Link;
         public DeepLinksModel task3Link;
-
-        public string context1 = DeeplinkHelper.task1Context;
-        public string context2 = DeeplinkHelper.task2Context;
-        public string context3 = DeeplinkHelper.task3Context;
-
 
         public static List<DeepLinkChannelModel> channelDeeplinks = new List<DeepLinkChannelModel>();
         public DeepLinkChannelModel task1ChannelLink;
         public DeepLinkChannelModel task2ChannelLink;
         public DeepLinkChannelModel task3ChannelLink;
 
-        public string channelContext1 = DeepLinkHelperChannel.task1Context;
-        public string channelContext2 = DeepLinkHelperChannel.task2Context;
-        public string channelContext3 = DeepLinkHelperChannel.task3Context;
-
+        DeeplinkHelper deeplinkHelper = new DeeplinkHelper();      
         public IActionResult Index()
         {
             return View();
@@ -44,26 +41,25 @@ namespace Microsoft.BotBuilderSamples.Controllers
             {
                 task1Link = new DeepLinksModel()
                 {
-                    linkUrl = "https://teams.microsoft.com/l/entity/"+ _configuraion["MicrosoftAppId"] + "/com.contoso.DeeplLinkBot.help?context=" + context1,
+                    linkUrl = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], entityIdTab, "<<PersonalBot-Subentity-ID1>>"),
                     ID = 1,
                     linkTitle = "Bots in Teams"
                 };
 
                 task2Link = new DeepLinksModel()
                 {
-                    linkUrl = "https://teams.microsoft.com/l/entity/"+_configuraion["MicrosoftAppId"]+"/com.contoso.DeeplLinkBot.help?context=" + context2,
+                    linkUrl = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], entityIdTab, "<<PersonalBot-Subentity-ID2>>"),
                     ID = 2,
                     linkTitle = "Bot Frawework SDK"
 
                 };
                 task3Link = new DeepLinksModel()
                 {
-                    linkUrl = "https://teams.microsoft.com/l/entity/" + _configuraion["MicrosoftAppId"] + "/com.contoso.DeeplLinkBot.help?context=" + context3,
+                    linkUrl = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], entityIdTab, "<<PersonalBot-Subentity-ID3>>"),
                     ID = 3,
                     linkTitle = "Teams Apps"
 
                 };
-
 
                 deeplinks.Add(task1Link);
                 deeplinks.Add(task2Link);
@@ -80,26 +76,25 @@ namespace Microsoft.BotBuilderSamples.Controllers
             {
                 task1ChannelLink = new DeepLinkChannelModel()
                 {
-                    linkUrl = "https://teams.microsoft.com/l/entity/"+_configuraion["MicrosoftAppId"]+"/DeepLinkapp?context=" + channelContext1,
+                    linkUrl = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"],_configuration["BaseURL"],channelID,entityIdChannel, "<<Channel-Subentity-ID1>>"),
                     ID = 1,
                     linkTitle = "Bots in Teams"
                 };
 
                 task2ChannelLink = new DeepLinkChannelModel()
                 {
-                    linkUrl = "https://teams.microsoft.com/l/entity/"+_configuraion["MicrosoftAppId"]+"/DeepLinkapp?context=" + channelContext2,
+                    linkUrl = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, entityIdChannel, "<<Channel-Subentity-ID2>>"),
                     ID = 2,
                     linkTitle = "Bot Frawework SDK"
 
                 };
                 task3ChannelLink = new DeepLinkChannelModel()
                 {
-                    linkUrl = "https://teams.microsoft.com/l/entity/"+_configuraion["MicrosoftAppId"]+"/DeepLinkapp?context=" + channelContext3,
+                    linkUrl = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, entityIdChannel, "<<Channel-Subentity-ID3>>"),
                     ID = 3,
                     linkTitle = "Teams Apps"
 
                 };
-
 
                 channelDeeplinks.Add(task1ChannelLink);
                 channelDeeplinks.Add(task2ChannelLink);
@@ -116,21 +111,21 @@ namespace Microsoft.BotBuilderSamples.Controllers
             {
                 task1ChannelLink = new DeepLinkChannelModel()
                 {
-                    linkUrl = "https://teams.microsoft.com/l/entity/"+_configuraion["MicrosoftAppId"]+"/DeepLinkapp?context=" + channelContext1,
+                    linkUrl = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, entityIdChannel, "<<Channel-Subentity-ID1>>"),
                     ID = 1,
                     linkTitle = "Bots in Teams"
                 };
 
                 task2ChannelLink = new DeepLinkChannelModel()
                 {
-                    linkUrl = "https://teams.microsoft.com/l/entity/"+_configuraion["MicrosoftAppId"]+"/DeepLinkapp?context=" + channelContext2,
+                    linkUrl = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, entityIdChannel, "<<Channel-Subentity-ID2>>"),
                     ID = 2,
                     linkTitle = "Bot Frawework SDK"
 
                 };
                 task3ChannelLink = new DeepLinkChannelModel()
                 {
-                    linkUrl = "https://teams.microsoft.com/l/entity/"+_configuraion["MicrosoftAppId"]+"/DeepLinkapp?context=" + channelContext3,
+                    linkUrl = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, entityIdChannel, "<<Channel-Subentity-ID3>>"),
                     ID = 3,
                     linkTitle = "Teams Apps"
 
@@ -158,21 +153,21 @@ namespace Microsoft.BotBuilderSamples.Controllers
             {
                 task1Link = new DeepLinksModel()
                 {
-                    linkUrl = "https://teams.microsoft.com/l/entity/"+_configuraion["MicrosoftAppId"]+"/com.contoso.DeeplLinkBot.help?context=" + context1,
+                    linkUrl = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], entityIdTab, "<<PersonalBot-Subentity-ID1>>"),
                     ID = 1,
                     linkTitle = "Bots in Teams"
                 };
 
                 task2Link = new DeepLinksModel()
                 {
-                    linkUrl = "https://teams.microsoft.com/l/entity/"+_configuraion["MicrosoftAppId"]+"/com.contoso.DeeplLinkBot.help?context=" + context2,
+                    linkUrl = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], entityIdTab, "<<PersonalBot-Subentity-ID2>>"),
                     ID = 2,
                     linkTitle = "Bot Frawework SDK"
 
                 };
                 task3Link = new DeepLinksModel()
                 {
-                    linkUrl = "https://teams.microsoft.com/l/entity/"+_configuraion["MicrosoftAppId"]+"/com.contoso.DeeplLinkBot.help?context=" + context3,
+                    linkUrl = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], entityIdTab, "<<PersonalBot-Subentity-ID3>>"),
                     ID = 3,
                     linkTitle = "Teams Apps"
 

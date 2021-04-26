@@ -1,79 +1,55 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
   "manifestVersion": "1.9",
   "version": "1.0.0",
-  "id": "MICROSOFT-APP-ID",
-  "packageName": "com.microsoft.teams.sample.deeplinkapp",
+  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "packageName": "com.microsoft.deeplinkbot",
   "developer": {
     "name": "Microsoft",
-    "websiteUrl": "https://dev.botframework.com",
-    "privacyUrl": "https://privacy.microsoft.com",
-    "termsOfUseUrl": "https://www.microsoft.com/en-us/legal/intellectualproperty/copyright/default.aspx"
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "DeepLink Bot"
+    "short": "Deep Link Bot",
+    "full": "Bot for Deep linking to tab"
   },
   "description": {
-    "short": "DeepLink Bot",
-    "full": "DeepLink Bot for channel and static tabs"
+    "short": "DeepLinkBot for Microsoft Teams",
+    "full": "This sample DeepLink app which demos to navigate to required item in tab."
   },
   "icons": {
-    "outline": "icon-outline.png",
-    "color": "icon-color.png"
+    "outline": "outline.png",
+    "color": "color.png"
   },
-  "accentColor": "#ffffff",
-  "configurableTabs": [
-    {
-      "configurationUrl": "BASE-URL/Configure",
-      "canUpdateConfiguration": true,
-      "scopes": [
-        "groupchat",
-        "team"
-      ]
-    }
-  ],
+  "accentColor": "#60A18E",
 
   "staticTabs": [
     {
-      "contentUrl": "BASE-URL/DeepLink",
-      "websiteUrl": "BASE-URL",
-      "entityId": "com.contoso.DeeplLinkBot.help",
-      "name": "Deep Link Tab",
+      "contentUrl": "<<YOUR-BASE-URL>>",
+      "websiteUrl": "<<YOUR-BASE-URL>>",
+      "entityId": "<<ENTITY-ID>>",
+      "name": "TAB NAME",
       "scopes": [
         "personal"
       ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "needsChannelSelector": false,
+      "isNotificationOnly": false,
+      "scopes": [
+        "personal",
+        "team"
+      ]
+
     }
   ],
   "permissions": [
     "identity",
     "messageTeamMembers"
   ],
-  "validDomains": [
-    "9be6f25ac8c7.ngrok.io"
-  ],
-  "bots": [
-    {
-      "botId": "MICROSOFT-APP-ID",
-      "scopes": [
-        "groupchat"
-      ],
-      "needsChannelSelector": false,
-      "isNotificationOnly": false,
-      "supportsFiles": false,
-      "commandLists": [
-        {
-          "scopes": [
-            "groupchat",
-            "team"
-          ],
-          "commands": [
-            {
-              "title": "reset",
-              "description": "reset the settings for the bot in the service"
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  "validDomains": [ "" ]
 }

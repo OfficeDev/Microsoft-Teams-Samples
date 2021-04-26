@@ -54,13 +54,8 @@ namespace Microsoft.BotBuilderSamples
                 .UseAuthorization()
                 .UseEndpoints(endpoints =>
                 {
-                    //endpoints.MapControllers();
                     endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}");
-                });
-
-            // app.UseHttpsRedirection();
-
-            
+                });            
         }
        
     }

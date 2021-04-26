@@ -32,15 +32,12 @@ This sample displays how to consume SubEntity Id to DeepLink from Bot to Tab and
    ```ngrok http -host-header=rewrite 3978```
 4. Create a new Bot by following steps mentioned in [Build a bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots?view=msteams-client-js-latest#build--a-bot-for-teams-with-the-microsoft-bot-framework) documentation.
 5. Go to appsettings.json and add ```MicrosoftAppId``` and  ```MicrosoftAppPassword``` information.
-6. Update DeepLink Urls with ```MicrosoftAppID```, ```EntityID``` and ```BaseUrl``` with respective values in DeepLinkHelper class, DeepLinkChannelHelper class and HomeController.
+6. Update DeepLink Urls with ```MicrosoftAppID``` and  ```EntityID``` with respective values in DeepLinkHelper class and HomeController.
 7. Run your app, either from Visual Studio with ```F5``` or using ```dotnet run``` in the appropriate folder.
 8. Update the manifest.json file with ```Microsoft-App-ID```,```ContentUrl```, ```WebsiteUrl``` and ```EntityID``` value.
 9. Install the app in Teams.
 
 ## Interacting with the app in Teams
-1. Interact with DeepLink bot by pinging it in channel. 
-2. Select the option from the options displayed in the adaptive card. This will redirect to the respective Task in the Channel tab.
-3. Click on Back to List to view all the options. User can select an option which will redirect to the respective Task in the Channel tab.
-4. Interact with DeepLink bot by pinging it in personal scope.
-5. Select the option from the options displayed in the adaptive card. This will redirect to the respective Task in the static tab.
-6. Click on Back to List to view all the options. User can select an option which will redirect to the respective Task in the static tab.
+1. Interact with DeepLink bot by pinging it in either personal scope or channel by @mentioning bot. 
+2. Select the option from the options displayed in the adaptive card. This will redirect to the respective Task in the static tab/ channel tab.
+3. Click on Back to List to view all the options. User can select an option which will redirect to the respective Task in static tab/ channel tab.

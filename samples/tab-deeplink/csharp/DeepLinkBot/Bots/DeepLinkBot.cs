@@ -1,33 +1,38 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using AdaptiveCards;
-using Microsoft.Bot.Builder;
-using Microsoft.Bot.Schema;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using AdaptiveCards;
+using Microsoft.Bot.Builder;
+using Microsoft.Bot.Schema;
+using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.BotBuilderSamples.Bots
 {
     public class DeepLinkBot : ActivityHandler
     {
-        public static string channelID = "";
+        public readonly IConfiguration _configuration;
+        public DeepLinkBot(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
+        public static string channelID = "";
+        public static string entityIdTab = "com.contoso.DeeplLinkBot.help";
+        public static string entityIdChannel = "DeepLinkApp";
+        public string teamsUrl = "https://teams.microsoft.com/l/entity/";
+        public string tabUrlTask1;
+        public string tabUrlTask2;
+        public string tabUrlTask3;
+
+        DeeplinkHelper deeplinkHelper = new DeeplinkHelper();
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            if (turnContext.Activity.Conversation.ConversationType == "channel")
-            {
-                channelID = turnContext.Activity.Conversation.Id.Split(';')[0];
-                var attachment = AdaptiveDeepLinkCard(turnContext.Activity.From.Name, DeepLinkHelperChannel.Task1Deeplink, DeepLinkHelperChannel.Task2Deeplink, DeepLinkHelperChannel.Task3Deeplink);
-                await turnContext.SendActivityAsync(MessageFactory.Attachment(attachment), cancellationToken);
-            }
-            else
-            {
-                var attachment = AdaptiveDeepLinkCard(turnContext.Activity.From.Name, DeeplinkHelper.Task1Deeplink, DeeplinkHelper.Task2Deeplink, DeeplinkHelper.Task3Deeplink);
-                await turnContext.SendActivityAsync(MessageFactory.Attachment(attachment), cancellationToken);
-            }
+            var attachment = AdaptiveDeepLinkCard(turnContext.Activity.From.Name, turnContext);
+            await turnContext.SendActivityAsync(MessageFactory.Attachment(attachment), cancellationToken);
         }
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
@@ -41,9 +46,22 @@ namespace Microsoft.BotBuilderSamples.Bots
                 }
             }
         }
-
-        public static Attachment AdaptiveDeepLinkCard(string userName, string deeplink1, string deeplink2, string deeplink3)
+        public Attachment AdaptiveDeepLinkCard(string userName, ITurnContext turnContext)
         {
+            if (turnContext.Activity.Conversation.ConversationType == "channel")
+            {
+                channelID = turnContext.Activity.Conversation.Id.Split(';')[0];
+                tabUrlTask1 = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, entityIdChannel, "bot1");
+                tabUrlTask2 = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, entityIdChannel, "bot2");
+                tabUrlTask3 = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, entityIdChannel, "bot3");
+            }
+            else
+            {
+                tabUrlTask1 = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], entityIdTab, "topic1");
+                tabUrlTask2 = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], entityIdTab, "topic2");
+                tabUrlTask3 = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], entityIdTab, "topic3");
+            }
+
             var DeepLinkCard = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
             {
                 Body = new List<AdaptiveElement>()
@@ -72,7 +90,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                                          },
                                            SelectAction = new AdaptiveOpenUrlAction()
                                          {
-                                             Url=new Uri(deeplink1),
+                                             Url=new Uri(tabUrlTask1),
                                              Title = "Bots in Teams"
                                          }
                                     }
@@ -87,38 +105,38 @@ namespace Microsoft.BotBuilderSamples.Bots
                                          Width=AdaptiveColumnWidth.Auto,
                                          Items=new List<AdaptiveElement>()
                                          {
-                                             new AdaptiveTextBlock(){Text="Bot Framework SDK",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
+                                             new AdaptiveTextBlock(){Text="Bot Frawework SDK",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
                                          },
                                            SelectAction = new AdaptiveOpenUrlAction()
-                                         {
-                                             Url=new Uri(deeplink2),
-                                             Title = "Bot Framework SDK"
-                                         }
+                                           {
+                                             Url=new Uri(tabUrlTask2),
+                                             Title = "Bot Frawework SDK"
+                                           }
                                     }
                                 }
                             },
                                new AdaptiveColumnSet()
-                            {
-                                Columns=new List<AdaptiveColumn>()
-                                {
-                                   new AdaptiveColumn()
+                               {
+                                    Columns=new List<AdaptiveColumn>()
                                     {
-                                         Width=AdaptiveColumnWidth.Auto,
-                                         Items=new List<AdaptiveElement>()
-                                         {
-                                             new AdaptiveTextBlock(){Text="Teams Apps",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
-                                         },
+                                        new AdaptiveColumn()
+                                        {
+                                            Width=AdaptiveColumnWidth.Auto,
+                                            Items=new List<AdaptiveElement>()
+                                            {
+                                               new AdaptiveTextBlock(){Text="Teams Apps",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
+                                            },
                                            SelectAction = new AdaptiveOpenUrlAction()
-                                         {
-                                             Url=new Uri(deeplink3),
+                                           {
+                                             Url=new Uri(tabUrlTask3),
                                              Title = "Teams Apps"
-                                         }
+                                           }
+                                        }
                                     }
-                                }
-                            }
+                               }
                         }
                     }
-             }
+                }
             };
 
             var acard = new Attachment()
