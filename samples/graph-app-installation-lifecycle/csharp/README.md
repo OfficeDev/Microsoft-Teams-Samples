@@ -39,7 +39,7 @@ This sample app demonstarte the installation lifecycle for Teams [Apps](https://
   ngrok http -host-header=rewrite 3978
   ```
 
-   Config changes
+- Config changes
    - Add your client id, client secret in appsettings.json
    - Press F5 to run the project
    - Update the ngrok in manifest
