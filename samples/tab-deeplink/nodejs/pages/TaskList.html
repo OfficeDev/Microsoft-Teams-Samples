@@ -11,22 +11,8 @@
                     var html ='';
                     s.forEach(x=> {
                     var loc = "Details.html?id="+x.ID;
-                    var Desc='';
-                    if(x.ID==1)
-                    {
-                        Desc= "Bots";
-                    }
-                    else  if(x.ID==2)
-                    {
-                        Desc= "Messaging Extension";
-                    }
-                    else  if(x.ID==3)
-                    {
-                        Desc= "Adaptive Card";
-                    }
-                    document.write('<a href="' + loc + '">'+Desc+'</a><br/>');                            
-                });            
-    
+                    document.write('<a href="' + loc + '">'+x.Desc+'</a><br/>');                            
+                });             
         </script>
        
     </body>

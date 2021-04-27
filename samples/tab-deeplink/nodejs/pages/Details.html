@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>    
+        <script src="https://statics.teams.microsoft.com/sdk/v1.4.2/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+         <script src="DeepLinkModel.js"></script> 
+        <script src="DeepLinkTabHelper.js"></script>      
+    </head>
+    <body>
+        <script>
+         const params = new URLSearchParams(window.location.search);
+         var Querystringid=params.get('id');;
+            var url='';
+            var s=DeepLinkModel;
+            s.forEach(x=> {             
+                if(x.ID==Querystringid)
+                {
+                    url=x.linkUrl;
+                }
+            });
+            microsoftTeams.initialize();
+            microsoftTeams.executeDeepLink(url);
+        </script>
+        <a href="TaskList.html">Back To List</a>
+    </body>
+</html>

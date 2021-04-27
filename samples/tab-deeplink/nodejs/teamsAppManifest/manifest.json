@@ -2,13 +2,17 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
   "manifestVersion": "1.9",
   "version": "1.0",
-  "id": "<<Your_Microsoft_AppId>>",
-  "packageName": "com.microsoft.teams.sample.deeplink",
+  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "packageName": "com.microsoft.teams.sample.meetingtoken",
+  "webApplicationInfo": {
+    "id": "690412fe-6f2a-4de8-a6e1-e856afc15692",
+    "resource": "api://63482176cf2a.ngrok.io/690412fe-6f2a-4de8-a6e1-e856afc15692"
+  },
   "developer": {
     "name": "Microsoft",
-    "websiteUrl": "<<Your_Website_URL>>",
-    "privacyUrl": "<<Your_Privacy_URL>>",
-    "termsOfUseUrl": "<<Your_termsOfUse_URL>>"
+    "websiteUrl": "",
+    "privacyUrl": "",
+    "termsOfUseUrl": ""
   },
   "name": {
     "short": "DeepLink Bot"
@@ -24,7 +28,7 @@
   "accentColor": "#ffffff",
   "configurableTabs": [
     {
-      "configurationUrl": "https://<<Your_Domain_URL>>/Configure.html",
+      "configurationUrl": "https://<<BASE-URL>>/Configure.html",
       "canUpdateConfiguration": true,
       "scopes": [
         "groupchat",
@@ -35,8 +39,8 @@
 
   "staticTabs": [
     {
-      "contentUrl": "https://<<Your_Domain_URL>>/DeepLink.html",
-      "websiteUrl": "https://<<Your_Domain_URL>>",
+      "contentUrl": "https://<<BASE-URL>>/DeepLink.html",
+      "websiteUrl": "https://<<BASE-URL>>",
       "entityId": "com.contoso.DeeplLinkBot.help",
       "name": "Deep Link Tab",
       "scopes": [
@@ -49,11 +53,11 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "<<Your_Domain_URL>>"
+    "*.ngrok.io"
   ],
   "bots": [
     {
-      "botId": "<<Your_Microsoft_AppId>>",
+      "botId": "690412fe-6f2a-4de8-a6e1-e856afc15692",
       "scopes": [
         "groupchat",
         "personal",
@@ -61,8 +65,7 @@
       ],
    
       "isNotificationOnly": false,
-      "supportsFiles": false
-      
+      "supportsFiles": false      
     }
   ]
 }

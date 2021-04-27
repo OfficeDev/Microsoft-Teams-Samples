@@ -3,7 +3,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>    
         <script src="https://statics.teams.microsoft.com/sdk/v1.4.2/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
-        <script src="ChannelDeepLinkModel.js"></script>
     </head>
     <body>
         <div id="taskDiv" style="margin-top:10px;width:70px;color:darkslateblue;font-family:'Segoe UI';font-size:20px;"></div>
@@ -11,7 +10,7 @@
         <a href="ChannelTasklist.html">Back To List</a>
        <script >
         const params = new URLSearchParams(window.location.search);
-        var Querystringid=params.get('id');;
+        var Querystringid=params.get('id');
             microsoftTeams.initialize();
                      
             window.onload = function () { 

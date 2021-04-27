@@ -30,10 +30,10 @@ This sample displays how to consume SubEntity Id to DeepLink from Bot to Tab and
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-- In a terminal, navigate to `samples/tab-deeplink/nodejs`
+- In a terminal, navigate to `samples/javascript_nodejs/DeepLinkTabnode`
 
     ```bash
-    cd samples/tab-deeplink/nodejs
+    cd samples/javascript_nodejs/DeepLinkTabnode
     ```
 
 - Install modules
@@ -60,8 +60,7 @@ This sample displays how to consume SubEntity Id to DeepLink from Bot to Tab and
 6. Go to .env file  and add ```MicrosoftAppId``` and  ```MicrosoftAppPassword``` information.
 7. Run your app, either from Visual Studio code  with ``` npm start``` or using ``` Run``` in the Terminal.
 8. Update the manifest.json file with ```Microsoft-App-ID```,```ContentUrl```, ```WebsiteUrl``` and ```EntityID``` value.
-9. Update the ```Encodeweburl(Domain)``` url in   deeplinkmodelforChannel file with ```ngrok```.
-10. Install the app in Teams.
+9. Install the app in Teams.
 
 
 ## Interacting with the bot

@@ -7,8 +7,8 @@
     <script>
          microsoftTeams.initialize();
   
-        microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
-          microsoftTeams.settings.setSettings({
+         microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
+         microsoftTeams.settings.setSettings({
               contentUrl: window.location.origin+"/ChannelDeepLink.html",
               entityId: "DeepLinkApp",
               suggestedDisplayName: "DeepLink App",
@@ -16,7 +16,7 @@
           });
           saveEvent.notifySuccess();
       });
-  microsoftTeams.settings.setValidityState(true);
+         microsoftTeams.settings.setValidityState(true);
 
     </script>
 </body>
