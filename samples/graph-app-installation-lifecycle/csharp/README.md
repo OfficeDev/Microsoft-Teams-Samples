@@ -19,7 +19,7 @@ This sample app demonstarte the installation lifecycle for Teams [Apps](https://
 - Register your app with Microsoft identity platform via the Azure AD portal
   - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2). 
 - You need to add following permissions mentioned in the below screenshots to call respective Graph   API
-![](https://user-images.githubusercontent.com/50989436/116118757-46c07a00-a6db-11eb-8813-8f800797b22e.png)
+![](https://user-images.githubusercontent.com/50989436/116188975-e155a300-a745-11eb-9ce5-7f467007e243.png)
   
 - Clone the repository 
    ```bash
