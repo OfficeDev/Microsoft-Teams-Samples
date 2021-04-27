@@ -22,7 +22,8 @@
 |7|SPFx Tab | Sample app showing Microsoft Teams tabs using SharePoint Framework                                    |   | [View][group-channel-tab#ts#spfx] |
 |8|Tab SSO               | Microsoft Teams sample app for tabs Azure AD SSO                                      | | [View][tab-sso#ts] ,[Teams Toolkit](https://docs.microsoft.com/microsoftteams/platform/toolkit/visual-studio-code-tab-sso)
 |9|Config Tab Authentication               | Microsoft Teams sample app for config tabs Azure AD authentication | [View]()                       | | 
-|10|Deep Link consuming subentity id in Tabs        | Microsoft Teams sample app for deeplinks in static and configurable tabs consuming subentity id | [View][deeplink-subentityId#cs]                       | | 
+|10|Deep Link consuming Subentity ID      | Microsoft Teams sample app for demonstrating deeplink from Bot chat to Tab consuming Subentity ID | [View][tab-deeplink#csharp]                       | | 
+
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
@@ -84,6 +85,7 @@
 |:--:|:-------------------|:-------------------------------------------------------------------------------------------------|:--------|:-------------|
 |1|Resource Specific Consent (RSC) | This sample illustrates how you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs. .                              |[View][graph#rsc#cs]       | [View][graph#rsc#js]
 |2|Graph API Channel Life Cycle | This sample illustrates how you can use [Graph API Channel Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-beta) to call Graph APIs. .                              |[View][graph#lifecycle#cs]       |
+|3|Graph API Teams App Installation Life Cycle | This sample illustrates how you can use [Teams App Installation Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/teamsappinstallation?view=graph-rest-1.0) by calling Microsoft Graph APIs. .                              |[View][graph#instllationlifecycle#cs]       |
 
 
 ## Scenario specific samples
@@ -109,14 +111,13 @@
 [group-tab-sso-quickstart#ts]:samples/tab-channel-group-sso-quickstart/ts
 [group-tab-sso-quickstart#js]:samples/tab-channel-group-sso-quickstart/js
 [group-tab-sso-quickstart#csharp]:samples/tab-channel-group-sso-quickstart/csharp_dotnetcore
-
+[tab-deeplink#csharp]:samples/tab-deeplink/csharp
 [personal-tab#cs#razor]:samples/tab-personal/razor-csharp
 [personal-tab#cs#mvc]:samples/tab-personal/mvc-csharp
 
 [group-channel-tab#cs#razor]:samples/tab-channel-group/razor-csharp
 [group-channel-tab#cs#mvc]:samples/tab-channel-group/mvc-csharp
 [group-channel-tab#ts#spfx]:samples/tab-channel-group/spfx
-[deeplink-subentityId#cs]:samples/tab-deeplink/csharp
 
 [connector#cs]:samples/connector-todo-notification/csharp
 [connector#ts]:samples/connector-github-notification/nodejs
@@ -154,6 +155,7 @@
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#rsc#js]:samples/graph-rsc/nodeJs
 [graph#lifecycle#cs]:samples/graph-channel-lifecycle/csharp
+[graph#instllationlifecycle#cs]:samples/graph-app-installation-lifecycle/csharp
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 
 ## Submitting issues
