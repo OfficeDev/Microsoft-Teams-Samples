@@ -96,6 +96,8 @@
 |4|Meetings Extensibility | Microsoft Teams meeting extensibility sample: token passing |[View][meetings-token-app#cs]     |
 |5|Meeting Content Bubble Bot | Microsoft Teams meeting extensibility sample for iteracting with Content Bubble Bot in-meeting |[View][meetings-content-bubble#cs]    |[View][meetings-content-bubble#js]
 |6|Region Selection App | This app contains a bot and Tab which is helpful to set the region |[View][region-selection-app#cs]     |
+|7|App Localization | Microsoft Teams app localization using Bot and Tab |[View][app-localization#cs]     |
+
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
@@ -150,6 +152,8 @@
 [region-selection-app#cs]: samples/app-region-selection/csharp  
 [meetings-content-bubble#cs]:samples/meetings-content-bubble/csharp
 [meetings-content-bubble#js]:samples/meetings-content-bubble/nodejs
+[app-localization#cs]:samples/app-localization/csharp
+
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#rsc#js]:samples/graph-rsc/nodeJs
 [graph#lifecycle#cs]:samples/graph-channel-lifecycle/csharp
