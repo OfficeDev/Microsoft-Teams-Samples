@@ -1,4 +1,3 @@
-import React from "react";
 import { List } from "@fluentui/react-teams";
 
 export function ListTab() {

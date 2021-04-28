@@ -120,8 +120,9 @@ task("schema-validation", (callback) => {
  * Creates the tab manifest
  */
 task("zip", () => {
-  return src("./src/manifest/**/*.*")
-    .pipe(src("./temp/manifest.json"))
+  return src("./temp/manifest.json")
+  .pipe(src("./src/manifest/icon-color.png"))
+    .pipe(src("./src/manifest/icon-outline.png"))
     .pipe(zip(config.manifestFileName))
     .pipe(dest("package"));
 });
