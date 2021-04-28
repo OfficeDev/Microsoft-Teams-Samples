@@ -2,12 +2,8 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
   "manifestVersion": "1.9",
   "version": "1.0",
-  "id": "<<YOUR-MICROSOFT-APP-ID>>",
-  "packageName": "com.microsoft.teams.sample.meetingtoken",
-  "webApplicationInfo": {
-    "id": "690412fe-6f2a-4de8-a6e1-e856afc15692",
-    "resource": "api://63482176cf2a.ngrok.io/690412fe-6f2a-4de8-a6e1-e856afc15692"
-  },
+  "id": "<<Your-Microsoft-App-Id>>",
+  "packageName": "com.microsoft.teams.sample.deeplinkBot",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "",
@@ -57,7 +53,7 @@
   ],
   "bots": [
     {
-      "botId": "690412fe-6f2a-4de8-a6e1-e856afc15692",
+      "botId": "<<Your-Microsoft-App-Id>>",
       "scopes": [
         "groupchat",
         "personal",

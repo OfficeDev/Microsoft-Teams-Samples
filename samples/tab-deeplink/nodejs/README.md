@@ -66,6 +66,9 @@ This sample displays how to consume SubEntity Id to DeepLink from Bot to Tab and
 ## Interacting with the bot
 
 Enter text in the emulator.  The text will be echoed back by the bot.
-1. Interact with DeepLink bot by pinging it. 
+1. Interact with DeepLink bot by pinging it in personal or channel scope. 
+![](https://user-images.githubusercontent.com/50989436/116378355-adef4300-a82f-11eb-865e-1366ad0163c7.png)
 2. Select the option from the options displayed in the adaptive card. This will redirect to the respective Task in the Tab.
+![](https://user-images.githubusercontent.com/50989436/116378517-d5dea680-a82f-11eb-9717-9eeb84942a05.png)
 3. Click on Back to List to view all the options. User can select an option which will redirect to the respective Task in the Tab.
+![](https://user-images.githubusercontent.com/50989436/116378607-ed1d9400-a82f-11eb-9234-33e307ccf184.png)
