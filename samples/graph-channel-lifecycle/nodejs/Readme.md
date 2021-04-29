@@ -16,7 +16,8 @@ This sample show sthe [Channel](https://docs.microsoft.com/en-us/graph/api/resou
     git clone https://github.com/Microsoft/botbuilder-samples.git
     ```
 
-1) In a terminal, navigate to `samples/javascript_nodejs/ChannelLifeCycle-NodeJs`
+1) In a terminal, navigate to `samples/graph-channel-lifecycle/nodejs
+`
 
 1) Install modules
 
