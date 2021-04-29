@@ -25,10 +25,10 @@ This sample show sthe [Channel](https://docs.microsoft.com/en-us/graph/api/resou
     npm install
     ```
 
-1) Run ngrok - point to port 3978
+1) Run ngrok - point to port 3333
 
     ```bash
-    ngrok http -host-header=rewrite 3978
+    ngrok http -host-header=rewrite 3333
     ```
 
 
