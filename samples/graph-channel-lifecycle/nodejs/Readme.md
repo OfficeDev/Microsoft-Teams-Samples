@@ -13,7 +13,7 @@ This sample show sthe [Channel](https://docs.microsoft.com/en-us/graph/api/resou
 1) Clone the repository
 
     ```bash
-    git clone https://github.com/Microsoft/botbuilder-samples.git
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
 1) In a terminal, navigate to `samples/graph-channel-lifecycle/nodejs
@@ -25,14 +25,14 @@ This sample show sthe [Channel](https://docs.microsoft.com/en-us/graph/api/resou
     npm install
     ```
 
-1) Run ngrok - point to port 3333
+1) Run ngrok - point to port 3978
 
     ```bash
-    ngrok http -host-header=rewrite 3333
+    ngrok http -host-header=rewrite 3978
     ```
 
 
-1) Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+1) Update the `.env` configuration for the bot to use the ```Microsoft App Id``` and ```App Password``` from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
 1) Run your bot at the command line:
 

@@ -27,6 +27,6 @@ app.get('/lifeCycleDemo', function(req, res) {
     
   });
 
-app.listen(3333 ||3000, function () {
-    console.log('app listening on port 3333!');
+app.listen(3978, function () {
+    console.log('app listening on port 3978!');
 }); 
