@@ -1,8 +1,6 @@
 # DeepLink
 
-Bot Framework v4 DeepLink sample
-
-This sample displays how to consume SubEntity Id to DeepLink from Bot to Tab and Tab to Tab.
+This sample displays how to consume SubEntity Id to [DeepLink](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-links#deep-linking-to-your-tab) from Bot to Tab and Tab to Tab.
 
 ## Prerequisites
 
@@ -24,43 +22,43 @@ This sample displays how to consume SubEntity Id to DeepLink from Bot to Tab and
 
 ## To try this sample
 
-- Clone the repository
+1. Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-- In a terminal, navigate to `samples/javascript_nodejs/DeepLinkTabnode`
+    - In a terminal, navigate to `samples/tab-deeplink/nodejs`
 
-    ```bash
-    cd samples/javascript_nodejs/DeepLinkTabnode
-    ```
+        ```bash
+        cd samples/tab-deeplink/nodejs
+        ```
 
-- Install modules
+    - Install modules
 
-    ```bash
-    npm install
-    ```
+        ```bash
+        npm install
+        ```
 
-- Start the bot
+    - Start the bot
 
-    ```bash
-    npm start
-    ```
+        ```bash
+        npm start
+        ```
 
-2. If you are using Visual Studio code
-- Launch Visual Studio code
-- Folder -> Open -> Project/Solution
-- Navigate to ```samples\DeepLinkBotnode\``` folder
-- Select ```DeepLinkBotnode``` Folder
-3. To run the application required  node modules.Please use this command to install modules npm i
-4. Run ngrok - point to port 3978
+1. If you are using Visual Studio code
+    - Launch Visual Studio code
+    - Folder -> Open -> Project/Solution
+    - Navigate to ```samples\DeepLinkBotnode\``` folder
+    - Select ```DeepLinkBotnode``` Folder
+1. To run the application required  node modules.Please use this command to install modules npm i
+1. Run ngrok - point to port 3978 (This is your Base_URL)
    ```ngrok http -host-header=rewrite 3978```
-5. Create a new Bot by following steps mentioned in [Build a bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots?view=msteams-client-js-latest#build--a-bot-for-teams-with-the-microsoft-bot-framework) documentation.
-6. Go to .env file  and add ```MicrosoftAppId``` and  ```MicrosoftAppPassword``` information.
-7. Run your app, either from Visual Studio code  with ``` npm start``` or using ``` Run``` in the Terminal.
-8. Update the manifest.json file with ```Microsoft-App-ID```,```ContentUrl```, ```WebsiteUrl``` and ```EntityID``` value.
-9. Install the app in Teams.
+1. Create a new Bot by following steps mentioned in [Build a bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots?view=msteams-client-js-latest#build--a-bot-for-teams-with-the-microsoft-bot-framework) documentation.
+1. Go to .env file  and add ```MicrosoftAppId``` ,  ```MicrosoftAppPassword``` and ```Base_URL``` information.
+1. Run your app, either from Visual Studio code  with ``` npm start``` or using ``` Run``` in the Terminal.
+1. Update the manifest.json file with ```Microsoft-App-ID```,```ContentUrl```, ```WebsiteUrl``` and ```EntityID``` value.
+1. Install the app in Teams.
 
 
 ## Interacting with the bot
