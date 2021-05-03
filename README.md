@@ -8,7 +8,8 @@
 
 |    | Sample Name        | Description                                                                                                                | C#    | TypeScript   
 |:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|
-|1|Hello World            | Microsoft Teams hello world sample app.                                          |[View][app-hello-world#cs]     |[View][app-hello-world#ts]
+|1|Hello World            | Microsoft Teams hello world sample app.                                           |[View][app-hello-world#cs]     |[View][app-hello-world#ts]
+|1|Teams Virtual Assistant| Customized virtual assistant template to support teams capabilities.              |[View][msteams-virtual-assistant#cs]|
 
 ## [Tabs samples](https://docs.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   | JavaScript
