@@ -32,7 +32,10 @@ This sample show sthe [Channel](https://docs.microsoft.com/en-us/graph/api/resou
     ```
 
 
-1) Update the `.env` configuration for the bot to use the ```Microsoft App Id``` and ```App Password``` from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+1) Register your app with Microsoft identity platform via the Azure AD portal
+    - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2). 
+
+1) Update the `.env` configuration for the bot to use the ```Microsoft App Id``` and ```App Password```
 
 1) Run your bot at the command line:
 
