@@ -22,7 +22,7 @@
 |7|SPFx Tab | Sample app showing Microsoft Teams tabs using SharePoint Framework                                    |   | [View][group-channel-tab#ts#spfx] |
 |8|Tab SSO               | Microsoft Teams sample app for tabs Azure AD SSO                                      | | [View][tab-sso#ts] ,[Teams Toolkit](https://docs.microsoft.com/microsoftteams/platform/toolkit/visual-studio-code-tab-sso)
 |9|Config Tab Authentication               | Microsoft Teams sample app for config tabs Azure AD authentication | [View]()                       | | 
-|10|Deep Link consuming Subentity ID      | Microsoft Teams sample app for demonstrating deeplink from Bot chat to Tab consuming Subentity ID | [View][tab-deeplink#csharp]                       | | 
+|10|Deep Link consuming Subentity ID      | Microsoft Teams sample app for demonstrating deeplink from Bot chat to Tab consuming Subentity ID | [View][tab-deeplink#csharp]                       | | [View][tab-deeplink#nodejs]|
 
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
@@ -115,6 +115,7 @@
 [group-tab-sso-quickstart#js]:samples/tab-channel-group-sso-quickstart/js
 [group-tab-sso-quickstart#csharp]:samples/tab-channel-group-sso-quickstart/csharp_dotnetcore
 [tab-deeplink#csharp]:samples/tab-deeplink/csharp
+[tab-deeplink#nodejs]:samples/tab-deeplink/nodejs
 [personal-tab#cs#razor]:samples/tab-personal/razor-csharp
 [personal-tab#cs#mvc]:samples/tab-personal/mvc-csharp
 
