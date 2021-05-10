@@ -100,6 +100,7 @@
 |6|Meeting SidePanel | Microsoft Teams meeting extensibility sample for iteracting with Side Panel in-meeting |[View][meetings-sidepanel#cs]     |
 |7|Region Selection App | This app contains a bot and Tab which is helpful to set the region |[View][region-selection-app#cs]     |
 |8|App Localization | Microsoft Teams app localization using Bot and Tab |[View][app-localization#cs]     |
+|9|SharePoint Uploader | Microsoft Teams app to submit assets and get approval through Universal bots |[View][app-sharepoint-uploader#cs]     |
 
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
@@ -158,6 +159,7 @@
 [meetings-sidepanel#cs]:samples/meetings-sidepanel/csharp
 [meetings-content-bubble#js]:samples/meetings-content-bubble/nodejs
 [app-localization#cs]:samples/app-localization/csharp
+[app-sharepoint-uploader#cs]:samples/app-sharepoint-uploader/csharp
 
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#rsc#js]:samples/graph-rsc/nodeJs
