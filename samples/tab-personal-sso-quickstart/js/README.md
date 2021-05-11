@@ -13,8 +13,10 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are sco
 
 ## ngrok
 
-Teams needs to access your tab from a publically accessible URL. If you are running your app in localhost, you will need to use a tunneling service like ngrok. Run ngrok and point it to localhost.
-  `ngrok http https://localhost:3000`
+Teams needs to access your tab from a publically accessible URL. If you are running your app in localhost, you will need to use a tunneling service like ngrok.
+
+-  Run ngrok and point it to localhost:
+-  `ngrok http https://localhost:3000`
 
 Note: It may be worth purchasing a basic subscription to ngrok so you can get a fixed subdomain ( see the --subdomain ngrok parameter)
 
@@ -38,6 +40,7 @@ On the first time running and debugging your app you need allow the localhost ce
 - Navigate to `https://localhost:3000/tab`
 - Click the `Advanced` button
 - Select the `Continue to localhost`
+- You may also need to enable popups in the browser to see the auth consent page.
 
 ### NOTE: Debugging
 Ensure you have the Debugger for Chrome/Edge extension installed for Visual Studio Code from the marketplace.

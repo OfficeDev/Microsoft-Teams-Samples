@@ -1,0 +1,15 @@
+﻿
+@{ ViewBag.Title = "Detail"; }
+@model Microsoft.BotBuilderSamples.Controllers.DeepLinksModel
+
+<script src="https://statics.teams.microsoft.com/sdk/v1.4.2/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+
+<script>
+    microsoftTeams.initialize();
+    microsoftTeams.executeDeepLink("@Model.linkUrl")
+</script>
+
+<p>
+    @Html.ActionLink("Back to List", "TaskList")
+</p>
+
