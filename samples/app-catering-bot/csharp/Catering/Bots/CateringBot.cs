@@ -15,7 +15,6 @@ using System.Net;
 using AdaptiveCards;
 using Microsoft.Bot.AdaptiveCards;
 using System.Linq;
-using Microsoft.Bot.Schema.Teams;
 using Microsoft.Identity.Client;
 using Microsoft.Extensions.Configuration;
 
@@ -192,24 +191,6 @@ namespace Catering
             };
         }
 
-        private static TaskModuleContinueResponse CreateTeamsInvokeResponse(object body = null)
-        {
-            string serializedBody = JsonConvert.SerializeObject(body);
-            string encodedBody = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(serializedBody));
-            return new TaskModuleContinueResponse
-            {
-                Value = new TaskModuleTaskInfo
-                {
-                    Url = "https://dummyurl.com",
-                    FallbackUrl = "https://dummyurl.com",
-                    Height = 600,
-                    Width = 600,
-                    Title = encodedBody,
-                    CompletionBotId = "be518d02-7ebc-4f26-8f72-284aa8a43349",
-                }
-            };
-        }
-
         private static async Task SendWelcomeMessageAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
             foreach (var member in turnContext.Activity.MembersAdded)
@@ -296,10 +277,10 @@ namespace Catering
         {
             var app = ConfidentialClientApplicationBuilder.Create(_configuration["MicrosoftAppId"])
                        .WithClientSecret(_configuration["MicrosoftAppPassword"])
-                       .WithAuthority(new System.Uri($"{"https://login.microsoftonline.com"}/{"botframework.com"}"))
+                       .WithAuthority(new System.Uri($"{_configuration["MicrosoftLoginUri"]}/{"botframework.com"}"))
                        .Build();
 
-            var authResult = await app.AcquireTokenForClient(new string[] { "https://api.botframework.com/.default" }).ExecuteAsync();
+            var authResult = await app.AcquireTokenForClient(new string[] { _configuration["BotFrameworkUri"] + ".default" }).ExecuteAsync();
             return authResult.AccessToken;
         }
 
@@ -307,16 +288,15 @@ namespace Catering
         {
             var token = await GetAccessToken();
             var requestAsString = JsonConvert.SerializeObject(activity);
-            //var path = $"v3/conversations/{convId}/activities";
+            
             var headers = new Dictionary<string, string>
             {
                 { "User-Agent", "UniversalBot" },
                 { "Authorization", $"Bearer {token}" }
             };
 
-            string requestUri;
-            //requestUri = $"https://canary.botapi.skype.com/amer-df/v3/conversations/{convId}/activities";
-            requestUri = $"https://smba.trafficmanager.net/amer/v3/conversations/{convId}/activities";
+            var path = $"v3/conversations/{convId}/activities";
+            string requestUri = _configuration["BaseUriSmba"] + path;
             
             HttpRequestMessage request = new HttpRequestMessage(method, requestUri);
 
