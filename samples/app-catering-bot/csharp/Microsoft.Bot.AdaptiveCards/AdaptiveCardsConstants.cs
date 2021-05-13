@@ -6,6 +6,5 @@
         public const string Error = "application/vnd.microsoft.error";
         public const string LoginRequest = "application/vnd.microsoft.activity.loginRequest";
         public const string Message = "application/ vnd.microsoft.activity.message";
-
     }
 }

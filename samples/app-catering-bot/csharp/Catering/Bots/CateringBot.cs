@@ -17,6 +17,7 @@ using Microsoft.Bot.AdaptiveCards;
 using System.Linq;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Identity.Client;
+using Microsoft.Extensions.Configuration;
 
 namespace Catering
 {
@@ -37,12 +38,14 @@ namespace Catering
         private BotState _userState;
         private CateringDb _cateringDb;
         private readonly CateringRecognizer _cateringRecognizer;
+        private readonly IConfiguration _configuration;
 
-        public CateringBot(UserState userState, CateringDb cateringDb, CateringRecognizer cateringRecognizer)
+        public CateringBot(UserState userState, CateringDb cateringDb, CateringRecognizer cateringRecognizer, IConfiguration configuration)
         {
             _userState = userState;
             _cateringDb = cateringDb;
             _cateringRecognizer = cateringRecognizer;
+            _configuration = configuration;
         }
 
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
@@ -289,10 +292,10 @@ namespace Catering
             return CardResponse("Confirmation.json");
         }
 
-        private static async Task<string> GetAccessToken()
+        private async Task<string> GetAccessToken()
         {
-            var app = ConfidentialClientApplicationBuilder.Create("be518d02-7ebc-4f26-8f72-284aa8a43349")
-                       .WithClientSecret("JX1ty-.4F5-ylcwsihVDKXnH..2AQ59urz")
+            var app = ConfidentialClientApplicationBuilder.Create(_configuration["MicrosoftAppId"])
+                       .WithClientSecret(_configuration["MicrosoftAppPassword"])
                        .WithAuthority(new System.Uri($"{"https://login.microsoftonline.com"}/{"botframework.com"}"))
                        .Build();
 
@@ -300,7 +303,7 @@ namespace Catering
             return authResult.AccessToken;
         }
 
-        private async static Task<string> SendHttpToTeams(HttpMethod method, IActivity activity, string convId, string messageId = null)
+        private async Task<string> SendHttpToTeams(HttpMethod method, IActivity activity, string convId, string messageId = null)
         {
             var token = await GetAccessToken();
             var requestAsString = JsonConvert.SerializeObject(activity);
