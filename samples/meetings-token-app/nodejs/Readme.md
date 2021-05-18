@@ -11,11 +11,6 @@ Through this app, meeting participants can request a "token", which is generated
  - Mark a token as done by the user
  - Skip the current token for the organizer of the meeting
   
-### User interactions
-- **Token** - Requests a token for the user
-- **Done** - Acknowledges that the user is done with the token
-- **Skip** - Skips the current user and moves on to the next person in line for a token. This button is only shown to users with the meeting Organizer role.
-
 ## Prerequisites
 
 ### Tools
@@ -113,6 +108,16 @@ Follow [these instructions](https://docs.microsoft.com/en-us/microsoftteams/plat
 1. Select the Meeting Token app.
 1. Now the app will be visible in the meeting chat.
 1. Start the meeting and the icon should be visible in the meeting control bar.
+
+### User interactions
+- **Token** - Requests a token for the user
+![](https://user-images.githubusercontent.com/50989436/118590957-06778780-b7c1-11eb-898c-44845d86909c.png)
+- **Done** - Acknowledges that the user is done with the token
+![](https://user-images.githubusercontent.com/50989436/118590973-0d9e9580-b7c1-11eb-8405-48ef54c1acf2.png)
+- **Skip** - Skips the current user and moves on to the next person in line for a token. This button is only shown to users with the meeting Organizer role.
+![](https://user-images.githubusercontent.com/50989436/118591024-1f803880-b7c1-11eb-9663-90e6959482dd.png)
+![](https://user-images.githubusercontent.com/50989436/118591053-2909a080-b7c1-11eb-8724-194e2aff2a42.png)
+
 
 ## Troubleshooting
 The sample app uses an in-memory store to maintain token information and the service URL for the tenant. If you restart the project, you must run the following command to recapture the service URL: `@[BotName] reset`
