@@ -3,6 +3,7 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+using AppCatalogSample.Helper;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
@@ -54,6 +55,8 @@ namespace AppCatalogSample.Dialogs
                     var botAdapter = (BotFrameworkAdapter)innerDc.Context.Adapter;
                     await botAdapter.SignOutUserAsync(innerDc.Context, ConnectionName, null, cancellationToken);
                     await innerDc.Context.SendActivityAsync(MessageFactory.Text("You have been signed out."), cancellationToken);
+                    AppCatalog appCatalog = new AppCatalog();
+                    appCatalog.GetToken(string.Empty);
                     return await innerDc.CancelAllDialogsAsync(cancellationToken);
                 }
             }

@@ -2,30 +2,30 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
   "manifestVersion": "1.5",
   "version": "1.0.0",
-  "id": "<<Your Micorosoft AppId>>",
+  "id": "<<Your App Id>>",
   "packageName": "com.microsoft.teams.samples",
   "developer": {
     "name": "Microsoft",
-    "websiteUrl": "",
-    "privacyUrl": "",
-    "termsOfUseUrl": ""
+    "websiteUrl": "https://f7f128cb3e84.ngrok.io/api/messages",
+    "privacyUrl": "https://www.techmahindra.com/en-in/privacy-policy/",
+    "termsOfUseUrl": "https://www.techmahindra.com/en-in/privacy-policy/e"
   },
   "icons": {
     "color": "icon-color.png",
     "outline": "icon-outline.png"
   },
   "name": {
-    "short": "App Catalog Bot",
-    "full": "App Catalog Lifecycle"
+    "short": "Team Auth Module",
+    "full": "Simple Team Auth Module"
   },
   "description": {
-    "short": "App Catalog Bot",
-    "full": "App Catalog lifecycle using Bot and delegated permissions"
+    "short": "Test Team Auth Module Scenario",
+    "full": "Simple Team Auth Module Scenario Test"
   },
   "accentColor": "#FFFFFF",
   "bots": [
     {
-      "botId": "<<Your Micorosoft AppId>>",
+      "botId": "<<Your bot Id>>,,
       "scopes": [
         "personal"
       ],
