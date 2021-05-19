@@ -90,14 +90,14 @@
 
 ## Scenario specific samples
 
-|    | Sample Name       | Description                                                                      | C#    | TypeScript   |
+|    | Sample Name       | Description                                                                      | C#    | JavaScript   |
 |:--:|:------------------|:---------------------------------------------------------------------------------------------------|:--------|:-------------|
 |1|Task Modules          | Sample app showing off the Teams Task Module, a way to invoke custom code from a bot, a tab, or both! |[View][app-task-module#cs]     |[View][app-task-module#ts]
 |2|Authentication        | Sample illustrating seamless inline authentication for Microsoft Teams apps.                      | | [View][app-auth#ts]
 |3|Complete Samples      | A template for building complex bots (SDK V3) for Microsoft Teams.                                      |[View][app-complete#cs]        |[View][app-complete#ts]
 |4|Meetings Extensibility | Microsoft Teams meeting extensibility sample: token passing |[View][meetings-token-app#cs]     |
 |5|Meeting Content Bubble Bot | Microsoft Teams meeting extensibility sample for iteracting with Content Bubble Bot in-meeting |[View][meetings-content-bubble#cs]    |[View][meetings-content-bubble#js]
-|6|Meeting SidePanel | Microsoft Teams meeting extensibility sample for iteracting with Side Panel in-meeting |[View][meetings-sidepanel#cs]     |
+|6|Meeting SidePanel | Microsoft Teams meeting extensibility sample for iteracting with Side Panel in-meeting |[View][meetings-sidepanel#cs]     | [View][meetings-sidepanel#js]
 |7|Region Selection App | This app contains a bot and Tab which is helpful to set the region |[View][region-selection-app#cs]     |
 |8|App Localization | Microsoft Teams app localization using Bot and Tab |[View][app-localization#cs]     |
 
@@ -156,6 +156,7 @@
 [region-selection-app#cs]: samples/app-region-selection/csharp  
 [meetings-content-bubble#cs]:samples/meetings-content-bubble/csharp
 [meetings-sidepanel#cs]:samples/meetings-sidepanel/csharp
+[meetings-sidepanel#js]:samples/meetings-sidepanel/nodejs
 [meetings-content-bubble#js]:samples/meetings-content-bubble/nodejs
 [app-localization#cs]:samples/app-localization/csharp
 
