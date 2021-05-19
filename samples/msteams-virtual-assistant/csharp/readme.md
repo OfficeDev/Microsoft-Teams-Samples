@@ -1,1 +1,1 @@
-Please refer to the [Virtual Assistant Template documentation](http://aka.ms/virtualassistantdocs) for deployment and customization instructions.
+Please refer to the [Virtual Assistant Template documentation](https://microsoft.github.io/botframework-solutions/virtual-assistant/tutorials/create-assistant/csharp/1-intro/) for deployment and customization instructions.
