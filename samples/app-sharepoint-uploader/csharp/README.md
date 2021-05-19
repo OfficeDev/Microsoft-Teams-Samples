@@ -12,7 +12,7 @@ Document manager sample app provides basis for building a digital asset / docume
 
 	Governance: Monitor and review assets being uploaded to the library 
 
-<img src="./Docs/Images/ApproveRequest.gif" width="1000" height="500">
+<img src="./Assets/Images/ApproveRequest.gif" width="1000" height="500">
 
 ## Frameworks
 
@@ -47,37 +47,37 @@ Step 1: Setup bot in Service
 ====================================
 1. Create new bot channel registration resource in Azure.
 
-<img src="./Docs/Images/BotChannelReg.png" alt="Bot Channel Reg" width="1000" height="500">
+<img src="./Assets/Images/BotChannelReg.png" alt="Bot Channel Reg" width="1000" height="500">
 
 
 2. Create New Microsoft App ID and Password.
 
-<img src="./Docs/Images/CreateNewMicrosoftAppId.png" alt="Create New Microsoft App Id" width="1000" height="500">
+<img src="./Assets/Images/CreateNewMicrosoftAppId.png" alt="Create New Microsoft App Id" width="1000" height="500">
 
 3. Go to App registrations and create a new app registration in a different tab.
 4. Register an application.
 	* Fill out name and select third option for supported account type and click "Register".
 
-<img src="./Docs/Images/RegisterAnApplication.png" alt="Register An Application" width="1000" height="500">
+<img src="./Assets/Images/RegisterAnApplication.png" alt="Register An Application" width="1000" height="500">
 
 	* Copy and paste the App Id and Tenant ID somewhere safe. You will need it in a future step.
 
 5. Create Client Secret.
    * Navigate to the "Certificates & secrets" blade and add a client secret by clicking "New Client Secret".
 
-<img src="./Docs/Images/CertificatesAndSecrets.png" alt="Certificates And Secrets" width="1000" height="500">
+<img src="./Assets/Images/CertificatesAndSecrets.png" alt="Certificates And Secrets" width="1000" height="500">
 
 	* Copy and paste the secret somewhere safe. You will need it in a future step.
 	
    * Paste the App Id and password in the respective blocks and click on OK.
 
-<img src="./Docs/Images/PopulateAppIdANdSecret.png" alt="Populate App Id And Secret" width="1000" height="500">
+<img src="./Assets/Images/PopulateAppIdANdSecret.png" alt="Populate App Id And Secret" width="1000" height="500">
 
    * Click on Create on the Bot Channel registration.
    
 6. Go to the created resource, navigate to channels and add "Microsoft Teams" and “Web chat” channels.
 
-<img src="./Docs/Images/BotChannels.png" alt="Bot Channels" width="1000" height="500">
+<img src="./Assets/Images/BotChannels.png" alt="Bot Channels" width="1000" height="500">
 
 
 7. Add any necessary API permissions for downstream calls in the App registration.
@@ -87,7 +87,7 @@ Step 1: Setup bot in Service
 									GroupMember.Read.All, Group.Read.All, GroupMember.ReadWrite.All, Group.ReadWrite.All,Directory.AccessAsUser.All
 		* Delegated permissions - User.Read (enabled by default)
 
-<img src="./Docs/Images/APIPermissions.PNG" alt="API Permissions" width="1000" height="500">
+<img src="./Assets/Images/APIPermissions.PNG" alt="API Permissions" width="1000" height="500">
 
 Step 2: Create sharepoint app
 ====================================
@@ -96,7 +96,7 @@ Step 2: Create sharepoint app
 	* You need to register a new addin/app in your Sharepoint site, this will generate a ClientID and a Client Secret, which we will use to authenticate.
 	* Navigate to https//{SharePointDomain}/_layouts/15/appregnew.aspx
 
-<img src="./Docs/Images/SharepointAppCreation.PNG" alt="Bot Channels" width="1000" height="500">
+<img src="./Assets/Images/SharepointAppCreation.PNG" alt="Bot Channels" width="1000" height="500">
 
 2. Know your Tenant ID and Resource ID
 	* It is very important to know your tenant ID for triggering any kind of service calls. You can get your Tenant ID, Resource Id by following below points:
@@ -104,18 +104,18 @@ Step 2: Create sharepoint app
 	* You will see Site Collection App Permissions under site settings.
 	* You can check your any App and get the Tenant Id and Resource Id from App Identifier. The part after "@" is your tenant ID and the part before @ is Resource ID
 
-<img src="./Docs/Images/AppPermissions.PNG" alt="Bot Channels" width="1000" height="500">
+<img src="./Assets/Images/AppPermissions.PNG" alt="Bot Channels" width="1000" height="500">
 
 3. Grant permissions
 	* New Client app has been created in SP Online site, now its time to decide what permissions this app should have on your site. You can grant Site collection, web or even at list level read or write permissions.
 	* Go to  https//{SharePointDomain}/_layouts/15/appinv.aspx and serach with ClientID we generated earlier. The application will fetch all other details based on your ClientID.
 
-<img src="./Docs/Images/GrantPermission.PNG" alt="Bot Channels" width="1000" height="500">
+<img src="./Assets/Images/GrantPermission.PNG" alt="Bot Channels" width="1000" height="500">
 
 4. Create document library
 	* Create Two document libraries to upload the files into sharepoint doc library
 
-<img src="./Docs/Images/AppCreated.png" alt="App Created" width="1000" height="500">
+<img src="./Assets/Images/AppCreated.png" alt="App Created" width="1000" height="500">
 
 
 Step 3: Run the app locally 
@@ -141,7 +141,7 @@ Step 3: Run the app locally
 
 3. Update the appsettings.json files. 
 
-<img src="./Docs/Images/appsettings.PNG" alt="App Settings" style="width: 100%;">
+<img src="./Assets/Images/appsettings.PNG" alt="App Settings" style="width: 100%;">
 
 NOTE: The App id to be installed into Teams meeting can be retrieved using the graph explorer. As this sample uses the same app to be added to the teams meeting, app needs to be installed into Teams (follow step 4 on how to package and install the app to teams) and use the app's ID generated by Teams (different from the external ID). For more information, see the [List teamsApp](https://docs.microsoft.com/en-us/graph/api/appcatalogs-list-teamsapps?view=graph-rest-1.0&tabs=http) refernce article
 
@@ -156,7 +156,7 @@ NOTE: The App id to be installed into Teams meeting can be retrieved using the g
 
 		ex: https://<subdomain>.ngrok.io/api/messages.
 
-<img src="./Docs/Images/BotConfiguration.png"  width="1000" height="500">
+<img src="./Assets/Images/BotConfiguration.png"  width="1000" height="500">
 
 Step 4: Packaging and installing your app to Teams 
 ==================================================
@@ -171,15 +171,15 @@ This sample app allows users to perform the above functionalities using Teams pl
 
 * Searching to find assets and sharing of those assets is facilitated by search based messaging extension 
 
-<img src="./Docs/Images/ShareAsset.gif" width="1000" height="500">
+<img src="./Assets/Images/ShareAsset.gif" width="1000" height="500">
 
 * If a user has an important asset they had created and want to share with wider community, they can submit the document for uploading to library using messaging action. Document submitted as upload requests are stored in a staging folder, a temporary location 
 
-<img src="./Docs/Images/UploadFile.gif" width="1000" height="500">
+<img src="./Assets/Images/UploadFile.gif" width="1000" height="500">
 
 * Designated repository owners (Team owner in this case) or content team can review and approve incoming document upload requests.  
 
-<img src="./Docs/Images/ApproveRequest.gif" alt="Bot Configuration" width="1000" height="500">
+<img src="./Assets/Images/ApproveRequest.gif" alt="Bot Configuration" width="1000" height="500">
 
 Contextual role-based view in adaptive card is used to provide differing views of the same card in approval workflow. In the above example, the adaptive card posted allows a designated team member on the right side to approve or reject the request based on their review. However, the same adaptive card only allows view option for rest of the team members on the left window.  
 
@@ -187,7 +187,7 @@ On approval, all members of the team get to see a single view of the card update
 
 * The sample also demonstrates the use of [full-width adaptive cards](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cconnector-html#full-width-adaptive-card) which is useful when an adaptive card has 3+ actions.  
 
-<img src="./Docs/Images/Fullwidth.png" width="1000" height="500">
+<img src="./Assets/Images/Fullwidth.png" width="1000" height="500">
 
 ## Take it Further
 
