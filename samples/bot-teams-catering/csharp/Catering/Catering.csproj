@@ -12,7 +12,6 @@
     <PackageReference Include="Microsoft.Bot.Builder.Azure" Version="4.8.0" />
     <PackageReference Include="Microsoft.Bot.Builder.Dialogs" Version="4.8.0" />
     <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.8.0" />
-    <PackageReference Include="Microsoft.Graph" Version="3.3.0" />
     <PackageReference Include="Microsoft.Identity.Client" Version="4.16.1" />
   </ItemGroup>
 

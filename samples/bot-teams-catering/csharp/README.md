@@ -1,6 +1,6 @@
 # Teams Catering Bot
 
-Bot Framework v4 TeamsCateringBot sample.
+Bot Framework v1.4 TeamsCateringBot sample.
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that accepts food order using Adaptive Cards V2.
 

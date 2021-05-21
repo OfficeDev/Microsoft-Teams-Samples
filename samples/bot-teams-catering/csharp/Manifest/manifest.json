@@ -2,7 +2,7 @@
     "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.7/MicrosoftTeams.schema.json",
     "manifestVersion": "1.7",
     "version": "2.0.0",
-    "id": "be518d02-7ebc-4f26-8f72-284aa8a43349",
+    "id": "<<YourAppId>>",
     "packageName": "teams.catering.bot",
     "developer": {
         "name": "Microsoft Corp.",
@@ -15,8 +15,8 @@
         "outline": "outline.png"
     },
     "name": {
-        "short": "Teams Catering Bot (dipja)",
-        "full": "Teams Catering Bot (dipja)"
+        "short": "Teams Catering Bot",
+        "full": "Teams Catering Bot"
     },
     "description": {
         "short": "Catering bot helps you place orders using adaptive cards",
@@ -25,7 +25,7 @@
     "accentColor": "#FFFFFF",
     "bots": [
         {
-            "botId": "be518d02-7ebc-4f26-8f72-284aa8a43349",
+            "botId": "<<YourBotId>>",
             "scopes": [
                 "personal",
                 "team",
