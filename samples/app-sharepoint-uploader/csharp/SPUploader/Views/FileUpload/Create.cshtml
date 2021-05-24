@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Create";
+}
+
+<P>Your file is being processed.</P>
+@section Scripts {
+    <script src="https://statics.teams.microsoft.com/sdk/v1.4.2/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            microsoftTeams.initialize();          
+            microsoftTeams.tasks.submitTask();
+        });
+    </script>
+}
+

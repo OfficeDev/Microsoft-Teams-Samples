@@ -1,0 +1,138 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4",
+  "type": "AdaptiveCard",
+  "refresh": {
+    "action": {
+      "type": "Action.Execute",
+      "title": "Submit",
+      "verb": "cardRefresh"
+    },
+    "userIds": [ "${userMRI}" ]
+  },
+  "body": [
+    {
+      "type": "Container",
+      "style": "emphasis",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "size": "Large",
+                  "weight": "Bolder",
+                  "text": "**Asset Submission Request**"
+                }
+              ],
+              "width": "stretch"
+            },
+            {
+              "type": "Column",
+              "items": [
+                {
+                  "type": "Image",
+                  "url": "https://adaptivecards.io/content/pending.png",
+                  "altText": "www.microsoft.com",
+                  "height": "30px"
+                }
+              ],
+              "width": "auto"
+            }
+          ]
+        }
+      ],
+      "bleed": true
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "size": "ExtraLarge",
+                  "text": "${docName}",
+                  "wrap": true
+                }
+              ],
+              "width": "stretch"
+            }
+          ]
+        },
+        {
+          "type": "TextBlock",
+          "spacing": "Small",
+          "size": "Small",
+          "weight": "Bolder",
+          "color": "Accent",
+          "text": "${approverName}, Your Action REQUIRED! "
+        },
+        {
+          "type": "FactSet",
+          "spacing": "Large",
+          "facts": [
+            {
+              "title": "Submitted By",
+              "value": "${submittedBy}"
+            },
+            {
+              "title": "Submitted On",
+              "value": "${dateOfSubmission}"
+            },
+            {
+              "title": "Awaiting approval from",
+              "value": "${approverName}"
+            },
+            {
+              "title": "Submitted to",
+              "value": "${submittedTo}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "ActionSet",
+          "actions": [
+            {
+              "type": "Action.Execute",
+              "title": "Approve",
+              "style": "positive",
+              "verb": "approveRequest"
+            },
+            {
+              "type": "Action.Execute",
+              "title": "Reject",
+              "style": "positive",
+              "verb": "rejectRequest"
+            },
+            {
+              "type": "Action.OpenUrl",
+              "title": "View Asset",
+              "url": "${url}"
+            },
+            {
+              "type": "Action.OpenUrl",
+              "title": "Chat with Requestor",
+              "Url": "${userChat}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "msteams": {
+    "width": "Full"
+  }
+}

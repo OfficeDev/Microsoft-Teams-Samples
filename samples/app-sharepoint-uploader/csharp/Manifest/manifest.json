@@ -1,0 +1,95 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.8",
+  "version": "1.0.1",
+  "id": "<<BotId>>",
+  "packageName": "com.teams.assets",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Document Manager",
+    "full": "Sample to work with sharepoint upload"
+  },
+  "description": {
+    "short": "Document Manager",
+    "full": "Sample to work with sharepoint upload"
+  },
+  "accentColor": "#5558AF",
+  "bots": [
+    {
+      "botId": "<<BotId>>",
+      "scopes": [
+        "team",
+        "groupchat"
+      ],
+      "supportsFiles": true,
+      "isNotificationOnly": false
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "<<BotId>>",
+      "canUpdateConfiguration": false,
+      "commands": [
+        {
+          "id": "searchAssets",
+          "description": "Search All",
+          "title": "All",
+          "initialRun": true,
+          "parameters": [
+            {
+              "title": "query",
+              "name": "assetTitle",
+              "description": "Enter asset name"
+            }
+          ]
+        },
+        {
+          "id": "RecentlyAdded",
+          "description": "Recently added resources title.",
+          "title": "Recently Added",
+          "initialRun": true,
+          "parameters": [
+            {
+              "title": "recent",
+              "name": "recentlyAdded",
+              "description": "Enter resource name"
+            }
+          ]
+        },
+        {
+          "id": "UploadAFile",
+          "description": "upload a file to sp",
+          "title": "Upload file to SP",
+          "type": "action",
+          "fetchTask": true,
+          "context": [
+            "compose",
+            "commandBox",
+            "message"
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "token.botframework.com",
+    "*.ngrok.io"
+  ],
+  "webApplicationInfo": {
+    "id": "00000003-0000-0ff1-ce00-000000000000",
+    "resource": "https://microsoft.sharepoint-df.com"
+  }
+}
