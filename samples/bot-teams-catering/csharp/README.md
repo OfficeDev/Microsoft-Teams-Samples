@@ -143,10 +143,9 @@ NOTE: The App id to be installed into Teams meeting can be retrieved using the g
 
 4. Press F5 to run the project in the Visual studio.
 
-5. Run Ngrok to expose your local web server via a public URL. Make sure to point it to your Ngrok URI. For example, if you're using port 3333 locally, run:
+5. Run Ngrok to expose your local web server via a public URL. Make sure to point it to your Ngrok URI. For example, if you're using port 2978 locally, run:
 
-		Win: ./ngrok http 3333 -host-header=localhost:3333 -subdomain="contoso"
-		Mac: /ngrok http 3333 -host-header=localhost:3333 -subdomain="contoso".
+		ngrok http -host-header=rewrite 2978
 
 6. Update messaging endpoint in the Azure Bots Channel Registration. Open the Bot channel registration, click on Configuration/Settings on the left pane, whichever is available and update the messaging endpoint to the endpoint that bot app will be listening on. Update the ngrok URL in the below format for the messaging endpoint.
 
