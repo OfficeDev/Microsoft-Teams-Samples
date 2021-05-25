@@ -295,9 +295,11 @@ namespace Catering
                 { "Authorization", $"Bearer {token}" }
             };
 
-            var path = $"v3/conversations/{convId}/activities";
-            string requestUri = _configuration["BaseUriSmba"] + path;
-            
+            var path = $"/conversations/{convId}/activities";
+
+            // The Bot Service Url needs to be dynamically fetched (and stored) from the Team. Recommendation is to capture the serviceUrl from the bot Payload and later re-use it to send proactive messages.
+            string requestUri = _configuration["BotServiceUrl"] + path;
+
             HttpRequestMessage request = new HttpRequestMessage(method, requestUri);
 
             if (headers != null)
