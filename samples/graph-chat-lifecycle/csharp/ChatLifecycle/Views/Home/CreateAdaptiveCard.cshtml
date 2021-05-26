@@ -1,0 +1,70 @@
+﻿@using ChatLifecycle.Helper;
+
+<script src='https://statics.teams.cdn.office.net/sdk/v1.8.0/js/MicrosoftTeams.min.js'></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<h4 id="successMsg"></h4>
+
+
+<script>
+
+    microsoftTeams.initialize();
+     window.onload = function () {
+
+         microsoftTeams.initialize();
+            let taskInfo = {
+            title: null,
+            height: null,
+            width: null,
+            url: null,
+            card: null,
+            fallbackUrl: null,
+            completionBotId: null,
+        };
+
+            taskInfo.card =   @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(AdaptiveCardHelper.GetAdaptiveCard()));
+            taskInfo.title = "";
+            taskInfo.height = "280";
+            taskInfo.width = "500";
+
+
+        // Set fallback URL
+        taskInfo.fallbackUrl = taskInfo.url;
+        microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+        }
+
+
+    submitHandler = (err,result) => {
+           microsoftTeams.initialize();
+           microsoftTeams.getContext(function (context) {
+           
+            var userID = context.userObjectId;
+            var Json = JSON.stringify(result);
+            var parsedJson = JSON.parse(Json);
+            var resultJson = parsedJson.users;
+            var title = parsedJson.title;
+
+            $.ajax({
+                type: 'GET',
+                url: '/CreateNewTeam',
+                dataType: 'json',
+                data: {resultJson:resultJson,userID:userID,title:title},
+                success: function (response) {
+                     console.log(response);
+                     showSuccessMessage();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    console.log(resultJson);
+                },
+            });
+          })
+    };
+
+    function showSuccessMessage()
+    {
+        document.getElementById("successMsg").innerHTML="Group Chat created with all the selected members. Also, the app has been installed and pinned as a tab successfully!";
+    }
+
+</script>
