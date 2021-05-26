@@ -8,7 +8,7 @@ const appPassword = env.MicrosoftAppPassword;
 const { ConnectorClient, MicrosoftAppCredentials } = require('botframework-connector');
 const credentials = new MicrosoftAppCredentials(appID,appPassword);
 
-getAgenda = (req,res) =>{
+getAgenda = (req) =>{
        
     publishAgenda();
     
@@ -27,10 +27,11 @@ async function publishAgenda() {
             attachments: [CardFactory.adaptiveCard(adaptive)]
             });
         }
-    catch(e){
+    catch(e) {
         console.log(e.message);
         }
     }
+
     async function AgendaAdaptiveList(agenda)
         {
             const aCard = new AdaptiveCards.AdaptiveCard();       
@@ -44,7 +45,7 @@ async function publishAgenda() {
         }
     }   
 
-setContext = (req, res) => {
+    setContext = (req, res) => {
 
     const meetingId = req.body.meetingId;
     const userId = req.body.userId;

@@ -66,7 +66,7 @@ agendaPoints = cacheService.myCache.get("points");
 console.log(agendaPoints);
 
 server.get('/', function indexHTML(req, res, next) {
-    fs.readFile(__dirname + 'Pages/sidePanel.html', function (err, data) {
+    fs.readFile(__dirname + 'Pages/sidePanel.html',{"baseURL":process.env.BaseURL}, function (err, data) {
         if (err) {
             next(err);
             return;
