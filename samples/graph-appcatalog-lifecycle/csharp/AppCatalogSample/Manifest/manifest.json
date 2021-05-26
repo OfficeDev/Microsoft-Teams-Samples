@@ -15,17 +15,17 @@
     "outline": "icon-outline.png"
   },
   "name": {
-    "short": "Team Auth Module",
-    "full": "Simple Team Auth Module"
+    "short": "Team App Catalog",
+    "full": "Simple Team App catalog lifecycle"
   },
   "description": {
-    "short": "Test Team Auth Module Scenario",
-    "full": "Simple Team Auth Module Scenario Test"
+    "short": "App Catalog lifecycle",
+    "full": "Simple Teams app catalog Test"
   },
   "accentColor": "#FFFFFF",
   "bots": [
     {
-      "botId": "<<Your bot Id>>,,
+      "botId": "<<Your bot Id>>",
       "scopes": [
         "personal"
       ],

@@ -60,8 +60,7 @@ namespace AppCatalogSample.Dialogs
             gtoken = tokenResponse.Token;
             if (tokenResponse?.Token != null)
             {
-                AppCatalog appCatalog = new AppCatalog();
-                appCatalog.GetToken(tokenResponse.Token);
+                AppCatalogHelper appCatalog = new AppCatalogHelper(tokenResponse.Token);
                 await stepContext.Context.SendActivityAsync($"You're logged in successfully");
                 return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
             }

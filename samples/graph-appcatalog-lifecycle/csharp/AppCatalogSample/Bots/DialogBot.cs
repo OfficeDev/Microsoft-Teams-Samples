@@ -53,6 +53,7 @@ namespace AppCatalogSample.Bots
             IList<TeamsApp> teamsApps = null;
             Microsoft.Bot.Schema.Attachment attachData = null;
             string logintext = "User is not login.Type 'login' to proceed";
+            AppCatalogHelper appCatalog = new AppCatalogHelper();
             switch (text)
             {
                 case "login":
@@ -60,136 +61,136 @@ namespace AppCatalogSample.Bots
                     await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
                     break;
                 case "listapp":
-                    teamsApps = AppCatalog.GetAllapp().ConfigureAwait(false).GetAwaiter().GetResult();
+                    teamsApps = appCatalog.GetAllapp().ConfigureAwait(false).GetAwaiter().GetResult();
                     if (teamsApps != null && teamsApps.Count > 0)
                     {
-                        taskInfoData= AppCatalog.ParseData(teamsApps);
-                        attachData = AppCatalog.AgendaAdaptiveList("listapp", taskInfoData);
+                        taskInfoData = appCatalog.ParseData(teamsApps);
+                        attachData = appCatalog.AgendaAdaptiveList("listapp", taskInfoData);
                         taskInfoData.Clear();
                         await turnContext.SendActivityAsync(MessageFactory.Attachment(attachData), cancellationToken);
-                        await AppCatalog.SendListActionAsync(turnContext, cancellationToken);
+                        await appCatalog.SendListActionAsync(turnContext, cancellationToken);
                     }
                     else
                     {
                         //login if not authenticated
                         await turnContext.SendActivityAsync(MessageFactory.Text(logintext, logintext), cancellationToken);
                     }
-                    
+
                     break;
                 case "app":
-                    teamsApps = AppCatalog.AppCatalogById().ConfigureAwait(false).GetAwaiter().GetResult();
+                    teamsApps = appCatalog.AppCatalogById().ConfigureAwait(false).GetAwaiter().GetResult();
                     if (teamsApps != null && teamsApps.Count > 0)
                     {
-                       taskInfoData= AppCatalog.ParseData(teamsApps);
-                        attachData = AppCatalog.AgendaAdaptiveList("App",taskInfoData);
+                        taskInfoData = appCatalog.ParseData(teamsApps);
+                        attachData = appCatalog.AgendaAdaptiveList("App", taskInfoData);
                         taskInfoData.Clear();
                         await turnContext.SendActivityAsync(MessageFactory.Attachment(attachData), cancellationToken);
-                        await AppCatalog.SendListActionAsync(turnContext, cancellationToken);
+                        await appCatalog.SendListActionAsync(turnContext, cancellationToken);
                     }
                     else
                     {
                         //login if not authenticated
                         await turnContext.SendActivityAsync(MessageFactory.Text(logintext, logintext), cancellationToken);
                     }
-                   
+
                     break;
                 case "findapp":
-                    teamsApps = AppCatalog.FindApplicationByTeamsId().ConfigureAwait(false).GetAwaiter().GetResult();
+                    teamsApps = appCatalog.FindApplicationByTeamsId().ConfigureAwait(false).GetAwaiter().GetResult();
                     if (teamsApps != null && teamsApps.Count > 0)
                     {
-                        taskInfoData = AppCatalog.ParseData(teamsApps);
-                        attachData = AppCatalog.AgendaAdaptiveList("findapp",taskInfoData);
+                        taskInfoData = appCatalog.ParseData(teamsApps);
+                        attachData = appCatalog.AgendaAdaptiveList("findapp", taskInfoData);
                         taskInfoData.Clear();
                         await turnContext.SendActivityAsync(MessageFactory.Attachment(attachData), cancellationToken);
-                        await AppCatalog.SendListActionAsync(turnContext, cancellationToken);
+                        await appCatalog.SendListActionAsync(turnContext, cancellationToken);
                     }
                     else
                     {
                         //login if not authenticated
                         await turnContext.SendActivityAsync(MessageFactory.Text(logintext, logintext), cancellationToken);
                     }
-                    
+
                     break;
                 case "status":
-                    teamsApps = AppCatalog.AppStatus().ConfigureAwait(false).GetAwaiter().GetResult();
+                    teamsApps = appCatalog.AppStatus().ConfigureAwait(false).GetAwaiter().GetResult();
                     if (teamsApps != null && teamsApps.Count > 0)
                     {
-                        taskInfoData= AppCatalog.ParseData(teamsApps);
-                        attachData = AppCatalog.AgendaAdaptiveList("status", taskInfoData);
+                        taskInfoData = appCatalog.ParseData(teamsApps);
+                        attachData = appCatalog.AgendaAdaptiveList("status", taskInfoData);
                         taskInfoData.Clear();
                         await turnContext.SendActivityAsync(MessageFactory.Attachment(attachData), cancellationToken);
-                        await AppCatalog.SendListActionAsync(turnContext, cancellationToken);
+                        await appCatalog.SendListActionAsync(turnContext, cancellationToken);
                     }
                     else
                     {
                         //login if not authenticated
                         await turnContext.SendActivityAsync(MessageFactory.Text(logintext, logintext), cancellationToken);
                     }
-                    
+
                     break;
                 case "bot":
-                    teamsApps = AppCatalog.ListAppHavingBot().ConfigureAwait(false).GetAwaiter().GetResult();
+                    teamsApps = appCatalog.ListAppHavingBot().ConfigureAwait(false).GetAwaiter().GetResult();
                     if (teamsApps != null && teamsApps.Count > 0)
                     {
-                        taskInfoData=AppCatalog.ParseData(teamsApps);
-                        attachData = AppCatalog.AgendaAdaptiveList("bot", taskInfoData);
+                        taskInfoData = appCatalog.ParseData(teamsApps);
+                        attachData = appCatalog.AgendaAdaptiveList("bot", taskInfoData);
                         taskInfoData.Clear();
                         await turnContext.SendActivityAsync(MessageFactory.Attachment(attachData), cancellationToken);
-                        await AppCatalog.SendListActionAsync(turnContext, cancellationToken);
+                        await appCatalog.SendListActionAsync(turnContext, cancellationToken);
                     }
                     else
                     {
                         //login if not authenticated
                         await turnContext.SendActivityAsync(MessageFactory.Text(logintext, logintext), cancellationToken);
                     }
-                    
+
                     break;
                 case "update":
-                    var upData = AppCatalog.UpdateFileAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+                    var upData = appCatalog.UpdateFileAsync().ConfigureAwait(false).GetAwaiter().GetResult();
                     if (upData == "require login")
                         await turnContext.SendActivityAsync(MessageFactory.Text(logintext, logintext), cancellationToken);
                     else
                     {
-                        attachData = AppCatalog.AdaptivCardList("Update", upData);
+                        attachData = appCatalog.AdaptivCardList("Update", upData);
                         await turnContext.SendActivityAsync(MessageFactory.Attachment(attachData), cancellationToken);
-                        await AppCatalog.SendSuggestedActionsAsync(turnContext, cancellationToken);
+                        await AppCatalogHelper.SendSuggestedActionsAsync(turnContext, cancellationToken);
                     }
                     break;
                 case "publish":
-                    var pubData = AppCatalog.UploadFileAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+                    var pubData = appCatalog.UploadFileAsync().ConfigureAwait(false).GetAwaiter().GetResult();
                     if (pubData == "require login")
                         await turnContext.SendActivityAsync(MessageFactory.Text(logintext, logintext), cancellationToken);
                     else
                     {
-                        attachData = AppCatalog.AdaptivCardList("publish", pubData);
+                        attachData = appCatalog.AdaptivCardList("publish", pubData);
                         await turnContext.SendActivityAsync(MessageFactory.Attachment(attachData), cancellationToken);
-                        await AppCatalog.SendSuggestedActionsAsync(turnContext, cancellationToken);
+                        await AppCatalogHelper.SendSuggestedActionsAsync(turnContext, cancellationToken);
                     }
                     break;
 
                 case "delete":
-                   var delData= AppCatalog.DeleteApp().ConfigureAwait(false).GetAwaiter().GetResult();
+                    var delData = appCatalog.DeleteApp().ConfigureAwait(false).GetAwaiter().GetResult();
                     if (String.IsNullOrEmpty(delData))
                         await turnContext.SendActivityAsync(MessageFactory.Text(logintext, logintext), cancellationToken);
                     else
-                            {
-                                await turnContext.SendActivityAsync(MessageFactory.Text("Delete app successfully"), cancellationToken);
-                                await AppCatalog.SendSuggestedActionsAsync(turnContext, cancellationToken);
-                            }
+                    {
+                        await turnContext.SendActivityAsync(MessageFactory.Text("Delete app successfully"), cancellationToken);
+                        await AppCatalogHelper.SendSuggestedActionsAsync(turnContext, cancellationToken);
+                    }
                     break;
                 case "list":
-                    await AppCatalog.SendListActionAsync(turnContext, cancellationToken);
+                    await appCatalog.SendListActionAsync(turnContext, cancellationToken);
                     break;
                 case "home":
-                    await AppCatalog.SendSuggestedActionsAsync(turnContext, cancellationToken);
+                    await AppCatalogHelper.SendSuggestedActionsAsync(turnContext, cancellationToken);
                     break;
-                default: 
+                default:
                     await turnContext.SendActivityAsync(MessageFactory.Text(text, text), cancellationToken);
                     break;
-            // Run the Dialog with the new message Activity.
-            // await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
+                    // Run the Dialog with the new message Activity.
+                    // await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
+            }
         }
-    }
 
 
         

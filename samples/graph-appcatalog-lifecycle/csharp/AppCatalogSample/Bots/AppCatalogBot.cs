@@ -32,7 +32,7 @@ namespace AppCatalogSample.Bots
                     await turnContext.SendActivityAsync(
                         $"Welcome to  Bot {member.Name} {WelcomeText}",
                         cancellationToken: cancellationToken);
-                    await AppCatalog.SendSuggestedActionsAsync(turnContext, cancellationToken);
+                    await AppCatalogHelper.SendSuggestedActionsAsync(turnContext, cancellationToken);
                 }
             }
         }

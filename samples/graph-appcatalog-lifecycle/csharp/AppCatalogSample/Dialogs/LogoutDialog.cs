@@ -55,8 +55,7 @@ namespace AppCatalogSample.Dialogs
                     var botAdapter = (BotFrameworkAdapter)innerDc.Context.Adapter;
                     await botAdapter.SignOutUserAsync(innerDc.Context, ConnectionName, null, cancellationToken);
                     await innerDc.Context.SendActivityAsync(MessageFactory.Text("You have been signed out."), cancellationToken);
-                    AppCatalog appCatalog = new AppCatalog();
-                    appCatalog.GetToken(string.Empty);
+                    AppCatalogHelper appCatalog = new AppCatalogHelper(string.Empty);
                     return await innerDc.CancelAllDialogsAsync(cancellationToken);
                 }
             }
