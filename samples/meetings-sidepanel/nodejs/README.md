@@ -63,13 +63,10 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
 
 ## Interacting with the app in Teams Meeting
 Interact with SidePanel by clicking on the App icon present on the top menu beside the "more actions" during a meeting.
-1. Once the app is clicked, sidepanel appears with the default agenda list. Only organizer gets the 
-feasibility to add new agenda points to the list using "Add New Agenda Item" button.
+1. Once the app is clicked, sidepanel appears with the default agenda list. Only organizer gets the feasibility to add new agenda points to the list using "Add New Agenda Item" button.
+
 ![](https://user-images.githubusercontent.com/50989436/118759535-d7c7e280-b88e-11eb-955b-8843d1a4a814.png)
-2. On click of "Add" button, agenda point will be added to the agenda list by organizer.
-![](https://user-images.githubusercontent.com/50989436/118760002-ad2a5980-b88f-11eb-821d-3a1f74d9fa71.png)
 
-![](https://user-images.githubusercontent.com/50989436/118759709-28d7d680-b88f-11eb-9aa7-a6b67daa639c.png)
+2. On click of "Add" button, agenda point will be added to the agenda list by organizer.![](https://user-images.githubusercontent.com/50989436/118760002-ad2a5980-b88f-11eb-821d-3a1f74d9fa71.png)![](https://user-images.githubusercontent.com/50989436/118759709-28d7d680-b88f-11eb-9aa7-a6b67daa639c.png)
 
-3. On click of "Publish Agenda", the agenda list will be sent to the meeting chat.
-![](https://user-images.githubusercontent.com/50989436/118759762-3e4d0080-b88f-11eb-8880-b0ed3739cbe0.png)
+3. On click of "Publish Agenda", the agenda list will be sent to the meeting chat.![](https://user-images.githubusercontent.com/50989436/118759762-3e4d0080-b88f-11eb-8880-b0ed3739cbe0.png)
