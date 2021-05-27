@@ -68,11 +68,16 @@ all users who have previously messaged the bot.
 
 ## Interacting with the bot
 
-In addition to responding to incoming messages, bots are frequently called on to send "proactive" messages based on activity, scheduled tasks, or external events.
+Install Proactive Bot in Personal scope
+![image](https://user-images.githubusercontent.com/50989436/119795172-daad7d80-bef5-11eb-9874-3465d8d8ca3e.png)
 
-In order to send a proactive message using Bot Framework, the bot must first capture a conversation reference from an incoming message using `TurnContext.getConversationReference()`. This reference can be stored for later use.
+![image](https://user-images.githubusercontent.com/50989436/119795259-ef8a1100-bef5-11eb-89a2-a4d4b3b496a3.png)
 
-To send proactive messages, acquire a conversation reference, then use `adapter.continueConversation()` to create a TurnContext object that will allow the bot to deliver the new outgoing message.
+Proactive Bot in Teams
+![image](https://user-images.githubusercontent.com/50989436/119795336-016bb400-bef6-11eb-8860-b2ba19d5dc0c.png)
+
+Proactive Bot in Group Chat
+![image](https://user-images.githubusercontent.com/50989436/119795404-0fb9d000-bef6-11eb-8609-62dddd811f6c.png)
 
 ## Deploy this bot to Azure
 
