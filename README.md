@@ -85,7 +85,7 @@
 |    | Sample Name        | Description                                                                      | C#    | JavaScript   |
 |:--:|:-------------------|:-------------------------------------------------------------------------------------------------|:--------|:-------------|
 |1|Resource Specific Consent (RSC) | This sample illustrates how you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs. .                              |[View][graph#rsc#cs]       | [View][graph#rsc#js]
-|2|Graph API Channel Life Cycle | This sample illustrates how you can use [Graph API Channel Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-beta) to call Graph APIs. .                              |[View][graph#lifecycle#cs]       |
+|2|Graph API Channel Life Cycle | This sample illustrates how you can use [Graph API Channel Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-beta) to call Graph APIs. .                              |[View][graph#lifecycle#cs]       | [View][graph#lifecycle#js]
 |3|Graph API Teams App Installation Life Cycle | This sample illustrates how you can use [Teams App Installation Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/teamsappinstallation?view=graph-rest-1.0) by calling Microsoft Graph APIs. .                              |[View][graph#instllationlifecycle#cs]       |
 
 
@@ -166,6 +166,7 @@
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#rsc#js]:samples/graph-rsc/nodeJs
 [graph#lifecycle#cs]:samples/graph-channel-lifecycle/csharp
+[graph#lifecycle#js]:samples/graph-channel-lifecycle/nodejs
 [graph#instllationlifecycle#cs]:samples/graph-app-installation-lifecycle/csharp
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 
