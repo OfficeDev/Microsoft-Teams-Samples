@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <script src="../packages/mgt/dist/es6/index.js"></script>
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css" />
+    <title>Microsoft Teams Tab</title>
+  </head>
+  <body>
+
+    <div id="root">  </div>
+    <mgt-teams-provider
+  client-id="Your_Client_Id"
+  auth-popup-url="/auth.html"
+></mgt-teams-provider>
+    <mgt-login></mgt-login>
+    <mgt-agenda></mgt-agenda>
+    <mgt-people-picker></mgt-people-picker>
+    <mgt-tasks></mgt-tasks>
+
+  </body>
+</html>

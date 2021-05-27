@@ -1,0 +1,26 @@
+{
+    "version": "1.0.0",
+    "configurations": [
+        {
+            "name": "Debug Teams (Chrome)",
+            "type": "chrome",
+            "request": "launch",
+            "url": "https://teams.microsoft.com/_#/l/app/f5ee7603-7bac-4550-9852-5e3eca5757ca?installAppPackage=true",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "name": "Debug Teams (Edge)",
+            "type": "edge",
+            "request": "launch",
+            "url": "https://teams.microsoft.com/_#/l/app/f5ee7603-7bac-4550-9852-5e3eca5757ca?installAppPackage=true",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "name": "Debug (Chrome)",
+            "type": "chrome",
+            "request": "launch",
+            "url": "https://localhost:3000/",
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}
