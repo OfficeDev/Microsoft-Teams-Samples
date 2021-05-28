@@ -9,7 +9,7 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 1. Removing member from chat
 1. Listing member in chat
 1. Listing apps in chat
-1. Installing polly app to chat
+1. Installing Polly app to chat
 1. Adding Polly tab and pinning it.
 
 ## Prerequisites
