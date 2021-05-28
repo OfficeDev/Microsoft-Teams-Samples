@@ -1,7 +1,7 @@
 ﻿# Chat LifeCycle Application
 This sample illustrates Lifecycle of chat in Teams (Creating chat, adding members with all scenarios, deleting member).
 
-Scenarios covered:
+**Scenarios covered:**
 1. Create a Group Chat
 1. Adding member sharing no chat history
 1. Adding member sharing all chat history
