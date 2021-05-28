@@ -4,7 +4,11 @@ Bot Framework v4 AppCatalog sample.
 
 This sample shows a AppCatalog bot and demonstrates teamsApp lifecycle in catalog followed by commands given to Bot.
 
-## Prerequisites
+**Scenarios Covered:**
+- List Apps in catalog
+- Publish App to catalog
+- Update App in catalog
+- Delete App from catalog
 
 ## Prerequisites
 
@@ -22,7 +26,7 @@ This sample shows a AppCatalog bot and demonstrates teamsApp lifecycle in catalo
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `graph-appcatalog-lifecycle/csharp` folder
+  - Navigate to `samples/graph-appcatalog-lifecycle/csharp` folder
   - Select `AppCatalogSample.sln` file
   - Press `F5` to run the project
 
@@ -58,7 +62,7 @@ A) Run ngrok - point to port 3978
  
  
 ## Further reading
-- [App in Catalog] (https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=aadv2%2Ccsharp)
-- [App in Catalog] (https://docs.microsoft.com/en-us/graph/api/resources/teamsapp?view=graph-rest-1.0)
+- [Add authentication to a bot](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=aadv2%2Ccsharp)
+- [App in Catalog](https://docs.microsoft.com/en-us/graph/api/resources/teamsapp?view=graph-rest-1.0)
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)

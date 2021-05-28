@@ -1,29 +1,29 @@
-﻿using System;
+﻿using AdaptiveCards;
+using Microsoft.Bot.Builder;
+using Microsoft.Bot.Schema;
+using Microsoft.Graph;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
-using System.IO;
 using System.Net.Http.Headers;
 using System.Threading;
-using System.Text;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Graph;
-using Microsoft.Bot.Builder;
-using Microsoft.Bot.Schema;
-using AdaptiveCards;
+using System.Threading.Tasks;
 
 namespace AppCatalogSample.Helper
 {
     public class AppCatalogHelper
     {
-        public static  string gToken { get; set; }
+        public static string gToken { get; set; }
 
         public static GraphServiceClient graphServiceClient;
+
         public AppCatalogHelper()
         {
         }
+
         public AppCatalogHelper(string token)
         {
             gToken = token;
@@ -43,11 +43,11 @@ namespace AppCatalogSample.Helper
             gToken = token;
             return token;
         }
+
         public async Task<IList<TeamsApp>> GetAllapp()
         {
             try
             {
-
                 if (string.IsNullOrEmpty(gToken))
                     return null;
                 var teamsApps = await graphServiceClient.AppCatalogs.TeamsApps
@@ -61,7 +61,6 @@ namespace AppCatalogSample.Helper
                 Console.WriteLine(ex.Message);
                 return null;
             }
-
         }
 
         public async Task<IList<TeamsApp>> AppCatalogById()
@@ -76,7 +75,6 @@ namespace AppCatalogSample.Helper
             .Filter($"id eq '{id}'")
             .GetAsync();
                 return teamsApps.CurrentPage;
-
             }
             catch (Exception ex)
             {
@@ -84,12 +82,14 @@ namespace AppCatalogSample.Helper
                 return null;
             }
         }
+
         public string GetAppId()
         {
             var listApp = GetAllapp().ConfigureAwait(false).GetAwaiter().GetResult();
             var id = listApp.Where(x => x.DisplayName == "AppCatalog").Select(x => x.Id).FirstOrDefault();
             return id;
         }
+
         public string GetExternalId()
         {
             var listApp = GetAllapp().ConfigureAwait(false).GetAwaiter().GetResult();
@@ -105,16 +105,17 @@ namespace AppCatalogSample.Helper
                     return null;
                 var ExternalId = GetExternalId();
                 var teamsApps = await graphServiceClient.AppCatalogs.TeamsApps
-           .Request()
-           .Filter($"externalId eq '{ExternalId}'")
-           .GetAsync();
-            return teamsApps.CurrentPage;
+                               .Request()
+                               .Filter($"externalId eq '{ExternalId}'")
+                               .GetAsync();
+                return teamsApps.CurrentPage;
             }
             catch (Exception)
             {
                 return null;
             }
         }
+
         //Return the status of App, Published or not
         public async Task<IList<TeamsApp>> AppStatus()
         {
@@ -124,18 +125,17 @@ namespace AppCatalogSample.Helper
                     return null;
                 var appId = GetAppId();
                 var teamsApps = await graphServiceClient.AppCatalogs.TeamsApps
-        .Request()
-        .Filter($"id eq '{appId}'")
-        .Expand("appDefinitions")
-        .GetAsync();
-         return teamsApps.CurrentPage;
+                                .Request()
+                                .Filter($"id eq '{appId}'")
+                                .Expand("appDefinitions")
+                                .GetAsync();
+                return teamsApps.CurrentPage;
             }
             catch (Exception)
             {
                 return null;
             }
         }
-
 
         // Returns the list of app that contains a  Bot
         public async Task<IList<TeamsApp>> ListAppHavingBot()
@@ -147,10 +147,10 @@ namespace AppCatalogSample.Helper
                 GraphClient graphClient = new GraphClient(gToken);
                 var globalgraphClient = graphClient.GetAuthenticatedClient();
                 var teamsApps = await globalgraphClient.AppCatalogs.TeamsApps
-        .Request()
-        .Filter("appDefinitions/any(a:a/bot ne null)")
-        .Expand("appDefinitions($expand=bot)")
-        .GetAsync();
+                                .Request()
+                                .Filter("appDefinitions/any(a:a/bot ne null)")
+                                .Expand("appDefinitions($expand=bot)")
+                                .GetAsync();
                 return teamsApps.CurrentPage;
             }
             catch (Exception)
@@ -158,11 +158,11 @@ namespace AppCatalogSample.Helper
                 return null;
             }
         }
+
         public async Task<string> DeleteApp()
         {
             try
             {
-
                 if (string.IsNullOrEmpty(gToken))
                     return null;
 
@@ -177,6 +177,7 @@ namespace AppCatalogSample.Helper
                 return ex.Message.ToString();
             }
         }
+
         public async Task<string> UploadFileAsync()
         {
             try
@@ -189,7 +190,7 @@ namespace AppCatalogSample.Helper
                 var multiForm = new MultipartFormDataContent();
                 HttpContent con;
                 string path = System.IO.Directory.GetCurrentDirectory();
-                path = path + @"\Manifest\manifest.zip";
+                path += @"\Manifest\manifest.zip";
                 using (var str = new FileStream(path, FileMode.Open))
                 {
                     con = new StreamContent(str);
@@ -281,8 +282,7 @@ namespace AppCatalogSample.Helper
             }
         }
 
-
-        public static   async Task SendSuggestedActionsAsync(ITurnContext turnContext, CancellationToken cancellationToken)
+        public static async Task SendSuggestedActionsAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
             var reply = MessageFactory.Text("Your Action :" + " \r" + "-" + " List" + " \r" + "-" + " Publish" + " \r" + "-" + " Update" + " \r" + "-" + " Delete" + " \r");
 
@@ -290,7 +290,6 @@ namespace AppCatalogSample.Helper
             {
                 Actions = new List<CardAction>()
                 {
-
                     new CardAction() { Title = "List", Type = ActionTypes.ImBack, Value = "list"},
                     new CardAction() { Title = "Update", Type = ActionTypes.ImBack, Value = "update"},
                     new CardAction() { Title = "Delete", Type = ActionTypes.ImBack, Value = "delete"},
@@ -298,6 +297,7 @@ namespace AppCatalogSample.Helper
             };
             await turnContext.SendActivityAsync(reply, cancellationToken);
         }
+
         public async Task SendListActionAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
             var reply = MessageFactory.Text("Your Action :" + " \r" + "-" + " Home" + " \r" + "-" + " ListApp: listapp" + " \r" + "-" + " ListApp by ID: app" + " \r" + "-" + " App based on manifest Id: findapp" + " \r" + "-" + " App Status:status" + " \r" + "-" + " List of bot:bot" + " \r");
@@ -317,10 +317,8 @@ namespace AppCatalogSample.Helper
             await turnContext.SendActivityAsync(reply, cancellationToken);
         }
 
-
         public List<CardData> ParseData(IList<TeamsApp> teamsApps)
         {
-
             List<CardData> InfoData = new List<CardData>();
             int DataCount = 0;
             foreach (var value in teamsApps)
@@ -343,6 +341,7 @@ namespace AppCatalogSample.Helper
             }
             return InfoData;
         }
+
         public Microsoft.Bot.Schema.Attachment AgendaAdaptiveList(string Header, List<CardData> taskInfoData)
         {
             AdaptiveCard adaptiveCard = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
@@ -358,7 +357,6 @@ namespace AppCatalogSample.Helper
                     {
                         Text = "- " + agendaPoint.DisplayName + " \r" +
                         " - " + agendaPoint.Id + " \r" + " - " + agendaPoint.Published + " \r",
-
                     };
                     adaptiveCard.Body.Add(textBlock);
                 }
@@ -368,12 +366,9 @@ namespace AppCatalogSample.Helper
                     {
                         Text = "- " + agendaPoint.DisplayName + " \r" +
                                             " - " + agendaPoint.Id + " \r",
-
                     };
                     adaptiveCard.Body.Add(textBlock);
                 }
-
-
             }
 
             return new Microsoft.Bot.Schema.Attachment()
@@ -391,11 +386,9 @@ namespace AppCatalogSample.Helper
                 new AdaptiveTextBlock(){Text=Header, Weight=AdaptiveTextWeight.Bolder}
             };
 
-
             AdaptiveTextBlock textBlock = new AdaptiveTextBlock()
             {
                 Text = "- " + response + " \r"
-
             };
             adaptiveCard.Body.Add(textBlock);
 
@@ -406,5 +399,4 @@ namespace AppCatalogSample.Helper
             };
         }
     }
-    
 }
