@@ -1,6 +1,17 @@
 ﻿# Chat LifeCycle Application
 This sample illustrates Lifecycle of chat in Teams (Creating chat, adding members with all scenarios, deleting member).
 
+Scenarios covered:
+1. Create a Group Chat
+1. Adding member sharing no chat history
+1. Adding member sharing all chat history
+1. Adding member sharing chat history for a timespan
+1. Removing member from chat
+1. Listing member in chat
+1. Listing apps in chat
+1. Installing polly app to chat
+1. Adding Polly tab and pinning it.
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
