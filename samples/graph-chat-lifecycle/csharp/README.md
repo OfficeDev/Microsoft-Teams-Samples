@@ -1,17 +1,6 @@
 ﻿# Chat LifeCycle Application
 This sample illustrates Lifecycle of chat in Teams (Creating chat, adding members with all scenarios, deleting member).
 
-**Scenarios covered:**
-1. Create a Group Chat
-1. Adding member sharing no chat history
-1. Adding member sharing all chat history
-1. Adding member sharing chat history for a timespan
-1. Removing member from chat
-1. Listing member in chat
-1. Listing apps in chat
-1. Installing Polly app to chat
-1. Adding Polly tab and pinning it.
-
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -69,6 +58,14 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
     * offline_access
     * OpenId
     * profile
+    * Chat.Create
+    * Chat.ReadWrite
+    * ChatMember.ReadWrite
+    * TeamsAppInstallation.ReadWriteForChat
+    * TeamsAppInstallation.ReadWriteSelfForChat
+    * TeamsTab.Create
+    * TeamsTab.ReadWriteForChat
+    * TeamsTab.ReadWrite.All
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 13. Navigate to **Authentication**
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
@@ -87,11 +84,22 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-1) Update appsettings.json file with Microsoft App Id, App Secret, Tenant Id (from bot created earlier). Polly App Id has been provided to install it after the group chat is created.
+1) Update appsettings.json file with Microsoft App Id, App Secret, Tenant Id (from bot created earlier).
 2) Run your app, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
 ## Interacting with the app in Teams
 
-1. In Teams, Once the app is succefully installed, it can be opened in the tab and has option to create group chat if user is authenticated.
-2. Once create group chat is clicked, user will be able to select users from drop down to create a group chat and add members (using different scenarios) and delete member accordingly to depict the lifecycle of chat.
+1. In Teams, Once the app is successfully installed, it can be opened in the tab and has option to create group chat if user is authenticated.
+
+  ![image](https://user-images.githubusercontent.com/80379013/120188120-592a5800-c233-11eb-99a8-b761ba60d862.png)
+
+2. Once create group chat is clicked, user will be able to add Title of the groupchat and select users from drop down to create a group chat and add members (using different scenarios) and delete member accordingly to depict the lifecycle of chat.
+
+  ![image](https://user-images.githubusercontent.com/80379013/120188158-66dfdd80-c233-11eb-90f9-224a865c910a.png)
+
+  ![image](https://user-images.githubusercontent.com/80379013/120188219-795a1700-c233-11eb-9b2e-fbfeeb3d1480.png)
+
 3. Also, Polly app will be installed to the created group chat and will be pinned to the chat.
+
+  ![image](https://user-images.githubusercontent.com/80379013/120188506-d5bd3680-c233-11eb-97fc-9029385e6458.png)
+
