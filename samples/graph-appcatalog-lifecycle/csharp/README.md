@@ -22,7 +22,7 @@ This sample shows a AppCatalog bot and demonstrates teamsApp lifecycle in catalo
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-  B) Or from Visual Studio
+  A) Or from Visual Studio
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
@@ -31,10 +31,11 @@ This sample shows a AppCatalog bot and demonstrates teamsApp lifecycle in catalo
   - Press `F5` to run the project
 
 
-A) Run ngrok - point to port 3978
+  B) Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http -host-header=rewrite 3978
+      ```bash
+       ngrok http -host-header=rewrite 3978
+
 ## Concepts introduced in this sample
 ### Descriptions MS TeamsApp resource type
 - List apps in catalog
