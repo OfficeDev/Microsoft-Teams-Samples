@@ -1,0 +1,54 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.9",
+  "version": "1.0.0",
+  "id": "<<Your-Microsoft-App-Id>>",
+  "packageName": "com.microsoft.teams.sample.detailstab",
+  "showLoadingIndicator": false,
+
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://dev.botframework.com",
+    "privacyUrl": "https://privacy.microsoft.com",
+    "termsOfUseUrl": "https://www.microsoft.com/en-us/legal/intellectualproperty/copyright/default.aspx"
+  },
+  "name": {
+    "short": "Details Tab"
+  },
+  "description": {
+    "short": "Details Tab",
+    "full": "Details Tab for Meeting Extensibility"
+  },
+  "icons": {
+    "outline": "icon-outline.png",
+    "color": "icon-color.png"
+  },
+  "accentColor": "#ffffff",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://{BaseUrl}/ConfigureTab",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "groupchat"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "<<Your-Bot-Id>>",
+      "scopes": [
+        "groupchat"
+      ],
+      "needsChannelSelector": false,
+      "isNotificationOnly": false,
+      "supportsFiles": false
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.ngrok.io"
+  ]
+}
