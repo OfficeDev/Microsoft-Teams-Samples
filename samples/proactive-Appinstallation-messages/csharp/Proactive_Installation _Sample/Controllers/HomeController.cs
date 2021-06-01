@@ -24,20 +24,12 @@ namespace ProactiveBot.Controllers
 {
     public class HomeController : Controller
     {
-        public static string MicrosoftTenantId;
-        public static string TeamId;
-        public static string MicrosoftAppId;
-        public static string MicrosoftAppPassword;
-        public static string MicrosoftTeamAppid;
         private readonly IConfiguration _configuration;
         ProactiveBot.Bots.ProactiveHelper Helper = new ProactiveBot.Bots.ProactiveHelper();
         private const string WelcomeMessage = "Welcome to the Proactive Bot sample.";
         public HomeController(IConfiguration configuration)
         {
             _configuration = configuration;
-            MicrosoftAppId = _configuration["MicrosoftAppId"];
-            MicrosoftAppPassword = _configuration["MicrosoftAppPassword"];
-            MicrosoftTeamAppid = _configuration["MicrosoftTeamAppid"];
         }
 
         [Route("ConfigureTab")]
@@ -50,16 +42,13 @@ namespace ProactiveBot.Controllers
         [Route("Index")]
         public async Task<IActionResult> Index(string tenantId, string teamId, string chatId)
         {
-            MicrosoftTenantId = tenantId;
-            TeamId = teamId;
-            bool status = false;
             if (chatId != null)
             {
-                status = await Helper.AppInstallationforChat(chatId, MicrosoftTenantId, MicrosoftAppId, MicrosoftAppPassword, MicrosoftTeamAppid);
+                await Helper.AppInstallationforChat(chatId, tenantId, _configuration["MicrosoftAppId"], _configuration["MicrosoftAppSecret"], teamId);
             }
             else
             {
-                status = await Helper.AppInstallationforChannel(teamId, MicrosoftTenantId, MicrosoftAppId, MicrosoftAppPassword, MicrosoftTeamAppid);
+                await Helper.AppInstallationforChannel(teamId, tenantId, _configuration["MicrosoftAppId"], _configuration["MicrosoftAppSecret"],_configuration["AppCatalogTeamAppId"]);
             }
             return Content(WelcomeMessage);
         }

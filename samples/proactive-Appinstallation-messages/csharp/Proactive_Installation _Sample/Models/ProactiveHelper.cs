@@ -15,6 +15,7 @@ using System.Net.Http;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema.Teams;
 using System.Linq;
+using ProactiveBot.Models;
 
 
 
@@ -25,6 +26,8 @@ namespace ProactiveBot.Bots
         public readonly IConfiguration _configuration;
 
         private readonly ConcurrentDictionary<string, ConversationReference> _conversationReferences;
+
+        CheckAppStatus objcheckAppStatus = new CheckAppStatus();
         public ProactiveHelper()
         {
 
@@ -85,12 +88,9 @@ namespace ProactiveBot.Bots
                 }
 
                 var CheckAppid = list.FirstOrDefault(x => x.Id == MicrosoftAppId);
-                if (CheckAppid == null)
+
+                if (CheckAppid== null)
                 {
-                    var teamsApps = await graphClient.AppCatalogs.TeamsApps
-                                    .Request()
-                                    .Filter("distributionMethod eq 'organization'")
-                                    .GetAsync();
                     try
                     {
                         var teamsAppInstallation = new TeamsAppInstallation
@@ -121,11 +121,9 @@ namespace ProactiveBot.Bots
             }
         }
 
-        public async Task<Tuple<bool,int>> AppinstallationforPersonal(string Userid, string MicrosoftTenantId, string MicrosoftAppId, string MicrosoftAppPassword, string MicrosoftTeamAppid)
+        public async Task<CheckAppStatus> AppinstallationforPersonal(string Userid, string MicrosoftTenantId, string MicrosoftAppId, string MicrosoftAppPassword, string MicrosoftTeamAppid)
         {
             List<AppModel> list = new List<AppModel>();
-            Tuple<bool, int> CheckStatus;
-
             try
             {
                 string Access_Token = await GetToken(MicrosoftTenantId, MicrosoftAppId, MicrosoftAppPassword);
@@ -156,8 +154,10 @@ namespace ProactiveBot.Bots
                         await graphClient.Users[Userid].Teamwork.InstalledApps
                             .Request()
                             .AddAsync(userScopeTeamsAppInstallation);
-                        CheckStatus = new Tuple<bool, int>(true, 1);
-                        //return true;
+                       // CheckStatus = new Tuple<bool, int>(true, 1);
+                        objcheckAppStatus.AppCount = 1;
+                        objcheckAppStatus.CheckStatus = true;
+                       
                     }
                     catch (Exception ex)
                     {
@@ -166,7 +166,9 @@ namespace ProactiveBot.Bots
                 }
                 else
                 {
-                    CheckStatus = new Tuple<bool, int>(true, 2);
+                    //CheckStatus = new Tuple<bool, int>(true, 2);
+                    objcheckAppStatus.AppCount = 2;
+                    objcheckAppStatus.CheckStatus = true;
                 }
             }
             catch (Exception ex1)
@@ -174,7 +176,7 @@ namespace ProactiveBot.Bots
 
                 throw ex1;
             }
-            return CheckStatus;
+            return objcheckAppStatus;
         }
 
         public async Task<bool> AppInstallationforChat(string ChatId, string MicrosoftTenantId, string MicrosoftAppId, string MicrosoftAppPassword, string MicrosoftTeamAppid)

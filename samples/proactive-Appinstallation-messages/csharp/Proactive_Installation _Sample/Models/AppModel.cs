@@ -13,4 +13,19 @@ namespace ProactiveBot.Models
         public string AppDistributionMethod { get; set; }
         public string Id { get; set; }
     }
+
+
+    public class CheckCount
+    {
+        public int Exist_Count { get; set; }
+
+        public int New_Count { get; set; }
+    }
+
+    public class CheckAppStatus
+    {
+        public int AppCount { get; set; }
+
+        public bool CheckStatus { get; set; }
+    }
 }

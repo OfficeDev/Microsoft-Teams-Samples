@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "configurableTabs": [
     {
-      "configurationUrl": "<<YOUR--BASEURL>>/ConfigureTab",
+      "configurationUrl": "<<YOUR-BASE-URL>>/ConfigureTab",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -36,7 +36,7 @@
   "staticTabs": [],
   "bots": [
     {
-      "botId": "1f34f063-d7c0-4034-aa5e-23e051e377a3",
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
       "needsChannelSelector": false,
       "isNotificationOnly": false,
       "scopes": [
@@ -47,6 +47,7 @@
       "commandLists": [
         {
           "scopes": [
+            "team",
             "groupchat"
           ],
           "commands": [
