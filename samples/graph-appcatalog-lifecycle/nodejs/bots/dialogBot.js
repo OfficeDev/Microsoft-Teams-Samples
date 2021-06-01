@@ -254,27 +254,6 @@ class DialogBot extends TeamsActivityHandler {
         );
         await context.sendActivity(MessageFactory.attachment(card));
     }
-    async sendUpdateCard(context, cardActions) {
-        var count = 0;
-        const data = context.activity.value;
-        count += 1;
-        cardActions.push({
-            type: ActionTypes.MessageBack,
-            title: 'Update Card',
-            value: data,
-            text: 'UpdateCardAction',
-        });
-        const card = CardFactory.heroCard(
-            'Updated card',
-            `Update count: ${count}`,
-            null,
-            cardActions
-        );
-        card.id = context.activity.replyToId;
-        const message = MessageFactory.attachment(card);
-        message.id = context.activity.replyToId;
-        await context.updateActivity(message);
-    }
 
     async sendWelcomeCard(context, cardActions) {
         const card = CardFactory.heroCard(
@@ -286,19 +265,6 @@ class DialogBot extends TeamsActivityHandler {
         await context.sendActivity(MessageFactory.attachment(card));
     }
 
-
-    async sendWelcomeCard(context, cardActions) {
-        const initialValue = {
-            count: 0,
-        };
-        const card = CardFactory.heroCard(
-            'AppCatalog Sample',
-            '',
-            null,
-            cardActions
-        );
-        await context.sendActivity(MessageFactory.attachment(card));
-    }
     async DislplayData(context, header, response) {
         let card = {
             "type": "AdaptiveCard",
@@ -353,22 +319,6 @@ class DialogBot extends TeamsActivityHandler {
         }
         var tdata = CardFactory.adaptiveCard(card);
         await context.sendActivity({ attachments: [tdata] });
-        // await context.sendActivity(MessageFactory.attachment(card));
-    }
-
-    async FormatData(data) {
-        const cardActions = [];
-        for (var id in data) {
-            console.log("##", id + ": " + data[id]);
-
-            if (id == "value") {
-                var tdata = data[id];
-                for (var id1 in tdata) {
-                    console.log("@@", id1 + ": " + tdata[id1].Value);
-                }
-            }
-        }
-
     }
 }
 module.exports.DialogBot = DialogBot;

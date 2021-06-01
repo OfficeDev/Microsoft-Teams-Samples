@@ -13,10 +13,10 @@ const { DialogBot }= require('../bots/dialogBot')
 
 class MainDialog extends LogoutDialog {
     constructor() {
-        super(MAIN_DIALOG, process.env.connectionName);
+        super(MAIN_DIALOG, process.env.ConnectionName);
 
         this.addDialog(new OAuthPrompt(OAUTH_PROMPT, {
-            connectionName: process.env.connectionName,
+            connectionName: process.env.ConnectionName,
             text: 'Please Sign In',
             title: 'Sign In',
             timeout: 300000

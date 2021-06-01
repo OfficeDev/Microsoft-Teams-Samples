@@ -6,9 +6,9 @@ const { ComponentDialog } = require('botbuilder-dialogs');
 const { AppCatalogHelper } = require('../Helper/AppCatalog');
 
 class LogoutDialog extends ComponentDialog {
-    constructor(id, connectionName) {
+    constructor(id, ConnectionName) {
         super(id);
-        this.connectionName = connectionName;
+        this.ConnectionName = ConnectionName;
     }
 
     async onBeginDialog(innerDc, options) {
@@ -35,7 +35,7 @@ class LogoutDialog extends ComponentDialog {
             if (text === 'logout') {
                 // The bot adapter encapsulates the authentication processes.
                 const botAdapter = innerDc.context.adapter;
-                await botAdapter.signOutUser(innerDc.context, this.connectionName);
+                await botAdapter.signOutUser(innerDc.context, this.ConnectionName);
                 AppCatalogHelper.SetToken("");
                 await innerDc.context.sendActivity('You have been signed out.');
                 return await innerDc.cancelAllDialogs();

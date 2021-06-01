@@ -129,7 +129,10 @@ class AppCatalogHelper {
 
     static async UpdateData(data) {
         return new Promise(async (resolve) => {
-            var appId = 'cf81bdb4-bd79-408f-9cbc-3a519ff4e971';
+            const client = new GraphClient(gToken);
+            var listApp = await client.getAppList();
+            var result = listApp.value.find(item => item.displayName === "AppCatalog");
+            var appId = result.id;
             var config = {
                 method: 'post',
                 url: 'https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/' + appId + '/appDefinitions',

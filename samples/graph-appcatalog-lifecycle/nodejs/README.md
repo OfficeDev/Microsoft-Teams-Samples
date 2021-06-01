@@ -23,6 +23,7 @@ This sample shows a AppCatalog bot and demonstrates teamsApp lifecycle in catalo
   - Launch Visual Studio code
   - File -> Open Folder
   - Navigate to `graph-appcatalog-lifecycle/node` folder
+  - Select `AppCatalogSample` folder
   - Press `F5` to run the project
 ## Instruction on setting connection string for bot authentication on the behalf of user
 1. In the Azure portal, select your resource group from the dashboard.
@@ -56,7 +57,6 @@ A) Run ngrok - point to port 3978
     ```bash
     ngrok http -host-header=rewrite 3978
 ## Concepts introduced in this sample
-### Descriptions MS TeamsApp resource type
 - List apps in catalog
 ![image](https://user-images.githubusercontent.com/50989436/118778342-9ee83780-b8a7-11eb-93fc-96bf8448e8e0.png)
 - Publish app to catalog

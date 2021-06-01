@@ -90,14 +90,10 @@ class GraphClient {
     }
 
     async ListAppHavingBot() {
-        console.log("In getAppById");
-        var id = "50c2ef26-e37c-462d-8d0e-ae9658e36078";
         return await this.graphClient.api('/appCatalogs/teamsApps')
             .filter('appDefinitions/any(a:a/bot ne null)')
             .expand('appDefinitions($expand=bot)')
             .get().then((res) => {
-                console.log("@@", res);
-                console.log("Out getAppById");
                 return res;
             });
 
