@@ -30,7 +30,14 @@ It shows how to send proactive messages to team (channel) or GroupChat after ins
 6. Run your app, either from Visual Studio with ```F5``` or using ```dotnet run``` in the appropriate folder.
 7. Update the manifest.json file with ```Microsoft-App-ID```, ```Base Url```   value.
 
-## Concepts introduced in this sample
+## Setup Permissions to call the Graph API
+- You need to add following Application permissions to your Azure App. 
+- `ChatMember.ReadWrite.All`
+- `Chat.ReadWrite.All`
+- `TeamsAppInstallation.ReadWriteSelfForUser.All`
+- `TeamsAppInstallation.ReadWriteForUser.All`
+- `TeamsAppInstallation.ReadWriteSelfForChat.All`
+- `TeamsAppInstallation.ReadWriteForChat.Al`
 
 ### Descriptions MS TeamsApp resource type
 
