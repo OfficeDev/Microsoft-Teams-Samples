@@ -17,6 +17,7 @@ namespace AppCatalogSample.Bots
 
     public class AppCatalogBot<T> : DialogBot<T> where T : Dialog
     {
+
         public AppCatalogBot(ConversationState conversationState, UserState userState, T dialog, ILogger<DialogBot<T>> logger)
             : base(conversationState, userState, dialog, logger)
         {
@@ -32,7 +33,7 @@ namespace AppCatalogSample.Bots
                     await turnContext.SendActivityAsync(
                         $"Welcome to  Bot {member.Name} {WelcomeText}",
                         cancellationToken: cancellationToken);
-                    await AppCatalogHelper.SendSuggestedActionsAsync(turnContext, cancellationToken);
+                    await OAuthHelpers.SendSuggestedActionsAsync(turnContext, cancellationToken);
                 }
             }
         }
