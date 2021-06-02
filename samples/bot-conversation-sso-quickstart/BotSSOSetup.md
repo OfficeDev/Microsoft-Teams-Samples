@@ -49,7 +49,7 @@ This step will create an AAD app, it will be reused wherever it needs AAD throug
 
             - User consent title: Teams can access your user profile and make requests on your behalf
 
-        - User consent description: Enable Teams to call this app’s APIs with the same rights that you have
+            - User consent description: Enable Teams to call this app’s APIs with the same rights that you have
 
         - Ensure that State is set to Enabled
 
@@ -121,13 +121,13 @@ Create [Bot Channels registration resource](https://docs.microsoft.com/en-us/azu
 
     - In the Service Provider dropdown, select Azure Active Directory V2
 
-    - Enter in the client id and client secret obtained in step 2
+    - Enter in the client id and client secret obtained in step 1.1 and 1.2
 
-    - For the Token Exchange URL use the Application ID URL obtained in step 2
+    - For the Token Exchange URL use the Application ID URL obtained in step 1.3
 
     - Specify "common" as the Tenant ID
 
-    - Add all the scopes configured when specifying permissions to downstream APIs in step 2
+    - Add all the scopes configured when specifying permissions to downstream APIs in step 1.3
 
     - Click "Save"
 

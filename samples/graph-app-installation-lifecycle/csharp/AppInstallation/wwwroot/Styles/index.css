@@ -1,0 +1,8 @@
+﻿td, th {
+    padding: 8px;
+    text-align: center;
+}
+
+#getAppModal {
+    z-index: 9999
+}

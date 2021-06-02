@@ -1,0 +1,31 @@
+{
+  "name": "teams-token-app",
+  "version": "1.0.0",
+  "msteams": {
+    "teamsAppId": "6773ef0b-a1b3-4049-b096-6143ccbdc3a6"
+  },
+  "description": "Microsoft Teams conversation bot quickstart",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js",
+    "watch": "nodemon server/index.js",
+    "build": "npm install && cd client && npm install && npm run build",
+    "server": "npm install && cd client && npm install && npm run build && cd ../ && nodemon server/index.js",
+    "client": "cd client && npm install && npm run start",
+    "manifest": "del \"appPackage\\appPackage.zip\" 2> nul && powershell Compress-Archive appPackage/* appPackage/appPackage.zip"
+  },
+  "keywords": [],
+  "author": "Microsoft",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "botbuilder": "~4.7.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "encodeurl": "^1.0.2",
+    "express": "^4.17.1",
+    "html-entities": "^1.3.1",
+    "memorystorage": "^0.12.0"
+  }
+}
