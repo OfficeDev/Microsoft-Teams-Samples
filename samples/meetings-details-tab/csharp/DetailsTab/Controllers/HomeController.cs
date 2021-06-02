@@ -18,11 +18,13 @@ namespace DetailsTab.Controllers
         public static string conversationId;
         public static string userName;
         public static string serviceUrl;
-        public static List<TaskInfo> taskInfoDataList = new List<TaskInfo>();
+     //   public static List<TaskInfo> taskInfoDataList = new List<TaskInfo>();
+        public static TaskInfoList TaskList = new TaskInfoList();
         private readonly IConfiguration _configuration;
         public HomeController(IConfiguration configuration)
         {
             _configuration = configuration;
+            TaskList.baseUrl = _configuration["BaseUrl"];
         }
 
         [Route("ConfigureTab")]
@@ -35,13 +37,8 @@ namespace DetailsTab.Controllers
         [Route("Index")]
         public IActionResult Index()
         {
-            if (taskInfoDataList.Count > 0)
-            {
-                return View(taskInfoDataList);
-            }
-            return View();
+            return View(TaskList);
         }
-
         [HttpGet]
         [Route("Detail")]
         public IActionResult Detail()
@@ -49,29 +46,21 @@ namespace DetailsTab.Controllers
             return View();
         }
 
-        [HttpGet]
-        [Route("First")]
-        public IActionResult First()
-        {
-            return View();
-        }
-
         [Route("Result")]
         public IActionResult Result(string id)
         {
-            TaskInfo info = taskInfoDataList.Find(x => x.id == id);
+            TaskInfo info = TaskList.taskInfoList.Find(x => x.id == id);
             return View(info);
         }
-
         [HttpPost]
         [Route("Index")]
         public IActionResult Index(TaskInfo taskInfo)
         {
             taskInfo.id = Guid.NewGuid().ToString();
-            taskInfoDataList.Add(taskInfo);
-            return Json(taskInfoDataList);
+            TaskList.taskInfoList.Add(taskInfo);
+            //taskInfoDataList.Add(taskInfo);
+            return Json(TaskList);
         }
-        
         [HttpPost]
         [Route("AddNewAgenda")]
         public void AddNewAgenda(TaskInfo taskInfo)
@@ -80,7 +69,7 @@ namespace DetailsTab.Controllers
             string appId = _configuration["MicrosoftAppId"];
             string appSecret = _configuration["MicrosoftAppPassword"];
 
-            taskInfoDataList.Find(x => x.id == taskInfo.id).IsSent = true;
+            TaskList.taskInfoList.Find(x => x.id == taskInfo.id).IsSent = true;
 
             using var connector = new ConnectorClient(new Uri(serviceUrl), appId, appSecret);
             MicrosoftAppCredentials.TrustServiceUrl(serviceUrl, DateTime.MaxValue);

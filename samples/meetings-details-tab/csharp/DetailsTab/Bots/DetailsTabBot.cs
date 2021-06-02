@@ -14,19 +14,16 @@ using Newtonsoft.Json.Linq;
 using DetailsTab.Controllers;
 using DetailsTab.Models;
 using System.Net.Http;
-using Newtonsoft.Json;
 
 namespace DetailsTab.Bots
 {
     public class DetailsTabBot : TeamsActivityHandler
     {
         private readonly IConfiguration _configuration;
-        
         public DetailsTabBot(IConfiguration configuration)
         {
             _configuration = configuration;
         }
-
         protected override async Task OnConversationUpdateActivityAsync(ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             HomeController.serviceUrl = turnContext.Activity.ServiceUrl;
@@ -39,12 +36,12 @@ namespace DetailsTab.Bots
             JObject value = JObject.Parse(turnContext.Activity.Value.ToString());
             string Id = value.GetValue("Choice")?.ToString();
             string answer = value.GetValue("Feedback")?.ToString();
-            if (Id == null || answer == null)
+            if(Id == null || answer == null)
             {
                 return;
             }
             string userName = turnContext.Activity.From.Name;
-            TaskInfo info = HomeController.taskInfoDataList.Find(x => x.id == Id);
+            TaskInfo info = HomeController.TaskList.taskInfoList.Find(x => x.id == Id);
             if (info.PersonAnswered == null)
             {
                 info.PersonAnswered = new Dictionary<string, List<string>> { { answer, new List<string> { userName } } };
@@ -64,7 +61,7 @@ namespace DetailsTab.Bots
             int option2Answerd = info.PersonAnswered.ContainsKey(info.option2) ? info.PersonAnswered[info.option2].Count : 0;
             int total = option1Answerd + option2Answerd;
 
-            int percentOption1 = total == 0 ? 0 : (option1Answerd * 100) / total;
+            int percentOption1 = total == 0 ? 0 :(option1Answerd * 100) / total;
             int percentOption2 = total == 0 ? 0 : 100 - percentOption1;
             Attachment att = HomeController.AgendaAdaptiveList(info, "Result.json", percentOption1, percentOption2);
             try
@@ -76,38 +73,27 @@ namespace DetailsTab.Bots
 
             }
         }
-
         protected override async Task<TaskModuleResponse> OnTeamsTaskModuleFetchAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
-            try
+            JObject value = JObject.Parse(turnContext.Activity.Value.ToString());
+            JObject data = JObject.Parse(value.GetValue("data").ToString());
+            string Id = data.GetValue("Id").ToString();
+            
+            var model = new TaskModuleResponse
             {
-                JObject value = JObject.Parse(turnContext.Activity.Value.ToString());
-                JObject data = JObject.Parse(value.GetValue("data").ToString());
-                string Id = data.GetValue("Id").ToString();
-
-                var response = new TaskModuleResponse
+                Task = new TaskModuleContinueResponse
                 {
-                    Task = new TaskModuleContinueResponse
+                    Value = new TaskModuleTaskInfo()
                     {
-                        Value = new TaskModuleTaskInfo()
-                        {
-                            Url = _configuration["BaseUrl"] + "/Result?id=" + Id,
-                            Height = 450,
-                            Width = 350,
-                            Title = "Details",
-                            CompletionBotId = _configuration["MicrosoftAppId"]
-                        },
+                        Url = _configuration["BaseUrl"] + "/Result?id=" + Id,
+                        FallbackUrl = _configuration["BaseUrl"] + "/Result?id=" + Id,
+                        Height = 300,
+                        Width = 350,
+                        Title = "Details",
                     },
-                };
-                return response; 
-            }
-
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-            return null;
+                },
+            };
+            return model;
         }
-
     }
 }

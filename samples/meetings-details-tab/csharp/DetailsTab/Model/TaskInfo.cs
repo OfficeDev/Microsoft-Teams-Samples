@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 
 namespace DetailsTab.Models
 {
@@ -11,21 +12,12 @@ namespace DetailsTab.Models
         public bool IsSent { get; set; }
         public Dictionary<string, List<string>> PersonAnswered { get; set; }
     }
-    public class ActionBase
-    {
-        public Data data { get; set; }
-        public Context context { get; set; }
-        public object tabContext { get; set; }
-    }
 
-    public class Data
+    public class TaskInfoList
     {
-        public string Type { get; set; }
-        public string type { get; set; }
-    }
+        public List<TaskInfo> taskInfoList { get; set; } = new List<TaskInfo>();
+        public string baseUrl { get; set; }
 
-    public class Context
-    {
-        public string theme { get; set; }
+
     }
 }

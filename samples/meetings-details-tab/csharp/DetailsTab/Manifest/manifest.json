@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
   "manifestVersion": "1.9",
   "version": "1.0.0",
-  "id": "<<Your-Microsoft-App-Id>>",
-  "packageName": "com.microsoft.teams.sample.detailstab",
+  "id": "<<Your AppId>>",
+  "packageName": "com.microsoft.teams.sample.meetingtoken",
   "showLoadingIndicator": false,
 
   "developer": {
@@ -26,22 +26,11 @@
   "accentColor": "#ffffff",
   "configurableTabs": [
     {
-      "configurationUrl": "https://{BaseUrl}/ConfigureTab",
+      "configurationUrl": "<<URL>>/ConfigureTab",
       "canUpdateConfiguration": true,
       "scopes": [
         "groupchat"
       ]
-    }
-  ],
-  "bots": [
-    {
-      "botId": "<<Your-Bot-Id>>",
-      "scopes": [
-        "groupchat"
-      ],
-      "needsChannelSelector": false,
-      "isNotificationOnly": false,
-      "supportsFiles": false
     }
   ],
   "permissions": [
@@ -50,5 +39,20 @@
   ],
   "validDomains": [
     "*.ngrok.io"
-  ]
+  ],
+  "bots": [
+    {
+      "botId": "<<Your AppId>>",
+      "scopes": [
+        "groupchat"
+      ],
+      "needsChannelSelector": false,
+      "isNotificationOnly": false,
+      "supportsFiles": false
+    }
+  ],
+  "webApplicationInfo": {
+    "id": "<<Your AppId>>",
+    "resource": "api:// <<Add URL>>"
+  }
 }
