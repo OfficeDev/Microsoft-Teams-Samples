@@ -7,7 +7,6 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.BotBuilderSamples.Bots;
 using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.BotBuilderSamples
@@ -30,9 +29,6 @@ namespace Microsoft.BotBuilderSamples
 
             // Create the Bot Framework Adapter with error handling enabled.
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
-
-            // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-            services.AddTransient<IBot, TabActivityFeedBot>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -50,7 +50,6 @@
         });
 
         function SendNotificationToGroupChat() {
-            debugger;
             var isValid = true;
             $('#title,#description').each(function () {
                 if ($.trim($(this).val()) == '') {
@@ -67,7 +66,6 @@
                 }
             });
             if (isValid == false) {
-                debugger;
                 e.preventDefault();
                 return false;
             }
@@ -89,7 +87,6 @@
             return true;
         };
         function customTopicNotification() {
-            // debugger;
             var isValid = true;
 
             $('#DeployementTitle,#DeploymentDescription').each(function () {
@@ -141,10 +138,8 @@
         </div></br>
         <div class="sendNotificationGroupChat desc">
             <div class="mb">
-                @*<div class="tk-no" id="taskNumber">@ViewBag.newTaskID</div>*@
                 <input type="text" class="tk-no" id="taskNumber" value="@ViewBag.taskId" disabled>
                 <div class="input-grp">
-                    @*    <input type="text" class="alias" id="taskAssignedTo" required />*@
                 </div>
                 <div class="form-group fg">
                     <label for="title" class="title">Task Title</label>
@@ -162,10 +157,8 @@
         </div>
         <div class="customTopicNotificationChat desc">
             <div class="mb">
-                @*<div class="tk-no" id="taskNumber">@ViewBag.newTaskID</div>*@
                 <input type="text" class="tk-no" id="deploymentId" value="@ViewBag.taskId" disabled>
                 <div class="input-grp">
-                    @*    <input type="text" class="alias" id="taskAssignedTo" required />*@
                 </div>
                 <div class="form-group fg">
                     <label for="DeployementTitle" class="DeployementTitle">Deployment Title</label>

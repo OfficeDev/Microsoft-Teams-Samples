@@ -11,6 +11,7 @@ using Microsoft.Graph;
 using Microsoft.Graph.Auth;
 using Microsoft.Identity.Client;
 using Newtonsoft.Json;
+using TabActivityFeed.Helpers;
 using TabActivityFeed.Model;
 using TabActivityFeed.Repository;
 
@@ -22,6 +23,7 @@ namespace TabActivityFeed.Controllers
         private readonly IConfiguration _configuration;
         public HomeController(IConfiguration configuration)
         {
+            _configuration = configuration;
             _configuration = configuration;
         }
         [Route("hello")]
@@ -64,13 +66,7 @@ namespace TabActivityFeed.Controllers
         [Route("SendNotificationToUser")]
         public async Task<ActionResult> SendNotificationToUser(TaskInfo taskInfo)
         {
-            FeedRepository.Tasks.Add(new TaskInfo
-            {
-                title = taskInfo.title,
-                DeployementTitle = taskInfo.DeployementTitle,
-                description = taskInfo.description,
-                DeploymentDescription = taskInfo.DeploymentDescription
-            });
+            TaskHelper.AddTaskToFeed(taskInfo);
             var graphClient = SimpleGraphClient.GetGraphClient(_configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"], _configuration["TenantId"]);
             var user = await graphClient.Users[taskInfo.userName]
                       .Request()
@@ -84,36 +80,8 @@ namespace TabActivityFeed.Controllers
 
             if (taskInfo.taskInfoAction == "customTopic")
             {
-
-                IChatMessageHostedContentsCollectionPage chatMessageHostedContentsCollectionPage = new ChatMessageHostedContentsCollectionPage();
-
-                string[] scopes = { "ChannelMessage.Send", "Group.ReadWrite.All", "User.Read" };
-                IPublicClientApplication publicClientApplication = PublicClientApplicationBuilder
-                    .Create(_configuration["clientAppId"])
-                    .WithTenantId(_configuration["tenantId"])
-                    .Build();
-                UsernamePasswordProvider authenticationProvider = new UsernamePasswordProvider(publicClientApplication, scopes);
-                GraphServiceClient graphClientChat = new GraphServiceClient(authenticationProvider);
-                string password = "<<Your Password>>";
-                System.Security.SecureString passWordSecureString = new System.Security.SecureString();
-                foreach (char c in password.ToCharArray()) passWordSecureString.AppendChar(c);
-                User me = await graphClientChat.Me.Request()
-                             .WithUsernamePassword("<<Your Username>>", passWordSecureString)
-                             .GetAsync();
-
-                var chatMessage = new ChatMessage
-                {
-                    Subject = null,
-                    Body = new ItemBody
-                    {
-                        ContentType = BodyType.Html,
-                        Content = "New Deployment: " + taskInfo.DeployementTitle
-                    },
-                };
-                chatMessage.HostedContents = chatMessageHostedContentsCollectionPage;
-                var getChannelMessage = await graphClientChat.Teams[_configuration["teamId"]].Channels[_configuration["channelId"]].Messages
-                     .Request()
-                     .AddAsync(chatMessage);
+                ChatMessageHelper chatMessage = new ChatMessageHelper(_configuration);
+                var getChannelMessage = await chatMessage.CreateChatMessageForChannel(taskInfo);
                 var customTopic = new TeamworkActivityTopic
                 {
                     Source = TeamworkActivityTopicSource.Text,
@@ -195,13 +163,7 @@ namespace TabActivityFeed.Controllers
         [Route("SendNotificationToGroupChat")]
         public async Task<ActionResult> SendNotificationToGroupChat(TaskInfo taskInfo)
         {
-            FeedRepository.Tasks.Add(new TaskInfo
-            {
-                title = taskInfo.title,
-                DeployementTitle = taskInfo.DeployementTitle,
-                description = taskInfo.description,
-                DeploymentDescription = taskInfo.DeploymentDescription
-            });
+            TaskHelper.AddTaskToFeed(taskInfo);
             var graphClient = SimpleGraphClient.GetGraphClient(_configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"], _configuration["TenantId"]);
             var user = await graphClient.Users[taskInfo.userName]
                       .Request()
@@ -209,39 +171,12 @@ namespace TabActivityFeed.Controllers
             if (taskInfo.taskInfoAction == "customTopic")
             {
 
-                IChatMessageHostedContentsCollectionPage chatMessageHostedContentsCollectionPage = new ChatMessageHostedContentsCollectionPage();
-                string[] scopes = { "ChannelMessage.Send", "Group.ReadWrite.All", "User.Read" };
-                IPublicClientApplication publicClientApplication = PublicClientApplicationBuilder
-                    .Create(_configuration["clientAppId"])
-                    .WithTenantId(_configuration["tenantId"])
-                    .Build();
-                UsernamePasswordProvider authenticationProvider = new UsernamePasswordProvider(publicClientApplication, scopes);
-                GraphServiceClient graphClientChat = new GraphServiceClient(authenticationProvider);
-                string password = "<<Your Password>>";
-                System.Security.SecureString passWordSecureString = new System.Security.SecureString();
-                foreach (char c in password.ToCharArray()) passWordSecureString.AppendChar(c);
-                User me = await graphClientChat.Me.Request()
-                             .WithUsernamePassword("<<Your Username>>", passWordSecureString)
-                             .GetAsync();
-
-                var chatMessage = new ChatMessage
-                {
-                    Subject = null,
-                    Body = new ItemBody
-                    {
-                        ContentType = BodyType.Html,
-                        Content = "New Deployment: " + taskInfo.DeployementTitle
-                    },
-                };
-                chatMessage.HostedContents = chatMessageHostedContentsCollectionPage;
-                var getChatMessage = await graphClientChat.Chats[taskInfo.chatId].Messages
-                     .Request()
-                     .AddAsync(chatMessage);
+                ChatMessageHelper chatMessage = new ChatMessageHelper(_configuration);
+                var getChatMessage = chatMessage.CreateGroupChatMessage(taskInfo);
                 var customTopic = new TeamworkActivityTopic
                 {
                     Source = TeamworkActivityTopicSource.EntityUrl,
-                    Value = "https://graph.microsoft.com/beta/chats/" + getChatMessage.ChatId + "/messages/" + getChatMessage.Id
-                    //  WebUrl = 
+                    Value = "https://graph.microsoft.com/beta/chats/" + taskInfo.chatId + "/messages/" + getChatMessage.Id
                 };
 
                 var CustomActivityType = "approvalRequired";
@@ -252,7 +187,7 @@ namespace TabActivityFeed.Controllers
                 };
                 var customRecipient = new AadUserNotificationRecipient
                 {
-                    UserId = "b130c271-d2eb-45f9-83ab-9eb3fe3788bc"
+                    UserId = user.Id
                 };
                 var CustomTemplateParameters = new List<Microsoft.Graph.KeyValuePair>()
                  {
@@ -274,83 +209,9 @@ namespace TabActivityFeed.Controllers
                     Console.WriteLine(ex);
                 }
             }
+
             else
             {
-                IChatMessageHostedContentsCollectionPage chatMessageHostedContentsCollectionPage = new ChatMessageHostedContentsCollectionPage();
-                string[] scopes = { "ChannelMessage.Send", "Group.ReadWrite.All", "User.Read" };
-                IPublicClientApplication publicClientApplication = PublicClientApplicationBuilder
-                    .Create(_configuration["clientAppId"])
-                    .WithTenantId(_configuration["tenantId"])
-                    .Build();
-                UsernamePasswordProvider authenticationProvider = new UsernamePasswordProvider(publicClientApplication, scopes);
-                GraphServiceClient graphClientChat = new GraphServiceClient(authenticationProvider);
-                string password ="<<Your Password>>";
-                System.Security.SecureString passWordSecureString = new System.Security.SecureString();
-                foreach (char c in password.ToCharArray()) passWordSecureString.AppendChar(c);
-                User me = await graphClientChat.Me.Request()
-                             .WithUsernamePassword("<<Your Username>>", passWordSecureString)
-                             .GetAsync();
-                var Card = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
-                {
-                    Body = new List<AdaptiveElement>()
-                          {
-                         new AdaptiveTextBlock()
-                              {
-                                  Text="Here is Your Task Details",
-                                  Weight = AdaptiveTextWeight.Bolder,
-                                  Size = AdaptiveTextSize.Large,
-                                  Id="taskDetails"
-                              },
-                              new AdaptiveTextBlock()
-                              {
-                                  Text=taskInfo.title,
-                                  Weight = AdaptiveTextWeight.Lighter,
-                                  Size = AdaptiveTextSize.Medium,
-                                  Id="taskTitle"
-                              },
-                              new AdaptiveTextBlock()
-                              {
-                                  Text=taskInfo.description,
-                                  Weight = AdaptiveTextWeight.Lighter,
-                                  Size = AdaptiveTextSize.Medium,
-                                  Id="taskdesc"
-                              },
-
-
-                          }
-
-                };
-
-
-                var chatMessage = new ChatMessage
-                {
-                    Subject = null,
-                    Body = new ItemBody
-                    {
-                        ContentType = BodyType.Html,
-                        Content = "<attachment id=\"74d20c7f34aa4a7fb74e2b30004247c5\"></attachment>"
-                    },
-                    Attachments = new List<ChatMessageAttachment>()
-                              {
-                                  new ChatMessageAttachment
-                                    {
-                                          Id = "74d20c7f34aa4a7fb74e2b30004247c5",
-                                          ContentType = "application/vnd.microsoft.card.adaptive",
-                                          ContentUrl = null,
-                                          Content =  JsonConvert.SerializeObject(Card),
-                                          Name = null,
-                                          ThumbnailUrl = null
-                                }
-                           }
-                };
-
-                chatMessage.HostedContents = chatMessageHostedContentsCollectionPage;
-                var getChatMessage = await graphClientChat.Chats[taskInfo.chatId].Messages
-                     .Request()
-                     .AddAsync(chatMessage);
-                var chatMembers = graphClientChat.Chats[taskInfo.chatId].Members
-                    .Request()
-                    .GetAsync().Result;
                 var topic = new TeamworkActivityTopic
                 {
                     Source = TeamworkActivityTopicSource.EntityUrl,
@@ -365,7 +226,7 @@ namespace TabActivityFeed.Controllers
                 };
                 var recipient = new AadUserNotificationRecipient
                 {
-                    UserId = "b130c271-d2eb-45f9-83ab-9eb3fe3788bc"
+                    UserId = user.Id
                 };
 
 
@@ -394,53 +255,21 @@ namespace TabActivityFeed.Controllers
             }
             return View("groupchatnotification");
         }
+
         [HttpPost]
         [Route("sendNotificationToTeam")]
         public async Task<ActionResult> sendNotificationToTeam(TaskInfo taskInfo)
         {
 
-            FeedRepository.Tasks.Add(new TaskInfo
-            {
-                title = taskInfo.title,
-                DeployementTitle = taskInfo.DeployementTitle,
-                description = taskInfo.description,
-                DeploymentDescription = taskInfo.DeploymentDescription
-            });
+            TaskHelper.AddTaskToFeed(taskInfo);
             var graphClient = SimpleGraphClient.GetGraphClient(_configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"], _configuration["TenantId"]);
             var user = await graphClient.Users[taskInfo.userName]
                       .Request()
                       .GetAsync();
             if (taskInfo.taskInfoAction == "customTopic")
             {
-
-                IChatMessageHostedContentsCollectionPage chatMessageHostedContentsCollectionPage = new ChatMessageHostedContentsCollectionPage();
-                string[] scopes = { "ChannelMessage.Send", "Group.ReadWrite.All", "User.Read" };
-                IPublicClientApplication publicClientApplication = PublicClientApplicationBuilder
-                    .Create(_configuration["clientAppId"])
-                    .WithTenantId(_configuration["tenantId"])
-                    .Build();
-                UsernamePasswordProvider authenticationProvider = new UsernamePasswordProvider(publicClientApplication, scopes);
-                GraphServiceClient graphClientChat = new GraphServiceClient(authenticationProvider);
-                string password = "<<Your Password>>"];
-                System.Security.SecureString passWordSecureString = new System.Security.SecureString();
-                foreach (char c in password.ToCharArray()) passWordSecureString.AppendChar(c);
-                User me = await graphClientChat.Me.Request()
-                             .WithUsernamePassword("<<Your Username>>", passWordSecureString)
-                             .GetAsync();
-
-                var chatMessage = new ChatMessage
-                {
-                    Subject = null,
-                    Body = new ItemBody
-                    {
-                        ContentType = BodyType.Html,
-                        Content = "New Deployment: " + taskInfo.DeployementTitle
-                    },
-                };
-                chatMessage.HostedContents = chatMessageHostedContentsCollectionPage;
-                var getChannelMessage = await graphClientChat.Teams[_configuration["teamId"]].Channels[_configuration["channelId"]].Messages
-                     .Request()
-                     .AddAsync(chatMessage);
+                ChatMessageHelper chatMessage = new ChatMessageHelper(_configuration);
+                var getChannelMessage = await chatMessage.CreateChatMessageForChannel(taskInfo);
                 var customTopic = new TeamworkActivityTopic
                 {
                     Source = TeamworkActivityTopicSource.Text,
@@ -456,7 +285,7 @@ namespace TabActivityFeed.Controllers
                 };
                 var customRecipient = new AadUserNotificationRecipient
                 {
-                    UserId = "b130c271-d2eb-45f9-83ab-9eb3fe3788bc"
+                    UserId = user.Id
                 };
                 var CustomTemplateParameters = new List<Microsoft.Graph.KeyValuePair>()
                  {
@@ -480,88 +309,13 @@ namespace TabActivityFeed.Controllers
             }
             else if (taskInfo.taskInfoAction == "channelTab")
             {
-                IChatMessageHostedContentsCollectionPage chatMessageHostedContentsCollectionPage = new ChatMessageHostedContentsCollectionPage();
-                string[] scopes = { "ChannelMessage.Send", "Group.ReadWrite.All", "User.Read" };
-                IPublicClientApplication publicClientApplication = PublicClientApplicationBuilder
-                    .Create(_configuration["clientAppId"])
-                    .WithTenantId(_configuration["tenantId"])
-                    .Build();
-                UsernamePasswordProvider authenticationProvider = new UsernamePasswordProvider(publicClientApplication, scopes);
-                GraphServiceClient graphClientChat = new GraphServiceClient(authenticationProvider);
-                string password = "<<Your Password>>";
-                System.Security.SecureString passWordSecureString = new System.Security.SecureString();
-                foreach (char c in password.ToCharArray()) passWordSecureString.AppendChar(c);
-                User me = await graphClientChat.Me.Request()
-                             .WithUsernamePassword("<<Your Username>>", passWordSecureString)
-                             .GetAsync();
-                var Card = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
-                {
-                    Body = new List<AdaptiveElement>()
-                          {
-                         new AdaptiveTextBlock()
-                              {
-                                  Text="Here is Your Reservation Details:",
-                                  Weight = AdaptiveTextWeight.Bolder,
-                                  Size = AdaptiveTextSize.Large,
-                                  Id="taskDetails"
-                              },
-                              new AdaptiveTextBlock()
-                              {
-                                  Text=taskInfo.reservationId,
-                                  Weight = AdaptiveTextWeight.Lighter,
-                                  Size = AdaptiveTextSize.Medium,
-                                  Id="taskTitle"
-                              },
-                              new AdaptiveTextBlock()
-                              {
-                                  Text=taskInfo.DeployementTitle,
-                                  Weight = AdaptiveTextWeight.Lighter,
-                                  Size = AdaptiveTextSize.Medium,
-                                  Id="taskdesc"
-                              },
-                               new AdaptiveTextBlock()
-                              {
-                                  Text=taskInfo.currentSlot,
-                                  Weight = AdaptiveTextWeight.Lighter,
-                                  Size = AdaptiveTextSize.Medium,
-                                  Id="taskslot"
-                               }
-                          }
-
-                };
-
-
-                var chatMessage = new ChatMessage
-                {
-                    Subject = "Reservation Activtity:",
-                    Body = new ItemBody
-                    {
-                        ContentType = BodyType.Html,
-                        Content = "<attachment id=\"74d20c7f34aa4a7fb74e2b30004247c5\"></attachment>"
-                    },
-                    Attachments = new List<ChatMessageAttachment>()
-                              {
-                                  new ChatMessageAttachment
-                                    {
-                                          Id = "74d20c7f34aa4a7fb74e2b30004247c5",
-                                          ContentType = "application/vnd.microsoft.card.adaptive",
-                                          ContentUrl = null,
-                                          Content =  JsonConvert.SerializeObject(Card),
-                                          Name = null,
-                                          ThumbnailUrl = null
-                                }
-                           }
-                };
-
-                chatMessage.HostedContents = chatMessageHostedContentsCollectionPage;
-                var getChannelMessage = await graphClientChat.Teams[_configuration["teamId"]].Channels[_configuration["channelId"]].Messages
-                     .Request()
-                     .AddAsync(chatMessage);
+                ChatMessageHelper chatMessage = new ChatMessageHelper(_configuration);
+                var getChannelMessage = chatMessage.CreateChannelMessageAdaptiveCard(taskInfo);
 
                 var tabs = await graphClient.Teams[_configuration["teamId"]].Channels[_configuration["channelId"]].Tabs
                 .Request()
-    .Expand("teamsApp")
-    .GetAsync();
+                .Expand("teamsApp")
+                .GetAsync();
                 var tabId = tabs.Where(a => a.DisplayName == "NotifyFeedApp").Select(x => x.Id).ToArray()[0];
                 var topic = new TeamworkActivityTopic
                 {
@@ -577,7 +331,7 @@ namespace TabActivityFeed.Controllers
                 };
                 var recipient = new AadUserNotificationRecipient
                 {
-                    UserId = "b130c271-d2eb-45f9-83ab-9eb3fe3788bc"
+                    UserId = user.Id
                 };
 
 
@@ -610,76 +364,10 @@ namespace TabActivityFeed.Controllers
             }
             else
             {
-                IChatMessageHostedContentsCollectionPage chatMessageHostedContentsCollectionPage = new ChatMessageHostedContentsCollectionPage();
-                string[] scopes = { "ChannelMessage.Send", "Group.ReadWrite.All", "User.Read" };
-                IPublicClientApplication publicClientApplication = PublicClientApplicationBuilder
-                    .Create(_configuration["clientAppId"])
-                    .WithTenantId(_configuration["tenantId"])
-                    .Build();
-                UsernamePasswordProvider authenticationProvider = new UsernamePasswordProvider(publicClientApplication, scopes);
-                GraphServiceClient graphClientChat = new GraphServiceClient(authenticationProvider);
-                string password = "<<Your Password>>";
-                System.Security.SecureString passWordSecureString = new System.Security.SecureString();
-                foreach (char c in password.ToCharArray()) passWordSecureString.AppendChar(c);
-                User me = await graphClientChat.Me.Request()
-                             .WithUsernamePassword("<<Your Username>>", passWordSecureString)
-                             .GetAsync();
-                var Card = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
-                {
-                    Body = new List<AdaptiveElement>()
-                          {
-                         new AdaptiveTextBlock()
-                              {
-                                  Text="Here is Your Task Details in Teams",
-                                  Weight = AdaptiveTextWeight.Bolder,
-                                  Size = AdaptiveTextSize.Large,
-                                  Id="taskDetails"
-                              },
-                              new AdaptiveTextBlock()
-                              {
-                                  Text=taskInfo.title,
-                                  Weight = AdaptiveTextWeight.Lighter,
-                                  Size = AdaptiveTextSize.Medium,
-                                  Id="taskTitle"
-                              },
-                              new AdaptiveTextBlock()
-                              {
-                                  Text=taskInfo.description,
-                                  Weight = AdaptiveTextWeight.Lighter,
-                                  Size = AdaptiveTextSize.Medium,
-                                  Id="taskdesc"
-                              },
-                          }
 
-                };
+                ChatMessageHelper chatMessage = new ChatMessageHelper(_configuration);
+                var getChannelMessage = await chatMessage.CreatePendingFinanceRequestCard(taskInfo);
 
-
-                var chatMessage = new ChatMessage
-                {
-                    Subject = null,
-                    Body = new ItemBody
-                    {
-                        ContentType = BodyType.Html,
-                        Content = "<attachment id=\"74d20c7f34aa4a7fb74e2b30004247c5\"></attachment>"
-                    },
-                    Attachments = new List<ChatMessageAttachment>()
-                              {
-                                  new ChatMessageAttachment
-                                    {
-                                          Id = "74d20c7f34aa4a7fb74e2b30004247c5",
-                                          ContentType = "application/vnd.microsoft.card.adaptive",
-                                          ContentUrl = null,
-                                          Content =  JsonConvert.SerializeObject(Card),
-                                          Name = null,
-                                          ThumbnailUrl = null
-                                }
-                           }
-                };
-
-                chatMessage.HostedContents = chatMessageHostedContentsCollectionPage;
-                var getChannelMessage = await graphClientChat.Teams[_configuration["teamId"]].Channels[_configuration["channelId"]].Messages
-                     .Request()
-                     .AddAsync(chatMessage);
                 var topic = new TeamworkActivityTopic
                 {
                     Source = TeamworkActivityTopicSource.Text,
@@ -688,14 +376,13 @@ namespace TabActivityFeed.Controllers
                 };
 
                 var activityType = "pendingFinanceApprovalRequests";
-
                 var previewText = new ItemBody
                 {
                     Content = "These are the count of pending request pending request:"
                 };
                 var recipient = new AadUserNotificationRecipient
                 {
-                    UserId = "b130c271-d2eb-45f9-83ab-9eb3fe3788bc"
+                    UserId = user.Id
                 };
 
 

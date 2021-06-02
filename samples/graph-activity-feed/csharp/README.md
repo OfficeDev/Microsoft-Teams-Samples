@@ -38,6 +38,12 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
   - Select `TabActivityFeed.csproj` file
   - Press `F5` to run the project
 
+## Permissions Required to run this sample
+
+  - Following Graph API permissions are required for your Azure App.
+  - `TeamsActivity.Send`, `ChannelMessage.Send`, `ChatMessage.Send`, `Chat.ReadWrite`, `User.Read`,  `TeamsAppInstallation.ReadForUser.All`.
+  - You can navigate to API Permissions section for your App and Choose Microsoft Graph => Application/Delegated permissions.
+
 ## Setting up activity types in manifest
 Teams Activity feed notification API uses activity to which user want a notification which we specify in app manifest, Add following activity type in your manifest for task creation.
 
@@ -51,7 +57,16 @@ Teams Activity feed notification API uses activity to which user want a notifica
     ]
 }
 ```
+## User Interaction with Tab Activity Feed App
 
+- Install TabActivityFeed manifest in Teams
+- Add Tab in Personal, GroupChat or Team scope
+- Fill the Details in Page and click on Send notification button
+![image](https://user-images.githubusercontent.com/50989436/109036739-eb303b00-76ef-11eb-91d2-806c2b180396.png)
+
+- Notification triggred by Tab App will appear in Teams Activity Feed
+
+![image](https://user-images.githubusercontent.com/50989436/109036793-fb481a80-76ef-11eb-9fc5-eafc763a67d8.png)
 
 ## Further reading
 
