@@ -21,23 +21,15 @@ It shows how to send proactive messages to team (channel) or GroupChat after ins
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution  
-  - Navigate to `samples/csharp_dotnetcore/Proactive_Installation _Sample` folder
+  - Navigate to `samples/graph-proactive-installation/csharp` folder
   - Select `ProactiveBot.sln` file
   - Press `F5` to run the project
 3. Run ngrok - point to port 3978
    ```ngrok http -host-header=rewrite 3978``
-5. Go to appsettings.json and add ```MicrosoftAppId``` ,  ```MicrosoftAppPassword```, ```MicrosoftTeamAppId``` information.
+5. Go to appsettings.json and add ```MicrosoftAppId``` ,  ```MicrosoftAppPassword```, ```AppCatalogTeamAppId``` information.
 6. Run your app, either from Visual Studio with ```F5``` or using ```dotnet run``` in the appropriate folder.
 7. Update the manifest.json file with ```Microsoft-App-ID```, ```Base Url```   value.
 
-## Setup Permissions to call the Graph API
-- You need to add following Application permissions to your Azure App. 
-- `ChatMember.ReadWrite.All`
-- `Chat.ReadWrite.All`
-- `TeamsAppInstallation.ReadWriteSelfForUser.All`
-- `TeamsAppInstallation.ReadWriteForUser.All`
-- `TeamsAppInstallation.ReadWriteSelfForChat.All`
-- `TeamsAppInstallation.ReadWriteForChat.Al`
 
 ### Descriptions MS TeamsApp resource type
 
@@ -64,10 +56,23 @@ It shows how to send proactive messages to team (channel) or GroupChat after ins
     For more information (https://docs.microsoft.com/en-us/graph/api/chat-post-installedapps?view=graph-rest-1.0&tabs=http)
 6. Add App to the Personal scope of Groupchat members
     While installing the app in groupchat we have to check the app in their personal scope if its not installed we have install and send a message.[To install this app from  GroupChat into personal Scope we need application Permissions], For more information (https://docs.microsoft.com/en-us/graph/api/userteamwork-post-installedapps?view=graph-rest-1.0&tabs=http)
-7.  To install the App in in a Channel or Groupchat we required TeamAppId. It will get from this link 
-    (https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/) from Microsft Graph explorer 
+7.  To install the App in in a Channel or Groupchat we required AppCatalogTeamAppId. You can Navigate to following link in your browser [Get TeamsAppCatalogId](https://developer.microsoft.com/en-us/graph/graph-explorer?request=appCatalogs%2FteamsApps%3F%24filter%3DdistributionMethod%20eq%20'organization'&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) from Microsft Graph explorer.
+8. You can search your app name in Graph Explorer response and copy the `Id`  
 
+### Interacting with the Proactive installation App in Teams
+- Install the proactive app Bot in Team, GroupChat or Personal Scope.
+![image](https://user-images.githubusercontent.com/50989436/120750023-3ba30a00-c523-11eb-9065-3a6b3ec706ab.png)
+
+- Bot will send an welcome message after installation
+![image](https://user-images.githubusercontent.com/50989436/120749546-6ccf0a80-c522-11eb-84a8-2191b1dcb08f.png)
+- Run Check and install command for the Bot
+- Bot will check the app installed for users or not, if not it will install the app in their personal scope and send a proactive notification else it will send a proactive notification saying app is already installed
+![image](https://user-images.githubusercontent.com/50989436/120749801-d51dec00-c522-11eb-8eb9-5243eb9fe470.png)
+
+
+
+## Further Reading
 
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Azure Portal](https://portal.azure.com)
+- [Proactive App Installation using Graph API](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages?tabs=csharp)

@@ -21,11 +21,9 @@ namespace Microsoft.BotBuilderSamples
 {
     public class ProactiveBot : TeamsActivityHandler
     {
-        public static string continuationToken = null;
         public readonly IConfiguration _configuration;
-
         ProactiveHelper Helper = new ProactiveHelper();
-        CheckCount objcheckCount = new CheckCount();
+        CheckAppCount CheckAppCount = new CheckAppCount();
         CheckAppStatus objcheckAppStatus = new CheckAppStatus();
         private readonly ConcurrentDictionary<string, ConversationReference> _conversationReferences;
         public ProactiveBot(ConcurrentDictionary<string, ConversationReference> conversationReferences, IConfiguration configuration)
@@ -41,37 +39,34 @@ namespace Microsoft.BotBuilderSamples
 
         protected override async Task OnConversationUpdateActivityAsync(ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            var adaptiveAttachment = New_AdaptiveCardAttachment();
             switch (turnContext.Activity.Conversation.ConversationType)
             {
                 case "channel":
                     if (turnContext.Activity.MembersAdded != null)
                     {
-                        await Helper.AppInstallationforChannel(turnContext.Activity.TeamsGetTeamInfo().AadGroupId, turnContext.Activity.Conversation.TenantId, _configuration["MicrosoftAppId"], _configuration["MicrosoftAppSecret"], _configuration["AppCataloTeamAppId"]);
-                        await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveAttachment), cancellationToken);
-                       await TeamsInfo.GetPagedMembersAsync(turnContext, 100, continuationToken, cancellationToken);
+                        await Helper.AppInstallationforChannel(turnContext.Activity.TeamsGetTeamInfo().AadGroupId, turnContext.Activity.Conversation.TenantId, _configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"], _configuration["TeamAppCatalogid"]);
+                        await turnContext.SendActivityAsync(MessageFactory.Attachment(New_AdaptiveCardAttachment()), cancellationToken);
                     }
                     break;
                 case "groupChat":
                     if (turnContext.Activity.MembersAdded != null)
                     {
-                        await Helper.AppInstallationforChat(turnContext.Activity.Conversation.Id, turnContext.Activity.Conversation.TenantId, _configuration["MicrosoftAppId"], _configuration["MicrosoftAppSecret"], _configuration["AppCatalogTeamAppId"]);
-                        await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveAttachment), cancellationToken);
-                     
+                        await Helper.AppInstallationforChat(turnContext.Activity.Conversation.Id, turnContext.Activity.Conversation.TenantId, _configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"], _configuration["TeamAppCatalogid"]);
+                        await turnContext.SendActivityAsync(MessageFactory.Attachment(New_AdaptiveCardAttachment()), cancellationToken);
                     }
                     break;
                 default: break;
             }
+            await InstallAppinGroupchatandTeamScopeAsync(turnContext, cancellationToken);
         }
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            var adaptiveAttachment = New_AdaptiveCardAttachment();
             foreach (var member in membersAdded)
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveAttachment), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Attachment(New_AdaptiveCardAttachment()), cancellationToken);
                 }
             }
         }
@@ -82,21 +77,20 @@ namespace Microsoft.BotBuilderSamples
             var text = turnContext.Activity.Text.Trim().ToLower();
 
             if (text.Contains("install"))
-               objcheckCount= await InstalledAppsinPersonalScopeAsync(turnContext, cancellationToken);
+                CheckAppCount = await InstalledAppsinPersonalScopeAsync(turnContext, cancellationToken);
 
             AddConversationReference(turnContext.Activity as Activity);
-            await turnContext.SendActivityAsync(MessageFactory.Attachment(InstalledAppCount_Attachment(objcheckCount.New_Count, objcheckCount.Exist_Count)), cancellationToken);
+            await turnContext.SendActivityAsync(MessageFactory.Attachment(InstalledAppCount_Attachment(CheckAppCount.New_Count, CheckAppCount.Exist_Count)), cancellationToken);
         }
 
-        public async Task<CheckCount> InstalledAppsinPersonalScopeAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        public async Task<CheckAppCount> InstalledAppsinPersonalScopeAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            var adaptiveAttachment = New_AdaptiveCardAttachment();
-            var currentPage_Memebers = await TeamsInfo.GetPagedMembersAsync(turnContext, 100, continuationToken, cancellationToken);
+            var currentPage_Memebers = await TeamsInfo.GetPagedMembersAsync(turnContext, 100, null, cancellationToken);
             int ExistedApp_Count = 0;
             int NewlyAddedApp_Count = 0;
             foreach (var teamMember in currentPage_Memebers.Members)
             {
-                objcheckAppStatus = await Helper.AppinstallationforPersonal(teamMember.AadObjectId, turnContext.Activity.Conversation.TenantId, _configuration["MicrosoftAppId"], _configuration["MicrosoftAppSecret"], _configuration["AppCatalogTeamAppId"]);
+                objcheckAppStatus = await Helper.AppinstallationforPersonal(teamMember.AadObjectId, turnContext.Activity.Conversation.TenantId, _configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"], _configuration["TeamAppCatalogid"]);
                 if (objcheckAppStatus.CheckStatus)
                 {
                     var conversationParameters = new ConversationParameters
@@ -109,21 +103,21 @@ namespace Microsoft.BotBuilderSamples
                     try
                     {
                         System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
-                        using var connector = new ConnectorClient(new Uri(turnContext.Activity.ServiceUrl), _configuration["MicrosoftAppId"], _configuration["MicrosoftAppSecret"]);
+                        using var connector = new ConnectorClient(new Uri(turnContext.Activity.ServiceUrl), _configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"]);
+
                         var conversationResource = await connector.Conversations.CreateConversationAsync(conversationParameters);
                         var replyMessage = Activity.CreateMessageActivity();
                         replyMessage.Conversation = new ConversationAccount(id: conversationResource.Id.ToString());
                         replyMessage.ChannelData = new TeamsChannelData() { Notification = new NotificationInfo(true) };
                         if (objcheckAppStatus.AppCount > 1)
                         {
-                            var Exist_adaptiveAttachment = Exist_AdaptiveCardAttachment();
-                            replyMessage.Attachments = new List<Attachment> { Exist_adaptiveAttachment };
+                            replyMessage.Attachments = new List<Attachment> { Exist_AdaptiveCardAttachment() };
                             ExistedApp_Count++;
                         }
                         else
                         {
                             NewlyAddedApp_Count++;
-                            replyMessage.Attachments = new List<Attachment> { adaptiveAttachment };
+                            replyMessage.Attachments = new List<Attachment> { New_AdaptiveCardAttachment() };
                         }
                         await connector.Conversations.SendToConversationAsync(conversationResource.Id, (Activity)replyMessage);
                     }
@@ -133,18 +127,17 @@ namespace Microsoft.BotBuilderSamples
                     }
                 }
             }
-            objcheckCount.Exist_Count = ExistedApp_Count;
-            objcheckCount.New_Count = NewlyAddedApp_Count;
-           return objcheckCount;
+            CheckAppCount.Exist_Count = ExistedApp_Count;
+            CheckAppCount.New_Count = NewlyAddedApp_Count;
+            return CheckAppCount;
         }
 
         public async Task InstallAppinGroupchatandTeamScopeAsync(ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            var adaptiveAttachment = New_AdaptiveCardAttachment();
-            var currentPage_Memebers = await TeamsInfo.GetPagedMembersAsync(turnContext, 100, continuationToken, cancellationToken);
+            var currentPage_Memebers = await TeamsInfo.GetPagedMembersAsync(turnContext, 100, null, cancellationToken);
             foreach (var teamMember in currentPage_Memebers.Members)
             {
-                objcheckAppStatus = await Helper.AppinstallationforPersonal(teamMember.AadObjectId, turnContext.Activity.Conversation.TenantId, _configuration["MicrosoftAppId"], _configuration["MicrosoftAppSecret"], _configuration["AppCatalogTeamAppId"]);
+                objcheckAppStatus = await Helper.AppinstallationforPersonal(teamMember.AadObjectId, turnContext.Activity.Conversation.TenantId, _configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"], _configuration["TeamAppCatalogid"]);
                 if (objcheckAppStatus.CheckStatus)
                 {
                     var conversationParameters = new ConversationParameters
@@ -157,19 +150,18 @@ namespace Microsoft.BotBuilderSamples
                     try
                     {
                         System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
-                        using var connector = new ConnectorClient(new Uri(turnContext.Activity.ServiceUrl),_configuration["MicrosoftAppId"], _configuration["MicrosoftAppSecret"]);
+                        using var connector = new ConnectorClient(new Uri(turnContext.Activity.ServiceUrl), _configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"]);
                         var conversationResource = await connector.Conversations.CreateConversationAsync(conversationParameters);
                         var replyMessage = Activity.CreateMessageActivity();
                         replyMessage.Conversation = new ConversationAccount(id: conversationResource.Id.ToString());
                         replyMessage.ChannelData = new TeamsChannelData() { Notification = new NotificationInfo(true) };
                         if (objcheckAppStatus.AppCount > 1)
                         {
-                            var Exist_adaptiveAttachment = Exist_AdaptiveCardAttachment();
-                            replyMessage.Attachments = new List<Attachment> { Exist_adaptiveAttachment };
+                            replyMessage.Attachments = new List<Attachment> { Exist_AdaptiveCardAttachment() };
                         }
                         else
                         {
-                            replyMessage.Attachments = new List<Attachment> { adaptiveAttachment };
+                            replyMessage.Attachments = new List<Attachment> { New_AdaptiveCardAttachment() };
                         }
                         await connector.Conversations.SendToConversationAsync(conversationResource.Id, (Activity)replyMessage);
                     }
@@ -205,7 +197,7 @@ namespace Microsoft.BotBuilderSamples
             return adaptiveCardAttachment;
         }
 
-        public static Attachment InstalledAppCount_Attachment(int New_Count,int Existed_Count)
+        public static Attachment InstalledAppCount_Attachment(int New_Count, int Existed_Count)
         {
             var AppCountCard = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
             {
@@ -231,7 +223,7 @@ namespace Microsoft.BotBuilderSamples
                                          Width=AdaptiveColumnWidth.Auto,
                                          Items=new List<AdaptiveElement>()
                                          {
-                                             new AdaptiveTextBlock(){Text="Newly Added Count is  "+New_Count,Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
+                                             new AdaptiveTextBlock(){Text="Newly Added Count is :  "+New_Count,Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
                                          }
                                     }
                                 }
@@ -245,7 +237,7 @@ namespace Microsoft.BotBuilderSamples
                                          Width=AdaptiveColumnWidth.Auto,
                                          Items=new List<AdaptiveElement>()
                                          {
-                                             new AdaptiveTextBlock(){Text="Exised  Count is  "+Existed_Count,Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
+                                             new AdaptiveTextBlock(){Text="Exised  Count is  :  "+Existed_Count,Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
                                          }
                                     }
                                 }

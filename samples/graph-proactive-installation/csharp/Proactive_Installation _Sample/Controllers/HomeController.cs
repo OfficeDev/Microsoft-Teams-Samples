@@ -40,15 +40,15 @@ namespace ProactiveBot.Controllers
 
         [HttpGet]
         [Route("Index")]
-        public async Task<IActionResult> Index(string tenantId, string teamId, string chatId)
+        public async Task<IActionResult> Index(string TenantId, string TeamId, string chatId)
         {
             if (chatId != null)
             {
-                await Helper.AppInstallationforChat(chatId, tenantId, _configuration["MicrosoftAppId"], _configuration["MicrosoftAppSecret"], teamId);
+                await Helper.AppInstallationforChat(chatId, TenantId, _configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"], _configuration["TeamAppCatalogid"]);
             }
             else
             {
-                await Helper.AppInstallationforChannel(teamId, tenantId, _configuration["MicrosoftAppId"], _configuration["MicrosoftAppSecret"],_configuration["AppCatalogTeamAppId"]);
+                await Helper.AppInstallationforChannel(TeamId, TenantId, _configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"], _configuration["TeamAppCatalogid"]);
             }
             return Content(WelcomeMessage);
         }
