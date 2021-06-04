@@ -18,13 +18,18 @@ This sample shows a AppCatalog bot and demonstrates teamsApp lifecycle in catalo
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-  B) Or from Visual Studio code
+  A) Or from Visual Studio code
 
   - Launch Visual Studio code
   - File -> Open Folder
-  - Navigate to `graph-appcatalog-lifecycle/node` folder
+  - Navigate to `samples/graph-appcatalog-lifecycle/csharp` folder
   - Select `AppCatalogSample` folder
   - Press `F5` to run the project
+
+  B) Run ngrok - point to port 3978
+
+    ```bash
+    ngrok http -host-header=rewrite 3978
 ## Instruction on setting connection string for bot authentication on the behalf of user
 1. In the Azure portal, select your resource group from the dashboard.
 
@@ -33,7 +38,8 @@ This sample shows a AppCatalog bot and demonstrates teamsApp lifecycle in catalo
 3. Open the resource page and select Configuration under Settings.
 
 4. Select Add OAuth Connection Settings.
-[Provide the connectionstring1 image url here]
+![image](https://user-images.githubusercontent.com/50989436/120748075-cda91380-c51f-11eb-965a-9024cdd7153b.png)
+
 5. Complete the form as follows:
 
 a. Name. Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
@@ -50,13 +56,9 @@ f. Login URL. Enter https://login.microsoftonline.com.
 
 g. Tenant ID, enter the Directory (tenant) ID that you recorded earlier for your Azure identity app or common depending on the supported account type selected when you created the identity provider app.
 h. For Resource URL, enter https://graph.microsoft.com/
-i. Provide  Scopes like "AppCatalog.Submit, AppCatalog.Read.All, AppCatalog.ReadWrite.All, Directory.Read.All, Directory.ReadWrite.All"
-[Provide the connectionstring2 image url here]
-A) Run ngrok - point to port 3978
+i. Provide  Scopes like "AppCatalog.Submit, AppCatalog.Read.All, AppCatalog.ReadWrite.Al"
+![image](https://user-images.githubusercontent.com/50989436/120748153-ec0f0f00-c51f-11eb-9a74-a010f89a6951.png)
 
-    ```bash
-    ngrok http -host-header=rewrite 3978
-    
 ### Descriptions MS TeamsApp resource type
 - List apps in catalog
 ![image](https://user-images.githubusercontent.com/50989436/118778342-9ee83780-b8a7-11eb-93fc-96bf8448e8e0.png)

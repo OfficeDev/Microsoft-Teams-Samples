@@ -15,12 +15,12 @@
     "outline": "icon-outline.png"
   },
   "name": {
-    "short": "Team App Catalog",
-    "full": "Simple Team App catalog lifecycle"
+    "short": "App Catalog Bot",
+    "full": "Team App Catalog lifecycle Bot"
   },
   "description": {
-    "short": "Team App Catalog",
-    "full": "Simple Team App catalog lifecycle"
+    "short": "Test App Catalog lifecycle",
+    "full": "Sample app for appCatalog lifecycle"
   },
   "accentColor": "#FFFFFF",
   "bots": [

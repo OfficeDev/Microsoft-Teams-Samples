@@ -62,7 +62,8 @@ namespace AppCatalogSample.Dialogs
             var tokenResponse = (TokenResponse)stepContext.Result;
             if (tokenResponse?.Token != null)
             {
-                 await OAuthHelpers.SendSuggestedActionsAsync(stepContext.Context, cancellationToken);
+                var client = new AppCatalogHelper(tokenResponse.Token);
+                await client.SendSuggestedActionsAsync(stepContext.Context, cancellationToken);
                 return await stepContext.PromptAsync(nameof(TextPrompt), new PromptOptions { Prompt = MessageFactory.Text("Type your actions") }, cancellationToken);
             }
             await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login was not successful please try again."), cancellationToken);
@@ -99,19 +100,19 @@ namespace AppCatalogSample.Dialogs
                     Microsoft.Bot.Schema.Attachment attachData = null;
                     string logintext = "User is not login.Type 'login' to proceed";
                     var command = ((string)stepContext.Values["command"] ?? string.Empty).ToLowerInvariant();
-
+                    var client = new AppCatalogHelper(tokenResponse.Token);
 
                     switch (command)
                     {
-                        case "listapp":
-                            teamsApps = OAuthHelpers.GetAllapp(stepContext.Context, tokenResponse).ConfigureAwait(false).GetAwaiter().GetResult();
+                        case "listapp": 
+                            teamsApps= await client.GetAllapp();
                             if (teamsApps != null && teamsApps.Count > 0)
                             {
-                                taskInfoData = OAuthHelpers.ParseData(teamsApps);
-                                attachData = OAuthHelpers.AgendaAdaptiveList("listapp", taskInfoData);
+                                taskInfoData = client.ParseData(teamsApps);
+                                attachData = client.AgendaAdaptiveList("listapp", taskInfoData);
                                 taskInfoData.Clear();
                                 await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(attachData), cancellationToken);
-                                await OAuthHelpers.SendListActionAsync(stepContext.Context, cancellationToken);
+                                await client.SendListActionAsync(stepContext.Context, cancellationToken);
                             }
                             else
                             {
@@ -121,15 +122,14 @@ namespace AppCatalogSample.Dialogs
 
                             break;
                         case "app":
-                            
-                            teamsApps = OAuthHelpers.AppCatalogById(stepContext.Context, tokenResponse).ConfigureAwait(false).GetAwaiter().GetResult();
+                            teamsApps = await client.AppCatalogById();
                             if (teamsApps != null && teamsApps.Count > 0)
                             {
-                                taskInfoData = OAuthHelpers.ParseData(teamsApps);
-                                attachData = OAuthHelpers.AgendaAdaptiveList("App", taskInfoData);
+                                taskInfoData = client.ParseData(teamsApps);
+                                attachData = client.AgendaAdaptiveList("App", taskInfoData);
                                 taskInfoData.Clear();
                                 await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(attachData), cancellationToken);
-                                await OAuthHelpers.SendListActionAsync(stepContext.Context, cancellationToken);
+                                await client.SendListActionAsync(stepContext.Context, cancellationToken);
                             }
                             else
                             {
@@ -139,14 +139,14 @@ namespace AppCatalogSample.Dialogs
 
                             break;
                         case "findapp":
-                            teamsApps = OAuthHelpers.FindApplicationByTeamsId(stepContext.Context, tokenResponse).ConfigureAwait(false).GetAwaiter().GetResult();
+                            teamsApps = await client.FindApplicationByTeamsId();
                             if (teamsApps != null && teamsApps.Count > 0)
                             {
-                                taskInfoData = OAuthHelpers.ParseData(teamsApps);
-                                attachData = OAuthHelpers.AgendaAdaptiveList("findapp", taskInfoData);
+                                taskInfoData = client.ParseData(teamsApps);
+                                attachData = client.AgendaAdaptiveList("findapp", taskInfoData);
                                 taskInfoData.Clear();
                                 await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(attachData), cancellationToken);
-                                await OAuthHelpers.SendListActionAsync(stepContext.Context, cancellationToken);
+                                await client.SendListActionAsync(stepContext.Context, cancellationToken);
                             }
                             else
                             {
@@ -157,15 +157,14 @@ namespace AppCatalogSample.Dialogs
 
                             break;
                         case "status":
-                            
-                            teamsApps = OAuthHelpers.AppStatus(stepContext.Context, tokenResponse).ConfigureAwait(false).GetAwaiter().GetResult();
+                            teamsApps = await client.AppStatus();
                             if (teamsApps != null && teamsApps.Count > 0)
                             {
-                                taskInfoData = OAuthHelpers.ParseData(teamsApps);
-                                attachData = OAuthHelpers.AgendaAdaptiveList("status", taskInfoData);
+                                taskInfoData = client.ParseData(teamsApps);
+                                attachData = client.AgendaAdaptiveList("status", taskInfoData);
                                 taskInfoData.Clear();
                                 await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(attachData), cancellationToken);
-                                await OAuthHelpers.SendListActionAsync(stepContext.Context, cancellationToken);
+                                await client.SendListActionAsync(stepContext.Context, cancellationToken);
                             }
                             else
                             {
@@ -175,14 +174,14 @@ namespace AppCatalogSample.Dialogs
 
                             break;
                         case "bot":
-                            teamsApps = OAuthHelpers.ListAppHavingBot(stepContext.Context, tokenResponse).ConfigureAwait(false).GetAwaiter().GetResult();
+                            teamsApps = await client.ListAppHavingBot();
                             if (teamsApps != null && teamsApps.Count > 0)
                             {
-                                taskInfoData = OAuthHelpers.ParseData(teamsApps);
-                                attachData = OAuthHelpers.AgendaAdaptiveList("bot", taskInfoData);
+                                taskInfoData = client.ParseData(teamsApps);
+                                attachData = client.AgendaAdaptiveList("bot", taskInfoData);
                                 taskInfoData.Clear();
                                 await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(attachData), cancellationToken);
-                                await OAuthHelpers.SendListActionAsync(stepContext.Context, cancellationToken);
+                                await client.SendListActionAsync(stepContext.Context, cancellationToken);
                             }
                             else
                             {
@@ -192,45 +191,43 @@ namespace AppCatalogSample.Dialogs
 
                             break;
                         case "update":
-                            var upData = OAuthHelpers.UpdateFileAsync(stepContext.Context, tokenResponse).ConfigureAwait(false).GetAwaiter().GetResult();
+                            var upData = await client.UpdateFileAsync();
                             if (upData == "require login")
                                 await stepContext.Context.SendActivityAsync(MessageFactory.Text(logintext, logintext), cancellationToken);
                             else
                             {
-                                attachData = OAuthHelpers.AdaptivCardList("Update", upData);
+                                attachData = client.AdaptivCardList("Update", upData);
                                 await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(attachData), cancellationToken);
-                                await OAuthHelpers.SendSuggestedActionsAsync(stepContext.Context, cancellationToken);
+                                await client.SendSuggestedActionsAsync(stepContext.Context, cancellationToken);
                             }
                             break;
                         case "publish":
-                           
-                            var pubData = OAuthHelpers.UploadFileAsync(stepContext.Context, tokenResponse).ConfigureAwait(false).GetAwaiter().GetResult();
+                           var pubData= await client.UploadFileAsync();
                             if (pubData == "require login")
                                 await stepContext.Context.SendActivityAsync(MessageFactory.Text(logintext, logintext), cancellationToken);
                             else
                             {
-                                attachData = OAuthHelpers.AdaptivCardList("publish", pubData);
+                                attachData = client.AdaptivCardList("publish", pubData);
                                 await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(attachData), cancellationToken);
-                                await OAuthHelpers.SendSuggestedActionsAsync(stepContext.Context, cancellationToken);
+                                await client.SendSuggestedActionsAsync(stepContext.Context, cancellationToken);
                             }
                             break;
 
                         case "delete":
-                           
-                            var delData = OAuthHelpers.DeleteApp(stepContext.Context, tokenResponse).ConfigureAwait(false).GetAwaiter().GetResult();
+                            var delData = await client.DeleteApp();
                             if (String.IsNullOrEmpty(delData))
                                 await stepContext.Context.SendActivityAsync(MessageFactory.Text(logintext, logintext), cancellationToken);
                             else
                             {
                                 await stepContext.Context.SendActivityAsync(MessageFactory.Text("Delete app successfully"), cancellationToken);
-                                await OAuthHelpers.SendSuggestedActionsAsync(stepContext.Context, cancellationToken);
+                                await client.SendSuggestedActionsAsync(stepContext.Context, cancellationToken);
                             }
                             break;
                         case "list":
-                            await OAuthHelpers.SendListActionAsync(stepContext.Context, cancellationToken);
+                            await client.SendListActionAsync(stepContext.Context, cancellationToken);
                             break;
                         case "home":
-                            await OAuthHelpers.SendSuggestedActionsAsync(stepContext.Context, cancellationToken);
+                            await client.SendSuggestedActionsAsync(stepContext.Context, cancellationToken);
                             break;
                         default:
 

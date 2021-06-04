@@ -33,7 +33,7 @@ namespace AppCatalogSample.Bots
                     await turnContext.SendActivityAsync(
                         $"Welcome to  Bot {member.Name} {WelcomeText}",
                         cancellationToken: cancellationToken);
-                    await OAuthHelpers.SendSuggestedActionsAsync(turnContext, cancellationToken);
+                    await SendSuggestedActionsAsync(turnContext, cancellationToken);
                 }
             }
         }
@@ -46,6 +46,22 @@ namespace AppCatalogSample.Bots
 
             // Run the Dialog with the new Invoke Activity.
             await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
+        }
+        protected static async Task SendSuggestedActionsAsync(ITurnContext turnContext, CancellationToken cancellationToken)
+        {
+            var reply = MessageFactory.Text("Your Action :" + " \r" + "-" + " List" + " \r" + "-" + " Publish" + " \r" + "-" + " Update" + " \r" + "-" + " Delete" + " \r");
+
+            reply.SuggestedActions = new SuggestedActions()
+            {
+                Actions = new List<CardAction>()
+                {
+
+                    new CardAction() { Title = "List", Type = ActionTypes.ImBack, Value = "list"},
+                    new CardAction() { Title = "Update", Type = ActionTypes.ImBack, Value = "update"},
+                    new CardAction() { Title = "Delete", Type = ActionTypes.ImBack, Value = "delete"},
+                },
+            };
+            await turnContext.SendActivityAsync(reply, cancellationToken);
         }
     }
         
