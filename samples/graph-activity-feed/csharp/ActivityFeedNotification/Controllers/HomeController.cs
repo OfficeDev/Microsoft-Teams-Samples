@@ -77,7 +77,7 @@ namespace TabActivityFeed.Controllers
         {
             TaskHelper.AddTaskToFeed(taskInfo);
             var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
-            var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"], _configuration["TenantId"]);
+            var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["AzureAd:MicrosoftAppId"], _configuration["AzureAd:MicrosoftAppPassword"], _configuration["AzureAd:TenantId"]);
             var user = await graphClient.Users[taskInfo.userName]
                       .Request()
                       .GetAsync();
@@ -175,7 +175,7 @@ namespace TabActivityFeed.Controllers
         {
             TaskHelper.AddTaskToFeed(taskInfo);
             var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
-            var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"], _configuration["TenantId"]);
+            var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["AzureAd:MicrosoftAppId"], _configuration["AzureAd:MicrosoftAppPassword"], _configuration["AzureAd:TenantId"]);
             var user = await graphClient.Users[taskInfo.userName]
                       .Request()
                       .GetAsync();
@@ -275,7 +275,7 @@ namespace TabActivityFeed.Controllers
 
             TaskHelper.AddTaskToFeed(taskInfo);
             var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
-            var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"], _configuration["TenantId"]);
+            var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["AzureAd:MicrosoftAppId"], _configuration["AzureAd:MicrosoftAppPassword"], _configuration["AzureAd:TenantId"]);
             var user = await graphClient.Users[taskInfo.userName]
                       .Request()
                       .GetAsync();
