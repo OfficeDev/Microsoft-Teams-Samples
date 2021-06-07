@@ -77,6 +77,7 @@ namespace TabActivityFeed.Controllers
         {
             TaskHelper.AddTaskToFeed(taskInfo);
             var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
+            var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"], _configuration["TenantId"]);
             var user = await graphClient.Users[taskInfo.userName]
                       .Request()
                       .GetAsync();
@@ -115,7 +116,7 @@ namespace TabActivityFeed.Controllers
                 };
                 try
                 {
-                    await graphClient.Users[user.Id].Teamwork
+                    await graphClientApp.Users[user.Id].Teamwork
                         .SendActivityNotification(customTopic, CustomActivityType, null, CustomPreviewText, CustomTemplateParameters)
                         .Request()
                         .PostAsync();
@@ -153,7 +154,7 @@ namespace TabActivityFeed.Controllers
            };
                 try
                 {
-                    await graphClient.Users[user.Id].Teamwork
+                    await graphClientApp.Users[user.Id].Teamwork
                         .SendActivityNotification(topic, activityType, null, previewText, templateParameters)
                         .Request()
                         .PostAsync();
@@ -174,6 +175,7 @@ namespace TabActivityFeed.Controllers
         {
             TaskHelper.AddTaskToFeed(taskInfo);
             var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
+            var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"], _configuration["TenantId"]);
             var user = await graphClient.Users[taskInfo.userName]
                       .Request()
                       .GetAsync();
@@ -208,7 +210,7 @@ namespace TabActivityFeed.Controllers
                 };
                 try
                 {
-                    await graphClient.Chats[taskInfo.chatId]
+                    await graphClientApp.Chats[taskInfo.chatId]
                           .SendActivityNotification(customTopic, CustomActivityType, null, CustomPreviewText, CustomTemplateParameters, customRecipient)
                           .Request()
                           .PostAsync();
@@ -251,7 +253,8 @@ namespace TabActivityFeed.Controllers
            };
                 try
                 {
-                    await graphClient.Chats[taskInfo.chatId]
+                    
+                    await graphClientApp.Chats[taskInfo.chatId]
                          .SendActivityNotification(topic, activityType, null, previewText, templateParameters, recipient)
                          .Request()
                          .PostAsync();
@@ -272,6 +275,7 @@ namespace TabActivityFeed.Controllers
 
             TaskHelper.AddTaskToFeed(taskInfo);
             var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
+            var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"], _configuration["TenantId"]);
             var user = await graphClient.Users[taskInfo.userName]
                       .Request()
                       .GetAsync();
@@ -306,7 +310,7 @@ namespace TabActivityFeed.Controllers
                 };
                 try
                 {
-                    await graphClient.Teams[taskInfo.teamId]
+                    await graphClientApp.Teams[taskInfo.teamId]
                           .SendActivityNotification(customTopic, CustomActivityType, null, CustomPreviewText, CustomTemplateParameters, customRecipient)
                           .Request()
                           .PostAsync();
@@ -360,7 +364,7 @@ namespace TabActivityFeed.Controllers
            };
                 try
                 {
-                    await graphClient.Teams[taskInfo.teamId]
+                    await graphClientApp.Teams[taskInfo.teamId]
                          .SendActivityNotification(topic, activityType, null, previewText, templateParameters, recipient)
                          .Request()
                          .PostAsync();
@@ -407,7 +411,7 @@ namespace TabActivityFeed.Controllers
            };
                 try
                 {
-                    await graphClient.Teams[taskInfo.teamId]
+                    await graphClientApp.Teams[taskInfo.teamId]
                          .SendActivityNotification(topic, activityType, null, previewText, templateParameters, recipient)
                          .Request()
                          .PostAsync();
