@@ -22,9 +22,8 @@
 |7|SPFx Tab | Sample app showing Microsoft Teams tabs using SharePoint Framework                                    |   | [View][group-channel-tab#ts#spfx] |
 |8|Tab SSO               | Microsoft Teams sample app for tabs Azure AD SSO                                      | | [View][tab-sso#ts] ,[Teams Toolkit](https://docs.microsoft.com/microsoftteams/platform/toolkit/visual-studio-code-tab-sso)
 |9|Config Tab Authentication               | Microsoft Teams sample app for config tabs Azure AD authentication | [View]()                       | | 
-|10|Tab Activity Feed               | Microsoft Teams sample app for Sending Activity feed notification using Graph API in a Teams Tab. | [View][graph-activity-feed#cs]                       | | 
-|11|Deep Link consuming Subentity ID      | Microsoft Teams sample app for demonstrating deeplink from Bot chat to Tab consuming Subentity ID | [View][tab-deeplink#csharp]                       | | [View][tab-deeplink#nodejs]|
-|12|Integrate graph toolkit component in teams tab      | Microsoft Teams tab sample app for demonstrating graph toolkit component |                      | [View][tab-graph-toolkit#js]|
+|10|Deep Link consuming Subentity ID      | Microsoft Teams sample app for demonstrating deeplink from Bot chat to Tab consuming Subentity ID | [View][tab-deeplink#csharp]                       | | [View][tab-deeplink#nodejs]|
+|11|Integrate graph toolkit component in teams tab      | Microsoft Teams tab sample app for demonstrating graph toolkit component |                      | [View][tab-graph-toolkit#js]|
 
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
@@ -89,6 +88,7 @@
 |2|Graph API Channel Life Cycle | This sample illustrates how you can use [Graph API Channel Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-beta) to call Graph APIs. .                              |[View][graph#lifecycle#cs]       | [View][graph#lifecycle#js]
 |3|Graph API Teams App Installation Life Cycle | This sample illustrates how you can use [Teams App Installation Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/teamsappinstallation?view=graph-rest-1.0) by calling Microsoft Graph APIs. .                              |[View][graph#instllationlifecycle#cs]       |
 |4|Graph API Teams App Catalog Life Cycle | This sample illustrates how you you programattically have an lifecycle for your teams App in catalog by calling Microsoft Graph APIs. .                              |       |[View][graph#appcataloglifecycle#js]
+|5|Tab Activity Feed               | Microsoft Teams sample app for Sending Activity feed notification using Graph API in a Teams Tab. | [View][graph-activity-feed#cs]                       | | 
 
 
 
@@ -120,7 +120,7 @@
 [group-tab-sso-quickstart#ts]:samples/tab-channel-group-sso-quickstart/ts
 [group-tab-sso-quickstart#js]:samples/tab-channel-group-sso-quickstart/js
 [group-tab-sso-quickstart#csharp]:samples/tab-channel-group-sso-quickstart/csharp_dotnetcore
-[graph-activity-feed#cs]:samples/graph-activity-feed/csharp
+
 
 [tab-deeplink#csharp]:samples/tab-deeplink/csharp
 [tab-deeplink#nodejs]:samples/tab-deeplink/nodejs
@@ -179,6 +179,7 @@
 [graph#lifecycle#js]:samples/graph-channel-lifecycle/nodejs
 [graph#instllationlifecycle#cs]:samples/graph-app-installation-lifecycle/csharp
 [graph#appcataloglifecycle#js]:samples/graph-appcatalog-lifecycle/nodejs
+[graph-activity-feed#cs]:samples/graph-activity-feed/csharp
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 
 ## Submitting issues
