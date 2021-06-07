@@ -5,7 +5,6 @@ namespace TabActivityFeed.Controllers
 {
     public class AuthController : Controller
     {
-
         private readonly IConfiguration _configuration;
 
         /// <summary>

@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Graph;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using TabActivityFeed.Helpers;
 using TabActivityFeed.Model;
 using TabActivityFeed.Repository;
 
 namespace TabActivityFeed.Controllers
 {
-
     public class HomeController : Controller
     {
         private readonly IConfiguration _configuration;
@@ -64,8 +62,6 @@ namespace TabActivityFeed.Controllers
         }
 
         [Route("teamnotification")]
-
-
         public ActionResult TeamNotification()
         {
             return View();
@@ -91,7 +87,7 @@ namespace TabActivityFeed.Controllers
             if (taskInfo.taskInfoAction == "customTopic")
             {
                 ChatMessageHelper chatMessage = new ChatMessageHelper(_configuration);
-                var getChannelMessage = await chatMessage.CreateChatMessageForChannel(taskInfo,taskInfo.access_token);
+                var getChannelMessage = await chatMessage.CreateChatMessageForChannel(taskInfo, taskInfo.access_token);
                 var customTopic = new TeamworkActivityTopic
                 {
                     Source = TeamworkActivityTopicSource.Text,
@@ -144,13 +140,11 @@ namespace TabActivityFeed.Controllers
 
                 var templateParameters = new List<Microsoft.Graph.KeyValuePair>()
             {
-
             new Microsoft.Graph.KeyValuePair
             {
               Name = "taskName",
               Value =taskInfo.title
              }
-
            };
                 try
                 {
@@ -163,7 +157,6 @@ namespace TabActivityFeed.Controllers
                 {
                     Console.WriteLine(ex);
                 }
-
             }
 
             return View("Index");
@@ -181,9 +174,8 @@ namespace TabActivityFeed.Controllers
                       .GetAsync();
             if (taskInfo.taskInfoAction == "customTopic")
             {
-
                 ChatMessageHelper chatMessage = new ChatMessageHelper(_configuration);
-                var getChatMessage = chatMessage.CreateGroupChatMessage(taskInfo,taskInfo.access_token);
+                var getChatMessage = chatMessage.CreateGroupChatMessage(taskInfo, taskInfo.access_token);
                 var customTopic = new TeamworkActivityTopic
                 {
                     Source = TeamworkActivityTopicSource.EntityUrl,
@@ -220,7 +212,6 @@ namespace TabActivityFeed.Controllers
                     Console.WriteLine(ex);
                 }
             }
-
             else
             {
                 var topic = new TeamworkActivityTopic
@@ -240,20 +231,16 @@ namespace TabActivityFeed.Controllers
                     UserId = user.Id
                 };
 
-
                 var templateParameters = new List<Microsoft.Graph.KeyValuePair>()
             {
-
             new Microsoft.Graph.KeyValuePair
             {
               Name = "taskName",
               Value =taskInfo.title
              }
-
            };
                 try
                 {
-                    
                     await graphClientApp.Chats[taskInfo.chatId]
                          .SendActivityNotification(topic, activityType, null, previewText, templateParameters, recipient)
                          .Request()
@@ -263,7 +250,6 @@ namespace TabActivityFeed.Controllers
                 {
                     Console.WriteLine(ex);
                 }
-
             }
             return View("groupchatnotification");
         }
@@ -272,7 +258,6 @@ namespace TabActivityFeed.Controllers
         [Route("sendNotificationToTeam")]
         public async Task<ActionResult> sendNotificationToTeam(TaskInfo taskInfo)
         {
-
             TaskHelper.AddTaskToFeed(taskInfo);
             var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
             var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["AzureAd:MicrosoftAppId"], _configuration["AzureAd:MicrosoftAppPassword"], _configuration["AzureAd:TenantId"]);
@@ -323,7 +308,7 @@ namespace TabActivityFeed.Controllers
             else if (taskInfo.taskInfoAction == "channelTab")
             {
                 ChatMessageHelper chatMessage = new ChatMessageHelper(_configuration);
-                var getChannelMessage = chatMessage.CreateChannelMessageAdaptiveCard(taskInfo,taskInfo.access_token);
+                var getChannelMessage = chatMessage.CreateChannelMessageAdaptiveCard(taskInfo, taskInfo.access_token);
 
                 var tabs = await graphClient.Teams[taskInfo.teamId].Channels[taskInfo.channelId].Tabs
                 .Request()
@@ -347,10 +332,8 @@ namespace TabActivityFeed.Controllers
                     UserId = user.Id
                 };
 
-
                 var templateParameters = new List<Microsoft.Graph.KeyValuePair>()
             {
-
             new Microsoft.Graph.KeyValuePair
             {
               Name = "reservationId",
@@ -373,13 +356,11 @@ namespace TabActivityFeed.Controllers
                 {
                     Console.WriteLine(ex);
                 }
-
             }
             else
             {
-
                 ChatMessageHelper chatMessage = new ChatMessageHelper(_configuration);
-                var getChannelMessage = await chatMessage.CreatePendingFinanceRequestCard(taskInfo,taskInfo.access_token);
+                var getChannelMessage = await chatMessage.CreatePendingFinanceRequestCard(taskInfo, taskInfo.access_token);
 
                 var topic = new TeamworkActivityTopic
                 {
@@ -398,16 +379,13 @@ namespace TabActivityFeed.Controllers
                     UserId = user.Id
                 };
 
-
                 var templateParameters = new List<Microsoft.Graph.KeyValuePair>()
             {
-
             new Microsoft.Graph.KeyValuePair
             {
               Name = "pendingRequestCount",
               Value ="5"
              }
-
            };
                 try
                 {
@@ -420,7 +398,6 @@ namespace TabActivityFeed.Controllers
                 {
                     Console.WriteLine(ex);
                 }
-
             }
             return View("teamnotification");
         }
@@ -440,6 +417,4 @@ namespace TabActivityFeed.Controllers
             }
         }
     }
-
-
 }
