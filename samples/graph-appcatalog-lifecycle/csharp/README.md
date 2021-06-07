@@ -42,25 +42,28 @@ This sample shows a AppCatalog bot and demonstrates teamsApp lifecycle in catalo
 
 5. Complete the form as follows:
 
-a. Name. Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
+    a. Name. Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
 
-b. Service Provider. Select Azure Active Directory. Once you select this, the Azure AD-specific fields will be displayed.
+    b. Service Provider. Select Azure Active Directory. Once you select this, the Azure AD-specific fields will be displayed.
 
-c. Client id. Enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
+    c. Client id. Enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
 
-d. Client secret. Enter the secret that you recorded for your Azure identity provider app in the steps above.
+    d. Client secret. Enter the secret that you recorded for your Azure identity provider app in the steps above.
 
-e. Grant Type. Enter authorization_code.
+    e. Grant Type. Enter authorization_code.
 
-f. Login URL. Enter https://login.microsoftonline.com.
+    f. Login URL. Enter https://login.microsoftonline.com.
 
-g. Tenant ID, enter the Directory (tenant) ID that you recorded earlier for your Azure identity app or common depending on the supported account type selected when you created the identity provider app.
-h. For Resource URL, enter https://graph.microsoft.com/
-i. Provide  Scopes like "AppCatalog.Submit, AppCatalog.Read.All, AppCatalog.ReadWrite.Al"
-![image](https://user-images.githubusercontent.com/50989436/120748153-ec0f0f00-c51f-11eb-9a74-a010f89a6951.png)
+    g. Tenant ID, enter the Directory (tenant) ID that you recorded earlier for your Azure identity app or common depending on the supported account type selected when you created the identity provider app.
 
-### Descriptions MS TeamsApp resource type
+    h. For Resource URL, enter https://graph.microsoft.com/
+
+    i. Add these Scopes"AppCatalog.Submit, AppCatalog.Read.All, AppCatalog.ReadWrite.Al"
+    ![image](https://user-images.githubusercontent.com/50989436/120748153-ec0f0f00-c51f-11eb-9a74-a010f89a6951.png)
+
+## Concepts introduced in this sample
 - List apps in catalog
+
 ![image](https://user-images.githubusercontent.com/50989436/118778342-9ee83780-b8a7-11eb-93fc-96bf8448e8e0.png)
 - Publish app to catalog
 ![image](https://user-images.githubusercontent.com/50989436/118778589-e2db3c80-b8a7-11eb-8159-a7880be1925e.png)
