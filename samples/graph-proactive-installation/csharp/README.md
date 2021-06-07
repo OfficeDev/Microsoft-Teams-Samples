@@ -25,10 +25,11 @@ It shows how to send proactive messages to team (channel) or GroupChat after ins
   - Select `ProactiveBot.sln` file
   - Press `F5` to run the project
 3. Run ngrok - point to port 3978
-   ```ngrok http -host-header=rewrite 3978``
-5. Go to appsettings.json and add ```MicrosoftAppId``` ,  ```MicrosoftAppPassword```, ```AppCatalogTeamAppId``` information.
-6. Run your app, either from Visual Studio with ```F5``` or using ```dotnet run``` in the appropriate folder.
-7. Update the manifest.json file with ```Microsoft-App-ID```, ```Base Url```   value.
+   ```bash
+   ngrok http -host-header=rewrite 3978
+4. Go to appsettings.json and add ```MicrosoftAppId``` ,  ```MicrosoftAppPassword```, ```AppCatalogTeamAppId``` information.
+5. Run your app, either from Visual Studio with ```F5``` or using ```dotnet run``` in the appropriate folder.
+6. Update the manifest.json file with ```Microsoft-App-ID```, ```Base Url```   value.
 
 
 ### Descriptions MS TeamsApp resource type
