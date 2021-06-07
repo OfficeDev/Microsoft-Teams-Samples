@@ -84,7 +84,7 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-1) Update appsettings.json file with Microsoft App Id, App Secret, Tenant Id (from bot created earlier).
+1) Update appsettings.json file with Microsoft App Id, App Secret, Tenant Id (from app created earlier).
 2) Run your app, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
 ## Interacting with the app in Teams
