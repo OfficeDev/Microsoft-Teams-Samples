@@ -65,7 +65,7 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
     * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
 12. Navigate to **API Permissions**, and make sure to add the follow permissions:
 -   Select Add a permission
--   Select Microsoft Graph -\> Application/Delegated permissions.
+-   Select Microsoft Graph -\> Delegated permissions.
     - `User.Read` (enabled by default)
     - `email`
     - `offline_access`
