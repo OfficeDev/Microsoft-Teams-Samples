@@ -9,6 +9,7 @@ namespace ChatLifecycle.Controllers
     using System.Diagnostics;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using AdaptiveCards.Templating;
     using ChatLifecycle.Helper;
     using ChatLifecycle.Models;
     using Microsoft.AspNetCore.Authorization;
@@ -22,10 +23,7 @@ namespace ChatLifecycle.Controllers
         private readonly IConfiguration _configuration;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private static readonly string pollyAppId = "AzureAd:PollyId";
-        public static string accessToken;
-        //   public static List<AdaptiveResultModel> members = new List<AdaptiveResultModel>();
-
+     
         /// <summary>
         /// Initializes a new instance of the <see cref="HomeController"/> class.
         /// </summary>
@@ -52,13 +50,6 @@ namespace ChatLifecycle.Controllers
 
             return View();
         }
-
-        [Route("CreateAdaptiveCard")]
-        public ActionResult CreateAdaptiveCard()
-        {
-            return View();
-        }
-
         /// <summary>
         /// Retrieve team members along with profile pictures
         /// </summary>
@@ -69,17 +60,54 @@ namespace ChatLifecycle.Controllers
         {
             try
             {
-                accessToken = await SSOAuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor);
-                return accessToken;
+                 var accessToken = await SSOAuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor);
+               
+                 return accessToken;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return null;
             }
         }
+        
+       
+        [Route("GetAdaptiveCard")]
+        public string GetAdaptiveCard(string token)
+        {            
+            var graphClient = GraphClient.GetGraphClient(token);
+            var users = graphClient.Users
+            .Request()
+            .GetAsync().Result;
+
+            string adaptiveCardJson = "{ \"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\", \"type\": \"AdaptiveCard\", \"version\": \"1.0\", \"body\": [{ \"type\": \"ColumnSet\", \"columns\": [{ \"type\": \"Column\", \"items\": [{ \"type\": \"TextBlock\", \"weight\": \"Bolder\", \"text\": \"Group Chat Title: \", \"wrap\": true }], \"width\": \"auto\" }, { \"type\": \"Column\", \"items\": [{ \"type\": \"Input.Text\", \"placeholder\": \"Please enter the title of GroupChat\", \"wrap\": true, \"id\": \"title\" }], \"width\": \"stretch\" }] }, { \"type\": \"ColumnSet\", \"columns\": [{ \"type\": \"Column\", \"items\": [{ \"type\": \"TextBlock\", \"weight\": \"Bolder\", \"text\": \"Select Members: \", \"wrap\": true }], \"width\": \"auto\" }, { \"type\": \"Column\", \"items\": [{ \"type\": \"Input.ChoiceSet\", \"id\": \"users\", \"style\": \"compact\", \"isMultiSelect\": true, \"value\": \"\", \"choices\": [{ \"title\":  \"${user1Title}\", \"value\":  \"${user1Value}\" }, { \"title\": \"${user2Title}\", \"value\": \"${user2Value}\" }, { \"title\": \"${user3Title}\", \"value\": \"${user3Value}\" }, { \"title\": \"${user4Title}\", \"value\": \"${user4Value}\" }, { \"title\": \"${user5Title}\", \"value\": \"${user5Value}\" }, { \"title\": \"${user6Title}\", \"value\": \"${user6Value}\" }] }] }] }, { \"type\": \"ColumnSet\", \"columns\": [{ \"type\": \"Column\", \"items\": [{ \"type\": \"TextBlock\", \"weight\": \"Bolder\", \"text\": \"\", \"wrap\": true, \"height\": \"stretch\" }], \"width\": \"stretch\" }] },{ \"type\": \"ColumnSet\", \"columns\": [{ \"type\": \"Column\", \"items\": [{ \"type\": \"TextBlock\", \"weight\": \"Bolder\", \"text\": \"\", \"wrap\": true, \"height\": \"stretch\" }], \"width\": \"stretch\" }] },{ \"type\": \"ColumnSet\", \"columns\": [ { \"type\": \"Column\", \"items\": [ { \"type\": \"TextBlock\", \"text\": \"**Note**: Selected Members will be added into a group chat and based on the count selected, members will be added to the chat using different scenarios: with all chat history, no chat history, chat history with no. of days accordingly.\", \"height\": \"stretch\", \"wrap\": true } ], \"width\": \"stretch\" } ] } ], \"actions\": [{ \"type\": \"Action.Submit\", \"title\": \"Submit\", \"card\": { \"version\": 1.0, \"type\": \"AdaptiveCard\", \"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\" } }] }";
+
+            // Create a Template instance from the template payload
+            AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
+
+            // You can use any serializable object as your data
+            var payloadData = new
+            {
+                user1Title = users.CurrentPage[0].DisplayName,
+                user1Value = users.CurrentPage[0].Id,
+                user2Title = users.CurrentPage[1].DisplayName,
+                user2Value = users.CurrentPage[1].Id,
+                user3Title = users.CurrentPage[2].DisplayName,
+                user3Value = users.CurrentPage[2].Id,
+                user4Title = users.CurrentPage[3].DisplayName,
+                user4Value = users.CurrentPage[3].Id,
+                user5Title = users.CurrentPage[4].DisplayName,
+                user5Value = users.CurrentPage[4].Id,
+                user6Title = users.CurrentPage[5].DisplayName,
+                user6Value = users.CurrentPage[5].Id,
+            };
+
+            //"Expand" the template -this generates the final Adaptive Card payload
+            string cardJson = template.Expand(payloadData);
+            return cardJson;
+        }
 
         [Route("CreateNewTeam")]
-        public bool CreateNewTeam(string resultJson, string userID, string title)
+        public bool CreateNewTeam(string token,string resultJson, string userID, string title)
         {
             string[] members = { };
             if (resultJson.Contains(','))
@@ -91,14 +119,13 @@ namespace ChatLifecycle.Controllers
                 members = new[] { resultJson };
             }
 
-            var graphClient = GraphClient.GetGraphClient(accessToken);
+            var graphClient = GraphClient.GetGraphClient(token);
             CreateGroupChat(graphClient, members, userID, title);
             return true;
         }
 
         public async void CreateGroupChat(GraphServiceClient graphClient, string[] members, string userID, string title)
         {
-            var pollyId = _configuration[pollyAppId];
             var chat = new Chat
             {
                 ChatType = ChatType.Group,
@@ -130,7 +157,6 @@ namespace ChatLifecycle.Controllers
                 }
             };
 
-
             var response = await graphClient.Chats
                  .Request()
                  .AddAsync(chat);
@@ -157,11 +183,12 @@ namespace ChatLifecycle.Controllers
             }
 
             //Adding Polly app to chat
+
             var teamsAppInstallation = new TeamsAppInstallation
             {
                 AdditionalData = new Dictionary<string, object>()
                 {
-                   {"teamsApp@odata.bind", "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/"+pollyId}
+                   {"teamsApp@odata.bind", "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/1542629c-01b3-4a6d-8f76-1938b779e48d"}
                 }
             };
 
@@ -183,7 +210,7 @@ namespace ChatLifecycle.Controllers
                 },
                 AdditionalData = new Dictionary<string, object>()
                 {
-                  {"teamsApp@odata.bind", "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/"+pollyId}
+                  {"teamsApp@odata.bind", "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/1542629c-01b3-4a6d-8f76-1938b779e48d"}
                 }
             };
 
@@ -192,7 +219,7 @@ namespace ChatLifecycle.Controllers
                 .AddAsync(teamsTab);
         }
 
-        //Adding member with full chat history
+    
         public async void AddMemberWithHistory(GraphServiceClient graphClient, Chat response, string[] members)
         {
             var conversationMember = new AadUserConversationMember
@@ -210,7 +237,6 @@ namespace ChatLifecycle.Controllers
                 .AddAsync(conversationMember);
         }
 
-        //Adding member with no chat history
         public async void AddMemberWithoutHistory(GraphServiceClient graphClient, Chat response, string[] members)
         {
             var conversationMember = new AadUserConversationMember
@@ -227,15 +253,13 @@ namespace ChatLifecycle.Controllers
                 .AddAsync(conversationMember);
         }
 
-        //Adding members with no. of days chat history
         public async void AddMemberWithNoOfDays(GraphServiceClient graphClient, Chat response, string[] members)
         {
-
-            if (members.Length < 4)
+            if (members.Length == 4)
             {
                 var conversationMember = new AadUserConversationMember
                 {
-                    VisibleHistoryStartDateTime = DateTime.Now.AddDays(-1),
+                    VisibleHistoryStartDateTime = DateTimeOffset.Parse("2021-05-20T00:51:43.255Z"),
                     Roles = new List<string>() { "owner" },
                     AdditionalData = new Dictionary<string, object>()
                     {
@@ -249,21 +273,11 @@ namespace ChatLifecycle.Controllers
             }
             else
             {
-                List<string> membersWithDays = new List<string>();
-                int i = 0;
                 foreach (var member in members)
-                {
-                    if (i > 4)
-                    {
-                        membersWithDays.Add(member);
-                    }
-                    i++;
-                }
-                foreach (var member in membersWithDays)
                 {
                     var conversationMember = new AadUserConversationMember
                     {
-                        VisibleHistoryStartDateTime = DateTime.Now.AddDays(-1),
+                        VisibleHistoryStartDateTime = DateTimeOffset.Parse("2021-05-20T00:51:43.255Z"),
                         Roles = new List<string>() { "owner" },
                         AdditionalData = new Dictionary<string, object>()
                         {
@@ -278,7 +292,6 @@ namespace ChatLifecycle.Controllers
             }
         }
 
-        //Delete first member added
         public async void DeleteMember(GraphServiceClient graphClient, Chat response)
         {
             var chat = await graphClient.Chats[response.Id]

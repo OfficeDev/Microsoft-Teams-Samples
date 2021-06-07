@@ -14,6 +14,7 @@ namespace TeamsAuthSSO
     using Microsoft.Extensions.Hosting;
     using Microsoft.IdentityModel.Tokens;    
     using ChatLifecycle.Helper;
+    using Microsoft.AspNetCore.Http;
 
     public class Startup
     {
@@ -27,6 +28,22 @@ namespace TeamsAuthSSO
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+            services.AddSession(options => {
+                options.Cookie.IsEssential = true;
+                options.IdleTimeout = TimeSpan.FromMinutes(60);//You can set Time   
+            });
+            services.Configure<CookiePolicyOptions>(options =>
+            {                
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => false;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+            services.AddMemoryCache();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddMvc().AddSessionStateTempDataProvider();
+
+
             services.AddControllersWithViews();
             services.AddHttpClient("WebClient", client => client.Timeout = TimeSpan.FromSeconds(600));
             services.AddHttpContextAccessor();
@@ -46,6 +63,7 @@ namespace TeamsAuthSSO
                         AudienceValidator = SSOAuthHelper.AudienceValidator
                     };
                 });
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +71,7 @@ namespace TeamsAuthSSO
         {
             if (env.IsDevelopment())
             {
+                app.UseSession();
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -62,7 +81,8 @@ namespace TeamsAuthSSO
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            app.UseSession();
+            app.UseCookiePolicy();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

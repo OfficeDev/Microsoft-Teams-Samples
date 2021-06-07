@@ -16,7 +16,7 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 1) If you are using Visual Studio
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/graph-chat-lifecycle/csharp` folder
+  - Navigate to `samples/graph-chat-lifecycle/ChatLifecycle` folder
   - Select `ChatLifecycle.csproj` file
 
 1) Run ngrok - point to port 3978

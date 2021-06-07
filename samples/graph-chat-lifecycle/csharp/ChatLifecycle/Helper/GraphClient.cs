@@ -19,6 +19,6 @@ namespace ChatLifecycle.Helper
             }));
 
             return graphClient;
-        }  
+        }    
     }
 }

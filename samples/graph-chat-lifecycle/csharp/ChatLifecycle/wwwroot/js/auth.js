@@ -99,6 +99,7 @@ function getServerSideToken(clientSideToken) {
                             reject(JSON.parse(responseJson).error);
                     } else if (responseJson) {
                         accessToken = responseJson;
+                        localStorage.setItem("accessToken", accessToken);
                         getUserInfo(context.userPrincipalName);
                     }
                 });
