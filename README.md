@@ -176,7 +176,7 @@
 [graph#lifecycle#js]:samples/graph-channel-lifecycle/nodejs
 [graph#instllationlifecycle#cs]:samples/graph-app-installation-lifecycle/csharp
 
-[graph#chatlifecyle#cs]:samples/graph-chat-lifecycle-lifecycle/csharp
+[graph#chatlifecyle#cs]:samples/graph-chat-lifecycle/csharp
 
 [graph#appcataloglifecycle#js]:samples/graph-appcatalog-lifecycle/nodejs
 
