@@ -1,36 +1,38 @@
-﻿using System.Collections.Concurrent;
+﻿using AdaptiveCards;
+using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Teams;
+using Microsoft.Bot.Connector;
+using Microsoft.Bot.Schema;
+using Microsoft.Bot.Schema.Teams;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using ProactiveBot.Bots;
+using ProactiveBot.Models;
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Bot.Builder;
-using Microsoft.Bot.Schema;
-using Microsoft.Extensions.Configuration;
-using System;
-using Microsoft.Bot.Builder.Teams;
-using Microsoft.Bot.Schema.Teams;
-using ProactiveBot.Bots;
-using Microsoft.Bot.Connector;
-using System.Net;
 using Attachment = Microsoft.Bot.Schema.Attachment;
-using System.IO;
-using Newtonsoft.Json;
-using AdaptiveCards;
-using ProactiveBot.Models;
 
 namespace Microsoft.BotBuilderSamples
 {
     public class ProactiveBot : TeamsActivityHandler
     {
         public readonly IConfiguration _configuration;
-        ProactiveHelper Helper = new ProactiveHelper();
-        CheckAppCount CheckAppCount = new CheckAppCount();
-        CheckAppStatus objcheckAppStatus = new CheckAppStatus();
+        private ProactiveHelper Helper = new ProactiveHelper();
+        private CheckCount CheckAppCount = new CheckCount();
+        private CheckAppStatus objcheckAppStatus = new CheckAppStatus();
         private readonly ConcurrentDictionary<string, ConversationReference> _conversationReferences;
+
         public ProactiveBot(ConcurrentDictionary<string, ConversationReference> conversationReferences, IConfiguration configuration)
         {
             _conversationReferences = conversationReferences;
             _configuration = configuration;
         }
+
         private void AddConversationReference(Activity activity)
         {
             var conversationReference = activity.GetConversationReference();
@@ -48,6 +50,7 @@ namespace Microsoft.BotBuilderSamples
                         await turnContext.SendActivityAsync(MessageFactory.Attachment(New_AdaptiveCardAttachment()), cancellationToken);
                     }
                     break;
+
                 case "groupChat":
                     if (turnContext.Activity.MembersAdded != null)
                     {
@@ -55,6 +58,7 @@ namespace Microsoft.BotBuilderSamples
                         await turnContext.SendActivityAsync(MessageFactory.Attachment(New_AdaptiveCardAttachment()), cancellationToken);
                     }
                     break;
+
                 default: break;
             }
             await InstallAppinGroupchatandTeamScopeAsync(turnContext, cancellationToken);
@@ -83,7 +87,7 @@ namespace Microsoft.BotBuilderSamples
             await turnContext.SendActivityAsync(MessageFactory.Attachment(InstalledAppCount_Attachment(CheckAppCount.New_Count, CheckAppCount.Exist_Count)), cancellationToken);
         }
 
-        public async Task<CheckAppCount> InstalledAppsinPersonalScopeAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        public async Task<CheckCount> InstalledAppsinPersonalScopeAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             var currentPage_Memebers = await TeamsInfo.GetPagedMembersAsync(turnContext, 100, null, cancellationToken);
             int ExistedApp_Count = 0;
@@ -254,6 +258,5 @@ namespace Microsoft.BotBuilderSamples
             };
             return acard;
         }
-
     }
 }

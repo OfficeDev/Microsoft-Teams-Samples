@@ -1,23 +1,15 @@
-﻿using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Bot.Builder;
+﻿using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
-using Microsoft.Graph;
 using Microsoft.Extensions.Configuration;
-using ProactiveBot.Models;
+using Microsoft.Graph;
 using Microsoft.Identity.Client;
-using System.Net.Http.Headers;
-using System;
-using Microsoft.Graph.Auth;
-using System.Net.Http;
-using Microsoft.Bot.Builder.Teams;
-using Microsoft.Bot.Schema.Teams;
-using System.Linq;
 using ProactiveBot.Models;
-
-
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 namespace ProactiveBot.Bots
 {
@@ -27,11 +19,12 @@ namespace ProactiveBot.Bots
 
         private readonly ConcurrentDictionary<string, ConversationReference> _conversationReferences;
 
-        CheckAppStatus objcheckAppStatus = new CheckAppStatus();
+        private CheckAppStatus objcheckAppStatus = new CheckAppStatus();
+
         public ProactiveHelper()
         {
-
         }
+
         public ProactiveHelper(ConcurrentDictionary<string, ConversationReference> conversationReferences, IConfiguration configuration)
         {
             _conversationReferences = conversationReferences;
@@ -89,7 +82,7 @@ namespace ProactiveBot.Bots
 
                 var CheckAppid = list.FirstOrDefault(x => x.Id == MicrosoftAppId);
 
-                if (CheckAppid== null)
+                if (CheckAppid == null)
                 {
                     try
                     {
@@ -154,10 +147,9 @@ namespace ProactiveBot.Bots
                         await graphClient.Users[Userid].Teamwork.InstalledApps
                             .Request()
                             .AddAsync(userScopeTeamsAppInstallation);
-                       // CheckStatus = new Tuple<bool, int>(true, 1);
+                        // CheckStatus = new Tuple<bool, int>(true, 1);
                         objcheckAppStatus.AppCount = 1;
                         objcheckAppStatus.CheckStatus = true;
-                       
                     }
                     catch (Exception ex)
                     {
@@ -173,7 +165,6 @@ namespace ProactiveBot.Bots
             }
             catch (Exception ex1)
             {
-
                 throw ex1;
             }
             return objcheckAppStatus;
