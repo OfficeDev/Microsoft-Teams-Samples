@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
+using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web.Helpers;
-using AdaptiveCards;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Graph;
-using Microsoft.Graph.Auth;
-using Microsoft.Identity.Client;
-using Newtonsoft.Json;
 using TabActivityFeed.Helpers;
 using TabActivityFeed.Model;
 using TabActivityFeed.Repository;
@@ -21,11 +19,19 @@ namespace TabActivityFeed.Controllers
     public class HomeController : Controller
     {
         private readonly IConfiguration _configuration;
-        public HomeController(IConfiguration configuration)
+        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public HomeController(
+            IConfiguration configuration,
+            IHttpClientFactory httpClientFactory,
+            IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
-            _configuration = configuration;
+            _httpClientFactory = httpClientFactory;
+            _httpContextAccessor = httpContextAccessor;
         }
+
         [Route("hello")]
         public ActionResult Hello()
         {
@@ -48,6 +54,7 @@ namespace TabActivityFeed.Controllers
         {
             return View();
         }
+
         [Route("details")]
         [HttpGet]
         [System.Web.Mvc.ChildActionOnly]
@@ -57,6 +64,8 @@ namespace TabActivityFeed.Controllers
         }
 
         [Route("teamnotification")]
+
+
         public ActionResult TeamNotification()
         {
             return View();
@@ -67,7 +76,7 @@ namespace TabActivityFeed.Controllers
         public async Task<ActionResult> SendNotificationToUser(TaskInfo taskInfo)
         {
             TaskHelper.AddTaskToFeed(taskInfo);
-            var graphClient = SimpleGraphClient.GetGraphClient(_configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"], _configuration["TenantId"]);
+            var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
             var user = await graphClient.Users[taskInfo.userName]
                       .Request()
                       .GetAsync();
@@ -81,7 +90,7 @@ namespace TabActivityFeed.Controllers
             if (taskInfo.taskInfoAction == "customTopic")
             {
                 ChatMessageHelper chatMessage = new ChatMessageHelper(_configuration);
-                var getChannelMessage = await chatMessage.CreateChatMessageForChannel(taskInfo);
+                var getChannelMessage = await chatMessage.CreateChatMessageForChannel(taskInfo,taskInfo.access_token);
                 var customTopic = new TeamworkActivityTopic
                 {
                     Source = TeamworkActivityTopicSource.Text,
@@ -164,7 +173,7 @@ namespace TabActivityFeed.Controllers
         public async Task<ActionResult> SendNotificationToGroupChat(TaskInfo taskInfo)
         {
             TaskHelper.AddTaskToFeed(taskInfo);
-            var graphClient = SimpleGraphClient.GetGraphClient(_configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"], _configuration["TenantId"]);
+            var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
             var user = await graphClient.Users[taskInfo.userName]
                       .Request()
                       .GetAsync();
@@ -172,7 +181,7 @@ namespace TabActivityFeed.Controllers
             {
 
                 ChatMessageHelper chatMessage = new ChatMessageHelper(_configuration);
-                var getChatMessage = chatMessage.CreateGroupChatMessage(taskInfo);
+                var getChatMessage = chatMessage.CreateGroupChatMessage(taskInfo,taskInfo.access_token);
                 var customTopic = new TeamworkActivityTopic
                 {
                     Source = TeamworkActivityTopicSource.EntityUrl,
@@ -262,14 +271,14 @@ namespace TabActivityFeed.Controllers
         {
 
             TaskHelper.AddTaskToFeed(taskInfo);
-            var graphClient = SimpleGraphClient.GetGraphClient(_configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"], _configuration["TenantId"]);
+            var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
             var user = await graphClient.Users[taskInfo.userName]
                       .Request()
                       .GetAsync();
             if (taskInfo.taskInfoAction == "customTopic")
             {
                 ChatMessageHelper chatMessage = new ChatMessageHelper(_configuration);
-                var getChannelMessage = await chatMessage.CreateChatMessageForChannel(taskInfo);
+                var getChannelMessage = await chatMessage.CreateChatMessageForChannel(taskInfo, taskInfo.access_token);
                 var customTopic = new TeamworkActivityTopic
                 {
                     Source = TeamworkActivityTopicSource.Text,
@@ -297,7 +306,7 @@ namespace TabActivityFeed.Controllers
                 };
                 try
                 {
-                    await graphClient.Teams[_configuration["teamId"]]
+                    await graphClient.Teams[taskInfo.teamId]
                           .SendActivityNotification(customTopic, CustomActivityType, null, CustomPreviewText, CustomTemplateParameters, customRecipient)
                           .Request()
                           .PostAsync();
@@ -310,9 +319,9 @@ namespace TabActivityFeed.Controllers
             else if (taskInfo.taskInfoAction == "channelTab")
             {
                 ChatMessageHelper chatMessage = new ChatMessageHelper(_configuration);
-                var getChannelMessage = chatMessage.CreateChannelMessageAdaptiveCard(taskInfo);
+                var getChannelMessage = chatMessage.CreateChannelMessageAdaptiveCard(taskInfo,taskInfo.access_token);
 
-                var tabs = await graphClient.Teams[_configuration["teamId"]].Channels[_configuration["channelId"]].Tabs
+                var tabs = await graphClient.Teams[taskInfo.teamId].Channels[taskInfo.channelId].Tabs
                 .Request()
                 .Expand("teamsApp")
                 .GetAsync();
@@ -320,7 +329,7 @@ namespace TabActivityFeed.Controllers
                 var topic = new TeamworkActivityTopic
                 {
                     Source = TeamworkActivityTopicSource.EntityUrl,
-                    Value = "https://graph.microsoft.com/beta/teams/" + _configuration["teamId"] + "/channels/" + _configuration["channelId"] + "/tabs/" + tabId
+                    Value = "https://graph.microsoft.com/beta/teams/" + taskInfo.teamId + "/channels/" + taskInfo.channelId + "/tabs/" + tabId
                 };
 
                 var activityType = "reservationUpdated";
@@ -351,7 +360,7 @@ namespace TabActivityFeed.Controllers
            };
                 try
                 {
-                    await graphClient.Teams[_configuration["TeamId"]]
+                    await graphClient.Teams[taskInfo.teamId]
                          .SendActivityNotification(topic, activityType, null, previewText, templateParameters, recipient)
                          .Request()
                          .PostAsync();
@@ -366,7 +375,7 @@ namespace TabActivityFeed.Controllers
             {
 
                 ChatMessageHelper chatMessage = new ChatMessageHelper(_configuration);
-                var getChannelMessage = await chatMessage.CreatePendingFinanceRequestCard(taskInfo);
+                var getChannelMessage = await chatMessage.CreatePendingFinanceRequestCard(taskInfo,taskInfo.access_token);
 
                 var topic = new TeamworkActivityTopic
                 {
@@ -398,7 +407,7 @@ namespace TabActivityFeed.Controllers
            };
                 try
                 {
-                    await graphClient.Teams[_configuration["TeamId"]]
+                    await graphClient.Teams[taskInfo.teamId]
                          .SendActivityNotification(topic, activityType, null, previewText, templateParameters, recipient)
                          .Request()
                          .PostAsync();
@@ -410,6 +419,21 @@ namespace TabActivityFeed.Controllers
 
             }
             return View("teamnotification");
+        }
+
+        [Authorize]
+        [HttpGet("/GetUserAccessToken")]
+        public async Task<ActionResult<string>> GetUserAccessToken()
+        {
+            try
+            {
+                var accessToken = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor);
+                return accessToken;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 

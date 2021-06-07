@@ -15,6 +15,7 @@ namespace TabActivityFeed.Helpers
     public class ChatMessageHelper
     {
         public readonly IConfiguration _configuration;
+        public static string channelId;
         IChatMessageHostedContentsCollectionPage chatMessageHostedContentsCollectionPage = new ChatMessageHostedContentsCollectionPage();
 
         public ChatMessageHelper(IConfiguration config)
@@ -22,9 +23,9 @@ namespace TabActivityFeed.Helpers
             _configuration = config;
         }
 
-        public async Task<ChatMessage> CreateChatMessageForChannel(TaskInfo taskInfo)
+        public async Task<ChatMessage> CreateChatMessageForChannel(TaskInfo taskInfo, string accessToken)
         {
-            GraphServiceClient graphClientChat = GetGraphClient();
+            GraphServiceClient graphClientChat = SimpleGraphClient.GetGraphClient(accessToken);
             var chatMessage = new ChatMessage
             {
                 Subject = null,
@@ -35,15 +36,23 @@ namespace TabActivityFeed.Helpers
                 },
             };
             chatMessage.HostedContents = chatMessageHostedContentsCollectionPage;
-            var channelMessage = await graphClientChat.Teams[_configuration["teamId"]].Channels[_configuration["channelId"]].Messages
-                 .Request()
-                 .AddAsync(chatMessage);
-            return channelMessage;
+            try
+            {
+                var channelMessage = await graphClientChat.Teams[taskInfo.teamId].Channels[taskInfo.channelId].Messages
+                     .Request()
+                     .AddAsync(chatMessage);
+                return channelMessage;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return null;
         }
 
-        public async Task<ChatMessage> CreateChannelMessageAdaptiveCard(TaskInfo taskInfo)
+        public async Task<ChatMessage> CreateChannelMessageAdaptiveCard(TaskInfo taskInfo, string accessToken)
         {
-            GraphServiceClient graphClientChat = GetGraphClient();
+            GraphServiceClient graphClientChat = SimpleGraphClient.GetGraphClient(accessToken);
             var Card = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
             {
                 Body = new List<AdaptiveElement>()
@@ -104,16 +113,16 @@ namespace TabActivityFeed.Helpers
             };
 
             chatMessage.HostedContents = chatMessageHostedContentsCollectionPage;
-            var getChannelMessage = await graphClientChat.Teams[_configuration["teamId"]].Channels[_configuration["channelId"]].Messages
+            var getChannelMessage = await graphClientChat.Teams[taskInfo.teamId].Channels[taskInfo.channelId].Messages
                  .Request()
                  .AddAsync(chatMessage);
             return getChannelMessage;
 
         }
 
-        public  async Task<ChatMessage> CreatePendingFinanceRequestCard(TaskInfo taskInfo)
+        public  async Task<ChatMessage> CreatePendingFinanceRequestCard(TaskInfo taskInfo, string accessToken)
         {
-            GraphServiceClient graphClientChat = GetGraphClient();
+            GraphServiceClient graphClientChat= SimpleGraphClient.GetGraphClient(accessToken);
             var Card = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
             {
                 Body = new List<AdaptiveElement>()
@@ -167,15 +176,15 @@ namespace TabActivityFeed.Helpers
             };
 
             chatMessage.HostedContents = chatMessageHostedContentsCollectionPage;
-            var getChannelMessage = await graphClientChat.Teams[_configuration["teamId"]].Channels[_configuration["channelId"]].Messages
+            var getChannelMessage = await graphClientChat.Teams[taskInfo.teamId].Channels[taskInfo.channelId].Messages
                  .Request()
                  .AddAsync(chatMessage);
             return getChannelMessage;
         }
 
-        public async Task<ChatMessage> CreateGroupChatMessage(TaskInfo taskInfo)
+        public async Task<ChatMessage> CreateGroupChatMessage(TaskInfo taskInfo, string accessToken)
         {
-            var graphClientChat = GetGraphClient();
+            var graphClientChat = SimpleGraphClient.GetGraphClient(accessToken);
             var chatMessage = new ChatMessage
             {
                 Subject = null,
@@ -190,21 +199,6 @@ namespace TabActivityFeed.Helpers
                  .Request()
                  .AddAsync(chatMessage);
             return getChatMessage;
-        }
-
-        public GraphServiceClient GetGraphClient()
-        {
-            string[] scopes = { "ChannelMessage.Send", "Group.ReadWrite.All", "User.Read" };
-            IPublicClientApplication publicClientApplication = PublicClientApplicationBuilder
-                .Create(_configuration["MicrosoftAppId"])
-                .WithTenantId(_configuration["tenantId"])
-                .Build();
-            UsernamePasswordProvider authenticationProvider = new UsernamePasswordProvider(publicClientApplication, scopes);
-            GraphServiceClient graphClientChat = new GraphServiceClient(authenticationProvider);
-            string password = "<<Your Password>>";
-            System.Security.SecureString passWordSecureString = new System.Security.SecureString();
-            foreach (char c in password.ToCharArray()) passWordSecureString.AppendChar(c);
-            return graphClientChat;
         }
     }
 }

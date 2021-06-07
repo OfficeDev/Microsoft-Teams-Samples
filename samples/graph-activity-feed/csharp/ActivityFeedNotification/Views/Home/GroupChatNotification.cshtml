@@ -1,7 +1,7 @@
 ﻿
 @model TabActivityFeed.Model.TaskInfo
 @{
-    Layout = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -32,6 +32,7 @@
             });
         });
         microsoftTeams.initialize();
+        var token = localStorage.getItem("accessToken");
         var username = "";
         var userId = "";
         var groupchatId = "";
@@ -75,6 +76,7 @@
                 description: $('#description').val(),
                 userName: username,
                 taskInfoAction: action,
+                access_token: token,
                 chatId:groupchatId,
             };
             $.ajax({
@@ -114,6 +116,7 @@
                 DeploymentDescription: $('#DeploymentDescription').val(),
                 taskInfoAction: action,
                 userName: username,
+                access_token: token,
                 chatId: groupchatId,
             };
             $.ajax({
@@ -130,6 +133,9 @@
 </head>
 
 <body>
+    <button onclick="requestConsent()" id="consent" style="display: none">Login</button>
+    <div id="divGraphProfile" style="display: none"></div>
+    <h4 id="successMsg"></h4>
     <div style="background-image: url('https://sharegate.com/app/uploads/2017/08/usemsteamslikearockstar-digest-thumbnail2x-920x517.png');">
 
         <div class="radioClass">

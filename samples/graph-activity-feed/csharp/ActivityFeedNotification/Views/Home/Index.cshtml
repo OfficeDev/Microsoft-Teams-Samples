@@ -1,7 +1,7 @@
 ﻿
 @model TabActivityFeed.Model.TaskInfo
 @{
-    Layout = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -32,8 +32,10 @@
             });
         });
         microsoftTeams.initialize();
+        var token = localStorage.getItem("accessToken");
         var username = "";
         var userId = "";
+
         microsoftTeams.getContext(function (context) {
             username = context.upn;
             userId = context.userObjectId;
@@ -75,6 +77,7 @@
                 title: $('#title').val(),
                 description: $('#description').val(),
                 userName: username,
+                access_token: token,
                 taskInfoAction: action,
             };
             $.ajax({
@@ -114,6 +117,7 @@
                 DeployementTitle: $('#DeployementTitle').val(),
                 DeploymentDescription: $('#DeploymentDescription').val(),
                 taskInfoAction: action,
+                access_token: token,
                 userName: username,
             };
             $.ajax({
@@ -130,6 +134,9 @@
 </head>
 
 <body>
+    <button onclick="requestConsent()" id="consent" style="display: none">Login</button>
+    <div id="divGraphProfile" style="display: none"></div>
+    <h4 id="successMsg"></h4>
     <div style="background-image: url('https://sharegate.com/app/uploads/2017/08/usemsteamslikearockstar-digest-thumbnail2x-920x517.png');">
         <div class="radioClass">
             <label><input type="radio" name="notificationRadio" value="sendNotification"> Send Notification To User</label></br>

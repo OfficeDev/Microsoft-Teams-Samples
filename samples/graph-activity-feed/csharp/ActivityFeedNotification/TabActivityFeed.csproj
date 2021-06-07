@@ -10,8 +10,11 @@
   <ItemGroup>
     <PackageReference Include="AdaptiveCards" Version="2.4.0" />
     <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureAD.UI" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Bot.Builder.Dialogs" Version="4.13.2" />
     <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.10.3" />
     <PackageReference Include="Microsoft.Graph.Auth" Version="1.0.0-preview.6" />
     <PackageReference Include="Microsoft.Graph.Beta" Version="0.35.0-preview" />

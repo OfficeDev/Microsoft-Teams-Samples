@@ -17,6 +17,10 @@ namespace TabActivityFeed.Model
 
         public string channelId { get; set; }
 
+        public string teamId { get; set; }
+
+        public string tenantId { get; set; }
+
         public string title { get; set; }
 
         public string description { get; set; }
@@ -33,5 +37,7 @@ namespace TabActivityFeed.Model
         public string reservationId { get; set; }
         public string currentSlot { get; set; }
         public string reservationTitle { get; set; }
+
+        public string access_token { get; set; }
     }
 }

@@ -1,13 +1,17 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using Microsoft.AspNetCore.Authentication.AzureAD.UI;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Bot.Builder;
-using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using TabActivityFeed.Helpers;
 
 namespace Microsoft.BotBuilderSamples
 {
@@ -23,12 +27,43 @@ namespace Microsoft.BotBuilderSamples
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();  
-            services.AddMvc();
-            services.AddControllers().AddNewtonsoftJson();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.Cookie.IsEssential = true;
+                options.IdleTimeout = TimeSpan.FromMinutes(60);//You can set Time   
+            });
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => false;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+            services.AddMemoryCache();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddMvc().AddSessionStateTempDataProvider();
 
-            // Create the Bot Framework Adapter with error handling enabled.
-            services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
+
+            services.AddControllersWithViews();
+            services.AddHttpClient("WebClient", client => client.Timeout = TimeSpan.FromSeconds(600));
+            services.AddHttpContextAccessor();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                {
+                    var azureAdOptions = new AzureADOptions();
+                    Configuration.Bind("AzureAd", azureAdOptions);
+                    options.Authority = $"{azureAdOptions.Instance}{azureAdOptions.TenantId}/v2.0";
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidAudiences = AuthHelper.GetValidAudiences(Configuration),
+                        ValidIssuers = AuthHelper.GetValidIssuers(Configuration),
+                        AudienceValidator = AuthHelper.AudienceValidator
+                    };
+                });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,17 +80,20 @@ namespace Microsoft.BotBuilderSamples
             app.UseDefaultFiles()
                 .UseStaticFiles()
                 .UseWebSockets()
+                .UseSession()
+                .UseCookiePolicy()
                 .UseRouting()
+                .UseAuthentication()
                 .UseAuthorization()
 
                 .UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllers();
                     endpoints.MapControllerRoute(
-                   name: "default",
-                   pattern: "{controller=Home}/{action=Index}/{id?}");
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
                 });
-         
+
             // app.UseHttpsRedirection();
         }
     }
