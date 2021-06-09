@@ -34,6 +34,7 @@ This sample shows a AppCatalog bot and demonstrates teamsApp lifecycle in catalo
 
 4. Select Add OAuth Connection Settings.
 
+
 5. Complete the form as follows:
 
     a. **Name:** Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
@@ -53,6 +54,7 @@ This sample shows a AppCatalog bot and demonstrates teamsApp lifecycle in catalo
     i. Provide  Scopes like "AppCatalog.Submit, AppCatalog.Read.All, AppCatalog.ReadWrite.All, Directory.Read.All, Directory.ReadWrite.All"
     ![image](https://user-images.githubusercontent.com/50989436/120277280-7877c280-c2d1-11eb-8bf6-ea65ee650f06.png)
     ![image](https://user-images.githubusercontent.com/50989436/120277389-9fce8f80-c2d1-11eb-8c5a-f70e6fa3ab51.png)
+
 A) Run ngrok - point to port 3978
 
     ```bash
