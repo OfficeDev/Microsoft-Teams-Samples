@@ -87,9 +87,7 @@
 |1|Resource Specific Consent (RSC) | This sample illustrates how you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs. .                              |[View][graph#rsc#cs]       | [View][graph#rsc#js]
 |2|Graph API Channel Life Cycle | This sample illustrates how you can use [Graph API Channel Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-beta) to call Graph APIs. .                              |[View][graph#lifecycle#cs]       | [View][graph#lifecycle#js]
 |3|Graph API Teams App Installation Life Cycle | This sample illustrates how you can use [Teams App Installation Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/teamsappinstallation?view=graph-rest-1.0) by calling Microsoft Graph APIs. .                              |[View][graph#instllationlifecycle#cs]       |
-|4|Graph API Teams App Catalog Life Cycle | This sample illustrates how you you programattically have an lifecycle for your teams App in catalog by calling Microsoft Graph APIs. .                              |       |[View][graph#appcataloglifecycle#js]
-
-
+|4|Graph API Teams App Catalog Life Cycle | This sample illustrates how you can use [App Catalog Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/teamsapp?view=graph-rest-1.0) by calling Microsoft Graph APIs. .                              |[View][graph#appctaloglifecycle#cs]       | [View][graph#appcataloglifecycle#js]
 
 
 ## Scenario specific samples
@@ -175,6 +173,7 @@
 [graph#lifecycle#cs]:samples/graph-channel-lifecycle/csharp
 [graph#lifecycle#js]:samples/graph-channel-lifecycle/nodejs
 [graph#instllationlifecycle#cs]:samples/graph-app-installation-lifecycle/csharp
+[graph#appctaloglifecycle#cs]:samples/graph-appcatalog-lifecycle/csharp
 [graph#appcataloglifecycle#js]:samples/graph-appcatalog-lifecycle/nodejs
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 
