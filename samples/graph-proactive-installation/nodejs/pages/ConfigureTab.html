@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+<body> 
+    <script src='https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js'></script>
+    <h2>Click on save to configure the tab.</h2>
+    <script>
+         microsoftTeams.initialize();
+  
+        microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
+            microsoftTeams.settings.setSettings({
+            entityId: 'ProactiveAppInstallation',
+            contentUrl: window.location.origin + "/Index.html",
+            configName: 'ProactiveAppInstallation'
+        });
+          saveEvent.notifySuccess();
+      });
+    microsoftTeams.settings.setValidityState(true);
+
+    </script>
+</body>
+
+</html>
