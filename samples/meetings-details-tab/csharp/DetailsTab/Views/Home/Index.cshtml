@@ -1,0 +1,179 @@
+﻿@model DetailsTab.Models.TaskInfoList
+@{
+    ViewData["Title"] = "Home Page";
+}
+<button type="button" class="btn btn-outline-info" id="btnAddAgenda" >Add Agenda</button>
+
+
+<div id="cards" style="display:none; width:50%; margin:15px;"></div>
+
+<div class="modal fade" id="getResultsModal" tabindex="-1" role="dialog" aria-labelledby="getAppModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalbody">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if(Model != null && Model.taskInfoList.Count > 0)
+{
+    @foreach (var item in Model.taskInfoList)
+    {
+        if (!item.IsSent)
+        {
+            <div class="card" style="margin:20px 0px; width:50%">
+                <div class="card-body" data-id="@item.id">
+                    <h5 class="card-title">@item.title</h5>
+                    <input type="radio" class="option1" name="option1" value="@item.option1"/>
+                    <label for="option1">@item.option1</label><br>
+                    <input type="radio" class="option2" name="option2" value="@item.option2"/>
+                    <label for="option2">@item.option2</label><br>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-primary btnSendAgenda">Send</button>
+                </div>
+            </div>
+}
+        else
+        {
+            int option1resultCount = item.PersonAnswered == null || item.PersonAnswered.Count == 0 || !item.PersonAnswered.ContainsKey(item.option1) ? 0 : item.PersonAnswered[item.option1].Count;
+            int option2resultCount = item.PersonAnswered == null || item.PersonAnswered.Count == 0 || !item.PersonAnswered.ContainsKey(item.option2) ? 0 : item.PersonAnswered[item.option2].Count;
+            int total = (option1resultCount + option2resultCount) == 0 ? 0 : (option1resultCount + option2resultCount);
+            int option1resultValue = total == 0 ? 0 :(option1resultCount *100)/total;
+            int option2resultValue = total == 0 ? 0 : 100 - option1resultValue;
+
+            List<string> option1resultNames = item.PersonAnswered == null || !item.PersonAnswered.ContainsKey(item.option1) ? new List<string> () : item.PersonAnswered[item.option1];
+            List<string> option2resultNames =  item.PersonAnswered == null || !item.PersonAnswered.ContainsKey(item.option2) ? new List<string> () : item.PersonAnswered[item.option2];
+
+            <div class="card" style="margin:20px 0px; width:50%">
+                <div class="card-body" data-id="@item.id">
+                    <h5 class="card-title">@item.title</h5>
+                    <span class="option1">@item.option1</span><br/>
+                    <span class="resultpercentage">@option1resultValue% has answerd </span><br />
+                    <input type="hidden" class="option1Results" data-result="@string.Join(',',option1resultNames)"/>
+                    <span class="option2">@item.option2</span><br>
+                    <span class="resultpercentage">@option2resultValue% has answerd </span>
+                    <input type="hidden" class="option2Results" data-result="@string.Join(',',option2resultNames)"/>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-primary btnResult">Results</button>
+                </div>
+            </div>
+        }
+    }
+}
+<script src="https://statics.teams.cdn.office.net/sdk/v1.9.0/js/MicrosoftTeams.min.js"></script>
+<script type="text/javascript">
+        microsoftTeams.initialize();
+
+        submitHandler = (err, result) => {
+            DisplayAgenda(result);
+        };
+        $("#btnAddAgenda").click(function () {
+            let taskInfo = {
+                title: null,
+                height: null,
+                width: null,
+                url: null,
+                card: null,
+                fallbackUrl: null,
+                completionBotId: null,
+            };
+                taskInfo.url = "@Model.baseUrl" +"/Detail";
+                taskInfo.title = "Add a Poll";
+                taskInfo.height = "250";
+                taskInfo.width = "500";
+                taskInfo.fallbackUrl = taskInfo.url
+            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+        });
+
+        function DisplayAgenda (result) {
+            var taskInfo = {
+                title: result.Title,
+                option1: result.Option1,
+                option2: result.Option2
+            }
+            $.ajax({
+                    url: '@Url.Action("Index", "Home")',
+                    type: "POST",
+                    dataType: "json",
+                    data: taskInfo,
+                    success: function (response) {
+                        bindPollDataToTab(response);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    },
+                });
+        }
+             function AddAgenda () {
+                $(".btnSendAgenda").on("click", function (e) {
+                e.preventDefault();
+                var element = $(e.currentTarget).parent().siblings('.card-body');
+                var id = element.attr('data-id')
+                var title = element.children('.card-title').html();
+                var option1 = element.children('input[name=option1]').val();
+                var option2 = element.children('input[name=option2]').val();
+     
+                 var taskInfo = {
+                    title: title,
+                    option1: option1,
+                    option2: option2,
+                    id: id
+                }
+                 $.ajax({
+                    url: '@Url.Action("AddNewAgenda", "Home")',
+                    type: "POST",
+                    dataType: "json",
+                    data: taskInfo,
+                    success: function (response) {
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    },
+                });
+            });
+          }
+        AddAgenda ();
+
+        function bindPollDataToTab (data) {
+            var html = '';
+            var response = data.taskInfoList;
+            $('#cards').show();
+            for(var i = 0 ; i< response.length; i++){
+                
+                if(response[i].isSent) continue;
+
+                html += `<div class="card" style="margin:20px 0px;"><div class="card-body" data-id=${response[i].id}>`
+                html += `<h5 class="card-title">${response[i].title}</h5>`
+                html += `<input type="radio" class="option1" name="option1" value="${response[i].option1}"/><label class="pollLabel" for="option1">${response[i].option1}</label><br>`
+                html += `<input type="radio" class="option2" name="option2" value="${response[i].option2}"/><label class="pollLabel" for="option2">${response[i].option2}</label><br>`
+                html += '</div><div class="card-footer"><button type="button" class="btn btn-primary btnSendAgenda">Send</button></div></div>';
+            }
+            $('#cards').html(html);
+            AddAgenda();
+        }
+
+         $(".btnResult").on('click', function (e) {
+            e.preventDefault();
+            var element = $(e.currentTarget).parent().siblings('.card-body');
+            var option1 = element.children('.option1').html();
+            var option2 = element.children('.option2').html();
+            var option1Results = element.children('.option1Results').attr('data-result');
+            var option2Results = element.children('.option2Results').attr('data-result');
+            var html = `<h4>${option1}</h4> <span style="font-size:12px; color:blue">${option1Results}</span> <br> <h4>${option2}</h4> <span style="font-size:12px; color:blue">${option2Results}</span>`;
+            $("#getResultsModal #modalbody").html(html);
+            $("#getResultsModal").modal('show');
+         })
+        
+</script>
