@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<script src='https://statics.teams.cdn.office.net/sdk/v1.8.0/js/MicrosoftTeams.min.js'></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<style>
+#adaptiveBtn {
+      border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    margin: 15px;
+    font-size: 16px;
+    background-color: #50B8CD;
+    padding: 8px;
+    cursor: pointer;
+    font-weight: bold;    
+}
+</style>
+
+<h3>Welcome to Chat LifeCycle Application!!</h3>
+<h4 id="subTitle" style="display: none">Please click on the button to create a group chat!</h4>
+<div id="divError" style="display: none"></div>
+<button onclick="requestConsent()" id="consent" style="display: none">Authenticate</button>
+<div id="divGraphProfile" style="display: none"></div>
+<h4 id="successMsg"></h4>
+<button class="button-primary" id="adaptiveBtn" style="display: none">Create Group Chat</button>
+
+<script>
+  
+    microsoftTeams.initialize();
+
+    //retrieve accessToken from localstorage saved in auth.js file
+    var token = localStorage.getItem("accessToken");
+
+    $("#adaptiveBtn").on('click', function (e) {
+    	
+            let taskInfo = {
+            title: null,
+            height: null,
+            width: null,
+            url: null,
+            card: null,
+            fallbackUrl: null,
+            completionBotId: null,
+            };
+
+            $.ajax({
+                    url:'@Url.Action("GetAdaptiveCard", "Home")',
+                    type: 'POST',
+                    dataType: "json",
+                    data:{token: token},                  
+                    success: function (data, textStatus, jQxhr) {
+                        console.log(data);
+                        taskInfo.card = data;
+                        microsoftTeams.tasks.startTask(taskInfo,submitHandler);                      
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        console.log('error', errorThrown);
+                    }
+                });
+            })
+
+    submitHandler = (err,result) => {
+           microsoftTeams.initialize();
+           microsoftTeams.getContext(function (context) {
+           
+            var userID = context.userObjectId;
+            var Json = JSON.stringify(result);
+            var parsedJson = JSON.parse(Json);
+            var resultJson = parsedJson.users;
+            var title = parsedJson.title;
+
+            $.ajax({
+                type: 'POST',
+                url: '/CreateNewTeam',
+                dataType: 'json',
+                data: {token:token,resultJson:resultJson,userID:userID,title:title},
+                success: function (response) {
+                     console.log(response);
+                     showSuccessMessage();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    console.log(resultJson);
+                },
+            });
+          })
+    };
+
+    function  showSuccessMessage()
+    {
+       document.getElementById("successMsg").innerHTML="Group Chat created with all the selected members. Also, the app has been installed and pinned as a tab successfully!";
+    }
+    
+</script>
