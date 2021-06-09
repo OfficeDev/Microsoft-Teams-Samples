@@ -175,6 +175,7 @@
 [graph#lifecycle#js]:samples/graph-channel-lifecycle/nodejs
 [graph#instllationlifecycle#cs]:samples/graph-app-installation-lifecycle/csharp
 [graph#appcataloglifecycle#js]:samples/graph-appcatalog-lifecycle/nodejs
+[graph#graphproactiveinstallation#cs]:samples/graph=proactive-installation/csharp
 [graph#graphproactiveinstallation#js]:samples/graph=proactive-installation/nodejs
 
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
