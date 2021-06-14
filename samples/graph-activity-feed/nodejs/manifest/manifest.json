@@ -1,0 +1,87 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.7/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.7",
+  "version": "1.6.5",
+  "id": "4b429db7-3bef-421d-9c49-7a4e670e50dc",
+  "packageName": "com.skype.teams.samples.sampleapp",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Activity-App",
+    "full": "Activity-App"
+  },
+  "description": {
+    "short": "This is a small sample app we made for you!",
+    "full": "This is a small sample app we made for you! This app has samples of all capabilities MS Teams supports."
+  },
+  "icons": {
+    "outline": "activity-send.png",
+    "color": "activity-send.png"
+  },
+  "accentColor": "#3F487F",
+  "staticTabs": [
+    {
+      "contentUrl": "https://455c30dffe44.ngrok.io/tab",
+      "entityId": "statictab",
+      "name": "Bot Info",
+      "scopes": [
+        "team",
+        "personal"
+      ]
+    }
+  ],
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://455c30dffe44.ngrok.io/configure",
+      "canUpdateConfiguration": false,
+      "scopes": [
+        "team",
+        "groupchat"
+      ]
+    }
+  ],
+  "webApplicationInfo": {
+    "id": "3845be07-a632-4478-8b38-00a51696a0cc",
+    "resource": "https://contosoapp.com"
+  },
+  "activities": {
+    "activityTypes": [
+      {
+        "type": "taskCreated",
+        "description": "Task created activity",
+        "templateText": "New created task {taskId} for you."
+      },
+      {
+        "type": "deploymentApprovalRequired",
+        "description": "New deployment requires your approval",
+        "templateText": "New deployment requires your approval with {deploymentId}"
+      },
+      {
+        "type": "approvalRequired",
+        "description": "Deployment requires your approval",
+        "templateText": "A Deployment approval Task created with {approvalTaskId}"
+      },
+      {
+        "type": "pendingFinanceApprovalRequests",
+        "description": "Internal spending team has a pending finance approval requests",
+        "templateText": "These are count of pending request {pendingRequestCount}"
+      },
+      {
+        "type": "reservationUpdated",
+        "description": "You have moved up the queue",
+        "templateText": "Here is the {reservationId} with {currentSlot}"
+      }
+    ]
+  },
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "ngrok.io"
+  ]
+}

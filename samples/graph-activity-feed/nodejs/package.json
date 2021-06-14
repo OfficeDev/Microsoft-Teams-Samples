@@ -1,0 +1,35 @@
+{
+  "name": "nodejs-graph-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@azure/msal-node": "^1.1.0",
+    "axios": "^0.21.1",
+    "botbuilder": "^4.13.4",
+    "dotenv": "^10.0.0",
+    "moment": "^2.29.1",
+    "pug": "^3.0.2",
+    "restify": "^8.5.1",
+    "restify-render-middleware": "^2.0.3",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.27.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-standard": "^5.0.0",
+    "nodemon": "^2.0.7"
+  },
+  "scripts": {
+    "start": "node ./index.js",
+    "watch": "nodemon --inspect ./index.js",
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

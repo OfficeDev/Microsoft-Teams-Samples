@@ -1,0 +1,39 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title configure
+        script(src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js")
+        script(src="https://code.jquery.com/jquery-1.11.3.min.js")
+
+        script.
+                var microsoftTeams;
+                // Set up the tab and stuff.
+                microsoftTeams.initialize();
+                microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
+                    microsoftTeams.settings.setSettings({ suggestedDisplayName: "Bot Info", contentUrl: createTabUrl(), entityId: "configTab" });
+                    saveEvent.notifySuccess();
+                });
+
+                microsoftTeams.settings.setValidityState(true);
+
+                function createTabUrl() {
+                    //Set the url of tab.aspx for pinned tab
+                    var tabUrl = window.location.protocol + "//" + window.location.host + "/tab";
+                    return tabUrl;
+                }
+        style.
+            .title {
+                color: white;
+            }
+
+            .textarea {
+                resize: none;
+            }
+    
+    body
+        <h1>Press save to create your tab</h1> 
+
+

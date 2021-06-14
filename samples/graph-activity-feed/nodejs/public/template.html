@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <title>Bot Home</title>
+    </head>
+
+    <body>
+        <style>
+            .title {
+                color: white;
+            }
+
+            .textarea {
+                resize: none;
+            }
+
+        </style>
+        <nav class="navbar navbar-light bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="https://pngimg.com/uploads/microsoft/small/microsoft_PNG13.png"
+                        alt="logo" width="auto" height="24" class="d-inline-block align-text-bottom">
+                    <span class="title">Microsoft</span>
+                </a>
+            </div>
+        </nav>
+        <div class="container my-4">
+            <div class="accordion" id="bot">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#userinchannel" aria-expanded="true" aria-controls="userinchannel">
+                            Send Notification to User in Channel
+                        </button>
+                    </h2>
+                    <div id="userinchannel" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                        data-bs-parent="#bot">
+                        <div class="accordion-body mx-4">
+                            <div class="mb-3">
+                                <label for="task" class="form-label">Task Title</label>
+                                <input type="text" class="form-control" id="task" placeholder="Enter title">
+                            </div>
+                            <div class="mb-3">
+                                <label for="taskdesc" class="form-label">Task Description</label>
+                                <textarea class="form-control textarea" id="taskdesc" rows="3"
+                                    placeholder="Enter description"></textarea>
+                            </div>
+                            <button type="button" class="btn btn-primary mx-auto d-flex">Send Notification to
+                                Channel</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#customtopicinchannel" aria-expanded="false"
+                            aria-controls="customtopicinchannel">
+                            Send Notification with Custom Topic in Channel
+                        </button>
+                    </h2>
+                    <div id="customtopicinchannel" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                        data-bs-parent="#bot">
+                        <div class="accordion-body mx-4">
+                            <strong>Coming soon....!</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#channeltab" aria-expanded="false" aria-controls="channeltab">
+                            Notify User about a channel Tab
+                        </button>
+                    </h2>
+                    <div id="channeltab" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                        data-bs-parent="#bot">
+                        <div class="accordion-body mx-4">
+                            <strong>Coming soon....!</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+
+</html>

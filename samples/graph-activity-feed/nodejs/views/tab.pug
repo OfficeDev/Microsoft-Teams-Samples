@@ -1,0 +1,110 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title tab
+        script(src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js")
+        script(src="https://code.jquery.com/jquery-1.11.3.min.js")
+        link("href"="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous")
+
+        style.
+            .title {
+                color: white;
+            }
+
+            .textarea {
+                resize: none;
+            }
+
+    body 
+        nav(class="navbar navbar-light bg-primary")
+            div(class="container-fluid")
+                a(class="navbar-brand" href="#")
+                    img(src="https://pngimg.com/uploads/microsoft/small/microsoft_PNG13.png" alt="logo" width="auto" height="24" class="d-inline-block align-text-bottom") 
+                    span(class="title" style="margin-left:10px;") Microsoft
+
+        div(class="container my-4")            
+            div(class="accordion" id="bot")
+                div(class="accordion-item")
+                    h2(class="accordion-header" id="headingOne")
+                        button(class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#userinchannel" aria-expanded="true" aria-controls="userinchannel") Send Notification to User in Channel
+
+                    div(id="userinchannel" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#bot")
+                        div(class="accordion-body mx-4")
+                            div(class="mb-3")
+                                label(for="task" class="form-label") Task Title
+                                input(type="text" class="form-control" id="task" placeholder="Enter title")
+
+                            div(class="mb-3")
+                                label(for="taskdesc" class="form-label") Task Description
+                                textarea(class="form-control textarea" id="taskdesc" rows="3" placeholder="Enter description")
+                            button(type="button" class="btn btn-primary mx-auto d-flex" id="btn-send-notification-to-channel") Send Notification to Channel
+
+                    div(class="accordion-item")
+                        h2(class="accordion-header" id="headingTwo")
+                            button(class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#customtopicinchannel" aria-expanded="false" aria-controls="customtopicinchannel") Send Notification with Custom Topic in Channel
+                        div(id="customtopicinchannel" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#bot")
+                            div(class="accordion-body mx-4")
+                                strong Coming soon....!
+
+                    div(class="accordion-item")
+                        h2(class="accordion-header" id="headingThree")
+                            button(class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#channeltab" aria-expanded="false" aria-controls="channeltab") Notify User about a channel Tab
+
+                        div(id="channeltab" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#bot")
+                            div(class="accordion-body mx-4")
+                                strong Coming soon....!
+
+            div(class="m-4")
+                table(class="table table-hover")
+                    thead
+                        tr 
+                            th(scope="col") Task Id
+                            th(scope="col") Task Title
+                            th(scope="col") Task Description
+                            th(scope="col") Task Created Date
+                            th(scope="col") Development Approval Required ?
+                            th(scope="col") Approval Required ?
+                    tbody
+                        each t,index in tasks
+                            tr
+                                td= t.taskId 
+                                td= t.taskTitle  
+                                td= t.taskDescription  
+                                td= t.createDate  
+                                td= t.isDevelopmentRequired  
+                                td= t.isApprovalRequired  
+
+
+
+
+
+        script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous")
+
+        script.
+                $("body").on("click","#btn-send-notification-to-channel",function(e){
+                    var payload={
+                        task:{}
+                    };
+                    payload.task.taskTitle= document.getElementById("task").value;
+                    payload.task.taskDescription=document.getElementById("taskdesc").value;
+                    
+                    $(this).text("Processing....")
+                    $.ajax({
+                        url:'/notificatio-to-channel',
+                        method:"post",
+                        data:JSON.stringify(payload),
+                        contentType:"application/json",
+                        success:function(resp){
+                            if(resp.status){
+                                $("#task").val("");
+                                $("#taskdesc").val("");
+                            }
+                            alert(resp.message);
+                        },complete:function(){
+                           $("#btn-send-notification-to-channel").text("Send Notification to Channel");
+                        }
+                    })
+                });
