@@ -32,7 +32,7 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 - In a terminal, navigate to `samples/graph-chat-lifecycle/nodejs`
 
     ```bash
-    cd samples/ChatLifecycle/nodejs
+    cd samples/graph-chat-lifecycle/nodejs
     ```
 
 - Install modules
