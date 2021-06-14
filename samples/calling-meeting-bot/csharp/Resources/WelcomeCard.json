@@ -1,0 +1,52 @@
+{
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Calling Bot"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Sample Calling Bot",
+      "wrap": true
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.3",
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Create Call",
+      "id": "createcall",
+      "data": {
+        "type": "createcall"
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Transfer Call",
+      "id": "transfercall",
+      "data": {
+        "type": "transfercall"
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Join scheduled meeting",
+      "id": "joinscheduledmeeting",
+      "data": {
+        "type": "joinscheduledmeeting"
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Invite Participant to meeting",
+      "id": "inviteparticipant",
+      "data": {
+        "type": "inviteparticipant"
+      }
+    }
+  ]
+}
