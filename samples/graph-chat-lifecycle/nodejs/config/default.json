@@ -1,0 +1,7 @@
+{
+    "tab": {
+        "appId": "YOUR-MICROSOFT-APP-ID",
+        "appPassword": "YOUR-MICROSOFT-APP-PASSWORD"
+    },
+    "port": "3333"
+}
