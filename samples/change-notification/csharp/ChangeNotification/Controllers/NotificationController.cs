@@ -22,11 +22,8 @@ namespace ChangeNotification.Controllers
     public class NotificationsController : Controller
     {
         private readonly IConfiguration _config;
-       // private readonly string _rootPath;
         private readonly ILogger _logger;
         public static  ITurnContext stepContext;
-
-        private readonly static ConcurrentDictionary<string, bool> _processedMessage = new ConcurrentDictionary<string, bool>(2, 64);
 
         public NotificationsController(IConfiguration config,
             ILogger<NotificationsController> logger,
@@ -90,10 +87,11 @@ namespace ChangeNotification.Controllers
                 }
                 if (stepContext != null)
                 {
-                   
+                    string _notication="Change your status to get notification";
                     ChangeNotificationHelper changeNotificationHelper = new ChangeNotificationHelper();
                     var attachData = changeNotificationHelper.ShowAdaptiveCard("User Presence", resourceData);
                     await stepContext.SendActivityAsync(MessageFactory.Attachment(attachData));
+                    await stepContext.SendActivityAsync(MessageFactory.Text(_notication,_notication));
                 }
 
                 return Ok();

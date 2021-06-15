@@ -25,7 +25,7 @@ namespace ChangeNotification.Bots
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            string WelcomeText = "AppCatalog";
+            string WelcomeText = "Change Notification";
             foreach (var member in turnContext.Activity.MembersAdded)
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
