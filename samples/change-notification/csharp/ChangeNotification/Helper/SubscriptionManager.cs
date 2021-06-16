@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Graph;
@@ -18,14 +19,16 @@ namespace ChangeNotification.Helper
         private readonly IConfiguration _config;
         private readonly ILogger _logger;
         private readonly string _token;
+        private readonly ITurnContext _turnContext;
 
         public static readonly Dictionary<string, Subscription> Subscriptions = new Dictionary<string, Subscription>();
 
-        public SubscriptionManager(IConfiguration config, ILogger<SubscriptionManager> logger, string token)
+        public SubscriptionManager(IConfiguration config, ILogger<SubscriptionManager> logger, string token,ITurnContext turnContext)
         {
             _config = config;
             _logger = logger;
             _token = token;
+            _turnContext = turnContext;
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
@@ -54,7 +57,7 @@ namespace ChangeNotification.Helper
         public async Task InitializeAllSubscription()
         {
             _logger.LogWarning("InitializeAllSubscription-started");
-            var UserId = _config["UserId"];
+            var UserId = _turnContext.Activity.From.AadObjectId;
 
             await CreateNewSubscription(UserId);
 

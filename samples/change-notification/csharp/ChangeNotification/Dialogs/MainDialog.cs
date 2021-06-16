@@ -65,16 +65,16 @@ namespace ChangeNotification.Dialogs
             if (tokenResponse?.Token != null)
             {
                 NotificationsController.stepContext = stepContext.Context;
-                await ExecuteAsync(tokenResponse.Token, cancellationToken);
+                await ExecuteAsync(tokenResponse.Token, stepContext.Context, cancellationToken);
                 return await stepContext.PromptAsync(nameof(TextPrompt), new PromptOptions { Prompt = MessageFactory.Text("Type anything to subscribe user presence") }, cancellationToken);
                 
             }
             await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login was not successful please try again."), cancellationToken);
             return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
         }
-        protected  async Task ExecuteAsync(string token,CancellationToken stoppingToken)
+        protected  async Task ExecuteAsync(string token,ITurnContext turnContext,CancellationToken stoppingToken)
         {
-            SubscriptionManager subscriptionManager = new SubscriptionManager(Config, sLogger,token);
+            SubscriptionManager subscriptionManager = new SubscriptionManager(Config, sLogger,token, turnContext);
             await subscriptionManager.InitializeAllSubscription();
 
             while (!stoppingToken.IsCancellationRequested)
