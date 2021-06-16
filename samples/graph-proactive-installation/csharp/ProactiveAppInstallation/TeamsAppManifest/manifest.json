@@ -11,7 +11,7 @@
     "termsOfUseUrl": "https://www.contoso.com/legal"
   },
   "name": {
-    "short": "Proactive Sampler",
+    "short": "Proactive Installation Demo",
     "full": "Teams Proactive Sampler Application"
   },
   "description": {
@@ -23,17 +23,6 @@
     "color": "color.png"
   },
   "accentColor": "#FFFFFF",
-  "configurableTabs": [
-    {
-      "configurationUrl": "<<YOUR-BASE-URL>>/ConfigureTab",
-      "canUpdateConfiguration": true,
-      "scopes": [
-        "team",
-        "groupchat"
-      ]
-    }
-  ],
-  "staticTabs": [],
   "bots": [
     {
       "botId": "<<YOUR-MICROSOFT-APP-ID>>",
@@ -54,6 +43,10 @@
             {
               "title": "Check and Install",
               "description": "Display the Welcome Message"
+            },
+            {
+              "title": "Send message",
+              "description": "Sends message to all the users"
             }
           ]
         }
@@ -63,6 +56,5 @@
   "permissions": [
     "identity",
     "messageTeamMembers"
-  ],
-  "validDomains": [ "*.ngrok.io" ]
+  ]
 }
