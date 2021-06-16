@@ -19,12 +19,12 @@
     "outline": "icon-outline.png"
   },
   "name": {
-    "short": "Bot Tab ME SSO",
-    "full": "Bot Tab ME SSO"
+    "short": "App SSO Node",
+    "full": "App SSO Node"
   },
   "description": {
-    "short": "Bot Tab ME SSO Scenario",
-    "full": "Bot Tab ME SSO Scenario"
+    "short": "App SSO Node",
+    "full": "App SSO Node for Bot Tab ME Scenario"
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [

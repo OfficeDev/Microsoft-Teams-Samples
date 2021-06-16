@@ -1,4 +1,6 @@
-# Teams Tab, Bot, ME - search, action, linkunfurl SSO with Node JS
+# App SSO Node
+
+This app talks about the Teams Tab, Bot, ME - search, action, linkunfurl SSO with Node JS
 
 __Tab SSO__
 This sample shows how to implement Azure AD single sign-on support for tabs. It will
