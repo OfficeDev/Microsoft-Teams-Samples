@@ -1,0 +1,57 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+
+      "type": "TextBlock",
+      "text": "Result"
+    },
+    {
+      "type": "TextBlock",
+      "wrap": true,
+      "text": "${title}?"
+    },
+    {
+      "type": "TextBlock",
+      "wrap": true,
+      "text": "${option1}",
+      "weight": "Bolder"
+    },
+    {
+      "type": "TextBlock",
+      "wrap": true,
+      "text": "${percentoption1}% has answered",
+      "horizontalAlignment": "Right",
+      "color": "Accent",
+      "size": "small"
+    },
+    {
+      "type": "TextBlock",
+      "wrap": true,
+      "text": "${option2}",
+      "weight": "Bolder"
+    },
+    {
+      "type": "TextBlock",
+      "wrap": true,
+      "text": "${percentoption2}% has answered",
+      "horizontalAlignment": "Right",
+      "color": "Accent",
+      "size": "small"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "id": "result",
+      "title": "Results",
+      "data": {
+        "Id": "${Id}",
+        "msteams": {
+          "type": "task/fetch"
+        }
+      }
+    }
+  ]
+}
