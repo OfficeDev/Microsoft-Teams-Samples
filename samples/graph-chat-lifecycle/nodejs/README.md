@@ -29,10 +29,10 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-- In a terminal, navigate to `samples/ChatLifecycle/nodejs`
+- In a terminal, navigate to `samples/graph-chat-lifecycle/nodejs`
 
     ```bash
-    cd samples/ChatLifecycle/nodejs
+    cd samples/graph-chat-lifecycle/nodejs
     ```
 
 - Install modules
