@@ -25,10 +25,10 @@ getAdaptiveCard = (req,res) =>{
       const template = new ACData.Template(templatePayload);
       const cardPayload = template.expand({
         $root: {
-          user1Title:users.value[11].displayName,
-          user1Id:users.value[11].id,
-          user2Title:users.value[13].displayName,
-          user2Id:users.value[13].id,
+          user1Title:users.value[0].displayName,
+          user1Id:users.value[0].id,
+          user2Title:users.value[1].displayName,
+          user2Id:users.value[1].id,
           user3Title:users.value[2].displayName,
           user3Id:users.value[2].id,
           user4Title:users.value[3].displayName,
