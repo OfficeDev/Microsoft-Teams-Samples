@@ -48,12 +48,6 @@ namespace ChangeNotification.Bots
         {
             Logger.LogInformation("Running dialog with Message Activity.");
             await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
-        }
-
-
-        
-
-
-        
+        }  
     }
 }

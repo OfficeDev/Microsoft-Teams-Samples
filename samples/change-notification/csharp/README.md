@@ -2,7 +2,7 @@
 
 Bot Framework v4 ChangeNotification sample.
 
-This sample shows a status of a user in personal scope  and demonstrates presence subscription  lifecycle followed by commands given to Bot.
+This sample app demonstrates sending change notifications to user presence in Teams based on user presence status.
 
 
 ## Prerequisites
@@ -21,7 +21,7 @@ This sample shows a status of a user in personal scope  and demonstrates presenc
 
   - Launch Visual Studio code
   - File -> Open Folder
-  - Navigate to `samples/change-notification/csharp` folder
+  - Navigate to `samples/graph-change-notification/csharp` folder
   - Select `ChangeNotification` folder
   - Press `F5` to run the project
 

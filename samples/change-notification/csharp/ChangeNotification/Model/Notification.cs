@@ -37,9 +37,6 @@ namespace ChangeNotification.Model
         // Properties of the changed resource.
         [JsonProperty(PropertyName = "resourceData")]
         public ResourceData ResourceData { get; set; }
-
-        //[JsonProperty(PropertyName = "encryptedContent")]
-        //public Encryptedcontent EncryptedContent { get; set; }
     }
 
 }
