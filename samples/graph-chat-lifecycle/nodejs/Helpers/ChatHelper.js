@@ -1,8 +1,9 @@
 const fs = require('fs');
-var ACData = require("adaptivecards-templating");
-const {CardFactory } = require('botbuilder');
+const ACData = require("adaptivecards-templating");
+const { CardFactory } = require('botbuilder');
 require('isomorphic-fetch');
 const { Client } = require("@microsoft/microsoft-graph-client");
+const config = require('../config/default.json');
 var token;
    
 getAdaptiveCard = (req,res) =>{
@@ -12,42 +13,42 @@ getAdaptiveCard = (req,res) =>{
     authProvider: (done) => {
     done(null, req.body.token); // First parameter takes an error if you can't get an access token.
     }
-    });
-    getUsers();  
+  });
+  getUsers();  
 
-    async function getUsers()
-    {
-        try {
-          const users = await client.api("/users").get();
-          const jsonContentStr = fs.readFileSync('resources/AdaptiveCard.json', 'utf8')
-          const templatePayload = JSON.parse(jsonContentStr);
-          const template = new ACData.Template(templatePayload);
-          const cardPayload = template.expand({
-            $root: {
-              user1Title:users.value[0].displayName,
-              user1Id:users.value[0].id,
-              user2Title:users.value[1].displayName,
-              user2Id:users.value[1].id,
-              user3Title:users.value[2].displayName,
-              user3Id:users.value[2].id,
-              user4Title:users.value[3].displayName,
-              user4Id:users.value[3].id,
-              user5Title:users.value[4].displayName,
-              user5Id:users.value[4].id,
-              user6Title:users.value[5].displayName,
-              user6Id:users.value[5].id
-            }
-          }); 
-         var card = CardFactory.adaptiveCard(cardPayload);    
-          res.send(card);
-        } catch (error) {
-            console.log(error);
+  async function getUsers()
+  {
+    try {
+      const users = await client.api("/users").get();
+      const jsonContentStr = fs.readFileSync('resources/AdaptiveCard.json', 'utf8')
+      const templatePayload = JSON.parse(jsonContentStr);
+      const template = new ACData.Template(templatePayload);
+      const cardPayload = template.expand({
+        $root: {
+          user1Title:users.value[11].displayName,
+          user1Id:users.value[11].id,
+          user2Title:users.value[13].displayName,
+          user2Id:users.value[13].id,
+          user3Title:users.value[2].displayName,
+          user3Id:users.value[2].id,
+          user4Title:users.value[3].displayName,
+          user4Id:users.value[3].id,
+          user5Title:users.value[4].displayName,
+          user5Id:users.value[4].id,
+          user6Title:users.value[5].displayName,
+          user6Id:users.value[5].id
         }
-    }     
+      }); 
+      var card = CardFactory.adaptiveCard(cardPayload);    
+      res.send(card);
+    } 
+    catch (error) {
+        console.log(error);
+    }
+  }     
 }
 
-createGroupChat = (req,res)=>{
-      
+createGroupChat = (req,res)=>{      
   const userID = req.body.users.split(",");
   const title = req.body.title;
   token = req.body.token;
@@ -55,9 +56,8 @@ createGroupChat = (req,res)=>{
       authProvider: (done) => {
       done(null, token); // First parameter takes an error if you can't get an access token.
       }
-      });
-
-      createChat();
+    });
+    createChat();
 
     async function createChat()
     {
@@ -101,18 +101,19 @@ createGroupChat = (req,res)=>{
           }          
               
           //Adding Polly App to chat
+          var pollyID = config["pollyID"];
           const teamsAppInstallation = {
-              'teamsApp@odata.bind':'https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/1542629c-01b3-4a6d-8f76-1938b779e48d'
+              'teamsApp@odata.bind': 'https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/'+pollyID
               };
-              
+             
           await client.api('/chats/'+response.id+'/installedApps')
                 .post(teamsAppInstallation);
-           
+                
 
           //Adding Polly app as Tab to chat      
           const teamsTab = {
                 displayName: 'Polly',
-                'teamsApp@odata.bind': 'https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/1542629c-01b3-4a6d-8f76-1938b779e48d',
+                'teamsApp@odata.bind': 'https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/'+pollyID,
                 configuration: {
                   entityId: 'pollyapp',
                   contentUrl: 'https://teams.polly.ai/msteams/content/meeting/tab?theme={theme}',
@@ -186,7 +187,7 @@ createGroupChat = (req,res)=>{
       //Deleting the first member added
       async function deleteMember(client,response)
       {        
-        let chat = await client.api('/chats/'+response.id)
+        const chat = await client.api('/chats/'+response.id)
     	  .expand('members')
 	      .get();
         var convMemID = chat.members[0].id;

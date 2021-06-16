@@ -1,14 +1,13 @@
 'use strict';
 
 var config = require('../config/default.json');
-console.log(config["port" ]);
+console.log(config["port"]);
 var express = require('express');
 const server = express();
 var Helper = require("../Helpers/ChatHelper");
 
 // Decide which port to use
-var port = process.env.PORT ||
-           config["port" ]? config["port" ] : 3978;
+var port = process.env.PORT || config["port"]? config["port"] : 3333;
 
 // Listen for incoming requests
 server.listen(port, function() {
@@ -18,7 +17,6 @@ server.listen(port, function() {
 
 const fetch = require("node-fetch");
 const querystring = require("querystring");
-var config = require('../config/default.json');
 
     var bodyParser = require("body-parser"); 
     server.use(express.static(__dirname + '/views'));
