@@ -49,8 +49,8 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
  If you are using Visual Studio code
 - Launch Visual Studio code
 - Folder -> Open -> Project/Solution
-- Navigate to ```samples\graph-chat-lifecycle\``` folder
-- Select ```graph-chat-lifecycle``` Folder
+- Navigate to ```samples\graph-chat-lifecycle\nodejs``` folder
+- Select ```graph-chat-lifecycle\nodejs``` Folder
 3. Run ngrok - point to port 3978
    ```ngrok http -host-header=rewrite 3978```
    
@@ -96,7 +96,7 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
     * TeamsTab.Create
     * TeamsTab.ReadWriteForChat
     * TeamsTab.ReadWrite.All
--   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+-   Click on Add permissions.
 13. Navigate to **Authentication**
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
     Set a redirect URI:

@@ -4,11 +4,9 @@ const { CardFactory } = require('botbuilder');
 require('isomorphic-fetch');
 const { Client } = require("@microsoft/microsoft-graph-client");
 const config = require('../config/default.json');
-var token;
    
 getAdaptiveCard = (req,res) =>{
 
-  token = req.body.token;
   const client = Client.init({
     authProvider: (done) => {
     done(null, req.body.token); // First parameter takes an error if you can't get an access token.
@@ -39,7 +37,7 @@ getAdaptiveCard = (req,res) =>{
           user6Id:users.value[5].id
         }
       }); 
-      var card = CardFactory.adaptiveCard(cardPayload);    
+      const card = CardFactory.adaptiveCard(cardPayload);    
       res.send(card);
     } 
     catch (error) {
@@ -51,10 +49,9 @@ getAdaptiveCard = (req,res) =>{
 createGroupChat = (req,res)=>{      
   const userID = req.body.users.split(",");
   const title = req.body.title;
-  token = req.body.token;
     const client = Client.init({
       authProvider: (done) => {
-      done(null, token); // First parameter takes an error if you can't get an access token.
+      done(null, req.body.token); // First parameter takes an error if you can't get an access token.
       }
     });
     createChat();
@@ -101,7 +98,7 @@ createGroupChat = (req,res)=>{
           }          
               
           //Adding Polly App to chat
-          var pollyID = config["pollyID"];
+          const pollyID = config["pollyID"];
           const teamsAppInstallation = {
               'teamsApp@odata.bind': 'https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/'+pollyID
               };

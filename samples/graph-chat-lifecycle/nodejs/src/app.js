@@ -57,8 +57,8 @@ const querystring = require("querystring");
 
     // On-behalf-of token exchange
     server.post('/auth/token', function(req, res) {
-        var tid = req.body.tid;
-        var token = req.body.token;
+        const tid = req.body.tid;
+        const token = req.body.token;
         var scopes = ["https://graph.microsoft.com/User.Read"];
         console.log(config["tab"]["appId"]  + " : " + config["tab"]["appPassword"]);
 
