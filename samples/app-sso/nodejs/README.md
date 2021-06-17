@@ -48,7 +48,8 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 - Setup for Bot SSO
 Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md).
 
-> NOTE: Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
+> **NOTE:**
+Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
     - Use the current `https` URL you were given by running ngrok. Append with the path `/api/messages` used by this sample
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
@@ -99,17 +100,24 @@ Open a terminal and navigate to project root directory
 
 
 ## Interacting with the bot in Teams
-> Note this `manifest.json` specified that the bot will be installed in a "personal" scope only. Please refer to Teams documentation for more details.
+> Note: This `manifest.json` specified that the bot will be installed in a "personal" scope only. Please refer to Teams documentation for more details.
 
 You can interact with this bot by sending it a message. The bot will respond by requesting you to login to AAD, then making a call to the Graph API on your behalf and returning the results.
 - Install App
 
 ![image](https://user-images.githubusercontent.com/85108465/121664976-acb76400-cac5-11eb-8256-53a8d7980476.png)
 
-- Type `login` on the compose box and send
-- After `Sign In`, Profile card will be displayed with a option prompt to view the `token`
+- Type *anything* on the compose box and send
+- The bot will perform `Single Sign-On` and Profile card will be displayed along with the option prompt to view the `token`
 
-![image](https://user-images.githubusercontent.com/85108465/121665869-4b43c500-cac6-11eb-8b1e-6eb59c6e24b7.png)
+![image](https://user-images.githubusercontent.com/85108465/122400808-ae879880-cf99-11eb-8cc2-5da9b8e420ca.png)
+
+> **NOTE:** 
+If the user is using the application for the first time and user consent is required for additional permissions, the following dialog box appears to continue with the consent experience
+![image](https://user-images.githubusercontent.com/85108465/122403165-c6601c00-cf9b-11eb-8c75-f0a83b1aea5c.png)
+
+>If the bot couldn't perform `SSO` then it will fallback to normal Authentication method and show a `Sign In` card like below
+![image](https://user-images.githubusercontent.com/85108465/122401855-9a906680-cf9a-11eb-94f1-87840c6662b4.png)
 
 - Open `Messaging Extension`(Search), it will show profile details
 
@@ -133,17 +141,8 @@ __*or*__
 ![image](https://user-images.githubusercontent.com/85108465/121669972-93fd7d00-caca-11eb-87bb-e07e0e7aa5e4.png)
 ![image](https://user-images.githubusercontent.com/85108465/121669990-98c23100-caca-11eb-9a31-30c3d5065853.png)
 
-> NOTE: If not logged in you will get a `Sign In` link like below
-
+> NOTE: If `SSO` couldn't be performed then it will fallback to normal Authentication method and you will get a `Sign In` link like below
 ![image](https://user-images.githubusercontent.com/85108465/121671255-f2772b00-cacb-11eb-9321-1317696eaccc.png)
-
-- How to `Log Out`
-
-![image](https://user-images.githubusercontent.com/85108465/121666571-09674e80-cac7-11eb-96bb-03a845e7dd33.png)
-
-__*or*__
-
-![image](https://user-images.githubusercontent.com/85108465/121670734-61a04f80-cacb-11eb-806b-ab706b247891.png)
 
 - Open `SSO Tab`, Continute and then Accept and it'll show the profile details
 

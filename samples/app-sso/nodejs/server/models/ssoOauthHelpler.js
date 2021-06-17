@@ -38,12 +38,12 @@ class SsoOAuthHelpler {
         try {
             this.storage.write(storeItems);
         } catch (err) {
-            console.log(err);
+            console.log('Could not write to storage');
             if (err instanceof Error && err.message.startsWith('Etag conflict')) {
+                console.log('Etag conflict : ' + err);
                 // TODO: Should send 200 invoke response here???
                 return false;
             }
-            throw err;
         }
         return true;
     }
