@@ -1,29 +1,26 @@
 const configuration = require('dotenv').config();
 const store = require('../services/store')
 const {createAdaptiveCard }= require('../services/AdaptiveCardService')
-const env = configuration.parsed;
-const appID = env.BotId;
-const appPassword = env.BotPassword;
 const { ConnectorClient, MicrosoftAppCredentials } = require('botframework-connector');
-const credentials = new MicrosoftAppCredentials(appID,appPassword);
+const credentials = new MicrosoftAppCredentials(process.env.BotId,process.env.BotPassword);
 
  const sendAgenda = async (req) => {
     const data = req.body;
     store.setItem("agendaList", data.taskList);
-    const ConversationID = store.getItem("conversationId");
-    const ServiceUrl = store.getItem("serviceUrl");
-    const client = new ConnectorClient(credentials, { baseUri: ServiceUrl });
+    const conversationID = store.getItem("conversationId");
+    const serviceUrl = store.getItem("serviceUrl");
+    const client = new ConnectorClient(credentials, { baseUri: serviceUrl });
     const adaptiveCard = createAdaptiveCard('Poll.json', data.taskInfo)
-        try {
-          MicrosoftAppCredentials.trustServiceUrl(ServiceUrl);
-          await client.conversations.sendToConversation(ConversationID, 
+        try{
+              MicrosoftAppCredentials.trustServiceUrl(serviceUrl);
+              await client.conversations.sendToConversation(conversationID, 
               {
-              type: 'message',
-              from: { id: appID },
-              attachments: [adaptiveCard]
+                type: 'message',
+                from: { id: process.env.BotId },
+                attachments: [adaptiveCard]
               });
           }
-      catch(e) {
+        catch(e){
           console.log(e.message);
           }
   }

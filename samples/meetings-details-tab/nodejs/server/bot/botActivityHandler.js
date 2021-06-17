@@ -53,7 +53,6 @@ class BotActivityHandler extends TeamsActivityHandler {
     }
 
     handleTeamsTaskModuleFetch(context, request) {
-        const baseUrl = process.env.BaseUrl;
             const Id = request.data.Id;
             let taskInfo = {
                 title: null,
@@ -64,7 +63,7 @@ class BotActivityHandler extends TeamsActivityHandler {
                 fallbackUrl: null,
                 completionBotId: null,
             };
-                taskInfo.url = baseUrl +"/Result?id="+Id;
+                taskInfo.url = process.env.BaseUrl +"/Result?id="+Id;
                 taskInfo.title = "Result";
                 taskInfo.height = 250;
                 taskInfo.width = 500;

@@ -3,7 +3,7 @@
   "manifestVersion": "1.9",
   "version": "1.0.0",
   "id": "<<Microsoft-APP-ID>>",
-  "packageName": "com.microsoft.teams.sample.meetingtoken",
+  "packageName": "meetingdetailstab",
   "showLoadingIndicator": false,
 
   "developer": {
@@ -38,7 +38,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "70f57cc49c98.ngrok.io",
+    "*.ngrok.io",
     "localhost"
   ],
   "bots": [

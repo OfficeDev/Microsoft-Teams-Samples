@@ -1,6 +1,6 @@
 # Details Tab
 
-This sample shows creating poll in meeting , where memebers of the meeting can answer poll question and can see the results.
+This sample app illustrates the implementation of Details Tab in Meeting. User can create a poll and post poll in meeting chat and participants can submit their feedback in Meeting.
 
 ## Prerequisites
 
