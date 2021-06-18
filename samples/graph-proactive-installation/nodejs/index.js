@@ -81,8 +81,7 @@ server.get('/api/notify', async (req, res) => {
     res.write('<html><body><h1>Proactive messages have been sent.</h1></body></html>');
     res.end();
 });
+
 server.get('/*', restify.plugins.serveStatic({
-
     directory: './pages'
-
 }));

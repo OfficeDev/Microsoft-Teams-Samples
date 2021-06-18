@@ -1,15 +1,15 @@
 const axios = require('axios');
 class Proactive_Messages {
-    static async GetAceessToken(MicrosoftTenatId) {
+    static async GetAccessToken(MicrosoftTenatId) {
         var qs = require('qs')
-        let data=qs.stringify({
+        const data=qs.stringify({
             'grant_type':'client_credentials',
             'client_id': process.env.MicrosoftAppId,
             'scope': 'https://graph.microsoft.com/.default',
             'client_secret': process.env.MicrosoftAppPassword
         });
         return new Promise(async (resolve)=>{
-            let config = {
+            const config = {
                 method: 'post',
                 url: 'https://login.microsoftonline.com/'+MicrosoftTenatId+'/oauth2/v2.0/token',
                 headers: {
@@ -21,7 +21,7 @@ class Proactive_Messages {
                 .then(function (response) {
                     resolve((response.data).access_token)
                 })
-                .catch(function (error,data) {
+                .catch(function (error) {
                     resolve(error)
                 });
         })
@@ -29,11 +29,11 @@ class Proactive_Messages {
 
     static async InstallApp_PersonalScope(MicrosoftTenatId,Userid) {
         return new Promise(async (resolve)=>{
-            let accessToken=await Proactive_Messages.GetAceessToken(MicrosoftTenatId);
-            let data=JSON.stringify({
+            let accessToken=await Proactive_Messages.GetAccessToken(MicrosoftTenatId);
+            const data=JSON.stringify({
                 'teamsApp@odata.bind':'https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/'+process.env.AppCatalogTeamAppId
             });
-            let config = {
+            const config = {
                 method: 'post',
                 url:  'https://graph.microsoft.com/v1.0/users/'+Userid+'/teamwork/installedApps',
                 headers: {
@@ -47,7 +47,7 @@ class Proactive_Messages {
                    resolve((response.data).status)
                 })
                 .catch(function (error) {
-                   let result=Proactive_Messages.TriggerConversationUpdate(MicrosoftTenatId,Userid);
+                   Proactive_Messages.TriggerConversationUpdate(MicrosoftTenatId,Userid);
                    resolve((error.response).status);
                 });
         })
@@ -56,7 +56,7 @@ class Proactive_Messages {
     static async TriggerConversationUpdate(MicrosoftTenatId,Userid) {
         return new Promise(async (resolve)=>{
             let accessToken=await Proactive_Messages.GetAceessToken(MicrosoftTenatId);
-            let config = {
+            const config = {
                 method: 'get',
                 url: 'https://graph.microsoft.com/v1.0/users/'+Userid+'/teamwork/installedApps?$expand=teamsApp,teamsAppDefinition&$filter=teamsApp/externalId eq \''+process.env.MicrosoftAppId+'\'',
                 headers: {
@@ -83,7 +83,7 @@ class Proactive_Messages {
 
     static async InstallApp_PersonalChatByScope(accessToken,Userid,id) {
         return new Promise(async (resolve)=>{
-            let config = {
+            const config = {
                 method: 'get',
                 url: 'https://graph.microsoft.com/v1.0/users/'+Userid+'/teamwork/installedApps/'+id+'/chat',
                 headers: {

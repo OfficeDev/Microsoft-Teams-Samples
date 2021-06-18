@@ -32,11 +32,11 @@ class ProactiveBot extends ActivityHandler {
     }
 
     async InstalledAppsinPersonalScopeAsync(context) {
-        let newInstallationCount=0;
-        let existingAppCount=0;
-        let result = ""; 
+        const newInstallationCount=0;
+        const existingAppCount=0;
+        const result = ""; 
         const TeamMembers = await TeamsInfo.getPagedMembers(context);
-         var Count = TeamMembers.members.map(async member => {
+        const Count = TeamMembers.members.map(async member => {
             const ref = TurnContext.getConversationReference(context.activity);
             ref.user = member;
              await context.adapter.createConversation(ref, async (context) => {
