@@ -114,7 +114,7 @@ You can interact with this bot by sending it a message. The bot will respond by 
 
 > **NOTE:** 
 If the user is using the application for the first time and user consent is required for additional permissions, the following dialog box appears to continue with the consent experience
-![image](https://user-images.githubusercontent.com/85108465/122403165-c6601c00-cf9b-11eb-8c75-f0a83b1aea5c.png)
+![image](https://user-images.githubusercontent.com/85108465/122513983-c3f7d380-d028-11eb-913c-1794c5ff851a.png)
 
 >If the bot couldn't perform `SSO` then it will fallback to normal Authentication method and show a `Sign In` card like below
 ![image](https://user-images.githubusercontent.com/85108465/122401855-9a906680-cf9a-11eb-94f1-87840c6662b4.png)
