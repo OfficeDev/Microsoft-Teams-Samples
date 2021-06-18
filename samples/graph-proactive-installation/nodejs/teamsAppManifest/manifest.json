@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
   "manifestVersion": "1.9",
   "version": "1.0.0",
-  "id": "<<YOUR-MICROSOFT-APPID>>",
+  "id": "<<YOUR-MICROSOFT-APP-ID>>",
   "packageName": "com.example.contoso",
   "developer": {
     "name": "contoso",
@@ -11,7 +11,7 @@
     "termsOfUseUrl": "https://www.contoso.com/legal"
   },
   "name": {
-    "short": "Proactive Sampler node",
+    "short": "Proactive Installation Demo",
     "full": "Teams Proactive Sampler Application"
   },
   "description": {
@@ -23,20 +23,9 @@
     "color": "color.png"
   },
   "accentColor": "#FFFFFF",
-  "configurableTabs": [
-    {
-      "configurationUrl": "<<YOUR-NGROK-URL>>/ConfigureTab.html",
-      "canUpdateConfiguration": true,
-      "scopes": [
-        "team",
-        "groupchat"
-      ]
-    }
-  ],
-  "staticTabs": [],
   "bots": [
     {
-      "botId": "<<Your Microsoft-App-Id>>",
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
       "needsChannelSelector": false,
       "isNotificationOnly": false,
       "scopes": [
@@ -47,12 +36,17 @@
       "commandLists": [
         {
           "scopes": [
+            "team",
             "groupchat"
           ],
           "commands": [
             {
               "title": "Check and Install",
               "description": "Display the Welcome Message"
+            },
+            {
+              "title": "Send message",
+              "description": "Sends message to all the users"
             }
           ]
         }
@@ -62,6 +56,5 @@
   "permissions": [
     "identity",
     "messageTeamMembers"
-  ],
-  "validDomains": [ "*.ngrok.io" ]
+  ]
 }
