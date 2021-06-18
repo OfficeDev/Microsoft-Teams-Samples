@@ -1,5 +1,5 @@
-const { ActivityHandler, TurnContext,CardFactory,TeamsInfo,MessageFactory } = require('botbuilder');
-var Proactive_Messages =require('../Models/ProactiveAppIntallationHelper');
+const { ActivityHandler, TurnContext,TeamsInfo,MessageFactory } = require('botbuilder');
+var ProactiveAppIntallationHelper =require('../Models/ProactiveAppIntallationHelper');
 
 class ProactiveBot extends ActivityHandler {
     constructor(conversationReferences) {
@@ -23,7 +23,7 @@ class ProactiveBot extends ActivityHandler {
             TurnContext.removeRecipientMention(context.activity);
             const text = context.activity.text.trim().toLocaleLowerCase();
             if (text.includes('install')) {
-               await this.InstalledAppsinPersonalScopeAsync(context);
+               await this.InstallAppInTeamsAndChatMembersPersonalScope(context);
             } 
             else if (text.includes('send')) {
                await this.SendNotificationToAllUsersAsync(context);
@@ -31,32 +31,32 @@ class ProactiveBot extends ActivityHandler {
         });
     }
 
-    async InstalledAppsinPersonalScopeAsync(context) {
-        const newInstallationCount=0;
-        const existingAppCount=0;
-        const result = ""; 
+    async InstallAppInTeamsAndChatMembersPersonalScope(context) {
+        let NewAppInstallCount=0;
+        let ExistingAppInstallCount=0;
+        let result = ""; 
         const TeamMembers = await TeamsInfo.getPagedMembers(context);
-        const Count = TeamMembers.members.map(async member => {
+        let Count = TeamMembers.members.map(async member => {
             const ref = TurnContext.getConversationReference(context.activity);
             ref.user = member;
              await context.adapter.createConversation(ref, async (context) => {
                 const ref = TurnContext.getConversationReference(context.activity);
                     await context.adapter.continueConversation(ref, async (context) => {
-                        result=await Proactive_Messages.InstallApp_PersonalScope(context.activity.conversation.tenantId,member.aadObjectId);
+                        result=await ProactiveAppIntallationHelper.InstallAppInPersonalScope(context.activity.conversation.tenantId,member.aadObjectId);
                 });
             });
            return result;
         });
 		(await Promise.all(Count)).forEach(function(Status_Code) {
-            if(Status_Code==409) existingAppCount++;
-            else if(Status_Code==201) newInstallationCount++;
+            if(Status_Code==409) ExistingAppInstallCount++;
+            else if(Status_Code==201) NewAppInstallCount++;
 		});
-        await context.sendActivity(MessageFactory.text("Existing: "+existingAppCount+" \n\n Newly Installed: "+newInstallationCount));
+        await context.sendActivity(MessageFactory.text("Existing: "+ExistingAppInstallCount+" \n\n Newly Installed: "+NewAppInstallCount));
     }
 
     async SendNotificationToAllUsersAsync(context) {
         const TeamMembers = await TeamsInfo.getPagedMembers(context);
-        let msg_App_Cout=TeamMembers.members.length;
+        let Sent_msg_Cout=TeamMembers.members.length;
         TeamMembers.members.map(async member => {
             const ref = TurnContext.getConversationReference(context.activity);
             ref.user = member;
@@ -67,7 +67,7 @@ class ProactiveBot extends ActivityHandler {
                 });
             });
         });
-        await context.sendActivity(MessageFactory.text("Message sent:"+msg_App_Cout));
+        await context.sendActivity(MessageFactory.text("Message sent:"+Sent_msg_Cout));
     }
 
     addConversationReference(activity) {
