@@ -115,7 +115,7 @@ You can interact with this bot by sending it a message. The bot will respond by 
 > **NOTE:** 
 If the user is using the application for the first time and user consent is required for additional permissions, the following dialog box appears to continue with the consent experience
 ![image](https://user-images.githubusercontent.com/85108465/122513983-c3f7d380-d028-11eb-913c-1794c5ff851a.png)
-![image](https://user-images.githubusercontent.com/85108465/122522688-dcb9b680-d033-11eb-88b0-f4e86491ceb6.png)
+![image](https://user-images.githubusercontent.com/85108465/122557279-3503af00-d05a-11eb-981d-bf8db77ff2ac.png)
 
 >If the bot couldn't perform `SSO` then it will fallback to normal Authentication method and show a `Sign In` card like below
 ![image](https://user-images.githubusercontent.com/85108465/122401855-9a906680-cf9a-11eb-94f1-87840c6662b4.png)
@@ -137,15 +137,22 @@ __*or*__
 
 - Open `Messaging Extension`(linkunfurl), The link will unfurl and show profile details
 
-*Paste* https://profile.botframework.com on the compose box
+**Paste** https://profile.botframework.com on the compose box
 
 ![image](https://user-images.githubusercontent.com/85108465/121669972-93fd7d00-caca-11eb-87bb-e07e0e7aa5e4.png)
 ![image](https://user-images.githubusercontent.com/85108465/121669990-98c23100-caca-11eb-9a31-30c3d5065853.png)
 
-> NOTE: If `SSO` couldn't be performed then it will fallback to normal Authentication method and you will get a `Sign In` link like below
+> NOTE: If `SSO` couldn't be performed then it will fallback to normal Authentication method and you will get a default `Sign In` action
+
+Consent the *ME Search* by clicking the `Sign In` link like below 
+
 ![image](https://user-images.githubusercontent.com/85108465/121671255-f2772b00-cacb-11eb-9321-1317696eaccc.png)
 
-- Open `SSO Tab`, Continute and then Accept and it'll show the profile details
+Consent the *ME Action* by clicking the `Setup` button like below 
+
+![image](https://user-images.githubusercontent.com/85108465/122556633-6039ce80-d059-11eb-9fa5-e0fe4db4939d.png)
+
+- Open `SSO Tab`, Continue and then Accept and it'll show the profile details
 
 ![image](https://user-images.githubusercontent.com/85108465/121671560-5568c200-cacc-11eb-954b-44155e039915.png)
 ![image](https://user-images.githubusercontent.com/85108465/121671603-61ed1a80-cacc-11eb-9754-ff0b2aaac671.png)

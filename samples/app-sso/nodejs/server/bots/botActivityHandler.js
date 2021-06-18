@@ -68,7 +68,7 @@ class BotActivityHandler extends TeamsActivityHandler {
 
             return {
                 composeExtension: {
-                    type: 'auth',
+                    type: 'silentAuth',
                     suggestedActions: {
                         actions: [
                             {
@@ -122,7 +122,7 @@ class BotActivityHandler extends TeamsActivityHandler {
 
             return {
                 composeExtension: {
-                    type: 'auth',
+                    type: 'silentAuth',
                     suggestedActions: {
                         actions: [
                             {
@@ -199,7 +199,7 @@ class BotActivityHandler extends TeamsActivityHandler {
 
                 return {
                     composeExtension: {
-                        type: 'auth',
+                        type: 'silentAuth',
                         suggestedActions: {
                             actions: [
                                 {

@@ -46,7 +46,7 @@ class SimpleGraphClient {
 
     // Gets the user's photo
     async getPhotoAsync() {
-        const graphPhotoEndpoint = 'https://graph.microsoft.com/v1.0/me/photos/240x240/$value';
+        const graphPhotoEndpoint = 'https://graph.microsoft.com/v1.0/me/photo/$value';
         const graphRequestParams = {
             method: 'GET',
             headers: {
