@@ -76,7 +76,7 @@ namespace Microsoft.BotBuilderSamples
         {
             // For demo purpose we are installing this for first 10 users.
             var currentPage_Memebers = await TeamsInfo.GetPagedMembersAsync(turnContext, 10, null, cancellationToken);
-            int existingAppCount = _conversationReferences.Count;
+            int existingAppInstallCount = _conversationReferences.Count;
             int newInstallationCount = 0;
 
             foreach (var teamMember in currentPage_Memebers.Members)
@@ -92,7 +92,7 @@ namespace Microsoft.BotBuilderSamples
 
             return new InstallationCounts
             {
-                Existing = existingAppCount,
+                Existing = existingAppInstallCount,
                 New = newInstallationCount
             };
         }
