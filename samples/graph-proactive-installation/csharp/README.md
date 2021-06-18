@@ -2,6 +2,8 @@
 
 This sample app illustartes the proactive installation of app using Graph API and sending proactive notification to users from GroupChat or Channel.
 
+Language Used : C#
+
 ## Prerequisites
 ### Tools
 
@@ -16,37 +18,33 @@ This sample app illustartes the proactive installation of app using Graph API an
     git clone https://github.com/OfficeDev/microsoft-teams-samples.git
     ```
 2. Run the bot from a terminal or from Visual Studio:
-
-  - Launch Visual Studio
-  - File -> Open -> Project/Solution  
-  - Navigate to `samples/graph-proactive-installation/csharp` folder
-  - Select `ProactiveBot.sln` file
-  - Press `F5` to run the project
+    - Launch Visual Studio
+    - File -> Open -> Project/Solution  
+    - Navigate to `samples/csharp_dotnetcore/graph-proactive-installation` folder
+    - Select `ProactiveAppInstallation.sln` file
+    - Press `F5` to run the project
 3. Run ngrok - point to port 3978
    ```ngrok http -host-header=rewrite 3978``
-5. Go to appsettings.json and add ```MicrosoftAppId``` ,  ```MicrosoftAppPassword```, ```TeamsappcatalogAppId``` information.You can Navigate to following link in your browser [Get TeamsAppCatalogId](https://developer.microsoft.com/en-us/graph/graph-explorer?request=appCatalogs%2FteamsApps%3F%24filter%3DdistributionMethod%20eq%20'organization'&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) from Microsft Graph explorer.  
-You can  search with app name or based on Manifest App id  in Graph Explorer response and copy the `Id` [i.e AppCatalogTeamAppId]
-6. Run your app, either from Visual Studio with ```F5``` or using ```dotnet run``` in the appropriate folder.
-7. Update the manifest.json file with ```Microsoft-App-ID```, ```Base Url```   value.
+4. Update the manifest.json file with ```Microsoft-App-ID``` value and to get TeamsAppCatalogId upload your     Manifest  for my Organization.
+![image](https://user-images.githubusercontent.com/85157377/122389115-38c9ff80-cf8e-11eb-8cda-0a836cb26b34.png)
+5. Go to appsettings.json and add ```MicrosoftAppId``` ,  ```MicrosoftAppPassword```, ```TeamsappcatalogAppId``` information.You can Navigate to following link in your browser [Get TeamsAppCatalogId](https://developer.microsoft.com/en-us/graph/graph-explorer?request=appCatalogs%2FteamsApps%3F%24filter%3DdistributionMethod%20eq%20'organization'&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) from Microsoft Graph explorer.  
+You can  search with app name or based on Manifest App id  in Graph Explorer response and copy the `Id` [i.e teamApp.Id]
+6. Required Microsoft graph Application level permissions to run this sample app
+     - TeamsAppInstallation.ReadWriteForUser.All
+7. [Get consent for the Application permissions](https://docs.microsoft.com/en-us/graph/auth-v2-service?context=graph%2Fapi%2F1.0&view=graph-rest-1.0#3-get-administrator-consent) by following steps mentioned here.
+8. Run your app, either from Visual Studio with ```F5``` or using ```dotnet run``` in the appropriate folder.
 
-### Required Microsoft graph Application level permissions to run this sample app
 
-- `TeamsAppInstallation.Read.Group*`
-- `TeamsAppInstallation.ReadWriteSelfForUser.All`
-- `TeamsAppInstallation.ReadWriteForUser.All`
-- `TeamsAppInstallation.ReadWriteSelfForChat.All`
-- `TeamsAppInstallation.ReadWriteForChat.All`
-- `TeamsAppInstallation.ReadWriteSelfForTeam.All`
 
 ### Interacting with the Proactive installation App in Teams
-- Install the proactive app Bot in Team, GroupChat or Personal Scope.
-![image](https://user-images.githubusercontent.com/50989436/120750023-3ba30a00-c523-11eb-9065-3a6b3ec706ab.png)
+- Install the Proactive App Installation demo in a Team or GroupChat.
+     ![image](https://user-images.githubusercontent.com/31851992/122173819-cd096900-ce9f-11eb-93a1-8028e6b1a46e.png)
 
-- Bot will send an welcome message after installation
-![image](https://user-images.githubusercontent.com/50989436/120749546-6ccf0a80-c522-11eb-84a8-2191b1dcb08f.png)
-- Run Check and install command for the Bot
-- Bot will check the app installed for users or not, if not it will install the app in their personal scope and send a proactive notification else it will send a proactive notification saying app is already installed
-![image](https://user-images.githubusercontent.com/50989436/120749801-d51dec00-c522-11eb-8eb9-5243eb9fe470.png)
+- **Team Scope**: Run Check and install to pro-actively installs the App for all the users in team. After installation send 'Send message' command to send proactive message.
+     ![image](https://user-images.githubusercontent.com/31851992/122173110-0ee5df80-ce9f-11eb-8037-4257afa95406.png)
+- **Group Chat**:  Run Check and install to pro-actively installs the App for all the users in team. After installation send 'Send message' command to send proactive message.
+    ![image](https://user-images.githubusercontent.com/31851992/122173594-83208300-ce9f-11eb-9100-7e9373d2a531.png)
+
 
 ## Further Reading
 
