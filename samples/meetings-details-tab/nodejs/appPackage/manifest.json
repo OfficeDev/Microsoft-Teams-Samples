@@ -3,7 +3,7 @@
   "manifestVersion": "1.9",
   "version": "1.0.0",
   "id": "<<Microsoft-APP-ID>>",
-  "packageName": "meetingdetailstab",
+  "packageName": "com.microsoft.teams.sample.meetingdetailstab",
   "showLoadingIndicator": false,
 
   "developer": {
