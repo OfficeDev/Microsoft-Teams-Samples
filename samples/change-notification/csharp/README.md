@@ -68,11 +68,11 @@ i. Provide  Scopes like "Presence.Read, Presence.Read.All"
 
 
 ## Concepts introduced in this sample
-# After sucessfully installation of app you will get a sign in button. When sign in is complete then you get your current status in adapative card
+- After sucessfully installation of app you will get a sign in button. When sign in is complete then you get your current status in adapative card
 ![image](https://user-images.githubusercontent.com/85864414/122000447-741cd080-cdcc-11eb-9833-54f87cd7567f.PNG)
 ![image](https://user-images.githubusercontent.com/85864414/121878949-ebe5ef00-cd29-11eb-8ab0-683ce3ffbfcb.PNG)
 
-# After that when the user status chagnes you will get notify about their status: 
+- After that when the user status chagnes you will get notify about their status: 
 - Change user status from available to busy like
 ![image](https://user-images.githubusercontent.com/85864414/121879184-30718a80-cd2a-11eb-88b5-2a422042990b.PNG)
 - Change user status from busy to busy offline

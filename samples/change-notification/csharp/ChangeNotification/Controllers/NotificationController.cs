@@ -1,10 +1,11 @@
 ﻿using ChangeNotification.Helper;
-using ChangeNotification.Helper;
 using ChangeNotification.Model;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -13,6 +14,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ChangeNotification.Controllers
@@ -23,15 +25,21 @@ namespace ChangeNotification.Controllers
     {
         private readonly IConfiguration _config;
         private readonly ILogger _logger;
-        public static  ITurnContext stepContext;
+        private readonly IBotFrameworkHttpAdapter _adapter;
+        private readonly string _appId;
+        private readonly ConcurrentDictionary<string, ConversationReference> _conversationReferences;
+        private ResourceData resourceData = null;
 
         public NotificationsController(IConfiguration config,
             ILogger<NotificationsController> logger,
-            UserState userState)
+            IBotFrameworkHttpAdapter adapter,
+            ConcurrentDictionary<string, ConversationReference> conversationReferences)
         {
             _config = config;
             _logger = logger;
-            ;
+            _adapter = adapter;
+            _conversationReferences = conversationReferences;
+            _appId = config["MicrosoftAppId"] ?? string.Empty;
         }
 
         [HttpGet]
@@ -80,23 +88,27 @@ namespace ChangeNotification.Controllers
                 var notifications = JsonConvert.DeserializeObject<Notifications>(content);
 
                 Console.WriteLine(content);
-                ResourceData resourceData = new ResourceData();
+                resourceData = new ResourceData();
                 foreach (var notification in notifications.Items)
                 {
                     resourceData = notification.ResourceData;
                 }
-                if (stepContext != null)
+
+                foreach (var conversationReference in _conversationReferences.Values)
                 {
-                    string _notication="Change your status to get notification";
-                    ChangeNotificationHelper changeNotificationHelper = new ChangeNotificationHelper();
-                    var attachData = changeNotificationHelper.ShowAdaptiveCard("User Presence", resourceData);
-                    await stepContext.SendActivityAsync(MessageFactory.Attachment(attachData));
-                    await stepContext.SendActivityAsync(MessageFactory.Text(_notication,_notication));
+                    await ((BotAdapter)_adapter).ContinueConversationAsync(_appId, conversationReference, BotCallback, default(CancellationToken));
                 }
 
                 return Ok();
             }
-
+        }
+        private async Task BotCallback(ITurnContext turnContext, CancellationToken cancellationToken)
+        {
+            string _notication = "Change your status to get notification";
+            ChangeNotificationHelper changeNotificationHelper = new ChangeNotificationHelper();
+            var attachData = changeNotificationHelper.GetAvailabilityChangeCard("User Presence", resourceData);
+            await turnContext.SendActivityAsync(MessageFactory.Attachment(attachData));
+            await turnContext.SendActivityAsync(MessageFactory.Text(_notication, _notication));
         }
     }
 }

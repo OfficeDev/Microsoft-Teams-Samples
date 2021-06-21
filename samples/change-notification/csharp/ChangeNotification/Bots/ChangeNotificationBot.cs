@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,8 +19,8 @@ namespace ChangeNotification.Bots
     public class ChangeNotificationBot<T> : DialogBot<T> where T : Dialog
     {
 
-        public ChangeNotificationBot(ConversationState conversationState, UserState userState, T dialog, ILogger<DialogBot<T>> logger)
-            : base(conversationState, userState, dialog, logger)
+        public ChangeNotificationBot(ConversationState conversationState, UserState userState, T dialog, ILogger<DialogBot<T>> logger, ConcurrentDictionary<string, ConversationReference> conversationReferences)
+            : base(conversationState, userState, dialog, logger, conversationReferences)
         {
         }
 
@@ -41,6 +42,9 @@ namespace ChangeNotification.Bots
         protected override async Task OnTeamsSigninVerifyStateAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
         {
             Logger.LogInformation("Running dialog with signin/verifystate from an Invoke Activity.");
+
+            // The OAuth Prompt needs to see the Invoke Activity in order to complete the login process.
+
             // Run the Dialog with the new Invoke Activity.
             await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
         }

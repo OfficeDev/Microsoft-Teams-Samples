@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using Microsoft.Bot.Schema;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Collections.Concurrent;
 
 namespace ChangeNotification
 {
@@ -30,6 +32,9 @@ namespace ChangeNotification
 
             // Create the Conversation state. (Used by the Dialog system itself.)
             services.AddSingleton<ConversationState>();
+
+            // Create a global hashset for our ConversationReferences
+            services.AddSingleton<ConcurrentDictionary<string, ConversationReference>>();
 
             // The Dialog that will be run by the bot.
             services.AddSingleton<MainDialog>();

@@ -20,7 +20,7 @@ namespace ChangeNotification.Helper
     public class ChangeNotificationHelper
     {
 
-        public Microsoft.Bot.Schema.Attachment ShowAdaptiveCard(string Header, ChangeNotification.Model.ResourceData InfoData)
+        public Microsoft.Bot.Schema.Attachment GetAvailabilityChangeCard(string Header, ChangeNotification.Model.ResourceData InfoData)
         {
             AdaptiveCard adaptiveCard = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
             adaptiveCard.Body = new List<AdaptiveElement>()

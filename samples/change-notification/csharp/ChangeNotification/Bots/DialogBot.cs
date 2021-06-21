@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,17 +28,25 @@ namespace ChangeNotification.Bots
         protected readonly Dialog Dialog;
         protected readonly ILogger Logger;
         protected readonly BotState UserState;
+        private readonly ConcurrentDictionary<string, ConversationReference> _conversationReferences;
 
-        public DialogBot(ConversationState conversationState, UserState userState, T dialog, ILogger<DialogBot<T>> logger)
+        public DialogBot(ConversationState conversationState, UserState userState, T dialog, ILogger<DialogBot<T>> logger, ConcurrentDictionary<string, ConversationReference> conversationReferences)
         {
             ConversationState = conversationState;
             UserState = userState;
             Dialog = dialog;
             Logger = logger;
+            _conversationReferences = conversationReferences;
         }
 
+        private void AddConversationReference(Activity activity)
+        {
+            var conversationReference = activity.GetConversationReference();
+            _conversationReferences.AddOrUpdate(conversationReference.User.Id, conversationReference, (key, newValue) => conversationReference);
+        }
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
         {
+            AddConversationReference(turnContext.Activity as Activity);
             await base.OnTurnAsync(turnContext, cancellationToken);
 
             // Save any state changes that might have occurred during the turn.
@@ -46,8 +55,16 @@ namespace ChangeNotification.Bots
         }
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
+            AddConversationReference(turnContext.Activity as Activity);
+
             Logger.LogInformation("Running dialog with Message Activity.");
             await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
-        }  
+        }
+
+
+        
+
+
+        
     }
 }

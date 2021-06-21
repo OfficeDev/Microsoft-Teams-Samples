@@ -2,18 +2,14 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using ChangeNotification.Helper;
 using ChangeNotification.Helper;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Graph;
-using ChangeNotification.Controllers;
 
 namespace ChangeNotification.Dialogs
 {
@@ -64,7 +60,6 @@ namespace ChangeNotification.Dialogs
             var tokenResponse = (TokenResponse)stepContext.Result;
             if (tokenResponse?.Token != null)
             {
-                NotificationsController.stepContext = stepContext.Context;
                 await ExecuteAsync(tokenResponse.Token, stepContext.Context, cancellationToken);
                 return await stepContext.PromptAsync(nameof(TextPrompt), new PromptOptions { Prompt = MessageFactory.Text("Type anything to subscribe user presence") }, cancellationToken);
                 
