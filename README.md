@@ -186,7 +186,7 @@
 [graph#appcataloglifecycle#js]:samples/graph-appcatalog-lifecycle/nodejs
 
 [graph-activity-feed#cs]:samples/graph-activity-feed/csharp
-[graph-change-notification#cs]:samples/change-notification/csharp
+[graph-change-notification#cs]:samples/graph-change-notification/csharp
 
 
 
