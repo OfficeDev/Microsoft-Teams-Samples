@@ -78,26 +78,26 @@ Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/az
 
 
 - Install modules & Run the `NodeJS` Server 
-Server will run on PORT:  `4001`
-Open a terminal and navigate to project root directory
+    - Server will run on PORT:  `4001`
+    - Open a terminal and navigate to project root directory
+    
     ```bash
     npm run server
     ```
-> **This command is equivalent to:**
-    _npm install
-    npm run build-client
-    npm start_
+    
+    > **This command is equivalent to:**
+    _npm install > npm run build-client > npm start_
 
 - Install modules & Run the `React` Client
-Client will run on PORT:  `4000`
-Open a terminal and navigate to project root directory
+    - Client will run on PORT:  `4000`
+    - Open a terminal and navigate to project root directory
+    
     ```bash
     npm run client
     ```
-> **This command is equivalent to:**
-    _cd client
-    npm install
-    npm start_
+    
+    > **This command is equivalent to:**
+    _cd client > npm install > npm start_
 
 > **NOTE:** 
 You might see an error _sometimes_ like below but it shouldn't be a problem if your Server is running on PORT `4001`
