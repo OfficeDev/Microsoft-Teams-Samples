@@ -4,10 +4,10 @@ var config = require('../config/default.json');
 console.log(config["port"]);
 var express = require('express');
 const server = express();
-var Helper = require("../Helpers/ChatHelper");
+var Helper = require("../helpers/chatHelper");
 
 // Decide which port to use
-var port = process.env.PORT || config["port"]? config["port"] : 3333;
+var port = process.env.PORT || config["port"]? config["port"] : 3978;
 
 // Listen for incoming requests
 server.listen(port, function() {
