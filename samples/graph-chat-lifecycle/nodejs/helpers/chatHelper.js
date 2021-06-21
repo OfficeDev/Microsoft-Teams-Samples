@@ -18,7 +18,7 @@ getAdaptiveCard = (req,res) =>{
   {
     try {
       const users = await client.api("/users").get();
-      const jsonContentStr = fs.readFileSync('resources/AdaptiveCard.json', 'utf8')
+      const jsonContentStr = fs.readFileSync('resources/adaptiveCard.json', 'utf8')
       const templatePayload = JSON.parse(jsonContentStr);
       const template = new ACData.Template(templatePayload);
       const cardPayload = template.expand({
