@@ -77,21 +77,31 @@ Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/az
 > NOTE: the App Password is referred to as the `client secret` in the azure portal and you can always create a new client secret anytime.
 
 
-- Install modules & Run the Server `Bot, ME`
+- Install modules & Run the `NodeJS` Server 
+Server will run on PORT:  `4001`
 Open a terminal and navigate to project root directory
     ```bash
-    npm install
-    npm run biuld-client
-    npm start
+    npm run server
     ```
+> **This command is equivalent to:**
+    _npm install
+    npm run build-client
+    npm start_
 
-- Install modules & Run the Client `Tab`
+- Install modules & Run the `React` Client
+Client will run on PORT:  `4000`
 Open a terminal and navigate to project root directory
     ```bash
-    cd client
-    npm install
-    npm start
+    npm run client
     ```
+> **This command is equivalent to:**
+    _cd client
+    npm install
+    npm start_
+
+> **NOTE:** 
+You might see an error _sometimes_ like below but it shouldn't be a problem if your Server is running on PORT `4001`
+![image](https://user-images.githubusercontent.com/85108465/122787796-502d2380-d2d3-11eb-832f-b50d317a4869.png)
 
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) also update the `<<DOMAIN-NAME>>` with the ngrok URL

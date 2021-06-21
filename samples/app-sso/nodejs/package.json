@@ -10,9 +10,9 @@
         "watch": "nodemon ./index.js",
         "lint": "eslint .",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "server": "npm install && node ./index.js",
+        "server": "npm install && cd client && npm install && npm run build && cd ../ && node ./index.js",
         "client": "cd client && npm install && npm run start",
-        "biuld-client": "cd client && npm install && npm run build",
+        "build-client": "cd client && npm install && npm run build",
         "manifest": "del \"teamsAppManifest\\manifest.zip\" 2> nul && powershell Compress-Archive teamsAppManifest/* teamsAppManifest/manifest.zip"
     },
     "repository": {
