@@ -41,7 +41,6 @@
 |7| Task Module | Demonstrating how to retrieve a Task Module and values from cards in it, for a Messaging Extension. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/54.teams-task-module) | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/javascript_nodejs/54.teams-task-module) | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/python/54.teams-task-module) |
 |8| Start new thread in a channel | Demonstrating how to create a new thread in a channel. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/58.teams-start-new-thread-in-channel) | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/javascript_nodejs/58.teams-start-new-thread-in-channel) | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/python/58.teams-start-thread-in-channel) |
 |9| Universal bots  | Teams catering bot demonstrating how to use Universal bots in Teams | [View](samples/bot-teams-catering/csharp) |  | |
-|10| Calling and Meeting bot  | This sample app demonstarte how an Bot can create a call, join a meeting and transfer the call | [View][calling-meeting-bot#csharp] |  | |
 
 #### Additional samples
 
@@ -106,6 +105,9 @@
 |7|Region Selection App | This app contains a bot and Tab which is helpful to set the region |[View][region-selection-app#cs]     |
 |8|App Localization | Microsoft Teams app localization using Bot and Tab |[View][app-localization#cs]  | [View][app-localization#js]
 |9|Details Tab in Meeting | Microsoft Teams meeting extensibility sample for iteracting with Details Tab in-meeting |[View][meetings-details-tab#cs]  | 
+|10| Calling and Meeting bot  | This sample app demonstarte how an Bot can create a call, join a meeting and transfer the call | [View][calling-meeting-bot#csharp] |  | |
+|11| Local Media Sample  | Local media samples give the developer direct access to the inbound and outbound media streams. The 2 samples here are focused on different local media scenarios. | [View](https://github.com/microsoftgraph/microsoft-graph-comms-samples/tree/master/Samples/V1.0Samples/LocalMediaSamples) |  | |
+|12| Remote Media Samples  | The Incident Bot sample is a Remote Media sample demonstrating a simple incident process workflow started by a Calling Bot. When an incident is raised (through a custom Web API call to the bot or some other trigger), the bot will join a pre-existing Teams meeting, voice call incident responder team members via Microsoft Teams, play an audio prompt about the incident, and connect users to the incident meeting after having the callers press "1". The whole process is kicked off by a Web API call that passes the scheduled Teams meeting information and incident responders Azure AD Identities. The sample also supports incoming direct voice calls to the bot. | [View](https://github.com/microsoftgraph/microsoft-graph-comms-samples/tree/master/Samples/V1.0Samples/RemoteMediaSamples) |  | |
 
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
