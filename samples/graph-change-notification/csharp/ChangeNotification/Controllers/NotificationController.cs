@@ -1,9 +1,7 @@
 ﻿using ChangeNotification.Helper;
 using ChangeNotification.Model;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +9,6 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -45,7 +42,7 @@ namespace ChangeNotification.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            return  Json(SubscriptionManager.Subscriptions.Select(s => new
+            return Json(SubscriptionManager.Subscriptions.Select(s => new
             {
                 Resource = s.Value.Resource,
                 ExpirationDateTime = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(s.Value.ExpirationDateTime.Value.DateTime, "UTC", "India Standard Time").ToString("MM/dd/yyyy h:mm tt"),
@@ -96,12 +93,13 @@ namespace ChangeNotification.Controllers
 
                 foreach (var conversationReference in _conversationReferences.Values)
                 {
-                    await ((BotAdapter)_adapter).ContinueConversationAsync(_appId, conversationReference, BotCallback, default(CancellationToken));
+                    await ((BotAdapter)_adapter).ContinueConversationAsync(_appId, conversationReference, BotCallback, default);
                 }
 
                 return Ok();
             }
         }
+
         private async Task BotCallback(ITurnContext turnContext, CancellationToken cancellationToken)
         {
             string _notication = "Change your status to get notification";

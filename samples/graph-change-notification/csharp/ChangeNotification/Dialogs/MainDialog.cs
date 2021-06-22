@@ -1,15 +1,15 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using ChangeNotification.Helper;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ChangeNotification.Dialogs
 {
@@ -62,14 +62,14 @@ namespace ChangeNotification.Dialogs
             {
                 await ExecuteAsync(tokenResponse.Token, stepContext.Context, cancellationToken);
                 return await stepContext.PromptAsync(nameof(TextPrompt), new PromptOptions { Prompt = MessageFactory.Text("Type anything to subscribe user presence") }, cancellationToken);
-                
             }
             await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login was not successful please try again."), cancellationToken);
             return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
         }
-        protected  async Task ExecuteAsync(string token,ITurnContext turnContext,CancellationToken stoppingToken)
+
+        protected async Task ExecuteAsync(string token, ITurnContext turnContext, CancellationToken stoppingToken)
         {
-            SubscriptionManager subscriptionManager = new SubscriptionManager(Config, sLogger,token, turnContext);
+            SubscriptionManager subscriptionManager = new SubscriptionManager(Config, sLogger, token, turnContext);
             await subscriptionManager.InitializeAllSubscription();
 
             while (!stoppingToken.IsCancellationRequested)
@@ -78,6 +78,5 @@ namespace ChangeNotification.Dialogs
                 await subscriptionManager.CheckSubscriptions().ConfigureAwait(false); ;
             }
         }
-
     }
 }

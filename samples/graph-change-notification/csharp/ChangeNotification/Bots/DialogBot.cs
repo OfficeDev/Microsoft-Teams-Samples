@@ -1,19 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using ChangeNotification.Dialogs;
-using ChangeNotification.Helper;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Logging;
-using Microsoft.Graph;
+using System.Collections.Concurrent;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ChangeNotification.Bots
 {
@@ -44,6 +39,7 @@ namespace ChangeNotification.Bots
             var conversationReference = activity.GetConversationReference();
             _conversationReferences.AddOrUpdate(conversationReference.User.Id, conversationReference, (key, newValue) => conversationReference);
         }
+
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
         {
             AddConversationReference(turnContext.Activity as Activity);
@@ -53,6 +49,7 @@ namespace ChangeNotification.Bots
             await ConversationState.SaveChangesAsync(turnContext, false, cancellationToken);
             await UserState.SaveChangesAsync(turnContext, false, cancellationToken);
         }
+
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             AddConversationReference(turnContext.Activity as Activity);
@@ -60,11 +57,5 @@ namespace ChangeNotification.Bots
             Logger.LogInformation("Running dialog with Message Activity.");
             await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
         }
-
-
-        
-
-
-        
     }
 }

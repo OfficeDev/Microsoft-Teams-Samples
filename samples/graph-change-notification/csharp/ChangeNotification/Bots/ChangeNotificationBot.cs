@@ -1,10 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using ChangeNotification;
 using ChangeNotification.Helper;
 using Microsoft.Bot.Builder;
@@ -18,7 +14,6 @@ namespace ChangeNotification.Bots
 
     public class ChangeNotificationBot<T> : DialogBot<T> where T : Dialog
     {
-
         public ChangeNotificationBot(ConversationState conversationState, UserState userState, T dialog, ILogger<DialogBot<T>> logger, ConcurrentDictionary<string, ConversationReference> conversationReferences)
             : base(conversationState, userState, dialog, logger, conversationReferences)
         {
@@ -49,5 +44,4 @@ namespace ChangeNotification.Bots
             await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
         }
     }
-        
 }

@@ -23,13 +23,14 @@ namespace ChangeNotification.Helper
 
         public static readonly Dictionary<string, Subscription> Subscriptions = new Dictionary<string, Subscription>();
 
-        public SubscriptionManager(IConfiguration config, ILogger<SubscriptionManager> logger, string token,ITurnContext turnContext)
+        public SubscriptionManager(IConfiguration config, ILogger<SubscriptionManager> logger, string token, ITurnContext turnContext)
         {
             _config = config;
             _logger = logger;
             _token = token;
             _turnContext = turnContext;
         }
+
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             await InitializeAllSubscription();
@@ -145,7 +146,6 @@ namespace ChangeNotification.Helper
         {
             _logger.LogWarning($"Checking subscriptions {DateTime.UtcNow.ToString("h:mm:ss.fff")}");
 
-
             //if (Subscriptions.Count != 1)
             if (Subscriptions.Count <= 0)
             {
@@ -179,7 +179,6 @@ namespace ChangeNotification.Helper
                      .UpdateAsync(newSubscription);
                 subscription.ExpirationDateTime = newSubscription.ExpirationDateTime;
                 _logger.LogWarning($"Renewed subscription: {subscription.Id}, New Expiration: {subscription.ExpirationDateTime}");
-
             }
             catch (Microsoft.Graph.ServiceException ex)
             {
@@ -219,8 +218,6 @@ namespace ChangeNotification.Helper
             }
         }
 
-
-
         private GraphServiceClient GetGraphClient()
         {
             var graphClient = new GraphServiceClient(new DelegateAuthenticationProvider((requestMessage) =>
@@ -237,7 +234,5 @@ namespace ChangeNotification.Helper
 
             return graphClient;
         }
-
-
     }
 }
