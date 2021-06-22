@@ -6,6 +6,7 @@ class ProactiveBot extends ActivityHandler {
         super();
         this.conversationReferences = conversationReferences;
         this.onConversationUpdate(async (context, next) => {
+            this.addConversationReference(context.activity);
         });
 
         this.onMembersAdded(async (context, next) => {
@@ -19,7 +20,6 @@ class ProactiveBot extends ActivityHandler {
         });
 
         this.onMessage(async (context, next) => {
-            this.addConversationReference(context.activity);
             TurnContext.removeRecipientMention(context.activity);
             const text = context.activity.text.trim().toLocaleLowerCase();
             if (text.includes('install')) {
@@ -37,16 +37,13 @@ class ProactiveBot extends ActivityHandler {
         let result = ""; 
         const TeamMembers = await TeamsInfo.getPagedMembers(context);
         let Count = TeamMembers.members.map(async member => {
-            const ref = TurnContext.getConversationReference(context.activity);
-            ref.user = member;
-             await context.adapter.createConversation(ref, async (context) => {
-                const ref = TurnContext.getConversationReference(context.activity);
-                    await context.adapter.continueConversation(ref, async (context) => {
-                        result=await ProactiveAppIntallationHelper.InstallAppInPersonalScope(context.activity.conversation.tenantId,member.aadObjectId);
-                });
-            });
+            if(!this.conversationReferences[member.aadObjectId])
+            {
+                result=await ProactiveAppIntallationHelper.InstallAppInPersonalScope(context.activity.conversation.tenantId,member.aadObjectId);
+            }
            return result;
         });
+       
 		(await Promise.all(Count)).forEach(function(Status_Code) {
             if(Status_Code==409) ExistingAppInstallCount++;
             else if(Status_Code==201) NewAppInstallCount++;
@@ -72,7 +69,7 @@ class ProactiveBot extends ActivityHandler {
 
     addConversationReference(activity) {
         const conversationReference = TurnContext.getConversationReference(activity);
-        this.conversationReferences[conversationReference.conversation.id] = conversationReference;
+        this.conversationReferences[conversationReference.user.aadObjectId] = conversationReference;
     }
 }
 module.exports.ProactiveBot = ProactiveBot;
