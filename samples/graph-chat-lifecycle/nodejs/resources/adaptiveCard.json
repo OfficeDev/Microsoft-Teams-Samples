@@ -37,7 +37,7 @@
           "width": "stretch"
         }
       ]
-    },    
+    },
     {
       "type": "ColumnSet",
       "columns": [
@@ -96,19 +96,19 @@
     {
       "type": "ColumnSet",
       "columns": [
-          {
-              "type": "Column",
-              "items": [
-                  {
-                      "type": "TextBlock",
-                      "text": "**Note**: Selected Members will be added into a group chat and based on the count selected, members will be added to the chat using different scenarios: with all chat history, no chat history, chat history with no. of days accordingly.",
-                      "wrap": true
-                  }
-              ],
-              "width": "auto"
-          }
+        {
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "**Note**: Selected Members will be added into a group chat and based on the count selected, members will be added to the chat using different scenarios: with all chat history, no chat history, chat history with no. of days accordingly.",
+              "wrap": true
+            }
+          ],
+          "width": "auto"
+        }
       ]
-  }   
+    }
   ],
   "actions": [
     {
