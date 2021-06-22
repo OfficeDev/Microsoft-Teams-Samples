@@ -185,8 +185,8 @@
 [graph#chatlifecyle#cs]:samples/graph-chat-lifecycle/csharp
 [graph#appctaloglifecycle#cs]:samples/graph-appcatalog-lifecycle/csharp
 [graph#appcataloglifecycle#js]:samples/graph-appcatalog-lifecycle/nodejs
-[graph#graphproactiveinstallation#cs]:samples/graph=proactive-installation/csharp
-[graph#graphproactiveinstallation#js]:samples/graph=proactive-installation/nodejs
+[graph#graphproactiveinstallation#cs]:samples/graph-proactive-installation/csharp
+[graph#graphproactiveinstallation#js]:samples/graph-proactive-installation/nodejs
 
 [graph-activity-feed#cs]:samples/graph-activity-feed/csharp
 
