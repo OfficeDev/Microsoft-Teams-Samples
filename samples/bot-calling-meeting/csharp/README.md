@@ -25,7 +25,7 @@ Calling and Meeting Bot provides basic functionality like Create Call, Join a ca
 1) If you are using Visual Studio
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/calling-meeting-bot/csharp` folder
+  - Navigate to `samples/bot-calling-meeting/csharp` folder
   - Select `CallingBotSample.csproj` file
 
 1) Run ngrok - point to port 3978
