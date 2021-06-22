@@ -14,13 +14,13 @@ Language Used : Nodejs
     node --version
     ```
 ## To try this sample
-- Clone the repository
+1. Clone the repository
     ```bash
     git clone https://github.com/OfficeDev/microsoft-teams-samples.git
     ```
 - In a terminal, navigate to `samples/javascript_nodejs/graph-proactive-installation`
     ```bash
-    cd samples/javascript_nodejs/graph-proactive-installation
+    cd samples/graph-proactive-installation/nodejs
     ```
 - Install modules
     ```bash
@@ -30,21 +30,22 @@ Language Used : Nodejs
     ```bash
     npm start
     ```
-    ```
 2. Run the bot from  Visual Studio Code:
     - Launch Visual Studio Code
-    - Folder -> Open -> Project/Solution  
-			 cd samples/javascript_nodejs/graph-proactive-installation/ProactiveAppIntstallation
-    - Navigate to `samples/javascript_nodejs/graph-proactive-installation` folder
-    - Select ```ProactiveAppInstallation``` Folder
-    -  To run the application required  node modules.Please use this command to install modules npm i
+    - Folder -> Open -> Project/Solution
+    - Navigate to `samples/graph-proactive-installation/nodejs` folder
+    - Select ```nodejs``` Folder
+    -  To run the application required  node modules. Please use this command to install modules `npm install`
 3. Run ngrok - point to port 3978
-   ```ngrok http -host-header=rewrite 3978``
+   ```bash
+      ngrok http -host-header=rewrite 3978
+    ```
 4. Update the manifest.json file with ```Microsoft-App-ID``` value and to get TeamsAppCatalogId upload your     Manifest  for my Organization.
 ![image](https://user-images.githubusercontent.com/85157377/122389115-38c9ff80-cf8e-11eb-8cda-0a836cb26b34.png)
 
-5. Go to .env file  and add ```MicrosoftAppId``` ,  ```MicrosoftAppPassword``` and ``` AppCatalogTeamAppId ``` information..You can Navigate to following link in your browser [Get TeamsAppCatalogId](https://developer.microsoft.com/en-us/graph/graph-explorer?request=appCatalogs%2FteamsApps%3F%24filter%3DdistributionMethod%20eq%20'organization'&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) from Microsoft Graph explorer.
-You can  search with app name or based on Manifest App id  in Graph Explorer response and copy the `Id` [i.e teamApp.Id]
+5. Go to .env file  and add `MicrosoftAppId` ,  `MicrosoftAppPassword` and `AppCatalogTeamAppId` information. 
+   - To get `AppCatalogTeamAppId` navigate to following link in your browser [Get TeamsAppCatalogId](https://developer.microsoft.com/en-us/graph/graph-explorer?request=appCatalogs%2FteamsApps%3F%24filter%3DdistributionMethod%20eq%20'organization'&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) from Microsoft Graph explorer.
+And then search with app name or based on Manifest App id in Graph Explorer response and copy the `Id` [i.e teamApp.Id]
 6. Required Microsoft graph Application level permissions to run this sample app
      - TeamsAppInstallation.ReadWriteForUser.All
 7. [Get consent for the Application permissions](https://docs.microsoft.com/en-us/graph/auth-v2-service?context=graph%2Fapi%2F1.0&view=graph-rest-1.0#3-get-administrator-consent) by following steps mentioned here.
