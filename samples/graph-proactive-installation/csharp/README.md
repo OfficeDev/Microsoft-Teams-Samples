@@ -20,15 +20,17 @@ Language Used : C#
 2. Run the bot from a terminal or from Visual Studio:
     - Launch Visual Studio
     - File -> Open -> Project/Solution  
-    - Navigate to `samples/csharp_dotnetcore/graph-proactive-installation` folder
+    - Navigate to `samples/graph-proactive-installation/csharp` folder
     - Select `ProactiveAppInstallation.sln` file
     - Press `F5` to run the project
-3. Run ngrok - point to port 3978
-   ```ngrok http -host-header=rewrite 3978``
-4. Update the manifest.json file with ```Microsoft-App-ID``` value and to get TeamsAppCatalogId upload your     Manifest  for my Organization.
+3. Run ngrok to point to port 3978
+   ```bash
+   ngrok http -host-header=rewrite 3978
+    ```
+4. Update the manifest.json file with `Microsoft-App-ID` value and to get TeamsAppCatalogId upload your     Manifest  for my Organization.
 ![image](https://user-images.githubusercontent.com/85157377/122389115-38c9ff80-cf8e-11eb-8cda-0a836cb26b34.png)
-5. Go to appsettings.json and add ```MicrosoftAppId``` ,  ```MicrosoftAppPassword```, ```TeamsappcatalogAppId``` information.You can Navigate to following link in your browser [Get TeamsAppCatalogId](https://developer.microsoft.com/en-us/graph/graph-explorer?request=appCatalogs%2FteamsApps%3F%24filter%3DdistributionMethod%20eq%20'organization'&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) from Microsoft Graph explorer.  
-You can  search with app name or based on Manifest App id  in Graph Explorer response and copy the `Id` [i.e teamApp.Id]
+5. Go to appsettings.json and update `MicrosoftAppId` ,  `MicrosoftAppPassword`, `TeamsappcatalogAppId` information. 
+   - To get `TeamsappcatalogAppId` you first navigate to following link in your browser [Get TeamsAppCatalogId](https://developer.microsoft.com/en-us/graph/graph-explorer?request=appCatalogs%2FteamsApps%3F%24filter%3DdistributionMethod%20eq%20'organization'&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) from Microsoft Graph explorer. Then search with app name or based on Manifest App id  in Graph Explorer response and copy the `Id` [i.e teamApp.Id]
 6. Required Microsoft graph Application level permissions to run this sample app
      - TeamsAppInstallation.ReadWriteForUser.All
 7. [Get consent for the Application permissions](https://docs.microsoft.com/en-us/graph/auth-v2-service?context=graph%2Fapi%2F1.0&view=graph-rest-1.0#3-get-administrator-consent) by following steps mentioned here.
