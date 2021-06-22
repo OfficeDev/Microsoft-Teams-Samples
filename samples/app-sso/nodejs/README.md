@@ -66,10 +66,10 @@ Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/az
     cd samples/app-sso/nodejs
     ```
 
-- Run ngrok - point to port `4000`
+- Run ngrok - point to port `3978`
 
     ```bash
-    ngrok http -host-header=localhost 4000
+    ngrok http -host-header=localhost 3978
     ```
 
 
@@ -89,7 +89,7 @@ Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/az
     _npm install > npm run build-client > npm start_
 
 - Install modules & Run the `React` Client
-    - Client will run on PORT:  `4000`
+    - Client will run on PORT:  `3978`
     - Open a terminal and navigate to project root directory
     
     ```bash
