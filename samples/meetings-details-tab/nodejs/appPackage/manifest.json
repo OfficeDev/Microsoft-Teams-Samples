@@ -38,8 +38,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok.io",
-    "localhost"
+    "*.ngrok.io"
   ],
   "bots": [
     {
