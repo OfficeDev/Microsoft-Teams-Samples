@@ -16,7 +16,7 @@ This sample app illustrates the implementation of Details Tab in Meeting. User c
     ```bash
 
      # run ngrok locally
-    ngrok http -host-header=localhost 4000
+    ngrok http -host-header=localhost 3978
     ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
@@ -35,17 +35,24 @@ This sample app illustrates the implementation of Details Tab in Meeting. User c
         ```
 
     - Install modules and Start the bot
+    - Server will run on PORT:  `4001`
 
         ```bash
         npm run server
         ```
 
+        > **This command is equivalent to:**
+        _npm install > npm run build-client > npm start_
+
     - Start client application
+    - Client will run on PORT:  `3978`
 
         ```bash
         npm run client
         ```
-
+        
+        > **This command is equivalent to:**
+         _cd client > npm install > npm start_
 
 Create a new Bot by following steps mentioned in [Build a bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots?view=msteams-client-js-latest#build--a-bot-for-teams-with-the-microsoft-bot-framework) documentation.
 Go to .env file  and add ```BotId``` ,  ```BotPassword``` and ```BaseUrl as ngrok URL``` information.
