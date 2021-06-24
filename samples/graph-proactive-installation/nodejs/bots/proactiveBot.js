@@ -1,4 +1,4 @@
-const { ActivityHandler, TurnContext, TeamsInfo, MessageFactory } = require('botbuilder');
+const {ActivityHandler,TurnContext,TeamsInfo,MessageFactory} = require('botbuilder');
 var ProactiveAppIntallationHelper = require('../Models/ProactiveAppIntallationHelper');
 
 class ProactiveBot extends ActivityHandler {
@@ -24,8 +24,7 @@ class ProactiveBot extends ActivityHandler {
             const text = context.activity.text.trim().toLocaleLowerCase();
             if (text.includes('install')) {
                 await this.InstallAppInTeamsAndChatMembersPersonalScope(context);
-            }
-            else if (text.includes('send')) {
+            } else if (text.includes('send')) {
                 await this.SendNotificationToAllUsersAsync(context);
             }
         });
@@ -35,14 +34,14 @@ class ProactiveBot extends ActivityHandler {
         let NewAppInstallCount = 0;
         let ExistingAppInstallCount = 0;
         let result = "";
+        const objProactiveAppIntallationHelper=new ProactiveAppIntallationHelper();
         const TeamMembers = await TeamsInfo.getPagedMembers(context);
         let Count = TeamMembers.members.map(async member => {
             if (!this.conversationReferences[member.aadObjectId]) {
-                result = await ProactiveAppIntallationHelper.InstallAppInPersonalScope(context.activity.conversation.tenantId, member.aadObjectId);
+                result = await objProactiveAppIntallationHelper.InstallAppInPersonalScope(context.activity.conversation.tenantId, member.aadObjectId);
             }
             return result;
         });
-
         (await Promise.all(Count)).forEach(function (Status_Code) {
             if (Status_Code == 409) ExistingAppInstallCount++;
             else if (Status_Code == 201) NewAppInstallCount++;
