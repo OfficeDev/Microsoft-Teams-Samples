@@ -71,11 +71,13 @@ server.use(express.json());
 server.use(express.urlencoded({
     extended: true
 }));
+
 server.listen(process.env.port || process.env.PORT || 3978, function () {
     console.log(`\n${server.name} listening to ${process.env.port}`);
     console.log('\nGet Bot Framework Emulator: https://aka.ms/botframework-emulator');
     console.log('\nTo talk to your bot, open the emulator select "Open Bot"');
 });
+
 // Listen for incoming requests.
 server.post('/api/messages', (req, res) => {
     adapter.processActivity(req, res, async (context) => {
@@ -99,7 +101,7 @@ const notification = async (req, res, next) => {
         status = 202;
         //for storing step context
         const dbot = new DialogBot(conversationState, userState, dialog, conversationReferences);
-        let _notication = "Change your status to get notification";
+        const _notication = "Change your status to get notification";
         for (const conversationReference of Object.values(conversationReferences)) {
             await adapter.continueConversation(conversationReference, async turnContext => {
                 let carddata = await dbot.DisplayData(turnContext, "User Status", userstatus.availability, userstatus.activity);

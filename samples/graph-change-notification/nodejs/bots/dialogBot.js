@@ -76,7 +76,7 @@ class DialogBot extends TeamsActivityHandler {
                     }
                 ]
             }
-            var tdata = CardFactory.adaptiveCard(card);
+            const tdata = CardFactory.adaptiveCard(card);
             await context.sendActivity({ attachments: [tdata] });
         }
         catch (e) {

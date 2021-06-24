@@ -15,10 +15,12 @@ class SubscriptionManagementService {
         });
         return client;
     }
+
     async deleteSubscription(subscriptionId) {
         const client = this.getGraphClient();
         await client.api(`${this.subscriptionPath}/${subscriptionId}`).delete();
     }
+
     async createSubscription(subscriptionCreationInformation,userId) {
         try {
             let subscription = null;
@@ -35,5 +37,6 @@ class SubscriptionManagementService {
             console.log("Error--" + e);
         }
     }
+    
 }
 exports.SubscriptionManagementService = SubscriptionManagementService;

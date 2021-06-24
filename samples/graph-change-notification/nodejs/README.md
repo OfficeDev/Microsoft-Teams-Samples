@@ -22,7 +22,6 @@ This sample app demonstrates sending change notifications to user presence in Te
   - Launch Visual Studio code
   - File -> Open Folder
   - Navigate to `samples/graph-change-notification/nodejs` folder
-  - Select `ChangeNotification` folder
   - Press `F5` to run the project
 
   B) Run ngrok - point to port 3978

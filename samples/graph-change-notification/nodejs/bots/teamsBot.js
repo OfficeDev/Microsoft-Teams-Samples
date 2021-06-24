@@ -22,6 +22,7 @@ class TeamsBot extends DialogBot {
 
             await next();
         });
+        
         this.onMembersAdded(async (context, next) => {
             const membersAdded = context.activity.membersAdded;
             for (let cnt = 0; cnt < membersAdded.length; cnt++) {
