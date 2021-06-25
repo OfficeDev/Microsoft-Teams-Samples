@@ -94,7 +94,7 @@
 |8|Change Notification  | This sample app demonstrates sending change notifications to user presence in Teams based on user presence status. | [View][graph-change-notification#cs]                        | 
 
 
-## [Calling and Meeting samples](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/calls-and-meetings/calls-meetings-bots-overview)
+## [Calls and online meetings bots](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/calls-and-meetings/calls-meetings-bots-overview)
 
 |    | Sample Name       | Description                                                                      | C#    |
 |:--:|:------------------|:---------------------------------------------------------------------------------------------------|:--------|
