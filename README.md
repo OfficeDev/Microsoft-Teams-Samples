@@ -109,9 +109,9 @@
 
 ## Calling and Meeting samples
 
-|    | Sample Name       | Description                                                                      | C#    | JavaScript   |
-|:--:|:------------------|:---------------------------------------------------------------------------------------------------|:--------|:-------------|
-|1|Calling and Meeting bot          | This sample app demonstarte how an Bot can create a call, join a meeting and transfer the call |[View](calling-meeting-bot#csharp)     |
+|    | Sample Name       | Description                                                                      | C#    |
+|:--:|:------------------|:---------------------------------------------------------------------------------------------------|:--------|
+|1|Calling and Meeting bot          | This sample app demonstarte how an Bot can create a call, join a meeting and transfer the call |[View][bot-calling-meeting#csharp]     |
 |2|Local Media Samples        |Local media samples give the developer direct access to the inbound and outbound media streams.                      |[View](https://github.com/microsoftgraph/microsoft-graph-comms-samples/tree/master/Samples/V1.0Samples/LocalMediaSamples) | 
 |3|Remote Media Samples      | The Incident Bot sample is a Remote Media sample demonstrating a simple incident process workflow started by a Calling Bot..                                      |[View](https://github.com/microsoftgraph/microsoft-graph-comms-samples/tree/master/Samples/V1.0Samples/RemoteMediaSamples)       |
 
