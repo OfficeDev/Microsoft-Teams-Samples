@@ -33,13 +33,7 @@ Calling and Meeting Bot provides basic functionality like Create Call, Join a ca
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
-
-## Version history
-
-Version|Date|Author|Comments
--------|----|----|--------
-1.0|June 22, 2021|Trinetra Kumar <br />SaiKrishna Neeli|Initial release
-
+    
 ## Disclaimer
 
 **THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.**
