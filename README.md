@@ -91,6 +91,14 @@
 |5|Graph API Chat Life Cycle | This sample illustrates how you can use [Teams App Chat Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/chat?view=graph-rest-1.0) by calling Microsoft Graph APIs. .                              |[View][graph#chatlifecyle#cs]      |
 |6|Activity Feed Notification  | Microsoft Teams sample app for Sending Activity feed notification using Graph API in a Teams Tab. | [View][graph-activity-feed#cs]                       | | 
 
+## [Calling and Meeting samples](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/calls-and-meetings/calls-meetings-bots-overview)
+
+|    | Sample Name       | Description                                                                      | C#    |
+|:--:|:------------------|:---------------------------------------------------------------------------------------------------|:--------|
+|1|Calling and Meeting bot          | This sample app demonstarte how an Bot can create a call, join a meeting and transfer the call |[View][bot-calling-meeting#csharp]     |
+|2|Local Media Samples        |Local media samples give the developer direct access to the inbound and outbound media streams.                      |[View](https://github.com/microsoftgraph/microsoft-graph-comms-samples/tree/master/Samples/V1.0Samples/LocalMediaSamples) | 
+|3|Remote Media Samples      | The Incident Bot sample is a Remote Media sample demonstrating a simple incident process workflow started by a Calling Bot..                                      |[View](https://github.com/microsoftgraph/microsoft-graph-comms-samples/tree/master/Samples/V1.0Samples/RemoteMediaSamples)       |
+
 
 ## Scenario specific samples
 
@@ -105,15 +113,6 @@
 |7|Region Selection App | This app contains a bot and Tab which is helpful to set the region |[View][region-selection-app#cs]     |
 |8|App Localization | Microsoft Teams app localization using Bot and Tab |[View][app-localization#cs]  | [View][app-localization#js]
 |9|Details Tab in Meeting | Microsoft Teams meeting extensibility sample for iteracting with Details Tab in-meeting |[View][meetings-details-tab#cs]  | 
-
-
-## Calling and Meeting samples
-
-|    | Sample Name       | Description                                                                      | C#    |
-|:--:|:------------------|:---------------------------------------------------------------------------------------------------|:--------|
-|1|Calling and Meeting bot          | This sample app demonstarte how an Bot can create a call, join a meeting and transfer the call |[View][bot-calling-meeting#csharp]     |
-|2|Local Media Samples        |Local media samples give the developer direct access to the inbound and outbound media streams.                      |[View](https://github.com/microsoftgraph/microsoft-graph-comms-samples/tree/master/Samples/V1.0Samples/LocalMediaSamples) | 
-|3|Remote Media Samples      | The Incident Bot sample is a Remote Media sample demonstrating a simple incident process workflow started by a Calling Bot..                                      |[View](https://github.com/microsoftgraph/microsoft-graph-comms-samples/tree/master/Samples/V1.0Samples/RemoteMediaSamples)       |
 
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
