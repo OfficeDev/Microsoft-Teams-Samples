@@ -1,0 +1,39 @@
+{
+  "type": "AdaptiveCard",
+  "appId": "f7d4ac80-4ceb-486d-b05b-64827c543141",
+  "body": [
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.Execute",
+          "verb": "thirdCard",
+          "title": "${subCategory1}",
+          "data": {
+            "CreatedBy": "${createdBy}",
+            "IncidentTitle": "${incidentTitle}",
+            "AssignedTo": "${assignedTo}",
+            "Category": "${category}",
+            "SubCategory": "${subCategory1}",
+            "UserMRI": "${userMRI}"
+          } 
+        },
+        {
+          "type": "Action.Execute",
+          "verb": "thirdCard",
+          "title": "${subCategory2}",
+          "data": {
+            "CreatedBy": "${createdBy}",
+            "IncidentTitle": "${incidentTitle}",
+            "AssignedTo": "${assignedTo}",
+            "Category": "${category}",
+            "SubCategory": "${subCategory2}",
+            "UserMRI": "${userMRI}"
+          }
+        }
+      ]
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4"
+}
