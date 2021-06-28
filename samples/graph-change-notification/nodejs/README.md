@@ -8,7 +8,12 @@ This sample app demonstrates sending change notifications to user presence in Te
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [Node.js](https://nodejs.org) version 10.14 or higher
+
+    ```bash
+    #determine node version
+    node --version
+    ```
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
 1) Clone the repository

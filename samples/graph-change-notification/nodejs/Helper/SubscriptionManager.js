@@ -25,6 +25,7 @@ class SubscriptionManagementService {
         try {
             let subscription = null;
             subscriptionCreationInformation.resource="communications/presences/"+userId;
+            subscriptionCreationInformation.notificationUrl=process.env.notificationUrl;
             subscriptionCreationInformation.expirationDateTime = new Date(Date.now() + 3600000).toISOString();
             const client = this.getGraphClient();
             subscription = await client.api(this.subscriptionPath).get();
@@ -37,6 +38,6 @@ class SubscriptionManagementService {
             console.log("Error--" + e);
         }
     }
-    
+
 }
 exports.SubscriptionManagementService = SubscriptionManagementService;
