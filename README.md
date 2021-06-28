@@ -88,8 +88,19 @@
 |2|Graph API Channel Life Cycle | This sample illustrates how you can use [Graph API Channel Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-beta) to call Graph APIs. .                              |[View][graph#lifecycle#cs]       | [View][graph#lifecycle#js]
 |3|Graph API Teams App Installation Life Cycle | This sample illustrates how you can use [Teams App Installation Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/teamsappinstallation?view=graph-rest-1.0) by calling Microsoft Graph APIs. .                              |[View][graph#instllationlifecycle#cs]       |
 |4|Graph API Teams App Catalog Life Cycle | This sample illustrates how you you programattically have an lifecycle for your teams App in catalog by calling Microsoft Graph APIs. .                               |[View][graph#appctaloglifecycle#cs]       | [View][graph#appcataloglifecycle#js]
-|5|Graph API Chat Life Cycle | This sample illustrates how you can use [Teams App Chat Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/chat?view=graph-rest-1.0) by calling Microsoft Graph APIs. .                              |[View][graph#chatlifecyle#cs]      |
+|5|Graph API Chat Life Cycle | This sample illustrates how you can use [Teams App Chat Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/chat?view=graph-rest-1.0) by calling Microsoft Graph APIs. .                              |[View][graph#chatlifecyle#cs]      |[View][graph#chatlifecycle#js]
 |6|Activity Feed Notification  | Microsoft Teams sample app for Sending Activity feed notification using Graph API in a Teams Tab. | [View][graph-activity-feed#cs]                       | | 
+|7|Proactive installation of App and sending proactive notifications | This sample illustrates how you can use [Proactive installation of app for user and send proactive notification](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages?tabs=csharp) by calling Microsoft Graph APIs. .                              |[View][graph#graphproactiveinstallation#cs]       |[View][graph#graphproactiveinstallation#js]
+|8|Change Notification  | This sample app demonstrates sending change notifications to user presence in Teams based on user presence status. | [View][graph-change-notification#cs]                        | 
+
+
+## [Calls and online meetings bots](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/calls-and-meetings/calls-meetings-bots-overview)
+
+|    | Sample Name       | Description                                                                      | C#    |
+|:--:|:------------------|:---------------------------------------------------------------------------------------------------|:--------|
+|1|Calling and Meeting bot          | This sample app demonstarte how an Bot can create a call, join a meeting and transfer the call |[View][bot-calling-meeting#csharp]     |
+|2|Local Media Samples        |Local media samples give the developer direct access to the inbound and outbound media streams.                      |[View](https://github.com/microsoftgraph/microsoft-graph-comms-samples/tree/master/Samples/V1.0Samples/LocalMediaSamples) | 
+|3|Remote Media Samples      | The Incident Bot sample is a Remote Media sample demonstrating a simple incident process workflow started by a Calling Bot..                                      |[View](https://github.com/microsoftgraph/microsoft-graph-comms-samples/tree/master/Samples/V1.0Samples/RemoteMediaSamples)       |
 
 
 ## Scenario specific samples
@@ -105,7 +116,7 @@
 |7|Region Selection App | This app contains a bot and Tab which is helpful to set the region |[View][region-selection-app#cs]     |
 |8|App Localization | Microsoft Teams app localization using Bot and Tab |[View][app-localization#cs]  | [View][app-localization#js]
 |9|Details Tab in Meeting | Microsoft Teams meeting extensibility sample for iteracting with Details Tab in-meeting |[View][meetings-details-tab#cs]  |[View][meetings-details-tab#js]
-
+|10|App SSO | Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl | |[View][app-sso#js] 
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
@@ -160,7 +171,7 @@
 [bot-conversation-sso-quickstart#js]:samples/bot-conversation-sso-quickstart/js
 [bot-sharepoint-list#cs]:samples/bot-sharepoint-list/csharp
 [bot-conversation-sso-quickstart#csharp_dotnetcore]:samples/bot-conversation-sso-quickstart/csharp_dotnetcore
-
+[bot-calling-meeting#csharp]:samples/bot-calling-meeting/csharp
 [meetings-token-app#cs]:samples/meetings-token-app/csharp
 [apps-in-meeting#cs]:samples/apps-in-meeting/csharp
 [meetings-token-app#js]:samples/meetings-token-app/nodejs
@@ -175,19 +186,23 @@
 [meetings-details-tab#cs]:samples/meetings-details-tab/csharp
 [meetings-details-tab#js]:samples/meetings-details-tab/nodejs
 
+[app-sso#js]:samples/app-sso/nodejs
+
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#rsc#js]:samples/graph-rsc/nodeJs
 [graph#lifecycle#cs]:samples/graph-channel-lifecycle/csharp
 [graph#lifecycle#js]:samples/graph-channel-lifecycle/nodejs
 [graph#instllationlifecycle#cs]:samples/graph-app-installation-lifecycle/csharp
-
+[graph#graphproactiveinstallation#cs]: samples/graph-proactive-installation/csharp
 [graph#chatlifecyle#cs]:samples/graph-chat-lifecycle/csharp
+[graph#chatlifecycle#js]:samples/graph-chat-lifecycle/nodejs
 [graph#appctaloglifecycle#cs]:samples/graph-appcatalog-lifecycle/csharp
 [graph#appcataloglifecycle#js]:samples/graph-appcatalog-lifecycle/nodejs
+[graph#graphproactiveinstallation#cs]:samples/graph-proactive-installation/csharp
+[graph#graphproactiveinstallation#js]:samples/graph-proactive-installation/nodejs
 
 [graph-activity-feed#cs]:samples/graph-activity-feed/csharp
-
-
+[graph-change-notification#cs]:samples/graph-change-notification/csharp
 
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 

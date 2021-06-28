@@ -1,0 +1,42 @@
+{
+  "name": "msteams-nodejs-hello-world",
+  "version": "1.0.0",
+  "description": "Microsoft Teams Node.js Hello World App. Start here to build your first app on the Teams platform.",
+  "scripts": {
+    "start": "node src/app.js",
+    "watch": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OfficeDev/msteams-samples-hello-world-nodejs.git"
+  },
+  "author": "Microsoft Corp.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OfficeDev/msteams-samples-hello-world-nodejs/issues"
+  },
+  "homepage": "https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-nodejs",
+  "dependencies": {
+    "@microsoft/microsoft-graph-client": "^2.2.1",
+    "@microsoft/teams-js": "^1.10.0",
+    "adaptivecards-templating": "^2.1.0",
+    "body-parser": "^1.19.0",
+    "botbuilder": "^4.13.4",
+    "config": "^1.28.1",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "faker": "^4.1.0",
+    "fs": "^0.0.1-security",
+    "isomorphic-fetch": "^3.0.0",
+    "node-fetch": "^2.1.2",
+    "nodemon": "^2.0.7",
+    "pug": "^2.0.0-rc.4",
+    "restify": "^8.5.1"
+  },
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp": "^4.0.2",
+    "gulp-zip": "^4.0.0"
+  }
+}
