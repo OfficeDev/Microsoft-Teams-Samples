@@ -22,11 +22,15 @@ This sample app demonstrates sending change notifications to user presence in Te
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-  A) Or from Visual Studio code
+  A) Open from Visual Studio code
 
   - Launch Visual Studio code
   - File -> Open Folder
   - Navigate to `samples/graph-change-notification/nodejs` folder
+  - Run npm command  in the terminal
+  ```bash
+     npm install
+   ``` 
   - Press `F5` to run the project
 
   B) Run ngrok - point to port 3978
