@@ -69,9 +69,9 @@ i. Provide  Scopes like "Presence.Read, Presence.Read.All"
 ![image](https://user-images.githubusercontent.com/85864414/121880473-af1af780-cd2b-11eb-8166-837425ef186f.PNG)
 
 ### Update the appsetting
-1. Provide appId and appPassword in the appsetting that is created in Azure.
-2. Provide UserId in appsetting for which you want to subscribe the user presence.
-3. Provide the ngrok url as  "BaseUrl" in appsetting on which application is running on.
+1. Update `MicrosoftAppId` and `MicrosoftAppPassword` in the .env that is created in Azure.
+2. Add `connectionName` created in step 5.
+3. Update `notificationUrl` as  `{NgrokBaseURL}/api/notifications`
 
 
 ### Concepts introduced in this sample
