@@ -20,8 +20,8 @@ const Result = (props) => {
     }, []);
     if(taskInfo != null){
         const {option1, option2, personAnswered}  = taskInfo;
-        const option1Answers = personAnswered[option1] ? personAnswered[option1] : [];
-        const option2Answers = personAnswered[option2] ? personAnswered[option2] : [];
+        const option1Answers = personAnswered && personAnswered[option1] ? personAnswered[option1] : [];
+        const option2Answers = personAnswered && personAnswered[option2] ? personAnswered[option2] : [];
     return (
         <div class="card" id="getResultsModal" tabindex="-1">
             <div class="card-header">

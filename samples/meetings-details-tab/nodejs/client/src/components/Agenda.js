@@ -43,15 +43,15 @@ const Agenda = ({title, option1, option2, Id, IsSend, taskList}) => {
                 <label className="pollLabel" for="option2">{option2}</label><br/>
             </div>
             <div className="card-footer">
-                <button type="button" className="btn btn-primary" onClick={() => sendAgenda(title, option1, option2)}>Send</button> :
+                <button type="button" className="btn btn-primary" onClick={() => sendAgenda(title, option1, option2)}>Send</button>
             </div>
         </div>
         )
     } else {
         const taskInfo = taskList.find(x=>x.Id == Id);
         const {title, option1, option2, personAnswered}  = taskInfo;
-        const option1Answered = personAnswered[option1] ? personAnswered[option1].length : 0;
-        const option2Answered = personAnswered[option2] ? personAnswered[option2].length : 0;
+        const option1Answered = personAnswered && personAnswered[option1] ? personAnswered[option1].length : 0;
+        const option2Answered = personAnswered && personAnswered[option2] ? personAnswered[option2].length : 0;
 
         const total = option1Answered + option2Answered;
         const percentOption1 = total == 0 ? 0 : parseInt(( option1Answered * 100 ) / total);

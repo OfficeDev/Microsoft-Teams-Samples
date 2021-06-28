@@ -14,8 +14,11 @@ function Welcome (){
                     'Content-Type': 'application/json',
                   }
             });
-            const data = await response.json();
+            const textData = await response.text();
+            if(textData.length){
+              const data = JSON.parse(textData);  
             setAgenda(data);
+            }
         };
         loadAgenda();
     }, []);
@@ -31,7 +34,7 @@ function Welcome (){
     }
     microsoftTeams.initialize();
      const submitHandler = (err, result) => {
-         if(!result.title || !result.option1 || !result.option2)
+         if(!result || !result.title || !result.option1 || !result.option2)
                 return ;
         const taskInfo = {...result, Id: uuidv4()}
         const list = [...agendaList, taskInfo];
