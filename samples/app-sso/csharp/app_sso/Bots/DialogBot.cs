@@ -54,6 +54,7 @@ namespace Microsoft.BotBuilderSamples
             }
             catch (Exception ex)
             {
+                Console.Write(ex);
             }
         }
 
@@ -99,8 +100,8 @@ namespace Microsoft.BotBuilderSamples
             var heroCard = new ThumbnailCard
             {
                 Title = "Thumbnail Card",
-                Text = $"Hello, {profile.DisplayName}",
-                Images = new List<CardImage> { new CardImage(imagelink) },
+                Text = $"Hello {profile.DisplayName}",
+                Images = new List<CardImage> { new CardImage(imagelink) }
             };
             var attachments = new MessagingExtensionAttachment(HeroCard.ContentType, null, heroCard);
             var result = new MessagingExtensionResult("list", "result", new[] { attachments });
@@ -174,45 +175,32 @@ namespace Microsoft.BotBuilderSamples
                     },
                 };
             }
-            try
+            var client = new SimpleGraphClient(tokenResponse.Token);
+            var me = await client.GetMyProfile();
+            var imagelink = await client.GetPhotoAsync();
+            var previewcard = new ThumbnailCard
             {
-                var client = new SimpleGraphClient(tokenResponse.Token);
-                var me = await client.GetMyProfile();
-                var imagelink = await client.GetPhotoAsync();
-                
-                var previewcard = new ThumbnailCard
-                {
-                    Title = me.DisplayName,
-                    Images = new List<CardImage> { new CardImage { Url = imagelink } }
-                };
-
-              
-                var attachment = new MessagingExtensionAttachment
-                {
-                    ContentType = ThumbnailCard.ContentType,
-                    Content = previewcard,
-                    Preview = previewcard.ToAttachment()
-                };
-
-                return new MessagingExtensionResponse
-                {
-                    ComposeExtension = new MessagingExtensionResult
-                    {
-                        Type = "result",
-                        AttachmentLayout = "list",
-                        Attachments = new List<MessagingExtensionAttachment> { attachment }
-                    }
-                };
-            }
-            catch (Exception ex)
+                Title = me.DisplayName,
+                Images = new List<CardImage> { new CardImage { Url = imagelink } }
+            };
+            var attachment = new MessagingExtensionAttachment
             {
-
-                throw;
-            }
-
+                ContentType = ThumbnailCard.ContentType,
+                Content = previewcard,
+                Preview = previewcard.ToAttachment()
+            };
+            return new MessagingExtensionResponse
+            {
+                ComposeExtension = new MessagingExtensionResult
+                {
+                    Type = "result",
+                    AttachmentLayout = "list",
+                    Attachments = new List<MessagingExtensionAttachment> { attachment }
+                }
+            };
         }
 
-      
+
         protected override Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionSubmitActionAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action, CancellationToken cancellationToken)
         {
             // This method is to handle the 'Close' button on the confirmation Task Module after the user signs out.
@@ -252,13 +240,9 @@ namespace Microsoft.BotBuilderSamples
                         },
                     };
                 }
-
                 var client = new SimpleGraphClient(tokenResponse.Token);
-
                 var profile = await client.GetMyProfile();
-
                 var imagelink = await client.GetPhotoAsync();
-
                 return new MessagingExtensionActionResponse
                 {
                     Task = new TaskModuleContinueResponse
@@ -273,7 +257,6 @@ namespace Microsoft.BotBuilderSamples
                     },
                 };
             }
-
             if (action.CommandId.ToUpper() == "SIGNOUTCOMMAND")
             {
                 await (turnContext.Adapter as IUserTokenProvider).SignOutUserAsync(turnContext, _connectionName, turnContext.Activity.From.Id, cancellationToken);
@@ -375,7 +358,7 @@ namespace Microsoft.BotBuilderSamples
             return true;
         }
 
-        private static Microsoft.Bot.Schema.Attachment GetProfileCard(Graph.User profile,string imagelink)
+        private static Microsoft.Bot.Schema.Attachment GetProfileCard(Graph.User profile, string imagelink)
         {
             var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
 
