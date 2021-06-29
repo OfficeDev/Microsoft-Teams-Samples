@@ -1,6 +1,5 @@
 {
   "type": "AdaptiveCard",
-  "appId": "86ee312e-e8f2-4a03-9515-4ac80986abd5",
   "refresh": {
     "action": {
       "type": "Action.Execute",

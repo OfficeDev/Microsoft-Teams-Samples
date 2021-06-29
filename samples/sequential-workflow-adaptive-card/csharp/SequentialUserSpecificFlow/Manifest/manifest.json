@@ -30,7 +30,8 @@
       "needsChannelSelector": false,
       "isNotificationOnly": false,
       "scopes": [
-        "groupchat"
+        "groupchat",
+        "team"
       ]
     }
   ],

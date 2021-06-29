@@ -19,8 +19,6 @@ namespace SequentialUserSpecificFlow.Bots
 {
     public class UserSpecificBot : ActivityHandler
     {
-        public readonly string appId;
-        public readonly string appPassword;
         List<Info> memberDetails = new List<Info> { };
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {

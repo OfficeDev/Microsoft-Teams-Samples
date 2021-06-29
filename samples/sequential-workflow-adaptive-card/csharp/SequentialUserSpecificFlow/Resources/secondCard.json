@@ -1,6 +1,5 @@
 {
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-  "appId": "f7d4ac80-4ceb-486d-b05b-64827c543141",
   "body": [
     {
       "type": "TextBlock",
