@@ -45,7 +45,7 @@ The bot channels registration registers your web service as a bot with the Bot F
 1. In the **Messaging endpoint** box, use same ngrok endpoint created earlier and append `/api/messages` to that endpoint. Example: `https://f631****.ngrok.io/api/messages`. 
     - The following picture shows an example of the registration settings:
 
-    ![bot app channels registration](Images/auth-bot-channels-registration.png)
+    ![bot app channels registration](https://user-images.githubusercontent.com/85108465/123810977-77f23c00-d910-11eb-8442-3a61ed57f00d.png)
 
 1. Click **Microsoft App ID and password** and then **Create New**.
 1. Click **Create App ID in the App Registration Portal** link.
@@ -66,7 +66,7 @@ The bot channels registration registers your web service as a bot with the Bot F
 
 After Azure has created the registration resource it will be included in the resource group list.  
 
-![bot app channels registration group](Images/auth-bot-channels-registration-group.png)
+![bot app channels registration group](https://user-images.githubusercontent.com/85108465/123811009-804a7700-d910-11eb-9568-9eb8878cca0b.png)
 
 Once your bot channels registration is created, you'll need to enable the Teams channel.
 

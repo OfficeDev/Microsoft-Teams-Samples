@@ -104,7 +104,7 @@ const selectResponseCard = async (context, user, members) => {
 
 const optionInc = () => ({
     $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
-    appId: '86ee312e-e8f2-4a03-9515-4ac80986abd5',
+    appId: process.env.MicrosoftAppId,
     body: [
         {
             type: 'TextBlock',
@@ -159,7 +159,7 @@ const chooseCategory = async () => {
     const actions = await Promise.all(actionsPromise);
     const card = {
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
-        appId: '86ee312e-e8f2-4a03-9515-4ac80986abd5',
+        appId: process.env.MicrosoftAppId,
         body: [
             {
                 type: 'TextBlock',
@@ -211,7 +211,7 @@ const chooseSubCategory = async (verb) => {
     const actions = await Promise.all(actionsPromise);
     const card = {
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
-        appId: '86ee312e-e8f2-4a03-9515-4ac80986abd5',
+        appId: process.env.MicrosoftAppId,
         body: [
             {
                 type: 'TextBlock',
@@ -256,7 +256,7 @@ const createInc = async (verb, user) => {
     }));
     const card = {
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
-        appId: '86ee312e-e8f2-4a03-9515-4ac80986abd5',
+        appId: process.env.MicrosoftAppId,
         body: [
             {
                 type: 'TextBlock',
@@ -418,7 +418,7 @@ const saveInc = async (action) => {
     const inc = await incidentService.saveInc(action, allMembers);
     const card = {
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
-        appId: '86ee312e-e8f2-4a03-9515-4ac80986abd5',
+        appId: process.env.MicrosoftAppId,
         refresh: {
             action: {
                 type: 'Action.Execute',
@@ -586,7 +586,7 @@ const editInc = async (action) => {
     const assignee = assignees.find(m => m.value === inc.assignedTo.aadObjectId);
     const card = {
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
-        appId: '86ee312e-e8f2-4a03-9515-4ac80986abd5',
+        appId: process.env.MicrosoftAppId,
         body: [
             {
                 type: 'TextBlock',
@@ -752,7 +752,7 @@ const updateInc = async (action) => {
     const inc = await incidentService.updateInc(action, allMembers);
     const card = {
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
-        appId: '86ee312e-e8f2-4a03-9515-4ac80986abd5',
+        appId: process.env.MicrosoftAppId,
         refresh: {
             action: {
                 type: 'Action.Execute',
@@ -915,7 +915,7 @@ const viewInc = async (action) => {
     const inc = action.data.incident;
     const card = {
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
-        appId: '86ee312e-e8f2-4a03-9515-4ac80986abd5',
+        appId: process.env.MicrosoftAppId,
         refresh: {
             action: {
                 type: 'Action.Execute',
@@ -1079,7 +1079,7 @@ const updateStatusInc = async (action) => {
     const statusIcon = inc.status === 'Approved' ? 'https://spsharewithme.azurewebsites.net/Images/approve1.png' : (inc.status === 'Rejected' ? 'https://spsharewithme.azurewebsites.net/Images/reject.png' : '');
     const card = {
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
-        appId: '86ee312e-e8f2-4a03-9515-4ac80986abd5',
+        appId: process.env.MicrosoftAppId,
         body: [
             {
                 type: 'TextBlock',
@@ -1299,7 +1299,7 @@ const refreshInc = async (user, action) => {
     }
     const card = {
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
-        appId: '86ee312e-e8f2-4a03-9515-4ac80986abd5',
+        appId: process.env.MicrosoftAppId,
         body: [
             {
                 type: 'TextBlock',

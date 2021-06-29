@@ -53,8 +53,6 @@
       "messageTeamMembers"
     ],
     "validDomains": [
-      "*.githubusercontent.com",
-      "*.botframework.com",
       "*.ngrok.io"
     ]
   }
