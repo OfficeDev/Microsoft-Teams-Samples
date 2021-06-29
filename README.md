@@ -147,11 +147,11 @@
 [connector#ts]:samples/connector-github-notification/nodejs
 [connector-generic#ts]:samples/connector-generic/nodejs
 
-[sequential#workflow#csharp]:samples/sequential-workflow-adaptive-card/csharp
+[sequential#workflow#csharp]:samples/bot-sequential-flow-adaptive-cards/csharp
 
 [app-auth#ts]:samples/app-auth/nodejs
 
-[app-task-module#cs]:samples/app-task-module/csharp
+[app-task-module#cs]:samples/app-task-module/csharpbot-sequential-flow-adaptive-cards
 [app-task-module#ts]:samples/app-task-module/nodejs
 
 [app-complete#cs]:samples/app-complete-sample/csharp
