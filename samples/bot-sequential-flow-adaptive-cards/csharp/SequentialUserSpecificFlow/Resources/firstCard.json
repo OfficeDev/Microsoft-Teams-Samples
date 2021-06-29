@@ -1,0 +1,58 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Incident Management"
+    },
+    {
+      "type": "RichTextBlock",
+      "separator": true,
+      "inlines": [
+        {
+          "type": "TextRun",
+          "text": "Title"
+        }
+      ]
+    },
+    {
+      "type": "Input.Text",
+      "id": "IncidentTitle",
+      "placeholder": "Enter Title"
+    },
+    {
+      "type": "RichTextBlock",
+      "inlines": [
+        {
+          "type": "TextRun",
+          "text": "Assigned To"
+        }
+      ]
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "choices": "${assignees}",
+      "id": "AssignedTo",
+      "isMultiSelect": true
+    },
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.Execute",
+          "verb": "firstCard",
+          "title": "Submit",
+          "data": {
+            "CreatedBy": "${createdBy}",
+            "AssignedTo": "${assignedTo}",
+            "UserMRI": "${userMRI}"
+          }
+        }
+      ]
+    }
+  ],
+  "type": "AdaptiveCard",
+  "version": "1.4"
+}
