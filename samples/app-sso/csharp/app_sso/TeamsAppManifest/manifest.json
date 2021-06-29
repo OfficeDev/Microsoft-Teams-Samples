@@ -3,7 +3,7 @@
   "manifestVersion": "1.7",
   "version": "1.0.0",
   "id": "<<YOUR-MICROSOFT-APP-ID>>",
-  "packageName": "com.microsoft.teams.samples",
+  "packageName": "com.microsoft.teams.samples.AppSSO",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://example.azurewebsites.net",
@@ -15,12 +15,12 @@
     "outline": "icon-outline.png"
   },
   "name": {
-    "short": "BotTabMeSSO",
+    "short": "App SSO in csharp",
     "full": "Teams Single Sign On Sample"
   },
   "description": {
-    "short": "Bot Tab ME SSO Scenario",
-    "full": "Bot Tab ME SSO Scenario"
+    "short": "App SSO in csharp",
+    "full": "This sample app demonstrates SSO for Tab Bot and ME (Link Unfurl, Action and Search Config"
   },
   "accentColor": "#FFFFFF",
   "composeExtensions": [
