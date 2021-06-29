@@ -82,40 +82,8 @@ namespace Microsoft.BotBuilderSamples
             return messages.Take(5).ToArray();
         }
 
-        private async Task<string> GetPhoto()
-        {
-            HttpClient client = new HttpClient();
-            var resp = await client.GetAsync("https://graph.microsoft.com/v1.0/me/photo/$value");
-            var buffer = await resp.Content.ReadAsByteArrayAsync();
-            var byteArray = buffer.ToArray();
-            string base64String = Convert.ToBase64String(byteArray);
-            return base64String;
-
-        }
-
-        public  async Task<byte[]> GetStreamWithAuthAsync()
-        {
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + _token);
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-            using (var response = await client.GetAsync("https://graph.microsoft.com/v1.0/me/photo/$value"))
-            {
-                if (response.IsSuccessStatusCode)
-                {
-                    var stream = await response.Content.ReadAsStreamAsync();
-                    byte[] bytes = new byte[stream.Length];
-                    stream.Read(bytes, 0, (int)stream.Length);
-
-                    return bytes;
-                }
-                else
-                    return null;
-            }
-        }
-
         public async Task<string> GetPhotoAsync()
         {
-            //Image Ima
             var graphClient = GetAuthenticatedClient();
             try
             {
@@ -132,62 +100,9 @@ namespace Microsoft.BotBuilderSamples
             }
             catch (Exception ex)
             {
-                throw;
+                Console.Write(ex);
+               return "http://adaptivecards.io/content/cats/1.png";
             }
-        }
-
-
-        public  async Task<Stream> GetCurrentUserPhotoStreamAsync()
-        {
-            Stream currentUserPhotoStream = null;
-            var graphClient = GetAuthenticatedClient();
-            try
-            {
-                currentUserPhotoStream = await graphClient.Me.Photo.Content.Request().GetAsync();
-
-            }
-            // If the user account is MSA (not work or school), the service will throw an exception.
-            catch (Exception)
-            {
-                return null;
-            }
-
-            return currentUserPhotoStream;
-
-        }
-
-        public async Task<DriveItem> UploadFileToOneDriveAsync(byte[] file)
-        {
-            DriveItem uploadedFile = null;
-            var graphClient = GetAuthenticatedClient();
-
-            try
-            {
-                MemoryStream fileStream = new MemoryStream(file);
-                uploadedFile = await graphClient.Me.Drive.Root.ItemWithPath("me.png").Content.Request().PutAsync<DriveItem>(fileStream);
-            }
-            catch (ServiceException)
-            {
-                return null;
-            }
-
-            return uploadedFile;
-        }
-
-        public  async Task<Permission> GetSharingLinkAsync(string Id)
-        {
-            Permission permission = null;
-            var graphClient = GetAuthenticatedClient();
-            try
-            {
-                permission = await graphClient.Me.Drive.Items[Id].CreateLink("view").Request().PostAsync();
-            }
-            catch (ServiceException)
-            {
-                return null;
-            }
-
-            return permission;
         }
         private GraphServiceClient GetAuthenticatedClient()
         {
