@@ -1,0 +1,52 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Incident Management"
+    },
+    {
+      "type": "RichTextBlock",
+      "inlines": [
+        {
+          "type": "TextRun",
+          "text": "Category"
+        
+        }
+      ]
+    },
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.Execute",
+          "verb": "secondCard",
+          "title": "Software",
+          "data": {
+            "CreatedBy": "${createdBy}",
+            "IncidentTitle": "${incidentTitle}",
+            "AssignedTo": "${assignedTo}",
+            "Category": "Software",
+            "UserMRI": "${userMRI}"
+          }
+        },
+        {
+          "type": "Action.Execute",
+          "verb": "secondCard",
+          "title": "Hardware",
+          "data": {
+            "CreatedBy": "${createdBy}",
+            "IncidentTitle": "${incidentTitle}",
+            "AssignedTo": "${assignedTo}",
+            "Category": "Hardware",
+            "UserMRI": "${userMRI}"
+          }
+        }
+      ]
+    }
+  ],
+  "type": "AdaptiveCard",
+  "version": "1.4"
+}
