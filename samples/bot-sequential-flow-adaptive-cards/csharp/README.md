@@ -16,7 +16,7 @@ This sample illustrates sequential workflow, user specific views and upto date a
 2) If you are using Visual Studio
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/sequential-workflow-adaptive-card/SequentialUserSpecificFlow` folder
+  - Navigate to `samples/bot-sequential-flow-adaptive-cards/csharp/` folder
   - Select `SequentialUserSpecificFlow.csproj` file
 
 3) Run ngrok - point to port 3978

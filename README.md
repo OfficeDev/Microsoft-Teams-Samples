@@ -151,7 +151,7 @@
 
 [app-auth#ts]:samples/app-auth/nodejs
 
-[app-task-module#cs]:samples/app-task-module/csharpbot-sequential-flow-adaptive-cards
+[app-task-module#cs]:samples/app-task-module/csharp
 [app-task-module#ts]:samples/app-task-module/nodejs
 
 [app-complete#cs]:samples/app-complete-sample/csharp
