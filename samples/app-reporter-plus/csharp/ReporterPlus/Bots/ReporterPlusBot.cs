@@ -125,7 +125,15 @@ namespace ReporterPlus.Bots
                 BlobHelper.GetBlob(blobId, null, messageId);
 
                 //Send Mail
-                await OutlookConnector.SendMailAsync(Constants.SenderEmail, blobData.assignedToMail, cardJsonstring, Constants.MailSubject);
+                try
+                {
+                    await OutlookConnector.SendMailAsync(Constants.SenderEmail, blobData.assignedToMail, cardJsonstring, Constants.MailSubject);
+                } catch (Exception ex)
+                {
+                    // Email sending would fail untill your request to send outlook actionable messages is approved.
+                    Console.WriteLine("Failed to send email");
+                    Console.WriteLine(ex.StackTrace);
+                }
             }
             return new MessagingExtensionActionResponse();
         }
