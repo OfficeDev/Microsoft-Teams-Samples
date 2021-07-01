@@ -1,0 +1,19 @@
+{
+  "requestID": "${requestID}",
+  "status": "${status}",
+  "itemName": "${itemName}",
+  "itemCode": "${itemCode}",
+  "assignedToName": "${assignedToName}",
+  "assignedToId": "${assignedToId}",
+  "assignedToMail": "${assignedToMail}",
+  "submittedByName": "${submittedByName}",
+  "submittedById": "${submittedById}",
+  "submittedByMail": "${submittedByMail}",
+  "assignedToUserImage": "${assignedToUserImage}",
+  "submittedByUserImage": "${submittedByUserImage}",
+  "imageURL": "${imageURL}",
+  "audioURL": "${audioURL}",
+  "comments": "${comments}",
+  "conversationId": "${conversationId}",
+  "messageId": "${messageId}"
+}

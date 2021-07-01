@@ -1,0 +1,27 @@
+﻿#imagePlaceHolder {
+    max-height: 275px;
+    width: 100%;
+    height: auto;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+button {
+    margin: 0;
+    position: absolute;
+}
+
+#images {
+    margin: 0px;
+    margin-top: 10px;
+    margin-bottom: 2px;
+}
+
+#itemName, #itemCode, #assignedTo, #commentsID, #imgNo {
+    font-size: 14px;
+    font-family: Segoe UI;
+}
+
+.col-5, .form-label {
+    font-weight: bold;
+}

@@ -1,0 +1,167 @@
+﻿<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Teams SDK-->
+<script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<link href="~/css/StyleSheet.css" rel="stylesheet" />
+<title>View Request Details</title>
+
+<div class="container">
+    <h3 style="text-align : center">Details</h3>
+    <div>
+        <div class="d-flex mb-1">
+            <label for="item-name" class="col-5 col-form-label">Item Name</label>
+            <label class="col-1 col-form-label">:</label>
+            <div class="col-6">
+                <div class="form-control-plaintext mx-3 col-auto" id="itemName"></div>
+            </div>
+        </div>
+        <div class="d-flex mb-1">
+            <label for="item-code" class="col-5 col-form-label">Item Code</label>
+            <label class="col-1 col-form-label">:</label>
+            <div class="col-6">
+                <div class="form-control-plaintext mx-3" id="itemCode"></div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="d-flex mb-1">
+            <label for="assigned-To" class="col-5 col-form-label">Assigned to</label>
+            <label class="col-1 col-form-label">:</label>
+            <div class="col-6">
+                <div class="form-control-plaintext mx-3" id="assignedTo"></div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <label for="uploaded-images" class="form-label">Uploaded Pictures</label>
+            <div class="carousel-inner">
+                <div id="images" class="carousel-item active">
+                    <button id="prev" class="carousel-control-prev" onclick="previous()">&#10094;</button>
+                    <img id="imagePlaceHolder" />
+                    <button id="next" class="carousel-control-next" onclick="next()">&#10095;</button>
+                </div>
+                <p id="imgNo" style="font-weight: bold; text-align : center"></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="audioRecord">
+        <div class="mb-3">
+            <div class="my-2">
+                <label for="recorded-audio" class="form-label">Audio Recorded</label>
+            </div>
+            <audio id="audioOutput"></audio>
+        </div>
+    </div>
+
+    <div class="mb-3" id="comments">
+        <label for="comment" class="form-label">Comments</label>
+        <div>
+            <label id="commentsID"></label>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+    microsoftTeams.initialize();
+    var imagesArray = [];
+    var imgUrlArray = [];
+    var imagesCount = 0;
+    let j = 0;
+
+    window.onload = function () {
+        var url = window.location.href;
+        var reqID = url.split("?id=")[1];
+        $.ajax({
+            type: 'GET',
+            url: '/LoadViewDetails',
+            dataType: 'json',
+            data: { reqID: reqID },
+            success: function (response) {
+                console.log(response);
+                renderFunction(response);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log("textStatus: " + textStatus + ", errorThrown:" + response);
+            },
+        });
+    }
+
+    function renderFunction(response) {
+        var jsonResponse = JSON.parse(response);
+        var iName = jsonResponse.itemName;
+        var iCode = jsonResponse.itemCode;
+        var assignedTo = jsonResponse.assignedToName;
+        var imageUrl = jsonResponse.imageURL;
+        var audioUrl = jsonResponse.audioURL;
+        var comments = jsonResponse.comments;
+        imageUrl.forEach(getUrls);
+        imagesCount = imagesArray.length;
+        document.getElementById("itemName").innerHTML = iName;
+        document.getElementById("itemCode").innerHTML = iCode;
+        document.getElementById("assignedTo").innerHTML = assignedTo;
+        document.getElementById("imagePlaceHolder").src = imagesArray[j];
+        document.getElementById("imgNo").innerHTML = j + 1 + "/" + imagesCount;
+        document.getElementById("commentsID").innerHTML = comments;
+        let AudioOutput = document.getElementById("audioOutput");
+        AudioOutput.controls = true;
+        AudioOutput.src = audioUrl;
+
+        if (imagesCount === 0) {
+            document.getElementById("carouselExampleIndicators").style.display = "none";
+        }
+        if (audioUrl === "") {
+            document.getElementById("audioRecord").style.display = "none";
+        }
+        if (comments === "") {
+            document.getElementById("comments").style.display = "none";
+        }
+    }
+
+    function getUrls(item, index) {
+        imagesArray.push(item.url);
+    }
+
+    function previous() {
+        console.log("Previous");
+        console.log(j);
+        if (j === 0) {
+            j = imagesCount - 1;
+        } else {
+            j = j - 1;
+        }
+        document.getElementById("imagePlaceHolder").src = imagesArray[j];
+        document.getElementById("imgNo").innerHTML = j + 1 + "/" + imagesCount;
+        console.log(imagesArray[j]);
+        event.preventDefault();
+    }
+
+    function next() {
+        console.log("Next");
+        console.log(j);
+        if (j === imagesCount - 1) {
+            j = 0;
+        } else {
+            j = j + 1;
+        }
+        document.getElementById("imagePlaceHolder").src = imagesArray[j];
+        document.getElementById("imgNo").innerHTML = j + 1 + "/" + imagesCount;
+        console.log(imagesArray[j]);
+        event.preventDefault();
+    }
+
+</script>
