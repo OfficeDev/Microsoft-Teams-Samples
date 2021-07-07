@@ -1,0 +1,47 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.8",
+    "version": "1.0.1",
+    "id": "15a789f3-c143-43c8-bf1c-fe845718fe70",
+    "packageName": "com.microsoft.teams.extension",
+    "developer": {
+        "name": "Teams App, Inc.",
+        "websiteUrl": "https://50c2552618db.ngrok.io",
+        "privacyUrl": "https://50c2552618db.ngrok.io/privacy",
+        "termsOfUseUrl": "https://50c2552618db.ngrok.io/termsofuse"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "mgt-teams-tab",
+        "full": ""
+    },
+    "description": {
+        "short": "Short description for Personal App.",
+        "full": "Full description of Personal App."
+    },
+    "accentColor": "#FFFFFF",
+    "staticTabs": [
+        {
+            "entityId": "index",
+            "name": "Personal Tab",
+            "contentUrl": "https://50c2552618db.ngrok.io/tab",
+            "websiteUrl": "https://50c2552618db.ngrok.io/tab",
+            "scopes": [
+                "personal"
+            ]
+        }
+    ],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "*.ngrok.io"
+    ],
+    "devicePermissions": [
+        "media"
+    ]
+}
