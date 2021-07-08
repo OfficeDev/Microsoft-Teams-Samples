@@ -47,53 +47,6 @@ const Tab = () => {
     microsoftTeams.media.selectMedia({ maxMediaCount: 10, mediaType: microsoftTeams.media.MediaType.Image }, (error: microsoftTeams.SdkError, attachments: microsoftTeams.media.Media[]) => {
       /* ... */
     });
-    //   navigator.permissions.query({name:'microphone'}).then(function(result) {
-    //     console.log(result)
-    //   if (result.state == 'granted') {
-    //     console.log(result)
-    //     let mediaInput: microsoftTeams.media.MediaInputs = {
-    //       mediaType: microsoftTeams.media.MediaType.Audio,
-    //       maxMediaCount: 1,
-    //   };
-    //   microsoftTeams.media.selectMedia(mediaInput, (error: microsoftTeams.SdkError, attachments: microsoftTeams.media.Media[]) => {
-    //     console.log(microsoftTeams)
-    //       if (error) {
-    //           if (error.message) {
-    //               alert(" ErrorCode: " + error.errorCode + error.message);
-    //           } else {
-    //               alert(" ErrorCode: " + error.errorCode);
-    //           }
-    //       }
-    //       // If you want to directly use the audio file (for smaller file sizes (~4MB))    
-    //       if (attachments) {
-    //       let audioResult = attachments[0];
-    //       var videoElement = document.createElement("video");
-    //       videoElement.setAttribute("src", ("data:" + audioResult.mimeType + ";base64," + audioResult.preview));
-    //       //To use the audio file via get Media API for bigger audio file sizes greater than 4MB       
-    //       audioResult.getMedia((error: microsoftTeams.SdkError, blob: Blob) => {
-    //       if (blob) {
-    //           if (blob.type.includes("video")) {
-    //               videoElement.setAttribute("src", URL.createObjectURL(blob));
-    //           }
-    //       }
-    //       if (error) {
-    //           if (error.message) {
-    //               alert(" ErrorCode: " + error.errorCode + error.message);
-    //           } else {
-    //               alert(" ErrorCode: " + error.errorCode);
-    //           }
-    //       }
-          
-    //   });
-    // }
-    //   }); 
-    // } 
-    // else if (result.state == 'prompt') {
-    //     // Access has not been granted
-    //     console.log(result)
-    //     navigator.mediaDevices.getUserMedia({ audio: true, video: true });
-    //   }
-    // });
   }
 
   function captureAudio() {
@@ -103,8 +56,8 @@ const Tab = () => {
   }
   
   function getLocation () {
-      microsoftTeams.location.getLocation({ allowChooseLocation: false, showMap: false }, (error: microsoftTeams.SdkError, location: microsoftTeams.location.Location) => {
-        alert(error.errorCode)
+      microsoftTeams.location.getLocation({ allowChooseLocation: true, showMap: true }, (error: microsoftTeams.SdkError, location: microsoftTeams.location.Location) => {
+        alert(JSON.stringify(location))
        });
   }
 
