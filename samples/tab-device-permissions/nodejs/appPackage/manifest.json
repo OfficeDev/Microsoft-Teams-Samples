@@ -4,12 +4,12 @@
     "version": "1.0.1",
     "id": "15a789f3-c143-43c8-bf1c-fe845718fe70",
     "packageName": "com.microsoft.teams.extension",
-    "developer": {
-        "name": "Teams App, Inc.",
-        "websiteUrl": "https://50c2552618db.ngrok.io",
-        "privacyUrl": "https://50c2552618db.ngrok.io/privacy",
-        "termsOfUseUrl": "https://50c2552618db.ngrok.io/termsofuse"
-    },
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://<<BASE-URL>>",
+    "privacyUrl": "https://<<BASE-URL>>/privacy",
+    "termsOfUseUrl": "https://<<BASE-URL>>/termsofuse"
+  },
     "icons": {
         "color": "color.png",
         "outline": "outline.png"
@@ -24,15 +24,15 @@
     },
     "accentColor": "#FFFFFF",
     "staticTabs": [
-        {
-            "entityId": "index",
-            "name": "Personal Tab",
-            "contentUrl": "https://50c2552618db.ngrok.io/tab",
-            "websiteUrl": "https://50c2552618db.ngrok.io/tab",
-            "scopes": [
-                "personal"
-            ]
-        }
+      {
+        "entityId": "index",
+        "name": "Personal Tab",
+        "contentUrl": "https://<<BASE-URL>>/tab",
+        "websiteUrl": "https://<<BASE-URL>>/tab",
+        "scopes": [
+          "personal"
+        ]
+      }
     ],
     "permissions": [
         "identity",
@@ -42,6 +42,7 @@
         "*.ngrok.io"
     ],
     "devicePermissions": [
-        "media"
+        "media",
+        "geolocation"
     ]
 }
