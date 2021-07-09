@@ -18,8 +18,8 @@ This is demo app to for tab device permissions.
 ## See it running
 
 1. Clone the sample and open it in Visual Studio. (Look at [similar steps if you are not sure](https://docs.microsoft.com/microsoftteams/platform/tutorials/get-started-dotnet-app-studio#download-the-sample))
-1. [Build and run your sample](https://docs.microsoft.com/microsoftteams/platform/tutorials/get-started-dotnet-app-studio#build-and-run-the-sample)
-![Local Running App](Images/home.png)
+1. [Build and run your sample](https://docs.microsoft.com/microsoftteams/platform/tutorials/get-started-dotnet-app-studio#build-and-run-the-sample).<br/>
+![Local Running App](Images/home.PNG)
 1. [Upload an app package](https://docs.microsoft.com/microsoftteams/platform/concepts/deploy-and-publish/apps-upload) (Zip file created in step 3 above) to Microsoft Teams
 ![Install App](Images/install.png)
 1. Go to Device permission tab.
