@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { Card, Flex, Text, Button, CardHeader, CardBody } from '@fluentui/react-northstar'
 
@@ -35,10 +35,10 @@ const GetGeoLocation = () => {
         // If there's any error, an alert shows the error message/code
         if (error) {
             if (error.message) {
-               alert(" ErrorCode: " + error.errorCode + error.message);
-             } else {
-               alert(" ErrorCode: " + error.errorCode);
-             }
+              alert(" ErrorCode: " + error.errorCode + error.message);
+            } else {
+              alert(" ErrorCode: " + error.errorCode);
+            }
              return;
         }
     });
@@ -54,14 +54,14 @@ const GetGeoLocation = () => {
         <CardBody>
         <Flex column gap="gap.small">
           <Button content="Get Location" onClick={getLocation}/>
-         {geoLocationValue != '' && 
-         <Text content={geoLocationValue}></Text>}
+         {geoLocationValue !== '' && 
+         <Text styles={{"word-wrap":"break-word"}} content={geoLocationValue}></Text>}
           <Button content="Show Location" onClick={showLocation}/>
         </Flex>
         </CardBody>
-        
       </Card>
       </>
     );
 }
+
 export default GetGeoLocation;

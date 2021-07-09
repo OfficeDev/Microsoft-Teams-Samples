@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 import Tab from './components/Tab'
 
 function App() {
