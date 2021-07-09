@@ -1,7 +1,7 @@
 {
     "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
     "manifestVersion": "1.8",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "id": "15a789f3-c143-43c8-bf1c-fe845718fe70",
     "packageName": "com.microsoft.teams.extension",
   "developer": {
@@ -15,18 +15,18 @@
         "outline": "outline.png"
     },
     "name": {
-        "short": "mgt-teams-tab",
-        "full": ""
+        "short": "Tab Device Permission",
+        "full": "Tab Device Permission Demo App"
     },
     "description": {
-        "short": "Short description for Personal App.",
-        "full": "Full description of Personal App."
+        "short": "Tab Device Permission Demo",
+        "full": "Tab Device Permission Demo"
     },
     "accentColor": "#FFFFFF",
     "staticTabs": [
       {
         "entityId": "index",
-        "name": "Personal Tab",
+        "name": "Device permission tab",
         "contentUrl": "https://<<BASE-URL>>/tab",
         "websiteUrl": "https://<<BASE-URL>>/tab",
         "scopes": [

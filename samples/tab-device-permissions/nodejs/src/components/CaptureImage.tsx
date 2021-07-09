@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { Card, Flex, Text, Button, CardHeader, CardBody, Image, Layout, Carousel } from '@fluentui/react-northstar'
 
@@ -18,7 +18,7 @@ const CaptureImage = () => {
   microsoftTeams.initialize()
  })
  
- //method to validate before capturing media
+ // Method to validate before capturing media
  function captureImage(){
     // Method to ask for image capture permission and then capture image 
     microsoftTeams.media.captureImage((error: microsoftTeams.SdkError, files: microsoftTeams.media.File[]) => {
@@ -35,7 +35,7 @@ const CaptureImage = () => {
     });
  }
  
-  //method to validate before capturing media
+  // Method to validate before capturing media
   function captureMultipleImages() {
     // Method to ask for image capture permission and then select media
     // maxMediaCount is the total no. of media that can be attached
@@ -53,20 +53,19 @@ const CaptureImage = () => {
             const imageArray: any[] = attachments.map((item, index) => {
                 return (
                     {
-                        key: index,
-                        id: index,
-                        content: (
-                          <Image
-                            src={"data:" + item.mimeType + ";base64," + item.preview}
-                            fluid
-                            alt={'image'}
-                          />
-                        ),
-                        'aria-label': "images",
+                      key: index,
+                      id: index,
+                      content: (
+                        <Image
+                          src={"data:" + item.mimeType + ";base64," + item.preview}
+                          fluid
+                          alt={'image'}
+                        />
+                      ),
+                      'aria-label': "images",
                     }
                 )
             })  
-
             setCapturedImages(imageArray);
           }
     });
@@ -85,9 +84,8 @@ const CaptureImage = () => {
           <Button content="Capture Image" onClick={captureImage}/>
         </Flex>
         </CardBody>
-        {capturedImage != '' && 
+        {capturedImage !== '' && 
         <Layout styles={{ maxWidth: '150px',}}
-        debug
         renderMainArea={() => (
             <Image
               fluid
@@ -106,18 +104,18 @@ const CaptureImage = () => {
         <Text content="Checks for permission before capturing image. You can capture multiple images or select them grom gallery." />
           <Button content="Capture multiple images" onClick={captureMultipleImages}/>
         </Flex>
-        {capturedImages.length != 0 && 
+        {capturedImages.length !== 0 && 
         <Carousel
-         ariaRoleDescription="carousel"
-         ariaLabel="Selected images"
-         navigation={{
+          ariaRoleDescription="carousel"
+          ariaLabel="Selected images"
+          navigation={{
             'aria-label': 'selected images',
-             items: capturedImages.map((item, index) => ({
-             key: index,
-             'aria-controls': item.id,
+              items: capturedImages.map((item, index) => ({
+              key: index,
+              'aria-controls': item.id,
               content: item.thumbnail,
-           })),
-        }}
+            })),
+          }}
          items={capturedImages}
          getItemPositionText={(index, size) => `${index + 1} of ${size}`}
         />
@@ -127,4 +125,5 @@ const CaptureImage = () => {
       </>
     );
 }
+
 export default CaptureImage;

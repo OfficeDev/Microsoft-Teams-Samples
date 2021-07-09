@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { Card, Flex, Text, Button, CardHeader, CardBody } from '@fluentui/react-northstar'
 
@@ -49,9 +49,10 @@ const ScanBarCode = () => {
            <Button content="Scan Barcode" onClick={scanBarCode}/>
         </Flex>
         </CardBody>
-       {barCodeValue != '' && <Text>Scanned Text: {barCodeValue}</Text>}
+       {barCodeValue !== '' && <Text>Scanned Text: {barCodeValue}</Text>}
       </Card>
       </>
     );
 }
+
 export default ScanBarCode;

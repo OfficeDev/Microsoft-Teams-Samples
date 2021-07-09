@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { Card, Flex, Text, Button, CardHeader, CardBody, Video } from '@fluentui/react-northstar'
 
@@ -23,9 +23,9 @@ const CaptureAudio = () => {
         // If there's any error, an alert shows the error message/code
         if (error) {
         if (error.message) {
-            alert(" ErrorCode: " + error.errorCode + error.message);
+          alert(" ErrorCode: " + error.errorCode + error.message);
         } else {
-            alert(" ErrorCode: " + error.errorCode);
+          alert(" ErrorCode: " + error.errorCode);
         }
     }
 
@@ -34,14 +34,13 @@ const CaptureAudio = () => {
       let audioResult = attachments[0];
       // setting state for preview
       setAudio("data:" + audioResult.mimeType + ";base64," + audioResult.preview)
-    }
-    });
+    }});
   }
 
   return(
      <>
      {/* Card for showing Video/Audio */}
-     <Card>
+      <Card>
         <CardHeader>
           <Text content="Media (Mobile Only)" weight="bold" />
         </CardHeader>
@@ -50,10 +49,11 @@ const CaptureAudio = () => {
         <Text content="Checks for permission to use media input" />
           <Button content="Capture audio" onClick={captureMedia}/>
         </Flex>
-        {audio != '' && <Video src={audio} variables={{height: '50px', width: '100%',}}/>}
+        {audio !== '' && <Video src={audio} variables={{height: '50px', width: '100%',}}/>}
         </CardBody>
       </Card>
       </>
     );
 }
+
 export default CaptureAudio;
