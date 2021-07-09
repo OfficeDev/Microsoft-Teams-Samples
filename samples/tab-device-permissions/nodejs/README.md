@@ -24,7 +24,7 @@ This is demo app to for tab device permissions.
 ![Install App](Images/install.png)
 1. Go to Device permission tab.
 1. Click on respective button to test the scenario. You will get prompt to accept permission request.
-![Accept Permissions](Images/allowPermissions.png)
+![Accept Permissions](Images/allowPermission.png)
 1. You can also try this on Mobile.<br/>
 ![Mobile Demo](Images/mainTab1.png)
 ![Mobile Demo](Images/mainTab2.png)
