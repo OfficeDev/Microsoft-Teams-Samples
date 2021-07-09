@@ -25,10 +25,16 @@ This is demo app to for tab device permissions.
 1. Go to Device permission tab.
 1. Click on respective button to test the scenario. You will get prompt to accept permission request.
 ![Accept Permissions](Images/allowPermission.png)
-1. You can also try this on Mobile.<br/>
+1. Try this on Mobile.<br/>
+
+Screenshot of available features:
 ![Mobile Demo](Images/mainTab1.png)
 ![Mobile Demo](Images/mainTab2.png)
+
+Screenshot of Capture image:
 ![Mobile Demo](Images/captureImage.png)
+
+Similarly, you can try out other features.
 
 > [!IMPORTANT]
   > Please take a look at [notes section in Device Permissions](https://docs.microsoft.com/microsoftteams/platform/concepts/device-capabilities/native-device-permissions?tabs=desktop) documentation as not all devices support these permissions.
