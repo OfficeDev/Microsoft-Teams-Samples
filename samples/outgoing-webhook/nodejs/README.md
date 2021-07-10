@@ -39,7 +39,17 @@ This project is an implementation of a very simple [Outgoing Webhook](https://do
 
 * In the directory in which you installed this project, type `node app.js`
 
-* In Microsoft Teams, in any channel in the team in which you created the Outgoing Webhook, you can type `@<botname> hello` (or anything else you like) and it will echo back its name and what you typed.
+* In Microsoft Teams, in any channel in the team in which you created the Outgoing Webhook, you can type `@<botname> <card-type>` then it will respond back a card with specified card type.
+  
+  Supported <card type>: "adaptive-card", "hero-card", "list-card", "o365-card", "thumbnail-card"
+
+Example screenshot to show Hero card:
+![Hero card](Images/heroCard.png)
+
+* If you type anything else apart from above mentioned type, it will echo back what you typed.
+
+Example screenshot to show Echo message:
+![Echo message](Images/echoMessage.png)
 
 ## Contributing
 
