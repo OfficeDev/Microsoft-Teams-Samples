@@ -13,24 +13,24 @@ import CaptureAudio from './CaptureAudio';
  * of your app.
  */
 const Tab = () => {
-    return(
-      <Flex column gap="gap.large">
-       {/* Component to capture image(s) */}
-       <CaptureImage/>
+  return (
+    <Flex column gap="gap.large">
+      {/* Component to capture image(s) */}
+      <CaptureImage />
 
-       {/* Component to capture audio */}
-       <CaptureAudio/>
+      {/* Component to capture audio */}
+      <CaptureAudio />
 
       {/* Component to scan barcode */}
-      <ScanBarCode/>
+      <ScanBarCode />
 
       {/* Component to show selected people */}
-      <PeoplePicker/>
+      <PeoplePicker />
 
       {/* Component to Get/Show geo-Location */}
-      <GetGeoLocation/>
-      </Flex>
-    );
+      <GetGeoLocation />
+    </Flex>
+  );
 }
 
 export default Tab;

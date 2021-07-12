@@ -8,8 +8,8 @@ import { Provider, teamsTheme } from '@fluentui/react-northstar';
 ReactDOM.render(
   <React.StrictMode>
     <Provider theme={teamsTheme}>
-    <App />
-  </Provider>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
