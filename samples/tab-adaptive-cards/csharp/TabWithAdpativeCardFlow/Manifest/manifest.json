@@ -1,0 +1,45 @@
+﻿{
+  "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.9",
+  "version": "1.0.0",
+  "id": "4d9e95ab-ebe3-4976-82e9-3526d5c54906",
+  "packageName": "com.microsoft.sequentialflowbot",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Tab With Adaptive Card",
+    "full": "Tab With Adaptive Card"
+  },
+  "description": {
+    "short": "View Tab With Adaptive Card",
+    "full": "This sample demos the tab with adaptive cards"
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
+  "staticTabs": [
+    {
+      "entityId": "homeTab",
+      "name": "Home",
+      "contentBotId": "8749ff03-ae9e-4d33-88d8-bc9761ea7335",
+      "scopes": [ "personal" ]
+    },
+    {
+      "entityId": "moreTab",
+      "name": "More",
+      "contentBotId": "8749ff03-ae9e-4d33-88d8-bc9761ea7335",
+      "scopes": [ "personal" ]
+    }
+  ],
+  "permissions": [ "identity", "messageTeamMembers" ],
+  "validDomains": [
+    "*.ngrok.io",
+    "token.botframework.com"
+  ]
+}
