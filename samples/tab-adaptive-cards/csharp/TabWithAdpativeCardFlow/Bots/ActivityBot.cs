@@ -1,6 +1,5 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-//
 // Generated with Bot Builder V4 SDK Template for Visual Studio v4.14.0
 
 using AdaptiveCards;
@@ -15,13 +14,22 @@ using System.Threading.Tasks;
 
 namespace TabWithAdpativeCardFlow.Bots
 {
+    /// <summary>
+    /// Bot Activity handler class
+    /// </summary>
     public class ActivityBot : TeamsActivityHandler
     {
-        protected override async Task<InvokeResponse> OnInvokeActivityAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
+        /// <summary>
+        /// Invoked when an invoke activity is received from the connector. Invoke activities can be used to communicate many different things.
+        /// </summary>
+        /// <param name="turnContext"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        protected override Task<InvokeResponse> OnInvokeActivityAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
         {
             if (turnContext.Activity.Name == "tab/fetch")
             {
-                return CreateInvokeResponse(new TabResponse
+                return Task.FromResult(CreateInvokeResponse(new TabResponse
                 {
                     Tab = new TabResponsePayload
                     {
@@ -41,11 +49,11 @@ namespace TabWithAdpativeCardFlow.Bots
                             },
                         },
                     },
-                });
+                }));
             }
             else if (turnContext.Activity.Name == "tab/submit")
             {
-                return CreateInvokeResponse(new TabResponse
+                return Task.FromResult(CreateInvokeResponse(new TabResponse
                 {
                     Tab = new TabResponsePayload
                     {
@@ -61,12 +69,16 @@ namespace TabWithAdpativeCardFlow.Bots
                             },
                         },
                     },
-                });
+                }));
             }
 
             return null;
         }
 
+        /// <summary>
+        /// Sample Adaptive card
+        /// </summary>
+        /// <returns></returns>
         private AdaptiveCard GetAdaptiveCard1()
         {
             AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
@@ -96,6 +108,10 @@ namespace TabWithAdpativeCardFlow.Bots
             return card;
         }
 
+        /// <summary>
+        /// Sample Adaptive card
+        /// </summary>
+        /// <returns></returns>
         private AdaptiveCard GetAdaptiveCard2()
         {
             AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))

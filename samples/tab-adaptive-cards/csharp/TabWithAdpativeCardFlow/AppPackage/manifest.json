@@ -11,7 +11,7 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Tab With Adaptive Card",
+    "short": "TabAdaptiveCard",
     "full": "Tab With Adaptive Card"
   },
   "description": {
@@ -27,13 +27,13 @@
     {
       "entityId": "homeTab",
       "name": "Home",
-      "contentBotId": "8749ff03-ae9e-4d33-88d8-bc9761ea7335",
+      "contentBotId": "{{BOT-ID}}",
       "scopes": [ "personal" ]
     },
     {
       "entityId": "moreTab",
       "name": "More",
-      "contentBotId": "8749ff03-ae9e-4d33-88d8-bc9761ea7335",
+      "contentBotId": "{{BOT-ID}}",
       "scopes": [ "personal" ]
     }
   ],

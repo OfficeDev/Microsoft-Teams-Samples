@@ -2,7 +2,9 @@
 
 Bot Framework v4 echo bot sample.
 
-This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that accepts input from the user and echoes it back.
+This bot has been created using [Bot Framework](https://dev.botframework.com), and it shows a tab that displays adaptive card.
+
+This feature shown in this sample is in Public Developer Preview and is supported in desktop and mobile.
 
 ## Prerequisites
 
@@ -12,6 +14,24 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
   # determine dotnet version
   dotnet --version
   ```
+- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+
+## Setup
+
+1. Run ngrok - point to port 3978
+
+```bash
+# ngrok http -host-header=rewrite 3978
+```
+
+2. Create a Bot Registration
+   In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+
+3. Modify the `manifest.json` in the `/AppPackage` folder and replace the `{{BOT-ID}}` with the id from step 2.
+
+4. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store.
+
+5. Modify the `/appsettings.json` and fill in the `{{ Bot Id }}` and `{{ Bot Password }}` with the id from step 2.
 
 ## To try this sample
 
@@ -39,17 +59,12 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
   - Select `TabWithAdpativeCardFlow.csproj` file
   - Press `F5` to run the project
 
-## Testing the bot using Bot Framework Emulator
+## Features of this sample
 
-[Bot Framework Emulator](https://github.com/microsoft/botframework-emulator) is a desktop application that allows bot developers to test and debug their bots on localhost or running remotely through a tunnel.
+- Tab showing Adaptive card with action controls.
 
-- Install the Bot Framework Emulator version 4.5.0 or greater from [here](https://github.com/Microsoft/BotFramework-Emulator/releases)
+![Adaptive Card](Images/TabAdaptiveCardFlow.png)
 
-### Connect to the bot using Bot Framework Emulator
-
-- Launch Bot Framework Emulator
-- File -> Open Bot
-- Enter a Bot URL of `http://localhost:3978/api/messages`
 
 ## Deploy the bot to Azure
 
