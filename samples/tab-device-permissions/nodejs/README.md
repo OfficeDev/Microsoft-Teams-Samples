@@ -1,5 +1,5 @@
 # Tab Device Permission Demo
-This is demo app to for tab device permissions.
+This is demo app to for [tab device permissions](https://docs.microsoft.com/microsoftteams/platform/concepts/device-capabilities/device-capabilities-overview).
 ## Getting started
 1. Install some sort of tunnelling service. These instructions assume you are using ngrok: https://ngrok.com/
 1. Begin your tunnelling service to get an https endpoint. For this example ngrok is used. Start an ngrok tunnel with the following command (you'll need the https endpoint for the bot registration):<br>
