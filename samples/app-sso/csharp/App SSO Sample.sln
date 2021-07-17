@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "app_sso", "app_sso\app_sso.csproj", "{AC80CEAA-E474-43CC-AE28-02B96BE44532}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App SSO Sample", "App SSO Sample\App SSO Sample.csproj", "{AC80CEAA-E474-43CC-AE28-02B96BE44532}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

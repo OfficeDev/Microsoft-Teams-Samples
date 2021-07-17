@@ -94,7 +94,7 @@ function getServerSideToken(clientSideToken) {
                     } else if (responseJson) {
                         accessToken = responseJson;
                         getUserInfo(context.userPrincipalName);
-                        getUserPhoto(context.userPrincipalName);
+                        getPhotoAsync(accessToken);
                     }
                 });
         });
@@ -143,32 +143,24 @@ function getUserInfo(principalName) {
     }
 }
 
-
-function getUserPhoto(principalName) {
-    if (principalName) {
-        let graphUrl = "https://graph.microsoft.com/v1.0/users/" + principalName +"/photo/$value";
-        $.ajax({
-            url: graphUrl,
-            type: "GET",
-            beforeSend: function (request) {
-                request.setRequestHeader("Authorization", `Bearer ${accessToken}`);
-            },
-            success: function (profile) {
-                console.log(profile);
-                let data = 'data:image/png;base64' + encodeUnicode(profile);
-                console.log(data);
-                var img = document.createElement('img');
-                img.src = data;
-                document.getElementById('divGraphProfile').appendChild(img);
-                $("#divGraphProfile").show();
-            },
-            error: function () {
-                console.log("Failed");
-            },
-            complete: function (data) {
-            }
-        });
-    }
+// Gets the user's photo
+function getPhotoAsync(token) {
+    let graphPhotoEndpoint = 'https://graph.microsoft.com/v1.0/me/photos/240x240/$value';
+    let request = new XMLHttpRequest();
+    request.open("GET", graphPhotoEndpoint, true);
+    request.setRequestHeader("Authorization", `Bearer ${token}`);
+    request.setRequestHeader("Content-Type", "image/png");
+    request.responseType = "blob";
+    request.onload = function (oEvent) {
+        let imageBlob = request.response;
+        if (imageBlob) {
+            let urlCreater = window.URL || window.webkitURL;
+            let imgUrl = urlCreater.createObjectURL(imageBlob);
+            $("#userPhoto").attr('src', imgUrl);
+            $("#userPhoto").show();
+        }
+    };
+    request.send();
 }
 
 function encodeUnicode(str) {

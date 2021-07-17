@@ -101,9 +101,41 @@ namespace Microsoft.BotBuilderSamples
             catch (Exception ex)
             {
                 Console.Write(ex);
-               return "http://adaptivecards.io/content/cats/1.png";
+                return "http://adaptivecards.io/content/cats/1.png";
             }
         }
+
+        public async Task<string> GetPublicURLForProfilePhoto(string id)
+        {
+            var graphClient = GetAuthenticatedClient();
+            try
+            {
+                var stream = await graphClient.Me.Photo.Content
+                            .Request()
+                            .GetAsync();
+
+                var fileName = id + "-ProflePhoto.png";
+                string imagePath = Path.Combine(".", "wwwroot", "photos");
+
+                if (!System.IO.Directory.Exists(imagePath))
+                    System.IO.Directory.CreateDirectory(imagePath);
+
+                imagePath = Path.Combine(imagePath, fileName);
+
+                using (var fileStream = System.IO.File.Create(imagePath))
+                {
+                    stream.Seek(0, SeekOrigin.Begin);
+                    stream.CopyTo(fileStream);
+                }
+                return  "/photos/" + fileName;
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+                return "http://adaptivecards.io/content/cats/1.png";
+            }
+        }
+
         private GraphServiceClient GetAuthenticatedClient()
         {
             var graphClient = new GraphServiceClient(

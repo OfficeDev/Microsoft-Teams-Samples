@@ -104,8 +104,8 @@
     {
       "entityId": "auth",
       "name": "SSO Tab",
-      "contentUrl": "<<DOMAIN-NAME>>/Home/Index",
-      "websiteUrl": "<<DOMAIN-NAME>>/Index",
+      "contentUrl": "https://<<DOMAIN-NAME>>/Home/Index",
+      "websiteUrl": "https://<<DOMAIN-NAME>>/Index",
       "scopes": [ "personal" ]
     }
   ],

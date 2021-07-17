@@ -242,7 +242,7 @@ namespace Microsoft.BotBuilderSamples
                 }
                 var client = new SimpleGraphClient(tokenResponse.Token);
                 var profile = await client.GetMyProfile();
-                var imagelink = await client.GetPhotoAsync();
+                var imagelink = _siteUrl +  await client.GetPublicURLForProfilePhoto(profile.Id);
                 return new MessagingExtensionActionResponse
                 {
                     Task = new TaskModuleContinueResponse

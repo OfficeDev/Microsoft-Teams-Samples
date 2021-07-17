@@ -21,4 +21,8 @@
     <PackageReference Include="Microsoft.Graph.Core" Version="1.25.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\photos\" />
+  </ItemGroup>
+
 </Project>
