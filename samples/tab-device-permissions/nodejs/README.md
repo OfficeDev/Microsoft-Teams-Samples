@@ -10,7 +10,7 @@ This is demo app to for tab device permissions.
     1. <<BASE_URI_DOMAIN>> change to your https endpoint from ngrok excluding the "https://" part
     1. Save the file and zip this file along with both the png icons (located next to it) together to create a manifest.zip file
 ## See it running
-1. Clone the sample and open it in Visual Studio. (Look at [similar steps if you are not sure](https://docs.microsoft.com/microsoftteams/platform/tutorials/get-started-dotnet-app-studio#download-the-sample))
+1. Clone the sample and open it in Visual Studio Code. (Look at [similar steps if you are not sure](https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-nodejs-app-studio?tabs=AS#download-the-sample))
 
 ## Build and Run
 In the project directory, execute:
