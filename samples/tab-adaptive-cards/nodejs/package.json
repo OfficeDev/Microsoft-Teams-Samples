@@ -15,6 +15,7 @@
   "author": "Microsoft",
   "license": "MIT",
   "dependencies": {
+    "@microsoft/microsoft-graph-client": "~2.0.0",
     "body-parser": "^1.19.0",
     "botbuilder": "~4.7.0",
     "botframework-connector": "^4.13.6",

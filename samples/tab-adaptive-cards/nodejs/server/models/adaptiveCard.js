@@ -1,7 +1,33 @@
 const { StatusCodes } = require('botbuilder');
+const { GraphClient } = require('../graphClient')
 
-const createFetchResponse = () => {
+const createAuthResponse = (signInLink) => {
+    console.log("Create Auth response")
+    const res = {
+        status: StatusCodes.OK,
+        body: {
+            "tab": {
+                "type": "auth",
+                "suggestedActions":{
+                    "actions":[
+                        {
+                            "type": "openUrl",
+                            "value": signInLink,
+                            "title": "Sign in to this app"
+                        }
+                    ]
+                }
+            },
+        }
+    };
+    return res;
+};
+
+const createFetchResponse = async (tokenResponse, userName) => {
     console.log("Create Invoke response")
+    const graphClient = new GraphClient(tokenResponse.token);
+    const profile = await graphClient.GetUserProfile();
+    console.log(profile);
     const res = {
         status: StatusCodes.OK,
         body: {
@@ -60,7 +86,7 @@ const adaptiveCard1 = {
             actions: [
                 {
                     type: 'Action.Submit',
-                    title: 'Action 1',
+                    title: 'Hide Action card',
                 },
                 {
                     type: 'Action.Submit',
@@ -112,5 +138,6 @@ const adaptiveCard2 = {
 
 module.exports = {
     createFetchResponse,
-    createSubmitResponse
+    createSubmitResponse,
+    createAuthResponse
 };
