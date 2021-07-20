@@ -43,23 +43,29 @@ class BotActivityHandler extends TeamsActivityHandler {
 
             const graphClient = new GraphClient(tokenResponse.token);
 
-            var profileImageUrl = 'https://cdn.vox-cdn.com/thumbor/Ndb49Uk3hjiquS041NDD0tPDPAs=/0x169:1423x914/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/7342855/microsoftteams.0.jpg';
-            await graphClient.GetUserPhoto().then(result => {
-                var imageType = "image/jpeg"
-                var imageBytes = Buffer.from(image.data).toString('base64');
-                profileImageUrl = `data:${imageType};base64,${imageBytes}`;
-                // Generating and returning continue response.
-                return adaptiveCards.createFetchResponse(profileImageUrl, context.activity.from.name);
-            }).catch((error) => {
-                return adaptiveCards.createFetchResponse(profileImageUrl, context.activity.from.name);
+            const profile = await graphClient.GetUserProfile().catch(error => {
+                console.log(error);
             });
 
+            const userImage = await graphClient.GetUserPhoto().catch(error => {
+                console.log(error);
+            });
+            console.log(userImage);
+            return adaptiveCards.createFetchResponse(userImage, profile.displayName);
         } else if (context.activity.name === 'tab/submit') {
             console.log('Trying to submit tab content');
+
+            const adapter = context.adapter;
+            await adapter.signOutUser(context, process.env.ConnectionName);
+
             // Generating and returning submit response.
             return adaptiveCards.createSubmitResponse();
         } else if (context.activity.name === "task/fetch") {
+            // Task Module task/fetch
             return adaptiveCards.invokeTaskResponse();
+        } else if (context.activity.name === "task/submit") {
+            // Task Module task/submit
+            return adaptiveCards.createFetchResponse();
         }
     }
 }
