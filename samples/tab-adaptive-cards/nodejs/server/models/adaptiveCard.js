@@ -1,7 +1,6 @@
 const { StatusCodes } = require('botbuilder');
 
-var profileImageUrl = '';
-var userName = '';
+// Card response for authentication
 const createAuthResponse = (signInLink) => {
     console.log("Create Auth response")
     const res = {
@@ -24,6 +23,7 @@ const createAuthResponse = (signInLink) => {
     return res;
 };
 
+// Card response for task module invoke request
 const invokeTaskResponse = () => {
     const response = {
         status: StatusCodes.OK,
@@ -45,11 +45,15 @@ const invokeTaskResponse = () => {
     return response;
 };
 
-const createFetchResponse = async (image, name) => {
+// Card response for tab fetch request
+const createFetchResponse = (userImage, displayName) => {
     console.log("Create Invoke response")
-    
-    profileImageUrl = image;
-    userName = name;
+    var profileImageUrl = '';
+    if (userImage) {
+        const imageType = "image/jpeg";
+        const imageBytes = Buffer.from(userImage).toString('base64');
+        profileImageUrl = `data:${imageType};base64,${imageBytes}`;
+    }
     const res = {
         status: StatusCodes.OK,
         body: {
@@ -58,10 +62,10 @@ const createFetchResponse = async (image, name) => {
                 "value": {
                     "cards": [
                         {
-                            "card": adaptiveCard1,
+                            "card": getAdaptiveCard1(profileImageUrl, displayName),
                         },
                         {
-                            "card": adaptiveCard2,
+                            "card": getAdaptiveCard2(),
                         }
                     ]
                 },
@@ -72,6 +76,7 @@ const createFetchResponse = async (image, name) => {
     return res;
 };
 
+// Card response for tab submit request
 const createSubmitResponse = () => {
     console.log("Create Invoke response")
     const res = {
@@ -82,7 +87,7 @@ const createSubmitResponse = () => {
                 "value": {
                     "cards": [
                         {
-                            "card": adaptiveCard2,
+                            "card": signOutCard,
                         }
                     ]
                 },
@@ -94,80 +99,98 @@ const createSubmitResponse = () => {
 };
 
 
-const adaptiveCard1 = {
-    $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
-    body: [
-        {
-            type: 'TextBlock',
-            size: 'Medium',
-            weight: 'Bolder',
-            text: 'Hello: '
-        },
-        {
-            type: 'Image',
-            height: '50px',
-            width: '50px',
-            url: profileImageUrl,
-        },
-        {
-            type: 'ActionSet',
-            actions: [
-                {
-                    type: 'Action.Submit',
-                    title: 'Hide Action card',
-                },
-                {
-                    type: "Action.Submit",
-                    title: "Show Task Module",
-                    data: {
-                      msteams: {
-                          type: "task/fetch"
-                      }
+const getAdaptiveCard1 = (image, name) => {
+    const adaptiveCard1 = {
+        $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
+        body: [
+            {
+                type: "ColumnSet",
+                columns: [
+                    {
+                        type: "Column",
+                        items: [
+                            {
+                                "type": "Image",
+                                "url": image ? image : "https://cdn.vox-cdn.com/thumbor/Ndb49Uk3hjiquS041NDD0tPDPAs=/0x169:1423x914/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/7342855/microsoftteams.0.jpg",
+                                "size": "Medium"
+                            }
+                        ],
+                        width: "auto"
+                    },
+                    {
+                        type: "Column",
+                        items: [
+                            {
+                                "type": "TextBlock",
+                                "weight": "Bolder",
+                                "text": 'Hello: ' + name,
+                                "wrap": true
+                            },
+                        ],
+                        "width": "stretch"
                     }
-                }
-            ]
-        }
-    ],
-    type: 'AdaptiveCard',
-    version: '1.4'
-};
+                ]
+            },
+            {
+                type: 'ActionSet',
+                actions: [
+                    {
+                        type: "Action.Submit",
+                        title: "Show Task Module",
+                        data: {
+                            msteams: {
+                                type: "task/fetch"
+                            }
+                        }
+                    }
+                ]
+            }
+        ],
+        type: 'AdaptiveCard',
+        version: '1.4'
+    };
+    return adaptiveCard1;
+}
 
-const adaptiveCard2 = {
-    $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
-    body: [
-        {
-            type: 'Image',
-            height: '300px',
-            width: '400px',
-            url: 'https://cdn.vox-cdn.com/thumbor/Ndb49Uk3hjiquS041NDD0tPDPAs=/0x169:1423x914/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/7342855/microsoftteams.0.jpg',
-        },
-        {
-            type: 'TextBlock',
-            size: 'Medium',
-            weight: 'Bolder',
-            text: 'tab/fetch is the first invoke request that your bot receives when a user opens an Adaptive Card tab. When your bot receives the request, it either sends a tab continue response or a tab auth response',
-            wrap: true,
-        },
-        {
-            type: 'TextBlock',
-            size: 'Medium',
-            weight: 'Bolder',
-            text: 'tab/submit request is triggered to your bot with the corresponding data through the Action.Submit function of Adaptive Card',
-            wrap: true,
-        },
-        {
-            type: 'ActionSet',
-            actions: [
-                {
-                    type: 'Action.Submit',
-                    title: 'Click to submit',
-                }
-            ],
-        }
-    ],
-    type: 'AdaptiveCard',
-    version: '1.4'
-};
+const getAdaptiveCard2 = () => {
+    const adaptiveCard2 = {
+        $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
+        body: [
+            {
+                type: 'Image',
+                height: '300px',
+                width: '400px',
+                url: 'https://cdn.vox-cdn.com/thumbor/Ndb49Uk3hjiquS041NDD0tPDPAs=/0x169:1423x914/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/7342855/microsoftteams.0.jpg',
+            },
+            {
+                type: 'TextBlock',
+                size: 'Medium',
+                weight: 'Bolder',
+                text: 'tab/fetch is the first invoke request that your bot receives when a user opens an Adaptive Card tab. When your bot receives the request, it either sends a tab continue response or a tab auth response',
+                wrap: true,
+            },
+            {
+                type: 'TextBlock',
+                size: 'Medium',
+                weight: 'Bolder',
+                text: 'tab/submit request is triggered to your bot with the corresponding data through the Action.Submit function of Adaptive Card',
+                wrap: true,
+            },
+            {
+                type: 'ActionSet',
+                actions: [
+                    {
+                        type: 'Action.Submit',
+                        title: 'Sign Out',
+                    }
+                ],
+            }
+        ],
+        type: 'AdaptiveCard',
+        version: '1.4'
+    };
+    return adaptiveCard2;
+}
 
 const adaptiveCardTaskModule = {
     $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
@@ -176,13 +199,28 @@ const adaptiveCardTaskModule = {
             type: 'TextBlock',
             size: 'Medium',
             weight: 'Bolder',
-            text: 'Hello: '
+            text: 'Sample task module flow for tab'
         },
         {
             type: 'Image',
             height: '50px',
             width: '50px',
             url: 'https://cdn.vox-cdn.com/thumbor/Ndb49Uk3hjiquS041NDD0tPDPAs=/0x169:1423x914/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/7342855/microsoftteams.0.jpg',
+        }
+    ],
+    type: 'AdaptiveCard',
+    version: '1.4'
+};
+
+const signOutCard = {
+    $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
+    body: [
+        {
+            type: 'TextBlock',
+            size: 'Medium',
+            weight: 'Bolder',
+            text: 'Sign out successful. Please refresh to Sign in again',
+            wrap: true,
         }
     ],
     type: 'AdaptiveCard',
