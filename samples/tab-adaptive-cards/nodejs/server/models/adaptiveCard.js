@@ -1,6 +1,7 @@
 const { StatusCodes } = require('botbuilder');
-const { GraphClient } = require('../graphClient')
 
+var profileImageUrl = '';
+var userName = '';
 const createAuthResponse = (signInLink) => {
     console.log("Create Auth response")
     const res = {
@@ -8,8 +9,8 @@ const createAuthResponse = (signInLink) => {
         body: {
             "tab": {
                 "type": "auth",
-                "suggestedActions":{
-                    "actions":[
+                "suggestedActions": {
+                    "actions": [
                         {
                             "type": "openUrl",
                             "value": signInLink,
@@ -23,11 +24,32 @@ const createAuthResponse = (signInLink) => {
     return res;
 };
 
-const createFetchResponse = async (tokenResponse, userName) => {
+const invokeTaskResponse = () => {
+    const response = {
+        status: StatusCodes.OK,
+        body: {
+            task: {
+                type: 'continue',
+                value: {
+                    card: {
+                        contentType: "application/vnd.microsoft.card.adaptive",
+                        content: adaptiveCardTaskModule
+                    },
+                    heigth: 250,
+                    width: 400,
+                    title: 'Sample Adaptive Card'
+                }
+            }
+        }
+    };
+    return response;
+};
+
+const createFetchResponse = async (image, name) => {
     console.log("Create Invoke response")
-    const graphClient = new GraphClient(tokenResponse.token);
-    const profile = await graphClient.GetUserProfile();
-    console.log(profile);
+    
+    profileImageUrl = image;
+    userName = name;
     const res = {
         status: StatusCodes.OK,
         body: {
@@ -79,7 +101,13 @@ const adaptiveCard1 = {
             type: 'TextBlock',
             size: 'Medium',
             weight: 'Bolder',
-            text: 'Test the tab view with Adaptive card'
+            text: 'Hello: '
+        },
+        {
+            type: 'Image',
+            height: '50px',
+            width: '50px',
+            url: profileImageUrl,
         },
         {
             type: 'ActionSet',
@@ -89,8 +117,13 @@ const adaptiveCard1 = {
                     title: 'Hide Action card',
                 },
                 {
-                    type: 'Action.Submit',
-                    title: 'Action 2',
+                    type: "Action.Submit",
+                    title: "Show Task Module",
+                    data: {
+                      msteams: {
+                          type: "task/fetch"
+                      }
+                    }
                 }
             ]
         }
@@ -136,8 +169,29 @@ const adaptiveCard2 = {
     version: '1.4'
 };
 
+const adaptiveCardTaskModule = {
+    $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
+    body: [
+        {
+            type: 'TextBlock',
+            size: 'Medium',
+            weight: 'Bolder',
+            text: 'Hello: '
+        },
+        {
+            type: 'Image',
+            height: '50px',
+            width: '50px',
+            url: 'https://cdn.vox-cdn.com/thumbor/Ndb49Uk3hjiquS041NDD0tPDPAs=/0x169:1423x914/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/7342855/microsoftteams.0.jpg',
+        }
+    ],
+    type: 'AdaptiveCard',
+    version: '1.4'
+};
+
 module.exports = {
     createFetchResponse,
     createSubmitResponse,
-    createAuthResponse
+    createAuthResponse,
+    invokeTaskResponse
 };

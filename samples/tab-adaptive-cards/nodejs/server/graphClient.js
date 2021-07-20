@@ -26,6 +26,10 @@ class GraphClient {
     async GetUserProfile() {
         return await this.graphClient.api('/me').get();
     }
+
+    async GetUserPhoto() {
+        return await this.graphClient.api('/me/photos/48x48/$value').get();
+    }
 }
 
 exports.GraphClient = GraphClient;
