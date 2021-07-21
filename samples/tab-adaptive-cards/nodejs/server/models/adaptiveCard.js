@@ -46,14 +46,18 @@ const invokeTaskResponse = () => {
 };
 
 // Card response for tab fetch request
-const createFetchResponse = (userImage, displayName) => {
-    console.log("Create Invoke response")
+const createFetchResponse = async (userImage, displayName) => {
+    console.log("Create Invoke response");
     var profileImageUrl = '';
-    if (userImage) {
-        const imageType = "image/jpeg";
-        const imageBytes = Buffer.from(userImage).toString('base64');
-        profileImageUrl = `data:${imageType};base64,${imageBytes}`;
-    }
+
+    // Converting image of Blob type to base64 string for rendering as image.
+    await userImage.arrayBuffer().then(result => {
+        console.log(userImage.type);
+        const imageBytes = Buffer.from(result).toString('base64');
+        profileImageUrl = `data:${userImage.type};base64,${imageBytes}`;
+        console.log(profileImageUrl)
+    }).catch(error => {console.log(error)});
+    
     const res = {
         status: StatusCodes.OK,
         body: {
