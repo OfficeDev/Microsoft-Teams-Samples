@@ -55,9 +55,8 @@ const createFetchResponse = async (userImage, displayName) => {
         console.log(userImage.type);
         const imageBytes = Buffer.from(result).toString('base64');
         profileImageUrl = `data:${userImage.type};base64,${imageBytes}`;
-        console.log(profileImageUrl)
-    }).catch(error => {console.log(error)});
-    
+    }).catch(error => { console.log(error) });
+
     const res = {
         status: StatusCodes.OK,
         body: {
@@ -82,7 +81,7 @@ const createFetchResponse = async (userImage, displayName) => {
 
 // Card response for tab submit request
 const createSubmitResponse = () => {
-    console.log("Create Invoke response")
+    console.log("Submit response")
     const res = {
         status: StatusCodes.OK,
         body: {
@@ -102,7 +101,6 @@ const createSubmitResponse = () => {
     return res;
 };
 
-
 const getAdaptiveCard1 = (image, name) => {
     const adaptiveCard1 = {
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
@@ -115,7 +113,7 @@ const getAdaptiveCard1 = (image, name) => {
                         items: [
                             {
                                 "type": "Image",
-                                "url": image ? image : "https://cdn.vox-cdn.com/thumbor/Ndb49Uk3hjiquS041NDD0tPDPAs=/0x169:1423x914/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/7342855/microsoftteams.0.jpg",
+                                "url": image ? `${image}` : "https://cdn.vox-cdn.com/thumbor/Ndb49Uk3hjiquS041NDD0tPDPAs=/0x169:1423x914/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/7342855/microsoftteams.0.jpg",
                                 "size": "Medium"
                             }
                         ],
@@ -223,7 +221,7 @@ const signOutCard = {
             type: 'TextBlock',
             size: 'Medium',
             weight: 'Bolder',
-            text: 'Sign out successful. Please refresh to Sign in again',
+            text: 'Sign out successful. Please refresh to Sign in again.',
             wrap: true,
         }
     ],

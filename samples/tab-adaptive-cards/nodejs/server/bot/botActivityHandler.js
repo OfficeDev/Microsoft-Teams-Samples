@@ -50,7 +50,7 @@ class BotActivityHandler extends TeamsActivityHandler {
             const userImage = await graphClient.GetUserPhoto().catch(error => {
                 console.log(error);
             });
-            console.log(userImage);
+
             return adaptiveCards.createFetchResponse(userImage, profile.displayName);
         } else if (context.activity.name === 'tab/submit') {
             console.log('Trying to submit tab content');
@@ -63,10 +63,7 @@ class BotActivityHandler extends TeamsActivityHandler {
         } else if (context.activity.name === "task/fetch") {
             // Task Module task/fetch
             return adaptiveCards.invokeTaskResponse();
-        } else if (context.activity.name === "task/submit") {
-            // Task Module task/submit
-            return adaptiveCards.createFetchResponse();
-        }
+        } 
     }
 }
 

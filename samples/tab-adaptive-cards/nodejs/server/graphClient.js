@@ -28,7 +28,7 @@ class GraphClient {
     }
 
     async GetUserPhoto() {
-        return await this.graphClient.api('/me/photos/48x48/$value').get();
+        return await this.graphClient.api('/me/photo/$value').get();
     }
 }
 
