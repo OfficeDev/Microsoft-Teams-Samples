@@ -1,0 +1,340 @@
+﻿<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Teams SDK-->
+<script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js" integrity="sha512-UNM1njAgOFUa74Z0bADwAq8gbTcqZC8Ej4xPSzpnh0l6KMevwvkBvbldF9uR++qKeJ+MOZHRjV1HZjoRvjDfNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="~/AzureStorage/azure-storage-blob.js"></script>
+<!-- JavaScript Bundle-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<title>QR Scanner</title>
+
+<style>
+    #PreviewImg {
+        width: 100px;
+        height: 100px;
+        margin: 2px;
+    }
+</style>
+
+<div id="taskModuleContainer" class="container">
+    <div id="qrScannerClick" class="my-2" onclick="scanBarCode()">
+        <label for="barcode" class="barcodescan">Scan Barcode</label>
+        <i class="bi bi-upc-scan float-end"></i>
+    </div>
+
+    <div>
+        <div class="d-flex mb-1">
+            <label for="item-name" class="col-5 col-form-label">Item Name</label>
+            <label class="col-1 col-form-label">:</label>
+            <div class="col-6">
+                <div class="form-control-plaintext mx-3 col-auto" id="itemName"></div>
+            </div>
+        </div>
+        <div class="d-flex mb-1">
+            <label for="item-code" class="col-5 col-form-label">Item Code</label>
+            <label class="col-1 col-form-label">:</label>
+            <div class="col-6">
+                <div class="form-control-plaintext mx-3" id="itemCode"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex mb-3">
+        <button type="button" id="peoplePickerClick" class="col-5 btn btn-light" onclick="peoplePicker()">Assign to</button>
+        <label class="col-1 col-form-label">:</label>
+        <div class="col-6">
+            <div class="form-control-plaintext mx-3" id="assignedTo"></div>
+        </div>
+    </div>
+
+    <div>
+        <div class="mb-3">
+            <label for="images-captured" class="form-label">Upload a picture</label>
+            <div id="imageClick" class="my-2" onclick="selectImage()">
+                <label for="ImageOutput">Click to take picture</label>
+                <i class="bi bi-camera float-end"></i>
+                <hr />
+            </div>
+            <div id="ImageOutput"></div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="comment" class="form-label">Comments</label>
+        <textarea class="form-control" id="CommentsID" placeholder="Add comments here" noresize></textarea>
+    </div>
+
+    <div>
+        <div class="mb-3">
+            <div id="audioClick" class="my-2" onclick="selectAudioRecord()">
+                <span class="col-1/2 btn btn-light" id="basic-addon1">
+                    <i class="bi bi-mic"></i>
+                </span>
+                <label for="audio-recorded">Record your message</label>
+                <hr />
+            </div>
+            <audio id="AudioOutput"></audio>
+        </div>
+    </div>
+
+    <button id="submitClick" type="button" class="btn btn-primary mx-auto d-flex" onclick="submit()">Submit</button>
+</div>
+
+
+<script>
+
+    microsoftTeams.initialize();
+
+    var requestId = "";
+    var itemName = "";
+    var itemCode = "";
+    var imagesBlobUrl = [];
+    var audioBlobUrl = "";
+    var maxImageCount = 5;
+    var assignedTo;
+    var submittedByMail;
+    var imagesCaptured = [];
+    var audioRecorded = "";
+
+    window.onload = function () {
+        microsoftTeams.getContext(function (context) {
+            console.log(context);
+            submittedByMail = context.userPrincipalName;
+        })
+    }
+
+    function scanBarCode() {
+        var config = {
+            timeOutIntervalInSec: 30
+        };
+        microsoftTeams.media.scanBarCode(function (error, decodedText) {
+            if (error) {
+                alert("Error in reading Barcode");
+                if (error.message) {
+                    alert(" ErrorCode: " + error.errorCode + error.message);
+                }
+                else {
+                    alert(" ErrorCode: " + error.errorCode);
+                }
+            }
+            else if (decodedText) {
+                var barcodeCapturedOutput = decodedText.split("|||");
+                itemName = barcodeCapturedOutput[0];
+                itemCode = barcodeCapturedOutput[1];
+                document.getElementById("itemName").innerHTML = itemName;
+                document.getElementById("itemCode").innerHTML = itemCode;
+            }
+            else {
+                alert("No Data in the BarCode");
+            }
+        }, config);
+    }
+
+    function peoplePicker() {
+        microsoftTeams.appInitialization.notifySuccess();
+        microsoftTeams.people.selectPeople(function (error, people) {
+            if (error) {
+                if (error.message) {
+                    alert(" ErrorCode: " + error.errorCode + error.message);
+                }
+                else {
+                    alert(" ErrorCode: " + error.errorCode);
+                }
+            }
+            if (people) {
+                var peopleString = JSON.stringify(people[0]);
+                var peopleJSON = JSON.parse(peopleString);
+                document.getElementById("assignedTo").innerHTML = peopleJSON.displayName;
+                assignedTo = peopleJSON;
+            }
+        });
+    }
+
+    function selectImage() {
+        if (maxImageCount) {
+            var imageProp = {
+                sources: [microsoftTeams.media.Source.Camera, microsoftTeams.media.Source.Gallery],
+                startMode: microsoftTeams.media.CameraStartMode.Photo,
+                ink: true,
+                cameraSwitcher: true,
+                textSticker: true,
+                enableFilter: true,
+            };
+            var mediaInput = {
+                mediaType: microsoftTeams.media.MediaType.Image,
+                maxMediaCount: maxImageCount,
+                imageProps: imageProp
+            };
+            microsoftTeams.media.selectMedia(mediaInput, function (error, attachments) {
+                if (error) {
+                    if (error.message) {
+                        alert(" ErrorCode: " + error.errorCode + error.message);
+                    }
+                    else {
+                        alert(" ErrorCode: " + error.errorCode);
+                    }
+                }
+                if (attachments) {
+                    var count = attachments.length;
+                    for (var i = 0; i < count && maxImageCount; i++) {
+                        var result = attachments[i];
+                        result.getMedia(function (error, blob) {
+                            if (blob) {
+                                if (blob.type.includes("image/jpeg")) {
+                                    var reader = new window.FileReader();
+                                    reader.readAsDataURL(blob);
+                                    reader.onloadend = function () {
+                                        var imgElement = document.createElement("IMG");
+                                        imgElement.setAttribute("src", reader.result);
+                                        imgElement.setAttribute("id", "PreviewImg");
+                                        imgElement.setAttribute("class", "img-thumbnail");
+                                        document.getElementById("ImageOutput").appendChild(imgElement);
+                                        var imageSource = imgElement.src;
+                                        imagesCaptured.push(imageSource);
+                                        maxImageCount--;
+                                    }
+                                }
+                            }
+                            if (error) {
+                                if (error.message) {
+                                    alert(" ErrorCode: " + error.errorCode + error.message);
+                                }
+                                else {
+                                    alert(" ErrorCode: " + error.errorCode);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+        else
+            alert("Maximum Number of Images already Selected");
+    }
+
+    function selectAudioRecord() {
+        var mediaInput = {
+            mediaType: microsoftTeams.media.MediaType.Audio,
+            maxMediaCount: 1,
+        };
+        microsoftTeams.media.selectMedia(mediaInput, function (error, attachments) {
+            if (error) {
+                if (error.message) {
+                    alert(" ErrorCode: " + error.errorCode + error.message);
+                }
+                else {
+                    alert(" ErrorCode: " + error.errorCode);
+                }
+            }
+            var audioResult = attachments[0];
+            var audioElement = document.createElement("audio");
+            audioElement.setAttribute("src", ("data:" + audioResult.mimeType + ";base64," + audioResult.preview));
+            AudioOutput.controls = true;
+            document.getElementById("AudioOutput").src = audioElement.src;
+            audioRecorded = audioElement.src;
+        });
+    }
+
+
+    async function submit() {
+        if (assignedTo == null) {
+            alert("Assign the Request to Approver to Submit");
+        }
+        else {
+            document.getElementById("submitClick").disabled = true;
+            document.getElementById("CommentsID").disabled = true;
+            document.getElementById("audioClick").disabled = true;
+            document.getElementById("imageClick").disabled = true;
+            document.getElementById("peoplePickerClick").disabled = true;
+            document.getElementById("qrScannerClick").disabled = true;
+            var status = await uploadToBlob();
+            if (status === "Success") {
+                var BarcodeTaskModuleInfo = {
+                    RequestId: requestId,
+                    ItemName: itemName,
+                    ItemCode: itemCode,
+                    ImagesOutput: imagesBlobUrl,
+                    RecorderOutput: audioBlobUrl,
+                    AssignedTo: assignedTo,
+                    SubmittedByMail: submittedByMail,
+                    Comments: $("#CommentsID").val()
+                }
+                console.log(BarcodeTaskModuleInfo);
+                microsoftTeams.tasks.submitTask(BarcodeTaskModuleInfo);
+                return true;
+            }
+        }
+    }
+
+    async function uploadToBlob() {
+        var accountName;
+        var sasString;
+        var containerName;
+        await $.ajax({
+            type: 'GET',
+            url: '/BlobAccessDetails',
+            success: function (response) {
+                console.log(response);
+                accountName = response[0];
+                containerName = response[1];
+                sasString = response[2];
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                alert("textStatus: " + textStatus + ", errorThrown:" + response);
+            },
+        });
+        var containerURL = new azblob.ContainerURL(
+            `https://${accountName}.blob.core.windows.net/${containerName}?${sasString}`,
+            azblob.StorageURL.newPipeline(new azblob.AnonymousCredential));
+
+        var staticUrl = `https://${accountName}.blob.core.windows.net/${containerName}/`;
+
+        requestId = uuid.v4().toUpperCase();
+        try {
+            var promises = [];
+
+            if (imagesCaptured.length != 0) {
+                var i = 0;
+                for (var imageData of imagesCaptured) {
+                    await fetch(imageData)
+                        .then(res => res.blob())
+                        .then(async blob => {
+                            var file = new File([blob], requestId + "-IMG-" + i + ".jpeg", { type: "image/jpeg" });
+                            var blockBlobURL = azblob.BlockBlobURL.fromContainerURL(containerURL, file.name);
+                            promises.push(azblob.uploadBrowserDataToBlockBlob(azblob.Aborter.none, file, blockBlobURL));
+                            var currentUrl = staticUrl + file.name;
+                            imagesBlobUrl.push(currentUrl);
+                            i++;
+                            await Promise.all(promises);
+                        });
+                }
+            }
+
+            if (audioRecorded != "") {
+                await fetch(audioRecorded)
+                    .then(res => res.blob())
+                    .then(async blob => {
+                        var file = new File([blob], requestId + "-AUD.mp3", { type: "video/mp4" });
+                        var blockBlobURL = azblob.BlockBlobURL.fromContainerURL(containerURL, file.name);
+                        promises.push(azblob.uploadBrowserDataToBlockBlob(azblob.Aborter.none, file, blockBlobURL));
+                        audioBlobUrl = staticUrl + file.name;
+                        await Promise.all(promises);
+                    });
+            }
+            await Promise.all(promises);
+            return "Success";
+        }
+        catch (error) {
+            alert(error.body.message);
+            return "Failed";
+        }
+    }
+
+</script>

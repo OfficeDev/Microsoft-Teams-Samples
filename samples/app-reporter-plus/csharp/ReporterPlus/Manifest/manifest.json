@@ -1,0 +1,62 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.9",
+  "version": "1.0",
+  "id": "<<MicrosoftAppId>>",
+  "packageName": "com.device.qrcode",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "<<BaseUrl>>",
+    "privacyUrl": "<<BaseUrl>>/privacy",
+    "termsOfUseUrl": "<<BaseUrl>>/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Reporter++",
+    "full": "Reporter++ App"
+  },
+  "description": {
+    "short": "Demonistration of Reporter++ App",
+    "full": "The Reporter++ App demonstartes the features of Microsoft Teams Device Capabilities."
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [
+    {
+      "botId": "<<MicrosoftAppId>>",
+      "needsChannelSelector": false,
+      "isNotificationOnly": false,
+      "scopes": [
+        "team",
+        "groupchat"
+      ]
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "<<MicrosoftAppId>>",
+      "commands": [
+        {
+          "id": "BarCodeScanner",
+          "description": "Bar Code Sacnner Task Module",
+          "title": "Bar Code Scanner",
+          "type": "action",
+          "fetchTask": true,
+          "context": [ "compose", "message" ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.ngrok.io"
+  ],
+  "devicePermissions": [
+    "media"
+  ]
+}

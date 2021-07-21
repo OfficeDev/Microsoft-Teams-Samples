@@ -1,0 +1,16 @@
+﻿<html lang="en">
+<head>
+    <title>ReporterPlus</title>
+
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js" asp-append-version="true"></script>
+
+    @RenderSection("scripts", required: false)
+</head>
+<body class="theme-light" style="margin:0px; padding:0px;">
+    <div class="surface" style="margin:0px; padding:0px;">
+        <div class="panel" style="margin:0px; padding:0px;">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>
