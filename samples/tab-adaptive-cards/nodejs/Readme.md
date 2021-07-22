@@ -8,9 +8,25 @@ This feature shown in this sample is in Public Developer Preview and is supporte
 
 ## Key features
 
-- Tab showing Adaptive card with action controls.
+- Tab showing Adaptive card with action controls
 
-![Adaptive Card](Images/TabAdaptiveCardFlow.png)
+![Adaptive Card](Images/home-page.png)
+
+- Task module
+
+![Adaptive Card](Images/task-module.png)
+
+- Sign in card
+
+![Adaptive Card](Images/sign-in.png)
+
+- Sign in popup
+
+![Adaptive Card](Images/sign-in-popup.png)
+
+- Sign out card
+
+![Adaptive Card](Images/sign-out.png)
 
 ## Prerequisites
 
