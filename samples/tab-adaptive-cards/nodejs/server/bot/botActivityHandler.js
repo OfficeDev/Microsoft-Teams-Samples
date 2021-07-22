@@ -63,6 +63,9 @@ class BotActivityHandler extends TeamsActivityHandler {
         } else if (context.activity.name === "task/fetch") {
             // Task Module task/fetch
             return adaptiveCards.invokeTaskResponse();
+        } else if (context.activity.name === "task/submit") {
+            // Task Module task/submit
+            return adaptiveCards.taskSubmitResponse();
         } 
     }
 }

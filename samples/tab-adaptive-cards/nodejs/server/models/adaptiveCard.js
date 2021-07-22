@@ -101,6 +101,34 @@ const createSubmitResponse = () => {
     return res;
 };
 
+// Card response for tab submit request
+const taskSubmitResponse = () => {
+    console.log("Task Submit response")
+    const res = {
+        status: StatusCodes.OK,
+        body: {
+            "task":{
+                "value": {
+                    "tab": {
+                        "type": "continue",
+                        "value": {
+                            "cards": [
+                                {
+                                    "card": taskSubmitCard
+                                }
+                            ]
+                        }
+                    }
+                },
+                "type": "continue"
+            },
+            "responseType": "task"
+        }
+    };
+
+    return res;
+};
+
 const getAdaptiveCard1 = (image, name) => {
     const adaptiveCard1 = {
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
@@ -208,6 +236,20 @@ const adaptiveCardTaskModule = {
             height: '50px',
             width: '50px',
             url: 'https://cdn.vox-cdn.com/thumbor/Ndb49Uk3hjiquS041NDD0tPDPAs=/0x169:1423x914/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/7342855/microsoftteams.0.jpg',
+        },
+        {
+            type: 'ActionSet',
+            actions: [
+                {
+                    type: "Action.Submit",
+                    title: "Close",
+                    data: {
+                        msteams: {
+                            type: "task/submit"
+                        }
+                    }
+                }
+            ]
         }
     ],
     type: 'AdaptiveCard',
@@ -229,9 +271,25 @@ const signOutCard = {
     version: '1.4'
 };
 
+const taskSubmitCard = {
+    $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
+    body: [
+        {
+            type: 'TextBlock',
+            size: 'Medium',
+            weight: 'Bolder',
+            text: 'The action called task/submit. Please refresh to laod contents again.',
+            wrap: true,
+        }
+    ],
+    type: 'AdaptiveCard',
+    version: '1.4'
+};
+
 module.exports = {
     createFetchResponse,
     createSubmitResponse,
     createAuthResponse,
-    invokeTaskResponse
+    invokeTaskResponse,
+    taskSubmitResponse
 };
