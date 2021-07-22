@@ -10,23 +10,23 @@ This feature shown in this sample is in Public Developer Preview and is supporte
 
 - Tab showing Adaptive card with action controls
 
-![Adaptive Card](Images/home-page.png)
+![Home Page](Images/home-page.png)
 
 - Task module
 
-![Adaptive Card](Images/task-module.png)
+![Task Module](Images/task-module.png)
 
 - Sign in card
 
-![Adaptive Card](Images/sign-in.png)
+![Sign in Card](Images/sign-in.png)
 
 - Sign in popup
 
-![Adaptive Card](Images/sign-in-popup.png)
+![Sing in popup](Images/sign-in-popup.png)
 
 - Sign out card
 
-![Adaptive Card](Images/sign-out.png)
+![Sign out Card](Images/sign-out.png)
 
 ## Prerequisites
 
