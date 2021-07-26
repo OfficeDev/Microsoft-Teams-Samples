@@ -26,14 +26,14 @@ namespace TabWithAdpativeCardFlow
         }
 
         //Fetching user's profile 
-        public async Task<User> GetMyProfile()
+        public async Task<User> GetUserProfile()
         {
             var graphClient = GetAuthenticatedClient();
             return await graphClient.Me.Request().GetAsync();
         }
 
         //Fetching user's photo 
-        public async Task<Stream> GetMyPhoto()
+        public async Task<Stream> GetUserPhoto()
         {
             var graphClient = GetAuthenticatedClient();
             return await graphClient.Me.Photo.Content.Request().GetAsync();
@@ -54,6 +54,7 @@ namespace TabWithAdpativeCardFlow
 
                         return Task.CompletedTask;
                     }));
+
             return graphClient;
         }
     }

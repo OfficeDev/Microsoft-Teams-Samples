@@ -16,10 +16,9 @@ namespace TabWithAdpativeCardFlow.Helpers
     public static class CardHelper
     {
         /// <summary>
-        /// Sample Adaptive card
+        /// Sample Adaptive card to show in tab.
         /// </summary>
-        /// <returns></returns>
-        public static AdaptiveCard GetAdaptiveCard1()
+        public static AdaptiveCard GetSampleAdaptiveCard1(string displayName)
         {
             AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
             {
@@ -48,7 +47,7 @@ namespace TabWithAdpativeCardFlow.Helpers
                                 {
                                     new AdaptiveTextBlock
                                     {
-                                        Text = "Hello: Mod",
+                                        Text = "Hello " + displayName,
                                         Weight = AdaptiveTextWeight.Bolder,
                                         Wrap = true,
                                     },
@@ -77,10 +76,9 @@ namespace TabWithAdpativeCardFlow.Helpers
         }
 
         /// <summary>
-        /// Sample Adaptive card
+        /// Sample Adaptive card to show in tab.
         /// </summary>
-        /// <returns></returns>
-        public static AdaptiveCard GetAdaptiveCard2()
+        public static AdaptiveCard GetSampleAdaptiveCard2()
         {
             AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
             {
@@ -107,7 +105,6 @@ namespace TabWithAdpativeCardFlow.Helpers
                         Wrap = true,
                     },
                 },
-
                 Actions = new List<AdaptiveAction>
                 {
                     new AdaptiveSubmitAction
@@ -121,9 +118,8 @@ namespace TabWithAdpativeCardFlow.Helpers
         }
 
         /// <summary>
-        /// Sample Adaptive card for Task module
+        /// Sample Adaptive card for Task module.
         /// </summary>
-        /// <returns></returns>
         public static Attachment GetAdaptiveCardForTaskModule()
         {
             AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
@@ -140,12 +136,11 @@ namespace TabWithAdpativeCardFlow.Helpers
                     {
                         Url = new Uri("https://cdn.vox-cdn.com/thumbor/Ndb49Uk3hjiquS041NDD0tPDPAs=/0x169:1423x914/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/7342855/microsoftteams.0.jpg"),
                         AltText = "AlternativeText",
-                        PixelHeight = 50,
-                        PixelWidth = 50,
+                        PixelHeight = 80,
+                        PixelWidth = 80,
                         Spacing = AdaptiveSpacing.Medium,
                     },
                 },
-
                 Actions = new List<AdaptiveAction>
                 {
                     new AdaptiveSubmitAction
@@ -170,9 +165,8 @@ namespace TabWithAdpativeCardFlow.Helpers
         }
 
         /// <summary>
-        /// Sample Adaptive card for sign out success message
+        /// Sample Adaptive card for sign out success message.
         /// </summary>
-        /// <returns></returns>
         public static AdaptiveCard GetSignOutCard()
         {
             AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
@@ -192,10 +186,9 @@ namespace TabWithAdpativeCardFlow.Helpers
         }
 
         /// <summary>
-        /// Sample Adaptive card task module submit
+        /// Sample Adaptive card task module submit.
         /// </summary>
-        /// <returns></returns>
-        public static AdaptiveCard GetTaskModuleSubmitCard()
+        public static Attachment GetTaskModuleSubmitCard()
         {
             AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
             {
@@ -203,14 +196,18 @@ namespace TabWithAdpativeCardFlow.Helpers
                 {
                     new AdaptiveTextBlock
                     {
-                        Text = "The action called task/submit. Please refresh to load contents again.",
+                        Text = "The action called task/submit",
                         Weight = AdaptiveTextWeight.Bolder,
                         Spacing = AdaptiveSpacing.Medium,
                     },
                 },
             };
 
-            return card;
+            return new Attachment()
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = card,
+            };
         }
     }
 }

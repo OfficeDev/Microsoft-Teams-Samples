@@ -8,27 +8,25 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
-using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using TabWithAdpativeCardFlow.Helpers;
+using Newtonsoft.Json;
+using TabWithAdpativeCardFlow.Models;
 
 namespace TabWithAdpativeCardFlow.Bots
 {
     /// <summary>
-    /// Bot Activity handler class
+    /// Bot Activity handler class.
     /// </summary>
     public class ActivityBot : TeamsActivityHandler
     {
         private readonly string _connectionName;
 
-        private readonly OAuthClient oAuthClient;
-
-        public ActivityBot(IConfiguration configuration, OAuthClient oAuthClient)
+        public ActivityBot(IConfiguration configuration)
         {
-            this.oAuthClient = oAuthClient ?? throw new ArgumentNullException(nameof(oAuthClient));
             _connectionName = configuration["ConnectionName"] ?? throw new NullReferenceException("ConnectionName");
         }
 
@@ -37,18 +35,16 @@ namespace TabWithAdpativeCardFlow.Bots
         /// </summary>
         /// <param name="turnContext"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <returns>Invoke response.</returns>
         protected override async Task<InvokeResponse> OnInvokeActivityAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
         {
             var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
 
             if (turnContext.Activity.Name == "tab/fetch")
             {
-                var state = turnContext.TurnState.ToString(); // Check the state value
-                var token = await this.oAuthClient.UserToken.GetAadTokensAsync(turnContext.Activity.From.Id, _connectionName, new Microsoft.Bot.Schema.AadResourceUrls { ResourceUrls = new string[] { "https://graph.microsoft.com/" } });
-                var tokenResponse = await GetTokenResponse(turnContext, state, cancellationToken);
-                var client = new SimpleGraphClient(tokenResponse.Token);
-                var profile = await client.GetMyProfile();
+                // Check the state value
+                var state = JsonConvert.DeserializeObject<AdaptiveCardAction>(turnContext.Activity.Value.ToString()); 
+                var tokenResponse = await GetTokenResponse(turnContext, state.State, cancellationToken);
 
                 if (tokenResponse == null || string.IsNullOrEmpty(tokenResponse.Token))
                 {
@@ -79,6 +75,10 @@ namespace TabWithAdpativeCardFlow.Bots
                     });
                 }
 
+                var client = new SimpleGraphClient(tokenResponse.Token);
+                var profile = await client.GetUserProfile();
+                var photo = await client.GetUserPhoto();
+
                 return CreateInvokeResponse(new TabResponse
                 {
                     Tab = new TabResponsePayload
@@ -90,11 +90,11 @@ namespace TabWithAdpativeCardFlow.Bots
                             {
                                 new TabResponseCard
                                 {
-                                    Card = CardHelper.GetAdaptiveCard1()
+                                    Card = CardHelper.GetSampleAdaptiveCard1(profile.DisplayName)
                                 },
                                 new TabResponseCard
                                 {
-                                    Card = CardHelper.GetAdaptiveCard2()
+                                    Card = CardHelper.GetSampleAdaptiveCard2()
                                 },
                             },
                         },
@@ -133,8 +133,8 @@ namespace TabWithAdpativeCardFlow.Bots
                         Value = new TaskModuleTaskInfo()
                         {
                             Card = CardHelper.GetAdaptiveCardForTaskModule(),
-                            Height = 250,
-                            Width = 400,
+                            Height = 200,
+                            Width = 350,
                             Title = "Sample Adaptive Card",
                         },
                     },
@@ -142,20 +142,17 @@ namespace TabWithAdpativeCardFlow.Bots
             }
             else if (turnContext.Activity.Name == "task/submit")
             {
-                return CreateInvokeResponse(new TabResponse
+                return CreateInvokeResponse(new TaskModuleResponse
                 {
-                    Tab = new TabResponsePayload
+                    Task = new TaskModuleContinueResponse
                     {
                         Type = "continue",
-                        Value = new TabResponseCards
+                        Value = new TaskModuleTaskInfo()
                         {
-                            Cards = new List<TabResponseCard>
-                            {
-                                new TabResponseCard
-                                {
-                                    Card = CardHelper.GetTaskModuleSubmitCard()
-                                },
-                            },
+                            Card = CardHelper.GetTaskModuleSubmitCard(),
+                            Height = 200,
+                            Width = 350,
+                            Title = "Sample Adaptive Card",
                         },
                     },
                 });
@@ -164,13 +161,9 @@ namespace TabWithAdpativeCardFlow.Bots
             return null;
         }
 
-        private async Task<string> GetSignInLinkAsync(ITurnContext turnContext, CancellationToken cancellationToken)
-        {
-            var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
-            var resource = await userTokenClient.GetSignInResourceAsync(_connectionName, turnContext.Activity as Activity, null, cancellationToken).ConfigureAwait(false);
-            return resource.SignInLink;
-        }
-
+        /// <summary>
+        /// Get token response on basis of state.
+        /// </summary>
         private async Task<TokenResponse> GetTokenResponse(ITurnContext<IInvokeActivity> turnContext, string state, CancellationToken cancellationToken)
         {
             var magicCode = string.Empty;
