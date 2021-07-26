@@ -55,8 +55,6 @@ namespace TabWithAdpativeCardFlow
                 {
                     endpoints.MapControllers();
                 });
-
-            // app.UseHttpsRedirection();
         }
     }
 }
