@@ -29,12 +29,6 @@
       "name": "Home",
       "contentBotId": "<<YOUR-MICROSOFT-APP-ID>>",
       "scopes": [ "personal" ]
-    },
-    {
-      "entityId": "moreTab",
-      "name": "More",
-      "contentBotId": "<<YOUR-MICROSOFT-APP-ID>>",
-      "scopes": [ "personal" ]
     }
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
