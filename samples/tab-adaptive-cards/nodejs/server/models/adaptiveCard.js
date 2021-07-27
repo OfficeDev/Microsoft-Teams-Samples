@@ -1,4 +1,5 @@
 const { StatusCodes } = require('botbuilder');
+var fs = require("fs");
 
 // Card response for authentication
 const createAuthResponse = (signInLink) => {
@@ -48,14 +49,21 @@ const invokeTaskResponse = () => {
 // Card response for tab fetch request
 const createFetchResponse = async (userImage, displayName) => {
     console.log("Create Invoke response");
-    var profileImageUrl = '';
+    var imageString = '';
 
-    // Converting image of Blob type to base64 string for rendering as image.
-    await userImage.arrayBuffer().then(result => {
-        console.log(userImage.type);
-        const imageBytes = Buffer.from(result).toString('base64');
-        profileImageUrl = `data:${userImage.type};base64,${imageBytes}`;
-    }).catch(error => { console.log(error) });
+    if (userImage) {
+        // Converting image of Blob type to base64 string for rendering as image.
+        await userImage.arrayBuffer().then(result => {
+            console.log(userImage.type);
+            imageString = Buffer.from(result).toString('base64');
+            if (imageString != '') {
+                // Writing file to Images folder to use as url in adaptive card
+                fs.writeFileSync("Images/profile-image.jpeg", imageString, { encoding: 'base64' }, function (err) {
+                    console.log("File Created");
+                });
+            }
+        }).catch(error => { console.log(error) });
+    }
 
     const res = {
         status: StatusCodes.OK,
@@ -65,7 +73,7 @@ const createFetchResponse = async (userImage, displayName) => {
                 "value": {
                     "cards": [
                         {
-                            "card": getAdaptiveCard1(profileImageUrl, displayName),
+                            "card": getAdaptiveCard1(imageString, displayName),
                         },
                         {
                             "card": getAdaptiveCard2(),
@@ -107,7 +115,7 @@ const taskSubmitResponse = () => {
     const res = {
         status: StatusCodes.OK,
         body: {
-            "task":{
+            "task": {
                 "value": {
                     "tab": {
                         "type": "continue",
@@ -129,6 +137,7 @@ const taskSubmitResponse = () => {
     return res;
 };
 
+// Adaptive Card with user image, name and Task Module invoke action
 const getAdaptiveCard1 = (image, name) => {
     const adaptiveCard1 = {
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
@@ -141,7 +150,7 @@ const getAdaptiveCard1 = (image, name) => {
                         items: [
                             {
                                 "type": "Image",
-                                "url": image ? `${image}` : "https://cdn.vox-cdn.com/thumbor/Ndb49Uk3hjiquS041NDD0tPDPAs=/0x169:1423x914/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/7342855/microsoftteams.0.jpg",
+                                "url": image && image != '' ? process.env.BaseUrl + "/Images/profile-image.jpeg" : "https://cdn.vox-cdn.com/thumbor/Ndb49Uk3hjiquS041NDD0tPDPAs=/0x169:1423x914/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/7342855/microsoftteams.0.jpg",
                                 "size": "Medium"
                             }
                         ],
@@ -182,6 +191,7 @@ const getAdaptiveCard1 = (image, name) => {
     return adaptiveCard1;
 }
 
+// Adaptive Card showing sample text and Submit Action
 const getAdaptiveCard2 = () => {
     const adaptiveCard2 = {
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
@@ -222,6 +232,7 @@ const getAdaptiveCard2 = () => {
     return adaptiveCard2;
 }
 
+// Adaptive Card to show in task module
 const adaptiveCardTaskModule = {
     $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
     body: [
@@ -256,6 +267,7 @@ const adaptiveCardTaskModule = {
     version: '1.4'
 };
 
+// Adaptive Card to show sign out action
 const signOutCard = {
     $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
     body: [
@@ -271,6 +283,7 @@ const signOutCard = {
     version: '1.4'
 };
 
+// Adaptive Card to show task/submit action
 const taskSubmitCard = {
     $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
     body: [
