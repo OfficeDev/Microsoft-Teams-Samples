@@ -3,7 +3,7 @@
   "manifestVersion": "1.9",
   "version": "1.0.0",
   "id": "4d9e95ab-ebe3-4976-82e9-3526d5c54906",
-  "packageName": "com.microsoft.sequentialflowbot",
+  "packageName": "com.microsoft.teams.tabadaptivecard",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
