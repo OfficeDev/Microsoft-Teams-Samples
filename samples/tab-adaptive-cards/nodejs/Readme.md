@@ -1,6 +1,6 @@
 # Tab With AdpativeCard Flow
 
-This App talks about the Teams tab which displays Adaptive card with Node JS
+This App talks about the Teams tab which displays Adaptive card with Node JS. For reference please check [Build tabs with Adaptive Cards](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs)
 
 This bot has been created using [Bot Framework v4](https://dev.botframework.com), it shows how to create a simple bot that accepts Adaptive Cards V1.4 to render in Teams tab.
 
@@ -48,7 +48,8 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 - Register Azure AD applications
     -   Register your bot using bot channel registration in Azure AD portal, following the instructions [here](Wiki/azure-bot-channels-registration.md).
-
+    - For authentication flow please check [Add authentication to bot](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2)
+    
 - Clone the repository
 
     ```bash
@@ -87,17 +88,15 @@ Also update `BaseUrl` according to your code runtime environment and `Connection
     - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) also update the `<<DOMAIN-NAME>>` with the ngrok URL
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+         - Go to Microsoft Teams. From the lower left corner, select Apps
+         - From the lower left corner, choose Upload a custom App
+         - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
+         - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
 
-## Interacting with the bot in Teams
+## Interacting with the tab in Teams
 
-You can interact with this bot by `@Sequential Workflows` (BotName). The bot will respond with adaptive card requesting you the details.
-
-- Install App
-
-Navigate to `Manage apps` > `Upload a custom app` (Bottom-Right of the screen) > Upload `manifest.zip` > `Add`
-![image](https://user-images.githubusercontent.com/85108465/123583709-b6e39d00-d7fd-11eb-83bc-737a17fbbadd.png)
-
-![image](https://user-images.githubusercontent.com/85108465/123583855-f3af9400-d7fd-11eb-87df-a69d880680aa.png)
+You can use this tab by following the below steps:
+- In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
 
 ## Deploy the bot to Azure
 
