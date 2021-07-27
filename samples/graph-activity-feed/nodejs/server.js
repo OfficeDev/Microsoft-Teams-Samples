@@ -29,7 +29,6 @@ app.get('/GroupChatNotification', function (req, res) {
 
 app.get('/TeamNotification', function (req, res) {
   var tenantId = req.url.split('=')[1];
-  console.log(tenantId);
   auth.getAccessToken(tenantId).then(async function (token) {
     console.log("token from js file : " + token);
     res.render('./views/TeamNotification', { token: JSON.stringify(token) });

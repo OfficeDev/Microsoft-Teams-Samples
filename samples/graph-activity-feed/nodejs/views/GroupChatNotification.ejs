@@ -192,8 +192,8 @@
         };
 
         function customTopicNotification() {
+            debugger;
             var isValid = true;
-
             $('#DeployementTitle,#DeploymentDescription').each(function (e) {
                 if ($.trim($(this).val()) == '') {
                     isValid = false;
@@ -209,7 +209,6 @@
                 }
             });
             if (isValid == false) {
-                debugger;
                 e.preventDefault();
                 return false;
             }
@@ -219,16 +218,45 @@
                 DeploymentDescription: $('#DeploymentDescription').val(),
                 taskInfoAction: action,
             };
-            var chatMessageRsponse= getChatMessage(taskInfo);
+
             microsoftTeams.getContext(function (context) {
-                console.log(context);
                 var groupchatId = context.chatId;
-                var username = context.upn;
                 var userId = context.userObjectId;
-                const chat = {
+                const message = {
+                    "body": {
+                        "content": "New Deployment: " + taskInfo.DeployementTitle 
+                    }
+                };
+                $.ajax({
+                    url: "https://graph.microsoft.com/v1.0/chats/"+groupchatId+"/messages",
+                    type: "POST",
+                    data: JSON.stringify(message),
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    beforeSend: function (request) {
+                        request.setRequestHeader("Authorization", "Bearer " + token);
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        getChatMessage(token, groupchatId, taskInfo, userId,response.id);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        debugger;
+                        console.log(xhr);
+                        console.log( "textStatus: " + textStatus + ", errorThrown: chat" + errorThrown);
+                    },
+                });
+            });
+        };
+
+        function getChatMessage(token, groupchatId, taskInfo, userId,messageId){
+            debugger;
+            const chat = {
                     "topic": {
                         "source": "entityUrl",
-                        "value": "https://graph.microsoft.com/v1.0/chats/"+groupchatId+"/messages/"+chatMessageRsponse.id
+                        "value": "https://graph.microsoft.com/v1.0/chats/"+groupchatId+"/messages/"+messageId
                     },
                     "activityType": "approvalRequired",
                     "previewText": {
@@ -241,7 +269,7 @@
                     "templateParameters": [
                         {
                             "name": "approvalTaskId",
-                            "value": "2020AAGGTAPP"
+                            "value": taskInfo.DeployementTitle
                         }
                     ]
                 };
@@ -257,53 +285,13 @@
                         request.setRequestHeader("Authorization", "Bearer " + token);
                     },
                     success: function (profile) {
-                        console.log(profile + "hahahaha");
+                        console.log(profile);
                     },
                     error: function (xhr, textStatus, errorThrown) {
-                        debugger;
+                        console.log(xhr);
                         console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                     },
-                });
-                microsoftTeams.tasks.submitTask(taskInfo);
-                return true;
-            });
-        };
-
-        function getChatMessage(taskInfo){
-            debugger;
-            microsoftTeams.getContext(function (context) {
-                console.log(context);
-                var groupchatId = context.chatId;
-                var userId = context.userObjectId;
-                const message = {
-                    "body": {
-                        "content": "New Deployment: "
-                    }
-                };
-                console.log(message);
-                console.log(token);
-                $.ajax({
-                    url: "https://graph.microsoft.com/v1.0/chats/"+groupchatId+"/messages",
-                    type: "POST",
-                    data: JSON.stringify(message),
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    beforeSend: function (request) {
-                        request.setRequestHeader("Authorization", "Bearer " + token);
-                    },
-                    success: function (response) {
-                        console.log(response + "hahahaha");
-                        return response;
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        debugger;
-                        console.log(xhr);
-                        console.log( "textStatus: " + textStatus + ", errorThrown: chat" + errorThrown);
-                    },
-                });
-            });
+                }); 
         }
     </script>
 </body>

@@ -24,7 +24,8 @@
     <div>
 
         <div class="radioClass">
-            <label><input type="radio" name="notificationRadio" value="sendNotificationChannel"> Send Notification To
+            <label><input type="radio" name="notificationRadio" value="sendNotificationChannel" checked> Send
+                Notification To
                 User in Channel</label></br>
             <label><input type="radio" name="notificationRadio" value="customTopicNotificationChannel"> Send
                 Notification with Custom Topic in Channel</label></br>
@@ -35,19 +36,28 @@
             <div class="mb">
                 <div class="tk-no" id="taskNumber"></div>
                 <input type="text" class="tk-no" id="taskNumber" value="" disabled>
+                </br>
+                </br>
                 <div class="input-grp">
                     <input type="text" class="alias" id="taskAssignedTo" required />
                 </div>
                 <div class="form-group fg">
+                    </br>
+                    </br>
                     <label for="title" class="title">Task Title</label>
+
                     <input type="text" id="taskTitle" name="taskTitle">
                 </div>
                 <div class="form-group fg">
+                    </br>
+                    </br>
                     <label for="title-desc" class="description">Task Description</label>
                     <input type="text" id="taskDescription" name="taskDescription">
                 </div>
             </div>
             <div class="modal-footer mf">
+                </br>
+                </br>
                 <button type="button" class="btn-send save" onclick="return SendNotificationToChannel()">Send
                     Notification to Channel</button>
             </div>
@@ -60,16 +70,22 @@
                     <input type="text" class="alias" id="taskAssignedTo" required />
                 </div>
                 <div class="form-group fg">
+                    </br>
+                    </br>
                     <label for="DeployementTitle" class="DeployementTitle">Deployment Title</label>
                     <input type="text" id="DeployementTitle" name="DeployementTitle">
 
                 </div>
                 <div class="form-group fg">
+                    </br>
+                    </br>
                     <label for="deployment-desc" class="DeploymentDescription">Deployment Description</label>
                     <input type="text" id="DeploymentDescription" name="DeploymentDescription">
                 </div>
             </div>
             <div class="modal-footer mf">
+                </br>
+                </br>
                 <button type="button" class="btn-send save" onclick="return customTopicTeamNotification()">Notify with
                     Custom Topic in Channel</button>
             </div>
@@ -80,19 +96,27 @@
                 <div class="input-grp">
                 </div>
                 <div class="form-group fg">
+                    </br>
+                    </br>
                     <label for="reservationId" class="reservationId">ID</label>
                     <input type="text" id="reservationId" name="reservationId">
                 </div>
                 <div class="form-group fg">
+                    </br>
+                    </br>
                     <label for="reservationTitle" class="reservationTitle">Reservation Title</label>
                     <input type="text" id="reservationTitle" name="reservationTitle">
                 </div>
                 <div class="form-group fg">
+                    </br>
+                    </br>
                     <label for="currentSlot-desc" class="currentSlot">Current Slot</label>
                     <input type="text" id="currentSlot" name="currentSlot">
                 </div>
             </div>
             <div class="modal-footer mf">
+                </br>
+                </br>
                 <button type="button" class="btn-send save" onclick="return channelTabTeamNotification()">Notify User
                     for channel Tab</button>
             </div>
@@ -113,11 +137,9 @@
                     $(".desc").not(targetBox).hide();
                     $(targetBox).show();
                 });
+                getChannelMessage();
             });
         microsoftTeams.initialize();
-        var encodedWebUrl = encodeURI('https://6687952db3e0.ngrok.io/123/456&label=Task 456');
-        var encodedContext = encodeURI('{"subEntityId": "task456"}');
-        var taskItemUrl = 'https://teams.microsoft.com/l/entity/bb56234b-a5f2-4d26-acff-edecce8bf42f/tasklist123?webUrl=' + encodedWebUrl + '&context=' + encodedContext;
         var empty = true;
         $('input[type="text"]').each(function () {
             if ($(this).val() != "") {
@@ -127,7 +149,6 @@
         });
 
         function SendNotificationToChannel() {
-            debugger;
             var isValid = true;
             $('#taskTitle,#taskDescription').each(function (e) {
                 if ($.trim($(this).val()) == '') {
@@ -205,10 +226,8 @@
             });
         };
 
-        function getChaannelMessage() {
+        function getChannelMessage() {
             microsoftTeams.getContext(function (context) {
-                console.log(token);
-                var groupchatId = context.chatId;
                 var userId = context.userObjectId;
                 var teamId = context.groupId;
                 var channelId = context.channelId;
@@ -241,7 +260,6 @@
             });
         }
         function channelTabTeamNotification() {
-            debugger;
             var isValid = true;
             $('#reservationId,#reservationTitle,#currentSlot').each(function (e) {
                 if ($.trim($(this).val()) == '') {
@@ -261,7 +279,7 @@
                 e.preventDefault();
                 return false;
             }
-            var action = "CustomTopic";
+            var action = "channelTab";
             let taskInfo = {
                 id: $('#reservationId').val(),
                 title: $('#reservationTitle').val(),
@@ -284,9 +302,8 @@
                         request.setRequestHeader("Authorization", "Bearer " + token);
                     },
                     success: function (profile) {
-                        console.log(profile);
                         taburl = getTabURL(profile);
-                        notificationToChannelTab(taburl,token,teamId,taskInfo,userId);
+                        notificationToChannelTab(taburl, token, teamId, taskInfo, userId);
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         console.log(xhr);
@@ -297,54 +314,55 @@
 
         }
 
-        function notificationToChannelTab(taburl,token,teamId,taskInfo,userId){
+        function notificationToChannelTab(taburl, token, teamId, taskInfo, userId) {
             const chat = {
-                    "topic": {
-                        "source": "text",
-                        "value": "Deployment Approvals Channel",
-                        "webUrl": taburl
+                "topic": {
+                    "source": "text",
+                    "value": "Deployment Approvals Channel",
+                    "webUrl": taburl
+                },
+                "activityType": "reservationUpdated",
+                "previewText": {
+                    "content": "You have moved up the queue"
+                },
+                "recipient": {
+                    "@odata.type": "microsoft.graph.aadUserNotificationRecipient",
+                    "userId": userId
+                },
+                "templateParameters": [
+                    {
+                        "name": "reservationId",
+                        "value": taskInfo.id
                     },
-                    "activityType": "reservationUpdated",
-                    "previewText": {
-                        "content": "You have moved up the queue"
-                    },
-                    "recipient": {
-                        "@odata.type": "microsoft.graph.aadUserNotificationRecipient",
-                        "userId": userId
-                    },
-                    "templateParameters": [
-                        {
-                            "name": "reservationId",
-                            "value": taskInfo.id
-                        },
-                        {
-                            "name": "currentSlot",
-                            "value": taskInfo.currentSlot
-                        }
-                    ]
-                };
+                    {
+                        "name": "currentSlot",
+                        "value": taskInfo.currentSlot
+                    }
+                ]
+            };
 
-                $.ajax({
-                    url: "https://graph.microsoft.com/v1.0/teams/" + teamId + "/sendActivityNotification",
-                    type: "POST",
-                    data: JSON.stringify(chat),
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    beforeSend: function (request) {
-                        request.setRequestHeader("Authorization", "Bearer " + token);
-                    },
-                    success: function (profile) {
-                        console.log(profile);
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        debugger;
-                        console.log(xhr);
-                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-                    },
-                });
+            $.ajax({
+                url: "https://graph.microsoft.com/v1.0/teams/" + teamId + "/sendActivityNotification",
+                type: "POST",
+                data: JSON.stringify(chat),
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + token);
+                },
+                success: function (profile) {
+                    console.log(profile);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    debugger;
+                    console.log(xhr);
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                },
+            });
         }
+
         function getTabURL(appList) {
             debugger;
             list = appList.value;
@@ -377,7 +395,7 @@
                 e.preventDefault();
                 return false;
             }
-            var action = "EntityTopic";
+            var action = "customTopic";
             let taskInfo = {
                 title: $('#DeployementTitle').val(),
                 description: $('#DeployementDescription').val(),
