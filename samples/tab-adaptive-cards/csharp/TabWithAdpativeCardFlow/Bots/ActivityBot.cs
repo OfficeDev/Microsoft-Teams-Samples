@@ -24,10 +24,12 @@ namespace TabWithAdpativeCardFlow.Bots
     public class ActivityBot : TeamsActivityHandler
     {
         private readonly string _connectionName;
+        private readonly string _applicationBaseUrl;
 
         public ActivityBot(IConfiguration configuration)
         {
             _connectionName = configuration["ConnectionName"] ?? throw new NullReferenceException("ConnectionName");
+            _applicationBaseUrl = configuration["ApplicationBaseUrl"] ?? throw new NullReferenceException("ApplicationBaseUrl");
         }
 
         /// <summary>
@@ -77,7 +79,7 @@ namespace TabWithAdpativeCardFlow.Bots
 
                 var client = new SimpleGraphClient(tokenResponse.Token);
                 var profile = await client.GetUserProfile();
-                var photo = await client.GetUserPhoto();
+                var userPhoto = await client.GetPublicURLForProfilePhoto(_applicationBaseUrl);
 
                 return CreateInvokeResponse(new TabResponse
                 {
@@ -90,7 +92,7 @@ namespace TabWithAdpativeCardFlow.Bots
                             {
                                 new TabResponseCard
                                 {
-                                    Card = CardHelper.GetSampleAdaptiveCard1(profile.DisplayName)
+                                    Card = CardHelper.GetSampleAdaptiveCard1(userPhoto, profile.DisplayName)
                                 },
                                 new TabResponseCard
                                 {

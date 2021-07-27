@@ -32,11 +32,36 @@ namespace TabWithAdpativeCardFlow
             return await graphClient.Me.Request().GetAsync();
         }
 
-        //Fetching user's photo 
-        public async Task<Stream> GetUserPhoto()
+        //Fetching public url of user profile photo
+        public async Task<string> GetPublicURLForProfilePhoto(string applicationBaseUrl)
         {
             var graphClient = GetAuthenticatedClient();
-            return await graphClient.Me.Photo.Content.Request().GetAsync();
+            try
+            {
+                var stream = await graphClient.Me.Photo.Content
+                            .Request()
+                            .GetAsync();
+
+                var fileName = "ProflePhoto.png";
+                string imagePath = Path.Combine(".", "wwwroot", "photos");
+
+                if (!System.IO.Directory.Exists(imagePath))
+                    System.IO.Directory.CreateDirectory(imagePath);
+
+                imagePath = Path.Combine(imagePath, fileName);
+
+                using (var fileStream = System.IO.File.Create(imagePath))
+                {
+                    stream.Seek(0, SeekOrigin.Begin);
+                    stream.CopyTo(fileStream);
+                }
+                return  $"{applicationBaseUrl}/photos/{fileName}";
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex);
+                return "http://adaptivecards.io/content/cats/1.png";
+            }
         }
 
         // Get an Authenticated Microsoft Graph client using the token issued to the user.

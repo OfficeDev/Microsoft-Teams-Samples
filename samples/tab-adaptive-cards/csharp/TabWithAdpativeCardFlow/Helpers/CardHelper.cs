@@ -18,7 +18,7 @@ namespace TabWithAdpativeCardFlow.Helpers
         /// <summary>
         /// Sample Adaptive card to show in tab.
         /// </summary>
-        public static AdaptiveCard GetSampleAdaptiveCard1(string displayName)
+        public static AdaptiveCard GetSampleAdaptiveCard1(string profilePhoto, string displayName)
         {
             AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
             {
@@ -35,8 +35,9 @@ namespace TabWithAdpativeCardFlow.Helpers
                                 {
                                     new AdaptiveImage
                                     {
-                                        Url = new Uri("https://cdn.vox-cdn.com/thumbor/Ndb49Uk3hjiquS041NDD0tPDPAs=/0x169:1423x914/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/7342855/microsoftteams.0.jpg"),
-                                        Size = AdaptiveImageSize.Medium,
+                                        Url = new Uri(profilePhoto),
+                                        Style = AdaptiveImageStyle.Person,
+                                        Size = AdaptiveImageSize.Small,
                                     },
                                 },
                             },
