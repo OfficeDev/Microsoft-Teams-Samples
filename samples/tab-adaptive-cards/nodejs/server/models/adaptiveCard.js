@@ -73,10 +73,10 @@ const createFetchResponse = async (userImage, displayName) => {
                 "value": {
                     "cards": [
                         {
-                            "card": getAdaptiveCard1(imageString, displayName),
+                            "card": getAdaptiveCardUserDetails(imageString, displayName),
                         },
                         {
-                            "card": getAdaptiveCard2(),
+                            "card": getAdaptiveCardSubmitAction(),
                         }
                     ]
                 },
@@ -138,7 +138,7 @@ const taskSubmitResponse = () => {
 };
 
 // Adaptive Card with user image, name and Task Module invoke action
-const getAdaptiveCard1 = (image, name) => {
+const getAdaptiveCardUserDetails = (image, name) => {
     const adaptiveCard1 = {
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
         body: [
@@ -192,7 +192,7 @@ const getAdaptiveCard1 = (image, name) => {
 }
 
 // Adaptive Card showing sample text and Submit Action
-const getAdaptiveCard2 = () => {
+const getAdaptiveCardSubmitAction = () => {
     const adaptiveCard2 = {
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
         body: [
