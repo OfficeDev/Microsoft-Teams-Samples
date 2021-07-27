@@ -29,12 +29,6 @@
       "name": "Home",
       "contentBotId": "{{BOT-ID}}",
       "scopes": [ "personal" ]
-    },
-    {
-      "entityId": "moreTab",
-      "name": "More",
-      "contentBotId": "{{BOT-ID}}",
-      "scopes": [ "personal" ]
     }
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
