@@ -69,7 +69,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 
 - Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the Bot Framework registration. 
-Also update `BaseUrl` according to your code runtime environment.
+Also update `BaseUrl` according to your code runtime environment and `ConnectionName` with Bot Channel Registration connection name.
 > NOTE: the App Password is referred to as the `client secret` in the azure portal and you can always create a new client secret anytime.
 
 - Install modules & Run the `NodeJS` Server 
