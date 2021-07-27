@@ -25,13 +25,15 @@ This feature shown in this sample is in Public Developer Preview and is supporte
 ```
 
 2. Create a Bot Registration
-   In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+   In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
 3. Modify the `manifest.json` in the `/AppPackage` folder and replace the `{{BOT-ID}}` with the id from step 2.
 
 4. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store.
 
-5. Modify the `/appsettings.json` and fill in the `{{ Bot Id }}` and `{{ Bot Password }}` with the id from step 2.
+5. Modify the `/appsettings.json` and fill in the `{{ Bot Id }}`,`{{ Bot Password }}` and `{{ Connection Name }}` with the id from step 2.
+
+6. Add `{{ Application Base Url }}`in appsetting.json with ngrok tunnel url. 
 
 ## To try this sample
 
@@ -63,8 +65,17 @@ This feature shown in this sample is in Public Developer Preview and is supporte
 
 - Tab showing Adaptive card with action controls.
 
+![Adaptive Card](TabWithAdpativeCardFlow/Images/SignIn.png)
+
+![Adaptive Card](TabWithAdpativeCardFlow/Images/SignInPrompt.png)
+
 ![Adaptive Card](TabWithAdpativeCardFlow/Images/TabAdaptiveCardFlow.png)
 
+![Adaptive Card](TabWithAdpativeCardFlow/Images/SampleTaskModuleFetch.png)
+
+![Adaptive Card](TabWithAdpativeCardFlow/Images/SampleTaskModuleSubmit.png)
+
+![Adaptive Card](TabWithAdpativeCardFlow/Images/SignOutMessage.png)
 
 ## Deploy the bot to Azure
 
