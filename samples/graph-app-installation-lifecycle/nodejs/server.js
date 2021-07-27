@@ -24,7 +24,6 @@ app.get('/installedAppsList', function (req, res) {
     console.log("token from js file : " + token);
     res.render('./views/installedAppsList', { token: JSON.stringify(token) });
   });
-
 });
 
 app.listen(3978, function () {

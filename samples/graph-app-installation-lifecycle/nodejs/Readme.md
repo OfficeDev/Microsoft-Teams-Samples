@@ -37,7 +37,7 @@ This sample app demonstarte the installation lifecycle for Teams [Apps](https://
     - You need to add following permissions mentioned in the below screenshots to call respective Graph   API
 ![](https://user-images.githubusercontent.com/50989436/116188975-e155a300-a745-11eb-9ce5-7f467007e243.png) 
 
-1) Update the `.env` configuration with the ```Microsoft App Id``` and ```App Password```
+1) Update the `.env` configuration with the ```ClientId``` and ```ClientSecret```
 
 1) Run your bot at the command line:
 
@@ -46,7 +46,7 @@ This sample app demonstarte the installation lifecycle for Teams [Apps](https://
     ```
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)and ngrok url *everywhere* you see the place holder string `yourngrok.ngrok.io`
+    - **Edit** the `manifest.json` contained in the  `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Manifest-id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)and ngrok url *everywhere* you see the place holder string `<<base-URL>>`
     - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 

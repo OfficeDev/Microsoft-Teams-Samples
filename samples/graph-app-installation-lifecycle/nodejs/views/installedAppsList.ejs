@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,7 +20,6 @@
         }
     </style>
 </head>
-
 <body id=mainDiv>
     <h4>App installed demo</h4>
     <br />
@@ -89,7 +87,6 @@
         <button type="button" class="btn btn-outline-info" onclick="showAllApp()">Show all Apps</button>
     </div>
 
-
     <script>
         var token =  <%-token%>
             $(document).ready(function () {
@@ -100,6 +97,8 @@
                     getAppsList(token, teamId, false);
                 });
             })
+
+        // get list of all apps installed in a team  
         function getAppsList(accessToken, teamId, showAll) {
             $.ajax({
                 url: "https://graph.microsoft.com/v1.0/teams/" + teamId + "/installedApps?$expand=teamsAppDefinition,teamsApp",
@@ -108,14 +107,16 @@
                     request.setRequestHeader("Authorization", "Bearer " + accessToken);
                 },
                 success: function (profile) {
-                    ListInstalledApps(profile, showAll);
+                    listInstalledApps(profile, showAll);
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                 },
             });
         }
-        function ListInstalledApps(appList, showAll) {
+
+        // show the list of top 10 apps installed in a team
+        function listInstalledApps(appList, showAll) {
             var list = appList.value;
             var i
             if (showAll) {
@@ -131,7 +132,7 @@
             <button type="button" style ="background-color: lightgray" class="btn btnUpgradeApp" id="upgrade${i}" data-app-itemid=${list[i].id} onclick="upgradeApp(event)">Update</button>
         </td>
         <td style="padding:5px">  
-            <button type="button" style ="background-color: lightgray" class="btn btndeleteApp" id="delete${i}" data-app-itemid=${list[i].id} data-app-itemname=${list[i].teamsAppDefinition['displayName']} onclick="DeleteApp(event)">Delete</button>
+            <button type="button" style ="background-color: lightgray" class="btn btndeleteApp" id="delete${i}" data-app-itemid=${list[i].id} data-app-itemname=${list[i].teamsAppDefinition['displayName']} onclick="deleteApp(event)">Delete</button>
         </td>
          </tr>`);
                 };
@@ -149,13 +150,14 @@
             <button type="button" style ="background-color: lightgray" class="btn btnUpgradeApp" id="upgrade${i}" data-app-itemid=${list[i].id} onclick="upgradeApp(event)">Update</button>
         </td>
         <td style="padding:5px">  
-            <button type="button" style ="background-color: lightgray" class="btn btndeleteApp" id="delete${i}" data-app-itemid=${list[i].id} data-app-itemname=${list[i].teamsAppDefinition['displayName']} onclick="DeleteApp(event)">Delete</button>
+            <button type="button" style ="background-color: lightgray" class="btn btndeleteApp" id="delete${i}" data-app-itemid=${list[i].id} data-app-itemname=${list[i].teamsAppDefinition['displayName']} onclick="deleteApp(event)">Delete</button>
         </td>
          </tr>`);
                 };
             }
         }
 
+        // show the list of all apps installed in a team 
         function showAllApp() {
             microsoftTeams.getContext(function (context) {
                 var tenantId = context.tid;
@@ -165,6 +167,7 @@
             document.getElementById('showAllApp').style.display = "none";
         }
 
+        // add polly app to team
         $("#btnAddApp").on('click', function (e) {
             microsoftTeams.getContext(function (context) {
                 var tenantId = context.tid;
@@ -200,14 +203,13 @@
             });
         })
 
+        // get the information of a app
         function getAppInfo(e) {
             var appId = $(e.currentTarget).attr('data-app-itemid');
             microsoftTeams.getContext(function (context) {
                 var tenantId = context.tid;
                 var teamId = context.groupId;
-
                 e.preventDefault();
-
                 $.ajax({
                     url: "https://graph.microsoft.com/v1.0/teams/" + teamId + "/installedApps/" + appId + "?$expand=teamsAppDefinition",
                     type: "GET",
@@ -221,7 +223,6 @@
                         var html = `<span>Name: ${profile.teamsAppDefinition['displayName']} </span> </br> <span>Description: ${profile.teamsAppDefinition['description']} </span>
                         </br> <span>Version: ${profile.teamsAppDefinition['version']} </span>`;
                         $("#modalbody").html(html);
-
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
@@ -229,14 +230,14 @@
                 });
             });
         }
+
+        // upgrade the app installed in a team
         function upgradeApp(e) {
             var appId = $(e.currentTarget).attr('data-app-itemid');
             microsoftTeams.getContext(function (context) {
                 var tenantId = context.tid;
                 var teamId = context.groupId;
-
                 e.preventDefault();
-
                 $.ajax({
                     url: "https://graph.microsoft.com/v1.0/teams/" + teamId + "/installedApps/" + appId + "/upgrade",
                     type: "POST",
@@ -260,7 +261,8 @@
             })
         }
 
-        function DeleteApp(e) {
+        // delete the app installed in a team
+        function deleteApp(e) {
             e.preventDefault();
             teamAppInstallationId = $(e.currentTarget).attr('data-app-itemid');
             var appName = $(e.currentTarget).attr('data-app-itemname');
@@ -294,9 +296,7 @@
                     },
                 });
             })
-
         });
     </script>
 </body>
-
 </html>
