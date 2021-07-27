@@ -1,8 +1,5 @@
-﻿# TabWithAdpativeCardFlow
-
-Bot Framework v4 echo bot sample.
-
-This bot has been created using [Bot Framework](https://dev.botframework.com), and it shows a tab that displays adaptive card.
+﻿This App talks about the Teams tab which displays Adaptive card with CSharp.
+For reference please check [Build tabs with Adaptive Cards](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs)
 
 This feature shown in this sample is in Public Developer Preview and is supported in desktop and mobile.
 
@@ -29,12 +26,18 @@ This feature shown in this sample is in Public Developer Preview and is supporte
 
 3. Modify the `manifest.json` in the `/AppPackage` folder and replace the `{{BOT-ID}}` with the id from step 2.
 
-4. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store.
+4. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 7.
 
 5. Modify the `/appsettings.json` and fill in the `{{ Bot Id }}`,`{{ Bot Password }}` and `{{ Connection Name }}` with the id from step 2.
 
-6. Add `{{ Application Base Url }}`in appsetting.json with ngrok tunnel url. 
+6. Add `{{ Application Base Url }}`in appsetting.json with ngrok tunnel url or deployed application base url. 
 
+7. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
+    
 ## To try this sample
 
 - In a terminal, navigate to `TabWithAdpativeCardFlow`
@@ -60,6 +63,10 @@ This feature shown in this sample is in Public Developer Preview and is supporte
   - Navigate to `TabWithAdpativeCardFlow` folder
   - Select `TabWithAdpativeCardFlow.csproj` file
   - Press `F5` to run the project
+
+## Interacting with the tab in Teams
+    You can use this tab by following the below steps:
+    - In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
 
 ## Features of this sample
 
