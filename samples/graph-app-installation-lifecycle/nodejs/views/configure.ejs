@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Graph installation app demo node js</title>
+</head>
+<body>
+    <header class="header">
+        <header class="header">
+            <div class="header-inner-container">
+                <div id="divConfig">
+                    <br />
+                    <form id="configForm">
+                        <input type="radio" name="notificationType" value="Create" onclick="onClick()"> Add App List tab
+                    </form>
+                </div>
+            </div>
+            <script src="https://unpkg.com/@microsoft/teams-js/dist/MicrosoftTeams.min.js"
+                crossorigin="anonymous"></script>
+        </header>
+        <script src="https://statics.teams.microsoft.com/sdk/v1.7.0/js/MicrosoftTeams.min.js"></script>
+        <script>
+            function onClick() {
+                microsoftTeams.settings.setValidityState(true);
+            }
+            microsoftTeams.initialize();
+            microsoftTeams.appInitialization.notifySuccess();
+            microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
+                var radios = document.getElementsByName('notificationType');
+                microsoftTeams.settings.setSettings({
+                    entityID: "App Installation Demo",
+                    contentUrl: `${window.location.origin}/installedAppsList?tenantId={tid}`,
+                    suggestedTabName: "App Installation",
+                    websiteUrl: `${window.location.origin}/installedAppsList?tenantId={tid}`,
+                });
+                saveEvent.notifySuccess();
+            });
+        </script>
+</body>
+</html>
