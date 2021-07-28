@@ -25,7 +25,7 @@
 |10|Deep Link consuming Subentity ID      | Microsoft Teams sample app for demonstrating deeplink from Bot chat to Tab consuming Subentity ID | [View][tab-deeplink#csharp]                       | | [View][tab-deeplink#nodejs]|
 |11|Integrate graph toolkit component in teams tab      | Microsoft Teams tab sample app for demonstrating graph toolkit component |                      | [View][tab-graph-toolkit#js]|
 |12|Device permissions      | Microsoft Teams tab sample app for demonstrating device permissions |                      | [View][tab-device-permissions#js]|
-|13|Show adaptive cards in Teams tab | Microsoft Teams tab sample code which demonstrates how to [show adaptive cards in Teams tab](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs) |                |                | [View][tab-adaptive-cards#js]|
+|13|Show adaptive cards in Teams tab | Microsoft Teams tab sample code which demonstrates how to [show adaptive cards in Teams tab](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs) | [View][tab-adaptive-cards#csharp]               |                | [View][tab-adaptive-cards#js]|
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
@@ -141,6 +141,8 @@
 [personal-tab#cs#mvc]:samples/tab-personal/mvc-csharp
 [tab-graph-toolkit#js]:samples/tab-graph-toolkit/nodejs
 [tab-device-permissions#js]:samples/tab-device-permissions/nodejs
+
+[tab-adaptive-cards#csharp]:samples/tab-adaptive-cards/csharp
 [tab-adaptive-cards#js]:samples/tab-adaptive-cards/nodejs
 
 [group-channel-tab#cs#razor]:samples/tab-channel-group/razor-csharp
@@ -150,10 +152,8 @@
 [connector#cs]:samples/connector-todo-notification/csharp
 [connector#ts]:samples/connector-github-notification/nodejs
 [connector-generic#ts]:samples/connector-generic/nodejs
-
 [sequential#workflow#csharp]:samples/bot-sequential-flow-adaptive-cards/csharp
 [sequential#workflow#js]:samples/bot-sequential-flow-adaptive-cards/nodejs
-
 [app-auth#ts]:samples/app-auth/nodejs
 
 [app-task-module#cs]:samples/app-task-module/csharp
