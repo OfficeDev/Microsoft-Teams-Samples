@@ -25,7 +25,7 @@
 |10|Deep Link consuming Subentity ID      | Microsoft Teams sample app for demonstrating deeplink from Bot chat to Tab consuming Subentity ID | [View][tab-deeplink#csharp]                       | | [View][tab-deeplink#nodejs]|
 |11|Integrate graph toolkit component in teams tab      | Microsoft Teams tab sample app for demonstrating graph toolkit component |                      | [View][tab-graph-toolkit#js]|
 |12|Device permissions      | Microsoft Teams tab sample app for demonstrating device permissions |                      | [View][tab-device-permissions#js]|
-|13|Show adaptive cards in Teams tab | Show adaptive cards in Teams tab |                |                | [View][tab-adaptive-cards#js]|
+|13|Show adaptive cards in Teams tab | Microsoft Teams tab sample code which demonstrates how to [show adaptive cards in Teams tab](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs) |                |                | [View][tab-adaptive-cards#js]|
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
