@@ -2,8 +2,8 @@
   "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
   "manifestVersion": "1.9",
   "version": "1.0.0",
-  "id": "4d9e95ab-ebe3-4976-82e9-3526d5c54906",
-  "packageName": "com.microsoft.tabadaptivecard",
+  "id": "f811a20f-dc2a-4c42-886a-b503ff250752",
+  "packageName": "com.microsoft.teams.tabstageviewnode",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -11,29 +11,32 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "TabWithAdaptiveCard",
-    "full": "Tab With Adaptive Card"
+    "short": "TabStageView-Node",
+    "full": "Tab in stage view"
   },
   "description": {
-    "short": "View Tab With Adaptive Card",
-    "full": "This sample demos the tab with adaptive cards"
+    "short": "View Tab in stage view",
+    "full": "This sample demos the tab in stage view"
   },
   "icons": {
     "outline": "outline.png",
     "color": "color.png"
   },
-  "accentColor": "#60A18E",
-  "staticTabs": [
+  "bots": [
     {
-      "entityId": "homeTab",
-      "name": "Home",
-      "contentBotId": "<<YOUR-MICROSOFT-APP-ID>>",
-      "scopes": [ "personal" ]
+      "botId": "",
+      "scopes": [
+        "team",
+        "personal",
+        "groupchat"
+      ],
+      "isNotificationOnly": false
     }
   ],
+  "accentColor": "#60A18E",
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "<<DOMAIN-NAME>>",
+    "*.ngrok.io",
     "token.botframework.com"
   ]
 }
