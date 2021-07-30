@@ -21,7 +21,7 @@
           <option value="" selected="selected">(Select: )</option>
           <option value="GroupChatNotification" id="groupChatTab">GroupChat</option>
           <option value="TeamNotification" id="teamsTab">Team</option>
-          <option value="NotificationDisabled" id="teamsTabdisable" disabled>FeedDisabled</option>
+          <option value="UserNotification" id="userTab">UserTab</option>
       </select>
   </div>
 </p>
@@ -40,11 +40,14 @@
             document.getElementById("textConfiguration").innerHTML = "Configure your Group Chat Tab to Send Activity Feed Notification: ";
              $("#teamsTab").hide();
              $("#groupChatTab").show();
+             $("#userTab").hide();
+             
         }
         else {
             document.getElementById("textConfiguration").innerHTML = "Configure your Teams Tab to Send Activity Feed Notification: ";
              $("#groupChatTab").hide();
              $("#teamsTab").show();
+             $("#userTab").show();
         }
     });
 
@@ -73,7 +76,7 @@
 
                 // This API tells Microsoft Teams to enable the 'Save' button. Since Microsoft Teams always assumes
                 // an initial invalid state, without this call the 'Save' button will never be enabled.
-                microsoftTeams.settings.setValidityState(selectedTab === 'GroupChatNotification' || selectedTab === 'TeamNotification');
+                microsoftTeams.settings.setValidityState(selectedTab === 'GroupChatNotification' || selectedTab === 'TeamNotification'|| selectedTab==='UserNotification');
             };
         }
     });

@@ -30,63 +30,61 @@
     <div>
 
         <div class="radioClass">
-            <label><input type="radio" name="notificationRadio" value="sendNotificationGroupChat" checked> Send
-                Notification To User Group Chat</label></br>
-            <label><input type="radio" name="notificationRadio" value="customTopicNotificationChat"> Send Notification
+            <label><input type="radio" name="notificationRadio" value="sendNotification" checked> Send
+                Notification To User</label></br>
+            <label><input type="radio" name="notificationRadio" value="customTopicNotification"> Send Notification
                 with Custom Topic</label>
-        </div>
+        </div></br>
         </br>
-        </br>
-        <div class="sendNotificationGroupChat desc">
-            <div class="form-group fg">
-                <label for="title" class="title">Task Title</label>
-                <br>
+        <div class="sendNotification desc">
+            <div class="mb">
+                <div class="form-group fg">
+                    <label for="title" class="title">Task Title</label>
+                    <br>
+                    </br>
+                    <input type="text" id="taskTitle" name="taskTitle">
+                </div>
                 </br>
-                <input type="text" id="taskTitle" name="taskTitle">
-            </div>
-            </br>
-            <div class="form-group fg">
-                <label for="title-desc" class="description">Task Description</label><br>
-                </br>
-                <input type="text" id="taskDescription" name="taskDescription">
-                </br>
-            </div>
+                <div class="form-group fg">
+                    <label for="title-desc" class="description">Task Description</label><br>
+                    </br>
+                    <input type="text" id="taskDescription" name="taskDescription">
+                    </br>
+                </div>
+            </div><br>
             <div class="modal-footer mf">
                 </br>
-                <button type="button" class="btn-send save" onclick="return SendNotificationToGroupChat()">Send
-                    Notification to Chat</button>
+                <button type="button" class="btn-send save" onclick="return SendNotificationToUser()">Send
+                    Notification</button>
             </div>
-
-
         </div>
-        <div class="customTopicNotificationChat desc">
-            <div class="form-group fg">
-                <label for="DeployementTitle" class="DeployementTitle">Deployment Title</label><br>
-                </br>
-                <input type="text" id="DeployementTitle" name="DeployementTitle">
-            </div>
-            <div class="form-group fg">
-                </br>
-                <label for="deployment-desc" class="DeploymentDescription">Deployment Description</label><br>
-                </br><input type="text" id="DeploymentDescription" name="DeploymentDescription">
-            </div>
-
+        <div class="customTopicNotification desc">
+            <div class="mb">
+                <div class="form-group fg">
+                    <label for="DeployementTitle" class="DeployementTitle">Deployment Title</label><br>
+                    </br>
+                    <input type="text" id="DeployementTitle" name="DeployementTitle">
+                </div>
+                <div class="form-group fg">
+                    </br>
+                    <label for="deployment-desc" class="DeploymentDescription">Deployment Description</label><br>
+                    </br><input type="text" id="DeploymentDescription" name="DeploymentDescription">
+                </div>
+            </div><br>
             <div class="modal-footer mf">
-                <br>
                 </br>
                 <button type="button" class="btn-send save" onclick="return customTopicNotification()">Notify with
                     Custom Topic</button>
             </div>
         </div>
-
     </div>
 
 
     <script>
-            var token =  <%-token%>
+        var token =  <%-token%>
             $(document).ready(function () {
                 debugger;
-                $(".customTopicNotificationChat").hide();
+                $(".customTopicNotification").hide();
                 $('input[type="radio"]').click(function () {
                     var inputValue = $(this).attr("value");
                     var targetBox = $("." + inputValue);
@@ -94,10 +92,8 @@
                     $(targetBox).show();
                 });
             });
+            var delegatedtoken = localStorage.getItem("accessToken");
         microsoftTeams.initialize();
-
-        var delegatedtoken = localStorage.getItem("accessToken");
-        console.log(delegatedtoken);
         microsoftTeams.getContext(function (context) {
             var groupchatId = context.chatId;
             var username = context.upn;
@@ -111,7 +107,7 @@
             }
         });
 
-        function SendNotificationToGroupChat() {
+        function SendNotificationToUser() {
             debugger;
             var isValid = true;
             $('#taskTitle,#taskDescription').each(function (e) {
@@ -140,48 +136,22 @@
             };
 
             microsoftTeams.getContext(function (context) {
-                console.log(context);
                 var groupchatId = context.chatId;
                 var username = context.upn;
                 var userId = context.userObjectId;
 
-                const chat = {
-                    "topic": {
-                        "source": "0",
-                        "value": "https://graph.microsoft.com/v1.0/chats/" + groupchatId
-                    },
-                    "activityType": "taskCreated",
-                    "previewText": {
-                        "content": "New Task Created"
-                    },
-                    "recipient": {
-                        "@odata.type": "microsoft.graph.aadUserNotificationRecipient",
-                        "userId": userId
-                    },
-                    "templateParameters": [
-                        {
-                            "name": "taskName",
-                            "value": taskInfo.title
-                        }
-                    ]
-                };
                 $.ajax({
-                    url: "https://graph.microsoft.com/v1.0/chats/" + groupchatId + "/sendActivityNotification",
-                    type: "POST",
-                    data: JSON.stringify(chat),
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
+                    url: "https://graph.microsoft.com/v1.0/users/" + userId + "/teamwork/installedApps/?$expand=teamsAppDefinition",
+                    type: "GET",
                     beforeSend: function (request) {
-                        request.setRequestHeader("Authorization", "Bearer " + token);
+                        request.setRequestHeader("Authorization", "Bearer " + delegatedtoken);
                     },
                     success: function (profile) {
                         console.log(profile);
+                        appId = getAppId(profile);
+                        sendNotification(userId, taskInfo, token, appId);
                     },
                     error: function (xhr, textStatus, errorThrown) {
-                        debugger;
-                        console.log(xhr);
                         console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                     },
                 });
@@ -189,6 +159,55 @@
                 return true;
             });
         };
+
+        function getAppId(appList){
+            var list= appList.value;
+            var i;
+            for(i=0;i<list.length;i++){
+                if(list[0].teamsAppDefinition['displayName']=="NotifyFeedApp-nikija"){
+                    return list[0].id;
+                }
+            }
+
+        }
+        function sendNotification(userId, taskInfo, token, appId) {
+            const postData = {
+                "topic": {
+                    "source": "entityUrl",
+                    "value": "https://graph.microsoft.com/v1.0/users/" + userId + "/teamwork/installedApps/" + appId
+                },
+                "activityType": "taskCreated",
+                "previewText": {
+                    "content": "New Task Created"
+                },
+                "templateParameters": [
+                    {
+                        "name": "taskId",
+                        "value": taskInfo.title
+                    }
+                ]
+            };
+            $.ajax({
+                url: "https://graph.microsoft.com/v1.0/users/" + userId + "/teamwork/sendActivityNotification",
+                type: "POST",
+                data: JSON.stringify(postData),
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + token);
+                },
+                success: function (profile) {
+                    console.log(profile);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    debugger;
+                    console.log(xhr);
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                },
+            });
+        }
 
         function customTopicNotification() {
             debugger;
@@ -219,15 +238,16 @@
             };
 
             microsoftTeams.getContext(function (context) {
-                var groupchatId = context.chatId;
                 var userId = context.userObjectId;
+                var teamId = context.groupId;
+                var channelId = context.channelId;
                 const message = {
                     "body": {
                         "content": "New Deployment: " + taskInfo.DeployementTitle
                     }
                 };
                 $.ajax({
-                    url: "https://graph.microsoft.com/v1.0/chats/" + groupchatId + "/messages",
+                    url: "https://graph.microsoft.com/v1.0/teams/" + teamId + "/channels/" + channelId + "/messages",
                     type: "POST",
                     data: JSON.stringify(message),
                     headers: {
@@ -235,47 +255,44 @@
                         'Content-Type': 'application/json',
                     },
                     beforeSend: function (request) {
-                        request.setRequestHeader("Authorization", "Bearer " + delegatedtoken);
+                        request.setRequestHeader("Authorization", "Bearer " + token);
                     },
                     success: function (response) {
                         console.log(response);
-                        getChatMessage(token, groupchatId, taskInfo, userId, response.id);
+                        getNotification(token, taskInfo, teamId, response);
                     },
                     error: function (xhr, textStatus, errorThrown) {
+                        debugger;
                         console.log(xhr);
-                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                        console.log("textStatus: " + textStatus + ", errorThrown: chat" + errorThrown);
                     },
                 });
-
             });
         };
 
-        function getChatMessage(token, groupchatId, taskInfo, userId, messageId) {
+        function getNotification(token, taskInfo, teamId, response) {
             debugger;
-            const chat = {
+            const postData = {
                 "topic": {
-                    "source": "entityUrl",
-                    "value": "https://graph.microsoft.com/v1.0/chats/" + groupchatId + "/messages/" + messageId
+                    "source": "text",
+                    "value": "Deployment Approvals Channel",
+                    "webUrl": response.webUrl
                 },
-                "activityType": "approvalRequired",
+                "activityType": "deploymentApprovalRequired",
                 "previewText": {
-                    "content": "Deployment requires your approval"
-                },
-                "recipient": {
-                    "@odata.type": "microsoft.graph.aadUserNotificationRecipient",
-                    "userId": userId
+                    "content": "New deployment requires your approval"
                 },
                 "templateParameters": [
                     {
-                        "name": "approvalTaskId",
+                        "name": "deploymentId",
                         "value": taskInfo.DeployementTitle
                     }
                 ]
             };
             $.ajax({
-                url: "https://graph.microsoft.com/v1.0/chats/" + groupchatId + "/sendActivityNotification",
+                url: "https://graph.microsoft.com/v1.0/teams/" + teamId + "/sendActivityNotification",
                 type: "POST",
-                data: JSON.stringify(chat),
+                data: JSON.stringify(postData),
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
