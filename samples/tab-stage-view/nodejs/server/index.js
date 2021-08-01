@@ -13,6 +13,11 @@ server.use(express.urlencoded({
     extended: true
 }));
 server.use('/api', require('./api'));
+
+server.get('/content', (req, res, next) => {
+    res.sendFile('views/content-tab.html', {root: __dirname })
+});
+
 server.get('*', (req, res) => {
     res.json({ error: 'Route not found' });
 });

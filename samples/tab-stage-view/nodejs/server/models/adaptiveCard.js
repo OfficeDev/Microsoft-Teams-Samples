@@ -1,30 +1,7 @@
 const { StatusCodes } = require('botbuilder');
 
-// Card response for tab fetch request
-const showAdaptiveCard = () => {
-    console.log("Show Adaptive Card request");
-
-    const res = {
-        status: StatusCodes.OK,
-        body: {
-            "tab": {
-                "type": "continue",
-                "value": {
-                    "cards": [
-                        {
-                            "card": adaptiveCardWithLink,
-                        }
-                    ]
-                },
-            },
-        }
-    };
-
-    return res;
-};
-
 // Adaptive Card to show in task module
-const adaptiveCardWithLink = () => ({
+const adaptiveCardWithLink = (adaptiveCardDeepLink) => ({
     $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
     body: [
         {
@@ -38,12 +15,26 @@ const adaptiveCardWithLink = () => ({
             actions: [
                 {
                     type: "Action.Submit",
-                    title: "Close",
+                    title: "View",
                     data: {
                         msteams: {
-                            type: "task/submit"
-                        }
+                            type: "invoke",
+                            value: {
+                                type: "tab/tabInfoAction",
+                                tabInfo: {
+                                    contentUrl: "https://7cc632dd9a40.ngrok.io/content",
+                                    websiteUrl: "https://7cc632dd9a40.ngrok.io/content",
+                                    name: "Tasks",
+                                    entityId: "entityId"
+                                 }
+                                }
+                            }
                     }
+                },
+                {
+                    type: "Action.OpenUrl",
+                    title: "View via Deep Link",
+                    url: "https://teams.microsoft.com/l/stage/4dec86fc-335d-497b-b66f-afcdf4e0c22d/0?context={'contentUrl':'https://a081fe9ce994.ngrok.io/content','websiteUrl':'https://a081fe9ce994.ngrok.io/content','name':'Contoso'}"
                 }
             ]
         }
@@ -52,11 +43,16 @@ const adaptiveCardWithLink = () => ({
     version: '1.4'
 });
 
+const getDeepLinkTabStatic = (subEntityId, ID, Desc,AppID)=> {
+    let taskContext = encodeURI(`{"subEntityId": "${subEntityId}"}`);
+      return {
+       linkUrl:"https://teams.microsoft.com/l/entity/"+AppID+"/com.contoso.DeeplLinkBot.help?context=" + taskContext,
+       ID:ID,
+       TaskText:Desc
+      }    
+ }
 
 module.exports = {
-    createFetchResponse,
-    createSubmitResponse,
-    createAuthResponse,
-    invokeTaskResponse,
-    taskSubmitResponse
+    adaptiveCardWithLink,
+    getDeepLinkTabStatic
 };
