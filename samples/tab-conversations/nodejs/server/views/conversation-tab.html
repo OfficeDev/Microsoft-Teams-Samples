@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/styles/msteams-16.css">
+    </link>
+    <link rel="stylesheet" type="text/css" href="/styles/custom.css">
+    </link>
+    <script src="https://statics.teams.microsoft.com/sdk/v1.5.2/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script>
+        microsoftTeams.initialize();
+
+        function startConversation() {
+            microsoftTeams.getContext(function (context) {
+                console.log(context);
+                microsoftTeams.conversations.openConversation(
+                    {
+                        "subEntityId": context.subEntityId,
+                        "entityId": context.entityId,
+                        "channelId": context.channelId,
+                        "title": "Task Title"
+                    })
+                microsoftTeams.conversations.onStartConversation = (conversationResponse) => {
+                    console.log(conversationReponse)
+                };
+            })
+        }
+
+        function closeConversation() {
+            microsoftTeams.conversations.closeConversation();
+        }
+
+        function continueConversation() {
+            microsoftTeams.getContext(function (context) {
+                console.log(context);
+                microsoftTeams.conversations.openConversation(
+                    {
+                        "subEntityId": context.subEntityId,
+                        "entityId": context.entityId,
+                        "channelId": context.channelId,
+                        "title": "Task Title",
+                        "conversationId": "1627638240614"
+                    })
+                microsoftTeams.conversations.onStartConversation = (conversationResponse) => {
+                    console.log(conversationReponse)
+                };
+            })
+        }
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            <div class="font-semibold font-title">
+                <p> Sample for Conversational tabs</p>
+                <button onclick="startConversation()">Start Coversation</button>
+                <button onclick="closeConversation()">Close Coversation</button>
+                <button onclick="continueConversation()">Continue Coversation</button>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
