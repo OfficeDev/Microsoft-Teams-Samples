@@ -7,8 +7,8 @@ require('dotenv').config({ path: ENV_FILE });
 const PORT = process.env.PORT || 3978;
 const server = express();
 
-server.use("/Images", express.static(path.resolve(__dirname, '../Images')));
-
+server.use("/images", express.static(path.resolve(__dirname, '../images')));
+server.use('/static', express.static(path.join(__dirname, 'static')))
 server.use(cors());
 server.use(express.json());
 server.use(express.urlencoded({
