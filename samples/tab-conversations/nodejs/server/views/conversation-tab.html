@@ -4,9 +4,11 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/styles/msteams-16.css">
     </link>
-    <link rel="stylesheet" type="text/css" href="/styles/custom.css">
+    <link rel="stylesheet" type="text/css" href="styles/custom.css">
     </link>
-    <script src="https://statics.teams.microsoft.com/sdk/v1.5.2/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+        crossorigin="anonymous"></script>
     <script>
         microsoftTeams.initialize();
 
@@ -15,15 +17,16 @@
                 console.log(context);
                 microsoftTeams.conversations.openConversation(
                     {
-                        "subEntityId": context.subEntityId,
+                        "subEntityId": "task-2037",
                         "entityId": context.entityId,
                         "channelId": context.channelId,
                         "title": "Task Title"
                     })
-                microsoftTeams.conversations.onStartConversation = (conversationResponse) => {
+                microsoftTeams.conversations.onStartConversation = (conversationReponse) => {
                     console.log(conversationReponse)
                 };
             })
+
         }
 
         function closeConversation() {
@@ -35,11 +38,11 @@
                 console.log(context);
                 microsoftTeams.conversations.openConversation(
                     {
-                        "subEntityId": context.subEntityId,
+                        "subEntityId": "task-2037",
                         "entityId": context.entityId,
                         "channelId": context.channelId,
                         "title": "Task Title",
-                        "conversationId": "1627638240614"
+                        "conversationId": "1627916894414"
                     })
                 microsoftTeams.conversations.onStartConversation = (conversationResponse) => {
                     console.log(conversationReponse)
@@ -54,9 +57,28 @@
         <div class="panel">
             <div class="font-semibold font-title">
                 <p> Sample for Conversational tabs</p>
-                <button onclick="startConversation()">Start Coversation</button>
-                <button onclick="closeConversation()">Close Coversation</button>
-                <button onclick="continueConversation()">Continue Coversation</button>
+                <table>
+                    <tr>
+                        <th>Task</th>
+                        <th>Description</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>Start Conversation</td>
+                        <td>To open a conversation</td>
+                        <td><button onclick="startConversation()">Start Coversation</button></td>
+                    </tr>
+                    <tr>
+                        <td>Close Conversation</td>
+                        <td>To close the conversation view</td>
+                        <td><button onclick="closeConversation()">Close Coversation</button></td>
+                    </tr>
+                    <tr>
+                        <td>Continue Conversation</td>
+                        <td>To continue a conversation.</td>
+                        <td><button onclick="continueConversation()">Continue Coversation</button></td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
