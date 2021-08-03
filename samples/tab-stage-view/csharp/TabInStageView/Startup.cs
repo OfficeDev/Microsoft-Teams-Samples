@@ -5,12 +5,12 @@
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
 using TabInStageView.Bots;
 
 namespace TabInStageView
@@ -34,27 +34,38 @@ namespace TabInStageView
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
             services.AddTransient<IBot, ActivityBot>();
+
+            // Setup SPA static files.
+            // In production, the React files will be served from this directory.
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/build";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
             {
-                app.UseDeveloperExceptionPage();
-            }
+                endpoints.MapControllerRoute(
+                   name: "default",
+                   pattern: "{controller}/{action=Index}/{id?}");
+            });
 
-            app.UseDefaultFiles()
-                .UseStaticFiles()
-                .UseWebSockets()
-                .UseRouting()
-                .UseAuthorization()
-                .UseEndpoints(endpoints =>
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "ClientApp";
+
+                if (env.IsDevelopment())
                 {
-                    endpoints.MapControllers();
-                });
-
-            // app.UseHttpsRedirection();
+                    spa.UseReactDevelopmentServer(npmScript: "start");
+                }
+            });
         }
     }
 }
