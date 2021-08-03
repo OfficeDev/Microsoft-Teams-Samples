@@ -12,11 +12,11 @@ This Teams tab app provides a way to allow users to have conversations about sub
 
 - Open Conversation - opens a new conversation
 
-![Open Conversation](images/startConversation.png)
+![Open Conversation](Images/startConversation.png)
 
 - Continue Conversation - continues old conversation based on conversation id
 
-![Continue Conversation](images/continueConversation.png)
+![Continue Conversation](Images/continueConversation.png)
 
 ## Prerequisites
 
