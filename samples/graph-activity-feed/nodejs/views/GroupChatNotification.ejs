@@ -10,6 +10,7 @@
         <script src="https://statics.teams.microsoft.com/sdk/v1.7.0/js/MicrosoftTeams.min.js"></script>
         <script src="https://unpkg.com/@microsoft/teams-js/dist/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="./scripts/auth-delegated.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Security-Policy"
@@ -85,7 +86,6 @@
     <script>
             var token =  <%-token%>
             $(document).ready(function () {
-                debugger;
                 $(".customTopicNotificationChat").hide();
                 $('input[type="radio"]').click(function () {
                     var inputValue = $(this).attr("value");
@@ -98,11 +98,6 @@
 
         var delegatedtoken = localStorage.getItem("accessToken");
         console.log(delegatedtoken);
-        microsoftTeams.getContext(function (context) {
-            var groupchatId = context.chatId;
-            var username = context.upn;
-            var userId = context.userObjectId;
-        });
         var empty = true;
         $('input[type="text"]').each(function () {
             if ($(this).val() != "") {
@@ -111,8 +106,8 @@
             }
         });
 
+        // send notification to group chat for task creation.
         function SendNotificationToGroupChat() {
-            debugger;
             var isValid = true;
             $('#taskTitle,#taskDescription').each(function (e) {
                 if ($.trim($(this).val()) == '') {
@@ -140,9 +135,7 @@
             };
 
             microsoftTeams.getContext(function (context) {
-                console.log(context);
                 var groupchatId = context.chatId;
-                var username = context.upn;
                 var userId = context.userObjectId;
 
                 const chat = {
@@ -190,8 +183,8 @@
             });
         };
 
+        // send notification of custom topic.
         function customTopicNotification() {
-            debugger;
             var isValid = true;
             $('#DeployementTitle,#DeploymentDescription').each(function (e) {
                 if ($.trim($(this).val()) == '') {
@@ -217,7 +210,6 @@
                 DeploymentDescription: $('#DeploymentDescription').val(),
                 taskInfoAction: action,
             };
-
             microsoftTeams.getContext(function (context) {
                 var groupchatId = context.chatId;
                 var userId = context.userObjectId;
@@ -238,11 +230,9 @@
                         request.setRequestHeader("Authorization", "Bearer " + delegatedtoken);
                     },
                     success: function (response) {
-                        console.log(response);
                         getChatMessage(token, groupchatId, taskInfo, userId, response.id);
                     },
                     error: function (xhr, textStatus, errorThrown) {
-                        console.log(xhr);
                         console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                     },
                 });
@@ -250,9 +240,9 @@
             });
         };
 
+        // get notification of custom topic.
         function getChatMessage(token, groupchatId, taskInfo, userId, messageId) {
-            debugger;
-            const chat = {
+            const postData = {
                 "topic": {
                     "source": "entityUrl",
                     "value": "https://graph.microsoft.com/v1.0/chats/" + groupchatId + "/messages/" + messageId
@@ -275,7 +265,7 @@
             $.ajax({
                 url: "https://graph.microsoft.com/v1.0/chats/" + groupchatId + "/sendActivityNotification",
                 type: "POST",
-                data: JSON.stringify(chat),
+                data: JSON.stringify(postData),
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',

@@ -9,6 +9,7 @@ const querystring = require("querystring");
 const app = express();
 
 app.use(express.static(__dirname + '/Styles'));
+app.use(express.static(path.join(__dirname, 'static')));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 app.set('views', __dirname);
@@ -22,7 +23,6 @@ app.get('/configure', function (req, res) {
 app.get('/GroupChatNotification', function (req, res) {
   var tenantId = req.url.split('=')[1];
   auth.getAccessToken(tenantId).then(async function (token) {
-    console.log("token from js file : " + token);
     res.render('./views/GroupChatNotification', { token: JSON.stringify(token) });
   });
 });
@@ -56,50 +56,50 @@ app.get('/auth/auth-end', function (req, res) {
   var clientId = process.env.ClientId;
   res.render('./views/auth-end', { clientId: clientId });
 });
+
 // On-behalf-of token exchange
-app.post('/auth/token', function (req, res) {
-  const tid = req.body.tid;
-  const token = req.body.token;
+app.post('/auth/token', function(req, res) {
+  var tid = req.body.tid;
+  var token = req.body.token;
   var scopes = ["https://graph.microsoft.com/User.Read"];
-  console.log(process.env.ClientId + " : " + config["tab"]["appPassword"]);
 
   var oboPromise = new Promise((resolve, reject) => {
-    const url = "https://login.microsoftonline.com/" + tid + "/oauth2/v2.0/token";
-    const params = {
-      client_id: process.env.ClientId,
-      client_secret: process.env.ClientSecret,
-      grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
-      assertion: token,
-      requested_token_use: "on_behalf_of",
-      scope: scopes.join(" ")
-    };
-
-    fetch(url, {
-      method: "POST",
-      body: querystring.stringify(params),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/x-www-form-urlencoded"
-      }
-    }).then(result => {
-      if (result.status !== 200) {
-        result.json().then(json => {
-          // TODO: Check explicitly for invalid_grant or interaction_required
-          reject({ "error": json.error });
-        });
-      } else {
-        result.json().then(json => {
-          resolve(json.access_token);
-        });
-      }
-    });
+      const url = "https://login.microsoftonline.com/" + tid + "/oauth2/v2.0/token";
+      const params = {
+          client_id: process.env.ClientId,
+          client_secret: process.env.ClientSecret,
+          grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
+          assertion: token,
+          requested_token_use: "on_behalf_of",
+          scope: scopes.join(" ")
+      };
+  
+      fetch(url, {
+        method: "POST",
+        body: querystring.stringify(params),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      }).then(result => {
+        if (result.status !== 200) {
+          result.json().then(json => {
+            // TODO: Check explicitly for invalid_grant or interaction_required
+            reject({"error":json.error});
+          });
+        } else {
+          result.json().then(json => {
+            resolve(json.access_token);
+          });
+        }
+      });
   });
 
-  oboPromise.then(function (result) {
-    res.json(result);
-  }, function (err) {
-    console.log(err); // Error: "It broke"
-    res.json(err);
+  oboPromise.then(function(result) {
+      res.json(result);
+  }, function(err) {
+      console.log(err); // Error: "It broke"
+      res.json(err);
   });
 });
 

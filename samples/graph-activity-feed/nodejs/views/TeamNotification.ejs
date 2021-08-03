@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <head>
         <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js"
             integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT"
@@ -10,20 +8,18 @@
         <script src="https://statics.teams.microsoft.com/sdk/v1.7.0/js/MicrosoftTeams.min.js"></script>
         <script src="https://unpkg.com/@microsoft/teams-js/dist/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="../scripts/auth.js"></script>
+        <script src="./scripts/auth-delegated.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Security-Policy"
             content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
     </head>
 </head>
-
 <body id=mainDiv>
     <button onclick="requestConsent()" id="consent" style="display: none">Login</button>
     <div id="divGraphProfile" style="display: none"></div>
     <h4 id="successMsg"></h4>
     <div>
-
         <div class="radioClass">
             <label><input type="radio" name="notificationRadio" value="sendNotificationChannel" checked> Send
                 Notification To
@@ -39,13 +35,14 @@
                     </br>
                     </br>
                     <label for="title" class="title">Task Title</label>
-
+                    </br>
                     <input type="text" id="taskTitle" name="taskTitle">
                 </div>
                 <div class="form-group fg">
                     </br>
                     </br>
                     <label for="title-desc" class="description">Task Description</label>
+                    </br>
                     <input type="text" id="taskDescription" name="taskDescription">
                 </div>
             </div>
@@ -62,13 +59,14 @@
                     </br>
                     </br>
                     <label for="DeployementTitle" class="DeployementTitle">Deployment Title</label>
+                    </br>
                     <input type="text" id="DeployementTitle" name="DeployementTitle">
-
                 </div>
                 <div class="form-group fg">
                     </br>
                     </br>
                     <label for="deployment-desc" class="DeploymentDescription">Deployment Description</label>
+                    </br>
                     <input type="text" id="DeploymentDescription" name="DeploymentDescription">
                 </div>
             </div>
@@ -91,12 +89,14 @@
                     </br>
                     </br>
                     <label for="reservationTitle" class="reservationTitle">Reservation Title</label>
+                    </br>
                     <input type="text" id="reservationTitle" name="reservationTitle">
                 </div>
                 <div class="form-group fg">
                     </br>
                     </br>
                     <label for="currentSlot-desc" class="currentSlot">Current Slot</label>
+                    </br>
                     <input type="text" id="currentSlot" name="currentSlot">
                 </div>
             </div>
@@ -108,8 +108,6 @@
             </div>
         </div>
     </div>
-
-
     <script>
         var token =  <%-token%>
             $(document).ready(function () {
@@ -135,6 +133,7 @@
             }
         });
 
+        // send notification to channel in a team for task creation.
         function SendNotificationToChannel() {
             var isValid = true;
             $('#taskTitle,#taskDescription').each(function (e) {
@@ -161,15 +160,13 @@
                 description: $('#taskDescription').val(),
                 taskInfoAction: action,
             };
-
             microsoftTeams.getContext(function (context) {
-                console.log(context);
                 var groupchatId = context.chatId;
                 var username = context.upn;
                 var userId = context.userObjectId;
                 var teamId = context.groupId;
 
-                const chat = {
+                const postData = {
                     "topic": {
                         "source": "entityUrl",
                         "value": "https://graph.microsoft.com/v1.0/teams/" + teamId
@@ -192,7 +189,7 @@
                 $.ajax({
                     url: "https://graph.microsoft.com/v1.0/teams/" + teamId + "/sendActivityNotification",
                     type: "POST",
-                    data: JSON.stringify(chat),
+                    data: JSON.stringify(postData),
                     headers: {
                         Accept: 'application/json',
                         'Content-Type': 'application/json',
@@ -211,6 +208,8 @@
                 return true;
             });
         };
+
+        // send notification for channel tab.
         function channelTabTeamNotification() {
             var isValid = true;
             $('#reservationId,#reservationTitle,#currentSlot').each(function (e) {
@@ -238,7 +237,6 @@
                 currentSlot: $('#currentSlot').val(),
                 taskInfoAction: action,
             };
-
             microsoftTeams.getContext(function (context) {
                 var groupchatId = context.chatId;
                 var username = context.upn;
@@ -256,7 +254,7 @@
                     success: function (profile) {
                         console.log(profile);
                         taburl = getTabURL(profile);
-                        getNotificationToChannelTab(taburl, token, teamId, taskInfo, userId,channelId);
+                        getNotificationToChannelTab(taburl, token, teamId, taskInfo, userId, channelId);
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         console.log(xhr);
@@ -267,11 +265,12 @@
 
         }
 
-        function getNotificationToChannelTab(tabId, token, teamId, taskInfo, userId,channelId) {
-            const chat = {
+        // get notification to channel tab.
+        function getNotificationToChannelTab(tabId, token, teamId, taskInfo, userId, channelId) {
+            const postData = {
                 "topic": {
                     "source": "entityUrl",
-                     "value": "https://graph.microsoft.com/v1.0/teams/"+teamId+"/channels/"+channelId+"/tabs/"+tabId
+                    "value": "https://graph.microsoft.com/v1.0/teams/" + teamId + "/channels/" + channelId + "/tabs/" + tabId
                 },
                 "activityType": "reservationUpdated",
                 "previewText": {
@@ -292,11 +291,10 @@
                     }
                 ]
             };
-
             $.ajax({
                 url: "https://graph.microsoft.com/v1.0/teams/" + teamId + "/sendActivityNotification",
                 type: "POST",
-                data: JSON.stringify(chat),
+                data: JSON.stringify(postData),
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
@@ -315,6 +313,7 @@
             });
         }
 
+        // get tab Url.
         function getTabURL(appList) {
             debugger;
             list = appList.value;
@@ -325,9 +324,9 @@
                 }
             }
         }
-
+        
+        // send notification for custom topic in team.
         function customTopicTeamNotification() {
-            debugger;
             var isValid = true;
             $('#DeployementTitle,#DeployementDescription').each(function (e) {
                 if ($.trim($(this).val()) == '') {
@@ -353,7 +352,6 @@
                 description: $('#DeployementDescription').val(),
                 taskInfoAction: action,
             };
-
             microsoftTeams.getContext(function (context) {
                 var groupchatId = context.chatId;
                 var username = context.upn;
@@ -363,7 +361,7 @@
 
                 const message = {
                     "body": {
-                        "content": "New Deployment :"+ taskInfo.title
+                        "content": "New Deployment :" + taskInfo.title
                     }
                 };
                 $.ajax({
@@ -378,57 +376,56 @@
                         request.setRequestHeader("Authorization", "Bearer " + delegatedtoken);
                     },
                     success: function (response) {
-                        console.log(response);
-                        getChannelMessage(userId,taskInfo,teamId,token,response.webUrl);
+                        getChannelNotification(userId, taskInfo, teamId, token, response.webUrl);
                     },
                     error: function (xhr, textStatus, errorThrown) {
-                        console.log(xhr);
                         console.log("textStatus: " + textStatus + ", errorThrown: chat" + errorThrown);
                     },
                 });
             });
         };
 
-        function getChannelMessage(userId,taskInfo,teamId,token,webUrl) {
-            const chat = {
-                    "topic": {
-                        "source": "text",
-                        "value": "Deployment Approvals Channel",
-                        "webUrl": webUrl,
-                    },
-                    "activityType": "deploymentApprovalRequired",
-                    "previewText": {
-                        "content": "New deployment requires your approval"
-                    },
-                    "recipient": {
-                        "@odata.type": "microsoft.graph.aadUserNotificationRecipient",
-                        "userId": userId
-                    },
-                    "templateParameters": [
-                        {
-                            "name": "deploymentId",
-                            "value": taskInfo.title
-                        }
-                    ]
-                };
-                $.ajax({
-                    url: "https://graph.microsoft.com/v1.0/teams/" + teamId + "/sendActivityNotification",
-                    type: "POST",
-                    data: JSON.stringify(chat),
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    beforeSend: function (request) {
-                        request.setRequestHeader("Authorization", "Bearer " + token);
-                    },
-                    success: function (profile) {
-                        console.log(profile);
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-                    },
-                });
+        // get channel notification for custom topic.
+        function getChannelNotification(userId, taskInfo, teamId, token, webUrl) {
+            const postData = {
+                "topic": {
+                    "source": "text",
+                    "value": "Deployment Approvals Channel",
+                    "webUrl": webUrl,
+                },
+                "activityType": "deploymentApprovalRequired",
+                "previewText": {
+                    "content": "New deployment requires your approval"
+                },
+                "recipient": {
+                    "@odata.type": "microsoft.graph.aadUserNotificationRecipient",
+                    "userId": userId
+                },
+                "templateParameters": [
+                    {
+                        "name": "deploymentId",
+                        "value": taskInfo.title
+                    }
+                ]
+            };
+            $.ajax({
+                url: "https://graph.microsoft.com/v1.0/teams/" + teamId + "/sendActivityNotification",
+                type: "POST",
+                data: JSON.stringify(postData),
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", "Bearer " + token);
+                },
+                success: function (profile) {
+                    console.log(profile);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                },
+            });
         }
     </script>
 </body>
