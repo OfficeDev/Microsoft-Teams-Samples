@@ -1,0 +1,87 @@
+﻿@page "/conversationTab"
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/styles/msteams-16.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/styles/custom.css"/>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+        crossorigin="anonymous"></script>
+    <script>
+        microsoftTeams.initialize();
+
+        function startConversation() {
+            microsoftTeams.getContext(function (context) {
+                console.log(context);
+                microsoftTeams.conversations.openConversation(
+                    {
+                        "subEntityId": "task-2037",
+                        "entityId": context.entityId,
+                        "channelId": context.channelId,
+                        "title": "Task Title"
+                    })
+                microsoftTeams.conversations.onStartConversation = (conversationReponse) => {
+                    console.log(conversationReponse)
+                };
+            })
+
+        }
+
+        function closeConversation() {
+            microsoftTeams.conversations.closeConversation();
+        }
+
+        function continueConversation() {
+            microsoftTeams.getContext(function (context) {
+                console.log(context);
+                microsoftTeams.conversations.openConversation(
+                    {
+                        "subEntityId": "task-2037",
+                        "entityId": context.entityId,
+                        "channelId": context.channelId,
+                        "title": "Task Title",
+                        "conversationId": "1627986462355"
+                    })
+                microsoftTeams.conversations.onStartConversation = (conversationResponse) => {
+                    console.log(conversationReponse)
+                };
+            })
+        }
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            <div class="font-semibold font-title">
+                <p> Sample for Conversational tabs</p>
+                <table>
+                    <tr>
+                        <th>Task</th>
+                        <th>Description</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>Start Conversation</td>
+                        <td>To open a conversation</td>
+                        <td><button onclick="startConversation()">Start Coversation</button></td>
+                    </tr>
+                    <tr>
+                        <td>Close Conversation</td>
+                        <td>To close the conversation view</td>
+                        <td><button onclick="closeConversation()">Close Coversation</button></td>
+                    </tr>
+                    <tr>
+                        <td>Continue Conversation</td>
+                        <td>To continue a conversation.</td>
+                        <td><button onclick="continueConversation()">Continue Coversation</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
