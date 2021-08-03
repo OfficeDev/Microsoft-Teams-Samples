@@ -8,13 +8,15 @@ const querystring = require("querystring");
 
 const app = express();
 
-app.use(express.static(__dirname + '/Styles'));
 app.use(express.static(path.join(__dirname, 'static')));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 app.set('views', __dirname);
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
+
+// parse application/json
+app.use(express.json());
 
 app.get('/configure', function (req, res) {
   res.render('./views/configure');
@@ -103,6 +105,6 @@ app.post('/auth/token', function(req, res) {
   });
 });
 
-app.listen(3333, function () {
-  console.log('app listening on port 3333!');
+app.listen(3978, function () {
+  console.log('app listening on port 3978!');
 });

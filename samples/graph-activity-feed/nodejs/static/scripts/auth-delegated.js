@@ -24,22 +24,19 @@
     // 2. Exchange that token for a token with the required permissions
     //    using the web service (see /auth/token handler in app.js)
     function getServerSideToken(clientSideToken) {
-
         return new Promise((resolve, reject) => {
-            debugger;
             microsoftTeams.initialize();
             microsoftTeams.getContext((context) => {
               fetch('/auth/token', {
-                    method: 'post',
+                    method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
                     },
                     body: JSON.stringify({
-                        'tid': context.tid,
-                        'token': clientSideToken 
+                        tid: context.tid,
+                        token: clientSideToken 
                     }),
-                    mode: 'cors',
-                    cache: 'default'
                 })
                 .then((response) => {
                     if (response.ok) {
@@ -112,7 +109,25 @@
             return getServerSideToken(clientSideToken);
         })
         .then((serverSideToken) => {
+            // Display in-line button so user can consent
+           
+                requestConsent()
+                    .then((result) => {
+                        // Consent succeeded - use the token we got back
+                        let accessToken = JSON.parse(result).accessToken;
+                        console.log(`Received access token ${accessToken}`);
+                        useServerSideToken(accessToken);
+                    })
+                    .catch((error) => {
+                        console.log(`ERROR ${error}`);
+                        // Consent failed - offer to refresh the page
+                        button.disabled = true;
+                        let refreshButton = display("Refresh page", "button");
+                        refreshButton.onclick = (() => { window.location.reload(); });
+                    });
+           
             return useServerSideToken(serverSideToken);
+
         })
         .catch((error) => {
             if (error === "invalid_grant") {
