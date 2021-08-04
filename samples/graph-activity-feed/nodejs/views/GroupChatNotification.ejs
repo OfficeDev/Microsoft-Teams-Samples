@@ -32,10 +32,9 @@
             <label><input type="radio" name="notificationRadio" value="customTopicNotificationChat"> Send Notification
                 with Custom Topic</label>
         </div>
-        </br>
-        </br>
         <div class="sendNotificationGroupChat desc">
             <div class="form-group fg">
+                <br>
                 <label for="title" class="title">Task Title</label>
                 <br>
                 <input type="text" id="taskTitle" name="taskTitle">
@@ -54,10 +53,12 @@
         </div>
         <div class="customTopicNotificationChat desc">
             <div class="form-group fg">
+                <br>
                 <label for="DeployementTitle" class="DeployementTitle">Deployment Title</label><br>
                 <input type="text" id="DeployementTitle" name="DeployementTitle">
             </div>
             <div class="form-group fg">
+                <br>
                 <label for="deployment-desc" class="DeploymentDescription">Deployment Description</label><br>
                 <input type="text" id="DeploymentDescription" name="DeploymentDescription">
             </div>
@@ -119,7 +120,7 @@
                 var groupchatId = context.chatId;
                 var userId = context.userObjectId;
 
-                const chat = {
+                const postData = {
                     "topic": {
                         "source": "0",
                         "value": "https://graph.microsoft.com/v1.0/chats/" + groupchatId
@@ -142,7 +143,7 @@
                 $.ajax({
                     url: "https://graph.microsoft.com/v1.0/chats/" + groupchatId + "/sendActivityNotification",
                     type: "POST",
-                    data: JSON.stringify(chat),
+                    data: JSON.stringify(postData),
                     headers: {
                         Accept: 'application/json',
                         'Content-Type': 'application/json',
@@ -154,13 +155,9 @@
                         console.log(profile);
                     },
                     error: function (xhr, textStatus, errorThrown) {
-                        debugger;
-                        console.log(xhr);
                         console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                     },
                 });
-                microsoftTeams.tasks.submitTask(taskInfo);
-                return true;
             });
         };
 
@@ -257,7 +254,6 @@
                     console.log(profile);
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    console.log(xhr);
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                 },
             });

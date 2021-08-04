@@ -1,11 +1,8 @@
 <html>
-
 <head>
     <title> Auth End Page</title>
 </head>
-
 <body>
-
     <script src="https://unpkg.com/@microsoft/teams-js@1.5.0/dist/MicrosoftTeams.min.js" ,
         crossorigin="anonymous"></script>
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.15/js/adal.min.js" ,
@@ -13,10 +10,8 @@
         crossorigin="anonymous"></script>
     <script>
         microsoftTeams.initialize();
-
         localStorage.removeItem("auth.error");
         let hashParams = getHashParameters();
-
         if (hashParams["error"]) {
             // Authentication/authorization failed
             localStorage.setItem("auth.error", JSON.stringify(hashParams));
@@ -59,5 +54,4 @@
         }
     </script>
 </body>
-
 </html>

@@ -33,7 +33,6 @@ app.get('/TeamNotification', function (req, res) {
   auth.getAccessToken(tenantId).then(async function (token) {
     res.render('./views/TeamNotification', { token: JSON.stringify(token) });
   });
-
 });
 
 app.get('/UserNotification', function (req, res) {
@@ -41,7 +40,6 @@ app.get('/UserNotification', function (req, res) {
   auth.getAccessToken(tenantId).then(async function (token) {
     res.render('./views/UserNotification', { token: JSON.stringify(token) });
   });
-
 });
 
 // Pop-up dialog to ask for additional permissions, redirects to AAD page
@@ -102,6 +100,6 @@ app.post('/auth/token', function(req, res) {
   });
 });
 
-app.listen(3333, function () {
-  console.log('app listening on port 3333!');
+app.listen(3978, function () {
+  console.log('app listening on port 3978!');
 });

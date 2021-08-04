@@ -55,29 +55,6 @@
         });
     }
 
-    // 3. Get the server side token and use it to call the Graph API
-    function useServerSideToken(data) {
-        return fetch("https://graph.microsoft.com/v1.0/me/",
-            {
-                method: 'GET',
-                headers: {
-                    "accept": "application/json",
-                    "authorization": "bearer " + data
-                },
-                mode: 'cors',
-                cache: 'default'
-            })
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw (`Error ${response.status}: ${response.statusText}`);
-                }
-            })
-            .then((profile) => {
-            });
-    }
-
     // Show the consent pop-up
     function requestConsent() {
         return new Promise((resolve, reject) => {
@@ -101,24 +78,6 @@
     getClientSideToken()
         .then((clientSideToken) => {
             return getServerSideToken(clientSideToken);
-        })
-        .then((serverSideToken) => {
-            // Display in-line button so user can consent
-            requestConsent()
-                .then((result) => {
-                    // Consent succeeded - use the token we got back
-                    let accessToken = JSON.parse(result).accessToken;
-                    console.log(`Received access token ${accessToken}`);
-                    useServerSideToken(accessToken);
-                })
-                .catch((error) => {
-                    console.log(`ERROR ${error}`);
-                    // Consent failed - offer to refresh the page
-                    button.disabled = true;
-                    let refreshButton = display("Refresh page", "button");
-                    refreshButton.onclick = (() => { window.location.reload(); });
-                });
-            return useServerSideToken(serverSideToken);
         })
         .catch((error) => {
             if (error === "invalid_grant") {

@@ -38,8 +38,6 @@
         <div class="sendNotificationChannel desc">
             <div class="mb">
                 <div class="form-group fg">
-                    </br>
-                    </br>
                     <label for="title" class="title">Task Title</label>
                     </br>
                     <input type="text" id="taskTitle" name="taskTitle">
@@ -60,7 +58,6 @@
         <div class="customTopicNotificationChannel desc">
             <div class="mb">
                 <div class="form-group fg">
-                    </br>
                     <label for="DeployementTitle" class="DeployementTitle">Deployment Title</label>
                     </br>
                     <input type="text" id="DeployementTitle" name="DeployementTitle">
@@ -199,8 +196,6 @@
                         console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                     },
                 });
-                microsoftTeams.tasks.submitTask(taskInfo);
-                return true;
             });
         };
 

@@ -27,10 +27,10 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
     npm install
     ```
 
-1) Run ngrok - point to port 3333
+1) Run ngrok - point to port 3978
 
     ```bash
-    ngrok http -host-header=rewrite 3333
+    ngrok http -host-header=rewrite 3978
     ```
 
 
@@ -90,7 +90,7 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
 14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env file.
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). Also, replace your Base url wherever you see the place holder string `<<YOUR-BASE-URL>>`.
+    - **Edit** the `manifest.json` contained in the `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`).Replace your Base url wherever you see the place holder string `<<YOUR-BASE-URL>>`. Also replace any random guid with the place holder `<<YOUR-MANIFEST-ID>>`.
     - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
@@ -107,6 +107,10 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
 - Add Tab in Personal, GroupChat or Team scope
 - Fill the Details in Page and click on Send notification button
 ![](Images/image1.png)
+
+![](Images/image3.png)
+
+![](Images/image4.png)
 
 - Notification triggred by Tab App will appear in Teams Activity Feed
 
