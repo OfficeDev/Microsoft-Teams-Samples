@@ -1,0 +1,33 @@
+﻿@page 
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/styles/msteams-16.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/custom.css"/>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+        crossorigin="anonymous"></script>
+    <script>
+        microsoftTeams.initialize();
+
+        function createLink() {
+            let url = "https://teams.microsoft.com/l/stage/8749ff03-ae9e-4d33-88d8-bc9761ea7335/0?context=%7B%22contentUrl%22%3A%22https%3A%2F%2F2f8fec398a1e.ngrok.io%2Ftab%22%2C%22websiteUrl%22%3A%22https%3A%2F%2F2f8fec398a1e.ngrok.io%2Ftab%22%2C%22name%22%3A%22Contoso%22%7D";
+            microsoftTeams.executeDeepLink(url);
+         };
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            <div>
+                <label for="tabChoice"></label>Click on the button to view the stage view from deeplink:
+                <button onClick={createLink}>Execute deeplink!</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

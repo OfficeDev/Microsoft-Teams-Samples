@@ -11,7 +11,7 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "TabStageView",
+    "short": "Tab Stage View",
     "full": "Tab in stage view"
   },
   "description": {
@@ -24,7 +24,7 @@
   },
   "bots": [
     {
-      "botId": "8749ff03-ae9e-4d33-88d8-bc9761ea7335",
+      "botId": "{{BOT-ID}}",
       "scopes": [
         "team",
         "personal",
@@ -33,10 +33,20 @@
       "isNotificationOnly": false
     }
   ],
+ "staticTabs": [
+  {
+    "entityId": "Stage view",
+    "name": "Sample Tab",
+    "contentUrl": "{{ Application Base Url }}/sampleTab",
+    "scopes": [
+      "personal"
+    ]
+  }
+  ],
   "accentColor": "#60A18E",
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "*.ngrok.io",
+    "<<VALID DOMAIN>>",
     "token.botframework.com"
   ]
 }
