@@ -1,7 +1,7 @@
 ﻿This App talks about the Teams tab which displays Adaptive card with CSharp.
-For reference please check [Build tabs with Adaptive Cards](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs)
+For reference please check [Tabs link unfurling and Stage View](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling)
 
-This feature shown in this sample is in Public Developer Preview and is supported in desktop and mobile.
+This feature shown in this sample is in Public Developer Preview.
 
 ## Prerequisites
 
@@ -28,7 +28,7 @@ This feature shown in this sample is in Public Developer Preview and is supporte
 
 4. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 7.
 
-5. Modify the `/appsettings.json` and fill in the `{{ Bot Id }}`,`{{ Bot Password }}` and `{{ Connection Name }}` with the id from step 2.
+5. Modify the `/appsettings.json` and fill in the `{{ Bot Id }}` and `{{ Bot Password }}` with the id from step 2.
 
 6. Add `{{ Application Base Url }}`in appsetting.json with ngrok tunnel url or deployed application base url. 
 
@@ -40,11 +40,11 @@ This feature shown in this sample is in Public Developer Preview and is supporte
     
 ## To try this sample
 
-- In a terminal, navigate to `TabWithAdpativeCardFlow`
+- In a terminal, navigate to `TabInStageView`
 
     ```bash
     # change into project folder
-    cd # TabWithAdpativeCardFlow
+    cd # TabInStageView
     ```
 
 - Run the bot from a terminal or from Visual Studio, choose option A or B.
@@ -60,8 +60,8 @@ This feature shown in this sample is in Public Developer Preview and is supporte
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `TabWithAdpativeCardFlow` folder
-  - Select `TabWithAdpativeCardFlow.csproj` file
+  - Navigate to `TabInStageView` folder
+  - Select `TabInStageView.csproj` file
   - Press `F5` to run the project
 
 ## Interacting with the tab in Teams
@@ -70,19 +70,21 @@ This feature shown in this sample is in Public Developer Preview and is supporte
 
 ## Features of this sample
 
-- Tab showing Adaptive card with action controls.
+- Welcome message with feature explanation.
 
-![Adaptive Card](TabWithAdpativeCardFlow/Images/SignIn.png)
+![Adaptive Card](TabInStageView/Images/welcomeAction.png)
 
-![Adaptive Card](TabWithAdpativeCardFlow/Images/SignInPrompt.png)
+- Opening stage view in tab with Adaptive card action.
 
-![Adaptive Card](TabWithAdpativeCardFlow/Images/TabAdaptiveCardFlow.png)
+![Adaptive Card](TabInStageView/Images/viaCardAction.png)
 
-![Adaptive Card](TabWithAdpativeCardFlow/Images/SampleTaskModuleFetch.png)
+- Opening sample tab in personal scope and show the button for executing deeplink to show stage view in tab.
 
-![Adaptive Card](TabWithAdpativeCardFlow/Images/SampleTaskModuleSubmit.png)
+![Adaptive Card](TabInStageView/Images/viaTabDeeplink.png)
 
-![Adaptive Card](TabWithAdpativeCardFlow/Images/SignOutMessage.png)
+- Opening stage view in tab with deeplink action.
+
+![Adaptive Card](TabInStageView/Images/viaDeeplink.png)
 
 ## Deploy the bot to Azure
 
