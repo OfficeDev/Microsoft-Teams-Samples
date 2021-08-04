@@ -29,7 +29,6 @@
     <div id="divGraphProfile" style="display: none"></div>
     <h4 id="successMsg"></h4>
     <div>
-
         <div class="radioClass">
             <label><input type="radio" name="notificationRadio" value="sendNotification" checked> Send
                 Notification To User</label></br>
@@ -50,7 +49,7 @@
                     <input type="text" id="taskDescription" name="taskDescription">
                     </br>
                 </div>
-            </div><br>
+            </div>
             <div class="modal-footer mf">
                 </br>
                 <button type="button" class="btn-send save" onclick="return SendNotificationToUser()">Send
@@ -77,8 +76,6 @@
             </div>
         </div>
     </div>
-
-
     <script>
         var token =  <%-token%>
             $(document).ready(function () {
@@ -91,7 +88,6 @@
                     $(targetBox).show();
                 });
             });
-        var delegatedtoken = localStorage.getItem("accessToken");
         microsoftTeams.initialize();
         var empty = true;
         $('input[type="text"]').each(function () {
@@ -129,7 +125,6 @@
                 description: $('#taskDescription').val(),
                 taskInfoAction: action,
             };
-
             microsoftTeams.getContext(function (context) {
                 var groupchatId = context.chatId;
                 var username = context.upn;
@@ -139,7 +134,7 @@
                     url: "https://graph.microsoft.com/v1.0/users/" + userId + "/teamwork/installedApps/?$expand=teamsAppDefinition",
                     type: "GET",
                     beforeSend: function (request) {
-                        request.setRequestHeader("Authorization", "Bearer " + delegatedtoken);
+                        request.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("accessToken"));
                     },
                     success: function (profile) {
                         console.log(profile);
@@ -160,13 +155,12 @@
             var list = appList.value;
             var i;
             for (i = 0; i < list.length; i++) {
-                if (list[0].teamsAppDefinition['displayName'] == "NotifyFeedApp-nikija") {
+                if (list[0].teamsAppDefinition['displayName'] == "NotifyFeedApp") {
                     return list[0].id;
                 }
             }
-
         }
-        
+
         // send notification to user.
         function sendNotification(userId, taskInfo, token, appId) {
             const postData = {
@@ -180,7 +174,7 @@
                 },
                 "templateParameters": [
                     {
-                        "name": "taskId",
+                        "name": "taskName",
                         "value": taskInfo.title
                     }
                 ]
@@ -200,8 +194,6 @@
                     console.log(profile);
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    debugger;
-                    console.log(xhr);
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                 },
             });
@@ -209,7 +201,6 @@
 
         // send notification for custom topic to user.
         function customTopicNotification() {
-            debugger;
             var isValid = true;
             $('#DeployementTitle,#DeploymentDescription').each(function (e) {
                 if ($.trim($(this).val()) == '') {
@@ -235,7 +226,6 @@
                 DeploymentDescription: $('#DeploymentDescription').val(),
                 taskInfoAction: action,
             };
-
             microsoftTeams.getContext(function (context) {
                 var userId = context.userObjectId;
                 var teamId = context.groupId;
@@ -254,10 +244,10 @@
                         'Content-Type': 'application/json',
                     },
                     beforeSend: function (request) {
-                        request.setRequestHeader("Authorization", "Bearer " + token);
+                        request.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("accessToken"));
                     },
                     success: function (response) {
-                        getNotification(token, taskInfo, teamId, response);
+                        getNotification(token, taskInfo, teamId, response, userId);
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         console.log("textStatus: " + textStatus + ", errorThrown: chat" + errorThrown);
@@ -267,8 +257,7 @@
         };
 
         // get notification for custom topic.
-        function getNotification(token, taskInfo, teamId, response) {
-            debugger;
+        function getNotification(token, taskInfo, teamId, response, userId) {
             const postData = {
                 "topic": {
                     "source": "text",
@@ -287,7 +276,7 @@
                 ]
             };
             $.ajax({
-                url: "https://graph.microsoft.com/v1.0/teams/" + teamId + "/sendActivityNotification",
+                url: "https://graph.microsoft.com/v1.0/users/" + userId + "/teamwork/sendActivityNotification",
                 type: "POST",
                 data: JSON.stringify(postData),
                 headers: {
@@ -301,6 +290,7 @@
                     console.log(profile);
                 },
                 error: function (xhr, textStatus, errorThrown) {
+                    console.log(xhr);
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                 },
             });

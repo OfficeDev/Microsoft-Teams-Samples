@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <head>
         <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js"
             integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT"
@@ -23,13 +21,11 @@
         }
     </style>
 </head>
-
 <body id=mainDiv>
     <button onclick="requestConsent()" id="consent" style="display: none">Login</button>
     <div id="divGraphProfile" style="display: none"></div>
     <h4 id="successMsg"></h4>
     <div>
-
         <div class="radioClass">
             <label><input type="radio" name="notificationRadio" value="sendNotificationGroupChat" checked> Send
                 Notification To User Group Chat</label></br>
@@ -42,13 +38,11 @@
             <div class="form-group fg">
                 <label for="title" class="title">Task Title</label>
                 <br>
-                </br>
                 <input type="text" id="taskTitle" name="taskTitle">
             </div>
             </br>
             <div class="form-group fg">
                 <label for="title-desc" class="description">Task Description</label><br>
-                </br>
                 <input type="text" id="taskDescription" name="taskDescription">
                 </br>
             </div>
@@ -57,32 +51,23 @@
                 <button type="button" class="btn-send save" onclick="return SendNotificationToGroupChat()">Send
                     Notification to Chat</button>
             </div>
-
-
         </div>
         <div class="customTopicNotificationChat desc">
             <div class="form-group fg">
                 <label for="DeployementTitle" class="DeployementTitle">Deployment Title</label><br>
-                </br>
                 <input type="text" id="DeployementTitle" name="DeployementTitle">
             </div>
             <div class="form-group fg">
-                </br>
                 <label for="deployment-desc" class="DeploymentDescription">Deployment Description</label><br>
-                </br><input type="text" id="DeploymentDescription" name="DeploymentDescription">
+                <input type="text" id="DeploymentDescription" name="DeploymentDescription">
             </div>
-
             <div class="modal-footer mf">
                 <br>
-                </br>
                 <button type="button" class="btn-send save" onclick="return customTopicNotification()">Notify with
                     Custom Topic</button>
             </div>
         </div>
-
     </div>
-
-
     <script>
             var token =  <%-token%>
             $(document).ready(function () {
@@ -95,9 +80,6 @@
                 });
             });
         microsoftTeams.initialize();
-
-        var delegatedtoken = localStorage.getItem("accessToken");
-        console.log(delegatedtoken);
         var empty = true;
         $('input[type="text"]').each(function () {
             if ($(this).val() != "") {
@@ -133,7 +115,6 @@
                 description: $('#taskDescription').val(),
                 taskInfoAction: action,
             };
-
             microsoftTeams.getContext(function (context) {
                 var groupchatId = context.chatId;
                 var userId = context.userObjectId;
@@ -227,21 +208,20 @@
                         'Content-Type': 'application/json',
                     },
                     beforeSend: function (request) {
-                        request.setRequestHeader("Authorization", "Bearer " + delegatedtoken);
+                        request.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("accessToken"));
                     },
                     success: function (response) {
-                        getChatMessage(token, groupchatId, taskInfo, userId, response.id);
+                        sendCustomTopicNotification(token, groupchatId, taskInfo, userId, response.id);
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                     },
                 });
-
             });
         };
 
-        // get notification of custom topic.
-        function getChatMessage(token, groupchatId, taskInfo, userId, messageId) {
+        // send notification of custom topic.
+        function sendCustomTopicNotification(token, groupchatId, taskInfo, userId, messageId) {
             const postData = {
                 "topic": {
                     "source": "entityUrl",
@@ -284,5 +264,4 @@
         }
     </script>
 </body>
-
 </html>

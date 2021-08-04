@@ -5,7 +5,6 @@ const path = require('path');
 const auth = require('./auth');
 const fetch = require("node-fetch");
 const querystring = require("querystring");
-
 const app = express();
 
 app.use(express.static(path.join(__dirname, 'static')));
@@ -32,7 +31,6 @@ app.get('/GroupChatNotification', function (req, res) {
 app.get('/TeamNotification', function (req, res) {
   var tenantId = req.url.split('=')[1];
   auth.getAccessToken(tenantId).then(async function (token) {
-    console.log("token from js file : " + token);
     res.render('./views/TeamNotification', { token: JSON.stringify(token) });
   });
 
@@ -41,7 +39,6 @@ app.get('/TeamNotification', function (req, res) {
 app.get('/UserNotification', function (req, res) {
   var tenantId = req.url.split('=')[1];
   auth.getAccessToken(tenantId).then(async function (token) {
-    console.log("token from js file : " + token);
     res.render('./views/UserNotification', { token: JSON.stringify(token) });
   });
 
@@ -105,6 +102,6 @@ app.post('/auth/token', function(req, res) {
   });
 });
 
-app.listen(3978, function () {
-  console.log('app listening on port 3978!');
+app.listen(3333, function () {
+  console.log('app listening on port 3333!');
 });
