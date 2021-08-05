@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    // 1. Get auth token
+    // Get auth token
     // Ask Teams to get us a token from AAD
     function getClientSideToken() {
         microsoftTeams.initialize();
@@ -14,12 +14,11 @@
                     reject("Error getting token: " + error);
                 }
             });
-
         });
     }
 
-    // 2. Exchange that token for a token with the required permissions
-    //    using the web service (see /auth/token handler in app.js)
+    // Exchange that token for a token with the required permissions
+    // using the web service (see /auth/token handler in app.js)
     function getServerSideToken(clientSideToken) {
         return new Promise((resolve, reject) => {
             microsoftTeams.initialize();
@@ -45,7 +44,8 @@
                     .then((responseJson) => {
                         if (responseJson.error) {
                             reject(responseJson.error);
-                        } else {
+                        }
+                        else {
                             const serverSideToken = responseJson;
                             localStorage.setItem("accessToken", serverSideToken);
                             resolve(serverSideToken);
@@ -74,7 +74,7 @@
         });
     }
 
-    // In-line code
+    // method invoked on sso authentication.
     getClientSideToken()
         .then((clientSideToken) => {
             return getServerSideToken(clientSideToken);
@@ -83,23 +83,17 @@
             if (error === "invalid_grant") {
                 console.log(`Error: ${error} - user or admin consent required`);
                 // Display in-line button so user can consent
-                let button = display("Consent", "button");
-                button.onclick = (() => {
                     requestConsent()
                         .then((result) => {
                             // Consent succeeded - use the token we got back
                             let accessToken = JSON.parse(result).accessToken;
-                            console.log(`Received access token ${accessToken}`);
-                            useServerSideToken(accessToken);
+                            console.log(`Received access token ${accessToken}`);s
                         })
                         .catch((error) => {
                             console.log(`ERROR ${error}`);
-                            // Consent failed - offer to refresh the page
-                            button.disabled = true;
-                            let refreshButton = display("Refresh page", "button");
-                            refreshButton.onclick = (() => { window.location.reload(); });
+                            window.location.reload();
                         });
-                });
+
             } else {
                 // Something else went wrong
                 console.log(`Error from web service: ${error}`);

@@ -69,9 +69,10 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
     - `ChatMessage.Send`
     - `Chat.ReadWrite`
     - `TeamsActivity.Send`
+    - `Directory.Read.All`
     - `TeamsAppInstallation.ReadForUser.All`.
 
-**Note** You need to add `TeamsActivity.Send` as Application level permissions
+**Note** You need to add `TeamsActivity.Send`,`Directory.Read.All` as Application level permissions
 
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 13. Navigate to **Authentication**
