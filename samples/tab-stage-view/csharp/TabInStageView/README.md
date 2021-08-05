@@ -72,11 +72,11 @@ This feature shown in this sample is in Public Developer Preview.
 
 - Welcome message with feature explanation.
 
-![Adaptive Card](TabInStageView/Images/welcomeAction.png)
+![Adaptive Card](Images/welcomeAction.png)
 
 - Opening stage view in tab with Adaptive card action.
 
-![Adaptive Card](TabInStageView/Images/viaCardAction.png)
+![Adaptive Card](Images/viaCardAction.png)
 
 ## Deploy the bot to Azure
 
