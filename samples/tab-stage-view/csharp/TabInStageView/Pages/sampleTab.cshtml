@@ -13,7 +13,8 @@
         microsoftTeams.initialize();
 
         function createLink() {
-            let url = "https://teams.microsoft.com/l/stage/8749ff03-ae9e-4d33-88d8-bc9761ea7335/0?context=%7B%22contentUrl%22%3A%22https%3A%2F%2F2f8fec398a1e.ngrok.io%2Ftab%22%2C%22websiteUrl%22%3A%22https%3A%2F%2F2f8fec398a1e.ngrok.io%2Ftab%22%2C%22name%22%3A%22Contoso%22%7D";
+            // pass the values and encode the url while implementing the deeplink from tab
+            let url = "https://teams.microsoft.com/l/stage/{appId}/0?context={“contentUrl”:”[contentUrl]”,“websiteUrl”:”[websiteUrl]”,“name”:”[name]”}";
             microsoftTeams.executeDeepLink(url);
          };
     </script>
@@ -24,7 +25,7 @@
         <div class="panel">
             <div>
                 <label for="tabChoice"></label>Click on the button to view the stage view from deeplink:
-                <button onClick={createLink}>Execute deeplink!</button>
+                <button onClick={createLink}>Execute deeplink</button>
             </div>
         </div>
     </div>

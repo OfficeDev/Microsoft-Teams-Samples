@@ -33,16 +33,6 @@
       "isNotificationOnly": false
     }
   ],
- "staticTabs": [
-  {
-    "entityId": "Stage view",
-    "name": "Sample Tab",
-    "contentUrl": "{{ Application Base Url }}/sampleTab",
-    "scopes": [
-      "personal"
-    ]
-  }
-  ],
   "accentColor": "#60A18E",
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [

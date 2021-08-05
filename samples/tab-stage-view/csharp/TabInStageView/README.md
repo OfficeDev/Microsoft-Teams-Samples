@@ -1,8 +1,7 @@
-﻿# TabInStageView
+﻿This App talks about the Teams tab in stage view with CSharp.
+For reference please check [Tabs link unfurling and Stage View](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling)
 
-Bot Framework v4 echo bot sample.
-
-This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that accepts input from the user and echoes it back.
+This feature shown in this sample is in Public Developer Preview.
 
 ## Prerequisites
 
@@ -12,7 +11,33 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
   # determine dotnet version
   dotnet --version
   ```
+- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
 
+## Setup
+
+1. Run ngrok - point to port 3978
+
+```bash
+# ngrok http -host-header=rewrite 3978
+```
+
+2. Create a Bot Registration
+   In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2#create-the-resource).
+
+3. Modify the `manifest.json` in the `/AppPackage` folder and replace the `{{BOT-ID}}` with the id from step 2.
+
+4. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 7.
+
+5. Modify the `/appsettings.json` and fill in the `{{ Bot Id }}` and `{{ Bot Password }}` with the id from step 2.
+
+6. Add `{{ Application Base URL }}`in appsetting.json with ngrok tunnel url or deployed application base url. 
+
+7. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
+    
 ## To try this sample
 
 - In a terminal, navigate to `TabInStageView`
@@ -39,17 +64,19 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
   - Select `TabInStageView.csproj` file
   - Press `F5` to run the project
 
-## Testing the bot using Bot Framework Emulator
+## Interacting with the bot in Teams
+    You can use this tab by following the below steps:
+    - In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
 
-[Bot Framework Emulator](https://github.com/microsoft/botframework-emulator) is a desktop application that allows bot developers to test and debug their bots on localhost or running remotely through a tunnel.
+## Features of this sample
 
-- Install the Bot Framework Emulator version 4.5.0 or greater from [here](https://github.com/Microsoft/BotFramework-Emulator/releases)
+- Welcome message with feature explanation.
 
-### Connect to the bot using Bot Framework Emulator
+![Adaptive Card](TabInStageView/Images/welcomeAction.png)
 
-- Launch Bot Framework Emulator
-- File -> Open Bot
-- Enter a Bot URL of `http://localhost:3978/api/messages`
+- Opening stage view in tab with Adaptive card action.
+
+![Adaptive Card](TabInStageView/Images/viaCardAction.png)
 
 ## Deploy the bot to Azure
 

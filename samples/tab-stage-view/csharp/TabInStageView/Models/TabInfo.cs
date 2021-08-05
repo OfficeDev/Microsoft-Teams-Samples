@@ -12,25 +12,25 @@ namespace TabInStageView.Models
     public class TabInfo
     {
         /// <summary>
-        /// Gets or sets content url type.
+        /// Gets or sets content url.
         /// </summary>
         [JsonProperty("contentUrl")]
         public string ContentUrl { get; set; }
 
         /// <summary>
-        /// Gets or sets website url type.
+        /// Gets or sets website url.
         /// </summary>
         [JsonProperty("websiteUrl")]
         public string WebsiteUrl { get; set; }
 
         /// <summary>
-        /// Gets or sets name type.
+        /// Gets or sets name.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets entity id type.
+        /// Gets or sets entity id.
         /// </summary>
         [JsonProperty("entityId")]
         public string EntityId { get; set; }

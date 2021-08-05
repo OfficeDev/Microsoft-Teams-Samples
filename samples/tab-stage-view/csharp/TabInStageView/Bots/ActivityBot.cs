@@ -22,14 +22,26 @@ namespace TabInStageView.Bots
     public class ActivityBot : TeamsActivityHandler
     {
         private readonly string _appId;
-        private readonly string _applicationBaseUrl;
+        private readonly string _applicationBaseURL;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ActivityBot"/> class.
+        /// </summary>
+        /// <param name="configuration">configuration of application.</param>
         public ActivityBot(IConfiguration configuration)
         {
             _appId = configuration["MicrosoftAppId"] ?? throw new NullReferenceException("MicrosoftAppId");
-            _applicationBaseUrl = configuration["ApplicationBaseUrl"] ?? throw new NullReferenceException("ApplicationBaseUrl");
+            _applicationBaseURL = configuration["ApplicationBaseURL"] ?? throw new NullReferenceException("ApplicationBaseURL");
         }
 
+
+        // <summary>
+        /// Overriding to send welcome card once Bot/ME is installed in team.
+        /// </summary>
+        /// <param name="membersAdded">A list of all the members added to the conversation, as described by the conversation update activity.</param>
+        /// <param name="turnContext">Provides context for a turn of a bot.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Welcome card  when bot is added first time by user.</returns>
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             var welcomeText = "Hello and welcome!, Please type any bot command to see the stage view feature";
@@ -42,6 +54,16 @@ namespace TabInStageView.Bots
             }
         }
 
+        /// <summary>
+        /// Handle when a message is addressed to the bot.
+        /// </summary>
+        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
+        /// <remarks>
+        /// For more information on bot messaging in Teams, see the documentation
+        /// https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/conversation-basics?tabs=dotnet#receive-a-message .
+        /// </remarks>
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForStageView()));
@@ -78,8 +100,8 @@ namespace TabInStageView.Bots
                                     Type = "tab/tabInfoAction",
                                     TabInfo = new TabInfo
                                     {
-                                        ContentUrl = $"{_applicationBaseUrl}/home",
-                                        WebsiteUrl = $"{_applicationBaseUrl}/home",
+                                        ContentUrl = $"{_applicationBaseURL}/home",
+                                        WebsiteUrl = $"{_applicationBaseURL}/home",
                                         Name = "Stage view",
                                         EntityId = "entityId"
                                     }
@@ -87,11 +109,11 @@ namespace TabInStageView.Bots
                             },
                         },
                     },
-                    new AdaptiveOpenUrlAction
-                    {
-                        Title = "view via deeplink",
-                        Url = new Uri(GetDeeplinkForStageView()),
-                    },
+                    //new AdaptiveOpenUrlAction
+                    //{
+                    //    Title = "view via deeplink",
+                    //    Url = new Uri(GetDeeplinkForStageView()),
+                    //},
                 },
             };
 
@@ -107,7 +129,7 @@ namespace TabInStageView.Bots
         /// </summary>
         private string GetDeeplinkForStageView()
         {
-            var contextUrl = HttpUtility.UrlEncode("{" + $"“contentUrl”:”{_applicationBaseUrl}/home”,“websiteUrl”:”{_applicationBaseUrl}/home”,“name”:”Stage View”" + "}");
+            var contextUrl = HttpUtility.UrlEncode("{" + $"“contentUrl”:”{_applicationBaseURL}/home”,“websiteUrl”:”{_applicationBaseURL}/home”,“name”:”Stage View”" + "}");
             return $"https://teams.microsoft.com/l/stage/{_appId}/0?context={contextUrl}";
         }
     }

@@ -12,7 +12,7 @@ namespace TabInStageView.Models
     public class TabInfoAction
     {
         /// <summary>
-        /// Gets or sets type.
+        /// Gets or sets type of tab.
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; set; }

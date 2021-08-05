@@ -13,7 +13,7 @@ namespace TabInStageView.Models
     public class AdaptiveCardAction
     {
         /// <summary>
-        /// Gets or sets Ms Teams card action type.
+        /// Gets or sets Ms Teams card action.
         /// </summary>
         [JsonProperty("msteams")]
         public CardAction MsteamsCardAction { get; set; }
