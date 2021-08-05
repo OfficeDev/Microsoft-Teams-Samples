@@ -209,7 +209,6 @@
 [graph#appcataloglifecycle#js]:samples/graph-appcatalog-lifecycle/nodejs
 [graph#graphproactiveinstallation#cs]:samples/graph-proactive-installation/csharp
 [graph#graphproactiveinstallation#js]:samples/graph-proactive-installation/nodejs
-
 [graph-activity-feed#cs]:samples/graph-activity-feed/csharp
 [graph-activity-feed#js]:samples/graph-activity-feed/nodejs
 [graph-change-notification#cs]:samples/graph-change-notification/csharp

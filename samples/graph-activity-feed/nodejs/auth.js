@@ -4,6 +4,8 @@ var Q = require('q');
 
 // The auth module object.
 var auth = {};
+
+// get application level access token.
 auth.getAccessToken = function (tenantId) {
   var deferred = Q.defer();
   var requestParams = {

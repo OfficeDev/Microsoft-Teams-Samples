@@ -3,7 +3,7 @@
   "manifestVersion": "1.8",
   "version": "1.0.1",
   "id": "<<YOUR-MANIFEST-ID>>",
-  "packageName": "com.microsoft.teams.devapp",
+  "packageName": "com.microsoft.teams.graphactivityfeed",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.teams.com",
@@ -16,7 +16,7 @@
   },
   "name": {
     "short": "NotifyFeedApp",
-    "full": "NotifyFeedApp for Send Activity Feed "
+    "full": "NotifyFeedApp for Send Activity Feed"
   },
   "description": {
     "short": "App helps to notifiy user for Task creation in Chat, Team and for custom Topic",
@@ -42,7 +42,8 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok.io"
+    "*.ngrok.io",
+    "<<appDomain>>"
   ],
   "activities": {
     "activityTypes": [

@@ -21,7 +21,7 @@
                 client_id: "#{clientId}",
                 response_type: "id_token token",
                 response_mode: "fragment",
-                scope: "https://graph.microsoft.com/User.Read email openid profile offline_access",
+                scope: "https://graph.microsoft.com/User.Read",
                 redirect_uri: window.location.origin + "/auth/auth-end",
                 nonce: _guid(),
                 state: state,
@@ -52,26 +52,7 @@
         // Generates RFC4122 version 4 guid (128 bits)
         // (From ADAL.js: https://github.com/AzureAD/azure-activedirectory-library-for-js/blob/dev/lib/adal.js)
         function _guid() {
-            // RFC4122: The version 4 UUID is meant for generating UUIDs from truly-random or
-            // pseudo-random numbers.
-            // The algorithm is as follows:
-            //     Set the two most significant bits (bits 6 and 7) of the
-            //        clock_seq_hi_and_reserved to zero and one, respectively.
-            //     Set the four most significant bits (bits 12 through 15) of the
-            //        time_hi_and_version field to the 4-bit version number from
-            //        Section 4.1.3. Version4
-            //     Set all the other bits to randomly (or pseudo-randomly) chosen
-            //     values.
-            // UUID                   = time-low "-" time-mid "-"time-high-and-version "-"clock-seq-reserved and low(2hexOctet)"-" node
-            // time-low               = 4hexOctet
-            // time-mid               = 2hexOctet
-            // time-high-and-version  = 2hexOctet
-            // clock-seq-and-reserved = hexOctet:
-            // clock-seq-low          = hexOctet
-            // node                   = 6hexOctet
-            // Format: xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
-            // y could be 1000, 1001, 1010, 1011 since most significant two bits needs to be 10
-            // y values are 8, 9, A, B
+
             var cryptoObj = window.crypto || window.msCrypto; // for IE 11
             if (cryptoObj && cryptoObj.getRandomValues) {
                 var buffer = new Uint8Array(16);

@@ -4,6 +4,7 @@ Nodejs Activity Feed sample using Tab.
 
 This sample has been created using [Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-beta), it shows how trigger a Activity feed notification from your Tab, it triggers the feed notification for User, Chat and Team scope and send back to conversation.
 
+[Activity Feed](https://docs.microsoft.com/en-us/graph/api/chat-sendactivitynotification?view=graph-rest-1.0&tabs=http)
 
 ## Prerequisites
 
@@ -64,17 +65,13 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
 -   Select Add a permission
 -   Select Microsoft Graph -\> Delegated permissions.
     - `User.Read` (enabled by default)
-    - `email`
-    - `offline_access`
-    - `OpenId`
-    - `profile`
     - `ChannelMessage.Send`
     - `ChatMessage.Send`
     - `Chat.ReadWrite`
     - `TeamsActivity.Send`
     - `TeamsAppInstallation.ReadForUser.All`.
 
-**Note** Your need to add `TeamsActivity.Send` as Application level permissions
+**Note** You need to add `TeamsActivity.Send` as Application level permissions
 
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 13. Navigate to **Authentication**
@@ -106,12 +103,12 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
 - Install TabActivityFeed manifest in Teams
 - Add Tab in Personal, GroupChat or Team scope
 - Fill the Details in Page and click on Send notification button
-![](Images/image1.png)
+![](Images/GroupChatNotification.png)
 
-![](Images/image3.png)
+![](Images/TeamsNotification.png)
 
-![](Images/image4.png)
+![](Images/UserNotification.png)
 
 - Notification triggred by Tab App will appear in Teams Activity Feed
 
-![](Images/image2.png)
+![](Images/ActivityFeedNotification.png)

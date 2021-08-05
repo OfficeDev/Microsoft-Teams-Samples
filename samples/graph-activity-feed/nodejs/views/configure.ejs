@@ -3,14 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Graph installation app demo node js</title>
+    <title>Graph activity feed app demo node js</title>
 </head>
 <body>
     <div class="font-semibold font-title" id="textConfiguration"></div>
 <p>
-  <div id="divError" style="display: none"></div>
-  <button onclick="requestConsent()" id="consent" style="display:none;">Authenticate</button>
-  <div id="divGraphProfile" style="display: none"></div>
   <div>
       <label for="tabChoice">Configure your Activity feed Tab here: </label>
       <select id="tabChoice" name="tabChoice">
@@ -22,15 +19,13 @@
   </div>
 </p>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://statics.teams.microsoft.com/sdk/v1.7.0/js/MicrosoftTeams.min.js"></script>
+<script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js" integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv" crossorigin="anonymous"></script>
 <script>
   microsoftTeams.initialize();
     var conextchatId = "";
     // Check the initial theme user chose and respect it
     microsoftTeams.getContext(function (context) {
-        debugger;
         conextchatId = context.chatId;
-        console.log(context);
         if (conextchatId != "") {
             document.getElementById("textConfiguration").innerHTML = "Configure your Group Chat Tab to Send Activity Feed Notification: ";
              $("#teamsTab").hide();
