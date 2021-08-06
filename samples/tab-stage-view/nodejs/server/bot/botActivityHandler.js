@@ -9,7 +9,7 @@ class BotActivityHandler extends TeamsActivityHandler  {
         super();
 
         this.onMessage(async (context, next) => {
-            await context.sendActivity({ attachments: [CardFactory.adaptiveCard(adaptiveCards.adaptiveCardWithLink())] });
+            await context.sendActivity({ attachments: [CardFactory.adaptiveCard(adaptiveCards.adaptiveCardForTabStageView())] });
             await next();
         });
 
@@ -19,24 +19,6 @@ class BotActivityHandler extends TeamsActivityHandler  {
           await next();
       });
     }
-
-    handleTeamsAppBasedLinkQuery(context, query) {
-        const attachment = CardFactory.thumbnailCard('Thumbnail Card',
-          query.url,
-          ['https://raw.githubusercontent.com/microsoft/botframework-sdk/master/icon.png']);
-    
-        const result = {
-          attachmentLayout: 'list',
-          type: 'result',
-          attachments: [CardFactory.adaptiveCard(adaptiveCards.adaptiveCardWithLink(query.url))]
-        };
-    
-        const response = {
-          composeExtension: result
-        };
-        return response;
-      }
-   
 }
 
 module.exports.BotActivityHandler = BotActivityHandler;
