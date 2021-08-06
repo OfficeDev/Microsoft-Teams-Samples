@@ -15,5 +15,11 @@ table {
 td, th {
   border: 1px solid #dddddd;
   text-align: left;
-  padding: 8px;
+  padding: 5px;
+  font-size:0.9rem;
+}
+
+img {
+  margin-left:6rem;
+  width:20px;
 }
