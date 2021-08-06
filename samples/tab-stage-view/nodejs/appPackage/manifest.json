@@ -3,7 +3,7 @@
   "manifestVersion": "1.9",
   "version": "1.0.0",
   "id": "f811a20f-dc2a-4c42-886a-b503ff250752",
-  "packageName": "com.microsoft.teams.tabstageviewnode",
+  "packageName": "com.microsoft.teams.tabstageview",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -11,7 +11,7 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "TabStageView-Node",
+    "short": "Tab Stage View",
     "full": "Tab in stage view"
   },
   "description": {
@@ -24,7 +24,7 @@
   },
   "bots": [
     {
-      "botId": "",
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
       "scopes": [
         "team",
         "personal",
@@ -36,7 +36,7 @@
   "accentColor": "#60A18E",
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "*.ngrok.io",
+    "<<DOMAIN-NAME>>",
     "token.botframework.com"
   ]
 }
