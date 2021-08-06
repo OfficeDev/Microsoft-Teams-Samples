@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const { TeamsActivityHandler , CardFactory } = require('botbuilder');
+const { TeamsActivityHandler , CardFactory, MessageFactory } = require('botbuilder');
 const adaptiveCards = require('../models/adaptiveCard');
 
 class BotActivityHandler extends TeamsActivityHandler  {
@@ -9,12 +9,15 @@ class BotActivityHandler extends TeamsActivityHandler  {
         super();
 
         this.onMessage(async (context, next) => {
-            const replyText = `Echo: ${ context.activity.text }`;  
-            var AdaptiveCardDeepLink = adaptiveCards.getDeepLinkTabStatic("deepLinkTab",3,"Adaptive Card",process.env.MicrosoftAppId);  
-            var link = "https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-links"
-            await context.sendActivity({ attachments: [CardFactory.adaptiveCard(adaptiveCards.adaptiveCardWithLink(link))] });
+            await context.sendActivity({ attachments: [CardFactory.adaptiveCard(adaptiveCards.adaptiveCardWithLink())] });
             await next();
         });
+
+        this.onMembersAdded(async (context, next) => {
+          var welcomeText = "Hello and welcome!, Please type any bot command to see the stage view feature";
+          await context.sendActivity(MessageFactory.text(welcomeText));
+          await next();
+      });
     }
 
     handleTeamsAppBasedLinkQuery(context, query) {

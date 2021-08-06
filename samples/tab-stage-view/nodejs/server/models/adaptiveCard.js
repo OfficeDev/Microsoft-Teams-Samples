@@ -1,41 +1,39 @@
-const { StatusCodes } = require('botbuilder');
-
-// Adaptive Card to show in task module
-const adaptiveCardWithLink = (adaptiveCardDeepLink) => ({
+// Adaptive Card for tab to show in stage view
+const adaptiveCardWithLink = () => ({
     $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
     body: [
         {
             type: 'TextBlock',
             size: 'Medium',
             weight: 'Bolder',
-            text: 'Sample link unfurling'
+            text: 'Click the button to open the url in tab stage view'
         },
         {
             type: 'ActionSet',
             actions: [
                 {
                     type: "Action.Submit",
-                    title: "View",
+                    title: "View via card",
                     data: {
                         msteams: {
                             type: "invoke",
                             value: {
                                 type: "tab/tabInfoAction",
                                 tabInfo: {
-                                    contentUrl: "https://7cc632dd9a40.ngrok.io/content",
-                                    websiteUrl: "https://7cc632dd9a40.ngrok.io/content",
-                                    name: "Tasks",
+                                    contentUrl:  process.env.BaseUrl + "/content",
+                                    websiteUrl: process.env.BaseUrl + "/content",
+                                    name: "Stage view",
                                     entityId: "entityId"
                                  }
                                 }
                             }
                     }
                 },
-                {
-                    type: "Action.OpenUrl",
+                /*{
+                   // type: "Action.OpenUrl",
                     title: "View via Deep Link",
                     url: "https://teams.microsoft.com/l/stage/4dec86fc-335d-497b-b66f-afcdf4e0c22d/0?context={'contentUrl':'https://a081fe9ce994.ngrok.io/content','websiteUrl':'https://a081fe9ce994.ngrok.io/content','name':'Contoso'}"
-                }
+                }*/
             ]
         }
     ],

@@ -26,6 +26,7 @@
 |11|Integrate graph toolkit component in teams tab      | Microsoft Teams tab sample app for demonstrating graph toolkit component |                      | [View][tab-graph-toolkit#js]|
 |12|Device permissions      | Microsoft Teams tab sample app for demonstrating device permissions |                      | [View][tab-device-permissions#js]|
 |13|Show adaptive cards in Teams tab | Microsoft Teams tab sample code which demonstrates how to [show adaptive cards in Teams tab](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs) | [View][tab-adaptive-cards#csharp]               |                | [View][tab-adaptive-cards#js]|
+|14|Tab in stage view   | Microsoft Teams tab sample app for demonstrating tab in stage view |                      |          | [View][tab-stage-view#js] |
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
@@ -141,9 +142,9 @@
 [personal-tab#cs#mvc]:samples/tab-personal/mvc-csharp
 [tab-graph-toolkit#js]:samples/tab-graph-toolkit/nodejs
 [tab-device-permissions#js]:samples/tab-device-permissions/nodejs
-
 [tab-adaptive-cards#csharp]:samples/tab-adaptive-cards/csharp
 [tab-adaptive-cards#js]:samples/tab-adaptive-cards/nodejs
+[tab-stage-view#js]:samples/tab-stage-view/nodejs
 
 [group-channel-tab#cs#razor]:samples/tab-channel-group/razor-csharp
 [group-channel-tab#cs#mvc]:samples/tab-channel-group/mvc-csharp

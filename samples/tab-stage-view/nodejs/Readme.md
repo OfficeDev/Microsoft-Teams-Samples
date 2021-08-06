@@ -1,32 +1,17 @@
-# Tab With AdpativeCard Flow
+﻿This App talks about the Teams tab in stage view with Nodejs.
+For reference please check [Tabs link unfurling and Stage View](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling)
 
-This App talks about the Teams tab which displays Adaptive card with Node JS. For reference please check [Build tabs with Adaptive Cards](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs)
-
-This bot has been created using [Bot Framework v4](https://dev.botframework.com), it shows how to create a simple bot that accepts Adaptive Cards V1.4 to render in Teams tab.
-
-This feature shown in this sample is in Public Developer Preview and is supported in desktop and mobile.
+This feature shown in this sample is in Public Developer Preview.
 
 ## Key features
 
-- Tab showing Adaptive card with action controls
+- Welcome message with feature explanation.
 
-![Home Page](Images/home-page.png)
+![Adaptive Card](Images/welcomeAction.png)
 
-- Task module
+- Opening stage view in tab with Adaptive card action.
 
-![Task Module](Images/task-module.png)
-
-- Sign in card
-
-![Sign in Card](Images/sign-in.png)
-
-- Sign in popup
-
-![Sing in popup](Images/sign-in-popup.png)
-
-- Sign out card
-
-![Sign out Card](Images/sign-out.png)
+![Adaptive Card](Images/viaCardAction.png)
 
 ## Prerequisites
 
@@ -48,7 +33,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 - Register Azure AD applications
     -   Register your bot using bot channel registration in Azure AD portal, following the instructions [here](Wiki/azure-bot-channels-registration.md).
-    - For authentication flow please check [Add authentication to bot](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2)
+    - For authentication flow please check [Add authentication to bot](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2#create-the-resource)
     
 - Clone the repository
 
@@ -56,10 +41,10 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-- In a console, navigate to `samples/tab-adaptive-cards/nodejs`
+- In a console, navigate to `samples/tab-stage-view/nodejs`
 
     ```bash
-    cd samples/tab-adaptive-cards/nodejs
+    cd samples/tab-stage-view/nodejs
     ```
 
 - Run ngrok - point to port `3978`
@@ -70,7 +55,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 
 - Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the Bot Framework registration. 
-Also update `BaseUrl` according to your code runtime environment and `ConnectionName` with Bot Channel Registration connection name.
+Also update `BaseUrl` according to your code runtime environment.
 > NOTE: the App Password is referred to as the `client secret` in the azure portal and you can always create a new client secret anytime.
 
 - Install modules & Run the `NodeJS` Server 
@@ -93,7 +78,7 @@ Also update `BaseUrl` according to your code runtime environment and `Connection
          - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
          - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
 
-## Interacting with the tab in Teams
+## Interacting with the bot in Teams
 
 You can use this tab by following the below steps:
 - In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
