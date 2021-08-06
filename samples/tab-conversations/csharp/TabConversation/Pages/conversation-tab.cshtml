@@ -26,7 +26,6 @@
                     console.log(conversationReponse)
                 };
             })
-
         }
 
         function closeConversation() {
@@ -49,6 +48,20 @@
                 };
             })
         }
+
+        function deeplinkConversation() {
+            microsoftTeams.getContext(function (context) {
+                microsoftTeams.conversations.openConversation(
+                    {
+                        "subEntityId": "task-2037",
+                        "entityId": context.entityId,
+                        "channelId": context.channelId,
+                        "title": "Task Title",
+                        "conversationId": "1627986462355"
+                    })
+                    microsoftTeams.executeDeepLink("https://teams.microsoft.com/l/message/"+context.channelId+"/1627986462355?groupId="+context.groupId+"&tenantId="+context.tid+"&parentMessageId=1627986462355");
+            })
+        }
     </script>
 </head>
 
@@ -66,17 +79,22 @@
                     <tr>
                         <td>Start Conversation</td>
                         <td>To open a conversation</td>
-                        <td><button onclick="startConversation()">Start Coversation</button></td>
+                        <td><img src="../../Images/start-conversation.svg" onclick="startConversation()"></td>
                     </tr>
                     <tr>
                         <td>Close Conversation</td>
                         <td>To close the conversation view</td>
-                        <td><button onclick="closeConversation()">Close Coversation</button></td>
+                        <td><img src="../../Images/close.svg"onclick="closeConversation()"></td>
                     </tr>
                     <tr>
                         <td>Continue Conversation</td>
                         <td>To continue a conversation.</td>
-                        <td><button onclick="continueConversation()">Continue Coversation</button></td>
+                        <td><img src="../../Images/continue-conversation.svg" onclick="continueConversation()"></td>
+                    </tr>
+                    <tr>
+                        <td>Deeplink to conversation</td>
+                        <td>Redirect to channel conversation.</td>
+                        <td><button onclick="deeplinkConversation()">deeplink to Coversation</button></td>
                     </tr>
                 </table>
             </div>
