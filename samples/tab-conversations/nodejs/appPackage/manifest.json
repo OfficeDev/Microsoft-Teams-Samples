@@ -37,7 +37,7 @@
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "<<>valid_domain>",
+    "<<valid_domain>>",
     "token.botframework.com"
   ]
 }

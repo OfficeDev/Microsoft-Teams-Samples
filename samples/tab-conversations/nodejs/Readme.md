@@ -20,6 +20,12 @@ This Teams tab app provides a way to allow users to have conversations about sub
 
 ![Continue Conversation](images/continue.png)
 
+> NOTE: We should save the subEntityId and conversationId to continue an existing conversartion.
+
+- Deeplink to Conversation - opens the conversation in channel
+
+![Deeplink to Conversation](images/deeplink.png)
+
 ## Prerequisites
 
 1. Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
