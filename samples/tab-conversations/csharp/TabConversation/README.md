@@ -4,19 +4,26 @@ This Teams tab app provides a way to allow users to have conversations about sub
 
 ## Key features
 
-![Actions Page](Images/configureTab.png)
-
 - Tab showing actions that can be performed
 
-![Actions Page](Images/optionsToTrigger.png)
+![Actions Page](images/actions.png)
 
 - Open Conversation - opens a new conversation
 
-![Open Conversation](Images/startConversation.png)
+![Open Conversation](images/open.png)
+
+- Close Conversation - closes the conversation view
+
+![Close Conversation](images/close.png)
 
 - Continue Conversation - continues old conversation based on conversation id
 
-![Continue Conversation](Images/continueConversation.png)
+![Continue Conversation](images/continue.png)
+
+> NOTE: We should save the subEntityId and conversationId to continue an existing conversartion.
+- Deeplink to Conversation - opens the conversation in channel
+
+![Deeplink to Conversation](images/deeplink.png)
 
 ## Prerequisites
 
