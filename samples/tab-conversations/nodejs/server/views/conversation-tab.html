@@ -10,8 +10,6 @@
         integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
         crossorigin="anonymous"></script>
     <script>
-        var subEntityId = "";
-        var conversationID = "";
         microsoftTeams.initialize();
 
         // Method to start a new conversation.
@@ -31,8 +29,8 @@
         // Callback function for open conversation.
         // We should save the subEntityId and conversationId to continue an existing conversartion
         function onStartConversation(conversationResponse) {
-            subEntityId = conversationResponse.subEntityId;
-            conversationId = conversationResponse.conversationId;
+            localStorage.setItem("subEntityId", conversationResponse.subEntityId);
+            localStorage.setItem("conversationId", conversationResponse.conversationId);
         }
 
         // Method to close an existing conversation.
@@ -45,11 +43,11 @@
             microsoftTeams.getContext(function (context) {
                 microsoftTeams.conversations.openConversation(
                     {
-                        "subEntityId": subEntityId,
+                        "subEntityId": localStorage.subEntityId,
                         "entityId": context.entityId,
                         "channelId": context.channelId,
                         "title": "Task Title",
-                        "conversationId": conversationId
+                        "conversationId": localStorage.conversationId
                     })
             })
         }
@@ -57,7 +55,7 @@
         // Method to execute deeplink to redirect to the subentity/conversation in the channel.
         function deeplinkConversation() {
             microsoftTeams.getContext(function (context) {
-                microsoftTeams.executeDeepLink("https://teams.microsoft.com/l/message/"+context.channelId+"/" + conversationId + "?groupId="+context.groupId+"&tenantId="+context.tid+"&parentMessageId="+conversationId);
+                microsoftTeams.executeDeepLink("https://teams.microsoft.com/l/message/"+context.channelId+"/" + localStorage.conversationId + "?groupId="+context.groupId+"&tenantId="+context.tid+"&parentMessageId="+localStorage.conversationId);
             })
         }
     </script>
