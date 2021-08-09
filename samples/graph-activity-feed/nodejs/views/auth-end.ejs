@@ -26,7 +26,6 @@
                 // Success -- return token information to the parent page.
                 // Use localStorage to avoid passing the token via notifySuccess; instead we send the item key.
                 let key = "auth.result";
-                // TODO: not sure why this isn't being set
                 localStorage.setItem(key, JSON.stringify({
                     idToken: hashParams["id_token"],
                     accessToken: hashParams["access_token"],

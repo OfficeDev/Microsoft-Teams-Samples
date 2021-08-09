@@ -41,7 +41,7 @@
             </div>
             <div class="modal-footer mf">
                 </br>
-                <button type="button" class="btn-send save" onclick="return SendNotificationToUser()">Send
+                <button type="button" class="btn-send save" onclick="return sendNotificationToUser()">Send
                     Notification</button>
             </div>
         </div>
@@ -65,10 +65,9 @@
         </div>
     </div>
     <script>
-        // application level permission token.
+        // Application level permission token.
         var token =  <%-token%>
             $(document).ready(function () {
-                debugger;
                 $(".customTopicNotification").hide();
                 $('input[type="radio"]').click(function () {
                     var inputValue = $(this).attr("value");
@@ -86,9 +85,8 @@
             }
         });
 
-        // send notification to user.
-        function SendNotificationToUser() {
-            debugger;
+        // Send notification to user.
+        function sendNotificationToUser() {
             var isValid = true;
             $('#taskTitle,#taskDescription').each(function (e) {
                 if ($.trim($(this).val()) == '') {
@@ -149,7 +147,7 @@
             }
         }
 
-        // send notification to user.
+        // Send notification to user.
         function sendNotification(userId, taskInfo, token, appId) {
             const postData = {
                 "topic": {
@@ -187,7 +185,7 @@
             });
         }
 
-        // send notification for custom topic to user.
+        // Send notification for custom topic to user.
         function customTopicNotification() {
             var isValid = true;
             $('#DeployementTitle,#DeploymentDescription').each(function (e) {
@@ -244,7 +242,7 @@
             });
         };
 
-        // get notification for custom topic.
+        // Get notification for custom topic.
         function getNotification(token, taskInfo, teamId, response, userId) {
             const postData = {
                 "topic": {

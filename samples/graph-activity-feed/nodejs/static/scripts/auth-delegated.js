@@ -34,23 +34,23 @@
                         token: clientSideToken
                     }),
                 })
-                    .then((response) => {
-                        if (response.ok) {
-                            return response.json();
-                        } else {
-                            reject(response.error);
-                        }
-                    })
-                    .then((responseJson) => {
-                        if (responseJson.error) {
-                            reject(responseJson.error);
-                        }
-                        else {
-                            const serverSideToken = responseJson;
-                            localStorage.setItem("accessToken", serverSideToken);
-                            resolve(serverSideToken);
-                        }
-                    });
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        reject(response.error);
+                    }
+                })
+                .then((responseJson) => {
+                    if (responseJson.error) {
+                        reject(responseJson.error);
+                    }
+                    else {
+                        const serverSideToken = responseJson;
+                        localStorage.setItem("accessToken", serverSideToken);
+                        resolve(serverSideToken);
+                    }
+                });
             });
         });
     }
@@ -83,16 +83,16 @@
             if (error === "invalid_grant") {
                 console.log(`Error: ${error} - user or admin consent required`);
                 // Display in-line button so user can consent
-                    requestConsent()
-                        .then((result) => {
-                            // Consent succeeded - use the token we got back
-                            let accessToken = JSON.parse(result).accessToken;
-                            console.log(`Received access token ${accessToken}`);s
-                        })
-                        .catch((error) => {
-                            console.log(`ERROR ${error}`);
-                            window.location.reload();
-                        });
+                requestConsent()
+                    .then((result) => {
+                        // Consent succeeded - use the token we got back
+                        let accessToken = JSON.parse(result).accessToken;
+                        console.log(`Received access token ${accessToken}`);
+                    })
+                    .catch((error) => {
+                        console.log(`ERROR ${error}`);
+                        window.location.reload();
+                    });
 
             } else {
                 // Something else went wrong

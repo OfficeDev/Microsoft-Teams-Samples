@@ -39,7 +39,7 @@
             </div>
             <div class="modal-footer mf">
                 </br>
-                <button type="button" class="btn-send save" onclick="return SendNotificationToGroupChat()">Send
+                <button type="button" class="btn-send save" onclick="return sendNotificationToGroupChat()">Send
                     Notification to Chat</button>
             </div>
         </div>
@@ -62,7 +62,7 @@
         </div>
     </div>
     <script>
-           // application level permission token.
+           // Application level permission token.
             var token =  <%-token%>
             $(document).ready(function () {
                 $(".customTopicNotificationChat").hide();
@@ -82,8 +82,8 @@
             }
         });
 
-        // send notification to group chat for task creation.
-        function SendNotificationToGroupChat() {
+        // Send notification to group chat for task creation.
+        function sendNotificationToGroupChat() {
             var isValid = true;
             $('#taskTitle,#taskDescription').each(function (e) {
                 if ($.trim($(this).val()) == '') {
@@ -154,7 +154,7 @@
             });
         };
 
-        // send notification of custom topic.
+        // Send notification of custom topic.
         function customTopicNotification() {
             var isValid = true;
             $('#DeployementTitle,#DeploymentDescription').each(function (e) {
@@ -210,7 +210,7 @@
             });
         };
 
-        // send notification of custom topic.
+        // Send notification of custom topic.
         function sendCustomTopicNotification(token, groupchatId, taskInfo, userId, messageId) {
             const postData = {
                 "topic": {
