@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App in a meeting demo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js" integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv" crossorigin="anonymous"></script>
+    <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+    <style>
+        #container {
+          width: 700px;
+          margin: 0 auto;
+        }
+        .chat-input {
+          width: 300px;
+          height: 35px;
+          border: solid 1px #444;
+        }
+        .chat-submit {
+          width: 50px;
+          height: 35px;
+          border: solid 1px #444;
+        }
+        .chat-window {
+          height: 300px;
+          width: 400px;
+          color:#fff;
+        }
+        #chatSection {
+          float: left;
+          border: 1px grey solid;
+          border-radius: 10px;
+          padding: 10px;
+        }
+      </style>
+</head>
+<body id=mainDiv>
+    <div id="container">
+        <div id="chatSection">
+          <div class="chat-window"></div>
+          <form class="chat-form">
+            <label class="chat-label">
+              Enter status message:
+              <input type="text" class="message" />
+            </label>
+            <button onclick="sendMessage()">Send message</button>
+          </form>
+        </div>
+      </div>
+    <script>
+          var meetingId;
+           var tenantId;
+           var userId;
+           var userName;
+$(document).ready(function () {
+    microsoftTeams.initialize();
+    microsoftTeams.getContext(function(context){
+           meetingId = context.meetingId;
+            tenantId = context.tid;
+            userId = context.userObjectId;
+            userName= context.upn;
+           console.log(context);
+    })
+});
+const socket = io('http://localhost:3978');
+socket.on('connection')
+
+const chatWindow = document.querySelector('.chat-window')
+
+const renderMessage = (message) => {
+  const div = document.createElement('div')
+  const p = document.createElement('p')
+  div.classList.add('render-message')
+  div.innerText = message.message
+  p.innerText = "By:"+ message.userName;
+  chatWindow.appendChild(div);
+  chatWindow.appendChild(p)
+}
+
+socket.on('message',(data)=>{
+    renderMessage(data)
+})
+
+const sendMessage=()=>{
+    const message = document.querySelector(".message")
+    const messageinput = {"message":message.value,
+  "userName":userName};
+    socket.emit('message', messageinput);
+}
+
+    </script>
+</body>
+</html>
