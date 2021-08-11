@@ -64,7 +64,7 @@ $(document).ready(function () {
            console.log(context);
     })
 });
-const socket = io('http://localhost:3978');
+const socket = io();
 socket.on('connection')
 
 const chatWindow = document.querySelector('.chat-window')
