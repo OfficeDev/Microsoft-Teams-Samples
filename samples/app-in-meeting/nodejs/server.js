@@ -2,6 +2,7 @@ const express = require('express');
 const bodyparser = require('body-parser');
 const env = require('dotenv')
 const path = require('path');
+const auth = require('./auth');
 const app = express();
 
 const server = require('http').createServer(app);
@@ -18,10 +19,13 @@ app.get('/configure', function (req, res) {
 });
 
 app.get('/appInMeeting', function (req, res) {
-    res.render('./views/appInMeeting');
+  var tenantId = req.url.split('=')[1];
+  auth.getAccessToken(tenantId).then(async function (token) {
+    res.render('./views/appInMeeting', { token: JSON.stringify(token) });
+  });
 });
 
-io.sockets.on("connection", (socket) => {
+io.on("connection", (socket) => {
   console.log(socket.id);
   socket.on("message", (message) => {
     io.emit("message", message)
@@ -31,4 +35,3 @@ io.sockets.on("connection", (socket) => {
 server.listen(3978, function () {
   console.log('app listening on port 3978!');
 });
-
