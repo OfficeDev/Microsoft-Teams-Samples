@@ -69,8 +69,9 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
     - `ChatMessage.Send`
     - `Chat.ReadWrite`
     - `TeamsActivity.Send`
+    - `TeamsActivity.Send (Delegated Permission)`
     - `Directory.Read.All`
-    - `TeamsAppInstallation.ReadForUser.All`.
+    - `TeamsAppInstallation.ReadForUser`.
 
 **Note** You need to add `TeamsActivity.Send`,`Directory.Read.All` as Application level permissions
 
@@ -81,10 +82,7 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
     * Select **Add a platform**.
     * Select **web**.
     * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}auth/auth-end`. This will be the page where a successful implicit grant flow will redirect the user.
-    
-    Enable implicit grant by checking the following boxes:  
-    ✔ ID Token  
-    ✔ Access Token  
+      
 14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env file.
 
 1) __*This step is specific to Teams.*__

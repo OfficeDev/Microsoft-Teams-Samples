@@ -43,7 +43,7 @@
             </div>
             <div class="modal-footer mf">
                 </br>
-                <button type="button" class="btn-send save" onclick="return SendNotificationToChannel()">Send
+                <button type="button" class="btn-send save" onclick="return sendNotificationToChannel()">Send
                     Notification to Channel</button>
             </div>
         </div>
@@ -99,11 +99,9 @@
         // application level permission token.
         var token =  <%-token%>
             $(document).ready(function () {
-                debugger;
                 $(".customTopicNotificationChannel").hide();
                 $(".notificationChannelTab").hide();
                 $('input[type="radio"]').click(function () {
-                    debugger;
                     var inputValue = $(this).attr("value");
                     var targetBox = $("." + inputValue);
                     $(".desc").not(targetBox).hide();
@@ -121,7 +119,7 @@
         });
 
         // send notification to channel in a team for task creation.
-        function SendNotificationToChannel() {
+        function sendNotificationToChannel() {
             var isValid = true;
             $('#taskTitle,#taskDescription').each(function (e) {
                 if ($.trim($(this).val()) == '') {
