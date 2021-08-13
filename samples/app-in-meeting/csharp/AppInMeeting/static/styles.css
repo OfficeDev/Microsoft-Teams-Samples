@@ -1,0 +1,98 @@
+.chat-input {
+    width: 300px;
+    height: 35px;
+    border: solid 1px #444;
+}
+
+.chat-submit {
+    width: 50px;
+    height: 35px;
+    border: solid 1px #444;
+}
+
+#chatSection {
+    float: left;
+}
+
+.chat-window {
+    height: 65vh;
+    width: 96vw;
+    overflow-y: scroll;
+    background-color: #fff;
+}
+
+.chatSection .chat-window {
+    height: 5vh;
+    width: 8vw;
+    overflow-y: scroll;
+    background-color: #fff;
+}
+
+.chatSection .chat-form {
+    width: 8vw;
+    margin-left: -1rem;
+}
+
+.chatSectionStage {
+    margin: 1rem;
+}
+
+.chat-form {
+    position: fixed;
+    bottom: 2rem;
+    display: grid;
+    background-color: #fff;
+    width: 94vw;
+    padding-left: 1rem;
+}
+
+.send-button {
+    width: fit-content;
+}
+
+.chatSectionStage .chat-label {
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.chatSection .chat-label {
+    display: inline-grid;
+}
+
+.chatSection .task-id {
+    margin-left: 0rem;
+}
+
+.chatSectionStage .task-id {
+    margin-left: 2rem;
+}
+
+.chatSectionStage .task-name {
+    margin-left: 3.1rem;
+}
+
+.chatSectionStage .task-status {
+    margin-left: 2.9rem;
+}
+
+.chatSectionStage .task-description {
+    margin-left: 0.7rem;
+}
+
+.chatSection .task-name {
+    margin-left: 1rem;
+}
+
+.chatSection .task-status {
+    margin-left: 1rem;
+}
+
+.chatSection .task-description {
+    margin-left: 0rem;
+}
+
+.details {
+    border: 1px solid black;
+    margin-bottom: 1rem;
+    padding-top: 0.5rem;
+}

@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
   "manifestVersion": "1.9",
   "version": "1.0.0",
-  "id": "<<Manifest-Id>>",
+  "id": "2901bd2e-6f35-4b83-b512-a1b15e5afa5a",
   "packageName": "com.teams.appinmeeting",
   "developer": {
     "name": "Microsoft",
@@ -20,12 +20,12 @@
   },
   "description": {
     "short": "App In Meeting",
-    "full": "This example shows app to add before, after and during a meting"
+    "full": "This example shows app to add before, after and during a meeting"
   },
   "accentColor": "#5558AF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://<<base-Url>>/configure",
+      "configurationUrl": "https://cf40b0aa1718.ngrok.io/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -51,9 +51,5 @@
   "validDomains": [
     "*.ngrok.io",
     "<<appDomain>>"
-  ],
-  "webApplicationInfo": {
-    "id": "<<Microsoft-app-id>>",
-    "resource": "api://<<base-Url>>/<<Microsoft-app-id>>"
-  }
+  ]
 }
