@@ -35,7 +35,7 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
     ```
 
 
-1### Register your Teams Auth SSO with Azure AD
+### Register your Teams Auth SSO with Azure AD
 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
@@ -68,12 +68,10 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
     - `ChannelMessage.Send`
     - `ChatMessage.Send`
     - `Chat.ReadWrite`
-    - `TeamsActivity.Send`
-    - `TeamsActivity.Send (Delegated Permission)`
-    - `Directory.Read.All`
+    - `TeamsActivity.Send`    
     - `TeamsAppInstallation.ReadForUser`.
 
-**Note** You need to add `TeamsActivity.Send`,`Directory.Read.All` as Application level permissions
+-  You need to add `TeamsActivity.Send` and `Directory.Read.All` as Application level permissions
 
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 13. Navigate to **Authentication**
