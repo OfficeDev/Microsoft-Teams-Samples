@@ -6,24 +6,24 @@ This Teams tab app provides a way to allow users to have conversations about sub
 
 - Tab showing actions that can be performed
 
-![Actions Page](images/actions.png)
+![Actions Page](TabConversation/images/actions.png)
 
 - Open Conversation - opens a new conversation
 
-![Open Conversation](images/open.png)
+![Open Conversation](TabConversation/images/open.png)
 
 - Close Conversation - closes the conversation view
 
-![Close Conversation](images/close.png)
+![Close Conversation](TabConversation/images/close.png)
 
 - Continue Conversation - continues old conversation based on conversation id
 
-![Continue Conversation](images/continue.png)
+![Continue Conversation](TabConversation/images/continue.png)
 
 > NOTE: We should save the subEntityId and conversationId to continue an existing conversartion.
 - Deeplink to Conversation - opens the conversation in channel
 
-![Deeplink to Conversation](images/deeplink.png)
+![Deeplink to Conversation](TabConversation/images/deeplink.png)
 
 ## Prerequisites
 
@@ -45,10 +45,10 @@ This Teams tab app provides a way to allow users to have conversations about sub
     cd samples/tab-conversations/ch
     ```
 
-- Run ngrok - point to port `5000`
+- Run ngrok - point to port `3978`
 
     ```bash
-    ngrok http -host-header=localhost 5000
+    ngrok http -host-header=localhost 3978
     ```
 
 - __*This step is specific to Teams.*__
