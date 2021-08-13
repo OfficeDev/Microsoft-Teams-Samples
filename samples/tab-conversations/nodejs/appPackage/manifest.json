@@ -1,6 +1,6 @@
 ﻿{
-  "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.9",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.10/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.10",
   "version": "1.0.0",
   "id": "4d9e95ab-ebe3-4976-82e9-3526d5c54906",
   "packageName": "com.microsoft.tabconversations",
@@ -37,7 +37,6 @@
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "<<valid_domain>>",
-    "token.botframework.com"
+    "<<valid_domain>>"
   ]
 }
