@@ -7,6 +7,7 @@ const app = express();
 
 const server = require('http').createServer(app);
 const io = require('socket.io')(server,{cors:{origin:"*"}});
+app.use(express.static(__dirname + '/static'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 app.set('views', __dirname);
@@ -26,7 +27,6 @@ app.get('/appInMeeting', function (req, res) {
 });
 
 io.on("connection", (socket) => {
-  console.log(socket.id);
   socket.on("message", (message) => {
     io.emit("message", message)
   })

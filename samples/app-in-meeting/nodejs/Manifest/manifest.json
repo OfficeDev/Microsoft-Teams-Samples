@@ -20,7 +20,7 @@
   },
   "description": {
     "short": "App In Meeting",
-    "full": "This example shows app to add before, after and during a meting"
+    "full": "This example shows app to add before, after and during a meeting"
   },
   "accentColor": "#5558AF",
   "configurableTabs": [
@@ -51,9 +51,5 @@
   "validDomains": [
     "*.ngrok.io",
     "<<appDomain>>"
-  ],
-  "webApplicationInfo": {
-    "id": "<<Microsoft-app-id>>",
-    "resource": "api://<<base-Url>>/<<Microsoft-app-id>>"
-  }
+  ]
 }

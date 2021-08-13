@@ -5,53 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>App in a meeting demo</title>
+  <link rel="stylesheet" href="styles.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
     integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
     crossorigin="anonymous"></script>
   <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
-  <style>
-    .chat-input {
-      width: 300px;
-      height: 35px;
-      border: solid 1px #444;
-    }
-
-    .chat-submit {
-      width: 50px;
-      height: 35px;
-      border: solid 1px #444;
-    }
-
-    #chatSection {
-      float: left;
-    }
-
-    .chat-window {
-      height: 70vh;
-      width: 96vw;
-      overflow-y: scroll;
-      background-color: #fff;
-    }
-
-    .chatSection .chat-window {
-      height: 5vh;
-      width: 8vw;
-      overflow-y: scroll;
-      background-color: #fff;
-    }
-
-    .chatSectionStage {
-      margin: 1rem;
-    }
-
-    .chat-form {
-      position: fixed;
-      bottom: 2rem;
-      display: grid;
-      background-color: #fff;
-    }
-  </style>
 </head>
 <body id=mainDiv>
   <div id="chatSection" className="chatSection">
@@ -74,7 +33,7 @@
         <input type="text" class="task-description" />
       </label>
       </br>
-      <button onclick="sendTaskDetails()">Send Details</button>
+      <button onclick="sendTaskDetails()" class="send-button">Send Details</button>
     </form>
   </div>
   <script>
@@ -90,7 +49,6 @@
         tenantId = context.tid;
         userId = context.userObjectId;
         userName = context.upn;
-        console.log(context);
       })
       var chatSection = document.getElementById("chatSection");
       if (screenWidth > 600) {
@@ -102,7 +60,7 @@
 
     // Render details
     const renderDetails = (data) => {
-      $('#chat-window').append(`<div style="border:1px solid black;margin-bottom:1rem">
+      $('#chat-window').append(`<div class="details">
         Task Id: ${data.taskId}</br>
         Task Name: ${data.taskName}</br>
         Task Description: ${data.taskDescription}</br>
@@ -149,7 +107,6 @@
       };
       socket.emit('message', taskDetails);
     }
-
   </script>
 </body>
 </html>
