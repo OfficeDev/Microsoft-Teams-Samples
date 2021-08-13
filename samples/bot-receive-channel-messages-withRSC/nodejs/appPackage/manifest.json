@@ -1,8 +1,8 @@
 ﻿{
-  "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.9",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.8",
   "version": "1.0.0",
-  "id": "f811a20f-dc2a-4c42-886a-b503ff250758",
+  "id": "<<manifest_id>>",
   "packageName": "com.microsoft.teams.botrsc",
   "developer": {
     "name": "Microsoft",
@@ -24,7 +24,7 @@
   },
   "bots": [
     {
-      "botId": "",
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
       "scopes": [
         "team",
         "personal",
@@ -36,7 +36,7 @@
   "accentColor": "#60A18E",
   "permissions": [ "identity", "messageTeamMembers" ],
   "webApplicationInfo": {
-    "id": "",
+    "id": "<<YOUR-MICROSOFT-APP-ID>>",
     "resource": "https://AnyString",
     "applicationPermissions": [
       "ChannelMessage.Read.Group"

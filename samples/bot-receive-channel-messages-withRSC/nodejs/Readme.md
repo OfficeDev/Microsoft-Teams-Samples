@@ -1,17 +1,17 @@
-﻿This App talks about the Teams tab in stage view with Nodejs.
-For reference please check [Tabs link unfurling and Stage View](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling)
+﻿Using this Node JS sample, a bot can receive all channel messages with RSC without @mention.
+For reference please check [Receive Channel messages with RSC](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/channel-messages-with-rsc)
 
-This feature shown in this sample is in Public Developer Preview.
+This feature shown in this sample is currently available in Public Developer Preview only.
 
 ## Key features
 
 - Welcome message with feature explanation.
 
-![Adaptive Card](Images/welcomeAction.png)
+![Welcome message](Images/welcomeAction.png)
 
-- Opening stage view in tab with Adaptive card action.
+- Showing messages based on option selected
 
-![Adaptive Card](Images/viaCardAction.png)
+![Channel messages](Images/viaCardAction.png)
 
 ## Prerequisites
 
@@ -40,7 +40,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-- In a console, navigate to `samples/tab-stage-view/nodejs`
+- In a console, navigate to `samples/bot-message-with-RSC/nodejs`
 
     ```bash
     cd samples/tab-stage-view/nodejs
@@ -54,7 +54,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 
 - Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the Bot Framework registration. 
-Also update `BaseUrl` according to your code runtime environment.
+
 > NOTE: the App Password is referred to as the `client secret` in the azure portal and you can always create a new client secret anytime.
 
 - Install modules & Run the `NodeJS` Server 
@@ -69,18 +69,21 @@ Also update `BaseUrl` according to your code runtime environment.
     _npm install  > npm start_
 
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) also update the `<<DOMAIN-NAME>>` with the ngrok URL
+    - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) also update the `<<DOMAIN-NAME>>` with the ngrok URL and add some unique Id to your manifest by replacing it with `<<manifest_id>>`
+    
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
-         - Go to Microsoft Teams. From the lower left corner, select Apps
-         - From the lower left corner, choose Upload a custom App
-         - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
-         - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
+    - **Sideload** in a team to test
+         - Select or create a team
+         - Select the ellipses **...** from the left pane. The drop-down menu appears.
+         - Select **Manage Team**, then select **Apps** 
+         - Then select **Upload a custom app** from the lower right corner.
+         - Then select the `manifest.zip` file from `appPackage`, and then select **Add** to add the bot to your selected team.
 
 ## Interacting with the bot in Teams
 
-You can use this tab by following the below steps:
-- In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
+Select a channel and enter a message in the channel for your bot.
+
+The bot receives the message without being @mentioned.
 
 ## Deploy the bot to Azure
 
