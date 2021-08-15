@@ -35,15 +35,15 @@
   ],
   "accentColor": "#60A18E",
   "permissions": [ "identity", "messageTeamMembers" ],
+  "validDomains": [
+    "*.ngrok.io",
+    "token.botframework.com"
+  ],
   "webApplicationInfo": {
     "id": "<<YOUR-MICROSOFT-APP-ID>>",
     "resource": "https://AnyString",
     "applicationPermissions": [
       "ChannelMessage.Read.Group"
     ]
-  },
-  "validDomains": [
-    "*.ngrok.io",
-    "token.botframework.com"
-  ]
+  }
 }

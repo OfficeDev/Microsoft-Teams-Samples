@@ -5,13 +5,9 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 ## Key features
 
-- Welcome message with feature explanation.
-
-![Welcome message](Images/welcomeAction.png)
-
 - Showing messages based on option selected
 
-![Channel messages](Images/viaCardAction.png)
+![Channel messages](images/channel_messages.png)
 
 ## Prerequisites
 
