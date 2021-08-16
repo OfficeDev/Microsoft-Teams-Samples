@@ -109,11 +109,11 @@ namespace TabInStageView.Bots
                             },
                         },
                     },
-                    //new AdaptiveOpenUrlAction
-                    //{
-                    //    Title = "view via deeplink",
-                    //    Url = new Uri(GetDeeplinkForStageView()),
-                    //},
+                    new AdaptiveOpenUrlAction
+                    {
+                        Title = "View via deeplink",
+                        Url = new Uri(GetDeeplinkForStageView()),
+                    },
                 },
             };
 
@@ -129,8 +129,8 @@ namespace TabInStageView.Bots
         /// </summary>
         private string GetDeeplinkForStageView()
         {
-            var contextUrl = HttpUtility.UrlEncode("{" + $"“contentUrl”:”{_applicationBaseURL}/home”,“websiteUrl”:”{_applicationBaseURL}/home”,“name”:”Stage View”" + "}");
-            return $"https://teams.microsoft.com/l/stage/{_appId}/0?context={contextUrl}";
+            var deepLinkUrl = "https://teams.microsoft.com/l/stage/" + _appId + "/0?context=" + HttpUtility.UrlEncode("{\"contentUrl\":\""+_applicationBaseURL+"\",\"websiteUrl\":\""+_applicationBaseURL+"\",\"name\":\"DemoStageView\"}");
+            return deepLinkUrl;
         }
     }
 }
