@@ -43,6 +43,7 @@
 |8| Start new thread in a channel | Demonstrating how to create a new thread in a channel. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/58.teams-start-new-thread-in-channel) | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/javascript_nodejs/58.teams-start-new-thread-in-channel) | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/python/58.teams-start-thread-in-channel) |
 |9| Universal bots  | Teams catering bot demonstrating how to use Universal bots in Teams | [View](samples/bot-teams-catering/csharp) |  | |
 |10| Sequential workflow adaptive cards | Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot. | [View][sequential#workflow#csharp] | [View][sequential#workflow#js]
+|11| Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. ||  [View][messageswithrsc#js] |
 
 #### Additional samples
 
@@ -188,6 +189,7 @@
 [meetings-sidepanel#cs]:samples/meetings-sidepanel/csharp
 [meetings-sidepanel#js]:samples/meetings-sidepanel/nodejs
 [meetings-content-bubble#js]:samples/meetings-content-bubble/nodejs
+[messageswithrsc#js]:samples/bot-receive-channel-messages-withRSC/nodejs
 
 [app-localization#cs]:samples/app-localization/csharp
 [app-localization#js]:samples/app-localization/nodejs
