@@ -7,11 +7,23 @@ This feature shown in this sample is in Public Developer Preview.
 
 - Welcome message with feature explanation.
 
-![Adaptive Card](Images/welcomeAction.png)
+![Welcome Message](Images/welcomeAction.png)
 
-- Opening stage view in tab with Adaptive card action.
+- Adaptive Card with actions.
 
-![Adaptive Card](Images/viaCardAction.png)
+![Card Actions](Images/cardActions.png)
+
+- Opening stage view from Adaptive Card Action.
+
+![Stage View](Images/viaCardAction.png)
+
+- Opening stage view from Adaptive card via deep link.
+
+![Stage View Deep Link](Images/viaDeepLink.png)
+
+- Tab with execute deep link action to open stage view.
+
+![Tab View](Images/viaTabDeepLink.png)
 
 ## Prerequisites
 
@@ -69,7 +81,9 @@ Also update `BaseUrl` according to your code runtime environment.
     _npm install  > npm start_
 
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) also update the `<<DOMAIN-NAME>>` with the ngrok URL
+    - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`).
+    Also update `<<BASE-URL>>` with your application base url.
+    Also update the `<<DOMAIN-NAME>>` with the ngrok URL or app hosted base url.   
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
          - Go to Microsoft Teams. From the lower left corner, select Apps
