@@ -25,10 +25,10 @@ This feature shown in this sample is in Public Developer Preview.
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2#create-the-resource).
 
 3. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
-   - <<MANIFEST-ID>> with some unique GUID   
-   - <<BASE-URL>> with your application's base url, e.g. https://1234.ngrok.io
+   - `<<MANIFEST-ID>>` with some unique GUID   
+   - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
    - `{{BOT-ID}}` with the id from step 2.
-   - <<VALID DOMAIN>> with your app domain e.g. *.ngrok.io
+   - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
 
 4. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 7.
 
@@ -88,11 +88,11 @@ This feature shown in this sample is in Public Developer Preview.
 
 - Opening stage view from Adaptive card via deep link.
 
-![Stage View Deep Link](Images/viaDeepLink.png)
+![Stage View Deep Link](Images/viaDeeplink.png)
 
 - Tab with execute deep link action to open stage view.
 
-![Tab View](Images/viaTabDeepLink.png)
+![Tab View](Images/viaTabDeeplink.png)
 
 ## Deploy the bot to Azure
 
