@@ -15,22 +15,22 @@ namespace ReceiveMessagesWithRSC.Bots
         /// <summary>
         /// Sample description text.
         /// </summary>
-        private const string sampleDescription = "With this sample your bot can receive user messages across standard channels in a team without being @mentioned";
+        private const string SampleDescription = "With this sample your bot can receive user messages across standard channels in a team without being @mentioned";
 
         /// <summary>
         /// Options text.
         /// </summary>
-        private const string options = "Type 1 to know about the permissions required,  Type 2 for documentation link";
+        private const string Option = "Type 1 to know about the permissions required,  Type 2 for documentation link";
 
         /// <summary>
         /// Permission required text.
         /// </summary>
-        private const string permissionRequired = "This capability is enabled by specifying the ChannelMessage.Read.Group permission in the manifest of an RSC enabled Teams app";
+        private const string PermissionRequired = "This capability is enabled by specifying the ChannelMessage.Read.Group permission in the manifest of an RSC enabled Teams app";
 
         /// <summary>
         /// Docs link.
         /// </summary>
-        private const string docLink = "https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/channel-messages-with-rsc";
+        private const string DocLink = "https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/channel-messages-with-rsc";
 
         /// <summary>
         /// Handle when a message is addressed to the bot.
@@ -48,16 +48,16 @@ namespace ReceiveMessagesWithRSC.Bots
             switch (userCommand)
             {
                 case "1":
-                    await turnContext.SendActivityAsync(MessageFactory.Text(permissionRequired));
+                    await turnContext.SendActivityAsync(MessageFactory.Text(PermissionRequired));
                     return;
 
                 case "2":
-                    await turnContext.SendActivityAsync(MessageFactory.Text(docLink));
+                    await turnContext.SendActivityAsync(MessageFactory.Text(DocLink));
                     return;
 
                 default:
-                    await turnContext.SendActivityAsync(MessageFactory.Text(sampleDescription));
-                    await turnContext.SendActivityAsync(MessageFactory.Text(options));
+                    await turnContext.SendActivityAsync(MessageFactory.Text(SampleDescription));
+                    await turnContext.SendActivityAsync(MessageFactory.Text(Option));
                     return;
             }
         }
