@@ -1,6 +1,6 @@
 ﻿{
   "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.9",
+  "manifestVersion": "devPreview",
   "version": "1.0.0",
   "id": "f811a20f-dc2a-4c42-886a-b503ff250752",
   "packageName": "com.microsoft.teams.tabstageview",
@@ -22,6 +22,22 @@
     "outline": "outline.png",
     "color": "color.png"
   },
+  "staticTabs": [
+    {
+      "entityId": "stageViewTask",
+      "scopes": [
+        "personal"
+      ],
+      "context": [
+        "personalTab",
+        "channelTab"
+      ],
+      "name": "Stage View",
+      "contentUrl": "<<BASE-URL>>/tab",
+      "websiteUrl": "<<BASE-URL>>/tab",
+      "searchUrl": "<<BASE-URL>>/tab"
+    }
+  ],
   "bots": [
     {
       "botId": "<<YOUR-MICROSOFT-APP-ID>>",

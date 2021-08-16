@@ -12,10 +12,17 @@ server.use(express.json());
 server.use(express.urlencoded({
     extended: true
 }));
+server.engine('.html', require('ejs').renderFile);
+server.set('views', __dirname);
+server.set('view engine', 'ejs');
 server.use('/api', require('./api'));
 
 server.get('/content', (req, res, next) => {
     res.sendFile('views/content-tab.html', {root: __dirname })
+});
+
+server.get('/tab', (req, res, next) => {
+    res.render('./views/sampleTab', { microsoftAppId: process.env.MicrosoftAppId, baseUrl: process.env.BaseUrl });
 });
 
 server.get('*', (req, res) => {

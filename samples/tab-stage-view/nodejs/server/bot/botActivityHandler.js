@@ -9,7 +9,9 @@ class BotActivityHandler extends TeamsActivityHandler  {
         super();
 
         this.onMessage(async (context, next) => {
-            await context.sendActivity({ attachments: [CardFactory.adaptiveCard(adaptiveCards.adaptiveCardForTabStageView())] });
+            // Base url without protocol to be used in OpenUrl encoded deeplink
+            var baseUrl = process.env.baseUrl ? process.env.baseUrl.split(':')[1] : '';
+            await context.sendActivity({ attachments: [CardFactory.adaptiveCard(adaptiveCards.adaptiveCardForTabStageView(baseUrl))] });
             await next();
         });
 
