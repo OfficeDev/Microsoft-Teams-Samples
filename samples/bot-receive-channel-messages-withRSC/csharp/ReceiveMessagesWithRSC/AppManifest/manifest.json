@@ -1,9 +1,9 @@
 ﻿{
-  "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.9",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.8",
   "version": "1.0.0",
   "id": "3214cc0a-f062-42c5-85c8-d8bb1dd12f21",
-  "packageName": "com.microsoft.tabconversations",
+  "packageName": "com.microsoft.teams.botrsc",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -11,34 +11,36 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Receive messages with RSC",
-    "full": "Receive channel messages with RSC"
+    "short": "RSC Sample",
+    "full": "Channel messages with RSC"
   },
   "description": {
     "short": "Receive channel messages with RSC",
-    "full": "This sample demos to receive channel messages with RSC"
+    "full": "This sample demos a bot with RSC permission"
   },
   "icons": {
     "outline": "outline.png",
     "color": "color.png"
   },
-  "accentColor": "#60A18E",
   "bots": [
     {
-      "botId": "8749ff03-ae9e-4d33-88d8-bc9761ea7335",
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
       "scopes": [
-        "team"
+        "team",
+        "personal",
+        "groupchat"
       ],
       "isNotificationOnly": false
     }
   ],
+  "accentColor": "#60A18E",
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "*.ngrok.io",
+    "<<DOMAIN-NAME>>",
     "token.botframework.com"
   ],
   "webApplicationInfo": {
-    "id": "8749ff03-ae9e-4d33-88d8-bc9761ea7335",
+    "id": "<<YOUR-MICROSOFT-APP-ID>>",
     "resource": "https://AnyString",
     "applicationPermissions": [
       "ChannelMessage.Read.Group"
