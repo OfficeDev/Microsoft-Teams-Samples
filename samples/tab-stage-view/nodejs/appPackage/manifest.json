@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
   "manifestVersion": "devPreview",
   "version": "1.0.0",
-  "id": "f811a20f-dc2a-4c42-886a-b503ff250752",
+  "id": "<<MANIFEST-ID>>",
   "packageName": "com.microsoft.teams.tabstageview",
   "developer": {
     "name": "Microsoft",
