@@ -1,6 +1,6 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.8",
+  "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.9",
   "version": "1.0.0",
   "id": "<<manifest_id>>",
   "packageName": "com.microsoft.teams.botrsc",
@@ -36,7 +36,7 @@
   "accentColor": "#60A18E",
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "*.ngrok.io",
+    "<<DOMAIN-NAME>>",
     "token.botframework.com"
   ],
   "webApplicationInfo": {
