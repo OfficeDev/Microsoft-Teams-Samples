@@ -44,7 +44,7 @@ namespace TabInStageView
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapControllers();
 
                 endpoints.MapControllerRoute(
                    name: "default",

@@ -1,5 +1,4 @@
-﻿@page
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,8 +8,13 @@
     <script>
         microsoftTeams.initialize();
         function createLink() {
-            var contentUrl = window.location.origin + "/home";
-            // pass the values and encode the url while implementing the deeplink from tab
+            // Client id
+            var appId = '@(ViewBag.AppId)';
+
+            // Application base url and this redirects to Index view
+            var contentUrl = window.location.origin;
+
+            // Passing the values and encoding the url while implementing the deeplink from tab
             let url = "https://teams.microsoft.com/l/stage/" + appId + "/0?context={\"contentUrl\":\"" + contentUrl + "\",\"websiteUrl\":\"" + contentUrl +"\",\"name\":\"DemoStageView\"}";
             microsoftTeams.executeDeepLink(url);
         };

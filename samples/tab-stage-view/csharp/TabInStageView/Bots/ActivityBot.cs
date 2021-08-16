@@ -89,7 +89,7 @@ namespace TabInStageView.Bots
                 {
                     new AdaptiveSubmitAction
                     {
-                        Title = "view via card action",
+                        Title = "View via card action",
                         Data = new AdaptiveCardAction
                         {
                             MsteamsCardAction = new CardAction
@@ -100,8 +100,8 @@ namespace TabInStageView.Bots
                                     Type = "tab/tabInfoAction",
                                     TabInfo = new TabInfo
                                     {
-                                        ContentUrl = $"{_applicationBaseURL}/home",
-                                        WebsiteUrl = $"{_applicationBaseURL}/home",
+                                        ContentUrl = $"{_applicationBaseURL}",
+                                        WebsiteUrl = $"{_applicationBaseURL}",
                                         Name = "Stage view",
                                         EntityId = "entityId"
                                     }
