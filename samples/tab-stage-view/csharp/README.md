@@ -76,23 +76,23 @@ This feature shown in this sample is in Public Developer Preview.
 
 - Welcome message with feature explanation.
 
-![Welcome Message](Images/welcomeAction.png)
+![Welcome Message](TabInStageView/Images/welcomeAction.png)
 
 - Opening stage view in tab with Adaptive card action.
 
-![Card Actions](Images/cardActions.png)
+![Card Actions](TabInStageView/Images/cardActions.png)
 
 - Opening stage view from Adaptive Card Action.
 
-![Stage View](Images/viaCardAction.png)
+![Stage View](TabInStageView/Images/viaCardAction.png)
 
 - Opening stage view from Adaptive card via deep link.
 
-![Stage View Deep Link](Images/viaDeeplink.png)
+![Stage View Deep Link](TabInStageView/Images/viaDeeplink.png)
 
 - Tab with execute deep link action to open stage view.
 
-![Tab View](Images/viaTabDeeplink.png)
+![Tab View](TabInStageView/Images/viaTabDeeplink.png)
 
 ## Deploy the bot to Azure
 
