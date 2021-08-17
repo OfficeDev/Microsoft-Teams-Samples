@@ -7,7 +7,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 - Showing messages based on option selected
 
-![Channel messages](Images/botWithRSCFlow.png)
+![Channel messages](ReceiveMessagesWithRSC/Images/botWithRSCFlow.png)
 
 ## Prerequisites
 
