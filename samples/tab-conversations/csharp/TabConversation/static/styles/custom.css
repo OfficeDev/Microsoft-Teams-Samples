@@ -1,0 +1,25 @@
+html, body, div.surface, div.panel {
+    height: 100%;
+    margin: 0;
+}
+
+div.panel {
+    padding: 15px;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 5px;
+  font-size:0.9rem;
+}
+
+img {
+  margin-left:6rem;
+  width:20px;
+}
