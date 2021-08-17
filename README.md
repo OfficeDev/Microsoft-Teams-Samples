@@ -27,6 +27,7 @@
 |12|Device permissions      | Microsoft Teams tab sample app for demonstrating device permissions |                      | [View][tab-device-permissions#js]|
 |13|Show adaptive cards in Teams tab | Microsoft Teams tab sample code which demonstrates how to [show adaptive cards in Teams tab](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs) | [View][tab-adaptive-cards#csharp]               |                | [View][tab-adaptive-cards#js]|
 |14|Tab in stage view   | Microsoft Teams tab sample app for demonstrating tab in stage view | [View][tab-stage-view#csharp]|                 |
+|15|Create Conversational tab     | Microsoft Teams tab sample app for demonstrating create conversation tab | [View][tab-conversation#csharp]          |           |[View][tab-conversation#nodejs]
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
@@ -92,7 +93,7 @@
 |3|Graph API Teams App Installation Life Cycle | This sample illustrates how you can use [Teams App Installation Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/teamsappinstallation?view=graph-rest-1.0) by calling Microsoft Graph APIs. .                              |[View][graph#instllationlifecycle#cs]       |[View][graph#instllationlifecycle#js] |
 |4|Graph API Teams App Catalog Life Cycle | This sample illustrates how you you programattically have an lifecycle for your teams App in catalog by calling Microsoft Graph APIs. .                               |[View][graph#appctaloglifecycle#cs]       | [View][graph#appcataloglifecycle#js]
 |5|Graph API Chat Life Cycle | This sample illustrates how you can use [Teams App Chat Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/chat?view=graph-rest-1.0) by calling Microsoft Graph APIs. .                              |[View][graph#chatlifecyle#cs]      |[View][graph#chatlifecycle#js]
-|6|Activity Feed Notification  | Microsoft Teams sample app for Sending Activity feed notification using Graph API in a Teams Tab. | [View][graph-activity-feed#cs]                       | | 
+|6|Activity Feed Notification  | Microsoft Teams sample app for Sending Activity feed notification using Graph API in a Teams Tab. | [View][graph-activity-feed#cs]                       | [View][graph-activity-feed#js]| 
 |7|Proactive installation of App and sending proactive notifications | This sample illustrates how you can use [Proactive installation of app for user and send proactive notification](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages?tabs=csharp) by calling Microsoft Graph APIs. .                              |[View][graph#graphproactiveinstallation#cs]       |[View][graph#graphproactiveinstallation#js]
 |8|Change Notification  | This sample app demonstrates sending change notifications to user presence in Teams based on user presence status. | [View][graph-change-notification#cs]                        |[View][graph-change-notification#js] 
 
@@ -141,6 +142,9 @@
 [personal-tab#cs#mvc]:samples/tab-personal/mvc-csharp
 [tab-graph-toolkit#js]:samples/tab-graph-toolkit/nodejs
 [tab-device-permissions#js]:samples/tab-device-permissions/nodejs
+[tab-conversation#csharp]:samples/tab-conversations/csharp
+
+[tab-conversation#nodejs]:samples/tab-conversations/nodejs
 [tab-adaptive-cards#csharp]:samples/tab-adaptive-cards/csharp
 [tab-adaptive-cards#js]:samples/tab-adaptive-cards/nodejs
 [tab-stage-view#csharp]:samples/tab-stage-view/csharp
@@ -209,8 +213,8 @@
 [graph#appcataloglifecycle#js]:samples/graph-appcatalog-lifecycle/nodejs
 [graph#graphproactiveinstallation#cs]:samples/graph-proactive-installation/csharp
 [graph#graphproactiveinstallation#js]:samples/graph-proactive-installation/nodejs
-
 [graph-activity-feed#cs]:samples/graph-activity-feed/csharp
+[graph-activity-feed#js]:samples/graph-activity-feed/nodejs
 [graph-change-notification#cs]:samples/graph-change-notification/csharp
 [graph-change-notification#js]:samples/graph-change-notification/nodejs
 
