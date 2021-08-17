@@ -26,7 +26,7 @@
 |11|Integrate graph toolkit component in teams tab      | Microsoft Teams tab sample app for demonstrating graph toolkit component |                      | [View][tab-graph-toolkit#js]|
 |12|Device permissions      | Microsoft Teams tab sample app for demonstrating device permissions |                      | [View][tab-device-permissions#js]|
 |13|Show adaptive cards in Teams tab | Microsoft Teams tab sample code which demonstrates how to [show adaptive cards in Teams tab](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs) | [View][tab-adaptive-cards#csharp]               |                | [View][tab-adaptive-cards#js]|
-|14|Tab in stage view   | Microsoft Teams tab sample app for demonstrating tab in stage view | [View][tab-stage-view#csharp]|                 |
+|14|Tab in stage view   | Microsoft Teams tab sample app for demonstrating tab in stage view |[View][tab-stage-view#csharp] |          | [View][tab-stage-view#js] |
 |15|Create Conversational tab     | Microsoft Teams tab sample app for demonstrating create conversation tab | [View][tab-conversation#csharp]          |           |[View][tab-conversation#nodejs]
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
@@ -147,6 +147,7 @@
 [tab-conversation#nodejs]:samples/tab-conversations/nodejs
 [tab-adaptive-cards#csharp]:samples/tab-adaptive-cards/csharp
 [tab-adaptive-cards#js]:samples/tab-adaptive-cards/nodejs
+[tab-stage-view#js]:samples/tab-stage-view/nodejs
 [tab-stage-view#csharp]:samples/tab-stage-view/csharp
 
 [group-channel-tab#cs#razor]:samples/tab-channel-group/razor-csharp
