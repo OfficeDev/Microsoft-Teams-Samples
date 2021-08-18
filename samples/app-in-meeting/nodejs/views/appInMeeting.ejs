@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,35 +13,45 @@
     crossorigin="anonymous"></script>
   <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
 </head>
+
 <body id=mainDiv>
+  <label>Sprint 80 Plan Action</label>
   <div id="chatSection" className="chatSection">
-    <div id="chat-window" class="chat-window"></div>
+    <div id="boardDiv" class="chat-window">
+      <div class="grid-item" id="todo">
+      ToDo
+      </div>
+      <div class="grid-item" id="doing">
+      Doing
+      </div>
+      <div class="grid-item" id="completed">
+      Completed
+      </div>
+      </div>
     <form class="chat-form">
-      <label class="chat-label">
-        Enter Task Id:
-        <input type="text" class="task-id" />
-      </label>
       <label class="chat-label">
         Task name:
         <input type="text" class="task-name" />
       </label>
       <label class="chat-label">
-        Task status:
-        <input type="text" class="task-status" />
-      </label>
-      <label class="chat-label">
         Task description:
         <input type="text" class="task-description" />
       </label>
+      <label>
+        Status:
+        <select class="status">
+          <option>todo</option>
+          <option>doing</option>
+          <option>completed</option>
+        </select>
+      </label>
       </br>
-      <button onclick="sendTaskDetails()" class="send-button">Send Details</button>
+      <button onclick="sendTaskDetails()" class="send-button">Update</button>
     </form>
   </div>
   <script>
     var screenWidth = window.innerWidth;
     var meetingId;
-    var tenantId;
-    var userId;
     var userName;
     $(document).ready(function () {
       microsoftTeams.initialize();
@@ -60,13 +71,32 @@
 
     // Render details
     const renderDetails = (data) => {
-      $('#chat-window').append(`<div class="details">
-        Task Id: ${data.taskId}</br>
+      if(data.status=="todo")
+      {
+        $('#todo').append(`<div class="details">
+        Status: ${data.status}</br>
         Task Name: ${data.taskName}</br>
         Task Description: ${data.taskDescription}</br>
-        Task Status: ${data.taskStatus}</br>
-        by:${data.userName}</div>
+        -:${data.userName}</div>
   `)
+      }
+      else if(data.status=="doing")
+      {
+      $('#doing').append(`<div class="details">
+        Status: ${data.status}</br>
+        Task Name: ${data.taskName}</br>
+        Task Description: ${data.taskDescription}</br>
+        -:${data.userName}</div>
+  `)
+      }
+      else{
+        $('#completed').append(`<div class="details">
+        Status: ${data.status}</br>
+        Task Name: ${data.taskName}</br>
+        Task Description: ${data.taskDescription}</br>
+        -:${data.userName}</div>
+  `)
+      }
     }
 
     socket.on('message', (data) => {
@@ -75,12 +105,11 @@
 
     // Send task details. 
     const sendTaskDetails = () => {
-      var taskId = document.querySelector(".task-id");
-      var taskStatus = document.querySelector(".task-status");
       var taskDescription = document.querySelector(".task-description")
       var taskName = document.querySelector(".task-name")
+      var status = document.querySelector(".status")
       var isValid = true;
-      $('.task-id,.task-status,.task-description,.task-name').each(function (e) {
+      $('.task-id,.task-status,.task-description,.task-name, .status').each(function (e) {
         if ($.trim($(this).val()) == '') {
           isValid = false;
           $(this).css({
@@ -99,14 +128,14 @@
         return false;
       }
       const taskDetails = {
-        "taskId": taskId.value,
-        "taskStatus": taskStatus.value,
         "taskDescription": taskDescription.value,
         "taskName": taskName.value,
-        "userName": userName
+        "userName": userName,
+        "status": status.value
       };
       socket.emit('message', taskDetails);
     }
   </script>
 </body>
+
 </html>
