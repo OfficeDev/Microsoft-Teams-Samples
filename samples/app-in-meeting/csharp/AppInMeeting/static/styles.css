@@ -15,22 +15,32 @@
 }
 
 .chat-window {
-    height: 65vh;
+    height: 60vh;
     width: 96vw;
+    overflow-y: scroll;
+    background-color: #11100f;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+    color: #f5f5f5;
+}
+
+.chatSection {
     overflow-y: scroll;
     background-color: #fff;
 }
 
-.chatSection .chat-window {
-    height: 5vh;
-    width: 8vw;
-    overflow-y: scroll;
-    background-color: #fff;
+#todo, #doing, #done {
+    height: 10vh;
+    color: #f5f5f5;
+    width: 25vw;
+    padding: 0.5rem;
 }
 
 .chatSection .chat-form {
     width: 8vw;
     margin-left: -1rem;
+    background-color: #11100f;
 }
 
 .chatSectionStage {
@@ -44,6 +54,9 @@
     background-color: #fff;
     width: 94vw;
     padding-left: 1rem;
+    background-color: #11100f;
+    color: #f5f5f5;
+    padding-top: 1em;
 }
 
 .send-button {
@@ -67,7 +80,7 @@
     margin-left: 2rem;
 }
 
-.chatSectionStage .task-name {
+.chatSectionStage .user-name {
     margin-left: 3.1rem;
 }
 
@@ -79,7 +92,7 @@
     margin-left: 0.7rem;
 }
 
-.chatSection .task-name {
+.chatSection .user-name {
     margin-left: 1rem;
 }
 
@@ -93,6 +106,7 @@
 
 .details {
     border: 1px solid black;
-    margin-bottom: 1rem;
-    padding-top: 0.5rem;
+    background-color: #484644;
+    margin-top: 1rem;
+    padding: 0.5rem;
 }
