@@ -17,13 +17,13 @@
     <div id="chatSection" className="chatSection">
         Sprint 80
         <div id="boardDiv" class="chat-window">
-            <div class="grid-item" id="todo">
+            <div id="todo">
                 To Do
             </div>
-            <div class="grid-item" id="doing">
+            <div id="doing">
                 Doing
             </div>
-            <div class="grid-item" id="done">
+            <div id="done">
                 Done
             </div>
         </div>
@@ -34,7 +34,7 @@
                 <input type="text" class="user-name" />
             </label>
             <label class="chat-label">
-                Task description:
+                Description:
                 <input type="text" class="task-description" />
             </label>
             <label class="chat-label">
@@ -45,7 +45,6 @@
                     <option>done</option>
                 </select>
             </label>
-            </br>
             <button class="send-button" id="updateDetails" onclick="sendTaskDetails()">Update Details</button>
         </form>
     </div>
@@ -60,13 +59,28 @@
         $(document).ready(function () {
             microsoftTeams.initialize();
             microsoftTeams.getContext(function (context) {
+                console.log(context);
                 meetingId = context.meetingId;
                 tenantId = context.tid;
                 userId = context.userObjectId;
             })
             var chatSection = document.getElementById("chatSection");
+            
             if (screenWidth > 600) {
                 chatSection.className = "chatSectionStage"
+                $("#todo, #doing, #done").addClass("grid-item");
+                $("#todo, #doing, #done").removeClass("grid-item-sidepanel");
+
+                $("#boardDiv").addClass("chat-window");
+                $("#boardDiv").removeClass("chat-window-sidepanel");
+            }
+            else {
+                chatSection.className = "chatSectionSidePanel";
+                $("#todo, #doing, #done").addClass("grid-item-sidepanel");
+                $("#todo, #doing, #done").removeClass("grid-item");
+
+                $("#boardDiv").addClass("chat-window-sidepanel");
+                $("#boardDiv").removeClass("chat-window");
             }
         });
         
