@@ -55,3 +55,6 @@ This sample app demonstarte the addtion of app during, before and after a meetin
 
 
    ![](Images/InStageView.png)
+
+
+   ![](Images/MainScreen.png)

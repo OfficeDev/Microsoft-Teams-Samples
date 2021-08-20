@@ -15,86 +15,96 @@
 </head>
 
 <body id=mainDiv>
-  <label>Sprint 80 Plan Action</label>
   <div id="chatSection" className="chatSection">
+    Sprint 80
     <div id="boardDiv" class="chat-window">
-      <div class="grid-item" id="todo">
-      ToDo
+      <div id="todo">
+        To Do
       </div>
-      <div class="grid-item" id="doing">
-      Doing
+      <div id="doing">
+        Doing
       </div>
-      <div class="grid-item" id="completed">
-      Completed
+      <div id="done">
+        Done
       </div>
-      </div>
-    <form class="chat-form">
+    </div>
+
+    <form class="chat-form" onsubmit="return false;">
       <label class="chat-label">
-        Task name:
-        <input type="text" class="task-name" />
+        Assigned To:
+        <input type="text" class="user-name" />
       </label>
       <label class="chat-label">
-        Task description:
+        Description:
         <input type="text" class="task-description" />
       </label>
-      <label>
-        Status:
-        <select class="status">
-          <option>todo</option>
+      <label class="chat-label">
+        Task status:
+        <select class="task-status">
+          <option selected>todo</option>
           <option>doing</option>
-          <option>completed</option>
+          <option>done</option>
         </select>
       </label>
-      </br>
-      <button onclick="sendTaskDetails()" class="send-button">Update</button>
+      <button class="send-button" id="updateDetails" onclick="sendTaskDetails()">Update Details</button>
     </form>
   </div>
   <script>
     var screenWidth = window.innerWidth;
     var meetingId;
     var userName;
+    
     $(document).ready(function () {
       microsoftTeams.initialize();
       microsoftTeams.getContext(function (context) {
         meetingId = context.meetingId;
         tenantId = context.tid;
-        userId = context.userObjectId;
-        userName = context.upn;
       })
       var chatSection = document.getElementById("chatSection");
+
       if (screenWidth > 600) {
         chatSection.className = "chatSectionStage"
+        $("#todo, #doing, #done").addClass("grid-item");
+        $("#todo, #doing, #done").removeClass("grid-item-sidepanel");
+        $("#boardDiv").addClass("chat-window");
+        $("#boardDiv").removeClass("chat-window-sidepanel");
+      }
+      else {
+        chatSection.className = "chatSectionSidePanel";
+        $("#todo, #doing, #done").addClass("grid-item-sidepanel");
+        $("#todo, #doing, #done").removeClass("grid-item");
+        $("#boardDiv").addClass("chat-window-sidepanel");
+        $("#boardDiv").removeClass("chat-window");
       }
     });
+
     const socket = io();
     socket.on('connection')
 
     // Render details
     const renderDetails = (data) => {
-      if(data.status=="todo")
-      {
+      if (data.taskStatus == "todo") {
         $('#todo').append(`<div class="details">
-        Status: ${data.status}</br>
-        Task Name: ${data.taskName}</br>
+        Assigned to: ${data.userName}</br>
         Task Description: ${data.taskDescription}</br>
-        -:${data.userName}</div>
+        Status: ${data.taskStatus}</br>
+        </div>
   `)
       }
-      else if(data.status=="doing")
-      {
-      $('#doing').append(`<div class="details">
-        Status: ${data.status}</br>
-        Task Name: ${data.taskName}</br>
+      else if (data.taskStatus == "doing") {
+        $('#doing').append(`<div class="details">
+        Assigned to: ${data.userName}</br>
         Task Description: ${data.taskDescription}</br>
-        -:${data.userName}</div>
+        Status: ${data.taskStatus}</br>
+        </div>
   `)
       }
-      else{
-        $('#completed').append(`<div class="details">
-        Status: ${data.status}</br>
-        Task Name: ${data.taskName}</br>
+      else {
+        $('#done').append(`<div class="details">
+        Assigned to: ${data.userName}</br>
         Task Description: ${data.taskDescription}</br>
-        -:${data.userName}</div>
+        Status: ${data.taskStatus}</br>
+        </div>
   `)
       }
     }
@@ -103,13 +113,13 @@
       renderDetails(data)
     })
 
-    // Send task details. 
+    // Send task details.
     const sendTaskDetails = () => {
+      var taskStatus = document.querySelector(".task-status");
       var taskDescription = document.querySelector(".task-description")
-      var taskName = document.querySelector(".task-name")
-      var status = document.querySelector(".status")
+      var userName = document.querySelector(".user-name")
       var isValid = true;
-      $('.task-id,.task-status,.task-description,.task-name, .status').each(function (e) {
+      $('.task-status,.task-description,.user-name').each(function (e) {
         if ($.trim($(this).val()) == '') {
           isValid = false;
           $(this).css({
@@ -128,10 +138,9 @@
         return false;
       }
       const taskDetails = {
+        "taskStatus": taskStatus.value,
         "taskDescription": taskDescription.value,
-        "taskName": taskName.value,
-        "userName": userName,
-        "status": status.value
+        "userName": userName.value
       };
       socket.emit('message', taskDetails);
     }

@@ -20,7 +20,7 @@
   },
   "description": {
     "short": "App In Meeting",
-    "full": "This example shows app to add before, after and during a meeting"
+    "full": "This example shows how to add app before, after or during the meeting"
   },
   "accentColor": "#5558AF",
   "configurableTabs": [
@@ -31,15 +31,15 @@
         "team",
         "groupchat"
       ],
-      "context":[
+      "context": [
         "channelTab",
         "privateChatTab",
         "meetingChatTab",
         "meetingDetailsTab",
         "meetingSidePanel",
         "meetingStage"
-     ],
-	 "meetingSurfaces": [
+      ],
+      "meetingSurfaces": [
         "sidePanel"
       ]
     }
@@ -49,7 +49,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok.io",
-    "<<appDomain>>"
+    "*.ngrok.io"
   ]
 }
