@@ -1,6 +1,75 @@
 ﻿@page
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>App in a meeting demo</title>
+        <link rel="stylesheet" href="/static/styles.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+                integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+                crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <form class="chat-form" onsubmit="return sendTaskDetails();">
+            <label class="chat-label">
+                Assigned To:
+                <input type="text" class="user-name" />
+            </label>
+            <label class="chat-label">
+                Description:
+                <input type="text" class="task-description" />
+            </label>
+            <label class="chat-label">
+                Task status:
+                <select class="task-status">
+                    <option selected>todo</option>
+                    <option>doing</option>
+                    <option>done</option>
+                </select>
+            </label>
+            <button class="send-button" id="updateDetails">Update Details</button>
+        </form>
+        <script src="/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+        <script src="/lib/microsoft/chat.js"></script>
+        <script>
+           
+            // Send task details.
+            const sendTaskDetails = () => {
+                microsoftTeams.initialize();
+                var taskStatus = document.querySelector(".task-status");
+                var taskDescription = document.querySelector(".task-description")
+                var userName = document.querySelector(".user-name")
+                var isValid = true;
+                $('.task-status,.task-description,.user-name').each(function (e) {
+                    if ($.trim($(this).val()) == '') {
+                        isValid = false;
+                        $(this).css({
+                            "border": "1px solid red"
+                        });
+                    }
+                    else {
+                        $(this).css({
+                            "border": "",
+                            "background": ""
+                        });
+                    }
+                });
+                if (isValid == false) {
+                    e.preventDefault();
+                    return false;
+                }
+                const taskDetails = {
+                    "taskStatus": taskStatus.value,
+                    "taskDescription": taskDescription.value,
+                    "userName": userName.value
+                };
+                microsoftTeams.tasks.submitTask(taskDetails);
+                //updateDetails(taskDetails);
+                return true;
+            }
+        </script>
+    </body>
+</html>

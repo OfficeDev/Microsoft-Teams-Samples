@@ -61,6 +61,12 @@ namespace AppInMeeting
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "lib")),
                 RequestPath = new PathString("/lib")
             });
+
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "images")),
+                RequestPath = new PathString("/Images")
+            });
         }
     }
 }

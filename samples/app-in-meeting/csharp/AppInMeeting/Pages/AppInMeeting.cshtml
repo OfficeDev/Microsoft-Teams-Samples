@@ -17,8 +17,14 @@
     <div id="chatSection" className="chatSection">
         Sprint 80
         <div id="boardDiv" class="chat-window">
-            <div id="todo">
+            <div>
                 To Do
+                <div>
+                    <button onclick="openTaskModule()" class="btn"><img src="../../Images/add_icon.svg" title="Click to continue existing conversation" /></button>
+                </div>
+                <div id="todo">
+
+                </div>
             </div>
             <div id="doing">
                 Doing
@@ -27,26 +33,6 @@
                 Done
             </div>
         </div>
-
-        <form class="chat-form" onsubmit="return false;">
-            <label class="chat-label">
-                Assigned To:
-                <input type="text" class="user-name" />
-            </label>
-            <label class="chat-label">
-                Description:
-                <input type="text" class="task-description" />
-            </label>
-            <label class="chat-label">
-                Task status:
-                <select class="task-status">
-                    <option selected>todo</option>
-                    <option>doing</option>
-                    <option>done</option>
-                </select>
-            </label>
-            <button class="send-button" id="updateDetails" onclick="sendTaskDetails()">Update Details</button>
-        </form>
     </div>
     <script src="/lib/microsoft/signalr/dist/browser/signalr.js"></script>
     <script src="/lib/microsoft/chat.js"></script>
@@ -65,7 +51,7 @@
                 userId = context.userObjectId;
             })
             var chatSection = document.getElementById("chatSection");
-            
+
             if (screenWidth > 600) {
                 chatSection.className = "chatSectionStage"
                 $("#todo, #doing, #done").addClass("grid-item");
@@ -83,38 +69,16 @@
                 $("#boardDiv").removeClass("chat-window");
             }
         });
-        
-        // Send task details.
-        const sendTaskDetails = () => {
-            var taskStatus = document.querySelector(".task-status");
-            var taskDescription = document.querySelector(".task-description")
-            var userName = document.querySelector(".user-name")
-            var isValid = true;
-            $('.task-status,.task-description,.user-name').each(function (e) {
-                if ($.trim($(this).val()) == '') {
-                    isValid = false;
-                    $(this).css({
-                        "border": "1px solid red"
-                    });
-                }
-                else {
-                    $(this).css({
-                        "border": "",
-                        "background": ""
-                    });
-                }
-            });
-            if (isValid == false) {
-                e.preventDefault();
-                return false;
-            }
-            const taskDetails = {
-                "taskStatus": taskStatus.value,
-                "taskDescription": taskDescription.value,
-                "userName": userName.value
+        const openTaskModule = () => {
+            let taskInfo = {
+                title: "Custom Form",
+                height: 510,
+                width: 430,
+                url: "https://7efa1df91e38.ngrok.io/Index",
             };
-            updateDetails(taskDetails);
-        }
+            microsoftTeams.tasks.startTask(taskInfo, updateDetails);
+        };
+
     </script>
 </body>
 </html>
