@@ -4,9 +4,8 @@
 
 //This method receive the message and Append to our list  
 connection.on("ReceiveMessage", (user, description, status) => {
-    var detailsClass = window.innerWidth > 600 ? "details" ? "details-sidepanel";
-    const divId = status;
-    document.getElementById(divId).innerHTML += (`<div class=${detailsClass}>
+    var detailsClass = window.innerWidth > 600 ? "details" : "details-sidepanel";
+    document.getElementById(status).innerHTML += (`<div class=${detailsClass}>
                 Description: ${description}</br>
                 Assigned To:${user}</div>
           `);
