@@ -13,7 +13,22 @@
                 crossorigin="anonymous"></script>
     </head>
     <body>
-        <form class="chat-form" onsubmit="return sendTaskDetails();">
+        <script src="/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+        <script src="/lib/microsoft/chat.js"></script>
+        <script>
+           
+            function sendTaskDetails() {
+                //microsoftTeams.initialize();
+                var customerInfo = {
+                    name: "abc",
+                    email: "abc",
+                    favoriteBook: "book"
+                }
+                microsoftTeams.tasks.submitTask(customerInfo, "1234");
+                return true;
+            }
+        </script>
+        <form class="chat-form" onsubmit="return false;">
             <label class="chat-label">
                 Assigned To:
                 <input type="text" class="user-name" />
@@ -30,46 +45,12 @@
                     <option>done</option>
                 </select>
             </label>
-            <button class="send-button" id="updateDetails">Update Details</button>
+            <button class="send-button" id="updateDetails" onclick="sendTaskDetails()">Update Details</button>
         </form>
-        <script src="/lib/microsoft/signalr/dist/browser/signalr.js"></script>
-        <script src="/lib/microsoft/chat.js"></script>
+
         <script>
-           
-            // Send task details.
-            const sendTaskDetails = () => {
-                microsoftTeams.initialize();
-                var taskStatus = document.querySelector(".task-status");
-                var taskDescription = document.querySelector(".task-description")
-                var userName = document.querySelector(".user-name")
-                var isValid = true;
-                $('.task-status,.task-description,.user-name').each(function (e) {
-                    if ($.trim($(this).val()) == '') {
-                        isValid = false;
-                        $(this).css({
-                            "border": "1px solid red"
-                        });
-                    }
-                    else {
-                        $(this).css({
-                            "border": "",
-                            "background": ""
-                        });
-                    }
-                });
-                if (isValid == false) {
-                    e.preventDefault();
-                    return false;
-                }
-                const taskDetails = {
-                    "taskStatus": taskStatus.value,
-                    "taskDescription": taskDescription.value,
-                    "userName": userName.value
-                };
-                microsoftTeams.tasks.submitTask(taskDetails);
-                //updateDetails(taskDetails);
-                return true;
-            }
+
+
         </script>
     </body>
-</html>
+    </html>
