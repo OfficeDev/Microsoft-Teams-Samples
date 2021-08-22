@@ -55,7 +55,8 @@ This capability is currently available in developer preview only.
 
 ![Select App](Images/select_app.png)
 
-    - Join the meeting and click on the app icon at the top, this will open a sidepanel with `Share` icon at top to share the app for collaboration.
+    - Join the meeting and click on the app icon at the top
+    - This will open a sidepanel with `Share` icon at top to share the app for collaboration in stage view.
 
 ![App icon](Images/app_icon.png)
 
