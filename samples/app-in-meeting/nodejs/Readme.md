@@ -49,17 +49,17 @@ This capability is currently available in developer preview only.
     You can use this app by following the below steps:
     - Edit a meeting and select `+` icon at the top right corner.
 
-![Add icon in meeting](AppInMeeting/Images/add_icon.png)
+![Add icon in meeting](/Images/add_icon.png)
 
     - Search for your app `App in meeting` and add it.
 
-![Select App](AppInMeeting/Images/select_app.png)
+![Select App](/Images/select_app.png)
 
     - Join the meeting and click on the app icon at the top, this will open a sidepanel with `Share` icon at top to share the app for collaboration.
 
-![App icon](AppInMeeting/Images/app_icon.png)
+![App icon](/Images/app_icon.png)
 
-![Share Icon](AppInMeeting/Images/share_icon.png)
+![Share Icon](/Images/share_icon.png)
 
     - You can now interact with the app.
 
@@ -68,14 +68,14 @@ This capability is currently available in developer preview only.
 
 - App in stage view.
 
-![Stage View Screen](AppInMeeting/Images/stage_view.png)
+![Stage View Screen](/Images/stage_view.png)
 
 - Add Details for collaboration.
 
-![Add Button](AppInMeeting/Images/add_button.png)
+![Add Button](/Images/add_button.png)
 
-![Add Details](AppInMeeting/Images/add_details.png)
+![Add Details](/Images/add_details.png)
 
 - App in sidepanel.
 
-![App in sidepanel](AppInMeeting/Images/side_panel.png)
+![App in sidepanel](/Images/side_panel.png)
