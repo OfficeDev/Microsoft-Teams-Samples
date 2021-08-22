@@ -84,20 +84,45 @@
     <script src="/lib/microsoft/chat.js"></script>
     <script>
         microsoftTeams.initialize();
-        submitHandler = (err, result) => {
-            alert("handler");
-            console.log(`Submit handler - err: ${err}`);
-            alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
-        };
+        $(document).ready(function () {
+            /*var chatSection = document.getElementById("chatSection");*/
+
+            if (window.innerWidth > 600) {
+                /*chatSection.className = "chatSectionStage"*/
+                $("#todo, #doing, #done").addClass("grid-item");
+                $("#todo, #doing, #done").removeClass("grid-item-sidepanel");
+
+                $("#boardDiv").addClass("chat-window");
+                $("#boardDiv").removeClass("chat-window-sidepanel");
+            }
+            else {
+                /*chatSection.className = "chatSectionSidePanel";*/
+                $("#todo, #doing, #done").addClass("grid-item-sidepanel");
+                $("#todo, #doing, #done").removeClass("grid-item");
+
+                $("#boardDiv").addClass("chat-window-sidepanel");
+                $("#boardDiv").removeClass("chat-window");
+            }
+        });
+
+        //submitHandler = (err, result) => {
+        //    alert("handler");
+        //    console.log(`Submit handler - err: ${err}`);
+        //    alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
+        //};
         const openTaskModule = () => {
             let taskInfo = {
                 title: "Custom Form",
                 height: 510,
                 width: 430,
-                url: "https://8489-122-175-234-83.ngrok.io/Index",
+                url: "https://be7c-122-175-234-83.ngrok.io/Index",
             };
 
-            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+            microsoftTeams.tasks.startTask(taskInfo, (err, result) => {
+                alert("handler");
+                console.log(`Submit handler - err: ${err}`);
+                alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
+            });
             //microsoftTeams.tasks.startTask(taskInfo, updateDetails);
         };
     </script>

@@ -18,39 +18,6 @@ const updateDetails = (data) => {
     connection.invoke("SendMessage", data.userName, data.taskDescription, data.taskStatus).catch(err => console.log(err.toString()));
 }
 
-var screenWidth = window.innerWidth;
-var meetingId;
-var tenantId;
-var userId;
-var userName;
-microsoftTeams.initialize();
-$(document).ready(function () {
-    //microsoftTeams.getContext(function (context) {
-    //    console.log(context);
-    //    meetingId = context.meetingId;
-    //    tenantId = context.tid;
-    //    userId = context.userObjectId;
-    //})
-    /*var chatSection = document.getElementById("chatSection");*/
-
-    if (screenWidth > 600) {
-        /*chatSection.className = "chatSectionStage"*/
-        $("#todo, #doing, #done").addClass("grid-item");
-        $("#todo, #doing, #done").removeClass("grid-item-sidepanel");
-
-        $("#boardDiv").addClass("chat-window");
-        $("#boardDiv").removeClass("chat-window-sidepanel");
-    }
-    else {
-        /*chatSection.className = "chatSectionSidePanel";*/
-        $("#todo, #doing, #done").addClass("grid-item-sidepanel");
-        $("#todo, #doing, #done").removeClass("grid-item");
-
-        $("#boardDiv").addClass("chat-window-sidepanel");
-        $("#boardDiv").removeClass("chat-window");
-    }
-});
-
 const openTaskModule1 = () => {
     let taskInfo = {
         title: "Custom Form",
