@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>App in a meeting demo node js</title>
+    <title>App in meeting - Stage View - Configuration</title>
     <style>
         .header{
             background-color: #fff;
@@ -34,9 +34,9 @@
                 var radios = document.getElementsByName('notificationType');
                 microsoftTeams.settings.setSettings({
                     entityID: "App in Meeting Demo",
-                    contentUrl: `${window.location.origin}/appInMeeting?tenantId={tid}`,
+                    contentUrl: `${window.location.origin}/appInMeeting`,
                     suggestedTabName: "App in meeting",
-                    websiteUrl: `${window.location.origin}/appInMeeting?tenantId={tid}`,
+                    websiteUrl: `${window.location.origin}/appInMeeting`,
                 });
                 saveEvent.notifySuccess();
             });

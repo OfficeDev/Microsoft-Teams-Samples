@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>App in a meeting demo</title>
+  <title>App in meeting - Stage View</title>
   <link rel="stylesheet" href="styles.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
@@ -16,61 +16,63 @@
 
 <body id=mainDiv>
   <div id="chatSection" className="chatSection">
-    Sprint 80
+    <div class="label">
+      Sprint Status
+    </div>
     <div id="boardDiv" class="chat-window">
-      <div id="todo">
-        To Do
+      <div>
+        <div class="label">
+          To Do
+        </div>
+
+        <button onclick="openTaskModule('todo')" class="add-card-button">
+          <img class="add-icon" src="/Images/add_icon.svg" title="Click to continue existing conversation" />
+        </button>
+
+        <div id="todo">
+          <!-- The statud details will be updated here on runtime -->
+        </div>
       </div>
-      <div id="doing">
-        Doing
+      <div>
+        <div class="label">
+          Doing
+        </div>
+
+        <button onclick="openTaskModule('doing')" class="add-card-button">
+          <img class="add-icon" src="/Images/add_icon.svg" title="Click to continue existing conversation" />
+        </button>
+
+        <div id="doing">
+          <!-- The statud details will be updated here on runtime -->
+        </div>
       </div>
-      <div id="done">
-        Done
+      <div>
+        <div class="label">
+          Done
+        </div>
+
+        <button onclick="openTaskModule('done')" class="add-card-button">
+          <img class="add-icon" src="/Images/add_icon.svg" title="Click to continue existing conversation" />
+        </button>
+
+        <div id="done">
+          <!-- The statud details will be updated here on runtime -->
+        </div>
       </div>
     </div>
-
-    <form class="chat-form" onsubmit="return false;">
-      <label class="chat-label">
-        Assigned To:
-        <input type="text" class="user-name" />
-      </label>
-      <label class="chat-label">
-        Description:
-        <input type="text" class="task-description" />
-      </label>
-      <label class="chat-label">
-        Task status:
-        <select class="task-status">
-          <option selected>todo</option>
-          <option>doing</option>
-          <option>done</option>
-        </select>
-      </label>
-      <button class="send-button" id="updateDetails" onclick="sendTaskDetails()">Update Details</button>
-    </form>
   </div>
   <script>
-    var screenWidth = window.innerWidth;
-    var meetingId;
-    var userName;
-    
+    microsoftTeams.initialize();
     $(document).ready(function () {
-      microsoftTeams.initialize();
-      microsoftTeams.getContext(function (context) {
-        meetingId = context.meetingId;
-        tenantId = context.tid;
-      })
-      var chatSection = document.getElementById("chatSection");
-
-      if (screenWidth > 600) {
-        chatSection.className = "chatSectionStage"
+      if (window.innerWidth > 600) {
+        // Adding and removing classes based on screen width, to show app in stage view and in side panel
         $("#todo, #doing, #done").addClass("grid-item");
         $("#todo, #doing, #done").removeClass("grid-item-sidepanel");
         $("#boardDiv").addClass("chat-window");
         $("#boardDiv").removeClass("chat-window-sidepanel");
       }
       else {
-        chatSection.className = "chatSectionSidePanel";
+        // Adding and removing classes based on screen width, to show app in stage view and in side panel
         $("#todo, #doing, #done").addClass("grid-item-sidepanel");
         $("#todo, #doing, #done").removeClass("grid-item");
         $("#boardDiv").addClass("chat-window-sidepanel");
@@ -78,72 +80,35 @@
       }
     });
 
+    // Creating socket instance for real time status updates in stage view.
     const socket = io();
     socket.on('connection')
 
-    // Render details
-    const renderDetails = (data) => {
-      if (data.taskStatus == "todo") {
-        $('#todo').append(`<div class="details">
-        Assigned to: ${data.userName}</br>
-        Task Description: ${data.taskDescription}</br>
-        Status: ${data.taskStatus}</br>
-        </div>
-  `)
+    // Updating containers when a status message is received.
+    socket.on('message', (data, status) => {
+      if (data !== undefined) {
+        var detailsClass = window.innerWidth > 600 ? "details" : "details-sidepanel";
+        document.getElementById(status).innerHTML += (`<div class=${detailsClass}>
+                <div class="description" title="${data.taskDescription}">${data.taskDescription}</div>
+                <div class="userName">--${data.userName}</div>
+          `);
       }
-      else if (data.taskStatus == "doing") {
-        $('#doing').append(`<div class="details">
-        Assigned to: ${data.userName}</br>
-        Task Description: ${data.taskDescription}</br>
-        Status: ${data.taskStatus}</br>
-        </div>
-  `)
-      }
-      else {
-        $('#done').append(`<div class="details">
-        Assigned to: ${data.userName}</br>
-        Task Description: ${data.taskDescription}</br>
-        Status: ${data.taskStatus}</br>
-        </div>
-  `)
-      }
-    }
-
-    socket.on('message', (data) => {
-      renderDetails(data)
     })
 
-    // Send task details.
-    const sendTaskDetails = () => {
-      var taskStatus = document.querySelector(".task-status");
-      var taskDescription = document.querySelector(".task-description")
-      var userName = document.querySelector(".user-name")
-      var isValid = true;
-      $('.task-status,.task-description,.user-name').each(function (e) {
-        if ($.trim($(this).val()) == '') {
-          isValid = false;
-          $(this).css({
-            "border": "1px solid red"
-          });
-        }
-        else {
-          $(this).css({
-            "border": "",
-            "background": ""
-          });
-        }
-      });
-      if (isValid == false) {
-        e.preventDefault();
-        return false;
-      }
-      const taskDetails = {
-        "taskStatus": taskStatus.value,
-        "taskDescription": taskDescription.value,
-        "userName": userName.value
+    // Task module to collect details from the meeting participants.
+    const openTaskModule = (status) => {
+      let taskInfo = {
+        title: "Status Details",
+        height: 250,
+        width: 250,
+        url: `${window.location.origin}/index`,
       };
-      socket.emit('message', taskDetails);
-    }
+
+      // Invoking task module to collect status details from participants.
+      microsoftTeams.tasks.startTask(taskInfo, (err, taskDetails) => {
+        socket.emit('message', taskDetails, status);
+      });
+    };
   </script>
 </body>
 

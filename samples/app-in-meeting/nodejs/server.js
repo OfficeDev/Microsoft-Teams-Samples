@@ -19,16 +19,19 @@ app.get('/configure', function (req, res) {
   res.render('./views/configure');
 });
 
-app.get('/appInMeeting', function (req, res) {
-  var tenantId = req.url.split('=')[1];
-  auth.getAccessToken(tenantId).then(async function (token) {
-    res.render('./views/appInMeeting', { token: JSON.stringify(token) });
-  });
+app.get('/index', function (req, res) {
+  res.render('./views/index');
 });
 
+app.get('/appInMeeting', function (req, res) {
+  res.render('./views/appInMeeting');
+});
+
+app.use("/Images", express.static(path.resolve(__dirname, './Images')));
+
 io.on("connection", (socket) => {
-  socket.on("message", (message) => {
-    io.emit("message", message)
+  socket.on("message", (message, status) => {
+    io.emit("message", message, status)
   })
 });
 

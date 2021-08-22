@@ -11,35 +11,36 @@
 }
 
 .chat-window {
-  height: 60vh;
+  height: 100vh;
   width: 96vw;
-  overflow-y: scroll;
-  background-color: #11100f;
   display: grid;
   grid-template-columns: auto auto auto;
   padding: 10px;
   color: #f5f5f5;
+  font-family: segoe ui;
 }
 
 .chat-window-sidepanel {
-  height: 60vh;
-  width: 96vw;
+  height: 80vh;
+  width: 88vw;
   overflow-y: scroll;
-  background-color: #11100f;
   padding: 10px;
   color: #f5f5f5;
 }
 
-.chatSection {
-  overflow-y: scroll;
-  background-color: #fff;
+#mainDiv {
+  background-color: #f5f5f5;
+  color: #111;
 }
 
 .grid-item {
-  height: 10vh;
+  max-height: 320px;
   color: #f5f5f5;
-  width: 25vw;
+  width: 22vw;
+  overflow-y: auto;
+  margin-top: 10px;
   padding: 0.5rem;
+  padding-right: 2rem;
 }
 
 .grid-item-sidepanel {
@@ -50,31 +51,24 @@
 .chatSection .chat-form {
   width: 8vw;
   margin-left: -1rem;
-  background-color: #11100f;
-}
-
-.chatSectionStage {
-  margin: 1rem;
 }
 
 .chat-form {
-  position: fixed;
-  bottom: 2rem;
   display: grid;
   background-color: #fff;
-  width: 96vw;
   padding-left: 1rem;
-  background-color: #11100f;
-  color: #f5f5f5;
-  padding-top: 1em;
+  color: #111;
+  font-family: segoe ui;
 }
 
-.send-button {
+#addDetails {
   width: fit-content;
+  margin-top: 5px;
 }
 
-.chatSectionStage .chat-label {
-  margin-bottom: 0.5rem;
+.chat-label {
+  margin-top: 5px;
+  margin-bottom: 5px;
   display: block;
 }
 
@@ -114,17 +108,73 @@
   margin-left: 0rem;
 }
 
-.details {
-  border: 1px solid black;
-  background-color: #484644;
+.details, .details-sidepanel {
   margin-top: 1rem;
   padding: 0.5rem;
+  color: #111;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+  transition: 0.3s;
+  border-radius: 5px;
 }
 
+  .details:hover, .details-sidepanel:hover {
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+
 .details-sidepanel {
-  width: 100vw;
-  border: 1px solid black;
-  background-color: #484644;
   margin-top: 1rem;
   padding: 0.5rem;
+  color: #111;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+.add-card-button {
+  width: 168px;
+  height: 32px;
+  width: 21vw;
+  height: 32px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.add-icon {
+  color: #5b5b5b;
+  height: 20px;
+}
+
+.label {
+  color: #111;
+  font-weight: bold;
+  font-family: segoe ui;
+  padding-left: 10px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #cbcbcb;
+  border-radius: 10px;
+}
+
+.description {
+  font-size: 18px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.userName{
+  font-size: 12px;
 }
