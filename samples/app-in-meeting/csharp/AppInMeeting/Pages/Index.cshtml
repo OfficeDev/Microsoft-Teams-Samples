@@ -16,41 +16,52 @@
         <script src="/lib/microsoft/signalr/dist/browser/signalr.js"></script>
         <script src="/lib/microsoft/chat.js"></script>
         <script>
-           
+            microsoftTeams.initialize();
+
+            // Method to check validate form and add the entered details.
             function sendTaskDetails() {
-                //microsoftTeams.initialize();
-                var customerInfo = {
-                    name: "abc",
-                    email: "abc",
-                    favoriteBook: "book"
+                var taskDescription = document.querySelector(".task-description")
+                var userName = document.querySelector(".user-name")
+                var isValid = true;
+                $('.task-description,.user-name').each(function (e) {
+                    if ($.trim($(this).val()) == '') {
+                        isValid = false;
+                        $(this).css({
+                            "border": "1px solid red"
+                        });
+                    }
+                    else {
+                        $(this).css({
+                            "border": "",
+                            "background": ""
+                        });
+                    }
+                });
+
+                if (isValid == false) {
+                    e.preventDefault();
+                    return false;
                 }
-                microsoftTeams.tasks.submitTask(customerInfo, "1234");
+
+                // Meeting participant's entered details.
+                const taskDetails = {
+                    "taskDescription": taskDescription.value,
+                    "userName": userName.value
+                };
+                microsoftTeams.tasks.submitTask(taskDetails);
                 return true;
             }
         </script>
-        <form class="chat-form" onsubmit="return false;">
-            <label class="chat-label">
+        <form class="chat-form" onsubmit="return sendTaskDetails()">
+            <div class="chat-label">
                 Assigned To:
                 <input type="text" class="user-name" />
-            </label>
-            <label class="chat-label">
+            </div>
+            <div class="chat-label">
                 Description:
                 <input type="text" class="task-description" />
-            </label>
-            <label class="chat-label">
-                Task status:
-                <select class="task-status">
-                    <option selected>todo</option>
-                    <option>doing</option>
-                    <option>done</option>
-                </select>
-            </label>
-            <button class="send-button" id="updateDetails" onclick="sendTaskDetails()">Update Details</button>
+            </div>
+            <input type="submit" id="addDetails" value="Add"/>
         </form>
-
-        <script>
-
-
-        </script>
     </body>
     </html>

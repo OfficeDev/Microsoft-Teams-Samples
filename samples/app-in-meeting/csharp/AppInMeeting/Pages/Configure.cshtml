@@ -33,7 +33,6 @@
             microsoftTeams.initialize();
             microsoftTeams.appInitialization.notifySuccess();
             microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
-                var radios = document.getElementsByName('notificationType');
                 microsoftTeams.settings.setSettings({
                     entityID: "App in Meeting Demo",
                     contentUrl: `${window.location.origin}/appInMeeting`,

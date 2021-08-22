@@ -34,12 +34,13 @@
 }
 
 .grid-item {
-    max-height: 178px;
+    max-height: 320px;
     color: #f5f5f5;
     width: 22vw;
-    padding: 0.5rem;
     overflow-y: auto;
     margin-top: 10px;
+    padding: 0.5rem;
+    padding-right: 2rem;
 }
 
 .grid-item-sidepanel {
@@ -52,28 +53,22 @@
     margin-left: -1rem;
 }
 
-.chatSectionStage {
-    margin: 1rem;
-}
-
 .chat-form {
-    position: fixed;
-    bottom: 2rem;
     display: grid;
     background-color: #fff;
-    width: 96vw;
     padding-left: 1rem;
-    background-color: #11100f;
-    color: #f5f5f5;
-    padding-top: 1em;
+    color: #111;
+    font-family: segoe ui;
 }
 
-.send-button {
+#addDetails {
     width: fit-content;
+    margin-top: 5px;
 }
 
-.chatSectionStage .chat-label {
-    margin-bottom: 0.5rem;
+.chat-label {
+    margin-top: 5px;
+    margin-bottom: 5px;
     display: block;
 }
 
@@ -153,4 +148,33 @@
     color: #111;
     font-weight: bold;
     font-family: segoe ui;
+    padding-left: 10px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f5f5f5;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #cbcbcb;
+    border-radius: 10px;
+}
+
+.description {
+    font-size: 18px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.userName{
+    font-size: 12px;
 }

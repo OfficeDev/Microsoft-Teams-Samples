@@ -23,11 +23,11 @@
                 <div class="label">
                     To Do
                 </div>
-               
-                    <button onclick="openTaskModule()" class="add-card-button">
-                        <img class="add-icon" src="../../Images/add_icon.svg" title="Click to continue existing conversation" />
-                    </button>
-               
+
+                <button onclick="openTaskModule('todo')" class="add-card-button">
+                    <img class="add-icon" src="../../Images/add_icon.svg" title="Click to continue existing conversation" />
+                </button>
+
                 <div id="todo">
 
                 </div>
@@ -36,11 +36,11 @@
                 <div class="label">
                     Doing
                 </div>
-               
-                    <button onclick="openTaskModule()" class="add-card-button">
-                        <img class="add-icon" src="../../Images/add_icon.svg" title="Click to continue existing conversation" />
-                    </button>
-             
+
+                <button onclick="openTaskModule('doing')" class="add-card-button">
+                    <img class="add-icon" src="../../Images/add_icon.svg" title="Click to continue existing conversation" />
+                </button>
+
                 <div id="doing">
 
                 </div>
@@ -49,46 +49,23 @@
                 <div class="label">
                     Done
                 </div>
-               
-                    <button onclick="openTaskModule()" class="add-card-button">
-                        <img class="add-icon" src="../../Images/add_icon.svg" title="Click to continue existing conversation" />
-                    </button>
-               
+
+                <button onclick="openTaskModule('done')" class="add-card-button">
+                    <img class="add-icon" src="../../Images/add_icon.svg" title="Click to continue existing conversation" />
+                </button>
+
                 <div id="done">
 
                 </div>
             </div>
         </div>
-
-        <form class="chat-form" onsubmit="return false;">
-            <label class="chat-label">
-                Assigned To:
-                <input type="text" class="user-name" />
-            </label>
-            <label class="chat-label">
-                Description:
-                <input type="text" class="task-description" />
-            </label>
-            <label class="chat-label">
-                Task status:
-                <select class="task-status">
-                    <option selected>todo</option>
-                    <option>doing</option>
-                    <option>done</option>
-                </select>
-            </label>
-            <button class="send-button" id="updateDetails" onclick="sendTaskDetails1()">Update Details</button>
-        </form>
     </div>
     <script src="/lib/microsoft/signalr/dist/browser/signalr.js"></script>
     <script src="/lib/microsoft/chat.js"></script>
     <script>
         microsoftTeams.initialize();
         $(document).ready(function () {
-            /*var chatSection = document.getElementById("chatSection");*/
-
             if (window.innerWidth > 600) {
-                /*chatSection.className = "chatSectionStage"*/
                 $("#todo, #doing, #done").addClass("grid-item");
                 $("#todo, #doing, #done").removeClass("grid-item-sidepanel");
 
@@ -96,7 +73,6 @@
                 $("#boardDiv").removeClass("chat-window-sidepanel");
             }
             else {
-                /*chatSection.className = "chatSectionSidePanel";*/
                 $("#todo, #doing, #done").addClass("grid-item-sidepanel");
                 $("#todo, #doing, #done").removeClass("grid-item");
 
@@ -105,26 +81,19 @@
             }
         });
 
-        //submitHandler = (err, result) => {
-        //    alert("handler");
-        //    console.log(`Submit handler - err: ${err}`);
-        //    alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
-        //};
-        const openTaskModule = () => {
+        // Task module to collect details from the meeting participants.
+        const openTaskModule = (status) => {
             let taskInfo = {
-                title: "Custom Form",
-                height: 510,
-                width: 430,
-                url: "https://be7c-122-175-234-83.ngrok.io/Index",
+                title: "Status Details",
+                height: 250,
+                width: 250,
+                url: `${window.location.origin}/Index`,
             };
 
             microsoftTeams.tasks.startTask(taskInfo, (err, result) => {
-                alert("handler");
-                console.log(`Submit handler - err: ${err}`);
-                alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
+                updateDetails(result, status);
             });
-            //microsoftTeams.tasks.startTask(taskInfo, updateDetails);
         };
     </script>
-</body >
-</html >
+</body>
+</html>
