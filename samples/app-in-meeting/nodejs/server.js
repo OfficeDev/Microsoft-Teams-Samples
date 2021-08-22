@@ -1,8 +1,6 @@
 const express = require('express');
 const bodyparser = require('body-parser');
-const env = require('dotenv')
 const path = require('path');
-const auth = require('./auth');
 const app = express();
 
 const server = require('http').createServer(app);
