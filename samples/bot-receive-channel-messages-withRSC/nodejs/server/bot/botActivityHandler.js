@@ -8,7 +8,7 @@ class BotActivityHandler extends TeamsActivityHandler  {
         super();
 
         var sampleDescription = "With this sample your bot can receive user messages across standard channels in a team without being @mentioned";
-        var option = "Press 1 to know about the permissions required,  Press 2 for documentation link"
+        var option = "Type 1 to know about the permissions required,  Type 2 for documentation link"
         var permissionRequired = "This capability is enabled by specifying the ChannelMessage.Read.Group permission in the manifest of an RSC enabled Teams app";
         var docLink = "https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/channel-messages-with-rsc";
 

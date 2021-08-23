@@ -3,7 +3,7 @@
   "manifestVersion": "1.10",
   "version": "1.0.0",
   "id": "<<MANIFEST-ID>>",
-  "packageName": "com.microsoft.teams.botrsc",
+  "packageName": "com.microsoft.teams.tabstageview",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -11,17 +11,33 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "RSC Sample",
-    "full": "Channel messages with RSC"
+    "short": "Tab Stage View",
+    "full": "Tab in stage view"
   },
   "description": {
-    "short": "Receive channel messages with RSC",
-    "full": "This sample demos a bot with RSC permission"
+    "short": "View Tab in stage view",
+    "full": "This sample demos the tab in stage view"
   },
   "icons": {
     "outline": "outline.png",
     "color": "color.png"
   },
+  "staticTabs": [
+    {
+      "entityId": "stageViewTask",
+      "scopes": [
+        "personal"
+      ],
+      "context": [
+        "personalTab",
+        "channelTab"
+      ],
+      "name": "Stage View",
+      "contentUrl": "<<BASE-URL>>/tab",
+      "websiteUrl": "<<BASE-URL>>/tab",
+      "searchUrl": "<<BASE-URL>>/tab"
+    }
+  ],
   "bots": [
     {
       "botId": "<<YOUR-MICROSOFT-APP-ID>>",
@@ -38,12 +54,5 @@
   "validDomains": [
     "<<DOMAIN-NAME>>",
     "token.botframework.com"
-  ],
-  "webApplicationInfo": {
-    "id": "<<YOUR-MICROSOFT-APP-ID>>",
-    "resource": "https://AnyString",
-    "applicationPermissions": [
-      "ChannelMessage.Read.Group"
-    ]
-  }
+  ]
 }
