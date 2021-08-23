@@ -75,6 +75,10 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
          - Then select **Upload a custom app** from the lower right corner.
          - Then select the `manifest.zip` file from `appPackage`, and then select **Add** to add the bot to your selected team.
 
+ ![App installation](images/installApp.png)
+
+ ![Permissions](images/permissions.png)
+
 ## Interacting with the bot in Teams
 
 Select a channel and enter a message in the channel for your bot.
