@@ -49,7 +49,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 ![App Installation](ReceiveMessagesWithRSC/Images/installApp.png)
 
-![Permissions](ReceiveMessagesWithRSC/Images/permissions.png)
+![Permissions](ReceiveMessagesWithRSC/Images/permissions1.png)
     
 ## To try this sample
 
