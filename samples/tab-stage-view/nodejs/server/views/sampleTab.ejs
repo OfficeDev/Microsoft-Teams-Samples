@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/styles/msteams-16.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/custom.css"/>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+        crossorigin="anonymous"></script>
+    <script>
+        microsoftTeams.initialize();
+
+        function createLink() {
+            var appId =  "<%-microsoftAppId%>";
+            var baseUrl =  "<%-baseUrl%>";
+
+            // Passing the values and encoding the url while implementing the deeplink from tab
+            let url = "https://teams.microsoft.com/l/stage/"+appId+"/0?context={\"contentUrl\":\""+baseUrl+"/content\",\"websiteUrl\":\""+baseUrl+"/content\",\"name\":\"DemoStageView\"}";
+            alert("URL - " + url);
+            microsoftTeams.executeDeepLink(url);
+         };
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            <div>
+                <label for="tabChoice"></label>Click on the button to view the stage view from deeplink:
+                <button onClick="createLink()">Execute deeplink</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
