@@ -46,6 +46,8 @@
 |9| Universal bots  | Teams catering bot demonstrating how to use Universal bots in Teams | [View](samples/bot-teams-catering/csharp) |  | |
 |10| Sequential workflow adaptive cards | Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot. | [View][sequential#workflow#csharp] | [View][sequential#workflow#js]
 |11| Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. | [View][messageswithrsc#csharp] | 
+|12| Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. ||  [View][messageswithrsc#js] |
+
 #### Additional samples
 
 |    | Sample Name | Description | .NET Core | JavaScript | 
@@ -194,6 +196,7 @@
 [meetings-sidepanel#js]:samples/meetings-sidepanel/nodejs
 [meetings-content-bubble#js]:samples/meetings-content-bubble/nodejs
 [messageswithrsc#csharp]:samples/bot-receive-channel-messages-withRSC/csharp
+[messageswithrsc#js]:samples/bot-receive-channel-messages-withRSC/nodejs
 
 [app-localization#cs]:samples/app-localization/csharp
 [app-localization#js]:samples/app-localization/nodejs
