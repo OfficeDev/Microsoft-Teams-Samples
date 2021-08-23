@@ -16,25 +16,25 @@
     display: grid;
     grid-template-columns: auto auto auto;
     padding: 10px;
-    color: #f5f5f5;
+    color: #b7b7b7;
     font-family: segoe ui;
 }
 
 .chat-window-sidepanel {
-    height: 60vh;
+    height: 80vh;
     width: 88vw;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding: 10px;
     color: #f5f5f5;
 }
 
 #mainDiv {
-    background-color: #f5f5f5;
-    color: #111;
+    background-color: #11100f;
+    color: #b7b7b7;
 }
 
 .grid-item {
-    max-height: 320px;
+    max-height: 420px;
     color: #f5f5f5;
     width: 22vw;
     overflow-y: auto;
@@ -55,9 +55,8 @@
 
 .chat-form {
     display: grid;
-    background-color: #fff;
     padding-left: 1rem;
-    color: #111;
+    color: #fff;
     font-family: segoe ui;
 }
 
@@ -111,32 +110,23 @@
 .details, .details-sidepanel {
     margin-top: 1rem;
     padding: 0.5rem;
-    color: #111;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
     transition: 0.3s;
     border-radius: 5px;
+    background-color: #484644;
 }
 
-    .details:hover, .details-sidepanel:hover {
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    }
-
-.details-sidepanel {
-    margin-top: 1rem;
-    padding: 0.5rem;
-    color: #111;
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
-    transition: 0.3s;
-    border-radius: 5px;
+.details:hover, .details-sidepanel:hover {
+   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 .add-card-button {
-    width: 168px;
-    height: 32px;
     width: 21vw;
     height: 32px;
     cursor: pointer;
     margin-top: 10px;
+    background-color: #484644;
+    border: 1px solid #b7b7b7;
 }
 
 .add-icon {
@@ -145,7 +135,7 @@
 }
 
 .label {
-    color: #111;
+    color: #b7b7b7;
     font-weight: bold;
     font-family: segoe ui;
     padding-left: 10px;
@@ -175,6 +165,6 @@
     text-overflow: ellipsis;
 }
 
-.userName{
+.userName {
     font-size: 12px;
 }
