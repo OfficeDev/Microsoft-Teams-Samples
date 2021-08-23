@@ -77,7 +77,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
  ![App installation](images/installApp.png)
 
- ![Permissions](images/permissions.png)
+ ![Permissions](images/permissions1.png)
 
 ## Interacting with the bot in Teams
 
