@@ -35,8 +35,12 @@ This capability is currently available in developer preview only.
    - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
     
 ## To try this sample
+-  Clone the repository
 
-- In a terminal, navigate to `AppInMeeting`
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+- In a terminal, navigate to `samples/app-in-meeting/csharp`
 
     ```bash
     # change into project folder
@@ -70,7 +74,8 @@ This capability is currently available in developer preview only.
 
 ![Select App](AppInMeeting/Images/select_app.png)
 
-    - Join the meeting and click on the app icon at the top, this will open a sidepanel with `Share` icon at top to share the app for collaboration.
+    - Join the meeting and click on the app icon at the top.
+    - This will open a sidepanel with `Share` icon at top to share the app for collaboration.
 
 ![App icon](AppInMeeting/Images/app_icon.png)
 
