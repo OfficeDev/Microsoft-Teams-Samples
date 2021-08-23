@@ -47,6 +47,10 @@ This feature shown in this sample is currently available in Public Developer Pre
          - Then select **Upload a custom app** from the lower right corner.
          - Then select the `manifest.zip` file from `appPackage`, and then select **Add** to add the bot to your selected team.
     
+![App Installation](Images/installApp.png)
+
+![Permissions](Images/permissions.png)
+
 ## To try this sample
 
 - In a terminal, navigate to `ReceiveMessagesWithRSC`
