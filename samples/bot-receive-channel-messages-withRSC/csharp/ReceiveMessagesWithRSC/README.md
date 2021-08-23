@@ -49,7 +49,7 @@ This feature shown in this sample is currently available in Public Developer Pre
     
 ![App Installation](Images/installApp.png)
 
-![Permissions](Images/permissions.png)
+![Permissions](Images/permissions1.png)
 
 ## To try this sample
 
