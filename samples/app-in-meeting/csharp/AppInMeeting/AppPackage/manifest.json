@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
   "manifestVersion": "1.9",
   "version": "1.0.0",
-  "id": "<<App-ID>>",
-  "packageName": "com.teams.meetingsstageview",
+  "id": "<<MANIFEST-ID>>",
+  "packageName": "com.teams.appinmeeting",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
