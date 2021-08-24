@@ -3,6 +3,10 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 
 This capability is currently available in developer preview only.
 
+- App in stage view.
+
+![Stage View Screen](MeetingsStageView/Images/stage_view.png)
+
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
@@ -12,27 +16,6 @@ This capability is currently available in developer preview only.
   dotnet --version
   ```
 - Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
-
-## Setup
-
-1. Run ngrok - point to port 3978
-
-```bash
-# ngrok http -host-header=rewrite 3978
-```
-
-2. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
-   - `<<MANIFEST-ID>>` with some unique GUID   
-   - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
-   - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
-
-3. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 4.
-
-4. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
-   - Go to Microsoft Teams. From the lower left corner, select Apps
-   - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
-   - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
     
 ## To try this sample
 -  Clone the repository
@@ -40,13 +23,18 @@ This capability is currently available in developer preview only.
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-- In a terminal, navigate to `samples/app-in-meeting/csharp`
+- In a terminal, navigate to `samples/meetings-stage-view/csharp`
 
     ```bash
     # change into project folder
     cd # AppInMeeting
     ```
 
+- Run ngrok - point to port 3978
+
+```bash
+# ngrok http -host-header=rewrite 3978
+```
 - Run the app from a terminal or from Visual Studio, choose option A or B.
 
   A) From a terminal
@@ -63,6 +51,20 @@ This capability is currently available in developer preview only.
   - Navigate to `AppInMeeting` folder
   - Select `AppInMeeting.csproj` file
   - Press `F5` to run the project
+
+
+- Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
+   - `<<App-ID>>` with some unique GUID   
+   - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
+   - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
+
+- Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 4.
+
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
 
 ## Interacting with the app in Teams
     You can use this app by following the below steps:
@@ -86,9 +88,6 @@ This capability is currently available in developer preview only.
 
 ## Features of this sample
 
-- App in stage view.
-
-![Stage View Screen](AppInMeeting/Images/stage_view.png)
 
 - Add Details for collaboration.
 
