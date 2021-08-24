@@ -122,7 +122,7 @@
 |8|App Localization | Microsoft Teams app localization using Bot and Tab |[View][app-localization#cs]  | [View][app-localization#js]
 |9|Details Tab in Meeting | Microsoft Teams meeting extensibility sample for iteracting with Details Tab in-meeting |[View][meetings-details-tab#cs]  |[View][meetings-details-tab#js]
 |10|App SSO | Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl |[View][app-sso#cs] |[View][app-sso#js] 
-|11|App for teams meetings - Stage View | Enable and configure your apps for Teams meetings to use in meeting stage |[View][app-in-meeting#cs] |
+|11|meetings-stage-view - Stage View | Enable and configure your apps for Teams meetings to use in meeting stage |[View][meetings-stage-view#cs] |
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
@@ -194,7 +194,7 @@
 [meetings-sidepanel#cs]:samples/meetings-sidepanel/csharp
 [meetings-sidepanel#js]:samples/meetings-sidepanel/nodejs
 [meetings-content-bubble#js]:samples/meetings-content-bubble/nodejs
-[app-in-meeting#cs]:samples/app-in-meeting/csharp
+[meetings-stage-view#cs]:samples/meetings-stage-view/csharp
 
 [app-localization#cs]:samples/app-localization/csharp
 [app-localization#js]:samples/app-localization/nodejs
