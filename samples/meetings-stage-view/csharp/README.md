@@ -5,7 +5,7 @@ This capability is currently available in developer preview only.
 
 - App in stage view.
 
-![Stage View Screen](MeetingsStageView/Images/stage_view.png)
+![Stage View Screen](AppInMeeting/Images/stage_view.png)
 
 ## Prerequisites
 
