@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
   "manifestVersion": "1.9",
   "version": "1.0.0",
-  "id": "<<MANIFEST-ID>>",
-  "packageName": "com.teams.appinmeeting",
+  "id": "<<App-ID>>",
+  "packageName": "com.teams.meetingsstageview",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -32,10 +32,6 @@
         "groupchat"
       ],
       "context": [
-        "channelTab",
-        "privateChatTab",
-        "meetingChatTab",
-        "meetingDetailsTab",
         "meetingSidePanel",
         "meetingStage"
       ],
