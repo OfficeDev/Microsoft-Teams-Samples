@@ -1,8 +1,10 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Bot.Builder.Community.Dialogs.FormFlow;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using Newtonsoft.Json;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
@@ -11,31 +13,48 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// This is Fetch Roster Payload Dialog Class. Main purpose of this dialog class is to Call the Roster Api and Post the 
     /// full JSON Payload in Teams returned by Roster Api.
     /// </summary>
-    [Serializable]
-    public class FetchRosterDialog : IDialog<object>
+    public class FetchRosterDialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        public FetchRosterDialog() : base(nameof(FetchRosterDialog))
         {
-            if (context == null)
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
+                BeginFormflowAsync,
+                SaveResultAsync,
+            }));
+        }
+
+            private async Task<DialogTurnResult> BeginFormflowAsync(
+    WaterfallStepContext stepContext,
+    CancellationToken cancellationToken = default(CancellationToken))
+            {
+                await stepContext.Context.SendActivityAsync(Strings.RosterWelcomeMsgTitle);
+
+                // Begin the Formflow dialog.
+                return await stepContext.BeginDialogAsync(
+                    nameof(FetchRosterDialog),
+                    cancellationToken: cancellationToken);
             }
 
-            await context.PostAsync(Strings.RosterWelcomeMsgTitle);
-            var connectorClient = new ConnectorClient(new Uri(context.Activity.ServiceUrl));
+        private async Task<DialogTurnResult> SaveResultAsync(
+    WaterfallStepContext stepContext,
+    CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var connectorClient = new ConnectorClient(new Uri(stepContext.Context.Activity.ServiceUrl));
 
-            var response = await connectorClient.Conversations.GetConversationMembersAsync(context.Activity.Conversation.Id);
+            var response = await connectorClient.Conversations.GetConversationMembersAsync(stepContext.Context.Activity.Conversation.Id);
             string output = JsonConvert.SerializeObject(response);
 
-            var message = context.MakeMessage();
+            var message = stepContext.MakeMessage();
             message.Text = output;
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogFetchPayloadRosterDialog);
+            //stepContext.context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogFetchPayloadRosterDialog);
 
-            await context.PostAsync(message);
+            await stepContext.Context.SendActivityAsync(message);
 
-            context.Done<object>(null);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
     }
 }

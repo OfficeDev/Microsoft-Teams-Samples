@@ -1,10 +1,10 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Builder.Scorables;
-using Microsoft.Bot.Connector;
-using Microsoft.Bot.Connector.Teams.Models;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Dialogs.Choices;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
@@ -13,477 +13,116 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// This is Root Dialog, its a triggring point for every Child dialog based on the RexEx Match with user input command
     /// </summary>
 
-    [Serializable]
-    public class RootDialog : DispatchDialog
+    public class RootDialog : ComponentDialog
     {
-        #region Fetch Roster Api Payload Pattern
-
-        [RegexPattern(DialogMatches.FetchRosterPayloadMatch)]
-        [ScorableGroup(1)]
-        public void FetchRosterPayLoadDetails(IDialogContext context, IActivity activity)
-        {
-            context.Call(new FetchRosterDialog(), this.EndFetchRosterDialog);
-        }
-
-        #endregion
-        
-        #region Fetch Roster Api Pattern
-
-        [RegexPattern(DialogMatches.FetchRosterApiMatch)]
-        [ScorableGroup(1)]
-        public void FetchRoster(IDialogContext context, IActivity activity)
-        {
-            context.Call(new ListNamesDialog(), this.EndFetchRosterDialog);
-        }
-
-        public async Task EndFetchRosterDialog(IDialogContext context, IAwaitable<object> result)
-        {
-            await context.PostAsync(Strings.ThanksRosterTitleMsg);
-            context.Done<object>(null);
-        }
-
-        #endregion
-
-        #region Play Quiz
-
-        [RegexPattern(DialogMatches.RunQuizQuestionsMatch)]
-        [ScorableGroup(1)]
-        public async Task RunQuiz(IDialogContext context, IActivity activity)
-        {
-            await this.SendWelcomeMessageQuizAsync(context,activity);
-        }
-        private async Task SendWelcomeMessageQuizAsync(IDialogContext context, IActivity activity)
-        {
-            await context.PostAsync(Strings.QuizTitleWelcomeMsg);
-            context.Call(new QuizFullDialog(), this.EndDialog);
-        }
-
-        #endregion
-
-        #region Prompt Flow Game Dialog Api Pattern
-
-        [RegexPattern(DialogMatches.PromptFlowGameMatch)]
-        [ScorableGroup(1)]
-        public void FlowGame(IDialogContext context, IActivity activity)
-        {
-            context.Call(new PromptDialogExample(), this.ResumeAfterFlowGame);
-        }
-
-        public async Task ResumeAfterFlowGame(IDialogContext context, IAwaitable<bool> result)
-        {
-            if (result == null)
+        private static List<Choice> CommandList = new List<Choice>()
             {
-                throw new InvalidOperationException((nameof(result)) + Strings.NullException);
-            }
-
-            var resultedValue = await result;
-
-            if(Convert.ToBoolean(resultedValue))
+                new Choice(DialogMatches.FetchRosterPayloadMatch) { Synonyms = new List<string> { DialogMatches.FetchRosterPayloadMatch } },
+                new Choice(DialogMatches.FetchRosterApiMatch) { Synonyms = new List<string> { DialogMatches.FetchRosterApiMatch } },
+                new Choice(DialogMatches.HelloDialogMatch1)  { Synonyms = new List<string> { "hi" } }
+            };
+        public RootDialog()
+            : base(nameof(RootDialog))
+        {
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                await context.PostAsync(Strings.PlayGameThanksMsg);
-            }
-            else
-            {
-                await context.PostAsync(Strings.PlayGameFailMsg);
-            }
-
-            context.Done<object>(null);
+                PromptForOptionsAsync,
+                ShowChildDialogAsync,
+                ResumeAfterAsync,
+            }));
+            AddDialog(new FetchRosterDialog());
+            AddDialog(new ListNamesDialog());
+            AddDialog(new HelloDialog());
+            AddDialog(new ChoicePrompt(nameof(ChoicePrompt)));
         }
 
-        #endregion
-
-        #region Dialog Flow
-
-        [RegexPattern(DialogMatches.DialogFlowMatch)]
-        [ScorableGroup(1)]
-        public async Task RunDialogFlow(IDialogContext context, IActivity activity)
+        private async Task<DialogTurnResult> PromptForOptionsAsync(
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
-            await context.PostAsync(Strings.DialogFlowStep1);
-            await this.SendStep1MsgAsync(context, activity);
-        }
-
-        private async Task SendStep1MsgAsync(IDialogContext context, IActivity activity)
-        {
-            await context.PostAsync(Strings.DialogFlowStep2);
-            context.Call(new BeginDialogExampleDialog(), this.ResumeAfterDialogFlow);
-        }
-
-        public async Task ResumeAfterDialogFlow(IDialogContext context, IAwaitable<object> result)
-        {
-            await context.PostAsync(Strings.DialogFlowStep3);
-            context.Done<object>(null);
-        }
-        #endregion
-
-        #region Hello Dialog
-
-        [RegexPattern(DialogMatches.HelloDialogMatch1)]
-        [RegexPattern(DialogMatches.HelloDialogMatch2)]
-        [ScorableGroup(1)]
-        public void RunHelloDialog(IDialogContext context, IActivity activity)
-        {
-            context.Call(new HelloDialog(), this.EndDialog);
-        }
-
-        #endregion
-
-        #region Run at Mention Api Pattern
-
-        [RegexPattern(DialogMatches.AtMentionMatch1)]
-        [RegexPattern(DialogMatches.AtMentionMatch2)]
-        [RegexPattern(DialogMatches.AtMentionMatch3)]
-        [ScorableGroup(1)]
-        public void AtMentionMatchUser(IDialogContext context, IActivity activity)
-        {
-            context.Call(new AtMentionDialog(), this.EndDialog);
-        }
-
-        #endregion
-
-        #region Multi Dialog1
-        [RegexPattern(DialogMatches.MultiDialog1Match1)]
-        [ScorableGroup(1)]
-        public void MultiDialog(IDialogContext context, IActivity activity)
-        {
-            context.Call(new MultiDialog1(), this.EndDialog);
-        }
-
-        #endregion
-
-        #region Multi Dialog2
-        [RegexPattern(DialogMatches.MultiDialog2Match)]
-        [ScorableGroup(1)]
-        public void MultiDialog2(IDialogContext context, IActivity activity)
-        {
-            context.Call(new MultiDialog2(), this.EndDialog);
-        }
-
-        #endregion
-
-        #region Help Dialog
-
-        [RegexPattern(DialogMatches.Help)]
-        [ScorableGroup(1)]
-        public void Help(IDialogContext context, IActivity activity)
-        {
-            this.Default(context, activity);
-        }
-
-        [MethodBind]
-        [ScorableGroup(2)]
-        public void Default(IDialogContext context, IActivity activity)
-        {
-            context.Call(new HelpDialog(), this.EndDefaultDialog);
-        }
-
-        public Task EndDefaultDialog(IDialogContext context, IAwaitable<object> result)
-        {
-            context.Done<object>(null);
-            return Task.CompletedTask;
-        }
-
-        public Task EndDialog(IDialogContext context, IAwaitable<object> result)
-        {
-            context.Done<object>(null);
-            return Task.CompletedTask;
-        }
-
-        #endregion
-
-        #region Fetch Last Exceuted Dialog
-
-        [RegexPattern(DialogMatches.FecthLastExecutedDialogMatch)]
-        [ScorableGroup(1)]
-        public void FetchLastExecutedDialog(IDialogContext context, IActivity activity)
-        {
-            context.Call(new GetLastDialogUsedDialog(), this.EndDialog);
-        }
-
-        #endregion
-
-        #region Send 1:1 Bot Conversation
-
-        [RegexPattern(DialogMatches.Send1to1Conversation)]
-        [ScorableGroup(1)]
-        public async Task SendOneToOneConversation(IDialogContext context, IActivity activity)
-        {
-            await context.PostAsync(Strings.Send1on1ConfirmMsg);
-            context.Call(new ProactiveMsgTo1to1Dialog(), this.EndDialog);
-        }
-
-        #endregion
-
-        #region Set Up Text Message
-
-        [RegexPattern(DialogMatches.SetUpTextMsg)]
-        [ScorableGroup(1)]
-        public void SetUpTextMessage(IDialogContext context, IActivity activity)
-        {
-            context.Call(new UpdateTextMsgSetupDialog(), this.EndDialog);
-        }
-
-        #endregion
-
-        #region Update Last Setup Text Message
-
-        [RegexPattern(DialogMatches.UpdateLastSetupTextMsg)]
-        [ScorableGroup(1)]
-        public void UpdateLastSetUpTextMessage(IDialogContext context, IActivity activity)
-        {
-            context.Call(new UpdateTextMsgDialog(), this.EndDialog);
-        }
-
-        #endregion
-
-        #region Set Up & Update Card
-
-        [RegexPattern(DialogMatches.SetUpCardMsg)]
-        [ScorableGroup(1)]
-        public void SetUpCardMessage(IDialogContext context, IActivity activity)
-        {
-            context.Call(new UpdateCardMsgSetupDialog(), this.EndDialog);
-        }
-
-        [RegexPattern(DialogMatches.UpdateCard)]
-        [ScorableGroup(1)]
-        public void UpdateCardMessage(IDialogContext context, IActivity activity)
-        {
-            context.Call(new UpdateCardMsgDialog(), this.EndDialog);
-        }
-
-        #endregion
-
-        #region Load Different Types of Cards
-
-        [RegexPattern(DialogMatches.DisplayCards)]
-        [ScorableGroup(1)]
-        public void DisplayCards(IDialogContext context, IActivity activity)
-        {
-            context.Call(new DisplayCardsDialog(), this.EndDialog);
-        }
-
-        [RegexPattern(DialogMatches.StopShowingCards)]
-        [ScorableGroup(1)]
-        public async Task LoadNone(IDialogContext context, IActivity activity)
-        {
-            await context.PostAsync(Strings.DisplayCardsThanksMsg);
-        }
-
-        #endregion
-
-        #region MessageBack Dialog
-
-        [RegexPattern(DialogMatches.MessageBack)]
-        [ScorableGroup(1)]
-        public void RunMessageBackDialog(IDialogContext context, IActivity activity)
-        {
-            context.Call(new MessagebackDialog(), this.EndDialog);
-        }
-
-        #endregion
-
-        #region LocalTime
-
-        [RegexPattern(DialogMatches.LocalTime)]
-        [ScorableGroup(1)]
-        public async Task GetLocalTimeZone(IDialogContext context, IActivity activity)
-        {
-            await context.PostAsync(Strings.UTCTimeZonePrompt + activity.Timestamp);
-            await context.PostAsync(Strings.LocalTimeZonePrompt + activity.LocalTimestamp);
-        }
-
-        #endregion
-
-        #region Deeplink Dialog
-
-        [RegexPattern(DialogMatches.DeepLinkTabCard)]
-        [ScorableGroup(1)]
-        public void DeeplinkDialog(IDialogContext context, IActivity activity)
-        {
-            context.Call(new DeepLinkStaticTabDialog(), this.EndDialog);
-        }
-
-        #endregion
-
-        #region Authentication Dialog
-
-        [RegexPattern(DialogMatches.AuthSample)]
-        [ScorableGroup(1)]
-        public async Task AuthSample(IDialogContext context, IActivity activity)
-        {
-            var message = CreateAuthSampleMessage(context);
-            await context.PostAsync(message);
-        }
-
-        #region Create Auth Message Card
-        private IMessageActivity CreateAuthSampleMessage(IDialogContext context)
-        {
-            var message = context.MakeMessage();
-            var attachment = CreateAuthSampleCard();
-            message.Attachments.Add(attachment);
-            return message;
-        }
-
-        private Attachment CreateAuthSampleCard()
-        {
-            return new HeroCard
-            {
-                Title = Strings.AuthSampleCardTitle,
-                Buttons = new List<CardAction>
+            // Prompt the user for a response using our choice prompt.
+            return await stepContext.PromptAsync(
+                nameof(ChoicePrompt),
+                new PromptOptions()
                 {
-                   new CardAction(ActionTypes.ImBack, Strings.FBAuthCardCaption, value: Strings.FBAuthCardValue),
-                   new CardAction(ActionTypes.ImBack, Strings.VSTSAuthCardCaption, value: Strings.VSTSAuthCardValue)
-                }
-            }.ToAttachment();
+                    Choices = CommandList,
+                    Prompt = MessageFactory.Text("hello"),
+                    RetryPrompt = MessageFactory.Text(Strings.ErrorMessage)
+                },
+                cancellationToken);
         }
-        #endregion
 
-        #endregion
-
-        #region Facebook Authentication Exmaple Dialog
-
-        [RegexPattern(DialogMatches.Facebooklogin)]
-        [ScorableGroup(1)]
-        public void SimpleFacebookAuthLoginDialog(IDialogContext context, IActivity activity)
+        private async Task<DialogTurnResult> ShowChildDialogAsync(
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
-            context.Call(new SimpleFacebookAuthDialog(), this.EndDialog);
+            // string optionSelected = await userReply;
+            var optionSelected = (stepContext.Result as FoundChoice).Value;
+
+            switch (optionSelected)
+            {
+                case DialogMatches.FetchRosterPayloadMatch:
+                    //context.Call(new InstallAppDialog(), this.ResumeAfterOptionDialog);
+                    //break;
+                    return await stepContext.BeginDialogAsync(
+                        nameof(FetchRosterDialog),
+                        cancellationToken);
+                case DialogMatches.FetchRosterApiMatch:
+                    //context.Call(new ResetPasswordDialog(), this.ResumeAfterOptionDialog);
+                    //break;
+                    return await stepContext.BeginDialogAsync(
+                        nameof(ListNamesDialog),
+                        cancellationToken);
+                case DialogMatches.HelloDialogMatch1:
+                    //context.Call(new LocalAdminDialog(), this.ResumeAfterOptionDialog);
+                    //break;
+                    return await stepContext.BeginDialogAsync(
+                        nameof(HelloDialog),
+                        cancellationToken);
+            }
+
+            // We shouldn't get here, but fail gracefully if we do.
+            await stepContext.Context.SendActivityAsync(
+                "I don't recognize that option.",
+                cancellationToken: cancellationToken);
+            // Continue through to the next step without starting a child dialog.
+            return await stepContext.NextAsync(cancellationToken: cancellationToken);
         }
 
-        [RegexPattern(DialogMatches.Facebooklogout)]
-        [ScorableGroup(1)]
-        public async Task SimpleFacebookAuthLogoutDialog(IDialogContext context, IActivity activity)
+        private async Task<DialogTurnResult> ResumeAfterAsync(
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
-            context.PrivateConversationData.RemoveValue(SimpleFacebookAuthDialog.AuthTokenKey);
-            context.PrivateConversationData.RemoveValue("persistedCookie");
-            context.UserData.RemoveValue("name");
-            await context.PostAsync(Strings.FBSuccessfulLogoutPrompt);
-            await context.PostAsync(Strings.FBSuccessfulLogoutLoginPrompt);
+            try
+            {
+                //var message = await userReply;
+                var message = stepContext.Context.Activity;
+
+                var ticketNumber = new Random().Next(0, 20000);
+                //await context.PostAsync($"Thank you for using the Helpdesk Bot. Your ticket number is {ticketNumber}.");
+                await stepContext.Context.SendActivityAsync(
+                    $"Thank you for using the Helpdesk Bot. Your ticket number is {ticketNumber}.",
+                    cancellationToken: cancellationToken);
+
+                //context.Done(ticketNumber);
+            }
+            catch (Exception ex)
+            {
+                // await context.PostAsync($"Failed with message: {ex.Message}");
+                await stepContext.Context.SendActivityAsync(
+                    $"Failed with message: {ex.Message}",
+                    cancellationToken: cancellationToken);
+
+                // In general resume from task after calling a child dialog is a good place to handle exceptions
+                // try catch will capture exceptions from the bot framework awaitable object which is essentially "userReply"
+            }
+
+            // Replace on the stack the current instance of the waterfall with a new instance,
+            // and start from the top.
+            return await stepContext.ReplaceDialogAsync(
+                nameof(WaterfallDialog),
+                cancellationToken: cancellationToken);
         }
-
-        #endregion
-
-        #region VSTS Authentication Exmaple Dialog
-
-        [RegexPattern(DialogMatches.VSTSlogin)]
-        [ScorableGroup(1)]
-        public void VSTSAuthLoginDialog(IDialogContext context, IActivity activity)
-        {
-            context.Call(new VSTSAPICallDialog(), this.EndDialog);
-        }
-
-        [RegexPattern(DialogMatches.VSTSlogout)]
-        [ScorableGroup(1)]
-        public async Task VSTSAuthLogoutDialog(IDialogContext context, IActivity activity)
-        {
-            context.UserData.RemoveValue(VSTSAPICallDialog.VSTSAuthTokenKey);
-            context.UserData.RemoveValue("persistedCookieVSTS");
-            context.UserData.RemoveValue("name");
-            await context.PostAsync(Strings.VSTSSuccessfulLogoutPrompt);
-            await context.PostAsync(Strings.VSTSSuccessfulLogoutLoginPrompt);
-        }
-
-        #endregion
-
-        #region VSTS Get Work Item Dialog
-
-        [RegexPattern(DialogMatches.VSTSApi)]
-        [ScorableGroup(1)]
-        public void VSTSAuthGetWorkItemDialog(IDialogContext context, IActivity activity)
-        {
-            context.Call(new VSTSGetworkItemDialog(), this.EndDialog);
-        }
-
-        #endregion
-
-        #region Load Hero Card Type
-
-        [RegexPattern(DialogMatches.HeroCard)]
-        [ScorableGroup(1)]
-        public void HeroCard(IDialogContext context, IActivity activity)
-        {
-            context.Call(new HeroCardDialog(), this.EndDialog);
-        }
-
-        #endregion
-
-        #region Load Thumbnail Card Type
-
-        [RegexPattern(DialogMatches.ThumbnailCard)]
-        [ScorableGroup(1)]
-        public void ThumbnailCard(IDialogContext context, IActivity activity)
-        {
-            context.Call(new ThumbnailcardDialog(), this.EndDialog);
-        }
-
-        #endregion
-
-        #region Load O365Connector Actionable Card Default
-        [RegexPattern(DialogMatches.O365ConnectorCardActionableCardDefault)]
-        [ScorableGroup(1)]
-        public void O365ConnectorCardActionableMessageDefault(IDialogContext context, IActivity activity)
-        {
-            context.Call(new O365ConnectorCardActionsDialog(), this.EndDialog);
-        }
-        #endregion
-
-        #region Load O365Connector Actionable Card Samples
-        [RegexPattern(DialogMatches.O365ConnectorCardActionableCards)]
-        [ScorableGroup(1)]
-        public void O365ConnectorCardActionableMessage(IDialogContext context, IActivity activity)
-        {
-            context.Call(new O365ConnectorCardActionsDialog(), this.EndDialog);
-        }
-        #endregion
-
-        #region Load O365Connector Card Default
-        [RegexPattern(DialogMatches.O365ConnectorCardDefault)]
-        [ScorableGroup(1)]
-        public void O365ConnectorCardDefault(IDialogContext context, IActivity activity)
-        {
-            context.Call(new O365ConnectorCardDialog(), this.EndDialog);
-        }
-        #endregion
-
-        #region Load O365Connector Card Samples
-        [RegexPattern(DialogMatches.O365ConnectorCards)]
-        [ScorableGroup(1)]
-        public void O365ConnectorCard(IDialogContext context, IActivity activity)
-        {
-            context.Call(new O365ConnectorCardDialog(), this.EndDialog);
-        }
-        #endregion
-
-        #region PopUp SignIn
-
-        [RegexPattern(DialogMatches.PopUpSignIn)]
-        [ScorableGroup(1)]
-        public void PopUpSignIn(IDialogContext context, IActivity activity)
-        {
-            context.Call(new PopupSigninCardDialog(), this.EndDialog);
-        }
-
-        #endregion
-
-        #region Team Info
-
-        [RegexPattern(DialogMatches.TeamInfo)]
-        [ScorableGroup(1)]
-        public void TeamsInfo(IDialogContext context, IActivity activity)
-        {
-            context.Call(new FetchTeamsInfoDialog(), this.EndDialog);
-        }
-
-        #endregion
-
-        #region Adaptive Card
-
-        [RegexPattern(DialogMatches.AdaptiveCard)]
-        [ScorableGroup(1)]
-        public void AdaptiveCard(IDialogContext context, IActivity activity)
-        {
-            context.Call(new AdaptiveCardDialog(), this.EndDialog);
-        }
-
-        #endregion
     }
 }

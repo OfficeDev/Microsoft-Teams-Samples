@@ -1,5 +1,4 @@
-﻿using Microsoft.Bot.Connector;
-using Newtonsoft.Json.Linq;
+﻿using Microsoft.Bot.Schema;
 using System;
 using System.Configuration;
 

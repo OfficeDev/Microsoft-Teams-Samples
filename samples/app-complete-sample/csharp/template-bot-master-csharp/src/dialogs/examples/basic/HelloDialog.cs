@@ -1,6 +1,7 @@
 ﻿using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
 {
@@ -10,21 +11,29 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// </summary>
 
     [Serializable]
-    public class HelloDialog : IDialog<object>
+    public class HelloDialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        public HelloDialog() : base(nameof(HelloDialog))
         {
-            if (context == null)
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
-            }
+                BeginFormflowAsync,
+            }));
+        }
 
-            //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogHelloDialog);
+        private async Task<DialogTurnResult> BeginFormflowAsync(
+WaterfallStepContext stepContext,
+CancellationToken cancellationToken = default(CancellationToken))
+        {
+            await stepContext.Context.SendActivityAsync(Strings.HelloDialogMsg);
 
-            await context.PostAsync(Strings.HelloDialogMsg);
+            // Begin the Formflow dialog.
+            await stepContext.BeginDialogAsync(
+                nameof(HelloDialog),
+                cancellationToken: cancellationToken);
 
-            context.Done<object>(null);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
     }
 }
