@@ -79,7 +79,7 @@ namespace ReceiveMessagesWithRSC.Bots
                                 {
                                     new AdaptiveTextBlock
                                     {
-                                        Text = Convert.ToString(meeting.StartTime),
+                                        Text = Convert.ToString(meeting.StartTime.ToLocalTime()),
                                         Wrap = true,
                                     },
                                 },
@@ -142,7 +142,7 @@ namespace ReceiveMessagesWithRSC.Bots
                                 {
                                     new AdaptiveTextBlock
                                     {
-                                        Text = Convert.ToString(meeting.EndTime),
+                                        Text = Convert.ToString(meeting.EndTime.ToLocalTime()),
                                         Wrap = true,
                                     },
                                 },
