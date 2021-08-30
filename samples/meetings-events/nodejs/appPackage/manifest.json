@@ -36,7 +36,7 @@
   "accentColor": "#60A18E",
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "*.ngrok.io",
+    "<<VALID DOMAIN>>",
     "token.botframework.com"
   ],
   "webApplicationInfo": {
