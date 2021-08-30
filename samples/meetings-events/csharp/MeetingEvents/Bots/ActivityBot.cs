@@ -8,6 +8,7 @@ namespace ReceiveMessagesWithRSC.Bots
     using Microsoft.Bot.Builder.Teams;
     using Microsoft.Bot.Schema;
     using Microsoft.Bot.Schema.Teams;
+    using System;
     using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
@@ -51,9 +52,39 @@ namespace ReceiveMessagesWithRSC.Bots
                 {
                     new AdaptiveTextBlock
                     {
-                        Text = meeting.Title,
+                        Text = meeting.Title  + "- started",
                         Weight = AdaptiveTextWeight.Bolder,
                         Spacing = AdaptiveSpacing.Medium,
+                    },
+                                         new AdaptiveColumnSet
+                    {
+                        Columns = new List<AdaptiveColumn>
+                        {
+                            new AdaptiveColumn
+                            {
+                                Width = AdaptiveColumnWidth.Auto,
+                                Items = new List<AdaptiveElement>
+                                {
+                                    new AdaptiveTextBlock
+                                    {
+                                        Text = "Start Time : ",
+                                        Wrap = true,
+                                    },
+                                },
+                            },
+                            new AdaptiveColumn
+                            {
+                                Width = AdaptiveColumnWidth.Auto,
+                                Items = new List<AdaptiveElement>
+                                {
+                                    new AdaptiveTextBlock
+                                    {
+                                        Text = Convert.ToString(meeting.StartTime),
+                                        Wrap = true,
+                                    },
+                                },
+                            },
+                        },
                     },
                 },
                 Actions = new List<AdaptiveAction>
@@ -84,9 +115,39 @@ namespace ReceiveMessagesWithRSC.Bots
                 {
                     new AdaptiveTextBlock
                     {
-                        Text = "Click the button to open the Url in tab stage view",
+                        Text = meeting.Title  + "- ended",
                         Weight = AdaptiveTextWeight.Bolder,
                         Spacing = AdaptiveSpacing.Medium,
+                    },
+                     new AdaptiveColumnSet
+                    {
+                        Columns = new List<AdaptiveColumn>
+                        {
+                            new AdaptiveColumn
+                            {
+                                Width = AdaptiveColumnWidth.Auto,
+                                Items = new List<AdaptiveElement>
+                                {
+                                    new AdaptiveTextBlock
+                                    {
+                                        Text = "End Time : ",
+                                        Wrap = true,
+                                    },
+                                },
+                            },
+                            new AdaptiveColumn
+                            {
+                                Width = AdaptiveColumnWidth.Auto,
+                                Items = new List<AdaptiveElement>
+                                {
+                                    new AdaptiveTextBlock
+                                    {
+                                        Text = Convert.ToString(meeting.EndTime),
+                                        Wrap = true,
+                                    },
+                                },
+                            },
+                        },
                     },
                 }
             };
