@@ -31,7 +31,7 @@ const adaptiveCardForMeetingStart = (meetingObject) => ({
                         {
                             type: 'TextBlock',
                             size: 'Medium',
-                            text: meetingObject.StartTime
+                            text: new Date(meetingObject.StartTime).toString()
                         }
                     ]
                 }
@@ -85,7 +85,7 @@ const adaptiveCardForMeetingEnd = (meetingObject) => ({
                         {
                             type: 'TextBlock',
                             size: 'Medium',
-                            text: meetingObject.EndTime
+                            text: new Date(meetingObject.EndTime).toString()
                         }
                     ]
                 }
