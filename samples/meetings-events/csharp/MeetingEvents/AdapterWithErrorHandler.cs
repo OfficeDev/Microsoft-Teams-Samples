@@ -3,13 +3,13 @@
 //
 // Generated with Bot Builder V4 SDK Template for Visual Studio CoreBot v4.14.0
 
-using Microsoft.Bot.Builder.Integration.AspNet.Core;
-using Microsoft.Bot.Builder.TraceExtensions;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-
-namespace ReceiveMessagesWithRSC
+namespace MeetingBots
 {
+    using Microsoft.Bot.Builder.Integration.AspNet.Core;
+    using Microsoft.Bot.Builder.TraceExtensions;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Logging;
+
     public class AdapterWithErrorHandler : BotFrameworkHttpAdapter
     {
         public AdapterWithErrorHandler(IConfiguration configuration, ILogger<BotFrameworkHttpAdapter> logger)

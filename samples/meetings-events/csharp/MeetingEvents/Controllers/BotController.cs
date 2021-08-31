@@ -3,13 +3,13 @@
 //
 // Generated with Bot Builder V4 SDK Template for Visual Studio EchoBot v4.14.0
 
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Bot.Builder;
-using Microsoft.Bot.Builder.Integration.AspNet.Core;
-using System.Threading.Tasks;
-
-namespace ReceiveMessagesWithRSC.Controllers
+namespace MeetingBots.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Bot.Builder;
+    using Microsoft.Bot.Builder.Integration.AspNet.Core;
+    using System.Threading.Tasks;
+
     // This ASP Controller is created to handle a request. Dependency Injection will provide the Adapter and IBot
     // implementation at runtime. Multiple different IBot implementations running at different endpoints can be
     // achieved by specifying a more specific type for the bot constructor argument.
