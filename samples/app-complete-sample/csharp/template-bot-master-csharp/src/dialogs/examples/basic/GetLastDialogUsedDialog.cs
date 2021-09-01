@@ -29,13 +29,13 @@ CancellationToken cancellationToken = default(CancellationToken))
             else
             {
                 //Set the Last Dialog in Conversation Data
-                stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogFetchDiaog);
+                //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogFetchDiaog);
 
                 await stepContext.Context.SendActivityAsync(Strings.LastDialogErrorMsg);
             }
 
             //Set the Last Dialog in Conversation Data
-            stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogFetchDiaog);
+            //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogFetchDiaog);
 
             return await stepContext.EndDialogAsync(null, cancellationToken);
         }

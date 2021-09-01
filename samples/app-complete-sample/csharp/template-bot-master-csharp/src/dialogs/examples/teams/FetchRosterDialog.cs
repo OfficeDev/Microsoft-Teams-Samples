@@ -51,8 +51,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             message.Text = output;
 
             //Set the Last Dialog in Conversation Data
-            //stepContext.context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogFetchPayloadRosterDialog);
-
+            //stepContext.State.Add(Strings.LastDialogKey, Strings.LastDialogFetchPayloadRosterDialog);
             await stepContext.Context.SendActivityAsync(message);
 
             return await stepContext.EndDialogAsync(null, cancellationToken);

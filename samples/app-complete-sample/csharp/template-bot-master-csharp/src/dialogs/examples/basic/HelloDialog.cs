@@ -1,6 +1,5 @@
 ﻿using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs

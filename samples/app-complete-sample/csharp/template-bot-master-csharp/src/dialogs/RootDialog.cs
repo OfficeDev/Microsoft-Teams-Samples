@@ -1,6 +1,6 @@
-﻿using Microsoft.Bot.Builder;
-using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Choices;
+using Microsoft.Teams.TemplateBotCSharp.Properties;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -40,6 +40,17 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             AddDialog(new UpdateCardMsgSetupDialog());
             AddDialog(new UpdateCardMsgDialog());
             AddDialog(new FetchTeamsInfoDialog());
+            AddDialog(new DeepLinkStaticTabDialog());
+            AddDialog(new AtMentionDialog());
+            AddDialog(new BeginDialogExampleDialog());
+            AddDialog(new HeroCardDialog());
+            AddDialog(new ThumbnailcardDialog());
+            AddDialog(new MessagebackDialog());
+            AddDialog(new AdaptiveCardDialog());
+            AddDialog(new PopupSigninCardDialog());
+            AddDialog(new QuizFullDialog());
+            AddDialog(new PromptDialog());
+            AddDialog(new DisplayCardsDialog());
         }
 
         private async Task<DialogTurnResult> PromptForOptionsAsync(
@@ -113,12 +124,83 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                 return await stepContext.BeginDialogAsync(
                         nameof(FetchTeamsInfoDialog));
             }
+            else if (command == DialogMatches.DeepLinkTabCard)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(DeepLinkStaticTabDialog));
+            }
+            else if (command == DialogMatches.AtMentionMatch1 || command == DialogMatches.AtMentionMatch2|| command == DialogMatches.AtMentionMatch3)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(AtMentionDialog));
+            }
+            else if (command == DialogMatches.DialogFlowMatch)
+            {
+                await stepContext.Context.SendActivityAsync(Strings.DialogFlowStep1);
+                await stepContext.Context.SendActivityAsync(Strings.DialogFlowStep2);
+                await stepContext.BeginDialogAsync(
+                        nameof(BeginDialogExampleDialog));
+                await stepContext.Context.SendActivityAsync(Strings.DialogFlowStep3);
+                return await stepContext.EndDialogAsync(null, cancellationToken);
+            }
+            else if (command == DialogMatches.HeroCard)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(HeroCardDialog));
+            }
+            else if (command == DialogMatches.ThumbnailCard)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(ThumbnailcardDialog));
+            }
+            else if (command == DialogMatches.MessageBack)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(MessagebackDialog));
+            }
+            else if (command == DialogMatches.AdaptiveCard)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(AdaptiveCardDialog));
+            }
+            else if (command == DialogMatches.PopUpSignIn)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(PopupSigninCardDialog));
+            }
+            else if (command == DialogMatches.RunQuizQuestionsMatch)
+            {
+                await stepContext.Context.SendActivityAsync(Strings.QuizTitleWelcomeMsg);
+                return await stepContext.BeginDialogAsync(
+                        nameof(QuizFullDialog));
+            }
+            else if (command == DialogMatches.PromptFlowGameMatch)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(PromptDialog));
+            }
+            else if (command == DialogMatches.DisplayCards)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(DisplayCardsDialog));
+            }
+            else if (command == DialogMatches.StopShowingCards)
+            {
+                await stepContext.Context.SendActivityAsync(Strings.DisplayCardsThanksMsg);
+                return await stepContext.EndDialogAsync(null, cancellationToken);
+            }
+            else if (command == DialogMatches.LocalTime)
+            {
+                await stepContext.Context.SendActivityAsync(Strings.UTCTimeZonePrompt + stepContext.Context.Activity.Timestamp);
+                await stepContext.Context.SendActivityAsync(Strings.LocalTimeZonePrompt + stepContext.Context.Activity.LocalTimestamp);
+                return await stepContext.EndDialogAsync(null, cancellationToken);
+            }
             // We shouldn't get here, but fail gracefully if we do.
             await stepContext.Context.SendActivityAsync(
                 "I don't recognize that option.",
                 cancellationToken: cancellationToken);
             // Continue through to the next step without starting a child dialog.
-            return await stepContext.NextAsync(cancellationToken: cancellationToken);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
     }
 }

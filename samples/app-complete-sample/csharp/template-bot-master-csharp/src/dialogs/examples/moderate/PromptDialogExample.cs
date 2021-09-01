@@ -16,7 +16,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     ///  2. If user choose any of the option, Bot take confirmation from the user about the choice.
     ///  3. Bot reply to the user based on user choice.
     /// </summary>
-    public class PromptDialog : ComponentDialog
+    public class PromptDialogExample : ComponentDialog
     {
         private static List<Choice> options = new List<Choice>()
             {
@@ -30,7 +30,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                 new Choice(Strings.OptionNo) { Synonyms = new List<string> { Strings.OptionNo } },
             };
 
-        public PromptDialog() : base(nameof(PromptDialog))
+        public PromptDialogExample() : base(nameof(PromptDialogExample))
         {
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]

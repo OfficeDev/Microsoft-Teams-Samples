@@ -1,8 +1,11 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Connector;
+﻿
+using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Dialogs.Choices;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
@@ -14,68 +17,61 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// Quiz Dialog --> Quiz1 Dialog (Child dialog of Quiz Dialog)
     /// Once this dialog Ends, it will resume in Quiz Dialog
     /// </summary>
-    [Serializable]
-    public class Quiz1Dialog : IDialog<object>
+    public class Quiz1Dialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
-        {
-            if (context == null)
+        private static List<Choice> Quiz1Options = new List<Choice>()
             {
-                throw new ArgumentNullException(nameof(context));
-            }
+                new Choice(Strings.OptionYes) { Synonyms = new List<string> { Strings.OptionYes } },
+                new Choice(Strings.OptionNo) { Synonyms = new List<string> { Strings.OptionNo } },
+            };
+        public Quiz1Dialog() : base(nameof(Quiz1Dialog))
+        {
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
+            {
+                BeginQuizAsync,
+                EndQuiz1DialogAsync
+            }));
+            AddDialog(new ChoicePrompt(nameof(ChoicePrompt)));
+        }
 
-            var message = CreateQuiz(context);
+        private async Task<DialogTurnResult> BeginQuizAsync(
+           WaterfallStepContext stepContext,
+           CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
+            }
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogQuiz1Dialog);
-
-            await context.PostAsync(message);
-            context.Wait(this.MessageReceivedAsync);
+            //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogQuiz1Dialog);
+            return await stepContext.PromptAsync(
+                    nameof(ChoicePrompt),
+                    new PromptOptions
+                    {
+                        Prompt = MessageFactory.Text(Strings.Quiz1Question),
+                        Choices = Quiz1Options,
+                    },
+                    cancellationToken);
         }
 
-        #region Create Quiz Message Card
-        private IMessageActivity CreateQuiz(IDialogContext context)
+        private async Task<DialogTurnResult> EndQuiz1DialogAsync(
+          WaterfallStepContext stepContext,
+          CancellationToken cancellationToken = default(CancellationToken))
         {
-            var message = context.MakeMessage();
-            var attachment = CreateQuizCard();
-            message.Attachments.Add(attachment);
-            return message;
-        }
-
-        private Attachment CreateQuizCard()
-        {
-            return new HeroCard
+            var optionSelected = (stepContext.Result as FoundChoice).Value;
+            if (optionSelected.ToLower() == Strings.OptionYes)
             {
-                Title = Strings.Quiz1Question,
-                Images = new List<CardImage> { new CardImage("https://sec.ch9.ms/ch9/7ff5/e07cfef0-aa3b-40bb-9baa-7c9ef8ff7ff5/buildreactionbotframework_960.jpg") },
-                Buttons = new List<CardAction>
-                {
-                   new CardAction(ActionTypes.ImBack, Strings.OptionYes, value: Strings.OptionYes),
-                   new CardAction(ActionTypes.ImBack, Strings.OptionNo, value: Strings.OptionNo)
-                }
-            }.ToAttachment();
-        }
-        #endregion
-
-        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
-        {
-            if (result == null)
-            {
-                throw new InvalidOperationException((nameof(result)) + Strings.NullException);
+                await stepContext.Context.SendActivityAsync(Strings.QuizAnswerYes);
+                return await stepContext.EndDialogAsync(null, cancellationToken);
             }
-
-            var activity = await result;
-
-            if (activity.Text.ToLower() == Strings.OptionYes)
+            else if (optionSelected.ToLower() == Strings.OptionNo)
             {
-                await context.PostAsync(Strings.QuizAnswerYes);
-                context.Done<object>(null);
+                await stepContext.Context.SendActivityAsync(Strings.QuizAnswerNo);
+                return await stepContext.EndDialogAsync(null, cancellationToken);
             }
-            else if (activity.Text.ToLower() == Strings.OptionNo)
-            {
-                await context.PostAsync(Strings.QuizAnswerNo);
-                context.Done<object>(null);
-            }
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
     }
 }

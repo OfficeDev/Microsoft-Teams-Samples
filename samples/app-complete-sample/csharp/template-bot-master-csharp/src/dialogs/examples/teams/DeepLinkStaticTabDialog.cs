@@ -47,7 +47,7 @@ CancellationToken cancellationToken = default(CancellationToken))
             var message = CreateDeepLinkMessage(stepContext);
 
             //Set the Last Dialog in Conversation Data
-            stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogDeepLinkStaticTabDialog);
+            //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogDeepLinkStaticTabDialog);
             await stepContext.Context.SendActivityAsync(message);
 
             return await stepContext.EndDialogAsync(null, cancellationToken);
@@ -57,13 +57,6 @@ CancellationToken cancellationToken = default(CancellationToken))
         private IMessageActivity CreateDeepLinkMessage(WaterfallStepContext context)
         {
             var message = context.Context.Activity;
-            var attachment = CreateDeepLinkCard();
-            message.Attachments.Add(attachment);
-            return message;
-        }
-
-        private Attachment CreateDeepLinkCard()
-        {
             if (IsChannelUser)
             {
                 TabUrl = GetConfigTabDeepLinkURL(ChannelId);
@@ -76,17 +69,18 @@ CancellationToken cancellationToken = default(CancellationToken))
                 ButtonCaption = Strings.DeepLinkCard1To1ButtonCaption;
                 DeepLinkCardTitle = Strings.DeepLinkCard1To1Title;
             }
-
-            return new HeroCard
+            message.Attachments = new List<Attachment> {
+            new HeroCard
             {
                 Title = DeepLinkCardTitle,
                 Buttons = new List<CardAction>
                 {
                    new CardAction(ActionTypes.OpenUrl, ButtonCaption, value: TabUrl),
                 }
-            }.ToAttachment();
+            }.ToAttachment()
+        };
+            return message;
         }
-
         private string GetStaticTabDeepLinkURL()
         {
             //Example -  BaseURL + 28:BotId + TabEntityId (set in the manifest) + ?conversationType=chat

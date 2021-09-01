@@ -1,9 +1,10 @@
 ﻿using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Connector;
+using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
@@ -11,44 +12,44 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// <summary>
     /// This is PopUp SignIn Dialog Class. Main purpose of this class is to Display the PopUp SignIn Card
     /// </summary>
-
-    [Serializable]
-    public class PopupSigninCardDialog : IDialog<object>
+    public class PopupSigninCardDialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        public PopupSigninCardDialog() : base(nameof(PopupSigninCardDialog))
         {
-            if (context == null)
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
+                BeginFormflowAsync,
+            }));
+        }
+
+        private async Task<DialogTurnResult> BeginFormflowAsync(
+WaterfallStepContext stepContext,
+CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
             }
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogPopUpSignIn);
+            //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogPopUpSignIn);
 
-            var message = context.MakeMessage();
-            var attachment = GetPopUpSignInCard();
-
-            message.Attachments.Add(attachment);
-
-            await context.PostAsync(message);
-
-            context.Done<object>(null);
-        }
-
-        private static Attachment GetPopUpSignInCard()
-        {
             string baseUri = Convert.ToString(ConfigurationManager.AppSettings["BaseUri"]);
-
-            var heroCard = new HeroCard
+            var message = stepContext.Context.Activity;
+            message.Attachments = new List<Attachment> {
+                new HeroCard
             {
                 Title = Strings.PopUpSignInCardTitle,
                 Buttons = new List<CardAction>
                 {
                     new CardAction(ActionTypes.Signin, Strings.PopUpSignInCardButtonTitle, value: baseUri + "/popUpSignin.html?height=200&width=200"),
                 }
+            }.ToAttachment()
             };
+            await stepContext.Context.SendActivityAsync(message);
 
-            return heroCard.ToAttachment();
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
     }
 }

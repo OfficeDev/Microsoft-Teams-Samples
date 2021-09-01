@@ -39,7 +39,7 @@ CancellationToken cancellationToken = default(CancellationToken))
             await stepContext.Context.SendActivityAsync(message);
 
             //Set the Last Dialog in Conversation Data
-            stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogSetupUpdateCard);
+            // stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogSetupUpdateCard);
 
             return await stepContext.EndDialogAsync(null, cancellationToken);
         }

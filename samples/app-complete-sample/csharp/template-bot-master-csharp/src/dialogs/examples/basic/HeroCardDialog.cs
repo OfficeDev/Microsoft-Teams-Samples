@@ -1,8 +1,10 @@
 ﻿using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
+using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
@@ -11,32 +13,33 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// This is Hero Card Dialog Class. Main purpose of this class is to display the Hero Card example
     /// </summary>
 
-    [Serializable]
-    public class HeroCardDialog : IDialog<object>
+    public class HeroCardDialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        public HeroCardDialog() : base(nameof(HeroCardDialog))
         {
-            if (context == null)
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
+                BeginFormflowAsync,
+            }));
+        }
+
+        private async Task<DialogTurnResult> BeginFormflowAsync(
+WaterfallStepContext stepContext,
+CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
             }
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogHeroCard);
+            // stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogHeroCard);
 
-            var message = context.MakeMessage();
-            var attachment = GetHeroCard();
+            var message = stepContext.Context.Activity;
 
-            message.Attachments.Add(attachment);
-
-            await context.PostAsync(message);
-
-            context.Done<object>(null);
-        }
-
-        private static Attachment GetHeroCard()
-        {
-            var heroCard = new HeroCard
+            message.Attachments = new List<Attachment> {
+                new HeroCard
             {
                 Title = Strings.HeroCardTitle,
                 Subtitle = Strings.HeroCardSubTitle,
@@ -47,9 +50,11 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                     new CardAction(ActionTypes.OpenUrl, Strings.HeroCardButtonCaption, value: "https://docs.microsoft.com/en-us/bot-framework/dotnet/bot-builder-dotnet-add-rich-card-attachments"),
                     new CardAction(ActionTypes.MessageBack, Strings.MessageBackCardButtonCaption, value: "{\"" + Strings.cmdValueMessageBack + "\": \"" + Strings.cmdValueMessageBack+ "\"}", text:Strings.cmdValueMessageBack, displayText:Strings.MessageBackDisplayedText)
                 }
+            }.ToAttachment()
             };
+            await stepContext.Context.SendActivityAsync(message);
 
-            return heroCard.ToAttachment();
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
     }
 }

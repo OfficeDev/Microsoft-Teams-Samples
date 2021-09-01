@@ -1,6 +1,7 @@
 ﻿using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
 {
@@ -8,28 +9,42 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// This is Begin Dialog Class. Main purpose of this class is to notify users that Child dialog has been called 
     /// and its a Basic example to call Child dialog from Root Dialog.
     /// </summary>
-
-    [Serializable]
-    public class BeginDialogExampleDialog : IDialog<object>
+    public class BeginDialogExampleDialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        public BeginDialogExampleDialog() : base(nameof(BeginDialogExampleDialog))
         {
-            if (context == null)
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
+                BeginFormflowAsync,
+                SaveResultAsync,
+            }));
+            AddDialog(new HelpDialog());
+        }
+
+        private async Task<DialogTurnResult> BeginFormflowAsync(
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
             }
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogBeginDialog);
-            await context.PostAsync(Strings.BeginDialog);
+            //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogBeginDialog);
+            await stepContext.Context.SendActivityAsync(Strings.BeginDialog);
 
-            context.Call(new HelloDialog(), ResumeAfterHelloDialog);
+            return await stepContext.BeginDialogAsync(
+                        nameof(HelloDialog));
         }
 
-        private async Task ResumeAfterHelloDialog(IDialogContext context, IAwaitable<object> result)
+        private async Task<DialogTurnResult> SaveResultAsync(
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
-            await context.PostAsync(Strings.BeginDialogEnd);
-            context.Done<object>(null);
+            await stepContext.Context.SendActivityAsync(Strings.BeginDialogEnd);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
     }
 }

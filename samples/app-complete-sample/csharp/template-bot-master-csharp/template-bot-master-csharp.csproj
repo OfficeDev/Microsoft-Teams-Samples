@@ -59,7 +59,7 @@
       <HintPath>..\packages\Azure.Core.1.3.0\lib\netstandard2.0\Azure.Core.dll</HintPath>
     </Reference>
     <Reference Include="Bot.Builder.Community.Dialogs.FormFlow, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Bot.Builder.Community.Dialogs.FormFlow.4.13.2\lib\netstandard2.0\Bot.Builder.Community.Dialogs.FormFlow.dll</HintPath>
+      <HintPath>..\packages\Bot.Builder.Community.Dialogs.FormFlow.4.12.0\lib\netstandard2.0\Bot.Builder.Community.Dialogs.FormFlow.dll</HintPath>
     </Reference>
     <Reference Include="Chronic, Version=0.3.2.0, Culture=neutral, PublicKeyToken=3bd1f1ef638b0d3c, processorArchitecture=MSIL">
       <HintPath>$(SolutionDir)\packages\Chronic.Signed.0.3.2\lib\net40\Chronic.dll</HintPath>
@@ -100,8 +100,8 @@
     <Reference Include="Microsoft.Bot.Builder.Azure, Version=4.14.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bot.Builder.Azure.4.14.1\lib\netstandard2.0\Microsoft.Bot.Builder.Azure.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Bot.Builder.Dialogs, Version=4.13.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bot.Builder.Dialogs.4.13.1\lib\netstandard2.0\Microsoft.Bot.Builder.Dialogs.dll</HintPath>
+    <Reference Include="Microsoft.Bot.Builder.Dialogs, Version=4.14.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bot.Builder.Dialogs.4.14.1\lib\netstandard2.0\Microsoft.Bot.Builder.Dialogs.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bot.Builder.Integration.AspNet.WebApi, Version=4.14.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bot.Builder.Integration.AspNet.WebApi.4.14.1\lib\net461\Microsoft.Bot.Builder.Integration.AspNet.WebApi.dll</HintPath>
@@ -489,10 +489,22 @@
     <Compile Include="Bot\DialogBot.cs" />
     <Compile Include="Bot\DialogExtensions.cs" />
     <Compile Include="middleware\AdaptiveCardSubmitActionHandler.cs" />
+    <Compile Include="src\dialogs\examples\basic\AdaptiveCardDialog.cs" />
     <Compile Include="src\dialogs\examples\basic\GetLastDialogUsedDialog.cs" />
+    <Compile Include="src\dialogs\examples\basic\HeroCardDialog.cs" />
+    <Compile Include="src\dialogs\examples\basic\MessagebackDialog.cs" />
     <Compile Include="src\dialogs\examples\basic\MultiDialog.cs" />
+    <Compile Include="src\dialogs\examples\basic\PopupSigninCardDialog.cs" />
+    <Compile Include="src\dialogs\examples\basic\ThumbnailcardDialog.cs" />
+    <Compile Include="src\dialogs\examples\moderate\BeginDialogExampleDialog.cs" />
     <Compile Include="src\dialogs\examples\moderate\ListNamesDialog.cs" />
+    <Compile Include="src\dialogs\examples\moderate\PromptDialog.cs" />
+    <Compile Include="src\dialogs\examples\moderate\Quiz1Dialog.cs" />
+    <Compile Include="src\dialogs\examples\moderate\Quiz2Dialog.cs" />
+    <Compile Include="src\dialogs\examples\moderate\QuizFullDialog.cs" />
+    <Compile Include="src\dialogs\examples\teams\AtMentionDialog.cs" />
     <Compile Include="src\dialogs\examples\teams\DeepLinkStaticTabDialog.cs" />
+    <Compile Include="src\dialogs\examples\teams\DisplayCardsDialog.cs" />
     <Compile Include="src\dialogs\examples\teams\FetchTeamsInfoDialog.cs" />
     <Compile Include="src\dialogs\examples\teams\HelpDialog.cs" />
     <Compile Include="src\dialogs\examples\teams\ProactiveMsgTo1to1Dialog.cs" />

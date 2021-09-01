@@ -1,8 +1,8 @@
 ﻿using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Connector;
-using Microsoft.Bot.Connector.Teams;
+using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
 {
@@ -12,25 +12,35 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// we can pass ChannelAccount object as first parameter of AddMentionToText method to @mention any user.
     /// e.g. ChannelAccount userInformation = new ChannelAccount("29:1TPHVQrnqOI3_FZbeY32VvlBwo1trPhN96SiKYP3av-QCKYGlLBApj-w9fgoI9SCUz4bEmzo9tVlSQdHzgoSzeQ", "Ashish");
     /// </summary>
-
-    [Serializable]
-    public class AtMentionDialog : IDialog<object>
+    public class AtMentionDialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        public AtMentionDialog() : base(nameof(AtMentionDialog))
         {
-            if (context == null)
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
+                BeginFormflowAsync,
+            }));
+        }
+
+        private async Task<DialogTurnResult> BeginFormflowAsync(
+WaterfallStepContext stepContext,
+CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
             }
 
-            var message = context.MakeMessage();
+            var message = stepContext.Context.Activity;
             Activity replyActivity = message as Activity;
-            replyActivity.AddMentionToText(context.Activity.From, MentionTextLocation.PrependText);
-            await context.PostAsync(replyActivity);
+            replyActivity.GetMentions();
+            await stepContext.Context.SendActivityAsync(replyActivity);
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogAtMentionDialog);
-            context.Done<object>(null);
+            //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogAtMentionDialog);
+
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
     }
 }

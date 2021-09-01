@@ -1,8 +1,9 @@
 ﻿using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Connector;
+using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
@@ -10,28 +11,48 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// <summary>
     /// This is Thumbnail Card Dialog Class. Main purpose of this class is to display the Thumbnail Card example
     /// </summary>
-
-    [Serializable]
-    public class ThumbnailcardDialog : IDialog<object>
+    public class ThumbnailcardDialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        public ThumbnailcardDialog() : base(nameof(ThumbnailcardDialog))
         {
-            if (context == null)
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
+                BeginFormflowAsync,
+            }));
+        }
+
+        private async Task<DialogTurnResult> BeginFormflowAsync(
+WaterfallStepContext stepContext,
+CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
             }
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogThumbnailCard);
+            // stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogThumbnailCard);
 
-            var message = context.MakeMessage();
-            var attachment = GetThumbnailCard();
+            var message = stepContext.Context.Activity;
+            message.Attachments =new List<Attachment>
+            {
+                new ThumbnailCard
+            {
+                Title = Strings.ThumbnailCardTitle,
+                Subtitle = Strings.ThumbnailCardSubTitle,
+                Text = Strings.ThumbnailCardTextMsg,
+                Images = new List<CardImage> { new CardImage(Strings.ThumbnailCardImageUrl) },
+                Buttons = new List<CardAction>
+                {
+                    new CardAction(ActionTypes.OpenUrl, Strings.ThumbnailCardButtonCaption, value: "https://docs.microsoft.com/en-us/bot-framework/dotnet/bot-builder-dotnet-add-rich-card-attachments"),
+                    new CardAction(ActionTypes.MessageBack, Strings.MessageBackCardButtonCaption, value: "{\"" + Strings.cmdValueMessageBack + "\": \"" + Strings.cmdValueMessageBack+ "\"}", text:Strings.cmdValueMessageBack, displayText:Strings.MessageBackDisplayedText)
+                }
+            }.ToAttachment()
+        };
+            await stepContext.Context.SendActivityAsync(message);
 
-            message.Attachments.Add(attachment);
-
-            await context.PostAsync(message);
-
-            context.Done<object>(null);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
 
         private static Attachment GetThumbnailCard()

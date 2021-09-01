@@ -1,6 +1,7 @@
 ﻿using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
@@ -13,33 +14,51 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     ///     4. Once Quiz 2 is Done -> it will Resume Quiz Dialog
     ///     5. Once Quiz Dialog Ends -> it will ResumeRoot Dialog
     /// </summary>
-    [Serializable]
-    public class QuizFullDialog : IDialog<object>
+    public class QuizFullDialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        public QuizFullDialog() : base(nameof(QuizFullDialog))
         {
-            if (context == null)
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
+                BeginFormflowAsync,
+                ResumeAfterRunQuiz1Dialog,
+                ResumeAfterBeginQuiz2
+            }));
+            AddDialog(new Quiz1Dialog());
+            AddDialog(new Quiz2Dialog());
+        }
+
+        private async Task<DialogTurnResult> BeginFormflowAsync(
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
             }
-            
+
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogQuizDialog);
+            //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogQuizDialog);
+            await stepContext.Context.SendActivityAsync(Strings.QuizDialogBeginTitle);
 
-            await context.PostAsync(Strings.QuizDialogBeginTitle);
-            context.Call(new Quiz1Dialog(), ResumeAfterRunQuiz1Dialog);
+            return await stepContext.BeginDialogAsync(
+                        nameof(Quiz1Dialog));
         }
 
-        private async Task ResumeAfterRunQuiz1Dialog(IDialogContext context, IAwaitable<object> result)
+        private async Task<DialogTurnResult> ResumeAfterRunQuiz1Dialog(WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
-            await context.PostAsync(Strings.Quiz1ThanksTitleMsg);
-            context.Call(new Quiz2Dialog(), this.ResumeAfterBeginQuiz2);
+            await stepContext.Context.SendActivityAsync(Strings.Quiz1ThanksTitleMsg);
+            return await stepContext.BeginDialogAsync(
+                        nameof(Quiz2Dialog));
         }
 
-        private async Task ResumeAfterBeginQuiz2(IDialogContext context, IAwaitable<object> result)
+        private async Task<DialogTurnResult> ResumeAfterBeginQuiz2(WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
-            await context.PostAsync(Strings.QuizThanksTitleMsg);
-            context.Done<object>(null);
+            await stepContext.Context.SendActivityAsync(Strings.QuizThanksTitleMsg);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
     }
 }
