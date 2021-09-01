@@ -3,7 +3,8 @@ For reference please check [Real-time Teams meeting events](https://docs.microso
 
 This feature shown in this sample is currently available in public developer preview only.
 
-![Real Time meeting events](images/meeting-events.png)
+![Meeting start event](images/meeting-start.png)
+![Meeting end event](images/meeting-end.png)
 
 ## Prerequisites
 1. Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program).

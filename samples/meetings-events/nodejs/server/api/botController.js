@@ -1,4 +1,4 @@
-const { BotFrameworkAdapter } = require('botbuilder');
+const { BotFrameworkAdapter, MemoryStorage, ConversationState } = require('botbuilder');
 const { BotActivityHandler } = require('../bot/botActivityHandler');
 
 const adapter = new BotFrameworkAdapter({
@@ -24,8 +24,15 @@ adapter.onTurnError = async (context, error) => {
     await context.sendActivity('The bot encountered an error or bug, please fix the bot source code.');
 };
 
+// Define state store for your bot.
+// See https://aka.ms/about-bot-state to learn more about bot state.
+const memoryStorage = new MemoryStorage();
+
+// Create conversation and user state with in-memory storage provider.
+const conversationState = new ConversationState(memoryStorage);
+
 // Create bot handlers
-const botActivityHandler = new BotActivityHandler();
+const botActivityHandler = new BotActivityHandler(conversationState);
 const botHandler = (req, res) => {
     adapter.processActivity(req, res, async (context) => {
         // Process bot activity

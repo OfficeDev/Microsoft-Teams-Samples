@@ -53,7 +53,7 @@ const adaptiveCardForMeetingStart = (meetingObject) => ({
 });
 
 // Adaptive Card for meeting end event
-const adaptiveCardForMeetingEnd = (meetingObject) => ({
+const adaptiveCardForMeetingEnd = (meetingObject, meetingDurationText) => ({
     $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
     body: [
         {
@@ -75,6 +75,12 @@ const adaptiveCardForMeetingEnd = (meetingObject) => ({
                             size: 'Medium',
                             weight: 'Bolder',
                             text: 'End Time : '
+                        },
+                        {
+                            type: 'TextBlock',
+                            size: 'Medium',
+                            weight: 'Bolder',
+                            text: 'Total Duration : '
                         }
                     ]
                 },
@@ -86,6 +92,11 @@ const adaptiveCardForMeetingEnd = (meetingObject) => ({
                             type: 'TextBlock',
                             size: 'Medium',
                             text: new Date(meetingObject.EndTime).toString()
+                        },
+                        {
+                            type: 'TextBlock',
+                            size: 'Medium',
+                            text: meetingDurationText
                         }
                     ]
                 }
