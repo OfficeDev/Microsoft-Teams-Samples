@@ -65,12 +65,10 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
    - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
 
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
-    - **Sideload** in a meeting to test
-         - Select or create a teams meeting
-         - Select the ellipses **...** from the left pane. The drop-down menu appears.
-         - Select **Manage Team**, then select **Apps** 
+    - **Add** in a meeting to test
+         - Select **Apps** from the left panel.
          - Then select **Upload a custom app** from the lower right corner.
-         - Then select the `manifest.zip` file from `appPackage`, and then select **Add to meeting** to add the bot to your selected meeting.
+         - Then select the `manifest.zip` file from `appPackage`. 
 
  ## Interacting with the bot in Teams
 
