@@ -124,8 +124,8 @@
 |8|App Localization | Microsoft Teams app localization using Bot and Tab |[View][app-localization#cs]  | [View][app-localization#js]
 |9|Details Tab in Meeting | Microsoft Teams meeting extensibility sample for iteracting with Details Tab in-meeting |[View][meetings-details-tab#cs]  |[View][meetings-details-tab#js]
 |10|App SSO | Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl |[View][app-sso#cs] |[View][app-sso#js] 
-|11|meetings stage view | Enable and configure your apps for Teams meetings to use in meeting stage |[View][meetings-stage-view#cs] |
-|12|meetings stage view | This example shows how to add app before, after or during the meeting  ||[View][meetings-stage-view#js]
+|11|Meetings Stage View | Enable and configure your apps for Teams meetings to use in stage view |[View][meetings-stage-view#cs] |[View][meetings-stage-view#js]|
+|12|Meeting Events | Get real time meeting events  |[View][meetings-events#cs] |
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
@@ -208,6 +208,8 @@
 [app-sso#cs]:samples/app-sso/csharp
 [app-sso#js]:samples/app-sso/nodejs
 [meetings-stage-view#js]:samples/meetings-stage-view/nodejs
+[meetings-stage-view#cs]:samples/meetings-stage-view/csharp
+[meetings-events#cs]:samples/meetings-events/csharp
 
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#rsc#js]:samples/graph-rsc/nodeJs
