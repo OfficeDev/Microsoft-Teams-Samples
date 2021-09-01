@@ -3,7 +3,8 @@ For reference please check [Real-time Teams meeting events](https://docs.microso
 
 The feature shown in this sample is currently available in public developer preview only.
 
-![Real Time meeting events](Images/meeting-events.png)
+![Meeting start event](Images/meeting-start.png)
+![Meeting end event](Images/meeting-end.png)
 
 ## Prerequisites
 
@@ -63,7 +64,7 @@ The feature shown in this sample is currently available in public developer prev
   - Select `MeetingEvents.csproj` file
   - Press `F5` to run the project
 
-9. **Sideload** in a meeting to test
+9. **Add** in a meeting to test
          - Select **Apps** from the left panel.
          - Then select **Upload a custom app** from the lower right corner.
          - Then select the `manifest.zip` file from `appPackage`. 

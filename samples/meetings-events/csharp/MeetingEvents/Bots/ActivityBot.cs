@@ -8,14 +8,21 @@ namespace MeetingEvents.Bots
     using System.Threading;
     using System.Threading.Tasks;
     using AdaptiveCards;
+    using MeetingEvents.Models;
     using Microsoft.Bot.Builder;
     using Microsoft.Bot.Builder.Teams;
     using Microsoft.Bot.Schema;
     using Microsoft.Bot.Schema.Teams;
- 
+
     public class ActivityBot : TeamsActivityHandler
     {
-        private DateTime StartTime;
+        private BotState _conversationState;
+        private BotState _userState;
+
+        public ActivityBot(ConversationState conversationState)
+        {
+            _conversationState = conversationState;
+        }
 
         /// <summary>
         /// Activity Handler for Meeting start event
@@ -26,7 +33,11 @@ namespace MeetingEvents.Bots
         /// <returns></returns>
         protected override async Task OnTeamsMeetingStartAsync(MeetingStartEventDetails meeting, ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
         {
-            StartTime = meeting.StartTime;
+            // Save any state changes that might have occurred during the turn.
+            var conversationStateAccessors = _conversationState.CreateProperty<MeetingData>(nameof(MeetingData));
+            var conversationData = await conversationStateAccessors.GetAsync(turnContext, () => new MeetingData());
+            conversationData.StartTime = meeting.StartTime;
+            await _conversationState.SaveChangesAsync(turnContext, false, cancellationToken);
             await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForMeetingStart(meeting)));
         }
 
@@ -39,7 +50,9 @@ namespace MeetingEvents.Bots
         /// <returns></returns>
         protected override async Task OnTeamsMeetingEndAsync(MeetingEndEventDetails meeting, ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
         {
-            await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForMeetingEnd(meeting)));
+            var conversationStateAccessors = _conversationState.CreateProperty<MeetingData>(nameof(MeetingData));
+            var conversationData = await conversationStateAccessors.GetAsync(turnContext, () => new MeetingData());
+            await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForMeetingEnd(meeting, conversationData)));
         }
 
         /// <summary>
@@ -108,9 +121,14 @@ namespace MeetingEvents.Bots
         /// <summary>
         /// Sample Adaptive card for Meeting End event.
         /// </summary>
-        private Attachment GetAdaptiveCardForMeetingEnd(MeetingEndEventDetails meeting)
+        private Attachment GetAdaptiveCardForMeetingEnd(MeetingEndEventDetails meeting, MeetingData conversationData)
         {
-            TimeSpan meetingDuration = meeting.EndTime - StartTime;
+
+            TimeSpan meetingDuration = meeting.EndTime - conversationData.StartTime;
+            var meetingDurationText = meetingDuration.Minutes < 1 ?
+                  Convert.ToInt32(meetingDuration.Seconds) + "s"
+                : Convert.ToInt32(meetingDuration.Minutes) + "min " + Convert.ToInt32(meetingDuration.Seconds) + "s";
+
             AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
             {
                 Body = new List<AdaptiveElement>
@@ -154,7 +172,7 @@ namespace MeetingEvents.Bots
                                     },
                                     new AdaptiveTextBlock
                                     {
-                                        Text = meetingDuration.TotalMinutes + "min" + meetingDuration.TotalSeconds + "s",
+                                        Text = meetingDurationText,
                                         Wrap = true,
                                     },
                                 },
