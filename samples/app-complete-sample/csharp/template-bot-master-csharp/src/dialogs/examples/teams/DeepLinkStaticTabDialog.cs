@@ -1,9 +1,10 @@
 ﻿using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Connector;
+using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
@@ -11,9 +12,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// <summary>
     /// This is DeepLink Dialog Class. Main purpose of this class is to show Deep link from Bot to Tab example
     /// </summary>
-
-    [Serializable]
-    public class DeepLinkStaticTabDialog : IDialog<object>
+    public class DeepLinkStaticTabDialog : ComponentDialog
     {
         private const string TabEntityID = "statictab";
         private const string TabConfigEntityID = "configTab";
@@ -24,31 +23,40 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
         private string ButtonCaption { get; set; }
         private string DeepLinkCardTitle { get; set; }
 
-        public async Task StartAsync(IDialogContext context)
+        public DeepLinkStaticTabDialog() : base(nameof(DeepLinkStaticTabDialog))
         {
-            if (context == null)
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
-            }
+                BeginFormflowAsync,
+            }));
+        }
 
+        private async Task<DialogTurnResult> BeginFormflowAsync(
+WaterfallStepContext stepContext,
+CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
+            }
             BotId = ConfigurationManager.AppSettings["MicrosoftAppId"];
 
-            GetChannelID(context);
+            GetChannelID(stepContext);
 
-            var message = CreateDeepLinkMessage(context);
+            var message = CreateDeepLinkMessage(stepContext);
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogDeepLinkStaticTabDialog);
+            stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogDeepLinkStaticTabDialog);
+            await stepContext.Context.SendActivityAsync(message);
 
-            await context.PostAsync(message);
-
-            context.Done<object>(null);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
 
         #region Create Deep Link Tab Card
-        private IMessageActivity CreateDeepLinkMessage(IDialogContext context)
+        private IMessageActivity CreateDeepLinkMessage(WaterfallStepContext context)
         {
-            var message = context.MakeMessage();
+            var message = context.Context.Activity;
             var attachment = CreateDeepLinkCard();
             message.Attachments.Add(attachment);
             return message;
@@ -96,14 +104,14 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             return "https://teams.microsoft.com/l/entity/" + BotId + "/" + TabConfigEntityID + "?context=%7B%22channelId%22%3A%22" + channelId + "%22%7D";
         }
 
-        private void GetChannelID(IDialogContext context)
+        private void GetChannelID(WaterfallStepContext context)
         {
 
             IsChannelUser = false;
 
-            if (context.Activity.ChannelData != null)
+            if (context.Context.Activity.ChannelData != null)
             {
-                ChannelId = context.Activity.ChannelData["teamsChannelId"];
+                ChannelId = context.Context.Activity.ChannelId;
 
                 if (!string.IsNullOrEmpty(ChannelId))
                 {

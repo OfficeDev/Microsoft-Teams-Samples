@@ -1,5 +1,4 @@
-﻿
-using Autofac;
+﻿using Autofac;
 using Autofac.Integration.WebApi;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.BotFramework;

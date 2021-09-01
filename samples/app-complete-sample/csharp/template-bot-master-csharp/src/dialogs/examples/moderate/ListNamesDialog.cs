@@ -6,6 +6,7 @@ using Microsoft.Teams.TemplateBotCSharp.Properties;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,7 +17,6 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// This is Fetch Roster Dialog Class. Main purpose of this dialog class is to Call the Roster Api and Post the 
     /// members information (Name and Id) in Teams. This Dialog is using Thumbnail Card to show the member information in teams.
     /// </summary>
-    [Serializable]
     public class ListNamesDialog : ComponentDialog
     {
         public ListNamesDialog() : base(nameof(ListNamesDialog))
@@ -36,7 +36,7 @@ CancellationToken cancellationToken = default(CancellationToken))
             await stepContext.Context.SendActivityAsync(Strings.RosterWelcomeMsgTitle);
 
             // Begin the Formflow dialog.
-            return await stepContext.BeginDialogAsync(
+            return await stepContext.NextAsync(
                 nameof(ListNamesDialog),
                 cancellationToken: cancellationToken);
         }
@@ -45,7 +45,7 @@ CancellationToken cancellationToken = default(CancellationToken))
     WaterfallStepContext stepContext,
     CancellationToken cancellationToken = default(CancellationToken))
         {
-            var connectorClient = new ConnectorClient(new Uri(stepContext.Context.Activity.ServiceUrl));
+            var connectorClient = new ConnectorClient(new Uri(stepContext.Context.Activity.ServiceUrl), ConfigurationManager.AppSettings["MicrosoftAppId"], ConfigurationManager.AppSettings["MicrosoftAppPassword"]);
 
             var response = await connectorClient.Conversations.GetConversationMembersAsync(stepContext.Context.Activity.Conversation.Id);
             string output = JsonConvert.SerializeObject(response);

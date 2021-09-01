@@ -1,61 +1,65 @@
 ﻿using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Connector;
+using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
 {
-    [Serializable]
-    public class MultiDialog1 : IDialog<object>
+    public class MultiDialog1 : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        public MultiDialog1() : base(nameof(MultiDialog1))
         {
-            if (context == null)
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
-            }
+                BeginFormflowAsync,
+            }));
+        }
 
-            //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogMultiDialog1);
+        private async Task<DialogTurnResult> BeginFormflowAsync(
+WaterfallStepContext stepContext,
+CancellationToken cancellationToken = default(CancellationToken))
+        {
+            await stepContext.Context.SendActivityAsync(Strings.HelpCaptionMultiDialog1);
 
-            await context.PostAsync(Strings.HelpCaptionMultiDialog1);
-            context.Done<object>(null);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
     }
 
-    [Serializable]
-    public class MultiDialog2 : IDialog<object>
+    public class MultiDialog2 : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        public MultiDialog2() : base(nameof(MultiDialog2))
         {
-            if (context == null)
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
-            }
+                BeginFormflowAsync,
+            }));
+        }
 
-            var message = CreateMultiDialog(context);
+        private async Task<DialogTurnResult> BeginFormflowAsync(
+WaterfallStepContext stepContext,
+CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var message = CreateMultiDialog(stepContext);
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogMultiDialog2);
+            //context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogMultiDialog2);
 
-            await context.PostAsync(message);
-            context.Done<object>(null);
+            await stepContext.Context.SendActivityAsync(message);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
 
-        private IMessageActivity CreateMultiDialog(IDialogContext context)
+        private IMessageActivity CreateMultiDialog(WaterfallStepContext context)
         {
-            var message = context.MakeMessage();
-            var attachment = CreateMultiDialogCard();
-            message.Attachments.Add(attachment);
-            return message;
-        }
-
-        private Attachment CreateMultiDialogCard()
-        {
-            return new HeroCard
+            var message = context.Context.Activity;
+            message.Attachments = new List<Attachment>
+            {
+                new HeroCard
             {
                 Title = Strings.MultiDialogCardTitle,
                 Subtitle = Strings.MultiDialogCardSubTitle,
@@ -66,7 +70,9 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                    new CardAction("invoke", Strings.CaptionInvokeHelloDailog, value: "{\"" + Strings.InvokeRequestJsonKey + "\": \"" + Strings.cmdHelloDialog + "\"}"),
                    new CardAction("invoke", Strings.CaptionInvokeMultiDailog, value: "{\"" + Strings.InvokeRequestJsonKey+ "\": \"" + Strings.cmdMultiDialog1 + "\"}"),
                 }
-            }.ToAttachment();
+            }.ToAttachment()
+        };
+            return message;
         }
     }
 }

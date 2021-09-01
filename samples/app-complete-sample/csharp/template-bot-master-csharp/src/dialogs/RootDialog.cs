@@ -1,8 +1,6 @@
 ﻿using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Choices;
-using Microsoft.Teams.TemplateBotCSharp.Properties;
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,7 +17,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             {
                 new Choice(DialogMatches.FetchRosterPayloadMatch) { Synonyms = new List<string> { DialogMatches.FetchRosterPayloadMatch } },
                 new Choice(DialogMatches.FetchRosterApiMatch) { Synonyms = new List<string> { DialogMatches.FetchRosterApiMatch } },
-                new Choice(DialogMatches.HelloDialogMatch1)  { Synonyms = new List<string> { "hi" } }
+                new Choice(DialogMatches.HelloDialogMatch1)  { Synonyms = new List<string> { "hello" } }
             };
         public RootDialog()
             : base(nameof(RootDialog))
@@ -27,102 +25,100 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                PromptForOptionsAsync,
-                ShowChildDialogAsync,
-                ResumeAfterAsync,
+                PromptForOptionsAsync
             }));
             AddDialog(new FetchRosterDialog());
             AddDialog(new ListNamesDialog());
             AddDialog(new HelloDialog());
-            AddDialog(new ChoicePrompt(nameof(ChoicePrompt)));
+            AddDialog(new HelpDialog());
+            AddDialog(new MultiDialog1());
+            AddDialog(new MultiDialog2());
+            AddDialog(new GetLastDialogUsedDialog());
+            AddDialog(new ProactiveMsgTo1to1Dialog());
+            AddDialog(new UpdateTextMsgSetupDialog());
+            AddDialog(new UpdateTextMsgDialog());
+            AddDialog(new UpdateCardMsgSetupDialog());
+            AddDialog(new UpdateCardMsgDialog());
+            AddDialog(new FetchTeamsInfoDialog());
         }
 
         private async Task<DialogTurnResult> PromptForOptionsAsync(
             WaterfallStepContext stepContext,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Prompt the user for a response using our choice prompt.
-            return await stepContext.PromptAsync(
-                nameof(ChoicePrompt),
-                new PromptOptions()
-                {
-                    Choices = CommandList,
-                    Prompt = MessageFactory.Text("hello"),
-                    RetryPrompt = MessageFactory.Text(Strings.ErrorMessage)
-                },
-                cancellationToken);
-        }
+            var command = stepContext.Context.Activity.Text.Trim();
 
-        private async Task<DialogTurnResult> ShowChildDialogAsync(
-            WaterfallStepContext stepContext,
-            CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // string optionSelected = await userReply;
-            var optionSelected = (stepContext.Result as FoundChoice).Value;
-
-            switch (optionSelected)
+            if (command == DialogMatches.FetchRosterPayloadMatch)
             {
-                case DialogMatches.FetchRosterPayloadMatch:
-                    //context.Call(new InstallAppDialog(), this.ResumeAfterOptionDialog);
-                    //break;
-                    return await stepContext.BeginDialogAsync(
-                        nameof(FetchRosterDialog),
-                        cancellationToken);
-                case DialogMatches.FetchRosterApiMatch:
-                    //context.Call(new ResetPasswordDialog(), this.ResumeAfterOptionDialog);
-                    //break;
-                    return await stepContext.BeginDialogAsync(
-                        nameof(ListNamesDialog),
-                        cancellationToken);
-                case DialogMatches.HelloDialogMatch1:
-                    //context.Call(new LocalAdminDialog(), this.ResumeAfterOptionDialog);
-                    //break;
-                    return await stepContext.BeginDialogAsync(
-                        nameof(HelloDialog),
-                        cancellationToken);
+                return await stepContext.BeginDialogAsync(
+                        nameof(FetchRosterDialog));
             }
-
+            else if (command == DialogMatches.FetchRosterApiMatch)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(ListNamesDialog));
+            }
+            else if (command == DialogMatches.HelloDialogMatch2 || command == DialogMatches.HelloDialogMatch1)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(HelloDialog));
+            }
+            else if (command == DialogMatches.Help)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(HelpDialog));
+            }
+            else if (command == DialogMatches.MultiDialog1Match1)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(MultiDialog1));
+            }
+            else if (command == DialogMatches.MultiDialog2Match)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(MultiDialog2));
+            }
+            else if (command == DialogMatches.FecthLastExecutedDialogMatch)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(GetLastDialogUsedDialog));
+            }
+            else if (command == DialogMatches.Send1to1Conversation)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(ProactiveMsgTo1to1Dialog));
+            }
+            else if (command == DialogMatches.SetUpTextMsg)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(UpdateTextMsgSetupDialog));
+            }
+            else if (command == DialogMatches.UpdateLastSetupTextMsg)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(UpdateTextMsgDialog));
+            }
+            else if (command == DialogMatches.SetUpCardMsg)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(UpdateCardMsgSetupDialog));
+            }
+            else if (command == DialogMatches.UpdateCard)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(UpdateCardMsgDialog));
+            }
+            else if (command == DialogMatches.TeamInfo)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(FetchTeamsInfoDialog));
+            }
             // We shouldn't get here, but fail gracefully if we do.
             await stepContext.Context.SendActivityAsync(
                 "I don't recognize that option.",
                 cancellationToken: cancellationToken);
             // Continue through to the next step without starting a child dialog.
             return await stepContext.NextAsync(cancellationToken: cancellationToken);
-        }
-
-        private async Task<DialogTurnResult> ResumeAfterAsync(
-            WaterfallStepContext stepContext,
-            CancellationToken cancellationToken = default(CancellationToken))
-        {
-            try
-            {
-                //var message = await userReply;
-                var message = stepContext.Context.Activity;
-
-                var ticketNumber = new Random().Next(0, 20000);
-                //await context.PostAsync($"Thank you for using the Helpdesk Bot. Your ticket number is {ticketNumber}.");
-                await stepContext.Context.SendActivityAsync(
-                    $"Thank you for using the Helpdesk Bot. Your ticket number is {ticketNumber}.",
-                    cancellationToken: cancellationToken);
-
-                //context.Done(ticketNumber);
-            }
-            catch (Exception ex)
-            {
-                // await context.PostAsync($"Failed with message: {ex.Message}");
-                await stepContext.Context.SendActivityAsync(
-                    $"Failed with message: {ex.Message}",
-                    cancellationToken: cancellationToken);
-
-                // In general resume from task after calling a child dialog is a good place to handle exceptions
-                // try catch will capture exceptions from the bot framework awaitable object which is essentially "userReply"
-            }
-
-            // Replace on the stack the current instance of the waterfall with a new instance,
-            // and start from the top.
-            return await stepContext.ReplaceDialogAsync(
-                nameof(WaterfallDialog),
-                cancellationToken: cancellationToken);
         }
     }
 }

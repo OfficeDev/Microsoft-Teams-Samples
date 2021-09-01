@@ -1,9 +1,11 @@
 ﻿using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Teams;
-using Microsoft.Bot.Connector.Teams.Models;
+using Microsoft.Bot.Schema.Teams;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using System;
+using System.Configuration;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -13,41 +15,50 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// This is Fetch Teams Info Dialog Class main purpose of this dialog class is to display Team Name, TeamId and AAD GroupId.
     /// </summary>
     [Serializable]
-    public class FetchTeamsInfoDialog : IDialog<object>
+    public class FetchTeamsInfoDialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        public FetchTeamsInfoDialog() : base(nameof(FetchTeamsInfoDialog))
         {
-            if (context == null)
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
-            }
+                BeginFormflowAsync,
+            }));
+        }
 
-            var team = context.Activity.GetChannelData<TeamsChannelData>().Team;
+        private async Task<DialogTurnResult> BeginFormflowAsync(
+WaterfallStepContext stepContext,
+CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
+            }
+            var team = stepContext.Context.Activity.GetChannelData<TeamsChannelData>().Team;
 
             if (team != null)
             {
-                var connectorClient = new ConnectorClient(new Uri(context.Activity.ServiceUrl));
+                var connectorClient = new ConnectorClient(new Uri(stepContext.Context.Activity.ServiceUrl), ConfigurationManager.AppSettings["MicrosoftAppId"], ConfigurationManager.AppSettings["MicrosoftAppPassword"]);
 
                 // Handle for channel conversation, AAD GroupId only exists within channel
-                TeamDetails teamDetails = await connectorClient.GetTeamsConnectorClient().Teams.FetchTeamDetailsAsync(team.Id);
+                //TeamDetails teamDetails = await connectorClient.GetTeamsConnectorClient().Teams.FetchTeamDetailsAsync(team.Id);
 
-                var message = context.MakeMessage();
-                message.Text = GenerateTable(teamDetails);
+                var message = stepContext.Context.Activity;
+                //message.Text = GenerateTable(teamDetails);
 
-                await context.PostAsync(message);
+                await stepContext.Context.SendActivityAsync(message);
             }
             else
             {
                 // Handle for 1 to 1 bot conversation
-                await context.PostAsync(Strings.TeamInfo1To1ConversationError);
+                await stepContext.Context.SendActivityAsync(Strings.TeamInfo1To1ConversationError);
             }
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogFetchTeamInfoDialog);
+            stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogFetchTeamInfoDialog);
 
-            context.Done<object>(null);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
-
         /// <summary>
         /// Generate HTML dynamically to show TeamId, TeamName and AAD GroupId in table format 
         /// </summary>

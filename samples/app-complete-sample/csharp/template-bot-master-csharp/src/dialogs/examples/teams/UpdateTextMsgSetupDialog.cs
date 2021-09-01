@@ -1,7 +1,10 @@
 ﻿using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
+using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using System;
+using System.Configuration;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
@@ -9,29 +12,39 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// <summary>
     /// This is Update Setup Text Dialog Class. Main purpose of this class is to Setup the text message that will be update later in Bot example.
     /// </summary>
-    [Serializable]
-    public class UpdateTextMsgSetupDialog : IDialog<object>
+    public class UpdateTextMsgSetupDialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        public UpdateTextMsgSetupDialog() : base(nameof(UpdateTextMsgSetupDialog))
         {
-            if (context == null)
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
+                BeginFormflowAsync,
+            }));
+        }
+
+        private async Task<DialogTurnResult> BeginFormflowAsync(
+WaterfallStepContext stepContext,
+CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
             }
 
-            IMessageActivity reply = context.MakeMessage();
+            IMessageActivity reply = stepContext.Context.Activity;
             reply.Text = Strings.SetupMessagePrompt;
 
-            ConnectorClient client = new ConnectorClient(new Uri(context.Activity.ServiceUrl));
+            ConnectorClient client = new ConnectorClient(new Uri(stepContext.Context.Activity.ServiceUrl), ConfigurationManager.AppSettings["MicrosoftAppId"], ConfigurationManager.AppSettings["MicrosoftAppPassword"]);
             ResourceResponse resp = await client.Conversations.ReplyToActivityAsync((Activity)reply);
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogSetupMessasge);
+            stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogSetupMessasge);
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.SetUpMsgKey, resp.Id.ToString());
+            stepContext.State.SetValue(Strings.SetUpMsgKey, resp.Id.ToString());
 
-            context.Done<object>(null);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
     }
 }

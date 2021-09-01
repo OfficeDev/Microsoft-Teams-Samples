@@ -1,12 +1,13 @@
 ﻿using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Bots
 {
-    public class DialogBot<T> : ActivityHandler where T : Dialog
+    public class DialogBot<T> : TeamsActivityHandler where T : Dialog
     {
         protected readonly Dialog _dialog;
         protected readonly BotState _conversationState;
@@ -24,7 +25,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Bots
             // Run the Dialog with the new message Activity.
             await _dialog.Run(
                 turnContext,
-                _conversationState.CreateProperty<DialogState>("DialogState"),
+                _conversationState.CreateProperty<DialogState>(nameof(DialogState)),
                 cancellationToken);
         }
 

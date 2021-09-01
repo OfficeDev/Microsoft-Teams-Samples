@@ -4,6 +4,7 @@ using Microsoft.Bot.Connector;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using Newtonsoft.Json;
 using System;
+using System.Configuration;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -32,7 +33,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                 await stepContext.Context.SendActivityAsync(Strings.RosterWelcomeMsgTitle);
 
                 // Begin the Formflow dialog.
-                return await stepContext.BeginDialogAsync(
+                return await stepContext.NextAsync(
                     nameof(FetchRosterDialog),
                     cancellationToken: cancellationToken);
             }
@@ -41,7 +42,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     WaterfallStepContext stepContext,
     CancellationToken cancellationToken = default(CancellationToken))
         {
-            var connectorClient = new ConnectorClient(new Uri(stepContext.Context.Activity.ServiceUrl));
+            var connectorClient = new ConnectorClient(new Uri(stepContext.Context.Activity.ServiceUrl), ConfigurationManager.AppSettings["MicrosoftAppId"], ConfigurationManager.AppSettings["MicrosoftAppPassword"]);
 
             var response = await connectorClient.Conversations.GetConversationMembersAsync(stepContext.Context.Activity.Conversation.Id);
             string output = JsonConvert.SerializeObject(response);

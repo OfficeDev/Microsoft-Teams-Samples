@@ -1,9 +1,10 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Connector;
+﻿
+using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
@@ -12,38 +13,44 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// This is setup card dialog class. Main purpose of this class is to setup the card message and then user can update the card using below update dialog file
     /// microsoft-teams-sample-complete-csharp\template-bot-master-csharp\src\dialogs\examples\teams\UpdateCardMsgDialog.cs
     /// </summary>
-    [Serializable]
-    public class UpdateCardMsgSetupDialog : IDialog<object>
+    public class UpdateCardMsgSetupDialog : ComponentDialog
     {
         public int updateCounter = 0;
-        public async Task StartAsync(IDialogContext context)
+
+        public UpdateCardMsgSetupDialog() : base(nameof(UpdateCardMsgSetupDialog))
         {
-            if (context == null)
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
+                BeginFormflowAsync,
+            }));
+        }
+
+        private async Task<DialogTurnResult> BeginFormflowAsync(
+WaterfallStepContext stepContext,
+CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
             }
 
-            var message = SetupMessage(context);
-            await context.PostAsync(message);
+            var message = SetupMessage(stepContext);
+            await stepContext.Context.SendActivityAsync(message);
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogSetupUpdateCard);
+            stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogSetupUpdateCard);
 
-            context.Done<object>(null);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
 
         #region Create Message to Setup Card
-        private IMessageActivity SetupMessage(IDialogContext context)
+        private IMessageActivity SetupMessage(WaterfallStepContext context)
         {
-            var message = context.MakeMessage();
-            var attachment = CreateCard();
-            message.Attachments.Add(attachment);
-            return message;
-        }
-
-        private Attachment CreateCard()
-        {
-            return new HeroCard
+            var message = context.Context.Activity;
+            message.Attachments = new List<Attachment>
+            {
+            new HeroCard
             {
                 Title = Strings.SetUpCardTitle,
                 Subtitle = Strings.SetupCardSubTitle,
@@ -52,7 +59,9 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                 {
                     new CardAction(ActionTypes.MessageBack, Strings.UpdateCardButtonCaption, value: "{\"updateKey\": \"" + ++updateCounter + "\"}", text: DialogMatches.UpdateCard)
                 }
-            }.ToAttachment();
+            }.ToAttachment()
+       };
+            return message;
         }
         #endregion
     }

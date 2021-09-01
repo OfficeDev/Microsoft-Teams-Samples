@@ -1,4 +1,4 @@
-﻿using Microsoft.Bot.Connector;
+﻿using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using Newtonsoft.Json;
 using System;

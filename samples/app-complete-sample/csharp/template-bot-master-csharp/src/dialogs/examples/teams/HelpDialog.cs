@@ -1,8 +1,9 @@
 ﻿using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Connector;
+using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
@@ -11,20 +12,30 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// This is Help Dialog Class. Main purpose of this dialog class is to post the help commands in Teams.
     /// These are Actionable help commands for easy to use.
     /// </summary>
-    [Serializable]
-    public class HelpDialog : IDialog<object>
+    public class HelpDialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        public HelpDialog() : base(nameof(HelpDialog))
         {
-            if (context == null)
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
+                BeginFormflowAsync,
+            }));
+        }
+
+        private async Task<DialogTurnResult> BeginFormflowAsync(
+WaterfallStepContext stepContext,
+CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
             }
 
-            var message = context.MakeMessage();
+            var message = stepContext.Context.Activity;
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogHelpDialog);
+            //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogHelpDialog);
 
             // This will create Interactive Card with help command buttons
 
@@ -58,9 +69,9 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                     }
                 }.ToAttachment()
             };
+            await stepContext.Context.SendActivityAsync(message);
 
-            await context.PostAsync(message);
-            context.Done<object>(null);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
     }
 }
