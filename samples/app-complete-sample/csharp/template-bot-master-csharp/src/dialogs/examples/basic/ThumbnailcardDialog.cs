@@ -35,21 +35,8 @@ CancellationToken cancellationToken = default(CancellationToken))
             // stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogThumbnailCard);
 
             var message = stepContext.Context.Activity;
-            message.Attachments =new List<Attachment>
-            {
-                new ThumbnailCard
-            {
-                Title = Strings.ThumbnailCardTitle,
-                Subtitle = Strings.ThumbnailCardSubTitle,
-                Text = Strings.ThumbnailCardTextMsg,
-                Images = new List<CardImage> { new CardImage(Strings.ThumbnailCardImageUrl) },
-                Buttons = new List<CardAction>
-                {
-                    new CardAction(ActionTypes.OpenUrl, Strings.ThumbnailCardButtonCaption, value: "https://docs.microsoft.com/en-us/bot-framework/dotnet/bot-builder-dotnet-add-rich-card-attachments"),
-                    new CardAction(ActionTypes.MessageBack, Strings.MessageBackCardButtonCaption, value: "{\"" + Strings.cmdValueMessageBack + "\": \"" + Strings.cmdValueMessageBack+ "\"}", text:Strings.cmdValueMessageBack, displayText:Strings.MessageBackDisplayedText)
-                }
-            }.ToAttachment()
-        };
+            var attachment = GetThumbnailCard();
+            message.Attachments = new List<Attachment>() { attachment };
             await stepContext.Context.SendActivityAsync(message);
 
             return await stepContext.EndDialogAsync(null, cancellationToken);

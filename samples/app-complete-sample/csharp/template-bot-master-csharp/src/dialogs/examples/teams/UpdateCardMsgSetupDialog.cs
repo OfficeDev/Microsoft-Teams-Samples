@@ -48,9 +48,14 @@ CancellationToken cancellationToken = default(CancellationToken))
         private IMessageActivity SetupMessage(WaterfallStepContext context)
         {
             var message = context.Context.Activity;
-            message.Attachments = new List<Attachment>
-            {
-            new HeroCard
+            var attachment = CreateCard();
+            message.Attachments = new List<Attachment>() { attachment };
+            return message;
+        }
+
+        private Attachment CreateCard()
+        {
+            return new HeroCard
             {
                 Title = Strings.SetUpCardTitle,
                 Subtitle = Strings.SetupCardSubTitle,
@@ -59,9 +64,7 @@ CancellationToken cancellationToken = default(CancellationToken))
                 {
                     new CardAction(ActionTypes.MessageBack, Strings.UpdateCardButtonCaption, value: "{\"updateKey\": \"" + ++updateCounter + "\"}", text: DialogMatches.UpdateCard)
                 }
-            }.ToAttachment()
-       };
-            return message;
+            }.ToAttachment();
         }
         #endregion
     }

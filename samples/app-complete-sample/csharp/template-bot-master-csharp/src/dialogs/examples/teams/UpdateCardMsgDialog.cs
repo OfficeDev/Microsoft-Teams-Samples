@@ -69,20 +69,22 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
         private IMessageActivity CreateUpdatedMessage(WaterfallStepContext context)
         {
             var message = context.Context.Activity;
-            message.Attachments = new List<Attachment>
-                {
-                new HeroCard
-                {
-                    Title = Strings.UpdatedCardTitle + " " + updateCounter,
-                    Subtitle = Strings.UpdatedCardSubTitle,
-                    Images = new List<CardImage> { new CardImage(ConfigurationManager.AppSettings["BaseUri"].ToString() + "/public/assets/computer_person.jpg") },
-                    Buttons = new List<CardAction>
+            var attachment = CreateUpdatedCardAttachment();
+            message.Attachments = new List<Attachment>() { attachment };
+            return message;
+        }
+        private Attachment CreateUpdatedCardAttachment()
+        {
+            return new HeroCard
+            {
+                Title = Strings.UpdatedCardTitle + " " + updateCounter,
+                Subtitle = Strings.UpdatedCardSubTitle,
+                Images = new List<CardImage> { new CardImage(ConfigurationManager.AppSettings["BaseUri"].ToString() + "/public/assets/computer_person.jpg") },
+                Buttons = new List<CardAction>
                 {
                    new CardAction(ActionTypes.MessageBack, Strings.UpdateCardButtonCaption, value: "{\"updateKey\": \"" + ++updateCounter + "\"}", text: DialogMatches.UpdateCard)
                 }
-                }.ToAttachment()
-                };
-            return message;
+            }.ToAttachment();
         }
         #endregion
     }

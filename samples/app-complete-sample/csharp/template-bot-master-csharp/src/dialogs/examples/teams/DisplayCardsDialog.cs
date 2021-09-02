@@ -39,6 +39,8 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             AddDialog(new HeroCardDialog());
             AddDialog(new ThumbnailcardDialog());
             AddDialog(new AdaptiveCardDialog());
+            AddDialog(new O365ConnectorCardActionsDialog());
+            AddDialog(new O365ConnectorCardDialog());
         }
         private async Task<DialogTurnResult> BeginDisplayCardsAsync(
            WaterfallStepContext stepContext,
@@ -80,26 +82,26 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             }
             else if (selectedCard.Equals(Strings.DisplayCardO365ConnectorCardDefault)){
                 return await stepContext.BeginDialogAsync(
-                         nameof(ThumbnailcardDialog));
+                         nameof(O365ConnectorCardDialog));
             }
             else if (selectedCard.Equals(Strings.DisplayCardO365ConnectorCard2))
             {
                 return await stepContext.BeginDialogAsync(
-                         nameof(ThumbnailcardDialog));
+                         nameof(O365ConnectorCardDialog));
             }
             else if (selectedCard.Equals(Strings.DisplayCardO365ConnectorCard3))
             {
                 return await stepContext.BeginDialogAsync(
-                         nameof(ThumbnailcardDialog));
+                         nameof(O365ConnectorCardDialog));
             }
             else if(selectedCard.Equals(Strings.DisplayCardO365ConnectorActionableCardDefault))
             {
                 return await stepContext.BeginDialogAsync(
-                         nameof(ThumbnailcardDialog));
+                         nameof(O365ConnectorCardActionsDialog));
             }
             else if (selectedCard.Equals(Strings.DisplayCardO365ConnectorActionableCard2)){
                 return await stepContext.BeginDialogAsync(
-                         nameof(ThumbnailcardDialog));
+                         nameof(O365ConnectorCardActionsDialog));
             }
             else if (selectedCard.Equals(Strings.DisplayCardAdaptiveCard))
             {

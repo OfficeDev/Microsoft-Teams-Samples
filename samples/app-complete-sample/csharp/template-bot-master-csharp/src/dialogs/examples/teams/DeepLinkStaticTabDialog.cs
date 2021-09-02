@@ -53,10 +53,16 @@ CancellationToken cancellationToken = default(CancellationToken))
             return await stepContext.EndDialogAsync(null, cancellationToken);
         }
 
-        #region Create Deep Link Tab Card
         private IMessageActivity CreateDeepLinkMessage(WaterfallStepContext context)
         {
             var message = context.Context.Activity;
+            var attachment = CreateDeepLinkCard();
+            message.Attachments = new List<Attachment>() { attachment };
+            return message;
+        }
+
+        private Attachment CreateDeepLinkCard()
+        {
             if (IsChannelUser)
             {
                 TabUrl = GetConfigTabDeepLinkURL(ChannelId);
@@ -69,17 +75,15 @@ CancellationToken cancellationToken = default(CancellationToken))
                 ButtonCaption = Strings.DeepLinkCard1To1ButtonCaption;
                 DeepLinkCardTitle = Strings.DeepLinkCard1To1Title;
             }
-            message.Attachments = new List<Attachment> {
-            new HeroCard
+
+            return new HeroCard
             {
                 Title = DeepLinkCardTitle,
                 Buttons = new List<CardAction>
                 {
                    new CardAction(ActionTypes.OpenUrl, ButtonCaption, value: TabUrl),
                 }
-            }.ToAttachment()
-        };
-            return message;
+            }.ToAttachment();
         }
         private string GetStaticTabDeepLinkURL()
         {
@@ -117,6 +121,5 @@ CancellationToken cancellationToken = default(CancellationToken))
                 }
             }
         }
-        #endregion
     }
 }

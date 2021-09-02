@@ -57,9 +57,14 @@ CancellationToken cancellationToken = default(CancellationToken))
         private IMessageActivity CreateMultiDialog(WaterfallStepContext context)
         {
             var message = context.Context.Activity;
-            message.Attachments = new List<Attachment>
-            {
-                new HeroCard
+            var attachment = CreateMultiDialogCard();
+            message.Attachments = new List<Attachment>() { attachment };
+            return message;
+        }
+
+        private Attachment CreateMultiDialogCard()
+        {
+            return new HeroCard
             {
                 Title = Strings.MultiDialogCardTitle,
                 Subtitle = Strings.MultiDialogCardSubTitle,
@@ -70,9 +75,7 @@ CancellationToken cancellationToken = default(CancellationToken))
                    new CardAction("invoke", Strings.CaptionInvokeHelloDailog, value: "{\"" + Strings.InvokeRequestJsonKey + "\": \"" + Strings.cmdHelloDialog + "\"}"),
                    new CardAction("invoke", Strings.CaptionInvokeMultiDailog, value: "{\"" + Strings.InvokeRequestJsonKey+ "\": \"" + Strings.cmdMultiDialog1 + "\"}"),
                 }
-            }.ToAttachment()
-        };
-            return message;
+            }.ToAttachment();
         }
     }
 }

@@ -1,7 +1,6 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Builder.Dialogs.Choices;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,18 +9,14 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// <summary>
     /// This is Root Dialog, its a triggring point for every Child dialog based on the RexEx Match with user input command
     /// </summary>
-
     public class RootDialog : ComponentDialog
     {
-        private static List<Choice> CommandList = new List<Choice>()
-            {
-                new Choice(DialogMatches.FetchRosterPayloadMatch) { Synonyms = new List<string> { DialogMatches.FetchRosterPayloadMatch } },
-                new Choice(DialogMatches.FetchRosterApiMatch) { Synonyms = new List<string> { DialogMatches.FetchRosterApiMatch } },
-                new Choice(DialogMatches.HelloDialogMatch1)  { Synonyms = new List<string> { "hello" } }
-            };
-        public RootDialog()
+        protected readonly BotState _conversationState;
+        public RootDialog(ConversationState conversationState)
             : base(nameof(RootDialog))
         {
+            _conversationState = conversationState;
+   
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -51,13 +46,15 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             AddDialog(new QuizFullDialog());
             AddDialog(new PromptDialog());
             AddDialog(new DisplayCardsDialog());
+            AddDialog(new O365ConnectorCardActionsDialog());
+            AddDialog(new O365ConnectorCardDialog());
         }
 
         private async Task<DialogTurnResult> PromptForOptionsAsync(
             WaterfallStepContext stepContext,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var command = stepContext.Context.Activity.Text.Trim();
+            var command = stepContext.Context.Activity.Text.Trim().ToLower();
 
             if (command == DialogMatches.FetchRosterPayloadMatch)
             {
@@ -194,6 +191,16 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                 await stepContext.Context.SendActivityAsync(Strings.UTCTimeZonePrompt + stepContext.Context.Activity.Timestamp);
                 await stepContext.Context.SendActivityAsync(Strings.LocalTimeZonePrompt + stepContext.Context.Activity.LocalTimestamp);
                 return await stepContext.EndDialogAsync(null, cancellationToken);
+            }
+            else if (command == DialogMatches.O365ConnectorCardDefault || command == DialogMatches.DisplayCardO365ConnectorCard2 || command == DialogMatches.DisplayCardO365ConnectorCard3)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(O365ConnectorCardDialog));
+            }
+            else if (command == DialogMatches.O365ConnectorCardActionableCardDefault || command == DialogMatches.DisplayCardO365ConnectorActionableCard2 )
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(O365ConnectorCardActionsDialog));
             }
             // We shouldn't get here, but fail gracefully if we do.
             await stepContext.Context.SendActivityAsync(

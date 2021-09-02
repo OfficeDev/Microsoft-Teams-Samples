@@ -37,9 +37,16 @@ CancellationToken cancellationToken = default(CancellationToken))
             // stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogHeroCard);
 
             var message = stepContext.Context.Activity;
+            var attachment = GetHeroCard();
+            message.Attachments = new List<Attachment>() { attachment };
+            await stepContext.Context.SendActivityAsync(message);
 
-            message.Attachments = new List<Attachment> {
-                new HeroCard
+            return await stepContext.EndDialogAsync(null, cancellationToken);
+        }
+
+        private static Attachment GetHeroCard()
+        {
+            var heroCard = new HeroCard
             {
                 Title = Strings.HeroCardTitle,
                 Subtitle = Strings.HeroCardSubTitle,
@@ -50,11 +57,9 @@ CancellationToken cancellationToken = default(CancellationToken))
                     new CardAction(ActionTypes.OpenUrl, Strings.HeroCardButtonCaption, value: "https://docs.microsoft.com/en-us/bot-framework/dotnet/bot-builder-dotnet-add-rich-card-attachments"),
                     new CardAction(ActionTypes.MessageBack, Strings.MessageBackCardButtonCaption, value: "{\"" + Strings.cmdValueMessageBack + "\": \"" + Strings.cmdValueMessageBack+ "\"}", text:Strings.cmdValueMessageBack, displayText:Strings.MessageBackDisplayedText)
                 }
-            }.ToAttachment()
             };
-            await stepContext.Context.SendActivityAsync(message);
 
-            return await stepContext.EndDialogAsync(null, cancellationToken);
+            return heroCard.ToAttachment();
         }
     }
 }

@@ -50,8 +50,7 @@ CancellationToken cancellationToken = default(CancellationToken))
                 // create and send adaptive card
                 var message = stepContext.Context.Activity;
                 var attachment = GetAdaptiveCardAttachment();
-
-                message.Attachments.Add(attachment);
+                message.Attachments = new List<Attachment>() { attachment };
                 await stepContext.Context.SendActivityAsync(message);
             }
             await stepContext.Context.SendActivityAsync(Strings.HelloDialogMsg);

@@ -37,19 +37,26 @@ CancellationToken cancellationToken = default(CancellationToken))
 
             string baseUri = Convert.ToString(ConfigurationManager.AppSettings["BaseUri"]);
             var message = stepContext.Context.Activity;
-            message.Attachments = new List<Attachment> {
-                new HeroCard
+            var attachment = GetPopUpSignInCard();
+            message.Attachments = new List<Attachment>() { attachment };
+            await stepContext.Context.SendActivityAsync(message);
+
+            return await stepContext.EndDialogAsync(null, cancellationToken);
+        }
+        private static Attachment GetPopUpSignInCard()
+        {
+            string baseUri = Convert.ToString(ConfigurationManager.AppSettings["BaseUri"]);
+
+            var heroCard = new HeroCard
             {
                 Title = Strings.PopUpSignInCardTitle,
                 Buttons = new List<CardAction>
                 {
                     new CardAction(ActionTypes.Signin, Strings.PopUpSignInCardButtonTitle, value: baseUri + "/popUpSignin.html?height=200&width=200"),
                 }
-            }.ToAttachment()
             };
-            await stepContext.Context.SendActivityAsync(message);
 
-            return await stepContext.EndDialogAsync(null, cancellationToken);
+            return heroCard.ToAttachment();
         }
     }
 }
