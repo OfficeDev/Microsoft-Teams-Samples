@@ -494,6 +494,8 @@
     <Compile Include="src\dialogs\examples\basic\HeroCardDialog.cs" />
     <Compile Include="src\dialogs\examples\basic\MessagebackDialog.cs" />
     <Compile Include="src\dialogs\examples\basic\MultiDialog.cs" />
+    <Compile Include="src\dialogs\examples\basic\O365ConnectorCardActionsDialog.cs" />
+    <Compile Include="src\dialogs\examples\basic\O365ConnectorCardDialog.cs" />
     <Compile Include="src\dialogs\examples\basic\PopupSigninCardDialog.cs" />
     <Compile Include="src\dialogs\examples\basic\ThumbnailcardDialog.cs" />
     <Compile Include="src\dialogs\examples\moderate\BeginDialogExampleDialog.cs" />

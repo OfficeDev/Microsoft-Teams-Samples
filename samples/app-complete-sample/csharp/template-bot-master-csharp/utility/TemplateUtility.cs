@@ -4,8 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using static Microsoft.Teams.TemplateBotCSharp.Utility.WikipediaComposeExtension;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Utility
 {
@@ -14,7 +13,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
     /// </summary>
     public static class TemplateUtility
     {
-        public static string GetLocale(Activity activity)
+        public static string GetLocale(IMessageActivity activity)
         {
             if (activity == null)
             {
@@ -24,7 +23,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
             //Get the locale from activity
             if (activity.Entities != null)
             {
-                foreach(var entity in activity.Entities)
+                foreach (var entity in activity.Entities)
                 {
                     if (string.Equals(entity.Type.ToString().ToLower(), "clientinfo"))
                     {
@@ -37,16 +36,6 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
                 }
             }
             return activity.Locale;
-        }
-
-        public static ComposeExtensionAttachment CreateComposeExtensionCardsAttachments(WikiHelperSearchResult wikiResult, string selectedType)
-        {
-            return GetComposeExtensionMainResultAttachment(wikiResult, selectedType).ToComposeExtensionAttachment(GetComposeExtensionPreviewAttachment(wikiResult, selectedType));
-        }
-
-        public static ComposeExtensionAttachment CreateComposeExtensionCardsAttachmentsSelectedItem(WikiHelperSearchResult wikiResult, string selectedType)
-        {
-            return GetComposeExtensionMainResultAttachment(wikiResult, selectedType).ToComposeExtensionAttachment();
         }
 
         public static Attachment GetComposeExtensionMainResultAttachment(WikiHelperSearchResult wikiResult, string selectedType)
@@ -167,31 +156,18 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
             return 0;
         }
 
-        public static async Task<BotData> GetBotUserDataObject(IBotDataStore<BotData> botDataStore, Activity activity)
+        public class InvokeValue
         {
-            IAddress key = Address.FromActivity(activity);
-            BotData botData = await botDataStore.LoadAsync(key, BotStoreType.BotUserData, CancellationToken.None);
-            return botData;
-        }
+            public string imageUrl { get; set; }
+            public string text { get; set; }
+            public string highlightedTitle { get; set; }
 
-        public static async Task SaveBotUserDataObject(IBotDataStore<BotData> botDataStore, Activity activity, BotData userData)
-        {
-            IAddress key = Address.FromActivity(activity);
-            await botDataStore.SaveAsync(key, BotStoreType.BotUserData, userData, CancellationToken.None);            
-        }
-    }
-
-    public class InvokeValue
-    {
-        public string imageUrl { get; set; }
-        public string text { get; set; }
-        public string highlightedTitle { get; set; }
-
-        public InvokeValue(string urlValue, string textValue, string highlightedTitleValue)
-        {
-            imageUrl = urlValue;
-            text = textValue;
-            highlightedTitle = highlightedTitleValue;
+            public InvokeValue(string urlValue, string textValue, string highlightedTitleValue)
+            {
+                imageUrl = urlValue;
+                text = textValue;
+                highlightedTitle = highlightedTitleValue;
+            }
         }
     }
 }

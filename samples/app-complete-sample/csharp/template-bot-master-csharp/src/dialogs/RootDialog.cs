@@ -12,11 +12,10 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     public class RootDialog : ComponentDialog
     {
         protected readonly BotState _conversationState;
-        public RootDialog(ConversationState conversationState)
+        public RootDialog()
             : base(nameof(RootDialog))
         {
-            _conversationState = conversationState;
-   
+     
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
