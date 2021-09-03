@@ -9,9 +9,10 @@ extensions:
   contentType: samples
   technologies:
   - Tabs
-  - Microsoft Bot Framework
+  - Microsoft Bot Framework v4
   createdDate: 9/22/2017 5:54:09 PM
-description: "Sample that shows how to build a bot for Microsoft Teams in C#."
+  updateDate:  
+description: "Sample that shows how to build a bot for Microsoft Teams in C# with bot framework v4."
 ---
 
 # Microsoft Teams Bot in C#
@@ -139,6 +140,20 @@ This directory holds utility functions for the project.
 
 * **web.config**<br><br>
 This file is a configuration file that can be used to update the config keys globally used in Application.
+
+## Steps included in migration of Bot framework from v3 to V4
+1. Updated the following packages:
+  * Microsoft.Bot.Builder.Azure and Microsoft.Bot.Builder.Integration.AspNet.WebApi
+  * Autofac.WebApi2
+  * Bot.Builder.Community.Dialogs.Formflow
+
+2. Updated the Global.asax.cs file
+
+3. Updated messageController.cs
+
+4. Added dilaogBot.cs. DialogExtension.cs, AdapterWithErrorHandler.cs
+
+5. Updated Dialog files into waterfall model dialog.
 
 ## Contributing
 
