@@ -3,9 +3,13 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
+using Microsoft.Teams.TemplateBotCSharp.Properties;
 using Microsoft.Teams.TemplateBotCSharp.Utility;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -58,11 +62,11 @@ namespace Microsoft.Teams.TemplateBotCSharp.Bots
                 turnContext = turnContext ?? throw new ArgumentNullException(nameof(turnContext));
 
                 var activity = turnContext.Activity;
-
+                WikipediaComposeExtension wikipediaComposeExtension = new WikipediaComposeExtension();
                 var messagingExtensionQuery = JsonConvert.DeserializeObject<MessagingExtensionQuery>(activity.Value.ToString());
                 // var searchQuery = this.messagingExtensionHelper.GetSearchResult(messagingExtensionQuery);
-
-                return Task.FromResult(new MessagingExtensionResponse());
+                var result = wikipediaComposeExtension.GetComposeExtensionResponseAsync(activity, query);
+                return result;
             }
             catch (Exception ex)
             {
@@ -77,5 +81,52 @@ namespace Microsoft.Teams.TemplateBotCSharp.Bots
             // Save any state changes that might have occured during the turn.
             await _conversationState.SaveChangesAsync(turnContext, false, cancellationToken);
         }
+
+        /// <summary>
+        /// Invoked when members other than this bot (like a user) are removed from the conversation.
+        /// </summary>
+        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
+        protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
+        {
+            turnContext = turnContext ?? throw new ArgumentNullException(nameof(turnContext));
+                   var activity = turnContext.Activity;
+ 
+                if (activity.Conversation.ConversationType == "personal")
+                {
+                    if (activity.MembersAdded != null && activity.MembersAdded.Any(member => member.Id == activity.Recipient.Id))
+                    {
+                        await this.SendWelcomeCardInPersonalScopeAsync(turnContext);
+                    }
+                }
+         }
+
+        /// <summary>
+        /// Sent welcome card to personal chat.
+        /// </summary>
+        /// <param name="turnContext">Provides context for a turn in a bot.</param>
+        /// <returns>A task that represents a response.</returns>
+        private async Task SendWelcomeCardInPersonalScopeAsync(ITurnContext<IConversationUpdateActivity> turnContext)
+        {
+            var userStateAccessors = this._conversationState.CreateProperty<UserConversationState>(nameof(UserConversationState));
+            var userConversationState = await userStateAccessors.GetAsync(turnContext, () => new UserConversationState());
+
+            if (userConversationState?.IsWelcomeCardSent == null || userConversationState?.IsWelcomeCardSent == false)
+            {
+                userConversationState.IsWelcomeCardSent = true;
+                await userStateAccessors.SetAsync(turnContext, userConversationState);
+                await turnContext.SendActivityAsync(MessageFactory.Text(Strings.BotWelcomeMessage));
+            }
+        }
+    }
+
+    public class UserConversationState
+    {
+        /// <summary>
+        /// Gets or sets a value indicating whether the welcome card is sent to user or not.
+        /// </summary>
+        /// <remark>Value is null when bot is installed for first time.</remark>
+        public bool IsWelcomeCardSent { get; set; }
     }
 }
