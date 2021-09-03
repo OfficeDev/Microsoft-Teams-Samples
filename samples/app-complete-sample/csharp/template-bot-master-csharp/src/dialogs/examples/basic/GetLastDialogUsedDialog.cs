@@ -1,5 +1,7 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -7,8 +9,10 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
 {
     public class GetLastDialogUsedDialog : ComponentDialog
     {
-        public GetLastDialogUsedDialog() : base(nameof(GetLastDialogUsedDialog))
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public GetLastDialogUsedDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(GetLastDialogUsedDialog))
         {
+            this._conversationState = conversationState;
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -21,10 +25,10 @@ WaterfallStepContext stepContext,
 CancellationToken cancellationToken = default(CancellationToken))
         {
             string dialogName = string.Empty;
-
-            if (stepContext.State.TryGetValue(Strings.LastDialogKey, out dialogName))
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            if (currentState.LastDialogKey != null)
             {
-                await stepContext.Context.SendActivityAsync(Strings.LastDialogPromptMsg + dialogName);
+                await stepContext.Context.SendActivityAsync(Strings.LastDialogPromptMsg + currentState.LastDialogKey);
             }
             else
             {

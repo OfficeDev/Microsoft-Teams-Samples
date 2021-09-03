@@ -1,6 +1,7 @@
 ﻿using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,23 +12,24 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// </summary>
     public class RootDialog : ComponentDialog
     {
-        protected readonly BotState _conversationState;
-        public RootDialog()
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+
+        public RootDialog(ConversationState conversationState)
             : base(nameof(RootDialog))
         {
-     
+            this._conversationState = conversationState.CreateProperty<RootDialogState>(nameof(RootDialogState));
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
                 PromptForOptionsAsync
             }));
-            AddDialog(new FetchRosterDialog());
+            AddDialog(new FetchRosterDialog(this._conversationState));
             AddDialog(new ListNamesDialog());
             AddDialog(new HelloDialog());
             AddDialog(new HelpDialog());
             AddDialog(new MultiDialog1());
             AddDialog(new MultiDialog2());
-            AddDialog(new GetLastDialogUsedDialog());
+            AddDialog(new GetLastDialogUsedDialog(this._conversationState));
             AddDialog(new ProactiveMsgTo1to1Dialog());
             AddDialog(new UpdateTextMsgSetupDialog());
             AddDialog(new UpdateTextMsgDialog());

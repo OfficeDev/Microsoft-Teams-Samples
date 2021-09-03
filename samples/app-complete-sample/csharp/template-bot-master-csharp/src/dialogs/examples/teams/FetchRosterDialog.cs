@@ -1,7 +1,9 @@
 ﻿using Bot.Builder.Community.Dialogs.FormFlow;
+using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using Newtonsoft.Json;
 using System;
 using System.Configuration;
@@ -16,8 +18,11 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// </summary>
     public class FetchRosterDialog : ComponentDialog
     {
-        public FetchRosterDialog() : base(nameof(FetchRosterDialog))
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+
+        public FetchRosterDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(FetchRosterDialog))
         {
+            this._conversationState = conversationState;
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -50,8 +55,12 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             var message = stepContext.MakeMessage();
             message.Text = output;
 
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogFetchPayloadRosterDialog;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
+
             //Set the Last Dialog in Conversation Data
-           // var conversationStateAccessors = stepContext.DialogManager.ConversationState.CreateProperty<StateData>(nameof(StateData));
+            // var conversationStateAccessors = stepContext.DialogManager.ConversationState.CreateProperty<StateData>(nameof(StateData));
             //var conversationData = await conversationStateAccessors.GetAsync(stepContext.Context, () => new StateData());
             //conversationData.LastDialogKey = Strings.LastDialogFetchPayloadRosterDialog;
             //await stepContext.DialogManager.ConversationState.SaveChangesAsync(stepContext.Context);
