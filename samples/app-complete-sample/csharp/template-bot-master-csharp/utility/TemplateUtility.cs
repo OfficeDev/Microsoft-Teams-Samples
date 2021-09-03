@@ -1,4 +1,5 @@
 ﻿using Microsoft.Bot.Schema;
+using Microsoft.Bot.Schema.Teams;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -38,6 +39,15 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
             return activity.Locale;
         }
 
+        public static MessagingExtensionAttachment CreateComposeExtensionCardsAttachments(WikiHelperSearchResult wikiResult, string selectedType)
+        {
+            return GetComposeExtensionMainResultAttachment(wikiResult, selectedType).ToMessagingExtensionAttachment(GetComposeExtensionPreviewAttachment(wikiResult, selectedType));
+        }
+
+        public static MessagingExtensionAttachment CreateComposeExtensionCardsAttachmentsSelectedItem(WikiHelperSearchResult wikiResult, string selectedType)
+        {
+            return GetComposeExtensionMainResultAttachment(wikiResult, selectedType).ToMessagingExtensionAttachment();
+        }
         public static Attachment GetComposeExtensionMainResultAttachment(WikiHelperSearchResult wikiResult, string selectedType)
         {
             CardType cardType;
