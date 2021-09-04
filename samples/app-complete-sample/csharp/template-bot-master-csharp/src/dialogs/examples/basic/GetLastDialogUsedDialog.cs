@@ -33,13 +33,15 @@ CancellationToken cancellationToken = default(CancellationToken))
             else
             {
                 //Set the Last Dialog in Conversation Data
-                //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogFetchDiaog);
+                currentState.LastDialogKey = Strings.LastDialogFetchDiaog;
+                await this._conversationState.SetAsync(stepContext.Context, currentState);
 
                 await stepContext.Context.SendActivityAsync(Strings.LastDialogErrorMsg);
             }
 
             //Set the Last Dialog in Conversation Data
-            //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogFetchDiaog);
+            currentState.LastDialogKey = Strings.LastDialogFetchDiaog;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
 
             return await stepContext.EndDialogAsync(null, cancellationToken);
         }

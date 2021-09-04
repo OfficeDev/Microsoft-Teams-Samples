@@ -1,5 +1,7 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,15 +13,17 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// </summary>
     public class BeginDialogExampleDialog : ComponentDialog
     {
-        public BeginDialogExampleDialog() : base(nameof(BeginDialogExampleDialog))
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public BeginDialogExampleDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(BeginDialogExampleDialog))
         {
+            this._conversationState = conversationState;
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
                 BeginFormflowAsync,
                 SaveResultAsync,
             }));
-            AddDialog(new HelpDialog());
+            AddDialog(new HelpDialog(conversationState));
         }
 
         private async Task<DialogTurnResult> BeginFormflowAsync(
@@ -32,7 +36,10 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             }
 
             //Set the Last Dialog in Conversation Data
-            //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogBeginDialog);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogBeginDialog;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
+
             await stepContext.Context.SendActivityAsync(Strings.BeginDialog);
 
             return await stepContext.BeginDialogAsync(

@@ -1,6 +1,8 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -23,8 +25,10 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
         private string ButtonCaption { get; set; }
         private string DeepLinkCardTitle { get; set; }
 
-        public DeepLinkStaticTabDialog() : base(nameof(DeepLinkStaticTabDialog))
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public DeepLinkStaticTabDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(DeepLinkStaticTabDialog))
         {
+            this._conversationState = conversationState;
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -47,7 +51,10 @@ CancellationToken cancellationToken = default(CancellationToken))
             var message = CreateDeepLinkMessage(stepContext);
 
             //Set the Last Dialog in Conversation Data
-            //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogDeepLinkStaticTabDialog);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogDeepLinkStaticTabDialog;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
+
             await stepContext.Context.SendActivityAsync(message);
 
             return await stepContext.EndDialogAsync(null, cancellationToken);

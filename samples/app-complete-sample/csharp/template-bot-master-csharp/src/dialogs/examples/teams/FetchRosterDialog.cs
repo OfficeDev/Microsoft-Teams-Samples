@@ -59,15 +59,6 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             currentState.LastDialogKey = Strings.LastDialogFetchPayloadRosterDialog;
             await this._conversationState.SetAsync(stepContext.Context, currentState);
 
-            //Set the Last Dialog in Conversation Data
-            // var conversationStateAccessors = stepContext.DialogManager.ConversationState.CreateProperty<StateData>(nameof(StateData));
-            //var conversationData = await conversationStateAccessors.GetAsync(stepContext.Context, () => new StateData());
-            //conversationData.LastDialogKey = Strings.LastDialogFetchPayloadRosterDialog;
-            //await stepContext.DialogManager.ConversationState.SaveChangesAsync(stepContext.Context);
-
-            //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogFetchPayloadRosterDialog);
-            //stepContext.State.Values.Add(Strings.LastDialogFetchPayloadRosterDialog);
-            //await stepContext.State.SaveAllChangesAsync(cancellationToken);
             await stepContext.Context.SendActivityAsync(message);
 
             return await stepContext.EndDialogAsync(null, cancellationToken);

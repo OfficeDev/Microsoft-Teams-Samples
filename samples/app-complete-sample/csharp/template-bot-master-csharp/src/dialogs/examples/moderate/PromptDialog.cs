@@ -3,6 +3,7 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Choices;
 using Microsoft.Bot.Connector;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -18,6 +19,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// </summary>
     public class PromptDialog : ComponentDialog
     {
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
         private static List<Choice> options = new List<Choice>()
             {
                 new Choice(Strings.PlayGameChoice1) { Synonyms = new List<string> { Strings.PlayGameChoice1 } },
@@ -30,8 +32,9 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                 new Choice(Strings.OptionNo) { Synonyms = new List<string> { Strings.OptionNo } },
             };
 
-        public PromptDialog() : base(nameof(PromptDialog))
+        public PromptDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(PromptDialog))
         {
+            this._conversationState = conversationState;
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -54,7 +57,9 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             }
 
             //Set the Last Dialog in Conversation Data
-            //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogGameDialog);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogGameDialog;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
 
             return await stepContext.PromptAsync(
                 nameof(TextPrompt),

@@ -1,7 +1,9 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
 using System.Configuration;
 using System.Threading;
@@ -14,8 +16,10 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// </summary>
     public class UpdateTextMsgDialog : ComponentDialog
     {
-        public UpdateTextMsgDialog() : base(nameof(UpdateTextMsgDialog))
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public UpdateTextMsgDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(UpdateTextMsgDialog))
         {
+            this._conversationState = conversationState;
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -50,7 +54,9 @@ CancellationToken cancellationToken = default(CancellationToken))
             }
 
             //Set the Last Dialog in Conversation Data
-            //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogUpdateMessasge);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogUpdateMessasge;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
 
             return await stepContext.EndDialogAsync(null, cancellationToken);
         }

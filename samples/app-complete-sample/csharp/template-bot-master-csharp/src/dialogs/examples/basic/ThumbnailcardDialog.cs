@@ -1,6 +1,8 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -13,8 +15,10 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// </summary>
     public class ThumbnailcardDialog : ComponentDialog
     {
-        public ThumbnailcardDialog() : base(nameof(ThumbnailcardDialog))
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public ThumbnailcardDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(ThumbnailcardDialog))
         {
+            this._conversationState = conversationState;
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -32,7 +36,9 @@ CancellationToken cancellationToken = default(CancellationToken))
             }
 
             //Set the Last Dialog in Conversation Data
-            // stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogThumbnailCard);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogThumbnailCard;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
 
             var message = stepContext.Context.Activity;
             var attachment = GetThumbnailCard();

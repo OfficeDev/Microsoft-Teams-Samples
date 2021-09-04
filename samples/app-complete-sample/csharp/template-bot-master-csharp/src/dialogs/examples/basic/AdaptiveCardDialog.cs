@@ -1,7 +1,9 @@
 ﻿using AdaptiveCards;
+using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -16,8 +18,10 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// </summary>
     public class AdaptiveCardDialog : ComponentDialog
     {
-        public AdaptiveCardDialog() : base(nameof(AdaptiveCardDialog))
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public AdaptiveCardDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(AdaptiveCardDialog))
         {
+            this._conversationState = conversationState;
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -35,7 +39,9 @@ CancellationToken cancellationToken = default(CancellationToken))
             }
 
             //Set the Last Dialog in Conversation Data
-            // stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogAdaptiveCard);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogAdaptiveCard;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
 
             Activity activity = stepContext.Context.Activity as Activity;
 

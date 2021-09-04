@@ -1,5 +1,7 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,8 +18,10 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// </summary>
     public class QuizFullDialog : ComponentDialog
     {
-        public QuizFullDialog() : base(nameof(QuizFullDialog))
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public QuizFullDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(QuizFullDialog))
         {
+            this._conversationState = conversationState;
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -25,8 +29,8 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                 ResumeAfterRunQuiz1Dialog,
                 ResumeAfterBeginQuiz2
             }));
-            AddDialog(new Quiz1Dialog());
-            AddDialog(new Quiz2Dialog());
+            AddDialog(new Quiz1Dialog(conversationState));
+            AddDialog(new Quiz2Dialog(conversationState));
         }
 
         private async Task<DialogTurnResult> BeginFormflowAsync(
@@ -39,7 +43,10 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             }
 
             //Set the Last Dialog in Conversation Data
-            //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogQuizDialog);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogQuizDialog;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
+
             await stepContext.Context.SendActivityAsync(Strings.QuizDialogBeginTitle);
 
             return await stepContext.BeginDialogAsync(

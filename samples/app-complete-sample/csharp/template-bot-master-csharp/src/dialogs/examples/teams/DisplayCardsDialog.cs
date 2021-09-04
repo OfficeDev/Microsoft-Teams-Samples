@@ -2,6 +2,7 @@
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Choices;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -13,6 +14,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// </summary>
     public class DisplayCardsDialog : ComponentDialog
     {
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
         private static List<Choice> options = new List<Choice>()
             {
                 new Choice(Strings.DisplayCardHeroCard) { Synonyms = new List<string> { Strings.DisplayCardHeroCard } },
@@ -25,8 +27,9 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                  new Choice(Strings.DisplayCardAdaptiveCard) { Synonyms = new List<string> { Strings.DisplayCardAdaptiveCard } }
             };
 
-        public DisplayCardsDialog() : base(nameof(DisplayCardsDialog))
+        public DisplayCardsDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(DisplayCardsDialog))
         {
+            this._conversationState = conversationState;
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -36,11 +39,11 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             }));
             AddDialog(new ChoicePrompt(nameof(ChoicePrompt)));
             AddDialog(new TextPrompt(nameof(TextPrompt)));
-            AddDialog(new HeroCardDialog());
-            AddDialog(new ThumbnailcardDialog());
-            AddDialog(new AdaptiveCardDialog());
-            AddDialog(new O365ConnectorCardActionsDialog());
-            AddDialog(new O365ConnectorCardDialog());
+            AddDialog(new HeroCardDialog(conversationState));
+            AddDialog(new ThumbnailcardDialog(conversationState));
+            AddDialog(new AdaptiveCardDialog(conversationState));
+            AddDialog(new O365ConnectorCardActionsDialog(conversationState));
+            AddDialog(new O365ConnectorCardDialog(conversationState));
         }
         private async Task<DialogTurnResult> BeginDisplayCardsAsync(
            WaterfallStepContext stepContext,
@@ -52,7 +55,9 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             }
 
             //Set the Last Dialog in Conversation Data
-            //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogDisplayCardsDialog);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogDisplayCardsDialog;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
 
             await stepContext.Context.SendActivityAsync(Strings.DisplayCardMsgTitle);
             return await stepContext.PromptAsync(

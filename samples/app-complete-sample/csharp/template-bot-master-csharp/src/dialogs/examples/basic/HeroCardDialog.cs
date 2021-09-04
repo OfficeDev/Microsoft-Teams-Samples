@@ -1,7 +1,9 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -15,8 +17,10 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
 
     public class HeroCardDialog : ComponentDialog
     {
-        public HeroCardDialog() : base(nameof(HeroCardDialog))
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public HeroCardDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(HeroCardDialog))
         {
+            this._conversationState = conversationState;
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -34,8 +38,9 @@ CancellationToken cancellationToken = default(CancellationToken))
             }
 
             //Set the Last Dialog in Conversation Data
-            // stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogHeroCard);
-
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogHeroCard;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
             var message = stepContext.Context.Activity;
             var attachment = GetHeroCard();
             message.Attachments = new List<Attachment>() { attachment };

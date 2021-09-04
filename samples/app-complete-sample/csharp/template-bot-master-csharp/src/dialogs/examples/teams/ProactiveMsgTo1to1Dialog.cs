@@ -1,8 +1,10 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
 using System.Configuration;
 using System.Threading;
@@ -15,8 +17,10 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// </summary>
     public class ProactiveMsgTo1to1Dialog : ComponentDialog
     {
-        public ProactiveMsgTo1to1Dialog() : base(nameof(ProactiveMsgTo1to1Dialog))
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public ProactiveMsgTo1to1Dialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(ProactiveMsgTo1to1Dialog))
         {
+            this._conversationState = conversationState;
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -35,7 +39,9 @@ CancellationToken cancellationToken = default(CancellationToken))
             }
 
             //Set the Last Dialog in Conversation Data
-            //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogSend1on1Dialog);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogSend1on1Dialog;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
 
             var userId = stepContext.Context.Activity.From.Id;
             var botId = stepContext.Context.Activity.Recipient.Id;

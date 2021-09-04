@@ -1,6 +1,8 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -14,8 +16,10 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// </summary>
     public class HelpDialog : ComponentDialog
     {
-        public HelpDialog() : base(nameof(HelpDialog))
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public HelpDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(HelpDialog))
         {
+            this._conversationState = conversationState;
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -35,7 +39,9 @@ CancellationToken cancellationToken = default(CancellationToken))
             var message = stepContext.Context.Activity;
 
             //Set the Last Dialog in Conversation Data
-            //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogHelpDialog);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogHelpDialog;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
 
             // This will create Interactive Card with help command buttons
 

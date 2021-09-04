@@ -1,7 +1,9 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -14,8 +16,10 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// </summary>
     public class O365ConnectorCardDialog : ComponentDialog
     {
-        public O365ConnectorCardDialog() : base(nameof(O365ConnectorCardDialog))
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public O365ConnectorCardDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(O365ConnectorCardDialog))
         {
+            this._conversationState = conversationState;
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -33,7 +37,9 @@ CancellationToken cancellationToken = default(CancellationToken))
             }
 
             //Set the Last Dialog in Conversation Data
-            //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogConnectorCardDialog);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogConnectorCardDialog;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
 
             // get the input number for the example to show if the user passed it into the command - e.g. 'show connector card 2'
             var activity = (IMessageActivity)stepContext.Context.Activity;

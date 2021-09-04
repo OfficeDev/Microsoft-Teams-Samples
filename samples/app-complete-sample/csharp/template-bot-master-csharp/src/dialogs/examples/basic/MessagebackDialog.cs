@@ -1,5 +1,7 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,8 +12,10 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// </summary
     public class MessagebackDialog : ComponentDialog
     {
-        public MessagebackDialog() : base(nameof(MessagebackDialog))
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public MessagebackDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(MessagebackDialog))
         {
+            this._conversationState = conversationState;
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -29,7 +33,10 @@ CancellationToken cancellationToken = default(CancellationToken))
             }
 
             //Set the Last Dialog in Conversation Data
-            //stepContext.State.SetValue(Strings.LastDialogKey, Strings.LastDialogMessageBackDialog);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogMessageBackDialog;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
+
             await stepContext.Context.SendActivityAsync(Strings.MessageBackTitleMsg);
 
             return await stepContext.EndDialogAsync(null, cancellationToken);
