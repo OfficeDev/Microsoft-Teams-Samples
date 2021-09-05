@@ -1,10 +1,13 @@
-﻿using Microsoft.Bot.Schema;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.utility;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using static Microsoft.Teams.TemplateBotCSharp.Utility.WikipediaComposeExtension;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Utility
@@ -39,6 +42,26 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
             return activity.Locale;
         }
 
+        public static async Task<UserData> GetBotUserDataObject(IStatePropertyAccessor<UserData> userState, ITurnContext<IInvokeActivity> turnContext, MessagingExtensionQuery query)
+        {
+            var currentState = await userState.GetAsync(turnContext, () => new UserData());
+            currentState.BotId = turnContext.Activity.Recipient.Id;
+            currentState.ChannelId = turnContext.Activity.ChannelId;
+            currentState.ConversationId = turnContext.Activity.Conversation.Id;
+            currentState.ServiceUrl = turnContext.Activity.ServiceUrl;
+            currentState.UserId = turnContext.Activity.From.Id;
+            currentState.ComposeExtensionCardType = query.State != null ? query.State : currentState.ComposeExtensionCardType;
+            await userState.SetAsync(turnContext, currentState);
+            
+            return currentState;
+        }
+
+        public static async Task SaveBotUserDataObject(IStatePropertyAccessor<UserData> userState, ITurnContext<IInvokeActivity> turnContext, List<WikiHelperSearchResult> historySearchWikiResult)
+        {
+            var currentState = await userState.GetAsync(turnContext, () => new UserData());
+            currentState.ComposeExtensionSelectedResults = historySearchWikiResult;
+            await userState.SetAsync(turnContext, currentState);
+        }
         public static MessagingExtensionAttachment CreateComposeExtensionCardsAttachments(WikiHelperSearchResult wikiResult, string selectedType)
         {
             return GetComposeExtensionMainResultAttachment(wikiResult, selectedType).ToMessagingExtensionAttachment(GetComposeExtensionPreviewAttachment(wikiResult, selectedType));

@@ -515,6 +515,7 @@
     <Compile Include="src\dialogs\examples\teams\UpdateTextMsgDialog.cs" />
     <Compile Include="src\dialogs\examples\teams\UpdateTextMsgSetupDialog.cs" />
     <Compile Include="src\dialogs\RootDialogState.cs" />
+    <Compile Include="utility\UserData.cs" />
     <Compile Include="utility\InvokeHandler.cs" />
     <Compile Include="middleware\Middleware.cs" />
     <Compile Include="Properties\Strings.Designer.cs">
@@ -581,7 +582,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3979</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:3978/</IISUrl>
+          <IISUrl>http://localhost:3979/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

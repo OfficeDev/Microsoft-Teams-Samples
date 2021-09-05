@@ -37,14 +37,15 @@ CancellationToken cancellationToken = default(CancellationToken))
             }
 
             string cachedMessage = string.Empty;
+            var existingState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
 
-            if (stepContext.State.TryGetValue(Strings.SetUpMsgKey, out cachedMessage))
+            if (existingState.SetUpMsgKey!=null)
             {
                 IMessageActivity reply = stepContext.Context.Activity;
                 reply.Text = Strings.UpdateMessagePrompt;
 
                 ConnectorClient client = new ConnectorClient(new Uri(stepContext.Context.Activity.ServiceUrl), ConfigurationManager.AppSettings["MicrosoftAppId"], ConfigurationManager.AppSettings["MicrosoftAppPassword"]);
-                ResourceResponse resp = await client.Conversations.UpdateActivityAsync(stepContext.Context.Activity.Conversation.Id, cachedMessage, (Activity)reply);
+                ResourceResponse resp = await client.Conversations.UpdateActivityAsync(stepContext.Context.Activity.Conversation.Id, existingState.SetUpMsgKey, (Activity)reply);
 
                 await stepContext.Context.SendActivityAsync(Strings.UpdateMessageConfirmation);
             }

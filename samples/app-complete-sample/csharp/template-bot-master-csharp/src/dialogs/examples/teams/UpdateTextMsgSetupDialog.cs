@@ -36,9 +36,9 @@ CancellationToken cancellationToken = default(CancellationToken))
                 throw new ArgumentNullException(nameof(stepContext));
             }
 
-            IMessageActivity reply = stepContext.Context.Activity;
+            Activity reply = stepContext.Context.Activity;
             reply.Text = Strings.SetupMessagePrompt;
-
+            reply.ReplyToId = reply.Id;
             ConnectorClient client = new ConnectorClient(new Uri(stepContext.Context.Activity.ServiceUrl), ConfigurationManager.AppSettings["MicrosoftAppId"], ConfigurationManager.AppSettings["MicrosoftAppPassword"]);
             ResourceResponse resp = await client.Conversations.ReplyToActivityAsync((Activity)reply);
 

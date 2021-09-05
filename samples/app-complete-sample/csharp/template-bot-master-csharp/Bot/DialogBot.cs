@@ -4,11 +4,10 @@ using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.utility;
 using Microsoft.Teams.TemplateBotCSharp.Utility;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,11 +18,14 @@ namespace Microsoft.Teams.TemplateBotCSharp.Bots
     {
         protected readonly Dialog _dialog;
         protected readonly BotState _conversationState;
+        protected readonly BotState _userState;
 
-        public DialogBot(ConversationState conversationState, T dialog)
+
+        public DialogBot(ConversationState conversationState, T dialog, UserState userState)
         {
             _conversationState = conversationState;
             _dialog = dialog;
+            _userState = userState;
         }
 
         protected override async Task OnMessageActivityAsync(
@@ -62,11 +64,19 @@ namespace Microsoft.Teams.TemplateBotCSharp.Bots
                 turnContext = turnContext ?? throw new ArgumentNullException(nameof(turnContext));
 
                 var activity = turnContext.Activity;
-                WikipediaComposeExtension wikipediaComposeExtension = new WikipediaComposeExtension();
-                var messagingExtensionQuery = JsonConvert.DeserializeObject<MessagingExtensionQuery>(activity.Value.ToString());
-                // var searchQuery = this.messagingExtensionHelper.GetSearchResult(messagingExtensionQuery);
-                var result = wikipediaComposeExtension.GetComposeExtensionResponseAsync(activity, query);
-                return result;
+                WikipediaComposeExtension wikipediaComposeExtension = new WikipediaComposeExtension(this._userState.CreateProperty<UserData>(nameof(UserData)));
+                if (activity.Name == "composeExtension/selectItem")
+                {
+                    var selectedItemResponse = wikipediaComposeExtension.HandleComposeExtensionSelectedItem(turnContext, query);
+                    this._userState.SaveChangesAsync(turnContext, false, cancellationToken);
+                    return selectedItemResponse;
+                }
+                else
+                {
+                    var result = wikipediaComposeExtension.GetComposeExtensionResponseAsync(turnContext, query);
+                    this._userState.SaveChangesAsync(turnContext, false, cancellationToken);
+                    return result;
+                }
             }
             catch (Exception ex)
             {
