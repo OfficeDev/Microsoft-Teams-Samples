@@ -489,6 +489,11 @@
     <Compile Include="Bot\DialogBot.cs" />
     <Compile Include="Bot\DialogExtensions.cs" />
     <Compile Include="middleware\AdaptiveCardSubmitActionHandler.cs" />
+    <Compile Include="src\dialogs\examples\auth\facebook\OAuthCallbackController.cs" />
+    <Compile Include="src\dialogs\examples\auth\facebook\SimpleFacebookAuthDialog.cs" />
+    <Compile Include="src\dialogs\examples\auth\vsts\OAuthCallbackVSTSController.cs" />
+    <Compile Include="src\dialogs\examples\auth\vsts\VSTSAPICallDialog.cs" />
+    <Compile Include="src\dialogs\examples\auth\vsts\VSTSGetworkItemDialog.cs" />
     <Compile Include="src\dialogs\examples\basic\AdaptiveCardDialog.cs" />
     <Compile Include="src\dialogs\examples\basic\GetLastDialogUsedDialog.cs" />
     <Compile Include="src\dialogs\examples\basic\HeroCardDialog.cs" />
@@ -514,6 +519,7 @@
     <Compile Include="src\dialogs\examples\teams\UpdateCardMsgSetupDialog.cs" />
     <Compile Include="src\dialogs\examples\teams\UpdateTextMsgDialog.cs" />
     <Compile Include="src\dialogs\examples\teams\UpdateTextMsgSetupDialog.cs" />
+    <Compile Include="src\dialogs\PrivateConversationData.cs" />
     <Compile Include="src\dialogs\RootDialogState.cs" />
     <Compile Include="utility\UserData.cs" />
     <Compile Include="utility\InvokeHandler.cs" />

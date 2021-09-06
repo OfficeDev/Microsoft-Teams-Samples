@@ -39,10 +39,11 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             {
                 throw new ArgumentNullException(nameof(stepContext));
             }
-            if (!string.IsNullOrEmpty(stepContext.Context.Activity.ReplyToId))
+            var existingState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            if (!string.IsNullOrEmpty(stepContext.Context.Activity.ReplyToId) && existingState.SetUpMsgKey != null)
             {
-                Activity activity = stepContext.Context.Activity as Activity;
-                updateCounter = TemplateUtility.ParseUpdateCounterJson(activity);
+                IMessageActivity activity = stepContext.Context.Activity;
+                updateCounter = TemplateUtility.ParseUpdateCounterJson((Activity)activity);
 
                 var updatedMessage = CreateUpdatedMessage(stepContext);
 
@@ -50,7 +51,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
 
                 try
                 {
-                    ResourceResponse resp = await client.Conversations.UpdateActivityAsync(stepContext.Context.Activity.Conversation.Id, stepContext.Context.Activity.ReplyToId, (Activity)updatedMessage);
+                    ResourceResponse resp = await client.Conversations.UpdateActivityAsync(stepContext.Context.Activity.Conversation.Id, existingState.SetUpMsgKey, (Activity)updatedMessage);
                     await stepContext.Context.SendActivityAsync(Strings.UpdateCardMessageConfirmation);
                 }
                 catch (Exception ex)

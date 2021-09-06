@@ -1,7 +1,9 @@
 ﻿using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,11 +15,14 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     public class RootDialog : ComponentDialog
     {
         protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
-
-        public RootDialog(ConversationState conversationState)
+        protected readonly BotState _privateCoversationState;
+        protected readonly IStatePropertyAccessor<PrivateConversationData> _privateState;
+        public RootDialog(ConversationState conversationState, PrivateConversationState privateCoversationState)
             : base(nameof(RootDialog))
         {
+            this._privateCoversationState = privateCoversationState;
             this._conversationState = conversationState.CreateProperty<RootDialogState>(nameof(RootDialogState));
+            this._privateState = this._privateCoversationState.CreateProperty<PrivateConversationData>(nameof(PrivateConversationData));
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -28,7 +33,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             AddDialog(new HelloDialog());
             AddDialog(new HelpDialog(this._conversationState));
             AddDialog(new MultiDialog1());
-            AddDialog(new MultiDialog2());
+            AddDialog(new MultiDialog2(this._conversationState));
             AddDialog(new GetLastDialogUsedDialog(this._conversationState));
             AddDialog(new ProactiveMsgTo1to1Dialog(this._conversationState));
             AddDialog(new UpdateTextMsgSetupDialog(this._conversationState));
@@ -49,6 +54,9 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             AddDialog(new DisplayCardsDialog(this._conversationState));
             AddDialog(new O365ConnectorCardActionsDialog(this._conversationState));
             AddDialog(new O365ConnectorCardDialog(this._conversationState));
+            AddDialog(new SimpleFacebookAuthDialog(this._conversationState,this._privateState));
+            AddDialog(new VSTSAPICallDialog(this._conversationState, this._privateState));
+            AddDialog(new VSTSGetworkItemDialog(this._privateState));
         }
 
         private async Task<DialogTurnResult> PromptForOptionsAsync(
@@ -64,8 +72,10 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             }
             else if (command == DialogMatches.FetchRosterApiMatch)
             {
-                return await stepContext.BeginDialogAsync(
+                await stepContext.BeginDialogAsync(
                         nameof(ListNamesDialog));
+                await stepContext.Context.SendActivityAsync(Strings.ThanksRosterTitleMsg);
+                return await stepContext.EndDialogAsync(null, cancellationToken);
             }
             else if (command == DialogMatches.HelloDialogMatch2 || command == DialogMatches.HelloDialogMatch1)
             {
@@ -203,6 +213,49 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                 return await stepContext.BeginDialogAsync(
                         nameof(O365ConnectorCardActionsDialog));
             }
+            else if (command == DialogMatches.AuthSample)
+            {
+                var message = CreateAuthSampleMessage(stepContext);
+                await stepContext.Context.SendActivityAsync(message);
+                return await stepContext.EndDialogAsync();
+            }
+            else if (command == DialogMatches.Facebooklogin)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(SimpleFacebookAuthDialog));
+            }
+            else if (command == DialogMatches.Facebooklogout)
+            {
+                var currentState = await this._privateState.GetAsync(stepContext.Context, () => new PrivateConversationData());
+                currentState.AuthTokenKey = null;
+                currentState.PersistedCookie = null;
+                currentState.Name = null;
+                await this._privateState.SetAsync(stepContext.Context, currentState);
+                await stepContext.Context.SendActivityAsync(Strings.FBSuccessfulLogoutPrompt);
+                await stepContext.Context.SendActivityAsync(Strings.FBSuccessfulLogoutLoginPrompt);
+                return await stepContext.EndDialogAsync(null, cancellationToken);
+            }
+            else if (command == DialogMatches.VSTSlogin)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(VSTSAPICallDialog));
+            }
+            else if (command == DialogMatches.VSTSlogout)
+            {
+                var currentState = await this._privateState.GetAsync(stepContext.Context, () => new PrivateConversationData());
+                currentState.VSTSAuthTokenKey = null;
+                currentState.PersistedCookieVSTS = null;
+                currentState.Name = null;
+                await this._privateState.SetAsync(stepContext.Context, currentState);
+                await stepContext.Context.SendActivityAsync(Strings.VSTSSuccessfulLogoutPrompt);
+                await stepContext.Context.SendActivityAsync(Strings.VSTSSuccessfulLogoutLoginPrompt);
+                return await stepContext.EndDialogAsync(null, cancellationToken);
+            }
+            else if (command == DialogMatches.VSTSApi)
+            {
+                return await stepContext.BeginDialogAsync(
+                        nameof(VSTSGetworkItemDialog));
+            }
             // We shouldn't get here, but fail gracefully if we do.
             await stepContext.Context.SendActivityAsync(
                 "I don't recognize that option.",
@@ -210,5 +263,28 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             // Continue through to the next step without starting a child dialog.
             return await stepContext.EndDialogAsync(null, cancellationToken);
         }
+
+        #region Create Auth Message Card
+        private IMessageActivity CreateAuthSampleMessage(WaterfallStepContext context)
+        {
+            var message = context.Context.Activity;
+            var attachment = CreateAuthSampleCard();
+            message.Attachments = new List<Attachment> { attachment };
+            return message;
+        }
+
+        private Attachment CreateAuthSampleCard()
+        {
+            return new HeroCard
+            {
+                Title = Strings.AuthSampleCardTitle,
+                Buttons = new List<CardAction>
+                {
+                   new CardAction(ActionTypes.ImBack, Strings.FBAuthCardCaption, value: Strings.FBAuthCardValue),
+                   new CardAction(ActionTypes.ImBack, Strings.VSTSAuthCardCaption, value: Strings.VSTSAuthCardValue)
+                }
+            }.ToAttachment();
+        }
+        #endregion
     }
 }

@@ -64,9 +64,4 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             return await stepContext.EndDialogAsync(null, cancellationToken);
         }
     }
-
-    public class StateData
-    {
-        public string LastDialogKey { get; set; }
-    }
 }

@@ -44,8 +44,10 @@ namespace Microsoft.Teams.TemplateBotCSharp
                 // The Conversation State object is where we persist anything at the conversation-scope.
                 var conversationState = new ConversationState(dataStore);
                 var userState = new UserState(dataStore);
+                var privateConversationData = new PrivateConversationState(dataStore);
                 builder.RegisterInstance(conversationState).As<ConversationState>().SingleInstance();
                 builder.RegisterInstance(userState).As<UserState>().SingleInstance();
+                builder.RegisterInstance(privateConversationData).As<PrivateConversationState>().SingleInstance();
 
                 // Register the main dialog, which is injected into the DialogBot class
                 builder.RegisterType<RootDialog>().SingleInstance();

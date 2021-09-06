@@ -1,6 +1,8 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -32,8 +34,10 @@ CancellationToken cancellationToken = default(CancellationToken))
 
     public class MultiDialog2 : ComponentDialog
     {
-        public MultiDialog2() : base(nameof(MultiDialog2))
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public MultiDialog2(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(MultiDialog2))
         {
+            this._conversationState = conversationState;
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -48,7 +52,9 @@ CancellationToken cancellationToken = default(CancellationToken))
             var message = CreateMultiDialog(stepContext);
 
             //Set the Last Dialog in Conversation Data
-            //context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogMultiDialog2);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogMultiDialog2;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
 
             await stepContext.Context.SendActivityAsync(message);
             return await stepContext.EndDialogAsync(null, cancellationToken);
@@ -72,8 +78,8 @@ CancellationToken cancellationToken = default(CancellationToken))
                 Images = new List<CardImage> { new CardImage(ConfigurationManager.AppSettings["BaseUri"].ToString() + "/public/assets/computer_person.jpg") },
                 Buttons = new List<CardAction>
                 {
-                   new CardAction("invoke", Strings.CaptionInvokeHelloDailog, value: "{\"" + Strings.InvokeRequestJsonKey + "\": \"" + Strings.cmdHelloDialog + "\"}"),
-                   new CardAction("invoke", Strings.CaptionInvokeMultiDailog, value: "{\"" + Strings.InvokeRequestJsonKey+ "\": \"" + Strings.cmdMultiDialog1 + "\"}"),
+                   new CardAction(ActionTypes.ImBack, Strings.CaptionInvokeHelloDailog, value: Strings.cmdHelloDialog),
+                   new CardAction(ActionTypes.ImBack, Strings.CaptionInvokeMultiDailog, value: Strings.cmdMultiDialog1),
                 }
             }.ToAttachment();
         }

@@ -22,7 +22,6 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
     {
         const string SearchApiUrlFormat = "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=[keyword]&srlimit=[limit]&sroffset=[offset]&format=json";
         const string ImageApiUrlFormat = "https://en.wikipedia.org/w/api.php?action=query&formatversion=2&format=json&prop=pageimages&piprop=thumbnail&pithumbsize=250&titles=[title]";
-        const string ComposeExtensionSelectedResultsKey = "ComposeExtensionSelectedResults";
         const string MaxComposeExtensionHistoryCountKey = "MaxComposeExtensionHistoryCount";
         public static HttpClient Client = new HttpClient();
         protected readonly IStatePropertyAccessor<UserData> _userState;
@@ -167,7 +166,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
                         WikiHelperSearchResult wikiSearchResult = new WikiHelperSearchResult(searchResult.imageUrl, searchResult.highlightedTitle, searchResult.text);
 
                         // create the card itself and the preview card based upon the information
-                        var createdCardAttachment = TemplateUtility.CreateComposeExtensionCardsAttachments(wikiSearchResult, query.State);
+                        var createdCardAttachment = TemplateUtility.CreateComposeExtensionCardsAttachments(wikiSearchResult, userPreferredCardType);
                         composeExtensionAttachments.Add(createdCardAttachment);
                     }
 
@@ -206,7 +205,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
                WikiHelperSearchResult wikiSearchResult = new WikiHelperSearchResult(imageUrl, searchResult.title, cardText);
 
             //    // create the card itself and the preview card based upon the information
-                var createdCardAttachment = TemplateUtility.CreateComposeExtensionCardsAttachments(wikiSearchResult, query.State);
+                var createdCardAttachment = TemplateUtility.CreateComposeExtensionCardsAttachments(wikiSearchResult, userPreferredCardType);
                 composeExtensionAttachments.Add(createdCardAttachment);
             }
 

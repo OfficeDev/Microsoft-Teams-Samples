@@ -4,6 +4,7 @@ using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using Microsoft.Teams.TemplateBotCSharp.utility;
 using Microsoft.Teams.TemplateBotCSharp.Utility;
 using System;
@@ -19,15 +20,14 @@ namespace Microsoft.Teams.TemplateBotCSharp.Bots
         protected readonly Dialog _dialog;
         protected readonly BotState _conversationState;
         protected readonly BotState _userState;
-
-
+       
         public DialogBot(ConversationState conversationState, T dialog, UserState userState)
         {
             _conversationState = conversationState;
             _dialog = dialog;
             _userState = userState;
+            
         }
-
         protected override async Task OnMessageActivityAsync(
     ITurnContext<IMessageActivity> turnContext,
     CancellationToken cancellationToken)
@@ -35,8 +35,22 @@ namespace Microsoft.Teams.TemplateBotCSharp.Bots
             //Set the Locale for Bot
             turnContext.Activity.Locale = TemplateUtility.GetLocale(turnContext.Activity);
 
-            // Run the Dialog with the new message Activity.
-            await _dialog.Run(
+            if (turnContext.Activity.Type == ActivityTypes.MessageReaction)
+            {
+                var reactions = turnContext.Activity.AsMessageReactionActivity();
+                var replytoId = turnContext.Activity.ReplyToId;
+
+                if (reactions.ReactionsAdded != null && reactions.ReactionsAdded.Count > 0)
+                {
+                    await turnContext.SendActivityAsync(Strings.LikeMessage);
+                }
+                else if (reactions.ReactionsRemoved != null && reactions.ReactionsRemoved.Count > 0)
+                {
+                    await turnContext.SendActivityAsync(Strings.RemoveLike);
+                }
+            }
+                // Run the Dialog with the new message Activity.
+                await _dialog.Run(
                 turnContext,
                 _conversationState.CreateProperty<DialogState>(nameof(DialogState)),
                 cancellationToken);
@@ -107,17 +121,23 @@ namespace Microsoft.Teams.TemplateBotCSharp.Bots
                 {
                     if (activity.MembersAdded != null && activity.MembersAdded.Any(member => member.Id == activity.Recipient.Id))
                     {
-                        await this.SendWelcomeCardInPersonalScopeAsync(turnContext);
+                        await this.SendWelcomeMessagePersonalScopeAsync(turnContext);
                     }
                 }
          }
 
+        protected override async Task OnMembersRemovedAsync(IList<ChannelAccount> membersRemoved, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
+        {
+            turnContext = turnContext ?? throw new ArgumentNullException(nameof(turnContext));
+            await this._conversationState.ClearStateAsync(turnContext, cancellationToken);
+            await this._userState.ClearStateAsync(turnContext, cancellationToken);
+        }
         /// <summary>
         /// Sent welcome card to personal chat.
         /// </summary>
         /// <param name="turnContext">Provides context for a turn in a bot.</param>
         /// <returns>A task that represents a response.</returns>
-        private async Task SendWelcomeCardInPersonalScopeAsync(ITurnContext<IConversationUpdateActivity> turnContext)
+        private async Task SendWelcomeMessagePersonalScopeAsync(ITurnContext<IConversationUpdateActivity> turnContext)
         {
             var userStateAccessors = this._conversationState.CreateProperty<UserConversationState>(nameof(UserConversationState));
             var userConversationState = await userStateAccessors.GetAsync(turnContext, () => new UserConversationState());
@@ -129,14 +149,5 @@ namespace Microsoft.Teams.TemplateBotCSharp.Bots
                 await turnContext.SendActivityAsync(MessageFactory.Text(Strings.BotWelcomeMessage));
             }
         }
-    }
-
-    public class UserConversationState
-    {
-        /// <summary>
-        /// Gets or sets a value indicating whether the welcome card is sent to user or not.
-        /// </summary>
-        /// <remark>Value is null when bot is installed for first time.</remark>
-        public bool IsWelcomeCardSent { get; set; }
     }
 }
