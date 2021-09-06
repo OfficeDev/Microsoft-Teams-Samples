@@ -20,13 +20,13 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                BeginFormflowAsync,
-                SaveResultAsync,
+                BeginBeginDialogExampleDialogAsync,
+                ContinueBeginDialogExampleDialogAsync,
             }));
             AddDialog(new HelpDialog(conversationState));
         }
 
-        private async Task<DialogTurnResult> BeginFormflowAsync(
+        private async Task<DialogTurnResult> BeginBeginDialogExampleDialogAsync(
             WaterfallStepContext stepContext,
             CancellationToken cancellationToken = default(CancellationToken))
         {
@@ -46,7 +46,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                         nameof(HelloDialog));
         }
 
-        private async Task<DialogTurnResult> SaveResultAsync(
+        private async Task<DialogTurnResult> ContinueBeginDialogExampleDialogAsync(
             WaterfallStepContext stepContext,
             CancellationToken cancellationToken = default(CancellationToken))
         {

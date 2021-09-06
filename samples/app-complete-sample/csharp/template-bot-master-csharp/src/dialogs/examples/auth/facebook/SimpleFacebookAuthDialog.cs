@@ -56,9 +56,7 @@ CancellationToken cancellationToken = default(CancellationToken))
             await this._conversationState.SetAsync(stepContext.Context, currentState);
             await LogIn(stepContext);
 
-            return await stepContext.NextAsync(
-                    nameof(SimpleFacebookAuthDialog),
-                    cancellationToken: cancellationToken);
+            return await stepContext.ContinueDialogAsync();
         }
 
         private async Task<DialogTurnResult> SaveResultAsync(

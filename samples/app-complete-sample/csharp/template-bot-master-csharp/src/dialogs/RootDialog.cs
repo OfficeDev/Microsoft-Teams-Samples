@@ -26,7 +26,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                PromptForOptionsAsync
+                BeginRootDialogAsync
             }));
             AddDialog(new FetchRosterDialog(this._conversationState));
             AddDialog(new ListNamesDialog());
@@ -59,7 +59,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             AddDialog(new VSTSGetworkItemDialog(this._privateState));
         }
 
-        private async Task<DialogTurnResult> PromptForOptionsAsync(
+        private async Task<DialogTurnResult> BeginRootDialogAsync(
             WaterfallStepContext stepContext,
             CancellationToken cancellationToken = default(CancellationToken))
         {
@@ -261,6 +261,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                 "I don't recognize that option.",
                 cancellationToken: cancellationToken);
             // Continue through to the next step without starting a child dialog.
+            await this._privateCoversationState.SaveChangesAsync(stepContext.Context, false, cancellationToken);
             return await stepContext.EndDialogAsync(null, cancellationToken);
         }
 

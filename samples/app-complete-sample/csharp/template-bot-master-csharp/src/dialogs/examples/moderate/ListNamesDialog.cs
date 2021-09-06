@@ -24,27 +24,16 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                BeginFormflowAsync,
-                SaveResultAsync,
+                BeginListNamesDialogAsync
             }));
         }
 
-        private async Task<DialogTurnResult> BeginFormflowAsync(
+        private async Task<DialogTurnResult> BeginListNamesDialogAsync(
 WaterfallStepContext stepContext,
 CancellationToken cancellationToken = default(CancellationToken))
         {
             await stepContext.Context.SendActivityAsync(Strings.RosterWelcomeMsgTitle);
 
-            // Begin the Formflow dialog.
-            return await stepContext.NextAsync(
-                nameof(ListNamesDialog),
-                cancellationToken: cancellationToken);
-        }
-
-        private async Task<DialogTurnResult> SaveResultAsync(
-    WaterfallStepContext stepContext,
-    CancellationToken cancellationToken = default(CancellationToken))
-        {
             var connectorClient = new ConnectorClient(new Uri(stepContext.Context.Activity.ServiceUrl), ConfigurationManager.AppSettings["MicrosoftAppId"], ConfigurationManager.AppSettings["MicrosoftAppPassword"]);
 
             var response = await connectorClient.Conversations.GetConversationMembersAsync(stepContext.Context.Activity.Conversation.Id);

@@ -23,11 +23,11 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                BeginFormflowAsync,
+                BeginO365ConnectorCardDialogAsync,
             }));
         }
 
-        private async Task<DialogTurnResult> BeginFormflowAsync(
+        private async Task<DialogTurnResult> BeginO365ConnectorCardDialogAsync(
 WaterfallStepContext stepContext,
 CancellationToken cancellationToken = default(CancellationToken))
         {

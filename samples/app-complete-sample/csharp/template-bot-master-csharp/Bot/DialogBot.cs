@@ -1,6 +1,7 @@
 ﻿using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Teams;
+using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
@@ -9,7 +10,10 @@ using Microsoft.Teams.TemplateBotCSharp.utility;
 using Microsoft.Teams.TemplateBotCSharp.Utility;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,13 +24,13 @@ namespace Microsoft.Teams.TemplateBotCSharp.Bots
         protected readonly Dialog _dialog;
         protected readonly BotState _conversationState;
         protected readonly BotState _userState;
-       
+
         public DialogBot(ConversationState conversationState, T dialog, UserState userState)
         {
             _conversationState = conversationState;
             _dialog = dialog;
             _userState = userState;
-            
+
         }
         protected override async Task OnMessageActivityAsync(
     ITurnContext<IMessageActivity> turnContext,
@@ -35,11 +39,20 @@ namespace Microsoft.Teams.TemplateBotCSharp.Bots
             //Set the Locale for Bot
             turnContext.Activity.Locale = TemplateUtility.GetLocale(turnContext.Activity);
 
+            // Run the Dialog with the new message Activity.
+            await _dialog.Run(
+            turnContext,
+            _conversationState.CreateProperty<DialogState>(nameof(DialogState)),
+            cancellationToken);
+
+            await _conversationState.SaveChangesAsync(turnContext, false, cancellationToken);
+        }
+
+        protected override async Task OnMessageReactionActivityAsync(ITurnContext<IMessageReactionActivity> turnContext, CancellationToken cancellationToken)
+        {
             if (turnContext.Activity.Type == ActivityTypes.MessageReaction)
             {
                 var reactions = turnContext.Activity.AsMessageReactionActivity();
-                var replytoId = turnContext.Activity.ReplyToId;
-
                 if (reactions.ReactionsAdded != null && reactions.ReactionsAdded.Count > 0)
                 {
                     await turnContext.SendActivityAsync(Strings.LikeMessage);
@@ -49,13 +62,16 @@ namespace Microsoft.Teams.TemplateBotCSharp.Bots
                     await turnContext.SendActivityAsync(Strings.RemoveLike);
                 }
             }
-                // Run the Dialog with the new message Activity.
-                await _dialog.Run(
-                turnContext,
-                _conversationState.CreateProperty<DialogState>(nameof(DialogState)),
-                cancellationToken);
+        }
 
-            await _conversationState.SaveChangesAsync(turnContext, false, cancellationToken);
+        protected override async Task OnTeamsO365ConnectorCardActionAsync(ITurnContext<IInvokeActivity> turnContext, O365ConnectorCardActionQuery query, CancellationToken cancellationToken)
+        {
+            await HandleO365ConnectorCardActionQuery(turnContext, query);
+        }
+
+        protected override async Task OnSignInInvokeAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
+        {
+            await PopUpSignInHandler(turnContext);
         }
 
         /// <summary>
@@ -98,6 +114,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Bots
                 throw;
             }
         }
+
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
             await base.OnTurnAsync(turnContext, cancellationToken);
@@ -115,16 +132,16 @@ namespace Microsoft.Teams.TemplateBotCSharp.Bots
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             turnContext = turnContext ?? throw new ArgumentNullException(nameof(turnContext));
-                   var activity = turnContext.Activity;
- 
-                if (activity.Conversation.ConversationType == "personal")
+            var activity = turnContext.Activity;
+
+            if (activity.Conversation.ConversationType == "personal")
+            {
+                if (activity.MembersAdded != null && activity.MembersAdded.Any(member => member.Id == activity.Recipient.Id))
                 {
-                    if (activity.MembersAdded != null && activity.MembersAdded.Any(member => member.Id == activity.Recipient.Id))
-                    {
-                        await this.SendWelcomeMessagePersonalScopeAsync(turnContext);
-                    }
+                    await this.SendWelcomeMessagePersonalScopeAsync(turnContext);
                 }
-         }
+            }
+        }
 
         protected override async Task OnMembersRemovedAsync(IList<ChannelAccount> membersRemoved, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
@@ -132,8 +149,9 @@ namespace Microsoft.Teams.TemplateBotCSharp.Bots
             await this._conversationState.ClearStateAsync(turnContext, cancellationToken);
             await this._userState.ClearStateAsync(turnContext, cancellationToken);
         }
+
         /// <summary>
-        /// Sent welcome card to personal chat.
+        /// Sent welcome message to personal chat.
         /// </summary>
         /// <param name="turnContext">Provides context for a turn in a bot.</param>
         /// <returns>A task that represents a response.</returns>
@@ -148,6 +166,37 @@ namespace Microsoft.Teams.TemplateBotCSharp.Bots
                 await userStateAccessors.SetAsync(turnContext, userConversationState);
                 await turnContext.SendActivityAsync(MessageFactory.Text(Strings.BotWelcomeMessage));
             }
+        }
+
+        private static async Task HandleO365ConnectorCardActionQuery(ITurnContext<IInvokeActivity> turnContext, O365ConnectorCardActionQuery query)
+        {
+
+            var connectorClient = new ConnectorClient(new Uri(turnContext.Activity.ServiceUrl), ConfigurationManager.AppSettings["MicrosoftAppId"], ConfigurationManager.AppSettings["MicrosoftAppPassword"]);
+            // Get O365 connector card query data.
+            O365ConnectorCardActionQuery o365CardQuery = query;
+
+            IMessageActivity replyActivity = turnContext.Activity.AsMessageActivity();
+            replyActivity.TextFormat = "xml";
+            replyActivity.Text = $@"
+            <h2>Thanks, {turnContext.Activity.From.Name}</h2><br/>
+            <h3>Your input action ID:</h3><br/>
+            <pre>{o365CardQuery.ActionId}</pre><br/>
+            <h3>Your input body:</h3><br/>
+            <pre>{o365CardQuery.Body}</pre>";
+
+            ResourceResponse resp = await connectorClient.Conversations.UpdateActivityAsync(turnContext.Activity.Conversation.Id, turnContext.Activity.ReplyToId, (Activity)replyActivity);
+            // await turnContext.SendActivityAsync("abc");
+        }
+
+        /// <summary>
+        /// Handle the PopUp SignIn requests
+        /// </summary>
+        /// <param name="turnContext"></param>
+        /// <returns></returns>
+        private static async Task<HttpResponseMessage> PopUpSignInHandler(ITurnContext<IInvokeActivity> turnContext)
+        {
+            await turnContext.SendActivityAsync("Authentication Successful");
+            return new HttpResponseMessage(HttpStatusCode.OK);
         }
     }
 }

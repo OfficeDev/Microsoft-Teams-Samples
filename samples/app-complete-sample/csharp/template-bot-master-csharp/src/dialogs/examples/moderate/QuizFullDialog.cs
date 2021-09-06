@@ -25,7 +25,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                BeginFormflowAsync,
+                BeginQuizFullDialogAsync,
                 ResumeAfterRunQuiz1Dialog,
                 ResumeAfterBeginQuiz2
             }));
@@ -33,7 +33,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             AddDialog(new Quiz2Dialog(conversationState));
         }
 
-        private async Task<DialogTurnResult> BeginFormflowAsync(
+        private async Task<DialogTurnResult> BeginQuizFullDialogAsync(
             WaterfallStepContext stepContext,
             CancellationToken cancellationToken = default(CancellationToken))
         {
