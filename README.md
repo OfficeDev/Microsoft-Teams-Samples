@@ -208,7 +208,7 @@
 [app-sso#js]:samples/app-sso/nodejs
 [meetings-stage-view#js]:samples/meetings-stage-view/nodejs
 [meetings-stage-view#cs]:samples/meetings-stage-view/csharp
-meetings-events#cs]:samples/meetings-events/csharp
+[meetings-events#cs]:samples/meetings-events/csharp
 [meetings-events#js]:samples/meetings-events/nodejs
 
 [graph#rsc#cs]:samples/graph-rsc/csharp
