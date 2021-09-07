@@ -31,8 +31,8 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
         }
 
             private async Task<DialogTurnResult> BeginFetchRosterDialogAsync(
-    WaterfallStepContext stepContext,
-    CancellationToken cancellationToken = default(CancellationToken))
+                WaterfallStepContext stepContext,
+                CancellationToken cancellationToken = default(CancellationToken))
             {
                 await stepContext.Context.SendActivityAsync(Strings.RosterWelcomeMsgTitle);
 

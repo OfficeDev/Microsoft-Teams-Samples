@@ -23,8 +23,8 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
         }
 
         private async Task<DialogTurnResult> BeginMultiDialog1Async(
-WaterfallStepContext stepContext,
-CancellationToken cancellationToken = default(CancellationToken))
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             await stepContext.Context.SendActivityAsync(Strings.HelpCaptionMultiDialog1);
 

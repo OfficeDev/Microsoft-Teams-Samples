@@ -16,7 +16,6 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// <summary>
     /// This is Fetch Teams Info Dialog Class main purpose of this dialog class is to display Team Name, TeamId and AAD GroupId.
     /// </summary>
-    [Serializable]
     public class FetchTeamsInfoDialog : ComponentDialog
     {
         protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
@@ -31,8 +30,8 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
         }
 
         private async Task<DialogTurnResult> BeginFetchTeamsInfoDialogAsync(
-WaterfallStepContext stepContext,
-CancellationToken cancellationToken = default(CancellationToken))
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             if (stepContext == null)
             {
@@ -45,10 +44,8 @@ CancellationToken cancellationToken = default(CancellationToken))
                 var connectorClient = new ConnectorClient(new Uri(stepContext.Context.Activity.ServiceUrl), ConfigurationManager.AppSettings["MicrosoftAppId"], ConfigurationManager.AppSettings["MicrosoftAppPassword"]);
 
                 // Handle for channel conversation, AAD GroupId only exists within channel
-                //TeamDetails teamDetails = await connectorClient.GetTeamsConnectorClient().Teams.FetchTeamDetailsAsync(team.Id);
-
                 var message = stepContext.Context.Activity;
-                //message.Text = GenerateTable(teamDetails);
+                message.Text = GenerateTable(team);
 
                 await stepContext.Context.SendActivityAsync(message);
             }
@@ -65,12 +62,13 @@ CancellationToken cancellationToken = default(CancellationToken))
 
             return await stepContext.EndDialogAsync(null, cancellationToken);
         }
+
         /// <summary>
         /// Generate HTML dynamically to show TeamId, TeamName and AAD GroupId in table format 
         /// </summary>
         /// <param name="teamDetails"></param>
         /// <returns></returns>
-        private string GenerateTable(TeamDetails teamDetails)
+        private string GenerateTable(TeamInfo teamDetails)
         {
             if (teamDetails == null)
             {

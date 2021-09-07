@@ -39,8 +39,8 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
         }
 
         private async Task<DialogTurnResult> BeginQuizAsync(
-           WaterfallStepContext stepContext,
-           CancellationToken cancellationToken = default(CancellationToken))
+              WaterfallStepContext stepContext,
+              CancellationToken cancellationToken = default(CancellationToken))
         {
             if (stepContext == null)
             {
@@ -63,8 +63,8 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
         }
 
         private async Task<DialogTurnResult> EndQuiz1DialogAsync(
-          WaterfallStepContext stepContext,
-          CancellationToken cancellationToken = default(CancellationToken))
+             WaterfallStepContext stepContext,
+             CancellationToken cancellationToken = default(CancellationToken))
         {
             var optionSelected = (stepContext.Result as FoundChoice).Value;
             if (optionSelected.ToLower() == Strings.OptionYes)

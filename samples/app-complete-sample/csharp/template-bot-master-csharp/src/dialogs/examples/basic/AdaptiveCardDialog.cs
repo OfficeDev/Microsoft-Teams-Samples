@@ -30,8 +30,8 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
         }
 
         private async Task<DialogTurnResult> BeginAdaptiveCardDialogAsync(
-WaterfallStepContext stepContext,
-CancellationToken cancellationToken = default(CancellationToken))
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             if (stepContext == null)
             {
@@ -415,11 +415,11 @@ CancellationToken cancellationToken = default(CancellationToken))
             return false;
         }
 
-        ///// <summary>
-        ///// Handle adaptive card request
-        ///// </summary>
-        ///// <param name="activity"></param>
-        ///// <returns></returns>
+        /// <summary>
+        /// Handle adaptive card request
+        /// </summary>
+        /// <param name="activity"></param>
+        /// <returns></returns>
         private async Task SendAdaptiveCardValues(WaterfallStepContext context, Activity activity)
         {
             var submitValue = context.Context.Activity;

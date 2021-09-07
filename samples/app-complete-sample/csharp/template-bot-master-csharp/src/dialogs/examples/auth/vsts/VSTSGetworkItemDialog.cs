@@ -35,16 +35,22 @@ namespace Microsoft.Teams.TemplateBotCSharp
         }
 
         private async Task<DialogTurnResult> BeginFormflowAsync(
-WaterfallStepContext stepContext,
-CancellationToken cancellationToken = default(CancellationToken))
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             await stepContext.Context.SendActivityAsync(Strings.VSTSGetWorkItemPrompt);
-            return await stepContext.ContinueDialogAsync();
+            return await stepContext.PromptAsync(
+                    nameof(TextPrompt),
+                    new PromptOptions
+                    {
+                        Prompt = new Activity(),
+                    },
+                    cancellationToken);
         }
 
         private async Task<DialogTurnResult> SaveResultAsync(
-    WaterfallStepContext stepContext,
-    CancellationToken cancellationToken = default(CancellationToken))
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             var msg = stepContext.Result as IMessageActivity;
             ConversationReference conversationReference;
@@ -149,7 +155,6 @@ CancellationToken cancellationToken = default(CancellationToken))
                 reply.Attachments.Add(loginCard.ToAttachment());
 
                 await context.Context.SendActivityAsync(reply);
-                await context.ContinueDialogAsync();
             }
             else
             {

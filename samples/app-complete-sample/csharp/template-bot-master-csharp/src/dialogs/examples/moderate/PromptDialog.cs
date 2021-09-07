@@ -71,8 +71,8 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
         }
 
         private async Task<DialogTurnResult> GetNameAsync(
-          WaterfallStepContext stepContext,
-          CancellationToken cancellationToken = default(CancellationToken))
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             var userName = stepContext.Result as string;
             await stepContext.Context.SendActivityAsync(Strings.PlayGameAnswerForName + userName);

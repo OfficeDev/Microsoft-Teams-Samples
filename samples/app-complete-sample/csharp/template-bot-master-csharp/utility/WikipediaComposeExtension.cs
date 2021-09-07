@@ -71,7 +71,6 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
             var activity = turnContext.Activity;
             bool isSettingUrl = false;
 
-            //var composeExtensionQuery = activity.GetComposeExtensionQueryData();
             if (string.Equals(activity.Name.ToLower(), Strings.ComposeExtensionQuerySettingUrl))
             {
                 isSettingUrl = true;
@@ -87,15 +86,15 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
             if (userData == null)
             {
                 composeExtensionResponse = new MessagingExtensionResponse();
-               string message = Strings.ComposeExtensionNoUserData;
-               composeExtensionResponse.ComposeExtension = GetMessageResponseResult(message);
-               return composeExtensionResponse;
+                string message = Strings.ComposeExtensionNoUserData;
+                composeExtensionResponse.ComposeExtension = GetMessageResponseResult(message);
+                return composeExtensionResponse;
             }
 
             /**
-                * Below are the checks for various states that may occur
-                * Note that the order of many of these blocks of code do matter
-             */
+            * Below are the checks for various states that may occur
+            * Note that the order of many of these blocks of code do matter
+            */
 
             // situation where the incoming payload was received from the config popup
 
@@ -107,15 +106,15 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
                 // then the word setting will not retrigger the config experience
                 **/
 
-                //queryParameter = "";
-                // initialRunParameter = "true";
+                queryParameter = "";
+                initialRunParameter = "true";
             }
 
             // this is a sitaution where the user's preferences have not been set up yet
-            if (query.State == null)
+            if (userData.ComposeExtensionCardType == null)
             {
-               composeExtensionResponse = GetConfig();
-               return composeExtensionResponse;
+                composeExtensionResponse = GetConfig();
+                return composeExtensionResponse;
             }
 
             /**
@@ -152,20 +151,20 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
 
             if (initialRunParameter == "true")
             {
-                //Signin Experience, please uncomment below code for Signin Experience
-              //composeExtensionResponse = GetSignin(composeExtensionResponse);
-               //return composeExtensionResponse;
+                // Signin Experience, please uncomment below code for Signin Experience
+                // ComposeExtensionResponse = GetSignin(composeExtensionResponse);
+                // Return composeExtensionResponse;
 
-               composeExtensionResponse = new MessagingExtensionResponse();
+                composeExtensionResponse = new MessagingExtensionResponse();
 
-               var historySearchWikiResult = userData.ComposeExtensionSelectedResults;
+                var historySearchWikiResult = userData.ComposeExtensionSelectedResults;
                 if (historySearchWikiResult != null)
                 {
                     foreach (var searchResult in historySearchWikiResult)
                     {
                         WikiHelperSearchResult wikiSearchResult = new WikiHelperSearchResult(searchResult.imageUrl, searchResult.highlightedTitle, searchResult.text);
 
-                        // create the card itself and the preview card based upon the information
+                        // Create the card itself and the preview card based upon the information
                         var createdCardAttachment = TemplateUtility.CreateComposeExtensionCardsAttachments(wikiSearchResult, userPreferredCardType);
                         composeExtensionAttachments.Add(createdCardAttachment);
                     }
@@ -191,20 +190,20 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
 
             WikiResult wikiResult = await SearchWiki(queryParameter, query);
 
-            //// enumerate search results and build Promises for cards for response
-           foreach (var searchResult in wikiResult.query.search)
-           {
+            // enumerate search results and build Promises for cards for response
+            foreach (var searchResult in wikiResult.query.search)
+            {
                 //Get the Image result on the basis of Image Title one by one
-               imageResult = await SearchWikiImage(searchResult);
+                imageResult = await SearchWikiImage(searchResult);
 
                 //Get the Image Url from imageResult
                 string imageUrl = GetImageURL(imageResult);
 
                 string cardText = searchResult.snippet + " ...";
 
-               WikiHelperSearchResult wikiSearchResult = new WikiHelperSearchResult(imageUrl, searchResult.title, cardText);
+                WikiHelperSearchResult wikiSearchResult = new WikiHelperSearchResult(imageUrl, searchResult.title, cardText);
 
-            //    // create the card itself and the preview card based upon the information
+                // Create the card itself and the preview card based upon the information
                 var createdCardAttachment = TemplateUtility.CreateComposeExtensionCardsAttachments(wikiSearchResult, userPreferredCardType);
                 composeExtensionAttachments.Add(createdCardAttachment);
             }
@@ -284,6 +283,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
 
             return composeExtensionResponse;
         }
+
         public async Task<WikiResult> SearchWiki(string queryParameter, MessagingExtensionQuery composeExtensionQuery)
         {
             string searchApiUrl = SearchApiUrlFormat.Replace("[keyword]", queryParameter);
@@ -347,7 +347,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
         public MessagingExtensionResponse GetConfig()
         {
             string configUrl = ConfigurationManager.AppSettings["BaseUri"].ToString() + "/composeExtensionSettings.html";
-            CardAction configExp = new CardAction(ActionTypes.OpenUrl, "Config", null,null,null, configUrl);
+            CardAction configExp = new CardAction(ActionTypes.OpenUrl, "Config", null, null, null, configUrl);
             List<CardAction> cardActions = new List<CardAction>();
             cardActions.Add(configExp);
             MessagingExtensionResponse composeExtensionResponse = new MessagingExtensionResponse();

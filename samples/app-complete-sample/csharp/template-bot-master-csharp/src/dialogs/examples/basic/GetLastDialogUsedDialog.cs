@@ -21,8 +21,8 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
         }
 
         private async Task<DialogTurnResult> BeginGetLastDialogUsedDialogAsync(
-WaterfallStepContext stepContext,
-CancellationToken cancellationToken = default(CancellationToken))
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             string dialogName = string.Empty;
             var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());

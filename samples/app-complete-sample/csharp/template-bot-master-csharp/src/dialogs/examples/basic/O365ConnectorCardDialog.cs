@@ -28,8 +28,8 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
         }
 
         private async Task<DialogTurnResult> BeginO365ConnectorCardDialogAsync(
-WaterfallStepContext stepContext,
-CancellationToken cancellationToken = default(CancellationToken))
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             if (stepContext == null)
             {
@@ -41,7 +41,7 @@ CancellationToken cancellationToken = default(CancellationToken))
             currentState.LastDialogKey = Strings.LastDialogConnectorCardDialog;
             await this._conversationState.SetAsync(stepContext.Context, currentState);
 
-            // get the input number for the example to show if the user passed it into the command - e.g. 'show connector card 2'
+            // Get the input number for the example to show if the user passed it into the command - e.g. 'show connector card 2'
             var activity = (IMessageActivity)stepContext.Context.Activity;
 
             string inputNumber = activity.Text.Substring(activity.Text.Length - 1, 1).Trim();

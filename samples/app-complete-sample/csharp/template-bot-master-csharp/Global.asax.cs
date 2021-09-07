@@ -20,8 +20,8 @@ namespace Microsoft.Teams.TemplateBotCSharp
             GlobalConfiguration.Configure(BotConfig.Register);
         }
 
-        //setting Bot data store policy to use last write win
-        //example if bot service got restarted, existing conversation would just overwrite data to store
+        // Setting Bot data store policy to use last write win
+        // Example if bot service got restarted, existing conversation would just overwrite data to store
         public static class BotConfig
         {
             public static void Register(HttpConfiguration config)

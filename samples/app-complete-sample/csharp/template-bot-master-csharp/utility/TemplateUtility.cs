@@ -71,6 +71,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
         {
             return GetComposeExtensionMainResultAttachment(wikiResult, selectedType).ToMessagingExtensionAttachment();
         }
+
         public static Attachment GetComposeExtensionMainResultAttachment(WikiHelperSearchResult wikiResult, string selectedType)
         {
             CardType cardType;

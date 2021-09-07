@@ -29,8 +29,8 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
         }
 
         private async Task<DialogTurnResult> BeginProactiveMsgTo1to1DialogAsync(
-WaterfallStepContext stepContext,
-CancellationToken cancellationToken = default(CancellationToken))
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             await stepContext.Context.SendActivityAsync(Strings.Send1on1ConfirmMsg);
             if (stepContext == null)

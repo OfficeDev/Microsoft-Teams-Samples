@@ -17,7 +17,6 @@ namespace Microsoft.Teams.TemplateBotCSharp
     /// </summary>
     public class SimpleFacebookAuthDialog : ComponentDialog
     {
-
         /// <summary>
         /// OAuth callback registered for Facebook app.
         /// <see cref="Controllers.OAuthCallbackController"/> implementats the callback.
@@ -33,6 +32,7 @@ namespace Microsoft.Teams.TemplateBotCSharp
         public static readonly string AuthTokenKey = ConfigurationManager.AppSettings["FBAuthToken"].ToString();
 
         protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+
         protected readonly IStatePropertyAccessor<PrivateConversationData> _privateCoversationState;
         public SimpleFacebookAuthDialog(IStatePropertyAccessor<RootDialogState> conversationState, IStatePropertyAccessor<PrivateConversationData> privateCoversationState) : base(nameof(SimpleFacebookAuthDialog))
         {
@@ -48,20 +48,26 @@ namespace Microsoft.Teams.TemplateBotCSharp
         }
 
         private async Task<DialogTurnResult> BeginFormflowAsync(
-WaterfallStepContext stepContext,
-CancellationToken cancellationToken = default(CancellationToken))
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
             currentState.LastDialogKey = Strings.LastDialogFacebookDialog;
             await this._conversationState.SetAsync(stepContext.Context, currentState);
             await LogIn(stepContext);
 
-            return await stepContext.ContinueDialogAsync();
+            return await stepContext.PromptAsync(
+                    nameof(TextPrompt),
+                    new PromptOptions
+                    {
+                        Prompt = new Activity(),
+                    },
+                    cancellationToken);
         }
 
         private async Task<DialogTurnResult> SaveResultAsync(
-    WaterfallStepContext stepContext,
-    CancellationToken cancellationToken = default(CancellationToken))
+             WaterfallStepContext stepContext,
+             CancellationToken cancellationToken = default(CancellationToken))
         {
             var msg = stepContext.Result as IMessageActivity;
             FacebookAcessToken facebookToken = new FacebookAcessToken();
@@ -143,7 +149,7 @@ CancellationToken cancellationToken = default(CancellationToken))
             string token;
             var currentPrivateConversationData = await this._privateCoversationState.GetAsync(context.Context, () => new PrivateConversationData());
             token = currentPrivateConversationData.AuthTokenKey;
-            if (currentPrivateConversationData.AuthTokenKey!=null)
+            if (currentPrivateConversationData.AuthTokenKey==null)
             {
                 var conversationReference = context.Context.Activity.GetConversationReference();
                 currentPrivateConversationData.PersistedCookie = conversationReference;
@@ -159,12 +165,11 @@ CancellationToken cancellationToken = default(CancellationToken))
                 {
                     Title = Strings.FBLoginCardPrompt,
                     Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, Strings.FBLoginCardButtonCaption, value: fbLoginUrl) }
-                };
+                }.ToAttachment();
 
-                reply.Attachments.Add(loginCard.ToAttachment());
+                reply.Attachments = new List<Attachment> { loginCard };
 
                 await context.Context.SendActivityAsync(reply);
-                await context.ContinueDialogAsync();
             }
             else
             {

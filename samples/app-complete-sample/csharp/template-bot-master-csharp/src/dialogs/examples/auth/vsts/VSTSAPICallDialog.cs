@@ -49,20 +49,26 @@ namespace Microsoft.Teams.TemplateBotCSharp
         }
 
         private async Task<DialogTurnResult> BeginFormflowAsync(
-WaterfallStepContext stepContext,
-CancellationToken cancellationToken = default(CancellationToken))
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
             currentState.LastDialogKey = Strings.LastDialogVSTSDialog;
             await this._conversationState.SetAsync(stepContext.Context, currentState);
             await LogIn(stepContext);
 
-            return await stepContext.ContinueDialogAsync();
+            return await stepContext.PromptAsync(
+                    nameof(TextPrompt),
+                    new PromptOptions
+                    {
+                        Prompt = new Activity(),
+                    },
+                    cancellationToken);
         }
 
         private async Task<DialogTurnResult> SaveResultAsync(
-    WaterfallStepContext stepContext,
-    CancellationToken cancellationToken = default(CancellationToken))
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             var msg = stepContext.Result as IMessageActivity;
             VSTSAcessToken facebookToken = new VSTSAcessToken();
@@ -145,7 +151,6 @@ CancellationToken cancellationToken = default(CancellationToken))
                 reply.Attachments.Add(loginCard.ToAttachment());
 
                 await context.Context.SendActivityAsync(reply);
-                await context.ContinueDialogAsync();
             }
             else
             {
