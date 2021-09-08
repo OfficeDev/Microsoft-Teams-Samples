@@ -1,10 +1,9 @@
-﻿using Autofac;
-using Microsoft.Bot.Builder;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Integration.AspNet.WebApi;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
-using Newtonsoft.Json;
 using System;
 using System.Configuration;
 using System.Net;
@@ -17,11 +16,16 @@ namespace Microsoft.Teams.TemplateBotCSharp
 {
     public class OAuthCallbackController : ApiController
     {
+        /// <summary>
+        /// Bot adapter.
+        /// </summary>
+        private readonly BotFrameworkHttpAdapter botAdapter;
+
         protected readonly IStatePropertyAccessor<PrivateConversationData> _privateCoversationState;
-        public OAuthCallbackController(PrivateConversationState privateCoversationState)
+        public OAuthCallbackController(PrivateConversationState privateCoversationState, BotFrameworkHttpAdapter adapter)
         {
             _privateCoversationState = privateCoversationState.CreateProperty<PrivateConversationData>(nameof(PrivateConversationData));
-
+            botAdapter = adapter;
         }
         /// <summary>
         /// Facebook OAuth Callback Method
@@ -51,13 +55,12 @@ namespace Microsoft.Teams.TemplateBotCSharp
             {
                 Id = FacebookHelpers.TokenDecoder(conversationId)
             };
-            //conversationReferenceJSON.Bot.Id = FacebookHelpers.TokenDecoder(botId);
             conversationReferenceJSON.ChannelId = channelId;
-            //conversationReferenceJSON.User.Id = FacebookHelpers.TokenDecoder(userId);
-            //conversationReferenceJSON.Conversation.Id = FacebookHelpers.TokenDecoder(conversationId);
             conversationReferenceJSON.ServiceUrl = FacebookHelpers.TokenDecoder(serviceUrl);
+
             // Get the resumption cookie
             var conversationReference = conversationReferenceJSON;
+
             // Exchange the Facebook Auth code with Access token
             var accessToken = await FacebookHelpers.ExchangeCodeForAccessToken(conversationReference, code, SimpleFacebookAuthDialog.FacebookOauthCallback.ToString());
 
@@ -70,25 +73,29 @@ namespace Microsoft.Teams.TemplateBotCSharp
             var msg = conversationReference.GetContinuationActivity();
             msg.Text = $"token:{accessToken.AccessToken}";
 
-            // Resume the conversation to SimpleFacebookAuthDialog
-            //var currentState = await this._privateCoversationState.GetAsync(turnContext, () => new PrivateConversationData());
-                   //ConversationReference pending = currentState.PersistedCookie;
-            ConversationReference pending = null;
-            var connector = new ConnectorClient(new Uri(conversationReference.ServiceUrl), ConfigurationManager.AppSettings["MicrosoftAppId"], ConfigurationManager.AppSettings["MicrosoftAppPassword"]);
+            bool result = false;
+            await ((BotFrameworkAdapter)this.botAdapter).ContinueConversationAsync(ConfigurationManager.AppSettings["MicrosoftAppPassword"], conversationReference, async (conversationTurnContext, conversationCancellationToken) =>
+             {
+                 var currentState = await this._privateCoversationState.GetAsync(conversationTurnContext, () => new PrivateConversationData());
+                 ConversationReference pending = currentState.PersistedCookie;
+                 if (pending != null)
+                 {
+                     currentState.PersistedCookie = conversationReference;
+                     await this._privateCoversationState.SetAsync(conversationTurnContext, currentState);
 
-            if (pending == null)
+                     //Send message to Bot
+                     IMessageActivity message = Activity.CreateMessageActivity();
+                     message.From = conversationReference.User;
+                     message.Recipient = conversationReference.User;
+                     message.Conversation = new ConversationAccount(id: conversationReference.Conversation.Id);
+                     message.Text = Strings.OAuthCallbackUserPrompt;
+                     await conversationTurnContext.SendActivityAsync((Activity)message);
+                     result = true;
+                 }
+             }, CancellationToken.None);
+
+            if (result == true)
             {
-                //currentState.PersistedCookie = conversationReference;
-                //await this._privateCoversationState.SetAsync(turnContext, currentState);
-
-                //Send message to Bot
-                IMessageActivity message = Activity.CreateMessageActivity();
-                message.From = conversationReference.User;
-                message.Recipient = conversationReference.User;
-                message.Conversation = new ConversationAccount(id: conversationReference.Conversation.Id);
-                message.Text = Strings.OAuthCallbackUserPrompt;
-                await connector.Conversations.SendToConversationAsync((Activity)message);
-
                 return Request.CreateResponse(Strings.OAuthCallbackMessage);
             }
             else
