@@ -5,7 +5,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
 {
     public static partial class Middleware
     {
-        public static IMessageActivity StripAtMentionText(IMessageActivity activity)
+        public static Activity StripAtMentionText(Activity activity)
         {
             if (activity == null)
             {

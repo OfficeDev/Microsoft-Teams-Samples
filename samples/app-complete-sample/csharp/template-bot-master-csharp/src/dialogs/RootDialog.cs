@@ -3,6 +3,7 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
+using Microsoft.Teams.TemplateBotCSharp.Utility;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -63,7 +64,15 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             WaterfallStepContext stepContext,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var command = stepContext.Context.Activity.Text.Trim().ToLower();
+            var activity = stepContext.Context.Activity;
+            activity = Middleware.StripAtMentionText(activity);
+
+            // Set activity text if request is from an adaptive card submit action
+            activity = Middleware.AdaptiveCardSubmitActionHandler(activity);
+
+            // Set activity text if request is from an adaptive card submit action
+            activity = Middleware.AdaptiveCardSubmitActionHandler(activity);
+            var command = activity.Text.Trim().ToLower();
 
             if (command == DialogMatches.FetchRosterPayloadMatch)
             {
