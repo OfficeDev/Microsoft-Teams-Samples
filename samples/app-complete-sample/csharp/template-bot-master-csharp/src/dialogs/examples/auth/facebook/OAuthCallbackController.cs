@@ -36,14 +36,25 @@ namespace Microsoft.Teams.TemplateBotCSharp
         /// <returns></returns>
         [HttpGet]
         [Route("api/OAuthCallback")]
-        public async Task<HttpResponseMessage> OAuthCallback([FromUri] string userId, [FromUri] string botId, [FromUri] string conversationId, [FromUri] string channelId, [FromUri] string serviceUrl, [FromUri] string code, [FromUri] string state, CancellationToken token)
+        public async Task<HttpResponseMessage> OAuthCallback([FromUri] string userId, [FromUri] string botId, [FromUri] string conversationId, [FromUri] string serviceUrl, [FromUri] string channelId, [FromUri] string code, [FromUri] string state, CancellationToken token)
         {
-            ConversationReference conversationReferenceJSON = JsonConvert.DeserializeObject<ConversationReference>(state);
-
-            conversationReferenceJSON.Bot.Id = FacebookHelpers.TokenDecoder(botId);
+            ConversationReference conversationReferenceJSON = new ConversationReference();
+            conversationReferenceJSON.Bot = new ChannelAccount()
+            {
+                Id = FacebookHelpers.TokenDecoder(botId)
+            };
+            conversationReferenceJSON.User = new ChannelAccount()
+            {
+                Id = FacebookHelpers.TokenDecoder(userId)
+            };
+            conversationReferenceJSON.Conversation = new ConversationAccount()
+            {
+                Id = FacebookHelpers.TokenDecoder(conversationId)
+            };
+            //conversationReferenceJSON.Bot.Id = FacebookHelpers.TokenDecoder(botId);
             conversationReferenceJSON.ChannelId = channelId;
-            conversationReferenceJSON.User.Id = FacebookHelpers.TokenDecoder(userId);
-            conversationReferenceJSON.Conversation.Id = FacebookHelpers.TokenDecoder(conversationId);
+            //conversationReferenceJSON.User.Id = FacebookHelpers.TokenDecoder(userId);
+            //conversationReferenceJSON.Conversation.Id = FacebookHelpers.TokenDecoder(conversationId);
             conversationReferenceJSON.ServiceUrl = FacebookHelpers.TokenDecoder(serviceUrl);
             // Get the resumption cookie
             var conversationReference = conversationReferenceJSON;
@@ -60,14 +71,15 @@ namespace Microsoft.Teams.TemplateBotCSharp
             msg.Text = $"token:{accessToken.AccessToken}";
 
             // Resume the conversation to SimpleFacebookAuthDialog
-            var currentState = await this._privateCoversationState.GetAsync(turnContext, () => new PrivateConversationData());
-            ConversationReference pending = currentState.PersistedCookie;
+            //var currentState = await this._privateCoversationState.GetAsync(turnContext, () => new PrivateConversationData());
+                   //ConversationReference pending = currentState.PersistedCookie;
+            ConversationReference pending = null;
             var connector = new ConnectorClient(new Uri(conversationReference.ServiceUrl));
 
-            if (pending != null)
+            if (pending == null)
             {
-                currentState.PersistedCookie = conversationReference;
-                await this._privateCoversationState.SetAsync(turnContext, currentState);
+                //currentState.PersistedCookie = conversationReference;
+                //await this._privateCoversationState.SetAsync(turnContext, currentState);
 
                 //Send message to Bot
                 IMessageActivity message = Activity.CreateMessageActivity();

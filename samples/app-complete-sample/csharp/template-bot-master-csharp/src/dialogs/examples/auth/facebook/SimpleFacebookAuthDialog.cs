@@ -149,7 +149,7 @@ namespace Microsoft.Teams.TemplateBotCSharp
             string token;
             var currentPrivateConversationData = await this._privateCoversationState.GetAsync(context.Context, () => new PrivateConversationData());
             token = currentPrivateConversationData.AuthTokenKey;
-            if (currentPrivateConversationData.AuthTokenKey==null)
+            if (currentPrivateConversationData.AuthTokenKey == null)
             {
                 var conversationReference = context.Context.Activity.GetConversationReference();
                 currentPrivateConversationData.PersistedCookie = conversationReference;
