@@ -53,7 +53,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             AddDialog(new DisplayCardsDialog(this._conversationState));
             AddDialog(new O365ConnectorCardActionsDialog(this._conversationState));
             AddDialog(new O365ConnectorCardDialog(this._conversationState));
-            AddDialog(new SimpleFacebookAuthDialog(this._conversationState,this._privateState));
+            AddDialog(new SimpleFacebookAuthDialog());
             AddDialog(new VSTSAPICallDialog(this._conversationState, this._privateState));
             AddDialog(new VSTSGetworkItemDialog(this._privateState));
         }
@@ -230,17 +230,6 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             {
                 return await stepContext.BeginDialogAsync(
                         nameof(SimpleFacebookAuthDialog));
-            }
-            else if (command == DialogMatches.Facebooklogout)
-            {
-                var currentState = await this._privateState.GetAsync(stepContext.Context, () => new PrivateConversationData());
-                currentState.AuthTokenKey = null;
-                currentState.PersistedCookie = null;
-                currentState.Name = null;
-                await this._privateState.SetAsync(stepContext.Context, currentState);
-                await stepContext.Context.SendActivityAsync(Strings.FBSuccessfulLogoutPrompt);
-                await stepContext.Context.SendActivityAsync(Strings.FBSuccessfulLogoutLoginPrompt);
-                return await stepContext.EndDialogAsync(null, cancellationToken);
             }
             else if (command == DialogMatches.VSTSlogin)
             {

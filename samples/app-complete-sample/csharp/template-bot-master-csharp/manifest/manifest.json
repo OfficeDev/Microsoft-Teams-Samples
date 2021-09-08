@@ -24,7 +24,7 @@
   },
   "accentColor": "#3F487F",
   "staticTabs": [
-      {
+    {
       "contentUrl": "<<BASE_URI>>/public/tab/tabConfig/tab.aspx",
       "entityId": "statictab",
       "name": "Bot Info",
@@ -38,7 +38,7 @@
     {
       "configurationUrl": "<<BASE_URI>>/public/tab/tabConfig/index.html",
       "canUpdateConfiguration": false,
-       "scopes": [ "team", "groupchat" ]
+      "scopes": [ "team", "groupchat" ]
     }
   ],
   "bots": [
@@ -170,6 +170,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "<<BASE_URI_DOMAIN>>"
+    "token.botframework.com",
+    "*.ngrok.io"
   ]
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
@@ -17,35 +18,17 @@ namespace Microsoft.Teams.TemplateBotCSharp
     /// </summary>
     public class SimpleFacebookAuthDialog : ComponentDialog
     {
-        /// <summary>
-        /// OAuth callback registered for Facebook app.
-        /// <see cref="Controllers.OAuthCallbackController"/> implementats the callback.
-        /// </summary>
-        /// <remarks>
-        /// Make sure to replace this with the appropriate website url registered for your Facebook app.
-        /// </remarks>
-        public static readonly Uri FacebookOauthCallback = new Uri(ConfigurationManager.AppSettings["FBCallbackUrl"].ToString());
+        public static readonly string ConnectionName = ConfigurationManager.AppSettings["FBConnectionName"].ToString();
 
-        /// <summary>
-        /// The key that is used to keep the AccessToken in <see cref="Microsoft.Bot.Builder.Dialogs.Internals.IBotData.PrivateConversationData"/>
-        /// </summary>
-        public static readonly string AuthTokenKey = ConfigurationManager.AppSettings["FBAuthToken"].ToString();
-
-        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
-
-        protected readonly IStatePropertyAccessor<PrivateConversationData> _privateCoversationState;
-        public SimpleFacebookAuthDialog(IStatePropertyAccessor<RootDialogState> conversationState, IStatePropertyAccessor<PrivateConversationData> privateCoversationState) : base(nameof(SimpleFacebookAuthDialog))
+        public SimpleFacebookAuthDialog() : base(nameof(SimpleFacebookAuthDialog))
         {
-            this._conversationState = conversationState;
-            this._privateCoversationState = privateCoversationState;
-
             AddDialog(new OAuthPrompt(
                 nameof(OAuthPrompt),
                 new OAuthPromptSettings
                 {
-                    ConnectionName = "fbconnection",
-                    Text = "Please Sign In",
-                    Title = "Sign In",
+                    ConnectionName = ConnectionName,
+                    Text = "Login to facebook",
+                    Title = "Log In",
                     Timeout = 300000, // User has 5 minutes to login (1000 * 60 * 5)
                 }));
 
@@ -60,14 +43,9 @@ namespace Microsoft.Teams.TemplateBotCSharp
             }));
 
             InitialDialogId = nameof(WaterfallDialog);
-            //AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
-            //{
-            //    BeginFormflowAsync,
-            //    SaveResultAsync,
-            //}));
-            //AddDialog(new TextPrompt(nameof(TextPrompt)));
         }
 
+        // Shows the OAuthPrompt to the user to login if not already logged in.
         private async Task<DialogTurnResult> PromptStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             return await stepContext.BeginDialogAsync(nameof(OAuthPrompt), null, cancellationToken);
@@ -75,20 +53,18 @@ namespace Microsoft.Teams.TemplateBotCSharp
 
         private async Task<DialogTurnResult> LoginStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            // Get the token from the previous step. Note that we could also have gotten the
-            // token directly from the prompt itself. There is an example of this in the next method.
+            // Getting the token from the previous step.
             var tokenResponse = (TokenResponse)stepContext.Result;
             if (tokenResponse?.Token != null)
             {
-                // Pull in the data from the Microsoft Graph.
-                //var client = new SimpleGraphClient(tokenResponse.Token);
-                //var me = await client.GetMeAsync();
-                //var title = !string.IsNullOrEmpty(me.JobTitle) ?
-                //            me.JobTitle : "Unknown";
+                // Validating the access token.
+                var valid = await FacebookHelpers.ValidateAccessToken(tokenResponse.Token);
 
-                //await stepContext.Context.SendActivityAsync($"You're logged in as {me.DisplayName} ({me.UserPrincipalName}); you job title is: {title}");
-                await stepContext.Context.SendActivityAsync($"You're logged in as ");
+                // Getting basic facebook profile details.
+                FacebookProfile profile = await FacebookHelpers.GetFacebookProfileName(tokenResponse.Token);
+                var message = CreateFBMessage(stepContext, profile);
 
+                await stepContext.Context.SendActivityAsync(message);
                 return await stepContext.PromptAsync(nameof(ConfirmPrompt), new PromptOptions { Prompt = MessageFactory.Text("Would you like to view your token?") }, cancellationToken);
             }
 
@@ -96,6 +72,7 @@ namespace Microsoft.Teams.TemplateBotCSharp
             return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
         }
 
+        // Method to show calling the prompt again to get the token.
         private async Task<DialogTurnResult> DisplayTokenPhase1Async(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             await stepContext.Context.SendActivityAsync(MessageFactory.Text("Thank you."), cancellationToken);
@@ -103,20 +80,14 @@ namespace Microsoft.Teams.TemplateBotCSharp
             var result = (bool)stepContext.Result;
             if (result)
             {
-                // Call the prompt again because we need the token. The reasons for this are:
-                // 1. If the user is already logged in we do not need to store the token locally in the bot and worry
-                // about refreshing it. We can always just call the prompt again to get the token.
-                // 2. We never know how long it will take a user to respond. By the time the
-                // user responds the token may have expired. The user would then be prompted to login again.
-                //
-                // There is no reason to store the token locally in the bot because we can always just call
-                // the OAuth prompt to get the token or get a new token if needed.
+                // Example to show calling the prompt again to get the token.
                 return await stepContext.BeginDialogAsync(nameof(OAuthPrompt), cancellationToken: cancellationToken);
             }
 
             return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
         }
 
+        // Method to display the token.
         private async Task<DialogTurnResult> DisplayTokenPhase2Async(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             var tokenResponse = (TokenResponse)stepContext.Result;
@@ -127,73 +98,48 @@ namespace Microsoft.Teams.TemplateBotCSharp
 
             return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
         }
-        private async Task<DialogTurnResult> BeginFormflowAsync(
-            WaterfallStepContext stepContext,
-            CancellationToken cancellationToken = default(CancellationToken))
-        {
-            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
-            currentState.LastDialogKey = Strings.LastDialogFacebookDialog;
-            await this._conversationState.SetAsync(stepContext.Context, currentState);
-            await LogIn(stepContext);
 
-            return await stepContext.PromptAsync(
-                    nameof(TextPrompt),
-                    new PromptOptions
-                    {
-                        Prompt = MessageFactory.Text(Strings.OAuthCallbackUserPrompt),
-                    },
-                    cancellationToken);
+        protected override async Task<DialogTurnResult> OnBeginDialogAsync(DialogContext innerDc, object options, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var result = await LogoutAsync(innerDc, cancellationToken);
+            if (result != null)
+            {
+                return result;
+            }
+
+            return await base.OnBeginDialogAsync(innerDc, options, cancellationToken);
         }
 
-        private async Task<DialogTurnResult> SaveResultAsync(
-             WaterfallStepContext stepContext,
-             CancellationToken cancellationToken = default(CancellationToken))
+        protected override async Task<DialogTurnResult> OnContinueDialogAsync(DialogContext innerDc, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var msg = stepContext.Result as string;
-            FacebookAcessToken facebookToken = new FacebookAcessToken();
-            string magicNumber = string.Empty;
-            string token = string.Empty;
-            var currentPrivateConversationData = await this._privateCoversationState.GetAsync(stepContext.Context, () => new PrivateConversationData());
-
-            if (currentPrivateConversationData.PersistedCookie !=null)
+            var result = await LogoutAsync(innerDc, cancellationToken);
+            if (result != null)
             {
-                magicNumber = currentPrivateConversationData.PersistedCookie.User.Properties[ConfigurationManager.AppSettings["FBMagicNumberKey"].ToString()].ToString();
+                return result;
+            }
 
-                if (string.Equals(msg, magicNumber))
+            return await base.OnContinueDialogAsync(innerDc, cancellationToken);
+        }
+
+        private async Task<DialogTurnResult> LogoutAsync(DialogContext innerDc, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (innerDc.Context.Activity.Type == ActivityTypes.Message)
+            {
+                var text = innerDc.Context.Activity.Text.ToLowerInvariant();
+
+                // Allow logout anywhere in the command
+                if (text.IndexOf("logout") >= 0)
                 {
-                    currentPrivateConversationData.PersistedCookie.User.Properties[ConfigurationManager.AppSettings["FBIsValidatedKey"].ToString()] = true;
-                    await this._privateCoversationState.SetAsync(stepContext.Context, currentPrivateConversationData);
+                    // The UserTokenClient encapsulates the authentication processes.
+                    var userTokenClient = innerDc.Context.TurnState.Get<UserTokenClient>();
+                    await userTokenClient.SignOutUserAsync(innerDc.Context.Activity.From.Id, ConnectionName, innerDc.Context.Activity.ChannelId, cancellationToken).ConfigureAwait(false);
 
-                    token = currentPrivateConversationData.PersistedCookie.User.Properties[ConfigurationManager.AppSettings["FBAccessTokenKey"].ToString()].ToString();
-                    currentPrivateConversationData.AuthTokenKey = token;
-                    var valid = await FacebookHelpers.ValidateAccessToken(token);
-
-                    if (valid)
-                    {
-                        FacebookProfile profile = await FacebookHelpers.GetFacebookProfileName(token);
-                        var message = CreateFBMessage(stepContext, profile);
-
-                        await stepContext.Context.SendActivityAsync(message);
-                        await stepContext.Context.SendActivityAsync(Strings.FBLginSuccessPromptLogoutInfo);
-
-                        await this._privateCoversationState.SetAsync(stepContext.Context, currentPrivateConversationData);
-                        return await stepContext.EndDialogAsync(token);
-                    }
-                    return await stepContext.EndDialogAsync(token);
-                }
-                else
-                {
-                    //When entered number is not valid
-                    await stepContext.Context.SendActivityAsync(Strings.AuthMagicNumberNotMacthed);
-                    await LogIn(stepContext);
-                    return await stepContext.EndDialogAsync();
+                    await innerDc.Context.SendActivityAsync(MessageFactory.Text("You have been signed out."), cancellationToken);
+                    return await innerDc.CancelAllDialogsAsync(cancellationToken);
                 }
             }
-            else
-            {
-                await LogIn(stepContext);
-                return await stepContext.EndDialogAsync();
-            }
+
+            return null;
         }
 
         #region Create FB Profile Message Card
@@ -201,12 +147,8 @@ namespace Microsoft.Teams.TemplateBotCSharp
         {
             return new ThumbnailCard
             {
-                Title = Strings.FBLoginSuccessPrompt + " " + profile.Name + "(" + profile.Gender + ")",
+                Title = Strings.FBLoginSuccessPrompt + " " + profile.Name,
                 Images = new List<CardImage> { new CardImage(profile.ProfilePicture.data.url) },
-                Buttons = new List<CardAction>
-                    {
-                        new CardAction(ActionTypes.OpenUrl, Strings.FBCardButtonCaption, value: profile.link)
-                    }
             }.ToAttachment();
         }
 
@@ -218,45 +160,5 @@ namespace Microsoft.Teams.TemplateBotCSharp
             return message;
         }
         #endregion
-
-        /// <summary>
-        /// Login the user.
-        /// </summary>
-        /// <param name="context"> The Dialog context.</param>
-        /// <returns> A task that represents the login action.</returns>
-        private async Task LogIn(WaterfallStepContext context)
-        {
-            string token;
-            var currentPrivateConversationData = await this._privateCoversationState.GetAsync(context.Context, () => new PrivateConversationData());
-            token = currentPrivateConversationData.AuthTokenKey;
-            if (currentPrivateConversationData.AuthTokenKey == null)
-            {
-                var conversationReference = context.Context.Activity.GetConversationReference();
-                currentPrivateConversationData.PersistedCookie = conversationReference;
-                await this._privateCoversationState.SetAsync(context.Context, currentPrivateConversationData);
-
-                // sending the sigin card with Facebook login url
-                var reply = context.Context.Activity;
-                var fbLoginUrl = FacebookHelpers.GetFacebookLoginURL(conversationReference, FacebookOauthCallback.ToString());
-                reply.Text = Strings.FBLoginTitle;
-
-                //Login Card
-                var loginCard = new HeroCard
-                {
-                    Title = Strings.FBLoginCardPrompt,
-                    Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, Strings.FBLoginCardButtonCaption, value: fbLoginUrl) }
-                }.ToAttachment();
-
-                reply.Attachments = new List<Attachment> { loginCard };
-
-                await context.Context.SendActivityAsync(reply);
-            }
-            else
-            {
-                await context.Context.SendActivityAsync(Strings.FBLoginSessionExistsPrompt);
-                await context.Context.SendActivityAsync(Strings.FBLogoutPrompt);
-                await context.EndDialogAsync(token);
-            }
-        }
     }
 }
