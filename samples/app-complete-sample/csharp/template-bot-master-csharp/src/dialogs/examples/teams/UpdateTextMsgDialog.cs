@@ -42,6 +42,15 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             if (existingState.SetUpMsgKey!=null)
             {
                 IMessageActivity reply = stepContext.Context.Activity;
+                if (reply.Attachments != null)
+                {
+                    reply.Attachments = null;
+                }
+
+                if (reply.Entities.Count >= 1)
+                {
+                    reply.Entities.Remove(reply.Entities[0]);
+                }
                 reply.Text = Strings.UpdateMessagePrompt;
 
                 ConnectorClient client = new ConnectorClient(new Uri(stepContext.Context.Activity.ServiceUrl), ConfigurationManager.AppSettings["MicrosoftAppId"], ConfigurationManager.AppSettings["MicrosoftAppPassword"]);

@@ -63,6 +63,15 @@ CancellationToken cancellationToken = default(CancellationToken))
         private IMessageActivity CreateMultiDialog(WaterfallStepContext context)
         {
             var message = context.Context.Activity;
+            if (message.Attachments != null)
+            {
+                message.Attachments = null;
+            }
+
+            if (message.Entities.Count >= 1)
+            {
+                message.Entities.Remove(message.Entities[0]);
+            }
             var attachment = CreateMultiDialogCard();
             message.Attachments = new List<Attachment>() { attachment };
             return message;

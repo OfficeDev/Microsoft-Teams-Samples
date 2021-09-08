@@ -43,6 +43,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             if (!string.IsNullOrEmpty(stepContext.Context.Activity.ReplyToId))
             {
                 IMessageActivity activity = stepContext.Context.Activity;
+
                 updateCounter = TemplateUtility.ParseUpdateCounterJson((Activity)activity);
 
                 var updatedMessage = CreateUpdatedMessage(stepContext);
@@ -76,6 +77,10 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
         private IMessageActivity CreateUpdatedMessage(WaterfallStepContext context)
         {
             var message = context.Context.Activity;
+            if (message.Attachments != null)
+            {
+                message.Attachments = null;
+            }
             var attachment = CreateUpdatedCardAttachment();
             message.Attachments = new List<Attachment>() { attachment };
             return message;
