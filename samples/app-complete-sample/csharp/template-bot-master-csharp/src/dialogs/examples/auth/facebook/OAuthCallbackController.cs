@@ -74,7 +74,7 @@ namespace Microsoft.Teams.TemplateBotCSharp
             //var currentState = await this._privateCoversationState.GetAsync(turnContext, () => new PrivateConversationData());
                    //ConversationReference pending = currentState.PersistedCookie;
             ConversationReference pending = null;
-            var connector = new ConnectorClient(new Uri(conversationReference.ServiceUrl));
+            var connector = new ConnectorClient(new Uri(conversationReference.ServiceUrl), ConfigurationManager.AppSettings["MicrosoftAppId"], ConfigurationManager.AppSettings["MicrosoftAppPassword"]);
 
             if (pending == null)
             {

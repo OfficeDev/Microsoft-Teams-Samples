@@ -16,14 +16,12 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     public class RootDialog : ComponentDialog
     {
         protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
-        protected readonly BotState _privateCoversationState;
         protected readonly IStatePropertyAccessor<PrivateConversationData> _privateState;
-        public RootDialog(ConversationState conversationState, PrivateConversationState privateCoversationState)
+        public RootDialog(ConversationState conversationState)
             : base(nameof(RootDialog))
         {
-            this._privateCoversationState = privateCoversationState;
             this._conversationState = conversationState.CreateProperty<RootDialogState>(nameof(RootDialogState));
-            this._privateState = this._privateCoversationState.CreateProperty<PrivateConversationData>(nameof(PrivateConversationData));
+            this._privateState = conversationState.CreateProperty<PrivateConversationData>(nameof(PrivateConversationData));
             InitialDialogId = nameof(WaterfallDialog);
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
@@ -270,7 +268,6 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                 "I don't recognize that option.",
                 cancellationToken: cancellationToken);
             // Continue through to the next step without starting a child dialog.
-            await this._privateCoversationState.SaveChangesAsync(stepContext.Context, false, cancellationToken);
             return await stepContext.EndDialogAsync(null, cancellationToken);
         }
 

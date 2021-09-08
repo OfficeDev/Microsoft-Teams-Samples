@@ -60,7 +60,7 @@ namespace Microsoft.Teams.TemplateBotCSharp
                     nameof(TextPrompt),
                     new PromptOptions
                     {
-                        Prompt = new Activity(),
+                        Prompt = MessageFactory.Text(Strings.OAuthCallbackUserPrompt),
                     },
                     cancellationToken);
         }
@@ -69,7 +69,7 @@ namespace Microsoft.Teams.TemplateBotCSharp
              WaterfallStepContext stepContext,
              CancellationToken cancellationToken = default(CancellationToken))
         {
-            var msg = stepContext.Result as IMessageActivity;
+            var msg = stepContext.Result as string;
             FacebookAcessToken facebookToken = new FacebookAcessToken();
             string magicNumber = string.Empty;
             string token = string.Empty;
@@ -79,7 +79,7 @@ namespace Microsoft.Teams.TemplateBotCSharp
             {
                 magicNumber = currentPrivateConversationData.PersistedCookie.User.Properties[ConfigurationManager.AppSettings["FBMagicNumberKey"].ToString()].ToString();
 
-                if (string.Equals(msg.Text, magicNumber))
+                if (string.Equals(msg, magicNumber))
                 {
                     currentPrivateConversationData.PersistedCookie.User.Properties[ConfigurationManager.AppSettings["FBIsValidatedKey"].ToString()] = true;
                     await this._privateCoversationState.SetAsync(stepContext.Context, currentPrivateConversationData);
