@@ -45,6 +45,15 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
 
                 // Handle for channel conversation, AAD GroupId only exists within channel
                 var message = stepContext.Context.Activity;
+                if (message.Attachments != null)
+                {
+                    message.Attachments = null;
+                }
+
+                if (message.Entities.Count >= 1)
+                {
+                    message.Entities.Remove(message.Entities[0]);
+                }
                 message.Text = GenerateTable(team);
 
                 await stepContext.Context.SendActivityAsync(message);

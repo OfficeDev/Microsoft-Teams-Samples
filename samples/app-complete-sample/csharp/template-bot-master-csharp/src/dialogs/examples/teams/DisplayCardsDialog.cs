@@ -24,7 +24,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                 new Choice(Strings.DisplayCardO365ConnectorCard3) { Synonyms = new List<string> { Strings.DisplayCardO365ConnectorCard3 } },
                 new Choice(Strings.DisplayCardO365ConnectorActionableCardDefault) { Synonyms = new List<string> { Strings.DisplayCardO365ConnectorActionableCardDefault } },
                 new Choice(Strings.DisplayCardO365ConnectorActionableCard2) { Synonyms = new List<string> { Strings.DisplayCardO365ConnectorActionableCard2 } },
-                 new Choice(Strings.DisplayCardAdaptiveCard) { Synonyms = new List<string> { Strings.DisplayCardAdaptiveCard } }
+                new Choice(Strings.DisplayCardAdaptiveCard) { Synonyms = new List<string> { Strings.DisplayCardAdaptiveCard } }
             };
 
         public DisplayCardsDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(DisplayCardsDialog))

@@ -53,6 +53,15 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
         private IMessageActivity SetupMessage(WaterfallStepContext context)
         {
             var message = context.Context.Activity;
+            if (message.Attachments != null)
+            {
+                message.Attachments = null;
+            }
+
+            if (message.Entities.Count >= 1)
+            {
+                message.Entities.Remove(message.Entities[0]);
+            }
             var attachment = CreateCard();
             message.Attachments = new List<Attachment>() { attachment };
             return message;

@@ -55,6 +55,15 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             {
                 // create and send adaptive card
                 var message = stepContext.Context.Activity;
+                if (message.Attachments != null)
+                {
+                    message.Attachments = null;
+                }
+
+                if (message.Entities.Count >= 1)
+                {
+                    message.Entities.Remove(message.Entities[0]);
+                }
                 var attachment = GetAdaptiveCardAttachment();
                 message.Attachments = new List<Attachment>() { attachment };
                 await stepContext.Context.SendActivityAsync(message);

@@ -36,8 +36,16 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                 throw new ArgumentNullException(nameof(stepContext));
             }
 
-            var message = stepContext.Context.Activity;
+            var message =  stepContext.Context.Activity;
+            if (message.Attachments != null)
+            {
+                message.Attachments = null;
+            }
 
+            if (message.Entities.Count >= 1)
+            {
+                message.Entities.Remove(message.Entities[0]);
+            }
             //Set the Last Dialog in Conversation Data
             var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
             currentState.LastDialogKey = Strings.LastDialogHelpDialog;
