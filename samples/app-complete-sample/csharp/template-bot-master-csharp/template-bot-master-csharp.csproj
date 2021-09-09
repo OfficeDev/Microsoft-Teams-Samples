@@ -489,7 +489,6 @@
     <Compile Include="Bot\DialogBot.cs" />
     <Compile Include="Bot\DialogExtensions.cs" />
     <Compile Include="middleware\AdaptiveCardSubmitActionHandler.cs" />
-    <Compile Include="src\dialogs\examples\auth\facebook\OAuthCallbackController.cs" />
     <Compile Include="src\dialogs\examples\auth\facebook\SimpleFacebookAuthDialog.cs" />
     <Compile Include="src\dialogs\examples\auth\vsts\OAuthCallbackVSTSController.cs" />
     <Compile Include="src\dialogs\examples\auth\vsts\VSTSAPICallDialog.cs" />
