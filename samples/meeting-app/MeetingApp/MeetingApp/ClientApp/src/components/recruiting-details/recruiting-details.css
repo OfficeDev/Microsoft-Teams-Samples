@@ -1,0 +1,39 @@
+.container{
+    background-color: #f0f0f0;
+}
+
+.detailsContainer{
+    width: 60vw;
+}
+
+.questionsContainer{
+    width: 40vw;
+}
+
+.details-separator{
+    width: 100%;
+    color: #E1DFDD;
+}
+
+.details{
+    width: 25%;
+    border-right: 1px solid #E1DFDD;
+    min-height: 60px;
+}
+
+.source-details{
+    width: 25%;
+    min-height: 40px;
+}
+
+.basic-details-card{
+    height: 35vh;
+}
+
+.timeline-card{
+    height: 30vh;
+}
+
+.notes-card{
+    height: 22vh;
+}
