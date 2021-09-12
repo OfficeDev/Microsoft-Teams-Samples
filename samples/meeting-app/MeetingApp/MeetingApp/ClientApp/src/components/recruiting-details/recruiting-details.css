@@ -27,13 +27,46 @@
 }
 
 .basic-details-card{
-    height: 35vh;
+    min-height: 35vh;
 }
 
 .timeline-card{
-    height: 30vh;
+    min-height: 30vh;
 }
 
 .notes-card{
-    height: 22vh;
+    min-height: 22vh;
+}
+
+/* Styles for mobile view */
+
+.container-mobile{
+    background-color: #000;
+    color: #fff;
+    max-width: 320px;
+}
+
+.menu-item{
+    border-bottom: none !important;
+}
+
+.menu-item:hover{
+    border-bottom: none;
+}
+
+.ui-menu__itemwrapper, .ui-menu__itemcontent{
+    color: #fff;
+}
+
+.questions-card-mobile{
+    background-color: #333333 !important;
+    width: 80vw;
+}
+
+.add-button{
+    width: 13vw;
+    padding-left: 0px;
+    border: none;
+    margin-left: -11px;
+    color: #696969 !important;
 }
