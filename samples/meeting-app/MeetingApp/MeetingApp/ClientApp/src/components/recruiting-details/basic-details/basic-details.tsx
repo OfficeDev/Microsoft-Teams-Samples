@@ -6,9 +6,9 @@ const BasicDetails = () => {
         <Card fluid aria-roledescription="card with basic details" className="basic-details-card">
             <Card.Header>
                 <Flex gap="gap.small" space="between">
-                    <Flex>
+                    <Flex gap="gap.small">
                         <Avatar
-                            image="public/images/avatar/small/matt.jpg"
+                            image="https://fabricweb.azureedge.net/fabric-website/assets/images/avatar/large/jenny.jpg"
                             label="Copy bandwidth"
                             name="Evie yundt"
                             status="unknown"

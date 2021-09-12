@@ -8,11 +8,14 @@
 
 .questionsContainer{
     width: 40vw;
+    background-color: #fff;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .details-separator{
     width: 100%;
-    color: #E1DFDD;
+    border-top: 1px solid #E1DFDD;
 }
 
 .details{
@@ -28,14 +31,23 @@
 
 .basic-details-card{
     min-height: 35vh;
+    background-color: #fff !important;
 }
 
 .timeline-card{
     min-height: 30vh;
+    background-color: #fff !important;
 }
 
 .notes-card{
     min-height: 22vh;
+    background-color: #fff !important;
+}
+
+.questionsCard{
+    height: 15vh !important;
+    background-color: #fff !important;
+    border: 1px solid #f5f5f5 !important;
 }
 
 /* Styles for mobile view */
@@ -44,6 +56,7 @@
     background-color: #000;
     color: #fff;
     max-width: 320px;
+    min-height: 80vh;
 }
 
 .menu-item{
@@ -69,4 +82,26 @@
     border: none;
     margin-left: -11px;
     color: #696969 !important;
+}
+
+.add-comment-textarea{
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+textarea::-webkit-input-placeholder {
+    color: #fff !important;
+}
+
+.basic-details-card-mobile{
+    background-color: #000 !important;
+    padding: 0 !important;
+}
+
+.subHeaders{
+    color: #fff !important;
+}
+
+.basicDetails{
+    background-color: #333333;
 }

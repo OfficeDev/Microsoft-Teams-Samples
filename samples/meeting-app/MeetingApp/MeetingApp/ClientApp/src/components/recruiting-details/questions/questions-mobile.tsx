@@ -1,8 +1,9 @@
-import { Flex, Card, Button, Text, AddIcon, RadioGroup } from '@fluentui/react-northstar'
+import React from "react";
+import { Flex, Card, Button, Text, AddIcon, TextArea } from '@fluentui/react-northstar'
 import "../../recruiting-details/recruiting-details.css"
 
 const QuestionsMobile = (): React.ReactElement => {
-    const questionDetails = [
+    const [questionDetails, setQuestionDetails] = React.useState<any[]>([
         {
             key: "key1",
             question: "Question 1",
@@ -10,7 +11,8 @@ const QuestionsMobile = (): React.ReactElement => {
             comments: {
                 comment: "Comment 1",
                 commentedBy: "User 1"
-            }
+            },
+            showAddComment: false
         },
         {
             key: "key2",
@@ -19,9 +21,30 @@ const QuestionsMobile = (): React.ReactElement => {
             comments: {
                 comment: "Comment 1",
                 commentedBy: "User 1"
-            }
+            },
+            showAddComment: false
         }
-    ]
+    ]);
+    const [ratingsArray, setRatingsArray] = React.useState<any[]>([]);
+
+    React.useEffect(() => {
+        const prevItems = [];
+        for (var i = 1; i <= 5; i++) {
+            prevItems.push(
+                <Button size="small" circular content={i} />
+            )
+        }
+        console.log(prevItems);
+        setRatingsArray(prevItems);
+    }, [])
+
+    const setShowAddComment = (index: number, isShow: boolean) => {
+        const currentQuestions = [...questionDetails];
+        currentQuestions[index] = isShow ? { ...currentQuestions[index], showAddComment: true }
+            : { ...currentQuestions[index], showAddComment: false };
+        setQuestionDetails(currentQuestions);
+    }
+
     return (
         <>
             {
@@ -31,14 +54,8 @@ const QuestionsMobile = (): React.ReactElement => {
                             <Card.Body>
                                 <Flex gap="gap.small" column>
                                     <Text content={questionDetail.question} />
-                                    <Flex>
-                                        <Button size="small" circular content="1" />
-                                        <RadioGroup
-                                            checkedValue={checkedValue}
-                                            items={items}
-                                            vertical={vertical}
-                                            onCheckedValueChange={(e, data) => setCheckedValue(data.value)}
-                                        />
+                                    <Flex gap="gap.small">
+                                        {ratingsArray}
                                     </Flex>
                                     <Button
                                         text
@@ -46,7 +63,21 @@ const QuestionsMobile = (): React.ReactElement => {
                                         icon={<AddIcon size="small" />}
                                         content="Add comment"
                                         iconPosition="before"
-                                        className="add-button" />
+                                        className="add-button"
+                                        hidden={questionDetail.showAddComment}
+                                        onClick={() => { setShowAddComment(index, true) }} />
+                                    <Flex gap="gap.small" column hidden={!questionDetail.showAddComment}>
+                                        <Text content="Comment" />
+                                        <TextArea placeholder="Add comment here..." className="add-comment-textarea"/>
+                                        <Flex gap="gap.smaller">
+                                            <Button
+                                                size="small"
+                                                content="Discard"
+                                                secondary
+                                                onClick={() => { setShowAddComment(index, false) }} />
+                                            <Button size="small" content="Save" primary />
+                                        </Flex>
+                                    </Flex>
                                 </Flex>
                             </Card.Body>
                         </Card>

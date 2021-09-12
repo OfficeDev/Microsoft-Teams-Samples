@@ -14,6 +14,7 @@ const Notes = () => {
                 <hr className="details-separator" />
             </Card.Header>
             <Card.Body>
+              <Text content="No notes yet" />
             </Card.Body>
         </Card>
 
