@@ -253,8 +253,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                 Title = Strings.AuthSampleCardTitle,
                 Buttons = new List<CardAction>
                 {
-                   new CardAction(ActionTypes.ImBack, Strings.FBAuthCardCaption, value: Strings.FBAuthCardValue),
-                   new CardAction(ActionTypes.ImBack, Strings.VSTSAuthCardCaption, value: Strings.VSTSAuthCardValue)
+                   new CardAction(ActionTypes.ImBack, Strings.FBAuthCardCaption, value: Strings.FBAuthCardValue)
                 }
             }.ToAttachment();
         }
