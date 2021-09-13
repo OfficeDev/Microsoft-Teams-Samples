@@ -84,6 +84,10 @@ class RootDialog extends ComponentDialog{
             else if(command.trim() == "adaptivecard"){
                 return await stepContext.beginDialog(ADAPTIVECARD);
             }
+            else if(command.trim() == "timezone"){
+                await stepContext.context.sendActivity("Here is UTC time -"+stepContext.context._activity.timestamp);
+                await stepContext.context.sendActivity('Here is Local Time - '+ stepContext.context._activity.localTimestamp);
+            }
             await stepContext.context.sendActivity('Sorry,Cannot recognize the command');
         return await stepContext.endDialog();
         }
