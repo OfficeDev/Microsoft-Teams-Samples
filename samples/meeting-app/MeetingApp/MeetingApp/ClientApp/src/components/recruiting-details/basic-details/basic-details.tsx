@@ -2,6 +2,33 @@ import { Flex, Card, Button, Avatar, Text, ChatIcon, CallVideoIcon } from '@flue
 import "../../recruiting-details/recruiting-details.css"
 
 const BasicDetails = () => {
+
+    const details = {
+        basicDetails: {
+            name: "Aaron Brooker",
+            designation: "Software Engineer",
+            totalExperience: "4 yrs 8 mos",
+            contactDetails: {
+                email: "",
+                phone: ""
+            },
+            skills: "",
+            attachments: "",
+            source: "",
+            timeline: [
+                {
+                    date: "",
+                    stage: "",
+                    hiringTeam: "",
+                    result: ""
+                }
+            ],
+            notes: [
+                "note 1",
+                "note 2"
+            ]
+        }
+    }
     return (
         <Card fluid aria-roledescription="card with basic details" className="basic-details-card">
             <Card.Header>
