@@ -490,9 +490,6 @@
     <Compile Include="Bot\DialogExtensions.cs" />
     <Compile Include="middleware\AdaptiveCardSubmitActionHandler.cs" />
     <Compile Include="src\dialogs\examples\auth\facebook\SimpleFacebookAuthDialog.cs" />
-    <Compile Include="src\dialogs\examples\auth\vsts\OAuthCallbackVSTSController.cs" />
-    <Compile Include="src\dialogs\examples\auth\vsts\VSTSAPICallDialog.cs" />
-    <Compile Include="src\dialogs\examples\auth\vsts\VSTSGetworkItemDialog.cs" />
     <Compile Include="src\dialogs\examples\basic\AdaptiveCardDialog.cs" />
     <Compile Include="src\dialogs\examples\basic\GetLastDialogUsedDialog.cs" />
     <Compile Include="src\dialogs\examples\basic\HeroCardDialog.cs" />
@@ -530,7 +527,6 @@
     </Compile>
     <Compile Include="src\controllers\MessagesController.cs" />
     <Compile Include="src\dialogs\examples\auth\facebook\FacebookHelpers.cs" />
-    <Compile Include="src\dialogs\examples\auth\vsts\VSTSHelpers.cs" />
     <Compile Include="src\dialogs\examples\basic\HelloDialog.cs" />
     <Compile Include="src\dialogs\examples\teams\FetchRosterDialog.cs" />
     <Compile Include="src\dialogs\RootDialog.cs" />

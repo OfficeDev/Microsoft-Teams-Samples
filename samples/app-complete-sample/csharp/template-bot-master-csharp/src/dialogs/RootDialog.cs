@@ -54,8 +54,6 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             AddDialog(new O365ConnectorCardActionsDialog(this._conversationState));
             AddDialog(new O365ConnectorCardDialog(this._conversationState));
             AddDialog(new SimpleFacebookAuthDialog());
-            AddDialog(new VSTSAPICallDialog(this._conversationState, this._privateState));
-            AddDialog(new VSTSGetworkItemDialog(this._privateState));
         }
 
         private async Task<DialogTurnResult> BeginRootDialogAsync(
@@ -230,27 +228,6 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             {
                 return await stepContext.BeginDialogAsync(
                         nameof(SimpleFacebookAuthDialog));
-            }
-            else if (command == DialogMatches.VSTSlogin)
-            {
-                return await stepContext.BeginDialogAsync(
-                        nameof(VSTSAPICallDialog));
-            }
-            else if (command == DialogMatches.VSTSlogout)
-            {
-                var currentState = await this._privateState.GetAsync(stepContext.Context, () => new PrivateConversationData());
-                currentState.VSTSAuthTokenKey = null;
-                currentState.PersistedCookieVSTS = null;
-                currentState.Name = null;
-                await this._privateState.SetAsync(stepContext.Context, currentState);
-                await stepContext.Context.SendActivityAsync(Strings.VSTSSuccessfulLogoutPrompt);
-                await stepContext.Context.SendActivityAsync(Strings.VSTSSuccessfulLogoutLoginPrompt);
-                return await stepContext.EndDialogAsync(null, cancellationToken);
-            }
-            else if (command == DialogMatches.VSTSApi)
-            {
-                return await stepContext.BeginDialogAsync(
-                        nameof(VSTSGetworkItemDialog));
             }
             // We shouldn't get here, but fail gracefully if we do.
             await stepContext.Context.SendActivityAsync(
