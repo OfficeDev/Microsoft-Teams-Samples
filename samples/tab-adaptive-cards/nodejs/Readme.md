@@ -70,8 +70,15 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 
 - Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the Bot Framework registration. 
+> NOTE: The `MicrosoftAppPassword` is referred as the `client secret` in the azure portal.
+
 Also update `BaseUrl` according to your code runtime environment and `ConnectionName` with Bot Channel Registration connection name.
-> NOTE: the App Password is referred to as the `client secret` in the azure portal and you can always create a new client secret anytime.
+
+For ex, If you are using tunnelling service like ngrok then `BaseUrl` will be https://6df9-223-181-129-XX.ngrok.io.
+
+The `ConnectionName` referred to is the name that we provide while adding OAuth connection setting in the Bot channel registration.
+Please follow link [Add authentication to your bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample) to see how we can add the setting.
+
 
 - Install modules & Run the `NodeJS` Server 
     - Server will run on PORT:  `3978`

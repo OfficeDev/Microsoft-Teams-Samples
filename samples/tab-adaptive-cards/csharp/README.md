@@ -28,7 +28,13 @@ This feature shown in this sample is in Public Developer Preview and is supporte
 
 4. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 7.
 
-5. Modify the `/appsettings.json` and fill in the `{{ Bot Id }}`,`{{ Bot Password }}` and `{{ Connection Name }}` with the id from step 2.
+5. Modify the `/appsettings.json` and fill in the `{{ MicrosoftAppId }}`,`{{ MicrosoftAppPassword }}` from step 2.
+   Also update `{{ ConnectionName }}` and `{{ ApplicationBaseUrl }}`.
+
+   For ex, If you are using tunnelling service like ngrok then `ApplicationBaseUrl` will be https://6df9-223-181-129-XX.ngrok.io.
+
+    The `ConnectionName` referred to is the name that we provide while adding OAuth connection setting in the Bot channel registration.
+    Please follow link [Add authentication to your bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample) to see how we can add the setting.
 
 6. Add `{{ Application Base Url }}`in appsetting.json with ngrok tunnel url or deployed application base url. 
 
