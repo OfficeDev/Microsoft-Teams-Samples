@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const { DialogSet, DialogTurnStatus, WaterfallDialog, ComponentDialog, isComponentPathResolvers  } = require('botbuilder-dialogs');
+const { DialogSet, DialogTurnStatus, WaterfallDialog, ComponentDialog,isComponentPathResolvers  } = require('botbuilder-dialogs');
 
 const ROOT_DIALOG = 'RootDialog';
 const ROOT_WATERFALL_DIALOG = 'RootWaterfallDialog';
@@ -12,16 +12,26 @@ const MESSAGEBACK = 'msgback';
 const MULTIDIALOG2 = 'MultiDialog2';
 const MULTIDIALOG1 = 'MultiDialog1';
 const THUMBNAILCARD = 'ThumbnailCard';
-const ADAPTIVECARD ="AdaptiveCardDialog"
+const ADAPTIVECARD ="AdaptiveCardDialog";
+const O365CONNECTORECARD = 'O365ConnectorCard';
+const POPUPSIGNINCARD = 'PopupSignInCard';
+const BEGINdIALOG = 'BeginDialog';
+const QUIZFULLDIALOG = 'QuizFullDialog';
+const PORMPTDIALOG = 'PromptDialog';
 
-const { HelloDialog } = require('./helloDialog');
-const { HelpDialog } = require('./helpDialog');
-const { HeroCardDialog } = require('./heroCardDialog');
-const { MessageBackDialog } = require('./messagebackDialog');
-const { MultiDialog1 } = require('./multiDialog1');
-const { MultiDialog2 } = require('./multiDialog2');
-const { ThumbnailCardDialog } = require('./thumbnailCardDialog');
-const { AdaptiveCardDialog } = require('./adaptiveCardDialog');
+const { HelloDialog } = require('./basic/helloDialog');
+const { HelpDialog } = require('./basic/helpDialog');
+const { HeroCardDialog } = require('./basic/heroCardDialog');
+const { MessageBackDialog } = require('./basic/messagebackDialog');
+const { MultiDialog1 } = require('./basic/multiDialog1');
+const { MultiDialog2 } = require('./basic/multiDialog2');
+const { ThumbnailCardDialog } = require('./basic/thumbnailCardDialog');
+const { AdaptiveCardDialog } = require('./basic/adaptiveCardDialog');
+const { O365ConnectorCardDialog } = require('./basic/o365connectorCardDialog');
+const { PopupSigninCardDialog } = require('./basic/popupSigninCardDialog');
+const { BeginDialogExampleDailog } = require('./moderate/beginDialogExampleDailog');
+const { QuizFullDialog } = require('./moderate/quizFullDialog');
+const { PromptDialog } = require('./moderate/promptDialog');
 class RootDialog extends ComponentDialog{
 
     constructor() {
@@ -37,6 +47,11 @@ class RootDialog extends ComponentDialog{
         this.addDialog(new MultiDialog2(MULTIDIALOG2));
         this.addDialog(new ThumbnailCardDialog(THUMBNAILCARD));
         this.addDialog(new AdaptiveCardDialog(ADAPTIVECARD));
+        this.addDialog(new O365ConnectorCardDialog(O365CONNECTORECARD));
+        this.addDialog(new PopupSigninCardDialog(POPUPSIGNINCARD));
+        this.addDialog(new BeginDialogExampleDailog(BEGINdIALOG));
+        this.addDialog(new QuizFullDialog(QUIZFULLDIALOG));
+        this.addDialog(new PromptDialog(PORMPTDIALOG));
 
         this.initialDialogId = ROOT_WATERFALL_DIALOG;
     }
@@ -52,6 +67,7 @@ class RootDialog extends ComponentDialog{
     
             const dialogContext = await dialogSet.createContext(context);
             const results = await dialogContext.continueDialog();
+            console.log(results);
             if (results.status === DialogTurnStatus.empty) {
                 await dialogContext.beginDialog(this.id);
             }
@@ -87,6 +103,26 @@ class RootDialog extends ComponentDialog{
             else if(command.trim() == "timezone"){
                 await stepContext.context.sendActivity("Here is UTC time -"+stepContext.context._activity.timestamp);
                 await stepContext.context.sendActivity('Here is Local Time - '+ stepContext.context._activity.localTimestamp);
+            }
+            else if(command.trim() == "connector card 1"||command.trim() == "connector card 2"||command.trim() == "connector card 3"){
+                return await stepContext.beginDialog(O365CONNECTORECARD);
+            }
+            else if(command.trim() == "signin"){
+                return await stepContext.beginDialog(POPUPSIGNINCARD);
+            }
+            else if(command.trim() == "dialogflow"){
+                await stepContext.context.sendActivity("This is step1 in Root Dialog");
+                await stepContext.context.sendActivity("This is step2 in Root Dialog");
+                await stepContext.beginDialog(BEGINdIALOG);
+                await stepContext.context.sendActivity("This is step3 in Root Dialog After triggering the Hello Dialog");
+                return await stepContext.endDialog();
+            }
+            else if(command.trim() == "quiz"){
+                await stepContext.context.sendActivity("Hi, Welcome to the fun quiz. Let's get started..");
+                return await stepContext.beginDialog(QUIZFULLDIALOG);
+            }
+            else if(command.trim() == "prompt"){
+                return await stepContext.beginDialog(PORMPTDIALOG);
             }
             await stepContext.context.sendActivity('Sorry,Cannot recognize the command');
         return await stepContext.endDialog();
