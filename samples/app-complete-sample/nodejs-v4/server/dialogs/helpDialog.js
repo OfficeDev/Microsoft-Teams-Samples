@@ -9,11 +9,11 @@ class HelpDialog extends ComponentDialog {
 
         // Define the conversation flow using a waterfall model.
         this.addDialog(new WaterfallDialog(HELP, [
-            this.beginHelloDialog.bind(this),
+            this.beginHelpDialog.bind(this),
         ]));
     }
 
-    async beginHelloDialog(stepContext) {
+    async beginHelpDialog(stepContext) {
         var reply = stepContext.context._activity;
         const buttons = [
             { type: ActionTypes.ImBack, title: 'At Mention', value: 'at mention' },
