@@ -57,9 +57,6 @@ namespace Microsoft.Teams.TemplateBotCSharp
             var tokenResponse = (TokenResponse)stepContext.Result;
             if (tokenResponse?.Token != null)
             {
-                // Validating the access token.
-                var valid = await FacebookHelpers.ValidateAccessToken(tokenResponse.Token);
-
                 // Getting basic facebook profile details.
                 FacebookProfile profile = await FacebookHelpers.GetFacebookProfileName(tokenResponse.Token);
                 var message = CreateFBMessage(stepContext, profile);
