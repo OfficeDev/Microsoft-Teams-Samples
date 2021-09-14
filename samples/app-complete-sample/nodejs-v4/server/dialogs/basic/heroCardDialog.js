@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 const { CardFactory,ActionTypes } = require('botbuilder');
 const {WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
-const { CardImage } = require('botframework-connector/lib/connectorApi/models/mappers');
 const HEROCARD = 'HeroCard';
 class HeroCardDialog extends ComponentDialog {
     constructor(id) {

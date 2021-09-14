@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 const {WaterfallDialog, ComponentDialog,ChoicePrompt,TextPrompt  } = require('botbuilder-dialogs');
-const PORMPTDIALOG = 'PromptDialog';
+const PROMPTDIALOG = 'PromptDialog';
 const CHOICE_PROMPT = 'choiceDialog';
 const TEXT_PROMPT = 'TexPrompt'
 class PromptDialog extends ComponentDialog {
@@ -10,22 +10,22 @@ class PromptDialog extends ComponentDialog {
         super(id);
 
         // Define the conversation flow using a waterfall model.
+        this.addDialog(new ChoicePrompt(CHOICE_PROMPT, this.validateNumberOfAttempts.bind(this)));
         this.addDialog(new TextPrompt(TEXT_PROMPT));
-        this.addDialog(new WaterfallDialog(PORMPTDIALOG, [
+        this.addDialog(new WaterfallDialog(PROMPTDIALOG, [
             this.beginPromptDialog.bind(this),
             this.getNameAsync.bind(this),
             this.getOptionAsync.bind(this),
             this.resultedOptionsAsync.bind(this)
         ]));
-        this.addDialog(new ChoicePrompt(CHOICE_PROMPT, this.validateNumberOfAttempts.bind(this)));
+        
     }
 
     async beginPromptDialog(stepContext) {
-        await stepContext.context.sendActivity("hola");
-        await stepContext.prompt(
+         return await stepContext.prompt(
             TEXT_PROMPT, {
-                prompt: 'Hi!  Im a bot.  What is your name?'
-            }
+               prompt: 'Hi!  Im a bot.  What is your name?'
+             }
         );
     }
     async getNameAsync(stepContext){

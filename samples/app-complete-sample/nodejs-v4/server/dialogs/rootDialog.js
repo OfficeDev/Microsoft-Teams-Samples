@@ -17,7 +17,14 @@ const O365CONNECTORECARD = 'O365ConnectorCard';
 const POPUPSIGNINCARD = 'PopupSignInCard';
 const BEGINdIALOG = 'BeginDialog';
 const QUIZFULLDIALOG = 'QuizFullDialog';
-const PORMPTDIALOG = 'PromptDialog';
+const PROMPTDIALOG = 'PromptDialog';
+const LISTNAMES = 'ListNames';
+const FETCHROSTER = 'FetchRoster';
+const DISPLAYCARDS = 'DisplayCards';
+const FETCHTEAMINFO = 'FetchTeamInfo';
+const DEEPLINKTAB = 'DeepLinkTab';
+const ATMENTION = 'AtMention';
+const O365CONNECTORCARDACTION = 'O365ConnectorCardAction';
 
 const { HelloDialog } = require('./basic/helloDialog');
 const { HelpDialog } = require('./basic/helpDialog');
@@ -32,6 +39,13 @@ const { PopupSigninCardDialog } = require('./basic/popupSigninCardDialog');
 const { BeginDialogExampleDailog } = require('./moderate/beginDialogExampleDailog');
 const { QuizFullDialog } = require('./moderate/quizFullDialog');
 const { PromptDialog } = require('./moderate/promptDialog');
+const { ListNamesDialog } = require('./moderate/listNamesDialog');
+const { FetchRosterDialog } = require('./teams/fetchRosterDialog');
+const { DisplayCardsDialog } = require('./teams/displayCardsDialog');
+const { FetchTeamInfoDialog } = require('./teams/fetchTeamInfoDialog');
+const { DeepLinkStaticTabDialog } = require('./teams/deepLinkStaticTabDialog');
+const { AtMentionDialog } = require('./teams/atMentionDialog');
+const { O365ConnectorCardActionDialog } = require('./basic/o365ConnectorCardActionDialog');
 class RootDialog extends ComponentDialog{
 
     constructor() {
@@ -51,7 +65,14 @@ class RootDialog extends ComponentDialog{
         this.addDialog(new PopupSigninCardDialog(POPUPSIGNINCARD));
         this.addDialog(new BeginDialogExampleDailog(BEGINdIALOG));
         this.addDialog(new QuizFullDialog(QUIZFULLDIALOG));
-        this.addDialog(new PromptDialog(PORMPTDIALOG));
+        this.addDialog(new PromptDialog(PROMPTDIALOG));
+        this.addDialog(new ListNamesDialog(LISTNAMES));
+        this.addDialog(new FetchRosterDialog(FETCHROSTER));
+        this.addDialog(new DisplayCardsDialog(DISPLAYCARDS));
+        this.addDialog(new FetchTeamInfoDialog(FETCHTEAMINFO));
+        this.addDialog(new DeepLinkStaticTabDialog(DEEPLINKTAB));
+        this.addDialog(new AtMentionDialog(ATMENTION));
+        this.addDialog(new O365ConnectorCardActionDialog(O365CONNECTORCARDACTION));
 
         this.initialDialogId = ROOT_WATERFALL_DIALOG;
     }
@@ -68,7 +89,8 @@ class RootDialog extends ComponentDialog{
             const dialogContext = await dialogSet.createContext(context);
             const results = await dialogContext.continueDialog();
             console.log(results);
-            if (results.status === DialogTurnStatus.empty) {
+
+            if (results!== undefined && results.status === DialogTurnStatus.empty) {
                 await dialogContext.beginDialog(this.id);
             }
         }
@@ -107,10 +129,13 @@ class RootDialog extends ComponentDialog{
             else if(command.trim() == "connector card 1"||command.trim() == "connector card 2"||command.trim() == "connector card 3"){
                 return await stepContext.beginDialog(O365CONNECTORECARD);
             }
+            else if(command.trim() == "Connector Card Actions 2"||command.trim() == "Connector Card Actions"){
+                return await stepContext.beginDialog(O365CONNECTORCARDACTION);
+            }
             else if(command.trim() == "signin"){
                 return await stepContext.beginDialog(POPUPSIGNINCARD);
             }
-            else if(command.trim() == "dialogflow"){
+            else if(command.trim() == "dialog flow"){
                 await stepContext.context.sendActivity("This is step1 in Root Dialog");
                 await stepContext.context.sendActivity("This is step2 in Root Dialog");
                 await stepContext.beginDialog(BEGINdIALOG);
@@ -122,7 +147,25 @@ class RootDialog extends ComponentDialog{
                 return await stepContext.beginDialog(QUIZFULLDIALOG);
             }
             else if(command.trim() == "prompt"){
-                return await stepContext.beginDialog(PORMPTDIALOG);
+                return await stepContext.beginDialog(PROMPTDIALOG);
+            }
+            else if(command.trim() == "names"){
+                return await stepContext.beginDialog(LISTNAMES);
+            }
+            else if(command.trim() == "roster"){
+                return await stepContext.beginDialog(FETCHROSTER);
+            }
+            else if(command.trim() == "display cards"){
+                return await stepContext.beginDialog(DISPLAYCARDS);
+            }
+            else if(command.trim() == "team info"){
+                return await stepContext.beginDialog(FETCHTEAMINFO);
+            }
+            else if(command.trim() == "deep link"){
+                return await stepContext.beginDialog(DEEPLINKTAB);
+            }
+            else if(command.trim() == "at mention"){
+                return await stepContext.beginDialog(ATMENTION);
             }
             await stepContext.context.sendActivity('Sorry,Cannot recognize the command');
         return await stepContext.endDialog();

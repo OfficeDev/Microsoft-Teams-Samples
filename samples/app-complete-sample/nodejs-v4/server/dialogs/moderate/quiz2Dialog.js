@@ -17,7 +17,7 @@ class Quiz2Dialog extends ComponentDialog {
     }
 
     async beginQuiz2Dialog(stepContext) {
-        await stepContext.prompt(
+       return await stepContext.prompt(
             CHOICE_PROMPT, {
                 prompt: 'Question 2',
                 choices: ['yes', 'no'],

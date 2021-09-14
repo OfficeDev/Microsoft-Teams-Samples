@@ -15,7 +15,6 @@ class AdaptiveCardDialog extends ComponentDialog{
     }
 
     async beginAdaptiveCardDialog(stepContext) {
-        console.log(stepContext);
     var reply = stepContext.context._activity;
        const card = this.getAdaptiveCard();
 
