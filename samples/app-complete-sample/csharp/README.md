@@ -11,7 +11,7 @@ extensions:
   - Tabs
   - Microsoft Bot Framework v4
   createdDate: 9/22/2017 5:54:09 PM
-  updateDate:  
+  updateDate: 9/15/2021 
 description: "Sample that shows how to build a bot for Microsoft Teams in C# with bot framework v4."
 ---
 
@@ -25,8 +25,9 @@ Sample that shows how to build a bot for Microsoft Teams in C#.
 
 * Clone this repo:<br>
     ```bash
-    git clone https://github.com/OfficeDev/microsoft-teams-template-bot-CSharp.git
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
+* In a terminal, navigate to samples/app-complete-sample/csharp
 
 * Install Visual Studio and launch it as an administrator
 
@@ -154,6 +155,15 @@ This file is a configuration file that can be used to update the config keys glo
 4. Added dilaogBot.cs. DialogExtension.cs, AdapterWithErrorHandler.cs
 
 5. Updated Dialog files into waterfall model dialog.
+
+## Features of this sample
+
+![ Dilaog ](template-bot-master-csharp/Images/dialog.png)
+
+![ Tab ](template-bot-master-csharp/Images/static-tab.png)
+
+![ ME](template-bot-master-csharp/Images/messaging-extension.png)
+
 
 ## Contributing
 
