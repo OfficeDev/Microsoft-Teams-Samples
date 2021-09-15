@@ -19,9 +19,8 @@ All these samples are deployed on Microsoft Azure and you can try it yourself by
 |3|Task Module Demo       | Sample app showing off the Teams Task Module, a way to invoke custom code from a bot, a tab, or both |[View](/demo%20manifest/Task-Module.zip)     |
 |4|Connectors        | Sample Office 365 Connector generating notifications to teams channel. |[View](/demo%20manifest/Connector.zip)     |
 |5|Tabs with Adaptive Cards  | Microsoft Teams tab sample code which demonstrates how to Build tabs with Adaptive Cards. |[View](/demo%20manifest/JSON-based-Tabs.zip)     |
-|6|Meetings Token App Demo  | Microsoft Teams meeting extensibility sample: token passing. |[View](/demo%20manifest/JSON-based-Tabs.zip)     |
-|7|Meetings Stage View Demo  | Enable and configure your apps for Teams meetings to use in stage view. |[View](/demo%20manifest/JSON-based-Tabs.zip)     |
-|8|Activity Feed Notification  | Microsoft Teams sample app for Sending Activity feed notification using Graph API in a Teams Tab. |[View](/demo%20manifest/JSON-based-Tabs.zip)     |
+|6|Meetings Stage View Demo  | Enable and configure your apps for Teams meetings to use in stage view. |[View](/demo%20manifest/JSON-based-Tabs.zip)     |
+|7|Activity Feed Notification  | Microsoft Teams sample app for Sending Activity feed notification using Graph API in a Teams Tab. |[View](/demo%20manifest/JSON-based-Tabs.zip)     |
 
 
 
