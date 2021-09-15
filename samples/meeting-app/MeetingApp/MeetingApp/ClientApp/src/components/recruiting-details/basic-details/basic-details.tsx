@@ -1,34 +1,23 @@
-import { Flex, Card, Button, Avatar, Text, ChatIcon, CallVideoIcon } from '@fluentui/react-northstar'
+import * as React from 'react';
+import { Flex, Card, Button, Avatar, Text, ChatIcon, CallVideoIcon, CallIcon, EmailIcon} from '@fluentui/react-northstar'
 import "../../recruiting-details/recruiting-details.css"
+import { getCandidateDetails } from "../services/recruiting-detail.service"
+import { ICandidateDetails } from './basic-details.types';
 
 const BasicDetails = () => {
+    const [candidateDetails, setCandidateDetails] = React.useState<ICandidateDetails>();
+    React.useEffect(() => {
+        getCandidateDetails()
+            .then((res) => {
+                console.log(res)
+                const data = res.data as ICandidateDetails;
+                setCandidateDetails(data);
+            })
+            .catch((ex) => {
+                console.log(ex)
+            });
+    }, [])
 
-    const details = {
-        basicDetails: {
-            name: "Aaron Brooker",
-            designation: "Software Engineer",
-            totalExperience: "4 yrs 8 mos",
-            contactDetails: {
-                email: "",
-                phone: ""
-            },
-            skills: "",
-            attachments: "",
-            source: "",
-            timeline: [
-                {
-                    date: "",
-                    stage: "",
-                    hiringTeam: "",
-                    result: ""
-                }
-            ],
-            notes: [
-                "note 1",
-                "note 2"
-            ]
-        }
-    }
     return (
         <Card fluid aria-roledescription="card with basic details" className="basic-details-card">
             <Card.Header>
@@ -41,8 +30,8 @@ const BasicDetails = () => {
                             status="unknown"
                         />
                         <Flex column>
-                            <Text content="Aaron Brooker" weight="bold" />
-                            <Text content="Software Engineer | 4yrs 8 mos" size="small" />
+                            <Text content={candidateDetails?.candidateName} weight="bold" />
+                            <Text content={candidateDetails?.role} size="small" />
                         </Flex>
                     </Flex>
                     <Flex >
@@ -56,11 +45,18 @@ const BasicDetails = () => {
                 <Flex gap="gap.small" padding="padding.medium">
                     <Flex column className="details">
                         <Text content="Contact" weight="bold" />
-                        <Text content="email" size="small" />
+                        <Flex>
+                            <Button icon={<EmailIcon />} iconOnly text title="Email" size="small"/>
+                            <Text content={candidateDetails?.email} size="small" />
+                        </Flex>
+                        <Flex>
+                            <Button icon={<CallIcon />} iconOnly text title="Call" size="small" />
+                            <Text content={candidateDetails?.mobile} size="small" />
+                        </Flex>
                     </Flex>
                     <Flex column className="details">
                         <Text content="Skills" weight="bold" />
-                        <Text content="email" size="small" />
+                        <Text content={candidateDetails?.skills} size="small" />
                     </Flex>
                     <Flex column className="details">
                         <Text content="Attachments" weight="bold" />
@@ -68,7 +64,7 @@ const BasicDetails = () => {
                     </Flex>
                     <Flex column className="source-details">
                         <Text content="Source" weight="bold" />
-                        <Text content="email" size="small" />
+                        <Text content={candidateDetails?.source} size="small" />
                     </Flex>
                 </Flex>
             </Card.Body>

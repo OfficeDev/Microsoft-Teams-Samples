@@ -4,6 +4,7 @@
 // Generated with Bot Builder V4 SDK Template for Visual Studio EchoBot v4.14.0
 
 using MeetingApp.Bots;
+using MeetingApp.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -37,6 +38,7 @@ namespace MeetingApp
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
+            services.AddSingleton<ICandidateRepository>(new CandidateRepository(this.Configuration["StorageConnectionString"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
