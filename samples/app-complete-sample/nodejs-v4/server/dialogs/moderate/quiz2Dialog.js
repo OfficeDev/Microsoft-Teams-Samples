@@ -5,9 +5,9 @@ const {WaterfallDialog, ComponentDialog,ChoicePrompt  } = require('botbuilder-di
 const QUIZ2DIALOG = 'Quiz2Dialog';
 const CHOICE_PROMPT = 'choiceDialog'
 class Quiz2Dialog extends ComponentDialog {
-    constructor(id) {
+    constructor(id,conversationDataAccessor) {
         super(id);
-
+        this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
         this.addDialog(new WaterfallDialog(QUIZ2DIALOG, [
             this.beginQuiz2Dialog.bind(this),
@@ -17,6 +17,8 @@ class Quiz2Dialog extends ComponentDialog {
     }
 
     async beginQuiz2Dialog(stepContext) {
+        var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+        currentState.lastDialogKey = "QuizQ2Dialog";
        return await stepContext.prompt(
             CHOICE_PROMPT, {
                 prompt: 'Question 2',

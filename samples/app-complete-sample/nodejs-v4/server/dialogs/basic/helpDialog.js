@@ -4,9 +4,9 @@ const { CardFactory,ActionTypes } = require('botbuilder');
 const {WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const HELP = 'Help';
 class HelpDialog extends ComponentDialog {
-    constructor(id) {
+    constructor(id,conversationDataAccessor) {
         super(id);
-
+        this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
         this.addDialog(new WaterfallDialog(HELP, [
             this.beginHelpDialog.bind(this),
@@ -14,7 +14,14 @@ class HelpDialog extends ComponentDialog {
     }
 
     async beginHelpDialog(stepContext) {
+        var currentState = await  this.conversationDataAccessor.get(stepContext.context, {});
+        currentState.lastDialogKey = "HelpDialog";
         var reply = stepContext.context._activity;
+        if(reply.attachments != null && reply.entities.length>1){
+            reply.attachments = null;
+            reply.entities.splice(0,1);
+
+        }
         const buttons = [
             { type: ActionTypes.ImBack, title: 'At Mention', value: 'at mention' },
             { type: ActionTypes.ImBack, title: 'RunQuiz', value: 'quiz' },

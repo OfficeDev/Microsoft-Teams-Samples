@@ -2,12 +2,11 @@
 // Licensed under the MIT License.
 const { CardFactory,ActionTypes } = require('botbuilder');
 const {WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
-const { CardImage } = require('botframework-connector/lib/connectorApi/models/mappers');
 const MULTIDIALOG2 = 'MultiDialog2';
 class MultiDialog2 extends ComponentDialog {
-    constructor(id) {
+    constructor(id,conversationDataAccessor) {
         super(id);
-
+        this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
         this.addDialog(new WaterfallDialog(MULTIDIALOG2, [
             this.beginMultiDialog2Dialog.bind(this),
@@ -15,6 +14,8 @@ class MultiDialog2 extends ComponentDialog {
     }
 
     async beginMultiDialog2Dialog(stepContext) {
+        var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+        currentState.lastDialogKey = "MultiDialog2";
         var reply = stepContext.context._activity;
         const buttons = [
             { type: ActionTypes.ImBack, title: 'Invoke Hello Dialog', value: 'hi' },

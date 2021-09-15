@@ -6,9 +6,9 @@ const BEGINdIALOG = 'BeginDialog';
 const HELLO = 'Hello';
 const { HelloDialog } = require('../basic/helloDialog');
 class BeginDialogExampleDailog extends ComponentDialog {
-    constructor(id) {
+    constructor(id,conversationDataAccessor) {
         super(id);
-
+        this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
         this.addDialog(new WaterfallDialog(BEGINdIALOG, [
             this.beginBeginDialogExampleDailog.bind(this),
@@ -18,6 +18,8 @@ class BeginDialogExampleDailog extends ComponentDialog {
     }
 
     async beginBeginDialogExampleDailog(stepContext) {
+        var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+        currentState.lastDialogKey = "BeginDialogFlowDialog";
         await stepContext.context.sendActivity('Hello, welcome to begin dialog');
         return await stepContext.beginDialog(HELLO);
     }

@@ -4,9 +4,9 @@ const { TeamsInfo } = require('botbuilder');
 const {WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const PROACTIVEMESSAGE = 'ProactiveMessage';
 class ProactiveMsgTo1to1Dialog extends ComponentDialog {
-    constructor(id) {
+    constructor(id,conversationDataAccessor) {
         super(id);
-
+        this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
         this.addDialog(new WaterfallDialog(PROACTIVEMESSAGE, [
             this.beginProactiveMsgTo1to1Dialog.bind(this),
@@ -14,6 +14,8 @@ class ProactiveMsgTo1to1Dialog extends ComponentDialog {
     }
 
     async beginProactiveMsgTo1to1Dialog(stepContext) {
+        var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+        currentState.lastDialogKey = "ProactiveMsgTo1to1Dialog";
         await stepContext.context.sendActivity("1:1 Message sent");
         var teamId = TeamsInfo.getTeamId;
         var teamDetails = await TeamsInfo.getTeamDetails(stepContext.context,teamId)

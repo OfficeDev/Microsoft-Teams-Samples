@@ -6,9 +6,9 @@ const PROMPTDIALOG = 'PromptDialog';
 const CHOICE_PROMPT = 'choiceDialog';
 const TEXT_PROMPT = 'TexPrompt'
 class PromptDialog extends ComponentDialog {
-    constructor(id) {
+    constructor(id,conversationDataAccessor) {
         super(id);
-
+        this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
         this.addDialog(new ChoicePrompt(CHOICE_PROMPT, this.validateNumberOfAttempts.bind(this)));
         this.addDialog(new TextPrompt(TEXT_PROMPT));
@@ -22,6 +22,8 @@ class PromptDialog extends ComponentDialog {
     }
 
     async beginPromptDialog(stepContext) {
+        var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+        currentState.lastDialogKey = "PromptDialog";
          return await stepContext.prompt(
             TEXT_PROMPT, {
                prompt: 'Hi!  Im a bot.  What is your name?'

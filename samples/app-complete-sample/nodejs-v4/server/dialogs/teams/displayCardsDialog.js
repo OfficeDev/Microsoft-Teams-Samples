@@ -15,9 +15,9 @@ const { AdaptiveCardDialog } = require('../basic/adaptiveCardDialog');
 const { O365ConnectorCardDialog } = require('../basic/o365connectorCardDialog');
 const { O365ConnectorCardActionDialog } = require('../basic/o365ConnectorCardActionDialog');
 class DisplayCardsDialog extends ComponentDialog {
-    constructor(id) {
+    constructor(id,conversationDataAccessor) {
         super(id);
-
+        this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
         this.addDialog(new WaterfallDialog(DISPLAYCARDS, [
             this.beginDisplayCardsDialog.bind(this),
@@ -33,6 +33,8 @@ class DisplayCardsDialog extends ComponentDialog {
     }
 
     async beginDisplayCardsDialog(stepContext) {
+        var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+        currentState.lastDialogKey = "DisplayCardsDialog";
         await stepContext.context.sendActivity("Please select any card");
         return await stepContext.prompt(
             CHOICE_PROMPT, {

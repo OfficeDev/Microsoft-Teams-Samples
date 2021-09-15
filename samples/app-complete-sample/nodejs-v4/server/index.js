@@ -52,7 +52,7 @@ const conversationState = new ConversationState(memoryStorage);
 const userState = new UserState(memoryStorage);
 
 // Create the main dialog.
-const dialog = new RootDialog();
+const dialog = new RootDialog(conversationState);
 // Create the bot that will handle incoming messages.
 const bot = new Bot(conversationState, userState, dialog);
 const server = express();

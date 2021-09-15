@@ -4,9 +4,9 @@ const { CardFactory,ActionTypes } = require('botbuilder');
 const {WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const POPUPSIGNINCARD = 'PopupSignInCard';
 class PopupSigninCardDialog  extends ComponentDialog {
-    constructor(id) {
+    constructor(id,conversationDataAccessor) {
         super(id);
-
+        this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
         this.addDialog(new WaterfallDialog(POPUPSIGNINCARD, [
             this.beginPopupSigninCardDialog.bind(this),
@@ -14,6 +14,8 @@ class PopupSigninCardDialog  extends ComponentDialog {
     }
 
     async beginPopupSigninCardDialog(stepContext) {
+        var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+        currentState.lastDialogKey = "PopupSignInDialog";
         var reply = stepContext.context._activity;
         const buttons = [
             { type: ActionTypes.Signin, title: 'Sign In', value: process.env.BaseUri+"/tab/tabConfig/popUpSignin.html?height=400&width=400" },

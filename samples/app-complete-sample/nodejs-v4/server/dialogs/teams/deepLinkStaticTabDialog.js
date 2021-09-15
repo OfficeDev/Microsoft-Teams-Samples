@@ -13,8 +13,9 @@ var deepLinkCardTitle;
 var botId;
 
 class DeepLinkStaticTabDialog extends ComponentDialog {
-    constructor(id) {
+    constructor(id,conversationDataAccessor) {
         super(id);
+        this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
         this.addDialog(new WaterfallDialog(DEEPLINKTAB, [
             this.beginDeepLinkStaticTabDialog.bind(this),
@@ -22,6 +23,8 @@ class DeepLinkStaticTabDialog extends ComponentDialog {
     }
 
     async beginDeepLinkStaticTabDialog(stepContext) {
+        var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+        currentState.lastDialogKey = "DeeplinkDialog";
         botId = process.env.MicrosoftAppId; 
         this.getChannelID(stepContext);
         var message = this.createDeepLinkMessage(stepContext);

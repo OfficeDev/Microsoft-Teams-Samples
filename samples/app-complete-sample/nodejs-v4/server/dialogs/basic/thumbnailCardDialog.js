@@ -4,9 +4,9 @@ const { CardFactory,ActionTypes } = require('botbuilder');
 const {WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const THUMBNAILCARD = 'ThumbnailCard';
 class ThumbnailCardDialog extends ComponentDialog {
-    constructor(id) {
+    constructor(id,conversationDataAccessor) {
         super(id);
-
+        this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
         this.addDialog(new WaterfallDialog(THUMBNAILCARD, [
             this.beginThumbnailCardDialog.bind(this),
@@ -14,6 +14,8 @@ class ThumbnailCardDialog extends ComponentDialog {
     }
 
     async beginThumbnailCardDialog(stepContext) {
+        var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+        currentState.lastDialogKey = "ThumbnailCardDialog";
         var reply = stepContext.context._activity;
         const buttons = [
             { type: ActionTypes.OpenUrl, title: 'Get Started', value: "https://docs.microsoft.com/en-us/bot-framework/dotnet/bot-builder-dotnet-add-rich-card-attachments" },

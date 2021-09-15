@@ -5,9 +5,9 @@ const {WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const ADAPTIVECARD ="AdaptiveCardDialog"
 
 class AdaptiveCardDialog extends ComponentDialog{
-    constructor(id) {
+    constructor(id,conversationDataAccessor) {
         super(id);
-
+        this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
         this.addDialog(new WaterfallDialog(ADAPTIVECARD, [
             this.beginAdaptiveCardDialog.bind(this),
@@ -15,6 +15,8 @@ class AdaptiveCardDialog extends ComponentDialog{
     }
 
     async beginAdaptiveCardDialog(stepContext) {
+        var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+        currentState.lastDialogKey = "AdaptiveCardDialog";
     var reply = stepContext.context._activity;
        const card = this.getAdaptiveCard();
 

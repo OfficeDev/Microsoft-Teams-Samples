@@ -8,9 +8,9 @@ const QUIZ2DIALOG = 'Quiz2Dialog';
 const { Quiz1Dialog } = require('./quiz1Dialog');
 const { Quiz2Dialog } = require('./quiz2Dialog');
 class QuizFullDialog extends ComponentDialog {
-    constructor(id) {
+    constructor(id,conversationDataAccessor) {
         super(id);
-
+        this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
         this.addDialog(new WaterfallDialog(QUIZFULLDIALOG, [
             this.beginQuizFulleDailog.bind(this),
@@ -22,6 +22,8 @@ class QuizFullDialog extends ComponentDialog {
     }
 
     async beginQuizFulleDailog(stepContext) {
+        var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+        currentState.lastDialogKey = "QuizFullDialog";
         await stepContext.context.sendActivity('Begin quiz dialog');
         return await stepContext.beginDialog(QUIZ1DIALOG);
     }

@@ -4,9 +4,9 @@ const { TeamsInfo ,CardFactory,ActionTypes} = require('botbuilder');
 const {WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const LISTNAMES = 'ListNames';
 class ListNamesDialog extends ComponentDialog {
-    constructor(id) {
+    constructor(id,conversationDataAccessor) {
         super(id);
-
+        this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
         this.addDialog(new WaterfallDialog(LISTNAMES, [
             this.beginListNamesDialog.bind(this),
@@ -14,6 +14,8 @@ class ListNamesDialog extends ComponentDialog {
     }
 
     async beginListNamesDialog(stepContext) {
+        var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+        currentState.lastDialogKey = "ListNamesDialog";
         var members = await TeamsInfo.getMembers(stepContext.context);
         var reply = stepContext.context._activity;
         reply.text = JSON.stringify(members)

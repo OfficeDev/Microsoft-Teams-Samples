@@ -4,9 +4,9 @@ const { TeamsInfo } = require('botbuilder');
 const {WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const FETCHTEAMINFO = 'FetchTeamInfo';
 class FetchTeamInfoDialog extends ComponentDialog {
-    constructor(id) {
+    constructor(id,conversationDataAccessor) {
         super(id);
-
+        this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
         this.addDialog(new WaterfallDialog(FETCHTEAMINFO, [
             this.beginFetchTeamInfoDialog.bind(this),
@@ -14,6 +14,8 @@ class FetchTeamInfoDialog extends ComponentDialog {
     }
 
     async beginFetchTeamInfoDialog(stepContext) {
+        var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+        currentState.lastDialogKey = "FetchTeamInfoDialog";
         var teamId = TeamsInfo.getTeamId;
         var teamDetails = await TeamsInfo.getTeamDetails(stepContext.context,teamId)
         if(teamDetails!=null){

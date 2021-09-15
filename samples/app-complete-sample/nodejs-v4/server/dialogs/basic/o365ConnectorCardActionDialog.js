@@ -4,9 +4,9 @@ const { CardFactory } = require('botbuilder');
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const O365CONNECTORCARDACTION = 'O365ConnectorCardAction';
 class O365ConnectorCardActionDialog extends ComponentDialog {
-    constructor(id) {
+    constructor(id,conversationDataAccessor) {
         super(id);
-
+        this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
         this.addDialog(new WaterfallDialog(O365CONNECTORCARDACTION, [
             this.beginO365ConnectorCardActionDialog.bind(this),
@@ -14,6 +14,8 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
     }
 
     async beginO365ConnectorCardActionDialog(stepContext) {
+        var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+        currentState.lastDialogKey = "O365ConnectorCardActionsDialog";
         var text = stepContext.context._activity.text.trim();
         var inputNumber = text.substr(text.length - 1, 1);
         console.log(inputNumber)

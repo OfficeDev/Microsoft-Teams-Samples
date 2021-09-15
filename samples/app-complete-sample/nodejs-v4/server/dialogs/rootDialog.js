@@ -25,6 +25,8 @@ const FETCHTEAMINFO = 'FetchTeamInfo';
 const DEEPLINKTAB = 'DeepLinkTab';
 const ATMENTION = 'AtMention';
 const O365CONNECTORCARDACTION = 'O365ConnectorCardAction';
+const CONVERSATION_DATA_PROPERTY = 'conversationData';
+const  GETLASTDIALOG = 'lastDialog';
 
 const { HelloDialog } = require('./basic/helloDialog');
 const { HelpDialog } = require('./basic/helpDialog');
@@ -46,33 +48,37 @@ const { FetchTeamInfoDialog } = require('./teams/fetchTeamInfoDialog');
 const { DeepLinkStaticTabDialog } = require('./teams/deepLinkStaticTabDialog');
 const { AtMentionDialog } = require('./teams/atMentionDialog');
 const { O365ConnectorCardActionDialog } = require('./basic/o365ConnectorCardActionDialog');
+const { GetLastDialogUsedDialog } = require('./basic/getLastDialogUsedDialog');
 class RootDialog extends ComponentDialog{
 
-    constructor() {
+    /**  @param {ConversationState} conversationState */
+    constructor(conversationState) {
         super(ROOT_DIALOG);
+        this.conversationDataAccessor = conversationState.createProperty(CONVERSATION_DATA_PROPERTY);
         this.addDialog(new WaterfallDialog(ROOT_WATERFALL_DIALOG, [
             this.promptStep.bind(this),
         ]));
-        this.addDialog(new HelloDialog(HELLO));
-        this.addDialog(new HelpDialog(HELP));
-        this.addDialog(new HeroCardDialog(HEROCARD));
-        this.addDialog(new MessageBackDialog(MESSAGEBACK));
-        this.addDialog(new MultiDialog1(MULTIDIALOG1));
-        this.addDialog(new MultiDialog2(MULTIDIALOG2));
-        this.addDialog(new ThumbnailCardDialog(THUMBNAILCARD));
-        this.addDialog(new AdaptiveCardDialog(ADAPTIVECARD));
-        this.addDialog(new O365ConnectorCardDialog(O365CONNECTORECARD));
-        this.addDialog(new PopupSigninCardDialog(POPUPSIGNINCARD));
-        this.addDialog(new BeginDialogExampleDailog(BEGINdIALOG));
-        this.addDialog(new QuizFullDialog(QUIZFULLDIALOG));
-        this.addDialog(new PromptDialog(PROMPTDIALOG));
-        this.addDialog(new ListNamesDialog(LISTNAMES));
-        this.addDialog(new FetchRosterDialog(FETCHROSTER));
-        this.addDialog(new DisplayCardsDialog(DISPLAYCARDS));
-        this.addDialog(new FetchTeamInfoDialog(FETCHTEAMINFO));
-        this.addDialog(new DeepLinkStaticTabDialog(DEEPLINKTAB));
-        this.addDialog(new AtMentionDialog(ATMENTION));
-        this.addDialog(new O365ConnectorCardActionDialog(O365CONNECTORCARDACTION));
+        this.addDialog(new HelloDialog(HELLO,this.conversationDataAccessor));
+        this.addDialog(new HelpDialog(HELP,this.conversationDataAccessor));
+        this.addDialog(new HeroCardDialog(HEROCARD,this.conversationDataAccessor));
+        this.addDialog(new MessageBackDialog(MESSAGEBACK,this.conversationDataAccessor));
+        this.addDialog(new MultiDialog1(MULTIDIALOG1,this.conversationDataAccessor));
+        this.addDialog(new MultiDialog2(MULTIDIALOG2,this.conversationDataAccessor));
+        this.addDialog(new ThumbnailCardDialog(THUMBNAILCARD,this.conversationDataAccessor));
+        this.addDialog(new AdaptiveCardDialog(ADAPTIVECARD,this.conversationDataAccessor));
+        this.addDialog(new O365ConnectorCardDialog(O365CONNECTORECARD,this.conversationDataAccessor));
+        this.addDialog(new PopupSigninCardDialog(POPUPSIGNINCARD,this.conversationDataAccessor));
+        this.addDialog(new BeginDialogExampleDailog(BEGINdIALOG,this.conversationDataAccessor));
+        this.addDialog(new QuizFullDialog(QUIZFULLDIALOG,this.conversationDataAccessor));
+        this.addDialog(new PromptDialog(PROMPTDIALOG,this.conversationDataAccessor));
+        this.addDialog(new ListNamesDialog(LISTNAMES,this.conversationDataAccessor));
+        this.addDialog(new FetchRosterDialog(FETCHROSTER,this.conversationDataAccessor));
+        this.addDialog(new DisplayCardsDialog(DISPLAYCARDS,this.conversationDataAccessor));
+        this.addDialog(new FetchTeamInfoDialog(FETCHTEAMINFO,this.conversationDataAccessor));
+        this.addDialog(new DeepLinkStaticTabDialog(DEEPLINKTAB,this.conversationDataAccessor));
+        this.addDialog(new AtMentionDialog(ATMENTION,this.conversationDataAccessor));
+        this.addDialog(new O365ConnectorCardActionDialog(O365CONNECTORCARDACTION,this.conversationDataAccessor));
+        this.addDialog(new GetLastDialogUsedDialog(GETLASTDIALOG,this.conversationDataAccessor));
 
         this.initialDialogId = ROOT_WATERFALL_DIALOG;
     }
@@ -96,8 +102,8 @@ class RootDialog extends ComponentDialog{
         }
 
         async promptStep(stepContext) {
-             var command = stepContext.context._activity.text;
-             console.log(command);
+            var activity = this.removeMentionText(stepContext.context._activity);
+             var command = activity.text;
              if(command.trim() =="hello" || command=="hi"){
                 return await stepContext.beginDialog(HELLO);
             }
@@ -167,8 +173,20 @@ class RootDialog extends ComponentDialog{
             else if(command.trim() == "at mention"){
                 return await stepContext.beginDialog(ATMENTION);
             }
+            else if(command.trim() == "last dialog"){
+                return await stepContext.beginDialog(GETLASTDIALOG);
+            }
             await stepContext.context.sendActivity('Sorry,Cannot recognize the command');
         return await stepContext.endDialog();
+        }
+
+        removeMentionText(activity){
+            var updatedActivity = activity;
+            if(activity.entities[0].type =="mention"){
+                updatedActivity.text = activity.text.replace(activity.entities[0].text,"");
+                return updatedActivity;
+            }
+            return activity;
         }
 }
 module.exports.RootDialog = RootDialog;
