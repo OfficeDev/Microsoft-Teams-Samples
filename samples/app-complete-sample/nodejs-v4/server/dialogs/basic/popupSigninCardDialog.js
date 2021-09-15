@@ -17,8 +17,13 @@ class PopupSigninCardDialog  extends ComponentDialog {
         var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "PopupSignInDialog";
         var reply = stepContext.context._activity;
+        if(reply.attachments != null && reply.entities.length>1){
+            reply.attachments = null;
+            reply.entities.splice(0,1);
+
+        }
         const buttons = [
-            { type: ActionTypes.Signin, title: 'Sign In', value: process.env.BaseUri+"/tab/tabConfig/popUpSignin.html?height=400&width=400" },
+            { type: ActionTypes.Signin, title: 'Sign In', value: process.env.BaseUri+"/public/tab/tabConfig/popUpSignin.html?height=400&width=400" },
 
         ];
 

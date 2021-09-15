@@ -27,6 +27,10 @@ const ATMENTION = 'AtMention';
 const O365CONNECTORCARDACTION = 'O365ConnectorCardAction';
 const CONVERSATION_DATA_PROPERTY = 'conversationData';
 const  GETLASTDIALOG = 'lastDialog';
+const SETUPTEXTMESSAGE = 'SetupTextMessage';
+const UPDATETEXTMESSAGE = 'UpdateTextMessage';
+const AUTHCARD = 'AuthCard';
+const FACEBOOKAUTH = 'FacebookAuth';
 
 const { HelloDialog } = require('./basic/helloDialog');
 const { HelpDialog } = require('./basic/helpDialog');
@@ -49,6 +53,11 @@ const { DeepLinkStaticTabDialog } = require('./teams/deepLinkStaticTabDialog');
 const { AtMentionDialog } = require('./teams/atMentionDialog');
 const { O365ConnectorCardActionDialog } = require('./basic/o365ConnectorCardActionDialog');
 const { GetLastDialogUsedDialog } = require('./basic/getLastDialogUsedDialog');
+const { UpdateTextMsgDialog } = require('./teams/updateTextMsgDialog');
+const { UpdateTextMsgSetupDialog } = require('./teams/updateTextMsgSetupDialog');
+const { AuthCardDialog } = require('./auth/authDialog');
+const { SimpleFacebookAuthDialog } = require('./auth/simpleFacebookAuthDialog');
+
 class RootDialog extends ComponentDialog{
 
     /**  @param {ConversationState} conversationState */
@@ -79,6 +88,10 @@ class RootDialog extends ComponentDialog{
         this.addDialog(new AtMentionDialog(ATMENTION,this.conversationDataAccessor));
         this.addDialog(new O365ConnectorCardActionDialog(O365CONNECTORCARDACTION,this.conversationDataAccessor));
         this.addDialog(new GetLastDialogUsedDialog(GETLASTDIALOG,this.conversationDataAccessor));
+        this.addDialog(new UpdateTextMsgDialog(UPDATETEXTMESSAGE,this.conversationDataAccessor));
+        this.addDialog(new UpdateTextMsgSetupDialog(SETUPTEXTMESSAGE,this.conversationDataAccessor));
+        this.addDialog(new AuthCardDialog(AUTHCARD,this.conversationDataAccessor));
+        this.addDialog(new SimpleFacebookAuthDialog(FACEBOOKAUTH,this.conversationDataAccessor));
 
         this.initialDialogId = ROOT_WATERFALL_DIALOG;
     }
@@ -175,6 +188,18 @@ class RootDialog extends ComponentDialog{
             }
             else if(command.trim() == "last dialog"){
                 return await stepContext.beginDialog(GETLASTDIALOG);
+            }
+            else if(command.trim() == "setup text message"){
+                return await stepContext.beginDialog(SETUPTEXTMESSAGE);
+            }
+            else if(command.trim() == "update text message"){
+                return await stepContext.beginDialog(UPDATETEXTMESSAGE);
+            }
+            else if(command.trim() == "auth"){
+                return await stepContext.beginDialog(AUTHCARD);
+            }
+            else if(command.trim() == "fblogin"){
+                return await stepContext.beginDialog(FACEBOOKAUTH);
             }
             await stepContext.context.sendActivity('Sorry,Cannot recognize the command');
         return await stepContext.endDialog();

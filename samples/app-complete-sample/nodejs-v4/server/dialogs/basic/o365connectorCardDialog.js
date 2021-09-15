@@ -18,6 +18,11 @@ class O365ConnectorCardDialog extends ComponentDialog {
         currentState.lastDialogKey = "O365ConnectorCardDialog";
         var inputNumber = stepContext.context._activity.text.substr(stepContext.context._activity.text.length - 1, 1);
         var reply = stepContext.context._activity;
+        if(reply.attachments != null && reply.entities.length>1){
+            reply.attachments = null;
+            reply.entities.splice(0,1);
+
+        }
         var card;
         switch (inputNumber) {
             case "1":

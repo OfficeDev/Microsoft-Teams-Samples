@@ -20,6 +20,11 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
         var inputNumber = text.substr(text.length - 1, 1);
         console.log(inputNumber)
         var reply = stepContext.context._activity;
+        if(reply.attachments != null && reply.entities.length>1){
+            reply.attachments = null;
+            reply.entities.splice(0,1);
+
+        }
         var card;
         switch (inputNumber) {
             case "2":
@@ -39,6 +44,8 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
     O365ActionableCardDefault = () => {
 
         var card = CardFactory.o365ConnectorCard({
+            "@context": "https://schema.org/extensions",
+            "@type": "MessageCard",
             "themeColor": "#E67A9E",
             "title": "card title",
             "text": "card text",
@@ -80,29 +87,29 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
             ],
             "potentialAction": [
                 {
-                    "type": "ActionCard",
+                    "@type": "ActionCard",
                     "name": "Multiple Choice",
                     "id": "Multiple Choice Card",
                     "inputs":
                         [
                             {
-                                "type": "multichoiceInput",
+                                "@type": "multichoiceInput",
                                 "id": "cardstype",
                                 "isRequired": true,
                                 "title": "Pick multiple options",
                                 "value": null,
-                                "Choices":
+                                "choices":
                                     [
                                         {
-                                            "disply": "Hero Card",
+                                            "display": "Hero Card",
                                             "value": "Hero Card"
                                         },
                                         {
-                                            "disply": "Hero Card",
+                                            "display": "Hero Card",
                                             "value": "Thumbnail Card"
                                         },
                                         {
-                                            "disply": "O365 Connector Card",
+                                            "display": "O365 Connector Card",
                                             "value": "O365 Connector Card"
                                         }],
 
@@ -110,27 +117,27 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                                 "isMultiSelect": true
                             },
                             {
-                                "type": "multichoiceInput",
+                                "@type": "multichoiceInput",
                                 "id": "Teams",
                                 "isRequired": true,
                                 "title": "Pick multiple options",
                                 "value": null,
-                                "Choices":
+                                "choices":
                                     [
                                         {
-                                            "disply": "Bot",
+                                            "display": "Bot",
                                             "value": "Bot"
                                         },
                                         {
-                                            "disply": "Tab",
+                                            "display": "Tab",
                                             "value": "Tab"
                                         },
                                         {
-                                            "disply": "Connector",
+                                            "display": "Connector",
                                             "value": "Connector"
                                         },
                                         {
-                                            "disply": "Compose Extension",
+                                            "display": "Compose Extension",
                                             "value": "Compose Extension"
                                         }
                                     ],
@@ -139,46 +146,46 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                                 "isMultiSelect": true
                             },
                             {
-                                "type": "multichoiceInput",
+                                "@type": "multichoiceInput",
                                 "id": "Apps",
                                 "isRequired": true,
                                 "title": "Pick an App",
                                 "value": null,
-                                "Choices":
+                                "choices":
                                     [
                                         {
-                                            "disply": "VSTS",
+                                            "display": "VSTS",
                                             "value": "VSTS"
                                         },
                                         {
-                                            "disply": "Wiki",
+                                            "display": "Wiki",
                                             "value": "Wiki"
                                         },
                                         {
-                                            "disply": "Github",
+                                            "display": "Github",
                                             "value": "Github"
                                         }],
 
                                 "style": "expanded",
                                 "isMultiSelect": false
                             }, {
-                                "type": "multichoiceInput",
+                                "@type": "multichoiceInput",
                                 "id": "OfficeProduct",
                                 "isRequired": true,
                                 "title": "Pick an Office Product",
                                 "value": null,
-                                "Choices":
+                                "choices":
                                     [
                                         {
-                                            "disply": "Outlook ",
+                                            "display": "Outlook ",
                                             "value": "Outlook"
                                         },
                                         {
-                                            "disply": "MS Teams",
+                                            "display": "MS Teams",
                                             "value": "MS Teams"
                                         },
                                         {
-                                            "disply": "Skype",
+                                            "display": "Skype",
                                             "value": "Skype"
                                         }],
 
@@ -188,27 +195,25 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                         ],
                     "actions": [
                         {
-                            "typr": "HttpPOST",
+                            "@type": "HttpPOST",
                             "name": "send",
                             "id": "multichoice",
-                            "body": {
-                                "cardstype": "{{cardstype.value}}",
-                                "Teams": "{{Teams.value}}",
-                                "Apps": "{{Apps.value}}", "OfficeProduct": "{{OfficeProduct.value}}"
-                            }
+                            "body":
+                                "cardstype={{cardstype.value}},Teams={{Teams.value}},Apps={{Apps.value}},OfficeProduct={{OfficeProduct.value}}"
+
                         }
                     ]
 
                 },
                 {
-                    "type": "ActionCard",
+                    "@type": "ActionCard",
                     "id": "text Input",
                     "name": "Input Card",
                     // text input control with multiline
                     "inputs":
                         [
                             {
-                                "type": "TextInput",
+                                "@type": "TextInput",
                                 "id": "text-1",
                                 "isRequired": false,
                                 "title": "multiline, no maxLength",
@@ -217,7 +222,7 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                                 "maxLength": null
                             },
                             {
-                                "type": "TextInput",
+                                "@type": "TextInput",
                                 "id": "text-2",
                                 "isRequired": false,
                                 "title": "single line, no maxLength",
@@ -226,7 +231,7 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                                 "maxLength": null
                             },
                             {
-                                "type": "TextInput",
+                                "@type": "TextInput",
                                 "id": "text-3",
                                 "isRequired": false,
                                 "title": "multiline, max len = 10, isRequired",
@@ -234,7 +239,7 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                                 "isMultiline": true,
                                 "maxLength": 10
                             }, {
-                                "type": "TextInput",
+                                "@type": "TextInput",
                                 "id": "text-4",
                                 "isRequired": false,
                                 "title": "single line, max len = 10, isRequired",
@@ -244,26 +249,23 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                             }],
                     "actions": [
                         {
-                            "type": "HttpPost",
+                            "@type": "HttpPOST",
                             "name": "Send",
                             "id": "inputText",
-                            "body": {
-                                "text1": "{{text-1.value}}",
-                                "text2": "{{text-2.value}}",
-                                "text3": "{{text-3.value}}",
-                                "text4": "{{text-4.value}}"
-                            }
+                            "body": 
+                                "text1={{text-1.value}}, text2={{text-2.value}},text3={{text-3.value}},text4={{text-4.value}}"
+                            
                         }
                     ]
                 },
                 {
-                    "type": "ActionCard",
+                    "@type": "ActionCard",
                     "name": "Date Input",
                     "id": "Date Card",
                     "inputs":
                         [
                             {
-                                "type": "DateInput",
+                                "@type": "DateInput",
                                 "id": "date-1",
                                 "isRequired": true,
                                 "title": "date with time",
@@ -281,16 +283,16 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                         ],
                     "actions": [
                         {
-                            "type": "HttpPost",
+                            "@type": "HttpPOST",
                             "name": "send",
                             "id": "dateInput",
-                            "body": { "date1": "{{date-1.value}}", "date2": "{{date-2.value}}" }
+                            "body": "date1={{date-1.value}},date2={{date-2.value}}"
                         }
                     ]
 
                 },
                 {
-                    "type": "ViewAction",
+                    "@type": "ViewAction",
                     "name": "Open Uri",
                     "id": "open Uri",
                     "targets": [{
@@ -310,7 +312,8 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                     }]
                 },
                 {
-                    "type": "ViewAction",
+                    "@context": "http://schema.org",
+                    "@type": "ViewAction",
                     "name": "View Action",
                     "id": null,
                     "target": ["http://microsoft.com"]
@@ -323,6 +326,8 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
     O365ActionableCardMultipleSection = () => {
 
         return CardFactory.o365ConnectorCard({
+            "@context": "https://schema.org/extensions",
+            "@type": "MessageCard",
             "themeColor": "#E67A9E",
             "title": "This is Actionable Card Title",
             "summary": "O365 card summary",
@@ -337,13 +342,13 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
             ],
             "potentialAction": [
                 {
-                    "type": "ActionCard",
+                    "@type": "ActionCard",
                     "name": "Multiple Choice",
                     "id": "Multiple Choice Card",
                     "inputs":
                         [
                             {
-                                "type": "multichoiceInput",
+                                "@type": "multichoiceInput",
                                 "id": "cardstype",
                                 "isRequired": true,
                                 "title": "Pick multiple options",
@@ -351,15 +356,15 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                                 "Choices":
                                     [
                                         {
-                                            "disply": "Hero Card",
+                                            "display": "Hero Card",
                                             "value": "Hero Card"
                                         },
                                         {
-                                            "disply": "Hero Card",
+                                            "display": "Hero Card",
                                             "value": "Thumbnail Card"
                                         },
                                         {
-                                            "disply": "O365 Connector Card",
+                                            "display": "O365 Connector Card",
                                             "value": "O365 Connector Card"
                                         }],
 
@@ -369,16 +374,16 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                         ],
                     "actions": [
                         {
-                            "type": "HttpPOSTS",
+                            "@type": "HttpPOST",
                             "name": "send",
                             "id": "multichoice",
-                            "body": { "cardstype": "{{cardstype.value}}" }
+                            "body": "cardstype={{cardstype.value}}"
                         }
                     ]
 
                 },
                 {
-                    "type": "ActionCard",
+                    "@type": "ActionCard",
                     "id": "text Input",
                     "name": "Input Card",
                     // text input control with multiline
@@ -395,21 +400,21 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                             }],
                     "actions": [
                         {
-                            "type": "HttpPOSTS",
+                            "@type": "HttpPOST",
                             "name": "Send",
                             "id": "inputText",
-                            "body": { "text1": "{{text-1.value}}" }
+                            "body": "text1={{text-1.value}}" 
                         }
                     ]
                 },
                 {
-                    "type": "ActionCard",
+                    "@type": "ActionCard",
                     "name": "Multiple Choice",
                     "id": "Multiple Choice Card",
                     "inputs":
                         [
                             {
-                                "type": "multichoiceInput",
+                                "@type": "multichoiceInput",
                                 "id": "CardsTypesection1",
                                 "isRequired": true,
                                 "title": "This is a title of combo box",
@@ -417,15 +422,15 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                                 "Choices":
                                     [
                                         {
-                                            "disply": "Hero Card",
+                                            "display": "Hero Card",
                                             "value": "Hero Card"
                                         },
                                         {
-                                            "disply": "Hero Card",
+                                            "display": "Hero Card",
                                             "value": "Thumbnail Card"
                                         },
                                         {
-                                            "disply": "O365 Connector Card",
+                                            "display": "O365 Connector Card",
                                             "value": "O365 Connector Card"
                                         }],
 
@@ -435,10 +440,10 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                         ],
                     "actions": [
                         {
-                            "type": "HttpPOSTS",
+                            "@type": "HttpPOST",
                             "name": "send",
                             "id": "multichoice",
-                            "body": { "CardsTypesection1": "{{CardsTypesection1.value}}" }
+                            "body": "CardsTypesection1= {{CardsTypesection1.value}}"
                         }
                     ]
                 }

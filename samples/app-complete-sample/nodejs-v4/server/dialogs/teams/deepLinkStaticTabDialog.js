@@ -35,6 +35,11 @@ class DeepLinkStaticTabDialog extends ComponentDialog {
 
     createDeepLinkMessage(stepContext){
         var reply = stepContext.context._activity;
+        if(reply.attachments != null && reply.entities.length>1){
+            reply.attachments = null;
+            reply.entities.splice(0,1);
+
+        }
         var card = this.createDeepLinkCard();
         reply.attachments = [card];
         return reply;

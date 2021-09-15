@@ -17,8 +17,8 @@ class AtMentionDialog extends ComponentDialog {
         var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "AtMentionDialog";
         var message = stepContext.context._activity;
-        let replyActivity = stepContext.context.getMentions(message);
-        await stepContext.Context.SendActivityAsync(replyActivity);
+        message.text = "at mention"
+        await stepContext.context.sendActivity(message);
         return await stepContext.endDialog();
     }
 }

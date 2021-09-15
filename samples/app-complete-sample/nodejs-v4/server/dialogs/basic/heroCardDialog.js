@@ -17,6 +17,11 @@ class HeroCardDialog extends ComponentDialog {
         var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "HeroCardDialog";
         var reply = stepContext.context._activity;
+        if(reply.attachments != null && reply.entities.length>1){
+            reply.attachments = null;
+            reply.entities.splice(0,1);
+
+        }
         const buttons = [
             { type: ActionTypes.OpenUrl, title: 'Get Started', value: "https://docs.microsoft.com/en-us/bot-framework/dotnet/bot-builder-dotnet-add-rich-card-attachments" },
             { type: ActionTypes.MessageBack, title: 'Message Back', value: 'msgback',text:"msgback",displayText:"This is Displayed Text for Message Back" },

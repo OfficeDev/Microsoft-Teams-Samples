@@ -17,6 +17,11 @@ class MultiDialog2 extends ComponentDialog {
         var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "MultiDialog2";
         var reply = stepContext.context._activity;
+        if(reply.attachments != null && reply.entities.length>1){
+            reply.attachments = null;
+            reply.entities.splice(0,1);
+
+        }
         const buttons = [
             { type: ActionTypes.ImBack, title: 'Invoke Hello Dialog', value: 'hi' },
             { type: ActionTypes.ImBack, title: 'Invoke Multi Dialog', value: 'multi dialog 1' },

@@ -1,38 +1,25 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const {WaterfallDialog, ComponentDialog,ChoicePrompt,TextPrompt  } = require('botbuilder-dialogs');
+const {WaterfallDialog, ComponentDialog,ChoicePrompt  } = require('botbuilder-dialogs');
 const PROMPTDIALOG = 'PromptDialog';
-const CHOICE_PROMPT = 'choiceDialog';
-const TEXT_PROMPT = 'TexPrompt'
+const CHOICE_PROMPT = 'choiceDialog'
 class PromptDialog extends ComponentDialog {
     constructor(id,conversationDataAccessor) {
         super(id);
         this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
-        this.addDialog(new ChoicePrompt(CHOICE_PROMPT, this.validateNumberOfAttempts.bind(this)));
-        this.addDialog(new TextPrompt(TEXT_PROMPT));
         this.addDialog(new WaterfallDialog(PROMPTDIALOG, [
             this.beginPromptDialog.bind(this),
-            this.getNameAsync.bind(this),
             this.getOptionAsync.bind(this),
             this.resultedOptionsAsync.bind(this)
         ]));
-        
+        this.addDialog(new ChoicePrompt(CHOICE_PROMPT, this.validateNumberOfAttempts.bind(this)));
     }
 
     async beginPromptDialog(stepContext) {
         var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "PromptDialog";
-         return await stepContext.prompt(
-            TEXT_PROMPT, {
-               prompt: 'Hi!  Im a bot.  What is your name?'
-             }
-        );
-    }
-    async getNameAsync(stepContext){
-        const name = stepContext.result;
-        await stepContext.context.sendActivity("Hi! Nice to meet you "+ name);
         return await stepContext.prompt(
             CHOICE_PROMPT, {
                 prompt: 'Lets play a game! You pick a button, and I will repeat it.',
@@ -41,7 +28,6 @@ class PromptDialog extends ComponentDialog {
             }
         );
     }
-
     async getOptionAsync(stepContext){
         const answer = stepContext.result.value;
         if (!answer) {

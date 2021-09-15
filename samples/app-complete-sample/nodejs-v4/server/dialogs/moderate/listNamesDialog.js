@@ -18,12 +18,19 @@ class ListNamesDialog extends ComponentDialog {
         currentState.lastDialogKey = "ListNamesDialog";
         var members = await TeamsInfo.getMembers(stepContext.context);
         var reply = stepContext.context._activity;
+        if(reply.attachments != null && reply.entities.length>1){
+            reply.attachments = null;
+            reply.entities.splice(0,1);
+
+        }
         reply.text = JSON.stringify(members)
+        var card =[];
         if(members.length!=0){
             for(let i=0;i<members.length;i++){
-                reply.attachments = [this.getInformationCard(members[i].givenName+members[i].surname,members[i].aadObjectId)]
+                 card.push(this.getInformationCard(members[i].givenName+members[i].surname,members[i].aadObjectId));
             }
         }
+        reply.attachments = card
         await stepContext.context.sendActivity(reply);
         return await stepContext.endDialog();
     }
