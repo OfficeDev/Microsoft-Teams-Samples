@@ -17,7 +17,15 @@ description: "Sample that shows how to build a bot for Microsoft Teams in C# wit
 
 # Microsoft Teams Bot in C#
 
-Sample that shows how to build a bot for Microsoft Teams in C#.
+Sample that shows how to build a bot for Microsoft Teams in C#. 
+
+## Features of this sample
+
+![ Dilaog ](template-bot-master-csharp/Images/dialog.png)
+
+![ Tab ](template-bot-master-csharp/Images/static-tab.png)
+
+![ ME](template-bot-master-csharp/Images/messaging-extension.png)
 
 ## Prerequisites
 
@@ -155,14 +163,6 @@ This file is a configuration file that can be used to update the config keys glo
 4. Added dilaogBot.cs. DialogExtension.cs, AdapterWithErrorHandler.cs
 
 5. Updated Dialog files into waterfall model dialog.
-
-## Features of this sample
-
-![ Dilaog ](template-bot-master-csharp/Images/dialog.png)
-
-![ Tab ](template-bot-master-csharp/Images/static-tab.png)
-
-![ ME](template-bot-master-csharp/Images/messaging-extension.png)
 
 
 ## Contributing
