@@ -33,8 +33,6 @@ const RecruitingDetails = () => {
                     <Notes />
                 </Flex>
                 <Flex column gap="gap.small" padding="padding.medium" className="questionsContainer">
-                     <Header as="h4" content="Questions" />
-                     <Text content="Questions added here will appear in meeting with candidate and can help you rate at the point of time" />
                      <Questions />
                 </Flex>
             </Flex>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Flex, Card, Button, Avatar, Text, ChatIcon, CallVideoIcon, CallIcon, EmailIcon} from '@fluentui/react-northstar'
+import { Flex, Card, Button, Avatar, Text, ChatIcon, CallVideoIcon, CallIcon, EmailIcon, PaperclipIcon, PopupIcon } from '@fluentui/react-northstar'
 import "../../recruiting-details/recruiting-details.css"
 import { getCandidateDetails } from "../services/recruiting-detail.service"
 import { ICandidateDetails } from './basic-details.types';
@@ -42,25 +42,36 @@ const BasicDetails = () => {
                 <hr className="details-separator" />
             </Card.Header>
             <Card.Body>
-                <Flex gap="gap.small" padding="padding.medium">
-                    <Flex column className="details">
+                <Flex gap="gap.small">
+                    <Flex column className="details details-border">
                         <Text content="Contact" weight="bold" />
-                        <Flex>
-                            <Button icon={<EmailIcon />} iconOnly text title="Email" size="small"/>
-                            <Text content={candidateDetails?.email} size="small" />
-                        </Flex>
-                        <Flex>
-                            <Button icon={<CallIcon />} iconOnly text title="Call" size="small" />
-                            <Text content={candidateDetails?.mobile} size="small" />
+                        <Flex column gap="gap.small">
+                            <Flex >
+                                <Button icon={<EmailIcon size="medium" />} iconOnly text title="Email" size="small" />
+                                <Text content={candidateDetails?.email} size="small" />
+                            </Flex>
+                            <Flex>
+                                <Button icon={<CallIcon size="medium" />} iconOnly text title="Call" size="small" />
+                                <Text content={candidateDetails?.mobile} size="small" />
+                            </Flex>
                         </Flex>
                     </Flex>
-                    <Flex column className="details">
+                    <Flex column className="details details-border">
                         <Text content="Skills" weight="bold" />
                         <Text content={candidateDetails?.skills} size="small" />
                     </Flex>
-                    <Flex column className="details">
+                    <Flex column className="source-details details-border">
                         <Text content="Attachments" weight="bold" />
-                        <Text content="email" size="small" />
+                        <Flex column gap="gap.small">
+                            <Flex>
+                                <Button icon={<PaperclipIcon size="medium" />} iconOnly text title="Email" size="small" />
+                                <Text content={'Resume'} size="small" className="iconText"/>
+                            </Flex>
+                            <Flex>
+                                <Button icon={<PopupIcon size="medium" />} iconOnly text title="Open link" size="small" />
+                                <Text content={'portfolio.com'} size="small" className="iconText"/>
+                            </Flex>
+                        </Flex>
                     </Flex>
                     <Flex column className="source-details">
                         <Text content="Source" weight="bold" />

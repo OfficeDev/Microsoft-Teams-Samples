@@ -6,7 +6,7 @@ const QuestionsMobile = (): React.ReactElement => {
     const [questionDetails, setQuestionDetails] = React.useState<any[]>([
         {
             key: "key1",
-            question: "Question 1",
+            question: "What are SDLC models available?",
             rating: 5,
             comments: {
                 comment: "Comment 1",
@@ -16,7 +16,7 @@ const QuestionsMobile = (): React.ReactElement => {
         },
         {
             key: "key2",
-            question: "Question 2",
+            question: "What are function points?",
             rating: 5,
             comments: {
                 comment: "Comment 1",
@@ -36,6 +36,7 @@ const QuestionsMobile = (): React.ReactElement => {
         }
         console.log(prevItems);
         setRatingsArray(prevItems);
+        console.log(localStorage.getItem("questionSet"));
     }, [])
 
     const setShowAddComment = (index: number, isShow: boolean) => {

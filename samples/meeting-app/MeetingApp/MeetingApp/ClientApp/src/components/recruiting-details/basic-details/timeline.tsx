@@ -44,15 +44,36 @@ const Timeline = () => {
                         </Flex>
                         <Flex column className="timelineDetail">
                            <Text content='Stage' />
-                           <Text content='14:00' />
+                           <Text content='Shortlisted' />
                         </Flex>
                         <Flex column className="timelineDetail">
                            <Text content='Hiring Team' />
-                           <Text content='14:00' />
+                           <Text content='Daniela' />
                         </Flex>
                         <Flex column className="timelineDetail">
                            <Text content='Result' />
+                           <Text content='Shortlisted' />
+                        </Flex>
+                        <Flex>
+                            <NotesIcon />
+                        </Flex>
+                    </Flex>
+                    <Flex gap="gap.small" className="timelineContainer">
+                        <Flex column className="timelineDetail">
+                           <Text content='26 Nov, 2020' />
                            <Text content='14:00' />
+                        </Flex>
+                        <Flex column className="timelineDetail">
+                           <Text content='Stage' />
+                           <Text content='Round 1' />
+                        </Flex>
+                        <Flex column className="timelineDetail">
+                           <Text content='Hiring Team' />
+                           <Text content='Ray' />
+                        </Flex>
+                        <Flex column className="timelineDetail">
+                           <Text content='Result' />
+                           <Text content='Hire' />
                         </Flex>
                         <Flex>
                             <NotesIcon />
