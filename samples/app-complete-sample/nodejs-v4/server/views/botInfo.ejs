@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Channel lifecycle demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js" integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT" crossorigin="anonymous"></script>
+
+<style>
+    #mainDiv{
+        padding-left: 10%;
+        padding-top:2%;
+    }
+</style>
+</head>
+<body id=mainDiv>
+  <button class="Btn">IMPORT</button>
+    <h3>file Content:</h3>
+    <div class="result"></div>
+    <pre id="filecontent"></pre>
+<!-- <script>
+// directory path
+// const dir = '../dialogs/';
+
+// // list all files in the directory
+// fs.readdir(dir, (err, files) => {
+//     if (err) {
+//         throw err;
+//     }
+
+//     // files object contains all files names
+//     // log them on console
+//     files.forEach(file => {
+//         console.log(file);
+//         var element = document.getElementById('filecontent');
+//       element.innerHTML += file;
+//     });
+// });
+
+    function readSingleFile(e) {
+        debugger;
+      var file = e.target.files[0];
+      if (!file) {
+        return;
+      }
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var contents = e.target.result;
+        displayContents(contents);
+      };
+      reader.readAsText(file);
+    }
+    
+    function displayContents(contents) {
+      var element = document.getElementById('filecontent');
+      element.innerHTML = contents;
+    }
+    
+    document.getElementById('fileinput')
+      .addEventListener('change', readSingleFile, false);
+    </script> -->
+
+    <script src="./scripts/tab.js" type="module"></script>
+</body>
+</html>

@@ -4,7 +4,7 @@
 const { ConfirmPrompt, OAuthPrompt, WaterfallDialog } = require('botbuilder-dialogs');
 
 const { LogoutDialog } = require('./logoutDialog');
-
+const axios = require('axios')
 const CONFIRM_PROMPT = 'ConfirmPrompt';
 const FACEBOOKAUTH = 'FacebookAuth';
 const OAUTH_PROMPT = 'OAuthPrompt';
@@ -31,7 +31,9 @@ class SimpleFacebookAuthDialog extends LogoutDialog {
     async promptStep(stepContext) {
         var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "FacebookAuthDialog";
-        return await stepContext.beginDialog(OAUTH_PROMPT);
+         await stepContext.beginDialog(OAUTH_PROMPT);
+
+        return await stepContext.resumeDialog(FACEBOOKAUTH);
     }
 
     async loginStep(stepContext) {
@@ -40,6 +42,7 @@ class SimpleFacebookAuthDialog extends LogoutDialog {
         const tokenResponse = stepContext.result;
         if (tokenResponse) {
             await stepContext.context.sendActivity('You are now logged in.');
+            var facbookProfile = await getFacebookUserData(tokenResponse.token);
             return await stepContext.prompt(CONFIRM_PROMPT, 'Would you like to view your token?');
         }
         await stepContext.context.sendActivity('Login was not successful please try again.');
@@ -71,6 +74,19 @@ class SimpleFacebookAuthDialog extends LogoutDialog {
         }
         return await stepContext.endDialog();
     }
+
+async getFacebookUserData(access_token) {
+  const { data } = await axios({
+    url: 'https://graph.facebook.com/me',
+    method: 'get',
+    params: {
+      fields: ['id', 'email', 'first_name', 'last_name'].join(','),
+      access_token: access_token,
+    },
+  });
+  console.log(data); // { id, email, first_name, last_name }
+  return data;
+};
 }
 
 exports.SimpleFacebookAuthDialog = SimpleFacebookAuthDialog;

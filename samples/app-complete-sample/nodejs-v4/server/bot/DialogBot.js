@@ -3,6 +3,8 @@
 
 const { TeamsActivityHandler } = require('botbuilder');
 
+const searchApiUrlFormat = "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=[keyword]&srlimit=[limit]&sroffset=[offset]&format=json";
+const imageApiUrlFormat = "https://en.wikipedia.org/w/api.php?action=query&formatversion=2&format=json&prop=pageimages&piprop=thumbnail&pithumbsize=250&titles=[title]";
 class DialogBot extends TeamsActivityHandler  {
    /**
      *
@@ -20,6 +22,7 @@ class DialogBot extends TeamsActivityHandler  {
       this.userState = userState;
       this.dialog = dialog;
       this.dialogState = this.conversationState.createProperty('DialogState');
+      this.userStateAccessor = this.userState.createProperty('userdata')
 
       this.onMessage(async (context, next) => {
           console.log('Running dialog with Message Activity.');
@@ -41,6 +44,20 @@ class DialogBot extends TeamsActivityHandler  {
       await this.conversationState.saveChanges(context, false);
       await this.userState.saveChanges(context, false);
   }
+
+  async handleTeamsMessagingExtensionQuery(context, query){
+    // get the parameters that were passed into the compose extension
+    let manifestInitialRun = "initialRun";
+    let manifestParameterName = "query";
+    let initialRunParameter = this.getQueryParameterByName(query, manifestInitialRun);
+    let queryParameter = this.getQueryParameterByName(query, manifestParameterName);
+}
+
+// return the value of the specified query parameter
+getQueryParameterByName(query, name) {
+let matchingParams = (query.parameters || []).filter(p => p.name === name);
+return matchingParams.length ? matchingParams[0].value : "";
+}
 }
 
 module.exports.DialogBot = DialogBot;

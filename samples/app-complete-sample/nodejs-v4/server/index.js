@@ -69,9 +69,25 @@ server.post('/api/messages', (req, res) => {
         await bot.run(context);
     });
 });
+server.use(express.static(path.join(__dirname, "../../public")));
+server.use(express.static(path.join(__dirname, "./public")));
+server.use(express.static(path.join(__dirname, 'static')));
+server.engine('html', require('ejs').renderFile);
+server.set('view engine', 'ejs');
+server.set('views', __dirname);
+server.get('/configure', function(req, res) {
+    res.render('./views/configure');
+});
 
-server.get('*', (req, res) => {
-    res.json({ error: 'Route not found' });
+
+
+server.get('/botInfo', function(req, res) {
+    res.render('./views/botInfo');
+});
+server.get('/tab/tabConfig/popUpSignin', (req, res) => {
+    res.render('popUpSignin.html')
+    //res.sendFile(path.resolve(__dirname, './public'));
+    //res.json({ error: 'Route not found' });
 });
 server.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);

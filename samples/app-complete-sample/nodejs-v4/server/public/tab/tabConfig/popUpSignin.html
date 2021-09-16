@@ -55,11 +55,6 @@
             Password : <input type="password" />
         </div>
     </div>
-    <div class="row input-container">
-        <div>
-            Magic Number : <input id="magicnumber" disabled="disabled" />
-        </div>
-    </div>
 
     <input type="submit" class="primary-button" value="Submit" onClick="submit()">
     <input type="submit" class="primary-button" value="Close" onClick="closeWindow()">
@@ -68,11 +63,10 @@
     <script>
         // magic number would not normally be shown to the user in the UI -- that is only to demonstrate the flow
         // receiving code can compare the magic number with what it expected
-        document.getElementById('magicnumber').value = Math.floor(Math.random() * 1000000);
         microsoftTeams.initialize();
         function submit()
         {
-            microsoftTeams.authentication.notifySuccess(document.getElementById('magicnumber').value);
+            microsoftTeams.authentication.notifySuccess('PopUpSignInAuthenticationSuccess');
         }
         function closeWindow()
         {

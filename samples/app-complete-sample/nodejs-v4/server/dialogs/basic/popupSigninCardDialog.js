@@ -23,7 +23,7 @@ class PopupSigninCardDialog  extends ComponentDialog {
 
         }
         const buttons = [
-            { type: ActionTypes.Signin, title: 'Sign In', value: process.env.BaseUri+"/public/tab/tabConfig/popUpSignin.html?height=400&width=400" },
+            { type: ActionTypes.Signin, title: 'Sign In', value: process.env.BaseUri+"/tab/tabConfig/popUpSignin.html?height=400&width=400" },
 
         ];
 
