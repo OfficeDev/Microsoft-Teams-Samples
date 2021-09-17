@@ -5,6 +5,7 @@
 
 using MeetingApp.Bots;
 using MeetingApp.Data.Repositories;
+using MeetingApp.Data.Repositories.Questions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -39,6 +40,8 @@ namespace MeetingApp
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
             services.AddSingleton<ICandidateRepository>(new CandidateRepository(this.Configuration["StorageConnectionString"]));
+
+            services.AddSingleton<IQuestionsRepository>(new QuestionsRepository(this.Configuration["StorageConnectionString"]));
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

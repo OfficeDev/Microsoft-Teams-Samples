@@ -10,8 +10,9 @@ export interface ICandidateDetails {
 }
 
 export interface IQuestionSet {
-  meetingId?: string;
+  meetingId: string;
+  questionId?: string,
   question: string;
-  setBy?: string;
+  setBy: string;
   isDelete: number;
 }

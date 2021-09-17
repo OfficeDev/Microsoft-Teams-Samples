@@ -1,11 +1,13 @@
 import React from "react";
-import { Input, Button } from '@fluentui/react-northstar'
+import { Flex, Button, Dropdown } from '@fluentui/react-northstar'
 import "../../recruiting-details/recruiting-details.css"
 import * as microsoftTeams from "@microsoft/teams-js";
 
 const AddQuestions = (): React.ReactElement => {
-    const [question, setQuestion] = React.useState<string>('');
-
+    const [question, setQuestion] = React.useState<any>();
+    const inputQuestions = [
+        "What are SDLC processes"
+    ]
     React.useEffect(() => {
         microsoftTeams.initialize();
     }, [])
@@ -17,8 +19,10 @@ const AddQuestions = (): React.ReactElement => {
 
     return (
         <>
-            <Input placeholder="Type your question" onChange={(e: any) => setQuestion(e.target.defaultValue)} />
-            <Button content="Add" onClick={saveQuestion} />
+           <Flex column gap="gap.smaller">
+             <Dropdown clearable items={inputQuestions} placeholder="Select question" onChange={(event, option): void => {setQuestion(option.value)}} />
+             <Button content="Add" onClick={saveQuestion} />
+            </Flex>
         </>
     )
 }

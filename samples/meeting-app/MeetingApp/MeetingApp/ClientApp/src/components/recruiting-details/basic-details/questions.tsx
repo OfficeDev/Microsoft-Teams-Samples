@@ -1,39 +1,99 @@
 import React from "react";
-import { Flex, Card, Button, Text, Header, AddIcon } from '@fluentui/react-northstar'
+import {
+    Flex,
+    Card,
+    Button,
+    Text,
+    Header,
+    AddIcon,
+    MoreIcon,
+    Tooltip,
+    CallControlStopPresentingNewIcon,
+    EditIcon,
+    Loader
+} from '@fluentui/react-northstar'
 import "../../recruiting-details/recruiting-details.css"
 import * as microsoftTeams from "@microsoft/teams-js";
 import { IQuestionSet } from "./basic-details.types";
-import { saveQuestions } from "../services/recruiting-detail.service";
+import { saveQuestions, getQuestions, deleteQuestion as deleteQuestionDetails } from "../services/recruiting-detail.service";
 
 const Questions = (): React.ReactElement => {
-    const [questionDetails, setQuestionDetails] = React.useState<any[]>([
-        {
-            key: 1,
-            question: "What are SDLC models available?",
-        },
-        {
-            key: 2,
-            question: "What are function points?",
-        }
-    ]);
-
+    // The questions array set for a meeting.
+    const [questionDetails, setQuestionDetails] = React.useState<any[]>([]);
     const [ratingsArray, setRatingsArray] = React.useState<any[]>([]);
+    const [showLoader, setShowLoader] = React.useState<boolean>(false);
 
+    // Method to start task module to add a question.
     const addQuestionsTaskModule = () => {
         let taskInfo = {
             title: "Questions",
-            height: 250,
-            width: 250,
+            height: 400,
+            width: 400,
             url: `${window.location.origin}/questions`,
         };
 
         microsoftTeams.tasks.startTask(taskInfo, (err, question) => {
-            const currentQuestions = [...questionDetails]
-            currentQuestions.push({key: currentQuestions.length + 1, question: question})
-            setQuestionDetails(currentQuestions);
-           
+            if (err) {
+                console.log("Some error occurred in the task module")
+                return
+            }
+            microsoftTeams.getContext((context) => {
+
+                // The question details to save.
+                const questDetails: IQuestionSet = {
+                    meetingId: context.meetingId!,
+                    question: question,
+                    setBy: context.userPrincipalName!,
+                    isDelete: 0
+                };
+
+                // API call to save the question to storage.
+                saveQuestions(questDetails)
+                    .then((res) => {
+                        loadQuestions()
+                    })
+                    .catch((ex) => {
+                        console.log("Error while saving question details" + ex)
+                    });
+            })
         });
     };
+
+    // Method to load the questions in the question container.
+    const loadQuestions = () => {
+        microsoftTeams.getContext((context) => {
+            getQuestions(context.meetingId!)
+                .then((res) => {
+                    console.log(res)
+                    const questions = res.data as any[];
+                    setQuestionDetails(questions)
+                })
+                .catch((ex) => {
+                    console.log("Error while getting the question details" + ex)
+                });
+        });
+    }
+
+    const deleteQuestion = (questionDetail: any) => {
+        const questionDetails: IQuestionSet = {
+            meetingId: questionDetail.meetingId,
+            question: questionDetail.question,
+            questionId: questionDetail.rowKey,
+            setBy: questionDetail.setBy,
+            isDelete: 1
+        }
+        setShowLoader(true);
+        // API call to save the question to storage.
+        deleteQuestionDetails(questionDetails)
+            .then((res) => {
+                loadQuestions();
+                setShowLoader(false);
+            })
+            .catch((ex) => {
+                console.log("Error while deleting question details" + ex);
+                setShowLoader(false);
+            });
+    }
 
     React.useEffect((): any => {
         const prevItems = [];
@@ -42,38 +102,41 @@ const Questions = (): React.ReactElement => {
                 <Button size="small" circular content={i} />
             )
         }
-        setRatingsArray(prevItems);
-        microsoftTeams.initialize();
-        microsoftTeams.getContext((context) => {
-            const questDetails: IQuestionSet[] = [];
-            questionDetails.map((questionDetail, index) => {
-                questDetails.push({
-                    meetingId: context.meetingId,
-                    question: questionDetail,
-                    setBy: context.userPrincipalName,
-                    isDelete: 0
-                });
-            })
 
-            saveQuestions(questDetails[0]);
-        })
+        // Setting ratings to show in the UI.
+        setRatingsArray(prevItems);
+
+        microsoftTeams.initialize();
+        loadQuestions();
     }, [])
 
     return (
         <>
+            <Loader hidden={!showLoader} />
             <Flex gap="gap.smaller">
-                <Header as="h4" content="Questions" className="questionsHeader"/>
-                <AddIcon onClick={addQuestionsTaskModule} title="Add new questions"/>
+                <Header as="h4" content="Questions" className="questionsHeader" />
+                <AddIcon onClick={addQuestionsTaskModule} title="Add new questions" />
             </Flex>
             <Text content="Questions added here will appear in meeting with candidate and can help you rate at the point of time" />
             {
                 questionDetails.map((questionDetail, index) => {
                     return (
                         <>
-                            <Card fluid aria-roledescription="card with question details" className="questionsCard">
+                            <Card key={index} fluid aria-roledescription="card with question details" className="questionsCard">
                                 <Card.Body>
                                     <Flex gap="gap.smaller" column>
-                                        <Text content={questionDetail.question} />
+                                        <Flex gap="gap.smaller" space="between">
+                                            <Text content={questionDetail.question} />
+                                            <Tooltip
+                                                trigger={<MoreIcon />}
+                                                content={
+                                                    <Flex column gap="gap.smaller">
+                                                        <Button icon={<EditIcon />} text content="Edit" />
+                                                        <Button icon={<CallControlStopPresentingNewIcon />} text content="Delete" onClick={() => deleteQuestion(questionDetail)} />
+                                                    </Flex>
+                                                }
+                                            />
+                                        </Flex>
                                         <Flex gap="gap.small">
                                             {ratingsArray}
                                         </Flex>

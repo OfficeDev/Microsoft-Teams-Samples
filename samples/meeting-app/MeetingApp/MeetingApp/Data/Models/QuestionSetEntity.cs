@@ -1,4 +1,5 @@
 ﻿using Microsoft.Azure.Cosmos.Table;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +9,19 @@ namespace MeetingApp.Data.Models
 {
     public class QuestionSetEntity: TableEntity
     {
+        [JsonProperty("meetingId")]
         public string MeetingId { get; set; }
 
+        [JsonProperty("question")]
         public string Question { get; set; }
 
+        [JsonProperty("questionId")]
+        public string QuestionId { get; set; }
+
+        [JsonProperty("setBy")]
         public string SetBy { get; set; }
 
-        public string IsDelete { get; set; }
+        [JsonProperty("isDelete")]
+        public int IsDelete { get; set; }
     }
 }
