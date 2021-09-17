@@ -6,6 +6,6 @@ export function getCandidateDetails(): Promise<AxiosResponse<unknown>> {
 }
 
 // Method to save Questions.
-export function saveQuestions(questionDetails: IQuestionSet[]): Promise<AxiosResponse<unknown>> {
+export function saveQuestions(questionDetails: IQuestionSet): Promise<AxiosResponse<unknown>> {
   return axios.post(`${window.location.origin}/api/Question/insertQuest`, questionDetails);
 }

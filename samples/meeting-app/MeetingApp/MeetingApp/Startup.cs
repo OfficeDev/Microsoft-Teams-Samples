@@ -39,6 +39,12 @@ namespace MeetingApp
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
             services.AddSingleton<ICandidateRepository>(new CandidateRepository(this.Configuration["StorageConnectionString"]));
+
+            // In production, the React files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/build";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

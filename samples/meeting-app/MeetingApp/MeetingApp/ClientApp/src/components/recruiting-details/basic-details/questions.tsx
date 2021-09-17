@@ -54,8 +54,8 @@ const Questions = (): React.ReactElement => {
                     isDelete: 0
                 });
             })
-            
-            saveQuestions(questDetails);
+
+            saveQuestions(questDetails[0]);
         })
     }, [])
 
