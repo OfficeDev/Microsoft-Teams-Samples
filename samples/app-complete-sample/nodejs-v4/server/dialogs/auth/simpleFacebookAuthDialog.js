@@ -31,9 +31,9 @@ class SimpleFacebookAuthDialog extends LogoutDialog {
     async promptStep(stepContext) {
         var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "FacebookAuthDialog";
-         await stepContext.beginDialog(OAUTH_PROMPT);
+        return await stepContext.beginDialog(OAUTH_PROMPT);
 
-        return await stepContext.resumeDialog(FACEBOOKAUTH);
+        //return await stepContext.resumeDialog(FACEBOOKAUTH);
     }
 
     async loginStep(stepContext) {

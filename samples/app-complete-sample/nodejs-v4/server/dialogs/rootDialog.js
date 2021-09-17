@@ -31,6 +31,8 @@ const SETUPTEXTMESSAGE = 'SetupTextMessage';
 const UPDATETEXTMESSAGE = 'UpdateTextMessage';
 const AUTHCARD = 'AuthCard';
 const FACEBOOKAUTH = 'FacebookAuth';
+const UPDATECARDMESSAGE = 'UpdateCardMessage';
+const UPDATECARDSETUP = 'UpdatecardSetupMsg';
 
 const { HelloDialog } = require('./basic/helloDialog');
 const { HelpDialog } = require('./basic/helpDialog');
@@ -55,6 +57,9 @@ const { O365ConnectorCardActionDialog } = require('./basic/o365ConnectorCardActi
 const { GetLastDialogUsedDialog } = require('./basic/getLastDialogUsedDialog');
 const { UpdateTextMsgDialog } = require('./teams/updateTextMsgDialog');
 const { UpdateTextMsgSetupDialog } = require('./teams/updateTextMsgSetupDialog');
+const { UpdateCardMsgSetupDialog } = require('./teams/updateCardMsgSetupDialog');
+const { UpdateCardMsgDialog } = require('./teams/updateCardMsgDialog');
+
 const { AuthCardDialog } = require('./auth/authDialog');
 const { SimpleFacebookAuthDialog } = require('./auth/simpleFacebookAuthDialog');
 
@@ -92,6 +97,8 @@ class RootDialog extends ComponentDialog{
         this.addDialog(new UpdateTextMsgSetupDialog(SETUPTEXTMESSAGE,this.conversationDataAccessor));
         this.addDialog(new AuthCardDialog(AUTHCARD,this.conversationDataAccessor));
         this.addDialog(new SimpleFacebookAuthDialog(FACEBOOKAUTH,this.conversationDataAccessor));
+        this.addDialog(new UpdateCardMsgDialog(UPDATECARDMESSAGE,this.conversationDataAccessor));
+        this.addDialog(new UpdateCardMsgSetupDialog(UPDATECARDSETUP,this.conversationDataAccessor));
 
         this.initialDialogId = ROOT_WATERFALL_DIALOG;
     }
@@ -200,6 +207,12 @@ class RootDialog extends ComponentDialog{
             }
             else if(command.trim() == "fblogin"){
                 return await stepContext.beginDialog(FACEBOOKAUTH);
+            }
+            else if(command.trim() == "setup card message"){
+                return await stepContext.beginDialog(UPDATECARDSETUP);
+            }
+            else if(command.trim() == "update card message"){
+                return await stepContext.beginDialog(UPDATECARDMESSAGE);
             }
             await stepContext.context.sendActivity('Sorry,Cannot recognize the command');
         return await stepContext.endDialog();

@@ -1,10 +1,24 @@
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
+const fs = require('fs')
 const ENV_FILE = path.join(__dirname, '../.env');
 require('dotenv').config({ path: ENV_FILE });
-
 const PORT = process.env.PORT || 3979;
+const server = express();
+
+server.use(cors());
+server.use(express.json());
+server.use(express.urlencoded({
+    extended: true
+}));
+server.use(express.static(path.join(__dirname, "../../public")));
+server.use(express.static(path.join(__dirname, "./public")));
+server.engine('html', require('ejs').renderFile);
+server.set('view engine', 'ejs');
+server.set('views', __dirname);
+
+
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
@@ -55,13 +69,7 @@ const userState = new UserState(memoryStorage);
 const dialog = new RootDialog(conversationState);
 // Create the bot that will handle incoming messages.
 const bot = new Bot(conversationState, userState, dialog);
-const server = express();
 
-server.use(cors());
-server.use(express.json());
-server.use(express.urlencoded({
-    extended: true
-}));
 
 // Listen for incoming requests.
 server.post('/api/messages', (req, res) => {
@@ -69,25 +77,18 @@ server.post('/api/messages', (req, res) => {
         await bot.run(context);
     });
 });
-server.use(express.static(path.join(__dirname, "../../public")));
-server.use(express.static(path.join(__dirname, "./public")));
-server.use(express.static(path.join(__dirname, 'static')));
-server.engine('html', require('ejs').renderFile);
-server.set('view engine', 'ejs');
-server.set('views', __dirname);
+
 server.get('/configure', function(req, res) {
     res.render('./views/configure');
 });
-
-
-
 server.get('/botInfo', function(req, res) {
-    res.render('./views/botInfo');
-});
-server.get('/tab/tabConfig/popUpSignin', (req, res) => {
-    res.render('popUpSignin.html')
-    //res.sendFile(path.resolve(__dirname, './public'));
-    //res.json({ error: 'Route not found' });
+    var fileContent;
+    fs.readFile('./server/dialogs/rootDialog.js', (err, data) => {
+        if (err) throw err;
+        fileContent = data.toString();
+        res.render('./views/botInfo', { fileContent: JSON.stringify(fileContent) });
+    });
+    
 });
 server.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);

@@ -17,12 +17,15 @@ class UpdateTextMsgSetupDialog extends ComponentDialog {
         var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "UpdateTextMsgSetupDialog";
         var reply = stepContext.context._activity;
+        reply.text = "Message set to be updated"
         if(reply.attachments != null && reply.entities.length>1){
             reply.attachments = null;
             reply.entities.splice(0,1);
         }
-        reply.text = "Message set to be updated"
+        
+        console.log(reply);
         await stepContext.context.sendActivity(reply);
+        currentState.activityId = reply.id;
         return await stepContext.endDialog();
     }
 }
