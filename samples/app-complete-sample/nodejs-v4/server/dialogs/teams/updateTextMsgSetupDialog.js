@@ -22,10 +22,9 @@ class UpdateTextMsgSetupDialog extends ComponentDialog {
             reply.attachments = null;
             reply.entities.splice(0,1);
         }
-        
-        console.log(reply);
-        await stepContext.context.sendActivity(reply);
-        currentState.activityId = reply.id;
+        var result = await stepContext.context.sendActivity(reply);
+        console.log(result)
+        currentState.activityId = result.id;
         return await stepContext.endDialog();
     }
 }

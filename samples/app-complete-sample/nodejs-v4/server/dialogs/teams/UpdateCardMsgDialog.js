@@ -19,7 +19,6 @@ class UpdateCardMsgDialog extends ComponentDialog {
         if(currentState.lastDialogKey=="UpdateCardMsgSetupDialog" && currentState.activityId!=null){
             var reply = stepContext.context._activity;
             reply.id = currentState.activityId;
-            reply.replyToId = currentState.activityId;
             if(reply.attachments != null && reply.entities.length>1){
                 reply.attachments = null;
                 reply.entities.splice(0,1);

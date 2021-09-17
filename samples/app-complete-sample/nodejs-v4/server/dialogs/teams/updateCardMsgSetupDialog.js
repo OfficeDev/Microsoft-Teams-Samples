@@ -31,8 +31,9 @@ class UpdateCardMsgSetupDialog extends ComponentDialog {
             buttons, { subtitle: "Subtitle"});
 
         reply.attachments = [card];
-        await stepContext.context.sendActivity(reply);
-        currentState.activityId = reply.id;
+        var result = await stepContext.context.sendActivity(reply);
+        console.log(result);
+        currentState.activityId = result.id;
         return await stepContext.endDialog();
     }
 }
