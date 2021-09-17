@@ -9,6 +9,7 @@
 |    | Sample Name        | Description                                                                                                                | C#    | TypeScript   
 |:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|
 |1|Hello World            | Microsoft Teams hello world sample app.                                           |[View][app-hello-world#cs]     |[View][app-hello-world#ts]
+|2|App Complete Sample    | Sample covering multiple scenarios.                                               |[View][app-complete-sample#cs]     |
 
 ## [Tabs samples](https://docs.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   | JavaScript
@@ -126,6 +127,7 @@
 |10|App SSO | Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl |[View][app-sso#cs] |[View][app-sso#js] 
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
+[app-complete-sample#cs]:samples/app-complete-sample/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
 [personal-tab-quickstart#ts]:samples/tab-personal-quickstart/ts
 [personal-tab-quickstart#js]:samples/tab-personal-quickstart/js
