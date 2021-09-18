@@ -7,6 +7,8 @@ export interface ICandidateDetails {
   mobile: string;
   skills: string;
   source: string;
+  education: string;
+  resumeUrl: string;
 }
 
 export interface IQuestionSet {

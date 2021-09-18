@@ -13,6 +13,6 @@ namespace MeetingApp.Data.Repositories.Questions
 
         Task<IEnumerable<QuestionSetEntity>> GetQuestions(string meetingId);
 
-        Task<TableResult> DeleteQuestion(QuestionSetEntity entity);
+        Task<int> DeleteQuestion(QuestionSetEntity entity);
     }
 }

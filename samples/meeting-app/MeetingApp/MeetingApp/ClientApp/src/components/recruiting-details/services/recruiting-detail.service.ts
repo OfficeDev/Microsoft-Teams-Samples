@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import { IQuestionDetails } from '../../../types/recruitment.types';
 import { IQuestionSet } from '../basic-details/basic-details.types';
 
 // Method to get Candidate details.
@@ -19,4 +20,10 @@ export function getQuestions(meetingId: string): Promise<AxiosResponse<unknown>>
 // Method to delete Question.
 export function deleteQuestion(questionDetails: IQuestionSet): Promise<AxiosResponse<unknown>> {
   return axios.post(`${window.location.origin}/api/Question/delete`, questionDetails);
+}
+
+// Method to save Questions.
+export function saveFeedback(questionDetails: IQuestionDetails[]): Promise<AxiosResponse<unknown>> {
+  console.log(questionDetails);
+  return axios.post(`${window.location.origin}/api/Question/feedback`, questionDetails);
 }

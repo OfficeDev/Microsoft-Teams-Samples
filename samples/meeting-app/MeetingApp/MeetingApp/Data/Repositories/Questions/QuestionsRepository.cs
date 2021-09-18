@@ -54,16 +54,16 @@ namespace MeetingApp.Data.Repositories.Questions
         /// Delete a particular question in table storage.
         /// </summary>
         /// <returns><see cref="Task"/> Already saved entity detail.</returns>
-        public async Task<TableResult> DeleteQuestion(QuestionSetEntity entity)
+        public async Task<int> DeleteQuestion(QuestionSetEntity entity)
         {
             await this.EnsureInitializedAsync().ConfigureAwait(false);
             entity.PartitionKey = entity.MeetingId;
             entity.RowKey = entity.QuestionId;
             entity.ETag = "*";
-            var tableOperation = TableOperation.Delete(entity);
-            var result = await this.questionCloudTable.ExecuteAsync(tableOperation).ConfigureAwait(false);
+            var deleteOperation = TableOperation.Delete(entity);
+            var result = await this.questionCloudTable.ExecuteAsync(deleteOperation).ConfigureAwait(false);
 
-            return (TableResult)result.Result;
+            return (int)result.HttpStatusCode;
         }
 
         /// <summary>

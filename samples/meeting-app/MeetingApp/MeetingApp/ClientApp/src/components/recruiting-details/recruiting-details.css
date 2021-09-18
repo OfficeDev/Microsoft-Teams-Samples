@@ -98,7 +98,15 @@
       margin: 0;
   }
 
+  .defaultBtn{
+    background-color: #333333 !important;
+    color: #fff !important;
+  }
 
+  .selectedBtn{
+    background-color: #56599f !important;
+    color: #fff !important;
+  }
 
 /* Styles for mobile view */
 
@@ -210,4 +218,10 @@ textarea::-webkit-input-placeholder {
 
 .education{
     margin-left: 5px !important;
+}
+
+.questionCardsMobile{
+    min-height: 80vh;
+    max-height: 80vh;
+    overflow-y: auto;
 }

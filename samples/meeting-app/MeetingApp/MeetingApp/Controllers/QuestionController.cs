@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using MeetingApp.Data.Models;
 using MeetingApp.Data.Repositories.Questions;
@@ -36,7 +37,7 @@ namespace MeetingApp.Controllers
             try
             {
                 var result = await this._questionsRepository.DeleteQuestion(question);
-                if (result == null) return NotFound();
+                if (result != (int)HttpStatusCode.NoContent) return NotFound();
                 return Ok(result);
             }
             catch (Exception ex)
