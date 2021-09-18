@@ -73,5 +73,11 @@
         public const string UpdateCard = "update card message";
 
         public const string AdaptiveCard = "adaptive card";
+
+        public const string DisplayCardO365ConnectorCard2 = "connector card 2";
+
+        public const string DisplayCardO365ConnectorCard3 = "connector card 3";
+
+        public const string DisplayCardO365ConnectorActionableCard2 = "connector card actions 2";
     }
 }

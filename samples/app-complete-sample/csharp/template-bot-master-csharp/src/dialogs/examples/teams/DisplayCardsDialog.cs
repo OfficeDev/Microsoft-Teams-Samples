@@ -1,92 +1,132 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Dialogs.Choices;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
 {
     /// <summary>
     /// This is Card Dialog Class. Main purpose of this dialog class is to post different types of Cards example like Hero Card, Thumbnail Card etc.
     /// </summary>
-    [Serializable]
-    public class DisplayCardsDialog : IDialog<object>
+    public class DisplayCardsDialog : ComponentDialog
     {
-        private IEnumerable<string> options = null;
-
-        public DisplayCardsDialog()
-        {
-            options = new List<string> { Strings.DisplayCardHeroCard, Strings.DisplayCardThumbnailCard, Strings.DisplayCardO365ConnectorCardDefault, Strings.DisplayCardO365ConnectorCard2, Strings.DisplayCardO365ConnectorCard3, Strings.DisplayCardO365ConnectorActionableCardDefault, Strings.DisplayCardO365ConnectorActionableCard2, Strings.DisplayCardAdaptiveCard };
-        }
-
-        public async Task StartAsync(IDialogContext context)
-        {
-            if (context == null)
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        private static List<Choice> options = new List<Choice>()
             {
-                throw new ArgumentNullException(nameof(context));
+                new Choice(Strings.DisplayCardHeroCard) { Synonyms = new List<string> { Strings.DisplayCardHeroCard } },
+                new Choice(Strings.DisplayCardThumbnailCard) { Synonyms = new List<string> { Strings.DisplayCardThumbnailCard } },
+                new Choice(Strings.DisplayCardO365ConnectorCardDefault) { Synonyms = new List<string> { Strings.DisplayCardO365ConnectorCardDefault } },
+                new Choice(Strings.DisplayCardO365ConnectorCard2) { Synonyms = new List<string> { Strings.DisplayCardO365ConnectorCard2 } },
+                new Choice(Strings.DisplayCardO365ConnectorCard3) { Synonyms = new List<string> { Strings.DisplayCardO365ConnectorCard3 } },
+                new Choice(Strings.DisplayCardO365ConnectorActionableCardDefault) { Synonyms = new List<string> { Strings.DisplayCardO365ConnectorActionableCardDefault } },
+                new Choice(Strings.DisplayCardO365ConnectorActionableCard2) { Synonyms = new List<string> { Strings.DisplayCardO365ConnectorActionableCard2 } },
+                new Choice(Strings.DisplayCardAdaptiveCard) { Synonyms = new List<string> { Strings.DisplayCardAdaptiveCard } }
+            };
+
+        public DisplayCardsDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(DisplayCardsDialog))
+        {
+            this._conversationState = conversationState;
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
+            {
+                BeginDisplayCardsAsync,
+                GetCardNameAsync,
+                ResumeAfterOptionDialogAsync
+            }));
+            AddDialog(new ChoicePrompt(nameof(ChoicePrompt)));
+            AddDialog(new TextPrompt(nameof(TextPrompt)));
+            AddDialog(new HeroCardDialog(conversationState));
+            AddDialog(new ThumbnailcardDialog(conversationState));
+            AddDialog(new AdaptiveCardDialog(conversationState));
+            AddDialog(new O365ConnectorCardActionsDialog(conversationState));
+            AddDialog(new O365ConnectorCardDialog(conversationState));
+        }
+        private async Task<DialogTurnResult> BeginDisplayCardsAsync(
+           WaterfallStepContext stepContext,
+           CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
             }
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogDisplayCardsDialog);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogDisplayCardsDialog;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
 
-            await context.PostAsync(Strings.DisplayCardMsgTitle);
-
-            PromptDialog.Choice<string>(
-                context,
-                this.DisplaySelectedCard,
-                options,
-                Strings.DisplayCardPromptText,
-                Strings.PromptInvalidMsg,
-                3);
+            await stepContext.Context.SendActivityAsync(Strings.DisplayCardMsgTitle);
+            return await stepContext.PromptAsync(
+                   nameof(ChoicePrompt),
+                   new PromptOptions
+                   {
+                       Prompt = MessageFactory.Text(Strings.DisplayCardPromptText),
+                       Choices = options,
+                       RetryPrompt = MessageFactory.Text(Strings.DisplayCardPromptText)
+                   },
+                   cancellationToken);
         }
 
-        public async Task DisplaySelectedCard(IDialogContext context, IAwaitable<string> result)
+        private async Task<DialogTurnResult> GetCardNameAsync(WaterfallStepContext stepContext,
+          CancellationToken cancellationToken = default(CancellationToken))
         {
-            var selectedCard = await result;
-
+            var selectedCard = (stepContext.Result as FoundChoice).Value;
             if (selectedCard.Equals(Strings.DisplayCardHeroCard))
             {
-                context.Call(new HeroCardDialog(), ResumeAfterOptionDialog);
+                return await stepContext.BeginDialogAsync(
+                        nameof(HeroCardDialog));
             }
-            else if (selectedCard.Equals(Strings.DisplayCardThumbnailCard))
+            else if(selectedCard.Equals(Strings.DisplayCardThumbnailCard))
             {
-                context.Call(new ThumbnailcardDialog(), ResumeAfterOptionDialog);
+                return await stepContext.BeginDialogAsync(
+                         nameof(ThumbnailcardDialog));
             }
-            else if (selectedCard.Equals(Strings.DisplayCardO365ConnectorCardDefault))
-            {
-                context.Call(new O365ConnectorCardDialog(), ResumeAfterOptionDialog);
+            else if (selectedCard.Equals(Strings.DisplayCardO365ConnectorCardDefault)){
+                return await stepContext.BeginDialogAsync(
+                         nameof(O365ConnectorCardDialog));
             }
             else if (selectedCard.Equals(Strings.DisplayCardO365ConnectorCard2))
             {
-                context.Call(new O365ConnectorCardDialog(), ResumeAfterOptionDialog);
+                return await stepContext.BeginDialogAsync(
+                         nameof(O365ConnectorCardDialog));
             }
             else if (selectedCard.Equals(Strings.DisplayCardO365ConnectorCard3))
             {
-                context.Call(new O365ConnectorCardDialog(), ResumeAfterOptionDialog);
+                return await stepContext.BeginDialogAsync(
+                         nameof(O365ConnectorCardDialog));
             }
-            else if (selectedCard.Equals(Strings.DisplayCardO365ConnectorActionableCardDefault))
+            else if(selectedCard.Equals(Strings.DisplayCardO365ConnectorActionableCardDefault))
             {
-                context.Call(new O365ConnectorCardActionsDialog(), ResumeAfterOptionDialog);
+                return await stepContext.BeginDialogAsync(
+                         nameof(O365ConnectorCardActionsDialog));
             }
-            else if (selectedCard.Equals(Strings.DisplayCardO365ConnectorActionableCard2))
-            {
-                context.Call(new O365ConnectorCardActionsDialog(), ResumeAfterOptionDialog);
+            else if (selectedCard.Equals(Strings.DisplayCardO365ConnectorActionableCard2)){
+                return await stepContext.BeginDialogAsync(
+                         nameof(O365ConnectorCardActionsDialog));
             }
             else if (selectedCard.Equals(Strings.DisplayCardAdaptiveCard))
             {
-                context.Call(new AdaptiveCardDialog(), ResumeAfterOptionDialog);
+                return await stepContext.BeginDialogAsync(
+                         nameof(AdaptiveCardDialog));
             }
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
 
-        private async Task ResumeAfterOptionDialog(IDialogContext context, IAwaitable<object> result)
+        private async Task<DialogTurnResult> ResumeAfterOptionDialogAsync(WaterfallStepContext stepContext,
+          CancellationToken cancellationToken = default(CancellationToken))
         {
             try
             {
-                var message = await result;
-                context.Done<object>(null);
+                return await stepContext.EndDialogAsync(null, cancellationToken);
             }
             catch (Exception ex)
             {
-                await context.PostAsync(Strings.DisplayCardErrorMsg + ex.Message);
+                await stepContext.Context.SendActivityAsync(Strings.DisplayCardErrorMsg + ex.Message);
+                return await stepContext.EndDialogAsync(null, cancellationToken);
             }
         }
     }

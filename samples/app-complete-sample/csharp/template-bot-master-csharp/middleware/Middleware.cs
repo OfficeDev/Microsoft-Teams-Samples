@@ -1,5 +1,4 @@
-﻿using Microsoft.Bot.Connector;
-using Newtonsoft.Json.Linq;
+﻿using Microsoft.Bot.Schema;
 using System;
 using System.Configuration;
 
@@ -31,7 +30,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
             }
         }
 
-        public static Activity ConvertActivityTextToLower(Activity activity)
+        public static IMessageActivity ConvertActivityTextToLower(IMessageActivity activity)
         {
             //Convert input command in lower case for 1To1 and Channel users
             if (activity.Text != null)

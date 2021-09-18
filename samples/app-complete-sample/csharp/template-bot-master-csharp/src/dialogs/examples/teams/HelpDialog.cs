@@ -1,8 +1,11 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Connector;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
@@ -11,20 +14,42 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// This is Help Dialog Class. Main purpose of this dialog class is to post the help commands in Teams.
     /// These are Actionable help commands for easy to use.
     /// </summary>
-    [Serializable]
-    public class HelpDialog : IDialog<object>
+    public class HelpDialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public HelpDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(HelpDialog))
         {
-            if (context == null)
+            this._conversationState = conversationState;
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
+                BeginHelpDialogAsync,
+            }));
+        }
+
+        private async Task<DialogTurnResult> BeginHelpDialogAsync(
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
             }
 
-            var message = context.MakeMessage();
+            var message =  stepContext.Context.Activity;
+            if (message.Attachments != null)
+            {
+                message.Attachments = null;
+            }
 
+            if (message.Entities.Count >= 1)
+            {
+                message.Entities.Remove(message.Entities[0]);
+            }
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogHelpDialog);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogHelpDialog;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
 
             // This will create Interactive Card with help command buttons
 
@@ -58,9 +83,9 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                     }
                 }.ToAttachment()
             };
+            await stepContext.Context.SendActivityAsync(message);
 
-            await context.PostAsync(message);
-            context.Done<object>(null);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
     }
 }
