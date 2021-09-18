@@ -1,10 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-const { CardFactory,ActionTypes } = require('botbuilder');
-const {WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
+const { CardFactory, ActionTypes } = require('botbuilder');
+const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const HELP = 'Help';
 class HelpDialog extends ComponentDialog {
-    constructor(id,conversationDataAccessor) {
+    constructor(id, conversationDataAccessor) {
         super(id);
         this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
@@ -14,12 +14,12 @@ class HelpDialog extends ComponentDialog {
     }
 
     async beginHelpDialog(stepContext) {
-        var currentState = await  this.conversationDataAccessor.get(stepContext.context, {});
+        var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "HelpDialog";
         var reply = stepContext.context._activity;
-        if(reply.attachments != null && reply.entities.length>1){
+        if (reply.attachments != null && reply.entities.length > 1) {
             reply.attachments = null;
-            reply.entities.splice(0,1);
+            reply.entities.splice(0, 1);
 
         }
         const buttons = [
@@ -47,9 +47,9 @@ class HelpDialog extends ComponentDialog {
 
         ];
         const card = CardFactory.heroCard('Template Options', undefined,
-        buttons);
+            buttons);
 
-    reply.attachments = [card];
+        reply.attachments = [card];
         await stepContext.context.sendActivity(reply);
         return await stepContext.endDialog();
     }

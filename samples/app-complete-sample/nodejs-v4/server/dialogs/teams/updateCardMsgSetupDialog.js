@@ -28,12 +28,11 @@ class UpdateCardMsgSetupDialog extends ComponentDialog {
         ];
         const CardImage = CardFactory.images(["https://sec.ch9.ms/ch9/7ff5/e07cfef0-aa3b-40bb-9baa-7c9ef8ff7ff5/buildreactionbotframework_960.jpg"])
         const card = CardFactory.heroCard('Title', CardImage,
-            buttons, { subtitle: "Subtitle"});
+            buttons, { subtitle: "Subtitle" });
 
         reply.attachments = [card];
-        var result = await stepContext.context.sendActivity(reply);
-        console.log(result);
-        currentState.activityId = result.id;
+        await stepContext.context.sendActivity(reply);
+        currentState.activityId = reply.id;
         return await stepContext.endDialog();
     }
 }

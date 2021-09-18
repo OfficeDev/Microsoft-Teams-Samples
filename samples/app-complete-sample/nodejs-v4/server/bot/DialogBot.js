@@ -4,7 +4,6 @@
 const { TeamsActivityHandler, ActionTypes, CardFactory } = require('botbuilder');
 const request = require('request-promise')
 const searchApiUrlFormat = "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=[keyword]&srlimit=[limit]&sroffset=[offset]&format=json";
-const imageApiUrlFormat = "https://en.wikipedia.org/w/api.php?action=query&formatversion=2&format=json&prop=pageimages&piprop=thumbnail&pithumbsize=250&titles=[title]";
 class DialogBot extends TeamsActivityHandler {
   /**
     *
@@ -26,7 +25,7 @@ class DialogBot extends TeamsActivityHandler {
 
     this.onMessage(async (context, next) => {
       console.log('Running dialog with Message Activity.');
-
+console.log(context.activity.name);
       // Run the Dialog with the new message Activity.
       await this.dialog.run(context, this.dialogState);
 
@@ -128,9 +127,7 @@ class DialogBot extends TeamsActivityHandler {
     /**
      * Below here is simply the logic to call the Wikipedia API and create the response for
      * a query; the general flow is to call the Wikipedia API for the query and then call the
-     * Wikipedia API for each entry for the query to see if that entry has an image; in order
-     * to get the asynchronous sections handled, an array of Promises for cards is used; each
-     * Promise is resolved when it is discovered if an image exists for that entry; once all
+     * Wikipedia API for each entry for the query. once all
      * of the Promises are resolved, the response is sent back to Teams
      */
 
@@ -138,87 +135,74 @@ class DialogBot extends TeamsActivityHandler {
     searchApiUrl = searchApiUrl.replace("[limit]", query.queryOptions.count + "");
     searchApiUrl = searchApiUrl.replace("[offset]", query.queryOptions.skip + "");
     searchApiUrl = encodeURI(searchApiUrl);
+    let promisesOfCardsAsAttachments = [];
 
     // call Wikipedia API to search
-    request(searchApiUrl, (error, res, body) => {
-      let wikiResults = JSON.parse(body).query.search;
-      let promisesOfCardsAsAttachments = [];
-
-      // enumerate search results and build Promises for cards for response
-      wikiResults.forEach((wikiResult) => {
-        // a separate API call to Wikipedia is needed to fetch the page image, if it exists
-        let imageApiUrl = imageApiUrlFormat.replace("[title]", encodeURI(wikiResult.title));
-        let cardPromise = Promise((resolve, reject) => {
-          request(imageApiUrl, (error2, res2, body2) => {
-            // parse image url
-            if (!error2) {
-              let imageUrl = null;
-              let pages = JSON.parse(body2).query.pages;
-              if (pages && pages.length > 0 && pages[0].thumbnail) {
-                imageUrl = pages[0].thumbnail.source;
-              } else {
-                // no image so use default Wikipedia image
-                imageUrl = "https://upload.wikimedia.org/wikipedia/commons/d/de/Wikipedia_Logo_1.0.png";
-              }
-
-              // highlight matched keyword
-              let highlightedTitle = wikiResult.title;
-              if (queryParameter) {
-                let matches = highlightedTitle.match(new RegExp(queryParameter, "gi"));
-                if (matches && matches.length > 0) {
-                  highlightedTitle = highlightedTitle.replace(new RegExp(queryParameter, "gi"), "<b>" + matches[0] + "</b>");
-                }
-              }
-
-              // make title into a link
-              highlightedTitle = "<a href=\"https://en.wikipedia.org/wiki/" + encodeURI(wikiResult.title) + "\" target=\"_blank\">" + highlightedTitle + "</a>";
-
-              let cardText = wikiResult.snippet + " ...";
-
-              // create the card itself and the preview card based upon the information
-
-              // HeroCard extends ThumbnailCard so we can use ThumbnailCard as the overarching type
-              let card = null;
-              // check user preference for which type of card to create
-              if (userData.composeExtensionCardType === "thumbnail") {
-                card = CardFactory.thumbnailCard(highlightedTitle, CardFactory.images([imageUrl]), null, { text: cardText });
-              } else {
-                // at this point session.userData.composeExtensionCardType === "hero"
-                card = CardFactory.heroCard(highlightedTitle, CardFactory.images([imageUrl]), null, { text: cardText });
-              }
-
-              // build the preview card that will show in the search results
-              // Note: this is only needed if you want the cards in the search results to look
-              // different from what is placed in the compose box
-              let previewCard = CardFactory.thumbnailCard(highlightedTitle, CardFactory.images([imageUrl]), null, { text: cardText });
-
-              let cardAsAttachment = card.toAttachment();
-              // add preview card to the response card
-              cardAsAttachment.preview = previewCard.toAttachment();
-
-              // resolve this Promise for a card once all of the information is in place
-              resolve(cardAsAttachment);
+    return new Promise(function (resolve, reject) {
+      request(searchApiUrl, (error, res, body) => {
+        let wikiResults = JSON.parse(body).query.search;
+        wikiResults.forEach((wikiResult) => {
+          // highlight matched keyword
+          let highlightedTitle = wikiResult.title;
+          if (queryParameter) {
+            let matches = highlightedTitle.match(new RegExp(queryParameter, "gi"));
+            if (matches && matches.length > 0) {
+              highlightedTitle = highlightedTitle.replace(new RegExp(queryParameter, "gi"), "<b>" + matches[0] + "</b>");
             }
-          });
-        });
-
-        promisesOfCardsAsAttachments.push(cardPromise);
-      });
-
-      // once all of the Promises for cards are resolved, then send the respone back to Teams
-      Promise.all(promisesOfCardsAsAttachments).then((cardsAsAttachments) => {
-        let response = {
-          composeExtension: {
-            type: 'result',
-            attachmentLayout: 'list',
-            attachments: [cardsAsAttachments]
           }
-        }
-        return response;
+
+          // make title into a link
+          highlightedTitle = "<a href=\"https://en.wikipedia.org/wiki/" + encodeURI(wikiResult.title) + "\" target=\"_blank\">" + highlightedTitle + "</a>";
+
+          let cardText = wikiResult.snippet + " ...";
+
+          // create the card itself and the preview card based upon the information
+
+          // HeroCard extends ThumbnailCard so we can use ThumbnailCard as the overarching type
+          let card = null;
+          // check user preference for which type of card to create
+          if (userData.composeExtensionCardType === "thumbnail") {
+            card = CardFactory.thumbnailCard(highlightedTitle, undefined, null, { text: cardText });
+          } else {
+            // at this point session.userData.composeExtensionCardType === "hero"
+            card = CardFactory.heroCard(highlightedTitle, undefined, null, { text: cardText });
+          }
+
+          // build the preview card that will show in the search results
+          // Note: this is only needed if you want the cards in the search results to look
+          // different from what is placed in the compose box
+          let previewCard = CardFactory.thumbnailCard(highlightedTitle, undefined, null, { text: cardText });
+          const attachment = { ...card, previewCard };
+          promisesOfCardsAsAttachments.push(attachment);
+          let response = {
+            composeExtension: {
+              type: 'result',
+              attachmentLayout: 'list',
+              attachments: promisesOfCardsAsAttachments
+            }
+          }
+          resolve(response);
+        });
       });
     });
   }
 
+  async handleTeamsMessagingExtensionSelectItem(context, obj) {
+    return {
+      composeExtension: {
+        type: 'result',
+        attachmentLayout: 'list',
+        attachments: [CardFactory.thumbnailCard(obj.description)]
+      }
+    };
+
+  }
+
+  async handleTeamsO365ConnectorCardAction(context,query){
+    var o365ActionQuery = query;
+    var text = "Thanks, "+context.activity.from.name +"\nYour input action ID:"+o365ActionQuery.actionId+"\nYour input body:"+o365CardQuery.Body;
+    await context.sendActivity(text);
+  }
 
   // return the value of the specified query parameter
   getQueryParameterByName(query, name) {

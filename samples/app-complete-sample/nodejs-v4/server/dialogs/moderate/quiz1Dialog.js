@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const {WaterfallDialog, ComponentDialog,ChoicePrompt  } = require('botbuilder-dialogs');
+const { WaterfallDialog, ComponentDialog, ChoicePrompt } = require('botbuilder-dialogs');
 const QUIZ1DIALOG = 'Quiz1Dialog';
 const CHOICE_PROMPT = 'choiceDialog'
 class Quiz1Dialog extends ComponentDialog {
-    constructor(id,conversationDataAccessor) {
+    constructor(id, conversationDataAccessor) {
         super(id);
         this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
@@ -21,13 +21,13 @@ class Quiz1Dialog extends ComponentDialog {
         currentState.lastDialogKey = "QuizQ1Dialog";
         return await stepContext.prompt(
             CHOICE_PROMPT, {
-                prompt: 'Question 1',
-                choices: ['yes', 'no'],
-                retryPrompt: 'Not a valid option'
-            }
+            prompt: 'Question 1',
+            choices: ['yes', 'no'],
+            retryPrompt: 'Not a valid option'
+        }
         );
     }
-    async endQuiz1Dialog(stepContext){
+    async endQuiz1Dialog(stepContext) {
         const answer = stepContext.result.value;
         if (!answer) {
             // exhausted attempts and no selection, start over

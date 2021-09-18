@@ -1,12 +1,12 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const {WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
+const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const BEGINdIALOG = 'BeginDialog';
 const HELLO = 'Hello';
 const { HelloDialog } = require('../basic/helloDialog');
 class BeginDialogExampleDailog extends ComponentDialog {
-    constructor(id,conversationDataAccessor) {
+    constructor(id, conversationDataAccessor) {
         super(id);
         this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
@@ -24,7 +24,7 @@ class BeginDialogExampleDailog extends ComponentDialog {
         return await stepContext.beginDialog(HELLO);
     }
 
-    async continueBeginDialogExampleDailog(stepContext){
+    async continueBeginDialogExampleDailog(stepContext) {
         await stepContext.context.sendActivity('Begin dialog end');
         return await stepContext.endDialog();
     }

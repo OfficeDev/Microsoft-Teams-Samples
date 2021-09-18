@@ -4,7 +4,7 @@ const { CardFactory } = require('botbuilder');
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const O365CONNECTORECARD = 'O365ConnectorCard';
 class O365ConnectorCardDialog extends ComponentDialog {
-    constructor(id,conversationDataAccessor) {
+    constructor(id, conversationDataAccessor) {
         super(id);
         this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
@@ -18,9 +18,9 @@ class O365ConnectorCardDialog extends ComponentDialog {
         currentState.lastDialogKey = "O365ConnectorCardDialog";
         var inputNumber = stepContext.context._activity.text.substr(stepContext.context._activity.text.length - 1, 1);
         var reply = stepContext.context._activity;
-        if(reply.attachments != null && reply.entities.length>1){
+        if (reply.attachments != null && reply.entities.length > 1) {
             reply.attachments = null;
-            reply.entities.splice(0,1);
+            reply.entities.splice(0, 1);
 
         }
         var card;
@@ -62,8 +62,9 @@ class O365ConnectorCardDialog extends ComponentDialog {
         return CardFactory.o365ConnectorCard({
             "themeColor": "#fe9a13",
             "sections": [
-                {   "title":"**New major event on omi10svr**",
-                    "activityTitle":"Batch upload for TAX data on db-srv-hr1 aborted due to timeout. (ref324)",
+                {
+                    "title": "**New major event on omi10svr**",
+                    "activityTitle": "Batch upload for TAX data on db-srv-hr1 aborted due to timeout. (ref324)",
                     "text": "This is the text1",
                     "facts": [
                         {

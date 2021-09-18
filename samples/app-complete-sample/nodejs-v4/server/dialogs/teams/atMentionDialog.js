@@ -1,10 +1,12 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const {WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
+const { MessageFactory } = require('botbuilder');
+const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
+const TextEncoder = require('util').TextEncoder;
 const ATMENTION = 'AtMention';
 class AtMentionDialog extends ComponentDialog {
-    constructor(id,conversationDataAccessor) {
+    constructor(id, conversationDataAccessor) {
         super(id);
         this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
@@ -16,9 +18,19 @@ class AtMentionDialog extends ComponentDialog {
     async beginAtMentionDialog(stepContext) {
         var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "AtMentionDialog";
+        const mention = {
+            mentioned: stepContext.context._activity.from,
+            text: `<at>${new TextEncoder().encode(
+                stepContext.context._activity.from.name
+            )}</at>`,
+            type: 'mention',
+        };
+
+        const replyActivity = MessageFactory.text(`Hi ${mention.text}`);
+        replyActivity.entities = [mention];
         var message = stepContext.context._activity;
         message.text = "at mention"
-        await stepContext.context.sendActivity(message);
+        await stepContext.context.sendActivity(replyActivity);
         return await stepContext.endDialog();
     }
 }

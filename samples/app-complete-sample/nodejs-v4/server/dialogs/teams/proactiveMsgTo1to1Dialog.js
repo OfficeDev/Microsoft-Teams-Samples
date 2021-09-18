@@ -1,10 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-const { TeamsInfo } = require('botbuilder');
-const {WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
+const { TurnContext } = require('botbuilder');
+const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const PROACTIVEMESSAGE = 'ProactiveMessage';
+const conversationReferences = {};
 class ProactiveMsgTo1to1Dialog extends ComponentDialog {
-    constructor(id,conversationDataAccessor) {
+    constructor(id, conversationDataAccessor) {
         super(id);
         this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
@@ -17,23 +18,16 @@ class ProactiveMsgTo1to1Dialog extends ComponentDialog {
         var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "ProactiveMsgTo1to1Dialog";
         await stepContext.context.sendActivity("1:1 Message sent");
-        var userId = stepContext.context._activity.from.id;
-        var botId = stepContext.context._activity.recipient.id;
-        var botName = stepContext.context._activity.recipient.name;
-        var channelData = stepContext.context._activity.channelData;
+        this.addConversationReference(stepContext.context._activity);
+        var reply = stepContext.context._activity;
+        reply.text = "Hey! I am Bot, How's going!!"
+        await stepContext.context.sendActivity(reply);
+        return await stepContext.endDialog();
+    }
 
-        var parameters ={
-            "bot":{
-                "id":botId,
-                "name":botName
-            },
-            "members":[{
-                "id":userId
-            }],
-            "channelData":channelData
-        }
-
-            return await stepContext.endDialog();
+    addConversationReference(activity) {
+        const conversationReference = TurnContext.getConversationReference(activity);
+        conversationReferences[conversationReference.conversation.id] = conversationReference;
     }
 }
 

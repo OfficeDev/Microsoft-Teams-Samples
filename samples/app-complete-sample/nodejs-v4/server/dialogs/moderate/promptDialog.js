@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const {WaterfallDialog, ComponentDialog,ChoicePrompt  } = require('botbuilder-dialogs');
+const { WaterfallDialog, ComponentDialog, ChoicePrompt } = require('botbuilder-dialogs');
 const PROMPTDIALOG = 'PromptDialog';
 const CHOICE_PROMPT = 'choiceDialog'
 class PromptDialog extends ComponentDialog {
-    constructor(id,conversationDataAccessor) {
+    constructor(id, conversationDataAccessor) {
         super(id);
         this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
@@ -22,13 +22,13 @@ class PromptDialog extends ComponentDialog {
         currentState.lastDialogKey = "PromptDialog";
         return await stepContext.prompt(
             CHOICE_PROMPT, {
-                prompt: 'Lets play a game! You pick a button, and I will repeat it.',
-                choices: ['choice1', 'choice2','Wrong Choice'],
-                retryPrompt: 'Not a valid option'
-            }
+            prompt: 'Lets play a game! You pick a button, and I will repeat it.',
+            choices: ['choice1', 'choice2', 'Wrong Choice'],
+            retryPrompt: 'Not a valid option'
+        }
         );
     }
-    async getOptionAsync(stepContext){
+    async getOptionAsync(stepContext) {
         const answer = stepContext.result.value;
         if (!answer) {
             // exhausted attempts and no selection, start over
@@ -38,14 +38,14 @@ class PromptDialog extends ComponentDialog {
         }
         return await stepContext.prompt(
             CHOICE_PROMPT, {
-                prompt: "Did you pick"+answer,
-                choices: ['yes', 'no'],
-                retryPrompt: 'Not a valid option'
-            }
+            prompt: "Did you pick" + answer,
+            choices: ['yes', 'no'],
+            retryPrompt: 'Not a valid option'
+        }
         );
 
     }
-    async resultedOptionsAsync(stepContext){
+    async resultedOptionsAsync(stepContext) {
         const answer = stepContext.result.value;
         if (!answer) {
             // exhausted attempts and no selection, start over

@@ -4,7 +4,7 @@ const { CardFactory } = require('botbuilder');
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const O365CONNECTORCARDACTION = 'O365ConnectorCardAction';
 class O365ConnectorCardActionDialog extends ComponentDialog {
-    constructor(id,conversationDataAccessor) {
+    constructor(id, conversationDataAccessor) {
         super(id);
         this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
@@ -20,9 +20,9 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
         var inputNumber = text.substr(text.length - 1, 1);
         console.log(inputNumber)
         var reply = stepContext.context._activity;
-        if(reply.attachments != null && reply.entities.length>1){
+        if (reply.attachments != null && reply.entities.length > 1) {
             reply.attachments = null;
-            reply.entities.splice(0,1);
+            reply.entities.splice(0, 1);
 
         }
         var card;
@@ -31,7 +31,7 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                 card = this.O365ActionableCardMultipleSection();
                 break;
             case "":
-                default:
+            default:
                 card = this.O365ActionableCardDefault();
                 break;
         }
@@ -213,7 +213,7 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                     "inputs":
                         [
                             {
-                                "@type": "TextInput",
+                                "@type": "textInput",
                                 "id": "text-1",
                                 "isRequired": false,
                                 "title": "multiline, no maxLength",
@@ -222,7 +222,7 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                                 "maxLength": null
                             },
                             {
-                                "@type": "TextInput",
+                                "@type": "textInput",
                                 "id": "text-2",
                                 "isRequired": false,
                                 "title": "single line, no maxLength",
@@ -231,7 +231,7 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                                 "maxLength": null
                             },
                             {
-                                "@type": "TextInput",
+                                "@type": "textInput",
                                 "id": "text-3",
                                 "isRequired": false,
                                 "title": "multiline, max len = 10, isRequired",
@@ -239,7 +239,7 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                                 "isMultiline": true,
                                 "maxLength": 10
                             }, {
-                                "@type": "TextInput",
+                                "@type": "textInput",
                                 "id": "text-4",
                                 "isRequired": false,
                                 "title": "single line, max len = 10, isRequired",
@@ -252,9 +252,9 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                             "@type": "HttpPOST",
                             "name": "Send",
                             "id": "inputText",
-                            "body": 
+                            "body":
                                 "text1={{text-1.value}}, text2={{text-2.value}},text3={{text-3.value}},text4={{text-4.value}}"
-                            
+
                         }
                     ]
                 },
@@ -265,7 +265,7 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                     "inputs":
                         [
                             {
-                                "@type": "DateInput",
+                                "@type": "dateInput",
                                 "id": "date-1",
                                 "isRequired": true,
                                 "title": "date with time",
@@ -273,7 +273,7 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                                 "includeTime": true
                             },
                             {
-                                "type": "DateInput",
+                                "@type": "dateInput",
                                 "id": "date-2",
                                 "isRequired": false,
                                 "title": "date only",
@@ -390,7 +390,7 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                     "inputs":
                         [
                             {
-                                "type": "TExtInput",
+                                "type": "textInput",
                                 "id": "text-1",
                                 "isRequired": false,
                                 "title": "This is the title of text box",
@@ -403,7 +403,7 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                             "@type": "HttpPOST",
                             "name": "Send",
                             "id": "inputText",
-                            "body": "text1={{text-1.value}}" 
+                            "body": "text1={{text-1.value}}"
                         }
                     ]
                 },

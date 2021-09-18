@@ -39,12 +39,12 @@ adapter.onTurnError = async (context, error) => {
     // NOTE: In production environment, you should consider logging this to Azure
     //       application insights. See https://aka.ms/bottelemetry for telemetry 
     //       configuration instructions.
-    console.error(`\n [onTurnError] unhandled error: ${ error }`);
+    console.error(`\n [onTurnError] unhandled error: ${error}`);
 
     // Send a trace activity, which will be displayed in Bot Framework Emulator
     await context.sendTraceActivity(
         'OnTurnError Trace',
-        `${ error }`,
+        `${error}`,
         'https://www.botframework.com/schemas/error',
         'TurnError'
     );
@@ -78,17 +78,17 @@ server.post('/api/messages', (req, res) => {
     });
 });
 
-server.get('/configure', function(req, res) {
+server.get('/configure', function (req, res) {
     res.render('./views/configure');
 });
-server.get('/botInfo', function(req, res) {
+server.get('/botInfo', function (req, res) {
     var fileContent;
     fs.readFile('./server/dialogs/rootDialog.js', (err, data) => {
         if (err) throw err;
         fileContent = data.toString();
         res.render('./views/botInfo', { fileContent: JSON.stringify(fileContent) });
     });
-    
+
 });
 server.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);

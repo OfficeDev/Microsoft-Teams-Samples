@@ -1,10 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 const { TeamsInfo } = require('botbuilder');
-const {WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
+const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const FETCHROSTER = 'FetchRoster';
 class FetchRosterDialog extends ComponentDialog {
-    constructor(id,conversationDataAccessor) {
+    constructor(id, conversationDataAccessor) {
         super(id);
         this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
@@ -18,9 +18,9 @@ class FetchRosterDialog extends ComponentDialog {
         currentState.lastDialogKey = "FetchRosterDialog";
         var members = await TeamsInfo.getMembers(stepContext.context);
         var reply = stepContext.context._activity;
-        if(reply.attachments != null && reply.entities.length>1){
+        if (reply.attachments != null && reply.entities.length > 1) {
             reply.attachments = null;
-            reply.entities.splice(0,1);
+            reply.entities.splice(0, 1);
 
         }
         reply.text = JSON.stringify(members)

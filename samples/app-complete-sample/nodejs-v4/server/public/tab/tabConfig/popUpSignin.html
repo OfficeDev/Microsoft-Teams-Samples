@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <style type="text/css">
         .row {
@@ -15,11 +16,11 @@
         }
 
         .row input:hover {
-            background-color: rgba(0,0,0,0.05);
+            background-color: rgba(0, 0, 0, 0.05);
         }
 
         .row input:active {
-            background-color: rgba(0,0,0,0.1);
+            background-color: rgba(0, 0, 0, 0.1);
         }
 
         .row .label {
@@ -40,10 +41,11 @@
             white-space: nowrap;
             font-family: 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
         }
-    </style>    
+    </style>
 </head>
 <!-- Purpose of this login html page is to show fake authentication when user click on signin action using popup window -->
 <!-- From popup window, user can send information from popup window to bot e.g. here we are passing random magic number to Bot -->
+
 <body>
     <div class="row input-container">
         <div>
@@ -61,17 +63,14 @@
 
     <script src="https://statics.teams.microsoft.com/sdk/v1.2/js/MicrosoftTeams.min.js"></script>
     <script>
-        // magic number would not normally be shown to the user in the UI -- that is only to demonstrate the flow
-        // receiving code can compare the magic number with what it expected
         microsoftTeams.initialize();
-        function submit()
-        {
+        function submit() {
             microsoftTeams.authentication.notifySuccess('PopUpSignInAuthenticationSuccess');
         }
-        function closeWindow()
-        {
+        function closeWindow() {
             microsoftTeams.authentication.notifyFailure();
         }
     </script>
 </body>
+
 </html>

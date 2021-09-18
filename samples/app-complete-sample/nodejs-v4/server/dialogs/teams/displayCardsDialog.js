@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const {WaterfallDialog, ComponentDialog,ChoicePrompt  } = require('botbuilder-dialogs');
+const { WaterfallDialog, ComponentDialog, ChoicePrompt } = require('botbuilder-dialogs');
 const DISPLAYCARDS = 'DisplayCards';
 const CHOICE_PROMPT = 'choiceDialog';
 const THUMBNAILCARD = 'ThumbnailCard';
-const ADAPTIVECARD ="AdaptiveCardDialog";
+const ADAPTIVECARD = "AdaptiveCardDialog";
 const O365CONNECTORECARD = 'O365ConnectorCard';
 const HEROCARD = 'HeroCard';
 const O365CONNECTORCARDACTION = 'O365ConnectorCardAction';
@@ -15,7 +15,7 @@ const { AdaptiveCardDialog } = require('../basic/adaptiveCardDialog');
 const { O365ConnectorCardDialog } = require('../basic/o365connectorCardDialog');
 const { O365ConnectorCardActionDialog } = require('../basic/o365ConnectorCardActionDialog');
 class DisplayCardsDialog extends ComponentDialog {
-    constructor(id,conversationDataAccessor) {
+    constructor(id, conversationDataAccessor) {
         super(id);
         this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
@@ -38,13 +38,13 @@ class DisplayCardsDialog extends ComponentDialog {
         await stepContext.context.sendActivity("Please select any card");
         return await stepContext.prompt(
             CHOICE_PROMPT, {
-                prompt: 'What card you would like to test?',
-                choices: ['herocard', 'thumbnailcard','adaptivecard','connector card 1','connector card 2','connector card 3','Connector Card Actions 2','Connector Card Actions'],
-                retryPrompt: 'Not a valid option'
-            }
+            prompt: 'What card you would like to test?',
+            choices: ['herocard', 'thumbnailcard', 'adaptivecard', 'connector card 1', 'connector card 2', 'connector card 3', 'Connector Card Actions 2', 'Connector Card Actions'],
+            retryPrompt: 'Not a valid option'
+        }
         );
     }
-    async getDisplayCardsDialog(stepContext){
+    async getDisplayCardsDialog(stepContext) {
         const answer = stepContext.result.value;
         if (!answer) {
             // exhausted attempts and no selection, start over
@@ -79,7 +79,7 @@ class DisplayCardsDialog extends ComponentDialog {
         return await stepContext.endDialog();
     }
 
-    async endDisplayCardDialog(stepContext){
+    async endDisplayCardDialog(stepContext) {
         return await stepContext.endDialog();
     }
 

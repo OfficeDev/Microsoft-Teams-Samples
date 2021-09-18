@@ -1,10 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-const { CardFactory,ActionTypes } = require('botbuilder');
-const {WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
+const { CardFactory, ActionTypes } = require('botbuilder');
+const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const AUTHCARD = 'AuthCard';
 class AuthCardDialog extends ComponentDialog {
-    constructor(id,conversationDataAccessor) {
+    constructor(id, conversationDataAccessor) {
         super(id);
         this.conversationDataAccessor = conversationDataAccessor;
         // Define the conversation flow using a waterfall model.
@@ -17,9 +17,9 @@ class AuthCardDialog extends ComponentDialog {
         var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "AuthCardDialog";
         var reply = stepContext.context._activity;
-        if(reply.attachments != null && reply.entities.length>1){
+        if (reply.attachments != null && reply.entities.length > 1) {
             reply.attachments = null;
-            reply.entities.splice(0,1);
+            reply.entities.splice(0, 1);
 
         }
         reply.attachments = [this.createAuthSampleCard()];
@@ -27,13 +27,13 @@ class AuthCardDialog extends ComponentDialog {
         return await stepContext.endDialog();
     }
 
-    createAuthSampleCard(){
+    createAuthSampleCard() {
         const buttons = [
-            { type: ActionTypes.ImBack, title: 'Facebook Auth', value: 'fblogin'},
+            { type: ActionTypes.ImBack, title: 'Facebook Auth', value: 'fblogin' },
 
         ];
         const card = CardFactory.heroCard('Please Clicked below any OAuth 2.0 Samples (Bot Command - "auth")', undefined,
-        buttons);
+            buttons);
         return card;
     }
 }
