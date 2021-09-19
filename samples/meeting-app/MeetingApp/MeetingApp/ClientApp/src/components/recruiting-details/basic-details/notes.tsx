@@ -17,7 +17,7 @@ const Notes = (props: INotesProps) => {
     const addNotesTaskModule = () => {
         let taskInfo = {
             title: "Notes",
-            height: 400,
+            height: 150,
             width: 400,
             url: `${window.location.origin}/addNote`,
         };
@@ -50,7 +50,6 @@ const Notes = (props: INotesProps) => {
 
     // Method to load the notes in the question container.
     const loadNotes = () => {
-        debugger
         getNotes(props.currentCandidateEmail)
             .then((res) => {
                 console.log(res)
@@ -88,12 +87,14 @@ const Notes = (props: INotesProps) => {
                 {notes.length == 0 && <Text content="No notes yet" />}
                 {
                     notes.length > 0 && notes.map((noteDetail, index) => {
-                    return (<Flex column key={index}>
-                        <Text content={noteDetail.note}/>
-                        <Flex>
-                            {noteDetail.addedBy}| {noteDetail.timestamp}
-                        </Flex>
-                    </Flex>)
+                        return (
+                            <Flex column key={index} padding="padding.medium">
+                                <Text content={noteDetail.note} />
+                                <Flex>
+                                    - {noteDetail.addedBy} | {new Date(noteDetail.timestamp).toLocaleDateString()}
+                                </Flex>
+                            </Flex>
+                        )
                     })
                 }
             </Card.Body>

@@ -24,12 +24,12 @@ const Questions = (): React.ReactElement => {
     const [showLoader, setShowLoader] = React.useState<boolean>(false);
 
     // Method to start task module to add a question.
-    const addQuestionsTaskModule = () => {
+    const addOrEditQuestionsTaskModule = (editText: string, rowKey: any) => {
         let taskInfo = {
             title: "Questions",
-            height: 400,
+            height: 150,
             width: 400,
-            url: `${window.location.origin}/questions`,
+            url: editText == "" ? `${window.location.origin}/questions` : `${window.location.origin}/questions?editText=`+editText,
         };
 
         microsoftTeams.tasks.startTask(taskInfo, (err, question) => {
@@ -44,7 +44,8 @@ const Questions = (): React.ReactElement => {
                     meetingId: context.meetingId!,
                     question: question,
                     setBy: context.userPrincipalName!,
-                    isDelete: 0
+                    isDelete: 0,
+                    questionId: rowKey
                 };
 
                 // API call to save the question to storage.
@@ -115,7 +116,7 @@ const Questions = (): React.ReactElement => {
             <Loader hidden={!showLoader} />
             <Flex gap="gap.smaller">
                 <Header as="h4" content="Questions" className="questionsHeader" />
-                <AddIcon onClick={addQuestionsTaskModule} title="Add new questions" />
+                <AddIcon onClick={() => addOrEditQuestionsTaskModule("", null)} title="Add new questions" />
             </Flex>
             <Text content="Questions added here will appear in meeting with candidate and can help you rate at the point of time" />
             {
@@ -131,7 +132,7 @@ const Questions = (): React.ReactElement => {
                                                 trigger={<MoreIcon />}
                                                 content={
                                                     <Flex column gap="gap.smaller">
-                                                        <Button icon={<EditIcon />} text content="Edit" />
+                                                        <Button icon={<EditIcon />} text content="Edit" onClick={() => addOrEditQuestionsTaskModule(questionDetail.question, questionDetail.rowKey)}/>
                                                         <Button icon={<CallControlStopPresentingNewIcon />} text content="Delete" onClick={() => deleteQuestion(questionDetail)} />
                                                     </Flex>
                                                 }

@@ -9,7 +9,7 @@ import QuestionsMobile from './questions/questions-mobile';
 import BasicDetailsMobile from './basic-details/basic-details-mobile';
 import Questions from './basic-details/questions';
 import { getQuestions, saveFeedback } from "./services/recruiting-detail.service";
-import { IQuestionDetails } from '../../types/recruitment.types';
+import { IFeedbackDetails, IQuestionDetails } from '../../types/recruitment.types';
 
 const RecruitingDetails = () => {
     const mobileMenuItems = [
@@ -27,10 +27,10 @@ const RecruitingDetails = () => {
     const [questionDetails, setQuestionDetails] = React.useState<IQuestionDetails[]>([]);
     const [selectedIndex, setSelectedIndex] = React.useState(0);
     const [currentCandidateEmail, setCurrentCandidateEmail] = React.useState<string>('');
+    const [feedbackSubmitted, setFeedbackSubmitted] = React.useState(false);
 
     const setSelectedCandidateIndex = (index: number, email: string) => {
         setSelectedIndex(index);
-        debugger
         setCurrentCandidateEmail(email);
     }
 
@@ -54,7 +54,7 @@ const RecruitingDetails = () => {
     const setShowAddComment = (rowKey: string, isShow: boolean) => {
         const currentQuestions = [...questionDetails];
         const questToUpdate = currentQuestions.find(quest => quest.rowKey == rowKey)!;
-        questToUpdate.showAddComment = isShow ? true: false;
+        questToUpdate.showAddComment = isShow ? true : false;
         setQuestionDetails(currentQuestions);
     }
 
@@ -83,14 +83,30 @@ const RecruitingDetails = () => {
 
     // Method to submit feedback for all questions.
     const submitFeedback = () => {
-        saveFeedback(questionDetails)
-            .then((res) => {
-                console.log(res)
+        const feedback = questionDetails.map((detail: IQuestionDetails) => {
+            return {
+                question: detail.question,
+                rating: detail.rating,
+                comment: detail.comment
+            }
+        })
+        const feedbackJson = JSON.stringify(feedback);
+        microsoftTeams.getContext((context) => {
+            const feedbackDetails: IFeedbackDetails = {
+                meetingId: questionDetails[0].meetingId,
+                candidateEmail: currentCandidateEmail,
+                feedbackJson: feedbackJson,
+                interviewer: context?.userPrincipalName!
+            }
+            saveFeedback(feedbackDetails)
+                .then((res) => {
+                    setFeedbackSubmitted(true);
+                })
+                .catch((ex) => {
+                    console.log("Error while submitting the feedback.")
+                    console.log(ex)
+                });
             })
-            .catch((ex) => {
-                console.log("Error while submitting the feedback.")
-                console.log(ex)
-            });
     }
 
     React.useEffect(() => {
@@ -104,9 +120,9 @@ const RecruitingDetails = () => {
             {/* Content for stage view */}
             <Flex hidden={window.innerWidth < 600} gap="gap.small" padding="padding.medium" className="container">
                 <Flex column gap="gap.small" padding="padding.medium" className="detailsContainer">
-                    <BasicDetails setSelectedCandidateIndex={setSelectedCandidateIndex}/>
+                    <BasicDetails setSelectedCandidateIndex={setSelectedCandidateIndex} />
                     <Timeline />
-                    <Notes currentCandidateEmail={currentCandidateEmail}/>
+                    <Notes currentCandidateEmail={currentCandidateEmail} />
                 </Flex>
                 <Flex column gap="gap.small" padding="padding.medium" className="questionsContainer">
                     <Questions />
@@ -125,7 +141,8 @@ const RecruitingDetails = () => {
                 <Flex column gap="gap.small">
                     <>
                         {!activeMobileMenu && <BasicDetailsMobile selectedIndex={selectedIndex} />}
-                        {questionDetails.length > 0 && activeMobileMenu == 1 &&
+                        {feedbackSubmitted && <Text>Feedback submitted!</Text>}
+                        {!feedbackSubmitted && questionDetails.length > 0 && activeMobileMenu == 1 &&
                             <Flex column>
                                 <Flex column gap="gap.smaller" className="questionCardsMobile">
                                     <QuestionsMobile

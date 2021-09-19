@@ -43,7 +43,7 @@ namespace MeetingApp.Data.Repositories.Questions
         public async Task<TableResult> StoreOrUpdateQuestionEntityAsync(QuestionSetEntity entity)
         {
             entity.PartitionKey = entity.MeetingId;
-            entity.RowKey = string.Format("{0:D19}", DateTime.UtcNow.Ticks);
+            entity.RowKey = entity.QuestionId == null ? string.Format("{0:D19}", DateTime.UtcNow.Ticks) : entity.QuestionId;
             await this.EnsureInitializedAsync().ConfigureAwait(false);
             TableOperation addOrUpdateOperation = TableOperation.InsertOrReplace(entity);
             return await this.questionCloudTable.ExecuteAsync(addOrUpdateOperation).ConfigureAwait(false);

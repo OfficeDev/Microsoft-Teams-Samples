@@ -18,3 +18,11 @@ export interface INoteDetails {
   addedBy: string,
   note: string
 }
+
+// Interface for feedback submiited for questions.
+export interface IFeedbackDetails {
+    meetingId: string,
+    candidateEmail: string,
+    feedbackJson: string,
+    interviewer: string
+  }

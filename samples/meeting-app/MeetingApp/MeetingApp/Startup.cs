@@ -5,6 +5,7 @@
 
 using MeetingApp.Bots;
 using MeetingApp.Data.Repositories;
+using MeetingApp.Data.Repositories.Feedback;
 using MeetingApp.Data.Repositories.Notes;
 using MeetingApp.Data.Repositories.Questions;
 using Microsoft.AspNetCore.Builder;
@@ -46,6 +47,8 @@ namespace MeetingApp
 
             services.AddSingleton<INotesRepository>(new NotesRepository(this.Configuration["StorageConnectionString"]));
 
+            services.AddSingleton<IFeedbackRepository>(new FeedbackRepository(this.Configuration["StorageConnectionString"]));
+
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -61,13 +64,15 @@ namespace MeetingApp
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseDefaultFiles()
-                .UseStaticFiles()
-                .UseWebSockets()
-                .UseRouting()
-                .UseAuthorization();
+            //app.UseDefaultFiles();
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
+            app.UseWebSockets();
+            app.UseRouting();
+            app.UseAuthorization();
             app.UseMvc();
-            //app.UseSpaStaticFiles();
+            app.UseEndpoints(endpointRouteBuilder => endpointRouteBuilder.MapControllers());
+
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";

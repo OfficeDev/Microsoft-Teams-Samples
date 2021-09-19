@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>latest</LangVersion>
+    <UserSecretsId>82c81116-057f-40bf-9bf2-2563189614e8</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,7 +22,7 @@
   </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="ClientApp\" />
+      <Folder Include="ClientApp\build" />
     </ItemGroup>
 
 </Project>

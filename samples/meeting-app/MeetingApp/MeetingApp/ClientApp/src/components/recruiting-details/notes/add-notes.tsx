@@ -17,7 +17,7 @@ const AddNotes = (): React.ReactElement => {
 
     return (
         <>
-           <Flex column gap="gap.smaller">
+           <Flex column gap="gap.smaller" padding="padding.medium">
              <TextArea placeholder="Add note" onChange={(event: any) => setNote(event.target.value)} />
              <Button content="Add" onClick={saveNote} />
             </Flex>

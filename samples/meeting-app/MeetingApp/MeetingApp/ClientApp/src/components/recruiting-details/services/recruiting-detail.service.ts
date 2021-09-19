@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { IQuestionDetails, INoteDetails } from '../../../types/recruitment.types';
+import { IQuestionDetails, INoteDetails, IFeedbackDetails } from '../../../types/recruitment.types';
 import { IQuestionSet } from '../basic-details/basic-details.types';
 
 // API call to get Candidate details.
@@ -22,10 +22,9 @@ export function deleteQuestion(questionDetails: IQuestionSet): Promise<AxiosResp
   return axios.post(`${window.location.origin}/api/Question/delete`, questionDetails);
 }
 
-// API call to save Questions.
-export function saveFeedback(questionDetails: IQuestionDetails[]): Promise<AxiosResponse<unknown>> {
-  console.log(questionDetails);
-  return axios.post(`${window.location.origin}/api/Question/feedback`, questionDetails);
+// API call to save feedback.
+export function saveFeedback(feedbackDetails: IFeedbackDetails): Promise<AxiosResponse<unknown>> {
+  return axios.post(`${window.location.origin}/api/Feedback`, feedbackDetails);
 }
 
 // API call to get Questions.
