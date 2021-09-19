@@ -1,23 +1,103 @@
+import * as React from 'react';
 import { Flex, Card, Button, Text, AddIcon } from '@fluentui/react-northstar'
+import { INoteDetails } from '../../../types/recruitment.types';
 import "../../recruiting-details/recruiting-details.css"
+import { getNotes, saveNote } from '../services/recruiting-detail.service';
+import * as microsoftTeams from "@microsoft/teams-js";
 
-const Notes = () => {
+export interface INotesProps {
+    currentCandidateEmail: string
+}
+
+const Notes = (props: INotesProps) => {
+
+    const [notes, setNotes] = React.useState<any[]>([]);
+
+    // Method to start task module to add a note.
+    const addNotesTaskModule = () => {
+        let taskInfo = {
+            title: "Notes",
+            height: 400,
+            width: 400,
+            url: `${window.location.origin}/addNote`,
+        };
+
+        microsoftTeams.tasks.startTask(taskInfo, (err, note) => {
+            if (err) {
+                console.log("Some error occurred in the task module")
+                return
+            }
+
+            microsoftTeams.getContext((context) => {
+                // The note details to save.
+                const noteDetails: INoteDetails = {
+                    candidateEmail: props.currentCandidateEmail,
+                    note: note,
+                    addedBy: context.userPrincipalName!
+                };
+
+                // API call to save the question to storage.
+                saveNote(noteDetails)
+                    .then((res) => {
+                        loadNotes()
+                    })
+                    .catch((ex) => {
+                        console.log("Error while saving note details" + ex)
+                    });
+            })
+        });
+    };
+
+    // Method to load the notes in the question container.
+    const loadNotes = () => {
+        debugger
+        getNotes(props.currentCandidateEmail)
+            .then((res) => {
+                console.log(res)
+                const notes = res.data as any[];
+                console.log(notes);
+                setNotes(notes)
+            })
+            .catch((ex) => {
+                console.log("Error while getting the notes" + ex)
+            });
+    }
+
+    React.useEffect((): any => {
+        microsoftTeams.initialize();
+        loadNotes();
+    }, [props.currentCandidateEmail])
+
     return (
         <Card fluid aria-roledescription="card with basic details" className="notes-card">
             <Card.Header>
                 <Flex gap="gap.small" space="between">
-                <Text content="Notes" weight="bold" />
+                    <Text content="Notes" weight="bold" />
                     <Flex >
-                        <Button size="small" icon={<AddIcon  size="small"/>} content="Add a note" iconPosition="before" />
+                        <Button
+                            size="small"
+                            icon={<AddIcon size="small" />}
+                            content="Add a note"
+                            iconPosition="before"
+                            onClick={addNotesTaskModule} />
                     </Flex>
                 </Flex>
                 <hr className="details-separator" />
             </Card.Header>
             <Card.Body>
-              <Text content="No notes yet" />
+                {notes.length == 0 && <Text content="No notes yet" />}
+                {
+                    notes.length > 0 && notes.map((noteDetail, index) => {
+                    return (<Flex column key={index}>
+                        <Text content={noteDetail.note}/>
+                        <Flex>
+                            {noteDetail.addedBy}| {noteDetail.timestamp}
+                        </Flex>
+                    </Flex>)
+                    })
+                }
             </Card.Body>
         </Card>
-
     )
 }
 

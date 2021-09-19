@@ -6,6 +6,6 @@ namespace MeetingApp.Data.Repositories
 {
     public interface ICandidateRepository
     {
-        Task<CandidateDetailEntity> GetCandidateDetailsByEmail(string email);
+        Task<IEnumerable<CandidateDetailEntity>> GetCandidateDetails();
     }
 }

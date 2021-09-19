@@ -6,7 +6,11 @@ import TwitterLogo from '../../../images/twitter.svg';
 import { getCandidateDetails } from "../services/recruiting-detail.service"
 import { ICandidateDetails } from './basic-details.types';
 
-const BasicDetailsMobile = () => {
+export interface IBasicDetailsMobileProps {
+    selectedIndex: number,
+}
+
+const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
     const links = [{
         type: "Resume",
         url: ""
@@ -17,14 +21,15 @@ const BasicDetailsMobile = () => {
     }
     ]
 
-    const [candidateDetails, setCandidateDetails] = React.useState<ICandidateDetails>();
+    const [candidateDetails, setCandidateDetails] = React.useState<ICandidateDetails[]>([]);
     const [skills, setSkills] = React.useState<string[]>([]);
+
     React.useEffect(() => {
         getCandidateDetails()
             .then((res) => {
                 console.log(res)
-                const data = res.data as ICandidateDetails;
-                setSkills(data.skills.split(','));
+                const data = res.data as ICandidateDetails[];
+                setSkills(data[props.selectedIndex].skills.split(','));
                 setCandidateDetails(data);
             })
             .catch((ex) => {
@@ -47,18 +52,18 @@ const BasicDetailsMobile = () => {
                             status="unknown"
                         />
                         <Flex column>
-                            <Text content={candidateDetails?.candidateName} />
-                            <Text content={candidateDetails?.role} size="small" className="roleText" />
+                            <Text content={candidateDetails[props.selectedIndex]?.candidateName} />
+                            <Text content={candidateDetails[props.selectedIndex]?.role} size="small" className="roleText" />
                         </Flex>
                     </Flex>
                     <Flex column>
                         <Flex gap="gap.small">
                             <Text content="Experience" size="small" className="expLabel" />
-                            <Text content={candidateDetails?.experience} size="small" />
+                            <Text content={candidateDetails[props.selectedIndex]?.experience} size="small" />
                         </Flex>
                         <Flex gap="gap.small">
                             <Text content="Education" size="small" />
-                            <Text content={candidateDetails?.education} size="small" className="education" />
+                            <Text content={candidateDetails[props.selectedIndex]?.education} size="small" className="education" />
                         </Flex>
                     </Flex>
                     <Flex column>

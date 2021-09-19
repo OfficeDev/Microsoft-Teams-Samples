@@ -5,24 +5,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MeetingApp.Data.Repositories.Questions
+namespace MeetingApp.Data.Repositories.Notes
 {
-    public class QuestionsRepository: IQuestionsRepository
+    public class NotesRepository: INotesRepository
     {
         private readonly Lazy<Task> initializeTask;
-        private CloudTable questionCloudTable;
+        private CloudTable notesCloudTable;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="QuestionsRepository"/> class.
         /// </summary>
         /// <param name="connectionString">connection string of storage provided by dependency injection.</param>
-        public QuestionsRepository(string connectionString)
+        public NotesRepository(string connectionString)
         {
             this.initializeTask = new Lazy<Task>(() => this.InitializeTableStorageAsync(connectionString));
         }
 
         /// <summary>
-        /// Create CandidateDetails table if it doesn't exist.
+        /// Create Notes table if it doesn't exist.
         /// </summary>
         /// <param name="connectionString">storage account connection string.</param>
         /// <returns><see cref="Task"/> representing the asynchronous operation task which represents table is created if its not existing.</returns>
@@ -30,53 +30,37 @@ namespace MeetingApp.Data.Repositories.Questions
         {
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connectionString);
             CloudTableClient cloudTableClient = storageAccount.CreateCloudTableClient();
-            this.questionCloudTable = cloudTableClient.GetTableReference("Questions");
+            this.notesCloudTable = cloudTableClient.GetTableReference("Notes");
 
-            await this.questionCloudTable.CreateIfNotExistsAsync().ConfigureAwait(false);
+            await this.notesCloudTable.CreateIfNotExistsAsync().ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Store or update questions in table storage.
+        /// Store or update notes in table storage.
         /// </summary>
-        /// <param name="entity">Represents questionSet entity used for storage and retrieval.</param>
-        /// <returns><see cref="Task"/> that represents configuration entity is saved or updated.</returns>
-        public async Task<TableResult> StoreOrUpdateQuestionEntityAsync(QuestionSetEntity entity)
+        /// <param name="entity">Represents notes entity used for storage and retrieval.</param>
+        /// <returns><see cref="Task"/> that represents notes entity is saved or updated.</returns>
+        public async Task<TableResult> StoreOrUpdateQuestionEntityAsync(NotesEntity entity)
         {
-            entity.PartitionKey = entity.MeetingId;
+            entity.PartitionKey = entity.CandidateEmail;
             entity.RowKey = string.Format("{0:D19}", DateTime.UtcNow.Ticks);
             await this.EnsureInitializedAsync().ConfigureAwait(false);
             TableOperation addOrUpdateOperation = TableOperation.InsertOrReplace(entity);
-            return await this.questionCloudTable.ExecuteAsync(addOrUpdateOperation).ConfigureAwait(false);
+            return await this.notesCloudTable.ExecuteAsync(addOrUpdateOperation).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Delete a particular question in table storage.
+        /// Get notes from table storage.
         /// </summary>
         /// <returns><see cref="Task"/> Already saved entity detail.</returns>
-        public async Task<int> DeleteQuestion(QuestionSetEntity entity)
-        {
-            await this.EnsureInitializedAsync().ConfigureAwait(false);
-            entity.PartitionKey = entity.MeetingId;
-            entity.RowKey = entity.QuestionId;
-            entity.ETag = "*";
-            var deleteOperation = TableOperation.Delete(entity);
-            var result = await this.questionCloudTable.ExecuteAsync(deleteOperation).ConfigureAwait(false);
-
-            return (int)result.HttpStatusCode;
-        }
-
-        /// <summary>
-        /// Edit a particular question in table storage.
-        /// </summary>
-        /// <returns><see cref="Task"/> Already saved entity detail.</returns>
-        public async Task<IEnumerable<QuestionSetEntity>> GetQuestions(string meetingId)
+        public async Task<IEnumerable<NotesEntity>> GetNotes(string email)
         {
             await this.EnsureInitializedAsync().ConfigureAwait(false);
 
             TableContinuationToken continuationToken = null;
-            TableQuery<QuestionSetEntity> query = new TableQuery<QuestionSetEntity>()
-            .Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, meetingId));
-            var searchResult = await this.questionCloudTable.ExecuteQuerySegmentedAsync(query, continuationToken).ConfigureAwait(false);
+            TableQuery<NotesEntity> query = new TableQuery<NotesEntity>()
+            .Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, email));
+            var searchResult = await this.notesCloudTable.ExecuteQuerySegmentedAsync(query, continuationToken).ConfigureAwait(false);
 
             return searchResult.ToList();
         }

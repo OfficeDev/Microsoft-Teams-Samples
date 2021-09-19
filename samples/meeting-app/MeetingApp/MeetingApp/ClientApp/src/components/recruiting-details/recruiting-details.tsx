@@ -25,6 +25,14 @@ const RecruitingDetails = () => {
 
     const [activeMobileMenu, setActiveMobileMenu] = React.useState(0);
     const [questionDetails, setQuestionDetails] = React.useState<IQuestionDetails[]>([]);
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
+    const [currentCandidateEmail, setCurrentCandidateEmail] = React.useState<string>('');
+
+    const setSelectedCandidateIndex = (index: number, email: string) => {
+        setSelectedIndex(index);
+        debugger
+        setCurrentCandidateEmail(email);
+    }
 
     // Method to set the rating for a question.
     const setRating = (event: any) => {
@@ -50,15 +58,8 @@ const RecruitingDetails = () => {
         setQuestionDetails(currentQuestions);
     }
 
-    // Method to reset comment on a question.
-    const resetComment = (rowKey: string) => {
-        debugger;
-        const doc: any = document.getElementById(rowKey + "_textarea");
-        doc.value = "";
-    }
     // Method to load the questions in the question container.
     const loadQuestions = () => {
-        debugger;
         microsoftTeams.getContext((context) => {
             getQuestions(context.meetingId!)
                 .then((res) => {
@@ -103,9 +104,9 @@ const RecruitingDetails = () => {
             {/* Content for stage view */}
             <Flex hidden={window.innerWidth < 600} gap="gap.small" padding="padding.medium" className="container">
                 <Flex column gap="gap.small" padding="padding.medium" className="detailsContainer">
-                    <BasicDetails />
+                    <BasicDetails setSelectedCandidateIndex={setSelectedCandidateIndex}/>
                     <Timeline />
-                    <Notes />
+                    <Notes currentCandidateEmail={currentCandidateEmail}/>
                 </Flex>
                 <Flex column gap="gap.small" padding="padding.medium" className="questionsContainer">
                     <Questions />
@@ -123,7 +124,7 @@ const RecruitingDetails = () => {
                     primary />
                 <Flex column gap="gap.small">
                     <>
-                        {!activeMobileMenu && <BasicDetailsMobile />}
+                        {!activeMobileMenu && <BasicDetailsMobile selectedIndex={selectedIndex} />}
                         {questionDetails.length > 0 && activeMobileMenu == 1 &&
                             <Flex column>
                                 <Flex column gap="gap.smaller" className="questionCardsMobile">

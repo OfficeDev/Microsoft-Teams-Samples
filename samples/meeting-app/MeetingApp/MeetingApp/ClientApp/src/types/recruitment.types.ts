@@ -12,3 +12,9 @@ export interface IQuestionDetails {
     commentedBy?: string,
     showAddComment?: boolean
 }
+
+export interface INoteDetails {
+  candidateEmail: string,
+  addedBy: string,
+  note: string
+}

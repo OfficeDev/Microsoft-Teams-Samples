@@ -1,17 +1,50 @@
 import * as React from 'react';
-import { Flex, Card, Button, Avatar, Text, ChatIcon, CallVideoIcon, CallIcon, EmailIcon, PaperclipIcon, PopupIcon } from '@fluentui/react-northstar'
+import { 
+    Flex, 
+    Card, 
+    Button, 
+    Avatar, 
+    Text, 
+    ChatIcon, 
+    CallVideoIcon, 
+    CallIcon, 
+    EmailIcon, 
+    PaperclipIcon, 
+    PopupIcon,
+    Dropdown} from '@fluentui/react-northstar'
 import "../../recruiting-details/recruiting-details.css"
 import { getCandidateDetails } from "../services/recruiting-detail.service"
 import { ICandidateDetails } from './basic-details.types';
 
-const BasicDetails = () => {
-    const [candidateDetails, setCandidateDetails] = React.useState<ICandidateDetails>();
+export interface IBasicDetailsProps {
+    setSelectedCandidateIndex: (index: number, email: string) => void,
+}
+
+const BasicDetails = (props: IBasicDetailsProps) => {
+    const [candidateDetails, setCandidateDetails] = React.useState<ICandidateDetails[]>([]);
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
+    const [candidateNames, setCandidateNames] = React.useState<any[]>([]);
+
+    const handleNameChange = (event: any, dropdownProps?: any) => {
+        setSelectedIndex(dropdownProps.value.key);
+        props.setSelectedCandidateIndex(dropdownProps.value.key, dropdownProps.value.email);     
+    }
+
     React.useEffect(() => {
         getCandidateDetails()
             .then((res) => {
                 console.log(res)
-                const data = res.data as ICandidateDetails;
+                const data = res.data as ICandidateDetails[];
                 setCandidateDetails(data);
+                const names = data?.map((candidate, index) => {
+                    return {
+                        header: candidate.candidateName,
+                        key: index,
+                        email: candidate.email
+                    }
+                });
+                setCandidateNames(names);
+                props.setSelectedCandidateIndex(selectedIndex, data[selectedIndex]?.email); 
             })
             .catch((ex) => {
                 console.log(ex)
@@ -30,8 +63,14 @@ const BasicDetails = () => {
                             status="unknown"
                         />
                         <Flex column>
-                            <Text content={candidateDetails?.candidateName} weight="bold" />
-                            <Text content={candidateDetails?.role} size="small" />
+                             <Dropdown
+                                activeSelectedIndex={selectedIndex}
+                                items={candidateNames}
+                                onChange={handleNameChange}
+                                inline
+                                value={candidateDetails[selectedIndex]?.candidateName}
+                            />
+                            <Text content={candidateDetails[selectedIndex]?.role} size="small" />
                         </Flex>
                     </Flex>
                     <Flex >
@@ -48,34 +87,34 @@ const BasicDetails = () => {
                         <Flex column gap="gap.small">
                             <Flex >
                                 <Button icon={<EmailIcon size="medium" />} iconOnly text title="Email" size="small" />
-                                <Text content={candidateDetails?.email} size="small" />
+                                <Text content={candidateDetails[selectedIndex]?.email} size="small" />
                             </Flex>
                             <Flex>
                                 <Button icon={<CallIcon size="medium" />} iconOnly text title="Call" size="small" />
-                                <Text content={candidateDetails?.mobile} size="small" />
+                                <Text content={candidateDetails[selectedIndex]?.mobile} size="small" />
                             </Flex>
                         </Flex>
                     </Flex>
                     <Flex column className="details details-border">
                         <Text content="Skills" weight="bold" />
-                        <Text content={candidateDetails?.skills} size="small" />
+                        <Text content={candidateDetails[selectedIndex]?.skills} size="small" />
                     </Flex>
                     <Flex column className="source-details details-border">
                         <Text content="Attachments" weight="bold" />
                         <Flex column gap="gap.small">
                             <Flex>
                                 <Button icon={<PaperclipIcon size="medium" />} iconOnly text title="Email" size="small" />
-                                <Text content={'Resume'} size="small" className="iconText"/>
+                                <Text content={'Resume'} size="small" className="iconText" />
                             </Flex>
                             <Flex>
                                 <Button icon={<PopupIcon size="medium" />} iconOnly text title="Open link" size="small" />
-                                <Text content={'portfolio.com'} size="small" className="iconText"/>
+                                <Text content={'portfolio.com'} size="small" className="iconText" />
                             </Flex>
                         </Flex>
                     </Flex>
                     <Flex column className="source-details">
                         <Text content="Source" weight="bold" />
-                        <Text content={candidateDetails?.source} size="small" />
+                        <Text content={candidateDetails[selectedIndex]?.source} size="small" />
                     </Flex>
                 </Flex>
             </Card.Body>

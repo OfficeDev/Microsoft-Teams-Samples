@@ -21,11 +21,11 @@ namespace MeetingApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCandidateDetailsById(string email)
+        public async Task<IActionResult> GetCandidateDetailsById()
         {
-            var candidate = await this._candidateRepository.GetCandidateDetailsByEmail(email);
-            if (candidate == null) return NotFound();
-            return Ok(candidate);
+            var candidates = await this._candidateRepository.GetCandidateDetails();
+            if (candidates == null) return NotFound();
+            return Ok(candidates);
         }
     }
 }

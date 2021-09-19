@@ -40,23 +40,20 @@ namespace MeetingApp.Data.Repositories
         /// Get all candidate details from table storage.
         /// </summary>
         /// <returns><see cref="Task"/> Already saved entity detail.</returns>
-        public async Task<CandidateDetailEntity> GetCandidateDetailsByEmail(string email)
+        public async Task<IEnumerable<CandidateDetailEntity>> GetCandidateDetails()
         {
             await this.EnsureInitializedAsync().ConfigureAwait(false);
 
             var query = new TableQuery<CandidateDetailEntity>();
-            //{
-            //    FilterString = $"CandidateEmail eq '{email}'",
-            //};
 
             TableContinuationToken continuationToken = null;
-            var candidateDetails = new CandidateDetailEntity();
+            var candidateDetails = new List<CandidateDetailEntity>();
             do
             {
                 var queryResult = await this.candidateCloudTable.ExecuteQuerySegmentedAsync(query, continuationToken).ConfigureAwait(false);
                 if (queryResult != null)
                 {
-                    candidateDetails = queryResult.FirstOrDefault();
+                    candidateDetails = queryResult.ToList();
                 }
 
                 continuationToken = queryResult?.ContinuationToken;
