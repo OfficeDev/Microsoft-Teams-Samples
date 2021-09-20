@@ -31,7 +31,7 @@ class LogoutDialog extends ComponentDialog {
     async interrupt(innerDc) {
         if (innerDc.context.activity.type === ActivityTypes.Message) {
             const text = innerDc.context.activity.text.toLowerCase();
-            if (text === 'logout') {
+            if (text.indexOf('logout') != -1) {
                 // The bot adapter encapsulates the authentication processes.
                 const botAdapter = innerDc.context.adapter;
                 await botAdapter.signOutUser(innerDc.context, this.connectionName);

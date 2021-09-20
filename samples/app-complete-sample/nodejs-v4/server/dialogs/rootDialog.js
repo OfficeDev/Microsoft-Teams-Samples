@@ -34,6 +34,7 @@ const FACEBOOKAUTH = 'FacebookAuth';
 const UPDATECARDMESSAGE = 'UpdateCardMessage';
 const UPDATECARDSETUP = 'UpdatecardSetupMsg';
 const PROACTIVEMESSAGE = 'ProactiveMessage';
+const LOGOUT = 'Logout';
 
 const { HelloDialog } = require('./basic/helloDialog');
 const { HelpDialog } = require('./basic/helpDialog');
@@ -63,6 +64,7 @@ const { UpdateCardMsgDialog } = require('./teams/updateCardMsgDialog');
 const { ProactiveMsgTo1to1Dialog } = require('./teams/proactiveMsgTo1to1Dialog');
 const { AuthCardDialog } = require('./auth/authDialog');
 const { SimpleFacebookAuthDialog } = require('./auth/simpleFacebookAuthDialog');
+const { LogoutDialog } = require('./auth/logoutDialog');
 
 class RootDialog extends ComponentDialog {
 
@@ -98,6 +100,7 @@ class RootDialog extends ComponentDialog {
         this.addDialog(new UpdateTextMsgSetupDialog(SETUPTEXTMESSAGE, this.conversationDataAccessor));
         this.addDialog(new AuthCardDialog(AUTHCARD, this.conversationDataAccessor));
         this.addDialog(new SimpleFacebookAuthDialog(FACEBOOKAUTH, this.conversationDataAccessor));
+        this.addDialog(new LogoutDialog(LOGOUT, process.env.ConnectionName));
         this.addDialog(new UpdateCardMsgDialog(UPDATECARDMESSAGE, this.conversationDataAccessor));
         this.addDialog(new UpdateCardMsgSetupDialog(UPDATECARDSETUP, this.conversationDataAccessor));
         this.addDialog(new ProactiveMsgTo1to1Dialog(PROACTIVEMESSAGE, this.conversationDataAccessor));
@@ -220,6 +223,9 @@ class RootDialog extends ComponentDialog {
             }
             else if (command.trim() == "send message to 1:1") {
                 return await stepContext.beginDialog(PROACTIVEMESSAGE);
+            }
+            else if (command.trim() == "logout") {
+                return await stepContext.beginDialog(LOGOUT);
             }
             await stepContext.context.sendActivity('Sorry,Cannot recognize the command');
             return await stepContext.endDialog();
