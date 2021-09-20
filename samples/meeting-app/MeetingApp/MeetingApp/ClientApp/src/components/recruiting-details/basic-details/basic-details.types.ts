@@ -9,6 +9,8 @@ export interface ICandidateDetails {
   source: string;
   education: string;
   resumeUrl: string;
+  linkedInUrl: string;
+  twitterUrl: string;
 }
 
 export interface IQuestionSet {

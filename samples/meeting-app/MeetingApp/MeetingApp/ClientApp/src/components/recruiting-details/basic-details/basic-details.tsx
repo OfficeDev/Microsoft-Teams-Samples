@@ -113,7 +113,9 @@ const BasicDetails = (props: IBasicDetailsProps) => {
                                 content={'portfolio.com'} 
                                 size="small" 
                                 className="iconText"
-                                 />
+                                onClick={() => {
+                                    window.open(candidateDetails[selectedIndex].linkedInUrl)
+                                }} />
                             </Flex>
                         </Flex>
                     </Flex>

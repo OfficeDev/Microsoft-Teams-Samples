@@ -25,5 +25,9 @@ namespace MeetingApp.Data.Models
         public string Attachments { get; set; }
 
         public string Education { get; set; }
+
+        public string LinkedInUrl { get; set; }
+
+        public string TwitterUrl { get; set; }
     }
 }
