@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Flex, Card, Avatar, Text, Header, Button, Label } from '@fluentui/react-northstar'
+import { Flex, Card, Avatar, Text, Header, Button, Label, AddIcon } from '@fluentui/react-northstar'
 import "../../recruiting-details/recruiting-details.css"
 import LinkedInLogo from '../../../images/linkedin.svg';
 import TwitterLogo from '../../../images/twitter.svg';
@@ -91,6 +91,9 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
                             })
                             }
                         </Flex>
+                    </Flex>
+                    <Flex>
+                        <Button icon={<AddIcon />} content={'Share docs'} size="small" className="shareDocs"/>
                     </Flex>
                 </Flex>
             </Card.Body>

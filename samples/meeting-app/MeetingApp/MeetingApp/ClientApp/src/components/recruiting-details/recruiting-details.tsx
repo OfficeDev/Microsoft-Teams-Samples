@@ -130,7 +130,7 @@ const RecruitingDetails = () => {
             </Flex>
 
             {/* Content for sidepanel/mobile view */}
-            <Flex hidden={window.innerWidth < 600} gap="gap.small" padding="padding.medium" className="container-mobile" column>
+            <Flex hidden={window.innerWidth > 600} gap="gap.small" padding="padding.medium" className="container-mobile" column>
                 <Menu
                     defaultActiveIndex={0}
                     items={mobileMenuItems}
@@ -141,7 +141,7 @@ const RecruitingDetails = () => {
                 <Flex column gap="gap.small">
                     <>
                         {!activeMobileMenu && <BasicDetailsMobile selectedIndex={selectedIndex} />}
-                        {feedbackSubmitted && <Text>Feedback submitted!</Text>}
+                        {feedbackSubmitted && activeMobileMenu == 1 && <Text>Feedback submitted!</Text>}
                         {!feedbackSubmitted && questionDetails.length > 0 && activeMobileMenu == 1 &&
                             <Flex column>
                                 <Flex column gap="gap.smaller" className="questionCardsMobile">

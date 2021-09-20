@@ -74,8 +74,8 @@ const BasicDetails = (props: IBasicDetailsProps) => {
                         </Flex>
                     </Flex>
                     <Flex >
-                        <Button icon={<ChatIcon />} iconOnly text title="Favourite" />
-                        <Button icon={<CallVideoIcon />} iconOnly text title="Download" />
+                        <Button icon={<ChatIcon />} iconOnly text title="Message" />
+                        <Button icon={<CallVideoIcon />} iconOnly text title="Call" />
                     </Flex>
                 </Flex>
                 <hr className="details-separator" />
@@ -103,12 +103,17 @@ const BasicDetails = (props: IBasicDetailsProps) => {
                         <Text content="Attachments" weight="bold" />
                         <Flex column gap="gap.small">
                             <Flex>
-                                <Button icon={<PaperclipIcon size="medium" />} iconOnly text title="Email" size="small" />
-                                <Text content={'Resume'} size="small" className="iconText" />
+                                <Button icon={<PaperclipIcon />} primary text content={'Resume'} size="small" className="iconText" />
                             </Flex>
                             <Flex>
-                                <Button icon={<PopupIcon size="medium" />} iconOnly text title="Open link" size="small" />
-                                <Text content={'portfolio.com'} size="small" className="iconText" />
+                                <Button 
+                                icon={<PopupIcon />}
+                                primary 
+                                text 
+                                content={'portfolio.com'} 
+                                size="small" 
+                                className="iconText"
+                                 />
                             </Flex>
                         </Flex>
                     </Flex>

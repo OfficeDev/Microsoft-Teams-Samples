@@ -23,5 +23,7 @@ namespace MeetingApp.Data.Models
         public string Source { get; set; }
 
         public string Attachments { get; set; }
+
+        public string Education { get; set; }
     }
 }
