@@ -1,29 +1,45 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
 {
     /// <summary>
     /// This is Message Back Dialog Class. Main purpose of this class is to show example of Message Back event
-    /// </summary>
-
-    [Serializable]
-    public class MessagebackDialog : IDialog<object>
+    /// </summary
+    public class MessagebackDialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public MessagebackDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(MessagebackDialog))
         {
-            if (context == null)
+            this._conversationState = conversationState;
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
+                BeginMessagebackDialogAsync,
+            }));
+        }
+
+        private async Task<DialogTurnResult> BeginMessagebackDialogAsync(
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
             }
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogMessageBackDialog);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogMessageBackDialog;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
 
-            await context.PostAsync(Strings.MessageBackTitleMsg);
+            await stepContext.Context.SendActivityAsync(Strings.MessageBackTitleMsg);
 
-            context.Done<object>(null);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
     }
 }

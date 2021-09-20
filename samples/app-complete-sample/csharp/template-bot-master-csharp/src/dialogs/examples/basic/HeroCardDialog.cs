@@ -1,8 +1,12 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
+using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
@@ -11,27 +15,47 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// This is Hero Card Dialog Class. Main purpose of this class is to display the Hero Card example
     /// </summary>
 
-    [Serializable]
-    public class HeroCardDialog : IDialog<object>
+    public class HeroCardDialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public HeroCardDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(HeroCardDialog))
         {
-            if (context == null)
+            this._conversationState = conversationState;
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
+                BeginHeroCardDialogAsync,
+            }));
+        }
+
+        private async Task<DialogTurnResult> BeginHeroCardDialogAsync(
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
             }
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogHeroCard);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogHeroCard;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
+            var message = stepContext.Context.Activity;
+            if (message.Attachments != null)
+            {
+                message.Attachments = null;
+            }
 
-            var message = context.MakeMessage();
+            if (message.Entities.Count >= 1)
+            {
+                message.Entities.Remove(message.Entities[0]);
+            }
             var attachment = GetHeroCard();
+            message.Attachments = new List<Attachment>() { attachment };
+            await stepContext.Context.SendActivityAsync(message);
 
-            message.Attachments.Add(attachment);
-
-            await context.PostAsync(message);
-
-            context.Done<object>(null);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
 
         private static Attachment GetHeroCard()

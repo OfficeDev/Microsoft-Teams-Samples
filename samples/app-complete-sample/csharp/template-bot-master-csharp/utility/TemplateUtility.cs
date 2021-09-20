@@ -1,15 +1,14 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Builder.Dialogs.Internals;
-using Microsoft.Bot.Connector;
-using Microsoft.Bot.Connector.Teams;
-using Microsoft.Bot.Connector.Teams.Models;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Schema;
+using Microsoft.Bot.Schema.Teams;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.utility;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
+using static Microsoft.Teams.TemplateBotCSharp.Utility.WikipediaComposeExtension;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Utility
 {
@@ -18,7 +17,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
     /// </summary>
     public static class TemplateUtility
     {
-        public static string GetLocale(Activity activity)
+        public static string GetLocale(IMessageActivity activity)
         {
             if (activity == null)
             {
@@ -28,7 +27,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
             //Get the locale from activity
             if (activity.Entities != null)
             {
-                foreach(var entity in activity.Entities)
+                foreach (var entity in activity.Entities)
                 {
                     if (string.Equals(entity.Type.ToString().ToLower(), "clientinfo"))
                     {
@@ -43,14 +42,34 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
             return activity.Locale;
         }
 
-        public static ComposeExtensionAttachment CreateComposeExtensionCardsAttachments(WikiHelperSearchResult wikiResult, string selectedType)
+        public static async Task<UserData> GetBotUserDataObject(IStatePropertyAccessor<UserData> userState, ITurnContext<IInvokeActivity> turnContext, MessagingExtensionQuery query)
         {
-            return GetComposeExtensionMainResultAttachment(wikiResult, selectedType).ToComposeExtensionAttachment(GetComposeExtensionPreviewAttachment(wikiResult, selectedType));
+            var currentState = await userState.GetAsync(turnContext, () => new UserData());
+            currentState.BotId = turnContext.Activity.Recipient.Id;
+            currentState.ChannelId = turnContext.Activity.ChannelId;
+            currentState.ConversationId = turnContext.Activity.Conversation.Id;
+            currentState.ServiceUrl = turnContext.Activity.ServiceUrl;
+            currentState.UserId = turnContext.Activity.From.Id;
+            currentState.ComposeExtensionCardType = query.State != null ? query.State : currentState.ComposeExtensionCardType;
+            await userState.SetAsync(turnContext, currentState);
+            
+            return currentState;
         }
 
-        public static ComposeExtensionAttachment CreateComposeExtensionCardsAttachmentsSelectedItem(WikiHelperSearchResult wikiResult, string selectedType)
+        public static async Task SaveBotUserDataObject(IStatePropertyAccessor<UserData> userState, ITurnContext<IInvokeActivity> turnContext, List<WikiHelperSearchResult> historySearchWikiResult)
         {
-            return GetComposeExtensionMainResultAttachment(wikiResult, selectedType).ToComposeExtensionAttachment();
+            var currentState = await userState.GetAsync(turnContext, () => new UserData());
+            currentState.ComposeExtensionSelectedResults = historySearchWikiResult;
+            await userState.SetAsync(turnContext, currentState);
+        }
+        public static MessagingExtensionAttachment CreateComposeExtensionCardsAttachments(WikiHelperSearchResult wikiResult, string selectedType)
+        {
+            return GetComposeExtensionMainResultAttachment(wikiResult, selectedType).ToMessagingExtensionAttachment(GetComposeExtensionPreviewAttachment(wikiResult, selectedType));
+        }
+
+        public static MessagingExtensionAttachment CreateComposeExtensionCardsAttachmentsSelectedItem(WikiHelperSearchResult wikiResult, string selectedType)
+        {
+            return GetComposeExtensionMainResultAttachment(wikiResult, selectedType).ToMessagingExtensionAttachment();
         }
 
         public static Attachment GetComposeExtensionMainResultAttachment(WikiHelperSearchResult wikiResult, string selectedType)
@@ -171,31 +190,18 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
             return 0;
         }
 
-        public static async Task<BotData> GetBotUserDataObject(IBotDataStore<BotData> botDataStore, Activity activity)
+        public class InvokeValue
         {
-            IAddress key = Address.FromActivity(activity);
-            BotData botData = await botDataStore.LoadAsync(key, BotStoreType.BotUserData, CancellationToken.None);
-            return botData;
-        }
+            public string imageUrl { get; set; }
+            public string text { get; set; }
+            public string highlightedTitle { get; set; }
 
-        public static async Task SaveBotUserDataObject(IBotDataStore<BotData> botDataStore, Activity activity, BotData userData)
-        {
-            IAddress key = Address.FromActivity(activity);
-            await botDataStore.SaveAsync(key, BotStoreType.BotUserData, userData, CancellationToken.None);            
-        }
-    }
-
-    public class InvokeValue
-    {
-        public string imageUrl { get; set; }
-        public string text { get; set; }
-        public string highlightedTitle { get; set; }
-
-        public InvokeValue(string urlValue, string textValue, string highlightedTitleValue)
-        {
-            imageUrl = urlValue;
-            text = textValue;
-            highlightedTitle = highlightedTitleValue;
+            public InvokeValue(string urlValue, string textValue, string highlightedTitleValue)
+            {
+                imageUrl = urlValue;
+                text = textValue;
+                highlightedTitle = highlightedTitleValue;
+            }
         }
     }
 }

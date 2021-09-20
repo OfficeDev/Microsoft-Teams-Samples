@@ -1,9 +1,12 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Connector;
-using Microsoft.Bot.Connector.Teams.Models;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Schema;
+using Microsoft.Bot.Schema.Teams;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
@@ -14,25 +17,47 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// </summary>
 
     [Serializable]
-    public class O365ConnectorCardActionsDialog : IDialog<object>
+    public class O365ConnectorCardActionsDialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public O365ConnectorCardActionsDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(O365ConnectorCardActionsDialog))
         {
-            if (context == null)
+            this._conversationState = conversationState;
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
+                BeginO365ConnectorCardActionsDialogAsync,
+            }));
+        }
+
+        private async Task<DialogTurnResult> BeginO365ConnectorCardActionsDialogAsync(
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
             }
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogActionableMessageDialog);
-
-            var message = context.MakeMessage();
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogConnectorCardDialog;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
 
             // get the input number for the example to show if the user passed it into the command - e.g. 'show connector card 2'
-            var activity = (IMessageActivity)context.Activity;
+            var activity = (IMessageActivity)stepContext.Context.Activity;
 
             string inputNumber = activity.Text.Substring(activity.Text.Length - 1, 1).Trim();
             Attachment attachment = null;
+
+            /*
+                * Below are a few more examples of more complex connector cards
+                * To use: simply call 'connector card 2' or 'connector card 3'
+                * Note: these examples are just filled with demo data and that demo data is NOT using the localization system
+                * Note: these examples are leveraging an actual JSON string as their input content - more examples can be found at
+                * https://messagecardplayground.azurewebsites.net/ - it is recommended that the developer use the method
+                * shown above in order to get the benefits of type checking from the O365ConnectorCard class
+            */
 
             switch (inputNumber)
             {
@@ -40,20 +65,30 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                 // If a section contains only 1 card action, that is automatically expanded
                 case "2":
                     attachment = O365ActionableCardMultipleSection();
-                    break;
+            break;
 
                 // this is the default example's content
                 // multiple choice (compact & expanded), text input, date and placing images in card
                 case "1":
                 default:
                     attachment = O365ActionableCardDefault();
-                    break;
+            break;
+        }
+
+            var message = stepContext.Context.Activity;
+            if (message.Attachments != null)
+            {
+                message.Attachments = null;
             }
 
-            message.Attachments.Add(attachment);
-            await context.PostAsync(message);
+            if (message.Entities.Count >= 1)
+            {
+                message.Entities.Remove(message.Entities[0]);
+            }
+            message.Attachments = new List<Attachment>() { attachment };
+            await stepContext.Context.SendActivityAsync(message);
 
-            context.Done<object>(null);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
 
         /// <summary>
@@ -215,7 +250,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             #endregion
 
             #region date/time input examples
-            var dateCard = new O365ConnectorCardActionCard (O365ConnectorCardActionCard.Type)
+            var dateCard = new O365ConnectorCardActionCard(O365ConnectorCardActionCard.Type)
             {
                 Name = "Date Input",
                 Id = "Date Card",
@@ -347,7 +382,12 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                 }
             };
 
-            return card.ToAttachment();
+            Attachment attachment = new Attachment()
+            {
+                ContentType = O365ConnectorCard.ContentType,
+                Content = card
+            };
+            return attachment;
         }
 
         /// <summary>
@@ -362,7 +402,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
 
             #region Multichoice Card
             // multiple choice control with required, multiselect, compact style            
-            var multichoiceCardSection1 = new O365ConnectorCardActionCard (O365ConnectorCardActionCard.Type)
+            var multichoiceCardSection1 = new O365ConnectorCardActionCard(O365ConnectorCardActionCard.Type)
             {
                 Name = "Multiple Choice",
                 Id = "Multiple Choice Card",
@@ -422,7 +462,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
 
             #region Input Card
             // text input examples
-            var inputCard = new O365ConnectorCardActionCard (O365ConnectorCardActionCard.Type)
+            var inputCard = new O365ConnectorCardActionCard(O365ConnectorCardActionCard.Type)
             {
                 Id = "Text Input",
                 Name = "Input Card",
@@ -453,7 +493,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
 
             #region Multichoice Card For Section2
             // multiple choice control with not required, multiselect, compact style
-            var multichoiceCardSection2 = new O365ConnectorCardActionCard (O365ConnectorCardActionCard.Type)
+            var multichoiceCardSection2 = new O365ConnectorCardActionCard(O365ConnectorCardActionCard.Type)
             {
                 Name = "Multiple Choice",
                 Id = "Multiple Choice Card",
@@ -518,7 +558,12 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                 Sections = new List<O365ConnectorCardSection> { section1, section2 },
             };
 
-            return card.ToAttachment();
+            Attachment attachment = new Attachment()
+            {
+                ContentType = O365ConnectorCard.ContentType,
+                Content = card
+            };
+            return attachment;
         }
     }
 }
