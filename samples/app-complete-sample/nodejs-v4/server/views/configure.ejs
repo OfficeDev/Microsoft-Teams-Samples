@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>auto-complete-sample node js</title>
-
 </head>
 
 <body>
@@ -24,7 +23,7 @@
             microsoftTeams.appInitialization.notifySuccess();
             microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
                 microsoftTeams.settings.setSettings({
-                    entityID: "Bot Info",
+                    entityID: "configTab",
                     contentUrl: `${window.location.origin}/botInfo?tenantId={tid}`,
                     suggestedTabName: "Bot Info",
                     websiteUrl: `${window.location.origin}/botInfo?tenantId={tid}`,

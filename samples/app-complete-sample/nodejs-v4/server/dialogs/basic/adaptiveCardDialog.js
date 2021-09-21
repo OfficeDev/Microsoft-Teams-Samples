@@ -26,10 +26,9 @@ class AdaptiveCardDialog extends ComponentDialog {
             if (reply.attachments != null && reply.entities.length > 1) {
                 reply.attachments = null;
                 reply.entities.splice(0, 1);
-    
             }
+
             const card = this.getAdaptiveCard();
-    
             reply.attachments = [card];
             await stepContext.context.sendActivity(reply);
         }

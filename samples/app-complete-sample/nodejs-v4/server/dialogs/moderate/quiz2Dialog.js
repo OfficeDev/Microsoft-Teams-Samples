@@ -4,6 +4,7 @@
 const { WaterfallDialog, ComponentDialog, ChoicePrompt } = require('botbuilder-dialogs');
 const QUIZ2DIALOG = 'Quiz2Dialog';
 const CHOICE_PROMPT = 'choiceDialog'
+
 class Quiz2Dialog extends ComponentDialog {
     constructor(id, conversationDataAccessor) {
         super(id);
@@ -27,22 +28,27 @@ class Quiz2Dialog extends ComponentDialog {
         }
         );
     }
+
     async endQuiz2Dialog(stepContext) {
         const answer = stepContext.result.value;
+
         if (!answer) {
             // exhausted attempts and no selection, start over
             await stepContext.context.sendActivity('Not a valid option. We\'ll restart the dialog ' +
                 'so you can try again!');
             return await stepContext.endDialog();
         }
+
         if (answer === 'yes') {
             await stepContext.context.sendActivity("You are Right");
             return await stepContext.endDialog();
         }
+
         if (answer === 'no') {
             await stepContext.context.sendActivity("Wrong Choice");
             return await stepContext.endDialog();
         }
+        
         return await stepContext.endDialog();
     }
 

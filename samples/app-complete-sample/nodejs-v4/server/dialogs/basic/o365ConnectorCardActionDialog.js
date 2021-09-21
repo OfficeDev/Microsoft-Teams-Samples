@@ -3,6 +3,7 @@
 const { CardFactory } = require('botbuilder');
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const O365CONNECTORCARDACTION = 'O365ConnectorCardAction';
+
 class O365ConnectorCardActionDialog extends ComponentDialog {
     constructor(id, conversationDataAccessor) {
         super(id);
@@ -23,7 +24,6 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
         if (reply.attachments != null && reply.entities.length > 1) {
             reply.attachments = null;
             reply.entities.splice(0, 1);
-
         }
         var card;
         switch (inputNumber) {
@@ -78,7 +78,8 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                         {
                             "image": "http://connectorsdemo.azurewebsites.net/images/WIN12_Scene_01.jpg",
                             "title": "image 2"
-                        }, {
+                        },
+                        {
                             "image": "http://connectorsdemo.azurewebsites.net/images/WIN12_Anthony_02.jpg",
                             "title": "image 3"
                         }
@@ -200,10 +201,8 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                             "id": "multichoice",
                             "body":
                                 "cardstype={{cardstype.value}},Teams={{Teams.value}},Apps={{Apps.value}},OfficeProduct={{OfficeProduct.value}}"
-
                         }
                     ]
-
                 },
                 {
                     "@type": "ActionCard",
@@ -254,7 +253,6 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                             "id": "inputText",
                             "body":
                                 "text1={{text-1.value}}, text2={{text-2.value}},text3={{text-3.value}},text4={{text-4.value}}"
-
                         }
                     ]
                 },
@@ -289,7 +287,6 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                             "body": "date1={{date-1.value}},date2={{date-2.value}}"
                         }
                     ]
-
                 },
                 {
                     "@type": "ViewAction",
@@ -302,14 +299,16 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                     {
                         "os": "iOS",
                         "uri": "http://microsoft.com"
-                    }, {
+                    },
+                    {
                         "os": "android",
                         "uri": "http://microsoft.com"
                     },
                     {
                         "os": "windows",
                         "uri": "http://microsoft.com"
-                    }]
+                    }
+                    ]
                 },
                 {
                     "@context": "http://schema.org",
@@ -320,6 +319,7 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                 }
             ]
         });
+
         return card;
     }
 
@@ -380,7 +380,6 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                             "body": "cardstype={{cardstype.value}}"
                         }
                     ]
-
                 },
                 {
                     "@type": "ActionCard",
@@ -397,7 +396,8 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                                 "value": null,
                                 "isMultiline": true,
                                 "maxLength": null
-                            }],
+                            }
+                        ],
                     "actions": [
                         {
                             "@type": "HttpPOST",
@@ -432,8 +432,8 @@ class O365ConnectorCardActionDialog extends ComponentDialog {
                                         {
                                             "display": "O365 Connector Card",
                                             "value": "O365 Connector Card"
-                                        }],
-
+                                        }
+                                    ],
                                 "style": "compact",
                                 "isMultiSelect": true
                             }

@@ -5,6 +5,7 @@ const { MessageFactory } = require('botbuilder');
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const TextEncoder = require('util').TextEncoder;
 const ATMENTION = 'AtMention';
+
 class AtMentionDialog extends ComponentDialog {
     constructor(id, conversationDataAccessor) {
         super(id);
@@ -28,8 +29,6 @@ class AtMentionDialog extends ComponentDialog {
 
         const replyActivity = MessageFactory.text(`Hi ${mention.text}`);
         replyActivity.entities = [mention];
-        var message = stepContext.context._activity;
-        message.text = "at mention"
         await stepContext.context.sendActivity(replyActivity);
         return await stepContext.endDialog();
     }

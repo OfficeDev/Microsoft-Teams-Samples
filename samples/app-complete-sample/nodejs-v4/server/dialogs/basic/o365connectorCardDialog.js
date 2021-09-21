@@ -3,6 +3,7 @@
 const { CardFactory } = require('botbuilder');
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const O365CONNECTORECARD = 'O365ConnectorCard';
+
 class O365ConnectorCardDialog extends ComponentDialog {
     constructor(id, conversationDataAccessor) {
         super(id);
@@ -21,8 +22,8 @@ class O365ConnectorCardDialog extends ComponentDialog {
         if (reply.attachments != null && reply.entities.length > 1) {
             reply.attachments = null;
             reply.entities.splice(0, 1);
-
         }
+        
         var card;
         switch (inputNumber) {
             case "1":

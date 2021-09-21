@@ -4,6 +4,7 @@
 const { WaterfallDialog, ComponentDialog, ChoicePrompt } = require('botbuilder-dialogs');
 const QUIZ1DIALOG = 'Quiz1Dialog';
 const CHOICE_PROMPT = 'choiceDialog'
+
 class Quiz1Dialog extends ComponentDialog {
     constructor(id, conversationDataAccessor) {
         super(id);
@@ -27,26 +28,32 @@ class Quiz1Dialog extends ComponentDialog {
         }
         );
     }
+    
     async endQuiz1Dialog(stepContext) {
         const answer = stepContext.result.value;
+
         if (!answer) {
             // exhausted attempts and no selection, start over
             await stepContext.context.sendActivity('Not a valid option. We\'ll restart the dialog ' +
                 'so you can try again!');
             return await stepContext.endDialog();
         }
+
         if (answer === 'yes') {
             await stepContext.context.sendActivity("You are Right");
             return await stepContext.endDialog();
         }
+
         if (answer === 'no') {
             await stepContext.context.sendActivity("Wrong Choice");
             return await stepContext.endDialog();
         }
+
         return await stepContext.endDialog();
     }
 
     async validateNumberOfAttempts(promptContext) {
+
         if (promptContext.attemptCount > 3) {
             // cancel everything
             await promptContext.context.sendActivity('Oops! Too many attempts :( But don\'t worry, I\'m ' +

@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 const { TeamsInfo } = require('botbuilder');
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
-const FETCHTEAMINFO = 'FetchTeamInfo';
+const FETCHTEAMINFO = 'FetchTeamInfo'
 class FetchTeamInfoDialog extends ComponentDialog {
     constructor(id, conversationDataAccessor) {
         super(id);
@@ -23,7 +23,6 @@ class FetchTeamInfoDialog extends ComponentDialog {
             if (reply.attachments != null && reply.entities.length > 1) {
                 reply.attachments = null;
                 reply.entities.splice(0, 1);
-
             }
             reply.text = this.generateTableForTeamInfo(teamDetails);
             await stepContext.context.sendActivity(reply);
@@ -41,9 +40,9 @@ class FetchTeamInfoDialog extends ComponentDialog {
             // Currently, aadGroupId is present but is not defined in the TeamInfo typings
             return `Team id : ${teamDetails.id},
                         Team name : ${teamDetails.name},
-                        AAD group id : ${teamDetails.aadGroupId}
-                    `;
+                        AAD group id : ${teamDetails.aadGroupId}`;
         }
+        
         return "";
     }
 }

@@ -4,6 +4,7 @@ const { TurnContext } = require('botbuilder');
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const PROACTIVEMESSAGE = 'ProactiveMessage';
 const conversationReferences = {};
+
 class ProactiveMsgTo1to1Dialog extends ComponentDialog {
     constructor(id, conversationDataAccessor) {
         super(id);
@@ -22,6 +23,7 @@ class ProactiveMsgTo1to1Dialog extends ComponentDialog {
         var reply = stepContext.context._activity;
         reply.text = "Hey! I am Bot, How's going!!"
         await stepContext.context.sendActivity(reply);
+        
         return await stepContext.endDialog();
     }
 

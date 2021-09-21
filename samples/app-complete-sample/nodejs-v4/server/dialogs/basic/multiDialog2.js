@@ -3,6 +3,7 @@
 const { CardFactory, ActionTypes } = require('botbuilder');
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const MULTIDIALOG2 = 'MultiDialog2';
+
 class MultiDialog2 extends ComponentDialog {
     constructor(id, conversationDataAccessor) {
         super(id);
@@ -20,12 +21,11 @@ class MultiDialog2 extends ComponentDialog {
         if (reply.attachments != null && reply.entities.length > 1) {
             reply.attachments = null;
             reply.entities.splice(0, 1);
-
         }
+        
         const buttons = [
             { type: ActionTypes.ImBack, title: 'Invoke Hello Dialog', value: 'hi' },
             { type: ActionTypes.ImBack, title: 'Invoke Multi Dialog', value: 'multi dialog 1' },
-
         ];
         const CardImage = CardFactory.images(["https://sec.ch9.ms/ch9/7ff5/e07cfef0-aa3b-40bb-9baa-7c9ef8ff7ff5/buildreactionbotframework_960.jpg"])
         const card = CardFactory.heroCard('Multi Dialog Card Title.', CardImage,

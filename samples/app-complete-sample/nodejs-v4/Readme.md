@@ -60,8 +60,8 @@ Sample that shows how to build a Microsoft Teams bot in Node.js.
 
 6). Once you have saved your bot and gotten the confirmation that it is created, navigate back to your  project. Open the ".env" file. There, copy/paste your App ID and App password from the step above.
     ```
-    MicrosoftAppId=88888888-1111-2222-3333-999999999999
-    MicrosoftAppPassword=abc123abc123abc123abc12
+    MicrosoftAppId=
+    MicrosoftAppPassword=
     BaseUri=https://#####abc.ngrok.io
     ```
 

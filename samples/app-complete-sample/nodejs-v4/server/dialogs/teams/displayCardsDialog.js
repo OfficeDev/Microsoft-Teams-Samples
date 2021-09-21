@@ -14,6 +14,7 @@ const { ThumbnailCardDialog } = require('../basic/thumbnailCardDialog');
 const { AdaptiveCardDialog } = require('../basic/adaptiveCardDialog');
 const { O365ConnectorCardDialog } = require('../basic/o365connectorCardDialog');
 const { O365ConnectorCardActionDialog } = require('../basic/o365ConnectorCardActionDialog');
+
 class DisplayCardsDialog extends ComponentDialog {
     constructor(id, conversationDataAccessor) {
         super(id);
@@ -44,9 +45,12 @@ class DisplayCardsDialog extends ComponentDialog {
         }
         );
     }
+
     async getDisplayCardsDialog(stepContext) {
         const answer = stepContext.result.value;
-        if (!answer) {
+
+        if (!answer)
+        {
             // exhausted attempts and no selection, start over
             await stepContext.context.sendActivity('Not a valid option. We\'ll restart the dialog ' +
                 'so you can try again!');

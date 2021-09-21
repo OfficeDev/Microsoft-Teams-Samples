@@ -3,6 +3,7 @@
 
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const HELLO = 'Hello';
+
 class HelloDialog extends ComponentDialog {
     constructor(id, conversationDataAccessor) {
         super(id);
@@ -16,7 +17,6 @@ class HelloDialog extends ComponentDialog {
     async beginHelloDialog(stepContext) {
         var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "HelloDialog";
-
         await stepContext.context.sendActivity('This is Hello Dialog');
         return await stepContext.endDialog();
     }

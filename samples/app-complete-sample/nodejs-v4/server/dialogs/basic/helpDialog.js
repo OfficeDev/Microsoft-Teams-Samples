@@ -3,6 +3,7 @@
 const { CardFactory, ActionTypes } = require('botbuilder');
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const HELP = 'Help';
+
 class HelpDialog extends ComponentDialog {
     constructor(id, conversationDataAccessor) {
         super(id);
@@ -44,8 +45,8 @@ class HelpDialog extends ComponentDialog {
             { type: ActionTypes.ImBack, title: 'Message Back', value: 'msgback' },
             { type: ActionTypes.ImBack, title: 'Popup Sign-In', value: 'signin' },
             { type: ActionTypes.ImBack, title: 'Team Info', value: 'team info' },
-
         ];
+        
         const card = CardFactory.heroCard('Template Options', undefined,
             buttons);
 

@@ -33,7 +33,7 @@
   "staticTabs": [
     {
       "contentUrl": "<<BASE_URI>>/botInfo",
-      "entityId": "1on1test123",
+      "entityId": "statictab",
       "name": "Bot Info",
       "scopes": [
         "team",

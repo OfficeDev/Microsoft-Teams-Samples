@@ -3,6 +3,7 @@
 
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const MULTIDIALOG1 = 'MultiDialog1';
+
 class MultiDialog1 extends ComponentDialog {
     constructor(id, conversationDataAccessor) {
         super(id);

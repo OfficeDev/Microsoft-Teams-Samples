@@ -3,6 +3,7 @@
 const { TeamsInfo, CardFactory, ActionTypes } = require('botbuilder');
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const LISTNAMES = 'ListNames';
+
 class ListNamesDialog extends ComponentDialog {
     constructor(id, conversationDataAccessor) {
         super(id);
@@ -21,10 +22,11 @@ class ListNamesDialog extends ComponentDialog {
         if (reply.attachments != null && reply.entities.length > 1) {
             reply.attachments = null;
             reply.entities.splice(0, 1);
-
         }
+
         reply.text = JSON.stringify(members)
         var card = [];
+
         if (members.length != 0) {
             for (let i = 0; i < members.length; i++) {
                 card.push(this.getInformationCard(members[i].givenName + members[i].surname, members[i].aadObjectId));
@@ -39,13 +41,11 @@ class ListNamesDialog extends ComponentDialog {
         var chatUrl = "https://teams.microsoft.com/l/chat/0/0?users=" + aadId;
         const buttons = [
             { type: ActionTypes.OpenUrl, title: 'Chat', value: chatUrl },
-
         ];
         const card = CardFactory.heroCard(name, undefined,
             buttons);
         return card;
     }
-
 }
 
 exports.ListNamesDialog = ListNamesDialog;

@@ -4,6 +4,7 @@
 const { TeamsActivityHandler, ActionTypes, CardFactory } = require('botbuilder');
 const request = require('request-promise')
 const searchApiUrlFormat = "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=[keyword]&srlimit=[limit]&sroffset=[offset]&format=json";
+
 class DialogBot extends TeamsActivityHandler {
   /**
     *
@@ -25,7 +26,6 @@ class DialogBot extends TeamsActivityHandler {
 
     this.onMessage(async (context, next) => {
       console.log('Running dialog with Message Activity.');
-console.log(context.activity.name);
       // Run the Dialog with the new message Activity.
       await this.dialog.run(context, this.dialogState);
 
@@ -64,9 +64,9 @@ console.log(context.activity.name);
     }
 
     /**
-           * Below are the checks for various states that may occur
-           * Note that the order of many of these blocks of code do matter
-           */
+    * Below are the checks for various states that may occur
+    * Note that the order of many of these blocks of code do matter
+    */
 
     // situation where the incoming payload was received from the config popup
     if (query.state) {
@@ -82,6 +82,7 @@ console.log(context.activity.name);
       queryParameter = "";
       initialRunParameter = "true";
     }
+
     if (!userData.composeExtensionCardType) {
       let configResponse = this.getConfigResponse();
       return configResponse;
@@ -125,11 +126,11 @@ console.log(context.activity.name);
     }
 
     /**
-     * Below here is simply the logic to call the Wikipedia API and create the response for
-     * a query; the general flow is to call the Wikipedia API for the query and then call the
-     * Wikipedia API for each entry for the query. once all
-     * of the Promises are resolved, the response is sent back to Teams
-     */
+    * Below here is simply the logic to call the Wikipedia API and create the response for
+    * a query; the general flow is to call the Wikipedia API for the query and then call the
+    * Wikipedia API for each entry for the query. once all
+    * of the Promises are resolved, the response is sent back to Teams
+    */
 
     let searchApiUrl = searchApiUrlFormat.replace("[keyword]", queryParameter);
     searchApiUrl = searchApiUrl.replace("[limit]", query.queryOptions.count + "");
@@ -144,6 +145,7 @@ console.log(context.activity.name);
         wikiResults.forEach((wikiResult) => {
           // highlight matched keyword
           let highlightedTitle = wikiResult.title;
+
           if (queryParameter) {
             let matches = highlightedTitle.match(new RegExp(queryParameter, "gi"));
             if (matches && matches.length > 0) {
@@ -161,6 +163,7 @@ console.log(context.activity.name);
           // HeroCard extends ThumbnailCard so we can use ThumbnailCard as the overarching type
           let card = null;
           // check user preference for which type of card to create
+
           if (userData.composeExtensionCardType === "thumbnail") {
             card = CardFactory.thumbnailCard(highlightedTitle, undefined, null, { text: cardText });
           } else {
@@ -195,12 +198,11 @@ console.log(context.activity.name);
         attachments: [CardFactory.thumbnailCard(obj.description)]
       }
     };
-
   }
 
-  async handleTeamsO365ConnectorCardAction(context,query){
+  async handleTeamsO365ConnectorCardAction(context, query) {
     var o365ActionQuery = query;
-    var text = "Thanks, "+context.activity.from.name +"\nYour input action ID:"+o365ActionQuery.actionId+"\nYour input body:"+o365CardQuery.Body;
+    var text = "Thanks, " + context.activity.from.name + "\nYour input action ID:" + o365ActionQuery.actionId + "\nYour input body:" + o365CardQuery.Body;
     await context.sendActivity(text);
   }
 

@@ -108,7 +108,7 @@ class RootDialog extends ComponentDialog {
         this.initialDialogId = ROOT_WATERFALL_DIALOG;
     }
 
-    /**
+  /**
   * The run method handles the incoming activity (in the form of a DialogContext) and passes it through the dialog system.
   * If no dialog is active, it will start the default dialog.
   * @param {*} dialogContext
@@ -227,21 +227,23 @@ class RootDialog extends ComponentDialog {
             else if (command.trim() == "logout") {
                 return await stepContext.beginDialog(LOGOUT);
             }
+
             await stepContext.context.sendActivity('Sorry,Cannot recognize the command');
             return await stepContext.endDialog();
         }
         else{
             return await stepContext.beginDialog(ADAPTIVECARD);
-        }
-        
+        }    
     }
 
     removeMentionText(activity) {
         var updatedActivity = activity;
+
         if (activity.entities[0].type == "mention") {
             updatedActivity.text = activity.text.replace(activity.entities[0].text, "");
             return updatedActivity;
         }
+
         return activity;
     }
 }

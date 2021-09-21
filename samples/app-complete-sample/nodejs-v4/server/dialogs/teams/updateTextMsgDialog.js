@@ -3,6 +3,7 @@
 
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const UPDATETEXTMESSAGE = 'UpdateTextMessage';
+
 class UpdateTextMsgDialog extends ComponentDialog {
     constructor(id, conversationDataAccessor) {
         super(id);
@@ -15,10 +16,11 @@ class UpdateTextMsgDialog extends ComponentDialog {
 
     async beginUpdateTextMsgDialog(stepContext) {
         var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
+
         if (currentState.lastDialogKey == "UpdateTextMsgSetupDialog" && currentState.activityId != null) {
             var reply = stepContext.context._activity;
             reply.id = currentState.activityId;
-            console.log(reply)
+
             if (reply.attachments != null && reply.entities.length > 1) {
                 reply.attachments = null;
                 reply.entities.splice(0, 1);
@@ -32,7 +34,6 @@ class UpdateTextMsgDialog extends ComponentDialog {
             currentState.lastDialogKey = "UpdateTextMsgDialog";
             await stepContext.context.sendActivity("Please setup card message using \"setup text message\" command before updating card.");
         }
-
 
         return await stepContext.endDialog();
     }

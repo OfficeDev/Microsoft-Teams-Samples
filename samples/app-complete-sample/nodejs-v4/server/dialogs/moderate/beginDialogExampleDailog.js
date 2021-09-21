@@ -5,6 +5,7 @@ const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const BEGINdIALOG = 'BeginDialog';
 const HELLO = 'Hello';
 const { HelloDialog } = require('../basic/helloDialog');
+
 class BeginDialogExampleDailog extends ComponentDialog {
     constructor(id, conversationDataAccessor) {
         super(id);

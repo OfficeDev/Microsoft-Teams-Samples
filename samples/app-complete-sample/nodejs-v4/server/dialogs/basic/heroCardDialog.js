@@ -3,6 +3,7 @@
 const { CardFactory, ActionTypes } = require('botbuilder');
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const HEROCARD = 'HeroCard';
+
 class HeroCardDialog extends ComponentDialog {
     constructor(id, conversationDataAccessor) {
         super(id);
@@ -20,8 +21,8 @@ class HeroCardDialog extends ComponentDialog {
         if (reply.attachments != null && reply.entities.length > 1) {
             reply.attachments = null;
             reply.entities.splice(0, 1);
-
         }
+
         const buttons = [
             { type: ActionTypes.OpenUrl, title: 'Get Started', value: "https://docs.microsoft.com/en-us/bot-framework/dotnet/bot-builder-dotnet-add-rich-card-attachments" },
             { type: ActionTypes.MessageBack, title: 'Message Back', value: 'msgback', text: "msgback", displayText: "This is Displayed Text for Message Back" },

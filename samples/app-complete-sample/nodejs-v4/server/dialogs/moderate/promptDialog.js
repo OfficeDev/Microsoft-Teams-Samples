@@ -4,6 +4,7 @@
 const { WaterfallDialog, ComponentDialog, ChoicePrompt } = require('botbuilder-dialogs');
 const PROMPTDIALOG = 'PromptDialog';
 const CHOICE_PROMPT = 'choiceDialog'
+
 class PromptDialog extends ComponentDialog {
     constructor(id, conversationDataAccessor) {
         super(id);
@@ -28,8 +29,10 @@ class PromptDialog extends ComponentDialog {
         }
         );
     }
+
     async getOptionAsync(stepContext) {
         const answer = stepContext.result.value;
+
         if (!answer) {
             // exhausted attempts and no selection, start over
             await stepContext.context.sendActivity('Not a valid option. We\'ll restart the dialog ' +
@@ -43,28 +46,33 @@ class PromptDialog extends ComponentDialog {
             retryPrompt: 'Not a valid option'
         }
         );
-
     }
+
     async resultedOptionsAsync(stepContext) {
         const answer = stepContext.result.value;
+
         if (!answer) {
             // exhausted attempts and no selection, start over
             await stepContext.context.sendActivity('Not a valid option. We\'ll restart the dialog ' +
                 'so you can try again!');
             return await stepContext.endDialog();
         }
+
         if (answer === 'yes') {
             await stepContext.context.sendActivity("Yay!!!! What a fun game!");
             return await stepContext.endDialog();
         }
+
         if (answer === 'no') {
             await stepContext.context.sendActivity("Awwww man! I'm still in the prototype phase.");
             return await stepContext.endDialog();
         }
+
         return await stepContext.endDialog();
     }
 
     async validateNumberOfAttempts(promptContext) {
+
         if (promptContext.attemptCount > 3) {
             // cancel everything
             await promptContext.context.sendActivity('Oops! Too many attempts :( But don\'t worry, I\'m ' +
@@ -76,6 +84,7 @@ class PromptDialog extends ComponentDialog {
             await promptContext.context.sendActivity(promptContext.options.retryPrompt);
             return false;
         }
+
         return true;
     }
 }

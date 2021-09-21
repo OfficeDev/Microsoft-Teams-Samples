@@ -3,6 +3,7 @@
 const { CardFactory, ActionTypes } = require('botbuilder');
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const POPUPSIGNINCARD = 'PopupSignInCard';
+
 class PopupSigninCardDialog extends ComponentDialog {
     constructor(id, conversationDataAccessor) {
         super(id);
@@ -20,11 +21,10 @@ class PopupSigninCardDialog extends ComponentDialog {
         if (reply.attachments != null && reply.entities.length > 1) {
             reply.attachments = null;
             reply.entities.splice(0, 1);
-
         }
+
         const buttons = [
             { type: ActionTypes.Signin, title: 'Sign In', value: process.env.BaseUri + "/tab/tabConfig/popUpSignin.html?height=400&width=400" },
-
         ];
 
         const card = CardFactory.heroCard('Please click below for Popup Sign-In experience', undefined,

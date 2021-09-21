@@ -7,6 +7,7 @@ const QUIZ1DIALOG = 'Quiz1Dialog';
 const QUIZ2DIALOG = 'Quiz2Dialog';
 const { Quiz1Dialog } = require('./quiz1Dialog');
 const { Quiz2Dialog } = require('./quiz2Dialog');
+
 class QuizFullDialog extends ComponentDialog {
     constructor(id, conversationDataAccessor) {
         super(id);
@@ -32,6 +33,7 @@ class QuizFullDialog extends ComponentDialog {
         await stepContext.context.sendActivity('Thanks for Completing Quiz 1');
         return await stepContext.beginDialog(QUIZ2DIALOG);
     }
+    
     async ResumeAfterBeginQuiz2(stepContext) {
         await stepContext.context.sendActivity('Thanks for playing fun quiz!!');
         return await stepContext.endDialog();

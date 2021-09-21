@@ -3,6 +3,7 @@
 const { TeamsInfo } = require('botbuilder');
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const FETCHROSTER = 'FetchRoster';
+
 class FetchRosterDialog extends ComponentDialog {
     constructor(id, conversationDataAccessor) {
         super(id);
@@ -21,8 +22,8 @@ class FetchRosterDialog extends ComponentDialog {
         if (reply.attachments != null && reply.entities.length > 1) {
             reply.attachments = null;
             reply.entities.splice(0, 1);
-
         }
+        
         reply.text = JSON.stringify(members)
         await stepContext.context.sendActivity(reply);
         return await stepContext.endDialog();

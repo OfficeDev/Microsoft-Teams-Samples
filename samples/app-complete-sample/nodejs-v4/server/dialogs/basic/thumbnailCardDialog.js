@@ -3,6 +3,7 @@
 const { CardFactory, ActionTypes } = require('botbuilder');
 const { WaterfallDialog, ComponentDialog } = require('botbuilder-dialogs');
 const THUMBNAILCARD = 'ThumbnailCard';
+
 class ThumbnailCardDialog extends ComponentDialog {
     constructor(id, conversationDataAccessor) {
         super(id);
@@ -21,11 +22,12 @@ class ThumbnailCardDialog extends ComponentDialog {
             reply.attachments = null;
             reply.entities.splice(0, 1);
         }
+
         const buttons = [
             { type: ActionTypes.OpenUrl, title: 'Get Started', value: "https://docs.microsoft.com/en-us/bot-framework/dotnet/bot-builder-dotnet-add-rich-card-attachments" },
             { type: ActionTypes.MessageBack, title: 'Message Back', value: 'msgback', text: "msgback", displayText: "This is Displayed Text for Message Back" },
-
         ];
+        
         const CardImage = CardFactory.images(["https://sec.ch9.ms/ch9/7ff5/e07cfef0-aa3b-40bb-9baa-7c9ef8ff7ff5/buildreactionbotframework_960.jpg"])
         const card = CardFactory.thumbnailCard('BotFramework Thumbnail Card', CardImage,
             buttons, { subtitle: "Your bots — wherever your users are talking", text: "Build and connect intelligent bots to interact with your users naturally wherever they are, from text/sms to Skype, Slack, Office 365 mail and other popular services." });
