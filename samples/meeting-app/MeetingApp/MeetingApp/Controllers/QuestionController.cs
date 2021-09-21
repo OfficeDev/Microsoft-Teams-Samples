@@ -23,9 +23,18 @@ namespace MeetingApp.Controllers
 
         [Route("insertQuest")]
         [HttpPost]
-        public async Task<IActionResult> SaveQuestion([FromBody]QuestionSetEntity questions)
+        public async Task<IActionResult> SaveQuestion([FromBody]List<QuestionSetEntity> questions)
         {
-            var result = await this._questionsRepository.StoreOrUpdateQuestionEntityAsync(questions);
+            var result = await this._questionsRepository.StoreQuestionEntityAsync(questions);
+            if (result != true) return NotFound();
+            return Ok(result);
+        }
+
+        [Route("edit")]
+        [HttpPost]
+        public async Task<IActionResult> EditQuestion([FromBody]QuestionSetEntity question)
+        {
+            var result = await this._questionsRepository.UpdateQuestionEntityAsync(question);
             if (result == null) return NotFound();
             return Ok(result);
         }

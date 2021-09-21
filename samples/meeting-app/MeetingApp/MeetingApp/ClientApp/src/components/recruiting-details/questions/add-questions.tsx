@@ -1,32 +1,49 @@
 import React from "react";
-import { Flex, Button, Dropdown, Input } from '@fluentui/react-northstar'
+import { Flex, Button, Checkbox, Input, formTextAreaClassName } from '@fluentui/react-northstar'
 import "../../recruiting-details/recruiting-details.css"
 import * as microsoftTeams from "@microsoft/teams-js";
 
 const AddQuestions = (props: any): React.ReactElement => {
-    const [question, setQuestion] = React.useState<any>('');
-    const inputQuestions = [
-        "What are SDLC processes"
-    ]
+    const [questions, setQuestions] = React.useState<any[]>([
+        {
+            key: 1,
+            value: "What are SDLC processes?",
+            checked: false
+        },
+        {
+            key: 2,
+            value: "What are function poniters?",
+            checked: false
+        }
+    ]);
+  
     React.useEffect(() => {
         microsoftTeams.initialize();
-        const search = props.location.search;
-        const editText = new URLSearchParams(search).get('editText');
-        if(editText != null)
-            setQuestion(editText);
     }, [])
 
     const saveQuestion = () => {
-        microsoftTeams.tasks.submitTask(question);
+        microsoftTeams.tasks.submitTask(JSON.stringify(questions));
         return true;
+    }
+
+    const checkUncheck = (props: any, index: number) => {
+       const currentQuest = [...questions];
+       const questToUpdate = currentQuest.find(quest => quest.key == index + 1);
+        questToUpdate.checked = props.checked;
+        setQuestions(currentQuest);
     }
 
     return (
         <>
-           <Flex column gap="gap.smaller" padding="padding.medium">
-             {question == '' && <Dropdown clearable items={inputQuestions} placeholder="Select question" onChange={(event, option): void => {setQuestion(option.value)}} />}
-             {question != '' && <Input fluid defaultValue={question} onChange={(event: any)=> {setQuestion(event.target.defaultValue)}} />}
-             <Button content="Add" onClick={saveQuestion} />
+            <Flex column gap="gap.smaller" padding="padding.medium">
+                {
+                     questions.map((question, index) => {
+                        return (
+                            <Checkbox label={question.value} defaultValue={question.value} onChange={(event, props) => {checkUncheck(props, index)}}/>
+                        )
+                    })
+                }
+                <Button content="Add" onClick={saveQuestion} />
             </Flex>
         </>
     )

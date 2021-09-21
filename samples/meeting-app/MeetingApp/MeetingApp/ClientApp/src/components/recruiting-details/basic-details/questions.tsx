@@ -15,7 +15,7 @@ import {
 import "../../recruiting-details/recruiting-details.css"
 import * as microsoftTeams from "@microsoft/teams-js";
 import { IQuestionSet } from "./basic-details.types";
-import { saveQuestions, getQuestions, deleteQuestion as deleteQuestionDetails } from "../services/recruiting-detail.service";
+import { saveQuestions, getQuestions, deleteQuestion as deleteQuestionDetails, editQuestion } from "../services/recruiting-detail.service";
 
 const Questions = (): React.ReactElement => {
     // The questions array set for a meeting.
@@ -23,23 +23,62 @@ const Questions = (): React.ReactElement => {
     const [ratingsArray, setRatingsArray] = React.useState<any[]>([]);
     const [showLoader, setShowLoader] = React.useState<boolean>(false);
 
-    // Method to start task module to add a question.
-    const addOrEditQuestionsTaskModule = (editText: string, rowKey: any) => {
+    // Method to start task module to add questions.
+    const addQuestionsTaskModule = () => {
         let taskInfo = {
             title: "Questions",
             height: 150,
             width: 400,
-            url: editText == "" ? `${window.location.origin}/questions` : `${window.location.origin}/questions?editText=`+editText,
+            url: `${window.location.origin}/questions`,
         };
 
-        microsoftTeams.tasks.startTask(taskInfo, (err, question) => {
+        microsoftTeams.tasks.startTask(taskInfo, (err, questionsJson) => {
+            if (err) {
+                console.log("Some error occurred in the task module")
+                return
+            }
+            const questionsObject = JSON.parse(questionsJson);
+            microsoftTeams.getContext((context) => {
+                const questDetails: IQuestionSet[] = questionsObject.map((question: any) => {
+                    if (question.checked) {
+                        // The question details to save.
+                        return {
+                            meetingId: context.meetingId!,
+                            question: question.value,
+                            setBy: context.userPrincipalName!,
+                            isDelete: 0
+                        };
+                    }
+                })
+
+
+                // API call to save the question to storage.
+                saveQuestions(questDetails)
+                    .then((res) => {
+                        loadQuestions()
+                    })
+                    .catch((ex) => {
+                        console.log("Error while saving question details" + ex)
+                    });
+            })
+        });
+    };
+
+    // Method to start task module to edit a question.
+    const editQuestionsTaskModule = (editText: string, rowKey: any) => {
+        let taskInfo = {
+            title: "Questions",
+            height: 150,
+            width: 400,
+            url: `${window.location.origin}/edit?editText=` + editText,
+        };
+
+        microsoftTeams.tasks.startTask(taskInfo, (err, question: string) => {
             if (err) {
                 console.log("Some error occurred in the task module")
                 return
             }
             microsoftTeams.getContext((context) => {
-
-                // The question details to save.
                 const questDetails: IQuestionSet = {
                     meetingId: context.meetingId!,
                     question: question,
@@ -49,12 +88,12 @@ const Questions = (): React.ReactElement => {
                 };
 
                 // API call to save the question to storage.
-                saveQuestions(questDetails)
+                editQuestion(questDetails)
                     .then((res) => {
                         loadQuestions()
                     })
                     .catch((ex) => {
-                        console.log("Error while saving question details" + ex)
+                        console.log("Error while saving question details in edit" + ex)
                     });
             })
         });
@@ -116,7 +155,7 @@ const Questions = (): React.ReactElement => {
             <Loader hidden={!showLoader} />
             <Flex gap="gap.smaller">
                 <Header as="h4" content="Questions" className="questionsHeader" />
-                <AddIcon onClick={() => addOrEditQuestionsTaskModule("", null)} title="Add new questions" />
+                <AddIcon onClick={() => addQuestionsTaskModule()} title="Add new questions" />
             </Flex>
             <Text content="Questions added here will appear in meeting with candidate and can help you rate at the point of time" />
             {
@@ -132,7 +171,7 @@ const Questions = (): React.ReactElement => {
                                                 trigger={<MoreIcon />}
                                                 content={
                                                     <Flex column gap="gap.smaller">
-                                                        <Button icon={<EditIcon />} text content="Edit" onClick={() => addOrEditQuestionsTaskModule(questionDetail.question, questionDetail.rowKey)}/>
+                                                        <Button icon={<EditIcon />} text content="Edit" onClick={() => editQuestionsTaskModule(questionDetail.question, questionDetail.rowKey)} />
                                                         <Button icon={<CallControlStopPresentingNewIcon />} text content="Delete" onClick={() => deleteQuestion(questionDetail)} />
                                                     </Flex>
                                                 }

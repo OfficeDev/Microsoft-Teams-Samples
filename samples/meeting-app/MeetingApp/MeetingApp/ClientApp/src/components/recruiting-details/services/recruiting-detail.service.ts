@@ -8,8 +8,13 @@ export function getCandidateDetails(): Promise<AxiosResponse<unknown>> {
 }
 
 // API call to save Questions.
-export function saveQuestions(questionDetails: IQuestionSet): Promise<AxiosResponse<unknown>> {
+export function saveQuestions(questionDetails: IQuestionSet[]): Promise<AxiosResponse<unknown>> {
   return axios.post(`${window.location.origin}/api/Question/insertQuest`, questionDetails);
+}
+
+// API call to edit Question.
+export function editQuestion(questionDetails: IQuestionSet): Promise<AxiosResponse<unknown>> {
+  return axios.post(`${window.location.origin}/api/Question/edit`, questionDetails);
 }
 
 // API call to get Questions.

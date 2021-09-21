@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MeetingApp.Data.Repositories.Questions
 {
-    public class QuestionsRepository: IQuestionsRepository
+    public class QuestionsRepository : IQuestionsRepository
     {
         private readonly Lazy<Task> initializeTask;
         private CloudTable questionCloudTable;
@@ -36,17 +36,36 @@ namespace MeetingApp.Data.Repositories.Questions
         }
 
         /// <summary>
-        /// Store or update questions in table storage.
+        /// Store questions in table storage.
         /// </summary>
         /// <param name="entity">Represents questionSet entity used for storage and retrieval.</param>
         /// <returns><see cref="Task"/> that represents configuration entity is saved or updated.</returns>
-        public async Task<TableResult> StoreOrUpdateQuestionEntityAsync(QuestionSetEntity entity)
+        public async Task<bool> StoreQuestionEntityAsync(List<QuestionSetEntity> questionsSet)
+        {
+            //Iterating through each batch  
+            foreach (var entity in questionsSet)
+            {
+                entity.PartitionKey = entity.MeetingId;
+                entity.RowKey = string.Format("{0:D19}", DateTime.UtcNow.Ticks);
+                await this.EnsureInitializedAsync().ConfigureAwait(false);
+                TableOperation addOperation = TableOperation.InsertOrReplace(entity);
+                await this.questionCloudTable.ExecuteAsync(addOperation).ConfigureAwait(false);
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Update question in table storage.
+        /// </summary>
+        /// <param name="entity">Represents questionSet entity used for storage and retrieval.</param>
+        /// <returns><see cref="Task"/> that represents configuration entity is saved or updated.</returns>
+        public async Task<TableResult> UpdateQuestionEntityAsync(QuestionSetEntity entity)
         {
             entity.PartitionKey = entity.MeetingId;
             entity.RowKey = entity.QuestionId == null ? string.Format("{0:D19}", DateTime.UtcNow.Ticks) : entity.QuestionId;
             await this.EnsureInitializedAsync().ConfigureAwait(false);
-            TableOperation addOrUpdateOperation = TableOperation.InsertOrReplace(entity);
-            return await this.questionCloudTable.ExecuteAsync(addOrUpdateOperation).ConfigureAwait(false);
+            TableOperation updateOperation = TableOperation.InsertOrReplace(entity);
+            return await this.questionCloudTable.ExecuteAsync(updateOperation).ConfigureAwait(false);
         }
 
         /// <summary>

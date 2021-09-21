@@ -9,7 +9,9 @@ namespace MeetingApp.Data.Repositories.Questions
 {
     public interface IQuestionsRepository
     {
-        Task<TableResult> StoreOrUpdateQuestionEntityAsync(QuestionSetEntity entity);
+        Task<bool> StoreQuestionEntityAsync(List<QuestionSetEntity> questionsSet);
+
+        Task<TableResult> UpdateQuestionEntityAsync(QuestionSetEntity entity);
 
         Task<IEnumerable<QuestionSetEntity>> GetQuestions(string meetingId);
 
