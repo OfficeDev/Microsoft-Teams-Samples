@@ -41,3 +41,8 @@ export function getNotes(email: string): Promise<AxiosResponse<unknown>> {
 export function saveNote(noteDetails: INoteDetails): Promise<AxiosResponse<unknown>> {
   return axios.post(`${window.location.origin}/api/Notes`, noteDetails);
 }
+
+// API call to download assets.
+export function download(): Promise<AxiosResponse<unknown>> {
+  return axios.get(`${window.location.origin}/api/Candidate/file`);
+}

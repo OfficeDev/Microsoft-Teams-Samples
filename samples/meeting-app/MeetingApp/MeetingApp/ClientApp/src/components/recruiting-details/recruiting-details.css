@@ -108,6 +108,19 @@
     color: #fff !important;
   }
 
+  .editIcon{
+    padding-left: 0px !important;
+    padding-right: 1.5vw !important;
+  }
+
+  .editTextArea{
+      height: 120px !important;
+  }
+
+  .notesContainer{
+    overflow-y: auto;
+    max-height: 22vh;
+  }
 /* Styles for mobile view */
 
 .container-mobile{

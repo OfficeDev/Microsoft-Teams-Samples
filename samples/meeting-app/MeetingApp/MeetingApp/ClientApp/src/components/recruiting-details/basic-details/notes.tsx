@@ -17,7 +17,7 @@ const Notes = (props: INotesProps) => {
     const addNotesTaskModule = () => {
         let taskInfo = {
             title: "Notes",
-            height: 150,
+            height: 300,
             width: 400,
             url: `${window.location.origin}/addNote`,
         };
@@ -84,19 +84,26 @@ const Notes = (props: INotesProps) => {
                 <hr className="details-separator" />
             </Card.Header>
             <Card.Body>
-                {notes.length == 0 && <Text content="No notes yet" />}
-                {
-                    notes.length > 0 && notes.map((noteDetail, index) => {
-                        return (
-                            <Flex column key={index} padding="padding.medium">
-                                <Text content={noteDetail.note} />
-                                <Flex>
-                                    - {noteDetail.addedBy} | {new Date(noteDetail.timestamp).toLocaleDateString()}
+                <Flex className="notesContainer" column>
+                    {notes.length == 0 && <Text content="No notes yet" />}
+                    {
+                        notes.length > 0 && notes.map((noteDetail, index) => {
+                            let timestamp = new Date(noteDetail.timestamp);
+                            let formatted_date = timestamp.getFullYear() + "-" +
+                                (timestamp.getMonth() + 1) + "-" +
+                                timestamp.getDate() + " " + timestamp.getHours() + ":" + timestamp.getMinutes()
+                            return (
+                                <Flex column key={index} padding="padding.medium">
+                                    <Flex gap="gap.small">
+                                        <Text content={noteDetail.addedBy} weight="bold" title={noteDetail.addedBy} />
+                                        <Text content={formatted_date} weight="light" />
+                                    </Flex>
+                                    <Text content={noteDetail.note} />
                                 </Flex>
-                            </Flex>
-                        )
-                    })
-                }
+                            )
+                        })
+                    }
+                </Flex>
             </Card.Body>
         </Card>
     )

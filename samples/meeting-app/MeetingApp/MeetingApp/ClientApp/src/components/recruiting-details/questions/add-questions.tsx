@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Button, Checkbox, Input, formTextAreaClassName } from '@fluentui/react-northstar'
+import { Flex, Button, Checkbox, Text, formTextAreaClassName } from '@fluentui/react-northstar'
 import "../../recruiting-details/recruiting-details.css"
 import * as microsoftTeams from "@microsoft/teams-js";
 
@@ -13,6 +13,21 @@ const AddQuestions = (props: any): React.ReactElement => {
         {
             key: 2,
             value: "What are function poniters?",
+            checked: false
+        },
+        {
+            key: 3,
+            value: "What is dependency injection?",
+            checked: false
+        },
+        {
+            key: 4,
+            value: "What is Encapsulation?",
+            checked: false
+        },
+        {
+            key: 5,
+            value: "What is recursion?",
             checked: false
         }
     ]);
@@ -36,6 +51,7 @@ const AddQuestions = (props: any): React.ReactElement => {
     return (
         <>
             <Flex column gap="gap.smaller" padding="padding.medium">
+                <Text content="Please select questions for meeting"/>
                 {
                      questions.map((question, index) => {
                         return (
@@ -43,7 +59,9 @@ const AddQuestions = (props: any): React.ReactElement => {
                         )
                     })
                 }
-                <Button content="Add" onClick={saveQuestion} />
+                <Flex hAlign="center">
+                 <Button primary content="Save selection" onClick={saveQuestion} />
+                </Flex>
             </Flex>
         </>
     )

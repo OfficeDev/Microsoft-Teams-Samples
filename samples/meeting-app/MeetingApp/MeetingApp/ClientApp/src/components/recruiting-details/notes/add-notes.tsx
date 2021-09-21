@@ -5,7 +5,7 @@ import * as microsoftTeams from "@microsoft/teams-js";
 
 const AddNotes = (): React.ReactElement => {
     const [note, setNote] = React.useState<string>('');
-   
+
     React.useEffect(() => {
         microsoftTeams.initialize();
     }, [])
@@ -17,9 +17,13 @@ const AddNotes = (): React.ReactElement => {
 
     return (
         <>
-           <Flex column gap="gap.smaller" padding="padding.medium">
-             <TextArea placeholder="Add note" onChange={(event: any) => setNote(event.target.value)} />
-             <Button content="Add" onClick={saveNote} />
+            <Flex column gap="gap.small" padding="padding.medium">
+                <Text content="Please add your notes here" />
+                <TextArea placeholder="Add note" className="editTextArea"
+                    onChange={(event: any) => setNote(event.target.value)} />
+                <Flex hAlign="center">
+                    <Button primary content="Add note" onClick={saveNote} />
+                </Flex>
             </Flex>
         </>
     )

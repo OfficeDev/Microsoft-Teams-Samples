@@ -1,19 +1,20 @@
 import * as React from 'react';
-import { 
-    Flex, 
-    Card, 
-    Button, 
-    Avatar, 
-    Text, 
-    ChatIcon, 
-    CallVideoIcon, 
-    CallIcon, 
-    EmailIcon, 
-    PaperclipIcon, 
+import {
+    Flex,
+    Card,
+    Button,
+    Avatar,
+    Text,
+    ChatIcon,
+    CallVideoIcon,
+    CallIcon,
+    EmailIcon,
+    PaperclipIcon,
     PopupIcon,
-    Dropdown} from '@fluentui/react-northstar'
+    Dropdown
+} from '@fluentui/react-northstar'
 import "../../recruiting-details/recruiting-details.css"
-import { getCandidateDetails } from "../services/recruiting-detail.service"
+import { download, getCandidateDetails } from "../services/recruiting-detail.service"
 import { ICandidateDetails } from './basic-details.types';
 
 export interface IBasicDetailsProps {
@@ -27,7 +28,31 @@ const BasicDetails = (props: IBasicDetailsProps) => {
 
     const handleNameChange = (event: any, dropdownProps?: any) => {
         setSelectedIndex(dropdownProps.value.key);
-        props.setSelectedCandidateIndex(dropdownProps.value.key, dropdownProps.value.email);     
+        props.setSelectedCandidateIndex(dropdownProps.value.key, dropdownProps.value.email);
+    }
+
+    const downloadFile = () => {
+          // API call to download.
+          download()
+          .then((res) => {
+              debugger
+              console.log(res);
+            //   var a = document.createElement("a")
+            //   var file = new Blob([res.data], { type: "application/octect-stream" });
+  
+            //   var url = URL.createObjectURL(file);
+            //   a.href = url;
+            //   a.download = filename;
+            //   document.body.appendChild(a); 
+            //   a.click();
+            //   setTimeout(function () {
+            //       document.body.removeChild(a);
+            //       window.URL.revokeObjectURL(url);
+            //   }, 0);  
+          })
+          .catch((ex) => {
+              console.log("Error while downloading the file" + ex)
+          });
     }
 
     React.useEffect(() => {
@@ -44,7 +69,7 @@ const BasicDetails = (props: IBasicDetailsProps) => {
                     }
                 });
                 setCandidateNames(names);
-                props.setSelectedCandidateIndex(selectedIndex, data[selectedIndex]?.email); 
+                props.setSelectedCandidateIndex(selectedIndex, data[selectedIndex]?.email);
             })
             .catch((ex) => {
                 console.log(ex)
@@ -63,7 +88,7 @@ const BasicDetails = (props: IBasicDetailsProps) => {
                             status="unknown"
                         />
                         <Flex column>
-                             <Dropdown
+                            <Dropdown
                                 activeSelectedIndex={selectedIndex}
                                 items={candidateNames}
                                 onChange={handleNameChange}
@@ -103,19 +128,26 @@ const BasicDetails = (props: IBasicDetailsProps) => {
                         <Text content="Attachments" weight="bold" />
                         <Flex column gap="gap.small">
                             <Flex>
-                                <Button icon={<PaperclipIcon />} primary text content={'Resume'} size="small" className="iconText" />
+                                <Button
+                                    icon={<PaperclipIcon />}
+                                    primary
+                                    text
+                                    content={'Resume'}
+                                    size="small"
+                                    className="iconText"
+                                    onClick={downloadFile} />
                             </Flex>
                             <Flex>
-                                <Button 
-                                icon={<PopupIcon />}
-                                primary 
-                                text 
-                                content={'portfolio.com'} 
-                                size="small" 
-                                className="iconText"
-                                onClick={() => {
-                                    window.open(candidateDetails[selectedIndex].linkedInUrl)
-                                }} />
+                                <Button
+                                    icon={<PopupIcon />}
+                                    primary
+                                    text
+                                    content={'portfolio.com'}
+                                    size="small"
+                                    className="iconText"
+                                    onClick={() => {
+                                        window.open(candidateDetails[selectedIndex].linkedInUrl)
+                                    }} />
                             </Flex>
                         </Flex>
                     </Flex>

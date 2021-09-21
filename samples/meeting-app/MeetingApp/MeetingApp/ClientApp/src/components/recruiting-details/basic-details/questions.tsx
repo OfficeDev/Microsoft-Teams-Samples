@@ -27,7 +27,7 @@ const Questions = (): React.ReactElement => {
     const addQuestionsTaskModule = () => {
         let taskInfo = {
             title: "Questions",
-            height: 150,
+            height: 300,
             width: 400,
             url: `${window.location.origin}/questions`,
         };
@@ -68,7 +68,7 @@ const Questions = (): React.ReactElement => {
     const editQuestionsTaskModule = (editText: string, rowKey: any) => {
         let taskInfo = {
             title: "Questions",
-            height: 150,
+            height: 300,
             width: 400,
             url: `${window.location.origin}/edit?editText=` + editText,
         };
@@ -171,10 +171,16 @@ const Questions = (): React.ReactElement => {
                                                 trigger={<MoreIcon />}
                                                 content={
                                                     <Flex column gap="gap.smaller">
-                                                        <Button icon={<EditIcon />} text content="Edit" onClick={() => editQuestionsTaskModule(questionDetail.question, questionDetail.rowKey)} />
-                                                        <Button icon={<CallControlStopPresentingNewIcon />} text content="Delete" onClick={() => deleteQuestion(questionDetail)} />
+                                                        <Flex >
+                                                            <Button icon={<EditIcon />} text content="Edit" className="editIcon"
+                                                             onClick={() => editQuestionsTaskModule(questionDetail.question, questionDetail.rowKey)} />
+                                                        </Flex>
+                                                        <Flex>
+                                                            <Button icon={<CallControlStopPresentingNewIcon />} text content="Delete" onClick={() => deleteQuestion(questionDetail)} />
+                                                        </Flex>
                                                     </Flex>
                                                 }
+                                                position="below"
                                             />
                                         </Flex>
                                         <Flex gap="gap.small">

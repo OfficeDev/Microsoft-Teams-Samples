@@ -39,20 +39,20 @@ const Timeline = () => {
                 <Flex gap="gap.small" className="timeline" column>
                     <Flex gap="gap.small" className="timelineContainer">
                         <Flex column className="timelineDetail">
-                           <Text content='26 Nov, 2020' />
+                           <Text content='26 Nov, 2020' weight="bold"/>
                            <Text content='14:00' />
                         </Flex>
                         <Flex column className="timelineDetail">
                            <Text content='Stage' />
-                           <Text content='Shortlisted' />
+                           <Text content='Shortlisted' weight="bold"/>
                         </Flex>
                         <Flex column className="timelineDetail">
                            <Text content='Hiring Team' />
-                           <Text content='Daniela' />
+                           <Text content='Daniela' weight="bold"/>
                         </Flex>
                         <Flex column className="timelineDetail">
                            <Text content='Result' />
-                           <Text content='Shortlisted' />
+                           <Text content='Shortlisted' weight="bold"/>
                         </Flex>
                         <Flex>
                             <NotesIcon />
@@ -60,20 +60,20 @@ const Timeline = () => {
                     </Flex>
                     <Flex gap="gap.small" className="timelineContainer">
                         <Flex column className="timelineDetail">
-                           <Text content='26 Nov, 2020' />
+                           <Text content='26 Nov, 2020' weight="bold"/>
                            <Text content='14:00' />
                         </Flex>
                         <Flex column className="timelineDetail">
                            <Text content='Stage' />
-                           <Text content='Round 1' />
+                           <Text content='Round 1' weight="bold"/>
                         </Flex>
                         <Flex column className="timelineDetail">
                            <Text content='Hiring Team' />
-                           <Text content='Ray' />
+                           <Text content='Ray' weight="bold"/>
                         </Flex>
                         <Flex column className="timelineDetail">
                            <Text content='Result' />
-                           <Text content='Hire' />
+                           <Text content='Hire' weight="bold"/>
                         </Flex>
                         <Flex>
                             <NotesIcon />
