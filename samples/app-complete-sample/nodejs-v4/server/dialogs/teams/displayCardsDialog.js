@@ -26,11 +26,11 @@ class DisplayCardsDialog extends ComponentDialog {
             this.endDisplayCardDialog.bind(this),
         ]));
         this.addDialog(new ChoicePrompt(CHOICE_PROMPT, this.validateNumberOfAttempts.bind(this)));
-        this.addDialog(new HeroCardDialog(HEROCARD));
-        this.addDialog(new ThumbnailCardDialog(THUMBNAILCARD));
-        this.addDialog(new AdaptiveCardDialog(ADAPTIVECARD));
-        this.addDialog(new O365ConnectorCardDialog(O365CONNECTORECARD));
-        this.addDialog(new O365ConnectorCardActionDialog(O365CONNECTORCARDACTION));
+        this.addDialog(new HeroCardDialog(HEROCARD,this.conversationDataAccessor));
+        this.addDialog(new ThumbnailCardDialog(THUMBNAILCARD,this.conversationDataAccessor));
+        this.addDialog(new AdaptiveCardDialog(ADAPTIVECARD,this.conversationDataAccessor));
+        this.addDialog(new O365ConnectorCardDialog(O365CONNECTORECARD,this.conversationDataAccessor));
+        this.addDialog(new O365ConnectorCardActionDialog(O365CONNECTORCARDACTION,this.conversationDataAccessor));
     }
 
     async beginDisplayCardsDialog(stepContext) {

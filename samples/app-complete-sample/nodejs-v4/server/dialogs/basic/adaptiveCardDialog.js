@@ -17,9 +17,11 @@ class AdaptiveCardDialog extends ComponentDialog {
     async beginAdaptiveCardDialog(stepContext) {
         var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "AdaptiveCardDialog";
-        if(stepContext.context._activity.value.isFromAdaptiveCard){
-            var text = JSON.stringify(stepContext.context._activity.value);
-            await stepContext.context.sendActivity(text);
+        if(stepContext.context._activity.value!=null){
+            if(stepContext.context._activity.value.isFromAdaptiveCard){
+                var text = JSON.stringify(stepContext.context._activity.value);
+                await stepContext.context.sendActivity(text);
+            }          
         }
         else{
             var reply = stepContext.context._activity;
@@ -455,7 +457,6 @@ class AdaptiveCardDialog extends ComponentDialog {
         };
 
         var card = CardFactory.adaptiveCard(adaptiveCardJson);
-        console.log(card);
         return card;
     }
 }

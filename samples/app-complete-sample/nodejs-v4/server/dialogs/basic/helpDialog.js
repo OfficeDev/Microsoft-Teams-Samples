@@ -41,7 +41,7 @@ class HelpDialog extends ComponentDialog {
             { type: ActionTypes.ImBack, title: 'Choose Cards', value: 'display cards' },
             { type: ActionTypes.ImBack, title: 'Tab Example', value: 'deep link' },
             { type: ActionTypes.ImBack, title: 'Auth Sample', value: 'auth' },
-            { type: ActionTypes.ImBack, title: 'Local Time', value: 'localtime' },
+            { type: ActionTypes.ImBack, title: 'Local Time', value: 'timezone' },
             { type: ActionTypes.ImBack, title: 'Message Back', value: 'msgback' },
             { type: ActionTypes.ImBack, title: 'Popup Sign-In', value: 'signin' },
             { type: ActionTypes.ImBack, title: 'Team Info', value: 'team info' },

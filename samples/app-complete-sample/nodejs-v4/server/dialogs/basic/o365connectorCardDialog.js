@@ -17,7 +17,8 @@ class O365ConnectorCardDialog extends ComponentDialog {
     async beginO365ConnectorCardDialog(stepContext) {
         var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "O365ConnectorCardDialog";
-        var inputNumber = stepContext.context._activity.text.substr(stepContext.context._activity.text.length - 1, 1);
+        var text = stepContext.context._activity.text.trim();
+        var inputNumber = text.substr(text.length - 1, 1);
         var reply = stepContext.context._activity;
         if (reply.attachments != null && reply.entities.length > 1) {
             reply.attachments = null;

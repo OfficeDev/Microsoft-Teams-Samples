@@ -26,7 +26,7 @@ class Bot extends DialogBot {
     }
 
     async handleTeamsSigninVerifyState(context, state) {
-        await this.dialog.run(context, this.dialogState);
+        await context.sendActivity("Authentication successful");
     }
 }
 

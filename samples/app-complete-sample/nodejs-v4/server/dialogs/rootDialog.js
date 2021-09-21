@@ -128,10 +128,9 @@ class RootDialog extends ComponentDialog {
 
     async promptStep(stepContext) {
         var activity = this.removeMentionText(stepContext.context._activity);
-        console.log(activity);
         if(activity.text){
             var command = activity.text;
-            if (command.trim() == "hello" || command == "hi") {
+            if (command.trim() == "hello" || command.trim() == "hi") {
                 return await stepContext.beginDialog(HELLO);
             }
             else if (command.trim() == "help") {
@@ -158,6 +157,7 @@ class RootDialog extends ComponentDialog {
             else if (command.trim() == "timezone") {
                 await stepContext.context.sendActivity("Here is UTC time -" + stepContext.context._activity.timestamp);
                 await stepContext.context.sendActivity('Here is Local Time - ' + stepContext.context._activity.localTimestamp);
+                return await stepContext.endDialog();
             }
             else if (command.trim() == "connector card 1" || command.trim() == "connector card 2" || command.trim() == "connector card 3") {
                 return await stepContext.beginDialog(O365CONNECTORECARD);
@@ -226,14 +226,17 @@ class RootDialog extends ComponentDialog {
             }
             else if (command.trim() == "logout") {
                 return await stepContext.beginDialog(LOGOUT);
-            }
-
+            }          
+        }
+        else if(activity.value!=null)
+        {
+            return await stepContext.beginDialog(ADAPTIVECARD);
+        }  
+        else{
             await stepContext.context.sendActivity('Sorry,Cannot recognize the command');
             return await stepContext.endDialog();
         }
-        else{
-            return await stepContext.beginDialog(ADAPTIVECARD);
-        }    
+       
     }
 
     removeMentionText(activity) {

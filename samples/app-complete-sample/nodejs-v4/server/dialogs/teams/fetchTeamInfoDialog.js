@@ -16,14 +16,15 @@ class FetchTeamInfoDialog extends ComponentDialog {
     async beginFetchTeamInfoDialog(stepContext) {
         var currentState = await this.conversationDataAccessor.get(stepContext.context, {});
         currentState.lastDialogKey = "FetchTeamInfoDialog";
-        var teamId = stepContext.context._activity.channelData.teamsTeamId;
-        var teamDetails = await TeamsInfo.getTeamDetails(stepContext.context, teamId)
-        if (teamDetails != null) {
+        var teamId = stepContext.context._activity.channelData.teamsTeamId;      
+        if (teamId != null) {
+            var teamDetails = await TeamsInfo.getTeamDetails(stepContext.context, teamId)
             var reply = stepContext.context._activity;
             if (reply.attachments != null && reply.entities.length > 1) {
                 reply.attachments = null;
                 reply.entities.splice(0, 1);
             }
+            
             reply.text = this.generateTableForTeamInfo(teamDetails);
             await stepContext.context.sendActivity(reply);
             return await stepContext.endDialog();

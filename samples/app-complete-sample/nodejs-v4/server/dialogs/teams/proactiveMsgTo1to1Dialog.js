@@ -21,6 +21,11 @@ class ProactiveMsgTo1to1Dialog extends ComponentDialog {
         await stepContext.context.sendActivity("1:1 Message sent");
         this.addConversationReference(stepContext.context._activity);
         var reply = stepContext.context._activity;
+        if (reply.attachments != null && reply.entities.length > 1) {
+            reply.attachments = null;
+            reply.entities.splice(0, 1);
+        }
+        
         reply.text = "Hey! I am Bot, How's going!!"
         await stepContext.context.sendActivity(reply);
         

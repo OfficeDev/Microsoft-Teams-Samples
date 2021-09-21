@@ -15,7 +15,7 @@ class BeginDialogExampleDailog extends ComponentDialog {
             this.beginBeginDialogExampleDailog.bind(this),
             this.continueBeginDialogExampleDailog.bind(this),
         ]));
-        this.addDialog(new HelloDialog(HELLO));
+        this.addDialog(new HelloDialog(HELLO,this.conversationDataAccessor));
     }
 
     async beginBeginDialogExampleDailog(stepContext) {

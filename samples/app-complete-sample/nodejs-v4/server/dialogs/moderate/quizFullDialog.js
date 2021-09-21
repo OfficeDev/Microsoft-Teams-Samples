@@ -18,8 +18,8 @@ class QuizFullDialog extends ComponentDialog {
             this.resumeAfterRunQuiz1Dialog.bind(this),
             this.ResumeAfterBeginQuiz2.bind(this),
         ]));
-        this.addDialog(new Quiz1Dialog(QUIZ1DIALOG));
-        this.addDialog(new Quiz2Dialog(QUIZ2DIALOG));
+        this.addDialog(new Quiz1Dialog(QUIZ1DIALOG,this.conversationDataAccessor));
+        this.addDialog(new Quiz2Dialog(QUIZ2DIALOG,this.conversationDataAccessor));
     }
 
     async beginQuizFulleDailog(stepContext) {
