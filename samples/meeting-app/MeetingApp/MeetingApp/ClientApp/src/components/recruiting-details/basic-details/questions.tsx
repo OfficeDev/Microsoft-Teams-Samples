@@ -86,14 +86,16 @@ const Questions = (): React.ReactElement => {
                     isDelete: 0,
                     questionId: rowKey
                 };
-
+                setShowLoader(true);
                 // API call to save the question to storage.
                 editQuestion(questDetails)
                     .then((res) => {
-                        loadQuestions()
+                        loadQuestions();
+                        setShowLoader(false);
                     })
                     .catch((ex) => {
-                        console.log("Error while saving question details in edit" + ex)
+                        console.log("Error while saving question details in edit" + ex);
+                        setShowLoader(false);
                     });
             })
         });

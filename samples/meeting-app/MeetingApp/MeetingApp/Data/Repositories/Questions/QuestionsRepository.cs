@@ -63,8 +63,9 @@ namespace MeetingApp.Data.Repositories.Questions
         {
             entity.PartitionKey = entity.MeetingId;
             entity.RowKey = entity.QuestionId;
+            entity.ETag = "*";
             await this.EnsureInitializedAsync().ConfigureAwait(false);
-            TableOperation updateOperation = TableOperation.InsertOrReplace(entity);
+            TableOperation updateOperation = TableOperation.Replace(entity);
             return await this.questionCloudTable.ExecuteAsync(updateOperation).ConfigureAwait(false);
         }
 

@@ -14,11 +14,12 @@ import {
     Dropdown
 } from '@fluentui/react-northstar'
 import "../../recruiting-details/recruiting-details.css"
-import { download, getCandidateDetails } from "../services/recruiting-detail.service"
+import { getCandidateDetails } from "../services/recruiting-detail.service"
 import { ICandidateDetails } from './basic-details.types';
 
 export interface IBasicDetailsProps {
     setSelectedCandidateIndex: (index: number, email: string) => void,
+    downloadFile: () => void,
 }
 
 const BasicDetails = (props: IBasicDetailsProps) => {
@@ -29,30 +30,6 @@ const BasicDetails = (props: IBasicDetailsProps) => {
     const handleNameChange = (event: any, dropdownProps?: any) => {
         setSelectedIndex(dropdownProps.value.key);
         props.setSelectedCandidateIndex(dropdownProps.value.key, dropdownProps.value.email);
-    }
-
-    const downloadFile = () => {
-          // API call to download.
-          download()
-          .then((res) => {
-              debugger
-              console.log(res);
-            //   var a = document.createElement("a")
-            //   var file = new Blob([res.data], { type: "application/octect-stream" });
-  
-            //   var url = URL.createObjectURL(file);
-            //   a.href = url;
-            //   a.download = filename;
-            //   document.body.appendChild(a); 
-            //   a.click();
-            //   setTimeout(function () {
-            //       document.body.removeChild(a);
-            //       window.URL.revokeObjectURL(url);
-            //   }, 0);  
-          })
-          .catch((ex) => {
-              console.log("Error while downloading the file" + ex)
-          });
     }
 
     React.useEffect(() => {
@@ -135,7 +112,7 @@ const BasicDetails = (props: IBasicDetailsProps) => {
                                     content={'Resume'}
                                     size="small"
                                     className="iconText"
-                                    onClick={downloadFile} />
+                                    onClick={props.downloadFile} />
                             </Flex>
                             <Flex>
                                 <Button

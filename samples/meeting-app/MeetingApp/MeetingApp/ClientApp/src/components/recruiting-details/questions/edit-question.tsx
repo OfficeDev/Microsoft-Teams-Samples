@@ -6,7 +6,6 @@ import * as microsoftTeams from "@microsoft/teams-js";
 const EditQuestion = (props: any): React.ReactElement => {
     const [question, setQuestion] = React.useState<any>('');
     React.useEffect(() => {
-        debugger
         microsoftTeams.initialize();
         const search = props.location.search;
         const editText = new URLSearchParams(search).get('editText');
@@ -24,7 +23,8 @@ const EditQuestion = (props: any): React.ReactElement => {
                 <Flex column gap="gap.medium" padding="padding.medium">
                     <Text content="Please edit the below question"/>
                     <TextArea fluid defaultValue={question} className="editTextArea"
-                      onChange={(event: any) => { setQuestion(event.target.defaultValue) }} />
+                      onChange={(event: any) => { 
+                      setQuestion(event.target.value) }} />
                     <Flex hAlign="center">
                         <Button primary content="Update" onClick={saveQuestion} />
                     </Flex>

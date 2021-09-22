@@ -16,6 +16,7 @@ using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace MeetingApp
 {
@@ -32,6 +33,10 @@ namespace MeetingApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddNewtonsoftJson();
+
+            services.AddHttpClient("WebClient", client => client.Timeout = TimeSpan.FromSeconds(600));
+
+            services.AddHttpContextAccessor();
 
             // Create the Bot Framework Adapter with error handling enabled.
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();

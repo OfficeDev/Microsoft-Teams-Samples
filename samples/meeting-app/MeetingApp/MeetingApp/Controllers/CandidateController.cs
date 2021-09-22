@@ -1,13 +1,16 @@
 ﻿using MeetingApp.Data;
 using MeetingApp.Data.Repositories;
+using MeetingApp.Graph;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace MeetingApp.Controllers
@@ -20,7 +23,9 @@ namespace MeetingApp.Controllers
 
         private IWebHostEnvironment _environment;
 
-        public CandidateController(ICandidateRepository candidateRepository, IWebHostEnvironment environment)
+        public CandidateController(
+            ICandidateRepository candidateRepository, 
+            IWebHostEnvironment environment)
         {
             _candidateRepository = candidateRepository;
             _environment = environment;
@@ -38,14 +43,14 @@ namespace MeetingApp.Controllers
         public async Task<ActionResult> DownloadFile()
         {
             var provider = new FileExtensionContentTypeProvider();
-            var filePath = _environment.WebRootPath + "/Test_doc.docx";
+            var filePath = _environment.WebRootPath + "/test.pdf";
             if (!provider.TryGetContentType(filePath, out var contentType))
             {
                 contentType = "application/octet-stream";
             }
 
             var bytes = await System.IO.File.ReadAllBytesAsync(filePath);
-            return File(Convert.ToBase64String(bytes), contentType, Path.GetFileName(filePath));
+            return File(bytes, contentType, Path.GetFileName(filePath));
         }
     }
 }

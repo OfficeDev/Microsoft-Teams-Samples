@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.18" />
     <PackageReference Include="Microsoft.Azure.Cosmos.Table" Version="1.0.8" />
     <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.14.0" />
+    <PackageReference Include="Microsoft.Graph" Version="4.5.0" />
   </ItemGroup>
 
     <ItemGroup>

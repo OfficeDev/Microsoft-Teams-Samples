@@ -202,6 +202,8 @@ textarea::-webkit-input-placeholder {
     color: #f5f5f5 !important;
     font-size: 12px !important;
     padding: 1vw !important;
+    border: none !important;
+    height: 25px !important;
 }
 
 .expLabel{

@@ -34,9 +34,16 @@ namespace MeetingApp.Controllers
         [HttpPost]
         public async Task<IActionResult> EditQuestion([FromBody]QuestionSetEntity question)
         {
-            var result = await this._questionsRepository.UpdateQuestionEntityAsync(question);
-            if (result == null) return NotFound();
-            return Ok(result);
+            try
+            {
+                var result = await this._questionsRepository.UpdateQuestionEntityAsync(question);
+                if (result == null) return NotFound();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         [Route("delete")]

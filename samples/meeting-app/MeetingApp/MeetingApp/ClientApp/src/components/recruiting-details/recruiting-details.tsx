@@ -8,7 +8,7 @@ import Notes from "./basic-details/notes"
 import QuestionsMobile from './questions/questions-mobile';
 import BasicDetailsMobile from './basic-details/basic-details-mobile';
 import Questions from './basic-details/questions';
-import { getQuestions, saveFeedback } from "./services/recruiting-detail.service";
+import { getQuestions, saveFeedback, download } from "./services/recruiting-detail.service";
 import { IFeedbackDetails, IQuestionDetails } from '../../types/recruitment.types';
 
 const RecruitingDetails = () => {
@@ -109,6 +109,32 @@ const RecruitingDetails = () => {
             })
     }
 
+    const downloadFile = () => {
+        // API call to download.
+        download()
+            .then((res) => {
+                debugger
+                console.log(res);
+                const bytes: string = res.data as string;
+                var buffer = Buffer.from(bytes);
+
+                var blob = new Blob([buffer], { type: res.headers["content-type"] });
+                var a = document.createElement("a")
+                var url = URL.createObjectURL(blob);
+                a.href = url;
+                a.download = "test.pdf";
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(function () {
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                }, 0);
+            })
+            .catch((ex) => {
+                console.log("Error while downloading the file" + ex)
+            });
+    }
+
     React.useEffect(() => {
         microsoftTeams.initialize();
         loadQuestions();
@@ -120,7 +146,7 @@ const RecruitingDetails = () => {
             {/* Content for stage view */}
             <Flex hidden={window.innerWidth < 600} gap="gap.small" padding="padding.medium" className="container">
                 <Flex column gap="gap.small" padding="padding.medium" className="detailsContainer">
-                    <BasicDetails setSelectedCandidateIndex={setSelectedCandidateIndex} />
+                    <BasicDetails setSelectedCandidateIndex={setSelectedCandidateIndex} downloadFile={downloadFile}/>
                     <Timeline />
                     <Notes currentCandidateEmail={currentCandidateEmail} />
                 </Flex>
@@ -130,7 +156,7 @@ const RecruitingDetails = () => {
             </Flex>
 
             {/* Content for sidepanel/mobile view */}
-            <Flex hidden={window.innerWidth < 600} gap="gap.small" padding="padding.medium" className="container-mobile" column>
+            <Flex hidden={window.innerWidth > 600} gap="gap.small" padding="padding.medium" className="container-mobile" column>
                 <Menu
                     defaultActiveIndex={0}
                     items={mobileMenuItems}
@@ -140,7 +166,7 @@ const RecruitingDetails = () => {
                     primary />
                 <Flex column gap="gap.small">
                     <>
-                        {!activeMobileMenu && <BasicDetailsMobile selectedIndex={selectedIndex} />}
+                        {!activeMobileMenu && <BasicDetailsMobile selectedIndex={selectedIndex} downloadFile={downloadFile}/>}
                         {feedbackSubmitted && activeMobileMenu == 1 && <Text>Feedback submitted!</Text>}
                         {!feedbackSubmitted && questionDetails.length > 0 && activeMobileMenu == 1 &&
                             <Flex column>
