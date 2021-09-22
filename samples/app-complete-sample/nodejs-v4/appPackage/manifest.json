@@ -3,16 +3,16 @@
   "manifestVersion": "1.5",
   "version": "1.5",
   "id": "<<REGISTERED_BOT_ID>>",
-  "packageName": "com.Template.microsoftteams",
+  "packageName": "com.Template.microsoftteams.completesampleapp",
   "developer": {
-    "name": "Bot Template",
+    "name": "Complete Sample App",
     "websiteUrl": "https://dev.botframework.com",
     "privacyUrl": "https://privacy.microsoft.com/en-us/privacystatement",
     "termsOfUseUrl": "https://www.botframework.com/Content/Microsoft-Bot-Framework-Preview-Online-Services-Agreement.htm"
   },
   "name": {
-    "short": "Bot Template",
-    "full": "Bot Template"
+    "short": "Complete Sample App",
+    "full": "Complete Sample App"
   },
   "description": {
     "short": "Bot Template - a template for creating a bot",

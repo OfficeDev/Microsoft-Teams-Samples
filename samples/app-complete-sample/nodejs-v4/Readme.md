@@ -15,7 +15,7 @@ extensions:
 
 # Microsoft Teams Bot in Node.js
 
-Sample that shows how to build a Microsoft Teams bot in Node.js.
+Sample that shows how to use dialog bot with bot sdk v4, messaging extension, facebook auth flow in Nodejs.
 
 ## Features of this sample
 
@@ -24,6 +24,8 @@ Sample that shows how to build a Microsoft Teams bot in Node.js.
 ![](images/static-tab.png)
 
 ![](images/messaging-extension.png)
+
+![](images/facebook-auth-flow.png)
 
 
 ## Prerequisites
@@ -39,8 +41,7 @@ Sample that shows how to build a Microsoft Teams bot in Node.js.
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/auto-complete-sample/nodejs-v4
-`
+2) In a terminal, navigate to `samples/auto-complete-sample/nodejs-v4`
 
 3) Install modules
 
@@ -76,6 +77,15 @@ Sample that shows how to build a Microsoft Teams bot in Node.js.
 - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
 - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app") 
 
+9) To test facebook auth flow [create a facebookapp](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-facebook?view=azure-bot-service-4.0) and get client id and secret.
+now Go to your bot channel registartion-> configuration->Add OAuth connection string-> 
+give connection Name : for ex `facebookconnection`
+service provider-> select facebook
+add clientid and secret of your facebook app that we have created above and click on save.
+ 
+Open the ".env" file in the project and add connection name which we have provided in bot channel registration
+ConnectionName = 
+ 
 ## Overview
 
 This project is meant to help a Teams developer in two ways.  First, it is meant to show many examples of how an app can integrate into Teams.  Second, it is meant to give a set of patterns, templates, and tools that can be used as a starting point for creating a larger, scalable, more enterprise level bot to work within Teams.  Although this project focuses on creating a robust bot, it does include simples examples of tabs as well as examples of how a bot can give links into these tabs.
