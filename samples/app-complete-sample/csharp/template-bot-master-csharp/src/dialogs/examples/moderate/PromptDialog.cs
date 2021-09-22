@@ -1,8 +1,12 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Dialogs.Choices;
 using Microsoft.Bot.Connector;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
@@ -13,87 +17,97 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     ///  2. If user choose any of the option, Bot take confirmation from the user about the choice.
     ///  3. Bot reply to the user based on user choice.
     /// </summary>
-    [Serializable]
-    public class PromptDialogExample : IDialog<bool>
+    public class PromptDialog : ComponentDialog
     {
-        private IEnumerable<string> options = null;
-        private IEnumerable<string> choiceOptions = null;
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        private static List<Choice> options = new List<Choice>()
+            {
+                new Choice(Strings.PlayGameChoice1) { Synonyms = new List<string> { Strings.PlayGameChoice1 } },
+                new Choice(Strings.PlayGameChoice2) { Synonyms = new List<string> { Strings.PlayGameChoice2 } },
+                new Choice(Strings.PlayGameWrongChoice) { Synonyms = new List<string> { Strings.PlayGameWrongChoice } }
+            };
+        private static List<Choice> choiceOptions = new List<Choice>()
+            {
+                new Choice(Strings.OptionYes) { Synonyms = new List<string> { Strings.OptionYes } },
+                new Choice(Strings.OptionNo) { Synonyms = new List<string> { Strings.OptionNo } },
+            };
 
-        /// <summary>
-        /// In below class constructor, we are initializing the strings Enumerable at runtime. 
-        /// </summary>
-        public PromptDialogExample()
+        public PromptDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(PromptDialog))
         {
-            options = new string[] { Strings.PlayGameChoice1, Strings.PlayGameChoice2, Strings.PlayGameWrongChoice };
-            choiceOptions = new string[] { Strings.OptionYes, Strings.OptionNo };
+            this._conversationState = conversationState;
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
+            {
+                BeginPromptDialogAsync,
+                GetNameAsync,
+                GetOptionAsync,
+                ResultedOptionsAsync
+            }));
+            AddDialog(new ChoicePrompt(nameof(ChoicePrompt)));
+            AddDialog(new TextPrompt(nameof(TextPrompt)));
         }
 
-        /// <summary>
-        /// This is start of the Dialog and Prompting for User name
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        public async Task StartAsync(IDialogContext context)
+        private async Task<DialogTurnResult> BeginPromptDialogAsync(
+           WaterfallStepContext stepContext,
+           CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (context == null)
+            if (stepContext == null)
             {
-                throw new ArgumentNullException(nameof(context));
+                throw new ArgumentNullException(nameof(stepContext));
             }
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogGameDialog);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogGameDialog;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
 
-            // This will Prompt for Name of the user.
-            await context.PostAsync(Strings.PlayGamePromptForName);
-            context.Wait(this.MessageReceivedAsync);
+            return await stepContext.PromptAsync(
+                nameof(TextPrompt),
+                new PromptOptions
+                {
+                    Prompt = MessageFactory.Text(Strings.PlayGamePromptForName),
+                },
+                cancellationToken);
+        }
+
+        private async Task<DialogTurnResult> GetNameAsync(
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var userName = stepContext.Result as string;
+            await stepContext.Context.SendActivityAsync(Strings.PlayGameAnswerForName + userName);
+            return await stepContext.PromptAsync(
+                    nameof(ChoicePrompt),
+                    new PromptOptions
+                    {
+                        Prompt = MessageFactory.Text(Strings.PlayGameStartMsg),
+                        Choices = options,
+                        RetryPrompt = MessageFactory.Text(Strings.PromptInvalidMsg)
+                    },
+                    cancellationToken);
         }
 
         /// <summary>
-        /// Prompt the welcome message. 
-        /// Few options for user to choose any.
+        /// In this method, we are taking confirmation from user about the selection.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="result"></param>
+        /// <param name="stepContext"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
+        private async Task<DialogTurnResult> GetOptionAsync(
+          WaterfallStepContext stepContext,
+          CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (result == null)
-            {
-                throw new InvalidOperationException((nameof(result)) + Strings.NullException);
-            }
+            var optionSelected = (stepContext.Result as FoundChoice).Value;
+            return await stepContext.PromptAsync(
+                    nameof(ChoicePrompt),
+                    new PromptOptions
+                    {
+                        Prompt = MessageFactory.Text(Strings.PlayGameReplyMsg + "'" + optionSelected + "'?"),
+                        Choices = choiceOptions,
+                        RetryPrompt = MessageFactory.Text(Strings.PromptInvalidMsg)
+                    },
+                    cancellationToken);
 
-            //Prompt the user with welcome message before game starts
-            var resultActivity = await result;
-            await context.PostAsync(Strings.PlayGameAnswerForName + resultActivity.Text);
-
-            //Here we are prompting few options for user to choose any.
-            PromptDialog.Choice<string>(
-                context,
-                this.ChooseOptions,
-                options,
-                Strings.PlayGameStartMsg,
-                Strings.PromptInvalidMsg,
-                3);
-        }
-
-        /// <summary>
-        /// In this methos, we are taking confirmation from user about the selection.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="result"></param>
-        /// <returns></returns>
-        private async Task ChooseOptions(IDialogContext context, IAwaitable<string> result)
-        {
-            var selctedChoice = await result;
-
-            //Once User choose any of the given option, we are taking confirmation from user about the selection.
-            PromptDialog.Choice<string>(
-                context,
-                this.ResultedOptions,
-                choiceOptions,
-                Strings.PlayGameReplyMsg + "'" + selctedChoice + "'?",
-                Strings.PromptInvalidMsg,
-                3);
         }
 
         /// <summary>
@@ -102,21 +116,23 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
         /// <param name="context"></param>
         /// <param name="result"></param>
         /// <returns></returns>
-        private async Task ResultedOptions(IDialogContext context, IAwaitable<string> result)
+        private async Task<DialogTurnResult> ResultedOptionsAsync(WaterfallStepContext stepContext,
+          CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (result == null)
+            var optionSelected = (stepContext.Result as FoundChoice).Value;
+            if (optionSelected == null)
             {
-                throw new InvalidOperationException((nameof(result)) + Strings.NullException);
+                throw new InvalidOperationException((nameof(optionSelected)) + Strings.NullException);
             }
-
-            var selctedChoice = await result;
-            if (selctedChoice == Strings.OptionYes)
+            if (optionSelected == Strings.OptionYes)
             {
-                context.Done(true);
+                await stepContext.Context.SendActivityAsync(Strings.PlayGameThanksMsg);
+                return await stepContext.EndDialogAsync(null, cancellationToken);
             }
             else
             {
-                context.Done(false);
+                await stepContext.Context.SendActivityAsync(Strings.PlayGameFailMsg);
+                return await stepContext.EndDialogAsync(null, cancellationToken);
             }
         }
     }

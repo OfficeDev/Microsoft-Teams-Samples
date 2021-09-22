@@ -1,10 +1,14 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
+using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using Microsoft.Teams.TemplateBotCSharp.Utility;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
@@ -13,58 +17,75 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// This is update card dialog class. Main purpose of this class is to update the card, if user has already setup the card message from below dialog file
     /// microsoft-teams-sample-complete-csharp\template-bot-master-csharp\src\dialogs\examples\teams\updatecardmsgsetupdialog.cs
     /// </summary>
-    [Serializable]
-    public class UpdateCardMsgDialog : IDialog<object>
+    public class UpdateCardMsgDialog : ComponentDialog
     {
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
         public int updateCounter;
-
-        public async Task StartAsync(IDialogContext context)
+        public UpdateCardMsgDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(UpdateCardMsgDialog))
         {
-            if (context == null)
+            this._conversationState = conversationState;
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
+                BeginUpdateCardMsgDialogAsync,
+            }));
+        }
+
+        private async Task<DialogTurnResult> BeginUpdateCardMsgDialogAsync(
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
             }
-
-            if (!string.IsNullOrEmpty(context.Activity.ReplyToId))
+            var existingState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            if (!string.IsNullOrEmpty(stepContext.Context.Activity.ReplyToId))
             {
-                Activity activity = context.Activity as Activity;
-                updateCounter = TemplateUtility.ParseUpdateCounterJson(activity);
+                IMessageActivity activity = stepContext.Context.Activity;
 
-                var updatedMessage = CreateUpdatedMessage(context);
+                updateCounter = TemplateUtility.ParseUpdateCounterJson((Activity)activity);
 
-                ConnectorClient client = new ConnectorClient(new Uri(context.Activity.ServiceUrl));
+                var updatedMessage = CreateUpdatedMessage(stepContext);
+
+                ConnectorClient client = new ConnectorClient(new Uri(stepContext.Context.Activity.ServiceUrl), ConfigurationManager.AppSettings["MicrosoftAppId"], ConfigurationManager.AppSettings["MicrosoftAppPassword"]);
 
                 try
                 {
-                    ResourceResponse resp = await client.Conversations.UpdateActivityAsync(context.Activity.Conversation.Id, context.Activity.ReplyToId, (Activity)updatedMessage);
-                    await context.PostAsync(Strings.UpdateCardMessageConfirmation);
+                    ResourceResponse resp = await client.Conversations.UpdateActivityAsync(stepContext.Context.Activity.Conversation.Id, stepContext.Context.Activity.ReplyToId, (Activity)updatedMessage);
+                    await stepContext.Context.SendActivityAsync(Strings.UpdateCardMessageConfirmation);
                 }
                 catch (Exception ex)
                 {
-                    await context.PostAsync(Strings.ErrorUpdatingCard + ex.Message);
+                    await stepContext.Context.SendActivityAsync(Strings.ErrorUpdatingCard + ex.Message);
                 }
             }
             else
             {
-                await context.PostAsync(Strings.NoMsgToUpdate);
+                await stepContext.Context.SendActivityAsync(Strings.NoMsgToUpdate);
             }
 
-            context.Done<object>(null);
-
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogSetupUpdateCard);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogSetupUpdateCard;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
+
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
 
         #region Create Updated Card Message
-        private IMessageActivity CreateUpdatedMessage(IDialogContext context)
+        private IMessageActivity CreateUpdatedMessage(WaterfallStepContext context)
         {
-            var message = context.MakeMessage();
+            var message = context.Context.Activity;
+            if (message.Attachments != null)
+            {
+                message.Attachments = null;
+            }
             var attachment = CreateUpdatedCardAttachment();
-            message.Attachments.Add(attachment);
+            message.Attachments = new List<Attachment>() { attachment };
             return message;
         }
-
-        private Attachment CreateUpdatedCardAttachment()    
+        private Attachment CreateUpdatedCardAttachment()
         {
             return new HeroCard
             {

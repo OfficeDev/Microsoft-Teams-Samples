@@ -858,4 +858,7 @@
   <data name="LastDialogAdaptiveCard" xml:space="preserve">
     <value>AdaptiveCardDialog</value>
   </data>
+  <data name="ErrorMessage" xml:space="preserve">
+    <value>Something went wrong</value>
+  </data>
 </root>
