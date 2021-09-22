@@ -55,18 +55,18 @@ Sample that shows how to use dialog bot with bot sdk v4, messaging extension, fa
     ngrok http -host-header=rewrite 3979
     ```
 
-5). Register a new bot (or update an existing one) with Bot Framework by using the full endpoint as the bot's "Messaging endpoint". Make sure to add Teams as a channel for the bot. Bot registration is here (open in a new browser tab): https://dev.botframework.com/bots
+5) Register a new bot (or update an existing one) with Bot Framework by using the full endpoint as the bot's "Messaging endpoint". Make sure to add Teams as a channel for the bot. Bot registration is here (open in a new browser tab): https://dev.botframework.com/bots
 
     > **NOTE**: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
-6). Once you have saved your bot and gotten the confirmation that it is created, navigate back to your  project. Open the ".env" file. There, copy/paste your App ID and App password from the step above.
+6) Once you have saved your bot and gotten the confirmation that it is created, navigate back to your  project. Open the ".env" file. There, copy/paste your App ID and App password from the step above.
     ```
     MicrosoftAppId=
     MicrosoftAppPassword=
     BaseUri=https://#####abc.ngrok.io
     ```
 
-7). Run your bot at the command line:
+7) Run your bot at the command line:
 
     ```bash
     npm start
@@ -77,14 +77,14 @@ Sample that shows how to use dialog bot with bot sdk v4, messaging extension, fa
 - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
 - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app") 
 
-9) To test facebook auth flow [create a facebookapp](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-facebook?view=azure-bot-service-4.0) and get client id and secret.
-now Go to your bot channel registartion-> configuration->Add OAuth connection string-> 
-give connection Name : for ex `facebookconnection`
-service provider-> select facebook
-add clientid and secret of your facebook app that we have created above and click on save.
+9) To test facebook auth flow [create a facebookapp](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-facebook?view=azure-bot-service-4.0) and get client id and secret for facebook app.
+Now go to your bot channel registartion -> configuration -> Add OAuth connection string
+- Provide connection Name : for eg `facebookconnection`
+- Select service provider ad `facebook`
+- Add clientid and secret of your facebook app that was created using Step 9.
  
 Open the ".env" file in the project and add connection name which we have provided in bot channel registration
-ConnectionName = 
+E.g. ConnectionName = facebookconnection
  
 ## Overview
 
