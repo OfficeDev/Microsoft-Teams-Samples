@@ -27,7 +27,6 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |    | Sample Name        | Description                                                                                                                | C#    | TypeScript   
 |:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|
 |1|Hello World            | Microsoft Teams hello world sample app.                                           |[View][app-hello-world#cs]     |[View][app-hello-world#ts]
-|2|App Complete Sample    | Sample covering multiple scenarios.                                               |[View][app-complete-sample#cs]     |
 
 ## [Tabs samples](https://docs.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   | JavaScript
