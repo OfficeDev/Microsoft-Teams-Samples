@@ -20,3 +20,7 @@ export interface IQuestionSet {
   setBy: string;
   isDelete: number;
 }
+
+export interface IAssetDetails {
+ message: string;
+}

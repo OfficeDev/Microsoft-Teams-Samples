@@ -16,6 +16,7 @@ import {
 import "../../recruiting-details/recruiting-details.css"
 import { getCandidateDetails } from "../services/recruiting-detail.service"
 import { ICandidateDetails } from './basic-details.types';
+import * as microsoftTeams from "@microsoft/teams-js";
 
 export interface IBasicDetailsProps {
     setSelectedCandidateIndex: (index: number, email: string) => void,
@@ -30,6 +31,11 @@ const BasicDetails = (props: IBasicDetailsProps) => {
     const handleNameChange = (event: any, dropdownProps?: any) => {
         setSelectedIndex(dropdownProps.value.key);
         props.setSelectedCandidateIndex(dropdownProps.value.key, dropdownProps.value.email);
+    }
+
+    const startCall = () => {
+        microsoftTeams.initialize();
+        microsoftTeams.executeDeepLink("https://teams.microsoft.com/l/call/0/0?users=v-chetsh@microsoftTeams.com");
     }
 
     React.useEffect(() => {
@@ -92,7 +98,7 @@ const BasicDetails = (props: IBasicDetailsProps) => {
                                 <Text content={candidateDetails[selectedIndex]?.email} size="small" />
                             </Flex>
                             <Flex>
-                                <Button icon={<CallIcon size="medium" />} iconOnly text title="Call" size="small" />
+                                <Button icon={<CallIcon size="medium" />} iconOnly text title="Call" size="small" onClick={startCall}/>
                                 <Text content={candidateDetails[selectedIndex]?.mobile} size="small" />
                             </Flex>
                         </Flex>

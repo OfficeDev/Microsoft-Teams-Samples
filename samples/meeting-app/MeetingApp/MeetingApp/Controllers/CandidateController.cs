@@ -50,6 +50,7 @@ namespace MeetingApp.Controllers
             }
 
             var bytes = await System.IO.File.ReadAllBytesAsync(filePath);
+            var dataStream = new MemoryStream(bytes);
             return File(bytes, contentType, Path.GetFileName(filePath));
         }
     }

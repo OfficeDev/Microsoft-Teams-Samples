@@ -106,28 +106,21 @@ const RecruitingDetails = () => {
                     console.log("Error while submitting the feedback.")
                     console.log(ex)
                 });
-            })
+        })
     }
 
     const downloadFile = () => {
         // API call to download.
         download()
             .then((res) => {
-                debugger
-                console.log(res);
-                const bytes: string = res.data as string;
-                var buffer = Buffer.from(bytes);
-
-                var blob = new Blob([buffer], { type: res.headers["content-type"] });
-                var a = document.createElement("a")
-                var url = URL.createObjectURL(blob);
-                a.href = url;
-                a.download = "test.pdf";
-                document.body.appendChild(a);
-                a.click();
+                var link = document.createElement("a")
+                var blob = new Blob([res.data as Blob], { type: res.headers["content-type"] });
+                const blobUrl = window.URL.createObjectURL(blob)
                 setTimeout(function () {
-                    document.body.removeChild(a);
-                    window.URL.revokeObjectURL(url);
+                    link.href = blobUrl; // data url
+                    link.download = "test.pdf";
+                    document.body.appendChild(link);
+                    link.click();
                 }, 0);
             })
             .catch((ex) => {
@@ -146,7 +139,7 @@ const RecruitingDetails = () => {
             {/* Content for stage view */}
             <Flex hidden={window.innerWidth < 600} gap="gap.small" padding="padding.medium" className="container">
                 <Flex column gap="gap.small" padding="padding.medium" className="detailsContainer">
-                    <BasicDetails setSelectedCandidateIndex={setSelectedCandidateIndex} downloadFile={downloadFile}/>
+                    <BasicDetails setSelectedCandidateIndex={setSelectedCandidateIndex} downloadFile={downloadFile} />
                     <Timeline />
                     <Notes currentCandidateEmail={currentCandidateEmail} />
                 </Flex>
@@ -156,7 +149,7 @@ const RecruitingDetails = () => {
             </Flex>
 
             {/* Content for sidepanel/mobile view */}
-            <Flex hidden={window.innerWidth > 600} gap="gap.small" padding="padding.medium" className="container-mobile" column>
+            <Flex hidden={window.innerWidth < 600} gap="gap.small" padding="padding.medium" className="container-mobile" column>
                 <Menu
                     defaultActiveIndex={0}
                     items={mobileMenuItems}
@@ -166,7 +159,7 @@ const RecruitingDetails = () => {
                     primary />
                 <Flex column gap="gap.small">
                     <>
-                        {!activeMobileMenu && <BasicDetailsMobile selectedIndex={selectedIndex} downloadFile={downloadFile}/>}
+                        {!activeMobileMenu && <BasicDetailsMobile selectedIndex={selectedIndex} downloadFile={downloadFile} />}
                         {feedbackSubmitted && activeMobileMenu == 1 && <Text>Feedback submitted!</Text>}
                         {!feedbackSubmitted && questionDetails.length > 0 && activeMobileMenu == 1 &&
                             <Flex column>

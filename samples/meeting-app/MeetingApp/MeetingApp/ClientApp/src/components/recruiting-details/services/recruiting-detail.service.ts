@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { IQuestionDetails, INoteDetails, IFeedbackDetails } from '../../../types/recruitment.types';
-import { IQuestionSet } from '../basic-details/basic-details.types';
+import { IAssetDetails, IQuestionSet } from '../basic-details/basic-details.types';
 
 // API call to get Candidate details.
 export function getCandidateDetails(): Promise<AxiosResponse<unknown>> {
@@ -44,5 +44,10 @@ export function saveNote(noteDetails: INoteDetails): Promise<AxiosResponse<unkno
 
 // API call to download assets.
 export function download(): Promise<AxiosResponse<unknown>> {
-  return axios.get(`${window.location.origin}/api/Candidate/file`);
+  return axios.get(`${window.location.origin}/api/Candidate/file`, {responseType: 'blob'});
+}
+
+// API call to share assets and notes.
+export function shareAssets(note: IAssetDetails): Promise<AxiosResponse<unknown>> {
+  return axios.post(`${window.location.origin}/api/Notify`, note);
 }

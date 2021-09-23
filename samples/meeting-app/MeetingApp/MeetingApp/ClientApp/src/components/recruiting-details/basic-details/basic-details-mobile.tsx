@@ -3,8 +3,8 @@ import { Flex, Card, Avatar, Text, Header, Button, Label, AddIcon } from '@fluen
 import "../../recruiting-details/recruiting-details.css"
 import LinkedInLogo from '../../../images/linkedin.svg';
 import TwitterLogo from '../../../images/twitter.svg';
-import { getCandidateDetails } from "../services/recruiting-detail.service"
-import { ICandidateDetails } from './basic-details.types';
+import { getCandidateDetails, shareAssets } from "../services/recruiting-detail.service"
+import { IAssetDetails, ICandidateDetails } from './basic-details.types';
 import * as microsoftTeams from "@microsoft/teams-js";
 
 export interface IBasicDetailsMobileProps {
@@ -24,20 +24,22 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
             url: `${window.location.origin}/shareAssets`,
         };
 
-        microsoftTeams.tasks.startTask(taskInfo, (err, question) => {
+        microsoftTeams.tasks.startTask(taskInfo, (err, note) => {
             if (err) {
                 console.log("Some error occurred in the task module")
                 return
             }
-            var authTokenRequest = {
-                successCallback: function (result: any) {
-                    console.log("Success: " + result);
-                },
-                failureCallback: function (error: any) {
-                    console.log("Failure: " + error);
-                }
-            };
-            microsoftTeams.authentication.getAuthToken(authTokenRequest);
+            const assetDetail: IAssetDetails = {
+                message: note
+            }
+            shareAssets(assetDetail)
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((ex) => {
+                console.log("Some error occurred while sharing the assets info");
+                console.log(ex);
+            });
         })
     }
 
