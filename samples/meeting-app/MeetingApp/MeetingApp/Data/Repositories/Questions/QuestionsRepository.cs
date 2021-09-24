@@ -1,12 +1,15 @@
-﻿using MeetingApp.Data.Models;
-using Microsoft.Azure.Cosmos.Table;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MeetingApp.Data.Models;
+using Microsoft.Azure.Cosmos.Table;
 
 namespace MeetingApp.Data.Repositories.Questions
 {
+    /// <summary>
+    /// QuestionsRepository class for table operations for Questions table
+    /// </summary>
     public class QuestionsRepository : IQuestionsRepository
     {
         private readonly Lazy<Task> initializeTask;
@@ -45,11 +48,14 @@ namespace MeetingApp.Data.Repositories.Questions
             //Iterating through each batch  
             foreach (var entity in questionsSet)
             {
-                entity.PartitionKey = entity.MeetingId;
-                entity.RowKey = string.Format("{0:D19}", DateTime.UtcNow.Ticks);
-                await this.EnsureInitializedAsync().ConfigureAwait(false);
-                TableOperation addOperation = TableOperation.InsertOrReplace(entity);
-                await this.questionCloudTable.ExecuteAsync(addOperation).ConfigureAwait(false);
+                if (entity != null)
+                {
+                    entity.PartitionKey = entity.MeetingId;
+                    entity.RowKey = string.Format("{0:D19}", DateTime.UtcNow.Ticks);
+                    await this.EnsureInitializedAsync().ConfigureAwait(false);
+                    TableOperation addOperation = TableOperation.InsertOrReplace(entity);
+                    await this.questionCloudTable.ExecuteAsync(addOperation).ConfigureAwait(false);
+                }
             }
             return true;
         }
@@ -86,7 +92,7 @@ namespace MeetingApp.Data.Repositories.Questions
         }
 
         /// <summary>
-        /// Edit a particular question in table storage.
+        /// Get questions from table storage.
         /// </summary>
         /// <returns><see cref="Task"/> Already saved entity detail.</returns>
         public async Task<IEnumerable<QuestionSetEntity>> GetQuestions(string meetingId)

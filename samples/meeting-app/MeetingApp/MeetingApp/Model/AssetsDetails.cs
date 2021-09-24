@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MeetingApp.Model
+﻿namespace MeetingApp.Model
 {
+    /// <summary>
+    /// Class with properties related to ShareAsset feature
+    /// </summary>
     public class AssetsDetails
     {
         public string Message { get; set; }

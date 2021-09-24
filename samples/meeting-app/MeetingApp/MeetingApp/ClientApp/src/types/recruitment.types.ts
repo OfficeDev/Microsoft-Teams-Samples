@@ -16,7 +16,9 @@ export interface IQuestionDetails {
 export interface INoteDetails {
   candidateEmail: string,
   addedBy: string,
-  note: string
+  addedByName?: string,
+  note: string,
+  timestamp?: string
 }
 
 // Interface for feedback submiited for questions.

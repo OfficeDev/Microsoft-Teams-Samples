@@ -8,6 +8,7 @@ using MeetingApp.Data.Repositories;
 using MeetingApp.Data.Repositories.Feedback;
 using MeetingApp.Data.Repositories.Notes;
 using MeetingApp.Data.Repositories.Questions;
+using MeetingApp.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -46,6 +47,9 @@ namespace MeetingApp
             // Create a global hashset for our ConversationReferences
             services.AddSingleton<ConcurrentDictionary<string, ConversationReference>>();
 
+            // Create a global hashset for our Roster and notes information
+            services.AddSingleton<ConcurrentDictionary<string, ConversationData>>();
+
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
             services.AddTransient<IBot, MeetingBot>();
 
@@ -58,6 +62,12 @@ namespace MeetingApp
             services.AddSingleton<INotesRepository>(new NotesRepository(this.Configuration["StorageConnectionString"]));
 
             services.AddSingleton<IFeedbackRepository>(new FeedbackRepository(this.Configuration["StorageConnectionString"]));
+
+            // Storage we'll be using for User and Conversation state. 
+            services.AddSingleton<IStorage, MemoryStorage>();
+
+            // Create the Conversation state.  
+            services.AddSingleton<ConversationState>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

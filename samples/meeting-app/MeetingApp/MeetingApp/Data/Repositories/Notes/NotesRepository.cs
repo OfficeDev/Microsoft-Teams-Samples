@@ -1,12 +1,15 @@
-﻿using MeetingApp.Data.Models;
-using Microsoft.Azure.Cosmos.Table;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MeetingApp.Data.Models;
+using Microsoft.Azure.Cosmos.Table;
 
 namespace MeetingApp.Data.Repositories.Notes
 {
+    /// <summary>
+    /// NotesRepository class for table operations for Notes table
+    /// </summary>
     public class NotesRepository: INotesRepository
     {
         private readonly Lazy<Task> initializeTask;

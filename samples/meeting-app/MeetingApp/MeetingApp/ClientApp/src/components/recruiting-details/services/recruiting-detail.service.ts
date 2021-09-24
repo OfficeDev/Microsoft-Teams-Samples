@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { IQuestionDetails, INoteDetails, IFeedbackDetails } from '../../../types/recruitment.types';
+import { INoteDetails, IFeedbackDetails } from '../../../types/recruitment.types';
 import { IAssetDetails, IQuestionSet } from '../basic-details/basic-details.types';
 
 // API call to get Candidate details.

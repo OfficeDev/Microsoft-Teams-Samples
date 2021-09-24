@@ -1,15 +1,17 @@
-﻿using MeetingApp.Data.Models;
-using Microsoft.Azure.Cosmos.Table;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MeetingApp.Data.Models;
+using Microsoft.Azure.Cosmos.Table;
 
 namespace MeetingApp.Data.Repositories
 {
+    /// <summary>
+    /// CandidateRepository class for table operations for CandidateDetails table
+    /// </summary>
     public class CandidateRepository : ICandidateRepository
     {
-        private const string PartitionKey = "CandidateDetails";
         private readonly Lazy<Task> initializeTask;
         private CloudTable candidateCloudTable;
 

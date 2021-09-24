@@ -1,12 +1,13 @@
-﻿using MeetingApp.Data.Models;
-using Microsoft.Azure.Cosmos.Table;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Threading.Tasks;
+using MeetingApp.Data.Models;
+using Microsoft.Azure.Cosmos.Table;
 
 namespace MeetingApp.Data.Repositories.Feedback
 {
+    /// <summary>
+    /// FeedbackRepository class for table operations for Feedback table
+    /// </summary>
     public class FeedbackRepository: IFeedbackRepository
     {
         private readonly Lazy<Task> initializeTask;

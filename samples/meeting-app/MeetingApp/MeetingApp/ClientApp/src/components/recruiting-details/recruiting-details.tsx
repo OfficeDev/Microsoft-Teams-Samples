@@ -149,7 +149,7 @@ const RecruitingDetails = () => {
             </Flex>
 
             {/* Content for sidepanel/mobile view */}
-            <Flex hidden={window.innerWidth < 600} gap="gap.small" padding="padding.medium" className="container-mobile" column>
+            <Flex hidden={window.innerWidth > 600} gap="gap.small" padding="padding.medium" className="container-mobile" column>
                 <Menu
                     defaultActiveIndex={0}
                     items={mobileMenuItems}

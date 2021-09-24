@@ -21,7 +21,7 @@ const AddNotes = (): React.ReactElement => {
                 <Text content="Please add your notes here" />
                 <TextArea placeholder="Add note" className="editTextArea"
                     onChange={(event: any) => setNote(event.target.value)} />
-                <Flex hAlign="center">
+                <Flex>
                     <Button primary content="Add note" onClick={saveNote} />
                 </Flex>
             </Flex>

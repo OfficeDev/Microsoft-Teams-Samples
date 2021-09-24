@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace MeetingApp.Data.Models
 {
+    /// <summary>
+    /// Feedback related properties.
+    /// </summary>
     public class FeedbackEntity: TableEntity
     {
         public string MeetingId { get; set; }

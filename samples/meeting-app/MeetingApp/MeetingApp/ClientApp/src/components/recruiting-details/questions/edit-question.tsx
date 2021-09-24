@@ -25,7 +25,7 @@ const EditQuestion = (props: any): React.ReactElement => {
                     <TextArea fluid defaultValue={question} className="editTextArea"
                       onChange={(event: any) => { 
                       setQuestion(event.target.value) }} />
-                    <Flex hAlign="center">
+                    <Flex>
                         <Button primary content="Update" onClick={saveQuestion} />
                     </Flex>
                 </Flex>

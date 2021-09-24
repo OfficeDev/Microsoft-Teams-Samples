@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace MeetingApp.Data.Models
 {
+    /// <summary>
+    /// Class for Question details related properties.
+    /// </summary>
     public class QuestionSetEntity: TableEntity
     {
         [JsonProperty("meetingId")]

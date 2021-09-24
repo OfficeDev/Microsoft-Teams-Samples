@@ -59,7 +59,7 @@ const AddQuestions = (props: any): React.ReactElement => {
                         )
                     })
                 }
-                <Flex hAlign="center">
+                <Flex>
                  <Button primary content="Save selection" onClick={saveQuestion} />
                 </Flex>
             </Flex>

@@ -6,6 +6,9 @@ using Microsoft.Azure.Cosmos.Table;
 
 namespace MeetingApp.Data.Models
 {
+    /// <summary>
+    /// Candidate details related properties.
+    /// </summary>
     public class CandidateDetailEntity: TableEntity
     {
         public string CandidateName { get; set; }

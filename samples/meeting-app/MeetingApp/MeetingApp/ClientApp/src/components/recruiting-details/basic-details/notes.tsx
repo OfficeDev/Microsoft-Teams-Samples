@@ -53,7 +53,7 @@ const Notes = (props: INotesProps) => {
         getNotes(props.currentCandidateEmail)
             .then((res) => {
                 console.log(res)
-                const notes = res.data as any[];
+                const notes = res.data as INoteDetails[];
                 console.log(notes);
                 setNotes(notes)
             })
@@ -87,15 +87,15 @@ const Notes = (props: INotesProps) => {
                 <Flex className="notesContainer" column>
                     {notes.length == 0 && <Text content="No notes yet" />}
                     {
-                        notes.length > 0 && notes.map((noteDetail, index) => {
-                            let timestamp = new Date(noteDetail.timestamp);
+                        notes.length > 0 && notes.map((noteDetail: INoteDetails, index) => {
+                            let timestamp = new Date(noteDetail.timestamp as string);
                             let formatted_date = timestamp.getFullYear() + "-" +
                                 (timestamp.getMonth() + 1) + "-" +
                                 timestamp.getDate() + " " + timestamp.getHours() + ":" + timestamp.getMinutes()
                             return (
                                 <Flex column key={index} padding="padding.medium">
                                     <Flex gap="gap.small">
-                                        <Text content={noteDetail.addedBy} weight="bold" title={noteDetail.addedBy} />
+                                        <Text content={noteDetail.addedByName} weight="bold" title={noteDetail.addedBy} />
                                         <Text content={formatted_date} weight="light" />
                                     </Flex>
                                     <Text content={noteDetail.note} />
