@@ -26,7 +26,7 @@ namespace FetchGroupChatMessagesWithRSC
         }
 
         //Fetching chat messages 
-        public async Task<IChatMessagesCollectionPage> GetUserProfile(string Chatid)
+        public async Task<IChatMessagesCollectionPage> GetUserChatMessages(string Chatid)
         {
             var graphClient = GetAuthenticatedClient();
             var messages = await graphClient.Chats[Chatid].Messages

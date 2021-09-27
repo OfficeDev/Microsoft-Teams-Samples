@@ -4,6 +4,7 @@
 using FetchGroupChatMessagesWithRSC.helper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Authentication;
@@ -22,18 +23,30 @@ using System.Threading.Tasks;
 
 namespace FetchGroupChatMessagesWithRSC.Bots
 {
-    public class ActivityBot : TeamsActivityHandler
+    public class ActivityBot<T> : TeamsActivityHandler where T : Dialog
     {
         public readonly IConfiguration _configuration;
         private readonly GetChatHelper _helper = new();
         private readonly IWebHostEnvironment _env;
         private readonly IHttpClientFactory _clientFactory;
+        protected readonly BotState ConversationState;
+        protected readonly Dialog Dialog;
 
-        public ActivityBot(IConfiguration configuration, IWebHostEnvironment env, IHttpClientFactory clientFactory)
+        public ActivityBot(IConfiguration configuration, IWebHostEnvironment env, IHttpClientFactory clientFactory, ConversationState conversationState, T dialog)
         {
             _clientFactory = clientFactory;
             _configuration = configuration;
             _env = env;
+            ConversationState = conversationState;
+            Dialog = dialog;
+        }
+
+        public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            await base.OnTurnAsync(turnContext, cancellationToken);
+
+            // Save any state changes that might have occurred during the turn.
+            await ConversationState.SaveChangesAsync(turnContext, false, cancellationToken);
         }
 
         /// <summary>
@@ -57,78 +70,17 @@ namespace FetchGroupChatMessagesWithRSC.Bots
             }
             else
             {
-                //var resource = await userTokenClient.GetSignInResourceAsync(_configuration["ConnectionName"], turnContext.Activity as Activity, null, cancellationToken);
-                // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
-                //var signInLink = resource.SignInLink;
-                var attachment = new Attachment
-                {
-                    Content = new OAuthCard
-                    {
-                        ConnectionName = _configuration["ConnectionName"],
-                        Text = "Please login",
-                        
-                    },
-                    ContentType = OAuthCard.ContentType,
-                };
-                var activiti = MessageFactory.Attachment(attachment);
-
-                // NOTE: This activity needs to be sent in the 1:1 conversation between the bot and the user. 
-                // If the bot supports group and channel scope, this code should be updated to send the request to the 1:1 chat. 
-
-                await turnContext.SendActivityAsync(activiti, cancellationToken);
+                // Run the Dialog with the new message Activity.
+                await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
                 //var chat = await _helper.GetGroupChatMessage(turnContext.Activity.Conversation.TenantId, _configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"], turnContext.Activity.Conversation.Id);
 
-                string filename = "chat.txt";
-                string filePath = Path.Combine(_env.ContentRootPath, $".\\public\\chat.txt");
-                long fileSize = new FileInfo(filePath).Length;
-                await SendFileCardAsync(turnContext, filename, fileSize, cancellationToken); 
-                await turnContext.SendActivityAsync(MessageFactory.Text("hello"));
+                //string filename = "chat.txt";
+                //string filePath = Path.Combine(_env.ContentRootPath, $".\\public\\chat.txt");
+                //long fileSize = new FileInfo(filePath).Length;
+                //await SendFileCardAsync(turnContext, filename, fileSize, cancellationToken); 
+                // await turnContext.SendActivityAsync(MessageFactory.Text("hello"));
             }
             return;
-        }
-
-        protected override async Task<InvokeResponse> OnInvokeActivityAsync
-    (ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
-        {
-            var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
-            // Check the state value
-            var state = turnContext.Activity.Value.ToString();
-            var tokenResponse = await GetTokenResponse(turnContext, state, cancellationToken);
-            try
-            {
-                if (turnContext.Activity.Name == SignInConstants.TokenExchangeOperationName && turnContext.Activity.ChannelId == Channels.Msteams)
-                {
-                    await OnTokenResponseEventAsync((ITurnContext<IEventActivity>)turnContext, cancellationToken);
-                    return new InvokeResponse() { Status = 200 };
-                }
-                else
-                {
-                    return await base.OnInvokeActivityAsync(turnContext, cancellationToken);
-                }
-            }
-            catch (InvokeResponseException e)
-            {
-                return e.CreateInvokeResponse();
-            }
-        }
-
-        /// <summary>
-        /// Overriding to send welcome card once Bot/ME is installed in team.
-        /// </summary>
-        /// <param name="membersAdded">A list of all the members added to the conversation, as described by the conversation update activity.</param>
-        /// <param name="turnContext">Provides context for a turn of a bot.</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Welcome card  when bot is added first time by user.</returns>
-        protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
-        {
-            var welcomeText = "Hello and welcome! With this sample your bot can fetch groupchat messages send it to the same chat as a file";
-            foreach (var member in membersAdded)
-            {
-                if (member.Id == turnContext.Activity.Recipient.Id)
-                {
-                    await turnContext.SendActivityAsync(MessageFactory.Text(welcomeText, welcomeText), cancellationToken);
-                }
-            }
         }
 
         private async Task SendFileCardAsync(ITurnContext turnContext, string filename, long filesize, CancellationToken cancellationToken)
