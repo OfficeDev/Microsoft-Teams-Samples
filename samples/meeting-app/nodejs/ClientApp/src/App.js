@@ -6,6 +6,10 @@ import {
 } from 'react-router-dom';
 import Configuration from './components/configuration';
 import RecruitingDetails from './components/recruiting-details/recruiting-details';
+import AddQuestions from './components/recruiting-details/questions/add-questions';
+import AddNotes from './components/recruiting-details/notes/add-notes';
+import ShareAssets from './components/recruiting-details/share-assets/share-assets';
+import EditQuestion from './components/recruiting-details/questions/edit-question';
 
 function App() {
   return (
@@ -13,6 +17,10 @@ function App() {
       <Switch>
         <Route exact path='/configure' component={Configuration}></Route>
         <Route exact path='/details' component={RecruitingDetails}></Route>
+        <Route exact path='/questions' component={AddQuestions}></Route>
+        <Route exact path='/edit' component={EditQuestion}></Route>
+        <Route exact path='/addNote' component={AddNotes}></Route>
+        <Route exact path='/shareAssets' component={ShareAssets}></Route>
       </Switch>
     </Router>
   );

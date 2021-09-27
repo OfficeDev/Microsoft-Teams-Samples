@@ -1,34 +1,64 @@
-import { Flex, Card, Button, Avatar, Text, ChatIcon, CallVideoIcon } from '@fluentui/react-northstar'
+import * as React from 'react';
+import {
+    Flex,
+    Card,
+    Button,
+    Avatar,
+    Text,
+    ChatIcon,
+    CallVideoIcon,
+    CallIcon,
+    EmailIcon,
+    PaperclipIcon,
+    PopupIcon,
+    Dropdown
+} from '@fluentui/react-northstar'
 import "../../recruiting-details/recruiting-details.css"
+import { getCandidateDetails } from "../services/recruiting-detail.service"
+import { ICandidateDetails } from './basic-details.types';
+import * as microsoftTeams from "@microsoft/teams-js";
 
-const BasicDetails = () => {
+export interface IBasicDetailsProps {
+    setSelectedCandidateIndex: (index: number, email: string) => void,
+    downloadFile: () => void,
+}
 
-    const details = {
-        basicDetails: {
-            name: "Aaron Brooker",
-            designation: "Software Engineer",
-            totalExperience: "4 yrs 8 mos",
-            contactDetails: {
-                email: "",
-                phone: ""
-            },
-            skills: "",
-            attachments: "",
-            source: "",
-            timeline: [
-                {
-                    date: "",
-                    stage: "",
-                    hiringTeam: "",
-                    result: ""
-                }
-            ],
-            notes: [
-                "note 1",
-                "note 2"
-            ]
-        }
+const BasicDetails = (props: IBasicDetailsProps) => {
+    const [candidateDetails, setCandidateDetails] = React.useState<ICandidateDetails[]>([]);
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
+    const [candidateNames, setCandidateNames] = React.useState<any[]>([]);
+
+    const handleNameChange = (event: any, dropdownProps?: any) => {
+        setSelectedIndex(dropdownProps.value.key);
+        props.setSelectedCandidateIndex(dropdownProps.value.key, dropdownProps.value.email);
     }
+
+    const startCall = () => {
+        microsoftTeams.initialize();
+        microsoftTeams.executeDeepLink("https://teams.microsoft.com/l/call/0/0?users=v-chetsh@microsoftTeams.com");
+    }
+
+    React.useEffect(() => {
+        getCandidateDetails()
+            .then((res) => {
+                console.log(res)
+                const data = res.data as ICandidateDetails[];
+                setCandidateDetails(data);
+                const names = data?.map((candidate, index) => {
+                    return {
+                        header: candidate.candidateName,
+                        key: index,
+                        email: candidate.email
+                    }
+                });
+                setCandidateNames(names);
+                props.setSelectedCandidateIndex(selectedIndex, data[selectedIndex]?.email);
+            })
+            .catch((ex) => {
+                console.log(ex)
+            });
+    }, [])
+
     return (
         <Card fluid aria-roledescription="card with basic details" className="basic-details-card">
             <Card.Header>
@@ -41,34 +71,72 @@ const BasicDetails = () => {
                             status="unknown"
                         />
                         <Flex column>
-                            <Text content="Aaron Brooker" weight="bold" />
-                            <Text content="Software Engineer | 4yrs 8 mos" size="small" />
+                            <Dropdown
+                                activeSelectedIndex={selectedIndex}
+                                items={candidateNames}
+                                onChange={handleNameChange}
+                                inline
+                                value={candidateDetails[selectedIndex]?.candidateName}
+                            />
+                            <Text content={candidateDetails[selectedIndex]?.role} size="small" />
                         </Flex>
                     </Flex>
                     <Flex >
-                        <Button icon={<ChatIcon />} iconOnly text title="Favourite" />
-                        <Button icon={<CallVideoIcon />} iconOnly text title="Download" />
+                        <Button icon={<ChatIcon />} iconOnly text title="Message" />
+                        <Button icon={<CallVideoIcon />} iconOnly text title="Call" />
                     </Flex>
                 </Flex>
                 <hr className="details-separator" />
             </Card.Header>
             <Card.Body>
-                <Flex gap="gap.small" padding="padding.medium">
-                    <Flex column className="details">
+                <Flex gap="gap.small">
+                    <Flex column className="details details-border">
                         <Text content="Contact" weight="bold" />
-                        <Text content="email" size="small" />
+                        <Flex column gap="gap.small">
+                            <Flex >
+                                <Button icon={<EmailIcon size="medium" />} iconOnly text title="Email" size="small" />
+                                <Text content={candidateDetails[selectedIndex]?.email} size="small" />
+                            </Flex>
+                            <Flex>
+                                <Button icon={<CallIcon size="medium" />} iconOnly text title="Call" size="small" onClick={startCall}/>
+                                <Text content={candidateDetails[selectedIndex]?.mobile} size="small" />
+                            </Flex>
+                        </Flex>
                     </Flex>
-                    <Flex column className="details">
+                    <Flex column className="details details-border">
                         <Text content="Skills" weight="bold" />
-                        <Text content="email" size="small" />
+                        <Text content={candidateDetails[selectedIndex]?.skills} size="small" />
                     </Flex>
-                    <Flex column className="details">
+                    <Flex column className="source-details details-border">
                         <Text content="Attachments" weight="bold" />
-                        <Text content="email" size="small" />
+                        <Flex column gap="gap.small">
+                            <Flex>
+                                <Button
+                                    icon={<PaperclipIcon />}
+                                    primary
+                                    text
+                                    content={'Resume'}
+                                    size="small"
+                                    className="iconText"
+                                    onClick={props.downloadFile} />
+                            </Flex>
+                            <Flex>
+                                <Button
+                                    icon={<PopupIcon />}
+                                    primary
+                                    text
+                                    content={'portfolio.com'}
+                                    size="small"
+                                    className="iconText"
+                                    onClick={() => {
+                                        window.open(candidateDetails[selectedIndex].linkedInUrl)
+                                    }} />
+                            </Flex>
+                        </Flex>
                     </Flex>
                     <Flex column className="source-details">
                         <Text content="Source" weight="bold" />
-                        <Text content="email" size="small" />
+                        <Text content={candidateDetails[selectedIndex]?.source} size="small" />
                     </Flex>
                 </Flex>
             </Card.Body>

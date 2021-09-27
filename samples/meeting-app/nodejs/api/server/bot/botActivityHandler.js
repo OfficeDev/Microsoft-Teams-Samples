@@ -13,6 +13,13 @@ class BotActivityHandler extends TeamsActivityHandler  {
           await context.sendActivity(MessageFactory.text(welcomeText));
           await next();
       });
+
+         // Activity called when there's a message in channel
+         this.onMessage(async (context, next) => {
+          var replyText = context.activity.text;
+          await context.sendActivity(MessageFactory.text(replyText));
+          await next();
+      });
     }
 }
 

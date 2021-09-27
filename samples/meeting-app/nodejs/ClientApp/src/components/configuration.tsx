@@ -14,7 +14,7 @@ const Configuration = () => {
         microsoftTeams.settings.registerOnSaveHandler(async (saveEvent: microsoftTeams.settings.SaveEvent) => {
             microsoftTeams.settings.setSettings({
                 entityId: tabId,
-                contentUrl: "https://973c-223-181-129-77.ngrok.io/details",
+                contentUrl: `${window.location.origin}/details`,
                 suggestedDisplayName: 'Recruiting',
             });
             saveEvent.notifySuccess();
