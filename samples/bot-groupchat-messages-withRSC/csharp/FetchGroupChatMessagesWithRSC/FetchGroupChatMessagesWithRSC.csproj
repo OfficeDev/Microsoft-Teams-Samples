@@ -18,4 +18,12 @@
     </Content>
   </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Images\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="wwwroot\chat.txt" />
+    </ItemGroup>
+
 </Project>

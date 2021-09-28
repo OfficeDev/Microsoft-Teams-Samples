@@ -6,12 +6,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Teams;
-using Microsoft.Bot.Connector;
-using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -61,53 +58,18 @@ namespace FetchGroupChatMessagesWithRSC.Bots
         /// </remarks>
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
             var activity = this.StripAtMentionText((Activity)turnContext.Activity);
             var userCommand = activity.Text;
-            if(userCommand!= "getchat")
-            {
-                this.createChatFile(activity);
-            }
-            else
+            if (userCommand == "getchat")
             {
                 // Run the Dialog with the new message Activity.
                 await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
-                //var chat = await _helper.GetGroupChatMessage(turnContext.Activity.Conversation.TenantId, _configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"], turnContext.Activity.Conversation.Id);
-
-                //string filename = "chat.txt";
-                //string filePath = Path.Combine(_env.ContentRootPath, $".\\public\\chat.txt");
-                //long fileSize = new FileInfo(filePath).Length;
-                //await SendFileCardAsync(turnContext, filename, fileSize, cancellationToken); 
-                // await turnContext.SendActivityAsync(MessageFactory.Text("hello"));
+            }
+            else
+            {
+                await turnContext.SendActivityAsync(MessageFactory.Text("type getchat to get archieved messages"));                   
             }
             return;
-        }
-
-        private async Task SendFileCardAsync(ITurnContext turnContext, string filename, long filesize, CancellationToken cancellationToken)
-        {
-            var consentContext = new Dictionary<string, string>
-            {
-                { "filename", filename },
-            };
-
-            var fileCard = new FileConsentCard
-            {
-                Description = "This is the file I want to send you",
-                SizeInBytes = filesize,
-                AcceptContext = consentContext,
-                DeclineContext = consentContext,
-            };
-
-            var asAttachment = new Attachment
-            {
-                Content = fileCard,
-                ContentType = FileConsentCard.ContentType,
-                Name = filename,
-            };
-
-            var replyActivity = turnContext.Activity.CreateReply();
-            replyActivity.Attachments = new List<Attachment>() { asAttachment };
-            await turnContext.SendActivityAsync(replyActivity, cancellationToken);
         }
 
         protected override async Task OnTeamsFileConsentAcceptAsync(ITurnContext<IInvokeActivity> turnContext, FileConsentCardResponse fileConsentCardResponse, CancellationToken cancellationToken)
@@ -116,9 +78,10 @@ namespace FetchGroupChatMessagesWithRSC.Bots
             {
                 JToken context = JObject.FromObject(fileConsentCardResponse.Context);
 
-                string filePath = Path.Combine(_env.ContentRootPath, $".\\public\\chat.txt");
+                string filePath = Path.Combine(_env.ContentRootPath, $".\\wwwroot\\chat.txt");
                 long fileSize = new FileInfo(filePath).Length;
                 var client = _clientFactory.CreateClient();
+
                 using (var fileStream = File.OpenRead(filePath))
                 {
                     var fileContent = new StreamContent(fileStream);
@@ -173,6 +136,7 @@ namespace FetchGroupChatMessagesWithRSC.Bots
             reply.TextFormat = "xml";
             await turnContext.SendActivityAsync(reply, cancellationToken);
         }
+
         private Activity StripAtMentionText(Activity activity)
         {
             if (activity == null)
@@ -191,53 +155,7 @@ namespace FetchGroupChatMessagesWithRSC.Bots
                         activity.Text = activity.Text.Replace(m.Text, "").Trim();
                 }
             }
-
             return activity;
-        }
-
-        private void createChatFile(Activity activity)
-        {
-            var fileName = Path.Combine(_env.ContentRootPath, $".\\public\\chat.txt");
-            // string fileName = "C:\\Users\\v-nikija\\source\\repos\\Microsoft-Teams-Samples\\samples\\bot-groupchat-messages-withRSC\\csharp\\FetchGroupChatMessagesWithRSC\\public\\chat.txt";
-            FileInfo fi = new FileInfo(fileName);
-            try
-            {
-                // Check if file already exists. If yes, delete it.     
-                if (fi.Exists)
-                {
-                    using (StreamWriter sw = fi.AppendText())
-                    {
-                        sw.WriteLine("from: {0}", activity.From.Name);
-                        sw.WriteLine("text: {0}", activity.Text);
-                        sw.WriteLine("at: {0}", activity.LocalTimestamp);
-                    }
-                }
-            }
-            catch (Exception Ex)
-            {
-                Console.WriteLine(Ex.ToString());
-            }
-
-        }
-
-        /// <summary>
-        /// Get token response on basis of state.
-        /// </summary>
-        private async Task<TokenResponse> GetTokenResponse(ITurnContext<IInvokeActivity> turnContext, string state, CancellationToken cancellationToken)
-        {
-            var magicCode = string.Empty;
-
-            if (!string.IsNullOrEmpty(state))
-            {
-                if (int.TryParse(state, out var parsed))
-                {
-                    magicCode = parsed.ToString();
-                }
-            }
-
-            var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
-            var tokenResponse = await userTokenClient.GetUserTokenAsync(turnContext.Activity.From.Id, _configuration["ConnectionName"], turnContext.Activity.ChannelId, magicCode, cancellationToken).ConfigureAwait(false);
-            return tokenResponse;
         }
     }
 }

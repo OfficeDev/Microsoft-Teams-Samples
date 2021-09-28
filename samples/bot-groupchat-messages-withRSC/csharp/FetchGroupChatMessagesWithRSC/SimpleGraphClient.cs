@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using System;
-using System.IO;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.Graph;
@@ -26,7 +25,7 @@ namespace FetchGroupChatMessagesWithRSC
         }
 
         //Fetching chat messages 
-        public async Task<IChatMessagesCollectionPage> GetUserChatMessages(string Chatid)
+        public async Task<IChatMessagesCollectionPage> GetGroupChatMessages(string Chatid)
         {
             var graphClient = GetAuthenticatedClient();
             var messages = await graphClient.Chats[Chatid].Messages

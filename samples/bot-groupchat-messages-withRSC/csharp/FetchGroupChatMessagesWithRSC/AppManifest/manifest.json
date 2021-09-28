@@ -30,7 +30,8 @@
         "personal",
         "groupchat"
       ],
-      "isNotificationOnly": false
+      "isNotificationOnly": false,
+      "supportsFiles": true
     }
   ],
   "accentColor": "#60A18E",
@@ -41,7 +42,7 @@
   ],
   "webApplicationInfo": {
     "id": "<<YOUR-MICROSOFT-APP-ID>>",
-    "resource": "https://RscBasedStoreApp",
+    "resource": "api://botid-<<YOUR-MICROSOFT-APP-ID>>",
     "applicationPermissions": [
       "ChatMessage.Read.Chat"
     ]

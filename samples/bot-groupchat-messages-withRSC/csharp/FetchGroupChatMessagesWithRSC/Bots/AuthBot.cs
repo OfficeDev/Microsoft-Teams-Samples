@@ -10,7 +10,6 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace FetchGroupChatMessagesWithRSC.Bots
 {
@@ -27,23 +26,19 @@ namespace FetchGroupChatMessagesWithRSC.Bots
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"Welcome to Authentication Bot on MSGraph. Type anything to get logged in. Type 'logout' to sign-out."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample your bot can fetch groupchat messages and send it to the user as a file"), cancellationToken);
                 }
             }
         }
 
         protected override async Task OnTokenResponseEventAsync(ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
         {
-           // Logger.LogInformation("Running dialog with Token Response Event Activity.");
-
             // Run the Dialog with the new Token Response Event Activity.
             await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
         }
 
         protected override async Task OnTeamsSigninVerifyStateAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
         {
-            //Logger.LogInformation("Running dialog with Teams Signin Verify State Activity.");
-
             // Run the Dialog with the new Teams Signin Verify State  Activity.
             await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
         }
