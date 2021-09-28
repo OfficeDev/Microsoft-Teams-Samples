@@ -39,10 +39,15 @@ class SsoOAuthHelpler {
             this.storage.write(storeItems);
         } catch (err) {
             console.log(err);
-            if (err instanceof Error && err.message.startsWith('Etag conflict')) {
-                // TODO: Should send 200 invoke response here???
+
+            const message = err.message?.toLowerCase();
+
+            // Do NOT proceed processing this message, some other thread or machine already has processed it.
+            // Send 200 invoke response.
+            if (message.includes('etag conflict') || message.includes('precondition is not met')) {
                 return false;
             }
+            
             throw err;
         }
         return true;
