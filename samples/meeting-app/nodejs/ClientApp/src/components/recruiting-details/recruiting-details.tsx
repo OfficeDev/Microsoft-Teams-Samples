@@ -37,24 +37,24 @@ const RecruitingDetails = () => {
     // Method to set the rating for a question.
     const setRating = (event: any) => {
         const currentQuestions = [...questionDetails];
-        const questToUpdate = currentQuestions.find(quest => quest.rowKey == event.currentTarget.id)!;
-        questToUpdate.rating = event.target.innerText;
+        const questToUpdate = currentQuestions.find(quest => quest.RowKey == event.currentTarget.id)!;
+        questToUpdate.Rating = event.target.innerText;
         setQuestionDetails(currentQuestions);
     }
 
     // Method to set comment on a question.
     const saveComment = (rowKey: string) => {
         const currentQuestions = [...questionDetails];
-        const questToUpdate = currentQuestions.find(quest => quest.rowKey == rowKey)!;
+        const questToUpdate = currentQuestions.find(quest => quest.RowKey == rowKey)!;
         const doc: any = document.getElementById(rowKey + "_textarea");
-        questToUpdate.comment = doc.value;
+        questToUpdate.Comment = doc.value;
         setQuestionDetails(currentQuestions);
     }
 
     const setShowAddComment = (rowKey: string, isShow: boolean) => {
         const currentQuestions = [...questionDetails];
-        const questToUpdate = currentQuestions.find(quest => quest.rowKey == rowKey)!;
-        questToUpdate.showAddComment = isShow ? true : false;
+        const questToUpdate = currentQuestions.find(quest => quest.RowKey == rowKey)!;
+        questToUpdate.ShowAddComment = isShow ? true : false;
         setQuestionDetails(currentQuestions);
     }
 
@@ -63,14 +63,14 @@ const RecruitingDetails = () => {
         microsoftTeams.getContext((context) => {
             getQuestions(context.meetingId!)
                 .then((res) => {
-                    console.log(res)
+                    console.log(res);
                     const questions = res.data as IQuestionDetails[];
                     const inMeetingQuestions = questions.map((questionDetail) => {
                         return {
                             ...questionDetail,
-                            rating: 0,
-                            comment: '',
-                            commentedBy: ''
+                            Rating: 0,
+                            Comment: '',
+                            CommentedBy: ''
                         }
                     })
                     setQuestionDetails(inMeetingQuestions)
@@ -85,18 +85,18 @@ const RecruitingDetails = () => {
     const submitFeedback = () => {
         const feedback = questionDetails.map((detail: IQuestionDetails) => {
             return {
-                question: detail.question,
-                rating: detail.rating,
-                comment: detail.comment
+                Question: detail.Question,
+                Rating: detail.Rating,
+                Comment: detail.Comment
             }
         })
         const feedbackJson = JSON.stringify(feedback);
         microsoftTeams.getContext((context) => {
             const feedbackDetails: IFeedbackDetails = {
-                meetingId: questionDetails[0].meetingId,
-                candidateEmail: currentCandidateEmail,
-                feedbackJson: feedbackJson,
-                interviewer: context?.userPrincipalName!
+                MeetingId: questionDetails[0].MeetingId,
+                CandidateEmail: currentCandidateEmail,
+                FeedbackJson: feedbackJson,
+                Interviewer: context?.userPrincipalName!
             }
             saveFeedback(feedbackDetails)
                 .then((res) => {
@@ -149,7 +149,7 @@ const RecruitingDetails = () => {
             </Flex>
 
             {/* Content for sidepanel/mobile view */}
-            <Flex hidden={window.innerWidth > 600} gap="gap.small" padding="padding.medium" className="container-mobile" column>
+            <Flex hidden={window.innerWidth < 600} gap="gap.small" padding="padding.medium" className="container-mobile" column>
                 <Menu
                     defaultActiveIndex={0}
                     items={mobileMenuItems}

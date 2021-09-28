@@ -80,11 +80,11 @@ const Questions = (): React.ReactElement => {
             }
             microsoftTeams.getContext((context) => {
                 const questDetails: IQuestionSet = {
-                    meetingId: context.meetingId!,
-                    question: question,
-                    setBy: context.userPrincipalName!,
-                    isDelete: 0,
-                    questionId: rowKey
+                    MeetingId: context.meetingId!,
+                    Question: question,
+                    SetBy: context.userPrincipalName!,
+                    IsDelete: 0,
+                    QuestionId: rowKey
                 };
                 setShowLoader(true);
                 // API call to save the question to storage.
@@ -118,11 +118,11 @@ const Questions = (): React.ReactElement => {
 
     const deleteQuestion = (questionDetail: any) => {
         const questionDetails: IQuestionSet = {
-            meetingId: questionDetail.meetingId,
-            question: questionDetail.question,
-            questionId: questionDetail.rowKey,
-            setBy: questionDetail.setBy,
-            isDelete: 1
+            MeetingId: questionDetail.MeetingId,
+            Question: questionDetail.Question,
+            QuestionId: questionDetail.RowKey,
+            SetBy: questionDetail.SetBy,
+            IsDelete: 1
         }
         setShowLoader(true);
         // API call to save the question to storage.
@@ -168,14 +168,14 @@ const Questions = (): React.ReactElement => {
                                 <Card.Body>
                                     <Flex gap="gap.smaller" column>
                                         <Flex gap="gap.smaller" space="between">
-                                            <Text content={questionDetail.question} />
+                                            <Text content={questionDetail.Question} />
                                             <Tooltip
                                                 trigger={<MoreIcon />}
                                                 content={
                                                     <Flex column gap="gap.smaller">
                                                         <Flex >
                                                             <Button icon={<EditIcon />} text content="Edit" className="editIcon"
-                                                             onClick={() => editQuestionsTaskModule(questionDetail.question, questionDetail.rowKey)} />
+                                                             onClick={() => editQuestionsTaskModule(questionDetail.Question, questionDetail.RowKey)} />
                                                         </Flex>
                                                         <Flex>
                                                             <Button icon={<CallControlStopPresentingNewIcon />} text content="Delete" onClick={() => deleteQuestion(questionDetail)} />

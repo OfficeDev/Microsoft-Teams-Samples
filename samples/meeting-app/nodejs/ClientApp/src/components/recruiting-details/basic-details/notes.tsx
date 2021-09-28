@@ -31,9 +31,9 @@ const Notes = (props: INotesProps) => {
             microsoftTeams.getContext((context) => {
                 // The note details to save.
                 const noteDetails: INoteDetails = {
-                    candidateEmail: props.currentCandidateEmail,
-                    note: note,
-                    addedBy: context.userPrincipalName!
+                    CandidateEmail: props.currentCandidateEmail,
+                    Note: note,
+                    AddedBy: context.userPrincipalName!
                 };
 
                 // API call to save the question to storage.
@@ -52,9 +52,7 @@ const Notes = (props: INotesProps) => {
     const loadNotes = () => {
         getNotes(props.currentCandidateEmail)
             .then((res) => {
-                console.log(res)
                 const notes = res.data as INoteDetails[];
-                console.log(notes);
                 setNotes(notes)
             })
             .catch((ex) => {
@@ -88,17 +86,17 @@ const Notes = (props: INotesProps) => {
                     {notes.length == 0 && <Text content="No notes yet" />}
                     {
                         notes.length > 0 && notes.map((noteDetail: INoteDetails, index) => {
-                            let timestamp = new Date(noteDetail.timestamp as string);
+                            let timestamp = new Date(noteDetail.Timestamp as string);
                             let formatted_date = timestamp.getFullYear() + "-" +
                                 (timestamp.getMonth() + 1) + "-" +
                                 timestamp.getDate() + " " + timestamp.getHours() + ":" + timestamp.getMinutes()
                             return (
                                 <Flex column key={index} padding="padding.medium">
                                     <Flex gap="gap.small">
-                                        <Text content={noteDetail.addedByName} weight="bold" title={noteDetail.addedBy} />
+                                        <Text content={noteDetail.AddedByName} weight="bold" title={noteDetail.AddedBy} />
                                         <Text content={formatted_date} weight="light" />
                                     </Flex>
-                                    <Text content={noteDetail.note} />
+                                    <Text content={noteDetail.Note} />
                                 </Flex>
                             )
                         })

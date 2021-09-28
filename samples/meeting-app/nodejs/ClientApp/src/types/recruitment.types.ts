@@ -1,30 +1,30 @@
 export interface IQuestionDetails {
-    eTag: string,
-    isDelete: number,
-    meetingId: string,
-    partitionKey: string,
-    question: string,
-    rowKey: string,
-    setBy: string,
-    timestamp: string,
-    rating?: number,
-    comment?: string,
-    commentedBy?: string,
-    showAddComment?: boolean
+    ETag: string,
+    IsDelete: number,
+    MeetingId: string,
+    PartitionKey: string,
+    Question: string,
+    RowKey: string,
+    SetBy: string,
+    Timestamp: string,
+    Rating?: number,
+    Comment?: string,
+    CommentedBy?: string,
+    ShowAddComment?: boolean
 }
 
 export interface INoteDetails {
-  candidateEmail: string,
-  addedBy: string,
-  addedByName?: string,
-  note: string,
-  timestamp?: string
+  CandidateEmail: string,
+  AddedBy: string,
+  AddedByName?: string,
+  Note: string,
+  Timestamp?: string
 }
 
 // Interface for feedback submiited for questions.
 export interface IFeedbackDetails {
-    meetingId: string,
-    candidateEmail: string,
-    feedbackJson: string,
-    interviewer: string
+    MeetingId: string,
+    CandidateEmail: string,
+    FeedbackJson: string,
+    Interviewer: string
   }

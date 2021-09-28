@@ -14,11 +14,11 @@ export interface ICandidateDetails {
 }
 
 export interface IQuestionSet {
-  meetingId: string;
-  questionId?: string,
-  question: string;
-  setBy: string;
-  isDelete: number;
+  MeetingId: string;
+  QuestionId?: string,
+  Question: string;
+  SetBy: string;
+  IsDelete: number;
 }
 
 export interface IAssetDetails {

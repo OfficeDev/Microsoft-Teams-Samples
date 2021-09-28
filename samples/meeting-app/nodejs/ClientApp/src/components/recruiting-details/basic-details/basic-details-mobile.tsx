@@ -48,7 +48,7 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
             .then((res) => {
                 console.log(res)
                 const data = res.data as ICandidateDetails[];
-                setSkills(data[props.selectedIndex].skills.split(','));
+                setSkills(data[props.selectedIndex].Skills.split(','));
                 setCandidateDetails(data);
             })
             .catch((ex) => {
@@ -71,18 +71,18 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
                             status="unknown"
                         />
                         <Flex column>
-                            <Text content={candidateDetails[props.selectedIndex]?.candidateName} />
-                            <Text content={candidateDetails[props.selectedIndex]?.role} size="small" className="roleText" />
+                            <Text content={candidateDetails[props.selectedIndex]?.CandidateName} />
+                            <Text content={candidateDetails[props.selectedIndex]?.Role} size="small" className="roleText" />
                         </Flex>
                     </Flex>
                     <Flex column>
                         <Flex gap="gap.small">
                             <Text content="Experience" size="small" className="expLabel" />
-                            <Text content={candidateDetails[props.selectedIndex]?.experience} size="small" />
+                            <Text content={candidateDetails[props.selectedIndex]?.Experience} size="small" />
                         </Flex>
                         <Flex gap="gap.small">
                             <Text content="Education" size="small" />
-                            <Text content={candidateDetails[props.selectedIndex]?.education} size="small" className="education" />
+                            <Text content={candidateDetails[props.selectedIndex]?.Education} size="small" className="education" />
                         </Flex>
                     </Flex>
                     <Flex column>
@@ -100,10 +100,10 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
                         <Header as="h5" content="Links" className="subHeaders" />
                         <Flex gap="gap.small" className="linkIcons">
                             <img src={LinkedInLogo} alt="Linked in icon" onClick={() => {
-                                window.open(candidateDetails[props.selectedIndex].linkedInUrl)
+                                window.open(candidateDetails[props.selectedIndex].LinkedInUrl)
                             }} />
                             <img src={TwitterLogo} alt="Twitter icon" onClick={() => {
-                                window.open(candidateDetails[props.selectedIndex].twitterUrl)
+                                window.open(candidateDetails[props.selectedIndex].TwitterUrl)
                             }} />
                         </Flex>
                         <Flex gap="gap.small">
