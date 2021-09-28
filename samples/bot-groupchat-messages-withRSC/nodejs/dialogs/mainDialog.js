@@ -12,6 +12,7 @@ const { SsoOAuthPrompt } = require('./ssoOAuthPrompt');
 const { SimpleGraphClient } = require('../simpleGraphClient');
 const { polyfills } = require('isomorphic-fetch');
 const { CardFactory, MessageFactory } = require('botbuilder-core');
+const fs = require('fs')
 
 class MainDialog extends LogoutDialog {
     constructor() {
@@ -64,9 +65,24 @@ class MainDialog extends LogoutDialog {
         } else {
             const client = new SimpleGraphClient(tokenResponse.token);
             const me = await client.getMessages(stepContext.context._activity.conversation.id);
-            console.log(me);
+            console.log(me.value);
+            this.createFile(me.value);
+            this.sendFile();
         }
         return await stepContext.endDialog();
+    }
+
+    createFile(data) {
+        const stream = fs.createWriteStream('../nodejs/public/chat.txt', { flags: 'a' });
+        data.map((element) => {
+            stream.write(`from:${element.from.user != null ? element.from.user.displayName : element.from.application.displayName}\n`);
+            stream.write(`from:${element.body.content}\n`);
+            stream.write(`at:${element.lastModifiedDateTime}\n`)
+        });
+    }
+
+    sendFile(){
+        
     }
 }
 
