@@ -12,6 +12,20 @@ const questionsHandler = require('./data/questions')
 const notesHandler = require('./data/notes')
 const feedbackHandler = require('./data/feedback')
 
+// Import required bot services.
+// See https://aka.ms/bot-services to learn more about the different parts of a bot.
+const { AdapterRef } = require('./api/botController');
+const { ConversationRef } = require('./bot/botActivityHandler');
+
+// This bot's main dialog.
+const { BotActivityHandler } = require('./bot/botActivityHandler');
+const { CardFactory } = require('botbuilder');
+
+// Create the main dialog.
+const conversationReferences = {};
+const bot = new BotActivityHandler(conversationReferences);
+const cardHelper = require('./cards/cardHelper')
+
 server.use(cors());
 server.use(express.json());
 server.use(express.urlencoded({
@@ -71,11 +85,21 @@ server.post('/api/Notes', (req, res) => {
 });
 
 server.get('/api/Candidate/file', (req, res) => {
-    res.json({ error: 'Route not found' });
+    let filePath = path.join(__dirname, "./files/test.pdf");
+    res.download(filePath);
 });
 
-server.get('/api/Notify', (req, res) => {
-    res.json({ error: 'Route not found' });
+server.post('/api/Notify', async (req, res) => {
+    for (const conversationReference of Object.values(ConversationRef)) {
+        await AdapterRef.continueConversation(conversationReference, async turnContext => {
+            await turnContext.sendActivity({ attachments: [CardFactory.adaptiveCard(cardHelper.getCardForMessage(req.body.message))] });
+        });
+    }
+
+    res.setHeader('Content-Type', 'text/html');
+    res.writeHead(200);
+    res.write('<html><body><h1>Proactive messages have been sent.</h1></body></html>');
+    res.end();
 });
 
 server.listen(PORT, () => {

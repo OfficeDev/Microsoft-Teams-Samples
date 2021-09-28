@@ -34,3 +34,4 @@ const botHandler = (req, res) => {
 };
 
 module.exports = botHandler;
+exports.AdapterRef = adapter;

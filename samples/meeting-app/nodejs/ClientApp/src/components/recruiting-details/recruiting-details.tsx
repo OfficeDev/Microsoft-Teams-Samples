@@ -113,6 +113,7 @@ const RecruitingDetails = () => {
         // API call to download.
         download()
             .then((res) => {
+                debugger
                 var link = document.createElement("a")
                 var blob = new Blob([res.data as Blob], { type: res.headers["content-type"] });
                 const blobUrl = window.URL.createObjectURL(blob)
