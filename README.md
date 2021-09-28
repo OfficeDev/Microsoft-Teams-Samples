@@ -4,12 +4,29 @@
 >NOTE: These samples are designed to help understand Microsoft Teams platform capabilities and scenarios. If you are looking for production ready apps then please visit [App Templates for Microsoft Teams](https://docs.microsoft.com/microsoftteams/platform/samples/app-templates)
 
 
+## Try it yourself - experience the Apps in your Microsoft Teams client
+
+Here are all the samples which are deployed on Microsoft Azure and you can try it yourself by uploading respective app packages (.zip files links below) to one of your teams and/or as a personal app. (Sideloading must be enabled for your tenant; [see steps here](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading).) These apps are running on the free Azure tier, so it may take a while to load (warm up) if you haven't used it recently and it goes back to sleep quickly if it's not being used. Rest assured, once it's loaded it's pretty snappy.
+
+
+|    | Sample Name        | Description                                                                                                                | Manifest| 
+|:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|
+|1|SSO Demo        | Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl |[View](/demo%20manifest/SSO-Demo.zip)     |
+|2|Complete sample Demo       | Complete sample to showcase various capabilities including bots, tabs, messaging extension |[View](/demo%20manifest/Complete-Sample.zip)     |
+|3|Task Module Demo       | Sample app showing off the Teams Task Module, a way to invoke custom code from a bot, a tab, or both |[View](/demo%20manifest/Task-Module.zip)     |
+|4|Connectors        | Sample Office 365 Connector generating notifications to teams channel. |[View](/demo%20manifest/Connector.zip)     |
+|5|Tabs with Adaptive Cards  | Microsoft Teams tab sample code which demonstrates how to Build tabs with Adaptive Cards. |[View](/demo%20manifest/JSON-based-Tabs.zip)     |
+|6|Meetings Stage View Demo  | Enable and configure your apps for Teams meetings to use in stage view. |[View](/demo%20manifest/Meetings-StageView.zip)     |
+|7|Meeting Events | Microsoft Teams sample app to get real time meeting events. |[View](/demo%20manifest/Meetings-Events.zip)     |
+|8|Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. |[View](/demo%20manifest/Bot-RSC.zip)     |
+
+
+
 ## [Getting Started - Samples and Tutorials](https://docs.microsoft.com/microsoftteams/platform/tutorials/get-started-dotnet-app-studio)
 
 |    | Sample Name        | Description                                                                                                                | C#    | TypeScript   
 |:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|
 |1|Hello World            | Microsoft Teams hello world sample app.                                           |[View][app-hello-world#cs]     |[View][app-hello-world#ts]
-|2|App Complete Sample    | Sample covering multiple scenarios - dialogs, ME, and facebook auth.                                               |[View][app-complete-sample#cs]     |[View][app-complete-sample#js]
 
 ## [Tabs samples](https://docs.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
 |    | Sample Name        | Description                                                                      | C#    | TypeScript   | JavaScript
@@ -17,7 +34,7 @@
 |1|Personal tabs            | Sample app showing custom personal Tab with ASP. NET Core                      |[MVC][personal-tab#cs#mvc], [Razor][personal-tab#cs#razor]     | [Yeoman Generator](https://docs.microsoft.com/microsoftteams/platform/tabs/quickstarts/create-personal-tab-node-yeoman#generate-your-project) |
 |2|Personal tab quick-start| Sample personal tab quick-start app.                                            |                               |[View][personal-tab-quickstart#ts]|[View][personal-tab-quickstart#js]
 |3|Personal tab with SSO quick-start| Sample personal tab with SSO hello world app.                          |[View][personal-tab-sso-quickstart#csharp]|[View][personal-tab-sso-quickstart#ts]|[View][personal-tab-sso-quickstart#js]
-|4|Channel and group tabs   | Sample app showing custom group and channel Tab with ASP. NET Core                                    |[MVC][group-channel-tab#cs#mvc], [Razor][group-channel-tab#cs#razor]     | [Yeoman Generator](https://docs.microsoft.com/microsoftteams/platform/tabs/quickstarts/create-channel-group-tab-node-yeoman#generate-your-project) |
+|4|Channel and group tabs   | Sample app showing custom group and channel Tab with ASP. NET Core                                    |[MVC][group-channel-tab#cs#mvc], [Razor][group-channel-tab#cs#razor]     | [Yeoman Generator](https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-yeoman) |
 |5|Channel and group tab quick-start| Sample channel and group tab hello world app.                          |                               |[View][group-tab-quickstart#ts]|[View][group-tab-quickstart#js]
 |6|Channel and group tab with SSO quick-start| Sample channel and group tab with SSO hello world app.        |[View][group-tab-sso-quickstart#csharp]|[View][group-tab-sso-quickstart#ts]|[View][group-tab-sso-quickstart#js]
 |7|SPFx Tab | Sample app showing Microsoft Teams tabs using SharePoint Framework                                    |   | [View][group-channel-tab#ts#spfx] |
@@ -116,7 +133,7 @@
 |:--:|:------------------|:---------------------------------------------------------------------------------------------------|:--------|:-------------|
 |1|Task Modules          | Sample app showing off the Teams Task Module, a way to invoke custom code from a bot, a tab, or both! |[View][app-task-module#cs]     |[View][app-task-module#ts]
 |2|Authentication        | Sample illustrating seamless inline authentication for Microsoft Teams apps.                      | | [View][app-auth#ts]
-|3|Complete Samples      | A template for building complex bots (SDK V3) for Microsoft Teams.                                      |[View][app-complete#cs]        |[View][app-complete#ts]
+|3|Complete Samples      | Sample covering multiple scenarios - dialogs, ME, and facebook auth.                                      |[View][app-complete#cs]        |[View][app-complete#ts]
 |4|Meetings Extensibility | Microsoft Teams meeting extensibility sample: token passing |[View][meetings-token-app#cs]     |[View][meetings-token-app#js]
 |5|Meetings Content Bubble Bot | Microsoft Teams meeting extensibility sample for iteracting with Content Bubble Bot in-meeting |[View][meetings-content-bubble#cs]    |[View][meetings-content-bubble#js]
 |6|Meetings SidePanel | Microsoft Teams meeting extensibility sample for iteracting with Side Panel in-meeting |[View][meetings-sidepanel#cs]     | [View][meetings-sidepanel#js]
@@ -128,8 +145,6 @@
 |12|Meeting Events | Get real time meeting events  |[View][meetings-events#cs] | [View][meetings-events#js] |
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
-[app-complete-sample#cs]:samples/app-complete-sample/csharp
-[app-complete-sample#js]:samples/app-complete-sample/nodejs-v4
 [app-hello-world#ts]:samples/app-hello-world/nodejs
 [personal-tab-quickstart#ts]:samples/tab-personal-quickstart/ts
 [personal-tab-quickstart#js]:samples/tab-personal-quickstart/js
