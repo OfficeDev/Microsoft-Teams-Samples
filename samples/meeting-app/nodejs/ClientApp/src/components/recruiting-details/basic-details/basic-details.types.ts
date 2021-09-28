@@ -1,16 +1,16 @@
 export interface ICandidateDetails {
-  attachments: string;
-  candidateName: string;
-  role: string;
-  email: string;
-  experience: string;
-  mobile: string;
-  skills: string;
-  source: string;
-  education: string;
-  resumeUrl: string;
-  linkedInUrl: string;
-  twitterUrl: string;
+  Attachments: string;
+  CandidateName: string;
+  Role: string;
+  Email: string;
+  Experience: string;
+  Mobile: string;
+  Skills: string;
+  Source: string;
+  Education: string;
+  ResumeUrl: string; 
+  LinkedInUrl: string;
+  TwitterUrl: string;
 }
 
 export interface IQuestionSet {

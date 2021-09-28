@@ -41,18 +41,18 @@ const BasicDetails = (props: IBasicDetailsProps) => {
     React.useEffect(() => {
         getCandidateDetails()
             .then((res) => {
-                console.log(res)
+                debugger;
                 const data = res.data as ICandidateDetails[];
                 setCandidateDetails(data);
                 const names = data?.map((candidate, index) => {
                     return {
-                        header: candidate.candidateName,
+                        header: candidate.CandidateName,
                         key: index,
-                        email: candidate.email
+                        email: candidate.Email
                     }
                 });
                 setCandidateNames(names);
-                props.setSelectedCandidateIndex(selectedIndex, data[selectedIndex]?.email);
+                props.setSelectedCandidateIndex(selectedIndex, data[selectedIndex]?.Email);
             })
             .catch((ex) => {
                 console.log(ex)
@@ -76,9 +76,9 @@ const BasicDetails = (props: IBasicDetailsProps) => {
                                 items={candidateNames}
                                 onChange={handleNameChange}
                                 inline
-                                value={candidateDetails[selectedIndex]?.candidateName}
+                                value={candidateDetails[selectedIndex]?.CandidateName}
                             />
-                            <Text content={candidateDetails[selectedIndex]?.role} size="small" />
+                            <Text content={candidateDetails[selectedIndex]?.Role} size="small" />
                         </Flex>
                     </Flex>
                     <Flex >
@@ -95,17 +95,17 @@ const BasicDetails = (props: IBasicDetailsProps) => {
                         <Flex column gap="gap.small">
                             <Flex >
                                 <Button icon={<EmailIcon size="medium" />} iconOnly text title="Email" size="small" />
-                                <Text content={candidateDetails[selectedIndex]?.email} size="small" />
+                                <Text content={candidateDetails[selectedIndex]?.Email} size="small" />
                             </Flex>
                             <Flex>
                                 <Button icon={<CallIcon size="medium" />} iconOnly text title="Call" size="small" onClick={startCall}/>
-                                <Text content={candidateDetails[selectedIndex]?.mobile} size="small" />
+                                <Text content={candidateDetails[selectedIndex]?.Mobile} size="small" />
                             </Flex>
                         </Flex>
                     </Flex>
                     <Flex column className="details details-border">
                         <Text content="Skills" weight="bold" />
-                        <Text content={candidateDetails[selectedIndex]?.skills} size="small" />
+                        <Text content={candidateDetails[selectedIndex]?.Skills} size="small" />
                     </Flex>
                     <Flex column className="source-details details-border">
                         <Text content="Attachments" weight="bold" />
@@ -129,14 +129,14 @@ const BasicDetails = (props: IBasicDetailsProps) => {
                                     size="small"
                                     className="iconText"
                                     onClick={() => {
-                                        window.open(candidateDetails[selectedIndex].linkedInUrl)
+                                        window.open(candidateDetails[selectedIndex].LinkedInUrl)
                                     }} />
                             </Flex>
                         </Flex>
                     </Flex>
                     <Flex column className="source-details">
                         <Text content="Source" weight="bold" />
-                        <Text content={candidateDetails[selectedIndex]?.source} size="small" />
+                        <Text content={candidateDetails[selectedIndex]?.Source} size="small" />
                     </Flex>
                 </Flex>
             </Card.Body>

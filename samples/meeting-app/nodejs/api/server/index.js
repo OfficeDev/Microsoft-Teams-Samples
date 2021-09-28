@@ -7,8 +7,7 @@ require('dotenv').config({ path: ENV_FILE });
 const PORT = process.env.PORT || 3978;
 const server = express();
 
-const httpProxy = require('http-proxy');
-const proxy = httpProxy.createServer({});
+const candidateRepo = require('./data/candidate')
 
 server.use(cors());
 server.use(express.json());
@@ -18,17 +17,10 @@ server.use(express.urlencoded({
 
 server.use('/api', require('./api'));
 
-server.get('/configure', (req, res) => {
-    res.setHeader('Content-Security-Policy', 'frame-src blob: data: https: mailto: ms-appx-web: ms-excel: ms-powerpoint: ms-visio: ms-word: onenote: pdf: local.teams.office.com:* local.teams.live.com:* localhost:* msteams: sip: sips: ms-whiteboard-preview:');
-    res.redirect('http://localhost:3000/configure');
-});
-
-server.get('/details', (req, res) => {
-    proxy.web(req, res, { target: 'http://localhost:3000/details' });
-});
-
-server.get('/api/candidate', (req, res) => {
-    res.json({ error: 'Route not found' });
+server.get('/api/candidate', async (req, res) => {
+    candidateRepo.getCandidateDetails(function(response) {
+        res.send(response);
+    });
 });
 
 server.get('/api/Question/insertQuest', (req, res) => {

@@ -1,9 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
 import { INoteDetails, IFeedbackDetails } from '../../../types/recruitment.types';
-import { IAssetDetails, IQuestionSet } from '../basic-details/basic-details.types';
+import { IAssetDetails, ICandidateDetails, IQuestionSet } from '../basic-details/basic-details.types';
 
 // API call to get Candidate details.
-export function getCandidateDetails(): Promise<AxiosResponse<unknown>> {
+export function getCandidateDetails(): Promise<AxiosResponse<ICandidateDetails[]>> {
   return axios.get(`${window.location.origin}/api/Candidate`);
 }
 
