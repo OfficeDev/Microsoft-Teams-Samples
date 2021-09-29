@@ -24,7 +24,7 @@ const Configuration = () => {
 
     return (
         <div className="config-container">
-            Meeting App
+            Please click on Save to configure this tab
         </div>
     )
 }

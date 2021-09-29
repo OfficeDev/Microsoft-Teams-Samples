@@ -1,14 +1,9 @@
-.container{
-    background-color: #f0f0f0;
-}
-
 .detailsContainer{
     width: 60vw;
 }
 
 .questionsContainer{
     width: 40vw;
-    background-color: #fff;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -34,22 +29,18 @@
 
 .basic-details-card{
     min-height: 30vh;
-    background-color: #fff !important;
 }
 
 .timeline-card{
     min-height: 40vh;
-    background-color: #fff !important;
 }
 
 .notes-card{
     min-height: 16vh;
-    background-color: #fff !important;
 }
 
 .questionsCard{
     height: 15vh !important;
-    background-color: #fff !important;
     border: 1px solid #f5f5f5 !important;
 }
 
@@ -96,16 +87,6 @@
 
   .questionsHeader{
       margin: 0;
-  }
-
-  .defaultBtn{
-    background-color: #333333 !important;
-    color: #fff !important;
-  }
-
-  .selectedBtn{
-    background-color: #56599f !important;
-    color: #fff !important;
   }
 
   .editIcon{

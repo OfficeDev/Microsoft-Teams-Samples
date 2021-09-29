@@ -2,31 +2,6 @@ import { Flex, Card, Text, NotesIcon } from '@fluentui/react-northstar'
 import "../../recruiting-details/recruiting-details.css"
 
 const Timeline = () => {
-    const rowsPlain = [
-        {
-            key: 1,
-            items: [
-                {
-
-                    key: '1-1',
-                },
-                {
-                    content: 'Roman van von der Longername',
-                    key: '1-2',
-                    id: 'name-1',
-                },
-                {
-                    content: 'None',
-                    key: '1-3',
-                },
-                {
-                    content: '30 years',
-                    key: '1-4',
-                    id: 'age-1',
-                },
-            ]
-        }
-    ];
     return (
         <Card fluid aria-roledescription="card with basic details" className="timeline-card">
             <Card.Header>
