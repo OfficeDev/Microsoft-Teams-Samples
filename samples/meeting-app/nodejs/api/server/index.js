@@ -88,7 +88,6 @@ server.post('/api/Notify', async (req, res) => {
             await turnContext.sendActivity({ attachments: [CardFactory.adaptiveCard(cardHelper.getCardForMessage(req.body.message))] });
         });
     }
-
     res.setHeader('Content-Type', 'text/html');
     res.writeHead(200);
     res.write('<html><body><h1>Proactive messages have been sent.</h1></body></html>');
