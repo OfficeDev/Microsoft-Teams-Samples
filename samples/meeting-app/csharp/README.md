@@ -6,6 +6,10 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 
 ![Details](MeetingApp/Images/details.png)
 
+![Sidepanel Overview](MeetingApp/Images/sidepanel_overview.png)
+
+![Sidepanel Questions](MeetingApp/Images/sidepanel_questions.png)
+
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
