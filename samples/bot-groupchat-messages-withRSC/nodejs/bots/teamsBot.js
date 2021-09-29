@@ -7,19 +7,19 @@ const { SsoOAuthHelpler } = require('../SsoOAuthHelpler');
 
 class TeamsBot extends DialogBot {
     /**
-     *
-     * @param {ConversationState} conversationState
-     * @param {UserState} userState
-     * @param {Dialog} dialog
-     */
+    *
+    * @param {ConversationState} conversationState
+    * @param {UserState} userState
+    * @param {Dialog} dialog
+    */
     constructor(conversationState, userState, dialog) {
         super(conversationState, userState, dialog);
         this._ssoOAuthHelper = new SsoOAuthHelpler(process.env.connectionName, conversationState);
 
         this.onMembersAdded(async (context, next) => {
             const membersAdded = context.activity.membersAdded;
-            for (let cnt = 0; cnt < membersAdded.length; cnt++) {
-                if (membersAdded[cnt].id !== context.activity.recipient.id) {
+            for (let member = 0; member < membersAdded.length; member++) {
+                if (membersAdded[member].id !== context.activity.recipient.id) {
                     await context.sendActivity('Welcome to TeamsBot. Type anything to get logged in. Type \'logout\' to sign-out.');
                 }
             }

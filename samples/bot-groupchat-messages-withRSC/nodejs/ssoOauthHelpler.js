@@ -34,6 +34,7 @@ class SsoOAuthHelpler {
         const storeItem = {
             eTag: turnContext.activity.value.id
         };
+
         const storeItems = { [this.getStorageKey(turnContext)]: storeItem };
         try {
             this.storage.write(storeItems);
@@ -62,6 +63,7 @@ class SsoOAuthHelpler {
                 tokenExchangeRequest.connectionName,
                 turnContext.activity.from.id,
                 { token: tokenExchangeRequest.token });
+                
             console.log('tokenExchangeResponse: ' + JSON.stringify(tokenExchangeResponse));
         } catch (err) {
             console.log(err);

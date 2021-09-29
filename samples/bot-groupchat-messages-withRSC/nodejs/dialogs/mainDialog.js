@@ -24,6 +24,7 @@ class MainDialog extends LogoutDialog {
             title: 'Sign In',
             timeout: 300000
         }));
+
         this.addDialog(new WaterfallDialog(MAIN_WATERFALL_DIALOG, [
             this.promptStep.bind(this),
             this.loginStep.bind(this)
@@ -42,6 +43,7 @@ class MainDialog extends LogoutDialog {
         dialogSet.add(this);
         const dialogContext = await dialogSet.createContext(context);
         const results = await dialogContext.continueDialog();
+
         if (results.status === DialogTurnStatus.empty) {
             await dialogContext.beginDialog(this.id);
         }
@@ -59,28 +61,45 @@ class MainDialog extends LogoutDialog {
         // Get the token from the previous step. Note that we could also have gotten the
         // token directly from the prompt itself. There is an example of this in the next method.
         const tokenResponse = stepContext.result;
+
         if (!tokenResponse || !tokenResponse.token) {
             await stepContext.context.sendActivity('Login was not successful please try again.');
-        } else {
+        } 
+        else {
             const client = new SimpleGraphClient(tokenResponse.token);
             const me = await client.getMessages(stepContext.context._activity.conversation.id);
             this.createFile(me.value);
             await this.sendFileConsentCardAsync(stepContext.context);
         }
+
         return await stepContext.endDialog();
     }
 
-    createFile(data) {
-        const stream = fs.createWriteStream('../nodejs/public/chat.txt', { flags: 'a' });
-        data.map((element) => {
-            if (element.messageType == 'message') {
-                stream.write(`from:${element.from.user != null ? element.from.user.displayName : element.from.application.displayName}\n`);
-                stream.write(`from:${element.body.content}\n`);
-                stream.write(`at:${element.lastModifiedDateTime}\n`)
-            }
-        });
+    // Create archive messages file.
+    createFile(messages) {
+        fs.readFile('../nodejs/public/chat.txt', 'utf-8', function(err, data) {
+            if (err) throw err;
+         
+            var newValue = "";
+         if(data.toString() != ""){
+            fs.writeFile('../nodejs/public/chat.txt', newValue, 'utf-8', function(err, data) {
+                if (err) throw err;
+                console.log('Done!');
+            })
+         }
+
+         const stream = fs.createWriteStream('../nodejs/public/chat.txt', { flags: 'a' });
+         messages.map((element) => {
+             if (element.messageType == 'message') {
+                 stream.write(`from:${element.from.user != null ? element.from.user.displayName : element.from.application.displayName}\n`);
+                 stream.write(`from:${element.body.content}\n`);
+                 stream.write(`at:${element.lastModifiedDateTime}\n`)
+             }
+         });
+        })    
     }
 
+    // Send file consent card.
     async sendFileConsentCardAsync(context) {
         const filename = 'chat.txt';
         const stats = fs.statSync(path.join(FILES_DIR, filename));
@@ -107,6 +126,7 @@ class MainDialog extends LogoutDialog {
         }));
     }
 
+    // Create file consent card.
     sendFileCard(filename, filesize) {
         const consentContext = { filename: filename };
 
@@ -116,6 +136,7 @@ class MainDialog extends LogoutDialog {
             acceptContext: consentContext,
             declineContext: consentContext
         };
+
         const asAttachment = {
             content: fileCard,
             contentType: 'application/vnd.microsoft.teams.card.file.consent',

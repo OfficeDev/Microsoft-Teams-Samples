@@ -8,19 +8,22 @@ const axios = require('axios');
 const fs = require('fs');
 class DialogBot extends TeamsActivityHandler {
     /**
-     *
-     * @param {ConversationState} conversationState
-     * @param {UserState} userState
-     * @param {Dialog} dialog
-     */
+    *
+    * @param {ConversationState} conversationState
+    * @param {UserState} userState
+    * @param {Dialog} dialog
+    */
     constructor(conversationState, userState, dialog) {
         super();
+
         if (!conversationState) {
             throw new Error('[DialogBot]: Missing parameter. conversationState is required');
         }
+
         if (!userState) {
             throw new Error('[DialogBot]: Missing parameter. userState is required');
         }
+
         if (!dialog) {
             throw new Error('[DialogBot]: Missing parameter. dialog is required');
         }
@@ -34,7 +37,7 @@ class DialogBot extends TeamsActivityHandler {
             console.log('Running dialog with Message Activity.');
             var activity = this.removeMentionText(context._activity);
 
-            if(activity.text.trim() =="getchat")
+            if(activity.text.trim() =="getchat" || activity.text.trim() =="logout")
             // Run the Dialog with the new message Activity.
             await this.dialog.run(context, this.dialogState);
 
@@ -43,8 +46,8 @@ class DialogBot extends TeamsActivityHandler {
     }
 
     /**
-     * Override the ActivityHandler.run() method to save state changes after the bot logic completes.
-     */
+    * Override the ActivityHandler.run() method to save state changes after the bot logic completes.
+    */
     async run(context) {
         await super.run(context);
 
@@ -53,6 +56,9 @@ class DialogBot extends TeamsActivityHandler {
         await this.userState.saveChanges(context, false);
     }
 
+    /**
+    * Invoked when a file consent card activity is received.
+    */
     async handleTeamsFileConsentAccept(context, fileConsentCardResponse) {
         try {
             const fname = path.join(FILES_DIR, fileConsentCardResponse.context.filename);
@@ -73,35 +79,45 @@ class DialogBot extends TeamsActivityHandler {
         }
     }
 
+    /**
+    * Invoked when a file consent card is declined by the user.
+    */
     async handleTeamsFileConsentDecline(context, fileConsentCardResponse) {
         const reply = MessageFactory.text(`Declined. We won't upload file <b>${ fileConsentCardResponse.context.filename }</b>.`);
         reply.textFormat = 'xml';
         await context.sendActivity(reply);
     }
 
+    // Handle file upload.
     async fileUploadCompleted(context, fileConsentCardResponse) {
         const downloadCard = {
             uniqueId: fileConsentCardResponse.uploadInfo.uniqueId,
             fileType: fileConsentCardResponse.uploadInfo.fileType
         };
+
         const asAttachment = {
             content: downloadCard,
             contentType: 'application/vnd.microsoft.teams.card.file.info',
             name: fileConsentCardResponse.uploadInfo.name,
             contentUrl: fileConsentCardResponse.uploadInfo.contentUrl
         };
+
         const reply = MessageFactory.text(`<b>File uploaded.</b> Your file <b>${ fileConsentCardResponse.uploadInfo.name }</b> is ready to download`);
         reply.textFormat = 'xml';
         reply.attachments = [asAttachment];
+
         await context.sendActivity(reply);
     }
 
+    // Handle file upload failure.
     async fileUploadFailed(context, error) {
         const reply = MessageFactory.text(`<b>File upload failed.</b> Error: <pre>${ error }</pre>`);
         reply.textFormat = 'xml';
+
         await context.sendActivity(reply);
     }
 
+    // Remove mention text from the activity. 
     removeMentionText(activity) {
         var updatedActivity = activity;
 
