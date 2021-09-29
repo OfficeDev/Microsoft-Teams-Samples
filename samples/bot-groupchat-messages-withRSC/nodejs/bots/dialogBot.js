@@ -1,10 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const { TeamsActivityHandler } = require('botbuilder');
-const FILES_DIR = 'files';
+const { TeamsActivityHandler,MessageFactory } = require('botbuilder');
+const FILES_DIR = 'public';
 const path = require('path');
 const axios = require('axios');
+const fs = require('fs');
 class DialogBot extends TeamsActivityHandler {
     /**
      *

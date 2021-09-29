@@ -1,18 +1,18 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const { ConfirmPrompt, DialogSet, DialogTurnStatus, WaterfallDialog } = require('botbuilder-dialogs');
+const { DialogSet, DialogTurnStatus, WaterfallDialog } = require('botbuilder-dialogs');
 const { LogoutDialog } = require('./logoutDialog');
-
-const CONFIRM_PROMPT = 'ConfirmPrompt';
 const MAIN_DIALOG = 'MainDialog';
 const MAIN_WATERFALL_DIALOG = 'MainWaterfallDialog';
 const OAUTH_PROMPT = 'OAuthPrompt';
 const { SsoOAuthPrompt } = require('./ssoOAuthPrompt');
 const { SimpleGraphClient } = require('../simpleGraphClient');
 const { polyfills } = require('isomorphic-fetch');
-const { CardFactory, MessageFactory } = require('botbuilder-core');
-const fs = require('fs')
+const { TurnContext } = require('botbuilder');
+const FILES_DIR = 'public';
+const fs = require('fs');
+const path = require('path');
 
 class MainDialog extends LogoutDialog {
     constructor() {
@@ -24,7 +24,6 @@ class MainDialog extends LogoutDialog {
             title: 'Sign In',
             timeout: 300000
         }));
-        this.addDialog(new ConfirmPrompt(CONFIRM_PROMPT));
         this.addDialog(new WaterfallDialog(MAIN_WATERFALL_DIALOG, [
             this.promptStep.bind(this),
             this.loginStep.bind(this)
@@ -34,10 +33,10 @@ class MainDialog extends LogoutDialog {
     }
 
     /**
-     * The run method handles the incoming activity (in the form of a DialogContext) and passes it through the dialog system.
-     * If no dialog is active, it will start the default dialog.
-     * @param {*} dialogContext
-     */
+    * The run method handles the incoming activity (in the form of a DialogContext) and passes it through the dialog system.
+    * If no dialog is active, it will start the default dialog.
+    * @param {*} dialogContext
+    */
     async run(context, accessor) {
         const dialogSet = new DialogSet(accessor);
         dialogSet.add(this);
@@ -65,9 +64,8 @@ class MainDialog extends LogoutDialog {
         } else {
             const client = new SimpleGraphClient(tokenResponse.token);
             const me = await client.getMessages(stepContext.context._activity.conversation.id);
-            console.log(me.value);
             this.createFile(me.value);
-            this.sendFile();
+            await this.sendFileConsentCardAsync(stepContext.context);
         }
         return await stepContext.endDialog();
     }
@@ -75,14 +73,57 @@ class MainDialog extends LogoutDialog {
     createFile(data) {
         const stream = fs.createWriteStream('../nodejs/public/chat.txt', { flags: 'a' });
         data.map((element) => {
-            stream.write(`from:${element.from.user != null ? element.from.user.displayName : element.from.application.displayName}\n`);
-            stream.write(`from:${element.body.content}\n`);
-            stream.write(`at:${element.lastModifiedDateTime}\n`)
+            if (element.messageType == 'message') {
+                stream.write(`from:${element.from.user != null ? element.from.user.displayName : element.from.application.displayName}\n`);
+                stream.write(`from:${element.body.content}\n`);
+                stream.write(`at:${element.lastModifiedDateTime}\n`)
+            }
         });
     }
 
-    sendFile(){
-        
+    async sendFileConsentCardAsync(context) {
+        const filename = 'chat.txt';
+        const stats = fs.statSync(path.join(FILES_DIR, filename));
+        const fileSize = stats.size;
+        const members = [{
+            "aadObjectId": context._activity.from.aadObjectId,
+            "name": context._activity.from.name,
+            "id": context._activity.from.id
+        }];
+
+        await Promise.all(members.map(async (member) => {
+            const message = this.sendFileCard(filename, fileSize);
+
+            const ref = TurnContext.getConversationReference(context._activity);
+            ref.user = member;
+
+            await context.adapter.createConversation(ref, async (context) => {
+                const ref = TurnContext.getConversationReference(context._activity);
+
+                await context.adapter.continueConversation(ref, async (context) => {
+                    await context.sendActivity(message);
+                });
+            });
+        }));
+    }
+
+    sendFileCard(filename, filesize) {
+        const consentContext = { filename: filename };
+
+        const fileCard = {
+            description: 'This is the file I want to send you',
+            sizeInBytes: filesize,
+            acceptContext: consentContext,
+            declineContext: consentContext
+        };
+        const asAttachment = {
+            content: fileCard,
+            contentType: 'application/vnd.microsoft.teams.card.file.consent',
+            name: filename
+        };
+
+        const reply = { attachments: [asAttachment] };
+        return reply;
     }
 }
 

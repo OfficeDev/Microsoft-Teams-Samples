@@ -4,9 +4,9 @@
 const { Client } = require('@microsoft/microsoft-graph-client');
 
 /**
- * This class is a wrapper for the Microsoft Graph API.
- * See: https://developer.microsoft.com/en-us/graph for more information.
- */
+* This class is a wrapper for the Microsoft Graph API.
+* See: https://developer.microsoft.com/en-us/graph for more information.
+*/
 class SimpleGraphClient {
     constructor(token) {
         if (!token || !token.trim()) {
@@ -24,8 +24,8 @@ class SimpleGraphClient {
     }
 
     /**
-     * Collects information about the user in the bot.
-     */
+    * Collects information about the user in the bot.
+    */
     async getMessages(chatId) {
         return await this.graphClient
             .api('/chats/'+chatId+'/messages').version('beta')

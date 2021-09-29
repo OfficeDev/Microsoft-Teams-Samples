@@ -1,50 +1,50 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.8",
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.10/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.10",
     "version": "1.0.0",
     "id": "{TODO: MicrosoftAppId}",
-    "packageName": "com.microsoft.teams.extension",
+    "packageName": "com.microsoft.teams.botgroupchatrsc",
     "developer": {
-        "name": "Teams App, Inc.",
-        "websiteUrl": "https://example.azurewebsites.net",
-        "privacyUrl": "https://example.azurewebsites.net/privacy",
-        "termsOfUseUrl": "https://example.azurewebsites.net/termsofuse"
-    },
-    "icons": {
-        "color": "color.png",
-        "outline": "outline.png"
+      "name": "Microsoft",
+      "websiteUrl": "https://www.microsoft.com",
+      "privacyUrl": "https://www.microsoft.com/privacy",
+      "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
     },
     "name": {
-        "short": "Conversation Bot",
-        "full": "Conversation Bot"
+      "short": "RSC Groupchat Sample",
+      "full": "Groupchat Messages with RSC"
     },
     "description": {
-        "short": "Short description for Conversation Bot.",
-        "full": "Full description of Conversation Bot."
+      "short": "Receive groupchat messages with RSC",
+      "full": "This sample demos a bot with RSC permission"
     },
-    "accentColor": "#FFFFFF",
+    "icons": {
+      "outline": "outline.png",
+      "color": "color.png"
+    },
     "bots": [
-        {
-            "botId": "{TODO: MicrosoftAppId}",
-            "scopes": [
-                "team",
-        "personal",
-        "groupchat"
-            ],
-            "supportsFiles": true,
-            "isNotificationOnly": false
-        }
+      {
+        "botId": "{TODO: MicrosoftAppId}",
+        "scopes": [
+          "team",
+          "personal",
+          "groupchat"
+        ],
+        "isNotificationOnly": false,
+        "supportsFiles": true
+      }
     ],
-    "permissions": [
-        "identity",
-        "messageTeamMembers"
-    ],
+    "accentColor": "#60A18E",
+    "permissions": [ "identity", "messageTeamMembers" ],
     "validDomains": [
-        "token.botframework.com",
-        "*.ngrok.io"
+      "<<DOMAIN-NAME>>",
+      "token.botframework.com"
     ],
     "webApplicationInfo": {
-        "id": "{TODO: MicrosoftAppId}",
-        "resource": "api://botid-{TODO: MicrosoftAppId}"
+      "id": "{TODO: MicrosoftAppId}",
+      "resource": "api://botid-{TODO: MicrosoftAppId}",
+      "applicationPermissions": [
+        "ChatMessage.Read.Chat"
+      ]
     }
-}
+  }

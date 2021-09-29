@@ -64,7 +64,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |9| Universal bots  | Teams catering bot demonstrating how to use Universal bots in Teams | [View](samples/bot-teams-catering/csharp) |  | |
 |10| Sequential workflow adaptive cards | Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot. | [View][sequential#workflow#csharp] | [View][sequential#workflow#js]
 |11| Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. | [View][messageswithrsc#csharp] |[View][messageswithrsc#js]
-
+|12| Archive groupchat message with RSC permissions | Demonstrating on how a bot can archive groupchat messages with RSC and send it to user. |  |[View][groupchatmessageswithrsc#nodejs]|
 #### Additional samples
 
 |    | Sample Name | Description | .NET Core | JavaScript | 
@@ -218,6 +218,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 [messageswithrsc#csharp]:samples/bot-receive-channel-messages-withRSC/csharp
 [messageswithrsc#js]:samples/bot-receive-channel-messages-withRSC/nodejs
 [app-in-meeting#cs]:samples/app-in-meeting/csharp
+[groupchatmessageswithrsc#nodejs]:samples/bot-groupchat-messages-withRSC/nodejs
 
 [app-localization#cs]:samples/app-localization/csharp
 [app-localization#js]:samples/app-localization/nodejs

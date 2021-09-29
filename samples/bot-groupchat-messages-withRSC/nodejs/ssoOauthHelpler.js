@@ -37,14 +37,17 @@ class SsoOAuthHelpler {
         const storeItems = { [this.getStorageKey(turnContext)]: storeItem };
         try {
             this.storage.write(storeItems);
-        } catch (err) {
+        }
+        catch (err) {
             console.log(err);
+
             if (err instanceof Error && err.message.startsWith('Etag conflict')) {
                 // TODO: Should send 200 invoke response here???
                 return false;
             }
             throw err;
         }
+
         return true;
     }
 
@@ -96,20 +99,24 @@ class SsoOAuthHelpler {
     }
 
     getStorageKey(turnContext) {
+
         if (!turnContext || !turnContext.activity || !turnContext.activity.conversation) {
             throw new Error('Invalid context, can not get storage key!');
         }
+
         const activity = turnContext.activity;
         const channelId = activity.channelId;
         const conversationId = activity.conversation.id;
+
         if (activity.type !== ActivityTypes.Invoke || activity.name !== tokenExchangeOperationName) {
             throw new Error('TokenExchangeState can only be used with Invokes of signin/tokenExchange.');
         }
         const value = activity.value;
+
         if (!value || !value.id) {
             throw new Error('Invalid signin/tokenExchange. Missing activity.value.id.');
         }
-        return `${ channelId }/${ conversationId }/${ value.id }`;
+        return `${channelId}/${conversationId}/${value.id}`;
     }
 }
 
