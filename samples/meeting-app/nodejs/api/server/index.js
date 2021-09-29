@@ -16,14 +16,7 @@ const feedbackHandler = require('./data/feedback')
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
 const { AdapterRef } = require('./api/botController');
 const { ConversationRef } = require('./bot/botActivityHandler');
-
-// This bot's main dialog.
-const { BotActivityHandler } = require('./bot/botActivityHandler');
 const { CardFactory } = require('botbuilder');
-
-// Create the main dialog.
-const conversationReferences = {};
-const bot = new BotActivityHandler(conversationReferences);
 const cardHelper = require('./cards/cardHelper')
 
 server.use(cors());

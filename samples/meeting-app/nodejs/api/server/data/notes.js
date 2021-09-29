@@ -1,6 +1,7 @@
 const tableStore = require('azure-storage');
 const authStore = require('../keys');
 const authObject = new authStore();
+const { ConversationDataRef } = require('../bot/botActivityHandler');
 
 // unique identifiers for our PartitionKey
 const { v4: uuidv4 } = require('uuid')
@@ -32,8 +33,9 @@ function addNote(notesObj, callback) {
     if (notesObj != null) {
         notesObj.PartitionKey = notesObj.CandidateEmail;
         notesObj.RowKey = uuidv4();
-
-        // Use { echoContent: true } if you want to return the created item including the Timestamp & etag
+        notesObj.AddedByName = ConversationDataRef != null && ConversationDataRef.members.length > 0 
+        ? ConversationDataRef.members.find(entity => entity.email === notesObj.AddedBy).name
+        : "Unknown";
         tableClient.insertEntity(tableName, notesObj, function (error, result, response) {
             if (!error) {
                 return callback(response);
