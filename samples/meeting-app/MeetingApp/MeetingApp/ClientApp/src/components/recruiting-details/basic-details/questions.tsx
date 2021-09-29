@@ -37,6 +37,7 @@ const Questions = (): React.ReactElement => {
                 console.log("Some error occurred in the task module")
                 return
             }
+
             const questionsObject = JSON.parse(questionsJson);
             microsoftTeams.getContext((context) => {
                 const questDetails: IQuestionSet[] = questionsObject.map((question: any) => {
@@ -50,7 +51,6 @@ const Questions = (): React.ReactElement => {
                         };
                     }
                 })
-
 
                 // API call to save the question to storage.
                 saveQuestions(questDetails)

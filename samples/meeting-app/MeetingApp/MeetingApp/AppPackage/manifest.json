@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
   "manifestVersion": "1.9",
   "version": "1.0.0",
-  "id": "<<Your AppId>>",
+  "id": "<<App-ID>>",
   "packageName": "com.microsoft.teams.sample.meetingtoken",
   "showLoadingIndicator": false,
   "developer": {
@@ -25,7 +25,7 @@
   "accentColor": "#ffffff",
   "configurableTabs": [
     {
-      "configurationUrl": "<<URL>>/configure",
+      "configurationUrl": "<<BASE-URL>>/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -43,11 +43,11 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok.io"
+    "<<VALID DOMAIN>>"
   ],
   "bots": [
     {
-      "botId": "<<Your AppId>>",
+      "botId": "App-ID",
       "scopes": [
         "groupchat"
       ],

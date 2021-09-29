@@ -68,6 +68,7 @@ namespace MeetingApp.Controllers
                     ContentType = "text/html",
                     StatusCode = (int)HttpStatusCode.OK,
                 };
+
                 return Ok(result);
             }
             catch (Exception ex)
@@ -84,7 +85,6 @@ namespace MeetingApp.Controllers
         /// <returns></returns>
         private async Task BotCallback(ITurnContext turnContext, CancellationToken cancellationToken)
         {
-
             // If you encounter permission-related errors when sending this message, see
             // https://aka.ms/BotTrustServiceUrl
             await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForMessage()));

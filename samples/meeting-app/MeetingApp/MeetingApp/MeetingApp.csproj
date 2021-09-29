@@ -25,6 +25,7 @@
 
     <ItemGroup>
       <Folder Include="ClientApp\build" />
+      <Folder Include="Images\" />
     </ItemGroup>
 
 </Project>

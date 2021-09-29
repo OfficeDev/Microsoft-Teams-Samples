@@ -13,6 +13,9 @@ namespace MeetingApp.Model
         public string Note { get; set; }
     }
 
+    /// <summary>
+    /// Class with properties related to Roster info
+    /// </summary>
     public class RosterInfo
     {
         [JsonProperty("id")]

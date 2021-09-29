@@ -84,7 +84,6 @@ namespace MeetingApp
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseWebSockets();
@@ -102,7 +101,6 @@ namespace MeetingApp
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
-            // app.UseHttpsRedirection();
         }
     }
 }

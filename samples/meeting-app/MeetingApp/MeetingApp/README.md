@@ -1,8 +1,10 @@
-﻿# MeetingApp
+﻿## MeetingApp (HR recruitment) Sample
 
-Bot Framework v4 echo bot sample.
+This sample illustrates a meeting experience for HR recruitment.
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that accepts input from the user and echoes it back.
+
+![Details](MeetingApp/Images/details.png)
 
 ## Prerequisites
 
@@ -13,21 +15,52 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
   dotnet --version
   ```
 
-## To try this sample
+- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+  ```bash
+  # run ngrok locally
+  ngrok http -host-header=localhost 3978
+  ```
 
-- In a terminal, navigate to `MeetingApp`
+- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+
+
+## To try this sample
+- Create a Bot Registration
+   In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2#create-the-resource).
+ 
+- Clone the repository
+   ```bash
+   git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+   ```
+
+- In a terminal, navigate to `samples/meeting-app/csharp`
 
     ```bash
     # change into project folder
     cd # MeetingApp
     ```
+- Run ngrok - point to port 3978
 
-- Run the bot from a terminal or from Visual Studio, choose option A or B.
+    ```bash
+    # ngrok http -host-header=rewrite 3978
+    ```
+- Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
+   - `<<App-ID>>` with some unique GUID   
+   - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
+   - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
+
+- Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 4.
+
+- Modify the `/appsettings.json` and fill in the `{{ MicrosoftAppId }}`,`{{ MicrosoftAppPassword }}` with the id from step 1.
+
+- Modify the `/appsettings.json` and fill in the `{{ StorageConnectionString }}`
+
+- Run the app from a terminal or from Visual Studio, choose option A or B.
 
   A) From a terminal
 
   ```bash
-  # run the bot
+  # run the app
   dotnet run
   ```
 
@@ -39,21 +72,51 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
   - Select `MeetingApp.csproj` file
   - Press `F5` to run the project
 
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
+   - Select Add to meeting in the pop-up dialog box. Your app is uploaded to Teams.
+
+## Features of this sample
+
+1) Details page:
+   The details page shows basic information of the candidate, timeline, Questions (that can be added for meeting), Notes (provided by peers)
+
+   ![Details](MeetingApp/Images/details.png)
+
+2) Action on Questions:
+   The interviewer can Add/Edit or Delete question.
+
+   ![Add Question](MeetingApp/Images/add_question.png)
+
+   - Add Questions Task Module
+   ![Add Question Task](MeetingApp/Images/add_task.png)
+
+   ![Edit Delete Question](MeetingApp/Images/edit_questions.png)
+
+   - Edit Question Task Module
+   ![Edit Task](MeetingApp/Images/edit_task.png)
+
+3) Add Notes:
+   The interviewer can add notes that will appear to other peers.
+
+   ![Add Notes](MeetingApp/Images/add_note.png)
+
+   Add Note Task Module
+   ![Add Notes](MeetingApp/Images/add_note_task.png)
+
+4) Sidepanel:
+    The in-meeting side panel shows two sections as follows:
+    A) Overview: Shows the basic details of the candidate.
+    B) Questions: The questions set in the details page appear here. The interviewer can use this to provide rating and submit final feedback.
+
+
 ## Testing the bot using Bot Framework Emulator
 
 [Bot Framework Emulator](https://github.com/microsoft/botframework-emulator) is a desktop application that allows bot developers to test and debug their bots on localhost or running remotely through a tunnel.
 
 - Install the Bot Framework Emulator version 4.5.0 or greater from [here](https://github.com/Microsoft/BotFramework-Emulator/releases)
-
-### Connect to the bot using Bot Framework Emulator
-
-- Launch Bot Framework Emulator
-- File -> Open Bot
-- Enter a Bot URL of `http://localhost:3978/api/messages`
-
-## Deploy the bot to Azure
-
-To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 
 ## Further reading
 
