@@ -7,8 +7,10 @@ const authObject = new authStore();
 
 const tableClient = tableStore.createTableService(authObject.accountName, authObject.accessKey);
 
+// The table name in table storage.
 const tableName = "Questions";
 
+// Ensuring questions table is created if not already exists.
 tableClient.createTableIfNotExists(tableName, (error, result) => {
     if (error) {
         console.log(`Error Occured in table creation ${error.message}`);
@@ -17,6 +19,7 @@ tableClient.createTableIfNotExists(tableName, (error, result) => {
     }
 });
 
+// Method to get questions set for a meeting.
 function getQuestions(meetingId, callback) {
     var query = new tableStore.TableQuery()
         .where('PartitionKey eq ?', meetingId);
@@ -28,6 +31,7 @@ function getQuestions(meetingId, callback) {
     });
 }
 
+// Method to save Questions to be used in a meeting
 function saveQuestions(questionsObj, callback) {
     questionsObj.forEach(function (obj) {
         var entity = {}
@@ -42,8 +46,7 @@ function saveQuestions(questionsObj, callback) {
             // Use { echoContent: true } if you want to return the created item including the Timestamp & etag
             tableClient.insertEntity(tableName, entity, { echoContent: true }, function (error, result, response) {
                 if (!error) {
-                    // This returns a 201 code + the database response inside the body
-                    // Calling status like this will automatically trigger a context.done()
+                    // sending response once all entries are created
                 } else {
                     // In case of an error we return an appropriate status code and the error returned by the DB
                     return callback({ error: error });
@@ -54,13 +57,13 @@ function saveQuestions(questionsObj, callback) {
     return callback(true);
 }
 
+// Method to edit already existing question.
 function editQuestion(questionObj, callback) {
     if (questionObj != null) {
         questionObj.PartitionKey = questionObj.MeetingId;
         questionObj.RowKey = questionObj.QuestionId;
         questionObj.ETag = "*";
 
-        // Use { echoContent: true } if you want to return the created item including the Timestamp & etag
         tableClient.replaceEntity(tableName, questionObj, function (error, result, response) {
             if (!error) {
                 return callback(response);
@@ -72,13 +75,13 @@ function editQuestion(questionObj, callback) {
     }
 }
 
+// Method to delete an existing question.
 function deleteQuestion(questionObj, callback) {
     if (questionObj != null) {
         questionObj.PartitionKey = questionObj.MeetingId;
         questionObj.RowKey = questionObj.QuestionId;
         questionObj.ETag = "*";
 
-        // Use { echoContent: true } if you want to return the created item including the Timestamp & etag
         tableClient.deleteEntity(tableName, questionObj, function (error, result, response) {
             if (!error) {
                 return callback(response);

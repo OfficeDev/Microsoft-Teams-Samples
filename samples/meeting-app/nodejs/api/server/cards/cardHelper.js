@@ -1,4 +1,4 @@
-// Adaptive Card with assets and note.
+// Adaptive Card with assets detail and note.
 const getAdaptiveForMessage = (message) => {
     const adaptiveCard = {
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',

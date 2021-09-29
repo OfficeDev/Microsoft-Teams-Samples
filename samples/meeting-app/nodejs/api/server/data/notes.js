@@ -8,9 +8,11 @@ const { v4: uuidv4 } = require('uuid')
 
 const tableClient = tableStore.createTableService(authObject.accountName, authObject.accessKey);
 
+// The table name in table storage.
 const tableName = "Notes";
 
- tableClient.createTableIfNotExists(tableName, (error, result) => {
+// Ensuring notes table is created if not already exists.
+tableClient.createTableIfNotExists(tableName, (error, result) => {
      if (error) {
          console.log(`Error Occured in table creation ${error.message}`);
      } else {
@@ -18,6 +20,7 @@ const tableName = "Notes";
      }
  });
 
+// Method to get notes from table storage.
 function getNotes(email, callback) {
     var query = new tableStore.TableQuery()
         .where('PartitionKey eq ?', email);
@@ -29,6 +32,7 @@ function getNotes(email, callback) {
     });
 }
 
+// Method to add a new note.
 function addNote(notesObj, callback) {
     if (notesObj != null) {
         notesObj.PartitionKey = notesObj.CandidateEmail;

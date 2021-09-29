@@ -7,9 +7,11 @@ const { v4: uuidv4 } = require('uuid')
 
 const tableClient = tableStore.createTableService(authObject.accountName, authObject.accessKey);
 
+// The table name in table storage.
 const tableName = "Feedback";
 
- tableClient.createTableIfNotExists(tableName, (error, result) => {
+// Ensuring feedback table is created if not already exists.
+tableClient.createTableIfNotExists(tableName, (error, result) => {
      if (error) {
          console.log(`Error Occured in table creation ${error.message}`);
      } else {
@@ -17,6 +19,7 @@ const tableName = "Feedback";
      }
  });
 
+// Method to save feedback details.
 function saveFeedback(feedbackObj, callback) {
     if (feedbackObj != null) {
         feedbackObj.PartitionKey = feedbackObj.MeetingId;

@@ -23,7 +23,7 @@ const QuestionsMobile = (props: IQuestionProps): React.ReactElement => {
                     content={i}
                     id={questionId}
                     onClick={props.setRating}
-                    className={currentRating == i ? 'selectedBtn' : 'defaultBtn'} />
+                    className={currentRating >= i ? 'selectedBtn' : 'defaultBtn'} />
             )
         }
         return prevItems;

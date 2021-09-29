@@ -11,9 +11,6 @@ const candidateHandler = require('./data/candidate')
 const questionsHandler = require('./data/questions')
 const notesHandler = require('./data/notes')
 const feedbackHandler = require('./data/feedback')
-
-// Import required bot services.
-// See https://aka.ms/bot-services to learn more about the different parts of a bot.
 const { AdapterRef } = require('./api/botController');
 const { ConversationRef } = require('./bot/botActivityHandler');
 const { CardFactory } = require('botbuilder');
