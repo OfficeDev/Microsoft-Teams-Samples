@@ -4,11 +4,11 @@ This sample illustrates a meeting experience for HR recruitment.
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that accepts input from the user and echoes it back.
 
-![Details](MeetingApp/Images/details.png)
+![Details](Images/details.png)
 
-![Sidepanel Overview](MeetingApp/Images/sidepanel_overview.png)
+![Sidepanel Overview](Images/sidepanel_overview.png)
 
-![Sidepanel Questions](MeetingApp/Images/sidepanel_questions.png)
+![Sidepanel Questions](Images/sidepanel_questions.png)
 
 ## Prerequisites
 
