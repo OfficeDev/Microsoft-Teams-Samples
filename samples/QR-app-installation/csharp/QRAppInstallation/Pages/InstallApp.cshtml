@@ -33,6 +33,24 @@
                 }
             }, config);
         }
+
+       function installApp() {
+            debugger;
+            var teamId;
+             microsoftTeams.getContext(function (context) {
+                    teamId = context.groupId;
+                     var appInfo ={appId:null,
+               teamId:null};
+               appInfo.appId="1542629c-01b3-4a6d-8f76-1938b779e48d";
+               appInfo.teamId = teamId;
+                    submitHandler = (err, result) => {
+                    console.log(`Submit handler - err: ${err}`);
+                     };
+                 microsoftTeams.tasks.submitTask(appInfo);               
+                });
+                    //var appId = document.querySelector("#scannedText");   
+         };
+       
     </script>
 </head>
 <body class="theme-light">
@@ -40,6 +58,7 @@
         <div class="panel">
             <div>
                 <label id="scannedText"></label>
+                <button type="button" onclick="installApp()">Install App</button>
             </div>
         </div>
     </div>

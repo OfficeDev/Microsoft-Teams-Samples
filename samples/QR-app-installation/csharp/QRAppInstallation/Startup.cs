@@ -11,9 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-using TabWithAdpativeCardFlow.Bots;
+using QRAppInstallation.Bots;
 
-namespace TabWithAdpativeCardFlow
+namespace QRAppInstallation
 {
     public class Startup
     {

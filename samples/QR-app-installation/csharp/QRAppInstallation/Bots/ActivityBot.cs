@@ -15,8 +15,10 @@ using TabWithAdpativeCardFlow.Models;
 using AdaptiveCards;
 using Newtonsoft.Json.Linq;
 using QRAppInstallation.Models;
+using Microsoft.Bot.Connector.Authentication;
+using Newtonsoft.Json;
 
-namespace TabWithAdpativeCardFlow.Bots
+namespace QRAppInstallation.Bots
 {
     /// <summary>
     /// Bot Activity handler class.
@@ -74,6 +76,49 @@ namespace TabWithAdpativeCardFlow.Bots
             return Task.FromResult(taskModuleResponse);
         }
 
+        protected override async Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
+        {
+            var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
+            var appInfo = JObject.FromObject(taskModuleRequest.Data);
+            var appId = (string)appInfo.ToObject<AppInstallDetails<string>>()?.Id;
+            var teamId = (string)appInfo.ToObject<AppInstallDetails<string>>()?.TeamId;
+
+            if (appInfo != null)
+            {
+               // Check the state value
+               var state = JsonConvert.DeserializeObject<AdaptiveCardAction>(turnContext.Activity.Value.ToString());
+               var tokenResponse = await GetTokenResponse(turnContext, state.State, cancellationToken);
+
+                if (tokenResponse == null || string.IsNullOrEmpty(tokenResponse.Token))
+                {
+                    // There is no token, so the user has not signed in yet.
+
+                    var resource = await userTokenClient.GetSignInResourceAsync(_connectionName, turnContext.Activity as Activity, null, cancellationToken);
+                   // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
+                    var signInLink = resource.SignInLink;
+                   return new TaskModuleResponse
+                    {
+                        Task = new TaskModuleContinueResponse
+                        {
+                            Type = "continue",
+                            Value = new TaskModuleTaskInfo()
+                            {
+                                Card = GetSignInCardForTaskModule(signInLink),
+                               Height = 200,
+                                Width = 350,
+                                Title = "Sign In ",
+                           },
+                       },
+                   };
+               }
+
+                var client = new SimpleGraphClient(tokenResponse.Token);
+                await client.InstallAppInTeam(teamId, appId);
+           }
+           return null;
+        }
+
+        
         /// <summary>
         /// Sample Adaptive card for Meeting Start event.
         /// </summary>
@@ -114,6 +159,66 @@ namespace TabWithAdpativeCardFlow.Bots
                                 Type = "task/fetch",
                             },
                             Id="install"
+                        },
+                    },
+                },
+            };
+
+            return new Attachment()
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = card,
+            };
+        }
+
+        /// <summary>
+        /// Get token response on basis of state.
+        /// </summary>
+        private async Task<TokenResponse> GetTokenResponse(ITurnContext<IInvokeActivity> turnContext, string state, CancellationToken cancellationToken)
+        {
+            var magicCode = string.Empty;
+
+            if (!string.IsNullOrEmpty(state))
+            {
+                if (int.TryParse(state, out var parsed))
+                {
+                    magicCode = parsed.ToString();
+                }
+            }
+
+            var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
+            var tokenResponse = await userTokenClient.GetUserTokenAsync(turnContext.Activity.From.Id, _connectionName, turnContext.Activity.ChannelId, magicCode, cancellationToken).ConfigureAwait(false);
+            return tokenResponse;
+        }
+
+        /// <summary>
+        /// Sample Adaptive card for Task module.
+        /// </summary>
+        public static Attachment GetSignInCardForTaskModule(string signInUrl)
+        {
+            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
+            {
+                Body = new List<AdaptiveElement>
+                {
+                    new AdaptiveTextBlock
+                    {
+                        Text = "Sign in to this app",
+                        Weight = AdaptiveTextWeight.Bolder,
+                        Spacing = AdaptiveSpacing.Medium,
+                    },
+                },
+                Actions = new List<AdaptiveAction>
+                {
+                    new AdaptiveSubmitAction
+                    {
+                        Title = "Sign in",
+                        Data = new AdaptiveCardAction
+                        {
+                            MsteamsCardAction = new CardAction
+                            {
+                                Type = ActionTypes.OpenUrl,
+                                Value = signInUrl
+                            },
                         },
                     },
                 },
