@@ -34,11 +34,16 @@ const BasicDetails = (props: IBasicDetailsProps) => {
     }
 
     const startCall = () => {
-        microsoftTeams.initialize();
-        microsoftTeams.executeDeepLink("https://teams.microsoft.com/l/call/0/0?users=v-chetsh@microsoftTeams.com");
+        debugger;
+        microsoftTeams.executeDeepLink("https://teams.microsoft.com/l/call/0/0?users="+candidateDetails[selectedIndex]?.email);
+    }
+
+    const startChat = () => {
+        microsoftTeams.executeDeepLink("https://teams.microsoft.com/l/chat/0/0?users="+candidateDetails[selectedIndex]?.email);
     }
 
     React.useEffect(() => {
+        microsoftTeams.initialize();
         getCandidateDetails()
             .then((res) => {
                 console.log(res)
@@ -82,8 +87,8 @@ const BasicDetails = (props: IBasicDetailsProps) => {
                         </Flex>
                     </Flex>
                     <Flex >
-                        <Button icon={<ChatIcon />} iconOnly text title="Message" />
-                        <Button icon={<CallVideoIcon />} iconOnly text title="Call" />
+                        <Button icon={<ChatIcon />} iconOnly text title="Message" onClick={startChat}/>
+                        <Button icon={<CallVideoIcon />} iconOnly text title="Call" onClick={startCall}/>
                     </Flex>
                 </Flex>
                 <hr className="details-separator" />

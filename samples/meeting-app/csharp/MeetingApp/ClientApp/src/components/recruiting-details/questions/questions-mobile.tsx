@@ -23,7 +23,7 @@ const QuestionsMobile = (props: IQuestionProps): React.ReactElement => {
                     content={i}
                     id={questionId}
                     onClick={props.setRating}
-                    className={currentRating == i ? 'selectedBtn' : 'defaultBtn'} />
+                    className={currentRating >= i ? 'selectedBtn' : 'defaultBtn'} />
             )
         }
         return prevItems;
@@ -42,15 +42,17 @@ const QuestionsMobile = (props: IQuestionProps): React.ReactElement => {
                                         {getRatings(questionDetail.rowKey, questionDetail.rating!)}
                                     </Flex>
 
-                                    <Button
-                                        text
-                                        size="small"
-                                        icon={<AddIcon size="small" />}
-                                        content="Add comment"
-                                        iconPosition="before"
-                                        className="add-button"
-                                        hidden={questionDetail.showAddComment}
-                                        onClick={() => { props.setShowAddComment(questionDetail.rowKey, true) }} />
+                                    <Flex>
+                                        <Button
+                                            text
+                                            size="small"
+                                            icon={<AddIcon size="small" />}
+                                            content="Add comment"
+                                            iconPosition="before"
+                                            className="add-button"
+                                            hidden={questionDetail.showAddComment}
+                                            onClick={() => { props.setShowAddComment(questionDetail.rowKey, true) }} />
+                                    </Flex>
 
                                     <Flex gap="gap.small" column hidden={!questionDetail.showAddComment}>
                                         <Text content="Comment" />

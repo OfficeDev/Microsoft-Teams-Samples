@@ -160,41 +160,43 @@ const Questions = (): React.ReactElement => {
                 <AddIcon onClick={() => addQuestionsTaskModule()} title="Add new questions" />
             </Flex>
             <Text content="Questions added here will appear in meeting with candidate and can help you rate at the point of time" />
-            {
-                questionDetails.map((questionDetail, index) => {
-                    return (
-                        <>
-                            <Card key={index} fluid aria-roledescription="card with question details" className="questionsCard">
-                                <Card.Body>
-                                    <Flex gap="gap.smaller" column>
-                                        <Flex gap="gap.smaller" space="between">
-                                            <Text content={questionDetail.question} />
-                                            <Tooltip
-                                                trigger={<MoreIcon />}
-                                                content={
-                                                    <Flex column gap="gap.smaller">
-                                                        <Flex >
-                                                            <Button icon={<EditIcon />} text content="Edit" className="editIcon"
-                                                             onClick={() => editQuestionsTaskModule(questionDetail.question, questionDetail.rowKey)} />
+            <Flex column gap="gap.smaller" className="questionWrapper">
+                {
+                    questionDetails.map((questionDetail, index) => {
+                        return (
+                            <>
+                                <Card key={index} fluid aria-roledescription="card with question details" className="questionsCard">
+                                    <Card.Body>
+                                        <Flex gap="gap.smaller" column>
+                                            <Flex gap="gap.smaller" space="between">
+                                                <Text content={questionDetail.question} />
+                                                <Tooltip
+                                                    trigger={<MoreIcon />}
+                                                    content={
+                                                        <Flex column gap="gap.smaller">
+                                                            <Flex >
+                                                                <Button icon={<EditIcon />} text content="Edit" className="editIcon"
+                                                                    onClick={() => editQuestionsTaskModule(questionDetail.question, questionDetail.rowKey)} />
+                                                            </Flex>
+                                                            <Flex>
+                                                                <Button icon={<CallControlStopPresentingNewIcon />} text content="Delete" onClick={() => deleteQuestion(questionDetail)} />
+                                                            </Flex>
                                                         </Flex>
-                                                        <Flex>
-                                                            <Button icon={<CallControlStopPresentingNewIcon />} text content="Delete" onClick={() => deleteQuestion(questionDetail)} />
-                                                        </Flex>
-                                                    </Flex>
-                                                }
-                                                position="below"
-                                            />
+                                                    }
+                                                    position="below"
+                                                />
+                                            </Flex>
+                                            <Flex gap="gap.small">
+                                                {ratingsArray}
+                                            </Flex>
                                         </Flex>
-                                        <Flex gap="gap.small">
-                                            {ratingsArray}
-                                        </Flex>
-                                    </Flex>
-                                </Card.Body>
-                            </Card>
-                        </>
-                    )
-                })
-            }
+                                    </Card.Body>
+                                </Card>
+                            </>
+                        )
+                    })
+                }
+            </Flex>
         </>
     )
 }
