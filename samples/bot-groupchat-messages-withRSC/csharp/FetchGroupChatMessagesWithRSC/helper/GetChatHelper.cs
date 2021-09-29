@@ -12,6 +12,7 @@ namespace FetchGroupChatMessagesWithRSC.helper
 {
     public class GetChatHelper
     {
+        // Get groupchat message
         public static async Task<IChatMessagesCollectionPage> GetGroupChatMessage(ITurnContext turnContext, TokenResponse tokenResponse, string Chatid)
         {
             if (turnContext == null)
@@ -36,8 +37,10 @@ namespace FetchGroupChatMessagesWithRSC.helper
             }
         }
 
+        // Send archive messages file to user.
         public static async Task SendGroupChatMessage(ITurnContext turnContext, long fileSize,string microsoftAppId, string microsoftAppPassword,  CancellationToken cancellationToken)
         {
+
             if (turnContext == null)
             {
                 throw new ArgumentNullException(nameof(turnContext));
@@ -91,6 +94,7 @@ namespace FetchGroupChatMessagesWithRSC.helper
             }
         }
 
+        // Send consent card to user.
         private static Activity SendFileCardAsync(ITurnContext turnContext, string filename, long filesize)
         {
             var consentContext = new Dictionary<string, string>

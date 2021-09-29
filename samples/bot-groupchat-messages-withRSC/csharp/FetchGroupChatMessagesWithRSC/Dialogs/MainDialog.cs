@@ -27,6 +27,7 @@ namespace FetchGroupChatMessagesWithRSC.Dialogs
             _logger = logger;
             _env = env;
             _configuration = configuration;
+
             AddDialog(new OAuthPrompt(
                 nameof(OAuthPrompt),
                 new OAuthPromptSettings

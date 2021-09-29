@@ -24,7 +24,7 @@ namespace FetchGroupChatMessagesWithRSC
             _token = token;
         }
 
-        //Fetching chat messages 
+        // Fetching chat messages 
         public async Task<IChatMessagesCollectionPage> GetGroupChatMessages(string Chatid)
         {
             var graphClient = GetAuthenticatedClient();

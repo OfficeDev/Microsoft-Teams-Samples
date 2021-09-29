@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using FetchGroupChatMessagesWithRSC.helper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
@@ -23,7 +22,6 @@ namespace FetchGroupChatMessagesWithRSC.Bots
     public class ActivityBot<T> : TeamsActivityHandler where T : Dialog
     {
         public readonly IConfiguration _configuration;
-        private readonly GetChatHelper _helper = new();
         private readonly IWebHostEnvironment _env;
         private readonly IHttpClientFactory _clientFactory;
         protected readonly BotState ConversationState;
@@ -38,6 +36,12 @@ namespace FetchGroupChatMessagesWithRSC.Bots
             Dialog = dialog;
         }
 
+        /// <summary>
+        /// Handle request from bot.
+        /// </summary>
+        /// <param name = "turnContext" > The turn context.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
         {
             await base.OnTurnAsync(turnContext, cancellationToken);
@@ -59,8 +63,9 @@ namespace FetchGroupChatMessagesWithRSC.Bots
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             var activity = this.StripAtMentionText((Activity)turnContext.Activity);
-            var userCommand = activity.Text;
-            if (userCommand == "getchat")
+            var userCommand = activity.Text.ToLower().Trim();
+
+            if (userCommand == "getchat" || userCommand == "logout")
             {
                 // Run the Dialog with the new message Activity.
                 await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
@@ -69,9 +74,17 @@ namespace FetchGroupChatMessagesWithRSC.Bots
             {
                 await turnContext.SendActivityAsync(MessageFactory.Text("type getchat to get archieved messages"));                   
             }
+
             return;
         }
 
+        /// <summary>
+        /// Invoked when a file consent card activity is received.
+        /// </summary>
+        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
+        /// <param name="fileConsentCardResponse">The response representing the value of the invoke activity sent when the user acts on a file consent card.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnTeamsFileConsentAcceptAsync(ITurnContext<IInvokeActivity> turnContext, FileConsentCardResponse fileConsentCardResponse, CancellationToken cancellationToken)
         {
             try
@@ -98,6 +111,13 @@ namespace FetchGroupChatMessagesWithRSC.Bots
             }
         }
 
+        /// <summary>
+        /// Invoked when a file consent card is declined by the user.
+        /// </summary>
+        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
+        /// <param name="fileConsentCardResponse">The response representing the value of the invoke activity sent when the user declines a file consent card.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnTeamsFileConsentDeclineAsync(ITurnContext<IInvokeActivity> turnContext, FileConsentCardResponse fileConsentCardResponse, CancellationToken cancellationToken)
         {
             JToken context = JObject.FromObject(fileConsentCardResponse.Context);
@@ -107,6 +127,13 @@ namespace FetchGroupChatMessagesWithRSC.Bots
             await turnContext.SendActivityAsync(reply, cancellationToken);
         }
 
+        /// <summary>
+        /// Handle file upload.
+        /// </summary>
+        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
+        /// <param name="fileConsentCardResponse">The response representing the value of the invoke activity sent when the user accept a file consent card.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         private async Task FileUploadCompletedAsync(ITurnContext turnContext, FileConsentCardResponse fileConsentCardResponse, CancellationToken cancellationToken)
         {
             var downloadCard = new FileInfoCard
@@ -130,6 +157,13 @@ namespace FetchGroupChatMessagesWithRSC.Bots
             await turnContext.SendActivityAsync(reply, cancellationToken);
         }
 
+        /// <summary>
+        /// Handle file upload failure.
+        /// </summary>
+        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
+        /// <param name="error"> Error while uploading the file.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         private async Task FileUploadFailedAsync(ITurnContext turnContext, string error, CancellationToken cancellationToken)
         {
             var reply = MessageFactory.Text($"<b>File upload failed.</b> Error: <pre>{error}</pre>");
@@ -137,6 +171,7 @@ namespace FetchGroupChatMessagesWithRSC.Bots
             await turnContext.SendActivityAsync(reply, cancellationToken);
         }
 
+        // Remove mention text from the activity. 
         private Activity StripAtMentionText(Activity activity)
         {
             if (activity == null)
