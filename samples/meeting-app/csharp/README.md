@@ -115,7 +115,9 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
     A) Overview: Shows the basic details of the candidate.
     B) Questions: The questions set in the details page appear here. The interviewer can use this to provide rating and submit final feedback.
 
+    ![Sidepanel Overview](MeetingApp/Images/sidepanel_overview.png)
 
+    ![Sidepanel Questions](MeetingApp/Images/sidepanel_questions.png)
 ## Testing the bot using Bot Framework Emulator
 
 [Bot Framework Emulator](https://github.com/microsoft/botframework-emulator) is a desktop application that allows bot developers to test and debug their bots on localhost or running remotely through a tunnel.
