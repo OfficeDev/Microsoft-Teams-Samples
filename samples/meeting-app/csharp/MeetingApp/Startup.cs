@@ -84,6 +84,7 @@ namespace MeetingApp
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseWebSockets();
