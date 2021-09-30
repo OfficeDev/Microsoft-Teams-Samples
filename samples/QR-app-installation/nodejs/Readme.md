@@ -1,16 +1,18 @@
-# Bot with RSC permission to archive groupchat message
+This sample demos app installation using QR code with team id in Csharp
 
-Using this nodejs sample, a bot can archive chat messages of groupchat and send it to user.
+This feature shown in this sample is in Public Developer Preview and is supported in desktop and mobile.
 
-This feature shown in this sample is currently available in Public Developer Preview only.
+## Features of the sample
 
-## Key features
+- ![Card](Images/CardWithButtons.png)
 
-- Sending archive chat messages text file of a groupchat to user
+- Generate QR code for app id.
 
-![Bot command](Images/botCommandToGetChatMessages.png)
+![QR Code](Images/QRCode.png)
 
-![Bot reply](Images/replyFromBot.png)
+- Install app in team with barcode scanner.
+
+![Install App](Images/AppInstallation.png)
 
 ## Prerequisites
 
@@ -27,6 +29,9 @@ This feature shown in this sample is currently available in Public Developer Pre
 ### 1. Setup for Bot SSO
 In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
+Add the following permission in app registration
+
+![Install App](Images/AppInstallation.png)
 
 ### 2. Run your bot sample
 1) Clone the repository
@@ -62,8 +67,3 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
 
     > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
-## Interacting with the bot in GroupChat
-
-Select a groupchat and add the bot to chat.
-
-Send `getchat` message to the bot, you will recieve a consent card by the bot in your personal scope.
