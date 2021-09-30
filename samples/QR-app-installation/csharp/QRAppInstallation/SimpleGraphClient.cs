@@ -26,7 +26,7 @@ namespace QRAppInstallation
             _token = token;
         }
 
-        //Fetching user's profile 
+        // Install app in team. 
         public async Task InstallAppInTeam(string TeamId, string AppId)
         {
             try
@@ -35,11 +35,12 @@ namespace QRAppInstallation
                 var teamsAppInstallation = new TeamsAppInstallation
                 {
                     AdditionalData = new Dictionary<string, object>()
-                {
-                    {"teamsApp@odata.bind", "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/"+ AppId}
-                }
+                    {
+                        {"teamsApp@odata.bind", "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/"+ AppId}
+                    }
                 };
-                await graphClient.Teams[TeamId].InstalledApps
+
+                 await graphClient.Teams[TeamId].InstalledApps
                     .Request()
                     .AddAsync(teamsAppInstallation);
             }

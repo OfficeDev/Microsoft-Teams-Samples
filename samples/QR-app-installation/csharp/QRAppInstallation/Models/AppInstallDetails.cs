@@ -6,7 +6,7 @@ namespace QRAppInstallation.Models
     {
 
         [JsonProperty("appid")]
-        public object Id { get; set; }
+        public object AppId { get; set; }
 
         [JsonProperty("teamid")]
         public object TeamId { get; set; }

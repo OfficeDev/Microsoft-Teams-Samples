@@ -13,6 +13,7 @@
             scanBarCode();
         });
        
+        var appId;
         // Method to scan barcode
         function scanBarCode() {
             var config = {
@@ -29,26 +30,22 @@
                         alert(" ErrorCode: " + error.errorCode);
                     }
                 } else if (decodedText) {
+                    appId = decodedText;
                     $("#scannedText").text(decodedText);
                 }
             }, config);
         }
 
        function installApp() {
-            debugger;
             var teamId;
-             microsoftTeams.getContext(function (context) {
+               microsoftTeams.getContext(function (context) {
                     teamId = context.groupId;
-                     var appInfo ={appId:null,
-               teamId:null};
-               appInfo.appId="1542629c-01b3-4a6d-8f76-1938b779e48d";
-               appInfo.teamId = teamId;
-                    submitHandler = (err, result) => {
-                    console.log(`Submit handler - err: ${err}`);
-                     };
-                 microsoftTeams.tasks.submitTask(appInfo);               
-                });
-                    //var appId = document.querySelector("#scannedText");   
+                    var appInfo ={appId:null,
+                    teamId:null};
+                    appInfo.appId=appId;
+                    appInfo.teamId = teamId;
+                    microsoftTeams.tasks.submitTask(appInfo);               
+               }); 
          };
        
     </script>

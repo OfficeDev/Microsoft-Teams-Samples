@@ -64,6 +64,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |9| Universal bots  | Teams catering bot demonstrating how to use Universal bots in Teams | [View](samples/bot-teams-catering/csharp) |  | |
 |10| Sequential workflow adaptive cards | Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot. | [View][sequential#workflow#csharp] | [View][sequential#workflow#js]
 |11| Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. | [View][messageswithrsc#csharp] |[View][messageswithrsc#js]
+|13| QR App Installtion | This sample demos app installation using QR code with team id | [View][qrappinstallation#csharp] |
 
 #### Additional samples
 
@@ -218,6 +219,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 [messageswithrsc#csharp]:samples/bot-receive-channel-messages-withRSC/csharp
 [messageswithrsc#js]:samples/bot-receive-channel-messages-withRSC/nodejs
 [app-in-meeting#cs]:samples/app-in-meeting/csharp
+[qrappinstallation#csharp]:samples/QRAppInstallation/csharp
 
 [app-localization#cs]:samples/app-localization/csharp
 [app-localization#js]:samples/app-localization/nodejs
