@@ -1,9 +1,9 @@
-﻿{
-  "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.9",
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.10/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.10",
   "version": "1.0.0",
-  "id": "",
-  "packageName": "com.microsoft.tabadaptivecard",
+  "id": "{{MicrosoftAppId}}",
+  "packageName": "com.microsoft.teams.qrappinstallation",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -11,29 +11,39 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "TabWithAdaptiveCard",
-    "full": "Tab With Adaptive Card"
+    "short": "QRAppInstallation",
+    "full": "Install app by QR"
   },
   "description": {
-    "short": "View Tab With Adaptive Card",
-    "full": "This sample demos the tab with adaptive cards"
+    "short": "Install app by QR",
+    "full": "This sample demos app installation using QR code with team id"
   },
   "icons": {
     "outline": "outline.png",
     "color": "color.png"
   },
   "accentColor": "#60A18E",
-  "staticTabs": [
+  "bots": [
     {
-      "entityId": "homeTab",
-      "name": "Home",
-      "contentBotId": "<<YOUR-MICROSOFT-APP-ID>>",
-      "scopes": [ "personal" ]
+      "botId": "87a133ac-47f2-4d47-9af2-b9115a5edbf3",
+      "scopes": [
+        "team",
+        "personal",
+        "groupchat"
+      ],
+      "isNotificationOnly": false
     }
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
+  "devicePermissions": [
+    "media"
+  ],
   "validDomains": [
-    "<<DOMAIN-NAME>>",
+    "*.ngrok.io",
     "token.botframework.com"
-  ]
+  ],
+    "webApplicationInfo": {
+    "id": "{{MicrosoftAppId}}",
+    "resource": "api://botid-{{MicrosoftAppId}}"
+  }
 }
