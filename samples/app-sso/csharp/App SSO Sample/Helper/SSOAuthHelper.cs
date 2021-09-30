@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -21,12 +22,7 @@ namespace TeamsTabSSO.Helper
         /// <summary>
         /// Azure Client Id.
         /// </summary>
-        private static readonly string ClientIdConfigurationSettingsKey = "AzureAd:ClientId";
-
-        /// <summary>
-        /// Azure Tenant Id.
-        /// </summary>
-        private static readonly string TenantIdConfigurationSettingsKey = "AzureAd:TenantId";
+        private static readonly string ClientIdConfigurationSettingsKey = "MicrosoftAppId";
 
         /// <summary>
         /// Azure Application Id URI.
@@ -41,7 +37,7 @@ namespace TeamsTabSSO.Helper
         /// <summary>
         /// Azure AppSecret .
         /// </summary>
-        private static readonly string AppsecretConfigurationSettingsKey = "AzureAd:AppSecret";
+        private static readonly string AppsecretConfigurationSettingsKey = "MicrosoftAppPassword";
 
         /// <summary>
         /// Azure Url .
@@ -64,22 +60,6 @@ namespace TeamsTabSSO.Helper
             var applicationIdUri = configuration[ApplicationIdURIConfigurationSettingsKey];
             var validAudiences = new List<string> { clientId, applicationIdUri.ToLower() };
             return validAudiences;
-        }
-
-        /// <summary>
-        /// Retrieve Valid Issuers.
-        /// </summary>
-        /// <param name="configuration">IConfiguration instance.</param>
-        /// <returns>Valid Issuers.</returns>
-        public static IEnumerable<string> GetValidIssuers(IConfiguration configuration)
-        {
-            var tenantId = configuration[TenantIdConfigurationSettingsKey];
-
-            var validIssuers = GetSettings(configuration);
-
-            validIssuers = validIssuers.Select(validIssuer => validIssuer.Replace("TENANT_ID", tenantId));
-
-            return validIssuers;
         }
 
         /// <summary>
@@ -128,12 +108,13 @@ namespace TeamsTabSSO.Helper
             var httpContext = httpContextAccessor.HttpContext;
             httpContext.Request.Headers.TryGetValue("Authorization", out StringValues assertion);
             var idToken = assertion.ToString().Split(" ")[1];
-            var body = $"assertion={idToken}&requested_token_use=on_behalf_of&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&client_id={configuration[ClientIdConfigurationSettingsKey]}@{configuration[TenantIdConfigurationSettingsKey]}&client_secret={configuration[AppsecretConfigurationSettingsKey]}&scope=https://graph.microsoft.com/User.Read";
+            string tenantId = getTenantId(idToken);
+            var body = $"assertion={idToken}&requested_token_use=on_behalf_of&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&client_id={configuration[ClientIdConfigurationSettingsKey]}&client_secret={configuration[AppsecretConfigurationSettingsKey]}&scope=https%3A%2F%2Fgraph.microsoft.com%2FUser.Read";
             try
             {
                 var client = httpClientFactory.CreateClient("WebClient");
                 string responseBody;
-                using (var request = new HttpRequestMessage(HttpMethod.Post, configuration[AzureInstanceConfigurationSettingsKey] + configuration[TenantIdConfigurationSettingsKey] + configuration[AzureAuthUrlConfigurationSettingsKey]))
+                using (var request = new HttpRequestMessage(HttpMethod.Post, configuration[AzureInstanceConfigurationSettingsKey] + tenantId + configuration[AzureAuthUrlConfigurationSettingsKey]))
                 {
                     request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     request.Content = new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded");
@@ -157,6 +138,15 @@ namespace TeamsTabSSO.Helper
             {
                 return ex.Message;
             }
+        }
+
+        private static string getTenantId(string idToken)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var jsonToken = handler.ReadToken(idToken);
+            var tokenS = jsonToken as JwtSecurityToken;
+            var tenantId = tokenS.Claims.FirstOrDefault(c => c.Type == "tid")?.Value;
+            return tenantId;
         }
 
         /// <summary>

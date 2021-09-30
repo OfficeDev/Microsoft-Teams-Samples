@@ -1,9 +1,12 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Connector;
-using Microsoft.Bot.Connector.Teams.Models;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Schema;
+using Microsoft.Bot.Schema.Teams;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
@@ -11,22 +14,35 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// <summary>
     /// This is Connector Card Dialog Class. Main purpose of this class is to display the Connector Card basic examples
     /// </summary>
-
-    [Serializable]
-    public class O365ConnectorCardDialog : IDialog<object>
+    public class O365ConnectorCardDialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public O365ConnectorCardDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(O365ConnectorCardDialog))
         {
-            if (context == null)
+            this._conversationState = conversationState;
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
+                BeginO365ConnectorCardDialogAsync,
+            }));
+        }
+
+        private async Task<DialogTurnResult> BeginO365ConnectorCardDialogAsync(
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
             }
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogConnectorCardDialog);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogConnectorCardDialog;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
 
-            // get the input number for the example to show if the user passed it into the command - e.g. 'show connector card 2'
-            var activity = (IMessageActivity)context.Activity;
+            // Get the input number for the example to show if the user passed it into the command - e.g. 'show connector card 2'
+            var activity = (IMessageActivity)stepContext.Context.Activity;
 
             string inputNumber = activity.Text.Substring(activity.Text.Length - 1, 1).Trim();
             Attachment attachment = null;
@@ -54,11 +70,20 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                     break;
             }
 
-            var message = context.MakeMessage();
-            message.Attachments.Add(attachment);
-            await context.PostAsync(message);
+            var message = stepContext.Context.Activity;
+            if (message.Attachments != null)
+            {
+                message.Attachments = null;
+            }
 
-            context.Done<object>(null);
+            if (message.Entities.Count >= 1)
+            {
+                message.Entities.Remove(message.Entities[0]);
+            }
+            message.Attachments = new List<Attachment>() { attachment };
+            await stepContext.Context.SendActivityAsync(message);
+
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
 
         /// <summary>
@@ -77,7 +102,12 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                 },
             };
 
-            return o365connector.ToAttachment();
+            Attachment attachment = new Attachment()
+            {
+                ContentType = O365ConnectorCard.ContentType,
+                Content = o365connector
+            };
+            return attachment;
         }
 
         /// <summary>
@@ -105,7 +135,12 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                 Sections = new List<O365ConnectorCardSection> { section },
             };
 
-            return o365connector.ToAttachment();
+            Attachment attachment = new Attachment()
+            {
+                ContentType = O365ConnectorCard.ContentType,
+                Content = o365connector
+            };
+            return attachment;
         }
 
         /// <summary>
@@ -135,7 +170,12 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
                 Text = Strings.O365V3Text
             };
 
-            return o365connector.ToAttachment();
+            Attachment attachment = new Attachment()
+            {
+                ContentType = O365ConnectorCard.ContentType,
+                Content = o365connector
+            };
+            return attachment;
         }
     }
 }

@@ -16,22 +16,23 @@
                 localStorage.removeItem("simple.error");
                 // See https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-implicit
                 // for documentation on these query parameters
+
                 let queryParams = {
                     client_id: clientId,
                     response_type: "id_token token",
                     response_mode: "fragment",
-                    resource: "https://graph.microsoft.com/",
+                    scope: "https://graph.microsoft.com/User.Read openid",
                     redirect_uri: window.location.origin + "/Auth/End",
                     nonce: _guid(),
                     state: state,
                     // login_hint pre-fills the username/email address field of the sign in page for the user,
                     // if you know their username ahead of time.
-                    login_hint: context.upn
+                    login_hint: context.loginHint
                 };
                 // Go to the AzureAD authorization endpoint
                 let authorizeEndpoint =
-                    "https://login.microsoftonline.com/common/oauth2/authorize?" +
-                        toQueryString(queryParams);
+                    "https://login.microsoftonline.com/" + context.tid +"/oauth2/v2.0/authorize?" +
+                    toQueryString(queryParams);
                 window.location.assign(authorizeEndpoint);
             });
         }
