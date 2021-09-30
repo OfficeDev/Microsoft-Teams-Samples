@@ -120,6 +120,7 @@
     color: #fff;
     max-width: 320px;
     min-height: 80vh;
+    padding: 1%;
 }
 
 .menu-item{
@@ -140,7 +141,6 @@
 }
 
 .add-button{
-    width: 13vw;
     padding-left: 0px;
     border: none;
     margin-left: -11px;

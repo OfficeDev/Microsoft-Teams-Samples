@@ -27,39 +27,44 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-
 ## To try this sample
-- Create a Bot Registration
+1) Create a Bot Registration
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2#create-the-resource).
- 
-- Clone the repository
+
+2) Create a Azure Storage account(This is needed to store/retrieve data that is used in the app) 
+  [Create storage account](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal)
+
+  This step will create a storage account. You will require storage account name and keys in following steps.
+  Please follow [View account keys](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to see the keys info.
+
+3) Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
 
-- In a terminal, navigate to `samples/meeting-app/csharp`
+4) In a terminal, navigate to `samples/meeting-app/csharp`
 
     ```bash
     # change into project folder
     cd # MeetingApp
     ```
-- Run ngrok - point to port 3978
+5) Run ngrok - point to port 3978
 
     ```bash
     # ngrok http -host-header=rewrite 3978
     ```
-- Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
+6) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
    - `<<App-ID>>` with some unique GUID   
    - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
    - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
 
-- Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 4.
+7) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
 
-- Modify the `/appsettings.json` and fill in the `{{ MicrosoftAppId }}`,`{{ MicrosoftAppPassword }}` with the id from step 1.
+8) Modify the `/appsettings.json` and fill in the `{{ MicrosoftAppId }}`,`{{ MicrosoftAppPassword }}` with the id from step 1.
 
-- Modify the `/appsettings.json` and fill in the `{{ StorageConnectionString }}`
+9) Modify the `/appsettings.json` and fill in the `{{ StorageConnectionString }}` from step 2.
 
-- Run the app from a terminal or from Visual Studio, choose option A or B.
+10) Run the app from a terminal or from Visual Studio, choose option A or B.
 
   A) From a terminal
 
@@ -76,7 +81,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
   - Select `MeetingApp.csproj` file
   - Press `F5` to run the project
 
-- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+11) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
@@ -118,6 +123,11 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
     ![Sidepanel Overview](MeetingApp/Images/sidepanel_overview.png)
 
     ![Sidepanel Questions](MeetingApp/Images/sidepanel_questions.png)
+
+5) Share assets:
+   This is used to share assets to the candidate.
+   ![Share Assets](MeetingApp/Images/share_assets.png)
+  
 ## Testing the bot using Bot Framework Emulator
 
 [Bot Framework Emulator](https://github.com/microsoft/botframework-emulator) is a desktop application that allows bot developers to test and debug their bots on localhost or running remotely through a tunnel.

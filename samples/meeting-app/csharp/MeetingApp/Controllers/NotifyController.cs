@@ -51,25 +51,29 @@ namespace MeetingApp.Controllers
         {
             try
             {
-                // Getting stored conversation data reference.
-                var dataToUpdate = new ConversationData();
-                _conversationDataReference.TryGetValue("conversationData", out dataToUpdate);
-                dataToUpdate.Note = assetDetails.Message;
-
-                foreach (var conversationReference in _conversationReferences.Values)
+                if (assetDetails != null)
                 {
-                    await ((BotAdapter)_adapter).ContinueConversationAsync(_appId, conversationReference, BotCallback, default(CancellationToken));
+                    // Getting stored conversation data reference.
+                    var dataToUpdate = new ConversationData();
+                    _conversationDataReference.TryGetValue("conversationData", out dataToUpdate);
+                    dataToUpdate.Note = assetDetails.Message;
+
+                    foreach (var conversationReference in _conversationReferences.Values)
+                    {
+                        await ((BotAdapter)_adapter).ContinueConversationAsync(_appId, conversationReference, BotCallback, default(CancellationToken));
+                    }
+
+                    // Let the caller know proactive messages have been sent
+                    var result = new ContentResult()
+                    {
+                        Content = "<html><body><h1>Proactive messages have been sent.</h1></body></html>",
+                        ContentType = "text/html",
+                        StatusCode = (int)HttpStatusCode.OK,
+                    };
+
+                    return Ok(result);
                 }
-
-                // Let the caller know proactive messages have been sent
-                var result = new ContentResult()
-                {
-                    Content = "<html><body><h1>Proactive messages have been sent.</h1></body></html>",
-                    ContentType = "text/html",
-                    StatusCode = (int)HttpStatusCode.OK,
-                };
-
-                return Ok(result);
+                return NotFound();
             }
             catch (Exception ex)
             {

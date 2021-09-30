@@ -35,7 +35,63 @@ namespace MeetingApp.Data.Repositories
             CloudTableClient cloudTableClient = storageAccount.CreateCloudTableClient();
             this.candidateCloudTable = cloudTableClient.GetTableReference("CandidateDetails");
 
-            await this.candidateCloudTable.CreateIfNotExistsAsync().ConfigureAwait(false);
+            var exists = await this.candidateCloudTable.ExistsAsync();
+            if (!exists)
+            {
+                await this.candidateCloudTable.CreateAsync().ConfigureAwait(false);
+                await this.InitializeCandidateTableWithRecords().ConfigureAwait(false);
+            }
+        }
+
+        /// <summary>
+        /// Initialize candidate table with test records.
+        /// </summary>
+        /// <param name="entity">Represents questionSet entity used for storage and retrieval.</param>
+        /// <returns><see cref="Task"/> that represents configuration entity is saved or updated.</returns>
+        public async Task<bool> InitializeCandidateTableWithRecords()
+        {
+            var candidateEntitySet = new List<CandidateDetailEntity> {
+           new CandidateDetailEntity{
+                CandidateName = "Aaron Brooker",
+                Role = "Software Engineer",
+                Experience = "4 years 2 mos",
+                Email = "aaron.b@gmail.com",
+                Mobile = "+1 98765432",
+                Skills = "React JS, .Net Core",
+                Source = "Website",
+                Attachments = "url1,url2",
+                Education = "B Tech",
+                LinkedInUrl = "https://in.linkedin.com/",
+                TwitterUrl = "https://twitter.com/"
+            },
+                new CandidateDetailEntity{
+                CandidateName = "John Doe",
+                Role = "Data Scientist",
+                Experience = "5 years",
+                Email = "john.d@gmail.com",
+                Mobile = "+1 2456789",
+                Skills = "Python, ML",
+                Source = "Website",
+                Attachments = "url1,url2",
+                Education = "M Tech",
+                LinkedInUrl = "https://in.linkedin.com/",
+                TwitterUrl = "https://twitter.com/"
+            }
+            };
+
+            //Iterating through each batch  
+            foreach (var entity in candidateEntitySet)
+            {
+                if (entity != null)
+                {
+                    entity.PartitionKey = "CandidateDetails";
+                    entity.RowKey = string.Format("{0:D19}", DateTime.UtcNow.Ticks);
+                    await this.EnsureInitializedAsync().ConfigureAwait(false);
+                    TableOperation addOperation = TableOperation.InsertOrReplace(entity);
+                    await this.candidateCloudTable.ExecuteAsync(addOperation).ConfigureAwait(false);
+                }
+            }
+            return true;
         }
 
         /// <summary>

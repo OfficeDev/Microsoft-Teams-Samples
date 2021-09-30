@@ -68,30 +68,22 @@ namespace MeetingApp.Bots
             _conversationDataReference.AddOrUpdate("conversationData", conversationData, (key, newValue) => conversationData);
         }
 
-        protected override Task OnConversationUpdateActivityAsync(ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
-        {
-            AddConversationReference(turnContext.Activity as Activity);
-
-            return base.OnConversationUpdateActivityAsync(turnContext, cancellationToken);
-        }
-
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            await GetConversationMembers(turnContext);
-            AddConversationReference(turnContext.Activity as Activity);
             var replyText = $"Echo: {turnContext.Activity.Text}";
             await turnContext.SendActivityAsync(MessageFactory.Text(replyText, replyText), cancellationToken);
         }
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            await GetConversationMembers(turnContext);
-            AddConversationReference(turnContext.Activity as Activity);
-            var welcomeText = "Hello and welcome!";
             foreach (var member in membersAdded)
             {
+                // Greet anyone that was not the target (recipient) of this message.
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
+                    AddConversationReference(turnContext.Activity as Activity);
+                    await GetConversationMembers(turnContext);
+                    var welcomeText = "Hello and welcome!";
                     await turnContext.SendActivityAsync(MessageFactory.Text(welcomeText, welcomeText), cancellationToken);
                 }
             }
