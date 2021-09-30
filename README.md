@@ -219,7 +219,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 [messageswithrsc#csharp]:samples/bot-receive-channel-messages-withRSC/csharp
 [messageswithrsc#js]:samples/bot-receive-channel-messages-withRSC/nodejs
 [app-in-meeting#cs]:samples/app-in-meeting/csharp
-[qrappinstallation#csharp]:samples/QRAppInstallation/csharp
+[qrappinstallation#csharp]:samples/QR-app-installation/csharp
 
 [app-localization#cs]:samples/app-localization/csharp
 [app-localization#js]:samples/app-localization/nodejs

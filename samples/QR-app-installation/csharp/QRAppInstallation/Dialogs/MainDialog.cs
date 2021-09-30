@@ -67,9 +67,10 @@ namespace QRAppInstallation.Dialogs
                     await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForTaskModule()), cancellationToken);
                     return await stepContext.EndDialogAsync();
                 }
+
+                await stepContext.Context.SendActivityAsync("Login successfully");
             }
 
-            await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login was not successful please try again."), cancellationToken);
             return await stepContext.EndDialogAsync();
         }
 

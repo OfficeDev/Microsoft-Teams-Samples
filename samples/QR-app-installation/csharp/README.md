@@ -2,6 +2,15 @@
 
 This feature shown in this sample is in Public Developer Preview and is supported in desktop and mobile.
 
+## Features of the sample
+- Generate QR code for app id.
+
+![QR Code](QRAppInstallation/Images/QRCode.png)
+
+- Install app in team with barcode scanner.
+
+![Install App](QRAppInstallation/Images/AppInstallation.png)
+
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
@@ -22,12 +31,16 @@ This feature shown in this sample is in Public Developer Preview and is supporte
 
 2. Create a Bot Registration
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+   Add following permission in app registration.
+   
+   ![Permission](QRAppInstallation/Images/Permission.png)
+   
 
-3. Modify the `manifest.json` in the `/AppPackage` folder and replace the `{{Microsoft-App-Id}}` with the id from step 2.
+3. Modify the `manifest.json` in the `/appPackage` folder and replace the `{{Microsoft-App-Id}}` with the id from step 2 and `{{domain-name}}` with base Url domain.
 
-4. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 7.
+4. Zip the contents of `appPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 7.
 
-5. Modify the `/appsettings.json` and fill in the `{{Microsoft-App-Id}}`,`{{ Bot Password }}` and `{{Microsoft-App-Password}}` with the id from step 2.
+5. Modify the `/appsettings.json` and fill in the `{{Microsoft-App-Id}}`,`{{ Microsoft-App-Password }}` and `{{onnection Name}}` with the id from step 2.
 
 6. Add `{{ Application Base Url }}`in appsetting.json with ngrok tunnel url or deployed application base url. 
 
@@ -39,7 +52,7 @@ This feature shown in this sample is in Public Developer Preview and is supporte
     
 ## To try this sample
 
-- In a terminal, navigate to `QRAppInstallation`
+- In a terminal, navigate to `QR-app-installation`
 
     ```bash
     # change into project folder
@@ -62,15 +75,6 @@ This feature shown in this sample is in Public Developer Preview and is supporte
   - Navigate to `QRAppInstallation` folder
   - Select `QRAppInstallation.csproj` file
   - Press `F5` to run the project
-
-## Interacting with the tab in Teams
-    You can use this tab by following the below steps:
-    - In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
-
-## Features of this sample
-
-- Tab showing Adaptive card with action controls.
-
 
 ## Deploy the bot to Azure
 
