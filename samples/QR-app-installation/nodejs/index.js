@@ -69,7 +69,7 @@ server.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);
 });
 
-server.use("/Images", express.static(path.resolve(__dirname, '../Images')));
+server.use("/Images", express.static(path.resolve(__dirname, '/Images')));
 
 server.get('/generate', (req, res, next) => {
     res.render('./views/generate')

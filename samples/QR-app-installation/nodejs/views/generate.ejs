@@ -10,6 +10,7 @@
     <script>
         microsoftTeams.initialize();
         function generateQR() {
+            debugger
             var appId = $("#appIdOptions").val();
             $("#qrImg").attr("src", `${window.location.origin}/Images/${appId}.png`);
             $("#qrImg").removeAttr("hidden");
