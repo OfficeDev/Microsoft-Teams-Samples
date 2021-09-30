@@ -1,6 +1,9 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
 {
@@ -8,28 +11,47 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// This is Begin Dialog Class. Main purpose of this class is to notify users that Child dialog has been called 
     /// and its a Basic example to call Child dialog from Root Dialog.
     /// </summary>
-
-    [Serializable]
-    public class BeginDialogExampleDialog : IDialog<object>
+    public class BeginDialogExampleDialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public BeginDialogExampleDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(BeginDialogExampleDialog))
         {
-            if (context == null)
+            this._conversationState = conversationState;
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
+                BeginBeginDialogExampleDialogAsync,
+                ContinueBeginDialogExampleDialogAsync,
+            }));
+            AddDialog(new HelpDialog(conversationState));
+        }
+
+        private async Task<DialogTurnResult> BeginBeginDialogExampleDialogAsync(
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
             }
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogBeginDialog);
-            await context.PostAsync(Strings.BeginDialog);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogBeginDialog;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
 
-            context.Call(new HelloDialog(), ResumeAfterHelloDialog);
+            await stepContext.Context.SendActivityAsync(Strings.BeginDialog);
+
+            return await stepContext.BeginDialogAsync(
+                        nameof(HelloDialog));
         }
 
-        private async Task ResumeAfterHelloDialog(IDialogContext context, IAwaitable<object> result)
+        private async Task<DialogTurnResult> ContinueBeginDialogExampleDialogAsync(
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
-            await context.PostAsync(Strings.BeginDialogEnd);
-            context.Done<object>(null);
+            await stepContext.Context.SendActivityAsync(Strings.BeginDialogEnd);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
     }
 }

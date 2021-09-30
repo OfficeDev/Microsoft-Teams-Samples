@@ -67,11 +67,9 @@ namespace Microsoft.BotBuilderSamples
                 {
                     var azureAdOptions = new AzureADOptions();
                     Configuration.Bind("AzureAd", azureAdOptions);
-                    options.Authority = $"{azureAdOptions.Instance}{azureAdOptions.TenantId}/v2.0";
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidAudiences = SSOAuthHelper.GetValidAudiences(Configuration),
-                        ValidIssuers = SSOAuthHelper.GetValidIssuers(Configuration),
                         AudienceValidator = SSOAuthHelper.AudienceValidator
                     };
                 });

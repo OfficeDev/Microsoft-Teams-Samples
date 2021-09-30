@@ -1,11 +1,14 @@
 ﻿using AdaptiveCards;
+using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Connector;
+using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
@@ -13,39 +16,61 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// <summary>
     /// This is Adaptive Card Dialog Class. Main purpose of this class is to display the Adaptive Card example
     /// </summary>
-
-    [Serializable]
-    public class AdaptiveCardDialog : IDialog<object>
+    public class AdaptiveCardDialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public AdaptiveCardDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(AdaptiveCardDialog))
         {
-            if (context == null)
+            this._conversationState = conversationState;
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
+                BeginAdaptiveCardDialogAsync,
+            }));
+        }
+
+        private async Task<DialogTurnResult> BeginAdaptiveCardDialogAsync(
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
             }
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogAdaptiveCard);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogAdaptiveCard;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
 
-            Activity activity = context.Activity as Activity;
+            Activity activity = stepContext.Context.Activity as Activity;
 
             // if request is from submit action, process adaptive card values
             if (IsActivityFromAdaptiveCard(activity))
             {
                 // handle adaptive card submit action
-                await SendAdaptiveCardValues(context, activity);
+                await SendAdaptiveCardValues(stepContext, activity);
             }
             else
             {
                 // create and send adaptive card
-                var message = context.MakeMessage();
+                var message = stepContext.Context.Activity;
+                if (message.Attachments != null)
+                {
+                    message.Attachments = null;
+                }
+
+                if (message.Entities.Count >= 1)
+                {
+                    message.Entities.Remove(message.Entities[0]);
+                }
                 var attachment = GetAdaptiveCardAttachment();
-
-                message.Attachments.Add(attachment);
-                await context.PostAsync((message));
+                message.Attachments = new List<Attachment>() { attachment };
+                await stepContext.Context.SendActivityAsync(message);
             }
+            await stepContext.Context.SendActivityAsync(Strings.HelloDialogMsg);
 
-            context.Done<object>(null);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
 
         // Here is the example of adaptive card having image set, text block,
@@ -399,16 +424,16 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
             return false;
         }
 
-        ///// <summary>
-        ///// Handle adaptive card request
-        ///// </summary>
-        ///// <param name="activity"></param>
-        ///// <returns></returns>
-        private async Task SendAdaptiveCardValues(IDialogContext context, Activity activity)
+        /// <summary>
+        /// Handle adaptive card request
+        /// </summary>
+        /// <param name="activity"></param>
+        /// <returns></returns>
+        private async Task SendAdaptiveCardValues(WaterfallStepContext context, Activity activity)
         {
-            var submitValue = context.MakeMessage();
+            var submitValue = context.Context.Activity;
             submitValue.Text = Convert.ToString(activity.Value);
-            await context.PostAsync(submitValue);            
+            await context.Context.SendActivityAsync(submitValue);
         }
     }
 }

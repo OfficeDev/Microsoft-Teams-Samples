@@ -1,8 +1,8 @@
-﻿using Microsoft.Bot.Builder.Dialogs.Internals;
-using Microsoft.Bot.Connector;
-using Microsoft.Bot.Connector.Teams;
-using Microsoft.Bot.Connector.Teams.Models;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Schema;
+using Microsoft.Bot.Schema.Teams;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.utility;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -22,319 +22,13 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
     {
         const string SearchApiUrlFormat = "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=[keyword]&srlimit=[limit]&sroffset=[offset]&format=json";
         const string ImageApiUrlFormat = "https://en.wikipedia.org/w/api.php?action=query&formatversion=2&format=json&prop=pageimages&piprop=thumbnail&pithumbsize=250&titles=[title]";
-        const string ComposeExtensionSelectedResultsKey = "ComposeExtensionSelectedResults";
         const string MaxComposeExtensionHistoryCountKey = "MaxComposeExtensionHistoryCount";
         public static HttpClient Client = new HttpClient();
-
-        public async Task<ComposeExtensionResponse> GetComposeExtensionResponse(Activity activity, IBotDataStore<BotData> botDataStore)
+        protected readonly IStatePropertyAccessor<UserData> _userState;
+        public WikipediaComposeExtension(IStatePropertyAccessor<UserData> userState)
         {
-            ComposeExtensionResponse composeExtensionResponse = null;
-            ImageResult imageResult = null;
-            List<ComposeExtensionAttachment> composeExtensionAttachments = new List<ComposeExtensionAttachment>();
-
-            var userData = await TemplateUtility.GetBotUserDataObject(botDataStore, activity);
-
-            var userPreferredCardType = userData.GetProperty<string>(Strings.ComposeExtensionCardTypeKeyword);
-
-            bool isSettingUrl = false;
-
-            var composeExtensionQuery = activity.GetComposeExtensionQueryData();
-            if (string.Equals(activity.Name.ToLower(), Strings.ComposeExtensionQuerySettingUrl))
-            {
-                isSettingUrl = true;
-            }
-
-            if (composeExtensionQuery.CommandId == null || composeExtensionQuery.Parameters == null)
-            {
-                return null;
-            }
-
-            var initialRunParameter = GetQueryParameterByName(composeExtensionQuery, Strings.manifestInitialRun);
-            var queryParameter = GetQueryParameterByName(composeExtensionQuery, Strings.manifestParameterName);
-
-            if (userData == null)
-            {
-                composeExtensionResponse = new ComposeExtensionResponse();
-                string message = Strings.ComposeExtensionNoUserData;
-                composeExtensionResponse.ComposeExtension = GetMessageResponseResult(message);
-                return composeExtensionResponse;
-            }
-
-            /**
-                * Below are the checks for various states that may occur
-                * Note that the order of many of these blocks of code do matter
-             */
-
-            // situation where the incoming payload was received from the config popup
-
-            if (!string.IsNullOrEmpty(composeExtensionQuery.State))
-            {
-                ParseSettingsAndSave(composeExtensionQuery.State, userData, activity, botDataStore);
-                /**
-                //// need to keep going to return a response so do not return here
-                //// these variables are changed so if the word 'setting' kicked off the compose extension,
-                //// then the word setting will not retrigger the config experience
-                **/
-
-                queryParameter = "";
-                initialRunParameter = "true";
-            }
-
-            // this is a sitaution where the user's preferences have not been set up yet
-            if (string.IsNullOrEmpty(userData.GetProperty<string>(Strings.ComposeExtensionCardTypeKeyword)))
-            {
-                composeExtensionResponse = GetConfig();
-                return composeExtensionResponse;
-            }
-
-            /**
-            // this is the situation where the user has entered the word 'reset' and wants
-            // to clear his/her settings
-            // resetKeyword for English is "reset"
-            **/
-
-            if (string.Equals(queryParameter.ToLower(), Strings.ComposeExtensionResetKeyword))
-            {
-                userData.RemoveProperty(Strings.ComposeExtensionCardTypeKeyword);
-                await TemplateUtility.SaveBotUserDataObject(botDataStore, activity, userData);
-
-                composeExtensionResponse = new ComposeExtensionResponse();
-                composeExtensionResponse.ComposeExtension = GetMessageResponseResult(Strings.ComposeExtensionResetText);
-                return composeExtensionResponse;
-            }
-
-            /**
-            // this is the situation where the user has entered "setting" or "settings" in order
-            // to repromt the config experience
-            // keywords for English are "setting" and "settings"
-            **/
-
-            if ((string.Equals(queryParameter.ToLower(), Strings.ComposeExtensionSettingKeyword) || string.Equals(queryParameter.ToLower(), Strings.ComposeExtensionSettingsKeyword)) || (isSettingUrl))
-            {
-                composeExtensionResponse = GetConfig();
-                return composeExtensionResponse;
-            }
-
-            /**
-            // this is the situation where the user in on the initial run of the compose extension
-            // e.g. when the user first goes to the compose extension and the search bar is still blank
-            // in order to get the compose extension to run the initial run, the setting "initialRun": true
-            // must be set in the manifest for the compose extension
-            **/
-            
-            if (initialRunParameter == "true")
-            {
-                //Signin Experience, please uncomment below code for Signin Experience
-                //composeExtensionResponse = GetSignin(composeExtensionResponse);
-                //return composeExtensionResponse;
-
-                composeExtensionResponse = new ComposeExtensionResponse();
-
-                var historySearchWikiResult = userData.GetProperty<List<WikiHelperSearchResult>>(ComposeExtensionSelectedResultsKey);
-                if (historySearchWikiResult != null)
-                {
-                    foreach (var searchResult in historySearchWikiResult)
-                    {
-                        WikiHelperSearchResult wikiSearchResult = new WikiHelperSearchResult(searchResult.imageUrl, searchResult.highlightedTitle, searchResult.text);
-
-                        // create the card itself and the preview card based upon the information
-                        var createdCardAttachment = TemplateUtility.CreateComposeExtensionCardsAttachments(wikiSearchResult, userPreferredCardType);
-                        composeExtensionAttachments.Add(createdCardAttachment);
-                    }
-
-                    composeExtensionResponse = GetComposeExtensionQueryResult(composeExtensionAttachments);
-                }
-                else
-                {
-                    composeExtensionResponse.ComposeExtension = GetMessageResponseResult(Strings.ComposeExtensionInitialRunText);
-                }
-
-                return composeExtensionResponse;
-            }
-
-            /**
-            * Below here is simply the logic to call the Wikipedia API and create the response for
-            * a query; the general flow is to call the Wikipedia API for the query and then call the
-            * Wikipedia API for each entry for the query to see if that entry has an image; in order
-            * to get the asynchronous sections handled, an array of Promises for cards is used; each
-            * Promise is resolved when it is discovered if an image exists for that entry; once all
-            * of the Promises are resolved, the response is sent back to Teams
-            */
-
-            WikiResult wikiResult = await SearchWiki(queryParameter, composeExtensionQuery);
-
-            // enumerate search results and build Promises for cards for response
-            foreach (var searchResult in wikiResult.query.search)
-            {
-                //Get the Image result on the basis of Image Title one by one
-                imageResult = await SearchWikiImage(searchResult);
-
-                //Get the Image Url from imageResult
-                string imageUrl = GetImageURL(imageResult);
-
-                string cardText = searchResult.snippet + " ...";
-
-                WikiHelperSearchResult wikiSearchResult = new WikiHelperSearchResult(imageUrl, searchResult.title, cardText);
-
-                // create the card itself and the preview card based upon the information
-                var createdCardAttachment = TemplateUtility.CreateComposeExtensionCardsAttachments(wikiSearchResult, userPreferredCardType);
-                composeExtensionAttachments.Add(createdCardAttachment);
-            }
-
-            composeExtensionResponse = GetComposeExtensionQueryResult(composeExtensionAttachments);
-
-            return composeExtensionResponse;
+            _userState = userState;
         }
-
-        /// <summary>
-        /// Handle the callback received when the user selects an item from the results list        
-        /// </summary>
-        /// <param name="activity"></param>
-        /// <returns></returns>
-        public async Task<ComposeExtensionResponse> HandleComposeExtensionSelectedItem(Activity activity, IBotDataStore<BotData> botDataStore)
-        {
-            // Keep a history of recently-selected items in bot user data. The history will be returned in response to the initialRun query
-            var userData = await TemplateUtility.GetBotUserDataObject(botDataStore, activity);
-
-            //Get the Max number of History items from config file
-            int maxComposeExtensionHistoryCount = Convert.ToInt32(ConfigurationManager.AppSettings[MaxComposeExtensionHistoryCountKey]);
-
-            WikiHelperSearchResult selectedItem = JsonConvert.DeserializeObject<WikiHelperSearchResult>(activity.Value.ToString());
-
-            var historySearchWikiResult = userData.GetProperty<List<WikiHelperSearchResult>>(ComposeExtensionSelectedResultsKey);
-
-            //Removing other occurrences of the current selectedItem so there are not duplicates in the most recently used list
-            if (historySearchWikiResult != null && historySearchWikiResult.Count > 0)
-            {
-                int index = 0;
-                while (index < historySearchWikiResult.Count)
-                {
-                    if (string.Equals(historySearchWikiResult[index].highlightedTitle.ToLower(), selectedItem.highlightedTitle.ToLower()))
-                    {
-                        historySearchWikiResult.RemoveAt(index);
-                    }
-                    else
-                    {
-                        index++;
-                    }
-                }
-            }
-            else
-            {
-                historySearchWikiResult = new List<WikiHelperSearchResult>();
-            }
-
-            //Add new item in list
-            historySearchWikiResult.Insert(0, selectedItem);
-
-            //Restrict the transaction History with Max Items.
-            if (historySearchWikiResult.Count > maxComposeExtensionHistoryCount)
-            {
-                historySearchWikiResult = historySearchWikiResult.GetRange(0, maxComposeExtensionHistoryCount);
-            }
-
-            //Save the history Items in user Data
-            userData.SetProperty<List<WikiHelperSearchResult>>(ComposeExtensionSelectedResultsKey, historySearchWikiResult);
-            await TemplateUtility.SaveBotUserDataObject(botDataStore, activity, userData);
-
-            ComposeExtensionResponse composeExtensionResponse = new ComposeExtensionResponse();
-            List<ComposeExtensionAttachment> composeExtensionAttachment = new List<ComposeExtensionAttachment>();
-
-            if (selectedItem != null)
-            {
-                // create the card itself and the preview card based upon the information
-                // check user preference for which type of card to create
-                var userPreferredCardType = userData.GetProperty<string>(Strings.ComposeExtensionCardTypeKeyword);
-                var createdCardAttachment = TemplateUtility.CreateComposeExtensionCardsAttachmentsSelectedItem(selectedItem, userPreferredCardType);
-                composeExtensionAttachment.Add(createdCardAttachment);
-
-                composeExtensionResponse = GetComposeExtensionQueryResult(composeExtensionAttachment);
-            }
-            else
-            {
-                composeExtensionResponse.ComposeExtension = GetMessageResponseResult(Strings.ComposeExtensionInitialRunText);
-            }
-
-            return composeExtensionResponse;
-        }
-
-        // return the value of the specified query parameter
-        public string GetQueryParameterByName(ComposeExtensionQuery query, string name)
-        {
-            foreach (var param in query.Parameters)
-            {
-                if (param.Name == name)
-                {
-                    return param.Value.ToString();
-                }
-            }
-
-            return "";
-        }
-
-        // used to parse the user preferences from the state and save them for later use
-        public async void ParseSettingsAndSave(string state, BotData userData, Activity activity, IBotDataStore<BotData> service)
-        {
-            userData.SetProperty<string>("composeExtensionCardType", state);
-            await TemplateUtility.SaveBotUserDataObject(service, activity, userData);
-        }
-
-        public ComposeExtensionResponse GetConfig()
-        {
-            string configUrl = ConfigurationManager.AppSettings["BaseUri"].ToString() + "/composeExtensionSettings.html";
-            CardAction configExp = new CardAction(ActionTypes.OpenUrl, "Config", null, configUrl);
-            List<CardAction> cardActions = new List<CardAction>();
-            cardActions.Add(configExp);
-            ComposeExtensionResponse composeExtensionResponse = new ComposeExtensionResponse();
-            ComposeExtensionResult composeExtensionResult = new ComposeExtensionResult();
-
-            ComposeExtensionSuggestedAction objSuggestedAction = new ComposeExtensionSuggestedAction();
-            objSuggestedAction.Actions = cardActions;
-
-            composeExtensionResult.SuggestedActions = objSuggestedAction;
-            composeExtensionResult.Type = "config";
-            composeExtensionResponse.ComposeExtension = composeExtensionResult;
-
-            return composeExtensionResponse;
-        }
-
-        public ComposeExtensionResponse GetSignin()
-        {
-            string configUrl = ConfigurationManager.AppSettings["BaseUri"].ToString() + "/composeExtensionSettings.html";
-            CardAction configExp = new CardAction(ActionTypes.OpenUrl, "Config", null, configUrl);
-            List<CardAction> cardActions = new List<CardAction>();
-            cardActions.Add(configExp);
-            ComposeExtensionResponse composeExtensionResponse = new ComposeExtensionResponse();
-            ComposeExtensionResult composeExtensionResult = new ComposeExtensionResult();
-
-            ComposeExtensionSuggestedAction objSuggestedAction = new ComposeExtensionSuggestedAction();
-            objSuggestedAction.Actions = cardActions;
-
-            composeExtensionResult.SuggestedActions = objSuggestedAction;
-            composeExtensionResult.Type = "auth";
-            composeExtensionResponse.ComposeExtension = composeExtensionResult;
-
-            return composeExtensionResponse;
-        }
-
-        public ComposeExtensionResult GetMessageResponseResult(string message)
-        {
-            ComposeExtensionResult composeExtensionResult = new ComposeExtensionResult();
-            composeExtensionResult.Type = "message";
-            composeExtensionResult.Text = message;
-            return composeExtensionResult;
-        }
-
-        public async Task<WikiResult> SearchWiki(string queryParameter, ComposeExtensionQuery composeExtensionQuery)
-        {
-            string searchApiUrl = SearchApiUrlFormat.Replace("[keyword]", queryParameter);
-            searchApiUrl = searchApiUrl.Replace("[limit]", composeExtensionQuery.QueryOptions.Count + "");
-            searchApiUrl = searchApiUrl.Replace("[offset]", composeExtensionQuery.QueryOptions.Skip + "");
-
-            Uri apiUrl = new Uri(searchApiUrl);
-            return await ProcessRequest<WikiResult>(apiUrl);
-        }
-
         public async Task<ImageResult> SearchWikiImage(Search wikiSearch)
         {
             // a separate API call to Wikipedia is needed to fetch the page image, if it exists
@@ -367,10 +61,268 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
             return imageUrl;
         }
 
-        public ComposeExtensionResponse GetComposeExtensionQueryResult(List<ComposeExtensionAttachment> composeExtensionAttachments)
+        public async Task<MessagingExtensionResponse> GetComposeExtensionResponseAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionQuery query)
         {
-            ComposeExtensionResponse composeExtensionResponse = new ComposeExtensionResponse();
-            ComposeExtensionResult composeExtensionResult = new ComposeExtensionResult();
+            MessagingExtensionResponse composeExtensionResponse = null;
+            ImageResult imageResult = null;
+            List<MessagingExtensionAttachment> composeExtensionAttachments = new List<MessagingExtensionAttachment>();
+            var userData = await TemplateUtility.GetBotUserDataObject(_userState, turnContext, query);
+            var userPreferredCardType = userData.ComposeExtensionCardType;
+            var activity = turnContext.Activity;
+            bool isSettingUrl = false;
+
+            if (string.Equals(activity.Name.ToLower(), Strings.ComposeExtensionQuerySettingUrl))
+            {
+                isSettingUrl = true;
+            }
+
+            if (query.CommandId == null || query.Parameters == null)
+            {
+                return null;
+            }
+            var initialRunParameter = GetQueryParameterByName(query, Strings.manifestInitialRun);
+            var queryParameter = GetQueryParameterByName(query, Strings.manifestParameterName);
+
+            if (userData == null)
+            {
+                composeExtensionResponse = new MessagingExtensionResponse();
+                string message = Strings.ComposeExtensionNoUserData;
+                composeExtensionResponse.ComposeExtension = GetMessageResponseResult(message);
+                return composeExtensionResponse;
+            }
+
+            /**
+            * Below are the checks for various states that may occur
+            * Note that the order of many of these blocks of code do matter
+            */
+
+            // situation where the incoming payload was received from the config popup
+
+            if (!string.IsNullOrEmpty(query.State))
+            {
+                /**
+                // need to keep going to return a response so do not return here
+                // these variables are changed so if the word 'setting' kicked off the compose extension,
+                // then the word setting will not retrigger the config experience
+                **/
+
+                queryParameter = "";
+                initialRunParameter = "true";
+            }
+
+            // this is a sitaution where the user's preferences have not been set up yet
+            if (userData.ComposeExtensionCardType == null)
+            {
+                composeExtensionResponse = GetConfig();
+                return composeExtensionResponse;
+            }
+
+            /**
+            // this is the situation where the user has entered the word 'reset' and wants
+            // to clear his/her settings
+            // resetKeyword for English is "reset"
+            **/
+
+            if (string.Equals(queryParameter.ToLower(), Strings.ComposeExtensionResetKeyword))
+            {
+                composeExtensionResponse = new MessagingExtensionResponse();
+                composeExtensionResponse.ComposeExtension = GetMessageResponseResult(Strings.ComposeExtensionResetText);
+                return composeExtensionResponse;
+            }
+
+            /**
+            // this is the situation where the user has entered "setting" or "settings" in order
+            // to repromt the config experience
+            // keywords for English are "setting" and "settings"
+            **/
+
+            if (string.Equals(queryParameter.ToLower(), Strings.ComposeExtensionSettingKeyword) || string.Equals(queryParameter.ToLower(), Strings.ComposeExtensionSettingsKeyword) || (isSettingUrl))
+            {
+                composeExtensionResponse = GetConfig();
+                return composeExtensionResponse;
+            }
+
+            /**
+            // this is the situation where the user in on the initial run of the compose extension
+            // e.g. when the user first goes to the compose extension and the search bar is still blank
+            // in order to get the compose extension to run the initial run, the setting "initialRun": true
+            // must be set in the manifest for the compose extension
+            **/
+
+            if (initialRunParameter == "true")
+            {
+                // Signin Experience, please uncomment below code for Signin Experience
+                // ComposeExtensionResponse = GetSignin(composeExtensionResponse);
+                // Return composeExtensionResponse;
+
+                composeExtensionResponse = new MessagingExtensionResponse();
+
+                var historySearchWikiResult = userData.ComposeExtensionSelectedResults;
+                if (historySearchWikiResult != null)
+                {
+                    foreach (var searchResult in historySearchWikiResult)
+                    {
+                        WikiHelperSearchResult wikiSearchResult = new WikiHelperSearchResult(searchResult.imageUrl, searchResult.highlightedTitle, searchResult.text);
+
+                        // Create the card itself and the preview card based upon the information
+                        var createdCardAttachment = TemplateUtility.CreateComposeExtensionCardsAttachments(wikiSearchResult, userPreferredCardType);
+                        composeExtensionAttachments.Add(createdCardAttachment);
+                    }
+
+                    composeExtensionResponse = GetComposeExtensionQueryResult(composeExtensionAttachments);
+                }
+                else
+                {
+                    composeExtensionResponse.ComposeExtension = GetMessageResponseResult(Strings.ComposeExtensionInitialRunText);
+
+                }
+                return composeExtensionResponse;
+            }
+
+            /**
+            * Below here is simply the logic to call the Wikipedia API and create the response for
+            * a query; the general flow is to call the Wikipedia API for the query and then call the
+            * Wikipedia API for each entry for the query to see if that entry has an image; in order
+            * to get the asynchronous sections handled, an array of Promises for cards is used; each
+            * Promise is resolved when it is discovered if an image exists for that entry; once all
+            * of the Promises are resolved, the response is sent back to Teams
+            */
+
+            WikiResult wikiResult = await SearchWiki(queryParameter, query);
+
+            // enumerate search results and build Promises for cards for response
+            foreach (var searchResult in wikiResult.query.search)
+            {
+                //Get the Image result on the basis of Image Title one by one
+                imageResult = await SearchWikiImage(searchResult);
+
+                //Get the Image Url from imageResult
+                string imageUrl = GetImageURL(imageResult);
+
+                string cardText = searchResult.snippet + " ...";
+
+                WikiHelperSearchResult wikiSearchResult = new WikiHelperSearchResult(imageUrl, searchResult.title, cardText);
+
+                // Create the card itself and the preview card based upon the information
+                var createdCardAttachment = TemplateUtility.CreateComposeExtensionCardsAttachments(wikiSearchResult, userPreferredCardType);
+                composeExtensionAttachments.Add(createdCardAttachment);
+            }
+
+            composeExtensionResponse = GetComposeExtensionQueryResult(composeExtensionAttachments);
+
+            return composeExtensionResponse;
+        }
+
+        /// <summary>
+        /// Handle the callback received when the user selects an item from the results list        
+        /// </summary>
+        /// <param name="activity"></param>
+        /// <returns></returns>
+        public async Task<MessagingExtensionResponse> HandleComposeExtensionSelectedItem(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionQuery query)
+        {
+            // Keep a history of recently-selected items in bot user data. The history will be returned in response to the initialRun query
+            var userData = await TemplateUtility.GetBotUserDataObject(_userState, turnContext, query);
+
+            //Get the Max number of History items from config file
+            int maxComposeExtensionHistoryCount = Convert.ToInt32(ConfigurationManager.AppSettings[MaxComposeExtensionHistoryCountKey]);
+
+            WikiHelperSearchResult selectedItem = JsonConvert.DeserializeObject<WikiHelperSearchResult>(turnContext.Activity.Value.ToString());
+
+            var historySearchWikiResult = userData.ComposeExtensionSelectedResults;
+
+            //Removing other occurrences of the current selectedItem so there are not duplicates in the most recently used list
+            if (historySearchWikiResult != null && historySearchWikiResult.Count > 0)
+            {
+                int index = 0;
+                while (index < historySearchWikiResult.Count)
+                {
+                    if (string.Equals(historySearchWikiResult[index].highlightedTitle.ToLower(), selectedItem.highlightedTitle.ToLower()))
+                    {
+                        historySearchWikiResult.RemoveAt(index);
+                    }
+                    else
+                    {
+                        index++;
+                    }
+                }
+            }
+            else
+            {
+                historySearchWikiResult = new List<WikiHelperSearchResult>();
+            }
+
+            //Add new item in list
+            historySearchWikiResult.Insert(0, selectedItem);
+
+            //Restrict the transaction History with Max Items.
+            if (historySearchWikiResult.Count > maxComposeExtensionHistoryCount)
+            {
+                historySearchWikiResult = historySearchWikiResult.GetRange(0, maxComposeExtensionHistoryCount);
+            }
+
+            //Save the history Items in user Data
+            await TemplateUtility.SaveBotUserDataObject(_userState, turnContext, historySearchWikiResult);
+
+            MessagingExtensionResponse composeExtensionResponse = new MessagingExtensionResponse();
+            List<MessagingExtensionAttachment> composeExtensionAttachment = new List<MessagingExtensionAttachment>();
+
+            if (selectedItem != null)
+            {
+                // create the card itself and the preview card based upon the information
+                // check user preference for which type of card to create
+                var userPreferredCardType = userData.ComposeExtensionCardType;
+                var createdCardAttachment = TemplateUtility.CreateComposeExtensionCardsAttachmentsSelectedItem(selectedItem, userPreferredCardType);
+                composeExtensionAttachment.Add(createdCardAttachment);
+
+                composeExtensionResponse = GetComposeExtensionQueryResult(composeExtensionAttachment);
+            }
+            else
+            {
+                composeExtensionResponse.ComposeExtension = GetMessageResponseResult(Strings.ComposeExtensionInitialRunText);
+            }
+
+            return composeExtensionResponse;
+        }
+
+        public async Task<WikiResult> SearchWiki(string queryParameter, MessagingExtensionQuery composeExtensionQuery)
+        {
+            string searchApiUrl = SearchApiUrlFormat.Replace("[keyword]", queryParameter);
+            searchApiUrl = searchApiUrl.Replace("[limit]", composeExtensionQuery.QueryOptions.Count + "");
+            searchApiUrl = searchApiUrl.Replace("[offset]", composeExtensionQuery.QueryOptions.Skip + "");
+
+            Uri apiUrl = new Uri(searchApiUrl);
+            return await ProcessRequest<WikiResult>(apiUrl);
+        }
+
+        public MessagingExtensionResult GetMessageResponseResult(string message)
+        {
+            MessagingExtensionResult composeExtensionResult = new MessagingExtensionResult();
+            composeExtensionResult.Type = "message";
+            composeExtensionResult.Text = message;
+            return composeExtensionResult;
+        }
+        public MessagingExtensionResponse GetSignin()
+        {
+            string configUrl = ConfigurationManager.AppSettings["BaseUri"].ToString() + "/composeExtensionSettings.html";
+            CardAction configExp = new CardAction(ActionTypes.OpenUrl, "Config", null, configUrl);
+            List<CardAction> cardActions = new List<CardAction>();
+            cardActions.Add(configExp);
+            MessagingExtensionResponse composeExtensionResponse = new MessagingExtensionResponse();
+            MessagingExtensionResult composeExtensionResult = new MessagingExtensionResult();
+
+            MessagingExtensionSuggestedAction objSuggestedAction = new MessagingExtensionSuggestedAction();
+            objSuggestedAction.Actions = cardActions;
+
+            composeExtensionResult.SuggestedActions = objSuggestedAction;
+            composeExtensionResult.Type = "auth";
+            composeExtensionResponse.ComposeExtension = composeExtensionResult;
+
+            return composeExtensionResponse;
+        }
+        public MessagingExtensionResponse GetComposeExtensionQueryResult(List<MessagingExtensionAttachment> composeExtensionAttachments)
+        {
+            MessagingExtensionResponse composeExtensionResponse = new MessagingExtensionResponse();
+            MessagingExtensionResult composeExtensionResult = new MessagingExtensionResult();
             composeExtensionResult.Type = "result";
             composeExtensionResult.Attachments = composeExtensionAttachments;
             composeExtensionResult.AttachmentLayout = "list";
@@ -378,8 +330,40 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
 
             return composeExtensionResponse;
         }
-    }
 
+        // return the value of the specified query parameter
+        public string GetQueryParameterByName(MessagingExtensionQuery query, string name)
+        {
+            foreach (var param in query.Parameters)
+            {
+                if (param.Name == name)
+                {
+                    return param.Value.ToString();
+                }
+            }
+
+            return "";
+        }
+        public MessagingExtensionResponse GetConfig()
+        {
+            string configUrl = ConfigurationManager.AppSettings["BaseUri"].ToString() + "/composeExtensionSettings.html";
+            CardAction configExp = new CardAction(ActionTypes.OpenUrl, "Config", null, null, null, configUrl);
+            List<CardAction> cardActions = new List<CardAction>();
+            cardActions.Add(configExp);
+            MessagingExtensionResponse composeExtensionResponse = new MessagingExtensionResponse();
+            MessagingExtensionResult composeExtensionResult = new MessagingExtensionResult();
+
+            MessagingExtensionSuggestedAction objSuggestedAction = new MessagingExtensionSuggestedAction();
+            objSuggestedAction.Actions = cardActions;
+
+            composeExtensionResult.SuggestedActions = objSuggestedAction;
+            composeExtensionResult.Type = "config";
+            composeExtensionResponse.ComposeExtension = composeExtensionResult;
+
+            return composeExtensionResponse;
+        }
+
+    }
     public class WikiHelperSearchResult
     {
         public string imageUrl { get; set; }
