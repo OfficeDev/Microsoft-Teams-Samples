@@ -134,7 +134,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |:--:|:------------------|:---------------------------------------------------------------------------------------------------|:--------|:-------------|
 |1|Task Modules          | Sample app showing off the Teams Task Module, a way to invoke custom code from a bot, a tab, or both! |[View][app-task-module#cs]     |[View][app-task-module#ts]
 |2|Authentication        | Sample illustrating seamless inline authentication for Microsoft Teams apps.                      | | [View][app-auth#ts]
-|3|Complete Samples      | A template for building complex bots (SDK V3) for Microsoft Teams.                                      |[View][app-complete#cs]        |[View][app-complete#ts]
+|3|Complete Samples      | Sample covering multiple scenarios - dialogs, ME, and facebook auth.                                      |[View][app-complete#cs]        |[View][app-complete#ts]
 |4|Meetings Extensibility | Microsoft Teams meeting extensibility sample: token passing |[View][meetings-token-app#cs]     |[View][meetings-token-app#js]
 |5|Meetings Content Bubble Bot | Microsoft Teams meeting extensibility sample for iteracting with Content Bubble Bot in-meeting |[View][meetings-content-bubble#cs]    |[View][meetings-content-bubble#js]
 |6|Meetings SidePanel | Microsoft Teams meeting extensibility sample for iteracting with Side Panel in-meeting |[View][meetings-sidepanel#cs]     | [View][meetings-sidepanel#js]
@@ -146,7 +146,6 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |12|Meeting Events | Get real time meeting events  |[View][meetings-events#cs] | [View][meetings-events#js] |
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
-[app-complete-sample#cs]:samples/app-complete-sample/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
 [personal-tab-quickstart#ts]:samples/tab-personal-quickstart/ts
 [personal-tab-quickstart#js]:samples/tab-personal-quickstart/js

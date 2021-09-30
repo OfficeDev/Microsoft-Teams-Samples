@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bot Info</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js'></script>
+    <script src='https://code.jquery.com/jquery-1.11.3.min.js'></script>
+</head>
+<body>
+    <p>I prefer:</p>
+    <button onclick="selectThumbnailCards()">Thumbnail Cards</button>
+    <button onclick="selectHeroCards()">Hero Cards</button>
+    <script>
+        var microsoftTeams;
+        
+        $(document).ready(function () {
+            microsoftTeams.initialize();
+        });
+
+        function selectThumbnailCards() {
+            var thumbnailSetting = {
+                cardType: 'thumbnail'
+            };
+            microsoftTeams.authentication.notifySuccess(JSON.stringify(thumbnailSetting));
+        }
+
+        function selectHeroCards() {
+            var heroSetting = {
+                cardType: 'hero'
+            };
+            microsoftTeams.authentication.notifySuccess(JSON.stringify(heroSetting));
+        }
+    </script>
+</body>
+
+</html>
