@@ -8,15 +8,6 @@ class BotActivityHandler extends TeamsActivityHandler {
     constructor() {
         super();
 
-        // Called when there is conversation update event.
-        this.onConversationUpdate(async (context, next) => {
-
-            // Calling method to set conversation reference.
-            this.addConversationReference(context.activity);
-
-            await next();
-        });
-
         // Called when the bot is added to a team.
         this.onMembersAdded(async (context, next) => {
             const membersAdded = context.activity.membersAdded;
@@ -37,12 +28,6 @@ class BotActivityHandler extends TeamsActivityHandler {
 
         // Activity called when there's a message in channel
         this.onMessage(async (context, next) => {
-
-            // Calling method to set conversation reference.
-            this.addConversationReference(context.activity);
-
-            // Calling method to set conversation data reference that has roster information.
-            this.addConversationDataReference(context);
             var replyText = context.activity.text;
             await context.sendActivity(MessageFactory.text(`You sent '${replyText}'`));
             await next();

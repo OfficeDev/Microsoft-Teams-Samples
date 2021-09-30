@@ -12,6 +12,7 @@ export interface IBasicDetailsMobileProps {
     downloadFile: () => void,
 }
 
+// Component for basic details about candidate
 const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
     const [candidateDetails, setCandidateDetails] = React.useState<ICandidateDetails[]>([]);
     const [skills, setSkills] = React.useState<string[]>([]);
@@ -29,17 +30,21 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
                 console.log("Some error occurred in the task module")
                 return
             }
-            const assetDetail: IAssetDetails = {
-                message: note
+
+            if (note !== undefined) {
+                const assetDetail: IAssetDetails = {
+                    message: note
+                }
+
+                shareAssets(assetDetail)
+                    .then((res) => {
+                        console.log(res)
+                    })
+                    .catch((ex) => {
+                        console.log("Some error occurred while sharing the assets info");
+                        console.log(ex);
+                    });
             }
-            shareAssets(assetDetail)
-            .then((res) => {
-                console.log(res)
-            })
-            .catch((ex) => {
-                console.log("Some error occurred while sharing the assets info");
-                console.log(ex);
-            });
         })
     }
 
@@ -107,7 +112,7 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
                             }} />
                         </Flex>
                         <Flex gap="gap.small">
-                            <Button content={"Resume"} className="linkLabel" onClick={props.downloadFile}/>
+                            <Button content={"Resume"} className="linkLabel" onClick={props.downloadFile} />
                             <Button content={"Peer feedback"} className="linkLabel" />
                         </Flex>
                     </Flex>

@@ -17,6 +17,7 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import { IQuestionSet } from "./basic-details.types";
 import { saveQuestions, getQuestions, deleteQuestion as deleteQuestionDetails, editQuestion } from "../services/recruiting-detail.service";
 
+// Component for the Questions section
 const Questions = (): React.ReactElement => {
     // The questions array set for a meeting.
     const [questionDetails, setQuestionDetails] = React.useState<any[]>([]);
@@ -51,7 +52,6 @@ const Questions = (): React.ReactElement => {
                     }
                 })
 
-
                 // API call to save the question to storage.
                 saveQuestions(questDetails)
                     .then((res) => {
@@ -78,6 +78,7 @@ const Questions = (): React.ReactElement => {
                 console.log("Some error occurred in the task module")
                 return
             }
+
             microsoftTeams.getContext((context) => {
                 const questDetails: IQuestionSet = {
                     MeetingId: context.meetingId!,

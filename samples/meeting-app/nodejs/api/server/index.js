@@ -1,3 +1,13 @@
+// Import required bot services.
+// See https://aka.ms/bot-services to learn more about the different parts of a bot.
+const { BotFrameworkAdapter, CardFactory } = require('botbuilder');
+const { BotActivityHandler } = require('./bot/botActivityHandler');
+const candidateHandler = require('./data/candidate')
+const questionsHandler = require('./data/questions')
+const notesHandler = require('./data/notes')
+const feedbackHandler = require('./data/feedback')
+const { ConversationRef } = require('./bot/botActivityHandler');
+const cardHelper = require('./cards/cardHelper')
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
@@ -7,22 +17,51 @@ require('dotenv').config({ path: ENV_FILE });
 const PORT = process.env.PORT || 3978;
 const server = express();
 
-const candidateHandler = require('./data/candidate')
-const questionsHandler = require('./data/questions')
-const notesHandler = require('./data/notes')
-const feedbackHandler = require('./data/feedback')
-const { AdapterRef } = require('./api/botController');
-const { ConversationRef } = require('./bot/botActivityHandler');
-const { CardFactory } = require('botbuilder');
-const cardHelper = require('./cards/cardHelper')
+// Create bot handlers
+const botActivityHandler = new BotActivityHandler();
+
+
+// Listen for incoming activities and route them to your bot main dialog.
+server.post('/api/messages', (req, res) => {
+    // Route received a request to adapter for processing
+    adapter.processActivity(req, res, async (turnContext) => {
+        // route to bot activity handler.
+        await botActivityHandler.run(turnContext);
+    });
+});
+
+// Create adapter.
+// See https://aka.ms/about-bot-adapter to learn more about adapters.
+const adapter = new BotFrameworkAdapter({
+    appId: process.env.MicrosoftAppId,
+    appPassword: process.env.MicrosoftAppPassword
+});
+
+adapter.onTurnError = async (context, error) => {
+    // This check writes out errors to console log .vs. server insights.
+    // NOTE: In production environment, you should consider logging this to Azure
+    //       serverlication insights.
+    console.error(`\n [onTurnError] unhandled error: ${ error }`);
+
+    // Send a trace activity, which will be displayed in Bot Framework Emulator
+    await context.sendTraceActivity(
+        'OnTurnError Trace',
+        `${ error }`,
+        'https://www.botframework.com/schemas/error',
+        'TurnError'
+    );
+
+    // Send a message to the user
+    await context.sendActivity('The bot encountered an error or bug, please fix the bot source code.');
+};
+
+
 
 server.use(cors());
 server.use(express.json());
 server.use(express.urlencoded({
     extended: true
 }));
-
-server.use('/api', require('./api'));
 
 server.get('/api/candidate', async (req, res) => {
     candidateHandler.getCandidateDetails(function(response) {
@@ -81,7 +120,7 @@ server.get('/api/Candidate/file', (req, res) => {
 
 server.post('/api/Notify', async (req, res) => {
     for (const conversationReference of Object.values(ConversationRef)) {
-        await AdapterRef.continueConversation(conversationReference, async turnContext => {
+        await adapter.continueConversation(conversationReference, async turnContext => {
             await turnContext.sendActivity({ attachments: [CardFactory.adaptiveCard(cardHelper.getCardForMessage(req.body.message))] });
         });
     }

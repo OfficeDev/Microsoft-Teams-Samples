@@ -3,6 +3,7 @@ import { Flex, Button, Text, TextArea } from '@fluentui/react-northstar'
 import "../../recruiting-details/recruiting-details.css"
 import * as microsoftTeams from "@microsoft/teams-js";
 
+// Component for Add Notes task module
 const AddNotes = (): React.ReactElement => {
     const [note, setNote] = React.useState<string>('');
 

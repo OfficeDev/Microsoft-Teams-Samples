@@ -1,8 +1,6 @@
 import React from "react";
 import { Flex, Card, Button, Text, AddIcon, TextArea } from '@fluentui/react-northstar'
 import "../../recruiting-details/recruiting-details.css"
-import { getQuestions } from "../services/recruiting-detail.service";
-import * as microsoftTeams from "@microsoft/teams-js";
 import { IQuestionDetails } from "../../../types/recruitment.types";
 
 export interface IQuestionProps {
@@ -12,6 +10,7 @@ export interface IQuestionProps {
     setShowAddComment: (rowKey: string, isShow: boolean) => void
 }
 
+// Component for Questions section in mobile for feedback by interviewer
 const QuestionsMobile = (props: IQuestionProps): React.ReactElement => {
     const getRatings = (questionId: string, currentRating: number) => {
         const prevItems = [];
@@ -42,7 +41,8 @@ const QuestionsMobile = (props: IQuestionProps): React.ReactElement => {
                                         {getRatings(questionDetail.RowKey, questionDetail.Rating!)}
                                     </Flex>
 
-                                    <Button
+                                    <Flex>
+                                        <Button
                                         text
                                         size="small"
                                         icon={<AddIcon size="small" />}
@@ -51,6 +51,7 @@ const QuestionsMobile = (props: IQuestionProps): React.ReactElement => {
                                         className="add-button"
                                         hidden={questionDetail.ShowAddComment}
                                         onClick={() => { props.setShowAddComment(questionDetail.RowKey, true) }} />
+                                    </Flex>
 
                                     <Flex gap="gap.small" column hidden={!questionDetail.ShowAddComment}>
                                         <Text content="Comment" />

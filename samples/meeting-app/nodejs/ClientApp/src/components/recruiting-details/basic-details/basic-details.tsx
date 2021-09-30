@@ -23,6 +23,7 @@ export interface IBasicDetailsProps {
     downloadFile: () => void,
 }
 
+// Component for basic details about candidate
 const BasicDetails = (props: IBasicDetailsProps) => {
     const [candidateDetails, setCandidateDetails] = React.useState<ICandidateDetails[]>([]);
     const [selectedIndex, setSelectedIndex] = React.useState(0);

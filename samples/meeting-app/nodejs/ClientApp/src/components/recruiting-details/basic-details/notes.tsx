@@ -9,8 +9,8 @@ export interface INotesProps {
     currentCandidateEmail: string
 }
 
+// Component for Notes details
 const Notes = (props: INotesProps) => {
-
     const [notes, setNotes] = React.useState<any[]>([]);
 
     // Method to start task module to add a note.

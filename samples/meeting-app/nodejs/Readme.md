@@ -18,41 +18,47 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 
 
 ## To try this sample
-- Create a Bot Registration
+1) Create a Bot Registration
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2#create-the-resource).
  
-- Clone the repository
+2) Create a Azure Storage account(This is needed to store/retrieve data that's used in the app) 
+  [Create storage account](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal)
+
+  This step will create a storage account. You will require storage account name and keys in next steps.
+  Please follow [View account keys](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to see the keys info.
+
+3) Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
-- We have two different solutions to run so follow below steps:
+4) We have two different solutions to run so follow below steps:
  A) In a terminal, navigate to `samples/meeting-app/nodejs/api`
 
  B) In a different terminal, navigate to `samples/meeting-app/nodejs/clientapp`
 
-- Run ngrok - point to port 3000
+5) Run ngrok - point to port 3000
 
     ```bash
     # ngrok http -host-header=rewrite 3000
     ```
-- Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
+6) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
    - `<<APP-ID>>` with some unique GUID. e.g. your app id generated in Step-1 
    - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
    - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
 
-- Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
+7) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
 
-- Modify the `.env` file in the location `samples/meeting-app/nodejs/api` and fill in the `{{ MicrosoftAppId }}`,`{{ MicrosoftAppPassword }}` generated from step 1 (Create a bot registration step).
+8) Modify the `.env` file in the location `samples/meeting-app/nodejs/api` and fill in the `{{ MicrosoftAppId }}`,`{{ MicrosoftAppPassword }}` generated from step 1 (Create a bot registration step).
 
-- Modify the `keys.js` file in the location `samples/meeting-app/nodejs/api/server and fill in the `[STORAGE ACCOUNT NAME]` and `[ACCESS KEY]` for azure table storage.
+9) Modify the `keys.js` file in the location `samples/meeting-app/nodejs/api/server and fill in the `[STORAGE ACCOUNT NAME]` and `[ACCESS KEY]` for azure table storage.
 
-- Run both solutions i.e. `samples/meeting-app/nodejs/api` and `samples/meeting-app/nodejs/clientapp`
+10) Run both solutions i.e. `samples/meeting-app/nodejs/api` and `samples/meeting-app/nodejs/clientapp`
 
     ```
     npm start
     ```
 
-- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+11) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
@@ -94,6 +100,11 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
     ![Sidepanel Overview](Images/sidepanel_overview.png)
 
     ![Sidepanel Questions](Images/sidepanel_questions.png)
+
+5) Share assets:
+   This is used to share assets to the candidate.
+   ![Share Assets](MeetingApp/Images/share_assets.png)
+
 ## Testing the bot using Bot Framework Emulator
 
 [Bot Framework Emulator](https://github.com/microsoft/botframework-emulator) is a desktop application that allows bot developers to test and debug their bots on localhost or running remotely through a tunnel.

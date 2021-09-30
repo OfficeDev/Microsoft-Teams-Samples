@@ -1,3 +1,4 @@
+// Type for candidate details
 export interface ICandidateDetails {
   Attachments: string;
   CandidateName: string;
@@ -13,6 +14,7 @@ export interface ICandidateDetails {
   TwitterUrl: string;
 }
 
+// Type for question details
 export interface IQuestionSet {
   MeetingId: string;
   QuestionId?: string,
@@ -21,6 +23,7 @@ export interface IQuestionSet {
   IsDelete: number;
 }
 
+// Type for asset details
 export interface IAssetDetails {
  message: string;
 }
