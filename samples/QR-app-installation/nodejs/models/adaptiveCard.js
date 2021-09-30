@@ -5,7 +5,7 @@ const getAdaptiveCardUserDetails = () => {
         body: [
             {
                 type: 'TextBlock',
-                text: 'Please use the following action to generate QR for team id',
+                text: 'Generate QR for app id and install app',
                 weight: 'bolder',
                 size: 3
             }
