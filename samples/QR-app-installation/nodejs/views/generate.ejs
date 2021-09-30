@@ -10,25 +10,9 @@
     <script>
         microsoftTeams.initialize();
         function generateQR() {
-            var teamId = $("#teamIdInput").val();
-            $.ajax({
-                url: "https://api.qrserver.com/v1/create-qr-code/?data=" + teamId + "&size=20*20",
-                type: "GET",
-                cache: false,
-                xhr: function () {
-                    var xhr = new XMLHttpRequest();
-                    xhr.responseType = 'blob'
-                    return xhr;
-                },
-                success: function (response) {
-                    var url = window.URL || window.webkitURL;
-                    $("#qrImg").attr("src", url.createObjectURL(response));
-                    $("#qrImg").removeAttr("hidden");
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-                },
-            });
+            var appId = $("#appIdOptions").val();
+            $("#qrImg").attr("src", `${window.location.origin}/Images/${appId}.png`);
+            $("#qrImg").removeAttr("hidden");
         };
     </script>
 </head>
@@ -37,8 +21,13 @@
     <div class="surface">
         <div class="panel">
             <div>
-                <label for="teamIdInput">Enter Team Id:</label>
-                <input id="teamIdInput" name="fname" type="text" />
+                <label for="appIdOptions">Select App</label>
+                <select id="appIdOptions" name="cars">
+                    <option value="1542629c-01b3-4a6d-8f76-1938b779e48d" selected>Polly</option>
+                    <option value="81fef3a6-72aa-4648-a763-de824aeafb7d">Forms</option>
+                    <option value="7299542a-1697-4ec1-812b-6b70065c0795">Azure Boards</option>
+                    <option value="0c5cfdbb-596f-4d39-b557-5d9516c94107">App Studio</option>
+                </select>
                 <button onClick="generateQR()">Generate QR</button>
                 <img alt="QR Image" id="qrImg" hidden="hidden" />
             </div>
