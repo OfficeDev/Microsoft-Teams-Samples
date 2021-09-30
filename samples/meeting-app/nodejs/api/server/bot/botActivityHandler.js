@@ -14,15 +14,18 @@ class BotActivityHandler extends TeamsActivityHandler {
             // Calling method to set conversation reference.
             this.addConversationReference(context.activity);
 
-            // Calling method to set conversation data reference that has roster information.
-            this.addConversationDataReference(context);
             await next();
         });
 
         // Called when the bot is added to a team.
         this.onMembersAdded(async (context, next) => {
-            var welcomeText = "Hello and welcome!";
-            await context.sendActivity(MessageFactory.text(welcomeText));
+            const membersAdded = context.activity.membersAdded;
+            for (let cnt = 0; cnt < membersAdded.length; cnt++) {
+                if (membersAdded[cnt].id !== context.activity.recipient.id) {
+                    var welcomeText = "Hello and welcome!";
+                    await context.sendActivity(MessageFactory.text(welcomeText));
+                }
+            }
 
             // Calling method to set conversation reference.
             this.addConversationReference(context.activity);
