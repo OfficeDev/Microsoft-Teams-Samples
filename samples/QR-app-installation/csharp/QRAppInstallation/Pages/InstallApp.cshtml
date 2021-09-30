@@ -14,6 +14,8 @@
         });
        
         var appId;
+        var appName;
+
         // Method to scan barcode
         function scanBarCode() {
             var config = {
@@ -22,6 +24,7 @@
 
             // Method that enables the user to scan different types of barcode, and returns the result as a string.  
             microsoftTeams.media.scanBarCode((error, decodedText) => {
+
                 // If there's any error, an alert shows the error message/code
                 if (error) {
                     if (error.message) {
@@ -31,7 +34,19 @@
                     }
                 } else if (decodedText) {
                     appId = decodedText;
-                    $("#scannedText").text(decodedText);
+                    if (decodedText == "1542629c-01b3-4a6d-8f76-1938b779e48d") {
+                        appName = "Polly"
+                    }
+                    else if (decodedText == "81fef3a6-72aa-4648-a763-de824aeafb7d") {
+                        appName = "Forms"
+                    }
+                    if (decodedText == "7299542a-1697-4ec1-812b-6b70065c0795") {
+                        appName = "Azure Boards"
+                    }
+                    if (decodedText == "0c5cfdbb-596f-4d39-b557-5d9516c94107") {
+                        appName = "App Studio"
+                    }
+                    $("#scannedText").text("Please click on confirm to install app -" + appName + "");
                 }
             }, config);
         }
@@ -55,7 +70,7 @@
         <div class="panel">
             <div>
                 <label id="scannedText"></label>
-                <button type="button" onclick="installApp()">Install App</button>
+                <button type="button" onclick="installApp()">Confirm</button>
             </div>
         </div>
     </div>

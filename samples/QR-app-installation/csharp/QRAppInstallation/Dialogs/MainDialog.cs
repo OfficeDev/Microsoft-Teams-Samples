@@ -84,7 +84,7 @@ namespace QRAppInstallation.Dialogs
                 {
                     new AdaptiveTextBlock
                     {
-                        Text = "Please use the following action to generate QR for team and install it using scan and install option",
+                        Text = "Generate QR for app and install",
                         Weight = AdaptiveTextWeight.Bolder,
                         Spacing = AdaptiveSpacing.Medium,
                     }

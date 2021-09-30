@@ -56,9 +56,9 @@ namespace QRAppInstallation
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseDefaultFiles()
-                .UseStaticFiles()
-                .UseWebSockets()
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            app.UseWebSockets()
                 .UseRouting()
                 .UseAuthorization()
                 .UseEndpoints(endpoints =>
