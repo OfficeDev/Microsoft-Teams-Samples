@@ -1,6 +1,8 @@
-This sample demos app installation using QR code with team id in Csharp
+## Install app using barcode sample
 
-This feature shown in this sample is in Public Developer Preview and is supported in desktop and mobile.
+This sample demos app installation using QR code with applications app id in Nodejs
+
+Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients
 
 ## Features of the sample
 
