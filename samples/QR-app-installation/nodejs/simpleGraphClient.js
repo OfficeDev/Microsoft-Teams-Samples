@@ -4,10 +4,10 @@
 const { Client } = require('@microsoft/microsoft-graph-client');
 
 /**
- * This class is a wrapper for the Microsoft Graph API.
- * See: https://developer.microsoft.com/en-us/graph for more information.
- */
-class GraphClient {
+* This class is a wrapper for the Microsoft Graph API.
+* See: https://developer.microsoft.com/en-us/graph for more information.
+*/
+class SimpleGraphClient {
     constructor(token) {
         if (!token || !token.trim()) {
             throw new Error('SimpleGraphClient: Invalid token received.');
@@ -19,17 +19,21 @@ class GraphClient {
         this.graphClient = Client.init({
             authProvider: (done) => {
                 done(null, this._token); // First parameter takes an error if you can't get an access token.
-            },
+            }
         });
     }
 
-    async GetUserProfile() {
-        return await this.graphClient.api('/me').get();
-    }
-
-    async GetUserPhoto() {
-        return await this.graphClient.api('/me/photo/$value').get();
+    /**
+    * Install app in a team
+    */
+    async installApp(appId,teamId) {
+        const teamsAppInstallation = {
+            'teamsApp@odata.bind':'https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/'+ appId
+         };
+         
+         await this.graphClient.api('/teams/'+ teamId +'/installedApps')
+             .post(teamsAppInstallation);
     }
 }
 
-exports.GraphClient = GraphClient;
+exports.SimpleGraphClient = SimpleGraphClient;

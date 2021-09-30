@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+    integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+    crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        microsoftTeams.initialize(() => {
+            scanBarCode();
+        });
+       
+        var appId;
+        // Method to scan barcode
+        function scanBarCode() {
+            var config = {
+                timeOutIntervalInSec: 30
+            };
+            // Method that enables the user to scan different types of barcode, and returns the result as a string.  
+            microsoftTeams.media.scanBarCode((error, decodedText) => {
+                // If there's any error, an alert shows the error message/code
+                if (error) {
+                    if (error.message) {
+                        alert(" ErrorCode: " + error.errorCode + error.message);
+                    } else {
+                        alert(" ErrorCode: " + error.errorCode);
+                    }
+                } else if (decodedText) {
+                    appId = decodedText;
+                    $("#scannedText").text(decodedText);
+                }
+            }, config);
+        }
+       function installApp() {
+            var teamId;
+               microsoftTeams.getContext(function (context) {
+                    teamId = context.groupId;
+                    var appInfo ={
+                        appId:null,
+                        teamId:null};
+                    appInfo.appId=appId;
+                    appInfo.teamId = teamId;
+                    microsoftTeams.tasks.submitTask(appInfo);               
+               }); 
+         };
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            <div>
+                <label id="scannedText"></label>
+                <button type="button" onclick="installApp()">Install App</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
