@@ -2,7 +2,7 @@
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
-namespace TabWithAdpativeCardFlow.Models
+namespace QRAppInstallation.Models
 {
     using Microsoft.Bot.Schema;
     using Newtonsoft.Json;
@@ -23,5 +23,6 @@ namespace TabWithAdpativeCardFlow.Models
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
+
     }
 }

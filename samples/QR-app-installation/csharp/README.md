@@ -1,5 +1,4 @@
-﻿This App talks about the Teams tab which displays Adaptive card with CSharp.
-For reference please check [Build tabs with Adaptive Cards](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs)
+﻿This sample demos app installation using QR code with team id in Csharp
 
 This feature shown in this sample is in Public Developer Preview and is supported in desktop and mobile.
 
@@ -24,11 +23,11 @@ This feature shown in this sample is in Public Developer Preview and is supporte
 2. Create a Bot Registration
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
-3. Modify the `manifest.json` in the `/AppPackage` folder and replace the `{{BOT-ID}}` with the id from step 2.
+3. Modify the `manifest.json` in the `/AppPackage` folder and replace the `{{Microsoft-App-Id}}` with the id from step 2.
 
 4. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 7.
 
-5. Modify the `/appsettings.json` and fill in the `{{ Bot Id }}`,`{{ Bot Password }}` and `{{ Connection Name }}` with the id from step 2.
+5. Modify the `/appsettings.json` and fill in the `{{Microsoft-App-Id}}`,`{{ Bot Password }}` and `{{Microsoft-App-Password}}` with the id from step 2.
 
 6. Add `{{ Application Base Url }}`in appsetting.json with ngrok tunnel url or deployed application base url. 
 
@@ -40,11 +39,11 @@ This feature shown in this sample is in Public Developer Preview and is supporte
     
 ## To try this sample
 
-- In a terminal, navigate to `TabWithAdpativeCardFlow`
+- In a terminal, navigate to `QRAppInstallation`
 
     ```bash
     # change into project folder
-    cd # TabWithAdpativeCardFlow
+    cd # QRAppInstallation
     ```
 
 - Run the bot from a terminal or from Visual Studio, choose option A or B.
@@ -60,8 +59,8 @@ This feature shown in this sample is in Public Developer Preview and is supporte
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `TabWithAdpativeCardFlow` folder
-  - Select `TabWithAdpativeCardFlow.csproj` file
+  - Navigate to `QRAppInstallation` folder
+  - Select `QRAppInstallation.csproj` file
   - Press `F5` to run the project
 
 ## Interacting with the tab in Teams

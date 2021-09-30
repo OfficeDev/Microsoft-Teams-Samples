@@ -3,7 +3,6 @@
 // Generated with Bot Builder V4 SDK Template for Visual Studio v4.14.0
 
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
@@ -11,32 +10,51 @@ using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
-using TabWithAdpativeCardFlow.Models;
-using AdaptiveCards;
 using Newtonsoft.Json.Linq;
 using QRAppInstallation.Models;
+using Microsoft.Bot.Builder.Dialogs;
 
-namespace TabWithAdpativeCardFlow.Bots
+namespace QRAppInstallation.Bots
 {
     /// <summary>
     /// Bot Activity handler class.
     /// </summary>
-    public class ActivityBot : TeamsActivityHandler
+    public class ActivityBot<T> : TeamsActivityHandler where T : Dialog
     {
         private readonly string _connectionName;
         private readonly string _applicationBaseUrl;
-
-        public ActivityBot(IConfiguration configuration)
+        protected readonly BotState ConversationState;
+        protected readonly Dialog Dialog;
+        protected readonly IStatePropertyAccessor<TokenState> _TokenState;
+        public ActivityBot(IConfiguration configuration, ConversationState conversationState, T dialog)
         {
             _connectionName = configuration["ConnectionName"] ?? throw new NullReferenceException("ConnectionName");
             _applicationBaseUrl = configuration["ApplicationBaseUrl"] ?? throw new NullReferenceException("ApplicationBaseUrl");
+            ConversationState = conversationState;
+            Dialog = dialog;
+            _TokenState = conversationState.CreateProperty<TokenState>(nameof(TokenState));
         }
 
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForTaskModule()), cancellationToken);
+            // Run the Dialog with the new message Activity.
+            await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
+           // await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForTaskModule()), cancellationToken);
         }
 
+        /// <summary>
+        /// Handle request from bot.
+        /// </summary>
+        /// <param name = "turnContext" > The turn context.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
+        public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken)
+        {
+            await base.OnTurnAsync(turnContext, cancellationToken);
+
+            // Save any state changes that might have occured during the turn.
+            await ConversationState.SaveChangesAsync(turnContext, false, cancellationToken);
+        }
         protected override Task<TaskModuleResponse> OnTeamsTaskModuleFetchAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
             var asJobject = JObject.FromObject(taskModuleRequest.Data);
@@ -74,56 +92,25 @@ namespace TabWithAdpativeCardFlow.Bots
             return Task.FromResult(taskModuleResponse);
         }
 
-        /// <summary>
-        /// Sample Adaptive card for Meeting Start event.
-        /// </summary>
-        private Attachment GetAdaptiveCardForTaskModule()
+        protected override async Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
-            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
-            {
-                Body = new List<AdaptiveElement>
-                {
-                    new AdaptiveTextBlock
-                    {
-                        Text = "Please use the following action to generate QR for team and install it using scan and install option",
-                        Weight = AdaptiveTextWeight.Bolder,
-                        Spacing = AdaptiveSpacing.Medium,
-                    }
-                },
-                Actions = new List<AdaptiveAction>
-                {
-                    new AdaptiveSubmitAction
-                    {
-                        Title = "Generate QR code",
-                        Data = new AdaptiveCardAction
-                        {
-                            MsteamsCardAction = new CardAction
-                            {
-                                Type = "task/fetch",
-                            },
-                            Id="generate"
-                        },
-                    },
-                     new AdaptiveSubmitAction
-                    {
-                        Title = "Install App",
-                        Data = new AdaptiveCardAction
-                        {
-                            MsteamsCardAction = new CardAction
-                            {
-                                Type = "task/fetch",
-                            },
-                            Id="install"
-                        },
-                    },
-                },
-            };
+            var appInfo = JObject.FromObject(taskModuleRequest.Data);
+            var appId = (string)appInfo.ToObject<AppInstallDetails<string>>()?.AppId;
+            var teamId = (string)appInfo.ToObject<AppInstallDetails<string>>()?.TeamId;
+            var Token = await this._TokenState.GetAsync(turnContext, () => new TokenState());
 
-            return new Attachment()
+            if (appInfo != null)
             {
-                ContentType = AdaptiveCard.ContentType,
-                Content = card,
-            };
+                if (Token == null || string.IsNullOrEmpty(Token.AccessToken))
+                {
+                    await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
+                }
+
+                var client = new SimpleGraphClient(Token.AccessToken);
+                await client.InstallAppInTeam(teamId, appId);
+                await turnContext.SendActivityAsync("App added sucessfully");
+           }
+           return null;
         }
     }
 }

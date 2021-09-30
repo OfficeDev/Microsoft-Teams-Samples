@@ -11,9 +11,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-using TabWithAdpativeCardFlow.Bots;
+using QRAppInstallation.Bots;
+using QRAppInstallation.Dialogs;
 
-namespace TabWithAdpativeCardFlow
+namespace QRAppInstallation
 {
     public class Startup
     {
@@ -32,11 +33,19 @@ namespace TabWithAdpativeCardFlow
             services.AddHttpClient().AddControllers().AddNewtonsoftJson();
             services.AddRazorPages();
 
+            // Create the storage we'll be using for User and Conversation state. (Memory is great for testing purposes.)
+            services.AddSingleton<IStorage, MemoryStorage>();
+
+            // Create the Conversation state. (Used by the Dialog system itself.)
+            services.AddSingleton<ConversationState>();
+
+            // The Dialog that will be run by the bot.
+            services.AddSingleton<MainDialog>();
             // Create the Bot Framework Adapter with error handling enabled.
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-            services.AddTransient<IBot, ActivityBot>();
+            services.AddTransient<IBot, AuthBot<MainDialog>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

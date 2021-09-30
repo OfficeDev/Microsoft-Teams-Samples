@@ -13,6 +13,7 @@
             scanBarCode();
         });
        
+        var appId;
         // Method to scan barcode
         function scanBarCode() {
             var config = {
@@ -29,10 +30,24 @@
                         alert(" ErrorCode: " + error.errorCode);
                     }
                 } else if (decodedText) {
+                    appId = decodedText;
                     $("#scannedText").text(decodedText);
                 }
             }, config);
         }
+
+       function installApp() {
+            var teamId;
+               microsoftTeams.getContext(function (context) {
+                    teamId = context.groupId;
+                    var appInfo ={appId:null,
+                    teamId:null};
+                    appInfo.appId=appId;
+                    appInfo.teamId = teamId;
+                    microsoftTeams.tasks.submitTask(appInfo);               
+               }); 
+         };
+       
     </script>
 </head>
 <body class="theme-light">
@@ -40,6 +55,7 @@
         <div class="panel">
             <div>
                 <label id="scannedText"></label>
+                <button type="button" onclick="installApp()">Install App</button>
             </div>
         </div>
     </div>
