@@ -90,12 +90,16 @@ namespace FetchGroupChatMessagesWithRSC.Dialogs
                     System.IO.File.WriteAllText(fileName, string.Empty);
                 }
                 foreach (var chat in activity) {
-                    using (StreamWriter sw = new(fileName, append: true))
+                    if(chat.MessageType.ToString() == "Message")
                     {
-                        sw.WriteLine("from: {0}", chat.From.User!=null ? chat.From.User.DisplayName:"bot" );
-                        sw.WriteLine("text: {0}", chat.Body.Content.ToString());
-                        sw.WriteLine("at: {0}", chat.LastModifiedDateTime);
+                        using (StreamWriter sw = new(fileName, append: true))
+                        {
+                            sw.WriteLine("from: {0}", chat.From.User != null ? chat.From.User.DisplayName : "bot");
+                            sw.WriteLine("text: {0}", chat.Body.Content.ToString());
+                            sw.WriteLine("at: {0}", chat.LastModifiedDateTime);
+                        }
                     }
+                   
                 }
             }
         }
