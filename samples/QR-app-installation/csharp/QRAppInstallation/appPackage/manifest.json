@@ -16,7 +16,7 @@
   },
   "description": {
     "short": "Install app by QR",
-    "full": "This sample demos app installation using QR code with team id"
+    "full": "This sample demos app installation using QR code which has application's app id"
   },
   "icons": {
     "outline": "outline.png",

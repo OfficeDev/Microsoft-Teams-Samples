@@ -1,6 +1,8 @@
-﻿This sample demos app installation using QR code with team id in Csharp
+﻿﻿## Install app using barcode sample
 
-This feature shown in this sample is in Public Developer Preview and is supported in desktop and mobile.
+This sample demos app installation using QR code with applications app id in Csharp
+
+Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients
 
 ## Features of the sample
 
@@ -21,47 +23,48 @@ This feature shown in this sample is in Public Developer Preview and is supporte
   # determine dotnet version
   dotnet --version
   ```
-- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+  ```bash
+  # run ngrok locally
+  ngrok http -host-header=localhost 3978
+  ```
 
-## Setup
+- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-1. Run ngrok - point to port 3978
+## To try this sample
 
-```bash
-# ngrok http -host-header=rewrite 3978
-```
-
-2. Create a Bot Registration
+1. Create a Bot Registration
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
    Add following permission in app registration.
    
    ![Permission](QRAppInstallation/Images/Permission.png)
-   
 
-3. Modify the `manifest.json` in the `/appPackage` folder and replace the `{{Microsoft-App-Id}}` with the id from step 2 and `{{domain-name}}` with base Url domain.
+2) Clone the repository
+   ```bash
+   git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+   ```
 
-4. Zip the contents of `appPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 7.
-
-5. Modify the `/appsettings.json` and fill in the `{{Microsoft-App-Id}}`,`{{ Microsoft-App-Password }}` and `{{onnection Name}}` with the id from step 2.
-
-6. Add `{{ Application Base Url }}`in appsetting.json with ngrok tunnel url or deployed application base url. 
-
-7. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
-   - Go to Microsoft Teams. From the lower left corner, select Apps
-   - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
-   - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
-    
-## To try this sample
-
-- In a terminal, navigate to `QR-app-installation`
+3) In a terminal, navigate to `samples/QR-app-installation/csharp`
 
     ```bash
     # change into project folder
     cd # QRAppInstallation
     ```
+4) Run ngrok - point to port 3978
 
-- Run the bot from a terminal or from Visual Studio, choose option A or B.
+    ```bash
+    # ngrok http -host-header=rewrite 3978
+ ```
+ 
+5) Modify the `manifest.json` in the `/appPackage` folder and replace the `{{Microsoft-App-Id}}` with the id from step 2 and `{{domain-name}}` with base Url domain.
+
+6) Zip the contents of `appPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 7.
+
+7) Modify the `/appsettings.json` and fill in the `{{Microsoft-App-Id}}`,`{{ Microsoft-App-Password }}` and `{{onnection Name}}` with the id from step 2.
+
+8) Add `{{ Application Base Url }}`in appsetting.json with ngrok tunnel url or deployed application base url.
+
+9) Run the bot from a terminal or from Visual Studio, choose option A or B.
 
   A) From a terminal
 
@@ -76,7 +79,13 @@ This feature shown in this sample is in Public Developer Preview and is supporte
   - File -> Open -> Project/Solution
   - Navigate to `QRAppInstallation` folder
   - Select `QRAppInstallation.csproj` file
-  - Press `F5` to run the project
+  - Press `F5` to run the project 
+
+10) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
 
 ## Deploy the bot to Azure
 

@@ -39,7 +39,6 @@ namespace QRAppInstallation.Bots
         {
             // Run the Dialog with the new message Activity.
             await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
-           // await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForTaskModule()), cancellationToken);
         }
 
         /// <summary>
@@ -55,6 +54,7 @@ namespace QRAppInstallation.Bots
             // Save any state changes that might have occured during the turn.
             await ConversationState.SaveChangesAsync(turnContext, false, cancellationToken);
         }
+
         protected override Task<TaskModuleResponse> OnTeamsTaskModuleFetchAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
             var asJobject = JObject.FromObject(taskModuleRequest.Data);
