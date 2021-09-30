@@ -3,6 +3,8 @@
 This feature shown in this sample is in Public Developer Preview and is supported in desktop and mobile.
 
 ## Features of the sample
+
+- ![Card](QRAppInstallation/Images/CardWithButtons.png)
 - Generate QR code for app id.
 
 ![QR Code](QRAppInstallation/Images/QRCode.png)
