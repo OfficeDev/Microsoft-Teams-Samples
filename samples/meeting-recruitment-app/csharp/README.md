@@ -2,7 +2,7 @@
 
 This sample illustrates a meeting experience for recruitment.
 
-It shows interaction between interviewers and candidates through an in-meeting.
+It has meeting details and in-meeting app that helps in the interview process.
 
 ![Details](MeetingApp/Images/details.png)
 
