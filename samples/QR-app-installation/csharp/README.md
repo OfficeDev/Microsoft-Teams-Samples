@@ -2,6 +2,7 @@
 ## Install app using barcode sample
 
 This sample demos app installation using QR code.
+
 The user can Generate a new QR code (contains app id information) and then use Install action to scan and install the app.
 
 `Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients`
@@ -32,7 +33,8 @@ The user can Generate a new QR code (contains app id information) and then use I
 
 1) Create a Bot Registration
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
-   Add following permission in app registration.
+   
+   Also add following permission in app registration. (used for App installation in a team)
    
    ![Permission](QRAppInstallation/Images/Permission.png)
 
@@ -55,36 +57,34 @@ The user can Generate a new QR code (contains app id information) and then use I
     ```
  
 5) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
-   `{{Microsoft-App-Id}}` with Application id generated from Step 1
-   `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok.io`
+  - `{{Microsoft-App-Id}}` with Application id generated from Step 1
+  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok.io`
 
 6) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 9.
 
 7) Modify the `/appsettings.json` and fill in the following details:
-  `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
-  `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
-  `{{Connection Name}}` - The OAuthConnection setting 
-  `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+  - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
+  - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
+  - `{{Connection Name}}` - The OAuthConnection setting 
+  - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
 
-  The `ConnectionName` referred to is the name that we provide while adding OAuth connection setting in the Bot channel registration.
-  Please follow link [Add authentication to your bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?  tabs=dotnet%2Cdotnet-sample#azure-ad-v2) to see how we can add the setting.
-
+    The `Connection Name` referred to is the name that we provide while adding OAuth connection setting in the Bot channel registration.
+    Please follow link [Add authentication to your bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2) to see how we can add the setting.
+  
 8) Run the bot from a terminal or from Visual Studio, choose option A or B.
+ 
+   A) From a terminal
+     ```bash
+     # run the bot
+     dotnet run
+     ```
 
-  A) From a terminal
-
-  ```bash
-  # run the bot
-  dotnet run
-  ```
-
-  B) Or from Visual Studio
-
-  - Launch Visual Studio
-  - File -> Open -> Project/Solution
-  - Navigate to `QRAppInstallation` folder
-  - Select `QRAppInstallation.csproj` file
-  - Press `F5` to run the project 
+   B) Or from Visual Studio
+     - Launch Visual Studio
+     - File -> Open -> Project/Solution
+     - Navigate to `QRAppInstallation` folder
+     - Select `QRAppInstallation.csproj` file
+     - Press `F5` to run the project 
 
 9) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
@@ -94,13 +94,16 @@ The user can Generate a new QR code (contains app id information) and then use I
 
 ## Features of this sample
 
-- Card with actions `Generate` and `Install`. 
+- Card with actions `Generate QR code` and `Install App`. 
+
 ![Card](QRAppInstallation/Images/CardWithButtons.png)
 
-- `Generate` is used to generate a QR code by selecting the app.
+- `Generate QR code` is used to generate a QR code by selecting the app.
+
 ![QR Code](QRAppInstallation/Images/QRCode.png)
 
-- `Install` is used to Scan the QR code and it then installs the app.
+- `Install App` is used to Scan the QR code and it then installs the app.
+
 ![Install App](QRAppInstallation/Images/AppInstallation.png)
 
 ## Deploy the bot to Azure
