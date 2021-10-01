@@ -6,9 +6,9 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 - Sending archive chat messages text file of a groupchat to user
 
-![Bot command](FetchGroupChatMessagesWithRSC/Images/botCommandToGetChatMessages.png)
+![Bot command](Images/botCommandToGetChatMessages.png)
 
-![Bot reply](FetchGroupChatMessagesWithRSC/Images/replyFromBot.png)
+![Bot reply](Images/replyFromBot.png)
 
 ## Prerequisites
 
@@ -39,22 +39,21 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 6. Add this permission to app registration
 
-![Permissions](FetchGroupChatMessagesWithRSC/Images/permissions.png)
+![Permissions](Images/permissions.png)
+
 7. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your tab is uploaded to Teams
 
-
-
 ## To try this sample
 
-- In a terminal, navigate to `FetchGroupChatMessagesWithRSC`
+- In a terminal, navigate to `FetchGroupChatMessages`
 
     ```bash
     # change into project folder
-    cd # FetchGroupChatMessagesWithRSC
+    cd # FetchGroupChatMessages
     ```
 
 - Run the bot from a terminal or from Visual Studio, choose option A or B.
@@ -70,8 +69,8 @@ This feature shown in this sample is currently available in Public Developer Pre
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/bot-groupchat-messages-withRSC/csharp` folder
-  - Select `FetchGroupChatMessagesWithRSC.csproj` file
+  - Navigate to `samples/bot-groupchat-messages/csharp` folder
+  - Select `FetchGroupChatMessages.csproj` file
   - Press `F5` to run the project
 
 ## Interacting with the bot in GroupChat

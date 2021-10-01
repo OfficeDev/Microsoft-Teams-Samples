@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.10/MicrosoftTeams.schema.json",
   "manifestVersion": "1.10",
   "version": "1.0.0",
-  "id": "3214cc0a-f062-42c5-85c8-d8bb1dd12f21",
-  "packageName": "com.microsoft.teams.botgroupchatrsc",
+  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "packageName": "com.microsoft.teams.botgroupchatmessages",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -11,12 +11,12 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "RSC Groupchat Sample",
-    "full": "Groupchat Messages with RSC"
+    "short": "Fetch Groupchat Messages",
+    "full": "Fetch groupchat messages with graph api"
   },
   "description": {
-    "short": "Receive groupchat messages with RSC",
-    "full": "This sample demos a bot with RSC permission"
+    "short": "Fetch groupchat messages.",
+    "full": "This sample demos a bot which fetch and archive groupchat messages"
   },
   "icons": {
     "outline": "outline.png",
@@ -42,9 +42,6 @@
   ],
   "webApplicationInfo": {
     "id": "<<YOUR-MICROSOFT-APP-ID>>",
-    "resource": "api://botid-<<YOUR-MICROSOFT-APP-ID>>",
-    "applicationPermissions": [
-      "ChatMessage.Read.Chat"
-    ]
+    "resource": "api://botid-<<YOUR-MICROSOFT-APP-ID>>"
   }
 }

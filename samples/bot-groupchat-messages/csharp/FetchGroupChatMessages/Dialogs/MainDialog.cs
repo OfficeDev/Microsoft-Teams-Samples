@@ -71,9 +71,10 @@ namespace FetchGroupChatMessagesWithRSC.Dialogs
                     await GetChatHelper.SendGroupChatMessage(stepContext.Context, fileSize, _configuration["MicrosoftAppId"], _configuration["MicrosoftAppPassword"] ,cancellationToken);
                     return await stepContext.EndDialogAsync();
                 }
+
+                await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login successfully"), cancellationToken);
             }
 
-            await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login was not successful please try again."), cancellationToken);
             return await stepContext.EndDialogAsync();
         }
 
