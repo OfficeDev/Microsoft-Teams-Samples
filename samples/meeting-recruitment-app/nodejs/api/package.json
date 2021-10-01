@@ -15,7 +15,6 @@
   "author": "Microsoft",
   "license": "MIT",
   "dependencies": {
-    "@microsoft/microsoft-graph-client": "~2.0.0",
     "azure-storage": "^2.10.4",
     "body-parser": "^1.19.0",
     "botbuilder": "~4.7.0",

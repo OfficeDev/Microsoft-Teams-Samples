@@ -1,8 +1,8 @@
 ﻿## MeetingApp (HR recruitment) Sample
 
-This sample illustrates a meeting experience for HR recruitment.
+This sample illustrates a meeting experience for recruitment.
 
-This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that accepts input from the user and echoes it back.
+It has meeting details and in-meeting app that helps in the interview process.
 
 ![Details](Images/details.png)
 
