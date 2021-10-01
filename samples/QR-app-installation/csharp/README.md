@@ -1,17 +1,14 @@
-﻿﻿## Install app using barcode sample
+﻿﻿
+## Install app using barcode sample
 
-This sample demos app installation using QR code with applications app id in Csharp
+This sample demos app installation using QR code.
+The user can Generate a new QR code (contains app id information) and then use Install action to scan and install the app.
 
-Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients
+`Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients`
 
-## Features of the sample
-
-- ![Card](QRAppInstallation/Images/CardWithButtons.png)
-- Generate QR code for app id.
+![Card](QRAppInstallation/Images/CardWithButtons.png)
 
 ![QR Code](QRAppInstallation/Images/QRCode.png)
-
-- Install app in team with barcode scanner.
 
 ![Install App](QRAppInstallation/Images/AppInstallation.png)
 
@@ -33,7 +30,7 @@ Currently, Microsoft Teams support for QR or barcode scanner capability is only 
 
 ## To try this sample
 
-1. Create a Bot Registration
+1) Create a Bot Registration
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
    Add following permission in app registration.
    
@@ -56,15 +53,22 @@ Currently, Microsoft Teams support for QR or barcode scanner capability is only 
     # ngrok http -host-header=rewrite 3978
  ```
  
-5) Modify the `manifest.json` in the `/appPackage` folder and replace the `{{Microsoft-App-Id}}` with the id from step 2 and `{{domain-name}}` with base Url domain.
+5) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
+   `{{Microsoft-App-Id}}` with Application id generated from Step 1
+   `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok.io`
 
-6) Zip the contents of `appPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 7.
+6) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 9.
 
-7) Modify the `/appsettings.json` and fill in the `{{Microsoft-App-Id}}`,`{{ Microsoft-App-Password }}` and `{{onnection Name}}` with the id from step 2.
+7) Modify the `/appsettings.json` and fill in the following details:
+  `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
+  `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
+  `{{Connection Name}}` - The OAuthConnection setting 
+  `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
 
-8) Add `{{ Application Base Url }}`in appsetting.json with ngrok tunnel url or deployed application base url.
+  The `ConnectionName` referred to is the name that we provide while adding OAuth connection setting in the Bot channel registration.
+  Please follow link [Add authentication to your bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2) to see how we can add the setting.
 
-9) Run the bot from a terminal or from Visual Studio, choose option A or B.
+8) Run the bot from a terminal or from Visual Studio, choose option A or B.
 
   A) From a terminal
 
@@ -81,11 +85,22 @@ Currently, Microsoft Teams support for QR or barcode scanner capability is only 
   - Select `QRAppInstallation.csproj` file
   - Press `F5` to run the project 
 
-10) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+9) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
-   - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
+   - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+
+## Features of this sample
+
+- Card with actions `Generate` and `Install`. 
+![Card](QRAppInstallation/Images/CardWithButtons.png)
+
+- `Generate` is used to generate a QR code by selecting the app.
+![QR Code](QRAppInstallation/Images/QRCode.png)
+
+- `Install` is used to Scan the QR code and it then installs the app.
+![Install App](QRAppInstallation/Images/AppInstallation.png)
 
 ## Deploy the bot to Azure
 
