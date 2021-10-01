@@ -19,8 +19,8 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |6|Meetings Stage View Demo  | Enable and configure your apps for Teams meetings to use in stage view. |[View](/demo%20manifest/Meetings-StageView.zip)     |
 |7|Meeting Events | Microsoft Teams sample app to get real time meeting events. |[View](/demo%20manifest/Meetings-Events.zip)     |
 |8|Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. |[View](/demo%20manifest/Bot-RSC.zip)     |
-|9|App installation using QR code | Sample app that generates a QR or installs app using the QR code.|[View](/demo%20manifest/QR-App-Installation.zip)     |
-
+|9|Meeting Recruitment App | Sample app showing meeting app experience for interview scenario. |[View](/demo%20manifest/Meeting-Recruitment-App.zip)     |
+|10|App installation using QR code | Sample app that generates a QR or installs app using the QR code.|[View](/demo%20manifest/QR-App-Installation.zip)     |
 
 
 ## [Getting Started - Samples and Tutorials](https://docs.microsoft.com/microsoftteams/platform/tutorials/get-started-dotnet-app-studio)
@@ -65,7 +65,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |9| Universal bots  | Teams catering bot demonstrating how to use Universal bots in Teams | [View](samples/bot-teams-catering/csharp) |  | |
 |10| Sequential workflow adaptive cards | Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot. | [View][sequential#workflow#csharp] | [View][sequential#workflow#js]
 |11| Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. | [View][messageswithrsc#csharp] |[View][messageswithrsc#js]
-|13| QR App Installtion | This sample demos app installation using QR code with team id | [View][qrappinstallation#csharp] |
+|12| QR App Installtion | This sample demos app installation using QR code with team id | [View][qrappinstallation#csharp] |
 
 #### Additional samples
 
@@ -145,6 +145,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |10|App SSO | Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl |[View][app-sso#cs] |[View][app-sso#js] 
 |11|Meetings Stage View | Enable and configure your apps for Teams meetings to use in stage view |[View][meetings-stage-view#cs] |[View][meetings-stage-view#js]|
 |12|Meeting Events | Get real time meeting events  |[View][meetings-events#cs] | [View][meetings-events#js] |
+|13|Meeting Recruitment App | Sample app showing meeting app experience for interview scenario.|[View][meeting-recruitment-app#cs] |[View][meeting-recruitment-app#js]|
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
@@ -231,6 +232,8 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 [meetings-stage-view#cs]:samples/meetings-stage-view/csharp
 [meetings-events#cs]:samples/meetings-events/csharp
 [meetings-events#js]:samples/meetings-events/nodejs
+[meeting-recruitment-app#cs]:samples/meeting-recruitment-app/csharp
+[meeting-recruitment-app#js]:samples/meeting-recruitment-app/nodejs
 
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#rsc#js]:samples/graph-rsc/nodeJs
