@@ -1,5 +1,3 @@
-# Bot with RSC permission to archive groupchat message
-
 Using this nodejs sample, a bot can archive chat messages of groupchat and send it to user.
 
 This feature shown in this sample is currently available in Public Developer Preview only.
@@ -38,7 +36,7 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/bot-groupchat-messages-withRSC/nodejs-v4`
+2) In a terminal, navigate to `samples/bot-groupchat-messages/nodejs-v4`
 
 3) Install modules
 
@@ -59,7 +57,7 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
     npm start
     ```
 - **Manually update the manifest.json**
-    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 

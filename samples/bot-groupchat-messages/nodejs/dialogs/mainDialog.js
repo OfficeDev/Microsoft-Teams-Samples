@@ -66,10 +66,16 @@ class MainDialog extends LogoutDialog {
             await stepContext.context.sendActivity('Login was not successful please try again.');
         } 
         else {
-            const client = new SimpleGraphClient(tokenResponse.token);
-            const me = await client.getMessages(stepContext.context._activity.conversation.id);
-            this.createFile(me.value);
-            await this.sendFileConsentCardAsync(stepContext.context);
+
+            if(stepContext.context._activity.conversation.conversationType !='personal'){
+                const client = new SimpleGraphClient(tokenResponse.token);
+                const me = await client.getMessages(stepContext.context._activity.conversation.id);
+                this.createFile(me.value);
+                await this.sendFileConsentCardAsync(stepContext.context);
+                return await stepContext.endDialog();
+            }
+            
+            await stepContext.context.sendActivity(" Login successfully");
         }
 
         return await stepContext.endDialog();
