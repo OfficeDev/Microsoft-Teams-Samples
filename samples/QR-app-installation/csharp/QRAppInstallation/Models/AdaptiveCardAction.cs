@@ -23,6 +23,5 @@ namespace QRAppInstallation.Models
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
-
     }
 }

@@ -26,6 +26,7 @@ namespace QRAppInstallation.Bots
         protected readonly BotState ConversationState;
         protected readonly Dialog Dialog;
         protected readonly IStatePropertyAccessor<TokenState> _TokenState;
+
         public ActivityBot(IConfiguration configuration, ConversationState conversationState, T dialog)
         {
             _connectionName = configuration["ConnectionName"] ?? throw new NullReferenceException("ConnectionName");
@@ -35,6 +36,12 @@ namespace QRAppInstallation.Bots
             _TokenState = conversationState.CreateProperty<TokenState>(nameof(TokenState));
         }
 
+        /// <summary>
+        /// Handle when a message is addressed to the bot.
+        /// </summary>
+        /// <param name="turnContext">The turn context.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             // Run the Dialog with the new message Activity.
@@ -55,6 +62,13 @@ namespace QRAppInstallation.Bots
             await ConversationState.SaveChangesAsync(turnContext, false, cancellationToken);
         }
 
+        /// <summary>
+        /// Handle task module is fetch.
+        /// </summary>
+        /// <param name = "turnContext" > The turn context.</param>
+        /// <param name = "taskModuleRequest" >The task module invoke request value payload.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A Task Module Response for the request.</returns>
         protected override Task<TaskModuleResponse> OnTeamsTaskModuleFetchAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
             var asJobject = JObject.FromObject(taskModuleRequest.Data);
@@ -89,9 +103,17 @@ namespace QRAppInstallation.Bots
                         },
                 };
             }
+
             return Task.FromResult(taskModuleResponse);
         }
 
+        /// <summary>
+        /// Handle task module is submit.
+        /// </summary>
+        /// <param name = "turnContext" > The turn context.</param>
+        /// <param name = "taskModuleRequest" >The task module invoke request value payload.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A Task Module Response for the request.</returns>
         protected override async Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
             var appInfo = JObject.FromObject(taskModuleRequest.Data);
@@ -109,7 +131,8 @@ namespace QRAppInstallation.Bots
                 var client = new SimpleGraphClient(Token.AccessToken);
                 await client.InstallAppInTeam(teamId, appId);
                 await turnContext.SendActivityAsync("App added sucessfully");
-           }
+            }
+
            return null;
         }
     }

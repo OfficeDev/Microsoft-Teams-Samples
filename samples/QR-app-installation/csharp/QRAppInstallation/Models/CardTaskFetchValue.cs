@@ -1,7 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿// <copyright file="CardTaskFetchValue.cs" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyright>
+
+using Newtonsoft.Json;
 
 namespace QRAppInstallation.Models
 {
+    /// <summary>
+    /// Card task fetch value model class.
+    /// </summary>
     public class CardTaskFetchValue<T>
     {
         [JsonProperty("type")]

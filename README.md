@@ -19,7 +19,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |6|Meetings Stage View Demo  | Enable and configure your apps for Teams meetings to use in stage view. |[View](/demo%20manifest/Meetings-StageView.zip)     |
 |7|Meeting Events | Microsoft Teams sample app to get real time meeting events. |[View](/demo%20manifest/Meetings-Events.zip)     |
 |8|Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. |[View](/demo%20manifest/Bot-RSC.zip)     |
-|9|App installation using QR code | Sample app that generates a QR or installs app using the QR code . |[View](/demo%20manifest/QR-App-Installation.zip)     |
+|9|App installation using QR code | Sample app that generates a QR or installs app using the QR code.|[View](/demo%20manifest/QR-App-Installation.zip)     |
 
 
 
