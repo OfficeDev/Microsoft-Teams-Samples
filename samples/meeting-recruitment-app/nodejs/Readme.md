@@ -1,4 +1,4 @@
-﻿## MeetingApp (HR recruitment) Sample
+﻿## Meeting Recruitment App Sample
 
 This sample illustrates a meeting experience for recruitment.
 
@@ -18,23 +18,25 @@ It has meeting details and in-meeting app that helps in the interview process.
 
 
 ## To try this sample
-1) Create a Bot Registration
-   In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2#create-the-resource).
- 
+1) Create a Bot Registration in Azure portal. [Bot Framework registration](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2#create-the-resource)
+    
 2) Create a Azure Storage account(This is needed to store/retrieve data that's used in the app) 
   [Create storage account](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal)
 
-  This step will create a storage account. You will require storage account name and keys in next steps.
-  Please follow [View account keys](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to see the keys info.
+   This step will create a storage account. You will require storage account name and keys in next steps.
+  
+   Please follow [View account keys](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to see the   
+   keys info.
 
 3) Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
 4) We have two different solutions to run so follow below steps:
- A) In a terminal, navigate to `samples/meeting-app/nodejs/api`
+ 
+   A) In a terminal, navigate to `samples/meeting-app/nodejs/api`
 
- B) In a different terminal, navigate to `samples/meeting-app/nodejs/clientapp`
+   B) In a different terminal, navigate to `samples/meeting-app/nodejs/clientapp`
 
 5) Run ngrok - point to port 3000
 
@@ -48,16 +50,15 @@ It has meeting details and in-meeting app that helps in the interview process.
 
 7) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
 
-8) Modify the `.env` file in the location `samples/meeting-app/nodejs/api` and fill in the `{{ MicrosoftAppId }}`,`{{ MicrosoftAppPassword }}` generated from step 1 (Create a bot registration step).
+8) Modify the `.env` file in the location `samples/meeting-app/nodejs/api` and fill in the `{{ MicrosoftAppId }}`, `{{ MicrosoftAppPassword }}` generated from step 1 
+   i.e. (Create a bot registration step).
 
-9) Modify the `keys.js` file in the location `samples/meeting-app/nodejs/api/server and fill in the `[STORAGE ACCOUNT NAME]` and `[ACCESS KEY]` for azure table storage.
+9) Modify the `keys.js` file in the location `samples/meeting-app/nodejs/api/server` and fill in the `[STORAGE ACCOUNT NAME]` and `[ACCESS KEY]` for azure table storage.
 
 10) Run both solutions i.e. `samples/meeting-app/nodejs/api` and `samples/meeting-app/nodejs/clientapp`
-
     ```
     npm start
     ```
-
 11) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
@@ -72,29 +73,37 @@ It has meeting details and in-meeting app that helps in the interview process.
    ![Details](Images/details.png)
 
 2) Action on Questions:
-   The interviewer can Add/Edit or Delete question.
+   
+   - The interviewer can Add/Edit or Delete question.
 
    ![Add Question](Images/add_question.png)
 
    - Add Questions Task Module
+   
    ![Add Question Task](Images/add_task.png)
 
    ![Edit Delete Question](Images/edit_questions.png)
 
    - Edit Question Task Module
+   
    ![Edit Task](Images/edit_task.png)
 
 3) Add Notes:
+   
    The interviewer can add notes that will appear to other peers.
 
    ![Add Notes](Images/add_note.png)
 
    Add Note Task Module
+  
    ![Add Notes](Images/add_note_task.png)
 
 4) Sidepanel:
+    
     The in-meeting side panel shows two sections as follows:
+    
     A) Overview: Shows the basic details of the candidate.
+    
     B) Questions: The questions set in the details page appear here. The interviewer can use this to provide rating and submit final feedback.
 
     ![Sidepanel Overview](Images/sidepanel_overview.png)
@@ -102,8 +111,10 @@ It has meeting details and in-meeting app that helps in the interview process.
     ![Sidepanel Questions](Images/sidepanel_questions.png)
 
 5) Share assets:
+
    This is used to share assets to the candidate.
-   ![Share Assets](MeetingApp/Images/share_assets.png)
+   
+   ![Share Assets](Images/share_assets.png)
 
 ## Testing the bot using Bot Framework Emulator
 
