@@ -80,7 +80,7 @@ class SsoOAuthHelpler {
                     value:
                     {
                         status: StatusCodes.PRECONDITION_FAILED,
-                        // TokenExchangeInvokeResponse
+                        // Token exchange invoke response
                         body:
                         {
                             id: tokenExchangeRequest.id,
@@ -118,6 +118,7 @@ class SsoOAuthHelpler {
         if (!value || !value.id) {
             throw new Error('Invalid signin/tokenExchange. Missing activity.value.id.');
         }
+
         return `${channelId}/${conversationId}/${value.id}`;
     }
 }

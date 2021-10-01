@@ -11,7 +11,7 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "QRAppInstallation",
+    "short": "QR App Installation",
     "full": "Install app by QR"
   },
   "description": {
@@ -39,7 +39,7 @@
     "media"
   ],
   "validDomains": [
-    "*.ngrok.io",
+    "{{domain-name}}",
     "token.botframework.com"
   ],
     "webApplicationInfo": {

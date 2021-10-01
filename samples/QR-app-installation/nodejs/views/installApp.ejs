@@ -33,18 +33,23 @@
                         }
                     } else if (decodedText) {
                         appId = decodedText;
+
                         if (decodedText == "1542629c-01b3-4a6d-8f76-1938b779e48d") {
                             appName = "Polly"
                         }
+                        
                         else if (decodedText == "81fef3a6-72aa-4648-a763-de824aeafb7d") {
                             appName = "Forms"
                         }
+
                         if (decodedText == "7299542a-1697-4ec1-812b-6b70065c0795") {
                             appName = "Azure Boards"
                         }
+
                         if (decodedText == "0c5cfdbb-596f-4d39-b557-5d9516c94107") {
                             appName = "App Studio"
                         }
+
                         $("#scannedText").text("Please click on confirm to install app -" + appName + "");
                     }
                 }, config);

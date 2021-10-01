@@ -1,18 +1,14 @@
 ## Install app using barcode sample
 
-This sample demos app installation using QR code with applications app id in Nodejs
+This sample demos app installation using QR code.
 
-Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients
+The user can Generate a new QR code (contains app id information) and then use Install action to scan and install the app.
 
-## Features of the sample
+`Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients`
 
 - ![Card](Images/CardWithButtons.png)
 
-- Generate QR code for app id.
-
 ![QR Code](Images/QRCode.png)
-
-- Install app in team with barcode scanner.
 
 ![Install App](Images/AppInstallation.png)
 
@@ -33,7 +29,7 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
 
 Add the following permission in app registration
 
-![Install App](Images/AppInstallation.png)
+![Install App](Images/Permission.png)
 
 ### 2. Run your bot sample
 1) Clone the repository
@@ -69,3 +65,16 @@ Add the following permission in app registration
 
     > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
+## Features of this sample
+
+- Card with actions `Generate QR code` and `Install App`. 
+
+![Card](Images/CardWithButtons.png)
+
+- `Generate QR code` is used to generate a QR code by selecting the app.
+
+![QR Code](Images/QRCode.png)
+
+- `Install App` is used to Scan the QR code and it then installs the app.
+
+![Install App](Images/AppInstallation.png)
