@@ -34,9 +34,9 @@ It has meeting details and in-meeting app that helps in the interview process.
    ```
 4) We have two different solutions to run so follow below steps:
  
-   A) In a terminal, navigate to `samples/meeting-app/nodejs/api`
+   A) In a terminal, navigate to `samples/meeting-recruitment-app/nodejs/api`
 
-   B) In a different terminal, navigate to `samples/meeting-app/nodejs/clientapp`
+   B) In a different terminal, navigate to `samples/meeting-recruitment-app/nodejs/clientapp`
 
 5) Run ngrok - point to port 3000
 
