@@ -1,4 +1,4 @@
-﻿﻿
+﻿﻿﻿
 ## Install app using barcode sample
 
 This sample demos app installation using QR code.
@@ -16,16 +16,16 @@ The user can Generate a new QR code (contains app id information) and then use I
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
 
+  determine dotnet version
   ```bash
-  # determine dotnet version
   dotnet --version
   ```
 - [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+  
+  run ngrok locally
   ```bash
-  # run ngrok locally
   ngrok http -host-header=localhost 3978
   ```
-
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 ## To try this sample
@@ -40,18 +40,19 @@ The user can Generate a new QR code (contains app id information) and then use I
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
-
+   
 3) In a terminal, navigate to `samples/QR-app-installation/csharp`
 
+    change into project folder
     ```bash
-    # change into project folder
     cd # QRAppInstallation
     ```
+    
 4) Run ngrok - point to port 3978
 
     ```bash
     # ngrok http -host-header=rewrite 3978
- ```
+    ```
  
 5) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
    `{{Microsoft-App-Id}}` with Application id generated from Step 1
@@ -66,7 +67,7 @@ The user can Generate a new QR code (contains app id information) and then use I
   `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
 
   The `ConnectionName` referred to is the name that we provide while adding OAuth connection setting in the Bot channel registration.
-  Please follow link [Add authentication to your bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2) to see how we can add the setting.
+  Please follow link [Add authentication to your bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?  tabs=dotnet%2Cdotnet-sample#azure-ad-v2) to see how we can add the setting.
 
 8) Run the bot from a terminal or from Visual Studio, choose option A or B.
 
