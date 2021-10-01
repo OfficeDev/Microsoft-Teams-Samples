@@ -36,7 +36,7 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/bot-groupchat-messages/nodejs-v4`
+2) In a terminal, navigate to `samples/bot-groupchat-messages/nodejs`
 
 3) Install modules
 
@@ -49,7 +49,7 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
-5) Update the `.env` configuration for the bot to use the Microsoft App Id and App Password and connection name   from the Bot Framework registration. (Note the MicrosoftAppId is the AppId created in step 1.1, the MicrosoftAppPassword is referred to as the "client secret" in step1.2 and you can always create a new client secret anytime.)
+5) Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` and `ConnectionName` from the Bot Framework registration. (Note that the MicrosoftAppId is the AppId created in step 1 (Setup for Bot SSO), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot SSO) and you can always create a new client secret anytime.)
 
 6) Run your bot at the command line:
 
@@ -57,8 +57,8 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
     npm start
     ```
 - **Manually update the manifest.json**
-    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
+    - Edit the `manifest.json` contained in the  `/appPackage` folder to and fill in MicrosoftAppId (that was created in step 1 and it is the same value of MicrosoftAppId as in `.env` file) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario it may occur multiple times in the `manifest.json`)
+    - Zip up the contents of the `/appPackage` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
     > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
