@@ -143,7 +143,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |10|App SSO | Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl |[View][app-sso#cs] |[View][app-sso#js] 
 |11|Meetings Stage View | Enable and configure your apps for Teams meetings to use in stage view |[View][meetings-stage-view#cs] |[View][meetings-stage-view#js]|
 |12|Meeting Events | Get real time meeting events  |[View][meetings-events#cs] | [View][meetings-events#js] |
-|13|Meeting Recruitment App | Sample app showing meeting app experience for interview scenario.|[View][meeting-recruitment-app#cs] |  |
+|13|Meeting Recruitment App | Sample app showing meeting app experience for interview scenario.|[View][meeting-recruitment-app#cs] |[View][meeting-recruitment-app#js]|
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
@@ -230,6 +230,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 [meetings-events#cs]:samples/meetings-events/csharp
 [meetings-events#js]:samples/meetings-events/nodejs
 [meeting-recruitment-app#cs]:samples/meeting-recruitment-app/csharp
+[meeting-recruitment-app#js]:samples/meeting-recruitment-app/nodejs
 
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#rsc#js]:samples/graph-rsc/nodeJs
