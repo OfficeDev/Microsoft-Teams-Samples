@@ -42,7 +42,7 @@ It has meeting details and in-meeting app that helps in the interview process.
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
 
-4) In a terminal, navigate to `samples/meeting-app/csharp`
+4) In a terminal, navigate to `samples/meeting-recruitment-app/csharp`
 
     ```bash
     # change into project folder
