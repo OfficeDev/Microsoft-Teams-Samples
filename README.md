@@ -19,7 +19,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |6|Meetings Stage View Demo  | Enable and configure your apps for Teams meetings to use in stage view. |[View](/demo%20manifest/Meetings-StageView.zip.zip)     |
 |7|Meeting Events | Microsoft Teams sample app to get real time meeting events. |[View](/demo%20manifest/Meetings-Events.zip)     |
 |8|Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. |[View](/demo%20manifest/Bot-RSC.zip)     |
-|9|Fetch groupchat messages | Demonstrating bot fetch groupchat messages and send it to user. |[View](/demo%20manifest/Fetch-GroupChat-Messages.zip)     |
+
 
 
 ## [Getting Started - Samples and Tutorials](https://docs.microsoft.com/microsoftteams/platform/tutorials/get-started-dotnet-app-studio)
@@ -64,8 +64,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |9| Universal bots  | Teams catering bot demonstrating how to use Universal bots in Teams | [View](samples/bot-teams-catering/csharp) |  | |
 |10| Sequential workflow adaptive cards | Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot. | [View][sequential#workflow#csharp] | [View][sequential#workflow#js]
 |11| Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. | [View][messageswithrsc#csharp] |[View][messageswithrsc#js]
-|12| Archive groupchat message | Demonstrating on how a bot can archive groupchat messages and send it to user. | [View][fetchgroupchatmessages#csharp] |
-
+|12| Archive groupchat messages | Demonstrating on how a bot can archive groupchat messages and send it to user as a file. |  |[View][fetchgroupchatmessages#nodejs]|
 #### Additional samples
 
 |    | Sample Name | Description | .NET Core | JavaScript | 
@@ -218,8 +217,8 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 [meetings-content-bubble#js]:samples/meetings-content-bubble/nodejs
 [messageswithrsc#csharp]:samples/bot-receive-channel-messages-withRSC/csharp
 [messageswithrsc#js]:samples/bot-receive-channel-messages-withRSC/nodejs
-[fetchgroupchatmessages#csharp]:samples/bot-groupchat-messages/csharp
 [app-in-meeting#cs]:samples/app-in-meeting/csharp
+[fetchgroupchatmessages#nodejs]:samples/bot-groupchat-messages/nodejs
 
 [app-localization#cs]:samples/app-localization/csharp
 [app-localization#js]:samples/app-localization/nodejs
