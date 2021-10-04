@@ -37,7 +37,7 @@ class DialogBot extends TeamsActivityHandler {
             console.log('Running dialog with Message Activity.');
             var activity = this.removeMentionText(context._activity);
 
-            if(activity.text.trim() =="getchat" || activity.text.trim() =="logout")
+            if(activity.text.trim() =="getchat" || activity.text.trim() =="logout" || activity.text.trim() =="login")
             // Run the Dialog with the new message Activity.
             await this.dialog.run(context, this.dialogState);
 

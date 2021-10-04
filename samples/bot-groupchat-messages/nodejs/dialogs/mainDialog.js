@@ -75,7 +75,8 @@ class MainDialog extends LogoutDialog {
                 return await stepContext.endDialog();
             }
             
-            await stepContext.context.sendActivity(" Login successfully");
+            await stepContext.context.sendActivity("Login successful");
+            await stepContext.context.sendActivity("Please type 'getchat' command in the groupchat where the bot is added to fetch messages.");
         }
 
         return await stepContext.endDialog();
