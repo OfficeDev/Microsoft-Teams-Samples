@@ -36,7 +36,7 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/bot-groupchat-messages/nodejs`
+2) In a terminal, navigate to `samples/bot-archive-groupchat-messages/nodejs`
 
 3) Install modules
 
