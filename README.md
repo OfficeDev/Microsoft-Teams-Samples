@@ -20,6 +20,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |7|Meeting Events | Microsoft Teams sample app to get real time meeting events. |[View](/demo%20manifest/Meetings-Events.zip)     |
 |8|Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. |[View](/demo%20manifest/Bot-RSC.zip)     |
 |9|Meeting Recruitment App | Sample app showing meeting app experience for interview scenario. |[View](/demo%20manifest/Meeting-Recruitment-App.zip)     |
+|10|App installation using QR code | Sample app that generates a QR or installs app using the QR code.|[View](/demo%20manifest/App-Installation-Using-QR.zip)     |
 
 
 ## [Getting Started - Samples and Tutorials](https://docs.microsoft.com/microsoftteams/platform/tutorials/get-started-dotnet-app-studio)
@@ -144,7 +145,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |11|Meetings Stage View | Enable and configure your apps for Teams meetings to use in stage view |[View][meetings-stage-view#cs] |[View][meetings-stage-view#js]|
 |12|Meeting Events | Get real time meeting events  |[View][meetings-events#cs] | [View][meetings-events#js] |
 |13|Meeting Recruitment App | Sample app showing meeting app experience for interview scenario.|[View][meeting-recruitment-app#cs] |[View][meeting-recruitment-app#js]|
-|14| App Installtion  using QR code |This sample demos app installation using QR code of application's app id |  | [View][qrappinstallation#nodejs]
+|14| App Installtion  using QR code |This sample demos app installation using QR code of application's app id | [View][qrappinstallation#csharp] | [View][qrappinstallation#nodejs]
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
@@ -219,7 +220,6 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 [messageswithrsc#csharp]:samples/bot-receive-channel-messages-withRSC/csharp
 [messageswithrsc#js]:samples/bot-receive-channel-messages-withRSC/nodejs
 [app-in-meeting#cs]:samples/app-in-meeting/csharp
-[qrappinstallation#nodejs]:samples/app-installation-using-qr-code/nodejs
 
 [app-localization#cs]:samples/app-localization/csharp
 [app-localization#js]:samples/app-localization/nodejs
@@ -233,6 +233,8 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 [meetings-events#js]:samples/meetings-events/nodejs
 [meeting-recruitment-app#cs]:samples/meeting-recruitment-app/csharp
 [meeting-recruitment-app#js]:samples/meeting-recruitment-app/nodejs
+[qrappinstallation#csharp]:samples/app-installation-using-qr-code/csharp
+[qrappinstallation#nodejs]:samples/app-installation-using-qr-code/nodejs
 
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#rsc#js]:samples/graph-rsc/nodeJs
