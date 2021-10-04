@@ -64,7 +64,6 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |9| Universal bots  | Teams catering bot demonstrating how to use Universal bots in Teams | [View](samples/bot-teams-catering/csharp) |  | |
 |10| Sequential workflow adaptive cards | Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot. | [View][sequential#workflow#csharp] | [View][sequential#workflow#js]
 |11| Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. | [View][messageswithrsc#csharp] |[View][messageswithrsc#js]
-|13| App Installtion  using QR code |This sample demos app installation using QR code of applications's app id |  | [View][qrappinstallation#nodejs]
 
 #### Additional samples
 
@@ -145,6 +144,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |11|Meetings Stage View | Enable and configure your apps for Teams meetings to use in stage view |[View][meetings-stage-view#cs] |[View][meetings-stage-view#js]|
 |12|Meeting Events | Get real time meeting events  |[View][meetings-events#cs] | [View][meetings-events#js] |
 |13|Meeting Recruitment App | Sample app showing meeting app experience for interview scenario.|[View][meeting-recruitment-app#cs] |[View][meeting-recruitment-app#js]|
+|14| App Installtion  using QR code |This sample demos app installation using QR code of application's app id |  | [View][qrappinstallation#nodejs]
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
