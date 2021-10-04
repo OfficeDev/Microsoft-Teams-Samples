@@ -6,9 +6,9 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 - Sending archive chat messages text file of a groupchat to user
 
-![Bot command](Images/botCommandToGetChatMessages.png)
+![Bot command](FetchGroupChatMessages/Images/botCommandToGetChatMessages.png)
 
-![Bot reply](Images/replyFromBot.png)
+![Bot reply](FetchGroupChatMessages/Images/replyFromBot.png)
 
 ## Prerequisites
 
@@ -28,7 +28,7 @@ This feature shown in this sample is currently available in Public Developer Pre
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2 In a terminal, navigate to `samples/bot-groupchat-messages/csharp`
+2 In a terminal, navigate to `samples/bot-archive-groupchat-messages/csharp`
 
 3 Run ngrok - point to port 3978
 
@@ -41,7 +41,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 
    Add this permission to app registration
 
-![Permissions](Images/permissions.png)
+![Permissions](FetchGroupChatMessages/Images/permissions.png)
 
 5. Modify the `manifest.json` in the `/AppManifest` folder and replace the `<<YOUR-MICROSOFT-APP-ID>>` with the id from step 2.
 
@@ -77,7 +77,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/bot-groupchat-messages/csharp` folder
+  - Navigate to `samples/bot-archive-groupchat-messages/csharp` folder
   - Select `FetchGroupChatMessages.csproj` file
   - Press `F5` to run the project
 
