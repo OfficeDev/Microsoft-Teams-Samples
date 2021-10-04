@@ -72,7 +72,8 @@ namespace FetchGroupChatMessagesWithRSC.Dialogs
                     return await stepContext.EndDialogAsync();
                 }
 
-                await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login successfully"), cancellationToken);
+                await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login successful"), cancellationToken);
+                await stepContext.Context.SendActivityAsync(MessageFactory.Text("Please type 'getchat' command in the groupchat where the bot is added to fetch messages."), cancellationToken);
             }
 
             return await stepContext.EndDialogAsync();

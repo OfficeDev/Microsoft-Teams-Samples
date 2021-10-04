@@ -34,7 +34,7 @@ namespace FetchGroupChatMessagesWithRSC.Bots
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample your bot can fetch groupchat messages and send it to the user as a file"), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! Please type 'login' for initiating the authentication flow."), cancellationToken);
                 }
             }
         }

@@ -65,14 +65,14 @@ namespace FetchGroupChatMessagesWithRSC.Bots
             var activity = this.StripAtMentionText((Activity)turnContext.Activity);
             var userCommand = activity.Text.ToLower().Trim();
 
-            if (userCommand == "getchat" || userCommand == "logout")
+            if (userCommand == "getchat" || userCommand == "logout"|| userCommand == "login")
             {
                 // Run the Dialog with the new message Activity.
                 await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
             }
             else
             {
-                await turnContext.SendActivityAsync(MessageFactory.Text("type getchat to get archieved messages"));                   
+                await turnContext.SendActivityAsync(MessageFactory.Text("type getchat to get archived messages"));                   
             }
 
             return;
