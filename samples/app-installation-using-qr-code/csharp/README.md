@@ -43,7 +43,7 @@ The user can Generate a new QR code (contains app id information) and then use I
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
    
-3) In a terminal, navigate to `samples/QR-app-installation/csharp`
+3) In a terminal, navigate to `samples/app-installation-using-qr-code/csharp`
 
     change into project folder
     ```bash
