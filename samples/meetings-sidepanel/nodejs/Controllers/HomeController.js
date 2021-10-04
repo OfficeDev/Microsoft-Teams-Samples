@@ -1,6 +1,6 @@
 const {CardFactory } = require('botbuilder');
 const AdaptiveCards = require("adaptivecards");
-const sidePanelBot = require('../bots/teamsConversationBot');
+const sidePanelBot = require('../bots/SidePanelBot');
 const configuration = require('dotenv').config();
 const env = configuration.parsed;
 const appID = env.MicrosoftAppId;
