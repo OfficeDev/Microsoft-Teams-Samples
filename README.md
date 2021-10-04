@@ -144,6 +144,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |11|Meetings Stage View | Enable and configure your apps for Teams meetings to use in stage view |[View][meetings-stage-view#cs] |[View][meetings-stage-view#js]|
 |12|Meeting Events | Get real time meeting events  |[View][meetings-events#cs] | [View][meetings-events#js] |
 |13|Meeting Recruitment App | Sample app showing meeting app experience for interview scenario.|[View][meeting-recruitment-app#cs] |[View][meeting-recruitment-app#js]|
+|14| App Installtion  using QR code |This sample demos app installation using QR code of application's app id |  | [View][qrappinstallation#nodejs]
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
@@ -218,6 +219,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 [messageswithrsc#csharp]:samples/bot-receive-channel-messages-withRSC/csharp
 [messageswithrsc#js]:samples/bot-receive-channel-messages-withRSC/nodejs
 [app-in-meeting#cs]:samples/app-in-meeting/csharp
+[qrappinstallation#nodejs]:samples/app-installation-using-qr-code/nodejs
 
 [app-localization#cs]:samples/app-localization/csharp
 [app-localization#js]:samples/app-localization/nodejs
