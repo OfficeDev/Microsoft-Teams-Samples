@@ -39,7 +39,7 @@ Add the following permission in app registration
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/QR-App-Installation/nodejs`
+2) In a terminal, navigate to `samples/app-installation-using-qr-code/nodejs`
 
 3) Install modules
 
