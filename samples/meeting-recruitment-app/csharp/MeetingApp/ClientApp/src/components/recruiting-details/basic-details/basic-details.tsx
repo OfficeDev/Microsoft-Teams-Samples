@@ -34,7 +34,6 @@ const BasicDetails = (props: IBasicDetailsProps) => {
     }
 
     const startCall = () => {
-        debugger;
         microsoftTeams.executeDeepLink("https://teams.microsoft.com/l/call/0/0?users="+candidateDetails[selectedIndex]?.email);
     }
 

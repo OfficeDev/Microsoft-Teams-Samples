@@ -7,10 +7,7 @@ const ShareAssets = (): React.ReactElement => {
     const [note, setNote] = React.useState<string>('');
 
     React.useEffect(() => {
-        microsoftTeams.initialize();
-        microsoftTeams.getContext((context) => {
-            console.log(context)
-        })
+        microsoftTeams.initialize();      
     }, [])
 
     const saveNote = () => {

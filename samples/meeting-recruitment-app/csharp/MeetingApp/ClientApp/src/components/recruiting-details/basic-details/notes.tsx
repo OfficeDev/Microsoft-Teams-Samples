@@ -52,9 +52,7 @@ const Notes = (props: INotesProps) => {
     const loadNotes = () => {
         getNotes(props.currentCandidateEmail)
             .then((res) => {
-                console.log(res)
                 const notes = res.data as INoteDetails[];
-                console.log(notes);
                 setNotes(notes)
             })
             .catch((ex) => {

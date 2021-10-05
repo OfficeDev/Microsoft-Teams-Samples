@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -56,8 +57,14 @@ namespace MeetingApp.Controllers
                     // Getting stored conversation data reference.
                     var dataToUpdate = new ConversationData();
                     _conversationDataReference.TryGetValue("conversationData", out dataToUpdate);
-                    dataToUpdate.Note = assetDetails.Message;
 
+                    if (dataToUpdate == null)
+                    {
+                        throw new ArgumentNullException(nameof(dataToUpdate));
+                    }
+
+                    dataToUpdate.Note = assetDetails.Message;
+                    dataToUpdate.SharedByName = dataToUpdate.Roster.Length > 0 ? dataToUpdate.Roster.Where(entity => entity.Email == assetDetails.SharedBy).FirstOrDefault().GivenName : "";
                     foreach (var conversationReference in _conversationReferences.Values)
                     {
                         await ((BotAdapter)_adapter).ContinueConversationAsync(_appId, conversationReference, BotCallback, default(CancellationToken));
@@ -106,6 +113,12 @@ namespace MeetingApp.Controllers
             {
                 Body = new List<AdaptiveElement>
                 {
+                    new AdaptiveTextBlock
+                    {
+                        Text = updatedData.SharedByName + " shared a message",
+                        Weight = AdaptiveTextWeight.Lighter,
+                        Spacing = AdaptiveSpacing.Medium,
+                    },
                     new AdaptiveTextBlock
                     {
                         Text = updatedData.Note,

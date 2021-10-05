@@ -6,5 +6,7 @@
     public class AssetsDetails
     {
         public string Message { get; set; }
+
+        public string SharedBy { get; set; }
     }
 }
