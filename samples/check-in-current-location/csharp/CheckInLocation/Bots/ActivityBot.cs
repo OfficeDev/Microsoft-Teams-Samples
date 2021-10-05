@@ -102,7 +102,9 @@ namespace CheckInLocation.Bots
         protected override async Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
             var appInfo = taskModuleRequest.Data;
-            await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForUserLocation("time")), cancellationToken);
+            string user = turnContext.Activity.From.Name;
+            string time = turnContext.Activity.LocalTimestamp.ToString();
+            await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForUserLocation(time, user)), cancellationToken);
             return null;
         }
 
@@ -149,7 +151,7 @@ namespace CheckInLocation.Bots
         /// <summary>
         /// Sample Adaptive card for Meeting Start event.
         /// </summary>
-        private Attachment GetAdaptiveCardForUserLocation(string time)
+        private Attachment GetAdaptiveCardForUserLocation(string time,string user)
         {
             AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
             {
@@ -157,26 +159,23 @@ namespace CheckInLocation.Bots
                 {
                     new AdaptiveTextBlock
                     {
-                        Text = $"Check In time:{time}",
+                        Text = $"{user}",
+                        Weight = AdaptiveTextWeight.Bolder,
+                        Spacing = AdaptiveSpacing.Medium,
+                    },
+                    new AdaptiveTextBlock
+                    {
+                        Text = $"Check in time:{time}",
+                        Weight = AdaptiveTextWeight.Bolder,
+                        Spacing = AdaptiveSpacing.Medium,
+                    },
+                    new AdaptiveTextBlock
+                    {
+                        Text = $"Check in at:{time}",
                         Weight = AdaptiveTextWeight.Bolder,
                         Spacing = AdaptiveSpacing.Medium,
                     }
-                },
-                Actions = new List<AdaptiveAction>
-                {
-                    new AdaptiveSubmitAction
-                    {
-                        Title = "Check in",
-                        Data = new AdaptiveCardAction
-                        {
-                            MsteamsCardAction = new CardAction
-                            {
-                                Type = "task/fetch",
-                            },
-                            Id="checkin"
-                        },
-                    }
-                },
+                }
             };
 
             return new Attachment()
