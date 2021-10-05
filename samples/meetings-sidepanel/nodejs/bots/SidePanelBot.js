@@ -2,8 +2,10 @@
 // Licensed under the MIT License.
 
 const {TeamsActivityHandler} = require('botbuilder');
-const ConversationID;
-const serviceUrl;
+
+// Initializing conversationID and serviceUrl
+const ConversationID = "";
+const serviceUrl = "";
 
 class SidePanelBot extends TeamsActivityHandler {
     constructor() {

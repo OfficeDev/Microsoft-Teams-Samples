@@ -1,0 +1,261 @@
+.detailsContainer{
+    width: 60vw;
+}
+
+.questionsContainer{
+    width: 40vw;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.details-separator{
+    width: 100%;
+    border-top: 1px solid #E1DFDD;
+}
+
+.details{
+    width: 30vw;
+    min-height: 60px;
+}
+
+.source-details{
+    width: 25vw;
+    min-height: 60px;
+}
+
+.details-border{
+    border-right: 1px solid #E1DFDD;
+}
+
+.basic-details-card{
+    min-height: 30vh;
+}
+
+.timeline-card{
+    min-height: 40vh;
+}
+
+.notes-card{
+    min-height: 16vh;
+}
+
+.questionsCard{
+    height: 15vh !important;
+    border: 1px solid #f5f5f5 !important;
+}
+
+.timeline{
+    overflow-y: auto;
+    max-height: 28vh;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    background-color: #6a6ba9;
+    top: 78px;
+    bottom: 0;
+    left: 5%;
+  }
+
+  .timelineContainer {
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+  }
+
+  .timelineContainer::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #6a6ba9;
+    top: 14px;
+    border-radius: 50%;
+    z-index: 1;
+    left: 1.5vh;
+  }
+
+  .timelineDetail{
+    width: 25%;
+    min-height: 60px;
+  }
+  .iconText{
+      margin-top: 2px;
+  }
+
+  .questionsHeader{
+      margin: 0;
+  }
+
+  .selectedBtn{
+    background-color: #56599f !important;
+    color: #fff !important;
+  }
+
+  .editIcon{
+    padding-left: 0px !important;
+    padding-right: 1.5vw !important;
+  }
+
+  .editTextArea{
+      height: 120px !important;
+  }
+
+  .notesContainer{
+    overflow-y: auto;
+    max-height: 22vh;
+  }
+
+  .questionWrapper{
+    overflow-y: auto;
+    max-height: 100vh;
+  }
+
+/* Styles for mobile view */
+
+.container-mobile{
+    background-color: #000;
+    color: #fff;
+    max-width: 320px;
+    min-height: 80vh;
+    padding: 1%;
+}
+
+.menu-item{
+    border-bottom: none !important;
+}
+
+.menu-item:hover{
+    border-bottom: none;
+}
+
+.ui-menu__itemwrapper, .ui-menu__itemcontent{
+    color: #fff;
+}
+
+.questions-card-mobile{
+    background-color: #333333 !important;
+    width: 80vw;
+}
+
+.add-button{
+    padding-left: 0px;
+    border: none;
+    margin-left: -11px;
+    color: #696969 !important;
+}
+
+.add-comment-textarea{
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+textarea::-webkit-input-placeholder {
+    color: #fff !important;
+}
+
+.basic-details-card-mobile{
+    background-color: #000 !important;
+    padding: 0 !important;
+}
+
+.subHeaders{
+    color: #fff !important;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.basicDetails{
+    background-color: #333333;
+}
+
+.experienceTable .ui-table__row{
+    background-color: #333333 !important;
+    color: #fff;
+    border: none;
+}
+
+.experienceTable .ui-table__row :hover{
+    background-color: #333333 !important;
+    color: #fff;
+    border: none;
+}
+
+.skillLabel{
+    background-color: #484646 !important;
+    color: #f5f5f5 !important;
+    font-size: 12px !important;
+}
+
+.linkLabel{
+    background-color: #484646 !important;
+    color: #f5f5f5 !important;
+    font-size: 12px !important;
+    padding: 1vw !important;
+    border: none !important;
+    height: 25px !important;
+}
+
+.expLabel{
+    margin-bottom: 5px;
+}
+
+.roleText{
+    color: #f5f5f5 !important;
+    font-size: 10px !important;
+}
+
+.linkIcons{
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.askCustomerButton{
+    color: #fff;
+    background-color: #565559;
+    outline: none;
+    width: 14vw;
+    margin-top: 15px;
+    height: 24px;
+    font-weight: normal;
+    border: none;
+}
+
+.education{
+    margin-left: 5px !important;
+}
+
+.questionCardsMobile{
+    min-height: 80vh;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.shareDocs{
+    color: #fff !important;
+    background-color: #484646 !important;
+    border: 1px solid #f5f5f5!important;
+}
+
+.shareAssetsTaskModule{
+    background-color: #292929 !important;
+}
+.shareAssetsTaskModule .ui-header{
+    color: #f5f5f5 !important;
+}
+
+.shareAssetsTaskModule .ui-checkbox{
+    color: #f5f5f5 !important;
+}
+
+.shareAssetsTaskModule .ui-box{
+    border: 1 px solid#f5f5f5 !important;
+}
+
+.shareAssetsText{
+    background: #484646 !important;
+    border: 1px solid #f5f5f5 !important;
+    color: #f5f5f5 !important;
+}

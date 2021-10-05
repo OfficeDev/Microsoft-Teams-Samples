@@ -1,8 +1,13 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
-using Microsoft.Bot.Connector.Teams.Models;
+using Microsoft.Bot.Schema;
+using Microsoft.Bot.Schema.Teams;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
+using System.Configuration;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
@@ -10,25 +15,40 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// <summary>
     /// This is Proactive Message Dialog Class. Main purpose of this class is to show the Send Proactive Message Example
     /// </summary>
-    [Serializable]
-    public class ProactiveMsgTo1to1Dialog : IDialog<object>
+    public class ProactiveMsgTo1to1Dialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public ProactiveMsgTo1to1Dialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(ProactiveMsgTo1to1Dialog))
         {
-            if (context == null)
+            this._conversationState = conversationState;
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
+                BeginProactiveMsgTo1to1DialogAsync,
+            }));
+        }
+
+        private async Task<DialogTurnResult> BeginProactiveMsgTo1to1DialogAsync(
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            await stepContext.Context.SendActivityAsync(Strings.Send1on1ConfirmMsg);
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
             }
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogSend1on1Dialog);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogSend1on1Dialog;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
 
-            var userId = context.Activity.From.Id;
-            var botId = context.Activity.Recipient.Id;
-            var botName = context.Activity.Recipient.Name;
+            var userId = stepContext.Context.Activity.From.Id;
+            var botId = stepContext.Context.Activity.Recipient.Id;
+            var botName = stepContext.Context.Activity.Recipient.Name;
 
-            var channelData = context.Activity.GetChannelData<TeamsChannelData>();
-            var connectorClient = new ConnectorClient(new Uri(context.Activity.ServiceUrl));
+            var channelData = stepContext.Context.Activity.GetChannelData<TeamsChannelData>();
+            var connectorClient = new ConnectorClient(new Uri(stepContext.Context.Activity.ServiceUrl), ConfigurationManager.AppSettings["MicrosoftAppId"], ConfigurationManager.AppSettings["MicrosoftAppPassword"]);
 
             var parameters = new ConversationParameters
             {
@@ -49,7 +69,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
 
             await connectorClient.Conversations.SendToConversationAsync((Activity)message);
 
-            context.Done<object>(null);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
     }
 }

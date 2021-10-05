@@ -1,7 +1,12 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
+using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
 using System;
+using System.Configuration;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
@@ -9,29 +14,49 @@ namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
     /// <summary>
     /// This is Update Setup Text Dialog Class. Main purpose of this class is to Setup the text message that will be update later in Bot example.
     /// </summary>
-    [Serializable]
-    public class UpdateTextMsgSetupDialog : IDialog<object>
+    public class UpdateTextMsgSetupDialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public UpdateTextMsgSetupDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(UpdateTextMsgSetupDialog))
         {
-            if (context == null)
+            this._conversationState = conversationState;
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
+                BeginUpdateTextMsgSetupDialogAsync,
+            }));
+        }
+
+        private async Task<DialogTurnResult> BeginUpdateTextMsgSetupDialogAsync(
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (stepContext == null)
+            {
+                throw new ArgumentNullException(nameof(stepContext));
             }
 
-            IMessageActivity reply = context.MakeMessage();
-            reply.Text = Strings.SetupMessagePrompt;
+            Activity reply = stepContext.Context.Activity;
+            if (reply.Attachments != null)
+            {
+                reply.Attachments = null;
+            }
 
-            ConnectorClient client = new ConnectorClient(new Uri(context.Activity.ServiceUrl));
+            if (reply.Entities.Count >= 1)
+            {
+                reply.Entities.Remove(reply.Entities[0]);
+            }
+            reply.Text = Strings.SetupMessagePrompt;
+            reply.ReplyToId = reply.Id;
+            ConnectorClient client = new ConnectorClient(new Uri(stepContext.Context.Activity.ServiceUrl), ConfigurationManager.AppSettings["MicrosoftAppId"], ConfigurationManager.AppSettings["MicrosoftAppPassword"]);
             ResourceResponse resp = await client.Conversations.ReplyToActivityAsync((Activity)reply);
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogSetupMessasge);
-
-            //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.SetUpMsgKey, resp.Id.ToString());
-
-            context.Done<object>(null);
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            currentState.LastDialogKey = Strings.LastDialogSetupMessasge;
+            currentState.SetUpMsgKey = resp.Id.ToString();
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
     }
 }

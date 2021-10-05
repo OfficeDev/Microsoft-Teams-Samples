@@ -1,4 +1,4 @@
-﻿using Microsoft.Bot.Connector;
+﻿using Microsoft.Bot.Schema;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
 using Newtonsoft.Json;
 using System;
@@ -70,47 +70,6 @@ namespace Microsoft.Teams.TemplateBotCSharp
     /// </summary>
     public static class FacebookHelpers
     {
-        // The Facebook App Id
-        public static readonly string FacebookAppId = ConfigurationManager.AppSettings["FBAppId"].ToString();
-
-        // The Facebook App Secret
-        public static readonly string FacebookAppSecret = ConfigurationManager.AppSettings["FBAppSecret"].ToString();
-
-        /// <summary>
-        /// Get the Authentication Token from Api code
-        /// </summary>
-        /// <param name="conversationReference"></param>
-        /// <param name="code"></param>
-        /// <param name="facebookOauthCallback"></param>
-        /// <returns></returns>
-        public async static Task<FacebookAcessToken> ExchangeCodeForAccessToken(ConversationReference conversationReference, string code, string facebookOauthCallback)
-        {
-            var redirectUri = GetOAuthCallBack(conversationReference, facebookOauthCallback);
-            var uri = GetUri(ConfigurationManager.AppSettings["FBTokenUrl"].ToString(),
-                Tuple.Create("client_id", FacebookAppId),
-                Tuple.Create("redirect_uri", redirectUri),
-                Tuple.Create("client_secret", FacebookAppSecret),
-                Tuple.Create("code", code)
-                );
-
-            return await FacebookRequest<FacebookAcessToken>(uri);
-        }
-
-        /// <summary>
-        /// Validate the Access Token
-        /// </summary>
-        /// <param name="accessToken"></param>
-        /// <returns></returns>
-        public static async Task<bool> ValidateAccessToken(string accessToken)
-        {
-            var uri = GetUri(ConfigurationManager.AppSettings["FBDebugUrl"].ToString(),
-                Tuple.Create("input_token", accessToken),
-                Tuple.Create("access_token", $"{FacebookAppId}|{FacebookAppSecret}"));
-
-            var res = await FacebookRequest<object>(uri).ConfigureAwait(false);
-            return (((dynamic)res)?.data)?.is_valid;
-        }
-
         /// <summary>
         /// Get the User Profile information using valid Access Token
         /// </summary>
@@ -138,44 +97,6 @@ namespace Microsoft.Teams.TemplateBotCSharp
                 Tuple.Create("access_token", accessToken));
             var res = await FacebookRequest<FacebookProfile>(uri);
             return res;
-        }
-
-        /// <summary>
-        /// Create the Auth URL    
-        /// </summary>
-        /// <param name="conversationReference"></param>
-        /// <param name="facebookOauthCallback"></param>
-        /// <returns></returns>
-        private static string GetOAuthCallBack(ConversationReference conversationReference, string facebookOauthCallback)
-        {
-            var uri = GetUri(facebookOauthCallback,
-                Tuple.Create("userId", TokenEncoder(conversationReference.User.Id)),
-                Tuple.Create("botId", TokenEncoder(conversationReference.Bot.Id)),
-                Tuple.Create("conversationId", TokenEncoder(conversationReference.Conversation.Id)),
-                Tuple.Create("serviceUrl", TokenEncoder(conversationReference.ServiceUrl)),
-                Tuple.Create("channelId", conversationReference.ChannelId)
-                );
-            return uri.ToString();
-        }
-
-        /// <summary>
-        /// Create Facebook Login URL
-        /// </summary>
-        /// <param name="conversationReference"></param>
-        /// <param name="facebookOauthCallback"></param>
-        /// <returns></returns>
-        public static string GetFacebookLoginURL(ConversationReference conversationReference, string facebookOauthCallback)
-        {
-            var redirectUri = GetOAuthCallBack(conversationReference, facebookOauthCallback);
-            var uri = GetUri(ConfigurationManager.AppSettings["FBAuthUrl"].ToString(),
-                Tuple.Create("client_id", FacebookAppId),
-                Tuple.Create("redirect_uri", redirectUri),
-                Tuple.Create("response_type", "code"),
-                Tuple.Create("scope", "public_profile,email"),
-                Tuple.Create("state", Convert.ToString(new Random().Next(9999)))
-                );
-
-            return uri.ToString();
         }
 
         /// <summary>

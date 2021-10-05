@@ -1,41 +1,49 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Teams.TemplateBotCSharp.Properties;
-using System;
+using Microsoft.Teams.TemplateBotCSharp.src.dialogs;
+using System.Threading;
 using System.Threading.Tasks;
+
 namespace Microsoft.Teams.TemplateBotCSharp.Dialogs
 {
-    /// <summary>
-    /// This is get Last Dialog Class. Main purpose of this class is to set the Last Active dialog information
-    /// </summary>
-
-    [Serializable]
-    public class GetLastDialogUsedDialog : IDialog<object>
+    public class GetLastDialogUsedDialog : ComponentDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        protected readonly IStatePropertyAccessor<RootDialogState> _conversationState;
+        public GetLastDialogUsedDialog(IStatePropertyAccessor<RootDialogState> conversationState) : base(nameof(GetLastDialogUsedDialog))
         {
-            if (context == null)
+            this._conversationState = conversationState;
+            InitialDialogId = nameof(WaterfallDialog);
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
-                throw new ArgumentNullException(nameof(context));
-            }
+                BeginGetLastDialogUsedDialogAsync,
+            }));
+        }
 
+        private async Task<DialogTurnResult> BeginGetLastDialogUsedDialogAsync(
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
             string dialogName = string.Empty;
-
-            if (context.UserData.TryGetValue(Strings.LastDialogKey, out dialogName))
+            var currentState = await this._conversationState.GetAsync(stepContext.Context, () => new RootDialogState());
+            if (currentState.LastDialogKey != null)
             {
-                await context.PostAsync(Strings.LastDialogPromptMsg + dialogName);
+                await stepContext.Context.SendActivityAsync(Strings.LastDialogPromptMsg + currentState.LastDialogKey);
             }
             else
             {
                 //Set the Last Dialog in Conversation Data
-                context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogFetchDiaog);
+                currentState.LastDialogKey = Strings.LastDialogFetchDiaog;
+                await this._conversationState.SetAsync(stepContext.Context, currentState);
 
-                await context.PostAsync(Strings.LastDialogErrorMsg);
+                await stepContext.Context.SendActivityAsync(Strings.LastDialogErrorMsg);
             }
 
             //Set the Last Dialog in Conversation Data
-            context.UserData.SetValue(Strings.LastDialogKey, Strings.LastDialogFetchDiaog);
+            currentState.LastDialogKey = Strings.LastDialogFetchDiaog;
+            await this._conversationState.SetAsync(stepContext.Context, currentState);
 
-            context.Done<object>(null);
+            return await stepContext.EndDialogAsync(null, cancellationToken);
         }
     }
 }
