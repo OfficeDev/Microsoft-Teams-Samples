@@ -14,6 +14,7 @@
         })
 
         var currentLocation;
+
          // Method to get current user's geo location
          // If the value of allowChooseLocation is true, then the users can choose any location of their choice.
          // If the value of allowChooseLocation is false, then the users cannot change their current location.
@@ -23,7 +24,7 @@
             microsoftTeams.location.getLocation({ allowChooseLocation: true, showMap: true }, (error, location) => {
                 currentLocation=location;
              $("#locationText").text(JSON.stringify(location));
-         });
+          });
         } 
   
         function submitLoaction() {

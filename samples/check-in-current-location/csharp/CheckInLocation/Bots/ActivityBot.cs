@@ -4,15 +4,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using AdaptiveCards;
 using CheckInLocation.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace CheckInLocation.Bots
@@ -23,9 +26,11 @@ namespace CheckInLocation.Bots
     public class ActivityBot : TeamsActivityHandler
     {
         private readonly string _applicationBaseUrl;
+        private readonly IWebHostEnvironment _env;
 
-        public ActivityBot(IConfiguration configuration)
+        public ActivityBot(IConfiguration configuration, IWebHostEnvironment env)
         {
+            _env = env;
             _applicationBaseUrl = configuration["ApplicationBaseUrl"] ?? throw new NullReferenceException("ApplicationBaseUrl");
         }
 
@@ -37,7 +42,43 @@ namespace CheckInLocation.Bots
         /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForTaskModule()), cancellationToken);
+            if(turnContext.Activity.Text.ToLower() == "view last check in")
+            {
+                var fileName = Path.Combine(_env.ContentRootPath, $".\\wwwroot\\UserLocationdetails.json");
+                string Json = File.ReadAllText(fileName);
+                List<UserDetails> userDetailsList = new List<UserDetails>();
+
+                if (Json == "")
+                {
+                    await turnContext.SendActivityAsync(MessageFactory.Text("No last check in found"));
+                }
+                else
+                {
+                    userDetailsList = JsonConvert.DeserializeObject<List<UserDetails>>(Json);
+                    List<UserDetails> userCheckInList = new List<UserDetails>();
+
+                    foreach (var userDetail in userDetailsList)
+                    {
+                        if (userDetail.UserId == turnContext.Activity.From.AadObjectId)
+                        {
+                            userCheckInList.Add(userDetail);
+                        }
+                    }
+
+                    if (userCheckInList.Count == 0)
+                    {
+                        await turnContext.SendActivityAsync(MessageFactory.Text("No last check in found"));
+                    }
+                    else
+                    {
+                        await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForUserLastCheckIn(userCheckInList)), cancellationToken);
+                    }
+                }                       
+            }
+            else
+            {
+                await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForTaskModule()), cancellationToken);
+            }            
         }
 
         /// <summary>
@@ -52,10 +93,9 @@ namespace CheckInLocation.Bots
         {
             foreach (var member in turnContext.Activity.MembersAdded)
             {
-
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample your bot can get your current location. Please type hey or check in to get check in card."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample your bot can get your current location and all your last check in's. Please type 'hey' or 'check in' to get check in card or type 'view last check in' to get all check in details"), cancellationToken);
                 }
             }
         }
@@ -71,9 +111,6 @@ namespace CheckInLocation.Bots
         {
             var asJobject = JObject.FromObject(taskModuleRequest.Data);
             var buttonType = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.Id;
-            var latitude = (string)asJobject.ToObject<LocationDetails<string>>()?.Latitude;
-            var longitude = (string)asJobject.ToObject<LocationDetails<string>>()?.Longitude;
-
             var taskModuleResponse = new TaskModuleResponse();
 
             if (buttonType == "checkin")
@@ -92,12 +129,14 @@ namespace CheckInLocation.Bots
             }
             else if (buttonType == "viewLocation")
             {
+                var latitude = (double)asJobject.ToObject<LocationDetails<double>>()?.Latitude;
+                var longitude = (double)asJobject.ToObject<LocationDetails<double>>()?.Longitude;
                 taskModuleResponse.Task = new TaskModuleContinueResponse
                 {
                     Type = "continue",
                     Value = new TaskModuleTaskInfo()
                     {
-                        Url = _applicationBaseUrl + "/" + "ViewLocation",
+                        Url = _applicationBaseUrl + "/" + "ViewLocation?latitude="+ latitude+"&longitude="+longitude,
                         Height = 350,
                         Width = 350,
                         Title = "View location",
@@ -118,17 +157,27 @@ namespace CheckInLocation.Bots
         protected override async Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
             var locationInfo = JObject.FromObject(taskModuleRequest.Data);
-            var latitude = (string)locationInfo.ToObject<LocationDetails<string>>()?.Latitude;
-            var longitude = (string)locationInfo.ToObject<LocationDetails<string>>()?.Longitude;
+            var latitude = (double)locationInfo.ToObject<LocationDetails<double>>()?.Latitude;
+            var longitude = (double)locationInfo.ToObject<LocationDetails<double>>()?.Longitude;
             string user = turnContext.Activity.From.Name;
             string time = turnContext.Activity.LocalTimestamp.ToString();
+
+            UserDetails userDetails = new UserDetails {
+                CheckInTime = time,
+                UserName = user,
+                Longitude = longitude,
+                Latitude = latitude,
+                UserId = turnContext.Activity.From.AadObjectId
+            };
+
+            SaveUserDetails(userDetails);
             await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForUserLocation(time, user, latitude, longitude)), cancellationToken);
 
             return null;
         }
 
         /// <summary>
-        /// Sample Adaptive card for Meeting Start event.
+        /// Sample Adaptive card for check in button.
         /// </summary>
         private Attachment GetAdaptiveCardForTaskModule()
         {
@@ -168,9 +217,9 @@ namespace CheckInLocation.Bots
         }
 
         /// <summary>
-        /// Sample Adaptive card for Meeting Start event.
+        /// Sample Adaptive card for user current location info.
         /// </summary>
-        private Attachment GetAdaptiveCardForUserLocation(string time, string user, string latitude, string longitude)
+        private Attachment GetAdaptiveCardForUserLocation(string time, string user, double latitude, double longitude)
         {
             AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
             {
@@ -215,6 +264,81 @@ namespace CheckInLocation.Bots
                 ContentType = AdaptiveCard.ContentType,
                 Content = card,
             };
+        }
+
+        /// <summary>
+        /// Sample Adaptive card for user's last check in's.
+        /// </summary>
+        private List<Attachment> GetAdaptiveCardForUserLastCheckIn(List<UserDetails> userDetails)
+        {
+            List<Attachment> attachmentList = new List<Attachment>();
+
+            foreach (var user in userDetails)
+            {
+                AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
+                {
+                    Body = new List<AdaptiveElement>
+                    {
+                        new AdaptiveTextBlock
+                        {
+                            Text = $"User name :{user.UserName}",
+                            Weight = AdaptiveTextWeight.Bolder,
+                            Spacing = AdaptiveSpacing.Medium,
+                            Wrap = true
+                        },
+                        new AdaptiveTextBlock
+                        {
+                            Text = $"Check in time: {user.CheckInTime}",
+                            Weight = AdaptiveTextWeight.Bolder,
+                            Spacing = AdaptiveSpacing.Medium,
+                            Wrap = true
+                        },
+                        new AdaptiveTextBlock
+                        {
+                            Text = $"Check in latitude: {user.Latitude}",
+                            Weight = AdaptiveTextWeight.Bolder,
+                            Spacing = AdaptiveSpacing.Medium,
+                            Wrap = true
+                        },
+                        new AdaptiveTextBlock
+                        {
+                            Text = $"Check in longitude: {user.Longitude}",
+                            Weight = AdaptiveTextWeight.Bolder,
+                            Spacing = AdaptiveSpacing.Medium,
+                            Wrap = true
+                        }
+                    }
+                };
+
+                Attachment attachment = new Attachment()
+                {
+                    ContentType = AdaptiveCard.ContentType,
+                    Content = card,
+                };
+
+                attachmentList.Add(attachment);
+            }
+
+            return attachmentList;
+        }
+
+        // Save user details in json file.
+        private void SaveUserDetails(UserDetails userDetails)
+        {
+            var fileName = Path.Combine(_env.ContentRootPath, $".\\wwwroot\\UserLocationdetails.json");
+            string Json = File.ReadAllText(fileName);
+            List<UserDetails> userDetailsList = new List<UserDetails>();
+
+            if (Json == "")
+            {
+                userDetailsList.Add(userDetails);
+            }
+            else {
+                userDetailsList = JsonConvert.DeserializeObject<List<UserDetails>>(Json);
+                userDetailsList.Add(userDetails);
+            }
+
+            File.WriteAllText(fileName, JsonConvert.SerializeObject(userDetailsList));
         }
     }
 }

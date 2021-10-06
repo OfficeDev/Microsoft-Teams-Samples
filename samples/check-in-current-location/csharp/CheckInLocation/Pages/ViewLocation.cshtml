@@ -13,36 +13,32 @@
             viewLocation(); 
         })
 
-         // Method to get current user's geo location
-         // If the value of allowChooseLocation is true, then the users can choose any location of their choice.
-         // If the value of allowChooseLocation is false, then the users cannot change their current location.
-         // If the value of showMap is false, the current location is fetched without displaying the map. 
-         // showMap is ignored if allowChooseLocation is set to true.
+        // Method to show geo location for given latitude and longitude values.
         function viewLocation() {
-            let location = {"latitude":28.704059,"longitude":77.10249};
-            // Methos to ask for permission and then show current user location
-             microsoftTeams.location.showLocation(location, (error, result) => {
-            // If there's any error, an alert shows the error message/code
-            if (error)
-            {
-            if (error.message)
-            {
-              alert(" ErrorCode: " + error.errorCode + error.message);
-            }
-            else 
-            {
-              alert(" ErrorCode: " + error.errorCode);
-            }
+            const params = window.location.search;
+            let latitude = params.substring(params.search("=")+1,params.search("&"));
+            let longitude = params.substring(params.search("&")+11);
+            let location = {"latitude":latitude,"longitude":longitude};
 
-             return;
-        }
-        });
+            // Methos to ask for permission and then show current user location
+            microsoftTeams.location.showLocation(location, (error, result) => {
+
+                // If there's any error, an alert shows the error message/code
+                if (error)
+                {
+                    if (error.message)
+                    {
+                        alert(" ErrorCode: " + error.errorCode + error.message);
+                    }
+                    else 
+                    {
+                        alert(" ErrorCode: " + error.errorCode);
+                    }
+
+                    return;
+                }
+            });
         } 
-  
-        function submitLoaction() {
-            var geoLoaction= document.getElementById("locationText").innerHTML;
-            microsoftTeams.tasks.submitTask(geoLoaction);
-        }
     </script>
     <style>
         .submitClick{

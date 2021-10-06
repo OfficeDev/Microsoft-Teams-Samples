@@ -1,7 +1,7 @@
 ﻿﻿﻿
 ## Get Check-in info of user
 
-This sample demos to get current location and time of user.
+This sample demos to get current location and time of user and all last check in of user.
 
 `Currently, Microsoft Teams support for get geolocation capability is only available for mobile clients`
 
@@ -12,6 +12,8 @@ This sample demos to get current location and time of user.
 ![Geo Location](CheckInLocation/Images/GeolocationDetails.png)
 
 ![User details card](CheckInLocation/Images/UserDetailsCard.png)
+
+![User last checkin card](CheckInLocation/Images/UserLastCheckInCard.png)
 
 ## Prerequisites
 
@@ -40,7 +42,7 @@ This sample demos to get current location and time of user.
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
    
-3) In a terminal, navigate to `samples/check-in-location/csharp`
+3) In a terminal, navigate to `samples/check-in-current-location/csharp`
 
     change into project folder
     ```bash
@@ -99,6 +101,10 @@ This sample demos to get current location and time of user.
 - User details.
 
 ![User details card](CheckInLocation/Images/UserDetailsCard.png)
+
+- `view lastchek in` of user.
+
+![User last checkin card](CheckInLocation/Images/UserLastCheckInCard.png)
 
 ## Deploy the bot to Azure
 

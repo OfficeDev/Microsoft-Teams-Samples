@@ -1,4 +1,4 @@
-﻿// <copyright file="AppInstallDetails.cs" company="Microsoft">
+﻿// <copyright file="LocationDetails.cs" company="Microsoft">
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
