@@ -22,12 +22,10 @@ namespace CheckInLocation.Bots
     /// </summary>
     public class ActivityBot : TeamsActivityHandler
     {
-       // private readonly string _connectionName;
         private readonly string _applicationBaseUrl;
 
         public ActivityBot(IConfiguration configuration)
         {
-           // _connectionName = configuration["ConnectionName"] ?? throw new NullReferenceException("ConnectionName");
             _applicationBaseUrl = configuration["ApplicationBaseUrl"] ?? throw new NullReferenceException("ApplicationBaseUrl");
         }
 
@@ -39,7 +37,6 @@ namespace CheckInLocation.Bots
         /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            // Run the Dialog with the new message Activity.
             await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForTaskModule()), cancellationToken);
         }
 
@@ -55,9 +52,10 @@ namespace CheckInLocation.Bots
         {
             foreach (var member in turnContext.Activity.MembersAdded)
             {
+
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample your bot can generate QR code for App and install the app in team by scanning QR code. Please add this bot to team and type hey."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample your bot can get your current location. Please type hey or check in to get check in card."), cancellationToken);
                 }
             }
         }
@@ -73,8 +71,11 @@ namespace CheckInLocation.Bots
         {
             var asJobject = JObject.FromObject(taskModuleRequest.Data);
             var buttonType = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.Id;
+            var latitude = (string)asJobject.ToObject<LocationDetails<string>>()?.Latitude;
+            var longitude = (string)asJobject.ToObject<LocationDetails<string>>()?.Longitude;
 
             var taskModuleResponse = new TaskModuleResponse();
+
             if (buttonType == "checkin")
             {
                 taskModuleResponse.Task = new TaskModuleContinueResponse
@@ -89,6 +90,21 @@ namespace CheckInLocation.Bots
                     },
                 };
             }
+            else if (buttonType == "viewLocation")
+            {
+                taskModuleResponse.Task = new TaskModuleContinueResponse
+                {
+                    Type = "continue",
+                    Value = new TaskModuleTaskInfo()
+                    {
+                        Url = _applicationBaseUrl + "/" + "ViewLocation",
+                        Height = 350,
+                        Width = 350,
+                        Title = "View location",
+                    },
+                };
+            }
+
             return Task.FromResult(taskModuleResponse);
         }
 
@@ -101,10 +117,13 @@ namespace CheckInLocation.Bots
         /// <returns>A Task Module Response for the request.</returns>
         protected override async Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
-            var appInfo = taskModuleRequest.Data;
+            var locationInfo = JObject.FromObject(taskModuleRequest.Data);
+            var latitude = (string)locationInfo.ToObject<LocationDetails<string>>()?.Latitude;
+            var longitude = (string)locationInfo.ToObject<LocationDetails<string>>()?.Longitude;
             string user = turnContext.Activity.From.Name;
             string time = turnContext.Activity.LocalTimestamp.ToString();
-            await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForUserLocation(time, user)), cancellationToken);
+            await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForUserLocation(time, user, latitude, longitude)), cancellationToken);
+
             return null;
         }
 
@@ -151,7 +170,7 @@ namespace CheckInLocation.Bots
         /// <summary>
         /// Sample Adaptive card for Meeting Start event.
         /// </summary>
-        private Attachment GetAdaptiveCardForUserLocation(string time,string user)
+        private Attachment GetAdaptiveCardForUserLocation(string time, string user, string latitude, string longitude)
         {
             AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
             {
@@ -159,23 +178,36 @@ namespace CheckInLocation.Bots
                 {
                     new AdaptiveTextBlock
                     {
-                        Text = $"{user}",
+                        Text = $"User name :{user}",
                         Weight = AdaptiveTextWeight.Bolder,
                         Spacing = AdaptiveSpacing.Medium,
+                        Wrap = true
                     },
                     new AdaptiveTextBlock
                     {
-                        Text = $"Check in time:{time}",
+                        Text = $"Check in time: {time}",
                         Weight = AdaptiveTextWeight.Bolder,
                         Spacing = AdaptiveSpacing.Medium,
-                    },
-                    new AdaptiveTextBlock
-                    {
-                        Text = $"Check in at:{time}",
-                        Weight = AdaptiveTextWeight.Bolder,
-                        Spacing = AdaptiveSpacing.Medium,
+                        Wrap = true
                     }
-                }
+                },
+                Actions = new List<AdaptiveAction>
+                {
+                    new AdaptiveSubmitAction
+                    {
+                        Title = "View location",
+                        Data = new AdaptiveCardAction
+                        {
+                            MsteamsCardAction = new CardAction
+                            {
+                                Type = "task/fetch",
+                            },
+                            Id = "viewLocation",
+                            Latitude = latitude,
+                            Longitude = longitude
+                        },
+                    }
+                },
             };
 
             return new Attachment()

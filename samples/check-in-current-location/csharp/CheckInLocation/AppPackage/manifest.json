@@ -34,7 +34,6 @@
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
   "devicePermissions": [
-    "media",
     "geolocation"
   ],
   "validDomains": [

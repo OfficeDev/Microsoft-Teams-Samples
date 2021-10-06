@@ -1,17 +1,17 @@
 ﻿﻿﻿
-## Install app using barcode sample
+## Get Check-in info of user
 
-This sample demos app installation using QR code.
+This sample demos to get current location and time of user.
 
-The user can Generate a new QR code (contains app id information) and then use Install action to scan and install the app.
+`Currently, Microsoft Teams support for get geolocation capability is only available for mobile clients`
 
-`Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients`
+![Check in card](CheckInLocation/Images/CheckinCard.png)
 
-![Card](QRAppInstallation/Images/CardWithButtons.png)
+![Geo Location](CheckInLocation/Images/Geolocation.png)
 
-![QR Code](QRAppInstallation/Images/QRCode.png)
+![Geo Location](CheckInLocation/Images/GeolocationDetails.png)
 
-![Install App](QRAppInstallation/Images/AppInstallation.png)
+![User details card](CheckInLocation/Images/UserDetailsCard.png)
 
 ## Prerequisites
 
@@ -34,20 +34,17 @@ The user can Generate a new QR code (contains app id information) and then use I
 1) Create a Bot Registration
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
    
-   Also add following permission in app registration. (used for App installation in a team)
-   
-   ![Permission](QRAppInstallation/Images/Permission.png)
 
 2) Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
    
-3) In a terminal, navigate to `samples/app-installation-using-qr-code/csharp`
+3) In a terminal, navigate to `samples/check-in-location/csharp`
 
     change into project folder
     ```bash
-    cd # QRAppInstallation
+    cd # CheckInLocation
     ```
     
 4) Run ngrok - point to port 3978
@@ -65,11 +62,8 @@ The user can Generate a new QR code (contains app id information) and then use I
 7) Modify the `/appsettings.json` and fill in the following details:
   - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
   - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
-  - `{{Connection Name}}` - The OAuthConnection setting 
   - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
 
-    The `Connection Name` referred to is the name that we provide while adding OAuth connection setting in the Bot channel registration.
-    Please follow link [Add authentication to your bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2) to see how we can add the setting.
   
 8) Run the bot from a terminal or from Visual Studio, choose option A or B.
  
@@ -82,8 +76,8 @@ The user can Generate a new QR code (contains app id information) and then use I
    B) Or from Visual Studio
      - Launch Visual Studio
      - File -> Open -> Project/Solution
-     - Navigate to `QRAppInstallation` folder
-     - Select `QRAppInstallation.csproj` file
+     - Navigate to `CheckInLocation` folder
+     - Select `CheckInLocation.csproj` file
      - Press `F5` to run the project 
 
 9) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
@@ -94,17 +88,17 @@ The user can Generate a new QR code (contains app id information) and then use I
 
 ## Features of this sample
 
-- Card with actions `Generate QR code` and `Install App`. 
+- Card with actions `check in`. 
 
-![Card](QRAppInstallation/Images/CardWithButtons.png)
+![Check in card](CheckInLocation/Images/CheckinCard.png)
 
-- `Generate QR code` is used to generate a QR code by selecting the app.
+- `Geo Location` of user.
 
-![QR Code](QRAppInstallation/Images/QRCode.png)
+![Geo Location](CheckInLocation/Images/Geolocation.png)
 
-- `Install App` is used to Scan the QR code and it then installs the app.
+- User details.
 
-![Install App](QRAppInstallation/Images/AppInstallation.png)
+![User details card](CheckInLocation/Images/UserDetailsCard.png)
 
 ## Deploy the bot to Azure
 

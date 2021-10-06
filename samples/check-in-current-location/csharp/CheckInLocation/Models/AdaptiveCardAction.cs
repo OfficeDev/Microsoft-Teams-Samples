@@ -23,5 +23,17 @@ namespace CheckInLocation.Models
         /// </summary>
         [JsonProperty("id")]
         public string Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets id value of longitude.
+        /// </summary>
+        [JsonProperty("longitude")]
+        public string Longitude { get; set; }
+
+        /// <summary>
+        /// Gets or sets id value of longitude.
+        /// </summary>
+        [JsonProperty("latitude")]
+        public string Latitude { get; set; }
     }
 }
