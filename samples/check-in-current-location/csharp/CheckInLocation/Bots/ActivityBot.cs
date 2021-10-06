@@ -95,7 +95,7 @@ namespace CheckInLocation.Bots
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample your bot can get your current location and all your last check in's. Please type 'hey' or 'check in' to get check in card or type 'view last check in' to get all check in details"), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample your bot can get your current location and all your last check in's. Please type 'check in' to get check in card or type 'view last check in' to get all check in details"), cancellationToken);
                 }
             }
         }
@@ -292,22 +292,25 @@ namespace CheckInLocation.Bots
                             Weight = AdaptiveTextWeight.Bolder,
                             Spacing = AdaptiveSpacing.Medium,
                             Wrap = true
-                        },
-                        new AdaptiveTextBlock
-                        {
-                            Text = $"Check in latitude: {user.Latitude}",
-                            Weight = AdaptiveTextWeight.Bolder,
-                            Spacing = AdaptiveSpacing.Medium,
-                            Wrap = true
-                        },
-                        new AdaptiveTextBlock
-                        {
-                            Text = $"Check in longitude: {user.Longitude}",
-                            Weight = AdaptiveTextWeight.Bolder,
-                            Spacing = AdaptiveSpacing.Medium,
-                            Wrap = true
                         }
-                    }
+                    },
+                    Actions = new List<AdaptiveAction>
+                    {
+                        new AdaptiveSubmitAction
+                        {
+                            Title = "View location",
+                            Data = new AdaptiveCardAction
+                            {
+                                MsteamsCardAction = new CardAction
+                                {
+                                    Type = "task/fetch",
+                                },
+                                Id = "viewLocation",
+                                Latitude = user.Latitude,
+                                Longitude = user.Longitude
+                            },
+                        }
+                    },
                 };
 
                 Attachment attachment = new Attachment()

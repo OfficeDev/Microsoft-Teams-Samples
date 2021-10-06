@@ -13,8 +13,6 @@
             getLocation(); 
         })
 
-        var currentLocation;
-
          // Method to get current user's geo location
          // If the value of allowChooseLocation is true, then the users can choose any location of their choice.
          // If the value of allowChooseLocation is false, then the users cannot change their current location.
@@ -22,15 +20,10 @@
          // showMap is ignored if allowChooseLocation is set to true.
         function getLocation() {
             microsoftTeams.location.getLocation({ allowChooseLocation: true, showMap: true }, (error, location) => {
-                currentLocation=location;
-             $("#locationText").text(JSON.stringify(location));
+             var currentLocation=location;
+             microsoftTeams.tasks.submitTask(currentLocation);
           });
         } 
-  
-        function submitLoaction() {
-           // var geoLoaction= document.getElementById("locationText").innerHTML;
-            microsoftTeams.tasks.submitTask(currentLocation);
-        }
     </script>
     <style>
         .submitClick{
@@ -43,8 +36,6 @@
     <div class="surface">
         <div class="panel">
             <div>
-                <label id="locationText"></label>
-                <button type="button" class="submitClick" onclick="submitLoaction()">Submit Location</button>
             </div>
         </div>
     </div>

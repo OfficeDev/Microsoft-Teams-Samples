@@ -9,8 +9,6 @@ This sample demos to get current location and time of user and all last check in
 
 ![Geo Location](CheckInLocation/Images/Geolocation.png)
 
-![Geo Location](CheckInLocation/Images/GeolocationDetails.png)
-
 ![User details card](CheckInLocation/Images/UserDetailsCard.png)
 
 ![User last checkin card](CheckInLocation/Images/UserLastCheckInCard.png)
@@ -102,7 +100,7 @@ This sample demos to get current location and time of user and all last check in
 
 ![User details card](CheckInLocation/Images/UserDetailsCard.png)
 
-- `view lastchek in` of user.
+- `view last check in` of user.
 
 ![User last checkin card](CheckInLocation/Images/UserLastCheckInCard.png)
 
