@@ -65,7 +65,6 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |9| Universal bots  | Teams catering bot demonstrating how to use Universal bots in Teams | [View](samples/bot-teams-catering/csharp) |  | |
 |10| Sequential workflow adaptive cards | Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot. | [View][sequential#workflow#csharp] | [View][sequential#workflow#js]
 |11| Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. | [View][messageswithrsc#csharp] |[View][messageswithrsc#js]
-
 #### Additional samples
 
 |    | Sample Name | Description | .NET Core | JavaScript | 
@@ -146,7 +145,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |12|Meeting Events | Get real time meeting events  |[View][meetings-events#cs] | [View][meetings-events#js] |
 |13|Meeting Recruitment App | Sample app showing meeting app experience for interview scenario.|[View][meeting-recruitment-app#cs] |[View][meeting-recruitment-app#js]|
 |14| App Installtion  using QR code |This sample demos app installation using QR code of application's app id | [View][qrappinstallation#csharp] | [View][qrappinstallation#nodejs]
-|15| Archive groupchat messages | Demonstrating on how a bot can archive groupchat messages and send it to user as a file. | [View][fetchgroupchatmessages#csharp] ||
+|15| Archive groupchat messages | Demonstrating on how a bot can archive groupchat messages and send it to user as a file. | [View][fetchgroupchatmessages#csharp] |[View][fetchgroupchatmessages#nodejs]|
 |16| App check in location | Demonstrating feature where user can checkin with current location and view all previous checkins. | [View][appcheckinlocation#csharp] ||
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
@@ -223,6 +222,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 [messageswithrsc#js]:samples/bot-receive-channel-messages-withRSC/nodejs
 [app-in-meeting#cs]:samples/app-in-meeting/csharp
 [fetchgroupchatmessages#csharp]:samples/bot-archive-groupchat-messages/csharp
+[fetchgroupchatmessages#nodejs]:samples/bot-archive-groupchat-messages/nodejs
 [appcheckinlocation#csharp]:samples/app-checkin-location/csharp
 
 [app-localization#cs]:samples/app-localization/csharp
