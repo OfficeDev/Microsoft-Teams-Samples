@@ -4,7 +4,7 @@
 
 using Newtonsoft.Json;
 
-namespace CheckInLocation.Models
+namespace AppCheckinLocation.Models
 {
     /// <summary>
     /// Location details model class.

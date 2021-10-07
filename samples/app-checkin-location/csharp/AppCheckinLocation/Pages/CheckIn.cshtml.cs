@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace CheckInLocation.Pages
+namespace AppCheckinLocation.Pages
 {
-    public class ViewLocationModel
+    public class CheckInModel
         : PageModel
     {
         public void OnGet()

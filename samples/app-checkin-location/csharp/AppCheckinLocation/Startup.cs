@@ -3,7 +3,7 @@
 //
 // Generated with Bot Builder V4 SDK Template for Visual Studio v4.14.0
 
-using CheckInLocation.Bots;
+using AppCheckinLocation.Bots;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace CheckInLocation
+namespace AppCheckinLocation
 {
     public class Startup
     {

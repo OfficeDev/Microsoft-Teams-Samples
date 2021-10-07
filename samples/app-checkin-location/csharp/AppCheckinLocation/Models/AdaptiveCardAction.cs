@@ -2,7 +2,7 @@
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
-namespace CheckInLocation.Models
+namespace AppCheckinLocation.Models
 {
     using Microsoft.Bot.Schema;
     using Newtonsoft.Json;

@@ -1,13 +1,13 @@
-﻿// <copyright file="UserDetails.cs" company="Microsoft">
+﻿// <copyright file="UserDetail.cs" company="Microsoft">
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
-namespace CheckInLocation.Models
+namespace AppCheckinLocation.Models
 {
     /// <summary>
-    /// User Details model class.
+    /// User Detail model class.
     /// </summary>
-    public class UserDetails
+    public class UserDetail
     {
         public string UserName { get; set; }
 

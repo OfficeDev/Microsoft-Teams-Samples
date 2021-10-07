@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Net.Http;
 
-namespace CheckInLocation
+namespace AppCheckinLocation
 {
     public class AdapterWithErrorHandler : CloudAdapter
     {

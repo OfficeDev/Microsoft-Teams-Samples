@@ -8,7 +8,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using AdaptiveCards;
-using CheckInLocation.Models;
+using AppCheckinLocation.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
@@ -18,7 +18,7 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace CheckInLocation.Bots
+namespace AppCheckinLocation.Bots
 {
     /// <summary>
     /// Bot Activity handler class.
@@ -42,20 +42,20 @@ namespace CheckInLocation.Bots
         /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            if(turnContext.Activity.Text.ToLower() == "view last check in")
+            if(turnContext.Activity.Text.ToLower() == "viewcheckin")
             {
-                var fileName = Path.Combine(_env.ContentRootPath, $".\\wwwroot\\UserLocationdetails.json");
-                string Json = File.ReadAllText(fileName);
-                List<UserDetails> userDetailsList = new List<UserDetails>();
+                var fileName = Path.Combine(_env.ContentRootPath, $".\\wwwroot\\checkindetails.json");
+                string filedata = File.ReadAllText(fileName);
+                List<UserDetail> userDetailsList = new List<UserDetail>();
 
-                if (Json == "")
+                if (string.IsNullOrEmpty(filedata))
                 {
                     await turnContext.SendActivityAsync(MessageFactory.Text("No last check in found"));
                 }
                 else
                 {
-                    userDetailsList = JsonConvert.DeserializeObject<List<UserDetails>>(Json);
-                    List<UserDetails> userCheckInList = new List<UserDetails>();
+                    userDetailsList = JsonConvert.DeserializeObject<List<UserDetail>>(filedata);
+                    List<UserDetail> userCheckInList = new List<UserDetail>();
 
                     foreach (var userDetail in userDetailsList)
                     {
@@ -95,7 +95,7 @@ namespace CheckInLocation.Bots
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample your bot can get your current location and all your last check in's. Please type 'check in' to get check in card or type 'view last check in' to get all check in details"), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample you can checkin your location (use command 'checkin') and view your checked in location(use command 'viewcheckin')."), cancellationToken);
                 }
             }
         }
@@ -162,7 +162,7 @@ namespace CheckInLocation.Bots
             string user = turnContext.Activity.From.Name;
             string time = turnContext.Activity.LocalTimestamp.ToString();
 
-            UserDetails userDetails = new UserDetails {
+            UserDetail userDetails = new UserDetail {
                 CheckInTime = time,
                 UserName = user,
                 Longitude = longitude,
@@ -269,7 +269,7 @@ namespace CheckInLocation.Bots
         /// <summary>
         /// Sample Adaptive card for user's last check in's.
         /// </summary>
-        private List<Attachment> GetAdaptiveCardForUserLastCheckIn(List<UserDetails> userDetails)
+        private List<Attachment> GetAdaptiveCardForUserLastCheckIn(List<UserDetail> userDetails)
         {
             List<Attachment> attachmentList = new List<Attachment>();
 
@@ -326,18 +326,18 @@ namespace CheckInLocation.Bots
         }
 
         // Save user details in json file.
-        private void SaveUserDetails(UserDetails userDetails)
+        private void SaveUserDetails(UserDetail userDetails)
         {
-            var fileName = Path.Combine(_env.ContentRootPath, $".\\wwwroot\\UserLocationdetails.json");
-            string Json = File.ReadAllText(fileName);
-            List<UserDetails> userDetailsList = new List<UserDetails>();
+            var fileName = Path.Combine(_env.ContentRootPath, $".\\wwwroot\\checkindetails.json");
+            string fileData = File.ReadAllText(fileName);
+            List<UserDetail> userDetailsList = new List<UserDetail>();
 
-            if (Json == "")
+            if (string.IsNullOrEmpty(fileData))
             {
                 userDetailsList.Add(userDetails);
             }
             else {
-                userDetailsList = JsonConvert.DeserializeObject<List<UserDetails>>(Json);
+                userDetailsList = JsonConvert.DeserializeObject<List<UserDetail>>(fileData);
                 userDetailsList.Add(userDetails);
             }
 

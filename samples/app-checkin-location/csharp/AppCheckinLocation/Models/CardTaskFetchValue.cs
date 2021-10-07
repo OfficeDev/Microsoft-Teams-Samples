@@ -4,7 +4,7 @@
 
 using Newtonsoft.Json;
 
-namespace CheckInLocation.Models
+namespace AppCheckinLocation.Models
 {
     /// <summary>
     /// Card task fetch value model class.

@@ -3,7 +3,7 @@
   "manifestVersion": "1.10",
   "version": "1.0.0",
   "id": "{{Microsoft-App-Id}}",
-  "packageName": "com.microsoft.teams.checkinlocation",
+  "packageName": "com.microsoft.teams.appcheckinlocation",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -11,12 +11,12 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Check in location",
+    "short": "App check in location",
     "full": "Get check in location of user"
   },
   "description": {
-    "short": "Check in location",
-    "full": "This sample demos to get current location and time of user."
+    "short": "App check in location",
+    "full": "This sample shows feature where user can checkin with current location and view all previous checkins."
   },
   "icons": {
     "outline": "outline.png",
@@ -37,7 +37,6 @@
     "geolocation"
   ],
   "validDomains": [
-    "{{domain-name}}",
-    "token.botframework.com"
+    "{{domain-name}}"
   ]
 }

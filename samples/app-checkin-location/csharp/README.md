@@ -1,17 +1,17 @@
 ﻿﻿﻿
-## Get Check-in info of user
+## Get Checkin info of user
 
-This sample demos to get current location and time of user and all last check in of user.
+This sample shows feature where user can checkin with current location and view all previous checkins.
 
 `Currently, Microsoft Teams support for get geolocation capability is only available for mobile clients`
 
-![Check in card](CheckInLocation/Images/CheckinCard.png)
+![Check in card](AppCheckinLocation/Images/CheckinCard.png)
 
-![Geo Location](CheckInLocation/Images/Geolocation.png)
+![Geo Location](AppCheckinLocation/Images/Geolocation.jpg)
 
-![User details card](CheckInLocation/Images/UserDetailsCard.png)
+![User details card](AppCheckinLocation/Images/UserDetailsCard.png)
 
-![User last checkin card](CheckInLocation/Images/UserLastCheckInCard.png)
+![User last checkin card](AppCheckinLocation/Images/UserLastCheckInCard.png)
 
 ## Prerequisites
 
@@ -40,11 +40,11 @@ This sample demos to get current location and time of user and all last check in
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
    
-3) In a terminal, navigate to `samples/check-in-current-location/csharp`
+3) In a terminal, navigate to `samples/app-checkin-location/csharp`
 
     change into project folder
     ```bash
-    cd # CheckInLocation
+    cd # AppCheckinLocation
     ```
     
 4) Run ngrok - point to port 3978
@@ -76,8 +76,8 @@ This sample demos to get current location and time of user and all last check in
    B) Or from Visual Studio
      - Launch Visual Studio
      - File -> Open -> Project/Solution
-     - Navigate to `CheckInLocation` folder
-     - Select `CheckInLocation.csproj` file
+     - Navigate to `AppCheckinLocation` folder
+     - Select `AppCheckinLocation.csproj` file
      - Press `F5` to run the project 
 
 9) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
@@ -90,19 +90,19 @@ This sample demos to get current location and time of user and all last check in
 
 - Card with actions `check in`. 
 
-![Check in card](CheckInLocation/Images/CheckinCard.png)
+![Check in card](AppCheckinLocation/Images/CheckinCard.png)
 
 - `Geo Location` of user.
 
-![Geo Location](CheckInLocation/Images/Geolocation.png)
+![Geo Location](AppCheckinLocation/Images/Geolocation.jpg)
 
 - User details.
 
-![User details card](CheckInLocation/Images/UserDetailsCard.png)
+![User details card](AppCheckinLocation/Images/UserDetailsCard.png)
 
-- `view last check in` of user.
+- `viewcheckindetails` of user.
 
-![User last checkin card](CheckInLocation/Images/UserLastCheckInCard.png)
+![User last checkin card](AppCheckinLocation/Images/UserLastCheckInCard.png)
 
 ## Deploy the bot to Azure
 

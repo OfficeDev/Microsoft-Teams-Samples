@@ -6,7 +6,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace CheckInLocation
+namespace AppCheckinLocation
 {
     public class Program
     {
