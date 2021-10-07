@@ -7,7 +7,7 @@ This sample shows feature where user can checkin with current location and view 
 
 ![Check in card](AppCheckinLocation/Images/CheckinCard.png)
 
-![Geo Location](AppCheckinLocation/Images/Geolocation.jpg)
+![Geo Location](AppCheckinLocation/Images/Geolocation.png)
 
 ![User details card](AppCheckinLocation/Images/UserDetailsCard.png)
 
@@ -94,7 +94,7 @@ This sample shows feature where user can checkin with current location and view 
 
 - `Geo Location` of user.
 
-![Geo Location](AppCheckinLocation/Images/Geolocation.jpg)
+![Geo Location](AppCheckinLocation/Images/Geolocation.png)
 
 - User details.
 
