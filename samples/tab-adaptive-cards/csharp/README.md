@@ -22,7 +22,7 @@ This feature shown in this sample is in Public Developer Preview and is supporte
 ```
 
 2. Create a Bot Registration
-   In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+   In Azure portal, register your bot using Azure Bot resource, and also add authentication to bot following the instructions at [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
 3. Modify the `manifest.json` in the `/AppPackage` folder and replace the `{{BOT-ID}}` with the id from step 2.
 

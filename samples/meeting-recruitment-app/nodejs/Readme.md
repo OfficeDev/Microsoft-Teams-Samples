@@ -18,9 +18,8 @@ It has meeting details and in-meeting app that helps in the interview process.
 
 
 ## To try this sample
-1) Create an Azure Bot resource
-   Follow the resource, [Create an Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2#create-the-resource) to create an Azure Bot and add authentication to bot.
-
+1) Create a Bot Registration in Azure portal. [Bot Framework registration](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2#create-the-resource)
+    
 2) Create a Azure Storage account(This is needed to store/retrieve data that's used in the app) 
   [Create storage account](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal)
 
