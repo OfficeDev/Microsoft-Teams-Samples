@@ -6,16 +6,30 @@
     <script src="../packages/mgt/dist/es6/index.js"></script>
     <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css" />
     <title>Microsoft Teams Tab</title>
+    <style>
+        .title{
+            font-size: 16px;
+            font-weight: bold;
+            margin: 1rem 0rem;
+        }
+    </style>
 </head>
 <body>
 
     <div id="root">  </div>
-    <mgt-teams-provider client-id="Your_Client_ID"
-                        auth-popup-url="/auth.html"></mgt-teams-provider>
+    <mgt-teams-msal2-provider client-id=""
+                        auth-popup-url="https://43f4-117-199-44-212.ngrok.io/auth.html"></mgt-teams-msal2-provider>mgt-teams-msal2-provider
     <mgt-login></mgt-login>
+    <div class="title">Agenda</div>
     <mgt-agenda></mgt-agenda>
+    <div class="title"> People picker </div>
     <mgt-people-picker></mgt-people-picker>
+    <div class="title"> Task </div>
     <mgt-tasks></mgt-tasks>
+    <div class="title"> To do</div>
+    <mgt-todo></mgt-todo>
+    <div class="title"> Person Card</div>
+    <mgt-person-card person-query="me"></mgt-person-card>
 
 </body>
 </html>
