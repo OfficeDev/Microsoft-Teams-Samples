@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP.Net Core app to Azure Web App - Meeting Events App
+name: Build and deploy ASP.Net Core app (Meeting Events App) to Azure Web App - meeting-events
 
 on:
   push:
@@ -49,6 +49,7 @@ jobs:
       name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
+    #Change the app-name which is the azure web app name
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
@@ -59,7 +60,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'appcheckin'
+          app-name: 'meeting-events'
           slot-name: 'production'
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_Meeting_Events }}
           package: .
