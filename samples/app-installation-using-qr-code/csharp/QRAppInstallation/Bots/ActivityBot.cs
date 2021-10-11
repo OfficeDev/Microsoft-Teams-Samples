@@ -63,7 +63,7 @@ namespace QRAppInstallation.Bots
         }
 
         /// <summary>
-        /// Handle task module is fetch.
+        /// Handle task module is fetch
         /// </summary>
         /// <param name = "turnContext" > The turn context.</param>
         /// <param name = "taskModuleRequest" >The task module invoke request value payload.</param>
