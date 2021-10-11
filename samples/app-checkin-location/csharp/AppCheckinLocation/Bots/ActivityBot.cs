@@ -325,7 +325,7 @@ namespace AppCheckinLocation.Bots
             return attachmentList;
         }
 
-        // Save user details in json file.
+        // Save user details in json file
         private void SaveUserDetails(UserDetail userDetails)
         {
             var fileName = Path.Combine(_env.ContentRootPath, $".\\wwwroot\\checkindetails.json");
