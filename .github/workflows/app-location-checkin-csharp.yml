@@ -9,7 +9,7 @@ on:
     #Change the path to the folder where your code resides. Any change here will start the activity. 
     branches:
       - main
-	paths:
+    paths:
       - 'samples/app-checkin-location/**'  
   workflow_dispatch:
 env:
