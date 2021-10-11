@@ -61,5 +61,5 @@ jobs:
         with:
           app-name: 'appcheckin'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_d876b13c832b4e0dac2796badf1f2582 }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_App_Checkin_Location }}
           package: .
