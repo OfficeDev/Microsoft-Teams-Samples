@@ -8,7 +8,7 @@ on:
     #Change the branch name to <<main>>
     #Change the path to the folder where your code resides. Any change here will start the activity. 
     branches:
-      - v-abt/meeting-app
+      - main
     paths:
       - 'samples/tab-adaptive-cards/**'  
   workflow_dispatch:
