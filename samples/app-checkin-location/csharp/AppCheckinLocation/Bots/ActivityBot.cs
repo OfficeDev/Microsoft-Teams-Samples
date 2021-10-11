@@ -331,7 +331,6 @@ namespace AppCheckinLocation.Bots
             var fileName = Path.Combine(_env.ContentRootPath, $".\\wwwroot\\checkindetails.json");
             string fileData = File.ReadAllText(fileName);
             List<UserDetail> userDetailsList = new List<UserDetail>();
-
             if (string.IsNullOrEmpty(fileData))
             {
                 userDetailsList.Add(userDetails);
