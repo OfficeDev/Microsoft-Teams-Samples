@@ -42,7 +42,7 @@ namespace AppCheckinLocation.Bots
         /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            if(turnContext.Activity.Text.ToLower() == "viewcheckin")
+            if(turnContext.Activity.Text.ToLower().Trim() == "viewcheckin")
             {
                 var fileName = Path.Combine(_env.ContentRootPath, $".\\wwwroot\\checkindetails.json");
                 string filedata = File.ReadAllText(fileName);
