@@ -3,14 +3,12 @@
 
 const { TeamsActivityHandler, CardFactory } = require("botbuilder");
 const { TaskModuleResponseFactory } = require("../models/taskModuleResponseFactory");
-const fs = require("fs");
+const conversationDataReferences = {};
 
 class TeamsBot extends TeamsActivityHandler {
     constructor() {
         super();
-
         this.baseUrl = process.env.BaseUrl;
-
         this.onMembersAdded(async (context, next) => {
             const membersAdded = context.activity.membersAdded;
             for (let member = 0; member < membersAdded.length; member++) {
@@ -24,35 +22,21 @@ class TeamsBot extends TeamsActivityHandler {
 
         this.onMessage(async (context, next) => {
             if (context.activity.text.toLowerCase().trim() == "viewcheckin") {
-                const fileJsonString = fs.readFileSync("../nodejs/public/checkindetails.json", "utf8");
-                let prevCheckinDetails = new Array();
+                var currentData = conversationDataReferences["userDetails"];
 
-                // Check if file is empty.
-                if (fileJsonString == "") {
+                // Check if currentDatais empty.
+                if (currentData == undefined) {
                     await context.sendActivity("No last check in found");
                 }
                 else {
-                    const allCheckinDetails = JSON.parse(fileJsonString);
+                    // An array for cards will be created for all the checkin details of the user. 
+                    const cardArray = new Array();
+                    currentData.map((user) => {
+                        let userCheckinCard = CardFactory.adaptiveCard(this.adaptiveCardForUserLastCheckin(user));
+                        cardArray.push(userCheckinCard);
+                    })
 
-                    allCheckinDetails.find((user) => {
-                        if (user.userId == context.activity.from.aadObjectId) {
-                            prevCheckinDetails.push(user);
-                        }
-                    });
-
-                    if (prevCheckinDetails.length == 0) {
-                        await context.sendActivity("No last check in found");
-                    }
-                    else {
-                        // An array for cards will be created for all the checkin details of the user. 
-                        const cardArray = new Array();
-                        prevCheckinDetails.map((user) => {
-                            let userCheckinCard = CardFactory.adaptiveCard(this.adaptiveCardForUserLastCheckin(user));
-                            cardArray.push(userCheckinCard);
-                        })
-
-                        await context.sendActivity({ attachments: cardArray });
-                    }
+                    await context.sendActivity({ attachments: cardArray });
                 }
             }
             else {
@@ -97,26 +81,36 @@ class TeamsBot extends TeamsActivityHandler {
             time: context.activity.localTimestamp.toString()
         };
 
-        this.saveUserDetails(newCheckinDetails);
+        await this.saveUserDetails(context, newCheckinDetails);
         const locationCard = CardFactory.adaptiveCard(this.adaptiveCardForUserLocationDetails(newCheckinDetails.userName, newCheckinDetails.time, newCheckinDetails.latitude, newCheckinDetails.longitude));
         await context.sendActivity({ attachments: [locationCard] });
 
         return null;
     }
 
-    // This method is used to save user's checkin details to file.
-    saveUserDetails = (newCheckinDetails) => {
-        var fileJsonString = fs.readFileSync("../nodejs/public/checkindetails.json", 'utf8');
-
-        // Check if file is empty.
-        if (fileJsonString == "") {
-            fs.writeFileSync("../nodejs/public/checkindetails.json", JSON.stringify([newCheckinDetails]), "utf-8");
+    // This method is used to save user's checkin details.
+    async saveUserDetails(context, newCheckinDetails) {
+        var currentData = conversationDataReferences["userDetails"];
+        // Check if currentData is undefined.
+        if (currentData == undefined) {
+            const userDetailsList = new Array();
+            userDetailsList.push(newCheckinDetails)
+            currentData = userDetailsList;
+            conversationDataReferences["userDetails"] = currentData;
         }
-        // Add the new chekin data into the file.
+        // Check if currentData length is 10.
+        else if (currentData.length == 10) {
+            currentData.splice(0, 1);
+            const userDetailsList = currentData;
+            userDetailsList.push(newCheckinDetails)
+            currentData = userDetailsList;
+            conversationDataReferences["userDetails"] = currentData;
+        }
         else {
-            let CheckinData = JSON.parse(fileJsonString);
-            CheckinData.push(newCheckinDetails);
-            fs.writeFileSync("../nodejs/public/checkindetails.json", JSON.stringify(CheckinData), "utf-8");
+            const userDetailsList = currentData;
+            userDetailsList.push(newCheckinDetails)
+            currentData = userDetailsList;
+            conversationDataReferences["userDetails"] = currentData;
         }
     }
 
