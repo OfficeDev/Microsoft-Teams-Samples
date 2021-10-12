@@ -44,7 +44,7 @@ namespace Microsoft.BotBuilderSamples
         {
             if (turnContext.Activity.Name == SignInConstants.TokenExchangeOperationName)
             {
-                // The Token Exchange Helper will attempt the exchange, and if successful, it will cache the result
+                // The Token Exchange Helper will attempt the exchange, and if successful, it will cache the result.
                 // in TurnState.  This is then read by TokenExchangeOAuthPrompt, and processed accordingly.
                 if (! await _tokenExchangeHelper.ShouldProcessTokenExchange(turnContext, cancellationToken))
                 {
