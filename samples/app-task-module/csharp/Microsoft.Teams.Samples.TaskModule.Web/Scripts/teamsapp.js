@@ -1,4 +1,5 @@
-﻿function getAdaptiveCard() {
+﻿// Method to get adaptive card
+function getAdaptiveCard() {
     var card = {
         "type": "AdaptiveCard",
         "body": [
