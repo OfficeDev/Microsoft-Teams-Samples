@@ -33,7 +33,7 @@ jobs:
           nuget-version: ${{ env.NUGET_VERSION}}
       
       - name: NuGet to restore dependencies as well as project-specific tools that are specified in the project file
-        run: nuget restore
+        run: nuget restore ${{ env.AZURE_WEBAPP_PACKAGE_PATH}}
       
       - name: Add msbuild to PATH
         run: microsoft/setup-msbuild@v1.0.2
