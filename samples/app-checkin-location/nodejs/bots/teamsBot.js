@@ -23,7 +23,7 @@ class TeamsBot extends TeamsActivityHandler {
         });
 
         this.onMessage(async (context, next) => {
-            if (context.activity.text.toLowerCase() == "viewcheckin") {
+            if (context.activity.text.toLowerCase().trim() == "viewcheckin") {
                 const fileJsonString = fs.readFileSync("../nodejs/public/checkindetails.json", "utf8");
                 let prevCheckinDetails = new Array();
 
@@ -31,7 +31,6 @@ class TeamsBot extends TeamsActivityHandler {
                 if (fileJsonString == "") {
                     await context.sendActivity("No last check in found");
                 }
-                
                 else {
                     const allCheckinDetails = JSON.parse(fileJsonString);
 
@@ -44,7 +43,6 @@ class TeamsBot extends TeamsActivityHandler {
                     if (prevCheckinDetails.length == 0) {
                         await context.sendActivity("No last check in found");
                     }
-
                     else {
                         // An array for cards will be created for all the checkin details of the user. 
                         const cardArray = new Array();
@@ -57,7 +55,6 @@ class TeamsBot extends TeamsActivityHandler {
                     }
                 }
             }
-
             else {
                 const userCard = CardFactory.adaptiveCard(this.adaptiveCardForTaskModule());
                 await context.sendActivity({ attachments: [userCard] });
@@ -115,7 +112,6 @@ class TeamsBot extends TeamsActivityHandler {
         if (fileJsonString == "") {
             fs.writeFileSync("../nodejs/public/checkindetails.json", JSON.stringify([newCheckinDetails]), "utf-8");
         }
-
         // Add the new chekin data into the file.
         else {
             let CheckinData = JSON.parse(fileJsonString);

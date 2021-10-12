@@ -29,6 +29,23 @@
       "scopes": [
         "personal"
       ],
+      "commandLists": [
+        {
+          "scopes": [
+            "personal"
+          ],
+          "commands": [
+            {
+              "title": "checkin",
+              "description": "To check in current location"
+            },
+            {
+              "title": "viewcheckin",
+              "description": "To get all last checkin locations"
+            }
+          ]
+        }
+      ],
       "isNotificationOnly": false
     }
   ],
