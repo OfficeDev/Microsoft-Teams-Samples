@@ -35,9 +35,6 @@ jobs:
       - name: NuGet to restore dependencies as well as project-specific tools that are specified in the project file
         run: nuget restore ${{ env.AZURE_WEBAPP_PACKAGE_PATH}}packages.config -PackagesDirectory ..\packages
       
-      - name: Add msbuild to PATH
-        run: microsoft/setup-msbuild@v1.0.2
-
       - name: Run MSBuild
         run: msbuild ${{ env.PROJECT_PATH}}
       
