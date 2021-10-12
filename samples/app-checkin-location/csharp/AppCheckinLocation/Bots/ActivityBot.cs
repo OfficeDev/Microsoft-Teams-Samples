@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AdaptiveCards;
@@ -27,11 +28,15 @@ namespace AppCheckinLocation.Bots
     {
         private readonly string _applicationBaseUrl;
         private readonly IWebHostEnvironment _env;
+        protected readonly BotState _conversationState;
+        protected readonly IStatePropertyAccessor<UserLocationDetail> _UserDetail;
 
-        public ActivityBot(IConfiguration configuration, IWebHostEnvironment env)
+        public ActivityBot(IConfiguration configuration, IWebHostEnvironment env, ConversationState conversationState)
         {
+            _conversationState = conversationState;
             _env = env;
             _applicationBaseUrl = configuration["ApplicationBaseUrl"] ?? throw new NullReferenceException("ApplicationBaseUrl");
+            _UserDetail = conversationState.CreateProperty<UserLocationDetail>(nameof(UserLocationDetail));
         }
 
         /// <summary>
@@ -44,41 +49,36 @@ namespace AppCheckinLocation.Bots
         {
             if(turnContext.Activity.Text.ToLower().Trim() == "viewcheckin")
             {
-                var fileName = Path.Combine(_env.ContentRootPath, $".\\wwwroot\\checkindetails.json");
-                string filedata = File.ReadAllText(fileName);
+                var currentUserDetail = await this._UserDetail.GetAsync(turnContext, () => new UserLocationDetail());
                 List<UserDetail> userDetailsList = new List<UserDetail>();
 
-                if (string.IsNullOrEmpty(filedata))
+                if (currentUserDetail.UserDetails == null)
                 {
                     await turnContext.SendActivityAsync(MessageFactory.Text("No last check in found"));
                 }
                 else
                 {
-                    userDetailsList = JsonConvert.DeserializeObject<List<UserDetail>>(filedata);
-                    List<UserDetail> userCheckInList = new List<UserDetail>();
-
-                    foreach (var userDetail in userDetailsList)
-                    {
-                        if (userDetail.UserId == turnContext.Activity.From.AadObjectId)
-                        {
-                            userCheckInList.Add(userDetail);
-                        }
-                    }
-
-                    if (userCheckInList.Count == 0)
-                    {
-                        await turnContext.SendActivityAsync(MessageFactory.Text("No last check in found"));
-                    }
-                    else
-                    {
-                        await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForUserLastCheckIn(userCheckInList)), cancellationToken);
-                    }
+                    await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForUserLastCheckIn(currentUserDetail.UserDetails)), cancellationToken);
                 }                       
             }
             else
             {
                 await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForTaskModule()), cancellationToken);
             }            
+        }
+
+        /// <summary>
+        /// Handle request from bot.
+        /// </summary>
+        /// <param name = "turnContext" > The turn context.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
+        public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            await base.OnTurnAsync(turnContext, cancellationToken);
+
+            // Save any state changes that might have occurred during the turn.
+            await _conversationState.SaveChangesAsync(turnContext, false, cancellationToken);
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace AppCheckinLocation.Bots
                 UserId = turnContext.Activity.From.AadObjectId
             };
 
-            SaveUserDetails(userDetails);
+            await SaveUserDetailsAsync(turnContext,userDetails);
             await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForUserLocation(time, user, latitude, longitude)), cancellationToken);
 
             return null;
@@ -326,21 +326,31 @@ namespace AppCheckinLocation.Bots
         }
 
         // Save user details in json file.
-        private void SaveUserDetails(UserDetail userDetails)
+        private async Task SaveUserDetailsAsync(ITurnContext<IInvokeActivity> turnContext, UserDetail userDetails)
         {
-            var fileName = Path.Combine(_env.ContentRootPath, $".\\wwwroot\\checkindetails.json");
-            string fileData = File.ReadAllText(fileName);
+            var currentUserDetail = await this._UserDetail.GetAsync(turnContext, () => new UserLocationDetail());
             List<UserDetail> userDetailsList = new List<UserDetail>();
-            if (string.IsNullOrEmpty(fileData))
+            if (currentUserDetail.UserDetails == null)
             {
                 userDetailsList.Add(userDetails);
+                currentUserDetail.UserDetails = userDetailsList;
+                await this._UserDetail.SetAsync(turnContext, currentUserDetail);
             }
-            else {
-                userDetailsList = JsonConvert.DeserializeObject<List<UserDetail>>(fileData);
+            else if (currentUserDetail.UserDetails.Count == 10)
+            {
+                currentUserDetail.UserDetails.RemoveAt(0); 
+                userDetailsList = currentUserDetail.UserDetails;
                 userDetailsList.Add(userDetails);
+                currentUserDetail.UserDetails = userDetailsList;
+                await this._UserDetail.SetAsync(turnContext, currentUserDetail);
             }
-
-            File.WriteAllText(fileName, JsonConvert.SerializeObject(userDetailsList));
+            else
+            {
+                userDetailsList = currentUserDetail.UserDetails;
+                userDetailsList.Add(userDetails);
+                currentUserDetail.UserDetails = userDetailsList;
+                await this._UserDetail.SetAsync(turnContext, currentUserDetail);
+            }
         }
     }
 }
