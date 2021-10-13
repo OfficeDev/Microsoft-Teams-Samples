@@ -37,7 +37,7 @@ namespace FetchGroupChatMessagesWithRSC.Bots
         }
 
         /// <summary>
-        /// Handle request from bot.
+        /// Handle request from bot
         /// </summary>
         /// <param name = "turnContext" > The turn context.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
