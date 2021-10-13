@@ -8,7 +8,7 @@ on:
     #Change the branch name to <<main>>
     #Change the path to the folder where your code resides. Any change here will start the activity. 
     branches:
-      - main
+      - v-abt/deployment-scripts
     paths:
       - 'samples/bot-receive-channel-messages-withRSC/**'  
   workflow_dispatch:
@@ -17,6 +17,7 @@ env:
     #Change the project path to your project file path.
     AZURE_WEBAPP_PACKAGE_PATH: 'samples/bot-receive-channel-messages-withRSC/csharp/published'
     PROJECT_PATH: 'samples/bot-receive-channel-messages-withRSC/csharp/ReceiveMessagesWithRSC/ReceiveMessagesWithRSC.csproj'
+    AZURE_WEBAPP_NAME: 'bot-rsc'
 jobs:
   build:
     runs-on: windows-latest
@@ -49,7 +50,6 @@ jobs:
       name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
-    #Change the app-name which is the azure web app name
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
@@ -60,7 +60,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'rsc-fetch-messages'
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
           slot-name: 'production'
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_Bot_Receive_Channel_Messages_WithRSC }}
           package: .
