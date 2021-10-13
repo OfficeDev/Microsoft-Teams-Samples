@@ -6,18 +6,25 @@ import reportWebVitals from './reportWebVitals';
 import {Providers} from '@microsoft/mgt-element';
 import {TeamsMsal2Provider} from '@microsoft/mgt-teams-msal2-provider';
 import * as MicrosoftTeams from "@microsoft/teams-js";
+import { Route, BrowserRouter } from 'react-router-dom'
+import GraphSignIn from './tabauth';
 
 TeamsMsal2Provider.microsoftTeamsLib = MicrosoftTeams;
 
 Providers.globalProvider = new TeamsMsal2Provider({
-  clientId: 'client-id',
-  authPopupUrl: '/tabauth',
+  clientId: '',
+  authPopupUrl: 'https://51b9-27-57-140-105.ngrok.io/tabauth',
   scopes: ['calendars.read', 'user.read', 'openid', 'profile', 'people.read', 'user.readbasic.all'],
 });
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    < BrowserRouter >
+      <div>
+         <Route exact path="/" component={App} />
+         <Route path="/tabauth" component={ GraphSignIn } />
+      </div>
+   </ BrowserRouter >
   </React.StrictMode>,
   document.getElementById('root')
 );
