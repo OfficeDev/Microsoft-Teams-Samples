@@ -1,7 +1,7 @@
 import { Providers, ProviderState } from '@microsoft/mgt-element';
-import { Agenda, Login, Todo, PersonCard, PeoplePicker } from '@microsoft/mgt-react';
+import { Agenda, Login, Todo, PersonCard, PeoplePicker, Tasks, Person,ViewType} from '@microsoft/mgt-react';
 import React, { useState, useEffect } from 'react';
-import './App.css';
+import '../App.css';
 
 function useIsSignedIn(): [boolean] {
   const [isSignedIn, setIsSignedIn] = useState(false);
@@ -42,6 +42,11 @@ function App() {
             <Todo />
             <div className="title"> Person Card</div>
             <PersonCard personQuery="me" />
+            <div className="title"> Person</div>
+            <Person personQuery="me" view={ViewType.threelines} />
+            <div className="title"> Tasks</div>
+            <Tasks />
+            
           </div>}
       </div>
     </div>

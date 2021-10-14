@@ -14,6 +14,8 @@ This is the demo app for [Teams tab using miscrosoftgraph toolkit](https://docs.
 
 ![person-card](TabGraphToolkit/Images/person-card.png)
 
+![person](TabGraphToolkit/Images/person.png)
+
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
@@ -26,7 +28,7 @@ This is the demo app for [Teams tab using miscrosoftgraph toolkit](https://docs.
   
   run ngrok locally
   ```bash
- ngrok http https://localhost:3000 -host-header="localhost:3000"
+ ngrok http -host-header=rewrite 3978
   ```
   
 -  [NodeJS](https://nodejs.org/en/)
@@ -39,7 +41,7 @@ This is the demo app for [Teams tab using miscrosoftgraph toolkit](https://docs.
  - Register your app with Microsoft identity platform via the Azure AD portal
  - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2). .
  - Click on Add a Platform in redirect URI section.
- - Select Single Page Application and add following URL `https://localhost:3000/`
+ - Select Single Page Application and add following URL `<<base-url>>/tabauth`
  - Save and register.
  - Once App is registerd copy the `client_Id` for your app and update in the app.
 
@@ -60,7 +62,7 @@ This is the demo app for [Teams tab using miscrosoftgraph toolkit](https://docs.
     ```bash
     npm install
     ```
-5) Update `client_Id` copied from step 1 in index.tsx and index.html file.  
+5) Update `client_Id` copied from step 1 in index.tsx file.  
  
 6) Modify the `manifest.json` in the `/appPackage` folder and replace the following details:
   - `{{Microsoft-App-Id}}` with Application id generated from Step 1
@@ -116,27 +118,6 @@ This is the demo app for [Teams tab using miscrosoftgraph toolkit](https://docs.
 
 ![person-card](TabGraphToolkit/Images/person-card.png)
 
-## Deploy to Teams
-Start debugging the project by hitting the `F5` key or click the debug icon in Visual Studio Code and click the `Start Debugging` green arrow button.
+- <mgt-person>
 
-### NOTE: First time debug step
-On the first time running and debugging your app you need allow the localhost certificate.  After starting debugging when Chrome is launched and you have installed your app it will fail to load.
-
-- Open a new tab `in the same browser window that was opened`
-- Navigate to `https://localhost:3000/`
-- Click the `Advanced` button
-- Select the `Continue to localhost`
-
-### NOTE: Debugging
-Ensure you have the Debugger for Chrome/Edge extension installed for Visual Studio Code from the marketplace.
-
-### Build for production
-`npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![person](TabGraphToolkit/Images/person.png)

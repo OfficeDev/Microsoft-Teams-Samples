@@ -1,19 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './components/App';
 import reportWebVitals from './reportWebVitals';
-import {Providers} from '@microsoft/mgt-element';
-import {TeamsMsal2Provider} from '@microsoft/mgt-teams-msal2-provider';
+import { Providers } from '@microsoft/mgt-element';
+import { TeamsMsal2Provider } from '@microsoft/mgt-teams-msal2-provider';
 import * as MicrosoftTeams from "@microsoft/teams-js";
 import { Route, BrowserRouter } from 'react-router-dom'
-import GraphSignIn from './tabauth';
+import TabAuth from './components/tabsauth';
 
 TeamsMsal2Provider.microsoftTeamsLib = MicrosoftTeams;
 
 Providers.globalProvider = new TeamsMsal2Provider({
-  clientId: '',
-  authPopupUrl: 'https://51b9-27-57-140-105.ngrok.io/tabauth',
+    clientId: 'client_Id',
+  authPopupUrl: window.location.origin + '/tabauth',
   scopes: ['calendars.read', 'user.read', 'openid', 'profile', 'people.read', 'user.readbasic.all'],
 });
 
@@ -21,10 +21,10 @@ ReactDOM.render(
   <React.StrictMode>
     < BrowserRouter >
       <div>
-         <Route exact path="/" component={App} />
-         <Route path="/tabauth" component={ GraphSignIn } />
+        <Route exact path="/tab" component={App} />
+        <Route path="/tabauth" component={TabAuth} />
       </div>
-   </ BrowserRouter >
+    </ BrowserRouter >
   </React.StrictMode>,
   document.getElementById('root')
 );
