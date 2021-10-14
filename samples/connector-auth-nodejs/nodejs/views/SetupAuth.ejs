@@ -50,6 +50,24 @@
                 removeUrl: window.location.origin + "/SetupAuth",
                 configName: eventType
             });
+            microsoftTeams.settings.getSettings(function (settings) {
+                // We get the Webhook URL in settings.webhookUrl which needs to be saved.
+                $.ajax({
+                    url: '/Connector/Save',
+                    type: 'post',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        webhookUrl: settings.webhookUrl,
+                        eventType: eventType
+                    }),
+                    success: function (data, textStatus, jQxhr) {
+                        console.log('webhook created successfully.');
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        console.log('error', errorThrown);
+                    }
+                });
+            });
             saveEvent.notifySuccess();
         });
         microsoftTeams.settings.registerOnRemoveHandler(function (removeEvent) {
@@ -77,7 +95,6 @@
                     $("#primary").show();
                     $("#divConfig").show();
                     $("#divLogin").hide();
-                    microsoftTeams.settings.setValidityState(true);
                 },
                 failureCallback: function (reason) {
                     console.log("Login failed: " + reason);
