@@ -7,7 +7,7 @@ import { Providers } from '@microsoft/mgt-element';
 import { TeamsMsal2Provider } from '@microsoft/mgt-teams-msal2-provider';
 import * as MicrosoftTeams from "@microsoft/teams-js";
 import { Route, BrowserRouter } from 'react-router-dom'
-import TabAuth from './components/tabsauth';
+import TabAuth from './components/TabAuth';
 
 TeamsMsal2Provider.microsoftTeamsLib = MicrosoftTeams;
 
