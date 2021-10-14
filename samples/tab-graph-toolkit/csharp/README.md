@@ -27,8 +27,8 @@ This is the demo app for [Teams tab using miscrosoft graph toolkit](https://docs
 - [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
   
   run ngrok locally
-  ```bash
- ngrok http -host-header=rewrite 3978
+   ```bash
+  ngrok http -host-header=rewrite 3978
   ```
   
 -  [NodeJS](https://nodejs.org/en/)
