@@ -1,0 +1,42 @@
+﻿@page
+@model AppCheckinLocation.Pages.CheckInModel
+@{
+}
+<head>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        microsoftTeams.initialize(()=>{
+            getLocation(); 
+        })
+
+         // Method to get current user's geo location
+         // If the value of allowChooseLocation is true, then the users can choose any location of their choice.
+         // If the value of allowChooseLocation is false, then the users cannot change their current location.
+         // If the value of showMap is false, the current location is fetched without displaying the map. 
+         // showMap is ignored if allowChooseLocation is set to true.
+        function getLocation() {
+            microsoftTeams.location.getLocation({ allowChooseLocation: true, showMap: true }, (error, location) => {
+             var currentLocation=location;
+             microsoftTeams.tasks.submitTask(currentLocation);
+          });
+        } 
+    </script>
+    <style>
+        .submitClick{
+            margin:5rem;
+            margin-left:0rem;
+        }
+    </style>
+</head>
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            <div>
+            </div>
+        </div>
+    </div>
+</body>
