@@ -1,6 +1,6 @@
-## Teams tab with microsoft Graph Toolkit
+## Teams tab with microsoft graph toolkit
 
-This is the demo app for [Teams tab using miscrosoftgraph toolkit](https://docs.microsoft.com/en-us/graph/toolkit/get-started/build-a-microsoft-teams-tab?tabs=unpkg%2Cjs)
+This is the demo app for [Teams tab using miscrosoft graph toolkit](https://docs.microsoft.com/en-us/graph/toolkit/get-started/build-a-microsoft-teams-tab?tabs=unpkg%2Cjs)
 
 ![Login](TabGraphToolkit/Images/login.png)
 
@@ -39,7 +39,7 @@ This is the demo app for [Teams tab using miscrosoftgraph toolkit](https://docs.
 
  1) Configuring MSAL2.0 Auth Provider
  - Register your app with Microsoft identity platform via the Azure AD portal
- - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2). .
+ - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2).
  - Click on Add a Platform in redirect URI section.
  - Select Single Page Application and add following URL `<<base-url>>/tabauth`
  - Save and register.
@@ -57,7 +57,7 @@ This is the demo app for [Teams tab using miscrosoftgraph toolkit](https://docs.
     cd # TabGraphToolkit
     ```
 4) Install modules
- navigate to `samples/tab-graph-toolkit/csharp/TabGraphToolkit/clientapp`
+ navigate to `samples/tab-graph-toolkit/csharp/TabGraphToolkit/ClientApp`
 
     ```bash
     npm install
@@ -92,32 +92,32 @@ This is the demo app for [Teams tab using miscrosoftgraph toolkit](https://docs.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
    
 ## Features of this sample
-- Once you access the Tab within your app you will be able to see following microsoft-graph-toolkit component. 
+Once you access the Tab within your app you will be able to see following microsoft-graph-toolkit component. 
 
-- <mgt-login>
+- `<mgt-login>`
 
 ![Login](TabGraphToolkit/Images/login.png)
 
-- <mgt-agenda>
+- `<mgt-agenda>`
 
 ![agenda](TabGraphToolkit/Images/agenda.png)
 
-- <mgt-people-picker>
+- `<mgt-people-picker>`
 
 ![people-picker](TabGraphToolkit/Images/people-picker.png)
 
-- <mgt-tasks>
+- `<mgt-tasks>`
 
 ![tasks](TabGraphToolkit/Images/tasks.png)
 
-- <mgt-todo>
+- `<mgt-todo>`
 
 ![todo](TabGraphToolkit/Images/todo.png)
 
-- <mgt-person-card>
+- `<mgt-person-card>`
 
 ![person-card](TabGraphToolkit/Images/person-card.png)
 
-- <mgt-person>
+- `<mgt-person>`
 
 ![person](TabGraphToolkit/Images/person.png)
