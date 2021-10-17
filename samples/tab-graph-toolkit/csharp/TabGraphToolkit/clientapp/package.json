@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fluentui/react": "^8.36.5",
+    "@fluentui/react-northstar": "^0.59.0",
     "@microsoft/mgt": "^2.3.0",
     "@microsoft/mgt-components": "^2.3.0",
     "@microsoft/mgt-element": "^2.3.0",
