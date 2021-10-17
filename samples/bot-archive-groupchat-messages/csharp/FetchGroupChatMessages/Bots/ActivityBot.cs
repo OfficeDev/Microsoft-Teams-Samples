@@ -51,7 +51,7 @@ namespace FetchGroupChatMessagesWithRSC.Bots
         }
 
         /// <summary>
-        /// Handle when a message is addressed to the bot.
+        /// Handle when a message is addressed to the bot
         /// </summary>
         /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
