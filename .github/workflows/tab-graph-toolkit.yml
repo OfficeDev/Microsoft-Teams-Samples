@@ -74,5 +74,5 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_App_SSO }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_Tab_Graph_Toolkit }}
           package: .
