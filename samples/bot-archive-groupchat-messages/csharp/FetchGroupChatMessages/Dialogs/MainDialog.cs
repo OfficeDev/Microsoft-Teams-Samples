@@ -94,7 +94,7 @@ namespace FetchGroupChatMessagesWithRSC.Dialogs
                 foreach (var chat in activity) {
                     if(chat.MessageType.ToString() == "Message")
                     {
-                        using (StreamWriter sw = new(fileName, append: true))
+                        using( StreamWriter sw = new StreamWriter(fileName, append: true))
                         {
                             sw.WriteLine("from: {0}", chat.From.User != null ? chat.From.User.DisplayName : "bot");
                             sw.WriteLine("text: {0}", chat.Body.Content.ToString());
