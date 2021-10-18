@@ -8,7 +8,7 @@ on:
     #Change the branch name to <<main>>
     #Change the path to the folder where your code resides. Any change here will start the activity. 
     branches:
-      - v-pritka/app-auth-connector
+      - main
     paths:
       - 'samples/connector-todo-notification/nodejs/**'  
   workflow_dispatch:
