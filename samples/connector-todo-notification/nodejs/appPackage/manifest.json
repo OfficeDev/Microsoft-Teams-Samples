@@ -1,5 +1,4 @@
-﻿
-{
+﻿{
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.7/MicrosoftTeams.schema.json",
   "manifestVersion": "1.7",
   "version": "1.0.1",
@@ -39,9 +38,5 @@
   ],
   "validDomains": [
     "<<appDomain>>"
-  ],
-  "webApplicationInfo": {
-    "id": "<<app-id>>",
-    "resource": "api://<<base-url>>/<<app-id>>"
-    }
+  ]
 }
