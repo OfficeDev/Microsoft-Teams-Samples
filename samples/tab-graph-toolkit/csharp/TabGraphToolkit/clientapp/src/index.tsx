@@ -11,7 +11,7 @@ import TabAuth from './components/TabAuth';
 TeamsMsal2Provider.microsoftTeamsLib = MicrosoftTeams;
 
 Providers.globalProvider = new TeamsMsal2Provider({
-  clientId: 'client_id',
+   clientId: '813b8a65-e4b2-43d4-afc9-6fd4f88f0ab9',
   authPopupUrl: window.location.origin + '/tabauth',
   scopes: ['calendars.read', 'user.read', 'openid', 'profile', 'people.read', 'user.readbasic.all'],
 });
