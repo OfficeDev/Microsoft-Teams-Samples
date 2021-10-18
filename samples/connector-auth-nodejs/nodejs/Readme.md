@@ -1,9 +1,19 @@
 # Microsoft Teams Sample for Authentication in Connector in nodejs
 
-This is a sample connector application which demonstarates how to add authentication to connector configuration page.
+This is a sample connector application which demonstarates how to add authentication to connector configuration page and send notification on task creation.
 
 **For more information on developing apps for Microsoft Teams, please review the Microsoft Teams [developer documentation](https://docs.microsoft.com/microsoftteams/platform/overview).**
-n 
+
+![Login](Images/Signin.png)
+
+![Welcome-card](Images/WelcomeCard.png)
+
+![Task-details](Images/TaskDetails.png)
+
+![Create-task](Images/CreateTask.png)
+
+![Task-created](Images/TaskCreated.png)
+
 ## Prerequisites
 - Microsoft Teams is installed and you have an account (not a guest account)
 -  [NodeJS](https://nodejs.org/en/)
@@ -22,6 +32,10 @@ n
 ### [Configure your own connector](https://docs.microsoft.com/microsoftteams/platform/webhooks-and-connectors/how-to/connectors-creating)
 The sample shows a simple implementation of a connector registration implementation. It also sends a connector card to the registered connector via a process triggered "externally."
 
+1. Clone the repository
+   ```bash
+   git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+   ```
 1. In a terminal, navigate to `samples/connector-auth-nodejs/nodejs`
 1. Install node modules using command npm install.
 1. Run your app using command npm start.
@@ -35,7 +49,7 @@ The sample shows a simple implementation of a connector registration implementat
    1. Fill in all the basic details such as name, logo, descriptions etc. for the new connector.
    1. For the configuration page, you'll use our sample code's setup endpoint: `https://[BASE_URI]/connector/SimpleAuth`
    1. For Valid domains, make entery of your domain's https URL, e.g. XXXXXXXX.ngrok.io.
-   1. Click on Save. After the save completes, you will see your connector id.
+   1. Click on Save. After the save completes, download the zip file for your connector which will contain the connector id.
 1. Now you can sideload your app package and test your new connector.
 
 ### [Using Azure AD](#using-azure-ad)
@@ -58,23 +72,10 @@ The sample shows a simple implementation of a connector registration implementat
 1. Scroll to the bottom of the page and click on "Add Permissions".
     ```
 
-## Setting up Authentication on Configuration page 
+## Setting up Authentication for Configuration page 
 
 
-1. Enter your AppId in the `client_id` property in SimpleStart.ejs page 
-
-```javascript
- let queryParams = {
-                    client_id: "***YOUR CLIENT ID HERE***",
-                    response_type: "id_token token",
-                    response_mode: "fragment",
-                    resource: "https://graph.microsoft.com/",
-                    redirect_uri: window.location.origin + "/Home/SimpleEnd",
-                    nonce: _guid(),
-                    state: state,
-                    login_hint: context.loginHint,
-                };
-```
+1. Update the `.env` configuration with the `ClientId` and `BaseUrl`
 
 1.  Update your Microsoft Teams application manifest
 
@@ -86,10 +87,19 @@ The sample shows a simple implementation of a connector registration implementat
 
     ```json
     "webApplicationInfo": {
-    "id": "<AAD_application_id here>",
-    "resource": "<web_API resource here>"
+    "id": "<<app-id>",
+    "resource": "<api://<base-url>/<app-id>>"
     }
     ```
+
+1. Add your ngrok URL to validDomains. Teams will only show the sign-in popup if its from a whitelisted domain.
+
+   ```json
+    "validDomains": [
+        "<<base-url>>"
+    ]
+    ```
+
 
 ## More Information
 For more information about getting started with Teams, please review the following resources:

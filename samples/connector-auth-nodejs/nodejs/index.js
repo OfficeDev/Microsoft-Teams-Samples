@@ -7,6 +7,23 @@ const PORT = process.env.PORT || 3978;
 const server = express();
 const axios = require('axios');
 
+var webhookUrl = "";
+
+var taskList = {
+    "task": [
+        {
+            "Title" : "Sample task 1",
+            "Assigned" : "Alex",
+            "Description" : "Description for sample task 1"
+        },
+        {
+            "Title" : "Sample task 2",
+            "Assigned" : "Wilbur",
+            "Description" : "Description for sample task 2"
+        }
+    ]
+}
+
 server.use(cors());
 server.use(express.json());
 server.use(express.urlencoded({
@@ -26,8 +43,59 @@ server.get('/SetupAuth', (req, res, next) => {
     res.render('./views/SetupAuth')
 });
 
+server.get('/TaskDetails', (req, res, next) => {
+    res.render('./views/TaskDetails', {taskList: JSON.stringify(taskList)})
+});
+
+server.post('/Task/Save', (req, res, next) => {
+    var link = process.env.BaseUrl + "/TaskDetails"
+
+    var task = {
+        "Title": req.body.title,
+        "Description": req.body.description,
+        "Assigned": req.body.assignedTo
+    };
+
+taskList.task.push(task);
+
+    var card = {
+        "@type": "MessageCard",
+        "summary": "Task Created",
+        "sections": [
+            {
+                "activityTitle": "Task "+task.Title,
+                "facts": [
+                    {
+                        "name": 'Title:',
+                        "value": task.Title
+                    },
+                    {
+                        "name": 'Description:',
+                        "value": task.Description
+                    },
+                    {
+                        "name": 'Assigned To:',
+                        "value": task.Assigned
+                    }
+                ]
+    }]
+}
+        axios.post(webhookUrl, card)
+      .then(res => {
+        console.log(`statusCode: ${res.status}`)
+        console.log(res)
+      })
+      .catch(error => {
+        console.error(error)
+      })
+});
+
+server.get('/Create', (req, res, next) => {
+    res.render('./views/Create')
+});
+
 server.get('/SimpleStart', (req, res, next) => {
-    res.render('./views/SimpleStart')
+    res.render('./views/SimpleStart', {clientId: JSON.stringify(process.env.MicrosoftAppId)})
 });
 
 server.get('/SimpleEnd', (req, res, next) => {
@@ -39,29 +107,18 @@ server.get('*', (req, res) => {
 });
 
 server.post('/Connector/Save', (req, res) => {
-    var responseMsg = JSON.stringify({
-        "type": "message",
-        "attachments": [
-            {
-                "contentType": "application/vnd.microsoft.card.adaptive",
-                "contentUrl": null,
-                "content": {
-                    "type": "AdaptiveCard",
-                    "version": "1.4",
-                    "body": [
-                        {
-                            "type": "TextBlock",
-                            "text": "Teams todo connector is setup we will notify you when new task is created [here](https://google.com)"
-                        }
-                    ]
-                },
-                "name": null,
-                "thumbnailUrl": null
-            }
-        ]
-    });
 
-    axios.post(req.body.webhookUrl, responseMsg)
+var link = process.env.BaseUrl + "/TaskDetails"
+webhookUrl = req.body.webhookUrl;
+var card = {
+    "@type": "MessageCard",
+    "summary": "Welcome Message",
+    "sections": [{ 
+        "activityTitle": "Welcome Message",
+        "text": "Teams todo connector is setup we will notify you when new task is created [here]("+link+")"
+    }]}
+
+    axios.post(req.body.webhookUrl, card)
   .then(res => {
     console.log(`statusCode: ${res.status}`)
     console.log(res)
