@@ -4,15 +4,15 @@ This is a sample connector application which demonstarates how to add authentica
 
 **For more information on developing apps for Microsoft Teams, please review the Microsoft Teams [developer documentation](https://docs.microsoft.com/microsoftteams/platform/overview).**
 
-![Login](Images/Signin.png)
+![Login](Images/Signin.PNG)
 
-![Welcome-card](Images/WelcomeCard.png)
+![Welcome-card](Images/WelcomeCard.PNG)
 
-![Task-details](Images/TaskDetails.png)
+![Task-details](Images/TaskDetails.PNG)
 
-![Create-task](Images/CreateTask.png)
+![Create-task](Images/CreateTask.PNG)
 
-![Task-created](Images/TaskCreated.png)
+![Task-created](Images/TaskCreated.PNG)
 
 ## Prerequisites
 - Microsoft Teams is installed and you have an account (not a guest account)
@@ -70,7 +70,6 @@ The sample shows a simple implementation of a connector registration implementat
     - openid
     - profile
 1. Scroll to the bottom of the page and click on "Add Permissions".
-    ```
 
 ## Setting up Authentication for Configuration page 
 
