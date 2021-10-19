@@ -78,19 +78,6 @@ The sample shows a simple implementation of a connector registration implementat
 
 1.  Update your Microsoft Teams application manifest
 
-1. Add new properties to your Microsoft Teams manifest:
-
-    - **WebApplicationInfo** - The parent of the following elements.
-    - **Id** - The client ID of the application. This is an application ID that you obtain as part of registering the application with Azure AD 1.0 endpoint.
-    - **Resource** - The domain and subdomain of your application. This is the same URI (including the `api://` protocol) that you used when registering the app in AAD. The domain part of this URI should match the domain, including any subdomains, used in the URLs in the section of your Teams application manifest.
-
-    ```json
-    "webApplicationInfo": {
-    "id": "<<app-id>",
-    "resource": "<api://<base-url>/<app-id>>"
-    }
-    ```
-
 1. Add your ngrok URL to validDomains. Teams will only show the sign-in popup if its from a whitelisted domain.
 
    ```json
