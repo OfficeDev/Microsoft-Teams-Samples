@@ -1,4 +1,19 @@
-﻿## Meeting Recruitment App Sample
+---
+page_type: sample
+description: "This sample illustrates a meeting experience for recruitment scenario using Apps In Meetings."
+products:
+- office-teams
+- office
+- office-365
+languages:
+- csharp
+- dotnet
+extensions:
+  contentType: samples
+  createdDate: "10/1/2021 2:36:57 PM"
+---
+
+# Recruitment App Sample using Apps in Meetings
 
 This sample illustrates a meeting experience for recruitment.
 
