@@ -88,7 +88,6 @@ namespace MeetingApp.Bots
                 // Greet anyone that was not the target (recipient) of this message.
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    //AddConversationReference(turnContext.Activity as Activity);
                     await GetConversationMembers(turnContext);
                     var welcomeText = "Hello and welcome!";
                     await turnContext.SendActivityAsync(MessageFactory.Text(welcomeText, welcomeText), cancellationToken);

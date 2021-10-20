@@ -1,7 +1,13 @@
 // Adaptive Card with assets detail and note.
-const getCardForMessage = (message) => ({
+const getCardForMessage = (message, sharedByName) => ({
     $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
     body: [
+        {
+            type: 'TextBlock',
+            size: 'Medium',
+            weight: 'Lighter',
+            text: sharedByName + " shared a message",
+        },
         {
             type: 'TextBlock',
             size: 'Medium',

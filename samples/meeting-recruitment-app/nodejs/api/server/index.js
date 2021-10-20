@@ -6,7 +6,7 @@ const candidateHandler = require('./data/candidate')
 const questionsHandler = require('./data/questions')
 const notesHandler = require('./data/notes')
 const feedbackHandler = require('./data/feedback')
-const { ConversationRef } = require('./bot/botActivityHandler');
+const { ConversationRef, ConversationDataRef } = require('./bot/botActivityHandler');
 const cardHelper = require('./cards/cardHelper')
 const path = require('path');
 const express = require('express');
@@ -119,9 +119,12 @@ server.get('/api/Candidate/file', (req, res) => {
 });
 
 server.post('/api/Notify', async (req, res) => {
+    const sharedByName = ConversationDataRef != null && ConversationDataRef.members.length > 0 
+    ? ConversationDataRef.members.find(entity => entity.email === req.body.sharedBy).name
+    : "Unknown";
     for (const conversationReference of Object.values(ConversationRef)) {
         await adapter.continueConversation(conversationReference, async turnContext => {
-            await turnContext.sendActivity({ attachments: [CardFactory.adaptiveCard(cardHelper.getCardForMessage(req.body.message))] });
+            await turnContext.sendActivity({ attachments: [CardFactory.adaptiveCard(cardHelper.getCardForMessage(req.body.message, sharedByName))] });
         });
     }
     res.setHeader('Content-Type', 'text/html');
