@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            debugger;
+            $("#productStatus").hide();
+            $("#captureImage").hide();
+        });
+        microsoftTeams.initialize(() => {
+            scanBarCode();
+        });
+
+        var productId;
+        var image;
+
+        // Method to scan barcode
+        function scanBarCode() {
+            var config = {
+                timeOutIntervalInSec: 30
+            };
+            // Method that enables the user to scan different types of barcode, and returns the result as a string.  
+            microsoftTeams.media.scanBarCode((error, decodedText) => {
+                // If there's any error, an alert shows the error message/code
+                if (error) {
+                    if (error.message) {
+                        alert(" ErrorCode: " + error.errorCode + error.message);
+                    } else {
+                        alert(" ErrorCode: " + error.errorCode);
+                    }
+                } else if (decodedText) {
+                    productId = decodedText;
+                    $("#captureImage").show();
+                }
+            }, config);
+        }
+
+        // Method to capture product image 
+        function captureImage() {
+            microsoftTeams.initialize();
+            // Method to ask for image capture permission and then capture image 
+            microsoftTeams.media.captureImage((error, files) => {
+                // If there's any error, an alert shows the error message/code
+                if (error) {
+                    if (error.message) {
+                        alert(" ErrorCode: " + error.errorCode + error.message);
+                    } else {
+                        alert(" ErrorCode: " + error.errorCode);
+                    }
+                } else if (files) {
+                    image = files[0].content;
+                    $("#productStatus").show();
+                }
+            });
+        };
+
+        // Method to select product image 
+        function selectImage() {
+            microsoftTeams.media.selectMedia({ maxMediaCount: 1, mediaType: microsoftTeams.media.MediaType.Image }, (error, attachments) => {
+                // If there's any error, an alert shows the error message/code
+                if (error) {
+                    if (error.message) {
+                        alert(" ErrorCode: " + error.errorCode + error.message);
+                    } else {
+                        alert(" ErrorCode: " + error.errorCode);
+                    }
+                } else if (attachments) {
+
+                    // creating selected images array to show preview 
+                    const imageArray = "data:" + attachments[0].mimeType + ";base64," + attachments[0].preview
+                    image = imageArray;
+                    $("#productStatus").show();
+                    alert(image);
+                }
+            });
+        }
+
+        // Method invoked on reject click.
+        function rejectProduct() {
+            var productDetails = {
+                "productId": productId,
+                "image": image,
+                "status": "Rejected"
+            }
+
+            $.ajax({
+                url: '/Save',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(productDetails),
+                success: function (data, textStatus, jQxhr) {
+                    console.log('success');
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log('error', errorThrown);
+                }
+            });
+
+            microsoftTeams.tasks.submitTask();
+        }
+
+        // Method invoked on approve click.
+        function approveProduct() {
+            var productDetails = {
+                "productId": productId,
+                "image": image,
+                "status": "Approved"
+            }
+
+            $.ajax({
+                url: '/Save',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(productDetails),
+                success: function (data, textStatus, jQxhr) {
+                    console.log('success');
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log('error', errorThrown);
+                }
+            });
+
+            microsoftTeams.tasks.submitTask();
+        }
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+                <div id="captureImage">
+                    <button type="button" onclick="captureImage()">Capture Image</button>
+                    <button type="button" onclick="selectImage()">Select Image</button>
+                </div>
+                <div id="productStatus">
+                    <button type="button" onclick="approveProduct()">Approve</button>
+                    <button type="button" onclick="rejectProduct()">Reject</button>
+                </div>
+        </div>
+    </div>
+</body>
+
+</html>
