@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App installed demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .mainDiv {
+            max-width: 40%;
+            padding: 4%;
+        }
+    </style>
+</head>
+
+<div class="mainDiv">
+    <div>
+        <div class="modal fade" id="getAppModal" tabindex="-1" role="dialog" aria-labelledby="getAppModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="modalbody">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="backtolist" data-dismiss="modal">Back to
+                            list</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h4>Create Task</h4>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description">
+        </div>
+        <div class="form-group">
+            <label for="assignto">Assign To</label>
+            <input type="text" class="form-control" id="assignto">
+        </div>
+        <button type="submit" class="btn btn-outline-info" onclick="saveTask()">Save</button>
+    </div>
+
+    <script type="text/javascript">
+
+        function saveTask() {
+            var isValid = true;
+
+            // Check if all fields are filled.
+            $('#title,#description,#assignto').each(function (e) {
+                if ($.trim($(this).val()) == '') {
+                    isValid = false;
+                    $(this).css({
+                        "border": "1px solid red"
+                    });
+                }
+                else {
+                    $(this).css({
+                        "border": "",
+                        "background": ""
+                    });
+                }
+            });
+            if (isValid == false) {
+                e.preventDefault();
+                return false;
+            }
+
+            let taskInfo = {
+                title: $('#title').val(),
+                description: $('#description').val(),
+                assignedTo: $('#assignto').val()
+            };
+
+            // We need to save the created task.
+            $.ajax({
+                url: '/Task/Save',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(taskInfo),
+                success: function (data, textStatus, jQxhr) {
+                    console.log('success');
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log('error', errorThrown);
+                }
+            });
+
+            $("#getAppModal").modal('show');
+            var html = `<span> Task added successfully </span> </br>`;
+            $("#modalbody").html(html);
+
+        }
+
+        $("#backtolist").on('click', function (e) {
+            window.location.href = window.location.origin + "/TaskDetails";
+        })
+
+    </script>
+
+</html>
