@@ -21,7 +21,8 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |8|Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. |[View](/demo%20manifest/Bot-RSC.zip)     |
 |9|Meeting Recruitment App | Sample app showing meeting app experience for interview scenario. |[View](/demo%20manifest/Meeting-Recruitment-App.zip)     |
 |10|App installation using QR code | Sample app that generates a QR or installs app using the QR code.|[View](/demo%20manifest/App-Installation-Using-QR.zip)     |
-|11|App checkin location | Demonstrating feature where user can checkin with current location and view all previous checkins.|[View](/demo%20manifest/App-checkin-location.zip)
+|11|App checkin location | Demonstrating feature where user can checkin with current location and view all previous checkins.|[View](/demo%20manifest/App-checkin-location.zip)     |
+|12|Teams tab graph toolkit | This sample demos building teams tab using microsoft graph toolkit|[View](/demo%20manifest/Teams-tab-graph-toolkit.zip)     |
 
 ## [Getting Started - Samples and Tutorials](https://docs.microsoft.com/microsoftteams/platform/tutorials/get-started-dotnet-app-studio)
 
@@ -42,7 +43,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |8|Tab SSO               | Microsoft Teams sample app for tabs Azure AD SSO                                      | | [View][tab-sso#ts] ,[Teams Toolkit](https://docs.microsoft.com/microsoftteams/platform/toolkit/visual-studio-code-tab-sso)
 |9|Config Tab Authentication               | Microsoft Teams sample app for config tabs Azure AD authentication | [View]()                       | | 
 |10|Deep Link consuming Subentity ID      | Microsoft Teams sample app for demonstrating deeplink from Bot chat to Tab consuming Subentity ID | [View][tab-deeplink#csharp]                       | | [View][tab-deeplink#nodejs]|
-|11|Integrate graph toolkit component in teams tab      | Microsoft Teams tab sample app for demonstrating graph toolkit component |                      | [View][tab-graph-toolkit#js]|
+|11|Integrate graph toolkit component in teams tab      | Microsoft Teams tab sample app for demonstrating graph toolkit component |[View][tab-graph-toolkit#csharp]|[View][tab-graph-toolkit#js]|
 |12|Device permissions      | Microsoft Teams tab sample app for demonstrating device permissions |                      | [View][tab-device-permissions#js]|
 |13|Build tabs with Adaptive Cards | Microsoft Teams tab sample code which demonstrates how to [Build tabs with Adaptive Cards](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs) | [View][tab-adaptive-cards#csharp]               |                | [View][tab-adaptive-cards#js]|
 |14|Tab in stage view   | Microsoft Teams tab sample app for demonstrating tab in stage view |[View][tab-stage-view#csharp] |          | [View][tab-stage-view#js] |
@@ -167,6 +168,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 [personal-tab#cs#razor]:samples/tab-personal/razor-csharp
 [personal-tab#cs#mvc]:samples/tab-personal/mvc-csharp
 [tab-graph-toolkit#js]:samples/tab-graph-toolkit/nodejs
+[tab-graph-toolkit#csharp]:samples/tab-graph-toolkit/csharp
 [tab-device-permissions#js]:samples/tab-device-permissions/nodejs
 [tab-conversation#csharp]:samples/tab-conversations/csharp
 
