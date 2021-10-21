@@ -7,9 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Inspection demo</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
-        integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
-        crossorigin="anonymous"></script>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js" integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
@@ -23,17 +21,41 @@
 <body id=mainDiv>
     <h4>Product Inspection</h4>
     <br />
-    <button type="button" class="btn btn-outline-info" id="btnInspectItem">Inspect item</button>
+    <button type="button" class="btn btn-outline-info" id="btnAllProduct">Show all product list</button>
     <br />
     <br />
-    <button type="button" class="btn btn-outline-info" id="btnViewItem">View item status</button>
+    <button type="button" class="btn btn-outline-info" id="btnInspectProduct">Inspect product</button>
+    <br />
+    <br />
+    <button type="button" class="btn btn-outline-info" id="btnViewProduct">View product status</button>
 
     <script>
         $(document).ready(function () {
             microsoftTeams.initialize();
         });
 
-        $("#btnInspectItem").on('click', function (e) {
+        $("#btnAllProduct").on('click', function (e) {
+            let taskInfo = {
+                title: null,
+                height: null,
+                width: null,
+                url: null,
+                card: null,
+                fallbackUrl: null,
+                completionBotId: null,
+            };
+
+            taskInfo.url = window.location.origin +"/productList";
+            taskInfo.title = " All product list";
+            taskInfo.height = 510;
+            taskInfo.width = 430;
+            submitHandler = (err, result) => {
+                console.log(`Submit handler - err: ${err}`);
+            };
+            microsoftTeams.tasks.startTask(taskInfo, submitHandler);          
+        })
+
+        $("#btnInspectProduct").on('click', function (e) {
             let taskInfo = {
                 title: null,
                 height: null,
@@ -50,12 +72,11 @@
             taskInfo.width = 430;
             submitHandler = (err, result) => {
                 console.log(`Submit handler - err: ${err}`);
-                console.log(`Submit handler - result\rName: ${result.name}\rEmail: ${result.email}\rFavorite book: ${result.favoriteBook}`);
             };
             microsoftTeams.tasks.startTask(taskInfo, submitHandler);          
         })
 
-        $("#btnViewItem").on('click', function (e){
+        $("#btnViewProduct").on('click', function (e){
             let taskInfo = {
                 title: null,
                 height: null,
@@ -72,7 +93,6 @@
             taskInfo.width = 430;
             submitHandler = (err, result) => {
                 console.log(`Submit handler - err: ${err}`);
-                console.log(`Submit handler - result\rName: ${result.name}\rEmail: ${result.email}\rFavorite book: ${result.favoriteBook}`);
             };
             microsoftTeams.tasks.startTask(taskInfo, submitHandler);
         })

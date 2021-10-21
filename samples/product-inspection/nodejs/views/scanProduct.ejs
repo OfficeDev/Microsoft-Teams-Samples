@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
-        integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
-        crossorigin="anonymous"></script>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js" integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function () {
-            debugger;
             $("#productStatus").hide();
             $("#captureImage").hide();
+            $("#noProductFound").hide();
         });
         microsoftTeams.initialize(() => {
             scanBarCode();
         });
 
         var productId;
+        var productName;
         var image;
 
         // Method to scan barcode
@@ -34,18 +32,43 @@
                     } else {
                         alert(" ErrorCode: " + error.errorCode);
                     }
-                } else if (decodedText) {
+                }
+                else if (decodedText) {
                     productId = decodedText;
-                    $("#captureImage").show();
+
+                    if (decodedText == "01SD001") {
+                        productName = "Laptop";
+                        $("#captureImage").show();
+                    }
+                    else if (decodedText == "01DU890") {
+                        productName = "Desktop";
+                        $("#captureImage").show();
+                    }
+                    else if (decodedText == "01PM998") {
+                        productName = "Mobile";
+                        $("#captureImage").show();
+                    }
+                    else if (decodedText == "01NT789") {
+                        productName = "Tablet";
+                        $("#captureImage").show();
+                    }
+                    else if (decodedText == "01EW420") {
+                        productName = "IOS device";
+                        $("#captureImage").show();
+                    }
+                    else{
+                        $("#noProductFound").show();
+                    }
+                    
                 }
             }, config);
         }
 
         // Method to capture product image 
         function captureImage() {
-            microsoftTeams.initialize();
-            // Method to ask for image capture permission and then capture image 
-            microsoftTeams.media.captureImage((error, files) => {
+            microsoftTeams.initialize(()=>{
+                // Method to ask for image capture permission and then capture image
+                microsoftTeams.media.captureImage((error, files) => {
                 // If there's any error, an alert shows the error message/code
                 if (error) {
                     if (error.message) {
@@ -55,9 +78,12 @@
                     }
                 } else if (files) {
                     image = files[0].content;
+                    $("#productName").text("Product Name :" + productName);
+                    document.getElementById("productImage").src = image;
                     $("#productStatus").show();
                 }
             });
+            });     
         };
 
         // Method to select product image 
@@ -75,8 +101,9 @@
                     // creating selected images array to show preview 
                     const imageArray = "data:" + attachments[0].mimeType + ";base64," + attachments[0].preview
                     image = imageArray;
+                    $("#productName").text("Product Name :" + productName);
+                    document.getElementById("productImage").src = image;
                     $("#productStatus").show();
-                    alert(image);
                 }
             });
         }
@@ -85,6 +112,7 @@
         function rejectProduct() {
             var productDetails = {
                 "productId": productId,
+                "productName": productName,
                 "image": image,
                 "status": "Rejected"
             }
@@ -109,6 +137,7 @@
         function approveProduct() {
             var productDetails = {
                 "productId": productId,
+                "productName": productName,
                 "image": image,
                 "status": "Approved"
             }
@@ -134,14 +163,17 @@
 <body class="theme-light">
     <div class="surface">
         <div class="panel">
-                <div id="captureImage">
-                    <button type="button" onclick="captureImage()">Capture Image</button>
-                    <button type="button" onclick="selectImage()">Select Image</button>
-                </div>
-                <div id="productStatus">
-                    <button type="button" onclick="approveProduct()">Approve</button>
-                    <button type="button" onclick="rejectProduct()">Reject</button>
-                </div>
+            <label id="noProductFound">this product is not available. Please scan the product from 'All product list'</label>
+            <div id="captureImage">
+                <button type="button" onclick="captureImage()">Capture Image</button>
+                <button type="button" onclick="selectImage()">Select Image</button>
+            </div>
+            <div id="productStatus">
+                <label id="productName"></label><br/>
+                <img id="productImage" src/>
+                <button type="button" onclick="approveProduct()">Approve</button>
+                <button type="button" onclick="rejectProduct()">Reject</button>
+            </div>
         </div>
     </div>
 </body>

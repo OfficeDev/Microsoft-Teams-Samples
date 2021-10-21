@@ -1,23 +1,23 @@
 # Product Inspection
 
-This sample app demonstarte inspecting item and marking it as approved/rejected"
+This sample app demonstarte inspecting product and marking it as approved/rejected.
 
-  ![](Images/image1.png)
-
-
-   ![](Images/image2.png)
+  ![](Images/tab.png)
 
 
-   ![](Images/image3.png)
+   ![](Images/product-list.png)
 
 
-   ![](Images/image4.png)
+   ![](Images/product-barcode.png)
 
 
-   ![](Images/image5.png)
+   ![](Images/capture-image.png)
 
 
-   ![](Images/image6.png)
+   ![](Images/product-status.png)
+
+
+   ![](Images/view-product-status.png)
 
 ## Prerequisites
 
@@ -53,6 +53,6 @@ This sample app demonstarte inspecting item and marking it as approved/rejected"
     ```
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Manifest-id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)and ngrok url *everywhere* you see the place holder string `<<base-URL>>`
+    - **Edit** the `manifest.json` contained in the  `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Manifest-id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)and ngrok url *everywhere* you see the place holder string `<<base-url>>`
     - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
