@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#productStatus").hide();
+            $("#captureImage").hide();
+            $("#invalidBarcode").hide();
+        });
+        microsoftTeams.initialize(() => {
+            scanBarCode();
+        });
+
+        let productId;
+        let productName;
+        let image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZirG05mpQKCJjqvjRbyyC9mDmRfS7grTeTg&usqp=CAU";
+
+        // Method to scan barcode
+        function scanBarCode() {
+            var config = {
+                timeOutIntervalInSec: 30
+            };
+
+            var invalidBarCode = false;
+            // Method that enables the user to scan different types of barcode, and returns the result as a string.
+            microsoftTeams.media.scanBarCode((error, decodedText) => {
+                // If there's any error, an alert shows the error message/code
+                if (error) {
+                    if (error.message) {
+                        alert(" ErrorCode: " + error.errorCode + error.message);
+                    } else {
+                        alert(" ErrorCode: " + error.errorCode);
+                    }
+                } else if (decodedText) {
+                    if (decodedText == "01DU890") {
+                        productId = "01DU890";
+                        productName = "Desktop";
+                    }
+                    else if (decodedText == "01SD001") {
+                        productId = "01SD001";
+                        productName = "Laptop";
+                    }
+                    else if (decodedText == "01PM998") {
+                        productId = "01PM998";
+                        productName = "Mobile";
+                    }
+                    else if (decodedText == "01NT789") {
+                        productId = "01NT789";
+                        productName = "Tablet";
+                    }
+                    else if (decodedText == "01EW420") {
+                        productId = "01EW420";
+                        productName = "IOS Device";
+                    }
+                    else {
+                        invalidBarCode = true;
+                    }
+                    if (!invalidBarCode) {
+                        $("#productStatus").show();
+                        $("#productImg").attr("src", image);
+                        $("#scannedText").text("Product Name is :" + productName);
+                    }
+                    else {
+                        $("#invalidBarcode").show();
+                        $("#errorMessage").text("No product data found for scanned barcode. Please generate barcode from all products option.");
+                    }
+                }
+            }, config);
+        }
+
+        // Method to capture product image
+        function captureImage() {
+            microsoftTeams.initialize();
+            // Method to ask for image capture permission and then capture image
+            microsoftTeams.media.captureImage((error, files) => {
+                // If there's any error, an alert shows the error message/code
+                if (error) {
+                    if (error.message) {
+                        alert(" ErrorCode: " + error.errorCode + error.message);
+                    } else {
+                        alert(" ErrorCode: " + error.errorCode);
+                    }
+                } else if (files) {
+                    image = files[0].content;
+                    $("#productStatus").show();
+                }
+            });
+        };
+
+        // Method to select product image
+        function selectImage() {
+            microsoftTeams.media.selectMedia({ maxMediaCount: 1, mediaType: microsoftTeams.media.MediaType.Image }, (error, attachments) => {
+                // If there's any error, an alert shows the error message/code
+                if (error) {
+                    if (error.message) {
+                        alert(" ErrorCode: " + error.errorCode + error.message);
+                    } else {
+                        alert(" ErrorCode: " + error.errorCode);
+                    }
+                } else if (attachments) {
+                    // creating selected images array to show preview
+                    const imageArray = "data:" + attachments[0].mimeType + ";base64," + attachments[0].preview
+                    image = imageArray;
+                    $("#productStatus").show();
+                }
+            });
+        }
+
+        function saveProduct(status) {
+            $.ajax({
+                url: '@Url.Action("Save", "Home")',
+                type: "POST",
+                dataType: "json",
+                data: { productId: productId, image: image, status: status ? "Approved" : "Rejected" },
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                },
+            });
+            microsoftTeams.tasks.submitTask();
+        }
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            <div id="captureImage">
+                <button type="button" class="btn btn-outline-info" onclick="captureImage()">Capture Image</button>
+                <button type="button" class="btn btn-outline-info" onclick="selectImage()">Select Image</button>
+            </div>
+            <div id="productStatus">
+                <label id="scannedText"></label>
+                <br />
+                <img alt="Product Image" id="productImg" />
+                <br />
+                <br />
+                <button type="button" class="btn btn-outline-info" onclick="saveProduct(true)">Approve</button>
+                <button type="button" class="btn btn-outline-info" onclick="saveProduct(false)">Reject</button>
+            </div>
+            <div id="invalidBarcode">
+                <label id="errorMessage"></label>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+﻿<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Inspection demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        #mainDiv {
+            padding-left: 10%;
+            padding-top: 2%;
+        }
+    </style>
+    <script>
+        microsoftTeams.initialize();
+        //Method that will generate barcode image for the selected product.
+        function generateBarCode() {
+            var productName = $("#productOptions").val();
+            $("#productImg").attr("src", `${window.location.origin}/${productName}.PNG`);
+            $("#productImg").removeAttr("hidden");
+        };
+    </script>
+</head>
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            <div>
+                <label for="productOptions">Select Product</label>
+                <select id="productOptions" name="products">
+                    <option value="Desktop" selected>Desktop</option>
+                    <option value="Laptop">Laptop</option>
+                    <option value="IOSDevice">IOS Device</option>
+                    <option value="Tablet">Tablet</option>
+                    <option value="Mobile">Mobile</option>
+                </select>
+                <button onClick="generateBarCode()">Generate Barcode</button>
+                <img alt="Product Image" id="productImg" hidden="hidden" />
+            </div>
+        </div>
+    </div>
+</body>

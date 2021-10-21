@@ -1,0 +1,104 @@
+﻿<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Inspection demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        #mainDiv {
+            padding-left: 10%;
+            padding-top: 2%;
+        }
+    </style>
+    <script>
+        microsoftTeams.initialize()
+
+        // Method to open taskmodule that will contain list of all products and their barcodes.
+        function viewItems() {
+
+            let taskInfo = {
+                title: null,
+                height: null,
+                width: null,
+                url: null,
+                card: null,
+                fallbackUrl: null,
+                completionBotId: null,
+            };
+
+            taskInfo.url = window.location.origin + "/viewProducts";
+            taskInfo.title = "View Products";
+            taskInfo.height = 510;
+            taskInfo.width = 430;
+            submitHandler = (err) => {
+                console.log(`Submit handler - err: ${err}`);
+            };
+
+            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+        }
+
+        // Method to open taskmodule that will redirect user to scan bar code for product.
+        function scanBarCode() {
+
+            let taskInfo = {
+                title: null,
+                height: null,
+                width: null,
+                url: null,
+                card: null,
+                fallbackUrl: null,
+                completionBotId: null,
+            };
+
+            taskInfo.url = window.location.origin + "/scanProduct";
+            taskInfo.title = "Scan Product";
+            taskInfo.height = 510;
+            taskInfo.width = 430;
+            submitHandler = (err) => {
+                console.log(`Submit handler - err: ${err}`);
+            };
+
+            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+        }
+
+        // Method to open taskmodule that wil redirect user to get product details based on scanned barcode.
+        function viewItemDetails() {
+
+            let taskInfo = {
+                title: null,
+                height: null,
+                width: null,
+                url: null,
+                card: null,
+                fallbackUrl: null,
+                completionBotId: null,
+            };
+
+            taskInfo.url = window.location.origin + "/viewDetails";
+            taskInfo.title = "View Product Details";
+            taskInfo.height = 510;
+            taskInfo.width = 430;
+            submitHandler = (err) => {
+                console.log(`Submit handler - err: ${err}`);
+            };
+
+            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+        }
+    </script>
+</head>
+<body id=mainDiv>
+    <h4>Product Inspection</h4>
+    <br />
+    <button type="button" class="btn btn-outline-info" id="btnViewAllItems" onclick="viewItems()">View all items</button>
+    <br />
+    <br />
+    <button type="button" class="btn btn-outline-info" id="btnScanItem" onclick="scanBarCode()">Scan item</button>
+    <br />
+    <br />
+    <button type="button" class="btn btn-outline-info" id="btnViewItem" onclick="viewItemDetails()">View item details</button>
+</body>
