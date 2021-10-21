@@ -108,38 +108,13 @@
             });
         }
 
-        // Method invoked on reject click.
-        function rejectProduct() {
+        // Method invoked on approve/reject click.
+        function approveRejectProduct(status) {
             var productDetails = {
                 "productId": productId,
                 "productName": productName,
                 "image": image,
-                "status": "Rejected"
-            }
-
-            $.ajax({
-                url: '/Save',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(productDetails),
-                success: function (data, textStatus, jQxhr) {
-                    console.log('success');
-                },
-                error: function (jqXhr, textStatus, errorThrown) {
-                    console.log('error', errorThrown);
-                }
-            });
-
-            microsoftTeams.tasks.submitTask();
-        }
-
-        // Method invoked on approve click.
-        function approveProduct() {
-            var productDetails = {
-                "productId": productId,
-                "productName": productName,
-                "image": image,
-                "status": "Approved"
+                "status": status?"Approved":"Rejected"
             }
 
             $.ajax({
@@ -171,8 +146,8 @@
             <div id="productStatus">
                 <label id="productName"></label><br/>
                 <img id="productImage" src/>
-                <button type="button" onclick="approveProduct()">Approve</button>
-                <button type="button" onclick="rejectProduct()">Reject</button>
+                <button type="button" onclick="approveRejectProduct(true)">Approve</button>
+                <button type="button" onclick="approveRejectProduct(false)">Reject</button>
             </div>
         </div>
     </div>
