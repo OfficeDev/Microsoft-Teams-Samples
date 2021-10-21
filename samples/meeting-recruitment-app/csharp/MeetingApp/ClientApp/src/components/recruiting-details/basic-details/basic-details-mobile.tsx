@@ -34,7 +34,8 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
                 microsoftTeams.getContext((context) => {
                     const assetDetail: IAssetDetails = {
                         message: note,
-                        sharedBy: context.userPrincipalName!
+                        sharedBy: context.userPrincipalName!,
+                        meetingId: context.meetingId!,
                     }
                     shareAssets(assetDetail)
                         .then((res) => {

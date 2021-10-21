@@ -33,7 +33,8 @@ const Notes = (props: INotesProps) => {
                 const noteDetails: INoteDetails = {
                     candidateEmail: props.currentCandidateEmail,
                     note: note,
-                    addedBy: context.userPrincipalName!
+                    addedBy: context.userPrincipalName!,
+                    meetingId: context.meetingId!,
                 };
 
                 // API call to save the question to storage.

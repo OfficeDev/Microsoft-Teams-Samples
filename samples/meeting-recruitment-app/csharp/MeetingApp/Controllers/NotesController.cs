@@ -39,7 +39,7 @@ namespace MeetingApp.Controllers
             {
                 // Getting stored conversation data reference.
                 var currentRosterInfo = new ConversationData();
-                _conversationDataReference.TryGetValue("conversationData", out currentRosterInfo);
+                _conversationDataReference.TryGetValue(notesEntity.MeetingId, out currentRosterInfo);
                 if (currentRosterInfo == null)
                 {
                     throw new ArgumentNullException(nameof(currentRosterInfo));

@@ -24,6 +24,7 @@ namespace MeetingApp.Controllers
     {
         private readonly IBotFrameworkHttpAdapter _adapter;
         private readonly string _appId;
+        private string meetingId;
 
         // Dependency injected dictionary for storing ConversationReference objects used in NotifyController to proactively message users
         private readonly ConcurrentDictionary<string, ConversationReference> _conversationReferences;
@@ -56,7 +57,7 @@ namespace MeetingApp.Controllers
                 {
                     // Getting stored conversation data reference.
                     var dataToUpdate = new ConversationData();
-                    _conversationDataReference.TryGetValue("conversationData", out dataToUpdate);
+                    _conversationDataReference.TryGetValue(assetDetails.MeetingId, out dataToUpdate);
 
                     if (dataToUpdate == null)
                     {
@@ -65,10 +66,10 @@ namespace MeetingApp.Controllers
 
                     dataToUpdate.Note = assetDetails.Message;
                     dataToUpdate.SharedByName = dataToUpdate.Roster.Length > 0 ? dataToUpdate.Roster.Where(entity => entity.Email == assetDetails.SharedBy).FirstOrDefault().GivenName : "";
-                    foreach (var conversationReference in _conversationReferences.Values)
-                    {
-                        await ((BotAdapter)_adapter).ContinueConversationAsync(_appId, conversationReference, BotCallback, default(CancellationToken));
-                    }
+                    var meetingConversationReference = new ConversationReference();
+                    _conversationReferences.TryGetValue(assetDetails.MeetingId, out meetingConversationReference);
+                    meetingId = assetDetails.MeetingId;
+                    await ((BotAdapter)_adapter).ContinueConversationAsync(_appId, meetingConversationReference, BotCallback, default(CancellationToken));
 
                     // Let the caller know proactive messages have been sent
                     var result = new ContentResult()
@@ -107,7 +108,7 @@ namespace MeetingApp.Controllers
         private Attachment GetAdaptiveCardForMessage()
         {
             var updatedData = new ConversationData();
-            _conversationDataReference.TryGetValue("conversationData", out updatedData);
+            _conversationDataReference.TryGetValue(meetingId, out updatedData);
 
             AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
             {

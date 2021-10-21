@@ -18,5 +18,7 @@ namespace MeetingApp.Data.Models
         public string AddedByName { get; set; }
 
         public string Note { get; set; }
+
+        public string MeetingId { get; set; }
     }
 }
