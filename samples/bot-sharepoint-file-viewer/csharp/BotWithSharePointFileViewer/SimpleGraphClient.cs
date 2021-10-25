@@ -26,13 +26,42 @@ namespace BotWithSharePointFileViewer
         }
 
         // Get share point file.
-        public async Task<DriveItem> GetSharePointFile(string itemId)
+        public async Task<List<string>> GetSharePointFile(string sharepointSiteName, string sharepointTenantName)
         {
             var graphClient = GetAuthenticatedClient();
-            var fileInfo = await graphClient.Me.Drive.Items[itemId]
-                                .Request()
-                                .GetAsync();
-            return fileInfo;
+
+           var site =await graphClient.Sites[sharepointTenantName].Sites[sharepointSiteName]
+                             .Request()
+                             .GetAsync();
+            if (site != null)
+            {
+                var drive = await graphClient.Sites[site.Id].Drives
+                                    .Request()
+                                    .GetAsync();
+
+                if(drive != null)
+                {
+                    var children = await graphClient.Sites[site.Id].Drives[drive.CurrentPage[0].Id].Root.Children
+                                            .Request()
+                                            .GetAsync();
+
+                    var fileName = new List<string>();
+                    foreach (var file in children.CurrentPage)
+                    {
+                        fileName.Add(file.Name);
+                    }
+
+                    return fileName;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
         }
 
         // Send file to chat.

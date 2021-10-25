@@ -27,7 +27,8 @@ namespace BotWithSharePointFileViewer
         {
             services.AddControllers().AddNewtonsoftJson();
 
-            services.AddHttpClient();
+            services.AddHttpClient().AddControllers().AddNewtonsoftJson();
+            services.AddRazorPages();
 
             // Create the storage we'll be using for User and Conversation state. (Memory is great for testing purposes.)
             services.AddSingleton<IStorage, MemoryStorage>();
@@ -61,6 +62,7 @@ namespace BotWithSharePointFileViewer
                 .UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllers();
+                    endpoints.MapRazorPages();
                 });
         }
     }

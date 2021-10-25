@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using BotWithSharePointFileViewer.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
@@ -21,16 +22,16 @@ namespace BotWithSharePointFileViewer.Bots
 {
     public class ActivityBot<T> : TeamsActivityHandler where T : Dialog
     {
-        public readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _env;
         private readonly IHttpClientFactory _clientFactory;
         protected readonly BotState ConversationState;
         protected readonly Dialog Dialog;
+        private readonly string _applicationBaseUrl;
 
         public ActivityBot(IConfiguration configuration, IWebHostEnvironment env, IHttpClientFactory clientFactory, ConversationState conversationState, T dialog)
         {
             _clientFactory = clientFactory;
-            _configuration = configuration;
+            _applicationBaseUrl = configuration["ApplicationBaseUrl"] ?? throw new NullReferenceException("ApplicationBaseUrl");
             _env = env;
             ConversationState = conversationState;
             Dialog = dialog;
@@ -65,110 +66,48 @@ namespace BotWithSharePointFileViewer.Bots
             var activity = this.StripAtMentionText((Activity)turnContext.Activity);
             var userCommand = activity.Text.ToLower().Trim();
 
-            if (userCommand == "getchat" || userCommand == "logout"|| userCommand == "login")
+            if (userCommand == "viewfile" || userCommand == "logout"|| userCommand == "login"|| userCommand == "upload")
             {
                 // Run the Dialog with the new message Activity.
                 await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
             }
             else
             {
-                await turnContext.SendActivityAsync(MessageFactory.Text("type getchat to get archived messages"));                   
+                await turnContext.SendActivityAsync(MessageFactory.Text("type 'viewfile' to get card for file viewer "));                   
             }
 
             return;
         }
 
+
         /// <summary>
-        /// Invoked when a file consent card activity is received.
+        /// Handle task module is fetch.
         /// </summary>
-        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
-        /// <param name="fileConsentCardResponse">The response representing the value of the invoke activity sent when the user acts on a file consent card.</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>A task that represents the work queued to execute.</returns>
-        protected override async Task OnTeamsFileConsentAcceptAsync(ITurnContext<IInvokeActivity> turnContext, FileConsentCardResponse fileConsentCardResponse, CancellationToken cancellationToken)
+        /// <param name = "turnContext" > The turn context.</param>
+        /// <param name = "taskModuleRequest" >The task module invoke request value payload.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A Task Module Response for the request.</returns>
+        protected override Task<TaskModuleResponse> OnTeamsTaskModuleFetchAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
-            try
+            var asJobject = JObject.FromObject(taskModuleRequest.Data);
+            var buttonType = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.Id;
+
+            var taskModuleResponse = new TaskModuleResponse();
+            if (buttonType == "upload")
             {
-                JToken context = JObject.FromObject(fileConsentCardResponse.Context);
-
-                string filePath = Path.Combine(_env.ContentRootPath, $".\\wwwroot\\chat.txt");
-                long fileSize = new FileInfo(filePath).Length;
-                var client = _clientFactory.CreateClient();
-
-                using (var fileStream = File.OpenRead(filePath))
+                taskModuleResponse.Task = new TaskModuleContinueResponse
                 {
-                    var fileContent = new StreamContent(fileStream);
-                    fileContent.Headers.ContentLength = fileSize;
-                    fileContent.Headers.ContentRange = new ContentRangeHeaderValue(0, fileSize - 1, fileSize);
-                    await client.PutAsync(fileConsentCardResponse.UploadInfo.UploadUrl, fileContent, cancellationToken);
-                }
-
-                await FileUploadCompletedAsync(turnContext, fileConsentCardResponse, cancellationToken);
+                    Type = "continue",
+                    Value = new TaskModuleTaskInfo()
+                    {
+                        Url = _applicationBaseUrl + "/" + "uploadFile",
+                        Height = 350,
+                        Width = 350,
+                        Title = "Upload file",
+                    },
+                };
             }
-            catch (Exception e)
-            {
-                await FileUploadFailedAsync(turnContext, e.ToString(), cancellationToken);
-            }
-        }
-
-        /// <summary>
-        /// Invoked when a file consent card is declined by the user.
-        /// </summary>
-        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
-        /// <param name="fileConsentCardResponse">The response representing the value of the invoke activity sent when the user declines a file consent card.</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>A task that represents the work queued to execute.</returns>
-        protected override async Task OnTeamsFileConsentDeclineAsync(ITurnContext<IInvokeActivity> turnContext, FileConsentCardResponse fileConsentCardResponse, CancellationToken cancellationToken)
-        {
-            JToken context = JObject.FromObject(fileConsentCardResponse.Context);
-
-            var reply = MessageFactory.Text($"Declined. We won't upload file <b>{context["filename"]}</b>.");
-            reply.TextFormat = "xml";
-            await turnContext.SendActivityAsync(reply, cancellationToken);
-        }
-
-        /// <summary>
-        /// Handle file upload.
-        /// </summary>
-        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
-        /// <param name="fileConsentCardResponse">The response representing the value of the invoke activity sent when the user accept a file consent card.</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>A task that represents the work queued to execute.</returns>
-        private async Task FileUploadCompletedAsync(ITurnContext turnContext, FileConsentCardResponse fileConsentCardResponse, CancellationToken cancellationToken)
-        {
-            var downloadCard = new FileInfoCard
-            {
-                UniqueId = fileConsentCardResponse.UploadInfo.UniqueId,
-                FileType = fileConsentCardResponse.UploadInfo.FileType,
-            };
-
-            var asAttachment = new Attachment
-            {
-                Content = downloadCard,
-                ContentType = FileInfoCard.ContentType,
-                Name = fileConsentCardResponse.UploadInfo.Name,
-                ContentUrl = fileConsentCardResponse.UploadInfo.ContentUrl,
-            };
-
-            var reply = MessageFactory.Text($"<b>File uploaded.</b> Your file <b>{fileConsentCardResponse.UploadInfo.Name}</b> is ready to download");
-            reply.TextFormat = "xml";
-            reply.Attachments = new List<Attachment> { asAttachment };
-
-            await turnContext.SendActivityAsync(reply, cancellationToken);
-        }
-
-        /// <summary>
-        /// Handle file upload failure.
-        /// </summary>
-        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
-        /// <param name="error"> Error while uploading the file.</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>A task that represents the work queued to execute.</returns>
-        private async Task FileUploadFailedAsync(ITurnContext turnContext, string error, CancellationToken cancellationToken)
-        {
-            var reply = MessageFactory.Text($"<b>File upload failed.</b> Error: <pre>{error}</pre>");
-            reply.TextFormat = "xml";
-            await turnContext.SendActivityAsync(reply, cancellationToken);
+            return Task.FromResult(taskModuleResponse);
         }
 
         // Remove mention text from the activity. 

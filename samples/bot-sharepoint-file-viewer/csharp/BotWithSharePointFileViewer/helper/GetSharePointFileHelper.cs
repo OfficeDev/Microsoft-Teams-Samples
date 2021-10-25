@@ -13,7 +13,7 @@ namespace BotWithSharePointFileViewer.helper
     public class GetSharePointFileHelper
     {
         // Get share point file.
-        public static async void GetSharePointFile(ITurnContext turnContext, TokenResponse tokenResponse, string chatId)
+        public static async Task<List<string>> GetSharePointFile(ITurnContext turnContext, TokenResponse tokenResponse, string sharepointSiteName, string sharepointTenantName)
         {
             if (turnContext == null)
             {
@@ -28,8 +28,9 @@ namespace BotWithSharePointFileViewer.helper
             try
             {
                 var client = new SimpleGraphClient(tokenResponse.Token);
-                var fileInfo = await client.GetSharePointFile("017RCRBETV23GWYZ6WNZC3HUXLPWHU2BDT");
-                client.SendFileToChat(chatId, fileInfo);    
+                var fileNameList = await client.GetSharePointFile(sharepointSiteName, sharepointTenantName);
+
+                return fileNameList;
             }
             catch (ServiceException ex)
             {
@@ -47,7 +48,7 @@ namespace BotWithSharePointFileViewer.helper
             }
             try
             {
-                string filename = "chat.txt";
+                string filename = "word.docx";
                 var member = new ChannelAccount
                 {
                     AadObjectId = turnContext.Activity.From.AadObjectId,
