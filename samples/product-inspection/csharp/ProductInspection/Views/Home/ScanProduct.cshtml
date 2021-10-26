@@ -19,7 +19,7 @@
 
         let productId;
         let productName;
-        let image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZirG05mpQKCJjqvjRbyyC9mDmRfS7grTeTg&usqp=CAU";
+        let image = "";
 
         // Method to scan barcode
         function scanBarCode() {
@@ -62,8 +62,8 @@
                         invalidBarCode = true;
                     }
                     if (!invalidBarCode) {
-                        $("#productStatus").show();
-                        $("#productImg").attr("src", image);
+                       // $("#productStatus").show();
+                      //  $("#productImg").attr("src", image);
                         $("#scannedText").text("Product Name is :" + productName);
                     }
                     else {
@@ -88,29 +88,11 @@
                     }
                 } else if (files) {
                     image = files[0].content;
+                    $("#productImg").attr("src", image);
                     $("#productStatus").show();
                 }
             });
         };
-
-        // Method to select product image
-        function selectImage() {
-            microsoftTeams.media.selectMedia({ maxMediaCount: 1, mediaType: microsoftTeams.media.MediaType.Image }, (error, attachments) => {
-                // If there's any error, an alert shows the error message/code
-                if (error) {
-                    if (error.message) {
-                        alert(" ErrorCode: " + error.errorCode + error.message);
-                    } else {
-                        alert(" ErrorCode: " + error.errorCode);
-                    }
-                } else if (attachments) {
-                    // creating selected images array to show preview
-                    const imageArray = "data:" + attachments[0].mimeType + ";base64," + attachments[0].preview
-                    image = imageArray;
-                    $("#productStatus").show();
-                }
-            });
-        }
 
         function saveProduct(status) {
             $.ajax({
@@ -135,7 +117,6 @@
         <div class="panel">
             <div id="captureImage">
                 <button type="button" class="btn btn-outline-info" onclick="captureImage()">Capture Image</button>
-                <button type="button" class="btn btn-outline-info" onclick="selectImage()">Select Image</button>
             </div>
             <div id="productStatus">
                 <label id="scannedText"></label>
