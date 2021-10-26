@@ -79,44 +79,46 @@
                 } else if (files) {
                     image = files[0].content;
                     $("#productName").text("Product Name :" + productName);
-                    document.getElementById("productImage").src = image;
+                    document.getElementById("productImage").src = "data:image/png;base64," + image;
                     $("#productStatus").show();
                 }
             });
             });     
         };
 
-        // Method to select product image 
-        function selectImage() {
-            microsoftTeams.media.selectMedia({ maxMediaCount: 1, mediaType: microsoftTeams.media.MediaType.Image }, (error, attachments) => {
-                // If there's any error, an alert shows the error message/code
-                if (error) {
-                    if (error.message) {
-                        alert(" ErrorCode: " + error.errorCode + error.message);
-                    } else {
-                        alert(" ErrorCode: " + error.errorCode);
-                    }
-                } else if (attachments) {
+    function dataURItoBlob(dataURI) {
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+        byteString = atob(dataURI.split(',')[1]);
+    else
+        byteString = unescape(dataURI.split(',')[1]);
 
-                    // creating selected images array to show preview 
-                    const imageArray = "data:" + attachments[0].mimeType + ";base64," + attachments[0].preview
-                    image = imageArray;
-                    $("#productName").text("Product Name :" + productName);
-                    document.getElementById("productImage").src = image;
-                    $("#productStatus").show();
-                }
-            });
-        }
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
 
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([ia], {type:mimeString});
+}
         // Method invoked on approve/reject click.
         function approveRejectProduct(status) {
+            alert("hello:"+image);
+            var blob = dataURItoBlob("data:image/png;base64," + image);
+            let formData = new FormData();
+            formData.append("image", blob);
+            alert(JSON.stringify(formData));
             var productDetails = {
                 "productId": productId,
                 "productName": productName,
-                "image": image,
+                "image": formData,
                 "status": status?"Approved":"Rejected"
             }
-
+            alert(productDetails);
             $.ajax({
                 url: '/Save',
                 type: 'POST',
@@ -140,8 +142,7 @@
         <div class="panel">
             <label id="noProductFound">this product is not available. Please scan the product from 'All product list'</label>
             <div id="captureImage">
-                <button type="button" onclick="captureImage()">Capture Image</button>
-                <button type="button" onclick="selectImage()">Select Image</button>
+                <input type="button" value="Capture Image" onclick="captureImage()">
             </div>
             <div id="productStatus">
                 <label id="productName"></label><br/>
