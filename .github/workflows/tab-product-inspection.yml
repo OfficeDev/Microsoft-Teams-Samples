@@ -17,6 +17,7 @@ env:
     #Change the project path to your project file path.
     AZURE_WEBAPP_PACKAGE_PATH: 'samples/tab-product-inspection/csharp/published'
     PROJECT_PATH: 'samples/tab-product-inspection/csharp/ProductInspection/ProductInspection.csproj'
+    AZURE_WEBAPP_NAME: 'tab-product-inspection'
 jobs:
   build:
     runs-on: windows-latest
@@ -60,7 +61,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'json-tabs'
-          slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_Tab_Product_Inspection}}
-          package: .
+         app-name: ${{ env.AZURE_WEBAPP_NAME }}
+         slot-name: 'production'
+         publish-profile: ${{ secrets.AzureAppService_PublishProfile_Tab_Product_Inspection}}
+         package: .

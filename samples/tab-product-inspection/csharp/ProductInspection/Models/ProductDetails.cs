@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+
 namespace ProductInspection.Models
 {
     public class ProductDetails
