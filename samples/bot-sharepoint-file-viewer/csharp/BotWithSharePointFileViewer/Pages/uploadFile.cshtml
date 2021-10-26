@@ -4,46 +4,30 @@
 }
 
 <head>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+            crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-
-        window.onload = function () {
-            var fileupload = document.getElementById("FileUpload1");
-            var filePath = document.getElementById("spnFilePath");
-            var button = document.getElementById("btnFileUpload");
-            button.onclick = function () {
-                fileupload.click();
-            };
-            fileupload.onchange = function () {
-                var fileName = fileupload.value.split('\\')[fileupload.value.split('\\').length - 1];
-                filePath.innerHTML = "<b>Selected File: </b>" + fileName;
-            };
+        microsoftTeams.initialize();
+        function submit() {
+            debugger;
+            const input = document.querySelector('input[type="file"]');
+            const file = input.files[0];
+            const formData = new FormData();
+            formData.append('word.docx', file);
+            console.log(formData);
+            microsoftTeams.tasks.submitTask(JSON.stringify(formData));
         };
-
-        function installApp() {
-            var teamId;
-            microsoftTeams.getContext(function (context) {
-                teamId = context.groupId;
-                var appInfo = {
-                    appId: null,
-                    teamId: null
-                };
-                appInfo.appId = appId;
-                appInfo.teamId = teamId;
-                microsoftTeams.tasks.submitTask(appInfo);
-            });
-        };
-
     </script>
 </head>
 <body class="theme-light">
     <div class="surface">
         <div class="panel">
             <div>
-                <input type="button" id="btnFileUpload" value="Select File" />
-                <span id="spnFilePath"></span>
-                <input type="file" id="FileUpload1" style="display: none" />
+                <input type="file" name="file" id="file" accept=".docx, .pdf, .xlsx">
+                <button type="button" onclick="submit()">Upload</button>
             </div>
         </div>
     </div>

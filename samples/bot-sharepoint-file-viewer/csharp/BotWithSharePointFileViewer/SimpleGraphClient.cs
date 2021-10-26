@@ -65,33 +65,28 @@ namespace BotWithSharePointFileViewer
         }
 
         // Send file to chat.
-        public async void SendFileToChat(string chatid, DriveItem driveItem)
+        public async void UploadFileInSharepointSite(string sharepointSiteName, string sharepointTenantName, string fileName)
         {
             var graphClient = GetAuthenticatedClient();
-            var weburl = driveItem.WebUrl.Substring(0, driveItem.WebUrl.IndexOf("&action"));
 
-            var chatMessage = new ChatMessage
+            var site = await graphClient.Sites[sharepointTenantName].Sites[sharepointSiteName]
+                             .Request()
+                             .GetAsync();
+
+            if (site != null)
             {
-                Body = new ItemBody
+                var drive = await graphClient.Sites[site.Id].Drives
+                                    .Request()
+                                    .GetAsync();
+                if (drive != null)
                 {
-                    ContentType = BodyType.Html,
-                    Content = $"Here's the share point file. <attachment id=\"{driveItem.ETag.Substring(2,36)}\"></attachment>"
-                },
-                Attachments = new List<ChatMessageAttachment>()
-                {
-                    new ChatMessageAttachment
-                    {
-                        Id = driveItem.ETag.Substring(2,36),
-                        ContentType = "reference",
-                        ContentUrl = weburl,
-                        Name = driveItem.Name
-                    }
-                }
-            };
 
-            await graphClient.Chats[chatid].Messages
-                .Request()
-                .AddAsync(chatMessage);
+                    //var children = await graphClient.Sites[site.Id].Drives[drive.CurrentPage[0].Id].Items
+                                          //  .Request()
+                                           // .p();
+                   
+                }
+            }
         }
 
         // Get an Authenticated Microsoft Graph client using the token issued to the user.

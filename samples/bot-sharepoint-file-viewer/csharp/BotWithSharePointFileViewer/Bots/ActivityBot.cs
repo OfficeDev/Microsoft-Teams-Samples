@@ -27,6 +27,7 @@ namespace BotWithSharePointFileViewer.Bots
         protected readonly BotState ConversationState;
         protected readonly Dialog Dialog;
         private readonly string _applicationBaseUrl;
+        protected readonly IStatePropertyAccessor<TokenState> _TokenState;
 
         public ActivityBot(IConfiguration configuration, IWebHostEnvironment env, IHttpClientFactory clientFactory, ConversationState conversationState, T dialog)
         {
@@ -35,6 +36,7 @@ namespace BotWithSharePointFileViewer.Bots
             _env = env;
             ConversationState = conversationState;
             Dialog = dialog;
+            _TokenState = ConversationState.CreateProperty<TokenState>(nameof(TokenState));
         }
 
         /// <summary>
@@ -110,6 +112,32 @@ namespace BotWithSharePointFileViewer.Bots
             return Task.FromResult(taskModuleResponse);
         }
 
+        /// <summary>
+        /// Handle task module is submit.
+        /// </summary>
+        /// <param name = "turnContext" > The turn context.</param>
+        /// <param name = "taskModuleRequest" >The task module invoke request value payload.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A Task Module Response for the request.</returns>
+        protected override async Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
+        {
+            var appInfo = JObject.FromObject(taskModuleRequest.Data);
+            var Token = await this._TokenState.GetAsync(turnContext, () => new TokenState());
+
+            if (appInfo != null)
+            {
+                if (Token == null || string.IsNullOrEmpty(Token.AccessToken))
+                {
+                    await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
+                }
+
+                //var client = new SimpleGraphClient(Token.AccessToken);
+                //await client.InstallAppInTeam(teamId, appId);
+                //await turnContext.SendActivityAsync("App added sucessfully");
+            }
+
+            return null;
+        }
         // Remove mention text from the activity. 
         private Activity StripAtMentionText(Activity activity)
         {

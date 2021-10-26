@@ -22,12 +22,14 @@ namespace BotWithSharePointFileViewer.Dialogs
     {
         public readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _env;
+        protected readonly IStatePropertyAccessor<TokenState> _conversationState;
 
-        public MainDialog(IConfiguration configuration, IWebHostEnvironment env)
+        public MainDialog(IConfiguration configuration, IWebHostEnvironment env, ConversationState conversationState)
             : base(nameof(MainDialog), configuration["ConnectionName"])
         {
             _configuration = configuration;
             _env = env;
+            _conversationState = conversationState.CreateProperty<TokenState>(nameof(TokenState));
 
             AddDialog(new OAuthPrompt(
                 nameof(OAuthPrompt),
@@ -66,7 +68,7 @@ namespace BotWithSharePointFileViewer.Dialogs
             {
                 if (stepContext.Context.Activity.Text == "viewfile")
                 {
-                    var fileNameList = await GetSharePointFileHelper.GetSharePointFile(stepContext.Context, tokenResponse, _configuration["SharepointSiteName"], _configuration["SharepointTenantName"] + ":");
+                    var fileNameList = await GetSharePointFileHelper.GetSharePointFile(tokenResponse, _configuration["SharepointSiteName"], _configuration["SharepointTenantName"] + ":");
                     var sharePointTenantName = _configuration["SharepointTenantName"];
                     var sharepointSiteName = _configuration["SharepointSiteName"];
                     var fileUrl = "";
@@ -90,6 +92,12 @@ namespace BotWithSharePointFileViewer.Dialogs
                 }
                 else if (stepContext.Context.Activity.Text == "upload")
                 {
+                    // Set the token in Conversation Data
+                    var token = await this._conversationState.GetAsync(stepContext.Context, () => new TokenState());
+                    token.AccessToken = tokenResponse.Token;
+                    await this._conversationState.SetAsync(stepContext.Context, token);
+                    var fileName = Path.Combine(_env.ContentRootPath, $".\\wwwroot\\word1.docx");
+                    await GetSharePointFileHelper.UploadFileInSharepointSite(tokenResponse, _configuration["SharepointSiteName"], _configuration["SharepointTenantName"] + ":", fileName);
                     await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForUploadFileOption()), cancellationToken);
 
                     return await stepContext.EndDialogAsync();
