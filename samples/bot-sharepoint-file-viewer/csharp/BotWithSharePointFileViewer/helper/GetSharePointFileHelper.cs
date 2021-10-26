@@ -31,7 +31,7 @@ namespace BotWithSharePointFileViewer.helper
         }
 
         // Upload file in sharepoint site.
-        public static async Task<bool> UploadFileInSharepointSite(TokenResponse tokenResponse, string sharepointSiteName, string sharepointTenantName, string fileName)
+        public static bool UploadFileInSharepointSite(TokenResponse tokenResponse, string sharepointSiteName, string sharepointTenantName, string fileName)
         {
             if (tokenResponse == null)
             {
@@ -45,7 +45,7 @@ namespace BotWithSharePointFileViewer.helper
             try
             {
                 var client = new SimpleGraphClient(tokenResponse.Token);
-                var fileNameList = await client.GetSharePointFile(sharepointSiteName, sharepointTenantName);
+                client.UploadFileInSharepointSite(sharepointSiteName, sharepointTenantName, fileName);
 
                 return true;
             }

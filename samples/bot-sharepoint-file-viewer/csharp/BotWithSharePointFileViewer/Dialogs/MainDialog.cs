@@ -96,9 +96,9 @@ namespace BotWithSharePointFileViewer.Dialogs
                     var token = await this._conversationState.GetAsync(stepContext.Context, () => new TokenState());
                     token.AccessToken = tokenResponse.Token;
                     await this._conversationState.SetAsync(stepContext.Context, token);
-                    var fileName = Path.Combine(_env.ContentRootPath, $".\\wwwroot\\word1.docx");
-                    await GetSharePointFileHelper.UploadFileInSharepointSite(tokenResponse, _configuration["SharepointSiteName"], _configuration["SharepointTenantName"] + ":", fileName);
-                    await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForUploadFileOption()), cancellationToken);
+                    var fileName = Path.Combine(_env.ContentRootPath, $".\\wwwroot\\test2.pdf");
+                    GetSharePointFileHelper.UploadFileInSharepointSite(tokenResponse, _configuration["SharepointSiteName"], _configuration["SharepointTenantName"] + ":", fileName);
+                    //await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForUploadFileOption()), cancellationToken);
 
                     return await stepContext.EndDialogAsync();
                 }

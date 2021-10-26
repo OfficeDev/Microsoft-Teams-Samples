@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.Graph;
@@ -80,10 +81,12 @@ namespace BotWithSharePointFileViewer
                                     .GetAsync();
                 if (drive != null)
                 {
-
-                    //var children = await graphClient.Sites[site.Id].Drives[drive.CurrentPage[0].Id].Items
-                                          //  .Request()
-                                           // .p();
+                    FileStream stream = new FileStream(fileName, FileMode.Open);
+                    //byte[] array = new byte[stream.Length];
+                    //var stream = File.ReadAllBytes("filename.ext"); ;
+                    var children = await graphClient.Sites[site.Id].Drives[drive.CurrentPage[0].Id].Root.ItemWithPath("test2.pdf").Content
+                                            .Request()
+                                            .PutAsync<DriveItem>(stream);
                    
                 }
             }
