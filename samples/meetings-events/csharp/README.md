@@ -1,4 +1,4 @@
-﻿﻿﻿Using this C# sample, a bot can receive real-time meeting events.
+Using this C# sample, a bot can receive real-time meeting events.
 For reference please check [Real-time Teams meeting events](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet)
 
 The feature shown in this sample is currently available in public developer preview only.
