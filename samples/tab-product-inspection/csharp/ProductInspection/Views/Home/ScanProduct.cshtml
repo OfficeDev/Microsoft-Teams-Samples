@@ -62,7 +62,8 @@
                         invalidBarCode = true;
                     }
                     if (!invalidBarCode) {
-                       // $("#productStatus").show();
+                      //  $("#productStatus").show();
+                       // $("#productImg").attr("src", "data:image/png;base64"+image);
                       //  $("#productImg").attr("src", image);
                         $("#captureImage").show();
                         $("#scannedText").text("Product Name is :" + productName);
@@ -89,7 +90,7 @@
                     }
                 } else if (files) {
                     image = files[0].content;
-                    $("#productImg").attr("src", image);
+                    $("#productImg").attr("src", "data:image/png;base64,"+image);
                     $("#productStatus").show();
                 }
             });
