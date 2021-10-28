@@ -26,7 +26,7 @@ namespace BotWithSharePointFileViewer
             _token = token;
         }
 
-        // Get share point file.
+        // Get share point file list.
         public async Task<List<string>> GetSharePointFile(string sharepointSiteName, string sharepointTenantName)
         {
             var graphClient = GetAuthenticatedClient();
@@ -65,8 +65,8 @@ namespace BotWithSharePointFileViewer
             }
         }
 
-        // Send file to chat.
-        public async void UploadFileInSharepointSite(string sharepointSiteName, string sharepointTenantName, string fileName)
+        // Upload file to sharepoint site.
+        public async void UploadFileInSharepointSite(string sharepointSiteName, string sharepointTenantName, string fileName, Stream stream)
         {
             var graphClient = GetAuthenticatedClient();
 
@@ -81,13 +81,9 @@ namespace BotWithSharePointFileViewer
                                     .GetAsync();
                 if (drive != null)
                 {
-                    FileStream stream = new FileStream(fileName, FileMode.Open);
-                    //byte[] array = new byte[stream.Length];
-                    //var stream = File.ReadAllBytes("filename.ext"); ;
-                    var children = await graphClient.Sites[site.Id].Drives[drive.CurrentPage[0].Id].Root.ItemWithPath("test2.pdf").Content
+                    await graphClient.Sites[site.Id].Drives[drive.CurrentPage[0].Id].Root.ItemWithPath(fileName).Content
                                             .Request()
                                             .PutAsync<DriveItem>(stream);
-                   
                 }
             }
         }

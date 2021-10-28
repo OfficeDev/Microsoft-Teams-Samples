@@ -11,10 +11,7 @@ using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,7 +24,6 @@ namespace BotWithSharePointFileViewer.Bots
         protected readonly BotState ConversationState;
         protected readonly Dialog Dialog;
         private readonly string _applicationBaseUrl;
-        protected readonly IStatePropertyAccessor<TokenState> _TokenState;
 
         public ActivityBot(IConfiguration configuration, IWebHostEnvironment env, IHttpClientFactory clientFactory, ConversationState conversationState, T dialog)
         {
@@ -36,7 +32,6 @@ namespace BotWithSharePointFileViewer.Bots
             _env = env;
             ConversationState = conversationState;
             Dialog = dialog;
-            _TokenState = ConversationState.CreateProperty<TokenState>(nameof(TokenState));
         }
 
         /// <summary>
@@ -65,17 +60,16 @@ namespace BotWithSharePointFileViewer.Bots
         /// </remarks>
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            var activity = this.StripAtMentionText((Activity)turnContext.Activity);
-            var userCommand = activity.Text.ToLower().Trim();
+            var userCommand = turnContext.Activity.Text.ToLower().Trim();
 
-            if (userCommand == "viewfile" || userCommand == "logout"|| userCommand == "login"|| userCommand == "upload")
+            if (userCommand == "viewfile" || userCommand == "logout"|| userCommand == "login"|| userCommand == "uploadfile")
             {
                 // Run the Dialog with the new message Activity.
                 await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
             }
             else
             {
-                await turnContext.SendActivityAsync(MessageFactory.Text("type 'viewfile' to get card for file viewer "));                   
+                await turnContext.SendActivityAsync(MessageFactory.Text("type 'uploadfile' to upload file to sharepoint site or 'viewfile' to get card for file viewer"));                   
             }
 
             return;
@@ -121,43 +115,8 @@ namespace BotWithSharePointFileViewer.Bots
         /// <returns>A Task Module Response for the request.</returns>
         protected override async Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
-            var appInfo = JObject.FromObject(taskModuleRequest.Data);
-            var Token = await this._TokenState.GetAsync(turnContext, () => new TokenState());
-
-            if (appInfo != null)
-            {
-                if (Token == null || string.IsNullOrEmpty(Token.AccessToken))
-                {
-                    await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
-                }
-
-                //var client = new SimpleGraphClient(Token.AccessToken);
-                //await client.InstallAppInTeam(teamId, appId);
-                //await turnContext.SendActivityAsync("App added sucessfully");
-            }
-
+            await turnContext.SendActivityAsync("File uploaded successfully");
             return null;
-        }
-        // Remove mention text from the activity. 
-        private Activity StripAtMentionText(Activity activity)
-        {
-            if (activity == null)
-            {
-                throw new ArgumentNullException(nameof(activity));
-            }
-
-            foreach (var m in activity.GetMentions())
-            {
-                if (m.Mentioned.Id == activity.Recipient.Id)
-                {
-                    //Bot is in the @mention list.  
-                    //The below example will strip the bot name out of the message, so you can parse it as if it wasn't included.
-                    //Note that the Text object will contain the full bot name, if applicable.
-                    if (m.Text != null)
-                        activity.Text = activity.Text.Replace(m.Text, "").Trim();
-                }
-            }
-            return activity;
         }
     }
 }

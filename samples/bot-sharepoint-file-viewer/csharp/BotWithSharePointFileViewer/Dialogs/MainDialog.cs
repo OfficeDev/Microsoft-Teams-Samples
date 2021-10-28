@@ -2,34 +2,30 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using AdaptiveCards;
 using BotWithSharePointFileViewer.helper;
 using BotWithSharePointFileViewer.Models;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Graph;
 
 namespace BotWithSharePointFileViewer.Dialogs
 {
     public class MainDialog : LogoutDialog
     {
         public readonly IConfiguration _configuration;
-        private readonly IWebHostEnvironment _env;
-        protected readonly IStatePropertyAccessor<TokenState> _conversationState;
+        private readonly ConcurrentDictionary<string, TokenState> _Token;
 
-        public MainDialog(IConfiguration configuration, IWebHostEnvironment env, ConversationState conversationState)
+        public MainDialog(IConfiguration configuration,ConcurrentDictionary<string, TokenState> token)
             : base(nameof(MainDialog), configuration["ConnectionName"])
         {
             _configuration = configuration;
-            _env = env;
-            _conversationState = conversationState.CreateProperty<TokenState>(nameof(TokenState));
+            _Token = token;
 
             AddDialog(new OAuthPrompt(
                 nameof(OAuthPrompt),
@@ -66,45 +62,53 @@ namespace BotWithSharePointFileViewer.Dialogs
 
             if (tokenResponse != null)
             {
-                if (stepContext.Context.Activity.Text == "viewfile")
+                if (stepContext.Context.Activity.Text.Trim() == "viewfile")
                 {
-                    var fileNameList = await GetSharePointFileHelper.GetSharePointFile(tokenResponse, _configuration["SharepointSiteName"], _configuration["SharepointTenantName"] + ":");
-                    var sharePointTenantName = _configuration["SharepointTenantName"];
-                    var sharepointSiteName = _configuration["SharepointSiteName"];
-                    var fileUrl = "";
-                    var actions = new List<AdaptiveAction>();
+                    var fileNameList = await SharePointFileHelper.GetSharePointFile(tokenResponse, _configuration["SharepointSiteName"], _configuration["SharepointTenantName"] + ":");
 
-                    foreach (var file in fileNameList)
+                    if (fileNameList.Count == 0)
                     {
-                        var extension = file.Split('.')[1];
-                        fileUrl = $"https://teams.microsoft.com/_#/{extension}/viewer/teams/https:~2F~2F{sharePointTenantName}~2Fsites~2F{sharepointSiteName}~2FShared%20Documents~2F{file}";
-                        actions.Add(new AdaptiveOpenUrlAction
-                        {
-                            Title = file.Split('.')[0],
-                            Url = new Uri(fileUrl),
-
-                        });
- 
+                        await stepContext.Context.SendActivityAsync(MessageFactory.Text("No files found. Please type 'uploadfile' to upload file to sharepoint site"), cancellationToken);
                     }
-                    await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForFileViewerOption(actions)), cancellationToken);
+                    else
+                    {
+                        var sharePointTenantName = _configuration["SharepointTenantName"];
+                        var sharepointSiteName = _configuration["SharepointSiteName"];
+                        var fileUrl = "";
+                        var actions = new List<AdaptiveAction>();
+
+                        foreach (var file in fileNameList)
+                        {
+                            var extension = file.Split('.')[1];
+                            fileUrl = $"https://teams.microsoft.com/_#/{extension}/viewer/teams/https:~2F~2F{sharePointTenantName}~2Fsites~2F{sharepointSiteName}~2FShared%20Documents~2F{file}";
+                            actions.Add(new AdaptiveOpenUrlAction
+                            {
+                                Title = file.Split('.')[0],
+                                Url = new Uri(fileUrl),
+
+                            });
+                        }
+
+                        await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForFileViewerOption(actions)), cancellationToken);
+                    }
 
                     return await stepContext.EndDialogAsync();
                 }
-                else if (stepContext.Context.Activity.Text == "upload")
+                else if (stepContext.Context.Activity.Text.Trim() == "uploadfile")
                 {
-                    // Set the token in Conversation Data
-                    var token = await this._conversationState.GetAsync(stepContext.Context, () => new TokenState());
-                    token.AccessToken = tokenResponse.Token;
-                    await this._conversationState.SetAsync(stepContext.Context, token);
-                    var fileName = Path.Combine(_env.ContentRootPath, $".\\wwwroot\\test2.pdf");
-                    GetSharePointFileHelper.UploadFileInSharepointSite(tokenResponse, _configuration["SharepointSiteName"], _configuration["SharepointTenantName"] + ":", fileName);
-                    //await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForUploadFileOption()), cancellationToken);
+                    TokenState token = new TokenState
+                    {
+                        AccessToken = tokenResponse.Token
+                    };
+
+                    _Token.AddOrUpdate("token", token, (key, newValue) => token);
+                    await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForUploadFileOption()), cancellationToken);
 
                     return await stepContext.EndDialogAsync();
                 }
 
                 await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login successful"), cancellationToken);
-                await stepContext.Context.SendActivityAsync(MessageFactory.Text("Please type 'getchat' command in the groupchat where the bot is added to fetch messages."), cancellationToken);
+                await stepContext.Context.SendActivityAsync(MessageFactory.Text("Please type 'uploadfile' to upload file to sharepoint site or 'viewfile' to get card for file viewer"), cancellationToken);
             }
 
             return await stepContext.EndDialogAsync();
@@ -113,7 +117,7 @@ namespace BotWithSharePointFileViewer.Dialogs
         /// <summary>
         /// Sample Adaptive card for file viewer.
         /// </summary>
-        private Microsoft.Bot.Schema.Attachment GetAdaptiveCardForFileViewerOption(List<AdaptiveAction> actions)
+        private Attachment GetAdaptiveCardForFileViewerOption(List<AdaptiveAction> actions)
         {
             AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
             {
@@ -129,7 +133,7 @@ namespace BotWithSharePointFileViewer.Dialogs
                 Actions = actions
             };
 
-            return new Microsoft.Bot.Schema.Attachment()
+            return new Attachment()
             {
                 ContentType = AdaptiveCard.ContentType,
                 Content = card,
@@ -137,9 +141,9 @@ namespace BotWithSharePointFileViewer.Dialogs
         }
 
         /// <summary>
-        /// Sample Adaptive card for file viewer.
+        /// Sample Adaptive card for upload file.
         /// </summary>
-        private Microsoft.Bot.Schema.Attachment GetAdaptiveCardForUploadFileOption()
+        private Attachment GetAdaptiveCardForUploadFileOption()
         {
             AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
             {
@@ -147,7 +151,7 @@ namespace BotWithSharePointFileViewer.Dialogs
                 {
                     new AdaptiveTextBlock
                     {
-                        Text = "Click on button to upload file in sharepoint site",
+                        Text = "Click on button to upload file to sharepoint site",
                         Weight = AdaptiveTextWeight.Bolder,
                         Spacing = AdaptiveSpacing.Medium,
                     }
@@ -169,7 +173,7 @@ namespace BotWithSharePointFileViewer.Dialogs
                 }
             };
 
-            return new Microsoft.Bot.Schema.Attachment()
+            return new Attachment()
             {
                 ContentType = AdaptiveCard.ContentType,
                 Content = card,

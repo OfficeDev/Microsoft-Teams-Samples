@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BotWithSharePointFileViewer.Bots;
 using BotWithSharePointFileViewer.Dialogs;
+using System.Collections.Concurrent;
+using BotWithSharePointFileViewer.Models;
 
 namespace BotWithSharePointFileViewer
 {
@@ -35,6 +37,9 @@ namespace BotWithSharePointFileViewer
 
             // Create the Conversation state. (Used by the Dialog system itself.)
             services.AddSingleton<ConversationState>();
+
+            // Create a global hashset for our Roster and notes information
+            services.AddSingleton<ConcurrentDictionary<string, TokenState>>();
 
             // The Dialog that will be run by the bot.
             services.AddSingleton<MainDialog>();

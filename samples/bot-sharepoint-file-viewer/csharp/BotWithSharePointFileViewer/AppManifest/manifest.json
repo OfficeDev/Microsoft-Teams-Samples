@@ -16,7 +16,7 @@
   },
   "description": {
     "short": "Bot sharepoint file viewer",
-    "full": "This sample demos a bot which shares SharePoint file which can be viewed in Teams file viewer"
+    "full": "This sample demos a bot which uploads file to SharePoint site and same files can be viewed in teams file viewer"
   },
   "icons": {
     "outline": "outline.png",
@@ -26,9 +26,24 @@
     {
       "botId": "<<Microsoft-App-Id>>",
       "scopes": [
-        "team",
-        "personal",
-        "groupchat"
+        "personal"
+      ],
+      "commandLists": [
+        {
+          "scopes": [
+            "personal"
+          ],
+          "commands": [
+            {
+              "title": "uploadfile",
+              "description": "To upload file in sharepoint site"
+            },
+            {
+              "title": "viewfile",
+              "description": "To view file in teams file viewer"
+            }
+          ]
+        }
       ],
       "isNotificationOnly": false,
       "supportsFiles": true

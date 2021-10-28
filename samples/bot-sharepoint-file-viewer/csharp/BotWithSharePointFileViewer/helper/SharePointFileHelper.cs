@@ -1,15 +1,18 @@
-﻿using Microsoft.Bot.Builder;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 using Microsoft.Bot.Schema;
 using Microsoft.Graph;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace BotWithSharePointFileViewer.helper
 {
-    public class GetSharePointFileHelper
+    public class SharePointFileHelper
     {
-        // Get share point file.
+        // Get sharepoint file list.
         public static async Task<List<string>> GetSharePointFile(TokenResponse tokenResponse, string sharepointSiteName, string sharepointTenantName)
         {
             if (tokenResponse == null)
@@ -31,12 +34,13 @@ namespace BotWithSharePointFileViewer.helper
         }
 
         // Upload file in sharepoint site.
-        public static bool UploadFileInSharepointSite(TokenResponse tokenResponse, string sharepointSiteName, string sharepointTenantName, string fileName)
+        public static void UploadFileInSharepointSite(string token, string sharepointSiteName, string sharepointTenantName, string fileName, Stream stream)
         {
-            if (tokenResponse == null)
+            if (string.IsNullOrEmpty(token))
             {
-                throw new ArgumentNullException(nameof(tokenResponse));
+                throw new ArgumentNullException(nameof(token));
             }
+
             if (string.IsNullOrEmpty(fileName))
             {
                 throw new ArgumentNullException(nameof(fileName));
@@ -44,10 +48,8 @@ namespace BotWithSharePointFileViewer.helper
 
             try
             {
-                var client = new SimpleGraphClient(tokenResponse.Token);
-                client.UploadFileInSharepointSite(sharepointSiteName, sharepointTenantName, fileName);
-
-                return true;
+                var client = new SimpleGraphClient(token);
+                client.UploadFileInSharepointSite(sharepointSiteName, sharepointTenantName, fileName, stream);
             }
             catch (ServiceException ex)
             {

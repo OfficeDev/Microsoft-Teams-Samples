@@ -1,12 +1,14 @@
-﻿﻿﻿Using this C# sample, a bot can share SharePoint file which can be viewed in Teams file viewer.
+﻿﻿﻿Using this C# sample, a bot can upload file to sharePoint site and same files can be viewed in teams file viewer.
 
 ## Key features
 
-- Sending archive chat messages text file of a groupchat to user
+![upload file card](BotWithSharePointFileViewer/Images/uploadFileCard.png)
 
-![Bot command](BotWithSharePointFileViewer/Images/botCommandToGetChatMessages.png)
+![Upload file](BotWithSharePointFileViewer/Images/uploadFile.png)
 
-![Bot reply](BotWithSharePointFileViewer/Images/replyFromBot.png)
+![View file card](BotWithSharePointFileViewer/Images/viewFileCard.png)
+
+![view file in teams](BotWithSharePointFileViewer/Images/fileViewer.png)
 
 ## Prerequisites
 
@@ -41,13 +43,29 @@
 
 ![Permissions](BotWithSharePointFileViewer/Images/permissions.png)
 
-5. Modify the `manifest.json` in the `/AppManifest` folder and replace the `<<MICROSOFT-APP-ID>>` with the id from step 2.
+5. Sharepoint site configuration
+   - Login to [sharepoint](https://m365x357260.sharepoint.com/_layouts/15/sharepoint.aspx?)
+   - Click on `Create site` and select `Team site`
+   
+   ![Team Site](BotWithSharePointFileViewer/Images/teamSite.png)
+   
+   - Enter site name and description of site.
+   
+   ![Site name](BotWithSharePointFileViewer/Images/siteName.png).
+   
+   - From site address eg: 'https://m365x357260.sharepoint.com/sites/SharePointTestSite'
+      `m365x357260.sharepoint.com` - value is sharepoint tenant name.
+	  
+   - Click on next. (optional step)Add aditional owner and member.
+   - Click on Finish.
 
-6. Zip the contents of `AppManifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 6.
+6. Modify the `manifest.json` in the `/AppManifest` folder and replace the `<<Microsoft-App-Id>>` with the id from step 2.
 
-7. Modify the `/appsettings.json` and fill in the `{{ Bot Id }}`,`{{ Bot Password }}` and `{{ Connection Name }}` with the id from step 2.
+7. Zip the contents of `AppManifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 6.
 
-8. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+8. Modify the `/appsettings.json` and fill in the `{{ Bot Id }}`,`{{ Bot Password }}`,`{{ Connection Name }}` with the id from step 2 and `{{Sharepoint tenant name}}`,`{{Sharepoint site name}}` from step 5 and `{{Appbase-url}}`.
+
+9. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
@@ -78,13 +96,6 @@
   - Navigate to `samples/bot-sharepoint-file-viewer/csharp` folder
   - Select `BotWithSharePointFileViewer.csproj` file
   - Press `F5` to run the project
-
-## Interacting with the bot in GroupChat
-
-Select a groupchat and add the bot to chat.
-
-Send `getchat` message to the bot, you will recieve a consent card by the bot in your personal scope.
-
 
 ## Deploy the bot to Azure
 
