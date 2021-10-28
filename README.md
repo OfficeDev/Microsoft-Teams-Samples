@@ -103,6 +103,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |1|Connectors             | Sample Office 365 Connector generating notifications to teams channel.                              |[View][connector#cs]       |[View][connector#ts]
 |2|Generic connectors sample | Sample code for a generic connector that's easy to customize for any system which supports webhooks.   |    |[View][connector-generic#ts]
 |3|Outgoing Webhooks      | Samples to create "Custom Bots" to be used in Microsoft Teams.                                        |[View][outgoing-webhook#cs]|[View][outgoing-webhook#ts]
+|4|Authentication in todo Connector App      | This is a sample app which shows connector authentication and sends notification on task creation.                                        ||[View][auth-in-connector#nodejs] 
 
 ## [Graph APIs](https://docs.microsoft.com/graph/teams-concept-overview)
 
@@ -187,6 +188,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 [sequential#workflow#csharp]:samples/bot-sequential-flow-adaptive-cards/csharp
 [sequential#workflow#js]:samples/bot-sequential-flow-adaptive-cards/nodejs
 [app-auth#ts]:samples/app-auth/nodejs
+[auth-in-connector#nodejs]:samples/connector-todo-notification/nodejs
 
 [app-task-module#cs]:samples/app-task-module/csharp
 [app-task-module#ts]:samples/app-task-module/nodejs
