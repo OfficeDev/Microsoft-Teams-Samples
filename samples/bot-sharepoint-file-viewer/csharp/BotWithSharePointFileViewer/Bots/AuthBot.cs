@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
@@ -15,8 +14,8 @@ namespace BotWithSharePointFileViewer.Bots
 {
     public class AuthBot<T> : ActivityBot<T> where T : Dialog
     {
-        public AuthBot(IConfiguration configuration, IWebHostEnvironment env, IHttpClientFactory clientFactory, ConversationState conversationState, T dialog)
-            : base(configuration, env, clientFactory,conversationState, dialog)
+        public AuthBot(IConfiguration configuration, ConversationState conversationState, T dialog)
+            : base(configuration,conversationState, dialog)
         {
         }
 

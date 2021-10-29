@@ -33,8 +33,8 @@ namespace BotWithSharePointFileViewer.helper
             }
         }
 
-        // Upload file in sharepoint site.
-        public static void UploadFileInSharepointSite(string token, string sharepointSiteName, string sharepointTenantName, string fileName, Stream stream)
+        // Upload file in SharePoint site.
+        public static void UploadFileInSharePointSite(string token, string sharepointSiteName, string sharepointTenantName, string fileName, Stream stream)
         {
             if (string.IsNullOrEmpty(token))
             {
@@ -46,15 +46,8 @@ namespace BotWithSharePointFileViewer.helper
                 throw new ArgumentNullException(nameof(fileName));
             }
 
-            try
-            {
-                var client = new SimpleGraphClient(token);
-                client.UploadFileInSharepointSite(sharepointSiteName, sharepointTenantName, fileName, stream);
-            }
-            catch (ServiceException ex)
-            {
-                throw ex;
-            }
+            var client = new SimpleGraphClient(token);
+            client.UploadFileInSharePointSite(sharepointSiteName, sharepointTenantName, fileName, stream);
         }
     }
 }

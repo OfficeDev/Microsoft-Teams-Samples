@@ -1,4 +1,4 @@
-﻿﻿﻿Using this C# sample, a bot can upload file to sharePoint site and same files can be viewed in teams file viewer.
+﻿﻿﻿Using this C# sample, a bot can upload file to SharePoint site and same files can be viewed in Teams file viewer.
 
 ## Key features
 
@@ -43,7 +43,7 @@
 
 ![Permissions](BotWithSharePointFileViewer/Images/permissions.png)
 
-5. Sharepoint site configuration
+5. SharePoint site configuration
    - Login to [sharepoint](https://m365x357260.sharepoint.com/_layouts/15/sharepoint.aspx?)
    - Click on `Create site` and select `Team site`
    

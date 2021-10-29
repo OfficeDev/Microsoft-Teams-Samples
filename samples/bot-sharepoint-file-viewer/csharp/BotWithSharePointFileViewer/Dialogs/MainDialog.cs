@@ -64,23 +64,23 @@ namespace BotWithSharePointFileViewer.Dialogs
             {
                 if (stepContext.Context.Activity.Text.ToLower().Trim() == "viewfile")
                 {
-                    var fileNameList = await SharePointFileHelper.GetSharePointFile(tokenResponse, _configuration["SharepointSiteName"], _configuration["SharepointTenantName"] + ":");
+                    var fileNameList = await SharePointFileHelper.GetSharePointFile(tokenResponse, _configuration["SharePointSiteName"], _configuration["SharePointTenantName"] + ":");
 
                     if (fileNameList.Count == 0)
                     {
-                        await stepContext.Context.SendActivityAsync(MessageFactory.Text("No files found. Please type 'uploadfile' to upload file to sharepoint site"), cancellationToken);
+                        await stepContext.Context.SendActivityAsync(MessageFactory.Text("No files found. Please type 'uploadfile' to upload file to SharePoint site"), cancellationToken);
                     }
                     else
                     {
-                        var sharePointTenantName = _configuration["SharepointTenantName"];
-                        var sharepointSiteName = _configuration["SharepointSiteName"];
+                        var sharePointTenantName = _configuration["SharePointTenantName"];
+                        var sharePointSiteName = _configuration["SharePointSiteName"];
                         var fileUrl = "";
                         var actions = new List<AdaptiveAction>();
 
                         foreach (var file in fileNameList)
                         {
                             var extension = file.Split('.')[1];
-                            fileUrl = $"https://teams.microsoft.com/_#/{extension}/viewer/teams/https:~2F~2F{sharePointTenantName}~2Fsites~2F{sharepointSiteName}~2FShared%20Documents~2F{file}";
+                            fileUrl = $"https://teams.microsoft.com/_#/{extension}/viewer/teams/https:~2F~2F{sharePointTenantName}~2Fsites~2F{sharePointSiteName}~2FShared%20Documents~2F{file}";
                             actions.Add(new AdaptiveOpenUrlAction
                             {
                                 Title = file.Split('.')[0],
@@ -108,7 +108,7 @@ namespace BotWithSharePointFileViewer.Dialogs
                 }
 
                 await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login successful"), cancellationToken);
-                await stepContext.Context.SendActivityAsync(MessageFactory.Text("Please type 'uploadfile' to upload file to sharepoint site or 'viewfile' to get card for file viewer"), cancellationToken);
+                await stepContext.Context.SendActivityAsync(MessageFactory.Text("Please type 'uploadfile' to upload file to SharePoint site or 'viewfile' to get card for file viewer"), cancellationToken);
             }
 
             return await stepContext.EndDialogAsync();
@@ -151,7 +151,7 @@ namespace BotWithSharePointFileViewer.Dialogs
                 {
                     new AdaptiveTextBlock
                     {
-                        Text = "Click on button to upload file to sharepoint site",
+                        Text = "Click on button to upload file to SharePoint site",
                         Weight = AdaptiveTextWeight.Bolder,
                         Spacing = AdaptiveSpacing.Medium,
                     }

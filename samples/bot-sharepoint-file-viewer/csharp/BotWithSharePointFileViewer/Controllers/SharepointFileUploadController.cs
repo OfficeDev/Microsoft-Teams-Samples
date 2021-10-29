@@ -12,11 +12,11 @@ namespace BotWithSharePointFileViewer.Controllers
     /// Class for sharepoint file upload
     /// </summary>
     [Route("upload")]
-    public class SharepointFileUploadController : ControllerBase
+    public class SharePointFileUploadController : ControllerBase
     {
         private readonly ConcurrentDictionary<string, TokenState> _token;
         public readonly IConfiguration _configuration;
-        public SharepointFileUploadController(
+        public SharePointFileUploadController(
             ConcurrentDictionary<string, TokenState> token,IConfiguration configuration)
         {
             _token = token;
@@ -36,7 +36,8 @@ namespace BotWithSharePointFileViewer.Controllers
                 Stream stream = new MemoryStream(result);
                 var token = new TokenState();
                 _token.TryGetValue("token", out token);
-                SharePointFileHelper.UploadFileInSharepointSite(token.AccessToken, _configuration["SharepointSiteName"], _configuration["SharepointTenantName"] + ":", file.FileName, stream);
+
+                SharePointFileHelper.UploadFileInSharePointSite(token.AccessToken, _configuration["SharepointSiteName"], _configuration["SharepointTenantName"] + ":", file.FileName, stream);
             };
         }
 
@@ -51,6 +52,7 @@ namespace BotWithSharePointFileViewer.Controllers
                 {
                     ms.Write(buffer, 0, read);
                 }
+
                 return ms.ToArray();
             }
         }

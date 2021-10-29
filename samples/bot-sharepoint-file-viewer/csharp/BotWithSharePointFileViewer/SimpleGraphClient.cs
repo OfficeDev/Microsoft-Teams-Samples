@@ -26,7 +26,7 @@ namespace BotWithSharePointFileViewer
             _token = token;
         }
 
-        // Get share point file list.
+        // Get SharePoint file list.
         public async Task<List<string>> GetSharePointFile(string sharepointSiteName, string sharepointTenantName)
         {
             var graphClient = GetAuthenticatedClient();
@@ -65,8 +65,8 @@ namespace BotWithSharePointFileViewer
             }
         }
 
-        // Upload file to sharepoint site.
-        public async void UploadFileInSharepointSite(string sharepointSiteName, string sharepointTenantName, string fileName, Stream stream)
+        // Upload file to SharePoint site.
+        public async void UploadFileInSharePointSite(string sharepointSiteName, string sharepointTenantName, string fileName, Stream stream)
         {
             var graphClient = GetAuthenticatedClient();
 

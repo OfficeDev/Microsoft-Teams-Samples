@@ -20,6 +20,7 @@ namespace BotWithSharePointFileViewer.Dialogs
 
         protected string ConnectionName { get; private set; }
 
+        // Called when the dialog is started and pushed onto the parent's dialog stack. 
         protected override async Task<DialogTurnResult> OnBeginDialogAsync(DialogContext innerDc, object options, CancellationToken cancellationToken)
         {
             var result = await InterruptAsync(innerDc, cancellationToken);
@@ -31,6 +32,7 @@ namespace BotWithSharePointFileViewer.Dialogs
             return await base.OnBeginDialogAsync(innerDc, options, cancellationToken);
         }
 
+        // Called when the dialog is _continued_, where it is the active dialog and the user replies with a new activity.    
         protected override async Task<DialogTurnResult> OnContinueDialogAsync(DialogContext innerDc, CancellationToken cancellationToken)
         {
             var result = await InterruptAsync(innerDc, cancellationToken);
@@ -58,6 +60,7 @@ namespace BotWithSharePointFileViewer.Dialogs
                     return await innerDc.CancelAllDialogsAsync();
                 }
             }
+
             return null;
         }
     }

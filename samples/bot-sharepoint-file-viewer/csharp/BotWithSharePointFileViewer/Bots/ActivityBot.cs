@@ -11,7 +11,6 @@ using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,17 +18,13 @@ namespace BotWithSharePointFileViewer.Bots
 {
     public class ActivityBot<T> : TeamsActivityHandler where T : Dialog
     {
-        private readonly IWebHostEnvironment _env;
-        private readonly IHttpClientFactory _clientFactory;
         protected readonly BotState ConversationState;
         protected readonly Dialog Dialog;
         private readonly string _applicationBaseUrl;
 
-        public ActivityBot(IConfiguration configuration, IWebHostEnvironment env, IHttpClientFactory clientFactory, ConversationState conversationState, T dialog)
+        public ActivityBot(IConfiguration configuration, ConversationState conversationState, T dialog)
         {
-            _clientFactory = clientFactory;
             _applicationBaseUrl = configuration["ApplicationBaseUrl"] ?? throw new NullReferenceException("ApplicationBaseUrl");
-            _env = env;
             ConversationState = conversationState;
             Dialog = dialog;
         }
@@ -103,6 +98,7 @@ namespace BotWithSharePointFileViewer.Bots
                     },
                 };
             }
+
             return Task.FromResult(taskModuleResponse);
         }
 
