@@ -70,7 +70,6 @@ namespace BotWithSharePointFileViewer.Bots
             return;
         }
 
-
         /// <summary>
         /// Handle task module is fetch.
         /// </summary>

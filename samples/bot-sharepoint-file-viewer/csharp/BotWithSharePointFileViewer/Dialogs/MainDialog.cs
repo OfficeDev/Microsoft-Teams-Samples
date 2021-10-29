@@ -49,11 +49,13 @@ namespace BotWithSharePointFileViewer.Dialogs
             InitialDialogId = nameof(WaterfallDialog);
         }
 
+        // Method to invoke oauth flow.
         private async Task<DialogTurnResult> PromptStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             return await stepContext.BeginDialogAsync(nameof(OAuthPrompt), null, cancellationToken);
         }
 
+        // Invoked after success of prompt step async.
         private async Task<DialogTurnResult> LoginStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             // Get the token from the previous step. Note that we could also have gotten the
