@@ -62,7 +62,7 @@ namespace BotWithSharePointFileViewer.Dialogs
 
             if (tokenResponse != null)
             {
-                if (stepContext.Context.Activity.Text.Trim() == "viewfile")
+                if (stepContext.Context.Activity.Text.ToLower().Trim() == "viewfile")
                 {
                     var fileNameList = await SharePointFileHelper.GetSharePointFile(tokenResponse, _configuration["SharepointSiteName"], _configuration["SharepointTenantName"] + ":");
 
@@ -94,7 +94,7 @@ namespace BotWithSharePointFileViewer.Dialogs
 
                     return await stepContext.EndDialogAsync();
                 }
-                else if (stepContext.Context.Activity.Text.Trim() == "uploadfile")
+                else if (stepContext.Context.Activity.Text.ToLower().Trim() == "uploadfile")
                 {
                     TokenState token = new TokenState
                     {

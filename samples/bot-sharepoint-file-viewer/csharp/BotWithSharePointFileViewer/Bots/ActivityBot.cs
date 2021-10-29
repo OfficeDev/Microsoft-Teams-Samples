@@ -69,7 +69,7 @@ namespace BotWithSharePointFileViewer.Bots
             }
             else
             {
-                await turnContext.SendActivityAsync(MessageFactory.Text("type 'uploadfile' to upload file to sharepoint site or 'viewfile' to get card for file viewer"));                   
+                await turnContext.SendActivityAsync(MessageFactory.Text("Type 'uploadfile' to upload file to sharepoint site or 'viewfile' to get card for file viewer"));                   
             }
 
             return;
