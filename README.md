@@ -22,7 +22,6 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |9|Meeting Recruitment App | Sample app showing meeting app experience for interview scenario. |[View](/demo%20manifest/Meeting-Recruitment-App.zip)     |
 |10|App installation using QR code | Sample app that generates a QR or installs app using the QR code.|[View](/demo%20manifest/App-Installation-Using-QR.zip)     |
 |11|App checkin location | Demonstrating feature where user can checkin with current location and view all previous checkins.|[View](/demo%20manifest/App-checkin-location.zip)     |
-
 |12|Teams tab graph toolkit | This sample demos building teams tab using microsoft graph toolkit|[View](/demo%20manifest/Teams-tab-graph-toolkit.zip)     |
 
 ## [Getting Started - Samples and Tutorials](https://docs.microsoft.com/microsoftteams/platform/tutorials/get-started-dotnet-app-studio)
@@ -67,7 +66,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |9| Universal bots  | Teams catering bot demonstrating how to use Universal bots in Teams | [View](samples/bot-teams-catering/csharp) |  | |
 |10| Sequential workflow adaptive cards | Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot. | [View][sequential#workflow#csharp] | [View][sequential#workflow#js]
 |11| Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. | [View][messageswithrsc#csharp] |[View][messageswithrsc#js]
-|11| Bot with sharepoint file viewer| This sample demos a bot which uploads file to SharePoint site and same files can be viewed in teams file viewer. | [View][botwithsharepointfileviewer#csharp] |
+|12| Bot with sharepoint file viewer| This sample demos a bot which uploads file to SharePoint site and same files can be viewed in teams file viewer. | [View][botwithsharepointfileviewer#csharp] |
 #### Additional samples
 
 |    | Sample Name | Description | .NET Core | JavaScript | 
