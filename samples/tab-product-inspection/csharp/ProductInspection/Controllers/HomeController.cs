@@ -15,10 +15,8 @@ namespace ProductInspection.Controllers
         public static List<ProductDetails> ProductList = new List<ProductDetails>()
         {
             new ProductDetails(){ProductId = "01DU890", ProductName = "Desktop", Image = "", Status = ""},
-            new ProductDetails(){ProductId = "01SD001", ProductName = "Laptop", Image = "", Status = ""},
             new ProductDetails(){ProductId = "01PM998", ProductName = "Mobile", Image = "", Status = ""},
-            new ProductDetails(){ProductId = "01NT789", ProductName = "Tablet", Image = "", Status = ""},
-            new ProductDetails(){ProductId = "01EW420", ProductName = "IOS Device", Image = "", Status = ""}
+            new ProductDetails(){ProductId = "01SD001", ProductName = "Laptop", Image = "", Status = ""}
         };
 
         /// <summary>
@@ -37,16 +35,6 @@ namespace ProductInspection.Controllers
         [Route("scanProduct")]
         [HttpGet]
         public IActionResult ScanProduct()
-        {
-            return View();
-        }
-
-        /// <summary>
-        /// This enpoint is called to load view product page that contains list of all products.
-        /// </summary>
-        [Route("viewProducts")]
-        [HttpGet]
-        public IActionResult ViewProducts()
         {
             return View();
         }

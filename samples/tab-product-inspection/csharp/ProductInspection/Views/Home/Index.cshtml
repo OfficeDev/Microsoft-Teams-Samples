@@ -10,37 +10,34 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
-        #mainDiv {
-            padding-left: 10%;
-            padding-top: 2%;
+
+        .flex-container {
+            display: flex;
+        }
+
+            .flex-container > div {
+                margin: 10px;
+                padding: 10px;
+            }
+
+        .container {
+            height: auto;
+            margin: 0 auto;
+            padding: 10px;
+            position: relative;
+            margin-left: 65px;
+            font-size: 20px;
+            font-weight: bold;
         }
     </style>
     <script>
-        microsoftTeams.initialize()
-
-        // Method to open taskmodule that will contain list of all products and their barcodes.
-        function viewItems() {
-
-            let taskInfo = {
-                title: null,
-                height: null,
-                width: null,
-                url: null,
-                card: null,
-                fallbackUrl: null,
-                completionBotId: null,
-            };
-
-            taskInfo.url = window.location.origin + "/viewProducts";
-            taskInfo.title = "View Products";
-            taskInfo.height = 510;
-            taskInfo.width = 430;
-            submitHandler = (err) => {
-                console.log(`Submit handler - err: ${err}`);
-            };
-
-            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+        $(document).ready(function () {
+            microsoftTeams.initialize();
+            $("#desktop").attr("src", `${window.location.origin}/Desktop.PNG`);
+            $("#laptop").attr("src", `${window.location.origin}/Laptop.PNG`);
+            $("#mobile").attr("src", `${window.location.origin}/Mobile.PNG`);
         }
+        );
 
         // Method to open taskmodule that will redirect user to scan bar code for product.
         function scanBarCode() {
@@ -59,6 +56,7 @@
             taskInfo.title = "Scan Product";
             taskInfo.height = 510;
             taskInfo.width = 430;
+
             submitHandler = (err) => {
                 console.log(`Submit handler - err: ${err}`);
             };
@@ -89,16 +87,17 @@
 
             microsoftTeams.tasks.startTask(taskInfo, submitHandler);
         }
+
     </script>
 </head>
-<body id=mainDiv>
+<body>
     <h4>Product Inspection</h4>
+    <div class="flex-container">
+        <div><img src="" id="desktop"><div class="container">Desktop</div></div>
+        <div><img src="" id="laptop"><div class="container"><span>Laptop</span></div></div>
+        <div><img src="" id="mobile"><div class="container"><span>Mobile</span></div></div>
+    </div>
+    <button type="button" class="btn btn-outline-info" id="btnScanItem" onclick="scanBarCode()">Inspect product</button>
     <br />
-    <button type="button" class="btn btn-outline-info" id="btnViewAllItems" onclick="viewItems()">View all items</button>
-    <br />
-    <br />
-    <button type="button" class="btn btn-outline-info" id="btnScanItem" onclick="scanBarCode()">Scan item</button>
-    <br />
-    <br />
-    <button type="button" class="btn btn-outline-info" id="btnViewItem" onclick="viewItemDetails()">View item details</button>
+    <button type="button" class="btn btn-outline-info" id="btnViewItem" onclick="viewItemDetails()">View product status</button>
 </body>

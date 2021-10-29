@@ -12,6 +12,8 @@
             $("#productStatus").hide();
             $("#captureImage").hide();
             $("#invalidBarcode").hide();
+            $("#status").hide();
+            $("#wait").hide();
         });
 
         microsoftTeams.initialize(() => {
@@ -43,29 +45,18 @@
                         productId = "01DU890";
                         productName = "Desktop";
                     }
-                    else if (decodedText == "01SD001") {
-                        productId = "01SD001";
-                        productName = "Laptop";
-                    }
                     else if (decodedText == "01PM998") {
                         productId = "01PM998";
                         productName = "Mobile";
                     }
-                    else if (decodedText == "01NT789") {
-                        productId = "01NT789";
-                        productName = "Tablet";
-                    }
-                    else if (decodedText == "01EW420") {
-                        productId = "01EW420";
-                        productName = "IOS Device";
+                    else if (decodedText == "01SD001") {
+                        productId = "01SD001";
+                        productName = "Laptop";
                     }
                     else {
                         invalidBarCode = true;
                     }
                     if (!invalidBarCode) {
-                      //  $("#productStatus").show();
-                       // $("#productImg").attr("src", "data:image/png;base64"+image);
-                      //  $("#productImg").attr("src", image);
                         $("#captureImage").show();
                         $("#scannedText").text("Product Name is :" + productName);
                     }
@@ -80,6 +71,7 @@
         // Method to capture product image
         function captureImage() {
             microsoftTeams.initialize();
+
             // Method to ask for image capture permission and then capture image
             microsoftTeams.media.captureImage((error, files) => {
                 // If there's any error, an alert shows the error message/code
@@ -103,6 +95,9 @@
             formData.append('productId', productId);
             formData.append('image', "data:image/png;base64,"+image);
             formData.append('status', productStatus);
+            $("#productStatus").hide();
+            $("#captureImage").hide();
+            $("#wait").show();
             setTimeout(function(){
                 $.ajax({
                 url: '@Url.Action("Save", "Home")',
@@ -113,7 +108,8 @@
                 cache: false,
                 processData: false,
                 success: function (response) {
-                    microsoftTeams.tasks.submitTask();
+                    $("#wait").hide();
+                    $("#status").show();
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
@@ -139,6 +135,8 @@
                 <button type="button" class="btn btn-outline-info" onclick="saveProduct(true)">Approve</button>
                 <button type="button" class="btn btn-outline-info" onclick="saveProduct(false)">Reject</button>
             </div>
+            <div id="wait">Please wait...</div>
+            <div id="status">Product status updated successfully</div>
             <div id="invalidBarcode">
                 <label id="errorMessage"></label>
             </div>

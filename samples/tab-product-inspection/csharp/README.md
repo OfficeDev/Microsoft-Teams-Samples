@@ -2,16 +2,8 @@
 
 This sample app demonstrate a feature where user can scan a product and mark it as approved/rejected.
 
-  ![](ProductInspection/Images/tab.png)
-
 
    ![](ProductInspection/Images/product-list.png)
-
-
-   ![](ProductInspection/Images/product-barcode.png)
-
-
-   ![](ProductInspection/Images/capture-image.png)
 
 
    ![](ProductInspection/Images/product-status.png)
@@ -41,7 +33,7 @@ This sample app demonstrate a feature where user can scan a product and mark it 
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/product-inspection/csharp/ProductInspection` folder
+  - Navigate to `samples/tab-product-inspection/csharp/ProductInspection` folder
   - Select `ProductInspection.csproj` file
   - Press `F5` to run the project
 
