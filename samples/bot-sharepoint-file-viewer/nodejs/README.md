@@ -34,11 +34,11 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
 - Login to [sharepoint](https://m365x357260.sharepoint.com/_layouts/15/sharepoint.aspx?)
 - Click on `Create site` and select `Team site`
    
-   ![Team Site](BotWithSharePointFileViewer/Images/teamSite.png)
+   ![Team Site](Images/teamSite.png)
    
    - Enter site name and description of site.
    
-   ![Site name](BotWithSharePointFileViewer/Images/siteName.png).
+   ![Site name](Images/siteName.png).
    
    - From site address eg: 'https://m365x357260.sharepoint.com/sites/SharePointTestSite'
       `m365x357260.sharepoint.com` - value is sharepoint tenant name.
