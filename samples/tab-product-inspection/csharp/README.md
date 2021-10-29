@@ -1,6 +1,6 @@
 ﻿# Product Inspection
 
-This sample app demonstarte inspecting product and marking it as approved/rejected.
+This sample app demonstrate a feature where user can scan a product and mark it as approved/rejected.
 
   ![](ProductInspection/Images/tab.png)
 

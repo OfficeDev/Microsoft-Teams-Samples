@@ -20,7 +20,7 @@
   },
   "description": {
     "short": "Product Inspection",
-    "full": "This app allows inspecting item and marking it as approved/rejected"
+    "full": "This app allows users to scan a product and mark it as approved/rejected"
   },
   "accentColor": "#5558AF",
   "staticTabs": [

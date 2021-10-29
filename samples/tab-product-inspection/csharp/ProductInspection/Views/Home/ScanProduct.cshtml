@@ -13,6 +13,7 @@
             $("#captureImage").hide();
             $("#invalidBarcode").hide();
         });
+
         microsoftTeams.initialize(() => {
             scanBarCode();
         });
@@ -97,19 +98,28 @@
         };
 
         function saveProduct(status) {
-            $.ajax({
+            var productStatus = status ? "Approved" : "Rejected";
+            const formData = new FormData();
+            formData.append('productId', productId);
+            formData.append('image', "data:image/png;base64,"+image);
+            formData.append('status', productStatus);
+            setTimeout(function(){
+                $.ajax({
                 url: '@Url.Action("Save", "Home")',
                 type: "POST",
-                dataType: "json",
-                data: { productId: productId, image: image, status: status ? "Approved" : "Rejected" },
+                data: formData,
+                mimeType: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
                 success: function (response) {
-                    console.log(response);
+                    microsoftTeams.tasks.submitTask();
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                 },
-            });
-            microsoftTeams.tasks.submitTask();
+                });
+            },700);            
         }
     </script>
 </head>
@@ -123,7 +133,7 @@
             <div id="productStatus">
                 <label id="scannedText"></label>
                 <br />
-                <img alt="Product Image" id="productImg" />
+                <img alt="Product Image" id="productImg" width="200" height="200" />
                 <br />
                 <br />
                 <button type="button" class="btn btn-outline-info" onclick="saveProduct(true)">Approve</button>

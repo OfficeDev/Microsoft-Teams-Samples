@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Primitives;
+using Microsoft.AspNetCore.Http;
 
 namespace ProductInspection.Controllers
 {
@@ -12,19 +14,12 @@ namespace ProductInspection.Controllers
         /// </summary>
         public static List<ProductDetails> ProductList = new List<ProductDetails>()
         {
-            new ProductDetails(){ProductId="01DU890", ProductName="Desktop", Image="", Status=""},
-            new ProductDetails(){ProductId="01SD001", ProductName="Laptop", Image="", Status=""},
-            new ProductDetails(){ProductId="01PM998", ProductName="Mobile", Image="", Status=""},
-            new ProductDetails(){ProductId="01NT789", ProductName="Tablet", Image="", Status=""},
-            new ProductDetails(){ProductId="01EW420", ProductName="IOS Device", Image="", Status=""}
+            new ProductDetails(){ProductId = "01DU890", ProductName = "Desktop", Image = "", Status = ""},
+            new ProductDetails(){ProductId = "01SD001", ProductName = "Laptop", Image = "", Status = ""},
+            new ProductDetails(){ProductId = "01PM998", ProductName = "Mobile", Image = "", Status = ""},
+            new ProductDetails(){ProductId = "01NT789", ProductName = "Tablet", Image = "", Status = ""},
+            new ProductDetails(){ProductId = "01EW420", ProductName = "IOS Device", Image = "", Status = ""}
         };
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HomeController"/> class.
-        /// </summary>
-        public HomeController()
-        {
-        }
 
         /// <summary>
         /// This enpoint is called to load initial page for product inspection app.
@@ -93,10 +88,13 @@ namespace ProductInspection.Controllers
         /// </summary>
         [HttpPost]
         [Route("Save")]
-        public string Save(string productId, string image, string status)
+        public string Save()
         {
+            var productId = Request.Form["productId"];
+            var image = Request.Form["image"];
+            var status = Request.Form["status"];
             // Check if product id recieved is null
-            if (productId == null)
+            if (string.IsNullOrEmpty(productId))
             {
                 return "Empty Product id";
             }
