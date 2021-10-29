@@ -1,21 +1,10 @@
 # Product Inspection
 
-This sample app demonstarte inspecting product and marking it as approved/rejected.
-
-  ![](Images/tab.png)
-
+This sample app demonstrate a feature where user can scan a product and mark it as approved/rejected.
 
    ![](Images/product-list.png)
 
-
-   ![](Images/product-barcode.png)
-
-
-   ![](Images/capture-image.png)
-
-
    ![](Images/product-status.png)
-
 
    ![](Images/view-product-status.png)
 
@@ -32,7 +21,7 @@ This sample app demonstarte inspecting product and marking it as approved/reject
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/product-inspection/nodejs`
+1) In a terminal, navigate to `samples/tab-product-inspection/nodejs`
 
 1) Install modules
 

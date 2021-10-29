@@ -12,8 +12,26 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
         #mainDiv {
-            padding-left: 10%;
+            padding-left: 5%;
             padding-top: 2%;
+        }
+         .flex-container {
+            display: flex;
+        }
+ 
+        .flex-container > div {
+            margin: 10px;
+            padding: 10px;
+        }
+ 
+        .container {
+            height: auto;
+            margin: 0 auto;
+            padding: 10px;
+            position: relative;
+            margin-left: 65px;
+            font-size: 20px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -21,7 +39,11 @@
 <body id=mainDiv>
     <h4>Product Inspection</h4>
     <br />
-    <button type="button" class="btn btn-outline-info" id="btnAllProduct">Show all product list</button>
+    <div class="flex-container">
+        <div><img src="" id="desktop"><div class="container">Desktop</div></div>
+        <div><img src="" id="laptop"><div class="container"><span>Laptop</span></div></div>
+        <div><img src="" id="mobile"><div class="container"><span>Mobile</span></div></div>
+    </div>
     <br />
     <br />
     <button type="button" class="btn btn-outline-info" id="btnInspectProduct">Inspect product</button>
@@ -32,28 +54,10 @@
     <script>
         $(document).ready(function () {
             microsoftTeams.initialize();
+            $("#desktop").attr("src", `${window.location.origin}/Images/01DU890.png`);
+            $("#laptop").attr("src", `${window.location.origin}/Images/01SD001.png`);
+            $("#mobile").attr("src", `${window.location.origin}/Images/01PM998.png`);
         });
-
-        $("#btnAllProduct").on('click', function (e) {
-            let taskInfo = {
-                title: null,
-                height: null,
-                width: null,
-                url: null,
-                card: null,
-                fallbackUrl: null,
-                completionBotId: null,
-            };
-
-            taskInfo.url = window.location.origin +"/productList";
-            taskInfo.title = " All product list";
-            taskInfo.height = 510;
-            taskInfo.width = 430;
-            submitHandler = (err, result) => {
-                console.log(`Submit handler - err: ${err}`);
-            };
-            microsoftTeams.tasks.startTask(taskInfo, submitHandler);          
-        })
 
         $("#btnInspectProduct").on('click', function (e) {
             let taskInfo = {

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js" integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -9,6 +10,8 @@
             $("#productStatus").hide();
             $("#captureImage").hide();
             $("#noProductFound").hide();
+            $("#status").hide();
+            $("#wait").hide();
         });
         microsoftTeams.initialize(() => {
             scanBarCode();
@@ -48,14 +51,6 @@
                         productName = "Mobile";
                         $("#captureImage").show();
                     }
-                    else if (decodedText == "01NT789") {
-                        productName = "Tablet";
-                        $("#captureImage").show();
-                    }
-                    else if (decodedText == "01EW420") {
-                        productName = "IOS device";
-                        $("#captureImage").show();
-                    }
                     else{
                         $("#noProductFound").show();
                     }
@@ -86,53 +81,39 @@
             });     
         };
 
-    function dataURItoBlob(dataURI) {
-    // convert base64/URLEncoded data component to raw binary data held in a string
-    var byteString;
-    if (dataURI.split(',')[0].indexOf('base64') >= 0)
-        byteString = atob(dataURI.split(',')[1]);
-    else
-        byteString = unescape(dataURI.split(',')[1]);
-
-    // separate out the mime component
-    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-
-    // write the bytes of the string to a typed array
-    var ia = new Uint8Array(byteString.length);
-    for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
-
-    return new Blob([ia], {type:mimeString});
-}
         // Method invoked on approve/reject click.
         function approveRejectProduct(status) {
-            alert("hello:"+image);
-            var blob = dataURItoBlob("data:image/png;base64," + image);
+            microsoftTeams.initialize();
             let formData = new FormData();
-            formData.append("image", blob);
-            alert(JSON.stringify(formData));
-            var productDetails = {
-                "productId": productId,
-                "productName": productName,
-                "image": formData,
-                "status": status?"Approved":"Rejected"
+
+            var productDetails= {
+                "productId":productId,
+                "image":"data:image/png;base64," + image,
+                "status": status?"Approved":"Rejected",
+                "productName": productName
             }
-            alert(productDetails);
+
+            var data = JSON.stringify(productDetails)
+            formData.append("data", data);
+            $("#productStatus").hide();
+            $("#captureImage").hide();
+            $("#wait").show();
             $.ajax({
-                url: '/Save',
+                url: '/save',
                 type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(productDetails),
+                data: formData,
+                mimeType: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
                 success: function (data, textStatus, jQxhr) {
-                    console.log('success');
+                    $("#wait").hide();
+                    $("#status").show();
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
                     console.log('error', errorThrown);
                 }
-            });
-
-            microsoftTeams.tasks.submitTask();
+                });           
         }
     </script>
 </head>
@@ -140,18 +121,22 @@
 <body class="theme-light">
     <div class="surface">
         <div class="panel">
-            <label id="noProductFound">this product is not available. Please scan the product from 'All product list'</label>
+            <label id="noProductFound">This product is not available. Please scan the product from 'All product list'</label>
             <div id="captureImage">
                 <input type="button" value="Capture Image" onclick="captureImage()">
+                <br/>
             </div>
             <div id="productStatus">
                 <label id="productName"></label><br/>
-                <img id="productImage" src/>
+                <img id="productImage" src height="100" width="100"/>
+                <br/>
+                <br/>
                 <button type="button" onclick="approveRejectProduct(true)">Approve</button>
                 <button type="button" onclick="approveRejectProduct(false)">Reject</button>
             </div>
+            <div id="wait">Please wait...</div>
+            <div id="status">Product status updated successfully.</div>
         </div>
     </div>
 </body>
-
 </html>
