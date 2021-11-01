@@ -24,7 +24,7 @@ namespace BotWithSharePointFileViewer.Controllers
         }
 
         /// <summary>
-        /// This enpoint is called to save the updated changes for particular product based on id.
+        /// This endpoint is called to save the updated changes for particular product based on id.
         /// </summary>
         [HttpPost]
         public  void UploadFileToSharepoint()

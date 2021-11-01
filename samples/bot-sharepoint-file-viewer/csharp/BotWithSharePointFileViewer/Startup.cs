@@ -12,6 +12,7 @@ using BotWithSharePointFileViewer.Bots;
 using BotWithSharePointFileViewer.Dialogs;
 using System.Collections.Concurrent;
 using BotWithSharePointFileViewer.Models;
+using Microsoft.Bot.Builder.Dialogs;
 
 namespace BotWithSharePointFileViewer
 {
@@ -41,6 +42,9 @@ namespace BotWithSharePointFileViewer
             // Create a global hashset for our Roster and notes information
             services.AddSingleton<ConcurrentDictionary<string, TokenState>>();
 
+            // Dialog Manager handles initiating the Dialog Stack, saving state, etc.
+            services.AddSingleton<DialogManager>();
+
             // The Dialog that will be run by the bot.
             services.AddSingleton<MainDialog>();
 
@@ -49,6 +53,9 @@ namespace BotWithSharePointFileViewer
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
             services.AddTransient<IBot, AuthBot<MainDialog>>();
+
+            // Register the Token Exchange Helper, for processing TokenExchangeOperation Invoke Activities 
+            services.AddSingleton<TokenExchangeHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -27,14 +27,16 @@ namespace BotWithSharePointFileViewer.Dialogs
             _configuration = configuration;
             _Token = token;
 
-            AddDialog(new OAuthPrompt(
-                nameof(OAuthPrompt),
+            AddDialog(new TokenExchangeOAuthPrompt(
+                nameof(TokenExchangeOAuthPrompt),
                 new OAuthPromptSettings
                 {
                     ConnectionName = ConnectionName,
                     Text = "Please login",
-                    Title = "Login",
-                    Timeout = 300000, // User has 5 minutes to login
+                    Title = "Sign In",
+                    Timeout = 1000 * 60 * 1, // User has 5 minutes to login (1000 * 60 * 5)
+
+                    //EndOnInvalidMessage = true
                 }));
 
             AddDialog(new TextPrompt(nameof(TextPrompt)));
@@ -52,7 +54,7 @@ namespace BotWithSharePointFileViewer.Dialogs
         // Method to invoke oauth flow.
         private async Task<DialogTurnResult> PromptStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            return await stepContext.BeginDialogAsync(nameof(OAuthPrompt), null, cancellationToken);
+            return await stepContext.BeginDialogAsync(nameof(TokenExchangeOAuthPrompt), null, cancellationToken);
         }
 
         // Invoked after success of prompt step async.
@@ -64,54 +66,57 @@ namespace BotWithSharePointFileViewer.Dialogs
 
             if (tokenResponse != null)
             {
-                if (stepContext.Context.Activity.Text.ToLower().Trim() == "viewfile")
+                if (stepContext.Context.Activity.Text!= null)
                 {
-                    var fileNameList = await SharePointFileHelper.GetSharePointFile(tokenResponse, _configuration["SharePointSiteName"], _configuration["SharePointTenantName"] + ":");
-
-                    if (fileNameList.Count == 0)
+                    if (stepContext.Context.Activity.Text.ToLower().Trim() == "viewfile")
                     {
-                        await stepContext.Context.SendActivityAsync(MessageFactory.Text("No files found. Please type 'uploadfile' to upload file to SharePoint site"), cancellationToken);
-                    }
-                    else
-                    {
-                        var sharePointTenantName = _configuration["SharePointTenantName"];
-                        var sharePointSiteName = _configuration["SharePointSiteName"];
-                        var fileUrl = "";
-                        var actions = new List<AdaptiveAction>();
+                        var fileNameList = await SharePointFileHelper.GetSharePointFile(tokenResponse, _configuration["SharePointSiteName"], _configuration["SharePointTenantName"] + ":");
 
-                        foreach (var file in fileNameList)
+                        if (fileNameList.Count == 0)
                         {
-                            var extension = file.Split('.')[1];
-                            fileUrl = $"https://teams.microsoft.com/_#/{extension}/viewer/teams/https:~2F~2F{sharePointTenantName}~2Fsites~2F{sharePointSiteName}~2FShared%20Documents~2F{file}";
-                            actions.Add(new AdaptiveOpenUrlAction
-                            {
-                                Title = file.Split('.')[0],
-                                Url = new Uri(fileUrl),
+                            await stepContext.Context.SendActivityAsync(MessageFactory.Text("No files found. Please type 'uploadfile' to upload file to SharePoint site"), cancellationToken);
+                        }
+                        else
+                        {
+                            var sharePointTenantName = _configuration["SharePointTenantName"];
+                            var sharePointSiteName = _configuration["SharePointSiteName"];
+                            var fileUrl = "";
+                            var actions = new List<AdaptiveAction>();
 
-                            });
+                            foreach (var file in fileNameList)
+                            {
+                                var extension = file.Split('.')[1];
+                                fileUrl = $"https://teams.microsoft.com/_#/{extension}/viewer/teams/https:~2F~2F{sharePointTenantName}~2Fsites~2F{sharePointSiteName}~2FShared%20Documents~2F{file}";
+                                actions.Add(new AdaptiveOpenUrlAction
+                                {
+                                    Title = file.Split('.')[0],
+                                    Url = new Uri(fileUrl),
+
+                                });
+                            }
+
+                            await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForFileViewerOption(actions)), cancellationToken);
                         }
 
-                        await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForFileViewerOption(actions)), cancellationToken);
+                        return await stepContext.EndDialogAsync();
                     }
-
-                    return await stepContext.EndDialogAsync();
-                }
-                else if (stepContext.Context.Activity.Text.ToLower().Trim() == "uploadfile")
-                {
-                    TokenState token = new TokenState
+                    else if (stepContext.Context.Activity.Text.ToLower().Trim() == "uploadfile")
                     {
-                        AccessToken = tokenResponse.Token
-                    };
+                        TokenState token = new TokenState
+                        {
+                            AccessToken = tokenResponse.Token
+                        };
 
-                    _Token.AddOrUpdate("token", token, (key, newValue) => token);
-                    await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForUploadFileOption()), cancellationToken);
+                        _Token.AddOrUpdate("token", token, (key, newValue) => token);
+                        await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForUploadFileOption()), cancellationToken);
 
-                    return await stepContext.EndDialogAsync();
-                }
-
-                await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login successful"), cancellationToken);
-                await stepContext.Context.SendActivityAsync(MessageFactory.Text("Please type 'uploadfile' to upload file to SharePoint site or 'viewfile' to get card for file viewer"), cancellationToken);
+                        return await stepContext.EndDialogAsync();
+                    }    
+                }                  
             }
+
+            await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login successful"), cancellationToken);
+            await stepContext.Context.SendActivityAsync(MessageFactory.Text("Please type 'uploadfile' to upload file to SharePoint site or 'viewfile' to get card for file viewer"), cancellationToken);
 
             return await stepContext.EndDialogAsync();
         }

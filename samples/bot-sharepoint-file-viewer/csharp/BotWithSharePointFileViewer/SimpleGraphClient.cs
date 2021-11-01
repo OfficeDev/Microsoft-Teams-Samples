@@ -82,8 +82,8 @@ namespace BotWithSharePointFileViewer
                 if (drive != null)
                 {
                     await graphClient.Sites[site.Id].Drives[drive.CurrentPage[0].Id].Root.ItemWithPath(fileName).Content
-                                            .Request()
-                                            .PutAsync<DriveItem>(stream);
+                            .Request()
+                            .PutAsync<DriveItem>(stream);
                 }
             }
         }

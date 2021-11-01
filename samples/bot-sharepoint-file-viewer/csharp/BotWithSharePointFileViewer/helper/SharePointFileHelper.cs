@@ -12,7 +12,7 @@ namespace BotWithSharePointFileViewer.helper
 {
     public class SharePointFileHelper
     {
-        // Get sharepoint file list.
+        // Get SharePoint file list.
         public static async Task<List<string>> GetSharePointFile(TokenResponse tokenResponse, string sharepointSiteName, string sharepointTenantName)
         {
             if (tokenResponse == null)

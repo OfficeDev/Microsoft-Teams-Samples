@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 
 namespace BotWithSharePointFileViewer.Dialogs
@@ -18,10 +17,10 @@ namespace BotWithSharePointFileViewer.Dialogs
             ConnectionName = connectionName;
         }
 
-        protected string ConnectionName { get; private set; }
+        protected string ConnectionName { get; }
 
-        // Called when the dialog is started and pushed onto the parent's dialog stack. 
-        protected override async Task<DialogTurnResult> OnBeginDialogAsync(DialogContext innerDc, object options, CancellationToken cancellationToken)
+        // Called when the dialog is started and pushed onto the parent's dialog stack.
+        protected override async Task<DialogTurnResult> OnBeginDialogAsync(DialogContext innerDc, object options, CancellationToken cancellationToken = default(CancellationToken))
         {
             var result = await InterruptAsync(innerDc, cancellationToken);
             if (result != null)
@@ -32,8 +31,8 @@ namespace BotWithSharePointFileViewer.Dialogs
             return await base.OnBeginDialogAsync(innerDc, options, cancellationToken);
         }
 
-        // Called when the dialog is _continued_, where it is the active dialog and the user replies with a new activity.    
-        protected override async Task<DialogTurnResult> OnContinueDialogAsync(DialogContext innerDc, CancellationToken cancellationToken)
+        // Called when the dialog is _continued_, where it is the active dialog and the user replies with a new activity.
+        protected override async Task<DialogTurnResult> OnContinueDialogAsync(DialogContext innerDc, CancellationToken cancellationToken = default(CancellationToken))
         {
             var result = await InterruptAsync(innerDc, cancellationToken);
             if (result != null)
@@ -44,20 +43,20 @@ namespace BotWithSharePointFileViewer.Dialogs
             return await base.OnContinueDialogAsync(innerDc, cancellationToken);
         }
 
-        private async Task<DialogTurnResult> InterruptAsync(DialogContext innerDc, CancellationToken cancellationToken)
+        private async Task<DialogTurnResult> InterruptAsync(DialogContext innerDc, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (innerDc.Context.Activity.Type == ActivityTypes.Message)
             {
-                var text = innerDc.Context.Activity.Text.Trim().ToLowerInvariant();
+                var text = innerDc.Context.Activity.Text.ToLowerInvariant();
 
-                if (text == "logout")
+                // Allow logout anywhere in the command
+                if (text.IndexOf("logout") >= 0)
                 {
-                    // The UserTokenClient encapsulates the authentication processes.
-                    var userTokenClient = innerDc.Context.TurnState.Get<UserTokenClient>();
-                    await userTokenClient.SignOutUserAsync(innerDc.Context.Activity.From.Id, ConnectionName, innerDc.Context.Activity.ChannelId, cancellationToken).ConfigureAwait(false);
-
+                    // The bot adapter encapsulates the authentication processes.
+                    var botAdapter = (BotFrameworkAdapter)innerDc.Context.Adapter;
+                    await botAdapter.SignOutUserAsync(innerDc.Context, ConnectionName, null, cancellationToken);
                     await innerDc.Context.SendActivityAsync(MessageFactory.Text("You have been signed out."), cancellationToken);
-                    return await innerDc.CancelAllDialogsAsync();
+                    return await innerDc.CancelAllDialogsAsync(cancellationToken);
                 }
             }
 

@@ -16,7 +16,7 @@
   },
   "description": {
     "short": "Bot SharePoint file viewer",
-    "full": "This sample demos a bot which uploads file to SharePoint site and same files can be viewed in Teams file viewer"
+    "full": "This sample demos a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer."
   },
   "icons": {
     "outline": "outline.png",
