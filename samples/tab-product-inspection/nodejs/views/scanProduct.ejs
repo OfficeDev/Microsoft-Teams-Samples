@@ -13,6 +13,7 @@
             $("#status").hide();
             $("#wait").hide();
         });
+
         microsoftTeams.initialize(() => {
             scanBarCode();
         });
@@ -53,8 +54,7 @@
                     }
                     else{
                         $("#noProductFound").show();
-                    }
-                    
+                    }  
                 }
             }, config);
         }
