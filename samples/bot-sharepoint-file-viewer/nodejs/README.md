@@ -1,4 +1,4 @@
-Using this Nodejs sample, a bot can upload file to SharePoint site and same files can be viewed in Teams file viewer.
+Using this Nodejs sample, a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer.
 
 ## Key features
 

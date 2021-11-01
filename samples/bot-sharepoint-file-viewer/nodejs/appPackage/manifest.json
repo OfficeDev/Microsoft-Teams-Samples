@@ -1,8 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.11",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.10/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.10",
   "version": "1.0.0",
-  "id": "<<Microsoft-App-Id>>",
+  "id": "9eaae164-573e-4a8c-ab4e-00d8580fe092",
   "packageName": "com.microsoft.teams.botgroupchatmessages",
   "developer": {
     "name": "Microsoft",
@@ -11,12 +11,12 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Bot SharePoint file viewer",
-    "full": "Bot SharePoint file viewer"
+    "short": "Prithvi File explorer",
+    "full": "Fetch groupchat messages with graph api"
   },
   "description": {
-    "short": "Bot SharePoint file viewer",
-    "full": "This sample demos a bot which uploads file to SharePoint site and same files can be viewed in Teams file viewer"
+    "short": "Prithvi File explorer",
+    "full": "This sample demos a bot which fetch and archive groupchat messages"
   },
   "icons": {
     "outline": "outline.png",
@@ -24,26 +24,11 @@
   },
   "bots": [
     {
-      "botId": "<<Microsoft-App-Id>>",
+      "botId": "68af893d-75e2-4277-857e-3105101e9a8b",
       "scopes": [
-        "personal"
-      ],
-      "commandLists": [
-        {
-          "scopes": [
-            "personal"
-          ],
-          "commands": [
-            {
-              "title": "uploadfile",
-              "description": "To upload file in SharePoint site"
-            },
-            {
-              "title": "viewfile",
-              "description": "To view file in Teams file viewer"
-            }
-          ]
-        }
+        "team",
+        "personal",
+        "groupchat"
       ],
       "isNotificationOnly": false,
       "supportsFiles": true
@@ -52,11 +37,11 @@
   "accentColor": "#60A18E",
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "<<Domain-name>>",
+    "a337-116-75-27-174.ngrok.io",
     "token.botframework.com"
   ],
   "webApplicationInfo": {
-    "id": "<<Microsoft-App-Id>>",
-    "resource": "api://botid-<<Microsoft-App-Id>>"
+    "id": "68af893d-75e2-4277-857e-3105101e9a8b",
+    "resource": "api://botid-68af893d-75e2-4277-857e-3105101e9a8b"
   }
 }

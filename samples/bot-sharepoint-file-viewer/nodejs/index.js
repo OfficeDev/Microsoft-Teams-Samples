@@ -96,7 +96,7 @@ server.post('/Save', upload.single('file'), async(req, res) => {
     var token = tokenData["token"];
     var buffer = req.file.buffer;
     const client = new SimpleGraphClient(token);
-    const site = await client.getSiteDetails(process.env.SharepointTenantName, process.env.SharepointSiteName);
+    const site = await client.getSiteDetails(process.env.SharePointTenantName, process.env.SharePointSiteName);
 
     if (site != null) {
         var drive = await client.getDriveDetails(site.id);

@@ -67,7 +67,7 @@ class MainDialog extends LogoutDialog {
 
             if (stepContext.context._activity.text == "viewfile") {
                 const client = new SimpleGraphClient(tokenResponse.token);
-                const site = await client.getSiteDetails(process.env.SharepointTenantName, process.env.SharepointSiteName);
+                const site = await client.getSiteDetails(process.env.SharePointTenantName, process.env.SharePointSiteName);
 
                 if (site != null) {
                     var drive = await client.getDriveDetails(site.id);
@@ -109,6 +109,8 @@ class MainDialog extends LogoutDialog {
                 return await stepContext.endDialog();
             }
         }
+        
+        await stepContext.context.sendActivity("Please type 'uploadfile' to upload file to SharePoint site or 'viewfile' to get card for file viewer");
 
         return await stepContext.endDialog();
     }

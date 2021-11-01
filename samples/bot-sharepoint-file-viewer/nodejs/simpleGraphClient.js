@@ -39,7 +39,7 @@ class SimpleGraphClient {
     */
     async getDriveDetails(siteId) {
         return await this.graphClient
-            .api('/sites/m365x645306.sharepoint.com,09a9477b-476c-4473-87c0-e9cbb5ddbec3,287bdd87-9679-46d1-8e16-572d9a6900ab/drives').version('beta')
+            .api('/sites/'+siteId+'/drives').version('beta')
             .get().then((res) => {
                 return res;
             });
@@ -57,7 +57,7 @@ class SimpleGraphClient {
     }
 
     /**
-    * This endpoin will upload the user's file to SharePoint drive .
+    * This endpoint will upload the user's file to SharePoint drive.
     */
     async uploadFile(siteId, driveId, stream, fileName) {
         return await this.graphClient
