@@ -35,7 +35,6 @@ class SsoOAuthHelpler {
             eTag: turnContext.activity.value.id
         };
 
-
         return true;
     }
 

@@ -1,9 +1,9 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.10/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.10",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.11",
   "version": "1.0.0",
-  "id": "9eaae164-573e-4a8c-ab4e-00d8580fe092",
-  "packageName": "com.microsoft.teams.botgroupchatmessages",
+  "id": "<<Microsoft-App-Id>>",
+  "packageName": "com.microsoft.teams.botsharepointfileviewer",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -11,12 +11,12 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Prithvi File explorer",
-    "full": "Fetch groupchat messages with graph api"
+    "short": "Bot SharePoint file viewer",
+    "full": "Bot SharePoint file viewer"
   },
   "description": {
-    "short": "Prithvi File explorer",
-    "full": "This sample demos a bot which fetch and archive groupchat messages"
+    "short": "Bot SharePoint file viewer",
+    "full": "This sample demos a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer."
   },
   "icons": {
     "outline": "outline.png",
@@ -24,11 +24,26 @@
   },
   "bots": [
     {
-      "botId": "68af893d-75e2-4277-857e-3105101e9a8b",
+      "botId": "<<Microsoft-App-Id>>",
       "scopes": [
-        "team",
-        "personal",
-        "groupchat"
+        "personal"
+      ],
+      "commandLists": [
+        {
+          "scopes": [
+            "personal"
+          ],
+          "commands": [
+            {
+              "title": "uploadfile",
+              "description": "To upload file in SharePoint site"
+            },
+            {
+              "title": "viewfile",
+              "description": "To view file in Teams file viewer"
+            }
+          ]
+        }
       ],
       "isNotificationOnly": false,
       "supportsFiles": true
@@ -37,11 +52,11 @@
   "accentColor": "#60A18E",
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "a337-116-75-27-174.ngrok.io",
+    "<<Domain-name>>",
     "token.botframework.com"
   ],
   "webApplicationInfo": {
-    "id": "68af893d-75e2-4277-857e-3105101e9a8b",
-    "resource": "api://botid-68af893d-75e2-4277-857e-3105101e9a8b"
+    "id": "<<Microsoft-App-Id>>",
+    "resource": "api://botid-<<Microsoft-App-Id>>"
   }
 }
