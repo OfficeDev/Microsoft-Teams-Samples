@@ -88,7 +88,7 @@ server.get('/Upload', (req, res, next) => {
 });
 
 // Endpoint to listen to multiport/form-data requests.
-server.post('/single', upload.single('file'), async(req, res) => {
+server.post('/Save', upload.single('file'), async(req, res) => {
     if(req.file == null) {
         return;
     }

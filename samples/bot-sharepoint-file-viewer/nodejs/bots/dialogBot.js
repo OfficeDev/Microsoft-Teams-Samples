@@ -77,18 +77,6 @@ class DialogBot extends TeamsActivityHandler {
         await this.conversationState.saveChanges(context, false);
         await this.userState.saveChanges(context, false);
     }
-
-    // // Remove mention text from the activity. 
-    // removeMentionText(activity) {
-    //     var updatedActivity = activity;
-
-    //     if (activity.entities[0].type == "mention") {
-    //         updatedActivity.text = activity.text.replace(activity.entities[0].text, "");
-    //         return updatedActivity;
-    //     }
-
-    //     return activity;
-    // }
 }
 
 module.exports.DialogBot = DialogBot;

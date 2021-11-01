@@ -11,12 +11,12 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Bot sharepoint file viewer",
-    "full": "Bot sharepoint file viewer"
+    "short": "Bot SharePoint file viewer",
+    "full": "Bot SharePoint file viewer"
   },
   "description": {
-    "short": "Bot sharepoint file viewer",
-    "full": "This sample demos a bot which uploads file to SharePoint site and same files can be viewed in teams file viewer"
+    "short": "Bot SharePoint file viewer",
+    "full": "This sample demos a bot which uploads file to SharePoint site and same files can be viewed in Teams file viewer"
   },
   "icons": {
     "outline": "outline.png",
@@ -36,11 +36,11 @@
           "commands": [
             {
               "title": "uploadfile",
-              "description": "To upload file in sharepoint site"
+              "description": "To upload file in SharePoint site"
             },
             {
               "title": "viewfile",
-              "description": "To view file in teams file viewer"
+              "description": "To view file in Teams file viewer"
             }
           ]
         }

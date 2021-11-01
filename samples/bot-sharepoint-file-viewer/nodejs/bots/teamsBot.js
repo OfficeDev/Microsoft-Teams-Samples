@@ -14,7 +14,7 @@ class TeamsBot extends DialogBot {
     */
     constructor(conversationState, userState, dialog) {
         super(conversationState, userState, dialog);
-        this._ssoOAuthHelper = new SsoOAuthHelpler(process.env.connectionName, conversationState);
+        this._ssoOAuthHelper = new SsoOAuthHelpler(process.env.ConnectionName, conversationState);
 
         this.onMembersAdded(async (context, next) => {
             const membersAdded = context.activity.membersAdded;
@@ -47,7 +47,7 @@ class TeamsBot extends DialogBot {
         }
         await this.dialog.run(context, this.dialogState);
     }
-
+    
     async handleTeamsSigninVerifyState(context, query) {
         console.log('Running dialog with signin/verifystate from an Invoke Activity.');
         await this.dialog.run(context, this.dialogState);
