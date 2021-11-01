@@ -81,6 +81,7 @@ namespace ProductInspection.Controllers
             var productId = Request.Form["productId"];
             var image = Request.Form["image"];
             var status = Request.Form["status"];
+
             // Check if product id recieved is null
             if (string.IsNullOrEmpty(productId))
             {

@@ -20,12 +20,12 @@
   },
   "description": {
     "short": "Product Inspection",
-    "full": "This sample app demonstrate a feature where user can scan a product and mark it as approved/rejected."
+    "full": "This sample app demonstrate a feature where user can scan a product, capture a image and mark it as approved/rejected."
   },
   "accentColor": "#5558AF",
   "staticTabs": [
     {
-      "entityId": "index",
+      "entityId": "TabProductInspection",
       "name": "Capture image tab",
       "contentUrl": "https://<<base-url>>/index",
       "websiteUrl": "https://<<base-url>>/index",
