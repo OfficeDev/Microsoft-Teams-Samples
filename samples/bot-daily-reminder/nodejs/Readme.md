@@ -2,13 +2,11 @@
 
 This sample shows feature where user can schedule a task and get reminder on the scheduled date and time.
 
-![Check in card](Images/CheckinCard.png)
+![Schedule task ](Images/ScheduleTaskCard.png)
 
-![Geo Location](Images/GeoLocation.png)
+![Task Details ](Images/ScheduleTask.png)
 
-![User details card](Images/UserDetailsCard.png)
-
-![User last checkin card](Images/UserLastCheckInCard.png)
+![Task reminder](Images/TaskReminder.png)
 
 ## Prerequisites
 
@@ -60,9 +58,11 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 
 ## Features of this sample
 
-- Card with actions `Schedule task reminder`. 
+- Card with actions `Schedule task`. 
 
-![Schedule task reminder](Images/ScheduleTaskCard.png)
+![Schedule task ](Images/ScheduleTaskCard.png)
+
+![Task Details ](Images/ScheduleTask.png)
 
 - Task reminder
 

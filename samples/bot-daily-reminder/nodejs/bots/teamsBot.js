@@ -1,10 +1,12 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const { TeamsActivityHandler, CardFactory } = require("botbuilder");
+const { TeamsActivityHandler, CardFactory,TurnContext  } = require("botbuilder");
 const { TaskModuleResponseFactory } = require("../models/taskModuleResponseFactory");
-const taskDetails = {};
 const schedule = require('node-schedule');
+const taskDetails = {};
+var conversationReferences = {};
+var adapter;
 
 class TeamsBot extends TeamsActivityHandler {
     constructor() {
@@ -50,16 +52,54 @@ class TeamsBot extends TeamsActivityHandler {
         let taskDetails = {
             title: taskModuleRequest.data.title,
             dateTime: taskModuleRequest.data.dateTime,
+            description: taskModuleRequest.data.description,
         };
 
         this.saveTaskDetails(taskDetails);
-        await context.sendActivity("Task submitted successfully");
-        const date = new Date(2021, 10, 5, 20, 6, 0);
-        const job = schedule.scheduleJob(date, async function(){
-           console.log("hey");
-            //sendReminder("hello");
-        // await context.sendActivity("Task submitted.");
-          });
+        await context.sendActivity("Task submitted successfully. You will get reminder for the task at scheduled time");
+
+        const currentUser = context.activity.from.id;
+        conversationReferences[currentUser] = TurnContext.getConversationReference(context.activity);
+        adapter = context.adapter;
+
+        var year =taskModuleRequest.data.dateTime.substring(0, 4);
+        var month = taskModuleRequest.data.dateTime.substring(5, 7);
+        var day = taskModuleRequest.data.dateTime.substring(8, 10);
+        var hour = taskModuleRequest.data.dateTime.substring(11, 13);
+        var min = taskModuleRequest.data.dateTime.substring(14, 16);
+        const date = new Date(year,month-1,day,hour,min);
+
+         const job = schedule.scheduleJob(date, async function(){
+           await adapter.continueConversation(conversationReferences[currentUser], async turnContext => {
+            const userCard = CardFactory.adaptiveCard({
+                $schema: "http://adaptivecards.io/schemas/adaptive-card.json",
+                body: [
+                    {
+                        type: "TextBlock",
+                        size: "Medium",
+                        weight: "Bolder",
+                        text: "Reminder for scheduled task"
+                    },
+                    {
+                        type: "TextBlock",
+                        size: "Medium",
+                        weight: "Bolder",
+                        text: "Task title: " + taskDetails["taskDetails"].title
+                    },
+                    {
+                        type: "TextBlock",
+                        size: "Medium",
+                        weight: "Bolder",
+                        text: "Task description: " + taskDetails["taskDetails"].description
+                    },
+                ],
+                type: "AdaptiveCard",
+                version: "1.2"
+            });
+
+             await turnContext.sendActivity({ attachments: [userCard] });
+         });
+        });
 
         return null;
     }
@@ -69,10 +109,7 @@ class TeamsBot extends TeamsActivityHandler {
         taskDetails["taskDetails"] = taskDetails;
     }
 
-    sendReminder(test){
-        console.log(test);
-    }
-
+    // This method is used to create adaptive card.
     adaptiveCardForTaskModule = () => ({
         $schema: "http://adaptivecards.io/schemas/adaptive-card.json",
         body: [

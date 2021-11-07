@@ -14,7 +14,7 @@
         function submit() {
             debugger;
             var isValid = true;
-            $('#taskTitle,#taskdatetime').each(function (e) {
+            $('#taskTitle,#taskdatetime,#taskdescription').each(function (e) {
                 if ($.trim($(this).val()) == '') {
                     isValid = false;
                     $(this).css({
@@ -36,6 +36,7 @@
             let taskInfo = {
                 title: $('#taskTitle').val(),
                 dateTime: $('#taskdatetime').val(),
+                description:$('#taskdescription').val(),
             };
 
           microsoftTeams.tasks.submitTask(taskInfo);
@@ -51,8 +52,15 @@
                 <input type="text" id="taskTitle" name="taskTitle">
                 <br/>
                 <br/>
+                <label for="description" class="description">Task description</label>
+                <br>
+                <input type="text" id="taskdescription" name="taskdescription">
+                <br/>
+                <br/>
                 <label for="taskdatetime">Date and time</label>
+                <br/>
                 <input type="datetime-local" id="taskdatetime" name="taskdatetime">
+                </br>
                 </br>
                 <button type="button" class="btn-send save" onclick="submit()">Submit</button>
             </div>
