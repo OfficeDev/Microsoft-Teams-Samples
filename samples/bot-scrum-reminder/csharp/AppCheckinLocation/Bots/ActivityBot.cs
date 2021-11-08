@@ -128,6 +128,8 @@ namespace AppCheckinLocation.Bots
         {
             var locationInfo = JObject.FromObject(taskModuleRequest.Data);
 
+            Console.WriteLine("Hello task");
+
             await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForTaskModule()), cancellationToken);
 
             Scheduler sc = new Scheduler();

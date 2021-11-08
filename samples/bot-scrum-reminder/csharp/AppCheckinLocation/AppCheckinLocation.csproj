@@ -11,7 +11,8 @@
     <PackageReference Include="Microsoft.Bot.Builder.Dialogs" Version="4.14.1" />
     <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.14.0" />
     <PackageReference Include="Microsoft.Graph" Version="3.35.0" />
-    <PackageReference Include="Quartz" Version="2.3.3" />
+    <PackageReference Include="Quartz" Version="3.3.3" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
   </ItemGroup>
 
     <ItemGroup>

@@ -1,13 +1,16 @@
 ﻿using Quartz;
 using System;
+using System.Threading.Tasks;
 
 namespace AppCheckinLocation
 {
     public class Job: IJob
     {
-        public void Execute(IJobExecutionContext context)
+        public Task Execute(IJobExecutionContext context)
         {
-            Console.WriteLine("Hello task");
+            Console.WriteLine("Hello Job");
+
+            return null;
         }
     }
 }
