@@ -48,7 +48,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |13|Build tabs with Adaptive Cards | Microsoft Teams tab sample code which demonstrates how to [Build tabs with Adaptive Cards](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs) | [View][tab-adaptive-cards#csharp]               |                | [View][tab-adaptive-cards#js]|
 |14|Tab in stage view   | Microsoft Teams tab sample app for demonstrating tab in stage view |[View][tab-stage-view#csharp] |          | [View][tab-stage-view#js] |
 |15|Create Conversational tab     | Microsoft Teams tab sample app for demonstrating create conversation tab | [View][tab-conversation#csharp]          |           |[View][tab-conversation#nodejs]
-|16| Product inspection | Demonstrating a feature where user can scan a product and mark it as approved/rejected. |[View][tab-product-inspection#csharp]|
+|16| Product inspection | Demonstrating a feature where user can scan a product and mark it as approved/rejected. |[View][tab-product-inspection#csharp]|[View][productinspection#nodejs]|
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
@@ -104,6 +104,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |1|Connectors             | Sample Office 365 Connector generating notifications to teams channel.                              |[View][connector#cs]       |[View][connector#ts]
 |2|Generic connectors sample | Sample code for a generic connector that's easy to customize for any system which supports webhooks.   |    |[View][connector-generic#ts]
 |3|Outgoing Webhooks      | Samples to create "Custom Bots" to be used in Microsoft Teams.                                        |[View][outgoing-webhook#cs]|[View][outgoing-webhook#ts]
+|4|Authentication in todo Connector App      | This is a sample app which shows connector authentication and sends notification on task creation.                                        ||[View][auth-in-connector#nodejs] 
 
 ## [Graph APIs](https://docs.microsoft.com/graph/teams-concept-overview)
 
@@ -189,6 +190,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 [sequential#workflow#csharp]:samples/bot-sequential-flow-adaptive-cards/csharp
 [sequential#workflow#js]:samples/bot-sequential-flow-adaptive-cards/nodejs
 [app-auth#ts]:samples/app-auth/nodejs
+[auth-in-connector#nodejs]:samples/connector-todo-notification/nodejs
 
 [app-task-module#cs]:samples/app-task-module/csharp
 [app-task-module#ts]:samples/app-task-module/nodejs
@@ -229,6 +231,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 [fetchgroupchatmessages#nodejs]:samples/bot-archive-groupchat-messages/nodejs
 [appcheckinlocation#csharp]:samples/app-checkin-location/csharp
 [checkinlocation#nodejs]:samples/app-checkin-location/nodejs
+[productinspection#nodejs]:samples/tab-product-inspection/nodejs
 
 [app-localization#cs]:samples/app-localization/csharp
 [app-localization#js]:samples/app-localization/nodejs
