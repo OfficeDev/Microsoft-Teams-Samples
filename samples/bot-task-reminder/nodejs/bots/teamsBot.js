@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const { TeamsActivityHandler, CardFactory,TurnContext  } = require("botbuilder");
+const { TeamsActivityHandler, CardFactory, TurnContext } = require("botbuilder");
 const { TaskModuleResponseFactory } = require("../models/taskModuleResponseFactory");
 const schedule = require('node-schedule');
 const taskDetails = {};
@@ -16,7 +16,7 @@ class TeamsBot extends TeamsActivityHandler {
             const membersAdded = context.activity.membersAdded;
             for (let member = 0; member < membersAdded.length; member++) {
                 if (membersAdded[member].id !== context.activity.recipient.id) {
-                    await context.sendActivity("Hello and welcome! With this sample you can schedule a task and get reminder on the scheduled date and time.(use command 'create-reminder').");
+                    await context.sendActivity("Hello and welcome! With this sample you can schedule a task and get reminder on the scheduled date and time.(use command 'create-reminder')");
                 }
             }
 
@@ -44,6 +44,7 @@ class TeamsBot extends TeamsActivityHandler {
             taskInfo.width = 350;
             taskInfo.title = "Schedule task";
         }
+
         return TaskModuleResponseFactory.toTaskModuleResponse(taskInfo);
     }
 
@@ -62,43 +63,43 @@ class TeamsBot extends TeamsActivityHandler {
         conversationReferences[currentUser] = TurnContext.getConversationReference(context.activity);
         adapter = context.adapter;
 
-        var year =taskModuleRequest.data.dateTime.substring(0, 4);
+        var year = taskModuleRequest.data.dateTime.substring(0, 4);
         var month = taskModuleRequest.data.dateTime.substring(5, 7);
         var day = taskModuleRequest.data.dateTime.substring(8, 10);
         var hour = taskModuleRequest.data.dateTime.substring(11, 13);
         var min = taskModuleRequest.data.dateTime.substring(14, 16);
-        const date = new Date(year,month-1,day,hour,min);
+        const date = new Date(year, month - 1, day, hour, min);
 
-         const job = schedule.scheduleJob(date, async function(){
-           await adapter.continueConversation(conversationReferences[currentUser], async turnContext => {
-            const userCard = CardFactory.adaptiveCard({
-                $schema: "http://adaptivecards.io/schemas/adaptive-card.json",
-                body: [
-                    {
-                        type: "TextBlock",
-                        size: "Medium",
-                        weight: "Bolder",
-                        text: "Reminder for scheduled task"
-                    },
-                    {
-                        type: "TextBlock",
-                        size: "Medium",
-                        weight: "Bolder",
-                        text: "Task title: " + taskDetails["taskDetails"].title
-                    },
-                    {
-                        type: "TextBlock",
-                        size: "Medium",
-                        weight: "Bolder",
-                        text: "Task description: " + taskDetails["taskDetails"].description
-                    },
-                ],
-                type: "AdaptiveCard",
-                version: "1.2"
+        const job = schedule.scheduleJob(date, async function () {
+            await adapter.continueConversation(conversationReferences[currentUser], async turnContext => {
+                const userCard = CardFactory.adaptiveCard({
+                    $schema: "http://adaptivecards.io/schemas/adaptive-card.json",
+                    body: [
+                        {
+                            type: "TextBlock",
+                            size: "Medium",
+                            weight: "Bolder",
+                            text: "Reminder for scheduled task"
+                        },
+                        {
+                            type: "TextBlock",
+                            size: "Medium",
+                            weight: "Bolder",
+                            text: "Task title: " + taskDetails["taskDetails"].title
+                        },
+                        {
+                            type: "TextBlock",
+                            size: "Medium",
+                            weight: "Bolder",
+                            text: "Task description: " + taskDetails["taskDetails"].description
+                        },
+                    ],
+                    type: "AdaptiveCard",
+                    version: "1.2"
+                });
+
+                await turnContext.sendActivity({ attachments: [userCard] });
             });
-
-             await turnContext.sendActivity({ attachments: [userCard] });
-         });
         });
 
         return null;

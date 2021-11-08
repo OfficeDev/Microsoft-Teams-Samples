@@ -31,7 +31,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/bot-daily-reminder/nodejs`
+2) In a terminal, navigate to `samples/bot-task-reminder/nodejs`
 
 3) Install modules
 
