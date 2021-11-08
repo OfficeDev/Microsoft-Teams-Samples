@@ -30,18 +30,7 @@ jobs:
         with:
           dotnet-version: '3.1.301'
           include-prerelease: true
-          
-      - name: Set up Node.js version
-        uses: actions/setup-node@v1
-        with:
-          node-version: '14.x'
-          
-      - name: npm install and build
-        working-directory: ${{ env.CLIENT_APP_PATH }}
-        run: |
-          npm install
-          npm run build --if-present
-          
+
       - name: Build app
         run: dotnet build "${{ env.PROJECT_PATH }}" --configuration Release
 
