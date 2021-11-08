@@ -44,7 +44,7 @@
 ![Permissions](BotWithSharePointFileViewer/Images/permissions.png)
 
 5. SharePoint site configuration
-   - Login to [sharepoint](https://m365x357260.sharepoint.com/_layouts/15/sharepoint.aspx?)
+   - Login to [sharepoint](https://www.office.com/launch/sharepoint?auth=2)
    - Click on `Create site` and select `Team site`
    
    ![Team Site](BotWithSharePointFileViewer/Images/teamSite.png)
