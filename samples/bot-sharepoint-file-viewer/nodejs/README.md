@@ -31,7 +31,7 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
 ![Permissions](Images/permissions.png)
 
 ### 2. Setup Sharepoint site configuration
-- Login to [sharepoint](https://m365x357260.sharepoint.com/_layouts/15/sharepoint.aspx?)
+- Login to [sharepoint](https://www.office.com/launch/sharepoint?auth=2)
 - Click on `Create site` and select `Team site`
    
    ![Team Site](Images/teamSite.png)
