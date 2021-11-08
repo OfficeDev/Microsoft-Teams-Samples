@@ -23,6 +23,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |10|App installation using QR code | Sample app that generates a QR or installs app using the QR code.|[View](/demo%20manifest/App-Installation-Using-QR.zip)     |
 |11|App checkin location | Demonstrating feature where user can checkin with current location and view all previous checkins.|[View](/demo%20manifest/App-checkin-location.zip)     |
 |12|Teams tab graph toolkit | This sample demos building teams tab using microsoft graph toolkit|[View](/demo%20manifest/Teams-tab-graph-toolkit.zip)     |
+|13| Product inspection | Demonstrating a feature where user can scan a product and mark it as approved/rejected. |[View](/demo%20manifest/Tab-Product-Inspection.zip)     |
 
 ## [Getting Started - Samples and Tutorials](https://docs.microsoft.com/microsoftteams/platform/tutorials/get-started-dotnet-app-studio)
 
