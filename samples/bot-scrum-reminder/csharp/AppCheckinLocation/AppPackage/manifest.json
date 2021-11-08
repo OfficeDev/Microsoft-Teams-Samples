@@ -1,0 +1,55 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.10/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.10",
+  "version": "1.0.0",
+  "id": "6e9d440a-fb75-49d4-a522-1bf3b93bd520",
+  "packageName": "com.microsoft.teams.appcheckinlocation",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "App reminder Prithvi",
+    "full": "Get check in location of user"
+  },
+  "description": {
+    "short": "App reminder Prithvi",
+    "full": "This sample shows feature where user can checkin with current location and view all previous checkins."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
+  "bots": [
+    {
+      "botId": "68af893d-75e2-4277-857e-3105101e9a8b",
+      "scopes": [
+        "personal"
+      ],
+      "commandLists": [
+        {
+          "scopes": [
+            "personal"
+          ],
+          "commands": [
+            {
+              "title": "create-reminder",
+              "description": "To schedule a reminder"
+            }
+          ]
+        }
+      ],
+      "isNotificationOnly": false
+    }
+  ],
+  "permissions": [ "identity", "messageTeamMembers" ],
+  "devicePermissions": [
+    "geolocation"
+  ],
+  "validDomains": [
+    "d37c-116-75-27-174.ngrok.io"
+  ]
+}
