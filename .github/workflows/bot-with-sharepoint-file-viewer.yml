@@ -8,7 +8,7 @@ on:
     #Change the branch name to <<main>>
     #Change the path to the folder where your code resides. Any change here will start the activity. 
     branches:
-      - v-nikija/bot-sharepoint-file-viewer
+      - main
     paths:
       - 'samples/bot-sharepoint-file-viewer/**'  
   workflow_dispatch:
