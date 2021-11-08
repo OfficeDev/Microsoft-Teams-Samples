@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js" integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        microsoftTeams.initialize(() => {
+            scanBarCode();
+        });
+        var productId;
+
+        // Method to scan barcode
+        function scanBarCode() {
+            var config = {
+                timeOutIntervalInSec: 30
+            };
+
+            // Method that enables the user to scan different types of barcode, and returns the product id as string.
+            microsoftTeams.media.scanBarCode((error, decodedText) => {
+                // If there's any error, an alert shows the error message/code
+                if (error) {
+                    if (error.message) {
+                        alert(" ErrorCode: " + error.errorCode + error.message);
+                    } else {
+                        alert(" ErrorCode: " + error.errorCode);
+                    }
+                } else if (decodedText) {
+                    productId = decodedText;
+                    window.location.href = window.location.origin + "/productDetails?productId=" + productId;
+                }
+            }, config);
+        }
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+        </div>
+    </div>
+</body>
+</html>
