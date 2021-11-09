@@ -30,12 +30,20 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
                 console.log("Some error occurred in the task module")
                 return
             }
+            var details = JSON.parse(note);
+            let files = new Array();
+            details.checkedValues.map((item: any) => {
+                if (item.isChecked == true) {
+                    files.push(item.name);
+                }
+            })
             if (note !== undefined) {
                 microsoftTeams.getContext((context) => {
                     const assetDetail: IAssetDetails = {
-                        message: note,
+                        message: details.note,
                         sharedBy: context.userPrincipalName!,
                         meetingId: context.meetingId!,
+                        files: files,
                     }
                     shareAssets(assetDetail)
                         .then((res) => {

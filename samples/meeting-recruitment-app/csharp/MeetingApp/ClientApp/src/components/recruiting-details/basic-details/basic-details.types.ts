@@ -25,4 +25,5 @@ export interface IAssetDetails {
   message: string;
   sharedBy: string;
   meetingId?: string;
+  files: Array<string>;
 }

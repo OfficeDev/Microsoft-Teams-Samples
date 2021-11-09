@@ -25,6 +25,9 @@ namespace MeetingApp.Controllers
         private readonly IBotFrameworkHttpAdapter _adapter;
         private readonly string _appId;
         private string meetingId;
+        private readonly string blobUrl;
+      //  var actions = new List<AdaptiveAction>();
+        public readonly List<AdaptiveAction> actions = new List<AdaptiveAction>();
 
         // Dependency injected dictionary for storing ConversationReference objects used in NotifyController to proactively message users
         private readonly ConcurrentDictionary<string, ConversationReference> _conversationReferences;
@@ -41,6 +44,7 @@ namespace MeetingApp.Controllers
             _conversationReferences = conversationReferences;
             _appId = configuration["MicrosoftAppId"] ?? string.Empty;
             _conversationDataReference = conversationDataReference;
+            blobUrl = configuration["BlobUrl"] ?? string.Empty;
         }
 
         /// <summary>
@@ -55,6 +59,17 @@ namespace MeetingApp.Controllers
             {
                 if (assetDetails != null)
                 {
+                    var url = blobUrl;
+                    foreach (var fileName in assetDetails.Files)
+                    {
+                        actions.Add(new AdaptiveOpenUrlAction
+                        {
+                            Title = fileName,
+                            Url = new Uri(url + "/"+fileName),
+
+                        });
+                    }
+
                     // Getting stored conversation data reference.
                     var dataToUpdate = new ConversationData();
                     _conversationDataReference.TryGetValue(assetDetails.MeetingId, out dataToUpdate);
@@ -65,7 +80,14 @@ namespace MeetingApp.Controllers
                     }
 
                     dataToUpdate.Note = assetDetails.Message;
-                    dataToUpdate.SharedByName = dataToUpdate.Roster.Length > 0 ? dataToUpdate.Roster.Where(entity => entity.Email == assetDetails.SharedBy).FirstOrDefault().GivenName : "";
+
+                    // This code is to get user name from roster.
+                    //if (dataToUpdate.Roster.Any(entity => entity.Email == assetDetails.SharedBy))
+                    //{
+                    //    dataToUpdate.SharedByName = dataToUpdate.Roster.Length > 0 ? dataToUpdate.Roster.Where(entity => entity.Email == assetDetails.SharedBy).FirstOrDefault().GivenName : "";
+                    //}
+
+                    dataToUpdate.SharedByName = "Hey, here is a message for you";
                     var meetingConversationReference = new ConversationReference();
                     _conversationReferences.TryGetValue(assetDetails.MeetingId, out meetingConversationReference);
                     meetingId = assetDetails.MeetingId;
@@ -99,13 +121,13 @@ namespace MeetingApp.Controllers
         {
             // If you encounter permission-related errors when sending this message, see
             // https://aka.ms/BotTrustServiceUrl
-            await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForMessage()));
+            await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForMessage(actions)));
         }
 
         /// <summary>
         /// Sample Adaptive card to send as proactive message.
         /// </summary>
-        private Attachment GetAdaptiveCardForMessage()
+        private Attachment GetAdaptiveCardForMessage(List<AdaptiveAction> actions)
         {
             var updatedData = new ConversationData();
             _conversationDataReference.TryGetValue(meetingId, out updatedData);
@@ -116,7 +138,7 @@ namespace MeetingApp.Controllers
                 {
                     new AdaptiveTextBlock
                     {
-                        Text = updatedData.SharedByName + " shared a message",
+                        Text = updatedData.SharedByName,
                         Weight = AdaptiveTextWeight.Lighter,
                         Spacing = AdaptiveSpacing.Medium,
                     },
@@ -127,14 +149,7 @@ namespace MeetingApp.Controllers
                         Spacing = AdaptiveSpacing.Medium,
                     },
                 },
-                Actions = new List<AdaptiveAction>
-                {
-                    new AdaptiveOpenUrlAction
-                    {
-                        Title = "View document",
-                        Url = new Uri("https://microsoftapc.sharepoint.com/_layouts/15/sharepoint.aspx"),
-                    },
-                },
+                Actions = actions
             };
 
             return new Attachment()
