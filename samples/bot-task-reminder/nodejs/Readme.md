@@ -1,4 +1,4 @@
-## Get Checkin info of user
+## Bot task reminder
 
 This sample shows feature where user can schedule a task and get reminder on the scheduled date and time.
 
