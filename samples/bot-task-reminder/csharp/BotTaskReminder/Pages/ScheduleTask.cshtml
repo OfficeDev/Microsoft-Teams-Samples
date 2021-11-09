@@ -1,0 +1,75 @@
+﻿@page
+@model AppCheckinLocation.Pages.ScheduleTaskModel
+@{
+}
+<head>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        .container{
+            margin-top: 1rem;
+            margin-left: 1.5rem;
+        }
+    </style>
+
+    <script>
+        microsoftTeams.initialize();
+
+        // Submit task details.
+        function submit() {
+            var isValid = true;
+            $('#taskTitle,#taskdatetime,#taskdescription').each(function (e) {
+                if ($.trim($(this).val()) == '') {
+                    isValid = false;
+                    $(this).css({
+                        "border": "1px solid red"
+                    });
+                }
+                else {
+                    $(this).css({
+                        "border": "",
+                        "background": ""
+                    });
+                }
+            });
+            if (isValid == false) {
+                e.preventDefault();
+                return false;
+            }
+            let taskInfo = {
+                title: $('#taskTitle').val(),
+                dateTime: $('#taskdatetime').val(),
+                description: $('#taskdescription').val(),
+            };
+            microsoftTeams.tasks.submitTask(taskInfo);
+        }
+    </script>
+</head>
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            <div class="container">
+                <label for="title" class="title">Task Title</label>
+                <br>
+                <input type="text" id="taskTitle" name="taskTitle">
+                <br />
+                <br />
+                <label for="description" class="description">Task description</label>
+                <br>
+                <input type="text" id="taskdescription" name="taskdescription">
+                <br />
+                <br />
+                <label for="taskdatetime">Date and time</label>
+                <br />
+                <input type="datetime-local" id="taskdatetime" name="taskdatetime">
+                <br/>
+                <br/>
+                <button type="button" class="btn-send save" onclick="submit()">Submit</button>
+            </div>
+        </div>
+    </div>
+</body>
