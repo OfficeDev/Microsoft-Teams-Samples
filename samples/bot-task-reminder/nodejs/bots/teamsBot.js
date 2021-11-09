@@ -34,6 +34,7 @@ class TeamsBot extends TeamsActivityHandler {
         });
     }
 
+    // Handle task module fetch.
     handleTeamsTaskModuleFetch(context, taskModuleRequest) {
         const cardTaskFetchId = taskModuleRequest.data.id;
         var taskInfo = {}; // TaskModuleTaskInfo
@@ -48,6 +49,7 @@ class TeamsBot extends TeamsActivityHandler {
         return TaskModuleResponseFactory.toTaskModuleResponse(taskInfo);
     }
 
+    // Handle task module submit action.
     async handleTeamsTaskModuleSubmit(context, taskModuleRequest) {
         // Create new object to save task details.
         let taskDetails = {
@@ -77,21 +79,23 @@ class TeamsBot extends TeamsActivityHandler {
                     body: [
                         {
                             type: "TextBlock",
-                            size: "Medium",
+                            size: "Default",
                             weight: "Bolder",
-                            text: "Reminder for scheduled task"
+                            text: "Reminder for scheduled task!"
                         },
                         {
                             type: "TextBlock",
-                            size: "Medium",
-                            weight: "Bolder",
-                            text: "Task title: " + taskDetails["taskDetails"].title
+                            size: "Default",
+                            weight: "Default",
+                            text: "Task title: " + taskDetails["taskDetails"].title,
+                            wrap: true
                         },
                         {
                             type: "TextBlock",
-                            size: "Medium",
-                            weight: "Bolder",
-                            text: "Task description: " + taskDetails["taskDetails"].description
+                            size: "Default",
+                            weight: "Default",
+                            text: "Task description: " + taskDetails["taskDetails"].description,
+                            wrap: true
                         },
                     ],
                     type: "AdaptiveCard",
@@ -116,7 +120,7 @@ class TeamsBot extends TeamsActivityHandler {
         body: [
             {
                 type: "TextBlock",
-                size: "Medium",
+                size: "Default",
                 weight: "Bolder",
                 text: "Please click on schedule to schedule task"
             },
