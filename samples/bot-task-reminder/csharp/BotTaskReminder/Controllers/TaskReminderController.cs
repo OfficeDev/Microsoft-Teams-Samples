@@ -61,16 +61,21 @@ namespace BotTaskReminder.Controllers
         {
             var taskList = new List<SaveTaskDetail>();
             _taskDetails.TryGetValue("taskDetails", out taskList);
+            var removeTask = new SaveTaskDetail();
 
-            foreach(var task in taskList)
+            foreach (var task in taskList)
             {
                 var time = new DateTimeOffset(DateTime.Now);
 
                 if(task.DateTime.Minute == time.Minute && task.DateTime.Hour == time.Hour && task.DateTime.Day == time.Day && task.DateTime.Month == time.Month && task.DateTime.Year == time.Year)
                 {
                     await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForTaskReminder(task.Title, task.Description)), cancellationToken);
+                    removeTask = task;
                 }              
-            }           
+            }
+
+            taskList.Remove(removeTask);
+            _taskDetails.AddOrUpdate("taskDetails", taskList, (key, newValue) => taskList);
         }
 
         /// <summary>
