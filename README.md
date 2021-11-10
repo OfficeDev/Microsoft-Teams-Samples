@@ -149,6 +149,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |14| App Installtion  using QR code |This sample demos app installation using QR code of application's app id | [View][qrappinstallation#csharp] | [View][qrappinstallation#nodejs]
 |15| Archive groupchat messages | Demonstrating on how a bot can archive groupchat messages and send it to user as a file. | [View][fetchgroupchatmessages#csharp] |[View][fetchgroupchatmessages#nodejs]|
 |16| App check in location | Demonstrating feature where user can checkin with current location and view all previous checkins. | [View][appcheckinlocation#csharp] |[View][checkinlocation#nodejs]|
+|17| Bot task reminder | Demonstrating feature where user can schedule a task and get reminder on the scheduled date and time | |[View][bottaskreminder#nodejs]|
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
@@ -229,6 +230,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 [fetchgroupchatmessages#nodejs]:samples/bot-archive-groupchat-messages/nodejs
 [appcheckinlocation#csharp]:samples/app-checkin-location/csharp
 [checkinlocation#nodejs]:samples/app-checkin-location/nodejs
+[bottaskreminder#nodejs]:samples/bot-task-reminder/nodejs
 
 [app-localization#cs]:samples/app-localization/csharp
 [app-localization#js]:samples/app-localization/nodejs
