@@ -27,34 +27,24 @@
     {
       "botId": "{{Microsoft-App-Id}}",
       "scopes": [
-        "personal"
+        "personal",
+        "team"
       ],
       "isNotificationOnly": false
     }
   ],
   "composeExtensions": [
     {
-      "botId": "{{Microsoft-App-Id}}",
+      "botId": "87a133ac-47f2-4d47-9af2-b9115a5edbf3",
       "canUpdateConfiguration": true,
       "commands": [
         {
-          "id": "searchQuery",
-          "context": [
-            "compose",
-            "commandBox"
-          ],
-          "description": "Test command to run query",
-          "title": "Search",
-          "type": "query",
-          "initialRun": true,
-          "parameters": [
-            {
-              "name": "searchQuery",
-              "title": "Search Query",
-              "description": "Your search query",
-              "inputType": "text"
-            }
-          ]
+          "id": "create-reminder",
+          "description": "Fetch create-reminder task module",
+          "title": "Create-reminder",
+          "type": "action",
+          "fetchTask": true,
+          "context": [ "message", "compose" ]
         }
       ]
     }

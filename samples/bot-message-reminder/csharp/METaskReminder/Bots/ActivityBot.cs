@@ -47,9 +47,20 @@ namespace METaskReminder.Bots
             MessagingExtensionAction action,
             CancellationToken cancellationToken)
         {
-            var title = action.MessagePayload.Body.Content.ToString();
+            var title = string.Empty;
+            var description = string.Empty;
 
-            return this.GetTaskModuleResponse(title);
+            if(action.MessagePayload.Subject != null)
+            {
+                description = action.MessagePayload.Body.Content;
+                title = action.MessagePayload.Subject;
+            }
+            else
+            {
+                title = action.MessagePayload.Body.Content;
+            }
+
+            return this.GetTaskModuleResponse(title, description);
         }
 
         /// <summary>
@@ -155,7 +166,7 @@ namespace METaskReminder.Bots
         /// </summary>
         /// <param name="questionAnswerCard">Question answer card as input.</param>
         /// <returns>MessagingExtensionActionResponse object.</returns>
-        private MessagingExtensionActionResponse GetTaskModuleResponse(string title)
+        private MessagingExtensionActionResponse GetTaskModuleResponse(string title,string description)
         {
             return new MessagingExtensionActionResponse
             {
@@ -163,7 +174,7 @@ namespace METaskReminder.Bots
                 {
                     Value = new TaskModuleTaskInfo
                     {
-                        Url = _applicationBaseUrl + "/" + "ScheduleTask?title="+title+"&",
+                        Url = _applicationBaseUrl + "/" + "ScheduleTask?title="+title+ "&description="+ description,
                         Height = 460,
                         Width = 600,
                         Title = "Schedule-task",

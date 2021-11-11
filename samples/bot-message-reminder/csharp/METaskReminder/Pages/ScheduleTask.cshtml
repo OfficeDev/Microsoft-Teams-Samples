@@ -22,7 +22,16 @@
         microsoftTeams.initialize(()=>{
             const params = window.location.search;
             title = params.substring(params.search("=")+1,params.search("&"));
+            description=params.substring(params.search("&")+13);
             $("#taskTitle").text(title.replace(/%20/g," "));
+
+            if(description == "") {
+                 $("#taskdescriptionteam").hide();
+            }
+            else {
+                $("#taskdescriptionteam").text(description.replace(/%20/g," "));
+                $("#taskdescription").hide();
+            }
         });
 
         // Submit task details.
@@ -46,10 +55,11 @@
                 e.preventDefault();
                 return false;
             }
+
             let taskInfo = {
                 title: title.replace(/%20/g," "),
                 dateTime: $('#taskdatetime').val(),
-                description: $('#taskdescription').val(),
+                description: description==""?$('#taskdescription').val():description,
             };
             microsoftTeams.tasks.submitTask(taskInfo);
         }
@@ -66,6 +76,7 @@
                 <br />
                 <label for="description" class="description">Task description</label>
                 <br>
+                <label id="taskdescriptionteam"></label>
                 <input type="text" id="taskdescription" name="taskdescription">
                 <br />
                 <br />
