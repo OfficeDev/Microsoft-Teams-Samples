@@ -22,9 +22,7 @@
         microsoftTeams.initialize(()=>{
             const params = window.location.search;
             title = params.substring(params.search("=")+1,params.search("&"));
-            description=params.substring(params.search("&")+13);
             $("#taskTitle").text(title.replace(/%20/g," "));
-            $("#taskdescription").text(description.replace(/%20/g," "));
         });
 
         // Submit task details.
@@ -51,7 +49,7 @@
             let taskInfo = {
                 title: title.replace(/%20/g," "),
                 dateTime: $('#taskdatetime').val(),
-                description: description.replace(/%20/g," "),
+                description: $('#taskdescription').val(),
             };
             microsoftTeams.tasks.submitTask(taskInfo);
         }
@@ -68,7 +66,7 @@
                 <br />
                 <label for="description" class="description">Task description</label>
                 <br>
-                <label id="taskdescription"></label>
+                <input type="text" id="taskdescription" name="taskdescription">
                 <br />
                 <br />
                 <label for="taskdatetime">Date and time</label>

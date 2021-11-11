@@ -5,10 +5,8 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AdaptiveCards;
 using METaskReminder.Models;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
@@ -37,57 +35,22 @@ namespace METaskReminder.Bots
             _applicationBaseUrl = configuration["ApplicationBaseUrl"] ?? throw new NullReferenceException("ApplicationBaseUrl");
         }
 
-        protected override async Task<MessagingExtensionResponse> OnTeamsMessagingExtensionQueryAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionQuery query, CancellationToken cancellationToken)
+        /// <summary>
+        /// When OnTurn method receives a submit invoke activity on bot turn, it calls this method.
+        /// </summary>
+        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
+        /// <param name="action">Provides context for a turn of a bot and.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents a task module response.</returns>
+        protected override async Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionFetchTaskAsync(
+            ITurnContext<IInvokeActivity> turnContext,
+            MessagingExtensionAction action,
+            CancellationToken cancellationToken)
         {
-            GetTaskList();
+            var title = action.MessagePayload.Body.Content.ToString();
 
-            var taskList = new List<SaveTaskDetail>();
-            _taskDetails.TryGetValue("taskDetails", out taskList);
-
-            var attachmentlist = new List<MessagingExtensionAttachment>();
-            foreach (var task in taskList)
-            {
-                var previewCard = new ThumbnailCard {
-                    Title = task.Title,
-                    Text = task.Description,
-                    Tap = new CardAction { Type = "invoke", Value = task } 
-                };
-                var attachment = new MessagingExtensionAttachment
-                {
-                    ContentType = ThumbnailCard.ContentType,
-                    Content = previewCard,
-                    Preview = previewCard.ToAttachment()
-                };
-                attachmentlist.Add(attachment);
-            }
-
-            return new MessagingExtensionResponse
-            {
-                ComposeExtension = new MessagingExtensionResult
-                {
-                    Type = "result",
-                    AttachmentLayout = "list",
-                    Attachments = attachmentlist
-                }
-            };
+            return this.GetTaskModuleResponse(title);
         }
-
-        protected override Task<MessagingExtensionResponse> OnTeamsMessagingExtensionSelectItemAsync(ITurnContext<IInvokeActivity> turnContext, JObject query, CancellationToken cancellationToken)
-        {
-            var asObject = ((JObject)query).ToObject<SaveTaskDetail>();
-            var attachment = GetAdaptiveCardForMessagingExtension(asObject.Title, asObject.Description);
-
-            return Task.FromResult(new MessagingExtensionResponse
-            {
-                ComposeExtension = new MessagingExtensionResult
-                {
-                    Type = "result",
-                    AttachmentLayout = "list",
-                    Attachments = new List<MessagingExtensionAttachment> { attachment }
-                }
-            });
-        }
-
 
         /// <summary>
         /// Handle request from bot.
@@ -117,56 +80,28 @@ namespace METaskReminder.Bots
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    GetTaskList();
                     await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample you can schedule a task from messaging extension and get reminder on the scheduled date and time."), cancellationToken);
                 }
             }
         }
 
         /// <summary>
-        /// Handle task module is fetch.
+        ///  Handle message extension submit action task received by the bot.
         /// </summary>
-        /// <param name = "turnContext" > The turn context.</param>
-        /// <param name = "taskModuleRequest" >The task module invoke request value payload.</param>
-        /// <param name="cancellationToken">The cancellation token.</param>
-        /// <returns>A Task Module Response for the request.</returns>
-        protected override Task<TaskModuleResponse> OnTeamsTaskModuleFetchAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
-        {
-            var asJobject = JObject.FromObject(taskModuleRequest.Data);
-            var buttonType = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.Id;
-            var title = (string)asJobject.ToObject<TaskDetails<string>>()?.Title;
-            var description = (string)asJobject.ToObject<TaskDetails<string>>()?.Description;
-            var taskModuleResponse = new TaskModuleResponse();
-
-            if (buttonType == "schedule")
-            {
-                taskModuleResponse.Task = new TaskModuleContinueResponse
-                {
-                    Type = "continue",
-                    Value = new TaskModuleTaskInfo()
-                    {
-                        Url = _applicationBaseUrl + "/" + "ScheduleTask?title="+title+"&description="+ description,
-                        Height = 350,
-                        Width = 350,
-                        Title = "Schedule Task",
-                    },
-                };
-            }
-
-            return Task.FromResult(taskModuleResponse);
-        }
-
-        /// <summary>
-        /// Handle task module is submit.
-        /// </summary>
-        /// <param name = "turnContext" > The turn context.</param>
-        /// <param name = "taskModuleRequest" >The task module invoke request value payload.</param>
-        /// <param name="cancellationToken">The cancellation token.</param>
-        /// <returns>A Task Module Response for the request.</returns>
-        protected override async Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
+        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
+        /// <param name="action">Messaging extension action value payload.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Response of messaging extension action.</returns>
+        /// <remarks>
+        /// Reference link: https://docs.microsoft.com/en-us/dotnet/api/microsoft.bot.builder.teams.teamsactivityhandler.onteamsmessagingextensionfetchtaskasync?view=botbuilder-dotnet-stable.
+        /// </remarks>
+        protected override async Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionSubmitActionAsync(
+            ITurnContext<IInvokeActivity> turnContext,
+            MessagingExtensionAction action,
+            CancellationToken cancellationToken)
         {
             AddConversationReference(turnContext.Activity as Activity);
-            var asJobject = JObject.FromObject(taskModuleRequest.Data);
+            var asJobject = JObject.FromObject(action.Data);
             var title = (string)asJobject.ToObject<TaskDetails<string>>()?.Title;
             var description = (string)asJobject.ToObject<TaskDetails<string>>()?.Description;
             var dateTime = (string)asJobject.ToObject<TaskDetails<string>>()?.DateTime;
@@ -177,13 +112,27 @@ namespace METaskReminder.Bots
             var hour = Convert.ToInt32(dateTime.Substring(11, 2));
             var min = Convert.ToInt32(dateTime.Substring(14, 2));
 
+            var currentTaskList = new List<SaveTaskDetail>();
             List<SaveTaskDetail> taskList = new List<SaveTaskDetail>();
-            _taskDetails.TryGetValue("taskDetails", out taskList);
+            _taskDetails.TryGetValue("taskDetails", out currentTaskList);
 
-            var task = taskList.FirstOrDefault(task => task.Title == title);
-            task.DateTime = new DateTimeOffset(year, month, day, hour, min, 0, TimeSpan.Zero);
-            _taskDetails.AddOrUpdate("taskDetails", taskList, (key, newValue) => taskList);
+            var taskDetails = new SaveTaskDetail()
+            {
+                Description = description,
+                Title = title,
+                DateTime = new DateTimeOffset(year, month, day, hour, min, 0, TimeSpan.Zero),
+            };
 
+            if (currentTaskList == null)
+            {
+                taskList.Add(taskDetails);
+                _taskDetails.AddOrUpdate("taskDetails", taskList, (key, newValue) => taskList);
+            }
+            else
+            {
+                currentTaskList.Add(taskDetails);
+                _taskDetails.AddOrUpdate("taskDetails", currentTaskList, (key, newValue) => currentTaskList);
+            }
             TaskScheduler taskSchedule = new TaskScheduler();
             taskSchedule.Start(year, month, day, hour, min, _applicationBaseUrl);
             await turnContext.SendActivityAsync("Task submitted successfully. You will get reminder for the task at scheduled time");
@@ -201,89 +150,25 @@ namespace METaskReminder.Bots
             _conversationReferences.AddOrUpdate(conversationReference.User.Id, conversationReference, (key, newValue) => conversationReference);
         }
 
-        // Generate task list.
-        private void GetTaskList()
-        {
-            var taskList = new List<SaveTaskDetail>(){
-                new SaveTaskDetail()
-                {
-                    Title= "Scrum call",
-                    Description = "Daily task update and blocker discussion with team"
-                },
-                new SaveTaskDetail()
-                {
-                    Title= "Testing",
-                    Description = "Testing call for project."
-                },
-                new SaveTaskDetail()
-                {
-                    Title= "Development",
-                    Description = "Development discussion with team."
-                },
-                new SaveTaskDetail()
-                {
-                    Title= "SLA call",
-                    Description = "SLA updates with client."
-                },
-                new SaveTaskDetail()
-                {
-                    Title= "Learning call",
-                    Description = "Learning call with team."
-                },
-            };
-
-            _taskDetails.AddOrUpdate("taskDetails", taskList, (key, newValue) => taskList);
-        }
-
         /// <summary>
-        /// Sample Adaptive card messaging extension.
+        /// Get messaging extension action response object to show collection of question answers.
         /// </summary>
-        private MessagingExtensionAttachment GetAdaptiveCardForMessagingExtension(string title, string description)
+        /// <param name="questionAnswerCard">Question answer card as input.</param>
+        /// <returns>MessagingExtensionActionResponse object.</returns>
+        private MessagingExtensionActionResponse GetTaskModuleResponse(string title)
         {
-
-            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
+            return new MessagingExtensionActionResponse
             {
-                Body = new List<AdaptiveElement>
+                Task = new TaskModuleContinueResponse()
                 {
-                    new AdaptiveTextBlock
+                    Value = new TaskModuleTaskInfo
                     {
-                        Text = "Task title:"+ title,
-                        Weight = AdaptiveTextWeight.Default,
-                        Spacing = AdaptiveSpacing.Medium,
-                        Wrap = true,
+                        Url = _applicationBaseUrl + "/" + "ScheduleTask?title="+title+"&",
+                        Height = 460,
+                        Width = 600,
+                        Title = "Schedule-task",
                     },
-                    new AdaptiveTextBlock
-                    {
-                        Text = "Task description:"+ description,
-                        Weight = AdaptiveTextWeight.Default,
-                        Spacing = AdaptiveSpacing.Medium,
-                        Wrap = true,
-                    }
                 },
-                Actions = new List<AdaptiveAction>
-                {
-                    new AdaptiveSubmitAction
-                    {
-                        Title = "Schedule task",
-                        Data = new AdaptiveCardAction
-                        {
-                            MsteamsCardAction = new CardAction
-                            {
-                                Type = "task/fetch",
-                            },
-                            Id="schedule",
-                            Title = title,
-                            Description = description
-                        },
-                    }
-                },
-            };
-
-
-            return new MessagingExtensionAttachment
-            {
-                ContentType = AdaptiveCard.ContentType,
-                Content = card,
             };
         }
     }
