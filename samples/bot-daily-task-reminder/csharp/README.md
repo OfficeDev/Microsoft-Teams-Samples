@@ -1,13 +1,13 @@
 ﻿﻿﻿
-## Bot task reminder
+## Bot daily task reminder
 
-This sample shows feature where user can schedule a task and get reminder on the scheduled date and time.
+This sample shows feature where user can schedule a recurring task and get reminder on the scheduled time.
 
-![Schedule task ](BotTaskReminder/Images/ScheduleTaskCard.png)
+![Schedule task ](BotDailyTaskReminder/Images/ScheduleTaskCard.png)
 
-![Task Details](BotTaskReminder/Images/ScheduleTask.png)
+![Task Details](BotDailyTaskReminder/Images/ScheduleTask.png)
 
-![Task reminder](BotTaskReminder/Images/TaskReminder.png)
+![Task reminder](BotDailyTaskReminder/Images/TaskReminder.png)
 
 ## Prerequisites
 
@@ -71,8 +71,8 @@ This sample shows feature where user can schedule a task and get reminder on the
    B) Or from Visual Studio
      - Launch Visual Studio
      - File -> Open -> Project/Solution
-     - Navigate to `BotTaskReminder` folder
-     - Select `BotTaskReminder.csproj` file
+     - Navigate to `BotDailyTaskReminder` folder
+     - Select `BotDailyTaskReminder.csproj` file
      - Press `F5` to run the project 
 
 9) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
@@ -85,13 +85,13 @@ This sample shows feature where user can schedule a task and get reminder on the
 
 - Card with actions `Schedule task`. 
 
-![Schedule task ](BotTaskReminder/Images/ScheduleTaskCard.png)
+![Schedule task ](BotDailyTaskReminder/Images/ScheduleTaskCard.png)
 
-![Task Details ](BotTaskReminder/Images/ScheduleTask.png)
+![Task Details ](BotDailyTaskReminder/Images/ScheduleTask.png)
 
 - Task reminder
 
-![Task reminder](BotTaskReminder/Images/TaskReminder.png)
+![Task reminder](BotDailyTaskReminder/Images/TaskReminder.png)
 
 
 ## Deploy the bot to Azure

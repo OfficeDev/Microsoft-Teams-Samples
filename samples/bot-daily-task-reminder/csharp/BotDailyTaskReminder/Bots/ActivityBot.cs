@@ -16,7 +16,7 @@ using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 
-namespace BotTaskReminder.Bots
+namespace BotDailyTaskReminder.Bots
 {
     /// <summary>
     /// Bot Activity handler class.
@@ -79,7 +79,7 @@ namespace BotTaskReminder.Bots
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample you can schedule a task and get reminder on the scheduled date and time.(use command 'create-reminder')."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample you can schedule a recurring task and get reminder on the scheduled time.(use command 'create-reminder')."), cancellationToken);
                 }
             }
         }
@@ -105,8 +105,8 @@ namespace BotTaskReminder.Bots
                     Value = new TaskModuleTaskInfo()
                     {
                         Url = _applicationBaseUrl + "/" + "ScheduleTask",
-                        Height = 350,
-                        Width = 350,
+                        Height = 450,
+                        Width = 450,
                         Title = "Schedule Task",
                     },
                 };
@@ -128,6 +128,8 @@ namespace BotTaskReminder.Bots
             var title = (string)asJobject.ToObject<TaskDetails<string>>()?.Title;
             var description = (string)asJobject.ToObject<TaskDetails<string>>()?.Description;
             var dateTime = (string)asJobject.ToObject<TaskDetails<string>>()?.DateTime;
+            var selectedDaysObject = (JArray)asJobject.ToObject<TaskDetails<JArray>>()?.SelectedDays;
+            var selectedDays = selectedDaysObject.ToObject<List<string>>();
 
             var year = Convert.ToInt32(dateTime.Substring(0, 4));
             var month = Convert.ToInt32(dateTime.Substring(5, 2));
@@ -135,6 +137,7 @@ namespace BotTaskReminder.Bots
             var hour = Convert.ToInt32(dateTime.Substring(11, 2));
             var min = Convert.ToInt32(dateTime.Substring(14, 2));
 
+            var recurringDays = string.Join(",", selectedDays);
             var currentTaskList = new List<SaveTaskDetail>();
             List<SaveTaskDetail> taskList = new List<SaveTaskDetail>();
             _taskDetails.TryGetValue("taskDetails", out currentTaskList);
@@ -144,6 +147,7 @@ namespace BotTaskReminder.Bots
                 Description = description,
                 Title = title,
                 DateTime = new DateTimeOffset(year, month, day, hour, min,0, TimeSpan.Zero),
+                SelectedDays = selectedDays
             };
 
             if(currentTaskList == null)
@@ -158,7 +162,7 @@ namespace BotTaskReminder.Bots
             }
             
             TaskScheduler taskSchedule = new TaskScheduler();
-            taskSchedule.Start(year, month, day, hour, min, _applicationBaseUrl);
+            taskSchedule.Start(hour, min, _applicationBaseUrl, recurringDays);
             await turnContext.SendActivityAsync("Task submitted successfully. You will get reminder for the task at scheduled time");
 
             return null;

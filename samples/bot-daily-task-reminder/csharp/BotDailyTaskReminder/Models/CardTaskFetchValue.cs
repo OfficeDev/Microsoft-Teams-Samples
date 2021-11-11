@@ -4,7 +4,7 @@
 
 using Newtonsoft.Json;
 
-namespace BotTaskReminder.Models
+namespace BotDailyTaskReminder.Models
 {
     /// <summary>
     /// Card task fetch value model class.

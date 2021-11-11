@@ -6,13 +6,14 @@ using System;
 using Quartz;
 using Quartz.Impl;
 
-namespace BotTaskReminder
+namespace BotDailyTaskReminder
 {
     public class TaskScheduler
     {
         // Method to schedule task.
-        public void Start(int year, int month, int day, int hour, int min, string baseUrl)
+        public void Start(int hour, int min, string baseUrl,string selectedDays)
         {
+            var cronExpression = $"0 {min} {hour} ? * {selectedDays}";
             var triggerName = Guid.NewGuid().ToString();
             var scheduler = StdSchedulerFactory.GetDefaultScheduler().GetAwaiter().GetResult();
             scheduler.Start();
@@ -20,10 +21,11 @@ namespace BotTaskReminder
                                     UsingJobData("baseUrl", baseUrl).
                                     Build();
             ITrigger trigger = TriggerBuilder.Create()
-             .WithIdentity(triggerName, triggerName)
-               .StartAt(DateBuilder.DateOf(hour, min, 0, day, month, year))
-               .WithPriority(1)
-               .Build();
+                                    .ForJob(job)
+                                    .WithCronSchedule(cronExpression)
+                                    .WithIdentity(triggerName)
+                                    .StartNow()
+                                    .Build();
 
             scheduler.ScheduleJob(job, trigger);
         }

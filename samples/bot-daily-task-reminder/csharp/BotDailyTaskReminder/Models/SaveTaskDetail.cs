@@ -3,8 +3,9 @@
 // </copyright>
 
 using System;
+using System.Collections.Generic;
 
-namespace BotTaskReminder.Models
+namespace BotDailyTaskReminder.Models
 {
     /// <summary>
     /// Save task detail model class.
@@ -25,5 +26,10 @@ namespace BotTaskReminder.Models
         /// Gets or sets date-time value of task.
         /// </summary>
         public DateTimeOffset DateTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets selected days value of task.
+        /// </summary>
+        public List<string> SelectedDays { get; set; }
     }
 }

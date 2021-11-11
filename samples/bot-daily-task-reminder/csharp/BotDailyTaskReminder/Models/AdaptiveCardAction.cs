@@ -2,7 +2,7 @@
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
-namespace BotTaskReminder.Models
+namespace BotDailyTaskReminder.Models
 {
     using Microsoft.Bot.Schema;
     using Newtonsoft.Json;

@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 using AdaptiveCards;
-using BotTaskReminder.Models;
+using BotDailyTaskReminder.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BotTaskReminder.Controllers
+namespace BotDailyTaskReminder.Controllers
 {
     /// <summary>
     /// Class with properties related to task reminder.
@@ -61,21 +61,22 @@ namespace BotTaskReminder.Controllers
         {
             var taskList = new List<SaveTaskDetail>();
             _taskDetails.TryGetValue("taskDetails", out taskList);
-            var removeTask = new SaveTaskDetail();
 
             foreach (var task in taskList)
             {
                 var time = new DateTimeOffset(DateTime.Now);
 
-                if(task.DateTime.Minute == time.Minute && task.DateTime.Hour == time.Hour && task.DateTime.Day == time.Day && task.DateTime.Month == time.Month && task.DateTime.Year == time.Year)
+                if (task.DateTime.Minute == time.Minute && task.DateTime.Hour == time.Hour)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForTaskReminder(task.Title, task.Description)), cancellationToken);
-                    removeTask = task;
-                }              
+                    foreach (var day in task.SelectedDays)
+                    {
+                        if (Convert.ToInt32(day) == ((int)time.DayOfWeek))
+                        {
+                             await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForTaskReminder(task.Title, task.Description)), cancellationToken);
+                        }
+                    }                        
+                }             
             }
-
-            taskList.Remove(removeTask);
-            _taskDetails.AddOrUpdate("taskDetails", taskList, (key, newValue) => taskList);
         }
 
         /// <summary>
@@ -98,12 +99,14 @@ namespace BotTaskReminder.Controllers
                         Text = "Task title:"+ title,
                         Weight = AdaptiveTextWeight.Default,
                         Spacing = AdaptiveSpacing.Medium,
+                        Wrap = true,
                     },
                     new AdaptiveTextBlock
                     {
                         Text = "Task description:"+ description,
                         Weight = AdaptiveTextWeight.Default,
                         Spacing = AdaptiveSpacing.Medium,
+                        Wrap = true,
                     }
                 },
             };

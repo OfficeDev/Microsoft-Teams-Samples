@@ -4,7 +4,7 @@
 
 using Newtonsoft.Json;
 
-namespace BotTaskReminder.Models
+namespace BotDailyTaskReminder.Models
 {
     /// <summary>
     /// Task details model class.
@@ -28,5 +28,11 @@ namespace BotTaskReminder.Models
         /// </summary>
         [JsonProperty("dateTime")]
         public object DateTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets slected days value of task.
+        /// </summary>
+        [JsonProperty("selectedDays")]
+        public object SelectedDays { get; set; }
     }
 }

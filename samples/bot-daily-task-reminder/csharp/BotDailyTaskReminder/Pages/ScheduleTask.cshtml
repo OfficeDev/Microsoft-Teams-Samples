@@ -22,6 +22,8 @@
         // Submit task details.
         function submit() {
             var isValid = true;
+            let checkboxArray = [];
+
             $('#taskTitle,#taskdatetime,#taskdescription').each(function (e) {
                 if ($.trim($(this).val()) == '') {
                     isValid = false;
@@ -36,14 +38,23 @@
                     });
                 }
             });
+
             if (isValid == false) {
                 e.preventDefault();
                 return false;
             }
+
+            $('input[type=checkbox]').each(function () {
+                if (this.checked) {
+                    checkboxArray.push($(this).val())
+                }
+            });
+
             let taskInfo = {
                 title: $('#taskTitle').val(),
                 dateTime: $('#taskdatetime').val(),
                 description: $('#taskdescription').val(),
+                selectedDays: checkboxArray,
             };
             microsoftTeams.tasks.submitTask(taskInfo);
         }
@@ -66,6 +77,25 @@
                 <label for="taskdatetime">Date and time</label>
                 <br />
                 <input type="datetime-local" id="taskdatetime" name="taskdatetime">
+                <br/>
+                <br/>
+                <span>Please select days to be repeated</span>
+                <br/>
+                <br/>
+                <input type="checkbox" id="monday" name="monday" value="1">
+                <label for="monday">Monday</label><br>
+                <input type="checkbox" id="tuesday" name="tuesday" value="2">
+                <label for="tuesday">Tuesday</label><br>
+                <input type="checkbox" id="wednesday" name="wednesday" value="3">
+                <label for="wednesday">Wednesday</label><br>
+                <input type="checkbox" id="thursday" name="thursday" value="4">
+                <label for="thursday">Thursday</label><br>
+                <input type="checkbox" id="friday" name="friday" value="5">
+                <label for="friday">Friday</label><br>
+                <input type="checkbox" id="saturday" name="saturday" value="6">
+                <label for="saturday">Saturday</label><br>
+                <input type="checkbox" id="sunday" name="sunday" value="0">
+                <label for="sunday">Sunday</label>
                 <br/>
                 <br/>
                 <button type="button" class="btn-send save" onclick="submit()">Submit</button>
