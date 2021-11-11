@@ -61,5 +61,5 @@ jobs:
         with:
           app-name: 'appcheckin'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_App_Checkin_Location }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BOT_DAILY_TASK_REMINDER }}
           package: .
