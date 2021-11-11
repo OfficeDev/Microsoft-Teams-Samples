@@ -9,7 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AdaptiveCards;
-using BotTaskReminder.Models;
+using METaskReminder.Models;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
@@ -17,7 +17,7 @@ using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 
-namespace BotTaskReminder.Bots
+namespace METaskReminder.Bots
 {
     /// <summary>
     /// Bot Activity handler class.
@@ -39,6 +39,8 @@ namespace BotTaskReminder.Bots
 
         protected override async Task<MessagingExtensionResponse> OnTeamsMessagingExtensionQueryAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionQuery query, CancellationToken cancellationToken)
         {
+            GetTaskList();
+
             var taskList = new List<SaveTaskDetail>();
             _taskDetails.TryGetValue("taskDetails", out taskList);
 
@@ -72,55 +74,8 @@ namespace BotTaskReminder.Bots
 
         protected override Task<MessagingExtensionResponse> OnTeamsMessagingExtensionSelectItemAsync(ITurnContext<IInvokeActivity> turnContext, JObject query, CancellationToken cancellationToken)
         {
-            // The Preview card's Tap should have a Value property assigned, this will be returned to the bot in this event. 
             var asObject = ((JObject)query).ToObject<SaveTaskDetail>();
-
-            // We take every row of the results and wrap them in cards wrapped in in MessagingExtensionAttachment objects.
-            // The Preview is optional, if it includes a Tap, that will trigger the OnTeamsMessagingExtensionSelectItemAsync event back on this bot.
-
-            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
-            {
-                Body = new List<AdaptiveElement>
-                {
-                    new AdaptiveTextBlock
-                    {
-                        Text = "Task title:"+ asObject.Title,
-                        Weight = AdaptiveTextWeight.Default,
-                        Spacing = AdaptiveSpacing.Medium,
-                        Wrap = true, 
-                    },
-                    new AdaptiveTextBlock
-                    {
-                        Text = "Task description:"+ asObject.Description,
-                        Weight = AdaptiveTextWeight.Default,
-                        Spacing = AdaptiveSpacing.Medium,
-                        Wrap = true,
-                    }
-                },
-                Actions = new List<AdaptiveAction>
-                {
-                    new AdaptiveSubmitAction
-                    {
-                        Title = "Schedule task",
-                        Data = new AdaptiveCardAction
-                        {
-                            MsteamsCardAction = new CardAction
-                            {
-                                Type = "task/fetch",
-                            },
-                            Id="schedule",
-                            Title = asObject.Title,
-                            Description = asObject.Description
-                        },
-                    }
-                },
-            };
-
-            var attachment = new MessagingExtensionAttachment
-            {
-                ContentType = AdaptiveCard.ContentType,
-                Content = card,
-            };
+            var attachment = GetAdaptiveCardForMessagingExtension(asObject.Title, asObject.Description);
 
             return Task.FromResult(new MessagingExtensionResponse
             {
@@ -163,7 +118,7 @@ namespace BotTaskReminder.Bots
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
                     GetTaskList();
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample you can schedule a task and get reminder on the scheduled date and time.(use command 'create-reminder')."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample you can schedule a task from messaging extension and get reminder on the scheduled date and time."), cancellationToken);
                 }
             }
         }
@@ -258,26 +213,78 @@ namespace BotTaskReminder.Bots
                 new SaveTaskDetail()
                 {
                     Title= "Testing",
-                    Description = "Daily task update and blocker discussion with team"
+                    Description = "Testing call for project."
                 },
                 new SaveTaskDetail()
                 {
                     Title= "Development",
-                    Description = "Daily task update and blocker discussion with team"
+                    Description = "Development discussion with team."
                 },
                 new SaveTaskDetail()
                 {
                     Title= "SLA call",
-                    Description = "Daily task update and blocker discussion with team"
+                    Description = "SLA updates with client."
                 },
                 new SaveTaskDetail()
                 {
-                    Title= "Client call",
-                    Description = "Daily task update and blocker discussion with team"
+                    Title= "Learning call",
+                    Description = "Learning call with team."
                 },
             };
 
             _taskDetails.AddOrUpdate("taskDetails", taskList, (key, newValue) => taskList);
+        }
+
+        /// <summary>
+        /// Sample Adaptive card messaging extension.
+        /// </summary>
+        private MessagingExtensionAttachment GetAdaptiveCardForMessagingExtension(string title, string description)
+        {
+
+            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
+            {
+                Body = new List<AdaptiveElement>
+                {
+                    new AdaptiveTextBlock
+                    {
+                        Text = "Task title:"+ title,
+                        Weight = AdaptiveTextWeight.Default,
+                        Spacing = AdaptiveSpacing.Medium,
+                        Wrap = true,
+                    },
+                    new AdaptiveTextBlock
+                    {
+                        Text = "Task description:"+ description,
+                        Weight = AdaptiveTextWeight.Default,
+                        Spacing = AdaptiveSpacing.Medium,
+                        Wrap = true,
+                    }
+                },
+                Actions = new List<AdaptiveAction>
+                {
+                    new AdaptiveSubmitAction
+                    {
+                        Title = "Schedule task",
+                        Data = new AdaptiveCardAction
+                        {
+                            MsteamsCardAction = new CardAction
+                            {
+                                Type = "task/fetch",
+                            },
+                            Id="schedule",
+                            Title = title,
+                            Description = description
+                        },
+                    }
+                },
+            };
+
+
+            return new MessagingExtensionAttachment
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = card,
+            };
         }
     }
 }

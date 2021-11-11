@@ -6,7 +6,7 @@ using System;
 using Quartz;
 using Quartz.Impl;
 
-namespace BotTaskReminder
+namespace METaskReminder
 {
     public class TaskScheduler
     {

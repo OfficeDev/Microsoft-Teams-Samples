@@ -6,7 +6,7 @@ using Quartz;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace BotTaskReminder
+namespace METaskReminder
 {
     public class ScheduleTaskReminder : IJob
     {

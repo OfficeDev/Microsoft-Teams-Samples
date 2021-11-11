@@ -1,13 +1,15 @@
 ﻿﻿﻿
-## Bot task reminder
+## Task reminder with messaging extension
 
-This sample shows feature where user can schedule a task and get reminder on the scheduled date and time.
+This sample shows feature where user can schedule a task from messaging extension and get a reminder card at scheduled time.
 
-![Schedule task ](BotTaskReminder/Images/ScheduleTaskCard.png)
+![select task](METaskReminder/Images/SelectTask.png)
 
-![Task Details](BotTaskReminder/Images/ScheduleTask.png)
+![Schedule task ](METaskReminder/Images/ScheduleTaskCard.png)
 
-![Task reminder](BotTaskReminder/Images/TaskReminder.png)
+![Task Details](METaskReminder/Images/ScheduleTask.png)
+
+![Task reminder](METaskReminder/Images/TaskReminder.png)
 
 ## Prerequisites
 
@@ -35,11 +37,11 @@ This sample shows feature where user can schedule a task and get reminder on the
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
    
-3) In a terminal, navigate to `samples/bot-task-reminder/csharp`
+3) In a terminal, navigate to `samples/task-reminder-messaging-extension/csharp`
 
     change into project folder
     ```bash
-    cd # BotTaskReminder
+    cd # METaskReminder
     ```
     
 4) Run ngrok - point to port 3978
@@ -71,8 +73,8 @@ This sample shows feature where user can schedule a task and get reminder on the
    B) Or from Visual Studio
      - Launch Visual Studio
      - File -> Open -> Project/Solution
-     - Navigate to `BotTaskReminder` folder
-     - Select `BotTaskReminder.csproj` file
+     - Navigate to `METaskReminder` folder
+     - Select `METaskReminder.csproj` file
      - Press `F5` to run the project 
 
 9) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
@@ -83,15 +85,17 @@ This sample shows feature where user can schedule a task and get reminder on the
 
 ## Features of this sample
 
+![select task](METaskReminder/Images/SelectTask.png)
+
 - Card with actions `Schedule task`. 
 
-![Schedule task ](BotTaskReminder/Images/ScheduleTaskCard.png)
+![Schedule task ](METaskReminder/Images/ScheduleTaskCard.png)
 
-![Task Details ](BotTaskReminder/Images/ScheduleTask.png)
+![Task Details ](METaskReminder/Images/ScheduleTask.png)
 
 - Task reminder
 
-![Task reminder](BotTaskReminder/Images/TaskReminder.png)
+![Task reminder](METaskReminder/Images/TaskReminder.png)
 
 
 ## Deploy the bot to Azure

@@ -4,7 +4,7 @@
 
 using Newtonsoft.Json;
 
-namespace BotTaskReminder.Models
+namespace METaskReminder.Models
 {
     /// <summary>
     /// Location details model class.

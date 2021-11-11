@@ -4,7 +4,7 @@
 
 using System;
 
-namespace BotTaskReminder.Models
+namespace METaskReminder.Models
 {
     /// <summary>
     /// Save task detail model class.

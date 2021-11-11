@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 using AdaptiveCards;
-using BotTaskReminder.Models;
+using METaskReminder.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BotTaskReminder.Controllers
+namespace METaskReminder.Controllers
 {
     /// <summary>
     /// Class with properties related to task reminder.
