@@ -56,6 +56,7 @@ class TeamsBot extends TeamsActivityHandler {
             title: taskModuleRequest.data.title,
             dateTime: taskModuleRequest.data.dateTime,
             description: taskModuleRequest.data.description,
+            selectedDays: taskModuleRequest.data.selectedDays,
         };
 
         this.saveTaskDetails(taskDetails);
@@ -70,9 +71,11 @@ class TeamsBot extends TeamsActivityHandler {
         var day = taskModuleRequest.data.dateTime.substring(8, 10);
         var hour = taskModuleRequest.data.dateTime.substring(11, 13);
         var min = taskModuleRequest.data.dateTime.substring(14, 16);
+        var days = taskModuleRequest.data.selectedDays.toString();
         const date = new Date(year, month - 1, day, hour, min);
+        var cronExpression = min+' '+hour+' * * '+days;
 
-        const job = schedule.scheduleJob(date, async function () {
+        const job = schedule.scheduleJob(cronExpression, async function () {
             await adapter.continueConversation(conversationReferences[currentUser], async turnContext => {
                 const userCard = CardFactory.adaptiveCard({
                     $schema: "http://adaptivecards.io/schemas/adaptive-card.json",
