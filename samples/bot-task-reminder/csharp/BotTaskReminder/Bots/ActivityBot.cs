@@ -138,6 +138,7 @@ namespace BotTaskReminder.Bots
             var currentTaskList = new List<SaveTaskDetail>();
             List<SaveTaskDetail> taskList = new List<SaveTaskDetail>();
             _taskDetails.TryGetValue("taskDetails", out currentTaskList);
+
             var taskDetails = new SaveTaskDetail()
             {
                 Description = description,
