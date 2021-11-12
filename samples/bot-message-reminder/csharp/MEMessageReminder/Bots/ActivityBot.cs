@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using METaskReminder.Models;
+using MEMessageReminder.Models;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
@@ -16,7 +16,7 @@ using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 
-namespace METaskReminder.Bots
+namespace MEMessageReminder.Bots
 {
     /// <summary>
     /// Bot Activity handler class.
@@ -51,7 +51,7 @@ namespace METaskReminder.Bots
             var title = string.Empty;
             var description = string.Empty;
 
-            if(action.MessagePayload.Subject != null)
+            if(action.MessagePayload.Subject != null && turnContext.Activity.Conversation.ConversationType!="personal" && action.MessagePayload.Subject != "")
             {
                 description = action.MessagePayload.Body.Content;
                 title = action.MessagePayload.Subject;
@@ -113,13 +113,14 @@ namespace METaskReminder.Bots
             var asJobject = JObject.FromObject(action.Data);
             var title = (string)asJobject.ToObject<TaskDetails<string>>()?.Title;
             var description = (string)asJobject.ToObject<TaskDetails<string>>()?.Description;
-            var dateTime = (string)asJobject.ToObject<TaskDetails<string>>()?.DateTime;
+            var dateTime = (DateTime)asJobject.ToObject<TaskDetails<DateTime>>()?.DateTime;
 
-            var year = Convert.ToInt32(dateTime.Substring(0, 4));
-            var month = Convert.ToInt32(dateTime.Substring(5, 2));
-            var day = Convert.ToInt32(dateTime.Substring(8, 2));
-            var hour = Convert.ToInt32(dateTime.Substring(11, 2));
-            var min = Convert.ToInt32(dateTime.Substring(14, 2));
+            var date = dateTime.ToLocalTime();
+            var year = date.Year;
+            var month = date.Month;
+            var day = date.Day;
+            var hour = date.Hour;
+            var min = date.Minute;
 
             var currentTaskList = new List<SaveTaskDetail>();
             List<SaveTaskDetail> taskList = new List<SaveTaskDetail>();
@@ -173,8 +174,8 @@ namespace METaskReminder.Bots
                     Value = new TaskModuleTaskInfo
                     {
                         Url = _applicationBaseUrl + "/" + "ScheduleTask?title="+title+ "&description="+ description,
-                        Height = 460,
-                        Width = 600,
+                        Height = 350,
+                        Width = 400,
                         Title = "Schedule-task",
                     },
                 },

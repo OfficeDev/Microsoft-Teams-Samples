@@ -6,7 +6,7 @@ using System;
 using Quartz;
 using Quartz.Impl;
 
-namespace METaskReminder
+namespace MEMessageReminder
 {
     public class TaskScheduler
     {

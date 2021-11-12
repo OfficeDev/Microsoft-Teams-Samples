@@ -3,7 +3,7 @@
   "manifestVersion": "1.11",
   "version": "1.0.1",
   "id": "{{Microsoft-App-Id}}",
-  "packageName": "com.microsoft.teams.aaptaskreminderwithmessagingextension",
+  "packageName": "com.microsoft.teams.messagingextensionmessagereminder",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -11,12 +11,12 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "App task reminder from ME",
-    "full": "App task reminder from ME"
+    "short": "Message reminder from ME",
+    "full": "Message reminder from ME"
   },
   "description": {
-    "short": "App task reminder from ME",
-    "full": "This sample shows feature where user can schedule a task from messaging extension and get a reminder card at scheduled time."
+    "short": "Message reminder from ME",
+    "full": "This sample shows feature where user can schedule a task from messaging extension action and get a reminder card at scheduled date and time."
   },
   "icons": {
     "outline": "outline.png",
@@ -44,7 +44,7 @@
           "title": "Create-reminder",
           "type": "action",
           "fetchTask": true,
-          "context": [ "message", "compose" ]
+          "context": [ "message" ]
         }
       ]
     }

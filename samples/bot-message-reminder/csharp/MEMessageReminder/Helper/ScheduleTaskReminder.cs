@@ -6,7 +6,7 @@ using Quartz;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace METaskReminder
+namespace MEMessageReminder
 {
     public class ScheduleTaskReminder : IJob
     {

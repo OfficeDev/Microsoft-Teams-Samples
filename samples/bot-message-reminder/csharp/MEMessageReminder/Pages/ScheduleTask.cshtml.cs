@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace AppCheckinLocation.Pages
+namespace MEMessageReminder.Pages
 {
     public class ScheduleTaskModel
         : PageModel

@@ -1,15 +1,19 @@
 ﻿﻿﻿
-## Task reminder with messaging extension
+## Message reminder with messaging extension action
 
-This sample shows feature where user can schedule a task from messaging extension and get a reminder card at scheduled time.
+This sample shows feature where user can schedule a task from messaging extension action and get a reminder card at scheduled time.
 
-![select task](METaskReminder/Images/SelectTask.png)
+![Select message](MEMessageReminder/Images/MessageAction.png)
 
-![Schedule task ](METaskReminder/Images/ScheduleTaskCard.png)
+![Task Details](MEMessageReminder/Images/ScheduleTask.png)
 
-![Task Details](METaskReminder/Images/ScheduleTask.png)
+![Task reminder](MEMessageReminder/Images/TaskReminder.png)
 
-![Task reminder](METaskReminder/Images/TaskReminder.png)
+![Team message action ](MEMessageReminder/Images/MessageActionTeam.png)
+
+![Team Task Details ](MEMessageReminder/Images/ScheduleTaskTeam.png)
+
+![ TeamTask reminder](MEMessageReminder/Images/TaskReminderTeam.png)
 
 ## Prerequisites
 
@@ -37,11 +41,11 @@ This sample shows feature where user can schedule a task from messaging extensio
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
    
-3) In a terminal, navigate to `samples/task-reminder-messaging-extension/csharp`
+3) In a terminal, navigate to `samples/bot-message-reminder/csharp`
 
     change into project folder
     ```bash
-    cd # METaskReminder
+    cd # MEMessageReminder
     ```
     
 4) Run ngrok - point to port 3978
@@ -73,8 +77,8 @@ This sample shows feature where user can schedule a task from messaging extensio
    B) Or from Visual Studio
      - Launch Visual Studio
      - File -> Open -> Project/Solution
-     - Navigate to `METaskReminder` folder
-     - Select `METaskReminder.csproj` file
+     - Navigate to `MEMessageReminder` folder
+     - Select `MEMessageReminder.csproj` file
      - Press `F5` to run the project 
 
 9) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
@@ -85,17 +89,21 @@ This sample shows feature where user can schedule a task from messaging extensio
 
 ## Features of this sample
 
-![select task](METaskReminder/Images/SelectTask.png)
+Personal scope scenario 
 
-- Card with actions `Schedule task`. 
+![Select message](MEMessageReminder/Images/MessageAction.png)
 
-![Schedule task ](METaskReminder/Images/ScheduleTaskCard.png)
+![Task Details](MEMessageReminder/Images/ScheduleTask.png)
 
-![Task Details ](METaskReminder/Images/ScheduleTask.png)
+![Task reminder](MEMessageReminder/Images/TaskReminder.png)
 
-- Task reminder
+Team scope scenario
 
-![Task reminder](METaskReminder/Images/TaskReminder.png)
+![Team message action ](MEMessageReminder/Images/MessageActionTeam.png)
+
+![Team Task Details ](MEMessageReminder/Images/ScheduleTaskTeam.png)
+
+![ TeamTask reminder](MEMessageReminder/Images/TaskReminderTeam.png)
 
 
 ## Deploy the bot to Azure
