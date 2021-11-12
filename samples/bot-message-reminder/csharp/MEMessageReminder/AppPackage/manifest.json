@@ -1,7 +1,7 @@
 ﻿{
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
   "manifestVersion": "1.11",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "id": "{{Microsoft-App-Id}}",
   "packageName": "com.microsoft.teams.messagingextensionmessagereminder",
   "developer": {
@@ -35,7 +35,7 @@
   ],
   "composeExtensions": [
     {
-      "botId": "87a133ac-47f2-4d47-9af2-b9115a5edbf3",
+      "botId": "{{Microsoft-App-Id}}",
       "canUpdateConfiguration": true,
       "commands": [
         {
