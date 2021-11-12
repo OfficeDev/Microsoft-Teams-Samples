@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ConsoleApp1
@@ -24,12 +25,13 @@ namespace ConsoleApp1
         static string repoName = "Microsoft-Teams-Samples";
         static string access_token = "";
         static string rootReadmeContent = "";
+        static string branch = "v-abt/readme_update";
 
         //Get all files from a repo
         public static async Task<DirectoryInformation> getRepo()
         {
             HttpClient client = new HttpClient();
-            DirectoryInformation root = await readRootDirectory("root", client, String.Format("https://api.github.com/repos/{0}/{1}/contents/", owner, repoName), access_token);
+            DirectoryInformation root = await readRootDirectory("root", client, String.Format("https://api.github.com/repos/{0}/{1}/contents?ref={2}", owner, repoName, branch), access_token);
             client.Dispose();
             return root;
         }
@@ -37,31 +39,14 @@ namespace ConsoleApp1
         // Recursively get the contents of all files and subdirectories within a directory 
         private static async Task<DirectoryInformation> readRootDirectory(String name, HttpClient client, string uri, string access_token)
         {
-            //get the directory contents
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, uri);
-            request.Headers.Add("Authorization",
-                "Basic " + Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(String.Format("{0}:{1}", access_token, "x-oauth-basic"))));
-            request.Headers.Add("User-Agent", "lk-github-client");
-
-            //parse result
-            HttpResponseMessage response = await client.SendAsync(request);
-            String jsonStr = await response.Content.ReadAsStringAsync(); ;
-            response.Dispose();
-
-            List<FileInformation> dirContents = JsonConvert.DeserializeObject<List<FileInformation>>(jsonStr);
+            // Get repository contents from root folder.
+            List<RepositoryContent> dirContents = await getRepositoryContents(string.Empty);
 
             // Getting only the root README file.
-            FileInformation rootReadme = dirContents.Find(x => x.name == "README.md");
+            RepositoryContent rootReadme = dirContents.Find(x => x.name == "README.md");
 
             // Getting the file contents
-            HttpRequestMessage downLoadUrl = new HttpRequestMessage(HttpMethod.Get, rootReadme.download_url);
-            downLoadUrl.Headers.Add("Authorization",
-                        "Basic " + Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(String.Format("{0}:{1}", access_token, "x-oauth-basic"))));
-            request.Headers.Add("User-Agent", "lk-github-client");
-
-            HttpResponseMessage contentResponse = await client.SendAsync(downLoadUrl);
-            rootReadmeContent = await contentResponse.Content.ReadAsStringAsync();
-            contentResponse.Dispose();
+            string rootReadmeContent = await getFileContent(rootReadme.download_url);
 
             //read in data
             DirectoryInformation result = new DirectoryInformation();
@@ -93,42 +78,71 @@ namespace ConsoleApp1
             {
                 var splitSampleString = sampleString.Split(":");
                 var sampleKey = string.Join("", splitSampleString[0].Split('[', ']')).Trim();
-                var samplePath = splitSampleString[1];
+                var sampleFolderPathArray = splitSampleString[1].Split('/');
+                var samplePath = string.Join("/", sampleFolderPathArray[0], sampleFolderPathArray[1]).Trim();
+
+                List<RepositoryContent> sampleFolderContent = await getRepositoryContents(samplePath);
+                foreach(var content in sampleFolderContent)
+                {
+                    List<RepositoryContent> languageContent = await getRepositoryContents(samplePath + "/" + content.name);
+
+                    // Getting only the project README file.
+                    RepositoryContent projReadme = languageContent.Find(x => x.name == "README.md");
+
+                    // Getting the file contents
+                    var projectReadmeContent = await getFileContent(projReadme.download_url);
+
+                    var updateResponse = await UpdateFile(samplePath + "/" + content.name + "/" + projReadme.name);
+                }
                 //HttpClient tempClient = new HttpClient();
                 //DirectoryInformation sub = await readRootDirectory(samplePath, tempClient, file._links.self, access_token);
             }
 
-                //foreach (FileInfo file in dirContents)
-                //{
-                //    if (file.type == "dir")
-                //    { //read in the subdirectory
-                //        Directory sub = await readRootDirectory(file.name, client, file._links.self, access_token);
-                //        result.subDirs.Add(sub);
-                //    }
-                //    else
-                //    {
-                //        //get the file contents;
-                //        HttpRequestMessage downLoadUrl = new HttpRequestMessage(HttpMethod.Get, file.download_url);
-                //        downLoadUrl.Headers.Add("Authorization",
-                //            "Basic " + Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(String.Format("{0}:{1}", access_token, "x-oauth-basic"))));
-                //        request.Headers.Add("User-Agent", "lk-github-client");
-
-                //        HttpResponseMessage contentResponse = await client.SendAsync(downLoadUrl);
-                //        String content = await contentResponse.Content.ReadAsStringAsync();
-                //        contentResponse.Dispose();
-
-                //        FileData data;
-                //        data.name = file.name;
-                //        data.contents = content;
-
-                //        result.files.Add(data);
-                //    }
-                //}
               return result;
         }
 
+        // Recursively get the contents of all files and subdirectories within a directory 
+        private static async Task<List<RepositoryContent>> getRepositoryContents(string path)
+        {
+            HttpClient sampleClient = new HttpClient();
+
+            //get the directory contents
+            HttpRequestMessage request = path == string.Empty ?
+                 new HttpRequestMessage(HttpMethod.Get, String.Format("https://api.github.com/repos/{0}/{1}/contents?ref={2}", owner, repoName, branch))
+                 : new HttpRequestMessage(HttpMethod.Get, String.Format("https://api.github.com/repos/{0}/{1}/contents/{2}?ref={3}", owner, repoName, path, branch));
+            request.Headers.Add("Authorization",
+                "Basic " + Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(String.Format("{0}:{1}", access_token, "x-oauth-basic"))));
+            request.Headers.Add("User-Agent", "lk-github-client");
+
+            //parse result
+            HttpResponseMessage response = await sampleClient.SendAsync(request);
+            String jsonStr = await response.Content.ReadAsStringAsync();
+            response.Dispose();
+            sampleClient.Dispose();
+
+            List<RepositoryContent> repoContents = JsonConvert.DeserializeObject<List<RepositoryContent>>(jsonStr);
+            return repoContents;
+        }
+
+        // Get file content.
+        private static async Task<string> getFileContent(string downloadUrl)
+        {
+            HttpClient sampleClient = new HttpClient();
+
+            // Getting the file contents
+            HttpRequestMessage downLoadUrl = new HttpRequestMessage(HttpMethod.Get, downloadUrl);
+            downLoadUrl.Headers.Add("Authorization",
+                        "Basic " + Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(String.Format("{0}:{1}", access_token, "x-oauth-basic"))));
+
+            HttpResponseMessage contentResponse = await sampleClient.SendAsync(downLoadUrl);
+            rootReadmeContent = await contentResponse.Content.ReadAsStringAsync();
+            contentResponse.Dispose();
+
+            return rootReadmeContent;
+        }
+
         // Method to generate Stream from string to search for a line.
-        public static Stream GenerateStreamFromString(string s)
+        private static Stream GenerateStreamFromString(string s)
         {
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);
@@ -138,10 +152,26 @@ namespace ConsoleApp1
             return stream;
         }
 
-        // Method to append information to readme file.
-        public static void UpdateReadme()
+        // Method to update file.
+        public static async Task<string> UpdateFile(string path)
         {
+            HttpClient sampleClient = new HttpClient();
+            sampleClient.DefaultRequestHeaders
+                                .Accept
+                                .Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
+            sampleClient.DefaultRequestHeaders.Add("Authorization",
+                "Basic " + Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(String.Format("{0}:{1}", access_token, "x-oauth-basic"))));
+            sampleClient.DefaultRequestHeaders.Add("User-Agent", "lk-github-client");
 
+            var content = new StringContent("{\"content\":\"someValue\"}", Encoding.UTF8, "application/json");
+
+            //parse result
+            HttpResponseMessage response = await sampleClient.PutAsync(String.Format("https://api.github.com/repos/{0}/{1}/contents/{2}?ref={3}", owner, repoName, path, branch), content);
+            String jsonStr = await response.Content.ReadAsStringAsync();
+            response.Dispose();
+            sampleClient.Dispose();
+
+            return jsonStr;
         }
     }
 }

@@ -4,12 +4,7 @@ using System.Text;
 
 namespace ConsoleApp1.Models
 {
-    public class DirectoryInfo
-    {
-        public List<FileInformation> FilesInfo { get; set; }
-    }
-
-    public class FileInformation
+    public class RepositoryContent
     {
         public String name;
         public String type;
