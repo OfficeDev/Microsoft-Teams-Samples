@@ -59,7 +59,7 @@
             let taskInfo = {
                 title: title.replace(/%20/g," "),
                 dateTime: $('#taskdatetime').val(),
-                description: description==""?$('#taskdescription').val():description,
+                description: description == "" ? $('#taskdescription').val():description,
             };
             microsoftTeams.tasks.submitTask(taskInfo);
         }
