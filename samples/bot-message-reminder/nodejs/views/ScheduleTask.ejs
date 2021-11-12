@@ -23,7 +23,13 @@
                 title = params.substring(params.search("=")+1,params.search("&"));
                 description=params.substring(params.search("&")+13);
                 $("#taskTitle").text(title.replace(/%20/g," "));
-                $("#taskdescription").text(description.replace(/%20/g," "));
+                if(description == "") {
+                     $("#taskdescriptionteam").hide();
+                }
+                else {
+                    $("#taskdescriptionteam").text(description.replace(/%20/g," "));
+                    $("#taskdescription").hide();
+                }
             });
             // Submit task details.
             function submit() {
@@ -46,10 +52,13 @@
                     e.preventDefault();
                     return false;
                 }
+                var datetimeLocal = $('#taskdatetime').val()
+                var datetimeUTC = new Date(datetimeLocal).toUTCString();
+                var date = new Date(datetimeUTC);
                 let taskInfo = {
                     title: title.replace(/%20/g," "),
-                    dateTime: $('#taskdatetime').val(),
-                    description: description.replace(/%20/g," "),
+                    dateTime: date,
+                    description: description == "" ? $('#taskdescription').val():description.replace(/%20/g," "),
                 };
                 microsoftTeams.tasks.submitTask(taskInfo);
             }
@@ -59,14 +68,15 @@
         <div class="surface">
             <div class="panel">
                 <div class="container">
-                    <label for="title" class="title">Task Title</label>
+                    <label for="title" class="title">Task title</label>
                     <br>
                     <label id="taskTitle"></label>
                     <br />
                     <br />
                     <label for="description" class="description">Task description</label>
                     <br>
-                    <label id="taskdescription"></label>
+                    <label id="taskdescriptionteam"></label>
+                    <input type="text" id="taskdescription" name="taskdescription">
                     <br />
                     <br />
                     <label for="taskdatetime">Date and time</label>

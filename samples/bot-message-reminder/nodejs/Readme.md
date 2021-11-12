@@ -1,12 +1,18 @@
-## Bot task reminder
+## Message reminder with messaging extension action
 
-This sample shows feature where user can schedule a task and get reminder on the scheduled date and time.
+This sample shows feature where user can schedule a task from messaging extension action and get a reminder card at scheduled time.
 
-![Schedule task ](Images/ScheduleTaskCard.png)
+![Select message](Images/MessageAction.png)
 
-![Task Details ](Images/ScheduleTask.png)
+![Task Details](Images/ScheduleTask.png)
 
 ![Task reminder](Images/TaskReminder.png)
+
+![Team message action ](Images/MessageActionTeam.png)
+
+![Team Task Details ](Images/ScheduleTaskTeam.png)
+
+![ TeamTask reminder](Images/TaskReminderTeam.png)
 
 ## Prerequisites
 
@@ -31,7 +37,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/bot-task-reminder/nodejs`
+2) In a terminal, navigate to `samples/bot-message-reminder/nodejs`
 
 3) Install modules
 
@@ -58,13 +64,19 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 
 ## Features of this sample
 
-- Card with actions `Schedule task`. 
+- Personal scope scenario
 
-![Schedule task ](Images/ScheduleTaskCard.png)
+![Select message](Images/MessageAction.png)
 
-![Task Details ](Images/ScheduleTask.png)
-
-- Task reminder
+![Task Details](Images/ScheduleTask.png)
 
 ![Task reminder](Images/TaskReminder.png)
+
+- Team scope scenario
+
+![Team message action ](Images/MessageActionTeam.png)
+
+![Team Task Details ](Images/ScheduleTaskTeam.png)
+
+![ TeamTask reminder](Images/TaskReminderTeam.png)
 

@@ -7,19 +7,6 @@ const schedule = require('node-schedule');
 const taskDetails = {};
 var conversationReferences = {};
 var adapter;
-var messageArray = [{
-    Title: "Sample Message 1",
-    Description: "Description for sample message 1"
-}, {
-    Title: "Sample Message 2",
-    Description: "Description for sample message 2"
-}, {
-    Title: "Sample Message 3",
-    Description: "Description for sample message 3"
-}, {
-    Title: "Sample Message 4",
-    Description: "Description for sample message 4"
-}];
 
 class TeamsBot extends TeamsActivityHandler {
     constructor() {
@@ -29,125 +16,47 @@ class TeamsBot extends TeamsActivityHandler {
             const membersAdded = context.activity.membersAdded;
             for (let member = 0; member < membersAdded.length; member++) {
                 if (membersAdded[member].id !== context.activity.recipient.id) {
-                    await context.sendActivity("Hello and welcome! With this sample you can schedule a task and get reminder on the scheduled date and time.(use command 'create-reminder')");
+                    await context.sendActivity("Hello and welcome! With this sample you can schedule a message reminder by selecting `...` over the message then select more action and then create-reminder and you wil get reminder of the message at scheduled date and time.')");
                 }
             }
 
             await next();
         });
-
-        // this.onMessage(async (context, next) => {
-        //     if (context.activity.text.toLowerCase().trim() == "create-reminder") {
-        //         const userCard = CardFactory.adaptiveCard(this.adaptiveCardForTaskModule());
-        //         await context.sendActivity({ attachments: [userCard] });
-        //     }
-
-        //     // By calling next() you ensure that the next BotHandler is run.
-        //     await next();
-        // });
     }
 
-    async handleTeamsMessagingExtensionQuery(context, query) {
-        const attachments = [];
+    async handleTeamsMessagingExtensionFetchTask(context, action) {
+        var title = "";
+        var description = "";
 
-        messageArray.forEach(obj => {
-            // const heroCard = CardFactory.heroCard(obj.Title);
-            const preview = CardFactory.thumbnailCard(obj.Title, obj.Description);
-            preview.content.tap = { type: 'invoke', value: obj };
-            const attachment = { ...preview, preview };
-            attachments.push(attachment);
-        });
-
-        return {
-            composeExtension: {
-                type: 'result',
-                attachmentLayout: 'list',
-                attachments: attachments
-            }
-        };
-    }
-
-    async handleTeamsMessagingExtensionSelectItem(context, obj) {
-        const adaptiveCard = CardFactory.adaptiveCard({
-            $schema: "http://adaptivecards.io/schemas/adaptive-card.json",
-            body: [
-                {
-                    type: "TextBlock",
-                    size: "Default",
-                    weight: "Bolder",
-                    text: "Please schedule the message"
-                },
-                {
-                    type: "TextBlock",
-                    size: "Default",
-                    weight: "Default",
-                    text: "Message title: " + obj.Title,
-                    wrap: true
-                },
-                {
-                    type: "TextBlock",
-                    size: "Default",
-                    weight: "Default",
-                    text: "Message description: " + obj.Description,
-                    wrap: true
-                },
-                {
-                    type: "ActionSet",
-                    actions: [
-                        {
-                            type: "Action.Submit",
-                            title: "Schedule message",
-                            data: {
-                                msteams: {
-                                    type: "task/fetch"
-                                },
-                                id: "schedule",
-                                title: obj.Title,
-                                description: obj.Description
-                            }
-                        }
-                    ]
-                }
-            ],
-            type: "AdaptiveCard",
-            version: "1.2"
-        });
-
-        const attachment = { ...adaptiveCard, adaptiveCard };
-
-        return {
-            composeExtension: {
-                type: 'result',
-                attachmentLayout: 'list',
-                attachments: [attachment]
-            }
-        };
-    }
-
-    // Handle task module fetch.
-    handleTeamsTaskModuleFetch(context, taskModuleRequest) {
-        const cardTaskFetchId = taskModuleRequest.data.id;
-        var taskInfo = {}; // TaskModuleTaskInfo
-        let title = taskModuleRequest.data.title;
-        let description = taskModuleRequest.data.description;
-
-        if (cardTaskFetchId == "schedule") {
-            taskInfo.url = taskInfo.fallbackUrl = this.baseUrl + "/scheduleTask?title=" + title + "&description=" + description;
-            taskInfo.height = 350;
-            taskInfo.width = 350;
-            taskInfo.title = "Schedule task";
+        if (action.messagePayload.subject != null) {
+            title = action.messagePayload.body.content;
+            description = action.messagePayload.subject;
         }
 
-        return TaskModuleResponseFactory.toTaskModuleResponse(taskInfo);
+        else {
+            title = action.messagePayload.body.content;
+        }
+
+        return {
+            task: {
+                type: 'continue',
+                value: {
+                    width: 350,
+                    height: 350,
+                    title: 'Schedule task',
+                    url: this.baseUrl + "/scheduleTask?title=" + title + "&description=" + description
+                }
+            }
+        };
     }
 
     // Handle task module submit action.
-    async handleTeamsTaskModuleSubmit(context, taskModuleRequest) {
+    async  handleTeamsMessagingExtensionSubmitAction(context, action) {
         // Create new object to save task details.
         let taskDetails = {
-            title: taskModuleRequest.data.title,
-            dateTime: taskModuleRequest.data.dateTime,
-            description: taskModuleRequest.data.description,
+            title: action.data.title,
+            dateTime: action.data.dateTime,
+            description: action.data.description,
         };
 
         this.saveTaskDetails(taskDetails);
@@ -157,14 +66,16 @@ class TeamsBot extends TeamsActivityHandler {
         conversationReferences[currentUser] = TurnContext.getConversationReference(context.activity);
         adapter = context.adapter;
 
-        var year = taskModuleRequest.data.dateTime.substring(0, 4);
-        var month = taskModuleRequest.data.dateTime.substring(5, 7);
-        var day = taskModuleRequest.data.dateTime.substring(8, 10);
-        var hour = taskModuleRequest.data.dateTime.substring(11, 13);
-        var min = taskModuleRequest.data.dateTime.substring(14, 16);
-        const date = new Date(year, month - 1, day, hour, min);
+        var dateLocal = new Date(action.data.dateTime);
+        var dateLocalString = dateLocal.toLocaleString();
+        var month = dateLocalString.substring(0, 2);
+        var day = dateLocalString.substring(3, 5);
+        var year = dateLocalString.substring(6, 10);
+        var hour = dateLocal.getHours();
+        var min = dateLocal.getMinutes();
+        const scheduleDate = new Date(year, month -1, day, hour, min);
 
-        const job = schedule.scheduleJob(date, async function () {
+        const job = schedule.scheduleJob(scheduleDate, async function () {
             await adapter.continueConversation(conversationReferences[currentUser], async turnContext => {
                 const userCard = CardFactory.adaptiveCard({
                     $schema: "http://adaptivecards.io/schemas/adaptive-card.json",
