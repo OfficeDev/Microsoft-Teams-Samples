@@ -127,15 +127,15 @@ namespace BotDailyTaskReminder.Bots
             var asJobject = JObject.FromObject(taskModuleRequest.Data);
             var title = (string)asJobject.ToObject<TaskDetails<string>>()?.Title;
             var description = (string)asJobject.ToObject<TaskDetails<string>>()?.Description;
-            var dateTime = (string)asJobject.ToObject<TaskDetails<string>>()?.DateTime;
+            var dateTime = (DateTime)asJobject.ToObject<TaskDetails<DateTime>>()?.DateTime;
             var selectedDaysObject = (JArray)asJobject.ToObject<TaskDetails<JArray>>()?.SelectedDays;
             var selectedDays = selectedDaysObject.ToObject<List<string>>();
-
-            var year = Convert.ToInt32(dateTime.Substring(0, 4));
-            var month = Convert.ToInt32(dateTime.Substring(5, 2));
-            var day = Convert.ToInt32(dateTime.Substring(8, 2));
-            var hour = Convert.ToInt32(dateTime.Substring(11, 2));
-            var min = Convert.ToInt32(dateTime.Substring(14, 2));
+            var date = dateTime.ToLocalTime();
+            var year = date.Year;
+            var month = date.Month;
+            var day = date.Day;
+            var hour = date.Hour;
+            var min = date.Minute;
 
             var recurringDays = string.Join(",", selectedDays);
             var currentTaskList = new List<SaveTaskDetail>();

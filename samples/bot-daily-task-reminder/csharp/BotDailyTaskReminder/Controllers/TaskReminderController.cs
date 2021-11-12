@@ -70,7 +70,7 @@ namespace BotDailyTaskReminder.Controllers
                 {
                     foreach (var day in task.SelectedDays)
                     {
-                        if (Convert.ToInt32(day) == ((int)time.DayOfWeek))
+                        if (Convert.ToInt32(day) == ((int)time.DayOfWeek) || (Convert.ToInt32(day) == 7 && ((int)time.DayOfWeek) == 0))
                         {
                              await turnContext.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForTaskReminder(task.Title, task.Description)), cancellationToken);
                         }

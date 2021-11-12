@@ -21,6 +21,7 @@
 
         // Submit task details.
         function submit() {
+            debugger;
             var isValid = true;
             let checkboxArray = [];
 
@@ -49,10 +50,12 @@
                     checkboxArray.push($(this).val())
                 }
             });
-
+            var datetimeLocal = $('#taskdatetime').val()
+            var datetimeUTC = new Date(datetimeLocal).toUTCString();
+            var date = new Date(datetimeUTC);
             let taskInfo = {
                 title: $('#taskTitle').val(),
-                dateTime: $('#taskdatetime').val(),
+                dateTime: date,
                 description: $('#taskdescription').val(),
                 selectedDays: checkboxArray,
             };
