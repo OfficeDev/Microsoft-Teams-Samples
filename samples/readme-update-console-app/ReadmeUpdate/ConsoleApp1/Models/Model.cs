@@ -10,6 +10,7 @@ namespace ConsoleApp1.Models
         public String type;
         public String download_url;
         public LinkFields _links;
+        public String sha;
     }
 
     public class LinkFields
@@ -30,5 +31,14 @@ namespace ConsoleApp1.Models
         public string SampleLinkKey { get; set; }
 
         public string SampleFolder { get; set; }
+    }
+
+    public class UpdateParams
+    {
+        public string content { get; set; }
+
+        public string message { get; set; }
+
+        public string sha { get; set; }
     }
 }

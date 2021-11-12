@@ -26,6 +26,9 @@ namespace ConsoleApp1
         static string access_token = "";
         static string rootReadmeContent = "";
         static string branch = "v-abt/readme_update";
+        static string[] languages;
+        static string title = "";
+        static string description = "";
 
         //Get all files from a repo
         public static async Task<DirectoryInformation> getRepo()
@@ -92,10 +95,12 @@ namespace ConsoleApp1
                     // Getting the file contents
                     var projectReadmeContent = await getFileContent(projReadme.download_url);
 
-                    var updateResponse = await UpdateFile(samplePath + "/" + content.name + "/" + projReadme.name);
+                    //TODO: Uncomment this while running app.
+                    //var updateResponse = await UpdateFile(samplePath + "/" + content.name + "/" + projReadme.name, projReadme.sha);
+
+                    //TODO: Remove this while running app.
+                    break;
                 }
-                //HttpClient tempClient = new HttpClient();
-                //DirectoryInformation sub = await readRootDirectory(samplePath, tempClient, file._links.self, access_token);
             }
 
               return result;
@@ -153,25 +158,41 @@ namespace ConsoleApp1
         }
 
         // Method to update file.
-        public static async Task<string> UpdateFile(string path)
+        //public static async Task<string> UpdateFile(string path, string sha)
+        //{
+        //    HttpClient sampleClient = new HttpClient();
+        //    sampleClient.DefaultRequestHeaders
+        //                        .Accept
+        //                        .Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
+        //    sampleClient.DefaultRequestHeaders.Add("Authorization",
+        //        "Basic " + Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(String.Format("{0}:{1}", access_token, "x-oauth-basic"))));
+        //    sampleClient.DefaultRequestHeaders.Add("User-Agent", "lk-github-client");
+
+        //    var updateObj = new UpdateParams
+        //    {
+        //        content = Base64StringEncode("test"),
+        //        message = "",
+        //        sha = sha
+        //    };
+
+        //    var content = new StringContent(JsonConvert.SerializeObject(updateObj), Encoding.UTF8, "application/json");
+
+        //    //parse result
+        //    HttpResponseMessage response = await sampleClient.PutAsync(String.Format("https://api.github.com/repos/{0}/{1}/contents/{2}?ref={3}", owner, repoName, path, branch), content);
+        //    String jsonStr = await response.Content.ReadAsStringAsync();
+        //    response.Dispose();
+        //    sampleClient.Dispose();
+
+        //    return jsonStr;
+        //}
+
+        private static string Base64StringEncode(string originalString)
         {
-            HttpClient sampleClient = new HttpClient();
-            sampleClient.DefaultRequestHeaders
-                                .Accept
-                                .Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
-            sampleClient.DefaultRequestHeaders.Add("Authorization",
-                "Basic " + Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(String.Format("{0}:{1}", access_token, "x-oauth-basic"))));
-            sampleClient.DefaultRequestHeaders.Add("User-Agent", "lk-github-client");
+            var bytes = Encoding.UTF8.GetBytes(originalString);
 
-            var content = new StringContent("{\"content\":\"someValue\"}", Encoding.UTF8, "application/json");
+            var encodedString = Convert.ToBase64String(bytes);
 
-            //parse result
-            HttpResponseMessage response = await sampleClient.PutAsync(String.Format("https://api.github.com/repos/{0}/{1}/contents/{2}?ref={3}", owner, repoName, path, branch), content);
-            String jsonStr = await response.Content.ReadAsStringAsync();
-            response.Dispose();
-            sampleClient.Dispose();
-
-            return jsonStr;
+            return encodedString;
         }
     }
 }
