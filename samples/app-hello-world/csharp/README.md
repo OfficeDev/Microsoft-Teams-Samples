@@ -1,3 +1,21 @@
+
+page_type: sample
+
+description: Microsoft Teams hello world sample app.
+
+products:
+- office-teams
+- office
+- office-365
+
+languages:
+- csharp,nodejs
+
+extensions:
+contentType: samples
+
+# Hello World
+- Microsoft Teams hello world sample app.
 ---
 page_type: sample
 products:
