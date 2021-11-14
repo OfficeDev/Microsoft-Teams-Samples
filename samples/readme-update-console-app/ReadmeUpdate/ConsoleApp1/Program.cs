@@ -4,20 +4,14 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-
-    //Structs used to hold file data
-    public struct FileData
-    {
-        public String name;
-        public String contents;
-    }
-  
     class Program
     {
         // Information about the respository
@@ -26,21 +20,23 @@ namespace ConsoleApp1
         static string access_token = "";
         static string rootReadmeContent = "";
         static string branch = "v-abt/readme_update";
+
+        // Information to show in initial template.
         static string[] languages;
         static string title = "";
         static string description = "";
 
         //Get all files from a repo
-        public static async Task<DirectoryInformation> getRepo()
+        public static async Task<RepositoryContent> getRepo()
         {
             HttpClient client = new HttpClient();
-            DirectoryInformation root = await readRootDirectory("root", client, String.Format("https://api.github.com/repos/{0}/{1}/contents?ref={2}", owner, repoName, branch), access_token);
+            RepositoryContent root = await readRootDirectory("root", client, String.Format("https://api.github.com/repos/{0}/{1}/contents?ref={2}", owner, repoName, branch), access_token);
             client.Dispose();
             return root;
         }
 
         // Recursively get the contents of all files and subdirectories within a directory 
-        private static async Task<DirectoryInformation> readRootDirectory(String name, HttpClient client, string uri, string access_token)
+        private static async Task<RepositoryContent> readRootDirectory(String name, HttpClient client, string uri, string access_token)
         {
             // Get repository contents from root folder.
             List<RepositoryContent> dirContents = await getRepositoryContents(string.Empty);
@@ -50,18 +46,6 @@ namespace ConsoleApp1
 
             // Getting the file contents
             string rootReadmeContent = await getFileContent(rootReadme.download_url);
-
-            //read in data
-            DirectoryInformation result = new DirectoryInformation();
-            result.name = name;
-            result.subDirs = new List<DirectoryInformation>();
-            result.files = new List<FileData>();
-
-            FileData data;
-            data.name = rootReadme.name;
-            data.contents = rootReadmeContent;
-
-            result.files.Add(data);
 
             List<string> currentSamples = new List<string>();
             string line;
@@ -84,26 +68,53 @@ namespace ConsoleApp1
                 var sampleFolderPathArray = splitSampleString[1].Split('/');
                 var samplePath = string.Join("/", sampleFolderPathArray[0], sampleFolderPathArray[1]).Trim();
 
+                // Getting sample details by regex
+                string pattern = ".*" + sampleKey + ".*";
+                var match = Regex.Match(rootReadmeContent, pattern).Value;
+                var matchSlpit = match.Split('|');
+                title = matchSlpit[2].Trim();
+                description = matchSlpit[3].Trim();
+
+                // Getting the languages available for a given sample.
                 List<RepositoryContent> sampleFolderContent = await getRepositoryContents(samplePath);
-                foreach(var content in sampleFolderContent)
+                languages = sampleFolderContent.Where(item => item.type == "dir").Select(item => item.name).ToArray();
+
+                List<RepositoryContent> languageContent = await getRepositoryContents(samplePath + "/" + sampleFolderPathArray[2]);
+
+                // Getting only the project README file.
+                RepositoryContent projReadme = languageContent.Find(x => x.name == "README.md");
+
+                // Getting the file contents
+                var projectReadmeContent = await getFileContent(projReadme.download_url);
+                if (!projectReadmeContent.Contains("page_type:"))
                 {
-                    List<RepositoryContent> languageContent = await getRepositoryContents(samplePath + "/" + content.name);
+                    string initialContent = $@"
+page_type: sample
 
-                    // Getting only the project README file.
-                    RepositoryContent projReadme = languageContent.Find(x => x.name == "README.md");
+description: {description}
 
-                    // Getting the file contents
-                    var projectReadmeContent = await getFileContent(projReadme.download_url);
+products:
+- office-teams
+- office
+- office-365
+
+languages:
+- {string.Join(',', languages)}
+
+extensions:
+contentType: samples
+
+# {title}
+- {description}
+";
+
+                    string updatedReadmeContent = initialContent + projectReadmeContent;
 
                     //TODO: Uncomment this while running app.
-                    //var updateResponse = await UpdateFile(samplePath + "/" + content.name + "/" + projReadme.name, projReadme.sha);
-
-                    //TODO: Remove this while running app.
-                    break;
+                    //var updateResponse = await UpdateFile(samplePath + "/" + content.name + "/" + projReadme.name, projReadme.sha, updatedReadmeContent);
                 }
             }
-
-              return result;
+            return rootReadme;
         }
 
         // Recursively get the contents of all files and subdirectories within a directory 
@@ -158,7 +169,7 @@ namespace ConsoleApp1
         }
 
         // Method to update file.
-        //public static async Task<string> UpdateFile(string path, string sha)
+        //public static async Task<string> UpdateFile(string path, string sha, string projectReadmeContent)
         //{
         //    HttpClient sampleClient = new HttpClient();
         //    sampleClient.DefaultRequestHeaders
@@ -170,7 +181,7 @@ namespace ConsoleApp1
 
         //    var updateObj = new UpdateParams
         //    {
-        //        content = Base64StringEncode("test"),
+        //        content = Base64StringEncode(projectReadmeContent),
         //        message = "",
         //        sha = sha
         //    };

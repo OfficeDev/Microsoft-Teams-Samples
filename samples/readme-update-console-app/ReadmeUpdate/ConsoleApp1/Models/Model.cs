@@ -18,14 +18,6 @@ namespace ConsoleApp1.Models
         public String self;
     }
 
-    public class DirectoryInformation
-    {
-        public String name;
-        public List<DirectoryInformation> subDirs;
-        public List<FileData> files;
-        public List<Sample> samples;
-    }
-
     public class Sample
     {
         public string SampleLinkKey { get; set; }
