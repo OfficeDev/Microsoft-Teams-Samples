@@ -86,6 +86,8 @@ namespace ConsoleApp1
 
                 // Getting the file contents
                 var projectReadmeContent = await getFileContent(projReadme.download_url);
+                var commitInformation = await getCommitInformation(samplePath + "/" + sampleFolderPathArray[2] + "/README.md");
+                var projectReadmeCreatedDate = Convert.ToString(commitInformation[0].Commit.author.date);
                 if (!projectReadmeContent.Contains("page_type:"))
                 {
                     string initialContent = $@"
@@ -102,7 +104,10 @@ languages:
 - {string.Join(',', languages)}
 
 extensions:
+
 contentType: samples
+
+createdDate: {projectReadmeCreatedDate}
 
 # {title}
 - {description}
@@ -111,7 +116,7 @@ contentType: samples
                     string updatedReadmeContent = initialContent + projectReadmeContent;
 
                     //TODO: Uncomment this while running app.
-                    //var updateResponse = await UpdateFile(samplePath + "/" + content.name + "/" + projReadme.name, projReadme.sha, updatedReadmeContent);
+                    var updateResponse = await UpdateFile(samplePath + "/" + sampleFolderPathArray[2] + "/" + projReadme.name, projReadme.sha, updatedReadmeContent);
                 }
             }
             return rootReadme;
@@ -137,6 +142,27 @@ contentType: samples
             sampleClient.Dispose();
 
             List<RepositoryContent> repoContents = JsonConvert.DeserializeObject<List<RepositoryContent>>(jsonStr);
+            return repoContents;
+        }
+
+        // Get commit information. 
+        private static async Task<List<CommitInformation>> getCommitInformation(string path)
+        {
+            HttpClient sampleClient = new HttpClient();
+            
+            //get the directory contents
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, String.Format("https://api.github.com/repos/{0}/{1}/commits?path={2}&sha={3}", owner, repoName, path, branch));
+            request.Headers.Add("Authorization",
+                "Basic " + Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(String.Format("{0}:{1}", access_token, "x-oauth-basic"))));
+            request.Headers.Add("User-Agent", "lk-github-client");
+
+            //parse result
+            HttpResponseMessage response = await sampleClient.SendAsync(request);
+            String jsonStr = await response.Content.ReadAsStringAsync();
+            response.Dispose();
+            sampleClient.Dispose();
+
+            List<CommitInformation> repoContents = JsonConvert.DeserializeObject<List<CommitInformation>>(jsonStr);
             return repoContents;
         }
 
@@ -169,33 +195,34 @@ contentType: samples
         }
 
         // Method to update file.
-        //public static async Task<string> UpdateFile(string path, string sha, string projectReadmeContent)
-        //{
-        //    HttpClient sampleClient = new HttpClient();
-        //    sampleClient.DefaultRequestHeaders
-        //                        .Accept
-        //                        .Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
-        //    sampleClient.DefaultRequestHeaders.Add("Authorization",
-        //        "Basic " + Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(String.Format("{0}:{1}", access_token, "x-oauth-basic"))));
-        //    sampleClient.DefaultRequestHeaders.Add("User-Agent", "lk-github-client");
+        public static async Task<string> UpdateFile(string path, string sha, string projectReadmeContent)
+        {
+            HttpClient sampleClient = new HttpClient();
+            sampleClient.DefaultRequestHeaders
+                                .Accept
+                                .Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
+            sampleClient.DefaultRequestHeaders.Add("Authorization",
+                "Basic " + Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(String.Format("{0}:{1}", access_token, "x-oauth-basic"))));
+            sampleClient.DefaultRequestHeaders.Add("User-Agent", "lk-github-client");
 
-        //    var updateObj = new UpdateParams
-        //    {
-        //        content = Base64StringEncode(projectReadmeContent),
-        //        message = "",
-        //        sha = sha
-        //    };
+            var updateObj = new UpdateParams
+            {
+                content = Base64StringEncode(projectReadmeContent),
+                message = "",
+                sha = sha,
+                branch = branch
+            };
 
-        //    var content = new StringContent(JsonConvert.SerializeObject(updateObj), Encoding.UTF8, "application/json");
+            var content = new StringContent(JsonConvert.SerializeObject(updateObj), Encoding.UTF8, "application/json");
 
-        //    //parse result
-        //    HttpResponseMessage response = await sampleClient.PutAsync(String.Format("https://api.github.com/repos/{0}/{1}/contents/{2}?ref={3}", owner, repoName, path, branch), content);
-        //    String jsonStr = await response.Content.ReadAsStringAsync();
-        //    response.Dispose();
-        //    sampleClient.Dispose();
+            //parse result
+            HttpResponseMessage response = await sampleClient.PutAsync(String.Format("https://api.github.com/repos/{0}/{1}/contents/{2}", owner, repoName, path), content);
+            String jsonStr = await response.Content.ReadAsStringAsync();
+            response.Dispose();
+            sampleClient.Dispose();
 
-        //    return jsonStr;
-        //}
+            return jsonStr;
+        }
 
         private static string Base64StringEncode(string originalString)
         {

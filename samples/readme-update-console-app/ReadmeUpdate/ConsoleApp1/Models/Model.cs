@@ -32,5 +32,24 @@ namespace ConsoleApp1.Models
         public string message { get; set; }
 
         public string sha { get; set; }
+
+        public string branch { get; set; }
+    }
+
+    public class CommitInformation
+    {
+        public CommitDetails Commit { get; set; }
+    }
+
+    public class CommitDetails
+    {
+        public Author author { get; set; }
+    }
+
+    public class Author
+    {
+        public string name { get; set; }
+        public string email { get; set; }
+        public DateTime date { get; set; }
     }
 }
