@@ -1,4 +1,23 @@
-﻿# Calling and Meeting Bot Sample V4
+
+page_type: sample
+
+description: This sample app demonstarte how an Bot can create a call, join a meeting and transfer the call
+
+products:
+- office-teams
+- office
+- office-365
+
+language(s):
+- csharp
+
+extensions:
+
+contentType: samples
+
+createdDate: 07-07-2021 13:38:25
+
+# Calling and Meeting Bot Sample V4
 
 ## Summary
 
@@ -154,4 +173,5 @@ Calling and Meeting Bot provides basic functionality like Create Call, Join a ca
 ## Further reading
 - [Register a calling Bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/calls-and-meetings/registering-calling-bot#create-new-bot-or-add-calling-capabilities)
 - [Cloud Communications API](https://docs.microsoft.com/en-us/graph/api/resources/call?view=graph-rest-1.0)
+
 

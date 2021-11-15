@@ -1,4 +1,23 @@
-﻿﻿﻿
+
+page_type: sample
+
+description: Demonstrating feature where user can checkin with current location and view all previous checkins.
+
+products:
+- office-teams
+- office
+- office-365
+
+language(s):
+- csharp
+
+extensions:
+
+contentType: samples
+
+createdDate: 11-11-2021 23:30:17
+
+﻿﻿
 ## Get Checkin info of user
 
 This sample shows feature where user can checkin with current location and view all previous checkins.
@@ -120,3 +139,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Portal](https://portal.azure.com)
 - [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
 - [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
+

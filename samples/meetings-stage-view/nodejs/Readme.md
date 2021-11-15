@@ -1,3 +1,22 @@
+
+page_type: sample
+
+description: Enable and configure your apps for Teams meetings to use in stage view
+
+products:
+- office-teams
+- office
+- office-365
+
+language(s):
+- nodejs
+
+extensions:
+
+contentType: samples
+
+createdDate: 11-10-2021 17:35:46
+
 This App helps to enable and configure your apps for Teams meetings. This app covers Shared meeting stage.
 For reference please check [Enable and configure your apps for Teams meetings](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/enable-and-configure-your-app-for-teams-meetings)
 
@@ -83,3 +102,4 @@ This capability is currently available in developer preview only.
 - App in sidepanel.
 
 ![App in sidepanel](Images/side_panel.png)
+

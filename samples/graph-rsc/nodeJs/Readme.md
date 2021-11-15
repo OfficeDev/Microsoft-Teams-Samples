@@ -1,3 +1,22 @@
+
+page_type: sample
+
+description: This sample illustrates how you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs. .
+
+products:
+- office-teams
+- office
+- office-365
+
+language(s):
+- nodeJs
+
+extensions:
+
+contentType: samples
+
+createdDate: 07-07-2021 13:38:26
+
 # RSC with Graph API using Node js
 
 This sample illustrates you can use [Resource Specific Consent](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph API.
@@ -51,5 +70,6 @@ This sample illustrates you can use [Resource Specific Consent](https://docs.mic
 
 
    ![](./Images/image3.PNG)
+
 
 

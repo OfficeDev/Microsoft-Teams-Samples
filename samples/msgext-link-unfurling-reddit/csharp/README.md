@@ -1,3 +1,22 @@
+
+page_type: sample
+
+description: Messaging Extension with Link Unfurling Samples for Reddit Links
+
+products:
+- office-teams
+- office
+- office-365
+
+language(s):
+- csharp
+
+extensions:
+
+contentType: samples
+
+createdDate: 07-07-2021 13:38:27
+
 # Messaging Extension with Link Unfurling Samples for Reddit Links
 ![Preview Image](doc/images/Preview.gif)
 
@@ -58,4 +77,5 @@ At the bottom of the blade press `Add Setting`, this will open the `New Connecti
 ## References
 
 - [Link Unfurling BotBuilder Sample](https://github.com/microsoft/BotBuilder-Samples/tree/master/samples/csharp_dotnetcore/55.teams-link-unfurling)
+
 
