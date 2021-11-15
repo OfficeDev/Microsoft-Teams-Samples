@@ -1,4 +1,26 @@
-﻿# Teams Tab SSO Authentication
+
+---
+
+page_type: sample
+
+description: Sample channel and group tab with SSO hello world app.
+
+products:
+- office-teams
+- office
+- office-365
+
+language(s):
+- csharp
+
+extensions:
+
+contentType: samples
+
+createdDate: 16-11-2021 01:37:28
+
+---
+# Teams Tab SSO Authentication
 This sample illustrates how to implement SSO authentication for Teams Tab.
 
 ## Prerequisites

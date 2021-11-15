@@ -1,4 +1,26 @@
-﻿﻿﻿
+
+---
+
+page_type: sample
+
+description: This sample demos app installation using QR code of application's app id
+
+products:
+- office-teams
+- office
+- office-365
+
+language(s):
+- csharp
+
+extensions:
+
+contentType: samples
+
+createdDate: 16-11-2021 01:34:43
+
+---
+﻿﻿
 ## Install app using barcode sample
 
 This sample demos app installation using QR code.
@@ -122,3 +144,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Portal](https://portal.azure.com)
 - [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
 - [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
+

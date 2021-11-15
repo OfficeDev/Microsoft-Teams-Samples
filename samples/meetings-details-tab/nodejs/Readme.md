@@ -1,3 +1,26 @@
+
+---
+
+page_type: sample
+
+description: Microsoft Teams meeting extensibility sample for iteracting with Details Tab in-meeting
+
+products:
+- office-teams
+- office
+- office-365
+
+language(s):
+- javascript
+- nodejs
+
+extensions:
+
+contentType: samples
+
+createdDate: 16-11-2021 01:34:49
+
+---
 # Details Tab
 
 This sample app illustrates the implementation of Details Tab in Meeting. User can create a poll and post poll in meeting chat and participants can submit their feedback in Meeting.
@@ -76,3 +99,4 @@ Interact with Details Tab in Meeting.
 8. Response will be recorded and Bot will send an new adaptive card with response.
 ![Image](https://user-images.githubusercontent.com/50989436/120431763-92c7a400-c396-11eb-8daf-dce922b380ad.png)
 9. Participants in meeting can view the results from meeting chat or Tab itself.
+

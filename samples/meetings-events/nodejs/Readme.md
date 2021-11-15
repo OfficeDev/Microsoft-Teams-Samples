@@ -1,4 +1,27 @@
-﻿Using this Node JS sample, a bot can receive real-time meeting events.
+
+---
+
+page_type: sample
+
+description: Get real time meeting events
+
+products:
+- office-teams
+- office
+- office-365
+
+language(s):
+- javascript
+- nodejs
+
+extensions:
+
+contentType: samples
+
+createdDate: 16-11-2021 01:34:49
+
+---
+Using this Node JS sample, a bot can receive real-time meeting events.
 For reference please check [Real-time Teams meeting events](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet)
 
 This feature shown in this sample is currently available in public developer preview only.

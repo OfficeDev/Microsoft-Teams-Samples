@@ -1,3 +1,26 @@
+
+---
+
+page_type: sample
+
+description: Microsoft Teams tab sample app for demonstrating create conversation tab
+
+products:
+- office-teams
+- office
+- office-365
+
+language(s):
+- javascript
+- nodejs
+
+extensions:
+
+contentType: samples
+
+createdDate: 16-11-2021 01:34:48
+
+---
 # Conversational Tabs
 
 This Teams tab app provides a way to allow users to have conversations about sub-entities in the tab [Create conversational tabs](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/conversational-tabs?view=msteams-client-js-latest#continue-a-conversation)
@@ -105,3 +128,4 @@ You can use this tab by following the below steps:
 - [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
 - [dotenv](https://www.npmjs.com/package/dotenv)
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
+

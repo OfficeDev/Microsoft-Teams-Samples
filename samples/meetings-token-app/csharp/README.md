@@ -1,3 +1,25 @@
+
+---
+
+page_type: sample
+
+description: Microsoft Teams meeting extensibility sample: token passing
+
+products:
+- office-teams
+- office
+- office-365
+
+language(s):
+- csharp
+
+extensions:
+
+contentType: samples
+
+createdDate: 16-11-2021 01:34:49
+
+---
 # Meeting Token Generator
 
 The Meeting Token Generator app is a sample Microsoft Teams app that extends meetings in Teams.
@@ -149,3 +171,4 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+

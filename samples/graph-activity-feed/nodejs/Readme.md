@@ -1,3 +1,26 @@
+
+---
+
+page_type: sample
+
+description: Microsoft Teams sample app for Sending Activity feed notification using Graph API in a Teams Tab.
+
+products:
+- office-teams
+- office
+- office-365
+
+language(s):
+- javascript
+- nodejs
+
+extensions:
+
+contentType: samples
+
+createdDate: 16-11-2021 01:34:49
+
+---
 # Notify Feed App
 
 Nodejs Activity Feed sample using Tab.
@@ -109,3 +132,4 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
 - Notification triggred by Tab App will appear in Teams Activity Feed
 
 ![](Images/ActivityFeedNotification.png)
+

@@ -1,4 +1,26 @@
-﻿# RSC With Graph API
+
+---
+
+page_type: sample
+
+description: This sample illustrates how you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs. .
+
+products:
+- office-teams
+- office
+- office-365
+
+language(s):
+- csharp
+
+extensions:
+
+contentType: samples
+
+createdDate: 16-11-2021 01:34:49
+
+---
+# RSC With Graph API
 
 This sample illustrates you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs.
 
@@ -46,6 +68,7 @@ This sample illustrates you can use [Resource Specific Consent (RSC)](https://do
     ![](RSCDemo/Images/Picture1.png)
 
     ![](RSCDemo/Images/Picture2.Png)
+
 
 
 
