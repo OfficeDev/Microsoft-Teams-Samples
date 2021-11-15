@@ -1,4 +1,4 @@
----
+﻿---
 page_type: sample
 description: "This sample illustrates a meeting experience for recruitment scenario using Apps In Meetings."
 products:
@@ -7,7 +7,6 @@ products:
 - office-365
 languages:
 - csharp
-- dotnet
 extensions:
   contentType: samples
   createdDate: "10/1/2021 2:36:57 PM"
