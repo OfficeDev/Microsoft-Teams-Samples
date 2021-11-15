@@ -9,14 +9,13 @@ namespace ConsoleApp1
     public static class LocalFolder
     {
         // Information about the respository
-        static string rootReadmeContent = "";
         static string localFolderPath = @"C:\Users\v-abt\Documents\GitHub\Microsoft-Teams-Samples\";
 
         // Information to show in initial template.
-        static string[] languages;
         static string title = "";
         static string description = "";
         static int totalFilesUpdated = 0;
+        static string language = "";
 
         // Recursively get the contents of all files and subdirectories within a directory 
         public static bool readRootDirectory()
@@ -52,17 +51,27 @@ namespace ConsoleApp1
                 string pattern = ".*" + sampleKey + ".*";
                 var match = Regex.Match(rootReadmeContent, pattern).Value;
                 var matchSlpit = match.Split('|');
-                title = matchSlpit[2].Trim();
-                description = matchSlpit[3].Trim();
+                title = matchSlpit[2]?.Trim();
+                description = matchSlpit[3]?.Trim();
 
-                if (!Directory.Exists(localFolderPath + samplePath + "\\" + sampleFolderPathArray[2] + "\\README.md"))
+                var projectReadmePath = localFolderPath + samplePath + "\\";
+                if (sampleFolderPathArray.Length == 3)
+                {
+                    projectReadmePath += sampleFolderPathArray[2];
+                    language = sampleFolderPathArray[2];
+                }
+                else
+                {
+                    language = "js";
+                }
+                if (!Directory.Exists(projectReadmePath))
                 {
                     continue;
                 }
 
                 // Getting the file contents
-                var projectReadmeContent = File.ReadAllText(localFolderPath + samplePath + "\\" + sampleFolderPathArray[2] + "\\README.md"); 
-                var createdTime = File.GetCreationTime(localFolderPath + samplePath + "\\" + sampleFolderPathArray[2] + "\\README.md");
+                var projectReadmeContent = File.ReadAllText(projectReadmePath + "\\README.md");
+                var createdTime = File.GetCreationTime(projectReadmePath + "\\README.md");
                 var projectReadmeCreatedDate = Convert.ToString(createdTime);
                 if (!projectReadmeContent.Contains("page_type:"))
                 {
@@ -77,7 +86,7 @@ products:
 - office-365
 
 language(s):
-- {sampleFolderPathArray[2]}
+- {language}
 
 extensions:
 
@@ -89,11 +98,11 @@ createdDate: {projectReadmeCreatedDate}
 
                     string updatedReadmeContent = initialContent + projectReadmeContent;
 
-                    UpdateLocalFile(samplePath + "\\" + sampleFolderPathArray[2] + "\\README.md", updatedReadmeContent);
-                    Console.WriteLine("Updated " + samplePath + "/" + sampleFolderPathArray[2] + "/README.md");
+                    UpdateLocalFile(projectReadmePath + "\\README.md", updatedReadmeContent);
+                    Console.WriteLine("Updated " + projectReadmePath + "/README.md");
                     totalFilesUpdated += 1;
                 }
-                Console.WriteLine("Already updated " + samplePath + "/" + sampleFolderPathArray[2] + "/README.md");
+                Console.WriteLine("Already updated " + projectReadmePath + "/README.md");
             }
             return true;
         }
@@ -113,8 +122,7 @@ createdDate: {projectReadmeCreatedDate}
         // MEthod to update file locally.
         public static bool UpdateLocalFile(string path, string projectReadmeContent)
         {
-            string filePath = @"C:\Users\v-abt\Documents\GitHub\Microsoft-Teams-Samples\" + path;
-            using (StreamWriter newTask = new StreamWriter(filePath, false))
+            using (StreamWriter newTask = new StreamWriter(path, false))
             {
                 newTask.WriteLine(projectReadmeContent);
             }

@@ -25,6 +25,7 @@ namespace ConsoleApp1
         static string[] languages;
         static string title = "";
         static string description = "";
+        static int totalFilesUpdated = 0;
 
         //Get all files from a repo
         public static async Task<RepositoryContent> getRepo()
@@ -32,6 +33,8 @@ namespace ConsoleApp1
             HttpClient client = new HttpClient();
             RepositoryContent root = await readRootDirectory("root", client, String.Format("https://api.github.com/repos/{0}/{1}/contents?ref={2}", owner, repoName, branch), access_token);
             client.Dispose();
+
+            Console.WriteLine(totalFilesUpdated);
             return root;
         }
 
@@ -60,6 +63,8 @@ namespace ConsoleApp1
                 }
             }
 
+            Console.WriteLine("Total samples: " + currentSamples.Count);
+
             // Iterating through all samples in README file.
             foreach (string sampleString in currentSamples)
             {
@@ -84,6 +89,11 @@ namespace ConsoleApp1
                 // Getting only the project README file.
                 RepositoryContent projReadme = languageContent.Find(x => x.name == "README.md");
 
+                if(projReadme == null)
+                {
+                    continue;
+                }
+
                 // Getting the file contents
                 var projectReadmeContent = await getFileContent(projReadme.download_url);
                 var commitInformation = await getCommitInformation(samplePath + "/" + sampleFolderPathArray[2] + "/README.md");
@@ -100,8 +110,8 @@ products:
 - office
 - office-365
 
-languages:
-- {string.Join(',', languages)}
+language(s):
+- {sampleFolderPathArray[2]}
 
 extensions:
 
@@ -109,15 +119,18 @@ contentType: samples
 
 createdDate: {projectReadmeCreatedDate}
 
-# {title}
-- {description}
 ";
 
                     string updatedReadmeContent = initialContent + projectReadmeContent;
 
                     //TODO: Uncomment this while running app.
-                    var updateResponse = await UpdateFile(samplePath + "/" + sampleFolderPathArray[2] + "/" + projReadme.name, projReadme.sha, updatedReadmeContent);
+                    //var updateResponse = await UpdateFile(samplePath + "/" + sampleFolderPathArray[2] + "/" + projReadme.name, projReadme.sha, updatedReadmeContent);
+
+                    UpdateLocalFile(samplePath + "\\" + sampleFolderPathArray[2] + "\\" + projReadme.name, updatedReadmeContent);
+                    Console.WriteLine("Updated " + samplePath + "/" + sampleFolderPathArray[2] + "/" + projReadme.name);
+                    totalFilesUpdated += 1;
                 }
+                Console.WriteLine("Already updated " + samplePath + "/" + sampleFolderPathArray[2] + "/" + projReadme.name);
             }
             return rootReadme;
         }
@@ -194,35 +207,35 @@ createdDate: {projectReadmeCreatedDate}
             return stream;
         }
 
-        // Method to update file.
-        public static async Task<string> UpdateFile(string path, string sha, string projectReadmeContent)
-        {
-            HttpClient sampleClient = new HttpClient();
-            sampleClient.DefaultRequestHeaders
-                                .Accept
-                                .Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
-            sampleClient.DefaultRequestHeaders.Add("Authorization",
-                "Basic " + Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(String.Format("{0}:{1}", access_token, "x-oauth-basic"))));
-            sampleClient.DefaultRequestHeaders.Add("User-Agent", "lk-github-client");
+        // Method to update file in github branch.
+        //public static async Task<string> UpdateFile(string path, string sha, string projectReadmeContent)
+        //{
+        //    HttpClient sampleClient = new HttpClient();
+        //    sampleClient.DefaultRequestHeaders
+        //                        .Accept
+        //                        .Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
+        //    sampleClient.DefaultRequestHeaders.Add("Authorization",
+        //        "Basic " + Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(String.Format("{0}:{1}", access_token, "x-oauth-basic"))));
+        //    sampleClient.DefaultRequestHeaders.Add("User-Agent", "lk-github-client");
 
-            var updateObj = new UpdateParams
-            {
-                content = Base64StringEncode(projectReadmeContent),
-                message = "",
-                sha = sha,
-                branch = branch
-            };
+        //    var updateObj = new UpdateParams
+        //    {
+        //        content = Base64StringEncode(projectReadmeContent),
+        //        message = "",
+        //        sha = sha,
+        //        branch = branch
+        //    };
 
-            var content = new StringContent(JsonConvert.SerializeObject(updateObj), Encoding.UTF8, "application/json");
+        //    var content = new StringContent(JsonConvert.SerializeObject(updateObj), Encoding.UTF8, "application/json");
 
-            //parse result
-            HttpResponseMessage response = await sampleClient.PutAsync(String.Format("https://api.github.com/repos/{0}/{1}/contents/{2}", owner, repoName, path), content);
-            String jsonStr = await response.Content.ReadAsStringAsync();
-            response.Dispose();
-            sampleClient.Dispose();
+        //    //parse result
+        //    HttpResponseMessage response = await sampleClient.PutAsync(String.Format("https://api.github.com/repos/{0}/{1}/contents/{2}", owner, repoName, path), content);
+        //    String jsonStr = await response.Content.ReadAsStringAsync();
+        //    response.Dispose();
+        //    sampleClient.Dispose();
 
-            return jsonStr;
-        }
+        //    return jsonStr;
+        //}
 
         private static string Base64StringEncode(string originalString)
         {
@@ -232,6 +245,17 @@ createdDate: {projectReadmeCreatedDate}
 
             return encodedString;
         }
+
+        // MEthod to update file locally.
+        public static bool UpdateLocalFile(string path, string projectReadmeContent)
+        {
+            string filePath = @"C:\Users\v-abt\Documents\GitHub\Microsoft-Teams-Samples\" + path;
+            using (StreamWriter newTask = new StreamWriter(filePath, false))
+            {
+                newTask.WriteLine(projectReadmeContent);
+            }
+            return true;
+        }
     }
 }
 
@@ -239,8 +263,9 @@ public class MainClass
 {
     public static void Main()
     {
-        var task = Program.getRepo();
-        task.Wait();
-        var dir = task.Result;
+        var isCompleted = LocalFolder.readRootDirectory();
+        //var task = Program.getRepo();
+        //task.Wait();
+        //var dir = task.Result;
     }
 }
