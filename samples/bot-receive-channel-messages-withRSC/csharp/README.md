@@ -1,4 +1,26 @@
-﻿﻿﻿Using this C# sample, a bot can receive all channel messages with RSC without @mention.
+
+---
+
+page_type: sample
+
+description: Demonstrating on how a bot can receive all channel messages with RSC without @mention.
+
+products:
+- office-teams
+- office
+- office-365
+
+language(s):
+- csharp
+
+extensions:
+
+contentType: samples
+
+createdDate: 16-11-2021 01:42:53
+
+---
+﻿﻿Using this C# sample, a bot can receive all channel messages with RSC without @mention.
 For reference please check [Receive Channel messages with RSC](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/channel-messages-with-rsc)
 
 This feature shown in this sample is currently available in Public Developer Preview only.
@@ -99,3 +121,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Portal](https://portal.azure.com)
 - [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
 - [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
+

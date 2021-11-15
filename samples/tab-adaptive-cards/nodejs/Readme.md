@@ -1,3 +1,25 @@
+
+---
+
+page_type: sample
+
+description: Microsoft Teams tab sample code which demonstrates how to [Build tabs with Adaptive Cards](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs)
+
+products:
+- office-teams
+- office
+- office-365
+
+language(s):
+- nodejs
+
+extensions:
+
+contentType: samples
+
+createdDate: 16-11-2021 01:42:53
+
+---
 # Tab With AdpativeCard Flow
 
 This App talks about the Teams tab which displays Adaptive card with Node JS. For reference please check [Build tabs with Adaptive Cards](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs)
@@ -120,3 +142,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
 - [dotenv](https://www.npmjs.com/package/dotenv)
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
+

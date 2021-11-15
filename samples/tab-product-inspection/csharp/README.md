@@ -1,4 +1,26 @@
-﻿# Product Inspection
+
+---
+
+page_type: sample
+
+description: Demonstrating a feature where user can scan a product and mark it as approved/rejected.
+
+products:
+- office-teams
+- office
+- office-365
+
+language(s):
+- csharp
+
+extensions:
+
+contentType: samples
+
+createdDate: 16-11-2021 01:42:53
+
+---
+# Product Inspection
 
 This sample app demonstrate a feature where user can scan a product, capture a image and mark it as approved/rejected.
 
