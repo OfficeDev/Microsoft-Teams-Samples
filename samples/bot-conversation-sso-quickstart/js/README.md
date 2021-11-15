@@ -1,3 +1,24 @@
+---
+page_type: sample
+
+description: Messaging and conversation event handling hello world with SSO.
+
+products:
+- office-teams
+- office
+- office-365
+
+language(s):
+- javascript
+- nodejs
+
+extensions:
+
+contentType: samples
+
+createdDate: 16-11-2021 01:55:12
+---
+
 # Teams Bot with SSO
 
 Teams Bot with SSO using Bot Framework v4.
@@ -63,3 +84,4 @@ You can interact with this bot by sending it a message. The bot will respond by 
 - [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
 - [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
+

@@ -1,4 +1,4 @@
-
+---
 page_type: sample
 
 description: Microsoft Teams hello world sample app.
@@ -8,28 +8,18 @@ products:
 - office
 - office-365
 
-languages:
-- csharp,nodejs
+language(s):
+- csharp
 
 extensions:
+
 contentType: samples
+
+createdDate: 16-11-2021 01:59:21
+---
 
 # Hello World
 - Microsoft Teams hello world sample app.
----
-page_type: sample
-products:
-- office-365
-languages:
-- csharp
-title: Microsoft Teams C# Helloworld Sample
-description: Microsoft Teams "Hello world" application for .NET/C#
-extensions:
-  contentType: samples
-  platforms:
-  - CSS
-  createdDate: 10/16/2017 10:02:21 PM
----
 
 # Official documentation
 
@@ -48,3 +38,4 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+

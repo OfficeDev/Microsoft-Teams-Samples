@@ -1,4 +1,24 @@
-﻿# Teams Tab SSO Authentication
+---
+page_type: sample
+
+description: Sample personal tab with SSO hello world app.
+
+products:
+- office-teams
+- office
+- office-365
+
+language(s):
+- csharp
+
+extensions:
+
+contentType: samples
+
+createdDate: 16-11-2021 01:55:12
+---
+
+# Teams Tab SSO Authentication
 This sample illustrates how to implement SSO authentication for Teams Tab.
 
 ## Prerequisites

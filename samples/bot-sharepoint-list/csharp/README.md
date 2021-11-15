@@ -1,4 +1,24 @@
-﻿# SPListBot
+---
+page_type: sample
+
+description: This sample app shows the interaction between teams bot and SharePoint List, Bot saves the specified details in SharePoint List as back-end
+
+products:
+- office-teams
+- office
+- office-365
+
+language(s):
+- csharp
+
+extensions:
+
+contentType: samples
+
+createdDate: 16-11-2021 01:55:12
+---
+
+# SPListBot
 
 Bot Framework v4 SPListBot sample.
 
@@ -116,4 +136,5 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 - [Granting Access using sharepoint app only](https://docs.microsoft.com/en-us/sharepoint/dev/solution-guidance/security-apponly-azureacs)
 - [Sharepoint using Application Context](https://docs.microsoft.com/en-us/sharepoint/dev/solution-guidance/security-apponly)
 - [Sharepoint API basic operations](https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/complete-basic-operations-using-sharepoint-rest-endpoints)
+
 

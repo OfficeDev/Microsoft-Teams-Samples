@@ -1,3 +1,23 @@
+---
+page_type: sample
+
+description: Demonstrating a feature where user can scan a product and mark it as approved/rejected.
+
+products:
+- office-teams
+- office
+- office-365
+
+language(s):
+- nodejs
+
+extensions:
+
+contentType: samples
+
+createdDate: 16-11-2021 01:55:12
+---
+
 # Product Inspection
 
 This sample app demonstrate a feature where user can scan a product, capture a image and mark it as approved/rejected.
@@ -45,3 +65,4 @@ This sample app demonstrate a feature where user can scan a product, capture a i
     - **Edit** the `manifest.json` contained in the  `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Manifest-id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)and ngrok url *everywhere* you see the place holder string `<<base-url>>`
     - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+

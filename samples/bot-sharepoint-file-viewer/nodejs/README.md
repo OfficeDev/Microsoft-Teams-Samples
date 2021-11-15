@@ -1,3 +1,23 @@
+---
+page_type: sample
+
+description: This sample demos a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer.
+
+products:
+- office-teams
+- office
+- office-365
+
+language(s):
+- nodejs
+
+extensions:
+
+contentType: samples
+
+createdDate: 16-11-2021 01:55:12
+---
+
 Using this Nodejs sample, a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer.
 
 ## Key features
@@ -85,3 +105,4 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
 Add the bot to personal scope.
 
 Send `login` message to the bot, you will recieve a consent card by the bot in your personal scope.
+
