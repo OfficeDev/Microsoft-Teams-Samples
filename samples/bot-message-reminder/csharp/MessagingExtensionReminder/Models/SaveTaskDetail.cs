@@ -4,7 +4,7 @@
 
 using System;
 
-namespace MEMessageReminder.Models
+namespace MessagingExtensionReminder.Models
 {
     /// <summary>
     /// Save task detail model class.

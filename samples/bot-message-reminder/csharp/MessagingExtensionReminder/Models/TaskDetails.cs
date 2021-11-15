@@ -4,7 +4,7 @@
 
 using Newtonsoft.Json;
 
-namespace MEMessageReminder.Models
+namespace MessagingExtensionReminder.Models
 {
     /// <summary>
     /// Location details model class.

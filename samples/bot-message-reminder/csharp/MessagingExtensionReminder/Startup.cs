@@ -3,8 +3,8 @@
 //
 // Generated with Bot Builder V4 SDK Template for Visual Studio v4.14.0
 
-using MEMessageReminder.Bots;
-using MEMessageReminder.Models;
+using MessagingExtensionReminder.Bots;
+using MessagingExtensionReminder.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
@@ -16,7 +16,7 @@ using Microsoft.Extensions.Hosting;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 
-namespace MEMessageReminder
+namespace MessagingExtensionReminder
 {
     public class Startup
     {

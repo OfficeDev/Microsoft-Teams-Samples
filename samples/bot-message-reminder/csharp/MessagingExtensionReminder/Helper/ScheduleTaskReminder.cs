@@ -6,7 +6,7 @@ using Quartz;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace MEMessageReminder
+namespace MessagingExtensionReminder
 {
     public class ScheduleTaskReminder : IJob
     {
@@ -18,7 +18,7 @@ namespace MEMessageReminder
             JobDataMap dataMap = context.JobDetail.JobDataMap;
             string baseUrl = dataMap.GetString("baseUrl");
 
-            await client.GetAsync(baseUrl+"/api/task");
+            await client.GetAsync(baseUrl + "/api/task");
         }
     }
 }

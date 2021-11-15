@@ -6,7 +6,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace MEMessageReminder
+namespace MessagingExtensionReminder
 {
     public class Program
     {

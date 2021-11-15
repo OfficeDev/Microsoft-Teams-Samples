@@ -3,17 +3,17 @@
 
 This sample shows feature where user can schedule a task from messaging extension action and get a reminder card at scheduled time.
 
-![Select message](MEMessageReminder/Images/MessageAction.png)
+![Select message](MessagingExtensionReminder/Images/MessageAction.png)
 
-![Task Details](MEMessageReminder/Images/ScheduleTask.png)
+![Task Details](MessagingExtensionReminder/Images/ScheduleTask.png)
 
-![Task reminder](MEMessageReminder/Images/TaskReminder.png)
+![Task reminder](MessagingExtensionReminder/Images/TaskReminder.png)
 
-![Team message action ](MEMessageReminder/Images/MessageActionTeam.png)
+![Team message action ](MessagingExtensionReminder/Images/MessageActionTeam.png)
 
-![Team Task Details ](MEMessageReminder/Images/ScheduleTaskTeam.png)
+![Team Task Details ](MessagingExtensionReminder/Images/ScheduleTaskTeam.png)
 
-![ TeamTask reminder](MEMessageReminder/Images/TaskReminderTeam.png)
+![ TeamTask reminder](MessagingExtensionReminder/Images/TaskReminderTeam.png)
 
 ## Prerequisites
 
@@ -45,7 +45,7 @@ This sample shows feature where user can schedule a task from messaging extensio
 
     change into project folder
     ```bash
-    cd # MEMessageReminder
+    cd # MessagingExtensionReminder
     ```
     
 4) Run ngrok - point to port 3978
@@ -77,8 +77,8 @@ This sample shows feature where user can schedule a task from messaging extensio
    B) Or from Visual Studio
      - Launch Visual Studio
      - File -> Open -> Project/Solution
-     - Navigate to `MEMessageReminder` folder
-     - Select `MEMessageReminder.csproj` file
+     - Navigate to `MessagingExtensionReminder` folder
+     - Select `MessagingExtensionReminder.csproj` file
      - Press `F5` to run the project 
 
 9) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
@@ -91,19 +91,19 @@ This sample shows feature where user can schedule a task from messaging extensio
 
 Personal scope scenario 
 
-![Select message](MEMessageReminder/Images/MessageAction.png)
+![Select message](MessagingExtensionReminder/Images/MessageAction.png)
 
-![Task Details](MEMessageReminder/Images/ScheduleTask.png)
+![Task Details](MessagingExtensionReminder/Images/ScheduleTask.png)
 
-![Task reminder](MEMessageReminder/Images/TaskReminder.png)
+![Task reminder](MessagingExtensionReminder/Images/TaskReminder.png)
 
 Team scope scenario
 
-![Team message action ](MEMessageReminder/Images/MessageActionTeam.png)
+![Team message action ](MessagingExtensionReminder/Images/MessageActionTeam.png)
 
-![Team Task Details ](MEMessageReminder/Images/ScheduleTaskTeam.png)
+![Team Task Details ](MessagingExtensionReminder/Images/ScheduleTaskTeam.png)
 
-![ TeamTask reminder](MEMessageReminder/Images/TaskReminderTeam.png)
+![ TeamTask reminder](MessagingExtensionReminder/Images/TaskReminderTeam.png)
 
 
 ## Deploy the bot to Azure

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using MEMessageReminder.Models;
+using MessagingExtensionReminder.Models;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
@@ -16,7 +16,7 @@ using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 
-namespace MEMessageReminder.Bots
+namespace MessagingExtensionReminder.Bots
 {
     /// <summary>
     /// Bot Activity handler class.
@@ -116,11 +116,6 @@ namespace MEMessageReminder.Bots
             var dateTime = (DateTime)asJobject.ToObject<TaskDetails<DateTime>>()?.DateTime;
 
             var date = dateTime.ToLocalTime();
-            var year = date.Year;
-            var month = date.Month;
-            var day = date.Day;
-            var hour = date.Hour;
-            var min = date.Minute;
 
             var currentTaskList = new List<SaveTaskDetail>();
             List<SaveTaskDetail> taskList = new List<SaveTaskDetail>();
@@ -130,7 +125,7 @@ namespace MEMessageReminder.Bots
             {
                 Description = description,
                 Title = title,
-                DateTime = new DateTimeOffset(year, month, day, hour, min, 0, TimeSpan.Zero),
+                DateTime = new DateTimeOffset(date.Year, date.Month, date.Day, date.Hour, date.Minute, 0, TimeSpan.Zero),
             };
 
             if (currentTaskList == null)
@@ -144,7 +139,7 @@ namespace MEMessageReminder.Bots
                 _taskDetails.AddOrUpdate("taskDetails", currentTaskList, (key, newValue) => currentTaskList);
             }
             TaskScheduler taskSchedule = new TaskScheduler();
-            taskSchedule.Start(year, month, day, hour, min, _applicationBaseUrl);
+            taskSchedule.Start(date.Year, date.Month, date.Day, date.Hour, date.Minute, _applicationBaseUrl);
             await turnContext.SendActivityAsync("Task submitted successfully. You will get reminder for the task at scheduled time");
 
             return null;
@@ -173,7 +168,7 @@ namespace MEMessageReminder.Bots
                 {
                     Value = new TaskModuleTaskInfo
                     {
-                        Url = _applicationBaseUrl + "/" + "ScheduleTask?title="+title+ "&description="+ description,
+                        Url = _applicationBaseUrl + "/" + "ScheduleTask?title=" + title + "&description="+ description,
                         Height = 350,
                         Width = 400,
                         Title = "Schedule-task",

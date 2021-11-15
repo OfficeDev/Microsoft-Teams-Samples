@@ -6,7 +6,7 @@ using System;
 using Quartz;
 using Quartz.Impl;
 
-namespace MEMessageReminder
+namespace MessagingExtensionReminder
 {
     public class TaskScheduler
     {
@@ -16,14 +16,16 @@ namespace MEMessageReminder
             var triggerName = Guid.NewGuid().ToString();
             var scheduler = StdSchedulerFactory.GetDefaultScheduler().GetAwaiter().GetResult();
             scheduler.Start();
+
             IJobDetail job = JobBuilder.Create<ScheduleTaskReminder>().
                                     UsingJobData("baseUrl", baseUrl).
                                     Build();
+
             ITrigger trigger = TriggerBuilder.Create()
-             .WithIdentity(triggerName, triggerName)
-               .StartAt(DateBuilder.DateOf(hour, min, 0, day, month, year))
-               .WithPriority(1)
-               .Build();
+                                     .WithIdentity(triggerName, triggerName)
+                                     .StartAt(DateBuilder.DateOf(hour, min, 0, day, month, year))
+                                     .WithPriority(1)
+                                     .Build();
 
             scheduler.ScheduleJob(job, trigger);
         }

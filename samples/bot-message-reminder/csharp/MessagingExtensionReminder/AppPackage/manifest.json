@@ -11,11 +11,11 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Message reminder from ME",
-    "full": "Message reminder from ME"
+    "short": "Messaging extension reminder",
+    "full": "Message reminder from messaging extension"
   },
   "description": {
-    "short": "Message reminder from ME",
+    "short": "Message reminder from messaging extension",
     "full": "This sample shows feature where user can schedule a task from messaging extension action and get a reminder card at scheduled date and time."
   },
   "icons": {

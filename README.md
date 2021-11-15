@@ -25,7 +25,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |12|Teams tab graph toolkit | This sample demos building teams tab using microsoft graph toolkit|[View](/demo%20manifest/Teams-tab-graph-toolkit.zip)     |
 |13| Product inspection | Demonstrating a feature where user can scan a product and mark it as approved/rejected. |[View](/demo%20manifest/Tab-Product-Inspection.zip)     |
 |14| Bot with SharePoint file to view in Teams file viewer| This sample demos a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer.|[View](/demo%20manifest/Bot-SharePoint-File-Viewer.zip)     |
-|14| Message reminder ME | This sample demos a feature where user can schedule a task from messaging extension action and get a reminder card at scheduled date and time.|[View](/demo%20manifest/Message-Reminder-ME.zip)     |
+|14| Message reminder setup through messaging extension | This sample demos a feature where user can schedule a task from messaging extension action and get a reminder card at scheduled date and time.|[View](/demo%20manifest/Message-Reminder-Messaging-extension.zip)     |
 
 ## [Getting Started - Samples and Tutorials](https://docs.microsoft.com/microsoftteams/platform/tutorials/get-started-dotnet-app-studio)
 
@@ -154,7 +154,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |14| App Installtion  using QR code |This sample demos app installation using QR code of application's app id | [View][qrappinstallation#csharp] | [View][qrappinstallation#nodejs]
 |15| Archive groupchat messages | Demonstrating on how a bot can archive groupchat messages and send it to user as a file. | [View][fetchgroupchatmessages#csharp] |[View][fetchgroupchatmessages#nodejs]|
 |16| App check in location | Demonstrating feature where user can checkin with current location and view all previous checkins. | [View][appcheckinlocation#csharp] |[View][checkinlocation#nodejs]|
-|17| Message reminder messaging extension | Demonstrating feature where user can schedule a task from messaging extension action and get a reminder card at scheduled time | [View][memessagereminder#csharp] ||
+|17| Message reminder setup through messaging extension | Demonstrating feature where user can schedule a task from messaging extension action and get a reminder card at scheduled time | [View][memessagereminder#csharp] ||
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
