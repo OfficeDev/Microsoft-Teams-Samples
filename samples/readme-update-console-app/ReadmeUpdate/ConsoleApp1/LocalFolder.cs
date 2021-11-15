@@ -50,6 +50,8 @@ namespace ConsoleApp1
                 // Getting sample details by regex
                 string pattern = ".*" + sampleKey + ".*";
                 var match = Regex.Match(rootReadmeContent, pattern).Value;
+
+                if (match.IndexOf('|') == -1) continue;
                 var matchSlpit = match.Split('|');
                 title = matchSlpit[2]?.Trim();
                 description = matchSlpit[3]?.Trim();
