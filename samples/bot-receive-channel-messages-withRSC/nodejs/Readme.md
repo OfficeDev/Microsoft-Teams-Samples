@@ -1,27 +1,4 @@
-
----
-
-page_type: sample
-
-description: Demonstrating on how a bot can receive all channel messages with RSC without @mention.
-
-products:
-- office-teams
-- office
-- office-365
-
-language(s):
-- javascript
-- nodejs
-
-extensions:
-
-contentType: samples
-
-createdDate: 16-11-2021 01:34:49
-
----
-Using this Node JS sample, a bot can receive all channel messages with RSC without @mention.
+﻿Using this Node JS sample, a bot can receive all channel messages with RSC without @mention.
 For reference please check [Receive Channel messages with RSC](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/channel-messages-with-rsc)
 
 This feature shown in this sample is currently available in Public Developer Preview only.

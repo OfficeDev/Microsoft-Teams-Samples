@@ -1,26 +1,3 @@
-
----
-
-page_type: sample
-
-description: Demonstrating feature where user can checkin with current location and view all previous checkins.
-
-products:
-- office-teams
-- office
-- office-365
-
-language(s):
-- javascript
-- nodejs
-
-extensions:
-
-contentType: samples
-
-createdDate: 16-11-2021 01:34:49
-
----
 ## Get Checkin info of user
 
 This sample shows feature where user can checkin with current location and view all previous checkins.
@@ -100,4 +77,3 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 - `viewcheckindetails` of user.
 
 ![User last checkin card](Images/UserLastCheckInCard.png)
-

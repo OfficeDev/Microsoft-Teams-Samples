@@ -1,26 +1,3 @@
-
----
-
-page_type: sample
-
-description: Demonstrating on how a bot can archive groupchat messages and send it to user as a file.
-
-products:
-- office-teams
-- office
-- office-365
-
-language(s):
-- javascript
-- nodejs
-
-extensions:
-
-contentType: samples
-
-createdDate: 16-11-2021 01:34:49
-
----
 Using this nodejs sample, a bot can archive chat messages of groupchat and send it to user.
 
 This feature shown in this sample is currently available in Public Developer Preview only.
@@ -91,4 +68,3 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
 Select a groupchat and add the bot to chat.
 
 Send `getchat` message to the bot, you will recieve a consent card by the bot in your personal scope.
-

@@ -1,26 +1,3 @@
-
----
-
-page_type: sample
-
-description: Microsoft Teams meeting extensibility sample for iteracting with Content Bubble Bot in-meeting
-
-products:
-- office-teams
-- office
-- office-365
-
-language(s):
-- javascript
-- nodejs
-
-extensions:
-
-contentType: samples
-
-createdDate: 16-11-2021 01:34:49
-
----
 # ContentBubble JavaScript/NodeJS
 This sample illustrates how to implement [Content Bubble](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience.
 

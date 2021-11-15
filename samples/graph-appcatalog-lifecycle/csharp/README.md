@@ -1,26 +1,4 @@
-
----
-
-page_type: sample
-
-description: This sample illustrates how you programmatically manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs. .
-
-products:
-- office-teams
-- office
-- office-365
-
-language(s):
-- csharp
-
-extensions:
-
-contentType: samples
-
-createdDate: 16-11-2021 01:34:49
-
----
-### AppCatalog sample
+﻿### AppCatalog sample
 
 Bot Framework v4 AppCatalog sample.
 
@@ -114,4 +92,3 @@ This sample shows a AppCatalog bot and demonstrates teamsApp lifecycle in catalo
 - [App in Catalog] (https://docs.microsoft.com/en-us/graph/api/resources/teamsapp?view=graph-rest-1.0)
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-

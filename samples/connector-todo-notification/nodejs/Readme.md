@@ -1,26 +1,3 @@
-
----
-
-page_type: sample
-
-description: This is a sample app which shows connector authentication and sends notification on task creation.
-
-products:
-- office-teams
-- office
-- office-365
-
-language(s):
-- javascript
-- nodejs
-
-extensions:
-
-contentType: samples
-
-createdDate: 16-11-2021 01:34:49
-
----
 # Microsoft Teams Sample for Authentication in Connector in nodejs
 
 This is a sample connector application which demonstarates how to add authentication to connector configuration page and send notification on task creation.
@@ -114,6 +91,5 @@ The sample shows a simple implementation of a connector registration implementat
 For more information about getting started with Teams, please review the following resources:
 - Review [Getting Started with Authentications for Tabs](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-tab-aad)
 - Review [Getting Started with Teams](https://msdn.microsoft.com/en-us/microsoft-teams/setup)
-
 
 

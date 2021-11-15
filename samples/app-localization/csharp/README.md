@@ -1,26 +1,4 @@
-
----
-
-page_type: sample
-
-description: Microsoft Teams app localization using Bot and Tab
-
-products:
-- office-teams
-- office
-- office-365
-
-language(s):
-- csharp
-
-extensions:
-
-contentType: samples
-
-createdDate: 16-11-2021 01:34:49
-
----
-# Teams App Localization
+﻿# Teams App Localization
 This sample illustrates how to implement [Localization for Microsoft Teams apps](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/apps-localization).
 
 ## Prerequisites
@@ -76,4 +54,3 @@ To change the language in Microsoft Teams, please click your profile picture at 
 
 
   
-
