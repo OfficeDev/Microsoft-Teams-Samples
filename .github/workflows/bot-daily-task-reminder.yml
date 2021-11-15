@@ -8,7 +8,7 @@ on:
     #Change the branch name to <<main>>
     #Change the path to the folder where your code resides. Any change here will start the activity. 
     branches:
-      - v-pritka/bot-daily-reminder-c#
+      - v-pritka/bot-daily-remider-c#
     paths:
       - 'samples/bot-daily-task-reminder/csharp/**'  
   workflow_dispatch:
