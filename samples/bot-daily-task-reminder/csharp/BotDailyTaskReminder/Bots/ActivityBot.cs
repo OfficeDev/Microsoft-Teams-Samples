@@ -131,11 +131,6 @@ namespace BotDailyTaskReminder.Bots
             var selectedDaysObject = (JArray)asJobject.ToObject<TaskDetails<JArray>>()?.SelectedDays;
             var selectedDays = selectedDaysObject.ToObject<List<string>>();
             var date = dateTime.ToLocalTime();
-            var year = date.Year;
-            var month = date.Month;
-            var day = date.Day;
-            var hour = date.Hour;
-            var min = date.Minute;
 
             var recurringDays = string.Join(",", selectedDays);
             var currentTaskList = new List<SaveTaskDetail>();
@@ -146,7 +141,7 @@ namespace BotDailyTaskReminder.Bots
             {
                 Description = description,
                 Title = title,
-                DateTime = new DateTimeOffset(year, month, day, hour, min,0, TimeSpan.Zero),
+                DateTime = new DateTimeOffset(date.Year, date.Month, date.Day, date.Hour, date.Minute, 0, TimeSpan.Zero),
                 SelectedDays = selectedDays
             };
 
@@ -162,7 +157,7 @@ namespace BotDailyTaskReminder.Bots
             }
             
             TaskScheduler taskSchedule = new TaskScheduler();
-            taskSchedule.Start(hour, min, _applicationBaseUrl, recurringDays);
+            taskSchedule.Start(date.Hour, date.Minute, _applicationBaseUrl, recurringDays);
             await turnContext.SendActivityAsync("Task submitted successfully. You will get reminder for the task at scheduled time");
 
             return null;

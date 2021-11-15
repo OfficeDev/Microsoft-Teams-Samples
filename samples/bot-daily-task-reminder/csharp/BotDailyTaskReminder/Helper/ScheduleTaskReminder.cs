@@ -18,7 +18,7 @@ namespace BotDailyTaskReminder
             JobDataMap dataMap = context.JobDetail.JobDataMap;
             string baseUrl = dataMap.GetString("baseUrl");
 
-            await client.GetAsync(baseUrl+"/api/task");
+            await client.GetAsync(baseUrl + "/api/task");
         }
     }
 }
