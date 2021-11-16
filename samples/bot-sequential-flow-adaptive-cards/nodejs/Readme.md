@@ -1,4 +1,19 @@
-# Sequential Workflows in adaptive card
+---
+page_type: sample
+description: Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- nodejs
+- javascript
+extensions:
+contentType: samples
+createdDate: "07-07-2021 13:38:26"
+---
+
+# Sequential workflow adaptive cards
 
 This App talks about the Teams Bot User Specific Views and Sequential Workflows in adaptive card with Node JS
 
@@ -144,3 +159,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
 - [dotenv](https://www.npmjs.com/package/dotenv)
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
+

@@ -1,4 +1,18 @@
-# Configurable Tab using AAD and Silent Authentication
+---
+page_type: sample
+description: Configurable Tab using AAD and Silent Authentication
+products:
+- office-teams
+- office
+- office-365
+languages:
+- csharp
+extensions:
+contentType: samples
+createdDate: "20-03-2021 13:38:27"
+---
+
+# Config Tab Authentication
 
 ## Summary
 

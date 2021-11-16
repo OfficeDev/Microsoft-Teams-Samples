@@ -1,4 +1,20 @@
-﻿﻿﻿Using this C# sample, a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer
+﻿﻿---
+page_type: sample
+description: This sample demos a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- csharp
+extensions:
+contentType: samples
+createdDate: "16-11-2021 00:15:13"
+---
+
+# Bot with SharePoint file to view in Teams file viewer
+
+Using this C# sample, a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer
 
 ## Key features
 
