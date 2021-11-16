@@ -16,7 +16,7 @@ class TeamsBot extends TeamsActivityHandler {
             const membersAdded = context.activity.membersAdded;
             for (let member = 0; member < membersAdded.length; member++) {
                 if (membersAdded[member].id !== context.activity.recipient.id) {
-                    await context.sendActivity("Hello and welcome! With this sample you can schedule a task and get reminder on the scheduled date and time.(use command 'create-reminder')");
+                    await context.sendActivity("Hello and welcome! With this sample you can schedule a recurring task and get a reminder on the scheduled time.(use command 'create-reminder')");
                 }
             }
 
@@ -43,7 +43,7 @@ class TeamsBot extends TeamsActivityHandler {
             taskInfo.url = taskInfo.fallbackUrl = this.baseUrl + "/scheduleTask";
             taskInfo.height = 350;
             taskInfo.width = 350;
-            taskInfo.title = "Schedule task";
+            taskInfo.title = "Schedule a task";
         }
 
         return TaskModuleResponseFactory.toTaskModuleResponse(taskInfo);
@@ -60,7 +60,7 @@ class TeamsBot extends TeamsActivityHandler {
         };
 
         this.saveTaskDetails(taskDetails);
-        await context.sendActivity("Task submitted successfully. You will get reminder for the task at scheduled time");
+        await context.sendActivity("Task submitted successfully, you will get a recurring reminder for the task at a scheduled time");
 
         const currentUser = context.activity.from.id;
         conversationReferences[currentUser] = TurnContext.getConversationReference(context.activity);
@@ -84,7 +84,7 @@ class TeamsBot extends TeamsActivityHandler {
                             type: "TextBlock",
                             size: "Default",
                             weight: "Bolder",
-                            text: "Reminder for scheduled task!"
+                            text: "Reminder for a scheduled task!"
                         },
                         {
                             type: "TextBlock",

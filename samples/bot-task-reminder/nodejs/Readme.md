@@ -1,6 +1,8 @@
 ## Bot task reminder
 
-This sample shows feature where user can schedule a task and get reminder on the scheduled date and time.
+This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time.
+
+Type command create-reminder to get card for scheduling the recurring task.
 
 ![Schedule task ](Images/ScheduleTaskCard.png)
 
