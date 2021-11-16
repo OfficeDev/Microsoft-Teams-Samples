@@ -17,9 +17,11 @@ namespace BotDailyTaskReminder
             var triggerName = Guid.NewGuid().ToString();
             var scheduler = StdSchedulerFactory.GetDefaultScheduler().GetAwaiter().GetResult();
             scheduler.Start();
+
             IJobDetail job = JobBuilder.Create<ScheduleTaskReminder>().
                                     UsingJobData("baseUrl", baseUrl).
                                     Build();
+
             ITrigger trigger = TriggerBuilder.Create()
                                     .ForJob(job)
                                     .WithCronSchedule(cronExpression)

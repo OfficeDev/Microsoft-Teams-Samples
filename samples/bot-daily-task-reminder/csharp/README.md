@@ -1,7 +1,9 @@
 ﻿﻿﻿
 ## Bot daily task reminder
 
-This sample shows feature where user can schedule a recurring task and get reminder on the scheduled time.
+This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time.
+
+- use command `create-reminder` to get card with actions `Schedule task`.
 
 ![Schedule task ](BotDailyTaskReminder/Images/ScheduleTaskCard.png)
 
@@ -35,7 +37,7 @@ This sample shows feature where user can schedule a recurring task and get remin
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
    
-3) In a terminal, navigate to `samples/bot-task-reminder/csharp`
+3) In a folder where repository is cloned, navigate to `samples/bot-task-reminder/csharp`
 
     change into project folder
     ```bash
@@ -50,14 +52,14 @@ This sample shows feature where user can schedule a recurring task and get remin
  
 5) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
   - `{{Microsoft-App-Id}}` with Application id generated from Step 1
-  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok.io`
+  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `*.ngrok.io`.
 
 6) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 9.
 
 7) Modify the `/appsettings.json` and fill in the following details:
   - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
   - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
-  - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+  - `{{ Application Base Url }}` - Your application's base url.
 
   
 8) Run the bot from a terminal or from Visual Studio, choose option A or B.
@@ -83,7 +85,7 @@ This sample shows feature where user can schedule a recurring task and get remin
 
 ## Features of this sample
 
-- Card with actions `Schedule task`. 
+- use command `create-reminder` to get card with actions `Schedule task`. 
 
 ![Schedule task ](BotDailyTaskReminder/Images/ScheduleTaskCard.png)
 

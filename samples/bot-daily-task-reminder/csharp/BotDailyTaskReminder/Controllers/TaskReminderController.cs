@@ -90,20 +90,20 @@ namespace BotDailyTaskReminder.Controllers
                 {
                     new AdaptiveTextBlock
                     {
-                        Text = "Reminder for scheduled task!",
+                        Text = "Reminder for a scheduled task!",
                         Weight = AdaptiveTextWeight.Bolder,
                         Spacing = AdaptiveSpacing.Medium,
                     },
                     new AdaptiveTextBlock
                     {
-                        Text = "Task title:"+ title,
+                        Text = "Task title: "+ title,
                         Weight = AdaptiveTextWeight.Default,
                         Spacing = AdaptiveSpacing.Medium,
                         Wrap = true,
                     },
                     new AdaptiveTextBlock
                     {
-                        Text = "Task description:"+ description,
+                        Text = "Task description: "+ description,
                         Weight = AdaptiveTextWeight.Default,
                         Spacing = AdaptiveSpacing.Medium,
                         Wrap = true,

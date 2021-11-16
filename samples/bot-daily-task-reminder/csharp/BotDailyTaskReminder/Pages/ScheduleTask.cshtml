@@ -52,12 +52,14 @@
             var datetimeLocal = $('#taskdatetime').val()
             var datetimeUTC = new Date(datetimeLocal).toUTCString();
             var date = new Date(datetimeUTC);
+
             let taskInfo = {
                 title: $('#taskTitle').val(),
                 dateTime: date,
                 description: $('#taskdescription').val(),
                 selectedDays: checkboxArray,
             };
+
             microsoftTeams.tasks.submitTask(taskInfo);
         }
     </script>
@@ -66,7 +68,7 @@
     <div class="surface">
         <div class="panel">
             <div class="container">
-                <label for="title" class="title">Task Title</label>
+                <label for="title" class="title">Task title</label>
                 <br>
                 <input type="text" id="taskTitle" name="taskTitle">
                 <br />

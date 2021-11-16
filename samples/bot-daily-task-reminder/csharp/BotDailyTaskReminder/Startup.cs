@@ -64,14 +64,11 @@ namespace BotDailyTaskReminder
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
-            app.UseWebSockets()
-                .UseRouting()
-                .UseAuthorization()
-                .UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllers();
-                    endpoints.MapRazorPages();
-                });
+            app.UseWebSockets().UseRouting().UseAuthorization().UseEndpoints(endpoints =>
+               {
+                   endpoints.MapControllers();
+                   endpoints.MapRazorPages();
+               });
         }
     }
 }

@@ -28,7 +28,11 @@ namespace BotDailyTaskReminder.Bots
         private readonly ConcurrentDictionary<string, ConversationReference> _conversationReferences;
         private readonly ConcurrentDictionary<string, List<SaveTaskDetail>> _taskDetails;
 
-        public ActivityBot(IConfiguration configuration, ConversationState conversationState, ConcurrentDictionary<string, ConversationReference> conversationReferences, ConcurrentDictionary<string, List<SaveTaskDetail>> taskDetails)
+        public ActivityBot(IConfiguration configuration, 
+            ConversationState conversationState, 
+            ConcurrentDictionary<string, 
+            ConversationReference> conversationReferences, 
+            ConcurrentDictionary<string, List<SaveTaskDetail>> taskDetails)
         {
             _conversationReferences = conversationReferences;
             _conversationState = conversationState;
@@ -107,7 +111,7 @@ namespace BotDailyTaskReminder.Bots
                         Url = _applicationBaseUrl + "/" + "ScheduleTask",
                         Height = 450,
                         Width = 450,
-                        Title = "Schedule Task",
+                        Title = "Schedula a task",
                     },
                 };
             }
@@ -158,7 +162,7 @@ namespace BotDailyTaskReminder.Bots
             
             TaskScheduler taskSchedule = new TaskScheduler();
             taskSchedule.Start(date.Hour, date.Minute, _applicationBaseUrl, recurringDays);
-            await turnContext.SendActivityAsync("Task submitted successfully. You will get reminder for the task at scheduled time");
+            await turnContext.SendActivityAsync("Task submitted successfully, you will get a recurring reminder for the task at a scheduled time");
 
             return null;
         }
@@ -174,7 +178,7 @@ namespace BotDailyTaskReminder.Bots
                 {
                     new AdaptiveTextBlock
                     {
-                        Text = "Please click on schedule to schedule task",
+                        Text = "Please click here to schedule a recurring task reminder",
                         Weight = AdaptiveTextWeight.Bolder,
                         Spacing = AdaptiveSpacing.Medium,
                     }
@@ -190,7 +194,7 @@ namespace BotDailyTaskReminder.Bots
                             {
                                 Type = "task/fetch",
                             },
-                            Id="schedule"
+                            Id = "schedule"
                         },
                     }
                 },
