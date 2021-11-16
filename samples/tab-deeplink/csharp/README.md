@@ -1,4 +1,17 @@
-﻿# DeepLink Sample
+---
+page_type: sample
+description: Microsoft Teams sample app for demonstrating deeplink from Bot chat to Tab consuming Subentity ID
+products:
+- office-teams
+- office
+- office-365
+languages:
+- csharp
+extensions:
+contentType: samples
+createdDate: "07-07-2021 13:38:27"
+---
+# DeepLink Sample
 
 This sample displays how to consume SubEntity Id to DeepLink from Bot to Tab and Tab to Tab.
 
@@ -46,3 +59,4 @@ This sample displays how to consume SubEntity Id to DeepLink from Bot to Tab and
 **Channel Tab:**
 ![image](https://user-images.githubusercontent.com/50989436/115546556-ce188280-a2c2-11eb-95cc-b880f4b89cd2.png)
 1. Click on Back to List to view all the options. User can select an option which will redirect to the respective Task in static tab/ channel tab.
+

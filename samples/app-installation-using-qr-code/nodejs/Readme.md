@@ -1,3 +1,16 @@
+---
+page_type: sample
+description: This sample demos app installation using QR code of application's app id
+products:
+- office-teams
+- office
+- office-365
+languages:
+- nodejs
+extensions:
+contentType: samples
+createdDate: "11-10-2021 23:35:25"
+---
 ## Install app using barcode sample
 
 This sample demos app installation using QR code.
@@ -79,3 +92,4 @@ Add the following permission in app registration
 - `Install App` is used to Scan the QR code and it then installs the app.
 
 ![Install App](Images/AppInstallation.png)
+
