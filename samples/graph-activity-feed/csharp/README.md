@@ -11,7 +11,8 @@ extensions:
 contentType: samples
 createdDate: "07-07-2021 13:38:26"
 ---
-# Notify Feed App
+
+# Activity Feed Notification
 
 Bot Framework v4 Activity Feed sample using Tab.
 

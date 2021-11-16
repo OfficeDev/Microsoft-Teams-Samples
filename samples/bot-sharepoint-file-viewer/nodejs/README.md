@@ -7,10 +7,14 @@ products:
 - office-365
 languages:
 - nodejs
+- javascript
 extensions:
 contentType: samples
 createdDate: "16-11-2021 00:15:13"
 ---
+
+# Bot with SharePoint file to view in Teams file viewer
+
 Using this Nodejs sample, a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer.
 
 ## Key features

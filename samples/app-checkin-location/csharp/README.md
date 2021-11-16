@@ -11,8 +11,8 @@ extensions:
 contentType: samples
 createdDate: "11-11-2021 23:30:17"
 ---
-﻿﻿
-## Get Checkin info of user
+
+# Get Checkin info of user
 
 This sample shows feature where user can checkin with current location and view all previous checkins.
 

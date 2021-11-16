@@ -11,7 +11,8 @@ extensions:
 contentType: samples
 createdDate: "07-07-2021 13:38:26"
 ---
-# Teams Bot with SSO
+
+# Teams Conversation Bot SSO quick-start
 
 Teams Bot with SSO using Bot Framework v4.
 

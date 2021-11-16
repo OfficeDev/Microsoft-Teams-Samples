@@ -7,11 +7,13 @@ products:
 - office-365
 languages:
 - nodejs
+- javascript
 extensions:
 contentType: samples
 createdDate: "07-07-2021 13:38:26"
 ---
-# Sequential Workflows in adaptive card
+
+# Sequential workflow adaptive cards
 
 This App talks about the Teams Bot User Specific Views and Sequential Workflows in adaptive card with Node JS
 

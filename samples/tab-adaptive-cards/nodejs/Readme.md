@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams tab sample code which demonstrates how to [Build tabs with Adaptive Cards](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs)
+description: Microsoft Teams tab sample code which demonstrates how to build tabs with Adaptive Cards.
 products:
 - office-teams
 - office
@@ -11,7 +11,8 @@ extensions:
 contentType: samples
 createdDate: "02-09-2021 19:54:22"
 ---
-# Tab With AdpativeCard Flow
+
+# Tabs with Adaptive Cards
 
 This App talks about the Teams tab which displays Adaptive card with Node JS. For reference please check [Build tabs with Adaptive Cards](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs)
 

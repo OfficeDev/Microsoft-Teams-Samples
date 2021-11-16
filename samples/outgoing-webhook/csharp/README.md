@@ -11,7 +11,8 @@ extensions:
 contentType: samples
 createdDate: "07-07-2021 13:38:27"
 ---
-# Microsoft Teams Sample - Outgoing Webhook
+
+# Outgoing Webhook
 
 ## Summary
 

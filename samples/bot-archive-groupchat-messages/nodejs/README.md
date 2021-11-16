@@ -11,6 +11,9 @@ extensions:
 contentType: samples
 createdDate: "11-10-2021 23:35:25"
 ---
+ 
+# Archive groupchat messages
+
 Using this nodejs sample, a bot can archive chat messages of groupchat and send it to user.
 
 This feature shown in this sample is currently available in Public Developer Preview only.

@@ -11,7 +11,8 @@ extensions:
 contentType: samples
 createdDate: "11-11-2021 23:30:17"
 ---
-## Teams tab with microsoft graph toolkit
+
+# Teams tab with microsoft graph toolkit
 
 This is the demo app for [Teams tab using miscrosoft graph toolkit](https://docs.microsoft.com/en-us/graph/toolkit/get-started/build-a-microsoft-teams-tab?tabs=unpkg%2Cjs)
 

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample illustrates how you can use [Teams App Chat Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/chat?view=graph-rest-1.0) by calling Microsoft Graph APIs. .
+description: This sample illustrates how you can use Teams App Chat Life Cycle by calling Microsoft Graph APIs.
 products:
 - office-teams
 - office
@@ -11,7 +11,9 @@ extensions:
 contentType: samples
 createdDate: "07-07-2021 13:38:26"
 ---
+
 # Chat LifeCycle Application
+
 This sample illustrates Lifecycle of chat in Teams (Creating chat, adding members with all scenarios, deleting member).
 
 ## Prerequisites

@@ -11,6 +11,9 @@ extensions:
 contentType: samples
 createdDate: "06-10-2021 01:48:56"
 ---
+
+# Receive Channel messages with RSC permissions
+
 Using this Node JS sample, a bot can receive all channel messages with RSC without @mention.
 For reference please check [Receive Channel messages with RSC](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/channel-messages-with-rsc)
 

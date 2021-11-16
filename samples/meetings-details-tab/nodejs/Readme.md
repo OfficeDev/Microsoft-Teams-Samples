@@ -11,7 +11,8 @@ extensions:
 contentType: samples
 createdDate: "07-07-2021 13:38:27"
 ---
-# Details Tab
+
+# Meetings Details Tab
 
 This sample app illustrates the implementation of Details Tab in Meeting. User can create a poll and post poll in meeting chat and participants can submit their feedback in Meeting.
 

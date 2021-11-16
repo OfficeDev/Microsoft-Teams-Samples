@@ -11,7 +11,8 @@ extensions:
 contentType: samples
 createdDate: "07-07-2021 13:38:27"
 ---
-# DeepLink Sample
+
+# DeepLink
 
 This sample displays how to consume SubEntity Id to DeepLink from Bot to Tab and Tab to Tab.
 

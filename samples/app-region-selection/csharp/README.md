@@ -1,4 +1,18 @@
-﻿# Region Selection App
+﻿---
+page_type: sample
+description: Microsoft Teams app show end user region selection using Bot and Tab
+products:
+- office-teams
+- office
+- office-365
+languages:
+- csharp
+extensions:
+contentType: samples
+createdDate: "19-03-2021 13:38:25"
+---
+
+# Region Selection App
 
 Bot Framework v4 Region Selection sample.
 

@@ -7,11 +7,13 @@ products:
 - office-365
 languages:
 - nodejs
+- typescript
 extensions:
 contentType: samples
 createdDate: "07-07-2021 13:38:27"
 ---
-# Tabs
+
+# Teams tab with microsoft graph toolkit
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
 

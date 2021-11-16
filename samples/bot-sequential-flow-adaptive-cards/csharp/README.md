@@ -11,7 +11,9 @@ extensions:
 contentType: samples
 createdDate: "07-07-2021 13:38:26"
 ---
-# sequential-workflow-adaptive-card
+
+# Sequential workflow adaptive cards
+
 This sample illustrates sequential workflow, user specific views and upto date adaptive cards bot.
 
 ## Prerequisites

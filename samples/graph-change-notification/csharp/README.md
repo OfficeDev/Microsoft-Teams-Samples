@@ -11,7 +11,8 @@ extensions:
 contentType: samples
 createdDate: "07-07-2021 13:38:26"
 ---
-### Change Notification sample
+
+# Change Notification sample
 
 Bot Framework v4 ChangeNotification sample.
 

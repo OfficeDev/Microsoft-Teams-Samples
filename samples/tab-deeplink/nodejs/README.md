@@ -11,6 +11,7 @@ extensions:
 contentType: samples
 createdDate: "07-07-2021 13:38:27"
 ---
+
 # DeepLink
 
 This sample displays how to consume SubEntity Id to [DeepLink](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-links#deep-linking-to-your-tab) from Bot to Tab and Tab to Tab.

@@ -11,6 +11,9 @@ extensions:
 contentType: samples
 createdDate: "11-10-2021 17:35:46"
 ---
+
+# Realtime meeting events
+
 Using this C# sample, a bot can receive real-time meeting events.
 For reference please check [Real-time Teams meeting events](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet)
 

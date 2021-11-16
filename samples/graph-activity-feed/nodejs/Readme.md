@@ -11,7 +11,8 @@ extensions:
 contentType: samples
 createdDate: "06-10-2021 01:48:56"
 ---
-# Notify Feed App
+
+# Activity Feed Notification
 
 Nodejs Activity Feed sample using Tab.
 

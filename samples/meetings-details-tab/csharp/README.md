@@ -11,7 +11,8 @@ extensions:
 contentType: samples
 createdDate: "07-07-2021 13:38:27"
 ---
-# DetailsTab
+
+# Meetings Details Tab
 
 This sample shows creating poll in meeting , where memebers of the meeting can answer poll question and can see the results.
 

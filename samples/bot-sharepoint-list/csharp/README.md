@@ -11,7 +11,8 @@ extensions:
 contentType: samples
 createdDate: "07-07-2021 13:38:26"
 ---
-# SPListBot
+
+# Sharepoint List Bot
 
 Bot Framework v4 SPListBot sample.
 

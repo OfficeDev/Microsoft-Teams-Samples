@@ -11,7 +11,9 @@ extensions:
 contentType: samples
 createdDate: "07-07-2021 13:38:27"
 ---
-# Messaging Extension with Link Unfurling Samples for Reddit Links
+
+# Link Unfurling for Reddit Links
+
 ![Preview Image](doc/images/Preview.gif)
 
 This repository is a full implementation of [link unfurling](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=dotnet) for [Reddit](https://reddit.com) links in dotnet.

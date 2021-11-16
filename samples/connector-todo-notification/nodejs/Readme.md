@@ -11,7 +11,8 @@ extensions:
 contentType: samples
 createdDate: "11-11-2021 23:30:17"
 ---
-# Microsoft Teams Sample for Authentication in Connector in nodejs
+
+# Microsoft Teams Sample Connector
 
 This is a sample connector application which demonstarates how to add authentication to connector configuration page and send notification on task creation.
 

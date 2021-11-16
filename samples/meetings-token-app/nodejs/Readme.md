@@ -11,6 +11,7 @@ extensions:
 contentType: samples
 createdDate: "07-07-2021 13:38:27"
 ---
+
 # Meeting Token Generator
 
 The Meeting Token Generator app is a sample Microsoft Teams app that extends meetings in Teams.

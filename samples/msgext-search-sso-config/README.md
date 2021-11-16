@@ -12,7 +12,8 @@ extensions:
 contentType: samples
 createdDate: "07-07-2021 13:38:27"
 ---
-# Teams Search SSO Config Bot
+
+# Messaging Extension SSO Config Bot
 
 Bot Framework v4 sample for Teams expands the [52.teams-messaging-extensions-search-auth-config](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/javascript_nodejs/52.teams-messaging-extensions-search-auth-config) sample to include a configuration page and Bot Service SSO authentication.
 

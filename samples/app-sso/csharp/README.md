@@ -11,6 +11,7 @@ extensions:
 contentType: samples
 createdDate: "02-09-2021 19:54:21"
 ---
+
 # App SSO C#
 
 This app talks about the Teams Tab, Bot, ME - search, action, linkunfurl SSO with C#

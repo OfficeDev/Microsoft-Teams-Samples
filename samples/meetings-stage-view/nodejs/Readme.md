@@ -11,6 +11,9 @@ extensions:
 contentType: samples
 createdDate: "11-10-2021 17:35:46"
 ---
+
+# Meetings Stage View
+
 This App helps to enable and configure your apps for Teams meetings. This app covers Shared meeting stage.
 For reference please check [Enable and configure your apps for Teams meetings](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/enable-and-configure-your-app-for-teams-meetings)
 

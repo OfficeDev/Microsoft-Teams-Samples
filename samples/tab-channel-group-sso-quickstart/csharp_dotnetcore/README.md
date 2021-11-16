@@ -11,7 +11,9 @@ extensions:
 contentType: samples
 createdDate: "07-07-2021 13:38:27"
 ---
+
 # Teams Tab SSO Authentication
+
 This sample illustrates how to implement SSO authentication for Teams Tab.
 
 ## Prerequisites

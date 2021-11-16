@@ -11,7 +11,8 @@ extensions:
 contentType: samples
 createdDate: "11-10-2021 23:35:25"
 ---
-## Install app using barcode sample
+
+# Install app using barcode sample
 
 This sample demos app installation using QR code.
 

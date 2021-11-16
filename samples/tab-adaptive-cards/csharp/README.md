@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams tab sample code which demonstrates how to [Build tabs with Adaptive Cards](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs)
+description: Microsoft Teams tab sample code which demonstrates how to build tabs with Adaptive Cards.
 products:
 - office-teams
 - office
@@ -11,6 +11,9 @@ extensions:
 contentType: samples
 createdDate: "06-10-2021 01:48:56"
 ---
+
+# Tabs with Adaptive Cards
+
 This App talks about the Teams tab which displays Adaptive card with CSharp.
 For reference please check [Build tabs with Adaptive Cards](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs)
 

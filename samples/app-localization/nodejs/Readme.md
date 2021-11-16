@@ -11,6 +11,7 @@ extensions:
 contentType: samples
 createdDate: "07-07-2021 13:38:25"
 ---
+
 # Teams App Localization
 This sample illustrates how to implement [Localization for Microsoft Teams apps](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/apps-localization).
 

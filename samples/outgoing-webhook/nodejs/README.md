@@ -1,6 +1,9 @@
 ---
 page_type: sample
+description: Samples to create "Custom Bots" to be used in Microsoft Teams.
 products:
+- office-teams
+- office
 - office-365
 languages:
 - javascript
@@ -8,7 +11,8 @@ extensions:
   contentType: samples
   createdDate: 12/5/2017 6:03:13 PM
 ---
-# Microsoft Teams outgoing webhook sample
+
+# Outgoing webhook
 
 This project is an implementation of a very simple [Outgoing Webhook](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/custom-bot) for Microsoft Teams. All it does is verify that what's sending messages matches the Outgoing Webhook that was created in Teams, and it echoes back whatever is sent to it.
 
