@@ -1,17 +1,4 @@
----
-page_type: sample
-description: Microsoft Teams tab sample code which demonstrates how to [Build tabs with Adaptive Cards](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs)
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
-contentType: samples
-createdDate: "06-10-2021 01:48:56"
----
-This App talks about the Teams tab which displays Adaptive card with CSharp.
+﻿This App talks about the Teams tab which displays Adaptive card with CSharp.
 For reference please check [Build tabs with Adaptive Cards](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs)
 
 This feature shown in this sample is in Public Developer Preview and is supported in desktop and mobile.
@@ -113,4 +100,3 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Portal](https://portal.azure.com)
 - [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
 - [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
-

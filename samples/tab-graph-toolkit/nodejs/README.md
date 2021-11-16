@@ -1,16 +1,3 @@
----
-page_type: sample
-description: Microsoft Teams tab sample app for demonstrating graph toolkit component
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:27"
----
 # Tabs
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
@@ -66,4 +53,3 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-

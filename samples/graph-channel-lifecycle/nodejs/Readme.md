@@ -1,16 +1,3 @@
----
-page_type: sample
-description: This sample illustrates how you can use [Graph API Channel Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-beta) to call Graph APIs. .
-products:
-- office-teams
-- office
-- office-365
-languages:
-- nodejs
-extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:26"
----
 # Channel life cycle using Node js
 
 This sample show sthe [Channel](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-1.0) life cycle which includes create, update delete a channel
@@ -68,6 +55,5 @@ This sample show sthe [Channel](https://docs.microsoft.com/en-us/graph/api/resou
 
 
    ![](Images/image3.png)
-
 
 

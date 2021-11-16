@@ -1,17 +1,4 @@
----
-page_type: sample
-description: Microsoft Teams tab sample app for demonstrating tab in stage view
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
-contentType: samples
-createdDate: "06-10-2021 01:48:56"
----
-This App talks about the Teams tab in stage view with CSharp.
+﻿This App talks about the Teams tab in stage view with CSharp.
 For reference please check [Tabs link unfurling and Stage View](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling)
 
 This feature shown in this sample is in Public Developer Preview.
@@ -123,4 +110,3 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Portal](https://portal.azure.com)
 - [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
 - [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
-

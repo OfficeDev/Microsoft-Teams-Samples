@@ -1,17 +1,4 @@
----
-page_type: sample
-description: Microsoft Teams meeting extensibility sample for iteracting with Side Panel in-meeting
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:27"
----
-# SidePanel Sample
+﻿# SidePanel Sample
 
 This sample illustrates how to implement [Side Panel](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience.
   
@@ -63,4 +50,3 @@ Interact with SidePanel by clicking on the App icon present on the top menu besi
 ![](https://user-images.githubusercontent.com/50989436/111726569-3bce2a80-888f-11eb-8ba6-1c662b2939da.png)
 3. On click of "Publish Agenda", the agenda list will be sent to the meeting chat.
 ![](https://user-images.githubusercontent.com/50989436/111726656-5accbc80-888f-11eb-94e3-af1bc18bd500.png)
-

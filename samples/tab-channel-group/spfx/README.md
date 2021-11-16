@@ -1,16 +1,3 @@
----
-page_type: sample
-description: Sample app showing Microsoft Teams tabs using SharePoint Framework
-products:
-- office-teams
-- office
-- office-365
-languages:
-
-extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:27"
----
 # teams-tab-spfx
 
 ## Summary
@@ -186,4 +173,3 @@ You can now sync your new version to Microsoft Teams.
 - [Use Microsoft Graph in your solution](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/using-microsoft-graph-apis)
 - [Publish SharePoint Framework applications to the Marketplace](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/publish-to-marketplace-overview)
 - [Microsoft 365 Patterns and Practices](https://aka.ms/m365pnp) - Guidance, tooling, samples and open-source controls for your Microsoft 365 development
-
