@@ -1,4 +1,17 @@
-﻿﻿﻿Using this C# sample, a bot can archive chat messages of groupchat and send it to user.
+---
+page_type: sample
+description: Demonstrating on how a bot can archive groupchat messages and send it to user as a file.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- csharp
+extensions:
+contentType: samples
+createdDate: "11-10-2021 23:35:25"
+---
+﻿﻿Using this C# sample, a bot can archive chat messages of groupchat and send it to user.
 
 This feature shown in this sample is currently available in Public Developer Preview only.
 
@@ -91,3 +104,4 @@ Send `getchat` message to the bot, you will recieve a consent card by the bot in
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
+
