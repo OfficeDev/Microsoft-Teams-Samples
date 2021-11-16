@@ -138,7 +138,9 @@ namespace MessagingExtensionReminder.Bots
                 currentTaskList.Add(taskDetails);
                 _taskDetails.AddOrUpdate("taskDetails", currentTaskList, (key, newValue) => currentTaskList);
             }
+
             TaskScheduler taskSchedule = new TaskScheduler();
+
             taskSchedule.Start(date.Year, date.Month, date.Day, date.Hour, date.Minute, _applicationBaseUrl);
             await turnContext.SendActivityAsync("Task submitted successfully. You will get reminder for the task at scheduled time");
 

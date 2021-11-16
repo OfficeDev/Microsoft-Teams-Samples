@@ -1,14 +1,14 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Deploy - csharp Message-Reminder-ME
+name: Deploy - csharp Message-Reminder-Mesaging-Extension
 
 on:
   push:
     #Change the branch name to <<main>>
     #Change the path to the folder where your code resides. Any change here will start the activity. 
     branches:
-      - v-nikija/message-reminder-ME-C#
+      - main
     paths:
       - 'samples/bot-message-reminder/csharp/**'  
   workflow_dispatch:

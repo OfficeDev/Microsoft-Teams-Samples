@@ -1,7 +1,7 @@
 ﻿﻿﻿
 ## Message reminder with messaging extension action
 
-This sample shows feature where user can schedule a task from messaging extension action and get a reminder card at scheduled time.
+This sample shows a feature where user can schedule a task from messaging extension action and get a reminder card at a scheduled time.
 
 ![Select message](MessagingExtensionReminder/Images/MessageAction.png)
 
@@ -41,7 +41,7 @@ This sample shows feature where user can schedule a task from messaging extensio
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
    
-3) In a terminal, navigate to `samples/bot-message-reminder/csharp`
+3) In folder where repository is cloned, navigate to `samples/bot-message-reminder/csharp`
 
     change into project folder
     ```bash
@@ -56,7 +56,7 @@ This sample shows feature where user can schedule a task from messaging extensio
  
 5) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
   - `{{Microsoft-App-Id}}` with Application id generated from Step 1
-  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok.io`
+  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be *.ngrok.io.
 
 6) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 9.
 
