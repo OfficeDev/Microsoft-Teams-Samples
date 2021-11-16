@@ -1,23 +1,3 @@
----
-page_type: sample
-
-description: Samples to create "Custom Bots" to be used in Microsoft Teams.
-
-products:
-- office-teams
-- office
-- office-365
-
-language(s):
-- csharp
-
-extensions:
-
-contentType: samples
-
-createdDate: 16-11-2021 01:55:12
----
-
 # Microsoft Teams Sample - Outgoing Webhook
 
 ## Summary
@@ -77,6 +57,5 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
 
 
  
-
 
 

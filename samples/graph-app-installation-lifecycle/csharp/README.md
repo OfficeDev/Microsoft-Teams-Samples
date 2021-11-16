@@ -1,24 +1,4 @@
----
-page_type: sample
-
-description: This sample illustrates how you can use [Teams App Installation Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/teamsappinstallation?view=graph-rest-1.0) by calling Microsoft Graph APIs. .
-
-products:
-- office-teams
-- office
-- office-365
-
-language(s):
-- csharp
-
-extensions:
-
-contentType: samples
-
-createdDate: 16-11-2021 01:55:12
----
-
-# App Installation
+﻿# App Installation
 
 This sample app demonstarte the installation lifecycle for Teams [Apps](https://docs.microsoft.com/en-us/graph/api/resources/teamsappinstallation?view=graph-rest-1.0) which includes create, update delete Apps
 
@@ -71,4 +51,3 @@ This sample app demonstarte the installation lifecycle for Teams [Apps](https://
   
   
  
-

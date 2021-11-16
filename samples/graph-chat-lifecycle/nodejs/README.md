@@ -1,23 +1,3 @@
----
-page_type: sample
-
-description: This sample illustrates how you can use [Teams App Chat Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/chat?view=graph-rest-1.0) by calling Microsoft Graph APIs. .
-
-products:
-- office-teams
-- office
-- office-365
-
-language(s):
-- nodejs
-
-extensions:
-
-contentType: samples
-
-createdDate: 16-11-2021 01:55:12
----
-
 
 # ChatLifecycle Application
 
@@ -154,4 +134,3 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 3. Also, Polly app will be installed to the created group chat and will be pinned to the chat.
 
   ![image](https://user-images.githubusercontent.com/80379013/120188506-d5bd3680-c233-11eb-97fc-9029385e6458.png)
-
