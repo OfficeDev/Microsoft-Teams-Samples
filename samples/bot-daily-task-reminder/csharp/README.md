@@ -61,8 +61,8 @@ This sample shows a feature where user can schedule a recurring task and get the
 7) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 8.
 
 8) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
-   - Go to Microsoft Teams. From the lower left corner, select Apps
-   - From the lower left corner, choose Upload a custom App
+   - Go to Microsoft Teams and then go to side panel, select Apps
+   - Choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
