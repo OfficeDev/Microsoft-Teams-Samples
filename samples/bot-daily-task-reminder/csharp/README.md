@@ -37,12 +37,9 @@ This sample shows a feature where user can schedule a recurring task and get the
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
    
-3) In a folder where repository is cloned, navigate to `samples/bot-task-reminder/csharp`
-
-    change into project folder
-    ```bash
-    cd # BotDailyTaskReminder
-    ```
+3) Launch Visual Studio
+   - File -> Open -> Project/Solution
+   - Navigate to folder where repository is cloned then `samples/bot-daily-task-reminder/csharp/BotDailyTaskReminder.sln`
     
 4) Run ngrok - point to port 3978
 
@@ -50,20 +47,16 @@ This sample shows a feature where user can schedule a recurring task and get the
     # ngrok http -host-header=rewrite 3978
     ```
  
-5)Run the bot from Visual Studio
-  - Launch Visual Studio
-  - File -> Open -> Project/Solution
-  - Navigate to `BotDailyTaskReminder` folder
-     Modify the `appsettings.json` and fill in the following details:
-  - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
-  - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
-  - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
-  - Select `BotDailyTaskReminder.csproj` file
-  - Press `F5` to run the project
+5) Setup and run the bot from Visual Studio
+   Modify the `appsettings.json` and fill in the following details:
+   - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
+   - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
+   - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+   - Press `F5` to run the project
 	 
 6) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
-  - `{{Microsoft-App-Id}}` with Application id generated from Step 1
-  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+   - `{{Microsoft-App-Id}}` with Application id generated from Step 1
+   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
 7) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 9.
 
@@ -75,13 +68,15 @@ This sample shows a feature where user can schedule a recurring task and get the
 
 ## Features of this sample
 
-- use command `create-reminder` to get card with action `Schedule task`. 
+- Use command `create-reminder` to get card with action `Schedule task`. 
 
 ![Schedule task ](BotDailyTaskReminder/Images/ScheduleTaskCard.png)
 
+- Task module to add task details. 
+
 ![Task Details ](BotDailyTaskReminder/Images/ScheduleTask.png)
 
-- Task reminder
+- User will get a task reminder card at scheduled time.
 
 ![Task reminder](BotDailyTaskReminder/Images/TaskReminder.png)
 
