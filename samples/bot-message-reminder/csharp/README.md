@@ -53,20 +53,15 @@ This sample shows a feature where user can schedule a task from messaging extens
     ```bash
     # ngrok http -host-header=rewrite 3978
     ```
- 
-5) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
-  - `{{Microsoft-App-Id}}` with Application id generated from Step 1
-  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be *.ngrok.io.
-
-6) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 9.
-
-7) Modify the `/appsettings.json` and fill in the following details:
+5) Launch Visual Studio
+  - File -> Open -> Project/Solution
+  - Navigate to `MessagingExtensionReminder` folder
+     Modify the `appsettings.json` and fill in the following details:
   - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
   - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
   - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
-
   
-8) Run the bot from a terminal or from Visual Studio, choose option A or B.
+6) Run the bot from a terminal or from Visual Studio, choose option A or B.
  
    A) From a terminal
      ```bash
@@ -75,11 +70,14 @@ This sample shows a feature where user can schedule a task from messaging extens
      ```
 
    B) Or from Visual Studio
-     - Launch Visual Studio
-     - File -> Open -> Project/Solution
-     - Navigate to `MessagingExtensionReminder` folder
      - Select `MessagingExtensionReminder.csproj` file
      - Press `F5` to run the project 
+	 
+7) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
+  - `{{Microsoft-App-Id}}` with Application id generated from Step 1
+  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+
+8) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 9.
 
 9) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
@@ -91,17 +89,29 @@ This sample shows a feature where user can schedule a task from messaging extens
 
 Personal scope scenario 
 
+- Select `...` over message to get action `create-reminder` for scheduling task.
+
 ![Select message](MessagingExtensionReminder/Images/MessageAction.png)
 
+- Task module to add task details.
+
 ![Task Details](MessagingExtensionReminder/Images/ScheduleTask.png)
+
+- Reminder card of task at scheduled date and time.
 
 ![Task reminder](MessagingExtensionReminder/Images/TaskReminder.png)
 
 Team scope scenario
 
+- Select `...` over message to get action `create-reminder` for scheduling task.
+
 ![Team message action ](MessagingExtensionReminder/Images/MessageActionTeam.png)
 
+- Task module to add task details.
+
 ![Team Task Details ](MessagingExtensionReminder/Images/ScheduleTaskTeam.png)
+
+- Reminder card of task at scheduled date and time.
 
 ![ TeamTask reminder](MessagingExtensionReminder/Images/TaskReminderTeam.png)
 
