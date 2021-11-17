@@ -47,7 +47,7 @@ This sample shows a feature where user can schedule a recurring task and get the
     # ngrok http -host-header=rewrite 3978
     ```
  
-5) Setup and run the bot from Visual Studio
+5) Setup and run the bot from Visual Studio: 
    Modify the `appsettings.json` and fill in the following details:
    - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
    - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
@@ -58,7 +58,7 @@ This sample shows a feature where user can schedule a recurring task and get the
    - `{{Microsoft-App-Id}}` with Application id generated from Step 1
    - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
-7) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 9.
+7) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 8.
 
 8) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
