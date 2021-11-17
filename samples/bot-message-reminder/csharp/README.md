@@ -40,50 +40,35 @@ This sample shows a feature where user can schedule a task from messaging extens
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
-   
-3) In folder where repository is cloned, navigate to `samples/bot-message-reminder/csharp`
 
-    change into project folder
-    ```bash
-    cd # MessagingExtensionReminder
-    ```
+3) Launch Visual Studio
+   - File -> Open -> Project/Solution
+   - Navigate to folder where repository is cloned then `samples/bot-message-reminder/csharp/MessagingExtensionReminder.sln`
     
 4) Run ngrok - point to port 3978
 
     ```bash
     # ngrok http -host-header=rewrite 3978
     ```
-5) Launch Visual Studio
-  - File -> Open -> Project/Solution
-  - Navigate to `MessagingExtensionReminder` folder
-     Modify the `appsettings.json` and fill in the following details:
-  - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
-  - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
-  - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
-  
-6) Run the bot from a terminal or from Visual Studio, choose option A or B.
  
-   A) From a terminal
-     ```bash
-     # run the bot
-     dotnet run
-     ```
-
-   B) Or from Visual Studio
-     - Select `MessagingExtensionReminder.csproj` file
-     - Press `F5` to run the project 
+5) Setup and run the bot from Visual Studio: 
+   Modify the `appsettings.json` and fill in the following details:
+   - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
+   - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
+   - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+   - Press `F5` to run the project
 	 
-7) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
-  - `{{Microsoft-App-Id}}` with Application id generated from Step 1
-  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+6) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
+   - `{{Microsoft-App-Id}}` with Application id generated from Step 1
+   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
-8) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 9.
+7) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 8.
 
-9) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
-   - Go to Microsoft Teams. From the lower left corner, select Apps
-   - From the lower left corner, choose Upload a custom App
+8) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams and then go to side panel, select Apps
+   - Choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
-   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.    
 
 ## Features of this sample
 
