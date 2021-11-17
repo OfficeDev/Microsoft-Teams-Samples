@@ -3,7 +3,7 @@
 
 This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time.
 
-- use command `create-reminder` to get card with action `Schedule task`.
+- Use command `create-reminder` to get card with action `Schedule task`.
 
 ![Schedule task ](BotDailyTaskReminder/Images/ScheduleTaskCard.png)
 
