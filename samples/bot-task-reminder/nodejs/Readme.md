@@ -2,12 +2,14 @@
 
 This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time.
 
-Type command create-reminder to get card for scheduling the recurring task.
+Type command `create-reminder` to get card for scheduling the recurring task.
 
 ![Schedule task ](Images/ScheduleTaskCard.png)
 
+- Click on schedule task button to open task module for scheduling a task
 ![Task Details ](Images/ScheduleTask.png)
 
+- Once task is scheduled, you will be notified about the task at scheduled time.
 ![Task reminder](Images/TaskReminder.png)
 
 ## Prerequisites
@@ -15,8 +17,7 @@ Type command create-reminder to get card for scheduling the recurring task.
 - Microsoft Teams is installed and you have an account (not a guest account)
 -  [NodeJS](https://nodejs.org/en/)
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
--  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
-   appropriate permissions to install an app.
+-  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
 ## To try this sample
 
@@ -33,9 +34,11 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/bot-task-reminder/nodejs`
+2) In the folder where repository is cloned navigate to `samples/bot-task-reminder/nodejs`
 
-3) Install modules
+3) Install node modules
+
+Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same on Visual studio code terminal by opening the project on Visual studio code 
 
     ```bash
     npm install
@@ -53,7 +56,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     ```bash
     npm start
     ```
-- **Manually update the manifest.json**
+7) **Manually update the manifest.json**
     - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
@@ -64,6 +67,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 
 ![Schedule task ](Images/ScheduleTaskCard.png)
 
+- Click on schedule task button to open task module for scheduling a task
 ![Task Details ](Images/ScheduleTask.png)
 
 - Task reminder
