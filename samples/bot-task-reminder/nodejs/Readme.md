@@ -63,6 +63,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 ## Features of this sample
 
 - Type command `create-reminder` to get card for scheduling the recurring task.
+
 ![Schedule task ](Images/ScheduleTaskCard.png)
 
 - Click on schedule task button to open task module for scheduling a task
