@@ -60,7 +60,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 
 ## Features of this sample
 
-- Card with actions `Schedule task`. 
+- Card with action `Schedule task`. 
 
 ![Schedule task ](Images/ScheduleTaskCard.png)
 
