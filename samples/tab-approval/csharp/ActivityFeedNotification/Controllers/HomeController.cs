@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Graph;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -19,31 +20,63 @@ namespace TabActivityFeed.Controllers
         private readonly IConfiguration _configuration;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ConcurrentDictionary<string, List<TaskInfo>> _taskList;
 
         public HomeController(
             IConfiguration configuration,
             IHttpClientFactory httpClientFactory,
-            IHttpContextAccessor httpContextAccessor)
+            IHttpContextAccessor httpContextAccessor,
+            ConcurrentDictionary<string, List<TaskInfo>> taskList)
         {
             _configuration = configuration;
             _httpClientFactory = httpClientFactory;
             _httpContextAccessor = httpContextAccessor;
+            _taskList = taskList;
         }
 
         [Route("request")]
         public ActionResult Hello()
         {
+            var currentTaskList = new List<TaskInfo>();
+            _taskList.TryGetValue("taskList", out currentTaskList);
+            if (currentTaskList == null)
+            {
+                ViewBag.Message = "No request found";
+            }
+            else
+            {
+                ViewBag.TaskList = currentTaskList;
+            }
             return View("Index");
         }
 
         [HttpPost]
-        [Route("SendNotificationToUser")]
-        public async Task<ActionResult> SendNotificationToUser(TaskInfo taskInfo)
+        [Route("SendNotificationToManager")]
+        public async Task<ActionResult> SendNotificationToManager(TaskInfo taskInfo)
         {
-            TaskHelper.AddTaskToFeed(taskInfo);
+            // TaskHelper.AddTaskToFeed(taskInfo);
+            var currentTaskList = new List<TaskInfo>();
+            List<TaskInfo> taskList = new List<TaskInfo>();
+            _taskList.TryGetValue("taskList", out currentTaskList);
+            var request = taskInfo;
+            request.taskId = Guid.NewGuid();
+            request.status = "Pending";
+            if (currentTaskList == null)
+            {
+                taskList.Add(request);
+                _taskList.AddOrUpdate("taskList", taskList, (key, newValue) => taskList);
+                ViewBag.TaskList = taskList;
+            }
+            else
+            {
+                currentTaskList.Add(request);
+                _taskList.AddOrUpdate("taskList", currentTaskList, (key, newValue) => currentTaskList);
+                ViewBag.TaskList = currentTaskList;
+            }
+
             var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
             var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["AzureAd:MicrosoftAppId"], _configuration["AzureAd:MicrosoftAppPassword"], _configuration["AzureAd:TenantId"]);
-            var user = await graphClient.Users[taskInfo.userName]
+            var user = await graphClient.Users[taskInfo.managerName]
                       .Request()
                       .GetAsync();
             var installedApps = await graphClient.Users[user.Id].Teamwork.InstalledApps
@@ -90,6 +123,21 @@ namespace TabActivityFeed.Controllers
                     Console.WriteLine(ex);
                 }
 
+            return View("Index");
+        }
+
+        [HttpPost]
+        [Route("SendNotificationToUser")]
+        public async Task<ActionResult> SendNotificationToUser(TaskInfo taskInfo)
+        {
+            var currentTaskList = new List<TaskInfo>();
+            _taskList.TryGetValue("taskList", out currentTaskList);
+
+            var requestUpdate = currentTaskList.FirstOrDefault(p => p.taskId == taskInfo.taskId);
+            requestUpdate.status = taskInfo.status;
+            _taskList.AddOrUpdate("taskList", currentTaskList, (key, newValue) => currentTaskList);
+             ViewBag.TaskList = currentTaskList;
+            
             return View("Index");
         }
 

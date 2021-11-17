@@ -27,6 +27,8 @@ namespace TabActivityFeed.Model
 
         public string userName { get; set; }
 
+        public string managerName { get; set; }
+
         public string status { get; set; }
 
         public string DeployementTitle { get; set; }

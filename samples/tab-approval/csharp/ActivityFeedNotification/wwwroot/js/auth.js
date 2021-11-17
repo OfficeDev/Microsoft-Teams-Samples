@@ -8,7 +8,6 @@ $(document).ready(function () {
             return getServerSideToken(clientSideToken);
         })
         .catch((error) => {
-            console.log(error);
             if (error === "invalid_grant") {
                 // Display in-line button so user can consent
                 $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
@@ -47,8 +46,7 @@ function getToken() {
             successCallback: result => {
                 resolve(result);
             },
-            failureCallback: reason => {
-                
+            failureCallback: reason => {  
                 reject(reason);
             }
         });
@@ -60,16 +58,13 @@ function getClientSideToken() {
     return new Promise((resolve, reject) => {
         microsoftTeams.authentication.getAuthToken({
             successCallback: (result) => {
-                resolve(result);
-                
+                resolve(result);     
             },
             failureCallback: function (error) {                
                 reject("Error getting token: " + error);
             }
         });
-
     });
-
 }
 
 function getServerSideToken(clientSideToken) {
@@ -98,7 +93,6 @@ function getServerSideToken(clientSideToken) {
                     } else if (responseJson) {
                         accessToken = responseJson;
                         localStorage.setItem("accessToken", accessToken);
-                        getUserInfo(context.userPrincipalName);
                     }
                 });
         });

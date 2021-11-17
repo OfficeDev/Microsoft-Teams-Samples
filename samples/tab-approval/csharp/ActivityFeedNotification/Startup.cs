@@ -11,7 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using TabActivityFeed.Helpers;
+using TabActivityFeed.Model;
 
 namespace Microsoft.BotBuilderSamples
 {
@@ -42,7 +45,7 @@ namespace Microsoft.BotBuilderSamples
             services.AddMemoryCache();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddMvc().AddSessionStateTempDataProvider();
-
+            services.AddSingleton<ConcurrentDictionary<string, List<TaskInfo>>>();
 
             services.AddControllersWithViews();
             services.AddHttpClient("WebClient", client => client.Timeout = TimeSpan.FromSeconds(600));

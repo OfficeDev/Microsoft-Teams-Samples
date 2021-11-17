@@ -1,8 +1,5 @@
 ﻿
-@model TabActivityFeed.Model.TaskInfo
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@using TabActivityFeed.Model
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,25 +21,28 @@
     <title>Screen</title>
     <script>
         $(document).ready(function () {
-            $('input[type="radio"]').click(function () {
-                var inputValue = $(this).attr("value");
-                var targetBox = $("." + inputValue);
-                $(".desc").not(targetBox).hide();
-                $(targetBox).show();
-            });
         });
+
         microsoftTeams.initialize();
         var token = localStorage.getItem("accessToken");
-        console.log(token);
         var username = "";
         var userId = "";
 
         microsoftTeams.getContext(function (context) {
             username = context.upn;
             userId = context.userObjectId;
-            console.log(context);
-
+            console.log(token);
+            if (token != null) {
+                $("#consent").hide();
+            }
+            if (username == "admin@M365x881152.onmicrosoft.com") {
+                $("#managerList").hide();
+            }
+            else {
+                $("#userRequest").hide();
+            }
         });
+
         var empty = true;
         $('input[type="text"]').each(function () {
             if ($(this).val() != "") {
@@ -51,7 +51,39 @@
             }
         });
 
-        function SendNotificationToUser() {
+        function ApproveRequest(e) {
+            var taskId = $(e.currentTarget).attr('data-app-itemid');
+            let taskInfo = {
+                taskId: taskId,
+                status : "Approved",
+                access_token: token,
+            };
+            console.log(taskInfo);
+            $.ajax({
+                type: 'POST',
+                url: '/SendNotificationToUser',
+                dataType: 'json',
+                data: taskInfo
+            });
+        };
+
+        function RejectRequest(e) {
+            var taskId = $(e.currentTarget).attr('data-app-itemid');
+            let taskInfo = {
+                taskId: taskId,
+                status: "Rejected",
+                access_token: token,
+            };
+            console.log(taskInfo);
+            $.ajax({
+                type: 'POST',
+                url: '/SendNotificationToUser',
+                dataType: 'json',
+                data: taskInfo
+            });
+        };
+
+        function SendNotificationToManager() {
             var isValid = true;
             $('#title,#description').each(function () {
                 if ($.trim($(this).val()) == '') {
@@ -68,24 +100,23 @@
                 }
             });
             if (isValid == false) {
-                debugger;
                 e.preventDefault();
                 return false;
             }
-            var action = "EntityTopic";
             let taskInfo = {
                 title: $('#title').val(),
                 description: $('#description').val(),
-                userName: "meganb@M365x881152.onmicrosoft.com",
+                userName: username,
+                managerName: "meganb@M365x881152.onmicrosoft.com",
                 access_token: token,
-                taskInfoAction: action,
             };
             $.ajax({
                 type: 'POST',
-                url: '/SendNotificationToUser',
+                url: '/SendNotificationToManager',
                 dataType: 'json',
                 data: taskInfo
             });
+
             microsoftTeams.tasks.submitTask(taskInfo);
 
             return true;
@@ -94,24 +125,105 @@
 </head>
 
 <body>
-    <button onclick="requestConsent()" id="consent" style="display: none">Login</button>
-    <h4 id="successMsg"></h4>
-    <div>
-        <div class="sendNotification desc">
-            <div class="mb">
-                <div class="form-group fg">
-                    <label for="title" class="title"> Request title</label>
-                    @Html.TextBoxFor(model => model.title, htmlAttributes: new { @class = "form-control", @id = "title" })
-                </div>
-                <div class="form-group fg">
-                    <label for="title-desc" class="description"> Request description</label>
-                    @Html.TextAreaFor(model => model.description, htmlAttributes: new { @class = "form-control title-desc", @id = "description" })
-                    @Html.ValidationMessageFor(model => model.title)
-                </div>
+    <button onclick="requestConsent()" id="consent">Login</button>
+    <div id="userRequest">
+        <div class="mb">
+            <div class="form-group fg">
+                <label for="title" class="title"> Request title</label>
+                <input type="text" id="title" name="requesttitle">
             </div>
-            <div class="modal-footer mf">
-                <button type="button" class="btn-send save" onclick="return SendNotificationToUser()">Send Request</button>
+            <div class="form-group fg">
+                <label for="title-desc" class="description"> Request description</label>
+                <input type="text" id="description" name="taskdescription">
             </div>
+        </div>
+        <div class="modal-footer mf">
+            <button type="button" class="btn-send save" onclick="return SendNotificationToManager()">Send Request</button>
+        </div>
+        <br />
+        <div>
+            @{
+                var data = ViewBag.TaskList;
+                var message = ViewBag.Message;
+            }
+            @{int Count = 1;}
+            @if (data != null)
+            {
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <td>Sr No.</td>
+                            <td>Title</td>
+                            <td>Description</td>
+                            <td>With</td>
+                            <td>Status</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in data)
+                        {
+                                <tr style="padding:1px">
+                                    <td>@Count</td>
+                                    <td>@item.title</td>
+                                    <td>@item.description</td>
+                                    <td>@item.managerName</td>
+                                    <td>@item.status</td>
+                                </tr>
+                                Count = Count + 1;
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div>@message</div>
+            }
+        </div>
+    </div>
+    <div id="managerList">
+        <div>
+            @{
+                var managerRequestList = ViewBag.TaskList;
+                var managerMessage = ViewBag.Message;
+            }
+            @{int i = 1;}
+            @if (data != null)
+            {
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <td>Sr No.</td>
+                            <td>Title</td>
+                            <td>Description</td>
+                            <td>From</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in managerRequestList)
+                        {
+                            if (item.status == "Pending")
+                            {
+                            <tr style="padding:1px">
+                                <td>@i</td>
+                                <td>@item.title</td>
+                                <td>@item.description</td>
+                                <td>@item.userName</td>
+                                <td><button type="button" class="btn btn-outline-success" data-app-itemid="@item.taskId" onclick="ApproveRequest(event)">Approve</button></td>
+                                <td><button type="button" class="btn btn-outline-info" data-app-itemid="@item.taskId" onclick="RejectRequest(event)">Reject</button></td>
+
+                            </tr>
+                                Count = Count + 1;
+                            }
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div>@managerMessage</div>
+            }
         </div>
     </div>
 </body>
