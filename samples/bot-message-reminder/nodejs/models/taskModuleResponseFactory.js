@@ -3,6 +3,7 @@
 
 class TaskModuleResponseFactory {
     static createResponse(taskModuleInfoOrString) {
+        
         if (typeof taskModuleInfoOrString === 'string') {
             return {
                 task: {

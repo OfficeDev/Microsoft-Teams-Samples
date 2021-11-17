@@ -18,11 +18,13 @@
         <script>
             var title;
             var description;
+
             microsoftTeams.initialize(()=>{
                 const params = window.location.search;
                 title = params.substring(params.search("=")+1,params.search("&"));
                 description=params.substring(params.search("&")+13);
                 $("#taskTitle").text(title.replace(/%20/g," "));
+
                 if(description == "") {
                      $("#taskdescriptionteam").hide();
                 }
@@ -48,6 +50,7 @@
                         });
                     }
                 });
+                
                 if (isValid == false) {
                     e.preventDefault();
                     return false;

@@ -14,6 +14,7 @@ class TeamsBot extends TeamsActivityHandler {
         this.baseUrl = process.env.BaseUrl;
         this.onMembersAdded(async (context, next) => {
             const membersAdded = context.activity.membersAdded;
+            
             for (let member = 0; member < membersAdded.length; member++) {
                 if (membersAdded[member].id !== context.activity.recipient.id) {
                     await context.sendActivity("Hello and welcome! With this sample you can schedule a message reminder by selecting `...` over the message then select more action and then create-reminder and you wil get reminder of the message at scheduled date and time.')");
@@ -84,20 +85,20 @@ class TeamsBot extends TeamsActivityHandler {
                             type: "TextBlock",
                             size: "Default",
                             weight: "Bolder",
-                            text: "Reminder for scheduled message!"
+                            text: "Reminder for scheduled task!"
                         },
                         {
                             type: "TextBlock",
                             size: "Default",
                             weight: "Default",
-                            text: "Message title: " + taskDetails["taskDetails"].title,
+                            text: "Task title: " + taskDetails["taskDetails"].title,
                             wrap: true
                         },
                         {
                             type: "TextBlock",
                             size: "Default",
                             weight: "Default",
-                            text: "Message description: " + taskDetails["taskDetails"].description,
+                            text: "Task description: " + taskDetails["taskDetails"].description,
                             wrap: true
                         },
                     ],

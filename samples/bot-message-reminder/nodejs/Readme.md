@@ -1,6 +1,6 @@
 ## Message reminder with messaging extension action
 
-This sample shows feature where user can schedule a task from messaging extension action and get a reminder card at scheduled time.
+This sample shows a feature where user can schedule a task from messaging extension action and get a reminder card at a scheduled time.
 
 ![Select message](Images/MessageAction.png)
 
