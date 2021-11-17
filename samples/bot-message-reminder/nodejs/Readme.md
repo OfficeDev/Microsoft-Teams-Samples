@@ -2,15 +2,31 @@
 
 This sample shows a feature where user can schedule a task from messaging extension action and get a reminder card at a scheduled time.
 
+- Personal scope scenario
+- Select `...` over message to get action `create-reminder` for scheduling task.
+
 ![Select message](Images/MessageAction.png)
+
+- Task module to schedule a task.
 
 ![Task Details](Images/ScheduleTask.png)
 
+ Reminder card of task at scheduled date and time.
+ 
 ![Task reminder](Images/TaskReminder.png)
+
+- Team scope scenario
+- Navigate to team where the app is installed
+
+- Select `...` over message to get action `create-reminder` for scheduling task.
 
 ![Team message action ](Images/MessageActionTeam.png)
 
+- Task module to schedule a task.
+
 ![Team Task Details ](Images/ScheduleTaskTeam.png)
+
+- Reminder card of task at scheduled date and time.
 
 ![ TeamTask reminder](Images/TaskReminderTeam.png)
 
@@ -71,9 +87,11 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 ![Select message](Images/MessageAction.png)
 
 - Task module to schedule a task.
+
 ![Task Details](Images/ScheduleTask.png)
 
  Reminder card of task at scheduled date and time.
+
 ![Task reminder](Images/TaskReminder.png)
 
 - Team scope scenario
@@ -84,8 +102,10 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 ![Team message action ](Images/MessageActionTeam.png)
 
 - Task module to schedule a task.
+
 ![Team Task Details ](Images/ScheduleTaskTeam.png)
 
-Reminder card of task at scheduled date and time.
+- Reminder card of task at scheduled date and time.
+
 ![ TeamTask reminder](Images/TaskReminderTeam.png)
 
