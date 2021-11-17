@@ -111,7 +111,7 @@ namespace BotDailyTaskReminder.Bots
                         Url = _applicationBaseUrl + "/" + "ScheduleTask",
                         Height = 450,
                         Width = 450,
-                        Title = "Schedula a task",
+                        Title = "Schedule a task",
                     },
                 };
             }
