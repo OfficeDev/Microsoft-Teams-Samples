@@ -90,7 +90,7 @@
          
              if (list != undefined && list.length > 0) {
                  list.map(item => {
-                     if (item.status != "Approved" && item.managerName == username) {
+                     if (item.status == "Pending" && item.managerName == username) {
                          managerList.push(item);
                      }
                  })
