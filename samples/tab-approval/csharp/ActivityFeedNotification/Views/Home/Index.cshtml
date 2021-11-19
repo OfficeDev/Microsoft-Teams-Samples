@@ -3,23 +3,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://unpkg.com/&#64;microsoft/teams-js/dist/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/&#64;microsoft/mgt/dist/bundle/mgt-loader.js"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/index.css">
-    <!-- Microsoft Teams sdk must be referenced before the toolkit -->
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js" integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv" crossorigin="anonymous"></script>
-    <title>Screen</title>
+        <script src="https://unpkg.com/@@microsoft/teams-js/dist/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/@@microsoft/mgt/dist/bundle/mgt-loader.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js"
+                integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT"
+                crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Security-Policy"
+              content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+    <style>
+        #mainDiv {
+            padding-left: 2%;
+            padding-top: 2%;
+            padding-right: 2%;
+        }
+    </style>
     <script>
         $(document).ready(function () {
+            getRequestList();
         });
-
         microsoftTeams.initialize();
         var token = localStorage.getItem("accessToken");
         var username = "";
@@ -30,25 +36,86 @@
             username = context.upn;
             userId = context.userObjectId;
             console.log(token);
-            if (token != null) {
-                $("#consent").hide();
+        });
+
+        function getRequestList() {
+            $.ajax({
+                       url: '/GetRequestList',
+                        type: "GET",
+                        dataType: "json",
+                        success: function (response) {
+                            taskDetailsForUser(response);
+                            taskDetailsForManager(response);
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                        },
+                    });
+        }
+
+        function taskDetailsForUser(data) {
+            var list = data;
+            var userList = [];
+            if (list != undefined && list.length > 0) {
+                list.map(item => {
+                    if (item.userName == username) {
+                        userList.push(item);
+                    }
+                })
             }
-            if (username == "admin@M365x881152.onmicrosoft.com") {
-                $("#managerList").hide();
+            if (list == undefined || userList.length == 0) {
+                $('#notask').show();
+                $('#mytask').hide();
             }
             else {
-                $("#userRequest").hide();
+                $('#notask').hide();
+                var i;
+                for (i = 0; i < userList.length; i++) {
+                    $('#task-list-table-user').append(`<tr style="padding:1px" >
+              <td style="margin-left:1px">${i+1}</td>
+              <td style="margin-left:1px">${userList[i].title}</td>
+              <td style="margin-left:1px">${userList[i].description}</td>
+              <td style="margin-left:1px">${userList[i].managerName}</td>
+              <td style="margin-left:1px">${userList[i].status}</td>
+               </tr>`);
+                };
             }
-        });
+        }
 
-        var empty = true;
-        $('input[type="text"]').each(function () {
-            if ($(this).val() != "") {
-                empty = false;
-                return false;
+        function taskDetailsForManager(data) {
+            var list = data;
+            var managerList = [];
+
+            if (list != undefined && list.length > 0) {
+                list.map(item => {
+                    if (item.status != "Approved" && item.managerName == username) {
+                        managerList.push(item);
+                    }
+                })
             }
-        });
-
+            if (list == undefined || managerList.length == 0) {
+                $('#norequest').show();
+                $('#approverequest').hide();
+            }
+            else {
+                $('#norequest').hide();
+                var i;
+                for (i = 0; i < managerList.length; i++) {
+                    $('#task-list-table-manager').append(`<tr style="padding:1px" >
+         <td>${i+1}</td>
+        <td>${managerList[i].title}</td>
+        <td>${managerList[i].description}</td>
+        <td>${managerList[i].userName}</td>
+        <td style="padding:5px">  
+            <button type="button" style ="background-color: lightgray" class="btn" data-app-itemid=${managerList[i].taskId} onclick="ApproveRequest(event)">Approve</button>
+        </td> 
+        <td style="padding:5px">  
+            <button type="button" style ="background-color: lightgray" class="btn" data-app-itemid=${managerList[i].taskId} onclick="upgradeApp(event)">Reject</button>
+        </td>
+         </tr>`);
+                };
+            }
+        }
         function ApproveRequest(e) {
             var taskId = $(e.currentTarget).attr('data-app-itemid');
             let taskInfo = {
@@ -105,7 +172,7 @@
                 title: $('#title').val(),
                 description: $('#description').val(),
                 userName: username,
-                managerName: "meganb@M365x881152.onmicrosoft.com",
+                managerName: "MeganB@M365x881152.OnMicrosoft.com",
                 access_token: token,
             };
             $.ajax({
@@ -122,116 +189,80 @@
     </script>
 </head>
 
-<body>
-    <button onclick="requestConsent()" id="consent">Login</button>
-    <mgt-teams-msal2-provider client-id="d45923ab-a663-4eb8-877b-c4cc931362ff"
-                              auth-popup-url="tabAuth"
-                              scopes="User.Read,Mail.ReadBasic"></mgt-teams-msal2-provider>
-    <mgt-login></mgt-login>
-    <mgt-people-picker></mgt-people-picker>
-    <div id="userRequest">
-        <div class="mb">
-            <div class="form-group fg">
-                <label for="title" class="title"> Request title</label>
-                <br />
-                <input type="text" id="title" name="requesttitle">
+<body  id="mainDiv" >
+    <div>
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#createtask">Create Task</a></li>
+            <li><a data-toggle="tab" href="#mylist">My Requestes</a></li>
+            <li><a data-toggle="tab" href="#managerList">My Pending Approvals</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="createtask" class="tab-pane fade in active">
+                <div class="mb">
+                    <div class="form-group fg">
+                        <mgt-teams-msal2-provider client-id="d45923ab-a663-4eb8-877b-c4cc931362ff"
+                                                  auth-popup-url="/tabAuth"
+                                                  scopes="User.Read,Mail.ReadBasic"></mgt-teams-msal2-provider>
+                        <mgt-login></mgt-login>
+                        <label for="title" class="title">Request title</label>
+                        <br>
+                        <input type="text" id="title" name="taskTitle">
+                    </div>
+                    <br />
+                    <div class="form-group fg">
+                        <label for="title-desc" class="description">Request description</label><br/>
+                        <input type="text" id="description" name="taskDescription">
+                        <br />
+                    </div>
+                    <label for="request to" class="description">Request to</label><br/>
+                    <mgt-people-picker selection-mode="single"></mgt-people-picker>
+                </div>
+                <div class="modal-footer mf">
+                    <br />
+                    <button type="button" class="btn-send save" onclick="return SendNotificationToManager()">Send Request</button>
+                </div>
             </div>
-            <div class="form-group fg">
-                <label for="title-desc" class="description"> Request description</label>
-                <br />
-                <input type="text" id="description" name="taskdescription">
-            </div>
-
-        </div>
-        <div class="modal-footer mf">
-            <button type="button" class="btn-send save" onclick="return SendNotificationToManager()">Send Request</button>
-        </div>
-        <br />
-        <div>
-            @{
-                var data = ViewBag.TaskList;
-                var message = ViewBag.Message;
-            }
-            @{int Count = 1;}
-            @if (data != null)
-            {
-                <table border="1" class="table table-hover">
-                    <thead>
-                        <tr>
-                            <td>Sr No.</td>
-                            <td>Title</td>
-                            <td>Description</td>
-                            <td>With</td>
-                            <td>Status</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in data)
-                        {
-                            <tr style="padding:1px">
-                                <td>@Count</td>
-                                <td>@item.title</td>
-                                <td>@item.description</td>
-                                <td>@item.managerName</td>
-                                <td>@item.status</td>
+            <div id="mylist" class="tab-pane fade">
+                <div id="notask">
+                    <span>No records found</span>
+                </div>
+                <div id="mytask">
+                    <h5>List of tasks:</h5>
+                    <table border="1" id="task-list-table-user" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <td>Sr No.</td>
+                                <td>Request title</td>
+                                <td>Request description</td>
+                                <td>Pending with</td>
+                                <td>Status</td>
                             </tr>
-                            Count = Count + 1;
-                        }
-                    </tbody>
-                </table>
-            }
-            else
-            {
-                <div>@message</div>
-            }
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <div id="managerList" class="tab-pane fade">
+                <div id="norequest">
+                    <span>No records found</span>
+                </div>
+                <div id="approverequest">
+                    <h5>List of tasks:</h5>
+                    <table border="1" id="task-list-table-manager" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <td>Sr No.</td>
+                                <td>Request title</td>
+                                <td>Request description</td>
+                                <td>Request by</td>
+                                <td>Approve</td>
+                                <td>Reject</td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            </div>
         </div>
-    </div>
-    <div id="managerList">
-        <div>
-            @{
-                var managerRequestList = ViewBag.TaskList;
-                var managerMessage = ViewBag.Message;
-            }
-            @{int i = 1;}
-            @if (data != null)
-            {
-                <table border="1" class="table table-hover">
-                    <thead>
-                        <tr>
-                            <td>Sr No.</td>
-                            <td>Title</td>
-                            <td>Description</td>
-                            <td>From</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in managerRequestList)
-                        {
-                            if (item.status == "Pending")
-                            {
-                                <tr style="padding:1px">
-                                    <td>@i</td>
-                                    <td>@item.title</td>
-                                    <td>@item.description</td>
-                                    <td>@item.userName</td>
-                                    <td><button type="button" class="btn btn-outline-success" data-app-itemid="@item.taskId" onclick="ApproveRequest(event)">Approve</button></td>
-                                    <td><button type="button" class="btn btn-outline-info" data-app-itemid="@item.taskId" onclick="RejectRequest(event)">Reject</button></td>
-
-                                </tr>
-                                Count = Count + 1;
-                            }
-                        }
-                    </tbody>
-                </table>
-            }
-            else
-            {
-                <div>@managerMessage</div>
-            }
-        </div>
-    </div>
 </body>
 
 </html>

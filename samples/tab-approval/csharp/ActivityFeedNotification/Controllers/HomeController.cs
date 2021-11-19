@@ -36,17 +36,17 @@ namespace TabActivityFeed.Controllers
         [Route("request")]
         public ActionResult Hello()
         {
+            return View("Index");
+        }
+
+        [HttpGet]
+        [Route("GetRequestList")]
+        public async Task<List<RequestInfo>> GetRequestList()
+        {
             var currentTaskList = new List<RequestInfo>();
             _taskList.TryGetValue("taskList", out currentTaskList);
-            if (currentTaskList == null)
-            {
-                ViewBag.Message = "No request found";
-            }
-            else
-            {
-               ViewBag.TaskList = currentTaskList;
-            }
-            return View("Index");
+            return currentTaskList;
+
         }
 
         [Route("tabAuth")]
@@ -101,7 +101,7 @@ namespace TabActivityFeed.Controllers
 
             var previewText = new ItemBody
             {
-                Content = "Deployment requires your approval"
+                Content = $"Request for: {taskInfo.title}\nBy: {taskInfo.userName}"
             };
             var customRecipient = new AadUserNotificationRecipient
             {
@@ -112,7 +112,7 @@ namespace TabActivityFeed.Controllers
                  new Microsoft.Graph.KeyValuePair
                  {
                    Name = "approvalTaskId",
-                   Value ="2020AAGGTAPP"
+                   Value = taskInfo.title
                   }
                 };
             try
