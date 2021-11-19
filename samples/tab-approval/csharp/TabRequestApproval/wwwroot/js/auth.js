@@ -20,8 +20,6 @@ $(document).ready(function () {
                 $("#divError").show();
                 $("#consent").show();
                 $("#adaptiveBtn").hide();
-
-                // Something else went wrong
             }
         });
 });

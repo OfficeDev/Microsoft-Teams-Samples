@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿// <copyright file="HomeController.cs" company="Microsoft">
+// Copyright (c) Microsoft. All Rights Reserved.
+// </copyright>
+
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -9,10 +13,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using TabActivityFeed.Helpers;
-using TabActivityFeed.Model;
+using TabRequestApproval.Helpers;
+using TabRequestApproval.Model;
 
-namespace TabActivityFeed.Controllers
+namespace TabRequestApproval.Controllers
 {
     public class HomeController : Controller
     {
@@ -34,8 +38,9 @@ namespace TabActivityFeed.Controllers
         }
 
         [Route("request")]
-        public ActionResult Hello()
+        public ActionResult Request()
         {
+            ViewBag.clientId = _configuration["AzureAd:MicrosoftAppId"];
             return View("Index");
         }
 
@@ -45,8 +50,8 @@ namespace TabActivityFeed.Controllers
         {
             var currentTaskList = new List<RequestInfo>();
             _taskList.TryGetValue("taskList", out currentTaskList);
-            return currentTaskList;
 
+            return currentTaskList;
         }
 
         [Route("tabAuth")]
@@ -54,17 +59,19 @@ namespace TabActivityFeed.Controllers
         {
             return View("tabAuth");
         }
+
         [HttpPost]
         [Route("SendNotificationToManager")]
         public async Task<ActionResult> SendNotificationToManager(RequestInfo taskInfo)
         {
-            // TaskHelper.AddTaskToFeed(taskInfo);
             var currentTaskList = new List<RequestInfo>();
             List<RequestInfo> taskList = new List<RequestInfo>();
             _taskList.TryGetValue("taskList", out currentTaskList);
+
             var request = taskInfo;
             request.taskId = Guid.NewGuid();
             request.status = "Pending";
+
             if (currentTaskList == null)
             {
                 taskList.Add(request);
@@ -83,14 +90,15 @@ namespace TabActivityFeed.Controllers
             var user = await graphClient.Users[taskInfo.managerName]
                       .Request()
                       .GetAsync();
+
             var installedApps = await graphClient.Users[user.Id].Teamwork.InstalledApps
                                .Request()
                                .Expand("teamsAppDefinition")
                                .GetAsync();
+
             var installationId = installedApps.Where(id => id.TeamsAppDefinition.DisplayName == "Tab Approval").Select(x => x.Id);
             var userName = user.UserPrincipalName;
 
-            ViewBag.taskID = new Guid();
             var topic = new TeamworkActivityTopic
             {
                 Source = TeamworkActivityTopicSource.EntityUrl,
@@ -103,18 +111,16 @@ namespace TabActivityFeed.Controllers
             {
                 Content = $"Request for: {taskInfo.title}\nBy: {taskInfo.userName}"
             };
-            var customRecipient = new AadUserNotificationRecipient
-            {
-                UserId = user.Id
-            };
+
             var templateParameters = new List<Microsoft.Graph.KeyValuePair>()
-                 {
-                 new Microsoft.Graph.KeyValuePair
-                 {
-                   Name = "approvalTaskId",
-                   Value = taskInfo.title
-                  }
-                };
+            {
+                new Microsoft.Graph.KeyValuePair
+                {
+                    Name = "approvalTaskId",
+                    Value = taskInfo.title
+                }
+            };
+
             try
             {
                 await graphClientApp.Users[user.Id].Teamwork
@@ -131,8 +137,8 @@ namespace TabActivityFeed.Controllers
         }
 
         [HttpPost]
-        [Route("SendNotificationToUser")]
-        public async Task<ActionResult> SendNotificationToUser(RequestInfo taskInfo)
+        [Route("RespondRequest")]
+        public async Task<ActionResult> RespondRequest(RequestInfo taskInfo)
         {
             var currentTaskList = new List<RequestInfo>();
             _taskList.TryGetValue("taskList", out currentTaskList);
@@ -152,6 +158,7 @@ namespace TabActivityFeed.Controllers
             try
             {
                 var accessToken = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor);
+                
                 return accessToken;
             }
             catch (Exception)

@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿// <copyright file="AuthHelper.cs" company="Microsoft">
+// Copyright (c) Microsoft. All Rights Reserved.
+// </copyright>
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Primitives;
 using Microsoft.IdentityModel.Tokens;
@@ -11,7 +15,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TabActivityFeed.Helpers
+namespace TabRequestApproval.Helpers
 {
     public class AuthHelper
     {
@@ -60,6 +64,7 @@ namespace TabActivityFeed.Helpers
             var clientId = configuration[ClientIdConfigurationSettingsKey];
             var applicationIdUri = configuration[ApplicationIdURIConfigurationSettingsKey];
             var validAudiences = new List<string> { clientId, applicationIdUri.ToLower() };
+
             return validAudiences;
         }
 
@@ -74,7 +79,7 @@ namespace TabActivityFeed.Helpers
 
             var validIssuers = GetSettings(configuration);
 
-            validIssuers = validIssuers.Select(validIssuer => validIssuer.Replace("0d9b645f-597b-41f0-a2a3-ef103fbd91bb", tenantId));
+            validIssuers = validIssuers.Select(validIssuer => validIssuer.Replace("tenantId", tenantId));
 
             return validIssuers;
         }
@@ -167,6 +172,7 @@ namespace TabActivityFeed.Helpers
             var settings = configurationSettingsValue
                 ?.Split(new char[] { ';', ',' }, StringSplitOptions.RemoveEmptyEntries)
                 ?.Select(p => p.Trim());
+
             if (settings == null)
             {
 
@@ -176,5 +182,4 @@ namespace TabActivityFeed.Helpers
             return settings;
         }
     }
-
 }

@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿// <copyright file="AuthController.cs" company="Microsoft">
+// Copyright (c) Microsoft. All Rights Reserved.
+// </copyright>
+
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
-namespace TabActivityFeed.Controllers
+namespace TabRequestApproval.Controllers
 {
     public class AuthController : Controller
     {

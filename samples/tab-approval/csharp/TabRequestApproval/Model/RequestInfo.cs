@@ -1,6 +1,9 @@
-﻿using System;
+﻿// <copyright file="RequestInfo.cs" company="Microsoft">
+// Copyright (c) Microsoft. All Rights Reserved.
+// </copyright>
+using System;
 
-namespace TabActivityFeed.Model
+namespace TabRequestApproval.Model
 {
     
     public class RequestInfo

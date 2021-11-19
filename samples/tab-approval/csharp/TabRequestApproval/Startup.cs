@@ -13,10 +13,10 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using TabActivityFeed.Helpers;
-using TabActivityFeed.Model;
+using TabRequestApproval.Helpers;
+using TabRequestApproval.Model;
 
-namespace Microsoft.BotBuilderSamples
+namespace TabRequestApproval
 {
     public class Startup
     {
@@ -36,12 +36,14 @@ namespace Microsoft.BotBuilderSamples
                 options.Cookie.IsEssential = true;
                 options.IdleTimeout = TimeSpan.FromMinutes(60);//You can set Time   
             });
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
             services.AddMemoryCache();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddMvc().AddSessionStateTempDataProvider();
@@ -66,7 +68,6 @@ namespace Microsoft.BotBuilderSamples
                         AudienceValidator = AuthHelper.AudienceValidator
                     };
                 });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -96,8 +97,6 @@ namespace Microsoft.BotBuilderSamples
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 });
-
-            // app.UseHttpsRedirection();
         }
     }
 }
