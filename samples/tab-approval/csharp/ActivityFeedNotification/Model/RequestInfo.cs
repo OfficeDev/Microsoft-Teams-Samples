@@ -1,0 +1,22 @@
+﻿using System;
+
+namespace TabActivityFeed.Model
+{
+    
+    public class RequestInfo
+    {
+        public Guid taskId { get; set; }
+
+        public string title { get; set; }
+
+        public string description { get; set; }
+
+        public string userName { get; set; }
+
+        public string managerName { get; set; }
+
+        public string status { get; set; }
+
+        public string access_token { get; set; }
+    }
+}

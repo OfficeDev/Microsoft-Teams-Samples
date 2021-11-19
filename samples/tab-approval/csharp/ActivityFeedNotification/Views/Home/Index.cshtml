@@ -3,21 +3,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://unpkg.com/&#64;microsoft/teams-js/dist/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/&#64;microsoft/mgt/dist/bundle/mgt-loader.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/index.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <script src="@("https://unpkg.com/@microsoft/teams-js@1.4.1/dist/MicrosoftTeams.min.js")"></script>
-    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">*@
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-    <script src="https://statics.teams.microsoft.com/sdk/v1.5.2/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <!-- Microsoft Teams sdk must be referenced before the toolkit -->
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js" integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv" crossorigin="anonymous"></script>
     <title>Screen</title>
     <script>
         $(document).ready(function () {
@@ -29,6 +26,7 @@
         var userId = "";
 
         microsoftTeams.getContext(function (context) {
+            console.log(context);
             username = context.upn;
             userId = context.userObjectId;
             console.log(token);
@@ -55,7 +53,7 @@
             var taskId = $(e.currentTarget).attr('data-app-itemid');
             let taskInfo = {
                 taskId: taskId,
-                status : "Approved",
+                status: "Approved",
                 access_token: token,
             };
             console.log(taskInfo);
@@ -126,16 +124,24 @@
 
 <body>
     <button onclick="requestConsent()" id="consent">Login</button>
+    <mgt-teams-msal2-provider client-id="d45923ab-a663-4eb8-877b-c4cc931362ff"
+                              auth-popup-url="tabAuth"
+                              scopes="User.Read,Mail.ReadBasic"></mgt-teams-msal2-provider>
+    <mgt-login></mgt-login>
+    <mgt-people-picker></mgt-people-picker>
     <div id="userRequest">
         <div class="mb">
             <div class="form-group fg">
                 <label for="title" class="title"> Request title</label>
+                <br />
                 <input type="text" id="title" name="requesttitle">
             </div>
             <div class="form-group fg">
                 <label for="title-desc" class="description"> Request description</label>
+                <br />
                 <input type="text" id="description" name="taskdescription">
             </div>
+
         </div>
         <div class="modal-footer mf">
             <button type="button" class="btn-send save" onclick="return SendNotificationToManager()">Send Request</button>
@@ -149,7 +155,7 @@
             @{int Count = 1;}
             @if (data != null)
             {
-                <table border="1">
+                <table border="1" class="table table-hover">
                     <thead>
                         <tr>
                             <td>Sr No.</td>
@@ -162,14 +168,14 @@
                     <tbody>
                         @foreach (var item in data)
                         {
-                                <tr style="padding:1px">
-                                    <td>@Count</td>
-                                    <td>@item.title</td>
-                                    <td>@item.description</td>
-                                    <td>@item.managerName</td>
-                                    <td>@item.status</td>
-                                </tr>
-                                Count = Count + 1;
+                            <tr style="padding:1px">
+                                <td>@Count</td>
+                                <td>@item.title</td>
+                                <td>@item.description</td>
+                                <td>@item.managerName</td>
+                                <td>@item.status</td>
+                            </tr>
+                            Count = Count + 1;
                         }
                     </tbody>
                 </table>
@@ -189,7 +195,7 @@
             @{int i = 1;}
             @if (data != null)
             {
-                <table border="1">
+                <table border="1" class="table table-hover">
                     <thead>
                         <tr>
                             <td>Sr No.</td>
@@ -205,15 +211,15 @@
                         {
                             if (item.status == "Pending")
                             {
-                            <tr style="padding:1px">
-                                <td>@i</td>
-                                <td>@item.title</td>
-                                <td>@item.description</td>
-                                <td>@item.userName</td>
-                                <td><button type="button" class="btn btn-outline-success" data-app-itemid="@item.taskId" onclick="ApproveRequest(event)">Approve</button></td>
-                                <td><button type="button" class="btn btn-outline-info" data-app-itemid="@item.taskId" onclick="RejectRequest(event)">Reject</button></td>
+                                <tr style="padding:1px">
+                                    <td>@i</td>
+                                    <td>@item.title</td>
+                                    <td>@item.description</td>
+                                    <td>@item.userName</td>
+                                    <td><button type="button" class="btn btn-outline-success" data-app-itemid="@item.taskId" onclick="ApproveRequest(event)">Approve</button></td>
+                                    <td><button type="button" class="btn btn-outline-info" data-app-itemid="@item.taskId" onclick="RejectRequest(event)">Reject</button></td>
 
-                            </tr>
+                                </tr>
                                 Count = Count + 1;
                             }
                         }

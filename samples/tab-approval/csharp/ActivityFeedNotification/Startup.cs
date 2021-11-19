@@ -45,7 +45,7 @@ namespace Microsoft.BotBuilderSamples
             services.AddMemoryCache();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddMvc().AddSessionStateTempDataProvider();
-            services.AddSingleton<ConcurrentDictionary<string, List<TaskInfo>>>();
+            services.AddSingleton<ConcurrentDictionary<string, List<RequestInfo>>>();
 
             services.AddControllersWithViews();
             services.AddHttpClient("WebClient", client => client.Timeout = TimeSpan.FromSeconds(600));

@@ -11,7 +11,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using TabActivityFeed.Helpers;
 using TabActivityFeed.Model;
-using TabActivityFeed.Repository;
 
 namespace TabActivityFeed.Controllers
 {
@@ -20,13 +19,13 @@ namespace TabActivityFeed.Controllers
         private readonly IConfiguration _configuration;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly ConcurrentDictionary<string, List<TaskInfo>> _taskList;
+        private readonly ConcurrentDictionary<string, List<RequestInfo>> _taskList;
 
         public HomeController(
             IConfiguration configuration,
             IHttpClientFactory httpClientFactory,
             IHttpContextAccessor httpContextAccessor,
-            ConcurrentDictionary<string, List<TaskInfo>> taskList)
+            ConcurrentDictionary<string, List<RequestInfo>> taskList)
         {
             _configuration = configuration;
             _httpClientFactory = httpClientFactory;
@@ -37,7 +36,7 @@ namespace TabActivityFeed.Controllers
         [Route("request")]
         public ActionResult Hello()
         {
-            var currentTaskList = new List<TaskInfo>();
+            var currentTaskList = new List<RequestInfo>();
             _taskList.TryGetValue("taskList", out currentTaskList);
             if (currentTaskList == null)
             {
@@ -45,18 +44,23 @@ namespace TabActivityFeed.Controllers
             }
             else
             {
-                ViewBag.TaskList = currentTaskList;
+               ViewBag.TaskList = currentTaskList;
             }
             return View("Index");
         }
 
+        [Route("tabAuth")]
+        public ActionResult Auth()
+        {
+            return View("tabAuth");
+        }
         [HttpPost]
         [Route("SendNotificationToManager")]
-        public async Task<ActionResult> SendNotificationToManager(TaskInfo taskInfo)
+        public async Task<ActionResult> SendNotificationToManager(RequestInfo taskInfo)
         {
             // TaskHelper.AddTaskToFeed(taskInfo);
-            var currentTaskList = new List<TaskInfo>();
-            List<TaskInfo> taskList = new List<TaskInfo>();
+            var currentTaskList = new List<RequestInfo>();
+            List<RequestInfo> taskList = new List<RequestInfo>();
             _taskList.TryGetValue("taskList", out currentTaskList);
             var request = taskInfo;
             request.taskId = Guid.NewGuid();
@@ -86,12 +90,12 @@ namespace TabActivityFeed.Controllers
             var installationId = installedApps.Where(id => id.TeamsAppDefinition.DisplayName == "Tab Approval").Select(x => x.Id);
             var userName = user.UserPrincipalName;
 
-                ViewBag.taskID = new Guid();
-                var topic = new TeamworkActivityTopic
-                {
-                    Source = TeamworkActivityTopicSource.EntityUrl,
-                    Value = "https://graph.microsoft.com/beta/users/" + user.Id + "/teamwork/installedApps/" + installationId.ToList()[0]
-                };
+            ViewBag.taskID = new Guid();
+            var topic = new TeamworkActivityTopic
+            {
+                Source = TeamworkActivityTopicSource.EntityUrl,
+                Value = "https://graph.microsoft.com/beta/users/" + user.Id + "/teamwork/installedApps/" + installationId.ToList()[0]
+            };
 
             var activityType = "approvalRequired";
 
@@ -112,32 +116,32 @@ namespace TabActivityFeed.Controllers
                   }
                 };
             try
-                {
-                    await graphClientApp.Users[user.Id].Teamwork
-                        .SendActivityNotification(topic, activityType, null, previewText, templateParameters)
-                        .Request()
-                        .PostAsync();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                }
+            {
+                await graphClientApp.Users[user.Id].Teamwork
+                    .SendActivityNotification(topic, activityType, null, previewText, templateParameters)
+                    .Request()
+                    .PostAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
 
             return View("Index");
         }
 
         [HttpPost]
         [Route("SendNotificationToUser")]
-        public async Task<ActionResult> SendNotificationToUser(TaskInfo taskInfo)
+        public async Task<ActionResult> SendNotificationToUser(RequestInfo taskInfo)
         {
-            var currentTaskList = new List<TaskInfo>();
+            var currentTaskList = new List<RequestInfo>();
             _taskList.TryGetValue("taskList", out currentTaskList);
 
             var requestUpdate = currentTaskList.FirstOrDefault(p => p.taskId == taskInfo.taskId);
             requestUpdate.status = taskInfo.status;
             _taskList.AddOrUpdate("taskList", currentTaskList, (key, newValue) => currentTaskList);
-             ViewBag.TaskList = currentTaskList;
-            
+            ViewBag.TaskList = currentTaskList;
+
             return View("Index");
         }
 
