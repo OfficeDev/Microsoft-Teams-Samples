@@ -1,3 +1,16 @@
+---
+page_type: sample
+description: Sample code for a generic connector that's easy to customize for any system which supports webhooks.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- nodejs
+extensions:
+contentType: samples
+createdDate: "07-07-2021 13:38:26"
+---
 # Sample Connector 
 This contains the source for a generic connector that's easy to customize for any system which supports webhooks. 
  
@@ -50,3 +63,4 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+

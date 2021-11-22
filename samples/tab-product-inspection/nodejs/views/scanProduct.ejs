@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js" integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#productStatus").hide();
+            $("#captureImage").hide();
+            $("#noProductFound").hide();
+            $("#status").hide();
+            $("#wait").hide();
+        });
+
+        microsoftTeams.initialize(() => {
+            scanBarCode();
+        });
+
+        var productId;
+        var productName;
+        var image;
+
+        // Method to scan barcode
+        function scanBarCode() {
+            var config = {
+                timeOutIntervalInSec: 30
+            };
+            // Method that enables the user to scan different types of barcode, and returns the result as a string.  
+            microsoftTeams.media.scanBarCode((error, decodedText) => {
+                // If there's any error, an alert shows the error message/code
+                if (error) {
+                    if (error.message) {
+                        alert(" ErrorCode: " + error.errorCode + error.message);
+                    } else {
+                        alert(" ErrorCode: " + error.errorCode);
+                    }
+                }
+                else if (decodedText) {
+                    productId = decodedText;
+
+                    if (decodedText == "01SD001") {
+                        productName = "Laptop";
+                        $("#captureImage").show();
+                    }
+                    else if (decodedText == "01DU890") {
+                        productName = "Desktop";
+                        $("#captureImage").show();
+                    }
+                    else if (decodedText == "01PM998") {
+                        productName = "Mobile";
+                        $("#captureImage").show();
+                    }
+                    else{
+                        $("#noProductFound").show();
+                    }  
+                }
+            }, config);
+        }
+
+        // Method to capture product image 
+        function captureImage() {
+            microsoftTeams.initialize(()=>{
+                // Method to ask for image capture permission and then capture image
+                microsoftTeams.media.captureImage((error, files) => {
+                // If there's any error, an alert shows the error message/code
+                if (error) {
+                    if (error.message) {
+                        alert(" ErrorCode: " + error.errorCode + error.message);
+                    } else {
+                        alert(" ErrorCode: " + error.errorCode);
+                    }
+                } else if (files) {
+                    image = files[0].content;
+                    $("#productName").text("Product Name :" + productName);
+                    document.getElementById("productImage").src = "data:image/png;base64," + image;
+                    $("#productStatus").show();
+                }
+            });
+            });     
+        };
+
+        // Method invoked on approve/reject click.
+        function approveRejectProduct(status) {
+            microsoftTeams.initialize();
+            let formData = new FormData();
+
+            var productDetails= {
+                "productId":productId,
+                "image":"data:image/png;base64," + image,
+                "status": status?"Approved":"Rejected",
+                "productName": productName
+            }
+
+            var data = JSON.stringify(productDetails)
+            formData.append("data", data);
+            $("#productStatus").hide();
+            $("#captureImage").hide();
+            $("#wait").show();
+            $.ajax({
+                url: '/save',
+                type: 'POST',
+                data: formData,
+                mimeType: "multipart/form-data",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data, textStatus, jQxhr) {
+                    $("#wait").hide();
+                    $("#status").show();
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log('error', errorThrown);
+                }
+                });           
+        }
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            <label id="noProductFound">This product is not available. Please scan the product from 'All product list'</label>
+            <div id="captureImage">
+                <input type="button" value="Capture Image" onclick="captureImage()">
+                <br/>
+            </div>
+            <div id="productStatus">
+                <label id="productName"></label><br/>
+                <img id="productImage" src height="100" width="100"/>
+                <br/>
+                <br/>
+                <button type="button" onclick="approveRejectProduct(true)">Approve</button>
+                <button type="button" onclick="approveRejectProduct(false)">Reject</button>
+            </div>
+            <div id="wait">Please wait...</div>
+            <div id="status">Product status updated successfully.</div>
+        </div>
+    </div>
+</body>
+</html>

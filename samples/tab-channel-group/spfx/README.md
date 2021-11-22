@@ -1,8 +1,18 @@
-# teams-tab-spfx
+---
+page_type: sample
+description: Sample app showing Microsoft Teams tabs using SharePoint Framework
+products:
+- office-teams
+- office
+- office-365
+languages:
+- javascript
+extensions:
+contentType: samples
+createdDate: "07-07-2021 13:38:27"
+---
 
-## Summary
-
-# Build Microsoft Teams tab using SharePoint Framework
+# Microsoft Teams tab using SharePoint Framework
 
 Starting with the SharePoint Framework v1.8, you can implement your Microsoft Teams tabs using SharePoint Framework. Using SharePoint Framework significantly simplifies Teams tab development process as Teams tabs can be automatically hosted within SharePoint without any need for external services.
 
@@ -173,3 +183,4 @@ You can now sync your new version to Microsoft Teams.
 - [Use Microsoft Graph in your solution](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/using-microsoft-graph-apis)
 - [Publish SharePoint Framework applications to the Marketplace](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/publish-to-marketplace-overview)
 - [Microsoft 365 Patterns and Practices](https://aka.ms/m365pnp) - Guidance, tooling, samples and open-source controls for your Microsoft 365 development
+

@@ -1,6 +1,8 @@
 ---
 page_type: sample
 products:
+- office-teams
+- office
 - office-365
 languages:
 - javascript
@@ -11,7 +13,7 @@ extensions:
   createdDate: 11/3/2017 12:53:17 PM
 ---
 
-# Microsoft Teams - Tabs Azure AD Single Sign-On Sample
+# Tabs Azure AD Single Sign-On Sample
 
 This sample shows how to implement Azure AD single sign-on support for tabs. It will:
 
