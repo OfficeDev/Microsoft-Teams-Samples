@@ -87,9 +87,6 @@ Manager Persona:
     * Select **Add a platform**.
     * Select **web**.
     * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/Auth/end`, `https://{Base_Url}/Auth/Start`. This will be the page where a successful implicit grant flow will redirect the user.
-    Again
-	* Select **Single page application**.
-	* Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/tabAuth`
 	
     Enable implicit grant by checking the following boxes:  
     ✔ ID Token  
@@ -132,6 +129,7 @@ Manager Persona:
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.    
 
+Note: App should be installed for user's manager.
 ## Further reading
 
 - [Bot Framework Documentation](https://docs.botframework.com)

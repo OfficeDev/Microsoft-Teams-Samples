@@ -40,7 +40,6 @@ namespace TabRequestApproval.Controllers
         [Route("request")]
         public ActionResult Request()
         {
-            ViewBag.clientId = _configuration["AzureAd:MicrosoftAppId"];
             return View("Index");
         }
 
@@ -73,16 +72,21 @@ namespace TabRequestApproval.Controllers
             return View("Request");
         }
 
-        [Route("tabAuth")]
-        public ActionResult Auth()
-        {
-            return View("tabAuth");
-        }
-
         [HttpPost]
         [Route("SendNotificationToManager")]
         public async Task<ActionResult> SendNotificationToManager(RequestInfo taskInfo)
         {
+            try
+            {
+            var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
+            var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["AzureAd:MicrosoftAppId"], _configuration["AzureAd:MicrosoftAppPassword"], _configuration["AzureAd:TenantId"]);
+            var directoryObject = await graphClient.Me.Manager
+                                                    .Request()
+                                                    .GetAsync();
+            var user = await graphClient.Users[directoryObject.Id]
+                      .Request()
+                      .GetAsync();
+
             var currentTaskList = new List<RequestInfo>();
             List<RequestInfo> taskList = new List<RequestInfo>();
             _taskList.TryGetValue("taskList", out currentTaskList);
@@ -90,6 +94,7 @@ namespace TabRequestApproval.Controllers
             var request = taskInfo;
             request.taskId = Guid.NewGuid();
             request.status = "Pending";
+            request.managerName = user.UserPrincipalName;
 
             if (currentTaskList == null)
             {
@@ -104,11 +109,6 @@ namespace TabRequestApproval.Controllers
                 ViewBag.TaskList = currentTaskList;
             }
 
-            var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
-            var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["AzureAd:MicrosoftAppId"], _configuration["AzureAd:MicrosoftAppPassword"], _configuration["AzureAd:TenantId"]);
-            var user = await graphClient.Users[taskInfo.managerName]
-                      .Request()
-                      .GetAsync();
 
             var installedApps = await graphClient.Users[user.Id].Teamwork.InstalledApps
                                .Request()
@@ -142,8 +142,7 @@ namespace TabRequestApproval.Controllers
                 }
             };
 
-            try
-            {
+            
                 await graphClientApp.Users[user.Id].Teamwork
                     .SendActivityNotification(topic, activityType, null, previewText, templateParameters)
                     .Request()

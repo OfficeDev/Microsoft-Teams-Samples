@@ -24,7 +24,8 @@
       <script>
          $(document).ready(function () {
              getRequestList();
-              $('#task-submitted').hide();
+             $('#task-submitted').hide();
+             $('#nomanagerfound').hide();
          });
 
          microsoftTeams.initialize();
@@ -35,7 +36,7 @@
          microsoftTeams.getContext(function (context) {
              username = context.upn;
              userId = context.userObjectId;
-             if(context.subEntityId!="")
+             if(context.subEntityId!="" && context.subEntityId!= undefined)
              {
                  let taskInfo = {
                         title: "Request details",
@@ -43,7 +44,7 @@
                         width: 400,
                         url: window.location.origin + "/RequestDetails?taskId=" + context.subEntityId,
                         card: null,
-                        fallbackUrl: window.location.origin + "/RequestDetails?taskId=" + context.subEntityId,
+                        fallbackUrl:null,
                         completionBotId: null,
                      };
 
@@ -194,7 +195,6 @@
                  title: $('#title').val(),
                  description: $('#description').val(),
                  userName: username,
-                 managerName: "MeganB@M365x881152.OnMicrosoft.com",
                  access_token: token,
              };
 
@@ -203,9 +203,17 @@
                  url: '/SendNotificationToManager',
                  dataType: 'json',
                  data: taskInfo,
+                 success: function (response) {
+                        console.log(response);
+                        $('#task-submitted').show();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    if(textStatus!="parsererror"){
+                        $('#nomanagerfound').show();
+                    }  
+                },
              });
-
-             $('#task-submitted').show();
 
              return true;
          };
@@ -222,13 +230,7 @@
             <div id="createtask" class="tab-pane fade in active">
                <div class="mb">
                   <div class="form-group fg">
-                     @{
-                     var clientId = ViewBag.clientId;
-                     }        
-                     <mgt-teams-msal2-provider client-id=@clientId
-                        auth-popup-url="/tabAuth"
-                        scopes="User.Read,Mail.ReadBasic"></mgt-teams-msal2-provider>
-                     <mgt-login></mgt-login>
+                      <br/>
                      <label for="title" class="title">Request title</label>
                      <br>
                      <input type="text" id="title" name="taskTitle">
@@ -239,8 +241,6 @@
                      <input type="text" id="description" name="taskDescription">
                      <br />
                   </div>
-                  <label for="request to" class="description">Request to</label><br/>
-                  <mgt-people-picker selection-mode="single"></mgt-people-picker>
                </div>
                <div class="modal-footer mf">
                   <br />
@@ -248,6 +248,9 @@
                </div>
             <div id="task-submitted">
                 Request submitted successfully.
+            </div>
+             <div id="nomanagerfound">
+                No manager found.
             </div>
             </div>
             <div id="mylist" class="tab-pane fade">
