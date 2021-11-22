@@ -20,9 +20,9 @@ Manager Persona:
 
 ![Notification](TabRequestApproval/Images/RequestNotification.png)
 
-- List of pending request.
+- Pending request.
 
-![Pending request list](TabRequestApproval/Images/RequestList.png)
+![Pending request list](TabRequestApproval/Images/RequestDetails.png)
 
 ## Prerequisites
 
