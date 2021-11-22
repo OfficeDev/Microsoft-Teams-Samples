@@ -38,10 +38,6 @@ Manager Persona:
 
 ![RequestTaskNotification](Images/RequestTaskNotification.png)
 
-- List of pending request.
-
-![Pending request list](Images/RequestList.png)
-
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/en/)

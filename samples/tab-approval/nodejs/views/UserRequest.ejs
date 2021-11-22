@@ -24,35 +24,65 @@
             padding-top: 2%;
             padding-right: 2%;
         }
+
+        .container {
+        margin-top: 1rem;
+        margin-left:1.5rem;
+        }
+
     </style>
 </head>
 
 <body id=mainDiv>
-    <div>
+    <div class="container">
         <div id="productDetails">
             <h4>Request Details</h4>
             <br>
-            Request Name: <label id="requestName"></label>
-            <br />
-            Request Description: <label id="requestDescription"></label>
-            <br />
-            Created By: <label id="requestCreatedBy"></label>
-            <br />
-        </div>
-        <label id="noRequestFound">
-        </label>
+            <label for="title" class="title">Request Title</label>
+            <br>
+            <div id="requestName"></div>
+            <br>
+            <label for="description" class="title">Request Description</label>
+            <br>
+            <div id="requestDescription"></div>
+            <br>
+            <label for="description" class="title">Created By</label>
+            <br>
+            <div id="requestCreatedBy"></div>
+            <br>
         <br/>
         <button type="button" class="btn btn-outline-info" id="btnApprove" onclick="ApproveRequest()">Approve</button>
         <button type="button" class="btn btn-outline-info" id="btnReject" onclick="RejectRequest()">Reject</button>
     </div>
+    <div id="noRequestFound">
+        <span>Request not found</span>
+    </div>
+    <div id="requestApproved">
+        <span>Request is already approved/rejected</span>
+    </div>
+    </div>
     <script>
           var data =  <%-data%>
         microsoftTeams.initialize(()=>{
+            $("#noRequestFound").hide();
+            $("#requestApproved").hide();
             getRequestDetails(); 
         })
         // Method to show geo location for given latitude and longitude values.
         function getRequestDetails() {
-            if(data != null){
+            if(data == null){
+                $("#productDetails").hide();
+                $("#noRequestFound").show();
+                $("#requestApproved").hide();
+            }
+
+            else if(data != null && data.status != "Pending") {
+                $("#productDetails").hide();
+                $("#noRequestFound").hide();
+                $("#requestApproved").show();
+            }
+
+            else if(data != null && data.status == "Pending"){
                 $("#requestName").text(data.title);
                 $("#requestDescription").text(data.description);
                 $("#requestCreatedBy").text(data.createdBy);
@@ -71,14 +101,14 @@
                 contentType: 'application/json',
                 data: JSON.stringify(taskInfo),
                 success: function (data, textStatus, jQxhr) {
-                    microsoftTeams.tasks.submitTask(true);
+                    microsoftTeams.tasks.submitTask();
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
                     console.log('error', errorThrown);
                 }
             });
 
-            microsoftTeams.tasks.submitTask(true);
+            microsoftTeams.tasks.submitTask();
         };  
 
         function RejectRequest() {
@@ -94,14 +124,14 @@
                 contentType: 'application/json',
                 data: JSON.stringify(taskInfo),
                 success: function (data, textStatus, jQxhr) {
-                    microsoftTeams.tasks.submitTask(true);
+                    microsoftTeams.tasks.submitTask();
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
                     console.log('error', errorThrown);
                 }
             });
 
-            microsoftTeams.tasks.submitTask(true);
+            microsoftTeams.tasks.submitTask();
         };
     </script>
 </body>
