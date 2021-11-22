@@ -35,6 +35,20 @@
          microsoftTeams.getContext(function (context) {
              username = context.upn;
              userId = context.userObjectId;
+             if(context.subEntityId!="")
+             {
+                 let taskInfo = {
+                        title: "Request details",
+                        height: 400,
+                        width: 400,
+                        url: window.location.origin + "/RequestDetails?taskId=" + context.subEntityId,
+                        card: null,
+                        fallbackUrl: window.location.origin + "/RequestDetails?taskId=" + context.subEntityId,
+                        completionBotId: null,
+                     };
+
+                     microsoftTeams.tasks.startTask(taskInfo);
+             };
          });
          
          function getRequestList() {
@@ -113,7 +127,7 @@
                          <button type="button" style ="background-color: lightgray" class="btn" data-app-itemid=${managerList[i].taskId} onclick="ApproveRequest(event)">Approve</button>
                          </td> 
                          <td style="padding:5px">
-                         <button type="button" style ="background-color: lightgray" class="btn" data-app-itemid=${managerList[i].taskId} onclick="upgradeApp(event)">Reject</button>
+                         <button type="button" style ="background-color: lightgray" class="btn" data-app-itemid=${managerList[i].taskId} onclick="RejectRequest(event)">Reject</button>
                          </td>
                          </tr>`
                     );

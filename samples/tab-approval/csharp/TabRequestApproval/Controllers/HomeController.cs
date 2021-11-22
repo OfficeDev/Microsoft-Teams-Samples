@@ -54,6 +54,25 @@ namespace TabRequestApproval.Controllers
             return currentTaskList;
         }
 
+        [HttpGet]
+        [Route("RequestDetails")]
+        public ActionResult GetRequestByID(string taskId)
+        {
+            var currentTaskList = new List<RequestInfo>();
+            _taskList.TryGetValue("taskList", out currentTaskList);
+
+            if (currentTaskList == null)
+            {
+                ViewBag.Message = "No record found";
+            }
+            else
+            {
+                var request = currentTaskList.FirstOrDefault(p => p.taskId.ToString() == taskId);
+                ViewBag.TaskDetails = request;
+            }
+            return View("Request");
+        }
+
         [Route("tabAuth")]
         public ActionResult Auth()
         {
@@ -93,23 +112,25 @@ namespace TabRequestApproval.Controllers
 
             var installedApps = await graphClient.Users[user.Id].Teamwork.InstalledApps
                                .Request()
-                               .Expand("teamsAppDefinition")
+                               .Expand("teamsApp")
                                .GetAsync();
 
-            var installationId = installedApps.Where(id => id.TeamsAppDefinition.DisplayName == "Tab Approval").Select(x => x.Id);
+            var installationId = installedApps.Where(id => id.TeamsApp.DisplayName == "Tab Approval").Select(x => x.TeamsApp.Id);
             var userName = user.UserPrincipalName;
-
+   
+            var url = "https://teams.microsoft.com/l/entity/"+installationId.ToList()[0]+"/request?context={\"subEntityId\":\""+ request.taskId+"\"}";
             var topic = new TeamworkActivityTopic
             {
-                Source = TeamworkActivityTopicSource.EntityUrl,
-                Value = "https://graph.microsoft.com/beta/users/" + user.Id + "/teamwork/installedApps/" + installationId.ToList()[0]
+                Source = TeamworkActivityTopicSource.Text,
+                Value = $"{taskInfo.title}",
+                WebUrl = url
             };
 
             var activityType = "approvalRequired";
 
             var previewText = new ItemBody
             {
-                Content = $"Request for: {taskInfo.title}\nBy: {taskInfo.userName}"
+                Content = $"Request By: {taskInfo.userName}"
             };
 
             var templateParameters = new List<Microsoft.Graph.KeyValuePair>()
