@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams sample app for Sending Activity feed notification using Graph API in a Teams Tab.
+description: Microsoft Teams sample app for Sending Approval request using activity feed notification.
 products:
 - office-teams
 - office
@@ -12,13 +12,35 @@ contentType: samples
 createdDate: "06-10-2021 01:48:56"
 ---
 
-# Activity Feed Notification
+# Tab request approval with activity feed notification.
 
-Nodejs Activity Feed sample using Tab.
+This sample shows a feature where:
+1)Requester: Can request for any task to the manager by sending activity feed notification and can see his request status.
+2)Manager : Can see the list of pending request with him on the click of activity feed notification and can approve or reject the request.
 
-This sample has been created using [Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-beta), it shows how to trigger a Activity feed notification from your Tab, it triggers the feed notification for User, Chat and Team scope and send back to conversation.
+User Persona:
 
-[Activity Feed](https://docs.microsoft.com/en-us/graph/api/chat-sendactivitynotification?view=graph-rest-1.0&tabs=http)
+- Send request to the manger for task.
+
+![Request from user](Images/TaskRequest.png)
+
+- Request status
+
+![Request status](Images/RequestStatus.png)
+
+Manager Persona:
+
+- Activity feed notification of request.
+
+![Notification](Images/RequestNotification.png)
+
+- On click of notification a task module will open, redirecting the user to the request.
+
+![RequestTaskNotification](Images/RequestTaskNotification.png)
+
+- List of pending request.
+
+![Pending request list](Images/RequestList.png)
 
 ## Prerequisites
 
@@ -79,13 +101,13 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
 -   Select Add a permission
 -   Select Microsoft Graph -\> Delegated permissions.
     - `User.Read` (enabled by default)
-    - `ChannelMessage.Send`
+    - `Directory.Read.All`
     - `ChatMessage.Send`
     - `Chat.ReadWrite`
-    - `TeamsActivity.Send`    
-    - `TeamsAppInstallation.ReadForUser`.
+    - `TeamsActivity.Send`
+    - `TeamsAppInstallation.ReadForUser.All`.
 
--  You need to add `TeamsActivity.Send` and `Directory.Read.All` as Application level permissions
+**Note** Your need to add `TeamsActivity.Send` and `Directory.Read.All` as Application level permissions too.
 
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 13. Navigate to **Authentication**
@@ -93,34 +115,45 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
     Set a redirect URI:
     * Select **Add a platform**.
     * Select **web**.
-    * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}auth/auth-end`. This will be the page where a successful implicit grant flow will redirect the user.
-      
-14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env file.
+    * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/Auth/end`, `https://{Base_Url}/Auth/Start`. This will be the page where a successful implicit grant flow will redirect the user.
+    Again
+	* Select **Single page application**.
+	* Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/tabAuth`
+	
+    Enable implicit grant by checking the following boxes:  
+    ✔ ID Token  
+    ✔ Access Token  
+14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
-1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`).Replace your Base url wherever you see the place holder string `<<YOUR-BASE-URL>>`. Also replace any random guid with the place holder `<<YOUR-MANIFEST-ID>>`.
-    - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+### 2. Run your bot sample
+1) Clone the repository
 
-1) Update the `.env` configuration with the ```ClientId``` and ```ClientSecret```
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
 
-1) Run your bot at the command line:
+2) In the folder where repository is cloned navigate to `samples/tab-approval/nodejs`
+
+3) Install node modules
+
+   Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+
+    ```bash
+    npm install
+    ```
+4) Run ngrok - point to port 3978
+
+    ```bash
+    ngrok http -host-header=rewrite 3978
+    ```
+5) Update the `.env` configuration file in your project folder for the bot to use the `ClientId` and `ClientSecret`, `TenantId` with your tenant id. For e.g., your ngrok url. (Note the ClientId is the AppId created in step 1 (Setup for Bot), the ClientSecret is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+
+6) Run your app
 
     ```bash
     npm start
     ```
-## User Interaction with Tab Activity Feed App
-
-- Install TabActivityFeed manifest in Teams
-- Add Tab in Personal, GroupChat or Team scope
-- Fill the Details in Page and click on Send notification button
-![](Images/GroupChatNotification.png)
-
-![](Images/TeamsNotification.png)
-
-![](Images/UserNotification.png)
-
-- Notification triggred by Tab App will appear in Teams Activity Feed
-
-![](Images/ActivityFeedNotification.png)
-
+7) Manually update the manifest.json
+    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
+    - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")

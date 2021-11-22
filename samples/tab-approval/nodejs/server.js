@@ -14,55 +14,13 @@ app.set('views', __dirname);
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 
-// var localdata = [
-//   {
-//     id: "1",
-//     title: "Test1",
-//     description: "Test 1 description",
-//     manager: "Pradeep",
-//     status: ""
-//   },
-//   {
-//     id: "2",
-//     title: "Test2",
-//     description: "Test 2 description",
-//     manager: "Pradeep",
-//     status: ""
-//   },
-//   {
-//     id: "3",
-//     title: "Test3",
-//     description: "Test 3 description",
-//     manager: "Pradeep",
-//     status: ""
-//   }
-// ];
-
 var localdata = [];
 
 // parse application/json
 app.use(express.json());
 
-app.get('/configure', function (req, res) {
-  res.render('./views/configure');
-});
-
-app.get('/GroupChatNotification', function (req, res) {
-  var tenantId = req.url.split('=')[1];
-  auth.getAccessToken(tenantId).then(async function (token) {
-    res.render('./views/GroupChatNotification', { token: JSON.stringify(token) });
-  });
-});
-
-app.get('/TeamNotification', function (req, res) {
-  var tenantId = req.url.split('=')[1];
-  auth.getAccessToken(tenantId).then(async function (token) {
-    res.render('./views/TeamNotification', { token: JSON.stringify(token) });
-  });
-});
-
 app.get('/UserNotification', function (req, res) {
-  var tenantId = "295e356b-4c71-45d8-98bf-c0865ef4a4e8";
+  var tenantId = process.env.TenantId;
   
   auth.getAccessToken(tenantId).then(async function (token) {
     var requestData = {
@@ -89,19 +47,30 @@ app.get('/tabAuth', function (req, res) {
   res.render('./views/tabAuth');
 });
 
+app.get('/UserRequest', function (req, res) {
+  var requestId = req.url.split('=')[1];
+  let requestData = {};
+  if(requestId != null){
+    localdata.map(item => {
+      if(item.id == requestId){
+         requestData = item;
+      }
+    })
+  }
+  res.render('./views/UserRequest', { data: JSON.stringify(requestData) });
+});
 
-app.post('/ApproveRequest', function (req, res) {
+app.post('/ApproveRejectRequest', function (req, res) {
 localdata.map((item, index) => {
   if(item.id == req.body.taskId){
-    item.status = "Approved";
-    var a = "dsd";
+    item.status = req.body.status;
   }
 })
 });
 
 app.post('/SaveRequest', function (req, res) {
   var taskDetails = {
-    id: localdata.length + 1,
+    id: req.body.id,
     title: req.body.title,
     description: req.body.description,
     assignedTo: req.body.assignedTo,
@@ -110,7 +79,6 @@ app.post('/SaveRequest', function (req, res) {
   };
 
   localdata.push(taskDetails);
-  console.log(localdata);
  });
 
 // On-behalf-of token exchange
