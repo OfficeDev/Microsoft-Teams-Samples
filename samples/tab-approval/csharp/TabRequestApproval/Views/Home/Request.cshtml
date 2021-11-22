@@ -12,13 +12,19 @@
       <meta charset="UTF-8">
       <meta http-equiv="Content-Security-Policy"
          content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+
       <style>
          #mainDiv {
          padding-left: 2%;
          padding-top: 2%;
          padding-right: 2%;
          }
+         .container{
+            margin-top: 1rem;
+            margin-left: 1.5rem;
+        }
       </style>
+
       <script>
          function ApproveRequest(e) {
              var taskId = $(e.currentTarget).attr('data-app-itemid');
@@ -33,6 +39,7 @@
                  dataType: 'json',
                  data: taskInfo
              });
+
              microsoftTeams.tasks.submitTask();
          };
          
@@ -49,44 +56,45 @@
                  dataType: 'json',
                  data: taskInfo
              });
+
               microsoftTeams.tasks.submitTask();
          };
       </script>
    </head>
    <body  id="mainDiv" >
-      <div>
-               @{
-                var message = ViewBag.Message;
-                var taskDetails = ViewBag.TaskDetails;
-               }
-                @if(message==null && taskDetails.status=="Pending")
-                {
-                    <div id="approverequest">
-                        <label for="title" class="title">Request title:</label>
-                        <br/>
-                        <div id="title">@taskDetails.title</div>
-                        <br/>
-                        <br/>
-                        <label for="description" class="description">Request description:</label>
-                        <br/>
-                        <div id="description">@taskDetails.description</div>
-                        <br/>
-                        <br/>
-                        <label for="requestby" class="requestBy">Request by:</label>
-                        <br/>
-                        <div id="requestBy">@taskDetails.userName</div>
-                        <br/>
-                        <br/>
-                        <button type="button" style ="background-color: lightgray" class="btn" data-app-itemid=@taskDetails.taskId onclick="ApproveRequest(event)">Approve</button>
-                        <button type="button" style ="background-color: lightgray" class="btn" data-app-itemid=@taskDetails.taskId onclick="RejectRequest(event)">Reject</button>
-                    </div>
-               }
-               else
-                {
-                    <div id="requestStatus">
-                        <span>Request @taskDetails.status</span>
-                    </div>
-                } 
-            </div>
+      <div class="container">
+            @{
+            var message = ViewBag.Message;
+            var taskDetails = ViewBag.TaskDetails;
+            }
+            @if(message==null && taskDetails.status=="Pending")
+            {
+                <div id="approverequest">
+                    <label for="title" class="title">Request title:</label>
+                    <br/>
+                    <div id="title">@taskDetails.title</div>
+                    <br/>
+                    <br/>
+                    <label for="description" class="description">Request description:</label>
+                    <br/>
+                    <div id="description">@taskDetails.description</div>
+                    <br/>
+                    <br/>
+                    <label for="requestby" class="requestBy">Request by:</label>
+                    <br/>
+                    <div id="requestBy">@taskDetails.userName</div>
+                    <br/>
+                    <br/>
+                    <button type="button" style ="background-color: lightgray" class="btn" data-app-itemid=@taskDetails.taskId onclick="ApproveRequest(event)">Approve</button>
+                    <button type="button" style ="background-color: lightgray" class="btn" data-app-itemid=@taskDetails.taskId onclick="RejectRequest(event)">Reject</button>
+                </div>
+            }
+            else
+            {
+                <div id="requestStatus">
+                    <span>Request @taskDetails.status</span>
+                </div>
+            } 
+      </div>
    </body>
 </html>
