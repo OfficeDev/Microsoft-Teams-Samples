@@ -51,6 +51,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |14|Tab in stage view   | Microsoft Teams tab sample app for demonstrating tab in stage view |[View][tab-stage-view#csharp] |          | [View][tab-stage-view#js] |
 |15|Create Conversational tab     | Microsoft Teams tab sample app for demonstrating create conversation tab | [View][tab-conversation#csharp]          |           |[View][tab-conversation#nodejs]
 |16| Product inspection | Demonstrating a feature where user can scan a product and mark it as approved/rejected. |[View][tab-product-inspection#csharp]|[View][productinspection#nodejs]|
+|17| Request approval | Demonstrating a feature where manager will be notified about the requests raised by the user and manager will be redirected to approvve/reject the request from recieved notification. |[View][tab-approval#csharp]||
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
@@ -237,6 +238,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 [appcheckinlocation#csharp]:samples/app-checkin-location/csharp
 [checkinlocation#nodejs]:samples/app-checkin-location/nodejs
 [productinspection#nodejs]:samples/tab-product-inspection/nodejs
+[tab-approval#csharp]:samples/tab-approval/csharp
 
 [app-localization#cs]:samples/app-localization/csharp
 [app-localization#js]:samples/app-localization/nodejs
