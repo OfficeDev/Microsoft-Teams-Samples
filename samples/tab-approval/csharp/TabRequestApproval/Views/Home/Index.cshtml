@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-      <script src="https://unpkg.com/@@microsoft/teams-js/dist/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+     <script src="https://unpkg.com/@@microsoft/teams-js/dist/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/@@microsoft/mgt/dist/bundle/mgt-loader.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js"
@@ -25,7 +25,6 @@
          $(document).ready(function () {
              getRequestList();
              $('#task-submitted').hide();
-             $('#nomanagerfound').hide();
          });
 
          microsoftTeams.initialize();
@@ -198,10 +197,12 @@
                  return false;
              }
 
+             var person = document.querySelector('mgt-people-picker').selectedPeople;
              let taskInfo = {
                  title: $('#title').val(),
                  description: $('#description').val(),
                  userName: username,
+                 managerName: person[0].userPrincipalName,
                  access_token: token,
              };
 
@@ -210,16 +211,9 @@
                  url: '/SendNotificationToManager',
                  dataType: 'json',
                  data: taskInfo,
-                 success: function (response) {
-                        console.log(response);
-                        
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-
-                        $('#nomanagerfound').show();
-                },
              });
+
+               $('#task-submitted').show();
 
              return true;
          };
@@ -236,7 +230,14 @@
             <div id="createtask" class="tab-pane fade in active">
                <div class="mb">
                   <div class="form-group fg">
-                     <br/>
+                     @{
+                     var clientId = ViewBag.clientId;
+                     }        
+                     <mgt-teams-msal2-provider 
+                        client-id=@clientId
+                        auth-popup-url="/TabAuth"
+                        scopes="User.Read,people.read"></mgt-teams-msal2-provider>
+                     <mgt-login></mgt-login>
                      <label for="title" class="title">Request title</label>
                      <br>
                      <input type="text" id="title" name="taskTitle">
@@ -247,6 +248,8 @@
                      <input type="text" id="description" name="taskDescription">
                      <br />
                   </div>
+                  <label for="request to" class="description">Request to</label><br/>
+                  <mgt-people-picker selection-mode="single"></mgt-people-picker>
                </div>
                <div class="modal-footer mf">
                   <br />
@@ -254,9 +257,6 @@
                </div>
             <div id="task-submitted">
                 Request submitted successfully.
-            </div>
-             <div id="nomanagerfound">
-                No manager found.
             </div>
             </div>
             <div id="mylist" class="tab-pane fade">

@@ -41,6 +41,8 @@ namespace TabRequestApproval.Controllers
         [Route("request")]
         public ActionResult Request()
         {
+            ViewBag.clientId = _configuration["AzureAd:MicrosoftAppId"];
+
             return View("Index");
         }
 
@@ -55,7 +57,7 @@ namespace TabRequestApproval.Controllers
             return currentTaskList;
         }
 
-        // get reuest details by Id.
+        // Get reuest details by Id.
         [HttpGet]
         [Route("RequestDetails")]
         public ActionResult GetRequestByID(string taskId)
@@ -75,6 +77,13 @@ namespace TabRequestApproval.Controllers
             return View("Request");
         }
 
+        // Redirect to auth page.
+        [Route("TabAuth")]
+        public ActionResult Auth()
+        {
+            return View("TabAuth");
+        }
+
         // Send notification to manager about request.
         [HttpPost]
         [Route("SendNotificationToManager")]
@@ -82,71 +91,64 @@ namespace TabRequestApproval.Controllers
         {
             try
             {
-            var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
-            var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["AzureAd:MicrosoftAppId"], _configuration["AzureAd:MicrosoftAppPassword"], _configuration["AzureAd:TenantId"]);
-            
-            var manager = await graphClient.Me.Manager
-                                                    .Request()
-                                                    .GetAsync();
+                var currentTaskList = new List<RequestInfo>();
+                List<RequestInfo> taskList = new List<RequestInfo>();
+                _taskList.TryGetValue("taskList", out currentTaskList);
 
-            var user = await graphClient.Users[manager.Id]
-                      .Request()
-                      .GetAsync();
+                var request = taskInfo;
+                request.taskId = Guid.NewGuid();
+                request.status = "Pending";
 
-            var currentTaskList = new List<RequestInfo>();
-            List<RequestInfo> taskList = new List<RequestInfo>();
-            _taskList.TryGetValue("taskList", out currentTaskList);
-
-            var request = taskInfo;
-            request.taskId = Guid.NewGuid();
-            request.status = "Pending";
-            request.managerName = user.UserPrincipalName;
-
-            if (currentTaskList == null)
-            {
-                taskList.Add(request);
-                _taskList.AddOrUpdate("taskList", taskList, (key, newValue) => taskList);
-                ViewBag.TaskList = taskList;
-            }
-            else
-            {
-                currentTaskList.Add(request);
-                _taskList.AddOrUpdate("taskList", currentTaskList, (key, newValue) => currentTaskList);
-                ViewBag.TaskList = currentTaskList;
-            }
-
-
-            var installedApps = await graphClient.Users[user.Id].Teamwork.InstalledApps
-                               .Request()
-                               .Expand("teamsApp")
-                               .GetAsync();
-
-            var installationId = installedApps.Where(id => id.TeamsApp.DisplayName == "Tab Approval").Select(x => x.TeamsApp.Id);
-            var userName = user.UserPrincipalName;
-   
-            var url = "https://teams.microsoft.com/l/entity/"+installationId.ToList()[0]+"/request?context={\"subEntityId\":\""+ request.taskId+"\"}";
-            var topic = new TeamworkActivityTopic
-            {
-                Source = TeamworkActivityTopicSource.Text,
-                Value = $"{taskInfo.title}",
-                WebUrl = url
-            };
-
-            var activityType = "approvalRequired";
-
-            var previewText = new ItemBody
-            {
-                Content = $"Request By: {taskInfo.userName}"
-            };
-
-            var templateParameters = new List<Microsoft.Graph.KeyValuePair>()
-            {
-                new Microsoft.Graph.KeyValuePair
+                if (currentTaskList == null)
                 {
-                    Name = "approvalTaskId",
-                    Value = taskInfo.title
+                    taskList.Add(request);
+                    _taskList.AddOrUpdate("taskList", taskList, (key, newValue) => taskList);
+                    ViewBag.TaskList = taskList;
                 }
-            };
+                else
+                {
+                    currentTaskList.Add(request);
+                    _taskList.AddOrUpdate("taskList", currentTaskList, (key, newValue) => currentTaskList);
+                    ViewBag.TaskList = currentTaskList;
+                }
+
+                var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
+                var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["AzureAd:MicrosoftAppId"], _configuration["AzureAd:MicrosoftAppPassword"], _configuration["AzureAd:TenantId"]);
+                var user = await graphClient.Users[taskInfo.managerName]
+                          .Request()
+                          .GetAsync();
+
+                var installedApps = await graphClient.Users[user.Id].Teamwork.InstalledApps
+                                   .Request()
+                                   .Expand("teamsApp")
+                                   .GetAsync();
+
+                var installationId = installedApps.Where(id => id.TeamsApp.DisplayName == "Tab Approval").Select(x => x.TeamsApp.Id);
+                var userName = user.UserPrincipalName;
+   
+                var url = "https://teams.microsoft.com/l/entity/"+installationId.ToList()[0]+"/request?context={\"subEntityId\":\""+ request.taskId+"\"}";
+                var topic = new TeamworkActivityTopic
+                {
+                    Source = TeamworkActivityTopicSource.Text,
+                    Value = $"{taskInfo.title}",
+                    WebUrl = url
+                };
+
+                var activityType = "approvalRequired";
+
+                var previewText = new ItemBody
+                {
+                    Content = $"Request By: {taskInfo.userName}"
+                };
+
+                var templateParameters = new List<Microsoft.Graph.KeyValuePair>()
+                {
+                    new Microsoft.Graph.KeyValuePair
+                    {
+                        Name = "approvalTaskId",
+                        Value = taskInfo.title
+                    }
+                };
 
             
                 await graphClientApp.Users[user.Id].Teamwork
