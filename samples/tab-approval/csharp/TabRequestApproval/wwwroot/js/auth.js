@@ -52,7 +52,6 @@ function getToken() {
 }
 
 function getClientSideToken() {
-
     return new Promise((resolve, reject) => {
         microsoftTeams.authentication.getAuthToken({
             successCallback: (result) => {
