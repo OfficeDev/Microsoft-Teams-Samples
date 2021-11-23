@@ -24,6 +24,7 @@ namespace TabRequestApproval
                         logging.AddConsole();
                     });
                     webBuilder.UseStartup<Startup>();
-                });
+                }
+            );
     }
 }

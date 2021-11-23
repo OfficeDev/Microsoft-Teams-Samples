@@ -22,6 +22,7 @@
       </style>
 
       <script>
+         // Method to approve request.
          function ApproveRequest(e) {
              var taskId = $(e.currentTarget).attr('data-app-itemid');
              let taskInfo = {
@@ -39,6 +40,7 @@
              microsoftTeams.tasks.submitTask();
          };
          
+         // Method to reject request.
          function RejectRequest(e) {
              var taskId = $(e.currentTarget).attr('data-app-itemid');
              let taskInfo = {

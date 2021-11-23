@@ -37,12 +37,14 @@ namespace TabRequestApproval.Controllers
             _taskList = taskList;
         }
 
+        // Get request page.
         [Route("request")]
         public ActionResult Request()
         {
             return View("Index");
         }
 
+        // Get request list.
         [HttpGet]
         [Route("GetRequestList")]
         public async Task<List<RequestInfo>> GetRequestList()
@@ -53,6 +55,7 @@ namespace TabRequestApproval.Controllers
             return currentTaskList;
         }
 
+        // get reuest details by Id.
         [HttpGet]
         [Route("RequestDetails")]
         public ActionResult GetRequestByID(string taskId)
@@ -72,6 +75,7 @@ namespace TabRequestApproval.Controllers
             return View("Request");
         }
 
+        // Send notification to manager about request.
         [HttpPost]
         [Route("SendNotificationToManager")]
         public async Task<ActionResult> SendNotificationToManager(RequestInfo taskInfo)
@@ -80,10 +84,12 @@ namespace TabRequestApproval.Controllers
             {
             var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
             var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["AzureAd:MicrosoftAppId"], _configuration["AzureAd:MicrosoftAppPassword"], _configuration["AzureAd:TenantId"]);
-            var directoryObject = await graphClient.Me.Manager
+            
+            var manager = await graphClient.Me.Manager
                                                     .Request()
                                                     .GetAsync();
-            var user = await graphClient.Users[directoryObject.Id]
+
+            var user = await graphClient.Users[manager.Id]
                       .Request()
                       .GetAsync();
 
@@ -156,6 +162,7 @@ namespace TabRequestApproval.Controllers
             return View("Index");
         }
 
+        // Respond to user request.
         [HttpPost]
         [Route("RespondRequest")]
         public async Task<ActionResult> RespondRequest(RequestInfo taskInfo)
@@ -171,6 +178,7 @@ namespace TabRequestApproval.Controllers
             return View("Index");
         }
 
+        // Get user access token.
         [Authorize]
         [HttpGet("/GetUserAccessToken")]
         public async Task<ActionResult<string>> GetUserAccessToken()

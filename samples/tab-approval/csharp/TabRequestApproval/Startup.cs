@@ -81,6 +81,7 @@ namespace TabRequestApproval
             {
                 app.UseHsts();
             }
+
             app.UseDefaultFiles()
                 .UseStaticFiles()
                 .UseWebSockets()

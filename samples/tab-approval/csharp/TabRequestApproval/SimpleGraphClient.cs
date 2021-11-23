@@ -50,6 +50,7 @@ namespace TabRequestApproval
             string[] scopes = new string[] { "https://graph.microsoft.com/.default" };
 
             var result = await app.AcquireTokenForClient(scopes).ExecuteAsync();
+
             return result.AccessToken;
         }
     }

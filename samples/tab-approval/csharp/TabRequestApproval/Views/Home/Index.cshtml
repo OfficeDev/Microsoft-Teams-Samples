@@ -36,6 +36,7 @@
          microsoftTeams.getContext(function (context) {
              username = context.upn;
              userId = context.userObjectId;
+
              if(context.subEntityId!="" && context.subEntityId!= undefined)
              {
                  let taskInfo = {
@@ -52,6 +53,7 @@
              };
          });
          
+         // Get request list.
          function getRequestList() {
             $.ajax({
                 url: '/GetRequestList',
@@ -67,6 +69,7 @@
             });
          }
          
+         // Set details for user
          function taskDetailsForUser(data) {
              var list = data;
              var userList = [];
@@ -99,6 +102,7 @@
              }
          }
          
+         // Set details for manager.
          function taskDetailsForManager(data) {
              var list = data;
              var managerList = [];
@@ -136,6 +140,7 @@
              }
          }
 
+         // Method to approve request.
          function ApproveRequest(e) {
              var taskId = $(e.currentTarget).attr('data-app-itemid');
              let taskInfo = {
@@ -152,6 +157,7 @@
              });
          };
          
+         // Method to reject request.
          function RejectRequest(e) {
              var taskId = $(e.currentTarget).attr('data-app-itemid');
              let taskInfo = {
@@ -168,6 +174,7 @@
              });
          };
          
+         // Send notification to manager about request.
          function SendNotificationToManager() {
              var isValid = true;
              $('#title,#description').each(function () {
@@ -205,13 +212,12 @@
                  data: taskInfo,
                  success: function (response) {
                         console.log(response);
-                        $('#task-submitted').show();
+                        
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-                    if(textStatus!="parsererror"){
+
                         $('#nomanagerfound').show();
-                    }  
                 },
              });
 
@@ -230,7 +236,7 @@
             <div id="createtask" class="tab-pane fade in active">
                <div class="mb">
                   <div class="form-group fg">
-                      <br/>
+                     <br/>
                      <label for="title" class="title">Request title</label>
                      <br>
                      <input type="text" id="title" name="taskTitle">

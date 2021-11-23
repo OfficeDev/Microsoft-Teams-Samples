@@ -102,6 +102,7 @@ namespace TabRequestApproval.Helpers
             }
 
             var validAudiences = validationParameters.ValidAudiences;
+
             if (validAudiences == null || validAudiences.Count() == 0)
             {
                 throw new ApplicationException("No valid audiences defined in validationParameters!");
@@ -131,6 +132,7 @@ namespace TabRequestApproval.Helpers
             httpContext.Request.Headers.TryGetValue("Authorization", out StringValues assertion);
             var idToken = assertion.ToString().Split(" ")[1];
             var body = $"assertion={idToken}&requested_token_use=on_behalf_of&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&client_Id={configuration[ClientIdConfigurationSettingsKey]}@{configuration[TenantIdConfigurationSettingsKey]}&client_secret={configuration[AppsecretConfigurationSettingsKey]}&scope=https://graph.microsoft.com/User.Read";
+           
             try
             {
                 var client = httpClientFactory.CreateClient("WebClient");
