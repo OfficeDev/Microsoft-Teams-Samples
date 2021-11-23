@@ -27,8 +27,8 @@
     {
       "entityId": "request",
       "name": "Request",
-      "contentUrl": "https://7447-117-199-32-48.ngrok.io/request",
-      "websiteUrl": "https://7447-117-199-32-48.ngrok.io/request",
+      "contentUrl": "https://{Base_Url}/request",
+      "websiteUrl": "https://{Base_Url}/request",
       "scopes": [
         "personal"
       ]
@@ -39,7 +39,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{DOmain-name}}"
+    "{{Domain-name}}"
   ],
   "activities": {
     "activityTypes": [
@@ -52,6 +52,6 @@
   },
   "webApplicationInfo": {
     "id": "<<MicrosoftAppId>>",
-    "resource": "api://{Base_Url}/<<MicrosoftAppId>>
+    "resource": "api://{Base_Url}/<<MicrosoftAppId>>"
   }
 }
