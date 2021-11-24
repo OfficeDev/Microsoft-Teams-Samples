@@ -1,4 +1,18 @@
-## Message reminder with messaging extension action
+---
+page_type: sample
+description: This sample shows a feature where user can schedule a task from messaging extension action and get a reminder card at a scheduled time.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- nodejs
+extensions:
+contentType: samples
+createdDate: "11-24-2021 13:10:00"
+---
+
+# Message reminder with messaging extension action
 
 This sample shows a feature where user can schedule a task from messaging extension action and get a reminder card at a scheduled time.
 
@@ -14,21 +28,6 @@ This sample shows a feature where user can schedule a task from messaging extens
  Reminder card of task at scheduled date and time.
  
 ![Task reminder](Images/TaskReminder.png)
-
-- Team scope scenario
- Navigate to team where the app is installed
-
- Select `...` over message to get action `create-reminder` for scheduling task.
-
-![Team message action ](Images/MessageActionTeam.png)
-
- Task module to schedule a task.
-
-![Team Task Details ](Images/ScheduleTaskTeam.png)
-
- Reminder card of task at scheduled date and time.
-
-![ TeamTask reminder](Images/TaskReminderTeam.png)
 
 ## Prerequisites
 
@@ -108,4 +107,3 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
  Reminder card of task at scheduled date and time.
 
 ![ TeamTask reminder](Images/TaskReminderTeam.png)
-
