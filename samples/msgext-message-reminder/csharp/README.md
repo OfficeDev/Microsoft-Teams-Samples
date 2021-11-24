@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time.
+description: This sample shows a feature where user can schedule a task from messaging extension action and get a reminder card at a scheduled time.
 products:
 - office-teams
 - office
@@ -9,20 +9,18 @@ languages:
 - csharp
 extensions:
 contentType: samples
-createdDate: "24-11-2021 13:50:00"
+createdDate: "24-11-2021 14:00:25"
 ---
 
-# Bot daily task reminder
+# Message reminder with messaging extension action
 
-This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time.
+This sample shows a feature where user can schedule a task from messaging extension action and get a reminder card at a scheduled time.
 
-- Use command `create-reminder` to get card with action `Schedule task`.
+![Select message](MessagingExtensionReminder/Images/MessageAction.png)
 
-![Schedule task ](BotDailyTaskReminder/Images/ScheduleTaskCard.png)
+![Task Details](MessagingExtensionReminder/Images/ScheduleTask.png)
 
-![Task Details](BotDailyTaskReminder/Images/ScheduleTask.png)
-
-![Task reminder](BotDailyTaskReminder/Images/TaskReminder.png)
+![Task reminder](MessagingExtensionReminder/Images/TaskReminder.png)
 
 ## Prerequisites
 
@@ -49,10 +47,10 @@ This sample shows a feature where user can schedule a recurring task and get the
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
-   
+
 3) Launch Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/bot-daily-task-reminder/csharp/BotDailyTaskReminder.sln`
+   - Navigate to folder where repository is cloned then `samples/msgext-message-reminder/csharp/MessagingExtensionReminder.sln`
     
 4) Run ngrok - point to port 3978
 
@@ -77,21 +75,36 @@ This sample shows a feature where user can schedule a recurring task and get the
    - Go to Microsoft Teams and then go to side panel, select Apps
    - Choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
-   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
-
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.    
 ## Features of this sample
 
-- Use command `create-reminder` to get card with action `Schedule task`. 
+Personal scope scenario 
 
-![Schedule task ](BotDailyTaskReminder/Images/ScheduleTaskCard.png)
+- Select `...` over message to get action `create-reminder` for scheduling task.
 
-- Task module to add task details. 
+![Select message](MessagingExtensionReminder/Images/MessageAction.png)
 
-![Task Details ](BotDailyTaskReminder/Images/ScheduleTask.png)
+- Task module to add task details.
 
-- User will get a task reminder card at scheduled time.
+![Task Details](MessagingExtensionReminder/Images/ScheduleTask.png)
 
-![Task reminder](BotDailyTaskReminder/Images/TaskReminder.png)
+- Reminder card of task at scheduled date and time.
+
+![Task reminder](MessagingExtensionReminder/Images/TaskReminder.png)
+
+Team scope scenario
+
+- Select `...` over message to get action `create-reminder` for scheduling task.
+
+![Team message action ](MessagingExtensionReminder/Images/MessageActionTeam.png)
+
+- Task module to add task details.
+
+![Team Task Details ](MessagingExtensionReminder/Images/ScheduleTaskTeam.png)
+
+- Reminder card of task at scheduled date and time.
+
+![ TeamTask reminder](MessagingExtensionReminder/Images/TaskReminderTeam.png)
 
 
 ## Deploy the bot to Azure

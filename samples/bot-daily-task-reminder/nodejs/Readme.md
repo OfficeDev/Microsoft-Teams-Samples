@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
 contentType: samples
-createdDate: "11-24-2021 13:20:00"
+createdDate: "24-11-2021 13:20:00"
 ---
 
 # Bot task reminder
@@ -48,7 +48,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In the folder where repository is cloned navigate to `samples/bot-task-reminder/nodejs`
+2) In the folder where repository is cloned navigate to `samples/bot-daily-task-reminder/nodejs`
 
 3) Install node modules
 
