@@ -1,4 +1,4 @@
-﻿﻿﻿---
+﻿﻿---
 page_type: sample
 description: This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time.
 products:
@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
 contentType: samples
-createdDate: "24-11-2021 13:35:25"
+createdDate: "24-11-2021 13:50:00"
 ---
 
 # Bot daily task reminder
