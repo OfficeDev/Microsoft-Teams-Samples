@@ -26,7 +26,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |13| Product inspection | Demonstrating a feature where user can scan a product and mark it as approved/rejected. |[View](/demo%20manifest/Tab-Product-Inspection.zip)     |
 |14| Bot with SharePoint file to view in Teams file viewer| This sample demos a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer.|[View](/demo%20manifest/Bot-SharePoint-File-Viewer.zip)     |
 |15|Bot daily task reminder | This sample demos a feature where user can schedule a recurring task and get a reminder on the scheduled time|[View](/demo%20manifest/Bot-Daily-Task-Reminder.zip)     |
-|14| Message reminder setup through messaging extension | This sample demos a feature where user can schedule a task from messaging extension action command and get a reminder card at scheduled date and time.|[View](/demo%20manifest/Message-Reminder-Messaging-extension.zip)     |
+|16| Message reminder setup through messaging extension | This sample demos a feature where user can schedule a task from messaging extension action command and get a reminder card at scheduled date and time.|[View](/demo%20manifest/Message-Reminder-Messaging-extension.zip)     |
 
 ## [Getting Started - Samples and Tutorials](https://docs.microsoft.com/microsoftteams/platform/tutorials/get-started-dotnet-app-studio)
 
@@ -156,7 +156,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |15| Archive groupchat messages | Demonstrating on how a bot can archive groupchat messages and send it to user as a file. | [View][fetchgroupchatmessages#csharp] |[View][fetchgroupchatmessages#nodejs]|
 |16| App check in location | Demonstrating feature where user can checkin with current location and view all previous checkins. | [View][appcheckinlocation#csharp] |[View][checkinlocation#nodejs]|
 |17| Message reminder setup through messaging extension | Demonstrating a feature where user can schedule a task from messaging extension action command and get a reminder card at a scheduled time |[View][memessagereminder#csharp]|[View][msgext-message-reminder#nodejs]|
-|18| Bot daily task reminder | This sample demos a feature where user can schedule a recurring task and get a reminder on the scheduled time |[View][botdailytaskreminder#csharp |[View][bottaskreminder#nodejs]|
+|18| Bot daily task reminder | This sample demos a feature where user can schedule a recurring task and get a reminder on the scheduled time |[View][botdailytaskreminder#csharp] |[View][bottaskreminder#nodejs]|
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
