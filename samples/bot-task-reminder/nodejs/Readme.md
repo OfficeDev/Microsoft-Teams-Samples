@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows a feature where user can schedule a task from messaging extension action and get a reminder card at a scheduled time.
+description: This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time.
 products:
 - office-teams
 - office
@@ -9,24 +9,21 @@ languages:
 - nodejs
 extensions:
 contentType: samples
-createdDate: "24-11-2021 13:10:00"
+createdDate: "11-24-2021 13:20:00"
 ---
 
-# Message reminder with messaging extension action
+# Bot task reminder
 
-This sample shows a feature where user can schedule a task from messaging extension action and get a reminder card at a scheduled time.
+This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time.
 
-- Personal scope scenario
- Select `...` over message to get action `create-reminder` for scheduling task.
+Type command `create-reminder` to get card for scheduling the recurring task.
 
-![Select message](Images/MessageAction.png)
+![Schedule task ](Images/ScheduleTaskCard.png)
 
- Task module to schedule a task.
+- Click on schedule task button to open task module for scheduling a task.
+![Task Details ](Images/ScheduleTask.png)
 
-![Task Details](Images/ScheduleTask.png)
-
- Reminder card of task at scheduled date and time.
- 
+- Once task is scheduled, you will be notified about the task at scheduled time.
 ![Task reminder](Images/TaskReminder.png)
 
 ## Prerequisites
@@ -34,8 +31,7 @@ This sample shows a feature where user can schedule a task from messaging extens
 - Microsoft Teams is installed and you have an account (not a guest account)
 -  [NodeJS](https://nodejs.org/en/)
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
--  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
-   appropriate permissions to install an app.
+-  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
 ## To try this sample
 
@@ -80,30 +76,14 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 
 ## Features of this sample
 
-- Personal scope scenario
- Select `...` over message to get action `create-reminder` for scheduling task.
+- Type command `create-reminder` to get card for scheduling the recurring task.
 
-![Select message](Images/MessageAction.png)
+![Schedule task ](Images/ScheduleTaskCard.png)
 
- Task module to schedule a task.
+- Click on schedule task button to open task module for scheduling a task
+![Task Details ](Images/ScheduleTask.png)
 
-![Task Details](Images/ScheduleTask.png)
-
- Reminder card of task at scheduled date and time.
+- Task reminder
 
 ![Task reminder](Images/TaskReminder.png)
 
-- Team scope scenario
- Navigate to team where the app is installed
-
- Select `...` over message to get action `create-reminder` for scheduling task.
-
-![Team message action ](Images/MessageActionTeam.png)
-
- Task module to schedule a task.
-
-![Team Task Details ](Images/ScheduleTaskTeam.png)
-
- Reminder card of task at scheduled date and time.
-
-![ TeamTask reminder](Images/TaskReminderTeam.png)
