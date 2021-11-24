@@ -239,7 +239,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 [appcheckinlocation#csharp]:samples/app-checkin-location/csharp
 [checkinlocation#nodejs]:samples/app-checkin-location/nodejs
 [productinspection#nodejs]:samples/tab-product-inspection/nodejs
-[memessagereminder#csharp]:samples/bot-message-reminder/csharp
+[memessagereminder#csharp]:samples/msgext-message-reminder/csharp
 
 [app-localization#cs]:samples/app-localization/csharp
 [app-localization#js]:samples/app-localization/nodejs
