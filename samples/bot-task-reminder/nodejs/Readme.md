@@ -1,4 +1,18 @@
-## Bot task reminder
+---
+page_type: sample
+description: This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- nodejs
+extensions:
+contentType: samples
+createdDate: "11-24-2021 13:20:00"
+---
+
+# Bot task reminder
 
 This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time.
 
