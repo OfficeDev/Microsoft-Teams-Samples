@@ -1,4 +1,4 @@
-﻿﻿﻿---
+---
 page_type: sample
 description: This sample shows a feature where user can schedule a task from messaging extension action and get a reminder card at a scheduled time.
 products:
