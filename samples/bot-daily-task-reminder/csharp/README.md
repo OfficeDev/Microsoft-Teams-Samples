@@ -24,7 +24,7 @@ This sample shows a feature where user can schedule a recurring task and get the
 
 ![Task reminder](BotDailyTaskReminder/Images/TaskReminder.png)
 
-# Prerequisites
+## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
 
@@ -40,7 +40,7 @@ This sample shows a feature where user can schedule a recurring task and get the
   ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-# To try this sample
+## To try this sample
 
 1) Setup for Bot
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
@@ -79,7 +79,7 @@ This sample shows a feature where user can schedule a recurring task and get the
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-# Features of this sample
+## Features of this sample
 
 - Use command `create-reminder` to get card with action `Schedule task`. 
 
@@ -94,11 +94,11 @@ This sample shows a feature where user can schedule a recurring task and get the
 ![Task reminder](BotDailyTaskReminder/Images/TaskReminder.png)
 
 
-# Deploy the bot to Azure
+## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 
-# Further reading
+## Further reading
 
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
