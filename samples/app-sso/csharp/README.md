@@ -1,3 +1,17 @@
+---
+page_type: sample
+description: Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl
+products:
+- office-teams
+- office
+- office-365
+languages:
+- csharp
+extensions:
+contentType: samples
+createdDate: "02-09-2021 19:54:21"
+---
+
 # App SSO C#
 
 This app talks about the Teams Tab, Bot, ME - search, action, linkunfurl SSO with C#
@@ -158,3 +172,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
 - [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
+

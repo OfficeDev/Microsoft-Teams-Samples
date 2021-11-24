@@ -1,6 +1,8 @@
 ---
 page_type: sample
 products:
+- office-teams
+- office
 - office-365
 languages:
 - csharp
@@ -13,11 +15,15 @@ extensions:
   createdDate: 10/16/2017 10:02:21 PM
 ---
 
-# Official documentation
+# Microsoft Teams hello world sample app.
+
+- Microsoft Teams hello world sample app.
+
+## Official documentation
 
 More information for this sample - and for how to get started with Microsoft Teams development in general - is found in [Get started on the Microsoft Teams platform with Node.js and App Studio](https://docs.microsoft.com/microsoftteams/platform/tutorials/get-started-dotnet-app-studio).
 
-# Contributing
+## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us

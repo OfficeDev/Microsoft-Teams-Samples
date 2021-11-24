@@ -1,4 +1,18 @@
-## Teams tab with microsoft graph toolkit
+---
+page_type: sample
+description: Microsoft Teams tab sample app for demonstrating graph toolkit component
+products:
+- office-teams
+- office
+- office-365
+languages:
+- csharp
+extensions:
+contentType: samples
+createdDate: "11-11-2021 23:30:17"
+---
+
+# Teams tab with microsoft graph toolkit
 
 This is the demo app for [Teams tab using miscrosoft graph toolkit](https://docs.microsoft.com/en-us/graph/toolkit/get-started/build-a-microsoft-teams-tab?tabs=unpkg%2Cjs)
 

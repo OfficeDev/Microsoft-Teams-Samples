@@ -1,3 +1,17 @@
+---
+page_type: sample
+description: Sample app showing custom group and channel Tab with ASP. NET Core
+products:
+- office-teams
+- office
+- office-365
+languages:
+- csharp
+extensions:
+contentType: samples
+createdDate: "07-07-2021 13:38:27"
+---
+
 # Channel and group tabs in ASP.NET Core with Razor pages
 
 In this quickstart we'll walk-through creating a custom channel/group tab with C# and ASP.Net Core Razor page. We'll also use App Studio for Microsoft Teams to finalize your app manifest and deploy your tab to Teams.
