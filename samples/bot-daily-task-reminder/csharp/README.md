@@ -1,4 +1,4 @@
-﻿﻿---
+---
 page_type: sample
 description: This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time.
 products:
