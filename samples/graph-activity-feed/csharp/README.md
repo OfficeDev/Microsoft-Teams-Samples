@@ -1,4 +1,18 @@
-﻿# Notify Feed App
+---
+page_type: sample
+description: Microsoft Teams sample app for Sending Activity feed notification using Graph API in a Teams Tab.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- csharp
+extensions:
+contentType: samples
+createdDate: "07-07-2021 13:38:26"
+---
+
+# Activity Feed Notification
 
 Bot Framework v4 Activity Feed sample using Tab.
 
@@ -132,3 +146,4 @@ Teams Activity feed notification API uses activity to which user want a notifica
 - [Send Notification to User in Chat](https://docs.microsoft.com/en-us/graph/api/chat-sendactivitynotification?view=graph-rest-beta)
 - [Send Notification to User in Team](https://docs.microsoft.com/en-us/graph/api/team-sendactivitynotification?view=graph-rest-beta&tabs=http)
 - [Send Notification to User](https://docs.microsoft.com/en-us/graph/api/userteamwork-sendactivitynotification?view=graph-rest-beta&tabs=http)
+

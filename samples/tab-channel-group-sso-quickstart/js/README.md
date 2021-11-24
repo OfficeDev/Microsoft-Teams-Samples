@@ -1,4 +1,19 @@
-# Tabs
+---
+page_type: sample
+description: Sample channel and group tab with SSO hello world app.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- javascript
+- nodejs
+extensions:
+contentType: samples
+createdDate: "07-07-2021 13:38:27"
+---
+
+# Teams Tab SSO Authentication
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are scoped to a single user. They can be pinned to the left navigation bar for easy access.
 
@@ -41,3 +56,4 @@ On the first time running and debugging your app you need allow the localhost ce
 
 ### NOTE: Debugging
 Ensure you have the Debugger for Chrome/Edge extension installed for Visual Studio Code from the marketplace.
+
