@@ -1,4 +1,20 @@
-﻿# Teams Tab SSO Authentication
+﻿---
+page_type: sample
+products:
+- office-teams
+- office
+- office-365
+languages:
+- csharp
+title: Microsoft Teams NodeJS Helloworld - Tabs Azure AD SSO Sample
+description: Microsoft Teams hello world sample app for tabs Azure AD SSO in Node.js
+extensions:
+  contentType: samples
+  createdDate: 11/3/2017 12:53:17 PM
+---
+
+# Tabs Azure AD Single Sign-On Sample
+
 This sample illustrates how to implement SSO authentication for Teams Tab.
 
 ## Prerequisites

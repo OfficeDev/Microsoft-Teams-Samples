@@ -13,7 +13,7 @@ extensions:
   createdDate: "10/1/2021 2:36:57 PM"
 ---
 
-# Meeting Recruitment App Sample
+# Recruitment App Sample using Apps in Meetings
 
 This sample illustrates a meeting experience for recruitment.
 

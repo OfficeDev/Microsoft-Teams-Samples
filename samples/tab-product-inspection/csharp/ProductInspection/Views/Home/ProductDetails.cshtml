@@ -1,0 +1,67 @@
+﻿@using ProductInspection.Models
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Inspection demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        #mainDiv {
+            padding-left: 5%;
+            padding-top: 2%;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            microsoftTeams.initialize();
+
+            let productName = document.getElementById("productName").innerHTML;
+            let image = document.getElementById("productImg");
+
+            if (productName == "") {
+                $("#noProductFound").text("No product found for this Id");
+                $("#productDetails").hide();
+            }
+            else if (image.getAttribute('src') == "") {
+                $("#noProductFound").text("No product image found");
+                $("#productDetails").hide();
+            }
+            else {
+                document.getElementById("productDetails").hidden = false;
+            }
+        }
+        );
+
+        function viewItems() {
+            microsoftTeams.tasks.submitTask();
+        }
+    </script>
+</head>
+<body id=mainDiv>
+    <div id="productDetails" hidden="true">
+        @{
+            var data = ViewBag.Message;
+        }
+        <div>
+            <h4>Product Detail</h4>
+            Product Name: <label id="productName">@data.ProductName</label>
+            <br />
+            Product image
+            <br />
+            <img id="productImg" src="@data.Image" width="200" height="200" />
+            <br />
+            <br />
+            Product Status: <label id="productStatus">@data.Status</label>
+        </div>
+    </div>
+    <label id="noProductFound">
+    </label>
+    <br />
+    <button type="button" class="btn btn-outline-info" id="btnViewAllItems" onclick="viewItems()">Back</button>
+</body>

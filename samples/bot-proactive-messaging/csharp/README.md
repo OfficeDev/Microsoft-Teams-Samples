@@ -4,6 +4,8 @@ languages:
 - csharp
 products:
 - office-teams
+- office
+- office-365
 description: "Two samples to highlight solutions to two challenges with building proactive messaging apps in Microsoft Teams"
 urlFragment: "msteams-samples-proactive-messaging"
 ---

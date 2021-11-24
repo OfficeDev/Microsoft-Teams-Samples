@@ -1,4 +1,18 @@
-# DetailsTab
+---
+page_type: sample
+description: Microsoft Teams meeting extensibility sample for iteracting with Details Tab in-meeting
+products:
+- office-teams
+- office
+- office-365
+languages:
+- csharp
+extensions:
+contentType: samples
+createdDate: "07-07-2021 13:38:27"
+---
+
+# Meetings Details Tab
 
 This sample shows creating poll in meeting , where memebers of the meeting can answer poll question and can see the results.
 

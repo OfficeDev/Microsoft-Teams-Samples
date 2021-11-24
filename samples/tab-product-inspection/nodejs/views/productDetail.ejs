@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Inspection demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js" integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <style>
+        #mainDiv {
+            padding-left: 10%;
+            padding-top: 2%;
+        }
+    </style>
+</head>
+<body id=mainDiv>
+    <div id="productDetails">
+        <h4>Product Detail</h4>
+        Product Name: <label id="productName"></label>
+        <br />
+        Product image
+        <br />
+        <img id="productImg" src="" height="100" width="100" />
+        <br />
+        <br />
+        Product Status: <label id="productStatus"></label>
+    </div>
+    <label id="noProductFound">
+    </label>
+    <br/>
+    <button type="button" class="btn btn-outline-info" id="btnBack">Back</button>
+    <script>
+        var productDetails = <%-productDetails%>
+
+            $(document).ready(function () {
+                microsoftTeams.initialize();
+
+                if (productDetails.productId == null) {
+                    $("#noProductFound").text("No product found for this Id");
+                    $("#productDetails").hide();
+                }
+                else if (productDetails.image == null) {
+                    $("#noProductFound").text("No product status found");
+                    $("#productDetails").hide();
+                }
+                else {
+                    image = document.getElementById("#productImg");
+                    $("#noProductFound").show();
+                    $("#productName").text(productDetails.productName);
+                    $("#productStatus").text(productDetails.status);
+                    document.getElementById("productImg").src = productDetails.image;
+                }
+            });
+
+        $("#btnBack").on('click', function (e) {
+            microsoftTeams.tasks.submitTask();
+        });
+    </script>
+</body>
+</html>

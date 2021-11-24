@@ -1,6 +1,20 @@
-﻿# Channel life cycle
+---
+page_type: sample
+description: This sample illustrates how you can use Graph API Channel Life Cycle to call Graph APIs.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- csharp
+extensions:
+contentType: samples
+createdDate: "07-07-2021 13:38:26"
+---
 
-This sample show sthe [Channel](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-1.0) life cycle which includes create, update delete a channel
+# Channel life cycle
+
+This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-1.0) life cycle which includes create, update delete a channel
 
 ## Prerequisites
 
@@ -54,3 +68,4 @@ This sample show sthe [Channel](https://docs.microsoft.com/en-us/graph/api/resou
   
   
  
+

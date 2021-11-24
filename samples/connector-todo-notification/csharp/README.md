@@ -12,7 +12,7 @@ extensions:
   createdDate: 1/16/2018 10:21:42 PM
 ---
 
-# Microsoft Teams Sample Connector in .NET/C#
+# Microsoft Teams Sample Connector
 
 This is an MVC sample task management application generated using the [ASP.NET Web Application (.NET Framework)](https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/getting-started#creating-your-first-application) template. The majority of the code is related to either basic MVC configuration or Task management.
 
