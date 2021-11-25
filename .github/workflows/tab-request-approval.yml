@@ -8,7 +8,7 @@ on:
     #Change the branch name to <<main>>
     #Change the path to the folder where your code resides. Any change here will start the activity. 
     branches:
-      - v-nikija/tab-approval-csharp
+      - main
     paths:
       - 'samples/tab-approval/csharp/**'  
   workflow_dispatch:
