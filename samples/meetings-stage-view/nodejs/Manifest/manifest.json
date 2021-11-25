@@ -34,9 +34,6 @@
       "context": [
         "meetingSidePanel",
         "meetingStage"
-      ],
-      "meetingSurfaces": [
-        "sidePanel"
       ]
     }
   ],
