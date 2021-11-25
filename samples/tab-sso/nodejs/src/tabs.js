@@ -107,4 +107,37 @@ module.exports.setup = function (app) {
       res.json(err);
     });
   });
+
+  app.post('/getUserProfile', function (req, res) {
+    var token = req.body.token;
+    var oboPromise = new Promise((resolve, reject) => {
+      fetch("https://graph.microsoft.com/v1.0/me/",
+              {
+                method: 'GET',
+                headers: {
+                  "accept": "application/json",
+                  "authorization": "bearer " + token
+                },
+                mode: 'cors',
+                cache: 'default'
+              })
+              .then((response) => {
+                if (response.ok) {
+                  return response.json();
+                } else {
+                  throw (`Error ${response.status}: ${response.statusText}`);
+                }
+              })
+              .then((profile) => {
+                resolve(profile);
+              });
+    });
+    
+    oboPromise.then(function (result) {
+      res.json(result);
+    }, function (err) {
+      console.log(err); // Error: "It broke"
+      res.json(err);
+    });
+  });
 };

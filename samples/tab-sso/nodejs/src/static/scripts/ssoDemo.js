@@ -111,8 +111,30 @@
                         .then((result) => {
                             // Consent succeeded - use the token we got back
                             let accessToken = JSON.parse(result).accessToken;
-                            display(`Received access token ${accessToken}`);
-                            useServerSideToken(accessToken);
+                            fetch('/getUserProfile', {
+                                method: 'post',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    'token': accessToken
+                                }),
+                                mode: 'cors',
+                                cache: 'default'
+                            })
+                            .then((response) => {
+                                if (response.ok) {
+                                    return response.json();
+                                }
+                            })
+                            .then((responseJson) => {
+                                if (responseJson.error) {
+                                    console.log(responseJson.error);
+                                } else {
+                                    const profile = responseJson;
+                                    useServerSideToken(profile);
+                                }
+                            });
                         })
                         .catch((error) => {
                             display(`ERROR ${error}`);
