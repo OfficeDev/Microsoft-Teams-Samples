@@ -15,6 +15,7 @@
                 let state = _guid();
                 localStorage.setItem("simple.state", state);
                 localStorage.removeItem("simple.error");
+
                 // See https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-implicit
                 // for documentation on these query parameters
                 let queryParams = {
@@ -29,6 +30,7 @@
                     // if you know their username ahead of time.
                     login_hint: context.upn
                 };
+
                 // Go to the AzureAD authorization endpoint
                 let authorizeEndpoint =
                     "https://login.microsoftonline.com/common/oauth2/authorize?" +
@@ -48,6 +50,7 @@
 
             return encodedQueryParams.join("&");
         }
+
         // Converts decimal to hex equivalent
         // (From ADAL.js: https://github.com/AzureAD/azure-activedirectory-library-for-js/blob/dev/lib/adal.js)
         function _decimalToHex(number) {

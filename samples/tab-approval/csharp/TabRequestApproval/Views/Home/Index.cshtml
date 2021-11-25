@@ -2,25 +2,25 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-     <script src="https://unpkg.com/@@microsoft/teams-js/dist/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/@@microsoft/teams-js/dist/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/@@microsoft/mgt/dist/bundle/mgt-loader.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js"
             integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT"
             crossorigin="anonymous"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-      <meta charset="UTF-8">
-      <meta http-equiv="Content-Security-Policy"
-         content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
-      <style>
-         #mainDiv {
-         padding-left: 2%;
-         padding-top: 2%;
-         padding-right: 2%;
-         }
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+        <style>
+             #mainDiv {
+                 padding-left: 2%;
+                 padding-top: 2%;
+                 padding-right: 2%;
+             }
       </style>
+
       <script>
          $(document).ready(function () {
              getRequestList();
@@ -90,12 +90,12 @@
                  var i;
                  for (i = 0; i < userList.length; i++) {
                      $('#task-list-table-user').append(`<tr style="padding:1px" >
-                       <td style="margin-left:1px">${i+1}</td>
-                       <td style="margin-left:1px">${userList[i].title}</td>
-                       <td style="margin-left:1px">${userList[i].description}</td>
-                       <td style="margin-left:1px">${userList[i].managerName}</td>
-                       <td style="margin-left:1px">${userList[i].status}</td>
-                       </tr>`
+                        <td style="margin-left:1px"> ${i+1} </td>
+                        <td style="margin-left:1px"> ${userList[i].title} </td>
+                        <td style="margin-left:1px"> ${userList[i].description} </td>
+                        <td style="margin-left:1px"> ${userList[i].managerName} </td>
+                        <td style="margin-left:1px"> ${userList[i].status} </td>
+                        </tr>`
                       );
                  };
              }
@@ -122,16 +122,16 @@
                  $('#norequest').hide();
                  var i;
                  for (i = 0; i < managerList.length; i++) {
-                     $('#task-list-table-manager').append(`<tr style="padding:1px" >
+                     $('#task-list-table-manager').append(`<tr style="padding:1px">
                          <td>${i+1}</td>
                          <td>${managerList[i].title}</td>
                          <td>${managerList[i].description}</td>
                          <td>${managerList[i].userName}</td>
                          <td style="padding:5px">  
-                         <button type="button" style ="background-color: lightgray" class="btn" data-app-itemid=${managerList[i].taskId} onclick="ApproveRequest(event)">Approve</button>
+                         <button type="button" style = "background-color: lightgray" class = "btn" data-app-itemid = ${managerList[i].taskId} onclick = "ApproveRequest(event)"> Approve </button>
                          </td> 
                          <td style="padding:5px">
-                         <button type="button" style ="background-color: lightgray" class="btn" data-app-itemid=${managerList[i].taskId} onclick="RejectRequest(event)">Reject</button>
+                         <button type="button" style = "background-color: lightgray" class = "btn" data-app-itemid = ${managerList[i].taskId} onclick = "RejectRequest(event)"> Reject </button>
                          </td>
                          </tr>`
                     );
@@ -219,7 +219,7 @@
          };
       </script>
    </head>
-   <body  id="mainDiv" >
+   <body id="mainDiv" >
       <div>
          <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#createtask">Create Task</a></li>
@@ -231,8 +231,8 @@
                <div class="mb">
                   <div class="form-group fg">
                      @{
-                     var clientId = ViewBag.clientId;
-                     }        
+                         var clientId = ViewBag.clientId;
+                      }        
                      <mgt-teams-msal2-provider 
                         client-id=@clientId
                         auth-popup-url="/TabAuth"
@@ -255,9 +255,9 @@
                   <br />
                   <button type="button" class="btn-send save" onclick="return SendNotificationToManager()">Send Request</button>
                </div>
-            <div id="task-submitted">
-                Request submitted successfully.
-            </div>
+               <div id="task-submitted">
+                    Request submitted successfully.
+               </div>
             </div>
             <div id="mylist" class="tab-pane fade">
                <div id="notask">

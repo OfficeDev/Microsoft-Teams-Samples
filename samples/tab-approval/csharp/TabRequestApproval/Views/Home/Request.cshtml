@@ -1,4 +1,5 @@
 ﻿@using TabRequestApproval.Model
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -62,10 +63,10 @@
    <body  id="mainDiv" >
       <div>
             @{
-            var message = ViewBag.Message;
-            var taskDetails = ViewBag.TaskDetails;
+                var message = ViewBag.Message;
+                var taskDetails = ViewBag.TaskDetails;
             }
-            @if(message==null && taskDetails.status=="Pending")
+            @if(message == null && taskDetails.status == "Pending")
             {
                 <div id="approverequest">
                     <label for="title" class="title">Request title:</label>

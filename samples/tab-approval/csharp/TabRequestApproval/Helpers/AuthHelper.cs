@@ -76,9 +76,7 @@ namespace TabRequestApproval.Helpers
         public static IEnumerable<string> GetValidIssuers(IConfiguration configuration)
         {
             var tenantId = configuration[TenantIdConfigurationSettingsKey];
-
             var validIssuers = GetSettings(configuration);
-
             validIssuers = validIssuers.Select(validIssuer => validIssuer.Replace("tenantId", tenantId));
 
             return validIssuers;

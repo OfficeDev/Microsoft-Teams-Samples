@@ -1,7 +1,7 @@
 ﻿@model object
 
 @{ ViewBag.Title = "title";
-                Layout = "_Layout"; }
+   Layout = "_Layout"; }
 
 @section scripts{
     <script type="text/javascript">
@@ -13,7 +13,8 @@
             // Authentication/authorization failed
             localStorage.setItem("simple.error", JSON.stringify(hashParams));
             microsoftTeams.authentication.notifyFailure(hashParams["error"]);
-        } else if (hashParams["access_token"]) {
+        }
+        else if (hashParams["access_token"]) {
             // Get the stored state parameter and compare with incoming state
             let expectedState = localStorage.getItem("simple.state");
 
@@ -21,7 +22,8 @@
                 // State does not match, report error
                 localStorage.setItem("simple.error", JSON.stringify(hashParams));
                 microsoftTeams.authentication.notifyFailure("StateDoesNotMatch");
-            } else {
+            } 
+            else {
                 // Success -- return token information to the parent page
                 let key = "auth.result";
                  localStorage.setItem(key, JSON.stringify({
@@ -30,6 +32,7 @@
                     tokenType: hashParams["token_type"],
                     expiresIn: hashParams["expires_in"]
                 }));
+
                 microsoftTeams.authentication.notifySuccess({
                     idToken: hashParams["id_token"],
                     accessToken: hashParams["access_token"],
@@ -37,7 +40,8 @@
                     expiresIn: hashParams["expires_in"]
                 });
             }
-        } else {
+        }
+        else {
             // Unexpected condition: hash does not contain error or access_token parameter
             localStorage.setItem("simple.error", JSON.stringify(hashParams));
             microsoftTeams.authentication.notifyFailure("UnexpectedFailure");

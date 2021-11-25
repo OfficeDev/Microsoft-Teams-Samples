@@ -95,19 +95,18 @@ namespace TabRequestApproval.Controllers
                 List<RequestInfo> taskList = new List<RequestInfo>();
                 _taskList.TryGetValue("taskList", out currentTaskList);
 
-                var request = taskInfo;
-                request.taskId = Guid.NewGuid();
-                request.status = "Pending";
+                taskInfo.taskId = Guid.NewGuid();
+                taskInfo.status = "Pending";
 
                 if (currentTaskList == null)
                 {
-                    taskList.Add(request);
+                    taskList.Add(taskInfo);
                     _taskList.AddOrUpdate("taskList", taskList, (key, newValue) => taskList);
                     ViewBag.TaskList = taskList;
                 }
                 else
                 {
-                    currentTaskList.Add(request);
+                    currentTaskList.Add(taskInfo);
                     _taskList.AddOrUpdate("taskList", currentTaskList, (key, newValue) => currentTaskList);
                     ViewBag.TaskList = currentTaskList;
                 }
@@ -123,18 +122,16 @@ namespace TabRequestApproval.Controllers
                                    .Expand("teamsApp")
                                    .GetAsync();
 
-                var installationId = installedApps.Where(id => id.TeamsApp.DisplayName == "Tab Approval").Select(x => x.TeamsApp.Id);
+                var installationId = installedApps.Where(id => id.TeamsApp.DisplayName == "Tab Request Approval").Select(x => x.TeamsApp.Id);
                 var userName = user.UserPrincipalName;
    
-                var url = "https://teams.microsoft.com/l/entity/"+installationId.ToList()[0]+"/request?context={\"subEntityId\":\""+ request.taskId+"\"}";
+                var url = "https://teams.microsoft.com/l/entity/"+installationId.ToList()[0]+"/request?context={\"subEntityId\":\""+ taskInfo.taskId+"\"}";
                 var topic = new TeamworkActivityTopic
                 {
                     Source = TeamworkActivityTopicSource.Text,
                     Value = $"{taskInfo.title}",
                     WebUrl = url
                 };
-
-                var activityType = "approvalRequired";
 
                 var previewText = new ItemBody
                 {
@@ -149,10 +146,9 @@ namespace TabRequestApproval.Controllers
                         Value = taskInfo.title
                     }
                 };
-
             
                 await graphClientApp.Users[user.Id].Teamwork
-                    .SendActivityNotification(topic, activityType, null, previewText, templateParameters)
+                    .SendActivityNotification(topic, "approvalRequired", null, previewText, templateParameters)
                     .Request()
                     .PostAsync();
             }

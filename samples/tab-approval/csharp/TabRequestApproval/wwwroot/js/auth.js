@@ -27,10 +27,10 @@ $(document).ready(function () {
 function requestConsent() {
     getToken()
         .then(data => {
-        $("#consent").hide();
-        $("#divError").hide();
-        accessToken = data.accessToken;
-        microsoftTeams.getContext((context) => {
+            $("#consent").hide();
+            $("#divError").hide();
+            accessToken = data.accessToken;
+            microsoftTeams.getContext((context) => {
         });
     });
 }
@@ -77,22 +77,22 @@ function getServerSideToken(clientSideToken) {
                 },
                 cache: 'default'
             })
-                .then((response) => {
-                    if (response.ok) {
-                        return response.text();
-                    } else {
-                        reject(response.error);
-                    }
-                })
-                .then((responseJson) => {
-                    if (IsValidJSONString(responseJson)) {
-                        if (JSON.parse(responseJson).error)
-                            reject(JSON.parse(responseJson).error);
-                    } else if (responseJson) {
-                        accessToken = responseJson;
-                        localStorage.setItem("accessToken", accessToken);
-                    }
-                });
+            .then((response) => {
+                if (response.ok) {
+                    return response.text();
+                } else {
+                    reject(response.error);
+                }
+            })
+            .then((responseJson) => {
+                if (IsValidJSONString(responseJson)) {
+                    if (JSON.parse(responseJson).error)
+                        reject(JSON.parse(responseJson).error);
+                } else if (responseJson) {
+                    accessToken = responseJson;
+                    localStorage.setItem("accessToken", accessToken);
+                }
+            });
         });
     });
 }
