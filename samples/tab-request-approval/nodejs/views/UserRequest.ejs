@@ -15,8 +15,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script src="./scripts/auth-delegated.js"></script>
         <meta charset="UTF-8">
-        <meta http-equiv="Content-Security-Policy"
-            content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
     </head>
     <style>
         #mainDiv {
@@ -69,6 +68,7 @@
             getRequestDetails(); 
         })
         // Method to show geo location for given latitude and longitude values.
+        
         function getRequestDetails() {
             if(data == null){
                 $("#productDetails").hide();

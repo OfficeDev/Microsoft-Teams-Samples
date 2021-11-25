@@ -34,24 +34,24 @@
                         token: clientSideToken
                     }),
                 })
-                .then((response) => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        reject(response.error);
-                    }
-                })
-                .then((responseJson) => {
-                    if (responseJson.error) {
-                        reject(responseJson.error);
-                    }
-                    else {
-                        const serverSideToken = responseJson;
-                        localStorage.setItem("accessToken", serverSideToken);
-                        console.log("Token is"+serverSideToken);
-                        resolve(serverSideToken);
-                    }
-                });
+                    .then((response) => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            reject(response.error);
+                        }
+                    })
+                    .then((responseJson) => {
+                        if (responseJson.error) {
+                            reject(responseJson.error);
+                        }
+                        else {
+                            const serverSideToken = responseJson;
+                            localStorage.setItem("accessToken", serverSideToken);
+                            console.log("Token is" + serverSideToken);
+                            resolve(serverSideToken);
+                        }
+                    });
             });
         });
     }

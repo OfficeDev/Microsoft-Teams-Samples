@@ -15,12 +15,12 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "Tab Approval",
-    "full": "Activity feed notification to approve/reject user's request."
+    "short": "Tab Request Approval",
+    "full": "Activity feed notification to notify about request."
   },
   "description": {
-    "short": "App helps to notifiy manager regarding pending requests raised by user.",
-    "full": "This is an Tab app which send notification to manager for pending requset send by user."
+    "short": "App helps user to raise a request and notify manager for approve or reject it.",
+    "full": "This is an Tab app where requester can raise a request and a notification send to manager for its approval or rejection."
   },
   "accentColor": "#235EA5",
   "staticTabs": [
@@ -45,7 +45,7 @@
     "activityTypes": [
       {
         "type": "approvalRequired",
-        "description": "Reuired approval",
+        "description": "Required approval",
         "templateText": "A task created with title {approvalTaskId}"
       }
     ]

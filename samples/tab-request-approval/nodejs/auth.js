@@ -27,6 +27,7 @@ auth.getAccessToken = function (tenantId) {
       deferred.resolve(parsedBody.access_token);
     }
   });
+  
   return deferred.promise;
 };
 module.exports = auth;

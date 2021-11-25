@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams sample app for Sending Approval request using activity feed notification.
+description: This sample shows a feature where requester can request for any task approval from manager and manager can see the pending request by user on the click of activity feed notification and can approve or reject the request.
 products:
 - office-teams
 - office
@@ -9,18 +9,18 @@ languages:
 - nodejs
 extensions:
 contentType: samples
-createdDate: "06-10-2021 01:48:56"
+createdDate: "26-11-2021 14:00:00"
 ---
 
 # Tab request approval with activity feed notification.
 
 This sample shows a feature where:
-1)Requester: Can request for any task to the manager by sending activity feed notification and can see his request status.
-2)Manager : Can see the list of pending request with him on the click of activity feed notification and can approve or reject the request.
+1. Requester : Can request for any task approval from manager by sending activity feed notification and can see his request status.
+2. Manager : Can see the pending approval request raised by user on the click of activity feed notification and can approve or reject the request.
 
 User Persona:
 
-- Send request to the manger for task.
+- Send request to the manger for task approval.
 
 ![Request from user](Images/TaskRequest.png)
 
@@ -30,7 +30,7 @@ User Persona:
 
 Manager Persona:
 
-- Activity feed notification of request.
+- Activity feed notification of approval request.
 
 ![Notification](Images/RequestNotification.png)
 
@@ -42,30 +42,6 @@ Manager Persona:
 
 - [NodeJS](https://nodejs.org/en/)
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
-
-## To try this sample
-
-1) Clone the repository
-
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
-
-1) In a terminal, navigate to `samples/graph-activity-feed/nodejs
-`
-
-1) Install modules
-
-    ```bash
-    npm install
-    ```
-
-1) Run ngrok - point to port 3978
-
-    ```bash
-    ngrok http -host-header=rewrite 3978
-    ```
-
 
 ### Register your Teams Auth SSO with Azure AD
 
@@ -153,3 +129,5 @@ Manager Persona:
     - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
+
+**Note:** App should be installed for user's manager also to get task approval notification.

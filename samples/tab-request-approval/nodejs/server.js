@@ -27,6 +27,7 @@ app.get('/UserNotification', function (req, res) {
       "requestDetails": localdata,
       "token": token
     };
+
     res.render('./views/UserNotification', { data: JSON.stringify(requestData) });
   });
 });
@@ -106,6 +107,7 @@ app.post('/auth/token', function (req, res) {
         "Content-Type": "application/x-www-form-urlencoded"
       }
     }).then(result => {
+      
       if (result.status !== 200) {
         result.json().then(json => {
           // TODO: Check explicitly for invalid_grant or interaction_required
