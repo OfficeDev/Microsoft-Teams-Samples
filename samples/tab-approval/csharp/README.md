@@ -1,4 +1,4 @@
-﻿---
+---
 page_type: sample
 description: This sample shows a feature where requester can request for any task approval from manager and manager can see the pending request by user on the click of activity feed notification and can approve or reject the request.
 products:
@@ -86,6 +86,7 @@ Manager Persona:
 -   Select Microsoft Graph -\> Delegated permissions.
     - `User.Read` (enabled by default)
     - `Directory.Read.All`
+    - `Directory.ReadWrite.All`
     - `ChatMessage.Send`
     - `Chat.ReadWrite`
     - `TeamsActivity.Send`
