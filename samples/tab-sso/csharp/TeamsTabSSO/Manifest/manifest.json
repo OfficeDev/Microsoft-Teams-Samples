@@ -1,7 +1,7 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.5",
-  "version": "1.0.1",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.11",
+  "version": "1.0.0",
   "id": "{new GUID for this Teams app - not the Azure AD App ID}",
   "packageName": "com.contoso.teamsauthsso",
   "developer": {
@@ -33,7 +33,7 @@
   ],
   "configurableTabs": [
     {
-      "configurationUrl": "https://{ngrokSubdomain}.ngrok.io/Home/ConfigTab",
+      "configurationUrl": "https://{ngrokSubdomain}.ngrok.io/Home/Configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team"

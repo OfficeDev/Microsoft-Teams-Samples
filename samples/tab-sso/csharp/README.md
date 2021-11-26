@@ -80,7 +80,7 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
     Set a redirect URI:
     * Select **Add a platform**.
     * Select **web**.
-    * Enter the **redirect URI** for the app in the following format: https://%ngrokDomain%.ngrok.io/End. This will be the page where a successful implicit grant flow will redirect the user.
+    * Enter the **redirect URI** for the app in the following format: https://%ngrokDomain%.ngrok.io/Auth/End. This will be the page where a successful implicit grant flow will redirect the user.
     
     Enable implicit grant by checking the following boxes:  
     ✔ ID Token  
