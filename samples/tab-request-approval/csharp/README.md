@@ -22,21 +22,21 @@ User Persona:
 
 - Send request to the manger for task approval.
 
-![Request from user](TabRequestApproval/Images/TaskRequest.png)
+  ![Request from user](TabRequestApproval/Images/TaskRequest.png)
 
 - Request status
 
-![Request status](TabRequestApproval/Images/RequestStatus.png)
+  ![Request status](TabRequestApproval/Images/RequestStatus.png)
 
 Manager Persona:
 
 - Activity feed notification of approval request.
 
-![Notification](TabRequestApproval/Images/RequestNotification.png)
+  ![Notification](TabRequestApproval/Images/RequestNotification.png)
 
 - Pending task approval request.
 
-![Pending request list](TabRequestApproval/Images/RequestDetails.png)
+  ![Pending request list](TabRequestApproval/Images/RequestDetails.png)
 
 ## Prerequisites
 
