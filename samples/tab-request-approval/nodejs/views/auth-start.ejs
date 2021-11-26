@@ -13,6 +13,7 @@
     crossorigin="anonymous"></script>
 <script>
     microsoftTeams.initialize();
+
     // Get the tab context, and use the information to navigate to Azure AD login page
     microsoftTeams.getContext(function (context) {
         // Generate random state string and store it, so we can verify it in the callback
@@ -36,6 +37,7 @@
         let authorizeEndpoint = `https://login.microsoftonline.com/${context.tid}/oauth2/v2.0/authorize?${toQueryString(queryParams)}`;
         window.location.assign(authorizeEndpoint);
     });
+    
     // Build query string from map of query parameter
     function toQueryString(queryParams) {
         let encodedQueryParams = [];
@@ -55,6 +57,7 @@
     }
     // Generates RFC4122 version 4 guid (128 bits)
     // (From ADAL.js: https://github.com/AzureAD/azure-activedirectory-library-for-js/blob/dev/lib/adal.js)
+    
     function _guid() {
 
         var cryptoObj = window.crypto || window.msCrypto; // for IE 11

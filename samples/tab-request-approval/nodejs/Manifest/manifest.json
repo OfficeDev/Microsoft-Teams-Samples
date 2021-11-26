@@ -16,7 +16,7 @@
   },
   "name": {
     "short": "Tab Request Approval",
-    "full": "Activity feed notification to notify about request."
+    "full": "Activity feed notification to notify about approval request."
   },
   "description": {
     "short": "App helps user to raise a request and notify manager for approve or reject it.",

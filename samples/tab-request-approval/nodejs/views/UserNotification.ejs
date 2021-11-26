@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-
     <head>
         <script src="https://unpkg.com/@microsoft/teams-js/dist/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/@microsoft/mgt/dist/bundle/mgt-loader.js"></script>
@@ -165,11 +162,11 @@
                 var i;
                 for (i = 0; i < userList.length; i++) {
                     $('#task-list-table-user').append(`<tr style="padding:1px" >
-                    <td style="margin-left:1px">${userList[i].id}</td>
-                    <td style="margin-left:1px">${userList[i].title}</td>
-                    <td style="margin-left:1px">${userList[i].description}</td>
-                    <td style="margin-left:1px">${userList[i].assignedTo}</td>
-                    <td style="margin-left:1px">${userList[i].status}</td>
+                    <td style="margin-left:1px"> ${userList[i].id} </td>
+                    <td style="margin-left:1px"> ${userList[i].title} </td>
+                    <td style="margin-left:1px"> ${userList[i].description} </td>
+                    <td style="margin-left:1px"> ${userList[i].assignedTo} </td>
+                    <td style="margin-left:1px"> ${userList[i].status} </td>
                 </tr>`);
                 };
             }
@@ -195,9 +192,9 @@
                 var i;
                 for (i = 0; i < managerList.length; i++) {
                     $('#task-list-table-manager').append(`<tr style="padding:1px" >
-                    <td>${managerList[i].id}</td>
-                    <td>${managerList[i].title}</td>
-                    <td>${managerList[i].description}</td>
+                    <td> ${managerList[i].id} </td>
+                    <td> ${managerList[i].title} </td>
+                    <td> ${managerList[i].description} </td>
                     <td style="padding:5px">  
                         <button type="button" style ="background-color: lightgray" class="btn  btngetApp" data-app-itemid=${managerList[i].id} onclick="ApproveRequest(event)">Approve</button>
                     </td> 
@@ -216,6 +213,7 @@
                 status: "Approved"
             };
             location.reload();
+
             $.ajax({
                 type: 'POST',
                 url: '/ApproveRejectRequest',
@@ -237,6 +235,7 @@
                 status: "Rejected"
             };
             location.reload();
+
             $.ajax({
                 type: 'POST',
                 url: '/ApproveRejectRequest',
@@ -253,6 +252,7 @@
 
         function saveRequestDetails(taskInfo) {
             location.reload();
+
             $.ajax({
                 type: 'POST',
                 url: '/SaveRequest',
@@ -273,6 +273,7 @@
             userId = person[0].id;
             username = person[0].userPrincipalName;
             var isValid = true;
+
             $('#taskTitle,#taskDescription').each(function (e) {
                 if ($.trim($(this).val()) == '') {
                     isValid = false;
@@ -299,6 +300,7 @@
                 assignedTo: username,
                 createdBy: createdBy
             };
+
             $.ajax({
                 url: "https://graph.microsoft.com/v1.0/users/" + userId + "/teamwork/installedApps/?$expand=teamsApp",
                 type: "GET",
@@ -314,6 +316,7 @@
                 },
             });
         };
+
         // get app id.
         function getAppId(appList) {
             var list = appList.value;
@@ -324,6 +327,7 @@
                 }
             }
         }
+
         // Send notification to user.
         function sendNotification(userId, taskInfo, token, appId) {
             var taskID = taskInfo.id;

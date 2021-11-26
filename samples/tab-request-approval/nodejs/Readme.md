@@ -22,21 +22,21 @@ User Persona:
 
 - Send request to the manger for task approval.
 
-![Request from user](Images/TaskRequest.png)
+  ![Request from user](Images/TaskRequest.png)
 
 - Request status
 
-![Request status](Images/RequestStatus.png)
+  ![Request status](Images/RequestStatus.png)
 
 Manager Persona:
 
 - Activity feed notification of approval request.
 
-![Notification](Images/RequestNotification.png)
+  ![Notification](Images/RequestNotification.png)
 
 - On click of notification a task module will open, redirecting the user to the request.
 
-![RequestTaskNotification](Images/RequestTaskNotification.png)
+  ![RequestTaskNotification](Images/RequestTaskNotification.png)
 
 ## Prerequisites
 
@@ -104,7 +104,7 @@ Manager Persona:
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In the folder where repository is cloned navigate to `samples/tab-approval/nodejs`
+2) In the folder where repository is cloned navigate to `samples/tab-request-approval/nodejs`
 
 3) Install node modules
 
@@ -118,7 +118,7 @@ Manager Persona:
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
-5) Update the `.env` configuration file in your project folder for the bot to use the `ClientId` and `ClientSecret`, `TenantId` with your tenant id. For e.g., your ngrok url. (Note the ClientId is the AppId created in step 1 (Setup for Bot), the ClientSecret is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+5) Open the `.env` configuration file in your project folder (or in Visual Studio Code) and update the `ClientId` and `ClientSecret`, `TenantId` with your tenant id. For e.g., your ngrok url. (Note the ClientId is the AppId created in step 1 (Setup for Bot), the ClientSecret is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
 6) Run your app
 
