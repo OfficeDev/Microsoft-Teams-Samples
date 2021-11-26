@@ -5,7 +5,7 @@ using System;
 
 namespace TabRequestApproval.Model
 {
-    
+    // Class with request info model.
     public class RequestInfo
     {
         public Guid taskId { get; set; }

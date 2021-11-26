@@ -35,6 +35,7 @@ Manager Persona:
 ![Notification](TabRequestApproval/Images/RequestNotification.png)
 
 - Pending task approval request.
+
 ![Pending request list](TabRequestApproval/Images/RequestDetails.png)
 
 ## Prerequisites

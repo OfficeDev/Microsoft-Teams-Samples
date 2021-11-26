@@ -175,7 +175,6 @@ namespace TabRequestApproval.Helpers
 
             if (settings == null)
             {
-
                 throw new ApplicationException($"{ValidIssuersConfigurationSettingsKey} does not contain a valid value in the configuration file.");
             }
 
