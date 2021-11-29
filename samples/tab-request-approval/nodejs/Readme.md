@@ -12,7 +12,7 @@ contentType: samples
 createdDate: "26-11-2021 14:00:00"
 ---
 
-# Tab request approval with activity feed notification.
+# Send task approval request using activity feed notification (Graph APIs).
 
 This sample shows a feature where:
 1. Requester : Can request for any task approval from manager by sending activity feed notification and can see his request status.
