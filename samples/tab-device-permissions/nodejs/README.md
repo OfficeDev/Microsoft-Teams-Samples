@@ -20,9 +20,9 @@ It also shows Device permissions for the browser. Please refer [Device permissio
 
 ![Local Running App](Images/home.PNG)
 
-![Permissions View](Images/devicePermBrowser.PNG)
+![Permissions View](Images/deviceBrowser.PNG)
 
-![Device Browser](Images/deviceBrowser.PNG)
+![Device Browser](Images/devicePermBrowser.PNG)
 
 ```
 The latest update on how device permissions are handled in the browser is currently available in public developer preview
