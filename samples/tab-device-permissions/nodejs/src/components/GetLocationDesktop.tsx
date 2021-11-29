@@ -36,7 +36,7 @@ const GetLocationDesktop = () => {
             {/* Card for capturing single image */}
             <Card>
                 <CardHeader>
-                    <Text content="Get Location (Mobile, Desktop, Web)" weight="bold" />
+                    <Text content="Get Location (Browser support)" weight="bold" />
                 </CardHeader>
                 <CardBody>
                     <Flex column gap="gap.small">
