@@ -3,6 +3,7 @@
 //
 // Generated with Bot Builder V4 SDK Template for Visual Studio CoreBot v4.14.0
 
+using Microsoft.Bot.Builder.Integration.ApplicationInsights.Core;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder.TraceExtensions;
 using Microsoft.Extensions.Configuration;
@@ -12,11 +13,13 @@ namespace TabInStageView
 {
     public class AdapterWithErrorHandler : BotFrameworkHttpAdapter
     {
-        public AdapterWithErrorHandler(IConfiguration configuration, ILogger<BotFrameworkHttpAdapter> logger)
+        public AdapterWithErrorHandler(IConfiguration configuration, ILogger<BotFrameworkHttpAdapter> logger, TelemetryInitializerMiddleware telemetryInitializerMiddleware)
             : base(configuration, logger)
         {
             OnTurnError = async (turnContext, exception) =>
             {
+                Use(telemetryInitializerMiddleware);
+
                 // Log any leaked exception from the application.
                 logger.LogError(exception, $"[OnTurnError] unhandled error : {exception.Message}");
 
