@@ -1,4 +1,19 @@
-# Bots/Messaging Extension
+---
+page_type: sample
+description: Hello world Messaging Extension that accepts search requests and returns results.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- javascript
+- nodejs
+extensions:
+contentType: samples
+createdDate: "07-07-2021 13:38:27"
+---
+
+# Messaging Extension quick start
 
 *Bots* allow users to interact with your web service through text, interactive cards, and task modules. *Messaging extensions* allow users to interact with your web service through buttons and forms in the Microsoft Teams client. They can search, or initiate actions, in an external system from the compose message area, the command box, or directly from a message.
 
@@ -37,5 +52,6 @@ Run ngrok - point to port 3978
 
 ## Deploy to Teams
 Start debugging the project by hitting the `F5` key or click the debug icon in Visual Studio Code and click the `Start Debugging` green arrow button.
+
 
 

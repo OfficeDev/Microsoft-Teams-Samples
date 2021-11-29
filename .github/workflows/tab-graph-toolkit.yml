@@ -1,16 +1,16 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy tab-graph-toolkit sample.
+name: Deploy - csharp Tab-Graph-Toolkit
 
 on:
   push:
     #Change the branch name to <<main>>
     #Change the path to the folder where your code resides. Any change here will start the activity. 
     branches:
-      - v-nikija/tab-graph-toolkit
+      - main
     paths:
-      - 'samples/tab-graph-toolkit/**'  
+      - 'samples/tab-graph-toolkit/csharp/**'  
   workflow_dispatch:
 env:
     #Change the webapp package path. This will contain the code to be published after build
