@@ -31,9 +31,18 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
                 return
             }
 
+            var details = JSON.parse(note);
+            let files = new Array();
+            details.checkedValues.map((item: any) => {
+                if (item.isChecked == true) {
+                    files.push(item.name);
+                }
+            })
+
             if (note !== undefined) {
                 const assetDetail: IAssetDetails = {
-                    message: note
+                    message: details.note,
+                    files: files,
                 }
 
                 shareAssets(assetDetail)
