@@ -9,10 +9,10 @@ languages:
 - csharp
 extensions:
 contentType: samples
-createdDate: "26-11-2021 14:00:25"
+createdDate: "29-11-2021 17:00:25"
 ---
 
-# Tab request approval with activity feed notification.
+# Send task approvals using activity feed notification (Graph APIs)
 
 This sample shows a feature where:
 1. Requester : Can request for any task approval from manager by sending activity feed notification and can see his request status.
