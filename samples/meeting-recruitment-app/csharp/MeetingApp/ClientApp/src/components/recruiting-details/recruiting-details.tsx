@@ -158,7 +158,7 @@ const RecruitingDetails = () => {
             </Flex>
 
             {/* Content for sidepanel/mobile view */}
-            <Flex hidden={frameContext != "sidePanel"} gap="gap.small" className="container-mobile" column>
+            <Flex hidden={frameContext != "sidePanel"} gap="gap.small" className={hostClientType == "web" || hostClientType == "desktop" ? "container-sidePanel":"container-mobile"} column>
                 <Menu
                     defaultActiveIndex={0}
                     items={mobileMenuItems}

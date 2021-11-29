@@ -69,20 +69,20 @@
 }
 
 .timeline::after {
-    content: '';
-    position: absolute;
-    width: 3px;
-    background-color: #6a6ba9;
-    top: 78px;
-    bottom: 0;
-    left: 5%;
-  }
+content: '';
+position: absolute;
+width: 3px;
+background-color: #6a6ba9;
+top: 78px;
+bottom: 0;
+left: 5%;
+}
 
-  .timelineContainer {
-    padding: 10px 40px;
-    position: relative;
-    background-color: inherit;
-  }
+.timelineContainer {
+padding: 10px 40px;
+position: relative;
+background-color: inherit;
+}
 
 .timelineContainerMobile {
     padding: 10px 10px 10px 40px;
@@ -90,49 +90,49 @@
     background-color: inherit;
 }
 
-  .timelineContainer::after {
-    content: '';
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background-color: #6a6ba9;
-    top: 14px;
-    border-radius: 50%;
-    z-index: 1;
-    left: 1.5vh;
-  }
+.timelineContainer::after {
+content: '';
+position: absolute;
+width: 10px;
+height: 10px;
+background-color: #6a6ba9;
+top: 14px;
+border-radius: 50%;
+z-index: 1;
+left: 1.5vh;
+}
 
-  .timelineDetail{
-    width: 25%;
-    min-height: 60px;
-  }
+.timelineDetail{
+width: 25%;
+min-height: 60px;
+}
 
 .iconText {
     margin-top: 2px;
 }
 
-  .questionsHeader{
-      margin: 0;
-  }
+.questionsHeader{
+    margin: 0;
+}
 
-  .selectedBtn{
-    background-color: #56599f !important;
-    color: #fff !important;
-  }
+.selectedBtn{
+background-color: #56599f !important;
+color: #fff !important;
+}
 
-  .editIcon{
-    padding-left: 0px !important;
-    padding-right: 1.5vw !important;
-  }
+.editIcon{
+padding-left: 0px !important;
+padding-right: 1.5vw !important;
+}
 
-  .editTextArea{
-      height: 120px !important;
-  }
+.editTextArea{
+    height: 120px !important;
+}
 
-  .notesContainer{
-    overflow-y: auto;
-    max-height: 22vh;
-  }
+.notesContainer{
+overflow-y: auto;
+max-height: 22vh;
+}
 
 .notesContainerMobile {
     overflow-y: auto;
@@ -147,7 +147,7 @@
 
 /* Styles for mobile view */
 
-.container-mobile{
+.container-sidePanel{
     background-color: #000;
     color: #fff;
     max-width: 320px;
@@ -155,6 +155,13 @@
     padding: 1%;
 }
 
+.container-mobile {
+    background-color: #000;
+    color: #fff;
+    max-width: 100vw;
+    min-height: 80vh;
+    padding: 1%;
+}
 .menu-item{
     border-bottom: none !important;
 }
