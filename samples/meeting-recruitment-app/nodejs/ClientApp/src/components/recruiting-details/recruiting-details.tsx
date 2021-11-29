@@ -29,6 +29,8 @@ const RecruitingDetails = () => {
     const [selectedIndex, setSelectedIndex] = React.useState(0);
     const [currentCandidateEmail, setCurrentCandidateEmail] = React.useState<string>('');
     const [feedbackSubmitted, setFeedbackSubmitted] = React.useState(false);
+    const [frameContext, setframeContext] = React.useState<any>('');
+    const [hostClientType, sethostClientType] = React.useState<any>('');
 
     const setSelectedCandidateIndex = (index: number, email: string) => {
         setSelectedIndex(index);
@@ -132,6 +134,10 @@ const RecruitingDetails = () => {
 
     React.useEffect(() => {
         microsoftTeams.initialize();
+        microsoftTeams.getContext((context) => {
+            setframeContext(context.frameContext);
+            sethostClientType(context.hostClientType);
+        });
         loadQuestions();
     }, [])
 
@@ -139,19 +145,22 @@ const RecruitingDetails = () => {
     return (
         <>
             {/* Content for stage view */}
-            <Flex hidden={window.innerWidth < 600} gap="gap.small" padding="padding.medium" className="container">
-                <Flex column gap="gap.small" padding="padding.medium" className="detailsContainer">
+            <Flex hidden={frameContext != "content"} gap="gap.small" padding="padding.medium" className="container">
+                <Flex column gap="gap.small" padding="padding.medium" className={hostClientType == "web" || hostClientType == "desktop"? "detailsContainer" :"detailsContainerMobile"}>
                     <BasicDetails setSelectedCandidateIndex={setSelectedCandidateIndex} downloadFile={downloadFile} />
                     <Timeline />
                     <Notes currentCandidateEmail={currentCandidateEmail} />
+                    <Flex hidden={hostClientType == "web" || hostClientType == "desktop"} className="questionsContainerMobile">
+                        <Questions />
+                    </Flex>
                 </Flex>
-                <Flex column gap="gap.small" padding="padding.medium" className="questionsContainer">
+                <Flex hidden={hostClientType != "web" && hostClientType != "desktop"} column gap="gap.small" padding="padding.medium" className="questionsContainer">
                     <Questions />
                 </Flex>
             </Flex>
 
             {/* Content for sidepanel/mobile view */}
-            <Flex hidden={window.innerWidth < 600} gap="gap.small" className="container-mobile" column>
+            <Flex hidden={frameContext != "sidePanel"} gap="gap.small" className={hostClientType == "web" || hostClientType == "desktop" ? "container-sidePanel":"container-mobile"} column>
                 <Menu
                     defaultActiveIndex={0}
                     items={mobileMenuItems}
