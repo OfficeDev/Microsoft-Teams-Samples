@@ -20,7 +20,7 @@ It also shows Device permissions for the browser. Please refer [Device permissio
 
 ![Local Running App](Images/home.PNG)
 
-![Permissions View](Images/deviceBrowser.png)
+![Permissions View](Images/devicePermBrowser.png)
 
 ![Device Browser](Images/deviceBrowser.PNG)
 
