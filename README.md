@@ -187,7 +187,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 [tab-stage-view#js]:samples/tab-stage-view/nodejs
 [tab-stage-view#csharp]:samples/tab-stage-view/csharp
 [tab-product-inspection#csharp]:samples/tab-product-inspection/csharp
-[tab-request-approval#nodejs]:samples/tab-approval/nodejs
+[tab-request-approval#nodejs]:samples/tab-request-approval/nodejs
 
 [group-channel-tab#cs#razor]:samples/tab-channel-group/razor-csharp
 [group-channel-tab#cs#mvc]:samples/tab-channel-group/mvc-csharp
