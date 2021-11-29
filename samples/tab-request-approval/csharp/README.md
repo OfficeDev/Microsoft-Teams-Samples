@@ -117,7 +117,7 @@ Manager Persona:
 
 16. Open the code in Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/tab-approval/csharp/TabRequestApproval.sln`
+   - Navigate to folder where repository is cloned then `samples/tab-request-approval/csharp/TabRequestApproval.sln`
     
 17. Run ngrok - point to port 3978
 
