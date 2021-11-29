@@ -7,10 +7,11 @@ import GetGeoLocation from './GetGeoLocation';
 import CaptureImage from './CaptureImage';
 import PeoplePicker from './PeoplePicker';
 import CaptureAudio from './CaptureAudio';
+import GetLocationDesktop from './GetLocationDesktop';
 
 const getTabContent = () => {
   return (
-    <Grid columns={window.innerWidth < 720 ? 1 : 5}>
+    <Grid columns={window.innerWidth < 720 ? 1 : 3}>
       <Segment
         /* Component to capture image(s) */
         content={<CaptureImage />}
@@ -30,6 +31,10 @@ const getTabContent = () => {
       <Segment
         /* Component to Get/Show geo-Location */
         content={<GetGeoLocation />}
+      />
+      <Segment
+        /* Component to Get/Show geo-Location */
+        content={<GetLocationDesktop />}
       />
     </Grid>
   )
