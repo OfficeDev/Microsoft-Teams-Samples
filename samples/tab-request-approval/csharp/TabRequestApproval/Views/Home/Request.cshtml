@@ -1,0 +1,99 @@
+﻿@using TabRequestApproval.Model
+
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js"
+         integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT"
+         crossorigin="anonymous"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <meta charset="UTF-8">
+      <meta http-equiv="Content-Security-Policy"
+         content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+
+      <style>
+         #mainDiv {
+         padding-left: 2%;
+         padding-top: 2%;
+         padding-right: 2%;
+         }
+      </style>
+
+      <script>
+         // Method to approve request.
+         function ApproveRequest(e) {
+             var taskId = $(e.currentTarget).attr('data-app-itemid');
+             let taskInfo = {
+                 taskId: taskId,
+                 status: "Approved",
+             };
+
+             $.ajax({
+                 type: 'POST',
+                 url: '/RespondRequest',
+                 dataType: 'json',
+                 data: taskInfo
+             });
+
+             microsoftTeams.tasks.submitTask();
+         };
+         
+         // Method to reject request.
+         function RejectRequest(e) {
+             var taskId = $(e.currentTarget).attr('data-app-itemid');
+             let taskInfo = {
+                 taskId: taskId,
+                 status: "Rejected",
+             };
+
+             $.ajax({
+                 type: 'POST',
+                 url: '/RespondRequest',
+                 dataType: 'json',
+                 data: taskInfo
+             });
+
+              microsoftTeams.tasks.submitTask();
+         };
+      </script>
+   </head>
+   <body  id="mainDiv" >
+      <div>
+            @{
+                var message = ViewBag.Message;
+                var taskDetails = ViewBag.TaskDetails;
+            }
+            @if(message == null && taskDetails.status == "Pending")
+            {
+                <div id="approverequest">
+                    <label for="title" class="title">Request title:</label>
+                    <br/>
+                    <div id="title">@taskDetails.title</div>
+                    <br/>
+                    <br/>
+                    <label for="description" class="description">Request description:</label>
+                    <br/>
+                    <div id="description">@taskDetails.description</div>
+                    <br/>
+                    <br/>
+                    <label for="requestby" class="requestBy">Request by:</label>
+                    <br/>
+                    <div id="requestBy">@taskDetails.userName</div>
+                    <br/>
+                    <br/>
+                    <button type="button" style ="background-color: lightgray" class="btn" data-app-itemid=@taskDetails.taskId onclick="ApproveRequest(event)">Approve</button>
+                    <button type="button" style ="background-color: lightgray" class="btn" data-app-itemid=@taskDetails.taskId onclick="RejectRequest(event)">Reject</button>
+                </div>
+            }
+            else
+            {
+                <div id="requestStatus">
+                    <span>Request @taskDetails.status</span>
+                </div>
+            } 
+      </div>
+   </body>
+</html>
