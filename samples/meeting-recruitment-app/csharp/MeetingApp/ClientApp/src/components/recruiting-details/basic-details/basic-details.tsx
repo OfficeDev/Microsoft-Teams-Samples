@@ -27,6 +27,8 @@ const BasicDetails = (props: IBasicDetailsProps) => {
     const [candidateDetails, setCandidateDetails] = React.useState<ICandidateDetails[]>([]);
     const [selectedIndex, setSelectedIndex] = React.useState(0);
     const [candidateNames, setCandidateNames] = React.useState<any[]>([]);
+    const [frameContext, setframeContext] = React.useState<any>('');
+    const [hostClientType, sethostClientType] = React.useState<any>('');
 
     const handleNameChange = (event: any, dropdownProps?: any) => {
         setSelectedIndex(dropdownProps.value.key);
@@ -43,6 +45,11 @@ const BasicDetails = (props: IBasicDetailsProps) => {
 
     React.useEffect(() => {
         microsoftTeams.initialize();
+        microsoftTeams.getContext((context) => {
+            setframeContext(context.frameContext);
+            sethostClientType(context.hostClientType);
+        });
+
         getCandidateDetails()
             .then((res) => {
                 console.log(res)
@@ -94,7 +101,7 @@ const BasicDetails = (props: IBasicDetailsProps) => {
             </Card.Header>
             <Card.Body>
                 <Flex gap="gap.small">
-                    <Flex column className="details details-border">
+                    <Flex column className={hostClientType == "web" || hostClientType == "desktop" ? "details details-border" : "detailsMobile details-border"}>
                         <Text content="Contact" weight="bold" />
                         <Flex column gap="gap.small">
                             <Flex >
