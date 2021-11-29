@@ -20,7 +20,7 @@ It also shows Device permissions for the browser. Please refer [Device permissio
 
 ![Local Running App](Images/home.PNG)
 
-![Permissions View](Images/devicePermBrowser.png)
+![Permissions View](Images/devicePermBrowser.PNG)
 
 ![Device Browser](Images/deviceBrowser.PNG)
 
@@ -82,9 +82,9 @@ This update will be generally available (GA) by February 01, 2022
 
 1. Device permissions on browser
 
-![Permissions View](Images/deviceBrowser.png)
+![Permissions View](Images/deviceBrowser.PNG)
 
-![Get Location](Images/devicePermBrowser.png)
+![Get Location](Images/devicePermBrowser.PNG)
 
 Similary, you can try out for other features.
 > [!IMPORTANT]
