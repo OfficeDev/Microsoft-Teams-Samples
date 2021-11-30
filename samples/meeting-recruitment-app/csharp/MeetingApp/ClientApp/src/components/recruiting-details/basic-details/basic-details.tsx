@@ -27,7 +27,6 @@ const BasicDetails = (props: IBasicDetailsProps) => {
     const [candidateDetails, setCandidateDetails] = React.useState<ICandidateDetails[]>([]);
     const [selectedIndex, setSelectedIndex] = React.useState(0);
     const [candidateNames, setCandidateNames] = React.useState<any[]>([]);
-    const [frameContext, setframeContext] = React.useState<any>('');
     const [hostClientType, sethostClientType] = React.useState<any>('');
 
     const handleNameChange = (event: any, dropdownProps?: any) => {
@@ -46,7 +45,6 @@ const BasicDetails = (props: IBasicDetailsProps) => {
     React.useEffect(() => {
         microsoftTeams.initialize();
         microsoftTeams.getContext((context) => {
-            setframeContext(context.frameContext);
             sethostClientType(context.hostClientType);
         });
 

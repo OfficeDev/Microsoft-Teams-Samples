@@ -4,13 +4,11 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import "../../recruiting-details/recruiting-details.css"
 
 const Timeline = () => {
-    const [frameContext, setframeContext] = React.useState<any>('');
     const [hostClientType, sethostClientType] = React.useState<any>('');
 
     React.useEffect(() => {
         microsoftTeams.initialize();
         microsoftTeams.getContext((context) => {
-            setframeContext(context.frameContext);
             sethostClientType(context.hostClientType);
         });
     }, []);
