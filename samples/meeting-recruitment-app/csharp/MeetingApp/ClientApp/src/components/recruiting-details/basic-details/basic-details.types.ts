@@ -22,5 +22,8 @@ export interface IQuestionSet {
 }
 
 export interface IAssetDetails {
- message: string;
+  message: string;
+  sharedBy: string;
+  meetingId?: string;
+  files: Array<string>;
 }

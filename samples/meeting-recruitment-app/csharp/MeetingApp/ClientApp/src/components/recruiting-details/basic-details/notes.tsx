@@ -12,6 +12,7 @@ export interface INotesProps {
 const Notes = (props: INotesProps) => {
 
     const [notes, setNotes] = React.useState<any[]>([]);
+    const [hostClientType, sethostClientType] = React.useState<any>('');
 
     // Method to start task module to add a note.
     const addNotesTaskModule = () => {
@@ -33,7 +34,8 @@ const Notes = (props: INotesProps) => {
                 const noteDetails: INoteDetails = {
                     candidateEmail: props.currentCandidateEmail,
                     note: note,
-                    addedBy: context.userPrincipalName!
+                    addedBy: context.userPrincipalName!,
+                    meetingId: context.meetingId!,
                 };
 
                 // API call to save the question to storage.
@@ -52,9 +54,7 @@ const Notes = (props: INotesProps) => {
     const loadNotes = () => {
         getNotes(props.currentCandidateEmail)
             .then((res) => {
-                console.log(res)
                 const notes = res.data as INoteDetails[];
-                console.log(notes);
                 setNotes(notes)
             })
             .catch((ex) => {
@@ -64,6 +64,9 @@ const Notes = (props: INotesProps) => {
 
     React.useEffect((): any => {
         microsoftTeams.initialize();
+        microsoftTeams.getContext((context) => {
+            sethostClientType(context.hostClientType);
+        });
         loadNotes();
     }, [props.currentCandidateEmail])
 
@@ -84,7 +87,7 @@ const Notes = (props: INotesProps) => {
                 <hr className="details-separator" />
             </Card.Header>
             <Card.Body>
-                <Flex className="notesContainer" column>
+                <Flex className={hostClientType == "web" || hostClientType == "desktop" ? "notesContainer" :"notesContainerMobile"} column>
                     {notes.length == 0 && <Text content="No notes yet" />}
                     {
                         notes.length > 0 && notes.map((noteDetail: INoteDetails, index) => {

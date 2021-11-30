@@ -39,12 +39,16 @@ namespace MeetingApp.Controllers
             {
                 // Getting stored conversation data reference.
                 var currentRosterInfo = new ConversationData();
-                _conversationDataReference.TryGetValue("conversationData", out currentRosterInfo);
-                if (currentRosterInfo == null)
+                _conversationDataReference.TryGetValue(notesEntity.MeetingId, out currentRosterInfo);
+
+                if (currentRosterInfo != null && currentRosterInfo.Roster != null && currentRosterInfo.Roster.Any(entity => entity.Email == notesEntity.AddedBy))
                 {
-                    throw new ArgumentNullException(nameof(currentRosterInfo));
+                    notesEntity.AddedByName = currentRosterInfo.Roster.Length > 0 ? currentRosterInfo.Roster.Where(entity => entity.Email == notesEntity.AddedBy).FirstOrDefault().Name : "Unknown";
                 }
-                notesEntity.AddedByName = currentRosterInfo.Roster.Length > 0 ? currentRosterInfo.Roster.Where(entity => entity.Email == notesEntity.AddedBy).FirstOrDefault().Name: "Unknown";
+                else
+                {
+                    notesEntity.AddedByName = notesEntity.AddedBy;
+                }
                 var result = await this._notesRepository.StoreOrUpdateQuestionEntityAsync(notesEntity);
                 if (result == null) return NotFound();
                 return Ok(result);

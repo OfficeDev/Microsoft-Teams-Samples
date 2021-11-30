@@ -29,9 +29,6 @@ const ShareAssets = (): React.ReactElement => {
 
     React.useEffect(() => {
         microsoftTeams.initialize();
-        microsoftTeams.getContext((context) => {
-            console.log(context)
-        })
     }, [])
 
     const saveNote = () => {
