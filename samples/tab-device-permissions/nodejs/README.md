@@ -19,7 +19,7 @@ This sample shows [tab device permissions](https://docs.microsoft.com/microsoftt
 It also shows Device permissions for the browser. Please refer [Device permissions for browser](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/device-capabilities/browser-device-permissions) for more information.
 
 Mobile View
-![Mobile View](Images/mobileHome.png)
+![Mobile Demo](Images/mainTab1.png)
 
 Desktop View
 ![Desktop View](Images/desktopHome.png)
@@ -69,7 +69,8 @@ This update will be generally available (GA) by February 01, 2022
  
  6) Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app") ans start using the app.
 
-![Local Running App](Images/home.PNG)
+Local Running App:
+
 1. [Upload an app package](https://docs.microsoft.com/microsoftteams/platform/concepts/deploy-and-publish/apps-upload) (Zip file created in step 3 above) to Microsoft Teams
 ![Install App](Images/install.png)
 1. Go to Device permission tab.
