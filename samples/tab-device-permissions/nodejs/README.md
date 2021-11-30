@@ -18,11 +18,11 @@ This sample shows [tab device permissions](https://docs.microsoft.com/microsoftt
 
 It also shows Device permissions for the browser. Please refer [Device permissions for browser](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/device-capabilities/browser-device-permissions) for more information.
 
-![Local Running App](Images/home.PNG)
+Mobile View
+![Mobile View](Images/mobileHome.png)
 
-![Permissions View](Images/deviceBrowser.PNG)
-
-![Device Browser](Images/devicePermBrowser.PNG)
+Desktop View
+![Desktop View](Images/desktopHome.png)
 
 ```
 The latest update on how device permissions are handled in the browser is currently available in public developer preview
@@ -82,9 +82,13 @@ This update will be generally available (GA) by February 01, 2022
 
 1. Device permissions on browser
 
-![Permissions View](Images/deviceBrowser.PNG)
+![Desktop View](Images/desktopHome.png)
 
-![Get Location](Images/devicePermBrowser.PNG)
+![Error View](Images/errorView.png)
+
+![Permission View](Images/deviceBrowser.PNG)
+
+![Final View](Images/devicePermBrowser.PNG)
 
 Similary, you can try out for other features.
 > [!IMPORTANT]
