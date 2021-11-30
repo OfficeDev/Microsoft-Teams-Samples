@@ -1,0 +1,48 @@
+<head>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        microsoftTeams.initialize();
+
+        function submit() {
+            const input = document.querySelector('input[type="file"]');
+            const file = input.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+
+            setTimeout(function () {
+                $.ajax({
+                    url: '/Save',
+                    type: "POST",
+                    data: formData,
+                    mimeType: "multipart/form-data",
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function (response) {
+                        console.log(response);
+                        microsoftTeams.tasks.submitTask();
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    },
+                });
+            }, 700);
+        };
+
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            <div>
+                <input type="file" name="file" id="file" accept=".docx, .pdf, .xlsx">
+                <button type="button" onclick="submit()">Upload</button>
+            </div>
+        </div>
+    </div>
+</body>

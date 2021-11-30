@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Inspection demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js" integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        #mainDiv {
+            padding-left: 5%;
+            padding-top: 2%;
+        }
+         .flex-container {
+            display: flex;
+        }
+ 
+        .flex-container > div {
+            margin: 10px;
+            padding: 10px;
+        }
+ 
+        .container {
+            height: auto;
+            margin: 0 auto;
+            padding: 10px;
+            position: relative;
+            margin-left: 65px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body id=mainDiv>
+    <h4>Product Inspection</h4>
+    <br />
+    <div class="flex-container">
+        <div><img src="" id="desktop"><div class="container">Desktop</div></div>
+        <div><img src="" id="laptop"><div class="container"><span>Laptop</span></div></div>
+        <div><img src="" id="mobile"><div class="container"><span>Mobile</span></div></div>
+    </div>
+    <br />
+    <br />
+    <button type="button" class="btn btn-outline-info" id="btnInspectProduct">Inspect product</button>
+    <br />
+    <br />
+    <button type="button" class="btn btn-outline-info" id="btnViewProduct">View product status</button>
+
+    <script>
+        $(document).ready(function () {
+            microsoftTeams.initialize();
+            $("#desktop").attr("src", `${window.location.origin}/Images/01DU890.png`);
+            $("#laptop").attr("src", `${window.location.origin}/Images/01SD001.png`);
+            $("#mobile").attr("src", `${window.location.origin}/Images/01PM998.png`);
+        });
+
+        $("#btnInspectProduct").on('click', function (e) {
+            let taskInfo = {
+                title: null,
+                height: null,
+                width: null,
+                url: null,
+                card: null,
+                fallbackUrl: null,
+                completionBotId: null,
+            };
+
+            taskInfo.url = window.location.origin +"/scanProduct";
+            taskInfo.title = "Scan Product";
+            taskInfo.height = 510;
+            taskInfo.width = 430;
+            submitHandler = (err, result) => {
+                console.log(`Submit handler - err: ${err}`);
+            };
+            microsoftTeams.tasks.startTask(taskInfo, submitHandler);          
+        })
+
+        $("#btnViewProduct").on('click', function (e){
+            let taskInfo = {
+                title: null,
+                height: null,
+                width: null,
+                url: null,
+                card: null,
+                fallbackUrl: null,
+                completionBotId: null,
+            };
+
+            taskInfo.url = window.location.origin +"/viewProductDetail";
+            taskInfo.title = "View product";
+            taskInfo.height = 510;
+            taskInfo.width = 430;
+            submitHandler = (err, result) => {
+                console.log(`Submit handler - err: ${err}`);
+            };
+            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+        })
+    </script>
+</body>
+
+</html>

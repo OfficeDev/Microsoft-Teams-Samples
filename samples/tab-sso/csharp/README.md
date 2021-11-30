@@ -1,4 +1,20 @@
-﻿# Teams Tab SSO Authentication
+﻿---
+page_type: sample
+products:
+- office-teams
+- office
+- office-365
+languages:
+- csharp
+title: Microsoft Teams NodeJS Helloworld - Tabs Azure AD SSO Sample
+description: Microsoft Teams hello world sample app for tabs Azure AD SSO in Node.js
+extensions:
+  contentType: samples
+  createdDate: 11/3/2017 12:53:17 PM
+---
+
+# Tabs Azure AD Single Sign-On Sample
+
 This sample illustrates how to implement SSO authentication for Teams Tab.
 
 ## Prerequisites
@@ -64,7 +80,7 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
     Set a redirect URI:
     * Select **Add a platform**.
     * Select **web**.
-    * Enter the **redirect URI** for the app in the following format: https://%ngrokDomain%.ngrok.io/End. This will be the page where a successful implicit grant flow will redirect the user.
+    * Enter the **redirect URI** for the app in the following format: https://%ngrokDomain%.ngrok.io/Auth/End. This will be the page where a successful implicit grant flow will redirect the user.
     
     Enable implicit grant by checking the following boxes:  
     ✔ ID Token  

@@ -1,3 +1,17 @@
+---
+page_type: sample
+description: Teams catering bot demonstrating how to use Universal bots in Teams
+products:
+- office-teams
+- office
+- office-365
+languages:
+- csharp
+extensions:
+contentType: samples
+createdDate: "25-05-2021 13:38:26"
+---
+
 # Teams Catering Bot
 
 Bot Framework v1.4 TeamsCateringBot sample.

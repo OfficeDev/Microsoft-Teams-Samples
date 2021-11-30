@@ -1,4 +1,19 @@
-# Tabs
+---
+page_type: sample
+description: Sample channel and group tab hello world app.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- typescript
+- nodejs
+extensions:
+contentType: samples
+createdDate: "07-07-2021 13:38:27"
+---
+
+# Tabs quick start
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
 
@@ -39,3 +54,4 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+

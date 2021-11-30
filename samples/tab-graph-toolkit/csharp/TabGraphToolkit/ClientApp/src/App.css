@@ -1,0 +1,11 @@
+.app {
+  text-align: left;
+}
+
+.title {
+    font-size: 16px;
+    font-weight: bold;
+}
+.container-div {
+    margin:1rem;
+}

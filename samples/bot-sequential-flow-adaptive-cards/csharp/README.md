@@ -1,4 +1,19 @@
-﻿# sequential-workflow-adaptive-card
+---
+page_type: sample
+description: Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- csharp
+extensions:
+contentType: samples
+createdDate: "07-07-2021 13:38:26"
+---
+
+# Sequential workflow adaptive cards
+
 This sample illustrates sequential workflow, user specific views and upto date adaptive cards bot.
 
 ## Prerequisites
@@ -60,4 +75,5 @@ This sample illustrates sequential workflow, user specific views and upto date a
 6. After the approval/rejection of the card, the final updated card will be sent to the group chat.
 
   ![image](https://user-images.githubusercontent.com/80379013/123652838-4616a200-d84a-11eb-96c4-580979287b63.png)
+
 
