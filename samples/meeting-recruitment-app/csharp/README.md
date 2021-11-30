@@ -142,10 +142,14 @@ It has meeting details and in-meeting app that helps in the interview process.
    This is used to share assets to the candidate.
    ![Share Assets](MeetingApp/Images/share_assets.png)
    
-6) Mobile view:
+6) Mobile view: Details tab
    ![Details tab](MeetingApp/Images/details_tab_mobile.png)
    
+   - Action on Questions:
+   
    ![Question](MeetingApp/Images/question_mobile.png)
+   
+   - Sidepanel view
    
    ![Sidepanel mobile](MeetingApp/Images/sidepanel_mobile.png)
   
