@@ -1,7 +1,18 @@
+import * as React from 'react';
 import { Flex, Card, Text, NotesIcon } from '@fluentui/react-northstar'
+import * as microsoftTeams from "@microsoft/teams-js";
 import "../../recruiting-details/recruiting-details.css"
 
 const Timeline = () => {
+    const [hostClientType, sethostClientType] = React.useState<any>('');
+
+    React.useEffect(() => {
+        microsoftTeams.initialize();
+        microsoftTeams.getContext((context) => {
+            sethostClientType(context.hostClientType);
+        });
+    }, []);
+
     return (
         <Card fluid aria-roledescription="card with basic details" className="timeline-card">
             <Card.Header>
@@ -12,7 +23,7 @@ const Timeline = () => {
             </Card.Header>
             <Card.Body>
                 <Flex gap="gap.small" className="timeline" column>
-                    <Flex gap="gap.small" className="timelineContainer">
+                    <Flex gap="gap.small" className={hostClientType == "web" || hostClientType == "desktop" ? "timelineContainer" : "timelineContainerMobile"}>
                         <Flex column className="timelineDetail">
                             <Text content='26 Nov, 2020' weight="bold" />
                             <Text content='14:00' />
@@ -33,7 +44,7 @@ const Timeline = () => {
                             <NotesIcon />
                         </Flex>
                     </Flex>
-                    <Flex gap="gap.small" className="timelineContainer">
+                    <Flex gap="gap.small" className={hostClientType == "web" || hostClientType == "desktop" ? "timelineContainer" : "timelineContainerMobile"}>
                         <Flex column className="timelineDetail">
                             <Text content='26 Nov, 2020' weight="bold" />
                             <Text content='14:00' />
