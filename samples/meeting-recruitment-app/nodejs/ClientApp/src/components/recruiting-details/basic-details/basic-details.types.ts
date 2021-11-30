@@ -26,5 +26,5 @@ export interface IQuestionSet {
 // Type for asset details
 export interface IAssetDetails {
  message: string;
- sharedBy: string;
+ files: Array<string>;
 }

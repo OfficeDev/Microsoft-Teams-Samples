@@ -28,6 +28,7 @@ const BasicDetails = (props: IBasicDetailsProps) => {
     const [candidateDetails, setCandidateDetails] = React.useState<ICandidateDetails[]>([]);
     const [selectedIndex, setSelectedIndex] = React.useState(0);
     const [candidateNames, setCandidateNames] = React.useState<any[]>([]);
+    const [hostClientType, sethostClientType] = React.useState<any>('');
 
     const handleNameChange = (event: any, dropdownProps?: any) => {
         setSelectedIndex(dropdownProps.value.key);
@@ -44,6 +45,10 @@ const BasicDetails = (props: IBasicDetailsProps) => {
 
     React.useEffect(() => {
         microsoftTeams.initialize();
+        microsoftTeams.getContext((context) => {
+            sethostClientType(context.hostClientType);
+        });
+
         getCandidateDetails()
             .then((res) => {
                 const data = res.data as ICandidateDetails[];
@@ -94,7 +99,7 @@ const BasicDetails = (props: IBasicDetailsProps) => {
             </Card.Header>
             <Card.Body>
                 <Flex gap="gap.small">
-                    <Flex column className="details details-border">
+                    <Flex column className={hostClientType == "web" || hostClientType == "desktop" ? "details details-border" : "detailsMobile details-border"}>
                         <Text content="Contact" weight="bold" />
                         <Flex column gap="gap.small">
                             <Flex >
@@ -107,7 +112,7 @@ const BasicDetails = (props: IBasicDetailsProps) => {
                             </Flex>
                         </Flex>
                     </Flex>
-                    <Flex column className="details details-border">
+                    <Flex column className={hostClientType == "web" || hostClientType == "desktop" ? "details details-border" : "detailsMobile details-border"}>
                         <Text content="Skills" weight="bold" />
                         <Text content={candidateDetails[selectedIndex]?.Skills} size="small" />
                     </Flex>

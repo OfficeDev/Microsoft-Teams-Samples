@@ -16,7 +16,6 @@ export interface IBasicDetailsMobileProps {
 const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
     const [candidateDetails, setCandidateDetails] = React.useState<ICandidateDetails[]>([]);
     const [skills, setSkills] = React.useState<string[]>([]);
-    const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
 
     const openShareTaskModule = () => {
         let taskInfo = {
@@ -32,21 +31,28 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
                 return
             }
 
+            var details = JSON.parse(note);
+            let files = new Array();
+            details.checkedValues.map((item: any) => {
+                if (item.isChecked == true) {
+                    files.push(item.name);
+                }
+            })
+
             if (note !== undefined) {
-                microsoftTeams.getContext((context: any) => {
-                    const assetDetail: IAssetDetails = {
-                        message: note,
-                        sharedBy: context.userPrincipalName!
-                    }
-                    shareAssets(assetDetail)
-                        .then((res) => {
-                            console.log(res)
-                        })
-                        .catch((ex) => {
-                            console.log("Some error occurred while sharing the assets info");
-                            console.log(ex);
-                        });
-                })
+                const assetDetail: IAssetDetails = {
+                    message: details.note,
+                    files: files,
+                }
+
+                shareAssets(assetDetail)
+                    .then((res) => {
+                        console.log(res)
+                    })
+                    .catch((ex) => {
+                        console.log("Some error occurred while sharing the assets info");
+                        console.log(ex);
+                    });
             }
         })
     }
@@ -64,10 +70,6 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
             });
     }, [])
 
-    React.useEffect( () => {
-        setSelectedIndex(props.selectedIndex);
-    }, [props.selectedIndex])
-
     return (
         <Card fluid aria-roledescription="card with basic details" className="basic-details-card-mobile">
             <Card.Header>
@@ -83,18 +85,18 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
                             status="unknown"
                         />
                         <Flex column>
-                            <Text content={candidateDetails[selectedIndex]?.CandidateName} />
-                            <Text content={candidateDetails[selectedIndex]?.Role} size="small" className="roleText" />
+                            <Text content={candidateDetails[props.selectedIndex]?.CandidateName} />
+                            <Text content={candidateDetails[props.selectedIndex]?.Role} size="small" className="roleText" />
                         </Flex>
                     </Flex>
                     <Flex column>
                         <Flex gap="gap.small">
                             <Text content="Experience" size="small" className="expLabel" />
-                            <Text content={candidateDetails[selectedIndex]?.Experience} size="small" />
+                            <Text content={candidateDetails[props.selectedIndex]?.Experience} size="small" />
                         </Flex>
                         <Flex gap="gap.small">
                             <Text content="Education" size="small" />
-                            <Text content={candidateDetails[selectedIndex]?.Education} size="small" className="education" />
+                            <Text content={candidateDetails[props.selectedIndex]?.Education} size="small" className="education" />
                         </Flex>
                     </Flex>
                     <Flex column>
@@ -112,10 +114,10 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
                         <Header as="h5" content="Links" className="subHeaders" />
                         <Flex gap="gap.small" className="linkIcons">
                             <img src={LinkedInLogo} alt="Linked in icon" onClick={() => {
-                                window.open(candidateDetails[selectedIndex].LinkedInUrl)
+                                window.open(candidateDetails[props.selectedIndex].LinkedInUrl)
                             }} />
                             <img src={TwitterLogo} alt="Twitter icon" onClick={() => {
-                                window.open(candidateDetails[selectedIndex].TwitterUrl)
+                                window.open(candidateDetails[props.selectedIndex].TwitterUrl)
                             }} />
                         </Flex>
                         <Flex gap="gap.small">

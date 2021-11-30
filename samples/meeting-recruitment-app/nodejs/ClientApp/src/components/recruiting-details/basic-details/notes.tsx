@@ -12,6 +12,7 @@ export interface INotesProps {
 // Component for Notes details
 const Notes = (props: INotesProps) => {
     const [notes, setNotes] = React.useState<any[]>([]);
+    const [hostClientType, sethostClientType] = React.useState<any>('');
 
     // Method to start task module to add a note.
     const addNotesTaskModule = () => {
@@ -62,6 +63,9 @@ const Notes = (props: INotesProps) => {
 
     React.useEffect((): any => {
         microsoftTeams.initialize();
+        microsoftTeams.getContext((context) => {
+            sethostClientType(context.hostClientType);
+        });
         loadNotes();
     }, [props.currentCandidateEmail])
 
@@ -82,7 +86,7 @@ const Notes = (props: INotesProps) => {
                 <hr className="details-separator" />
             </Card.Header>
             <Card.Body>
-                <Flex className="notesContainer" column>
+                <Flex className={hostClientType == "web" || hostClientType == "desktop" ? "notesContainer" :"notesContainerMobile"} column>
                     {notes.length == 0 && <Text content="No notes yet" />}
                     {
                         notes.length > 0 && notes.map((noteDetail: INoteDetails, index) => {
