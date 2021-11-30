@@ -14,25 +14,63 @@ createdDate: "27-07-2021 16:32:33"
 
 # Tab Device Permission Demo
 
-This is demo app to for [tab device permissions](https://docs.microsoft.com/microsoftteams/platform/concepts/device-capabilities/device-capabilities-overview).
-## Getting started
-1. Install some sort of tunnelling service. These instructions assume you are using ngrok: https://ngrok.com/
-1. Begin your tunnelling service to get an https endpoint. For this example ngrok is used. Start an ngrok tunnel with the following command (you'll need the https endpoint for the bot registration):<br>
+This sample shows [tab device permissions](https://docs.microsoft.com/microsoftteams/platform/concepts/device-capabilities/device-capabilities-overview).
+
+It also shows Device permissions for the browser. Please refer [Device permissions for browser](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/device-capabilities/browser-device-permissions) for more information.
+
+Mobile View
+![Mobile Demo](Images/mainTab1.png)
+
+Desktop View
+![Desktop View](Images/desktopHome.png)
+
+```
+The latest update on how device permissions are handled in the browser is currently available in public developer preview
+only.
+
+This update will be generally available (GA) by February 01, 2022
+```
+## Prerequisites
+- Microsoft Teams is installed and you have an account (not a guest account)
+-  [NodeJS](https://nodejs.org/en/)
+-  [ngrok](https://ngrok.com/) or equivalent tunneling solution
+-  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
+   appropriate permissions to install an app.
+    
+## To try this sample
+1) Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+2) In the folder where repository is cloned navigate to `samples/tab-device-permissions/nodejs`.
+
+3) Install modules
+
+   Inside node js folder, open your local terminal and run the below command to install node modules. 
+   You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+
+    ```bash
+    npm install
+    ```
+ 4) Run the application in your local terminal (or Visual Studio Code terminal) using following command 
+    
+     ```bash
+    npm start
+    ```
+ 5) Begin your tunnelling service to get an https endpoint. For this example ngrok is used. Start an ngrok tunnel with the following command (you'll need the https endpoint     to update the manifest file):<br>
     ```bash
     ngrok http 3000 --host-header=localhost
     ```
-1. Create an app manifest. Navigate to the file, manifest/manifest.json - Change:
-    1. <<BASE_URI_DOMAIN>> change to your https endpoint from ngrok excluding the "https://" part
-    1. Save the file and zip this file along with both the png icons (located next to it) together to create a manifest.zip file
-## See it running
-1. Clone the sample and open it in Visual Studio Code. (Look at [similar steps if you are not sure](https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-nodejs-app-studio?tabs=AS#download-the-sample))
+ 6) Create an app manifest. Navigate to the file, appPackage/manifest.json and change the following:
+    1. <<BASE_URI_DOMAIN>> to your https endpoint from ngrok excluding the "https://" part
+    2. Save the file and zip this file along with both the png icons (located next to it) together to create a manifest.zip file.
+ 
+ 6) Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app") ans start using the app.
 
-## Build and Run
-In the project directory, execute:
-`npm install`
-`npm start`
+Local Running App:
 
-![Local Running App](Images/home.PNG)
 1. [Upload an app package](https://docs.microsoft.com/microsoftteams/platform/concepts/deploy-and-publish/apps-upload) (Zip file created in step 3 above) to Microsoft Teams
 ![Install App](Images/install.png)
 1. Go to Device permission tab.
@@ -42,6 +80,16 @@ In the project directory, execute:
 ![Mobile Demo](Images/mainTab1.png)
 ![Mobile Demo](Images/mainTab2.png)
 ![Mobile Demo](Images/captureImage.png)
+
+1. Device permissions on browser
+
+![Desktop View](Images/desktopHome.png)
+
+![Error View](Images/errorView.png)
+
+![Permission View](Images/deviceBrowser.PNG)
+
+![Final View](Images/devicePermBrowser.PNG)
 
 Similary, you can try out for other features.
 > [!IMPORTANT]
