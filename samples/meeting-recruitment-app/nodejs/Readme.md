@@ -116,6 +116,18 @@ It has meeting details and in-meeting app that helps in the interview process.
    
    ![Share Assets](Images/share_assets.png)
 
+6) Mobile view: Details tab
+
+   ![Details tab](Images/details_tab_mobile.png)
+   
+   - Action on Questions:
+   
+   ![Question](Images/question_mobile.png)
+   
+   - Sidepanel view
+   
+   ![Sidepanel mobile](Images/sidepanel_mobile.png)
+
 ## Testing the bot using Bot Framework Emulator
 
 [Bot Framework Emulator](https://github.com/microsoft/botframework-emulator) is a desktop application that allows bot developers to test and debug their bots on localhost or running remotely through a tunnel.

@@ -158,10 +158,12 @@ max-height: 22vh;
 .container-mobile {
     background-color: #000;
     color: #fff;
-    max-width: 100vw;
+    max-width: 85vw;
     min-height: 80vh;
     padding: 1%;
+    margin-left: 2rem;
 }
+
 .menu-item{
     border-bottom: none !important;
 }
