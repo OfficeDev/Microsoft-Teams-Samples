@@ -161,6 +161,7 @@ max-height: 100vh;
     max-width: 85vw;
     min-height: 80vh;
     padding: 1%;
+    margin-left:2rem;
 }
 
 .menu-item{
