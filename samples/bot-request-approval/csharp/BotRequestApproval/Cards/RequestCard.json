@@ -1,0 +1,53 @@
+﻿{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Please fill the details for your request"
+    },
+    {
+      "type": "Input.Text",
+      "label": "Request title",
+      "placeholder": "Request title",
+      "id": "requestTitle"
+    },
+    {
+      "type": "Input.Text",
+      "label": "Request description",
+      "placeholder": "request description",
+      "id": "requestdescription"
+    },
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Select manager"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "choices": [],
+      "choices.data": {
+        "type": "Data.Query",
+        "dataset": "graph.microsoft.com/users"
+      },
+      "id": "people-picker",
+      "isMultiSelect": false
+    },
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.Submit",
+          "title": "Submit",
+          "data": {
+            "isFromAdaptiveCard": true
+          }
+        }
+      ]
+    }
+  ],
+  "type": "AdaptiveCard",
+  "version": "1.2"
+}
