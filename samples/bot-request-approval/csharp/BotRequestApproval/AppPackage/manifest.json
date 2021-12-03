@@ -1,9 +1,9 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.10/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.10",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.11",
   "version": "1.0.0",
   "id": "{{Microsoft-App-Id}}",
-  "packageName": "com.microsoft.teams.appcheckinlocation",
+  "packageName": "com.microsoft.teams.botrequestapproval",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -11,12 +11,12 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "App check in location",
-    "full": "Get check in location of user"
+    "short": "Bot request approval",
+    "full": "User can send task request to his manager using bot"
   },
   "description": {
-    "short": "App check in location",
-    "full": "This sample shows feature where user can checkin with current location and view all previous checkins."
+    "short": "Bot request approval",
+    "full": "This sample shows feature where user can send task request to his manager and manager can approve/reject request."
   },
   "icons": {
     "outline": "outline.png",
@@ -26,33 +26,14 @@
   "bots": [
     {
       "botId": "{{Microsoft-App-Id}}",
+      "needsChannelSelector": false,
       "scopes": [
-        "personal"
-      ],
-      "commandLists": [
-        {
-          "scopes": [
-            "personal"
-          ],
-          "commands": [
-            {
-              "title": "checkin",
-              "description": "To check in current location"
-            },
-            {
-              "title": "viewcheckin",
-              "description": "To get all last checkin locations"
-            }
-          ]
-        }
+        "groupchat"
       ],
       "isNotificationOnly": false
     }
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
-  "devicePermissions": [
-    "geolocation"
-  ],
   "validDomains": [
     "{{domain-name}}"
   ]

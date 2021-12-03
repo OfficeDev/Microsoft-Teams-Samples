@@ -4,17 +4,14 @@
 // Generated with Bot Builder V4 SDK Template for Visual Studio v4.14.0
 
 using BotRequestApproval.Bots;
-using BotRequestApproval.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
-using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 
 namespace BotRequestApproval
 {
@@ -44,7 +41,7 @@ namespace BotRequestApproval
             // Create the Conversation state. (Used by the Dialog system itself.)
             services.AddSingleton<ConversationState>();
 
-            services.AddSingleton<ConcurrentDictionary<string, ConversationReference>>();
+            services.AddSingleton<ConcurrentDictionary<string, string>>();
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
             services.AddTransient<IBot, ActivityBot>();
         }

@@ -1,23 +1,97 @@
 ﻿{
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "refresh": {
+    "action": {
+      "type": "Action.Execute",
+      "title": "Submit",
+      "verb": "refresh",
+      "data": {
+        "RequestTitle": "${requestTitle}",
+        "RequestDescription": "${requestDescription}",
+        "AssignedTo": "${assignedTo}",
+        "CreatedBy": "${createdBy}",
+        "CreatedById": "${createdById}",
+        "AssignedToName": "${assignedToName}",
+        "UserMRI": "${userMRI}"
+      }
+    },
+    "userIds": [
+      "${userMRI}"
+    ]
+  },
   "body": [
     {
-      "type": "TextBlock",
-      "size": "Medium",
-      "weight": "Bolder",
-      "text": "Request details"
+      "type": "Container",
+      "style": "emphasis",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "size": "Medium",
+                  "weight": "Bolder",
+                  "text": "Request details"
+                }
+              ],
+              "width": "stretch"
+            },
+            {
+              "type": "Column",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "size": "Medium",
+                  "weight": "Bolder",
+                  "text": "Pending"
+                }
+              ],
+              "width": "auto"
+            }
+          ]
+        }
+      ],
+      "bleed": true
     },
     {
-      "type": "TextBlock",
-      "size": "Default",
-      "weight": "Default",
-      "text": "Request title : ${Title}"
-    },
-    {
-      "type": "TextBlock",
-      "size": "Medium",
-      "weight": "Default",
-      "text": "Request description : ${Description}"
+      "type": "Container",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "FactSet",
+                  "facts": [
+                    {
+                      "title": "**Request title:**",
+                      "value": "${requestTitle}"
+                    },
+                    {
+                      "title": "**Request description:**",
+                      "value": "${requestDescription}"
+                    },
+                    {
+                      "title": "**Created By:**",
+                      "value": "${createdBy}"
+                    },
+                    {
+                      "title": "**Assigned To:**",
+                      "value": "${assignedToName}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "type": "ActionSet",
@@ -27,6 +101,24 @@
           "title": "Edit",
           "card": {
             "type": "AdaptiveCard",
+            "refresh": {
+              "action": {
+                "type": "Action.Execute",
+                "title": "Submit",
+                "verb": "refresh",
+                "data": {
+                  "RequestTitle": "${requestTitle}",
+                  "RequestDescription": "${requestDescription}",
+                  "AssignedTo": "${assignedTo}",
+                  "CreatedBy": "${createdBy}",
+                  "AssignedToName": "${assignedToName}",
+                  "UserMRI": "${userMRI}"
+                }
+              },
+              "userIds": [
+                "${userMRI}"
+              ]
+            },
             "body": [
               {
                 "type": "Input.Text",
@@ -42,8 +134,8 @@
               },
               {
                 "type": "TextBlock",
-                "size": "Medium",
-                "weight": "Bolder",
+                "size": "Default",
+                "weight": "Default",
                 "text": "Select manager"
               },
               {
@@ -51,20 +143,22 @@
                 "choices": [],
                 "choices.data": {
                   "type": "Data.Query",
-                  "dataset": "graph.microsoft.com/users"
+                  "dataset": "graph.microsoft.com/users?scope=currentContext"
                 },
-                "id": "people-picker",
+                "id": "AssignedTo",
                 "isMultiSelect": false
               },
               {
                 "type": "ActionSet",
                 "actions": [
                   {
-                    "type": "Action.Submit",
+                    "type": "Action.Execute",
+                    "verb": "requestCard",
                     "title": "Submit",
                     "data": {
-                      "isFromAdaptiveCard": true,
-                      "requestId": "${TaskId}"
+                      "CreatedBy": "${createdBy}",
+                      "AssignedTo": "${assignedTo}",
+                      "UserMRI": "${userMRI}"
                     }
                   }
                 ]
@@ -73,13 +167,17 @@
           }
         },
         {
-          "type": "Action.Submit",
+          "type": "Action.Execute",
+          "verb": "cancelCard",
           "title": "Cancel request",
           "data": {
-            "isFromAdaptiveCard": true,
-            "requestId": "${TaskId}"
+            "RequestTitle": "${requestTitle}",
+            "RequestDescription": "${requestDescription}",
+            "CreatedBy": "${createdBy}",
+            "AssignedTo": "${assignedTo}",
+            "AssignedToName": "${assignedToName}",
+            "UserMRI": "${userMRI}"
           }
-
         }
       ]
     }

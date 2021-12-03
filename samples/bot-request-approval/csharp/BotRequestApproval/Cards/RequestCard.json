@@ -17,7 +17,7 @@
       "type": "Input.Text",
       "label": "Request description",
       "placeholder": "request description",
-      "id": "requestdescription"
+      "id": "requestDescription"
     },
     {
       "type": "TextBlock",
@@ -30,19 +30,24 @@
       "choices": [],
       "choices.data": {
         "type": "Data.Query",
-        "dataset": "graph.microsoft.com/users"
+        "dataset": "graph.microsoft.com/users?scope=currentContext"
       },
-      "id": "people-picker",
+      "id": "AssignedTo",
       "isMultiSelect": false
     },
     {
       "type": "ActionSet",
       "actions": [
         {
-          "type": "Action.Submit",
+          "type": "Action.Execute",
+          "verb": "requestCard",
           "title": "Submit",
           "data": {
-            "isFromAdaptiveCard": true
+            "CreatedBy": "${createdBy}",
+            "AssignedTo": "${assignedTo}",
+            "UserMRI": "${userMRI}",
+            "RequestTitle": "${requestTitle}",
+            "RequestDescription": "${requestDescription}"
           }
         }
       ]
