@@ -2,6 +2,8 @@
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
+using System.Collections.Generic;
+
 namespace BotRequestApproval.Models
 {
     /// <summary>
@@ -31,7 +33,7 @@ namespace BotRequestApproval.Models
     {
         public string CreatedBy { get; set; }
         public string CreatedById { get; set; }
-        public string UserId { get; set; }
+        public List<string> UserId { get; set; }
         public string RequestTitle { get; set; }
         public string RequestDescription { get; set; }
         public string AssignedTo { get; set; }

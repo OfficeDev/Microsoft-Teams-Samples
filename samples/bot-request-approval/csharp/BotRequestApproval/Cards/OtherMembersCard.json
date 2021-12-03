@@ -1,22 +1,5 @@
 ﻿{
-  "type": "AdaptiveCard",
-  "refresh": {
-    "action": {
-      "type": "Action.Execute",
-      "title": "Submit",
-      "verb": "refreshforothers",
-      "data": {
-        "RequestTitle": "${requestTitle}",
-        "RequestDescription": "${requestDescription}",
-        "AssignedTo": "${assignedTo}",
-        "CreatedBy": "${createdBy}",
-        "CreatedById": "${createdById}",
-        "AssignedToName": "${assignedToName}",
-        "UserMRI": "${userMRI}"
-      }
-    },
-    "userIds": "${userId}"
-  },
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
   "body": [
     {
       "type": "Container",
@@ -90,39 +73,8 @@
           ]
         }
       ]
-    },
-    {
-      "type": "ActionSet",
-      "actions": [
-        {
-          "type": "Action.Execute",
-          "verb": "approved",
-          "title": "Approve",
-          "data": {
-            "CreatedBy": "${createdBy}",
-            "RequestTitle": "${requestTitle}",
-            "RequestDescription": "${requestDescription}",
-            "AssignedTo": "${assignedTo}",
-            "AssignedToName": "${assignedToName}",
-            "UserMRI": "${userMRI}"
-          }
-        },
-        {
-          "type": "Action.Execute",
-          "verb": "rejected",
-          "title": "Reject",
-          "data": {
-            "CreatedBy": "${createdBy}",
-            "RequestTitle": "${requestTitle}",
-            "RequestDescription": "${requestDescription}",
-            "AssignedTo": "${assignedTo}",
-            "AssignedToName": "${assignedToName}",
-            "UserMRI": "${userMRI}"
-          }
-        }
-      ]
     }
   ],
-  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-  "version": "1.4"
+  "type": "AdaptiveCard",
+  "version": "1.2"
 }

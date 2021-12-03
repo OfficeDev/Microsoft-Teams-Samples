@@ -12,6 +12,7 @@ using BotRequestApproval.Models;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
+using Microsoft.Bot.Schema.Teams;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -23,6 +24,8 @@ namespace BotRequestApproval.Bots
     public class ActivityBot : TeamsActivityHandler
     {
         private readonly ConcurrentDictionary<string, string> _conversationReferences;
+
+        private List<string> memberDetails = new List<string> { };
 
         public ActivityBot(ConcurrentDictionary<string, string> conversationReferences)
         {
@@ -39,7 +42,7 @@ namespace BotRequestApproval.Bots
         {
             string[] path = { ".", "Cards", "InitialCard.json" };
             var member = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
-            _conversationReferences.AddOrUpdate(turnContext.Activity.From.Id, member.Id, (key, newValue) => member.Id);
+            _conversationReferences.AddOrUpdate(turnContext.Activity.From.AadObjectId, member.AadObjectId, (key, newValue) => member.AadObjectId);
             var initialAdaptiveCard = GetFirstOptionsAdaptiveCard(path, turnContext.Activity.From.Name, member.Id);
 
             await turnContext.SendActivityAsync(MessageFactory.Attachment(initialAdaptiveCard), cancellationToken);
@@ -88,14 +91,12 @@ namespace BotRequestApproval.Bots
                         return CreateInvokeResponse(adaptiveCardResponse);
 
                     case "requestCard":
-                        string userId = string.Empty;
-                        _conversationReferences.TryGetValue(turnContext.Activity.From.Id, out userId);
+                        
                         string[] firstCard = { ".", "Cards", "RequestDetailsCardForUser.json" };
                         var assigneeInfo = await TeamsInfo.GetMemberAsync(turnContext, data.action.data.AssignedTo, cancellationToken);
                         data.action.data.UserMRI = assigneeInfo.Id;
                         data.action.data.CreatedById = turnContext.Activity.From.Id;
                         data.action.data.AssignedToName = assigneeInfo.Name;
-                        data.action.data.UserId = userId;
                         var responseAttachment = GetResponseAttachment(firstCard, data, out cardJson);
                         Activity pendingActivity = new Activity();
                         pendingActivity.Type = "message";
@@ -113,8 +114,47 @@ namespace BotRequestApproval.Bots
                         return CreateInvokeResponse(adaptiveCardResponse);
 
                     case "refresh":
+                        string userId = string.Empty;
+                        _conversationReferences.TryGetValue(turnContext.Activity.From.AadObjectId, out userId);
+                        var members = new List<TeamsChannelAccount>();
+                        string continuationToken = null;
+                        do
+                        {
+                            var currentPage = await TeamsInfo.GetPagedMembersAsync(turnContext, 100, continuationToken, cancellationToken);
+                            continuationToken = currentPage.ContinuationToken;
+                            members.AddRange(currentPage.Members);
+                        }
+                        while (continuationToken != null);
+
+                        foreach (var member in members)
+                        {
+                            if (member.AadObjectId != turnContext.Activity.From.AadObjectId && member.Id!= data.action.data.CreatedById)
+                            {
+                                var newMemberInfo =  member.Id;
+                                memberDetails.Add(newMemberInfo);
+                            }
+                        }
+
+                        data.action.data.UserId = memberDetails;
                         string[] assignedToCard = { ".", "Cards", "AssignedToCard.json" };
-                        adaptiveCardResponse = GetNextActionCard(assignedToCard, data);
+                        var asignedToResponse = GetResponseAttachment(assignedToCard, data, out cardJson);
+                        Activity assignedToActivity = new Activity();
+                        assignedToActivity.Type = "message";
+                        assignedToActivity.Id = turnContext.Activity.ReplyToId;
+                        assignedToActivity.Attachments = new List<Attachment> { asignedToResponse };
+                        await turnContext.UpdateActivityAsync(assignedToActivity);
+                        response = JObject.Parse(cardJson);
+                        adaptiveCardResponse = new AdaptiveCardInvokeResponse()
+                        {
+                            StatusCode = 200,
+                            Type = "application/vnd.microsoft.card.adaptive",
+                            Value = response
+                        };
+                        return CreateInvokeResponse(adaptiveCardResponse);
+
+                    case "refreshforothers":
+                        string[] othersCard = { ".", "Cards", "OtherMembersCard.json" };
+                        adaptiveCardResponse = GetNextActionCard(othersCard, data);
 
                         return CreateInvokeResponse(adaptiveCardResponse);
 
