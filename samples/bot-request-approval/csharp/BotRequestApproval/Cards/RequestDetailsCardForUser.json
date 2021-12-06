@@ -15,9 +15,7 @@
         "UserMRI": "${userMRI}"
       }
     },
-    "userIds": [
-      "${userMRI}"
-    ]
+    "userIds": "${userId}"
   },
   "body": [
     {

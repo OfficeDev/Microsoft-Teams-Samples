@@ -41,7 +41,6 @@ namespace BotRequestApproval
             // Create the Conversation state. (Used by the Dialog system itself.)
             services.AddSingleton<ConversationState>();
 
-            services.AddSingleton<ConcurrentDictionary<string, string>>();
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
             services.AddTransient<IBot, ActivityBot>();
         }
