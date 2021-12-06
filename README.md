@@ -195,7 +195,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [tab-stage-view#csharp]:samples/tab-stage-view/csharp
 [tab-product-inspection#csharp]:samples/tab-product-inspection/csharp
 [tab-request-approval#nodejs]:samples/tab-request-approval/nodejs
-[bot-request-approval#nodejs:samples/bot-request-approval/nodejs
+[bot-request-approval#nodejs]:samples/bot-request-approval/nodejs
 
 [group-channel-tab#cs#razor]:samples/tab-channel-group/razor-csharp
 [group-channel-tab#cs#mvc]:samples/tab-channel-group/mvc-csharp
