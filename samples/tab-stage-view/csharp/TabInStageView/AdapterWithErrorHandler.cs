@@ -16,10 +16,9 @@ namespace TabInStageView
         public AdapterWithErrorHandler(IConfiguration configuration, ILogger<BotFrameworkHttpAdapter> logger, TelemetryInitializerMiddleware telemetryInitializerMiddleware)
             : base(configuration, logger)
         {
+            Use(telemetryInitializerMiddleware);
             OnTurnError = async (turnContext, exception) =>
             {
-                Use(telemetryInitializerMiddleware);
-
                 // Log any leaked exception from the application.
                 logger.LogError(exception, $"[OnTurnError] unhandled error : {exception.Message}");
 
