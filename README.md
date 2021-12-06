@@ -255,7 +255,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [bottaskreminder#nodejs]:samples/bot-daily-task-reminder/nodejs
 [memessagereminder#csharp]:samples/msgext-message-reminder/csharp
 [tab-request-approval#csharp]:samples/tab-request-approval/csharp
-[View][bot-request-approval#csharp]:samples/bot-request-approval/csharp
+[bot-request-approval#csharp]:samples/bot-request-approval/csharp
 
 [app-localization#cs]:samples/app-localization/csharp
 [app-localization#js]:samples/app-localization/nodejs
