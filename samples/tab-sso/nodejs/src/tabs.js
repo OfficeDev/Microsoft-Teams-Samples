@@ -2,6 +2,7 @@
 const fetch = require("node-fetch");
 const querystring = require("querystring");
 var config = require('config');
+const msal = require('@azure/msal-node');
 
 module.exports.setup = function (app) {
   var path = require('path');
@@ -49,38 +50,27 @@ module.exports.setup = function (app) {
     var token = req.body.token;
     var scopes = ["https://graph.microsoft.com/User.Read"];
 
+    // Creating MSAL client
+    const msalClient = new msal.ConfidentialClientApplication({
+      auth: {
+        clientId: config.get("tab.appId"),
+        clientSecret: config.get("tab.appPassword")
+      }
+    });
+    
     var oboPromise = new Promise((resolve, reject) => {
-      const url = "https://login.microsoftonline.com/" + tid + "/oauth2/v2.0/token";
-      const params = {
-        client_id: config.get("tab.appId"),
-        client_secret: config.get("tab.appPassword"),
-        grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
-        assertion: token,
-        requested_token_use: "on_behalf_of",
-        scope: scopes.join(" ")
-      };
-
-      fetch(url, {
-        method: "POST",
-        body: querystring.stringify(params),
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/x-www-form-urlencoded"
-        }
+      msalClient.acquireTokenOnBehalfOf({
+        authority: `https://login.microsoftonline.com/${tid}`,
+        oboAssertion: token,
+        scopes: scopes,
+        skipCache: true
       }).then(result => {
-        if (result.status !== 200) {
-          result.json().then(json => {
-            // TODO: Check explicitly for invalid_grant or interaction_required
-            reject({ "error": json.error });
-          });
-        } else {
-          result.json().then(json => {
             fetch("https://graph.microsoft.com/v1.0/me/",
               {
                 method: 'GET',
                 headers: {
                   "accept": "application/json",
-                  "authorization": "bearer " + json.access_token
+                  "authorization": "bearer " + result.accessToken
                 },
                 mode: 'cors',
                 cache: 'default'
@@ -94,9 +84,9 @@ module.exports.setup = function (app) {
               })
               .then((profile) => {
                 resolve(profile);
-              });
-          });
-        }
+              })
+      }).catch(error => {
+        reject({ "error": error.errorCode });
       });
     });
 
@@ -112,32 +102,32 @@ module.exports.setup = function (app) {
     var token = req.body.token;
     var oboPromise = new Promise((resolve, reject) => {
       fetch("https://graph.microsoft.com/v1.0/me/",
-              {
-                method: 'GET',
-                headers: {
-                  "accept": "application/json",
-                  "authorization": "bearer " + token
-                },
-                mode: 'cors',
-                cache: 'default'
-              })
-              .then((response) => {
-                if (response.ok) {
-                  return response.json();
-                } else {
-                  throw (`Error ${response.status}: ${response.statusText}`);
-                }
-              })
-              .then((profile) => {
-                resolve(profile);
-              });
+        {
+          method: 'GET',
+          headers: {
+            "accept": "application/json",
+            "authorization": "bearer " + token
+          },
+          mode: 'cors',
+          cache: 'default'
+        })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw (`Error ${response.status}: ${response.statusText}`);
+          }
+        })
+        .then((profile) => {
+          resolve(profile);
+        });
     });
-    
+
     oboPromise.then(function (result) {
       res.json(result);
     }, function (err) {
       console.log(err); // Error: "It broke"
       res.json(err);
-    });
+    });   
   });
 };
