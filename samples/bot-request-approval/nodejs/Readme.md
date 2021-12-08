@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows feature where user can send task request to his manager and manager can approve/reject request in groupchat.
+description: This sample shows a feature where user can send task request to his manager and manager can approve/reject the request in group chat.
 products:
 - office-teams
 - office
@@ -12,7 +12,7 @@ contentType: samples
 createdDate: "6-12-2021 17:00:25"
 ---
 
-# Send task request using universal adaptive cards in groupchat
+# Send task request using universal adaptive cards in group chat
 
 This sample shows a feature where:
 1. Requester : Can request for any task approval from manager by intiating request in groupchat using bot command `request` and only requester can edit the request card.
@@ -21,7 +21,7 @@ This sample shows a feature where:
 
 Requester:
 
-- Initiated request using bot command `request` in groupchat.
+- Initiated request using bot command `request` in group chat.
 
   ![Initial Card](Images/InitialCard.png)
 
@@ -29,15 +29,15 @@ Requester:
 
   ![Request Card](Images/CreateTask.png)
   
-- After submitting requester can edit or cancel the request. 
-  Note: Only user who created the card will see the buttons to edit and cancel the request.
+- After submitting the request, requester can edit or cancel the request.
+- Note: Only user who created the card will see the buttons to edit and cancel the request.
 
   ![Edit/Cancel Card](Images/UserCard.png)
 
 Manager:
 
-- After user submit the request manager can approve/reject the request.
-  Note: Only the manager of the request will see the buttons to approve/reject the request.
+- After requester submit the request, manager can approve/reject the request.
+- Note: Only the manager of the request will see the buttons to approve/reject the request.
 
   ![Approve/Reject Card](Images/ManagerCard.png)
 
@@ -49,7 +49,7 @@ Others:
 
 - Other members will only able to see details of the created request.
 
-  ![Members Card](Images/Otherembers.png)
+  ![Members Card](Images/OtherMembers.png)
 
 ## Prerequisites
 
@@ -70,7 +70,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 
 3) Install node modules
 
-   Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+   Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
 
     ```bash
     npm install

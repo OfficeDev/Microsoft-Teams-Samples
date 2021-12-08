@@ -6,9 +6,11 @@ let tasks = [];
 const saveInc = async (action, members) => {
     const assignedTo = members.find(m => m.aadObjectId === action.data.inc_assigned_to);
     const { inc_title: title, inc_description: description, inc_created_by: createdBy } = action.data;
+
     if (storageService.storeCheck(incKey)) {
         tasks = storageService.storeFetch(incKey);
     }
+
     const newInc = new Task(null, title, description, createdBy, assignedTo, null, null);
     tasks.push(newInc);
     storageService.storeSave(incKey, tasks);
@@ -19,9 +21,11 @@ const updateInc = async (action, members) => {
     const assignedTo = members.find(m => m.aadObjectId === action.data.inc_assigned_to);
     const oldTask = action.data.task;
     const { inc_title: title, inc_description: description, inc_created_by: createdBy } = action.data;
+
     if (storageService.storeCheck(incKey)) {
         tasks = storageService.storeFetch(incKey);
     }
+
     const inc = new Task();
     inc.fill(oldTask);
     inc.fill({ title, description, createdBy, assignedTo });
@@ -34,9 +38,11 @@ const updateInc = async (action, members) => {
 const updateStatusInc = async (action) => {
     const oldTask = action.data.task;
     const status = action.data.status;
+
     if (storageService.storeCheck(incKey)) {
         tasks = storageService.storeFetch(incKey);
     }
+    
     const inc = new Task();
     inc.fill(oldTask);
     inc.setStatus(status);
