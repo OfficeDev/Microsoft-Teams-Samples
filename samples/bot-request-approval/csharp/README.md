@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows feature where user can send task request to his manager and manager can approve/reject request in groupchat.
+description: This sample shows a feature where user can send task request to his manager and manager can approve/reject the request in group chat.
 products:
 - office-teams
 - office
@@ -9,19 +9,19 @@ languages:
 - csharp
 extensions:
 contentType: samples
-createdDate: "6-12-2021 17:00:25"
+createdDate: "13-12-2021 17:00:25"
 ---
 
-# Send task request using universal adaptive cards in groupchat
+# Send task request using universal adaptive cards in group chat
 
 This sample shows a feature where:
-1. Requester : Can request for any task approval from manager by intiating request in groupchat using bot command `request` and only requester can edit the request card.
-2. Manager : Can see the request raised by user in the same groupchat with an option of approve or reject.
+1. Requester : Can request for any task approval from manager by intiating request in group chat using bot command `request` and only requester can edit the request card.
+2. Manager : Can see the request raised by user in the same group chat with an option of approve or reject.
 3. Others: Other members in the group chat can see the request details only.
 
 Requester:
 
-- Initiated request using bot command `request` in groupchat.
+- Initiated request using bot command `request` in group chat.
 
   ![Initial Card](BotRequestApproval/Images/InitialCard.png)
 
@@ -29,23 +29,24 @@ Requester:
 
   ![Request Card](BotRequestApproval/Images/RequestCard.png)
   
-- After submitting requester can edit or cancel the request.
+- After submitting the request, requester can edit or cancel the request.
 
   ![Edit/Cancel Card](BotRequestApproval/Images/EditCancelCard.png)
 
 Manager:
 
-- After user submit the request manager can approve/reject the request.
-
+- After requester submit the request, manager can approve/reject the request.
+  Note: Only the manager of the request will see the buttons to approve/reject the request.
+  
   ![Approve/Reject Card](BotRequestApproval/Images/ApproveRejectCard.png)
 
-- If manager approves or rejects the request card will be refreshed for all the members in groupchat.
+- If manager approves or rejects the request, card will be refreshed for all the members in group chat.
 
   ![Status Card](BotRequestApproval/Images/StatusCard.png)
   
 Others:
 
-- Other members in groupchat cand see request details only.
+- Other members in group chat can see the request details only.
 
 ![Other member Card](BotRequestApproval/Images/OtherMemberCard.png)
 

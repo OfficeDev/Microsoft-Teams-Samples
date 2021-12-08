@@ -54,7 +54,7 @@ namespace BotRequestApproval.Bots
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample you can send task request to your manager and your manager can approve/reject the request."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text("Hello and welcome! With this sample you can send task request to your manager and your manager can approve/reject the request."), cancellationToken);
                 }
             }
         }

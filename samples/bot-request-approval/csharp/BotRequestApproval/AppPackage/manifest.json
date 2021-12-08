@@ -16,7 +16,7 @@
   },
   "description": {
     "short": "Bot request approval",
-    "full": "This sample shows feature where user can send task request to his manager and manager can approve/reject request."
+    "full": "This sample shows a feature where user can send task request to his manager and manager can approve/reject the request."
   },
   "icons": {
     "outline": "outline.png",
