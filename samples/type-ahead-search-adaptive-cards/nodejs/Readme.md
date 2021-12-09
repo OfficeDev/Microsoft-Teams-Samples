@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Demonstrating feature where user can checkin with current location and view all previous checkins.
+description: Demonstrating feature of type ahead search (static and dynamic)control in adaptive cards.
 products:
 - office-teams
 - office
@@ -11,32 +11,22 @@ extensions:
 contentType: samples
 createdDate: "11-11-2021 23:30:17"
 ---
-# Get Checkin info of user
+# Type ahead search control in adaptive cards
 
-This sample shows feature where user can checkin with current location and view all previous checkins.
+This sample shows feature of type ahead search (static and dynamic)control in adaptive cards.
 
-`Currently, Microsoft Teams support for get geolocation capability is only available for mobile clients`
+`Static search`
 
-![Check in card](Images/CheckinCard.png)
+![static search card](Images/staticSearchCard.png)
 
-![Geo Location](Images/GeoLocation.png)
+`Dynamic search`
 
-![User details card](Images/UserDetailsCard.png)
-
-![User last checkin card](Images/UserLastCheckInCard.png)
+![dynamic search card](Images/dynamicSearchCard.png)
 
 ## Prerequisites
 
-- Microsoft Teams is installed and you have an account (not a guest account)
--  [NodeJS](https://nodejs.org/en/)
--  [ngrok](https://ngrok.com/) or equivalent tunneling solution
--  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
-   appropriate permissions to install an app.
-
-## To try this sample
-
-> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
-> the Teams service needs to call into the bot.
+- [NodeJS](https://nodejs.org/en/)
+- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
 ### 1. Setup for Bot
 In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
@@ -48,46 +38,28 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/app-checkin-location/nodejs`
+2) In the folder where repository is cloned navigate to `samples/type-ahead-search-adaptive-cards/nodejs`
 
-3) Install modules
+3) Install node modules
+
+   Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
 
     ```bash
     npm install
     ```
-
 4) Run ngrok - point to port 3978
 
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
-5) Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`, `BaseUrl` with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+5) Open the `.env` configuration file in your project folder (or in Visual Studio Code) and update the `MicrosoftAppId` and `MicrosoftAppPassword` with your app's base url. (Note the ClientId is the AppId created in step 1 (Setup for Bot), the ClientSecret is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
 6) Run your app
 
     ```bash
     npm start
     ```
-- **Manually update the manifest.json**
+7) Manually update the manifest.json
     - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
-
-## Features of this sample
-
-- Card with actions `check in`. 
-
-![Check in card](Images/CheckinCard.png)
-
-- `Geo Location` of user.
-
-![Geo Location](Images/GeoLocation.png)
-
-- User details.
-
-![User details card](Images/UserDetailsCard.png)
-
-- `viewcheckindetails` of user.
-
-![User last checkin card](Images/UserLastCheckInCard.png)
-
