@@ -30,6 +30,23 @@
       "scopes": [
         "personal"
       ],
+      "commandLists": [
+        {
+          "scopes": [
+            "personal"
+          ],
+          "commands": [
+            {
+              "title": "staticsearch",
+              "description": "To get static search card"
+            },
+            {
+              "title": "dynamicsearch",
+              "description": "To get dynamic search card"
+            }
+          ]
+        }
+      ],
       "isNotificationOnly": false
     }
   ],
