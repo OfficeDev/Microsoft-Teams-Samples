@@ -12,7 +12,7 @@
   },
   "name": {
     "short": "Bot request approval",
-    "full": "User can send task request to his manager using bot"
+    "full": "User can send a task request to his manager for approval using bot"
   },
   "description": {
     "short": "Bot request approval",

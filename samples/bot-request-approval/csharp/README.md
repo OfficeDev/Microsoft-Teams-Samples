@@ -12,7 +12,7 @@ contentType: samples
 createdDate: "13-12-2021 17:00:25"
 ---
 
-# Send task request using universal adaptive cards in group chat
+# Send task request using Universal Adaptive Cards in group chat
 
 This sample shows a feature where:
 1. Requester : Can request for any task approval from manager by intiating request in group chat using bot command `request` and only requester can edit the request card.

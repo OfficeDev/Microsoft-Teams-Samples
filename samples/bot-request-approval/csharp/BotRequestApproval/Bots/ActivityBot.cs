@@ -22,7 +22,6 @@ namespace BotRequestApproval.Bots
     /// </summary>
     public class ActivityBot : TeamsActivityHandler
     {
-
         private List<string> memberDetails = new List<string> { };
 
         /// <summary>
@@ -74,6 +73,7 @@ namespace BotRequestApproval.Bots
                 AdaptiveCardInvokeResponse adaptiveCardResponse;
                 string cardJson;
                 JObject response;
+
                 switch (verb)
                 {
                     case "initialRefresh":
