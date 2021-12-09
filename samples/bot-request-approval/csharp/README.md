@@ -36,7 +36,7 @@ Requester:
 Manager:
 
 - After requester submit the request, manager can approve/reject the request.
-  Note: Only the manager of the request will see the buttons to approve/reject the request.
+   - Note: Only the manager of the request will see the buttons to approve/reject the request.
   
   ![Approve/Reject Card](BotRequestApproval/Images/ApproveRejectCard.png)
 
