@@ -10,6 +10,7 @@ class TeamsBot extends TeamsActivityHandler {
     constructor() {
         super();
         this.baseUrl = process.env.BaseUrl;
+        
         this.onMembersAdded(async (context, next) => {
             const membersAdded = context.activity.membersAdded;
             for (let member = 0; member < membersAdded.length; member++) {
