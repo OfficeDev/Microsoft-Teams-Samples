@@ -15,11 +15,11 @@ createdDate: "13-12-2021 17:00:25"
 # Send task request using Universal Adaptive Cards in group chat
 
 This sample shows a feature where:
-1. Requester : Can request for any task approval from manager by initiating a request in group chat using bot command `request` and only requester can edit the request card.
-2. Manager : Can see the request raised by user in the same group chat with an option of approve or reject.
-3. Others: Other members in the group chat can see the request details only.
+1. **Requester :** Can request for any task approval from manager by initiating a request in group chat using bot command `request` and only requester can edit the request card.
+2. **Manager :** Can see the request raised by user in the same group chat with an option of approve or reject.
+3. **Others:** Other members in the group chat can see the request details only.
 
-Requester:
+**Requester:**
 
 - Initiated request using bot command `request` in group chat.
 
@@ -35,7 +35,7 @@ Requester:
 
   ![Edit/Cancel Card](BotRequestApproval/Images/EditCancelCard.png)
 
-Manager:
+**Manager:**
 
 - After requester submit the request, manager can approve/reject the request.
 	
@@ -47,7 +47,7 @@ Manager:
 
   ![Status Card](BotRequestApproval/Images/StatusCard.png)
   
-Others:
+**Others:**
 
 - Other members in group chat will only be able to see the request details.
 
