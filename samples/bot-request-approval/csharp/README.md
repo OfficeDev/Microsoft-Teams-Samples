@@ -30,14 +30,14 @@ Requester:
   ![Request Card](BotRequestApproval/Images/RequestCard.png)
   
 - After submitting the request, requester can edit or cancel the request.
-  **Note:** Users who created the card will only be able to see the buttons to edit or cancel the request.
+- **Note:** Users who created the card will only be able to see the buttons to edit or cancel the request.
 
   ![Edit/Cancel Card](BotRequestApproval/Images/EditCancelCard.png)
 
 Manager:
 
 - After requester submit the request, manager can approve/reject the request.
-  **Note:** Manager of the task request will only be able to see the buttons to approve or reject the request.
+- **Note:** Manager of the task request will only be able to see the buttons to approve or reject the request.
   
   ![Approve/Reject Card](BotRequestApproval/Images/ApproveRejectCard.png)
 
