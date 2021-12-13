@@ -30,13 +30,14 @@ Requester:
   ![Request Card](BotRequestApproval/Images/RequestCard.png)
   
 - After submitting the request, requester can edit or cancel the request.
+  **Note:** Users who created the card will only be able to see the buttons to edit or cancel the request.
 
   ![Edit/Cancel Card](BotRequestApproval/Images/EditCancelCard.png)
 
 Manager:
 
 - After requester submit the request, manager can approve/reject the request.
-   - Note: Only the manager of the request will see the buttons to approve/reject the request.
+  **Note:** Manager of the task request will only be able to see the buttons to approve or reject the request.
   
   ![Approve/Reject Card](BotRequestApproval/Images/ApproveRejectCard.png)
 
@@ -46,7 +47,7 @@ Manager:
   
 Others:
 
-- Other members in group chat can see the request details only.
+- Other members in group chat will only be able to see the request details.
 
 ![Other member Card](BotRequestApproval/Images/OtherMemberCard.png)
 
@@ -104,6 +105,8 @@ Others:
    - Choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.    
+
+**Note:** App should be installed for user's manager as well, so that manager can get the task approval request notification.
 
 ## Further reading
 
