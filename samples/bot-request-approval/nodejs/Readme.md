@@ -30,14 +30,14 @@ Requester:
   ![Request Card](Images/CreateTask.png)
   
 - After submitting the request, requester can edit or cancel the request.
-- Note: Users who created the card will only be able to see the buttons to edit or cancel the request.
+  **Note:** Users who created the card will only be able to see the buttons to edit or cancel the request.
 
   ![Edit/Cancel Card](Images/UserCard.png)
 
 Manager:
 
 - After requester submit the request, manager can approve/reject the request.
-- Note: Manager of the task request will only be able to see the buttons to approve or reject the request.
+  **Note:** Manager of the task request will only be able to see the buttons to approve or reject the request.
 
   ![Approve/Reject Card](Images/ManagerCard.png)
 
@@ -47,7 +47,7 @@ Manager:
   
 Others:
 
-- Other members will only able to see the details of the created request.
+- Other members in group chat will only be able to see the request details.
 
   ![Members Card](Images/OtherMembers.png)
 
@@ -93,3 +93,11 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
 **Note:** App should be installed for user's manager as well, so that manager can get the task approval request notification.
+
+## Further reading
+
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Send Notification to User in Chat](https://docs.microsoft.com/en-us/graph/api/chat-sendactivitynotification?view=graph-rest-beta)
+- [Send Notification to User in Team](https://docs.microsoft.com/en-us/graph/api/team-sendactivitynotification?view=graph-rest-beta&tabs=http)
+- [Send Notification to User](https://docs.microsoft.com/en-us/graph/api/userteamwork-sendactivitynotification?view=graph-rest-beta&tabs=http)
