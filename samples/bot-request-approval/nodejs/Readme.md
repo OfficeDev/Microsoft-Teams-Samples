@@ -15,8 +15,8 @@ createdDate: "6-12-2021 17:00:25"
 # Send task request using Universal Adaptive Cards in group chat
 
 This sample shows a feature where:
-1. Requester : Can request for any task approval from manager by intiating request in groupchat using bot command `request` and only requester can edit the request card.
-2. Manager : Can see the request raised by user in the same groupchat with an option of approve or reject.
+1. Requester : Can request for any task approval from manager by initiating a request in group chat using bot command `request` and only requester can edit the request card.
+2. Manager : Can see the request raised by user in the same group chat with an option of approve or reject.
 3. Others: Other members in the group chat can see the request details only.
 
 Requester:
@@ -30,24 +30,24 @@ Requester:
   ![Request Card](Images/CreateTask.png)
   
 - After submitting the request, requester can edit or cancel the request.
-- Note: Only user who created the card will see the buttons to edit and cancel the request.
+- Note: Users who created the card will only be able to see the buttons to edit or cancel the request.
 
   ![Edit/Cancel Card](Images/UserCard.png)
 
 Manager:
 
 - After requester submit the request, manager can approve/reject the request.
-- Note: Only the manager of the request will see the buttons to approve/reject the request.
+- Note: Manager of the task request will only be able to see the buttons to approve or reject the request.
 
   ![Approve/Reject Card](Images/ManagerCard.png)
 
-- If manager approves or rejects the request card will be refreshed for all the members in groupchat.
+- If manager approves or rejects the request, card will be refreshed for all the members in group chat.
 
   ![Status Card](Images/ApprovedRequest.png)
   
 Others:
 
-- Other members will only able to see details of the created request.
+- Other members will only able to see the details of the created request.
 
   ![Members Card](Images/OtherMembers.png)
 
@@ -92,4 +92,4 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
-**Note:** App should be installed for user's manager also to get task approval notification.
+**Note:** App should be installed for user's manager as well, so that manager can get the task approval request notification.
