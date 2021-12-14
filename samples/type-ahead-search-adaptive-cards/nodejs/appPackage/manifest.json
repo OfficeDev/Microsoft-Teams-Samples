@@ -16,7 +16,7 @@
   },
   "description": {
     "short": "Search control adaptive card",
-    "full": "This sample shows feature type ahead search (static and dynamic)control in adaptive cards."
+    "full": "This sample shows feature type ahead search (static and dynamic) control in adaptive cards."
   },
   "icons": {
     "outline": "outline.png",

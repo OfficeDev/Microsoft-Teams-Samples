@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 
 const { TeamsActivityHandler, CardFactory, ActivityHandler } = require("botbuilder");
-const request = require('request-promise')
-const searchApiUrlFormat = "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=[keyword]&srlimit=[limit]&sroffset=[offset]&format=json";
+const axios = require('axios');
+const querystring = require('querystring');
 
 class TeamsBot extends TeamsActivityHandler {
   constructor() {
@@ -24,7 +24,7 @@ class TeamsBot extends TeamsActivityHandler {
       if (context.activity.text != null) {
         if (context.activity.text.toLowerCase().trim() == "staticsearch") {
           const userCard = CardFactory.adaptiveCard(this.adaptiveCardForStaticSearch());
-          
+
           await context.sendActivity({ attachments: [userCard] });
         }
         else if (context.activity.text.toLowerCase().trim() == "dynamicsearch") {
@@ -34,7 +34,7 @@ class TeamsBot extends TeamsActivityHandler {
         }
       }
       else if (context.activity.value != null) {
-        await context.sendActivity("Select IDE is: " + context.activity.value.choiceIDESingle);
+        await context.sendActivity("Selected option is: " + context.activity.value.choiceselect);
       }
 
       // By calling next() you ensure that the next BotHandler is run.
@@ -43,83 +43,31 @@ class TeamsBot extends TeamsActivityHandler {
   }
 
   async onInvokeActivity(context) {
-
     if (context._activity.name == 'application/search') {
-      let searchApiUrl = searchApiUrlFormat.replace("[keyword]", context._activity.value.queryText);
-      searchApiUrl = searchApiUrl.replace("[limit]", context._activity.value.queryOptions.top + "");
-      searchApiUrl = searchApiUrl.replace("[offset]", context._activity.value.queryOptions.skip + "");
-      searchApiUrl = encodeURI(searchApiUrl);
-      let promisesOfCardsAsAttachments = [];
+      let searchQuery = context._activity.value.queryText;
+      const response = await axios.get(`http://registry.npmjs.com/-/v1/search?${querystring.stringify({ text: searchQuery, size: 8 })}`);
+      let npmPackages = [];
 
-      //   var result = await new Promise(function (resolve, reject) {
-      //        request(searchApiUrl, (error, res, body) => {
-      //          let wikiResults = JSON.parse(body).query.search;
-      //        wikiResults.forEach((wikiResult) => {
+      response.data.objects.forEach(obj => {
+        const attatchment = {
+          "title": obj.package.name,
+          "value": obj.package.description
+        };
 
-      //        const attachment = { 
-      //          "title": wikiResult.title,
-      //          "value": wikiResult.snippet
-      //        };
-      //        promisesOfCardsAsAttachments.push(attachment);
-
-      //     });
-      //      let response = {
-      //       status : 200,
-      //       body:{"data":promisesOfCardsAsAttachments}
-      //      }
-      //       resolve(response);
-      //      });
-      //  });
+        npmPackages.push(attatchment);
+      });
 
       var data = {
-        "choices": [
-          {
-            "title": "hello",
-            "value": "hey"
-          },
-          {
-            "title": "hello1",
-            "value": "hey"
-          }, {
-            "title": "hello2",
-            "value": "hey"
-          }, {
-            "title": "hello3",
-            "value": "hey"
-          }, {
-            "title": "hello4",
-            "value": "hey"
-          }, {
-            "title": "hello5",
-            "value": "hey"
-          }, {
-            "title": "hello6",
-            "value": "hey"
-          }, {
-            "title": "hello7",
-            "value": "hey"
-          }, {
-            "title": "hello8",
-            "value": "hey"
-          }, {
-            "title": "hello9",
-            "value": "hey"
-          }, {
-            "title": "hello10",
-            "value": "hey"
-          }, {
-            "title": "hello11",
-            "value": "hey"
-          }]
+        "data": npmPackages
       }
-      var result = ActivityHandler.createInvokeResponse(JSON.stringify(data));
 
-      return result;
+      return  ActivityHandler.createInvokeResponse(data);;
     }
 
     return null;
   }
 
+  // Adaptive card for static search.
   adaptiveCardForStaticSearch = () => ({
     "type": "AdaptiveCard",
     "body": [
@@ -195,7 +143,7 @@ class TeamsBot extends TeamsActivityHandler {
                 ],
                 "style": "filtered",
                 "placeholder": "Search for a IDE",
-                "id": "choiceIDESingle",
+                "id": "choiceselect",
                 "type": "Input.ChoiceSet"
               }
             ],
@@ -216,11 +164,12 @@ class TeamsBot extends TeamsActivityHandler {
     "version": "1.2"
   });
 
+  // Adaptive card for dynamic search.
   adaptiveCardForDyanamicSearch = () => ({
     "type": "AdaptiveCard",
     "body": [
       {
-        "text": "Please fill out the below form to send a game purchase request.",
+        "text": "Please search for npm packages using dynamic search control.",
         "wrap": true,
         "type": "TextBlock"
       },
@@ -230,7 +179,7 @@ class TeamsBot extends TeamsActivityHandler {
             "width": "auto",
             "items": [
               {
-                "text": "Multi-Game: ",
+                "text": "NPM packages search: ",
                 "wrap": true,
                 "height": "stretch",
                 "type": "TextBlock"
@@ -261,13 +210,13 @@ class TeamsBot extends TeamsActivityHandler {
                     "value": "static_option_3"
                   }
                 ],
-                "isMultiSelect": true,
+                "isMultiSelect": false,
                 "style": "filtered",
                 "choices.data": {
                   "type": "Data.Query",
-                  "dataset": "graph.microsoft.com/me/joinedTeams"
+                  "dataset": "npmpackages"
                 },
-                "id": "choiceGameMulti",
+                "id": "choiceselect",
                 "type": "Input.ChoiceSet"
               }
             ],
@@ -278,11 +227,11 @@ class TeamsBot extends TeamsActivityHandler {
       }
     ],
     "actions": [
-        {
-            "type": "Action.Submit",
-            "id": "submitdynamic",
-            "title": "Submit"
-        }
+      {
+        "type": "Action.Submit",
+        "id": "submitdynamic",
+        "title": "Submit"
+      }
     ],
     "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
     "version": "1.2"

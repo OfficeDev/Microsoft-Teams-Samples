@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Demonstrating feature of type ahead search (static and dynamic)control in adaptive cards.
+description: Demonstrating feature of type ahead search (static and dynamic) control in Adaptive cards.
 products:
 - office-teams
 - office
@@ -11,9 +11,9 @@ extensions:
 contentType: samples
 createdDate: "11-11-2021 23:30:17"
 ---
-# Type ahead search control in adaptive cards
+# Type ahead search control in Adaptive cards
 
-This sample shows feature of type ahead search (static and dynamic)control in adaptive cards.
+This sample shows feature of type ahead search (static and dynamic) control in Adaptive cards.
 
 `Static search`
 
