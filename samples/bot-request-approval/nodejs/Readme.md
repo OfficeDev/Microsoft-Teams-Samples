@@ -94,8 +94,6 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
-**Note:** App should be installed for user's manager as well, so that manager can get the task approval request notification.
-
 ## Further reading
 
 - [Bot Framework Documentation](https://docs.botframework.com)
