@@ -5,14 +5,9 @@ var config = require('config');
 const msal = require('@azure/msal-node');
 
 module.exports.setup = function (app) {
-  var path = require('path');
   var express = require('express')
 
   // Configure the view engine, views folder and the statics path
-  app.use(express.static(path.join(__dirname, 'static')));
-  app.set('view engine', 'pug');
-  app.set('views', path.join(__dirname, 'views'));
-
   // Use the JSON middleware
   app.use(express.json());
 
@@ -21,7 +16,7 @@ module.exports.setup = function (app) {
     res.render('hello');
   });
 
-  // Setup the configure tab, with first and second as content tabs
+    // Setup the configure tab, with first and second as content tabs
   app.get('/configure', function (req, res) {
     res.render('configure');
   });
