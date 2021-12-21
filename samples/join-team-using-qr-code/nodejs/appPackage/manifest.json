@@ -1,8 +1,8 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.10/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.10",
-  "version": "1.0.2",
-  "id": "74603c0a-b20a-4881-893a-3a5092b8dc8c",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.11",
+  "version": "1.0.0",
+  "id": "{{Microsoft-App-Id}}",
   "packageName": "com.microsoft.teams.qrjointeam",
   "developer": {
     "name": "Microsoft",
@@ -25,7 +25,7 @@
   "accentColor": "#60A18E",
   "bots": [
     {
-      "botId": "b7915485-9376-4cb6-b0ce-6144801cb9ad",
+      "botId": "{{Microsoft-App-Id}}",
       "scopes": [
         "team",
         "personal",
@@ -39,11 +39,11 @@
     "media"
   ],
   "validDomains": [
-    "2f6f-116-75-27-174.ngrok.io",
+    "{{domain-name}}",
     "token.botframework.com"
   ],
     "webApplicationInfo": {
-    "id": "b7915485-9376-4cb6-b0ce-6144801cb9ad",
-    "resource": "api://botid-b7915485-9376-4cb6-b0ce-6144801cb9ad"
+    "id": "{{MicrosoftAppId}}",
+    "resource": "api://botid-{{MicrosoftAppId}}"
   }
 }
