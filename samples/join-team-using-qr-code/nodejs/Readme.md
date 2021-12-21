@@ -20,11 +20,17 @@ The user can Generate a new QR code (contains team id information) and then scan
 
 `Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients`
 
-![Card](Images/CardWithButtons.png)
+- Type a message to get card with generate action.
 
-![QR Code](Images/QRCode.png)
+ ![Card](Images/CardWithButtons.png)
 
-![Join Team](Images/JoinTeam.png)
+- Select the team for which you want to generate the QR code and click generate button.
+
+ ![QR Code](Images/QRCode.png)
+
+- Scan the generated QR code to join the team.
+
+ ![Join Team](Images/TeamQR.png)
 
 ## Prerequisites
 
@@ -40,9 +46,12 @@ The user can Generate a new QR code (contains team id information) and then scan
 > the Teams service needs to call into the bot.
 
 ### 1. Setup for Bot SSO
-In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+a) In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
-Add the following permission in app registration
+b) Once the bot is created go to navigation pane, select Channels to configure Microsoft Teams in Azure Bot.
+![Configure Channel](Images/BotChannel.png)
+
+c) Add the following permission in app registration
 
 ![Install App](Images/Permission.png)
 
@@ -83,11 +92,14 @@ Add the following permission in app registration
 
 ## Features of this sample
 
-- Card with action `Generate QR code`. 
+- Type a message to get card with generate action.
 
-![Card](Images/CardWithButtons.png)
+ ![Card](Images/CardWithButtons.png)
 
-- `Generate QR code` is used to generate a QR code by selecting the team.
+- Select the team for which you want to generate the QR code and click generate button.
 
-![QR Code](Images/QRCode.png)
-- You can scan the generated QR code to join the team.
+ ![QR Code](Images/QRCode.png)
+
+- Scan the generated QR code to join the team.
+
+ ![Join Team](Images/TeamQR.png)
