@@ -22,10 +22,9 @@
     // 2. Exchange that token for a token with the required permissions
     //    using the web service (see /auth/token handler in app.js)
     function getServerSideToken(clientSideToken) {
-
         return new Promise((resolve, reject) => {
             microsoftTeams.getContext((context) => {
-                fetch('/getProfile', {
+                fetch('/getProfileOnBehalfOf', {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/json'
@@ -68,7 +67,7 @@
     function requestConsent() {
         return new Promise((resolve, reject) => {
             microsoftTeams.authentication.authenticate({
-                url: window.location.origin + "/auth/auth-start",
+                url: window.location.origin + "/auth-start",
                 width: 600,
                 height: 535,
                 successCallback: (result) => {
@@ -109,32 +108,13 @@
                 button.onclick = (() => {
                     requestConsent()
                         .then((result) => {
-                            // Consent succeeded - use the token we got back
-                            let accessToken = JSON.parse(result).accessToken;
-                            fetch('/getUserProfile', {
-                                method: 'post',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({
-                                    'token': accessToken
-                                }),
-                                mode: 'cors',
-                                cache: 'default'
-                            })
-                            .then((response) => {
-                                if (response.ok) {
-                                    return response.json();
-                                }
-                            })
-                            .then((responseJson) => {
-                                if (responseJson.error) {
-                                    console.log(responseJson.error);
-                                } else {
-                                    const profile = responseJson;
-                                    useServerSideToken(profile);
-                                }
-                            });
+                             // Consent succeeded
+                             display(`Consent succeeded`);
+                            
+                             // offer to refresh the page
+                             button.disabled = true;
+                             let refreshButton = display("Refresh page", "button");
+                             refreshButton.onclick = (() => { window.location.reload(); });
                         })
                         .catch((error) => {
                             display(`ERROR ${error}`);
