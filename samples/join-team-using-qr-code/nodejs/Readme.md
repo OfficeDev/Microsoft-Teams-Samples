@@ -48,10 +48,10 @@ The user can Generate a new QR code (contains team id information) and then scan
 ### 1. Setup for Bot SSO
 a) In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
-b) Once the bot is created go to navigation pane, select Channels to configure Microsoft Teams in Azure Bot.
+**Note:** Once the Azure Bot is created, go to navigation pane and under Settings section select Channels and enable Microsoft Teams Channel.
 ![Configure Channel](Images/BotChannel.png)
 
-c) Add the following permission in app registration
+b) Add the following permission in app registration
 
 ![Install App](Images/Permission.png)
 
