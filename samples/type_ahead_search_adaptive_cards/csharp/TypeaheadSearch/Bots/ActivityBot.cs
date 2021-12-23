@@ -84,24 +84,35 @@ namespace TypeaheadSearch.Bots
         /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task<InvokeResponse> OnInvokeActivityAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
         {
+            InvokeResponse adaptiveCardResponse;
             if (turnContext.Activity.Name == "application/search")
             {
                 var searchData = JsonConvert.DeserializeObject<DynamicSearchCard>(turnContext.Activity.Value.ToString());
                 var packageResult = JObject.Parse(await (new HttpClient()).GetStringAsync($"https://azuresearch-usnc.nuget.org/query?q=id:{searchData.queryText}&prerelease=true"));
                 var packages = packageResult["data"].Select(item => (item["id"].ToString(), item["description"].ToString()));
-                var itemList = packages.Select(item => { var obj = new { Title = item.Item1, Value = item.Item2 }; return obj; }).ToList();
-                InvokeResponse adaptiveCardResponse;
-                var dynamicResult = new
+                var packageList = packages.Select(item => { var obj = new { title = item.Item1, value = item.Item2 }; return obj; }).ToList();
+                var data = new
                 {
-                    results = itemList
+                    type = "application/vnd.microsoft.search.searchResponse",
+                    value = new
+                    {
+                        results = packageList
+                    }
                 };
 
-                var sample = CreateInvokeResponse(dynamicResult);
+                var jsonString = JsonConvert.SerializeObject(data);
+                JObject jsonData = JObject.Parse(jsonString);
 
-                return sample;
+                adaptiveCardResponse = new InvokeResponse()
+                {
+                    Status = 200,
+                    Body = jsonData
+                };
+
+                    return adaptiveCardResponse;
             }
 
-            return null;
+                return null;
         }
 
         // Get intial card.

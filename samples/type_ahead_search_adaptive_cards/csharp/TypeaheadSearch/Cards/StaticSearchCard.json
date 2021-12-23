@@ -1,4 +1,6 @@
 {
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.2",
   "type": "AdaptiveCard",
   "body": [
     {
@@ -89,7 +91,5 @@
       "id": "submit",
       "title": "Submit"
     }
-  ],
-  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-  "version": "1.2"
+  ]
 }

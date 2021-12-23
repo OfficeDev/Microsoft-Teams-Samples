@@ -78,6 +78,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |10| Sequential workflow adaptive cards | Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot. | [View][sequential#workflow#csharp] | [View][sequential#workflow#js]
 |11| Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. | [View][messageswithrsc#csharp] |[View][messageswithrsc#js]
 |12| Bot with SharePoint file to view in Teams file viewer | This sample demos a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer. |[View][botwithsharepointfileviewer#csharp]|[View][botfileviewer#js]
+|13|  Type ahead search control on Adaptive Cards | This sample shows the feature of type ahead search (static and dynamic) control in Adaptive Cards. |[View][typeaheadsearch#csharp]|
+
 #### Additional samples
 
 |    | Sample Name | Description | .NET Core | JavaScript | 
@@ -207,6 +209,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [app-auth#ts]:samples/app-auth/nodejs
 [auth-in-connector#nodejs]:samples/connector-todo-notification/nodejs
 [botwithsharepointfileviewer#csharp]:sample/bot-sharepoint-file-viewer/csharp
+[typeaheadsearch#csharp]:sample/type_ahead_search_adaptive_cards/csharp
 
 [app-task-module#cs]:samples/app-task-module/csharp
 [app-task-module#ts]:samples/app-task-module/nodejs

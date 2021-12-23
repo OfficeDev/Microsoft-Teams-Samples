@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Demonstrating feature of type ahead search (static and dynamic) control in Adaptive cards.
+description: Demonstrating the feature of type ahead search (static and dynamic) control in Adaptive Cards.
 products:
 - office-teams
 - office
@@ -11,17 +11,21 @@ extensions:
 contentType: samples
 createdDate: "11-11-2021 23:30:17"
 ---
-# Type ahead search control in Adaptive cards
+# Type ahead search control on Adaptive Cards
 
-This sample shows feature of type ahead search (static and dynamic) control in Adaptive cards.
+This sample shows the feature of type ahead search (static and dynamic) control in Adaptive Cards.
 
 `Static search`
 
-![static search card](Images/staticSearchCard.png)
+![static search card](TypeaheadSearch/Images/staticSearchCard.png)
 
 `Dynamic search`
 
-![dynamic search card](Images/dynamicSearchCard.png)
+![dynamic search card](TypeaheadSearch/Images/dynamicSearchCard.png)
+
+`Dynamic search results`
+
+![dynamic search results](TypeaheadSearch/Images/dynamicSearchResults.png)
 
 ## Prerequisites
 
@@ -41,38 +45,41 @@ This sample shows feature of type ahead search (static and dynamic) control in A
 
 ## To try this sample
 
-### Register your Teams Auth SSO with Azure AD
-1. Register your app with Microsoft identity platform via the Azure AD portal
-   - Your app must be registered in the Azure AD portal. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2). 
-  
-2. Clone the repository
+### 1. Setup for Bot
+In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
+### 2. Run your bot sample
+
+1. Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
 
-3. Open the code in Visual Studio
+2. Open the code in Visual Studio
    - File -> Open -> Project/Solution
    - Navigate to folder where repository is cloned then `samples/type-ahead-search-adaptive-cards/csharp/TypeaheadSearch.sln`
     
-4. Run ngrok - point to port 3978
+3. Run ngrok - point to port 3978
 
     ```bash
     # ngrok http -host-header=rewrite 3978
     ```
  
-5. Setup and run the bot from Visual Studio: 
+4. Setup and run the bot from Visual Studio: 
    Modify the `appsettings.json` and fill in the following details:
    - `MicrosoftAppId` - Generated from Step 1 (Application (client) ID)is the application app id
    - `MicrosoftAppPassword` - Generated from Step 1, also referred to as Client secret
    - Press `F5` to run the project
 	 
-6. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
+5. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
    - `{{Microsoft-App-Id}}` with Application id generated from Step 3
    - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
-7. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 8.
+6. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 
 
-8. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+7. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps
    - Choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
