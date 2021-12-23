@@ -91,7 +91,7 @@ namespace TypeaheadSearch.Bots
                 var packageResult = JObject.Parse(await (new HttpClient()).GetStringAsync($"https://azuresearch-usnc.nuget.org/query?q=id:{searchData.queryText}&prerelease=true"));
                 var packages = packageResult["data"].Select(item => (item["id"].ToString(), item["description"].ToString()));
                 var packageList = packages.Select(item => { var obj = new { title = item.Item1, value = item.Item2 }; return obj; }).ToList();
-                var data = new
+                var searchResponseData = new
                 {
                     type = "application/vnd.microsoft.search.searchResponse",
                     value = new
@@ -100,7 +100,7 @@ namespace TypeaheadSearch.Bots
                     }
                 };
 
-                var jsonString = JsonConvert.SerializeObject(data);
+                var jsonString = JsonConvert.SerializeObject(searchResponseData);
                 JObject jsonData = JObject.Parse(jsonString);
 
                 adaptiveCardResponse = new InvokeResponse()
@@ -109,7 +109,7 @@ namespace TypeaheadSearch.Bots
                     Body = jsonData
                 };
 
-                    return adaptiveCardResponse;
+                return adaptiveCardResponse;
             }
 
                 return null;
