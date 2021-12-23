@@ -11,11 +11,11 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Search adaptive card",
+    "short": "Typeahead search Adaptive Card",
     "full": "Adaptive card with search control"
   },
   "description": {
-    "short": "Search control adaptive card",
+    "short": "Typeahead search Adaptive Card",
     "full": "This sample shows the feature of type ahead search (static and dynamic) control on Adaptive Cards."
   },
   "icons": {

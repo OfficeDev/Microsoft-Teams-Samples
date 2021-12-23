@@ -208,8 +208,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [sequential#workflow#js]:samples/bot-sequential-flow-adaptive-cards/nodejs
 [app-auth#ts]:samples/app-auth/nodejs
 [auth-in-connector#nodejs]:samples/connector-todo-notification/nodejs
-[botwithsharepointfileviewer#csharp]:sample/bot-sharepoint-file-viewer/csharp
-[typeaheadsearch#csharp]:sample/type_ahead_search_adaptive_cards/csharp
+[botwithsharepointfileviewer#csharp]:samples/bot-sharepoint-file-viewer/csharp
+[typeaheadsearch#csharp]:samples/type_ahead_search_adaptive_cards/csharp
 
 [app-task-module#cs]:samples/app-task-module/csharp
 [app-task-module#ts]:samples/app-task-module/nodejs
