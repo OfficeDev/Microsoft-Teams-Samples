@@ -69,6 +69,9 @@ This sample app illustrates the implementation of Details Tab in Meeting. User c
          _cd client > npm install > npm start_
 
 Create a new Bot by following steps mentioned in [Build a bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots?view=msteams-client-js-latest#build--a-bot-for-teams-with-the-microsoft-bot-framework) documentation.
+
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
 Go to .env file  and add ```BotId``` ,  ```BotPassword``` and ```BaseUrl as ngrok URL``` information.
 Update the manifest.json file with ```Microsoft-App-ID```,```BotId```, ```BaseUrl as ngrok URL```
 Install the app in Teams. 

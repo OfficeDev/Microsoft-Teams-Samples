@@ -40,6 +40,8 @@ This feature shown in this sample is in Public Developer Preview.
 2. Create a Bot Registration
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2#create-the-resource).
 
+   - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
 3. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
    - `<<MANIFEST-ID>>` with some unique GUID   
    - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io

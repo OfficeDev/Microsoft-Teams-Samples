@@ -75,6 +75,8 @@ This sample shows a AppCatalog bot and demonstrates teamsApp lifecycle in catalo
     i. Add these Scopes"AppCatalog.Submit, AppCatalog.Read.All, AppCatalog.ReadWrite.Al"
     ![image](https://user-images.githubusercontent.com/50989436/120748153-ec0f0f00-c51f-11eb-9a74-a010f89a6951.png)
 
+    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
 ## Concepts introduced in this sample
 - List apps in catalog
 

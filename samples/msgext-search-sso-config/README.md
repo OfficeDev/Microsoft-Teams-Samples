@@ -19,6 +19,8 @@ Bot Framework v4 sample for Teams expands the [52.teams-messaging-extensions-sea
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to use a Messaging Extension configuration page, as well as how to sign in from a search Messaging Extension.
 
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
