@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const { TeamsActivityHandler, CardFactory, ActivityHandler } = require("botbuilder");
+const { TeamsActivityHandler, CardFactory } = require("botbuilder");
 const axios = require('axios');
 const querystring = require('querystring');
 
@@ -57,11 +57,17 @@ class TeamsBot extends TeamsActivityHandler {
         npmPackages.push(attatchment);
       });
 
-      var data = {
-        "data": npmPackages
+      var result = {
+        status: 200,
+        body:{
+          "type": "application/vnd.microsoft.search.searchResponse",
+          "value": {
+            "results": npmPackages
+        }
       }
+    }
 
-      return  ActivityHandler.createInvokeResponse(data);;
+      return result;
     }
 
     return null;
@@ -69,6 +75,8 @@ class TeamsBot extends TeamsActivityHandler {
 
   // Adaptive card for static search.
   adaptiveCardForStaticSearch = () => ({
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.2",
     "type": "AdaptiveCard",
     "body": [
       {
@@ -159,13 +167,13 @@ class TeamsBot extends TeamsActivityHandler {
         "id": "submit",
         "title": "Submit"
       }
-    ],
-    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-    "version": "1.2"
+    ]
   });
 
   // Adaptive card for dynamic search.
   adaptiveCardForDyanamicSearch = () => ({
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.2",
     "type": "AdaptiveCard",
     "body": [
       {
@@ -232,9 +240,7 @@ class TeamsBot extends TeamsActivityHandler {
         "id": "submitdynamic",
         "title": "Submit"
       }
-    ],
-    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-    "version": "1.2"
+    ]
   });
 }
 

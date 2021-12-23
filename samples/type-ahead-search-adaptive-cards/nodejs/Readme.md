@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Demonstrating feature of type ahead search (static and dynamic) control in Adaptive cards.
+description: Demonstrating the feature of type ahead search (static and dynamic) control in Adaptive Cards.
 products:
 - office-teams
 - office
@@ -9,11 +9,12 @@ languages:
 - nodejs
 extensions:
 contentType: samples
-createdDate: "11-11-2021 23:30:17"
+createdDate: "24-12-2021 23:30:17"
 ---
-# Type ahead search control in Adaptive cards
 
-This sample shows feature of type ahead search (static and dynamic) control in Adaptive cards.
+# Type ahead search control on Adaptive Cards
+
+This sample shows the feature of type ahead search (static and dynamic) control in Adaptive Cards.
 
 `Static search`
 
@@ -23,6 +24,8 @@ This sample shows feature of type ahead search (static and dynamic) control in A
 
 ![dynamic search card](Images/dynamicSearchCard.png)
 
+![dynamic search result](Images/dynamicSearchResult.png)
+
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/en/)
@@ -30,6 +33,8 @@ This sample shows feature of type ahead search (static and dynamic) control in A
 
 ### 1. Setup for Bot
 In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 ### 2. Run your bot sample
 1) Clone the repository

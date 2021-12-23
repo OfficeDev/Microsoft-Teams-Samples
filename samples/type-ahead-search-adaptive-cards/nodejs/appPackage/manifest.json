@@ -11,12 +11,12 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Search adaptive card",
+    "short": "Typeahead search Adaptive Card",
     "full": "Adaptive card with search control"
   },
   "description": {
-    "short": "Search control adaptive card",
-    "full": "This sample shows feature type ahead search (static and dynamic) control in adaptive cards."
+    "short": "Type ahead search on Adaptive Card",
+    "full": "This sample shows the feature of type ahead search (static and dynamic) control on Adaptive Cards."
   },
   "icons": {
     "outline": "outline.png",
@@ -38,11 +38,11 @@
           "commands": [
             {
               "title": "staticsearch",
-              "description": "To get static search card"
+              "description": "To get static type ahead search Adaptive Card"
             },
             {
               "title": "dynamicsearch",
-              "description": "To get dynamic search card"
+              "description": "To get dynamic type ahead search Adaptive Card"
             }
           ]
         }
