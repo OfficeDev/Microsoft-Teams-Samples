@@ -63,7 +63,7 @@ b) Add the following permission in app registration
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/join-team-using-qr-code/nodejs`
+2) In a terminal, navigate to `samples/join-a-team-using-qr-code/nodejs`
 
 3) Install node modules
 
