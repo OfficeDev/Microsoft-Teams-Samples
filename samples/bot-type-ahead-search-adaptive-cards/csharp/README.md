@@ -15,11 +15,17 @@ createdDate: "11-11-2021 23:30:17"
 
 This sample shows the feature of type ahead search (static and dynamic) control on Adaptive Cards.
 
+ Use the bot command `staticsearch` to get card for static typeahead search and command `dynamicsearch` to get card for dynamic typeahead search
+
 `Static search`
+ 
+ Static typeahead search allows users to search from values specified within input.choiceset in the Adaptive Card payload.
 
 ![static search card](TypeaheadSearch/Images/staticSearchCard.png)
 
 `Dynamic search`
+
+ Dynamic typeahead search is useful to search and select data from large data sets. The data sets are loaded dynamically from the dataset specified in the card payload.
 
 ![dynamic search card](TypeaheadSearch/Images/dynamicSearchCard.png)
 
