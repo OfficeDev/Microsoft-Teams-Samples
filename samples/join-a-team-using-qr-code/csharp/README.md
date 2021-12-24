@@ -1,12 +1,12 @@
 ---
 page_type: sample
-description: This sample demos a feature where you can join a team using QR code containing the team's id.
+description: This sample demos a feature where user can join a team using QR code containing the team's id.
 products:
 - office-teams
 - office
 - office-365
 languages:
-- nodejs
+- csharp
 extensions:
 contentType: samples
 createdDate: "24-12-2021 23:35:25"
@@ -61,9 +61,7 @@ User can generate a new QR code (contains team id information) and then scan the
 4. Create a Bot Registration
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
-   **Note:** Once the Azure Bot is created, go to navigation pane and under Settings section select Channels and enable Microsoft Teams Channel.
-
-    ![Configure Channel](JoinTeamByQR/Images/BotChannel.png)
+   - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
    b) Add this permission to app registration
 

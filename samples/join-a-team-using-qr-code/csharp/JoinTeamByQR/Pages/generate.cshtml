@@ -25,6 +25,7 @@
              getTeams();
         })
 
+        // This method wil fetch team data that will be used for creating QR code.
         function getTeams() {
             QR_CODE = new QRCode("qrcode", {
                 width: 160,
@@ -48,22 +49,27 @@
                 },
             });
         }
+        // Method to dynamically set dropdown values.
         function setData(data) {
             var select = document.createElement("select");
             select.name = "teams";
             select.id = "teams"
             select.class = "form-select"
+
             for (const val of data) {
                 var option = document.createElement("option");
                 option.value = val.teamId;
                 option.text = val.teamName;
                 select.appendChild(option);
             }
+
             var label = document.createElement("label");
             label.innerHTML = "Select the team"
             label.htmlFor = "teams";
             document.getElementById("container").appendChild(label).appendChild(select);
         }
+
+        // Method to generate QR code based on selected team.
         function generateQR() {
             var teamId = $("#teams").val();
             $("#qrcode").removeAttr("hidden");

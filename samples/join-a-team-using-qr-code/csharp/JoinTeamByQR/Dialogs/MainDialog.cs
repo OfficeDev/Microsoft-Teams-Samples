@@ -110,7 +110,7 @@ namespace JoinTeamByQR.Dialogs
                             {
                                 Type = "task/fetch",
                             },
-                            Id="generate"
+                            Id = "generate"
                         },
                     },
                 },
