@@ -46,6 +46,7 @@ class SsoOAuthHelpler {
                 // TODO: Should send 200 invoke response here???
                 return false;
             }
+
             throw err;
         }
 
@@ -63,7 +64,7 @@ class SsoOAuthHelpler {
                 tokenExchangeRequest.connectionName,
                 turnContext.activity.from.id,
                 { token: tokenExchangeRequest.token });
-                
+
             console.log('tokenExchangeResponse: ' + JSON.stringify(tokenExchangeResponse));
         } catch (err) {
             console.log(err);

@@ -2,6 +2,8 @@
 const getAdaptiveCardUserDetails = () => {
     const adaptiveCard = {
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
+        type: 'AdaptiveCard',
+        version: '1.4',
         body: [
             {
                 type: 'TextBlock',
@@ -21,9 +23,7 @@ const getAdaptiveCardUserDetails = () => {
                     id: "generate"
                 }
             }
-        ],
-        type: 'AdaptiveCard',
-        version: '1.4'
+        ]
     };
     return adaptiveCard;
 }

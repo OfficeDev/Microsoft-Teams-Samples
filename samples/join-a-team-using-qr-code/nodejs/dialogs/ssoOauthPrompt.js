@@ -33,10 +33,10 @@ class SsoOAuthPrompt extends OAuthPrompt {
                 {
                     type: ActivityTypes.InvokeResponse,
                     value:
-                        {
-                            status: StatusCodes.OK,
-                            body: exchangeResponse
-                        }
+                    {
+                        status: StatusCodes.OK,
+                        body: exchangeResponse
+                    }
                 });
 
             result.succeeded = true;
