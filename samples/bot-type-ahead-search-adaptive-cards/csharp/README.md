@@ -33,6 +33,8 @@ This sample shows the feature of type ahead search (static and dynamic) control 
 
 ![dynamic search results](TypeaheadSearch/Images/dynamicSearchResults.png)
 
+ On submit the bot will return the choice we selected.
+
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
