@@ -51,23 +51,49 @@ class TeamsBot extends TeamsActivityHandler {
       response.data.objects.forEach(obj => {
         const attatchment = {
           "title": obj.package.name,
-          "value": obj.package.description
+          "value": `${obj.package.name} - ${obj.package.description}`
         };
 
         npmPackages.push(attatchment);
       });
 
-      var result = {
-        status: 200,
-        body:{
-          "type": "application/vnd.microsoft.search.searchResponse",
-          "value": {
-            "results": npmPackages
+      if (response.status == 200){
+        var successResult = {
+          status: 200,
+          body:{
+            "type": "application/vnd.microsoft.search.searchResponse",
+            "value": {
+              "results": npmPackages
+          }
         }
       }
-    }
+  
+        return successResult;
+      }
+      else if(response.status == 204){
+        var noResultFound = {
+          status: 204,
+          body:{
+            "type": "application/vnd.microsoft.search.searchResponse" 
+          }
+        }
+  
+        return noResultFound;
+      }
+      else if(response.status == 500){
+        var errorResult = {
+          status: 500,
+          body:{
+            "type": "application/vnd.microsoft.error",
+            "value": {
+              "code": "500", 
+              "message": "error message: internal Server Error" 
+          }
+        }
+      }
 
-      return result;
+        return errorResult;
+      }
     }
 
     return null;

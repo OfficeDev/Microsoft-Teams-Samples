@@ -43,7 +43,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In the folder where repository is cloned navigate to `samples/type-ahead-search-adaptive-cards/nodejs`
+2) In the folder where repository is cloned navigate to `samples/bot-type-ahead-search-adaptive-cards/nodejs`
 
 3) Install node modules
 
