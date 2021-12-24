@@ -1,4 +1,4 @@
-﻿﻿---
+---
 page_type: sample
 description: This sample demos a feature where you can join a team using QR code containing the team's id.
 products:
@@ -22,15 +22,15 @@ User can generate a new QR code (contains team id information) and then scan the
 
 - Type a message to get a card to generate the QR code.
 
- ![Card](JoinTeamUsingQR/Images/CardWithButtons.png)
+ ![Card](JoinTeamByQR/Images/CardWithButtons.png)
 
 - Select the team from dropdown list for which you want to generate the QR code and then click on      'Generate QR' button.
 
- ![QR Code](JoinTeamUsingQR/Images/QRCode.png)
+ ![QR Code](JoinTeamByQR/Images/QRCode.png)
 
 - Scan the generated QR code to join the team.
 
- ![Join Team](JoinTeamUsingQR/Images/TeamQR.png)
+ ![Join Team](JoinTeamByQR/Images/TeamQR.png)
 
 ## Prerequisites
 
@@ -63,11 +63,11 @@ User can generate a new QR code (contains team id information) and then scan the
 
    **Note:** Once the Azure Bot is created, go to navigation pane and under Settings section select Channels and enable Microsoft Teams Channel.
 
-    ![Configure Channel](JoinTeamUsingQR/Images/BotChannel.png)
+    ![Configure Channel](JoinTeamByQR/Images/BotChannel.png)
 
    b) Add this permission to app registration
 
-    ![Permissions](JoinTeamUsingQR/Images/Permission.png)
+    ![Permissions](JoinTeamByQR/Images/Permission.png)
 
 5. Modify the `manifest.json` in the `/AppManifest` folder and replace the `<<Microsoft-App-Id>>` with the id from step 2.
 
@@ -87,7 +87,7 @@ User can generate a new QR code (contains team id information) and then scan the
 
     ```bash
     # change into project folder
-    cd # JoinTeamUsingQR
+    cd # JoinTeamByQR
     ```
 
 - Run the bot from a terminal or from Visual Studio, choose option A or B.
@@ -104,7 +104,7 @@ User can generate a new QR code (contains team id information) and then scan the
   - Launch Visual Studio
   - File -> Open -> Project/Solution
   - Navigate to `samples/join-a-team-using-qr-code/csharp` folder
-  - Select `JoinTeamUsingQR.csproj` file
+  - Select `JoinTeamByQR.csproj` file
   - Press `F5` to run the project
 
 ## Deploy the bot to Azure
