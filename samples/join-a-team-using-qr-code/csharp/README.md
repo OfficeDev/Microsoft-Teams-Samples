@@ -22,15 +22,15 @@ User can generate a new QR code (contains team id information) and then scan the
 
 - Type a message to get a card to generate the QR code.
 
- ![Card](Images/CardWithButtons.png)
+ ![Card](JoinTeamUsingQR/Images/CardWithButtons.png)
 
 - Select the team from dropdown list for which you want to generate the QR code and then click on      'Generate QR' button.
 
- ![QR Code](Images/QRCode.png)
+ ![QR Code](JoinTeamUsingQR/Images/QRCode.png)
 
 - Scan the generated QR code to join the team.
 
- ![Join Team](Images/TeamQR.png)
+ ![Join Team](JoinTeamUsingQR/Images/TeamQR.png)
 
 ## Prerequisites
 
@@ -63,11 +63,11 @@ User can generate a new QR code (contains team id information) and then scan the
 
    **Note:** Once the Azure Bot is created, go to navigation pane and under Settings section select Channels and enable Microsoft Teams Channel.
 
-    ![Configure Channel](Images/BotChannel.png)
+    ![Configure Channel](JoinTeamUsingQR/Images/BotChannel.png)
 
    b) Add this permission to app registration
 
-    ![Permissions](BotWithSharePointFileViewer/Images/permissions.png)
+    ![Permissions](JoinTeamUsingQR/Images/Permission.png)
 
 5. Modify the `manifest.json` in the `/AppManifest` folder and replace the `<<Microsoft-App-Id>>` with the id from step 2.
 
