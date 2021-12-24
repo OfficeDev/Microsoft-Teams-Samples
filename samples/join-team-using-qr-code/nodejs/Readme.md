@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demos joining a team using QR code containing the team id.
+description: This sample demos a feature where you can join a team using QR code containing the team's id.
 products:
 - office-teams
 - office
@@ -12,19 +12,19 @@ contentType: samples
 createdDate: "21-12-2021 23:35:25"
 ---
 
-# Join team using QR code sample
+# Join a team using QR code sample
 
-This sample demos joining a team using QR code containing the team id.
+This sample demos a feature where user can join a team using QR code containing the team's id.
 
-The user can Generate a new QR code (contains team id information) and then scan the QR code to join the team.
+User can generate a new QR code (contains team id information) and then scan the QR code to join the team.
 
-`Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients`
+`Currently, Microsoft Teams support for QR or barcode scanner capability is only supported for mobile clients`
 
-- Type a message to get card with generate action.
+- Type a message to get a card to generate the QR code.
 
  ![Card](Images/CardWithButtons.png)
 
-- Select the team for which you want to generate the QR code and click generate button.
+- Select the team from dropdown list for which you want to generate the QR code and then click on      'Generate QR' button.
 
  ![QR Code](Images/QRCode.png)
 
@@ -49,6 +49,7 @@ The user can Generate a new QR code (contains team id information) and then scan
 a) In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
 **Note:** Once the Azure Bot is created, go to navigation pane and under Settings section select Channels and enable Microsoft Teams Channel.
+
 ![Configure Channel](Images/BotChannel.png)
 
 b) Add the following permission in app registration
@@ -88,15 +89,15 @@ b) Add the following permission in app registration
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
-    > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
+     > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
 ## Features of this sample
 
-- Type a message to get card with generate action.
+- Type a message to get a card to generate the QR code.
 
  ![Card](Images/CardWithButtons.png)
 
-- Select the team for which you want to generate the QR code and click generate button.
+- Select the team from dropdown list for which you want to generate the QR code and then click on 'Generate QR' button.
 
  ![QR Code](Images/QRCode.png)
 

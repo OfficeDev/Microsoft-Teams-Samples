@@ -14,11 +14,11 @@ const Token_State_Property = 'TokenData';
 
 class MainDialog extends LogoutDialog {
     constructor(conversationState) {
-        super(MAIN_DIALOG, process.env.connectionName);
+        super(MAIN_DIALOG, process.env.ConnectionName);
         this.conversationDataAccessor = conversationState.createProperty(Token_State_Property);
 
         this.addDialog(new SsoOAuthPrompt(OAUTH_PROMPT, {
-            connectionName: process.env.connectionName,
+            connectionName: process.env.ConnectionName,
             text: 'Please Sign In',
             title: 'Sign In',
             timeout: 300000

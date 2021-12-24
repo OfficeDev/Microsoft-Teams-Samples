@@ -27,26 +27,26 @@ class SsoOAuthPrompt extends OAuthPrompt {
             let result = {};
 
             // TokenExchangeInvokeResponse
-            const exchangeResponse = new TokenExchangeInvokeResponse(tokenExchangeRequest.id, this.settings.connectionName, this.failureDetail);
+            const exchangeResponse = new TokenExchangeInvokeResponse(tokenExchangeRequest.id, this.settings.ConnectionName, this.failureDetail);
 
             await dialogContext.context.sendActivity(
                 {
                     type: ActivityTypes.InvokeResponse,
                     value:
-                    {
-                        status: StatusCodes.OK,
-                        body: exchangeResponse
-                    }
+                        {
+                            status: StatusCodes.OK,
+                            body: exchangeResponse
+                        }
                 });
 
             result.succeeded = true;
             // TokenResponse
             result.value =
-            {
-                channelId: cachedTokenResponse.channelId,
-                connectionName: this.settings.connectionName,
-                token: cachedTokenResponse.token
-            };
+                {
+                    channelId: cachedTokenResponse.channelId,
+                    connectionName: this.settings.ConnectionName,
+                    token: cachedTokenResponse.token
+                };
 
             return await dialogContext.endDialog(result.value);
         }

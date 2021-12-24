@@ -93,9 +93,7 @@ server.get('/qrcode', (req, res, next) => {
 });
 
 server.get('/teamDetails', function (req, res) {
-
     var teamDetails = teamData["data"];
-
     res.render('./views/generate', { teamDetails: JSON.stringify(teamDetails) });
 });
 

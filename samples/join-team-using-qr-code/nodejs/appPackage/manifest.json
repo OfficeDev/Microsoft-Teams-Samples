@@ -12,11 +12,11 @@
   },
   "name": {
     "short": "Join team by QR",
-    "full": "Join team by QR"
+    "full": "oin the team by scanning QR code"
   },
   "description": {
     "short": "Join team by QR",
-    "full": "This sample demos joining a team using QR code containing the team id."
+    "full": "This sample demos a feature where user can join a team using QR code containing the team's id."
   },
   "icons": {
     "outline": "outline.png",
