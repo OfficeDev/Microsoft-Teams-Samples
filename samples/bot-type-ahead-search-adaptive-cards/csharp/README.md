@@ -59,7 +59,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 
 2. Open the code in Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/type-ahead-search-adaptive-cards/csharp/TypeaheadSearch.sln`
+   - Navigate to folder where repository is cloned then `samples/bot-type-ahead-search-adaptive-cards/csharp/TypeaheadSearch.sln`
     
 3. Run ngrok - point to port 3978
 

@@ -209,7 +209,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [app-auth#ts]:samples/app-auth/nodejs
 [auth-in-connector#nodejs]:samples/connector-todo-notification/nodejs
 [botwithsharepointfileviewer#csharp]:samples/bot-sharepoint-file-viewer/csharp
-[typeaheadsearch#csharp]:samples/type-ahead-search-adaptive-cards/csharp
+[typeaheadsearch#csharp]:samples/bot-type-ahead-search-adaptive-cards/csharp
 
 [app-task-module#cs]:samples/app-task-module/csharp
 [app-task-module#ts]:samples/app-task-module/nodejs

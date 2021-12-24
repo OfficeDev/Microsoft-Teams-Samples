@@ -87,27 +87,69 @@ namespace TypeaheadSearch.Bots
             InvokeResponse adaptiveCardResponse;
             if (turnContext.Activity.Name == "application/search")
             {
+                var responseStatus = 0;
                 var searchData = JsonConvert.DeserializeObject<DynamicSearchCard>(turnContext.Activity.Value.ToString());
                 var packageResult = JObject.Parse(await (new HttpClient()).GetStringAsync($"https://azuresearch-usnc.nuget.org/query?q=id:{searchData.queryText}&prerelease=true"));
-                var packages = packageResult["data"].Select(item => (item["id"].ToString(), item["description"].ToString()));
-                var packageList = packages.Select(item => { var obj = new { title = item.Item1, value = item.Item2 }; return obj; }).ToList();
-                var searchResponseData = new
+                responseStatus = (int)packageResult["status"];
+                if(responseStatus == 204)
                 {
-                    type = "application/vnd.microsoft.search.searchResponse",
-                    value = new
+                    var searchResponseData = new
                     {
-                        results = packageList
-                    }
-                };
+                        type = "application/vnd.microsoft.search.searchResponse"
+                    };
 
-                var jsonString = JsonConvert.SerializeObject(searchResponseData);
-                JObject jsonData = JObject.Parse(jsonString);
+                    var jsonString = JsonConvert.SerializeObject(searchResponseData);
+                    JObject jsonData = JObject.Parse(jsonString);
 
-                adaptiveCardResponse = new InvokeResponse()
+                    adaptiveCardResponse = new InvokeResponse()
+                    {
+                        Status = 200,
+                        Body = jsonData
+                    };
+                }
+                else if(responseStatus == 500)
                 {
-                    Status = 200,
-                    Body = jsonData
-                };
+                    var searchResponseData = new
+                    {
+                        type = "application/vnd.microsoft.search.searchResponse",
+                        value = new
+                        {
+                            code = 500,
+                            message = "error message: internal Server Error"
+                        }
+                    };
+
+                    var jsonString = JsonConvert.SerializeObject(searchResponseData);
+                    JObject jsonData = JObject.Parse(jsonString);
+
+                    adaptiveCardResponse = new InvokeResponse()
+                    {
+                        Status = 200,
+                        Body = jsonData
+                    };
+                }
+                else
+                {
+                    var packages = packageResult["data"].Select(item => (item["id"].ToString(), item["description"].ToString()));
+                    var packageList = packages.Select(item => { var obj = new { title = item.Item1, value = item.Item1 + " - " + item.Item2 }; return obj; }).ToList();
+                    var searchResponseData = new
+                    {
+                        type = "application/vnd.microsoft.search.searchResponse",
+                        value = new
+                        {
+                            results = packageList
+                        }
+                    };
+
+                    var jsonString = JsonConvert.SerializeObject(searchResponseData);
+                    JObject jsonData = JObject.Parse(jsonString);
+
+                    adaptiveCardResponse = new InvokeResponse()
+                    {
+                        Status = 200,
+                        Body = jsonData
+                    };
+                }
 
                 return adaptiveCardResponse;
             }
