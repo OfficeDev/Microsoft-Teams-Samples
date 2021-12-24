@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams sample app for Sending Activity feed notification using Graph API in a Teams Tab.
+description: This sample shows a feature where requester can request for any task approval from manager and manager can see the pending request by user on the click of activity feed notification and can approve or reject the request.
 products:
 - office-teams
 - office
@@ -9,48 +9,53 @@ languages:
 - csharp
 extensions:
 contentType: samples
-createdDate: "07-07-2021 13:38:26"
+createdDate: "29-11-2021 17:00:25"
 ---
 
-# Activity Feed Notification
+# Send task approvals using activity feed notification (Graph APIs)
 
-Bot Framework v4 Activity Feed sample using Tab.
+This sample shows a feature where:
+1. Requester : Can request for any task approval from manager by sending activity feed notification and can see his request status.
+2. Manager : Can see the pending approval request raised by user on the click of activity feed notification and can approve or reject the request.
 
-This sample has been created using [Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-beta), it shows how trigger a Activity feed notification from your Tab, it triggers the feed notification for User, Chat and Team scope and send back to conversation.
+User Persona:
+
+- Send request to the manger for task approval.
+
+  ![Request from user](TabRequestApproval/Images/TaskRequest.png)
+
+- Request status
+
+  ![Request status](TabRequestApproval/Images/RequestStatus.png)
+
+Manager Persona:
+
+- Activity feed notification of approval request.
+
+  ![Notification](TabRequestApproval/Images/RequestNotification.png)
+
+- Pending task approval request.
+
+  ![Pending request list](TabRequestApproval/Images/RequestDetails.png)
 
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
 
+  determine dotnet version
   ```bash
-  # determine dotnet version
   dotnet --version
   ```
+- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+  
+  run ngrok locally
+  ```bash
+  ngrok http -host-header=localhost 3978
+  ```
+- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 ## To try this sample
 
-- Clone the repository
-
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
-
-- Run the bot from a terminal or from Visual Studio:
-
-  A) From a terminal, navigate to `samples/graph-activity-feed/csharp` folder
-
-  ```bash
-  # run the bot
-  dotnet run
-  ```
-
-  B) Or from Visual Studio
-
-  - Launch Visual Studio
-  - File -> Open -> Project/Solution
-  - Navigate to `samples/graph-activity-feed/csharp` folder
-  - Select `TabActivityFeed.csproj` file
-  - Press `F5` to run the project
 ### Register your Teams Auth SSO with Azure AD
 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
@@ -81,17 +86,14 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
 -   Select Add a permission
 -   Select Microsoft Graph -\> Delegated permissions.
     - `User.Read` (enabled by default)
-    - `email`
-    - `offline_access`
-    - `OpenId`
-    - `profile`
-    - `ChannelMessage.Send`
+    - `Directory.Read.All`
+    - `Directory.ReadWrite.All`
     - `ChatMessage.Send`
     - `Chat.ReadWrite`
     - `TeamsActivity.Send`
     - `TeamsAppInstallation.ReadForUser.All`.
 
-**Note** Your need to add `TeamsActivity.Send` as Application level permissions
+**Note** Your need to add `TeamsActivity.Send` and `Directory.Read.All` as Application level permissions too.
 
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 13. Navigate to **Authentication**
@@ -100,45 +102,51 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
     * Select **Add a platform**.
     * Select **web**.
     * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/Auth/end`, `https://{Base_Url}/Auth/Start`. This will be the page where a successful implicit grant flow will redirect the user.
-    
+	Again
+	* Select **Single page application**.
+	* Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/TabAuth`
     Enable implicit grant by checking the following boxes:  
     ✔ ID Token  
     ✔ Access Token  
-14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
+14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
-1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). Also, replace your Base url wherever you see the place holder string `<<YOUR-BASE-URL>>`.
-    - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+15. Clone the repository
+   ```bash
+   git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+   ```
 
-1) Update appsettings.json file with Microsoft App Id, App Secret, Tenant Id (from bot created earlier).
-2) Run your app, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
+16. Open the code in Visual Studio
+   - File -> Open -> Project/Solution
+   - Navigate to folder where repository is cloned then `samples/tab-request-approval/csharp/TabRequestApproval.sln`
+    
+17. Run ngrok - point to port 3978
 
+    ```bash
+    # ngrok http -host-header=rewrite 3978
+    ```
+ 
+18. Setup and run the bot from Visual Studio: 
+   Modify the `appsettings.json` and fill in the following details:
+   - `MicrosoftAppId` - Generated from Step 3 (Application (client) ID)is the application app id
+   - `TenantId` - Generated from Step 3(Directory (tenant) ID) is the tenant id
+   - `MicrosoftAppPassword` - Generated from Step 14, also referred to as Client secret
+   - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+   - Press `F5` to run the project
+	 
+19. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
+   - `{{Microsoft-App-Id}}` with Application id generated from Step 3
+   - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
-## Setting up activity types in manifest
-Teams Activity feed notification API uses activity to which user want a notification which we specify in app manifest, Add following activity type in your manifest for task creation.
+20. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 19.
 
-  ```"activities": {
-    "activityTypes": [
-      {
-        "type": "taskCreated",
-        "description": "Task created activity",
-        "templateText": "New created task {taskName} for you"
-      }
-    ]
-}
-```
-## User Interaction with Tab Activity Feed App
+21. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams and then go to side panel, select Apps
+   - Choose Upload a custom App
+   - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.    
 
-- Install TabActivityFeed manifest in Teams
-- Add Tab in Personal, GroupChat or Team scope
-- Fill the Details in Page and click on Send notification button
-![image](https://user-images.githubusercontent.com/50989436/109036739-eb303b00-76ef-11eb-91d2-806c2b180396.png)
-
-- Notification triggred by Tab App will appear in Teams Activity Feed
-
-![image](https://user-images.githubusercontent.com/50989436/109036793-fb481a80-76ef-11eb-9fc5-eafc763a67d8.png)
-
+Note: App should be installed for user's manager also to get task approval notification.
 ## Further reading
 
 - [Bot Framework Documentation](https://docs.botframework.com)
@@ -146,4 +154,3 @@ Teams Activity feed notification API uses activity to which user want a notifica
 - [Send Notification to User in Chat](https://docs.microsoft.com/en-us/graph/api/chat-sendactivitynotification?view=graph-rest-beta)
 - [Send Notification to User in Team](https://docs.microsoft.com/en-us/graph/api/team-sendactivitynotification?view=graph-rest-beta&tabs=http)
 - [Send Notification to User](https://docs.microsoft.com/en-us/graph/api/userteamwork-sendactivitynotification?view=graph-rest-beta&tabs=http)
-
