@@ -10,14 +10,20 @@ using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Net.Http;
+using Microsoft.Bot.Builder.Integration.ApplicationInsights.Core;
 
 namespace AppCheckinLocation
 {
     public class AdapterWithErrorHandler : CloudAdapter
     {
-        public AdapterWithErrorHandler(IConfiguration configuration, IHttpClientFactory httpClientFactory, ILogger<IBotFrameworkHttpAdapter> logger, ConversationState conversationState = default)
+        public AdapterWithErrorHandler(IConfiguration configuration, 
+            IHttpClientFactory httpClientFactory, 
+            ILogger<IBotFrameworkHttpAdapter> logger,
+            TelemetryInitializerMiddleware telemetryInitializerMiddleware,
+            ConversationState conversationState = default)
             : base(configuration, httpClientFactory, logger)
         {
+            Use(telemetryInitializerMiddleware);
             OnTurnError = async (turnContext, exception) =>
             {
                 // Log any leaked exception from the application.
