@@ -18,7 +18,8 @@ export interface INoteDetails {
   addedBy: string,
   addedByName?: string,
   note: string,
-  timestamp?: string
+  timestamp?: string,
+  meetingId?: string
 }
 
 // Interface for feedback submiited for questions.

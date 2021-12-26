@@ -11,6 +11,8 @@ namespace MeetingApp.Model
         public RosterInfo[] Roster { get; set; }
 
         public string Note { get; set; }
+
+        public string SharedByName { get; set; }
     }
 
     /// <summary>

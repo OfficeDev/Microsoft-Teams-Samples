@@ -15,6 +15,7 @@ export interface IBasicDetailsMobileProps {
 const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
     const [candidateDetails, setCandidateDetails] = React.useState<ICandidateDetails[]>([]);
     const [skills, setSkills] = React.useState<string[]>([]);
+    const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
 
     const openShareTaskModule = () => {
         let taskInfo = {
@@ -29,18 +30,30 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
                 console.log("Some error occurred in the task module")
                 return
             }
-            if (note !== undefined) {
-                const assetDetail: IAssetDetails = {
-                    message: note
+            var details = JSON.parse(note);
+            let files = new Array();
+            details.checkedValues.map((item: any) => {
+                if (item.isChecked == true) {
+                    files.push(item.name);
                 }
-                shareAssets(assetDetail)
-                    .then((res) => {
-                        console.log(res)
-                    })
-                    .catch((ex) => {
-                        console.log("Some error occurred while sharing the assets info");
-                        console.log(ex);
-                    });
+            })
+            if (note !== undefined) {
+                microsoftTeams.getContext((context) => {
+                    const assetDetail: IAssetDetails = {
+                        message: details.note,
+                        sharedBy: context.userPrincipalName!,
+                        meetingId: context.meetingId!,
+                        files: files,
+                    }
+                    shareAssets(assetDetail)
+                        .then((res) => {
+                            console.log(res)
+                        })
+                        .catch((ex) => {
+                            console.log("Some error occurred while sharing the assets info");
+                            console.log(ex);
+                        });
+                })
             }
         })
     }
@@ -58,6 +71,11 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
             });
     }, [])
 
+    React.useEffect( () => {
+        setSelectedIndex(props.selectedIndex);
+    }, [props.selectedIndex])
+
+
     return (
         <Card fluid aria-roledescription="card with basic details" className="basic-details-card-mobile">
             <Card.Header>
@@ -73,18 +91,18 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
                             status="unknown"
                         />
                         <Flex column>
-                            <Text content={candidateDetails[props.selectedIndex]?.candidateName} />
-                            <Text content={candidateDetails[props.selectedIndex]?.role} size="small" className="roleText" />
+                            <Text content={candidateDetails[selectedIndex]?.candidateName} />
+                            <Text content={candidateDetails[selectedIndex]?.role} size="small" className="roleText" />
                         </Flex>
                     </Flex>
                     <Flex column>
                         <Flex gap="gap.small">
                             <Text content="Experience" size="small" className="expLabel" />
-                            <Text content={candidateDetails[props.selectedIndex]?.experience} size="small" />
+                            <Text content={candidateDetails[selectedIndex]?.experience} size="small" />
                         </Flex>
                         <Flex gap="gap.small">
                             <Text content="Education" size="small" />
-                            <Text content={candidateDetails[props.selectedIndex]?.education} size="small" className="education" />
+                            <Text content={candidateDetails[selectedIndex]?.education} size="small" className="education" />
                         </Flex>
                     </Flex>
                     <Flex column>
@@ -102,10 +120,10 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
                         <Header as="h5" content="Links" className="subHeaders" />
                         <Flex gap="gap.small" className="linkIcons">
                             <img src={LinkedInLogo} alt="Linked in icon" onClick={() => {
-                                window.open(candidateDetails[props.selectedIndex].linkedInUrl)
+                                window.open(candidateDetails[selectedIndex].linkedInUrl)
                             }} />
                             <img src={TwitterLogo} alt="Twitter icon" onClick={() => {
-                                window.open(candidateDetails[props.selectedIndex].twitterUrl)
+                                window.open(candidateDetails[selectedIndex].twitterUrl)
                             }} />
                         </Flex>
                         <Flex gap="gap.small">

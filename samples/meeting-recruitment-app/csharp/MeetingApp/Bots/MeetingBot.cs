@@ -12,6 +12,7 @@ using MeetingApp.Model;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Schema;
+using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
@@ -43,8 +44,9 @@ namespace MeetingApp.Bots
         /// <param name="activity">Bot activity</param>
         private void AddConversationReference(Activity activity)
         {
+            var meetingId = (activity.GetChannelData<TeamsChannelData>())?.Meeting?.Id;
             var conversationReference = activity.GetConversationReference();
-            _conversationReferences.AddOrUpdate(conversationReference.User.Id, conversationReference, (key, newValue) => conversationReference);
+            _conversationReferences.AddOrUpdate(meetingId, conversationReference, (key, newValue) => conversationReference);
         }
 
         /// <summary>
@@ -63,9 +65,17 @@ namespace MeetingApp.Bots
                 Roster = rosterInfo,
                 Note = ""
             };
+            var meetingId = (turnContext.Activity.GetChannelData<TeamsChannelData>())?.Meeting?.Id;
 
             // Adding member information to the dictionary.
-            _conversationDataReference.AddOrUpdate("conversationData", conversationData, (key, newValue) => conversationData);
+            _conversationDataReference.AddOrUpdate(meetingId, conversationData, (key, newValue) => conversationData);
+        }
+
+        protected override Task OnConversationUpdateActivityAsync(ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
+        {
+            AddConversationReference(turnContext.Activity as Activity);
+            GetConversationMembers(turnContext);
+            return base.OnConversationUpdateActivityAsync(turnContext, cancellationToken);
         }
 
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
@@ -81,7 +91,6 @@ namespace MeetingApp.Bots
                 // Greet anyone that was not the target (recipient) of this message.
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    AddConversationReference(turnContext.Activity as Activity);
                     await GetConversationMembers(turnContext);
                     var welcomeText = "Hello and welcome!";
                     await turnContext.SendActivityAsync(MessageFactory.Text(welcomeText, welcomeText), cancellationToken);

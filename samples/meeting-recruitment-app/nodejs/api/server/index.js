@@ -121,13 +121,37 @@ server.get('/api/Candidate/file', (req, res) => {
 server.post('/api/Notify', async (req, res) => {
     for (const conversationReference of Object.values(ConversationRef)) {
         await adapter.continueConversation(conversationReference, async turnContext => {
-            await turnContext.sendActivity({ attachments: [CardFactory.adaptiveCard(cardHelper.getCardForMessage(req.body.message))] });
+            var actions = new Array();
+            req.body.files.map((file) => {
+                actions.push({
+                    type: "Action.OpenUrl",
+                    title: file,
+                    url: process.env.BlobUrl +"/" +file
+                });
+            })
+            const userCard = CardFactory.adaptiveCard(cardHelper.getCardForMessage(req.body.message, actions));
+            await turnContext.sendActivity({ attachments: [userCard] });
         });
     }
     res.setHeader('Content-Type', 'text/html');
     res.writeHead(200);
     res.write('<html><body><h1>Proactive messages have been sent.</h1></body></html>');
     res.end();
+});
+
+getCardForMessage = (message, actions) => ({
+    $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
+    body: [
+        {
+            type: 'TextBlock',
+            size: 'Medium',
+            weight: 'Bolder',
+            text: message
+        }
+    ],
+    actions: actions,
+    type: 'AdaptiveCard',
+    version: '1.4'
 });
 
 server.listen(PORT, () => {

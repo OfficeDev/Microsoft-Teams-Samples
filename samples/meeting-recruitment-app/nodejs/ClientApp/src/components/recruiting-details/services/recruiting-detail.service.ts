@@ -48,6 +48,6 @@ export function download(): Promise<AxiosResponse<unknown>> {
 }
 
 // API call to share assets and notes.
-export function shareAssets(note: IAssetDetails): Promise<AxiosResponse<unknown>> {
-  return axios.post(`${window.location.origin}/api/Notify`, note);
+export function shareAssets(assetDetails: IAssetDetails): Promise<AxiosResponse<unknown>> {
+  return axios.post(`${window.location.origin}/api/Notify`, assetDetails);
 }

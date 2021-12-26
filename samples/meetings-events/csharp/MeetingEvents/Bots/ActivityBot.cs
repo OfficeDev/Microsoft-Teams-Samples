@@ -42,7 +42,7 @@ namespace MeetingEvents.Bots
         }
 
         /// <summary>
-        /// Activity Handler for Meeting end event
+        /// Activity Handler for Meeting end event.
         /// </summary>
         /// <param name="meeting"></param>
         /// <param name="turnContext"></param>
