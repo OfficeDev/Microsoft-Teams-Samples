@@ -9,7 +9,7 @@ languages:
 - C#
 extensions:
 contentType: samples
-createdDate: "11-11-2021 23:30:17"
+createdDate: "24-12-2021 23:30:17"
 ---
 # Typeahead search control in Adaptive Cards
 
