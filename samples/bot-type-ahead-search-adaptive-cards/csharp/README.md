@@ -15,7 +15,7 @@ createdDate: "11-11-2021 23:30:17"
 
 This sample shows the feature of typeahead search (static and dynamic) control in Adaptive Cards.
 
- Use the bot command `staticsearch` to get card for static typeahead search and command `dynamicsearch` to get card for dynamic typeahead search
+ Use the bot command `staticsearch` to get the card for static typeahead search and command `dynamicsearch` to get the card for dynamic typeahead search
 
 `Static search`
  
@@ -33,7 +33,7 @@ This sample shows the feature of typeahead search (static and dynamic) control i
 
 ![dynamic search results](TypeaheadSearch/Images/dynamicSearchResults.png)
 
- On submit the bot will return the choice we selected.
+ On submit, the bot will return the choice that we have selected.
 
 ## Prerequisites
 
