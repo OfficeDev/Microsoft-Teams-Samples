@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Demonstrating the feature of type-ahead search (static and dynamic) control on Adaptive Cards.
+description: Demonstrating the feature of typeahead search (static and dynamic) control in Adaptive Cards.
 products:
 - office-teams
 - office
@@ -11,9 +11,9 @@ extensions:
 contentType: samples
 createdDate: "11-11-2021 23:30:17"
 ---
-# Type ahead search control on Adaptive Cards
+# Typeahead search control in Adaptive Cards
 
-This sample shows the feature of type ahead search (static and dynamic) control on Adaptive Cards.
+This sample shows the feature of typeahead search (static and dynamic) control in Adaptive Cards.
 
  Use the bot command `staticsearch` to get card for static typeahead search and command `dynamicsearch` to get card for dynamic typeahead search
 
