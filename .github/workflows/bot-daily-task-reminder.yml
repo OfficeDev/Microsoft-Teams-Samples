@@ -7,7 +7,7 @@ on:
     #Change the branch name to <<main>>
     #Change the path to the folder where your code resides. Any change here will start the activity. 
     branches:
-      - v-abt/meeting-stage-fix
+      - main
     paths:
       - 'samples/bot-daily-task-reminder/csharp/**'  
   workflow_dispatch:
