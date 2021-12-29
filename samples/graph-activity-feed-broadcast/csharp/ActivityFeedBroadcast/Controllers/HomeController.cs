@@ -156,6 +156,8 @@ namespace ActivityFeedBroadcast.Controllers
                             .SendActivityNotification(topic, "approvalRequired", null, previewText, templateParameters)
                             .Request()
                             .PostAsync();
+
+                        await Task.Delay(2000);
                     }
                     else
                     {
@@ -185,6 +187,7 @@ namespace ActivityFeedBroadcast.Controllers
                             .SendActivityNotification(topic, "approvalRequired", null, previewText, templateParameters)
                             .Request()
                             .PostAsync();
+                        await Task.Delay(2000);
                     } 
                 }  
             }
