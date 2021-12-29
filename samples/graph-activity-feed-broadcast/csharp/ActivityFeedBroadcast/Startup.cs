@@ -13,10 +13,10 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using TabRequestApproval.Helpers;
-using TabRequestApproval.Model;
+using ActivityFeedBroadcast.Helpers;
+using ActivityFeedBroadcast.Model;
 
-namespace TabRequestApproval
+namespace ActivityFeedBroadcast
 {
     public class Startup
     {

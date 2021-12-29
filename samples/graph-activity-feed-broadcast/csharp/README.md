@@ -22,21 +22,21 @@ User Persona:
 
 - Send request to the manger for task approval.
 
-  ![Request from user](TabRequestApproval/Images/TaskRequest.png)
+  ![Request from user](ActivityFeedBroadcast/Images/TaskRequest.png)
 
 - Request status
 
-  ![Request status](TabRequestApproval/Images/RequestStatus.png)
+  ![Request status](ActivityFeedBroadcast/Images/RequestStatus.png)
 
 Manager Persona:
 
 - Activity feed notification of approval request.
 
-  ![Notification](TabRequestApproval/Images/RequestNotification.png)
+  ![Notification](ActivityFeedBroadcast/Images/RequestNotification.png)
 
 - Pending task approval request.
 
-  ![Pending request list](TabRequestApproval/Images/RequestDetails.png)
+  ![Pending request list](ActivityFeedBroadcast/Images/RequestDetails.png)
 
 ## Prerequisites
 
@@ -88,8 +88,8 @@ Manager Persona:
     - `User.Read` (enabled by default)
     - `Directory.Read.All`
     - `Directory.ReadWrite.All`
-    - `ChatMessage.Send`
-    - `Chat.ReadWrite`
+	- `TeamsAppInstallation.ReadForUser`
+	- `TeamsAppInstallation.ReadWriteForUser`
     - `TeamsActivity.Send`
     - `TeamsAppInstallation.ReadForUser.All`.
 
@@ -102,9 +102,6 @@ Manager Persona:
     * Select **Add a platform**.
     * Select **web**.
     * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/Auth/end`, `https://{Base_Url}/Auth/Start`. This will be the page where a successful implicit grant flow will redirect the user.
-	Again
-	* Select **Single page application**.
-	* Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/TabAuth`
     Enable implicit grant by checking the following boxes:  
     ✔ ID Token  
     ✔ Access Token  
@@ -117,7 +114,7 @@ Manager Persona:
 
 16. Open the code in Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/tab-request-approval/csharp/TabRequestApproval.sln`
+   - Navigate to folder where repository is cloned then `samples/graph-activity-feed-broadcast/csharp/ActivityFeedBroadcast.sln`
     
 17. Run ngrok - point to port 3978
 
@@ -146,7 +143,6 @@ Manager Persona:
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.    
 
-Note: App should be installed for user's manager also to get task approval notification.
 ## Further reading
 
 - [Bot Framework Documentation](https://docs.botframework.com)

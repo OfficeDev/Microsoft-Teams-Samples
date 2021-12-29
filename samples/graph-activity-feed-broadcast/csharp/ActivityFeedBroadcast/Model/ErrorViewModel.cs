@@ -2,7 +2,7 @@
 // Copyright (c) Microsoft. All Rights Reserved.
 // </copyright>
 
-namespace TabRequestApproval.Model
+namespace ActivityFeedBroadcast.Model
 {
     public class ErrorViewModel
     {

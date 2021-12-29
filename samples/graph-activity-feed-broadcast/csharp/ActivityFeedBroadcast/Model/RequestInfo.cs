@@ -3,7 +3,7 @@
 // </copyright>
 using System;
 
-namespace TabRequestApproval.Model
+namespace ActivityFeedBroadcast.Model
 {
     // Class with request info model.
     public class RequestInfo
@@ -14,11 +14,7 @@ namespace TabRequestApproval.Model
 
         public string description { get; set; }
 
-        public string userName { get; set; }
-
-        public string managerName { get; set; }
-
-        public string status { get; set; }
+        public string userId { get; set; }
 
         public string access_token { get; set; }
     }

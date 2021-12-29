@@ -15,7 +15,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TabRequestApproval.Helpers
+namespace ActivityFeedBroadcast.Helpers
 {
     public class AuthHelper
     {

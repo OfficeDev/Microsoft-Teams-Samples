@@ -5,7 +5,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
-namespace TabRequestApproval.Controllers
+namespace ActivityFeedBroadcast.Controllers
 {
     public class AuthController : Controller
     {

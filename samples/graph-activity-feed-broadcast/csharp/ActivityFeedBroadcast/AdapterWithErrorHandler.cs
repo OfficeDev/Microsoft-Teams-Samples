@@ -6,7 +6,7 @@ using Microsoft.Bot.Builder.TraceExtensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace TabRequestApproval
+namespace ActivityFeedBroadcast
 {
     public class AdapterWithErrorHandler : BotFrameworkHttpAdapter
     {

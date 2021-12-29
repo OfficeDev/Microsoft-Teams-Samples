@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Graph;
 using Microsoft.Identity.Client;
 
-namespace TabRequestApproval
+namespace ActivityFeedBroadcast
 {
     public class SimpleGraphClient
     {
