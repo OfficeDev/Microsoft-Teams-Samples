@@ -24,7 +24,7 @@ User can generate a new QR code (contains team id information) and then scan the
 
  ![Card](JoinTeamByQR/Images/CardWithButtons.png)
 
-- Select the team from dropdown list for which you want to generate the QR code and then click on      'Generate QR' button.
+- Select the team from dropdown list for which you want to generate the QR code and then click on 'Generate QR' button.
 
  ![QR Code](JoinTeamByQR/Images/QRCode.png)
 
@@ -50,7 +50,7 @@ User can generate a new QR code (contains team id information) and then scan the
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2. In a terminal, navigate to `samples/join-a-team-using-qr-code/csharp`
+2. In a terminal, navigate to `samples/bot-join-team-using-qr-code/csharp`
 
 3. Run ngrok - point to port 3978
 
@@ -58,8 +58,8 @@ User can generate a new QR code (contains team id information) and then scan the
    # ngrok http -host-header=rewrite 3978
    ```
 
-4. Create a Bot Registration
-   In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+4. Create a Azure Bot resource
+   a) In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=userassigned%2Caadv2%2Ccsharp).
 
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
@@ -71,7 +71,11 @@ User can generate a new QR code (contains team id information) and then scan the
 
 6. Zip the contents of `AppManifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 
 
-7. Modify the `/appsettings.json` and fill in the `{{ Bot Id }}`,`{{ Bot Password }}`,`{{ Connection Name }}` with the id, password and   connection name from step 4.a and also your application base url `{{Appbase-url}}`.
+7. Modify the `/appsettings.json` and fill in the following details:
+   - `{{ MicrosoftAppId }}` - Generated from Step 4.a is the application app id
+   - `{{ MicrosoftAppPassword }}` - Generated from Step 4.a, also referred to as Client secret
+   - `{{ ConnectionName }}` - Generated from Step 4.a, is the name that we provide while adding OAuth connection setting in Azure Bot resource
+   - `{{ ApplicationBaseUrl }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
 
 8. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
@@ -81,7 +85,7 @@ User can generate a new QR code (contains team id information) and then scan the
 
 ## To try this sample
 
-- In a terminal, navigate to `JoinTeamUsingQR`
+- In a terminal, navigate to `JoinTeamByQR`
 
     ```bash
     # change into project folder
@@ -101,7 +105,7 @@ User can generate a new QR code (contains team id information) and then scan the
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/join-a-team-using-qr-code/csharp` folder
+  - Navigate to `samples/bot-join-team-using-qr-code/csharp` folder
   - Select `JoinTeamByQR.csproj` file
   - Press `F5` to run the project
 
