@@ -79,7 +79,7 @@ b) Add the following permission in app registration
 5) Open the `.env` configuration file in your project folder (or in Visual Studio Code) and update the following details:
   - `MicrosoftAppId` - It is the AppId created in step 1.a (Setup for Bot SSO)
   - `MicrosoftAppPassword` - It is referred to as the "client secret" in step 1.a (Setup for Bot SSO) and you can always create a new client secret anytime
-  - `ConnectionName` - Generated from Step 1.a, is the name that we provide while adding OAuth connection setting in Azure Bot resource
+  - `ConnectionName` - Generated from Step 1.a, is the name that we provide while adding OAuth connection setting in Azure Bot resource. Please follow [Add authentication to bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2)
   - `BaseUrl` with application base url. For e.g., your ngrok url. 
 
 6) Run your app

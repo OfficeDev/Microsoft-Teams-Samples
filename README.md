@@ -273,7 +273,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meeting-recruitment-app#js]:samples/meeting-recruitment-app/nodejs
 [qrappinstallation#csharp]:samples/app-installation-using-qr-code/csharp
 [qrappinstallation#nodejs]:samples/app-installation-using-qr-code/nodejs
-[qrjointeam#nodejs]:samples/join-a-team-using-qr-code/nodejs
+[qrjointeam#nodejs]:samples/bot-join-team-using-qr-code/nodejs
 
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#rsc#js]:samples/graph-rsc/nodeJs
