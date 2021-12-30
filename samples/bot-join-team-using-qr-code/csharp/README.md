@@ -74,7 +74,8 @@ User can generate a new QR code (contains team id information) and then scan the
 7. Modify the `/appsettings.json` and fill in the following details:
    - `{{ MicrosoftAppId }}` - Generated from Step 4.a is the application app id
    - `{{ MicrosoftAppPassword }}` - Generated from Step 4.a, also referred to as Client secret
-   - `{{ ConnectionName }}` - Generated from Step 4.a, is the name that we provide while adding OAuth connection setting in Azure Bot resource
+   - `{{ ConnectionName }}` - Generated from Step 4.a, is the name that we provide while adding OAuth connection setting in Azure Bot resource.
+    Please follow [Add authentication to bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2) to configure the connection.
    - `{{ ApplicationBaseUrl }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
 
 8. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
