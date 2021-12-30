@@ -51,9 +51,16 @@ a) In Azure portal, create a [Azure Bot resource.](https://docs.microsoft.com/en
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-b) Add the following permission in app registration
+b) Navigate to **API Permissions**, and make sure to add the follow permissions:
+   - Select Add a permission
+   - Select Microsoft Graph -\> Delegated permissions.
+       * User.Read (enabled by default)
+       * Directory.AccessAsUser.All
+       * TeamMember.ReadWrite.All
 
-![Install App](Images/Permission.png)
+   - Click on Add permissions.
+
+   ![Install App](Images/Permission.png)
 
 ### 2. Run your bot sample
 1) Clone the repository
