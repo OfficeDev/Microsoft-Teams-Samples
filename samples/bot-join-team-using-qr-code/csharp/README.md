@@ -59,18 +59,18 @@ User can generate a new QR code (contains team id information) and then scan the
    ```
 
 4. Create a Azure Bot resource
-   a) In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=userassigned%2Caadv2%2Ccsharp).
+  - a) In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?   view=azure-bot-service-4.0&tabs=userassigned%2Caadv2%2Ccsharp).
 
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-   b) Navigate to **API Permissions**, and make sure to add the follow permissions:
--   Select Add a permission
--   Select Microsoft Graph -\> Delegated permissions.
-    * User.Read (enabled by default)
-    * Directory.AccessAsUser.All
-    * TeamMember.ReadWrite.All
+  - b) Navigate to **API Permissions**, and make sure to add the follow permissions:
+     - Select Add a permission
+     - Select Microsoft Graph -\> Delegated permissions.
+       * User.Read (enabled by default)
+       * Directory.AccessAsUser.All
+       * TeamMember.ReadWrite.All
 
--   Click on Add permissions.
+     - Click on Add permissions.
 
     ![Permissions](JoinTeamByQR/Images/Permission.png)
 
