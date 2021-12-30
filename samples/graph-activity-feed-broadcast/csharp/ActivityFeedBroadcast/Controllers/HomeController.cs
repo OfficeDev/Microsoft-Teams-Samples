@@ -67,7 +67,7 @@ namespace ActivityFeedBroadcast.Controllers
         // Send notification toorganisation.
         [HttpPost]
         [Route("SendNotificationToOrganisation")]
-        public async Task<ActionResult> SendNotificationToManager(RequestInfo taskInfo)
+        public async Task<ActionResult> SendNotificationToOrganisation(RequestInfo taskInfo)
         {
             try
             {
@@ -102,48 +102,41 @@ namespace ActivityFeedBroadcast.Controllers
                                    .GetAsync();
                 var appId = installedAppsForCurrentUser.Where(id => id.TeamsAppDefinition.DisplayName == "Activity feed broadcast").Select(x => x.TeamsAppDefinition.TeamsAppId);
 
-                foreach (var users in usersList)
-                {
-                    var installedApp = await graphClient.Users[users.Id].Teamwork.InstalledApps
-                                   .Request()
-                                   .Expand("teamsApp")
-                                   .GetAsync();
-                    var installationId = installedApp.Where(id => id.TeamsApp.DisplayName == "Activity feed broadcast").Select(x => x.TeamsApp.Id);
-                    var appid = installationId.ToList();
+                    Parallel.ForEach(usersList, async users => {
+                        var installedApp = await graphClient.Users[users.Id].Teamwork.InstalledApps
+                                                .Request()
+                                                .Expand("teamsApp")
+                                                .GetAsync();
+                        var installationId = installedApp.Where(id => id.TeamsApp.DisplayName == "Activity feed broadcast").Select(x => x.TeamsApp.Id);
 
-                    if (appid.Count == 0)
-                    {
-                        var userScopeTeamsAppInstallation = new UserScopeTeamsAppInstallation
+                        if (installationId.ToList().Count == 0)
                         {
-                            AdditionalData = new Dictionary<string, object>()
+                            var userScopeTeamsAppInstallation = new UserScopeTeamsAppInstallation
+                            {
+                                AdditionalData = new Dictionary<string, object>()
                             {
                                 {"teamsApp@odata.bind", "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/"+appId.ToList()[0]}
                             }
-                        };
+                            };
 
-                        await graphClient.Users[users.Id].Teamwork.InstalledApps
-                                            .Request()
-                                            .AddAsync(userScopeTeamsAppInstallation);
+                            await graphClient.Users[users.Id].Teamwork.InstalledApps
+                                                .Request()
+                                                .AddAsync(userScopeTeamsAppInstallation);
 
-                        var installedAppId = await graphClient.Users[users.Id].Teamwork.InstalledApps
-                                   .Request()
-                                   .Expand("teamsApp")
-                                   .GetAsync();
-                        var installationAppId = installedAppId.Where(id => id.TeamsApp.DisplayName == "Activity feed broadcast").Select(x => x.TeamsApp.Id);
-                        var url = "https://teams.microsoft.com/l/entity/" + installationAppId.ToList()[0] + "/broadcast?context={\"subEntityId\":\"" + taskInfo.taskId + "\"}";
-                        var topic = new TeamworkActivityTopic
-                        {
-                            Source = TeamworkActivityTopicSource.Text,
-                            Value = $"{taskInfo.title}",
-                            WebUrl = url
-                        };
+                            var url = "https://teams.microsoft.com/l/entity/" + appId.ToList()[0] + "/broadcast?context={\"subEntityId\":\"" + taskInfo.taskId + "\"}";
+                            var topic = new TeamworkActivityTopic
+                            {
+                                Source = TeamworkActivityTopicSource.Text,
+                                Value = $"{taskInfo.title}",
+                                WebUrl = url
+                            };
 
-                        var previewText = new ItemBody
-                        {
-                            Content = $"Request By:"
-                        };
+                            var previewText = new ItemBody
+                            {
+                                Content = $"Message By:"
+                            };
 
-                        var templateParameters = new List<Microsoft.Graph.KeyValuePair>()
+                            var templateParameters = new List<Microsoft.Graph.KeyValuePair>()
                         {
                             new Microsoft.Graph.KeyValuePair
                             {
@@ -152,29 +145,27 @@ namespace ActivityFeedBroadcast.Controllers
                             }
                         };
 
-                        await graphClientApp.Users[users.Id].Teamwork
-                            .SendActivityNotification(topic, "approvalRequired", null, previewText, templateParameters)
-                            .Request()
-                            .PostAsync();
-
-                        await Task.Delay(2000);
-                    }
-                    else
-                    {
-                        var url = "https://teams.microsoft.com/l/entity/" + installationId.ToList()[0] + "/broadcast?context={\"subEntityId\":\"" + taskInfo.taskId + "\"}";
-                        var topic = new TeamworkActivityTopic
+                            await graphClientApp.Users[users.Id].Teamwork
+                                .SendActivityNotification(topic, "approvalRequired", null, previewText, templateParameters)
+                                .Request()
+                                .PostAsync();
+                        }
+                        else
                         {
-                            Source = TeamworkActivityTopicSource.Text,
-                            Value = $"{taskInfo.title}",
-                            WebUrl = url
-                        };
+                            var url = "https://teams.microsoft.com/l/entity/" + installationId.ToList()[0] + "/broadcast?context={\"subEntityId\":\"" + taskInfo.taskId + "\"}";
+                            var topic = new TeamworkActivityTopic
+                            {
+                                Source = TeamworkActivityTopicSource.Text,
+                                Value = $"{taskInfo.title}",
+                                WebUrl = url
+                            };
 
-                        var previewText = new ItemBody
-                        {
-                            Content = $"Request By:"
-                        };
+                            var previewText = new ItemBody
+                            {
+                                Content = $"Request By:"
+                            };
 
-                        var templateParameters = new List<Microsoft.Graph.KeyValuePair>()
+                            var templateParameters = new List<Microsoft.Graph.KeyValuePair>()
                         {
                             new Microsoft.Graph.KeyValuePair
                             {
@@ -183,13 +174,12 @@ namespace ActivityFeedBroadcast.Controllers
                             }
                         };
 
-                        await graphClientApp.Users[users.Id].Teamwork
-                            .SendActivityNotification(topic, "approvalRequired", null, previewText, templateParameters)
-                            .Request()
-                            .PostAsync();
-                        await Task.Delay(2000);
-                    } 
-                }  
+                            await graphClientApp.Users[users.Id].Teamwork
+                                .SendActivityNotification(topic, "approvalRequired", null, previewText, templateParameters)
+                                .Request()
+                                .PostAsync();
+                        }
+                    });              
             }
             catch (Exception ex)
             {

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows a feature where requester can request for any task approval from manager and manager can see the pending request by user on the click of activity feed notification and can approve or reject the request.
+description: This sample shows a feature where user can broadcast a message to all members of organization using activty feed notification.
 products:
 - office-teams
 - office
@@ -9,34 +9,24 @@ languages:
 - csharp
 extensions:
 contentType: samples
-createdDate: "29-11-2021 17:00:25"
+createdDate: "05-01-2022 17:00:25"
 ---
 
-# Send task approvals using activity feed notification (Graph APIs)
+# Broadcast message to organization using activity feed notification (Graph APIs)
 
-This sample shows a feature where:
-1. Requester : Can request for any task approval from manager by sending activity feed notification and can see his request status.
-2. Manager : Can see the pending approval request raised by user on the click of activity feed notification and can approve or reject the request.
+This sample shows a feature where user can broadcast a message to all members of organization using activty feed notification.
 
-User Persona:
+- Broadcast message for all the members.
 
-- Send request to the manger for task approval.
+  ![Broadcast from user](ActivityFeedBroadcast/Images/BroadcastToBeSendToOraganisation.png)
 
-  ![Request from user](ActivityFeedBroadcast/Images/TaskRequest.png)
+- Activity feed notification.
 
-- Request status
+  ![Notification](ActivityFeedBroadcast/Images/BroadcastNotification.png)
 
-  ![Request status](ActivityFeedBroadcast/Images/RequestStatus.png)
+- Broadcast details available for members.
 
-Manager Persona:
-
-- Activity feed notification of approval request.
-
-  ![Notification](ActivityFeedBroadcast/Images/RequestNotification.png)
-
-- Pending task approval request.
-
-  ![Pending request list](ActivityFeedBroadcast/Images/RequestDetails.png)
+  ![Broadcast details](ActivityFeedBroadcast/Images/BroadcastDetails.png)
 
 ## Prerequisites
 

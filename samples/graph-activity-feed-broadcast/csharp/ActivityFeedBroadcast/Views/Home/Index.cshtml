@@ -21,27 +21,29 @@
          }); 
 
           microsoftTeams.initialize();
-             var token = localStorage.getItem("accessToken");
-             var userId = "";
+            var token = localStorage.getItem("accessToken");
+            var userId = "";
+            var userName = "";
          
-             microsoftTeams.getContext(function (context) {
-                 userId = context.userObjectId;
-                 console.log("sub:"+context.subEntityId)
-                 if(context.subEntityId!="" && context.subEntityId!= undefined)
-                 {
-                     let taskInfo = {
-                            title: "Message details",
-                            height: 400,
-                            width: 400,
-                            url: window.location.origin + "/MessageDetails?taskId=" + context.subEntityId,
-                            card: null,
-                            fallbackUrl:null,
-                            completionBotId: null,
-                         };
+            microsoftTeams.getContext(function (context) {
+                userId = context.userObjectId;
+                userName = context.upn;
 
-                      microsoftTeams.tasks.startTask(taskInfo);
-                 };
-             });       
+                if(context.subEntityId!="" && context.subEntityId!= undefined)
+                {
+                    let taskInfo = {
+                        title: "Message details",
+                        height: 400,
+                        width: 400,
+                        url: window.location.origin + "/MessageDetails?taskId=" + context.subEntityId,
+                        card: null,
+                        fallbackUrl:null,
+                        completionBotId: null,
+                        };
+
+                    microsoftTeams.tasks.startTask(taskInfo);
+                };
+            });       
 
          // Send notification to organisation.
          function SendNotificationToOrganisation() {
@@ -71,6 +73,7 @@
                  title: $('#title').val(),
                  description: $('#description').val(),
                  userId: userId,
+                 userName: userName,
                  access_token: token,
              };
 
@@ -88,31 +91,29 @@
       </script>
    </head>
    <body id="mainDiv" >
-      <div>
-         <div class="tab-content">
-            <div id="createtask" class="tab-pane fade in active">
-               <div class="mb">
-                  <div class="form-group fg">
-                     <label for="title" class="title">Message title</label>
-                     <br>
-                     <input type="text" id="title" name="taskTitle">
-                  </div>
-                  <br />
-                  <div class="form-group fg">
-                     <label for="title-desc" class="description">Message description</label><br/>
-                     <input type="text" id="description" name="taskDescription">
-                     <br />
-                  </div>
-               </div>
-               <div class="modal-footer mf">
-                  <br />
-                  <button type="button" class="btn-send save" onclick="return SendNotificationToOrganisation()">Send message</button>
-               </div>
-               <div id="task-submitted">
-                    Message broadcasted successfully.
-               </div>
+        <div class="tab-content">
+        <div id="createtask" class="tab-pane fade in active">
+            <div class="mb">
+                <div class="form-group fg">
+                    <label for="title" class="title">Message title</label>
+                    <br>
+                    <input type="text" id="title" name="taskTitle">
+                </div>
+                <br />
+                <div class="form-group fg">
+                    <label for="title-desc" class="description">Message description</label><br/>
+                    <input type="text" id="description" name="taskDescription">
+                    <br />
+                </div>
             </div>
-         </div>
-      </div>
+            <div class="modal-footer mf">
+                <br />
+                <button type="button" class="btn-send save" onclick="return SendNotificationToOrganisation()">Send message</button>
+            </div>
+            <div id="task-submitted">
+                Message broadcasted successfully.
+            </div>
+        </div>
+        </div>
    </body>
 </html>

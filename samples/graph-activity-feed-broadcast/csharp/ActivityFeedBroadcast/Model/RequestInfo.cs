@@ -16,6 +16,8 @@ namespace ActivityFeedBroadcast.Model
 
         public string userId { get; set; }
 
+        public string userName { get; set; }
+
         public string access_token { get; set; }
     }
 }
