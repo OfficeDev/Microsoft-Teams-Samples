@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        #mainDiv {
+            padding-left: 5%;
+            padding-top: 2%;
+        }
+    </style>
+    <script src="/node_modules/qrcode/build/qrcode.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        var qrString = <%-qrData%>
+
+        microsoftTeams.initialize(() => {
+            $("#qrImg").attr("src", `${qrString}`);
+            $("#qrImg").removeAttr("hidden");
+        })
+
+        function back() {
+            window.location.href = window.location.origin + "/teamDetails";
+        }
+    </script>
+</head>
+
+<body id="mainDiv">
+    <div class="surface">
+        <div class="panel">
+            <div>
+                <span>Scan the below QR code to join the team</span>
+                <br>
+                <img alt="QR Image" id="qrImg" hidden="hidden" />
+                <br>
+                <button type="button" id="btnBack" class="btn btn-outline-primary" onClick="back()">Back</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
