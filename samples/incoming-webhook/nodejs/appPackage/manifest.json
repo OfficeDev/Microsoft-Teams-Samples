@@ -1,0 +1,45 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.11",
+  "version": "1.0.1",
+  "id": "{{Manifest-id}}",
+  "packageName": "com.teams.incomingwebhook",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Incoming webhook",
+    "full": "Sample to show incoming webhook card"
+  },
+  "description": {
+    "short": "Incoming webhook",
+    "full": "This app shows the feature of incoming webhook card"
+  },
+  "accentColor": "#5558AF",
+  "staticTabs": [
+    {
+      "entityId": "incomingwebhook",
+      "name": "Incoming webhook",
+      "contentUrl": "https://{{base-url}}/configure-message",
+      "websiteUrl": "https://{{base-url}}/configure-message",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.ngrok.io",
+    "<<appDomain>>"
+  ]
+}
