@@ -70,7 +70,6 @@ Step 1: Setup bot in Service
 
 <img src="./Assets/Images/BotChannelReg.png" alt="Bot Channel Reg" width="1000" height="500">
 
-
 2. Create New Microsoft App ID and Password.
 
 <img src="./Assets/Images/CreateNewMicrosoftAppId.png" alt="Create New Microsoft App Id" width="1000" height="500">
