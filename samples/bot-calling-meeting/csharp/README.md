@@ -58,6 +58,10 @@ Calling and Meeting Bot provides basic functionality like Create Call, Join a ca
 * [Register an App](https://docs.microsoft.com/en-us/graph/auth-register-app-v2) in Azure using demo tenant 
 * Create `client_secret` for your app
 * Copy `client_Id` `client_secret` for your app in Notepad.
+ - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+
 * Create a policy for a demo tenant user for creating the online meeting on behalf of that user using the following powershell script
 
 ```
