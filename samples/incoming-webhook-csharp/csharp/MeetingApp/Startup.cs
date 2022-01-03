@@ -3,25 +3,16 @@
 //
 // Generated with Bot Builder V4 SDK Template for Visual Studio EchoBot v4.14.0
 
-using MeetingApp.Bots;
-using MeetingApp.Data.Repositories;
-using MeetingApp.Data.Repositories.Feedback;
-using MeetingApp.Data.Repositories.Notes;
-using MeetingApp.Data.Repositories.Questions;
-using MeetingApp.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Builder.Integration.AspNet.Core;
-using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Concurrent;
 
-namespace MeetingApp
+namespace IncomingWebhook
 {
     public class Startup
     {
@@ -40,28 +31,6 @@ namespace MeetingApp
             services.AddHttpClient("WebClient", client => client.Timeout = TimeSpan.FromSeconds(600));
 
             services.AddHttpContextAccessor();
-
-            // Create the Bot Framework Adapter with error handling enabled.
-            services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
-
-            // Create a global hashset for our ConversationReferences
-            services.AddSingleton<ConcurrentDictionary<string, ConversationReference>>();
-
-            // Create a global hashset for our Roster and notes information
-            services.AddSingleton<ConcurrentDictionary<string, ConversationData>>();
-
-            // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-            services.AddTransient<IBot, MeetingBot>();
-
-            services.AddMvc(options => options.EnableEndpointRouting = false);
-
-            services.AddSingleton<ICandidateRepository>(new CandidateRepository(this.Configuration["StorageConnectionString"]));
-
-            services.AddSingleton<IQuestionsRepository>(new QuestionsRepository(this.Configuration["StorageConnectionString"]));
-
-            services.AddSingleton<INotesRepository>(new NotesRepository(this.Configuration["StorageConnectionString"]));
-
-            services.AddSingleton<IFeedbackRepository>(new FeedbackRepository(this.Configuration["StorageConnectionString"]));
 
             // Storage we'll be using for User and Conversation state. 
             services.AddSingleton<IStorage, MemoryStorage>();
@@ -90,7 +59,7 @@ namespace MeetingApp
             app.UseWebSockets();
             app.UseRouting();
             app.UseAuthorization();
-            app.UseMvc();
+            //app.UseMvc();
             app.UseEndpoints(endpointRouteBuilder => endpointRouteBuilder.MapControllers());
 
             app.UseSpa(spa =>

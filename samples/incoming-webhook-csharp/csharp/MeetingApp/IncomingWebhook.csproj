@@ -7,7 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\components\recruiting-details\configure-message.tsx" />
+    <Compile Remove="ClientApp\src\components\recruiting-details\**" />
+    <Content Remove="ClientApp\src\components\recruiting-details\**" />
+    <EmbeddedResource Remove="ClientApp\src\components\recruiting-details\**" />
+    <None Remove="ClientApp\src\components\recruiting-details\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\components\card-constant.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,7 +39,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <TypeScriptCompile Include="ClientApp\src\components\recruiting-details\configure-message.tsx" />
+      <TypeScriptCompile Include="ClientApp\src\components\card-constant.ts" />
     </ItemGroup>
 
 </Project>

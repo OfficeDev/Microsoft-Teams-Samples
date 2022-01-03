@@ -1,40 +1,36 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.9",
-  "version": "1.0.0",
-  "id": "<<App-ID>>",
-  "packageName": "com.microsoft.teams.sample.meetingtoken",
-  "showLoadingIndicator": false,
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.11",
+  "version": "1.0.1",
+  "id": "{{Manifest-id}}",
+  "packageName": "com.teams.incomingwebhook",
   "developer": {
     "name": "Microsoft",
-    "websiteUrl": "https://dev.botframework.com",
-    "privacyUrl": "https://privacy.microsoft.com",
-    "termsOfUseUrl": "https://www.microsoft.com/en-us/legal/intellectualproperty/copyright/default.aspx"
-  },
-  "name": {
-    "short": "Details Tab"
-  },
-  "description": {
-    "short": "Details Tab",
-    "full": "Details Tab for Meeting Extensibility"
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
   },
   "icons": {
-    "outline": "icon-outline.png",
-    "color": "icon-color.png"
+    "color": "color.png",
+    "outline": "outline.png"
   },
-  "accentColor": "#ffffff",
-  "configurableTabs": [
+  "name": {
+    "short": "Incoming webhook",
+    "full": "Sample to show incoming webhook card"
+  },
+  "description": {
+    "short": "Incoming webhook",
+    "full": "This app shows the feature of incoming webhook card"
+  },
+  "accentColor": "#5558AF",
+  "staticTabs": [
     {
-      "configurationUrl": "<<BASE-URL>>/configure",
-      "canUpdateConfiguration": true,
+      "entityId": "incomingwebhook",
+      "name": "Incoming webhook",
+      "contentUrl": "https://{{base-url}}/configure-message",
+      "websiteUrl": "https://{{base-url}}/configure-message",
       "scopes": [
-        "team",
-        "groupchat"
-      ],
-      "context": [
-        "meetingChatTab",
-        "meetingDetailsTab",
-        "meetingSidePanel"
+        "personal"
       ]
     }
   ],
@@ -43,17 +39,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "<<VALID DOMAIN>>"
-  ],
-  "bots": [
-    {
-      "botId": "App-ID",
-      "scopes": [
-        "groupchat"
-      ],
-      "needsChannelSelector": false,
-      "isNotificationOnly": false,
-      "supportsFiles": false
-    }
+    "*.ngrok.io",
+    "<<appDomain>>"
   ]
 }

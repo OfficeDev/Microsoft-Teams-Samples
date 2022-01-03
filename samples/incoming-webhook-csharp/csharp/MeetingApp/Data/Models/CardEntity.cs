@@ -1,6 +1,6 @@
 ﻿using Microsoft.Azure.Cosmos.Table;
 
-namespace MeetingApp.Data.Models
+namespace IncomingWebhook.Data.Models
 {
     /// <summary>
     /// Class for Notes related properties.

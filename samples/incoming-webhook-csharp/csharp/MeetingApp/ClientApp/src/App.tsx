@@ -8,13 +8,7 @@ import {
 import * as microsoftTeams from "@microsoft/teams-js";
 import { TeamsThemeContext, getContext, ThemeStyle } from 'msteams-ui-components-react';
 import { Provider, teamsTheme, teamsDarkTheme, teamsHighContrastTheme } from '@fluentui/react-northstar'
-import Configuration from './components/configuration';
-import RecruitingDetails from './components/recruiting-details/recruiting-details';
-import AddQuestions from './components/recruiting-details/questions/add-questions';
-import AddNotes from './components/recruiting-details/notes/add-notes';
-import ShareAssets from './components/recruiting-details/share-assets/share-assets';
-import EditQuestion from './components/recruiting-details/questions/edit-question';
-import ConfigureMessage from './components/recruiting-details/configure-message';
+import ConfigureMessage from './components/configure-message';
 
 export interface IAppState {
   theme: string;
@@ -106,15 +100,7 @@ class App extends React.Component<{}, IAppState> {
         <Suspense fallback={<div></div>}>
           <div className="appContainer">
             <Router>
-              <Switch>
-                <Route exact path='/configure' component={Configuration}></Route>
                 <Route exact path='/configure-message' component={ConfigureMessage}></Route>
-                <Route exact path='/details' component={RecruitingDetails}></Route>
-                <Route exact path='/questions' component={AddQuestions}></Route>
-                <Route exact path='/edit' component={EditQuestion}></Route>
-                <Route exact path='/addNote' component={AddNotes}></Route>
-                <Route exact path='/shareAssets' component={ShareAssets}></Route>
-              </Switch>
             </Router>
           </div>
         </Suspense>
