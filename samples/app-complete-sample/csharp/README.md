@@ -83,6 +83,8 @@ Congratulations!!! You can now chat with the bot in the Bot Emulator!
 
     > **NOTE**: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
+    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
 3. You project needs to run with a configuration that matches your registered bot's configuration. To do this, you will need to update the web.config file:
 
 	* In Visual Studio, open the Web.config file. Locate the `<appSettings>` section. 

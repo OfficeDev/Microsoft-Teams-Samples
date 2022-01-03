@@ -12,7 +12,7 @@ contentType: samples
 createdDate: "13-12-2021 17:00:25"
 ---
 
-# Send task request using Universal Adaptive Cards in group chat
+# Send task request using Universal Adaptive Cards in a group chat
 
 This sample shows a feature where:
 1. **Requester :** Can request for any task approval from manager by initiating a request in group chat using bot command `request` and only requester can edit the request card.
@@ -73,8 +73,10 @@ This sample shows a feature where:
 
 ### Register your Teams Auth SSO with Azure AD
 1. Register your app with Microsoft identity platform via the Azure AD portal
-   - Your app must be registered in the Azure AD portal. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2). 
-  
+   - Your app must be registered in the Azure AD portal. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2).
+
+   - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
 2. Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
