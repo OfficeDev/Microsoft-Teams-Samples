@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: "This sample illustrates a messsage posted by incoming webhook."
+description: "This sample illustrates usage of incoming webhook."
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ extensions:
 
 # Incoming webhook
 
-This sample illustrates a messsage posted by incoming webhook.
+This sample illustrates usage of incoming webhook.
 
 ![tab](Images/tab.png)
 
