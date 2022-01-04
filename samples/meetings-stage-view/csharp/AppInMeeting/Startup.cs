@@ -1,3 +1,4 @@
+using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -28,6 +29,7 @@ namespace AppInMeeting
         {
             services.AddRazorPages();
             services.AddSignalR();
+            services.AddSingleton<ITelemetryInitializer, CustomTelemetryInitializer>();
             services.AddApplicationInsightsTelemetry();
         }
 
