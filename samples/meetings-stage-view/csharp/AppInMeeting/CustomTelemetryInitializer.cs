@@ -15,13 +15,13 @@ namespace AppInMeeting
         {
             byte[] tmpSource;
             byte[] tmpHash;
-            ISupportProperties propTelemetry = telemetry as ISupportProperties;
+            var requestTelemetry = telemetry as RequestTelemetry;
 
-            if (propTelemetry != null && !propTelemetry.Properties.ContainsKey("client_id"))
+            if (requestTelemetry != null)
             {
                 tmpSource = ASCIIEncoding.ASCII.GetBytes(GetLocalIPAddress());
                 tmpHash = new MD5CryptoServiceProvider().ComputeHash(tmpSource);
-                propTelemetry.Properties.Add("client_id", ByteArrayToString(tmpHash));
+                requestTelemetry.Properties["client_id"] = ByteArrayToString(tmpHash);
             }
         }
         static string ByteArrayToString(byte[] arrInput)
