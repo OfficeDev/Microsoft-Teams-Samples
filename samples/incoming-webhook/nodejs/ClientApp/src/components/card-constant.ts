@@ -1,23 +1,50 @@
+var baseUrl = window.location.origin;
 export const DEFAULT_CARD_PAYLOAD = `{
     "@type": "MessageCard",
-    "summary": "Task Created",
-    "sections": [
+    "@context": "http://schema.org/extensions",
+    "themeColor": "0076D7",
+    "summary": "Larry Bryant created a new task",
+    "sections": [{
+        "activityTitle": "Larry Bryant created a new task",
+        "activitySubtitle": "On Project Tango",
+        "activityImage": "https://teamsnodesample.azurewebsites.net/static/img/image5.png",
+        "facts": [{
+            "name": "Assigned to",
+            "value": "Megan Bowen"
+        },
         {
-            "activityTitle": "Test task",
-            "facts": [
-                {
-                    "name": "Title:",
-                    "value": "Test title"
-                },
-                {
-                    "name": "Description:",
-                    "value": "Test desc"
-                },
-                {
-                    "name": "Assigned To:",
-                    "value": "Test assigned to"
-                }
-            ]
-        }
-    ]
-}`;
+            "name": "Due date",
+            "value": "Mon May 01 2017 17:07:18 GMT-0700 (Pacific Daylight Time)"
+        },
+        {
+            "name": "Status",
+            "value": "Not started"
+        }],
+        "markdown": true
+    }],
+    "potentialAction": [{
+        "@type": "ActionCard",
+        "name": "Add a comment",
+        "inputs": [{
+            "@type": "TextInput",
+            "id": "comment",
+            "isMultiline": false,
+            "value": null,
+            "title": "Add a comment here for this task"
+        }],
+        "actions": [{
+            "@type": "HttpPOST",
+            "name": "Add comment",
+            "body": "",
+            "target": "${baseUrl}/api/save"
+        }]
+    }, 
+    {
+        "@type": "OpenUri",
+        "name": "Learn More",
+        "targets": [{
+            "os": "default",
+            "uri": "https://docs.microsoft.com/outlook/actionable-messages"
+        }]
+    }
+]}`;
