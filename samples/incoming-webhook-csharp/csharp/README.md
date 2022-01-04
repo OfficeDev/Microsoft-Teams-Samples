@@ -16,9 +16,9 @@ extensions:
 
 This sample illustrates usage of incoming webhook.
 
-![tab](Images/tab.png)
+![tab](IncomingWebhook/Images/tab.png)
 
-![card by webhook](Images/cardByWebhook.png)
+![card by webhook](IncomingWebhook/Images/cardByWebhook.png)
 
 ## Prerequisites
 
@@ -39,30 +39,30 @@ This sample illustrates usage of incoming webhook.
 
 ## To try this sample
 
-1) Clone the repository
+2) Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
 
-2) In a terminal, navigate to `samples/incoming-webhook/csharp`
+3) In a terminal, navigate to `samples/incoming-webhook/csharp`
 
     ```bash
     # change into project folder
     cd # IncomingWebhook
     ```
-5) Run ngrok - point to port 3978
+4) Run ngrok - point to port 3978
 
     ```bash
     # ngrok http -host-header=rewrite 3978
     ```
-6) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
+5) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
    - `<<App-ID>>` with some unique GUID   
    - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
    - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
 
-7) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
+6) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
 
-10) Run the app from a terminal or from Visual Studio, choose option A or B.
+7) Run the app from a terminal or from Visual Studio, choose option A or B.
 
   A) From a terminal
 
@@ -79,7 +79,7 @@ This sample illustrates usage of incoming webhook.
   - Select `IncomingWebhook.csproj` file
   - Press `F5` to run the project
 
-11) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+8) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
