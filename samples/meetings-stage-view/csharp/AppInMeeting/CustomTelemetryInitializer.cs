@@ -1,6 +1,9 @@
 ﻿using Microsoft.ApplicationInsights.Channel;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
+using System;
+using System.Net;
+using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -14,9 +17,9 @@ namespace AppInMeeting
             byte[] tmpHash;
             ISupportProperties propTelemetry = telemetry as ISupportProperties;
 
-            if (propTelemetry != null && !propTelemetry.Properties.ContainsKey("client-ip"))
+            if (propTelemetry != null && !propTelemetry.Properties.ContainsKey("client_id"))
             {
-                tmpSource = ASCIIEncoding.ASCII.GetBytes(telemetry.Context.Location.Ip);
+                tmpSource = ASCIIEncoding.ASCII.GetBytes(GetLocalIPAddress());
                 tmpHash = new MD5CryptoServiceProvider().ComputeHash(tmpSource);
                 propTelemetry.Properties.Add("client_id", ByteArrayToString(tmpHash));
             }
@@ -30,6 +33,19 @@ namespace AppInMeeting
                 sOutput.Append(arrInput[i].ToString("X2"));
             }
             return sOutput.ToString();
+        }
+
+        static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
         }
     }
 }
