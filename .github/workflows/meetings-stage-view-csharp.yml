@@ -8,7 +8,7 @@ on:
     #Change the branch name to <<main>>
     #Change the path to the folder where your code resides. Any change here will start the activity. 
     branches:
-      - main
+      - v-abt/meeting-stage-fix
     paths:
       - 'samples/meetings-stage-view/csharp/**'  
   workflow_dispatch:
