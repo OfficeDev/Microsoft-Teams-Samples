@@ -20,6 +20,12 @@ This sample illustrates usage of incoming webhook.
 
 ![card by webhook](IncomingWebhook/Images/cardByWebhook.png)
 
+- HttpPOST action response
+- Note: To see Post action please set target as `https://{{base-url}}/api/save`
+
+![post action response](IncomingWebhook/Images/postActionResponse.png)
+
+
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
