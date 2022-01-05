@@ -14,44 +14,44 @@ server.post('/api/Send', (req, res) => {
     var cardJson = JSON.parse(req.body.cardBody);
 
     axios.post(req.body.webhookUrl, cardJson)
-    .then(res => {
-        console.log(`statusCode: ${res.status}`)
-        console.log(res)
-    })
-    .catch(error => {
-        console.error(error)
-    })
+        .then(res => {
+            console.log(`statusCode: ${res.status}`)
+            console.log(res)
+        })
+        .catch(error => {
+            console.error(error)
+        })
 });
 
-server.post('/api/save',(req, res) => {
-    var card={
-        "type":"message",
-        "attachments":[
-           {
-              "contentType":"application/vnd.microsoft.card.adaptive",
-              "contentUrl":null,
-              "content":{
-                "$schema":"http://adaptivecards.io/schemas/adaptive-card.json",
-                "type":"AdaptiveCard",
-                "version":"1.2",
-                "body":[
-                    {
-                        "type": "TextBlock",
-                        "text": "Submitted response:"
-                    }
-                 ]
-              }
-           }
+server.post('/api/save', (req, res) => {
+    var card = {
+        "type": "message",
+        "attachments": [
+            {
+                "contentType": "application/vnd.microsoft.card.adaptive",
+                "contentUrl": null,
+                "content": {
+                    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                    "type": "AdaptiveCard",
+                    "version": "1.2",
+                    "body": [
+                        {
+                            "type": "TextBlock",
+                            "text": "Submitted response:"
+                        }
+                    ]
+                }
+            }
         ]
     }
 
-    axios.post(webhookUrl,card).then(res => {
+    axios.post(webhookUrl, card).then(res => {
         console.log(`statusCode: ${res.status}`)
         console.log(res)
-    })
-    .catch(error => {
-        console.error(error)
-    })
+        })
+        .catch(error => {
+            console.error(error)
+        })
 })
 
 server.listen(PORT, () => {
