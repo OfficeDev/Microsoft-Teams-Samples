@@ -21,6 +21,11 @@ This sample illustrates usage of incoming webhook.
 
 ![card by webhook](Images/cardByWebhook.png)
 
+- HttpPOST action response
+- Note: To see Post action please set target as `https://{{base-url}}/api/save`
+
+![post action response](Images/postActionResponse.png)
+
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/en/)

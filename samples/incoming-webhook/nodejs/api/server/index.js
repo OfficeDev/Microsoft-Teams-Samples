@@ -24,6 +24,7 @@ server.post('/api/Send', (req, res) => {
 });
 
 server.post('/api/save', (req, res) => {
+    var response = JSON.stringify(req.body);
     var card = {
         "type": "message",
         "attachments": [
@@ -37,7 +38,7 @@ server.post('/api/save', (req, res) => {
                     "body": [
                         {
                             "type": "TextBlock",
-                            "text": "Submitted response:"
+                            "text": "Submitted response:"+ response
                         }
                     ]
                 }

@@ -14,7 +14,7 @@ export const DEFAULT_CARD_PAYLOAD = `{
         },
         {
             "name": "Due date",
-            "value": "Mon May 01 2017 17:07:18 GMT-0700 (Pacific Daylight Time)"
+            "value": "Wed Jan 05 2022 17:07:18 GMT-0700 (Pacific Daylight Time)"
         },
         {
             "name": "Status",
@@ -35,7 +35,8 @@ export const DEFAULT_CARD_PAYLOAD = `{
         "actions": [{
             "@type": "HttpPOST",
             "name": "Add comment",
-            "body": "",
+            "body": "{\\"comment\\":\\"{{comment.value}}\\"}",
+            "bodyContentType": "application/json",
             "target": "${baseUrl}/api/save"
         }]
     }, 
