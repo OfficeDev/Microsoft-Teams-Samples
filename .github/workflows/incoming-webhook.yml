@@ -63,5 +63,5 @@ jobs:
         with:
          app-name: ${{ env.AZURE_WEBAPP_NAME }}
          slot-name: 'production'
-         publish-profile: ${{ secrets.AzureAppService_PublishProfile_Incoming_Webhook}}
+         publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_INCOMING_WEBHOOK}}
          package: .
