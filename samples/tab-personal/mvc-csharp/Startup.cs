@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace PersonalTabMVC
 {
@@ -9,20 +9,22 @@ namespace PersonalTabMVC
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc(routes =>
-            {
+            app.UseRouting();
+            app.UseMvc();
 
-                routes.MapRoute("Default", "{controller=Home}/{action=Index}/{Id?}");
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(name: "Default", pattern: "{controller=Home}/{action=Index}/{Id?}");
             });
 
             app.UseFileServer();
