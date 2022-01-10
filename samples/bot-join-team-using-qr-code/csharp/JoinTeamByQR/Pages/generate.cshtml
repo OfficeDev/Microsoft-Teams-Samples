@@ -1,0 +1,128 @@
+﻿@page
+@model JoinTeamByQR.Pages.generateModel
+@{
+}
+
+<head>
+    <style>
+        #mainDiv {
+            padding-left: 5%;
+            padding-top: 2%;
+        }
+    </style>
+    <script src="~/js/qrcode.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        var teamDetails = [];
+        var QR_CODE;
+
+        microsoftTeams.initialize(() => {
+             getTeams();
+        })
+
+        // This method wil fetch team data that will be used for creating QR code.
+        function getTeams() {
+            QR_CODE = new QRCode("qrcode", {
+                width: 160,
+                height: 160,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H,
+            });
+
+            $.ajax({
+                url: '/getTeams',
+                type: "GET",
+                dataType: "json",
+                success: function (response) {
+                    console.log("Success" + JSON.stringify(response));
+                    teamDetails = response;
+                    setData(response);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                },
+            });
+        }
+
+        // Method to dynamically set dropdown values.
+        function setData(data) {
+            var select = document.createElement("select");
+            select.name = "teams";
+            select.id = "teams"
+            select.class = "form-select"
+
+            for (const val of data) {
+                var option = document.createElement("option");
+                option.value = val.teamId;
+                option.text = val.teamName;
+                select.appendChild(option);
+            }
+
+            var label = document.createElement("label");
+            label.innerHTML = "Select the team"
+            label.htmlFor = "teams";
+            document.getElementById("container").appendChild(label).appendChild(select);
+        }
+
+        // Method to generate QR code based on selected team.
+        function generateQR() {
+            var teamId = $("#teams").val();
+            $("#qrcode").removeAttr("hidden");
+            QR_CODE.clear();
+            QR_CODE.makeCode(teamId);
+        }
+            
+        function scanOR() {
+            var config = {
+                timeOutIntervalInSec: 30
+            };
+
+            // Method that enables the user to scan different types of barcode, and returns the result as a string.
+            microsoftTeams.media.scanBarCode((error, decodedText) => {
+                // If there's any error, an alert shows the error message/code
+                if (error) {
+                    if (error.message) {
+                        alert(" ErrorCode: " + error.errorCode + error.message);
+                    } else {
+                        alert(" ErrorCode: " + error.errorCode);
+                    }
+                }
+                else if (decodedText) {
+                    for (const val of teamDetails) {
+                        if (val.teamId == decodedText) {
+
+                            microsoftTeams.getContext(function (context) {
+                                var teamData = {
+                                    teamId: decodedText,
+                                    userId: context.userObjectId
+                                }
+                                microsoftTeams.tasks.submitTask(teamData);
+                            });
+                        }
+                    }
+                }
+            }, config);
+        }
+    </script>
+</head>
+
+<body id="mainDiv">
+    <div class="surface">
+        <div class="panel">
+            <div>
+                <div id="container">
+                </div>
+                <div id="qrcode" hidden="hidden"></div>
+                <br>
+                <button type="button" class="btn btn-outline-primary" onClick="generateQR()">Generate QR</button>
+                <button type="button" class="btn btn-outline-primary" onClick="scanOR()">Scan QR</button>
+            </div>
+        </div>
+    </div>
+</body>
