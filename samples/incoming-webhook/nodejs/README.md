@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: "This sample illustrates usage of incoming webhook."
+description: "This sample demos UI to type in Incoming Webhook URL and message card payload and send the card in the team also demonstrates the HttpPOST action in the card. "
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ extensions:
 
 # Incoming webhook
 
-This sample illustrates usage of incoming webhook.
+This sample demos UI to type in Incoming Webhook URL and message card payload and send the card in the team also demonstrates the HttpPOST action in the card. 
 
 ![tab](Images/tab.png)
 
@@ -56,7 +56,7 @@ This sample illustrates usage of incoming webhook.
 
    B) In a different terminal, navigate to `samples/incoming-webhoook/nodejs/ClientApp`
 
-6) Run ngrok - point to port 3000
+6) Run ngrok - point to port 3000 (pointing to ClientApp)
 
     ```bash
     # ngrok http -host-header=rewrite 3000
