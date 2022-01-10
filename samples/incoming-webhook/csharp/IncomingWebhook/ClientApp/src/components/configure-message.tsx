@@ -16,14 +16,17 @@ const ConfigureMessage = () => {
     const [url, setUrl] = React.useState("");
     const [card, setCard] = React.useState(DEFAULT_CARD_PAYLOAD);
 
+    // Method to set webhook url value.
     const urlHandler = (event: any) => {
         setUrl(event.target.value);
     }
 
+    // Method to handle card payload value from editor.
     function handleEditor(value: any) {
         setCard(value);
     }
 
+    // Method to handle card payload formatting and submitting card details.
     const cardSubmitHandler = () => {
         var formattedCardPayload = card.replace(/[\r\n]+/gm, "");
         const cardDetails: any = {

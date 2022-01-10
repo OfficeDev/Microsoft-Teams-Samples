@@ -59,7 +59,6 @@ namespace IncomingWebhook
             app.UseWebSockets();
             app.UseRouting();
             app.UseAuthorization();
-            //app.UseMvc();
             app.UseEndpoints(endpointRouteBuilder => endpointRouteBuilder.MapControllers());
 
             app.UseSpa(spa =>

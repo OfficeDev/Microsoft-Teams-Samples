@@ -20,7 +20,7 @@
   },
   "description": {
     "short": "Incoming webhook",
-    "full": "This app shows the feature of incoming webhook card"
+    "full": "This sample demos UI to type in Incoming Webhook URL and message card payload, which send the card in the team also demonstrates the HttpPOST action in the card. "
   },
   "accentColor": "#5558AF",
   "staticTabs": [

@@ -14,7 +14,7 @@ extensions:
 
 # Incoming webhook
 
-This sample illustrates usage of incoming webhook.
+This sample demos UI to type in Incoming Webhook URL and message card payload, which send the card in the team also demonstrates the HttpPOST action in the card. 
 
 ![tab](IncomingWebhook/Images/tab.png)
 
@@ -44,6 +44,8 @@ This sample illustrates usage of incoming webhook.
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 ## To try this sample
+
+1) Create a incoming webhook. [Create incoming webhooks](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook)
 
 2) Clone the repository
    ```bash
