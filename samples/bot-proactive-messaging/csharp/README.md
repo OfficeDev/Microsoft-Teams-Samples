@@ -49,6 +49,8 @@ Two samples to highlight solutions to two challenges with building proactive mes
 2. Create a Bot Registration
 Either through [App Studio](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/app-studio-overview) or the Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration). (The 'Bot' tab in App Studio).
 
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
 3. Modify the `manifest.json` in the `/teamsAppManifest` folder and replace the `{{BOT-ID}}` with the id from step 2.
 
 4. Zip the contents of `teamsAppManifest` into a `manifest.zip`.

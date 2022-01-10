@@ -40,6 +40,11 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
     ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
+- Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+    > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
+
 1. Clone the repository
       ```bash
       git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git

@@ -1,47 +1,52 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.5",
+    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.11",
     "version": "1.0.0",
     "id": "{new GUID for this Teams app - not the Azure AD App ID}",
-    "packageName": "com.contoso.aadSsoSample",
+    "packageName": "com.contoso.teamsauthsso",
     "developer": {
-        "name": "AAD SSO Tab Sample",
-        "websiteUrl": "https://www.microsoft.com",
-        "privacyUrl": "https://www.microsoft.com/privacy",
-        "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+      "name": "Microsoft",
+      "websiteUrl": "https://www.microsoft.com",
+      "privacyUrl": "https://www.microsoft.com/privacy",
+      "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
     },
     "name": {
-        "short": "AAD SSO Tab Sample",
-        "full": "Auth sample app for Microsoft Teams"
+      "short": "Teams Auth SSO",
+      "full": "Teams Auth SSO"
     },
     "description": {
-        "short": "Auth sample for Microsoft Teams",
-        "full": "This sample app provides a very simple app for Microsoft Teams which illustrates how single sign-on (SSO) should work for tabs."
+      "short": "Teams Auth SSO app",
+      "full": "The Teams Auth SSO app"
     },
     "icons": {
-        "outline": "contoso20x20.png",
-        "color": "contoso96x96.png"
+      "outline": "contoso20x20.png",
+      "color": "contoso96x96.png"
     },
     "accentColor": "#60A18E",
-    "staticTabs": [{
-        "entityId": "com.contoso.teamsauthsample.static",
-        "name": "Auth Tab",
+    "staticTabs": [
+      {
+        "entityId": "auth",
+        "name": "Auth",
         "contentUrl": "https://{ngrokSubdomain}.ngrok.io/ssoDemo",
-        "scopes": [
-            "personal"
-        ]
-    }],
-    "configurableTabs": [{
+        "scopes": [ "personal" ]
+      }
+    ],
+    "configurableTabs": [
+      {
         "configurationUrl": "https://{ngrokSubdomain}.ngrok.io/configure",
         "canUpdateConfiguration": true,
         "scopes": [
-            "team"
+          "team"
         ]
-    }],
-    "permissions": [],
-    "validDomains": [],
+      }
+    ],
+    "permissions": [ "identity", "messageTeamMembers" ],
+    "validDomains": [
+      "{ngrokSubdomain}.ngrok.io"
+    ],
     "webApplicationInfo": {
-        "id": "{appId}",
-        "resource": "api://{ngrokSubdomain}.ngrok.io/4270fd50-64c5-439f-88a8-a9de938b8927"
+      "id": "{appId}",
+      "resource": "api://{ngrokSubdomain}.ngrok.io/{appId}"
     }
-}
+  }
+  

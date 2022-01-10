@@ -62,6 +62,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 - Register Azure AD applications
     -   Register your bot using bot channel registration in Azure AD portal, following the instructions [here](Wiki/azure-bot-channels-registration.md).
+    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - For authentication flow please check [Add authentication to bot](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2)
     
 - Clone the repository

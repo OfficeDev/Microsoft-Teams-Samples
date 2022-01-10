@@ -45,6 +45,7 @@ This sample displays how to consume SubEntity Id to DeepLink from Bot to Tab and
 3. Run ngrok - point to port 3978
    ```ngrok http -host-header=rewrite 3978```
 4. Create a new Bot by following steps mentioned in [Build a bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots?view=msteams-client-js-latest#build--a-bot-for-teams-with-the-microsoft-bot-framework) documentation.
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 5. Go to appsettings.json and add ```MicrosoftAppId``` and  ```MicrosoftAppPassword``` information.
 6. Update DeepLink Urls with ```MicrosoftAppID``` and  ```EntityID``` with respective values in DeepLinkHelper class and HomeController.
 7. Run your app, either from Visual Studio with ```F5``` or using ```dotnet run``` in the appropriate folder.
