@@ -12,7 +12,7 @@ require('dotenv').config({ path: ENV_FILE });
 
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
-const graphScopes = 'https://graph.microsoft.com/' + process.env.GRAPH_SCOPES;
+const graphScopes = ['https://graph.microsoft.com/' + process.env.GRAPH_SCOPES];
 
 let handleQueryError = function (err: string) {
     console.log("handleQueryError called: ", err);

@@ -97,7 +97,6 @@ class Tab extends React.Component<ITabProps, ITabState> {
         console.error(data);
         this.setState({error:true});
       } else {
-         // let imageBlog = await response.blob().catch(this.unhandledFetchError); //Get image data as raw binary data
          this.setState({
             photo: data //Convert binary data to an image URL and set the url in state
          })
