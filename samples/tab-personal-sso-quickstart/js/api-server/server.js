@@ -49,7 +49,7 @@ app.get('/getGraphAccessToken', async (req,res) => {
                     console.error("ERROR: ", response);
                 }
                 else{
-                    const imageBuffer = await response.arrayBuffer().catch(this.unhandledFetchError); // Get image data as raw binary data
+                    const imageBuffer = await response.arrayBuffer(); // Get image data as raw binary data
                     // Convert binary data to an image URL and set the url in state
                     const imageUri = 'data:image/png;base64,' + Buffer.from(imageBuffer).toString('base64');
                     res.json(imageUri);
