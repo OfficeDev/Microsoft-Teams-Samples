@@ -4,9 +4,9 @@
 import fetch from 'node-fetch';
 import * as express from 'express';
 import jwt_decode, { JwtPayload } from 'jwt-decode';
-const msal = require('@azure/msal-node');
+import * as path from 'path';
+import * as msal from '@azure/msal-node';
 const app = express();
-const path = require('path');
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 const clientId = process.env.CLIENT_ID;
@@ -51,7 +51,7 @@ app.get('/getGraphAccessToken', async (req,res) => {
                     console.error("ERROR: ", response);
                 }
                 else{
-                    const imageBuffer = await response.arrayBuffer().catch(this.unhandledFetchError); // Get image data as raw binary data
+                    const imageBuffer = await response.arrayBuffer(); // Get image data as raw binary data
                     // Convert binary data to an image URL and set the url in state
                     const imageUri = 'data:image/png;base64,' + Buffer.from(imageBuffer).toString('base64');
                     res.json(imageUri);
