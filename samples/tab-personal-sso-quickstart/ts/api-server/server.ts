@@ -4,16 +4,17 @@
 import fetch from 'node-fetch';
 import * as express from 'express';
 import jwt_decode, { JwtPayload } from 'jwt-decode';
-const msal = require('@azure/msal-node');
+import * as path from 'path';
+import * as msal from '@azure/msal-node';
 const app = express();
-const path = require('path');
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
-const graphScopes = ['https://graph.microsoft.com/' + process.env.GRAPH_SCOPES];
+const graphScopes = ['https://graph.microsoft.com/User.Read' + process.env.GRAPH_SCOPES];
 
+console.log(clientId);
 let handleQueryError = function (err: string) {
     console.log("handleQueryError called: ", err);
     return new Response(JSON.stringify({
@@ -26,7 +27,7 @@ app.get('/getGraphAccessToken', async (req,res) => {
     const msalClient = new msal.ConfidentialClientApplication({
         auth: {
             clientId: clientId,
-            clientSecret: clientSecret
+            clientSecret: clientSecret,
         }
     });
     const ssoToken = req.query.ssoToken as string;
@@ -52,7 +53,7 @@ app.get('/getGraphAccessToken', async (req,res) => {
                     console.error("ERROR: ", response);
                 }
                 else{
-                    const imageBuffer = await response.arrayBuffer().catch(this.unhandledFetchError); // Get image data as raw binary data
+                    const imageBuffer = await response.arrayBuffer(); // Get image data as raw binary data
                     // Convert binary data to an image URL and set the url in state
                     const imageUri = 'data:image/png;base64,' + Buffer.from(imageBuffer).toString('base64');
                     res.json(imageUri);
