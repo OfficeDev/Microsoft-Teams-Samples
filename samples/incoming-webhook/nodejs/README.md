@@ -35,7 +35,7 @@ This sample demos UI to type in Incoming Webhook URL and message card payload, w
 
 ## To try this sample
 
-1) Create a incoming webhook. [Create incoming webhooks](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook)
+1) Create a incoming webhook. [Create incoming webhooks](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook). Keep this webhook URL handy while running the sample. 
 
 3) Clone the repository
    ```bash
@@ -63,8 +63,7 @@ This sample demos UI to type in Incoming Webhook URL and message card payload, w
     ```
 7) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
    - `{{Manifest-id}}` with some unique GUID.
-   - `{{base-url}}` with your application's base url, e.g. https://1234.ngrok.io
-   - `{{appDomain}}` with your app domain e.g. *.ngrok.io
+   - `{{Domain Name}}` with your application's base url, e.g. https://1234.ngrok.io
 
 8) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
 
@@ -76,7 +75,13 @@ This sample demos UI to type in Incoming Webhook URL and message card payload, w
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
-   - Select Add to meeting in the pop-up dialog box. Your app is uploaded to Teams.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+
+## Features of the sample
+
+- Open Incoming webhook tab.
+- Update webhook URL in `Enter webhook URL` input field and card payload in `Card payload editor`.
+- Click on send button. You will get a card from webhook in the team where incoming webhook is added.
 
 ## Testing the bot using Bot Framework Emulator
 
@@ -86,7 +91,7 @@ This sample demos UI to type in Incoming Webhook URL and message card payload, w
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
+- [Build webhooks and connectors ](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/what-are-webhooks-and-connectors)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
