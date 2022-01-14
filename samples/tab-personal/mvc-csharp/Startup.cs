@@ -22,8 +22,6 @@ namespace PersonalTabMVC
             app.UseRouting();
             app.UseMvc();
 
-            //app.UseEndpoints(endpointRouteBuilder => endpointRouteBuilder.MapControllers());
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(name: "Default", pattern: "{controller=Home}/{action=Index}/{Id?}");
