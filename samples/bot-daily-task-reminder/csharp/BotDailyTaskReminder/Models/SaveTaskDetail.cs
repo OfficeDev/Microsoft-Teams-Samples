@@ -30,6 +30,6 @@ namespace BotDailyTaskReminder.Models
         /// <summary>
         /// Gets or sets selected days value of task.
         /// </summary>
-        public List<string> SelectedDays { get; set; }
+        public DayOfWeek[] SelectedDays { get; set; }
     }
 }
