@@ -23,7 +23,7 @@ This sample shows how to implement Azure AD single sign-on support for tabs. It 
 
 3. Call Graph and retrieve the user's profile
 
-![Screen shot of solution](./doc/images/AAD-SSO-Tab-4-ConsentGranted.png)
+![Screen shot of solution](./doc/images/AAD-SSO-Tab-5-ConsentPreviouslyGranted.png)
 
 ## Prerequisites
 
