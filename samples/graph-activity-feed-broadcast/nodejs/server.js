@@ -101,15 +101,20 @@ app.post('/SendNotificationToOrganisation', (req, res) => {
 
   localdata.push(taskDetails);
   var appId;
+
   axios.get("https://graph.microsoft.com/v1.0/users/" + req.body.userId + "/teamwork/installedApps/?$expand=teamsAppDefinition", {
     headers: {
       "accept": "application/json",
       "contentType": 'application/json',
-      "authorization": "bearer " + applicationToken
+      "authorization": "bearer " + delegatedToken
     }
-  }).then(res => {
+  })
+  .then(res => {
     appId = getAppId(res.data);
-  }).catch(error=>{console.log(error)});
+  })
+  .catch(error =>{
+    console.log(error);
+  });
 
   axios.get("https://graph.microsoft.com/v1.0/users", {
     headers: {
@@ -117,16 +122,17 @@ app.post('/SendNotificationToOrganisation', (req, res) => {
       "contentType": 'application/json',
       "authorization": "bearer " + delegatedToken
     }
-  }).then(userList => {
+  })
+  .then(userList => {
     for (let i = 0; i < userList.data.value.length; i++) {
-
       axios.get("https://graph.microsoft.com/v1.0/users/" + userList.data.value[i].id + "/teamwork/installedApps/?$expand=teamsAppDefinition", {
         headers: {
           "accept": "application/json",
           "contentType": 'application/json',
           "authorization": "bearer " + delegatedToken
         }
-      }).then(res => {
+      })
+      .then(res => {
         let userAppId = getAppId(res.data);
         if (userAppId == undefined) {
           const broadcastAppId = {
@@ -167,9 +173,9 @@ app.post('/SendNotificationToOrganisation', (req, res) => {
               "authorization": "bearer " + applicationToken
             }
           })
-            .then(res => {
-              console.log(`statusCode: ${res.status}`)
-            })
+          .then(res => {
+            console.log(`statusCode: ${res.status}`)
+          })
         }
         else {
           var encodedContext = encodeURI('{"subEntityId": ' + req.body.id + '}');
@@ -190,6 +196,7 @@ app.post('/SendNotificationToOrganisation', (req, res) => {
               }
             ]
           };
+          
           axios.post("https://graph.microsoft.com/v1.0/users/" + userList.data.value[i].id + "/teamwork/sendActivityNotification", postData, {
             headers: {
               "accept": "application/json",
@@ -197,21 +204,20 @@ app.post('/SendNotificationToOrganisation', (req, res) => {
               "authorization": "bearer " + applicationToken
             }
           })
-            .then(res => {
-              console.log(`statusCode: ${res.status}`)
-            })
+          .then(res => {
+            console.log(`statusCode: ${res.status}`)
+          })
         }
       })
     }
   })
-    .catch(error => { console.log(error) });
+  .catch(error => { console.log(error) });
 });
 
 // Get app id.
 function getAppId(appList) {
   var list = appList.value;
-  var i;
-  for (i = 0; i < list.length; i++) {
+  for (var i = 0; i < list.length; i++) {
     if (list[i].teamsAppDefinition['displayName'] == "Activity feed broadcast") {
       return list[i].teamsAppDefinition['teamsAppId'];
     }
