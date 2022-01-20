@@ -69,10 +69,11 @@ export class ValidateAzureADToken {
                 const verifyOptions: jwt.VerifyOptions = {
                     algorithms: ["RS256", "RS384", "RS512"],
                     issuer: openIdMetadata.getIssuer(decodedToken["payload"].tid),
-                    audience: this.appId,
+                 // audience: this.appId,
                     clockTolerance: 300,
                 };
                 try {
+                    console.log(this.appId);
                     res.locals.token = jwt.verify(encodedToken, key.key, verifyOptions);
                     res.locals.encodedToken = encodedToken;
                     next();
@@ -83,5 +84,4 @@ export class ValidateAzureADToken {
             });
         };
     }
-
 }
