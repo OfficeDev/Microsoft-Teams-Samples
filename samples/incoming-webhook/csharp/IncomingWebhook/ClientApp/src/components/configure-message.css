@@ -1,0 +1,28 @@
+.config-container {
+    height: 100vh !important;
+    width: 100%;
+    background-color: #fff;
+}
+
+.text-label {
+    margin-top: 0.2rem !important;
+}
+
+.input-box {
+    width: 50rem !important;
+    margin-left: 2rem !important;
+}
+
+.send-btn {
+    margin-left: 2rem !important;
+}
+
+.ed-label {
+    margin-left: 2rem !important;
+    margin-top: 0.5rem !important;
+}
+
+.ed-container {
+    margin-top: 1rem !important;
+}
+
