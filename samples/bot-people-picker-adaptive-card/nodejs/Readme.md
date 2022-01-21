@@ -17,6 +17,8 @@ This sample shows the feature of people picker on Adaptive Cards.
 
  Use the bot command `peoplepickercard` to get the card with people picker control 
 
+![people picker card ](Images/adaptiveCard.png)
+
 - Personal scope (get all the users of organisation)
 
 ![people picker card ](Images/personalPeoplePickerCard.png)

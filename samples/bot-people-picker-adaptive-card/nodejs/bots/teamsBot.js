@@ -32,7 +32,7 @@ class TeamsBot extends TeamsActivityHandler {
         }
       }
       else if (context.activity.value != null) {
-        await context.sendActivity("Task assigned to: " + context.activity.value.userId);
+        await context.sendActivity(`Task title: ${context.activity.value.taskTitle}, \n Task description : ${context.activity.value.taskDescription},\n Task assigned to : ${context.activity.value.userId}` );
       }
 
       // By calling next() you ensure that the next BotHandler is run.
@@ -58,10 +58,27 @@ class TeamsBot extends TeamsActivityHandler {
     "type": "AdaptiveCard",
     "body": [
       {
-        "text": " Task : Create people-picker adaptive card sample",
-        "wrap": true,
         "type": "TextBlock",
-        "weight": "Bolder"
+        "size": "Medium",
+        "weight": "Bolder",
+        "text": "Task title"
+      },
+      {
+        "type": "Input.Text",
+        "placeholder": "Task title",
+        "id": "taskTitle"
+      },
+      {
+        "type": "TextBlock",
+        "size": "Medium",
+        "text": "Task description",
+        "weight": "Bolder",
+      },
+      {
+        "type": "Input.Text",
+        "weight":"Bolder",
+        "placeholder": "Task description",
+        "id": "taskDescription"
       },
       {
         "columns": [
@@ -72,7 +89,8 @@ class TeamsBot extends TeamsActivityHandler {
                 "text": "Select the member to assign the task:",
                 "wrap": true,
                 "height": "stretch",
-                "type": "TextBlock"
+                "type": "TextBlock",
+                "weight":"Bolder",
               }
             ],
             "type": "Column"
@@ -119,10 +137,26 @@ class TeamsBot extends TeamsActivityHandler {
     "type": "AdaptiveCard",
     "body": [
       {
-        "text": " Task: Create people-picker adaptive card sample",
-        "wrap": true,
         "type": "TextBlock",
-        "weight": "Bolder"
+        "size": "Medium",
+        "weight": "Bolder",
+        "text": "Task title"
+      },
+      {
+        "type": "Input.Text",
+        "placeholder": "Task title",
+        "id": "taskTitle",
+      },
+      {
+        "type": "TextBlock",
+        "size": "Medium",
+        "weight": "Bolder",
+        "text": "Task description"
+      },
+      {
+        "type": "Input.Text",
+        "placeholder": "Task description",
+        "id": "taskDescription",
       },
       {
         "columns": [
@@ -133,7 +167,8 @@ class TeamsBot extends TeamsActivityHandler {
                 "text": "Select the member to assign the task: ",
                 "wrap": true,
                 "height": "stretch",
-                "type": "TextBlock"
+                "type": "TextBlock",
+                "weight":"Bolder",
               }
             ],
             "type": "Column"
