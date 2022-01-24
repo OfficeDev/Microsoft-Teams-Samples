@@ -43,7 +43,7 @@ namespace TabWithAdpativeCardFlow.Bots
         protected override async Task<TabResponse> OnTeamsTabFetchAsync(ITurnContext<IInvokeActivity> turnContext, TabRequest tabRequest, CancellationToken cancellationToken)
         {
             var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
-            if (tabRequest.TabEntityContext.TabEntityId == "hoomeTab")
+            if (tabRequest.TabEntityContext.TabEntityId == "homeTab")
             {
 
                 // Check the state value

@@ -109,6 +109,7 @@ namespace TabWithAdpativeCardFlow.Helpers
                                     new AdaptiveTextInput
                                     {
                                         Id = "youTubeVideoId",
+                                        Value = "jugBQqE_2sM",
                                     },
                                 },
                             },
