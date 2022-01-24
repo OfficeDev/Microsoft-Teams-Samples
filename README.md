@@ -79,7 +79,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |11| Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. | [View][messageswithrsc#csharp] |[View][messageswithrsc#js]
 |12| Bot with SharePoint file to view in Teams file viewer | This sample demos a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer. |[View][botwithsharepointfileviewer#csharp]|[View][botfileviewer#js]
 |13|  Type ahead search control on Adaptive Cards | This sample shows the feature of type ahead search (static and dynamic) control in Adaptive Cards. |[View][typeaheadsearch#csharp]|[View][typeaheadsearchonadaptivecard#js]
-|14|  People picker control on Adaptive Cards | This sample shows the feature of people picker control in Adaptive Cards. ||[View][peoplepickeronadaptivecard#js]
+|14|  People picker control in Adaptive Cards | This sample shows the feature of people picker control in Adaptive Cards. ||[View][peoplepickeronadaptivecard#js]
 
 #### Additional samples
 
