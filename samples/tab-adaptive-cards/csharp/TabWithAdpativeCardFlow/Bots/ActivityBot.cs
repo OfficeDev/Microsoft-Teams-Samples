@@ -43,7 +43,7 @@ namespace TabWithAdpativeCardFlow.Bots
         protected override async Task<TabResponse> OnTeamsTabFetchAsync(ITurnContext<IInvokeActivity> turnContext, TabRequest tabRequest, CancellationToken cancellationToken)
         {
             var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
-            if (tabRequest.TabEntityContext.TabEntityId == "homeTab")
+            if (tabRequest.TabEntityContext.TabEntityId == "hoomeTab")
             {
 
                 // Check the state value
@@ -138,8 +138,6 @@ namespace TabWithAdpativeCardFlow.Bots
         protected async override Task<TabResponse> OnTeamsTabSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TabSubmit tabSubmit, CancellationToken cancellationToken)
         {
             var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
-            if (tabSubmit.TabEntityContext.TabEntityId == "homeTab")
-            {
                 await userTokenClient.SignOutUserAsync(turnContext.Activity.From.Id, _connectionName, turnContext.Activity.ChannelId, cancellationToken);
 
                 return new TabResponse
@@ -159,11 +157,6 @@ namespace TabWithAdpativeCardFlow.Bots
                         },
                     },
                 };
-            }
-            else
-            {
-                return null;
-            }
         }
 
         /// <summary>
