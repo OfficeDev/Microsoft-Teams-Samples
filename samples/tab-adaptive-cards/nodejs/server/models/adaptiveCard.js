@@ -180,7 +180,7 @@ const getAdaptiveCardTab2 = () => {
                   {
                     type: "Input.Text",
                     id: "youTubeVideoId",
-                    value: ""
+                    value: "jugBQqE_2sM"
                   }
                 ]
               },
