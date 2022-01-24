@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "@azure/msal-node": "^1.5.0",
-    "adal-node": "^0.2.3",
     "body-parser": "^1.18.2",
     "botbuilder": "^4.8.0",
     "botbuilder-dialogs": "^4.8.0",

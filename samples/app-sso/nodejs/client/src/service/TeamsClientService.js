@@ -1,45 +1,66 @@
-const querystring = require('querystring');
-const msal = require('@azure/msal-node');
+import axios from "axios";
 
-// Get Access Token
-const getAccessToken = async (req) => {
-    const { tenantId, token } = reqData(req);
-    const msalClient = new msal.ConfidentialClientApplication({
-        auth: {
-            clientId: process.env.MicrosoftAppId,
-            clientSecret: process.env.MicrosoftAppPassword
-        }
-    });
-
+const clientContext = async(teamsClient, timeout = 10000) => {
     return new Promise((resolve, reject) => {
-        const scopes = ["https://graph.microsoft.com/User.Read email offline_access openid profile"];
-        msalClient.acquireTokenOnBehalfOf({
-            authority: `https://login.microsoftonline.com/${tenantId}`,
-            oboAssertion: token,
-            scopes: scopes,
-            skipCache: true
-          })
-          .then(result => {
-            console.log(result.accessToken);
-            resolve(result.accessToken);
-          })
-          .catch(error => {
-            reject({ "error": error.errorCode });
+        let shouldReject = true;
+        teamsClient.getContext((teamsContext) => {
+            shouldReject = false;
+            resolve({ 
+                ...teamsContext,
+                meetingId: teamsContext.meetingId,
+                conversationId: teamsContext.chatId,
+            });
         });
+        setTimeout(() => {
+            if (shouldReject) {
+                console.error("Error getting context: Timeout. Make sure you are running the app within teams context and have initialized the sdk");
+                reject("Error getting context: Timeout");
+            }
+        }, timeout);
     });
-};
+}
 
-// Parse Request
-const reqData = (req) => {
-    const tenantId = req.body.context.tid;
-    const authHeader = req.headers.authorization;
-    const token = authHeader.split(' ')[1];
-    return {
-        tenantId, token
-    };
-};
+const getAuthCode = (teamsClient) => {
+    return new Promise((resolve, reject) => {
+        teamsClient.authentication.getAuthToken({
+            successCallback: function (token) {
+                resolve(token)
+            },
+            failureCallback: function (error) {
+                console.error("Failed to get auth: ", error)
+                reject(error);
+            },
+        })
+    });
+}
 
-module.exports = {
-    getAccessToken,
-    reqData
-};
+const getUserProfile = async (authCode, context) => {
+    const data = {
+        context: context,
+    }
+    const options = {
+        headers: {
+            Authorization: `Bearer ${authCode}`
+        }
+    }
+    return axios.post('/api/user/profile', data, options)
+}
+
+const getUserPhoto = async (authCode, context) => {
+    const data = {
+        context: context,
+    }
+    const options = {
+        headers: {
+            Authorization: `Bearer ${authCode}`
+        }
+    }
+    return axios.post('/api/user/photo', data, options)
+}
+
+export {
+    clientContext,
+    getAuthCode,
+    getUserProfile,
+    getUserPhoto
+}
