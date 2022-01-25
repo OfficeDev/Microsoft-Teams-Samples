@@ -301,7 +301,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [graph-activity-feed#js]:samples/graph-activity-feed/nodejs
 [graph-change-notification#cs]:samples/graph-change-notification/csharp
 [graph-change-notification#js]:samples/graph-change-notification/nodejs
-[View][peoplepickeronadaptivecard#js]:samples/bot-people-picker-adaptive-card/nodejs
+[peoplepickeronadaptivecard#js]:samples/bot-people-picker-adaptive-card/nodejs
 
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 
