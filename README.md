@@ -265,7 +265,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [tab-request-approval#csharp]:samples/tab-request-approval/csharp
 [bot-request-approval#csharp]:samples/bot-request-approval/csharp
 [typeaheadsearchonadaptivecard#js]:samples/bot-type-ahead-search-adaptive-cards/nodejs
-[peoplepickeronadaptivecard#csharp]:samples/bot-people-picker-adaptive-cards/csharp
+[peoplepickeronadaptivecard#csharp]:samples/bot-people-picker-adaptive-card/csharp
 
 [app-localization#cs]:samples/app-localization/csharp
 [app-localization#js]:samples/app-localization/nodejs
