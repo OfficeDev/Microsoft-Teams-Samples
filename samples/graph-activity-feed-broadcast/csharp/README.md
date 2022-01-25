@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
 contentType: samples
-createdDate: "05-01-2022 17:00:25"
+createdDate: "28-01-2022 17:00:25"
 ---
 
 # Broadcast message to organization using activity feed notification (Graph APIs)
