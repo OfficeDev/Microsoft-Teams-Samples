@@ -61,13 +61,15 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 ![Permissions](FetchGroupChatMessages/Images/permissions.png)
 
-5. Modify the `manifest.json` in the `/AppManifest` folder and replace the `<<YOUR-MICROSOFT-APP-ID>>` with the id from step 4.
+5. Modify the `manifest.json` in the `/AppManifest` folder and replace the `<<MICROSOFT-APP-ID>>` with the id from step 4 `(Azure AAD Id)`.
 
 6. Zip the contents of `AppManifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
 
-7. Modify the `/appsettings.json` and fill in the `{{ Bot Id }}`,`{{ Bot Password }}` and `{{ Connection Name }}` with the id from step 4.
+7. Modify the `/appsettings.json` and fill in the `{{ MICROSOFT-APP-ID }}`,`{{ MICROSOFT-APP-PASSWORD }}` and `{{ Connection Name }}` with the id from step 4.
 
-8. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+8. In the valid domains section of the manifest update your ngrok url `{<<ngrokid>>.ngrok.io}`. 
+
+9. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
