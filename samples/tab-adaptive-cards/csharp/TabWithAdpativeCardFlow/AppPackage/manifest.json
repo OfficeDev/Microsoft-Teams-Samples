@@ -32,7 +32,7 @@
     },
     {
       "entityId": "youtubeTab",
-      "name": "Youtube",
+      "name": "YouTube",
       "contentBotId": "{{BOT-ID}}",
       "scopes": [ "personal" ]
     }
