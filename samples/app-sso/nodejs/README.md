@@ -60,6 +60,12 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 1. Setup for Bot SSO
 Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md).
+
+> **NOTE:**
+Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
+    - Use the current `https` URL you were given by running ngrok. Append with the path `/api/messages` used by this sample
+    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
     >**Important**: As we are building app with Bot & Tab in [Step 1.3](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md#13-expose-api-endpoint) change the `api://botid-{YourBotId` to  `api://fully-qualified-domain-name.com/botid-{YourBotId}`
     >
     >**Sample Application Id URI:** `api://43dfa1bc0d1e.ngrok.io/botid-eddbe35e-4878-99d2-.......946c4aac7`

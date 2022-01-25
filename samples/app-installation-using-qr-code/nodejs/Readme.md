@@ -42,6 +42,8 @@ The user can Generate a new QR code (contains app id information) and then use I
 ### 1. Setup for Bot SSO
 In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
 Add the following permission in app registration
 
 ![Install App](Images/Permission.png)

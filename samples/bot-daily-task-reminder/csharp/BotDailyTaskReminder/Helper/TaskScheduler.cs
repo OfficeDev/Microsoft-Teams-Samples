@@ -11,10 +11,8 @@ namespace BotDailyTaskReminder
     public class TaskScheduler
     {
         // Method to schedule task.
-        public void Start(int hour, int min, string baseUrl,string selectedDays)
+        public void Start(int hour, int min, string baseUrl, DayOfWeek[] selectedDays)
         {
-            var cronExpression = $"0 {min} {hour} ? * {selectedDays}";
-            var triggerName = Guid.NewGuid().ToString();
             var scheduler = StdSchedulerFactory.GetDefaultScheduler().GetAwaiter().GetResult();
             scheduler.Start();
 
@@ -22,13 +20,13 @@ namespace BotDailyTaskReminder
                                     UsingJobData("baseUrl", baseUrl).
                                     Build();
 
-            ITrigger trigger = TriggerBuilder.Create()
-                                    .ForJob(job)
-                                    .WithCronSchedule(cronExpression)
-                                    .WithIdentity(triggerName)
-                                    .StartNow()
-                                    .Build();
+            CronScheduleBuilder csb = CronScheduleBuilder
+                .AtHourAndMinuteOnGivenDaysOfWeek(hour, min, selectedDays);
 
+            ICronTrigger trigger = (ICronTrigger)TriggerBuilder
+                .Create()
+                .WithSchedule(csb)
+                .Build();
             scheduler.ScheduleJob(job, trigger);
         }
     }

@@ -36,15 +36,15 @@
     <section style="width: 100%; display: table">
         <div style="display:table-row">
             <div style="width: auto; display:table-cell;">
-                @{ Tab gray = new Tab();
-                    string g = ($"{@gray.GetColor()} gray!'");
+                @{ var gray = ViewBag.Gray;
+                    var g = ($"{gray}");
                     <div id="gray" style="display:none;">@g</div>
                 }
             </div>
 
             <div style="display: table-cell">
-                @{ Tab red = new Tab();
-                    string r = ($"{@red.GetColor()} red!'");
+                @{ var red = ViewBag.Red;
+                    var r = ($"{red}");
                     <div id="red" style="display:none;">@r</div>
                 }
 

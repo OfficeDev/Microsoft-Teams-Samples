@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ChannelGroupTabMVC
@@ -9,7 +8,7 @@ namespace ChannelGroupTabMVC
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -19,10 +18,12 @@ namespace ChannelGroupTabMVC
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc(routes =>
-            {
+            app.UseRouting();
+            app.UseMvc();
 
-                routes.MapRoute("Default", "{controller=Home}/{action=Index}/{Id?}");
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(name: "Default", pattern: "{controller=Home}/{action=Index}/{Id?}");
             });
 
             app.UseFileServer();

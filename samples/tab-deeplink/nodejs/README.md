@@ -69,6 +69,7 @@ This sample displays how to consume SubEntity Id to [DeepLink](https://docs.micr
 1. Run ngrok - point to port 3978 (This is your Base_URL)
    ```ngrok http -host-header=rewrite 3978```
 1. Create a new Bot by following steps mentioned in [Build a bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots?view=msteams-client-js-latest#build--a-bot-for-teams-with-the-microsoft-bot-framework) documentation.
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 1. Go to .env file  and add ```MicrosoftAppId``` ,  ```MicrosoftAppPassword``` and ```Base_URL``` information.
 1. Run your app, either from Visual Studio code  with ``` npm start``` or using ``` Run``` in the Terminal.
 1. Update the manifest.json file with ```Microsoft-App-ID```,```ContentUrl```, ```WebsiteUrl``` and ```EntityID``` value.

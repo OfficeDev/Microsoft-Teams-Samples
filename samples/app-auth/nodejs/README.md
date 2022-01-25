@@ -29,13 +29,14 @@ This sample demonstrates authentication in Microsoft Teams apps.
     ```
 
 1. Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-1. While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
     > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
 > **IMPORTANT**: Do not use the legacy Bot Framework portal, nor App Studio, to create the bot. Your bot MUST be registered with
 > Azure Bot Service to use the authentication functionality provided by Azure Bot Service.
 
-1. Create an app manifest. Navigate to the file, manifest/manifest.json - Change:
+4. Create an app manifest. Navigate to the file, manifest/manifest.json - Change:
     1. <<REGISTERED_BOT_ID>> (there are 3) change to your registered bot's app ID
     1. <<BASE_URI_DOMAIN>> (there are 5) change to your https endpoint from ngrok excluding the "https://" part
     1. Save the file and zip this file and the bot_blue.png file (located next to it) together to create a manifest.zip file
