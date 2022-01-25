@@ -17,15 +17,15 @@ This sample shows the feature of people picker on Adaptive Cards.
 
  Use the bot command `peoplepickercard` to get the card with people picker control 
 
-![people picker card ](Images/adaptiveCard.png)
+![people picker card ](PeoplePicker/Images/adaptiveCard.png)
 
 - Personal scope (get all the users of organisation)
 
-![people picker card ](Images/personalPeoplePickerCard.png)
+![people picker card ](PeoplePicker/personalPeoplePickerCard.png)
 
 - Team or groupchat scope (get user list to current context)
 
-![people picker card](Images/channelPeoplePickerCard.png)
+![people picker card](PeoplePicker/channelPeoplePickerCard.png)
 
  On `Assign` button click, the bot will return the member id that we have selected.
 

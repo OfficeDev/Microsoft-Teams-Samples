@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
   "manifestVersion": "1.11",
   "version": "1.0.0",
-  "id": "ce857bae-66fb-42b3-b37e-102876c52825",
+  "id": "{{Microsoft-App-Id}}",
   "packageName": "com.microsoft.teams.typeaheadsearchcard",
   "developer": {
     "name": "Microsoft",
@@ -11,7 +11,7 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "People picker P",
+    "short": "People picker card",
     "full": "Adaptive card with people picker."
   },
   "description": {
@@ -25,7 +25,7 @@
   "accentColor": "#60A18E",
   "bots": [
     {
-      "botId": "b7915485-9376-4cb6-b0ce-6144801cb9ad",
+      "botId": "{{Microsoft-App-Id}}",
 	    "needsChannelSelector": false,
       "scopes": [
         "personal","team","groupchat"
@@ -48,6 +48,6 @@
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "549f-116-75-27-174.ngrok.io"
+    "{{domain-name}}"
   ]
 }
