@@ -21,11 +21,11 @@ This sample shows the feature of people picker on Adaptive Cards.
 
 - Personal scope (get all the users of organisation)
 
-![people picker card ](PeoplePicker/personalPeoplePickerCard.png)
+![people picker card ](PeoplePicker/Images/personalPeoplePickerCard.png)
 
 - Team or groupchat scope (get user list to current context)
 
-![people picker card](PeoplePicker/channelPeoplePickerCard.png)
+![people picker card](PeoplePicker/Images/channelPeoplePickerCard.png)
 
  On `Assign` button click, the bot will return the member id that we have selected.
 
@@ -61,7 +61,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 
 2. Open the code in Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/bot-people-picker-adaptive-cards/csharp/PeoplePicker.sln`
+   - Navigate to folder where repository is cloned then `samples/bot-people-picker-adaptive-card/csharp/PeoplePicker.sln`
     
 3. Run ngrok - point to port 3978
 
