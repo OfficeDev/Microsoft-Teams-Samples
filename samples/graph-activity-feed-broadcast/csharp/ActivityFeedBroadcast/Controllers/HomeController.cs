@@ -28,13 +28,13 @@ namespace ActivityFeedBroadcast.Controllers
         private readonly IConfiguration _configuration;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly ConcurrentDictionary<string, List<RequestInfo>> _taskList;
+        private readonly ConcurrentDictionary<string, List<BroadcastInfo>> _taskList;
 
         public HomeController(
             IConfiguration configuration,
             IHttpClientFactory httpClientFactory,
             IHttpContextAccessor httpContextAccessor,
-            ConcurrentDictionary<string, List<RequestInfo>> taskList)
+            ConcurrentDictionary<string, List<BroadcastInfo>> taskList)
         {
             _configuration = configuration;
             _httpClientFactory = httpClientFactory;
@@ -54,7 +54,7 @@ namespace ActivityFeedBroadcast.Controllers
         [Route("MessageDetails")]
         public ActionResult GetRequestByID(string taskId)
         {
-            var currentTaskList = new List<RequestInfo>();
+            var currentTaskList = new List<BroadcastInfo>();
             _taskList.TryGetValue("taskList", out currentTaskList);
 
             if (currentTaskList == null)
@@ -72,12 +72,12 @@ namespace ActivityFeedBroadcast.Controllers
         // Send notification toorganisation.
         [HttpPost]
         [Route("SendNotificationToOrganisation")]
-        public async Task<ActionResult> SendNotificationToOrganisation(RequestInfo taskInfo)
+        public async Task<ActionResult> SendNotificationToOrganisation(BroadcastInfo taskInfo)
         {
             try
             {
-                var currentTaskList = new List<RequestInfo>();
-                List<RequestInfo> taskList = new List<RequestInfo>();
+                var currentTaskList = new List<BroadcastInfo>();
+                List<BroadcastInfo> taskList = new List<BroadcastInfo>();
                 _taskList.TryGetValue("taskList", out currentTaskList);
 
                 taskInfo.taskId = Guid.NewGuid();

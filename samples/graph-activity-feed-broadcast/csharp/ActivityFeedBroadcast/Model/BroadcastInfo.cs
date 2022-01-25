@@ -1,12 +1,12 @@
-﻿// <copyright file="RequestInfo.cs" company="Microsoft">
+﻿// <copyright file="BroadcastInfo.cs" company="Microsoft">
 // Copyright (c) Microsoft. All Rights Reserved.
 // </copyright>
 using System;
 
 namespace ActivityFeedBroadcast.Model
 {
-    // Class with request info model.
-    public class RequestInfo
+    // Class with broadcast info model.
+    public class BroadcastInfo
     {
         public Guid taskId { get; set; }
 

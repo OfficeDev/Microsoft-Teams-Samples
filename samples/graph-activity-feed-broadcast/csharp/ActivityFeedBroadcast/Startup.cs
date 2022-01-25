@@ -47,7 +47,7 @@ namespace ActivityFeedBroadcast
             services.AddMemoryCache();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddMvc().AddSessionStateTempDataProvider();
-            services.AddSingleton<ConcurrentDictionary<string, List<RequestInfo>>>();
+            services.AddSingleton<ConcurrentDictionary<string, List<BroadcastInfo>>>();
 
             services.AddControllersWithViews();
             services.AddHttpClient("WebClient", client => client.Timeout = TimeSpan.FromSeconds(600));
