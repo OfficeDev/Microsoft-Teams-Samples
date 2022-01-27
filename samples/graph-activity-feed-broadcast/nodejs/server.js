@@ -6,6 +6,7 @@ const auth = require('./auth');
 const app = express();
 const msal = require('@azure/msal-node');
 const axios = require('axios');
+const polly = require('polly-js');
 
 var delegatedToken = "";
 var applicationToken = "";
@@ -134,6 +135,24 @@ app.post('/SendNotificationToOrganisation', (req, res) => {
       })
       .then(res => {
         let userAppId = getAppId(res.data);
+        var encodedContext = encodeURI('{"subEntityId": ' + req.body.id + '}');
+          const postData = {
+            "topic": {
+              "source": "text",
+              "value": req.body.title,
+              "webUrl": 'https://teams.microsoft.com/l/entity/' + appId + '/broadcast?context=' + encodedContext
+            },
+            "activityType": "approvalRequired",
+            "previewText": {
+              "content": "Broadcast by"+ req.body.userName
+            },
+            "templateParameters": [
+              {
+                "name": "approvalTaskId",
+                "value": req.body.title
+              }
+            ]
+          };
         if (userAppId == undefined) {
           const broadcastAppId = {
             "teamsApp@odata.bind": "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/" + appId
@@ -147,25 +166,6 @@ app.post('/SendNotificationToOrganisation', (req, res) => {
             }
           });
 
-          var encodedContext = encodeURI('{"subEntityId": ' + req.body.id + '}');
-          const postData = {
-            "topic": {
-              "source": "text",
-              "value": req.body.title,
-              "webUrl": 'https://teams.microsoft.com/l/entity/' + appId + '/broadcast?context=' + encodedContext
-            },
-            "activityType": "approvalRequired",
-            "previewText": {
-              "content": "Broadcast by"+ req.body.userName
-            },
-            "templateParameters": [
-              {
-                "name": "approvalTaskId",
-                "value": req.body.title
-              }
-            ]
-          };
-
           axios.post("https://graph.microsoft.com/v1.0/users/" + userList.data.value[i].id + "/teamwork/sendActivityNotification", postData, {
             headers: {
               "accept": "application/json",
@@ -175,28 +175,32 @@ app.post('/SendNotificationToOrganisation', (req, res) => {
           })
           .then(res => {
             console.log(`statusCode: ${res.status}`)
+            if(res.status == 429)
+            {
+              polly()
+              .handle(function(err) {
+                  return err.statusCode === 429;
+              })
+              .waitAndRetry(3)
+              .executeForNode(function () {
+                axios.post("https://graph.microsoft.com/v1.0/users/" + userList.data.value[i].id + "/teamwork/sendActivityNotification", postData, {
+                  headers: {
+                    "accept": "application/json",
+                    "contentType": 'application/json',
+                    "authorization": "bearer " + applicationToken
+                  }
+                })
+              }, function (err, data) {
+                  if (err) {
+                      console.error('Failed trying twice with a 100ms delay', err)
+                  } else {
+                      console.log(data)
+                  }
+              });
+            }
           })
         }
         else {
-          var encodedContext = encodeURI('{"subEntityId": ' + req.body.id + '}');
-          const postData = {
-            "topic": {
-              "source": "text",
-              "value": req.body.title,
-              "webUrl": 'https://teams.microsoft.com/l/entity/' + appId + '/broadcast?context=' + encodedContext
-            },
-            "activityType": "approvalRequired",
-            "previewText": {
-              "content": "Broadcast by"+ req.body.userName
-            },
-            "templateParameters": [
-              {
-                "name": "approvalTaskId",
-                "value": req.body.title
-              }
-            ]
-          };
-          
           axios.post("https://graph.microsoft.com/v1.0/users/" + userList.data.value[i].id + "/teamwork/sendActivityNotification", postData, {
             headers: {
               "accept": "application/json",
@@ -206,6 +210,29 @@ app.post('/SendNotificationToOrganisation', (req, res) => {
           })
           .then(res => {
             console.log(`statusCode: ${res.status}`)
+            if(res.status == 429)
+            {
+              polly()
+              .handle(function(err) {
+                  return err.statusCode;
+              })
+              .waitAndRetry(3)
+              .executeForNode(function () {
+                axios.post("https://graph.microsoft.com/v1.0/users/" + userList.data.value[i].id + "/teamwork/sendActivityNotification", postData, {
+                  headers: {
+                    "accept": "application/json",
+                    "contentType": 'application/json',
+                    "authorization": "bearer " + applicationToken
+                  }
+                })
+              }, function (err, data) {
+                  if (err) {
+                      console.error('Failed trying twice with a 100ms delay', err)
+                  } else {
+                      console.log(data)
+                  }
+              });
+            }
           })
         }
       })
