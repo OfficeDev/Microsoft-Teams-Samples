@@ -89,8 +89,8 @@
                     .catch((error) => {
                         console.log(`ERROR ${error}`);
                     });
-
-            } else {
+            } 
+            else {
                 // Something else went wrong
                 console.log(`Error from web service: ${error}`);
             }
