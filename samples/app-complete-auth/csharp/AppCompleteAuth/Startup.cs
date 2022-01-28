@@ -13,6 +13,12 @@ using AppCompleteAuth.Dialogs;
 using System.Collections.Concurrent;
 using AppCompleteAuth.Models;
 using Microsoft.Bot.Builder.Dialogs;
+using System;
+using Microsoft.AspNetCore.Http;
+using AppCompleteAuth.helper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.AzureAD.UI;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AppCompleteAuth
 {
@@ -28,10 +34,43 @@ namespace AppCompleteAuth
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddNewtonsoftJson();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.Cookie.IsEssential = true;
+                options.IdleTimeout = TimeSpan.FromMinutes(60);//You can set Time   
+            });
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => false;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+            services.AddMemoryCache();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddMvc().AddSessionStateTempDataProvider();
 
             services.AddHttpClient().AddControllers().AddNewtonsoftJson();
             services.AddRazorPages();
+            services.AddHttpClient("WebClient", client => client.Timeout = TimeSpan.FromSeconds(600));
+            services.AddHttpContextAccessor();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                {
+                    var azureAdOptions = new AzureADOptions();
+                    Configuration.Bind("AzureAd", azureAdOptions);
+                    options.Authority = $"{azureAdOptions.Instance}{azureAdOptions.TenantId}/v2.0";
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidAudiences = AuthHelper.GetValidAudiences(Configuration),
+                        ValidIssuers = AuthHelper.GetValidIssuers(Configuration),
+                        AudienceValidator = AuthHelper.AudienceValidator
+                    };
+                });
 
             // Create the storage we'll be using for User and Conversation state. (Memory is great for testing purposes.)
             services.AddSingleton<IStorage, MemoryStorage>();

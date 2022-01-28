@@ -1,0 +1,118 @@
+﻿@page
+@model AppCompleteAuth.Pages.tabModel
+@{
+}
+
+<head>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        ﻿let accessToken;
+        microsoftTeams.initialize();
+
+        function ssoAuthentication()
+        {
+             getClientSideToken()
+            .then((clientSideToken) => {           
+                return getServerSideToken(clientSideToken);
+            })
+            .catch((error) => {
+                if (error === "invalid_grant") {
+                    // Display in-line button so user can consent
+                    $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
+                    $("#divError").show();
+                    $("#consent").show();
+                } else {
+                    // Display in-line button so user can consent
+                    $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
+                    $("#divError").show();
+                    $("#consent").show();
+                }
+            });
+        }
+
+            function getClientSideToken() {
+
+                return new Promise((resolve, reject) => {
+                    microsoftTeams.authentication.getAuthToken({
+                        successCallback: (result) => {
+                            console.log(result);
+                            resolve(result);     
+                        },
+                        failureCallback: function (error) {                
+                            reject("Error getting token: " + error);
+                        }
+                    });
+                });
+            }
+
+            function getServerSideToken(clientSideToken) {
+                return new Promise((resolve, reject) => {
+                    microsoftTeams.getContext((context) => {
+                        var scopes = ["https://graph.microsoft.com/User.Read"];
+                        fetch('/GetUserAccessToken', {
+                            method: 'get',
+                            headers: {
+                                "Content-Type": "application/text",
+                                "Authorization": "Bearer " + clientSideToken
+                            },
+                            cache: 'default'
+                        })
+                        .then((response) => {
+                            if (response.ok) {
+                                return response.text();
+                            } else {
+                                reject(response.error);
+                            }
+                        })
+                        .then((responseJson) => {
+                            if (IsValidJSONString(responseJson)) {
+                                if (JSON.parse(responseJson).error)
+                                    reject(JSON.parse(responseJson).error);
+                            } else if (responseJson) {
+                                accessToken = responseJson;
+                                localStorage.setItem("accessToken", accessToken);
+                            }
+                        });
+                    });
+                });
+            }
+
+            function IsValidJSONString(str) {
+                try {
+                    JSON.parse(str);
+                } catch (e) {
+                    return false;
+                }
+                return true;
+            }
+
+    </script>
+    <style>
+        h3{
+            text-align: center;
+            margin-top: 10rem;
+        }
+        .container{
+            text-align: center;
+        }
+        button{
+            margin-left: 36rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body class="theme-light">
+        <div class="surface">
+        <h3> Welcome to App complete auth sample</h3>
+        <div class="container">Select a method to sign in</div>
+        <button>Using Credentials</button>
+        <br/>
+        <button>Other identity provider</button>
+        <br />
+        <button onclick="ssoAuthentication()">SSO</button>
+    </div>
+</body>

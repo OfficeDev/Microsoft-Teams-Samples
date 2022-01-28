@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AppCompleteAuth.Pages
 {
-    public class uploadFileModel : PageModel
+    public class tabModel : PageModel
     {
         public void OnGet()
         {
