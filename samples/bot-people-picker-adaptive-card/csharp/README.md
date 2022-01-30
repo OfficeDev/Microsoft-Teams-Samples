@@ -77,7 +77,6 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 	 
 5. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
    - `{{Microsoft-App-Id}}` with Application id generated from Step 3
-   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
 6. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 
 
