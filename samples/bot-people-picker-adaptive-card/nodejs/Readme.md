@@ -68,7 +68,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     npm start
     ```
 7) Manually update the manifest.json
-    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step 1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) and `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be https://1234.ngrok.io then your domain-name will be 1234.ngrok.io.
+    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step 1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`).
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
