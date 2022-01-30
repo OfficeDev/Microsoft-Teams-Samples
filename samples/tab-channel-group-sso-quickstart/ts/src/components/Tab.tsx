@@ -81,7 +81,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
   //Learn more: https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow
   exchangeClientTokenForServerToken = async (token: string) => {
 
-    let serverURL = `${process.env.REACT_APP_BASE_URL}/getGraphAccessToken?ssoToken=${token}`;
+    let serverURL = `${process.env.REACT_APP_BASE_URL}/getGraphAccessToken?ssoToken=${token}&upn=${this.state.context?.upn}`;
     console.log('here ' + serverURL);
     let response = await fetch(serverURL).catch(this.unhandledFetchError); //This calls getGraphAccessToken route in /api-server/app.js
     if (response) {
@@ -97,8 +97,9 @@ class Tab extends React.Component<ITabProps, ITabState> {
         console.error(data);
         this.setState({error:true});
       } else {
-        //Server side token exchange worked. Save the access_token to state, so that it can be picked up and used by the componentDidMount lifecycle method.
-        this.setState({graphAccessToken:data['access_token']});
+        this.setState({
+          photo: data //Convert binary data to an image URL and set the url in state
+       })
       }
     }
   }

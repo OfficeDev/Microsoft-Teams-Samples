@@ -6,13 +6,18 @@ function Welcome (props){
     const { teamsContext, authCode } = useContext(TeamsContext);
     const [ profile, setProfile ] = useState('')
     const [ photo, setPhoto ] = useState('')
+    const [ flag, setFlag ] = useState(false)
     if(teamsContext && authCode){
-        getUserProfile(authCode, teamsContext).then(res=>{
-            setProfile(res.data);
-        });
-        getUserPhoto(authCode, teamsContext).then(res=>{
-            setPhoto(res.data);
-        });
+        if(!flag) {
+            getUserProfile(authCode, teamsContext).then(res=>{
+                setProfile(res.data);
+                console.log(res.data);
+            });
+            getUserPhoto(authCode, teamsContext).then(res=>{
+                setPhoto(res.data);
+            });
+            setFlag(true);
+        }
     }
     
     return (

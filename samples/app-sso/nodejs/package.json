@@ -22,6 +22,7 @@
     "dependencies": {
         "@microsoft/microsoft-graph-client": "^2.2.1",
         "axios": "^0.21.1",
+        "@azure/msal-node": "^1.4.0",
         "botbuilder": "~4.11.0",
         "botbuilder-dialogs": "~4.11.0",
         "cors": "^2.8.5",

@@ -104,7 +104,7 @@ let openIdMetadataV2 = new apis.OpenIdMetadata("https://login.microsoftonline.co
 let validateAzureADToken = new apis.ValidateAzureADToken(openIdMetadataV1, openIdMetadataV2, appId).listen();     // Middleware to validate id_token
 
 app.get("/api/decodeToken", validateAzureADToken, new apis.DecodeToken().listen());
-app.get("/api/getProfileFromGraph", validateAzureADToken, new apis.GetProfileFromGraph(config.get("app.appId"), config.get("app.appPassword")).listen());
+app.get("/api/getProfileFromGraph", validateAzureADToken, new apis.GetProfileFromGraph(config.get("app.appId"), config.get("bot.appPassword")).listen());
 app.get("/api/getProfilesFromBot", validateAzureADToken, async (req, res) => {
     let profiles = await bot.getUserProfilesAsync(res.locals.token["oid"]);
     res.status(200).send(profiles);
@@ -133,7 +133,8 @@ app.use(function (err: any, req: Request, res: Response, next: Function): void {
     res.sendStatus(err.status || 500);
 });
 
-http.createServer(app).listen(app.get("port"), function (): void {
+http.createServer(app).listen(3333, function (): void {
+    console.log("Serve is running!!!");
     logger.verbose("Express server listening on port " + app.get("port"));
     logger.verbose("Bot messaging endpoint: " + config.get("app.baseUri") + "/api/messages");
 });
