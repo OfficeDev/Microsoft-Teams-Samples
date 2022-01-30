@@ -21,7 +21,6 @@
     // using the web service (see /auth/token handler in app.js)
     function getServerSideToken(clientSideToken) {
         return new Promise((resolve, reject) => {
-            microsoftTeams.initialize();
             microsoftTeams.getContext((context) => {
                 fetch('/auth/token', {
                     method: 'POST',
@@ -46,9 +45,7 @@
                         reject(responseJson.error);
                     }
                     else {
-                        const serverSideToken = responseJson;
-                        localStorage.setItem("accessToken", serverSideToken);
-                        resolve(serverSideToken);
+                        resolve();
                     }
                 });
             });
@@ -59,7 +56,7 @@
     function requestConsent() {
         return new Promise((resolve, reject) => {
             microsoftTeams.authentication.authenticate({
-                url: window.location.origin + "/auth/auth-start",
+                url: window.location.origin + "/auth-start",
                 width: 600,
                 height: 535,
                 successCallback: (result) => {
@@ -91,7 +88,6 @@
                     })
                     .catch((error) => {
                         console.log(`ERROR ${error}`);
-                        window.location.reload();
                     });
 
             } else {

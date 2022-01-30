@@ -4,14 +4,17 @@
 import fetch from 'node-fetch';
 import * as express from 'express';
 import jwt_decode, { JwtPayload } from 'jwt-decode';
-
+import * as path from 'path';
+import * as msal from '@azure/msal-node';
 const app = express();
+const ENV_FILE = path.join(__dirname, '.env');
+require('dotenv').config({ path: ENV_FILE });
 
-require('dotenv').config()
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
-const graphScopes = 'https://graph.microsoft.com/' + process.env.GRAPH_SCOPES;
+const graphScopes = ['https://graph.microsoft.com/User.Read' + process.env.GRAPH_SCOPES];
 
+console.log(clientId);
 let handleQueryError = function (err: string) {
     console.log("handleQueryError called: ", err);
     return new Response(JSON.stringify({
@@ -21,50 +24,45 @@ let handleQueryError = function (err: string) {
 };
 
 app.get('/getGraphAccessToken', async (req,res) => {
-
+    const msalClient = new msal.ConfidentialClientApplication({
+        auth: {
+            clientId: clientId,
+            clientSecret: clientSecret,
+        }
+    });
     const ssoToken = req.query.ssoToken as string;
     let tenantId = jwt_decode<JwtPayload>(ssoToken)['tid']; //Get the tenant ID from the decoded token
-    let accessTokenEndpoint = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`;
 
-    //Create your access token query parameters
-    //Learn more: https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow#first-case-access-token-request-with-a-shared-secret
-    let accessTokenQueryParams = {
-        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
-        client_id: clientId,
-        client_secret: clientSecret,
-        assertion: req.query.ssoToken as string,
-        scope: graphScopes,
-        requested_token_use: "on_behalf_of",
-    };
-
-    let body = new URLSearchParams(accessTokenQueryParams).toString();
-
-    let accessTokenReqOptions = {
-        method:'POST',
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/x-www-form-urlencoded"},
-        body: body
-    };
-
-    let response = await fetch(accessTokenEndpoint,accessTokenReqOptions).catch(handleQueryError);
-
-    let data = await response.json();
-    console.log(`${data.token_type} token received`);
-    if(!response.ok) {
-        if( (data.error === 'invalid_grant') || (data.error === 'interaction_required') ) {
-            //This is expected if it's the user's first time running the app ( user must consent ) or the admin requires MFA
-            console.log("User must consent or perform MFA. You may also encouter this error if your client ID or secret is incorrect.");
-            res.status(403).json({ error: 'consent_required' }); //This error triggers the consent flow in the client.
-        } else {
-            //Unknown error
-            console.log('Could not exchange access token for unknown reasons.');
-            res.status(500).json({ error: 'Could not exchange access token' });
-        }
-    } else {
-        //The on behalf of token exchange worked. Return the token (data object) to the client.
-        res.send(data);
-    }
+    msalClient.acquireTokenOnBehalfOf({
+        authority: `https://login.microsoftonline.com/${tenantId}`,
+        oboAssertion: req.query.ssoToken as string,
+        scopes: graphScopes,
+        skipCache: true
+      })
+      .then( async (result) => {     
+                let graphPhotoEndpoint = `https://graph.microsoft.com/v1.0/users/${req.query.upn}/photo/$value`;
+                let graphRequestParams = {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'image/jpg',
+                        "authorization": "bearer " + result.accessToken
+                    }
+                }
+                let response = await fetch(graphPhotoEndpoint,graphRequestParams);
+                if(!response.ok){
+                    console.error("ERROR: ", response);
+                }
+                else{
+                    const imageBuffer = await response.arrayBuffer(); // Get image data as raw binary data
+                    // Convert binary data to an image URL and set the url in state
+                    const imageUri = 'data:image/png;base64,' + Buffer.from(imageBuffer).toString('base64');
+                    res.json(imageUri);
+                }
+      })
+      .catch((error) => {
+        console.log("error"+ error.errorCode);
+        res.status(403).json({ error: 'consent_required' });
+    });
 });
 
 // Handles any requests that don't match the ones above

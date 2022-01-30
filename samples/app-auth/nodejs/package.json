@@ -9,7 +9,7 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "start": "cd ./build/src && node app.js",
+    "start": "cd ./build && node app.js",
     "build": "gulp build",
     "debug": "cd ./build/src && node --debug app.js"
   },
@@ -20,6 +20,7 @@
     "natives": "1.1.3"
   },
   "dependencies": {
+    "@azure/msal-node": "^1.5.0",
     "body-parser": "^1.18.2",
     "botbuilder": "^4.8.0",
     "botbuilder-dialogs": "^4.8.0",

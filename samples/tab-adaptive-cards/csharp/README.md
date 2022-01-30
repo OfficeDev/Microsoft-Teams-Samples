@@ -19,6 +19,8 @@ For reference please check [Build tabs with Adaptive Cards](https://docs.microso
 
 This feature shown in this sample is in Public Developer Preview and is supported in desktop and mobile.
 
+![Adaptive Card](TabWithAdpativeCardFlow/Images/TabAdaptiveCardFlow.png)
+
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1

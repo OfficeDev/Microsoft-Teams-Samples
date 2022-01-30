@@ -64,21 +64,17 @@
 
         <script type="text/javascript">
             microsoftTeams.initialize();
-
             // Login to Azure AD and get access to Microsoft Graph
             function login(url) {
                 hideProfileAndError();
-
                 microsoftTeams.authentication.authenticate({
                     url: url,
                     width: 600,
                     height: 535,
                     successCallback: function (result) {
                         console.log("Login succeeded: " + result);
-
                         let data = localStorage.getItem(result);
                         localStorage.removeItem(result);
-
                         let tokenResult = JSON.parse(data);
                         showIdTokenAndClaims(tokenResult.idToken);
                         getUserProfile(tokenResult.accessToken);
@@ -89,10 +85,8 @@
                     }
                 });
             }
-
             function showIdTokenAndClaims(idToken) {
                 $("#divRawIdToken").text(idToken).show();
-
                 $.ajax({
                     url: window.location.origin + "/api/decodeToken",
                     beforeSend: function(request) {
@@ -101,17 +95,14 @@
                     success: function (token) {
                         let claimsDiv = $("#divIdTokenClaims");
                         claimsDiv.empty();
-
                         for (let claimId in token) {
                             $("<div>")
                                 .append($("<b>").text(claimId + ": "))
                                 .append($("<span>").text(token[claimId]))
                                 .appendTo(claimsDiv);
                         }
-
                         // The id token for a guest (external) user will not have a "upn" claim.
                         // Instead it has a "unique_name" claim, which is the username in the home organization/identity provider.
-
                         $("#divIdTokenClaims").show();
                         $("#divIdTokenError").hide();
                     },
@@ -122,15 +113,12 @@
                     },
                 });
             }
-
             function loginV1() {
                 login(window.location.origin + "/tab/simple-start");
             }
-
             function loginV2() {
                 login(window.location.origin + "/tab/simple-start-v2");
             }
-
             // Get the user's profile information from Microsoft Graph
             function getUserProfile(accessToken) {
                 $.ajax({
@@ -154,13 +142,11 @@
                     },
                 });
             }
-
             // Show error information
             function handleAuthError(reason) {
                 $("#divError").text(reason).show();
                 $("#divProfile").hide();
             }
-
             // Clear all information in tab
             function hideProfileAndError() {
                 $("#divError").text("").hide();

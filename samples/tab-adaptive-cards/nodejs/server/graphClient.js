@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 const { Client } = require('@microsoft/microsoft-graph-client');
+const { polyfills } = require('isomorphic-fetch');
 
 /**
  * This class is a wrapper for the Microsoft Graph API.
