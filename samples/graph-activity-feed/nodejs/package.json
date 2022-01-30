@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@azure/msal-node": "^1.4.0",
     "@microsoft/microsoft-graph-client": "^2.2.1",
     "@microsoft/teams-js": "^1.10.0",
     "axios": "^0.21.1",

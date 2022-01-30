@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <head>
-        <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js" integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv" crossorigin="anonymous"></script></script>
+        <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+            crossorigin="anonymous"></script>
+        </script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="./scripts/auth-delegated.js"></script>
         <meta charset="UTF-8">
@@ -16,6 +21,7 @@
         }
     </style>
 </head>
+
 <body id=mainDiv>
     <div>
         <div class="radioClass">
@@ -96,20 +102,28 @@
         </div>
     </div>
     <script>
-        // application level permission token.
-        var token =  <%-token%>
-            $(document).ready(function () {
-                $(".customTopicNotificationChannel").hide();
-                $(".notificationChannelTab").hide();
-                $('input[type="radio"]').click(function () {
-                    var inputValue = $(this).attr("value");
-                    var targetBox = $("." + inputValue);
-                    $(".desc").not(targetBox).hide();
-                    $(targetBox).show();
-                });
+        $(document).ready(function () {
+            $(".customTopicNotificationChannel").hide();
+            $(".notificationChannelTab").hide();
+            $('input[type="radio"]').click(function () {
+                var inputValue = $(this).attr("value");
+                var targetBox = $("." + inputValue);
+                $(".desc").not(targetBox).hide();
+                $(targetBox).show();
             });
+        });
+
         microsoftTeams.initialize();
-        var delegatedtoken = localStorage.getItem("accessToken");
+        var userId;
+        var teamId;
+        var channelId;
+
+        microsoftTeams.getContext(function (context) {
+            userId = context.userObjectId;
+            teamId = context.groupId;
+            channelId = context.channelId;
+        });
+
         var empty = true;
         $('input[type="text"]').each(function () {
             if ($(this).val() != "") {
@@ -135,58 +149,31 @@
                     });
                 }
             });
+
             if (isValid == false) {
                 e.preventDefault();
                 return false;
             }
-            var action = "EntityTopic";
+
             let taskInfo = {
                 title: $('#taskTitle').val(),
                 description: $('#taskDescription').val(),
-                taskInfoAction: action,
+                userId: userId,
+                teamId: teamId
             };
-            microsoftTeams.getContext(function (context) {
-                var userId = context.userObjectId;
-                var teamId = context.groupId;
 
-                const postData = {
-                    "topic": {
-                        "source": "entityUrl",
-                        "value": "https://graph.microsoft.com/v1.0/teams/" + teamId
-                    },
-                    "activityType": "pendingFinanceApprovalRequests",
-                    "previewText": {
-                        "content": "Internal spending team has a pending finance approval requests"
-                    },
-                    "recipient": {
-                        "@odata.type": "microsoft.graph.aadUserNotificationRecipient",
-                        "userId": userId
-                    },
-                    "templateParameters": [
-                        {
-                            "name": "pendingRequestCount",
-                            "value": taskInfo.title
-                        }
-                    ]
-                };
-                $.ajax({
-                    url: "https://graph.microsoft.com/v1.0/teams/" + teamId + "/sendActivityNotification",
-                    type: "POST",
-                    data: JSON.stringify(postData),
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    beforeSend: function (request) {
-                        request.setRequestHeader("Authorization", "Bearer " + token);
-                    },
-                    success: function (profile) {
-                        console.log(profile);
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-                    },
-                });
+            $.ajax({
+                url: "/sendNotificationToChannel",
+                type: "POST",
+                contentType: 'application/json',
+                data: JSON.stringify(taskInfo),
+                success: function (profile) {
+                    console.log(profile);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log(xhr)
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                },
             });
         };
 
@@ -207,94 +194,34 @@
                     });
                 }
             });
+
             if (isValid == false) {
                 e.preventDefault();
                 return false;
             }
-            var action = "channelTab";
+
             let taskInfo = {
                 id: $('#reservationId').val(),
                 title: $('#reservationTitle').val(),
                 currentSlot: $('#currentSlot').val(),
-                taskInfoAction: action,
+                userId: userId,
+                teamId: teamId,
+                channelId: channelId,
             };
-            microsoftTeams.getContext(function (context) {
-                var userId = context.userObjectId;
-                var teamId = context.groupId;
-                var channelId = context.channelId;
-                var taburl;
-                $.ajax({
-                    url: "https://graph.microsoft.com/v1.0/teams/" + teamId + "/channels/" + channelId + "/tabs?$expand=teamsApp",
-                    type: "GET",
-                    beforeSend: function (request) {
-                        request.setRequestHeader("Authorization", "Bearer " + token);
-                    },
-                    success: function (profile) {
-                        taburl = getTabURL(profile);
-                        getNotificationToChannelTab(taburl, token, teamId, taskInfo, userId, channelId);
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-                    },
-                });
-            });
-        }
 
-        // Get notification to channel tab.
-        function getNotificationToChannelTab(tabId, token, teamId, taskInfo, userId, channelId) {
-            const postData = {
-                "topic": {
-                    "source": "entityUrl",
-                    "value": "https://graph.microsoft.com/v1.0/teams/" + teamId + "/channels/" + channelId + "/tabs/" + tabId
-                },
-                "activityType": "reservationUpdated",
-                "previewText": {
-                    "content": "You have moved up the queue"
-                },
-                "recipient": {
-                    "@odata.type": "microsoft.graph.aadUserNotificationRecipient",
-                    "userId": userId
-                },
-                "templateParameters": [
-                    {
-                        "name": "reservationId",
-                        "value": taskInfo.id
-                    },
-                    {
-                        "name": "currentSlot",
-                        "value": taskInfo.currentSlot
-                    }
-                ]
-            };
             $.ajax({
-                url: "https://graph.microsoft.com/v1.0/teams/" + teamId + "/sendActivityNotification",
+                url: "/channelTabTeamNotification",
                 type: "POST",
-                data: JSON.stringify(postData),
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                beforeSend: function (request) {
-                    request.setRequestHeader("Authorization", "Bearer " + token);
-                },
+                contentType: 'application/json',
+                data: JSON.stringify(taskInfo),
                 success: function (profile) {
                     console.log(profile);
                 },
                 error: function (xhr, textStatus, errorThrown) {
+                    console.log(xhr)
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                 },
             });
-        }
-
-        // Get tab Url.
-        function getTabURL(appList) {
-            list = appList.value;
-            var i = 0;
-            for (i = 0; i < list.length; i++) {
-                if (list[i].teamsApp['displayName'] == "NotifyFeedApp") {
-                    return list[i].id;
-                }
-            }
         }
 
         // Send notification for custom topic in team.
@@ -314,89 +241,35 @@
                     });
                 }
             });
+
             if (isValid == false) {
                 e.preventDefault();
                 return false;
             }
-            var action = "customTopic";
+
             let taskInfo = {
                 title: $('#DeployementTitle').val(),
                 description: $('#DeployementDescription').val(),
-                taskInfoAction: action,
+                userId: userId,
+                teamId: teamId,
+                channelId: channelId
             };
-            microsoftTeams.getContext(function (context) {
-                var userId = context.userObjectId;
-                var teamId = context.groupId;
-                var channelId = context.channelId;
 
-                const message = {
-                    "body": {
-                        "content": "New Deployment :" + taskInfo.title
-                    }
-                };
-                $.ajax({
-                    url: "https://graph.microsoft.com/v1.0/teams/" + teamId + "/channels/" + channelId + "/messages",
-                    type: "POST",
-                    data: JSON.stringify(message),
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    beforeSend: function (request) {
-                        request.setRequestHeader("Authorization", "Bearer " + delegatedtoken);
-                    },
-                    success: function (response) {
-                        getChannelNotification(userId, taskInfo, teamId, token, response.webUrl);
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        console.log("textStatus: " + textStatus + ", errorThrown: chat" + errorThrown);
-                    },
-                });
-            });
-        };
-
-        // Get channel notification for custom topic.
-        function getChannelNotification(userId, taskInfo, teamId, token, webUrl) {
-            const postData = {
-                "topic": {
-                    "source": "text",
-                    "value": "Deployment Approvals Channel",
-                    "webUrl": webUrl,
-                },
-                "activityType": "deploymentApprovalRequired",
-                "previewText": {
-                    "content": "New deployment requires your approval"
-                },
-                "recipient": {
-                    "@odata.type": "microsoft.graph.aadUserNotificationRecipient",
-                    "userId": userId
-                },
-                "templateParameters": [
-                    {
-                        "name": "deploymentId",
-                        "value": taskInfo.title
-                    }
-                ]
-            };
             $.ajax({
-                url: "https://graph.microsoft.com/v1.0/teams/" + teamId + "/sendActivityNotification",
+                url: "/customTopicTeamNotification",
                 type: "POST",
-                data: JSON.stringify(postData),
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                beforeSend: function (request) {
-                    request.setRequestHeader("Authorization", "Bearer " + token);
-                },
+                contentType: 'application/json',
+                data: JSON.stringify(taskInfo),
                 success: function (profile) {
                     console.log(profile);
                 },
                 error: function (xhr, textStatus, errorThrown) {
+                    console.log(xhr)
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                 },
             });
-        }
+        };
     </script>
 </body>
+
 </html>

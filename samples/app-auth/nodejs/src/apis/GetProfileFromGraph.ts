@@ -23,6 +23,7 @@
 
 import * as express from "express";
 import * as request from "request-promise";
+import * as msal from "@azure/msal-node";
 
 // Gets the basic user profile from Graph, using the id_token in the Authorization header
 export class GetProfileFromGraph {
@@ -38,48 +39,39 @@ export class GetProfileFromGraph {
             let token = res.locals.token;
             let tenantId = token["tid"];
             let graphAccessToken: string;
-            let tokenEndpoint: string;
-            let params: any;
-            // The version of the endpoint to use for OBO flow must match the one used to get the initial token
-            switch (token.ver) {
-                case "1.0":
-                {
-                    // AAD v1 endpoint token
-                    tokenEndpoint = `https://login.microsoftonline.com/${tenantId}/oauth2/token`;
-                    params = {
-                        grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
-                        assertion: encodedToken,
-                        client_id: this.clientId,
-                        client_secret: this.clientSecret,
-                        resource: "https://graph.microsoft.com",
-                        requested_token_use: "on_behalf_of",
-                        scope: "openid",
-                    } as any;
-                    break;
-                }
-
-                case "2.0":
-                {
-                    // AAD v2 endpoint token
-                    tokenEndpoint = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`;
-                    params = {
-                        grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
-                        assertion: encodedToken,
-                        client_id: this.clientId,
-                        client_secret: this.clientSecret,
-                        requested_token_use: "on_behalf_of",
-                        scope: "https://graph.microsoft.com/User.Read",
-                    } as any;
-                    break;
-                }
-
-                default:
-                    throw new Error(`Unsupported Azure AD endpoint version ${token.ver}`);
-            }
-
             try {
-                let tokenResponse = await request.post({ url: tokenEndpoint, form: params, json: true });
-                graphAccessToken = tokenResponse.access_token;
+                const msalClient = new msal.ConfidentialClientApplication({
+                    auth: {
+                        clientId:  this.clientId,
+                        clientSecret: this.clientSecret
+                    }
+                });
+                const scopes = ["https://graph.microsoft.com/User.Read email offline_access openid profile"];
+                
+                msalClient.acquireTokenOnBehalfOf({
+                    authority: `https://login.microsoftonline.com/${tenantId}`,
+                    oboAssertion: encodedToken,
+                    scopes: scopes,
+                    skipCache: true
+                  })
+                  .then( async result => {
+                        graphAccessToken = result.accessToken;
+                        // Get user profile from Graph
+                        let options = {
+                            url: "https://graph.microsoft.com/v1.0/me",
+                            json: true,
+                            headers: {
+                                "Authorization": `Bearer ${graphAccessToken}`,
+                            },
+                        };
+                        let profile = await request.get(options);
+
+                        // Return profile as response
+                        res.status(200).send(profile);
+                    })
+                .catch(error => {
+                    console.log(error);
+                });
             }
             catch (ex) {
                 console.error("Error getting access token for Graph via On-Behalf-Of: ", ex);
@@ -93,22 +85,6 @@ export class GetProfileFromGraph {
                 }
                 return;
             }
-
-            // The OBO grant flow can fail with error interaction_required if there are Conditional Access policies set.
-            // This example does not handle that. See https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-oauth-on-behalf-of#error-response-example
-
-            // Get user profile from Graph
-            let options = {
-                url: "https://graph.microsoft.com/v1.0/me",
-                json: true,
-                headers: {
-                    "Authorization": `Bearer ${graphAccessToken}`,
-                },
-            };
-            let profile = await request.get(options);
-
-            // Return profile as response
-            res.status(200).send(profile);
         };
     }
 }

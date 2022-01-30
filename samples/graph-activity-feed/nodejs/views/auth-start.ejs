@@ -9,6 +9,7 @@
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.15/js/adal.min.js", integrity="sha384-lIk8T3uMxKqXQVVfFbiw0K/Nq+kt1P3NtGt/pNexiDby2rKU6xnDY8p16gIwKqgI", crossorigin="anonymous"></script>
     <script>
        microsoftTeams.initialize();
+       var id =  <%-clientId%>
         // Get the tab context, and use the information to navigate to Azure AD login page
         microsoftTeams.getContext(function (context) {
             // Generate random state string and store it, so we can verify it in the callback
@@ -18,11 +19,11 @@
             // See https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-implicit
             // for documentation on these query parameters
             let queryParams = {
-                client_id: "#{clientId}",
+                client_id: id,
                 response_type: "id_token token",
                 response_mode: "fragment",
                 scope: "https://graph.microsoft.com/User.Read",
-                redirect_uri: window.location.origin + "/auth/auth-end",
+                redirect_uri: window.location.origin + "/auth-end",
                 nonce: _guid(),
                 state: state,
                 login_hint: context.loginHint,
