@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using TabWithAdpativeCardFlow.Helpers;
 using Newtonsoft.Json;
 using TabWithAdpativeCardFlow.Models;
+using Newtonsoft.Json.Linq;
 
 namespace TabWithAdpativeCardFlow.Bots
 {
@@ -33,19 +34,20 @@ namespace TabWithAdpativeCardFlow.Bots
         }
 
         /// <summary>
-        /// Invoked when an invoke activity is received from the connector. Invoke activities can be used to communicate many different things.
+        /// Invoked when an fetch activity is recieved for tab.
         /// </summary>
         /// <param name="turnContext"></param>
+        /// <param name="tabRequest"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns>Invoke response.</returns>
-        protected override async Task<InvokeResponse> OnInvokeActivityAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
+        /// <returns>Tab response.</returns>
+        protected override async Task<TabResponse> OnTeamsTabFetchAsync(ITurnContext<IInvokeActivity> turnContext, TabRequest tabRequest, CancellationToken cancellationToken)
         {
             var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
-
-            if (turnContext.Activity.Name == "tab/fetch")
+            if (tabRequest.TabEntityContext.TabEntityId == "homeTab")
             {
+
                 // Check the state value
-                var state = JsonConvert.DeserializeObject<AdaptiveCardAction>(turnContext.Activity.Value.ToString()); 
+                var state = JsonConvert.DeserializeObject<AdaptiveCardAction>(turnContext.Activity.Value.ToString());
                 var tokenResponse = await GetTokenResponse(turnContext, state.State, cancellationToken);
 
                 if (tokenResponse == null || string.IsNullOrEmpty(tokenResponse.Token))
@@ -53,11 +55,11 @@ namespace TabWithAdpativeCardFlow.Bots
                     // There is no token, so the user has not signed in yet.
 
                     var resource = await userTokenClient.GetSignInResourceAsync(_connectionName, turnContext.Activity as Activity, null, cancellationToken);
-                    
+
                     // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
                     var signInLink = resource.SignInLink;
 
-                    return CreateInvokeResponse(new TabResponse
+                    return new TabResponse
                     {
                         Tab = new TabResponsePayload
                         {
@@ -75,14 +77,14 @@ namespace TabWithAdpativeCardFlow.Bots
                                 },
                             },
                         },
-                    });
+                    };
                 }
 
                 var client = new SimpleGraphClient(tokenResponse.Token);
                 var profile = await client.GetUserProfile();
                 var userPhoto = await client.GetPublicURLForProfilePhoto(_applicationBaseUrl);
 
-                return CreateInvokeResponse(new TabResponse
+                return new TabResponse
                 {
                     Tab = new TabResponsePayload
                     {
@@ -102,13 +104,43 @@ namespace TabWithAdpativeCardFlow.Bots
                             },
                         },
                     },
-                });
+                };
             }
-            else if (turnContext.Activity.Name == "tab/submit")
+            else
             {
+                return new TabResponse
+                {
+                    Tab = new TabResponsePayload
+                    {
+                        Type = "continue",
+                        Value = new TabResponseCards
+                        {
+                            Cards = new List<TabResponseCard>
+                            {
+                                new TabResponseCard
+                                {
+                                    Card = CardHelper.GetSampleAdaptiveCard3()
+                                },
+                            },
+                        },
+                    },
+                };
+            }
+        }
+
+        /// <summary>
+        /// Invoked when an submit activity is recieved for tab.
+        /// </summary>
+        /// <param name="turnContext"></param>
+        /// <param name="tabSubmit"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Tab response.</returns>
+        protected async override Task<TabResponse> OnTeamsTabSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TabSubmit tabSubmit, CancellationToken cancellationToken)
+        {
+            var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
                 await userTokenClient.SignOutUserAsync(turnContext.Activity.From.Id, _connectionName, turnContext.Activity.ChannelId, cancellationToken);
 
-                return CreateInvokeResponse(new TabResponse
+                return new TabResponse
                 {
                     Tab = new TabResponsePayload
                     {
@@ -124,44 +156,78 @@ namespace TabWithAdpativeCardFlow.Bots
                             },
                         },
                     },
-                });
-            }
-            else if (turnContext.Activity.Name == "task/fetch")
-            {
-                return CreateInvokeResponse(new TaskModuleResponse
-                {
-                    Task = new TaskModuleContinueResponse
-                    {
-                        Type = "continue",
-                        Value = new TaskModuleTaskInfo()
-                        {
-                            Card = CardHelper.GetAdaptiveCardForTaskModule(),
-                            Height = 200,
-                            Width = 350,
-                            Title = "Sample Adaptive Card",
-                        },
-                    },
-                });
-            }
-            else if (turnContext.Activity.Name == "task/submit")
-            {
-                return CreateInvokeResponse(new TaskModuleResponse
-                {
-                    Task = new TaskModuleContinueResponse
-                    {
-                        Type = "continue",
-                        Value = new TaskModuleTaskInfo()
-                        {
-                            Card = CardHelper.GetTaskModuleSubmitCard(),
-                            Height = 200,
-                            Width = 350,
-                            Title = "Sample Adaptive Card",
-                        },
-                    },
-                });
-            }
+                };
+        }
 
-            return null;
+        /// <summary>
+        /// Handle task module is fetch.
+        /// </summary>
+        /// <param name = "turnContext" > The turn context.</param>
+        /// <param name = "taskModuleRequest" >The task module invoke request value payload.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A Task Module Response for the request.</returns>
+        protected override Task<TaskModuleResponse> OnTeamsTaskModuleFetchAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
+        {
+            var taskInfo = new TaskModuleResponse();
+            var asJobject = JObject.FromObject(taskModuleRequest.Data);
+            var buttonType = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.Id;
+
+            if(buttonType == "youTubeVideo")
+            {
+                var videoId = asJobject.GetValue("youTubeVideoId")?.ToString();
+                taskInfo.Task = new TaskModuleContinueResponse
+                {
+                    Type = "continue",
+                    Value = new TaskModuleTaskInfo()
+                    {
+                        Url = "https://www.youtube.com/embed/"+ videoId,
+                        Height = 1000,
+                        Width = 700,
+                        Title = "Youtube video",
+                    },
+                };
+            }
+            else
+            {
+                taskInfo.Task = new TaskModuleContinueResponse
+                {
+                    Type = "continue",
+                    Value = new TaskModuleTaskInfo()
+                    {
+                        Card = CardHelper.GetAdaptiveCardForTaskModule(),
+                        Height = 200,
+                        Width = 350,
+                        Title = "Sample Adaptive Card",
+                    },
+                };
+            }
+            
+            return Task.FromResult(taskInfo);
+        }
+
+        /// <summary>
+        /// Handle task module is submit.
+        /// </summary>
+        /// <param name = "turnContext" > The turn context.</param>
+        /// <param name = "taskModuleRequest" >The task module invoke request value payload.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A Task Module Response for the request.</returns>
+        protected override Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
+        {
+            var taskInfo = new TaskModuleResponse();
+            taskInfo.Task = new TaskModuleContinueResponse
+            {
+                Type = "continue",
+                Value = new TaskModuleTaskInfo()
+                {
+                    Card = CardHelper.GetTaskModuleSubmitCard(),
+                    Height = 200,
+                    Width = 350,
+                    Title = "Sample Adaptive Card",
+                },
+            };
+
+            return Task.FromResult(taskInfo);
         }
 
         /// <summary>

@@ -79,6 +79,66 @@ namespace TabWithAdpativeCardFlow.Helpers
         /// <summary>
         /// Sample Adaptive card to show in tab.
         /// </summary>
+        public static AdaptiveCard GetSampleAdaptiveCard3()
+        {
+            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
+            {
+                Body = new List<AdaptiveElement>
+                {
+                     new AdaptiveColumnSet
+                    {
+                        Columns = new List<AdaptiveColumn>
+                        {
+                            new AdaptiveColumn
+                            {
+                                Width = AdaptiveColumnWidth.Auto,
+                                Items = new List<AdaptiveElement>
+                                {
+                                    new AdaptiveTextBlock
+                                    {
+                                        Text = "Enter the ID of youtube video",
+                                        Wrap = true,
+                                    },
+                                },
+                            },
+                            new AdaptiveColumn
+                            {
+                                Width = AdaptiveColumnWidth.Stretch,
+                                Items = new List<AdaptiveElement>
+                                {
+                                    new AdaptiveTextInput
+                                    {
+                                        Id = "youTubeVideoId",
+                                        Value = "jugBQqE_2sM",
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                Actions = new List<AdaptiveAction>
+                {
+                    new AdaptiveSubmitAction
+                    {
+                        Title = "Update",
+                        Data = new AdaptiveCardAction
+                        {
+                            MsteamsCardAction = new CardAction
+                            {
+                                Type = "task/fetch",
+                            },
+                            Id="youTubeVideo"
+                        },
+                    },
+                },
+            };
+
+            return card;
+        }
+
+        /// <summary>
+        /// Sample Adaptive card to show in tab.
+        /// </summary>
         public static AdaptiveCard GetSampleAdaptiveCard2()
         {
             AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
