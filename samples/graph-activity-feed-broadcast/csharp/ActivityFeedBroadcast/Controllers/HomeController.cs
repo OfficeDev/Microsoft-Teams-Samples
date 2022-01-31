@@ -69,7 +69,7 @@ namespace ActivityFeedBroadcast.Controllers
             return View("Message");
         }
 
-        // Send notification toorganisation.
+        // Send notification to organisation.
         [HttpPost]
         [Route("SendNotificationToOrganisation")]
         public async Task<ActionResult> SendNotificationToOrganisation(BroadcastInfo taskInfo)
@@ -95,7 +95,10 @@ namespace ActivityFeedBroadcast.Controllers
                     ViewBag.TaskList = currentTaskList;
                 }
 
+                // Graph client for user.
                 var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
+
+                // Graph client for app.
                 var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["AzureAd:MicrosoftAppId"], _configuration["AzureAd:MicrosoftAppPassword"], _configuration["AzureAd:TenantId"]);
                 var usersList = await graphClient.Users
                                  .Request()
@@ -105,6 +108,8 @@ namespace ActivityFeedBroadcast.Controllers
                                    .Request()
                                    .Expand("teamsAppDefinition")
                                    .GetAsync();
+
+                // Get app id using app display name.
                 var appId = installedAppsForCurrentUser.Where(id => id.TeamsAppDefinition.DisplayName == "Activity feed broadcast").Select(x => x.TeamsAppDefinition.TeamsAppId);
 
                 foreach (var users in usersList)
@@ -191,7 +196,7 @@ namespace ActivityFeedBroadcast.Controllers
 
                             return delay;
                         },
-                        onRetryAsync: async (response, timespan, retryCount, context) =>
+                        onRetryAsync:async (response, timespan, retryCount, context) =>
                         {
                         }
                       ).ExecuteAsync(async () =>

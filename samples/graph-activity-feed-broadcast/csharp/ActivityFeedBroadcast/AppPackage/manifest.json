@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
   "manifestVersion": "1.11",
   "version": "1.0.0",
-  "id": "<<MicrosoftAppId>>",
+  "id": "{{Microsoft-App-Id}}",
   "packageName": "com.microsoft.teams.activityfeedbroadcast",
   "developer": {
     "name": "Microsoft",
@@ -27,8 +27,8 @@
     {
       "entityId": "broadcast",
       "name": "BroadcastTab",
-      "contentUrl": "https://{Base_Url}/broadcast",
-      "websiteUrl": "https://{Base_Url}/broadcast",
+      "contentUrl": "https://{{Base_URL}}/broadcast",
+      "websiteUrl": "https://{{Base_URL}}/broadcast",
       "scopes": [
         "personal"
       ]
@@ -52,6 +52,6 @@
   },
   "webApplicationInfo": {
     "id": "<<MicrosoftAppId>>",
-    "resource": "api://{Base_Url}/<<MicrosoftAppId>>"
+    "resource": "api://{{Base_URL}}/{{Microsoft-App-Id}}"
   }
 }

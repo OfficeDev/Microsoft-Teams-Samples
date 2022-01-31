@@ -1,4 +1,8 @@
-﻿using System;
+﻿// <copyright file="SimpleGraphClient.cs" company="Microsoft">
+// Copyright (c) Microsoft. All Rights Reserved.
+// </copyright>
+
+using System;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.Graph;
@@ -8,6 +12,7 @@ namespace ActivityFeedBroadcast
 {
     public class SimpleGraphClient
     {
+        // Get graph client for user.
         public static GraphServiceClient GetGraphClient(string accessToken)
         {
             var graphClient = new GraphServiceClient(new DelegateAuthenticationProvider((requestMessage) =>
@@ -22,6 +27,7 @@ namespace ActivityFeedBroadcast
             return graphClient;
         }
 
+        // Get graph client for app.
         public static GraphServiceClient GetGraphClientforApp(string appId, string appPassword, string tenantId)
         {
             var graphClient = new GraphServiceClient(new DelegateAuthenticationProvider((requestMessage) =>
@@ -39,6 +45,7 @@ namespace ActivityFeedBroadcast
             return graphClient;
         }
 
+        // Get access token.
         private static async Task<string> GetAccessToken(string appId, string appPassword, string tenantId)
         {
             IConfidentialClientApplication app = ConfidentialClientApplicationBuilder.Create(appId)
