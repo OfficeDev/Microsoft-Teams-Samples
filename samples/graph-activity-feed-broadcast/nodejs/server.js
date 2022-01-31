@@ -164,41 +164,24 @@ app.post('/SendNotificationToOrganisation', (req, res) => {
               "contentType": 'application/json',
               "authorization": "bearer " + delegatedToken
             }
-          });
-
-          axios.post("https://graph.microsoft.com/v1.0/users/" + userList.data.value[i].id + "/teamwork/sendActivityNotification", postData, {
-            headers: {
-              "accept": "application/json",
-              "contentType": 'application/json',
-              "authorization": "bearer " + applicationToken
-            }
-          })
-          .then(res => {
-            console.log(`statusCode: ${res.status}`)
-            if(res.status == 429)
-            {
-              polly()
-              .handle(function(err) {
-                  return err.statusCode === 429;
-              })
-              .waitAndRetry(3)
-              .executeForNode(function () {
-                axios.post("https://graph.microsoft.com/v1.0/users/" + userList.data.value[i].id + "/teamwork/sendActivityNotification", postData, {
-                  headers: {
-                    "accept": "application/json",
-                    "contentType": 'application/json',
-                    "authorization": "bearer " + applicationToken
-                  }
-                })
-              }, function (err, data) {
-                  if (err) {
-                      console.error('Failed trying twice with a 100ms delay', err)
-                  } else {
-                      console.log(data)
-                  }
-              });
-            }
-          })
+          }).then( res=> {
+            axios.post("https://graph.microsoft.com/v1.0/users/" + userList.data.value[i].id + "/teamwork/sendActivityNotification", postData, {
+              headers: {
+                "accept": "application/json",
+                "contentType": 'application/json',
+                "authorization": "bearer " + applicationToken
+              }
+            })
+            .then(res => {
+              console.log(`statusCode: ${res.status}`)
+              if(res.status == 429)
+              {
+                handleTooManyRequestError(userList.data.value[i].id, postData);
+              }
+            })
+          }).catch(error=>{
+            console.log(error);
+          }); 
         }
         else {
           axios.post("https://graph.microsoft.com/v1.0/users/" + userList.data.value[i].id + "/teamwork/sendActivityNotification", postData, {
@@ -212,33 +195,16 @@ app.post('/SendNotificationToOrganisation', (req, res) => {
             console.log(`statusCode: ${res.status}`)
             if(res.status == 429)
             {
-              polly()
-              .handle(function(err) {
-                  return err.statusCode;
-              })
-              .waitAndRetry(3)
-              .executeForNode(function () {
-                axios.post("https://graph.microsoft.com/v1.0/users/" + userList.data.value[i].id + "/teamwork/sendActivityNotification", postData, {
-                  headers: {
-                    "accept": "application/json",
-                    "contentType": 'application/json',
-                    "authorization": "bearer " + applicationToken
-                  }
-                })
-              }, function (err, data) {
-                  if (err) {
-                      console.error('Failed trying twice with a 100ms delay', err)
-                  } else {
-                      console.log(data)
-                  }
-              });
+              handleTooManyRequestError(userList.data.value[i].id,postData);
             }
           })
         }
       })
     }
   })
-  .catch(error => { console.log(error) });
+  .catch(error => { 
+    console.log(error) 
+  });
 });
 
 // Get app id.
@@ -249,6 +215,26 @@ function getAppId(appList) {
       return list[i].teamsAppDefinition['teamsAppId'];
     }
   }
+}
+
+// Handle too many request (429?) error.
+function handleTooManyRequestError(userId,postData)
+{
+  polly().
+  retry(3).
+  executeForPromise(function () {
+    return axios.post("https://graph.microsoft.com/v1.0/users/" + userId + "/teamwork/sendActivityNotification", postData, {
+      headers: {
+        "accept": "application/json",
+        "contentType": 'application/json',
+        "authorization": "bearer " + applicationToken
+      }
+    })
+  })
+  .then(function(result) {
+    console.log(`statusCode: ${result.status}`)
+  }, 
+  function(err) {console.error('Failed trying three times', err)})
 }
 
 app.listen(3978, function () {
