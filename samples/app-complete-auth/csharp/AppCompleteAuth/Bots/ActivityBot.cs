@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -75,34 +77,27 @@ namespace AppCompleteAuth.Bots
         }
 
         /// <summary>
-        /// Handle task module is fetch.
+        /// Invoked when the user askfor sign in.
         /// </summary>
         /// <param name = "turnContext" > The turn context.</param>
-        /// <param name = "taskModuleRequest" >The task module invoke request value payload.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
-        /// <returns>A Task Module Response for the request.</returns>
-        protected override Task<TaskModuleResponse> OnTeamsTaskModuleFetchAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
+        /// <returns>A task that represents the work queued to execute.</returns>
+        protected override async Task OnSignInInvokeAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
         {
-            var asJobject = JObject.FromObject(taskModuleRequest.Data);
-            var buttonType = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.Id;
+            var asJobject = JObject.FromObject(turnContext.Activity.Value);
+            var state = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.State;
 
-            var taskModuleResponse = new TaskModuleResponse();
-            if (buttonType == "upload")
+            if (state.ToString() == "CancelledByUser")
             {
-                taskModuleResponse.Task = new TaskModuleContinueResponse
-                {
-                    Type = "continue",
-                    Value = new TaskModuleTaskInfo()
-                    {
-                        Url = _applicationBaseUrl + "/" + "uploadFile",
-                        Height = 350,
-                        Width = 350,
-                        Title = "Upload file",
-                    },
-                };
+                await turnContext.SendActivityAsync("Sign in cancelled by user");
             }
-
-            return Task.FromResult(taskModuleResponse);
+            else
+            {
+                var cred = JObject.Parse(state);
+                var userName = (string)cred.ToObject<CardTaskFetchValue<string>>()?.UserName;
+                var password = (string)cred.ToObject<CardTaskFetchValue<string>>()?.Password;
+                await turnContext.SendActivityAsync("Authentication Successful");
+            } 
         }
 
         /// <summary>

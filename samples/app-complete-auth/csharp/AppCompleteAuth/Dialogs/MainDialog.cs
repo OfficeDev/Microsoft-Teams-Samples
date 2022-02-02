@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
@@ -16,13 +17,13 @@ namespace AppCompleteAuth.Dialogs
 {
     public class MainDialog : LogoutDialog
     {
-        public readonly IConfiguration _configuration;
+        private readonly string _applicationBaseUrl;
         private readonly ConcurrentDictionary<string, TokenState> _Token;
 
-        public MainDialog(IConfiguration configuration,ConcurrentDictionary<string, TokenState> token)
+        public MainDialog(IConfiguration configuration, ConcurrentDictionary<string, TokenState> token)
             : base(nameof(MainDialog), configuration["ConnectionName"])
         {
-            _configuration = configuration;
+            _applicationBaseUrl = configuration["ApplicationBaseUrl"] ?? throw new NullReferenceException("ApplicationBaseUrl");
             _Token = token;
 
             AddDialog(new TokenExchangeOAuthPrompt(
@@ -60,7 +61,7 @@ namespace AppCompleteAuth.Dialogs
                 }
                 else if (stepContext.Context.Activity.Text.ToLower().Trim() == "usingcredentials")
                 {
-                    await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetAdaptiveCardForUserCredentials()), cancellationToken);
+                    await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetPopUpSignInCard()), cancellationToken);
                     return await stepContext.EndDialogAsync();
                 }
                 else if (stepContext.Context.Activity.Text.ToLower().Trim() == "otheridentityprovider")
@@ -100,45 +101,18 @@ namespace AppCompleteAuth.Dialogs
             return await stepContext.EndDialogAsync();
         }
 
-        /// <summary>
-        /// Sample Adaptive card for user credentials.
-        /// </summary>
-        private Attachment GetAdaptiveCardForUserCredentials()
+        private Attachment GetPopUpSignInCard()
         {
-            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
+            var heroCard = new HeroCard
             {
-                Body = new List<AdaptiveElement>
+                Title = "Sign in card",
+                Buttons = new List<CardAction>
                 {
-                     new AdaptiveTextInput()
-                    {
-                        Id = "userId",
-                        Placeholder = "enter user Id",
-                        Label = "User Id",
-                        Style = AdaptiveTextInputStyle.Text
-                    },
-                      new AdaptiveTextInput()
-                    {
-                        Id = "password",
-                        Placeholder = "Enter password",
-                        Label = "Enter password",
-                        Style = AdaptiveTextInputStyle.Text
-                    }
-                },
-                Actions = new List<AdaptiveAction>
-                {
-                     new AdaptiveSubmitAction()
-                    {
-                        Title = "Submit",
-                        DataJson = "{\"isFromAdaptiveCard\": \"true\"}",
-                    }
+                    new CardAction(ActionTypes.Signin, "Sign in", value: _applicationBaseUrl + "/popUpSignin?height=400&width=400"),
                 }
             };
 
-            return new Attachment()
-            {
-                ContentType = AdaptiveCard.ContentType,
-                Content = card,
-            };
+            return heroCard.ToAttachment();
         }
     }
 }

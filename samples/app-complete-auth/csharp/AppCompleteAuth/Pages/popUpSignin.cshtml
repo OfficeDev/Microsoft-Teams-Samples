@@ -1,0 +1,62 @@
+﻿@page
+@model AppCompleteAuth.Pages.popUpSignin
+@{
+}
+
+<head>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        microsoftTeams.initialize();
+        function submit()
+        {
+             var isValid = true;
+             $('#userName,#password').each(function () {
+                 if ($.trim($(this).val()) == '') {
+                     isValid = false;
+                     $(this).css({
+                         "border": "1px solid red"
+                     });
+                 }
+                 else {
+                     $(this).css({
+                         "border": "",
+                         "background": ""
+                     });
+                 }
+             });
+             if (isValid == false) {
+                 e.preventDefault();
+                 return false;
+             }
+
+             let credentials = {
+                 userName: $('#userName').val(),
+                 password: $('#password').val(),
+             };
+
+            microsoftTeams.authentication.notifySuccess(JSON.stringify(credentials));
+        } 
+
+        function closeWindow() {
+            microsoftTeams.authentication.notifyFailure();
+        }
+    </script>
+  
+</head>
+<body class="theme-light">
+    <div>
+        User Name : <input id="userName" type="text" />
+    </div>
+    <br />
+    <div>
+        Password : <input id="password" type="password" />
+    </div>
+
+    <input type="submit" class="primary-button" value="Submit" onClick="submit()">
+    <input type="submit" class="primary-button" value="Close" onClick="closeWindow()">
+
+</body>

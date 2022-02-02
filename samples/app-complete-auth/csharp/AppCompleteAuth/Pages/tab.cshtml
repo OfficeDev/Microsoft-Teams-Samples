@@ -10,7 +10,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        ﻿let accessToken;
+         $(document).ready(function () {
+            $("#userInformation").hide();
+            $("#userImg").hide();
+         });
+
         microsoftTeams.initialize();
 
         function ssoAuthentication()
@@ -39,7 +43,6 @@
                 return new Promise((resolve, reject) => {
                     microsoftTeams.authentication.getAuthToken({
                         successCallback: (result) => {
-                            console.log(result);
                             resolve(result);     
                         },
                         failureCallback: function (error) {                
@@ -69,38 +72,31 @@
                             }
                         })
                         .then((responseJson) => {
-                            if (IsValidJSONString(responseJson)) {
-                                if (JSON.parse(responseJson).error)
-                                    reject(JSON.parse(responseJson).error);
-                            } else if (responseJson) {
-                                accessToken = responseJson;
-                                localStorage.setItem("accessToken", accessToken);
-                            }
+                            userDetails = JSON.parse(responseJson);
+                            $("#userInfo").text(`You're logged in as ${userDetails.user.displayName} (${userDetails.user.userPrincipalName}); you job title is: ${userDetails.title}; your photo is: `);
+                            $("#userImg").attr("src", userDetails.photo);
+                            $("#userInformation").show();
+                            $("#userImg").show();
                         });
                     });
                 });
             }
 
-            function IsValidJSONString(str) {
-                try {
-                    JSON.parse(str);
-                } catch (e) {
-                    return false;
-                }
-                return true;
+            function usingCredentials(){
+               window.open(window.location.origin + "/popUpSignin","_blank","height=500,width=500");
             }
 
     </script>
     <style>
-        h3{
+        h3 {
             text-align: center;
             margin-top: 10rem;
         }
-        .container{
+        .container {
             text-align: center;
         }
-        button{
-            margin-left: 36rem;
+        button {
+            margin-left: 26rem;
             margin-top: 1rem;
         }
     </style>
@@ -109,10 +105,18 @@
         <div class="surface">
         <h3> Welcome to App complete auth sample</h3>
         <div class="container">Select a method to sign in</div>
-        <button>Using Credentials</button>
+        <button onclick="usingCredentials()">Using Credentials</button>
         <br/>
         <button>Other identity provider</button>
         <br />
         <button onclick="ssoAuthentication()">SSO</button>
+         <div id="userInformation">
+            User Information:
+            <div id = "userInfo">
+                <br />
+             </div>
+             <img id="userImg" width="200" height="200" />
+        </div>
     </div>
+   
 </body>

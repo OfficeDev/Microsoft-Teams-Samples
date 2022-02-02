@@ -1,5 +1,6 @@
 ﻿
 using AppCompleteAuth.helper;
+using AppCompleteAuth.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -30,13 +31,26 @@ namespace AppCompleteAuth.Controllers
 
         // Get user access token.
         [HttpGet]
-        public async Task<ActionResult<string>> GetUserAccessToken()
+        public async Task<ActionResult<UserData>> GetUserAccessToken()
         {
             try
             {
                 var accessToken = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor);
 
-                return accessToken;
+                var client = new SimpleGraphClient(accessToken);
+                var me = await client.GetMeAsync();
+                var title = !string.IsNullOrEmpty(me.JobTitle) ?
+                            me.JobTitle : "Unknown";
+
+                var photo = await client.GetPhotoAsync();
+
+                var userInfo = new UserData() { 
+                            User = me,
+                            Photo = photo,
+                            Title = title
+                        };
+
+                return userInfo;
             }
             catch (Exception)
             {
