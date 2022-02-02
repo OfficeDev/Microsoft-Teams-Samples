@@ -9,6 +9,7 @@ const axios = require('axios');
 const polly = require('polly-js');
 const { polyfills } = require('isomorphic-fetch');
 const { SimpleGraphClient } = require('./simpleGraphClient');
+const peach = require('parallel-each');
 
 var delegatedToken = "";
 var applicationToken = "";
@@ -112,8 +113,8 @@ app.post('/SendNotificationToOrganisation', async (req, res) => {
   var userList = await client.getUserList();
 
   if(userList.value){
-    for (let i = 0; i < userList.value.length; i++) {
-      let appList = await client.getInstalledAppsForUser(userList.value[i].id);
+    peach(userList.value, async( users) =>{
+      let appList = await client.getInstalledAppsForUser(users.id);
       if(appList){
         let userAppId = getAppId(appList);
         var encodedContext = encodeURI('{"subEntityId": ' + req.body.id + '}');
@@ -136,10 +137,10 @@ app.post('/SendNotificationToOrganisation', async (req, res) => {
           };
 
           if (userAppId == undefined) {
-            var appInstalled = client.installAppForUser(userList.value[i].id,appId)
+            var appInstalled = client.installAppForUser(users.id,appId)
             if(appInstalled)
             {
-              axios.post("https://graph.microsoft.com/v1.0/users/" + userList.value[i].id + "/teamwork/sendActivityNotification", postData, {
+              axios.post("https://graph.microsoft.com/v1.0/users/" + users.id + "/teamwork/sendActivityNotification", postData, {
                 headers: {
                   "accept": "application/json",
                   "contentType": 'application/json',
@@ -150,7 +151,7 @@ app.post('/SendNotificationToOrganisation', async (req, res) => {
                 console.log(`statusCode: ${res.status}`)
                 if(res.status == 429)
                 {
-                  handleTooManyRequestError(userList.value[i].id, postData);
+                  handleTooManyRequestError(users.id, postData);
                 }
               })
               .catch(error=>{
@@ -159,7 +160,7 @@ app.post('/SendNotificationToOrganisation', async (req, res) => {
             }
           }
           else{
-            axios.post("https://graph.microsoft.com/v1.0/users/" + userList.value[i].id + "/teamwork/sendActivityNotification", postData, {
+            axios.post("https://graph.microsoft.com/v1.0/users/" + users.id + "/teamwork/sendActivityNotification", postData, {
               headers: {
                 "accept": "application/json",
                 "contentType": 'application/json',
@@ -170,12 +171,13 @@ app.post('/SendNotificationToOrganisation', async (req, res) => {
               console.log(`statusCode: ${res.status}`)
               if(res.status == 429)
               {
-                handleTooManyRequestError(userList.value[i].id,postData);
+                handleTooManyRequestError(users.id,postData);
               }
             })
           }
       }
     }
+    );
   }
 });
 
