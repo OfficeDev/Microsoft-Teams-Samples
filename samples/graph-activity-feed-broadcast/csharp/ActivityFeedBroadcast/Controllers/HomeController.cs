@@ -112,12 +112,12 @@ namespace ActivityFeedBroadcast.Controllers
                 // Get app id using app display name.
                 var appId = installedAppsForCurrentUser.Where(id => id.TeamsAppDefinition.DisplayName == "Activity feed broadcast").Select(x => x.TeamsAppDefinition.TeamsAppId);
 
-                foreach (var users in usersList)
+                Parallel.ForEach (usersList, async users =>
                 {
                     var installedApp = await graphClient.Users[users.Id].Teamwork.InstalledApps
-                                            .Request()
-                                            .Expand("teamsApp")
-                                            .GetAsync();
+                                             .Request()
+                                             .Expand("teamsApp")
+                                             .GetAsync();
 
                     var response = new HttpResponseMessage();
                     var installationId = installedApp.Where(id => id.TeamsApp.DisplayName == "Activity feed broadcast").Select(x => x.TeamsApp.Id);
@@ -125,21 +125,23 @@ namespace ActivityFeedBroadcast.Controllers
                     var url = "https://teams.microsoft.com/l/entity/" + appId.ToList()[0] + "/broadcast?context={\"subEntityId\":\"" + taskInfo.taskId + "\"}";
                     var postData = new
                     {
-                        topic = new
+                        topic = new TeamworkActivityTopic()
                         {
-                            source = "text",
-                            value = $"{taskInfo.title}",
-                            webUrl = url
+                            Source = TeamworkActivityTopicSource.Text,
+                            Value = $"{taskInfo.title}",
+                            WebUrl = url
                         },
                         activityType = "approvalRequired",
-                        previewText = new
+                        previewText = new ItemBody
                         {
-                            content = $"Message By:"
+                            Content = $"Message By:"
                         },
-                        templateParameters = new[] {
-                            new {
-                                name = "approvalTaskId",
-                                value = taskInfo.title
+                        templateParameters = new List<Microsoft.Graph.KeyValuePair>()
+                        {
+                            new Microsoft.Graph.KeyValuePair
+                            {
+                                Name = "approvalTaskId",
+                                Value = taskInfo.title
                             }
                         }
                     };
@@ -166,45 +168,48 @@ namespace ActivityFeedBroadcast.Controllers
                     }
                     else
                     {
-                         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", taskInfo.access_token);
-                         response = await client.PostAsync($"https://graph.microsoft.com/v1.0/users/{users.Id}/teamwork/sendActivityNotification", data);
+                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", taskInfo.access_token);
+                        response = await client.PostAsync($"https://graph.microsoft.com/v1.0/users/{users.Id}/teamwork/sendActivityNotification", data);
                     }
 
-                   await Policy
-                    .Handle<HttpRequestException>()
-                    .OrResult<HttpResponseMessage>(response => response.StatusCode == HttpStatusCode.TooManyRequests ||
-                                                        response.StatusCode == HttpStatusCode.ServiceUnavailable)
-                    .WaitAndRetryAsync(3,
-                        sleepDurationProvider: (retryCount, response, context) =>
-                        {
-                            var delay = TimeSpan.FromSeconds(0);
+                    if (response.StatusCode == HttpStatusCode.TooManyRequests)
+                    {
+                        await Policy
+                        .Handle<HttpRequestException>()
+                        .OrResult<HttpResponseMessage>(response => response.StatusCode == HttpStatusCode.TooManyRequests ||
+                                                            response.StatusCode == HttpStatusCode.ServiceUnavailable)
+                        .WaitAndRetryAsync(3,
+                            sleepDurationProvider: (retryCount, response, context) =>
+                            {
+                                var delay = TimeSpan.FromSeconds(0);
                                 // if an exception was thrown, this will be null
                                 if (response.Result != null)
-                            {
-                                if (!response.Result.Headers.TryGetValues("Retry-After", out IEnumerable<string> values))
-                                    return delay;
+                                {
+                                    if (!response.Result.Headers.TryGetValues("Retry-After", out IEnumerable<string> values))
+                                        return delay;
 
-                                if (int.TryParse(values.First(), out int delayInSeconds))
-                                    delay = TimeSpan.FromSeconds(delayInSeconds);
-                            }
-                            else
-                            {
-                                var exponentialBackoff = Math.Pow(2, retryCount);
-                                var delayInSeconds = exponentialBackoff * 10000;
-                                delay = TimeSpan.FromMilliseconds(delayInSeconds);
-                            }
+                                    if (int.TryParse(values.First(), out int delayInSeconds))
+                                        delay = TimeSpan.FromSeconds(delayInSeconds);
+                                }
+                                else
+                                {
+                                    var exponentialBackoff = Math.Pow(2, retryCount);
+                                    var delayInSeconds = exponentialBackoff * 10000;
+                                    delay = TimeSpan.FromMilliseconds(delayInSeconds);
+                                }
 
-                            return delay;
-                        },
-                        onRetryAsync:async (response, timespan, retryCount, context) =>
-                        {
-                        }
-                      ).ExecuteAsync(async () =>
-                      {
-                          return await client.PostAsync($"https://graph.microsoft.com/v1.0/users/{users.Id}/teamwork/sendActivityNotification", data);
-                      }
-                    );
-                };
+                                return delay;
+                            },
+                            onRetryAsync: async (response, timespan, retryCount, context) =>
+                            {
+                            }
+                          ).ExecuteAsync(async () =>
+                          {
+                              return await client.PostAsync($"https://graph.microsoft.com/v1.0/users/{users.Id}/teamwork/sendActivityNotification", data);
+                          }
+                        );
+                    }
+                });       
             }
             catch (Exception ex)
             {
