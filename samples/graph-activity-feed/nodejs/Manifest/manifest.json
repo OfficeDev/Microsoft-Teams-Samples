@@ -1,7 +1,7 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.8",
-  "version": "1.0.1",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.11",
+  "version": "1.0.0",
   "id": "<<YOUR-MANIFEST-ID>>",
   "packageName": "com.microsoft.teams.graphactivityfeed",
   "developer": {
@@ -35,6 +35,17 @@
         "channelTab",
         "privateChatTab"
       ]
+    }
+  ],
+  "staticTabs": [
+    {
+		"entityId": "personal",
+		"name": "UserNotification",
+		"contentUrl": "https://<<YOUR-BASE-URL>>/UserNotification",
+		"websiteUrl": "https://<<YOUR-BASE-URL>>/UserNotification",
+		"scopes": [
+			"personal"
+		]
     }
   ],
   "permissions": [

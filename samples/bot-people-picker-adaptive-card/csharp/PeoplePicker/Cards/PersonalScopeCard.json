@@ -1,0 +1,77 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.2",
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Task title"
+    },
+    {
+      "type": "Input.Text",
+      "placeholder": "Task title",
+      "id": "taskTitle"
+    },
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "text": "Task description",
+      "weight": "Bolder"
+    },
+    {
+      "type": "Input.Text",
+      "weight": "Bolder",
+      "placeholder": "Task description",
+      "id": "taskDescription"
+    },
+    {
+      "columns": [
+        {
+          "width": "auto",
+          "items": [
+            {
+              "text": "Select the member to assign the task:",
+              "wrap": true,
+              "height": "stretch",
+              "type": "TextBlock",
+              "weight": "Bolder"
+            }
+          ],
+          "type": "Column"
+        }
+      ],
+      "type": "ColumnSet"
+    },
+    {
+      "columns": [
+        {
+          "width": "stretch",
+          "items": [
+            {
+              "choices": [],
+              "isMultiSelect": false,
+              "style": "filtered",
+              "choices.data": {
+                "type": "Data.Query",
+                "dataset": "graph.microsoft.com/users"
+              },
+              "id": "userId",
+              "type": "Input.ChoiceSet"
+            }
+          ],
+          "type": "Column"
+        }
+      ],
+      "type": "ColumnSet"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "id": "submitdynamic",
+      "title": "Assign"
+    }
+  ]
+}

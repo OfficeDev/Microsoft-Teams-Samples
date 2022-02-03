@@ -5,21 +5,18 @@ var fs = require("fs");
 const createAuthResponse = (signInLink) => {
     console.log("Create Auth response")
     const res = {
-        status: StatusCodes.OK,
-        body: {
-            "tab": {
-                "type": "auth",
-                "suggestedActions": {
-                    "actions": [
+            tab: {
+                type: "auth",
+                suggestedActions: {
+                    actions: [
                         {
-                            "type": "openUrl",
-                            "value": signInLink,
-                            "title": "Sign in to this app"
+                            type: "openUrl",
+                            value: signInLink,
+                            title: "Sign in to this app"
                         }
                     ]
                 }
-            },
-        }
+            }
     };
     return res;
 };
@@ -27,8 +24,6 @@ const createAuthResponse = (signInLink) => {
 // Card response for task module invoke request
 const invokeTaskResponse = () => {
     const response = {
-        status: StatusCodes.OK,
-        body: {
             task: {
                 type: 'continue',
                 value: {
@@ -41,7 +36,22 @@ const invokeTaskResponse = () => {
                     title: 'Sample Adaptive Card'
                 }
             }
-        }
+    };
+    return response;
+};
+
+const videoInvokeResponse = (videoId) => {
+    const response = {
+            task: {
+                type: 'continue',
+                value: {
+                    url: `https://www.youtube.com/embed/${videoId}`,
+                    fallbackUrl: `https://www.youtube.com/embed/${videoId}`,
+                    heigth: 1000,
+                    width: 700,
+                    title: 'Youtube Video'
+                }
+            }
     };
     return response;
 };
@@ -66,12 +76,10 @@ const createFetchResponse = async (userImage, displayName) => {
     }
 
     const res = {
-        status: StatusCodes.OK,
-        body: {
-            "tab": {
-                "type": "continue",
-                "value": {
-                    "cards": [
+            tab: {
+                type: "continue",
+                value: {
+                    cards: [
                         {
                             "card": getAdaptiveCardUserDetails(imageString, displayName),
                         },
@@ -80,8 +88,27 @@ const createFetchResponse = async (userImage, displayName) => {
                         }
                     ]
                 },
-            },
         }
+    };
+
+    return res;
+};
+
+// Card response for tab fetch request
+const createFetchResponseForTab2 = async () => {
+    console.log("Create Invoke response");
+
+    const res = {
+            tab: {
+                type: "continue",
+                value: {
+                    cards: [
+                        {
+                            "card": getAdaptiveCardTab2(),
+                        }
+                    ]
+                },
+            }
     };
 
     return res;
@@ -91,19 +118,16 @@ const createFetchResponse = async (userImage, displayName) => {
 const createSubmitResponse = () => {
     console.log("Submit response")
     const res = {
-        status: StatusCodes.OK,
-        body: {
-            "tab": {
-                "type": "continue",
-                "value": {
-                    "cards": [
+            tab: {
+                type: "continue",
+                value: {
+                    cards: [
                         {
-                            "card": signOutCard,
+                            card: signOutCard,
                         }
                     ]
                 },
-            },
-        }
+            }
     };
 
     return res;
@@ -112,30 +136,74 @@ const createSubmitResponse = () => {
 // Card response for tab submit request
 const taskSubmitResponse = () => {
     console.log("Task Submit response")
-    const res = {
-        status: StatusCodes.OK,
-        body: {
-            "task": {
-                "value": {
-                    "tab": {
-                        "type": "continue",
-                        "value": {
-                            "cards": [
-                                {
-                                    "card": taskSubmitCard
-                                }
-                            ]
+    const response = {
+        task: {
+            type: 'continue',
+            value: {
+                card: {
+                    contentType: "application/vnd.microsoft.card.adaptive",
+                    content: taskSubmitCard
+                },
+                heigth: 250,
+                width: 400,
+                title: 'Sample Adaptive Card'
+            }
+        }
+};
+return response;
+};
+
+// Adaptive Card with user image, name and Task Module invoke action
+const getAdaptiveCardTab2 = () => {
+    const adaptiveCard1 = {
+        $schema: "http://adaptivecards.io/schemas/adaptive-card.json",
+        body: [
+            {
+                type: "Container",
+                items: [
+                  {
+                    type: "TextBlock",
+                    text: "Video Player",
+                    weight: "Bolder",
+                    size: "Medium"
+                  }
+                ]
+              },
+              {
+                type: "Container",
+                items: [
+                  {
+                    type: "TextBlock",
+                    text: "Enter the ID of a YouTube video to play in a dialog",
+                    wrap: true
+                  },
+                  {
+                    type: "Input.Text",
+                    id: "youTubeVideoId",
+                    value: "jugBQqE_2sM"
+                  }
+                ]
+              },
+            {
+                type: 'ActionSet',
+                actions: [
+                    {
+                        type: "Action.Submit",
+                        title: "Show Task Module",
+                        data: {
+                            msteams: {
+                                type: "task/fetch"
+                            }
                         }
                     }
-                },
-                "type": "continue"
-            },
-            "responseType": "task"
-        }
+                ]
+            }
+        ],
+        type: 'AdaptiveCard',
+        version: '1.4'
     };
-
-    return res;
-};
+    return adaptiveCard1;
+}
 
 // Adaptive Card with user image, name and Task Module invoke action
 const getAdaptiveCardUserDetails = (image, name) => {
@@ -301,8 +369,10 @@ const taskSubmitCard = {
 
 module.exports = {
     createFetchResponse,
+    createFetchResponseForTab2,
     createSubmitResponse,
     createAuthResponse,
     invokeTaskResponse,
+    videoInvokeResponse,
     taskSubmitResponse
 };

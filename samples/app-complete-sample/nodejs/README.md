@@ -41,7 +41,7 @@ Sample that shows how to use dialog bot with bot sdk v4, messaging extension, fa
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/auto-complete-sample/nodejs-v4`
+2) In a terminal, navigate to `samples/app-complete-sample/nodejs`
 
 3) Install modules
 
