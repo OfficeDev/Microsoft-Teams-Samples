@@ -13,6 +13,7 @@
          $(document).ready(function () {
             $("#userInformation").hide();
             $("#userImg").hide();
+            $("#usingCredentials").hide();
          });
 
         microsoftTeams.initialize();
@@ -83,7 +84,21 @@
             }
 
             function usingCredentials(){
-               window.open(window.location.origin + "/popUpSignin","_blank","height=500,width=500");
+                microsoftTeams.authentication.authenticate({
+                    url: window.location.origin + "/popUpSignin?from=tab",
+                    width: 600,
+                    height: 535,
+                    successCallback: result => {
+                        console.log(result)
+                        $("#usingCredentials").text("Login Successful");
+                        $("#usingCredentials").show();
+                        $("#userInformation").hide();
+                        $("#userImg").hide();
+                    },
+                    failureCallback: reason => {
+                        console.log(reason);
+                    }
+                });              
             }
 
     </script>
@@ -116,6 +131,8 @@
                 <br />
              </div>
              <img id="userImg" width="200" height="200" />
+        </div>
+        <div id="usingCredentials">
         </div>
     </div>
    

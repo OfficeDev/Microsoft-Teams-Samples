@@ -10,7 +10,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        var requestFrom;
+         $(document).ready(function () {
+            const params = window.location.search;
+            requestFrom = params.substring(params.search("=")+1);
+        });
+
         microsoftTeams.initialize();
+
         function submit()
         {
              var isValid = true;
@@ -38,7 +45,19 @@
                  password: $('#password').val(),
              };
 
-            microsoftTeams.authentication.notifySuccess(JSON.stringify(credentials));
+             if(requestFrom == "tab"){
+                 fetch('/tabCredentialsAuth', {
+                        method: 'get',
+                        data:JSON.stringify(credentials),
+                        cache: 'default'
+                    }).
+                    then(response => {
+                     microsoftTeams.authentication.notifySuccess(JSON.stringify(response));
+                 });
+             }
+             else {
+                 microsoftTeams.authentication.notifySuccess(JSON.stringify(credentials));
+             }
         } 
 
         function closeWindow() {

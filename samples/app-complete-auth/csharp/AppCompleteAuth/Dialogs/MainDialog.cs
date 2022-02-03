@@ -108,7 +108,7 @@ namespace AppCompleteAuth.Dialogs
                 Title = "Sign in card",
                 Buttons = new List<CardAction>
                 {
-                    new CardAction(ActionTypes.Signin, "Sign in", value: _applicationBaseUrl + "/popUpSignin?height=400&width=400"),
+                    new CardAction(ActionTypes.Signin, "Sign in", value: _applicationBaseUrl + "/popUpSignin?from=bot&height=400&width=400"),
                 }
             };
 

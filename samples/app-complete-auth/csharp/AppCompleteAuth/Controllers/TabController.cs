@@ -1,7 +1,6 @@
 ﻿
 using AppCompleteAuth.helper;
 using AppCompleteAuth.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace AppCompleteAuth.Controllers
 {
-    [Route("GetUserAccessToken")]
     public class TabController : ControllerBase
     {
         public readonly IConfiguration _configuration;
@@ -31,6 +29,7 @@ namespace AppCompleteAuth.Controllers
 
         // Get user access token.
         [HttpGet]
+        [Route("GetUserAccessToken")]
         public async Task<ActionResult<UserData>> GetUserAccessToken()
         {
             try
@@ -44,11 +43,11 @@ namespace AppCompleteAuth.Controllers
 
                 var photo = await client.GetPhotoAsync();
 
-                var userInfo = new UserData() { 
-                            User = me,
-                            Photo = photo,
-                            Title = title
-                        };
+                var userInfo = new UserData() {
+                    User = me,
+                    Photo = photo,
+                    Title = title
+                };
 
                 return userInfo;
             }
@@ -56,6 +55,15 @@ namespace AppCompleteAuth.Controllers
             {
                 return null;
             }
+        }
+
+        [HttpGet]
+        [Route("tabCredentialsAuth")]
+        public string AuthenticateUsingCredentials([FromBody] string credentials)
+        {
+            var request = Request;
+            var result = "Authentication sucessful";
+            return result;
         }
     }
 }
