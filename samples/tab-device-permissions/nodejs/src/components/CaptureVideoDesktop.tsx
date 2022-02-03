@@ -18,11 +18,10 @@ const CaptureVideoDesktop = () => {
     })
 
     function captureVideo() {
-        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+        navigator.mediaDevices.getUserMedia({ video: true })
             .then(mediaStream => {
-                // var stream = mediaStream;
-                const video = document.querySelector("video");
-                video!.srcObject = mediaStream;
+                const videoElement = document.querySelector("video");
+                videoElement!.srcObject = mediaStream;
                 setCapturedVideo(mediaStream);
             })
             .catch(error => console.log(error));

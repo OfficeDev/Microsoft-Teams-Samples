@@ -17,11 +17,10 @@ const CaptureAudioDesktop = () => {
     })
 
     function captureAudio() {
-        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+        navigator.mediaDevices.getUserMedia({ audio: true })
             .then(mediaStream => {
-                // var stream = mediaStream;
-                const video = document.querySelector("audio");
-                video!.srcObject = mediaStream;
+                const audioElement = document.querySelector("audio");
+                audioElement!.srcObject = mediaStream;
                 setCapturedVideo(mediaStream);
             })
             .catch(error => console.log(error));

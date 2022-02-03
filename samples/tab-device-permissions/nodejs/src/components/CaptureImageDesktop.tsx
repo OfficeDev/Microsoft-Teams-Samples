@@ -39,7 +39,6 @@ const CaptureImageDesktop = () => {
             .then(mediaStream => {
                 const track = mediaStream.getVideoTracks()[0];
                 imageCapture = new ImageCapture(track);
-                console.log(imageCapture);
                 imageCapture.takePhoto()
                     .then(blob => {
                         setCapturedImage(URL.createObjectURL(blob));
