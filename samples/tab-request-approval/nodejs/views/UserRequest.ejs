@@ -20,10 +20,12 @@
             padding-top: 2%;
             padding-right: 2%;
         }
+
         .container {
         margin-top: 1rem;
         margin-left:1.5rem;
         }
+
     </style>
 </head>
 
@@ -70,17 +72,20 @@
                 $("#noRequestFound").show();
                 $("#requestApproved").hide();
             }
+
             else if(data != null && data.status != "Pending") {
                 $("#productDetails").hide();
                 $("#noRequestFound").hide();
                 $("#requestApproved").show();
             }
+
             else if(data != null && data.status == "Pending"){
                 $("#requestName").text(data.title);
                 $("#requestDescription").text(data.description);
                 $("#requestCreatedBy").text(data.createdBy);
             }
         }
+
         function ApproveRequest() {
             var taskId = data.id;
             let taskInfo = {
@@ -99,14 +104,17 @@
                     console.log('error', errorThrown);
                 }
             });
+
             microsoftTeams.tasks.submitTask();
         };  
+
         function RejectRequest() {
             var taskId = data.id;
             let taskInfo = {
                 taskId: taskId,
                 status: "Rejected"
             };
+            
             $.ajax({
                 type: 'POST',
                 url: '/ApproveRejectRequest',
@@ -119,6 +127,7 @@
                     console.log('error', errorThrown);
                 }
             });
+
             microsoftTeams.tasks.submitTask();
         };
     </script>
