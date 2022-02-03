@@ -34,32 +34,102 @@
         <div id="productDetails">
             <h4>Request Details</h4>
             <br>
-            <label for="title" class="title">Message title:</label>
+            <label for="title" class="title">Request Title</label>
             <br>
-            <div id="title"></div>
+            <div id="requestName"></div>
             <br>
-            <label for="description" class="title">Message description:</label>
+            <label for="description" class="title">Request Description</label>
             <br>
-            <div id="description"></div>
+            <div id="requestDescription"></div>
             <br>
-            <label for="messageby" class="title">Message by:</label>
+            <label for="description" class="title">Created By</label>
             <br>
             <div id="requestCreatedBy"></div>
-        </div>
+            <br>
+        <br/>
+        <button type="button" class="btn btn-outline-info" id="btnApprove" onclick="ApproveRequest()">Approve</button>
+        <button type="button" class="btn btn-outline-info" id="btnReject" onclick="RejectRequest()">Reject</button>
+    </div>
+    <div id="noRequestFound">
+        <span>Request not found</span>
+    </div>
+    <div id="requestApproved">
+        <span>Request is already approved/rejected</span>
+    </div>
     </div>
     <script>
-        var data =  <%-data%>
-
+          var data =  <%-data%>
         microsoftTeams.initialize(()=>{
+            $("#noRequestFound").hide();
+            $("#requestApproved").hide();
             getRequestDetails(); 
         })
+        // Method to show geo location for given latitude and longitude values.
         
         function getRequestDetails() {
-                $("#title").text(data.title);
-                $("#description").text(data.description);
-                $("#messageby").text(data.createdBy);
-        
+            if(data == null){
+                $("#productDetails").hide();
+                $("#noRequestFound").show();
+                $("#requestApproved").hide();
+            }
+
+            else if(data != null && data.status != "Pending") {
+                $("#productDetails").hide();
+                $("#noRequestFound").hide();
+                $("#requestApproved").show();
+            }
+
+            else if(data != null && data.status == "Pending"){
+                $("#requestName").text(data.title);
+                $("#requestDescription").text(data.description);
+                $("#requestCreatedBy").text(data.createdBy);
+            }
         }
+
+        function ApproveRequest() {
+            var taskId = data.id;
+            let taskInfo = {
+                taskId: taskId,
+                status: "Approved"
+            };
+            $.ajax({
+                type: 'POST',
+                url: '/ApproveRejectRequest',
+                contentType: 'application/json',
+                data: JSON.stringify(taskInfo),
+                success: function (data, textStatus, jQxhr) {
+                    microsoftTeams.tasks.submitTask();
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log('error', errorThrown);
+                }
+            });
+
+            microsoftTeams.tasks.submitTask();
+        };  
+
+        function RejectRequest() {
+            var taskId = data.id;
+            let taskInfo = {
+                taskId: taskId,
+                status: "Rejected"
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/ApproveRejectRequest',
+                contentType: 'application/json',
+                data: JSON.stringify(taskInfo),
+                success: function (data, textStatus, jQxhr) {
+                    microsoftTeams.tasks.submitTask();
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log('error', errorThrown);
+                }
+            });
+
+            microsoftTeams.tasks.submitTask();
+        };
     </script>
 </body>
 

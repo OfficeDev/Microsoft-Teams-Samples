@@ -7,6 +7,9 @@ const app = express();
 const msal = require('@azure/msal-node');
 const axios = require('axios');
 const polly = require('polly-js');
+const { polyfills } = require('isomorphic-fetch');
+const { SimpleGraphClient } = require('./simpleGraphClient');
+const peach = require('parallel-each');
 
 var delegatedToken = "";
 var applicationToken = "";
@@ -91,7 +94,7 @@ app.post('/auth/token', function (req, res) {
 });
 
 // Send notification to group chat for task creation.
-app.post('/SendNotificationToOrganisation', (req, res) => {
+app.post('/SendNotificationToOrganisation', async (req, res) => {
   var taskDetails = {
     id: req.body.id,
     title: req.body.title,
@@ -103,38 +106,17 @@ app.post('/SendNotificationToOrganisation', (req, res) => {
   localdata.push(taskDetails);
   var appId;
 
-  axios.get("https://graph.microsoft.com/v1.0/users/" + req.body.userId + "/teamwork/installedApps/?$expand=teamsAppDefinition", {
-    headers: {
-      "accept": "application/json",
-      "contentType": 'application/json',
-      "authorization": "bearer " + delegatedToken
-    }
-  })
-  .then(res => {
-    appId = getAppId(res.data);
-  })
-  .catch(error =>{
-    console.log(error);
-  });
+  const client = new SimpleGraphClient(delegatedToken);
 
-  axios.get("https://graph.microsoft.com/v1.0/users", {
-    headers: {
-      "accept": "application/json",
-      "contentType": 'application/json',
-      "authorization": "bearer " + delegatedToken
-    }
-  })
-  .then(userList => {
-    for (let i = 0; i < userList.data.value.length; i++) {
-      axios.get("https://graph.microsoft.com/v1.0/users/" + userList.data.value[i].id + "/teamwork/installedApps/?$expand=teamsAppDefinition", {
-        headers: {
-          "accept": "application/json",
-          "contentType": 'application/json',
-          "authorization": "bearer " + delegatedToken
-        }
-      })
-      .then(res => {
-        let userAppId = getAppId(res.data);
+  var response =  await client.getInstalledAppsForUser(req.body.userId);
+  appId = getAppId(response);
+  var userList = await client.getUserList();
+
+  if(userList.value){
+    peach(userList.value, async( users) =>{
+      let appList = await client.getInstalledAppsForUser(users.id);
+      if(appList){
+        let userAppId = getAppId(appList);
         var encodedContext = encodeURI('{"subEntityId": ' + req.body.id + '}');
           const postData = {
             "topic": {
@@ -153,19 +135,32 @@ app.post('/SendNotificationToOrganisation', (req, res) => {
               }
             ]
           };
-        if (userAppId == undefined) {
-          const broadcastAppId = {
-            "teamsApp@odata.bind": "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/" + appId
-          };
 
-          axios.post("https://graph.microsoft.com/v1.0/users/" + userList.data.value[i].id + "/teamwork/installedApps", broadcastAppId, {
-            headers: {
-              "accept": "application/json",
-              "contentType": 'application/json',
-              "authorization": "bearer " + delegatedToken
+          if (userAppId == undefined) {
+            var appInstalled = client.installAppForUser(users.id,appId)
+            if(appInstalled)
+            {
+              axios.post("https://graph.microsoft.com/v1.0/users/" + users.id + "/teamwork/sendActivityNotification", postData, {
+                headers: {
+                  "accept": "application/json",
+                  "contentType": 'application/json',
+                  "authorization": "bearer " + applicationToken
+                }
+              })
+              .then(res => {
+                console.log(`statusCode: ${res.status}`)
+                if(res.status == 429)
+                {
+                  handleTooManyRequestError(users.id, postData);
+                }
+              })
+              .catch(error=>{
+              console.log(error);
+            });
             }
-          }).then( res=> {
-            axios.post("https://graph.microsoft.com/v1.0/users/" + userList.data.value[i].id + "/teamwork/sendActivityNotification", postData, {
+          }
+          else{
+            axios.post("https://graph.microsoft.com/v1.0/users/" + users.id + "/teamwork/sendActivityNotification", postData, {
               headers: {
                 "accept": "application/json",
                 "contentType": 'application/json',
@@ -176,35 +171,14 @@ app.post('/SendNotificationToOrganisation', (req, res) => {
               console.log(`statusCode: ${res.status}`)
               if(res.status == 429)
               {
-                handleTooManyRequestError(userList.data.value[i].id, postData);
+                handleTooManyRequestError(users.id,postData);
               }
             })
-          }).catch(error=>{
-            console.log(error);
-          }); 
-        }
-        else {
-          axios.post("https://graph.microsoft.com/v1.0/users/" + userList.data.value[i].id + "/teamwork/sendActivityNotification", postData, {
-            headers: {
-              "accept": "application/json",
-              "contentType": 'application/json',
-              "authorization": "bearer " + applicationToken
-            }
-          })
-          .then(res => {
-            console.log(`statusCode: ${res.status}`)
-            if(res.status == 429)
-            {
-              handleTooManyRequestError(userList.data.value[i].id,postData);
-            }
-          })
-        }
-      })
+          }
+      }
     }
-  })
-  .catch(error => { 
-    console.log(error) 
-  });
+    );
+  }
 });
 
 // Get app id.
