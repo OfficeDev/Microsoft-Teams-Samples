@@ -96,7 +96,14 @@ namespace AppCompleteAuth.Bots
                 var cred = JObject.Parse(state);
                 var userName = (string)cred.ToObject<CardTaskFetchValue<string>>()?.UserName;
                 var password = (string)cred.ToObject<CardTaskFetchValue<string>>()?.Password;
-                await turnContext.SendActivityAsync("Authentication Successful");
+                if (userName == Constant.UserName && password == Constant.Password)
+                {
+                    await turnContext.SendActivityAsync("Authentication Successful");
+                }
+                else
+                {
+                    await turnContext.SendActivityAsync("Invalid username or password");
+                }    
             } 
         }
 

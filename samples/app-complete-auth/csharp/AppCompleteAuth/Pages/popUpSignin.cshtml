@@ -46,14 +46,18 @@
              };
 
              if(requestFrom == "tab"){
-                 fetch('/tabCredentialsAuth', {
-                        method: 'get',
-                        data:JSON.stringify(credentials),
-                        cache: 'default'
-                    }).
-                    then(response => {
-                     microsoftTeams.authentication.notifySuccess(JSON.stringify(response));
-                 });
+                 $.ajax({
+                 type: 'POST',
+                 url: '/tabCredentialsAuth',
+                 dataType: 'json',
+                 data: credentials,
+                 success: function (response) {
+                        microsoftTeams.authentication.notifySuccess(response);
+                    },
+                 error: function (xhr, textStatus, errorThrown) {
+                         console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    },
+                });
              }
              else {
                  microsoftTeams.authentication.notifySuccess(JSON.stringify(credentials));
@@ -65,17 +69,24 @@
         }
     </script>
   
+    <style>
+    .close-button{
+        margin-left:2rem;
+    }
+    </style>
 </head>
 <body class="theme-light">
     <div>
         User Name : <input id="userName" type="text" />
     </div>
     <br />
+    <br />
     <div>
         Password : <input id="password" type="password" />
     </div>
-
-    <input type="submit" class="primary-button" value="Submit" onClick="submit()">
-    <input type="submit" class="primary-button" value="Close" onClick="closeWindow()">
+    <br />
+    <br />
+    <input type="submit" class="submit-button" value="Submit" onClick="submit()">
+    <input type="submit" class="close-button" value="Close" onClick="closeWindow()">
 
 </body>

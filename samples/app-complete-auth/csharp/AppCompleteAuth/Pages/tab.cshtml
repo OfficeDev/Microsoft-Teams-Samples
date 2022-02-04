@@ -10,10 +10,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        let accessToken;
          $(document).ready(function () {
             $("#userInformation").hide();
             $("#userImg").hide();
             $("#usingCredentials").hide();
+            $("#facebookAuth").hide();
          });
 
         microsoftTeams.initialize();
@@ -25,6 +27,7 @@
                 return getServerSideToken(clientSideToken);
             })
             .catch((error) => {
+                debugger;
                 if (error === "invalid_grant") {
                     // Display in-line button so user can consent
                     $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
@@ -39,80 +42,145 @@
             });
         }
 
-            function getClientSideToken() {
+        function getClientSideToken() {
 
-                return new Promise((resolve, reject) => {
-                    microsoftTeams.authentication.getAuthToken({
-                        successCallback: (result) => {
-                            resolve(result);     
+            return new Promise((resolve, reject) => {
+            microsoftTeams.authentication.getAuthToken({
+                successCallback: (result) => {
+                    resolve(result);     
+                },
+                failureCallback: function (error) {                
+                    reject("Error getting token: " + error);
+                }
+            });
+         });
+        }
+
+        function getServerSideToken(clientSideToken) {
+            return new Promise((resolve, reject) => {
+                microsoftTeams.getContext((context) => {
+                    var scopes = ["https://graph.microsoft.com/User.Read"];
+                    fetch('/GetUserAccessToken', {
+                        method: 'get',
+                        headers: {
+                            "Content-Type": "application/text",
+                            "Authorization": "Bearer " + clientSideToken
                         },
-                        failureCallback: function (error) {                
-                            reject("Error getting token: " + error);
+                        cache: 'default'
+                    })
+                    .then((response) => {
+                        if (response.ok) {
+                            return response.text();
+                        } else {
+                            debugger;
+                            reject(response.error);
                         }
-                    });
-                });
-            }
-
-            function getServerSideToken(clientSideToken) {
-                return new Promise((resolve, reject) => {
-                    microsoftTeams.getContext((context) => {
-                        var scopes = ["https://graph.microsoft.com/User.Read"];
-                        fetch('/GetUserAccessToken', {
-                            method: 'get',
-                            headers: {
-                                "Content-Type": "application/text",
-                                "Authorization": "Bearer " + clientSideToken
-                            },
-                            cache: 'default'
-                        })
-                        .then((response) => {
-                            if (response.ok) {
-                                return response.text();
-                            } else {
-                                reject(response.error);
-                            }
-                        })
-                        .then((responseJson) => {
+                    })
+                    .then((responseJson) => {
+                        if(responseJson == ""){
+                            $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
+                            $("#divError").show();
+                            $("#consent").show()
+                        }else{
                             userDetails = JSON.parse(responseJson);
                             $("#userInfo").text(`You're logged in as ${userDetails.user.displayName} (${userDetails.user.userPrincipalName}); you job title is: ${userDetails.title}; your photo is: `);
                             $("#userImg").attr("src", userDetails.photo);
                             $("#userInformation").show();
                             $("#userImg").show();
-                        });
+                            $("#usingCredentials").hide();
+                        }
                     });
                 });
-            }
+            });
+        }
 
-            function usingCredentials(){
+        function requestConsent() {
+            getToken()
+            .then(data => {
+            $("#consent").hide();
+            $("#divError").hide();
+            accessToken = data.accessToken;
+            console.log(accessToken)
+            microsoftTeams.getContext((context) => {
+                getUserInfo(context.userPrincipalName);
+            });
+          });
+        }
+
+        function getToken() {
+            return new Promise((resolve, reject) => {
                 microsoftTeams.authentication.authenticate({
-                    url: window.location.origin + "/popUpSignin?from=tab",
+                    url: window.location.origin + "/auth-start",
                     width: 600,
                     height: 535,
                     successCallback: result => {
-                        console.log(result)
-                        $("#usingCredentials").text("Login Successful");
-                        $("#usingCredentials").show();
-                        $("#userInformation").hide();
-                        $("#userImg").hide();
+                        resolve(result);
                     },
                     failureCallback: reason => {
-                        console.log(reason);
+                        reject(reason);
                     }
-                });              
-            }
+                });
+            });
+        }
 
+        function usingCredentials(){
+            microsoftTeams.authentication.authenticate({
+                url: window.location.origin + "/popUpSignin?from=tab",
+                width: 600,
+                height: 535,
+                successCallback: result => {
+                    alert(result);
+                    $("#usingCredentials").text(result);
+                    $("#usingCredentials").show();
+                    $("#userInformation").hide();
+                    $("#userImg").hide();
+                },
+                failureCallback: reason => {
+                    console.log(reason);
+                }
+            });              
+        }
+
+        function getUserInfo(userPrincipleName) {
+            $.ajax({
+                 type: 'POST',
+                 url: '/GetUserDetails',
+                 dataType: 'json',
+                 data: {
+                            'accessToken': accessToken
+                        },
+                 success: function (responseJson) {
+                       alert(JSON.parse(responseJson));
+                    userDetails = JSON.parse(responseJson);
+                    $("#userInfo").text(`You're logged in as ${userDetails.user.displayName} (${userDetails.user.userPrincipalName}); you job title is: ${userDetails.title}; your photo is: `);
+                    $("#userImg").attr("src", userDetails.photo);
+                    $("#userInformation").show();
+                    $("#userImg").show();
+                    $("#usingCredentials").hide();
+                    },
+                 error: function (xhr, textStatus, errorThrown) {
+                         console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    },
+                });
+         }
+
+        function facebookLogin() {
+
+        }
     </script>
     <style>
         h3 {
             text-align: center;
-            margin-top: 10rem;
         }
         .container {
             text-align: center;
         }
         button {
-            margin-left: 26rem;
+            margin-left: 36rem;
             margin-top: 1rem;
+        }
+        #usingCredentials{
+            text-align: center;
         }
     </style>
 </head>
@@ -122,9 +190,11 @@
         <div class="container">Select a method to sign in</div>
         <button onclick="usingCredentials()">Using Credentials</button>
         <br/>
-        <button>Other identity provider</button>
+        <button onclick="facebookLogin()" >Other identity provider</button>
         <br />
         <button onclick="ssoAuthentication()">SSO</button>
+        <button onclick="requestConsent()" id="consent" style="display:none;">Authenticate</button>
+        <div id="divError" style="display: none"></div>
          <div id="userInformation">
             User Information:
             <div id = "userInfo">
@@ -133,6 +203,8 @@
              <img id="userImg" width="200" height="200" />
         </div>
         <div id="usingCredentials">
+        </div>
+        <div id="facebookAuth">
         </div>
     </div>
    

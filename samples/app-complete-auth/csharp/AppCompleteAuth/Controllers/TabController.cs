@@ -4,13 +4,14 @@ using AppCompleteAuth.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace AppCompleteAuth.Controllers
 {
-    public class TabController : ControllerBase
+    public class TabController : Controller
     {
         public readonly IConfiguration _configuration;
         private readonly IHttpClientFactory _httpClientFactory;
@@ -51,19 +52,46 @@ namespace AppCompleteAuth.Controllers
 
                 return userInfo;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 return null;
             }
         }
 
-        [HttpGet]
-        [Route("tabCredentialsAuth")]
-        public string AuthenticateUsingCredentials([FromBody] string credentials)
+        [HttpPost]
+        [Route("GetUserDetails")]
+        public async Task<JsonResult> GetUserProfile(string accessToken)
         {
-            var request = Request;
-            var result = "Authentication sucessful";
-            return result;
+            var client = new SimpleGraphClient(accessToken);
+            var me = await client.GetMeAsync();
+            var title = !string.IsNullOrEmpty(me.JobTitle) ?
+                        me.JobTitle : "Unknown";
+
+            var photo = await client.GetPhotoAsync();
+
+            var userInfo = new UserData()
+            {
+                User = me,
+                Photo = photo,
+                Title = title
+            };
+
+            return Json(userInfo);
+        } 
+
+        [HttpPost]
+        [Route("tabCredentialsAuth")]
+        public JsonResult AuthenticateUsingCredentials(string userName, string password)
+        {
+            if(userName == Constant.UserName && password == Constant.Password)
+            {
+                return Json("Authentication Sucessful");
+            }
+            else
+            {
+                return Json("Invalid username or password");
+            }
         }
     }
 }
