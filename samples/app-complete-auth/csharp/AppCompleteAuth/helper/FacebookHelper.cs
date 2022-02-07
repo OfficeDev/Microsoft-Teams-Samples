@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -55,7 +52,7 @@ namespace AppCompleteAuth.helper
         /// <typeparam name="T"></typeparam>
         /// <param name="uri"></param>
         /// <returns></returns>
-        private static async Task<T> FacebookRequest<T>(Uri uri)
+        public static async Task<T> FacebookRequest<T>(Uri uri)
         {
             string json;
             using (HttpClient client = new HttpClient())
@@ -80,7 +77,7 @@ namespace AppCompleteAuth.helper
         /// <param name="endPoint"></param>
         /// <param name="queryParams"></param>
         /// <returns></returns>
-        private static Uri GetUri(string endPoint, params Tuple<string, string>[] queryParams)
+        public static Uri GetUri(string endPoint, params Tuple<string, string>[] queryParams)
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
             foreach (var queryparam in queryParams)

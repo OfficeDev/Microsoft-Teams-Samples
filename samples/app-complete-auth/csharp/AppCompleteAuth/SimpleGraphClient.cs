@@ -53,6 +53,14 @@ namespace AppCompleteAuth
             }
         }
 
+        public async Task<User> GetUserProfile(string userPrincipleName)
+        {
+            var graphClient = GetAuthenticatedClient();
+            var user = await graphClient.Users[userPrincipleName]
+                                .Request()
+                                .GetAsync();
+            return user;
+        }
         // Get an Authenticated Microsoft Graph client using the token issued to the user.
         private GraphServiceClient GetAuthenticatedClient()
         {

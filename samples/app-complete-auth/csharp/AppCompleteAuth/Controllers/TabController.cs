@@ -61,23 +61,28 @@ namespace AppCompleteAuth.Controllers
 
         [HttpPost]
         [Route("GetUserDetails")]
-        public async Task<JsonResult> GetUserProfile(string accessToken)
+        public async Task<JsonResult> GetUserProfile(string accessToken,string userPrincipleName)
         {
-            var client = new SimpleGraphClient(accessToken);
-            var me = await client.GetMeAsync();
-            var title = !string.IsNullOrEmpty(me.JobTitle) ?
-                        me.JobTitle : "Unknown";
-
-            var photo = await client.GetPhotoAsync();
-
-            var userInfo = new UserData()
+            try
             {
-                User = me,
-                Photo = photo,
-                Title = title
-            };
+                var client = new SimpleGraphClient(accessToken);
+                var me = await client.GetUserProfile(userPrincipleName);
+                var title = !string.IsNullOrEmpty(me.JobTitle) ?
+                            me.JobTitle : "Unknown";
 
-            return Json(userInfo);
+                var userInfo = new UserData()
+                {
+                    User = me,
+                    Title = title
+                };
+
+                return Json(userInfo);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return null;
+            }
         } 
 
         [HttpPost]
@@ -91,6 +96,43 @@ namespace AppCompleteAuth.Controllers
             else
             {
                 return Json("Invalid username or password");
+            }
+        }
+
+        [HttpPost]
+        [Route("getFbAccessToken")]
+        public async Task<JsonResult> GetFacebookAuthToken(string accessToken)
+        {
+            var fbAppId = _configuration["FacebookAppId"];
+            var fbPassword = _configuration["FacebookAppPassword"];
+            var redirectUrl = _configuration["ApplicationBaseUrl"] + "/facebook-auth-end";
+            var client = new HttpClient();
+            string responseBody;
+            var response = await client.GetAsync(string.Format("https://graph.facebook.com/v12.0/oauth/access_token?client_id={0}&redirect_uri={1}&client_secret={2}&code={3}", fbAppId, redirectUrl, fbPassword,accessToken));
+            
+            if (response.IsSuccessStatusCode)
+            {
+                responseBody = await response.Content.ReadAsStringAsync();
+                var token = JsonConvert.DeserializeObject<dynamic>(responseBody).access_token;
+
+                var profile = FacebookHelper.GetUri("https://graph.facebook.com/me",
+                Tuple.Create("fields", "name,picture"),
+                Tuple.Create("access_token", token.Value));
+
+                var res = await FacebookHelper.FacebookRequest<FacebookProfile>(profile);
+                var result = new
+                {
+                    name = res.Name,
+                    picture = res.ProfilePicture.data.url
+                };
+
+                var jsonString = JsonConvert.SerializeObject(result);
+
+                return Json(jsonString);
+            }
+            else
+            {
+                return Json("Error occoured");
             }
         }
     }
