@@ -43,11 +43,15 @@ const CaptureAudio = () => {
       {/* Card for showing Video/Audio */}
       <Card>
         <CardHeader>
-          <Text content="Media (Mobile Only)" weight="bold" />
+          <Text content="Media" weight="bold" />
         </CardHeader>
         <CardBody>
           <Flex column gap="gap.small">
             <Text content="Checks for permission to use media input" />
+            <Text content="SDK used: " weight="semibold" />
+            <Text content="navigator, microsoftTeams" />
+            <Text content="Method: " weight="semibold" />
+            <Text content="navigator.mediaDevices.getUserMedia, teams.getmedia" />
             <Button content="Capture audio" onClick={captureMedia} />
           </Flex>
           {audio !== '' && <Video src={audio} variables={{ height: '50px', width: '100%', }} />}
