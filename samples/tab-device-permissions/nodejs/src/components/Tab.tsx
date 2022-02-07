@@ -12,6 +12,7 @@ import CaptureAudio from './CaptureAudio';
 import CaptureAudioDesktop from './CaptureAudioDesktop';
 import CaptureVideoDesktop from './CaptureVideoDesktop';
 import GetLocationDesktop from './GetLocationDesktop';
+import GetNotificationDesktop from './GetNotificationDesktop';
 import * as microsoftTeams from "@microsoft/teams-js";
 
 /**
@@ -36,7 +37,7 @@ const Tab = () => {
   })
 
   return (
-    <Grid columns={1}>
+    <Grid columns={isWeb ? 3 : 1}>
       {!isWeb &&
         <>
           <Segment
@@ -78,6 +79,10 @@ const Tab = () => {
         <Segment
           /* Component to Get/Show geo-Location in browser */
           content={<GetLocationDesktop />}
+        />
+        <Segment
+          /* Component to Get notification in browser */
+          content={<GetNotificationDesktop />}
         />
         </>
       }

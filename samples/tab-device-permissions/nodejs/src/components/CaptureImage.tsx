@@ -17,7 +17,7 @@ const CaptureImage = () => {
     // initializing microsoft teams sdk
     microsoftTeams.initialize()
   })
-  
+
   // Method to validate before capturing media
   function captureMultipleImages(mediaCount: number) {
     // Method to ask for image capture permission and then select media
@@ -74,11 +74,11 @@ const CaptureImage = () => {
       {/* Card for capturing single image */}
       <Card>
         <CardHeader>
-          <Text content="Capture Image (Mobile Only)" weight="bold" />
+          <Text content="Capture Image (Web/Mobile)" weight="bold" />
         </CardHeader>
         <CardBody>
           <Flex column gap="gap.small">
-            <Text content="Checks for permission before capturing image" />
+            <Text content="Checks for permission before capturing image." />
             <Button content="Capture Image" onClick={() => captureMultipleImages(1)} />
           </Flex>
         </CardBody>
@@ -99,7 +99,6 @@ const CaptureImage = () => {
         </CardHeader>
         <CardBody>
           <Flex column gap="gap.small">
-            <Text content="Checks for permission before capturing image. You can capture multiple images or select them grom gallery." />
             <Button content="Capture multiple images" onClick={() => captureMultipleImages(2)} />
           </Flex>
           {capturedImages.length !== 0 &&

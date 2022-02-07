@@ -52,11 +52,15 @@ const CaptureImageDesktop = () => {
             {/* Card for capturing single image */}
             <Card>
                 <CardHeader>
-                    <Text content="Capture Image (Browser Support)" weight="bold" />
+                    <Text content="Capture Image (Web/Mobile)" weight="bold" />
                 </CardHeader>
                 <CardBody>
                     <Flex column gap="gap.small">
-                        <Text content="Checks for permission before capturing image" />
+                        <Text content="Checks for permission before capturing image." />
+                        <Text content="SDK used: " weight="semibold"/>
+                        <Text content="navigator, microsoftTeams" />
+                        <Text content="Method: " weight="semibold"/>
+                        <Text content="navigator.mediaDevices.getUserMedia, teams.getmedia" />
                         <Button content="Capture image" onClick={captureMedia} />
                         <Image
                             fluid

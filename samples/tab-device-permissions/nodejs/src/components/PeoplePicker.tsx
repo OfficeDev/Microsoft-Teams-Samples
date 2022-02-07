@@ -41,6 +41,10 @@ const PeoplePicker = () => {
         </CardHeader>
         <CardBody>
           <Flex column gap="gap.small">
+            <Text content="SDK used: " weight="semibold" />
+            <Text content="microsoftTeams" />
+            <Text content="Method: " weight="semibold" />
+            <Text content="teams.people" />
             <Button content="People Picker" onClick={selectPeople} />
           </Flex>
           <Text>Selected {selectedPeople.length} people</Text>

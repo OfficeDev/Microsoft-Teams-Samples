@@ -31,11 +31,15 @@ const CaptureAudioDesktop = () => {
             {/* Card for showing Audio */}
             <Card>
                 <CardHeader>
-                    <Text content="Capture Audio (Browser Support)" weight="bold" />
+                    <Text content="Capture Audio (Web/Mobile)" weight="bold" />
                 </CardHeader>
                 <CardBody>
                     <Flex column gap="gap.small">
                         <Text content="Checks for permission to use media input" />
+                        <Text content="SDK used: " weight="semibold" />
+                        <Text content="navigator, microsoftTeams" />
+                        <Text content="Method: " weight="semibold" />
+                        <Text content="navigator.mediaDevices.getUserMedia, teams.getmedia" />
                         <Button content="Capture audio" onClick={captureAudio} />
                         <audio controls></audio>
                     </Flex>

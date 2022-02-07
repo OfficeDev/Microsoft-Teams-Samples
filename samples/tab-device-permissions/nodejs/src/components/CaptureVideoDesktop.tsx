@@ -32,11 +32,15 @@ const CaptureVideoDesktop = () => {
             {/* Card for showing Video */}
             <Card>
                 <CardHeader>
-                    <Text content="Capture Video (Browser Support)" weight="bold" />
+                    <Text content="Capture Video (Web only)" weight="bold" />
                 </CardHeader>
                 <CardBody>
                     <Flex column gap="gap.small">
                         <Text content="Checks for permission to use media input" />
+                        <Text content="SDK used: " weight="semibold" />
+                        <Text content="navigator" />
+                        <Text content="Method: " weight="semibold" />
+                        <Text content="navigator.mediaDevices.getUserMedia" />
                         <Button content="Capture video" onClick={captureVideo} />
                         <video controls ></video>
                     </Flex>

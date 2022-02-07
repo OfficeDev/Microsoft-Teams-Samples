@@ -46,12 +46,16 @@ const GetLocationDesktop = () => {
             <Flex gap="gap.large">
                 <Card>
                     <CardHeader>
-                        <Text content="Get Location (Browser support)" weight="bold" />
+                        <Text content="Get Location (Web/Mobile)" weight="bold" />
                     </CardHeader>
                     <CardBody>
                         <Flex column gap="gap.small">
                             <Text content="You need to enable these permissions using App permissions icon at the top for these permissions to take effect" />
                             <Text content="After you change the app's device permissions, you will be prompted to reload the application in Teams." />
+                            <Text content="SDK used: " weight="semibold" />
+                            <Text content="navigator, microsoftTeams" />
+                            <Text content="Method: " weight="semibold" />
+                            <Text content="navigator.geolocation.getCurrentPosition, teams.location" />
                             <Button content="Get Location" onClick={() => getCurrentLocation()} disabled={showComments} />
                         </Flex>
                     </CardBody>
