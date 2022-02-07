@@ -18,10 +18,11 @@ This sample shows [tab device permissions](https://docs.microsoft.com/microsoftt
 
 It also shows Device permissions for the browser. Please refer [Device permissions for browser](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/device-capabilities/browser-device-permissions) for more information.
 
-Mobile View
+**Mobile View**
+
 ![Mobile Demo](Images/mainTab1.png)
 
-Desktop View
+**Desktop View**
 ![Desktop View](Images/desktopHome.png)
 
 ```
