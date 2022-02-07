@@ -31,7 +31,7 @@ const CaptureAudioDesktop = () => {
             {/* Card for showing Audio */}
             <Card>
                 <CardHeader>
-                    <Text content="Capture Audio (Web/Mobile)" weight="bold" />
+                    <Text content="Capture Audio" weight="bold" />
                 </CardHeader>
                 <CardBody>
                     <Flex column gap="gap.small">

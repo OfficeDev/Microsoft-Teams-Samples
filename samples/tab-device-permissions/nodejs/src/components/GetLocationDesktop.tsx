@@ -46,7 +46,7 @@ const GetLocationDesktop = () => {
             <Flex gap="gap.large">
                 <Card>
                     <CardHeader>
-                        <Text content="Get Location (Web/Mobile)" weight="bold" />
+                        <Text content="Get Location" weight="bold" />
                     </CardHeader>
                     <CardBody>
                         <Flex column gap="gap.small">

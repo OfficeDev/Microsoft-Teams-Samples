@@ -43,7 +43,7 @@ const CaptureAudio = () => {
       {/* Card for showing Video/Audio */}
       <Card>
         <CardHeader>
-          <Text content="Media (Web/Mobile)" weight="bold" />
+          <Text content="Media" weight="bold" />
         </CardHeader>
         <CardBody>
           <Flex column gap="gap.small">

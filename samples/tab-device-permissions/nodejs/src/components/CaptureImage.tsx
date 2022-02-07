@@ -74,7 +74,7 @@ const CaptureImage = () => {
       {/* Card for capturing single image */}
       <Card>
         <CardHeader>
-          <Text content="Capture Image (Web/Mobile)" weight="bold" />
+          <Text content="Capture Image" weight="bold" />
         </CardHeader>
         <CardBody>
           <Flex column gap="gap.small">
