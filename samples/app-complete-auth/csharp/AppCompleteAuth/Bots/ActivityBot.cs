@@ -65,7 +65,7 @@ namespace AppCompleteAuth.Bots
             {
                 var userCommand = turnContext.Activity.Text.ToLower().Trim();
 
-                if (userCommand == "sso" || userCommand == "logout" || userCommand == "otheridentityprovider" || userCommand == "usingcredentials")
+                if (userCommand == "sso" || userCommand == "logoutsso" || userCommand == "logoutfacebook" || userCommand == "otheridentityprovider" || userCommand == "usingcredentials")
                 {
                     // Run the Dialog with the new message Activity.
                     await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
@@ -90,7 +90,11 @@ namespace AppCompleteAuth.Bots
             var asJobject = JObject.FromObject(turnContext.Activity.Value);
             var state = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.State;
 
-            if (state.ToString() == "CancelledByUser")
+            if(state == null || !state.Contains("username"))
+            {
+                await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
+            }
+            else if (state.ToString() == "CancelledByUser")
             {
                 await turnContext.SendActivityAsync("Sign in cancelled by user");
             }
@@ -106,8 +110,8 @@ namespace AppCompleteAuth.Bots
                 else
                 {
                     await turnContext.SendActivityAsync("Invalid username or password");
-                }    
-            } 
+                }
+            }
         }
 
         protected override async Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionFetchTaskAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action, CancellationToken cancellationToken)

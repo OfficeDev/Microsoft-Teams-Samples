@@ -10,13 +10,11 @@ using System.Threading.Tasks;
 
 namespace AppCompleteAuth.Dialogs
 {
-    public class FacebookAuthDialog : ComponentDialog
+    public class FacebookAuthDialog : LogoutDialog
     {
-        private readonly string ConnectionName;
-
-        public FacebookAuthDialog(string configuration) : base(nameof(FacebookAuthDialog))
+        public FacebookAuthDialog(string configuration) : base(nameof(FacebookAuthDialog), configuration)
         {
-            ConnectionName = configuration;
+
             AddDialog(new OAuthPrompt(
                 nameof(OAuthPrompt),
                 new OAuthPromptSettings
@@ -75,6 +73,7 @@ namespace AppCompleteAuth.Dialogs
         private IMessageActivity CreateFBMessage(WaterfallStepContext context, FacebookProfile profile)
         {
             var message = context.Context.Activity;
+            message.Text = "User details";
             var attachment = CreateFBProfileCard(profile);
             message.Attachments = new List<Attachment> { attachment };
             return message;
