@@ -44,7 +44,7 @@ class ContentBubbleBot extends TeamsActivityHandler {
       replyActivity.channelData = {
         notification: {
           alertInMeeting: true,
-          externalResourceUrl: 'https://teams.microsoft.com/l/bubble/'+this.baseUrl+'?url='+this.AppId+'&height=270&width=300&title=ContentBubbleinTeams&completionBotId='+this.AppId
+          externalResourceUrl: 'https://teams.microsoft.com/l/bubble/'+this.AppId+'?url='+this.baseUrl+'&height=270&width=300&title=ContentBubbleinTeams&completionBotId='+this.AppId
         }
       };
       await context.sendActivity(replyActivity);
