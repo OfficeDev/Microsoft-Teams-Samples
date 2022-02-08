@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+                integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+                crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            var requestFrom;
+             $(document).ready(function () {
+                const params = window.location.search;
+                requestFrom = params.substring(params.search("=")+1);
+            });
+            microsoftTeams.initialize();
+            function submit()
+            {
+                 var isValid = true;
+                 $('#userName,#password').each(function () {
+                     if ($.trim($(this).val()) == '') {
+                         isValid = false;
+                         $(this).css({
+                             "border": "1px solid red"
+                         });
+                     }
+                     else {
+                         $(this).css({
+                             "border": "",
+                             "background": ""
+                         });
+                     }
+                 });
+                 if (isValid == false) {
+                     e.preventDefault();
+                     return false;
+                 }
+                 let credentials = {
+                     userName: $('#userName').val(),
+                     password: $('#password').val(),
+                 };
+                 if(requestFrom == "tab"){
+                     $.ajax({
+                     type: 'POST',
+                     url: '/tabCredentialsAuth',
+                     dataType: 'json',
+                     data: credentials,
+                     success: function (response) {
+                            console.log("da"+response);
+                            microsoftTeams.authentication.notifySuccess(response);
+                        },
+                     error: function (xhr, textStatus, errorThrown) {
+                             console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                        },
+                    });
+                 }
+                 else {
+                     microsoftTeams.authentication.notifySuccess(JSON.stringify(credentials));
+                 }
+            } 
+            function closeWindow() {
+                microsoftTeams.authentication.notifyFailure();
+            }
+        </script>
+      
+        <style>
+        .close-button{
+            margin-left:2rem;
+        }
+        </style>
+    </head>
+    <body class="theme-light">
+        <div>
+            User Name : <input id="userName" type="text" />
+        </div>
+        <br />
+        <br />
+        <div>
+            Password : <input id="password" type="password" />
+        </div>
+        <br />
+        <br />
+        <input type="submit" class="submit-button" value="Submit" onClick="submit()">
+        <input type="submit" class="close-button" value="Close" onClick="closeWindow()">
+    
+    </body>
+</html>

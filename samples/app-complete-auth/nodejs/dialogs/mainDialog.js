@@ -56,7 +56,11 @@ class MainDialog extends LogoutDialog {
             if (stepContext.context._activity.text.trim() == "sso") {
                 return await stepContext.beginDialog(OAUTH_PROMPT);
             }
-            else {
+            else if (stepContext.context._activity.text.trim() == "usingcredentials") {
+                await stepContext.context.sendActivity({ attachments: [this.getAdaptiveCardUserLogin()] });
+                return await stepContext.endDialog();
+            }
+            else if (stepContext.context._activity.text.trim() == "otheridentityprovider") {
                 await stepContext.beginDialog(FACEBOOKAUTH);
                 return await stepContext.endDialog();
             }
@@ -102,6 +106,20 @@ class MainDialog extends LogoutDialog {
 
             return await stepContext.endDialog();
         }
+    }
+
+    getAdaptiveCardUserLogin() {
+        return CardFactory.heroCard(
+            'Signin card',
+            CardFactory.images(['https://sec.ch40bb-9baa-7c9ef8ff7ff5/buildreactionbotframework_960.jpg']),
+            CardFactory.actions([
+                {
+                    type: 'signin',
+                    title: 'Get started',
+                    value: 'https://0261-116-75-27-174.ngrok.io/popUpSignin?from=bot&height=535&width=600'
+                }
+            ])
+        );
     }
 
     getAdaptiveCardUserDetails = (myDetails, userImage) => ({

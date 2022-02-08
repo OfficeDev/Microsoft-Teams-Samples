@@ -36,16 +36,25 @@ class TeamsBot extends DialogBot {
     }
 
     async onSignInInvoke(context) {
-        if (context.activity && context.activity.name === tokenExchangeOperationName) {
-            // The Token Exchange Helper will attempt the exchange, and if successful, it will cache the result
-            // in TurnState.  This is then read by SsoOAuthPrompt, and processed accordingly.
-            if (!await this._ssoOAuthHelper.shouldProcessTokenExchange(context)) {
-                // If the token is not exchangeable, do not process this activity further.
-                // (The Token Exchange Helper will send the appropriate response if the token is not exchangeable)
-                return;
+        if(context.activity.value != null) {
+            var userDetails = JSON.parse(context.activity.value.state);
+            if(userDetails.userName == "test" && userDetails.password == "test") {
+                await context.sendActivity("Authentication successfull");
+            }
+            else {
+                await context.sendActivity("Invalid credentials");
             }
         }
-        await this.dialog.run(context, this.dialogState);
+        // if (context.activity && context.activity.name === tokenExchangeOperationName) {
+        //     // The Token Exchange Helper will attempt the exchange, and if successful, it will cache the result
+        //     // in TurnState.  This is then read by SsoOAuthPrompt, and processed accordingly.
+        //     if (!await this._ssoOAuthHelper.shouldProcessTokenExchange(context)) {
+        //         // If the token is not exchangeable, do not process this activity further.
+        //         // (The Token Exchange Helper will send the appropriate response if the token is not exchangeable)
+        //         return;
+        //     }
+        // }
+        // await this.dialog.run(context, this.dialogState);
     }
     
     async handleTeamsSigninVerifyState(context, query) {

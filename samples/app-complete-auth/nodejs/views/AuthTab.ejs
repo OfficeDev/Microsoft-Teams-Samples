@@ -133,6 +133,23 @@
             return true;
         }
 
+        function usingCredentials(){
+            microsoftTeams.authentication.authenticate({
+                url: window.location.origin + "/popUpSignin?from=tab",
+                width: 600,
+                height: 535,
+                successCallback: result => {
+                    $("#usingCredentials").text(result);
+                    $("#usingCredentials").show();
+                    $("#userInformation").hide();
+                    $("#userImg").hide();
+                },
+                failureCallback: reason => {
+                    console.log(reason);
+                }
+            });              
+        }
+
         function fbAuthentication() {
             return new Promise((resolve, reject) => {
                 microsoftTeams.authentication.authenticate({
@@ -195,6 +212,8 @@
                 <br />
             </div>
             <img id="userImg" width="200" height="200" />
+        </div>
+        <div id="usingCredentials">
         </div>
         <div id="fbInformation">
             <br>

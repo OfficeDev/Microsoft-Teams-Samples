@@ -85,9 +85,14 @@ server.listen(PORT, () => {
 });
 
 // Endpoint to fetch Auth tab page.
-server.get('/Upload', (req, res, next) => {
+server.get('/AuthTab', (req, res, next) => {
   var clientId = process.env.FaceBookAppId;
   res.render('./views/AuthTab', { clientId: clientId })
+});
+
+// Endpoint to fetch Signin popup page.
+server.get('/popUpSignin', function (req, res) {
+  res.render('./views/popUpSignin');
 });
 
 // Endpoint to facebook auth redirect page.
@@ -143,6 +148,27 @@ server.post('/getProfileOnBehalfOf', function (req, res) {
 
   oboPromise.then(function (result) {
     res.json(result);
+  }, function (err) {
+    console.log(err); // Error: "It broke"
+    res.json(err);
+  });
+});
+
+server.post('/tabCredentialsAuth', function (req, res) {
+  var userNAme = req.body.userName;
+  var password = req.body.password;
+  var resultResponse;
+  if(userNAme == "test" && password == "test") {
+    resultResponse = "Authentication successfull";
+  }
+  else {
+    resultResponse = "Authentication failed";
+  }
+
+  var responseMessage = Promise.resolve(resultResponse);
+  responseMessage.then(function(result) {
+    res.json(result);
+   console.log(result);
   }, function (err) {
     console.log(err); // Error: "It broke"
     res.json(err);
