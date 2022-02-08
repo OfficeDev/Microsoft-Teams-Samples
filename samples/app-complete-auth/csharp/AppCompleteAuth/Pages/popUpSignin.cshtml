@@ -59,13 +59,21 @@
                     },
                 });
              }
-             else {
+             else if(requestFrom == "msgext"){
+                microsoftTeams.authentication.notifySuccess(JSON.stringify(credentials));
+             }
+             else{
                  microsoftTeams.authentication.notifySuccess(JSON.stringify(credentials));
              }
         } 
 
         function closeWindow() {
-            microsoftTeams.authentication.notifyFailure();
+            if(requestFrom == "msgext"){
+                 microsoftTeams.tasks.submitTask();
+            }
+            else{
+                microsoftTeams.authentication.notifyFailure({state:"CancelledByUser"});
+            }
         }
     </script>
   

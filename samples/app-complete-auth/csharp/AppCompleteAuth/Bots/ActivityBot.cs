@@ -1,19 +1,20 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using AdaptiveCards;
 using AppCompleteAuth.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Teams;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Graph;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,9 +25,11 @@ namespace AppCompleteAuth.Bots
         protected readonly BotState ConversationState;
         protected readonly Dialog Dialog;
         private readonly string _applicationBaseUrl;
+        private readonly string _connectionName;
 
         public ActivityBot(IConfiguration configuration, ConversationState conversationState, T dialog)
         {
+            _connectionName = configuration["ConnectionName"] ?? throw new NullReferenceException("ConnectionName");
             _applicationBaseUrl = configuration["ApplicationBaseUrl"] ?? throw new NullReferenceException("ApplicationBaseUrl");
             ConversationState = conversationState;
             Dialog = dialog;
@@ -107,20 +110,131 @@ namespace AppCompleteAuth.Bots
             } 
         }
 
-        /// <summary>
-        /// Handle task module is submit.
-        /// </summary>
-        /// <param name = "turnContext" > The turn context.</param>
-        /// <param name = "taskModuleRequest" >The task module invoke request value payload.</param>
-        /// <param name="cancellationToken">The cancellation token.</param>
-        /// <returns>A Task Module Response for the request.</returns>
-        protected override async Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
+        protected override async Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionFetchTaskAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action, CancellationToken cancellationToken)
         {
-            await turnContext.SendActivityAsync("File uploaded successfully");
-            return null;
+            if (!string.IsNullOrEmpty(action.State))
+            {
+                JObject asJobject = JObject.Parse(action.State);
+                var userName = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.UserName;
+                var password = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.Password;
+                if (userName == Constant.UserName && password == Constant.Password)
+                {
+                    await turnContext.SendActivityAsync("Authentication Successful");
+                }
+                else
+                {
+                    await turnContext.SendActivityAsync("Invalid username or password");
+                }
+
+                return new MessagingExtensionActionResponse();
+            }
+            else if (action.CommandId.ToUpper() == "SSO")
+            {
+                var state = action.State; // Check the state value
+                var tokenResponse = await GetTokenResponse(turnContext, state, cancellationToken);
+                if (tokenResponse == null || string.IsNullOrEmpty(tokenResponse.Token))
+                {
+                    // There is no token, so the user has not signed in yet.
+
+                    // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
+                    var signInLink = await GetSignInLinkAsync(turnContext, cancellationToken).ConfigureAwait(false);
+
+                    return new MessagingExtensionActionResponse
+                    {
+                        ComposeExtension = new MessagingExtensionResult
+                        {
+                            Type = "auth",
+                            SuggestedActions = new MessagingExtensionSuggestedAction
+                            {
+                                Actions = new List<CardAction>
+                                {
+                                    new CardAction
+                                    {
+                                        Type = ActionTypes.OpenUrl,
+                                        Value = signInLink,
+                                        Title = "Bot Service OAuth",
+                                    },
+                                },
+                            },
+                        },
+                    };
+                }
+
+                var client = new SimpleGraphClient(tokenResponse.Token);
+
+                var profile = await client.GetMeAsync();
+
+                return new MessagingExtensionActionResponse
+                {
+                    Task = new TaskModuleContinueResponse
+                    {
+                        Value = new TaskModuleTaskInfo
+                        {
+                            Card = GetProfileCard(profile),
+                            Height = 250,
+                            Width = 400,
+                            Title = "Adaptive Card: Inputs",
+                        },
+                    },
+                };
+            }
+
+            else if (action.CommandId.ToUpper() == "SIGNOUTCOMMAND")
+            {
+                var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
+                await userTokenClient.SignOutUserAsync(turnContext.Activity.From.Id, _connectionName, turnContext.Activity.ChannelId, cancellationToken).ConfigureAwait(false);
+
+                return new MessagingExtensionActionResponse
+                {
+                    Task = new TaskModuleContinueResponse
+                    {
+                        Value = new TaskModuleTaskInfo
+                        {
+                            Card = new Microsoft.Bot.Schema.Attachment
+                            {
+                                Content = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
+                                {
+                                    Body = new List<AdaptiveElement>() { new AdaptiveTextBlock() { Text = "You have been signed out." } },
+                                    Actions = new List<AdaptiveAction>() { new AdaptiveSubmitAction() { Title = "Close" } },
+                                },
+                                ContentType = AdaptiveCard.ContentType,
+                            },
+                            Height = 200,
+                            Width = 400,
+                            Title = "Adaptive Card: Inputs",
+                        },
+                    },
+                };
+            }
+
+            else if (action.CommandId.ToUpper() == "USERCREDENTIALS")
+            {
+                return new MessagingExtensionActionResponse
+                {
+                    ComposeExtension = new MessagingExtensionResult
+                    {
+                        Type = "config",
+                        SuggestedActions = new MessagingExtensionSuggestedAction
+                        {
+                            Actions = new List<CardAction>
+                            {
+                                new CardAction
+                                {
+                                    Type = ActionTypes.OpenUrl,
+                                    Value = $"{_applicationBaseUrl}/popUpSignin?from=msgext"
+                                },
+                            },
+                        },
+                    },
+                };
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        private static Attachment GetLoginOptionCard()
+        private static Microsoft.Bot.Schema.Attachment GetLoginOptionCard()
         {
             var heroCard = new HeroCard
             {
@@ -135,6 +249,51 @@ namespace AppCompleteAuth.Bots
             };
 
             return heroCard.ToAttachment();
+        }
+
+        private async Task<string> GetSignInLinkAsync(ITurnContext turnContext, CancellationToken cancellationToken)
+        {
+            var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
+            var resource = await userTokenClient.GetSignInResourceAsync(_connectionName, turnContext.Activity as Activity, null, cancellationToken).ConfigureAwait(false);
+            return resource.SignInLink;
+        }
+
+        private static Microsoft.Bot.Schema.Attachment GetProfileCard(User profile)
+        {
+            var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
+
+            card.Body.Add(new AdaptiveTextBlock()
+            {
+                Text = $"Hello, {profile.DisplayName}",
+                Size = AdaptiveTextSize.ExtraLarge
+            });
+
+            card.Body.Add(new AdaptiveImage()
+            {
+                Url = new Uri("http://adaptivecards.io/content/cats/1.png")
+            });
+            return new Microsoft.Bot.Schema.Attachment()
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = card,
+            };
+        }
+
+        private async Task<TokenResponse> GetTokenResponse(ITurnContext<IInvokeActivity> turnContext, string state, CancellationToken cancellationToken)
+        {
+            var magicCode = string.Empty;
+
+            if (!string.IsNullOrEmpty(state))
+            {
+                if (int.TryParse(state, out var parsed))
+                {
+                    magicCode = parsed.ToString();
+                }
+            }
+
+            var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
+            var tokenResponse = await userTokenClient.GetUserTokenAsync(turnContext.Activity.From.Id, _connectionName, turnContext.Activity.ChannelId, magicCode, cancellationToken).ConfigureAwait(false);
+            return tokenResponse;
         }
     }
 }

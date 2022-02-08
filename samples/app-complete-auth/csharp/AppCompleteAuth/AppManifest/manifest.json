@@ -44,6 +44,59 @@
       ]
     }
   ],
+  "composeExtensions": [
+    {
+      "botId": "<<Microsoft-App-Id>>",
+      "canUpdateConfiguration": true,
+      "commands": [
+        {
+          "id": "SSO",
+          "type": "action",
+          "title": "SSO",
+          "description": "SSO authentication",
+          "initialRun": false,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        },
+        {
+          "id": "SignOutCommand",
+          "type": "action",
+          "title": "Sign Out",
+          "description": "Sign out from authenticated services.",
+          "initialRun": false,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        },
+        {
+          "id": "UserCredentials",
+          "description": "Sign in using user credentials",
+          "title": "Using credentials",
+          "type": "action",
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        }
+      ],
+      "messageHandlers": [
+        {
+          "type": "link",
+          "value": {
+            "domains": [
+              "*.botframework.com"
+            ]
+          }
+        }
+      ]
+    }
+  ],
   "permissions": [
     "identity",
     "messageTeamMembers"
