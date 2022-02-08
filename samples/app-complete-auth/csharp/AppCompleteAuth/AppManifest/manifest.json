@@ -62,11 +62,22 @@
           ]
         },
         {
-          "id": "SignOutCommand",
+          "id": "LogoutSSO",
           "type": "action",
-          "title": "Sign Out",
+          "title": "Log out sso",
           "description": "Sign out from authenticated services.",
           "initialRun": false,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        },
+        {
+          "id": "LogoutFacebook",
+          "description": "Sign out from authenticated services.",
+          "title": "Log out facebook",
+          "type": "action",
           "fetchTask": true,
           "context": [
             "commandBox",
@@ -77,6 +88,17 @@
           "id": "UserCredentials",
           "description": "Sign in using user credentials",
           "title": "Using credentials",
+          "type": "action",
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        },
+        {
+          "id": "OtherIdentityProvider",
+          "description": "Sign in to facebook",
+          "title": "Facebook sign in",
           "type": "action",
           "fetchTask": true,
           "context": [
