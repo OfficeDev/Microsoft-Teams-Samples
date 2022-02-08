@@ -75,7 +75,6 @@
                         if (response.ok) {
                             return response.text();
                         } else {
-                            debugger;
                             reject(response.error);
                         }
                     })
@@ -86,8 +85,8 @@
                             $("#consent").show()
                         }else{
                             userDetails = JSON.parse(responseJson);
-                            $("#userInfo").text(`You're logged in as ${userDetails.user.displayName} (${userDetails.user.userPrincipalName}); you job title is: ${userDetails.title}; your photo is: `);
-                            $("#userImg").attr("src", userDetails.photo);
+                            $("#userInfo").text(`You're logged in as ${userDetails.User.DisplayName} (${userDetails.User.UserPrincipalName}); you job title is: ${userDetails.Title}; your photo is: `);
+                            $("#userImg").attr("src", userDetails.Photo);
                             $("#userInformation").show();
                             $("#userImg").show();
                             $("#usingCredentials").hide();
