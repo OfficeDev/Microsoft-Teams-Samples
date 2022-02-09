@@ -1,4 +1,4 @@
-﻿﻿---
+---
 page_type: sample
 description: This sample demos authentication feature in bot,tab and messaging extension.
 products:
@@ -19,30 +19,39 @@ Using this C# sample, you can check authenticate in bot,tab and messaging extent
 ## Key features
 
 Bot Authentication
+
 ![Login option card](AppCompleteAuth/Images/BotLoginOptionCard.png)
 
   - SSO
+  
   ![SSO login](AppCompleteAuth/Images/BotSsoCard.png)
   
   - Using user name and password
+  
   ![using credentials](AppCompleteAuth/Images/BotUsingCredentials.png)
   
 Tab Authentication
+
 ![Tab](AppCompleteAuth/Images/Tab.png)
 
   - SSO
+  
   ![Tab SSO login](AppCompleteAuth/Images/TabSsoLogin.png)
   
   - Using user name and password
+  
   ![Tab using credentials](AppCompleteAuth/Images/TabUsingCredentials.png)
 
 Messaging Extention Authentication
+
 ![ME action](AppCompleteAuth/Images/MEActions.png)
 
   - SSO
+  
   ![ME SSO login](AppCompleteAuth/Images/MESsoCard.png)
   
   - Using user name and password
+  
   ![ME using credentials](AppCompleteAuth/Images/MEUsingCredentials.png)
   
 ## Prerequisites
