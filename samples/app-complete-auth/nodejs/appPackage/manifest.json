@@ -1,0 +1,147 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.11",
+  "version": "1.0.0",
+  "id": "9c764aa0-ea5e-40fe-a2da-22969fc39eb6",
+  "packageName": "com.microsoft.teams.botsharepointfileviewer",
+    "webApplicationInfo": {
+    "id": "",
+    "resource": "api://.ngrok.io/botid-"
+  },
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Auth C",
+    "full": "Bot SharePoint file viewer"
+  },
+  "description": {
+    "short": "Bot SharePoint file viewer",
+    "full": "This sample demos a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+   "staticTabs": [
+    {
+      "contentUrl": "https:///AuthTab",
+      "entityId": "Auth",
+      "name": "Auth",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "",
+      "scopes": [
+        "personal"
+      ],
+      "commandLists": [
+        {
+          "scopes": [
+            "personal"
+          ],
+          "commands": [
+            {
+              "title": "sso",
+              "description": "To upload file in SharePoint site"
+            },
+            {
+              "title": "viewfile",
+              "description": "To view file in Teams file viewer"
+            }
+          ]
+        }
+      ],
+      "isNotificationOnly": false,
+      "supportsFiles": true
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "1158a836-644f-4b5b-8565-3e23a10fbd38",
+      "canUpdateConfiguration": true,
+      "commands": [
+         {
+          "id": "SSO",
+          "type": "action",
+          "title": "SSO",
+          "description": "SSO authentication",
+          "initialRun": false,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        },
+        {
+          "id": "LogoutSSO",
+          "type": "action",
+          "title": "Log out sso",
+          "description": "Sign out from authenticated services.",
+          "initialRun": false,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        },
+        {
+          "id": "LogoutFacebook",
+          "description": "Sign out from authenticated services.",
+          "title": "Log out facebook",
+          "type": "action",
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        },
+        {
+          "id": "UserCredentials",
+          "description": "Sign in using user credentials",
+          "title": "Using credentials",
+          "type": "action",
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        },
+        {
+          "id": "OtherIdentityProvider",
+          "description": "Sign in to facebook",
+          "title": "Facebook sign in",
+          "type": "action",
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        }
+      ],
+      "messageHandlers": [
+        {
+          "type": "link",
+          "value": {
+            "domains": [
+              "*.botframework.com"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "accentColor": "#60A18E",
+  "permissions": [ "identity", "messageTeamMembers" ],
+  "validDomains": [
+    "*.ngrok.io",
+    "token.botframework.com"
+  ]
+}

@@ -111,7 +111,7 @@ class MainDialog extends LogoutDialog {
     getAdaptiveCardUserLogin() {
         return CardFactory.heroCard(
             'Signin card',
-            CardFactory.images(['https://sec.ch40bb-9baa-7c9ef8ff7ff5/buildreactionbotframework_960.jpg']),
+            undefined,
             CardFactory.actions([
                 {
                     type: 'signin',
