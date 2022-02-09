@@ -33,7 +33,7 @@ namespace AppCompleteAuth.Dialogs
             InitialDialogId = nameof(WaterfallDialog);
         }
 
-        // Method to invoke oauth flow.
+        // Method to invoke auth flow.
         private async Task<DialogTurnResult> PromptStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             if (stepContext.Context.Activity.Text != null)
@@ -45,9 +45,10 @@ namespace AppCompleteAuth.Dialogs
                 else if (stepContext.Context.Activity.Text.ToLower().Trim() == "usingcredentials")
                 {
                     await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetPopUpSignInCard()), cancellationToken);
+                    
                     return await stepContext.EndDialogAsync();
                 }
-                else if (stepContext.Context.Activity.Text.ToLower().Trim() == "otheridentityprovider" || stepContext.Context.Activity.Text.ToLower().Trim() == "logoutfacebook")
+                else if (stepContext.Context.Activity.Text.ToLower().Trim() == "facebooklogin" || stepContext.Context.Activity.Text.ToLower().Trim() == "logoutfacebook")
                 {
                     return await stepContext.BeginDialogAsync(nameof(FacebookAuthDialog));
                 }
@@ -55,6 +56,7 @@ namespace AppCompleteAuth.Dialogs
             return await stepContext.EndDialogAsync();
         }
 
+        // Get sign in card.
         private Attachment GetPopUpSignInCard()
         {
             var heroCard = new HeroCard

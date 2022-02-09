@@ -96,7 +96,7 @@
           ]
         },
         {
-          "id": "OtherIdentityProvider",
+          "id": "FacebookLogin",
           "description": "Sign in to facebook",
           "title": "Facebook sign in",
           "type": "action",

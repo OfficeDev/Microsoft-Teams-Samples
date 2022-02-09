@@ -13,6 +13,7 @@
         var facebookAppId = '@Model.FacebookAppId';
         let redirectUri = window.location.origin + "/facebook-auth-end";
         let accessToken;
+
          $(document).ready(function () {
             $("#userInformation").hide();
             $("#userImg").hide();
@@ -23,6 +24,7 @@
 
         microsoftTeams.initialize();
 
+        // Tab sso authentication.
         function ssoAuthentication()
         {
              getClientSideToken()
@@ -45,6 +47,7 @@
             });
         }
 
+        // Get client side token.
         function getClientSideToken() {
 
             return new Promise((resolve, reject) => {
@@ -59,6 +62,7 @@
          });
         }
 
+        // Get server side token and user profile.
         function getServerSideToken(clientSideToken) {
             return new Promise((resolve, reject) => {
                 microsoftTeams.getContext((context) => {
@@ -90,12 +94,14 @@
                             $("#userInformation").show();
                             $("#userImg").show();
                             $("#usingCredentials").hide();
+                            $("#facebookAuth").hide();
                         }
                     });
                 });
             });
         }
 
+        // Request consent on implicit grant error.
         function requestConsent() {
             getToken()
             .then(data => {
@@ -108,6 +114,7 @@
           });
         }
 
+        // Get token for multi tenant.
         function getToken() {
             return new Promise((resolve, reject) => {
                 microsoftTeams.authentication.authenticate({
@@ -124,6 +131,7 @@
             });
         }
 
+        // Authenticate user using credentials.
         function usingCredentials(){
             microsoftTeams.authentication.authenticate({
                 url: window.location.origin + "/popUpSignin?from=tab",
@@ -134,6 +142,7 @@
                     $("#usingCredentials").show();
                     $("#userInformation").hide();
                     $("#userImg").hide();
+                    $("#facebookAuth").hide();
                 },
                 failureCallback: reason => {
                     console.log(reason);
@@ -141,6 +150,7 @@
             });              
         }
 
+        // Get user information.
         function getUserInfo(userPrincipleName) {
             if (userPrincipleName) {
             $.ajax({
@@ -149,22 +159,24 @@
                  dataType: 'json',
                  data: {
                         'accessToken': accessToken,
-                        'userPrincipleName':userPrincipleName
                     },
-                 success: function (responseJson) {
+                success: function (responseJson) {
                     userDetails = JSON.parse(responseJson);
-                    $("#userInfo").text(`You're logged in as ${userDetails.user.displayName} (${userDetails.user.userPrincipalName}); you job title is: ${userDetails.title}; `);
+                    $("#userInfo").text(`You're logged in as ${userDetails.User.DisplayName} (${userDetails.User.UserPrincipalName}); you job title is: ${userDetails.Title}; `);
+                    $("#userImg").attr("src", userDetails.Photo);
                     $("#userInformation").show();
+                    $("#userImg").show();
                     $("#usingCredentials").hide();
                     },
-                 error: function (xhr, textStatus, errorThrown) {
+                error: function (xhr, textStatus, errorThrown) {
                          console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                     }
              });
           }
         }
 
-         function fbAuthentication() {
+        // Get client side token for facebook.
+        function fbAuthentication() {
             return new Promise((resolve, reject) => {
                 microsoftTeams.authentication.authenticate({
                     url: `https://www.facebook.com/v12.0/dialog/oauth?client_id=${facebookAppId}&redirect_uri=${redirectUri}&state=1234535`,
@@ -174,7 +186,6 @@
                         let data = localStorage.getItem(result);
                         let tokenDetails = JSON.parse(data);
                         localStorage.removeItem(result);
-                        console.log(tokenDetails);
                         resolve(tokenDetails);
                     },
                     failureCallback: reason => {
@@ -184,18 +195,19 @@
             });
         }
 
+        // Get face book profile of user.
         function getServerSideTokenFb(clientSideToken) {
             return new Promise((resolve, reject) => {
                 microsoftTeams.getContext((context) => {
 
                      $.ajax({
                         type: 'POST',
-                         url: '/getFbAccessToken',
-                         dataType: 'json',
-                         data: {
+                        url: '/getFbAccessToken',
+                        dataType: 'json',
+                        data: {
                                 'accessToken': clientSideToken,
                             },
-                         success: function (responseJson) {
+                        success: function (responseJson) {
                              facebookProfile = JSON.parse(responseJson);
                              console.log(facebookProfile);
                              $("#facebookAuth").text("Name:" + facebookProfile.name);
@@ -205,14 +217,15 @@
                              $("#usingCredentials").hide();
                              $("#fbImg").show();
                             },
-                         error: function (xhr, textStatus, errorThrown) {
+                        error: function (xhr, textStatus, errorThrown) {
                                  console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                             }
                      });
+                });
             });
-          });
         }
 
+        // Initiate facebook login.
         function facebookLogin() {
             fbAuthentication()
                 .then((result) => {
@@ -223,6 +236,7 @@
                 });
         }
     </script>
+
     <style>
         h3 {
             text-align: center;
@@ -238,6 +252,7 @@
             text-align: center;
         }
     </style>
+
 </head>
 <body class="theme-light">
         <div class="surface">
@@ -245,13 +260,14 @@
         <div class="container">Select a method to sign in</div>
         <button onclick="usingCredentials()">Using Credentials</button>
         <br/>
-        <button onclick="facebookLogin()" >Other identity provider</button>
+        <button onclick="facebookLogin()" > Facebook login</button>
         <br />
         <button onclick="ssoAuthentication()">SSO</button>
         <button onclick="requestConsent()" id="consent" style="display:none;">Authenticate</button>
         <div id="divError" style="display: none"></div>
          <div id="userInformation">
             User Information:
+            <br />
             <div id = "userInfo">
                 <br />
              </div>

@@ -1,9 +1,7 @@
 ﻿using AppCompleteAuth.helper;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
-using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,7 +12,6 @@ namespace AppCompleteAuth.Dialogs
     {
         public FacebookAuthDialog(string configuration) : base(nameof(FacebookAuthDialog), configuration)
         {
-
             AddDialog(new OAuthPrompt(
                 nameof(OAuthPrompt),
                 new OAuthPromptSettings
@@ -58,9 +55,11 @@ namespace AppCompleteAuth.Dialogs
             }
 
             await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login was not successful please try again."), cancellationToken);
+
             return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
         }
 
+        // Create facebook profile card.
         private Attachment CreateFBProfileCard(FacebookProfile profile)
         {
             return new ThumbnailCard
@@ -70,12 +69,14 @@ namespace AppCompleteAuth.Dialogs
             }.ToAttachment();
         }
 
+        // Create facebook message.
         private IMessageActivity CreateFBMessage(WaterfallStepContext context, FacebookProfile profile)
         {
             var message = context.Context.Activity;
             message.Text = "User details";
             var attachment = CreateFBProfileCard(profile);
             message.Attachments = new List<Attachment> { attachment };
+
             return message;
         }
     }

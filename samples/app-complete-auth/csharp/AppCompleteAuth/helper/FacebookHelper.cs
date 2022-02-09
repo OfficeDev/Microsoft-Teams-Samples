@@ -63,6 +63,7 @@ namespace AppCompleteAuth.helper
             try
             {
                 var result = JsonConvert.DeserializeObject<T>(json);
+
                 return result;
             }
             catch (JsonException ex)
@@ -87,6 +88,7 @@ namespace AppCompleteAuth.helper
 
             var builder = new UriBuilder(endPoint);
             builder.Query = queryString.ToString();
+
             return builder.Uri;
         }
     }

@@ -10,8 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AppCompleteAuth.Bots;
 using AppCompleteAuth.Dialogs;
-using System.Collections.Concurrent;
-using AppCompleteAuth.Models;
 using Microsoft.Bot.Builder.Dialogs;
 using System;
 using Microsoft.AspNetCore.Http;
@@ -81,9 +79,6 @@ namespace AppCompleteAuth
 
             // Create the Conversation state. (Used by the Dialog system itself.)
             services.AddSingleton<ConversationState>();
-
-            // Create a global hashset for our Roster and notes information
-            services.AddSingleton<ConcurrentDictionary<string, TokenState>>();
 
             // Dialog Manager handles initiating the Dialog Stack, saving state, etc.
             services.AddSingleton<DialogManager>();

@@ -68,7 +68,7 @@ namespace AppCompleteAuth.Bots
             {
                 var userCommand = turnContext.Activity.Text.ToLower().Trim();
 
-                if (userCommand == "sso" || userCommand == "logoutsso" || userCommand == "logoutfacebook" || userCommand == "otheridentityprovider" || userCommand == "usingcredentials")
+                if (userCommand == "sso" || userCommand == "logoutsso" || userCommand == "logoutfacebook" || userCommand == "facebooklogin" || userCommand == "usingcredentials")
                 {
                     // Run the Dialog with the new message Activity.
                     await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
@@ -93,7 +93,7 @@ namespace AppCompleteAuth.Bots
             var asJobject = JObject.FromObject(turnContext.Activity.Value);
             var state = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.State;
 
-            if(state == null || !state.Contains("userName"))
+            if (state == null || !state.Contains("userName"))
             {
                 await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
             }
@@ -106,6 +106,7 @@ namespace AppCompleteAuth.Bots
                 var cred = JObject.Parse(state);
                 var userName = (string)cred.ToObject<CardTaskFetchValue<string>>()?.UserName;
                 var password = (string)cred.ToObject<CardTaskFetchValue<string>>()?.Password;
+
                 if (userName == Constant.UserName && password == Constant.Password)
                 {
                     await turnContext.SendActivityAsync("Authentication Successful");
@@ -117,13 +118,20 @@ namespace AppCompleteAuth.Bots
             }
         }
 
+        /// <summary>
+        /// When OnTurn method receives a submit invoke activity on bot turn, it calls this method.
+        /// </summary>
+        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
+        /// <param name="action">Provides context for a turn of a bot and.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents a task module response.</returns>
         protected override async Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionFetchTaskAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action, CancellationToken cancellationToken)
         {
-            if ((!string.IsNullOrEmpty(action.State) && action.CommandId.ToUpper() == "SSO") || action.CommandId.ToUpper() == "SSO")
+            if ((!string.IsNullOrEmpty(action.State) && action.CommandId.ToLower() == "sso") || action.CommandId.ToLower() == "sso")
             {
                 var state = action.State; // Check the state value
                 var tokenResponse = await GetTokenResponse(turnContext, _botConnectionName, state, cancellationToken);
-                //var tokenResponse = new TokenResponse();
+
                 if (tokenResponse == null || string.IsNullOrEmpty(tokenResponse.Token))
                 {
                     // There is no token, so the user has not signed in yet.
@@ -166,16 +174,16 @@ namespace AppCompleteAuth.Bots
                             Card = GetProfileCard(profile, photo),
                             Height = 250,
                             Width = 400,
-                            Title = "Adaptive Card: Inputs",
+                            Title = "User information card",
                         },
                     },
                 };
             }
-            if ((!string.IsNullOrEmpty(action.State) && action.CommandId.ToUpper() == "OTHERIDENTITYPROVIDER") || action.CommandId.ToUpper() == "OTHERIDENTITYPROVIDER")
+            if ((!string.IsNullOrEmpty(action.State) && action.CommandId.ToLower() == "facebooklogin") || action.CommandId.ToUpper() == "facebooklogin")
             {
                 var state = action.State; // Check the state value
                 var tokenResponse = await GetTokenResponse(turnContext, _facebookConnectionName, state, cancellationToken);
-                //var tokenResponse = new TokenResponse();
+                
                 if (tokenResponse == null || string.IsNullOrEmpty(tokenResponse.Token))
                 {
                     // There is no token, so the user has not signed in yet.
@@ -215,12 +223,12 @@ namespace AppCompleteAuth.Bots
                             Card = GetFacebookProfile(profile),
                             Height = 250,
                             Width = 400,
-                            Title = "Adaptive Card: Inputs",
+                            Title = "User information card",
                         },
                     },
                 };
             }
-            else if (action.CommandId.ToUpper() == "LOGOUTSSO")
+            else if (action.CommandId.ToLower() == "logoutsso")
             {
                 var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
                 await userTokenClient.SignOutUserAsync(turnContext.Activity.From.Id, _botConnectionName, turnContext.Activity.ChannelId, cancellationToken).ConfigureAwait(false);
@@ -247,7 +255,7 @@ namespace AppCompleteAuth.Bots
                     },
                 };
             }
-            else if (action.CommandId.ToUpper() == "LOGOUTFACEBOOK")
+            else if (action.CommandId.ToLower() == "logoutfacebook")
             {
                 var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
                 await userTokenClient.SignOutUserAsync(turnContext.Activity.From.Id, _botConnectionName, turnContext.Activity.ChannelId, cancellationToken).ConfigureAwait(false);
@@ -274,13 +282,14 @@ namespace AppCompleteAuth.Bots
                     },
                 };
             }
-            else if ((!string.IsNullOrEmpty(action.State) && action.CommandId.ToUpper() == "USERCREDENTIALS")|| action.CommandId.ToUpper() == "USERCREDENTIALS")
+            else if ((!string.IsNullOrEmpty(action.State) && action.CommandId.ToLower() == "usercredentials")|| action.CommandId.ToLower() == "usercredentials")
             {
                 if (!string.IsNullOrEmpty(action.State))
                 {
                     JObject asJobject = JObject.Parse(action.State);
                     var userName = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.UserName;
                     var password = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.Password;
+
                     if (userName == Constant.UserName && password == Constant.Password)
                     {
                         await turnContext.SendActivityAsync("Authentication Successful");
@@ -320,6 +329,7 @@ namespace AppCompleteAuth.Bots
             }
         }
 
+        // Get login option card.
         private static Microsoft.Bot.Schema.Attachment GetLoginOptionCard()
         {
             var heroCard = new HeroCard
@@ -329,7 +339,7 @@ namespace AppCompleteAuth.Bots
                 Buttons = new List<CardAction>
                 {
                     new CardAction(ActionTypes.MessageBack,title:"Using credentials", value: "usingcredentials", text:"usingcredentials", displayText:"Using credentials"),
-                    new CardAction(ActionTypes.MessageBack,title:"Other identity provider", value: "otheridentityprovider", text:"otheridentityprovider", displayText:"Other identity provider"),
+                    new CardAction(ActionTypes.MessageBack,title:"Facebook login", value: "facebooklogin", text:"facebooklogin", displayText:"Facebook login"),
                     new CardAction(ActionTypes.MessageBack,title:"SSO authentication", value: "sso", text:"sso", displayText:"SSO authentication")
                 }
             };
@@ -337,13 +347,16 @@ namespace AppCompleteAuth.Bots
             return heroCard.ToAttachment();
         }
 
+        // Get sign in link.
         private async Task<string> GetSignInLinkAsync(ITurnContext turnContext, string connectionName ,CancellationToken cancellationToken)
         {
             var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
             var resource = await userTokenClient.GetSignInResourceAsync(connectionName, turnContext.Activity as Activity, null, cancellationToken).ConfigureAwait(false);
+            
             return resource.SignInLink;
         }
 
+        // Get user profile card.
         private static Microsoft.Bot.Schema.Attachment GetProfileCard(User profile, string photo)
         {
             var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
@@ -358,6 +371,7 @@ namespace AppCompleteAuth.Bots
             {
                 Url = new Uri(photo)
             });
+
             return new Microsoft.Bot.Schema.Attachment()
             {
                 ContentType = AdaptiveCard.ContentType,
@@ -365,6 +379,7 @@ namespace AppCompleteAuth.Bots
             };
         }
 
+        // Get facebook peofile card.
         private static Microsoft.Bot.Schema.Attachment GetFacebookProfile(FacebookProfile profile)
         {
             var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
@@ -379,12 +394,15 @@ namespace AppCompleteAuth.Bots
             {
                 Url = new Uri(profile.ProfilePicture.data.url)
             });
+
             return new Microsoft.Bot.Schema.Attachment()
             {
                 ContentType = AdaptiveCard.ContentType,
                 Content = card,
             };
         }
+
+        // Get token response.
         private async Task<TokenResponse> GetTokenResponse(ITurnContext<IInvokeActivity> turnContext,string connectionName, string state, CancellationToken cancellationToken)
         {
             var magicCode = string.Empty;
@@ -399,6 +417,7 @@ namespace AppCompleteAuth.Bots
 
             var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
             var tokenResponse = await userTokenClient.GetUserTokenAsync(turnContext.Activity.From.Id, connectionName, turnContext.Activity.ChannelId, magicCode, cancellationToken).ConfigureAwait(false);
+            
             return tokenResponse;
         }
     }

@@ -6,6 +6,9 @@ using Microsoft.Graph;
 
 namespace AppCompleteAuth.Models
 {
+    /// <summary>
+    /// User data model class.
+    /// </summary>
     public class UserData
     {
         public User User { get; set; }

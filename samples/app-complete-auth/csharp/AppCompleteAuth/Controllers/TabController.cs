@@ -59,24 +59,29 @@ namespace AppCompleteAuth.Controllers
             }
         }
 
+        // Get user details.
         [HttpPost]
         [Route("GetUserDetails")]
-        public async Task<JsonResult> GetUserProfile(string accessToken,string userPrincipleName)
+        public async Task<JsonResult> GetUserProfile(string accessToken)
         {
             try
             {
                 var client = new SimpleGraphClient(accessToken);
-                var me = await client.GetUserProfile(userPrincipleName);
+                var me = await client.GetMeAsync();
                 var title = !string.IsNullOrEmpty(me.JobTitle) ?
                             me.JobTitle : "Unknown";
+
+                var photo = await client.GetPhotoAsync();
 
                 var userInfo = new UserData()
                 {
                     User = me,
+                    Photo = photo,
                     Title = title
                 };
 
-                return Json(userInfo);
+                var jsonString = JsonConvert.SerializeObject(userInfo);
+                return Json(jsonString);
             }
             catch (Exception ex)
             {
@@ -85,6 +90,7 @@ namespace AppCompleteAuth.Controllers
             }
         } 
 
+        // Validate user credentials. 
         [HttpPost]
         [Route("tabCredentialsAuth")]
         public JsonResult AuthenticateUsingCredentials(string userName, string password)
@@ -99,6 +105,7 @@ namespace AppCompleteAuth.Controllers
             }
         }
 
+        // Get facebook profile of user.
         [HttpPost]
         [Route("getFbAccessToken")]
         public async Task<JsonResult> GetFacebookAuthToken(string accessToken)

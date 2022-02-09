@@ -37,6 +37,7 @@ namespace AppCompleteAuth.helper
             validIssuers = validIssuers.Select(validIssuer => validIssuer.Replace("tenantId", tenantId));
             return validIssuers;
         }
+
         /// <summary>
         /// Audience Validator.
         /// </summary>
@@ -53,11 +54,14 @@ namespace AppCompleteAuth.helper
             {
                 throw new ApplicationException("No audience defined in token!");
             }
+
             var validAudiences = validationParameters.ValidAudiences;
+
             if (validAudiences == null || validAudiences.Count() == 0)
             {
                 throw new ApplicationException("No valid audiences defined in validationParameters!");
             }
+
             foreach (var tokenAudience in tokenAudiences)
             {
                 if (validAudiences.Any(validAudience => validAudience.Equals(tokenAudience, StringComparison.OrdinalIgnoreCase)))
@@ -65,8 +69,10 @@ namespace AppCompleteAuth.helper
                     return true;
                 }
             }
+
             return false;
         }
+
         /// <summary>
         /// Get token using client credentials flow
         /// </summary>
@@ -81,7 +87,7 @@ namespace AppCompleteAuth.helper
                                                 .WithClientSecret(configuration["AzureAd:MicrosoftAppPassword"])
                                                 .WithAuthority($"https://login.microsoftonline.com/{tenantId}")
                                                 .Build();
-            //var body = $"assertion={idToken}&requested_token_use=on_behalf_of&grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&client_id={configuration[ClientIdConfigurationSettingsKey]}@{configuration[TenantIdConfigurationSettingsKey]}&client_secret={configuration[AppsecretConfigurationSettingsKey]}&scope=https://graph.microsoft.com/User.Read";
+           
             try
             {
                 var httpContext = httpContextAccessor.HttpContext;
@@ -91,6 +97,7 @@ namespace AppCompleteAuth.helper
                 List<string> scopes = new List<string>();
                 scopes.Add("https://graph.microsoft.com/User.Read");
                 var responseToken = await app.AcquireTokenOnBehalfOf(scopes, assert).ExecuteAsync();
+
                 return responseToken.AccessToken.ToString();
             }
             catch (Exception ex)
@@ -98,6 +105,7 @@ namespace AppCompleteAuth.helper
                 return ex.Message;
             }
         }
+
         /// <summary>
         /// Retrieve Settings.
         /// </summary>
@@ -109,10 +117,12 @@ namespace AppCompleteAuth.helper
             var settings = configurationSettingsValue
                 ?.Split(new char[] { ';', ',' }, StringSplitOptions.RemoveEmptyEntries)
                 ?.Select(p => p.Trim());
+
             if (settings == null)
             {
                 throw new ApplicationException($"AzureAd:ValidIssuers does not contain a valid value in the configuration file.");
             }
+
             return settings;
         }
     }

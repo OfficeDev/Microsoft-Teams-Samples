@@ -4,9 +4,12 @@
 
 namespace AppCompleteAuth.Models
 {
+    /// <summary>
+    /// Constant value class.
+    /// </summary>
     public static class Constant
     {
-        public static string UserName = "admin@M365x881152.onmicrosoft.com";
+        public static string UserName = "testaccount@test123.onmicrosoft.com";
 
         public static string Password = "testpassword";
     }

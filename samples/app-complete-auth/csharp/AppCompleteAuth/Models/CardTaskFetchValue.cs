@@ -19,6 +19,5 @@ namespace AppCompleteAuth.Models
 
         [JsonProperty("password")]
         public object Password { get; set; }
-
     }
 }

@@ -18,10 +18,12 @@
 
         microsoftTeams.initialize();
 
+        // Submit user name and password.
         function submit()
         {
              var isValid = true;
              $('#userName,#password').each(function () {
+
                  if ($.trim($(this).val()) == '') {
                      isValid = false;
                      $(this).css({
@@ -35,6 +37,7 @@
                      });
                  }
              });
+
              if (isValid == false) {
                  e.preventDefault();
                  return false;
@@ -67,13 +70,9 @@
              }
         } 
 
+        // Close auth window.
         function closeWindow() {
-            if(requestFrom == "msgext"){
-                 microsoftTeams.tasks.submitTask();
-            }
-            else{
-                microsoftTeams.authentication.notifyFailure({state:"CancelledByUser"});
-            }
+             microsoftTeams.authentication.notifyFailure({state:"CancelledByUser"});
         }
     </script>
   
