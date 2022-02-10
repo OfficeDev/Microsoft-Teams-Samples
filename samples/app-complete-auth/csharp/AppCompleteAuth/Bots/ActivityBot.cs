@@ -179,7 +179,7 @@ namespace AppCompleteAuth.Bots
                     },
                 };
             }
-            if ((!string.IsNullOrEmpty(action.State) && action.CommandId.ToLower() == "facebooklogin") || action.CommandId.ToUpper() == "facebooklogin")
+            if ((!string.IsNullOrEmpty(action.State) && action.CommandId.ToLower() == "facebooklogin") || action.CommandId.ToLower() == "facebooklogin")
             {
                 var state = action.State; // Check the state value
                 var tokenResponse = await GetTokenResponse(turnContext, _facebookConnectionName, state, cancellationToken);
