@@ -243,14 +243,13 @@ namespace AppCompleteAuth.Bots
                             {
                                 Content = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
                                 {
-                                    Body = new List<AdaptiveElement>() { new AdaptiveTextBlock() { Text = "You have been signed out." } },
-                                    Actions = new List<AdaptiveAction>() { new AdaptiveSubmitAction() { Title = "Close" } },
+                                    Body = new List<AdaptiveElement>() { new AdaptiveTextBlock() { Text = "You have been signed out." } }                                  
                                 },
                                 ContentType = AdaptiveCard.ContentType,
                             },
                             Height = 200,
                             Width = 400,
-                            Title = "Adaptive Card: Inputs",
+                            Title = "SSO logout",
                         },
                     },
                 };
@@ -258,7 +257,7 @@ namespace AppCompleteAuth.Bots
             else if (action.CommandId.ToLower() == "logoutfacebook")
             {
                 var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
-                await userTokenClient.SignOutUserAsync(turnContext.Activity.From.Id, _botConnectionName, turnContext.Activity.ChannelId, cancellationToken).ConfigureAwait(false);
+                await userTokenClient.SignOutUserAsync(turnContext.Activity.From.Id, _facebookConnectionName, turnContext.Activity.ChannelId, cancellationToken).ConfigureAwait(false);
 
                 return new MessagingExtensionActionResponse
                 {
@@ -270,14 +269,13 @@ namespace AppCompleteAuth.Bots
                             {
                                 Content = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
                                 {
-                                    Body = new List<AdaptiveElement>() { new AdaptiveTextBlock() { Text = "You have been signed out." } },
-                                    Actions = new List<AdaptiveAction>() { new AdaptiveSubmitAction() { Title = "Close" } },
+                                    Body = new List<AdaptiveElement>() { new AdaptiveTextBlock() { Text = "You have been signed out." } }
                                 },
                                 ContentType = AdaptiveCard.ContentType,
                             },
                             Height = 200,
                             Width = 400,
-                            Title = "Adaptive Card: Inputs",
+                            Title = "Facebook logut",
                         },
                     },
                 };
@@ -292,14 +290,50 @@ namespace AppCompleteAuth.Bots
 
                     if (userName == Constant.UserName && password == Constant.Password)
                     {
-                        await turnContext.SendActivityAsync("Authentication Successful");
+                        return new MessagingExtensionActionResponse
+                        {
+                            Task = new TaskModuleContinueResponse
+                            {
+                                Value = new TaskModuleTaskInfo
+                                {
+                                    Card = new Microsoft.Bot.Schema.Attachment
+                                    {
+                                        Content = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
+                                        {
+                                            Body = new List<AdaptiveElement>() { new AdaptiveTextBlock() { Text = "Authentication sucessful" } },                     
+                                        },
+                                        ContentType = AdaptiveCard.ContentType,
+                                    },
+                                    Height = 200,
+                                    Width = 400,
+                                    Title = "Using credentials",
+                                },
+                            },
+                         };
                     }
                     else
                     {
-                        await turnContext.SendActivityAsync("Invalid username or password");
+                        return new MessagingExtensionActionResponse
+                        {
+                            Task = new TaskModuleContinueResponse
+                            {
+                                Value = new TaskModuleTaskInfo
+                                {
+                                    Card = new Microsoft.Bot.Schema.Attachment
+                                    {
+                                        Content = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
+                                        {
+                                            Body = new List<AdaptiveElement>() { new AdaptiveTextBlock() { Text = "Invalid username or password" } }
+                                        },
+                                        ContentType = AdaptiveCard.ContentType,
+                                    },
+                                    Height = 200,
+                                    Width = 400,
+                                    Title = "Using credentials",
+                                },
+                            },
+                        };
                     }
-
-                    return new MessagingExtensionActionResponse();
                 }
                 else
                 {
