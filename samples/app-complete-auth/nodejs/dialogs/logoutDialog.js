@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const { ActivityTypes } = require('botbuilder');
+const { BotFrameworkAdapter, ActivityTypes } = require('botbuilder');
 const { ComponentDialog } = require('botbuilder-dialogs');
 
 class LogoutDialog extends ComponentDialog {

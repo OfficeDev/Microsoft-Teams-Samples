@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demos a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer.
+description: This sample demos authentication feature in bot,tab and messaging extension.
 products:
 - office-teams
 - office
@@ -10,23 +10,50 @@ languages:
 - javascript
 extensions:
 contentType: samples
-createdDate: "16-11-2021 00:15:13"
+createdDate: "16-02-2022 00:15:13"
 ---
 
-# Bot with SharePoint file to view in Teams file viewer
+# Authentication complete sample
 
-Using this Nodejs sample, a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer.
+Using this C# sample, you can check authenticate in bot,tab and messaging extention with sso, facebook and using user name and password.
 
 ## Key features
 
-![upload file card](Images/uploadFileCard.png)
+Bot Authentication
 
-![Upload file](Images/uploadFile.png)
+![Login option card](Images/BotLoginOptionCard.png)
 
-![View file card](Images/viewFileCard.png)
+  - SSO
+  
+  ![SSO login](Images/BotSsoCard.png)
+  
+  - Using user name and password
+  
+  ![using credentials](Images/BotUsingCredentials.png)
+  
+Tab Authentication
 
-![view file in teams](Images/fileViewer.png)
+![Tab](Images/Tab.png)
 
+  - SSO
+  
+  ![Tab SSO login](Images/TabSsoLogin.png)
+  
+  - Using user name and password
+  
+  ![Tab using credentials](Images/TabUsingCredentials.png)
+
+Messaging Extention Authentication
+
+![ME action](Images/MEActions.png)
+
+  - SSO
+  
+  ![ME SSO login](Images/MESsoCard.png)
+  
+  - Using user name and password
+  
+  ![ME using credentials](Images/MEUsingCredentials.png)
 
 ## Prerequisites
 
@@ -40,68 +67,109 @@ Using this Nodejs sample, a bot with capability to upload files to SharePoint si
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
 
-### 1. Setup for Bot SSO
-In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+### Register your Teams Auth SSO with Azure AD
 
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+3. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
+4. Under **Manage**, select **Expose an API**. 
+5. Select the **Set** link to generate the Application ID URI in the form of `api://{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name/{AppID}`
+    * ex: `api://%ngrokDomain%.ngrok.io/00000000-0000-0000-0000-000000000000`.
+6. Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
+7. Set **Who can consent?** to `Admins and users`
+8. Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
+    * **Admin consent title:** Teams can access the user’s profile.
+    * **Admin consent description**: Allows Teams to call the app’s web APIs as the current user.
+    * **User consent title**: Teams can access the user profile and make requests on the user's behalf.
+    * **User consent description:** Enable Teams to call this app’s APIs with the same rights as the user.
+9. Ensure that **State** is set to **Enabled**
+10. Select **Add scope**
+    * The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end:
+        * `api://[ngrokDomain].ngrok.io/00000000-0000-0000-0000-000000000000/access_as_user.
+11. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
+    * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
+    * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
+12. Navigate to **API Permissions**, and make sure to add the follow permissions:
+-   Select Add a permission
+-   Select Microsoft Graph -\> Delegated permissions.
+    - `User.Read` (enabled by default)
+-   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+13. Navigate to **Authentication**
+    If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
+    Set a redirect URI:
+    * Select **Add a platform**.
+    * Select **web**.
+    * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-end`. This will be the page where a successful implicit grant flow will redirect the user.
+    Enable implicit grant by checking the following boxes:  
+    ✔ ID Token  
+    ✔ Access Token  
+14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
- Add this permission to app registration
+15. Create a Bot Registration
+   In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
-![Permissions](Images/permissions.png)
+   - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+  
 
-### 2. Setup Sharepoint site configuration
-- Login to [sharepoint](https://www.office.com/launch/sharepoint?auth=2)
-- Click on `Create site` and select `Team site`
-   
-   ![Team Site](Images/teamSite.png)
-   
-   - Enter site name and description of site.
-   
-   ![Site name](Images/siteName.png).
-   
-   - From site address eg: 'https://m365x357260.sharepoint.com/sites/SharePointTestSite'
-      `m365x357260.sharepoint.com` - value is sharepoint tenant name.
-	  
-   - Click on next. (optional step)Add aditional owner and member.
-   - Click on Finish.
+16. To test facebook auth flow [create a facebookapp](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-facebook?view=azure-bot-service-4.0) and get client id and secret for facebook app.
+    Now go to your bot channel registartion -> configuration -> Add OAuth connection string
+   - Provide connection Name : for eg `facebookconnection`
+   - Select service provider ad `facebook`
+   - Add clientid and secret of your facebook app that was created using Step 16.
 
-### 3. Run your bot sample
+### Run your bot sample
 1) Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/bot-sharepoint-file-viewer/nodejs`
+2) In a terminal, navigate to `samples/app-complete-auth/nodejs`
 
-3) Install modules
+3) Install node modules
+
+   Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
 
     ```bash
     npm install
     ```
-
 4) Run ngrok - point to port 3978
 
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
-5) Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` and `ConnectionName` from the Bot Framework registration. (Note that the MicrosoftAppId is the AppId created in step 1 (Setup for Bot SSO), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot SSO) and you can always create a new client secret anytime.) Also update the `SharepointTenantName` with your tenant name and `SharepointSiteName` with your sharepoint site name. For `ApplicationBaseUrl` provide the application base url.
+5)  Modify the `.env` file in your project folder (or in Visual Studio Code) and fill in below details:
+   - `{{Microsoft-App-id}}` - Generated from Step 3 (Application (client) ID)is the application app id
+   - `{{TenantId}}` - Generated from Step 3(Directory (tenant) ID) is the tenant id
+   - `{{MicrosoftAppPassword}}` - Generated from Step 14, also referred to as Client secret
+   - `{{ApplicationBaseUrll}}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+   - `{{ Connection Name }}` - Generated from step 15.
+   - `{{FacebookAppId}} and {{FacebookAppPassword}} and {{ FBConnectionName}}`- Generated from step 16.
 
-6) Run your bot at the command line:
+6) Run your app
 
     ```bash
     npm start
     ```
 - **Manually update the manifest.json**
-    - Edit the `manifest.json` contained in the  `/appPackage` folder to and fill in MicrosoftAppId (that was created in step 1 and it is the same value of MicrosoftAppId as in `.env` file) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario it may occur multiple times in the `manifest.json`)
-    - Zip up the contents of the `/appPackage` folder to create a `manifest.zip`
-    - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
+    Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
+   - `{{Microsoft-App-Id}}` with Application id generated from Step 3
+   - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
     > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
-## Interacting with the bot.
+## Deploy the bot to Azure
 
-Add the bot to personal scope.
+To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 
-Send `login` message to the bot, you will recieve a consent card by the bot in your personal scope.
+## Further reading
+
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Authentication basics](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/authentication/authentication)
 

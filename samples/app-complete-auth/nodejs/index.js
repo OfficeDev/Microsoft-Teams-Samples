@@ -30,9 +30,9 @@ server.set('views', __dirname);
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
-const {  CloudAdapter,
+const { CloudAdapter,
   ConfigurationServiceClientCredentialFactory,
-  createBotFrameworkAuthenticationFromConfiguration,BotFrameworkAdapter, ConversationState, MemoryStorage, UserState } = require('botbuilder');
+  createBotFrameworkAuthenticationFromConfiguration, BotFrameworkAdapter, ConversationState, MemoryStorage, UserState } = require('botbuilder');
 const { TeamsBot } = require('./bots/teamsBot');
 const { MainDialog } = require('./dialogs/mainDialog');
 
@@ -41,8 +41,8 @@ const { tokenData } = require('./dialogs/mainDialog');
 const credentialsFactory = new ConfigurationServiceClientCredentialFactory({
   MicrosoftAppId: process.env.MicrosoftAppId,
   MicrosoftAppPassword: process.env.MicrosoftAppPassword,
-  MicrosoftAppType: "MultiTenant",
-  MicrosoftAppTenantId: ""
+  MicrosoftAppType: process.env.AppType,
+  MicrosoftAppTenantId: process.env.TenantId
 });
 
 const botFrameworkAuthentication = createBotFrameworkAuthenticationFromConfiguration(null, credentialsFactory);
@@ -56,14 +56,14 @@ adapter.onTurnError = async (context, error) => {
   // NOTE: In production environment, you should consider logging this to Azure
   //       application insights. See https://aka.ms/bottelemetry for telemetry
   //       configuration instructions.
-  console.error(`\n [onTurnError] unhandled error: ${ error }`);
+  console.error(`\n [onTurnError] unhandled error: ${error}`);
 
   // Send a trace activity, which will be displayed in Bot Framework Emulator
   await context.sendTraceActivity(
-      'OnTurnError Trace',
-      `${ error }`,
-      'https://www.botframework.com/schemas/error',
-      'TurnError'
+    'OnTurnError Trace',
+    `${error}`,
+    'https://www.botframework.com/schemas/error',
+    'TurnError'
   );
 
   // Note: Since this Messaging Extension does not have the messageTeamMembers permission
@@ -98,6 +98,18 @@ server.get('/AuthTab', (req, res, next) => {
 // Endpoint to fetch Signin popup page.
 server.get('/popUpSignin', function (req, res) {
   res.render('./views/popUpSignin');
+});
+
+// Pop-up dialog to ask for additional permissions, redirects to AAD page
+server.get('/auth-start', function (req, res) {
+  var clientId = process.env.MicrosoftAppId;
+  res.render('./views/auth-start', { clientId: clientId });
+});
+
+// End of the pop-up dialog auth flow, returns the results back to parent window
+server.get('/auth-end', function (req, res) {
+  var clientId = process.env.MicrosoftAppId;
+  res.render('./views/auth-end', { clientId: clientId });
 });
 
 // Endpoint to facebook auth redirect page.
@@ -158,11 +170,36 @@ server.post('/getProfileOnBehalfOf', function (req, res) {
   });
 });
 
+// Listen for incoming requests.
+server.post('/GetUserDetails', async (req, res) => {
+  var accessToken = req.body.accessToken;
+  const client = new SimpleGraphClient(accessToken);
+  const myDetails = await client.getMeAsync();
+  var userImage = await client.getUserPhoto()
+  await userImage.arrayBuffer().then(result => {
+    console.log(userImage.type);
+    imageString = Buffer.from(result).toString('base64');
+    img2 = "data:image/png;base64," + imageString;
+    var userData = {
+      details: myDetails,
+      image: img2
+    }
+    var responseMessage = Promise.resolve(userData);
+    responseMessage.then(function (result) {
+      res.json(result);
+      console.log(result);
+    }, function (err) {
+      console.log(err); // Error: "It broke"
+      res.json(err);
+    });
+  });
+});
+
 server.post('/tabCredentialsAuth', function (req, res) {
   var userNAme = req.body.userName;
   var password = req.body.password;
   var resultResponse;
-  if(userNAme == "test" && password == "test") {
+  if (userNAme == "test" && password == "test") {
     resultResponse = "Authentication successfull";
   }
   else {
@@ -170,9 +207,9 @@ server.post('/tabCredentialsAuth', function (req, res) {
   }
 
   var responseMessage = Promise.resolve(resultResponse);
-  responseMessage.then(function(result) {
+  responseMessage.then(function (result) {
     res.json(result);
-   console.log(result);
+    console.log(result);
   }, function (err) {
     console.log(err); // Error: "It broke"
     res.json(err);
@@ -186,35 +223,35 @@ server.post('/getFbAccessToken', function (req, res) {
   var scopes = ['id', 'email', 'name', 'hometown', 'gender', 'birthday'].join(',');
 
   var fbPromise = new Promise((resolve, reject) => {
-  axios.get('https://graph.facebook.com/v12.0/oauth/access_token', {
-    params: {
-      client_id: process.env.FaceBookAppId,
-      redirect_uri: process.env.ApplicationBaseUrl + '/fb-auth',
-      client_secret: process.env.FaceBookAppPassword,
-      code: token,
-    }
-  }).then(response => {
-    console.log(response);
-    accessToken = response.data.access_token;
-    axios.get('https://graph.facebook.com/me', {
-    params: {
-      fields: scopes,
-      access_token: accessToken,
-    }
-  }).then(profile => {
-    console.log(profile);
-    resolve(profile.data);
-  })
-  }).catch(error => {
-    reject({ "error": error.errorCode });
+    axios.get('https://graph.facebook.com/v12.0/oauth/access_token', {
+      params: {
+        client_id: process.env.FaceBookAppId,
+        redirect_uri: process.env.ApplicationBaseUrl + '/fb-auth',
+        client_secret: process.env.FaceBookAppPassword,
+        code: token,
+      }
+    }).then(response => {
+      console.log(response);
+      accessToken = response.data.access_token;
+      axios.get('https://graph.facebook.com/me', {
+        params: {
+          fields: scopes,
+          access_token: accessToken,
+        }
+      }).then(profile => {
+        console.log(profile);
+        resolve(profile.data);
+      })
+    }).catch(error => {
+      reject({ "error": error.errorCode });
+    });
   });
-});
 
-fbPromise.then(function (result) {
-  res.json(result);
-  console.log(result);
-}, function (err) {
-  console.log(err); // Error: "It broke"
-  res.json(err);
-});
+  fbPromise.then(function (result) {
+    res.json(result);
+    console.log(result);
+  }, function (err) {
+    console.log(err); // Error: "It broke"
+    res.json(err);
+  });
 });

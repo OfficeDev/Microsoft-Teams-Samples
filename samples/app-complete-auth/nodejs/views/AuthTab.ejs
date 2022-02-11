@@ -7,7 +7,7 @@
     <script>
         let accessToken;
         let clientId =  <%-clientId%>
-        let redirectUri = window.location.origin + "/fb-auth";
+            let redirectUri = window.location.origin + "/fb-auth";
 
         $(document).ready(function () {
             $("#userInformation").hide();
@@ -88,6 +88,62 @@
             });
         }
 
+        // Request consent on implicit grant error.
+        function requestConsent() {
+            getToken()
+                .then(data => {
+                    $("#consent").hide();
+                    $("#divError").hide();
+                    accessToken = data.accessToken;
+                    microsoftTeams.getContext((context) => {
+                        getUserInfo(context.userPrincipalName);
+                    });
+                });
+        }
+
+        // Get token for multi tenant.
+        function getToken() {
+            return new Promise((resolve, reject) => {
+                microsoftTeams.authentication.authenticate({
+                    url: window.location.origin + "/auth-start",
+                    width: 600,
+                    height: 535,
+                    successCallback: result => {
+                        resolve(result);
+                    },
+                    failureCallback: reason => {
+                        reject(reason);
+                    }
+                });
+            });
+        }
+
+
+        // Get user information.
+        function getUserInfo(userPrincipleName) {
+            if (userPrincipleName) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/GetUserDetails',
+                    dataType: 'json',
+                    data: {
+                        'accessToken': accessToken,
+                    },
+                    success: function (responseJson) {
+                        const userDetails = JSON.parse(responseJson);;
+                        $("#userInfo").text(`You're logged in as ${userDetails.details.displayName} (${userDetails.details.userPrincipalName}); you job title is: ${userDetails.title}; your photo is: `);
+                        $("#userImg").attr("src", userDetails.image);
+                        $("#userInformation").show();
+                        $("#userImg").show();
+                        $("#usingCredentials").hide();
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    }
+                });
+            }
+        }
+
         function getServerSideTokenFb(clientSideToken) {
             return new Promise((resolve, reject) => {
                 microsoftTeams.getContext((context) => {
@@ -133,7 +189,7 @@
             return true;
         }
 
-        function usingCredentials(){
+        function usingCredentials() {
             microsoftTeams.authentication.authenticate({
                 url: window.location.origin + "/popUpSignin?from=tab",
                 width: 600,
@@ -147,7 +203,7 @@
                 failureCallback: reason => {
                     console.log(reason);
                 }
-            });              
+            });
         }
 
         function fbAuthentication() {
@@ -206,6 +262,8 @@
         <button onclick="fbAuth()">Other identity provider</button>
         <br />
         <button onclick="ssoAuthentication()">SSO</button>
+        <button onclick="requestConsent()" id="consent" style="display:none;">Authenticate</button>
+        <div id="divError" style="display: none"></div>
         <div id="userInformation">
             User Information:
             <div id="userInfo">
