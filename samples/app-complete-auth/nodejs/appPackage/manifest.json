@@ -2,33 +2,32 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
   "manifestVersion": "1.11",
   "version": "1.0.0",
-  "id": "9c764aa0-ea5e-40fe-a2da-22969fc39eb6",
-  "packageName": "com.microsoft.teams.botsharepointfileviewer",
-    "webApplicationInfo": {
-    "id": "",
-    "resource": "api://.ngrok.io/botid-"
+  "id": "<<Microsoft-App-Id>>",
+  "packageName": "com.microsoft.teams.appcompleteauth",
+  "webApplicationInfo": {
+    "id": "<<Microsoft-App-Id>>",
+    "resource": "api://<<base-url>>/botid-<<Microsoft-App-Id>>"
   },
   "developer": {
     "name": "Microsoft",
-    "websiteUrl": "https://www.microsoft.com",
-    "privacyUrl": "https://www.microsoft.com/privacy",
-    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
-  },
-  "name": {
-    "short": "Auth C",
-    "full": "Bot SharePoint file viewer"
-  },
-  "description": {
-    "short": "Bot SharePoint file viewer",
-    "full": "This sample demos a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer."
+    "websiteUrl": "https://example.azurewebsites.net",
+    "privacyUrl": "https://example.azurewebsites.net/privacy",
+    "termsOfUseUrl": "https://example.azurewebsites.net/termsofuse"
   },
   "icons": {
-    "outline": "outline.png",
-    "color": "color.png"
+    "color": "icon-color.png",
+    "outline": "icon-outline.png"
   },
-   "staticTabs": [
+  "name": {
+    "short": "App complete auth"
+  },
+  "description": {
+    "short": "Authentication sample for Microsoft Teams",
+    "full": "Authentication sample for Microsoft Teams"
+  },
+  "staticTabs": [
     {
-      "contentUrl": "https:///AuthTab",
+      "contentUrl": "https://<<base-url>>/AuthTab",
       "entityId": "Auth",
       "name": "Auth",
       "scopes": [
@@ -38,7 +37,7 @@
   ],
   "bots": [
     {
-      "botId": "",
+      "botId": "<<Microsoft-App-Id>>",
       "scopes": [
         "personal"
       ],
@@ -65,10 +64,10 @@
   ],
   "composeExtensions": [
     {
-      "botId": "1158a836-644f-4b5b-8565-3e23a10fbd38",
+      "botId": "<<Microsoft-App-Id>>",
       "canUpdateConfiguration": true,
       "commands": [
-         {
+        {
           "id": "SSO",
           "type": "action",
           "title": "SSO",
@@ -141,7 +140,7 @@
   "accentColor": "#60A18E",
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "*.ngrok.io",
+    "<<Domain-name>>",
     "token.botframework.com"
   ]
 }
