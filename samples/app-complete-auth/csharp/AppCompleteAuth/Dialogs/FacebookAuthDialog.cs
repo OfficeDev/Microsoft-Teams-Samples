@@ -1,7 +1,9 @@
-﻿using AppCompleteAuth.helper;
+﻿using AdaptiveCards;
+using AppCompleteAuth.helper;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -47,9 +49,8 @@ namespace AppCompleteAuth.Dialogs
             {
                 // Getting basic facebook profile details.
                 FacebookProfile profile = await FacebookHelper.GetFacebookProfileName(tokenResponse.Token);
-                var message = CreateFBMessage(stepContext, profile);
 
-                await stepContext.Context.SendActivityAsync(message);
+                await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetProfileCard(profile)));
 
                 return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
             }
@@ -60,24 +61,55 @@ namespace AppCompleteAuth.Dialogs
         }
 
         // Create facebook profile card.
-        private Attachment CreateFBProfileCard(FacebookProfile profile)
+        private Attachment GetProfileCard(FacebookProfile profile)
         {
-            return new ThumbnailCard
+            var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
+
+            card.Body.Add(new AdaptiveTextBlock()
             {
-                Title = "" + " " + profile.Name,
-                Images = new List<CardImage> { new CardImage(profile.ProfilePicture.data.url) },
-            }.ToAttachment();
-        }
+                Text = $"User Information",
+                Size = AdaptiveTextSize.Default
+            });
 
-        // Create facebook message.
-        private IMessageActivity CreateFBMessage(WaterfallStepContext context, FacebookProfile profile)
-        {
-            var message = context.Context.Activity;
-            message.Text = "User details";
-            var attachment = CreateFBProfileCard(profile);
-            message.Attachments = new List<Attachment> { attachment };
+            card.Body.Add(new AdaptiveColumnSet()
+            {
+                Columns = new List<AdaptiveColumn>()
+                {
+                    new AdaptiveColumn()
+                    {
+                        Items = new List<AdaptiveElement>()
+                        {
+                            new AdaptiveImage()
+                            {
+                                Url = new Uri(profile.ProfilePicture.data.url),
+                                Size = AdaptiveImageSize.Medium,
+                                Style = AdaptiveImageStyle.Person
+                            }
+                        },
+                        Width ="auto"
 
-            return message;
+                    },
+                    new AdaptiveColumn()
+                    {
+                        Items = new List<AdaptiveElement>()
+                        {
+                            new AdaptiveTextBlock()
+                            {
+                                Text =  $"Hello! {profile.Name}",
+                                Weight = AdaptiveTextWeight.Bolder,
+                                IsSubtle = true
+                            }
+                        },
+                        Width ="stretch"
+                    }
+                }
+            });
+
+            return new Attachment()
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = card,
+            };
         }
     }
 }

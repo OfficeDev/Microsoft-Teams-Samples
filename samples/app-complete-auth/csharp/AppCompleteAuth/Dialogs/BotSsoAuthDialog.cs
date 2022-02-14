@@ -1,6 +1,11 @@
-﻿using Microsoft.Bot.Builder;
+﻿using AdaptiveCards;
+using AppCompleteAuth.Models;
+using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
+using Microsoft.Graph;
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,8 +14,10 @@ namespace AppCompleteAuth.Dialogs
 {
     public class BotSsoAuthDialog : LogoutDialog
     {
-        public BotSsoAuthDialog(string configuration) : base(nameof(BotSsoAuthDialog), configuration)
+        private readonly ConcurrentDictionary<string, Token> _Token;
+        public BotSsoAuthDialog(string configuration, ConcurrentDictionary<string, Token> token) : base(nameof(BotSsoAuthDialog), configuration)
         {
+            _Token = token;
             AddDialog(new TokenExchangeOAuthPrompt(
                  nameof(TokenExchangeOAuthPrompt),
                  new OAuthPromptSettings
@@ -23,10 +30,12 @@ namespace AppCompleteAuth.Dialogs
                     //EndOnInvalidMessage = true
                 }));
 
+            AddDialog(new TextPrompt(nameof(TextPrompt)));
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
                 PromptStepAsync,
-                LoginStepAsync
+                LoginStepAsync,
+                UserInfoCardAsync
             }));
 
             InitialDialogId = nameof(WaterfallDialog);
@@ -46,24 +55,112 @@ namespace AppCompleteAuth.Dialogs
             if (tokenResponse != null)
             {
                 await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login successful"), cancellationToken);
+                Token token = new Token
+                {
+                    AccessToken = tokenResponse.Token
+                };
 
-                // Pull in the data from the Microsoft Graph.
-                var client = new SimpleGraphClient(tokenResponse.Token);
-                var me = await client.GetMeAsync();
-                var title = !string.IsNullOrEmpty(me.JobTitle) ?
-                            me.JobTitle : "Unknown";
-
-                await stepContext.Context.SendActivityAsync($"You're logged in as {me.DisplayName} ({me.UserPrincipalName}); you job title is: {title}; your photo is: ");
-                var photo = await client.GetPhotoAsync();
-                var cardImage = new CardImage(photo);
-                var card = new ThumbnailCard(images: new List<CardImage>() { cardImage });
-                var reply = MessageFactory.Attachment(card.ToAttachment());
-                await stepContext.Context.SendActivityAsync(reply, cancellationToken);
-
-                return await stepContext.EndDialogAsync();
+                _Token.AddOrUpdate("token", token, (key, newValue) => token);
+                return await stepContext.PromptAsync(
+                nameof(TextPrompt),
+                new PromptOptions
+                {
+                    Prompt = MessageFactory.Text("What is your favorite color?"),
+                },
+                cancellationToken);
             }
 
             return await stepContext.EndDialogAsync();
+        }
+
+        private async Task<DialogTurnResult> UserInfoCardAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        {
+            var color = stepContext.Result as string;
+            // Pull in the data from the Microsoft Graph.
+            var token = new Token();
+            _Token.TryGetValue("token", out token);
+            var client = new SimpleGraphClient(token.AccessToken);
+            var me = await client.GetMeAsync();
+            var title = !string.IsNullOrEmpty(me.JobTitle) ?
+                        me.JobTitle : "Unknown";
+            var photo = await client.GetPhotoAsync();
+            var reply = MessageFactory.Attachment(GetProfileCard(me, photo, title, color));
+            await stepContext.Context.SendActivityAsync(reply, cancellationToken);
+            return await stepContext.EndDialogAsync();
+        }
+
+        // Get user profile card.
+        private Microsoft.Bot.Schema.Attachment GetProfileCard(User profile, string photo, string title, string color)
+        {
+            var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
+
+            card.Body.Add(new AdaptiveTextBlock()
+            {
+                Text = $"User Information",
+                Size = AdaptiveTextSize.Default
+            });
+
+            card.Body.Add(new AdaptiveColumnSet()
+            {
+                Columns = new List<AdaptiveColumn>()
+                {
+                    new AdaptiveColumn()
+                    {
+                        Items = new List<AdaptiveElement>()
+                        {
+                            new AdaptiveImage()
+                            {
+                                Url = new Uri(photo),
+                                Size = AdaptiveImageSize.Medium,
+                                Style = AdaptiveImageStyle.Person
+                            }
+                        },
+                        Width ="auto"
+                        
+                    },
+                    new AdaptiveColumn()
+                    {
+                        Items = new List<AdaptiveElement>()
+                        {
+                            new AdaptiveTextBlock()
+                            {
+                                Text =  $"Hello! {profile.DisplayName}",
+                                Weight = AdaptiveTextWeight.Bolder,
+                                IsSubtle = true
+                            }
+                        },
+                        Width ="stretch"
+                    }
+                }
+            });
+            card.Body.Add(new AdaptiveFactSet()
+            {
+                Separator = true,
+                Facts =
+                {
+                    new AdaptiveFact
+                    {
+                        Title = "Job title:",
+                        Value = $"{title}"
+                    },
+                    new AdaptiveFact
+                    {
+                        Title = "Email:",
+                        Value = $"{profile.UserPrincipalName}"
+                    },
+                    new AdaptiveFact
+                    {
+                        Title = "Favorite color:",
+                        Value = $"{color}"
+                    }
+                }
+            });
+
+            return new Microsoft.Bot.Schema.Attachment()
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = card,
+            };
         }
     }
 }

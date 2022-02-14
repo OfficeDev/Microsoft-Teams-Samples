@@ -66,17 +66,8 @@ namespace AppCompleteAuth.Bots
         {
             if (turnContext.Activity.Text != null)
             {
-                var userCommand = turnContext.Activity.Text.ToLower().Trim();
-
-                if (userCommand == "sso" || userCommand == "logoutsso" || userCommand == "logoutfacebook" || userCommand == "facebooklogin" || userCommand == "usingcredentials")
-                {
-                    // Run the Dialog with the new message Activity.
-                    await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
-                }
-                else
-                {
-                    await turnContext.SendActivityAsync(MessageFactory.Attachment(GetLoginOptionCard()));
-                }
+                // Run the Dialog with the new message Activity.
+                await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
             }
 
             return;
@@ -93,13 +84,14 @@ namespace AppCompleteAuth.Bots
             var asJobject = JObject.FromObject(turnContext.Activity.Value);
             var state = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.State;
 
-            if (state == null || !state.Contains("userName"))
-            {
-                await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
-            }
-            else if (state.ToString() == "CancelledByUser")
+
+            if (state.ToString() == "CancelledByUser")
             {
                 await turnContext.SendActivityAsync("Sign in cancelled by user");
+            }
+            else if (state == null || !state.Contains("userName"))
+            {
+                await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
             }
             else
             {
@@ -109,7 +101,7 @@ namespace AppCompleteAuth.Bots
 
                 if (userName == Constant.UserName && password == Constant.Password)
                 {
-                    await turnContext.SendActivityAsync("Authentication Successful");
+                    await turnContext.SendActivityAsync(MessageFactory.Attachment(GetProfileCard()));
                 }
                 else
                 {
@@ -164,6 +156,8 @@ namespace AppCompleteAuth.Bots
 
                 var profile = await client.GetMeAsync();
                 var photo = await client.GetPhotoAsync();
+                var title = !string.IsNullOrEmpty(profile.JobTitle) ?
+                        profile.JobTitle : "Unknown";
 
                 return new MessagingExtensionActionResponse
                 {
@@ -171,7 +165,7 @@ namespace AppCompleteAuth.Bots
                     {
                         Value = new TaskModuleTaskInfo
                         {
-                            Card = GetProfileCard(profile, photo),
+                            Card = GetSSOProfileCard(profile, photo, title),
                             Height = 250,
                             Width = 400,
                             Title = "User information card",
@@ -179,6 +173,7 @@ namespace AppCompleteAuth.Bots
                     },
                 };
             }
+
             if ((!string.IsNullOrEmpty(action.State) && action.CommandId.ToLower() == "facebooklogin") || action.CommandId.ToLower() == "facebooklogin")
             {
                 var state = action.State; // Check the state value
@@ -296,14 +291,7 @@ namespace AppCompleteAuth.Bots
                             {
                                 Value = new TaskModuleTaskInfo
                                 {
-                                    Card = new Microsoft.Bot.Schema.Attachment
-                                    {
-                                        Content = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
-                                        {
-                                            Body = new List<AdaptiveElement>() { new AdaptiveTextBlock() { Text = "Authentication sucessful" } },                     
-                                        },
-                                        ContentType = AdaptiveCard.ContentType,
-                                    },
+                                    Card = GetProfileCard(),
                                     Height = 200,
                                     Width = 400,
                                     Title = "Using credentials",
@@ -363,24 +351,6 @@ namespace AppCompleteAuth.Bots
             }
         }
 
-        // Get login option card.
-        private static Microsoft.Bot.Schema.Attachment GetLoginOptionCard()
-        {
-            var heroCard = new HeroCard
-            {
-                Title = "Login options",
-                Text = "Select a login option",
-                Buttons = new List<CardAction>
-                {
-                    new CardAction(ActionTypes.MessageBack,title:"Using credentials", value: "usingcredentials", text:"usingcredentials", displayText:"Using credentials"),
-                    new CardAction(ActionTypes.MessageBack,title:"Facebook login", value: "facebooklogin", text:"facebooklogin", displayText:"Facebook login"),
-                    new CardAction(ActionTypes.MessageBack,title:"SSO authentication", value: "sso", text:"sso", displayText:"SSO authentication")
-                }
-            };
-
-            return heroCard.ToAttachment();
-        }
-
         // Get sign in link.
         private async Task<string> GetSignInLinkAsync(ITurnContext turnContext, string connectionName ,CancellationToken cancellationToken)
         {
@@ -391,21 +361,67 @@ namespace AppCompleteAuth.Bots
         }
 
         // Get user profile card.
-        private static Microsoft.Bot.Schema.Attachment GetProfileCard(User profile, string photo)
+        private static Microsoft.Bot.Schema.Attachment GetSSOProfileCard(User profile, string photo,string title)
         {
             var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
 
             card.Body.Add(new AdaptiveTextBlock()
             {
-                Text = $"Hello, {profile.DisplayName}",
-                Size = AdaptiveTextSize.ExtraLarge
+                Text = $"User Information",
+                Size = AdaptiveTextSize.Default
             });
 
-            card.Body.Add(new AdaptiveImage()
+            card.Body.Add(new AdaptiveColumnSet()
             {
-                Url = new Uri(photo)
+                Columns = new List<AdaptiveColumn>()
+                {
+                    new AdaptiveColumn()
+                    {
+                        Items = new List<AdaptiveElement>()
+                        {
+                            new AdaptiveImage()
+                            {
+                                Url = new Uri(photo),
+                                Size = AdaptiveImageSize.Medium,
+                                Style = AdaptiveImageStyle.Person
+                            }
+                        },
+                        Width ="auto"
+
+                    },
+                    new AdaptiveColumn()
+                    {
+                        Items = new List<AdaptiveElement>()
+                        {
+                            new AdaptiveTextBlock()
+                            {
+                                Text =  $"Hello! {profile.DisplayName}",
+                                Weight = AdaptiveTextWeight.Bolder,
+                                IsSubtle = true
+                            }
+                        },
+                        Width ="stretch"
+                    }
+                }
             });
 
+            card.Body.Add(new AdaptiveFactSet()
+            {
+                Separator = true,
+                Facts =
+                {
+                    new AdaptiveFact
+                    {
+                        Title = "Job title:",
+                        Value = $"{title}"
+                    },
+                    new AdaptiveFact
+                    {
+                        Title = "Email:",
+                        Value = $"{profile.UserPrincipalName}"
+                    },
+                }
+            });
             return new Microsoft.Bot.Schema.Attachment()
             {
                 ContentType = AdaptiveCard.ContentType,
@@ -420,13 +436,42 @@ namespace AppCompleteAuth.Bots
 
             card.Body.Add(new AdaptiveTextBlock()
             {
-                Text = $"Hello, {profile.Name}",
-                Size = AdaptiveTextSize.ExtraLarge
+                Text = $"User Information",
+                Size = AdaptiveTextSize.Default
             });
 
-            card.Body.Add(new AdaptiveImage()
+            card.Body.Add(new AdaptiveColumnSet()
             {
-                Url = new Uri(profile.ProfilePicture.data.url)
+                Columns = new List<AdaptiveColumn>()
+                {
+                    new AdaptiveColumn()
+                    {
+                        Items = new List<AdaptiveElement>()
+                        {
+                            new AdaptiveImage()
+                            {
+                                Url = new Uri(profile.ProfilePicture.data.url),
+                                Size = AdaptiveImageSize.Medium,
+                                Style = AdaptiveImageStyle.Person
+                            }
+                        },
+                        Width ="auto"
+
+                    },
+                    new AdaptiveColumn()
+                    {
+                        Items = new List<AdaptiveElement>()
+                        {
+                            new AdaptiveTextBlock()
+                            {
+                                Text =  $"Hello! {profile.Name}",
+                                Weight = AdaptiveTextWeight.Bolder,
+                                IsSubtle = true
+                            }
+                        },
+                        Width ="stretch"
+                    }
+                }
             });
 
             return new Microsoft.Bot.Schema.Attachment()
@@ -453,6 +498,75 @@ namespace AppCompleteAuth.Bots
             var tokenResponse = await userTokenClient.GetUserTokenAsync(turnContext.Activity.From.Id, connectionName, turnContext.Activity.ChannelId, magicCode, cancellationToken).ConfigureAwait(false);
             
             return tokenResponse;
+        }
+
+        // Get user profile card.
+        private Microsoft.Bot.Schema.Attachment GetProfileCard()
+        {
+            var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
+
+            card.Body.Add(new AdaptiveTextBlock()
+            {
+                Text = $"User Information",
+                Size = AdaptiveTextSize.Default
+            });
+
+            card.Body.Add(new AdaptiveColumnSet()
+            {
+                Columns = new List<AdaptiveColumn>()
+                {
+                    new AdaptiveColumn()
+                    {
+                        Items = new List<AdaptiveElement>()
+                        {
+                            new AdaptiveImage()
+                            {
+                                Url = new Uri("https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg"),
+                                Size = AdaptiveImageSize.Medium,
+                                Style = AdaptiveImageStyle.Person
+                            }
+                        },
+                        Width ="auto"
+
+                    },
+                    new AdaptiveColumn()
+                    {
+                        Items = new List<AdaptiveElement>()
+                        {
+                            new AdaptiveTextBlock()
+                            {
+                                Text =  "Hello! Test user",
+                                Weight = AdaptiveTextWeight.Bolder,
+                                IsSubtle = true
+                            }
+                        },
+                        Width ="stretch"
+                    }
+                }
+            });
+            card.Body.Add(new AdaptiveFactSet()
+            {
+                Separator = true,
+                Facts =
+                {
+                    new AdaptiveFact
+                    {
+                        Title = "Job title:",
+                        Value = "Data scientist"
+                    },
+                    new AdaptiveFact
+                    {
+                        Title = "Email:",
+                        Value = "testaccount@test123.onmicrosoft.com"
+                    }
+                }
+            });
+
+            return new Microsoft.Bot.Schema.Attachment()
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = card,
+            };
         }
     }
 }

@@ -19,6 +19,8 @@ using Microsoft.AspNetCore.Authentication.AzureAD.UI;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
 using Microsoft.Bot.Connector.Authentication;
+using System.Collections.Concurrent;
+using AppCompleteAuth.Models;
 
 namespace AppCompleteAuth
 {
@@ -52,7 +54,8 @@ namespace AppCompleteAuth
             services.AddMemoryCache();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddMvc().AddSessionStateTempDataProvider();
-
+            // Create a global hashset for our Roster and notes information
+            services.AddSingleton<ConcurrentDictionary<string, Token>>();
             services.AddHttpClient().AddControllers().AddNewtonsoftJson();
             services.AddRazorPages();
             services.AddHttpClient("WebClient", client => client.Timeout = TimeSpan.FromSeconds(600));
