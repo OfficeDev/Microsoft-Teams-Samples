@@ -4,9 +4,7 @@
 const { DialogBot } = require('./dialogBot');
 const { tokenExchangeOperationName } = require('botbuilder');
 const { SsoOAuthHelpler } = require('../SsoOAuthHelpler');
-const {
-    CardFactory,
-} = require('botbuilder');
+const { CardFactory} = require('botbuilder');
 const { SimpleGraphClient } = require('../simpleGraphClient.js');
 const axios = require('axios')
 
@@ -44,24 +42,20 @@ class TeamsBot extends DialogBot {
 
     async onSignInInvoke(context) {
         if(context.activity.value != null) {
-            var userDetails = JSON.parse(context.activity.value.state);
-            if(userDetails.userName == "test" && userDetails.password == "test") {
-                await context.sendActivity("Authentication successfull"); //CancelledByUser
+            if(context.activity.value.state =='CancelledByUser'){
+                await context.sendActivity("Sign in cancelled by user"); 
             }
-            else {
-                await context.sendActivity("Invalid credentials");
+            else{
+                var userDetails = JSON.parse(context.activity.value.state);
+                if(userDetails.userName == "testaccount@test123.onmicrosoft.com" && userDetails.password == "testpassword") {
+                    const userCard = CardFactory.adaptiveCard(this.getAdaptiveCardUserDetails());
+                    await context.sendActivity({ attachments: [userCard] }); //CancelledByUser
+                }
+                else {
+                    await context.sendActivity("Invalid credentials");
+                }
             }
         }
-        // if (context.activity && context.activity.name === tokenExchangeOperationName) {
-        //     // The Token Exchange Helper will attempt the exchange, and if successful, it will cache the result
-        //     // in TurnState.  This is then read by SsoOAuthPrompt, and processed accordingly.
-        //     if (!await this._ssoOAuthHelper.shouldProcessTokenExchange(context)) {
-        //         // If the token is not exchangeable, do not process this activity further.
-        //         // (The Token Exchange Helper will send the appropriate response if the token is not exchangeable)
-        //         return;
-        //     }
-        // }
-        // await this.dialog.run(context, this.dialogState);
     }
     
     async handleTeamsSigninVerifyState(context, query) {
@@ -123,12 +117,34 @@ class TeamsBot extends DialogBot {
                 type: 'AdaptiveCard',
                 body: [
                     {
-                        type: 'TextBlock',
-                        text: 'Hello: ' + profile.displayName,
+                        type: "TextBlock",
+                        size: "Medium",
+                        weight: "Bolder",
+                        text: "User profile details are"
                     },
                     {
-                        type: 'Image',
-                        url: img2,
+                        type: "Image",
+                        size: "Medium",
+                        url: img2
+                    },
+                    {
+                        type: "TextBlock",
+                        size: "Medium",
+                        weight: "Bolder",
+                        wrap: true,
+                        text: `Hello! ${profile.displayName}`
+                    },
+                    {
+                        type: "TextBlock",
+                        size: "Medium",
+                        weight: "Bolder",
+                        text: `Job title: ${profile.jobDetails ? profile.jobDetails : "Unknown"}`
+                    },
+                    {
+                        type: "TextBlock",
+                        size: "Medium",
+                        weight: "Bolder",
+                        text: `Email: ${profile.userPrincipalName}`
                     },
                 ],
             });
@@ -144,7 +160,7 @@ class TeamsBot extends DialogBot {
                 },
             };
         }
-        if (action.commandId === 'OtherIdentityProvider') {
+        if (action.commandId === 'FacebookLogin') {
             const magicCode =
                 action.state && Number.isInteger(Number(action.state))
                     ? action.state
@@ -182,21 +198,23 @@ class TeamsBot extends DialogBot {
                 };
             }
 
-            var fbprofile = await this.getFacebookUserData(tokenResponse.token);
+            var facbookProfile = await this.getFacebookUserData(tokenResponse.token);
             const profileCard = CardFactory.adaptiveCard({
                 version: '1.0.0',
                 type: 'AdaptiveCard',
                 body: [
                     {
-                        type: 'TextBlock',
-                        text: 'Hello: ' + fbprofile.first_name + '' + fbprofile.last_name ,
+                        type: "Image",
+                        size: "Medium",
+                        url: facbookProfile.picture.data.url
                     },
                     {
                         type: 'TextBlock',
-                        text: 'your email id is: ' + fbprofile.email,
+                        text: 'Hello: ' + facbookProfile.name,
                     },
                 ],
             });
+
             return {
                 task: {
                     type: 'continue',
@@ -281,16 +299,7 @@ class TeamsBot extends DialogBot {
             else{
                 var data = JSON.parse(action.state);
                 if(data.userName == "test" && data.password == "test") {
-                    const card = CardFactory.adaptiveCard({
-                        version: '1.0.0',
-                        type: 'AdaptiveCard',
-                        body: [
-                            {
-                                type: 'TextBlock',
-                                text: "Authentication successfull"
-                            },
-                        ]
-                    });
+                    const card = CardFactory.adaptiveCard(this.getAdaptiveCardUserDetails());
         
                     return {
                         task: {
@@ -299,7 +308,7 @@ class TeamsBot extends DialogBot {
                                 card: card,
                                 heigth: 200,
                                 width: 400,
-                                title: 'Adaptive Card: Inputs'
+                                title: 'Using credentials'
                             },
                         },
                     };
@@ -323,7 +332,7 @@ class TeamsBot extends DialogBot {
                                 card: card,
                                 heigth: 200,
                                 width: 400,
-                                title: 'Adaptive Card: Inputs'
+                                title: 'Using credentials'
                             },
                         },
                     };
@@ -335,16 +344,53 @@ class TeamsBot extends DialogBot {
 
     async getFacebookUserData(access_token) {
         const { data } = await axios({
-            url: 'https://graph.facebook.com/me',
+            url: 'https://graph.facebook.com/v2.6/me',
             method: 'get',
             params: {
-                fields: ['id', 'email', 'first_name', 'last_name'].join(','),
+                fields: ['name','picture'].join(','),
                 access_token: access_token,
             },
         });
-        console.log(data); // { id, email, first_name, last_name }
         return data;
     };
+
+    getAdaptiveCardUserDetails = () => ({
+        $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
+        body: [
+            {
+                type: "TextBlock",
+                size: "Medium",
+                weight: "Bolder",
+                text: "User profile details are"
+            },
+            {
+                type: "Image",
+                size: "Medium",
+                url: "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg"
+            },
+            {
+                type: "TextBlock",
+                size: "Medium",
+                weight: "Bolder",
+                wrap: true,
+                text: "Hello! Test user"
+            },
+            {
+                type: "TextBlock",
+                size: "Medium",
+                weight: "Bolder",
+                text: "Job title: Data scientist"
+            },
+            {
+                type: "TextBlock",
+                size: "Medium",
+                weight: "Bolder",
+                text: 'Email: testaccount@test123.onmicrosoft.com'
+            }
+        ],
+        type: 'AdaptiveCard',
+        version: '1.4'
+    });
 }
 
 module.exports.TeamsBot = TeamsBot;

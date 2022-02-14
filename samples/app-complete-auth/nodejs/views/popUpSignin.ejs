@@ -4,6 +4,7 @@
     <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
         integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
         crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -70,8 +71,16 @@
     </script>
 
     <style>
-        .close-button {
-            margin-left: 2rem;
+        .container {   
+            padding: 25px; 
+            border: 3px solid #f1f1f1;   
+        } 
+
+        button {
+            margin: 2rem 0rem 0rem 2rem;
+            width: auto;
+            padding: 7px 18px;
+            float: right;
         }
 
         #snackbar {
@@ -147,20 +156,15 @@
 </head>
 
 <body class="theme-light">
-    <div>
-        User Name : <input id="userName" type="text" />
-        <i class="far fa-question-circle" onClick="showHint()"></i>
-    </div>
-    <br />
-    <br />
-    <div>
-        Password : <input id="password" type="password" />
-    </div>
-    <br />
-    <br />
-    <input type="submit" class="submit-button" value="Submit" onClick="submit()">
-    <input type="submit" class="close-button" value="Close" onClick="closeWindow()">
+   <div class="container">
+    <label>Username : </label><i class="far fa-question-circle" onClick="showHint()"></i>
+    <input id="userName" value="testaccount@test123.onmicrosoft.com" type="text" required/>
+    <label>Password : </label>
+    <input id="password" value="testpassword" type="password" />
+    <button  class="close-button" onClick="closeWindow()"> Cancel </button>
+    <button onClick="submit()"> Login </button> 
     <div id="snackbar">For testing purpose only default id and password are supported</div>
+</div>
 
 </body>
 

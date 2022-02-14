@@ -36,8 +36,6 @@ const { CloudAdapter,
 const { TeamsBot } = require('./bots/teamsBot');
 const { MainDialog } = require('./dialogs/mainDialog');
 
-const { tokenData } = require('./dialogs/mainDialog');
-
 const credentialsFactory = new ConfigurationServiceClientCredentialFactory({
   MicrosoftAppId: process.env.MicrosoftAppId,
   MicrosoftAppPassword: process.env.MicrosoftAppPassword,

@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 const { TeamsActivityHandler } = require('botbuilder');
-const { TaskModuleResponseFactory } = require("../models/taskModuleResponseFactory");
 class DialogBot extends TeamsActivityHandler {
     /**
     *
@@ -33,38 +32,11 @@ class DialogBot extends TeamsActivityHandler {
 
         this.onMessage(async (context, next) => {
             console.log('Running dialog with Message Activity.');
-            var userInput = context.activity.text;
-
-            if (userInput.trim() == "sso" || userInput.trim() == "logout" || userInput.trim() == "otheridentityprovider" || userInput.trim() == "usingcredentials") {
                 // Run the Dialog with the new message Activity.
                 await this.dialog.run(context, this.dialogState);
-            }
-            else {
-                await context.sendActivity("Type 'sso' to begin authentication");
-            }
 
             await next();
         });
-    }
-
-    handleTeamsTaskModuleFetch(context, taskModuleRequest) {
-        const cardTaskFetchId = taskModuleRequest.data.id;
-        var taskInfo = {}; // TaskModuleTaskInfo
-
-        if (cardTaskFetchId == "upload") {
-            taskInfo.url = taskInfo.fallbackUrl = this.baseUrl + "/Upload";
-            taskInfo.height = 350;
-            taskInfo.width = 350;
-            taskInfo.title = "Upload file";
-        }
-
-        return TaskModuleResponseFactory.toTaskModuleResponse(taskInfo);
-    }
-
-    async handleTeamsTaskModuleSubmit(context, taskModuleRequest) {
-        await context.sendActivity("File uploaded successfully");
-
-        return null;
     }
 
     /**

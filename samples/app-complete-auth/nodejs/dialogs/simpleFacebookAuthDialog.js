@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 const { ConfirmPrompt, OAuthPrompt, WaterfallDialog } = require('botbuilder-dialogs');
+const { CardFactory} = require('botbuilder');
 
 const { LogoutDialog } = require('./logoutDialog');
 const axios = require('axios')
@@ -39,7 +40,22 @@ class SimpleFacebookAuthDialog extends LogoutDialog {
         const tokenResponse = stepContext.result;
         if (tokenResponse) {
             var facbookProfile = await this.getFacebookUserData(tokenResponse.token);
-            await stepContext.context.sendActivity('You are now logged in -' + facbookProfile.first_name);
+            const profileCard = CardFactory.adaptiveCard({
+                version: '1.0.0',
+                type: 'AdaptiveCard',
+                body: [
+                    {
+                        type: "Image",
+                        size: "Medium",
+                        url: facbookProfile.picture.data.url
+                    },
+                    {
+                        type: 'TextBlock',
+                        text: 'Hello: ' + facbookProfile.name,
+                    },
+                ],
+            });
+            await stepContext.context.sendActivity({attachments:[profileCard]});
             return await stepContext.endDialog();
         }
         await stepContext.context.sendActivity('Login was not successful please try again.');
@@ -49,14 +65,13 @@ class SimpleFacebookAuthDialog extends LogoutDialog {
     // Method to get facebook user data.
     async getFacebookUserData(access_token) {
         const { data } = await axios({
-            url: 'https://graph.facebook.com/me',
+            url: 'https://graph.facebook.com/v2.6/me',
             method: 'get',
             params: {
-                fields: ['id', 'email', 'first_name', 'last_name'].join(','),
+                fields: ['name','picture'].join(','),
                 access_token: access_token,
             },
         });
-        console.log(data); // { id, email, first_name, last_name }
         return data;
     };
 }
