@@ -1,0 +1,332 @@
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        let clientId =  <%-clientId%>
+        let accessToken;
+        let redirectUri = window.location.origin + "/fb-auth";
+
+        $(document).ready(function () {
+            $("#userInformation").hide();
+            $("#fbInformation").hide();
+            $("#userImg").hide();
+        });
+
+        microsoftTeams.initialize();
+        function ssoAuthentication() {
+            getClientSideToken()
+                .then((clientSideToken) => {
+                    return getServerSideToken(clientSideToken);
+                })
+                .catch((error) => {
+                    alert(error);
+                    if (error === "invalid_grant") {
+                        // Display in-line button so user can consent
+                        $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required. Click Authenticate button.");
+                        $("#divError").css("margin-left", "15rem");
+                        $("#sso").hide();
+                        $("#divError").show();
+                        $("#consent").show();
+
+                    } else {
+                        // Display in-line button so user can consent
+                        $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required. Click Authenticate button.");
+                        $("#divError").css("margin-left", "15rem");
+                        $("#sso").hide();
+                        $("#divError").show();
+                        $("#consent").show();
+                    }
+                });
+        }
+
+        function getClientSideToken() {
+            return new Promise((resolve, reject) => {
+                microsoftTeams.authentication.getAuthToken({
+                    successCallback: (result) => {
+                        console.log(result);
+                        resolve(result);
+                    },
+                    failureCallback: function (error) {
+                        reject("Error getting token: " + error);
+                    }
+                });
+            });
+        }
+
+        function getServerSideToken(clientSideToken) {
+            return new Promise((resolve, reject) => {
+                microsoftTeams.getContext((context) => {
+                    fetch('/getProfileOnBehalfOf', {
+                        method: 'post',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            'tid': context.tid,
+                            'token': clientSideToken
+                        }),
+                        mode: 'cors',
+                        cache: 'default'
+                    })
+                        .then((response) => {
+                            if (response.ok) {
+                                return response.json();
+                            } else {
+                                reject(response.error);
+                            }
+                        })
+                        .then((responseJson) => {
+                            if (responseJson.error) {
+                                reject(responseJson.error);
+                            } else {
+                                const userDetails = responseJson;
+                                $("#sso").hide();
+                                $("#userImgSso").attr("src", userDetails.image);
+                                $("#name").append(userDetails.details.displayName);
+                                $("#email").append(userDetails.details.userPrincipalName);
+                                $("#work").append(userDetails.details.jobTitle);
+                                $("#facebooklogin").show();
+                                $("#googlelogin").show();
+                            }
+                        });
+                });
+            });
+        }
+
+        // Request consent on implicit grant error.
+        function requestConsent() {
+            getToken()
+                .then(data => {
+                    $("#consent").hide();
+                    $("#divError").hide();
+                    accessToken = data.accessToken;
+                    microsoftTeams.getContext((context) => {
+                        getUserInfo(context.userPrincipalName);
+                    });
+                });
+        }
+
+        // Get token for multi tenant.
+        function getToken() {
+            return new Promise((resolve, reject) => {
+                microsoftTeams.authentication.authenticate({
+                    url: window.location.origin + "/auth-start",
+                    width: 600,
+                    height: 535,
+                    successCallback: result => {
+                        resolve(result);
+                    },
+                    failureCallback: reason => {
+                        reject(reason);
+                    }
+                });
+            });
+        }
+
+
+        // Get user information.
+        function getUserInfo(userPrincipleName) {
+            if (userPrincipleName) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/GetUserDetails',
+                    dataType: 'json',
+                    data: {
+                        'accessToken': accessToken,
+                    },
+                    success: function (responseJson) {
+                        const userDetails = JSON.parse(responseJson);
+                        $("#sso").hide();
+                        $("#userImgId").attr("src", userDetails.image);
+                        $("#name").append(userDetails.details.displayName);
+                        $("#email").append(userDetails.details.userPrincipalName);
+                        $("#work").append(userDetails.details.jobTitle);
+                        $("#facebooklogin").show();
+                        $("#googlelogin").show();
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    }
+                });
+            }
+        }
+
+        function getServerSideTokenFb(clientSideToken) {
+            return new Promise((resolve, reject) => {
+                microsoftTeams.getContext((context) => {
+                    fetch('/getFbAccessToken', {
+                        method: 'post',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            'token': clientSideToken
+                        }),
+                        mode: 'cors',
+                        cache: 'default'
+                    })
+                        .then((response) => {
+                            if (response.ok) {
+                                console.log(response);
+                                return response.json();
+                            } else {
+                                reject(response.error);
+                            }
+                        })
+                        .then((responseJson) => {
+                            if (responseJson.error) {
+                                reject(responseJson.error);
+                            } else {
+                                console.log(responseJson);
+                                let userFbDetails = responseJson;
+                                $("#fbname").append(userFbDetails.name);
+                                $("#userImgFb").attr("src", userFbDetails.picture.data.url);
+                            }
+                        });
+                });
+            });
+        }
+
+        function IsValidJSONString(str) {
+            try {
+                JSON.parse(str);
+            } catch (e) {
+                return false;
+            }
+            return true;
+        }
+
+        function usingCredentials() {
+            microsoftTeams.authentication.authenticate({
+                url: window.location.origin + "/popUpSignin?from=tab",
+                width: 600,
+                height: 535,
+                successCallback: result => {
+                    $("#sname").append("Test user");
+                    $("#semail").append("testuser@test.com");
+                    $("#swork").append("Data scientist");
+                    $("#userImgId").attr("src", "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg");
+                },
+                failureCallback: reason => {
+                    console.log(reason);
+                }
+            });
+        }
+
+        function fbAuthentication() {
+            return new Promise((resolve, reject) => {
+                microsoftTeams.authentication.authenticate({
+                    url: `https://www.facebook.com/v12.0/dialog/oauth?client_id=${clientId}&redirect_uri=${redirectUri}&state=1234535`,
+                    width: 600,
+                    height: 535,
+                    successCallback: result => {
+                        let data = localStorage.getItem(result);
+                        let tokenDetails = JSON.parse(data);
+                        localStorage.removeItem(result);
+                        resolve(tokenDetails);
+                    },
+                    failureCallback: reason => {
+                        reject(reason);
+                    }
+                });
+            });
+        }
+
+        function fbAuth() {
+            fbAuthentication()
+                .then((result) => {
+                    return getServerSideTokenFb(result.idToken);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+
+    </script>
+    <style>
+        h3 {
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        button {
+            margin-left: 36rem;
+            margin-top: 1rem;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            width: 30rem;
+            height: 11rem;
+            margin-left: 2rem;
+            margin-top: 0.5rem;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            padding: 2px 2px;
+            display: flex;
+        }
+
+        img {
+            height: 50%;
+        }
+
+        .profile {
+            margin-top: 1rem;
+            margin-left: 2rem;
+            max-width: 25rem;
+            align-content: flex-start;
+        }
+
+        .btn-outline-info {
+            margin-left: 12rem;
+            max-width: 10rem;
+        }
+
+        .signin-header {
+            margin-left: 2rem;
+            margin-top: 1rem;
+        }
+
+        .card-container-div {
+            display: flex;
+        }
+        .ssologin{
+            background-color: rgb(98 100 167) !important;
+            border-color: rgb(98 100 167) !important;
+            color: #fff;
+        }
+        #home{
+            text-align: center;
+        }
+        .ssologin:hover{
+            color: #fff;
+            border-color: rgb(98 100 167);
+        }
+    </style>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <h3> Welcome to App sample</h3>
+        <P id="home"> <img src="/Images/home.png"/></P>
+        <div>
+            <button type="button" class="btn btn-sm ssologin" onclick="requestConsent()" id="consent"
+            style="display:none;">Authenticate</button>
+            <button type="button" class="btn btn-sm ssologin" onclick="ssoAuthentication()" id="sso">Login with AAD SSO</button>
+        </div>
+        <div>
+            <button type="button" id="facebooklogin" class="btn btn-primary" onclick="fbAuth()" style="display:none;"><i class="fa fa-facebook" ></i> Continue with Facebook</button>
+            <button type="button" id="googlelogin" class="btn" style="display:none;"><i class="fa fa-google"></i> Continue with Google</button>
+        </div>
+    </div>
+</body>
