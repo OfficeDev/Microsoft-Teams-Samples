@@ -54,6 +54,8 @@ Messaging Extention Authentication
   
   ![ME using credentials](AppCompleteAuth/Images/MEUsingCredentials.png)
   
+  ![ME using credentials details](AppCompleteAuth/Images/MEUsingCredentialsDetails.png)
+  
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
