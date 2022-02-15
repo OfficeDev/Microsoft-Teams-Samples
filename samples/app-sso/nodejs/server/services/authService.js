@@ -1,38 +1,30 @@
 const querystring = require('querystring');
+const msal = require('@azure/msal-node');
 
 // Get Access Token
 const getAccessToken = async (req) => {
+    const { tenantId, token } = reqData(req);
+    const msalClient = new msal.ConfidentialClientApplication({
+        auth: {
+            clientId: process.env.MicrosoftAppId,
+            clientSecret: process.env.MicrosoftAppPassword
+        }
+    });
+
     return new Promise((resolve, reject) => {
-        const { tenantId, token } = reqData(req);
-        const scopes = ['User.Read', 'email', 'offline_access', 'openid', 'profile'];
-        const url = `https://login.microsoftonline.com/${ tenantId }/oauth2/v2.0/token`;
-        const params = {
-            client_id: process.env.MicrosoftAppId,
-            client_secret: process.env.MicrosoftAppPassword,
-            grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
-            assertion: token,
-            requested_token_use: 'on_behalf_of',
-            scope: scopes.join(' ')
-        };
-        // eslint-disable-next-line no-undef
-        fetch(url, {
-            method: 'POST',
-            body: querystring.stringify(params),
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }).then(result => {
-            if (result.status !== 200) {
-                result.json().then(json => {
-                    // eslint-disable-next-line prefer-promise-reject-errors
-                    reject({ error: json.error });
-                });
-            } else {
-                result.json().then(async json => {
-                    resolve(json.access_token);
-                });
-            }
+        const scopes = ["https://graph.microsoft.com/User.Read email offline_access openid profile"];
+        msalClient.acquireTokenOnBehalfOf({
+            authority: `https://login.microsoftonline.com/${tenantId}`,
+            oboAssertion: token,
+            scopes: scopes,
+            skipCache: true
+          })
+          .then(result => {
+            console.log(result.accessToken);
+            resolve(result.accessToken);
+          })
+          .catch(error => {
+            reject({ "error": error.errorCode });
         });
     });
 };
