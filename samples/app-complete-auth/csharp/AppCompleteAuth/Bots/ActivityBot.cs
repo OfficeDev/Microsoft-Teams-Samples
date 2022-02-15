@@ -412,12 +412,12 @@ namespace AppCompleteAuth.Bots
                 {
                     new AdaptiveFact
                     {
-                        Title = "Job title:",
+                        Title = "Job title :",
                         Value = $"{title}"
                     },
                     new AdaptiveFact
                     {
-                        Title = "Email:",
+                        Title = "Email :",
                         Value = $"{profile.UserPrincipalName}"
                     },
                 }
@@ -551,12 +551,12 @@ namespace AppCompleteAuth.Bots
                 {
                     new AdaptiveFact
                     {
-                        Title = "Job title:",
+                        Title = "Job title :",
                         Value = "Data scientist"
                     },
                     new AdaptiveFact
                     {
-                        Title = "Email:",
+                        Title = "Email :",
                         Value = "testaccount@test123.onmicrosoft.com"
                     }
                 }

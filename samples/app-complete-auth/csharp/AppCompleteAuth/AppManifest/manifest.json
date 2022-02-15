@@ -52,9 +52,31 @@
         {
           "id": "SSO",
           "type": "action",
-          "title": "SSO",
+          "title": "AAD SSO authentication",
           "description": "SSO authentication",
           "initialRun": false,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        },
+        {
+          "id": "FacebookLogin",
+          "description": "Sign in to facebook",
+          "title": "Facebook login (OAuth 2)",
+          "type": "action",
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        },
+        {
+          "id": "UserCredentials",
+          "description": "Sign in using user credentials",
+          "title": "User Id/password login",
+          "type": "action",
           "fetchTask": true,
           "context": [
             "commandBox",
@@ -77,28 +99,6 @@
           "id": "LogoutFacebook",
           "description": "Sign out from authenticated services.",
           "title": "Log out facebook",
-          "type": "action",
-          "fetchTask": true,
-          "context": [
-            "commandBox",
-            "compose"
-          ]
-        },
-        {
-          "id": "UserCredentials",
-          "description": "Sign in using user credentials",
-          "title": "Using credentials",
-          "type": "action",
-          "fetchTask": true,
-          "context": [
-            "commandBox",
-            "compose"
-          ]
-        },
-        {
-          "id": "FacebookLogin",
-          "description": "Sign in to facebook",
-          "title": "Facebook sign in",
           "type": "action",
           "fetchTask": true,
           "context": [

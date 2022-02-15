@@ -4,6 +4,7 @@
 }
 
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
             integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
             crossorigin="anonymous"></script>
@@ -30,11 +31,13 @@
                     $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
                     $("#divError").show();
                     $("#consent").show();
+                    $("#sso").hide();
                 } else {
                     // Display in-line button so user can consent
                     $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
                     $("#divError").show();
                     $("#consent").show();
+                    $("#sso").hide();
                 }
             });
         }
@@ -78,13 +81,14 @@
                         if(responseJson == ""){
                             $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
                             $("#divError").show();
-                            $("#consent").show()
+                            $("#consent").show();
+                            $("#sso").hide();
                         }else{
                             userDetails = JSON.parse(responseJson);
                              $("#userImgSso").attr("src", userDetails.Photo);
-                             $("#name").append(":" + userDetails.User.DisplayName);
-                             $("#email").append(":" + userDetails.User.UserPrincipalName);
-                             $("#work").append(":" + userDetails.Title);
+                             $("#name").append(": " + userDetails.User.DisplayName);
+                             $("#email").append(": " + userDetails.User.UserPrincipalName);
+                             $("#work").append(": " + userDetails.Title);
                         }
                     });
                 });
@@ -151,10 +155,11 @@
                     },
                 success: function (responseJson) {
                     userDetails = JSON.parse(responseJson);
+                        $("#sso").show();
                         $("#userImgSso").attr("src", userDetails.Photo);
-                        $("#name").append(":" + userDetails.User.DisplayName);
-                        $("#email").append(":" + userDetails.User.UserPrincipalName);
-                        $("#work").append(":" + userDetails.Title);
+                        $("#name").append(": " + userDetails.User.DisplayName);
+                        $("#email").append(": " + userDetails.User.UserPrincipalName);
+                        $("#work").append(": " + userDetails.Title);
                     },
                 error: function (xhr, textStatus, errorThrown) {
                          console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
@@ -197,7 +202,7 @@
                             },
                         success: function (responseJson) {
                              facebookProfile = JSON.parse(responseJson);
-                             $("#fbname").append(":" + facebookProfile.name);
+                             $("#fbname").append(": " + facebookProfile.name);
                              $("#userFbImg").attr("src", facebookProfile.picture);
                             },
                         error: function (xhr, textStatus, errorThrown) {

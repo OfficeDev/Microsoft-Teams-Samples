@@ -140,17 +140,17 @@ namespace AppCompleteAuth.Dialogs
                 {
                     new AdaptiveFact
                     {
-                        Title = "Job title:",
+                        Title = "Job title :",
                         Value = $"{title}"
                     },
                     new AdaptiveFact
                     {
-                        Title = "Email:",
+                        Title = "Email :",
                         Value = $"{profile.UserPrincipalName}"
                     },
                     new AdaptiveFact
                     {
-                        Title = "Favorite color:",
+                        Title = "Favorite color :",
                         Value = $"{color}"
                     }
                 }
