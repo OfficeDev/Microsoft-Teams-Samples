@@ -218,7 +218,7 @@ server.post('/tabCredentialsAuth', function (req, res) {
 server.post('/getFbAccessToken', function (req, res) {
   var token = req.body.token;
   var accessToken;
-  var scopes = ['id', 'email', 'name', 'hometown', 'gender', 'birthday'].join(',');
+  var scopes = ['name','picture'].join(',');
 
   var fbPromise = new Promise((resolve, reject) => {
     axios.get('https://graph.facebook.com/v12.0/oauth/access_token', {
@@ -231,7 +231,7 @@ server.post('/getFbAccessToken', function (req, res) {
     }).then(response => {
       console.log(response);
       accessToken = response.data.access_token;
-      axios.get('https://graph.facebook.com/me', {
+      axios.get('https://graph.facebook.com/v2.6/me', {
         params: {
           fields: scopes,
           access_token: accessToken,
