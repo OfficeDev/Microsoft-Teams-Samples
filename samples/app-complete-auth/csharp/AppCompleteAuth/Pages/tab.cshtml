@@ -14,14 +14,6 @@
         let redirectUri = window.location.origin + "/facebook-auth-end";
         let accessToken;
 
-         $(document).ready(function () {
-            $("#userInformation").hide();
-            $("#userImg").hide();
-            $("#usingCredentials").hide();
-            $("#facebookAuth").hide();
-            $("#fbImg").hide();
-         });
-
         microsoftTeams.initialize();
 
         // Tab sso authentication.
@@ -89,12 +81,10 @@
                             $("#consent").show()
                         }else{
                             userDetails = JSON.parse(responseJson);
-                            $("#userInfo").text(`You're logged in as ${userDetails.User.DisplayName} (${userDetails.User.UserPrincipalName}); you job title is: ${userDetails.Title}; your photo is: `);
-                            $("#userImg").attr("src", userDetails.Photo);
-                            $("#userInformation").show();
-                            $("#userImg").show();
-                            $("#usingCredentials").hide();
-                            $("#facebookAuth").hide();
+                             $("#userImgSso").attr("src", userDetails.Photo);
+                             $("#name").append(":" + userDetails.User.DisplayName);
+                             $("#email").append(":" + userDetails.User.UserPrincipalName);
+                             $("#work").append(":" + userDetails.Title);
                         }
                     });
                 });
@@ -138,11 +128,10 @@
                 width: 600,
                 height: 535,
                 successCallback: result => {
-                    $("#usingCredentials").text(result);
-                    $("#usingCredentials").show();
-                    $("#userInformation").hide();
-                    $("#userImg").hide();
-                    $("#facebookAuth").hide();
+                    $("#sname").append(": Test user");
+                    $("#semail").append(": testaccount@test123.onmicrosoft.com");
+                    $("#swork").append(": Data scientist");
+                    $("#userImgId").attr("src", "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg");
                 },
                 failureCallback: reason => {
                     console.log(reason);
@@ -162,11 +151,10 @@
                     },
                 success: function (responseJson) {
                     userDetails = JSON.parse(responseJson);
-                    $("#userInfo").text(`You're logged in as ${userDetails.User.DisplayName} (${userDetails.User.UserPrincipalName}); you job title is: ${userDetails.Title}; `);
-                    $("#userImg").attr("src", userDetails.Photo);
-                    $("#userInformation").show();
-                    $("#userImg").show();
-                    $("#usingCredentials").hide();
+                        $("#userImgSso").attr("src", userDetails.Photo);
+                        $("#name").append(":" + userDetails.User.DisplayName);
+                        $("#email").append(":" + userDetails.User.UserPrincipalName);
+                        $("#work").append(":" + userDetails.Title);
                     },
                 error: function (xhr, textStatus, errorThrown) {
                          console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
@@ -209,13 +197,8 @@
                             },
                         success: function (responseJson) {
                              facebookProfile = JSON.parse(responseJson);
-                             console.log(facebookProfile);
-                             $("#facebookAuth").text("Name:" + facebookProfile.name);
-                             $("#fbImg").attr("src", facebookProfile.picture);
-                             $("#facebookAuth").show();
-                             $("#userInformation").hide();
-                             $("#usingCredentials").hide();
-                             $("#fbImg").show();
+                             $("#fbname").append(":" + facebookProfile.name);
+                             $("#userFbImg").attr("src", facebookProfile.picture);
                             },
                         error: function (xhr, textStatus, errorThrown) {
                                  console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
@@ -240,45 +223,111 @@
     <style>
         h3 {
             text-align: center;
+            margin-top: 0.5rem;
         }
-        .container {
-            text-align: center;
-        }
+
         button {
             margin-left: 36rem;
             margin-top: 1rem;
         }
-        #usingCredentials{
-            text-align: center;
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            width: 25rem;
+            height: 11rem;
+            margin-left: 2rem;
+            margin-top: 0.5rem;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            padding: 2px 2px;
+            display: flex;
+        }
+
+        img {
+            border-radius: 50%;
+        }
+
+        .profile {
+            margin-top: 1rem;
+            margin-left: 2rem;
+            max-width: 15rem;
+            align-content: flex-start;
+        }
+
+        .btn-outline-info {
+            margin-left: 12rem;
+            max-width: 10rem;
+        }
+
+        .signin-header {
+            margin-left: 2rem;
+            margin-top: 1rem;
+        }
+
+        .card-container-div {
+            display: flex;
         }
     </style>
 
 </head>
 <body class="theme-light">
-        <div class="surface">
+    <div class="surface">
         <h3> Welcome to App complete auth sample</h3>
-        <div class="container">Select a method to sign in</div>
-        <button onclick="usingCredentials()">Using Credentials</button>
-        <br/>
-        <button onclick="facebookLogin()" > Facebook login</button>
-        <br />
-        <button onclick="ssoAuthentication()">SSO</button>
-        <button onclick="requestConsent()" id="consent" style="display:none;">Authenticate</button>
-        <div id="divError" style="display: none"></div>
-         <div id="userInformation">
-            User Information:
-            <br />
-            <div id = "userInfo">
-                <br />
-             </div>
-             <img id="userImg" width="200" height="200" />
+         <div class="card-container-div">
+            <div>
+                <div class="signin-header"><b>1) Sign in using SSO</b></div>
+                <div class="card">
+                    <div class="container">
+                        <img src="https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744034?k=20&m=1016744034&s=612x612&w=0&h=kjCAwH5GOC3n3YRTHBaLDsLIuF8P3kkAJc9RvfiYWBY="
+                            alt="Avatar" id="userImgSso" width="100px">
+                        <div class="profile">
+                            <span id="name"><b>Name </b></span><br>
+                            <span id="email"><b>Email </b></span></span><br>
+                            <span id="work"><b>Work </b></span></span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-outline-info" onclick="requestConsent()" id="consent"
+                        style="display:none;">Authenticate</button>
+                    <button type="button" class="btn btn-outline-info" onclick="ssoAuthentication()" id="sso">Get
+                        Details</button>
+                </div>
+                <div id="divError" style="display: none"></div>
+            </div>
+            <div>
+                <div class="signin-header"><b>2) Sign in using Facebook</b></div>
+                <div id="divError" style="display: none"></div>
+                <div class="card">
+                    <div class="container">
+                        <img src="https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744034?k=20&m=1016744034&s=612x612&w=0&h=kjCAwH5GOC3n3YRTHBaLDsLIuF8P3kkAJc9RvfiYWBY="
+                            alt="Avatar" id="userFbImg" width="100px">
+                        <div class="profile">
+                            <span id="fbname"><b>Name</b></span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-outline-info" onclick="facebookLogin()">Get Details</button>
+                </div>
+            </div>
+            <div>
+                <div class="signin-header"><b>3) Sign in using id/password</b></div>
+                <div id="divError" style="display: none"></div>
+                <div class="card">
+                    <div class="container">
+                        <img src="https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744034?k=20&m=1016744034&s=612x612&w=0&h=kjCAwH5GOC3n3YRTHBaLDsLIuF8P3kkAJc9RvfiYWBY="
+                           id="userImgId" alt="Avatar" width="100px">
+                        <div class="profile">
+                            <span id="sname"><b>Name </b></span><br>
+                            <span id="semail"><b>Email </b></span><br>
+                            <span id="swork"><b>Work </b></span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-outline-info" onclick="usingCredentials()">Get Details</button>
+                </div>
+            </div>
         </div>
-        <div id="usingCredentials">
-        </div>
-        <div id="facebookAuth">
-        </div>
-        <br />
-        <img id="fbImg" width="200" height="200" />
     </div>
-   
 </body>
