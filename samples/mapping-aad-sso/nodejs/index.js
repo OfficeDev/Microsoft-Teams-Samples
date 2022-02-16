@@ -10,6 +10,7 @@ const cors = require('cors');
 const { SimpleGraphClient } = require('./simpleGraphClient');
 const msal = require('@azure/msal-node');
 const axios = require('axios')
+const userDetails = {};
 
 // Read botFilePath and botFileSecret from .env file.
 const ENV_FILE = path.join(__dirname, '.env');
@@ -89,8 +90,11 @@ server.listen(PORT, () => {
 
 // Endpoint to fetch Auth tab page.
 server.get('/tab', (req, res, next) => {
-  var clientId = process.env.FaceBookAppId;
-  res.render('./views/tab', { clientId: clientId })
+  var clientId = {
+    clientIdFb: process.env.FaceBookAppId,
+    clientIdGoogle: process.env.GoogleAppId
+  };
+  res.render('./views/tab', { clientId: JSON.stringify(clientId) })
 });
 
 // Endpoint to fetch Signin popup page.
@@ -115,6 +119,11 @@ server.get('/fb-auth', function (req, res) {
   res.render('./views/fb-auth');
 });
 
+// Endpoint to google auth redirect page.
+server.get('/google-auth', function (req, res) {
+  res.render('./views/google-auth');
+});
+
 // Listen for incoming requests.
 server.post('/api/messages', async (req, res) => {
   // Route received a request to adapter for processing
@@ -125,6 +134,7 @@ server.post('/api/messages', async (req, res) => {
 server.post('/getProfileOnBehalfOf', function (req, res) {
   var tid = req.body.tid;
   var token = req.body.token;
+  var userName = req.body.userName;
   var scopes = ["https://graph.microsoft.com/User.Read"];
 
   // Creating MSAL client
@@ -146,13 +156,31 @@ server.post('/getProfileOnBehalfOf', function (req, res) {
       const myDetails = await client.getMeAsync();
       var userImage = await client.getUserPhoto()
       await userImage.arrayBuffer().then(result => {
-        console.log(userImage.type);
         imageString = Buffer.from(result).toString('base64');
         img2 = "data:image/png;base64," + imageString;
         var userData = {
           details: myDetails,
           image: img2
         }
+
+        var currentData = userDetails["userDetails"];
+        if(currentData == undefined){
+          const userDetailsList = new Array();
+          userDetailsList.push({"aad_id":userName,"is_aad_signed_in":true});
+          currentData = userDetailsList;
+          userDetails["userDetails"] = currentData;
+        }
+        else if (!currentData.find((user) => {
+              if(user.aad_id == userName){
+                return true;
+              }
+            }))
+          {
+            const userDetailsList = new Array();
+            userDetailsList.push({"aad_id":userName,"is_aad_signed_in":true});
+            currentData = userDetailsList;
+            userDetails["userDetails"] = currentData;
+          }
         resolve(userData);
       })
     }).catch(error => {
@@ -168,9 +196,26 @@ server.post('/getProfileOnBehalfOf', function (req, res) {
   });
 });
 
+server.post('/getUserInfo',(req,res) =>{
+  var userName = req.body.userName;
+  var userData;
+  var currentData = userDetails["userDetails"];
+  if(currentData == undefined || !currentData.find((user) => {
+    if(user.aad_id == userName){
+        userData = user;
+      return true;
+    }
+  })){
+    res.json("NoDataFound");
+  }
+  else{
+    res.json(userData);
+  }
+})
 // Listen for incoming requests.
 server.post('/GetUserDetails', async (req, res) => {
   var accessToken = req.body.accessToken;
+  var userName = req.body.userName;
   const client = new SimpleGraphClient(accessToken);
   const myDetails = await client.getMeAsync();
   var userImage = await client.getUserPhoto()
@@ -182,6 +227,24 @@ server.post('/GetUserDetails', async (req, res) => {
       details: myDetails,
       image: img2
     }
+    var currentData = userDetails["userDetails"];
+        if(currentData == undefined){
+          const userDetailsList = new Array();
+          userDetailsList.push({"aad_id":userName,"is_aad_signed_in":true});
+          currentData = userDetailsList;
+          userDetails["userDetails"] = currentData;
+        }
+        else if (!currentData.find((user) => {
+              if(user.aad_id == userName){
+                return true;
+              }
+            }))
+          {
+            const userDetailsList = new Array();
+            userDetailsList.push({"aad_id":userName,"is_aad_signed_in":true});
+            currentData = userDetailsList;
+            userDetails["userDetails"] = currentData;
+          }
     var responseMessage = Promise.resolve(userData);
     responseMessage.then(function (result) {
       res.json(result);
@@ -217,8 +280,9 @@ server.post('/tabCredentialsAuth', function (req, res) {
 // Facebook Oauth token axchange
 server.post('/getFbAccessToken', function (req, res) {
   var token = req.body.token;
+  var userName = req.body.userName;
   var accessToken;
-  var scopes = ['name','picture'].join(',');
+  var scopes = ['name','picture','id'].join(',');
 
   var fbPromise = new Promise((resolve, reject) => {
     axios.get('https://graph.facebook.com/v12.0/oauth/access_token', {
@@ -237,7 +301,20 @@ server.post('/getFbAccessToken', function (req, res) {
           access_token: accessToken,
         }
       }).then(profile => {
-        console.log(profile);
+        var userData;
+        var currentData = userDetails["userDetails"];
+        let updateindex;
+        currentData.map((user, index) => {
+          if (user.aad_id == userName) {
+            updateindex = index;
+            userData = user;
+            userData['facebook_id'] = profile.data.id;
+            userData['facebook_token'] = accessToken;
+            userData['is_fb_signed_in'] = true;
+          }
+        })
+        currentData[updateindex] = userData;
+        userDetails["userDetails"]=currentData;
         resolve(profile.data);
       })
     }).catch(error => {
@@ -246,6 +323,55 @@ server.post('/getFbAccessToken', function (req, res) {
   });
 
   fbPromise.then(function (result) {
+    res.json(result);
+    console.log(result);
+  }, function (err) {
+    console.log(err); // Error: "It broke"
+    res.json(err);
+  });
+});
+
+server.post('/getGoogleAccessToken', function (req, res) {
+  var token = req.body.token;
+  var userName = req.body.userName;
+  var accessToken;
+  var googlePromise = new Promise((resolve, reject) => {
+    axios.post('https://oauth2.googleapis.com/token', {
+        client_id: process.env.GoogleAppId,
+        redirect_uri: process.env.ApplicationBaseUrl + '/google-auth',
+        client_secret: process.env.GoogleAppPassword,
+        code: token,
+        grant_type:"authorization_code"
+    }).then(response => {
+      console.log(response);
+      accessToken = response.data.access_token;
+      axios.get('https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,photos,urls', {
+        headers: {
+          "Authorization": `Bearer ${accessToken}`,
+        }
+      }).then(profile => {
+        var userData;
+        var currentData = userDetails["userDetails"];
+        let updateindex;
+        currentData.map((user, index) => {
+          if (user.aad_id == userName) {
+            updateindex = index;
+            userData = user;
+            userData["google_id"] = profile.data.emailAddresses[0].value;
+            userData["google_token"] = accessToken;
+            userData["is_google_signed_in"] = true;
+          }
+        })
+        currentData[updateindex] = userData;
+        userDetails["userDetails"]=currentData;
+        resolve(profile.data);
+      })
+    }).catch(error => {
+      reject({ "error": error.errorCode });
+    });
+  });
+
+  googlePromise.then(function (result) {
     res.json(result);
     console.log(result);
   }, function (err) {
