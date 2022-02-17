@@ -25,7 +25,7 @@ namespace AppCompleteAuth.Dialogs
             _applicationBaseUrl = configuration["ApplicationBaseUrl"] ?? throw new NullReferenceException("ApplicationBaseUrl");
 
             AddDialog(new TextPrompt(nameof(TextPrompt)));
-            AddDialog(new FacebookAuthDialog(configuration["FacebookConnectionName"]));
+            AddDialog(new FacebookAuthDialog(configuration["FacebookConnectionName"], _Token));
             AddDialog(new BotSsoAuthDialog(configuration["ConnectionName"], _Token));
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {

@@ -1,9 +1,11 @@
 ﻿using AdaptiveCards;
 using AppCompleteAuth.helper;
+using AppCompleteAuth.Models;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,8 +14,10 @@ namespace AppCompleteAuth.Dialogs
 {
     public class FacebookAuthDialog : LogoutDialog
     {
-        public FacebookAuthDialog(string configuration) : base(nameof(FacebookAuthDialog), configuration)
+        private readonly ConcurrentDictionary<string, Token> _Token;
+        public FacebookAuthDialog(string configuration, ConcurrentDictionary<string, Token> token) : base(nameof(FacebookAuthDialog), configuration)
         {
+            _Token = token;
             AddDialog(new OAuthPrompt(
                 nameof(OAuthPrompt),
                 new OAuthPromptSettings
@@ -24,12 +28,13 @@ namespace AppCompleteAuth.Dialogs
                     Timeout = 300000, // User has 5 minutes to login (1000 * 60 * 5)
                 }));
 
-            AddDialog(new ConfirmPrompt(nameof(ConfirmPrompt)));
+            AddDialog(new TextPrompt(nameof(TextPrompt)));
 
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
                 PromptStepAsync,
-                LoginStepAsync
+                LoginStepAsync,
+                UserInfoCardAsync
             }));
 
             InitialDialogId = nameof(WaterfallDialog);
@@ -47,12 +52,20 @@ namespace AppCompleteAuth.Dialogs
             var tokenResponse = (TokenResponse)stepContext.Result;
             if (tokenResponse?.Token != null)
             {
-                // Getting basic facebook profile details.
-                FacebookProfile profile = await FacebookHelper.GetFacebookProfileName(tokenResponse.Token);
+                Token token = new Token
+                {
+                    AccessToken = tokenResponse.Token
+                };
 
-                await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetProfileCard(profile)));
-
-                return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
+                _Token.AddOrUpdate("facebookToken", token, (key, newValue) => token);
+                return await stepContext.PromptAsync(
+                nameof(TextPrompt),
+                new PromptOptions
+                {
+                    Prompt = MessageFactory.Text("What is your favorite color?"),
+                },
+                cancellationToken);
+                
             }
 
             await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login was not successful please try again."), cancellationToken);
@@ -60,8 +73,22 @@ namespace AppCompleteAuth.Dialogs
             return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
         }
 
+        private async Task<DialogTurnResult> UserInfoCardAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        {
+            var color = stepContext.Result as string;
+            // Pull in the data from the Microsoft Graph.
+            var token = new Token();
+            _Token.TryGetValue("facebookToken", out token);
+            // Getting basic facebook profile details.
+            FacebookProfile profile = await FacebookHelper.GetFacebookProfileName(token.AccessToken);
+
+            await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetProfileCard(profile,color)));
+
+            return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
+        }
+
         // Create facebook profile card.
-        private Attachment GetProfileCard(FacebookProfile profile)
+        private Attachment GetProfileCard(FacebookProfile profile, string color)
         {
             var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
 
@@ -96,6 +123,12 @@ namespace AppCompleteAuth.Dialogs
                             new AdaptiveTextBlock()
                             {
                                 Text =  $"Hello! {profile.Name}",
+                                Weight = AdaptiveTextWeight.Bolder,
+                                IsSubtle = true
+                            },
+                            new AdaptiveTextBlock()
+                            {
+                                Text =  $"Favorite color: {color}",
                                 Weight = AdaptiveTextWeight.Bolder,
                                 IsSubtle = true
                             }
