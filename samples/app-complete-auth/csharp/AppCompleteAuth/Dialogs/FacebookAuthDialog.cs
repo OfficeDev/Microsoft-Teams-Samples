@@ -58,11 +58,12 @@ namespace AppCompleteAuth.Dialogs
                 };
 
                 _Token.AddOrUpdate("facebookToken", token, (key, newValue) => token);
+                await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login successful"), cancellationToken);
                 return await stepContext.PromptAsync(
                 nameof(TextPrompt),
                 new PromptOptions
                 {
-                    Prompt = MessageFactory.Text("What is your favorite color?"),
+                    Prompt = MessageFactory.Text("What is your user name?"),
                 },
                 cancellationToken);
                 
@@ -75,20 +76,20 @@ namespace AppCompleteAuth.Dialogs
 
         private async Task<DialogTurnResult> UserInfoCardAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            var color = stepContext.Result as string;
+            var userName = stepContext.Result as string;
             // Pull in the data from the Microsoft Graph.
             var token = new Token();
             _Token.TryGetValue("facebookToken", out token);
             // Getting basic facebook profile details.
             FacebookProfile profile = await FacebookHelper.GetFacebookProfileName(token.AccessToken);
 
-            await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetProfileCard(profile,color)));
+            await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetProfileCard(profile, userName)));
 
             return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
         }
 
         // Create facebook profile card.
-        private Attachment GetProfileCard(FacebookProfile profile, string color)
+        private Attachment GetProfileCard(FacebookProfile profile, string userName)
         {
             var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
 
@@ -128,7 +129,7 @@ namespace AppCompleteAuth.Dialogs
                             },
                             new AdaptiveTextBlock()
                             {
-                                Text =  $"Favorite color: {color}",
+                                Text =  $"User name : {userName}",
                                 Weight = AdaptiveTextWeight.Bolder,
                                 IsSubtle = true
                             }

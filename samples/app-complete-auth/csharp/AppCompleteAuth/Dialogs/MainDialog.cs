@@ -27,6 +27,7 @@ namespace AppCompleteAuth.Dialogs
             AddDialog(new TextPrompt(nameof(TextPrompt)));
             AddDialog(new FacebookAuthDialog(configuration["FacebookConnectionName"], _Token));
             AddDialog(new BotSsoAuthDialog(configuration["ConnectionName"], _Token));
+            AddDialog(new UsernamePasswordAuthDialog(configuration["ApplicationBaseUrl"]));
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
                 PromptStepAsync
@@ -39,15 +40,13 @@ namespace AppCompleteAuth.Dialogs
         // Method to invoke auth flow.
         private async Task<DialogTurnResult> PromptStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
+            if(stepContext.Context.Activity.Text == null || stepContext.Context.Activity.Text.ToLower().Trim() == "usingcredentials")
+            {
+                return await stepContext.BeginDialogAsync(nameof(UsernamePasswordAuthDialog));
+            }
             if (stepContext.Context.Activity.Text.ToLower().Trim() == "sso" || stepContext.Context.Activity.Text.ToLower().Trim() == "logoutsso")
             {
                 return await stepContext.BeginDialogAsync(nameof(BotSsoAuthDialog));
-            }
-            else if (stepContext.Context.Activity.Text.ToLower().Trim() == "usingcredentials")
-            {
-                await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetPopUpSignInCard()), cancellationToken);
-                    
-                return await stepContext.EndDialogAsync();
             }
             else if (stepContext.Context.Activity.Text.ToLower().Trim() == "facebooklogin" || stepContext.Context.Activity.Text.ToLower().Trim() == "logoutfacebook")
             {

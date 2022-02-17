@@ -65,7 +65,7 @@ namespace AppCompleteAuth.Dialogs
                 nameof(TextPrompt),
                 new PromptOptions
                 {
-                    Prompt = MessageFactory.Text("What is your favorite color?"),
+                    Prompt = MessageFactory.Text("What is your user name?"),
                 },
                 cancellationToken);
             }
@@ -75,7 +75,7 @@ namespace AppCompleteAuth.Dialogs
 
         private async Task<DialogTurnResult> UserInfoCardAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            var color = stepContext.Result as string;
+            var userName = stepContext.Result as string;
             // Pull in the data from the Microsoft Graph.
             var token = new Token();
             _Token.TryGetValue("token", out token);
@@ -84,13 +84,13 @@ namespace AppCompleteAuth.Dialogs
             var title = !string.IsNullOrEmpty(me.JobTitle) ?
                         me.JobTitle : "Unknown";
             var photo = await client.GetPhotoAsync();
-            var reply = MessageFactory.Attachment(GetProfileCard(me, photo, title, color));
+            var reply = MessageFactory.Attachment(GetProfileCard(me, photo, title, userName));
             await stepContext.Context.SendActivityAsync(reply, cancellationToken);
             return await stepContext.EndDialogAsync();
         }
 
         // Get user profile card.
-        private Microsoft.Bot.Schema.Attachment GetProfileCard(User profile, string photo, string title, string color)
+        private Microsoft.Bot.Schema.Attachment GetProfileCard(User profile, string photo, string title, string userName)
         {
             var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
 
@@ -150,8 +150,8 @@ namespace AppCompleteAuth.Dialogs
                     },
                     new AdaptiveFact
                     {
-                        Title = "Favorite color :",
-                        Value = $"{color}"
+                        Title = "User name :",
+                        Value = $"{userName}"
                     }
                 }
             });

@@ -30,6 +30,8 @@ Bot Authentication
   
   ![using credentials](AppCompleteAuth/Images/BotUsingCredentials.png)
   
+  ![using credentials details](AppCompleteAuth/Images/BotUsingCredentialsDetails.png)
+  
 Tab Authentication
 
 ![Tab](AppCompleteAuth/Images/Tab.png)
@@ -164,6 +166,7 @@ Messaging Extention Authentication
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
+- Note: To test facebook auth flow please setup the sample locally as due to limitations from facebook you cannot test the facebook auth flow in the deployed version of app.
 
 ## Deploy the bot to Azure
 

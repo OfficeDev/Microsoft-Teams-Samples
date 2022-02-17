@@ -89,24 +89,9 @@ namespace AppCompleteAuth.Bots
             {
                 await turnContext.SendActivityAsync("Sign in cancelled by user");
             }
-            else if (state == null || !state.Contains("userName"))
-            {
-                await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
-            }
             else
             {
-                var cred = JObject.Parse(state);
-                var userName = (string)cred.ToObject<CardTaskFetchValue<string>>()?.UserName;
-                var password = (string)cred.ToObject<CardTaskFetchValue<string>>()?.Password;
-
-                if (userName == Constant.UserName && password == Constant.Password)
-                {
-                    await turnContext.SendActivityAsync(MessageFactory.Attachment(GetProfileCard()));
-                }
-                else
-                {
-                    await turnContext.SendActivityAsync("Invalid username or password");
-                }
+                await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
             }
         }
 
@@ -521,13 +506,12 @@ namespace AppCompleteAuth.Bots
                         {
                             new AdaptiveImage()
                             {
-                                Url = new Uri("https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg"),
+                                Url = new Uri("https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744034?k=20&m=1016744034&s=612x612&w=0&h=kjCAwH5GOC3n3YRTHBaLDsLIuF8P3kkAJc9RvfiYWBY="),
                                 Size = AdaptiveImageSize.Medium,
                                 Style = AdaptiveImageStyle.Person
                             }
                         },
                         Width ="auto"
-
                     },
                     new AdaptiveColumn()
                     {
