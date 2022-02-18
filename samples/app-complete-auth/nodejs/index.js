@@ -197,7 +197,7 @@ server.post('/tabCredentialsAuth', function (req, res) {
   var userNAme = req.body.userName;
   var password = req.body.password;
   var resultResponse;
-  if (userNAme == "test" && password == "test") {
+  if (userNAme == "testaccount@test123.onmicrosoft.com" && password == "testpassword") {
     resultResponse = "Authentication successfull";
   }
   else {

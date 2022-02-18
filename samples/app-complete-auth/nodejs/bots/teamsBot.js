@@ -142,7 +142,7 @@ class TeamsBot extends DialogBot {
                 },
             };
         }
-        if (action.commandId === 'FacebookLogin') {
+        if (action.commandId === 'OtherIdentityProvider') {
             const magicCode =
                 action.state && Number.isInteger(Number(action.state))
                     ? action.state
