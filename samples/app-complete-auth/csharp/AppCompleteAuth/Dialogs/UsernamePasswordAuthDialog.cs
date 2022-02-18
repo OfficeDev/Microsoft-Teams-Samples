@@ -38,25 +38,33 @@ namespace AppCompleteAuth.Dialogs
             {
                 var asJobject = JObject.FromObject(stepContext.Context.Activity.Value);
                 var state = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.State;
-                var cred = JObject.Parse(state);
-                var userName = (string)cred.ToObject<CardTaskFetchValue<string>>()?.UserName;
-                var password = (string)cred.ToObject<CardTaskFetchValue<string>>()?.Password;
-
-                if (userName == Constant.UserName && password == Constant.Password)
+                if (state.ToString() == "CancelledByUser")
                 {
-                    await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login successful"), cancellationToken);
-                    return await stepContext.PromptAsync(
-                     nameof(TextPrompt),
-                     new PromptOptions
-                    {
-                         Prompt = MessageFactory.Text("What is your user name?"),
-                    },
-                     cancellationToken);
+                    await stepContext.Context.SendActivityAsync("Sign in cancelled by user");
+                    return await stepContext.EndDialogAsync(null, cancellationToken);
                 }
                 else
                 {
-                    await stepContext.Context.SendActivityAsync("Invalid username or password");
-                    return await stepContext.EndDialogAsync(null, cancellationToken);
+                    var cred = JObject.Parse(state);
+                    var userName = (string)cred.ToObject<CardTaskFetchValue<string>>()?.UserName;
+                    var password = (string)cred.ToObject<CardTaskFetchValue<string>>()?.Password;
+
+                    if (userName == Constant.UserName && password == Constant.Password)
+                    {
+                        await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login successful"), cancellationToken);
+                        return await stepContext.PromptAsync(
+                         nameof(TextPrompt),
+                         new PromptOptions
+                         {
+                             Prompt = MessageFactory.Text("What is your user name?"),
+                         },
+                         cancellationToken);
+                    }
+                    else
+                    {
+                        await stepContext.Context.SendActivityAsync("Invalid username or password");
+                        return await stepContext.EndDialogAsync(null, cancellationToken);
+                    }
                 }
             }
             await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetPopUpSignInCard()), cancellationToken);

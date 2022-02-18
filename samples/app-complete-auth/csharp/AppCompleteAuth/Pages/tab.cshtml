@@ -5,6 +5,7 @@
 
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
             integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
             crossorigin="anonymous"></script>
@@ -14,14 +15,16 @@
         var facebookAppId = '@Model.FacebookAppId';
         let redirectUri = window.location.origin + "/facebook-auth-end";
         let accessToken;
-
+        let showSSOToggle = false;
+        let showFbToggle = false;
+        let showUserToggle = false;
         microsoftTeams.initialize();
 
         // Tab sso authentication.
         function ssoAuthentication()
         {
              getClientSideToken()
-            .then((clientSideToken) => {           
+            .then((clientSideToken) => {
                 return getServerSideToken(clientSideToken);
             })
             .catch((error) => {
@@ -47,9 +50,9 @@
             return new Promise((resolve, reject) => {
             microsoftTeams.authentication.getAuthToken({
                 successCallback: (result) => {
-                    resolve(result);     
+                    resolve(result);
                 },
-                failureCallback: function (error) {                
+                failureCallback: function (error) {
                     reject("Error getting token: " + error);
                 }
             });
@@ -83,7 +86,9 @@
                             $("#consent").show();
                             $("#sso").hide();
                         }else{
-                            userDetails = JSON.parse(responseJson);
+                             userDetails = JSON.parse(responseJson);
+                             let userName = userDetails.User.DisplayName.split(" ");
+                             $("#username").append(`${userName[0]}_${userName[1]}  <i class="fa fa-pencil" aria-hidden="true" onclick="ssoUserNameToggle()"></i>`);
                              $("#userImgSso").attr("src", userDetails.Photo);
                              $("#name").append(userDetails.User.DisplayName);
                              $("#email").append(userDetails.User.UserPrincipalName);
@@ -135,12 +140,13 @@
                     $("#sname").append("Test user");
                     $("#semail").append("testaccount@test123.onmicrosoft.com");
                     $("#swork").append("Data scientist");
+                    $("#susername").append(`Test_User  <i class="fa fa-pencil" aria-hidden="true" onclick="usingIdUserNameToggle()"></i>`);
                     $("#usingCred").hide();
                 },
                 failureCallback: reason => {
                     console.log(reason);
                 }
-            });              
+            });
         }
 
         // Get user information.
@@ -154,7 +160,9 @@
                         'accessToken': accessToken,
                     },
                 success: function (responseJson) {
-                    userDetails = JSON.parse(responseJson);
+                        userDetails = JSON.parse(responseJson);
+                        let userName = userDetails.User.DisplayName.split(" ");
+                        $("#username").append(`${userName[0]}_${userName[1]}  <i class="fa fa-pencil" aria-hidden="true" onclick="ssoUserNameToggle()"></i>`);
                         $("#sso").hide();
                         $("#userImgSso").attr("src", userDetails.Photo);
                         $("#name").append(userDetails.User.DisplayName);
@@ -201,7 +209,9 @@
                                 'accessToken': clientSideToken,
                             },
                         success: function (responseJson) {
-                             facebookProfile = JSON.parse(responseJson);
+                            facebookProfile = JSON.parse(responseJson);
+                            let userName = facebookProfile.name.split(" ");
+                             $("#fbusername").append(`${userName[0]}_${userName[1]}  <i class="fa fa-pencil" aria-hidden="true" onclick="fbUserNameToggle()"></i>`);
                              $("#fbname").append(facebookProfile.name);
                              $("#userFbImg").attr("src", facebookProfile.picture);
                              $("#facebook").hide();
@@ -224,6 +234,63 @@
                     console.log(error);
                 });
         }
+
+        function ssoUserNameToggle() {
+            if (!showSSOToggle) {
+                $("#sso-username-container").show();
+                showSSOToggle = true;
+            }
+            else if (showSSOToggle) {
+                $("#sso-username-container").hide();
+                showSSOToggle = false;
+            }
+        }
+
+        function fbUserNameToggle() {
+            if (!showFbToggle) {
+                $("#fb-username-container").show();
+                showFbToggle = true;
+            }
+            else if (showFbToggle) {
+                $("#fb-username-container").hide();
+                showFbToggle = false;
+            }
+        }
+
+        function usingIdUserNameToggle() {
+            if (!showUserToggle) {
+                $("#userid-username-container").show();
+                showUserToggle = true;
+            }
+            else if (showUserToggle) {
+                $("#userid-username-container").hide();
+                showUserToggle = false;
+            }
+        }
+
+        function ssoUserNameEdit() {
+            var userName = $('#userNameInputSSO').val();
+            $("#username").empty();
+            $("#username").append(`<b>User Name :</b> ${userName} <i class="fa fa-pencil" aria-hidden="true" onclick="ssoUserNameToggle()"></i>`);
+            $("#sso-username-container").hide();
+            showSSOToggle = false;
+        }
+
+        function fbUserNameEdit() {
+            var userName = $('#userNameInputFb').val();
+            $("#fbusername").empty();
+            $("#fbusername").append(`<b>User Name :</b> ${userName} <i class="fa fa-pencil" aria-hidden="true" onclick="fbUserNameToggle()"></i>`);
+            $("#fb-username-container").hide();
+            showFbToggle = false;
+        }
+
+        function usingIdUserNameEdit() {
+            var userName = $('#userNameInputId').val();
+            $("#susername").empty();
+            $("#susername").append(`<b>User Name :</b> ${userName} <i class="fa fa-pencil" aria-hidden="true" onclick="usingIdUserNameToggle()"></i>`);
+            $("#userid-username-container").hide();
+            showUserToggle = false;
+        }
     </script>
 
     <style>
@@ -233,21 +300,21 @@
         }
 
         button {
-            margin-left: 42rem;
+            margin-left: 36rem;
             margin-top: 1rem;
         }
 
         .card {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
             width: 30rem;
-            height: 11rem;
+            height: 12rem;
             margin-left: 2rem;
             margin-top: 0.5rem;
         }
 
-        .card:hover {
-            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-        }
+            .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            }
 
         .container {
             padding: 2px 2px;
@@ -261,12 +328,17 @@
         .profile {
             margin-top: 1rem;
             margin-left: 2rem;
-            max-width: 21rem;
+            max-width: 30rem;
             align-content: flex-start;
         }
 
+        #fb-username-btn, #sso-username-btn, #userid-username-btn {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
         .btn-outline-info {
-            margin-left: 12rem;
+            margin-left: 19rem;
             max-width: 10rem;
         }
 
@@ -276,7 +348,8 @@
         }
 
         .card-container-div {
-            display: flex;
+            margin-left: 30%;
+            padding-bottom: 2rem;
         }
     </style>
 
@@ -292,11 +365,16 @@
                         <img src="https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744034?k=20&m=1016744034&s=612x612&w=0&h=kjCAwH5GOC3n3YRTHBaLDsLIuF8P3kkAJc9RvfiYWBY="
                             alt="Avatar" id="userImgSso" width="100px">
                         <div class="profile">
-                            <span id="name"><b>Name : </b></span><br>
-                            <span id="email"><b>Email : </b></span></span><br>
-                            <span id="work"><b>Work : </b></span></span>
+                            <span id="name"><b>Name: </b></span><br>
+                            <span id="username"><b>User name: </b></span><br>
+                            <span id="email"><b>Email: </b></span></span><br>
+                            <span id="work"><b>Work: </b></span></span>
+                            <div id="sso-username-container" style="display: none">
+                                <input id="userNameInputSSO" type="text">
+                                <button id="sso-username-btn" type="button" class="btn btn-outline-info" onclick="ssoUserNameEdit()">edit</button>
+                            </div>
                         </div>
-                    </div>
+                        </div>
                     <button type="button" class="btn btn-outline-info" onclick="requestConsent()" id="consent"
                         style="display:none;">Consent</button>
                     <button type="button" class="btn btn-outline-info" onclick="ssoAuthentication()" id="sso">Get
@@ -312,7 +390,12 @@
                         <img src="https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744034?k=20&m=1016744034&s=612x612&w=0&h=kjCAwH5GOC3n3YRTHBaLDsLIuF8P3kkAJc9RvfiYWBY="
                             alt="Avatar" id="userFbImg" width="100px">
                         <div class="profile">
-                            <span id="fbname"><b>Name: </b></span>
+                            <span id="fbname"><b>Name: </b></span><br>
+                            <span id="fbusername"><b>User name: </b></span><br>
+                            <div id="fb-username-container" style="display: none">
+                                <input id="userNameInputFb" type="text">
+                                <button id="fb-username-btn" type="button" class="btn btn-outline-info" onclick="fbUserNameEdit()">edit</button>
+                            </div>
                         </div>
                     </div>
                     <button type="button" id="facebook"class="btn btn-outline-info" onclick="facebookLogin()">Login</button>
@@ -326,9 +409,14 @@
                         <img src="https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744034?k=20&m=1016744034&s=612x612&w=0&h=kjCAwH5GOC3n3YRTHBaLDsLIuF8P3kkAJc9RvfiYWBY="
                            id="userImgId" alt="Avatar" width="100px">
                         <div class="profile">
-                            <span id="sname"><b>Name : </b></span><br>
-                            <span id="semail"><b>Email : </b></span><br>
-                            <span id="swork"><b>Work : </b></span>
+                            <span id="sname"><b>Name: </b></span><br>
+                            <span id="susername"><b>User name: </b></span><br>
+                            <span id="semail"><b>Email: </b></span><br>
+                            <span id="swork"><b>Work: </b></span>
+                            <div id="userid-username-container" style="display: none">
+                                <input id="userNameInputId" type="text">
+                                <button id="userid-username-btn" type="button" class="btn btn-outline-info" onclick="usingIdUserNameEdit()">edit</button>
+                            </div>
                         </div>
                     </div>
                     <button type="button" class="btn btn-outline-info" id="usingCred" onclick="usingCredentials()">Login</button>

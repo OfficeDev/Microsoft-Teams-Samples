@@ -81,18 +81,7 @@ namespace AppCompleteAuth.Bots
         /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnSignInInvokeAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
         {
-            var asJobject = JObject.FromObject(turnContext.Activity.Value);
-            var state = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.State;
-
-
-            if (state.ToString() == "CancelledByUser")
-            {
-                await turnContext.SendActivityAsync("Sign in cancelled by user");
-            }
-            else
-            {
-                await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
-            }
+            await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
         }
 
         /// <summary>
