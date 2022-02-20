@@ -5,7 +5,6 @@ products:
 - office
 - office-365
 languages:
-- javascript
 - nodejs
 title: Tabs Azure AD SSO Sample
 description: Microsoft Teams hello world sample app for tabs Azure AD SSO in Node.js
