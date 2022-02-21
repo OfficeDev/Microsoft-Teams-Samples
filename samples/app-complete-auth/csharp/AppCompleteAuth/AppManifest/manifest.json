@@ -50,6 +50,26 @@
       "canUpdateConfiguration": true,
       "commands": [
         {
+          "id": "searchQuery",
+          "type": "query",
+          "title": "Search",
+          "description": "Perform a search",
+          "initialRun": true,
+          "fetchTask": false,
+          "context": [
+            "commandBox",
+            "compose"
+          ],
+          "parameters": [
+            {
+              "name": "searchQuery",
+              "title": "Search",
+              "description": "Your search query",
+              "inputType": "text"
+            }
+          ]
+        },
+        {
           "id": "SSO",
           "type": "action",
           "title": "AAD SSO authentication",
@@ -76,29 +96,6 @@
           "id": "UserCredentials",
           "description": "Sign in using user credentials",
           "title": "User Id/password login",
-          "type": "action",
-          "fetchTask": true,
-          "context": [
-            "commandBox",
-            "compose"
-          ]
-        },
-        {
-          "id": "LogoutSSO",
-          "type": "action",
-          "title": "Log out sso",
-          "description": "Sign out from authenticated services.",
-          "initialRun": false,
-          "fetchTask": true,
-          "context": [
-            "commandBox",
-            "compose"
-          ]
-        },
-        {
-          "id": "LogoutFacebook",
-          "description": "Sign out from authenticated services.",
-          "title": "Log out facebook",
           "type": "action",
           "fetchTask": true,
           "context": [

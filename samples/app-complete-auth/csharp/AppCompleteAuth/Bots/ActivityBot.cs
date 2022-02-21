@@ -84,6 +84,217 @@ namespace AppCompleteAuth.Bots
             await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
         }
 
+        protected override async Task<MessagingExtensionResponse> OnTeamsMessagingExtensionQueryAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionQuery action, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrEmpty(action.State))
+            {
+                return new MessagingExtensionResponse
+                {
+                    ComposeExtension = new MessagingExtensionResult
+                    {
+                        Type = "auth",
+                        SuggestedActions = new MessagingExtensionSuggestedAction
+                        {
+                            Actions = new List<CardAction>
+                            {
+                                new CardAction
+                                {
+                                    Type = ActionTypes.OpenUrl,
+                                    Value = $"{_applicationBaseUrl}/config",
+                                    Title = "Select login option",
+                                },
+                            },
+                        },
+                    },
+                };
+            }
+            else if (action.State == "usercredentials" || action.State.Contains("userName"))
+            {
+                if (action.State.Contains("userName"))
+                {
+                    JObject asJobject = JObject.Parse(action.State);
+                    var userName = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.UserName;
+                    var password = (string)asJobject.ToObject<CardTaskFetchValue<string>>()?.Password;
+                    if (userName == Constant.UserName && password == Constant.Password)
+                    {
+                        var usingCredentialsCard = new ThumbnailCard
+                        {
+                            Title = $"Hello! Test user",
+                            Text = "Job title: Data Scientist",
+                            Subtitle = "Email: testaccount@test123.onmicrosoft.com",
+                            Images = new List<CardImage> { new CardImage { Url = "https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744034?k=20&m=1016744034&s=612x612&w=0&h=kjCAwH5GOC3n3YRTHBaLDsLIuF8P3kkAJc9RvfiYWBY=" } }
+                        };
+                        var usingCredentialsCardAttachment = new MessagingExtensionAttachment
+                        {
+                            ContentType = ThumbnailCard.ContentType,
+                            Content = usingCredentialsCard,
+                            Preview = usingCredentialsCard.ToAttachment()
+                        };
+                        return new MessagingExtensionResponse
+                        {
+                            ComposeExtension = new MessagingExtensionResult
+                            {
+                                Type = "result",
+                                AttachmentLayout = "list",
+                                Attachments = new List<MessagingExtensionAttachment> { usingCredentialsCardAttachment }
+                            },
+                        };
+                    }
+                    else
+                    {
+                        var invalidCredentialsCard = new ThumbnailCard
+                        {
+                            Title = "Invalid credentials",
+                        };
+                        var invalidCredentialsCardAttachment = new MessagingExtensionAttachment
+                        {
+                            ContentType = ThumbnailCard.ContentType,
+                            Content = invalidCredentialsCard,
+                            Preview = invalidCredentialsCard.ToAttachment()
+                        };
+                        return new MessagingExtensionResponse
+                        {
+                            ComposeExtension = new MessagingExtensionResult
+                            {
+                                Type = "result",
+                                AttachmentLayout = "list",
+                                Attachments = new List<MessagingExtensionAttachment> { invalidCredentialsCardAttachment }
+                            },
+                        };
+                    }
+                }
+                else {
+                    return new MessagingExtensionResponse
+                    {
+                        ComposeExtension = new MessagingExtensionResult
+                        {
+                            Type = "auth",
+                            SuggestedActions = new MessagingExtensionSuggestedAction
+                            {
+                                Actions = new List<CardAction>
+                            {
+                                new CardAction
+                                {
+                                    Type = ActionTypes.OpenUrl,
+                                    Value = $"{_applicationBaseUrl}/popUpSignin?from=msgext",
+                                    Title = "Using username/password",
+                                },
+                            },
+                            },
+                        },
+                    };
+                }
+            }
+            else if (action.State == "sso")
+            {
+                var state = action.State;
+                var tokenResponse = await GetTokenResponse(turnContext, _botConnectionName, state, cancellationToken);
+                if (tokenResponse == null || string.IsNullOrEmpty(tokenResponse.Token))
+                {
+                    var signInLink = await GetSignInLinkAsync(turnContext, _botConnectionName, cancellationToken).ConfigureAwait(false);
+                    return new MessagingExtensionResponse
+                    {
+                        ComposeExtension = new MessagingExtensionResult
+                        {
+                            Type = "auth",
+                            SuggestedActions = new MessagingExtensionSuggestedAction
+                            {
+                                Actions = new List<CardAction>
+                                    {
+                                        new CardAction
+                                        {
+                                            Type = ActionTypes.OpenUrl,
+                                            Value = signInLink,
+                                            Title = "Bot Service OAuth",
+                                        },
+                                    },
+                            },
+                        },
+                    };
+                }
+
+                var client = new SimpleGraphClient(tokenResponse.Token);
+
+                var profile = await client.GetMeAsync();
+                var photo = await client.GetPhotoAsync();
+                var title = !string.IsNullOrEmpty(profile.JobTitle) ?
+                        profile.JobTitle : "Unknown";
+                var previewcard = new ThumbnailCard
+                {
+                    Title = $"Hello! {profile.DisplayName}",
+                    Text = $"Job title: {title}",
+                    Images = new List<CardImage> { new CardImage { Url = photo } }
+                };
+                var attachment = new MessagingExtensionAttachment
+                {
+                    ContentType = ThumbnailCard.ContentType,
+                    Content = previewcard,
+                    Preview = previewcard.ToAttachment()
+                };
+
+                return new MessagingExtensionResponse
+                {
+                    ComposeExtension = new MessagingExtensionResult
+                    {
+                        Type = "result",
+                        AttachmentLayout = "list",
+                        Attachments = new List<MessagingExtensionAttachment> { attachment }
+                    },
+                };
+            }
+            else
+            {
+                var state = action.State;
+                var facebooktokenResponse = await GetTokenResponse(turnContext, _facebookConnectionName, state, cancellationToken);
+                if (facebooktokenResponse == null || string.IsNullOrEmpty(facebooktokenResponse.Token))
+                {
+                    var fbsignInLink = await GetSignInLinkAsync(turnContext, _facebookConnectionName, cancellationToken).ConfigureAwait(false);
+                    return new MessagingExtensionResponse
+                    {
+                        ComposeExtension = new MessagingExtensionResult
+                        {
+                            Type = "auth",
+                            SuggestedActions = new MessagingExtensionSuggestedAction
+                            {
+                                Actions = new List<CardAction>
+                                {
+                                    new CardAction
+                                    {
+                                        Type = ActionTypes.OpenUrl,
+                                        Value = fbsignInLink,
+                                        Title = "Facebook auth",
+                                    },
+                                },
+                            },
+                        },
+                    };
+                }
+
+                FacebookProfile fbProfile = await FacebookHelper.GetFacebookProfileName(facebooktokenResponse.Token);
+                var fbpreviewcard = new ThumbnailCard
+                {
+                    Title = $"Hello! {fbProfile.Name}",
+                    Images = new List<CardImage> { new CardImage { Url = fbProfile.ProfilePicture.data.url } }
+                };
+                var fbattachment = new MessagingExtensionAttachment
+                {
+                    ContentType = ThumbnailCard.ContentType,
+                    Content = fbpreviewcard,
+                    Preview = fbpreviewcard.ToAttachment()
+                };
+
+                return new MessagingExtensionResponse
+                {
+                    ComposeExtension = new MessagingExtensionResult
+                    {
+                        Type = "result",
+                        AttachmentLayout = "list",
+                        Attachments = new List<MessagingExtensionAttachment> { fbattachment }
+                    },
+                };
+            }
+        }
+
         /// <summary>
         /// When OnTurn method receives a submit invoke activity on bot turn, it calls this method.
         /// </summary>
@@ -193,58 +404,6 @@ namespace AppCompleteAuth.Bots
                             Height = 250,
                             Width = 400,
                             Title = "User information card",
-                        },
-                    },
-                };
-            }
-            else if (action.CommandId.ToLower() == "logoutsso")
-            {
-                var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
-                await userTokenClient.SignOutUserAsync(turnContext.Activity.From.Id, _botConnectionName, turnContext.Activity.ChannelId, cancellationToken).ConfigureAwait(false);
-
-                return new MessagingExtensionActionResponse
-                {
-                    Task = new TaskModuleContinueResponse
-                    {
-                        Value = new TaskModuleTaskInfo
-                        {
-                            Card = new Microsoft.Bot.Schema.Attachment
-                            {
-                                Content = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
-                                {
-                                    Body = new List<AdaptiveElement>() { new AdaptiveTextBlock() { Text = "You have been signed out." } }                                  
-                                },
-                                ContentType = AdaptiveCard.ContentType,
-                            },
-                            Height = 200,
-                            Width = 400,
-                            Title = "SSO logout",
-                        },
-                    },
-                };
-            }
-            else if (action.CommandId.ToLower() == "logoutfacebook")
-            {
-                var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
-                await userTokenClient.SignOutUserAsync(turnContext.Activity.From.Id, _facebookConnectionName, turnContext.Activity.ChannelId, cancellationToken).ConfigureAwait(false);
-
-                return new MessagingExtensionActionResponse
-                {
-                    Task = new TaskModuleContinueResponse
-                    {
-                        Value = new TaskModuleTaskInfo
-                        {
-                            Card = new Microsoft.Bot.Schema.Attachment
-                            {
-                                Content = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
-                                {
-                                    Body = new List<AdaptiveElement>() { new AdaptiveTextBlock() { Text = "You have been signed out." } }
-                                },
-                                ContentType = AdaptiveCard.ContentType,
-                            },
-                            Height = 200,
-                            Width = 400,
-                            Title = "Facebook logut",
                         },
                     },
                 };
@@ -524,7 +683,7 @@ namespace AppCompleteAuth.Bots
                 {
                     new AdaptiveFact
                     {
-                        Title = "Job title :",
+                        Title = "Job title:",
                         Value = "Data scientist"
                     },
                     new AdaptiveFact

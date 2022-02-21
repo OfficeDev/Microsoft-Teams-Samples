@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 
 namespace AppCompleteAuth.Dialogs
@@ -53,8 +54,8 @@ namespace AppCompleteAuth.Dialogs
                 if (text.IndexOf("logout") >= 0)
                 {
                     // The bot adapter encapsulates the authentication processes.
-                    var botAdapter = (BotFrameworkAdapter)innerDc.Context.Adapter;
-                    await botAdapter.SignOutUserAsync(innerDc.Context, ConnectionName, null, cancellationToken);
+                    var userTokenClient = innerDc.Context.TurnState.Get<UserTokenClient>();
+                    await userTokenClient.SignOutUserAsync(innerDc.Context.Activity.From.Id, ConnectionName, innerDc.Context.Activity.ChannelId, cancellationToken).ConfigureAwait(false);
                     await innerDc.Context.SendActivityAsync(MessageFactory.Text("You have been signed out."), cancellationToken);
                     return await innerDc.CancelAllDialogsAsync(cancellationToken);
                 }
