@@ -108,7 +108,7 @@ namespace AppCompleteAuth.Bots
                 {
                     ComposeExtension = new MessagingExtensionResult
                     {
-                        Type = "auth",
+                        Type = "config",
                         SuggestedActions = new MessagingExtensionSuggestedAction
                         {
                             Actions = new List<CardAction>
@@ -334,13 +334,11 @@ namespace AppCompleteAuth.Bots
             if (string.IsNullOrEmpty(action.State))
             {
                 _isSignedIn.AddOrUpdate("isSignedIn", false, (key, newValue) => false);
-                var url = $"{_applicationBaseUrl}/config";
-                await turnContext.SendActivityAsync(MessageFactory.Text(url));
                 return new MessagingExtensionResponse
                 {
                     ComposeExtension = new MessagingExtensionResult
                     {
-                        Type = "auth",
+                        Type = "config",
                         SuggestedActions = new MessagingExtensionSuggestedAction
                         {
                             Actions = new List<CardAction>
@@ -348,7 +346,7 @@ namespace AppCompleteAuth.Bots
                                 new CardAction
                                 {
                                     Type = ActionTypes.OpenUrl,
-                                    Value = url,
+                                    Value = $"{_applicationBaseUrl}/config",
                                     Title = "Select login option",
                                 },
                             },

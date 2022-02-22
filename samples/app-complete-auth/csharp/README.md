@@ -46,7 +46,9 @@ Tab Authentication
 
 Messaging Extention Authentication
 
-![ME action](AppCompleteAuth/Images/MEActions.png)
+- ME Action
+
+  ![ME action](AppCompleteAuth/Images/MEActions.png)
 
   - SSO
   
@@ -58,6 +60,30 @@ Messaging Extention Authentication
   
   ![ME using credentials details](AppCompleteAuth/Images/MEUsingCredentialsDetails.png)
   
+- ME Search
+
+  ![ME search](AppCompleteAuth/Images/MESearch.png)
+  
+  - SSO
+  
+  ![ME search SSO login](AppCompleteAuth/Images/MESearchSSOCard.png)
+  
+  - Using user name and password
+  
+   ![ME search using credentials details](AppCompleteAuth/Images/MESearchUsingCredentialsDetailsCard.png)
+   
+- ME Link unfurling
+
+  ![ME Link unfurling](AppCompleteAuth/Images/MELinkUnfurlingLoginLink.png)
+  
+  - SSO
+  
+  ![ME Link unfurling SSO login](AppCompleteAuth/Images/MELinkUnfurlSSOCard.png)
+  
+  - Using user name and password
+  
+   ![ME Link unfurling using credentials details](AppCompleteAuth/Images/MELinkUnfurlUsingCredentialsDetails.png)
+   
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
