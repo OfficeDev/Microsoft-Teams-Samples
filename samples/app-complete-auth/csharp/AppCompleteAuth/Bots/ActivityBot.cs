@@ -96,17 +96,14 @@ namespace AppCompleteAuth.Bots
         /// <returns>The Messaging Extension Response for the query.</returns>
         protected async override Task<MessagingExtensionResponse> OnTeamsAppBasedLinkQueryAsync(ITurnContext<IInvokeActivity> turnContext, AppBasedLinkQuery query, CancellationToken cancellationToken)
         {
-            await turnContext.SendActivityAsync("hello");
             var state = query.State;
             bool isSignedIn;
             _isSignedIn.TryGetValue("isSignedIn", out isSignedIn);
-            await turnContext.SendActivityAsync("hello hi hihi");
             var previewCard = new ThumbnailCard();
             var attachment = new MessagingExtensionAttachment();
 
             if (string.IsNullOrEmpty(state))
             {
-                await turnContext.SendActivityAsync("hello hi");
                 return new MessagingExtensionResponse
                 {
                     ComposeExtension = new MessagingExtensionResult
