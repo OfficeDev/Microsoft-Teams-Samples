@@ -310,13 +310,12 @@
 
         button {
             margin-left: 36rem;
-            margin-top: 1rem;
         }
 
         .card {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
             width: 30rem;
-            height: 12rem;
+            height: 11rem;
             margin-left: 2rem;
             margin-top: 0.5rem;
         }
@@ -364,6 +363,9 @@
             margin-left:1%;
             padding-bottom: 2rem;
         }
+        #divError{
+            margin-left: 1rem
+        }
     </style>
 
 </head>
@@ -388,12 +390,12 @@
                             </div>
                         </div>
                         </div>
+                      <div id="divError" style="display: none"></div>
                     <button type="button" class="btn btn-outline-info" onclick="requestConsent()" id="consent"
                         style="display:none;">Consent</button>
                     <button type="button" class="btn btn-outline-info" onclick="ssoAuthentication()" id="sso">Get
                         Details</button>
                 </div>
-                <div id="divError" style="display: none"></div>
             </div>
             <div>
                 <div class="signin-header"><b>2) Sign in using Facebook (OAuth 2)</b></div>
