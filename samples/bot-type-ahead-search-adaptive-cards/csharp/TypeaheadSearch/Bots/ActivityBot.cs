@@ -87,11 +87,9 @@ namespace TypeaheadSearch.Bots
             InvokeResponse adaptiveCardResponse;
             if (turnContext.Activity.Name == "application/search")
             {
-                var responseStatus = 0;
                 var searchData = JsonConvert.DeserializeObject<DynamicSearchCard>(turnContext.Activity.Value.ToString());
                 var packageResult = JObject.Parse(await (new HttpClient()).GetStringAsync($"https://azuresearch-usnc.nuget.org/query?q=id:{searchData.queryText}&prerelease=true"));
-                responseStatus = (int)packageResult["status"];
-                if(responseStatus == 204)
+                if(packageResult == null)
                 {
                     var searchResponseData = new
                     {
@@ -103,28 +101,7 @@ namespace TypeaheadSearch.Bots
 
                     adaptiveCardResponse = new InvokeResponse()
                     {
-                        Status = 200,
-                        Body = jsonData
-                    };
-                }
-                else if(responseStatus == 500)
-                {
-                    var searchResponseData = new
-                    {
-                        type = "application/vnd.microsoft.search.searchResponse",
-                        value = new
-                        {
-                            code = 500,
-                            message = "error message: internal Server Error"
-                        }
-                    };
-
-                    var jsonString = JsonConvert.SerializeObject(searchResponseData);
-                    JObject jsonData = JObject.Parse(jsonString);
-
-                    adaptiveCardResponse = new InvokeResponse()
-                    {
-                        Status = 200,
+                        Status = 204,
                         Body = jsonData
                     };
                 }
