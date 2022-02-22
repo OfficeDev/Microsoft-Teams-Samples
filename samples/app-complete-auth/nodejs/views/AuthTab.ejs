@@ -15,9 +15,13 @@
             let redirectUri = window.location.origin + "/fb-auth";
 
         $(document).ready(function () {
-            $("#userInformation").hide();
-            $("#fbInformation").hide();
-            $("#userImg").hide();
+            microsoftTeams.initialize();
+             microsoftTeams.getContext((context) => {
+                hostClientType = context.hostClientType;
+                if(hostClientType != "web" && hostClientType != "desktop"){
+                    $('.card-container-div').removeClass('card-container-div').addClass('card-container-div-mobile');
+                }
+             });
         });
 
         microsoftTeams.initialize();
@@ -371,9 +375,16 @@
          .card-container-div {
             margin-left: 30%;
             padding-bottom: 2rem;
-        } 
+        }
+        
+        .card-container-div-mobile {
+            margin-left:1%;
+            padding-bottom: 2rem;
+        }
 
-       
+        #divError{
+            margin-left: 1rem
+        }
     </style>
 </head>
 

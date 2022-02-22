@@ -31,9 +31,13 @@ Bot Authentication
   
   ![using credentials](Images/BotUsingCredentials.png)
   
+  ![using credentials details](Images/BotUsingCredentialsDetails.png)
+  
 Tab Authentication
 
 ![Tab](Images/Tab.png)
+
+![Tab mobile view](Images/TabMobileView.png)
 
   - SSO
   
@@ -45,7 +49,9 @@ Tab Authentication
 
 Messaging Extention Authentication
 
-![ME action](Images/MEActions.png)
+- ME Action
+
+  ![ME action](Images/MEActions.png)
 
   - SSO
   
@@ -54,6 +60,32 @@ Messaging Extention Authentication
   - Using user name and password
   
   ![ME using credentials](Images/MEUsingCredentials.png)
+  
+  ![ME using credentials details](Images/MEUsingCredentialsDetails.png)
+  
+- ME Search
+
+  ![ME search](Images/MESearch.png)
+  
+  - SSO
+  
+  ![ME search SSO login](Images/MESearchSSOCard.png)
+  
+  - Using user name and password
+  
+   ![ME search using credentials details](Images/MESearchUsingCredentialsDetailsCard.png)
+   
+- ME Link unfurling
+
+  ![ME Link unfurling](Images/MELinkUnfurlingLoginLink.png)
+  
+  - SSO
+  
+  ![ME Link unfurling SSO login](Images/MELinkUnfurlSSOCard.png)
+  
+  - Using user name and password
+  
+   ![ME Link unfurling using credentials details](Images/MELinkUnfurlUsingCredentialsDetails.png)
 
 ## Prerequisites
 
@@ -162,6 +194,8 @@ Messaging Extention Authentication
    - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
     > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
+
+- Note: To test facebook auth flow please setup the sample locally as due to limitations from facebook you cannot test the facebook auth flow in the deployed version of app.
 
 ## Deploy the bot to Azure
 
