@@ -36,6 +36,8 @@ Tab Authentication
 
 ![Tab](AppCompleteAuth/Images/Tab.png)
 
+![Tab mobile view](AppCompleteAuth/Images/TabMobileView.png)
+
   - SSO
   
   ![Tab SSO login](AppCompleteAuth/Images/TabSsoLogin.png)
