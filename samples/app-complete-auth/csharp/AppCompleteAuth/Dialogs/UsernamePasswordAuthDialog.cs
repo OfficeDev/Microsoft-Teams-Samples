@@ -56,7 +56,7 @@ namespace AppCompleteAuth.Dialogs
                          nameof(TextPrompt),
                          new PromptOptions
                          {
-                             Prompt = MessageFactory.Text("What is your user name?"),
+                             Prompt = MessageFactory.Text("What is your preferred user name?"),
                          },
                          cancellationToken);
                     }

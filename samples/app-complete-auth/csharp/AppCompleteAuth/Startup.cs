@@ -56,6 +56,7 @@ namespace AppCompleteAuth
             services.AddMvc().AddSessionStateTempDataProvider();
             // Create a global hashset for our Roster and notes information
             services.AddSingleton<ConcurrentDictionary<string, Token>>();
+            services.AddSingleton<ConcurrentDictionary<string, bool>>();
             services.AddHttpClient().AddControllers().AddNewtonsoftJson();
             services.AddRazorPages();
             services.AddHttpClient("WebClient", client => client.Timeout = TimeSpan.FromSeconds(600));

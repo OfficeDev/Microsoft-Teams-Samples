@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,8 +15,8 @@ namespace AppCompleteAuth.Bots
 {
     public class AuthBot<T> : ActivityBot<T> where T : Dialog
     {
-        public AuthBot(IConfiguration configuration, ConversationState conversationState, T dialog)
-            : base(configuration,conversationState, dialog)
+        public AuthBot(IConfiguration configuration, ConversationState conversationState, T dialog, ConcurrentDictionary<string, bool> isSignedIn)
+            : base(configuration,conversationState, dialog, isSignedIn)
         {
         }
 

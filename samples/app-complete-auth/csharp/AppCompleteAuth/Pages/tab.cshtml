@@ -18,8 +18,17 @@
         let showSSOToggle = false;
         let showFbToggle = false;
         let showUserToggle = false;
+        let hostClientType;
         microsoftTeams.initialize();
-
+        $(document).ready(function () {
+             microsoftTeams.initialize();
+             microsoftTeams.getContext((context) => {
+                hostClientType = context.hostClientType;
+                if(hostClientType != "web" && hostClientType != "desktop"){
+                    $('.card-container-div').removeClass('card-container-div').addClass('card-container-div-mobile');
+                }
+             });
+        });
         // Tab sso authentication.
         function ssoAuthentication()
         {
@@ -312,9 +321,9 @@
             margin-top: 0.5rem;
         }
 
-            .card:hover {
-                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-            }
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
 
         .container {
             padding: 2px 2px;
@@ -351,6 +360,10 @@
             margin-left: 30%;
             padding-bottom: 2rem;
         }
+        .card-container-div-mobile {
+            margin-left:1%;
+            padding-bottom: 2rem;
+        }
     </style>
 
 </head>
@@ -363,7 +376,7 @@
                 <div class="card">
                     <div class="container">
                         <img src="https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744034?k=20&m=1016744034&s=612x612&w=0&h=kjCAwH5GOC3n3YRTHBaLDsLIuF8P3kkAJc9RvfiYWBY="
-                            alt="Avatar" id="userImgSso" width="100px">
+                            alt="Avatar" id="userImgSso" width="100px" height="100px">
                         <div class="profile">
                             <span id="name"><b>Name: </b></span><br>
                             <span id="username"><b>User name: </b></span><br>
@@ -388,7 +401,7 @@
                 <div class="card">
                     <div class="container">
                         <img src="https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744034?k=20&m=1016744034&s=612x612&w=0&h=kjCAwH5GOC3n3YRTHBaLDsLIuF8P3kkAJc9RvfiYWBY="
-                            alt="Avatar" id="userFbImg" width="100px">
+                            alt="Avatar" id="userFbImg" width="100px" height="100px">
                         <div class="profile">
                             <span id="fbname"><b>Name: </b></span><br>
                             <span id="fbusername"><b>User name: </b></span><br>
@@ -407,7 +420,7 @@
                 <div class="card">
                     <div class="container">
                         <img src="https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744034?k=20&m=1016744034&s=612x612&w=0&h=kjCAwH5GOC3n3YRTHBaLDsLIuF8P3kkAJc9RvfiYWBY="
-                           id="userImgId" alt="Avatar" width="100px">
+                           id="userImgId" alt="Avatar" width="100px" height="100px">
                         <div class="profile">
                             <span id="sname"><b>Name: </b></span><br>
                             <span id="susername"><b>User name: </b></span><br>
