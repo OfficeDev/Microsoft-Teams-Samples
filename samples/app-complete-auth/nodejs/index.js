@@ -98,6 +98,10 @@ server.get('/popUpSignin', function (req, res) {
   res.render('./views/popUpSignin');
 });
 
+server.get('/config', function (req, res) {
+  res.render('./views/config');
+});
+
 // Pop-up dialog to ask for additional permissions, redirects to AAD page
 server.get('/auth-start', function (req, res) {
   var clientId = process.env.MicrosoftAppId;
