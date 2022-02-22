@@ -348,7 +348,7 @@ namespace AppCompleteAuth.Bots
                                 new CardAction
                                 {
                                     Type = ActionTypes.OpenUrl,
-                                    Value = $"{_applicationBaseUrl}/config",
+                                    Value = url,
                                     Title = "Select login option",
                                 },
                             },
