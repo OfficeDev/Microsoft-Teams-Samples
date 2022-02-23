@@ -153,6 +153,17 @@ Messaging Extention Authentication
    - Select service provider ad `facebook`
    - Add clientid and secret of your facebook app that was created using Step 16.
 
+17. After creating the app and getting client id and secret, make sure you add facebook login service under products section.
+     ![FacebookProduct](Images/FacebookProduct.png)
+
+18. Go to facebook settings and under valid domains, make sure to add the following url's
+     - `https://token.botframework.com/.auth/web/redirect`
+     - `https://<<base url>>`
+     - `https://<<base url>>/fb-auth`
+     
+    ![validDomains](Images/ValidDomains.png)
+
+
 ### Run your bot sample
 1) Clone the repository
 
