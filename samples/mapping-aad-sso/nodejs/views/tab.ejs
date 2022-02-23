@@ -90,6 +90,8 @@
         let accessToken;
         let redirectUriFb = window.location.origin + "/fb-auth";
         let redirectUriGoogle = window.location.origin + "/google-auth";
+        let is_google_signed_in = false;
+        let is_fb_signed_in = false;
         $(document).ready(function () {
             microsoftTeams.initialize();
             microsoftTeams.getContext(function (context) {
@@ -105,7 +107,7 @@
                     data: {
                         'userName':userName
                     },
-                    success: function (responseJson) {
+                    success: async function (responseJson) {
                         if(responseJson =='NoDataFound'){
                             $("#sso").show();
                         }
@@ -113,18 +115,22 @@
                             console.log(responseJson);
                             const userDetails = responseJson;
                             if(userDetails.is_aad_signed_in){
-                                ssoAuthentication();
+                                await ssoAuthentication();
                                 $("#sso").hide();
                                 $(".imgContainer").hide();
 
                                 if(userDetails.is_google_signed_in){
-                                    googleAuth();
+                                    is_google_signed_in = userDetails.is_google_signed_in
+                                    await googleAuth();
                                     $("#googlelogin").hide();
                                     $('#cardGoogle').show();
                                     $('#cardSSO').show();
                                 }
                                 if(userDetails.is_fb_signed_in){
-                                    fbAuth();
+                                    setTimeout(()=>{
+                                        fbAuth();
+                                    },3000) 
+                                    is_fb_signed_in = userDetails.is_fb_signed_in
                                     $("#facebooklogin").hide();
                                     $('#cardFacebook').show();
                                     $('#cardSSO').show();
@@ -139,7 +145,7 @@
         };
 
         microsoftTeams.initialize();
-        function ssoAuthentication() {
+        async function ssoAuthentication() {
             getClientSideToken()
                 .then((clientSideToken) => {
                     return getServerSideToken(clientSideToken);
@@ -147,7 +153,7 @@
                 .catch((error) => {
                     if (error === "invalid_grant") {
                         // Display in-line button so user can consent
-                        $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required. Click Authenticate button.");
+                        $("#divError").text("invalid_grant - User or admin consent is required. Click Authenticate button.");
                         $("#divError").css("margin-left", "15rem");
                         $("#sso").hide();
                         $("#divError").show();
@@ -155,7 +161,7 @@
 
                     } else {
                         // Display in-line button so user can consent
-                        $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required. Click Authenticate button.");
+                        $("#divError").text("invalid_grant - User or admin consent is required. Click Authenticate button.");
                         $("#divError").css("margin-left", "15rem");
                         $("#sso").hide();
                         $("#divError").show();
@@ -168,7 +174,6 @@
             return new Promise((resolve, reject) => {
                 microsoftTeams.authentication.getAuthToken({
                     successCallback: (result) => {
-                        console.log(result);
                         resolve(result);
                     },
                     failureCallback: function (error) {
@@ -211,8 +216,12 @@
                                 $("#name").append(userDetails.details.displayName);
                                 $("#email").append(userDetails.details.userPrincipalName);
                                 $("#work").append(userDetails.details.jobTitle);
-                                $("#facebooklogin").show();
-                                $("#googlelogin").show();
+                                if(!is_google_signed_in){
+                                    $("#googlelogin").show();
+                                }
+                                if(!is_fb_signed_in){
+                                    $("#facebooklogin").show();
+                                }
                             }
                         });
                 });
@@ -308,6 +317,8 @@
                                 $("#fbname").append(userFbDetails.name);
                                 $("#userImgFb").attr("src", userFbDetails.picture.data.url);
                                 $('#cardFacebook').show();
+                                $("#facebooklogin").hide();
+                                $('#cardSSO').show();
                             }
                         });
                 });
@@ -345,13 +356,15 @@
                                 $("#gname").append(userDetails.names[0].displayName);
                                 $("#gemail").append(userDetails.emailAddresses[0].value);
                                 $('#cardGoogle').show();
+                                $('#googlelogin').hide();
+                                $('#cardSSO').show();
                             }
                         });
                 });
             });
         }
 
-        function fbAuthentication() {
+        async function fbAuthentication() {
             return new Promise((resolve, reject) => {
                 microsoftTeams.authentication.authenticate({
                     url: `https://www.facebook.com/v12.0/dialog/oauth?client_id=${clientId.clientIdFb}&redirect_uri=${redirectUriFb}&state=1234535`,
@@ -371,6 +384,7 @@
         }
 
         function googleAuthentication() {
+            console.log("googliiiii")
             return new Promise((resolve, reject) => {
                 microsoftTeams.authentication.authenticate({
                     url: `https://accounts.google.com/o/oauth2/v2/auth/identifier?client_id=${clientId.clientIdGoogle}&scope=openid%20email%20profile&response_type=code&redirect_uri=${redirectUriGoogle}`,
@@ -383,6 +397,7 @@
                         resolve(tokenDetails);
                     },
                     failureCallback: reason => {
+                        alert(reason);
                         reject(reason);
                     }
                 });
@@ -399,7 +414,8 @@
                 });
         }
 
-        function googleAuth() {
+        async function googleAuth() {
+            console.log("googli")
             googleAuthentication()
                 .then((result) => {
                     return getServerSideTokenGoogle(result.idToken);

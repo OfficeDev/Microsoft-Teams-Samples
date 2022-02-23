@@ -220,7 +220,6 @@ server.post('/GetUserDetails', async (req, res) => {
   const myDetails = await client.getMeAsync();
   var userImage = await client.getUserPhoto()
   await userImage.arrayBuffer().then(result => {
-    console.log(userImage.type);
     imageString = Buffer.from(result).toString('base64');
     img2 = "data:image/png;base64," + imageString;
     var userData = {
@@ -256,27 +255,6 @@ server.post('/GetUserDetails', async (req, res) => {
   });
 });
 
-server.post('/tabCredentialsAuth', function (req, res) {
-  var userNAme = req.body.userName;
-  var password = req.body.password;
-  var resultResponse;
-  if (userNAme == "test" && password == "test") {
-    resultResponse = "Authentication successfull";
-  }
-  else {
-    resultResponse = "Authentication failed";
-  }
-
-  var responseMessage = Promise.resolve(resultResponse);
-  responseMessage.then(function (result) {
-    res.json(result);
-    console.log(result);
-  }, function (err) {
-    console.log(err); // Error: "It broke"
-    res.json(err);
-  });
-});
-
 // Facebook Oauth token axchange
 server.post('/getFbAccessToken', function (req, res) {
   var token = req.body.token;
@@ -293,7 +271,6 @@ server.post('/getFbAccessToken', function (req, res) {
         code: token,
       }
     }).then(response => {
-      console.log(response);
       accessToken = response.data.access_token;
       axios.get('https://graph.facebook.com/v2.6/me', {
         params: {
@@ -343,7 +320,6 @@ server.post('/getGoogleAccessToken', function (req, res) {
         code: token,
         grant_type:"authorization_code"
     }).then(response => {
-      console.log(response);
       accessToken = response.data.access_token;
       axios.get('https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,photos,urls', {
         headers: {
