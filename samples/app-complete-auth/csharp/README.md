@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
 contentType: samples
-createdDate: "14-02-2022 00:15:13"
+createdDate: "25-02-2022 00:15:13"
 ---
 
 # Authentication complete sample
@@ -26,7 +26,7 @@ Bot Authentication
   
   ![SSO login](AppCompleteAuth/Images/BotSsoCard.png)
   
-  - Using user name and password
+  - Authentication using user name and password
   
   ![using credentials](AppCompleteAuth/Images/BotUsingCredentials.png)
   
@@ -42,7 +42,7 @@ Tab Authentication
   
   ![Tab SSO login](AppCompleteAuth/Images/TabSsoLogin.png)
   
-  - Using user name and password
+  - Authentication using user name and password
   
   ![Tab using credentials](AppCompleteAuth/Images/TabUsingCredentials.png)
 
@@ -56,7 +56,7 @@ Messaging Extention Authentication
   
   ![ME SSO login](AppCompleteAuth/Images/MESsoCard.png)
   
-  - Using user name and password
+  - Authentication using user name and password
   
   ![ME using credentials](AppCompleteAuth/Images/MEUsingCredentials.png)
   
@@ -70,7 +70,7 @@ Messaging Extention Authentication
   
   ![ME search SSO login](AppCompleteAuth/Images/MESearchSSOCard.png)
   
-  - Using user name and password
+  - Authentication using user name and password
   
    ![ME search using credentials details](AppCompleteAuth/Images/MESearchUsingCredentialsDetailsCard.png)
    
@@ -82,7 +82,7 @@ Messaging Extention Authentication
   
   ![ME Link unfurling SSO login](AppCompleteAuth/Images/MELinkUnfurlSSOCard.png)
   
-  - Using user name and password
+  - Authentication using user name and password
   
    ![ME Link unfurling using credentials details](AppCompleteAuth/Images/MELinkUnfurlUsingCredentialsDetails.png)
    
