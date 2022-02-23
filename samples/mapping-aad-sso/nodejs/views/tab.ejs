@@ -440,18 +440,22 @@
                 data: {
                     'token':token
                 },success:function(responseJson){
-                    let userDetails = responseJson;
-                    console.log(userDetails);
-                    $("#userImgGoogle").attr("src",userDetails.photos[0].url);
-                    $("#gname").append(userDetails.names[0].displayName);
-                    $("#gemail").append(userDetails.emailAddresses[0].value);
-                    $('#cardGoogle').show();
-                    $('#googlelogin').hide();
-                    $('#cardSSO').show();
+                    if(responseJson.message =="Request failed with status code 401"){
+                        googleAuth();
+                    }
+                    else{
+                        let userDetails = responseJson;
+                        console.log(userDetails);
+                        $("#userImgGoogle").attr("src",userDetails.photos[0].url);
+                        $("#gname").append(userDetails.names[0].displayName);
+                        $("#gemail").append(userDetails.emailAddresses[0].value);
+                        $('#cardGoogle').show();
+                        $('#googlelogin').hide();
+                        $('#cardSSO').show();
+                    }
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-                    googleAuth();
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown); 
                 }
             })
         }
