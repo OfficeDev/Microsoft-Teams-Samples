@@ -190,8 +190,7 @@ server.post('/getProfileOnBehalfOf', function (req, res) {
 
   oboPromise.then(function (result) {
     res.json(result);
-  }, function (err) {
-    console.log(err); // Error: "It broke"
+  }, function (err) {// Error: "It broke"
     res.json(err);
   });
 });
@@ -286,8 +285,7 @@ server.post('/GetUserDetails', async (req, res) => {
     var responseMessage = Promise.resolve(userData);
     responseMessage.then(function (result) {
       res.json(result);
-    }, function (err) {
-      console.log(err); // Error: "It broke"
+    }, function (err) { // Error: "It broke"
       res.json(err);
     });
   });
@@ -339,9 +337,7 @@ server.post('/getFbAccessToken', function (req, res) {
 
   fbPromise.then(function (result) {
     res.json(result);
-    console.log(result);
-  }, function (err) {
-    console.log(err); // Error: "It broke"
+  }, function (err) {// Error: "It broke"
     res.json(err);
   });
 });
@@ -387,9 +383,51 @@ server.post('/getGoogleAccessToken', function (req, res) {
 
   googlePromise.then(function (result) {
     res.json(result);
-    console.log(result);
-  }, function (err) {
-    console.log(err); // Error: "It broke"
+  }, function (err) { // Error: "It broke"
     res.json(err);
   });
 });
+
+server.post('/getGoogleDetails', function (req,res){
+  var token = req.body.token;
+  var googlePromise = new Promise((resolve, reject) => {
+    axios.get('https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,photos,urls', {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      }
+    }).then(profile => {
+      resolve(profile.data);
+    }).catch((err)=>{
+      reject(err);
+    })
+  })
+
+  googlePromise.then(function (result) {
+    res.json(result);
+  }, function (err) { // Error: "It broke"
+    res.json(err);
+  });
+})
+
+server.post('/getFbDetails',function (req,res){
+  var token = req.body.token;
+  var scopes = ['name','picture','id'].join(',');
+  var fbPromise = new Promise((resolve, reject) => {  
+    axios.get('https://graph.facebook.com/v2.6/me', {
+      params: {
+        fields: scopes,
+        access_token: token,
+      }
+    }).then(profile => {
+      resolve(profile.data);
+    }).catch(error => {
+      reject(error);
+    });
+  })
+
+  fbPromise.then(function (result) {
+    res.json(result);
+  }, function (err) { // Error: "It broke"
+    res.json(err);
+  });
+})

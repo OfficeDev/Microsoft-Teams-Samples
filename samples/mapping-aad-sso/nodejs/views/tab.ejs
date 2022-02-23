@@ -112,46 +112,38 @@
         // Get user details
         function getUserDetails(userName){
             $.ajax({
-                    type: 'POST',
-                    url: '/GetUserInfo',
-                    dataType: 'json',
-                    data: {
-                        'userName':userName
-                    },
-                    success: function (responseJson) {
-                        if(responseJson =='NoDataFound'){
-                            $("#sso").show();
-                        }
-                        else{
-                            const userDetails = responseJson;
-                            if(userDetails.is_aad_signed_in){
-                                ssoAuthentication();
-                                $("#sso").hide();
-                                $(".imgContainer").hide();
-
-                                if(userDetails.is_google_signed_in){
-                                    is_google_signed_in = userDetails.is_google_signed_in
-                                    googleAuth();
-                                    $("#googlelogin").hide();
-                                    $('#cardGoogle').show();
-                                    $('#cardSSO').show();
-                                }
-                                if(userDetails.is_fb_signed_in){
-                                    setTimeout(()=>{
-                                        fbAuth();
-                                    },3000) 
-                                    is_fb_signed_in = userDetails.is_fb_signed_in
-                                    $("#facebooklogin").hide();
-                                    $('#cardFacebook').show();
-                                    $('#cardSSO').show();
-                                } 
-                            }
-                        }
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                type: 'POST',
+                url: '/GetUserInfo',
+                dataType: 'json',
+                data: {
+                    'userName':userName
+                },
+                success: function (responseJson) {
+                    if(responseJson =='NoDataFound'){
+                        $("#sso").show();
                     }
-                });
+                    else{
+                        const userDetails = responseJson;
+                        if(userDetails.is_aad_signed_in){
+                            ssoAuthentication();
+                            $("#sso").hide();
+                            $(".imgContainer").hide();
+
+                            if(userDetails.is_google_signed_in){
+                                is_google_signed_in = userDetails.is_google_signed_in
+                                getGoogleDetails(userDetails.google_token);
+                            }
+                            if(userDetails.is_fb_signed_in){ 
+                                is_fb_signed_in = userDetails.is_fb_signed_in
+                                getFbDetails(userDetails.facebook_token);
+                            } 
+                        }
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                }
+            });
         };
 
         // Initiate AAD sso authentication.
@@ -438,6 +430,52 @@
                         });
                 });
             });
+        }
+
+        function getGoogleDetails(token){
+            $.ajax({
+                type: 'POST',
+                url: '/getGoogleDetails',
+                dataType: 'json',
+                data: {
+                    'token':token
+                },success:function(responseJson){
+                    let userDetails = responseJson;
+                    console.log(userDetails);
+                    $("#userImgGoogle").attr("src",userDetails.photos[0].url);
+                    $("#gname").append(userDetails.names[0].displayName);
+                    $("#gemail").append(userDetails.emailAddresses[0].value);
+                    $('#cardGoogle').show();
+                    $('#googlelogin').hide();
+                    $('#cardSSO').show();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    googleAuth();
+                }
+            })
+        }
+
+        function getFbDetails(token){
+            $.ajax({
+                type: 'POST',
+                url: '/getFbDetails',
+                dataType: 'json',
+                data: {
+                    'token':token
+                },success:function(responseJson){
+                    let userFbDetails = responseJson;
+                    $("#fbname").append(userFbDetails.name);
+                    $("#userImgFb").attr("src", userFbDetails.picture.data.url);
+                    $('#cardFacebook').show();
+                    $("#facebooklogin").hide();
+                    $('#cardSSO').show();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    fbAuth();
+                }
+            })
         }
 
         // Disconnect from facebook.
