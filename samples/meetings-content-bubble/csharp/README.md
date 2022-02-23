@@ -40,6 +40,9 @@ This sample illustrates how to implement [Content Bubble](https://docs.microsoft
     ngrok http -host-header=rewrite 3978
     ```
 1) Create a new Bot by following steps mentioned in [Build a bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots?view=msteams-client-js-latest#build--a-bot-for-teams-with-the-microsoft-bot-framework) documentation.
+
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
 1) Go to appsettings.json and add `MicrosoftAppId`, `MicrosoftAppPassword` and `BaseUrl` information.
 1) Run your app, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder. 
 1) Update the manifest.json file with MICROSOFT-APP-ID value.

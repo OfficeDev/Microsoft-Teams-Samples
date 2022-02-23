@@ -46,6 +46,10 @@ const ScanBarCode = () => {
         <CardBody>
           <Flex column gap="gap.small">
             <Text content="Scan any barcode to get information related to it" />
+            <Text content="SDK used: " weight="semibold" />
+            <Text content="microsoftTeams" />
+            <Text content="Method: " weight="semibold" />
+            <Text content="teams.media" />
             <Button content="Scan Barcode" onClick={scanBarCode} />
           </Flex>
         </CardBody>

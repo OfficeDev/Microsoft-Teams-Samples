@@ -5,12 +5,12 @@ products:
 - office
 - office-365
 languages:
-- javascript
-title: Microsoft Teams NodeJS Helloworld - Tabs Azure AD SSO Sample
+- nodejs
+title: Tabs Azure AD SSO Sample
 description: Microsoft Teams hello world sample app for tabs Azure AD SSO in Node.js
 extensions:
   contentType: samples
-  createdDate: 11/3/2017 12:53:17 PM
+  createdDate: 12/3/2021 12:53:17 PM
 ---
 
 # Tabs Azure AD Single Sign-On Sample
@@ -23,7 +23,7 @@ This sample shows how to implement Azure AD single sign-on support for tabs. It 
 
 3. Call Graph and retrieve the user's profile
 
-![Screen shot of solution](./doc/images/AAD-SSO-Tab-4-ConsentGranted.png)
+![Screen shot of solution](./doc/images/AAD-SSO-Tab-5-ConsentPreviouslyGranted.png)
 
 ## Prerequisites
 
@@ -49,7 +49,7 @@ Your tab needs to run as a registered Azure AD application in order to obtain an
         using the application ID that was assigned to your app
     * Setup your redirect URIs. This will allow Azure AD to return authentication results to the correct URI.
         * Visit `Manage > Authentication`. 
-        * Create a redirect URI in the format of: `https://contoso.ngrok.io/auth/auth-end`.
+        * Create a redirect URI in the format of: `https://contoso.ngrok.io/auth-end`.
         * Enable Implicit Grant by selecting `Access Tokens` and `ID Tokens`.
     * Setup a client secret. You will need this when you exchange the token for more API permissions from your backend.
         * Visit `Manage > Certificates & secrets`
@@ -148,7 +148,7 @@ Compared to the Hello World sample, this app has four additional routes:
 1. `/ssoDemo` renders the tab UI. 
     * This is the tab called `Auth Tab` in personal app inside Teams. The purpose of this page is primarily to execute the `auth.js` file that handles initiates the authentication flow.
     * This tab can also be added to Teams channels
-2. `/auth/token` does not render anything but instead is the server-side route for initiating the [on-behalf-of flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-oauth2-on-behalf-of-flow). 
+2. `/getProfileOnBehalfOf` does not render anything but instead is the server-side route for initiating the [on-behalf-of flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-oauth2-on-behalf-of-flow). 
     * It takes the token it receives from the `/ssoDemo` page and attemps to exchange it for a new token that has elevated permissions to access the `profile` Graph API (which is usually used to retrieve the users profile photo).
     * If it fails (because the user hasn't granted permission to access the `profile` API), it returns an error to the `/ssoDemo` page. This error is used to display the "Consent" button which uses the Teams SDK to open the `/auth/start` page in a pop-up window.
 3. `/auth/start` and `/auth/end` routes are used if the user needs to grant further permissions. This experience happens in a seperate window. 

@@ -1,0 +1,46 @@
+﻿@using ActivityFeedBroadcast.Model
+
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js" integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <meta charset="UTF-8">
+      <meta http-equiv="Content-Security-Policy"
+         content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+
+      <style>
+         #mainDiv {
+             padding-left: 6%;
+             padding-top: 2%;
+             padding-right: 2%;
+         }
+      </style>
+   </head>
+   <body id="mainDiv">
+      <div>
+            @{
+                var taskDetails = ViewBag.TaskDetails;
+             }
+            @{
+                <div>
+                    <label for="title" class="title">Message title:</label>
+                    <br/>
+                    <div id="title">@taskDetails.title</div>
+                    <br/>
+                    <label for="description" class="description">Message description:</label>
+                    <br/>
+                    <div id="description">@taskDetails.description</div>
+                    <br/>
+                    <label for="requestby" class="messageBy">Message by:</label>
+                    <br/>
+                    <div id="requestBy">@taskDetails.userName</div>
+                    <br/>
+                </div>
+            } 
+      </div>
+   </body>
+</html>

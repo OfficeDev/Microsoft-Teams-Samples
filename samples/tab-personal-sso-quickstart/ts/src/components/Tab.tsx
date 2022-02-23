@@ -1,18 +1,14 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-
 import React from 'react';
 import './App.css';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { Avatar, Loader } from '@fluentui/react-northstar'
-
 /**
  * This tab component renders the main tab content
  * of your app.
  */
-
 export interface ITabProps {
-
 }
 interface ITabState {
   context?: microsoftTeams.Context;
@@ -24,7 +20,6 @@ interface ITabState {
   error: boolean;
 }
 class Tab extends React.Component<ITabProps, ITabState> {
-
   constructor(props: ITabProps){
     super(props)
     this.state = {
@@ -36,7 +31,6 @@ class Tab extends React.Component<ITabProps, ITabState> {
       photo: "",
       error: false
     }
-
     //Bind any functions that need to be passed as callbacks or used to React components
     this.ssoLoginSuccess = this.ssoLoginSuccess.bind(this);
     this.ssoLoginFailure = this.ssoLoginFailure.bind(this);
@@ -46,47 +40,38 @@ class Tab extends React.Component<ITabProps, ITabState> {
     this.callGraphFromClient = this.callGraphFromClient.bind(this);
     this.showConsentDialog = this.showConsentDialog.bind(this);
   }
-
   //React lifecycle method that gets called once a component has finished mounting
   //Learn more: https://reactjs.org/docs/react-component.html#componentdidmount
   componentDidMount(){
     // Initialize the Microsoft Teams SDK
     microsoftTeams.initialize();
-
     // Get the user context from Teams and set it in the state
     microsoftTeams.getContext((context: microsoftTeams.Context) => {
       this.setState({context:context});
     });
-
     //Perform Azure AD single sign-on authentication
     let authTokenRequestOptions = {
       successCallback: (result: string) => { this.ssoLoginSuccess(result) }, //The result variable is the SSO token.
       failureCallback: (error: string) => {this.ssoLoginFailure(error)}
     };
-
     microsoftTeams.authentication.getAuthToken(authTokenRequestOptions);
   }  
-
   ssoLoginSuccess = async (result: string) => {
     this.setState({ssoToken:result});
     this.exchangeClientTokenForServerToken(result);
   }
-
   ssoLoginFailure(error: string){
     console.error("SSO failed: ",error);
     this.setState({error:true});
   }
-
   //Exchange the SSO access token for a Graph access token
   //Learn more: https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow
   exchangeClientTokenForServerToken = async (token: string) => {
-
-    let serverURL = `${process.env.REACT_APP_BASE_URL}/getGraphAccessToken?ssoToken=${token}`;
+    let serverURL = `${process.env.REACT_APP_BASE_URL}/getGraphAccessToken?ssoToken=${token}&upn=${this.state.context?.upn}`;
     console.log('here ' + serverURL);
     let response = await fetch(serverURL).catch(this.unhandledFetchError); //This calls getGraphAccessToken route in /api-server/app.js
     if (response) {
       let data = await response.json().catch(this.unhandledFetchError);
-
       if(!response.ok && data.error==='consent_required'){
         //A consent_required error means it's the first time a user is logging into to the app, so they must consent to sharing their Graph data with the app.
         //They may also see this error if MFA is required.
@@ -97,16 +82,15 @@ class Tab extends React.Component<ITabProps, ITabState> {
         console.error(data);
         this.setState({error:true});
       } else {
-        //Server side token exchange worked. Save the access_token to state, so that it can be picked up and used by the componentDidMount lifecycle method.
-        this.setState({graphAccessToken:data['access_token']});
+         this.setState({
+            photo: data //Convert binary data to an image URL and set the url in state
+         })
       }
     }
   }
-
   //Show a popup dialogue prompting the user to consent to the required API permissions. This opens ConsentPopup.js.
   //Learn more: https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-tab-aad#initiate-authentication-flow
   showConsentDialog(){ 
-
     microsoftTeams.authentication.authenticate({
       url: window.location.origin + "/auth-start",
       width: 600,
@@ -115,7 +99,6 @@ class Tab extends React.Component<ITabProps, ITabState> {
       failureCallback: (reason) => {this.consentFailure(reason ?? "")}
     });
   }
-
   //Callback function for a successful authorization
   consentSuccess(result: string){
     //Save the Graph access token in state
@@ -124,22 +107,18 @@ class Tab extends React.Component<ITabProps, ITabState> {
       consentProvided: true
     });
   }
-
   consentFailure(reason: string){
     console.error("Consent failed: ",reason);
     this.setState({error:true});
   }  
-
   //React lifecycle method that gets called after a component's state or props updates
   //Learn more: https://reactjs.org/docs/react-component.html#componentdidupdate
   componentDidUpdate = async (prevProps: ITabProps, prevState: ITabState) => {
-    
     //Check to see if a Graph access token is now in state AND that it didn't exist previously
     if((prevState.graphAccessToken === "") && (this.state.graphAccessToken !== "")){
       this.callGraphFromClient();
     }
   }  
-
   // Fetch the user's profile photo from Graph using the access token retrieved either from the server 
   // or microsoftTeams.authentication.authenticate
   callGraphFromClient = async () => {
@@ -152,45 +131,34 @@ class Tab extends React.Component<ITabProps, ITabState> {
         "authorization": "bearer " + this.state.graphAccessToken
       }
     }
-
     let response = await fetch(graphPhotoEndpoint,graphRequestParams).catch(this.unhandledFetchError);
     if (response) {
       if(!response.ok){
         console.error("ERROR: ", response);
         this.setState({error:true});
       }
-      
       let imageBlog = await response.blob().catch(this.unhandledFetchError); //Get image data as raw binary data
-  
       this.setState({
         photo: URL.createObjectURL(imageBlog) //Convert binary data to an image URL and set the url in state
       })
     }
   }
-
   //Generic error handler ( avoids having to do async fetch in try/catch block )
   unhandledFetchError(err: string){
     console.error("Unhandled fetch error: ",err);
     this.setState({error:true});
   }
-
   render() {
-
       let title = this.state.context && Object.keys(this.state.context).length > 0 ?
         'Congratulations ' + this.state.context['upn'] + '! This is your tab' : <Loader/>;
-
       let ssoMessage = this.state.ssoToken === "" ?
         <Loader label='Performing Azure AD single sign-on authentication...'/>: null;
-      
       let serverExchangeMessage = (this.state.ssoToken !== "") && (!this.state.consentRequired) && (this.state.photo==="") ?
         <Loader label='Exchanging SSO access token for Graph access token...'/> : null;
-
       let consentMessage = (this.state.consentRequired && !this.state.consentProvided) ?
         <Loader label='Consent required.'/> : null;
-
       let avatar = this.state.photo !== "" ?
         <Avatar image={this.state.photo} size='largest'/> : null;
-
       let content;
       if(this.state.error){
         content = <h1>ERROR: Please ensure pop-ups are allowed for this website and retry</h1>
@@ -204,7 +172,6 @@ class Tab extends React.Component<ITabProps, ITabState> {
             <h1>{avatar}</h1>
           </div>
       }
-      
       return (
         <div>
           {content}

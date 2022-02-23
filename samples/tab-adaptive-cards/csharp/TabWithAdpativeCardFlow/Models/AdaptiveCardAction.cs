@@ -19,6 +19,12 @@ namespace TabWithAdpativeCardFlow.Models
         public CardAction MsteamsCardAction { get; set; }
 
         /// <summary>
+        /// Gets or sets id value of turncontext activity.
+        /// </summary>
+        [JsonProperty("id")]
+        public string Id { get; set; }
+
+        /// <summary>
         /// Gets or sets state value of turncontext activity.
         /// </summary>
         [JsonProperty("state")]

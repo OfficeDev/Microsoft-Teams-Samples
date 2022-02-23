@@ -67,7 +67,7 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
     ngrok http -host-header=rewrite 3978
     ```
 
-1) Run your tab, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
+1) Run your solution from Visual Studio with `F5`.
 
 
  

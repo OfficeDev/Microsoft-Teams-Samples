@@ -43,6 +43,8 @@ Using this Nodejs sample, a bot with capability to upload files to SharePoint si
 ### 1. Setup for Bot SSO
 In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
  Add this permission to app registration
 
 ![Permissions](Images/permissions.png)

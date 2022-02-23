@@ -41,7 +41,7 @@ Sample that shows how to use dialog bot with bot sdk v4, messaging extension, fa
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/auto-complete-sample/nodejs-v4`
+2) In a terminal, navigate to `samples/app-complete-sample/nodejs`
 
 3) Install modules
 
@@ -58,6 +58,8 @@ Sample that shows how to use dialog bot with bot sdk v4, messaging extension, fa
 5) Register a new bot (or update an existing one) with Bot Framework by using the full endpoint as the bot's "Messaging endpoint". Make sure to add Teams as a channel for the bot. Bot registration is here (open in a new browser tab): https://dev.botframework.com/bots
 
     > **NOTE**: When you create your bot you will create an App ID and App password - make sure you keep these for later.
+
+   - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 6) Once you have saved your bot and gotten the confirmation that it is created, navigate back to your  project. Open the ".env" file. There, copy/paste your App ID and App password from the step above.
     ```

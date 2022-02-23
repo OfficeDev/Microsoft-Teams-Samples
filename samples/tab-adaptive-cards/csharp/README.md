@@ -19,6 +19,8 @@ For reference please check [Build tabs with Adaptive Cards](https://docs.microso
 
 This feature shown in this sample is in Public Developer Preview and is supported in desktop and mobile.
 
+![Adaptive Card](TabWithAdpativeCardFlow/Images/TabAdaptiveCardFlow.png)
+
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
@@ -39,6 +41,8 @@ This feature shown in this sample is in Public Developer Preview and is supporte
 
 2. Create a Bot Registration
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+
+   - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 3. Modify the `manifest.json` in the `/AppPackage` folder and replace the `{{BOT-ID}}` with the id from step 2.
 
