@@ -176,7 +176,7 @@ server.post('/getProfileOnBehalfOf', function (req, res) {
               }
             }))
           {
-            const userDetailsList = new Array();
+            const userDetailsList = currentData;
             userDetailsList.push({"aad_id":userName,"is_aad_signed_in":true});
             currentData = userDetailsList;
             userDetails["userDetails"] = currentData;
@@ -212,6 +212,45 @@ server.post('/getUserInfo',(req,res) =>{
     res.json(userData);
   }
 })
+
+server.post('/disconnectFromGoogle',(req,res) =>{
+  var userName = req.body.userName;
+  var userData;
+  var currentData = userDetails["userDetails"];
+  let updateindex;
+  currentData.map((user, index) => {
+    if (user.aad_id == userName) {
+      updateindex = index;
+      userData = user;
+      userData['google_id'] = null;
+      userData['google_token'] = null;
+      userData['is_google_signed_in'] = false;
+    }
+  })
+    currentData[updateindex] = userData;
+    userDetails["userDetails"]=currentData;
+    res.json("disconnected from google");
+})
+
+server.post('/disconnectFromFb',(req,res) =>{
+  var userName = req.body.userName;
+  var userData;
+  var currentData = userDetails["userDetails"];
+  let updateindex;
+  currentData.map((user, index) => {
+    if (user.aad_id == userName) {
+      updateindex = index;
+      userData = user;
+      userData['facebook_id'] = null;
+      userData['facebook_token'] = null;
+      userData['is_fb_signed_in'] = false;
+    }
+  })
+    currentData[updateindex] = userData;
+    userDetails["userDetails"]=currentData;
+    res.json("disconnected from facebook");
+})
+
 // Listen for incoming requests.
 server.post('/GetUserDetails', async (req, res) => {
   var accessToken = req.body.accessToken;
@@ -227,27 +266,26 @@ server.post('/GetUserDetails', async (req, res) => {
       image: img2
     }
     var currentData = userDetails["userDetails"];
-        if(currentData == undefined){
-          const userDetailsList = new Array();
-          userDetailsList.push({"aad_id":userName,"is_aad_signed_in":true});
-          currentData = userDetailsList;
-          userDetails["userDetails"] = currentData;
-        }
-        else if (!currentData.find((user) => {
-              if(user.aad_id == userName){
-                return true;
-              }
-            }))
-          {
-            const userDetailsList = new Array();
-            userDetailsList.push({"aad_id":userName,"is_aad_signed_in":true});
-            currentData = userDetailsList;
-            userDetails["userDetails"] = currentData;
-          }
+      if(currentData == undefined){
+        const userDetailsList = currentData;
+        userDetailsList.push({"aad_id":userName,"is_aad_signed_in":true});
+        currentData = userDetailsList;
+        userDetails["userDetails"] = currentData;
+      }
+      else if (!currentData.find((user) => {
+            if(user.aad_id == userName){
+              return true;
+            }
+          }))
+      {
+        const userDetailsList = new Array();
+        userDetailsList.push({"aad_id":userName,"is_aad_signed_in":true});
+        currentData = userDetailsList;
+        userDetails["userDetails"] = currentData;
+      }
     var responseMessage = Promise.resolve(userData);
     responseMessage.then(function (result) {
       res.json(result);
-      console.log(result);
     }, function (err) {
       console.log(err); // Error: "It broke"
       res.json(err);

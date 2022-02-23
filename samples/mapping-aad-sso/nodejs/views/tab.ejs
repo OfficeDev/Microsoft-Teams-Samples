@@ -14,7 +14,7 @@
 
         .card {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            width: 30rem;
+            width: 26rem;
             height: 11rem;
             margin-left: 2rem;
             margin-top: 0.5rem;
@@ -35,14 +35,15 @@
 
         .profile {
             margin-top: 1rem;
-            margin-left: 2rem;
+            margin-left: 1rem;
             max-width: 25rem;
             align-content: flex-start;
         }
 
         .btn-outline-info {
-            margin-left: 12rem;
-            max-width: 10rem;
+            margin-left: 11.5rem;
+            max-width: 12.5rem;
+            padding: 0.5rem 0rem;
         }
 
         .signin-header {
@@ -53,15 +54,18 @@
         .card-container-div {
             display: flex;
         }
+
         .ssologin{
             background-color: rgb(98 100 167) !important;
             border-color: rgb(98 100 167) !important;
             color: #fff;
         }
+
         .home{
             text-align: center;
             margin-top: 1rem;
         }
+
         .imgContainer{
             text-align: center;
         }
@@ -69,22 +73,27 @@
             color: #fff;
             border-color: rgb(98 100 167);
         }
+
         .facebook{
             background-color: #4267b2;
             border-color:#4267b2;
         }
+
         .facebook:hover{
             background-color: #4267b2;
             border-color:#4267b2;
         }
+
         .googlebutton{
             border: 2px solid #000;
         }
+
         .googlebutton img{
             height: 20px;
             margin-right: 3px;
         }
     </style>
+    
     <script>
         let clientId =  <%-clientId%>
         let accessToken;
@@ -98,7 +107,9 @@
                 getUserDetails(context.upn);
             });
         });
+        microsoftTeams.initialize();
 
+        // Get user details
         function getUserDetails(userName){
             $.ajax({
                     type: 'POST',
@@ -107,21 +118,20 @@
                     data: {
                         'userName':userName
                     },
-                    success: async function (responseJson) {
+                    success: function (responseJson) {
                         if(responseJson =='NoDataFound'){
                             $("#sso").show();
                         }
                         else{
-                            console.log(responseJson);
                             const userDetails = responseJson;
                             if(userDetails.is_aad_signed_in){
-                                await ssoAuthentication();
+                                ssoAuthentication();
                                 $("#sso").hide();
                                 $(".imgContainer").hide();
 
                                 if(userDetails.is_google_signed_in){
                                     is_google_signed_in = userDetails.is_google_signed_in
-                                    await googleAuth();
+                                    googleAuth();
                                     $("#googlelogin").hide();
                                     $('#cardGoogle').show();
                                     $('#cardSSO').show();
@@ -144,8 +154,8 @@
                 });
         };
 
-        microsoftTeams.initialize();
-        async function ssoAuthentication() {
+        // Initiate AAD sso authentication.
+        function ssoAuthentication() {
             getClientSideToken()
                 .then((clientSideToken) => {
                     return getServerSideToken(clientSideToken);
@@ -170,6 +180,7 @@
                 });
         }
 
+        // Get client side token.
         function getClientSideToken() {
             return new Promise((resolve, reject) => {
                 microsoftTeams.authentication.getAuthToken({
@@ -183,6 +194,7 @@
             });
         }
 
+        // Get AAD server side token.
         function getServerSideToken(clientSideToken) {
             return new Promise((resolve, reject) => {
                 microsoftTeams.getContext((context) => {
@@ -199,31 +211,31 @@
                         mode: 'cors',
                         cache: 'default'
                     })
-                        .then((response) => {
-                            if (response.ok) {
-                                return response.json();
-                            } else {
-                                reject(response.error);
+                    .then((response) => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            reject(response.error);
+                        }
+                    })
+                    .then((responseJson) => {
+                        if (responseJson.error) {
+                            reject(responseJson.error);
+                        } else {
+                            const userDetails = responseJson;
+                            $("#sso").hide();
+                            $("#userImgSso").attr("src", userDetails.image);
+                            $("#name").append(userDetails.details.displayName);
+                            $("#email").append(userDetails.details.userPrincipalName);
+                            $("#work").append(userDetails.details.jobTitle);
+                            if(!is_google_signed_in){
+                                $("#googlelogin").show();
                             }
-                        })
-                        .then((responseJson) => {
-                            if (responseJson.error) {
-                                reject(responseJson.error);
-                            } else {
-                                const userDetails = responseJson;
-                                $("#sso").hide();
-                                $("#userImgSso").attr("src", userDetails.image);
-                                $("#name").append(userDetails.details.displayName);
-                                $("#email").append(userDetails.details.userPrincipalName);
-                                $("#work").append(userDetails.details.jobTitle);
-                                if(!is_google_signed_in){
-                                    $("#googlelogin").show();
-                                }
-                                if(!is_fb_signed_in){
-                                    $("#facebooklogin").show();
-                                }
+                            if(!is_fb_signed_in){
+                                $("#facebooklogin").show();
                             }
-                        });
+                        }
+                    });
                 });
             });
         }
@@ -258,7 +270,6 @@
             });
         }
 
-
         // Get user information.
         function getUserInfo(userPrincipleName) {
             if (userPrincipleName) {
@@ -287,6 +298,38 @@
             }
         }
 
+        // Initiate facebook auth flow.
+        function fbAuth() {
+            fbAuthentication()
+                .then((result) => {
+                    return getServerSideTokenFb(result.idToken);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+
+        // Get facebook client side token.
+        function fbAuthentication() {
+            return new Promise((resolve, reject) => {
+                microsoftTeams.authentication.authenticate({
+                    url: `https://www.facebook.com/v12.0/dialog/oauth?client_id=${clientId.clientIdFb}&redirect_uri=${redirectUriFb}&state=1234535`,
+                    width: 600,
+                    height: 535,
+                    successCallback: result => {
+                        let data = localStorage.getItem(result);
+                        let tokenDetails = JSON.parse(data);
+                        localStorage.removeItem(result);
+                        resolve(tokenDetails);
+                    },
+                    failureCallback: reason => {
+                        reject(reason);
+                    }
+                });
+            });
+        }
+
+        // Get facebook server side token.
         function getServerSideTokenFb(clientSideToken) {
             return new Promise((resolve, reject) => {
                 microsoftTeams.getContext((context) => {
@@ -325,6 +368,39 @@
             });
         }
 
+        // Initiate google auth flow.
+        function googleAuth() {
+            googleAuthentication()
+                .then((result) => {
+                    return getServerSideTokenGoogle(result.idToken);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+
+        // Get google client side token.
+        function googleAuthentication() {
+            return new Promise((resolve, reject) => {
+                microsoftTeams.authentication.authenticate({
+                    url: `https://accounts.google.com/o/oauth2/v2/auth/identifier?client_id=${clientId.clientIdGoogle}&scope=openid%20email%20profile&response_type=code&redirect_uri=${redirectUriGoogle}`,
+                    width: 600,
+                    height: 535,
+                    successCallback: result => {
+                        let data = localStorage.getItem(result);
+                        let tokenDetails = JSON.parse(data);
+                        localStorage.removeItem(result);
+                        resolve(tokenDetails);
+                    },
+                    failureCallback: reason => {
+                        alert(reason);
+                        reject(reason);
+                    }
+                });
+            });
+        }
+
+        // Get google server side token.
         function getServerSideTokenGoogle(clientSideToken) {
             return new Promise((resolve, reject) => {
                 microsoftTeams.getContext((context) => {
@@ -364,67 +440,51 @@
             });
         }
 
-        async function fbAuthentication() {
-            return new Promise((resolve, reject) => {
-                microsoftTeams.authentication.authenticate({
-                    url: `https://www.facebook.com/v12.0/dialog/oauth?client_id=${clientId.clientIdFb}&redirect_uri=${redirectUriFb}&state=1234535`,
-                    width: 600,
-                    height: 535,
-                    successCallback: result => {
-                        let data = localStorage.getItem(result);
-                        let tokenDetails = JSON.parse(data);
-                        localStorage.removeItem(result);
-                        resolve(tokenDetails);
+        // Disconnect from facebook.
+        function disconnectFromFb(){
+            microsoftTeams.getContext(function (context) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/disconnectFromFb',
+                    dataType: 'json',
+                    data: {
+                        'userName':context.upn
                     },
-                    failureCallback: reason => {
-                        reject(reason);
-                    }
-                });
-            });
-        }
-
-        function googleAuthentication() {
-            console.log("googliiiii")
-            return new Promise((resolve, reject) => {
-                microsoftTeams.authentication.authenticate({
-                    url: `https://accounts.google.com/o/oauth2/v2/auth/identifier?client_id=${clientId.clientIdGoogle}&scope=openid%20email%20profile&response_type=code&redirect_uri=${redirectUriGoogle}`,
-                    width: 600,
-                    height: 535,
-                    successCallback: result => {
-                        let data = localStorage.getItem(result);
-                        let tokenDetails = JSON.parse(data);
-                        localStorage.removeItem(result);
-                        resolve(tokenDetails);
+                    success:function(responseJson){
+                        if(responseJson == 'disconnected from facebook'){
+                            $('#cardFacebook').hide();
+                            $("#facebooklogin").show();
+                        }
                     },
-                    failureCallback: reason => {
-                        alert(reason);
-                        reject(reason);
+                    error: function (xhr, textStatus, errorThrown) {
+                            console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                     }
-                });
-            });
-        }
-
-        function fbAuth() {
-            fbAuthentication()
-                .then((result) => {
-                    return getServerSideTokenFb(result.idToken);
                 })
-                .catch((error) => {
-                    console.log(error);
-                });
+            })
         }
 
-        async function googleAuth() {
-            console.log("googli")
-            googleAuthentication()
-                .then((result) => {
-                    return getServerSideTokenGoogle(result.idToken);
+        // Disconnect from google.
+        function disconnectFromGoogle(){
+            microsoftTeams.getContext(function (context) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/disconnectFromGoogle',
+                    dataType: 'json',
+                    data: {
+                        'userName':context.upn
+                    },
+                    success:function(responseJson){
+                        if(responseJson == 'disconnected from google'){
+                            $('#cardGoogle').hide();
+                            $("#googlelogin").show();
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                            console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    }
                 })
-                .catch((error) => {
-                    console.log(error);
-                });
+            })
         }
-
     </script>
 </head>
 
@@ -469,6 +529,7 @@
                             <span id="fbname"><b>Name: </b></span>
                         </div>
                     </div>
+                    <button type="button" class="btn btn-outline-info" onclick="disconnectFromFb()" id="fb-disConnect">Disconnect from facebook</button>
                 </div>
             </div>
             <div id="cardGoogle" style="display:none;">
@@ -482,6 +543,7 @@
                             <span id="gemail"><b>Email: </b></span><br>
                         </div>
                     </div>
+                    <button type="button" class="btn btn-outline-info" onclick="disconnectFromGoogle()" id="google-disConnect">Disconnect from google</button>
                 </div>
             </div>
         </div>
