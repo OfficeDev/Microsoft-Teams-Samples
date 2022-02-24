@@ -43,7 +43,7 @@ Tab Authentication
   
   ![Tab SSO login](Images/TabSsoLogin.png)
   
-  - Using user name and password
+  - Authentication using user name and password
   
   ![Tab using credentials](Images/TabUsingCredentials.png)
 
@@ -57,7 +57,7 @@ Messaging Extention Authentication
   
   ![ME SSO login](Images/MESsoCard.png)
   
-  - Using user name and password
+  - Authentication using user name and password
   
   ![ME using credentials](Images/MEUsingCredentials.png)
   
@@ -71,7 +71,7 @@ Messaging Extention Authentication
   
   ![ME search SSO login](Images/MESearchSSOCard.png)
   
-  - Using user name and password
+  - Authentication using user name and password
   
    ![ME search using credentials details](Images/MESearchUsingCredentialsDetailsCard.png)
    
@@ -83,7 +83,7 @@ Messaging Extention Authentication
   
   ![ME Link unfurling SSO login](Images/MELinkUnfurlSSOCard.png)
   
-  - Using user name and password
+  - Authentication using user name and password
   
    ![ME Link unfurling using credentials details](Images/MELinkUnfurlUsingCredentialsDetails.png)
 
