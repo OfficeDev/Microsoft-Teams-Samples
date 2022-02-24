@@ -53,7 +53,7 @@ class SimpleFacebookAuthDialog extends LogoutDialog {
 
  async userInfoStep(stepContext) {
    const userName = stepContext.result
-   var facbookProfile = await this.getFacebookUserData(tokenResponse.token);
+   var facbookProfile = await this.getFacebookUserData(token);
         const profileCard = CardFactory.adaptiveCard({
             version: '1.0.0',
             type: 'AdaptiveCard',

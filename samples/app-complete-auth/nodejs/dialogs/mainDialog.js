@@ -54,8 +54,7 @@ class MainDialog extends ComponentDialog {
                 return await stepContext.beginDialog(SSOAUTH);
             }
             else if (stepContext.context._activity.text.trim() == "facebooklogin") {
-                await stepContext.beginDialog(FACEBOOKAUTH);
-                return await stepContext.endDialog();
+                return await stepContext.beginDialog(FACEBOOKAUTH);
             }
             else{
                 const buttons = [
