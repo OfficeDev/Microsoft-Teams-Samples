@@ -12,7 +12,9 @@ const { polyfills } = require('isomorphic-fetch');
 const { SsoOAuthPrompt } = require('./ssoOAuthPrompt');
 const { SimpleGraphClient } = require('../simpleGraphClient');
 const { SimpleFacebookAuthDialog } = require('./simpleFacebookAuthDialog');
+const { GoogleAuthDialog } = require('./googleAuthDialog');
 const FACEBOOKAUTH = 'FacebookAuth';
+const GOOGLEAUTH = 'GoogleAuth';
 var  token;
 
 class MainDialog extends LogoutDialog {
@@ -28,6 +30,7 @@ class MainDialog extends LogoutDialog {
 
         this.addDialog(new TextPrompt(TEXT_PROMPT))
         this.addDialog(new SimpleFacebookAuthDialog(FACEBOOKAUTH));
+        this.addDialog(new GoogleAuthDialog(GOOGLEAUTH));
 
         this.addDialog(new WaterfallDialog(MAIN_WATERFALL_DIALOG, [
             this.promptStep.bind(this),
@@ -59,19 +62,17 @@ class MainDialog extends LogoutDialog {
             if (stepContext.context._activity.text.trim() == "sso") {
                 return await stepContext.beginDialog(OAUTH_PROMPT);
             }
-            else if (stepContext.context._activity.text.trim() == "usingcredentials") {
-                await stepContext.context.sendActivity({ attachments: [this.getAdaptiveCardUserLogin()] });
-                return await stepContext.endDialog();
+            else if (stepContext.context._activity.text.trim() == "googlelogin") {
+                return await stepContext.beginDialog(GOOGLEAUTH);
             }
             else if (stepContext.context._activity.text.trim() == "facebooklogin") {
-                await stepContext.beginDialog(FACEBOOKAUTH);
-                return await stepContext.endDialog();
+                return await stepContext.beginDialog(FACEBOOKAUTH);
             }
             else{
                 const buttons = [
                     { type: ActionTypes.ImBack, title: 'AAD SSO authentication', value: 'sso' },
                     { type: ActionTypes.ImBack, title: 'Facebook login (OAuth 2)', value: 'facebooklogin' },
-                    { type: ActionTypes.ImBack, title: 'User Id/password login', value: 'usingcredentials' }]
+                    { type: ActionTypes.ImBack, title: 'Google login', value: 'googlelogin' }]
                 const card = CardFactory.heroCard('Login options', undefined,
                     buttons,{"text":"Select a login option"});
                 await stepContext.context.sendActivity({ attachments: [card] });

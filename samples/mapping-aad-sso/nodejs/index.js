@@ -105,7 +105,7 @@ server.get('/popUpSignin', function (req, res) {
 // Pop-up dialog to ask for additional permissions, redirects to AAD page
 server.get('/auth-start', function (req, res) {
   var clientId = process.env.MicrosoftAppId;
-  res.render('./views/auth-start', { clientId: clientId });
+  res.render('./views/auth-start', { clientId: JSON.stringify(clientId) });
 });
 
 // End of the pop-up dialog auth flow, returns the results back to parent window

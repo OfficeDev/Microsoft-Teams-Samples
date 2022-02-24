@@ -52,31 +52,25 @@
         }
 
         .card-container-div {
-            display: flex;
+            margin-left: 30%;
+            padding-bottom: 2rem;
         }
 
         .ssologin{
-            background-color: rgb(98 100 167) !important;
-            border-color: rgb(98 100 167) !important;
-            color: #fff;
-        }
-
-        .home{
-            text-align: center;
-            margin-top: 1rem;
+            margin-left: 10.5rem;
+            margin-top: 7.6rem;
+            width: 6.5rem;
         }
 
         .imgContainer{
             text-align: center;
         }
-        .ssologin:hover{
-            color: #fff;
-            border-color: rgb(98 100 167);
-        }
 
         .facebook{
             background-color: #4267b2;
             border-color:#4267b2;
+            max-width: 12rem;
+            margin-left: 46%;
         }
 
         .facebook:hover{
@@ -86,11 +80,17 @@
 
         .googlebutton{
             border: 2px solid #000;
+            max-width: 12rem;
+            margin-left: 46%;
         }
 
         .googlebutton img{
             height: 20px;
             margin-right: 3px;
+        }
+        #divError{
+            margin-left: -9rem;
+            margin-top: 8rem;
         }
     </style>
     
@@ -102,10 +102,7 @@
         let is_google_signed_in = false;
         let is_fb_signed_in = false;
         $(document).ready(function () {
-            microsoftTeams.initialize();
-            microsoftTeams.getContext(function (context) {
-                getUserDetails(context.upn);
-            });
+            ssoAuthentication();
         });
         microsoftTeams.initialize();
 
@@ -125,9 +122,6 @@
                     else{
                         const userDetails = responseJson;
                         if(userDetails.is_aad_signed_in){
-                            ssoAuthentication();
-                            $("#sso").hide();
-                            $(".imgContainer").hide();
 
                             if(userDetails.is_google_signed_in){
                                 is_google_signed_in = userDetails.is_google_signed_in
@@ -155,16 +149,14 @@
                 .catch((error) => {
                     if (error === "invalid_grant") {
                         // Display in-line button so user can consent
-                        $("#divError").text("invalid_grant - User or admin consent is required. Click Authenticate button.");
-                        $("#divError").css("margin-left", "15rem");
+                        $("#divError").text("invalid_grant");
                         $("#sso").hide();
                         $("#divError").show();
                         $("#consent").show();
 
                     } else {
                         // Display in-line button so user can consent
-                        $("#divError").text("invalid_grant - User or admin consent is required. Click Authenticate button.");
-                        $("#divError").css("margin-left", "15rem");
+                        $("#divError").text("invalid_grant");
                         $("#sso").hide();
                         $("#divError").show();
                         $("#consent").show();
@@ -220,11 +212,12 @@
                             $("#name").append(userDetails.details.displayName);
                             $("#email").append(userDetails.details.userPrincipalName);
                             $("#work").append(userDetails.details.jobTitle);
-                            if(!is_google_signed_in){
-                                $("#googlelogin").show();
+                            getUserDetails(context.upn);
+                            if(is_google_signed_in){
+                                $("#googlelogin").hide();
                             }
-                            if(!is_fb_signed_in){
-                                $("#facebooklogin").show();
+                            if(is_fb_signed_in){
+                                $("#facebooklogin").hide();
                             }
                         }
                     });
@@ -271,17 +264,15 @@
                     dataType: 'json',
                     data: {
                         'accessToken': accessToken,
-                        'userName':context.upn
+                        'userName':userPrincipleName
                     },
                     success: function (responseJson) {
                         const userDetails = JSON.parse(responseJson);
-                        $("#sso").hide();
                         $("#userImgId").attr("src", userDetails.image);
                         $("#name").append(userDetails.details.displayName);
                         $("#email").append(userDetails.details.userPrincipalName);
                         $("#work").append(userDetails.details.jobTitle);
-                        $("#facebooklogin").show();
-                        $("#googlelogin").show();
+                        getUserDetails(context.upn);
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
@@ -349,11 +340,11 @@
                                 reject(responseJson.error);
                             } else {
                                 let userFbDetails = responseJson;
-                                $("#fbname").append(userFbDetails.name);
+                                $("#fbname").empty();
+                                $("#fbname").append("<b> Name: </b>" + userFbDetails.name);
                                 $("#userImgFb").attr("src", userFbDetails.picture.data.url);
-                                $('#cardFacebook').show();
                                 $("#facebooklogin").hide();
-                                $('#cardSSO').show();
+                                $("#fb-disConnect").show();
                             }
                         });
                 });
@@ -421,17 +412,19 @@
                             } else {
                                 let userDetails = responseJson;
                                 $("#userImgGoogle").attr("src",userDetails.photos[0].url);
-                                $("#gname").append(userDetails.names[0].displayName);
-                                $("#gemail").append(userDetails.emailAddresses[0].value);
-                                $('#cardGoogle').show();
-                                $('#googlelogin').hide();
-                                $('#cardSSO').show();
+                                $("#gname").empty();
+                                $("#gemail").empty();
+                                $("#gname").append("<b>Name: </b>"+ userDetails.names[0].displayName);
+                                $("#gemail").append("<b>Email: </b>"+ userDetails.emailAddresses[0].value);
+                                $("#google-disConnect").show();
+                                $("#googlelogin").hide();
                             }
                         });
                 });
             });
         }
 
+        // Get google details.
         function getGoogleDetails(token){
             $.ajax({
                 type: 'POST',
@@ -449,9 +442,8 @@
                         $("#userImgGoogle").attr("src",userDetails.photos[0].url);
                         $("#gname").append(userDetails.names[0].displayName);
                         $("#gemail").append(userDetails.emailAddresses[0].value);
-                        $('#cardGoogle').show();
-                        $('#googlelogin').hide();
-                        $('#cardSSO').show();
+                        $("#google-disConnect").show();
+                        $("#googlelogin").hide();
                     }
                 },
                 error: function (xhr, textStatus, errorThrown) {
@@ -460,6 +452,7 @@
             })
         }
 
+        // Get facebook details.
         function getFbDetails(token){
             $.ajax({
                 type: 'POST',
@@ -471,9 +464,8 @@
                     let userFbDetails = responseJson;
                     $("#fbname").append(userFbDetails.name);
                     $("#userImgFb").attr("src", userFbDetails.picture.data.url);
-                    $('#cardFacebook').show();
+                    $("#fb-disConnect").show();
                     $("#facebooklogin").hide();
-                    $('#cardSSO').show();
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
@@ -494,7 +486,10 @@
                     },
                     success:function(responseJson){
                         if(responseJson == 'disconnected from facebook'){
-                            $('#cardFacebook').hide();
+                            $("#fbname").empty();
+                            $("#fbname").append("<b> Name: </b>");
+                            $("#userImgFb").attr("src", "https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744034?k=20&m=1016744034&s=612x612&w=0&h=kjCAwH5GOC3n3YRTHBaLDsLIuF8P3kkAJc9RvfiYWBY=");
+                            $("#fb-disConnect").hide();
                             $("#facebooklogin").show();
                         }
                     },
@@ -517,7 +512,12 @@
                     },
                     success:function(responseJson){
                         if(responseJson == 'disconnected from google'){
-                            $('#cardGoogle').hide();
+                            $("#userImgGoogle").attr("src","https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744034?k=20&m=1016744034&s=612x612&w=0&h=kjCAwH5GOC3n3YRTHBaLDsLIuF8P3kkAJc9RvfiYWBY=");
+                            $("#gname").empty();
+                            $("#gemail").empty();
+                            $("#gname").append("<b>Name: </b");
+                            $("#gemail").append("<b>Email: </b>");
+                            $("#google-disConnect").hide();
                             $("#googlelogin").show();
                         }
                     },
@@ -533,59 +533,51 @@
 <body class="theme-light">
     <div class="surface">
         <h3> Welcome to App sample</h3>
-        <P class="imgContainer"> <img class ="homeImg" src="/Images/home.png"/></P>
-        <div class="home">
-            <button type="button" class="btn btn-sm ssologin" onclick="requestConsent()" id="consent"
-            style="display:none;">Authenticate</button>
-            <div id="divError" style="display: none"></div>
-            <button type="button" class="btn btn-sm ssologin" onclick="ssoAuthentication()" id="sso">Login with AAD SSO</button>
-        </div>
-        <div class="home">
-            <button type="button" id="facebooklogin" class="btn btn-primary facebook" onclick="fbAuth()" style="display:none;"><i class="fa fa-facebook" ></i> Continue with Facebook</button>    
-        </div>
-        <div class="home">
-        <button type="button" id="googlelogin" class="btn googlebutton" style="display:none;" onclick="googleAuth()"><img src="/Images/googleIcon.png"> Continue with Google</button>
-        </div>
         <div class="card-container-div">
-            <div id="cardSSO" style="display:none;">
+            <div id="cardSSO">
                 <div class="signin-header"><b>User info from SSO</b></div>
-                <div class="card">
-                    <div class="container">
-                        <img src="https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744034?k=20&m=1016744034&s=612x612&w=0&h=kjCAwH5GOC3n3YRTHBaLDsLIuF8P3kkAJc9RvfiYWBY="
-                            alt="Avatar" id="userImgSso" width="100px">
-                        <div class="profile">
-                            <span id="name"><b>Name: </b></span><br>
-                            <span id="email"><b>Email: </b></span></span><br>
-                            <span id="work"><b>Work: </b></span></span>
-                        </div>
+                    <div class="card">
+                        <div class="container">
+                            <img src="https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744034?k=20&m=1016744034&s=612x612&w=0&h=kjCAwH5GOC3n3YRTHBaLDsLIuF8P3kkAJc9RvfiYWBY="
+                                alt="Avatar" id="userImgSso" width="100px" height="100px">
+                            <div class="profile">
+                                <span id="name"><b>Name: </b></span><br>
+                                <span id="email"><b>Email: </b></span></span><br>
+                                <span id="work"><b>Work: </b></span></span>
+                            </div>
+                            <div id="divError" style="display: none"></div>
+                            <button type="button" class="btn btn-sm btn-outline-info ssologin" onclick="requestConsent()" id="consent"
+                                style="display:none;">Consent</button>
                     </div>
                 </div>
             </div>
-            <div id="cardFacebook" style="display:none;">
+            <div id="cardFacebook">
                 <div class="signin-header"><b>User info from facebook</b></div>
                 <div class="card">
                     <div class="container">
                         <img src="https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744034?k=20&m=1016744034&s=612x612&w=0&h=kjCAwH5GOC3n3YRTHBaLDsLIuF8P3kkAJc9RvfiYWBY="
-                            alt="Avatar" id="userImgFb" width="100px">
+                            alt="Avatar" id="userImgFb" width="100px" height="100px">
                         <div class="profile">
                             <span id="fbname"><b>Name: </b></span>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-outline-info" onclick="disconnectFromFb()" id="fb-disConnect">Disconnect from facebook</button>
+                    <button type="button" id="facebooklogin" class="btn btn-primary facebook" onclick="fbAuth()"><i class="fa fa-facebook" ></i> Connect to Facebook</button>
+                    <button type="button" style="display:none;" class="btn btn-outline-info" onclick="disconnectFromFb()" id="fb-disConnect">Disconnect from facebook</button>
                 </div>
             </div>
-            <div id="cardGoogle" style="display:none;">
+            <div id="cardGoogle">
                 <div class="signin-header"><b>User info from google</b></div>
                 <div class="card">
                     <div class="container">
                         <img src="https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744034?k=20&m=1016744034&s=612x612&w=0&h=kjCAwH5GOC3n3YRTHBaLDsLIuF8P3kkAJc9RvfiYWBY="
-                            alt="Avatar" id="userImgGoogle" width="100px">
+                            alt="Avatar" id="userImgGoogle" width="100px" height="100px">
                         <div class="profile">
                             <span id="gname"><b>Name: </b></span><br>
                             <span id="gemail"><b>Email: </b></span><br>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-outline-info" onclick="disconnectFromGoogle()" id="google-disConnect">Disconnect from google</button>
+                    <button type="button" id="googlelogin" class="btn googlebutton" onclick="googleAuth()"><img src="/Images/googleIcon.png"> Connect to Google</button>
+                    <button style="display:none;" type="button" class="btn btn-outline-info" onclick="disconnectFromGoogle()" id="google-disConnect">Disconnect from google</button>
                 </div>
             </div>
         </div>

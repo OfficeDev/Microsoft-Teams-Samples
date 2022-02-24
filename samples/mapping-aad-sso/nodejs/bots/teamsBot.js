@@ -39,24 +39,6 @@ class TeamsBot extends DialogBot {
         // Run the Dialog with the new Token Response Event Activity.
         await this.dialog.run(context, this.dialogState);
     }
-
-    async onSignInInvoke(context) {
-        if(context.activity.value != null) {
-            if(context.activity.value.state =='CancelledByUser'){
-                await context.sendActivity("Sign in cancelled by user"); 
-            }
-            else{
-                var userDetails = JSON.parse(context.activity.value.state);
-                if(userDetails.userName == "testaccount@test123.onmicrosoft.com" && userDetails.password == "testpassword") {
-                    const userCard = CardFactory.adaptiveCard(this.getAdaptiveCardUserDetails());
-                    await context.sendActivity({ attachments: [userCard] }); //CancelledByUser
-                }
-                else {
-                    await context.sendActivity("Invalid credentials");
-                }
-            }
-        }
-    }
     
     async handleTeamsSigninVerifyState(context, query) {
         console.log('Running dialog with signin/verifystate from an Invoke Activity.');
