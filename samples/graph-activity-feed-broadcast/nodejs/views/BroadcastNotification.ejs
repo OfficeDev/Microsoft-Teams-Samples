@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+            crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="./scripts/auth-delegated.js"></script>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Security-Policy"
+            content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+    </head>
+    <style>
+        #mainDiv {
+            padding-left: 10%;
+            padding-top: 2%;
+        }
+        input {
+                 width: 58rem;
+             }
+    </style>
+</head>
+
+<body id=mainDiv>
+    <div class="tab-content">
+        <div id="createtask" class="tab-pane fade in active">
+            <div class="mb">
+                <div class="form-group fg">
+                    <label for="title" class="title">Message title</label>
+                    <br>
+                    <input type="text" id="title" name="taskTitle">
+                </div>
+                <br />
+                <div class="form-group fg">
+                    <label for="title-desc" class="description">Message description</label><br/>
+                    <textarea id="description" name="taskDescription" rows="5" cols="80"></textarea>
+                    <br />
+                </div>
+            </div>
+            <div class="modal-footer mf">
+                <br />
+                <button type="button" class="btn-send save" onclick="return SendNotificationToOrganisation()">Send message</button>
+            </div>
+            <div id="task-submitted">
+                Message broadcasted successfully.
+            </div>
+        </div>
+    </div>
+    <script>
+        var data =  <%-data%>
+
+        $(document).ready(function () {
+            $('#task-submitted').hide();
+        });
+
+        microsoftTeams.initialize();
+        var userId;
+        var userName ;
+
+        microsoftTeams.getContext(function (context) {
+            userId = context.userObjectId;
+            userName  = context.upn;
+
+            if(context.subEntityId!="" && context.subEntityId!= undefined)
+            {
+                let taskInfo = {
+                    title: "Broadcast details",
+                    height: 400,
+                    width: 400,
+                    url: window.location.origin + "/BroadcastDetails?taskId=" + context.subEntityId,
+                    card: null,
+                    fallbackUrl:null,
+                    completionBotId: null,
+                    };
+                microsoftTeams.tasks.startTask(taskInfo);
+            };
+        });
+
+        // Send notification to group chat for task creation.
+        function SendNotificationToOrganisation() {
+            var isValid = true;
+             $('#title,#description').each(function () {
+                 if ($.trim($(this).val()) == '') {
+                     isValid = false;
+                     $(this).css({
+                         "border": "1px solid red"
+                     });
+                 }
+                 else {
+                     $(this).css({
+                         "border": "",
+                         "background": ""
+                     });
+                 }
+             });
+
+             if (isValid == false) {
+                 e.preventDefault();
+                 return false;
+             }
+
+            let taskInfo = {
+                 id: data.length + 1,
+                 title: $('#title').val(),
+                 description: $('#description').val(),
+                 userId: userId,
+                 userName: userName
+             };
+
+            $.ajax({
+                url: "/SendNotificationToOrganisation",
+                type: "POST",
+                contentType: 'application/json',
+                data: JSON.stringify(taskInfo),
+                success: function (profile) {
+                    console.log(profile);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log(xhr)
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                },
+            });
+        };
+    </script>
+</body>
+
+</html>

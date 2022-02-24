@@ -18,10 +18,11 @@ This sample shows [tab device permissions](https://docs.microsoft.com/microsoftt
 
 It also shows Device permissions for the browser. Please refer [Device permissions for browser](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/device-capabilities/browser-device-permissions) for more information.
 
-Mobile View
+**Mobile View**
+
 ![Mobile Demo](Images/mainTab1.png)
 
-Desktop View
+**Desktop View**
 ![Desktop View](Images/desktopHome.png)
 
 ```
@@ -78,8 +79,6 @@ Local Running App:
 ![Accept Permissions](Images/allowPermission.png)
 1. Try this on Mobile. Screenshot of available features: <br/> 
 ![Mobile Demo](Images/mainTab1.png)
-![Mobile Demo](Images/mainTab2.png)
-![Mobile Demo](Images/captureImage.png)
 
 1. Device permissions on browser
 
@@ -104,4 +103,3 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
