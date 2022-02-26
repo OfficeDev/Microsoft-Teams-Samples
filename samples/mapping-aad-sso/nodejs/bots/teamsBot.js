@@ -26,6 +26,7 @@ class TeamsBot extends DialogBot {
             for (let member = 0; member < membersAdded.length; member++) {
                 if (membersAdded[member].id !== context.activity.recipient.id) {
                     await context.sendActivity("Hello and welcome! Please type 'login' for initiating the authentication flow.");
+                    await this.dialog.run(context, this.dialogState);
                 }
             }
 
