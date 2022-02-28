@@ -6,8 +6,12 @@ const { tokenExchangeOperationName } = require('botbuilder');
 const { SsoOAuthHelpler } = require('../SsoOAuthHelpler');
 const { CardFactory} = require('botbuilder');
 const { SimpleGraphClient } = require('../simpleGraphClient.js');
+const Data = require('../helper/dataHelper');
+const CardHelper = require('../cards/cardHelper');
 const axios = require('axios')
-
+const userDetails = {};
+let is_fb_signed_in;
+let is_google_signed_in;
 class TeamsBot extends DialogBot {
     /**
     *
@@ -20,6 +24,7 @@ class TeamsBot extends DialogBot {
         this._ssoOAuthHelper = new SsoOAuthHelpler(process.env.ConnectionName, conversationState);
         this.connectionName = process.env.ConnectionName;
         this.fbconnectionName = process.env.FBConnectionName;
+        this.googleconnectionName = process.env.GoogleConnectionName
         this.baseUrl = process.env.ApplicationBaseUrl;
         this.onMembersAdded(async (context, next) => {
             const membersAdded = context.activity.membersAdded;
@@ -46,108 +51,24 @@ class TeamsBot extends DialogBot {
         await this.dialog.run(context, this.dialogState);
     }
 
-    async handleTeamsMessagingExtensionFetchTask(context, action) {
-        const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
-
-        if (action.commandId === 'SSO') {
-            const magicCode =
-                action.state && Number.isInteger(Number(action.state))
-                    ? action.state
-                    : '';
-
-            const tokenResponse = await userTokenClient.getUserToken(
-                context.activity.from.id,
-                this.connectionName,
-                context.activity.channelId,
-                magicCode
-            );
-
-            if (!tokenResponse || !tokenResponse.token) {
-                // There is no token, so the user has not signed in yet.
-                // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
-
-                const { signInLink } = await userTokenClient.getSignInResource(
-                    this.connectionName,
-                    context.activity
-                );
-
-                return {
-                    composeExtension: {
-                        type: 'auth',
-                        suggestedActions: {
-                            actions: [
-                                {
-                                    type: 'openUrl',
-                                    value: signInLink,
-                                    title: 'Bot Service OAuth'
-                                },
-                            ],
-                        },
-                    },
-                };
-            }
-            const graphClient = new SimpleGraphClient(tokenResponse.token);
-            const profile = await graphClient.getMeAsync();
-            var userImage = await graphClient.getUserPhoto()
-            var imageString = "";
-            var img2 = "";
-            await userImage.arrayBuffer().then(result => {
-                imageString = Buffer.from(result).toString('base64');
-                img2 = "data:image/png;base64," + imageString;
-            })
-            const profileCard = CardFactory.adaptiveCard({
-                version: '1.0.0',
-                type: 'AdaptiveCard',
-                body: [
-                    {
-                        type: "TextBlock",
-                        size: "Medium",
-                        weight: "Bolder",
-                        text: "User profile details are"
-                    },
-                    {
-                        type: "Image",
-                        size: "Medium",
-                        url: img2
-                    },
-                    {
-                        type: "TextBlock",
-                        size: "Medium",
-                        weight: "Bolder",
-                        wrap: true,
-                        text: `Hello! ${profile.displayName}`
-                    },
-                    {
-                        type: "TextBlock",
-                        size: "Medium",
-                        weight: "Bolder",
-                        text: `Job title: ${profile.jobDetails ? profile.jobDetails : "Unknown"}`
-                    },
-                    {
-                        type: "TextBlock",
-                        size: "Medium",
-                        weight: "Bolder",
-                        text: `Email: ${profile.userPrincipalName}`
-                    },
-                ],
-            });
-            return {
-                task: {
-                    type: 'continue',
-                    value: {
-                        card: profileCard,
-                        heigth: 250,
-                        width: 400,
-                        title: 'Show Profile Card'
-                    },
-                },
-            };
-        }
-        if (action.commandId === 'FacebookLogin') {
-            const magicCode =
-                action.state && Number.isInteger(Number(action.state))
-                    ? action.state
-                    : '';
+    async handleTeamsMessagingExtensionSubmitAction(context, action) {
+        var state = action.data.msteams.id;
+        var currentData = userDetails["userDetails"];
+        var userData;
+        let updateindex;
+        currentData.find((user, index) => {
+          if (user.aad_id == context.activity.from.aadObjectId) {
+            userData = user;
+            updateindex = index;
+          }
+        })
+        var facebookProfile ={};
+        var googleProfile={};
+        var ssoData = await Data.getAADUserData(userData.aad_token);
+        var card;
+        if(state == 'connectWithFacebook' || is_fb_signed_in){
+            const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
+            const magicCode =action.state && Number.isInteger(Number(action.state))? action.state: '';
 
             const tokenResponse = await userTokenClient.getUserToken(
                 context.activity.from.id,
@@ -155,11 +76,12 @@ class TeamsBot extends DialogBot {
                 context.activity.channelId,
                 magicCode
             );
-
+        
             if (!tokenResponse || !tokenResponse.token) {
                 // There is no token, so the user has not signed in yet.
                 // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
-
+                is_fb_signed_in = true;
+                is_google_signed_in = false;
                 const { signInLink } = await userTokenClient.getSignInResource(
                     this.fbconnectionName,
                     context.activity
@@ -173,7 +95,7 @@ class TeamsBot extends DialogBot {
                                 {
                                     type: 'openUrl',
                                     value: signInLink,
-                                    title: 'Bot Service OAuth'
+                                    title: 'Facebook Oauth'
                                 },
                             ],
                         },
@@ -181,28 +103,31 @@ class TeamsBot extends DialogBot {
                 };
             }
 
-            var facbookProfile = await this.getFacebookUserData(tokenResponse.token);
-            const profileCard = CardFactory.adaptiveCard({
-                version: '1.0.0',
-                type: 'AdaptiveCard',
-                body: [
-                    {
-                        type: "Image",
-                        size: "Medium",
-                        url: facbookProfile.picture.data.url
-                    },
-                    {
-                        type: 'TextBlock',
-                        text: 'Hello: ' + facbookProfile.name,
-                    },
-                ],
-            });
-
+            var facebookProfileDetail = await Data.getFacebookUserData(tokenResponse.token);
+            userData['facebook_id'] = facebookProfileDetail.id;
+            userData['facebook_token'] = tokenResponse.token;
+            userData['is_fb_signed_in'] = true;
+            currentData[updateindex] = userData;
+            userDetails["userDetails"] = currentData;
+            facebookProfile["is_fb_signed_in"]= true;
+            facebookProfile["name"]= facebookProfileDetail.name;
+            facebookProfile["image"]= facebookProfileDetail.picture.data.url;
+            if(userData.is_google_signed_in){
+                var googleProfileDetails = await Data.getGoogleUserData(userData.google_token);
+                googleProfile["is_google_signed_in"]= true;
+                googleProfile["name"] = googleProfileDetails.names[0].displayName;
+                googleProfile["image"] = googleProfileDetails.photos[0].url;
+                googleProfile["email"] = googleProfileDetails.emailAddresses[0].value;
+            }
+            else{
+                googleProfile["is_google_signed_in"]= false
+            }
+            card = CardHelper.getMEResponseCard(ssoData.myDetails, ssoData.photo,facebookProfile,googleProfile);
             return {
                 task: {
                     type: 'continue',
                     value: {
-                        card: profileCard,
+                        card: card,
                         heigth: 250,
                         width: 400,
                         title: 'Show Profile Card'
@@ -210,119 +135,271 @@ class TeamsBot extends DialogBot {
                 },
             };
         }
-        if (action.commandId === 'LogoutSSO') {
-            await userTokenClient.signOutUser(context.activity.from.id, this.connectionName, context.activity.channelId);
+        if(state == 'connectWithGoogle' || is_google_signed_in){
+            const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
+            const magicCode =action.state && Number.isInteger(Number(action.state))? action.state: '';
 
-            const card = CardFactory.adaptiveCard({
-                version: '1.0.0',
-                type: 'AdaptiveCard',
-                body: [
-                    {
-                        type: 'TextBlock',
-                        text: 'You have been signed out.'
-                    },
-                ],
-            });
+            const tokenResponse = await userTokenClient.getUserToken(
+                context.activity.from.id,
+                this.googleconnectionName,
+                context.activity.channelId,
+                magicCode
+            );
+        
+            if (!tokenResponse || !tokenResponse.token) {
+                // There is no token, so the user has not signed in yet.
+                // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
+                is_fb_signed_in = false;
+                is_google_signed_in = true;
+                const { signInLink } = await userTokenClient.getSignInResource(
+                    this.googleconnectionName,
+                    context.activity
+                );
 
-            return {
-                task: {
-                    type: 'continue',
-                    value: {
-                        card: card,
-                        heigth: 200,
-                        width: 400,
-                        title: 'Adaptive Card: Inputs'
-                    },
-                },
-            };
-        }
-        if (action.commandId === 'LogoutFacebook') {
-            await userTokenClient.signOutUser(context.activity.from.id, this.fbconnectionName, context.activity.channelId);
-
-            const card = CardFactory.adaptiveCard({
-                version: '1.0.0',
-                type: 'AdaptiveCard',
-                body: [
-                    {
-                        type: 'TextBlock',
-                        text: 'You have been signed out.'
-                    },
-                ]
-            });
-
-            return {
-                task: {
-                    type: 'continue',
-                    value: {
-                        card: card,
-                        heigth: 200,
-                        width: 400,
-                        title: 'Adaptive Card: Inputs'
-                    },
-                },
-            };
-        }
-        if (action.commandId === 'UserCredentials'){
-            if(action.state == undefined)
-            {
                 return {
                     composeExtension: {
-                        type: 'config',
+                        type: 'auth',
                         suggestedActions: {
                             actions: [
                                 {
                                     type: 'openUrl',
-                                    value: this.baseUrl +'/popUpSignIn'
+                                    value: signInLink,
+                                    title: 'Google OAuth'
                                 },
                             ],
                         },
                     },
                 };
             }
+
+            var googleProfileDetails = await Data.getGoogleUserData(tokenResponse.token);
+            googleProfile["is_google_signed_in"]= true;
+            googleProfile["name"] = googleProfileDetails.names[0].displayName;
+            googleProfile["image"] = googleProfileDetails.photos[0].url;
+            googleProfile["email"] = googleProfileDetails.emailAddresses[0].value;
+            userData['google_id'] = googleProfileDetails.emailAddresses[0].value;
+            userData['google_token'] = tokenResponse.token;
+            userData['is_google_signed_in'] = true;
+            currentData[updateindex] = userData;
+            userDetails["userDetails"] = currentData;
+            if(userData.is_fb_signed_in){
+                var facebookProfileDetail = await Data.getFacebookUserData(userData.facebook_token);
+                facebookProfile["is_fb_signed_in"]= true;
+                facebookProfile["name"]= facebookProfileDetail.name;
+                facebookProfile["image"]= facebookProfileDetail.picture.data.url;
+            }
             else{
-                var data = JSON.parse(action.state);
-                if(data.userName == "test" && data.password == "test") {
-                    const card = CardFactory.adaptiveCard(this.getAdaptiveCardUserDetails());
-        
-                    return {
-                        task: {
-                            type: 'continue',
-                            value: {
-                                card: card,
-                                heigth: 200,
-                                width: 400,
-                                title: 'Using credentials'
-                            },
-                        },
-                    };
-                }
-                else {
-                    const card = CardFactory.adaptiveCard({
-                        version: '1.0.0',
-                        type: 'AdaptiveCard',
-                        body: [
-                            {
-                                type: 'TextBlock',
-                                text: "Invalid username password."
-                            },
-                        ]
-                    });
-        
-                    return {
-                        task: {
-                            type: 'continue',
-                            value: {
-                                card: card,
-                                heigth: 200,
-                                width: 400,
-                                title: 'Using credentials'
-                            },
-                        },
-                    };
-                }
-            } 
+                facebookProfile["is_fb_signed_in"]= false
+            }
+            card = CardHelper.getMEResponseCard(ssoData.myDetails, ssoData.photo,facebookProfile,googleProfile);
+            return {
+                task: {
+                    type: 'continue',
+                    value: {
+                        card: card,
+                        heigth: 250,
+                        width: 400,
+                        title: 'Show Profile Card'
+                    },
+                },
+            };
         }
-        return null;
+        if(state == 'dicconnectFromFacebook'){
+            is_fb_signed_in = false;
+            is_google_signed_in = false;
+            userData['facebook_id'] = null;
+            userData['facebook_token'] = null;
+            userData['is_fb_signed_in'] = false;
+            currentData[updateindex] = userData;
+            userDetails["userDetails"] = currentData;
+            facebookProfile["is_fb_signed_in"]= false;
+            if(userData.is_google_signed_in){
+                var googleProfileDetails = await Data.getGoogleUserData(userData.google_token);
+                googleProfile["is_google_signed_in"]= true;
+                googleProfile["name"] = googleProfileDetails.names[0].displayName;
+                googleProfile["image"] = googleProfileDetails.photos[0].url;
+                googleProfile["email"] = googleProfileDetails.emailAddresses[0].value;
+            }
+            else{
+                googleProfile["is_google_signed_in"]= false
+            }
+            card = CardHelper.getMEResponseCard(ssoData.myDetails, ssoData.photo,facebookProfile,googleProfile);
+            return {
+                task: {
+                    type: 'continue',
+                    value: {
+                        card: card,
+                        heigth: 250,
+                        width: 400,
+                        title: 'Show Profile Card'
+                    },
+                },
+            };
+        }
+        if(state == 'disConnectFromGoogle'){
+            is_fb_signed_in = false;
+            is_google_signed_in = false;
+            userData['google_id'] = null;
+            userData['google_token'] = null;
+            userData['is_google_signed_in'] = false;
+            currentData[updateindex] = userData;
+            userDetails["userDetails"] = currentData;
+            googleProfile["is_google_signed_in"]= false
+            if(userData.is_fb_signed_in){
+                var facebookProfileDetail = await Data.getFacebookUserData(userData.facebook_token);
+                facebookProfile["is_fb_signed_in"]= true
+                facebookProfile["name"]= facebookProfileDetail.name;
+                facebookProfile["image"]= facebookProfileDetail.picture.data.url;
+            }
+            else{
+                facebookProfile["is_fb_signed_in"]= false
+            }
+            card = CardHelper.getMEResponseCard(ssoData.myDetails, ssoData.photo,facebookProfile,googleProfile);
+            return {
+                task: {
+                    type: 'continue',
+                    value: {
+                        card: card,
+                        heigth: 250,
+                        width: 400,
+                        title: 'Show Profile Card'
+                    },
+                },
+            };
+        }
+    }
+
+    async handleTeamsMessagingExtensionFetchTask(context, action) {
+        const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
+        const magicCode =action.state && Number.isInteger(Number(action.state))? action.state: '';
+
+        const tokenResponse = await userTokenClient.getUserToken(
+            context.activity.from.id,
+            this.connectionName,
+            context.activity.channelId,
+            magicCode
+        );
+                
+        if (!tokenResponse || !tokenResponse.token) {
+            // There is no token, so the user has not signed in yet.
+            // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
+
+            const { signInLink } = await userTokenClient.getSignInResource(
+                this.connectionName,
+                context.activity
+            );
+
+            return {
+                composeExtension: {
+                    type: 'auth',
+                    suggestedActions: {
+                        actions: [
+                            {
+                                type: 'openUrl',
+                                value: signInLink,
+                                title: 'Bot Service OAuth'
+                            },
+                        ],
+                    },
+                },
+            };
+        }
+        else{
+            var currentData = userDetails["userDetails"];
+            var ssoData = await Data.getAADUserData(tokenResponse.token);
+            var facbookProfile = {};
+            var googleProfile= {};
+            var card;
+            if (currentData == undefined) {
+                const userDetailsList = new Array();
+                userDetailsList.push({ "aad_id": context.activity.from.aadObjectId, "is_aad_signed_in": true, "aad_token": tokenResponse.token });
+                currentData = userDetailsList;
+                userDetails["userDetails"] = currentData;
+                facbookProfile["is_fb_signed_in"]= false;
+                googleProfile["is_google_signed_in"]= false;
+                card = CardHelper.getMEResponseCard(ssoData.myDetails, ssoData.photo,facbookProfile,googleProfile);
+                return {
+                    task: {
+                        type: 'continue',
+                        value: {
+                            card: card,
+                            heigth: 250,
+                            width: 400,
+                            title: 'Show Profile Card'
+                        },
+                    },
+                };
+            }
+            else if (!currentData.find((user) => {
+                if (user.aad_id == context.activity.from.aadObjectId) {
+                  return true;
+                }
+              })) {
+                const userDetailsList = currentData;
+                userDetailsList.push({ "aad_id": context.activity.from.aadObjectId, "is_aad_signed_in": true, "aad_token": tokenResponse.token });
+                currentData = userDetailsList;
+                userDetails["userDetails"] = currentData;
+                facbookProfile["is_fb_signed_in"]= false;
+                googleProfile["is_google_signed_in"]= false;
+                card = CardHelper.getMEResponseCard(ssoData.myDetails, ssoData.photo,facbookProfile,googleProfile);
+                return {
+                    task: {
+                        type: 'continue',
+                        value: {
+                            card: card,
+                            heigth: 250,
+                            width: 400,
+                            title: 'Show Profile Card'
+                        },
+                    },
+                };
+              }
+            else{
+                var userData;
+                let updateindex;
+                currentData.find((user, index) => {
+                if (user.aad_id == context.activity.from.aadObjectId) {
+                    userData = user;
+                    updateindex = index;
+                }
+                })
+                userData["aad_token"] = tokenResponse.token
+                currentData[updateindex] = userData;
+                userDetails["userDetails"] = currentData;
+
+                if (userData.is_fb_signed_in){
+                    var facbookProfileDetail = await Data.getFacebookUserData(userData.facebook_token);
+                    facbookProfile["is_fb_signed_in"]= true;
+                    facbookProfile["name"]= facbookProfileDetail.name;
+                    facbookProfile["image"]= facbookProfileDetail.picture.data.url;
+                }
+                else{
+                    facbookProfile["is_fb_signed_in"]= false;
+                }
+                if(userData.is_google_signed_in){
+                   var googleProfileDetails = await Data.getGoogleUserData(userData.google_token);
+                    googleProfile["is_google_signed_in"]= true;
+                    googleProfile["name"] = googleProfileDetails.names[0].displayName;
+                    googleProfile["image"] = googleProfileDetails.photos[0].url;
+                    googleProfile["email"] = googleProfileDetails.emailAddresses[0].value;
+                }
+                else{
+                    googleProfile["is_google_signed_in"]= false;
+                }
+                card = CardHelper.getMEResponseCard(ssoData.myDetails, ssoData.photo,facbookProfile,googleProfile);
+                return {
+                    task: {
+                        type: 'continue',
+                        value: {
+                            card: card,
+                            heigth: 250,
+                            width: 400,
+                            title: 'Show Profile Card'
+                        },
+                    },
+                };
+            }
+        }
     }
 
     async getFacebookUserData(access_token) {
