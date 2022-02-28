@@ -2,19 +2,19 @@
 // Licensed under the MIT License.
 
 const { DialogSet, DialogTurnStatus, WaterfallDialog } = require('botbuilder-dialogs');
-const { MessageFactory, ActionTypes } = require('botbuilder');
+const { MessageFactory } = require('botbuilder');
 const { LogoutDialog } = require('./logoutDialog');
 const MAIN_DIALOG = 'MainDialog';
 const MAIN_WATERFALL_DIALOG = 'MainWaterfallDialog';
 const OAUTH_PROMPT = 'OAuthPrompt';
 const { polyfills } = require('isomorphic-fetch');
 const { SsoOAuthPrompt } = require('./ssoOAuthPrompt');
-const { SimpleGraphClient } = require('../simpleGraphClient');
 const { SimpleFacebookAuthDialog } = require('./simpleFacebookAuthDialog');
 const { GoogleAuthDialog } = require('./googleAuthDialog');
+const CardHelper = require('../cards/cardHelper');
 const FACEBOOKAUTH = 'FacebookAuth';
 const GOOGLEAUTH = 'GoogleAuth';
-const axios = require('axios')
+const Data = require('../helper/dataHelper');
 const userDetails = {};
 
 class MainDialog extends LogoutDialog {
@@ -106,8 +106,8 @@ class MainDialog extends LogoutDialog {
         currentData[updateindex] = userData;
         userDetails["userDetails"] = currentData;
 
-        var aadProfile = await this.getAADUserData(tokenResponse.token);
-        var aadDetailCard = this.getAADDetailsCard(aadProfile.myDetails, aadProfile.photo);
+        var aadProfile = await Data.getAADUserData(tokenResponse.token);
+        var aadDetailCard = CardHelper.getAADDetailsCard(aadProfile.myDetails, aadProfile.photo);
         var facbookProfile;
         var facebookdetailCard;
         var googleDetailsCard;
@@ -117,18 +117,7 @@ class MainDialog extends LogoutDialog {
             return await stepContext.beginDialog(FACEBOOKAUTH);
           }
           else {
-            facebookdetailCard = {
-              "contentType": "application/vnd.microsoft.card.hero",
-              "content": {
-                "buttons": [
-                  {
-                    "type": ActionTypes.ImBack,
-                    "title": "Connect to facebook",
-                    "value": "connectToFacebook"
-                  }
-                ]
-              }
-            }
+            facebookdetailCard = CardHelper.getConnectToFacebookCard();
           }
         }
         else {
@@ -138,22 +127,11 @@ class MainDialog extends LogoutDialog {
             userData['is_fb_signed_in'] = false;
             currentData[updateindex] = userData;
             userDetails["userDetails"] = currentData;
-            facebookdetailCard = {
-              "contentType": "application/vnd.microsoft.card.hero",
-              "content": {
-                "buttons": [
-                  {
-                    "type": ActionTypes.ImBack,
-                    "title": "Connect to facebook",
-                    "value": "connectToFacebook"
-                  }
-                ]
-              }
-            }
+            facebookdetailCard = CardHelper.getConnectToFacebookCard();
           }
           else {
-            facbookProfile = await this.getFacebookUserData(userData.facebook_token);
-            facebookdetailCard = this.getFacebookDetailsCard(facbookProfile);
+            facbookProfile = await Data.getFacebookUserData(userData.facebook_token);
+            facebookdetailCard = CardHelper.getFacebookDetailsCard(facbookProfile);
           }
         }
         if (!userData.is_google_signed_in) {
@@ -161,18 +139,7 @@ class MainDialog extends LogoutDialog {
             return await stepContext.beginDialog(GOOGLEAUTH);
           }
           else {
-            googleDetailsCard = {
-              "contentType": "application/vnd.microsoft.card.hero",
-              "content": {
-                "buttons": [
-                  {
-                    "type": ActionTypes.ImBack,
-                    "title": "Connect to google",
-                    "value": "connectToGoogle"
-                  }
-                ]
-              }
-            }
+            googleDetailsCard = CardHelper.getConnectToGoogleCard();
           }
         }
         else {
@@ -182,22 +149,11 @@ class MainDialog extends LogoutDialog {
             userData['is_google_signed_in'] = false;
             currentData[updateindex] = userData;
             userDetails["userDetails"] = currentData;
-            googleDetailsCard = {
-              "contentType": "application/vnd.microsoft.card.hero",
-              "content": {
-                "buttons": [
-                  {
-                    "type": ActionTypes.ImBack,
-                    "title": "Connect to google",
-                    "value": "connectToGoogle"
-                  }
-                ]
-              }
-            }
+            googleDetailsCard = CardHelper.getConnectToGoogleCard();
           }
           else {
-            googleProfile = await this.getGoogleUserData(userData.google_token);
-            googleDetailsCard = this.getGoogleDetailsCard(googleProfile)
+            googleProfile = await Data.getGoogleUserData(userData.google_token);
+            googleDetailsCard = CardHelper.getGoogleDetailsCard(googleProfile)
           }
         }
         await stepContext.context.sendActivity(MessageFactory.list([aadDetailCard, facebookdetailCard, googleDetailsCard]));
@@ -207,161 +163,10 @@ class MainDialog extends LogoutDialog {
   }
 
   async getUserEntryCard(stepContext, token) {
-    const data = await this.getAADUserData(token);
-    const userCard = MessageFactory.list(this.getAdaptiveCardUserDetails(data.myDetails, data.photo));
+    const data = await Data.getAADUserData(token);
+    const userCard = MessageFactory.list(CardHelper.getAdaptiveCardUserDetails(data.myDetails, data.photo));
     await stepContext.context.sendActivity(userCard);
   }
-
-  getAdaptiveCardUserDetails = (myDetails, userImage) => (
-    [this.getAADDetailsCard(myDetails, userImage),
-    {
-      "contentType": "application/vnd.microsoft.card.hero",
-      "content": {
-        "buttons": [
-          {
-            "type": ActionTypes.ImBack,
-            "title": "Connect to facebook",
-            "value": "connectToFacebook"
-          }
-        ]
-      }
-    },
-    {
-      "contentType": "application/vnd.microsoft.card.hero",
-      "content": {
-        "buttons": [
-          {
-            "type": ActionTypes.ImBack,
-            "title": "Connect to google",
-            "value": "connectToGoogle"
-          }
-        ]
-      }
-    }
-    ]);
-
-  getAADDetailsCard = (myDetails, userImage) => (
-    {
-      "contentType": "application/vnd.microsoft.card.adaptive",
-      "content": {
-        "type": "AdaptiveCard",
-        "version": "1.0",
-        "body": [
-          {
-            "type": "TextBlock",
-            "size": "Medium",
-            "weight": "Bolder",
-            "text": "User profile details are"
-          },
-          {
-            "type": "Image",
-            "size": "Medium",
-            "url": userImage
-          },
-          {
-            "type": "TextBlock",
-            "size": "Medium",
-            "weight": "Bolder",
-            "wrap": true,
-            "text": `Hello! ${myDetails.displayName}`
-          },
-          {
-            "type": "TextBlock",
-            "size": "Medium",
-            "weight": "Bolder",
-            "text": `Job title: ${myDetails.jobDetails ? myDetails.jobDetails : "Unknown"}`
-          },
-          {
-            "type": "TextBlock",
-            "size": "Medium",
-            "weight": "Bolder",
-            "text": `Email: ${myDetails.userPrincipalName}`
-          }
-        ]
-      }
-    });
-
-  async getAADUserData(token) {
-    const client = new SimpleGraphClient(token);
-    const myDetails = await client.getMeAsync();
-    var imageString = "";
-    var img2 = "";
-    if (myDetails != null) {
-      var userImage = await client.getUserPhoto();
-      await userImage.arrayBuffer().then(result => {
-        imageString = Buffer.from(result).toString('base64');
-        img2 = "data:image/png;base64," + imageString;
-      }).catch(error => {
-        console.log(error)
-      });
-    }
-    return {
-      myDetails: myDetails,
-      photo: img2
-    }
-  }
-
-  // Method to get facebook user data.
-  async getFacebookUserData(access_token) {
-    const { data } = await axios({
-      url: 'https://graph.facebook.com/v2.6/me',
-      method: 'get',
-      params: {
-        fields: ['name', 'picture'].join(','),
-        access_token: access_token,
-      },
-    });
-    return data;
-  };
-
-  getFacebookDetailsCard = (facbookProfile) => ({
-    "contentType": "application/vnd.microsoft.card.hero",
-    "content": {
-      "title": 'Hello: ' + facbookProfile.name,
-      "images": [
-        {
-          "url": facbookProfile.picture.data.url
-        }
-      ],
-      "buttons": [
-        {
-          "type": ActionTypes.ImBack,
-          "title": "Disconnect from facebook",
-          "value": "DisConnectFromFacebook"
-        }
-      ]
-    }
-  });
-
-  async getGoogleUserData(access_token) {
-    const data = await axios.get('https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,photos,urls', {
-      headers: {
-        "Authorization": `Bearer ${access_token}`,
-      }
-    })
-
-    return data.data;
-  };
-
-  getGoogleDetailsCard = (googleProfile) => ({
-    "contentType": "application/vnd.microsoft.card.hero",
-    "content": {
-      "title": 'Hello: ' + googleProfile.names[0].displayName,
-      "subtitle": 'Email: ' + googleProfile.emailAddresses[0].value,
-      "images": [
-        {
-          "url": googleProfile.photos[0].url
-        }
-      ],
-      "buttons": [
-        {
-          "type": ActionTypes.ImBack,
-          "title": "Disconnect from google",
-          "value": "DisConnectFromGoogle"
-        }
-      ]
-    }
-  });
 }
 
 module.exports.MainDialog = MainDialog;
