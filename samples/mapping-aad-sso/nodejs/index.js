@@ -256,17 +256,18 @@ server.post('/GetUserDetails', async (req, res) => {
   var userName = req.body.userName;
   const client = new SimpleGraphClient(accessToken);
   const myDetails = await client.getMeAsync();
-  var userImage = await client.getUserPhoto()
+  var userImage = await client.getUserPhoto();
+  var userData;
   await userImage.arrayBuffer().then(result => {
     imageString = Buffer.from(result).toString('base64');
     img2 = "data:image/png;base64," + imageString;
-    var userData = {
+    userData = {
       details: myDetails,
       image: img2
     }
     var currentData = userDetails["userDetails"];
       if(currentData == undefined){
-        const userDetailsList = currentData;
+        const userDetailsList = new Array();
         userDetailsList.push({"aad_id":userName,"is_aad_signed_in":true});
         currentData = userDetailsList;
         userDetails["userDetails"] = currentData;
@@ -277,18 +278,20 @@ server.post('/GetUserDetails', async (req, res) => {
             }
           }))
       {
-        const userDetailsList = new Array();
+        const userDetailsList = currentData;
         userDetailsList.push({"aad_id":userName,"is_aad_signed_in":true});
         currentData = userDetailsList;
         userDetails["userDetails"] = currentData;
       }
-    var responseMessage = Promise.resolve(userData);
+  });
+  var responseMessage = new Promise((resolve, reject) => {
+    resolve(userData)
+  });
     responseMessage.then(function (result) {
       res.json(result);
     }, function (err) { // Error: "It broke"
       res.json(err);
     });
-  });
 });
 
 // Facebook Oauth token axchange

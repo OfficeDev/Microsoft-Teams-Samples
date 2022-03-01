@@ -258,6 +258,7 @@
         // Get user information.
         function getUserInfo(userPrincipleName) {
             if (userPrincipleName) {
+                microsoftTeams.getContext((context) => {
                 $.ajax({
                     type: 'POST',
                     url: '/GetUserDetails',
@@ -267,8 +268,8 @@
                         'userName':userPrincipleName
                     },
                     success: function (responseJson) {
-                        const userDetails = JSON.parse(responseJson);
-                        $("#userImgId").attr("src", userDetails.image);
+                        const userDetails = responseJson;
+                        $("#userImgSso").attr("src", userDetails.image);
                         $("#name").append(userDetails.details.displayName);
                         $("#email").append(userDetails.details.userPrincipalName);
                         $("#work").append(userDetails.details.jobTitle);
@@ -278,7 +279,8 @@
                         console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                     }
                 });
-            }
+            });
+         }
         }
 
         // Initiate facebook auth flow.
