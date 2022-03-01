@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const { BotFrameworkAdapter, ActivityTypes } = require('botbuilder');
+const { CloudAdapter, ActivityTypes } = require('botbuilder');
 const { ComponentDialog } = require('botbuilder-dialogs');
 
 class LogoutDialog extends ComponentDialog {
@@ -34,7 +34,7 @@ class LogoutDialog extends ComponentDialog {
             // Remove the line break
             if (text.replace(/\r?\n|\r/g, '') === 'logout') {
                 // The bot adapter encapsulates the authentication processes.
-                const botAdapter = BotFrameworkAdapter(innerDc.context.adapter);
+                const botAdapter = CloudAdapter(innerDc.context.adapter);
                 await botAdapter.signOutUser(innerDc.context, this.connectionName);
                 await innerDc.context.sendActivity('You have been signed out.');
                 return await innerDc.cancelAllDialogs();

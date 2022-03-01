@@ -33,7 +33,7 @@ server.use("/Images", express.static(path.resolve(__dirname, 'Images')));
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
 const { CloudAdapter,
   ConfigurationServiceClientCredentialFactory,
-  createBotFrameworkAuthenticationFromConfiguration, BotFrameworkAdapter, ConversationState, MemoryStorage, UserState } = require('botbuilder');
+  createBotFrameworkAuthenticationFromConfiguration, ConversationState, MemoryStorage, UserState } = require('botbuilder');
 const { TeamsBot } = require('./bots/teamsBot');
 const { MainDialog } = require('./dialogs/mainDialog');
 

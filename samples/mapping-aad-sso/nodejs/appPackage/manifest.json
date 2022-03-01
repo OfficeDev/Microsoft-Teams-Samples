@@ -3,7 +3,7 @@
   "manifestVersion": "1.11",
   "version": "1.0.0",
   "id": "<<Microsoft-App-Id>>",
-  "packageName": "com.microsoft.teams.appcompleteauth",
+  "packageName": "com.microsoft.teams.mapaadsso",
   "webApplicationInfo": {
     "id": "<<Microsoft-App-Id>>",
     "resource": "api://<<base-url>>/botid-<<Microsoft-App-Id>>"
@@ -19,17 +19,17 @@
     "outline": "icon-outline.png"
   },
   "name": {
-    "short": "App complete auth"
+    "short": "Map AAD with FB and google"
   },
   "description": {
-    "short": "Authentication sample for Microsoft Teams",
-    "full": "Authentication sample for Microsoft Teams"
+    "short": "Map AAD id with other identity provider",
+    "full": "Map azure active directory id with facebook and google"
   },
   "staticTabs": [
     {
-      "contentUrl": "https://<<base-url>>/AuthTab",
-      "entityId": "Auth",
-      "name": "Auth",
+      "contentUrl": "https://<<base-url>>/tab",
+      "entityId": "Map",
+      "name": "MapAAD",
       "scopes": [
         "personal"
       ]
@@ -41,23 +41,6 @@
       "scopes": [
         "personal"
       ],
-      "commandLists": [
-        {
-          "scopes": [
-            "personal"
-          ],
-          "commands": [
-            {
-              "title": "sso",
-              "description": "To upload file in SharePoint site"
-            },
-            {
-              "title": "viewfile",
-              "description": "To view file in Teams file viewer"
-            }
-          ]
-        }
-      ],
       "isNotificationOnly": false,
       "supportsFiles": true
     }
@@ -68,56 +51,31 @@
       "canUpdateConfiguration": true,
       "commands": [
         {
-          "id": "SSO",
+          "id": "searchQuery",
+          "type": "query",
+          "title": "Search",
+          "description": "Perform a search",
+          "initialRun": true,
+          "fetchTask": false,
+          "context": [
+            "commandBox",
+            "compose"
+          ],
+          "parameters": [
+            {
+              "name": "searchQuery",
+              "title": "Search",
+              "description": "Your search query",
+              "inputType": "text"
+            }
+          ]
+        },
+        {
+          "id": "MapAadId",
           "type": "action",
-          "title": "SSO",
-          "description": "SSO authentication",
+          "title": "Connect with Facebook and google",
+          "description": "Connect with Facebook and google",
           "initialRun": false,
-          "fetchTask": true,
-          "context": [
-            "commandBox",
-            "compose"
-          ]
-        },
-        {
-          "id": "LogoutSSO",
-          "type": "action",
-          "title": "Log out sso",
-          "description": "Sign out from authenticated services.",
-          "initialRun": false,
-          "fetchTask": true,
-          "context": [
-            "commandBox",
-            "compose"
-          ]
-        },
-        {
-          "id": "LogoutFacebook",
-          "description": "Sign out from authenticated services.",
-          "title": "Log out facebook",
-          "type": "action",
-          "fetchTask": true,
-          "context": [
-            "commandBox",
-            "compose"
-          ]
-        },
-        {
-          "id": "UserCredentials",
-          "description": "Sign in using user credentials",
-          "title": "Using credentials",
-          "type": "action",
-          "fetchTask": true,
-          "context": [
-            "commandBox",
-            "compose"
-          ]
-        },
-        {
-          "id": "FacebookLogin",
-          "description": "Sign in to facebook",
-          "title": "Facebook sign in",
-          "type": "action",
           "fetchTask": true,
           "context": [
             "commandBox",
