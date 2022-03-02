@@ -10,8 +10,10 @@ const CardHelper = require('../cards/cardHelper');
 const userDetailsMEAction = {};
 const userDetailsMESearch = {};
 
-let is_fb_signed_in;
-let is_google_signed_in;
+let isFbSignedInMEAction;
+let isGoogleSignedInMEAction;
+let isFbSignedInMESearch;
+let isGoogleSignedInMESearch;
 class TeamsBot extends DialogBot {
     /**
     *
@@ -55,21 +57,33 @@ class TeamsBot extends DialogBot {
     }
 
     async handleTeamsMessagingExtensionSubmitAction(context, action) {
-        var state = action.data.msteams.id;
-        var currentData = userDetailsMEAction["userDetails"];
-        var userData;
+        let state = action.data.msteams.id;
+        let currentData = userDetailsMEAction["userDetails"];
+        let userData;
         let updateindex;
+        let facebookProfileDetail;
+        let googleProfileDetails;
         currentData.find((user, index) => {
           if (user.aad_id == context.activity.from.aadObjectId) {
             userData = user;
             updateindex = index;
           }
         })
-        var facebookProfile ={};
-        var googleProfile={};
-        var ssoData = await Data.getAADUserData(userData.aad_token);
-        var card;
-        if(state == 'connectWithFacebook' || is_fb_signed_in){
+        let facebookProfile = {
+            is_fb_signed_in:false,
+            name:"",
+            image:""
+        };
+        let googleProfile = {
+            is_google_signed_in:false,
+            name:"",
+            image:"",
+            email:""
+        };
+        let ssoData = await Data.getAADUserData(userData.aad_token);
+        let card;
+
+        if(state == 'connectWithFacebook' || isFbSignedInMEAction){
             const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
             const magicCode =action.state && Number.isInteger(Number(action.state))? action.state: '';
 
@@ -83,8 +97,8 @@ class TeamsBot extends DialogBot {
             if (!tokenResponse || !tokenResponse.token) {
                 // There is no token, so the user has not signed in yet.
                 // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
-                is_fb_signed_in = true;
-                is_google_signed_in = false;
+                isFbSignedInMEAction = true;
+                isGoogleSignedInMEAction = false;
                 const { signInLink } = await userTokenClient.getSignInResource(
                     this.fbconnectionName,
                     context.activity
@@ -106,24 +120,25 @@ class TeamsBot extends DialogBot {
                 };
             }
 
-            var facebookProfileDetail = await Data.getFacebookUserData(tokenResponse.token);
+            facebookProfileDetail = await Data.getFacebookUserData(tokenResponse.token);
             userData['facebook_id'] = facebookProfileDetail.id;
             userData['facebook_token'] = tokenResponse.token;
             userData['is_fb_signed_in'] = true;
             currentData[updateindex] = userData;
             userDetailsMEAction["userDetails"] = currentData;
-            facebookProfile["is_fb_signed_in"]= true;
-            facebookProfile["name"]= facebookProfileDetail.name;
-            facebookProfile["image"]= facebookProfileDetail.picture.data.url;
+            facebookProfile.is_fb_signed_in= true;
+            facebookProfile.name = facebookProfileDetail.name;
+            facebookProfile.image = facebookProfileDetail.picture.data.url;
+
             if(userData.is_google_signed_in){
-                var googleProfileDetails = await Data.getGoogleUserData(userData.google_token);
-                googleProfile["is_google_signed_in"]= true;
-                googleProfile["name"] = googleProfileDetails.names[0].displayName;
-                googleProfile["image"] = googleProfileDetails.photos[0].url;
-                googleProfile["email"] = googleProfileDetails.emailAddresses[0].value;
+                googleProfileDetails = await Data.getGoogleUserData(userData.google_token);
+                googleProfile.is_google_signed_in= true;
+                googleProfile.name = googleProfileDetails.names[0].displayName;
+                googleProfile.image = googleProfileDetails.photos[0].url;
+                googleProfile.email = googleProfileDetails.emailAddresses[0].value;
             }
             else{
-                googleProfile["is_google_signed_in"]= false
+                googleProfile.is_google_signed_in = false
             }
             card = CardHelper.getMEResponseCard(ssoData.myDetails, ssoData.photo,facebookProfile,googleProfile);
             return {
@@ -138,7 +153,7 @@ class TeamsBot extends DialogBot {
                 },
             };
         }
-        if(state == 'connectWithGoogle' || is_google_signed_in){
+        if(state == 'connectWithGoogle' || isGoogleSignedInMEAction){
             const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
             const magicCode =action.state && Number.isInteger(Number(action.state))? action.state: '';
 
@@ -152,8 +167,8 @@ class TeamsBot extends DialogBot {
             if (!tokenResponse || !tokenResponse.token) {
                 // There is no token, so the user has not signed in yet.
                 // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
-                is_fb_signed_in = false;
-                is_google_signed_in = true;
+                isFbSignedInMEAction = false;
+                isGoogleSignedInMEAction = true;
                 const { signInLink } = await userTokenClient.getSignInResource(
                     this.googleconnectionName,
                     context.activity
@@ -175,24 +190,24 @@ class TeamsBot extends DialogBot {
                 };
             }
 
-            var googleProfileDetails = await Data.getGoogleUserData(tokenResponse.token);
-            googleProfile["is_google_signed_in"]= true;
-            googleProfile["name"] = googleProfileDetails.names[0].displayName;
-            googleProfile["image"] = googleProfileDetails.photos[0].url;
-            googleProfile["email"] = googleProfileDetails.emailAddresses[0].value;
+            googleProfileDetails = await Data.getGoogleUserData(tokenResponse.token);
+            googleProfile.is_google_signed_in= true;
+            googleProfile.name = googleProfileDetails.names[0].displayName;
+            googleProfile.image = googleProfileDetails.photos[0].url;
+            googleProfile.email = googleProfileDetails.emailAddresses[0].value;
             userData['google_id'] = googleProfileDetails.emailAddresses[0].value;
             userData['google_token'] = tokenResponse.token;
             userData['is_google_signed_in'] = true;
             currentData[updateindex] = userData;
             userDetailsMEAction["userDetails"] = currentData;
             if(userData.is_fb_signed_in){
-                var facebookProfileDetail = await Data.getFacebookUserData(userData.facebook_token);
-                facebookProfile["is_fb_signed_in"]= true;
-                facebookProfile["name"]= facebookProfileDetail.name;
-                facebookProfile["image"]= facebookProfileDetail.picture.data.url;
+                facebookProfileDetail = await Data.getFacebookUserData(userData.facebook_token);
+                facebookProfile.is_fb_signed_in= true;
+                facebookProfile.name = facebookProfileDetail.name;
+                facebookProfile.image = facebookProfileDetail.picture.data.url;
             }
             else{
-                facebookProfile["is_fb_signed_in"]= false
+                facebookProfile.is_fb_signed_in = false
             }
             card = CardHelper.getMEResponseCard(ssoData.myDetails, ssoData.photo,facebookProfile,googleProfile);
             return {
@@ -208,23 +223,23 @@ class TeamsBot extends DialogBot {
             };
         }
         if(state == 'dicconnectFromFacebook'){
-            is_fb_signed_in = false;
-            is_google_signed_in = false;
+            isFbSignedInMEAction = false;
+            isGoogleSignedInMEAction = false;
             userData['facebook_id'] = null;
             userData['facebook_token'] = null;
             userData['is_fb_signed_in'] = false;
             currentData[updateindex] = userData;
             userDetailsMEAction["userDetails"] = currentData;
-            facebookProfile["is_fb_signed_in"]= false;
+            facebookProfile.is_fb_signed_in= false;
             if(userData.is_google_signed_in){
-                var googleProfileDetails = await Data.getGoogleUserData(userData.google_token);
-                googleProfile["is_google_signed_in"]= true;
-                googleProfile["name"] = googleProfileDetails.names[0].displayName;
-                googleProfile["image"] = googleProfileDetails.photos[0].url;
-                googleProfile["email"] = googleProfileDetails.emailAddresses[0].value;
+                googleProfileDetails = await Data.getGoogleUserData(userData.google_token);
+                googleProfile.is_google_signed_in= true;
+                googleProfile.name = googleProfileDetails.names[0].displayName;
+                googleProfile.image = googleProfileDetails.photos[0].url;
+                googleProfile.email = googleProfileDetails.emailAddresses[0].value;
             }
             else{
-                googleProfile["is_google_signed_in"]= false
+                googleProfile.is_google_signed_in = false
             }
             card = CardHelper.getMEResponseCard(ssoData.myDetails, ssoData.photo,facebookProfile,googleProfile);
             return {
@@ -240,22 +255,22 @@ class TeamsBot extends DialogBot {
             };
         }
         if(state == 'disConnectFromGoogle'){
-            is_fb_signed_in = false;
-            is_google_signed_in = false;
+            isFbSignedInMEAction = false;
+            isGoogleSignedInMEAction = false;
             userData['google_id'] = null;
             userData['google_token'] = null;
             userData['is_google_signed_in'] = false;
             currentData[updateindex] = userData;
             userDetailsMEAction["userDetails"] = currentData;
-            googleProfile["is_google_signed_in"]= false
+            googleProfile.is_google_signed_in= false
             if(userData.is_fb_signed_in){
-                var facebookProfileDetail = await Data.getFacebookUserData(userData.facebook_token);
-                facebookProfile["is_fb_signed_in"]= true
-                facebookProfile["name"]= facebookProfileDetail.name;
-                facebookProfile["image"]= facebookProfileDetail.picture.data.url;
+                facebookProfileDetail = await Data.getFacebookUserData(userData.facebook_token);
+                facebookProfile.is_fb_signed_in= true
+                facebookProfile.name= facebookProfileDetail.name;
+                facebookProfile.image= facebookProfileDetail.picture.data.url;
             }
             else{
-                facebookProfile["is_fb_signed_in"]= false
+                facebookProfile.is_fb_signed_in= false
             }
             card = CardHelper.getMEResponseCard(ssoData.myDetails, ssoData.photo,facebookProfile,googleProfile);
             return {
@@ -308,19 +323,28 @@ class TeamsBot extends DialogBot {
             };
         }
         else{
-            var currentData = userDetailsMEAction["userDetails"];
-            var ssoData = await Data.getAADUserData(tokenResponse.token);
-            var facbookProfile = {};
-            var googleProfile= {};
-            var card;
+            let currentData = userDetailsMEAction["userDetails"];
+            let ssoData = await Data.getAADUserData(tokenResponse.token);
+            let facebookProfile = {
+                is_fb_signed_in:false,
+                name:"",
+                image:""
+            };
+            let googleProfile = {
+                is_google_signed_in:false,
+                name:"",
+                image:"",
+                email:""
+            };
+            let card;
             if (currentData == undefined) {
                 const userDetailsList = new Array();
                 userDetailsList.push({ "aad_id": context.activity.from.aadObjectId, "is_aad_signed_in": true, "aad_token": tokenResponse.token });
                 currentData = userDetailsList;
                 userDetailsMEAction["userDetails"] = currentData;
-                facbookProfile["is_fb_signed_in"]= false;
-                googleProfile["is_google_signed_in"]= false;
-                card = CardHelper.getMEResponseCard(ssoData.myDetails, ssoData.photo,facbookProfile,googleProfile);
+                facebookProfile.is_fb_signed_in= false;
+                googleProfile.is_google_signed_in= false;
+                card = CardHelper.getMEResponseCard(ssoData.myDetails, ssoData.photo,facebookProfile,googleProfile);
                 return {
                     task: {
                         type: 'continue',
@@ -342,9 +366,9 @@ class TeamsBot extends DialogBot {
                 userDetailsList.push({ "aad_id": context.activity.from.aadObjectId, "is_aad_signed_in": true, "aad_token": tokenResponse.token });
                 currentData = userDetailsList;
                 userDetailsMEAction["userDetails"] = currentData;
-                facbookProfile["is_fb_signed_in"]= false;
-                googleProfile["is_google_signed_in"]= false;
-                card = CardHelper.getMEResponseCard(ssoData.myDetails, ssoData.photo,facbookProfile,googleProfile);
+                facebookProfile.is_fb_signed_in= false;
+                googleProfile.is_google_signed_in= false;
+                card = CardHelper.getMEResponseCard(ssoData.myDetails, ssoData.photo,facebookProfile,googleProfile);
                 return {
                     task: {
                         type: 'continue',
@@ -372,24 +396,24 @@ class TeamsBot extends DialogBot {
 
                 if (userData.is_fb_signed_in){
                     var facbookProfileDetail = await Data.getFacebookUserData(userData.facebook_token);
-                    facbookProfile["is_fb_signed_in"]= true;
-                    facbookProfile["name"]= facbookProfileDetail.name;
-                    facbookProfile["image"]= facbookProfileDetail.picture.data.url;
+                    facebookProfile.is_fb_signed_in= true;
+                    facebookProfile.name= facbookProfileDetail.name;
+                    facebookProfile.image= facbookProfileDetail.picture.data.url;
                 }
                 else{
-                    facbookProfile["is_fb_signed_in"]= false;
+                    facebookProfile.is_fb_signed_in = false;
                 }
                 if(userData.is_google_signed_in){
                    var googleProfileDetails = await Data.getGoogleUserData(userData.google_token);
-                    googleProfile["is_google_signed_in"]= true;
-                    googleProfile["name"] = googleProfileDetails.names[0].displayName;
-                    googleProfile["image"] = googleProfileDetails.photos[0].url;
-                    googleProfile["email"] = googleProfileDetails.emailAddresses[0].value;
+                    googleProfile.is_google_signed_in= true;
+                    googleProfile.name = googleProfileDetails.names[0].displayName;
+                    googleProfile.image= googleProfileDetails.photos[0].url;
+                    googleProfile.email = googleProfileDetails.emailAddresses[0].value;
                 }
                 else{
-                    googleProfile["is_google_signed_in"]= false;
+                    googleProfile.is_google_signed_in = false;
                 }
-                card = CardHelper.getMEResponseCard(ssoData.myDetails, ssoData.photo,facbookProfile,googleProfile);
+                card = CardHelper.getMEResponseCard(ssoData.myDetails, ssoData.photo,facebookProfile,googleProfile);
                 return {
                     task: {
                         type: 'continue',
@@ -418,6 +442,7 @@ class TeamsBot extends DialogBot {
             context.activity.channelId,
             magicCode
         );
+
         if (!tokenResponse || !tokenResponse.token) {
             this.isSignedIn = true;
             // There is no token, so the user has not signed in yet.
@@ -445,6 +470,7 @@ class TeamsBot extends DialogBot {
         else{
             var currentData = userDetailsMESearch["userDetails"];
             var ssoData = await Data.getAADUserData(tokenResponse.token);
+
             if (currentData == undefined) {
                 const userDetailsList = new Array();
                 userDetailsList.push({ "aad_id": context.activity.from.aadObjectId, "is_aad_signed_in": true, "aad_token": tokenResponse.token,"is_fb_signed_in":false,"is_google_signed_in":false });
@@ -490,8 +516,10 @@ class TeamsBot extends DialogBot {
                 };
             }
             else{
-                var userData;
+                let userData;
                 let updateindex;
+                let facebookProfileDetail;
+                let googleProfileDetails;
                 currentData.find((user, index) => {
                     if (user.aad_id == context.activity.from.aadObjectId) {
                         userData = user;
@@ -501,8 +529,18 @@ class TeamsBot extends DialogBot {
                 userData["aad_token"] = tokenResponse.token
                 currentData[updateindex] = userData;
                 userDetailsMESearch["userDetails"] = currentData;
+                const ssoAttachment = CardFactory.thumbnailCard(
+                    'User Profile card',
+                    ssoData.myDetails.displayName,
+                    CardFactory.images([
+                        ssoData.photo
+                    ])
+                );
+                let googleAttachment;
+                let fbAttachment;
 
                 if((!userData.is_fb_signed_in && query.state == undefined) ||(!userData.is_google_signed_in && query.state == undefined)){
+                    
                     return {
                         composeExtension: {
                             type: 'config',
@@ -518,7 +556,7 @@ class TeamsBot extends DialogBot {
                         }
                     };
                 }
-                else if(query.state == "ConnectWithFacebook" || is_fb_signed_in){
+                else if(query.state == "ConnectWithFacebook" || isFbSignedInMESearch){
                     const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
                     const magicCode =
                     context.state && Number.isInteger(Number(context.state))
@@ -531,9 +569,10 @@ class TeamsBot extends DialogBot {
                         context.activity.channelId,
                         magicCode
                     );
+
                     if (!tokenResponse || !tokenResponse.token) {
-                        is_fb_signed_in = true;
-                        is_google_signed_in = false;
+                        isFbSignedInMESearch = true;
+                        isGoogleSignedInMESearch = false;
                         // There is no token, so the user has not signed in yet.
                         // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
         
@@ -558,56 +597,52 @@ class TeamsBot extends DialogBot {
                         };
                     }
                     else{
-                        is_fb_signed_in = false;
-                        var facebookProfileDetail = await Data.getFacebookUserData(tokenResponse.token);
+                        isFbSignedInMESearch = false;
+                        facebookProfileDetail = await Data.getFacebookUserData(tokenResponse.token);
                         userData['facebook_id'] = facebookProfileDetail.id;
                         userData['facebook_token'] = tokenResponse.token;
                         userData['is_fb_signed_in'] = true;
                         currentData[updateindex] = userData;
                         userDetailsMESearch["userDetails"] = currentData;
-                        const ssoAttachment = CardFactory.thumbnailCard(
-                            'User Profile card',
-                            ssoData.myDetails.displayName,
-                            CardFactory.images([
-                                ssoData.photo
-                            ])
-                        );
-                        const fbattachment = CardFactory.thumbnailCard(
+                        fbAttachment = CardFactory.thumbnailCard(
                             'Facebook profile card',
                             facebookProfileDetail.name,
                             CardFactory.images([
                                 facebookProfileDetail.picture.data.url
                             ])
                         );
+
                         if(userData.is_google_signed_in){
-                            var googleProfileDetails = await Data.getGoogleUserData(userData.google_token);
-                            const googleAttachment = CardFactory.thumbnailCard(
+                            googleProfileDetails = await Data.getGoogleUserData(userData.google_token);
+                            googleAttachment = CardFactory.thumbnailCard(
                                 'Google profile card',
                                 googleProfileDetails.names[0].displayName,
                                 CardFactory.images([
                                     googleProfileDetails.photos[0].url
                                 ])
                             );
+
                             return {
                                 composeExtension: {
                                     attachmentLayout: 'list',
                                     type: 'result',
-                                    attachments: [ssoAttachment,fbattachment,googleAttachment]
+                                    attachments: [ssoAttachment,fbAttachment,googleAttachment]
                                 }
                             }
                         }
                         else{
+
                             return {
                                 composeExtension: {
                                     attachmentLayout: 'list',
                                     type: 'result',
-                                    attachments: [ssoAttachment,fbattachment]
+                                    attachments: [ssoAttachment,fbAttachment]
                                 }
                             }; 
                         }
                     }
                 }
-                else if(query.state == "ConnectWithGoogle" || is_google_signed_in){
+                else if(query.state == "ConnectWithGoogle" || isGoogleSignedInMESearch){
                     const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
                     const magicCode =
                     context.state && Number.isInteger(Number(context.state))
@@ -621,8 +656,8 @@ class TeamsBot extends DialogBot {
                         magicCode
                     );
                     if (!tokenResponse || !tokenResponse.token) {
-                        is_google_signed_in = true;
-                        is_fb_signed_in = false;
+                        isGoogleSignedInMESearch = true;
+                        isFbSignedInMESearch = false;
                         // There is no token, so the user has not signed in yet.
                         // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
         
@@ -646,64 +681,15 @@ class TeamsBot extends DialogBot {
                             },
                         };
                     }
-                    else if(query.state == "DisconnectFromGoogle"){
-                        userData['google_id'] = null;
-                        userData['google_token'] = null;
-                        userData['is_google_signed_in'] = false;
-                        currentData[updateindex] = userData;
-                        userDetailsMESearch["userDetails"] = currentData;
-                        return {
-                            composeExtension: {
-                                type: 'config',
-                                suggestedActions: {
-                                    actions: [
-                                        {
-                                            type: 'openUrl',
-                                            value: `${this.baseUrl}/config?is_fb_signed_in=${userData.is_fb_signed_in}&is_google_signed_in=${userData.is_google_signed_in}`,
-                                            title: 'Connect'
-                                        }
-                                    ]
-                                }
-                            }
-                        };
-                    }
-                    else if(query.state == "DisconnectFromFacebook"){
-                        userData['facebook_id'] = null;
-                        userData['facebook_token'] = null;
-                        userData['is_fb_signed_in'] = false;
-                        currentData[updateindex] = userData;
-                        userDetailsMESearch["userDetails"] = currentData;
-                        return {
-                            composeExtension: {
-                                type: 'config',
-                                suggestedActions: {
-                                    actions: [
-                                        {
-                                            type: 'openUrl',
-                                            value: `${this.baseUrl}/config?is_fb_signed_in=${userData.is_fb_signed_in}&is_google_signed_in=${userData.is_google_signed_in}`,
-                                            title: 'Connect'
-                                        }
-                                    ]
-                                }
-                            }
-                        };
-                    }
                     else{
-                        is_google_signed_in = false;
-                        var googleProfileDetails = await Data.getGoogleUserData(tokenResponse.token);
+                        isGoogleSignedInMESearch = false;
+                        googleProfileDetails = await Data.getGoogleUserData(tokenResponse.token);
                         userData['google_id'] = googleProfileDetails.emailAddresses[0].value;;
                         userData['google_token'] = tokenResponse.token;
                         userData['is_google_signed_in'] = true;
                         currentData[updateindex] = userData;
                         userDetailsMESearch["userDetails"] = currentData;
-                        const ssoAttachment = CardFactory.thumbnailCard(
-                            'User Profile card',
-                            ssoData.myDetails.displayName,
-                            CardFactory.images([
-                                ssoData.photo
-                            ])
-                        );
-                        const googleAttachment = CardFactory.thumbnailCard(
+                        googleAttachment = CardFactory.thumbnailCard(
                             'Google profile card',
                             googleProfileDetails.names[0].displayName,
                             CardFactory.images([
@@ -711,23 +697,25 @@ class TeamsBot extends DialogBot {
                             ])
                         );
                         if(userData.is_fb_signed_in){
-                            var facebookProfileDetail = await Data.getFacebookUserData(userData.facebook_token);
-                            const fbattachment = CardFactory.thumbnailCard(
+                            facebookProfileDetail = await Data.getFacebookUserData(userData.facebook_token);
+                            fbAttachment = CardFactory.thumbnailCard(
                                 'Facebook profile card',
                                 facebookProfileDetail.name,
                                 CardFactory.images([
                                     facebookProfileDetail.picture.data.url
                                 ])
                             );
+
                             return {
                                 composeExtension: {
                                     attachmentLayout: 'list',
                                     type: 'result',
-                                    attachments: [ssoAttachment,fbattachment,googleAttachment]
+                                    attachments: [ssoAttachment,fbAttachment,googleAttachment]
                                 }
                             }
                         }
                         else{
+
                             return {
                                 composeExtension: {
                                     attachmentLayout: 'list',
@@ -739,35 +727,73 @@ class TeamsBot extends DialogBot {
                         }
                     }
                 }
+                else if(query.state == "DisconnectFromGoogle"){
+                    userData['google_id'] = null;
+                    userData['google_token'] = null;
+                    userData['is_google_signed_in'] = false;
+                    currentData[updateindex] = userData;
+                    userDetailsMESearch["userDetails"] = currentData;
+
+                    return {
+                        composeExtension: {
+                            type: 'config',
+                            suggestedActions: {
+                                actions: [
+                                    {
+                                        type: 'openUrl',
+                                        value: `${this.baseUrl}/config?is_fb_signed_in=${userData.is_fb_signed_in}&is_google_signed_in=${userData.is_google_signed_in}`,
+                                        title: 'Connect'
+                                    }
+                                ]
+                            }
+                        }
+                    };
+                }
+                else if(query.state == "DisconnectFromFacebook"){
+                    userData['facebook_id'] = null;
+                    userData['facebook_token'] = null;
+                    userData['is_fb_signed_in'] = false;
+                    currentData[updateindex] = userData;
+                    userDetailsMESearch["userDetails"] = currentData;
+
+                    return {
+                        composeExtension: {
+                            type: 'config',
+                            suggestedActions: {
+                                actions: [
+                                    {
+                                        type: 'openUrl',
+                                        value: `${this.baseUrl}/config?is_fb_signed_in=${userData.is_fb_signed_in}&is_google_signed_in=${userData.is_google_signed_in}`,
+                                        title: 'Connect'
+                                    }
+                                ]
+                            }
+                        }
+                    };
+                }
                 else{
-                    const ssoAttachment = CardFactory.thumbnailCard(
-                        'User Profile card',
-                        ssoData.myDetails.displayName,
-                        CardFactory.images([
-                            ssoData.photo
-                        ])
-                    );
-                    var facebookProfileDetail = await Data.getFacebookUserData(userData.facebook_token);
-                            const fbattachment = CardFactory.thumbnailCard(
-                                'Facebook profile card',
-                                facebookProfileDetail.name,
-                                CardFactory.images([
-                                    facebookProfileDetail.picture.data.url
-                                ])
-                            );
-                    var googleProfileDetails = await Data.getGoogleUserData(userData.google_token);
-                    const googleAttachment = CardFactory.thumbnailCard(
+                    facebookProfileDetail = await Data.getFacebookUserData(userData.facebook_token);
+                    fbAttachment = CardFactory.thumbnailCard(
+                            'Facebook profile card',
+                            facebookProfileDetail.name,
+                            CardFactory.images([
+                                facebookProfileDetail.picture.data.url
+                            ])
+                        );
+                    googleProfileDetails = await Data.getGoogleUserData(userData.google_token);
+                    googleAttachment = CardFactory.thumbnailCard(
                         'Google profile card',
                         googleProfileDetails.names[0].displayName,
                         CardFactory.images([
                             googleProfileDetails.photos[0].url
                         ])
                     ); 
+
                     return {
                         composeExtension: {
                             attachmentLayout: 'list',
                             type: 'result',
-                            attachments: [ssoAttachment,fbattachment,googleAttachment]
+                            attachments: [ssoAttachment,fbAttachment,googleAttachment]
                         }
                     }           
                 }
@@ -775,11 +801,9 @@ class TeamsBot extends DialogBot {
         }
     }
 
-    async handleTeamsMessagingExtensionConfigurationQuerySettingUrl(
-        context,
-        query
-    ){
+    async handleTeamsMessagingExtensionConfigurationQuerySettingUrl(context,query){
         var currentData = userDetailsMESearch["userDetails"];
+
         if (currentData == undefined){
             return null;
         }
@@ -797,6 +821,7 @@ class TeamsBot extends DialogBot {
                     userData = user;
                 }
             })
+
             return {
                 composeExtension: {
                     type: 'config',
@@ -823,15 +848,22 @@ class TeamsBot extends DialogBot {
             updateindex = index;
           }
         })
+
         // When the user submits the settings page, this event is fired.
         if (settings.state =="ConnectWithFacebook") {
-            is_fb_signed_in = true;
+            isFbSignedInMESearch = true;
+            userData['is_fb_signed_in'] = true;
+            currentData[updateindex] = userData;
+            userDetailsMESearch["userDetails"] = currentData;
         }
         else if(settings.state =="ConnectWithGoogle") {
-            is_google_signed_in = true;
+            isGoogleSignedInMESearch = true;
+            userData['is_google_signed_in'] = true;
+            currentData[updateindex] = userData;
+            userDetailsMESearch["userDetails"] = currentData;
         }
         else if(settings.state =="DisconnectFromFacebook"){
-            is_fb_signed_in = false;
+            isFbSignedInMESearch = false;
             userData['facebook_id'] = null;
             userData['facebook_token'] = null;
             userData['is_fb_signed_in'] = false;
@@ -839,7 +871,7 @@ class TeamsBot extends DialogBot {
             userDetailsMESearch["userDetails"] = currentData;
         }
         else if(settings.state =="DisconnectFromGoogle"){
-            is_google_signed_in = false;
+            isGoogleSignedInMESearch = false;
             userData['google_id'] = null;
             userData['google_token'] = null;
             userData['is_google_signed_in'] = false;
