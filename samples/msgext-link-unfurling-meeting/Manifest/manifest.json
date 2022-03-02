@@ -1,0 +1,104 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.11",
+  "version": "1.4",
+  "id": "5c027db3-454b-4775-866c-9afb6047c94b",
+  "packageName": "com.microsoft.teams.meetings.package",
+  "developer": {
+    "name": "Anuj",
+    "websiteUrl": "https://teamstemplate.ngrok.io",
+    "privacyUrl": "https://teamstemplate.ngrok.io/privacy",
+    "termsOfUseUrl": "https://teamstemplate.ngrok.io/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Adaptive Card Sample",
+    "full": "Adaptive Card Sample"
+  },
+  "description": {
+    "short": "Adaptive Card Sample",
+    "full": "Adaptive Card Sample"
+  },
+  "showLoadingIndicator": true,
+  "bots": [
+    {
+      "botId": "5c027db3-454b-4775-866c-9afb6047c94b",
+      "scopes": [
+        "personal",
+        "team",
+        "groupchat"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false
+    }
+  ],
+  "accentColor": "#FFFFFF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://teamstemplate.ngrok.io/Config",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team",
+        "groupchat"
+      ],
+      "context": [
+        "channelTab",
+        "meetingChatTab",
+        "meetingDetailsTab",
+        "meetingSidePanel",
+        "meetingStage"
+      ]
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "5c027db3-454b-4775-866c-9afb6047c94b",
+      "canUpdateConfiguration": true,
+      "messageHandlers": [
+        {
+          "type": "link",
+          "value": {
+            "domains": [
+              "*.ngrok.io",
+              "ngrok.io"
+            ]
+          }
+        }
+      ],
+      "commands": [
+        {
+          "id": "Search",
+          "type": "query",
+          "title": "Title",
+          "description": "Description",
+          "initialRun": false,
+          "fetchTask": false,
+          "parameters": [
+            {
+              "name": "Parameter",
+              "title": "Title",
+              "description": "Description",
+              "inputType": "text"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.ngrok.io",
+    "*.botframework.com",
+    "*.microsoft.com"
+  ],
+  "webApplicationInfo": {
+    "id": "5c027db3-454b-4775-866c-9afb6047c94b",
+    "resource": "api://teamstemplate.ngrok.io/5c027db3-454b-4775-866c-9afb6047c94b"
+  }
+}

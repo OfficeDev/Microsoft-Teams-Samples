@@ -1,0 +1,41 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "Image",
+      "url": "${resource.imageUrl}",
+      "altText": "${resource.name} preview image.",
+      "size": "auto"
+    },
+    {
+      "type": "TextBlock",
+      "text": "${resource.Name}",
+      "wrap": true
+    },
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.OpenUrl",
+          "title": "View",
+          "url": "${resource.stageUrl}"
+        },
+        {
+          "type": "Action.Submit",
+          "title": "Review in meeting",
+          "data": {
+            "msteams": {
+              "type": "task/fetch"
+            },
+            "actionId": "ReviewInMeeting",
+            "id": "${resource.id}",
+            "url": "${resource.url}",
+            "name": "${resource.name}"
+          }
+        }
+      ]
+    }
+  ]
+  }
