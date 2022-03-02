@@ -181,7 +181,8 @@ const getMEResponseCard = (myDetails, userImage, facebookProfile, googleProfile)
       "type": "TextBlock",
       "size": "Medium",
       "weight": "Bolder",
-      "text": "User facebook details are"
+      "text": "User facebook details are",
+      "separator":true
     });
     card.content.body.push({
       "type": "Image",
@@ -221,7 +222,8 @@ const getMEResponseCard = (myDetails, userImage, facebookProfile, googleProfile)
       "type": "TextBlock",
       "size": "Medium",
       "weight": "Bolder",
-      "text": "User google details are"
+      "text": "User google details are",
+      "separator":true
     });
     card.content.body.push({
       "type": "Image",

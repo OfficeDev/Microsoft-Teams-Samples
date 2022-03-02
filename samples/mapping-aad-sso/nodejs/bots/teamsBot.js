@@ -4,12 +4,12 @@
 const { DialogBot } = require('./dialogBot');
 const { tokenExchangeOperationName } = require('botbuilder');
 const { SsoOAuthHelpler } = require('../SsoOAuthHelpler');
-const { CardFactory} = require('botbuilder');
-const { SimpleGraphClient } = require('../simpleGraphClient.js');
+const { CardFactory,ActionTypes } = require('botbuilder');
 const Data = require('../helper/dataHelper');
 const CardHelper = require('../cards/cardHelper');
-const axios = require('axios')
-const userDetails = {};
+const userDetailsMEAction = {};
+const userDetailsMESearch = {};
+
 let is_fb_signed_in;
 let is_google_signed_in;
 class TeamsBot extends DialogBot {
@@ -56,7 +56,7 @@ class TeamsBot extends DialogBot {
 
     async handleTeamsMessagingExtensionSubmitAction(context, action) {
         var state = action.data.msteams.id;
-        var currentData = userDetails["userDetails"];
+        var currentData = userDetailsMEAction["userDetails"];
         var userData;
         let updateindex;
         currentData.find((user, index) => {
@@ -111,7 +111,7 @@ class TeamsBot extends DialogBot {
             userData['facebook_token'] = tokenResponse.token;
             userData['is_fb_signed_in'] = true;
             currentData[updateindex] = userData;
-            userDetails["userDetails"] = currentData;
+            userDetailsMEAction["userDetails"] = currentData;
             facebookProfile["is_fb_signed_in"]= true;
             facebookProfile["name"]= facebookProfileDetail.name;
             facebookProfile["image"]= facebookProfileDetail.picture.data.url;
@@ -184,7 +184,7 @@ class TeamsBot extends DialogBot {
             userData['google_token'] = tokenResponse.token;
             userData['is_google_signed_in'] = true;
             currentData[updateindex] = userData;
-            userDetails["userDetails"] = currentData;
+            userDetailsMEAction["userDetails"] = currentData;
             if(userData.is_fb_signed_in){
                 var facebookProfileDetail = await Data.getFacebookUserData(userData.facebook_token);
                 facebookProfile["is_fb_signed_in"]= true;
@@ -214,7 +214,7 @@ class TeamsBot extends DialogBot {
             userData['facebook_token'] = null;
             userData['is_fb_signed_in'] = false;
             currentData[updateindex] = userData;
-            userDetails["userDetails"] = currentData;
+            userDetailsMEAction["userDetails"] = currentData;
             facebookProfile["is_fb_signed_in"]= false;
             if(userData.is_google_signed_in){
                 var googleProfileDetails = await Data.getGoogleUserData(userData.google_token);
@@ -246,7 +246,7 @@ class TeamsBot extends DialogBot {
             userData['google_token'] = null;
             userData['is_google_signed_in'] = false;
             currentData[updateindex] = userData;
-            userDetails["userDetails"] = currentData;
+            userDetailsMEAction["userDetails"] = currentData;
             googleProfile["is_google_signed_in"]= false
             if(userData.is_fb_signed_in){
                 var facebookProfileDetail = await Data.getFacebookUserData(userData.facebook_token);
@@ -308,7 +308,7 @@ class TeamsBot extends DialogBot {
             };
         }
         else{
-            var currentData = userDetails["userDetails"];
+            var currentData = userDetailsMEAction["userDetails"];
             var ssoData = await Data.getAADUserData(tokenResponse.token);
             var facbookProfile = {};
             var googleProfile= {};
@@ -317,7 +317,7 @@ class TeamsBot extends DialogBot {
                 const userDetailsList = new Array();
                 userDetailsList.push({ "aad_id": context.activity.from.aadObjectId, "is_aad_signed_in": true, "aad_token": tokenResponse.token });
                 currentData = userDetailsList;
-                userDetails["userDetails"] = currentData;
+                userDetailsMEAction["userDetails"] = currentData;
                 facbookProfile["is_fb_signed_in"]= false;
                 googleProfile["is_google_signed_in"]= false;
                 card = CardHelper.getMEResponseCard(ssoData.myDetails, ssoData.photo,facbookProfile,googleProfile);
@@ -341,7 +341,7 @@ class TeamsBot extends DialogBot {
                 const userDetailsList = currentData;
                 userDetailsList.push({ "aad_id": context.activity.from.aadObjectId, "is_aad_signed_in": true, "aad_token": tokenResponse.token });
                 currentData = userDetailsList;
-                userDetails["userDetails"] = currentData;
+                userDetailsMEAction["userDetails"] = currentData;
                 facbookProfile["is_fb_signed_in"]= false;
                 googleProfile["is_google_signed_in"]= false;
                 card = CardHelper.getMEResponseCard(ssoData.myDetails, ssoData.photo,facbookProfile,googleProfile);
@@ -368,7 +368,7 @@ class TeamsBot extends DialogBot {
                 })
                 userData["aad_token"] = tokenResponse.token
                 currentData[updateindex] = userData;
-                userDetails["userDetails"] = currentData;
+                userDetailsMEAction["userDetails"] = currentData;
 
                 if (userData.is_fb_signed_in){
                     var facbookProfileDetail = await Data.getFacebookUserData(userData.facebook_token);
@@ -405,55 +405,448 @@ class TeamsBot extends DialogBot {
         }
     }
 
-    async getFacebookUserData(access_token) {
-        const { data } = await axios({
-            url: 'https://graph.facebook.com/v2.6/me',
-            method: 'get',
-            params: {
-                fields: ['name','picture'].join(','),
-                access_token: access_token,
-            },
-        });
-        return data;
-    };
+    async handleTeamsMessagingExtensionQuery(context, query) {
+        const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
+        const magicCode =
+            context.state && Number.isInteger(Number(context.state))
+                ? context.state
+                : '';
 
-    getAdaptiveCardUserDetails = () => ({
-        $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
-        body: [
-            {
-                type: "TextBlock",
-                size: "Medium",
-                weight: "Bolder",
-                text: "User profile details are"
-            },
-            {
-                type: "Image",
-                size: "Medium",
-                url: "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg"
-            },
-            {
-                type: "TextBlock",
-                size: "Medium",
-                weight: "Bolder",
-                wrap: true,
-                text: "Hello! Test user"
-            },
-            {
-                type: "TextBlock",
-                size: "Medium",
-                weight: "Bolder",
-                text: "Job title: Data scientist"
-            },
-            {
-                type: "TextBlock",
-                size: "Medium",
-                weight: "Bolder",
-                text: 'Email: testaccount@test123.onmicrosoft.com'
+        const tokenResponse = await userTokenClient.getUserToken(
+            context.activity.from.id,
+            this.connectionName,
+            context.activity.channelId,
+            magicCode
+        );
+        if (!tokenResponse || !tokenResponse.token) {
+            this.isSignedIn = true;
+            // There is no token, so the user has not signed in yet.
+            // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
+            const { signInLink } = await userTokenClient.getSignInResource(
+                this.connectionName,
+                context.activity
+            );
+
+            return {
+                composeExtension: {
+                    type: 'auth',
+                    suggestedActions: {
+                        actions: [
+                            {
+                                type: 'openUrl',
+                                value: signInLink,
+                                title: 'Bot Service OAuth'
+                            }
+                        ]
+                    }
+                }
+            };
+        }
+        else{
+            var currentData = userDetailsMESearch["userDetails"];
+            var ssoData = await Data.getAADUserData(tokenResponse.token);
+            if (currentData == undefined) {
+                const userDetailsList = new Array();
+                userDetailsList.push({ "aad_id": context.activity.from.aadObjectId, "is_aad_signed_in": true, "aad_token": tokenResponse.token,"is_fb_signed_in":false,"is_google_signed_in":false });
+                currentData = userDetailsList;
+                userDetailsMESearch["userDetails"] = currentData;
+                return {
+                    composeExtension: {
+                        type: 'config',
+                        suggestedActions: {
+                            actions: [
+                                {
+                                    type: 'openUrl',
+                                    value: `${this.baseUrl}/config?is_fb_signed_in=false&is_google_signed_in=false`,
+                                    title: 'Connect'
+                                }
+                            ]
+                        }
+                    }
+                };
             }
-        ],
-        type: 'AdaptiveCard',
-        version: '1.4'
-    });
+            else if(!currentData.find((user) => {
+                if (user.aad_id == context.activity.from.aadObjectId) {
+                  return true;
+                }
+              })){
+                const userDetailsList = currentData;
+                userDetailsList.push({ "aad_id": context.activity.from.aadObjectId, "is_aad_signed_in": true, "aad_token": tokenResponse.token,"is_fb_signed_in":false,"is_google_signed_in":false });
+                currentData = userDetailsList;
+                userDetailsMESearch["userDetails"] = currentData;
+                return {
+                    composeExtension: {
+                        type: 'config',
+                        suggestedActions: {
+                            actions: [
+                                {
+                                    type: 'openUrl',
+                                    value: `${this.baseUrl}/config?is_fb_signed_in=false&is_google_signed_in=false`,
+                                    title: 'Connect'
+                                }
+                            ]
+                        }
+                    }
+                };
+            }
+            else{
+                var userData;
+                let updateindex;
+                currentData.find((user, index) => {
+                    if (user.aad_id == context.activity.from.aadObjectId) {
+                        userData = user;
+                        updateindex = index;
+                    }
+                })
+                userData["aad_token"] = tokenResponse.token
+                currentData[updateindex] = userData;
+                userDetailsMESearch["userDetails"] = currentData;
+
+                if((!userData.is_fb_signed_in && query.state == undefined) ||(!userData.is_google_signed_in && query.state == undefined)){
+                    return {
+                        composeExtension: {
+                            type: 'config',
+                            suggestedActions: {
+                                actions: [
+                                    {
+                                        type: 'openUrl',
+                                        value: `${this.baseUrl}/config?is_fb_signed_in=${userData.is_fb_signed_in}&is_google_signed_in=${userData.is_google_signed_in}`,
+                                        title: 'Connect'
+                                    }
+                                ]
+                            }
+                        }
+                    };
+                }
+                else if(query.state == "ConnectWithFacebook" || is_fb_signed_in){
+                    const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
+                    const magicCode =
+                    context.state && Number.isInteger(Number(context.state))
+                    ? context.state
+                    : '';
+
+                    const tokenResponse = await userTokenClient.getUserToken(
+                        context.activity.from.id,
+                        this.fbconnectionName,
+                        context.activity.channelId,
+                        magicCode
+                    );
+                    if (!tokenResponse || !tokenResponse.token) {
+                        is_fb_signed_in = true;
+                        is_google_signed_in = false;
+                        // There is no token, so the user has not signed in yet.
+                        // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
+        
+                        const { signInLink } = await userTokenClient.getSignInResource(
+                            this.fbconnectionName,
+                            context.activity
+                        );
+        
+                        return {
+                            composeExtension: {
+                                type: 'auth',
+                                suggestedActions: {
+                                    actions: [
+                                        {
+                                            type: 'openUrl',
+                                            value: signInLink,
+                                            title: 'Facebook login'
+                                        },
+                                    ],
+                                },
+                            },
+                        };
+                    }
+                    else{
+                        is_fb_signed_in = false;
+                        var facebookProfileDetail = await Data.getFacebookUserData(tokenResponse.token);
+                        userData['facebook_id'] = facebookProfileDetail.id;
+                        userData['facebook_token'] = tokenResponse.token;
+                        userData['is_fb_signed_in'] = true;
+                        currentData[updateindex] = userData;
+                        userDetailsMESearch["userDetails"] = currentData;
+                        const ssoAttachment = CardFactory.thumbnailCard(
+                            'User Profile card',
+                            ssoData.myDetails.displayName,
+                            CardFactory.images([
+                                ssoData.photo
+                            ])
+                        );
+                        const fbattachment = CardFactory.thumbnailCard(
+                            'Facebook profile card',
+                            facebookProfileDetail.name,
+                            CardFactory.images([
+                                facebookProfileDetail.picture.data.url
+                            ])
+                        );
+                        if(userData.is_google_signed_in){
+                            var googleProfileDetails = await Data.getGoogleUserData(userData.google_token);
+                            const googleAttachment = CardFactory.thumbnailCard(
+                                'Google profile card',
+                                googleProfileDetails.names[0].displayName,
+                                CardFactory.images([
+                                    googleProfileDetails.photos[0].url
+                                ])
+                            );
+                            return {
+                                composeExtension: {
+                                    attachmentLayout: 'list',
+                                    type: 'result',
+                                    attachments: [ssoAttachment,fbattachment,googleAttachment]
+                                }
+                            }
+                        }
+                        else{
+                            return {
+                                composeExtension: {
+                                    attachmentLayout: 'list',
+                                    type: 'result',
+                                    attachments: [ssoAttachment,fbattachment]
+                                }
+                            }; 
+                        }
+                    }
+                }
+                else if(query.state == "ConnectWithGoogle" || is_google_signed_in){
+                    const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
+                    const magicCode =
+                    context.state && Number.isInteger(Number(context.state))
+                    ? context.state
+                    : '';
+
+                    const tokenResponse = await userTokenClient.getUserToken(
+                        context.activity.from.id,
+                        this.googleconnectionName,
+                        context.activity.channelId,
+                        magicCode
+                    );
+                    if (!tokenResponse || !tokenResponse.token) {
+                        is_google_signed_in = true;
+                        is_fb_signed_in = false;
+                        // There is no token, so the user has not signed in yet.
+                        // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
+        
+                        const { signInLink } = await userTokenClient.getSignInResource(
+                            this.googleconnectionName,
+                            context.activity
+                        );
+        
+                        return {
+                            composeExtension: {
+                                type: 'auth',
+                                suggestedActions: {
+                                    actions: [
+                                        {
+                                            type: 'openUrl',
+                                            value: signInLink,
+                                            title: 'Google login'
+                                        },
+                                    ],
+                                },
+                            },
+                        };
+                    }
+                    else if(query.state == "DisconnectFromGoogle"){
+                        userData['google_id'] = null;
+                        userData['google_token'] = null;
+                        userData['is_google_signed_in'] = false;
+                        currentData[updateindex] = userData;
+                        userDetailsMESearch["userDetails"] = currentData;
+                        return {
+                            composeExtension: {
+                                type: 'config',
+                                suggestedActions: {
+                                    actions: [
+                                        {
+                                            type: 'openUrl',
+                                            value: `${this.baseUrl}/config?is_fb_signed_in=${userData.is_fb_signed_in}&is_google_signed_in=${userData.is_google_signed_in}`,
+                                            title: 'Connect'
+                                        }
+                                    ]
+                                }
+                            }
+                        };
+                    }
+                    else if(query.state == "DisconnectFromFacebook"){
+                        userData['facebook_id'] = null;
+                        userData['facebook_token'] = null;
+                        userData['is_fb_signed_in'] = false;
+                        currentData[updateindex] = userData;
+                        userDetailsMESearch["userDetails"] = currentData;
+                        return {
+                            composeExtension: {
+                                type: 'config',
+                                suggestedActions: {
+                                    actions: [
+                                        {
+                                            type: 'openUrl',
+                                            value: `${this.baseUrl}/config?is_fb_signed_in=${userData.is_fb_signed_in}&is_google_signed_in=${userData.is_google_signed_in}`,
+                                            title: 'Connect'
+                                        }
+                                    ]
+                                }
+                            }
+                        };
+                    }
+                    else{
+                        is_google_signed_in = false;
+                        var googleProfileDetails = await Data.getGoogleUserData(tokenResponse.token);
+                        userData['google_id'] = googleProfileDetails.emailAddresses[0].value;;
+                        userData['google_token'] = tokenResponse.token;
+                        userData['is_google_signed_in'] = true;
+                        currentData[updateindex] = userData;
+                        userDetailsMESearch["userDetails"] = currentData;
+                        const ssoAttachment = CardFactory.thumbnailCard(
+                            'User Profile card',
+                            ssoData.myDetails.displayName,
+                            CardFactory.images([
+                                ssoData.photo
+                            ])
+                        );
+                        const googleAttachment = CardFactory.thumbnailCard(
+                            'Google profile card',
+                            googleProfileDetails.names[0].displayName,
+                            CardFactory.images([
+                                googleProfileDetails.photos[0].url
+                            ])
+                        );
+                        if(userData.is_fb_signed_in){
+                            var facebookProfileDetail = await Data.getFacebookUserData(userData.facebook_token);
+                            const fbattachment = CardFactory.thumbnailCard(
+                                'Facebook profile card',
+                                facebookProfileDetail.name,
+                                CardFactory.images([
+                                    facebookProfileDetail.picture.data.url
+                                ])
+                            );
+                            return {
+                                composeExtension: {
+                                    attachmentLayout: 'list',
+                                    type: 'result',
+                                    attachments: [ssoAttachment,fbattachment,googleAttachment]
+                                }
+                            }
+                        }
+                        else{
+                            return {
+                                composeExtension: {
+                                    attachmentLayout: 'list',
+                                    type: 'result',
+                                    attachments: [ssoAttachment,googleAttachment]
+                                }
+                            };
+
+                        }
+                    }
+                }
+                else{
+                    const ssoAttachment = CardFactory.thumbnailCard(
+                        'User Profile card',
+                        ssoData.myDetails.displayName,
+                        CardFactory.images([
+                            ssoData.photo
+                        ])
+                    );
+                    var facebookProfileDetail = await Data.getFacebookUserData(userData.facebook_token);
+                            const fbattachment = CardFactory.thumbnailCard(
+                                'Facebook profile card',
+                                facebookProfileDetail.name,
+                                CardFactory.images([
+                                    facebookProfileDetail.picture.data.url
+                                ])
+                            );
+                    var googleProfileDetails = await Data.getGoogleUserData(userData.google_token);
+                    const googleAttachment = CardFactory.thumbnailCard(
+                        'Google profile card',
+                        googleProfileDetails.names[0].displayName,
+                        CardFactory.images([
+                            googleProfileDetails.photos[0].url
+                        ])
+                    ); 
+                    return {
+                        composeExtension: {
+                            attachmentLayout: 'list',
+                            type: 'result',
+                            attachments: [ssoAttachment,fbattachment,googleAttachment]
+                        }
+                    }           
+                }
+            }
+        }
+    }
+
+    async handleTeamsMessagingExtensionConfigurationQuerySettingUrl(
+        context,
+        query
+    ){
+        var currentData = userDetailsMESearch["userDetails"];
+        if (currentData == undefined){
+            return null;
+        }
+        else if(!currentData.find((user) => {
+            if (user.aad_id == context.activity.from.aadObjectId) {
+              return true;
+            }
+          })){
+            return null;
+          }
+        else{
+            var userData;
+            currentData.find((user) => {
+                if (user.aad_id == context.activity.from.aadObjectId) {
+                    userData = user;
+                }
+            })
+            return {
+                composeExtension: {
+                    type: 'config',
+                    suggestedActions: {
+                        actions: [
+                            {
+                                type: ActionTypes.OpenUrl,
+                                value: `${this.baseUrl}/config?is_fb_signed_in=${userData.is_fb_signed_in}&is_google_signed_in=${userData.is_google_signed_in}`
+                            },
+                        ],
+                    },
+                },
+            };
+        }
+    }
+
+    async handleTeamsMessagingExtensionConfigurationSetting(context, settings) {
+        var currentData = userDetailsMESearch["userDetails"];
+        var userData;
+        let updateindex;
+        currentData.find((user, index) => {
+          if (user.aad_id == context.activity.from.aadObjectId) {
+            userData = user;
+            updateindex = index;
+          }
+        })
+        // When the user submits the settings page, this event is fired.
+        if (settings.state =="ConnectWithFacebook") {
+            is_fb_signed_in = true;
+        }
+        else if(settings.state =="ConnectWithGoogle") {
+            is_google_signed_in = true;
+        }
+        else if(settings.state =="DisconnectFromFacebook"){
+            is_fb_signed_in = false;
+            userData['facebook_id'] = null;
+            userData['facebook_token'] = null;
+            userData['is_fb_signed_in'] = false;
+            currentData[updateindex] = userData;
+            userDetailsMESearch["userDetails"] = currentData;
+        }
+        else if(settings.state =="DisconnectFromGoogle"){
+            is_google_signed_in = false;
+            userData['google_id'] = null;
+            userData['google_token'] = null;
+            userData['is_google_signed_in'] = false;
+            currentData[updateindex] = userData;
+            userDetailsMESearch["userDetails"] = currentData;
+        }
+    }
 }
 
 module.exports.TeamsBot = TeamsBot;

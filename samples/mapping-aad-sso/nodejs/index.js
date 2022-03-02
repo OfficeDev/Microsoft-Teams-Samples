@@ -114,6 +114,10 @@ server.get('/auth-end', function (req, res) {
   res.render('./views/auth-end', { clientId: clientId });
 });
 
+server.get('/config', function (req, res) {
+  res.render('./views/config');
+});
+
 // Endpoint to facebook auth redirect page.
 server.get('/fb-auth', function (req, res) {
   res.render('./views/fb-auth');
