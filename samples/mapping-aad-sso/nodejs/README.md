@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demos authentication feature in bot,tab and messaging extension.
+description: This sample demos mapping with aad id, facebook, and google account of user in bot, ME and tab.
 products:
 - office-teams
 - office
@@ -13,47 +13,31 @@ contentType: samples
 createdDate: "16-02-2022 00:15:13"
 ---
 
-# Authentication complete sample
+# Mapping sample
 
-Using this C# sample, you can check authenticate in bot,tab and messaging extention with sso, facebook and using user name and password.
+This sample demos mapping with aad id, facebook, and google account of user in bot, ME and tab.
 
 ## Key features
 
-Bot Authentication
-
-![Login option card](Images/BotLoginOptionCard.png)
-
-  - SSO
+Bot Mapping
   
-  ![SSO login](Images/BotSsoCard.png)
-  
-  - Using user name and password
-  
-  ![using credentials](Images/BotUsingCredentials.png)
-  
-Tab Authentication
+Tab mapping
 
 ![Tab](Images/Tab.png)
 
-  - SSO
-  
-  ![Tab SSO login](Images/TabSsoLogin.png)
-  
-  - Using user name and password
-  
-  ![Tab using credentials](Images/TabUsingCredentials.png)
+Messaging Extention mapping
 
-Messaging Extention Authentication
+- ME Action
 
-![ME action](Images/MEActions.png)
+  ![ME action](Images/MEActions.png)
 
-  - SSO
-  
-  ![ME SSO login](Images/MESsoCard.png)
-  
-  - Using user name and password
-  
-  ![ME using credentials](Images/MEUsingCredentials.png)
+- ME Search
+
+  ![ME search](Images/MESearch.png)
+   
+- ME Link unfurling
+
+  ![ME Link unfurling](Images/MELinkUnfurlingLoginLink.png)
 
 ## Prerequisites
 
@@ -115,11 +99,33 @@ Messaging Extention Authentication
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
   
 
-16. To test facebook auth flow [create a facebookapp](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-facebook?view=azure-bot-service-4.0) and get client id and secret for facebook app.
+16. Facebook app setup.  [create a facebookapp](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-facebook?view=azure-bot-service-4.0) and get client id and secret for facebook app.
     Now go to your bot channel registartion -> configuration -> Add OAuth connection string
    - Provide connection Name : for eg `facebookconnection`
-   - Select service provider ad `facebook`
+   - Select service provider as `facebook`
    - Add clientid and secret of your facebook app that was created using Step 16.
+
+17. After creating the app and getting client id and secret, make sure you add facebook login service under products section.
+     ![FacebookProduct](Images/FacebookProduct.png)
+
+18. Go to facebook settings and under valid domains, make sure to add the following url's
+     - `https://token.botframework.com/.auth/web/redirect`
+     - `https://<<base url>>`
+     - `https://<<base url>>/fb-auth`
+     
+    ![validDomains](Images/ValidDomains.png)
+
+19. Google app setup. 
+    - Obtain OAuth2 client credentials from the [Google API Console](https://console.developers.google.com/). Enable access to the [Google People API](https://developers.google.com/people/). 
+
+    - In "Authorized redirect URLs", add `https://token.botframework.com/.auth/web/redirect` and `<<base-url>>/google-auth`.
+
+    ![validDomains](Images/ValidDomainsGoogle.png)
+
+    - Note your app's "Client ID" and "Client Secret".
+    - Now go to your bot channel registartion -> configuration -> Add OAuth connection string
+    - Provide connection Name : for eg `googleconnection`
+    - Select service provider as `google`
 
 ### Run your bot sample
 1) Clone the repository
@@ -128,7 +134,7 @@ Messaging Extention Authentication
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/app-complete-auth/nodejs`
+2) In a terminal, navigate to `samples/mapping-aad-sso/nodejs`
 
 3) Install node modules
 
@@ -143,13 +149,13 @@ Messaging Extention Authentication
     ngrok http -host-header=rewrite 3978
     ```
 5)  Modify the `.env` file in your project folder (or in Visual Studio Code) and fill in below details:
-   - `{{Microsoft-App-id}}` - Generated from Step 3 (Application (client) ID)is the application app id
-   - `{{TenantId}}` - Generated from Step 3(Directory (tenant) ID) is the tenant id
-   - `{{MicrosoftAppPassword}}` - Generated from Step 14, also referred to as Client secret
-   - `{{ApplicationBaseUrll}}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
-   - `{{ Connection Name }}` - Generated from step 15.
-   - `{{FacebookAppId}} and {{FacebookAppPassword}} and {{ FBConnectionName}}`- Generated from step 16.
-
+   - `MicrosoftAppId` - Generated from Step 3 (Application (client) ID)is the application app id
+   - `TenantId` - Generated from Step 3(Directory (tenant) ID) is the tenant id
+   - `MicrosoftAppPassword` - Generated from Step 14, also referred to as Client secret
+   - `ApplicationBaseUrl` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+   - `ConnectionName` - Generated from step 15.
+   - `FaceBookAppId and FacebookAppPassword and FBConnectionName`- Generated from step 16.
+   - `GoogleAppId and GoogleAppPassword and GoogleConnectionName` - Generated from step 19.
 6) Run your app
 
     ```bash
@@ -157,9 +163,9 @@ Messaging Extention Authentication
     ```
 - **Manually update the manifest.json**
     Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
-   - `{{Microsoft-App-Id}}` with Application id generated from Step 3
-   - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
-   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+   - `<<Microsoft-App-Id>>` with Application id generated from Step 3
+   - `<<base-url>>` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+   - `<<Domain-name>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
     > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
