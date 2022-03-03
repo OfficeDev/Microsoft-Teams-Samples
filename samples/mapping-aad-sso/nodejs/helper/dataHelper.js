@@ -11,41 +11,46 @@ async function getFacebookUserData(access_token) {
         access_token: access_token,
       },
     });
+
     return data;
   };
 
-  async function getAADUserData(token) {
-    const client = new SimpleGraphClient(token);
-    const myDetails = await client.getMeAsync();
-    var imageString = "";
-    var img2 = "";
-    if (myDetails != null) {
-      var userImage = await client.getUserPhoto();
-      await userImage.arrayBuffer().then(result => {
-        imageString = Buffer.from(result).toString('base64');
-        img2 = "data:image/png;base64," + imageString;
-      }).catch(error => {
-        console.log(error)
-      });
-    }
-    return {
-      myDetails: myDetails,
-      photo: img2
-    }
+// Method to get AAD data.
+async function getAADUserData(token) {
+  const client = new SimpleGraphClient(token);
+  const myDetails = await client.getMeAsync();
+  var imageString = "";
+  var img2 = "";
+
+  if (myDetails != null) {
+    var userImage = await client.getUserPhoto();
+    await userImage.arrayBuffer().then(result => {
+      imageString = Buffer.from(result).toString('base64');
+      img2 = "data:image/png;base64," + imageString;
+    }).catch(error => {
+      console.log(error)
+    });
   }
 
-  async function getGoogleUserData(access_token) {
-    const data = await axios.get('https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,photos,urls', {
-      headers: {
-        "Authorization": `Bearer ${access_token}`,
-      }
-    })
+  return {
+    myDetails: myDetails,
+    photo: img2
+  }
+}
 
-    return data.data;
-  };
+// Method to get google user data.
+async function getGoogleUserData(access_token) {
+  const data = await axios.get('https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,photos,urls', {
+    headers: {
+      "Authorization": `Bearer ${access_token}`,
+    }
+  })
 
-  module.exports = {
-    getGoogleUserData,
-    getAADUserData,
-    getFacebookUserData
+  return data.data;
+};
+
+module.exports = {
+  getGoogleUserData,
+  getAADUserData,
+  getFacebookUserData
 }

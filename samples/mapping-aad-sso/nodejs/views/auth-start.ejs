@@ -51,8 +51,10 @@
                     key + "=" + encodeURIComponent(queryParams[key])
                 );
             }
+
             return encodedQueryParams.join("&");
         }
+
         // Converts decimal to hex equivalent
         // (From ADAL.js: https://github.com/AzureAD/azure-activedirectory-library-for-js/blob/dev/lib/adal.js)
         function _decimalToHex(number) {
@@ -60,8 +62,10 @@
             while (hex.length < 2) {
                 hex = "0" + hex;
             }
+
             return hex;
         }
+
         // Generates RFC4122 version 4 guid (128 bits)
         // (From ADAL.js: https://github.com/AzureAD/azure-activedirectory-library-for-js/blob/dev/lib/adal.js)
         function _guid() {
@@ -73,6 +77,7 @@
                 buffer[6] &= 0x4f; 
                 buffer[8] |= 0x80; 
                 buffer[8] &= 0xbf;
+
                 return (
                     _decimalToHex(buffer[0]) +
                         _decimalToHex(buffer[1]) +
@@ -116,6 +121,7 @@
                         guidResponse += guidHolder[i];
                     }
                 }
+                
                 return guidResponse;
             }
         }

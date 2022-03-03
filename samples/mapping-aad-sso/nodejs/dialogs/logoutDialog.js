@@ -37,6 +37,7 @@ class LogoutDialog extends ComponentDialog {
                 const botAdapter = CloudAdapter(innerDc.context.adapter);
                 await botAdapter.signOutUser(innerDc.context, this.connectionName);
                 await innerDc.context.sendActivity('You have been signed out.');
+                
                 return await innerDc.cancelAllDialogs();
             }
         }

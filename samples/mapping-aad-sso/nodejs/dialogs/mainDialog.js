@@ -67,18 +67,21 @@ class MainDialog extends LogoutDialog {
     // Get the token from the previous step. Note that we could also have gotten the
     // token directly from the prompt itself. There is an example of this in the next method.
     const tokenResponse = stepContext.result;
+
     if (!tokenResponse || !tokenResponse.token) {
       await stepContext.context.sendActivity('Login was not successful please try again.');
       return await stepContext.endDialog();
     }
     else {
       var currentData = userDetails["userDetails"];
+
       if (currentData == undefined) {
         const userDetailsList = new Array();
         userDetailsList.push({ "aad_id": stepContext.context._activity.from.aadObjectId, "is_aad_signed_in": true, "aad_token": tokenResponse.token });
         currentData = userDetailsList;
         userDetails["userDetails"] = currentData;
         await this.getUserEntryCard(stepContext, tokenResponse.token);
+
         return await stepContext.endDialog();
       }
       else if (!currentData.find((user) => {
@@ -91,6 +94,7 @@ class MainDialog extends LogoutDialog {
         currentData = userDetailsList;
         userDetails["userDetails"] = currentData;
         await this.getUserEntryCard(stepContext, tokenResponse.token);
+
         return await stepContext.endDialog();
       }
       else {
@@ -112,6 +116,7 @@ class MainDialog extends LogoutDialog {
         var facebookdetailCard;
         var googleDetailsCard;
         var googleProfile;
+
         if (!userData.is_fb_signed_in) {
           if (stepContext.context._activity.text != undefined && stepContext.context._activity.text == "connectToFacebook") {
             return await stepContext.beginDialog(FACEBOOKAUTH);
@@ -157,11 +162,13 @@ class MainDialog extends LogoutDialog {
           }
         }
         await stepContext.context.sendActivity(MessageFactory.list([aadDetailCard, facebookdetailCard, googleDetailsCard]));
+
         return await stepContext.endDialog();
       }
     }
   }
 
+  // Get user entry card.
   async getUserEntryCard(stepContext, token) {
     const data = await Data.getAADUserData(token);
     const userCard = MessageFactory.list(CardHelper.getAdaptiveCardUserDetails(data.myDetails, data.photo));

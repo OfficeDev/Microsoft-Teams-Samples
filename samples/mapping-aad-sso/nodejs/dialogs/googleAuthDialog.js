@@ -56,6 +56,7 @@ class GoogleAuthDialog extends LogoutDialog {
             var aadDetailCard = CardHelper.getAADDetailsCard(aadProfile.myDetails, aadProfile.photo);
             var googleDetailsCard = CardHelper.getGoogleDetailsCard(googleProfile);
             var facebookdetailCard;
+            
             if (userData.is_fb_signed_in) {
                 var facebookProfile = await Data.getFacebookUserData(userData.facebook_token);
                 facebookdetailCard = CardHelper.getFacebookDetailsCard(facebookProfile)
@@ -70,6 +71,7 @@ class GoogleAuthDialog extends LogoutDialog {
         }
 
         await stepContext.context.sendActivity('Login was not successful please try again.');
+        
         return await stepContext.endDialog();
     }
 }

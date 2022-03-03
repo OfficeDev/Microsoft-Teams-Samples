@@ -1,5 +1,6 @@
 const { ActionTypes } = require('botbuilder');
 
+// Get user card.
 const getAdaptiveCardUserDetails = (myDetails, userImage) => (
   [getAADDetailsCard(myDetails, userImage),
   {
@@ -28,6 +29,7 @@ const getAdaptiveCardUserDetails = (myDetails, userImage) => (
   }
   ]);
 
+// Aad details card.
 const getAADDetailsCard = (myDetails, userImage) => (
   {
     "contentType": "application/vnd.microsoft.card.adaptive",
@@ -69,6 +71,7 @@ const getAADDetailsCard = (myDetails, userImage) => (
     }
   });
 
+  // Facebook details card.
 const getFacebookDetailsCard = (facebookProfile) => ({
   "contentType": "application/vnd.microsoft.card.hero",
   "content": {
@@ -88,6 +91,7 @@ const getFacebookDetailsCard = (facebookProfile) => ({
   }
 });
 
+// Google details card.
 const getGoogleDetailsCard = (googleProfile) => ({
   "contentType": "application/vnd.microsoft.card.hero",
   "content": {
@@ -108,6 +112,7 @@ const getGoogleDetailsCard = (googleProfile) => ({
   }
 });
 
+// Connect to facebook card.
 const getConnectToFacebookCard = () => ({
   "contentType": "application/vnd.microsoft.card.hero",
   "content": {
@@ -121,6 +126,7 @@ const getConnectToFacebookCard = () => ({
   }
 });
 
+// Connect to google card.
 const getConnectToGoogleCard = () => ({
   "contentType": "application/vnd.microsoft.card.hero",
   "content": {
@@ -134,6 +140,7 @@ const getConnectToGoogleCard = () => ({
   }
 });
 
+// ME action response card.
 const getMEResponseCard = (myDetails, userImage, facebookProfile, googleProfile) => {
   var card = {
     "contentType": "application/vnd.microsoft.card.adaptive",
@@ -267,7 +274,9 @@ const getMEResponseCard = (myDetails, userImage, facebookProfile, googleProfile)
       }
     })
   }
-  return card};
+  return card
+};
+
 module.exports = {
   getGoogleDetailsCard,
   getFacebookDetailsCard,

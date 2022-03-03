@@ -57,6 +57,7 @@ class SimpleFacebookAuthDialog extends LogoutDialog {
       var aadDetailCard = CardHelper.getAADDetailsCard(aadProfile.myDetails, aadProfile.photo);
       var facebbokdetailCard = CardHelper.getFacebookDetailsCard(facbookProfile);
       var googleDetailsCard;
+
       if (userData.is_google_signed_in) {
         var googleProfile = await Data.getGoogleUserData(userData.google_token);
         googleDetailsCard = CardHelper.getGoogleDetailsCard(googleProfile)
@@ -65,9 +66,11 @@ class SimpleFacebookAuthDialog extends LogoutDialog {
         googleDetailsCard = CardHelper.getConnectToGoogleCard();
       }
       await stepContext.context.sendActivity(MessageFactory.list([aadDetailCard, facebbokdetailCard, googleDetailsCard]));
+      
       return await stepContext.endDialog();
     }
     await stepContext.context.sendActivity('Login was not successful please try again.');
+    
     return await stepContext.endDialog();
   }
 }
