@@ -1,9 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using AppCompleteAuth.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
@@ -14,8 +16,8 @@ namespace AppCompleteAuth.Bots
 {
     public class AuthBot<T> : ActivityBot<T> where T : Dialog
     {
-        public AuthBot(IConfiguration configuration, ConversationState conversationState, T dialog)
-            : base(configuration,conversationState, dialog)
+        public AuthBot(IConfiguration configuration, ConversationState conversationState, T dialog, ConcurrentDictionary<string, List<UserMapData>> mapdata)
+            : base(configuration,conversationState, dialog, mapdata)
         {
         }
 
@@ -34,6 +36,7 @@ namespace AppCompleteAuth.Bots
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
                     await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! Please type 'login' for initiating the authentication flow."), cancellationToken);
+                    await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
                 }
             }
         }

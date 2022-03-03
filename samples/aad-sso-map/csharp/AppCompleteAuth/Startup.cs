@@ -21,6 +21,7 @@ using Newtonsoft.Json.Serialization;
 using Microsoft.Bot.Connector.Authentication;
 using System.Collections.Concurrent;
 using AppCompleteAuth.Models;
+using System.Collections.Generic;
 
 namespace AppCompleteAuth
 {
@@ -53,6 +54,9 @@ namespace AppCompleteAuth
             });
             services.AddMemoryCache();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            // Create a global hashset for our save task details
+            services.AddSingleton<ConcurrentDictionary<string, List<UserMapData>>>();
+            services.AddSingleton <ConcurrentDictionary<string, bool>>();
             services.AddMvc().AddSessionStateTempDataProvider();
             // Create a global hashset for our Roster and notes information
             services.AddSingleton<ConcurrentDictionary<string, Token>>();

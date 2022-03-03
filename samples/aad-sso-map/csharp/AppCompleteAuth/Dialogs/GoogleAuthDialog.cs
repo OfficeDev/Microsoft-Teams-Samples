@@ -17,10 +17,10 @@ using System.Threading.Tasks;
 
 namespace AppCompleteAuth.Dialogs
 {
-    public class FacebookAuthDialog : LogoutDialog
+    public class GoogleAuthDialog : LogoutDialog
     {
         private readonly ConcurrentDictionary<string, List<UserMapData>> mappingData;
-        public FacebookAuthDialog(string configuration, ConcurrentDictionary<string, List<UserMapData>> data) : base(nameof(FacebookAuthDialog), configuration)
+        public GoogleAuthDialog(string configuration, ConcurrentDictionary<string, List<UserMapData>> data) : base(nameof(GoogleAuthDialog), configuration)
         {
             mappingData = data;
             AddDialog(new OAuthPrompt(
@@ -28,7 +28,7 @@ namespace AppCompleteAuth.Dialogs
                 new OAuthPromptSettings
                 {
                     ConnectionName = ConnectionName,
-                    Text = "Login to facebook",
+                    Text = "Login to google",
                     Title = "Log In",
                     Timeout = 300000, // User has 5 minutes to login (1000 * 60 * 5)
                 }));
@@ -52,22 +52,50 @@ namespace AppCompleteAuth.Dialogs
 
         private async Task<DialogTurnResult> LoginStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            // Getting the token from the previous step.
-            var tokenResponse = (TokenResponse)stepContext.Result;
             List<UserMapData> currentList = new List<UserMapData>();
+            var attachmentList = new List<Microsoft.Bot.Schema.Attachment>();
             Microsoft.Bot.Schema.Attachment userCard;
             Microsoft.Bot.Schema.Attachment facebookCard;
             Microsoft.Bot.Schema.Attachment googleCard;
-            var attachmentList = new List<Microsoft.Bot.Schema.Attachment>();
+            // Getting the token from the previous step.
+            var tokenResponse = (TokenResponse)stepContext.Result;
             if (tokenResponse?.Token != null)
             {
                 // Getting basic facebook profile details.
-                FacebookProfile profile = await FacebookHelper.GetFacebookProfileName(tokenResponse.Token);
+                var client2 = new HttpClient();
+                client2.DefaultRequestHeaders.Accept.Clear();
+                client2.DefaultRequestHeaders.Add("Authorization", "Bearer " + tokenResponse.Token);
+
+                var json = await client2.GetStringAsync(String.Format("https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,photos,urls")).ConfigureAwait(false);
+                var jboject = JsonConvert.DeserializeObject(json);
+                var profile = JObject.FromObject(jboject);
+                var state = (JArray)profile.ToObject<CardTaskFetchValue<JArray>>()?.Names;
+                List<UserData> items = ((JArray)state).Select(x => new UserData
+                {
+                    DisplayName = (string)x["displayName"]
+                }).ToList();
+
+                var state2 = (JArray)profile.ToObject<CardTaskFetchValue<JArray>>()?.Photos;
+                List<UserData> items2 = ((JArray)state2).Select(x => new UserData
+                {
+                    Url = (string)x["url"]
+                }).ToList();
+
+                var state3 = (JArray)profile.ToObject<CardTaskFetchValue<JArray>>()?.EmailAddresses;
+                List<UserData> items3 = ((JArray)state3).Select(x => new UserData
+                {
+                    Value = (string)x["value"]
+                }).ToList();
+
+                var displayName = items[0].DisplayName;
+                var photoUrl = items2[0].Url;
+                var emailAddress = items3[0].Value;
+
                 mappingData.TryGetValue("key", out currentList);
                 var data = currentList.Find(e => e.AadId == stepContext.Context.Activity.From.AadObjectId);
-                data.FacebookToken = tokenResponse.Token;
-                data.FacebookId = profile.Id;
-                data.isFacebookSignedIn = true;
+                data.GoogleToken = tokenResponse.Token;
+                data.GoogleId = emailAddress;
+                data.isGoogleSignedIn = true;
                 var index = currentList.FindIndex(e => e.AadId == stepContext.Context.Activity.From.AadObjectId);
                 currentList[index] = data;
                 var client = new SimpleGraphClient(data.AadToken);
@@ -76,50 +104,24 @@ namespace AppCompleteAuth.Dialogs
                             me.JobTitle : "Unknown";
                 var photo = await client.GetPhotoAsync();
                 userCard = GetProfileCard(me, photo, title);
-                facebookCard = GetProfileCard(profile);
-                if(data.isGoogleSignedIn)
+                if(data.isFacebookSignedIn)
                 {
-                    var client2 = new HttpClient();
-                    client2.DefaultRequestHeaders.Accept.Clear();
-                    client2.DefaultRequestHeaders.Add("Authorization", "Bearer " + data.GoogleToken);
-
-                    var json = await client2.GetStringAsync(String.Format("https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,photos,urls")).ConfigureAwait(false);
-                    var jboject = JsonConvert.DeserializeObject(json);
-                    var googleData = JObject.FromObject(jboject);
-                    var state = (JArray)googleData.ToObject<CardTaskFetchValue<JArray>>()?.Names;
-                    List<UserData> items = ((JArray)state).Select(x => new UserData
-                    {
-                        DisplayName = (string)x["displayName"]
-                    }).ToList();
-
-                    var state2 = (JArray)googleData.ToObject<CardTaskFetchValue<JArray>>()?.Photos;
-                    List<UserData> items2 = ((JArray)state2).Select(x => new UserData
-                    {
-                        Url = (string)x["url"]
-                    }).ToList();
-
-                    var state3 = (JArray)googleData.ToObject<CardTaskFetchValue<JArray>>()?.EmailAddresses;
-                    List<UserData> items3 = ((JArray)state3).Select(x => new UserData
-                    {
-                        Value = (string)x["value"]
-                    }).ToList();
-
-                    var displayName = items[0].DisplayName;
-                    var photoUrl = items2[0].Url;
-                    var emailAddress = items3[0].Value;
-                    googleCard = GetGoogleProfile(displayName, photoUrl, emailAddress);
+                    FacebookProfile fbData = await FacebookHelper.GetFacebookProfileName(data.FacebookToken);
+                    facebookCard = GetProfileCard(fbData);
                 }
+
                 else
                 {
-                    googleCard = GetThumbnailCardGoogle().ToAttachment();
+                    facebookCard = GetThumbnailCardFacebook().ToAttachment();
                 }
+              //  var faceBookCard = GetProfileCard(profile);
+                googleCard = GetGoogleProfile(displayName, photoUrl, emailAddress);
                 attachmentList = new List<Microsoft.Bot.Schema.Attachment>();
                 attachmentList.Add(userCard);
                 attachmentList.Add(facebookCard);
                 attachmentList.Add(googleCard);
                 var reply = MessageFactory.Attachment(attachmentList);
                 await stepContext.Context.SendActivityAsync(reply, cancellationToken);
-
                 return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
             }
 
@@ -236,6 +238,16 @@ namespace AppCompleteAuth.Dialogs
             };
         }
 
+        public static ThumbnailCard GetThumbnailCardFacebook()
+        {
+            var thumbnailCard = new ThumbnailCard
+            {
+                Buttons = new List<CardAction> { new CardAction(ActionTypes.ImBack, "Connect to facebook", value: "connectToFacebook") }
+            };
+
+            return thumbnailCard;
+        }
+
         // Create facebook profile card.
         private Microsoft.Bot.Schema.Attachment GetGoogleProfile(string displayName, string photoUrl, string emailAddress)
         {
@@ -286,11 +298,11 @@ namespace AppCompleteAuth.Dialogs
                 Title = "DisConnect",
                 Data = new AdaptiveCardAction
                 {
-                   MsteamsCardAction = new CardAction
-                   {
-                       Type = "imBack",
-                       Value = "DisConnectFromGoogle",
-                   }
+                    MsteamsCardAction = new CardAction
+                    {
+                        Type = "imBack",
+                        Value = "DisConnectFromGoogle",
+                    }
                 },
             });
 
@@ -299,16 +311,6 @@ namespace AppCompleteAuth.Dialogs
                 ContentType = AdaptiveCard.ContentType,
                 Content = card,
             };
-        }
-
-        public static ThumbnailCard GetThumbnailCardGoogle()
-        {
-            var thumbnailCard = new ThumbnailCard
-            {
-                Buttons = new List<CardAction> { new CardAction(ActionTypes.ImBack, "Connect to google", value: "connectToGoogle") }
-            };
-
-            return thumbnailCard;
         }
     }
 }

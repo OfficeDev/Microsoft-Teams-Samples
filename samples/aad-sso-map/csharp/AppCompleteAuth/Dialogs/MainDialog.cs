@@ -18,15 +18,18 @@ namespace AppCompleteAuth.Dialogs
     {
         private readonly string _applicationBaseUrl;
         private readonly ConcurrentDictionary<string, Token> _Token;
-        public MainDialog(IConfiguration configuration, ConcurrentDictionary<string, Token> token)
+        private readonly ConcurrentDictionary<string, List<UserMapData>> mappingData;
+        public MainDialog(IConfiguration configuration, ConcurrentDictionary<string, Token> token, ConcurrentDictionary<string, List<UserMapData>> data)
             : base(nameof(MainDialog))
         {
             _Token = token;
+            mappingData = data;
             _applicationBaseUrl = configuration["ApplicationBaseUrl"] ?? throw new NullReferenceException("ApplicationBaseUrl");
 
             AddDialog(new TextPrompt(nameof(TextPrompt)));
-            AddDialog(new FacebookAuthDialog(configuration["FacebookConnectionName"]));
-            AddDialog(new BotSsoAuthDialog(configuration["ConnectionName"], _Token));
+            AddDialog(new FacebookAuthDialog(configuration["FacebookConnectionName"], mappingData));
+            AddDialog(new GoogleAuthDialog(configuration["GoogleConnectionName"], mappingData));
+            AddDialog(new BotSsoAuthDialog(configuration["ConnectionName"], _Token, mappingData));
             AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
             {
                 PromptStepAsync
@@ -39,44 +42,69 @@ namespace AppCompleteAuth.Dialogs
         // Method to invoke auth flow.
         private async Task<DialogTurnResult> PromptStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            if (stepContext.Context.Activity.Text.ToLower().Trim() == "sso" || stepContext.Context.Activity.Text.ToLower().Trim() == "logoutsso")
-            {
                 return await stepContext.BeginDialogAsync(nameof(BotSsoAuthDialog));
-            }
-            else if (stepContext.Context.Activity.Text.ToLower().Trim() == "usingcredentials")
-            {
-                await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetPopUpSignInCard()), cancellationToken);
-                    
-                return await stepContext.EndDialogAsync();
-            }
-            else if (stepContext.Context.Activity.Text.ToLower().Trim() == "facebooklogin" || stepContext.Context.Activity.Text.ToLower().Trim() == "logoutfacebook")
-            {
-                return await stepContext.BeginDialogAsync(nameof(FacebookAuthDialog));
-            }
-            else {
-                await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(GetLoginOptionCard()), cancellationToken);
-
-                return await stepContext.EndDialogAsync();
-            }
         }
 
         // Get login option card.
-        private static Attachment GetLoginOptionCard()
+        //private static Attachment GetLoginOptionCard()
+        //{
+        //    var heroCard = new HeroCard
+        //    {
+        //        Title = "Login options",
+        //        Text = "Select a login option",
+        //        Buttons = new List<CardAction>
+        //        {
+        //            new CardAction(ActionTypes.MessageBack,title:"AAD SSO authentication", value: "sso", text:"sso", displayText:"AAD SSO authentication"),
+        //            new CardAction(ActionTypes.MessageBack,title:"Facebook login (OAuth 2)", value: "facebooklogin", text:"facebooklogin", displayText:"Facebook login (OAuth 2)"),
+        //            new CardAction(ActionTypes.MessageBack,title:"User Id/password login", value: "usingcredentials", text:"usingcredentials", displayText:"User Id/password login"),
+        //        }
+        //    };
+
+        //    return heroCard.ToAttachment();
+        //}
+
+        private static Attachment GetListCard()
         {
-            var heroCard = new HeroCard
+            ListCard card = new ListCard
             {
-                Title = "Login options",
-                Text = "Select a login option",
-                Buttons = new List<CardAction>
-                {
-                    new CardAction(ActionTypes.MessageBack,title:"AAD SSO authentication", value: "sso", text:"sso", displayText:"AAD SSO authentication"),
-                    new CardAction(ActionTypes.MessageBack,title:"Facebook login (OAuth 2)", value: "facebooklogin", text:"facebooklogin", displayText:"Facebook login (OAuth 2)"),
-                    new CardAction(ActionTypes.MessageBack,title:"User Id/password login", value: "usingcredentials", text:"usingcredentials", displayText:"User Id/password login"),
-                }
+                Title = "Test List card",
+                Items = new List<ListCardItem>(),
             };
 
-            return heroCard.ToAttachment();
+            card.Items.Add(new ListCardItem
+            {
+                Type = "resultItem",
+                Id = Guid.NewGuid().ToString(),
+                Title = "Login sso",
+                Tap = new TapItem ()
+                {
+                    Type = "openUrl",
+                    Value = "https://f8ea651f07bb.ngrok.io/popUpSignin"
+                }
+            });
+
+            card.Items.Add(new ListCardItem
+            {
+                Type = "resultItem",
+                Id = Guid.NewGuid().ToString(),
+                Title = "Login facebook",
+            });
+
+            card.Items.Add(new ListCardItem
+            {
+                Type = "resultItem",
+                Id = Guid.NewGuid().ToString(),
+                Title = "Login google",
+            });
+
+            return new Attachment
+            {
+                ContentType = "application/vnd.microsoft.teams.card.list",
+                Content = card,
+            };
         }
+
+
 
         // Get sign in card.
         private Attachment GetPopUpSignInCard()

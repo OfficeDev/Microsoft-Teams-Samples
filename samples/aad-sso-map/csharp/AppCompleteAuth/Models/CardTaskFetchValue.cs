@@ -11,6 +11,9 @@ namespace AppCompleteAuth.Models
     /// </summary>
     public class CardTaskFetchValue<T>
     {
+        [JsonProperty("id")]
+        public object Id { get; set; }
+
         [JsonProperty("state")]
         public object State { get; set; }
 

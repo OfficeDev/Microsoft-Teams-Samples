@@ -15,6 +15,8 @@ namespace AppCompleteAuth.Models
 
         public bool isAadSignedIn { get; set; }
 
+        public string AadToken { get; set; }
+
         public string FacebookId { get; set; }
 
         public string FacebookToken { get; set; }
