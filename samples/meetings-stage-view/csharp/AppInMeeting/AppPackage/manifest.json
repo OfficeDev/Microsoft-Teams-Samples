@@ -43,5 +43,15 @@
   ],
   "validDomains": [
     "<<VALID DOMAIN>>"
-  ]
+  ],
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "MeetingStage.Write.Chat",
+          "type": "Delegated"
+        }
+      ]
+    }
+  }
 }
