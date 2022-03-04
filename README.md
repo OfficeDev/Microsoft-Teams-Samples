@@ -61,6 +61,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |14|Tab in stage view   | Microsoft Teams tab sample app for demonstrating tab in stage view |[View][tab-stage-view#csharp] |          | [View][tab-stage-view#js] |
 |15|Create Conversational tab     | Microsoft Teams tab sample app for demonstrating create conversation tab | [View][tab-conversation#csharp]          |           |[View][tab-conversation#nodejs]
 |16| Product inspection | Demonstrating a feature where user can scan a product and mark it as approved/rejected. |[View][tab-product-inspection#csharp]|[View][productinspection#nodejs]|
+|16| Tab staggered permission | Demonstrating a feature to get staggered graph api permissions. ||[View][staggeredpermissions#nodejs]|
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
@@ -308,6 +309,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [peoplepickeronadaptivecard#js]:samples/bot-people-picker-adaptive-card/nodejs
 [peoplepickeronadaptivecard#csharp]:samples/bot-people-picker-adaptive-card/csharp
 [graph-activity-feed-broadcast#js]:samples/graph-activity-feed-broadcast/nodejs
+[staggeredpermissions#nodejs]:samples/tab-staggered-permission/nodejs
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 
 ## Submitting issues
