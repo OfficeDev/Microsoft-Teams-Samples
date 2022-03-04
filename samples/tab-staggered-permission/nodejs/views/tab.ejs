@@ -8,8 +8,8 @@
     <style>
         .card {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            width: 26rem;
-            height: 11rem;
+            width: 31rem;
+            height: 10rem;
             margin-left: 2rem;
             margin-top: 0.5rem;
         }
@@ -26,12 +26,12 @@
         .profile {
             margin-top: 1rem;
             margin-left: 1rem;
-            max-width: 25rem;
+            width: 40rem;
             align-content: flex-start;
         }
 
         .btn-outline-info {
-            margin-top: 7rem;
+            margin-top: 6rem;
             width: 15.5rem;
             padding: 0.5rem 0rem;
             margin-left: -8rem;
@@ -65,7 +65,8 @@
 
         $(document).ready(function () {
             $("#mails").hide();
-            ssoAuthentication();
+            //ssoAuthentication();
+            getClientSideToken();
         });
 
         microsoftTeams.initialize();
@@ -98,6 +99,7 @@
                 microsoftTeams.authentication.getAuthToken({
                     successCallback: (result) => {
                         resolve(result);
+                        decodingJWT(result)
                     },
                     failureCallback: function (error) {
                         reject("Error getting token: " + error);
@@ -105,6 +107,7 @@
                 });
             });
         }
+
 
         function getServerSideToken(clientSideToken) {
             return new Promise((resolve, reject) => {
@@ -133,11 +136,17 @@
                                 reject(responseJson.error);
                             } else {
                                 const userDetails = responseJson;
+                                for (let i = 0; i < userDetails.details.length; i++) {
+                                $('#mail-list-table').append(`<tr style="padding:1px" >
+                                    <td><label id=${i + 1}>${i + 1}</label></td>
+                                    <td>${userDetails.details[i].from.emailAddress.address}</td>
+                                    <td>${userDetails.details[i].toRecipients[0].emailAddress.address}</td>
+                                    <td>${userDetails.details[i].subject}</td>
+                                    <td>${userDetails.details[i].receivedDateTime}</td>
+                                    </tr>`);
+                                };
+                                $("#mails").show();
                                 $("#userImgSso").attr("src", userDetails.image);
-                                $("#name").append(userDetails.details.displayName);
-                                $("#email").append(userDetails.details.userPrincipalName);
-                                $("#work").append(userDetails.details.jobTitle);
-                                $("#getmails").show();
                             }
                         });
                 });
@@ -145,28 +154,23 @@
         }
 
         // Request consent on implicit grant error.
-        function requestConsent(scope) {
-            getToken(scope)
+        function requestConsent() {
+            getToken()
                 .then(data => {
                     $("#consent").hide();
                     $("#divError").hide();
                     accessToken = data.accessToken;
                     microsoftTeams.getContext((context) => {
-                        if (scope == "User.Read") {
-                            getUserInfo(context.userPrincipalName);
-                        }
-                        else {
-                            getUserMail();
-                        }
+                            getUserInfo();
                     });
                 });
         }
 
         // Get token for multi tenant.
-        function getToken(scope) {
+        function getToken() {
             return new Promise((resolve, reject) => {
                 microsoftTeams.authentication.authenticate({
-                    url: window.location.origin + "/auth-start?scope=" + scope,
+                    url: window.location.origin + "/auth-start",
                     width: 600,
                     height: 535,
                     successCallback: result => {
@@ -179,53 +183,49 @@
             });
         }
 
-
         // Get user information.
-        function getUserInfo(userPrincipleName) {
-            if (userPrincipleName) {
-                $.ajax({
-                    type: 'POST',
-                    url: '/GetUserDetails',
-                    dataType: 'json',
-                    data: {
-                        'accessToken': accessToken,
-                    },
-                    success: function (responseJson) {
-                        const userDetails = responseJson;
-                        $("#userImgId").attr("src", userDetails.image);
-                        $("#name").append(userDetails.details.displayName);
-                        $("#email").append(userDetails.details.userPrincipalName);
-                        $("#work").append(userDetails.details.jobTitle);
-                        $("#getmails").show();
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-                    }
-                });
-            }
-        }
-
-        function getUserMail() {
+        function getUserInfo() {
             $.ajax({
                 type: 'POST',
-                url: '/GetUserMails',
+                url: '/GetUserDetails',
                 dataType: 'json',
                 data: {
                     'accessToken': accessToken,
                 },
                 success: function (responseJson) {
-                    const userMails = responseJson;
-                    for (let i = 0; i < userMails.length; i++) {
+                    const userDetails = responseJson;
+                    $("#userImgSso").attr("src", userDetails.image);
+                        for (let i = 0; i < userDetails.usermails.length; i++) {
                     $('#mail-list-table').append(`<tr style="padding:1px" >
                         <td><label id=${i + 1}>${i + 1}</label></td>
-                        <td>${userMails[i].from.emailAddress.address}</td>
-                        <td>${userMails[i].toRecipients[0].emailAddress.address}</td>
-                        <td>${userMails[i].subject}</td>
-                        <td>${userMails[i].receivedDateTime}</td>
+                        <td>${userDetails.usermails[i].from.emailAddress.address}</td>
+                        <td>${userDetails.usermails[i].toRecipients[0].emailAddress.address}</td>
+                        <td>${userDetails.usermails[i].subject}</td>
+                        <td>${userDetails.usermails[i].receivedDateTime}</td>
                         </tr>`);
                     };
                     $("#mails").show();
                     $("#getmails").hide();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                }
+            });
+        }
+
+        function decodingJWT(token){
+            $.ajax({
+                type: 'POST',
+                url: '/decodeToken',
+                dataType: 'json',
+                data: {
+                    'accessToken': token,
+                },
+                success: function (responseJson) {
+                    const userDetails = responseJson;
+                    $("#name").append(userDetails.name);
+                    $("#email").append(userDetails.upn);
+                    $("#getmails").show();
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
@@ -239,7 +239,7 @@
     <div class="surface">
         <div class="card-container-div">
             <div>
-                <div class="signin-header"><b>User info</b></div>
+                <div class="signin-header"><b>User information</b></div>
                 <div class="card">
                     <div class="container">
                         <img src="https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744034?k=20&m=1016744034&s=612x612&w=0&h=kjCAwH5GOC3n3YRTHBaLDsLIuF8P3kkAJc9RvfiYWBY="
@@ -247,13 +247,12 @@
                         <div class="profile">
                             <span id="name"><b>Name: </b></span><br>
                             <span id="email"><b>Email: </b></span></span><br>
-                            <span id="work"><b>Work: </b></span></span>
                         </div>
                         <div id="divError" style="display: none"></div>
-                        <button type="button" class="btn-outline-info" onclick="requestConsent('User.Read')"
-                            id="consent" style="display:none;">Consent</button>
-                        <button type="button" class="btn-outline-info" onclick="requestConsent('Mail.Read')"
-                            id="getmails" style="display:none;">Get mails</button>
+                        <!-- <button type="button" class="btn-outline-info" onclick="ssoAuthentication()"
+                            id="consent">Using Obo flow</button> -->
+                        <button type="button" class="btn-outline-info" onclick="requestConsent()"
+                            id="getmails" style="display:none;">Get details</button>
                     </div>
                 </div>
             </div>

@@ -38,26 +38,20 @@ server.get('/tab', (req, res, next) => {
 
 // Pop-up dialog to ask for additional permissions, redirects to AAD page
 server.get('/auth-start', function (req, res) {
-  var scope = req.url.split('=')[1];
-  var data = {
-    clientId:process.env.MicrosoftAppId,
-    scope:scope
-  };
-  res.render('./views/auth-start', { data: JSON.stringify(data) });
+  var clientId =process.env.MicrosoftAppId;
+  res.render('./views/auth-start', { clientId: JSON.stringify(clientId) });
 });
 
 // End of the pop-up dialog auth flow, returns the results back to parent window
 server.get('/auth-end', function (req, res) {
-  var clientId = process.env.MicrosoftAppId;
-  res.render('./views/auth-end', { clientId: clientId });
+  res.render('./views/auth-end');
 });
-
 
 // On-behalf-of token exchange
 server.post('/getProfileOnBehalfOf', function (req, res) {
   var tid = req.body.tid;
   var token = req.body.token;
-  var scopes = ["https://graph.microsoft.com/User.Read"];
+  var scopes = ["https://graph.microsoft.com/User.Read Mail.Read"];
 
   // Creating MSAL client
   const msalClient = new msal.ConfidentialClientApplication({
@@ -75,13 +69,13 @@ server.post('/getProfileOnBehalfOf', function (req, res) {
       skipCache: true
     }).then(async result => {
       const client = new SimpleGraphClient(result.accessToken);
-      const myDetails = await client.getMeAsync();
+      const usermails = await client.getMailAsync();
       var userImage = await client.getUserPhoto()
       await userImage.arrayBuffer().then(result => {
         imageString = Buffer.from(result).toString('base64');
         img2 = "data:image/png;base64," + imageString;
         var userData = {
-          details: myDetails,
+          details: usermails.value,
           image: img2
         }
         resolve(userData);
@@ -103,15 +97,15 @@ server.post('/getProfileOnBehalfOf', function (req, res) {
 server.post('/GetUserDetails', async (req, res) => {
   var accessToken = req.body.accessToken;
   const client = new SimpleGraphClient(accessToken);
-  const myDetails = await client.getMeAsync();
   var userImage = await client.getUserPhoto();
+  const usermails = await client.getMailAsync();
   var userData;
   await userImage.arrayBuffer().then(result => {
     imageString = Buffer.from(result).toString('base64');
     img2 = "data:image/png;base64," + imageString;
     userData = {
-      details: myDetails,
-      image: img2
+      image: img2,
+      usermails:usermails.value
     }
   });
   var responseMessage = new Promise((resolve, reject) => {
@@ -124,16 +118,12 @@ server.post('/GetUserDetails', async (req, res) => {
   });
 });
 
-// Get user mails.
-server.post('/GetUserMails', async (req, res) => {
-  var accessToken = req.body.accessToken;
-  const client = new SimpleGraphClient(accessToken);
-  const usermails = await client.getMailAsync();
-    var responseMessage = Promise.resolve(usermails.value);
-    responseMessage.then(function (result) {
-      res.json(result);
-    }, function (err) {
-      console.log(err); // Error: "It broke"
-      res.json(err);
-    });
-});
+server.post('/decodeToken',(req, res)=>{
+  var token = req.body.accessToken;
+  if(token !== null || token !== undefined){
+    const base64String = token.split('.')[1];
+    const decodedValue = JSON.parse(Buffer.from(base64String,    
+      'base64').toString('ascii'));
+      res.json(decodedValue);
+    }
+})
