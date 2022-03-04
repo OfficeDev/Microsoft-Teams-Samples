@@ -97,11 +97,6 @@ server.get('/tab', (req, res, next) => {
   res.render('./views/tab', { clientId: JSON.stringify(clientId) })
 });
 
-// Endpoint to fetch Signin popup page.
-server.get('/popUpSignin', function (req, res) {
-  res.render('./views/popUpSignin');
-});
-
 // Pop-up dialog to ask for additional permissions, redirects to AAD page
 server.get('/auth-start', function (req, res) {
   var clientId = process.env.MicrosoftAppId;
@@ -110,8 +105,7 @@ server.get('/auth-start', function (req, res) {
 
 // End of the pop-up dialog auth flow, returns the results back to parent window
 server.get('/auth-end', function (req, res) {
-  var clientId = process.env.MicrosoftAppId;
-  res.render('./views/auth-end', { clientId: clientId });
+  res.render('./views/auth-end');
 });
 
 server.get('/config', function (req, res) {

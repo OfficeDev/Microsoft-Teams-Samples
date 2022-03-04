@@ -9,6 +9,7 @@ const Data = require('../helper/dataHelper');
 const CardHelper = require('../cards/cardHelper');
 const userDetailsMEAction = {};
 const userDetailsMESearch = {};
+const userDetailsMELinkUnfurl = {};
 
 let isFbSignedInMEAction;
 let isGoogleSignedInMEAction;
@@ -36,6 +37,42 @@ class TeamsBot extends DialogBot {
                 }
             }
 
+            await next();
+        });
+
+        this.onMessage(async (context, next) => {
+            if(context.activity.text=="DisconnectFromGoogleLinkUnfurl" || context.activity.text=="DisconnectFromFacebookLinkUnfurl" ){
+                var currentData = userDetailsMELinkUnfurl["userDetails"];
+                let userData;
+                let updateindex;
+                currentData.find((user, index) => {
+                    if (user.aad_id == context.activity.from.aadObjectId) {
+                        userData = user;
+                        updateindex = index;
+                    }
+                })
+                if(context.activity.text=="DisconnectFromGoogleLinkUnfurl"){
+                    userData['google_id'] = null;
+                    userData['google_token'] = null;
+                    userData['is_google_signed_in'] = false;
+                    currentData[updateindex] = userData;
+                    userDetailsMELinkUnfurl["userDetails"] = currentData;  
+                    await context.sendActivity("disconnected from google link unfurling");
+                }
+                if(context.activity.text=="DisconnectFromFacebookLinkUnfurl" ){
+                    userData['facebook_id'] = null;
+                    userData['facebook_token'] = null;
+                    userData['is_fb_signed_in'] = false;
+                    currentData[updateindex] = userData;
+                    userDetailsMELinkUnfurl["userDetails"] = currentData;
+                    await context.sendActivity("disconnected from facebook link unfurling");
+                }
+            }
+            else if(context.activity.attachments == undefined){
+                console.log('Running dialog with Message Activity.');
+                // Run the Dialog with the new message Activity.
+                await this.dialog.run(context, this.dialogState);
+            }
             await next();
         });
     }
@@ -918,14 +955,14 @@ class TeamsBot extends DialogBot {
             };
         }
         else{
-            var currentData = userDetailsMESearch["userDetails"];
+            var currentData = userDetailsMELinkUnfurl["userDetails"];
             var ssoData = await Data.getAADUserData(tokenResponse.token);
 
             if (currentData == undefined) {
                 const userDetailsList = new Array();
                 userDetailsList.push({ "aad_id": context.activity.from.aadObjectId, "is_aad_signed_in": true, "aad_token": tokenResponse.token,"is_fb_signed_in":false,"is_google_signed_in":false });
                 currentData = userDetailsList;
-                userDetailsMESearch["userDetails"] = currentData;
+                userDetailsMELinkUnfurl["userDetails"] = currentData;
                 return {
                     composeExtension: {
                         type: 'config',
@@ -949,7 +986,7 @@ class TeamsBot extends DialogBot {
                 const userDetailsList = currentData;
                 userDetailsList.push({ "aad_id": context.activity.from.aadObjectId, "is_aad_signed_in": true, "aad_token": tokenResponse.token,"is_fb_signed_in":false,"is_google_signed_in":false });
                 currentData = userDetailsList;
-                userDetailsMESearch["userDetails"] = currentData;
+                userDetailsMELinkUnfurl["userDetails"] = currentData;
                 return {
                     composeExtension: {
                         type: 'config',
@@ -978,16 +1015,23 @@ class TeamsBot extends DialogBot {
                 })
                 userData["aad_token"] = tokenResponse.token
                 currentData[updateindex] = userData;
-                userDetailsMESearch["userDetails"] = currentData;
-                const ssoAttachment = CardFactory.thumbnailCard(
-                    'User Profile card',
-                    ssoData.myDetails.displayName,
-                    CardFactory.images([
-                        ssoData.photo
-                    ])
-                );
-                let googleAttachment;
-                let fbAttachment;
+                userDetailsMELinkUnfurl["userDetails"] = currentData;
+                var userCard;
+                let facebookProfile = {
+                    is_fb_signed_in:false,
+                    name:"",
+                    image:""
+                };
+                let googleProfile = {
+                    is_google_signed_in:false,
+                    name:"",
+                    image:"",
+                    email:""
+                };
+                const preview = CardFactory.thumbnailCard(
+                    'Adaptive Card',
+                    'Please select to get the card'
+                    );
 
                 if((!userData.is_fb_signed_in && query.state == undefined) ||(!userData.is_google_signed_in && query.state == undefined)){
                     
@@ -1053,33 +1097,33 @@ class TeamsBot extends DialogBot {
                         userData['facebook_token'] = tokenResponse.token;
                         userData['is_fb_signed_in'] = true;
                         currentData[updateindex] = userData;
-                        userDetailsMESearch["userDetails"] = currentData;
-                        fbAttachment = CardHelper.getFacebookDetailsCard(facebookProfileDetail)
+                        userDetailsMELinkUnfurl["userDetails"] = currentData;
+                        facebookProfile.is_fb_signed_in= true;
+                        facebookProfile.name= facebookProfileDetail.name;
+                        facebookProfile.image= facebookProfileDetail.picture.data.url;
                         if(userData.is_google_signed_in){
                             googleProfileDetails = await Data.getGoogleUserData(userData.google_token);
-                            googleAttachment = CardFactory.thumbnailCard(
-                                'Google profile card',
-                                googleProfileDetails.names[0].displayName,
-                                CardFactory.images([
-                                    googleProfileDetails.photos[0].url
-                                ])
-                            );
-
+                            googleProfile.is_google_signed_in= true;
+                            googleProfile.name = googleProfileDetails.names[0].displayName;
+                            googleProfile.image= googleProfileDetails.photos[0].url;
+                            googleProfile.email = googleProfileDetails.emailAddresses[0].value;
+                            userCard = CardFactory.adaptiveCard(CardHelper.getMELinkUnfurlingCard(ssoData.myDetails,ssoData.photo,facebookProfile,googleProfile));
                             return {
                                 composeExtension: {
                                     attachmentLayout: 'list',
                                     type: 'result',
-                                    attachments: [ssoAttachment]
+                                    attachments: [{...userCard,preview}]
                                 }
                             }
                         }
                         else{
+                            userCard = CardFactory.adaptiveCard(CardHelper.getMELinkUnfurlingCard(ssoData.myDetails,ssoData.photo,facebookProfile,googleProfile));
 
                             return {
                                 composeExtension: {
                                     attachmentLayout: 'list',
                                     type: 'result',
-                                    attachments: [ssoAttachment]
+                                    attachments: [{...userCard,preview}]
                                 }
                             }; 
                         }
@@ -1131,55 +1175,34 @@ class TeamsBot extends DialogBot {
                         userData['google_token'] = tokenResponse.token;
                         userData['is_google_signed_in'] = true;
                         currentData[updateindex] = userData;
-                        userDetailsMESearch["userDetails"] = currentData;
-                        googleAttachment = {
-                            "contentType": "application/vnd.microsoft.card.hero",
-                            "content": {
-                              "title": 'User profile card',
-                              "subtitle": `AAD name: ${ssoData.myDetails.displayName}\n Google name: ${googleProfileDetails.names[0].displayName}`,
-                              "text":`AAD email: ${ssoData.myDetails.userPrincipalName} \n Google mail: ${googleProfileDetails.emailAddresses[0].value}`,
-                              "images": [
-                                {"url":ssoData.photo},
-                                {
-                                  "url": googleProfileDetails.photos[0].url
-                                }
-                              ],
-                            }
-                          }
-                         // CardFactory.thumbnailCard(
-                        //     'User profile card',
-                        //     `AAD name: ${ssoData.myDetails.displayName}\n Google name: ${googleProfileDetails.names[0].displayName}`,
-                        //     {"subtitle":`AAD email: ${ssoData.myDetails.userPrincipalName} \n Google mail: ${googleProfileDetails.emailAddresses[0].value}`},
-                        //     [{"url":ssoData.photo},
-                        //     {
-                        //     "url":googleProfileDetails.photos[0].url
-                        //     }]
-                        // );
+                        userDetailsMELinkUnfurl["userDetails"] = currentData;
+                        googleProfile.is_google_signed_in= true;
+                        googleProfile.name = googleProfileDetails.names[0].displayName;
+                        googleProfile.image= googleProfileDetails.photos[0].url;
+                        googleProfile.email = googleProfileDetails.emailAddresses[0].value;
+
                         if(userData.is_fb_signed_in){
                             facebookProfileDetail = await Data.getFacebookUserData(userData.facebook_token);
-                            fbAttachment = CardFactory.thumbnailCard(
-                                'Facebook profile card',
-                                facebookProfileDetail.name,
-                                CardFactory.images([
-                                    facebookProfileDetail.picture.data.url
-                                ])
-                            );
+                            facebookProfile.is_fb_signed_in= true;
+                            facebookProfile.name= facebookProfileDetail.name;
+                            facebookProfile.image= facebookProfileDetail.picture.data.url;
+                            userCard = CardFactory.adaptiveCard(CardHelper.getMELinkUnfurlingCard(ssoData.myDetails,ssoData.photo,facebookProfile,googleProfile));
 
                             return {
                                 composeExtension: {
                                     attachmentLayout: 'list',
                                     type: 'result',
-                                    attachments: [ssoAttachment]
+                                    attachments: [{...userCard,preview}]
                                 }
                             }
                         }
                         else{
-
+                            userCard = CardFactory.adaptiveCard(CardHelper.getMELinkUnfurlingCard(ssoData.myDetails,ssoData.photo,facebookProfile,googleProfile))
                             return {
                                 composeExtension: {
                                     attachmentLayout: 'list',
                                     type: 'result',
-                                    attachments: [googleAttachment]
+                                    attachments: [{ ...userCard, preview }]
                                 }
                             };
                         }
@@ -1190,7 +1213,7 @@ class TeamsBot extends DialogBot {
                     userData['google_token'] = null;
                     userData['is_google_signed_in'] = false;
                     currentData[updateindex] = userData;
-                    userDetailsMESearch["userDetails"] = currentData;
+                    userDetailsMELinkUnfurl["userDetails"] = currentData;
 
                     return {
                         composeExtension: {
@@ -1212,7 +1235,7 @@ class TeamsBot extends DialogBot {
                     userData['facebook_token'] = null;
                     userData['is_fb_signed_in'] = false;
                     currentData[updateindex] = userData;
-                    userDetailsMESearch["userDetails"] = currentData;
+                    userDetailsMELinkUnfurl["userDetails"] = currentData;
 
                     return {
                         composeExtension: {
@@ -1231,27 +1254,21 @@ class TeamsBot extends DialogBot {
                 }
                 else{
                     facebookProfileDetail = await Data.getFacebookUserData(userData.facebook_token);
-                    fbAttachment = CardFactory.thumbnailCard(
-                            'Facebook profile card',
-                            facebookProfileDetail.name,
-                            CardFactory.images([
-                                facebookProfileDetail.picture.data.url
-                            ])
-                        );
+                    facebookProfile.is_fb_signed_in= true;
+                    facebookProfile.name= facebookProfileDetail.name;
+                    facebookProfile.image= facebookProfileDetail.picture.data.url;
                     googleProfileDetails = await Data.getGoogleUserData(userData.google_token);
-                    googleAttachment = CardFactory.thumbnailCard(
-                        'Google profile card',
-                        googleProfileDetails.names[0].displayName,
-                        CardFactory.images([
-                            googleProfileDetails.photos[0].url
-                        ])
-                    ); 
+                    googleProfile.is_google_signed_in= true;
+                    googleProfile.name = googleProfileDetails.names[0].displayName;
+                    googleProfile.image= googleProfileDetails.photos[0].url;
+                    googleProfile.email = googleProfileDetails.emailAddresses[0].value;
+                    userCard =CardFactory.adaptiveCard(CardHelper.getMELinkUnfurlingCard(ssoData.myDetails,ssoData.photo,facebookProfile,googleProfile))
 
                     return {
                         composeExtension: {
                             attachmentLayout: 'list',
                             type: 'result',
-                            attachments: [ssoAttachment]
+                            attachments: [{...userCard,preview}]
                         }
                     }           
                 }

@@ -277,6 +277,122 @@ const getMEResponseCard = (myDetails, userImage, facebookProfile, googleProfile)
   return card
 };
 
+const getMELinkUnfurlingCard = (myDetails, userImage, facebookProfile, googleProfile)=>{
+  var card = {
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.0",
+    "body": [
+      {
+        "type": "TextBlock",
+        "size": "Medium",
+        "weight": "Bolder",
+        "text": "User sso details are"
+      },
+      {
+        "type": "Image",
+        "size": "Medium",
+        "url": userImage
+      },
+      {
+        "type": "TextBlock",
+        "size": "Medium",
+        "weight": "Bolder",
+        "wrap": true,
+        "text": `Hello! ${myDetails.displayName}`
+      },
+      {
+        "type": "TextBlock",
+        "size": "Medium",
+        "weight": "Bolder",
+        "text": `Job title: ${myDetails.jobDetails ? myDetails.jobDetails : "Unknown"}`
+      },
+      {
+        "type": "TextBlock",
+        "size": "Medium",
+        "weight": "Bolder",
+        "text": `Email: ${myDetails.userPrincipalName}`
+      }
+    ],
+    "actions":[]
+  }
+  if(facebookProfile.is_fb_signed_in){
+    card.body.push({
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "User facebook details are",
+      "separator":true
+    });
+    card.body.push({
+      "type": "Image",
+      "size": "Medium",
+      "url": facebookProfile.image
+    });
+    card.body.push({
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "wrap": true,
+      "text": `Hello! ${facebookProfile.name}`
+    });
+    card.actions.push({ 
+      "type": "Action.Submit", 
+      "title": "Disconnect from facebook",
+       "data": { 
+         "msteams": { 
+           "type": "imBack",
+            "text": "Disconnect from facebook", 
+            "value": "DisconnectFromFacebookLinkUnfurl" 
+          } 
+        }
+       });
+  }
+  if(googleProfile.is_google_signed_in){
+    card.body.push({
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "User google details are",
+      "separator":true
+    });
+    card.body.push({
+      "type": "Image",
+      "size": "Medium",
+      "url": googleProfile.image
+    });
+    card.body.push({
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "wrap": true,
+      "text": `Hello! ${googleProfile.name}`
+    });
+    card.body.push(
+      {
+        "type": "TextBlock",
+        "when": !googleProfile.is_google_signed_in,
+        "size": "Medium",
+        "weight": "Bolder",
+        "wrap": true,
+        "text": 'Email: ' + googleProfile.email,
+      });
+      card.actions.push({ 
+        "type": "Action.Submit", 
+        "title": "Disconnect from google",
+         "data": { 
+           "msteams": { 
+             "type": "imBack",
+              "text": "Disconnect from google", 
+              "value": "DisconnectFromGoogleLinkUnfurl" 
+            } 
+          }
+         });
+  }
+
+  return card;
+}
+
 module.exports = {
   getGoogleDetailsCard,
   getFacebookDetailsCard,
@@ -284,5 +400,6 @@ module.exports = {
   getAdaptiveCardUserDetails,
   getConnectToFacebookCard,
   getConnectToGoogleCard,
-  getMEResponseCard
+  getMEResponseCard,
+  getMELinkUnfurlingCard
 };
