@@ -66,26 +66,27 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 2. Open the code in Visual Studio
    - File -> Open -> Project/Solution
    - Navigate to folder where repository is cloned then `samples/bot-type-ahead-search-adaptive-cards/csharp/TypeaheadSearch.sln`
-    
+
 3. Run ngrok - point to port 3978
 
     ```bash
     # ngrok http -host-header=rewrite 3978
     ```
- 
-4. Setup and run the bot from Visual Studio: 
+4. Open your Azure Bot settings on the Azure Portal and change the "Messaging endpoint" for the HTTPS URL from the ngrok with `/api/messages` appended. E. g. for ngrok forwarding URL `https://1234.ngrok.io` the "Messaging endpoint" would be `https://1234.ngrok.io/api/messages`
+
+5. Setup and run the bot from Visual Studio: 
    Modify the `appsettings.json` and fill in the following details:
    - `MicrosoftAppId` - Generated from Step 1 (Application (client) ID)is the application app id
    - `MicrosoftAppPassword` - Generated from Step 1, also referred to as Client secret
    - Press `F5` to run the project
 	 
-5. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
+6. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
    - `{{Microsoft-App-Id}}` with Application id generated from Step 3
    - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
-6. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 
+7. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 
 
-7. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+8. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps
    - Choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
