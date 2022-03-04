@@ -11,28 +11,24 @@ import * as microsoftTeams from "@microsoft/teams-js";
 class Resource extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      context: {},
-    };
   }
 
   componentDidMount() {
-    // Initialize the Microsoft Teams SDK
-    microsoftTeams.initialize();
-
-    // Get the user context from Teams and set it in the state
-    microsoftTeams.getContext((context, error) => {
-      this.setState({ context: context });
-    });
-
-    microsoftTeams.appInitialization.notifySuccess();
+    // Initialize the Microsoft Teams SDK and notify success.
+    microsoftTeams.initialize(() =>
+      microsoftTeams.appInitialization.notifySuccess()
+    );
   }
 
   render() {
-      return (
+    return (
       <div className="container">
         <h1>{this.props.id}</h1>
-        <img src="images/image.png" alt="Sample dashboard image." />
+        <img
+          className="image"
+          src="images/image.png"
+          alt="Sample dashboard image."
+        />
       </div>
     );
   }

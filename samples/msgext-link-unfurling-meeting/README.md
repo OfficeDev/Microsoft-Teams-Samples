@@ -97,3 +97,10 @@ This sample illustrates a common scenario where a user shares a link to a resour
   * `Web` - Exposes REST APIs (including Bot messaging endpoint) for clients to consume and contains ClientApp logic.
   * `Domain` - Contains the business logic to setup online meetings based on where the resource is shared.
   * `Infrastructure` - Fulfills `Domain`'s dependencies. Example - resource service, card factory to prepare card etc. If you want to change AC, or connect to a resource service, this is where you would make the changes.
+
+#### Troubleshooting
+* If the web application fails to load, run `npm install` and `npm run build` under ClientApp folder.
+* If the meeting setup fails with 403 (Not authorized), make sure you grant admin consent on behalf of all the users.
+  * Grant admin conset - `https://login.microsoftonline.com/{tenant-id}/adminconsent?client_id={client-id}` where
+  * `{client-id}` is the app ID saved earlier.
+  * `{tenant-id}` is your organization's tenant ID.

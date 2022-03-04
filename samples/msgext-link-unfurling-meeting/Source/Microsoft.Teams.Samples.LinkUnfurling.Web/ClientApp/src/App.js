@@ -1,4 +1,4 @@
-import React, { useEffect, useState  } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Switch } from "react-router";
 
 import { Home } from "./components/Home";
@@ -14,34 +14,37 @@ import MESettings from "./components/MESettings";
 import { Provider } from "@fluentui/react-northstar";
 
 import * as microsoftTeams from "@microsoft/teams-js";
-import { teamsDarkTheme, teamsHighContrastTheme, teamsTheme } from "@fluentui/react-northstar";
+import {
+  teamsDarkTheme,
+  teamsHighContrastTheme,
+  teamsTheme,
+} from "@fluentui/react-northstar";
 
 export const App = () => {
+  const [theme, setTheme] = useState(teamsTheme);
 
-    const [theme, setTheme] = useState(teamsTheme);
+  const themeChangeHandler = (theme) => {
+    switch (theme) {
+      case "dark":
+        setTheme(teamsDarkTheme);
+        break;
+      case "contrast":
+        setTheme(teamsHighContrastTheme);
+        break;
+      case "default":
+      default:
+        setTheme(teamsTheme);
+    }
+  };
 
-    const themeChangeHandler = (theme) => {
-        switch (theme) {
-            case "dark":
-                setTheme(teamsDarkTheme);
-                break;
-            case "contrast":
-                setTheme(teamsHighContrastTheme);
-                break;
-            case "default":
-            default:
-                setTheme(teamsTheme);
-        }
-    };
-
-    useEffect(() => {
-            microsoftTeams.initialize(() => {
-                microsoftTeams.getContext(context => {
-                    themeChangeHandler(context.theme);
-                });
-                microsoftTeams.registerOnThemeChangeHandler(themeChangeHandler);
-            });
+  useEffect(() => {
+    microsoftTeams.initialize(() => {
+      microsoftTeams.getContext((context) => {
+        themeChangeHandler(context.theme);
+      });
+      microsoftTeams.registerOnThemeChangeHandler(themeChangeHandler);
     });
+  });
 
   return (
     <Provider theme={theme}>

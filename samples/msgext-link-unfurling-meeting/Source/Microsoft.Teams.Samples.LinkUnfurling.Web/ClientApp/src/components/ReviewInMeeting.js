@@ -27,8 +27,6 @@ export class ReviewInMeeting extends Component {
     // Initialize teams library and set context.
     this.initialize();
 
-    microsoftTeams.appInitialization.notifySuccess();
-
     // SSO.
     this.initiateSSO();
   }
@@ -67,11 +65,14 @@ export class ReviewInMeeting extends Component {
 
   initialize() {
     // Initialize the Microsoft Teams SDK
-    microsoftTeams.initialize();
+    microsoftTeams.initialize(() => {
+      // Get the user context from Teams and set it in the state
+      microsoftTeams.getContext((context, error) => {
+        this.setState({ context: context });
+      });
 
-    // Get the user context from Teams and set it in the state
-    microsoftTeams.getContext((context, error) => {
-      this.setState({ context: context });
+      // Notify sucess.
+      microsoftTeams.appInitialization.notifySuccess();
     });
   }
 
@@ -79,7 +80,6 @@ export class ReviewInMeeting extends Component {
     // Get SSO token.
     let authTokenRequestOptions = {
       successCallback: (ssoToken) => {
-        console.log("SSO Token ", ssoToken);
         this.ssoLoginSuccess(ssoToken);
       },
       failureCallback: (errorMessage) => {
@@ -180,7 +180,6 @@ export class ReviewInMeeting extends Component {
 
   // Callback function for a successful authorization
   consentSuccess(result) {
-    console.log("SSO Completed", result);
     this.setState({
       consentProvided: true,
     });

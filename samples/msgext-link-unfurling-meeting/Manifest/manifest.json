@@ -1,31 +1,31 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
   "manifestVersion": "1.11",
-  "version": "1.4",
-  "id": "5c027db3-454b-4775-866c-9afb6047c94b",
+  "version": "1.0",
+  "id": "845d8001-f01d-4887-b909-2dd673af7bb8",
   "packageName": "com.microsoft.teams.meetings.package",
   "developer": {
-    "name": "Anuj",
-    "websiteUrl": "https://teamstemplate.ngrok.io",
-    "privacyUrl": "https://teamstemplate.ngrok.io/privacy",
-    "termsOfUseUrl": "https://teamstemplate.ngrok.io/termsofuse"
+    "name": "{DeveloperName}",
+    "websiteUrl": "{WebsiteUrl}",
+    "privacyUrl": "{BaseUrl}/privacy",
+    "termsOfUseUrl": "{BaseUrl}/termsofuse"
   },
   "icons": {
     "color": "color.png",
     "outline": "outline.png"
   },
   "name": {
-    "short": "Adaptive Card Sample",
-    "full": "Adaptive Card Sample"
+    "short": "Link Unfurling Sample",
+    "full": "Link Unfurling Sample"
   },
   "description": {
-    "short": "Adaptive Card Sample",
-    "full": "Adaptive Card Sample"
+    "short": "{Short description.}",
+    "full": "{Long description.}"
   },
   "showLoadingIndicator": true,
   "bots": [
     {
-      "botId": "5c027db3-454b-4775-866c-9afb6047c94b",
+      "botId": "{Bot App Id}",
       "scopes": [
         "personal",
         "team",
@@ -38,7 +38,7 @@
   "accentColor": "#FFFFFF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://teamstemplate.ngrok.io/Config",
+      "configurationUrl": "{BaseUrl}/Config",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -55,7 +55,7 @@
   ],
   "composeExtensions": [
     {
-      "botId": "5c027db3-454b-4775-866c-9afb6047c94b",
+      "botId": "{Bot App Id}",
       "canUpdateConfiguration": true,
       "messageHandlers": [
         {
@@ -98,7 +98,7 @@
     "*.microsoft.com"
   ],
   "webApplicationInfo": {
-    "id": "5c027db3-454b-4775-866c-9afb6047c94b",
-    "resource": "api://teamstemplate.ngrok.io/5c027db3-454b-4775-866c-9afb6047c94b"
+    "id": "{Bot App Id}",
+    "resource": "api://{domain}/{Bot App Id}"
   }
 }

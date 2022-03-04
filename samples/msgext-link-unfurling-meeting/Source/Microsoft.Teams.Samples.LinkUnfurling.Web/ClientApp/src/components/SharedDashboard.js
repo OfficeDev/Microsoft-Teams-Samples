@@ -10,10 +10,10 @@ import * as microsoftTeams from "@microsoft/teams-js";
  */
 class SharedDashboard extends React.Component {
   componentDidMount() {
-    // Initialize the Microsoft Teams SDK
-    microsoftTeams.initialize();
-
-    microsoftTeams.appInitialization.notifySuccess();
+    // Initialize the Microsoft Teams SDK and notify success.
+    microsoftTeams.initialize(() =>
+      microsoftTeams.appInitialization.notifySuccess()
+    );
   }
 
   render() {
@@ -21,6 +21,7 @@ class SharedDashboard extends React.Component {
       <div className="container">
         <h1>Shared Dashboard</h1>
         <img
+          className="image"
           src="images/power-bi-dashboard.png"
           alt="Sample dashboard image."
         />

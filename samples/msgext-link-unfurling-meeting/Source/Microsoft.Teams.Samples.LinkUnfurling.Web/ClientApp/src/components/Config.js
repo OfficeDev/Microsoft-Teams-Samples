@@ -4,7 +4,6 @@
 import React from "react";
 import "./App.css";
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Header } from "@fluentui/react-northstar";
 
 /**
  * This component is used to display tab configuration.
@@ -35,7 +34,7 @@ class Config extends React.Component {
   render() {
     return (
       <div className="container">
-        <Header as="h1">Configuration</Header>
+        <h1>Configuration</h1>
       </div>
     );
   }
