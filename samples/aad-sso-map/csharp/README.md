@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demos authentication feature in bot,tab and messaging extension.
+description: This sample demos mapping with aad id, facebook, and google account of user in bot, ME and tab.
 products:
 - office-teams
 - office
@@ -9,26 +9,22 @@ languages:
 - csharp
 extensions:
 contentType: samples
-createdDate: "14-02-2022 00:15:13"
+createdDate: "16-02-2022 00:15:13"
 ---
 
-# Authentication complete sample
+# Mapping sample
 
-Using this C# sample, you can check authenticate in bot,tab and messaging extention with sso, facebook and using user name and password.
+This sample demos mapping with aad id, facebook, and google account of user in bot, ME and tab.
 
 ## Key features
 
-Bot Authentication
+Bot Mapping
 
 ![Login option card](AppCompleteAuth/Images/BotLoginOptionCard.png)
 
   - SSO
   
   ![SSO login](AppCompleteAuth/Images/BotSsoCard.png)
-  
-  - Using user name and password
-  
-  ![using credentials](AppCompleteAuth/Images/BotUsingCredentials.png)
   
 Tab Authentication
 
@@ -37,10 +33,6 @@ Tab Authentication
   - SSO
   
   ![Tab SSO login](AppCompleteAuth/Images/TabSsoLogin.png)
-  
-  - Using user name and password
-  
-  ![Tab using credentials](AppCompleteAuth/Images/TabUsingCredentials.png)
 
 Messaging Extention Authentication
 
@@ -49,12 +41,14 @@ Messaging Extention Authentication
   - SSO
   
   ![ME SSO login](AppCompleteAuth/Images/MESsoCard.png)
+
+ME Link unfurling
+
+  ![ME Link unfurling](AppCompleteAuth/Images/MELinkUnfurlingLoginLink.png)
   
-  - Using user name and password
+  - SSO
   
-  ![ME using credentials](AppCompleteAuth/Images/MEUsingCredentials.png)
-  
-  ![ME using credentials details](AppCompleteAuth/Images/MEUsingCredentialsDetails.png)
+  ![ME Link unfurling SSO login](AppCompleteAuth/Images/MELinkUnfurlSSOCard.png)
   
 ## Prerequisites
 
@@ -125,23 +119,35 @@ Messaging Extention Authentication
    - Provide connection Name : for eg `facebookconnection`
    - Select service provider ad `facebook`
    - Add clientid and secret of your facebook app that was created using Step 16.
+
+17.  Google app setup.
+ - Obtain OAuth2 client credentials from the [Google API Console](https://console.developers.google.com/). Enable access to the [Google People API](https://developers.google.com/people/). 
+
+    - In "Authorized redirect URLs", add `https://token.botframework.com/.auth/web/redirect` and `<<base-url>>/google-auth`.
+
+    ![validDomains](Images/ValidDomainsGoogle.png)
+
+    - Note your app's "Client ID" and "Client Secret".
+    - Now go to your bot channel registartion -> configuration -> Add OAuth connection string
+    - Provide connection Name : for eg `googleconnection`
+    - Select service provider as `google`
   
-17. Clone the repository
+18. Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
 
-18. Open the code in Visual Studio
+19. Open the code in Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/app-complete-auth/csharp/AppCompleteAuth.sln`
+   - Navigate to folder where repository is cloned then `samples/aad-sso-map/csharpMapAadSSO.sln`
     
-19. Run ngrok - point to port 3978
+20. Run ngrok - point to port 3978
 
     ```bash
     # ngrok http -host-header=rewrite 3978
     ```
  
-20. Setup and run the bot from Visual Studio: 
+21. Setup and run the bot from Visual Studio: 
     Modify the `appsettings.json` and fill in the following details:
    - `{{Microsoft-App-id}}` - Generated from Step 3 (Application (client) ID)is the application app id
    - `{{TenantId}}` - Generated from Step 3(Directory (tenant) ID) is the tenant id
@@ -149,16 +155,17 @@ Messaging Extention Authentication
    - `{{base-url}}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
    - `{{ Connection Name }}` - Generated from step 15.
    - `{{FacebookAppId}} and {{FacebookAppPassword}} and {{ Facebook Connection Name}}`- Generated from step 16.
+   - `GoogleAppId and GoogleAppPassword and GoogleConnectionName` - Generated from step 17.
    - Press `F5` to run the project
 	 
-21. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
+22. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
    - `{{Microsoft-App-Id}}` with Application id generated from Step 3
    - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
    - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
-22. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 21.
+23. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step
 
-23. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+24. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps
    - Choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.

@@ -14,6 +14,8 @@ namespace AppCompleteAuth.Pages
 
         public string FacebookAppId { get; set; }
 
+        public string GoogleAppId { get; set; }
+
         public string BaseUrl { get; set; }
 
         public tabModel(IConfiguration configuration)
@@ -23,6 +25,7 @@ namespace AppCompleteAuth.Pages
         public void OnGet()
         {
             FacebookAppId = _configuration["FacebookAppId"];
+            GoogleAppId = _configuration["GoogleAppId"];
             BaseUrl = _configuration["ApplicationBaseUrl"];
         }
     }

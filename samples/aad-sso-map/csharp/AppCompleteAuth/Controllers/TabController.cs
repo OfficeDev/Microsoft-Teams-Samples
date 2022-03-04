@@ -54,6 +54,7 @@ namespace AppCompleteAuth.Controllers
                     Photo = photo,
                     Title = title
                 };
+
                 if (UserMapData.Count < 1)
                 {
                     UserMapData.Add(new UserMapData { AadId = userName, isAadSignedIn = true });
@@ -81,7 +82,7 @@ namespace AppCompleteAuth.Controllers
         // Get user details.
         [HttpPost]
         [Route("GetUserDetails")]
-        public async Task<JsonResult> GetUserProfile(string accessToken)
+        public async Task<JsonResult> GetUserProfile(string accessToken, string userName)
         {
             try
             {
@@ -98,6 +99,20 @@ namespace AppCompleteAuth.Controllers
                     Photo = photo,
                     Title = title
                 };
+
+                if (UserMapData.Count < 1)
+                {
+                    UserMapData.Add(new UserMapData { AadId = userName, isAadSignedIn = true });
+                }
+
+                else
+                {
+                    var data = UserMapData.Find(e => e.AadId == userName);
+                    if (data == null)
+                    {
+                        UserMapData.Add(new UserMapData { AadId = userName, isAadSignedIn = true });
+                    }
+                }
 
                 var jsonString = JsonConvert.SerializeObject(userInfo);
                 return Json(jsonString);
@@ -236,13 +251,13 @@ namespace AppCompleteAuth.Controllers
         [Route("getGoogleAccessToken")]
         public async Task<JsonResult> GetGoogleAccessToken(string accessToken, string userName)
         {
-            var fbAppId = _configuration["FacebookAppId"];
-            var fbPassword = _configuration["FacebookAppPassword"];
             var redirectUrl = _configuration["ApplicationBaseUrl"] + "/facebook-auth-end";
+            var googleAppId = _configuration["GoogleAppId"];
+            var googleAppPassword = _configuration["GoogleAppPassword"];
             var client = new HttpClient();
             HttpContent content = new StringContent("");
             string responseBody;
-            var response = await client.PostAsync(string.Format("https://oauth2.googleapis.com/token?client_id=857226880078-gtp1fg2dicr1uk09kk8grdaploig3oje.apps.googleusercontent.com&client_secret=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&code={0}&redirect_uri={1}&grant_type=authorization_code", accessToken, redirectUrl), content);
+            var response = await client.PostAsync(string.Format("https://oauth2.googleapis.com/token?client_id={0}&client_secret={1}&code={2}&redirect_uri={3}&grant_type=authorization_code", googleAppId, googleAppPassword, accessToken, redirectUrl), content);
 
             if (response.IsSuccessStatusCode)
             {

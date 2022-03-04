@@ -13,22 +13,26 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         var facebookAppId = '@Model.FacebookAppId';
+         var googleAppId = '@Model.GoogleAppId';
         var baseUrl = '@Model.BaseUrl'
         let is_google_signed_in = false;
         let is_fb_signed_in = false;
-        var imageUrl = baseUrl + "/home.png";
-        $("#homeImg").attr("src", imageUrl);
+        //var imageUrl = baseUrl + "/home.png";
+        //$("#homeImg").attr("src", imageUrl);
         let redirectUri = window.location.origin + "/facebook-auth-end";
         var googleLogo = baseUrl + "/googleIcon.png";
         $("#googleLogo").attr("src", googleLogo);
         let accessToken;
 
         $(document).ready(function () {
-            microsoftTeams.initialize();
-            microsoftTeams.getContext(function (context) {
-                getUserDetails(context.upn);
-            });
+          
+            ssoAuthentication();
+            //microsoftTeams.getContext(function (context) {
+            //    getUserDetails(context.upn);
+            //});
         });
+
+        microsoftTeams.initialize();
 
         // Get user details
         function getUserDetails(userName) {
@@ -45,11 +49,7 @@
                     }
                     else {
                         const userDetails = JSON.parse(responseJson);
-                        console.log("aad" + userDetails);
                         if (userDetails.isAadSignedIn) {
-                            ssoAuthentication();
-                            $("#sso").hide();
-                            $(".imgContainer").hide();
                             if (userDetails.isGoogleSignedIn) {
                                 is_google_signed_in = true;
                                 setTimeout(() => { getGoogleDetails(userDetails.GoogleToken) }, 3000);
@@ -75,7 +75,6 @@
                 return getServerSideToken(clientSideToken);
             })
             .catch((error) => {
-                debugger;
                 if (error === "invalid_grant") {
                     // Display in-line button so user can consent
                     $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
@@ -128,11 +127,12 @@
                             $("#name").append(": " + userDetails.User.DisplayName);
                             $("#email").append(": " + userDetails.User.UserPrincipalName);
                             $("#work").append(": " + userDetails.Title);
-                            if (!is_google_signed_in) {
-                                $("#googlelogin").show();
+                            getUserDetails(context.upn);
+                            if (is_google_signed_in) {
+                                $("#googlelogin").hide();
                             }
-                            if (!is_fb_signed_in) {
-                                $("#facebooklogin").show();
+                            if (is_fb_signed_in) {
+                                $("#facebooklogin").hide();
                             }
                         },
                         error: function (xhr, textStatus, errorThrown) {
@@ -173,24 +173,6 @@
             });
         }
 
-        // Authenticate user using credentials.
-        function usingCredentials(){
-            microsoftTeams.authentication.authenticate({
-                url: window.location.origin + "/popUpSignin?from=tab",
-                width: 600,
-                height: 535,
-                successCallback: result => {
-                    $("#sname").append(": Test user");
-                    $("#semail").append(": testaccount@test123.onmicrosoft.com");
-                    $("#swork").append(": Data scientist");
-                    $("#userImgId").attr("src", "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg");
-                },
-                failureCallback: reason => {
-                    console.log(reason);
-                }
-            });
-        }
-
         // Get user information.
         function getUserInfo(userPrincipleName) {
             if (userPrincipleName) {
@@ -199,7 +181,8 @@
                  url: '/GetUserDetails',
                  dataType: 'json',
                  data: {
-                        'accessToken': accessToken,
+                     'accessToken': accessToken,
+                     'userName': userPrincipleName,
                     },
                 success: function (responseJson) {
                     userDetails = JSON.parse(responseJson);
@@ -214,6 +197,17 @@
                     }
              });
           }
+        }
+
+        // Initiate facebook login.
+        function facebookLogin() {
+            fbAuthentication()
+                .then((result) => {
+                    return getServerSideTokenFb(result.idToken);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         }
 
         // Get client side token for facebook.
@@ -236,11 +230,51 @@
             });
         }
 
+        // Get face book profile of user.
+        function getServerSideTokenFb(clientSideToken) {
+            return new Promise((resolve, reject) => {
+                microsoftTeams.getContext((context) => {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/getFbAccessToken',
+                        dataType: 'json',
+                        data: {
+                            'accessToken': clientSideToken,
+                            'userName': context.upn,
+                        },
+                        success: function (responseJson) {
+                            facebookProfile = JSON.parse(responseJson);
+                            $("#fbname").empty();
+                            $("#fbname").append("<b> Name: </b> " + facebookProfile.name);
+                            $("#userFbImg").attr("src", facebookProfile.picture);
+                            $("#facebooklogin").hide();
+                            $("#fb-disConnect").show();
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                        }
+                    });
+                });
+            });
+        }
+
+        // Initiate google login.
+        function googleAuth() {
+            googleAuthentication()
+                .then((result) => {
+                    return getServerSideTokenGoogle(result.idToken);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+
         // Get client side token for facebook.
         function googleAuthentication() {
             return new Promise((resolve, reject) => {
                 microsoftTeams.authentication.authenticate({
-                    url: `https://accounts.google.com/o/oauth2/v2/auth/identifier?client_id=857226880078-gtp1fg2dicr1uk09kk8grdaploig3oje.apps.googleusercontent.com&scope=openid email profile&response_type=code&redirect_uri=https://f8ea651f07bb.ngrok.io/facebook-auth-end`,
+                    url: `https://accounts.google.com/o/oauth2/v2/auth/identifier?client_id=${googleAppId}&scope=openid email profile&response_type=code&redirect_uri=${redirectUri}`,
                     width: 600,
                     height: 535,
                     successCallback: result => {
@@ -252,37 +286,6 @@
                     failureCallback: reason => {
                         reject(reason);
                     }
-                });
-            });
-        }
-
-        // Get face book profile of user.
-        function getServerSideTokenFb(clientSideToken) {
-            return new Promise((resolve, reject) => {
-                microsoftTeams.getContext((context) => {
-
-                     $.ajax({
-                        type: 'POST',
-                        url: '/getFbAccessToken',
-                        dataType: 'json',
-                        data: {
-                            'accessToken': clientSideToken,
-                            'userName': context.upn,
-                            },
-                        success: function (responseJson) {
-                            facebookProfile = JSON.parse(responseJson);
-                            console.log(responseJson);
-                            $("#fbname").empty();
-                             $("#fbname").append(": " + facebookProfile.name);
-                            $("#userFbImg").attr("src", facebookProfile.picture);
-                            $('#cardFacebook').show();
-                            $("#facebooklogin").hide();
-                            $('#cardSSO').show();
-                            },
-                        error: function (xhr, textStatus, errorThrown) {
-                                 console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-                            }
-                     });
                 });
             });
         }
@@ -302,16 +305,13 @@
                         },
                         success: function (responseJson) {
                             let googleProfile = JSON.parse(responseJson);
-                            console.dir("res" + googleProfile);
-                            console.log("res" + responseJson);
                             $("#userImgGoogle").attr("src", googleProfile.picture);
                             $("#gname").empty();
                             $("#gemail").empty();
-                            $("#gname").append(googleProfile.name);
-                            $("#gemail").append(googleProfile.email);
-                            $('#cardGoogle').show();
-                            $('#googlelogin').hide();
-                            $('#cardSSO').show();
+                            $("#gname").append("<b>Name: </b>" + googleProfile.name);
+                            $("#gemail").append("<b>Email: </b>" + googleProfile.email);
+                            $("#google-disConnect").show();
+                            $("#googlelogin").hide();
                         },
                         error: function (xhr, textStatus, errorThrown) {
                             console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
@@ -319,28 +319,6 @@
                     });
                 });
             });
-        }
-
-        // Initiate facebook login.
-        function facebookLogin() {
-            fbAuthentication()
-                .then((result) => {
-                    return getServerSideTokenFb(result.idToken);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        }
-
-         // Initiate google login.
-        function googleAuth() {
-            googleAuthentication()
-                .then((result) => {
-                    return getServerSideTokenGoogle(result.idToken);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
         }
 
         function getFbDetails(token) {
@@ -356,8 +334,8 @@
                     $("#fbname").append(facebookProfile.name);
                     $("#userFbImg").attr("src", facebookProfile.picture);
                     $('#cardFacebook').show();
+                    $("#fb-disConnect").show();
                     $("#facebooklogin").hide();
-                    $('#cardSSO').show();
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
@@ -383,9 +361,8 @@
                         $("#userImgGoogle").attr("src", googleProfile.picture);
                         $("#gname").append(googleProfile.name);
                         $("#gemail").append(googleProfile.email);
-                        $('#cardGoogle').show();
-                        $('#googlelogin').hide();
-                        $('#cardSSO').show();
+                        $("#google-disConnect").show();
+                        $("#googlelogin").hide();
                     }
                 },
                 error: function (xhr, textStatus, errorThrown) {
@@ -406,7 +383,10 @@
                     },
                     success: function (responseJson) {
                         if (responseJson == 'disconnected from facebook') {
-                            $('#cardFacebook').hide();
+                            $("#fbname").empty();
+                            $("#fbname").append("<b> Name: </b>");
+                            $("#userFbImg").attr("src", "https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744034?k=20&m=1016744034&s=612x612&w=0&h=kjCAwH5GOC3n3YRTHBaLDsLIuF8P3kkAJc9RvfiYWBY=");
+                            $("#fb-disConnect").hide();
                             $("#facebooklogin").show();
                         }
                     },
@@ -428,7 +408,12 @@
                     },
                     success: function (responseJson) {
                         if (responseJson == 'disconnected from google') {
-                            $('#cardGoogle').hide();
+                            $("#userImgGoogle").attr("src", "https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744034?k=20&m=1016744034&s=612x612&w=0&h=kjCAwH5GOC3n3YRTHBaLDsLIuF8P3kkAJc9RvfiYWBY=");
+                            $("#gname").empty();
+                            $("#gemail").empty();
+                            $("#gname").append("<b>Name: </b");
+                            $("#gemail").append("<b>Email: </b>");
+                            $("#google-disConnect").hide();
                             $("#googlelogin").show();
                         }
                     },
@@ -486,13 +471,14 @@
         }
 
         .card-container-div {
-            display: flex;
+            margin-left: 30%;
+            padding-bottom: 2rem;
         }
 
         .ssologin {
-            background-color: rgb(98 100 167) !important;
-            border-color: rgb(98 100 167) !important;
-            color: #fff;
+            margin-left: 10.5rem;
+            margin-top: 7.6rem;
+            width: 6.5rem;
         }
 
         .home {
@@ -504,52 +490,36 @@
             text-align: center;
         }
 
-        .ssologin:hover {
-            color: #fff;
-            border-color: rgb(98 100 167);
+        .facebook {
+            background-color: #4267b2;
+            border-color: #4267b2;
+            max-width: 12rem;
+            margin-left: 46%;
         }
 
-        .facebook {
+        .facebook:hover {
             background-color: #4267b2;
             border-color: #4267b2;
         }
 
-            .facebook:hover {
-                background-color: #4267b2;
-                border-color: #4267b2;
-            }
-
         .googlebutton {
             border: 2px solid #000;
+            max-width: 12rem;
+            margin-left: 46%;
         }
 
-            .googlebutton img {
-                height: 20px;
-                margin-right: 3px;
-            }
+        .googlebutton img {
+            height: 20px;
+            margin-right: 3px;
+        }
     </style>
 
 </head>
 <body class="theme-light">
     <div class="surface">
         <h3> Welcome to App sample</h3>
-        <P id="home" class="imgContainer"> <img class="homeImg" id="homeImg" src="/Images/home.png" /></P>
-        <div class="home">
-            <button type="button" class="btn btn-sm ssologin" onclick="requestConsent()" id="consent"
-                    style="display:none;">
-                Authenticate
-            </button>
-            <div id="divError" style="display: none"></div>
-            <button type="button" class="btn btn-sm ssologin" onclick="ssoAuthentication()" id="sso">Login with AAD SSO</button>
-        </div>
-        <div class="home">
-            <button type="button" id="facebooklogin" class="btn btn-primary" onclick="facebookLogin()" style="display:none;"><i class="fa fa-facebook"></i> Continue with Facebook</button>
-        </div>
-        <div class="home">
-            <button type="button" id="googlelogin" class="btn" style="display:none;" onclick="googleAuth()"><img id="googleLogo" src="/Images/googleIcon.png">Continue with Google</button>
-        </div>
         <div class="card-container-div">
-            <div id="cardSSO" style="display:none;">
+            <div id="cardSSO">
                 <div class="signin-header"><b>User info from SSO</b></div>
                 <div class="card">
                     <div class="container">
@@ -560,10 +530,15 @@
                             <span id="email"><b>Email: </b></span><br>
                             <span id="work"><b>Work: </b></span>
                         </div>
+                        <div id="divError" style="display: none"></div>
+                        <button type="button" class="btn btn-sm btn-outline-info ssologin" onclick="requestConsent()"
+                                id="consent" style="display:none;">
+                            Consent
+                        </button>
+                    </div>
                     </div>
                 </div>
-            </div>
-            <div id="cardFacebook" style="display:none;">
+            <div id="cardFacebook">
                 <div class="signin-header"><b>User info from facebook</b></div>
                 <div class="card">
                     <div class="container">
@@ -573,10 +548,16 @@
                             <span id="fbname"><b>Name: </b></span>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-outline-info" onclick="disconnectFromFb()" id="fb-disConnect">Disconnect from facebook</button>
+                    <button type="button" id="facebooklogin" class="btn btn-primary facebook" onclick="facebookLogin()">
+                        <i class="fa fa-facebook"></i> Connect to Facebook
+                    </button>
+                    <button type="button" style="display:none;" class="btn btn-outline-info"
+                            onclick="disconnectFromFb()" id="fb-disConnect">
+                        Disconnect from facebook
+                    </button>
                 </div>
             </div>
-            <div id="cardGoogle" style="display:none;">
+            <div id="cardGoogle">
                 <div class="signin-header"><b>User info from google</b></div>
                 <div class="card">
                     <div class="container">
@@ -587,8 +568,15 @@
                             <span id="gemail"><b>Email: </b></span><br>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-outline-info" onclick="disconnectFromGoogle()" id="google-disConnect">Disconnect from google</button>
+                    <button type="button" id="googlelogin" class="btn googlebutton" onclick="googleAuth()">
+                        <img id="googleLogo"> Connect to Google
+                    </button>
+                    <button style="display:none;" type="button" class="btn btn-outline-info"
+                            onclick="disconnectFromGoogle()" id="google-disConnect">
+                        Disconnect from google
+                    </button>
                 </div>
             </div>
         </div>
+     </div>
 </body>
