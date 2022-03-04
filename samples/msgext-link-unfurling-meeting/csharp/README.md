@@ -1,24 +1,39 @@
+---
+page_type: sample
+description: This sample illustrates a common scenario where a user shares a link to a resource with a group of users, and they collaborate to review it in a meeting.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- csharp
+extensions:
+contentType: samples
+createdDate: "03-04-2022 11:00:00"
+---
+
 ### Link unfurling meeting sample
 
 #### About
 This sample illustrates a common scenario where a user shares a link to a resource (dashboard in this sample) with a group of users, and they collaborate to review it in a meeting.
 
 #### Unfurl a link to a dashboard
-![Preview Image](docs/LinkUnfurling.gif)
+![Preview Image](Docs/LinkUnfurling.gif)
 ##### Workflow:
 * User shares a link to a dashboard with a group of users.
 * Teams app unfurls the link to an adaptive card with actions to view it in a stage tab or review it in a meeting.
-![UML](docs/ShareLinkUML.png)
+
+![UML](Docs/ShareLinkUML.png)
 
 #### Review in meeting
-![Preview Image](docs/ReviewInMeeting.gif)
+![Preview Image](Docs/ReviewInMeeting.gif)
 ##### Workflow:
 * Other user in the group chooses to review the dashboard in a meeting.
 * Teams app creates a new meeting, adds a tab (that points to the dashboard originally shared) to a meeting.
 * User automatically joins the meeting and reviews the tab.
 * User shares the tab to meeting stage view with other users.
 
-![UML](docs/ReviewInMeetingUML.png)
+![UML](Docs/ReviewInMeetingUML.png)
 
 #### Prerequisites
 * Make sure you have an active [Azure subscription](https://azure.microsoft.com/en-us/free/).
