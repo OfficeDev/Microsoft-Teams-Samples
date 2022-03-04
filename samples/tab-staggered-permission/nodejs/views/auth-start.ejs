@@ -25,7 +25,7 @@
                     // for documentation on these query parameters
                     let queryParams = {
                         client_id: clientId,
-                        response_type: `${data.scope == "Mail.Read" ? "token" : "token"}`,
+                        response_type: "token",
                         response_mode: "fragment",
                         scope: "https://graph.microsoft.com/"+data.scope,
                         redirect_uri: window.location.origin + "/auth-end",
@@ -35,7 +35,7 @@
                         // if you know their username ahead of time.
                         login_hint: context.upn
                     };
-                    alert(queryParams.response_type);
+                   
                     // Go to the AzureAD authorization endpoint
                     let authorizeEndpoint =
                         "https://login.microsoftonline.com/" + context.tid + "/oauth2/v2.0/authorize?" + toQueryString(queryParams);
