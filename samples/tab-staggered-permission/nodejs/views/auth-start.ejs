@@ -5,9 +5,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
      <script type="text/javascript">
-         let clientId = <%-clientId%>
+         let data = <%-data%>
          $(document).ready(function () {
-            getAuthToken(clientId);
+            getAuthToken(data.clientId);
         });
        
         // Get auth token.
@@ -27,7 +27,7 @@
                         client_id: clientId,
                         response_type: "token",
                         response_mode: "fragment",
-                        scope: "https://graph.microsoft.com/User.Read Mail.Read",
+                        scope: "https://graph.microsoft.com/"+ data.scope,
                         redirect_uri: window.location.origin + "/auth-end",
                         nonce: _guid(),
                         state: state,

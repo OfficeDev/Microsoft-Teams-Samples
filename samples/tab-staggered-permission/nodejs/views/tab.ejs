@@ -9,7 +9,7 @@
         .card {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
             width: 31rem;
-            height: 10rem;
+            height: 11rem;
             margin-left: 2rem;
             margin-top: 0.5rem;
         }
@@ -26,12 +26,12 @@
         .profile {
             margin-top: 1rem;
             margin-left: 1rem;
-            width: 40rem;
+            max-width: 25rem;
             align-content: flex-start;
         }
 
         .btn-outline-info {
-            margin-top: 6rem;
+            margin-top: 7rem;
             width: 15.5rem;
             padding: 0.5rem 0rem;
             margin-left: -8rem;
@@ -53,16 +53,17 @@
             margin-left: -9rem;
             margin-top: 8rem;
         }
-        
-         #mail-list-table {
+
+        td {
+            padding: 0.3rem;
+        }
+
+        #consent {
+            margin-right: 9rem;
+        }
+
+        #mail-list-table {
             margin-left: 6rem;
-        }
-        
-        td{
-            padding:0.3rem;
-        }
-        #consent{
-            margin-left: 8rem;
         }
     </style>
     <script>
@@ -70,34 +71,10 @@
 
         $(document).ready(function () {
             $("#mails").hide();
-            //ssoAuthentication();
             getClientSideToken();
         });
 
         microsoftTeams.initialize();
-        function ssoAuthentication() {
-            getClientSideToken()
-                .then((clientSideToken) => {
-                    return getServerSideToken(clientSideToken);
-                })
-                .catch((error) => {
-                    alert(error);
-                    if (error === "invalid_grant") {
-                        // Display in-line button so user can consent
-                        $("#divError").text("invalid_grant")
-                        $("#sso").hide();
-                        $("#divError").show();
-                        $("#consent").show();
-
-                    } else {
-                        // Display in-line button so user can consent
-                        $("#divError").text("invalid_grant")
-                        $("#sso").hide();
-                        $("#divError").show();
-                        $("#consent").show();
-                    }
-                });
-        }
 
         function getClientSideToken() {
             return new Promise((resolve, reject) => {
@@ -113,69 +90,29 @@
             });
         }
 
-
-        function getServerSideToken(clientSideToken) {
-            return new Promise((resolve, reject) => {
-                microsoftTeams.getContext((context) => {
-                    fetch('/getProfileOnBehalfOf', {
-                        method: 'post',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            'tid': context.tid,
-                            'token': clientSideToken
-                        }),
-                        mode: 'cors',
-                        cache: 'default'
-                    })
-                        .then((response) => {
-                            if (response.ok) {
-                                return response.json();
-                            } else {
-                                reject(response.error);
-                            }
-                        })
-                        .then((responseJson) => {
-                            if (responseJson.error) {
-                                reject(responseJson.error);
-                            } else {
-                                const userDetails = responseJson;
-                                for (let i = 0; i < userDetails.details.length; i++) {
-                                $('#mail-list-table').append(`<tr style="padding:1px" >
-                                    <td><label id=${i + 1}>${i + 1}</label></td>
-                                    <td>${userDetails.details[i].from.emailAddress.address}</td>
-                                    <td>${userDetails.details[i].toRecipients[0].emailAddress.address}</td>
-                                    <td>${userDetails.details[i].subject}</td>
-                                    <td>${userDetails.details[i].receivedDateTime}</td>
-                                    </tr>`);
-                                };
-                                $("#mails").show();
-                                $("#userImgSso").attr("src", userDetails.image);
-                            }
-                        });
-                });
-            });
-        }
-
         // Request consent on implicit grant error.
-        function requestConsent() {
-            getToken()
+        function requestConsent(scope) {
+            getToken(scope)
                 .then(data => {
                     $("#consent").hide();
                     $("#divError").hide();
                     accessToken = data.accessToken;
                     microsoftTeams.getContext((context) => {
-                            getUserInfo();
+                        if (scope == "User.Read") {
+                            getUserPhoto();
+                        }
+                        else {
+                            getUserMail();
+                        }
                     });
                 });
         }
 
         // Get token for multi tenant.
-        function getToken() {
+        function getToken(scope) {
             return new Promise((resolve, reject) => {
                 microsoftTeams.authentication.authenticate({
-                    url: window.location.origin + "/auth-start",
+                    url: window.location.origin + "/auth-start?scope=" + scope,
                     width: 600,
                     height: 535,
                     successCallback: result => {
@@ -189,10 +126,10 @@
         }
 
         // Get user information.
-        function getUserInfo() {
+        function getUserPhoto() {
             $.ajax({
                 type: 'POST',
-                url: '/GetUserDetails',
+                url: '/GetUserPhoto',
                 dataType: 'json',
                 data: {
                     'accessToken': accessToken,
@@ -200,13 +137,31 @@
                 success: function (responseJson) {
                     const userDetails = responseJson;
                     $("#userImgSso").attr("src", userDetails.image);
-                        for (let i = 0; i < userDetails.usermails.length; i++) {
-                    $('#mail-list-table').append(`<tr style="padding:1px" >
+                    $("#consent").hide();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                }
+            });
+        }
+
+        function getUserMail() {
+            $.ajax({
+                type: 'POST',
+                url: '/GetUserMails',
+                dataType: 'json',
+                data: {
+                    'accessToken': accessToken,
+                },
+                success: function (responseJson) {
+                    const userMails = responseJson;
+                    for (let i = 0; i < userMails.length; i++) {
+                        $('#mail-list-table').append(`<tr style="padding:1px" >
                         <td><label id=${i + 1}>${i + 1}</label></td>
-                        <td>${userDetails.usermails[i].from.emailAddress.address}</td>
-                        <td>${userDetails.usermails[i].toRecipients[0].emailAddress.address}</td>
-                        <td>${userDetails.usermails[i].subject}</td>
-                        <td>${userDetails.usermails[i].receivedDateTime}</td>
+                        <td>${userMails[i].from.emailAddress.address}</td>
+                        <td>${userMails[i].toRecipients[0].emailAddress.address}</td>
+                        <td>${userMails[i].subject}</td>
+                        <td>${userMails[i].receivedDateTime}</td>
                         </tr>`);
                     };
                     $("#mails").show();
@@ -218,7 +173,7 @@
             });
         }
 
-        function decodingJWT(token){
+        function decodingJWT(token) {
             $.ajax({
                 type: 'POST',
                 url: '/decodeToken',
@@ -230,6 +185,7 @@
                     const userDetails = responseJson;
                     $("#name").append(userDetails.name);
                     $("#email").append(userDetails.upn);
+                    $("#consent").show();
                     $("#getmails").show();
                 },
                 error: function (xhr, textStatus, errorThrown) {
@@ -254,10 +210,14 @@
                             <span id="email"><b>Email: </b></span></span><br>
                         </div>
                         <div id="divError" style="display: none"></div>
-                        <!-- <button type="button" class="btn-outline-info" onclick="ssoAuthentication()"
-                            id="consent">Using Obo flow</button> -->
-                        <button type="button" class="btn-outline-info" onclick="requestConsent()"
-                            id="getmails" style="display:none;">Get details</button>
+                        <button type="button" class="btn-outline-info" onclick="requestConsent('User.Read')"
+                            id="consent">
+                            Get Photo
+                        </button>
+                        <button type="button" class="btn-outline-info" onclick="requestConsent('Mail.Read')"
+                            id="getmails">
+                            Get mails
+                        </button>
                     </div>
                 </div>
             </div>

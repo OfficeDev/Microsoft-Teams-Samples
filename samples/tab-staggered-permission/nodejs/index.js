@@ -8,7 +8,6 @@ const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const { SimpleGraphClient } = require('./simpleGraphClient');
-const msal = require('@azure/msal-node');
 const { polyfills } = require('isomorphic-fetch');
 
 // Read botFilePath and botFileSecret from .env file.
@@ -38,8 +37,12 @@ server.get('/tab', (req, res, next) => {
 
 // Pop-up dialog to ask for additional permissions, redirects to AAD page
 server.get('/auth-start', function (req, res) {
-  var clientId =process.env.MicrosoftAppId;
-  res.render('./views/auth-start', { clientId: JSON.stringify(clientId) });
+  var scope = req.url.split('=')[1];
+  var data = {
+    clientId:process.env.MicrosoftAppId,
+    scope:scope
+  };
+  res.render('./views/auth-start', { data: JSON.stringify(data) });
 });
 
 // End of the pop-up dialog auth flow, returns the results back to parent window
@@ -47,65 +50,17 @@ server.get('/auth-end', function (req, res) {
   res.render('./views/auth-end');
 });
 
-// On-behalf-of token exchange
-server.post('/getProfileOnBehalfOf', function (req, res) {
-  var tid = req.body.tid;
-  var token = req.body.token;
-  var scopes = ["https://graph.microsoft.com/User.Read Mail.Read"];
-
-  // Creating MSAL client
-  const msalClient = new msal.ConfidentialClientApplication({
-    auth: {
-      clientId: process.env.MicrosoftAppId,
-      clientSecret: process.env.MicrosoftAppPassword
-    }
-  });
-
-  var oboPromise = new Promise((resolve, reject) => {
-    msalClient.acquireTokenOnBehalfOf({
-      authority: `https://login.microsoftonline.com/${tid}`,
-      oboAssertion: token,
-      scopes: scopes,
-      skipCache: true
-    }).then(async result => {
-      const client = new SimpleGraphClient(result.accessToken);
-      const usermails = await client.getMailAsync();
-      var userImage = await client.getUserPhoto()
-      await userImage.arrayBuffer().then(result => {
-        imageString = Buffer.from(result).toString('base64');
-        img2 = "data:image/png;base64," + imageString;
-        var userData = {
-          details: usermails.value,
-          image: img2
-        }
-        resolve(userData);
-      })
-    }).catch(error => {
-      reject({ "error": error.errorCode });
-    });
-  });
-
-  oboPromise.then(function (result) {
-    res.json(result);
-  }, function (err) {
-    console.log(err); // Error: "It broke"
-    res.json(err);
-  });
-});
-
 // Get user details.
-server.post('/GetUserDetails', async (req, res) => {
+server.post('/GetUserPhoto', async (req, res) => {
   var accessToken = req.body.accessToken;
   const client = new SimpleGraphClient(accessToken);
   var userImage = await client.getUserPhoto();
-  const usermails = await client.getMailAsync();
   var userData;
   await userImage.arrayBuffer().then(result => {
     imageString = Buffer.from(result).toString('base64');
     img2 = "data:image/png;base64," + imageString;
     userData = {
       image: img2,
-      usermails:usermails.value
     }
   });
   var responseMessage = new Promise((resolve, reject) => {
@@ -116,6 +71,20 @@ server.post('/GetUserDetails', async (req, res) => {
   }, function (err) { // Error: "It broke"
     res.json(err);
   });
+});
+
+// Get user mails.
+server.post('/GetUserMails', async (req, res) => {
+  var accessToken = req.body.accessToken;
+  const client = new SimpleGraphClient(accessToken);
+  const usermails = await client.getMailAsync();
+    var responseMessage = Promise.resolve(usermails.value);
+    responseMessage.then(function (result) {
+      res.json(result);
+    }, function (err) {
+      console.log(err); // Error: "It broke"
+      res.json(err);
+    });
 });
 
 server.post('/decodeToken',(req, res)=>{
