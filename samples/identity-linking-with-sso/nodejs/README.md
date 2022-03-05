@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demos mapping with aad id, facebook, and google account of user in bot, ME and tab.
+description: This sample demos linking aad id with  facebook and google account of user in bot, ME and tab.
 products:
 - office-teams
 - office
@@ -10,12 +10,12 @@ languages:
 - javascript
 extensions:
 contentType: samples
-createdDate: "16-02-2022 00:15:13"
+createdDate: "7-03-2022 00:15:13"
 ---
 
-# Mapping sample
+# Identity linking with sso
 
-This sample demos mapping with aad id, facebook, and google account of user in bot, ME and tab.
+This sample demos linking aad id with  facebook and google account of user in bot, ME and tab.
 
 ## Key features
 
