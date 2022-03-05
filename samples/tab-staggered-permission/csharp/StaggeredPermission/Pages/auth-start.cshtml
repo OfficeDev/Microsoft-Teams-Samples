@@ -17,7 +17,9 @@
        
         // Get auth token.
          function getAuthToken() {
-            let clientId = '@Model.ClientId';
+             let clientId = '@Model.ClientId';
+             const params = window.location.search;
+             const scope = params.substring(params.search("=") + 1);
 
             if (clientId != undefined && clientId != null && clientId !== '') {
                 microsoftTeams.initialize();
@@ -34,7 +36,7 @@
                         client_id: clientId,
                         response_type: "token",
                         response_mode: "fragment",
-                        scope: "https://graph.microsoft.com/User.Read Mail.Read",
+                        scope: "https://graph.microsoft.com/"+scope,
                         redirect_uri: window.location.origin + "/auth-end",
                         nonce: _guid(),
                         state: state,
