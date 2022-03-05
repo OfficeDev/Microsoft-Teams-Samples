@@ -19,7 +19,7 @@
     "outline": "icon-outline.png"
   },
   "name": {
-    "short": "Map AAD with FB and google"
+    "short": "Identity link with sso"
   },
   "description": {
     "short": "Map AAD id with other identity provider",
@@ -28,8 +28,8 @@
   "staticTabs": [
     {
       "contentUrl": "https://<<base-url>>/tab",
-      "entityId": "Map",
-      "name": "MapAAD",
+      "entityId": "Identity",
+      "name": "Identity link",
       "scopes": [
         "personal"
       ]
@@ -71,7 +71,7 @@
           ]
         },
         {
-          "id": "MapAadId",
+          "id": "IdentityLink",
           "type": "action",
           "title": "Connect with Facebook and google",
           "description": "Connect with Facebook and google",

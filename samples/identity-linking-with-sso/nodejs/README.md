@@ -20,7 +20,8 @@ This sample demos mapping with aad id, facebook, and google account of user in b
 ## Key features
 
 Bot Mapping
-  
+![Bot](Images/BotLinkingOptionCard.png)
+
 Tab mapping
 
 ![Tab](Images/Tab.png)
@@ -29,15 +30,19 @@ Messaging Extention mapping
 
 - ME Action
 
-  ![ME action](Images/MEActions.png)
+  ![ME action](Images/MEActionsCard.png)
+
+  ![ME action](Images/MEActionsLinkCard.png)
 
 - ME Search
 
   ![ME search](Images/MESearch.png)
+
+  ![ME search](Images/MESearchLinkCard.jpg)
    
 - ME Link unfurling
 
-  ![ME Link unfurling](Images/MELinkUnfurlingLoginLink.png)
+  ![ME Link unfurling](Images/MELinkUnfurlingCard.png)
 
 ## Prerequisites
 

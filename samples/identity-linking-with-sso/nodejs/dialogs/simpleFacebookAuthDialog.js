@@ -55,17 +55,17 @@ class SimpleFacebookAuthDialog extends LogoutDialog {
 
       var aadProfile = await Data.getAADUserData(userData.aad_token);
       var aadDetailCard = CardHelper.getAADDetailsCard(aadProfile.myDetails, aadProfile.photo);
-      var facebbokdetailCard = CardHelper.getFacebookDetailsCard(facbookProfile);
-      var googleDetailsCard;
+      var facebookdetailCard = CardHelper.getFacebookDetailsCard(facbookProfile);
+      var googleDetailCard;
 
       if (userData.is_google_signed_in) {
         var googleProfile = await Data.getGoogleUserData(userData.google_token);
-        googleDetailsCard = CardHelper.getGoogleDetailsCard(googleProfile)
+        googleDetailCard = CardHelper.getGoogleDetailsCard(googleProfile)
       }
       else {
-        googleDetailsCard = CardHelper.getConnectToGoogleCard();
+        googleDetailCard = CardHelper.getConnectToGoogleCard();
       }
-      await stepContext.context.sendActivity(MessageFactory.list([aadDetailCard, facebbokdetailCard, googleDetailsCard]));
+      await stepContext.context.sendActivity(MessageFactory.list([aadDetailCard, facebookdetailCard, googleDetailCard]));
       
       return await stepContext.endDialog();
     }
