@@ -19,6 +19,7 @@ This sample demos linking user's AAD id with Facebook and google account of user
 ## Key features
 
 Bot Mapping
+
 ![Bot](IdentityLinkingWithSSO/Images/BotLinkingOptionCard.png)
 
 Tab mapping
@@ -37,7 +38,7 @@ Messaging Extention mapping
 
   ![ME search](IdentityLinkingWithSSO/Images/MESearch.png)
 
-  ![ME search](IdentityLinkingWithSSO/Images/MESearchLinkCard.jpg)
+  ![ME search](IdentityLinkingWithSSO/Images/MESearchLinkCard.png)
    
 - ME Link unfurling
 
@@ -118,7 +119,7 @@ Messaging Extention mapping
 
     - In "Authorized redirect URLs", add `https://token.botframework.com/.auth/web/redirect` and `<<base-url>>/google-auth`.
 
-    ![validDomains](Images/ValidDomainsGoogle.png)
+    ![validDomains](IdentityLinkingWithSSO/Images/ValidDomainsGoogle.png)
 
     - Note your app's "Client ID" and "Client Secret".
     - Now go to your bot channel registartion -> configuration -> Add OAuth connection string
