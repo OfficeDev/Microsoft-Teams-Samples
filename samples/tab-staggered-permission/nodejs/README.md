@@ -10,10 +10,10 @@ languages:
 - javascript
 extensions:
 contentType: samples
-createdDate: "17-03-2022 00:15:13"
+createdDate: "7-03-2022 00:15:13"
 ---
 
-# Authentication complete sample
+# Staggered permission sample
 
 Using this nodejs sample, you can check how to get staggered graph api permissions
 
@@ -25,7 +25,7 @@ Tab
 
 - Consent popup for staggered permission
  
-  ![consent popup](Images/ConsentPopup.png)
+![consent popup](Images/ConsentPopup.png)
 
 - User emails
 

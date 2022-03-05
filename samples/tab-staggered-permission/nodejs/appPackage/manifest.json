@@ -43,6 +43,6 @@
   ],
   "webApplicationInfo": {
     "id": "{{Microsoft-App-Id}}",
-    "resource": "api://{Base_URL}}/{{Microsoft-App-Id}}"
+    "resource": "api://{{Base_URL}}/{{Microsoft-App-Id}}"
   }
 }
