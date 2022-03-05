@@ -22,7 +22,7 @@ Tab
 
   - User basic
 
-![user info card](user-info.png)
+![user info card](StaggeredPermission/Images/user-info.png)
 
 - Consent popup for staggered permission
  
