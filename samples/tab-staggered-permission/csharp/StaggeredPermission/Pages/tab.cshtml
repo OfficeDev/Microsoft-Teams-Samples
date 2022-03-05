@@ -116,7 +116,7 @@
         function getToken(scope) {
             return new Promise((resolve, reject) => {
                 microsoftTeams.authentication.authenticate({
-                    url: window.location.origin + "/auth-start?scope=" + scope",
+                    url: window.location.origin + "/auth-start?scope=" + scope,
                     width: 600,
                     height: 535,
                     successCallback: result => {
