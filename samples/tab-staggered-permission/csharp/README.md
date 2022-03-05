@@ -26,15 +26,15 @@ Tab
 
 - Consent popup for staggered permission
  
-  ![consent popup](Images/consent-popup.png)
+  ![consent popup](StaggeredPermission/Images/consent-popup.png)
 
   - User photo
 
-![User mails](Images/user-photo.png)
+![User mails](StaggeredPermission/Images/user-photo.png)
 
 - User emails
 
-![User mails](Images/user-mails.png)
+![User mails](StaggeredPermission/Images/user-mails.png)
    
 ## Prerequisites
 
