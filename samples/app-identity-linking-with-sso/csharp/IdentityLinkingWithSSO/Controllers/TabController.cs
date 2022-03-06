@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace IdentityLinkingWithSSO.Controllers
@@ -192,7 +191,7 @@ namespace IdentityLinkingWithSSO.Controllers
             }
         }
 
-        // Get facebook profile of user.
+        // Get facebook profile of exisiting mapped user.
         [HttpPost]
         [Route("getFbDetails")]
         public async Task<JsonResult> GetFbDetails(string token)
@@ -236,7 +235,7 @@ namespace IdentityLinkingWithSSO.Controllers
         [Route("getGoogleAccessToken")]
         public async Task<JsonResult> GetGoogleAccessToken(string accessToken, string userName)
         {
-            var redirectUrl = _configuration["ApplicationBaseUrl"] + "/facebook-auth-end";
+            var redirectUrl = _configuration["ApplicationBaseUrl"] + "/google-auth-end";
             var googleAppId = _configuration["GoogleAppId"];
             var googleAppPassword = _configuration["GoogleAppPassword"];
             var client = new HttpClient();
@@ -312,6 +311,7 @@ namespace IdentityLinkingWithSSO.Controllers
             }
         }
 
+        // Get google profile of existing mapped user.
         [HttpPost]
         [Route("getGoogleDetails")]
         public async Task<JsonResult> GetGoogleDetails(string token)
@@ -357,6 +357,7 @@ namespace IdentityLinkingWithSSO.Controllers
             return Json(jsonString);
         }
 
+        // Disconnect from google.
         [HttpPost]
         [Route("disconnectFromGoogle")]
         public JsonResult DisconnectGoogle(string userName)

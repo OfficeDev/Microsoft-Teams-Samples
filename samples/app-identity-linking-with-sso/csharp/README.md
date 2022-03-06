@@ -109,17 +109,26 @@ Messaging Extention mapping
   
 
 16. To test facebook auth flow [create a facebookapp](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-facebook?view=azure-bot-service-4.0) and get client id and secret for facebook app.
+- Bot auth setup
     Now go to your bot channel registartion -> configuration -> Add OAuth connection string
    - Provide connection Name : for eg `facebookconnection`
-   - Select service provider ad `facebook`
-   - Add clientid and secret of your facebook app that was created using Step 16.
+   - Select service provider add `facebook`
+   - Add clientid and secret of your facebook app that was created using Step 16 and save.
+
+   - Tab auth setup
+     - After creating the app and getting client id and secret, make sure you add facebook login service under products section of your facebook app.
+     ![FacebookProduct](IdentityLinkingWithSSO/Images/FacebookProduct.png)
+      - Go to facebook settings and under valid domains, make sure to add the following url's
+      - `https://token.botframework.com/.auth/web/redirect`
+      - `https://<<base url>>/facebook-auth-end`
+       ![validDomains](IdentityLinkingWithSSO/Images/ValidDomainsFacebook.png)
 
 17.  Google app setup.
  - Obtain OAuth2 client credentials from the [Google API Console](https://console.developers.google.com/). Enable access to the [Google People API](https://developers.google.com/people/). 
 
     - In "Authorized redirect URLs", add `https://token.botframework.com/.auth/web/redirect` and `<<base-url>>/google-auth`.
 
-    ![validDomains](IdentityLinkingWithSSO/Images/ValidDomainsGoogle.png)
+    ![validDomains](IdentityLinkingWithSSO/Images/ValidDomainsGoogle.PNG)
 
     - Note your app's "Client ID" and "Client Secret".
     - Now go to your bot channel registartion -> configuration -> Add OAuth connection string

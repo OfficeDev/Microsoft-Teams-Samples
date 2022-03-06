@@ -226,47 +226,10 @@ namespace IdentityLinkingWithSSO.Dialogs
                     }
 
                 }
-                //var client = new SimpleGraphClient(tokenResponse.Token);
-                //var me = await client.GetMeAsync();
-                //var title = !string.IsNullOrEmpty(me.JobTitle) ?
-                //            me.JobTitle : "Unknown";
-                //var photo = await client.GetPhotoAsync();
-                //userCard = GetProfileCard(me, photo, title);
-                //thumbnailCardFacebook = GetThumbnailCardFacebook().ToAttachment();
-                //thumbnailCardGoogle = GetThumbnailCardGoogle().ToAttachment();
-                //attachmentList = new List<Microsoft.Bot.Schema.Attachment>();
-                //attachmentList.Add(userCard);
-                //attachmentList.Add(thumbnailCardFacebook);
-                //attachmentList.Add(thumbnailCardGoogle);
-                //reply = MessageFactory.Attachment(attachmentList);
-                //await stepContext.Context.SendActivityAsync(reply, cancellationToken);
-                //return await stepContext.EndDialogAsync();
-                //Token token = new Token
-                //{
-                //    AccessToken = tokenResponse.Token
-                //};
-
-                //_Token.AddOrUpdate("token", token, (key, newValue) => token);
             }
 
             return await stepContext.EndDialogAsync();
         }
-
-        //private async Task<DialogTurnResult> UserInfoCardAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
-        //{
-        //    var color = stepContext.Result as string;
-        //    // Pull in the data from the Microsoft Graph.
-        //    var token = new Token();
-        //    _Token.TryGetValue("token", out token);
-        //    var client = new SimpleGraphClient(token.AccessToken);
-        //    var me = await client.GetMeAsync();
-        //    var title = !string.IsNullOrEmpty(me.JobTitle) ?
-        //                me.JobTitle : "Unknown";
-        //    var photo = await client.GetPhotoAsync();
-        //    var reply = MessageFactory.Attachment(GetProfileCard(me, photo, title, color));
-        //    await stepContext.Context.SendActivityAsync(reply, cancellationToken);
-        //    return await stepContext.EndDialogAsync();
-        //}
 
         // Get user profile card.
         private Microsoft.Bot.Schema.Attachment GetProfileCard(User profile, string photo, string title)

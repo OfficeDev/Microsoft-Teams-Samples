@@ -1,4 +1,4 @@
-﻿// <copyright file="UserData.cs" company="Microsoft">
+﻿// <copyright file="GoogleData.cs" company="Microsoft">
 // Copyright (c) Microsoft. All rights reserved.
 // </copyrightusing Microsoft.Graph;
 

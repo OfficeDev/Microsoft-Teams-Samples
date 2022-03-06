@@ -53,6 +53,7 @@ namespace IdentityLinkingWithSSO
             }
         }
 
+        // Get the user profile details.
         public async Task<User> GetUserProfile(string userPrincipleName)
         {
             var graphClient = GetAuthenticatedClient();
@@ -61,6 +62,7 @@ namespace IdentityLinkingWithSSO
                                 .GetAsync();
             return user;
         }
+
         // Get an Authenticated Microsoft Graph client using the token issued to the user.
         private GraphServiceClient GetAuthenticatedClient()
         {

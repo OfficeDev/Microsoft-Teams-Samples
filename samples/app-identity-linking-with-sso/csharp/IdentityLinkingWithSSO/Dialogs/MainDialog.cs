@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using IdentityLinkingWithSSO.Models;
-using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
@@ -44,24 +43,6 @@ namespace IdentityLinkingWithSSO.Dialogs
         {
                 return await stepContext.BeginDialogAsync(nameof(BotSsoAuthDialog));
         }
-
-        // Get login option card.
-        //private static Attachment GetLoginOptionCard()
-        //{
-        //    var heroCard = new HeroCard
-        //    {
-        //        Title = "Login options",
-        //        Text = "Select a login option",
-        //        Buttons = new List<CardAction>
-        //        {
-        //            new CardAction(ActionTypes.MessageBack,title:"AAD SSO authentication", value: "sso", text:"sso", displayText:"AAD SSO authentication"),
-        //            new CardAction(ActionTypes.MessageBack,title:"Facebook login (OAuth 2)", value: "facebooklogin", text:"facebooklogin", displayText:"Facebook login (OAuth 2)"),
-        //            new CardAction(ActionTypes.MessageBack,title:"User Id/password login", value: "usingcredentials", text:"usingcredentials", displayText:"User Id/password login"),
-        //        }
-        //    };
-
-        //    return heroCard.ToAttachment();
-        //}
 
         private static Attachment GetListCard()
         {

@@ -1869,44 +1869,15 @@ namespace IdentityLinkingWithSSO.Bots
 
             if (facebookProfile.isFacebookSignedIn && googleProfile.isGoogleSignedIn)
             {
-                //var url = "https://f8ea651f07bb.ngrok.io/config?is_fb_signed_in=true&is_google_signed_in=true";
+                var url = $"{_applicationBaseUrl}/config?is_fb_signed_in={facebookProfile.isFacebookSignedIn}&is_google_signed_in={googleProfile.isGoogleSignedIn}";
                 card.Actions.Add(new AdaptiveOpenUrlAction()
                 {
                     Title = "Disconnect",
-                    Url = new Uri("https://f8ea651f07bb.ngrok.io")
+                    Url = new Uri(url)
                 });
             }
 
             return card;
-            //{
-            //    ContentType = AdaptiveCard.ContentType,
-            //    Content = card
-            //};
-        }
-
-        /// <summary>
-        /// Connector card with text in section with card title sample
-        /// </summary>
-        /// <returns></returns>
-        public static MessagingExtensionAttachment O365ConnectorCardDefault()
-        {
-            var o365connector = new O365ConnectorCard
-            {
-                Title = "Connector card test",
-                Sections = new List<O365ConnectorCardSection>
-                {
-                    new O365ConnectorCardSection{ Text= "Hello" },
-                    new O365ConnectorCardSection{ Text= "Test" }
-                },
-            };
-
-            MessagingExtensionAttachment attachment = new MessagingExtensionAttachment()
-            {
-                ContentType = O365ConnectorCard.ContentType,
-                Content = o365connector
-            };
-
-            return attachment;
         }
 
         private async Task<string> GetSignInLinkAsync(ITurnContext turnContext, string connectionName, CancellationToken cancellationToken)
