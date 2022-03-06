@@ -128,7 +128,7 @@ Messaging Extention mapping
 
     - In "Authorized redirect URLs", add `https://token.botframework.com/.auth/web/redirect` and `<<base-url>>/google-auth`.
 
-    ![validDomains](IdentityLinkingWithSSO/Images/ValidDomainsGoogle.PNG)
+    ![validDomains](IdentityLinkingWithSSO/Images/ValidDomainsGoogle.png)
 
     - Note your app's "Client ID" and "Client Secret".
     - Now go to your bot channel registartion -> configuration -> Add OAuth connection string
