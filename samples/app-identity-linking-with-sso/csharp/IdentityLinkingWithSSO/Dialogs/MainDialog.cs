@@ -44,49 +44,6 @@ namespace IdentityLinkingWithSSO.Dialogs
                 return await stepContext.BeginDialogAsync(nameof(BotSsoAuthDialog));
         }
 
-        private static Attachment GetListCard()
-        {
-            ListCard card = new ListCard
-            {
-                Title = "Test List card",
-                Items = new List<ListCardItem>(),
-            };
-
-            card.Items.Add(new ListCardItem
-            {
-                Type = "resultItem",
-                Id = Guid.NewGuid().ToString(),
-                Title = "Login sso",
-                Tap = new TapItem ()
-                {
-                    Type = "openUrl",
-                    Value = "https://f8ea651f07bb.ngrok.io/popUpSignin"
-                }
-            });
-
-            card.Items.Add(new ListCardItem
-            {
-                Type = "resultItem",
-                Id = Guid.NewGuid().ToString(),
-                Title = "Login facebook",
-            });
-
-            card.Items.Add(new ListCardItem
-            {
-                Type = "resultItem",
-                Id = Guid.NewGuid().ToString(),
-                Title = "Login google",
-            });
-
-            return new Attachment
-            {
-                ContentType = "application/vnd.microsoft.teams.card.list",
-                Content = card,
-            };
-        }
-
-
-
         // Get sign in card.
         private Attachment GetPopUpSignInCard()
         {
