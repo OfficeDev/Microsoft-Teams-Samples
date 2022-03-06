@@ -1,0 +1,62 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.11",
+    "version": "1.0.0",
+    "id": "{{localSettings.teamsApp.teamsAppId}}",
+    "packageName": "com.microsoft.teams.extension",
+    "developer": {
+        "name": "Teams App, Inc.",
+        "websiteUrl": "{{{localSettings.frontend.tabEndpoint}}}",
+        "privacyUrl": "{{{localSettings.frontend.tabEndpoint}}}{{{localSettings.frontend.tabIndexPath}}}/privacy",
+        "termsOfUseUrl": "{{{localSettings.frontend.tabEndpoint}}}{{{localSettings.frontend.tabIndexPath}}}/termsofuse"
+    },
+    "icons": {
+        "color": "resources/color.png",
+        "outline": "resources/outline.png"
+    },
+    "name": {
+        "short": "ProactiveMessagesTeamsFx",
+        "full": "ProactiveMessagesTeamsFx"
+    },
+    "description": {
+        "short": "Short description of ProactiveMessagesTeamsFx",
+        "full": "Full description of ProactiveMessagesTeamsFx"
+    },
+    "accentColor": "#FFFFFF",
+    "bots": [
+        {
+            "botId": "{{localSettings.bot.botId}}",
+            "scopes": [
+                "personal",
+                "team",
+                "groupchat"
+            ],
+            "supportsFiles": false,
+            "isNotificationOnly": false,
+            "commandLists": [
+                {
+                    "scopes": [
+                        "personal",
+                        "team",
+                        "groupchat"
+                    ],
+                    "commands": [
+                        {
+                            "title": "help",
+                            "description": "Resend welcome card of this Bot"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [],
+    "webApplicationInfo": {
+        "id": "{{localSettings.auth.clientId}}",
+        "resource": "{{{localSettings.auth.applicationIdUris}}}"
+    }
+}

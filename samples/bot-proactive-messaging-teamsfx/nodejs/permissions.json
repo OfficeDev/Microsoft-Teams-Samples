@@ -1,0 +1,9 @@
+[
+    {
+        "resource": "Microsoft Graph",
+        "delegated": [
+            "User.Read"
+        ],
+        "application": []
+    }
+]

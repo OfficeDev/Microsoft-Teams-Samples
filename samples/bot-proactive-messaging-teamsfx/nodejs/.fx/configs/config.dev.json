@@ -1,0 +1,10 @@
+{
+    "$schema": "https://aka.ms/teamsfx-env-config-schema",
+    "description": "You can customize the TeamsFx config for different environments. Visit https://aka.ms/teamsfx-env-config to learn more about this.",
+    "manifest": {
+        "appName": {
+            "short": "ProactiveMessagesTeamsFx",
+            "full": "Full name for ProactiveMessagesTeamsFx"
+        }
+    }
+}
