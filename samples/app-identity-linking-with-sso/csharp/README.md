@@ -126,7 +126,7 @@ Messaging Extention mapping
 17.  Google app setup.
  - Obtain OAuth2 client credentials from the [Google API Console](https://console.developers.google.com/). Enable access to the [Google People API](https://developers.google.com/people/). 
 
-    - In "Authorized redirect URLs", add `https://token.botframework.com/.auth/web/redirect` and `<<base-url>>/google-auth`.
+    - In "Authorized redirect URLs", add `https://token.botframework.com/.auth/web/redirect` and `<<base-url>>/google-auth-end`.
 
     ![validDomains](IdentityLinkingWithSSO/Images/ValidDomainsGoogle.png)
 
