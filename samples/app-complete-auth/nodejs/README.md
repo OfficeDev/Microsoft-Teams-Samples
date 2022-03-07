@@ -31,29 +31,61 @@ Bot Authentication
   
   ![using credentials](Images/BotUsingCredentials.png)
   
+  ![using credentials details](Images/BotUsingCredentialsDetails.png)
+  
 Tab Authentication
 
 ![Tab](Images/Tab.png)
+
+![Tab mobile view](Images/TabMobileView.png)
 
   - SSO
   
   ![Tab SSO login](Images/TabSsoLogin.png)
   
-  - Using user name and password
+  - Authentication using user name and password
   
   ![Tab using credentials](Images/TabUsingCredentials.png)
 
 Messaging Extention Authentication
 
-![ME action](Images/MEActions.png)
+- ME Action
+
+  ![ME action](Images/MEActions.png)
 
   - SSO
   
   ![ME SSO login](Images/MESsoCard.png)
   
-  - Using user name and password
+  - Authentication using user name and password
   
   ![ME using credentials](Images/MEUsingCredentials.png)
+  
+  ![ME using credentials details](Images/MEUsingCredentialsDetails.png)
+  
+- ME Search
+
+  ![ME search](Images/MESearch.png)
+  
+  - SSO
+  
+  ![ME search SSO login](Images/MESearchSSOCard.png)
+  
+  - Authentication using user name and password
+  
+   ![ME search using credentials details](Images/MESearchUsingCredentialsDetailsCard.png)
+   
+- ME Link unfurling
+
+  ![ME Link unfurling](Images/MELinkUnfurlingLoginLink.png)
+  
+  - SSO
+  
+  ![ME Link unfurling SSO login](Images/MELinkUnfurlSSOCard.png)
+  
+  - Authentication using user name and password
+  
+   ![ME Link unfurling using credentials details](Images/MELinkUnfurlUsingCredentialsDetails.png)
 
 ## Prerequisites
 
@@ -121,6 +153,17 @@ Messaging Extention Authentication
    - Select service provider ad `facebook`
    - Add clientid and secret of your facebook app that was created using Step 16.
 
+17. After creating the app and getting client id and secret, make sure you add facebook login service under products section.
+     ![FacebookProduct](Images/FacebookProduct.png)
+
+18. Go to facebook settings and under valid domains, make sure to add the following url's
+     - `https://token.botframework.com/.auth/web/redirect`
+     - `https://<<base url>>`
+     - `https://<<base url>>/fb-auth`
+     
+    ![validDomains](Images/ValidDomains.png)
+
+
 ### Run your bot sample
 1) Clone the repository
 
@@ -162,6 +205,8 @@ Messaging Extention Authentication
    - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
     > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
+
+- Note: To test facebook auth flow please setup the sample locally as due to limitations from facebook you cannot test the facebook auth flow in the deployed version of app.
 
 ## Deploy the bot to Azure
 

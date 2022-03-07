@@ -31,6 +31,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |18|Bot request approval|Demonstrating a feature where user can send task request to his manager using universal adaptive card and manager can approve/reject the request.|[View](/demo%20manifest/Bot-Request-Approval.zip) |
 |19|Incoming Webhook|This sample is used to send card using incoming webhook.|[View](/demo%20manifest/Incoming-Webhook.zip) |
 |20|People picker control in Adaptive Cards | This sample shows the feature of people picker control in Adaptive Cards.|[View](/demo%20manifest/People-Picker-Adaptive-Card.zip) |
+|21|App complete auth|This sample demos authentication feature in bot,tab and messaging extension.|[View](/demo%20manifest/App-Complete-Auth.zip) |
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 
 The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) is an extension on Visual Studio Code and Visual Studio. It enable Teams developers to create and deploy Teams apps with integrated identity, access to cloud storage, data from Microsoft Graph, and other services in Azure and M365 with a "zero-configuration" approach to the developer experience. And [Sample Apps](https://github.com/OfficeDev/TeamsFx-Samples) are provided in Teams Toolkit. Download and try it by today! [Learn more about Teams Toolkit](https://docs.microsoft.com/en-us/microsoftteams/platform/toolkit/visual-studio-code-overview).
@@ -90,7 +91,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |1|Proactive Messaging   | Sample to highlight solutions to two challenges with building proactive messaging apps in Microsoft Teams.                                      |[View][bot-proactive-msg#cs]        |
 |2| Sharepoint List Bot| This sample app shows the interaction between teams bot and SharePoint List, Bot saves the specified details in SharePoint List as back-end| [View][bot-sharepoint-list#cs] |  |  |
 |3|Teams Virtual Assistant| Customized virtual assistant template to support teams capabilities.        |[View][app-virtual-assistant#cs]|
-|4|App complete auth|This sample demos authentication feature in bot,tab and messaging extension.||[View][app-complete-auth#nodejs]|
+|4|App complete auth|This sample demos authentication feature in bot,tab and messaging extension.|[View][app-complete-auth#cs]|
 
 ## [Messaging Extensions samples](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) (using the v4 SDK)
 >NOTE:
@@ -173,7 +174,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |19| Tab request approval | Demonstrating a feature where user can raise the requests and manager will be notified about the requests and manager will be redirected to approve/reject the request from received notification. |[View][tab-request-approval#csharp]|[View][tab-request-approval#nodejs]|
 |20| Bot request approval | Demonstrating a feature where user can send task request to his manager using universal adaptive card and manager can approve/reject the request. |[View][bot-request-approval#csharp]|[View][bot-request-approval#nodejs]|
 |21| Join the Team using QR code |This sample demos a feature where user can join a team using QR code containing the team's id. |[View][qrjointeam#csharp]|[View][qrjointeam#nodejs]
-|22| App complete auth |This sample demos authentication feature in bot,tab and messaging extension. ||[View][appauth#nodejs]
+|22| Activity feed broadcast |Demonstrating a feature to notify any message to all members of the organisation using activity feed notification .|[View][graph-activity-feed-broadcast#csharp]|[View][graph-activity-feed-broadcast#js]|
+|23| App complete auth |This sample demos authentication feature in bot,tab and messaging extension. ||[View][appauth#nodejs]
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
@@ -196,6 +198,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [tab-graph-toolkit#csharp]:samples/tab-graph-toolkit/csharp
 [tab-device-permissions#js]:samples/tab-device-permissions/nodejs
 [tab-conversation#csharp]:samples/tab-conversations/csharp
+[app-complete-auth#cs]:samples/app-complete-auth/csharp
 
 [tab-conversation#nodejs]:samples/tab-conversations/nodejs
 [tab-adaptive-cards#csharp]:samples/tab-adaptive-cards/csharp
@@ -220,6 +223,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [auth-in-connector#nodejs]:samples/connector-todo-notification/nodejs
 [botwithsharepointfileviewer#csharp]:samples/bot-sharepoint-file-viewer/csharp
 [typeaheadsearch#csharp]:samples/bot-type-ahead-search-adaptive-cards/csharp
+[graph-activity-feed-broadcast#csharp]:samples/graph-activity-feed-broadcast/csharp
 
 [app-task-module#cs]:samples/app-task-module/csharp
 [app-task-module#ts]:samples/app-task-module/nodejs
@@ -239,7 +243,6 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [tab-sso#cs]:samples/tab-sso/csharp
 
 [app-virtual-assistant#cs]:samples/app-virtual-assistant/csharp
-[app-complete-auth#nodejs]:samples/app-complete-auth/nodejs
 [bot-proactive-msg#cs]:samples/bot-proactive-messaging/csharp
 [bot-conversation-quickstart#js]:samples/bot-conversation-quickstart/js
 [bot-conversation-sso-quickstart#js]:samples/bot-conversation-sso-quickstart/js
@@ -309,7 +312,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [graph-change-notification#js]:samples/graph-change-notification/nodejs
 [peoplepickeronadaptivecard#js]:samples/bot-people-picker-adaptive-card/nodejs
 [peoplepickeronadaptivecard#csharp]:samples/bot-people-picker-adaptive-card/csharp
-
+[graph-activity-feed-broadcast#js]:samples/graph-activity-feed-broadcast/nodejs
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 
 ## Submitting issues

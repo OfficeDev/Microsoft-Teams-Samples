@@ -4,7 +4,7 @@
 const { DialogBot } = require('./dialogBot');
 const { tokenExchangeOperationName } = require('botbuilder');
 const { SsoOAuthHelpler } = require('../SsoOAuthHelpler');
-const { CardFactory} = require('botbuilder');
+const { CardFactory } = require('botbuilder');
 const { SimpleGraphClient } = require('../simpleGraphClient.js');
 const axios = require('axios')
 
@@ -21,6 +21,7 @@ class TeamsBot extends DialogBot {
         this.connectionName = process.env.ConnectionName;
         this.fbconnectionName = process.env.FBConnectionName;
         this.baseUrl = process.env.ApplicationBaseUrl;
+        this.isSignedIn = false;
         this.onMembersAdded(async (context, next) => {
             const membersAdded = context.activity.membersAdded;
             for (let member = 0; member < membersAdded.length; member++) {
@@ -40,28 +41,389 @@ class TeamsBot extends DialogBot {
         await this.dialog.run(context, this.dialogState);
     }
 
-    async onSignInInvoke(context) {
-        if(context.activity.value != null) {
-            if(context.activity.value.state =='CancelledByUser'){
-                await context.sendActivity("Sign in cancelled by user"); 
-            }
-            else{
-                var userDetails = JSON.parse(context.activity.value.state);
-                if(userDetails.userName == "testaccount@test123.onmicrosoft.com" && userDetails.password == "testpassword") {
-                    const userCard = CardFactory.adaptiveCard(this.getAdaptiveCardUserDetails());
-                    await context.sendActivity({ attachments: [userCard] }); //CancelledByUser
-                }
-                else {
-                    await context.sendActivity("Invalid credentials");
-                }
-            }
-        }
-    }
-    
     async handleTeamsSigninVerifyState(context, query) {
         console.log('Running dialog with signin/verifystate from an Invoke Activity.');
         await this.dialog.run(context, this.dialogState);
     }
+
+    async handleTeamsAppBasedLinkQuery(context, query) {
+        var state = query.state;
+        if (state == undefined) {
+            return {
+                composeExtension: {
+                    type: 'config',
+                    suggestedActions: {
+                        actions: [
+                            {
+                                type: 'openUrl',
+                                value: `${this.baseUrl}/config`,
+                                title: 'Using credentials'
+                            }
+                        ]
+                    }
+                }
+            };
+        }
+
+        else if (state == "sso" || this.isSignedIn) {
+            const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
+            const magicCode =
+                context.state && Number.isInteger(Number(context.state))
+                    ? context.state
+                    : '';
+
+            const tokenResponse = await userTokenClient.getUserToken(
+                context.activity.from.id,
+                this.connectionName,
+                context.activity.channelId,
+                magicCode
+            );
+            if (!tokenResponse || !tokenResponse.token) {
+                this.isSignedIn = true;
+                // There is no token, so the user has not signed in yet.
+                // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
+                const { signInLink } = await userTokenClient.getSignInResource(
+                    this.connectionName,
+                    context.activity
+                );
+
+                return {
+                    composeExtension: {
+                        type: 'auth',
+                        suggestedActions: {
+                            actions: [
+                                {
+                                    type: 'openUrl',
+                                    value: signInLink,
+                                    title: 'Bot Service OAuth'
+                                }
+                            ]
+                        }
+                    }
+                };
+            }
+            const graphClient = new SimpleGraphClient(tokenResponse.token);
+            const profile = await graphClient.getMeAsync();
+            var userPhoto = await graphClient.getUserPhoto();
+            const attachment = CardFactory.thumbnailCard(
+                'User Profile card',
+                profile.displayName,
+                CardFactory.images([
+                    userPhoto
+                ])
+            );
+            const result = {
+                attachmentLayout: 'list',
+                type: 'result',
+                attachments: [attachment]
+            };
+            const response = {
+                composeExtension: result
+            };
+            return response;
+        }
+
+        else if (state == "usercredentials" || state.includes("userName") || this.isSignedIn) {
+            if(state.includes("userName")) {
+                var details = JSON.parse(state);
+                if(details.userName == "testaccount@test123.onmicrosoft.com" && details.password == "testpassword") {
+                    const attachment = CardFactory.thumbnailCard(
+                        'Test user',
+                        'Data scientist',
+                        undefined,
+                    );
+                    const result = {
+                        attachmentLayout: 'list',
+                        type: 'result',
+                        attachments: [attachment]
+                    };
+                    const response = {
+                        composeExtension: result
+                    };
+                    return response;
+                }
+                else {
+                    const attachment = CardFactory.thumbnailCard(
+                        'Invalid user'
+                    );
+                    const result = {
+                        attachmentLayout: 'list',
+                        type: 'result',
+                        attachments: [attachment]
+                    };
+                    const response = {
+                        composeExtension: result
+                    };
+                    return response;
+                }
+            }
+            else {
+                return {
+                    composeExtension: {
+                        type: 'config',
+                        suggestedActions: {
+                            actions: [
+                                {
+                                    type: 'openUrl',
+                                    value: `${this.baseUrl}/popUpSignin?from=msgext`,
+                                    title: 'Using credentials'
+                                }
+                            ]
+                        }
+                    }
+                };
+            }
+        }
+        else {
+            const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
+            const magicCode =
+            context.state && Number.isInteger(Number(context.state))
+                    ? context.state
+                    : '';
+
+            const tokenResponse = await userTokenClient.getUserToken(
+                context.activity.from.id,
+                this.fbconnectionName,
+                context.activity.channelId,
+                magicCode
+            );
+
+            if (!tokenResponse || !tokenResponse.token) {
+                this.isSignedIn = false;
+                // There is no token, so the user has not signed in yet.
+                // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
+
+                const { signInLink } = await userTokenClient.getSignInResource(
+                    this.fbconnectionName,
+                    context.activity
+                );
+
+                return {
+                    composeExtension: {
+                        type: 'auth',
+                        suggestedActions: {
+                            actions: [
+                                {
+                                    type: 'openUrl',
+                                    value: signInLink,
+                                    title: 'Bot Service OAuth'
+                                },
+                            ],
+                        },
+                    },
+                };
+            }
+
+            var facbookProfile = await this.getFacebookUserData(tokenResponse.token);
+
+            const attachment = CardFactory.thumbnailCard(
+                'Facebook profile card',
+                facbookProfile.name,
+                CardFactory.images([
+                    facbookProfile.picture.data.url
+                ])
+            );
+            const result = {
+                attachmentLayout: 'list',
+                type: 'result',
+                attachments: [attachment]
+            };
+            const response = {
+                composeExtension: result
+            };
+            return response;
+        }
+    }
+
+    async handleTeamsMessagingExtensionQuery(context, query) {
+        var state = query.state;
+        if (state == undefined) {
+            return {
+                composeExtension: {
+                    type: 'config',
+                    suggestedActions: {
+                        actions: [
+                            {
+                                type: 'openUrl',
+                                value: `${this.baseUrl}/config`,
+                                title: 'Using credentials'
+                            }
+                        ]
+                    }
+                }
+            };
+        }
+
+        else if (state == "sso" || this.isSignedIn) {
+            const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
+            const magicCode =
+                context.state && Number.isInteger(Number(context.state))
+                    ? context.state
+                    : '';
+
+            const tokenResponse = await userTokenClient.getUserToken(
+                context.activity.from.id,
+                this.connectionName,
+                context.activity.channelId,
+                magicCode
+            );
+            if (!tokenResponse || !tokenResponse.token) {
+                this.isSignedIn = true;
+                // There is no token, so the user has not signed in yet.
+                // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
+                const { signInLink } = await userTokenClient.getSignInResource(
+                    this.connectionName,
+                    context.activity
+                );
+
+                return {
+                    composeExtension: {
+                        type: 'auth',
+                        suggestedActions: {
+                            actions: [
+                                {
+                                    type: 'openUrl',
+                                    value: signInLink,
+                                    title: 'Bot Service OAuth'
+                                }
+                            ]
+                        }
+                    }
+                };
+            }
+            const graphClient = new SimpleGraphClient(tokenResponse.token);
+            const profile = await graphClient.getMeAsync();
+            var userPhoto = await graphClient.getUserPhoto();
+            const attachment = CardFactory.thumbnailCard(
+                'User Profile card',
+                profile.displayName,
+                CardFactory.images([
+                    userPhoto
+                ])
+            );
+            const result = {
+                attachmentLayout: 'list',
+                type: 'result',
+                attachments: [attachment]
+            };
+            const response = {
+                composeExtension: result
+            };
+            return response;
+        }
+
+        else if (state == "usercredentials" || state.includes("userName") || this.isSignedIn) {
+            if(state.includes("userName")) {
+                var details = JSON.parse(state);
+                if(details.userName == "testaccount@test123.onmicrosoft.com" && details.password == "testpassword") {
+                    const attachment = CardFactory.thumbnailCard(
+                        'Test user',
+                        'Data scientist',
+                        undefined,
+                    );
+                    const result = {
+                        attachmentLayout: 'list',
+                        type: 'result',
+                        attachments: [attachment]
+                    };
+                    const response = {
+                        composeExtension: result
+                    };
+                    return response;
+                }
+                else {
+                    const attachment = CardFactory.thumbnailCard(
+                        'Invalid user'
+                    );
+                    const result = {
+                        attachmentLayout: 'list',
+                        type: 'result',
+                        attachments: [attachment]
+                    };
+                    const response = {
+                        composeExtension: result
+                    };
+                    return response;
+                }
+            }
+            else {
+                return {
+                    composeExtension: {
+                        type: 'config',
+                        suggestedActions: {
+                            actions: [
+                                {
+                                    type: 'openUrl',
+                                    value: `${this.baseUrl}/popUpSignin?from=msgext`,
+                                    title: 'Using credentials'
+                                }
+                            ]
+                        }
+                    }
+                };
+            }
+        }
+        else {
+            const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
+            const magicCode =
+            context.state && Number.isInteger(Number(context.state))
+                    ? context.state
+                    : '';
+
+            const tokenResponse = await userTokenClient.getUserToken(
+                context.activity.from.id,
+                this.fbconnectionName,
+                context.activity.channelId,
+                magicCode
+            );
+
+            if (!tokenResponse || !tokenResponse.token) {
+                this.isSignedIn = false;
+                // There is no token, so the user has not signed in yet.
+                // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions
+
+                const { signInLink } = await userTokenClient.getSignInResource(
+                    this.fbconnectionName,
+                    context.activity
+                );
+
+                return {
+                    composeExtension: {
+                        type: 'auth',
+                        suggestedActions: {
+                            actions: [
+                                {
+                                    type: 'openUrl',
+                                    value: signInLink,
+                                    title: 'Bot Service OAuth'
+                                },
+                            ],
+                        },
+                    },
+                };
+            }
+
+            var facbookProfile = await this.getFacebookUserData(tokenResponse.token);
+
+            const attachment = CardFactory.thumbnailCard(
+                'Facebook profile card',
+                facbookProfile.name,
+                CardFactory.images([
+                    facbookProfile.picture.data.url
+                ])
+            );
+            const result = {
+                attachmentLayout: 'list',
+                type: 'result',
+                attachments: [attachment]
+            };
+            const response = {
+                composeExtension: result
+            };
+            return response;
+        }
+    }
+
 
     async handleTeamsMessagingExtensionFetchTask(context, action) {
         const userTokenClient = context.turnState.get(context.adapter.UserTokenClientKey);
@@ -160,7 +522,7 @@ class TeamsBot extends DialogBot {
                 },
             };
         }
-        if (action.commandId === 'FacebookLogin') {
+        if (action.commandId === 'OtherIdentityProvider') {
             const magicCode =
                 action.state && Number.isInteger(Number(action.state))
                     ? action.state
@@ -279,9 +641,8 @@ class TeamsBot extends DialogBot {
                 },
             };
         }
-        if (action.commandId === 'UserCredentials'){
-            if(action.state == undefined)
-            {
+        if (action.commandId === 'UserCredentials') {
+            if (action.state == undefined) {
                 return {
                     composeExtension: {
                         type: 'config',
@@ -289,18 +650,18 @@ class TeamsBot extends DialogBot {
                             actions: [
                                 {
                                     type: 'openUrl',
-                                    value: this.baseUrl +'/popUpSignIn'
+                                    value: this.baseUrl + '/popUpSignIn'
                                 },
                             ],
                         },
                     },
                 };
             }
-            else{
+            else {
                 var data = JSON.parse(action.state);
-                if(data.userName == "test" && data.password == "test") {
+                if (data.userName == "test" && data.password == "test") {
                     const card = CardFactory.adaptiveCard(this.getAdaptiveCardUserDetails());
-        
+
                     return {
                         task: {
                             type: 'continue',
@@ -324,7 +685,7 @@ class TeamsBot extends DialogBot {
                             },
                         ]
                     });
-        
+
                     return {
                         task: {
                             type: 'continue',
@@ -337,7 +698,7 @@ class TeamsBot extends DialogBot {
                         },
                     };
                 }
-            } 
+            }
         }
         return null;
     }
@@ -347,7 +708,7 @@ class TeamsBot extends DialogBot {
             url: 'https://graph.facebook.com/v2.6/me',
             method: 'get',
             params: {
-                fields: ['name','picture'].join(','),
+                fields: ['name', 'picture'].join(','),
                 access_token: access_token,
             },
         });

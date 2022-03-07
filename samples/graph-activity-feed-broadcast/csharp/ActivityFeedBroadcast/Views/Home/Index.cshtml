@@ -1,0 +1,123 @@
+﻿@using ActivityFeedBroadcast.Model
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js" integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+        <style>
+             #mainDiv {
+                 padding-left: 2%;
+                 padding-top: 2%;
+                 padding-right: 2%;
+             }
+
+             input {
+                 width: 58rem;
+             }
+      </style>
+
+      <script>
+         $(document).ready(function () {
+             $('#task-submitted').hide();
+         }); 
+
+          microsoftTeams.initialize();
+            var token = localStorage.getItem("accessToken");
+            var userId = "";
+            var userName = "";
+         
+            microsoftTeams.getContext(function (context) {
+                userId = context.userObjectId;
+                userName = context.upn;
+
+                if(context.subEntityId!="" && context.subEntityId!= undefined)
+                {
+                    let taskInfo = {
+                        title: "Message details",
+                        height: 400,
+                        width: 400,
+                        url: window.location.origin + "/MessageDetails?taskId=" + context.subEntityId,
+                        card: null,
+                        fallbackUrl:null,
+                        completionBotId: null,
+                        };
+
+                    microsoftTeams.tasks.startTask(taskInfo);
+                };
+            });       
+
+         // Send notification to organisation.
+         function SendNotificationToOrganisation() {
+             var isValid = true;
+             $('#title,#description').each(function () {
+                 if ($.trim($(this).val()) == '') {
+                     isValid = false;
+                     $(this).css({
+                         "border": "1px solid red"
+                     });
+                 }
+                 else {
+                     $(this).css({
+                         "border": "",
+                         "background": ""
+                     });
+                 }
+             });
+
+             if (isValid == false) {
+                 e.preventDefault();
+
+                 return false;
+             }
+
+             let taskInfo = {
+                 title: $('#title').val(),
+                 description: $('#description').val(),
+                 userId: userId,
+                 userName: userName,
+                 access_token: token,
+             };
+
+             $.ajax({
+                 type: 'POST',
+                 url: '/SendNotificationToOrganisation',
+                 dataType: 'json',
+                 data: taskInfo,
+             });
+
+             $('#task-submitted').show();
+
+             return true;
+         };
+      </script>
+   </head>
+   <body id="mainDiv" >
+        <div class="tab-content">
+        <div id="createtask" class="tab-pane fade in active">
+            <div class="mb">
+                <div class="form-group fg">
+                    <label for="title" class="title">Message title</label>
+                    <br>
+                    <input type="text" id="title" name="taskTitle">
+                </div>
+                <br />
+                <div class="form-group fg">
+                    <label for="title-desc" class="description">Message description</label><br/>
+                    <textarea id="description" name="taskDescription" rows="5" cols="80"></textarea>
+                    <br />
+                </div>
+            </div>
+            <div class="modal-footer mf">
+                <br />
+                <button type="button" class="btn-send save" onclick="return SendNotificationToOrganisation()">Send message</button>
+            </div>
+            <div id="task-submitted">
+                Message broadcasted successfully.
+            </div>
+        </div>
+        </div>
+   </body>
+</html>

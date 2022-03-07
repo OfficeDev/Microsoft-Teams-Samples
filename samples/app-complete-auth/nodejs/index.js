@@ -98,10 +98,14 @@ server.get('/popUpSignin', function (req, res) {
   res.render('./views/popUpSignin');
 });
 
+server.get('/config', function (req, res) {
+  res.render('./views/config');
+});
+
 // Pop-up dialog to ask for additional permissions, redirects to AAD page
 server.get('/auth-start', function (req, res) {
   var clientId = process.env.MicrosoftAppId;
-  res.render('./views/auth-start', { clientId: clientId });
+  res.render('./views/auth-start', { clientId: JSON.stringify(clientId) });
 });
 
 // End of the pop-up dialog auth flow, returns the results back to parent window
@@ -197,7 +201,7 @@ server.post('/tabCredentialsAuth', function (req, res) {
   var userNAme = req.body.userName;
   var password = req.body.password;
   var resultResponse;
-  if (userNAme == "test" && password == "test") {
+  if (userNAme == "testaccount@test123.onmicrosoft.com" && password == "testpassword") {
     resultResponse = "Authentication successfull";
   }
   else {
