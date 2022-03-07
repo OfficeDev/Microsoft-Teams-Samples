@@ -1,0 +1,69 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.11",
+    "version": "1.0.0",
+    "id": "{{state.fx-resource-appstudio.teamsAppId}}",
+    "packageName": "com.microsoft.teams.extension",
+    "developer": {
+        "name": "Teams App, Inc.",
+        "websiteUrl": "{{{state.fx-resource-frontend-hosting.endpoint}}}",
+        "privacyUrl": "{{{state.fx-resource-frontend-hosting.endpoint}}}{{{state.fx-resource-frontend-hosting.indexPath}}}/privacy",
+        "termsOfUseUrl": "{{{state.fx-resource-frontend-hosting.endpoint}}}{{{state.fx-resource-frontend-hosting.indexPath}}}/termsofuse"
+    },
+    "icons": {
+        "color": "resources/color.png",
+        "outline": "resources/outline.png"
+    },
+    "name": {
+        "short": "{{config.manifest.appName.short}}",
+        "full": "{{config.manifest.appName.full}}"
+    },
+    "description": {
+        "short": "Short description of {{config.manifest.appName.short}}",
+        "full": "Full description of {{config.manifest.appName.short}}"
+    },
+    "accentColor": "#FFFFFF",
+    "bots": [
+        {
+            "botId": "{{state.fx-resource-bot.botId}}",
+            "scopes": [
+                "personal",
+                "team",
+                "groupchat"
+            ],
+            "supportsFiles": false,
+            "isNotificationOnly": false,
+            "commandLists": [
+                {
+                    "scopes": [
+                        "personal",
+                        "team",
+                        "groupchat"
+                    ],
+                    "commands": [
+                        {
+                            "title": "welcome",
+                            "description": "Resend welcome card of this Bot"
+                        },
+                        {
+                            "title": "learn",
+                            "description": "Learn about Adaptive Card and Bot Command"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "composeExtensions": [],
+    "configurableTabs": [],
+    "staticTabs": [],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [],
+    "webApplicationInfo": {
+        "id": "{{state.fx-resource-aad-app-for-teams.clientId}}",
+        "resource": "{{{state.fx-resource-aad-app-for-teams.applicationIdUris}}}"
+    }
+}
