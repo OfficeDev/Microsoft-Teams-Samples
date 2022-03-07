@@ -14,7 +14,7 @@ createdDate: "17-03-2022 00:15:13"
 
 # Staggered Permission sample
 
-Using this nodejs sample, you can check how to get staggered graph api permissions
+Using this csharp sample, you can check how to get staggered graph api permissions
 
 ## Key features
 
