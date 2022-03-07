@@ -100,11 +100,12 @@ Messaging Extention mapping
     Enable implicit grant by checking the following boxes:  
     ✔ ID Token  
     ✔ Access Token  
-    
 14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
-15. Create a Azure Bot Service
-   In Azure portal, create a [Azure Bot service.](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+15. Create a Azure bot service
+   In Azure portal, create a [Azure bot service](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+
+   - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
   
 
 16. To test facebook auth flow [create a facebookapp](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-facebook?view=azure-bot-service-4.0) and get client id and secret for facebook app.
@@ -125,9 +126,9 @@ Messaging Extention mapping
 17.  Google app setup.
  - Obtain OAuth2 client credentials from the [Google API Console](https://console.developers.google.com/). Enable access to the [Google People API](https://developers.google.com/people/). 
 
-    - In "Authorized redirect URLs", add `https://token.botframework.com/.auth/web/redirect` and `<<base-url>>/google-auth`.
+    - In "Authorized redirect URLs", add `https://token.botframework.com/.auth/web/redirect` and `<<base-url>>/google-auth-end`.
 
-    ![validDomains](IdentityLinkingWithSSO/Images/ValidDomainsGoogle.PNG)
+    ![validDomains](IdentityLinkingWithSSO/Images/ValidDomainsGoogle.png)
 
     - Note your app's "Client ID" and "Client Secret".
     - Now go to your bot channel registartion -> configuration -> Add OAuth connection string
