@@ -92,7 +92,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |2| Sharepoint List Bot| This sample app shows the interaction between teams bot and SharePoint List, Bot saves the specified details in SharePoint List as back-end| [View][bot-sharepoint-list#cs] |  |  |
 |3|Teams Virtual Assistant| Customized virtual assistant template to support teams capabilities.        |[View][app-virtual-assistant#cs]|
 |4|App complete auth|This sample demos authentication feature in bot,tab and messaging extension.|[View][app-complete-auth#cs]|
-|5|Identity linking with sso|This sample demos mapping with aad id, facebook, and google account of user in bot, ME and tab.||[View][identity-link-with-sso#nodejs]|
+|5|App identity linking with sso|This sample demos mapping with aad id, facebook, and google account of user in bot, ME and tab.||[View][app-identity-link-with-sso#nodejs]|
 
 ## [Messaging Extensions samples](https://docs.microsoft.com/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) (using the v4 SDK)
 >NOTE:
@@ -312,7 +312,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [peoplepickeronadaptivecard#js]:samples/bot-people-picker-adaptive-card/nodejs
 [peoplepickeronadaptivecard#csharp]:samples/bot-people-picker-adaptive-card/csharp
 [graph-activity-feed-broadcast#js]:samples/graph-activity-feed-broadcast/nodejs
-[identity-link-with-sso#nodejs]:samples/identity-link-with-sso/nodejs
+[app-identity-link-with-sso#nodejs]:samples/app-identity-link-with-sso/nodejs
 
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demos linking aad id with  facebook and google account of user in bot, ME and tab.
+description: This sample demos linking user's AAD id with Facebook and google account of user from bot, ME and tab.
 products:
 - office-teams
 - office
@@ -13,13 +13,14 @@ contentType: samples
 createdDate: "7-03-2022 00:15:13"
 ---
 
-# Identity linking with sso
+# App identity linking with sso
 
-This sample demos linking aad id with  facebook and google account of user in bot, ME and tab.
+This sample demos linking user's AAD id with Facebook and google account of user from bot, ME and tab.
 
 ## Key features
 
 Bot Mapping
+
 ![Bot](Images/BotLinkingOptionCard.png)
 
 Tab mapping
@@ -98,8 +99,8 @@ Messaging Extention mapping
     ✔ Access Token  
 14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
-15. Create a Bot Registration
-   In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+15. Create a Azure Bot Service
+   In Azure portal, create a [Azure Bot service.](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
   
