@@ -173,6 +173,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |19| Tab request approval | Demonstrating a feature where user can raise the requests and manager will be notified about the requests and manager will be redirected to approve/reject the request from received notification. |[View][tab-request-approval#csharp]|[View][tab-request-approval#nodejs]|
 |20| Bot request approval | Demonstrating a feature where user can send task request to his manager using universal adaptive card and manager can approve/reject the request. |[View][bot-request-approval#csharp]|[View][bot-request-approval#nodejs]|
 |21| Join the Team using QR code |This sample demos a feature where user can join a team using QR code containing the team's id. |[View][qrjointeam#csharp]|[View][qrjointeam#nodejs]
+|22| App complete auth |This sample demos authentication feature in bot,tab and messaging extension. ||[View][appauth#nodejs]
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
@@ -268,6 +269,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [memessagereminder#csharp]:samples/msgext-message-reminder/csharp
 [tab-request-approval#csharp]:samples/tab-request-approval/csharp
 [bot-request-approval#csharp]:samples/bot-request-approval/csharp
+[appauth#nodejs]:samples/app-complete-auth/nodejs
 [typeaheadsearchonadaptivecard#js]:samples/bot-type-ahead-search-adaptive-cards/nodejs
 
 [app-localization#cs]:samples/app-localization/csharp
