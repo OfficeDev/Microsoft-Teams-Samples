@@ -140,7 +140,7 @@ Messaging Extention mapping
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/identity-linking-with-sso/nodejs`
+2) In a terminal, navigate to `samples/app-identity-linking-with-sso/nodejs`
 
 3) Install node modules
 
