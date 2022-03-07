@@ -114,7 +114,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |    | Sample Name | Description | .NET Core | JavaScript | Python |
 |:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|:-------------|
 |1|Link unfurling demo of Reddit        | Messaging Extension with Link Unfurling Samples for Reddit Links                              |[View][msgext-link-unfurl#cs]        |
-
+|2|Link unfurling - setup a meeting     | This sample illustrates a common scenario where a user shares a link to a resource with a group of users, and they collaborate to review it in a meeting.                              |[View][msgext-link-unfurl-meeting#cs]        |
 
 ## [Webhooks and Connectors samples](https://docs.microsoft.com/microsoftteams/platform/webhooks-and-connectors/what-are-webhooks-and-connectors)
 
@@ -238,6 +238,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [outgoing-webhook#ts]:samples/outgoing-webhook/nodejs
 
 [msgext-link-unfurl#cs]:samples/msgext-link-unfurling-reddit/csharp
+[msgext-link-unfurl-meeting#cs]:samples/msgext-link-unfurling-meeting/csharp
 [msgext-action-quickstart#js]:samples/msgext-action-quickstart/js
 [msgext-search-quickstart#js]:samples/msgext-search-quickstart/js
 [msgext-search-sso-config#js]:samples/msgext-search-sso-config
