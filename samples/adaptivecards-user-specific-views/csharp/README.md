@@ -29,7 +29,7 @@ For more details, refer to our [documentation](https://docs.microsoft.com/en-us/
 
 Apps can define `refresh` property with details about the refresh event and optionally add a list of users for whom the card should automatically refresh. (Refer to the image below).
 
-![AdaptiveCardRefreshSchema](Docs/AdaptiveCardRefreshSchema.png)
+![AdaptiveCardRefreshSchema](docs/AdaptiveCardRefreshSchema.png)
 
 For more details on Adaptive card schema, refer to our [documentation](https://adaptivecards.io/explorer/).
 ____
@@ -54,9 +54,9 @@ You can extend the `Me` card to automatically refresh for a list of users by add
 
 The following GIF captures `Automatic refresh`, `Manual refresh`, and `Update Base Card` actions in `Me` card.
 
-![OnlyMe](Docs/Me.gif)
+![OnlyMe](docs/Me.gif)
 
-![UML](Docs/UserSpecificView_Me.png)
+![UML](docs/UserSpecificView_Me.png)
 
 The diagram above captures the sequence of events for `Me` card.
 
