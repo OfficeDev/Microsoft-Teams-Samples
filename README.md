@@ -249,7 +249,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [app-virtual-assistant#cs]:samples/app-virtual-assistant/csharp
 [identity-linking-with-sso#cs]:samples/app-identity-linking-with-sso/csharp
 [bot-proactive-msg#cs]:samples/bot-proactive-messaging/csharp
-[bot-proactive-msg-teamsfx#js]:samples/bot-proactive-messaging-teamsfx/nodejs
+[bot-proactive-msg-teamsfx#js]:samples/bot-proactive-messaging-teamsfx
 [bot-conversation-quickstart#js]:samples/bot-conversation-quickstart/js
 [bot-conversation-sso-quickstart#js]:samples/bot-conversation-sso-quickstart/js
 [bot-sharepoint-list#cs]:samples/bot-sharepoint-list/csharp
