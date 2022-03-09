@@ -16,6 +16,8 @@ createdDate: "07-07-2021 13:38:27"
 
 This sample illustrates how to implement SSO authentication for Teams Tab.
 
+![personaltabsso](Images/personaltabsso.png)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
