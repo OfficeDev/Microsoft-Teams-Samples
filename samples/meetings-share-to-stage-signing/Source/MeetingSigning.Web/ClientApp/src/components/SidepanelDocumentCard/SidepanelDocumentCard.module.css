@@ -1,0 +1,10 @@
+.sidepanelDocumentCard {
+  border-top-width: 0.1875rem !important;
+}
+
+.sidepanelDocumentCardDocument {
+  overflow: hidden;
+  max-height: 20rem;
+  white-space: nowrap;
+  font-size: 0.65rem;
+}
