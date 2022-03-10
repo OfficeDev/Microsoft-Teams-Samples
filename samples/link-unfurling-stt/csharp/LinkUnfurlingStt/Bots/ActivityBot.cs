@@ -68,7 +68,7 @@ namespace LinkUnfurlingStt.Bots
 
             card.Body.Add(new AdaptiveImage()
             {
-                Url = new Uri(_applicationBaseUrl+"/Images/Tab.png"),
+                Url = new Uri(_applicationBaseUrl+"/Tab.png"),
                 Size = AdaptiveImageSize.Medium,
                 Style = AdaptiveImageStyle.Person
             });
