@@ -9,9 +9,7 @@
     <title>App in a meeting demo</title>
     <link rel="stylesheet" href="/static/styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
-            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
-            crossorigin="anonymous"></script>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js" integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2" crossorigin="anonymous"></script>
 </head>
 <body id=mainDiv>
     <div id="chatSection" className="chatSection">
@@ -28,6 +26,10 @@
                     <img class="add-icon" src="../../Images/add_icon.svg" title="Click to continue existing conversation" />
                 </button>
 
+                <button onclick="shareToStage()" class="add-card-button">
+                    <img class="add-icon" src="../../Images/add_icon.svg" title="Click to continue existing conversation" />
+                </button>
+
                 <div id="todo">
 
                 </div>
@@ -38,6 +40,9 @@
                 </div>
 
                 <button onclick="openTaskModule('doing')" class="add-card-button">
+                    <img class="add-icon" src="../../Images/add_icon.svg" title="Click to continue existing conversation" />
+                </button>
+                <button onclick="shareToStage()" class="add-card-button">
                     <img class="add-icon" src="../../Images/add_icon.svg" title="Click to continue existing conversation" />
                 </button>
 
@@ -51,6 +56,9 @@
                 </div>
 
                 <button onclick="openTaskModule('done')" class="add-card-button">
+                    <img class="add-icon" src="../../Images/add_icon.svg" title="Click to continue existing conversation" />
+                </button>
+                <button onclick="shareToStage()" class="add-card-button">
                     <img class="add-icon" src="../../Images/add_icon.svg" title="Click to continue existing conversation" />
                 </button>
 
@@ -93,6 +101,23 @@
             microsoftTeams.tasks.startTask(taskInfo, (err, result) => {
                 updateDetails(result, status);
             });
+        };
+
+        // shareToStage.
+        const shareToStage = () => {
+            alert("inside shareToStage")
+            const appContentUrl = `${window.location.origin}/ToDo`;
+
+            microsoftTeams.meeting.shareAppContentToStage((err, result) => {
+                if (result) {
+                    // handle success
+                    alert("success")
+                }
+                if (err) {
+                    // handle error
+                    alert(JSON.stringify(err))
+                }
+            }, appContentUrl);
         };
     </script>
 </body>
