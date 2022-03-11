@@ -19,7 +19,7 @@
   },
   "description": {
     "short": "Sample to test link unfurling in STT",
-    "full": "This sample demos the feature of link ufurling in share to teams"
+    "full": "This sample demos the feature of link unfurling in share to teams"
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [

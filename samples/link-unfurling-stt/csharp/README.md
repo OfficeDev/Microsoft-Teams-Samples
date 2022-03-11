@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demos the feature of link ufurling in share to teams.
+description: This sample demos the feature of link unfurling in share to teams.
 products:
 - office-teams
 - office
@@ -14,7 +14,7 @@ createdDate: "14-03-2022 00:15:13"
 
 # Link unfruling Share to teams sample
 
-This sample demos the feature of link ufurling in share to teams.
+This sample demos the feature of link unfurling in share to teams.
 
 ## Key features
   

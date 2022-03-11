@@ -36,9 +36,10 @@ namespace LinkUnfurlingStt.Bots
         protected async override Task<MessagingExtensionResponse> OnTeamsAppBasedLinkQueryAsync(ITurnContext<IInvokeActivity> turnContext, AppBasedLinkQuery query, CancellationToken cancellationToken)
         {
             var preview = new MessagingExtensionAttachment(
-                                            contentType: HeroCard.ContentType,
-                                            contentUrl: null,
-                                            content: GetUnfurlCard());
+                                contentType: HeroCard.ContentType,
+                                contentUrl: null,
+                                content: GetUnfurlCard());
+
             return new MessagingExtensionResponse
             {
                 ComposeExtension = new MessagingExtensionResult
