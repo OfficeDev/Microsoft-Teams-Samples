@@ -58,8 +58,8 @@ server.listen(PORT, () => {
 server.use("/Images", express.static(path.resolve(__dirname, 'Images')));
 
 // Endpoint to fetch Link unfurling tab page.
-server.get('/AuthTab', (req, res, next) => {
-  res.render('./views/AuthTab')
+server.get('/tab', (req, res, next) => {
+  res.render('./views/tab')
 });
 
 server.get('*', (req, res) => {

@@ -48,13 +48,13 @@ class TeamsBot extends TeamsActivityHandler {
             },
             {
               "type": "Image",
-              "url": `${process.env.ApplicationBaseUrl}/Images/budget.png`
+              "url": `${process.env.ApplicationBaseUrl}/Images/report.png`
             }
           ],
           "actions":[
             {
                 "type": "Action.OpenUrl",
-                "title": "Action.OpenUrl",
+                "title": "Open tab",
                 "url": `https://teams.microsoft.com/l/entity/${process.env.AppId}/${process.env.EntityId}?webUrl=${process.env.ApplicationBaseUrl}/AuthTab`
               }
           ]
