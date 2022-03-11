@@ -18,11 +18,11 @@ This sample demos the feature of link unfurling in share to teams.
 
 ## Key features
   
-  ![tab](LinkUnfurlingStt/Images/Tab.png)
+  ![tab](LinkUnfurlingStt/Images/Tab.PNG)
   
   ![Link unfurling STT](LinkUnfurlingStt/Images/LinkUnfurlSTT.png)
   
-  ![Link unfurling card](LinkUnfurlingStt/Images/LinkUnfurlCard.png)
+  ![Link unfurling card](LinkUnfurlingStt/Images/LinkUnfurlCard.PNG)
    
 ## Prerequisites
 
