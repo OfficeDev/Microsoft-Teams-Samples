@@ -17,10 +17,12 @@ namespace LinkUnfurlingStt.Bots
     public class ActivityBot : TeamsActivityHandler
     {
         private readonly string _applicationBaseUrl;
+        private readonly string _microsoftAppId;
 
         public ActivityBot(IConfiguration configuration)
         {
             _applicationBaseUrl = configuration["ApplicationBaseUrl"] ?? throw new NullReferenceException("ApplicationBaseUrl");
+            _microsoftAppId= configuration["MicrosoftAppId"] ?? throw new NullReferenceException("MicrosoftAppId");
         }
 
 
@@ -36,7 +38,7 @@ namespace LinkUnfurlingStt.Bots
             var preview = new MessagingExtensionAttachment(
                                             contentType: HeroCard.ContentType,
                                             contentUrl: null,
-                                            content: GetProfileCard());
+                                            content: GetUnfurlCard());
             return new MessagingExtensionResponse
             {
                 ComposeExtension = new MessagingExtensionResult
@@ -47,7 +49,7 @@ namespace LinkUnfurlingStt.Bots
                         new MessagingExtensionAttachment
                         {
                             ContentType = AdaptiveCard.ContentType,
-                            Content = GetProfileCard(),
+                            Content = GetUnfurlCard(),
                             Preview = preview,
                         }
                     }
@@ -55,30 +57,26 @@ namespace LinkUnfurlingStt.Bots
             };
         }
 
-        private AdaptiveCard GetProfileCard()
+        // Get unfurling card.
+        private AdaptiveCard GetUnfurlCard()
         {
-
             var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
 
             card.Body.Add(new AdaptiveTextBlock()
             {
-                Text = $"User SSO details are",
+                Text = "The analytics details are",
                 Size = AdaptiveTextSize.Default
             });
 
             card.Body.Add(new AdaptiveImage()
             {
-                Url = new Uri(_applicationBaseUrl+"/Tab.png"),
-                Size = AdaptiveImageSize.Medium,
-                Style = AdaptiveImageStyle.Person
+                Url = new Uri(_applicationBaseUrl+"/report.png")
             });
 
-            card.Body.Add(new AdaptiveTextBlock()
+            card.Actions.Add(new AdaptiveOpenUrlAction()
             {
-                Text = $"Hello!",
-                Weight = AdaptiveTextWeight.Bolder,
-                IsSubtle = true,
-                Wrap = true
+                Title = "Open tab",
+                Url = new Uri($"https://teams.microsoft.com/l/entity/{_microsoftAppId}/tab?webUrl={_applicationBaseUrl}/tab")
             });
 
             return card;

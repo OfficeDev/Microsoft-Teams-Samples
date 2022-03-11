@@ -3,11 +3,7 @@
   "manifestVersion": "1.11",
   "version": "1.0.0",
   "id": "<<Microsoft-App-Id>>",
-  "packageName": "com.microsoft.teams.appcompleteauth",
-  "webApplicationInfo": {
-    "id": "<<Microsoft-App-Id>>",
-    "resource": "api://<<base-url>>/botid-<<Microsoft-App-Id>>"
-  },
+  "packageName": "com.microsoft.teams.linkunfurlingstt",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://example.azurewebsites.net",
@@ -19,18 +15,18 @@
     "outline": "icon-outline.png"
   },
   "name": {
-    "short": "App complete auth"
+    "short": "Link unfurling STT"
   },
   "description": {
-    "short": "Authentication sample for Microsoft Teams",
-    "full": "Authentication sample for Microsoft Teams"
+    "short": "Sample to test link unfurling in STT",
+    "full": "This sample demos the feature of link ufurling in share to teams"
   },
   "accentColor": "#FFFFFF",
   "staticTabs": [
     {
       "contentUrl": "https://<<base-url>>/tab",
-      "entityId": "Auth",
-      "name": "Auth",
+      "entityId": "tab",
+      "name": "Tab",
       "scopes": [
         "personal"
       ]
@@ -68,40 +64,6 @@
               "inputType": "text"
             }
           ]
-        },
-        {
-          "id": "SSO",
-          "type": "action",
-          "title": "AAD SSO authentication",
-          "description": "SSO authentication",
-          "initialRun": false,
-          "fetchTask": true,
-          "context": [
-            "commandBox",
-            "compose"
-          ]
-        },
-        {
-          "id": "FacebookLogin",
-          "description": "Sign in to facebook",
-          "title": "Facebook login (OAuth 2)",
-          "type": "action",
-          "fetchTask": true,
-          "context": [
-            "commandBox",
-            "compose"
-          ]
-        },
-        {
-          "id": "UserCredentials",
-          "description": "Sign in using user credentials",
-          "title": "User Id/password login",
-          "type": "action",
-          "fetchTask": true,
-          "context": [
-            "commandBox",
-            "compose"
-          ]
         }
       ],
       "messageHandlers": [
@@ -109,7 +71,8 @@
           "type": "link",
           "value": {
             "domains": [
-              "*.botframework.com"
+              "*.botframework.com",
+              "<<Domain-name>>"
             ]
           }
         }
