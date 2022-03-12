@@ -257,7 +257,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [bot-conversation-sso-quickstart#csharp_dotnetcore]:samples/bot-conversation-sso-quickstart/csharp_dotnetcore
 [bot-calling-meeting#csharp]:samples/bot-calling-meeting/csharp
 [botfileviewer#js]:samples/bot-sharepoint-file-viewer/nodejs
-[adaptivecards-userspecificviews#cs]:samples/adaptivecards-user-specific-views/csharp
+[adaptivecards-userspecificviews#cs]:samples/bot-adaptivecards-user-specific-views/csharp
 [meetings-token-app#cs]:samples/meetings-token-app/csharp
 [apps-in-meeting#cs]:samples/apps-in-meeting/csharp
 [meetings-token-app#js]:samples/meetings-token-app/nodejs
