@@ -25,9 +25,9 @@
                 <button onclick="openTaskModule('todo')" class="add-card-button">
                     <img class="add-icon" src="../../Images/add_icon.svg" title="Click to continue existing conversation" />
                 </button>
-
-                <button onclick="shareToStage()" class="add-card-button">
-                    <img class="add-icon" src="../../Images/add_icon.svg" title="Click to continue existing conversation" />
+                <br/>
+                <button onclick="shareSpecificPart('todo')" class="share-specific-part-button">
+                    Share To Do
                 </button>
 
                 <div id="todo">
@@ -42,8 +42,9 @@
                 <button onclick="openTaskModule('doing')" class="add-card-button">
                     <img class="add-icon" src="../../Images/add_icon.svg" title="Click to continue existing conversation" />
                 </button>
-                <button onclick="shareToStage()" class="add-card-button">
-                    <img class="add-icon" src="../../Images/add_icon.svg" title="Click to continue existing conversation" />
+                <br />
+                <button onclick="shareSpecificPart('doing')" class="share-specific-part-button">
+                    Share Doing
                 </button>
 
                 <div id="doing">
@@ -58,8 +59,9 @@
                 <button onclick="openTaskModule('done')" class="add-card-button">
                     <img class="add-icon" src="../../Images/add_icon.svg" title="Click to continue existing conversation" />
                 </button>
-                <button onclick="shareToStage()" class="add-card-button">
-                    <img class="add-icon" src="../../Images/add_icon.svg" title="Click to continue existing conversation" />
+                <br />
+                <button onclick="shareSpecificPart('done')" class="share-specific-part-button">
+                    Share Done
                 </button>
 
                 <div id="done">
@@ -104,9 +106,9 @@
         };
 
         // shareToStage.
-        const shareToStage = () => {
-            alert("inside shareToStage")
-            const appContentUrl = `${window.location.origin}/ToDo`;
+        const shareSpecificPart = (partName) => {
+            var appContentUrl = "";
+            appContentUrl = partName == 'todo' ? `${window.location.origin}/ToDo` : partName == 'doing' ? `${window.location.origin}/Doing` : `${window.location.origin}/Done`;
 
             microsoftTeams.meeting.shareAppContentToStage((err, result) => {
                 if (result) {
