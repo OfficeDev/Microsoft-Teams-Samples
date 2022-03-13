@@ -28,7 +28,7 @@ This capability is currently available in developer preview only.
 
 - Sharing specific part of your app to the meeting stage.
 
-![Stage View Screen](AppInMeeting/Images/share_specific_part.png)
+![Share Specific part screen](AppInMeeting/Images/share_specific_part.png)
 
 ## Prerequisites
 
@@ -121,4 +121,8 @@ This capability is currently available in developer preview only.
 - App in sidepanel.
 
 ![App in sidepanel](AppInMeeting/Images/side_panel.png)
+
+- Sharing specific parts of app.
+
+![Share specific part](AppInMeeting/Images/share_specific_part_sidepanel.png)
 
