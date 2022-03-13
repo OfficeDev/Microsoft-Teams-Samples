@@ -1,0 +1,92 @@
+﻿{
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Conversation will be created between the selected users.",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Enter Name of Group Chat"
+    },
+    {
+      "type": "Input.Text",
+      "spacing": "Medium",
+      "id": "title"
+    },
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Enter Message"
+    },
+    {
+      "type": "Input.Text",
+      "spacing": "Medium",
+      "id": "message"
+    },
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Select Context"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "choices": [
+        {
+          "title": "CurrentContext",
+          "value": "CurrentContext"
+        },
+        {
+          "title": "OrgWide",
+          "value": "OrgWide"
+        }
+      ],
+      "value": "CurrentContext",
+      "id" :  "choice"
+    },
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Search User (SAME CONTEXT)"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "choices.data": {
+        "type": "Data.Query",
+        "dataset": "graph.microsoft.com/users?scope=currentContext"
+      },
+      "id": "people-picker-current",
+      "isMultiSelect": true
+    },
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Search User (ORG WIDE)"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "choices.data": {
+        "type": "Data.Query",
+        "dataset": "graph.microsoft.com/users"
+      },
+      "id": "people-picker-org",
+      "isMultiSelect": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Execute",
+      "title": "Submit",
+      "verb": "userlike"
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5"
+}

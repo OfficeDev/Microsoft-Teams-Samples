@@ -1,0 +1,130 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.9",
+  "version": "1.0.0",
+  "id": "64fa65ef-9eab-4922-8816-beb6f1b1224c",
+  "packageName": "com.microsoft.teams.samples.peoplepicker",
+  "developer": {
+    "name": "{DeveloperName}",
+    "websiteUrl": "https://{WebsiteUrl}",
+    "privacyUrl": "https://{BaseUrl}/privacy",
+    "termsOfUseUrl": "https://{BaseUrl}/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "People Picker Sample",
+    "full": "People Picker Sample"
+  },
+  "description": {
+    "short": "{Short description.}",
+    "full": "{Long description.}"
+  },
+  "bots": [
+    {
+      "botId": "{Bot App Id}",
+      "scopes": [
+        "personal",
+        "team",
+        "groupchat"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false,
+      "commandLists": [
+        {
+          "scopes": [
+            "personal"
+          ],
+          "commands": [
+            {
+              "title": "task",
+              "description": "Task Module Adaptive Card implementation Demo"
+            },
+            {
+              "title": "card",
+              "description": "Chat Bot Adaptive Card implementation Demo"
+            }
+          ]
+        },
+        {
+          "scopes": [
+            "team"
+          ],
+          "commands": [
+            {
+              "title": "task",
+              "description": "Task Module Adaptive Card implementation Demo"
+            },
+            {
+              "title": "card",
+              "description": "Chat Bot Adaptive Card implementation Demo"
+            }
+          ]
+        },
+        {
+          "scopes": [
+            "groupchat"
+          ],
+          "commands": [
+            {
+              "title": "task",
+              "description": "Task Module Adaptive Card implementation Demo"
+            },
+            {
+              "title": "card",
+              "description": "Chat Bot Adaptive Card implementation Demo"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "{Bot App Id}",
+      "commands": [
+        {
+          "id": "CurrentContext",
+          "context": [
+            "message"
+          ],
+          "description": "Renders Adaptive Card for Current Context",
+          "type": "action",
+          "fetchTask": true,
+          "title": "Share(Current)"
+        },
+        {
+          "id": "OrgWideContext",
+          "context": [
+            "message"
+          ],
+          "description": "Renders Adaptive Card for OrgWide Context",
+          "type": "action",
+          "fetchTask": true,
+          "title": "Share(OrgWide)"
+        }
+      ],
+      "messageHandlers": [
+        {
+          "type": "link",
+          "value": {
+            "domains": [
+              "*.botframework.com"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "accentColor": "#FFFFFF",
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.ngrok.io",
+    "*.botframework.com"
+  ]
+}

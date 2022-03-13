@@ -1,0 +1,34 @@
+﻿{
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Generate People Picker Task Module for"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "CURRENT CONTEXT",
+      "data": {
+        "msteams": {
+          "type": "task/fetch"
+        },
+        "data": "CurrentContext"
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "ORG WIDE USERS",
+      "data": {
+        "msteams": {
+          "type": "task/fetch"
+        },
+        "data": "OrgWideContext"
+      }
+    }
+  ],
+  "version": "1.5"
+}

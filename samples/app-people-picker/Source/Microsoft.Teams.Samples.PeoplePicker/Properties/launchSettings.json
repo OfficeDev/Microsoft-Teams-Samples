@@ -1,0 +1,32 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:50086",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "https://teams.microsoft.com/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "hotReloadProfile": "aspnetcore"
+    },
+    "Microsoft.Teams.Samples.PeoplePicker": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "https://teams.microsoft.com/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "hotReloadProfile": "aspnetcore",
+      "dotnetRunMessages": "true",
+      "applicationUrl": "https://localhost:44357;http://localhost:50086"
+    }
+  }
+}

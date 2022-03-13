@@ -1,0 +1,57 @@
+﻿{
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Group conversaiton will be created between the selected users.",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Enter the title of group conversation"
+    },
+    {
+      "type": "Input.Text",
+      "spacing": "Medium",
+      "id": "title"
+    },
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Enter the welcome message"
+    },
+    {
+      "type": "Input.Text",
+      "spacing": "Medium",
+      "id": "message",
+      "isMultiline": true,
+      "value": "${text}"
+    },
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "Search user (ORG WIDE CONTEXT)"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "choices.data": {
+        "type": "Data.Query",
+        "dataset": "graph.microsoft.com/users"
+      },
+      "id": "people-picker",
+      "isMultiSelect": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Submit"
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5"
+}
