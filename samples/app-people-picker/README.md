@@ -37,7 +37,7 @@ This sample illustrates [people picker implementation using Adaptive Card](https
 
 #### Adaptive Card
 
-![Preview](Docs/card.png)
+![Preview](Docs/Card.png)
 
 ##### Workflow:
 * User invokes the people picker bot and [selects "card" bot command](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-commands-menu?tabs=desktop%2Cdotnet). NOTE : Bot can be invoked in 1-1 conversation, group or channel.
