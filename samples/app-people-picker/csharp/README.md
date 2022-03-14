@@ -80,7 +80,7 @@ This sample illustrates [people picker implementation using Adaptive Card](https
 * [Register a bot with Azure](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-4.0&tabs=userassigned).
   * Make sure to copy and save the Azure Bot resource app ID and password.
 * [Connect the bot to Microsoft Teams](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0).
-* Run ngrok and point it to port: 3978.
+* Run ngrok and point it to port: 50086.
     ```
     ngrok http 50086 -host-header=localhost:50086
     ```
@@ -105,12 +105,12 @@ This sample illustrates [people picker implementation using Adaptive Card](https
   * TeamsAppInstallation.ReadWriteForChat.All
 * Grant Admin consent.
   * If you are the Admin, then admin consent can be granted from API permissions page by clicking Grant Admin consent once an API permission is added.
-  * If you are not the admin, share the following URL with the admin and request to grant consent.  
+  * If you are not the admin, share the following URL with the admin and request to grant consent.
     * URL - https://login.microsoftonline.com/{tenant-id}/adminconsent?client_id={app-id} where
     * {app-id} is the app ID saved earlier.
     * {tenant-id} is your organization's tenant ID.
 
-NOTE : We can add the above API permissions to a new application by [Registering a new app with Azure AD](https://docs.microsoft.com/en-us/powerapps/developer/data-platform/walkthrough-register-app-azure-active-directory) and save new App Id and Client Secret specifically for Graph API calls. Being a Sample, we are lmiting to single app registration only. 
+NOTE : We can add the above API permissions to a new application by [Registering a new app with Azure AD](https://docs.microsoft.com/en-us/powerapps/developer/data-platform/walkthrough-register-app-azure-active-directory) and save new App Id and Client Secret specifically for Graph API calls. Being a Sample, we are lmiting to single app registration only.
 
 ##### Project setup
 * Clone the repo or download the sample code to your machine.
