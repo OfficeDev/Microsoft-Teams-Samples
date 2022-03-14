@@ -8,10 +8,9 @@
   <title>App in meeting - Stage View</title>
   <link rel="stylesheet" href="styles.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
-    integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
-    crossorigin="anonymous"></script>
+  <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js" integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2" crossorigin="anonymous"></script>
   <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+  <!-- <script src="/static/socket.js"></script> -->
 </head>
 
 <body id=mainDiv>
@@ -28,6 +27,10 @@
         <button onclick="openTaskModule('todo')" class="add-card-button">
           <img class="add-icon" src="/Images/add_icon.svg" title="Click to continue existing conversation" />
         </button>
+        <br/>
+        <button onclick="shareSpecificPart('todo')" class="share-specific-part-button">
+          Share To Do
+        </button>
 
         <div id="todo">
           <!-- The statud details will be updated here on runtime -->
@@ -40,6 +43,10 @@
 
         <button onclick="openTaskModule('doing')" class="add-card-button">
           <img class="add-icon" src="/Images/add_icon.svg" title="Click to continue existing conversation" />
+        </button>
+        <br />
+        <button onclick="shareSpecificPart('doing')" class="share-specific-part-button">
+            Share Doing
         </button>
 
         <div id="doing">
@@ -54,7 +61,11 @@
         <button onclick="openTaskModule('done')" class="add-card-button">
           <img class="add-icon" src="/Images/add_icon.svg" title="Click to continue existing conversation" />
         </button>
-
+        <br />
+        <button onclick="shareSpecificPart('done')" class="share-specific-part-button">
+            Share Done
+        </button>
+        
         <div id="done">
           <!-- The statud details will be updated here on runtime -->
         </div>
@@ -80,7 +91,7 @@
       }
     });
 
-    // Creating socket instance for real time status updates in stage view.
+    // // Creating socket instance for real time status updates in stage view.
     const socket = io();
     socket.on('connection')
 
@@ -109,6 +120,22 @@
         socket.emit('message', taskDetails, status);
       });
     };
+
+    // shareToStage.
+    const shareSpecificPart = (partName) => {
+            var appContentUrl = "";
+            appContentUrl = partName == 'todo' ? `${window.location.origin}/todoView` : partName == 'doing' ? `${window.location.origin}/doingView` : `${window.location.origin}/doneView`;
+            microsoftTeams.meeting.shareAppContentToStage((err, result) => {
+                if (result) {
+                    // handle success
+                    alert("success")
+                }
+                if (err) {
+                    // handle error
+                    alert(JSON.stringify(err))
+                }
+            }, appContentUrl);
+        };
   </script>
 </body>
 

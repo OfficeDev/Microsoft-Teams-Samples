@@ -25,6 +25,18 @@ app.get('/appInMeeting', function (req, res) {
   res.render('./views/appInMeeting');
 });
 
+app.get('/todoView', function (req, res) {
+  res.render('./views/todo');
+});
+
+app.get('/doingView', function (req, res) {
+  res.render('./views/doing');
+});
+
+app.get('/doneView', function (req, res) {
+  res.render('./views/done');
+});
+
 app.use("/Images", express.static(path.resolve(__dirname, './Images')));
 
 io.on("connection", (socket) => {
