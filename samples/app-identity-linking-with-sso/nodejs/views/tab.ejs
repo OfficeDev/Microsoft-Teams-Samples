@@ -97,7 +97,7 @@
 
     <script>
         let clientId =  <%-clientId%>
-            let accessToken;
+        let accessToken;
         let redirectUriFb = window.location.origin + "/fb-auth";
         let redirectUriGoogle = window.location.origin + "/google-auth";
         let is_google_signed_in = false;
@@ -127,12 +127,12 @@
 
                             if (userDetails.is_google_signed_in) {
                                 is_google_signed_in = userDetails.is_google_signed_in
-                                getGoogleDetails(userDetails.google_token);
+                                getGoogleDetails();
                             }
 
                             if (userDetails.is_fb_signed_in) {
                                 is_fb_signed_in = userDetails.is_fb_signed_in
-                                getFbDetails(userDetails.facebook_token);
+                                getFbDetails();
                             }
                         }
                     }
@@ -198,34 +198,35 @@
                         mode: 'cors',
                         cache: 'default'
                     })
-                        .then((response) => {
-                            if (response.ok) {
-                                return response.json();
-                            } else {
-                                reject(response.error);
-                            }
-                        })
-                        .then((responseJson) => {
-                            if (responseJson.error) {
-                                reject(responseJson.error);
-                            } else {
-                                const userDetails = responseJson;
-                                $("#sso").hide();
-                                $("#userImgSso").attr("src", userDetails.image);
-                                $("#name").append(userDetails.details.displayName);
-                                $("#email").append(userDetails.details.userPrincipalName);
-                                $("#work").append(userDetails.details.jobTitle);
-                                getUserDetails(context.upn);
+                    .then((response) => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            reject(response.error);
+                        }
+                    })
+                    .then((responseJson) => {
+                        if (responseJson.error) {
+                            reject(responseJson.error);
+                        } 
+                        else {
+                            const userDetails = responseJson;
+                            $("#sso").hide();
+                            $("#userImgSso").attr("src", userDetails.image);
+                            $("#name").append(userDetails.details.displayName);
+                            $("#email").append(userDetails.details.userPrincipalName);
+                            $("#work").append(userDetails.details.jobTitle);
+                            getUserDetails(context.upn);
 
-                                if (is_google_signed_in) {
-                                    $("#googlelogin").hide();
-                                }
-
-                                if (is_fb_signed_in) {
-                                    $("#facebooklogin").hide();
-                                }
+                            if (is_google_signed_in) {
+                                $("#googlelogin").hide();
                             }
-                        });
+
+                            if (is_fb_signed_in) {
+                                $("#facebooklogin").hide();
+                            }
+                        }
+                    });
                 });
             });
         }
@@ -323,7 +324,7 @@
         function getServerSideTokenFb(clientSideToken) {
             return new Promise((resolve, reject) => {
                 microsoftTeams.getContext((context) => {
-                    fetch('/getFbAccessToken', {
+                    fetch('/getFbDetailsOauth', {
                         method: 'post',
                         headers: {
                             'Content-Type': 'application/json'
@@ -394,7 +395,7 @@
         function getServerSideTokenGoogle(clientSideToken) {
             return new Promise((resolve, reject) => {
                 microsoftTeams.getContext((context) => {
-                    fetch('/getGoogleAccessToken', {
+                    fetch('/getGoogleDetailsOauth', {
                         method: 'post',
                         headers: {
                             'Content-Type': 'application/json'
@@ -432,52 +433,56 @@
         }
 
         // Get google details.
-        function getGoogleDetails(token) {
-            $.ajax({
-                type: 'POST',
-                url: '/getGoogleDetails',
-                dataType: 'json',
-                data: {
-                    'token': token
-                }, success: function (responseJson) {
-                    if (responseJson.message == "Request failed with status code 401") {
-                        googleAuth();
+        function getGoogleDetails() {
+            microsoftTeams.getContext((context) => {
+                $.ajax({
+                    type: 'POST',
+                    url: '/getGoogleDetails',
+                    dataType: 'json',
+                    data: {
+                        'userName': context.upn
+                    }, success: function (responseJson) {
+                        if (responseJson.message == "Request failed with status code 401") {
+                            googleAuth();
+                        }
+                        else {
+                            let userDetails = responseJson;
+                            console.log(userDetails);
+                            $("#userImgGoogle").attr("src", userDetails.photos[0].url);
+                            $("#gname").append(userDetails.names[0].displayName);
+                            $("#gemail").append(userDetails.emailAddresses[0].value);
+                            $("#google-disConnect").show();
+                            $("#googlelogin").hide();
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                     }
-                    else {
-                        let userDetails = responseJson;
-                        console.log(userDetails);
-                        $("#userImgGoogle").attr("src", userDetails.photos[0].url);
-                        $("#gname").append(userDetails.names[0].displayName);
-                        $("#gemail").append(userDetails.emailAddresses[0].value);
-                        $("#google-disConnect").show();
-                        $("#googlelogin").hide();
-                    }
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-                }
+                })
             })
         }
 
         // Get facebook details.
-        function getFbDetails(token) {
-            $.ajax({
-                type: 'POST',
-                url: '/getFbDetails',
-                dataType: 'json',
-                data: {
-                    'token': token
-                }, success: function (responseJson) {
-                    let userFbDetails = responseJson;
-                    $("#fbname").append(userFbDetails.name);
-                    $("#userImgFb").attr("src", userFbDetails.picture.data.url);
-                    $("#fb-disConnect").show();
-                    $("#facebooklogin").hide();
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-                    fbAuth();
-                }
+        function getFbDetails() {
+            microsoftTeams.getContext((context) => {
+                $.ajax({
+                    type: 'POST',
+                    url: '/getFbDetails',
+                    dataType: 'json',
+                    data: {
+                        'userName': context.upn
+                    }, success: function (responseJson) {
+                        let userFbDetails = responseJson;
+                        $("#fbname").append(userFbDetails.name);
+                        $("#userImgFb").attr("src", userFbDetails.picture.data.url);
+                        $("#fb-disConnect").show();
+                        $("#facebooklogin").hide();
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                        fbAuth();
+                    }
+                })
             })
         }
 

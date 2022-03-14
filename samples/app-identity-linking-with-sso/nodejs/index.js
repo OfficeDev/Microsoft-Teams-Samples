@@ -293,7 +293,7 @@ server.post('/GetUserDetails', async (req, res) => {
 });
 
 // Facebook Oauth token axchange
-server.post('/getFbAccessToken', function (req, res) {
+server.post('/getFbDetailsOauth', function (req, res) {
   var token = req.body.token;
   var userName = req.body.userName;
   var accessToken;
@@ -343,7 +343,7 @@ server.post('/getFbAccessToken', function (req, res) {
   });
 });
 
-server.post('/getGoogleAccessToken', function (req, res) {
+server.post('/getGoogleDetailsOauth', function (req, res) {
   var token = req.body.token;
   var userName = req.body.userName;
   var accessToken;
@@ -390,7 +390,13 @@ server.post('/getGoogleAccessToken', function (req, res) {
 });
 
 server.post('/getGoogleDetails', function (req,res){
-  var token = req.body.token;
+  var userName = req.body.userName;
+  var token;
+  var currentData = userDetails["userDetails"];
+  currentData.map((user) => {
+    if (user.aad_id == userName) {
+      token = user.google_token;
+    }})
   var googlePromise = new Promise((resolve, reject) => {
     axios.get('https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,photos,urls', {
       headers: {
@@ -411,7 +417,13 @@ server.post('/getGoogleDetails', function (req,res){
 })
 
 server.post('/getFbDetails',function (req,res){
-  var token = req.body.token;
+  var userName = req.body.userName;
+  var token;
+  var currentData = userDetails["userDetails"];
+  currentData.map((user) => {
+    if (user.aad_id == userName) {
+      token = user.facebook_token;
+    }})
   var scopes = ['name','picture','id'].join(',');
   var fbPromise = new Promise((resolve, reject) => {  
     axios.get('https://graph.facebook.com/v2.6/me', {

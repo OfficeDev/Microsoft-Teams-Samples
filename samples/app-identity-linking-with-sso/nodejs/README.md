@@ -23,9 +23,15 @@ Bot Mapping
 
 ![Bot](Images/BotLinkingOptionCard.png)
 
+- Click on `Connect to facebook` or `Connect to google` button you will get a sign in card. Click on sign in button and provide your facebook or google credentials.
+- Once you get login successfully you will get a card with details of facebook/google with AAD.
+
 Tab mapping
 
 ![Tab](Images/Tab.png)
+
+- Click on `Connect to facebook` or `Connect to google` button you will be redirected to login page.    Provide your facebook/google credentials.
+- Once you get login successfully your details will be shown in the card.
 
 Messaging Extention mapping
 
@@ -45,6 +51,8 @@ Messaging Extention mapping
 
   ![ME Link unfurling](Images/MELinkUnfurlingCard.png)
 
+- On Click of `Disconnect from facebook` or `Disconnect from google`. User's facebook/google data will be removed from the data base.
+ 
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
