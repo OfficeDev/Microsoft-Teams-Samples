@@ -1,6 +1,7 @@
 ﻿
 using IdentityLinkingWithSSO.helper;
 using IdentityLinkingWithSSO.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -34,7 +35,7 @@ namespace IdentityLinkingWithSSO.Controllers
 
         // Get user access token.
         [HttpPost]
-        [Route("GetUserAccessToken")]
+        [Route("GetProfileOnBehalfOf")]
         public async Task<JsonResult> GetUserAccessToken(string accessToken, string tid, string userName)
         {
             try
@@ -48,7 +49,8 @@ namespace IdentityLinkingWithSSO.Controllers
 
                 var photo = await client.GetPhotoAsync();
 
-                var userInfo = new UserData() {
+                var userInfo = new UserData()
+                {
                     User = me,
                     Photo = photo,
                     Title = title
@@ -132,7 +134,18 @@ namespace IdentityLinkingWithSSO.Controllers
 
             if (index != -1)
             {
-                var userInfo = UserMapData[index];
+                var userInfo = new UserMapData()
+                {
+                    AadId = UserMapData[index].AadId,
+                    isAadSignedIn = UserMapData[index].isAadSignedIn,
+                    AadToken = "",
+                    FacebookId = UserMapData[index].FacebookId,
+                    FacebookToken = "",
+                    isFacebookSignedIn = UserMapData[index].isFacebookSignedIn,
+                    GoogleId = UserMapData[index].GoogleId,
+                    GoogleToken = "",
+                    isGoogleSignedIn = UserMapData[index].isGoogleSignedIn,
+                };
                 var jsonString = JsonConvert.SerializeObject(userInfo);
                 return Json(jsonString);
             }
@@ -145,7 +158,7 @@ namespace IdentityLinkingWithSSO.Controllers
 
         // Get facebook profile of user.
         [HttpPost]
-        [Route("getFbAccessToken")]
+        [Route("getFbDetailsOauth")]
         public async Task<JsonResult> GetFacebookAuthToken(string accessToken, string userName)
         {
             var fbAppId = _configuration["FacebookAppId"];
@@ -194,11 +207,13 @@ namespace IdentityLinkingWithSSO.Controllers
         // Get facebook profile of exisiting mapped user.
         [HttpPost]
         [Route("getFbDetails")]
-        public async Task<JsonResult> GetFbDetails(string token)
+        public async Task<JsonResult> GetFbDetails(string userName)
         {
+            int index = UserMapData.FindIndex(e => e.AadId == userName);
+            var data = UserMapData[index];
             var profile = FacebookHelper.GetUri("https://graph.facebook.com/me",
             Tuple.Create("fields", "name,picture,id"),
-            Tuple.Create("access_token", token));
+            Tuple.Create("access_token", data.FacebookToken));
 
             var res = await FacebookHelper.FacebookRequest<FacebookProfile>(profile);
             var result = new
@@ -232,7 +247,7 @@ namespace IdentityLinkingWithSSO.Controllers
 
         // Get google profile of user.
         [HttpPost]
-        [Route("getGoogleAccessToken")]
+        [Route("getGoogleDetailsOauth")]
         public async Task<JsonResult> GetGoogleAccessToken(string accessToken, string userName)
         {
             var redirectUrl = _configuration["ApplicationBaseUrl"] + "/google-auth-end";
@@ -247,9 +262,9 @@ namespace IdentityLinkingWithSSO.Controllers
             {
                 try
                 {
-                responseBody = await response.Content.ReadAsStringAsync();
-                var token = JsonConvert.DeserializeObject<dynamic>(responseBody).access_token;
-                var client2 = new HttpClient();
+                    responseBody = await response.Content.ReadAsStringAsync();
+                    var token = JsonConvert.DeserializeObject<dynamic>(responseBody).access_token;
+                    var client2 = new HttpClient();
                     client2.DefaultRequestHeaders.Accept.Clear();
                     client2.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
 
@@ -259,7 +274,7 @@ namespace IdentityLinkingWithSSO.Controllers
                     var state = (JArray)profile.ToObject<CardTaskFetchValue<JArray>>()?.Names;
                     List<UserData> items = ((JArray)state).Select(x => new UserData
                     {
-                       DisplayName = (string)x["displayName"]
+                        DisplayName = (string)x["displayName"]
                     }).ToList();
 
                     var state2 = (JArray)profile.ToObject<CardTaskFetchValue<JArray>>()?.Photos;
@@ -299,12 +314,13 @@ namespace IdentityLinkingWithSSO.Controllers
 
                     return Json(jsonString);
 
-            }catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                return null;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                    return null;
+                }
             }
-        }
             else
             {
                 return Json("Error occoured");
@@ -314,11 +330,13 @@ namespace IdentityLinkingWithSSO.Controllers
         // Get google profile of existing mapped user.
         [HttpPost]
         [Route("getGoogleDetails")]
-        public async Task<JsonResult> GetGoogleDetails(string token)
+        public async Task<JsonResult> GetGoogleDetails(string userName)
         {
             var client2 = new HttpClient();
             client2.DefaultRequestHeaders.Accept.Clear();
-            client2.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            int index = UserMapData.FindIndex(e => e.AadId == userName);
+            var data = UserMapData[index];
+            client2.DefaultRequestHeaders.Add("Authorization", "Bearer " + data.GoogleToken);
 
             var json = await client2.GetStringAsync(String.Format("https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,photos,urls")).ConfigureAwait(false);
             var jboject = JsonConvert.DeserializeObject(json);

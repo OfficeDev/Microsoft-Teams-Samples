@@ -25,9 +25,9 @@
             margin-top: 0.5rem;
         }
 
-         .card:hover {
-            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-         }
+            .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            }
 
         .container {
             padding: 2px 2px;
@@ -83,10 +83,10 @@
             margin-left: 46%;
         }
 
-        .facebook:hover {
-            background-color: #4267b2;
-            border-color: #4267b2;
-        }
+            .facebook:hover {
+                background-color: #4267b2;
+                border-color: #4267b2;
+            }
 
         .googlebutton {
             border: 2px solid #000;
@@ -115,14 +115,10 @@
         var googleLogo = baseUrl + "/googleIcon.png";
         $("#googleLogo").attr("src", googleLogo);
         let accessToken;
-
         $(document).ready(function () {
-
             ssoAuthentication();
         });
-
         microsoftTeams.initialize();
-
         // Get user details
         function getUserDetails(userName) {
             $.ajax({
@@ -138,14 +134,15 @@
                     }
                     else {
                         const userDetails = JSON.parse(responseJson);
+                        console.log(userDetails);
                         if (userDetails.isAadSignedIn) {
                             if (userDetails.isGoogleSignedIn) {
                                 is_google_signed_in = true;
-                                setTimeout(() => { getGoogleDetails(userDetails.GoogleToken) }, 3000);
+                                setTimeout(() => { getGoogleDetails() }, 3000);
                             }
                             if (userDetails.isFacebookSignedIn) {
                                 is_fb_signed_in = true;
-                                getFbDetails(userDetails.FacebookToken);
+                                getFbDetails();
                             }
                         }
                     }
@@ -155,12 +152,13 @@
                 }
             });
         };
-
         // Tab sso authentication.
         function ssoAuthentication()
         {
+            alert("inside sso");
              getClientSideToken()
-            .then((clientSideToken) => {
+                 .then((clientSideToken) => {
+                     console.log("id token recieved");
                 return getServerSideToken(clientSideToken);
             })
             .catch((error) => {
@@ -181,29 +179,27 @@
                 }
             });
         }
-
         // Get client side token.
         function getClientSideToken() {
-
             return new Promise((resolve, reject) => {
             microsoftTeams.authentication.getAuthToken({
                 successCallback: (result) => {
                     resolve(result);
                 },
                 failureCallback: function (error) {
+                    console.log("id error");
                     reject("Error getting token: " + error);
                 }
             });
          });
         }
-
         // Get server side token and user profile.
         function getServerSideToken(clientSideToken) {
             return new Promise((resolve, reject) => {
                 microsoftTeams.getContext((context) => {
                     $.ajax({
                         type: 'POST',
-                        url: '/GetUserAccessToken',
+                        url: '/GetProfileOnBehalfOf',
                         dataType: 'json',
                         data: {
                             'accessToken': clientSideToken,
@@ -234,7 +230,6 @@
                 });
             });
         }
-
         // Request consent on implicit grant error.
         function requestConsent() {
             getToken()
@@ -247,7 +242,6 @@
             });
           });
         }
-
         // Get token for multi tenant.
         function getToken() {
             return new Promise((resolve, reject) => {
@@ -264,7 +258,6 @@
                 });
             });
         }
-
         // Get user information.
         function getUserInfo(userPrincipleName) {
             if (userPrincipleName) {
@@ -290,7 +283,6 @@
              });
           }
         }
-
         // Initiate facebook login.
         function facebookLogin() {
             fbAuthentication()
@@ -301,7 +293,6 @@
                     console.log(error);
                 });
         }
-
         // Get client side token for facebook.
         function fbAuthentication() {
             return new Promise((resolve, reject) => {
@@ -321,15 +312,13 @@
                 });
             });
         }
-
         // Get face book profile of user.
         function getServerSideTokenFb(clientSideToken) {
             return new Promise((resolve, reject) => {
                 microsoftTeams.getContext((context) => {
-
                     $.ajax({
                         type: 'POST',
-                        url: '/getFbAccessToken',
+                        url: '/getFbDetailsOauth',
                         dataType: 'json',
                         data: {
                             'accessToken': clientSideToken,
@@ -350,7 +339,6 @@
                 });
             });
         }
-
         // Initiate google login.
         function googleAuth() {
             googleAuthentication()
@@ -361,7 +349,6 @@
                     console.log(error);
                 });
         }
-
         // Get client side token for facebook.
         function googleAuthentication() {
             return new Promise((resolve, reject) => {
@@ -381,15 +368,13 @@
                 });
             });
         }
-
         // Get face book profile of user.
         function getServerSideTokenGoogle(clientSideToken) {
             return new Promise((resolve, reject) => {
                 microsoftTeams.getContext((context) => {
-
                     $.ajax({
                         type: 'POST',
-                        url: '/getGoogleAccessToken',
+                        url: '/getGoogleDetailsOauth',
                         dataType: 'json',
                         data: {
                             'accessToken': clientSideToken,
@@ -412,15 +397,14 @@
                 });
             });
         }
-
-        function getFbDetails(token) {
-            console.log("da" + token);
+        function getFbDetails() {
+            microsoftTeams.getContext((context) => {
             $.ajax({
                 type: 'POST',
                 url: '/getFbDetails',
                 dataType: 'json',
                 data: {
-                    'token': token
+                    'userName': context.upn
                 }, success: function (responseJson) {
                     let facebookProfile = JSON.parse(responseJson);
                     $("#fbname").append(facebookProfile.name);
@@ -433,16 +417,17 @@
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                     fbAuth();
                 }
-            })
+             })
+          })
         }
-
-        function getGoogleDetails(token) {
+        function getGoogleDetails() {
+            microsoftTeams.getContext(function (context) {
             $.ajax({
                 type: 'POST',
                 url: '/getGoogleDetails',
                 dataType: 'json',
                 data: {
-                    'token': token
+                    'userName': context.upn
                 }, success: function (responseJson) {
                     if (responseJson.message == "Request failed with status code 401") {
                         googleAuth();
@@ -460,6 +445,7 @@
                 error: function (xhr, textStatus, errorThrown) {
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                 }
+            })
             })
         }
 
@@ -538,8 +524,8 @@
                             Consent
                         </button>
                     </div>
-                    </div>
                 </div>
+            </div>
             <div id="cardFacebook">
                 <div class="signin-header"><b>User info from facebook</b></div>
                 <div class="card">
@@ -580,5 +566,5 @@
                 </div>
             </div>
         </div>
-     </div>
+    </div>
 </body>
