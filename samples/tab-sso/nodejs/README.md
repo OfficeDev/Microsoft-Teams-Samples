@@ -13,7 +13,7 @@ extensions:
   createdDate: 12/3/2021 12:53:17 PM
 ---
 
-# Tabs Azure AD Single Sign-On Sample
+# Tabs Azure AD SSO Sample - Node.js
 
 This sample shows how to implement Azure AD single sign-on support for tabs. It will:
 
