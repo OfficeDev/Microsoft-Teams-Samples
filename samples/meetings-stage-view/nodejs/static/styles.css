@@ -129,6 +129,16 @@
   border: 1px solid #b7b7b7;
 }
 
+.share-specific-part-button {
+  height: 32px;
+  cursor: pointer;
+  margin-top: 10px;
+  background-color: #484644;
+  color: #ffffff;
+  border: 1px solid #b7b7b7;
+  margin-top: 5px;
+}
+
 .add-icon {
   color: #5b5b5b;
   height: 20px;
