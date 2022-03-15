@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demos the feature of link unfurling in share to teams.
+description: This sample demos the feature of link unfurling for share to teams.
 products:
 - office-teams
 - office
@@ -15,15 +15,15 @@ createdDate: "14-03-2022 00:15:13"
 
 # Link unfruling Share to teams sample
 
-This sample demos the feature of link unfurling in share to teams.
+This sample demos the feature of link unfurling for share to teams (The Share to Teams feature allows site users to easily share a site and content to individual contacts or groups on Teams.).
 
 ## Key features
   
-  ![tab](Images/Tab.PNG)
+  ![tab](Images/Tab.png)
   
   ![Link unfurling STT](Images/LinkUnfurlSTT.png)
   
-  ![Link unfurling card](Images/LinkUnfurlCard.PNG)
+  ![Link unfurling card](Images/LinkUnfurlCard.png)
 
 ## Prerequisites
 
@@ -56,7 +56,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
-5) Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`, `BaseUrl` with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.). Also update `AppId` and `EntityId` where Appid will be the manifest id and entity id will be the entity id of tab (Here entity id is tab).
+5) Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`, `BaseUrl` with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.).
 
 6) Run your app
 

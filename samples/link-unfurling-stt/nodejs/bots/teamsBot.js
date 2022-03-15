@@ -18,6 +18,7 @@ class TeamsBot extends TeamsActivityHandler {
         });
     }
 
+    // Invoked when an app based link query activity is received from the connector.
     async handleTeamsAppBasedLinkQuery(context, query) {
         var userCard = CardFactory.adaptiveCard(this.getLinkUnfurlingCard());
         const preview = CardFactory.thumbnailCard(
@@ -34,6 +35,7 @@ class TeamsBot extends TeamsActivityHandler {
         }
     }
 
+    // Adaptive card for link unfurling.
     getLinkUnfurlingCard = () => {
         var card = {
           "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
@@ -55,7 +57,7 @@ class TeamsBot extends TeamsActivityHandler {
             {
                 "type": "Action.OpenUrl",
                 "title": "Open tab",
-                "url": `https://teams.microsoft.com/l/entity/${process.env.AppId}/${process.env.EntityId}?webUrl=${process.env.ApplicationBaseUrl}/AuthTab`
+                "url": `https://teams.microsoft.com/l/entity/${process.env.MicrosoftAppId}/tab?webUrl=${process.env.ApplicationBaseUrl}/AuthTab`
               }
           ]
         }
