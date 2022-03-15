@@ -26,6 +26,10 @@ This capability is currently available in developer preview only.
 
 ![Stage View Screen](Images/stage_view.png)
 
+- Sharing specific part of your app to the meeting stage.
+
+![Share Specific part screen](Images/share_specific_part.png)
+
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/en/)
@@ -105,4 +109,4 @@ This capability is currently available in developer preview only.
 
 - Sharing specific parts of app.
 
-![Share specific part](AppInMeeting/Images/share_specific_part_sidepanel.png)
+![Share specific part](Images/share_specific_part_sidepanel.png)
