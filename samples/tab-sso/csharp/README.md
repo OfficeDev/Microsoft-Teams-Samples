@@ -13,7 +13,7 @@ extensions:
   createdDate: 12/3/2021 12:53:17 PM
 ---
 
-# Tabs Azure AD Single Sign-On Sample
+# Tabs Azure AD SSO Sample - C#
 
 This sample illustrates how to implement SSO authentication for Teams Tab.
 
