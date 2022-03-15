@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demos the feature of link unfurling in share to teams.
+description: This sample demos the feature of link unfurling for Share to teams.
 products:
 - office-teams
 - office
@@ -14,15 +14,15 @@ createdDate: "14-03-2022 00:15:13"
 
 # Link unfruling Share to teams sample
 
-This sample demos the feature of link unfurling in share to teams.
+This sample demos the feature of link unfurling for Share to teams (The Share to Teams feature allows site users to easily share a site and content to individual contacts or groups on Teams.).
 
 ## Key features
   
-  ![tab](LinkUnfurlingStt/Images/Tab.PNG)
+  ![tab](LinkUnfurlingStt/Images/Tab.png)
   
   ![Link unfurling STT](LinkUnfurlingStt/Images/LinkUnfurlSTT.png)
   
-  ![Link unfurling card](LinkUnfurlingStt/Images/LinkUnfurlCard.PNG)
+  ![Link unfurling card](LinkUnfurlingStt/Images/LinkUnfurlCard.png)
    
 ## Prerequisites
 

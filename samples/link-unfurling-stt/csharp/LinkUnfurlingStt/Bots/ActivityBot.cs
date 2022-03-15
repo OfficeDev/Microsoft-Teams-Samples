@@ -25,7 +25,6 @@ namespace LinkUnfurlingStt.Bots
             _microsoftAppId= configuration["MicrosoftAppId"] ?? throw new NullReferenceException("MicrosoftAppId");
         }
 
-
         /// <summary>
         /// Invoked when an app based link query activity is received from the connector.
         /// </summary>
@@ -58,7 +57,9 @@ namespace LinkUnfurlingStt.Bots
             };
         }
 
-        // Get unfurling card.
+        /// <summary>
+        /// Invoked when link is unfurled.
+        /// <returns> Adaptive card for link unfurling.</returns>
         private AdaptiveCard GetUnfurlCard()
         {
             var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
