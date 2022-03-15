@@ -10,7 +10,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js" integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2" crossorigin="anonymous"></script>
   <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
-  <!-- <script src="/static/socket.js"></script> -->
 </head>
 
 <body id=mainDiv>
@@ -91,7 +90,7 @@
       }
     });
 
-    // // Creating socket instance for real time status updates in stage view.
+    // Creating socket instance for real time status updates in stage view.
     const socket = io();
     socket.on('connection')
 
@@ -128,7 +127,7 @@
             microsoftTeams.meeting.shareAppContentToStage((err, result) => {
                 if (result) {
                     // handle success
-                    alert("success")
+                    console.log(result);
                 }
                 if (err) {
                     // handle error

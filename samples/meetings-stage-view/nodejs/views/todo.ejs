@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add ToDo</title>
+    <title>Add to ToDo</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js" integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2" crossorigin="anonymous"></script>
+    <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
 </head>
 
 <body>
@@ -16,11 +17,11 @@
     microsoftTeams.initialize();
 
     // Creating socket instance for real time status updates in stage view.
-    const socket = io();
-    socket.on('connection')
+    const socketTodo = io();
+    socketTodo.on('connection')
 
     // Updating containers when a status message is received.
-    socket.on('message', (data, status) => {
+    socketTodo.on('message', (data, status) => {
       if (data !== undefined) {
         var detailsClass = window.innerWidth > 600 ? "details" : "details-sidepanel";
         document.getElementById(status).innerHTML += (`<div class=${detailsClass}>
@@ -59,7 +60,7 @@
                 "taskDescription": taskDescription.value,
                 "userName": userName.value
             };
-            socket.emit('message', taskDetails, status);
+            socketTodo.emit('message', taskDetails, 'todo');
             return true;
         }
     </script>

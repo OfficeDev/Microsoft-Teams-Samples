@@ -2,3 +2,4 @@
  const socket = io();
  socket.on('connection')
  
+ exports.socketConn = socket;
