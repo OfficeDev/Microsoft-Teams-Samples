@@ -32,14 +32,6 @@
       ]
     }
   ],
-  "bots": [
-    {
-      "botId": "<<Microsoft-App-Id>>",
-      "scopes": [
-        "personal"
-      ]
-    }
-  ],
   "composeExtensions": [
     {
       "botId": "<<Microsoft-App-Id>>",
