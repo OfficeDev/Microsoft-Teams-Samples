@@ -127,7 +127,7 @@
 
                             if (userDetails.is_google_signed_in) {
                                 is_google_signed_in = userDetails.is_google_signed_in
-                                getGoogleDetails();
+                                getGoogleAccountDetails();
                             }
 
                             if (userDetails.is_fb_signed_in) {
@@ -215,7 +215,7 @@
                             $("#userImgSso").attr("src", userDetails.image);
                             $("#name").append(userDetails.details.displayName);
                             $("#email").append(userDetails.details.userPrincipalName);
-                            $("#work").append(userDetails.details.jobTitle);
+                            $("#jobTitle").append(userDetails.details.jobTitle);
                             getUserDetails(context.upn);
 
                             if (is_google_signed_in) {
@@ -278,7 +278,7 @@
                             $("#userImgSso").attr("src", userDetails.image);
                             $("#name").append(userDetails.details.displayName);
                             $("#email").append(userDetails.details.userPrincipalName);
-                            $("#work").append(userDetails.details.jobTitle);
+                            $("#jobTitle").append(userDetails.details.jobTitle);
                             getUserDetails(context.upn);
                         },
                         error: function (xhr, textStatus, errorThrown) {
@@ -324,13 +324,13 @@
         function getServerSideTokenFb(clientSideToken) {
             return new Promise((resolve, reject) => {
                 microsoftTeams.getContext((context) => {
-                    fetch('/getFbDetailsOauth', {
+                    fetch('/getFbUserDetails', {
                         method: 'post',
                         headers: {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            'token': clientSideToken,
+                            'idToken': clientSideToken,
                             'userName': context.upn
                         }),
                         mode: 'cors',
@@ -395,13 +395,13 @@
         function getServerSideTokenGoogle(clientSideToken) {
             return new Promise((resolve, reject) => {
                 microsoftTeams.getContext((context) => {
-                    fetch('/getGoogleDetailsOauth', {
+                    fetch('/getGoogleAccountDetails', {
                         method: 'post',
                         headers: {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            'token': clientSideToken,
+                            'idToken': clientSideToken,
                             'userName': context.upn
                         }),
                         mode: 'cors',
@@ -433,7 +433,7 @@
         }
 
         // Get google details.
-        function getGoogleDetails() {
+        function getGoogleAccountDetails() {
             microsoftTeams.getContext((context) => {
                 $.ajax({
                     type: 'POST',
@@ -555,7 +555,7 @@
                         <div class="profile">
                             <span id="name"><b>Name: </b></span><br>
                             <span id="email"><b>Email: </b></span></span><br>
-                            <span id="work"><b>Work: </b></span></span>
+                            <span id="jobTitle"><b>Job Title: </b></span></span>
                         </div>
                         <div id="divError" style="display: none"></div>
                         <button type="button" class="btn btn-sm btn-outline-info ssologin" onclick="requestConsent()"

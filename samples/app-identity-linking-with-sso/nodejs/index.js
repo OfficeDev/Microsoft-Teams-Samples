@@ -293,8 +293,8 @@ server.post('/GetUserDetails', async (req, res) => {
 });
 
 // Facebook Oauth token axchange
-server.post('/getFbDetailsOauth', function (req, res) {
-  var token = req.body.token;
+server.post('/getFbUserDetails', function (req, res) {
+  var idToken = req.body.idToken;
   var userName = req.body.userName;
   var accessToken;
   var scopes = ['name','picture','id'].join(',');
@@ -305,7 +305,7 @@ server.post('/getFbDetailsOauth', function (req, res) {
         client_id: process.env.FaceBookAppId,
         redirect_uri: process.env.ApplicationBaseUrl + '/fb-auth',
         client_secret: process.env.FaceBookAppPassword,
-        code: token,
+        code: idToken,
       }
     }).then(response => {
       accessToken = response.data.access_token;
@@ -343,8 +343,8 @@ server.post('/getFbDetailsOauth', function (req, res) {
   });
 });
 
-server.post('/getGoogleDetailsOauth', function (req, res) {
-  var token = req.body.token;
+server.post('/getGoogleAccountDetails', function (req, res) {
+  var idToken = req.body.idToken;
   var userName = req.body.userName;
   var accessToken;
   var googlePromise = new Promise((resolve, reject) => {
@@ -352,7 +352,7 @@ server.post('/getGoogleDetailsOauth', function (req, res) {
         client_id: process.env.GoogleAppId,
         redirect_uri: process.env.ApplicationBaseUrl + '/google-auth',
         client_secret: process.env.GoogleAppPassword,
-        code: token,
+        code: idToken,
         grant_type:"authorization_code"
     }).then(response => {
       accessToken = response.data.access_token;
