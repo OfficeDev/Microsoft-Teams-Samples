@@ -47,7 +47,7 @@ Messaging Extention mapping
 ## About the sample
 
   - When the user installs the app, after successful sso authentication user AAD details are added in the local memory storage and displayed in the card with the option to connect with facebook or google.
-  - When user connect with facebook, app follows the Oauth2 flow for facebook authentication, with successful authentication in facebook app user's facebook details are mapped with the aad details in local memory storage and user's facebook data is displayed along with the AAD details.
+  - When user tries connect with facebook, app follows the Oauth2 flow for facebook authentication, with successful authentication in facebook app user's facebook details are mapped with the aad details in local memory storage and user's facebook data is displayed along with the AAD details.
     same flow goes with google connection.
   - If user clicks on `Disconnect from facebook` or `Disconnect from google`. User's facebook/google data will be removed from the local memory storage.
   - Note: You can use any memory like DB or in memory or in-file for storing mapping details.
