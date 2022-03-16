@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "provisionParameters": {
+      "value": {
+        "resourceBaseName": "proactivemdev713a2c",
+        "botAadAppClientId": "{{state.fx-resource-bot.botId}}",
+        "botAadAppClientSecret": "{{state.fx-resource-bot.botPassword}}",
+        "m365ClientId": "{{state.fx-resource-aad-app-for-teams.clientId}}",
+        "m365ClientSecret": "{{state.fx-resource-aad-app-for-teams.clientSecret}}",
+        "m365TenantId": "{{state.fx-resource-aad-app-for-teams.tenantId}}",
+        "m365OauthAuthorityHost": "{{state.fx-resource-aad-app-for-teams.oauthHost}}"
+      }
+    }
+  }
+}
