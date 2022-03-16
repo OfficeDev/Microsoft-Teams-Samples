@@ -22,15 +22,9 @@ Bot Mapping
 
 ![Bot](IdentityLinkingWithSSO/Images/BotLinkingOptionCard.png)
 
-- Click on `Connect to facebook` or `Connect to google` button you will get a sign in card. Click on sign in button and provide your facebook or google credentials.
-- Once you get login successfully you will get a card with details of facebook/google with AAD.
-
 Tab mapping
 
 ![Tab](IdentityLinkingWithSSO/Images/Tab.png)
-
-- Click on `Connect to facebook` or `Connect to google` button you will be redirected to login page.    Provide your facebook/google credentials.
-- Once you get login successfully your details will be shown in the card.
 
 Messaging Extention mapping
 
@@ -49,9 +43,16 @@ Messaging Extention mapping
 - ME Link unfurling
 
   ![ME Link unfurling](IdentityLinkingWithSSO/Images/MELinkUnfurlingCard.png)
-
-  - On Click of `Disconnect from facebook` or `Disconnect from google`. User's facebook/google data will be removed from the data base.
   
+## About the sample
+
+  - When the user installs the app, after successful sso authentication user AAD details are added in the local memory storage and displayed in the card with the option to connect with facebook or google.
+  - When user connect with facebook, app follows the Oauth2 flow for facebook authentication, with successful authentication in facebook app user's facebook details are mapped with the aad details in local memory storage and user's facebook data is displayed along with the AAD details.
+    same flow goes with google connection.
+  - If user clicks on `Disconnect from facebook` or `Disconnect from google`. User's facebook/google data will be removed from the local memory storage.
+  - Note: You can use any memory like DB or in memory or in-file for storing mapping details.
+  
+    This scenario is covered in bot,tab and ME.
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1

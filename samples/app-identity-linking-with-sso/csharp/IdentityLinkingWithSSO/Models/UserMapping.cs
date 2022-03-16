@@ -7,7 +7,7 @@ namespace IdentityLinkingWithSSO.Models
     /// <summary>
     /// User map data model class.
     /// </summary>
-    public class UserMapData
+    public class UserMapping
     {
         public string AadId { get; set; }
 

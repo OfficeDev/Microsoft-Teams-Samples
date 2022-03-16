@@ -115,18 +115,21 @@
         var googleLogo = baseUrl + "/googleIcon.png";
         $("#googleLogo").attr("src", googleLogo);
         let accessToken;
+
         $(document).ready(function () {
             ssoAuthentication();
         });
+
         microsoftTeams.initialize();
+
         // Get user details
         function getUserDetails(userName) {
             $.ajax({
                 type: 'POST',
-                url: '/getUSerMapData',
+                url: '/getUserMapData',
                 dataType: 'json',
                 data: {
-                    'userName': userName
+                    'userPrincipleName': userName
                 },
                 success: function (responseJson) {
                     if (responseJson == 'NoDataFound') {
@@ -138,7 +141,7 @@
                         if (userDetails.isAadSignedIn) {
                             if (userDetails.isGoogleSignedIn) {
                                 is_google_signed_in = true;
-                                setTimeout(() => { getGoogleDetails() }, 3000);
+                                setTimeout(() => { getGoogleAccountUserDetails() }, 3000);
                             }
                             if (userDetails.isFacebookSignedIn) {
                                 is_fb_signed_in = true;
@@ -152,10 +155,10 @@
                 }
             });
         };
+
         // Tab sso authentication.
         function ssoAuthentication()
         {
-            alert("inside sso");
              getClientSideToken()
                  .then((clientSideToken) => {
                      console.log("id token recieved");
@@ -179,6 +182,7 @@
                 }
             });
         }
+
         // Get client side token.
         function getClientSideToken() {
             return new Promise((resolve, reject) => {
@@ -193,18 +197,19 @@
             });
          });
         }
+
         // Get server side token and user profile.
         function getServerSideToken(clientSideToken) {
             return new Promise((resolve, reject) => {
                 microsoftTeams.getContext((context) => {
                     $.ajax({
                         type: 'POST',
-                        url: '/GetProfileOnBehalfOf',
+                        url: '/getUserDetailsOnBehalfOf',
                         dataType: 'json',
                         data: {
-                            'accessToken': clientSideToken,
-                            'tid': context.tid,
-                            'userName': context.upn,
+                            'idToken': clientSideToken,
+                            'tenantId': context.tid,
+                            'userPrincipleName': context.upn,
                         },
                         success: function (responseJson) {
                             userDetails = JSON.parse(responseJson);
@@ -230,6 +235,7 @@
                 });
             });
         }
+
         // Request consent on implicit grant error.
         function requestConsent() {
             getToken()
@@ -242,6 +248,7 @@
             });
           });
         }
+
         // Get token for multi tenant.
         function getToken() {
             return new Promise((resolve, reject) => {
@@ -258,16 +265,17 @@
                 });
             });
         }
+
         // Get user information.
         function getUserInfo(userPrincipleName) {
             if (userPrincipleName) {
             $.ajax({
                 type: 'POST',
-                 url: '/GetUserDetails',
+                 url: '/getUserDetails',
                  dataType: 'json',
                  data: {
                      'accessToken': accessToken,
-                     'userName': userPrincipleName,
+                     'userPrincipleName': userPrincipleName,
                     },
                 success: function (responseJson) {
                     userDetails = JSON.parse(responseJson);
@@ -283,6 +291,7 @@
              });
           }
         }
+
         // Initiate facebook login.
         function facebookLogin() {
             fbAuthentication()
@@ -293,6 +302,7 @@
                     console.log(error);
                 });
         }
+
         // Get client side token for facebook.
         function fbAuthentication() {
             return new Promise((resolve, reject) => {
@@ -312,17 +322,18 @@
                 });
             });
         }
+
         // Get face book profile of user.
         function getServerSideTokenFb(clientSideToken) {
             return new Promise((resolve, reject) => {
                 microsoftTeams.getContext((context) => {
                     $.ajax({
                         type: 'POST',
-                        url: '/getFbDetailsOauth',
+                        url: '/getFbUserDetails',
                         dataType: 'json',
                         data: {
                             'accessToken': clientSideToken,
-                            'userName': context.upn,
+                            'userPrincipleName': context.upn,
                         },
                         success: function (responseJson) {
                             facebookProfile = JSON.parse(responseJson);
@@ -339,6 +350,7 @@
                 });
             });
         }
+
         // Initiate google login.
         function googleAuth() {
             googleAuthentication()
@@ -349,6 +361,7 @@
                     console.log(error);
                 });
         }
+
         // Get client side token for facebook.
         function googleAuthentication() {
             return new Promise((resolve, reject) => {
@@ -368,17 +381,18 @@
                 });
             });
         }
+
         // Get face book profile of user.
         function getServerSideTokenGoogle(clientSideToken) {
             return new Promise((resolve, reject) => {
                 microsoftTeams.getContext((context) => {
                     $.ajax({
                         type: 'POST',
-                        url: '/getGoogleDetailsOauth',
+                        url: '/getGoogleUserDetails',
                         dataType: 'json',
                         data: {
-                            'accessToken': clientSideToken,
-                            'userName': context.upn,
+                            'idToken': clientSideToken,
+                            'userPrincipleName': context.upn,
                         },
                         success: function (responseJson) {
                             let googleProfile = JSON.parse(responseJson);
@@ -397,6 +411,7 @@
                 });
             });
         }
+
         function getFbDetails() {
             microsoftTeams.getContext((context) => {
             $.ajax({
@@ -404,7 +419,7 @@
                 url: '/getFbDetails',
                 dataType: 'json',
                 data: {
-                    'userName': context.upn
+                    'userPrincipleName': context.upn
                 }, success: function (responseJson) {
                     let facebookProfile = JSON.parse(responseJson);
                     $("#fbname").append(facebookProfile.name);
@@ -420,14 +435,15 @@
              })
           })
         }
-        function getGoogleDetails() {
+
+        function getGoogleAccountUserDetails() {
             microsoftTeams.getContext(function (context) {
             $.ajax({
                 type: 'POST',
                 url: '/getGoogleDetails',
                 dataType: 'json',
                 data: {
-                    'userName': context.upn
+                    'userPrincipleName': context.upn
                 }, success: function (responseJson) {
                     if (responseJson.message == "Request failed with status code 401") {
                         googleAuth();
@@ -457,7 +473,7 @@
                     url: '/disconnectFromFb',
                     dataType: 'json',
                     data: {
-                        'userName': context.upn
+                        'userPrincipleName': context.upn
                     },
                     success: function (responseJson) {
                         if (responseJson == 'disconnected from facebook') {
@@ -474,6 +490,7 @@
                 })
             })
         }
+
         // Disconnect from google.
         function disconnectFromGoogle() {
             microsoftTeams.getContext(function (context) {
@@ -482,7 +499,7 @@
                     url: '/disconnectFromGoogle',
                     dataType: 'json',
                     data: {
-                        'userName': context.upn
+                        'userPrincipleName': context.upn
                     },
                     success: function (responseJson) {
                         if (responseJson == 'disconnected from google') {

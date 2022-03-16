@@ -18,7 +18,7 @@ namespace IdentityLinkingWithSSO.Controllers
     public class TabController : Controller
     {
         public readonly IConfiguration _configuration;
-        public static List<UserMapData> UserMapData = new List<UserMapData>();
+        public static List<UserMapping> userMapping = new List<UserMapping>();
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
@@ -35,12 +35,12 @@ namespace IdentityLinkingWithSSO.Controllers
 
         // Get user access token.
         [HttpPost]
-        [Route("GetProfileOnBehalfOf")]
-        public async Task<JsonResult> GetUserAccessToken(string accessToken, string tid, string userName)
+        [Route("getUserDetailsOnBehalfOf")]
+        public async Task<JsonResult> GetUserDetails(string idToken, string tenantId, string userPrincipleName)
         {
             try
             {
-                var bearerToken = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor, accessToken);
+                var bearerToken = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor, idToken);
 
                 var client = new SimpleGraphClient(bearerToken);
                 var me = await client.GetMeAsync();
@@ -49,29 +49,29 @@ namespace IdentityLinkingWithSSO.Controllers
 
                 var photo = await client.GetPhotoAsync();
 
-                var userInfo = new UserData()
+                var userDetail = new UserData()
                 {
                     User = me,
                     Photo = photo,
                     Title = title
                 };
 
-                if (UserMapData.Count < 1)
+                if (userMapping.Count < 1)
                 {
-                    UserMapData.Add(new UserMapData { AadId = userName, isAadSignedIn = true });
+                    userMapping.Add(new UserMapping { AadId = userPrincipleName, isAadSignedIn = true });
                 }
 
                 else
                 {
-                    var data = UserMapData.Find(e => e.AadId == userName);
+                    var data = userMapping.Find(e => e.AadId == userPrincipleName);
                     if (data == null)
                     {
-                        UserMapData.Add(new UserMapData { AadId = userName, isAadSignedIn = true });
+                        userMapping.Add(new UserMapping { AadId = userPrincipleName, isAadSignedIn = true });
                     }
                 }
 
-                var jsonString = JsonConvert.SerializeObject(userInfo);
-                return Json(jsonString);
+                var userDetailJson = JsonConvert.SerializeObject(userDetail);
+                return Json(userDetailJson);
             }
             catch (Exception ex)
             {
@@ -82,8 +82,8 @@ namespace IdentityLinkingWithSSO.Controllers
 
         // Get user details.
         [HttpPost]
-        [Route("GetUserDetails")]
-        public async Task<JsonResult> GetUserProfile(string accessToken, string userName)
+        [Route("getUserDetails")]
+        public async Task<JsonResult> GetUserProfile(string accessToken, string userPrincipleName)
         {
             try
             {
@@ -101,17 +101,17 @@ namespace IdentityLinkingWithSSO.Controllers
                     Title = title
                 };
 
-                if (UserMapData.Count < 1)
+                if (userMapping.Count < 1)
                 {
-                    UserMapData.Add(new UserMapData { AadId = userName, isAadSignedIn = true });
+                    userMapping.Add(new UserMapping { AadId = userPrincipleName, isAadSignedIn = true });
                 }
 
                 else
                 {
-                    var data = UserMapData.Find(e => e.AadId == userName);
+                    var data = userMapping.Find(e => e.AadId == userPrincipleName);
                     if (data == null)
                     {
-                        UserMapData.Add(new UserMapData { AadId = userName, isAadSignedIn = true });
+                        userMapping.Add(new UserMapping { AadId = userPrincipleName, isAadSignedIn = true });
                     }
                 }
 
@@ -127,24 +127,24 @@ namespace IdentityLinkingWithSSO.Controllers
 
         // Get user mapping data. 
         [HttpPost]
-        [Route("getUSerMapData")]
-        public JsonResult GetUserMapData(string userName)
+        [Route("getUserMapData")]
+        public JsonResult GetUserMapData(string userPrincipleName)
         {
-            int index = UserMapData.FindIndex(e => e.AadId == userName);
+            int index = userMapping.FindIndex(e => e.AadId == userPrincipleName);
 
             if (index != -1)
             {
-                var userInfo = new UserMapData()
+                var userInfo = new UserMapping()
                 {
-                    AadId = UserMapData[index].AadId,
-                    isAadSignedIn = UserMapData[index].isAadSignedIn,
+                    AadId = userMapping[index].AadId,
+                    isAadSignedIn = userMapping[index].isAadSignedIn,
                     AadToken = "",
-                    FacebookId = UserMapData[index].FacebookId,
+                    FacebookId = userMapping[index].FacebookId,
                     FacebookToken = "",
-                    isFacebookSignedIn = UserMapData[index].isFacebookSignedIn,
-                    GoogleId = UserMapData[index].GoogleId,
+                    isFacebookSignedIn = userMapping[index].isFacebookSignedIn,
+                    GoogleId = userMapping[index].GoogleId,
                     GoogleToken = "",
-                    isGoogleSignedIn = UserMapData[index].isGoogleSignedIn,
+                    isGoogleSignedIn = userMapping[index].isGoogleSignedIn,
                 };
                 var jsonString = JsonConvert.SerializeObject(userInfo);
                 return Json(jsonString);
@@ -158,8 +158,8 @@ namespace IdentityLinkingWithSSO.Controllers
 
         // Get facebook profile of user.
         [HttpPost]
-        [Route("getFbDetailsOauth")]
-        public async Task<JsonResult> GetFacebookAuthToken(string accessToken, string userName)
+        [Route("getFbUserDetails")]
+        public async Task<JsonResult> GetFbUserDetails(string accessToken, string userPrincipleName)
         {
             var fbAppId = _configuration["FacebookAppId"];
             var fbPassword = _configuration["FacebookAppPassword"];
@@ -184,14 +184,14 @@ namespace IdentityLinkingWithSSO.Controllers
                     picture = res.ProfilePicture.data.url
                 };
 
-                int index = UserMapData.FindIndex(e => e.AadId == userName);
+                int index = userMapping.FindIndex(e => e.AadId == userPrincipleName);
                 if (index != -1)
                 {
-                    var data = UserMapData[index];
+                    var data = userMapping[index];
                     data.FacebookId = res.Id;
                     data.FacebookToken = token.Value;
                     data.isFacebookSignedIn = true;
-                    UserMapData[index] = data;
+                    userMapping[index] = data;
                 }
 
                 var jsonString = JsonConvert.SerializeObject(result);
@@ -207,10 +207,10 @@ namespace IdentityLinkingWithSSO.Controllers
         // Get facebook profile of exisiting mapped user.
         [HttpPost]
         [Route("getFbDetails")]
-        public async Task<JsonResult> GetFbDetails(string userName)
+        public async Task<JsonResult> GetFbDetails(string userPrincipleName)
         {
-            int index = UserMapData.FindIndex(e => e.AadId == userName);
-            var data = UserMapData[index];
+            int index = userMapping.FindIndex(e => e.AadId == userPrincipleName);
+            var data = userMapping[index];
             var profile = FacebookHelper.GetUri("https://graph.facebook.com/me",
             Tuple.Create("fields", "name,picture,id"),
             Tuple.Create("access_token", data.FacebookToken));
@@ -222,24 +222,24 @@ namespace IdentityLinkingWithSSO.Controllers
                 picture = res.ProfilePicture.data.url
             };
 
-            var jsonString = JsonConvert.SerializeObject(result);
+            var fbDetailsString = JsonConvert.SerializeObject(result);
 
-            return Json(jsonString);
+            return Json(fbDetailsString);
         }
 
         // Disconnect facebook profile.
         [HttpPost]
         [Route("disconnectFromFb")]
-        public JsonResult DisconnectFb(string userName)
+        public JsonResult DisconnectFb(string userPrincipleName)
         {
-            int index = UserMapData.FindIndex(e => e.AadId == userName);
+            int index = userMapping.FindIndex(e => e.AadId == userPrincipleName);
             if (index != -1)
             {
-                var data = UserMapData[index];
+                var data = userMapping[index];
                 data.FacebookId = "";
                 data.FacebookToken = "";
                 data.isFacebookSignedIn = false;
-                UserMapData[index] = data;
+                userMapping[index] = data;
             }
 
             return Json("disconnected from facebook");
@@ -247,8 +247,8 @@ namespace IdentityLinkingWithSSO.Controllers
 
         // Get google profile of user.
         [HttpPost]
-        [Route("getGoogleDetailsOauth")]
-        public async Task<JsonResult> GetGoogleAccessToken(string accessToken, string userName)
+        [Route("getGoogleUserDetails")]
+        public async Task<JsonResult> GetGoogleUserDetails(string idToken, string userPrincipleName)
         {
             var redirectUrl = _configuration["ApplicationBaseUrl"] + "/google-auth-end";
             var googleAppId = _configuration["GoogleAppId"];
@@ -256,19 +256,19 @@ namespace IdentityLinkingWithSSO.Controllers
             var client = new HttpClient();
             HttpContent content = new StringContent("");
             string responseBody;
-            var response = await client.PostAsync(string.Format("https://oauth2.googleapis.com/token?client_id={0}&client_secret={1}&code={2}&redirect_uri={3}&grant_type=authorization_code", googleAppId, googleAppPassword, accessToken, redirectUrl), content);
+            var response = await client.PostAsync(string.Format("https://oauth2.googleapis.com/token?client_id={0}&client_secret={1}&code={2}&redirect_uri={3}&grant_type=authorization_code", googleAppId, googleAppPassword, idToken, redirectUrl), content);
 
             if (response.IsSuccessStatusCode)
             {
                 try
                 {
                     responseBody = await response.Content.ReadAsStringAsync();
-                    var token = JsonConvert.DeserializeObject<dynamic>(responseBody).access_token;
-                    var client2 = new HttpClient();
-                    client2.DefaultRequestHeaders.Accept.Clear();
-                    client2.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+                    var accessToken = JsonConvert.DeserializeObject<dynamic>(responseBody).access_token;
+                    var googleClient = new HttpClient();
+                    googleClient.DefaultRequestHeaders.Accept.Clear();
+                    googleClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
 
-                    var json = await client2.GetStringAsync(String.Format("https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,photos,urls")).ConfigureAwait(false);
+                    var json = await googleClient.GetStringAsync(String.Format("https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,photos,urls")).ConfigureAwait(false);
                     var jboject = JsonConvert.DeserializeObject(json);
                     var profile = JObject.FromObject(jboject);
                     var state = (JArray)profile.ToObject<CardTaskFetchValue<JArray>>()?.Names;
@@ -289,30 +289,26 @@ namespace IdentityLinkingWithSSO.Controllers
                         Value = (string)x["value"]
                     }).ToList();
 
-                    var displayName = items[0].DisplayName;
-                    var photoUrl = items2[0].Url;
-                    var emailAddress = items3[0].Value;
-
                     var result = new
                     {
-                        name = displayName,
-                        picture = photoUrl,
-                        email = emailAddress
+                        name = items[0].DisplayName,
+                        picture = items2[0].Url,
+                        email = items3[0].Value
                     };
 
-                    int index = UserMapData.FindIndex(e => e.AadId == userName);
+                    int index = userMapping.FindIndex(e => e.AadId == userPrincipleName);
                     if (index != -1)
                     {
-                        var data = UserMapData[index];
-                        data.GoogleId = emailAddress;
-                        data.GoogleToken = token;
+                        var data = userMapping[index];
+                        data.GoogleId = items3[0].Value;
+                        data.GoogleToken = accessToken;
                         data.isGoogleSignedIn = true;
-                        UserMapData[index] = data;
+                        userMapping[index] = data;
                     }
 
-                    var jsonString = JsonConvert.SerializeObject(result);
+                    var googleUserDetailString = JsonConvert.SerializeObject(result);
 
-                    return Json(jsonString);
+                    return Json(googleUserDetailString);
 
                 }
                 catch (Exception ex)
@@ -330,12 +326,12 @@ namespace IdentityLinkingWithSSO.Controllers
         // Get google profile of existing mapped user.
         [HttpPost]
         [Route("getGoogleDetails")]
-        public async Task<JsonResult> GetGoogleDetails(string userName)
+        public async Task<JsonResult> GetGoogleDetails(string userPrincipleName)
         {
             var client2 = new HttpClient();
             client2.DefaultRequestHeaders.Accept.Clear();
-            int index = UserMapData.FindIndex(e => e.AadId == userName);
-            var data = UserMapData[index];
+            int index = userMapping.FindIndex(e => e.AadId == userPrincipleName);
+            var data = userMapping[index];
             client2.DefaultRequestHeaders.Add("Authorization", "Bearer " + data.GoogleToken);
 
             var json = await client2.GetStringAsync(String.Format("https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,photos,urls")).ConfigureAwait(false);
@@ -378,16 +374,16 @@ namespace IdentityLinkingWithSSO.Controllers
         // Disconnect from google.
         [HttpPost]
         [Route("disconnectFromGoogle")]
-        public JsonResult DisconnectGoogle(string userName)
+        public JsonResult DisconnectGoogle(string userPrincipleName)
         {
-            int index = UserMapData.FindIndex(e => e.AadId == userName);
+            int index = userMapping.FindIndex(e => e.AadId == userPrincipleName);
             if (index != -1)
             {
-                var data = UserMapData[index];
+                var data = userMapping[index];
                 data.GoogleId = "";
                 data.GoogleToken = "";
                 data.isGoogleSignedIn = false;
-                UserMapData[index] = data;
+                userMapping[index] = data;
             }
 
             return Json("disconnected from google");

@@ -19,8 +19,8 @@ namespace IdentityLinkingWithSSO.Dialogs
 {
     public class FacebookAuthDialog : LogoutDialog
     {
-        private readonly ConcurrentDictionary<string, List<UserMapData>> mappingData;
-        public FacebookAuthDialog(string configuration, ConcurrentDictionary<string, List<UserMapData>> data) : base(nameof(FacebookAuthDialog), configuration)
+        private readonly ConcurrentDictionary<string, List<UserMapping>> mappingData;
+        public FacebookAuthDialog(string configuration, ConcurrentDictionary<string, List<UserMapping>> data) : base(nameof(FacebookAuthDialog), configuration)
         {
             mappingData = data;
             AddDialog(new OAuthPrompt(
@@ -54,7 +54,7 @@ namespace IdentityLinkingWithSSO.Dialogs
         {
             // Getting the token from the previous step.
             var tokenResponse = (TokenResponse)stepContext.Result;
-            List<UserMapData> currentList = new List<UserMapData>();
+            List<UserMapping> currentList = new List<UserMapping>();
             Microsoft.Bot.Schema.Attachment userCard;
             Microsoft.Bot.Schema.Attachment facebookCard;
             Microsoft.Bot.Schema.Attachment googleCard;

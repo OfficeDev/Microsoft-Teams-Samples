@@ -16,7 +16,7 @@ namespace IdentityLinkingWithSSO.Bots
 {
     public class AuthBot<T> : ActivityBot<T> where T : Dialog
     {
-        public AuthBot(IConfiguration configuration, ConversationState conversationState, T dialog, ConcurrentDictionary<string, List<UserMapData>> mapdata)
+        public AuthBot(IConfiguration configuration, ConversationState conversationState, T dialog, ConcurrentDictionary<string, List<UserMapping>> mapdata)
             : base(configuration,conversationState, dialog, mapdata)
         {
         }
