@@ -30,7 +30,7 @@ Tab mapping
 
 ![Tab](Images/Tab.png)
 
-- Click on `Connect to facebook` or `Connect to google` button you will be redirected to login page.    Provide your facebook/google credentials.
+- Click on `Connect to facebook` or `Connect to google` button you will be redirected to login page.Provide your facebook/google credentials.
 - Once you get login successfully your details will be shown in the card.
 
 Messaging Extention mapping
@@ -45,7 +45,7 @@ Messaging Extention mapping
 
   ![ME search](Images/MESearch.png)
 
-  ![ME search](Images/MESearchLinkCard.jpg)
+  ![ME search](Images/MESearchLinkCard.png)
    
 - ME Link unfurling
 
