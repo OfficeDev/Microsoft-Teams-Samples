@@ -20,8 +20,8 @@ namespace IdentityLinkingWithSSO.Dialogs
     public class BotSsoAuthDialog : LogoutDialog
     {
         private readonly ConcurrentDictionary<string, Token> _Token;
-        private readonly ConcurrentDictionary<string, List<UserMapData>> mappingData;
-        public BotSsoAuthDialog(string configuration, ConcurrentDictionary<string, Token> token, ConcurrentDictionary<string, List<UserMapData>> data) : base(nameof(BotSsoAuthDialog), configuration)
+        private readonly ConcurrentDictionary<string, List<UserMapping>> mappingData;
+        public BotSsoAuthDialog(string configuration, ConcurrentDictionary<string, Token> token, ConcurrentDictionary<string, List<UserMapping>> data) : base(nameof(BotSsoAuthDialog), configuration)
         {
             _Token = token;
             mappingData = data;
@@ -57,8 +57,8 @@ namespace IdentityLinkingWithSSO.Dialogs
         {
             // Get the token from the previous step.
             var tokenResponse = (TokenResponse)stepContext.Result;
-            List<UserMapData> userDetailsList = new List<UserMapData>();
-            List<UserMapData> currentList = new List<UserMapData>();
+            List<UserMapping> userDetailsList = new List<UserMapping>();
+            List<UserMapping> currentList = new List<UserMapping>();
             var attachmentList = new List<Microsoft.Bot.Schema.Attachment>();
             Microsoft.Bot.Schema.Attachment userCard;
             Microsoft.Bot.Schema.Attachment thumbnailCardFacebook;
@@ -76,7 +76,7 @@ namespace IdentityLinkingWithSSO.Dialogs
                 mappingData.TryGetValue("key", out currentList);
                 if (currentList == null)
                 {
-                    var userDetails = new UserMapData()
+                    var userDetails = new UserMapping()
                     {
                         AadId = stepContext.Context.Activity.From.AadObjectId,
                         isAadSignedIn = true,
@@ -101,7 +101,7 @@ namespace IdentityLinkingWithSSO.Dialogs
                     var data = currentList.Find(e => e.AadId == stepContext.Context.Activity.From.AadObjectId);
                     if (data == null)
                     {
-                        var userDetails = new UserMapData()
+                        var userDetails = new UserMapping()
                         {
                             AadId = stepContext.Context.Activity.From.AadObjectId,
                             isAadSignedIn = true,

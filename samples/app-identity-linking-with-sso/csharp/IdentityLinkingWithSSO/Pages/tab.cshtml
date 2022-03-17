@@ -25,9 +25,9 @@
             margin-top: 0.5rem;
         }
 
-         .card:hover {
-            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-         }
+            .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            }
 
         .container {
             padding: 2px 2px;
@@ -83,10 +83,10 @@
             margin-left: 46%;
         }
 
-        .facebook:hover {
-            background-color: #4267b2;
-            border-color: #4267b2;
-        }
+            .facebook:hover {
+                background-color: #4267b2;
+                border-color: #4267b2;
+            }
 
         .googlebutton {
             border: 2px solid #000;
@@ -117,7 +117,6 @@
         let accessToken;
 
         $(document).ready(function () {
-
             ssoAuthentication();
         });
 
@@ -127,10 +126,10 @@
         function getUserDetails(userName) {
             $.ajax({
                 type: 'POST',
-                url: '/getUSerMapData',
+                url: '/getUserMapData',
                 dataType: 'json',
                 data: {
-                    'userName': userName
+                    'userPrincipleName': userName
                 },
                 success: function (responseJson) {
                     if (responseJson == 'NoDataFound') {
@@ -138,14 +137,15 @@
                     }
                     else {
                         const userDetails = JSON.parse(responseJson);
+                        console.log(userDetails);
                         if (userDetails.isAadSignedIn) {
                             if (userDetails.isGoogleSignedIn) {
                                 is_google_signed_in = true;
-                                setTimeout(() => { getGoogleDetails(userDetails.GoogleToken) }, 3000);
+                                setTimeout(() => { getGoogleAccountUserDetails() }, 3000);
                             }
                             if (userDetails.isFacebookSignedIn) {
                                 is_fb_signed_in = true;
-                                getFbDetails(userDetails.FacebookToken);
+                                getFbDetails();
                             }
                         }
                     }
@@ -160,7 +160,8 @@
         function ssoAuthentication()
         {
              getClientSideToken()
-            .then((clientSideToken) => {
+                 .then((clientSideToken) => {
+                     console.log("id token recieved");
                 return getServerSideToken(clientSideToken);
             })
             .catch((error) => {
@@ -184,13 +185,13 @@
 
         // Get client side token.
         function getClientSideToken() {
-
             return new Promise((resolve, reject) => {
             microsoftTeams.authentication.getAuthToken({
                 successCallback: (result) => {
                     resolve(result);
                 },
                 failureCallback: function (error) {
+                    console.log("id error");
                     reject("Error getting token: " + error);
                 }
             });
@@ -203,12 +204,12 @@
                 microsoftTeams.getContext((context) => {
                     $.ajax({
                         type: 'POST',
-                        url: '/GetUserAccessToken',
+                        url: '/getUserDetailsOnBehalfOf',
                         dataType: 'json',
                         data: {
-                            'accessToken': clientSideToken,
-                            'tid': context.tid,
-                            'userName': context.upn,
+                            'idToken': clientSideToken,
+                            'tenantId': context.tid,
+                            'userPrincipleName': context.upn,
                         },
                         success: function (responseJson) {
                             userDetails = JSON.parse(responseJson);
@@ -270,11 +271,11 @@
             if (userPrincipleName) {
             $.ajax({
                 type: 'POST',
-                 url: '/GetUserDetails',
+                 url: '/getUserDetails',
                  dataType: 'json',
                  data: {
                      'accessToken': accessToken,
-                     'userName': userPrincipleName,
+                     'userPrincipleName': userPrincipleName,
                     },
                 success: function (responseJson) {
                     userDetails = JSON.parse(responseJson);
@@ -326,14 +327,13 @@
         function getServerSideTokenFb(clientSideToken) {
             return new Promise((resolve, reject) => {
                 microsoftTeams.getContext((context) => {
-
                     $.ajax({
                         type: 'POST',
-                        url: '/getFbAccessToken',
+                        url: '/getFbUserDetails',
                         dataType: 'json',
                         data: {
                             'accessToken': clientSideToken,
-                            'userName': context.upn,
+                            'userPrincipleName': context.upn,
                         },
                         success: function (responseJson) {
                             facebookProfile = JSON.parse(responseJson);
@@ -386,14 +386,13 @@
         function getServerSideTokenGoogle(clientSideToken) {
             return new Promise((resolve, reject) => {
                 microsoftTeams.getContext((context) => {
-
                     $.ajax({
                         type: 'POST',
-                        url: '/getGoogleAccessToken',
+                        url: '/getGoogleUserDetails',
                         dataType: 'json',
                         data: {
-                            'accessToken': clientSideToken,
-                            'userName': context.upn,
+                            'idToken': clientSideToken,
+                            'userPrincipleName': context.upn,
                         },
                         success: function (responseJson) {
                             let googleProfile = JSON.parse(responseJson);
@@ -413,14 +412,14 @@
             });
         }
 
-        function getFbDetails(token) {
-            console.log("da" + token);
+        function getFbDetails() {
+            microsoftTeams.getContext((context) => {
             $.ajax({
                 type: 'POST',
                 url: '/getFbDetails',
                 dataType: 'json',
                 data: {
-                    'token': token
+                    'userPrincipleName': context.upn
                 }, success: function (responseJson) {
                     let facebookProfile = JSON.parse(responseJson);
                     $("#fbname").append(facebookProfile.name);
@@ -433,16 +432,18 @@
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                     fbAuth();
                 }
-            })
+             })
+          })
         }
 
-        function getGoogleDetails(token) {
+        function getGoogleAccountUserDetails() {
+            microsoftTeams.getContext(function (context) {
             $.ajax({
                 type: 'POST',
                 url: '/getGoogleDetails',
                 dataType: 'json',
                 data: {
-                    'token': token
+                    'userPrincipleName': context.upn
                 }, success: function (responseJson) {
                     if (responseJson.message == "Request failed with status code 401") {
                         googleAuth();
@@ -461,6 +462,7 @@
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
                 }
             })
+            })
         }
 
         // Disconnect from facebook.
@@ -471,7 +473,7 @@
                     url: '/disconnectFromFb',
                     dataType: 'json',
                     data: {
-                        'userName': context.upn
+                        'userPrincipleName': context.upn
                     },
                     success: function (responseJson) {
                         if (responseJson == 'disconnected from facebook') {
@@ -488,6 +490,7 @@
                 })
             })
         }
+
         // Disconnect from google.
         function disconnectFromGoogle() {
             microsoftTeams.getContext(function (context) {
@@ -496,7 +499,7 @@
                     url: '/disconnectFromGoogle',
                     dataType: 'json',
                     data: {
-                        'userName': context.upn
+                        'userPrincipleName': context.upn
                     },
                     success: function (responseJson) {
                         if (responseJson == 'disconnected from google') {
@@ -538,8 +541,8 @@
                             Consent
                         </button>
                     </div>
-                    </div>
                 </div>
+            </div>
             <div id="cardFacebook">
                 <div class="signin-header"><b>User info from facebook</b></div>
                 <div class="card">
@@ -580,5 +583,5 @@
                 </div>
             </div>
         </div>
-     </div>
+    </div>
 </body>

@@ -55,7 +55,7 @@ namespace IdentityLinkingWithSSO
             services.AddMemoryCache();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             // Create a global hashset for our save task details
-            services.AddSingleton<ConcurrentDictionary<string, List<UserMapData>>>();
+            services.AddSingleton<ConcurrentDictionary<string, List<UserMapping>>>();
             services.AddSingleton <ConcurrentDictionary<string, bool>>();
             services.AddMvc().AddSessionStateTempDataProvider();
             // Create a global hashset for our Roster and notes information
