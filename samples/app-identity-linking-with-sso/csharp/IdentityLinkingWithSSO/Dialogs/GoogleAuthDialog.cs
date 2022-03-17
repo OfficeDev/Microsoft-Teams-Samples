@@ -19,8 +19,8 @@ namespace IdentityLinkingWithSSO.Dialogs
 {
     public class GoogleAuthDialog : LogoutDialog
     {
-        private readonly ConcurrentDictionary<string, List<UserMapData>> mappingData;
-        public GoogleAuthDialog(string configuration, ConcurrentDictionary<string, List<UserMapData>> data) : base(nameof(GoogleAuthDialog), configuration)
+        private readonly ConcurrentDictionary<string, List<UserMapping>> mappingData;
+        public GoogleAuthDialog(string configuration, ConcurrentDictionary<string, List<UserMapping>> data) : base(nameof(GoogleAuthDialog), configuration)
         {
             mappingData = data;
             AddDialog(new OAuthPrompt(
@@ -52,7 +52,7 @@ namespace IdentityLinkingWithSSO.Dialogs
 
         private async Task<DialogTurnResult> LoginStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            List<UserMapData> currentList = new List<UserMapData>();
+            List<UserMapping> currentList = new List<UserMapping>();
             var attachmentList = new List<Microsoft.Bot.Schema.Attachment>();
             Microsoft.Bot.Schema.Attachment userCard;
             Microsoft.Bot.Schema.Attachment facebookCard;

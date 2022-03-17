@@ -17,8 +17,8 @@ namespace IdentityLinkingWithSSO.Dialogs
     {
         private readonly string _applicationBaseUrl;
         private readonly ConcurrentDictionary<string, Token> _Token;
-        private readonly ConcurrentDictionary<string, List<UserMapData>> mappingData;
-        public MainDialog(IConfiguration configuration, ConcurrentDictionary<string, Token> token, ConcurrentDictionary<string, List<UserMapData>> data)
+        private readonly ConcurrentDictionary<string, List<UserMapping>> mappingData;
+        public MainDialog(IConfiguration configuration, ConcurrentDictionary<string, Token> token, ConcurrentDictionary<string, List<UserMapping>> data)
             : base(nameof(MainDialog))
         {
             _Token = token;

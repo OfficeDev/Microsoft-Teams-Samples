@@ -35,9 +35,9 @@ namespace IdentityLinkingWithSSO.Bots
         private readonly string _botConnectionName;
         private readonly string _facebookConnectionName;
         private readonly string _googleConnectionName;
-        private readonly ConcurrentDictionary<string, List<UserMapData>> userMappingData;
+        private readonly ConcurrentDictionary<string, List<UserMapping>> userMappingData;
 
-        public ActivityBot(IConfiguration configuration, ConversationState conversationState, T dialog, ConcurrentDictionary<string, List<UserMapData>> mapdata)
+        public ActivityBot(IConfiguration configuration, ConversationState conversationState, T dialog, ConcurrentDictionary<string, List<UserMapping>> mapdata)
         {
             _botConnectionName = configuration["ConnectionName"] ?? throw new NullReferenceException("ConnectionName");
             _facebookConnectionName = configuration["FacebookConnectionName"] ?? throw new NullReferenceException("FacebookConnectionName");
@@ -136,8 +136,8 @@ namespace IdentityLinkingWithSSO.Bots
             }
             else
             {
-                List<UserMapData> currentList = new List<UserMapData>();
-                List<UserMapData> userDetailsList = new List<UserMapData>();
+                List<UserMapping> currentList = new List<UserMapping>();
+                List<UserMapping> userDetailsList = new List<UserMapping>();
                 var googleData = new GoogleData();
                 var facebookData = new FacebookData();
                 userMappingData.TryGetValue("link", out currentList);
@@ -147,7 +147,7 @@ namespace IdentityLinkingWithSSO.Bots
                 var title = !string.IsNullOrEmpty(profile.JobTitle) ? profile.JobTitle : "Unknown";
                 if (currentList == null)
                 {
-                    var userDetails = new UserMapData()
+                    var userDetails = new UserMapping()
                     {
                         AadId = turnContext.Activity.From.AadObjectId,
                         isAadSignedIn = true,
@@ -186,7 +186,7 @@ namespace IdentityLinkingWithSSO.Bots
                     var data = currentList.Find(e => e.AadId == turnContext.Activity.From.AadObjectId);
                     if (data == null)
                     {
-                        var userDetails = new UserMapData()
+                        var userDetails = new UserMapping()
                         {
                             AadId = turnContext.Activity.From.AadObjectId,
                             isAadSignedIn = true,
@@ -599,7 +599,7 @@ namespace IdentityLinkingWithSSO.Bots
             var googleConnect = "connectWithGoogle";
             var googleData = new GoogleData();
             var facebookData = new FacebookData();
-            List<UserMapData> currentList = new List<UserMapData>();
+            List<UserMapping> currentList = new List<UserMapping>();
             userMappingData.TryGetValue("me", out currentList);
             var data = currentList.Find(e => e.AadId == turnContext.Activity.From.AadObjectId);
             var index = currentList.FindIndex(e => e.AadId == turnContext.Activity.From.AadObjectId);
@@ -959,8 +959,8 @@ namespace IdentityLinkingWithSSO.Bots
             }
             else
             {
-                List<UserMapData> currentList = new List<UserMapData>();
-                List<UserMapData> userDetailsList = new List<UserMapData>();
+                List<UserMapping> currentList = new List<UserMapping>();
+                List<UserMapping> userDetailsList = new List<UserMapping>();
                 userMappingData.TryGetValue("search", out currentList);
                 var client = new SimpleGraphClient(tokenResponse.Token);
                 var profile = await client.GetMeAsync();
@@ -968,7 +968,7 @@ namespace IdentityLinkingWithSSO.Bots
                 var title = !string.IsNullOrEmpty(profile.JobTitle) ? profile.JobTitle : "Unknown";
                 if (currentList == null)
                 {
-                    var userDetails = new UserMapData()
+                    var userDetails = new UserMapping()
                     {
                         AadId = turnContext.Activity.From.AadObjectId,
                         isAadSignedIn = true,
@@ -1005,7 +1005,7 @@ namespace IdentityLinkingWithSSO.Bots
                     var data = currentList.Find(e => e.AadId == turnContext.Activity.From.AadObjectId);
                     if (data == null)
                     {
-                        var userDetails = new UserMapData()
+                        var userDetails = new UserMapping()
                         {
                             AadId = turnContext.Activity.From.AadObjectId,
                             isAadSignedIn = true,
@@ -1484,7 +1484,7 @@ namespace IdentityLinkingWithSSO.Bots
 
         protected override async Task<MessagingExtensionResponse> OnTeamsMessagingExtensionConfigurationQuerySettingUrlAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionQuery query, CancellationToken cancellationToken)
         {
-            List<UserMapData> currentList = new List<UserMapData>();
+            List<UserMapping> currentList = new List<UserMapping>();
             userMappingData.TryGetValue("search", out currentList);
 
             if (currentList == null)
@@ -1527,7 +1527,7 @@ namespace IdentityLinkingWithSSO.Bots
 
         protected override async Task OnTeamsMessagingExtensionConfigurationSettingAsync(ITurnContext<IInvokeActivity> turnContext, JObject settings, CancellationToken cancellationToken)
         {
-            List<UserMapData> currentList = new List<UserMapData>();
+            List<UserMapping> currentList = new List<UserMapping>();
             userMappingData.TryGetValue("search", out currentList);
             string userConfigSettings;
 
@@ -1630,12 +1630,12 @@ namespace IdentityLinkingWithSSO.Bots
                         profile.JobTitle : "Unknown";
                 var googleData = new GoogleData();
                 var facebookData = new FacebookData();
-                List<UserMapData> currentList = new List<UserMapData>();
-                List<UserMapData> userDetailsList = new List<UserMapData>();
+                List<UserMapping> currentList = new List<UserMapping>();
+                List<UserMapping> userDetailsList = new List<UserMapping>();
                 userMappingData.TryGetValue("me", out currentList);
                 if (currentList == null)
                 {
-                    var userDetails = new UserMapData()
+                    var userDetails = new UserMapping()
                     {
                         AadId = turnContext.Activity.From.AadObjectId,
                         isAadSignedIn = true,
@@ -1667,7 +1667,7 @@ namespace IdentityLinkingWithSSO.Bots
                     var data = currentList.Find(e => e.AadId == turnContext.Activity.From.AadObjectId);
                     if (data == null)
                     {
-                        var userDetails = new UserMapData()
+                        var userDetails = new UserMapping()
                         {
                             AadId = turnContext.Activity.From.AadObjectId,
                             isAadSignedIn = true,

@@ -17,6 +17,12 @@ createdDate: "07-07-2021 13:38:27"
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are scoped to a single user. They can be pinned to the left navigation bar for easy access.
 
+![tabconfigure](Images/tabconfigure.png)
+
+![setuptab](Images/setuptab.png)
+
+![Mytab](Images/Mytab.png)
+
 ## Prerequisites
 -  [NodeJS](https://nodejs.org/en/)
 

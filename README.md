@@ -85,6 +85,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |13|  Type ahead search control on Adaptive Cards | This sample shows the feature of type ahead search (static and dynamic) control in Adaptive Cards. |[View][typeaheadsearch#csharp]|[View][typeaheadsearchonadaptivecard#js]
 |14|  People picker control in Adaptive Cards | This sample shows the feature of people picker control in Adaptive Cards. |[View][peoplepickeronadaptivecard#csharp]|[View][peoplepickeronadaptivecard#js]
 |15|  Proactive Messaging sample | This sample shows how to save user's conversation reference information to send proactive reminder message using Bots. This uses Teams toolkit for Visual Stuido Code to provide scafolding experience. ||[View][bot-proactive-msg-teamsfx#js]
+|16| User specific views in Adaptive Cards| This sample illustrates a few different ways developers can consume user-specific views in Adaptive cards. | [View][adaptivecards-userspecificviews#cs] |
 
 #### Additional samples
 
@@ -256,6 +257,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [bot-conversation-sso-quickstart#csharp_dotnetcore]:samples/bot-conversation-sso-quickstart/csharp_dotnetcore
 [bot-calling-meeting#csharp]:samples/bot-calling-meeting/csharp
 [botfileviewer#js]:samples/bot-sharepoint-file-viewer/nodejs
+[adaptivecards-userspecificviews#cs]:samples/bot-adaptivecards-user-specific-views/csharp
 [meetings-token-app#cs]:samples/meetings-token-app/csharp
 [apps-in-meeting#cs]:samples/apps-in-meeting/csharp
 [meetings-token-app#js]:samples/meetings-token-app/nodejs
