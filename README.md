@@ -296,7 +296,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-events#js]:samples/meetings-events/nodejs
 [meeting-recruitment-app#cs]:samples/meeting-recruitment-app/csharp
 [meeting-recruitment-app#js]:samples/meeting-recruitment-app/nodejs
-[meetings-share-to-stage-signing#csharp]:samples/meetings-share-to-stage-signing
+[meetings-share-to-stage-signing#csharp]:samples/meetings-share-to-stage-signing/csharp
 [qrappinstallation#csharp]:samples/app-installation-using-qr-code/csharp
 [qrappinstallation#nodejs]:samples/app-installation-using-qr-code/nodejs
 [qrjointeam#csharp]:samples/bot-join-team-using-qr-code/csharp
