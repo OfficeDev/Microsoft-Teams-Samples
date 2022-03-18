@@ -19,6 +19,23 @@ A task module allows you to create modal popup experiences in your Teams applica
 
 Task modules build on the foundation of Microsoft Teams tabs: a task module is essentially a tab in a popup window. It uses the same SDK, so if you've built a tab you are already 90% of the way to being able to create a task module.
 
+
+![adaptivecard](Microsoft.Teams.Samples.TaskModule.Web/Images/adaptivecard.png)
+
+![Customform](Microsoft.Teams.Samples.TaskModule.Web/Images/Customform.png)
+
+![customformregister](Microsoft.Teams.Samples.TaskModule.Web/Images/customformregister.png)
+
+![adaptivecard2](Microsoft.Teams.Samples.TaskModule.Web/Images/adaptivecard2.png)
+
+![powerapps](Microsoft.Teams.Samples.TaskModule.Web/Images/powerapps.png)
+
+![TaskModule](Microsoft.Teams.Samples.TaskModule.Web/Images/TaskModule.png)
+
+![tasks](Microsoft.Teams.Samples.TaskModule.Web/Images/tasks.png)
+
+![youtube](Microsoft.Teams.Samples.TaskModule.Web/Images/youtube.png)
+
 ## Try it yourself
 
 This sample is deployed on Microsoft Azure and you can try it yourself by uploading [Task Module CSharp.zip](Microsoft.Teams.Samples.TaskModule.Web/Manifest/TaskModuleCSharp.zip) to one of your teams and/or as a personal app. (Sideloading must be enabled for your tenant; see [step 6 here](https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-tenant#turn-on-microsoft-teams-for-your-organization).) The app is running on the free Azure tier, so it may take a while to load if you haven't used it recently and it goes back to sleep quickly if it's not being used, but once it's loaded it's pretty snappy.
