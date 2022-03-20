@@ -21,7 +21,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
 
             activity.Text = TemplateUtility.ParseInvokeRequestJson(activity.Value.ToString());
 
-            //Change the Type of Activity to work in exisiting Root Dialog Architecture
+            //Change the Type of Activity to work in existing Root Dialog Architecture
             activity.Type = Strings.MessageActivity;
 
             return activity;
