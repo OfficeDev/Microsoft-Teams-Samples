@@ -168,3 +168,20 @@
 .userName {
   font-size: 12px;
 }
+
+.part-container {
+  border: 1px solid;
+  padding: 5px;
+  border-radius: 5px;
+  margin-right: 2px;
+}
+
+.share-specific-part-button {
+  height: 32px;
+  cursor: pointer;
+  margin-top: 10px;
+  background-color: #484644;
+  color: #ffffff;
+  border: 1px solid #b7b7b7;
+  margin-top: 5px;
+}

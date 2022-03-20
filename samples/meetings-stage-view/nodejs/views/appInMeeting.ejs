@@ -18,77 +18,38 @@
       Sprint Status
     </div>
     <div id="boardDiv" class="chat-window">
-      <div>
-        <div class="label">
-          To Do
-        </div>
-
-        <button onclick="openTaskModule('todo')" class="add-card-button">
-          <img class="add-icon" src="/Images/add_icon.svg" title="Click to continue existing conversation" />
-        </button>
-        <br/>
-        <button onclick="shareSpecificPart('todo')" class="share-specific-part-button">
-          Share To Do
-        </button>
-
-        <div id="todo">
-          <!-- The statud details will be updated here on runtime -->
-        </div>
+      <div class="part-container">
+        <%- include('todo') %>
       </div>
-      <div>
-        <div class="label">
-          Doing
-        </div>
-
-        <button onclick="openTaskModule('doing')" class="add-card-button">
-          <img class="add-icon" src="/Images/add_icon.svg" title="Click to continue existing conversation" />
-        </button>
-        <br />
-        <button onclick="shareSpecificPart('doing')" class="share-specific-part-button">
-            Share Doing
-        </button>
-
-        <div id="doing">
-          <!-- The statud details will be updated here on runtime -->
-        </div>
+      <div class="part-container">
+        <%- include('doing') %>
       </div>
-      <div>
-        <div class="label">
-          Done
-        </div>
-
-        <button onclick="openTaskModule('done')" class="add-card-button">
-          <img class="add-icon" src="/Images/add_icon.svg" title="Click to continue existing conversation" />
-        </button>
-        <br />
-        <button onclick="shareSpecificPart('done')" class="share-specific-part-button">
-            Share Done
-        </button>
-        
-        <div id="done">
-          <!-- The statud details will be updated here on runtime -->
-        </div>
+      <div class="part-container">
+        <%- include('done') %>
       </div>
     </div>
   </div>
   <script>
     microsoftTeams.initialize();
-    $(document).ready(function () {
-      if (window.innerWidth > 600) {
-        // Adding and removing classes based on screen width, to show app in stage view and in side panel
-        $("#todo, #doing, #done").addClass("grid-item");
-        $("#todo, #doing, #done").removeClass("grid-item-sidepanel");
-        $("#boardDiv").addClass("chat-window");
-        $("#boardDiv").removeClass("chat-window-sidepanel");
-      }
-      else {
+    microsoftTeams.getContext((context) => {
+      $(document).ready(function () {
+      if (context.frameContext === "sidePanel") {
         // Adding and removing classes based on screen width, to show app in stage view and in side panel
         $("#todo, #doing, #done").addClass("grid-item-sidepanel");
         $("#todo, #doing, #done").removeClass("grid-item");
         $("#boardDiv").addClass("chat-window-sidepanel");
         $("#boardDiv").removeClass("chat-window");
       }
+      else {
+        // Adding and removing classes based on screen width, to show app in stage view and in side panel
+        $("#todo, #doing, #done").addClass("grid-item");
+        $("#todo, #doing, #done").removeClass("grid-item-sidepanel");
+        $("#boardDiv").addClass("chat-window");
+        $("#boardDiv").removeClass("chat-window-sidepanel");
+      }
     });
+    });
+    
 
     // Creating socket instance for real time status updates in stage view.
     const socket = io();

@@ -15,67 +15,32 @@
 <body>
     <script>
     microsoftTeams.initialize();
-
-    // Creating socket instance for real time status updates in stage view.
-    const socketTodo = io();
-    socketTodo.on('connection')
-
-    // Updating containers when a status message is received.
-    socketTodo.on('message', (data, status) => {
-      if (data !== undefined) {
-        var detailsClass = window.innerWidth > 600 ? "details" : "details-sidepanel";
-        document.getElementById(status).innerHTML += (`<div class=${detailsClass}>
-                <div class="description" title="${data.taskDescription}">${data.taskDescription}</div>
-                <div class="userName">--${data.userName}</div>
-          `);
-      }
-    })
-        // Method to check validate form and add the entered details.
-        function sendTaskDetails() {
-            var taskDescription = document.querySelector(".task-description")
-            var userName = document.querySelector(".user-name")
-            var isValid = true;
-            $('.task-description,.user-name').each(function (e) {
-                if ($.trim($(this).val()) == '') {
-                    isValid = false;
-                    $(this).css({
-                        "border": "1px solid red"
-                    });
+    microsoftTeams.getContext((context) => {
+            $(document).ready(function () {
+                if (context.frameContext == "sidePanel") {
+                    $(".share-specific-part-button").show();
                 }
                 else {
-                    $(this).css({
-                        "border": "",
-                        "background": ""
-                    });
+                    $(".share-specific-part-button").hide();
                 }
             });
-
-            if (isValid == false) {
-                e.preventDefault();
-                return false;
-            }
-
-            // Meeting participant's entered details.
-            const taskDetails = {
-                "taskDescription": taskDescription.value,
-                "userName": userName.value
-            };
-            socketTodo.emit('message', taskDetails, 'todo');
-            return true;
-        }
+        });
     </script>
-    <form class="chat-form" onsubmit="sendTaskDetails()">
-        <h3>Add to ToDo:</h3>
-        <div class="chat-label">
-            Assigned To:
-            <input type="text" class="user-name" />
-        </div>
-        <div class="chat-label">
-            Description:
-            <input type="text" class="task-description" />
-        </div>
-        <input type="submit" id="addDetails" value="Add" />
-    </form>
+    <div class="label">
+        To Do
+      </div>
+
+      <button onclick="openTaskModule('todo')" class="add-card-button">
+        <img class="add-icon" src="/Images/add_icon.svg" title="Click to continue existing conversation" />
+      </button>
+      <br/>
+      <button onclick="shareSpecificPart('todo')" class="share-specific-part-button">
+        Share To Do
+      </button>
+
+      <div id="todo">
+        <!-- The statud details will be updated here on runtime -->
+      </div>
 </body>
 
 </html>
