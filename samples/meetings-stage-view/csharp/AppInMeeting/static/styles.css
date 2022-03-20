@@ -178,3 +178,9 @@
 .userName {
     font-size: 12px;
 }
+
+.part-container {
+    border: 1px solid;
+    padding: 5px;
+    border-radius: 5px;
+}
