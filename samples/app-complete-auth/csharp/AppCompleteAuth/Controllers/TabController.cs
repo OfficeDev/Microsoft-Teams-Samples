@@ -97,7 +97,7 @@ namespace AppCompleteAuth.Controllers
         {
             if(userName == Constant.UserName && password == Constant.Password)
             {
-                return Json("Authentication Sucessful");
+                return Json("Authentication Successful");
             }
             else
             {
@@ -139,7 +139,7 @@ namespace AppCompleteAuth.Controllers
             }
             else
             {
-                return Json("Error occoured");
+                return Json("Error occurred");
             }
         }
     }
