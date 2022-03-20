@@ -68,7 +68,7 @@
         // shareToStage.
         const shareSpecificPart = (partName) => {
             var appContentUrl = "";
-            appContentUrl = partName == 'todo' ? `${window.location.origin}/AppSpecificPart/todo` : partName == 'doing' ? `${window.location.origin}/AppSpecificPart/Doing` : `${window.location.origin}/AppSpecificPart/Done`;
+            appContentUrl = partName == 'todo' ? `${window.location.origin}/AppSpecificPart/todo` : partName == 'doing' ? `${window.location.origin}/AppSpecificPart/doing` : `${window.location.origin}/AppSpecificPart/done`;
 
             microsoftTeams.meeting.shareAppContentToStage((err, result) => {
                 if (result) {
