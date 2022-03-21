@@ -1,17 +1,3 @@
----
-page_type: sample
-description: This sample illustrates people picker implementation using Adaptive Card inside Teams App.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- csharp
-extensions:
-contentType: samples
-createdDate: "12-03-2022 11:00:00"
----
-
 ### People Picker Sample
 
 #### About
@@ -37,7 +23,7 @@ This sample illustrates [people picker implementation using Adaptive Card](https
 
 #### Adaptive Card
 
-![Preview](Docs/Card.png)
+![Preview](Docs/card.png)
 
 ##### Workflow:
 * User invokes the people picker bot and [selects "card" bot command](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-commands-menu?tabs=desktop%2Cdotnet). NOTE : Bot can be invoked in 1-1 conversation, group or channel.
@@ -80,9 +66,9 @@ This sample illustrates [people picker implementation using Adaptive Card](https
 * [Register a bot with Azure](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-4.0&tabs=userassigned).
   * Make sure to copy and save the Azure Bot resource app ID and password.
 * [Connect the bot to Microsoft Teams](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0).
-* Run ngrok and point it to port: 50086.
+* Run ngrok and point it to port: 3978.
     ```
-    ngrok http 50086 -host-header=localhost:50086
+    ngrok http 3978 -host-header=localhost:3978
     ```
 
 
@@ -99,18 +85,23 @@ This sample illustrates [people picker implementation using Adaptive Card](https
 ##### Azure AD App Registration and Permission
 * The app uses client context for Creating Chat and App Installation in Group Conversation.
 * Goto Azure AD Portal and look for the Application with the app ID saved earlier.
+* Goto Authentication section from the left menu. Under Platform configurations, select "Add a Platform"
+* Select "Web" under "Web Applications". Under Redirect URIs add the following (other fields are optional):
+  * URI : `https://<randomdomain>.ngrok.io/default.html`
 * Navigate to API Permissions for the app. Select Add a permission. Select Microsoft Graph, Application Permission.
 * Provide the Following Application Permissions.
   * Chat.Create
   * TeamsAppInstallation.ReadWriteForChat.All
 * Grant Admin consent.
   * If you are the Admin, then admin consent can be granted from API permissions page by clicking Grant Admin consent once an API permission is added.
-  * If you are not the admin, share the following URL with the admin and request to grant consent.
+  * If you are not the admin, share the following URL with the admin and request to grant consent.  
     * URL - https://login.microsoftonline.com/{tenant-id}/adminconsent?client_id={app-id} where
     * {app-id} is the app ID saved earlier.
     * {tenant-id} is your organization's tenant ID.
+    * After Successfully granting the permission, admins will see the following screen
+    ![Default](Docs/Default.png)
 
-NOTE : We can add the above API permissions to a new application by [Registering a new app with Azure AD](https://docs.microsoft.com/en-us/powerapps/developer/data-platform/walkthrough-register-app-azure-active-directory) and save new App Id and Client Secret specifically for Graph API calls. Being a Sample, we are lmiting to single app registration only.
+NOTE : We can add the above API permissions to a new application by [Registering a new app with Azure AD](https://docs.microsoft.com/en-us/powerapps/developer/data-platform/walkthrough-register-app-azure-active-directory) and save new App Id and Client Secret specifically for Graph API calls. Being a Sample, we are lmiting to single app registration only. 
 
 ##### Project setup
 * Clone the repo or download the sample code to your machine.
