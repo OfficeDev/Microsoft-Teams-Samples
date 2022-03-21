@@ -46,7 +46,7 @@
   "validDomains": [
       "localhost:44326",
       "*.ngrok.io",
-      "meetingsigningpoc.azurewebsites.net"
+      "<<deployment-url>>"
   ],
   "authorization": {
     "permissions": {
