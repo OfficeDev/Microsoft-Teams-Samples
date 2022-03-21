@@ -6,14 +6,14 @@ app.use(express.urlencoded({
     extended: true
 }));
 const server = require('http').createServer(app);
-const io = require('socket.io')(server,{cors:{origin:"*"}});
+const io = require('socket.io')(server,{cors:{origin: "*"}});
+
 io.on("connection", (socket) => {
     socket.on("message", (message) => {
       io.emit("message", message)
     })
   });
 
-
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);
 });

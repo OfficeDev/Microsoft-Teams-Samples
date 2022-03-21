@@ -1,9 +1,9 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.11",
-  "version": "1.0.1",
-  "id": "{{Manifest-id}}",
-  "packageName": "com.teams.incomingwebhook",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.10",
+  "id": "<<Manifest-id>>",
+  "packageName": "com.teams.meetingsstageview",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -15,22 +15,25 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "Incoming webhook",
-    "full": "Sample to show incoming webhook card"
+    "short": "Live coding interview",
+    "full": "Live coding interview"
   },
   "description": {
-    "short": "Incoming webhook",
-    "full": "This sample demos UI to type in Incoming Webhook URL and message card payload, which send the card in the team also demonstrates the HttpPOST action in the card. "
+    "short": "Live coding interview",
+    "full": "This example shows live coding in teams meeting."
   },
   "accentColor": "#5558AF",
-  "staticTabs": [
+  "configurableTabs": [
     {
-      "entityId": "incomingwebhook",
-      "name": "Incoming webhook",
-      "contentUrl": "https://{{Domain Name}}/configure-message",
-      "websiteUrl": "https://{{Domain Name}}/configure-message",
+      "configurationUrl": "https://{{Domain Name}}/configure",
+      "canUpdateConfiguration": true,
       "scopes": [
-        "personal"
+        "team",
+        "groupchat"
+      ],
+      "context": [
+        "meetingSidePanel",
+        "meetingStage"
       ]
     }
   ],
@@ -39,6 +42,16 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{Domain Name}}"
-  ]
+    "{{Domain-name}}"
+  ],
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "MeetingStage.Write.Chat",
+          "type": "Delegated"
+        }
+      ]
+    }
+  }
 }
