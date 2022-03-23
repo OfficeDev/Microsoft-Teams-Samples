@@ -280,7 +280,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [tab-request-approval#csharp]:samples/tab-request-approval/csharp
 [bot-request-approval#csharp]:samples/bot-request-approval/csharp
 [typeaheadsearchonadaptivecard#js]:samples/bot-type-ahead-search-adaptive-cards/nodejs
-[meetings-live-code-interview#csharp]:samples/meetings-live-code-interview/csharp
+[meetings-live-code-interview#csharp]:samples/meeting-live-coding-interview/csharp
 
 [app-localization#cs]:samples/app-localization/csharp
 [app-localization#js]:samples/app-localization/nodejs
