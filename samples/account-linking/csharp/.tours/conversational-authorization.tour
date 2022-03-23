@@ -1,0 +1,177 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Conversational Authorization",
+  "steps": [
+    {
+      "file": "Source/Dialogs/MainDialog.cs",
+      "description": "The conversational authorization is the most complex client for the account linking. \r\n\r\nSince conversations don't intrensically have 'state' we use the BotBuilder Dialog library to assist.  ",
+      "line": 31
+    },
+    {
+      "file": "Source/Dialogs/AccountLinkingPrompt.cs",
+      "description": "The majority of the work is done with this `AccountLinkingPrompt`. This dialog is reponsible for acting as the client for the account linking flow. ",
+      "line": 39
+    },
+    {
+      "file": "Source/Dialogs/AccountLinkingPrompt.cs",
+      "description": "We first optimistacally attempt to get an access token for the user. ",
+      "line": 56,
+      "selection": {
+        "start": {
+          "line": 48,
+          "character": 7
+        },
+        "end": {
+          "line": 56,
+          "character": 109
+        }
+      }
+    },
+    {
+      "file": "Source/Dialogs/AccountLinkingPrompt.cs",
+      "description": "If we have the token, we go ahead with the rest of the conversation and pass the access token to the next dialog in the flow.",
+      "line": 92,
+      "selection": {
+        "start": {
+          "line": 92,
+          "character": 13
+        },
+        "end": {
+          "line": 92,
+          "character": 104
+        }
+      }
+    },
+    {
+      "file": "Source/Dialogs/AccountLinkingPrompt.cs",
+      "description": "Otherwise, we need to start the authorization flow. \r\n\r\nFirst, we generate the [PKCE](https://www.rfc-editor.org/rfc/rfc7636) code challenge and verifier. We encode the code challenge into the query string for starting the common auth flow.  ",
+      "line": 66,
+      "selection": {
+        "start": {
+          "line": 59,
+          "character": 13
+        },
+        "end": {
+          "line": 66,
+          "character": 16
+        }
+      }
+    },
+    {
+      "file": "Source/Dialogs/AccountLinkingPrompt.cs",
+      "description": "We then send the user a card prompting them to sign in. The action will open the associated link in an auth popup. \r\n\r\n![Image of a signin card in the 1:1 conversation with the app](./Docs/Images/ConversationalPrompt.jpg)",
+      "line": 86,
+      "selection": {
+        "start": {
+          "line": 69,
+          "character": 13
+        },
+        "end": {
+          "line": 86,
+          "character": 133
+        }
+      }
+    },
+    {
+      "file": "Source/Dialogs/AccountLinkingPrompt.cs",
+      "description": "We save the activity's id so we can replace it (to prevent the user from logging in twice for the same request)",
+      "line": 87,
+      "selection": {
+        "start": {
+          "line": 87,
+          "character": 13
+        },
+        "end": {
+          "line": 87,
+          "character": 50
+        }
+      }
+    },
+    {
+      "file": "Source/wwwroot/authEnd.js",
+      "description": "When the user completes the authorization flow this end page will call the `notifysuccess` method to send the state & code back to the bot.",
+      "line": 17,
+      "selection": {
+        "start": {
+          "line": 17,
+          "character": 9
+        },
+        "end": {
+          "line": 17,
+          "character": 84
+        }
+      }
+    },
+    {
+      "file": "Source/Bots/SampleActivityHandler.cs",
+      "description": "The sigin state verification comes as an invoke which we then use to re-activiate the dialog from before. ",
+      "line": 164
+    },
+    {
+      "file": "Source/Dialogs/AccountLinkingPrompt.cs",
+      "description": "If we detect this is the invoke that includes the code / token we attempt to claim the code",
+      "line": 124
+    },
+    {
+      "file": "Source/Dialogs/AccountLinkingPrompt.cs",
+      "description": "We check the state is what we expect given the code verifier we stored earlier. ",
+      "line": 131,
+      "selection": {
+        "start": {
+          "line": 130,
+          "character": 13
+        },
+        "end": {
+          "line": 131,
+          "character": 74
+        }
+      }
+    },
+    {
+      "file": "Source/Dialogs/AccountLinkingPrompt.cs",
+      "description": "We then perform the common 'claim' flow given the tenant and user ids from the activity and the account linking token / code verifier from the authorization flow.",
+      "line": 144,
+      "selection": {
+        "start": {
+          "line": 139,
+          "character": 13
+        },
+        "end": {
+          "line": 144,
+          "character": 15
+        }
+      }
+    },
+    {
+      "file": "Source/Dialogs/AccountLinkingPrompt.cs",
+      "description": "We then fetch the now retrieved access token. If it is somehow already gone, bail on the dialog. ",
+      "line": 152,
+      "selection": {
+        "start": {
+          "line": 147,
+          "character": 9
+        },
+        "end": {
+          "line": 152,
+          "character": 10
+        }
+      }
+    },
+    {
+      "file": "Source/Dialogs/AccountLinkingPrompt.cs",
+      "description": "Before continuing on with the dialog it is important we clean up and update the sign in card so that the user cannot use that button again. \r\n\r\nSince the 'state' is one-time use subsequent logins will fail. ",
+      "line": 166,
+      "selection": {
+        "start": {
+          "line": 155,
+          "character": 12
+        },
+        "end": {
+          "line": 166,
+          "character": 14
+        }
+      }
+    }
+  ],
+  "ref": "nibeauli/account-linking-sample"
+}
