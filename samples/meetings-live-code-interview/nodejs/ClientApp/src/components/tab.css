@@ -1,20 +1,12 @@
-.text-label {
-    margin-top: 0.2rem !important;
-}
 .send-btn {
     margin-left:9rem !important;
     margin-top: 1rem !important;
     max-width:3rem !important;
 }
 
-.ed-label {
-    margin-left: 2rem !important;
-    margin-top: 0.5rem !important;
-}
-
-.ed-container {
-    margin-top: 1rem !important;
-}
 .text-ui{
     margin-bottom: 0.5rem;
+}
+.card{
+    width:17.2rem !important;
 }

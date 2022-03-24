@@ -5,7 +5,6 @@ import "./tab.css"
 import { IQuestionDetails } from '../types/question';
 
 const Tab = () => {
-
     const [frameContext, setframeContext] = React.useState<any>('');
     React.useEffect(() => {
         microsoftTeams.initialize();
@@ -35,10 +34,10 @@ const Tab = () => {
         <>
             <div hidden={frameContext !== "sidePanel"}>
                 {IQuestionDetails.questions ? IQuestionDetails.questions.map((question) => {
-                    return <Card>
+                    return <Card className="card">
                         <CardHeader>
                             <Flex gap="gap.small">
-                                <Text content={question.srNo} weight="bold" />
+                                <Text content={question.questionId} weight="bold" />
                                 <Flex column>
                                     <Text className="text-ui" content={"Question: " + question.question} weight="bold" />
                                     <Text className="text-ui" content={"Language: " + question.language} size="small" />
@@ -46,10 +45,10 @@ const Tab = () => {
                             </Flex>
                         </CardHeader>
                         <CardBody>
-                            <Button className="send-btn" content="Share" onClick={() => shareSpecificPart(question.srNo)} />
+                            <Button className="send-btn" content="Share" onClick={() => shareSpecificPart(question.questionId)} />
                         </CardBody>
                     </Card>
-                }) : null}
+                }) : <div> No content to show</div>}
             </div>
         </>
     )

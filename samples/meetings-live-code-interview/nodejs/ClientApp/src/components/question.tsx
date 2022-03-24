@@ -8,44 +8,51 @@ import "./tab.css"
 
 const Question = (props: any) => {
     const params = props.match.params;
-    const questionNumber = params['srno'];
+    const questionNumber = params['questionId'];
     const [data, setData] = React.useState();
-    const socket = io();
+    const [socket, setSocket] = React.useState(io());
 
     React.useEffect(() => {
         microsoftTeams.initialize();
-
+        setSocket(io());
     }, [])
 
-    const debounce = (callback: any, lim: any) => {
-        let timer: any;
-        return (...args: any) => {
-            clearTimeout(timer);
-            timer = setTimeout(() => {
-                callback.apply(this, args);
-            }, lim)
-        }
-    }
-
-    // Handle editor value change. 
-    const handleEditor = debounce((value: any) => {
-        socket.on('connection', () => {
-        });
-        socket.emit('message', value);
-    }, 2000);
+    // subscribe to the socket event
+    React.useEffect(() => {
+    if (!socket) return;
+    socket.on('connection', () => {
+        socket.connect();
+    });
 
     // get latest state of editor.
     socket.on("message", data => {
         setData(data);
     });
+ 
+  }, [socket]);
+
+    const emitMessageAction = (handleEditorChange: any, time: any) => {
+        let timer: any;
+        return (...argument: any) => {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                handleEditorChange.apply(this, argument);
+            }, time)
+        }
+    }
+
+    // Handle editor value change. 
+    const handleEditor = emitMessageAction((value: any) => {
+        socket.emit('message', value);
+    }, 2000);
 
     return (
         <>
             {IQuestionDetails.questions ? IQuestionDetails.questions.map((question) => {
-                if (question.srNo == questionNumber) {
+                if (question.questionId == questionNumber) {
                     return <>
                         <Flex gap="gap.small">
-                            <Text content={question.srNo} weight="bold" />
+                            <Text content={question.questionId} weight="bold" />
                             <Flex column>
                                 <Text className="text-ui" content={"Question: " + question.question} weight="bold" />
                                 <Text className="text-ui" content={"Language: " + question.language} size="small" />

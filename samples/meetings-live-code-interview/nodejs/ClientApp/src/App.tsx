@@ -98,13 +98,13 @@ class App extends React.Component<{}, IAppState> {
     });
     return (
       <TeamsThemeContext.Provider value={context}>
-        <Suspense fallback={<div></div>}>
+        <Suspense fallback={<div> Something went wrong</div>}>
           <div className="appContainer">
             <Router>
               <Switch>
                 <Route exact path='/configure' component={Configuration}></Route>
                 <Route exact path='/tab' component={Tab}></Route>
-                <Route exact path='/question/:srno' component={Question}></Route>
+                <Route exact path='/question/:questionId' component={Question}></Route>
               </Switch>
             </Router>
           </div>
