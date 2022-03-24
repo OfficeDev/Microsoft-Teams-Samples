@@ -47,7 +47,8 @@
           "data": {
             "CreatedBy": "${createdBy}",
             "AssignedTo": "${assignedTo}",
-            "UserMRI": "${userMRI}"
+            "UserMRI": "${userMRI}",
+            "IncidentId": "${incidentId}"
           }
         }
       ]

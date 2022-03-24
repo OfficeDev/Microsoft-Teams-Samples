@@ -9,6 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SequentialUserSpecificFlow.Bots;
+using SequentialUserSpecificFlow.Models;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace SequentialUserSpecificFlow
 {
@@ -30,7 +33,8 @@ namespace SequentialUserSpecificFlow
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
             services.AddRazorPages();
-            
+            services.AddSingleton<ConcurrentDictionary<string, List<IncidentDetails>>>();
+
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
             services.AddTransient<IBot, UserSpecificBot>();
             

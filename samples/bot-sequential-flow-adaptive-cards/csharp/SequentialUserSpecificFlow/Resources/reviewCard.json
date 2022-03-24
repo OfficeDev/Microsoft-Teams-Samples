@@ -12,7 +12,8 @@
         "Category": "${category}",
         "SubCategory": "${subCategory}",
         "AssignedToName": "${assignedToName}",
-        "UserMRI": "${userMRI}"
+        "UserMRI": "${userMRI}",
+        "IncidentId": "${incidentId}"
       }
     },
     "userIds": [
