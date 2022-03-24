@@ -7,7 +7,7 @@ products:
 languages:
 - csharp
 title: Tabs Azure AD SSO Sample - C#
-description: Microsoft Teams hello world sample app for tabs Azure AD SSO in Node.js
+description: Microsoft Teams hello world sample app for tabs Azure AD SSO in C#
 extensions:
   contentType: samples
   createdDate: 12/3/2021 12:53:17 PM
