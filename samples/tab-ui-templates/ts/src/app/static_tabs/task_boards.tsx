@@ -1,9 +1,5 @@
-import { Board } from "@fluentui/react-teams";
-import {
-  IBoardItem,
-  IBoardItemCardLayout,
-} from "@fluentui/react-teams/lib/components/Board/Board";
-import { TUsers } from "@fluentui/react-teams/lib/types/types";
+import { Board, IBoardItem, IBoardItemCardLayout, TUsers } from "@fluentui/react-teams";
+
 // TODO: Avoid faker
 import { fake, image } from "faker";
 import { people } from "@uifabric/example-data";

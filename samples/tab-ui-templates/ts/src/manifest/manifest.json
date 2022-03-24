@@ -28,25 +28,38 @@
     {
       "entityId": "sample.app.welcome",
       "name": "Welcome",
-      "contentUrl": "https://{{HOSTNAME}}/welcome",
+      "contentUrl": "https://{{HOSTNAME}}/#/welcome",
       "scopes": ["personal"]
     },
     {
       "entityId": "sample.app.dashboard",
       "name": "Dashboard",
-      "contentUrl": "https://{{HOSTNAME}}/dashboard",
+      "contentUrl": "https://{{HOSTNAME}}/#/dashboard",
       "scopes": ["personal"]
     },
     {
       "entityId": "sample.app.list",
       "name": "List",
-      "contentUrl": "https://{{HOSTNAME}}/list",
+      "contentUrl": "https://{{HOSTNAME}}/#/list",
       "scopes": ["personal"]
     },
     {
       "entityId": "sample.app.boards",
       "name": "Task boards",
-      "contentUrl": "https://{{HOSTNAME}}/board",
+      "contentUrl": "https://{{HOSTNAME}}/#/board",
+      "scopes": ["personal"]
+    }
+    ,
+    {
+      "entityId": "sample.app.wizard",
+      "name": "Wizard",
+      "contentUrl": "https://{{HOSTNAME}}/#/wizard",
+      "scopes": ["personal"]
+    },
+    {
+      "entityId": "sample.app.form",
+      "name": "Form",
+      "contentUrl": "https://{{HOSTNAME}}/#/form",
       "scopes": ["personal"]
     }
   ],
