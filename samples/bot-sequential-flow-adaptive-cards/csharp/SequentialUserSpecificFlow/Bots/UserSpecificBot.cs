@@ -25,10 +25,12 @@ namespace SequentialUserSpecificFlow.Bots
     {
         private List<Info> memberDetails = new List<Info> { };
         private readonly ConcurrentDictionary<string, List<IncidentDetails>> incidentDetailsList;
+        private readonly ConcurrentDictionary<string, IsBotInstalled> isBotInstalled;
 
-        public UserSpecificBot(ConcurrentDictionary<string, List<IncidentDetails>> _incidentDetailsList)
+        public UserSpecificBot(ConcurrentDictionary<string, List<IncidentDetails>> _incidentDetailsList, ConcurrentDictionary<string, IsBotInstalled> _isBotInstalled)
         {
-            incidentDetailsList= _incidentDetailsList;
+            incidentDetailsList = _incidentDetailsList;
+            isBotInstalled = _isBotInstalled;
         }
 
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
@@ -67,6 +69,12 @@ namespace SequentialUserSpecificFlow.Bots
             {
                 var asJobject = JObject.FromObject(turnContext.Activity.Value);
                 var data = (object)asJobject.ToObject<CardTaskFetchValue<object>>()?.Data;
+                var botInstalled = (object)JObject.Parse(data.ToString()).ToObject<CardTaskFetchValue<object>>()?.MsTeams;
+                if (!string.IsNullOrEmpty(botInstalled.ToString()))
+                {
+                    return CreateInvokeResponse();
+                };
+
                 var incidentId = (string)JObject.Parse(data.ToString()).ToObject<CardTaskFetchValue<string>>()?.IncidentId;
                 var incident = currentIncidentList.FirstOrDefault(incident => incident.IncidentId.ToString() == incidentId);
                 await turnContext.SendActivityAsync(MessageFactory.Attachment(GetIncidentReviewCard(incident)));
@@ -75,6 +83,25 @@ namespace SequentialUserSpecificFlow.Bots
 
             if (turnContext.Activity.Name == "composeExtension/fetchTask")
             {
+                var isBotInstalledInScope = new IsBotInstalled();
+                isBotInstalled.TryGetValue(turnContext.Activity.Conversation.Id, out isBotInstalledInScope);
+
+                if (isBotInstalledInScope == null)
+                {
+                    return CreateInvokeResponse(new MessagingExtensionActionResponse
+                    {
+                        Task = new TaskModuleContinueResponse
+                        {
+                            Value = new TaskModuleTaskInfo
+                            {
+                                Card = GetAdaptiveCardAttachmentFromFile("installBot.json"),
+                                Height = 200,
+                                Width = 400,
+                                Title = "Bot is not installed",
+                            },
+                        },
+                    });
+                }
                 if (currentIncidentList == null)
                 {
                     return CreateInvokeResponse(new MessagingExtensionActionResponse
@@ -325,15 +352,24 @@ namespace SequentialUserSpecificFlow.Bots
             return adaptiveCardAttachment;
         }
 
-        protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
+
+        /// <summary>
+        /// Invoked when members other than this bot (like a user) are removed from the conversation.
+        /// </summary>
+        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
+        protected override async Task OnConversationUpdateActivityAsync(ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            var welcomeText = "Hello and welcome!";
-            foreach (var member in membersAdded)
+            turnContext = turnContext ?? throw new ArgumentNullException(nameof(turnContext));
+            if (turnContext.Activity.MembersAdded != null && turnContext.Activity.MembersAdded.Any(member => member.Id == turnContext.Activity.Recipient.Id))
             {
-                if (member.Id != turnContext.Activity.Recipient.Id)
+                var installBot = new IsBotInstalled()
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text(welcomeText, welcomeText), cancellationToken);
-                }
+                    isBotInstalled = true
+                };
+                isBotInstalled.AddOrUpdate(turnContext.Activity.Conversation.Id, installBot, (key, value) => installBot);
+                await turnContext.SendActivityAsync(MessageFactory.Text("Hello and Welcome"));
             }
         }
 
@@ -390,6 +426,19 @@ namespace SequentialUserSpecificFlow.Bots
                 Content = JsonConvert.DeserializeObject(cardJsonString),
             };
 
+            return adaptiveCardAttachment;
+        }
+
+        private static Attachment GetAdaptiveCardAttachmentFromFile(string fileName)
+        {
+            //Read the card json and create attachment.
+            string[] paths = { ".", "Resources", fileName };
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
+            var adaptiveCardAttachment = new Attachment()
+            {
+                ContentType = "application/vnd.microsoft.card.adaptive",
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
+            };
             return adaptiveCardAttachment;
         }
     }

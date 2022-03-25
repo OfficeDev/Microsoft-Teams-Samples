@@ -12,5 +12,8 @@ namespace SequentialUserSpecificFlow.Models
 
         [JsonProperty("data")]
         public object Data { get; set; }
+
+        [JsonProperty("msteams")]
+        public object MsTeams { get; set; }
     }
 }

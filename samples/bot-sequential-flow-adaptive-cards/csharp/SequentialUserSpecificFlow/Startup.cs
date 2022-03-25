@@ -34,7 +34,12 @@ namespace SequentialUserSpecificFlow
 
             services.AddRazorPages();
             services.AddSingleton<ConcurrentDictionary<string, List<IncidentDetails>>>();
+            services.AddSingleton<ConcurrentDictionary<string, IsBotInstalled>>();
+            // Create the storage we'll be using for User and Conversation state. (Memory is great for testing purposes.)
+            services.AddSingleton<IStorage, MemoryStorage>();
 
+            // Create the Conversation state. (Used by the Dialog system itself.)
+            services.AddSingleton<UserState>();
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
             services.AddTransient<IBot, UserSpecificBot>();
             

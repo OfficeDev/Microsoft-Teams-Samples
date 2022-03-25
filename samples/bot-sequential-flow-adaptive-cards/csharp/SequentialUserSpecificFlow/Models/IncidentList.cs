@@ -13,4 +13,9 @@ namespace SequentialUserSpecificFlow.Models
 
         public Guid value { get; set; }
     }
+
+    public class IsBotInstalled
+    {
+        public bool isBotInstalled { get; set; }
+    }
 }
