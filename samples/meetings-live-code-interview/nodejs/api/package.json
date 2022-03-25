@@ -1,7 +1,7 @@
 {
-  "name": "sequential-workflow-adaptive-card",
+  "name": "meeting-live-coding-interview",
   "version": "1.0.0",
-  "description": "Sequential Workflows in adaptive card",
+  "description": "App demos functionality to do live coding in meeting.",
   "main": "server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
