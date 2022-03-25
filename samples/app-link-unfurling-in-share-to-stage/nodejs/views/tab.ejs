@@ -1,0 +1,18 @@
+<head>
+    <link rel="stylesheet" href="./tab.css">
+    <script async defer src="https://teams.microsoft.com/share/launcher.js"></script>
+    <script>
+         $(document).ready(function () {
+            var element = document.getElementById("stt-btn");
+            element.setAttribute("data-href",`${window.location.origin}?linkunfurling`);
+        });
+    </script>
+</head>
+
+<body class="theme-light">
+    <div class="surface">
+        <h3 id="tabheader"> Link unfurling in STT</h3>
+        <img id="reportimg" src="/Images/report.png" width="500" height="425"/>
+        <div id="stt-btn" class="teams-share-button" data-href="" data-button-type="medium" data-icon-px-size="160" data-preview="true"></div>
+    </div>
+</body>

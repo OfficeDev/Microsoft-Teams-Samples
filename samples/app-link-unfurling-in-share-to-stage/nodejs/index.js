@@ -14,6 +14,7 @@ server.use(express.urlencoded({
 server.engine('html', require('ejs').renderFile);
 server.set('view engine', 'ejs');
 server.set('views', __dirname);
+server.use(express.static(path.join(__dirname, 'static')));
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.

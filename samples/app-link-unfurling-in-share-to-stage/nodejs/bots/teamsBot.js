@@ -6,16 +6,6 @@ const { TeamsActivityHandler, CardFactory } = require("botbuilder");
 class TeamsBot extends TeamsActivityHandler {
     constructor() {
         super();
-        this.onMembersAdded(async (context, next) => {
-            const membersAdded = context.activity.membersAdded;
-            for (let member = 0; member < membersAdded.length; member++) {
-                if (membersAdded[member].id !== context.activity.recipient.id) {
-                    await context.sendActivity("Hello and welcome! This sample demonstrates the use of link unfurling in share to teams scope.");
-                }
-            }
-
-            await next();
-        });
     }
 
     // Invoked when an app based link query activity is received from the connector.
@@ -40,13 +30,13 @@ class TeamsBot extends TeamsActivityHandler {
         var card = {
           "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
           "type": "AdaptiveCard",
-          "version": "1.0",
+          "version": "1.4",
           "body": [
             {
               "type": "TextBlock",
               "size": "Medium",
               "weight": "Bolder",
-              "text": "The analytics details are"
+              "text": "Analytics details:"
             },
             {
               "type": "Image",
