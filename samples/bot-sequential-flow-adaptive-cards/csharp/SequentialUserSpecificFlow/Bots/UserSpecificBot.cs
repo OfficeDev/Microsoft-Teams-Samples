@@ -35,41 +35,17 @@ namespace SequentialUserSpecificFlow.Bots
         {
             string[] path = { ".", "Resources", "initialCard.json" };
             var member = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
-            var incidentDetail = new IncidentDetails
-            {
-                IncidentId = Guid.NewGuid(),
-                CreatedBy = turnContext.Activity.From.Name,
-                UserMRI = member.Id
-            };
-            var currentIncidentList = new List<IncidentDetails>() { };
-            incidentDetailsList.TryGetValue("incidentList", out currentIncidentList);
-            if(currentIncidentList == null)
-            {
-                currentIncidentList = new List<IncidentDetails> { incidentDetail };
-                incidentDetailsList.AddOrUpdate("incidentList", currentIncidentList, (key, value) => currentIncidentList);
-            }
-            else
-            {
-                List<IncidentDetails> incidentList = new List<IncidentDetails>();
-                incidentList = currentIncidentList;
-                incidentList.Add(incidentDetail);
-                currentIncidentList = incidentList;
-                incidentDetailsList.AddOrUpdate("incidentList", currentIncidentList, (key, value) => currentIncidentList);
-            }
-            
-              
-            var initialAdaptiveCard = GetFirstOptionsAdaptiveCard(path, incidentDetail.IncidentId, turnContext.Activity.From.Name, member.Id);
+            var initialAdaptiveCard = GetFirstOptionsAdaptiveCard(path,turnContext.Activity.From.Name, member.Id);
             await turnContext.SendActivityAsync(MessageFactory.Attachment(initialAdaptiveCard), cancellationToken);
         }
 
-        private Attachment GetFirstOptionsAdaptiveCard(string[] filepath, Guid incidentId,string name = null, string userMRI = null)
+        private Attachment GetFirstOptionsAdaptiveCard(string[] filepath,string name = null, string userMRI = null)
         {
             
             var adaptiveCardJson = File.ReadAllText(Path.Combine(filepath));
             AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
             var payloadData = new
             {
-                IncidentId = incidentId,
                 createdById = userMRI,
                 createdBy = name
             };
@@ -86,64 +62,65 @@ namespace SequentialUserSpecificFlow.Bots
         {
             List<IncidentDetails> currentIncidentList = new List<IncidentDetails>();
             incidentDetailsList.TryGetValue("incidentList", out currentIncidentList);
+
+            if (turnContext.Activity.Name == "composeExtension/submitAction")
+            {
+                var asJobject = JObject.FromObject(turnContext.Activity.Value);
+                var data = (object)asJobject.ToObject<CardTaskFetchValue<object>>()?.Data;
+                var incidentId = (string)JObject.Parse(data.ToString()).ToObject<CardTaskFetchValue<string>>()?.IncidentId;
+                var incident = currentIncidentList.FirstOrDefault(incident => incident.IncidentId.ToString() == incidentId);
+                await turnContext.SendActivityAsync(MessageFactory.Attachment(GetIncidentReviewCard(incident)));
+                return CreateInvokeResponse();
+            }
+
             if (turnContext.Activity.Name == "composeExtension/fetchTask")
             {
-                if (currentIncidentList.Count <= 0)
+                if (currentIncidentList == null)
                 {
-                    var previewcard = new ThumbnailCard
+                    return CreateInvokeResponse(new MessagingExtensionActionResponse
                     {
-                        Title = "No Incident Created",
-                    };
-                    var attachment = new MessagingExtensionAttachment
-                    {
-                        ContentType = HeroCard.ContentType,
-                        Content = previewcard,
-                        Preview = previewcard.ToAttachment()
-                    };
-                    return CreateInvokeResponse(new MessagingExtensionResponse
-                    {
-                        ComposeExtension = new MessagingExtensionResult
+                        Task = new TaskModuleContinueResponse
                         {
-                            Type = "result",
-                            AttachmentLayout = "list",
-                            Attachments = new List<MessagingExtensionAttachment> { attachment }
-                        }
-                    }); ;
+                            Value = new TaskModuleTaskInfo
+                            {
+                                Card = GetNoInicidentFoundCard(),
+                                Height = 200,
+                                Width = 400,
+                                Title = "No Incident found",
+                            },
+                        },
+                    });
                 }
 
-                var attachments = new List<MessagingExtensionAttachment>();
-                foreach(var incident in currentIncidentList)
+                var incidentList = new IncidentList();
+                var listOfIncident = new List<IncidentChoiceSet>();
+                foreach (var incident in currentIncidentList)
                 {
-                    var preview = new MessagingExtensionAttachment(
-                                            contentType: ThumbnailCard.ContentType,
-                                            contentUrl: null,
-                                            content: new ThumbnailCard { Title = incident.IncidentTitle, Text = "CreatedBy:" + incident.CreatedBy });
-                    // var previewCard = new ThumbnailCard { Title = incident.IncidentTitle,Text = "CreatedBy:"+ incident.CreatedBy};
-                    string[] path = { ".", "Resources", "initialCard.json" };
-                    var card = GetFirstOptionsAdaptiveCard(path, incident.IncidentId,incident.CreatedBy,incident.UserMRI);
-                    var attachment = new MessagingExtensionAttachment
+                    var incidentdetail = new IncidentChoiceSet()
                     {
-                        ContentType = AdaptiveCard.ContentType,
-                        Content = card.Content,
-                        Preview = preview
+                        title = $"**Incident title**: {incident.IncidentTitle}, *Created by*: {incident.CreatedBy}",
+                        value = incident.IncidentId
                     };
-                    attachments.Add(attachment);
-
+                    listOfIncident.Add(incidentdetail);
                 }
-                return CreateInvokeResponse(new MessagingExtensionResponse
+                incidentList.incidentList = listOfIncident.ToArray();
+                return CreateInvokeResponse(new MessagingExtensionActionResponse
                 {
-                    ComposeExtension = new MessagingExtensionResult
+                    Task = new TaskModuleContinueResponse()
                     {
-                        Type = "result",
-                        AttachmentLayout = "list",
-                        Attachments = attachments
-                    }
+                        Value = new TaskModuleTaskInfo
+                        {
+                            Card = GetInicidentListCard(incidentList),
+                            Height = 460,
+                            Width = 600,
+                            Title = "Incident list",
+                        },
+                    },
                 });
             }
             if (turnContext.Activity.Name == "adaptiveCard/action")
             {
                 var data = JsonConvert.DeserializeObject<InitialSequentialCard>(turnContext.Activity.Value.ToString());
-                var incident = currentIncidentList.FirstOrDefault(i => i.IncidentId == data.action.data.IncidentId);
                 string verb = data.action.verb;
                 AdaptiveCardInvokeResponse adaptiveCardResponse;
                 string cardJson;
@@ -178,16 +155,11 @@ namespace SequentialUserSpecificFlow.Bots
                         string[] firstCard = { ".", "Resources", "secondCard.json" };
                         var assigneeInfo = await TeamsInfo.GetMemberAsync(turnContext, data.action.data.AssignedTo, cancellationToken);
                         data.action.data.UserMRI = assigneeInfo.Id;
-                        incident.AssignedToMRI = assigneeInfo.Id;
-                        incident.AssignedToName = assigneeInfo.Name;
-                        incident.IncidentTitle = data.action.data.IncidentTitle;
                         adaptiveCardResponse = GetNextActionCard(firstCard, data);
-                        incidentDetailsList.AddOrUpdate("incidentList", currentIncidentList, (key, value) => currentIncidentList);
                         return CreateInvokeResponse(adaptiveCardResponse);
 
                     case "secondCard":
                         string[] secondCard = { ".", "Resources", "thirdCard.json" };
-                        incident.Category = data.action.data.Category;
                         if (data.action.data.Category == "Software")
                         {
                             adaptiveCardResponse = GetNextActionCard(secondCard, data, Constants.Software);
@@ -196,15 +168,22 @@ namespace SequentialUserSpecificFlow.Bots
                         {
                             adaptiveCardResponse = GetNextActionCard(secondCard, data, Constants.Hardware);
                         }
-                        incidentDetailsList.AddOrUpdate("incidentList", currentIncidentList, (key, value) => currentIncidentList);
                         return CreateInvokeResponse(adaptiveCardResponse);
 
                     case "thirdCard":
-
                         var initiator = await TeamsInfo.GetMemberAsync(turnContext, data.action.data.AssignedTo, cancellationToken);
                         data.action.data.AssignedToName = initiator.Name;
-                        incident.SubCategory = data.action.data.SubCategory;
-
+                        var incidentDetail = new IncidentDetails
+                        {
+                            IncidentId = Guid.NewGuid(),
+                            CreatedBy = turnContext.Activity.From.Name,
+                            AssignedToMRI = data.action.data.UserMRI,
+                            AssignedToName = data.action.data.AssignedToName,
+                            Category = data.action.data.Category,
+                            IncidentTitle = data.action.data.IncidentTitle,
+                            SubCategory = data.action.data.SubCategory
+                        };
+                        data.action.data.IncidentId = incidentDetail.IncidentId;
                         string[] thirdCard = { ".", "Resources", "reviewCard.json" };
                         var responseAttachment = GetResponseAttachment(thirdCard, data, out cardJson);
                         Activity pendingActivity = new Activity();
@@ -219,6 +198,19 @@ namespace SequentialUserSpecificFlow.Bots
                             Type = "application/vnd.microsoft.card.adaptive",
                             Value = response
                         };
+                       
+
+                        if (currentIncidentList == null)
+                        {
+                            currentIncidentList = new List<IncidentDetails> { incidentDetail };
+                        }
+                        else
+                        {
+                            List<IncidentDetails> incidentList = new List<IncidentDetails>();
+                            incidentList = currentIncidentList;
+                            incidentList.Add(incidentDetail);
+                            currentIncidentList = incidentList;
+                        }
                         incidentDetailsList.AddOrUpdate("incidentList", currentIncidentList, (key, value) => currentIncidentList);
                         return CreateInvokeResponse(adaptiveCardResponse);
 
@@ -343,6 +335,62 @@ namespace SequentialUserSpecificFlow.Bots
                     await turnContext.SendActivityAsync(MessageFactory.Text(welcomeText, welcomeText), cancellationToken);
                 }
             }
+        }
+
+        private static Attachment GetNoInicidentFoundCard()
+        {
+            //Read the card json and create attachment.
+            string[] paths = { ".", "Resources", "noIncidentFound.json" };
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
+
+            var adaptiveCardAttachment = new Attachment()
+            {
+                ContentType = "application/vnd.microsoft.card.adaptive",
+                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
+            };
+            return adaptiveCardAttachment;
+        }
+        private static Attachment GetInicidentListCard(IncidentList incidentList)
+        {
+            //Read the card json and create attachment.
+            string[] paths = { ".", "Resources", "incidentListCard.json" };
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
+            AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
+            var cardJsonstring = template.Expand(incidentList);
+            var card = JObject.Parse(cardJsonstring);
+
+            var adaptiveCardAttachment = new Attachment()
+            {
+                ContentType = "application/vnd.microsoft.card.adaptive",
+                Content = card,
+            };
+            return adaptiveCardAttachment;
+        }
+
+        private static Attachment GetIncidentReviewCard(IncidentDetails incidentDetail)
+        {
+            string[] paths = { ".", "Resources", "reviewCard.json" };
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
+            AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
+            var payloadData = new
+            {
+                incidentTitle = incidentDetail.IncidentTitle,
+                assignedTo = incidentDetail.AssignedToName,
+                category = incidentDetail.Category,
+                subCategory = incidentDetail.SubCategory,
+                createdBy = incidentDetail.CreatedBy,
+                assignedToName = incidentDetail.AssignedToName,
+                userMRI = incidentDetail.AssignedToMRI,
+                incidentId = incidentDetail.IncidentId
+            };
+            var cardJsonString = template.Expand(payloadData);
+            var adaptiveCardAttachment = new Attachment()
+            {
+                ContentType = "application/vnd.microsoft.card.adaptive",
+                Content = JsonConvert.DeserializeObject(cardJsonString),
+            };
+
+            return adaptiveCardAttachment;
         }
     }
 }

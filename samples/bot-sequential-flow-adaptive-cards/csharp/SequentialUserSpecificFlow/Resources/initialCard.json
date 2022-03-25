@@ -6,8 +6,7 @@
       "title": "Submit",
       "verb": "initialRefresh",
       "data": {
-        "CreatedBy": "${createdBy}",
-        "IncidentId": "${incidentId}"
+        "CreatedBy": "${createdBy}"
       }
     },
     "userIds": [

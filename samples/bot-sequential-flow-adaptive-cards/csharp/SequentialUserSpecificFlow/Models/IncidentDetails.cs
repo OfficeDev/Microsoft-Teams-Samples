@@ -11,6 +11,5 @@ namespace SequentialUserSpecificFlow.Models
         public string Category { get; set; }
         public string SubCategory { get; set; }
         public string AssignedToName { get; set; }
-        public string UserMRI { get; set; }
     }
 }

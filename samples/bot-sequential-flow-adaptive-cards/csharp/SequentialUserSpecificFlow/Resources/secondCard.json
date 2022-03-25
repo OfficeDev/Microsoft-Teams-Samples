@@ -29,8 +29,7 @@
             "IncidentTitle": "${incidentTitle}",
             "AssignedTo": "${assignedTo}",
             "Category": "Software",
-            "UserMRI": "${userMRI}",
-            "IncidentId": "${incidentId}"
+            "UserMRI": "${userMRI}"
           }
         },
         {
@@ -42,8 +41,7 @@
             "IncidentTitle": "${incidentTitle}",
             "AssignedTo": "${assignedTo}",
             "Category": "Hardware",
-            "UserMRI": "${userMRI}",
-            "IncidentId": "${incidentId}"
+            "UserMRI": "${userMRI}"
           }
         }
       ]
