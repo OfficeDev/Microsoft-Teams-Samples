@@ -8,7 +8,7 @@ import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 const Question =(props :any)=>
 {
     const params = props.match.params;
-    const questionNumber = params['srno'];
+    const questionNumber = params['questionId'];
     const [data, setData] = React.useState();
     const [connection, setConnection] = useState<null | HubConnection>(null);
     React.useEffect(() => {
@@ -38,27 +38,27 @@ const Question =(props :any)=>
         }
     }, [connection]);
 
-    const debounce = (callback: any, lim: any) => {
+    const emitMessageAction = (handleEditorChange: any, time: any) => {
         let timer: any;
-        return (...args: any) => {
+        return (...argument: any) => {
             clearTimeout(timer);
             timer = setTimeout(() => {
-                callback.apply(this, args);
-            }, lim)
+                handleEditorChange.apply(this, argument);
+            }, time)
         }
     }
 
-    const handleEditor = debounce(async (value: any) => {
+    const handleEditor = emitMessageAction(async (value: any) => {
         if (connection) await connection.send("SendMessage", "test", value);
     }, 2000);
     
     return (
         <>
             {IQuestionDetails.questions ? IQuestionDetails.questions.map((question) => {
-                if(question.srNo == questionNumber){
+                if (question.questionId == questionNumber){
                     return <>
                         <Flex gap="gap.small">
-                            <Text content={question.srNo} weight="bold" />
+                            <Text content={question.questionId} weight="bold" />
                             <Flex column>
                                 <Text className="text-ui" content={"Question: " + question.question} weight="bold" />
                                 <Text className="text-ui" content={"Language: " + question.language} size="small" />
