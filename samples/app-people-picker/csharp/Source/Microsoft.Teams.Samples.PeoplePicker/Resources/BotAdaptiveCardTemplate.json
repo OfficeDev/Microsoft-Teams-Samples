@@ -10,7 +10,9 @@
       "type": "TextBlock",
       "size": "Medium",
       "weight": "Bolder",
-      "text": "Enter Name of Group Chat"
+      "text": "Enter title of the group chat",
+      "isRequired": true,
+      "errorMessage": "Title is required"
     },
     {
       "type": "Input.Text",
@@ -21,7 +23,9 @@
       "type": "TextBlock",
       "size": "Medium",
       "weight": "Bolder",
-      "text": "Enter Message"
+      "text": "Enter the message",
+      "isRequired": true,
+      "errorMessage": "Message is required"
     },
     {
       "type": "Input.Text",
@@ -32,28 +36,30 @@
       "type": "TextBlock",
       "size": "Medium",
       "weight": "Bolder",
-      "text": "Select Context"
+      "text": "Select context"
     },
     {
       "type": "Input.ChoiceSet",
       "choices": [
         {
-          "title": "CurrentContext",
+          "title": "Context of the conversation",
           "value": "CurrentContext"
         },
         {
-          "title": "OrgWide",
+          "title": "Org wide context",
           "value": "OrgWide"
         }
       ],
+      "isRequired": true,
+      "errorMessage": "Choice is required",
       "value": "CurrentContext",
-      "id" :  "choice"
+      "id": "choice"
     },
     {
       "type": "TextBlock",
       "size": "Medium",
       "weight": "Bolder",
-      "text": "Search User (SAME CONTEXT)"
+      "text": "Search user (CONVERSATION CONTEXT)"
     },
     {
       "type": "Input.ChoiceSet",
@@ -68,7 +74,7 @@
       "type": "TextBlock",
       "size": "Medium",
       "weight": "Bolder",
-      "text": "Search User (ORG WIDE)"
+      "text": "Search user (ORG WIDE)"
     },
     {
       "type": "Input.ChoiceSet",
