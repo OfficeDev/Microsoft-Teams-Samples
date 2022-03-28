@@ -70,14 +70,57 @@ namespace SequentialUserSpecificFlow.Bots
                 var asJobject = JObject.FromObject(turnContext.Activity.Value);
                 var data = (object)asJobject.ToObject<CardTaskFetchValue<object>>()?.Data;
                 var botInstalled = (object)JObject.Parse(data.ToString()).ToObject<CardTaskFetchValue<object>>()?.MsTeams;
-                if (!string.IsNullOrEmpty(botInstalled.ToString()))
+                if (botInstalled != null || !string.IsNullOrEmpty(botInstalled.ToString()))
                 {
-                    return CreateInvokeResponse();
+                    if (currentIncidentList == null)
+                    {
+                        return CreateInvokeResponse(new MessagingExtensionActionResponse
+                        {
+                            Task = new TaskModuleContinueResponse
+                            {
+                                Value = new TaskModuleTaskInfo
+                                {
+                                    Card = GetNoInicidentFoundCard(),
+                                    Height = 200,
+                                    Width = 400,
+                                    Title = "No Incident found",
+                                },
+                            },
+                        });
+                    }
+                    else
+                    {
+                        var incidentList = new IncidentList();
+                        var listOfIncident = new List<IncidentChoiceSet>();
+                        foreach (var incident in currentIncidentList)
+                        {
+                            var incidentdetail = new IncidentChoiceSet()
+                            {
+                                title = $"Incident title: {incident.IncidentTitle}, Created by: {incident.CreatedBy}",
+                                value = incident.IncidentId
+                            };
+                            listOfIncident.Add(incidentdetail);
+                        }
+                        incidentList.incidentList = listOfIncident.ToArray();
+                        return CreateInvokeResponse(new MessagingExtensionActionResponse
+                        {
+                            Task = new TaskModuleContinueResponse()
+                            {
+                                Value = new TaskModuleTaskInfo
+                                {
+                                    Card = GetInicidentListCard(incidentList),
+                                    Height = 460,
+                                    Width = 600,
+                                    Title = "Incident list",
+                                },
+                            },
+                        });
+                    }
                 };
 
                 var incidentId = (string)JObject.Parse(data.ToString()).ToObject<CardTaskFetchValue<string>>()?.IncidentId;
-                var incident = currentIncidentList.FirstOrDefault(incident => incident.IncidentId.ToString() == incidentId);
-                await turnContext.SendActivityAsync(MessageFactory.Attachment(GetIncidentReviewCard(incident)));
+                var incidentDetail = currentIncidentList.FirstOrDefault(incident => incident.IncidentId.ToString() == incidentId);
+                await turnContext.SendActivityAsync(MessageFactory.Attachment(GetIncidentReviewCard(incidentDetail)));
                 return CreateInvokeResponse();
             }
 
@@ -86,7 +129,7 @@ namespace SequentialUserSpecificFlow.Bots
                 var isBotInstalledInScope = new IsBotInstalled();
                 isBotInstalled.TryGetValue(turnContext.Activity.Conversation.Id, out isBotInstalledInScope);
 
-                if (isBotInstalledInScope == null)
+                if (isBotInstalledInScope == null || !isBotInstalledInScope.isBotInstalled)
                 {
                     return CreateInvokeResponse(new MessagingExtensionActionResponse
                     {
@@ -367,6 +410,15 @@ namespace SequentialUserSpecificFlow.Bots
                 var installBot = new IsBotInstalled()
                 {
                     isBotInstalled = true
+                };
+                isBotInstalled.AddOrUpdate(turnContext.Activity.Conversation.Id, installBot, (key, value) => installBot);
+                await turnContext.SendActivityAsync(MessageFactory.Text("Hello and Welcome"));
+            }
+            if (turnContext.Activity.MembersRemoved != null && turnContext.Activity.MembersAdded.Any(member => member.Id == turnContext.Activity.Recipient.Id))
+            {
+                var installBot = new IsBotInstalled()
+                {
+                    isBotInstalled = false
                 };
                 isBotInstalled.AddOrUpdate(turnContext.Activity.Conversation.Id, installBot, (key, value) => installBot);
                 await turnContext.SendActivityAsync(MessageFactory.Text("Hello and Welcome"));
