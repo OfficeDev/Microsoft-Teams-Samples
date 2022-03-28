@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SequentialUserSpecificFlow.Models
+﻿namespace SequentialUserSpecificFlow.Models
 {
     public class MemberDetails
     {
@@ -13,5 +8,10 @@ namespace SequentialUserSpecificFlow.Models
     {
         public string value { get; set; }
         public string title { get; set; }
+    }
+
+    public class IsBotInstalled
+    {
+        public bool isBotInstalled { get; set; }
     }
 }

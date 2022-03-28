@@ -41,23 +41,32 @@ namespace SequentialUserSpecificFlow.Bots
             await turnContext.SendActivityAsync(MessageFactory.Attachment(initialAdaptiveCard), cancellationToken);
         }
 
-        private Attachment GetFirstOptionsAdaptiveCard(string[] filepath,string name = null, string userMRI = null)
+        /// <summary>
+        /// Invoked when members other than this bot (like a user) are removed from the conversation.
+        /// </summary>
+        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
+        protected override async Task OnConversationUpdateActivityAsync(ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(filepath));
-            AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
-            var payloadData = new
+            turnContext = turnContext ?? throw new ArgumentNullException(nameof(turnContext));
+            if (turnContext.Activity.MembersAdded != null && turnContext.Activity.MembersAdded.Any(member => member.Id == turnContext.Activity.Recipient.Id))
             {
-                createdById = userMRI,
-                createdBy = name
-            };
-            var cardJsonstring = template.Expand(payloadData);
-            var adaptiveCardAttachment = new Attachment()
+                var installBot = new IsBotInstalled()
+                {
+                    isBotInstalled = true
+                };
+                isBotInstalled.AddOrUpdate(turnContext.Activity.Conversation.Id, installBot, (key, value) => installBot);
+                await turnContext.SendActivityAsync(MessageFactory.Text("Hello and Welcome"));
+            }
+            if (turnContext.Activity.MembersRemoved != null && turnContext.Activity.MembersRemoved.Any(member => member.Id == turnContext.Activity.Recipient.Id))
             {
-                ContentType = "application/vnd.microsoft.card.adaptive",
-                Content = JsonConvert.DeserializeObject(cardJsonstring),
-            };
-            return adaptiveCardAttachment;
+                var installBot = new IsBotInstalled()
+                {
+                    isBotInstalled = false
+                };
+                isBotInstalled.AddOrUpdate(turnContext.Activity.Conversation.Id, installBot, (key, value) => installBot);
+            }
         }
 
         protected override async Task<InvokeResponse> OnInvokeActivityAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
@@ -70,58 +79,19 @@ namespace SequentialUserSpecificFlow.Bots
                 var asJobject = JObject.FromObject(turnContext.Activity.Value);
                 var data = (object)asJobject.ToObject<CardTaskFetchValue<object>>()?.Data;
                 var botInstalled = (object)JObject.Parse(data.ToString()).ToObject<CardTaskFetchValue<object>>()?.MsTeams;
+
                 if (botInstalled != null || !string.IsNullOrEmpty(botInstalled.ToString()))
                 {
-                    if (currentIncidentList == null)
-                    {
-                        return CreateInvokeResponse(new MessagingExtensionActionResponse
-                        {
-                            Task = new TaskModuleContinueResponse
-                            {
-                                Value = new TaskModuleTaskInfo
-                                {
-                                    Card = GetNoInicidentFoundCard(),
-                                    Height = 200,
-                                    Width = 400,
-                                    Title = "No Incident found",
-                                },
-                            },
-                        });
-                    }
-                    else
-                    {
-                        var incidentList = new IncidentList();
-                        var listOfIncident = new List<IncidentChoiceSet>();
-                        foreach (var incident in currentIncidentList)
-                        {
-                            var incidentdetail = new IncidentChoiceSet()
-                            {
-                                title = $"Incident title: {incident.IncidentTitle}, Created by: {incident.CreatedBy}",
-                                value = incident.IncidentId
-                            };
-                            listOfIncident.Add(incidentdetail);
-                        }
-                        incidentList.incidentList = listOfIncident.ToArray();
-                        return CreateInvokeResponse(new MessagingExtensionActionResponse
-                        {
-                            Task = new TaskModuleContinueResponse()
-                            {
-                                Value = new TaskModuleTaskInfo
-                                {
-                                    Card = GetInicidentListCard(incidentList),
-                                    Height = 460,
-                                    Width = 600,
-                                    Title = "Incident list",
-                                },
-                            },
-                        });
-                    }
-                };
+                    return GetIncientListFromMEAction(currentIncidentList);
+                }
+                else
+                {
+                    var incidentId = (string)JObject.Parse(data.ToString()).ToObject<CardTaskFetchValue<string>>()?.IncidentId;
+                    var incidentDetail = currentIncidentList.FirstOrDefault(incident => incident.IncidentId.ToString() == incidentId);
+                    await turnContext.SendActivityAsync(MessageFactory.Attachment(GetIncidentReviewCard(incidentDetail)));
 
-                var incidentId = (string)JObject.Parse(data.ToString()).ToObject<CardTaskFetchValue<string>>()?.IncidentId;
-                var incidentDetail = currentIncidentList.FirstOrDefault(incident => incident.IncidentId.ToString() == incidentId);
-                await turnContext.SendActivityAsync(MessageFactory.Attachment(GetIncidentReviewCard(incidentDetail)));
-                return CreateInvokeResponse();
+                    return CreateInvokeResponse();
+                }
             }
 
             if (turnContext.Activity.Name == "composeExtension/fetchTask")
@@ -131,13 +101,21 @@ namespace SequentialUserSpecificFlow.Bots
 
                 if (isBotInstalledInScope == null || !isBotInstalledInScope.isBotInstalled)
                 {
+                    string[] paths = { ".", "Resources", "installBot.json" };
+                    var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
+                    var adaptiveCardAttachment = new Attachment()
+                    {
+                        ContentType = "application/vnd.microsoft.card.adaptive",
+                        Content = JsonConvert.DeserializeObject(adaptiveCardJson),
+                    };
+
                     return CreateInvokeResponse(new MessagingExtensionActionResponse
                     {
                         Task = new TaskModuleContinueResponse
                         {
                             Value = new TaskModuleTaskInfo
                             {
-                                Card = GetAdaptiveCardAttachmentFromFile("installBot.json"),
+                                Card = adaptiveCardAttachment,
                                 Height = 200,
                                 Width = 400,
                                 Title = "Bot is not installed",
@@ -145,49 +123,12 @@ namespace SequentialUserSpecificFlow.Bots
                         },
                     });
                 }
-                if (currentIncidentList == null)
+                else
                 {
-                    return CreateInvokeResponse(new MessagingExtensionActionResponse
-                    {
-                        Task = new TaskModuleContinueResponse
-                        {
-                            Value = new TaskModuleTaskInfo
-                            {
-                                Card = GetNoInicidentFoundCard(),
-                                Height = 200,
-                                Width = 400,
-                                Title = "No Incident found",
-                            },
-                        },
-                    });
+                    return GetIncientListFromMEAction(currentIncidentList);
                 }
-
-                var incidentList = new IncidentList();
-                var listOfIncident = new List<IncidentChoiceSet>();
-                foreach (var incident in currentIncidentList)
-                {
-                    var incidentdetail = new IncidentChoiceSet()
-                    {
-                        title = $"**Incident title**: {incident.IncidentTitle}, *Created by*: {incident.CreatedBy}",
-                        value = incident.IncidentId
-                    };
-                    listOfIncident.Add(incidentdetail);
-                }
-                incidentList.incidentList = listOfIncident.ToArray();
-                return CreateInvokeResponse(new MessagingExtensionActionResponse
-                {
-                    Task = new TaskModuleContinueResponse()
-                    {
-                        Value = new TaskModuleTaskInfo
-                        {
-                            Card = GetInicidentListCard(incidentList),
-                            Height = 460,
-                            Width = 600,
-                            Title = "Incident list",
-                        },
-                    },
-                });
             }
+
             if (turnContext.Activity.Name == "adaptiveCard/action")
             {
                 var data = JsonConvert.DeserializeObject<InitialSequentialCard>(turnContext.Activity.Value.ToString());
@@ -219,6 +160,7 @@ namespace SequentialUserSpecificFlow.Bots
                         }
 
                         adaptiveCardResponse = GetNextActionCard(initialCard, data);
+
                         return CreateInvokeResponse(adaptiveCardResponse);
 
                     case "firstCard":
@@ -226,6 +168,7 @@ namespace SequentialUserSpecificFlow.Bots
                         var assigneeInfo = await TeamsInfo.GetMemberAsync(turnContext, data.action.data.AssignedTo, cancellationToken);
                         data.action.data.UserMRI = assigneeInfo.Id;
                         adaptiveCardResponse = GetNextActionCard(firstCard, data);
+
                         return CreateInvokeResponse(adaptiveCardResponse);
 
                     case "secondCard":
@@ -238,6 +181,7 @@ namespace SequentialUserSpecificFlow.Bots
                         {
                             adaptiveCardResponse = GetNextActionCard(secondCard, data, Constants.Hardware);
                         }
+
                         return CreateInvokeResponse(adaptiveCardResponse);
 
                     case "thirdCard":
@@ -268,8 +212,7 @@ namespace SequentialUserSpecificFlow.Bots
                             Type = "application/vnd.microsoft.card.adaptive",
                             Value = response
                         };
-                       
-
+                      
                         if (currentIncidentList == null)
                         {
                             currentIncidentList = new List<IncidentDetails> { incidentDetail };
@@ -282,12 +225,14 @@ namespace SequentialUserSpecificFlow.Bots
                             currentIncidentList = incidentList;
                         }
                         incidentDetailsList.AddOrUpdate("incidentList", currentIncidentList, (key, value) => currentIncidentList);
+                        
                         return CreateInvokeResponse(adaptiveCardResponse);
 
                     case "refresh":
 
                         string[] assignedToCard = { ".", "Resources", "assignedToCard.json" };
                         adaptiveCardResponse = GetNextActionCard(assignedToCard, data);
+                        
                         return CreateInvokeResponse(adaptiveCardResponse);
 
                     case "approved":
@@ -306,6 +251,7 @@ namespace SequentialUserSpecificFlow.Bots
                             Type = "application/vnd.microsoft.card.adaptive",
                             Value = response
                         };
+                        
                         return CreateInvokeResponse(adaptiveCardResponse);
 
                     case "rejected":
@@ -324,10 +270,82 @@ namespace SequentialUserSpecificFlow.Bots
                             Type = "application/vnd.microsoft.card.adaptive",
                             Value = response
                         };
+                        
                         return CreateInvokeResponse(adaptiveCardResponse);
                 }
             }
+
             return null;
+        }
+
+        private Attachment GetFirstOptionsAdaptiveCard(string[] filepath, string name = null, string userMRI = null)
+        {
+
+            var adaptiveCardJson = File.ReadAllText(Path.Combine(filepath));
+            AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
+            var payloadData = new
+            {
+                createdById = userMRI,
+                createdBy = name
+            };
+            var cardJsonstring = template.Expand(payloadData);
+            var adaptiveCardAttachment = new Attachment()
+            {
+                ContentType = "application/vnd.microsoft.card.adaptive",
+                Content = JsonConvert.DeserializeObject(cardJsonstring),
+            };
+
+            return adaptiveCardAttachment;
+        }
+
+        // Get incident list from messaging extension action command.
+        public InvokeResponse GetIncientListFromMEAction(List<IncidentDetails> currentIncidentList)
+        {
+            if (currentIncidentList == null)
+            {
+                return CreateInvokeResponse(new MessagingExtensionActionResponse
+                {
+                    Task = new TaskModuleContinueResponse
+                    {
+                        Value = new TaskModuleTaskInfo
+                        {
+                            Card = GetNoInicidentFoundCard(),
+                            Height = 200,
+                            Width = 400,
+                            Title = "No Incident found",
+                        },
+                    },
+                });
+            }
+            else
+            {
+                var incidentList = new IncidentList();
+                var listOfIncident = new List<IncidentChoiceSet>();
+                foreach (var incident in currentIncidentList)
+                {
+                    var incidentdetail = new IncidentChoiceSet()
+                    {
+                        title = $"Incident title: {incident.IncidentTitle}, Created by: {incident.CreatedBy}",
+                        value = incident.IncidentId
+                    };
+                    listOfIncident.Add(incidentdetail);
+                }
+                incidentList.incidentList = listOfIncident.ToArray();
+
+                return CreateInvokeResponse(new MessagingExtensionActionResponse
+                {
+                    Task = new TaskModuleContinueResponse()
+                    {
+                        Value = new TaskModuleTaskInfo
+                        {
+                            Card = GetInicidentListCard(incidentList),
+                            Height = 460,
+                            Width = 600,
+                            Title = "Incident list",
+                        },
+                    },
+                });
+            }
         }
 
         public AdaptiveCardInvokeResponse GetNextActionCard(string[] path, InitialSequentialCard data, List<string> subCategory = null)
@@ -395,36 +413,7 @@ namespace SequentialUserSpecificFlow.Bots
             return adaptiveCardAttachment;
         }
 
-
-        /// <summary>
-        /// Invoked when members other than this bot (like a user) are removed from the conversation.
-        /// </summary>
-        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
-        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
-        /// <returns>A task that represents the work queued to execute.</returns>
-        protected override async Task OnConversationUpdateActivityAsync(ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
-        {
-            turnContext = turnContext ?? throw new ArgumentNullException(nameof(turnContext));
-            if (turnContext.Activity.MembersAdded != null && turnContext.Activity.MembersAdded.Any(member => member.Id == turnContext.Activity.Recipient.Id))
-            {
-                var installBot = new IsBotInstalled()
-                {
-                    isBotInstalled = true
-                };
-                isBotInstalled.AddOrUpdate(turnContext.Activity.Conversation.Id, installBot, (key, value) => installBot);
-                await turnContext.SendActivityAsync(MessageFactory.Text("Hello and Welcome"));
-            }
-            if (turnContext.Activity.MembersRemoved != null && turnContext.Activity.MembersAdded.Any(member => member.Id == turnContext.Activity.Recipient.Id))
-            {
-                var installBot = new IsBotInstalled()
-                {
-                    isBotInstalled = false
-                };
-                isBotInstalled.AddOrUpdate(turnContext.Activity.Conversation.Id, installBot, (key, value) => installBot);
-                await turnContext.SendActivityAsync(MessageFactory.Text("Hello and Welcome"));
-            }
-        }
-
+        // Get no incident found card.
         private static Attachment GetNoInicidentFoundCard()
         {
             //Read the card json and create attachment.
@@ -438,6 +427,8 @@ namespace SequentialUserSpecificFlow.Bots
             };
             return adaptiveCardAttachment;
         }
+
+        // Get incident list card.
         private static Attachment GetInicidentListCard(IncidentList incidentList)
         {
             //Read the card json and create attachment.
@@ -455,6 +446,7 @@ namespace SequentialUserSpecificFlow.Bots
             return adaptiveCardAttachment;
         }
 
+        // Get incident review card send from messaging extension.
         private static Attachment GetIncidentReviewCard(IncidentDetails incidentDetail)
         {
             string[] paths = { ".", "Resources", "reviewCard.json" };
@@ -478,19 +470,6 @@ namespace SequentialUserSpecificFlow.Bots
                 Content = JsonConvert.DeserializeObject(cardJsonString),
             };
 
-            return adaptiveCardAttachment;
-        }
-
-        private static Attachment GetAdaptiveCardAttachmentFromFile(string fileName)
-        {
-            //Read the card json and create attachment.
-            string[] paths = { ".", "Resources", fileName };
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
-            var adaptiveCardAttachment = new Attachment()
-            {
-                ContentType = "application/vnd.microsoft.card.adaptive",
-                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
-            };
             return adaptiveCardAttachment;
         }
     }
