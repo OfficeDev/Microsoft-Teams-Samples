@@ -6,7 +6,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace LinkUnfurlingStt
+namespace LinkUnfurlingInShareToStage
 {
     public class Program
     {

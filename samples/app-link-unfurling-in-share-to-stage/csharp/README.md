@@ -12,7 +12,7 @@ contentType: samples
 createdDate: "14-03-2022 00:15:13"
 ---
 
-# Link unfruling Share to teams sample
+# Link unfruling in Share to teams sample
 
 This sample demos the feature of link unfurling for Share to teams (The Share to Teams feature allows site users to easily share a site and content to individual contacts or groups on Teams.).
 
@@ -20,7 +20,7 @@ This sample demos the feature of link unfurling for Share to teams (The Share to
   
   ![tab](LinkUnfurlingStt/Images/Tab.png)
   
-  ![Link unfurling STT](LinkUnfurlingStt/Images/LinkUnfurlSTT.png)
+  ![Link unfurling STT](LinkUnfurlingStt/Images/LinkUnfurlingShareToStage.png)
   
   ![Link unfurling card](LinkUnfurlingStt/Images/LinkUnfurlCard.png)
    
@@ -34,10 +34,6 @@ This sample demos the feature of link unfurling for Share to teams (The Share to
   ```
 - [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
   
-  run ngrok locally
-  ```bash
-  ngrok http -host-header=localhost 3978
-  ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 1) Setup for Bot
@@ -52,7 +48,7 @@ This sample demos the feature of link unfurling for Share to teams (The Share to
    
 3) Launch Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/link-unfurling-stt/csharp/LinkUnfurlingStt.sln`
+   - Navigate to folder where repository is cloned then `samples/app-link-unfurling-in-share-to-stage/csharp/LinkUnfurlingInShareToStage.sln`
     
 4) Run ngrok - point to port 3978
 

@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LinkUnfurlingStt.Bots
+namespace LinkUnfurlingInShareToStage.Bots
 {
     public class ActivityBot : TeamsActivityHandler
     {
@@ -66,7 +66,7 @@ namespace LinkUnfurlingStt.Bots
 
             card.Body.Add(new AdaptiveTextBlock()
             {
-                Text = "The analytics details are",
+                Text = "Analytics details:",
                 Size = AdaptiveTextSize.Default
             });
 

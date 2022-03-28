@@ -1,6 +1,6 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.11",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
   "version": "1.0.0",
   "id": "<<Microsoft-App-Id>>",
   "packageName": "com.microsoft.teams.linkunfurlingstt",
@@ -24,7 +24,7 @@
   "accentColor": "#FFFFFF",
   "staticTabs": [
     {
-      "contentUrl": "https://<<base-url>>/tab",
+      "contentUrl": "https://<<base-url>>/Tab",
       "entityId": "tab",
       "name": "Tab",
       "scopes": [
@@ -40,22 +40,7 @@
         {
           "id": "searchQuery",
           "type": "query",
-          "title": "Search",
-          "description": "Perform a search",
-          "initialRun": true,
-          "fetchTask": false,
-          "context": [
-            "commandBox",
-            "compose"
-          ],
-          "parameters": [
-            {
-              "name": "searchQuery",
-              "title": "Search",
-              "description": "Your search query",
-              "inputType": "text"
-            }
-          ]
+          "title": "Search"
         }
       ],
       "messageHandlers": [
@@ -63,7 +48,6 @@
           "type": "link",
           "value": {
             "domains": [
-              "*.botframework.com",
               "<<Domain-name>>"
             ]
           }
@@ -76,7 +60,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.botframework.com",
     "<<Domain-name>>"
   ]
 }

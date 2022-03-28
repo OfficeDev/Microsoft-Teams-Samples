@@ -32,7 +32,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |19|Incoming Webhook|This sample is used to send card using incoming webhook.|[View](/demo%20manifest/Incoming-Webhook.zip) |
 |20|People picker control in Adaptive Cards | This sample shows the feature of people picker control in Adaptive Cards.|[View](/demo%20manifest/People-Picker-Adaptive-Card.zip) |
 |21|App complete auth|This sample demos authentication feature in bot,tab and messaging extension.|[View](/demo%20manifest/App-Complete-Auth.zip) |
-|22|Link unfurling for 'share to teams'|This sample demos the feature of link unfurling for Share to teams.|[View](/demo%20manifest/Link-Unfurling-Stt.zip) |
+|22|Link unfurling for 'share to teams'|This sample demos the feature of link unfurling for Share to teams.|[View](/demo%20manifest/Link-Unfurling-In-Share-To-Teams.zip) |
 
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 
@@ -323,7 +323,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [graph-activity-feed-broadcast#js]:samples/graph-activity-feed-broadcast/nodejs
 [app-identity-link-with-sso#nodejs]:samples/app-identity-link-with-sso/nodejs
 [tab-staggered-permission#nodejs]:samples/tab-staggered-permission/nodejs
-[link-unfurling-stt#cs]:samples/link-unfurling-stt/csharp
+[link-unfurling-stt#cs]:samples/app-link-unfurling-in-share-to-stage/csharp
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 
 ## Submitting issues
