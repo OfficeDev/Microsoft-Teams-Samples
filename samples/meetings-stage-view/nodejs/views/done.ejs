@@ -8,14 +8,29 @@
     <title>Add to Done</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js" integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2" crossorigin="anonymous"></script>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2"
+        crossorigin="anonymous"></script>
     <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
 </head>
 
 <body>
     <script>
-    microsoftTeams.initialize();
-    microsoftTeams.getContext((context) => {
+        // Creating socket instance for real time status updates in stage view.
+        const socketTodo = io();
+        socketTodo.on('connection');
+
+        // Updating containers when a status message is received.
+        socketTodo.on('message', (data, status) => {
+            if (data !== undefined) {
+                document.getElementById(status).innerHTML += (`<div class="details">
+            <div class="description" title="${data.taskDescription}">${data.taskDescription}</div>
+            <div class="userName">--${data.userName}</div>
+      `);
+            }
+        })
+        microsoftTeams.initialize();
+        microsoftTeams.getContext((context) => {
             $(document).ready(function () {
                 if (context.frameContext == "sidePanel") {
                     $(".share-specific-part-button").show();
@@ -26,21 +41,21 @@
             });
         });
     </script>
-   <div class="label">
-    Done
-  </div>
+    <div class="label">
+        Done
+    </div>
 
-  <button onclick="openTaskModule('done')" class="add-card-button">
-    <img class="add-icon" src="/Images/add_icon.svg" title="Click to continue existing conversation" />
-  </button>
-  <br />
-  <button onclick="shareSpecificPart('done')" class="share-specific-part-button">
-      Share Done
-  </button>
-  
-  <div id="done">
-    <!-- The statud details will be updated here on runtime -->
-  </div>
+    <button onclick="openTaskModule('done')" class="add-card-button">
+        <img class="add-icon" src="/Images/add_icon.svg" title="Click to continue existing conversation" />
+    </button>
+    <br />
+    <button onclick="shareSpecificPart('done')" class="share-specific-part-button">
+        Share Done
+    </button>
+
+    <div id="done">
+        <!-- The statud details will be updated here on runtime -->
+    </div>
 </body>
 
 </html>

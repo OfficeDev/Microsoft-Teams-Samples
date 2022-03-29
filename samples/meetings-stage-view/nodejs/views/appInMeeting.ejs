@@ -8,7 +8,9 @@
   <title>App in meeting - Stage View</title>
   <link rel="stylesheet" href="styles.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js" integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2" crossorigin="anonymous"></script>
+  <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js"
+    integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2"
+    crossorigin="anonymous"></script>
   <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
 </head>
 
@@ -33,69 +35,39 @@
     microsoftTeams.initialize();
     microsoftTeams.getContext((context) => {
       $(document).ready(function () {
-      if (context.frameContext === "sidePanel") {
-        // Adding and removing classes based on screen width, to show app in stage view and in side panel
-        $("#todo, #doing, #done").addClass("grid-item-sidepanel");
-        $("#todo, #doing, #done").removeClass("grid-item");
-        $("#boardDiv").addClass("chat-window-sidepanel");
-        $("#boardDiv").removeClass("chat-window");
-      }
-      else {
-        // Adding and removing classes based on screen width, to show app in stage view and in side panel
-        $("#todo, #doing, #done").addClass("grid-item");
-        $("#todo, #doing, #done").removeClass("grid-item-sidepanel");
-        $("#boardDiv").addClass("chat-window");
-        $("#boardDiv").removeClass("chat-window-sidepanel");
-      }
-    });
-    });
-    
-
-    // Creating socket instance for real time status updates in stage view.
-    const socket = io();
-    socket.on('connection')
-
-    // Updating containers when a status message is received.
-    socket.on('message', (data, status) => {
-      if (data !== undefined) {
-        var detailsClass = window.innerWidth > 600 ? "details" : "details-sidepanel";
-        document.getElementById(status).innerHTML += (`<div class=${detailsClass}>
-                <div class="description" title="${data.taskDescription}">${data.taskDescription}</div>
-                <div class="userName">--${data.userName}</div>
-          `);
-      }
-    })
-
-    // Task module to collect details from the meeting participants.
-    const openTaskModule = (status) => {
-      let taskInfo = {
-        title: "Status Details",
-        height: 250,
-        width: 250,
-        url: `${window.location.origin}/index`,
-      };
-
-      // Invoking task module to collect status details from participants.
-      microsoftTeams.tasks.startTask(taskInfo, (err, taskDetails) => {
-        socket.emit('message', taskDetails, status);
+        if (context.frameContext === "sidePanel") {
+          // Adding and removing classes based on screen width, to show app in stage view and in side panel
+          $("#todo, #doing, #done").addClass("grid-item-sidepanel");
+          $("#todo, #doing, #done").removeClass("grid-item");
+          $("#boardDiv").addClass("chat-window-sidepanel");
+          $("#boardDiv").removeClass("chat-window");
+        }
+        else {
+          // Adding and removing classes based on screen width, to show app in stage view and in side panel
+          $("#todo, #doing, #done").addClass("grid-item");
+          $("#todo, #doing, #done").removeClass("grid-item-sidepanel");
+          $("#boardDiv").addClass("chat-window");
+          $("#boardDiv").removeClass("chat-window-sidepanel");
+        }
       });
-    };
+    });
 
     // shareToStage.
     const shareSpecificPart = (partName) => {
-            var appContentUrl = "";
-            appContentUrl = partName == 'todo' ? `${window.location.origin}/todoView` : partName == 'doing' ? `${window.location.origin}/doingView` : `${window.location.origin}/doneView`;
-            microsoftTeams.meeting.shareAppContentToStage((err, result) => {
-                if (result) {
-                    // handle success
-                    console.log(result);
-                }
-                if (err) {
-                    // handle error
-                    alert(JSON.stringify(err))
-                }
-            }, appContentUrl);
-        };
+      var appContentUrl = "";
+      appContentUrl = partName == 'todo' ? `${window.location.origin}/todoView` : partName == 'doing' ? `${window.location.origin}/doingView` : `${window.location.origin}/doneView`;
+      microsoftTeams.meeting.shareAppContentToStage((err, result) => {
+        alert(document.getElementById('todo').innerHTML);
+        if (result) {
+          // handle success
+          console.log(result);
+        }
+        if (err) {
+          // handle error
+          alert(JSON.stringify(err))
+        }
+      }, appContentUrl);
+    };
   </script>
 </body>
 
