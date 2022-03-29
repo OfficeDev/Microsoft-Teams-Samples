@@ -4,17 +4,26 @@ import { IQuestionDetails } from '../types/question';
 import { Flex, Text } from '@fluentui/react-northstar'
 import Editor from '@monaco-editor/react';
 import io from "socket.io-client";
+import {getLatestEditorValue} from "./services/getLatestEditorValue"
 import "./tab.css"
 
 const Question = (props: any) => {
     const params = props.match.params;
     const questionNumber = params['questionId'];
     const [data, setData] = React.useState();
+    const [meetingId, setMeetingId] = React.useState();
     const [socket, setSocket] = React.useState(io());
 
     React.useEffect(() => {
         microsoftTeams.initialize();
+        microsoftTeams.getContext((context:any) =>{
+            setMeetingId(context.meetingId)
+            getLatestEditorValue(questionNumber,context.meetingId).then((res:any) =>{
+                setData(res.data.value);
+            })
+        })
         setSocket(io());
+        
     }, [])
 
     // subscribe to the socket event
@@ -43,7 +52,7 @@ const Question = (props: any) => {
 
     // Handle editor value change. 
     const handleEditor = emitMessageAction((value: any) => {
-        socket.emit('message', value);
+        socket.emit('message', value,questionNumber,meetingId);
     }, 2000);
 
     return (
