@@ -15,7 +15,6 @@ const Tab = () => {
 
     // Share specific content 
     const shareSpecificPart = (partName: number) => {
-        alert("hello");
         var appContentUrl = "";
         appContentUrl = `${window.location.origin}/question/${partName}`;
         microsoftTeams.meeting.shareAppContentToStage((error, result) => {
@@ -26,7 +25,7 @@ const Tab = () => {
 
             if (error) {
                 // handle error
-                alert(JSON.stringify(error))
+                console.log(JSON.stringify(error))
             }
         }, appContentUrl);
     };
