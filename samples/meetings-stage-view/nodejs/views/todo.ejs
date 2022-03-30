@@ -16,6 +16,7 @@
 
 <body>
   <script>
+
     // Creating socket instance for real time status updates in stage view.
     const socketTodo = io();
     socketTodo.on('connection');
@@ -37,19 +38,30 @@
     microsoftTeams.initialize();
     microsoftTeams.getContext((context) => {
       $(document).ready(function () {
-        // setTimeout(() => {
-        //   alert(document.getElementById('todo').innerHTML);
-        // }, 1000);
+        $.ajax({
+          url: "/getMeetingData?meetingId=" + context.meetingId + "&status=todo",
+          type: "GET",
+          success: function (response) {
+            var html = '';
+            if (response.data != "") {
+              for (var i = 0; i < response.data.length; i++) {
+                document.getElementById('todo').innerHTML += (`<div class="details">
+            <div class="description" title="${response.data[i].taskDescription}">${response.data[i].taskDescription}</div>
+            <div class="userName">--${response.data[i].userName}</div>
+      `);
+              }
+            }
+          },
+          error: function (xhr, textStatus, errorThrown) {
+            console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+          },
+        });
         if (context.frameContext == "sidePanel") {
           $(".share-specific-part-button").show();
         }
         else {
           $(".share-specific-part-button").hide();
         }
-        document.getElementById('todo').innerHTML += (`<div class="details">
-            <div class="description" title="${data.taskDescription}">${data.taskDescription}</div>
-            <div class="userName">--${data.userName}</div>
-      `);
       });
     });
 

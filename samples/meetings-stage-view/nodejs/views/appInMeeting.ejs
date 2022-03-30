@@ -55,20 +55,20 @@
     // shareToStage.
     const shareSpecificPart = (partName) => {
       var appContentUrl = "";
-      appContentUrl = partName == 'todo' ? `${window.location.origin}/todoView` : partName == 'doing' ? `${window.location.origin}/doingView` : `${window.location.origin}/doneView`;
-      microsoftTeams.meeting.shareAppContentToStage((err, result) => {
-        alert(document.getElementById('todo').innerHTML);
-        if (result) {
-          // handle success
-          console.log(result);
-        }
-        if (err) {
-          // handle error
-          alert(JSON.stringify(err))
-        }
-      }, appContentUrl);
+      microsoftTeams.getContext((context) => {
+        appContentUrl = partName == 'todo' ? `${window.location.origin}/todoView?meetingId=`+context.meetingId : partName == 'doing' ? `${window.location.origin}/doingView?meetingId=`+context.meetingId : `${window.location.origin}/doneView?meetingId=`+context.meetingId;
+        microsoftTeams.meeting.shareAppContentToStage((err, result) => {
+          if (result) {
+            // handle success
+            console.log(result);
+          }
+          if (err) {
+            // handle error
+            alert(JSON.stringify(err))
+          }
+        }, appContentUrl);
+      });
     };
   </script>
 </body>
-
 </html>
