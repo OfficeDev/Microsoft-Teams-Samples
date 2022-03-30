@@ -76,6 +76,40 @@ This sample illustrates sequential workflow, user specific views and upto date a
 
   ![image](https://user-images.githubusercontent.com/80379013/123652838-4616a200-d84a-11eb-96c4-580979287b63.png)
   
+## Workflow for ME Interaction
+
+```mermaid
+
+sequenceDiagram
+
+    Teams User A->>+Teams Client: Clicks on Incidents ME action in chat
+
+    opt App not installed flow
+
+        Teams Client->>+Teams User A: App install dialog
+
+        Teams User A->>+Teams Client: Installs app
+
+    end  
+
+    Teams Client->>Task Module(Web App): Launches Task Module
+
+    Task Module(Web App)->>+Teams Client: Loads existing incidents
+
+    Teams User A->>Teams Client: Selects incident to share in chat
+
+    Teams Client->>Sample App: Invoke action callback composeExtension/submitAction
+
+    Sample App->>Teams Client: Posts Base card with auto-refresh for user A
+
+    Teams Client->>Teams User A: loads incident card with loading indicator
+
+    Teams Client->>Sample App: Automatically invokes refresh action
+
+    Sample App->>Teams Client: Responds with Updated Card for the user
+
+```
+
 ## Interaction from messaging extension.
 
 1. On selecting app from messaging extension,it checks whether bot is installed in chat/team. If not installed, user will get a option for justInTimeInstallation card.
