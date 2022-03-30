@@ -68,11 +68,10 @@ const Question =(props :any)=>
                 if (question.questionId == questionNumber){
                     return <>
                         <Flex gap="gap.small">
-                            <Text content={question.questionId} weight="bold" />
                             <Flex column>
-                                <Text className="text-ui" content={"Question: " + question.question} weight="bold" />
-                                <Text className="text-ui" content={"Language: " + question.language} size="small" />
-                                <Text className="text-ui" content={"Expected output: " + question.expectedOuput} size="small" />
+                                <Flex> <Text className="text-ui" content="Question :" size="small" weight="bold" /> <Text className="text-ui" content={question.question} size="small" /></Flex>
+                                <Flex> <Text className="text-ui" content="Language :" size="small" weight="bold" /> <Text className="text-ui" content={question.language} size="small" /></Flex>
+                                <Flex><Text className="text-ui" content="Expected output :" size="small" weight="bold" /><Text className="text-ui" content={question.expectedOuput} size="small" /></Flex>
                             </Flex>
                         </Flex>
   
