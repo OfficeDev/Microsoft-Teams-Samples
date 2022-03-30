@@ -4,6 +4,7 @@
 // Generated with Bot Builder V4 SDK Template for Visual Studio EchoBot v4.14.0
 
 using MeetingLiveCoding.Hubs;
+using MeetingLiveCoding.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -12,6 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace MeetingLiveCoding
 {
@@ -27,11 +30,15 @@ namespace MeetingLiveCoding
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
+
             services.AddControllers().AddNewtonsoftJson();
 
             services.AddHttpClient("WebClient", client => client.Timeout = TimeSpan.FromSeconds(600));
 
             services.AddHttpContextAccessor();
+
+            services.AddSingleton<ConcurrentDictionary<string, List<MeetingDetails>>>();
 
             // Storage we'll be using for User and Conversation state. 
             services.AddSingleton<IStorage, MemoryStorage>();

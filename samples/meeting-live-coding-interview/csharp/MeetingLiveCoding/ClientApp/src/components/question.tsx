@@ -3,6 +3,7 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import { IQuestionDetails } from '../types/question';
 import { Flex, Text } from '@fluentui/react-northstar'
 import Editor from '@monaco-editor/react';
+import { getLatestEditorValue } from "./services/getLatestEditorValue"
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 
 const Question =(props :any)=>
@@ -10,6 +11,7 @@ const Question =(props :any)=>
     const params = props.match.params;
     const questionNumber = params['questionId'];
     const [data, setData] = React.useState();
+    const [meetingId, setMeetingId] = React.useState();
     const [connection, setConnection] = useState<null | HubConnection>(null);
     React.useEffect(() => {
         microsoftTeams.initialize();
@@ -17,6 +19,14 @@ const Question =(props :any)=>
     }, [])
 
     React.useEffect(() => {
+        microsoftTeams.initialize();
+        microsoftTeams.getContext((context: any) => {
+            setMeetingId(context.meetingId)
+            getLatestEditorValue(questionNumber, context.meetingId).then((res: any) => {
+                if(res.data.value != null && res.data.value != "")
+                setData(res.data.value);
+            })
+        })
         const connect = new HubConnectionBuilder()
             .withUrl(`${window.location.origin}/chatHub`)
             .withAutomaticReconnect()
@@ -30,7 +40,7 @@ const Question =(props :any)=>
             connection
                 .start()
                 .then(() => {
-                    connection.on("ReceiveMessage", (user: any, description: any) => {
+                    connection.on("ReceiveMessage", (user: any, description: any, questionId:any, meetingId:any) => {
                         setData(description);
                     });
                 })
@@ -49,7 +59,7 @@ const Question =(props :any)=>
     }
 
     const handleEditor = emitMessageAction(async (value: any) => {
-        if (connection) await connection.send("SendMessage", "test", value);
+        if (connection) await connection.send("SendMessage", "test", value, questionNumber, meetingId);
     }, 2000);
     
     return (
