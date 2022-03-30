@@ -22,6 +22,40 @@ Now any participant in meeting can write code for the question and same will be 
 
 ![shared content](Images/stageView.png)
 
+## Workflow
+
+```mermaid
+
+sequenceDiagram
+
+    Teams User A->>+Teams Client: Clicks on Incidents ME action in chat
+
+    opt App not installed flow
+
+        Teams Client->>+Teams User A: App install dialog
+
+        Teams User A->>+Teams Client: Installs app
+
+    end  
+
+    Teams Client->>Task Module(Web App): Launches Task Module
+
+    Task Module(Web App)->>+Teams Client: Loads existing incidents
+
+    Teams User A->>Teams Client: Selects incident to share in chat
+
+    Teams Client->>Sample App: Invoke action callback composeExtension/submitAction
+
+    Sample App->>Teams Client: Posts Base card with auto-refresh for user A
+
+    Teams Client->>Teams User A: loads incident card with loading indicator
+
+    Teams Client->>Sample App: Automatically invokes refresh action
+
+    Sample App->>Teams Client: Responds with Updated AC for the user
+
+```
+
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/en/)
