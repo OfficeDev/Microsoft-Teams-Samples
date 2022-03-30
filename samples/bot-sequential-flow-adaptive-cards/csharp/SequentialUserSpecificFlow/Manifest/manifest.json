@@ -35,6 +35,26 @@
       ]
     }
   ],
+  "composeExtensions": [
+    {
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "canUpdateConfiguration": true,
+      "commands": [
+        {
+          "id": "Incident",
+          "type": "action",
+          "title": "Get incidents",
+          "description": "Get list of incidents",
+          "initialRun": false,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        }
+      ]
+    }
+  ],
   "permissions": [
     "identity",
     "messageTeamMembers"

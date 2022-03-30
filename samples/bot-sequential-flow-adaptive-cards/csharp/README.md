@@ -14,7 +14,7 @@ createdDate: "07-07-2021 13:38:26"
 
 # Sequential workflow adaptive cards
 
-This sample illustrates sequential workflow, user specific views and upto date adaptive cards bot.
+This sample illustrates sequential workflow, user specific views and upto date adaptive cards bot and the list of incident created can be seen in messaging extension and can share a specific incident to the chat/team.
 
 ## Prerequisites
 
@@ -75,5 +75,18 @@ This sample illustrates sequential workflow, user specific views and upto date a
 6. After the approval/rejection of the card, the final updated card will be sent to the group chat.
 
   ![image](https://user-images.githubusercontent.com/80379013/123652838-4616a200-d84a-11eb-96c4-580979287b63.png)
+  
+## Interaction from messaging extension.
 
+1. On selecting app from messaging extension,it checks whether bot is installed in chat/team. If not installed, user will get a option for justInTimeInstallation card.
+
+   ![just in time installation card](SequentialUserSpecificFlow/Images/justInTimeInstallation.png)
+
+2. After successful installation, list of all incident will be available in messaging extension.
+
+   ![incident list card](SequentialUserSpecificFlow/Images/incidentListCard.png).
+   
+3. User can select any incident from the list and can share to that chat/team.
+
+   ![share incident](SequentialUserSpecificFlow/Images/shareIncidentCard.png).   
 

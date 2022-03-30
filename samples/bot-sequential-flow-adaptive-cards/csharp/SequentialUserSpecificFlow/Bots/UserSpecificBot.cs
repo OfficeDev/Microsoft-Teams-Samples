@@ -25,12 +25,10 @@ namespace SequentialUserSpecificFlow.Bots
     {
         private List<Info> memberDetails = new List<Info> { };
         private readonly ConcurrentDictionary<string, List<IncidentDetails>> incidentDetailsList;
-        private readonly ConcurrentDictionary<string, IsBotInstalled> isBotInstalled;
 
-        public UserSpecificBot(ConcurrentDictionary<string, List<IncidentDetails>> _incidentDetailsList, ConcurrentDictionary<string, IsBotInstalled> _isBotInstalled)
+        public UserSpecificBot(ConcurrentDictionary<string, List<IncidentDetails>> _incidentDetailsList)
         {
             incidentDetailsList = _incidentDetailsList;
-            isBotInstalled = _isBotInstalled;
         }
 
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
@@ -52,20 +50,7 @@ namespace SequentialUserSpecificFlow.Bots
             turnContext = turnContext ?? throw new ArgumentNullException(nameof(turnContext));
             if (turnContext.Activity.MembersAdded != null && turnContext.Activity.MembersAdded.Any(member => member.Id == turnContext.Activity.Recipient.Id))
             {
-                var installBot = new IsBotInstalled()
-                {
-                    isBotInstalled = true
-                };
-                isBotInstalled.AddOrUpdate(turnContext.Activity.Conversation.Id, installBot, (key, value) => installBot);
                 await turnContext.SendActivityAsync(MessageFactory.Text("Hello and Welcome"));
-            }
-            if (turnContext.Activity.MembersRemoved != null && turnContext.Activity.MembersRemoved.Any(member => member.Id == turnContext.Activity.Recipient.Id))
-            {
-                var installBot = new IsBotInstalled()
-                {
-                    isBotInstalled = false
-                };
-                isBotInstalled.AddOrUpdate(turnContext.Activity.Conversation.Id, installBot, (key, value) => installBot);
             }
         }
 
@@ -80,7 +65,7 @@ namespace SequentialUserSpecificFlow.Bots
                 var data = (object)asJobject.ToObject<CardTaskFetchValue<object>>()?.Data;
                 var botInstalled = (object)JObject.Parse(data.ToString()).ToObject<CardTaskFetchValue<object>>()?.MsTeams;
 
-                if (botInstalled != null || !string.IsNullOrEmpty(botInstalled.ToString()))
+                if (botInstalled != null)
                 {
                     return GetIncientListFromMEAction(currentIncidentList);
                 }
@@ -96,36 +81,40 @@ namespace SequentialUserSpecificFlow.Bots
 
             if (turnContext.Activity.Name == "composeExtension/fetchTask")
             {
-                var isBotInstalledInScope = new IsBotInstalled();
-                isBotInstalled.TryGetValue(turnContext.Activity.Conversation.Id, out isBotInstalledInScope);
-
-                if (isBotInstalledInScope == null || !isBotInstalledInScope.isBotInstalled)
+                try
                 {
-                    string[] paths = { ".", "Resources", "installBot.json" };
-                    var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
-                    var adaptiveCardAttachment = new Attachment()
-                    {
-                        ContentType = "application/vnd.microsoft.card.adaptive",
-                        Content = JsonConvert.DeserializeObject(adaptiveCardJson),
-                    };
+                    // Check if your app is installed by fetching member information.
+                    var member = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
 
-                    return CreateInvokeResponse(new MessagingExtensionActionResponse
-                    {
-                        Task = new TaskModuleContinueResponse
-                        {
-                            Value = new TaskModuleTaskInfo
-                            {
-                                Card = adaptiveCardAttachment,
-                                Height = 200,
-                                Width = 400,
-                                Title = "Bot is not installed",
-                            },
-                        },
-                    });
-                }
-                else
-                {
                     return GetIncientListFromMEAction(currentIncidentList);
+                    
+                }
+                catch (ErrorResponseException ex)
+                {
+                    if (ex.Body.Error.Code == "BotNotInConversationRoster")
+                    {
+                        string[] paths = { ".", "Resources", "justInTimeInstall.json" };
+                        var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
+                        var adaptiveCardAttachment = new Attachment()
+                        {
+                            ContentType = AdaptiveCard.ContentType,
+                            Content = JsonConvert.DeserializeObject(adaptiveCardJson),
+                        };
+
+                        return CreateInvokeResponse(new MessagingExtensionActionResponse
+                        {
+                            Task = new TaskModuleContinueResponse
+                            {
+                                Value = new TaskModuleTaskInfo
+                                {
+                                    Card = adaptiveCardAttachment,
+                                    Height = 200,
+                                    Width = 400,
+                                    Title = "Bot is not installed",
+                                },
+                            },
+                        });
+                    }
                 }
             }
 
@@ -173,6 +162,7 @@ namespace SequentialUserSpecificFlow.Bots
 
                     case "secondCard":
                         string[] secondCard = { ".", "Resources", "thirdCard.json" };
+
                         if (data.action.data.Category == "Software")
                         {
                             adaptiveCardResponse = GetNextActionCard(secondCard, data, Constants.Software);
@@ -197,6 +187,7 @@ namespace SequentialUserSpecificFlow.Bots
                             IncidentTitle = data.action.data.IncidentTitle,
                             SubCategory = data.action.data.SubCategory
                         };
+
                         data.action.data.IncidentId = incidentDetail.IncidentId;
                         string[] thirdCard = { ".", "Resources", "reviewCard.json" };
                         var responseAttachment = GetResponseAttachment(thirdCard, data, out cardJson);
@@ -209,7 +200,7 @@ namespace SequentialUserSpecificFlow.Bots
                         adaptiveCardResponse = new AdaptiveCardInvokeResponse()
                         {
                             StatusCode = 200,
-                            Type = "application/vnd.microsoft.card.adaptive",
+                            Type = AdaptiveCard.ContentType,
                             Value = response
                         };
                       
@@ -248,7 +239,7 @@ namespace SequentialUserSpecificFlow.Bots
                         adaptiveCardResponse = new AdaptiveCardInvokeResponse()
                         {
                             StatusCode = 200,
-                            Type = "application/vnd.microsoft.card.adaptive",
+                            Type = AdaptiveCard.ContentType,
                             Value = response
                         };
                         
@@ -267,7 +258,7 @@ namespace SequentialUserSpecificFlow.Bots
                         adaptiveCardResponse = new AdaptiveCardInvokeResponse()
                         {
                             StatusCode = 200,
-                            Type = "application/vnd.microsoft.card.adaptive",
+                            Type = AdaptiveCard.ContentType,
                             Value = response
                         };
                         
@@ -280,7 +271,6 @@ namespace SequentialUserSpecificFlow.Bots
 
         private Attachment GetFirstOptionsAdaptiveCard(string[] filepath, string name = null, string userMRI = null)
         {
-
             var adaptiveCardJson = File.ReadAllText(Path.Combine(filepath));
             AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
             var payloadData = new
@@ -291,7 +281,7 @@ namespace SequentialUserSpecificFlow.Bots
             var cardJsonstring = template.Expand(payloadData);
             var adaptiveCardAttachment = new Attachment()
             {
-                ContentType = "application/vnd.microsoft.card.adaptive",
+                ContentType = AdaptiveCard.ContentType,
                 Content = JsonConvert.DeserializeObject(cardJsonstring),
             };
 
@@ -378,14 +368,15 @@ namespace SequentialUserSpecificFlow.Bots
 
             //"Expand" the template -this generates the final Adaptive Card payload
             var cardJsonstring = template.Expand(payloadData);
-            var card = JObject.Parse(cardJsonstring);
+            var card = JsonConvert.DeserializeObject(cardJsonstring);
 
             var adaptiveCardResponse = new AdaptiveCardInvokeResponse()
             {
                 StatusCode = 200,
-                Type = "application/vnd.microsoft.card.adaptive",
+                Type = AdaptiveCard.ContentType,
                 Value = card
             };
+
             return adaptiveCardResponse;
         }
 
@@ -407,9 +398,10 @@ namespace SequentialUserSpecificFlow.Bots
             cardJsonString = template.Expand(payloadData);
             var adaptiveCardAttachment = new Attachment()
             {
-                ContentType = "application/vnd.microsoft.card.adaptive",
+                ContentType = AdaptiveCard.ContentType,
                 Content = JsonConvert.DeserializeObject(cardJsonString),
             };
+
             return adaptiveCardAttachment;
         }
 
@@ -422,9 +414,10 @@ namespace SequentialUserSpecificFlow.Bots
 
             var adaptiveCardAttachment = new Attachment()
             {
-                ContentType = "application/vnd.microsoft.card.adaptive",
+                ContentType = AdaptiveCard.ContentType,
                 Content = JsonConvert.DeserializeObject(adaptiveCardJson),
             };
+
             return adaptiveCardAttachment;
         }
 
@@ -436,13 +429,13 @@ namespace SequentialUserSpecificFlow.Bots
             var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
             AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
             var cardJsonstring = template.Expand(incidentList);
-            var card = JObject.Parse(cardJsonstring);
 
             var adaptiveCardAttachment = new Attachment()
             {
-                ContentType = "application/vnd.microsoft.card.adaptive",
-                Content = card,
+                ContentType = AdaptiveCard.ContentType,
+                Content = JsonConvert.DeserializeObject(cardJsonstring)
             };
+
             return adaptiveCardAttachment;
         }
 
@@ -466,7 +459,7 @@ namespace SequentialUserSpecificFlow.Bots
             var cardJsonString = template.Expand(payloadData);
             var adaptiveCardAttachment = new Attachment()
             {
-                ContentType = "application/vnd.microsoft.card.adaptive",
+                ContentType = AdaptiveCard.ContentType,
                 Content = JsonConvert.DeserializeObject(cardJsonString),
             };
 

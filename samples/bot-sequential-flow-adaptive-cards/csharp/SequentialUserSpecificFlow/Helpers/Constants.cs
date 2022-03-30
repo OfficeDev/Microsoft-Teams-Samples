@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿// <copyright file="Constants.cs" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyright>
+
+using System.Collections.Generic;
 
 namespace SequentialUserSpecificFlow.Helpers
 {

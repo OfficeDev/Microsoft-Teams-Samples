@@ -5,7 +5,7 @@
   "body": [
     {
       "type": "TextBlock",
-      "text": "Select a incident to send.",
+      "text": "Select a incident to share in chat/team.",
       "size": "large",
       "weight": "bolder"
     },

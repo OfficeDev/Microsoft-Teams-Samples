@@ -8,6 +8,12 @@
       "text": "No incident found.",
       "size": "large",
       "weight": "bolder"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Please create a incident using bot",
+      "size": "medium",
+      "weight": "default"
     }
   ]
 }
