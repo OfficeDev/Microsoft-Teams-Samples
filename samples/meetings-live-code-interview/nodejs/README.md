@@ -23,36 +23,31 @@ Now any participant in meeting can write code for the question and same will be 
 ![shared content](Images/stageView.png)
 
 ## Workflow
+## Workflow
 
 ```mermaid
 
 sequenceDiagram
 
-    Teams User A->>+Teams Client: Clicks on Incidents ME action in chat
+    Teams User->>+Teams Client: Schedules a Teams Meeting with candidate
 
-    opt App not installed flow
+    Teams Client->>+Live Coding App: Installs the App
 
-        Teams Client->>+Teams User A: App install dialog
+    Teams User->>+Teams Client: Starts the meeting
 
-        Teams User A->>+Teams Client: Installs app
+    Teams User->>+Live Coding App: Opens the Live coding app side panel
 
-    end  
+    Live Coding App->>+Side Panel: Load questions
 
-    Teams Client->>Task Module(Web App): Launches Task Module
+    Side Panel-->>-Live Coding App: Loads predefined coding questions
 
-    Task Module(Web App)->>+Teams Client: Loads existing incidents
+    Teams User->>+Side Panel: Select the coding question to share to stage
 
-    Teams User A->>Teams Client: Selects incident to share in chat
+    Side Panel-->>-Teams Client: Tells the team client to open a code editor on the stage
 
-    Teams Client->>Sample App: Invoke action callback composeExtension/submitAction
+    Teams Client->>+Code Editor Stage: Tells the app which coding question to open
 
-    Sample App->>Teams Client: Posts Base card with auto-refresh for user A
-
-    Teams Client->>Teams User A: loads incident card with loading indicator
-
-    Teams Client->>Sample App: Automatically invokes refresh action
-
-    Sample App->>Teams Client: Responds with Updated AC for the user
+    Code Editor Stage-->>-Live Coding App: Shares the question to share to stage in the meeting
 
 ```
 
