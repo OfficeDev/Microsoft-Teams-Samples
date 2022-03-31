@@ -23,8 +23,6 @@ Now any participant in meeting can write code for the question and same will be 
 
 ## Workflow
 
-## Workflow
-
 ```mermaid
 
 sequenceDiagram
