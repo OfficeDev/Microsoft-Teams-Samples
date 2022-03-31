@@ -11,9 +11,8 @@ namespace MeetingLiveCoding.Hubs
     {
         static HttpClient client = new HttpClient();
 
-        public async Task SendMessage(string user, string description, string questionId, string meetingId)
+        public async Task SendMessage(string user, string description, string questionId, string meetingId, string baseUrl)
         {
-            var baseUrl = "https://0923-116-75-10-155.ngrok.io";
             if (description != "")
             {
                 var meetingDataEntity = new PostMeetingData()

@@ -134,6 +134,7 @@ namespace MeetingLiveCoding.Controllers
                 var meetingIndex = meetingList.FindIndex(e => e.MeetingId == meetingData.MeetingId);
                 var questionIndex = meetingList[meetingIndex].Questions.FindIndex(e => e.QuestionId == meetingData.QuestionId);
                 meetingList[meetingIndex].Questions[questionIndex].Value = meetingData.Description;
+
                 _meetingDetails.AddOrUpdate("meetingDetails", meetingList, (key, newvalue) => meetingList);
             }
             catch (Exception ex)

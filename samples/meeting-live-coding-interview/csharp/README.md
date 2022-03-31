@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demos live coding in a teams meeting."
+description: "This sample demos a live coding in a teams meeting stage."
 products:
 - office-teams
 - office

@@ -9,6 +9,7 @@ import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 const Question =(props :any)=>
 {
     const params = props.match.params;
+    const baseUrl = window.location.origin;
     const questionNumber = params['questionId'];
     const [data, setData] = React.useState();
     const [meetingId, setMeetingId] = React.useState();
@@ -27,6 +28,8 @@ const Question =(props :any)=>
                 setData(res.data.value);
             })
         })
+
+        // create a new signalr connection
         const connect = new HubConnectionBuilder()
             .withUrl(`${window.location.origin}/chatHub`)
             .withAutomaticReconnect()
@@ -35,12 +38,13 @@ const Question =(props :any)=>
         setConnection(connect);
     }, []);
 
+    // subscribe to a signalr connection
     React.useEffect(() => {
         if (connection) {
             connection
                 .start()
                 .then(() => {
-                    connection.on("ReceiveMessage", (user: any, description: any, questionId:any, meetingId:any) => {
+                    connection.on("ReceiveMessage", (user: any, description: any, questionId:any, meetingId:any, baseUrl: any) => {
                         setData(description);
                     });
                 })
@@ -48,6 +52,7 @@ const Question =(props :any)=>
         }
     }, [connection]);
 
+    // Emit action to send message to server.
     const emitMessageAction = (handleEditorChange: any, time: any) => {
         let timer: any;
         return (...argument: any) => {
@@ -58,8 +63,9 @@ const Question =(props :any)=>
         }
     }
 
+     // Handle editor value change. 
     const handleEditor = emitMessageAction(async (value: any) => {
-        if (connection) await connection.send("SendMessage", "test", value, questionNumber, meetingId);
+        if (connection) await connection.send("SendMessage", "EditorCode", value, questionNumber, meetingId, baseUrl);
     }, 2000);
     
     return (

@@ -1,9 +1,9 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
   "manifestVersion": "1.12",
-  "version": "1.0.10",
+  "version": "1.0.0",
   "id": "<<Manifest-id>>",
-  "packageName": "com.teams.meetingsstageview",
+  "packageName": "com.teams.livecodinginterview",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -20,7 +20,7 @@
   },
   "description": {
     "short": "Live coding interview",
-    "full": "This example shows live coding in teams meeting."
+    "full": "This sample demos a live coding in a scheduled teams meeting."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [
