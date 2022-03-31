@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LinkUnfurlingInShareToStage.Bots
+namespace LinkUnfurlingInShareToTeams.Bots
 {
     public class ActivityBot : TeamsActivityHandler
     {

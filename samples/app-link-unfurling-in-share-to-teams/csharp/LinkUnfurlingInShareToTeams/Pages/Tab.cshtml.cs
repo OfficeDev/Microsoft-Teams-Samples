@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace LinkUnfurlingInShareToStage.Pages
+namespace LinkUnfurlingInShareToTeams.Pages
 {
     public class TabModel : PageModel
     {

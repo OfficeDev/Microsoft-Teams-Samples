@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Net.Http;
 
-namespace LinkUnfurlingInShareToStage
+namespace LinkUnfurlingInShareToTeams
 {
     public class AdapterWithErrorHandler : CloudAdapter
     {

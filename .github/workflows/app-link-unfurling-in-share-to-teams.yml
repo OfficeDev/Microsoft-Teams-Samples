@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Deploy - csharp app-link-unfurling-in-share-to-stage
+name: Deploy - csharp app-link-unfurling-in-share-to-teams
 
 on:
   push:
@@ -10,13 +10,13 @@ on:
     branches:
       - main
     paths:
-      - 'samples/app-link-unfurling-in-share-to-stage/csharp/**'  
+      - 'samples/app-link-unfurling-in-share-to-teams/csharp/**'  
   workflow_dispatch:
 env:
     #Change the webapp package path. This will contain the code to be published after build
     #Change the project path to your project file path.
-    AZURE_WEBAPP_PACKAGE_PATH: 'samples/app-link-unfurling-in-share-to-stage/csharp/published'
-    PROJECT_PATH: 'samples/app-link-unfurling-in-share-to-stage/csharp/LinkUnfurlingInShareToStage/LinkUnfurlingInShareToStage.csproj'
+    AZURE_WEBAPP_PACKAGE_PATH: 'samples/app-link-unfurling-in-share-to-teams/csharp/published'
+    PROJECT_PATH: 'samples/app-link-unfurling-in-share-to-teams/csharp/LinkUnfurlingInShareToTeams/LinkUnfurlingInShareToTeams.csproj'
 jobs:
   build:
     runs-on: windows-latest

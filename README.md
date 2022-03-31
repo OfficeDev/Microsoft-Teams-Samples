@@ -323,7 +323,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [graph-activity-feed-broadcast#js]:samples/graph-activity-feed-broadcast/nodejs
 [app-identity-link-with-sso#nodejs]:samples/app-identity-link-with-sso/nodejs
 [tab-staggered-permission#nodejs]:samples/tab-staggered-permission/nodejs
-[link-unfurling-stt#cs]:samples/app-link-unfurling-in-share-to-stage/csharp
+[link-unfurling-stt#cs]:samples/app-link-unfurling-in-share-to-teams/csharp
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 
 ## Submitting issues

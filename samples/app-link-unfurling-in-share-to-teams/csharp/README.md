@@ -18,11 +18,11 @@ This sample demos the feature of link unfurling for Share to teams (The Share to
 
 ## Key features
   
-  ![tab](LinkUnfurlingInShareToStage/Images/Tab.png)
+  ![tab](LinkUnfurlingInShareToTeams/Images/Tab.png)
   
-  ![Link unfurling STT](LinkUnfurlingInShareToStage/Images/LinkUnfurlingShareToStage.png)
+  ![Link unfurling STT](LinkUnfurlingInShareToTeams/Images/LinkUnfurlingShareToTeams.png)
   
-  ![Link unfurling card](LinkUnfurlingInShareToStage/Images/LinkUnfurlCard.png)
+  ![Link unfurling card](LinkUnfurlingInShareToTeams/Images/LinkUnfurlCard.png)
    
 ## Prerequisites
 
@@ -48,7 +48,7 @@ This sample demos the feature of link unfurling for Share to teams (The Share to
    
 3) Launch Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/app-link-unfurling-in-share-to-stage/csharp/LinkUnfurlingInShareToStage.sln`
+   - Navigate to folder where repository is cloned then `samples/app-link-unfurling-in-share-to-teams/csharp/LinkUnfurlingInShareToTeams.sln`
     
 4) Run ngrok - point to port 3978
 
