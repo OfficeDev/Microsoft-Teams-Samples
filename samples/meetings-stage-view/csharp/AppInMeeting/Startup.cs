@@ -26,8 +26,11 @@ namespace AppInMeeting
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
             services.AddRazorPages();
             services.AddSignalR();
+            services.AddSession();
+            services.AddMemoryCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,10 +46,13 @@ namespace AppInMeeting
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                  name: "default",
+                  pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapHub<ChatHub>("/chatHub");
             });
 

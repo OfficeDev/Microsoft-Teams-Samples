@@ -1,6 +1,4 @@
-﻿@page "/appInMeeting"
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,18 +16,16 @@
         </div>
         <div id="boardDiv" class="chat-window">
             <div class="part-container">
-                <partial name="~/Pages/ToDo.cshtml" />
+                @Html.Partial("ToDo.cshtml")
             </div>
             <div class="part-container">
-                <partial name="~/Pages/Doing.cshtml" />
+                @Html.Partial("Doing.cshtml")
             </div>
             <div class="part-container">
-                <partial name="~/Pages/Done.cshtml" />
+                @Html.Partial("Done.cshtml")
             </div>
         </div>
     </div>
-    <script src="/lib/microsoft/signalr/dist/browser/signalr.js"></script>
-    <script src="/lib/microsoft/chat.js"></script>
     <script>
         microsoftTeams.initialize();
         microsoftTeams.getContext((context) => {
@@ -51,24 +47,10 @@
             });
         });
 
-        // Task module to collect details from the meeting participants.
-        const openTaskModule = (status) => {
-            let taskInfo = {
-                title: "Status Details",
-                height: 250,
-                width: 250,
-                url: `${window.location.origin}/Index`,
-            };
-
-            microsoftTeams.tasks.startTask(taskInfo, (err, result) => {
-                updateDetails(result, status);
-            });
-        };
-
         // shareToStage.
         const shareSpecificPart = (partName) => {
             var appContentUrl = "";
-            appContentUrl = partName == 'todo' ? `${window.location.origin}/AppSpecificPart/todo` : partName == 'doing' ? `${window.location.origin}/AppSpecificPart/doing` : `${window.location.origin}/AppSpecificPart/done`;
+            appContentUrl = partName == 'todo' ? `${window.location.origin}/todo` : partName == 'doing' ? `${window.location.origin}/doing` : `${window.location.origin}/done`;
 
             microsoftTeams.meeting.shareAppContentToStage((err, result) => {
                 if (result) {

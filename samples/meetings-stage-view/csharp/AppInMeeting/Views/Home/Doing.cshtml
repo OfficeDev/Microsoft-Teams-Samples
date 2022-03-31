@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Done</title>
+    <title>Doing</title>
     <link rel="stylesheet" href="/static/styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js" integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2" crossorigin="anonymous"></script>
@@ -13,21 +13,22 @@
     <script src="/lib/microsoft/signalr/dist/browser/signalr.js"></script>
     <script src="/lib/microsoft/chat.js"></script>
     <div class="label">
-        Done
+        Doing
     </div>
 
-    <button onclick="openTaskModule('done')" class="add-card-button">
+    <button onclick="openTaskModule('doing')" class="add-card-button">
         <img class="add-icon" src="../../Images/add_icon.svg" title="Click to continue existing conversation" />
     </button>
     <br />
-    <button onclick="shareSpecificPart('done')" class="share-specific-part-button">
-        Share Done
+    <button onclick="shareSpecificPart('doing')" class="share-specific-part-button">
+        Share Doing
     </button>
 
-    <div id="done">
+    <div id="doing">
 
     </div>
-
+    <script src="/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script src="/lib/microsoft/chat.js"></script>
     <script>
         microsoftTeams.initialize();
         microsoftTeams.getContext((context) => {
@@ -40,6 +41,20 @@
                 }
             });
         });
+
+        // Task module to collect details from the meeting participants.
+        const openTaskModule = (status) => {
+            let taskInfo = {
+                title: "Status Details",
+                height: 250,
+                width: 250,
+                url: `${window.location.origin}/taskInfo`,
+            };
+
+            microsoftTeams.tasks.startTask(taskInfo, (err, result) => {
+                updateDetails(result, status);
+            });
+        };
     </script>
 </body>
 </html>
