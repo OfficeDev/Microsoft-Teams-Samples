@@ -138,6 +138,54 @@ List Incidents
 ![image](https://user-images.githubusercontent.com/85108465/123595684-d0d9ab80-d80e-11eb-9798-82f535ba6486.png)
 ![image](https://user-images.githubusercontent.com/85108465/123769386-e28e8200-d8e6-11eb-96e0-3d1f8365c7ef.png)
 
+## Workflow for ME Interaction
+
+```mermaid
+
+sequenceDiagram
+
+    Teams User A->>+Teams Client: Clicks on Incidents ME action in chat
+
+    opt App not installed flow
+
+        Teams Client->>+Teams User A: App install dialog
+
+        Teams User A->>+Teams Client: Installs app
+
+    end  
+
+    Teams Client->>Task Module(Web App): Launches Task Module
+
+    Task Module(Web App)->>+Teams Client: Loads existing incidents
+
+    Teams User A->>Teams Client: Selects incident to share in chat
+
+    Teams Client->>Sample App: Invoke action callback composeExtension/submitAction
+
+    Sample App->>Teams Client: Posts Base card with auto-refresh for user A
+
+    Teams Client->>Teams User A: loads incident card with loading indicator
+
+    Teams Client->>Sample App: Automatically invokes refresh action
+
+    Sample App->>Teams Client: Responds with Updated Card for the user
+
+```
+
+## Interaction from messaging extension.
+
+1. On selecting app from messaging extension,it checks whether bot is installed in chat/team. If not installed, user will get a option for justInTimeInstallation card.
+
+   ![just in time installation card](Images/justInTimeInstallation.png)
+
+2. After successful installation, list of all incident will be available in messaging extension.
+
+   ![incident list card](Images/incidentListCard.png).
+   
+3. User can select any incident from the list and can share to that chat/team.
+
+   ![image](https://user-images.githubusercontent.com/85108465/123768720-351b6e80-d8e6-11eb-9f6e-7525c761d034.png)
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
