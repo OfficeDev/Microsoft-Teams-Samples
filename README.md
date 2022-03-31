@@ -320,7 +320,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [peoplepickeronadaptivecard#csharp]:samples/bot-people-picker-adaptive-card/csharp
 [graph-activity-feed-broadcast#js]:samples/graph-activity-feed-broadcast/nodejs
 [app-identity-link-with-sso#nodejs]:samples/app-identity-link-with-sso/nodejs
-[link-unfurling-stt#nodejs]:samples/link-unfurling-stt/nodejs
+[link-unfurling-stt#nodejs]:samples/app-link-unfurling-in-share-to-teams/nodejs
 [tab-staggered-permission#nodejs]:samples/tab-staggered-permission/nodejs
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 

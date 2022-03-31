@@ -43,7 +43,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/app-link-unfurling-in-share-to-stage/nodejs`
+2) In a terminal, navigate to `samples/app-link-unfurling-in-share-to-teams/nodejs`
 
 3) Install modules
 
