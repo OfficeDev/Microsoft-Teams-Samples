@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: "This sample demos live coding in a teams meeting."
+description: "This sample demos a live coding in a teams meeting stage."
 products:
 - office-teams
 - office
@@ -15,14 +15,13 @@ extensions:
 
 # Live coding interview using Shared meeting stage 
 
-This sample demos live coding in a teams meeting. In side panel there is a list of question in specific coding language and on share click specific question with language code editor will be shared with other participant in meeting.
+This sample demos a live coding in a teams meeting stage. In side panel there is a list of question in specific coding language and on share click specific question with language code editor will be shared with other participant in meeting.
 Now any participant in meeting can write code for the question and same will be updated to all the other participants in meeting.  
 
 ![side panel ](Images/sidePanelView.png)
 
 ![shared content](Images/stageView.png)
 
-## Workflow
 ## Workflow
 
 ```mermaid

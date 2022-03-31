@@ -1,7 +1,7 @@
 {
   "name": "meeting-live-coding-interview",
   "version": "1.0.0",
-  "description": "App demos functionality to do live coding in meeting.",
+  "description": "App demos functionality to do live coding in teams meeting.",
   "main": "server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

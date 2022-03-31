@@ -4,7 +4,7 @@ import { IQuestionDetails } from '../types/question';
 import { Flex, Text } from '@fluentui/react-northstar'
 import Editor from '@monaco-editor/react';
 import io from "socket.io-client";
-import {getLatestEditorValue} from "./services/getLatestEditorValue"
+import { getLatestEditorValue } from "./services/getLatestEditorValue"
 import "./tab.css"
 
 const Question = (props: any) => {
@@ -22,8 +22,7 @@ const Question = (props: any) => {
                 setData(res.data.value);
             })
         })
-        setSocket(io());
-        
+        setSocket(io());     
     }, [])
 
     // subscribe to the socket event
@@ -33,13 +32,14 @@ const Question = (props: any) => {
         socket.connect();
     });
 
-    // get latest state of editor.
+    // Get latest state of editor.
     socket.on("message", data => {
         setData(data);
     });
  
   }, [socket]);
 
+    // Emit action to send message to server.
     const emitMessageAction = (handleEditorChange: any, time: any) => {
         let timer: any;
         return (...argument: any) => {
