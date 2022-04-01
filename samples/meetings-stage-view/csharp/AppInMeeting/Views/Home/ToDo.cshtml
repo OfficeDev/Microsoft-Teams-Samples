@@ -31,6 +31,23 @@
         microsoftTeams.initialize();
         microsoftTeams.getContext((context) => {
             $(document).ready(function () {
+                $.ajax({
+                    url: "/getMeetingData?meetingId=" + context.meetingId + "&status=todo",
+                    type: "GET",
+                    success: function (response) {
+                        if (response !== undefined) {
+                            for (var i = 0; i < response.length; i++) {
+                                document.getElementById('todo').innerHTML += (`<div class="details">
+                            <div class="description" title="${response[i].taskDescription}">${response[i].taskDescription}</div>
+                            <div class="userName">--${response[i].userName}</div>
+                      `);
+                            }
+                        }
+                    },
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                        },
+                    });
                 if (context.frameContext == "sidePanel") {
                     $(".share-specific-part-button").show();
                 }
@@ -50,7 +67,9 @@
             };
 
             microsoftTeams.tasks.startTask(taskInfo, (err, result) => {
-                updateDetails(result, status);
+                microsoftTeams.getContext((context) => {
+                    updateDetails(result, status, context.meetingId);
+                });
             });
         };
     </script>
