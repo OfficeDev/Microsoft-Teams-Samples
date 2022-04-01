@@ -32,7 +32,6 @@ namespace SequentialUserSpecificFlow
             // Create the Bot Framework Adapter with error handling enabled.
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
-            services.AddRazorPages();
             services.AddSingleton<ConcurrentDictionary<string, List<IncidentDetails>>>();
             // Create the storage we'll be using for User and Conversation state. (Memory is great for testing purposes.)
             services.AddSingleton<IStorage, MemoryStorage>();

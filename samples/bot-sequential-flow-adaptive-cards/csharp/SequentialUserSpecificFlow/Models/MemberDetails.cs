@@ -17,8 +17,10 @@ namespace SequentialUserSpecificFlow.Models
     /// </summary>
     public class Info
     {
+        // Aad object id of member.
         public string value { get; set; }
 
+        // User name of member.
         public string title { get; set; }
     }
 }

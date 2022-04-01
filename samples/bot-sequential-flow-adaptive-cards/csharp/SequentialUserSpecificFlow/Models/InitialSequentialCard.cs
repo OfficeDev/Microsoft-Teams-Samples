@@ -15,7 +15,7 @@ namespace SequentialUserSpecificFlow.Models
     }
 
     /// <summary>
-    /// Action model class.
+    /// Action in adaptive card model class.
     /// </summary>
     public class Action
     {
@@ -29,7 +29,7 @@ namespace SequentialUserSpecificFlow.Models
     }
 
     /// <summary>
-    /// Data model class.
+    /// Incident data model class.
     /// </summary>
     public class Data
     {

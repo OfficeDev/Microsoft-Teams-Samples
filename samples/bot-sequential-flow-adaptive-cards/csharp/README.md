@@ -76,7 +76,7 @@ This sample illustrates sequential workflow, user specific views and upto date a
 
   ![image](https://user-images.githubusercontent.com/80379013/123652838-4616a200-d84a-11eb-96c4-580979287b63.png)
   
-## Workflow for ME Interaction
+## Workflow for messaging extension Interaction
 
 ```mermaid
 
