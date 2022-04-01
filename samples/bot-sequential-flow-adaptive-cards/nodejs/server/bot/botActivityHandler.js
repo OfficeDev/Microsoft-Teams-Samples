@@ -29,11 +29,12 @@ class BotActivityHandler extends TeamsActivityHandler {
         console.log('Activity: ', context.activity.name);
         const user = context.activity.from;
         const action = context.activity.value.action;
+
         if(context.activity.name == "composeExtension/submitAction") {
             let choiceset = [];
-            const incs = await incidentService.getAllInc();
+            const incidents = await incidentService.getAllInc();
             if(context.activity.value.data.msteams != null) {
-                incs.map(inc => {
+                incidents.map(inc => {
                     let choiceData = {
                         title: `Incident title: ${inc.title}, Created by: ${inc.createdBy.name}`,
                         value: inc.id
@@ -48,13 +49,13 @@ class BotActivityHandler extends TeamsActivityHandler {
             }
 
             var incidentData = context.activity.value.data;
-            const incident = incs.find(inc => inc.id == incidentData.incidentId);
-            var card1 = CardFactory.adaptiveCard(await adaptiveCards.refreshBotCard(incident));
+            const incident = incidents.find(inc => inc.id == incidentData.incidentId);
+            var refreshCard = CardFactory.adaptiveCard(await adaptiveCards.refreshBotCard(incident));
             await context.sendActivity({
-                attachments: [card1]
+                attachments: [refreshCard]
             });
 
-            return adaptiveCards.invokeResponse(card1);
+            return adaptiveCards.invokeResponse(refreshCard);
         }
 
         if(context.activity.name == "composeExtension/fetchTask") {
@@ -62,9 +63,9 @@ class BotActivityHandler extends TeamsActivityHandler {
             try {
                 let choiceset = [];
                 const allMembers = await (await TeamsInfo.getMembers(context)).filter(tm => tm.aadObjectId);
-                const incs = await incidentService.getAllInc();
+                const incidents = await incidentService.getAllInc();
 
-                if(incs.length == 0) {
+                if(incidents.length == 0) {
                     const noIncidentFound = CardFactory.adaptiveCard({
                         version: '1.0.0',
                         type: 'AdaptiveCard',
@@ -83,10 +84,11 @@ class BotActivityHandler extends TeamsActivityHandler {
                             }
                         ]
                     });
+
                     return adaptiveCards.invokeTaskResponse("No Incident found", noIncidentFound);
                 }
 
-                incs.map(inc => {
+                incidents.map(inc => {
                     let choiceData = {
                         title: `Incident title: ${inc.title}, Created by: ${inc.createdBy.name}`,
                         value: inc.id

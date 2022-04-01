@@ -138,7 +138,7 @@ List Incidents
 ![image](https://user-images.githubusercontent.com/85108465/123595684-d0d9ab80-d80e-11eb-9798-82f535ba6486.png)
 ![image](https://user-images.githubusercontent.com/85108465/123769386-e28e8200-d8e6-11eb-96e0-3d1f8365c7ef.png)
 
-## Workflow for ME Interaction
+## Workflow for Messaging Extension Interaction
 
 ```mermaid
 

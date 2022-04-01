@@ -23,7 +23,7 @@ const incidentManagementCard = (profileName) => ({
     body: [
         {
             type: 'TextBlock',
-            text: `Hello ${ profileName }`
+            text: `Hello ${profileName}`
         },
         {
             type: 'TextBlock',
@@ -184,24 +184,24 @@ const incidentListCard = (choiceset) => ({
             value: "",
             choices: choiceset,
             wrap: true
-          }
+        }
     ],
     actions: [
         {
-          type: "Action.Submit",
-          id: "submit",
-          title: "Send",
-          data: {
-            action: "incidentSelector"
-          }
+            type: "Action.Submit",
+            id: "submit",
+            title: "Send",
+            data: {
+                action: "incidentSelector"
+            }
         }
-      ]
+    ]
 });
 
 const chooseCategory = async () => {
     const actionsPromise = categories.map(c => ({
         type: 'Action.Execute',
-        verb: `category_${ c.name }`,
+        verb: `category_${c.name}`,
         title: c.name,
         data: {
             option: c.name
@@ -253,7 +253,7 @@ const chooseSubCategory = async (verb) => {
     const subCategories = categories.filter(c => c.name === category);
     const actionsPromise = subCategories[0].subcategory.map(sc => ({
         type: 'Action.Execute',
-        verb: `subcategory_${ category }_${ sc }`,
+        verb: `subcategory_${category}_${sc}`,
         title: sc,
         data: {
             option: sc
@@ -452,7 +452,7 @@ const createInc = async (verb, user) => {
             },
             {
                 type: 'Action.Execute',
-                verb: `category_${ verb.split('_')[1] }`,
+                verb: `category_${verb.split('_')[1]}`,
                 title: 'Back',
                 data: {
                     info: 'Back'
@@ -1544,7 +1544,6 @@ const refreshBotCard = async (inc) => {
                     }
                 ]
             },
-
             {
                 type: 'ColumnSet',
                 columns: [
@@ -1606,7 +1605,6 @@ const refreshBotCard = async (inc) => {
                     }
                 ]
             },
-
             {
                 type: 'RichTextBlock',
                 inlines: [
@@ -1884,7 +1882,7 @@ const viewAllInc = async () => {
 };
 
 const toTitleCase = (str) => {
-    return str.replace(/\b\w/g, function(txt) { return txt.toUpperCase(); });
+    return str.replace(/\b\w/g, function (txt) { return txt.toUpperCase(); });
 };
 
 module.exports = {
