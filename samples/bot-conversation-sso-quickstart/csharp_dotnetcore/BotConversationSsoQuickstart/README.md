@@ -22,11 +22,11 @@ The focus of this sample is how to use the Bot Framework support for OAuth SSO i
 
 The sample uses the bot authentication capabilities in [Azure Bot Service](https://docs.botframework.com), providing features to make it easier to develop a bot that authenticates users to various identity providers such as Azure AD (Azure Active Directory), GitHub, Uber, etc. The OAuth token is then used to make basic Microsoft Graph queries.
 
-[bot signin card](Tmages/BotSignInCard.png)
+[bot signin card](Images/BotSignInCard.png)
 
-[user details card](Tmages/UserDetailsCard.png)
+[user details card](Images/UserDetailsCard.png)
 
-[token](Tmages/Token.png)
+[token](Images/Token.png)
 
 > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
