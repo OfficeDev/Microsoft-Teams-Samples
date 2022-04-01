@@ -24,11 +24,11 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
-[bot signin card](sso_media/BotSignInCard.png)
+![bot signin card](sso_media/BotSignInCard.png)
 
-[user details card](sso_media/UserDetailsCard.png)
+![user details card](sso_media/UserDetailsCard.png)
 
-[token](sso_media/Token.png)
+![token](sso_media/Token.png)
 
 ## Prerequisites
 

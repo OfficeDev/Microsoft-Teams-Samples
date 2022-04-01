@@ -24,19 +24,19 @@ This application simulates a real task management system and allows users to cre
 
 **For more information on developing apps for Microsoft Teams, please review the Microsoft Teams [developer documentation](https://docs.microsoft.com/en-us/microsoftteams/platform/overview).**
 
-[Setup Connector](TeamsToDoAppConnector/Images/SetUpConnector.png)
+![Setup Connector](TeamsToDoAppConnector/Images/SetUpConnector.png)
 
-[Welcome card](TeamsToDoAppConnector/Images/WelcomeCardSentbyConnector.png)
+![Welcome card](TeamsToDoAppConnector/Images/WelcomeCardSentbyConnector.png)
 
-[Task manager portal](TeamsToDoAppConnector/Images/TaskManagerPortal.png)
+![Task manager portal](TeamsToDoAppConnector/Images/TaskManagerPortal.png)
 
-[Create new task](TeamsToDoAppConnector/Images/CreateNewTask.png)
+![Create new task](TeamsToDoAppConnector/Images/CreateNewTask.png)
 
-[Task details](TeamsToDoAppConnector/Images/TaskDetails.png)
+![Task details](TeamsToDoAppConnector/Images/TaskDetails.png)
 
-[Task card by connector](TeamsToDoAppConnector/Images/TaskCardByConnector.png)
+![Task card by connector](TeamsToDoAppConnector/Images/TaskCardByConnector.png)
 
-[Update task card](TeamsToDoAppConnector/Images/UpdateTaskCard.png)
+![Update task card](TeamsToDoAppConnector/Images/UpdateTaskCard.png)
 
 ## Prerequisites
 The minimum prerequisites to run this sample are:
