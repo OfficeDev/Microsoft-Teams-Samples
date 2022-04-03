@@ -93,10 +93,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-## Interacting with the bot in Teams
-
-You can interact with this bot by `@Sequential Workflows` (BotName). The bot will respond with adaptive card requesting you the details.
-
+## Workflows
 ### Workflow for bot interaction
 
 ```mermaid
@@ -116,6 +113,35 @@ sequenceDiagram
     Teams Client->>Sample App: Automatically invokes refresh action
     Sample App-->>Teams User B: Responds with card for user B with option to approve/reject
 ```
+### Workflow for messaging extension interaction
+
+```mermaid
+sequenceDiagram
+    participant Teams User B    
+    participant Teams User A
+    participant Teams Client
+    Teams User A->>+Teams Client: Clicks on Incidents ME action in a group chat
+    opt App not installed flow
+        Teams Client-->>Teams User A: App install dialog
+        Teams User A->>Teams Client: Installs app
+    end   
+    Teams Client->>+Sample App: Launches Task Module
+    Sample App-->>-Teams Client: Loads existing incidents created using Bot
+    Teams User A->>Teams Client: Selects incident to share in chat
+    Teams Client->>Sample App: Invoke action callback composeExtension/submitAction
+    Sample App-->>Teams Client: Posts Base card with auto-refresh for user A and user B
+    Teams Client->>Teams User A: loads incident card with loading indicator 
+    Teams Client->>Sample App: Automatically invokes refresh action
+    Sample App-->>Teams User A: Responds with Updated AC for the user A
+    Teams User B->>Teams Client: User opens the chat
+    Teams Client-->>Teams User B: Loads the incident base card
+    Teams Client->>Sample App: Automatically invokes refresh action
+    Sample App-->>Teams User B: Responds with card for user B with option to approve/reject
+```
+
+## Interacting with the bot in Teams
+
+You can interact with this bot by `@Sequential Workflows` (BotName). The bot will respond with adaptive card requesting you the details.
 
 - Install App
 
@@ -162,32 +188,6 @@ List Incidents
 ## Interaction from messaging extension.
 
 You can also interact with this app using messaging extension action which allows you to share incidents in group chats.
-
-### Workflow for messaging extension interaction
-
-```mermaid
-sequenceDiagram
-    participant Teams User B    
-    participant Teams User A
-    participant Teams Client
-    Teams User A->>+Teams Client: Clicks on Incidents ME action in a group chat
-    opt App not installed flow
-        Teams Client-->>Teams User A: App install dialog
-        Teams User A->>Teams Client: Installs app
-    end   
-    Teams Client->>+Sample App: Launches Task Module
-    Sample App-->>-Teams Client: Loads existing incidents created using Bot
-    Teams User A->>Teams Client: Selects incident to share in chat
-    Teams Client->>Sample App: Invoke action callback composeExtension/submitAction
-    Sample App-->>Teams Client: Posts Base card with auto-refresh for user A and user B
-    Teams Client->>Teams User A: loads incident card with loading indicator 
-    Teams Client->>Sample App: Automatically invokes refresh action
-    Sample App-->>Teams User A: Responds with Updated AC for the user A
-    Teams User B->>Teams Client: User opens the chat
-    Teams Client-->>Teams User B: Loads the incident base card
-    Teams Client->>Sample App: Automatically invokes refresh action
-    Sample App-->>Teams User B: Responds with card for user B with option to approve/reject
-```
 
 1. On selecting app from messaging extension,it checks whether bot is installed in chat/team. If not installed, user will get a option for justInTimeInstallation card.
 
