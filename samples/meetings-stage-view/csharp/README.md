@@ -17,11 +17,18 @@ createdDate: "06-10-2021 01:48:56"
 This App helps to enable and configure your apps for Teams meetings. This app covers Shared meeting stage.
 For reference please check [Enable and configure your apps for Teams meetings](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/enable-and-configure-your-app-for-teams-meetings)
 
+This sample also shows how to share specific parts of your app to the meeting stage.
+For reference please check [Share app content to stage API](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet#share-app-content-to-stage-api)
+
 This capability is currently available in developer preview only.
 
 - App in stage view.
 
 ![Stage View Screen](AppInMeeting/Images/stage_view.png)
+
+- Sharing specific part of your app to the meeting stage.
+
+![Share Specific part screen](AppInMeeting/Images/share_specific_part.png)
 
 ## Prerequisites
 
@@ -114,4 +121,8 @@ This capability is currently available in developer preview only.
 - App in sidepanel.
 
 ![App in sidepanel](AppInMeeting/Images/side_panel.png)
+
+- Sharing specific parts of app.
+
+![Share specific part](AppInMeeting/Images/share_specific_part_sidepanel.png)
 
