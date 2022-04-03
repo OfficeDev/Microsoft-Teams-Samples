@@ -97,6 +97,26 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 You can interact with this bot by `@Sequential Workflows` (BotName). The bot will respond with adaptive card requesting you the details.
 
+### Workflow for bot interaction
+
+```mermaid
+sequenceDiagram
+    participant Teams User B    
+    participant Teams User A
+    participant Teams Client
+    Teams User A->>+Teams Client: Enters create incident bot commands
+    Sample App->>+Teams Client: loads card with option 
+    Teams User A->>+Teams Client: Enters required details and assigns to user B
+    Sample App-->>Teams Client: Posts the incidet card with auto-refresh for user A and user B
+    Teams Client->>Teams User A: loads incident card with loading indicator 
+    Teams Client->>Sample App: Automatically invokes refresh action
+    Sample App-->>Teams User A: Responds with Updated AC for the user A
+    Teams User B->>Teams Client: User opens the chat
+    Teams Client-->>Teams User B: Loads the incident base card
+    Teams Client->>Sample App: Automatically invokes refresh action
+    Sample App-->>Teams User B: Responds with card for user B with option to approve/reject
+```
+
 - Install App
 
 Navigate to `Manage apps` > `Upload a custom app` (Bottom-Right of the screen) > Upload `manifest.zip` > `Add`
@@ -138,41 +158,36 @@ List Incidents
 ![image](https://user-images.githubusercontent.com/85108465/123595684-d0d9ab80-d80e-11eb-9798-82f535ba6486.png)
 ![image](https://user-images.githubusercontent.com/85108465/123769386-e28e8200-d8e6-11eb-96e0-3d1f8365c7ef.png)
 
-## Workflow for Messaging Extension Interaction
-
-```mermaid
-
-sequenceDiagram
-
-    Teams User A->>+Teams Client: Clicks on Incidents ME action in chat
-
-    opt App not installed flow
-
-        Teams Client->>+Teams User A: App install dialog
-
-        Teams User A->>+Teams Client: Installs app
-
-    end  
-
-    Teams Client->>Task Module(Web App): Launches Task Module
-
-    Task Module(Web App)->>+Teams Client: Loads existing incidents
-
-    Teams User A->>Teams Client: Selects incident to share in chat
-
-    Teams Client->>Sample App: Invoke action callback composeExtension/submitAction
-
-    Sample App->>Teams Client: Posts Base card with auto-refresh for user A
-
-    Teams Client->>Teams User A: loads incident card with loading indicator
-
-    Teams Client->>Sample App: Automatically invokes refresh action
-
-    Sample App->>Teams Client: Responds with Updated Card for the user
-
-```
 
 ## Interaction from messaging extension.
+
+You can also interact with this app using messaging extension action which allows you to share incidents in group chats.
+
+### Workflow for messaging extension interaction
+
+```mermaid
+sequenceDiagram
+    participant Teams User B    
+    participant Teams User A
+    participant Teams Client
+    Teams User A->>+Teams Client: Clicks on Incidents ME action in a group chat
+    opt App not installed flow
+        Teams Client-->>Teams User A: App install dialog
+        Teams User A->>Teams Client: Installs app
+    end   
+    Teams Client->>+Sample App: Launches Task Module
+    Sample App-->>-Teams Client: Loads existing incidents created using Bot
+    Teams User A->>Teams Client: Selects incident to share in chat
+    Teams Client->>Sample App: Invoke action callback composeExtension/submitAction
+    Sample App-->>Teams Client: Posts Base card with auto-refresh for user A and user B
+    Teams Client->>Teams User A: loads incident card with loading indicator 
+    Teams Client->>Sample App: Automatically invokes refresh action
+    Sample App-->>Teams User A: Responds with Updated AC for the user A
+    Teams User B->>Teams Client: User opens the chat
+    Teams Client-->>Teams User B: Loads the incident base card
+    Teams Client->>Sample App: Automatically invokes refresh action
+    Sample App-->>Teams User B: Responds with card for user B with option to approve/reject
+```
 
 1. On selecting app from messaging extension,it checks whether bot is installed in chat/team. If not installed, user will get a option for justInTimeInstallation card.
 
