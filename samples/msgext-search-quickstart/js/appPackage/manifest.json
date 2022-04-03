@@ -56,6 +56,6 @@
         "messageTeamMembers"
     ],
     "validDomains": [
-        "localhost:3000"
+        "<<valid-domain>>"
     ]
 }
