@@ -22,6 +22,7 @@ This proof of concept demonstrates the use case of sharing a document on Teams S
 * Adaptive Cards
 
 <!-- Include a video documenting the sharing to stage here. -->
+![Video documenting the sharing to stage, including the choosing of a document from the sidepanel, and the signing of the document on the stage](/Docs/Signing-Clip.gif)
 
 ## Workflow
 ```mermaid
@@ -29,7 +30,7 @@ sequenceDiagram
     Teams User->>+Teams Client: Schedules a Teams Meeting with members
     Teams Client->>+MeetingSigning App: Installs the App
     Teams User->>+Teams Client: Pre meeting, organises the documents
-    Teams Client->>+MeetingSigning App: Opelet me ns the pre-meeting tab
+    Teams Client->>+MeetingSigning App: Opens the pre-meeting tab
     MeetingSigning App->>+Document Creation : From pre-meeting tab, creates a document and assigns signers & readers
     Document Creation-->>-MeetingSigning App: Document created
     Teams User->>+Teams Client: Starts the meeting
