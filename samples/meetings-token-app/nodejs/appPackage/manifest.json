@@ -1,97 +1,97 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.8",
-    "version": "1.0.0",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.0",
+  "id": "[MicrosoftAppId]",
+  "packageName": "com.microsoft.teams.extension",
+  "webApplicationInfo": {
     "id": "[MicrosoftAppId]",
-    "packageName": "com.microsoft.teams.extension",
-    "webApplicationInfo": {
-        "id": "[MicrosoftAppId]",
-        "resource": "api://[WebAppDomainName]/[MicrosoftAppId]"
+    "resource": "api://[WebAppDomainName]/[MicrosoftAppId]"
+  },
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://[WebAppDomainName]",
+    "privacyUrl": "https://[WebAppDomainName]/privacy",
+    "termsOfUseUrl": "https://[WebAppDomainName]/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Token App For Meeting",
+    "full": "Token App For Meeting"
+  },
+  "description": {
+    "short": "Token App For Meeting",
+    "full": "Token app optimized for meetings to generate sequential tokens for paticipants"
+  },
+  "accentColor": "#FFFFFF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://[WebAppDomainName]/config",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team",
+        "groupchat"
+      ],
+      "context": [
+        "channelTab",
+        "privateChatTab",
+        "meetingSidePanel",
+        "meetingDetailsTab",
+        "meetingChatTab",
+        "meetingStage"
+      ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "entityId": "index",
+      "name": "Token App",
+      "contentUrl": "https://[WebAppDomainName]/tab",
+      "websiteUrl": "https://[WebAppDomainName]/tab",
+      "scopes": [
+        "personal",
+        "team"
+      ]
     },
-    "developer": {
-        "name": "Teams App, Inc.",
-        "websiteUrl": "https://[WebAppDomainName]",
-        "privacyUrl": "https://[WebAppDomainName]/privacy",
-        "termsOfUseUrl": "https://[WebAppDomainName]/termsofuse"
-    },
-    "icons": {
-        "color": "color.png",
-        "outline": "outline.png"
-    },
-    "name": {
-        "short": "Token App For Meeting",
-        "full": "Token App For Meeting"
-    },
-    "description": {
-        "short": "Token App For Meeting",
-        "full": "Token app optimized for meetings to generate sequential tokens for paticipants"
-    },
-    "accentColor": "#FFFFFF",
-    "configurableTabs": [
+    {
+      "entityId": "about",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "[MicrosoftAppBotId]",
+      "scopes": [
+        "groupchat"
+      ],
+      "commandLists": [
         {
-            "configurationUrl": "https://[WebAppDomainName]/config",
-            "canUpdateConfiguration": true,
-            "scopes": [
-                "team",
-                "groupchat"
-            ],
-            "context": [
-                "channelTab",
-                "privateChatTab",
-                "meetingSidePanel",
-                "meetingDetailsTab",
-                "meetingChatTab",
-                "meetingStage"
-            ]
+          "scopes": [
+            "groupchat"
+          ],
+          "commands": [
+            {
+              "title": "Hello",
+              "description": "Sends a hello message and @mention the sender"
+            }
+          ]
         }
-    ],
-    "staticTabs": [
-        {
-            "entityId": "index",
-            "name": "Token App",
-            "contentUrl": "https://[WebAppDomainName]/tab",
-            "websiteUrl": "https://[WebAppDomainName]/tab",
-            "scopes": [
-                "personal",
-                "team"
-            ]
-        },
-        {
-            "entityId": "about",
-            "scopes": [
-                "personal"
-            ]
-        }
-    ],
-    "bots": [
-        {
-            "botId": "[MicrosoftAppBotId]",
-            "scopes": [
-                "groupchat"
-            ],
-            "commandLists": [
-                {
-                    "scopes": [
-                        "groupchat"
-                    ],
-                    "commands": [
-                        {
-                            "title": "Hello",
-                            "description": "Sends a hello message and @mention the sender"
-                        }
-                    ]
-                }
-            ],
-            "needsChannelSelector": false,
-            "supportsFiles": false,
-            "isNotificationOnly": false
-        }
-    ],
-    "permissions": [
-        "identity",
-        "messageTeamMembers"
-    ],
-    "validDomains": [
-        "[WebAppDomainName]"
-    ]
+      ],
+      "needsChannelSelector": false,
+      "supportsFiles": false,
+      "isNotificationOnly": false
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "[WebAppDomainName]"
+  ]
 }

@@ -1,68 +1,68 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.8",
-    "version": "1.0.0",
-    "id": "2133b039-46a8-452a-b7ab-cb5bbc3ee7e6",
-    "packageName": "contoso.com",
-    "developer": {
-        "name": "contoso",
-        "websiteUrl": "https://www.teams.com",
-        "privacyUrl": "https://www.teams.com/privacy",
-        "termsOfUseUrl": "https://www.teams.com/termsofuse"
-    },
-    "icons": {
-        "color": "color.png",
-        "outline": "outline.png"
-    },
-    "name": {
-        "short": "Both Silent and Simple",
-        "full": "Both Silent and Simple"
-    },
-    "description": {
-        "short": "Both Silent and Simple",
-        "full": "Both Silent and Simple"
-    },
-    "accentColor": "#FFFFFF",
-    "configurableTabs": [
-      {
-        "configurationUrl": "https://d624f4f277fb.ngrok.io/ChooseAuth",
-        "canUpdateConfiguration": true,
-        "scopes": [
-          "team"
-        ],
-        "context": [
-          "channelTab"
-        ]
-      }
-    ],
-    "staticTabs": [
-      {
-        "entityId": "BothSilentandSimple",
-        "name": "BothSilentandSimple",
-        "contentUrl": "https://d624f4f277fb.ngrok.io/ChooseAuth",
-        "websiteUrl": "https://d624f4f277fb.ngrok.io/ChooseAuth",
-        "scopes": [
-          "personal"
-        ]
-      }
-    ],
-    "bots": [
-        {
-            "botId": "72272b60-1a3a-4f2b-9c4b-6ab9680ee9de",
-            "scopes": [
-                "personal",
-                "team",
-                "groupchat"
-            ],
-            "supportsFiles": false,
-            "isNotificationOnly": false
-        }
-    ],
-    "permissions": [
-        "identity",
-        "messageTeamMembers"
-    ],
-    "validDomains": [
-        "*.ngrok.io"
-    ]
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.0",
+  "id": "2133b039-46a8-452a-b7ab-cb5bbc3ee7e6",
+  "packageName": "contoso.com",
+  "developer": {
+    "name": "contoso",
+    "websiteUrl": "https://www.teams.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Both Silent and Simple",
+    "full": "Both Silent and Simple"
+  },
+  "description": {
+    "short": "Both Silent and Simple",
+    "full": "Both Silent and Simple"
+  },
+  "accentColor": "#FFFFFF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://d624f4f277fb.ngrok.io/ChooseAuth",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team"
+      ],
+      "context": [
+        "channelTab"
+      ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "entityId": "BothSilentandSimple",
+      "name": "BothSilentandSimple",
+      "contentUrl": "https://d624f4f277fb.ngrok.io/ChooseAuth",
+      "websiteUrl": "https://d624f4f277fb.ngrok.io/ChooseAuth",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "72272b60-1a3a-4f2b-9c4b-6ab9680ee9de",
+      "scopes": [
+        "personal",
+        "team",
+        "groupchat"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.ngrok.io"
+  ]
 }

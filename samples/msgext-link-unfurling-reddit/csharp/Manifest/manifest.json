@@ -1,75 +1,75 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.5",
-    "version": "1.0.0",
-    "id": "{{Your Teams App Id Here}}",
-    "packageName": "com.example.reddit-link-unfurler",
-    "developer": {
-        "name": "{{Company Name}}",
-        "websiteUrl": "{{Company Website}}",
-        "privacyUrl": "{{Privacy Page}}",
-        "termsOfUseUrl": "{{TOS Page}}"
-    },
-    "icons": {
-        "color": "color.png",
-        "outline": "outline.png"
-    },
-    "name": {
-        "short": "Reddit Link Unfurler",
-        "full": "Reddit Link Unfurler"
-    },
-    "description": {
-        "short": "Adds Reddit link unfurling & card posts",
-        "full": "Make pasted Reddit links better!"
-    },
-    "accentColor": "#FC4518",
-    "bots": [
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.0",
+  "id": "{{Your Teams App Id Here}}",
+  "packageName": "com.example.reddit-link-unfurler",
+  "developer": {
+    "name": "{{Company Name}}",
+    "websiteUrl": "{{Company Website}}",
+    "privacyUrl": "{{Privacy Page}}",
+    "termsOfUseUrl": "{{TOS Page}}"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Reddit Link Unfurler",
+    "full": "Reddit Link Unfurler"
+  },
+  "description": {
+    "short": "Adds Reddit link unfurling & card posts",
+    "full": "Make pasted Reddit links better!"
+  },
+  "accentColor": "#FC4518",
+  "bots": [
+    {
+      "botId": "{{Bot Framework Id Here}}",
+      "scopes": [
+        "personal"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "{{Bot Framework Id Here}}",
+      "canUpdateConfiguration": false,
+      "commands": [
         {
-            "botId": "{{Bot Framework Id Here}}",
-            "scopes": [
-                "personal"
-            ],
-            "supportsFiles": false,
-            "isNotificationOnly": false
+          "id": "Search",
+          "type": "query",
+          "title": "Title",
+          "description": "Description",
+          "initialRun": false,
+          "fetchTask": false,
+          "parameters": [
+            {
+              "name": "Parameter",
+              "title": "Title",
+              "description": "Description",
+              "inputType": "text"
+            }
+          ]
         }
-    ],
-    "composeExtensions": [
+      ],
+      "messageHandlers": [
         {
-            "botId": "{{Bot Framework Id Here}}",
-            "canUpdateConfiguration": false,
-            "commands": [
-                {
-                    "id": "Search",
-                    "type": "query",
-                    "title": "Title",
-                    "description": "Description",
-                    "initialRun": false,
-                    "fetchTask": false,
-                    "parameters": [
-                        {
-                            "name": "Parameter",
-                            "title": "Title",
-                            "description": "Description",
-                            "inputType": "text"
-                        }
-                    ]
-                }
-            ],
-            "messageHandlers": [
-                {
-                    "type": "link",
-                    "value": {
-                        "domains": [
-                            "www.reddit.com",
-                            "reddit.com"
-                        ]
-                    }
-                }
+          "type": "link",
+          "value": {
+            "domains": [
+              "www.reddit.com",
+              "reddit.com"
             ]
+          }
         }
-    ],
-    "permissions": [
-        "identity"
-    ],
-    "validDomains": []
+      ]
+    }
+  ],
+  "permissions": [
+    "identity"
+  ],
+  "validDomains": []
 }

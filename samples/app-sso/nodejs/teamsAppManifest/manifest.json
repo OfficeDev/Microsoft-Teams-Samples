@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.5",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
   "version": "1.0.0",
   "id": "<<YOUR-MICROSOFT-APP-ID>>",
   "packageName": "com.microsoft.teams.bottabmesso",
   "webApplicationInfo": {
     "id": "<<YOUR-MICROSOFT-APP-ID>>",
     "resource": "api://<<DOMAIN-NAME>>/botid-<<YOUR-MICROSOFT-APP-ID>>"
-},
+  },
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://example.azurewebsites.net",
