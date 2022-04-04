@@ -1,45 +1,45 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.8",
-    "version": "1.0.0",
-    "id": "17a49c1f-6f68-4d8f-b488-b8d9a7b20665",
-    "packageName": "com.microsoft.teams.extension",
-    "developer": {
-        "name": "Teams App, Inc.",
-        "websiteUrl": "https://localhost:3000",
-        "privacyUrl": "https://localhost:3000/privacy",
-        "termsOfUseUrl": "https://localhost:3000/termsofuse"
-    },
-    "icons": {
-        "color": "color.png",
-        "outline": "outline.png"
-    },
-    "name": {
-        "short": "Personal App",
-        "full": ""
-    },
-    "description": {
-        "short": "Short description for Personal App.",
-        "full": "Full description of Personal App."
-    },
-    "accentColor": "#FFFFFF",
-    "staticTabs": [
-        {
-            "entityId": "index",
-            "name": "Personal Tab",
-            "contentUrl": "https://localhost:3000/tab",
-            "websiteUrl": "https://localhost:3000/tab",
-            "scopes": [
-                "personal"
-            ]
-        }
-    ],
-    "permissions": [
-        "identity",
-        "messageTeamMembers"
-    ],
-    "validDomains": [
-        "localhost",
-        "localhost:3000"
-    ]
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.0",
+  "id": "17a49c1f-6f68-4d8f-b488-b8d9a7b20665",
+  "packageName": "com.microsoft.teams.extension",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://localhost:3000",
+    "privacyUrl": "https://localhost:3000/privacy",
+    "termsOfUseUrl": "https://localhost:3000/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Personal App",
+    "full": ""
+  },
+  "description": {
+    "short": "Short description for Personal App.",
+    "full": "Full description of Personal App."
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "index",
+      "name": "Personal Tab",
+      "contentUrl": "https://localhost:3000/tab",
+      "websiteUrl": "https://localhost:3000/tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "localhost",
+    "localhost:3000"
+  ]
 }

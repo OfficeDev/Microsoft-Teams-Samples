@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.9",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
   "version": "1.0",
   "id": "<<Your-Microsoft-App-Id>>",
   "packageName": "com.microsoft.teams.sample.deeplinkBot",
@@ -29,7 +29,7 @@
       "scopes": [
         "groupchat",
         "team"
-      ]      
+      ]
     }
   ],
 
@@ -59,9 +59,9 @@
         "personal",
         "team"
       ],
-   
+
       "isNotificationOnly": false,
-      "supportsFiles": false      
+      "supportsFiles": false
     }
   ]
 }

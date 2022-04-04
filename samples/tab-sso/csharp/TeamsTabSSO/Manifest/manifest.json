@@ -1,6 +1,6 @@
 ﻿{
   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.11",
+ "manifestVersion": "1.12",
   "version": "1.0.0",
   "id": "{new GUID for this Teams app - not the Azure AD App ID}",
   "packageName": "com.contoso.teamsauthsso",

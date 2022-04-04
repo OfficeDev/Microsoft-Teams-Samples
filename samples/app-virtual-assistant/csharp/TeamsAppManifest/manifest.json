@@ -1,181 +1,181 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.5",
-    "version": "1.0.0",
-    "id": "<App_Id>",
-    "packageName": "Microsoft.Teams.Apps.VirtualAssistant",
-    "developer": {
-        "name": "Microsoft",
-        "websiteUrl": "https://github.com/nebhagat/1",
-        "privacyUrl": "https://github.com/nebhagat/1",
-        "termsOfUseUrl": "https://github.com/nebhagat/1",
-    },
-    "icons": {
-        "color": "icon-color.png",
-        "outline": "icon-outline.png"
-    },
-    "name": {
-        "short": "Virtual Assistant",
-        "full": "Customized Virtual Assistant"
-    },
-    "description": {
-        "short": "Virtual Assistant",
-        "full": "Customized Virtual Assistant"
-    },
-    "bots": [
-        {
-            "botId": "<App_Id>",
-            "scopes": [
-                "personal",
-                "team",
-                "groupchat"
-            ],
-            "supportsFiles": true,
-            "isNotificationOnly": false
-        }
-    ],
-    "composeExtensions": [
-        {
-            "botId": "<App_Id>",
-            "canUpdateConfiguration": true,
+	"$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+	"manifestVersion": "1.12",
+	"version": "1.0.0",
+	"id": "<App_Id>",
+	"packageName": "Microsoft.Teams.Apps.VirtualAssistant",
+	"developer": {
+		"name": "Microsoft",
+		"websiteUrl": "https://github.com/nebhagat/1",
+		"privacyUrl": "https://github.com/nebhagat/1",
+		"termsOfUseUrl": "https://github.com/nebhagat/1"
+	},
+	"icons": {
+		"color": "icon-color.png",
+		"outline": "icon-outline.png"
+	},
+	"name": {
+		"short": "Virtual Assistant",
+		"full": "Customized Virtual Assistant"
+	},
+	"description": {
+		"short": "Virtual Assistant",
+		"full": "Customized Virtual Assistant"
+	},
+	"bots": [
+		{
+			"botId": "<App_Id>",
+			"scopes": [
+				"personal",
+				"team",
+				"groupchat"
+			],
+			"supportsFiles": true,
+			"isNotificationOnly": false
+		}
+	],
+	"composeExtensions": [
+		{
+			"botId": "<App_Id>",
+			"canUpdateConfiguration": true,
 			"commands": [
 				{
-				  "id": "searchQuery:<skill_id>",
-				  "context": [ "compose", "commandBox" ],
-				  "description": "Test command to run query",
-				  "title": "Search",
-				  "type": "query",
-				  "parameters": [
-					{
-					  "name": "searchQuery",
-					  "title": "Search Query",
-					  "description": "Your search query",
-					  "inputType": "text"
-					}
-				  ]
+					"id": "searchQuery:<skill_id>",
+					"context": [ "compose", "commandBox" ],
+					"description": "Test command to run query",
+					"title": "Search",
+					"type": "query",
+					"parameters": [
+						{
+							"name": "searchQuery",
+							"title": "Search Query",
+							"description": "Your search query",
+							"inputType": "text"
+						}
+					]
 				},
 				{
-				  "id": "createCard:<skill_id>",
-				  "type": "action",
-				  "context": [ "compose" ],
-				  "description": "Command to run action to create a Card from Compose Box",
-				  "title": "Create Card",
-				  "parameters": [
-					{
-					  "name": "title",
-					  "title": "Card title",
-					  "description": "Title for the card",
-					  "inputType": "text"
-					},
-					{
-					  "name": "subTitle",
-					  "title": "Subtitle",
-					  "description": "Subtitle for the card",
-					  "inputType": "text"
-					},
-					{
-					  "name": "text",
-					  "title": "Text",
-					  "description": "Text for the card",
-					  "inputType": "textarea"
-					}
-				  ]
+					"id": "createCard:<skill_id>",
+					"type": "action",
+					"context": [ "compose" ],
+					"description": "Command to run action to create a Card from Compose Box",
+					"title": "Create Card",
+					"parameters": [
+						{
+							"name": "title",
+							"title": "Card title",
+							"description": "Title for the card",
+							"inputType": "text"
+						},
+						{
+							"name": "subTitle",
+							"title": "Subtitle",
+							"description": "Subtitle for the card",
+							"inputType": "text"
+						},
+						{
+							"name": "text",
+							"title": "Text",
+							"description": "Text for the card",
+							"inputType": "textarea"
+						}
+					]
 				},
 				{
-				  "id": "shareMessage:<skill_id>",
-				  "type": "action",
-				  "context": [ "message" ],
-				  "description": "Test command to run action on message context (message sharing)",
-				  "title": "Share Message",
-				  "parameters": [
-					{
-					  "name": "includeImage",
-					  "title": "Include Image",
-					  "description": "Include image in Hero Card",
-					  "inputType": "toggle"
-					}
-				  ]
+					"id": "shareMessage:<skill_id>",
+					"type": "action",
+					"context": [ "message" ],
+					"description": "Test command to run action on message context (message sharing)",
+					"title": "Share Message",
+					"parameters": [
+						{
+							"name": "includeImage",
+							"title": "Include Image",
+							"description": "Include image in Hero Card",
+							"inputType": "toggle"
+						}
+					]
 				},
 				{
-				  "id": "createWithPreview:<skill_id>",
-				  "type": "action",
-				  "title": "Create Card",
-				  "description": "Example of creating a Card",
-				  "initialRun": false,
-				  "fetchTask": true,
-				  "context": [
-					"commandBox",
-					"compose",
-					"message"
-				  ],
-				  "parameters": [
-					{
-					  "name": "param",
-					  "title": "param",
-					  "description": ""
-					}
-				  ]
+					"id": "createWithPreview:<skill_id>",
+					"type": "action",
+					"title": "Create Card",
+					"description": "Example of creating a Card",
+					"initialRun": false,
+					"fetchTask": true,
+					"context": [
+						"commandBox",
+						"compose",
+						"message"
+					],
+					"parameters": [
+						{
+							"name": "param",
+							"title": "param",
+							"description": ""
+						}
+					]
 				},
 				{
-				  "id": "searchQuery:<skill_id>",
-				  "type": "query",
-				  "title": "Search",
-				  "description": "Perform a search",
-				  "initialRun": false,
-				  "fetchTask": false,
-				  "context": [
-					"commandBox",
-					"compose",
-					"message"
-				  ],
-				  "parameters": [
-					{
-					  "name": "searchQuery",
-					  "title": "Search",
-					  "description": "Your search query",
-					  "inputType": "text"
-					}
-				  ]
+					"id": "searchQuery:<skill_id>",
+					"type": "query",
+					"title": "Search",
+					"description": "Perform a search",
+					"initialRun": false,
+					"fetchTask": false,
+					"context": [
+						"commandBox",
+						"compose",
+						"message"
+					],
+					"parameters": [
+						{
+							"name": "searchQuery",
+							"title": "Search",
+							"description": "Your search query",
+							"inputType": "text"
+						}
+					]
 				},
 				{
-				  "id": "SignOutCommand:<skill_id>",
-				  "type": "action",
-				  "title": "Sign Out",
-				  "description": "Sign out from authenticated services.",
-				  "initialRun": false,
-				  "fetchTask": true,
-				  "context": [
-					"commandBox",
-					"compose"
-				  ],
-				  "parameters": [
-					{
-					  "name": "param",
-					  "title": "param",
-					  "description": ""
-					}
-				  ]
+					"id": "SignOutCommand:<skill_id>",
+					"type": "action",
+					"title": "Sign Out",
+					"description": "Sign out from authenticated services.",
+					"initialRun": false,
+					"fetchTask": true,
+					"context": [
+						"commandBox",
+						"compose"
+					],
+					"parameters": [
+						{
+							"name": "param",
+							"title": "param",
+							"description": ""
+						}
+					]
 				}
 			],
-            "messageHandlers": [
-                {
-                    "type": "link",
-                    "value": {
-                        "domains": [
-                            "*.ngrok.io"
-                        ]
-                    }
-                }
-            ]
-        }
-    ],
-    "permissions": [
-        "identity",
-        "messageTeamMembers"
-    ],
-    "validDomains": [
-        "*.botframework.com",
-        "*.ngrok.io",
+			"messageHandlers": [
+				{
+					"type": "link",
+					"value": {
+						"domains": [
+							"*.ngrok.io"
+						]
+					}
+				}
+			]
+		}
+	],
+	"permissions": [
+		"identity",
+		"messageTeamMembers"
+	],
+	"validDomains": [
+		"*.botframework.com",
+		"*.ngrok.io",
 		"*.githubusercontent.com"
-    ]
+	]
 }

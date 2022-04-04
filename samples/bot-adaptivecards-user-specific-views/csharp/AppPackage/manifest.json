@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.11",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+ "manifestVersion": "1.12",
   "version": "1.0",
   "id": "b7f34602-9e67-4106-a7f6-3ef300411e5f",
   "packageName": "com.microsoft.teams.samples.userpsecificviews",

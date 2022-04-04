@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.10/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.10",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
   "version": "1.0.0",
   "id": "{{MicrosoftAppId}}",
   "packageName": "com.microsoft.teams.qrappinstallation",
@@ -42,7 +42,7 @@
     "{{domain-name}}",
     "token.botframework.com"
   ],
-    "webApplicationInfo": {
+  "webApplicationInfo": {
     "id": "{{MicrosoftAppId}}",
     "resource": "api://botid-{{MicrosoftAppId}}"
   }
