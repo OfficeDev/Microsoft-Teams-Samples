@@ -1,0 +1,60 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.4",
+  "body": [
+    {
+      "type": "Input.ChoiceSet",
+      "id": "${id}Value",
+      "isMultiSelect": true,
+      "choices": [
+        {
+          "$data": "${choices}",
+          "title": "${name}",
+          "value": "${value}"
+        }
+      ],
+      "isRequired": true,
+      "style": "expanded",
+      "label": "${title}",
+      "errorMessage": "${error}"
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "viewersValue",
+      "isMultiSelect": true,
+      "isRequired": true,
+      "style": "expanded",
+      "label": "Select viewers of the documents",
+      "errorMessage": "At least one viewer is required",
+      "choices": [],
+      "choices.data": {
+        "type": "Data.Query",
+        "dataset": "graph.microsoft.com/users?scope=currentContext"
+      }
+    },
+    {
+      "type": "Input.ChoiceSet",
+      "id": "signersValue",
+      "isMultiSelect": true,
+      "isRequired": true,
+      "style": "expanded",
+      "label": "Select signers of the documents",
+      "errorMessage": "At least one viewer is required",
+      "choices": [],
+      "choices.data": {
+        "type": "Data.Query",
+        "dataset": "graph.microsoft.com/users?scope=currentContext"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Done",
+      "data": {
+        "id": "${id}"
+      }
+    }
+  ]
+}

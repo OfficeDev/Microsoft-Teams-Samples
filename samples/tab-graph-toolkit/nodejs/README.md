@@ -17,6 +17,14 @@ createdDate: "07-07-2021 13:38:27"
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
 
+![Sign in card](Images/SignInOption.png)
+
+![Agenda](Images/Agenda.png)
+
+![People picker](Images/PeoplePicker.png)
+
+![Tasks](Images/Tasks.png)
+
 ## Prerequisites
 -  [NodeJS](https://nodejs.org/en/)
 

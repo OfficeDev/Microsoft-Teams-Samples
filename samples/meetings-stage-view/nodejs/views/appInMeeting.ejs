@@ -8,8 +8,8 @@
   <title>App in meeting - Stage View</title>
   <link rel="stylesheet" href="styles.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
-    integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+  <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js"
+    integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2"
     crossorigin="anonymous"></script>
   <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
 </head>
@@ -20,96 +20,55 @@
       Sprint Status
     </div>
     <div id="boardDiv" class="chat-window">
-      <div>
-        <div class="label">
-          To Do
-        </div>
-
-        <button onclick="openTaskModule('todo')" class="add-card-button">
-          <img class="add-icon" src="/Images/add_icon.svg" title="Click to continue existing conversation" />
-        </button>
-
-        <div id="todo">
-          <!-- The statud details will be updated here on runtime -->
-        </div>
+      <div class="part-container">
+        <%- include('todo') %>
       </div>
-      <div>
-        <div class="label">
-          Doing
-        </div>
-
-        <button onclick="openTaskModule('doing')" class="add-card-button">
-          <img class="add-icon" src="/Images/add_icon.svg" title="Click to continue existing conversation" />
-        </button>
-
-        <div id="doing">
-          <!-- The statud details will be updated here on runtime -->
-        </div>
+      <div class="part-container">
+        <%- include('doing') %>
       </div>
-      <div>
-        <div class="label">
-          Done
-        </div>
-
-        <button onclick="openTaskModule('done')" class="add-card-button">
-          <img class="add-icon" src="/Images/add_icon.svg" title="Click to continue existing conversation" />
-        </button>
-
-        <div id="done">
-          <!-- The statud details will be updated here on runtime -->
-        </div>
+      <div class="part-container">
+        <%- include('done') %>
       </div>
     </div>
   </div>
   <script>
     microsoftTeams.initialize();
-    $(document).ready(function () {
-      if (window.innerWidth > 600) {
-        // Adding and removing classes based on screen width, to show app in stage view and in side panel
-        $("#todo, #doing, #done").addClass("grid-item");
-        $("#todo, #doing, #done").removeClass("grid-item-sidepanel");
-        $("#boardDiv").addClass("chat-window");
-        $("#boardDiv").removeClass("chat-window-sidepanel");
-      }
-      else {
-        // Adding and removing classes based on screen width, to show app in stage view and in side panel
-        $("#todo, #doing, #done").addClass("grid-item-sidepanel");
-        $("#todo, #doing, #done").removeClass("grid-item");
-        $("#boardDiv").addClass("chat-window-sidepanel");
-        $("#boardDiv").removeClass("chat-window");
-      }
+    microsoftTeams.getContext((context) => {
+      $(document).ready(function () {
+        if (context.frameContext === "sidePanel") {
+          // Adding and removing classes based on screen width, to show app in stage view and in side panel
+          $("#todo, #doing, #done").addClass("grid-item-sidepanel");
+          $("#todo, #doing, #done").removeClass("grid-item");
+          $("#boardDiv").addClass("chat-window-sidepanel");
+          $("#boardDiv").removeClass("chat-window");
+        }
+        else {
+          // Adding and removing classes based on screen width, to show app in stage view and in side panel
+          $("#todo, #doing, #done").addClass("grid-item");
+          $("#todo, #doing, #done").removeClass("grid-item-sidepanel");
+          $("#boardDiv").addClass("chat-window");
+          $("#boardDiv").removeClass("chat-window-sidepanel");
+        }
+      });
     });
 
-    // Creating socket instance for real time status updates in stage view.
-    const socket = io();
-    socket.on('connection')
-
-    // Updating containers when a status message is received.
-    socket.on('message', (data, status) => {
-      if (data !== undefined) {
-        var detailsClass = window.innerWidth > 600 ? "details" : "details-sidepanel";
-        document.getElementById(status).innerHTML += (`<div class=${detailsClass}>
-                <div class="description" title="${data.taskDescription}">${data.taskDescription}</div>
-                <div class="userName">--${data.userName}</div>
-          `);
-      }
-    })
-
-    // Task module to collect details from the meeting participants.
-    const openTaskModule = (status) => {
-      let taskInfo = {
-        title: "Status Details",
-        height: 250,
-        width: 250,
-        url: `${window.location.origin}/index`,
-      };
-
-      // Invoking task module to collect status details from participants.
-      microsoftTeams.tasks.startTask(taskInfo, (err, taskDetails) => {
-        socket.emit('message', taskDetails, status);
+    // shareToStage.
+    const shareSpecificPart = (partName) => {
+      var appContentUrl = "";
+      microsoftTeams.getContext((context) => {
+        appContentUrl = partName == 'todo' ? `${window.location.origin}/todoView?meetingId=`+context.meetingId : partName == 'doing' ? `${window.location.origin}/doingView?meetingId=`+context.meetingId : `${window.location.origin}/doneView?meetingId=`+context.meetingId;
+        microsoftTeams.meeting.shareAppContentToStage((err, result) => {
+          if (result) {
+            // handle success
+            console.log(result);
+          }
+          if (err) {
+            // handle error
+            alert(JSON.stringify(err))
+          }
+        }, appContentUrl);
       });
     };
   </script>
 </body>
-
 </html>
