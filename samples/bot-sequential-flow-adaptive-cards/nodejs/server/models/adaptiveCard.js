@@ -23,7 +23,7 @@ const incidentManagementCard = (profileName) => ({
     body: [
         {
             type: 'TextBlock',
-            text: `Hello ${ profileName }`
+            text: `Hello ${profileName}`
         },
         {
             type: 'TextBlock',
@@ -55,6 +55,24 @@ const invokeTaskResponse = (title, card) => {
                     card: card,
                     heigth: 250,
                     width: 400,
+                    title: title
+                }
+            }
+        }
+    };
+    return task;
+};
+
+const invokeIncidentTaskResponse = (title, card) => {
+    const task = {
+        status: StatusCodes.OK,
+        body: {
+            task: {
+                type: 'continue',
+                value: {
+                    card: card,
+                    heigth: 460,
+                    width: 600,
                     title: title
                 }
             }
@@ -147,10 +165,43 @@ const optionInc = () => ({
     version: '1.4'
 });
 
+const incidentListCard = (choiceset) => ({
+    $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
+    version: '1.0.0',
+    type: 'AdaptiveCard',
+    body: [
+        {
+            type: 'TextBlock',
+            text: 'Select a incident to send in chat',
+            size: "large",
+            weight: "bolder"
+        },
+        {
+            type: "Input.ChoiceSet",
+            id: "incidentId",
+            style: "expanded",
+            isMultiSelect: false,
+            value: "",
+            choices: choiceset,
+            wrap: true
+        }
+    ],
+    actions: [
+        {
+            type: "Action.Submit",
+            id: "submit",
+            title: "Send",
+            data: {
+                action: "incidentSelector"
+            }
+        }
+    ]
+});
+
 const chooseCategory = async () => {
     const actionsPromise = categories.map(c => ({
         type: 'Action.Execute',
-        verb: `category_${ c.name }`,
+        verb: `category_${c.name}`,
         title: c.name,
         data: {
             option: c.name
@@ -202,7 +253,7 @@ const chooseSubCategory = async (verb) => {
     const subCategories = categories.filter(c => c.name === category);
     const actionsPromise = subCategories[0].subcategory.map(sc => ({
         type: 'Action.Execute',
-        verb: `subcategory_${ category }_${ sc }`,
+        verb: `subcategory_${category}_${sc}`,
         title: sc,
         data: {
             option: sc
@@ -401,7 +452,7 @@ const createInc = async (verb, user) => {
             },
             {
                 type: 'Action.Execute',
-                verb: `category_${ verb.split('_')[1] }`,
+                verb: `category_${verb.split('_')[1]}`,
                 title: 'Back',
                 data: {
                     info: 'Back'
@@ -1447,6 +1498,166 @@ const refreshInc = async (user, action) => {
     return card;
 };
 
+const refreshBotCard = async (inc) => {
+    const card = {
+        $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
+        appId: process.env.MicrosoftAppId,
+        refresh: {
+            action: {
+                type: 'Action.Execute',
+                title: 'Refresh',
+                verb: 'refresh_edit_status',
+                data: {
+                    info: 'refresh',
+                    incident: inc
+                }
+            },
+            userIds: allMembers.map(m => m.id)
+        },
+        body: [
+            {
+                type: 'TextBlock',
+                size: 'Medium',
+                weight: 'Bolder',
+                text: 'Incident Management'
+            },
+            {
+                type: 'RichTextBlock',
+                separator: true,
+                inlines: [
+                    {
+                        type: 'TextRun',
+                        text: 'Title',
+                        weight: 'Bolder',
+                        italic: true,
+                        size: 'medium'
+                    }
+                ]
+            },
+            {
+                id: 'inc_title',
+                type: 'RichTextBlock',
+                inlines: [
+                    {
+                        type: 'TextRun',
+                        text: inc.title
+                    }
+                ]
+            },
+            {
+                type: 'ColumnSet',
+                columns: [
+                    {
+                        type: 'Column',
+                        width: 'auto',
+                        items: [
+                            {
+                                type: 'RichTextBlock',
+                                inlines: [
+                                    {
+                                        type: 'TextRun',
+                                        text: 'Category',
+                                        weight: 'Bolder',
+                                        italic: true,
+                                        size: 'medium'
+                                    }
+                                ]
+                            },
+                            {
+                                type: 'RichTextBlock',
+                                inlines: [
+                                    {
+                                        type: 'TextRun',
+                                        text: inc.category
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        type: 'Column',
+                        width: 'auto',
+                        items: [
+                            {
+                                type: 'RichTextBlock',
+                                inlines: [
+                                    {
+                                        type: 'TextRun',
+                                        text: 'Sub-Category',
+                                        weight: 'Bolder',
+                                        italic: true,
+                                        size: 'medium',
+                                        horizontalAlignment: 'Center'
+                                    }
+                                ]
+                            },
+                            {
+                                type: 'RichTextBlock',
+                                inlines: [
+                                    {
+                                        type: 'TextRun',
+                                        text: inc.subCategory,
+                                        horizontalAlignment: 'Center'
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                type: 'RichTextBlock',
+                inlines: [
+                    {
+                        type: 'TextRun',
+                        text: 'Created By',
+                        weight: 'Bolder',
+                        italic: true,
+                        size: 'medium'
+                    }
+                ]
+            },
+            {
+                type: 'RichTextBlock',
+                id: 'inc_created_by',
+                inlines: [
+                    {
+                        type: 'TextRun',
+                        text: inc.createdBy.name,
+                        wrap: true
+                    }
+                ]
+            },
+            {
+                type: 'RichTextBlock',
+                inlines: [
+                    {
+                        type: 'TextRun',
+                        text: 'Assigned To',
+                        weight: 'Bolder',
+                        italic: true,
+                        size: 'medium'
+                    }
+                ]
+            },
+            {
+                type: 'RichTextBlock',
+                id: 'inc_assigned_to',
+                inlines: [
+                    {
+                        type: 'TextRun',
+                        text: inc.assignedTo.name,
+                        wrap: true
+                    }
+                ]
+            }
+        ],
+        type: 'AdaptiveCard',
+        version: '1.4'
+    };
+    return card;
+};
+
 const viewAllInc = async () => {
     const incs = await incidentService.getAllInc();
     let incCards = [];
@@ -1671,18 +1882,21 @@ const viewAllInc = async () => {
 };
 
 const toTitleCase = (str) => {
-    return str.replace(/\b\w/g, function(txt) { return txt.toUpperCase(); });
+    return str.replace(/\b\w/g, function (txt) { return txt.toUpperCase(); });
 };
 
 module.exports = {
     incidentManagementCard,
     invokeResponse,
     invokeTaskResponse,
+    invokeIncidentTaskResponse,
     selectResponseCard,
     optionInc,
     chooseCategory,
     chooseSubCategory,
     createInc,
     saveInc,
+    refreshBotCard,
+    incidentListCard,
     toTitleCase
 };
