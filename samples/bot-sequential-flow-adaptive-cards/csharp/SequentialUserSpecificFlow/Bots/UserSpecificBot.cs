@@ -35,7 +35,7 @@ namespace SequentialUserSpecificFlow.Bots
         {
             string[] path = { ".", "Resources", "initialCard.json" };
             var member = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
-            var initialAdaptiveCard = GetFirstOptionsAdaptiveCard(path,turnContext.Activity.From.Name, member.Id);
+            var initialAdaptiveCard = CardHelper.GetFirstOptionsAdaptiveCard(path,turnContext.Activity.From.Name, member.Id);
             await turnContext.SendActivityAsync(MessageFactory.Attachment(initialAdaptiveCard), cancellationToken);
         }
 
@@ -73,7 +73,7 @@ namespace SequentialUserSpecificFlow.Bots
                 {
                     var incidentId = (string)JObject.Parse(data.ToString()).ToObject<CardTaskFetchValue<string>>()?.IncidentId;
                     var incidentDetail = currentIncidentList.FirstOrDefault(incident => incident.IncidentId.ToString() == incidentId);
-                    await turnContext.SendActivityAsync(MessageFactory.Attachment(GetIncidentReviewCard(incidentDetail)));
+                    await turnContext.SendActivityAsync(MessageFactory.Attachment(CardHelper.GetIncidentReviewCard(incidentDetail)));
 
                     return CreateInvokeResponse();
                 }
@@ -190,7 +190,7 @@ namespace SequentialUserSpecificFlow.Bots
 
                         data.action.data.IncidentId = incidentDetail.IncidentId;
                         string[] thirdCard = { ".", "Resources", "reviewCard.json" };
-                        var responseAttachment = GetResponseAttachment(thirdCard, data, out cardJson);
+                        var responseAttachment = CardHelper.GetResponseAttachment(thirdCard, data, out cardJson);
                         Activity pendingActivity = new Activity();
                         pendingActivity.Type = "message";
                         pendingActivity.Id = turnContext.Activity.ReplyToId;
@@ -229,7 +229,7 @@ namespace SequentialUserSpecificFlow.Bots
                     case "approved":
 
                         string[] approvedCard = { ".", "Resources", "approvedCard.json" };
-                        var approvedAttachment = GetResponseAttachment(approvedCard, data, out cardJson);
+                        var approvedAttachment = CardHelper.GetResponseAttachment(approvedCard, data, out cardJson);
                         Activity approvedActivity = new Activity();
                         approvedActivity.Type = "message";
                         approvedActivity.Id = turnContext.Activity.ReplyToId;
@@ -248,7 +248,7 @@ namespace SequentialUserSpecificFlow.Bots
                     case "rejected":
 
                         string[] rejectedCard = { ".", "Resources", "rejectedCard.json" };
-                        var rejectedAttachment = GetResponseAttachment(rejectedCard, data, out cardJson);
+                        var rejectedAttachment = CardHelper.GetResponseAttachment(rejectedCard, data, out cardJson);
                         Activity rejectedActivity = new Activity();
                         rejectedActivity.Type = "message";
                         rejectedActivity.Id = turnContext.Activity.ReplyToId;
@@ -269,25 +269,6 @@ namespace SequentialUserSpecificFlow.Bots
             return null;
         }
 
-        private Attachment GetFirstOptionsAdaptiveCard(string[] filepath, string name = null, string userMRI = null)
-        {
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(filepath));
-            AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
-            var payloadData = new
-            {
-                createdById = userMRI,
-                createdBy = name
-            };
-            var cardJsonstring = template.Expand(payloadData);
-            var adaptiveCardAttachment = new Attachment()
-            {
-                ContentType = AdaptiveCard.ContentType,
-                Content = JsonConvert.DeserializeObject(cardJsonstring),
-            };
-
-            return adaptiveCardAttachment;
-        }
-
         // Get incident list from messaging extension action command.
         public InvokeResponse GetIncientListFromMEAction(List<IncidentDetails> currentIncidentList)
         {
@@ -299,7 +280,7 @@ namespace SequentialUserSpecificFlow.Bots
                     {
                         Value = new TaskModuleTaskInfo
                         {
-                            Card = GetNoInicidentFoundCard(),
+                            Card = CardHelper.GetNoInicidentFoundCard(),
                             Height = 200,
                             Width = 400,
                             Title = "No Incident found",
@@ -328,7 +309,7 @@ namespace SequentialUserSpecificFlow.Bots
                     {
                         Value = new TaskModuleTaskInfo
                         {
-                            Card = GetInicidentListCard(incidentList),
+                            Card = CardHelper.GetInicidentListCard(incidentList),
                             Height = 460,
                             Width = 600,
                             Title = "Incident list",
@@ -378,92 +359,6 @@ namespace SequentialUserSpecificFlow.Bots
             };
 
             return adaptiveCardResponse;
-        }
-
-        private Attachment GetResponseAttachment(string[] filepath, InitialSequentialCard data, out string cardJsonString)
-        {
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(filepath));
-            AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
-            var payloadData = new
-            {
-                incidentTitle = data.action.data.IncidentTitle,
-                assignedTo = data.action.data.AssignedTo,
-                category = data.action.data.Category,
-                subCategory = data.action.data.SubCategory,
-                createdBy = data.action.data.CreatedBy,
-                assignedToName = data.action.data.AssignedToName,
-                userMRI = data.action.data.UserMRI,
-                incidentId = data.action.data.IncidentId
-            };
-            cardJsonString = template.Expand(payloadData);
-            var adaptiveCardAttachment = new Attachment()
-            {
-                ContentType = AdaptiveCard.ContentType,
-                Content = JsonConvert.DeserializeObject(cardJsonString),
-            };
-
-            return adaptiveCardAttachment;
-        }
-
-        // Get no incident found card.
-        private static Attachment GetNoInicidentFoundCard()
-        {
-            //Read the card json and create attachment.
-            string[] paths = { ".", "Resources", "noIncidentFound.json" };
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
-
-            var adaptiveCardAttachment = new Attachment()
-            {
-                ContentType = AdaptiveCard.ContentType,
-                Content = JsonConvert.DeserializeObject(adaptiveCardJson),
-            };
-
-            return adaptiveCardAttachment;
-        }
-
-        // Get incident list card.
-        private static Attachment GetInicidentListCard(IncidentList incidentList)
-        {
-            //Read the card json and create attachment.
-            string[] paths = { ".", "Resources", "incidentListCard.json" };
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
-            AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
-            var cardJsonstring = template.Expand(incidentList);
-
-            var adaptiveCardAttachment = new Attachment()
-            {
-                ContentType = AdaptiveCard.ContentType,
-                Content = JsonConvert.DeserializeObject(cardJsonstring)
-            };
-
-            return adaptiveCardAttachment;
-        }
-
-        // Get incident review card send from messaging extension.
-        private static Attachment GetIncidentReviewCard(IncidentDetails incidentDetail)
-        {
-            string[] paths = { ".", "Resources", "reviewCard.json" };
-            var adaptiveCardJson = File.ReadAllText(Path.Combine(paths));
-            AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
-            var payloadData = new
-            {
-                incidentTitle = incidentDetail.IncidentTitle,
-                assignedTo = incidentDetail.AssignedToName,
-                category = incidentDetail.Category,
-                subCategory = incidentDetail.SubCategory,
-                createdBy = incidentDetail.CreatedBy,
-                assignedToName = incidentDetail.AssignedToName,
-                userMRI = incidentDetail.AssignedToMRI,
-                incidentId = incidentDetail.IncidentId
-            };
-            var cardJsonString = template.Expand(payloadData);
-            var adaptiveCardAttachment = new Attachment()
-            {
-                ContentType = AdaptiveCard.ContentType,
-                Content = JsonConvert.DeserializeObject(cardJsonString),
-            };
-
-            return adaptiveCardAttachment;
         }
     }
 }
