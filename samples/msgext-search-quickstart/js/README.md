@@ -17,6 +17,10 @@ createdDate: "07-07-2021 13:38:27"
 
 *Bots* allow users to interact with your web service through text, interactive cards, and task modules. *Messaging extensions* allow users to interact with your web service through buttons and forms in the Microsoft Teams client. They can search, or initiate actions, in an external system from the compose message area, the command box, or directly from a message.
 
+![Search](Images/search.png)
+
+![Result](Images/result.png)
+
 ## Prerequisites
 
 **Dependencies**
@@ -44,6 +48,14 @@ Run ngrok - point to port 3978
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
+- **Manually update the manifest.json**
+    - Edit the `manifest.json` contained in the  `appPackage/` and update BOT_ID with your Microsoft-App-Id or Client-Id created from Azure Bot service.
+    Also Update <valid-domain>> with your application's domain e.g. *.ngrok.io if you are using ngrok.
+    - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
+    - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
+
+- **Manually update the env file**
+    - Update the env file with Microsoft-App-Id(or Client Id) and Microsoft-App-Password(or Client Secret)
 ## Build and run
 
 ### `npm install`

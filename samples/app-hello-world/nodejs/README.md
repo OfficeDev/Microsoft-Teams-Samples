@@ -13,6 +13,8 @@ extensions:
 
 # Microsoft Teams hello world sample app.
 
+![HelloWorld](Images/HelloWorld.png)
+
 ## Official documentation
 
 More information for this sample - and for how to get started with Microsoft Teams development in general - is found in [Get started on the Microsoft Teams platform with Node.js and App Studio](https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-nodejs-app-studio).

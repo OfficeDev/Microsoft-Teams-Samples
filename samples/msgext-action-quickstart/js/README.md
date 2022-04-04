@@ -17,6 +17,14 @@ createdDate: "07-07-2021 13:38:27"
 
 *Bots* allow users to interact with your web service through text, interactive cards, and task modules. *Messaging extensions* allow users to interact with your web service through buttons and forms in the Microsoft Teams client. They can search, or initiate actions, in an external system from the compose message area, the command box, or directly from a message.
 
+![action command compose](Images/ActionCommandParameter.PNG)
+
+![compose extension result](Images/ComposeExtensionResultCard.PNG)
+
+![action command from message](Images/ActionCommandFromMessage.PNG)
+
+![compose result from message action](Images/HeroCardResult.PNG)
+
 ## Prerequisites
 
 **Dependencies**

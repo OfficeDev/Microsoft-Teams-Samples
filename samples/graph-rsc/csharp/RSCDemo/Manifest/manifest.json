@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.8",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
   "version": "1.0.0",
   "id": "<<Your Microsoft APP Id>>",
   "packageName": "com.teams.RSC",
@@ -41,21 +41,64 @@
   ],
   "webApplicationInfo": {
     "id": "<<Your Microsoft APP Id>>",
-    "resource": "https://RscBasedStoreApp",
-    "applicationPermissions": [
-      "TeamSettings.Read.Group",
-      "ChannelMessage.Read.Group",
-      "TeamSettings.Edit.Group",
-      "ChannelSettings.ReadWrite.Group",
-      "Channel.Create.Group",
-      "Channel.Delete.Group",
-      "TeamsApp.Read.Group",
-      "TeamsTab.Read.Group",
-      "TeamsTab.Create.Group",
-      "TeamsTab.ReadWrite.Group",
-      "TeamsTab.Delete.Group",
-      "Member.Read.Group",
-      "Owner.Read.Group"
-    ]
+    "resource": "https://RscBasedStoreApp"
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "TeamSettings.Read.Group",
+          "type": "Application"
+        },
+        {
+          "name": "ChannelMessage.Read.Group",
+          "type": "Application"
+        },
+        {
+          "name": "TeamSettings.Edit.Group",
+          "type": "Application"
+        },
+        {
+          "name": "ChannelSettings.ReadWrite.Group",
+          "type": "Application"
+        },
+        {
+          "name": "Channel.Create.Group",
+          "type": "Application"
+        },
+        {
+          "name": "Channel.Delete.Group",
+          "type": "Application"
+        },
+        {
+          "name": "TeamsApp.Read.Group",
+          "type": "Application"
+        },
+        {
+          "name": "TeamsTab.Read.Group",
+          "type": "Application"
+        },
+        {
+          "name": "TeamsTab.Create.Group",
+          "type": "Application"
+        },
+        {
+          "name": "TeamsTab.ReadWrite.Group",
+          "type": "Application"
+        },
+        {
+          "name": "TeamsTab.Delete.Group",
+          "type": "Application"
+        },
+        {
+          "name": "Member.Read.Group",
+          "type": "Application"
+        },
+        {
+          "name": "Owner.Read.Group",
+          "type": "Application"
+        }
+      ]
+    }
   }
 }

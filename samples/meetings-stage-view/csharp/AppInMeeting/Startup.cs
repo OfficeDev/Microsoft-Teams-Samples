@@ -1,3 +1,5 @@
+using AppInMeeting.Models;
+using AppInMeeting.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,8 +29,9 @@ namespace AppInMeeting
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services.AddControllersWithViews();
             services.AddSignalR();
+            services.AddSingleton<TasksService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,10 +47,12 @@ namespace AppInMeeting
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                  name: "default",
+                  pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapHub<ChatHub>("/chatHub");
             });
 
