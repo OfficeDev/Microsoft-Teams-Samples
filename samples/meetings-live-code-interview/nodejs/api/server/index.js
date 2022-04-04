@@ -16,13 +16,12 @@ app.get('/api/editorState', function (req, res) {
     "value": null,
   }
 
-  if (editorData["meetings"] == undefined) {
-    const newMeeting = new Array();
-    newMeeting.push({
-      meetingId: meetingId, questions: [{
-        questionId: "1",
-        value: ""
-      },
+  if (!editorData.hasOwnProperty(meetingId)) {
+    editorData[meetingId] = new Array();
+    editorData[meetingId].push({
+      questionId: "1",
+      value: ""
+    },
       {
         questionId: "2",
         value: ""
@@ -30,38 +29,13 @@ app.get('/api/editorState', function (req, res) {
       {
         questionId: "3",
         value: ""
-      }]
-    })
-    editorData["meetings"] = newMeeting;
-  }
-  else if (!editorData["meetings"].find((meeting) => {
-    if (meeting.meetingId == meetingId) {
-      return true;
-    }
-  })) {
-    editorData["meetings"].push({
-      meetingId: meetingId, questions: [{
-        questionId: "1",
-        value: ""
-      },
-      {
-        questionId: "2",
-        value: ""
-      },
-      {
-        questionId: "3",
-        value: ""
-      }]
-    })
+      }
+    )
   }
   else {
-    editorData["meetings"].find((meeting) => {
-      if (meeting.meetingId == meetingId) {
-        meeting.questions.find(question => {
-          if (question.questionId == questionId) {
-            latestState.value = question.value;
-          }
-        })
+    editorData[meetingId].find((question) => {
+      if (question.questionId == questionId) {
+        latestState.value = question.value;
       }
     });
   }
@@ -70,20 +44,13 @@ app.get('/api/editorState', function (req, res) {
 
 io.on("connection", (socket) => {
   socket.on("message", (message, questionId, meetingId) => {
-    let currentMeeting;
-    let updateindex;
-    editorData["meetings"].find((meeting, meetingIndex) => {
-      if (meeting.meetingId == meetingId) {
-        updateindex = meetingIndex;
-        currentMeeting = meeting;
-        meeting.questions.find((question, index) => {
-          if (question.questionId == questionId) {
-            currentMeeting.questions[index].value = message;
-          }
-        })
-      }
-    });
-    editorData["meetings"][updateindex] = currentMeeting;
+    if (editorData.hasOwnProperty(meetingId)) {
+      editorData[meetingId].find((question, index) => {
+        if (question.questionId == questionId) {
+          editorData[meetingId][index].value = message;
+        }
+      });
+    }
     io.emit("message", message)
   })
 });
