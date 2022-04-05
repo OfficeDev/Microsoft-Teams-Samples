@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <head>
+        <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+            crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Security-Policy"
+            content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+    </head>
+    <style>
+        #mainDiv {
+            padding-left: 10%;
+            padding-top: 2%;
+        }
+    </style>
+</head>
+
+<body id=mainDiv>
+    <div class="container">
+        <label for="title" class="title">Task title</label>
+        <br>
+        <input type="text" id="taskdtitle" name="taskdtitle">
+        <br />
+        <br />
+        <label for="description" class="description">Task description</label>
+        <br>
+        <input type="text" id="taskdescription" name="taskdescription">
+        <br />
+        <br />
+        <label for="assignto" class="assignto">Assign to:</label>
+        <Button onclick="selectPeople()"> select people</button>
+        <br />
+        <br />
+        <button type="button" class="btn-send save" onclick="submit()">Submit</button>
+    </div>
+    <div id="taskDetails">
+        <label for="title" class="title" id="title">Task title: </label>
+        <br />
+        <label for="description" class="description" id="description">Task description: </label>
+        <br />
+        <label for="assignto" class="assignto" id="assignto">Assign to:</label>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#taskDetails").hide();
+        });
+
+        microsoftTeams.initialize();
+
+        function selectPeople() {
+            microsoftTeams.people.selectPeople((error, people) => {
+                if (error) {
+                    if (error.message) {
+                        alert(" ErrorCode: " + error.errorCode + error.message);
+                    }
+                    else {
+                        alert(" ErrorCode: " + error.errorCode);
+                    }
+                }
+                if (people) {
+                    console.log(" People length: " + people.length + " " + JSON.stringify(people));
+                }
+            });
+        }
+        // Submit task details.
+        function submit() {
+            var isValid = true;
+            $('#taskdtitle,#taskdescription').each(function (e) {
+                if ($.trim($(this).val()) == '') {
+                    isValid = false;
+                    $(this).css({
+                        "border": "1px solid red"
+                    });
+                }
+                else {
+                    $(this).css({
+                        "border": "",
+                        "background": ""
+                    });
+                }
+            });
+
+            if (isValid == false) {
+                e.preventDefault();
+                return false;
+            }
+
+            $("#title").empty();
+            $("#title").append("Task title: " + $('#taskdtitle').val());
+            $("#description").empty();
+            $("#description").append("Task description: " + $('#taskdescription').val())
+            $("#assignto").empty();
+            $("#assignto").append("Assign to: " + $('#taskdtitle').val());
+            $("#taskDetails").show();
+        }
+    </script>
+</body>
+
+</html>

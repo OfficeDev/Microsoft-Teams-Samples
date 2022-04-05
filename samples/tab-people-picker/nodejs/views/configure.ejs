@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Graph activity feed app demo node js</title>
+</head>
+<body>
+    <div class="font-semibold font-title" id="textConfiguration"></div>
+<p>
+  <div>
+      <label for="tabChoice">Configure your Activity feed Tab here: </label>
+      <select id="tabChoice" name="tabChoice">
+          <option value="" selected="selected">(Select: )</option>
+          <option value="tab" id="groupChatTab">GroupChat</option>
+          <option value="tab" id="teamsTab">Team</option>
+          <option value="tab" id="userTab">UserTab</option>
+      </select>
+  </div>
+</p>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js" integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv" crossorigin="anonymous"></script>
+<script>
+  microsoftTeams.initialize();
+    // Save configuration changes
+    microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
+        // Let the Microsoft Teams platform know what you want to load based on
+        // what the user configured on this page
+        microsoftTeams.settings.setSettings({
+            contentUrl: window.location.origin +"/tab", // Mandatory parameter
+            entityId: window.location.origin +"/tab"// Mandatory parameter
+        });
+
+        // Tells Microsoft Teams platform that we are done saving our settings. Microsoft Teams waits
+        // for the app to call this API before it dismisses the dialog. If the wait times out, you will
+        // see an error indicating that the configuration settings could not be saved.
+        saveEvent.notifySuccess();
+    });
+
+    microsoftTeams.settings.setValidityState(true);
+</script>
+</body>
+</html>
