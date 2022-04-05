@@ -1,0 +1,49 @@
+{
+  "name": "meeting-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@fluentui/react-northstar": "^0.58.0",
+    "@microsoft/signalr": "6.0.3",
+    "@microsoft/teams-js": "^1.11.0",
+    "@monaco-editor/react": "^4.3.1",
+    "axios": "^0.21.4",
+    "cors": "^2.8.5",
+    "has-cors": "^1.1.0",
+    "msteams-ui-components-react": "^0.8.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-meta-tags": "^1.0.1",
+    "react-router-dom": "^5.3.0",
+    "react-scripts": "4.0.3",
+    "typescript": "^4.6.2",
+    "typestyle": "^2.3.0",
+    "web-vitals": "^1.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.41",
+    "@types/react-router-dom": "^5.3.3"
+  }
+}

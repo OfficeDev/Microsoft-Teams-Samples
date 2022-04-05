@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.8",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
   "version": "1.0.0",
   "id": "<<Your Microsoft App Id>>",
   "packageName": "com.teams.RSC",
@@ -41,10 +41,40 @@
   ],
   "webApplicationInfo": {
     "id": "<<Your Microsoft App Id>>",
-    "resource": "https://RscBasedStoreApp",
-    "applicationPermissions": [
-      "TeamsTab.Read.Group",
-      "TeamsTab.ReadWrite.Group"
-    ]
+    "resource": "https://RscBasedStoreApp"
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "TeamsTab.Read.Group",
+          "type": "Application"
+        },
+        {
+          "name": "TeamsTab.ReadWrite.Group",
+          "type": "Application"
+        },
+        {
+          "name": "ChannelSettings.ReadWrite.Group",
+          "type": "Application"
+        },
+        {
+          "name": "Channel.Create.Group",
+          "type": "Application"
+        },
+        {
+          "name": "Channel.Delete.Group",
+          "type": "Application"
+        },
+        {
+          "name": "TeamsTab.Create.Group",
+          "type": "Application"
+        },
+        {
+          "name": "Member.Read.Group",
+          "type": "Application"
+        }
+      ]
+    }
   }
 }
