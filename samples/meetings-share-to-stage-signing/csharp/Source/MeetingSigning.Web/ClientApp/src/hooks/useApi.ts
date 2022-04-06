@@ -135,9 +135,7 @@ export const useApi = (
   useEffect(() => {
     const callApiWithNewToken = async () => {
       if (
-        requestState !== RequestState.Unrequested &&
-        requestState !== RequestState.Pending &&
-        requestState !== RequestState.Rejected &&
+        requestState !== RequestState.Resolved &&
         state === AuthState.Resolved &&
         token
       ) {
