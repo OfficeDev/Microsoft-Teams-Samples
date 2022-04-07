@@ -25,7 +25,7 @@
   "accentColor": "#235EA5",
   "configurableTabs": [
     {
-      "configurationUrl": "https://f72c-116-75-10-155.ngrok.io/configure",
+      "configurationUrl": "https://{{base-url}}/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -37,8 +37,8 @@
     {
       "entityId": "peoplepickertab",
       "name": "Tab",
-      "contentUrl": "https://f72c-116-75-10-155.ngrok.io/index",
-      "websiteUrl": "https://f72c-116-75-10-155.ngrok.io/index",
+      "contentUrl": "https://{{base-url}}/index",
+      "websiteUrl": "https://{{base-url}}/index",
       "scopes": [
         "personal"
       ]
