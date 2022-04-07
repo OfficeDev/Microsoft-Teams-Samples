@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
-
-    <head>
-        <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js"
-            integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2"
-            crossorigin="anonymous"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <meta charset="UTF-8">
-        <meta http-equiv="Content-Security-Policy"
-            content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
-    </head>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
     <style>
         #mainDiv {
             padding-left: 6%;
@@ -31,29 +25,43 @@
             color: #dd1438;
             margin-top: 1rem;
         }
+
         .card {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            width: 22rem;
-            height: 9rem;
+            width: 40rem;
+            min-height: 27rem;
+            overflow: hidden;
             margin-left: 2rem;
             margin-top: 0.5rem;
         }
+
         .card:hover {
             box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
         }
+
         .card-container-div {
             padding-bottom: 2rem;
             display: flex;
         }
-        .signin-header {
+
+        .signin-header,
+        .configure-header {
             margin-left: 1rem;
             margin-top: 1rem;
             padding-top: 0.5rem;
         }
-        button{
-            margin: 2rem 8.5rem 0rem 8.5rem;
+
+        button {
+            margin: 2rem 8.5rem 0rem 14.5rem;
         }
 
+        #defaultSelected,
+        #allMemberOfOrganisationSelected,
+        #singleSelected,
+        #defaultMemberSelected,
+        .configure-header {
+            word-wrap: break-word;
+        }
     </style>
 </head>
 
@@ -62,52 +70,49 @@
         <div class="card-container-div">
             <div>
                 <div class="card">
-                <div class="signin-header"><b>People picker with members according to scope</b></div>
-                <Button data-id="default" onclick="selectPeople(event,null,false,false)"> Select </button>
-                <div id="defaultSelected" class="label-text"></div>
+                    <div class="signin-header"><b>People picker with members according to scope</b></div>
+                    <div class="configure-header">To use this option, configure the function using following parameters
+                        microsoftTeams.people.selectPeople(callbackfunc, setSelected: null,
+                        openOrgWideSearchInChatOrChannel: false, singleSelect: false)</div>
+                    <Button data-id="default" onclick="selectPeople(event,null,false,false)"> Select </Button>
+                    <div id="defaultSelected" class="label-text"></div>
                 </div>
             </div>
             <div>
                 <div class="card">
                     <div class="signin-header"><b>People picker with all members of the tenant</b></div>
-                    <Button data-id="allMemberOfOrganisation" onclick="selectPeople(event,null,true,false)"> Select </button>
+                    <div class="configure-header">To use this option, configure the function using following parameters
+                        microsoftTeams.people.selectPeople(callbackfunc, setSelected: null,
+                        openOrgWideSearchInChatOrChannel: true, singleSelect: false)</div>
+                    <Button data-id="allMemberOfOrganisation" onclick="selectPeople(event,null,true,false)"> Select
+                    </Button>
                     <div id="allMemberOfOrganisationSelected" class="label-text"></div>
-                    </div>
+                </div>
             </div>
+        </div>
+        <div class="card-container-div">
             <div>
                 <div class="card">
                     <div class="signin-header"><b>People picker with single member select.</b></div>
-                    <Button data-id="singleSelect" onclick="selectPeople(event,null,false,true)"> Select </button>
-                        <div id="singleSelected" class="label-text"></div>
-                    </div>
+                    <div class="configure-header"><b>To use this option, configure the function using following
+                            parameters microsoftTeams.people.selectPeople(callbackfunc, setSelected: null,
+                            openOrgWideSearchInChatOrChannel: false, singleSelect: true)</b></div>
+                    <Button data-id="singleSelect" onclick="selectPeople(event,null,false,true)"> Select </Button>
+                    <div id="singleSelected" class="label-text"></div>
+                </div>
+            </div>
+            <div>
+                <div class="card">
+                    <div class="signin-header"><b>People picker with defualt selected member</b></div>
+                    <div class="configure-header"><b>To use this option, configure the function using following
+                            parameters microsoftTeams.people.selectPeople(callbackfunc, setSelected: aad id,
+                            openOrgWideSearchInChatOrChannel: false, singleSelect: true)</b></div>
+                    <Button data-id="defaultSelect" onclick="selectPeople(event,'default',false,false)"> Select
+                    </Button>
+                    <div id="defaultMemberSelected" class="label-text"></div>
+                </div>
             </div>
         </div>
-        <!-- <label for="title">Task title:</label>
-        <br>
-        <input type="text" id="taskdtitle" name="taskdtitle">
-        <br />
-        <br />
-        <label for="description">Task description:</label>
-        <br>
-        <input type="text" id="taskdescription" name="taskdescription">
-        <br />
-        <br />
-        <label for="assignto">Assign to:</label>
-        <label for="assignToName" id="assignToName"></label> -->
-        
-        
-        
-        <!-- <br />
-        <br />
-        <button type="button" onclick="submit()">Submit</button>
-        <div id="error"> Please select a member to assign the task.</div>
-    </div>
-    <div id="taskDetails">
-        <label for="title" class="label-text" id="title">Task title: </label>
-        <br />
-        <label for="description" class="label-text" id="description">Task description: </label>
-        <br />
-        <label for="assignto" class="label-text" id="assignto">Assign to:</label> -->
     </div>
     <script>
         $(document).ready(function () {
@@ -118,13 +123,18 @@
 
         let aadId;
         microsoftTeams.initialize();
-        microsoftTeams.getContext(function (context){
+        microsoftTeams.getContext(function (context) {
             aadId = context.userObjectId
         })
-        
-        function selectPeople(e,setSelected, openOrgWideSearchInChatOrChannel, singleSelect) {
+
+        // People picker api call.
+        function selectPeople(e, setSelected, openOrgWideSearchInChatOrChannel, singleSelect) {
             var id = $(e.currentTarget).attr('data-id');
-            console.log(id);
+
+            if (setSelected == "default") {
+                setSelected = [aadId];
+            }
+
             microsoftTeams.people.selectPeople((error, people) => {
                 if (error) {
                     if (error.message) {
@@ -135,63 +145,33 @@
                     }
                 }
                 if (people) {
-                    
-                    let selectedMember = people.map(people => people.displayName);
-                    if(id=="default"){
+                    let peopleData = JSON.stringify(people);
+
+                    if (id == "default") {
                         $("#defaultSelected").empty();
-                        $("#defaultSelected").append("Selected member: "+ selectedMember )
+                        $("#defaultSelected").append("Selected member: " + peopleData)
                         $("#defaultSelected").show();
                     }
-                    if(id=="singleSelect"){
+
+                    if (id == "singleSelect") {
                         $("#singleSelected").empty();
-                        $("#singleSelected").append("Selected member: "+ selectedMember )
+                        $("#singleSelected").append("Selected member: " + peopleData)
                         $("#singleSelected").show();
                     }
-                    if(id=="allMemberOfOrganisation"){
+
+                    if (id == "allMemberOfOrganisation") {
                         $("#allMemberOfOrganisationSelected").empty();
-                        $("#allMemberOfOrganisationSelected").append("Selected member: "+ selectedMember )
+                        $("#allMemberOfOrganisationSelected").append("Selected member: " + peopleData)
                         $("#allMemberOfOrganisationSelected").show();
                     }
-                    
+
+                    if (id == "defaultSelect") {
+                        $("#defaultMemberSelected").empty();
+                        $("#defaultMemberSelected").append("Selected member: " + peopleData)
+                        $("#defaultMemberSelected").show();
+                    }
                 }
             }, { setSelected: setSelected, openOrgWideSearchInChatOrChannel: openOrgWideSearchInChatOrChannel, singleSelect: singleSelect });
         }
-
-        // // Submit task details.
-        // function submit() {
-        //     var isValid = true;
-        //     $('#taskdtitle,#taskdescription').each(function (e) {
-        //         if ($.trim($(this).val()) == '') {
-        //             isValid = false;
-        //             $(this).css({
-        //                 "border": "1px solid red"
-        //             });
-        //         }
-        //         else {
-        //             $(this).css({
-        //                 "border": "",
-        //                 "background": ""
-        //             });
-        //             if (assignTo == undefined) {
-        //                 isValid = false;
-        //                 $("#error").show();
-        //             }
-        //         }
-        //     });
-
-        //     if (isValid == false) {
-        //         e.preventDefault();
-        //         return false;
-        //     }
-        // $("#title").empty();
-        //     $("#title").append("Task title: " + $('#taskdtitle').val());
-        //     $("#description").empty();
-        //     $("#description").append("Task description: " + $('#taskdescription').val())
-        //     $("#assignto").empty();
-        //     $("#assignto").append("Assign to: " + $('#taskdtitle').val());
-        //     $("#taskDetails").show();
-        // }
     </script>
 </body>
-
-</html>

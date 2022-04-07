@@ -19,8 +19,8 @@
     "full": "People picker functionality in tab."
   },
   "description": {
-    "short": "This is an Tab app which has client sdk people picker integrated.",
-    "full": "This is an Tab app which has client sdk people picker integrated."
+    "short": "This is an tab app which shows the feature of client sdk people picker.",
+    "full": "This is an tab app which shows the feature of client sdk people picker."
   },
   "accentColor": "#235EA5",
   "configurableTabs": [
