@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is an tab app which shows the feature of client sdk people picker.
+description: This sample shows tab capability with the feature of client sdk people picker.
 products:
 - office-teams
 - office
@@ -14,7 +14,7 @@ createdDate: "06-10-2021 01:48:56"
 
 # Tab people picker
 
-This is an tab app which shows the feature of client sdk people picker.
+This sample shows tab capability with the feature of client sdk people picker.
 
 ![tab](Images/Tab.PNG)
 
