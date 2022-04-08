@@ -4,7 +4,6 @@ namespace TabPeoplePicker.Controllers
 {
     public class HomeController : Controller
     {
-
         /// <summary>
         /// This enpoint is called to load initial page for tab people picker app.
         /// </summary>
