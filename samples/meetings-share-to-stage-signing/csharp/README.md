@@ -22,7 +22,7 @@ This proof of concept demonstrates the use case of sharing a document on Teams S
 * Adaptive Cards
 
 <!-- Include a video documenting the sharing to stage here. -->
-![Video documenting the sharing to stage, including the choosing of a document from the sidepanel, and the signing of the document on the stage](/samples/meetings-share-to-stage-signing/csharp/Docs/Signing-Clip.gif)
+![Video documenting the sharing to stage, including the choosing of a document from the sidepanel, and the signing of the document on the stage](/Docs/Signing-Clip.gif)
 
 ## Workflow
 ```mermaid
@@ -47,6 +47,7 @@ sequenceDiagram
 * Sideload the app to a meeting.
 * In the meeting group chat, add the *Meeting Signing* app as a new Tab.
 * In the pre-meeting tab, create a test document so you can test the meeting share to stage APIs.
+* Provide one-time consent to the app for Graph permissions while creating the document.
 * Start the meeting.
     * In the bar at the top, select *Meeting Signing* to open the sidepanel.
     * You will see any documents you created here
@@ -74,6 +75,11 @@ Currently, this app is not fully supported in the following scenarios:
     * The people picker does not allow users outside of the tenant to be selected. Similarly, if a federated user creates the document, they are only able to select people in their tenant as signers/viewers, and nobody from outside their tenant can view the document.
 * Anonymous Users - Does not work because apps can't get an SSO token for anonymous users.
 
+### Common Problems
+* When the solution is run on a local web browser (anywhere outside of Teams), it will load an expected error message stating that 
+" Unable to get information about the App.
+This happens if you are running the application in a normal browser, and not inside Teams. Install the app inside teams to test this application. To upload the app to Teams follow the instructions on https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload"
+
 ## Prerequisites
 * Make sure you have an active [Azure subscription](https://azure.microsoft.com/en-us/free/).
 * Make sure [Publish to organization's app store](https://docs.microsoft.com/en-us/MicrosoftTeams/manage-apps?toc=%2Fmicrosoftteams%2Fplatform%2Ftoc.json&bc=%2Fmicrosoftteams%2Fplatform%2Fbreadcrumb%2Ftoc.json#publish-a-custom-app-to-your-organizations-app-store) is available in Teams.
@@ -93,13 +99,15 @@ Currently, this app is not fully supported in the following scenarios:
 * Run Ngrok
     * Run ngrok and point it to the port the Web App is listening on.
     ```bash
-    ngrok http -host-header=rewrite 44326 # For Visual Studio
+    ngrok http https://localhost:44326 -host-header=rewrite 44326 # For Visual Studio
     ```
     * Make sure to copy and save the `https` url (it should look like `https://<randomsubdomain>.ngrok.io`).
 * [Register an App in AAD that can be used for Teams SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso?tabs=dotnet#develop-an-sso-microsoft-teams-tab)
+    * Once the app is registered update Redirect Uris under the Authentication section with the ngrok url, followed by /auth-end (https://<randomsubdomain>.ngrok.io/auth-end)
+    * Ensure the following API permissions are granted to the app for Microsoft Graph access - email, offline_access, openid, profile, User.Read, User.ReadBasic.All
     * *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your AAD App*
     * After you create an AAD app, under *Certificates & secrets* create a new  *Client secret*. Copy the secret value and set it in `appSettings.json`
-* In `appSettings.json`, `manifest.json` and `.env.local` replace:
+* In `appSettings.json`, `manifest.json` and `.env` replace:
     * `<<deployment-url>>` with your ngrok url, minus the https://.
     * `<<aad-id>>` with your AAD Application (Client) Id.
     * `<<client secret>>` with the client secret you created above.
@@ -117,7 +125,7 @@ Currently, this app is not fully supported in the following scenarios:
 
 ## Deployment
 ### Locally in Visual Studio
-* Point Ngrok to port 44326: `ngrok http -host-header=rewrite 44326`
+* Point Ngrok to port 44326: `ngrok http https://localhost:44326 -host-header=rewrite 44326`
 * Open the solution in Visual Studio.
 * Ensure the start-up project is set to `Microsoft.Teams.Samples.MeetingSigning.Web`
 * Start Debugging using IIS Express
