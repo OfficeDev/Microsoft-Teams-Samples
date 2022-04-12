@@ -99,7 +99,7 @@ This happens if you are running the application in a normal browser, and not ins
 * Run Ngrok
     * Run ngrok and point it to the port the Web App is listening on.
     ```bash
-    ngrok http https://localhost:44326 -host-header=rewrite 44326 # For Visual Studio
+    ngrok http https://localhost:44326 -host-header=localhost:44326 # For Visual Studio
     ```
     * Make sure to copy and save the `https` url (it should look like `https://<randomsubdomain>.ngrok.io`).
 * [Register an App in AAD that can be used for Teams SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso?tabs=dotnet#develop-an-sso-microsoft-teams-tab)
@@ -125,7 +125,7 @@ This happens if you are running the application in a normal browser, and not ins
 
 ## Deployment
 ### Locally in Visual Studio
-* Point Ngrok to port 44326: `ngrok http https://localhost:44326 -host-header=rewrite 44326`
+* Point Ngrok to port 44326: `ngrok http https://localhost:44326 -host-header=localhost:44326`
 * Open the solution in Visual Studio.
 * Ensure the start-up project is set to `Microsoft.Teams.Samples.MeetingSigning.Web`
 * Start Debugging using IIS Express
