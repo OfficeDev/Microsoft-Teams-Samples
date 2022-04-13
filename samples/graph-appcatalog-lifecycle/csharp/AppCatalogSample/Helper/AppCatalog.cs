@@ -19,7 +19,7 @@ namespace AppCatalogSample.Helper
 {
     public class AppCatalogHelper
     {
-
+        private const string appName = "App Catalog Bot";
         public readonly GraphServiceClient graphServiceClient;
 
         private readonly string _token;
@@ -80,13 +80,13 @@ namespace AppCatalogSample.Helper
         public string GetAppId()
         {
             var listApp = GetAllapp().ConfigureAwait(false).GetAwaiter().GetResult();
-            var id = listApp.Where(x => x.DisplayName == "AppCatalog").Select(x => x.Id).FirstOrDefault();
+            var id = listApp.Where(x => x.DisplayName == appName).Select(x => x.Id).FirstOrDefault();
             return id;
         }
         public string GetExternalId()
         {
             var listApp = GetAllapp().ConfigureAwait(false).GetAwaiter().GetResult();
-            var id = listApp.Where(x => x.DisplayName == "AppCatalog").Select(x => x.ExternalId).FirstOrDefault();
+            var id = listApp.Where(x => x.DisplayName == appName).Select(x => x.ExternalId).FirstOrDefault();
             return id;
         }
 
@@ -275,29 +275,15 @@ namespace AppCatalogSample.Helper
 
         public  async Task SendSuggestedActionsAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
-            var reply = MessageFactory.Text("Your Action :" + " \r" + "-" + " List" + " \r" + "-" + " Publish" + " \r" + "-" + " Update" + " \r" + "-" + " Delete" + " \r");
+            var reply = MessageFactory.Text("Your Action :" + " \r" + "-" + " Publish: publish" + " \r" + "-" + " Update: update" + " \r" + "-" + " Delete: delete" + " \r" + " \r" + "-" + " ListApp: listapp" + " \r" + "-" + " ListApp by ID: app" + " \r" + "-" + " App based on manifest Id: findapp" + " \r" + "-" + " App Status:status" + " \r" + "-" + " List of bot:bot" + " \r");
 
             reply.SuggestedActions = new SuggestedActions()
             {
                 Actions = new List<CardAction>()
                 {
-
-                    new CardAction() { Title = "List", Type = ActionTypes.ImBack, Value = "list"},
                     new CardAction() { Title = "Update", Type = ActionTypes.ImBack, Value = "update"},
+                    new CardAction() { Title = "Publish", Type = ActionTypes.ImBack, Value = "publish"},
                     new CardAction() { Title = "Delete", Type = ActionTypes.ImBack, Value = "delete"},
-                },
-            };
-            await turnContext.SendActivityAsync(reply, cancellationToken);
-        }
-        public  async Task SendListActionAsync(ITurnContext turnContext, CancellationToken cancellationToken)
-        {
-            var reply = MessageFactory.Text("Your Action :" + " \r" + "-" + " Home" + " \r" + "-" + " ListApp: listapp" + " \r" + "-" + " ListApp by ID: app" + " \r" + "-" + " App based on manifest Id: findapp" + " \r" + "-" + " App Status:status" + " \r" + "-" + " List of bot:bot" + " \r");
-
-            reply.SuggestedActions = new SuggestedActions()
-            {
-                Actions = new List<CardAction>()
-                {
-                    new CardAction() { Title = "Home", Type = ActionTypes.ImBack, Value = "home" },
                     new CardAction() { Title = "ListApp", Type = ActionTypes.ImBack, Value = "listapp"},
                     new CardAction() { Title = "ListApp by ID", Type = ActionTypes.ImBack, Value = "app" },
                     new CardAction() { Title = "App based on manifest Id", Type = ActionTypes.ImBack, Value = "findapp"},
@@ -305,6 +291,11 @@ namespace AppCatalogSample.Helper
                     new CardAction() { Title = "List of bot", Type = ActionTypes.ImBack, Value = "bot" },
                 },
             };
+            await turnContext.SendActivityAsync(reply, cancellationToken);
+        }
+        public  async Task SendContinueMessageAsync(ITurnContext turnContext, CancellationToken cancellationToken)
+        {
+            var reply = MessageFactory.Text("Please type something to contiue.");
             await turnContext.SendActivityAsync(reply, cancellationToken);
         }
 
