@@ -19,10 +19,14 @@ This sample demos the feature of link unfurling for Share to teams (The Share to
 ## Key features
   
   ![tab](LinkUnfurlingInShareToTeams/Images/Tab.png)
+
+  ![tab-web](LinkUnfurlingInShareToTeams/Images/TabWeb.PNG)
   
-  ![Link unfurling STT](LinkUnfurlingInShareToTeams/Images/LinkUnfurlingShareToTeams.png)
+  ![Link unfurling STT](LinkUnfurlingInShareToTeams/Images/LinkUnfurlSTT.png)
+
+  ![Link unfurling sdk](LinkUnfurlingInShareToTeams/Images/LinkUnfurlingSdk.png)
   
-  ![Link unfurling card](LinkUnfurlingInShareToTeams/Images/LinkUnfurlCard.png)
+  ![Link unfurling card](LinkUnfurlingInShareToTeams/Images/LinkUnfurlCard.PNG)
    
 ## Prerequisites
 
@@ -71,6 +75,7 @@ This sample demos the feature of link unfurling for Share to teams (The Share to
 
 8) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps
+   - Manage your apps
    - Choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.

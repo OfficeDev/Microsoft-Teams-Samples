@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using AdaptiveCards;
+using LinkUnfurlingInShareToTeams.Models;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
@@ -62,24 +63,51 @@ namespace LinkUnfurlingInShareToTeams.Bots
         /// <returns> Adaptive card for link unfurling.</returns>
         private AdaptiveCard GetUnfurlCard()
         {
-            var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
-
-            card.Body.Add(new AdaptiveTextBlock()
+            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion("1.2"))
             {
-                Text = "Analytics details:",
-                Size = AdaptiveTextSize.Default
-            });
-
-            card.Body.Add(new AdaptiveImage()
-            {
-                Url = new Uri(_applicationBaseUrl+"/report.png")
-            });
-
-            card.Actions.Add(new AdaptiveOpenUrlAction()
-            {
-                Title = "Open tab",
-                Url = new Uri($"https://teams.microsoft.com/l/entity/{_microsoftAppId}/tab?webUrl={_applicationBaseUrl}/tab")
-            });
+                Body = new List<AdaptiveElement>
+                {
+                    new AdaptiveTextBlock
+                    {
+                        Text = "Analytics details:",
+                        Size = AdaptiveTextSize.Default
+                    },
+                    new AdaptiveImage()
+                    {
+                        Url = new Uri(_applicationBaseUrl+"/report.png")
+                    }
+                },
+                Actions = new List<AdaptiveAction>
+                {
+                    new AdaptiveSubmitAction
+                    {
+                        Title = "View via card action",
+                        Data = new AdaptiveCardAction
+                        {
+                            MsteamsCardAction = new CardAction
+                            {
+                                Type = "invoke",
+                                Value = new TabInfoAction
+                                {
+                                    Type = "tab/tabInfoAction",
+                                    TabInfo = new TabInfo
+                                    {
+                                        ContentUrl = $"{_applicationBaseUrl}/tab?openInTeams=true",
+                                        WebsiteUrl = $"{_applicationBaseUrl}/tab?openInTeams=false",
+                                        Name = "Stage view",
+                                        EntityId = "entityId"
+                                    }
+                                }
+                            },
+                        },
+                    },
+                    new AdaptiveOpenUrlAction
+                    {
+                        Title = "View via deeplink",
+                        Url = new Uri($"https://teams.microsoft.com/l/entity/{_microsoftAppId}/tab?webUrl={_applicationBaseUrl}/tab?openInTeams=true"),
+                    },
+                },
+            };
 
             return card;
         }
