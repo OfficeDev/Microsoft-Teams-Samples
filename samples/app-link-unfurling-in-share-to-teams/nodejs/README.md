@@ -19,9 +19,13 @@ This sample demos the feature of link unfurling for share to teams (The Share to
 
 ## Key features
   
-  ![tab](Images/Tab.png)
+  ![tab](Images/Tab.PNG)
+
+  ![tab-web](Images/TabWeb.PNG)
   
   ![Link unfurling STT](Images/LinkUnfurlSTT.png)
+
+  ![Link unfurling sdk](Images/LinkUnfurlingSdk.PNG)
   
   ![Link unfurling card](Images/LinkUnfurlCard.png)
 

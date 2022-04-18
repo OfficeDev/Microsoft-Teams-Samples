@@ -47,8 +47,26 @@ class TeamsBot extends TeamsActivityHandler {
             {
                 "type": "Action.OpenUrl",
                 "title": "Open tab",
-                "url": `https://teams.microsoft.com/l/entity/${process.env.MicrosoftAppId}/tab?webUrl=${process.env.ApplicationBaseUrl}/AuthTab`
-              }
+                "url": `https://teams.microsoft.com/l/entity/${process.env.MicrosoftAppId}/tab?webUrl=${process.env.ApplicationBaseUrl}/tab?openInTeams=true`
+              },
+              {
+                "type": "Action.Submit",
+                "title": "View via card",
+                "data": {
+                    "msteams": {
+                        "type": "invoke",
+                        "value": {
+                            "type": "tab/tabInfoAction",
+                            "tabInfo": {
+                                "contentUrl":  process.env.ApplicationBaseUrl + "/tab?openInTeams=true",
+                                "websiteUrl": process.env.ApplicationBaseUrl + "/tab?openInTeams=false",
+                                "name": "Stage view",
+                                "entityId": "entityId"
+                             }
+                            }
+                        }
+                }
+            }
           ]
         }
       
