@@ -15,8 +15,8 @@
     "termsOfUseUrl": "https://example.azurewebsites.net/termsofuse"
   },
   "icons": {
-    "color": "icon-color.png",
-    "outline": "icon-outline.png"
+    "color": "color.png",
+    "outline": "outline.png"
   },
   "name": {
     "short": "App complete auth"
@@ -130,7 +130,8 @@
           "type": "link",
           "value": {
             "domains": [
-              "*.botframework.com"
+              "*.botframework.com",
+              "<<base-url>>"
             ]
           }
         }
@@ -140,7 +141,7 @@
   "accentColor": "#60A18E",
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "<<Domain-name>>",
+    "<<base-url>>",
     "token.botframework.com"
   ]
 }

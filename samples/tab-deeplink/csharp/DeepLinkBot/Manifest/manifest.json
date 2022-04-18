@@ -23,13 +23,22 @@
     "color": "color.png"
   },
   "accentColor": "#60A18E",
-
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://<<BASE-URL>>/Configure.html",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "groupchat",
+        "team"
+      ]
+    }
+  ],
   "staticTabs": [
     {
-      "contentUrl": "<<YOUR-BASE-URL>>",
-      "websiteUrl": "<<YOUR-BASE-URL>>",
-      "entityId": "<<ENTITY-ID>>",
-      "name": "TAB NAME",
+      "contentUrl": "https://<<BASE-URL>>/DeepLink.html",
+      "websiteUrl": "https://<<BASE-URL>>",
+      "entityId": "com.contoso.DeeplLinkBot.help",
+      "name": "Deep Link Tab",
       "scopes": [
         "personal"
       ]
@@ -41,6 +50,7 @@
       "needsChannelSelector": false,
       "isNotificationOnly": false,
       "scopes": [
+        "groupchat",
         "personal",
         "team"
       ]
@@ -51,5 +61,7 @@
     "identity",
     "messageTeamMembers"
   ],
-  "validDomains": [ "" ]
+  "validDomains": [
+    "*.ngrok.io"
+  ]
 }

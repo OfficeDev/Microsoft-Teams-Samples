@@ -1,4 +1,4 @@
----
+﻿---
 page_type: sample
 description: This sample illustrates how you programmatically manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs. .
 products:
@@ -44,6 +44,65 @@ This sample shows a AppCatalog bot and demonstrates teamsApp lifecycle in catalo
 
     ```bash
     ngrok http -host-header=rewrite 3978
+    ```
+    
+## Register Azure AD application
+Register one Azure AD application in your tenant's directory: for the bot and tab app authentication.
+
+1.  Log in to the Azure portal from your subscription, and go to the "App registrations" blade  [here](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps). Ensure that you use a tenant where admin consent for API permissions can be provided.
+
+2.  Click on "New registration", and create an Azure AD application.
+
+3.  **Name:**  The name of your Teams app - if you are following the template for a default deployment, we recommend "App catalog lifecycle".
+
+4.  **Supported account types:**  Select "Accounts in any organizational directory"
+
+5.  Leave the "Redirect URL" field blank.   
+
+6.  Click on the "Register" button.
+
+7.  When the app is registered, you'll be taken to the app's "Overview" page. Copy the  **Application (client) ID**; we will need it later. Verify that the "Supported account types" is set to  **Multiple organizations**.
+
+8.  On the side rail in the Manage section, navigate to the "Certificates & secrets" section. In the Client secrets section, click on "+ New client secret". Add a description for the secret and select Expires as "Never". Click "Add".
+
+9.  Once the client secret is created, copy its  **Value**, please take a note of the secret as it will be required later.
+
+
+At this point you have 3 unique values:
+-   Application (client) ID which will be later used during Azure bot creation
+-   Client secret for the bot which will be later used during Azure bot creation
+-   Directory (tenant) ID
+
+
+We recommend that you copy these values into a text file, using an application like Notepad. We will need these values later.
+
+10.  Under left menu, select  **Authentication**  under  **Manage**  section.
+
+11. Select 'Accounts in any organizational directory (Any Azure AD directory - Multitenant)' under Supported account types and click "+Add a platform".
+
+12.  On the flyout menu, Select "Web"    
+
+13.  Add  `https://token.botframework.com/.auth/web/redirect`  under Redirect URLs and click Configure button. 
+
+14.  Once the flyout menu close, scroll bottom to section 'Implicit Grant' and select check boxes "Access tokens" and "ID tokens" and click "Save" at the top bar.
+
+15.  Under left menu, navigate to  **API Permissions**, and make sure to add the following permissions of Microsoft Graph API > Delegated permissions:
+-    AppCatalog.ReadWrite.All
+-  AppCatalog.Submit
+
+Click on �Add Permissions� to commit your changes.
+
+16.  If you are logged in as the Global Administrator, click on the �Grant admin consent for %tenant-name%� button to grant admin consent else, inform your admin to do the same through the portal or follow the steps provided here to create a link and send it to your admin for consent.
+    
+17.  Global Administrator can grant consent using following link:  [https://login.microsoftonline.com/common/adminconsent?client_id=](https://login.microsoftonline.com/common/adminconsent?client_id=)<%appId%> 
+
+## Setup bot Service
+1. Create new Azure Bot resource in Azure.
+2. Select Type of App as "Multi Tenant"
+3.  Select Creation type as "Use existing app registration"
+4. Use the copied App Id and Client secret from above step and fill in App Id and App secret respectively.
+5. Click on Create on the Azure bot.   
+6. Go to the created resource, navigate to channels and add "Microsoft Teams".
 ## Instruction on setting connection string for bot authentication on the behalf of user
 1. In the Azure portal, select your resource group from the dashboard.
 
@@ -108,4 +167,3 @@ This sample shows a AppCatalog bot and demonstrates teamsApp lifecycle in catalo
 - [App in Catalog] (https://docs.microsoft.com/en-us/graph/api/resources/teamsapp?view=graph-rest-1.0)
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-

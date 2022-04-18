@@ -102,7 +102,7 @@ Calling and Meeting Bot provides basic functionality like Create Call, Join a ca
 * Click on Create AppId and Secret
 * Enter `Client_Id and Client_Secret` of your azure app registered in demo tenant
 * Add the Teams channel.
-* Select the Calling tab on the Teams channel page. Select Enable calling, and then update Webhook (for calling) with your HTTPS URL (`https://yourNgrok/api/callback`) where you receive incoming notifications, for example `https://contoso.com/teamsapp/api/callback`.
+* Select the Calling tab on the Teams channel page. Select Enable calling, and then update Webhook (for calling) with your HTTPS URL (`https://yourNgrok/callback`) where you receive incoming notifications, for example `https://contoso.com/teamsapp/callback`.
 ![image](https://user-images.githubusercontent.com/50989436/122867490-375e5580-d347-11eb-8447-7e417947bf1f.png)
 * Save your changes.
 
@@ -165,7 +165,7 @@ Calling and Meeting Bot provides basic functionality like Create Call, Join a ca
 * User can ask Bot to Create a call, Transfer a call
 ![image](https://user-images.githubusercontent.com/50989436/122867719-92904800-d347-11eb-87a6-3d61c24c6451.png)
 
-* User can ask Bot o schedule a Meeting and invite the participants
+* User can ask Bot to schedule a Meeting and invite the participants
 ![image](https://user-images.githubusercontent.com/50989436/122867010-848df780-d346-11eb-9129-4447e39d35f5.png)
 
 ## Further reading

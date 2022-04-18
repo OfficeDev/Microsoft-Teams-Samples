@@ -8,6 +8,7 @@ require('isomorphic-fetch');
  * See: https://developer.microsoft.com/en-us/graph for more information.
  */
 class GraphClient {
+    appName = "App Catalog Bot";
     constructor(token) {
         if (!token || !token.trim()) {
             throw new Error('SimpleGraphClient: Invalid token received.');
@@ -54,7 +55,7 @@ class GraphClient {
 
     async getAppById() {
         let listApp = await this.getAppList();
-        let result = listApp.value.find(item => item.displayName === "AppCatalog");
+        let result = listApp.value.find(item => item.displayName === appName);
         let appId = "id eq " + "'" + result.id + "'";
         return await this.graphClient.api('/appCatalogs/teamsApps')
             .filter(appId)
@@ -66,7 +67,7 @@ class GraphClient {
 
     async getAppByManifestId() {
         let listApp = await this.getAppList();
-        let result = listApp.value.find(item => item.displayName === "AppCatalog");
+        let result = listApp.value.find(item => item.displayName === appName);
         let ExternalId = "externalId eq " + "'" + result.externalId + "'";
         return await this.graphClient.api('/appCatalogs/teamsApps')
             .filter(ExternalId)
@@ -78,7 +79,7 @@ class GraphClient {
 
     async AppStatus() {
         let listApp = await this.getAppList();
-        let result = listApp.value.find(item => item.displayName === "AppCatalog");
+        let result = listApp.value.find(item => item.displayName === appName);
         let id = "id eq " + "'" + result.id + "'";
         return await this.graphClient.api('/appCatalogs/teamsApps')
             .filter(id)
@@ -98,7 +99,7 @@ class GraphClient {
             });
 
     }
-    
+
     async DeleteApp() {
         let listApp = await this.getAppList();
         let result = listApp.value.find(item => item.displayName === "AppCatalog");

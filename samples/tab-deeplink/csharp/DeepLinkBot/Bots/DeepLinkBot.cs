@@ -105,12 +105,12 @@ namespace Microsoft.BotBuilderSamples.Bots
                                          Width=AdaptiveColumnWidth.Auto,
                                          Items=new List<AdaptiveElement>()
                                          {
-                                             new AdaptiveTextBlock(){Text="Bot Frawework SDK",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
+                                             new AdaptiveTextBlock(){Text="Messaging Extension",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
                                          },
                                            SelectAction = new AdaptiveOpenUrlAction()
                                            {
                                              Url=new Uri(tabUrlTask2),
-                                             Title = "Bot Frawework SDK"
+                                             Title = "Messaging Extension"
                                            }
                                     }
                                 }
@@ -124,12 +124,12 @@ namespace Microsoft.BotBuilderSamples.Bots
                                             Width=AdaptiveColumnWidth.Auto,
                                             Items=new List<AdaptiveElement>()
                                             {
-                                               new AdaptiveTextBlock(){Text="Teams Apps",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
+                                               new AdaptiveTextBlock(){Text="Adaptive Card",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
                                             },
                                            SelectAction = new AdaptiveOpenUrlAction()
                                            {
                                              Url=new Uri(tabUrlTask3),
-                                             Title = "Teams Apps"
+                                             Title = "Adaptive Card"
                                            }
                                         }
                                     }
