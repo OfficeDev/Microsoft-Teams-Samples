@@ -36,17 +36,17 @@
       "type": "TextBlock",
       "size": "Medium",
       "weight": "Bolder",
-      "text": "Select context"
+      "text": "Select scope"
     },
     {
       "type": "Input.ChoiceSet",
       "choices": [
         {
-          "title": "Context of the conversation",
+          "title": "Conversation",
           "value": "CurrentContext"
         },
         {
-          "title": "Org wide context",
+          "title": "Organization",
           "value": "OrgWide"
         }
       ],
@@ -59,7 +59,7 @@
       "type": "TextBlock",
       "size": "Medium",
       "weight": "Bolder",
-      "text": "Search user (CONVERSATION CONTEXT)"
+      "text": "Search user in this conversation"
     },
     {
       "type": "Input.ChoiceSet",
@@ -74,7 +74,7 @@
       "type": "TextBlock",
       "size": "Medium",
       "weight": "Bolder",
-      "text": "Search user (ORG WIDE)"
+      "text": "Search user in the organization"
     },
     {
       "type": "Input.ChoiceSet",
