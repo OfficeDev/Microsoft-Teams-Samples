@@ -149,6 +149,14 @@ Messaging Extention Authentication
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+   - Select Configuration section.
+   - Under Configuration, select add OAuth Connection Setting.
+   - Complete the form as follows:
+
+    a. **Name:** Enter a name for the connection. You'll use this name in your bot in the .env file.
+    b. **Client id:** Enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
+    c. **Client secret:** Enter the secret that you recorded for your Azure identity provider app in the steps above.
+    d. Provide **Scopes** like "User.Read openid"
   
 
 16. To test facebook auth flow [create a facebookapp](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-facebook?view=azure-bot-service-4.0) and get client id and secret for facebook app.

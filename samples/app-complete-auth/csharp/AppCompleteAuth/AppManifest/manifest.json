@@ -41,6 +41,27 @@
       "botId": "<<Microsoft-App-Id>>",
       "scopes": [
         "personal"
+      ],
+      "commandLists": [
+        {
+          "scopes": [
+            "personal"
+          ],
+          "commands": [
+            {
+              "title": "sso",
+              "description": "For AAD SSO authentication"
+            },
+            {
+              "title": "facebooklogin",
+              "description": "For Facebook signin"
+            },
+            {
+              "title": "usingcredentials",
+              "description": "For User Id/Password signin"
+            }
+          ]
+        }
       ]
     }
   ],

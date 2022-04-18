@@ -148,14 +148,13 @@
                         'accessToken': accessToken,
                     },
                     success: function (responseJson) {
-                        const userDetails = JSON.parse(responseJson);
-                        let userName = userDetails.details.displayName.split(" ");
+                        let userName = responseJson.details.displayName.split(" ");
                         $("#sso").show();
-                        $("#userImgId").attr("src", userDetails.image);
-                        $("#name").append(userDetails.details.displayName);
+                        $("#userImgSso").attr("src", responseJson.image);
+                        $("#name").append(responseJson.details.displayName);
                         $("#username").append(`${userName[0]}_${userName[1]}  <i class="fa fa-pencil" aria-hidden="true" onclick="ssoUserNameToggle()"></i>`);
-                        $("#email").append(userDetails.details.userPrincipalName);
-                        $("#work").append(userDetails.details.jobTitle);
+                        $("#email").append(responseJson.details.userPrincipalName);
+                        $("#work").append(responseJson.details.jobTitle);
                         $("#consent").hide();
                     },
                     error: function (xhr, textStatus, errorThrown) {
@@ -441,7 +440,7 @@
                 <div class="card">
                     <div class="container">
                         <img src="https://media.istockphoto.com/vectors/profile-placeholder-image-gray-silhouette-no-photo-vector-id1016744034?k=20&m=1016744034&s=612x612&w=0&h=kjCAwH5GOC3n3YRTHBaLDsLIuF8P3kkAJc9RvfiYWBY="
-                            alt="Avatar" id="userImgId" width="100px">
+                            alt="Avatar" id="userImgSso" width="100px">
                         <div class="profile">
                             <span id="sname"><b>Name: </b></span><br>
                             <span id="susername"><b>User Name: </b></span><br>

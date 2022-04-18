@@ -139,7 +139,7 @@ Click on �Add Permissions� to commit your changes.
 ## Concepts introduced in this sample
 - List apps in catalog
 
-![image](https://user-images.githubusercontent.com/50989436/118778342-9ee83780-b8a7-11eb-93fc-96bf8448e8e0.png)
+![](AppCatalogSample/Images/1.PNG)
 - Publish app to catalog
 ![image](https://user-images.githubusercontent.com/50989436/118778589-e2db3c80-b8a7-11eb-8159-a7880be1925e.png)
 - Update app in catalog
