@@ -26,7 +26,7 @@ This sample demos the feature of link unfurling for Share to teams (The Share to
 
   ![Link unfurling sdk](LinkUnfurlingInShareToTeams/Images/LinkUnfurlingSdk.png)
   
-  ![Link unfurling card](LinkUnfurlingInShareToTeams/Images/LinkUnfurlCard.PNG)
+  ![Link unfurling card](LinkUnfurlingInShareToTeams/Images/LinkUnfurlCard.png)
    
 ## Prerequisites
 
