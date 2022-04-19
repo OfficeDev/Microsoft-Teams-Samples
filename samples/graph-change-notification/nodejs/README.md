@@ -1,6 +1,7 @@
 ---
 page_type: sample
 description: This sample app demonstrates sending change notifications to user presence in Teams based on user presence status.
+urlFragment: teams-graph-change-notification-nodejs
 products:
 - office-teams
 - office
