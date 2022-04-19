@@ -1,0 +1,51 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build - All Samples
+
+on:
+  push:
+    #Change the branch name to <<main>>
+    #Change the path to the folder where your code resides. Any change here will start the activity. 
+    branches:
+      - v-abt/sample-health-build
+    paths:
+      - 'samples/app-installation-using-qr-code/csharp/**'  
+  workflow_dispatch:
+env:
+    #Change the webapp package path. This will contain the code to be published after build
+    #Change the project path to your project file path.
+    PROJECT_PATH_APP_INSTALLATION_USING_QR_CODE_CSHARP: 'samples/app-installation-using-qr-code/csharp/QRAppInstallation/QRAppInstallation.csproj'
+    PROJECT_PATH_MEETING_EVENTS_CSHARP: 'samples/meetings-events/csharp/MeetingEvents/MeetingEvents.csproj'
+jobs:
+  build-app-installation-using-qr-code-csharp:
+    name: Build app-installation-using-qr-code csharp
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '3.1.301'
+          include-prerelease: true
+
+      - name: Build app
+        run: dotnet build "${{ env.PROJECT_PATH_APP_INSTALLATION_USING_QR_CODE_CSHARP }}" --configuration Release
+
+  build-meeting-events-csharp:
+    name: Build meeting-events csharp
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '3.1.301'
+          include-prerelease: true
+
+      - name: Build app
+        run: dotnet build "${{ env.PROJECT_PATH_MEETING_EVENTS_CSHARP }}" --configuration Release
