@@ -13,13 +13,30 @@ createdDate: "09-03-2022 15:56:00"
 ---
 
 # In-Meeting Document Signing
-This proof of concept demonstrates the use case of sharing a document on Teams Share to Stage with live signing feature in a meeting.
+Meeting Signing Teams App is a custom Teams app that enables users to sign documents in real time during meetings so documents can be reviewed and signed in a single session. This app will let users electronically sign documents by certifying their identity. Many kind of documents like NDAs, Purchase Orders and Contracts can be signed during meetings where real time collaboration happens. This template can be used for multiple scenarios such as approve PRs, Purchase Orders, Document Changes 
+
+The app can be customized to incorporate other kind of signatures like manual signatures, Tax Offices Certified signatures among others. 
+
+## Personas: 
+
+This app has 3 main personas: 
+
+* Meeting organizer: this role will add the app and the documents to be reviewed and signed 
+* Signer: this role will be able to sign documents reviewed during the meeting 
+* Reader: this role will only be able to read the documents reviewed during the meeting 
+
+## Scenarios: 
+
+* Add documents to be reviewed during a meeting 
+* Share documents to be reviewed to main stage 
+* Sign documents using the signer’s identity
 
 ## Included Features
 * Teams SSO
 * Programmatic sharing of content to stage
 * Stage app view depends on the authentication of the user
 * Adaptive Cards
+* People Picker
 
 <!-- Include a video documenting the sharing to stage here. -->
 ![Video documenting the sharing to stage, including the choosing of a document from the sidepanel, and the signing of the document on the stage](/samples/meetings-share-to-stage-signing/csharp/Docs/Signing-Clip.gif)
