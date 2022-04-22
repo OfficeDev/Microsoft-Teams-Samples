@@ -1,4 +1,4 @@
-﻿﻿---
+---
 page_type: sample
 description: This sample demos a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer.
 products:
