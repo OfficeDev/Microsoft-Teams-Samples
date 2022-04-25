@@ -13,15 +13,15 @@ createdDate: "09-03-2022 15:56:00"
 ---
 
 # In-Meeting Document Signing
-Meeting Signing Teams App is a custom Teams app that enables users to sign documents in real time during meetings so documents can be reviewed and signed in a single session. This app will let users electronically sign documents by certifying their identity. Many kind of documents like NDAs, Purchase Orders and Contracts can be signed during meetings where real time collaboration happens. This template can be used for multiple scenarios such as approve PRs, Purchase Orders, Document Changes 
+Meeting Signing is a Teams sample app that demonstrates the scenario of enabling users to sign documents in real time during meetings making possible to review and sign documents in a single session. This sample will let users electronically sign documents by certifying their identity. Many kind of documents like NDAs, Purchase Orders and Contracts can be signed during meetings where real time collaboration happens. This template can be used for multiple scenarios such as approve PRs, Purchase Orders, Document Changes 
 
-The app can be customized to incorporate other kind of signatures like manual signatures, Tax Offices Certified signatures among others. 
+The sample app can be customized to incorporate other kind of signatures like manual signatures, Tax Offices Certified signatures among others. 
 
 ## Personas: 
 
-This app has 3 main personas: 
+This sample has 3 main personas: 
 
-* Meeting organizer: this role will add the app and the documents to be reviewed and signed 
+* Meeting organizer: this role can add the app to the meeting and the documents created to be reviewed and signed 
 * Signer: this role will be able to sign documents reviewed during the meeting 
 * Reader: this role will only be able to read the documents reviewed during the meeting 
 
