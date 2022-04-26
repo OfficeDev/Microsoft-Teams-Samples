@@ -12,7 +12,7 @@ contentType: samples
 createdDate: "27-04-2022 23:30:17"
 ---
 
-# Get Checkin info of user
+# Get Suggested actions from bot
 
 This sample shows feature where user can can send suggested actions using bot.
 
