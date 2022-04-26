@@ -1,9 +1,9 @@
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js"
         integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2"
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <meta charset="UTF-8">
     <style>
         #mainDiv {
             padding-left: 6%;
@@ -26,7 +26,7 @@
 
         .card {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            width: 40rem;
+            width: 52rem;
             min-height: 27rem;
             overflow: hidden;
             margin-left: 2rem;
@@ -45,12 +45,13 @@
         .signin-header,
         .configure-header {
             margin-left: 1rem;
+			margin-right: 1rem;
             margin-top: 1rem;
             padding-top: 0.5rem;
         }
 
         button {
-            margin: 2rem 8.5rem 0rem 14.5rem;
+            margin: 1rem 8.5rem 0rem 19.5rem;
         }
 
         #defaultSelected,
@@ -70,8 +71,13 @@
                 <div class="card">
                     <div class="signin-header"><b>People picker with members according to scope</b></div>
                     <div class="configure-header">To use this option, configure the function using following parameters
-                        microsoftTeams.people.selectPeople(callbackfunc, setSelected: null,
-                        openOrgWideSearchInChatOrChannel: false, singleSelect: false)</div>
+                        <pre>microsoftTeams.people.selectPeople(
+callbackfunc, 
+setSelected: null,
+openOrgWideSearchInChatOrChannel: false, 
+singleSelect: false)
+                       </pre>
+                    </div>
                     <Button data-id="default" onclick="selectPeople(event,null,false,false)"> Select </Button>
                     <div id="defaultSelected" class="label-text"></div>
                 </div>
@@ -80,8 +86,13 @@
                 <div class="card">
                     <div class="signin-header"><b>People picker with all members of the tenant</b></div>
                     <div class="configure-header">To use this option, configure the function using following parameters
-                        microsoftTeams.people.selectPeople(callbackfunc, setSelected: null,
-                        openOrgWideSearchInChatOrChannel: true, singleSelect: false)</div>
+                        <pre>microsoftTeams.people.selectPeople(
+callbackfunc, 
+setSelected: null,
+openOrgWideSearchInChatOrChannel: true, 
+singleSelect: false)
+						</pre>
+				    </div>
                     <Button data-id="allMemberOfOrganisation" onclick="selectPeople(event,null,true,false)"> Select
                     </Button>
                     <div id="allMemberOfOrganisationSelected" class="label-text"></div>
@@ -92,9 +103,14 @@
             <div>
                 <div class="card">
                     <div class="signin-header"><b>People picker with single member select.</b></div>
-                    <div class="configure-header"><b>To use this option, configure the function using following
-                            parameters microsoftTeams.people.selectPeople(callbackfunc, setSelected: null,
-                            openOrgWideSearchInChatOrChannel: false, singleSelect: true)</b></div>
+                    <div class="configure-header">To use this option, configure the function using following
+                            parameters <pre>microsoftTeams.people.selectPeople(
+callbackfunc, 
+setSelected: null,
+openOrgWideSearchInChatOrChannel: false, 
+singleSelect: true)
+                            </pre>
+                    </div>
                     <Button data-id="singleSelect" onclick="selectPeople(event,null,false,true)"> Select </Button>
                     <div id="singleSelected" class="label-text"></div>
                 </div>
@@ -102,9 +118,14 @@
             <div>
                 <div class="card">
                     <div class="signin-header"><b>People picker with defualt selected member</b></div>
-                    <div class="configure-header"><b>To use this option, configure the function using following
-                            parameters microsoftTeams.people.selectPeople(callbackfunc, setSelected: aad id,
-                            openOrgWideSearchInChatOrChannel: false, singleSelect: true)</b></div>
+                    <div class="configure-header">To use this option, configure the function using following
+                            parameters <pre>microsoftTeams.people.selectPeople(
+callbackfunc, 
+setSelected: aad id,
+openOrgWideSearchInChatOrChannel: false, 
+singleSelect: true)
+					     </pre>
+					</div>
                     <Button data-id="defaultSelect" onclick="selectPeople(event,'default',false,false)"> Select
                     </Button>
                     <div id="defaultMemberSelected" class="label-text"></div>
