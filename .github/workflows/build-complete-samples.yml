@@ -14,6 +14,7 @@ on:
     - cron: '12 21 * * *'  # every day at midnight
 env:
     DOTNET_3_1: '3.1.301'
+    NODE_14: '14.x'
     #Change the webapp package path. This will contain the code to be published after build
     #Change the project path to your project file path.
     PROJECT_PATH_APP_INSTALLATION_USING_QR_CODE_CSHARP: 'samples/app-installation-using-qr-code/csharp/QRAppInstallation/QRAppInstallation.csproj'
@@ -50,3 +51,20 @@ jobs:
 
       - name: Build app
         run: dotnet build "${{ env.PROJECT_PATH_MEETING_EVENTS_CSHARP }}" --configuration Release
+
+  build-app-complete-sample:
+    name: Build app-complete-sample nodejs
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: "${{ env.NODE_14 }}"
+
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run build --if-present
