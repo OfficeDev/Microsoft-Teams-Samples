@@ -19,6 +19,7 @@ env:
     #Change the project path to your project file path.
     PROJECT_PATH_APP_INSTALLATION_USING_QR_CODE_CSHARP: 'samples/app-installation-using-qr-code/csharp/QRAppInstallation/QRAppInstallation.csproj'
     PROJECT_PATH_MEETING_EVENTS_CSHARP: 'samples/meetings-events/csharp/MeetingEvents/MeetingEvents.csproj'
+    PROJECT_PATH_APP_COMPLETE_SAMPLE: 'samples/app-complete-sample/nodejs'
 jobs:
   build-app-installation-using-qr-code-csharp:
     name: Build app-installation-using-qr-code csharp
@@ -55,6 +56,9 @@ jobs:
   build-app-complete-sample:
     name: Build app-complete-sample nodejs
     runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ${{ env.PROJECT_PATH_APP_COMPLETE_SAMPLE }}
 
     steps:
       - uses: actions/checkout@v2
