@@ -15,6 +15,7 @@ on:
 env:
     DOTNET_3_1: '3.1.301'
     NODE_14: '14.x'
+
     #Change the webapp package path. This will contain the code to be published after build
     #Change the project path to your project file path.
     PROJECT_PATH_APP_INSTALLATION_USING_QR_CODE_CSHARP: 'samples/app-installation-using-qr-code/csharp/QRAppInstallation/QRAppInstallation.csproj'
