@@ -15,7 +15,7 @@ createdDate: "27-04-2022 23:30:17"
 
 This sample shows feature where user can can send suggested actions using bot.
 
-![Initial message](Images/WelcomeMessage.png)
+![Initial message](Images/WelcomeMessage.PNG)
 
 ## Prerequisites
 
@@ -43,7 +43,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/app-checkin-location/nodejs`
+2) In a terminal, navigate to `samples/bot-suggested-actions/nodejs`
 
 3) Install modules
 
@@ -70,5 +70,5 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 
 ## Features of this sample
 
-![Initial Message](SuggestedActions/Images/WelcomeCard.png)
+![Initial Message](Images/WelcomeMessage.PNG)
 
