@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Demonstrating feature where user can checkin with current location and view all previous checkins.
+description: Demonstrating feature where user can send suggested actions using bot.
 products:
 - office-teams
 - office
@@ -9,22 +9,14 @@ languages:
 - csharp
 extensions:
 contentType: samples
-createdDate: "11-11-2021 23:30:17"
+createdDate: "27-04-2022 23:30:17"
 ---
 
 # Get Checkin info of user
 
-This sample shows feature where user can checkin with current location and view all previous checkins.
+This sample shows feature where user can can send suggested actions using bot.
 
-`Currently, Microsoft Teams support for get geolocation capability is only available for mobile clients`
-
-![Check in card](AppCheckinLocation/Images/CheckinCard.png)
-
-![Geo Location](AppCheckinLocation/Images/GeoLocation.png)
-
-![User details card](AppCheckinLocation/Images/UserDetailsCard.png)
-
-![User last checkin card](AppCheckinLocation/Images/UserLastCheckInCard.png)
+![Initial message](SuggestedActions/Images/WelcomeMessage.png)
 
 ## Prerequisites
 
@@ -54,11 +46,11 @@ This sample shows feature where user can checkin with current location and view 
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
    
-3) In a terminal, navigate to `samples/app-checkin-location/csharp`
+3) In a terminal, navigate to `samples/bot-suggested-actions/csharp`
 
     change into project folder
     ```bash
-    cd # AppCheckinLocation
+    cd # SuggestedActions
     ```
     
 4) Run ngrok - point to port 3978
@@ -74,9 +66,8 @@ This sample shows feature where user can checkin with current location and view 
 6) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 9.
 
 7) Modify the `/appsettings.json` and fill in the following details:
-  - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
-  - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
-  - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+  - `{{MicrosoftAppId}}` - Generated from Step 1 is the application app id
+  - `{{MicrosoftAppPassword}}` - Generated from Step 1, also referred to as Client secret
 
   
 8) Run the bot from a terminal or from Visual Studio, choose option A or B.
@@ -90,8 +81,8 @@ This sample shows feature where user can checkin with current location and view 
    B) Or from Visual Studio
      - Launch Visual Studio
      - File -> Open -> Project/Solution
-     - Navigate to `AppCheckinLocation` folder
-     - Select `AppCheckinLocation.csproj` file
+     - Navigate to `SuggestedActions` folder
+     - Select `SuggestedActionsBot.csproj` file
      - Press `F5` to run the project 
 
 9) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
@@ -102,21 +93,7 @@ This sample shows feature where user can checkin with current location and view 
 
 ## Features of this sample
 
-- Card with actions `check in`. 
-
-![Check in card](AppCheckinLocation/Images/CheckinCard.png)
-
-- `Geo Location` of user.
-
-![Geo Location](AppCheckinLocation/Images/GeoLocation.png)
-
-- User details.
-
-![User details card](AppCheckinLocation/Images/UserDetailsCard.png)
-
-- `viewcheckindetails` of user.
-
-![User last checkin card](AppCheckinLocation/Images/UserLastCheckInCard.png)
+![Initial Message](SuggestedActions/Images/WelcomeCard.png)
 
 ## Deploy the bot to Azure
 
