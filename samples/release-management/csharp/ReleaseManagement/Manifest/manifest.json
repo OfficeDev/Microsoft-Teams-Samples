@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.1",
+  "id": "<<Microsoft-App=Id>>",
+  "packageName": "com.microsoft.teams.devapp",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.teams.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Release Management",
+    "full": "Release Management"
+  },
+  "description": {
+    "short": "TODO",
+    "full": "TODO"
+  },
+  "accentColor": "#235EA5",
+  "bots": [
+    {
+      "botId": "<<Microsoft-App=Id>>",
+      "scopes": [ "groupchat" ],
+      "isNotificationOnly": true
+    }
+  ],
+  "validDomains": [
+    "*.ngrok.io"
+  ],
+  "permissions": [ "messageTeamMembers" ]
+}
