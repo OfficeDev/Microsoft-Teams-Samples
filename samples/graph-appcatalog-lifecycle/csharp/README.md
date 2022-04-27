@@ -90,7 +90,7 @@ We recommend that you copy these values into a text file, using an application l
 -    AppCatalog.ReadWrite.All
 -  AppCatalog.Submit
 
-Click on �Add Permissions� to commit your changes.
+Click on Add Permissions to commit your changes.
 
 16.  If you are logged in as the Global Administrator, click on the �Grant admin consent for %tenant-name%� button to grant admin consent else, inform your admin to do the same through the portal or follow the steps provided here to create a link and send it to your admin for consent.
     
@@ -139,7 +139,7 @@ Click on �Add Permissions� to commit your changes.
 ## Concepts introduced in this sample
 - List apps in catalog
 
-![](AppCatalogSample/Images/1.PNG)
+![](AppCatalogSample/Images/BotAction.PNG)
 - Publish app to catalog
 ![image](https://user-images.githubusercontent.com/50989436/118778589-e2db3c80-b8a7-11eb-8159-a7880be1925e.png)
 - Update app in catalog

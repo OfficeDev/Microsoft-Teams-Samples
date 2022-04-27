@@ -214,7 +214,6 @@ Messaging Extention Authentication
     Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
    - `{{Microsoft-App-Id}}` with Application id generated from Step 3
    - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
-   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
     > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
