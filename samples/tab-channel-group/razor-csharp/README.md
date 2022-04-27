@@ -32,4 +32,4 @@ In this quickstart we'll walk-through creating a custom channel/group tab with C
 
 For complete instructions on running this sample see:
 
-[Create a Custom Channel and Group Tab with ASP.NET Core](https://docs.microsoft.com/microsoftteams/platform/tabs/quickstarts/create-channel-group-tab-dotnet-core)
+[Create a Custom Channel and Group Tab with ASP.NET Core](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=razor-csharp)
