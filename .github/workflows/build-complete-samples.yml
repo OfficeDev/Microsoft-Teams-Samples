@@ -18,26 +18,39 @@ env:
 
     #Change the webapp package path. This will contain the code to be published after build
     #Change the project path to your project file path.
-    PROJECT_PATH_APP_INSTALLATION_USING_QR_CODE_CSHARP: 'samples/app-installation-using-qr-code/csharp/QRAppInstallation/QRAppInstallation.csproj'
     PROJECT_PATH_MEETING_EVENTS_CSHARP: 'samples/meetings-events/csharp/MeetingEvents/MeetingEvents.csproj'
-    PROJECT_PATH_APP_COMPLETE_SAMPLE: 'samples/app-complete-sample/nodejs'
+
+    PROJECT_PATH_APP_AUTH_NODEJS: 'samples/app-auth/nodejs'
+
+    PROJECT_PATH_APP_CHECKIN_LOCATION_CSHARP: 'samples/app-checkin-location/csharp/AppCheckinLocation/AppCheckinLocation.csproj'
+    PROJECT_PATH_APP_CHECKIN_LOCATION_NODEJS: 'samples/app-checkin-location/nodejs'
+
+    PROJECT_PATH_APP_COMPLETE_AUTH_CSHARP: 'samples/app-complete-auth/csharp/AppCompleteAuth/AppCompleteAuth.csproj'
+    PROJECT_PATH_APP_COMPLETE_AUTH_NODEJS: 'samples/app-complete-auth/nodejs'
+
+    PROJECT_PATH_APP_COMPLETE_SAMPLE_CSHARP: 'samples/app-complete-sample/csharp/template-bot-master-csharp/template-bot-master-csharp.csproj'
+    PROJECT_PATH_APP_COMPLETE_SAMPLE_NODEJS: 'samples/app-complete-sample/nodejs'
+
+    PROJECT_PATH_APP_HELLO_WORLD_CSHARP: 'samples/app-hello-world/csharp/Microsoft.Teams.Samples.HelloWorld.Web/Microsoft.Teams.Samples.HelloWorld.Web.csproj'
+    PROJECT_PATH_APP_HELLO_WORLD_NODEJS: 'samples/app-hello-world/nodejs'
+
+    PROJECT_PATH_APP_INSTALLATION_USING_QR_CODE_CSHARP: 'samples/app-installation-using-qr-code/csharp/QRAppInstallation/QRAppInstallation.csproj'
+    PROJECT_PATH_APP_INSTALLATION_USING_QR_CODE_NODEJS: 'samples/app-installation-using-qr-code/nodejs'
+
+    PROJECT_PATH_APP_LOCALIZATION_CSHARP: 'samples/app-localization/csharp/Localization/Localization.csproj'
+    PROJECT_PATH_APP_LOCALIZATION_NODEJS: 'samples/app-localization/nodejs'
+
+    PROJECT_PATH_APP_REGION_SELECTION_CSHARP: 'samples/app-region-selection/csharp/RegionSectionApp/RegionSectionApp.csproj'
+
+    PROJECT_PATH_APP_SSO_CSHARP: 'samples/app-sso/csharp/App SSO Sample/App SSO Sample.csproj'
+    PROJECT_PATH_APP_SSO_NODEJS: 'samples/app-sso/nodejs'
+
+    PROJECT_PATH_APP_TASK_MODULE_CSHARP: 'samples/app-task-module/csharp/Microsoft.Teams.Samples.TaskModule.Web/Microsoft.Teams.Samples.TaskModule.Web.csproj'
+    PROJECT_PATH_APP_TASK_MODULE_NODEJS: 'samples/app-task-module/nodejs'
+
+    PROJECT_PATH_APP_VIRTUAL_ASSISTANT_CSHARP: 'samples/app-virtual-assistant/csharp/TeamsVirtualAssistant.csproj'
+
 jobs:
-  build-app-installation-using-qr-code-csharp:
-    name: Build app-installation-using-qr-code csharp
-    runs-on: windows-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up .NET Core
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: "${{ env.DOTNET_3_1 }}"
-          include-prerelease: true
-
-      - name: Build app
-        run: dotnet build "${{ env.PROJECT_PATH_APP_INSTALLATION_USING_QR_CODE_CSHARP }}" --configuration Release
-
   build-meeting-events-csharp:
     name: Build meeting-events csharp
     runs-on: windows-latest
@@ -54,12 +67,12 @@ jobs:
       - name: Build app
         run: dotnet build "${{ env.PROJECT_PATH_MEETING_EVENTS_CSHARP }}" --configuration Release
 
-  build-app-complete-sample:
-    name: Build app-complete-sample nodejs
+  build-app-auth-nodejs:
+    name: Build app-auth-nodejs nodejs
     runs-on: windows-latest
     defaults:
       run:
-        working-directory: ${{ env.PROJECT_PATH_APP_COMPLETE_SAMPLE }}
+        working-directory: ${{ env.PROJECT_PATH_APP_AUTH_NODEJS }}
 
     steps:
       - uses: actions/checkout@v2
@@ -73,3 +86,287 @@ jobs:
         run: |
           npm install
           npm run build --if-present
+
+  build-app-complete-sample-csharp:
+    name: Build app-complete-sample csharp
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "${{ env.DOTNET_3_1 }}"
+          include-prerelease: true
+
+      - name: Build app
+        run: dotnet build "${{ env.PROJECT_PATH_APP_COMPLETE_SAMPLE_CSHARP }}" --configuration Release
+
+  build-app-complete-sample:
+    name: Build app-complete-sample nodejs
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ${{ env.PROJECT_PATH_APP_COMPLETE_SAMPLE_NODEJS }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: "${{ env.NODE_14 }}"
+
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run build --if-present
+
+  build-app-complete-auth-csharp:
+    name: Build app-complete-auth csharp
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "${{ env.DOTNET_3_1 }}"
+          include-prerelease: true
+
+      - name: Build app
+        run: dotnet build "${{ env.PROJECT_PATH_APP_COMPLETE_AUTH_CSHARP }}" --configuration Release
+
+  build-app-complete-auth-nodejs:
+    name: Build app-complete-auth nodejs
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ${{ env.PROJECT_PATH_APP_COMPLETE_AUTH_NODEJS }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: "${{ env.NODE_14 }}"
+
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run build --if-present
+
+  build-app-hello-world-csharp:
+    name: Build app-hello-world csharp
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "${{ env.DOTNET_3_1 }}"
+          include-prerelease: true
+
+      - name: Build app
+        run: dotnet build "${{ env.PROJECT_PATH_APP_HELLO_WORLD_CSHARP }}" --configuration Release
+
+  build-app-hello-world-nodejs:
+    name: Build app-hello-world nodejs
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ${{ env.PROJECT_PATH_APP_HELLO_WORLD_NODEJS }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: "${{ env.NODE_14 }}"
+
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run build --if-present
+
+  build-app-installation-using-qr-code-csharp:
+    name: Build app-installation-using-qr-code csharp
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "${{ env.DOTNET_3_1 }}"
+          include-prerelease: true
+
+      - name: Build app
+        run: dotnet build "${{ env.PROJECT_PATH_APP_INSTALLATION_USING_QR_CODE_CSHARP }}" --configuration Release
+
+  build-app-installation-using-qr-code-nodejs:
+    name: Build app-installation-using-qr-code nodejs
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ${{ env.PROJECT_PATH_APP_INSTALLATION_USING_QR_CODE_NODEJS }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: "${{ env.NODE_14 }}"
+
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run build --if-present
+
+  build-app-localization-csharp:
+    name: Build app-localization csharp
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "${{ env.DOTNET_3_1 }}"
+          include-prerelease: true
+
+      - name: Build app
+        run: dotnet build "${{ env.PROJECT_PATH_APP_LOCALIZATION_CSHARP }}" --configuration Release
+
+  build-app-localization-nodejs:
+    name: Build app-localization nodejs
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ${{ env.PROJECT_PATH_APP_LOCALIZATION_NODEJS }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: "${{ env.NODE_14 }}"
+
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run build --if-present
+
+  build-app-region-selection-csharp:
+    name: Build app-region-selection csharp
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "${{ env.DOTNET_3_1 }}"
+          include-prerelease: true
+
+      - name: Build app
+        run: dotnet build "${{ env.PROJECT_PATH_APP_REGION_SELECTION_CSHARP }}" --configuration Release
+
+  build-app-sso-csharp:
+    name: Build app-sso csharp
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "${{ env.DOTNET_3_1 }}"
+          include-prerelease: true
+
+      - name: Build app
+        run: dotnet build "${{ env.PROJECT_PATH_APP_SSO_CSHARP }}" --configuration Release
+
+  build-app-sso-nodejs:
+    name: Build app-sso nodejs
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ${{ env.PROJECT_PATH_APP_SSO_NODEJS }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: "${{ env.NODE_14 }}"
+
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run build --if-present
+
+  build-app-task-module-csharp:
+    name: Build app-task-module csharp
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "${{ env.DOTNET_3_1 }}"
+          include-prerelease: true
+
+      - name: Build app
+        run: dotnet build "${{ env.PROJECT_PATH_APP_TASK_MODULE_CSHARP }}" --configuration Release
+
+  build-app-task-module-nodejs:
+    name: Build app-task-module nodejs
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ${{ env.PROJECT_PATH_APP_TASK_MODULE_NODEJS }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: "${{ env.NODE_14 }}"
+
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run build --if-present
+
+  build-app-virtual-assistant-csharp:
+    name: Build app-virtual-assistant csharp
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "${{ env.DOTNET_3_1 }}"
+          include-prerelease: true
+
+      - name: Build app
+        run: dotnet build "${{ env.PROJECT_PATH_APP_VIRTUAL_ASSISTANT_CSHARP }}" --configuration Release
