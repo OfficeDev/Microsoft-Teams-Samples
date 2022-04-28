@@ -39,6 +39,7 @@ This is a sample application which demonstarates how to create a webhook on [Azu
 ### 1. Start ngrok on localhost:3978
 - Open ngrok and run command `ngrok http -host-header=rewrite 3978` 
 - Once started you should see URL  `https://41ed-abcd-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
+
 ![Ngrok](Images/NgrokScreenshot.PNG)
 
 ### 2. Setup Azure DevOps service hook.
@@ -49,6 +50,7 @@ This is a sample application which demonstarates how to create a webhook on [Azu
 ### 3. Setup custom work item type.
 - Follow the doc to [Add a custom field to an inherited process - Azure DevOps Services](https://docs.microsoft.com/en-us/azure/devops/organizations/settings/work/add-custom-field?view=azure-devops). 
 - Make sure to give name as *StakeholderTeam* and Type *Text (Single line)*
+
 ![Custom field](Images/CustomField.PNG)
 - Make sure to [Apply the customized process to your project](https://docs.microsoft.com/en-us/azure/devops/organizations/settings/work/add-custom-field?view=azure-devops#apply-the-customized-process-to-your-project)
 - Go to *Options* and check *Required* and Add.
@@ -105,8 +107,10 @@ Click on Add Permissions to commit your changes.
 - Zip up the contents of the `/appPackage` folder to create a `manifest.zip`
 - Login to [Teams Admin portal](https://admin.teams.microsoft.com) 
 - Under *Teams apps*, select *Manage apps* and then click on *+ Upload* to upload the zip created.
+
 ![Teams Admin Manage apps](Images/ManageApps.PNG)
 - Once uploaded search the application and under About copy *App ID*. We will need it in next step.
+
 ![App Id](Images/AppId.PNG)
 
 ### 7. Run your bot sample
