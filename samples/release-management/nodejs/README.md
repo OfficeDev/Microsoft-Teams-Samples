@@ -19,7 +19,7 @@ This is a sample application which demonstarates how to create a webhook on [Azu
 
 ## Key features
 
-![Workitem card](Images/WorkItemCard.png)
+![Workitem card](Images/WorkItemCard.PNG)
 
 
 ## Prerequisites
