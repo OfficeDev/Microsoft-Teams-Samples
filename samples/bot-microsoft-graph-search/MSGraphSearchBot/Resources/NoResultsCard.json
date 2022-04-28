@@ -1,0 +1,15 @@
+{
+  "type": "AdaptiveCard",
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.3",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Sorry! I couldn't find any results.",
+      "wrap": true,
+      "size": "Default",
+      "weight": "Bolder",
+      "spacing": "Large"
+    }
+  ]
+}

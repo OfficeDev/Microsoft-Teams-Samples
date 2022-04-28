@@ -1,0 +1,73 @@
+{
+  "type": "Container",
+  "selectAction": {
+    "type": "Action.OpenUrl",
+    "title": "${Name}",
+    "url": "${WebLink}"
+  },
+  "items": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAACHklEQVQ4ja3S708ScRwHcPoj+lfqeX8AY3NsbWI5/HHcKeLqSV0Cmmy0sNRyONKatpZsDMEeeLdB9SQeuOEANzvMB5VZccel94NGjNqn+9xiioPjaH6393a7+7xf970fFsu/ZbfbL7rd7jltuWianvJ4PI/MBDvYtZxdNpvtUiwWU+v1OkiSBKVSyVSi0ahqtVovtwQZhpE5joNwOGwqOMuyrGwIQperI3huO+zr6RliNjcVURQhn8+bCs6yDKNg97R1geztnZkmCEnboSIIAmQyGVPBWQ1UAwShjDocD9CyDA/2+6coQi7OhADBVo+cy+Xav0MN5EIhQGNooG/SQo06IxvMQm2cGpAT63G124+STCTUcZfzOMk8rpKUM6KDe1824PCIhcizQDm8OC9Wq9WOUK1Wg5XV5fLsgk88EBlAownkK2k92d213xP+G8L2dratWtgp/Jrw3RS2Ci/qjV5bEFNS07AWf3gUvHdXlOWTX7NSqcDc/P3y0+fBH9+VVFPHEMRwnxLgvUUIQf+Y8CbNqm9fp34GfGO8lyYEvHZ23hDkPifBe9tVVvaX4c/hKqTi0yoGj/Ec3ghnTIHFg6RekPaWdKxVEPXRLuH9x3VjcP/rK22Q5I2w0+jkHZLHDbQEG9hx8UlHrHmnBI/9JjC7G+0aa0T+sKR3t3ZenoAj5HWZezcL3wqL/xXsjpDXFB0c7L96hRp2rJxH0PoL+FluOuuPsYAAAAAASUVORK5CYII=",
+                      "horizontalAlignment": "Left",
+                      "spacing": "None"
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "${Subject}",
+                      "height": "stretch",
+                      "size": "Large",
+                      "weight": "Bolder",
+                      "color": "Accent",
+                      "fontType": "Default",
+                      "spacing": "None"
+                    }
+                  ],
+                  "horizontalAlignment": "Left",
+                  "spacing": "Small"
+                }
+              ]
+            }
+          ],
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "**From:** ${From}",
+      "wrap": true,
+      "spacing": "None"
+    },
+    {
+      "type": "TextBlock",
+      "text": "**Created:** ${CreatedDatedTime}",
+      "spacing": "None"
+    },
+    {
+      "type": "TextBlock",
+      "wrap": true,
+      "text": "**Has attachments:** ${HasAttachments}",
+      "spacing": "None"
+    }
+  ]
+}

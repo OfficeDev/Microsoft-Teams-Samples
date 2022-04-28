@@ -1,0 +1,11 @@
+{
+  "type": "Container",
+  "items": [
+    {
+      "type": "TextBlock",
+      "size": "Large",
+      "weight": "Bolder",
+      "text": "I found ${Total} results:"
+    }
+  ]
+}

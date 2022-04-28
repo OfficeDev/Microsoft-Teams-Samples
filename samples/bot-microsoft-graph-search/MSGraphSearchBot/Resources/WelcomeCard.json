@@ -1,0 +1,111 @@
+{
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "Container",
+      "id": "welcomeScreen",
+      "items": [
+        {
+          "type": "TextBlock",
+          "size": "Medium",
+          "weight": "Bolder",
+          "text": "Hi ${GivenName}, I'm the Microsoft Graph Search bot"
+        },
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Here are some of the things I can do:",
+              "wrap": true,
+              "spacing": "Medium"
+            }
+          ]
+        },
+        {
+          "type": "TextBlock",
+          "wrap": true,
+          "text": "* Search Outlook messages\n* Search calendar events\n* Search SharePoint list items\n* Search OneDrive files"
+        },
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Ready to get started? Choose an option below!",
+              "wrap": true,
+              "spacing": "Medium"
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    {
+                      "type": "ActionSet",
+                      "actions": [
+                        {
+                          "type": "Action.Submit",
+                          "title": "Messages",
+                          "data": {
+                            "msteams": {
+                              "type": "messageBack",
+                              "text": "Messages",
+                              "value": "Messages"
+                            }
+                          }
+                        },
+                        {
+                          "type": "Action.Submit",
+                          "title": "Events",
+                          "data": {
+                            "msteams": {
+                              "type": "messageBack",
+                              "text": "Events",
+                              "value": "Events"
+                            }
+                          }
+                        },
+                        {
+                          "type": "Action.Submit",
+                          "title": "List Items",
+                          "data": {
+                            "msteams": {
+                              "type": "messageBack",
+                              "text": "ListItems",
+                              "value": "ListItems"
+                            }
+                          }
+                        },
+                        {
+                          "type": "Action.Submit",
+                          "title": "Files",
+                          "data": {
+                            "msteams": {
+                              "type": "messageBack",
+                              "text": "Files",
+                              "value": "Files"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.3"
+}

@@ -1,0 +1,67 @@
+{
+  "type": "Container",
+  "selectAction": {
+    "type": "Action.OpenUrl",
+    "title": "${Name}",
+    "url": "${WebUrl}"
+  },
+  "items": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "Image",
+                  "url": "${Icon}",
+                  "horizontalAlignment": "Left",
+                  "spacing": "None"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "${Name}",
+                  "height": "stretch",
+                  "size": "Large",
+                  "weight": "Bolder",
+                  "color": "Accent",
+                  "fontType": "Default",
+                  "spacing": "None"
+                }
+              ],
+              "horizontalAlignment": "Left",
+              "spacing": "Small"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "**Created:** ${CreatedDateTime}",
+      "wrap": true,
+      "spacing": "None"
+    },
+    {
+      "type": "TextBlock",
+      "text": "**Created By:** ${CreatedBy}",
+      "spacing": "None"
+    },
+    {
+      "type": "TextBlock",
+      "wrap": true,
+      "text": "**Size:** ${Size}",
+      "spacing": "None"
+    }
+  ]
+}

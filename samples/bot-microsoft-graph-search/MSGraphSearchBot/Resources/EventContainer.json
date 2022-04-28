@@ -1,0 +1,64 @@
+{
+  "type": "Container",
+  "items": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "Image",
+                  "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAACxMAAAsTAQCanBgAAAFCSURBVEhLYxgFFAG3ld/uua74xg/lYgWE1DBCaTBwW/ndEygyC8iUgYiQDB4DcfquMM7tEC4acFv1/dGhp3//v/j+H4yjt/z4f/8zhI0LI6sB6QWZATUODJigNAzIqgkhhHqd2Rk4WaAcHABZDVSvLJgDBegWUB2gxsGq7/+hTIoAMA5QzIUDaliAbgbOEHZd+c2YkZHBA8jcsSuM66z72i9s//8ypYDkWBj+zdkWxvMLXQ1IDh3gjANGRkZgUmMEpm/GbSA+xHDGKCCO/v0fYhG6GmyA1EiGhS3RQYnHgv9Ar///yPD/vyeIBwoWIH/p////l7Ay/psLVoKmBhvAacH//1DXMkLov8xgHjBYECkPXQ02MBoHBOMABYAKKmDxawPlkgxAetELO5TIAUqCXDITiFEKLBIA/uJ6FAwAYGAAAFfIvbvvP401AAAAAElFTkSuQmCC",
+                  "horizontalAlignment": "Left",
+                  "spacing": "None",
+                  "style": "Person"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "${Subject}",
+                  "height": "stretch",
+                  "size": "Large",
+                  "weight": "Bolder",
+                  "color": "Accent",
+                  "fontType": "Default",
+                  "spacing": "None"
+                }
+              ],
+              "horizontalAlignment": "Left",
+              "spacing": "Small"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "**Start:** ${Start}",
+      "wrap": true,
+      "spacing": "None"
+    },
+    {
+      "type": "TextBlock",
+      "text": "**End:** ${End}",
+      "wrap": true,
+      "spacing": "None"
+    },
+    {
+      "type": "TextBlock",
+      "wrap": true,
+      "text": "**Is all day event:** ${IsAllDay}",
+      "spacing": "None"
+    }
+  ]
+}
