@@ -1,4 +1,4 @@
-﻿---
+---
 page_type: sample
 description: This is a sample app with capability to send notfication when user creates workitem in [Azure DevOps](https://dev.azure.com) via webhooks.
 products:
@@ -18,7 +18,7 @@ This is a sample application which demonstarates how to create a webhook on [Azu
 
 ## Key features
 
-![Workitem card](ReleaseManagement/ReleaseManagement/Images/WorkItemCard.PNG)
+![Workitem card](ReleaseManagement/Images/WorkItemCard.png)
 
 
 ## Prerequisites
@@ -39,7 +39,7 @@ This is a sample application which demonstarates how to create a webhook on [Azu
 - Open ngrok and run command `ngrok http -host-header=rewrite 3978` 
 - Once started you should see URL  `https://41ed-abcd-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
 
-![Ngrok](ReleaseManagement/Images/NgrokScreenshot.PNG)
+![Ngrok](ReleaseManagement/Images/NgrokScreenshot.png)
 
 ### 2. Setup Azure DevOps service hook.
 - Follow this document- [Create Webhooks](https://docs.microsoft.com/en-us/azure/devops/service-hooks/services/webhooks?view=azure-devops) to service hook. 
@@ -50,7 +50,7 @@ This is a sample application which demonstarates how to create a webhook on [Azu
 - Follow the doc to [Add a custom field to an inherited process - Azure DevOps Services](https://docs.microsoft.com/en-us/azure/devops/organizations/settings/work/add-custom-field?view=azure-devops). 
 - Make sure to give name as *StakeholderTeam* and Type *Text (Single line)*
 
-![Custom field](ReleaseManagement/Images/CustomField.PNG)
+![Custom field](ReleaseManagement/Images/CustomField.png)
 - Make sure to [Apply the customized process to your project](https://docs.microsoft.com/en-us/azure/devops/organizations/settings/work/add-custom-field?view=azure-devops#apply-the-customized-process-to-your-project)
 - Go to *Options* and check *Required* and Add.
 
@@ -107,10 +107,10 @@ Click on Add Permissions to commit your changes.
 - Login to [Teams Admin portal](https://admin.teams.microsoft.com) 
 - Under *Teams apps*, select *Manage apps* and then click on *+ Upload* to upload the zip created.
 
-![Teams Admin Manage apps](ReleaseManagement/Images/ManageApps.PNG)
+![Teams Admin Manage apps](ReleaseManagement/Images/ManageApps.png)
 - Once uploaded search the application and under About copy *App ID*. We will need it in next step.
 
-![App Id](ReleaseManagement/Images/AppId.PNG)
+![App Id](ReleaseManagement/Images/AppId.png)
 
 ### 7. To try this sample
 
