@@ -13,7 +13,7 @@ contentType: samples
 createdDate: "28-04-2022 00:15:15"
 ---
 
-# Bot with SharePoint file to view in Teams file viewer
+# Bot to created group chat and send task notfication using Azure webhooks.
 
 This is a sample application which demonstarates how to create a webhook on [Azure DevOps](https://dev.azure.com) and connect with Teams bot that creates a group chat and send workitems details.
 
