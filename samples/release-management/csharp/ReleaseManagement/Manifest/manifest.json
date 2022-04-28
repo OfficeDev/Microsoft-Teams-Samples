@@ -1,8 +1,8 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
   "manifestVersion": "1.12",
-  "version": "1.0.1",
-  "id": "<<Microsoft-App=Id>>",
+  "version": "1.0.0",
+  "id": "<<Microsoft-App-Id>>",
   "packageName": "com.microsoft.teams.devapp",
   "developer": {
     "name": "Microsoft",
@@ -25,7 +25,7 @@
   "accentColor": "#235EA5",
   "bots": [
     {
-      "botId": "<<Microsoft-App=Id>>",
+      "botId": "<<Microsoft-App-Id>>",
       "scopes": [ "groupchat" ],
       "isNotificationOnly": true
     }

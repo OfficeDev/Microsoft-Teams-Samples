@@ -13,6 +13,7 @@ using ReleaseManagement;
 using ReleaseManagement.Bots;
 using ReleaseManagement.Models;
 using ReleaseManagement.Models.Configuration;
+using ReleaseManagement.Services;
 using System.Collections.Concurrent;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,10 @@ builder.Services.AddOptions<AzureSettings>()
     botOptions.MicrosoftAppTenantId = configuration.GetValue<string>("MicrosoftAppTenantId");
     botOptions.AppExternalId = configuration.GetValue<string>("AppExternalId");
 });
+
+// Creates Singleton Card Factory.
+builder.Services.AddSingleton<ICardFactory, CardFactory>();
+
 // Create a global hashset for our save task details
 builder.Services.AddSingleton<ConcurrentDictionary<string, ReleaseManagementTask>>();
 

@@ -2,10 +2,10 @@
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
-using System.Collections.Generic;
-
 namespace ReleaseManagement.Models
 {
+    using System.Collections.Generic;
+
     public class ReleaseManagementTask
     {
         /// <summary>
@@ -24,13 +24,28 @@ namespace ReleaseManagement.Models
         public string AssignedToName { get; set; }
 
         /// <summary>
-        /// Gets or sets stakeholder team members mail.
+        /// Gets or sets comma seperated stakeholder team members mail.
         /// </summary>
-        public IEnumerable<string> StakeholderTeam { get; set; }
+        public string StakeholderTeam { get; set; }
 
         /// <summary>
         /// Gets or sets state of task.
         /// </summary>
         public string State { get; set; }
+
+        /// <summary>
+        /// Gets or sets name of workitem creator.
+        /// </summary>
+        public string CreatedByName { get; set; }
+
+        /// <summary>
+        /// Gets or sets list of group member.
+        /// </summary>
+        public IEnumerable<string> GroupChatMembers { get; set; }
+
+        /// <summary>
+        /// Gets or sets state of workitem url.
+        /// </summary>
+        public string WorkitemUrl { get; set; }
     }
 }

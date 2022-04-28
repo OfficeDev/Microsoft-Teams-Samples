@@ -2,12 +2,13 @@
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
-using ReleaseManagement.Models;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-
 namespace ReleaseManagement.Helpers
 {
+    using ReleaseManagement.Models;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+
     public class DevOpsHelper
     {
         /// <summary>
@@ -18,12 +19,12 @@ namespace ReleaseManagement.Helpers
         public static ReleaseManagementTask MapToReleaseManagementTask (WorkItem workItem)
         {
             var isAssignedToPresent = workItem.Resource.Fields.TryGetValue(Constant.AssignedTo, out string assignedToString);
-            var emailList = new List<string>(workItem.Resource.Fields[Constant.StakeHolderTeamKey].Split(','));
-            emailList.Add(GetEmailOrName(workItem.Resource.Fields[Constant.CreatedByKey], false));
+            IEnumerable<string> emailList = workItem.Resource.Fields[Constant.StakeHolderTeamKey].Split(',');
+            emailList = emailList.Append(GetEmailOrName(workItem.Resource.Fields[Constant.CreatedByKey], false));
 
             if (isAssignedToPresent)
             {
-                emailList.Add(GetEmailOrName(assignedToString, false));
+                emailList = emailList.Append(GetEmailOrName(assignedToString, false));
             }
 
             var validEmailList = ValidateMails(emailList);
@@ -32,9 +33,12 @@ namespace ReleaseManagement.Helpers
             {
                 AssignedToName = isAssignedToPresent ? GetEmailOrName(assignedToString, true) : "",
                 Id = workItem.Id,
-                StakeholderTeam  = validEmailList,
+                StakeholderTeam  = string.Join(", ", ValidateMails(workItem.Resource.Fields[Constant.StakeHolderTeamKey].Split(','))),
+                GroupChatMembers  = validEmailList,
                 State = workItem.Resource.Fields[Constant.StateKey],
                 TaskTitle = workItem.Resource.Fields[Constant.TaskTitleKey],
+                WorkitemUrl = (workItem.Resource._links["html"])["href"],
+                CreatedByName = GetEmailOrName(workItem.Resource.Fields[Constant.CreatedByKey], true)
             };
 
             return releaseManagementTask;
@@ -44,10 +48,10 @@ namespace ReleaseManagement.Helpers
         /// Validates mail list.
         /// </summary>
         /// <param name="emailList">List of mails to validate.</param>
-        /// <returns>List of valid mails.</returns>
-        private static List<string> ValidateMails (List<string> emailList)
+        /// <returns>Enumerable of valid mails.</returns>
+        private static IEnumerable<string> ValidateMails (IEnumerable<string> emailList)
         {
-            var validEmailList = new List<string>();
+            var validEmailList = Enumerable.Empty<string>();
             foreach (var email in emailList)
             {
                 Regex regex = new Regex(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$",
@@ -55,7 +59,7 @@ namespace ReleaseManagement.Helpers
                 bool isValidEmail = regex.IsMatch(email.Trim());
                 if (isValidEmail)
                 {
-                    validEmailList.Add(email.Trim());
+                    validEmailList = validEmailList.Append(email.Trim());
                 }
             }
 

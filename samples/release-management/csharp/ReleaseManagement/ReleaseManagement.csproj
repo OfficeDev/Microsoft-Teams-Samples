@@ -7,6 +7,8 @@
 
   <ItemGroup>
     <PackageReference Include="AdaptiveCards" Version="2.7.3" />
+    <PackageReference Include="AdaptiveCards.Templating" Version="1.2.2" />
+    <PackageReference Include="Azure.Identity" Version="1.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.4" />
     <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.16.0" />
     <PackageReference Include="Microsoft.Bot.Connector" Version="4.16.0" />

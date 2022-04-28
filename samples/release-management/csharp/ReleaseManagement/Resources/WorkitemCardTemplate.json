@@ -1,0 +1,51 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5",
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Welcome to the group chat for ${taskTitle}",
+      "weight": "bolder",
+      "size": "large",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "Task Details",
+      "weight": "Bolder"
+    },
+    {
+      "type": "FactSet",
+      "facts": [
+        {
+          "title": "Title:",
+          "value": "${TaskTitle}"
+        },
+        {
+          "title": "State:",
+          "value": "${State}"
+        },
+        {
+          "title": "Created by:",
+          "value": "${CreatedByName}"
+        },
+        {
+          "title": "Assigned to:",
+          "value": "${AssignedToName}"
+        },
+        {
+          "title": "Stakeholders:",
+          "value": "${StakeholderTeam}"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "View",
+      "url": "${WorkitemUrl}"
+    }
+  ]
+}

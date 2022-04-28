@@ -2,23 +2,26 @@
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
-using AdaptiveCards;
-using Microsoft.Bot.Builder;
-using Microsoft.Bot.Schema;
-using ReleaseManagement.Models;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-
 namespace ReleaseManagement.Bots
 {
+    using Microsoft.Bot.Builder;
+    using Microsoft.Bot.Schema;
+    using ReleaseManagement.Models;
+    using ReleaseManagement.Services;
+    using System.Collections.Concurrent;
+    using System.IO;
+    using System.Threading;
+    using System.Threading.Tasks;
+
     public class ActivityBot : ActivityHandler
     {
         private readonly ConcurrentDictionary<string, ReleaseManagementTask> taskDetails;
-        public ActivityBot (ConcurrentDictionary<string, ReleaseManagementTask> taskDetails)
+        private readonly ICardFactory cardFactory;
+
+        public ActivityBot (ConcurrentDictionary<string, ReleaseManagementTask> taskDetails, ICardFactory cardFactory)
         {
             this.taskDetails = taskDetails;
+            this.cardFactory = cardFactory;
         }
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
@@ -33,34 +36,7 @@ namespace ReleaseManagement.Bots
             // Checking if task details is present and if bot is installed.
             if (isPresent && turnContext.Activity.MembersAdded.Count > 0)
             {
-                var adaptiveCard = new AdaptiveCard(new AdaptiveSchemaVersion(1, 4))
-                {
-                    Body = new List<AdaptiveElement>
-                        {
-                            new AdaptiveTextBlock
-                            {
-                                Text = "New task created",
-                                Weight = AdaptiveTextWeight.Bolder
-                            },
-                            new AdaptiveTextBlock
-                            {
-                                Text = $"{releaseManagementTask.TaskTitle}"
-                            },
-                            new AdaptiveTextBlock
-                            {
-                                Text = $"Assigned to- {releaseManagementTask.AssignedToName}"
-                            },
-                            new AdaptiveTextBlock
-                            {
-                                Text = $"State- {releaseManagementTask.State}"
-                            },
-                        }
-                };
-                var adaptiveAttachment = new Attachment
-                {
-                    Content = adaptiveCard,
-                    ContentType = AdaptiveCard.ContentType,
-                };
+                var adaptiveAttachment = this.cardFactory.CreateAdaptiveCardAttachement(Path.Combine(".", "Resources", "WorkitemCardTemplate.json"), releaseManagementTask);
                 await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveAttachment), cancellationToken);
             }
         }

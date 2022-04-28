@@ -2,17 +2,17 @@
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
 
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using ReleaseManagement.Models;
-using ReleaseManagement.Helpers;
-using ReleaseManagement.Models.Configuration;
-using Microsoft.Extensions.Options;
-using System.Linq;
-using System.Collections.Concurrent;
-
 namespace ReleaseManagement.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using System.Threading.Tasks;
+    using ReleaseManagement.Models;
+    using ReleaseManagement.Helpers;
+    using ReleaseManagement.Models.Configuration;
+    using Microsoft.Extensions.Options;
+    using System.Linq;
+    using System.Collections.Concurrent;
+
     [Route("api/[controller]")]
     [ApiController]
     public class WorkItemController : ControllerBase
@@ -36,13 +36,12 @@ namespace ReleaseManagement.Controllers
 
             taskDetails.AddOrUpdate(Constant.TaskDetails, releaseManagementTask, (key, newValue) => releaseManagementTask);
 
-            if (releaseManagementTask.StakeholderTeam.Count() > 1)
+            if (releaseManagementTask.GroupChatMembers.Count() > 1)
             {
-                var groupChat = await _helper.CreateGroupChatAsync(releaseManagementTask.StakeholderTeam);
+                var groupChat = await _helper.CreateGroupChatAsync(releaseManagementTask.GroupChatMembers, releaseManagementTask.TaskTitle);
                 await _helper.AppinstallationforGroupAsync(groupChat.Id);
-                return this.Ok();
             }
-            return this.BadRequest();
+            return this.Ok();
         }
     }
 }

@@ -85,7 +85,7 @@ namespace ReleaseManagement.Helpers
             }
             catch (Microsoft.Graph.ServiceException ex)
             {
-                throw ex;
+                Console.WriteLine(ex);
             }
         }
 
@@ -93,8 +93,9 @@ namespace ReleaseManagement.Helpers
         /// Creates group chat.
         /// </summary>
         /// <param name="userMails">Members mail to be added in group chat.</param>
+        /// <param name="groupTitle">Title of group chat.</param>
         /// <returns>Created chat details.</returns>
-        public async Task<Chat> CreateGroupChatAsync(IEnumerable<string> userMails)
+        public async Task<Chat> CreateGroupChatAsync(IEnumerable<string> userMails, string groupTitle)
         {
             string accessToken = await GetToken();
             GraphServiceClient graphClient = GetAuthenticatedClient(accessToken);
@@ -120,6 +121,7 @@ namespace ReleaseManagement.Helpers
                 var chat = new Chat
                 {
                     ChatType = ChatType.Group,
+                    Topic = groupTitle,
                     Members = chatMembersCollectionPage
                 };
 
@@ -131,7 +133,8 @@ namespace ReleaseManagement.Helpers
             }
             catch (Microsoft.Graph.ServiceException ex)
             {
-                throw ex;
+                Console.WriteLine(ex);
+                return new Chat();
             }
         }
     }
