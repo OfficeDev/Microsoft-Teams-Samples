@@ -1,11 +1,23 @@
 const axios = require('axios');
+const { Client } = require('@microsoft/microsoft-graph-client');
+require('isomorphic-fetch');
+
 class GraphHelper {
+    constructor() {
+        this._token = this.GetAccessToken();
+        // Get an Authenticated Microsoft Graph client using the token issued to the user.
+        this.graphClient = Client.init({
+            authProvider: (done) => {
+                done(null, this._token); // First parameter takes an error if you can't get an access token.
+            }
+        });
+    }
     
     /**
      * Gets application token.
      * @returns Application token.
      */
-    async GetAccessToken() {
+    GetAccessToken() {
         let qs = require('qs')
         const data = qs.stringify({
             'grant_type': 'client_credentials',
@@ -38,69 +50,47 @@ class GraphHelper {
      * @returns 
      */
     async AppinstallationforGroupAsync(groupId) {
-        return new Promise(async (resolve) => {
-            let accessToken = await this.GetAccessToken();
-            const data = JSON.stringify({
+        try {
+            const data = {
                 'teamsApp@odata.bind': 'https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/' + process.env.AppExternalId
-            });
-            const config = {
-                method: 'post',
-                url: 'https://graph.microsoft.com/v1.0/chats/'+groupId+'/installedApps',
-                headers: {
-                    'Content-type': 'application/json',
-                    'Authorization': accessToken
-                },
-                data: data
             };
-            await axios(config)
-                .then(function (response) {
-                    resolve((response.data).status)
-                })
-                .catch(async function (error) {
-                    throw error;
-                });
-        })
+            await this.graphClient.api(`/chats/${groupId}/installedApps`).post(data);
+        }
+        catch (ex) {
+            console.log(ex);
+        }
     }
 
     /**
      * Creates group chat.
      * @param {string[]} userMails Members mail to be added in group chat.
+     * @param {string} groupTitle Title of the group chat.
      * @returns Created chat details.
      */
-    async CreateGroupChatAsync(userMails) {
-        let members = [];
-        let distinctMailList = [...new Set(userMails)];
-        distinctMailList.forEach(mail => {
-            members.push({
-                '@odata.type': '#microsoft.graph.aadUserConversationMember',
-                roles: ['owner'],
-                'user@odata.bind': 'https://graph.microsoft.com/v1.0/users/' + mail
-              });
-        });
-
-        return new Promise(async (resolve) => {
-            let accessToken = await this.GetAccessToken();
-            const data = JSON.stringify({
-                'chatType': 'group',
-                'members': members
+    async CreateGroupChatAsync(userMails, groupTitle) {
+        try 
+        {
+            let members = [];
+            let distinctMailList = [...new Set(userMails)];
+            distinctMailList.forEach(mail => {
+                members.push({
+                    '@odata.type': '#microsoft.graph.aadUserConversationMember',
+                    roles: ['owner'],
+                    'user@odata.bind': 'https://graph.microsoft.com/v1.0/users/' + mail
+                  });
             });
-            const config = {
-                method: 'post',
-                url: 'https://graph.microsoft.com/v1.0/chats/',
-                headers: {
-                    'Content-type': 'application/json',
-                    'Authorization': accessToken
-                },
-                data: data
+    
+            const data = {
+                'chatType': 'group',
+                'topic': groupTitle,
+                'members': members
             };
-            await axios(config)
-                .then(function (response) {
-                    resolve(response.data)
-                })
-                .catch(async function (error) {
-                    throw error;
-                });
-        })
+    
+            return await this.graphClient.api('/chats').post(data);
+        }
+        catch (ex) {
+            console.log(ex);
+        }
     }
 }
 module.exports = GraphHelper;

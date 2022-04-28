@@ -1,89 +1,140 @@
 ---
 page_type: sample
-description: This sample illustrates how you can use Proactive installation of app for user and send proactive notification by calling Microsoft Graph APIs.
+description: This is a sample app with capability to send notfication when user creates workitem in [Azure DevOps](https://dev.azure.com) via webhooks.
 products:
 - office-teams
 - office
 - office-365
 languages:
 - nodejs
+- javascript
 extensions:
 contentType: samples
-createdDate: "07-07-2021 13:38:26"
+createdDate: "28-04-2022 00:15:15"
 ---
 
-# Proactive Installation Sample App
+# Bot with SharePoint file to view in Teams file viewer
 
-This sample app illustartes the proactive installation of app using Graph API and sending proactive notification to users from GroupChat or Channel.
+This is a sample application which demonstarates how to create a webhook on [Azure DevOps](https://dev.azure.com) and connect with Teams bot that creates a group chat and send workitems details.
 
-Language Used : Nodejs
+## Key features
+
+![Workitem card](Images/WorkItemCard.png)
+
 
 ## Prerequisites
-### Tools
 
-- [Node.js](https://nodejs.org) version 10.14 or higher
+- Microsoft Teams is installed and you have an account (not a guest account)
+-  [NodeJS](https://nodejs.org/en/)
+-  [ngrok](https://ngrok.com/) or equivalent tunneling solution
+-  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+-  [Azure DevOps](https://dev.azure.com) access to set up service hooks and add custom field in workitem.
+-  [Teams Admin portal](https://admin.teams.microsoft.com) access to upload the manifest.json.
 
-    ```bash
-    # determine node version
-    node --version
-    ```
 ## To try this sample
 
-- Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-    > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
+> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
+> the Teams service needs to call into the bot.
 
-1. Clone the repository
+### 1. Start ngrok on localhost:3978
+- Open ngrok and run command `ngrok http -host-header=rewrite 3978` 
+- Once started you should see URL  `https://41ed-abcd-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
+![Ngrok](Images/NgrokScreenshot.PNG)
+
+### 2. Setup Azure DevOps service hook.
+- Follow this document- [Create Webhooks](https://docs.microsoft.com/en-us/azure/devops/service-hooks/services/webhooks?view=azure-devops) to service hook. 
+- Make sure to select trigger as *Work item created*
+- Make sure to add URL as https://{baseUrl}/api/workItem. It will look somethihng as https://41ed-abcd-e125.ngrok.io/api/workItem. *Here baseUrl is reffered to URL we get in step 1*.
+
+### 3. Setup custom work item type.
+- Follow the doc to [Add a custom field to an inherited process - Azure DevOps Services](https://docs.microsoft.com/en-us/azure/devops/organizations/settings/work/add-custom-field?view=azure-devops). 
+- Make sure to give name as *StakeholderTeam* and Type *Text (Single line)*
+![Custom field](Images/CustomField.PNG)
+- Make sure to [Apply the customized process to your project](https://docs.microsoft.com/en-us/azure/devops/organizations/settings/work/add-custom-field?view=azure-devops#apply-the-customized-process-to-your-project)
+- Go to *Options* and check *Required* and Add.
+
+### 4. Register Azure AD application
+Register one Azure AD application in your tenant's directory: for the bot and tab app authentication.
+
+-  Log in to the Azure portal from your subscription, and go to the "App registrations" blade  [here](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps). Ensure that you use a tenant where admin consent for API permissions can be provided.
+
+-  Click on "New registration", and create an Azure AD application.
+
+-  **Name:**  The name of your Teams app - if you are following the template for a default deployment, we recommend "App catalog lifecycle".
+
+-  **Supported account types:**  Select "Accounts in any organizational directory"
+
+-  Leave the "Redirect URL" field blank.   
+
+- Click on the "Register" button.
+
+7.  When the app is registered, you'll be taken to the app's "Overview" page. Copy the  **Application (client) ID**; we will need it later. Verify that the "Supported account types" is set to  **Multiple organizations**.
+
+-  On the side rail in the Manage section, navigate to the "Certificates & secrets" section. In the Client secrets section, click on "+ New client secret". Add a description for the secret and select Expires as "Never". Click "Add".
+
+-  Once the client secret is created, copy its  **Value**, please take a note of the secret as it will be required later.
+
+
+- At this point you have 3 unique values:
+    -   Application (client) ID which will be later used during Azure bot creation
+    -   Client secret for the bot which will be later used during Azure bot creation
+    -   Directory (tenant) ID
+We recommend that you copy these values into a text file, using an application like Notepad. We will need these values later.
+
+-  Under left menu, navigate to  **API Permissions**, and make sure to add the following permissions of Microsoft Graph API > Application permissions:
+    -  Chat.Create
+    -  TeamsAppInstallation.ReadWriteForChat.All
+
+Click on Add Permissions to commit your changes.
+
+- If you are logged in as the Global Administrator, click on the Grant admin consent for %tenant-name% button to grant admin consent else, inform your admin to do the same through the portal or follow the steps provided here to create a link and send it to your admin for consent.
+
+- Global Administrator can grant consent using following link:  [https://login.microsoftonline.com/common/adminconsent?client_id=](https://login.microsoftonline.com/common/adminconsent?client_id=)<%appId%> 
+
+### 5. Setup a Azure bot resource
+- Create new Azure Bot resource in Azure.
+- Select Type of App as "Multi Tenant"
+-  Select Creation type as "Use existing app registration"
+- Use the copied App Id and Client secret from above step and fill in App Id and App secret respectively.
+- Click on Create on the Azure bot.   
+- Go to the created resource, navigate to channels and add "Microsoft Teams".
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
+### 6. Manually update the manifest.json and publish to Teams admin portal
+- Edit the `manifest.json` contained in the  `/teamsAppManifest` folder to and fill in MicrosoftAppId (that was created in step 1 and it is the same value of MicrosoftAppId as in `.env` file) *everywhere* you see the place holder string `<<Microsoft-App-Id>>` (depending on the scenario it may occur multiple times in the `manifest.json`)
+- Zip up the contents of the `/appPackage` folder to create a `manifest.zip`
+- Login to [Teams Admin portal](https://admin.teams.microsoft.com) 
+- Under *Teams apps*, select *Manage apps* and then click on *+ Upload* to upload the zip created.
+![Teams Admin Manage apps](Images/ManageApps.PNG)
+- Once uploaded search the application and under About copy *App ID*. We will need it in next step.
+![App Id](Images/AppId.PNG)
+
+### 7. Run your bot sample
+1) Clone the repository
+
     ```bash
-    git clone https://github.com/OfficeDev/microsoft-teams-samples.git
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-- In a terminal, navigate to `samples/javascript_nodejs/graph-proactive-installation`
-    ```bash
-    cd samples/graph-proactive-installation/nodejs
-    ```
-- Install modules
+
+2) In a terminal, navigate to `samples/release-management/nodejs`
+
+3) Install modules
+
     ```bash
     npm install
     ```
-- Start the bot
+5) Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` and `MicrosoftAppTenantId` (Note that the MicrosoftAppId is the AppId created in step 4 , the MicrosoftAppPassword is referred to as the "client secret" in step 4 and you can always create a new client secret anytime., MicrosoftAppTenantId is reffered to as Directory tenant Id in step 4) Also update the `AppExternalId` with your ID we get in step 6.
+
+6) Run your bot at the command line:
+
     ```bash
     npm start
     ```
-2. Run the bot from  Visual Studio Code:
-    - Launch Visual Studio Code
-    - Folder -> Open -> Project/Solution
-    - Navigate to `samples/graph-proactive-installation/nodejs` folder
-    - Select ```nodejs``` Folder
-    -  To run the application required  node modules. Please use this command to install modules `npm install`
-3. Run ngrok - point to port 3978
-   ```bash
-      ngrok http -host-header=rewrite 3978
-    ```
-4. Update the manifest.json file with ```Microsoft-App-ID``` value and to get TeamsAppCatalogId upload your     Manifest  for my Organization.
-![image](https://user-images.githubusercontent.com/85157377/122389115-38c9ff80-cf8e-11eb-8cda-0a836cb26b34.png)
-
-5. Go to .env file  and add `MicrosoftAppId` ,  `MicrosoftAppPassword` and `AppCatalogTeamAppId` information. 
-   - To get `AppCatalogTeamAppId` navigate to following link in your browser [Get TeamsAppCatalogId](https://developer.microsoft.com/en-us/graph/graph-explorer?request=appCatalogs%2FteamsApps%3F%24filter%3DdistributionMethod%20eq%20'organization'&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) from Microsoft Graph explorer.
-And then search with app name or based on Manifest App id in Graph Explorer response and copy the `Id` [i.e teamApp.Id]
-6. Required Microsoft graph Application level permissions to run this sample app
-     - TeamsAppInstallation.ReadWriteForUser.All
-7. [Get consent for the Application permissions](https://docs.microsoft.com/en-us/graph/auth-v2-service?context=graph%2Fapi%2F1.0&view=graph-rest-1.0#3-get-administrator-consent) by following steps mentioned here.
-8. Run your app, either from Visual Studio code  with ``` npm start``` or using ``` Run``` in the Terminal.
 
 
+## Interacting with the bot.
+- Login into [Azure DevOps](https://dev.azure.com) and open the project where custom process was applied.
+- Create a new workitem -> Tasks, provide comma seprated email ids in *StakeHolderTeam* (NOTE: The email should belong to tenant where we register Application in step 4)
+- Save
+- Bot will create the group chat with members you added and send the Task details.
 
-### Interacting with the Proactive installation App in Teams
-- Install the Proactive App Installation demo in a Team or GroupChat.
-    ![image](https://user-images.githubusercontent.com/85157377/122391474-abd47580-cf90-11eb-8006-1852fc003ae4.png)
-
-- **Team Scope**: Run Check and install to pro-actively installs the App for all the users in team. After installation send 'Send message' command to send proactive message.
-    ![image](https://user-images.githubusercontent.com/85157377/122392520-90b63580-cf91-11eb-8bef-d9e2873252c0.png)
-- **Group Chat**:  Run Check and install to pro-actively installs the App for all the users in team. After installation send 'Send message' command to send proactive message.
-   ![image](https://user-images.githubusercontent.com/85157377/122392813-d83cc180-cf91-11eb-8484-6271a137b822.png)
-
-## Further Reading
-
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Proactive App Installation using Graph API](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages?tabs=node)

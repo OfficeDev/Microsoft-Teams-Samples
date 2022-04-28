@@ -86,12 +86,11 @@ server.post('/api/workItem', async (req, res) => {
 
     taskDetails[Constant.TaskDetails] = releaseManagementTask;
 
-    if (releaseManagementTask.StakeholderTeam.length > 1)
+    if (releaseManagementTask.GroupChatMembers.length > 1)
     {
         var graphHelper = new GraphHelper();
-        var groupChat = await graphHelper.CreateGroupChatAsync(releaseManagementTask.StakeholderTeam);
+        var groupChat = await graphHelper.CreateGroupChatAsync(releaseManagementTask.GroupChatMembers, releaseManagementTask.TaskTitle);
         await graphHelper.AppinstallationforGroupAsync(groupChat.id);
-        return res.status(200);
     }
-    return res.status(400);
+    return res.status(200).send();
 });

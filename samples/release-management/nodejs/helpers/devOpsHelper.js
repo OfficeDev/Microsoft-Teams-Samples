@@ -22,10 +22,13 @@ class DevOpsHelper {
         var releaseManagementTask = 
         {
             AssignedToName: isAssignedToPresent ? DevOpsHelper.GetEmailOrName(workItem.resource.fields[Constant.AssignedTo], true) : "",
+            CreatedByName: DevOpsHelper.GetEmailOrName(workItem.resource.fields[Constant.CreatedByKey], true),
+            StakeholderTeam: DevOpsHelper.ValidateMails(workItem.resource.fields[Constant.StakeHolderTeamKey].split(',')),
             Id: workItem.id,
-            StakeholderTeam: validEmailList,
+            GroupChatMembers: validEmailList,
             State: workItem.resource.fields[Constant.StateKey],
             TaskTitle: workItem.resource.fields[Constant.TaskTitleKey],
+            WorkitemUrl: workItem.resource._links.html.href
         };
 
         return releaseManagementTask;
