@@ -18,6 +18,7 @@ using Microsoft.Teams.Samples.AccountLinking.UserTokenStorage;
 using Microsoft.Teams.Samples.AccountLinking.Bots;
 using Microsoft.Teams.Samples.AccountLinking.Dialogs;
 using Microsoft.Teams.Samples.AccountLinking.State;
+using Microsoft.Teams.Samples.AccountLinking.SampleClient.Services.Gmail;
 
 var builder = WebApplication.CreateBuilder(args);
 var useAzure = builder.Configuration.GetValue<bool>("UseAzure");
@@ -172,6 +173,10 @@ services.AddHttpClient<GitHubServiceClient>(cfg => {
     cfg.DefaultRequestHeaders.UserAgent.Add(productValue);
 });
 
+services.AddHttpClient<GmailServiceClient>(cfg => {
+    var productValue = new ProductInfoHeaderValue("GithubTeamsSSOintegrationSample", "1.0");
+    cfg.DefaultRequestHeaders.UserAgent.Add(productValue);
+});
 
 services.AddControllers();
 

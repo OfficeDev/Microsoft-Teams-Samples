@@ -60,6 +60,9 @@ public sealed class OAuthController : ControllerBase
         // we use our acct linking state as the 'state' parameter in the external OAuth.
         oauthQueryParameters.Add("state", accountLinkingState); 
         oauthQueryParameters.Add("redirect_uri", _options.AuthEndUri);
+        oauthQueryParameters.Add("response_type", "code");
+        // respective provider's/api's scope
+        oauthQueryParameters.Add("scope", "https://mail.google.com/");
         var redirectUriBuilder = new UriBuilder(_options.AuthorizeUrl)
         {
             Query = oauthQueryParameters.ToString()
