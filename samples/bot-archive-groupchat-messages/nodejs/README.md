@@ -42,12 +42,37 @@ This feature shown in this sample is currently available in Public Developer Pre
 In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- Refer [this](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/auth-aad-sso-bots) for setting the connection string
 
+## Instruction on setting connection string for bot authentication on the behalf of user
 
- Add this permission to app registration
+1. In the Azure portal, select your resource group from the dashboard.
+2. Select your bot channel registration link.
+3. Open the resource page and select Configuration under Settings.
+4. Select Add OAuth Connection Settings.
+5. Complete the form as follows:
 
-![Permissions](Images/permissions.png)
+    a. **Name:** Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
+
+    b. **Service Provider:** Select Azure Active Directory v2. Once you select this, the Azure AD-specific fields will be displayed.
+
+    c. **Client id:** Enter the Application (client) ID .
+
+    d. **Client secret:** Enter the Application (client) secret.
+
+    e. Provide **Scopes** like "User.Read Chat.ReadWrite ChatMessage.Read"
+
+6. Go to the Azure portal where app registration is created.
+ 
+    a. Add this permission to app registration
+    - Chat.ReadWrite
+    - ChatMessage.Read
+    ![Permissions](Images/permissions.png)
+
+    b.  Under left menu, select  **Authentication**  under  **Manage**  section.
+    - Select 'Accounts in any organizational directory (Any Azure AD directory - Multitenant)' under Supported account types and click "+Add a platform".
+    -  On the flyout menu, Select "Web"    
+    -  Add  `https://token.botframework.com/.auth/web/redirect`  under Redirect URLs and click Configure button.
+    -  Once the flyout menu close, scroll bottom to section 'Implicit Grant' and select check boxes "Access tokens" and "ID tokens" and click "Save" at the top bar.
 
 ### 2. Run your bot sample
 1) Clone the repository

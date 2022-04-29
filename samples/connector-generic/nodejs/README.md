@@ -32,7 +32,7 @@ To complete this tutorial, you need the following tools. If you don't already ha
    1. Ngrok will fill the entire prompt window. Make note of the https:// Forwarding URL. This URL will be your [BASE_URI] referenced below. 
    1. Minimize the ngrok Command Prompt window. It is no longer referenced in these instructions, but it must remain running.
 1. [Register a new connector](https://docs.microsoft.com/microsoftteams/platform/webhooks-and-connectors/how-to/connectors-creating#adding-a-connector-to-your-teams-app)
-   1. Open [Connector Developer Portal](https://outlook.office.com/connectors/home/login/#/new) and select New Connector.
+   1. Open [Connector Developer Portal](https://aka.ms/connectorsdashboard) and select New Connector.
    1. Fill in all the basic details such as name, logo, descriptions etc. for the new connector.
    1. For the configuration page, you'll use our sample code's setup endpoint: `https://[BASE_URI]/connector/setup`
    1. For Valid domains, make enter your domain's http or https URL, e.g. XXXXXXXX.ngrok.io.
