@@ -16,7 +16,7 @@ createdDate: "27-04-2022 23:30:17"
 
 This sample shows the feature where user can send suggested actions using bot.
 
-![Initial message](SuggestedActions/Images/WelcomeMessage.png)
+![Initial message](SuggestedActions/Images/WelcomeMessage.PNG)
 
 ## Prerequisites
 
@@ -93,7 +93,7 @@ This sample shows the feature where user can send suggested actions using bot.
 
 ## Features of this sample
 
-![Initial Message](SuggestedActions/Images/WelcomeCard.png)
+![Initial Message](SuggestedActions/Images/WelcomeMessage.PNG)
 
 ## Deploy the bot to Azure
 
