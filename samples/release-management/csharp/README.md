@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample app with capability to send notfication when user creates workitem in [Azure DevOps](https://dev.azure.com) via webhooks.
+description: This is a sample app with capability to send notification when user creates workitem in [Azure DevOps](https://dev.azure.com) via webhooks.
 products:
 - office-teams
 - office
@@ -12,9 +12,9 @@ contentType: samples
 createdDate: "29-04-2022 00:02:15"
 ---
 
-# Bot to created group chat and send task notfication using Azure webhooks.
+# Bot to create the group chat and send task notification using Azure webhooks.
 
-This is a sample application which demonstarates how to create a webhook on [Azure DevOps](https://dev.azure.com) and connect with Teams bot that creates a group chat and send workitems details.
+This is a sample application which demonstrates how to create a webhook on [Azure DevOps](https://dev.azure.com) and connect with Teams bot that creates a group chat and send workitems details.
 
 ## Key features
 
@@ -44,7 +44,7 @@ This is a sample application which demonstarates how to create a webhook on [Azu
 ### 2. Setup Azure DevOps service hook.
 - Follow this document- [Create Webhooks](https://docs.microsoft.com/en-us/azure/devops/service-hooks/services/webhooks?view=azure-devops) to service hook. 
 - Make sure to select trigger as *Work item created*
-- Make sure to add URL as https://{baseUrl}/api/workItem. It will look somethihng as https://41ed-abcd-e125.ngrok.io/api/workItem. *Here baseUrl is reffered to URL we get in step 1*.
+- Make sure to add URL as https://{baseUrl}/api/workItem. It will look somethihng as https://41ed-abcd-e125.ngrok.io/api/workItem. *Here baseUrl is referred to URL we get in step 1*.
 
 ### 3. Setup custom work item type.
 - Follow the doc to [Add a custom field to an inherited process - Azure DevOps Services](https://docs.microsoft.com/en-us/azure/devops/organizations/settings/work/add-custom-field?view=azure-devops). 

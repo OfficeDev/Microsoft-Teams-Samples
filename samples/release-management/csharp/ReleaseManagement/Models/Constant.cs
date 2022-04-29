@@ -9,7 +9,6 @@ namespace ReleaseManagement.Models
     /// </summary>
     public static class Constant
     {
-
         public static string StakeHolderTeamKey = "Custom.StakeholderTeam";
 
         public static string TaskTitleKey = "System.Title";

@@ -26,6 +26,7 @@
                 ContentType = AdaptiveCard.ContentType,
                 Content = JsonConvert.DeserializeObject(cardJSON),
             };
+
             return adaptiveCardAttachment;
         }
     }

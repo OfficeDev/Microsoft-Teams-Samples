@@ -41,6 +41,7 @@ namespace ReleaseManagement.Controllers
                 var groupChat = await _helper.CreateGroupChatAsync(releaseManagementTask.GroupChatMembers, releaseManagementTask.TaskTitle);
                 await _helper.AppinstallationforGroupAsync(groupChat.Id);
             }
+
             return this.Ok();
         }
     }

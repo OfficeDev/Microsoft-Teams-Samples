@@ -33,14 +33,17 @@ namespace ReleaseManagement.Helpers
                 new DelegateAuthenticationProvider(
                     requestMessage =>
                     {
-                    // Append the access token to the request.
-                    requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", token);
+                        // Append the access token to the request.
+                        requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", token);
 
-                    // Get event times in the current time zone.
-                    requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
+                        // Get event times in the current time zone.
+                        requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
 
                         return Task.CompletedTask;
-                    }));
+                    }
+                )
+            );
+
             return graphClient;
         }
 
@@ -58,6 +61,7 @@ namespace ReleaseManagement.Helpers
             // TeamsAppInstallation.ReadWriteForChat.All Chat.Create
             string[] scopes = new string[] { "https://graph.microsoft.com/.default" };
             var result = await app.AcquireTokenForClient(scopes).ExecuteAsync();
+
             return result.AccessToken;
         }
 
@@ -79,6 +83,7 @@ namespace ReleaseManagement.Helpers
                         {"teamsApp@odata.bind", $"https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/{this.azureSettings.Value.AppExternalId}"}
                     }
                 };
+
                 await graphClient.Chats[GroupId].InstalledApps
                     .Request()
                     .AddAsync(userScopeTeamsAppInstallation);
