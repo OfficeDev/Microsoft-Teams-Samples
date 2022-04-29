@@ -3,7 +3,7 @@
   "manifestVersion": "1.12",
   "version": "1.0.0",
   "id": "<<MICROSOFT-APP-ID>>",
-  "packageName": "com.microsoft.teams.appcheckinlocation",
+  "packageName": "com.microsoft.teams.botsuggestedactions",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -16,7 +16,7 @@
   },
   "description": {
     "short": "Suggested Actions Bot",
-    "full": "This sample shows feature where user can can send suggested actions using bot."
+    "full": "This sample shows the feature where user can send suggested actions using bot."
   },
   "icons": {
     "outline": "outline.png",

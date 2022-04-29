@@ -43,7 +43,7 @@ namespace Microsoft.BotBuilderSamples
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
                     await turnContext.SendActivityAsync(
-                        $"Welcome to SuggestedActionsBot {member.Name}. {WelcomeText}",
+                        $"Welcome to SuggestedActionsBot. This bot will introduce you to suggestedActions. Please answerthe question:",
                         cancellationToken: cancellationToken);
                     await SendSuggestedActionsAsync(turnContext, cancellationToken);
                 }
@@ -59,17 +59,14 @@ namespace Microsoft.BotBuilderSamples
                 {
                     return $"Red {colorText}";
                 }
-
                 case "yellow":
                 {
                     return $"Yellow {colorText}";
                 }
-
                 case "blue":
                 {
                     return $"Blue {colorText}";
                 }
-
                 default:
                 {
                     return "Please select a color from the suggested action choices";
