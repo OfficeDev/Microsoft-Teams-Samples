@@ -46,7 +46,7 @@ class SuggestedActionsBot extends ActivityHandler {
         // Iterate over all new members added to the conversation.
         for (const idx in activity.membersAdded) {
             if (activity.membersAdded[idx].id !== activity.recipient.id) {
-                const welcomeMessage = `Welcome to SuggestedActionsBot. This bot will introduce you to suggestedActions. Please answerthe question:` +
+                const welcomeMessage = `Welcome to suggested actions bot. This bot will introduce you to suggested actions. Please answer the question:` +
                     'Please select an option:';
                 await turnContext.sendActivity(welcomeMessage);
                 await this.sendSuggestedActions(turnContext);
@@ -77,7 +77,7 @@ class SuggestedActionsBot extends ActivityHandler {
             }
         ];
 
-        var reply = MessageFactory.text("What is your fav colour ?");
+        var reply = MessageFactory.text("What is your favorite color ?");
         reply.suggestedActions = {"actions": cardActions, "to": [turnContext.activity.from.id]};
         await turnContext.sendActivity(reply);
     }
