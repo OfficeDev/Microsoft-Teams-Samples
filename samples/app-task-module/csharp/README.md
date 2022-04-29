@@ -36,10 +36,58 @@ Task modules build on the foundation of Microsoft Teams tabs: a task module is e
 
 ![youtube](Microsoft.Teams.Samples.TaskModule.Web/Images/youtube.png)
 
-## Try it yourself
+## Run this sample locally
+> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
+> the Teams service needs to call into the bot.
 
-This sample is deployed on Microsoft Azure and you can try it yourself by uploading [Task Module CSharp.zip](Microsoft.Teams.Samples.TaskModule.Web/Manifest/TaskModuleCSharp.zip) to one of your teams and/or as a personal app. (Sideloading must be enabled for your tenant; see [step 6 here](https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-tenant#turn-on-microsoft-teams-for-your-organization).) The app is running on the free Azure tier, so it may take a while to load if you haven't used it recently and it goes back to sleep quickly if it's not being used, but once it's loaded it's pretty snappy.
+### 1. Setup for Bot
+In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/abs-quickstart?view=azure-bot-service-4.0&tabs=userassigned).
 
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
+### 2. Run your bot sample
+1) Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+2) In a terminal, navigate to `samples/app-task-module/nodejs`
+
+3) Run ngrok - point to port 3978
+
+    ```bash
+    ngrok http -host-header=rewrite 3978
+    ```
+
+5) Modify the /web.config and fill in the {{ MicrosoftAppId }},{{ MicrosoftAppPassword }} with the id from step 1 and {{BaseUrl}} we get from previous step. ngrok BaseUrl will look something like `https://abc21-hun-12ef.ngrok.io`.
+
+4) In a terminal, navigate to `BotWithSharePointFileViewer`
+
+    ```bash
+    # change into project folder
+    cd # BotWithSharePointFileViewer
+    ```
+
+5) Run the bot from a terminal or from Visual Studio, choose option A or B.
+
+  A) From a terminal
+
+  ```bash
+  # run the bot
+  dotnet run
+  ```
+
+  B) Or from Visual Studio
+
+  - Launch Visual Studio
+  - File -> Open -> Project/Solution
+  - Navigate to `samples/bot-sharepoint-file-viewer/csharp` folder
+  - Select `BotWithSharePointFileViewer.csproj` file
+  - Press `F5` to run the project
+
+## Deploy the bot to Azure
+
+To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 ## Overview of this sample
 
 * **A personal app.** When you upload the [Task Module CSharp.zip](Microsoft.Teams.Samples.TaskModule.Web/Manifest/TaskModuleCSharp.zip) file, choose "Add for you" and "Task Module CSharp" will appear in the "..." menu in the Teams app bar. The personal app has both a tab and a bot.
