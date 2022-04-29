@@ -46,8 +46,7 @@ class SuggestedActionsBot extends ActivityHandler {
         // Iterate over all new members added to the conversation.
         for (const idx in activity.membersAdded) {
             if (activity.membersAdded[idx].id !== activity.recipient.id) {
-                const welcomeMessage = `Welcome to suggestedActionsBot ${ activity.membersAdded[idx].name }. ` +
-                    'This bot will introduce you to Suggested Actions. ' +
+                const welcomeMessage = `Welcome to SuggestedActionsBot. This bot will introduce you to suggestedActions. Please answerthe question:` +
                     'Please select an option:';
                 await turnContext.sendActivity(welcomeMessage);
                 await this.sendSuggestedActions(turnContext);

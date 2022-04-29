@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Demonstrating feature where user can send suggested actions using bot.
+description: Demonstrating the feature where user can send suggested actions using bot.
 products:
 - office-teams
 - office
@@ -13,7 +13,7 @@ createdDate: "27-04-2022 23:30:17"
 ---
 # Get Suggested Actions
 
-This sample shows feature where user can can send suggested actions using bot.
+This sample shows the feature where user can send suggested actions using bot.
 
 ![Initial message](Images/WelcomeMessage.PNG)
 
