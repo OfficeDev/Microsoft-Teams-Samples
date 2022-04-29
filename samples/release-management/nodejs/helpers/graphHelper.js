@@ -25,6 +25,7 @@ class GraphHelper {
             'scope': 'https://graph.microsoft.com/.default',
             'client_secret': process.env.MicrosoftAppPassword
         });
+
         return new Promise(async (resolve) => {
             const config = {
                 method: 'post',
