@@ -77,7 +77,6 @@ jobs:
             - project_path: 'samples/app-auth/nodejs'
               name: 'app-auth'
               version: "${{ env.NODE_14 }}"
-
             - project_path: 'samples/app-checkin-location/nodejs'
               name: 'app-checkin-location'
               version: "${{ env.NODE_14 }}"
