@@ -57,7 +57,10 @@ jobs:
       matrix:
         include:
             - project: 'samples/meetings-events/csharp/MeetingEvents/MeetingEvents.csproj'
+              name: 'meetings-events'
             - project: 'samples/app-checkin-location/csharp/AppCheckinLocation/AppCheckinLocation.csproj'
+              name: 'app-checkin-location'
+    name: Build "${{ matrix.name }}" csharp
     steps:
       - uses: actions/checkout@v2
 
