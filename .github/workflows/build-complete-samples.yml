@@ -16,6 +16,8 @@ env:
     DOTNET_3_1: '3.1.301'
     NODE_14: '14.x'
 
+    
+
     PROJECT_PATH_APP_COMPLETE_AUTH_CSHARP: 'samples/app-complete-auth/csharp/AppCompleteAuth/AppCompleteAuth.csproj'
     PROJECT_PATH_APP_COMPLETE_AUTH_NODEJS: 'samples/app-complete-auth/nodejs'
 
@@ -50,7 +52,6 @@ jobs:
             - project_path: 'samples/meetings-events/csharp/MeetingEvents/MeetingEvents.csproj'
               name: 'meetings-events'
               version: "${{ env.DOTNET_3_1 }}"
-
             - project_path: 'samples/app-checkin-location/csharp/AppCheckinLocation/AppCheckinLocation.csproj'
               name: 'app-checkin-location'
               version: "${{ env.DOTNET_3_1 }}"
@@ -70,7 +71,6 @@ jobs:
 
   build-nodejs-samples:
     runs-on: windows-latest
-
     strategy:
       matrix:
         include:
