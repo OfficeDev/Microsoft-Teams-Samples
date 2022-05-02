@@ -13,11 +13,6 @@ on:
   schedule:
     - cron: '12 21 * * *'  # every day at midnight
 env:
-    DOTNET_3_1: '3.1.301'
-    NODE_14: '14.x'
-
-    
-
     PROJECT_PATH_APP_COMPLETE_AUTH_CSHARP: 'samples/app-complete-auth/csharp/AppCompleteAuth/AppCompleteAuth.csproj'
     PROJECT_PATH_APP_COMPLETE_AUTH_NODEJS: 'samples/app-complete-auth/nodejs'
 
@@ -51,10 +46,11 @@ jobs:
         include:
             - project_path: 'samples/meetings-events/csharp/MeetingEvents/MeetingEvents.csproj'
               name: 'meetings-events'
-              version: "${{ env.DOTNET_3_1 }}"
+              version: '3.1.301'
+
             - project_path: 'samples/app-checkin-location/csharp/AppCheckinLocation/AppCheckinLocation.csproj'
               name: 'app-checkin-location'
-              version: "${{ env.DOTNET_3_1 }}"
+              version: '3.1.301'
 
     name: Build "${{ matrix.name }}" csharp
     steps:
@@ -76,10 +72,11 @@ jobs:
         include:
             - project_path: 'samples/app-auth/nodejs'
               name: 'app-auth'
-              version: "${{ env.NODE_14 }}"
+              version: '14.x'
+
             - project_path: 'samples/app-checkin-location/nodejs'
               name: 'app-checkin-location'
-              version: "${{ env.NODE_14 }}"
+              version: '14.x'
 
     name: Build "${{ matrix.name }}" nodejs
     defaults:
