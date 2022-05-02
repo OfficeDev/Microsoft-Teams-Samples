@@ -102,7 +102,7 @@ Click on Add Permissions to commit your changes.
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 ### 6. Manually update the manifest.json and publish to Teams admin portal
-- Edit the `manifest.json` contained in the  `/Manifest` folder to and fill in MicrosoftAppId (that was created in step 1 and it is the same value of MicrosoftAppId as in `.env` file) *everywhere* you see the place holder string `<<Microsoft-App-Id>>` (depending on the scenario it may occur multiple times in the `manifest.json`)
+- Edit the `manifest.json` contained in the  `/AppManifest` folder to and fill in MicrosoftAppId (that was created in step 1 and it is the same value of MicrosoftAppId as in `.env` file) *everywhere* you see the place holder string `<<Microsoft-App-Id>>` (depending on the scenario it may occur multiple times in the `manifest.json`)
 - Zip up the contents of the `/appPackage` folder to create a `manifest.zip`
 - Login to [Teams Admin portal](https://admin.teams.microsoft.com) 
 - Under *Teams apps*, select *Manage apps* and then click on *+ Upload* to upload the zip created.

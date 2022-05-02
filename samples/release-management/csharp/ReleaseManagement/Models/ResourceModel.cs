@@ -6,7 +6,7 @@ namespace ReleaseManagement.Models
 {
     using System.Collections.Generic;
 
-    public class Resource
+    public class ResourceModel
     {
         /// <summary>
         /// Gets or sets project Id.

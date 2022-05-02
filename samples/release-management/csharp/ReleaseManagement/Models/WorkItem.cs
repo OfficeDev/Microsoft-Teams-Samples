@@ -14,6 +14,6 @@ namespace ReleaseManagement.Models
         /// <summary>
         /// Gets or sets resource.
         /// </summary>
-        public Resource Resource { get; set; }
+        public ResourceModel Resource { get; set; }
     }
 }

@@ -3,12 +3,12 @@
   "manifestVersion": "1.12",
   "version": "1.0.0",
   "id": "<<Microsoft-App-Id>>",
-  "packageName": "com.microsoft.teams.devapp",
+  "packageName": "com.microsoft.teams.releasemanagement",
   "developer": {
     "name": "Microsoft",
-    "websiteUrl": "https://www.teams.com",
-    "privacyUrl": "https://www.teams.com/privacy",
-    "termsOfUseUrl": "https://www.teams.com/termsofuse"
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "icons": {
     "color": "color.png",
@@ -19,8 +19,8 @@
     "full": "Release Management"
   },
   "description": {
-    "short": "TODO",
-    "full": "TODO"
+    "short": "Bot to create a group chat and send work item notification using Azure webhooks.",
+    "full": "This is a sample app with capability to send notification when user creates a work item in Azure DevOps via webhooks"
   },
   "accentColor": "#235EA5",
   "bots": [
