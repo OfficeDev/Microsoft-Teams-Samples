@@ -99,3 +99,11 @@ jobs:
     if: ${{ always() }}
     needs: [build-csharp-samples, build-nodejs-samples]
     runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "${{ matrix.version }}"
+          include-prerelease: true
