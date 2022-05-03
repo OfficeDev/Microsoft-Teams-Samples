@@ -94,3 +94,8 @@ jobs:
         run: |
           npm install
           npm run build --if-present
+
+  send-email:
+    if: ${{ always() }}
+    needs: [build-csharp-samples, build-nodejs-samples]
+    runs-on: windows-latest
