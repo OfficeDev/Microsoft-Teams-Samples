@@ -78,6 +78,10 @@ jobs:
               name: 'app-checkin-location'
               version: '14.x'
 
+            - project_path: 'samples/app-localization/nodejs'
+              name: 'app-localization'
+              version: '14.x'
+
     name: Build "${{ matrix.name }}" nodejs
     defaults:
       run:
