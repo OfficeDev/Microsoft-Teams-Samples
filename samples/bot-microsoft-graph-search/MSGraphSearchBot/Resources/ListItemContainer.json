@@ -1,0 +1,79 @@
+{
+  "type": "Container",
+  "selectAction": {
+    "type": "Action.OpenUrl",
+    "title": "${Title}",
+    "url": "${URL}"
+  },
+  "items": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAAAsTAAALEwEAmpwYAAABh0lEQVQ4jWNgQAPnr992PH/9ztVz12//O3/jzn9i8Lkbd34C9e0+c+WuHIph169f5wUa9B5o4NRzN++6EIvP3rjtATT4wPkbt3ehGHjx1i0ZoIEdV65cYUN3OSFw/totN5BLwRy/0lLe0Lxqm6CcaheicG6lY2hWiQRaUDmAvM8AkgzJrXwfklf1nxQcnFf1JzS3ugjDQKDEVaCCKaH19aR4kzE4pzoSbCjUpQgDcyv/glxJapjV19czgVwalF9th2Ig2Pn51Q4gwfX7jyus33u0AS/ef9gBZiiyXhwGHjHYsPfIAXwYqCaBaANJBUS48LDDhn1H/+PDIG+TYOB+AZCh+PFxBRIMHFyR4gjMtn+pEimgvA80cNq5G7cvE44UoKsIGQg0rAFo2FuQt4mIlCMGhAw8c+2BJNCVPGBBYNb7GZxb4Uaqdz1yc9lBBobmV1ii2VK5G1jaHAzNrfAguvgCYmDBMA3omLehWfU8KAYGZVXLB+dW7QK5lOiiC1ighORWXcYWmQCA4m/y3Xwx8QAAAABJRU5ErkJggg==",
+                      "horizontalAlignment": "Left",
+                      "spacing": "None"
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "${Title}",
+                      "height": "stretch",
+                      "size": "Large",
+                      "weight": "Bolder",
+                      "color": "Accent",
+                      "fontType": "Default",
+                      "spacing": "None"
+                    }
+                  ],
+                  "horizontalAlignment": "Left",
+                  "spacing": "Small"
+                }
+              ]
+            }
+          ],
+          "spacing": "Small"
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "**Created:** ${Created}",
+      "wrap": true,
+      "spacing": "None"
+    },
+    {
+      "type": "TextBlock",
+      "text": "**Created By:** ${CreatedBy}",
+      "spacing": "None"
+    },
+    {
+      "type": "TextBlock",
+      "wrap": true,
+      "text": "**Last modified time:** ${LastModifiedTime}",
+      "spacing": "None"
+    },
+    {
+      "type": "TextBlock",
+      "wrap": true,
+      "text": "**Site:** ${SiteName}",
+      "spacing": "None"
+    }
+  ]
+}
