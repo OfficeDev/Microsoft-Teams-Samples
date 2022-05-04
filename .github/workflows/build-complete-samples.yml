@@ -115,7 +115,7 @@ jobs:
                 # email subject
                 subject: Status of Automated build <<testing>>
                 # email body as text
-                body: ${{ github.workflow }} executed with status ${{ build-csharp-samples.status }} ${{ build-nodejs-samples.status }}
+                body: ${{ github.workflow }} executed with status ${{ github.workflow.status }}
                 # comma-separated string, send email to
                 to: v-abt@microsoft.com
                 # from email name
