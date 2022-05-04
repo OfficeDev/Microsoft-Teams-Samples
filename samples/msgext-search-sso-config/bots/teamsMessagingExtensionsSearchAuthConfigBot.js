@@ -83,14 +83,8 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
         }
         const graphClient = new SimpleGraphClient(tokenResponse.token);
         const profile = await graphClient.GetMyProfile();
-        const attachment = CardFactory.thumbnailCard(
-            'Thumbnail Card',
-            profile.displayName,
-            query.url,
-            [
-                'https://raw.githubusercontent.com/microsoft/botframework-sdk/master/icon.png'
-            ]
-        );
+        const userPhoto = await graphClient.GetPhotoAsync(tokenResponse.token);
+        const attachment = CardFactory.thumbnailCard(profile.displayName,  CardFactory.images([userPhoto]));
         const result = {
             attachmentLayout: 'list',
             type: 'result',
