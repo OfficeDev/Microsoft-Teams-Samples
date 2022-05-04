@@ -104,10 +104,20 @@ jobs:
     needs: [build-csharp-samples, build-nodejs-samples]
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up .NET Core
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: "${{ matrix.version }}"
-          include-prerelease: true
+        - uses: dawidd6/action-send-mail@v2
+          with:
+                # mail server settings
+                server_address: smtp-mail.outlook.com
+                server_port: 587
+                # user credentials
+                username: ${{ secrets.EMAIL_USERNAME_SAMPLE_HEALTH_BUILD }}
+                password: ${{ secrets.EMAIL_PASSWORD_SAMPLE_HEALTH_BUILD }}
+                # email subject
+                subject: Status of Automated build <<testing>>
+                # email body as text
+                body: ${{ github.workflow }} executed with status ${{ build-csharp-samples.status }} ${{ build-nodejs-samples.status }}
+                # comma-separated string, send email to
+                to: v-abt@microsoft.com
+                # from email name
+                from: Abhijeet Thakur
+    
