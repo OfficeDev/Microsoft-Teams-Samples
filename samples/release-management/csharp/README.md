@@ -107,15 +107,10 @@ Click on Add Permissions to commit your changes.
 - Go to the created resource, navigate to channels and add "Microsoft Teams".
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-### 6. Manually update the manifest.json and publish to Teams admin portal
+### 6. Manually update the manifest.json
 - Edit the `manifest.json` contained in the  `/AppManifest` folder to and fill in MicrosoftAppId (that was created in step 1 and it is the same value of MicrosoftAppId as in `appsettings.json` file) *everywhere* you see the place holder string `<<Microsoft-App-Id>>` (depending on the scenario it may occur multiple times in the `manifest.json`)
-- Zip up the contents of the `/appPackage` folder to create a `manifest.zip`
+- Zip up the contents of the `/AppManifest` folder to create a `manifest.zip`
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
-
-![Teams Admin Manage apps](ReleaseManagement/Images/ManageApps.png)
-- Once uploaded search the application and under About copy *App ID*. We will need it in next step.
-
-![App Id](ReleaseManagement/Images/AppId.png)
 
 ### 7. To try this sample
 
@@ -142,6 +137,8 @@ Click on Add Permissions to commit your changes.
   - Navigate to `samples/release-management/csharp` folder
   - Select `ReleaseManagement.csproj` file
   - Press `F5` to run the project
+
+**NOTE: If you are not getting incoming request from Azure DevOps make sure that service webhook is in *Enabled* state.**
 
 ## Deploy the bot to Azure
 
