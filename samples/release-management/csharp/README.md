@@ -24,7 +24,11 @@ This is a sample application which demonstrates how to create a webhook on [Azur
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
--  [NodeJS](https://nodejs.org/en/)
+-  .[NET 6.0](https://dotnet.microsoft.com/en-us/download) SDK.
+    ```bash
+        # determine dotnet version
+        dotnet --version
+    ```
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 -  [Azure DevOps](https://dev.azure.com) access to set up service hooks and add custom field in workitem.
@@ -85,6 +89,8 @@ We recommend that you copy these values into a text file, using an application l
 -  Under left menu, navigate to  **API Permissions**, and make sure to add the following permissions of Microsoft Graph API > Application permissions:
     -  Chat.Create
     -  TeamsAppInstallation.ReadWriteForChat.All
+    -  AppCatalog.Read.All
+    -  User.Read.All
 
 Click on Add Permissions to commit your changes.
 
@@ -102,10 +108,9 @@ Click on Add Permissions to commit your changes.
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 ### 6. Manually update the manifest.json and publish to Teams admin portal
-- Edit the `manifest.json` contained in the  `/AppManifest` folder to and fill in MicrosoftAppId (that was created in step 1 and it is the same value of MicrosoftAppId as in `.env` file) *everywhere* you see the place holder string `<<Microsoft-App-Id>>` (depending on the scenario it may occur multiple times in the `manifest.json`)
+- Edit the `manifest.json` contained in the  `/AppManifest` folder to and fill in MicrosoftAppId (that was created in step 1 and it is the same value of MicrosoftAppId as in `appsettings.json` file) *everywhere* you see the place holder string `<<Microsoft-App-Id>>` (depending on the scenario it may occur multiple times in the `manifest.json`)
 - Zip up the contents of the `/appPackage` folder to create a `manifest.zip`
-- Login to [Teams Admin portal](https://admin.teams.microsoft.com) 
-- Under *Teams apps*, select *Manage apps* and then click on *+ Upload* to upload the zip created.
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
 
 ![Teams Admin Manage apps](ReleaseManagement/Images/ManageApps.png)
 - Once uploaded search the application and under About copy *App ID*. We will need it in next step.

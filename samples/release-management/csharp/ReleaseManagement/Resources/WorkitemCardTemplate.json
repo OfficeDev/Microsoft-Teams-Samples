@@ -5,10 +5,9 @@
   "body": [
     {
       "type": "TextBlock",
-      "text": "Welcome to the group chat for ${taskTitle}",
-      "weight": "bolder",
-      "size": "large",
-      "wrap": true
+      "text": "${NotificationId}: ${taskTitle}",
+      "weight": "Bolder",
+      "size": "Large"
     },
     {
       "type": "TextBlock",
@@ -16,27 +15,126 @@
       "weight": "Bolder"
     },
     {
-      "type": "FactSet",
-      "facts": [
+      "type": "ColumnSet",
+      "columns": [
         {
-          "title": "Title:",
-          "value": "${TaskTitle}"
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "**ID:**"
+            },
+            {
+              "type": "TextBlock",
+              "text": "**Title:**"
+            },
+            {
+              "type": "TextBlock",
+              "text": "**State:**"
+            },
+            {
+              "type": "Container",
+              "minHeight": "30px",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "**Created by:**",
+                  "height": "stretch"
+                }
+              ]
+            },
+            {
+              "type": "TextBlock",
+              "text": "**Assigned to:**",
+              "height": "stretch"
+            },
+            {
+              "type": "TextBlock",
+              "text": "**Stakeholders:**"
+            }
+          ],
+          "width": "stretch"
         },
         {
-          "title": "State:",
-          "value": "${State}"
-        },
-        {
-          "title": "Created by:",
-          "value": "${CreatedByName}"
-        },
-        {
-          "title": "Assigned to:",
-          "value": "${AssignedToName}"
-        },
-        {
-          "title": "Stakeholders:",
-          "value": "${StakeholderTeam}"
+          "type": "Column",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${NotificationId}"
+            },
+            {
+              "type": "TextBlock",
+              "text": "${TaskTitle}"
+            },
+            {
+              "type": "TextBlock",
+              "text": "${State}"
+            },
+            {
+              "type": "ColumnSet",
+              "minHeight": "30px",
+              "columns": [
+                {
+                  "type": "Column",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "style": "Person",
+                      "url": "${CreatedByProfileImage}",
+                      "height": "25px"
+                    }
+                  ],
+                  "width": "25px",
+                  "spacing": "None"
+                },
+                {
+                  "type": "Column",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "${CreatedByName}"
+                    }
+                  ],
+                  "width": "stretch",
+                  "verticalContentAlignment": "Center"
+                }
+              ]
+            },
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "style": "Person",
+                      "url": "${AssignedToProfileImage}",
+                      "height": "25px"
+                    }
+                  ],
+                  "width": "25px",
+                  "spacing": "None"
+                },
+                {
+                  "type": "Column",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "${AssignedToName}"
+                    }
+                  ],
+                  "width": "stretch",
+                  "verticalContentAlignment": "Top"
+                }
+              ]
+            },
+            {
+              "type": "TextBlock",
+              "text": "${StakeholderTeam}"
+            }
+          ],
+          "width": "stretch"
         }
       ]
     }

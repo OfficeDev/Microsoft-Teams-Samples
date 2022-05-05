@@ -7,9 +7,9 @@ namespace ReleaseManagement.Models
     public class WorkItem
     {
         /// <summary>
-        /// Gets or sets Id.
+        /// Gets or sets notification Id.
         /// </summary>
-        public string Id { get; set; }
+        public string NotificationId { get; set; }
 
         /// <summary>
         /// Gets or sets resource.

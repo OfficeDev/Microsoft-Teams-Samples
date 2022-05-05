@@ -9,9 +9,9 @@ namespace ReleaseManagement.Models
     public class ReleaseManagementTask
     {
         /// <summary>
-        /// Gets or sets Id.
+        /// Gets or sets notification Id.
         /// </summary>
-        public string Id { get; set; }
+        public string NotificationId { get; set; }
 
         /// <summary>
         /// Gets or sets task title.
@@ -22,6 +22,11 @@ namespace ReleaseManagement.Models
         /// Gets or sets assigned member name.
         /// </summary>
         public string AssignedToName { get; set; }
+
+        /// <summary>
+        /// Gets or sets assigned to user profile image.
+        /// </summary>
+        public string AssignedToProfileImage { get; set; }
 
         /// <summary>
         /// Gets or sets comma seperated stakeholder team members mail.
@@ -37,6 +42,11 @@ namespace ReleaseManagement.Models
         /// Gets or sets name of workitem creator.
         /// </summary>
         public string CreatedByName { get; set; }
+
+        /// <summary>
+        /// Gets or sets profile image of workitem creator.
+        /// </summary>
+        public string CreatedByProfileImage { get; set; }
 
         /// <summary>
         /// Gets or sets list of group member.

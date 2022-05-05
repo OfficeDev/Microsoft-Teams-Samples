@@ -20,10 +20,5 @@ namespace ReleaseManagement.Models.Configuration
         /// Gets or sets Microsoft tenant Id.
         /// </summary>
         public string MicrosoftAppTenantId { get; set; }
-
-        /// <summary>
-        /// Gets or sets external app Id.
-        /// </summary>
-        public string AppExternalId { get; set; }
     }
 }

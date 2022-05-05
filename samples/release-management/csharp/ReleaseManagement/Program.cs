@@ -25,7 +25,6 @@ builder.Services.AddOptions<AzureSettings>()
     botOptions.MicrosoftAppId = configuration.GetValue<string>("MicrosoftAppId");
     botOptions.MicrosoftAppPassword = configuration.GetValue<string>("MicrosoftAppPassword");
     botOptions.MicrosoftAppTenantId = configuration.GetValue<string>("MicrosoftAppTenantId");
-    botOptions.AppExternalId = configuration.GetValue<string>("AppExternalId");
 });
 
 // Creates Singleton Card Factory.

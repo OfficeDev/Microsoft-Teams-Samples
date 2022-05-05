@@ -17,14 +17,14 @@ namespace ReleaseManagement.Controllers
     [ApiController]
     public class WorkItemController : ControllerBase
     {
-        private readonly GraphHelper _helper;
-        private readonly IOptions<AzureSettings> azureSettings;
+        private readonly GraphHelper graphHelper;
+        private readonly DevOpsHelper devOpsHelper;
         private readonly ConcurrentDictionary<string, ReleaseManagementTask> taskDetails;
 
         public WorkItemController(IOptions<AzureSettings> azureSettings, ConcurrentDictionary<string, ReleaseManagementTask> taskDetails)
         {
-            this.azureSettings = azureSettings;
-            this._helper = new(azureSettings);
+            this.graphHelper = new(azureSettings);
+            this.devOpsHelper = new(azureSettings);
             this.taskDetails = taskDetails;
         }
 
@@ -32,14 +32,14 @@ namespace ReleaseManagement.Controllers
         public async Task<IActionResult> OnWebHookTriggerAsync(WorkItem workItem)
         {
             // Maps incoming workitem payload to release management model.
-            var releaseManagementTask = DevOpsHelper.MapToReleaseManagementTask(workItem);
+            var releaseManagementTask = await devOpsHelper.MapToReleaseManagementTask(workItem);
 
             taskDetails.AddOrUpdate(Constant.TaskDetails, releaseManagementTask, (key, newValue) => releaseManagementTask);
 
             if (releaseManagementTask.GroupChatMembers.Count() > 1)
             {
-                var groupChat = await _helper.CreateGroupChatAsync(releaseManagementTask.GroupChatMembers, releaseManagementTask.TaskTitle);
-                await _helper.AppinstallationforGroupAsync(groupChat.Id);
+                var groupChatId = await graphHelper.CreateGroupChatAsync(releaseManagementTask.GroupChatMembers, releaseManagementTask.TaskTitle);
+                await graphHelper.AppinstallationforGroupAsync(groupChatId);
             }
 
             return this.Ok();

@@ -4,19 +4,29 @@
 
 namespace ReleaseManagement.Helpers
 {
+    using Microsoft.Extensions.Options;
     using ReleaseManagement.Models;
+    using ReleaseManagement.Models.Configuration;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
 
     public class DevOpsHelper
     {
+        private readonly GraphHelper graphHelper;
+
+        public DevOpsHelper(IOptions<AzureSettings> azureSettings)
+        {
+            this.graphHelper = new(azureSettings);
+        }
+
         /// <summary>
         /// Maps the workitem object to release management task object.
         /// </summary>
         /// <param name="workItem">Incoming workitem payload.</param>
         /// <returns>Mapped release management task object.</returns>
-        public static ReleaseManagementTask MapToReleaseManagementTask (WorkItem workItem)
+        public async Task<ReleaseManagementTask> MapToReleaseManagementTask (WorkItem workItem)
         {
             var isAssignedToPresent = workItem.Resource.Fields.TryGetValue(Constant.AssignedTo, out string assignedToString);
             IEnumerable<string> emailList = workItem.Resource.Fields[Constant.StakeHolderTeamKey].Split(',');
@@ -32,13 +42,15 @@ namespace ReleaseManagement.Helpers
             var releaseManagementTask = new ReleaseManagementTask
             {
                 AssignedToName = isAssignedToPresent ? GetEmailOrName(assignedToString, true) : "",
-                Id = workItem.Id,
+                AssignedToProfileImage = isAssignedToPresent ? await graphHelper.GetProfilePictureByUserPrincipalNameAsync(GetEmailOrName(assignedToString, false)) : "",
+                NotificationId = workItem.NotificationId,
                 StakeholderTeam  = string.Join(", ", ValidateMails(workItem.Resource.Fields[Constant.StakeHolderTeamKey].Split(','))),
                 GroupChatMembers  = validEmailList,
                 State = workItem.Resource.Fields[Constant.StateKey],
                 TaskTitle = workItem.Resource.Fields[Constant.TaskTitleKey],
                 WorkitemUrl = (workItem.Resource._links["html"])["href"],
-                CreatedByName = GetEmailOrName(workItem.Resource.Fields[Constant.CreatedByKey], true)
+                CreatedByName = GetEmailOrName(workItem.Resource.Fields[Constant.CreatedByKey], true),
+                CreatedByProfileImage = await graphHelper.GetProfilePictureByUserPrincipalNameAsync(GetEmailOrName(workItem.Resource.Fields[Constant.CreatedByKey], false))
             };
 
             return releaseManagementTask;
@@ -59,7 +71,7 @@ namespace ReleaseManagement.Helpers
                 bool isValidEmail = regex.IsMatch(email.Trim());
                 if (isValidEmail)
                 {
-                    validEmailList = validEmailList.Append(email.Trim());
+                    validEmailList = validEmailList.Append(email.Trim().ToLower());
                 }
             }
 
