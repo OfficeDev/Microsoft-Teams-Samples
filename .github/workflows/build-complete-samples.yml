@@ -49,17 +49,17 @@ jobs:
               name: 'app-complete-sample'
               version: '3.1.301'
 
-            - project_path: 'samples/app-region-selection/csharp/RegionSectionApp/RegionSectionApp.csproj'
-              name: 'app-region-selection'
-              version: '3.1.301'
+            #- project_path: 'samples/app-region-selection/csharp/RegionSectionApp/RegionSectionApp.csproj'
+            #  name: 'app-region-selection'
+            #  version: '3.1.301'
 
             - project_path: 'samples/app-sso/csharp/App SSO Sample/App SSO Sample.csproj'
               name: 'app-sso'
               version: '3.1.301'
 
-            - project_path: 'samples/app-region-selection/csharp/RegionSectionApp/RegionSectionApp.csproj'
-              name: 'app-region-selection'
-              version: '3.1.301'
+            #- project_path: 'samples/app-region-selection/csharp/RegionSectionApp/RegionSectionApp.csproj'
+            #  name: 'app-region-selection'
+            #  version: '3.1.301'
 
             - project_path: 'samples/app-task-module/csharp/Microsoft.Teams.Samples.TaskModule.Web/Microsoft.Teams.Samples.TaskModule.Web.csproj'
               name: 'app-task-module'
