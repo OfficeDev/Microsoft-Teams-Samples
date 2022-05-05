@@ -61,11 +61,7 @@ jobs:
               name: 'app-virtual-assistant'
               version: '3.1.301'
 
-            - project_path: 'samples/bot-calling-meeting/csharp/CallingBotSample.csproj'
-              name: 'bot-calling-meeting'
-              version: '3.1.301'
-
-            - project_path: 'samples/bot-archive-groupchat-messages/csharp/FetchGroupChatMessages.csproj'
+            - project_path: 'samples/bot-archive-groupchat-messages/csharp/FetchGroupChatMessages/FetchGroupChatMessages.csproj'
               name: 'bot-archive-groupchat-messages'
               version: '3.1.301'
 
@@ -73,39 +69,39 @@ jobs:
               name: 'bot-calling-meeting'
               version: '3.1.301'
 
-            - project_path: 'samples/bot-daily-task-reminder/csharp/BotDailyTaskReminder.csproj'
+            - project_path: 'samples/bot-daily-task-reminder/csharp/BotDailyTaskReminder/BotDailyTaskReminder.csproj'
               name: 'bot-daily-task-reminder'
               version: '3.1.301'
 
-            - project_path: 'samples/bot-join-team-using-qr-code/csharp/JoinTeamByQR.csproj'
+            - project_path: 'samples/bot-join-team-using-qr-code/csharp/JoinTeamByQR/JoinTeamByQR.csproj'
               name: 'bot-join-team-using-qr-code'
               version: '3.1.301'
 
-            - project_path: 'samples/bot-people-picker-adaptive-card/csharp/PeoplePicker.csproj'
+            - project_path: 'samples/bot-people-picker-adaptive-card/csharp/PeoplePicker/PeoplePicker.csproj'
               name: 'bot-people-picker-adaptive-card'
               version: '3.1.301'
 
-            - project_path: 'samples/bot-receive-channel-messages-withRSC/csharp/ReceiveMessagesWithRSC.csproj'
+            - project_path: 'samples/bot-receive-channel-messages-withRSC/csharp/ReceiveMessagesWithRSC/ReceiveMessagesWithRSC.csproj'
               name: 'bot-receive-channel-messages-withRSC'
               version: '3.1.301'
 
-            - project_path: 'samples/bot-request-approval/csharp/BotRequestApproval.csproj'
+            - project_path: 'samples/bot-request-approval/csharp/BotRequestApproval/BotRequestApproval.csproj'
               name: 'bot-request-approval'
               version: '3.1.301'
 
-            - project_path: 'samples/bot-sequential-flow-adaptive-cards/csharp/SequentialUserSpecificFlow.csproj'
+            - project_path: 'samples/bot-sequential-flow-adaptive-cards/csharp/SequentialUserSpecificFlow/SequentialUserSpecificFlow.csproj'
               name: 'bot-sequential-flow-adaptive-cards'
               version: '3.1.301'
 
-            - project_path: 'samples/bot-sharepoint-file-viewer/csharp/BotWithSharePointFileViewer.csproj'
+            - project_path: 'samples/bot-sharepoint-file-viewer/csharp/BotWithSharePointFileViewer/BotWithSharePointFileViewer.csproj'
               name: 'bot-sharepoint-file-viewer'
               version: '3.1.301'
 
-            - project_path: 'samples/bot-sharepoint-list/csharp/SPListBot.csproj'
+            - project_path: 'samples/bot-sharepoint-list/csharp/SPListBot/SPListBot.csproj'
               name: 'bot-sharepoint-list'
               version: '3.1.301'
 
-            - project_path: 'samples/bot-type-ahead-search-adaptive-cards/csharp/TypeaheadSearch.csproj'
+            - project_path: 'samples/bot-type-ahead-search-adaptive-cards/csharp/TypeaheadSearch/TypeaheadSearch.csproj'
               name: 'bot-type-ahead-search-adaptive-cards'
               version: '3.1.301'
       fail-fast: false
