@@ -13,30 +13,7 @@ on:
   schedule:
     - cron: '12 21 * * *'  # every day at midnight
 env:
-    PROJECT_PATH_APP_COMPLETE_AUTH_CSHARP: 'samples/app-complete-auth/csharp/AppCompleteAuth/AppCompleteAuth.csproj'
-    PROJECT_PATH_APP_COMPLETE_AUTH_NODEJS: 'samples/app-complete-auth/nodejs'
-
-    PROJECT_PATH_APP_COMPLETE_SAMPLE_CSHARP: 'samples/app-complete-sample/csharp/template-bot-master-csharp/template-bot-master-csharp.csproj'
-    PROJECT_PATH_APP_COMPLETE_SAMPLE_NODEJS: 'samples/app-complete-sample/nodejs'
-
-    PROJECT_PATH_APP_HELLO_WORLD_CSHARP: 'samples/app-hello-world/csharp/Microsoft.Teams.Samples.HelloWorld.Web/Microsoft.Teams.Samples.HelloWorld.Web.csproj'
-    PROJECT_PATH_APP_HELLO_WORLD_NODEJS: 'samples/app-hello-world/nodejs'
-
-    PROJECT_PATH_APP_INSTALLATION_USING_QR_CODE_CSHARP: 'samples/app-installation-using-qr-code/csharp/QRAppInstallation/QRAppInstallation.csproj'
-    PROJECT_PATH_APP_INSTALLATION_USING_QR_CODE_NODEJS: 'samples/app-installation-using-qr-code/nodejs'
-
-    PROJECT_PATH_APP_LOCALIZATION_CSHARP: 'samples/app-localization/csharp/Localization/Localization.csproj'
-    PROJECT_PATH_APP_LOCALIZATION_NODEJS: 'samples/app-localization/nodejs'
-
-    PROJECT_PATH_APP_REGION_SELECTION_CSHARP: 'samples/app-region-selection/csharp/RegionSectionApp/RegionSectionApp.csproj'
-
-    PROJECT_PATH_APP_SSO_CSHARP: 'samples/app-sso/csharp/App SSO Sample/App SSO Sample.csproj'
-    PROJECT_PATH_APP_SSO_NODEJS: 'samples/app-sso/nodejs'
-
-    PROJECT_PATH_APP_TASK_MODULE_CSHARP: 'samples/app-task-module/csharp/Microsoft.Teams.Samples.TaskModule.Web/Microsoft.Teams.Samples.TaskModule.Web.csproj'
-    PROJECT_PATH_APP_TASK_MODULE_NODEJS: 'samples/app-task-module/nodejs'
-
-    PROJECT_PATH_APP_VIRTUAL_ASSISTANT_CSHARP: 'samples/app-virtual-assistant/csharp/TeamsVirtualAssistant.csproj'
+    PROJECT_PATH_APP_VIRTUAL_ASSISTANT_CSHARP: ''
 
 jobs:
   build-csharp-samples:
@@ -48,8 +25,96 @@ jobs:
               name: 'meetings-events'
               version: '3.1.301'
 
-            - project_path: 'samples/app-checkin-location/csharp/AppCheckinLocation/AppCheckinLocation.csproj'
-              name: 'app-checkin-location'
+            - project_path: 'samples/app-complete-auth/csharp/AppCompleteAuth/AppCompleteAuth.csproj'
+              name: 'app-complete-auth'
+              version: '3.1.301'
+
+            - project_path: 'samples/meetings-events/csharp/MeetingEvents/MeetingEvents.csproj'
+              name: 'meetings-events'
+              version: '3.1.301'
+
+            - project_path: 'samples/app-hello-world/csharp/Microsoft.Teams.Samples.HelloWorld.Web/Microsoft.Teams.Samples.HelloWorld.Web.csproj'
+              name: 'app-hello-world'
+              version: '3.1.301'
+
+            - project_path: 'samples/app-installation-using-qr-code/csharp/QRAppInstallation/QRAppInstallation.csproj'
+              name: 'app-installation-using-qr-code'
+              version: '3.1.301'
+
+            - project_path: 'samples/app-localization/csharp/Localization/Localization.csproj'
+              name: 'app-localization'
+              version: '3.1.301'
+
+            - project_path: 'samples/app-complete-sample/csharp/template-bot-master-csharp/template-bot-master-csharp.csproj'
+              name: 'app-complete-sample'
+              version: '3.1.301'
+
+            - project_path: 'samples/app-region-selection/csharp/RegionSectionApp/RegionSectionApp.csproj'
+              name: 'app-region-selection'
+              version: '3.1.301'
+
+            - project_path: 'samples/app-sso/csharp/App SSO Sample/App SSO Sample.csproj'
+              name: 'app-sso'
+              version: '3.1.301'
+
+            - project_path: 'samples/app-region-selection/csharp/RegionSectionApp/RegionSectionApp.csproj'
+              name: 'app-region-selection'
+              version: '3.1.301'
+
+            - project_path: 'samples/app-task-module/csharp/Microsoft.Teams.Samples.TaskModule.Web/Microsoft.Teams.Samples.TaskModule.Web.csproj'
+              name: 'app-task-module'
+              version: '3.1.301'
+
+            - project_path: 'samples/app-virtual-assistant/csharp/TeamsVirtualAssistant.csproj'
+              name: 'app-virtual-assistant'
+              version: '3.1.301'
+
+            - project_path: 'samples/bot-calling-meeting/csharp/CallingBotSample.csproj'
+              name: 'bot-calling-meeting'
+              version: '3.1.301'
+
+            - project_path: 'samples/bot-archive-groupchat-messages/csharp/FetchGroupChatMessages.csproj'
+              name: 'bot-archive-groupchat-messages'
+              version: '3.1.301'
+
+            - project_path: 'samples/bot-calling-meeting/csharp/CallingBotSample.csproj'
+              name: 'bot-calling-meeting'
+              version: '3.1.301'
+
+            - project_path: 'samples/bot-daily-task-reminder/csharp/BotDailyTaskReminder.csproj'
+              name: 'bot-daily-task-reminder'
+              version: '3.1.301'
+
+            - project_path: 'samples/bot-join-team-using-qr-code/csharp/JoinTeamByQR.csproj'
+              name: 'bot-join-team-using-qr-code'
+              version: '3.1.301'
+
+            - project_path: 'samples/bot-people-picker-adaptive-card/csharp/PeoplePicker.csproj'
+              name: 'bot-people-picker-adaptive-card'
+              version: '3.1.301'
+
+            - project_path: 'samples/bot-receive-channel-messages-withRSC/csharp/ReceiveMessagesWithRSC.csproj'
+              name: 'bot-receive-channel-messages-withRSC'
+              version: '3.1.301'
+
+            - project_path: 'samples/bot-request-approval/csharp/BotRequestApproval.csproj'
+              name: 'bot-request-approval'
+              version: '3.1.301'
+
+            - project_path: 'samples/bot-sequential-flow-adaptive-cards/csharp/SequentialUserSpecificFlow.csproj'
+              name: 'bot-sequential-flow-adaptive-cards'
+              version: '3.1.301'
+
+            - project_path: 'samples/bot-sharepoint-file-viewer/csharp/BotWithSharePointFileViewer.csproj'
+              name: 'bot-sharepoint-file-viewer'
+              version: '3.1.301'
+
+            - project_path: 'samples/bot-sharepoint-list/csharp/SPListBot.csproj'
+              name: 'bot-sharepoint-list'
+              version: '3.1.301'
+
+            - project_path: 'samples/bot-type-ahead-search-adaptive-cards/csharp/TypeaheadSearch.csproj'
+              name: 'bot-type-ahead-search-adaptive-cards'
               version: '3.1.301'
 
     name: Build "${{ matrix.name }}" csharp
@@ -78,10 +143,77 @@ jobs:
               name: 'app-checkin-location'
               version: '14.x'
 
+            - project_path: 'samples/app-complete-auth/nodejs'
+              name: 'app-complete-auth'
+              version: '14.x'
+
+            - project_path: 'samples/app-hello-world/nodejs'
+              name: 'app-hello-world'
+              version: '14.x'
+
+            - project_path: 'samples/app-installation-using-qr-code/nodejs'
+              name: 'app-installation-using-qr-code'
+              version: '14.x'
+
             - project_path: 'samples/app-localization/nodejs'
               name: 'app-localization'
               version: '14.x'
 
+            - project_path: 'samples/app-complete-sample/nodejs'
+              name: 'app-complete-sample'
+              version: '14.x'
+
+            - project_path: 'samples/app-sso/nodejs'
+              name: 'app-sso'
+              version: '14.x'
+
+            - project_path: 'samples/app-task-module/nodejs'
+              name: 'app-task-module'
+              version: '14.x'
+
+            - project_path: 'samples/bot-archive-groupchat-messages/nodejs'
+              name: 'bot-archive-groupchat-messages'
+              version: '14.x'
+
+            - project_path: 'samples/bot-daily-task-reminder/nodejs'
+              name: 'bot-daily-task-reminder'
+              version: '14.x'
+
+            - project_path: 'samples/bot-join-team-using-qr-code/nodejs'
+              name: 'bot-join-team-using-qr-code'
+              version: '14.x'
+
+            - project_path: 'samples/bot-people-picker-adaptive-card/nodejs'
+              name: 'bot-people-picker-adaptive-card'
+              version: '14.x'
+
+            - project_path: 'samples/bot-receive-channel-messages-withRSC/nodejs'
+              name: 'bot-receive-channel-messages-withRSC'
+              version: '14.x'
+
+            - project_path: 'samples/bot-request-approval/nodejs'
+              name: 'bot-request-approval'
+              version: '14.x'
+
+            - project_path: 'samples/bot-sequential-flow-adaptive-cards/nodejs'
+              name: 'bot-sequential-flow-adaptive-cards'
+              version: '14.x'
+
+            - project_path: 'samples/bot-sharepoint-file-viewer/nodejs'
+              name: 'bot-sharepoint-file-viewer'
+              version: '14.x'
+
+            - project_path: 'samples/bot-type-ahead-search-adaptive-cards/nodejs'
+              name: 'bot-type-ahead-search-adaptive-cards'
+              version: '14.x'
+
+            - project_path: 'samples/connector-generic/nodejs'
+              name: 'connector-generic'
+              version: '14.x'
+
+            - project_path: 'samples/connector-github-notification/nodejs'
+              name: 'connector-github-notification'
+              version: '14.x'
     name: Build "${{ matrix.name }}" nodejs
     defaults:
       run:
@@ -98,26 +230,4 @@ jobs:
         run: |
           npm install
           npm run build --if-present
-
-  send-email:
-    if: ${{ always() }}
-    needs: [build-csharp-samples, build-nodejs-samples]
-    runs-on: windows-latest
-    steps:
-        - uses: dawidd6/action-send-mail@v2
-          with:
-                # mail server settings
-                server_address: smtp-mail.outlook.com
-                server_port: 587
-                # user credentials
-                username: ${{ secrets.EMAIL_USERNAME_SAMPLE_HEALTH_BUILD }}
-                password: ${{ secrets.EMAIL_PASSWORD_SAMPLE_HEALTH_BUILD }}
-                # email subject
-                subject: Status of Automated build <<testing>>
-                # email body as text
-                body: ${{ github.workflow }} executed with status ${{ github.workflow.status }}
-                # comma-separated string, send email to
-                to: v-abt@microsoft.com
-                # from email name
-                from: Abhijeet Thakur
     
