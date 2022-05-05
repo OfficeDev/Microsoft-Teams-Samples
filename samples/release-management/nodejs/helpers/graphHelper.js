@@ -52,8 +52,10 @@ class GraphHelper {
      */
     async AppinstallationforGroupAsync(groupId) {
         try {
+            const appInternalId = await this.GetApplicationInternalId();
+
             const data = {
-                'teamsApp@odata.bind': 'https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/' + process.env.AppExternalId
+                'teamsApp@odata.bind': 'https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/' + appInternalId
             };
             await this.graphClient.api(`/chats/${groupId}/installedApps`).post(data);
         }
@@ -92,6 +94,47 @@ class GraphHelper {
         catch (ex) {
             console.log(ex);
         }
+    }
+
+    /**
+     * Gets the user's photo
+     * @param {string} userMail User mail.
+     * @returns Profile photo in base64 format.
+     */ 
+    async GetProfilePictureByUserPrincipalNameAsync(userMail) {
+        try 
+        {
+            const userInfo = await this.graphClient.api(`/users/${userMail}`).get();
+
+            const response = await this.graphClient.api(`/users/${userInfo.id}/photo/$value`).get();
+
+            var imageString = await response.arrayBuffer().then(result => {                
+                return "data:image/png;base64," + Buffer.from(result).toString('base64');
+            }); 
+
+            return imageString;
+        }
+        catch (ex)  {
+            console.log(ex);
+        }
+    }
+
+    /**
+     * Gets the application internal Id.
+     * @returns Application internal Id.
+     */
+    async GetApplicationInternalId() {
+        try
+        {
+            var apps =  await this.graphClient.api(`/appCatalogs/teamsApps`).filter(`externalId eq '${process.env.MicrosoftAppId}'`).get();
+            
+            return apps.value[0].id;
+        }
+        catch (ex)
+        {
+            throw ex;
+        }
+        
     }
 }
 module.exports = GraphHelper;

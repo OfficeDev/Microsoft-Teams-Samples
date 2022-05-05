@@ -82,7 +82,7 @@ server.post('/api/messages', (req, res) => {
 // Listen for incoming notifications and send proactive messages to group.
 server.post('/api/workItem', async (req, res) => {
     // Maps incoming workitem payload to release management model.
-    var releaseManagementTask = DevOpsHelper.MapToReleaseManagementTask(req.body);
+    var releaseManagementTask = await DevOpsHelper.MapToReleaseManagementTask(req.body);
 
     taskDetails[Constant.TaskDetails] = releaseManagementTask;
 
