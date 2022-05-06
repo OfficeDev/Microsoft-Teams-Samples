@@ -33,6 +33,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |20|People picker control in Adaptive Cards | This sample shows the feature of people picker control in Adaptive Cards.|[View](/demo%20manifest/People-Picker-Adaptive-Card.zip) |
 |21|App complete auth|This sample demos authentication feature in bot,tab and messaging extension.|[View](/demo%20manifest/App-Complete-Auth.zip) |
 |22|Meeting signing programmatic share to stage|Demonstrating the programmatic share to stage feature, by means of a document signing in a meeting. |[View](/demo%20manifest/Meeting-Share-To-Stage-Signing.zip) |
+|23|Tab people picker|This is an tab app which shows the feature of client sdk people picker. |[View](/demo%20manifest/Tab-People-Picker.zip) |
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 
 The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) is an extension on Visual Studio Code and Visual Studio. It enable Teams developers to create and deploy Teams apps with integrated identity, access to cloud storage, data from Microsoft Graph, and other services in Azure and M365 with a "zero-configuration" approach to the developer experience. And [Sample Apps](https://github.com/OfficeDev/TeamsFx-Samples) are provided in Teams Toolkit. Download and try it by today! [Learn more about Teams Toolkit](https://docs.microsoft.com/en-us/microsoftteams/platform/toolkit/visual-studio-code-overview).
@@ -64,7 +65,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |15|Create Conversational tab     | Microsoft Teams tab sample app for demonstrating create conversation tab | [View][tab-conversation#csharp]          |           |[View][tab-conversation#nodejs]
 |16| Product inspection | Demonstrating a feature where user can scan a product and mark it as approved/rejected. |[View][tab-product-inspection#csharp]|[View][productinspection#nodejs]|
 |17| Staggered Permission | This sample demos to get staggered graph api permissions. |[View][tab-staggered-permission#csharp]|[View][tab-staggered-permission#nodejs]|
-|18| tab people picker | This is an tab app which shows the feature of client sdk people picker. |[View][tab-people-picker#csharp]||
+|18| Tab people picker | This is an tab app which shows the feature of client sdk people picker. |[View][tab-people-picker#csharp]||
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
