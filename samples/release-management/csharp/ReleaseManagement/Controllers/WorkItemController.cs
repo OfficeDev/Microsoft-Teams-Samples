@@ -40,9 +40,10 @@ namespace ReleaseManagement.Controllers
             {
                 var groupChatId = await graphHelper.CreateGroupChatAsync(releaseManagementTask.GroupChatMembers, releaseManagementTask.TaskTitle);
                 await graphHelper.AppinstallationforGroupAsync(groupChatId);
+                return this.Ok();
             }
 
-            return this.Ok();
+            return this.BadRequest();
         }
     }
 }

@@ -17,6 +17,9 @@ namespace ReleaseManagement.Helpers
 
     public class GraphHelper
     {
+        /// <summary>
+        /// Stores the Azure configuration values.
+        /// </summary>
         private readonly IOptions<AzureSettings> azureSettings;
 
         public GraphHelper(IOptions<AzureSettings> azureSettings)
@@ -60,7 +63,8 @@ namespace ReleaseManagement.Helpers
                                                     .WithAuthority($"https://login.microsoftonline.com/{this.azureSettings.Value.MicrosoftAppTenantId}")
                                                     .WithRedirectUri("https://daemon")
                                                     .Build();
-            // TeamsAppInstallation.ReadWriteForChat.All Chat.Create
+
+            // TeamsAppInstallation.ReadWriteForChat.All Chat.Create User.Read.All TeamsAppInstallation.ReadWriteForChat.All
             string[] scopes = new string[] { "https://graph.microsoft.com/.default" };
             var result = await app.AcquireTokenForClient(scopes).ExecuteAsync();
 
@@ -150,6 +154,11 @@ namespace ReleaseManagement.Helpers
             return "";
         }
 
+        /// <summary>
+        /// Gets the user profile by user principal name.
+        /// </summary>
+        /// <param name="userPrincipalName">User principal name</param>
+        /// <returns>User profile pictrue in base64 format.</returns>
         public async Task<string> GetProfilePictureByUserPrincipalNameAsync (string userPrincipalName)
         {
             string accessToken = await GetToken();

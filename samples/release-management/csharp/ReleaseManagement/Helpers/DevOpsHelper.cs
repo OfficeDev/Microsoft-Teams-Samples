@@ -12,6 +12,9 @@ namespace ReleaseManagement.Helpers
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Maps the incoming workitem payload to resource model.
+    /// </summary>
     public class DevOpsHelper
     {
         private readonly GraphHelper graphHelper;
@@ -92,6 +95,7 @@ namespace ReleaseManagement.Helpers
             {
                 result = isName ? splitResult[0] : splitResult[1];
             }
+
             return result;
         }
     }

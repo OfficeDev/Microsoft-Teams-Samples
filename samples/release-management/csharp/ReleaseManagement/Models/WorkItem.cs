@@ -12,7 +12,7 @@ namespace ReleaseManagement.Models
         public string NotificationId { get; set; }
 
         /// <summary>
-        /// Gets or sets resource.
+        /// Gets or sets resource property of incoming workitem payload.
         /// </summary>
         public ResourceModel Resource { get; set; }
     }

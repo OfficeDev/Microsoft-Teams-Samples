@@ -14,12 +14,12 @@ namespace ReleaseManagement.Models
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or sets fields.
+        /// Gets or sets fields property of incoming workitem payload.
         /// </summary>
         public Dictionary<string, string> Fields { get; set; }
 
         /// <summary>
-        /// Gets or sets Links.
+        /// Gets or sets links property of incoming workitem payload.
         /// </summary>
         public Dictionary<string, Dictionary<string, dynamic>> _links { get; set; }
     }

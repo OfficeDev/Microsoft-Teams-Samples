@@ -24,6 +24,12 @@ namespace ReleaseManagement.Bots
             this.cardFactory = cardFactory;
         }
 
+        /// <summary>
+        /// Invoked when members are added/removed from the conversation.
+        /// </summary>
+        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnConversationUpdateActivityAsync(ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             var isPresent = taskDetails.TryGetValue(Constant.TaskDetails, out ReleaseManagementTask releaseManagementTask);
