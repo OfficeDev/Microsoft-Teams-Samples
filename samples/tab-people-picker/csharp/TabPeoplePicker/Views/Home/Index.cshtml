@@ -92,9 +92,9 @@
             margin-top: 0.5rem;
         }
 
-            .card:hover {
+        .card:hover {
                 box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-            }
+        }
 
         .card-container-div {
             padding-bottom: 2rem;
@@ -139,7 +139,7 @@ openOrgWideSearchInChatOrChannel: false,
 singleSelect: false)
                        </pre>
                     </div>
-                    <Button data-id="default" onclick="selectPeople(event,null,false,false)"> Select </Button>
+                    <Button data-id="default" onclick="selectPeople(event,[],false,false)"> Select </Button>
                     <div id="defaultSelected" class="label-text"></div>
                 </div>
             </div>
@@ -156,7 +156,7 @@ openOrgWideSearchInChatOrChannel: true,
 singleSelect: false)
 						</pre>
                     </div>
-                    <Button data-id="allMemberOfOrganisation" onclick="selectPeople(event,null,true,false)">
+                    <Button data-id="allMemberOfOrganisation" onclick="selectPeople(event,[],true,false)">
                         Select
                     </Button>
                     <div id="allMemberOfOrganisationSelected" class="label-text"></div>
@@ -177,7 +177,7 @@ openOrgWideSearchInChatOrChannel: false,
 singleSelect: true)
                             </pre>
                     </div>
-                    <Button data-id="singleSelect" onclick="selectPeople(event,null,false,true)"> Select </Button>
+                    <Button data-id="singleSelect" onclick="selectPeople(event,[],false,true)"> Select </Button>
                     <div id="singleSelected" class="label-text"></div>
                 </div>
             </div>
@@ -191,7 +191,7 @@ singleSelect: true)
 callbackfunc, 
 setSelected: aad id,
 openOrgWideSearchInChatOrChannel: false, 
-singleSelect: true)
+singleSelect: false)
 					     </pre>
                     </div>
                     <Button data-id="defaultSelect" onclick="selectPeople(event,'default',false,false)">
