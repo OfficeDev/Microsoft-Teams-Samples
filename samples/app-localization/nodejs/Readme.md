@@ -1,6 +1,7 @@
 ---
 page_type: sample
 description: Microsoft Teams app localization using Bot and Tab
+urlFragment: teams-app-localization-nodejs
 products:
 - office-teams
 - office
