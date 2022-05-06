@@ -37,7 +37,8 @@ export default function Home() {
             <Header
               as="h2"
               content="Unable to get information about the App."
-              description="Is the app running inside Microsoft Teams?"
+              description="This happens if you are running the application in a normal browser, and not inside Teams.
+                          Install the app inside Teams to test this application. To upload the app to Teams follow the instructions on https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload"
             />
           )}
         </div>

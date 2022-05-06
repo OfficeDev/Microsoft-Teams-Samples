@@ -17,6 +17,16 @@ createdDate: "07-07-2021 13:38:27"
 
 Bot Framework v4 sample for Teams expands the [52.teams-messaging-extensions-search-auth-config](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/javascript_nodejs/52.teams-messaging-extensions-search-auth-config) sample to include a configuration page and Bot Service SSO authentication.
 
+![action sso](Images/ActionCommand.PNG)
+
+![config page](Images/configurationPage.PNG)
+
+![nuget packages search result](Images/NugetPackagesSearchResult.PNG)
+
+![profile in search](Images/ProfileFromSearch.PNG)
+
+![link unfurling](Images/LinkUnfurlingCard.PNG)
+
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to use a Messaging Extension configuration page, as well as how to sign in from a search Messaging Extension.
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)

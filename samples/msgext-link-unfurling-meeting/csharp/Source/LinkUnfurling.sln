@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Teams.Samples.LinkUnfurling.Web", "Microsoft.Teams.Samples.LinkUnfurling\Microsoft.Teams.Samples.LinkUnfurling.Web.csproj", "{92FCBF96-ED6A-4229-9006-D19B74CF61B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Teams.Samples.LinkUnfurling.Web", "Microsoft.Teams.Samples.LinkUnfurling.Web\Microsoft.Teams.Samples.LinkUnfurling.Web.csproj", "{92FCBF96-ED6A-4229-9006-D19B74CF61B2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Teams.Samples.LinkUnfurling.Infrastructure", "Microsoft.Teams.Samples.Infrastructure\Microsoft.Teams.Samples.LinkUnfurling.Infrastructure.csproj", "{27A9339D-8BBB-4083-87DB-31B47345B42C}"
 EndProject
