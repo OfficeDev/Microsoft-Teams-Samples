@@ -26,6 +26,8 @@ This sample shows tab capability with the feature of client sdk people picker.
 
 ![Set selected search](Images/SetSelectedSearch.PNG)
 
+![Mobile View](Images/MobileView.PNG)
+
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/en/)
