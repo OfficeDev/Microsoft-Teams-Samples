@@ -71,7 +71,7 @@ The sample shows a simple implementation of a connector registration implementat
 1. Go to the [Application Registration Portal](https://aka.ms/appregistrations) and sign in with the your account to create an application.
 1. Navigate to **Authentication** under **Manage** and add the following redirect URLs:
 
-    - `https://<your_ngrok_url>/Connector/SimpleEnd`
+    - `https://<your_ngrok_url>/SimpleEnd`
 
 1. Additionally, under the **Implicit grant** subsection select **Access tokens** and **ID tokens**
 
