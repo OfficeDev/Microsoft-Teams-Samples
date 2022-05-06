@@ -26,7 +26,7 @@ This is an tab app which shows the feature of client sdk people picker.
 
 ![Set selected search](TabPeoplePicker/Images/SetSelectedSearch.PNG)
 
-![Mobile View](TabPeoplePicker/Images/MpbileView.PNG)
+![Mobile View](TabPeoplePicker/Images/MobileView.PNG)
 
 ## Prerequisites
 
