@@ -21,85 +21,57 @@ jobs:
     strategy:
       matrix:
         include:
-            - project_path: 'samples/app-complete-sample/csharp/template-bot-master-csharp/template-bot-master-csharp.csproj'
-              name: 'app-complete-sample'
-              version: '3.1.301'
-
-            - project_path: 'samples/app-region-selection/csharp/RegionSectionApp/RegionSectionApp.csproj'
+            - project_path: 'samples/app-region-selection/csharp/RegionSectionApp/RegionSelectionApp.csproj'
               name: 'app-region-selection'
               version: '3.1.301'
 
-            - project_path: 'samples/app-task-module/csharp/Microsoft.Teams.Samples.TaskModule.Web/Microsoft.Teams.Samples.TaskModule.Web.csproj'
-              name: 'app-task-module'
-              version: '3.1.301'
-
-            - project_path: 'samples/graph-activity-feed-broadcast/csharp/ActivityFeedBroadcast/ActivityFeedBroadcast.csproj'
-              name: 'graph-activity-feed-broadcast'
-              version: '3.1.301'
-
-            - project_path: 'samples/graph-app-installation-lifecycle/csharp/AppInstallation/AppInstallation.csproj'
-              name: 'graph-app-installation-lifecycle'
-              version: '3.1.301'
-
-            - project_path: 'samples/graph-appcatalog-lifecycle/csharp/AppCatalogSample/AppCatalogSample.csproj'
-              name: 'graph-appcatalog-lifecycle'
-              version: '3.1.301'
-
-            - project_path: 'samples/graph-change-notification/csharp/ChangeNotification/ChangeNotification.csproj'
-              name: 'graph-change-notification'
-              version: '3.1.301'
-
-            - project_path: 'samples/graph-channel-lifecycle/csharp/ChannelLifecycle/ChannelLifecycle.csproj'
-              name: 'graph-channel-lifecycle'
-              version: '3.1.301'
-
-            - project_path: 'samples/graph-chat-lifecycle/csharp/ChatLifecycle/ChatLifecycle.csproj'
-              name: 'graph-chat-lifecycle'
-              version: '3.1.301'
-
-            - project_path: 'samples/graph-proactive-installation/csharp/ProactiveAppInstallation/ProactiveAppInstallation.csproj'
-              name: 'graph-proactive-installation'
-              version: '3.1.301'
-
-            - project_path: 'samples/graph-rsc/csharp/RSCDemo/RSCDemo.csproj'
-              name: 'graph-rsc'
-              version: '3.1.301'
-
-            - project_path: 'samples/meeting-recruitment-app/csharp/MeetingApp/MeetingApp.csproj'
-              name: 'meeting-recruitment-app'
-              version: '3.1.301'
-
-            - project_path: 'samples/meetings-content-bubble/csharp/ContentBubble/Content Bubble Bot.csproj'
-              name: 'meetings-content-bubble'
-              version: '3.1.301'
-
-            - project_path: 'samples/meetings-details-tab/csharp/DetailsTab/DetailsTab.csproj'
-              name: 'meetings-details-tab'
-              version: '3.1.301'
-
-            - project_path: 'samples/meetings-live-code-interview/csharp/MeetingLiveCoding/MeetingLiveCoding.csproj'
-              name: 'meetings-live-code-interview'
-              version: '3.1.301'
-
-            - project_path: 'samples/meetings-sidepanel/csharp/SidePanel/SidePanel.csproj'
+            - project_path: 'samples/meetings-sidepanel/csharp/Side Panel/SidePanel.csproj'
               name: 'meetings-sidepanel'
               version: '3.1.301'
 
-            - project_path: 'samples/meetings-stage-view/csharp/AppInMeeting/AppInMeeting.csproj'
-              name: 'meetings-stage-view'
+            - project_path: 'samples/msgext-message-reminder/csharp/MessagingExtensionReminder/MessagingExtensionReminder.csproj'
+              name: 'msgext-message-reminder'
               version: '3.1.301'
 
-            - project_path: 'samples/meetings-token-app/csharp/TokenApp.csproj'
-              name: 'meetings-token-app'
+            - project_path: 'samples/tab-adaptive-cards/csharp/TabWithAdpativeCardFlow/TabWithAdpativeCardFlow.csproj'
+              name: 'tab-adaptive-cards'
               version: '3.1.301'
 
-            - project_path: 'samples/msgext-link-unfurling-meeting/csharp/Source/Microsoft.Teams.Samples.LinkUnfurling.Web./Microsoft.Teams.Samples.LinkUnfurling.Web.csproj'
-              name: 'msgext-link-unfurling-meeting'
+            - project_path: 'samples/tab-channel-group-config-page-auth/csharp/TabAuthentication/TabAuthentication.csproj'
+              name: 'tab-channel-group-config-page-auth'
               version: '3.1.301'
 
-            - project_path: 'samples/msgext-link-unfurling-reddit/csharp/dotnet/RLU.csproj'
-              name: 'msgext-link-unfurling-reddit'
-              version: '2.1.x'
+            - project_path: 'samples/tab-conversations/csharp/TabConversation/TabConversation.csproj'
+              name: 'tab-conversations'
+              version: '3.1.301'
+
+            - project_path: 'samples/tab-deeplink/csharp/DeepLinkBot/DeepLinkBot.csproj'
+              name: 'tab-deeplink'
+              version: '3.1.301'
+
+            - project_path: 'samples/tab-graph-toolkit/csharp/TabGraphToolkit/TabGraphToolkit.csproj'
+              name: 'tab-graph-toolkit'
+              version: '3.1.301'
+
+            - project_path: 'samples/tab-product-inspection/csharp/ProductInspection/ProductInspection.csproj'
+              name: 'tab-product-inspection'
+              version: '3.1.301'
+
+            - project_path: 'samples/tab-request-approval/csharp/TabRequestApproval/TabRequestApproval.csproj'
+              name: 'tab-request-approval'
+              version: '3.1.301'
+
+            - project_path: 'samples/tab-sso/csharp/TeamsTabSSO/TeamsTabSSO.csproj'
+              name: 'tab-sso'
+              version: '3.1.301'
+
+            - project_path: 'samples/tab-stage-view/csharp/TabInStageView/TabInStageView.csproj'
+              name: 'tab-stage-view'
+              version: '3.1.301'
+
+            - project_path: 'samples/tab-staggered-permission/csharp/StaggeredPermission/StaggeredPermission.csproj'
+              name: 'tab-staggered-permission'
+              version: '3.1.301'
 
       fail-fast: false
     name: Build "${{ matrix.name }}" csharp
@@ -115,81 +87,85 @@ jobs:
       - name: Build app
         run: dotnet build "${{ matrix.project_path }}" --configuration Release
 
+  build-dotnet-samples:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        include:
+            - project_path: 'samples/app-complete-sample/csharp/template-bot-master-csharp/template-bot-master-csharp.csproj'
+              name: 'app-complete-sample'
+
+            - project_path: 'samples/app-task-module/csharp/Microsoft.Teams.Samples.TaskModule.Web/Microsoft.Teams.Samples.TaskModule.Web.csproj'
+              name: 'app-task-module'
+
+      fail-fast: false
+    name: Build "${{ matrix.name }}" csharp
+    steps:
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Build app
+        run: msbuild ${{ matrix.project_path }}" -t:rebuild -verbosity:diag -property:Configuration=Release
+
   build-nodejs-samples:
     runs-on: windows-latest
     strategy:
       matrix:
         include:
-            - project_path: 'samples/app-localization/nodejs'
-              name: 'app-localization'
-              version: '14.x'
-
-            - project_path: 'samples/graph-activity-feed-broadcast/nodejs'
-              name: 'graph-activity-feed-broadcast'
-              version: '14.x'
-
-            - project_path: 'samples/graph-activity-feed/nodejs'
-              name: 'graph-activity-feed'
-              version: '14.x'
-
-            - project_path: 'samples/graph-app-installation-lifecycle/nodejs'
-              name: 'graph-app-installation-lifecycle'
-              version: '14.x'
-
-            - project_path: 'samples/graph-appcatalog-lifecycle/nodejs'
-              name: 'graph-appcatalog-lifecycle'
-              version: '14.x'
-
-            - project_path: 'samples/graph-change-notification/nodejs'
-              name: 'graph-change-notification'
-              version: '14.x'
-
-            - project_path: 'samples/graph-channel-lifecycle/nodejs'
-              name: 'graph-channel-lifecycle'
-              version: '14.x'
-
-            - project_path: 'samples/graph-chat-lifecycle/nodejs'
-              name: 'graph-chat-lifecycle'
-              version: '14.x'
-
-            - project_path: 'samples/graph-proactive-installation/nodejs'
-              name: 'graph-proactive-installation'
-              version: '14.x'
-
-            - project_path: 'samples/graph-rsc/nodejs'
-              name: 'graph-rsc'
-              version: '14.x'
-
-            - project_path: 'samples/meeting-recruitment-app/nodejs'
+            - project_path: 'samples/meeting-recruitment-app/nodejs/api'
               name: 'meeting-recruitment-app'
               version: '14.x'
 
-            - project_path: 'samples/meetings-content-bubble/nodejs'
-              name: 'meetings-content-bubblek'
-              version: '14.x'
-
-            - project_path: 'samples/meetings-details-tab/nodejs'
+            - project_path: 'samples/meetings-details-tab/nodejs/api'
               name: 'meetings-details-tab'
-              version: '14.x'
-
-            - project_path: 'samples/meetings-events/nodejs'
-              name: 'meetings-events'
               version: '14.x'
 
             - project_path: 'samples/meetings-live-code-interview/nodejs'
               name: 'meetings-live-code-interview'
               version: '14.x'
-
-            - project_path: 'samples/meetings-sidepanel/nodejs'
-              name: 'meetings-sidepanel'
+        
+            - project_path: 'samples/msgext-message-reminder/nodejs'
+              name: 'msgext-message-reminder'
               version: '14.x'
 
-            - project_path: 'samples/meetings-stage-view/nodejs'
-              name: 'meetings-stage-view'
+            - project_path: 'samples/msgext-search-sso-config/nodejs'
+              name: 'msgext-search-sso-config'
               version: '14.x'
 
-            - project_path: 'samples/meetings-token-app/nodejs'
-              name: 'meetings-token-app'
+            - project_path: 'samples/tab-adaptive-cards/nodejs'
+              name: 'tab-adaptive-cards'
+              version: '14.x'
+
+            - project_path: 'samples/tab-conversations/nodejs'
+              name: 'tab-conversations'
+              version: '14.x'
+
+            - project_path: 'samples/tab-deeplink/nodejs'
+              name: 'tab-deeplink'
+              version: '14.x'
+
+            - project_path: 'samples/tab-device-permissions/nodejs'
+              name: 'tab-device-permissions'
+              version: '14.x'
+
+            - project_path: 'samples/tab-product-inspection/nodejs'
+              name: 'tab-product-inspection'
+              version: '14.x'
+
+            - project_path: 'samples/tab-request-approval/nodejs'
+              name: 'tab-request-approval'
+              version: '14.x'
+
+            - project_path: 'samples/tab-sso/nodejs'
+              name: 'tab-sso'
+              version: '14.x'
+
+            - project_path: 'samples/tab-stage-view/nodejs'
+              name: 'tab-stage-view'
+              version: '14.x'
+
+            - project_path: 'samples/tab-staggered-permission/nodejs'
+              name: 'tab-staggered-permission'
               version: '14.x'
 
       fail-fast: false
