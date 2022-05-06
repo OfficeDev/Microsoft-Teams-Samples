@@ -105,7 +105,7 @@ jobs:
         uses: microsoft/setup-msbuild@v1.1
 
       - name: Build app
-        run: msbuild ${{ matrix.project_path }}" -t:rebuild -verbosity:diag -property:Configuration=Release
+        run: msbuild "${{ matrix.project_path }}" -t:rebuild -verbosity:diag -property:Configuration=Release
 
   build-nodejs-samples:
     runs-on: windows-latest
