@@ -35,6 +35,7 @@ class GraphHelper {
                 },
                 data: data
             };
+
             await axios(config)
                 .then(function (response) {
                     resolve((response.data).access_token)
@@ -57,6 +58,7 @@ class GraphHelper {
             const data = {
                 'teamsApp@odata.bind': 'https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/' + appInternalId
             };
+
             await this.graphClient.api(`/chats/${groupId}/installedApps`).post(data);
         }
         catch (ex) {
@@ -127,8 +129,12 @@ class GraphHelper {
         try
         {
             var apps =  await this.graphClient.api(`/appCatalogs/teamsApps`).filter(`externalId eq '${process.env.MicrosoftAppId}'`).get();
-            
-            return apps.value[0].id;
+
+            if (apps.value.length > 0) {
+                return apps.value[0].id;
+            }
+
+            return "";
         }
         catch (ex)
         {

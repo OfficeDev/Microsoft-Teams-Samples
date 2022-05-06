@@ -55,6 +55,7 @@ class DevOpsHelper {
                 validEmailList.push(email.trim());
             }
         });
+
         return validEmailList;
     }
 
@@ -72,6 +73,7 @@ class DevOpsHelper {
         {
             result = isName ? splitString[0] : splitString[1].replace('>','');
         }
+
         return result.trim();
     }
 }
