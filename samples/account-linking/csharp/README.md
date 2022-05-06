@@ -28,7 +28,7 @@ Please see the [Code Tours](#code-tours) section for in-depth explanation of the
 You will find the implementation details below. 
 
 This sample will help you
-•	Show you the architecture to build out SSO in Teams
+•	Show you the architecture to build out more seamless authentication by using SSO in Teams
 •	Use this code (if you build in C#) 
 
 ### Scope
@@ -59,14 +59,13 @@ Teams enacts AADD SSO in the following manner:
 6.	JavaScript in the tab application can parse the token and extract the information it needs, such as the user's email address. The tab app can optionally exchange the token server-side for further Graph permissions.
 
 ### Problem Definition
-You have two approaches to link AAD accounts with existing customer accounts. These two scenarios are:
+Teams SSO (https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso?tabs=dotnet) offers a seamless experience for partners to build auth inside of Teams. However, Teams SSO is only available for partners who use AzureAD already in their app. For partners that don't use AAD, they often have to use a workaround. There are two main types of scenarios that we typically see partners face when doing these workarounds:
 1.	the user exists in the third-party app with the same email address
 2.	the user exists in the third-party app with a different email address
-3.	the user logs  in with Microsoft SSO and then provides consent for AAD to access partner’s account information
 
 #### Scenario #1
 If the email addresses are same, then you can be linked right after the user is signed in with AAD. This is relatively simple for you to implement as you merely have to search their own auth system for the user’s email and associated the access token with that email. You need to create a separate attribute or separate table to match a user’s email address  with the AAD access token (and token refresh). 
-To add to this difficulty, AzureAD also does not advise email mapping. Emails and User Principal Names (UPNs) can sometimes change.
+To add to this difficulty, Microsoft also does not advise email mapping. Emails and User Principal Names (UPNs) can sometimes change.
  
 #### Scenario #2
 If the email addresses are different, you must do the following:
@@ -105,18 +104,16 @@ The flows are:
 Tab:
 1.	User consents to Teams SSO
 2.	User presented with partner auth popup
-3.	Azure AD consent
+
 Bot:
 1.	SignIn Card 
 2.	Auth popup
 3.	Partner auth 
-4.	Azure AD consent
+
 Message Extension: 
 1.	SignIn response
 2.	Auth popup
 3.	Partner auth
-4.	Azure AD consent
-
 
 ## Prerequisites
 
