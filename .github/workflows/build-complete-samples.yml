@@ -4,20 +4,12 @@
 name: Build - All Samples
 on:
   push:
-    #Change the branch name to <<main>>
-    #Change the path to the folder where your code resides. Any change here will start the activity. 
-    branches:
-      - v-abt/sample-health-build
-    paths:
-      - 'samples/app-installation-using-qr-code/csharp/**'  
   schedule:
-    - cron: '12 21 20 * *'  # every day at midnight
-env:
-    PROJECT_PATH_APP_VIRTUAL_ASSISTANT_CSHARP: ''
-
+    - cron: '12 21 20 * *'  # 20th every month at 21:12
 jobs:
   build-csharp-samples:
     runs-on: windows-latest
+    #Add project path, name and project runtime version as below for any new additions
     strategy:
       matrix:
         include:
@@ -201,6 +193,7 @@ jobs:
 
   build-nodejs-samples:
     runs-on: windows-latest
+    #Add project path, name and version as below for any new additions
     strategy:
       matrix:
         include:
