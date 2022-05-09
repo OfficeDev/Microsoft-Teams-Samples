@@ -26,10 +26,24 @@ namespace TabAuthentication.Controllers
         [Route("SimpleAuthStart")]
         public ActionResult SimpleAuthStart()
         {
-            ViewBag.ClientId = Configuration["SimpleClientId"].ToString();
+            ViewBag.ClientId = Configuration["ClientId"].ToString();
             ViewBag.ResponseType = Configuration["ResponseType"].ToString();
             ViewBag.ResponseMode = Configuration["ResponseMode"].ToString();
             ViewBag.Resource = Configuration["Resource"].ToString();
+            return View();
+        }
+
+        [Route("AuthStart")]
+        public ActionResult AuthStart()
+        {
+            ViewBag.AuthStartClientId = Configuration["ClientId"].ToString();
+            return View();
+        }
+
+        [Route("AuthEnd")]
+        public ActionResult AuthEnd()
+        {
+            ViewBag.AuthEndClientId = Configuration["ClientId"].ToString();
             return View();
         }
 
