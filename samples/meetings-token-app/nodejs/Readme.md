@@ -100,13 +100,13 @@ The app uses the Teams extensibility features described on the following pages:
 You can build and run the project from the command line or an IDE:
 
 1. Navigate to the Project root folder
-2. Run Client
+2. Build Client
+    - Open terminal
+    - npm run build
+3. Run Client
     - Open new terminal
     - npm run client
     - The client will start running on 4000 port
-3. Build Client
-    - Open terminal
-    - npm run build
 4. Run Server
     - Open new terminal
     - npm run server
