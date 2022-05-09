@@ -3,7 +3,6 @@
 
 name: Build - All Samples
 on:
-  push:
   schedule:
     - cron: '12 21 20 * *'  # 20th every month at 21:12
 jobs:
