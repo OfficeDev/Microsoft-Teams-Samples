@@ -17,6 +17,16 @@ extensions:
 
 This sample illustrates how to implement SSO authentication for Teams Tab.
 
+## Key feature.
+
+![SSO](Images/sso_personal.png)
+
+![Success SSO](Images/success_sso_personal.png)
+
+![Config](Images/config_teams.png)
+
+![Config SSO](Images/config_sso_teams.png)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account

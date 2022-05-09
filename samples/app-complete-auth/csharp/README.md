@@ -135,11 +135,15 @@ Messaging Extention Authentication
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 13. Navigate to **Authentication**
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
-    Set a redirect URI:
+- Set a redirect URI:
     * Select **Add a platform**.
     * Select **web**.
     * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-end`. This will be the page where a successful implicit grant flow will redirect the user.
-    Enable implicit grant by checking the following boxes:  
+- Set another redirect URI:
+    * Select **Add a platform**.
+    * Select **web**.
+    * Enter the **redirect URI** `https://token.botframework.com/.auth/web/redirect`. This will be use for bot authenticaiton. 
+- Enable implicit grant by checking the following boxes:  
     ✔ ID Token  
     ✔ Access Token  
 14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
@@ -148,6 +152,14 @@ Messaging Extention Authentication
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+   - Select Configuration section.
+   - Under Configuration, select add OAuth Connection Setting.
+   - Complete the form as follows:
+
+    a. **Name:** Enter a name for the connection. You'll use this name in your bot in the appsettings.json file.
+    b. **Client id:** Enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
+    c. **Client secret:** Enter the secret that you recorded for your Azure identity provider app in the steps above.
+    d. Provide **Scopes** like "User.Read openid"
   
 
 16. To test facebook auth flow [create a facebookapp](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-facebook?view=azure-bot-service-4.0) and get client id and secret for facebook app.
@@ -195,7 +207,6 @@ Messaging Extention Authentication
 21. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
    - `{{Microsoft-App-Id}}` with Application id generated from Step 3
    - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
-   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
 22. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 21.
 

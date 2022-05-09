@@ -32,4 +32,4 @@ In this quickstart we'll walk-through creating a custom channel/group tab with A
 
 For complete instructions on running this sample see:
 
-[Create a Custom Channel and Group Tab with ASP.NET Core and MVC](https://docs.microsoft.com/microsoftteams/platform/tabs/quickstarts/create-channel-group-tab-dotnet-core-mvc)
+[Create a Custom Channel and Group Tab with ASP.NET Core and MVC](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=mvc-csharp)
