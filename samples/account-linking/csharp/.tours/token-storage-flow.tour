@@ -1,0 +1,172 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Token Storage Flow",
+  "steps": [
+    {
+      "file": "Source/Services/UserTokenStore/IUserTokenStore.cs",
+      "description": "Token storage is abstracted by the `IUserTokenStore` interface. It supports a minimal set of operations `set`, `delete` and `get` all key'd off the tenant and user ids. \r\n\r\nIt is expected that the caller will serialize the token or token payload before calling.\r\n\r\nThis interface is kept minimal to allow for ease of implementation with off-the-shelf key/value databases. ",
+      "line": 31,
+      "selection": {
+        "start": {
+          "line": 7,
+          "character": 1
+        },
+        "end": {
+          "line": 31,
+          "character": 65
+        }
+      }
+    },
+    {
+      "file": "Source/Services/UserTokenStore/InMemory/InMemoryUserTokenStore.cs",
+      "description": "The simplest implementation of this token storage is a dictionary of (tenant id, userId) => token.",
+      "line": 13,
+      "selection": {
+        "start": {
+          "line": 11,
+          "character": 1
+        },
+        "end": {
+          "line": 13,
+          "character": 75
+        }
+      }
+    },
+    {
+      "file": "Source/Services/UserTokenStore/EncryptingUserTokenStoreDecorator.cs",
+      "description": "In practice persisting the tokens in plaintext is a security risk. If the database is leaked for any reason the attacker would have valid access tokens for every user. \r\n\r\nTo mitigate this, we need to encrypt the tokens before persisting them.",
+      "line": 17,
+      "selection": {
+        "start": {
+          "line": 15,
+          "character": 1
+        },
+        "end": {
+          "line": 17,
+          "character": 49
+        }
+      }
+    },
+    {
+      "file": "Source/Services/UserTokenStore/EncryptingUserTokenStoreDecorator.cs",
+      "description": "In this sample, we accomplish this with the [ASP.NET Core Data Protection library](https://docs.microsoft.com/en-us/aspnet/core/security/data-protection/consumer-apis/dangerous-unprotect?view=aspnetcore-6.0#ipersisteddataprotector). ",
+      "line": 21,
+      "selection": {
+        "start": {
+          "line": 21,
+          "character": 5
+        },
+        "end": {
+          "line": 21,
+          "character": 61
+        }
+      }
+    },
+    {
+      "file": "Source/Services/UserTokenStore/EncryptingUserTokenStoreDecorator.cs",
+      "description": "We use unique encryption keys for each user's token so that if an attacker managed to decrypt one token the others remain secure. \r\n\r\nThe data protection library uses the [PBKDF2](https://www.ietf.org/rfc/rfc2898.txt) algorithm to derive the encryption key from the tenant and user id.",
+      "line": 92,
+      "selection": {
+        "start": {
+          "line": 90,
+          "character": 8
+        },
+        "end": {
+          "line": 92,
+          "character": 97
+        }
+      }
+    },
+    {
+      "file": "Source/Services/UserTokenStore/EncryptingUserTokenStoreDecorator.cs",
+      "description": "We then use the derived key (protector) to encrypt the plain-text token. ",
+      "line": 83,
+      "selection": {
+        "start": {
+          "line": 80,
+          "character": 9
+        },
+        "end": {
+          "line": 83,
+          "character": 69
+        }
+      }
+    },
+    {
+      "file": "Source/Services/UserTokenStore/EncryptingUserTokenStoreDecorator.cs",
+      "description": "We then pass along the encrypted token to the underlying user token store. \r\n\r\nBy building this as a decorator pattern, the encryption layer can be reused and the underlying providers can focus on persistance and retrival.",
+      "line": 85,
+      "selection": {
+        "start": {
+          "line": 85,
+          "character": 9
+        },
+        "end": {
+          "line": 85,
+          "character": 123
+        }
+      }
+    },
+    {
+      "file": "Source/Services/UserTokenStore/EncryptingUserTokenStoreDecorator.cs",
+      "description": "Retriving the token works in reverse. We first fetch the encrypted token from the underlying provider",
+      "line": 49,
+      "selection": {
+        "start": {
+          "line": 42,
+          "character": 9
+        },
+        "end": {
+          "line": 49,
+          "character": 10
+        }
+      }
+    },
+    {
+      "file": "Source/Services/UserTokenStore/EncryptingUserTokenStoreDecorator.cs",
+      "description": "We then _attempt_ to decypt the payload. \r\n\r\nThe data protection library _might_ reject the encrypted payload if the key used to encrypt it was rotated (time based invalidation). \r\n\r\nSince threats such as an attacker both knowing an expired key and having the ability to write values into our database is out of scope we trust that the most likely reason for revocation was that the encryption key was rotated between uses. ",
+      "line": 63,
+      "selection": {
+        "start": {
+          "line": 54,
+          "character": 13
+        },
+        "end": {
+          "line": 63,
+          "character": 75
+        }
+      }
+    },
+    {
+      "file": "Source/Services/UserTokenStore/EncryptingUserTokenStoreDecorator.cs",
+      "description": "If we find that the key will either soon be expired (requiresMigration) or has already expired (wasRevoked) we go ahead and re-encrypt the token and persist it again with the refreshed key.",
+      "line": 69,
+      "selection": {
+        "start": {
+          "line": 64,
+          "character": 13
+        },
+        "end": {
+          "line": 69,
+          "character": 14
+        }
+      }
+    },
+    {
+      "file": "Source/Services/UserTokenStore/EncryptingUserTokenStoreDecorator.cs",
+      "description": "We then return back the unencrypted token",
+      "line": 75,
+      "selection": {
+        "start": {
+          "line": 75,
+          "character": 9
+        },
+        "end": {
+          "line": 75,
+          "character": 31
+        }
+      }
+    }
+  ],
+  "ref": "nibeauli/account-linking-sample"
+}
