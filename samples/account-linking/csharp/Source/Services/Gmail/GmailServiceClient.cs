@@ -1,4 +1,6 @@
-﻿using System.Net.Http.Headers;
+﻿using Microsoft.Extensions.Options;
+using Microsoft.Teams.Samples.AccountLinking.Sample.Services.OAuth;
+using System.Net.Http.Headers;
 
 namespace Microsoft.Teams.Samples.AccountLinking.SampleClient.Services.Gmail
 {
@@ -7,21 +9,26 @@ namespace Microsoft.Teams.Samples.AccountLinking.SampleClient.Services.Gmail
         private readonly ILogger<GmailServiceClient> _logger;
 
         private readonly HttpClient _httpClient;
+
+        private readonly ExternalAuthParameters _externalAuthParameters;
+
         public GmailServiceClient(
             ILogger<GmailServiceClient> logger,
-            HttpClient httpClient)
+            HttpClient httpClient,
+            IOptions<ExternalAuthParameters> externalAuthParameters)
         {
             _logger = logger;
             _httpClient = httpClient;
+            _externalAuthParameters = externalAuthParameters.Value;
         }
 
-        public async Task<GmailUserProfile> GetGmailUserProfile(string email, string userAccessToken)
+        public async Task<GmailUserProfile> GetUserProfile(string userAccessToken)
         {
             try
             {
                 var request = new HttpRequestMessage
                 {
-                    RequestUri = new Uri($"https://gmail.googleapis.com/gmail/v1/users/{email}/profile"),
+                    RequestUri = new Uri($"https://gmail.googleapis.com/gmail/v1/users/{_externalAuthParameters.GmailAddress}/profile"),
                     Method = HttpMethod.Get
                 };
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", userAccessToken);

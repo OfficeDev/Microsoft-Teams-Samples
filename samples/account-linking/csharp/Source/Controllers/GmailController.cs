@@ -30,8 +30,8 @@ namespace Microsoft.Teams.Samples.AccountLinking.SampleClient.Controllers
             _gmailServiceClient = gmailServiceClient;
         }
 
-        [HttpGet("gmailUserProfile")]
-        public async Task<IActionResult> GetGmailUserProfile()
+        [HttpGet("userProfile")]
+        public async Task<IActionResult> GetUserProfile()
         {
             var userId = User.FindFirstValue(ClaimConstants.ObjectId);
             var tenantId = User.FindFirstValue(ClaimConstants.TenantId);
@@ -58,7 +58,7 @@ namespace Microsoft.Teams.Samples.AccountLinking.SampleClient.Controllers
             }
             else if (tokenResult is AccessTokenResult accessTokenResult)
             {
-                var userProfile = await _gmailServiceClient.GetGmailUserProfile("externallinkingsample@gmail.com", accessTokenResult.AccessToken);
+                var userProfile = await _gmailServiceClient.GetUserProfile(accessTokenResult.AccessToken);
                 _logger.LogInformation("Total {count} mails are found in the inbox", userProfile.totalMessages);
                 return new JsonResult(userProfile);
             }

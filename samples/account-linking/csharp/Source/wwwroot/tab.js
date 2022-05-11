@@ -117,7 +117,8 @@ async function onLogin()
 {
   const accessToken = await getAccessToken();
 
-  let response = await fetch('/github/repositories', {
+    //TODO: swap the end point based on .env variable ?
+    let response = await fetch('/gmail/userProfile', {
     method: 'GET',
     headers: new Headers({
       authorization: `Bearer ${accessToken}`
@@ -134,7 +135,7 @@ async function onLogin()
     
 
     // re-run the request now that we are authenticated
-    response = await fetch('/github/repositories', {
+      response = await fetch('/gmail/userProfile', {
       method: 'GET',
       headers: new Headers({
         authorization: `Bearer ${accessToken}`
