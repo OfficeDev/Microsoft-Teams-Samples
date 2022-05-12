@@ -10,17 +10,28 @@
             cacheLocation: "localStorage",
             navigateToLoginRequestUrl: false,
         };
-        let authContext = new AuthenticationContext(config);
 
-        if (authContext.isCallback(window.location.hash)) {
-            authContext.handleWindowCallback(window.location.hash);
-            // Only call notifySuccess or notifyFailure if this page is in the authentication popup
-            if (window.opener) {
-                if (authContext.getCachedUser()) {
-                    microsoftTeams.authentication.notifySuccess();
-                } else {
-                    microsoftTeams.authentication.notifyFailure(authContext.getLoginError());
-                }
+        let msalConfig = {
+            auth: {
+                clientId: '@ViewBag.AuthEndClientId',
+                redirectUri: window.location.origin + "/SilentAuthEnd",       // This should be in the list of redirect uris for the AAD app
+                navigateToLoginRequestUrl: false,
+            },
+            cache: {
+                cacheLocation: "localStorage",
             }
-        }
+        };
+        // let authContext = new AuthenticationContext(config);
+        const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+        msalInstance.handleRedirectPromise(window.location.hash).then((tokenResponse) => {
+            debugger;
+            const currentAccounts = msalInstance.getAllAccounts();
+            if (!currentAccounts || currentAccounts.length === 0) {
+                microsoftTeams.authentication.notifyFailure("Unable to login");
+                return;
+            } else
+                microsoftTeams.authentication.notifySuccess();
+            } 
+        });
 </script>
