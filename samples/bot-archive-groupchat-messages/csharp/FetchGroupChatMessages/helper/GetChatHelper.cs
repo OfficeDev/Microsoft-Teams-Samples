@@ -33,7 +33,7 @@ namespace FetchGroupChatMessagesWithRSC.helper
             }
             catch (ServiceException ex)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -90,7 +90,7 @@ namespace FetchGroupChatMessagesWithRSC.helper
             }
             catch (ServiceException ex)
             {
-                throw ex;
+                throw;
             }
         }
 

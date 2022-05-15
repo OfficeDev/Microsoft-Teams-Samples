@@ -137,7 +137,7 @@ namespace CallingBotSample.Helpers
                 catch (System.Exception ex)
                 {
 
-                    throw ex;
+                    throw;
                 }
             });
         }
@@ -208,7 +208,7 @@ namespace CallingBotSample.Helpers
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
+                    throw;
                 }
             });
         }

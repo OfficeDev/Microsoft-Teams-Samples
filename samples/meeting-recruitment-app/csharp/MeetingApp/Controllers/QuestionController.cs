@@ -39,7 +39,7 @@ namespace MeetingApp.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -60,7 +60,7 @@ namespace MeetingApp.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -81,7 +81,7 @@ namespace MeetingApp.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -101,7 +101,7 @@ namespace MeetingApp.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
     }

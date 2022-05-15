@@ -62,7 +62,7 @@ namespace MeetingLiveCoding.Controllers
                 }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -112,7 +112,7 @@ namespace MeetingLiveCoding.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
     }
