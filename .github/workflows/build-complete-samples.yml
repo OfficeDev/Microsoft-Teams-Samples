@@ -25,7 +25,7 @@ jobs:
               name: 'msgext-message-reminder'
               version: '3.1.301'
 
-            - project_path: 'samples/tab-channel-group-config-page-auth/csharp/TabAuthentication/TabAuthentication.csproj'
+            - project_path: 'samples/tab-channel-group-config-page-auth/csharp/ConfigTabAuthentication/TabAuthentication.csproj'
               name: 'tab-channel-group-config-page-auth'
               version: '3.1.301'
 
@@ -73,11 +73,19 @@ jobs:
       fail-fast: false
     name: Build "${{ matrix.name }}" csharp
     steps:
-      - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v1.1
+      - uses: actions/checkout@v2
 
-      - name: Build app
-        run: msbuild "${{ matrix.project_path }}" -t:rebuild -verbosity:diag -property:Configuration=Release
+      - name: Setup MSBuild path
+        uses: microsoft/setup-msbuild@v1.0.2
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1.0.5
+
+      - name: Restore NuGet packages
+        run: nuget restore ${{ matrix.project_path }}
+      
+      - name: Build
+        run: msbuild ${{ matrix.project_path }} /p:Configuration=Release
 
   build-nodejs-samples:
     runs-on: windows-latest
@@ -88,7 +96,7 @@ jobs:
               name: 'msgext-search-sso-config'
               version: '14.x'
 
-            - project_path: 'samples/meetings-details-tab/nodejs/api'
+            - project_path: 'samples/meetings-details-tab/nodejs'
               name: 'meetings-details-tab'
               version: '14.x'
 
@@ -96,7 +104,7 @@ jobs:
               name: 'tab-device-permissions'
               version: '14.x'
 
-            - project_path: 'samples/meetings-live-code-interview/nodejs'
+            - project_path: 'samples/meetings-live-code-interview/nodejs/api'
               name: 'meetings-live-code-interview'
               version: '14.x'
       fail-fast: false
