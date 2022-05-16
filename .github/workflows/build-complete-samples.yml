@@ -12,8 +12,6 @@ on:
       - 'samples/app-installation-using-qr-code/csharp/**'  
   schedule:
     - cron: '12 21 * * *'  # every day at midnight
-env:
-    PROJECT_PATH_APP_VIRTUAL_ASSISTANT_CSHARP: ''
 
 jobs:
   build-csharp-samples:
@@ -21,29 +19,6 @@ jobs:
     strategy:
       matrix:
         include:
-            - project_path: 'samples/msgext-message-reminder/csharp/MessagingExtensionReminder/MessagingExtensionReminder.csproj'
-              name: 'msgext-message-reminder'
-              version: '3.1.301'
-
-            - project_path: 'samples/tab-channel-group-config-page-auth/csharp/ConfigTabAuthentication/TabAuthentication.csproj'
-              name: 'tab-channel-group-config-page-auth'
-              version: '3.1.301'
-
-            - project_path: 'samples/tab-deeplink/csharp/DeepLinkBot/DeepLinkBot.csproj'
-              name: 'tab-deeplink'
-              version: '3.1.301'
-
-            - project_path: 'samples/tab-graph-toolkit/csharp/TabGraphToolkit/TabGraphToolkit.csproj'
-              name: 'tab-graph-toolkit'
-              version: '3.1.301'
-
-            - project_path: 'samples/tab-sso/csharp/TeamsTabSSO/TeamsTabSSO.csproj'
-              name: 'tab-sso'
-              version: '3.1.301'
-
-            - project_path: 'samples/tab-stage-view/csharp/TabInStageView/TabInStageView.csproj'
-              name: 'tab-stage-view'
-              version: '3.1.301'
 
       fail-fast: false
     name: Build "${{ matrix.name }}" csharp
@@ -64,10 +39,10 @@ jobs:
     strategy:
       matrix:
         include:
-            - project_path: 'samples/app-complete-sample/csharp/template-bot-master-csharp/template-bot-master-csharp.csproj'
+            - project_path: 'samples/app-complete-sample/csharp/template-bot-master-csharp.sln'
               name: 'app-complete-sample'
 
-            - project_path: 'samples/app-task-module/csharp/Microsoft.Teams.Samples.TaskModule.Web/Microsoft.Teams.Samples.TaskModule.Web.csproj'
+            - project_path: 'samples/app-task-module/csharp/Microsoft.Teams.Samples.TaskModule.sln'
               name: 'app-task-module'
 
       fail-fast: false
@@ -92,20 +67,16 @@ jobs:
     strategy:
       matrix:
         include:
-            - project_path: 'samples/msgext-search-sso-config/nodejs'
+            - project_path: 'samples\msgext-search-sso-config\nodejs'
               name: 'msgext-search-sso-config'
               version: '14.x'
 
-            - project_path: 'samples/meetings-details-tab/nodejs'
+            - project_path: 'samples\meetings-details-tab\nodejs'
               name: 'meetings-details-tab'
               version: '14.x'
 
             - project_path: 'samples/tab-device-permissions/nodejs'
               name: 'tab-device-permissions'
-              version: '14.x'
-
-            - project_path: 'samples/meetings-live-code-interview/nodejs/api'
-              name: 'meetings-live-code-interview'
               version: '14.x'
       fail-fast: false
     name: Build "${{ matrix.name }}" nodejs
