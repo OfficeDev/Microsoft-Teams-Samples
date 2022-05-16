@@ -14,25 +14,25 @@ on:
     - cron: '12 21 * * *'  # every day at midnight
 
 jobs:
-  build-csharp-samples:
-    runs-on: windows-latest
-    strategy:
-      matrix:
-        include:
+  #build-csharp-samples:
+  #  runs-on: windows-latest
+  #  strategy:
+  #    matrix:
+  #      include:
 
-      fail-fast: false
-    name: Build "${{ matrix.name }}" csharp
-    steps:
-      - uses: actions/checkout@v2
+  #    fail-fast: false
+  #  name: Build "${{ matrix.name }}" csharp
+  #  steps:
+  #    - uses: actions/checkout@v2
 
-      - name: Set up .NET Core
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: "${{ matrix.version }}"
-          include-prerelease: true
+  #    - name: Set up .NET Core
+  #      uses: actions/setup-dotnet@v1
+  #      with:
+  #        dotnet-version: "${{ matrix.version }}"
+  #        include-prerelease: true
 
-      - name: Build app
-        run: dotnet build "${{ matrix.project_path }}" --configuration Release
+  #    - name: Build app
+  #      run: dotnet build "${{ matrix.project_path }}" --configuration Release
 
   build-dotnet-samples:
     runs-on: windows-latest
