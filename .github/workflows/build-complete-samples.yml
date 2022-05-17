@@ -67,7 +67,7 @@ jobs:
     strategy:
       matrix:
         include:
-            - project_path: 'samples\msgext-search-sso-config\nodejs'
+            - project_path: 'samples\msgext-search-sso-config'
               name: 'msgext-search-sso-config'
               version: '14.x'
 
