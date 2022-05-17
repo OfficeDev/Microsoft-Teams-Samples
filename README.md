@@ -225,8 +225,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 [connector#cs]:samples/connector-todo-notification/csharp
 [incoming-webhook#cs]:samples/incoming-webhook/csharp
-[release-management#cs]:samples/release-management/csharp
-[release-management#nodejs]:samples/release-management/nodejs
+[release-management#cs]:samples/bot-release-management/csharp
+[release-management#nodejs]:samples/bot-release-management/nodejs
 [connector#ts]:samples/connector-github-notification/nodejs
 [connector-generic#ts]:samples/connector-generic/nodejs
 [sequential#workflow#csharp]:samples/bot-sequential-flow-adaptive-cards/csharp
