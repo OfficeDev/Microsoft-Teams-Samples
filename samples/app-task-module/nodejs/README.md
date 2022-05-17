@@ -37,16 +37,73 @@ The tab shows how to invoke the task module using the Teams SDK. Source code for
 The following task modules are supported:
 
 * YouTube, which is comprised of a [generic template for embedded `<iframe>` experiences](src/views/embed.pug) (also used for the PowerApp task module below) plus a [four-line stub containing the YouTube embed URL](src/views/youtube.pug)
+
+![Youtube TaskModule](Images/YoutubeTaskModule.PNG)
 * [PowerApp](src/views/powerapp.pug) &mdash; unfortunately it doesn't work out of the box; click the button or see the [source code](src/views/powerapp.pug) for details on how you can customize it for your tenant
+
+![PowerApp TaskModule](Images/PowerApp_TaskModule.PNG)
 * [A simple HTML form](src/views/customform.pug)
+
+![Html form](Images/CustomerInfoTaskModule.PNG)
 * There are two Adaptive card examples:
   * Showing the results of an `Action.Submit` button returned to the tab
   * Showing the results returned to the bot as a message
 
-The sample app also contains a bot with cards allowing you to invoke these task modules. You can invoke them from an Adaptive card (using the _tasks_ command) or from a Bot Framework thumbnail card (using the _bfcard_ command). [RootDialog.ts](src/dialogs/RootDialog.ts) contains the code for the _tasks_ and _bfcard_ commands, and [TeamsBot.ts](src/TeamsBot.ts) contains the code for responding to `task/fetch` and `task/submit` messages. The task modules when invoked from a bot are the same as for the tab, except for the Adaptive card examples:
+The sample app also contains a bot with cards allowing you to invoke these task modules.
+
+![Deeplink Invoke](Images/Card_Deeplink.PNG)
+
+![task/fetch Invoke](Images/Card_TaskFetch.PNG)
+
+You can invoke them from an Adaptive card (using the _tasks_ command) or from a Bot Framework thumbnail card (using the _bfcard_ command). 
+
+[RootDialog.ts](src/dialogs/RootDialog.ts) contains the code for the _tasks_ and _bfcard_ commands, and [TeamsBot.ts](src/TeamsBot.ts) contains the code for responding to `task/fetch` and `task/submit` messages. The task modules when invoked from a bot are the same as for the tab, except for the Adaptive card examples:
 
 * _Adaptive Card - Single_ returns the results to the conversation as a message.
 * _Adaptive Card - Sequence_ shows how adaptive cards can be chained together: instead of returning the result to the chat, the result is shown in another Adaptive card.
+
+## Run this sample locally.
+> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
+> the Teams service needs to call into the bot.
+
+### 1. Setup for Bot
+In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/abs-quickstart?view=azure-bot-service-4.0&tabs=userassigned).
+
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
+### 2. Run your bot sample
+1) Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+2) In a terminal, navigate to `samples/app-task-module/nodejs`
+
+3) Install modules
+
+    ```bash
+    npm install
+    ```
+6) Build application:
+
+    ```bash
+    npm run build
+    ```
+
+4) Run ngrok - point to port 3978
+
+    ```bash
+    ngrok http -host-header=rewrite 3978
+    ```
+    This will be used as baseURI.
+5) Update the `.env` configuration for the bot to use the `MICROSOFT_APP_ID` and `MICROSOFT_APP_PASSWORD` from the Azure Bot resource. (Note that the MicrosoftAppId is the AppId created in step 1, the MicrosoftAppPassword is referred to as the "client secret" in step 1 and you can always create a new client secret anytime.). For `BASE_URI` provide the application base url, you get by running ngrok it should look something like `https://abc21-hun-12ef.ngrok.io`
+
+6) Run your bot at the command line:
+
+    ```bash
+    npm start
+    ```
 
 ## Implementation notes
 

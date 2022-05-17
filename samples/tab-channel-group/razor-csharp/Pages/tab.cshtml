@@ -12,8 +12,8 @@
     let saveGray = () => {
         microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
             microsoftTeams.settings.setSettings({
-                websiteUrl: "replace with ngrok address",
-                contentUrl: "replace with ngrok address/gray",
+                websiteUrl: `${window.location.origin}`,
+                contentUrl: `${window.location.origin}/gray`,
                 entityId: "grayIconTab",
                 suggestedDisplayName: "MyNewTab",
                 removeUrl: ""
@@ -24,8 +24,8 @@
     let saveRed = () => {
         microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
             microsoftTeams.settings.setSettings({
-                websiteUrl: "replace with ngrok address",
-                contentUrl: "replace with ngrok address/red",
+                websiteUrl: `${window.location.origin}`,
+                contentUrl: `${window.location.origin}/red`,
                 entityId: "redIconTab",
                 suggestedDisplayName: "MyNewTab",
                 removeUrl: ""
@@ -66,7 +66,6 @@
         gr.display = "block";
         rd.display = "none";
         microsoftTeams.settings.setValidityState(true);
-        $(".disappear").remove();
         saveGray()
     }
 
@@ -74,7 +73,6 @@
         rd.display = "block";
         gr.display = "none";
         microsoftTeams.settings.setValidityState(true);
-        $(".disappear").remove();
         saveRed();
     }
 </script>
