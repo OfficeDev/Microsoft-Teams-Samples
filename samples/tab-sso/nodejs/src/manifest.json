@@ -11,12 +11,12 @@
       "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
     },
     "name": {
-      "short": "Teams Auth SSO",
-      "full": "Teams Auth SSO"
+      "short": "Tab Auth SSO",
+      "full": "Tab Auth SSO"
     },
     "description": {
-      "short": "Teams Auth SSO app",
-      "full": "The Teams Auth SSO app"
+      "short": "Tab Auth SSO app",
+      "full": "This sample shows sso authentication for tab."
     },
     "icons": {
       "outline": "outline.png",
