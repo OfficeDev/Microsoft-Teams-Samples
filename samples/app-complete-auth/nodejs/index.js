@@ -129,7 +129,7 @@ server.post('/api/messages', async (req, res) => {
 server.post('/getProfileOnBehalfOf', function (req, res) {
   var tid = req.body.tid;
   var token = req.body.token;
-  var scopes = ["https://graph.microsoft.com/User.Read"];
+  var scopes = ["https://graph.microsoft.com/User.Read", "openid"];
 
   // Creating MSAL client
   const msalClient = new msal.ConfidentialClientApplication({
@@ -148,17 +148,23 @@ server.post('/getProfileOnBehalfOf', function (req, res) {
     }).then(async result => {
       const client = new SimpleGraphClient(result.accessToken);
       const myDetails = await client.getMeAsync();
-      var userImage = await client.getUserPhoto()
-      await userImage.arrayBuffer().then(result => {
-        console.log(userImage.type);
-        imageString = Buffer.from(result).toString('base64');
-        img2 = "data:image/png;base64," + imageString;
-        var userData = {
-          details: myDetails,
-          image: img2
-        }
-        resolve(userData);
-      })
+      try {
+        var userImage = await client.getUserPhoto()
+        await userImage.arrayBuffer().then(result => {
+          console.log(userImage.type);
+          imageString = Buffer.from(result).toString('base64');
+          img2 = "data:image/png;base64," + imageString;
+          var userData = {
+            details: myDetails,
+            image: img2
+          }
+          resolve(userData);
+        });
+      }
+      catch (error) {
+        console.log(error);
+      }
+      
     }).catch(error => {
       reject({ "error": error.errorCode });
     });

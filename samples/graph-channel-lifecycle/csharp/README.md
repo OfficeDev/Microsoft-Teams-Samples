@@ -60,11 +60,11 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
 - [Upload app manifest file](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#load-your-package-into-teams) (zip file) to your team
   
   
-  ![](ChannelLifecycle/Images/Picture1.png)
+  ![](ChannelLifecycle/Images/Image1.PNG)
 
-  ![](ChannelLifecycle/Images/Picture2.png)
+  ![](ChannelLifecycle/Images/Image2.PNG)
 
-  ![](ChannelLifecycle/Images/Picture3.png)
+  ![](ChannelLifecycle/Images/Image3.PNG)
   
   
  

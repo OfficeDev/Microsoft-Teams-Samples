@@ -22,9 +22,9 @@
             microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
                 microsoftTeams.settings.setSettings({
                     entityID: "Side Panel App",
-                    contentUrl: `${window.location.origin}/Home/SidePanel`,
+                    contentUrl: `${window.location.origin}/Home/sidePanel`,
                     suggestedTabName: "Side Panel App",
-                    websiteUrl: `${window.location.origin}/Home/SidePanel`,
+                    websiteUrl: `${window.location.origin}/Home/sidePanel`,
                 });
                 saveEvent.notifySuccess();
             });
