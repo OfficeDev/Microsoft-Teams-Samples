@@ -19,5 +19,10 @@
             "fx-resource-appstudio"
         ]
     },
-    "programmingLanguage": "javascript"
+    "programmingLanguage": "javascript",
+    "pluginSettings": {
+        "fx-resource-bot": {
+            "capabilities": []
+        }
+    }
 }
