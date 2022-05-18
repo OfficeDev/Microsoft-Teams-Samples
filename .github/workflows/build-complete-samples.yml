@@ -139,7 +139,7 @@ jobs:
               name: 'meetings-live-code-interview'
               version: '3.1.301'
 
-            - project_path: 'samples/meetings-sidepanel/csharp/SidePanel/SidePanel.csproj'
+            - project_path: 'samples/meetings-sidepanel/csharp/Side Panel/SidePanel.csproj'
               name: 'meetings-sidepanel'
               version: '3.1.301'
 
@@ -456,7 +456,7 @@ jobs:
               name: 'bot-conversation-quickstart'
               version: '14.x'
 
-            - project_path: 'samples/bot-release-management/nodejs'
+            - project_path: 'samples\bot-release-management\nodejs'
               name: 'bot-release-management'
               version: '14.x'
 
