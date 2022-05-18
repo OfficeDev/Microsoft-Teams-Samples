@@ -14,25 +14,36 @@ on:
     - cron: '12 21 * * *'  # every day at midnight
 
 jobs:
-  #build-csharp-samples:
-  #  runs-on: windows-latest
-  #  strategy:
-  #    matrix:
-  #      include:
+  build-csharp-samples:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        include:
+            - project_path: 'samples/bot-adaptivecards-user-specific-views/csharp/Microsoft.Teams.Samples.UserSpecificViews/Microsoft.Teams.Samples.UserSpecificViews.csproj'
+              name: 'bot-adaptivecards-user-specific-views'
+              version: '6.0.x'
 
-  #    fail-fast: false
-  #  name: Build "${{ matrix.name }}" csharp
-  #  steps:
-  #    - uses: actions/checkout@v2
+            - project_path: 'samples/bot-proactive-messaging/csharp/proactive-cmd/msteams-app-proactivecmd.csproj'
+              name: 'bot-proactive-messaging'
+              version: '3.1.301'
 
-  #    - name: Set up .NET Core
-  #      uses: actions/setup-dotnet@v1
-  #      with:
-  #        dotnet-version: "${{ matrix.version }}"
-  #        include-prerelease: true
+            - project_path: 'samples/bot-sharepoint-list/csharp/SPListBot/SPListBot.csproj'
+              name: 'bot-sharepoint-list'
+              version: '3.1.301'
 
-  #    - name: Build app
-  #      run: dotnet build "${{ matrix.project_path }}" --configuration Release
+      fail-fast: false
+    name: Build "${{ matrix.name }}" csharp
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "${{ matrix.version }}"
+          include-prerelease: true
+
+      - name: Build app
+        run: dotnet build "${{ matrix.project_path }}" --configuration Release
 
   build-dotnet-samples:
     runs-on: windows-latest
@@ -77,6 +88,10 @@ jobs:
 
             - project_path: 'samples/tab-device-permissions/nodejs'
               name: 'tab-device-permissions'
+              version: '14.x'
+
+            - project_path: 'samples/bot-conversation-quickstart/js'
+              name: 'bot-conversation-quickstart'
               version: '14.x'
       fail-fast: false
     name: Build "${{ matrix.name }}" nodejs
