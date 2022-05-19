@@ -64,7 +64,6 @@
         }
 
         // Converts decimal to hex equivalent
-        // (From ADAL.js: https://github.com/AzureAD/azure-activedirectory-library-for-js/blob/dev/lib/adal.js)
         function _decimalToHex(number) {
             let hex = number.toString(16);
             while (hex.length < 2) {
@@ -75,7 +74,6 @@
         }
 
         // Generates RFC4122 version 4 guid (128 bits)
-        // (From ADAL.js: https://github.com/AzureAD/azure-activedirectory-library-for-js/blob/dev/lib/adal.js)
         function _guid() {
             let cryptoObj = window.crypto || window.msCrypto; // for IE 11
             if (cryptoObj && cryptoObj.getRandomValues) {
