@@ -10,6 +10,8 @@ export default function ContextService(teamsClient, timeout = 10000) {
                     ...teamsContext,
                     meetingId: teamsContext.meetingId,
                     conversationId: teamsContext.chatId,
+                    tid: teamsContext.tid,
+                    userObjectId: teamsContext.userObjectId
                 });
             });
             setTimeout(() => {
