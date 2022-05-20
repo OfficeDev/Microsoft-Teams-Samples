@@ -3,6 +3,19 @@
 
 >NOTE: These samples are designed to help understand Microsoft Teams platform capabilities and scenarios. If you are looking for production ready apps then please visit [App Templates for Microsoft Teams](https://docs.microsoft.com/microsoftteams/platform/samples/app-templates)
 
+# Sample lists
+
+1. [Ready to try sample manifests](#try-it-yourself---experience-the-apps-in-your-microsoft-teams-client)
+1. [Teams Toolkit samples](#samples-built-using-new-generation-of-teams-development-tool---teams-toolkit)
+1. [Getting Started Samples and Tutorials](#getting-started---samples-and-tutorials)
+1. [Tabs samples](#Tabs-samples)
+1. [Bots samples (using the v4 SDK)](#Bots-samples-using-the-v4-SDK)
+1. [Messaging Extensions samples (using the v4 SDK)](#Messaging-Extensions-samples-using-the-v4-SDK)
+1. [Webhooks and Connectors samples](#Webhooks-and-Connectors-samples)
+1. [Graph APIs](#Graph-APIs)
+1. [Calls and online meetings bots](#Calls-and-online-meetings-bots)
+1. [Scenario specific samples](#Scenario-specific-samples)
+
 
 ## Try it yourself - experience the Apps in your Microsoft Teams client
 
