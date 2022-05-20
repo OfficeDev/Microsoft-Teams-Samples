@@ -12,13 +12,12 @@
 
 <script type="text/javascript">
 
-    microsoftTeams.initialize();
-
     function loginV1() {
         login(window.location.origin + "/SimpleAuthStart");
     }
 
     function login(url) {
+        microsoftTeams.initialize();
         microsoftTeams.authentication.authenticate({
             url: url,
             width: 600,

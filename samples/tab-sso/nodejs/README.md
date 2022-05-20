@@ -105,8 +105,7 @@ Thhe app should start running on port 3333 or the port you configured
     * `gulp generate-manifest`
     * This will create a zip file in the manifest folder
 2. Install in Teams
-    * Open Teams and visit the app store. Depending on the version of Teams, you may see an "App Store" button in the bottom left of Teams or you can find the app store by visiting `Apps > More Apps` in the left-hand app rail.
-    * Install the app by clicking on the `Upload a custom app` link in the bottom left-hand side of the app store.
+    * Open Teams and visit the app store. Depending on the version of Teams, you may see an "App Store" button in the bottom left of Teams or you can find the app store by visiting `Apps > Manage your apps > Publish App > Upload Custom App`.
     * Upload the manifest zip file created in step #1
 
 ## Trying out the app

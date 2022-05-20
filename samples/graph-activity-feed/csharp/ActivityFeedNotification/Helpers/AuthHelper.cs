@@ -74,7 +74,7 @@ namespace TabActivityFeed.Helpers
 
             var validIssuers = GetSettings(configuration);
 
-            validIssuers = validIssuers.Select(validIssuer => validIssuer.Replace("0d9b645f-597b-41f0-a2a3-ef103fbd91bb", tenantId));
+            validIssuers = validIssuers.Select(validIssuer => validIssuer.Replace("TENANT_ID", tenantId));
 
             return validIssuers;
         }

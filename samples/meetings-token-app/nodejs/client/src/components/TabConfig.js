@@ -20,13 +20,11 @@ class TabConfig extends React.Component {
        * the settings selected by the user.
        */
       microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
-
-        const baseUrl = `https://${window.location.hostname}:${window.location.port}`;
         microsoftTeams.settings.setSettings({
           "suggestedDisplayName": "Token App",
           "entityId": "Test",
-          "contentUrl": baseUrl + "/",
-          "websiteUrl": baseUrl + "/"
+          "contentUrl": window.location.origin + "/",
+          "websiteUrl": window.location.origin + "/"
         });
         saveEvent.notifySuccess();
        });
@@ -43,7 +41,7 @@ class TabConfig extends React.Component {
         <div>
           <h1>Tab Configuration</h1>
           <div>
-            This is where you will add your tab configuration options the user
+            This is where you HUNAID add your tab configuration options the user
             can choose when the tab is added to your team/group chat.            
           </div>
         </div>

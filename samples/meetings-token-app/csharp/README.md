@@ -27,7 +27,7 @@ Through this app, meeting participants can request a "token", which is generated
 
  ![config_page](Images/config_page.png)
 
- ![pre_meeting_tab](Images/pre_meeting_tab)
+ ![pre_meeting_tab](Images/pre_meeting_tab.png)
 
  ![side_panel_tab](Images/side_panel_tab.png)
   
