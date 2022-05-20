@@ -27,14 +27,14 @@
     {
       "entityId": "support-department-personal",
       "name": "Customer Support",
-      "contentUrl": "https://725d-198-98-102-205.ngrok.io/personal",
-      "websiteUrl": "https://725d-198-98-102-205.ngrok.io",
+      "contentUrl": "https://<<deployment-url>>/personal",
+      "websiteUrl": "https://<<deployment-url>>",
       "scopes": ["personal"]
     }
   ],
   "configurableTabs": [
     {
-      "configurationUrl": "https://725d-198-98-102-205.ngrok.io/configure",
+      "configurationUrl": "https://<<deployment-url>>/configure",
       "canUpdateConfiguration": false,
       "scopes": ["team"],
       "context": ["channelTab"]
@@ -42,7 +42,7 @@
   ],
   "bots": [
     {
-      "botId": "dd1555ee-d727-4b9f-ad37-488754826b90",
+      "botId": "<<app-id>>",
       "scopes": ["team"],
       "isNotificationOnly": false,
       "supportsCalling": false,
@@ -54,7 +54,7 @@
   "permissions": [],
   "validDomains": ["localhost:44326", "*.ngrok.io"],
   "webApplicationInfo": {
-    "id": "dd1555ee-d727-4b9f-ad37-488754826b90",
-    "resource": "api://725d-198-98-102-205.ngrok.io/dd1555ee-d727-4b9f-ad37-488754826b90"
+    "id": "<<app-id>>",
+    "resource": "api://<<deployment-url>>/<<app-id>>"
   }
 }
