@@ -15,6 +15,7 @@ import { CustomerInquiry, SupportDepartment } from 'models';
 
 function InquirySubEntityTab() {
   const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
+  const [onLoadConversationOpened, setOnLoadConversationOpened] = useState<boolean>(false);
   const navigate = useNavigate();
   const params = useParams();
   const entityId: string = params.entityId ?? 'unknown';
@@ -22,17 +23,33 @@ function InquirySubEntityTab() {
 
   useEffect(() => {
     // When we navigate away, close the chat.
-    return () => closeConversation()
-  }, [])
+    return () => closeConversation();
+  }, []);
 
   const inquiry = useQuery<CustomerInquiry, Error>(
     ['getSupportDepartmentItem', { entityId }, { subEntityId }],
     () => getSupportDepartmentItem(entityId, subEntityId),
+    {
+      onSuccess: () => {
+        if (!onLoadConversationOpened) {
+          const successful = openConversation();
+          setOnLoadConversationOpened(successful);
+        }
+      },
+    },
   );
 
   const supportDepartment = useQuery<SupportDepartment, Error>(
     ['getSupportDepartment', { entityId }],
     () => getSupportDepartment(entityId),
+    {
+      onSuccess: () => {
+        if (!onLoadConversationOpened) {
+          const successful = openConversation();
+          setOnLoadConversationOpened(successful);
+        }
+      },
+    },
   );
 
   const openConversation = () => {
@@ -40,13 +57,15 @@ function InquirySubEntityTab() {
       microsoftTeams.conversations.openConversation({
         entityId: supportDepartment.data.supportDepartmentId,
         subEntityId: inquiry.data.subEntityId,
-        channelId:
-          supportDepartment.data.teamChannelId,
+        channelId: supportDepartment.data.teamChannelId,
         title: inquiry.data.question,
         conversationId: inquiry.data.conversationId,
       });
       setIsChatOpen(true);
+      return true;
     }
+
+    return false;
   };
 
   const closeConversation = () => {

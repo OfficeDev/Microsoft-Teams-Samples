@@ -8,6 +8,8 @@ import {
   Text,
 } from '@fluentui/react-northstar';
 import { CustomerInquiry } from 'models';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 type CustomerInquiryDetailProps = {
   customerInquiry: CustomerInquiry;
@@ -22,16 +24,12 @@ function CustomerInquiryDetail({
   onOpenConversation,
   onCloseConversation,
 }: CustomerInquiryDetailProps) {
+  dayjs.extend(relativeTime)
+
   return (
     <Flex column>
       <Flex vAlign="center" gap="gap.medium">
         <Header as="h1" content={customerInquiry.customerName} />
-        <Label
-          content={customerInquiry.active ? 'Active' : 'Inactive'}
-          circular
-          color={customerInquiry.active ? 'green' : 'red'}
-          fluid={false}
-        />
         <FlexItem push>
           <Button
             tabIndex={-1}
@@ -41,6 +39,15 @@ function CustomerInquiryDetail({
             onClick={isChatOpen ? onCloseConversation : onOpenConversation}
           />
         </FlexItem>
+      </Flex>
+      <Flex vAlign="center" gap="gap.medium">
+        <Label
+            content={customerInquiry.active ? 'Active' : 'Inactive'}
+            circular
+            color={customerInquiry.active ? 'green' : 'red'}
+            fluid={false}
+          />
+          <Text content={`Created ${dayjs(customerInquiry.createdDateTime).fromNow()}`} />
       </Flex>
       <Header as="h2" content="Inquiry" />
       <Text content={customerInquiry.question} />

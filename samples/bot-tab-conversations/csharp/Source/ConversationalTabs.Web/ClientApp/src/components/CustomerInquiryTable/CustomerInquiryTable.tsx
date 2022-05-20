@@ -8,6 +8,8 @@ import {
 } from '@fluentui/react-northstar';
 import { CustomerInquiry } from 'models';
 import { Link } from 'react-router-dom';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 type CustomerInquiryTableProps = {
   entityId: string;
@@ -19,6 +21,8 @@ function createRowItemsFromCategoryItem(
   inquiry: CustomerInquiry,
   index: number,
 ): ShorthandCollection<TableCellProps> {
+  dayjs.extend(relativeTime)
+
   return [
     {
       content: inquiry.customerName,
@@ -30,7 +34,7 @@ function createRowItemsFromCategoryItem(
       key: `${index}-question`,
     },
     {
-      content: inquiry.createdDateTime,
+      content: dayjs(inquiry.createdDateTime).fromNow(),
       truncateContent: true,
       key: `${index}-createdDateTime`,
     },
