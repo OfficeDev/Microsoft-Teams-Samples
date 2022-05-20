@@ -4,10 +4,11 @@
 name: Build - All Samples
 on:
   schedule:
-    - cron: '12 21 20 * *'  # every day at midnight
+    - cron: '12 21 20 * *'  # 20th every month at 21:12
 jobs:
   build-csharp-samples:
     runs-on: windows-latest
+    #Add project path, name and project runtime version as below for any new additions
     strategy:
       matrix:
         include:
@@ -275,6 +276,7 @@ jobs:
 
   build-dotnet-samples:
     runs-on: windows-latest
+    #Add project path, name as below for any new additions
     strategy:
       matrix:
         include:
@@ -301,6 +303,7 @@ jobs:
 
   build-nodejs-samples:
     runs-on: windows-latest
+    #Add project path, name and version as below for any new additions
     strategy:
       matrix:
         include:
