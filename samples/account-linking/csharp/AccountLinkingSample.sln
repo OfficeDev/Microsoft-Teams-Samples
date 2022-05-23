@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Teams.Samples.AccountLinking.SampleClient", "Source\Microsoft.Teams.Samples.AccountLinking.Sample.csproj", "{A3E9437F-0A2D-46FD-AFA8-62F518278BDA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountLinking.Service", "Source\AccountLinking.Service\AccountLinking.Service.csproj", "{78D1AB23-888A-4A78-B401-778F9354B292}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +14,12 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A3E9437F-0A2D-46FD-AFA8-62F518278BDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A3E9437F-0A2D-46FD-AFA8-62F518278BDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A3E9437F-0A2D-46FD-AFA8-62F518278BDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A3E9437F-0A2D-46FD-AFA8-62F518278BDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78D1AB23-888A-4A78-B401-778F9354B292}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78D1AB23-888A-4A78-B401-778F9354B292}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78D1AB23-888A-4A78-B401-778F9354B292}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78D1AB23-888A-4A78-B401-778F9354B292}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{78D1AB23-888A-4A78-B401-778F9354B292} = {524CF55A-7A9B-4637-9BEB-84C3A40DE810}
 	EndGlobalSection
 EndGlobal
