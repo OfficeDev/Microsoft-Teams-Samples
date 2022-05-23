@@ -1,0 +1,13 @@
+{
+  "name": "Account Linking Sample (.NET)",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {}
+  },
+  "features": {},
+  "extensions": [
+    "ms-dotnettools.csharp"
+  ],
+  "remoteUser": "vscode",
+  "forwardPorts": [5000, 5001, 5002]
+}
