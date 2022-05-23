@@ -159,7 +159,7 @@ class Tab extends React.Component {
   render() {
 
       let title = Object.keys(this.state.context).length > 0 ?
-        'Congratulations ' + this.state.context['userPrincipalName'] + '! This is your tab' : <Loader/>;
+        'Congratulations ' + this.state.context.user.userPrincipalName + '! This is your tab' : <Loader/>;
 
       let ssoMessage = this.state.ssoToken === "" ?
         <Loader label='Performing Azure AD single sign-on authentication...'/>: null;
