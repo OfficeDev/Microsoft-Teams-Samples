@@ -15,7 +15,7 @@ export interface ITabProps {
 
 }
 interface ITabState {
-  context?: microsoftTeams.Context;
+  context?: microsoftTeams.app.Context;
   ssoToken: string;
   consentRequired: boolean;
   consentProvided: boolean;
@@ -51,20 +51,18 @@ class Tab extends React.Component<ITabProps, ITabState> {
   //Learn more: https://reactjs.org/docs/react-component.html#componentdidmount
   componentDidMount(){
     // Initialize the Microsoft Teams SDK
-    microsoftTeams.initialize();
+    microsoftTeams.app.initialize().then(() => {
+      // Get the user context from Teams and set it in the state
+      microsoftTeams.app.getContext().then((context: microsoftTeams.app.Context) => {
+        this.setState({context:context});
+      });
 
-    // Get the user context from Teams and set it in the state
-    microsoftTeams.getContext((context: microsoftTeams.Context) => {
-      this.setState({context:context});
+      microsoftTeams.authentication.getAuthToken().then((result: string) => {
+        this.ssoLoginSuccess(result)
+      }).catch((error: string) => {
+        this.ssoLoginFailure(error)
+      });
     });
-
-    //Perform Azure AD single sign-on authentication
-    let authTokenRequestOptions = {
-      successCallback: (result: string) => { this.ssoLoginSuccess(result) }, //The result variable is the SSO token.
-      failureCallback: (error: string) => {this.ssoLoginFailure(error)}
-    };
-
-    microsoftTeams.authentication.getAuthToken(authTokenRequestOptions);
   }  
 
   ssoLoginSuccess = async (result: string) => {
@@ -111,9 +109,11 @@ class Tab extends React.Component<ITabProps, ITabState> {
     microsoftTeams.authentication.authenticate({
       url: window.location.origin + "/auth-start",
       width: 600,
-      height: 535,
-      successCallback: (result) => {this.consentSuccess(result ?? "")},
-      failureCallback: (reason) => {this.consentFailure(reason ?? "")}
+      height: 535
+    }).then((result: string) => {
+      this.consentSuccess(result ?? "")
+    }).catch((reason: string) => {
+      this.consentFailure(reason ?? "")
     });
   }
 
@@ -144,7 +144,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
   // Fetch the user's profile photo from Graph using the access token retrieved either from the server 
   // or microsoftTeams.authentication.authenticate
   callGraphFromClient = async () => {
-    let upn = this.state.context?.upn;
+    let upn = this.state.context?.user.userPrincipalName;
     let graphPhotoEndpoint = `https://graph.microsoft.com/v1.0/users/${upn}/photo/$value`;
     let graphRequestParams = {
       method: 'GET',
@@ -178,7 +178,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
   render() {
 
       let title = this.state.context && Object.keys(this.state.context).length > 0 ?
-        'Congratulations ' + this.state.context['upn'] + '! This is your tab' : <Loader/>;
+        'Congratulations ' + this.state.context.user.userPrincipalName + '! This is your tab' : <Loader/>;
 
       let ssoMessage = this.state.ssoToken === "" ?
         <Loader label='Performing Azure AD single sign-on authentication...'/>: null;
