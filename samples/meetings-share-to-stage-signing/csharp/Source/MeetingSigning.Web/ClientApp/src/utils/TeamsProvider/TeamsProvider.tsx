@@ -8,12 +8,11 @@ import {
   Provider as FluentUiProvider,
   ThemeInput,
 } from '@fluentui/react-northstar';
-import { Story } from '@storybook/react';
 
 export interface TeamsProviderContext {
   context: Context;
   microsoftTeams: typeof microsoftTeams;
-  initializePromise: Promise<void>;
+  initializePromise: Promise<unknown>;
   setContext: (ctx: Context) => void;
 }
 
@@ -45,7 +44,7 @@ export const themeMap: { [key: string]: ThemeInput } = {
 };
 
 export function getTheme(theme?: string): ThemeInput {
-  const key = theme && theme in themeMap ? theme : 'dark';
+  const key = theme && theme in themeMap ? theme : 'default';
   return themeMap[key];
 }
 
@@ -61,7 +60,17 @@ export function TeamsProvider({
   };
   const [context, setContext] = useState<Context>(contextInit);
   const initializePromise = useMemo(
-    () => new Promise<void>((resolve) => microsoftTeams.initialize(resolve)),
+    () =>
+      Promise.race([
+        new Promise<void>((resolve) => microsoftTeams.initialize(resolve)),
+        new Promise((resolve, reject) =>
+          setTimeout(
+            () =>
+              reject('Failed to initialize connection with Microsoft Teams'),
+            1000,
+          ),
+        ),
+      ]),
     [microsoftTeams],
   );
 
@@ -89,17 +98,3 @@ export function TeamsProvider({
     </TeamsContext.Provider>
   );
 }
-
-export type TeamsThemeProviderProps = {
-  story: Story;
-};
-
-export const withTeamsThemeProvider = (
-  props: TeamsThemeProviderProps,
-): React.ReactElement => {
-  return (
-    <TeamsProvider microsoftTeams={microsoftTeams}>
-      {<props.story />}
-    </TeamsProvider>
-  );
-};

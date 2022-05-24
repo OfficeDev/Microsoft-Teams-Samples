@@ -18,7 +18,7 @@ DocumentCardList.args = {
       id: '12300000-0000-0000-0000-000000000001',
       documentType: DocumentType.PurchaseAgreement,
       documentState: 'active',
-      loggedInAadId: '00000000-0000-0000-0000-000000000001', // eslint-disable-line sonarjs/no-duplicate-string
+      loggedInAadId: '00000000-0000-0000-0000-000000000001',
       signatures: [
         {
           signer: {
