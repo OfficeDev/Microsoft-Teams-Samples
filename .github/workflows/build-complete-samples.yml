@@ -307,10 +307,6 @@ jobs:
     strategy:
       matrix:
         include:
-            - project_path: 'samples/app-auth/nodejs'
-              name: 'app-auth'
-              version: '14.x'
-
             - project_path: 'samples/app-checkin-location/nodejs'
               name: 'app-checkin-location'
               version: '14.x'
