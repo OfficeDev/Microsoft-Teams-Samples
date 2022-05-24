@@ -1,21 +1,16 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
-
-import fetch from 'node-fetch';
-import * as express from 'express';
-import jwt_decode, { JwtPayload } from 'jwt-decode';
-import * as path from 'path';
-import * as msal from '@azure/msal-node';
+const fetch = require('node-fetch');
+const express = require('express');
+const jwt_decode = require('jwt-decode');
+const msal = require('@azure/msal-node');
 const app = express();
+const path = require('path');
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
-const graphScopes = ['https://graph.microsoft.com/User.Read' + process.env.GRAPH_SCOPES];
-
-console.log(clientId);
-let handleQueryError = function (err: string) {
+const graphScopes = ['https://graph.microsoft.com/' + process.env.GRAPH_SCOPES];
+let handleQueryError = function (err) {
     console.log("handleQueryError called: ", err);
     return new Response(JSON.stringify({
         code: 400,
@@ -24,18 +19,18 @@ let handleQueryError = function (err: string) {
 };
 
 app.get('/getGraphAccessToken', async (req,res) => {
+
     const msalClient = new msal.ConfidentialClientApplication({
         auth: {
             clientId: clientId,
-            clientSecret: clientSecret,
+            clientSecret: clientSecret
         }
     });
-    const ssoToken = req.query.ssoToken as string;
-    let tenantId = jwt_decode<JwtPayload>(ssoToken)['tid']; //Get the tenant ID from the decoded token
+    let tenantId = jwt_decode(req.query.ssoToken)['tid']; //Get the tenant ID from the decoded toke
 
     msalClient.acquireTokenOnBehalfOf({
         authority: `https://login.microsoftonline.com/${tenantId}`,
-        oboAssertion: req.query.ssoToken as string,
+        oboAssertion: req.query.ssoToken,
         scopes: graphScopes,
         skipCache: true
       })
@@ -48,7 +43,7 @@ app.get('/getGraphAccessToken', async (req,res) => {
                         "authorization": "bearer " + result.accessToken
                     }
                 }
-                let response = await fetch(graphPhotoEndpoint,graphRequestParams);
+                let response = await fetch(graphPhotoEndpoint,graphRequestParams).catch(this.unhandledFetchError);
                 if(!response.ok){
                     console.error("ERROR: ", response);
                 }
@@ -59,7 +54,7 @@ app.get('/getGraphAccessToken', async (req,res) => {
                     res.json(imageUri);
                 }
       })
-      .catch((error) => {
+      .catch(error => {
         console.log("error"+ error.errorCode);
         res.status(403).json({ error: 'consent_required' });
     });
