@@ -1,6 +1,10 @@
 <html>
     <head>
-        <script src="https://statics.teams.cdn.office.net/sdk/v1.7.0/js/MicrosoftTeams.min.js" integrity="sha384-00JbifySIlPvW32u9rSurgu8PujfL6XFdV9iNn4ZWyurJJ33MFvpwPqmCHDq9ADv" crossorigin="anonymous"></script>
+     <script
+  src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
+  integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
+  crossorigin="anonymous"
+></script>
     </head>
     <body>
         <div id="taskDiv" style="margin-top:10px;width:70px;color:darkslateblue;font-family:'Segoe UI';font-size:20px;"></div>
@@ -9,7 +13,7 @@
        <script >
         const params = new URLSearchParams(window.location.search);
         var Querystringid=params.get('id');
-            microsoftTeams.initialize();
+            microsoftTeams.app.initialize();
                      
             window.onload = function () { 
              if (Querystringid==2) {

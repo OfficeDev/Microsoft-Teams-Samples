@@ -37,8 +37,8 @@
             e.preventDefault();
 
             microsoftTeams.initialize();
-
-            $.post({ baseURL } + "/api/getAdaptiveCard", { token: localStorage.getItem("accessToken") }).done(function (data) {
+            let baseURL = window.location.origin;
+            $.post(baseURL + "/api/getAdaptiveCard", { token: localStorage.getItem("accessToken") }).done(function (data) {
                 let taskInfo = {
                     title: null,
                     height: null,
@@ -66,7 +66,7 @@
                     microsoftTeams.initialize();
                     microsoftTeams.getContext(function (context) {
                         var userId = context.userObjectId;
-                        $.post({ baseURL } + "/api/createGroupChat", { token: localStorage.getItem("accessToken"), users: result.users, userId: userId, title: result.title }).done(function (data) {
+                        $.post(baseURL + "/api/createGroupChat", { token: localStorage.getItem("accessToken"), users: result.users, userId: userId, title: result.title }).done(function (data) {
                             console.log(data);
                             $("#createGroupChat").hide();
                             $("#welcomeMsg").hide();

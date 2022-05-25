@@ -29,15 +29,20 @@
 <script type="text/javascript">
         microsoftTeams.initialize();
 
-        // ADAL.js configuration
-        let config = {
-            clientId: '@ViewBag.ClientId',
-            redirectUri: window.location.origin + "/SilentAuthEnd",       // This should be in the list of redirect uris for the AAD app
-            cacheLocation: "localStorage",
-            navigateToLoginRequestUrl: false,
+         let msalConfig = {
+            auth: {
+                clientId: '@ViewBag.ClientId',
+                redirectUri: window.location.origin + "/SilentAuthEnd",     // This should be in the list of redirect uris for the AAD app
+                navigateToLoginRequestUrl: false,
+            },
+            cache: {
+                cacheLocation: "localStorage",
+            }
         };
 
-        //localStorage.setItem("Client", config.clientId)
+        const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+        localStorage.setItem("Client", msalConfig.auth.clientId)
         let upn = undefined;
         microsoftTeams.getContext(function (context) {
             upn = context.upn;
@@ -46,45 +51,30 @@
 
         // Loads data for the given user
         function loadData(upn) {
-            // Setup extra query parameters for ADAL
-            // - openid and profile scope adds profile information to the id_token
-            // - login_hint provides the expected user name
-            if (upn) {
-                config.extraQueryParameters = "scope=openid+profile&login_hint=" + encodeURIComponent(upn);
-            } else {
-                config.extraQueryParameters = "scope=openid+profile";
-            }
+            let cachedAccounts =  msalInstance.getAllAccounts();
+            let accountInfo = cachedAccounts.filter(account => account.username === upn);
+            if (accountInfo.length > 0) {
 
-            let authContext = new AuthenticationContext(config);
+                const silentRequest = {
+                    account: accountInfo[0]
+                };
 
-            // See if there's a cached user and it matches the expected user
-            let user = authContext.getCachedUser();
-            if (user) {
-                if (user.userName !== upn) {
-                    // User doesn't match, clear the cache
-                    authContext.clearCache();
-                }
-            }
-
-            // Get the id token (which is the access token for resource = clientId)
-            let token = authContext.getCachedToken(config.clientId);
-            if (token) {
-                showProfileInformation(token);
-            } else {
-                // No token, or token is expired
-                authContext._renewIdToken(function (err, idToken) {
-                    if (err) {
-                        console.log("Renewal failed: " + err);
-
-                        // Failed to get the token silently; show the login button
-                        $("#btnLogin").css({ display: "" });
-
-                        // You could attempt to launch the login popup here, but in browsers this could be blocked by
-                        // a popup blocker, in which case the login attempt will fail with the reason FailedToOpenWindow.
+                // Acquire Token Silently
+                msalInstance.acquireTokenSilent(silentRequest)
+                .then((response) => {
+                    if (response.idToken) {
+                        showProfileInformation(response.idToken);
                     } else {
-                        showProfileInformation(idToken);
+                        $("#btnLogin").css({ display: "" });
                     }
+                })
+                .catch((error) => {
+                    console.log(error);
+                    $("#btnLogin").css({ display: "" });
                 });
+            }
+            else {
+                $("#btnLogin").css({ display: "" });
             }
         }
 
@@ -101,15 +91,32 @@
                 height: 535,
                 successCallback: function (result) {
                     // AuthenticationContext is a singleton
-                    let authContext = new AuthenticationContext();
-                    let idToken = authContext.getCachedToken(config.clientId);
-                    if (idToken) {
-                        showProfileInformation(idToken);
-                    } else {
-                        console.error("Error getting cached id token. This should never happen.");
-                        // At this point we have to get the user involved, so show the login button
-                        $("#btnLogin").css({ display: "" });
-                    };
+                    cachedAccounts =  msalInstance.getAllAccounts();
+
+                    microsoftTeams.getContext(function (context) {
+                        let accountInfo = cachedAccounts.filter(account => account.username === context.upn);
+
+                        if (accountInfo.length > 0) {
+                            const silentRequest = {
+                                account: accountInfo[0]
+                            };
+
+                            // Acquire Token Silently
+                            msalInstance.acquireTokenSilent(silentRequest)
+                            .then((response) => {
+                                if (response.idToken) {
+                                    showProfileInformation(response.idToken);
+                                } else {
+                                    console.error("Error getting cached id token. This should never happen.");
+                                    // At this point we have to get the user involved, so show the login button
+                                    $("#btnLogin").css({ display: "" });
+                                }
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            });
+                        }
+                    });
                 },
                 failureCallback: function (reason) {
                     console.log("Login failed: " + reason);
@@ -136,7 +143,7 @@
                 success: function (token) {
                     var token = JSON.parse(token);
                     $("#profileDisplayName").text(token.name);
-                    $("#profileUpn").text(token.upn);
+                    $("#profileUpn").text(token.preferred_username);
                     $("#profileObjectId").text(token.oid);
                     $("#divProfile").css({ display: "" });
                     $("#divSilentSignOut").css({ display: "" });

@@ -65,13 +65,6 @@ namespace TabAuthentication.Controllers
             return View();
         }
 
-        [Route("SilentAuthStart")]
-        public ActionResult SilentAuthStart()
-        {
-            ViewBag.AuthStartClientId = Configuration["ClientId"].ToString();
-            return View();
-        }
-
         [Route("SilentAuthEnd")]
         public ActionResult SilentAuthEnd()
         {
