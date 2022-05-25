@@ -39,7 +39,7 @@ public class Startup
             .EnableTokenAcquisitionToCallDownstreamApi()
             // If you do not need Graph calls, remove the following.
             .AddMicrosoftGraph(Configuration.GetSection("Graph"))
-            .AddInMemoryTokenCaches();
+            .AddSessionTokenCaches();
 
         services.AddHttpContextAccessor();
         services.AddCustomAuthorization();
@@ -73,6 +73,8 @@ public class Startup
             // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
+
+        app.UseSession();
 
         app.UseMiddleware<JsonExceptionHandler>();
 

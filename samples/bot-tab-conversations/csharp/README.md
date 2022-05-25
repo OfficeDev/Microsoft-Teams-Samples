@@ -54,7 +54,7 @@ sequenceDiagram
         Service ->> ChannelTab: Create tab
     else Bot context missing
         DataStore ->> Service: No bot context error
-        Service ->> ChannelTab: Error message //TODO
+        Service ->> ChannelTab: Channel bot context not found error message 
     end
     ChannelTab ->> User: Error or tab created successfully
 
@@ -121,7 +121,8 @@ There is also a personal tab that will list inquires from all the support depart
 ## Known issues
 * When the solution is run on a local web browser (anywhere outside of Teams), it will load a spinner. Instead side-load the application to a teams client, or open up `<<deployment-url>>/admin` to open the admin page
 * Sometimes, the "Open Details" button on a new inquiry's Adaptive Card may not navigate to a the channel tab. This is due to side-loaded apps not having a consistent entityId. This makes deeplinking difficult. If this happens you can open the inquiry in the tab directly.
-* **TODO TODO Check permissions for shared, private and non members opening conversations in personal tabs** 
+* Private channels do not support bots at the moment, therefore this app is not supported on private channels.
+* If in the personal app a user opens a conversation from a channel they are not a member of, the conversation will fail to show. This is not an issue in our sample as we filter support departments based on Team membership. 
 
 ## Prerequisites
 * Make sure you have an active [Azure subscription](https://azure.microsoft.com/en-us/free/).
@@ -154,8 +155,7 @@ There is also a personal tab that will list inquires from all the support depart
     * When creating the Bot above, an AAD app should either have been created for you, or you should have chosen an AAD app to associate with the bot.
     * The updates below will allow for us to authenticate and authorize API calls to limit data returned to only channels the user is a member of.
     * [Follow the instructions](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso?tabs=dotnet#develop-an-sso-microsoft-teams-tab), but skip actually creating a new AAD application. Instead, create the Application ID URI, scopes, etc.
-    * Once you have followed those instructions update Redirect Uris under the Authentication section with the ngrok url, followed by /auth-end (`https://<randomsubdomain>.ngrok.io/auth-end`)
-**TODO TODO Is this actually needed?**
+    * Once you have followed those instructions, you need to enable Implicit grant. Under the Authentication section, enable `Access tokens` and `ID tokens`.
     * Ensure the following API permissions are granted to the app for Microsoft Graph access - `email`, `offline_access`, `openid`, `profile`, `Team.ReadBasic.All`    
     * *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your AAD App*
 * In `appSettings.json`, `manifest.json` and `.env` replace:
@@ -178,22 +178,21 @@ There is also a personal tab that will list inquires from all the support depart
 ### Locally in Visual Studio
 * Point Ngrok to port 44326: `ngrok http https://localhost:44326 -host-header=localhost:44326`
 * Open the solution in Visual Studio.
-* Ensure the start-up project is set to `Microsoft.Teams.Samples.MeetingSigning.Web`
+* Ensure the start-up project is set to `Microsoft.Teams.Samples.ConversationalTabs.Web`
 * Start Debugging using IIS Express
 
 ### Locally using .NET SDK
 * Point Ngrok to port 5001: `ngrok http -host-header=rewrite 5001`
-* In a terminal, navigate to `Source\MeetingSigning.Web`
+* In a terminal, navigate to `Source\ConversationalTabs.Web`
 * Run `dotnet run`
 
 ### Docker
 *Note the below instructions are using [Podman](https://podman.io/), but Docker's commands are similar. [There are instructions for setting up Podman on WSL2 here](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-share-to-stage-signing/csharp/Docs/installing-podman-on-wsl2.md)*
-* From this directory build the Docker image `podman build -f Deployment/Dockerfile
---ignorefile Deployment/.dockerignore ./Source`
+* From this directory build the Docker image `podman build -f Deployment/Dockerfile --ignorefile Deployment/.dockerignore ./Source`
 * Wait for the container to build
 * Run `podman images` to view available images, copy the Image ID
 * Point Ngrok to port 8080: `ngrok http -host-header=rewrite 8080`
-* Run `podman run -d -p 8080:80 --name MeetingSigning <IMAGE_ID>` to start the container
+* Run `podman run -d -p 8080:80 --name ConversationalTabs <IMAGE_ID>` to start the container
 * Open [http://localhost:8080/](http://localhost:8080/) to view the service running
 
 ## Additional links
