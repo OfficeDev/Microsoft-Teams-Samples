@@ -79,7 +79,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
   //Learn more: https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow
   exchangeClientTokenForServerToken = async (token: string) => {
 
-    let serverURL = `${process.env.REACT_APP_BASE_URL}/getGraphAccessToken?ssoToken=${token}&upn=${this.state.context?.upn}`;
+    let serverURL = `${process.env.REACT_APP_BASE_URL}/getGraphAccessToken?ssoToken=${token}&upn=${this.state.context?.user?.userPrincipalName}`;
     console.log('here ' + serverURL);
     let response = await fetch(serverURL).catch(this.unhandledFetchError); //This calls getGraphAccessToken route in /api-server/app.js
     if (response) {
@@ -144,7 +144,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
   // Fetch the user's profile photo from Graph using the access token retrieved either from the server 
   // or microsoftTeams.authentication.authenticate
   callGraphFromClient = async () => {
-    let upn = this.state.context?.user.userPrincipalName;
+    let upn = this.state.context?.user?.userPrincipalName;
     let graphPhotoEndpoint = `https://graph.microsoft.com/v1.0/users/${upn}/photo/$value`;
     let graphRequestParams = {
       method: 'GET',
@@ -163,9 +163,11 @@ class Tab extends React.Component<ITabProps, ITabState> {
       
       let imageBlog = await response.blob().catch(this.unhandledFetchError); //Get image data as raw binary data
   
-      this.setState({
-        photo: URL.createObjectURL(imageBlog) //Convert binary data to an image URL and set the url in state
-      })
+      if (imageBlog) {
+        this.setState({
+          photo: URL.createObjectURL(imageBlog) //Convert binary data to an image URL and set the url in state
+        })
+      }
     }
   }
 
@@ -178,7 +180,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
   render() {
 
       let title = this.state.context && Object.keys(this.state.context).length > 0 ?
-        'Congratulations ' + this.state.context.user.userPrincipalName + '! This is your tab' : <Loader/>;
+        'Congratulations ' + this.state.context?.user?.userPrincipalName + '! This is your tab' : <Loader/>;
 
       let ssoMessage = this.state.ssoToken === "" ?
         <Loader label='Performing Azure AD single sign-on authentication...'/>: null;

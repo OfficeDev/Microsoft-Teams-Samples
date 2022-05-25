@@ -17,8 +17,7 @@ class ConsentPopup extends React.Component {
       microsoftTeams.app.initialize().then(() => {
         // Get the user context in order to extract the tenant ID
         microsoftTeams.app.getContext().then((context) => {
-
-          let tenant = context.user.tenant.id; //Tenant ID of the logged in user
+          let tenant = context?.user?.tenant?.id!; //Tenant ID of the logged in user
           let client_id = process.env.REACT_APP_AZURE_APP_REGISTRATION_ID; //Client ID of the Azure AD app registration ( may be from different tenant for multitenant apps)
 
           //Form a query for the Azure implicit grant authorization flow
@@ -39,7 +38,6 @@ class ConsentPopup extends React.Component {
           //Redirect to the Azure authorization endpoint. When that flow completes, the user will be directed to auth-end
           //Go to ClosePopup.js
           window.location.assign(authorizeEndpoint);
-
         });
       });
     }    
