@@ -11,10 +11,11 @@ import {
   PersonalTab,
   SupportDepartmentChannelTab,
 } from 'routes';
+import styles from './App.module.css';
 
 function App() {
   return (
-    <Flex column>
+    <Flex column className={styles.app}>
       <FlexItem>
         <Routes>
           <Route path="/" element={<Container />}>
