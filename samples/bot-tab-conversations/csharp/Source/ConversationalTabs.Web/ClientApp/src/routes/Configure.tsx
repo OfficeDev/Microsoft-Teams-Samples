@@ -22,6 +22,14 @@ function Configure() {
   );
 
   useEffect(() => {
+    microsoftTeams.getContext((context) => {
+      if (context.channelName !== undefined) {
+        setDepartmentTitle(context.channelName);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     if (departmentTitle !== '' && departmentDescription !== '') {
       microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
         microsoftTeams.getContext((context) => {
@@ -39,7 +47,7 @@ function Configure() {
                 microsoftTeams.settings.setSettings({
                   contentUrl: `${window.location.origin}/support-department/${data.supportDepartmentId}`,
                   entityId: data.supportDepartmentId,
-                  suggestedDisplayName: data.title
+                  suggestedDisplayName: data.title,
                 });
                 saveEvent.notifySuccess();
               },
