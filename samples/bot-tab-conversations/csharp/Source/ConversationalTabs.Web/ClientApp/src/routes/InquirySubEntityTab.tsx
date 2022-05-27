@@ -15,7 +15,8 @@ import { CustomerInquiry, SupportDepartment } from 'models';
 
 function InquirySubEntityTab() {
   const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
-  const [onLoadConversationOpened, setOnLoadConversationOpened] = useState<boolean>(false);
+  const [onLoadConversationOpened, setOnLoadConversationOpened] =
+    useState<boolean>(false);
   const navigate = useNavigate();
   const params = useParams();
   const entityId: string = params.entityId ?? 'unknown';
@@ -60,6 +61,9 @@ function InquirySubEntityTab() {
         channelId: supportDepartment.data.teamChannelId,
         title: inquiry.data.question,
         conversationId: inquiry.data.conversationId,
+        onCloseConversation: (_) => {
+          setIsChatOpen(false);
+        },
       });
       setIsChatOpen(true);
       return true;
