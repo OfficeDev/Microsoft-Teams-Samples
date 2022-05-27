@@ -62,6 +62,8 @@ public class CustomerInquiryService : ISubEntityService<CustomerInquiry, Custome
         {
             _logger.LogError(ex, $"Something went wrong while adding '{subEntityInput.CustomerName}''s inquiry to customer support department '{entityId}'");
             await _customerInquiryRepository.DeleteSubEntity(entityId, customerInquiry);
+
+            throw new ApiException(HttpStatusCode.InternalServerError, ErrorCode.Unknown, $"Error while adding '{subEntityInput.CustomerName}''s inquiry to customer support department '{entityId}'");
         }
 
         return customerInquiry;

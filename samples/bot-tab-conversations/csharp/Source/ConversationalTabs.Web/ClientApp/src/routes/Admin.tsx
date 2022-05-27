@@ -27,7 +27,7 @@ function Admin() {
   const [customerName, setCustomerName] = useState<string>('');
   const [customerInquiry, setCustomerInquiry] = useState<string>('');
 
-  const { data, error, isLoading, isSuccess } = useQuery<
+  const { data, isSuccess } = useQuery<
     SupportDepartment[],
     Error
   >(['getAllSupportDepartments'], () => getAllSupportDepartments());
@@ -203,7 +203,16 @@ function Admin() {
               <Alert
                 attached="bottom"
                 dismissible
+                success
                 content={`Inquiry Created for '${createCustomerInquiryMutation.data.customerName}' (${createCustomerInquiryMutation.data.subEntityId})`}
+              />
+            )}
+            {createCustomerInquiryMutation.isError && (
+              <Alert
+                attached="bottom"
+                dismissible
+                danger
+                content={createCustomerInquiryMutation.error.message}
               />
             )}
           </>
