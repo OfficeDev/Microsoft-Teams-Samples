@@ -1,5 +1,6 @@
 import { Flex, FlexItem } from '@fluentui/react-northstar';
-import { Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import {
   Admin,
   AuthEnd,
@@ -13,7 +14,19 @@ import {
 } from 'routes';
 import styles from './App.module.css';
 
+const titles = [
+  {
+    path: '/admin',
+    title: 'External Admin Service | '
+  },
+];
+
 function App() {
+  const location = useLocation();
+  useEffect(() => {
+    document.title = (titles.find(item => item.path === location.pathname)?.title ?? '') + 'Tab Conversations Proof-of-Concept'
+  }, [location]);
+
   return (
     <Flex column className={styles.app}>
       <FlexItem>
