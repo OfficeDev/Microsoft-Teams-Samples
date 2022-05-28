@@ -42,7 +42,7 @@ namespace AppCompleteAuth
         {
             if (turnContext.Activity.Name != SignInConstants.TokenExchangeOperationName)
             {
-                throw new InvalidOperationException("Only 'signin/tokenExchange' invoke activities can be procssed by TokenExchangeHelper.");
+                throw new InvalidOperationException("Only 'signin/tokenExchange' invoke activities can be processed by TokenExchangeHelper.");
             }
 
             if (!await this.ExchangedTokenAsync(turnContext, cancellationToken).ConfigureAwait(false))

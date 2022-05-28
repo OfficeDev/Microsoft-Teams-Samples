@@ -817,7 +817,7 @@ namespace AppCompleteAuth.Bots
             };
         }
 
-        // Get facebook peofile card.
+        // Get facebook profile card.
         private static Microsoft.Bot.Schema.Attachment GetFacebookProfile(FacebookProfile profile)
         {
             var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
