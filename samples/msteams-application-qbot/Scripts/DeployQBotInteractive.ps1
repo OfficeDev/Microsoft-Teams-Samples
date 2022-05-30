@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    $artifactsBaseUri = "https://qbotdeployteststatics.blob.core.windows.net/qbot-statics"
+    $artifactsBaseUri = ""
 )
 
 # Helper functions for bootstrapping

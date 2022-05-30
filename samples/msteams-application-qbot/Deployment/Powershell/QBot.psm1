@@ -17,10 +17,7 @@ function New-QBotDeployment
 
     # Create the resource group
     Write-Verbose "Creating Resource Group"
-
-    # TODO(guptaa): Remove the tags. These are required for internal subscription only.
-    $tags = @{"service-name"="qbot"; "owner-team"="ecosystem1"; "owner-alias"="guptaa"}
-    New-AzResourceGroup -Name $resourceGroupName -Location $location -Tag $tags | Out-Null
+    New-AzResourceGroup -Name $resourceGroupName -Location $location | Out-Null
 
     # Deploy the layer 1 arm template
     # This is broken into two stages since there are 3 resources which need manual post-processing 
