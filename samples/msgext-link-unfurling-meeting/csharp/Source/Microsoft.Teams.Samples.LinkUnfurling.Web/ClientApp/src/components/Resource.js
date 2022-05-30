@@ -15,8 +15,8 @@ class Resource extends React.Component {
 
   componentDidMount() {
     // Initialize the Microsoft Teams SDK and notify success.
-    microsoftTeams.initialize(() =>
-      microsoftTeams.appInitialization.notifySuccess()
+    microsoftTeams.app.initialize().then(() =>
+      microsoftTeams.app.notifySuccess()
     );
   }
 
