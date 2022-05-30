@@ -5,21 +5,21 @@ const Configuration = () => {
     const [tabId, setTabId] = React.useState('');
 
     React.useEffect(() => {
-        microsoftTeams.initialize();
-
-        microsoftTeams.getContext(async (context: microsoftTeams.Context) => {
-            setTabId(context.entityId)
-        });
-
-        microsoftTeams.settings.registerOnSaveHandler(async (saveEvent: microsoftTeams.settings.SaveEvent) => {
-            microsoftTeams.settings.setSettings({
-                entityId: tabId,
-                contentUrl: `${window.location.origin}/tab`,
-                suggestedDisplayName: 'Live coding',
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then(async (context: microsoftTeams.app.Context) => {
+                setTabId(context.page.id)
             });
-            saveEvent.notifySuccess();
+
+            microsoftTeams.pages.config.registerOnSaveHandler(async (saveEvent: microsoftTeams.settings.SaveEvent) => {
+                microsoftTeams.pages.config.setConfig({
+                    entityId: tabId,
+                    contentUrl: `${window.location.origin}/tab`,
+                    suggestedDisplayName: 'Live coding',
+                });
+                saveEvent.notifySuccess();
+            });
+            microsoftTeams.pages.config.setValidityState(true);
         });
-        microsoftTeams.settings.setValidityState(true);
     }, []);
 
     return (

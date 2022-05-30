@@ -5,7 +5,7 @@
   "dependencies": {
     "@fluentui/react-northstar": "^0.58.0",
     "@microsoft/signalr": "6.0.3",
-    "@microsoft/teams-js": "^1.11.0",
+    "@microsoft/teams-js": "^2.0.0",
     "@monaco-editor/react": "^4.3.1",
     "axios": "^0.21.4",
     "cors": "^2.8.5",

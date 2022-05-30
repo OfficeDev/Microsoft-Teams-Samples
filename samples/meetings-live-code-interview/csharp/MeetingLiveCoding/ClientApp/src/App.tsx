@@ -27,21 +27,22 @@ class App extends React.Component<{}, IAppState> {
     }
 
     public componentDidMount() {
-        microsoftTeams.initialize();
-        microsoftTeams.getContext((context) => {
-            let theme = context.theme || "";
-            this.updateTheme(theme);
-            this.setState({
-                theme: theme
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then((context) => {
+                let theme = context.app.theme || "";
+                this.updateTheme(theme);
+                this.setState({
+                    theme: theme
+                });
             });
-        });
 
-        microsoftTeams.registerOnThemeChangeHandler((theme) => {
-            this.updateTheme(theme);
-            this.setState({
-                theme: theme,
-            }, () => {
-                this.forceUpdate();
+            microsoftTeams.app.registerOnThemeChangeHandler((theme) => {
+                this.updateTheme(theme);
+                this.setState({
+                    theme: theme,
+                }, () => {
+                    this.forceUpdate();
+                });
             });
         });
     }
