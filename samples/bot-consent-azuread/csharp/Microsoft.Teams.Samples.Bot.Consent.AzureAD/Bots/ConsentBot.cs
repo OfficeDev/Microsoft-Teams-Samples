@@ -60,7 +60,7 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
 
         }
 
-        protected override async Task<InvokeResponse> OnInvokeActivityAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
+        protected async override Task OnTeamsSigninVerifyStateAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
         {
             //this method is called by the SDK when an invoke is received by the bot. Typically this is because a button has been pressed in an adaptive card, that sends some data back to the bot
             //or it could be because the Teams SSO was invoked
@@ -76,8 +76,8 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
                 //reports the success back down to the user...
                 string message = "You have succesfully signed in, and the bot has now saved your access token to user state. Please send your command again to try again.";
                 await turnContext.SendActivityAsync(MessageFactory.Text(message));
-                return new InvokeResponse() { Status = 200 };  
-                
+                return;
+
             }
 
             //processes the value of the invoke, to allow you to make decisions on what to do next...
@@ -113,13 +113,13 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
                 var activity = MessageFactory.Attachment(card.ToAttachment());
                 activity.Id = turnContext.Activity.ReplyToId;
                 await turnContext.UpdateActivityAsync(activity, cancellationToken);
-                return new InvokeResponse { Status = 200 };
+                return;
             }
 
             //If the user user consent was succesful then this will display a card that reports success and provide the ability to invoke the graph API call (delegated).
             if (turnContext.Activity.Name == "signin/verifyState" && value == "UserConsent")
             {
-                
+
 
                 var card = new HeroCard()
                 {
@@ -139,16 +139,12 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
                 var activity = MessageFactory.Attachment(card.ToAttachment());
                 activity.Id = turnContext.Activity.ReplyToId;
                 await turnContext.UpdateActivityAsync(activity, cancellationToken);
-                return new InvokeResponse { Status = 200 };
+                return;
 
 
             }
 
-            //if we hit this point in the code, then the invoke that was sent to the bot is not understood, so return 501.
-            return new InvokeResponse { Status = 501 };
         }
-
-        
 
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
@@ -588,15 +584,17 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
         }
 
 
-        private GraphServiceClient GetGraphServiceClient(string token) => new GraphServiceClient(
+        private GraphServiceClient GetGraphServiceClient(string token)
+        {
+            return new GraphServiceClient(
                //this method creates a new Graph Service client, and requires you to pass in a token (app or delegated). Use GetTokenForApp or GetTokenOnBehalfOfUser to get an access token for Graph.
                new DelegateAuthenticationProvider(
-           requestMessage =>
-           {
-               requestMessage.Headers.Authorization = new AuthenticationHeaderValue(CoreConstants.Headers.Bearer, token);
-               return Task.CompletedTask;
-           }));
-
+                   requestMessage =>
+                   {
+                       requestMessage.Headers.Authorization = new AuthenticationHeaderValue(CoreConstants.Headers.Bearer, token);
+                       return Task.CompletedTask;
+                   }));
+        }
 
         private string GetTenantIdFromChannelData(string channelData)
         {
