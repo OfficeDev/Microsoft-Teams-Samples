@@ -198,7 +198,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |26|Live coding interview using Shared meeting stage |This sample demos a live coding in a teams meeting stage.|[View][meetings-live-code-interview#csharp]|[View][meetings-live-code-interview#nodejs]|
 |27|Release Management     | This is a sample used to send workitem notification using Azure webhook.                                        |[View][release-management#cs]       |[View][release-management#nodejs]
 
-## Application samples
+## Application templates
 
 |    | App Name       | Description                                                                      | Code   |
 |:--:|:------------------|:---------------------------------------------------------------------------------------------------|:--------|
