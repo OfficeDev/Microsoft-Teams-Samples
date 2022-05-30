@@ -158,7 +158,7 @@ Write-Host "Deployment logs will be written to: ${logFileLocation}"
 $oldVerbosePreference = $VerbosePreference
 $VerbosePreference = "Continue"
 
-$appZipUrl = "https://github.com/juna-gupta/qbot-testing/raw/main/app.zip"
+$appZipUrl = "https://github.com/OfficeDev/Microsoft-Teams-Samples/raw/main/samples/msteams-application-qbot/Deployment/zip/qbot.zip"
 
 # Start Deployment
 $($result = New-QBotDeployment -verbose `
