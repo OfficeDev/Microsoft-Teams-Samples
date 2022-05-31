@@ -29,7 +29,6 @@
       "needsChannelSelector": false,
       "isNotificationOnly": false,
       "scopes": [
-        "team",
         "personal"
       ]
     }

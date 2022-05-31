@@ -15,6 +15,7 @@ using AdaptiveCards.Templating;
 using AdaptiveCards;
 using Microsoft.Teams.Samples.Bot.Consent.AzureAD.Models;
 using Microsoft.Bot.Connector.Authentication;
+using Microsoft.Extensions.Options;
 
 namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
 {
@@ -30,14 +31,14 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
     {        
         readonly UserState _userState;
         readonly IStatePropertyAccessor<string> _tokenAccessor;
-        private readonly MicrosoftAppCredentials _appSettings;
-        public ConsentBot(UserState userState, MicrosoftAppCredentials appSettings)
+        private readonly AppSettings _appSettings;
+        public ConsentBot(UserState userState, IOptions<AppSettings> appSettings)
         {
             //these are the member variables that are used to store the access token in storage for a specific user
             _userState = userState;
             _tokenAccessor = userState.CreateProperty<string>("accessToken");
             //member variable for passing the values in appsetting to the bot
-            _appSettings = appSettings;
+            _appSettings = appSettings.Value;
         }
 
         public async override Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default)
@@ -60,7 +61,7 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
 
         }
 
-        protected override async Task<InvokeResponse> OnInvokeActivityAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
+        protected async override Task OnTeamsSigninVerifyStateAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
         {
             //this method is called by the SDK when an invoke is received by the bot. Typically this is because a button has been pressed in an adaptive card, that sends some data back to the bot
             //or it could be because the Teams SSO was invoked
@@ -76,8 +77,8 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
                 //reports the success back down to the user...
                 string message = "You have succesfully signed in, and the bot has now saved your access token to user state. Please send your command again to try again.";
                 await turnContext.SendActivityAsync(MessageFactory.Text(message));
-                return new InvokeResponse() { Status = 200 };  
-                
+                return;
+
             }
 
             //processes the value of the invoke, to allow you to make decisions on what to do next...
@@ -113,13 +114,13 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
                 var activity = MessageFactory.Attachment(card.ToAttachment());
                 activity.Id = turnContext.Activity.ReplyToId;
                 await turnContext.UpdateActivityAsync(activity, cancellationToken);
-                return new InvokeResponse { Status = 200 };
+                return;
             }
 
             //If the user user consent was succesful then this will display a card that reports success and provide the ability to invoke the graph API call (delegated).
             if (turnContext.Activity.Name == "signin/verifyState" && value == "UserConsent")
             {
-                
+
 
                 var card = new HeroCard()
                 {
@@ -139,16 +140,12 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
                 var activity = MessageFactory.Attachment(card.ToAttachment());
                 activity.Id = turnContext.Activity.ReplyToId;
                 await turnContext.UpdateActivityAsync(activity, cancellationToken);
-                return new InvokeResponse { Status = 200 };
+                return;
 
 
             }
 
-            //if we hit this point in the code, then the invoke that was sent to the bot is not understood, so return 501.
-            return new InvokeResponse { Status = 501 };
         }
-
-        
 
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
@@ -170,13 +167,13 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
                             Type = ActionTypes.Signin,
                             Title = "Provide Admin Consent",
                             Text = "Provide Admin Consent",
-                            Value = $"https://jalew123.eu.ngrok.io/loginstart?appId={_appSettings.MicrosoftAppId}"
+                            Value = $"{_appSettings.BaseUrl}loginstart?appId={_appSettings.MicrosoftAppId}"
                         },
                         new CardAction() {
                             Type = ActionTypes.Signin,
                             Title = "Provide User Consent",
                             Text = "Provide User Consent",
-                            Value = $"https://jalew123.eu.ngrok.io/loginstart?userConsent=true&appId={_appSettings.MicrosoftAppId}"
+                            Value = $"{_appSettings.BaseUrl}loginstart?userConsent=true&appId={_appSettings.MicrosoftAppId}"
                         },
                         new CardAction() {
                             Type = ActionTypes.ImBack,
@@ -367,7 +364,7 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
                 {
 
                     //if a graph service exception is thrown, that requires consent to resolve, then send down the sign-in card, that invokes the consent process
-                    var card1 = SigninCard.Create("Consent Required!", "Provide Consent", $"https://jalew123.eu.ngrok.io/loginstart?appId={_appSettings.MicrosoftAppId}");
+                    var card1 = SigninCard.Create("Consent Required!", "Provide Consent", $"{_appSettings.BaseUrl}loginstart?appId={_appSettings.MicrosoftAppId}");
 
                     await turnContext.SendActivityAsync(MessageFactory.Attachment(card1.ToAttachment()), cancellationToken);
                     return;
@@ -430,7 +427,7 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
                                 Type = ActionTypes.Signin,
                                 Title = "Provide Consent For User Scopes",
                                 Text = "Provide Consent For User Scopes",
-                                Value = $"https://jalew123.eu.ngrok.io/loginstart?userConsent=true&appId={_appSettings.MicrosoftAppId}"
+                                Value = $"{_appSettings.BaseUrl}loginstart?userConsent=true&appId={_appSettings.MicrosoftAppId}"
                                 }
                             }
                             };
@@ -588,15 +585,17 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
         }
 
 
-        private GraphServiceClient GetGraphServiceClient(string token) => new GraphServiceClient(
+        private GraphServiceClient GetGraphServiceClient(string token)
+        {
+            return new GraphServiceClient(
                //this method creates a new Graph Service client, and requires you to pass in a token (app or delegated). Use GetTokenForApp or GetTokenOnBehalfOfUser to get an access token for Graph.
                new DelegateAuthenticationProvider(
-           requestMessage =>
-           {
-               requestMessage.Headers.Authorization = new AuthenticationHeaderValue(CoreConstants.Headers.Bearer, token);
-               return Task.CompletedTask;
-           }));
-
+                   requestMessage =>
+                   {
+                       requestMessage.Headers.Authorization = new AuthenticationHeaderValue(CoreConstants.Headers.Bearer, token);
+                       return Task.CompletedTask;
+                   }));
+        }
 
         private string GetTenantIdFromChannelData(string channelData)
         {
