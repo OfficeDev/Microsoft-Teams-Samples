@@ -7,7 +7,11 @@
     <title>App in a meeting demo</title>
     <link rel="stylesheet" href="/static/styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js" integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2" crossorigin="anonymous"></script>
+    <script
+  src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
+  integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
+  crossorigin="anonymous"
+></script>
 </head>
 <body id=mainDiv>
     <div id="chatSection" className="chatSection">
@@ -27,10 +31,10 @@
         </div>
     </div>
     <script>
-        microsoftTeams.initialize();
-        microsoftTeams.getContext((context) => {
+        microsoftTeams.app.initialize();
+        microsoftTeams.app.getContext().then((context) => {
             $(document).ready(function () {
-                if (context.frameContext == "sidePanel") {
+                if (context.page.frameContext == "sidePanel") {
                     $("#todo, #doing, #done").addClass("grid-item-sidepanel");
                     $("#todo, #doing, #done").removeClass("grid-item");
 
