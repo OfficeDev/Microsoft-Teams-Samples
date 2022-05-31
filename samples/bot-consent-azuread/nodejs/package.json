@@ -1,10 +1,9 @@
 {
-  "name": "msteams-nodejs-hello-world",
+  "name": "msteams-nodejs-bot-consent",
   "version": "1.0.0",
-  "description": "Microsoft Teams Hello World sample app written in ES6 with Bot Framework v4 SDK",
+  "description": "Microsoft Teams Bot Consent sample app written in ES6 with Bot Framework v4 SDK",
   "scripts": {
-    "start": "nodemon --exec babel-node src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/app.js"
   },
   "repository": {
     "type": "git",
