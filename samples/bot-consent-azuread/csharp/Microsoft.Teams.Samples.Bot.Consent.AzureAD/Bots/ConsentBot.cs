@@ -15,6 +15,7 @@ using AdaptiveCards.Templating;
 using AdaptiveCards;
 using Microsoft.Teams.Samples.Bot.Consent.AzureAD.Models;
 using Microsoft.Bot.Connector.Authentication;
+using Microsoft.Extensions.Options;
 
 namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
 {
@@ -30,14 +31,14 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
     {        
         readonly UserState _userState;
         readonly IStatePropertyAccessor<string> _tokenAccessor;
-        private readonly MicrosoftAppCredentials _appSettings;
-        public ConsentBot(UserState userState, MicrosoftAppCredentials appSettings)
+        private readonly AppSettings _appSettings;
+        public ConsentBot(UserState userState, IOptions<AppSettings> appSettings)
         {
             //these are the member variables that are used to store the access token in storage for a specific user
             _userState = userState;
             _tokenAccessor = userState.CreateProperty<string>("accessToken");
             //member variable for passing the values in appsetting to the bot
-            _appSettings = appSettings;
+            _appSettings = appSettings.Value;
         }
 
         public async override Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default)
@@ -166,13 +167,13 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
                             Type = ActionTypes.Signin,
                             Title = "Provide Admin Consent",
                             Text = "Provide Admin Consent",
-                            Value = $"https://jalew123.eu.ngrok.io/loginstart?appId={_appSettings.MicrosoftAppId}"
+                            Value = $"{_appSettings.BaseUrl}loginstart?appId={_appSettings.MicrosoftAppId}"
                         },
                         new CardAction() {
                             Type = ActionTypes.Signin,
                             Title = "Provide User Consent",
                             Text = "Provide User Consent",
-                            Value = $"https://jalew123.eu.ngrok.io/loginstart?userConsent=true&appId={_appSettings.MicrosoftAppId}"
+                            Value = $"{_appSettings.BaseUrl}loginstart?userConsent=true&appId={_appSettings.MicrosoftAppId}"
                         },
                         new CardAction() {
                             Type = ActionTypes.ImBack,
@@ -363,7 +364,7 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
                 {
 
                     //if a graph service exception is thrown, that requires consent to resolve, then send down the sign-in card, that invokes the consent process
-                    var card1 = SigninCard.Create("Consent Required!", "Provide Consent", $"https://jalew123.eu.ngrok.io/loginstart?appId={_appSettings.MicrosoftAppId}");
+                    var card1 = SigninCard.Create("Consent Required!", "Provide Consent", $"{_appSettings.BaseUrl}loginstart?appId={_appSettings.MicrosoftAppId}");
 
                     await turnContext.SendActivityAsync(MessageFactory.Attachment(card1.ToAttachment()), cancellationToken);
                     return;
@@ -426,7 +427,7 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
                                 Type = ActionTypes.Signin,
                                 Title = "Provide Consent For User Scopes",
                                 Text = "Provide Consent For User Scopes",
-                                Value = $"https://jalew123.eu.ngrok.io/loginstart?userConsent=true&appId={_appSettings.MicrosoftAppId}"
+                                Value = $"{_appSettings.BaseUrl}loginstart?userConsent=true&appId={_appSettings.MicrosoftAppId}"
                                 }
                             }
                             };
