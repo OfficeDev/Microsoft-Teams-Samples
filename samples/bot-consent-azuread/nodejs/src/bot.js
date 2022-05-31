@@ -13,38 +13,43 @@ const {
 
 const msal = require("@azure/msal-node");
 const axios = require("axios");
-const { Blob } = require("buffer");
 
 class EchoBot extends TeamsActivityHandler {
 
     userState = null;
     tokenAccessor = null;
+    baseUrl = null;
 
-    constructor() {
+    constructor(baseUrl) {
         super();
 
         const memoryStorage = new MemoryStorage();
         this.userState = new UserState(memoryStorage);
         this.tokenAccessor = this.userState.createProperty("accessToken");
+        this.baseUrl = baseUrl;
 
-        // this.onInstallationUpdate(async (context, next) => {
-        //     // If the app was updated or uninstalled, clear the welcome message state for the current user
-        //     if (context.activity.action == "add") {
-        //         await context.sendActivity(`Hello ${context.activity.from.name}, I'm the consent bot. Ask me to 'get profile' and I'll try and make a connection to Graph to get some information about you. If I need consent, I'll walk you through the process, using a sign-in card, and a modal window.`);
-        //     }
-        //     await next();
-        // });
+        this.onInstallationUpdateAdd(async (context, next) => {
+            await context.sendActivity(
+                MessageFactory.attachment(
+                    CardFactory.heroCard(
+                        "Hello, I'm the consent bot", 
+                        "Ask me to 'get profile' and I'll try and make a connection to Graph to get some information about you. If I need consent, I'll walk you through the process, using a sign-in card, and a modal window.", 
+                        null, 
+                        [
+                            {
+                                type: ActionTypes.ImBack,
+                                title: "Help",
+                                value: "help"
+                            }
+                        ])));
+            await next();
+        });
 
         this.onMessage(async (context, next) => {
             TurnContext.removeRecipientMention(context.activity);
             const text = context.activity.text.trim().toLocaleLowerCase().replace(/[\s-]/g, "");
 
             const token = await this.tokenAccessor.get(context);
-
-            let baseUrl = process.env.BaseUrl.trim();
-            while(baseUrl.charAt(baseUrl.length-1)=="/") {
-                baseUrl = baseUrl.substring(0,baseUrl.length-1);
-            }
 
             switch (text) {
                 case "hello": case "help":       
@@ -54,32 +59,10 @@ class EchoBot extends TeamsActivityHandler {
                         "I can get information about you from Graph API, and display it in a hero card. To do this, click Get Profile... Or if you want to provide Consent, click Provide Consent. If you click Get Profile, and consent isn't already in place, I'm smart enough to deal with this and I'll walk you through that process!",
                         null,
                         [
-                            {
-                                type: ActionTypes.Signin,
-                                title: "Provide Admin Consent",
-                                text: "Provide Admin Consent",
-                                value: `${baseUrl}/LoginStart.html?appId=${process.env.MicrosoftAppId}`
-                            },
-                            {
-                                type: ActionTypes.Signin,
-                                title: "Provide User Consent",
-                                text: "Provide User Consent",
-                                value: `${baseUrl}/LoginStart.html?userConsent=true&appId=${process.env.MicrosoftAppId}`
-                            },
-                            {
-                                type: ActionTypes.ImBack,
-                                title: "Get My Profile (app permissions)",
-                                text: "Get Profile - app",
-                                value: "Get Profile - app",
-                                displayText: "Get My Profile (app permissions)"
-                            },
-                            {
-                                type: ActionTypes.ImBack,
-                                title: "Get My Profile (delegated permissions)",
-                                text: "Get Profile - delegated",
-                                value: "Get Profile - delegated",
-                                displayText: "Get My Profile (delegated permissions)"
-                            }
+                            this.provideAdminConsentAction(),
+                            this.provideUserConsentAction(),
+                            this.getProfileActionApp(),
+                            this.getProfileActionDelegated()
                         ]);
 
                     await context.sendActivity(MessageFactory.attachment(card));
@@ -107,20 +90,8 @@ class EchoBot extends TeamsActivityHandler {
                                 "Do you want me to get your profile using an app permissions or a delegated permission token?", 
                                 null, 
                                 [
-                                    {
-                                        type: ActionTypes.ImBack,
-                                        title: "Get My Profile (app permissions)",
-                                        text: "Get Profile - app",
-                                        value: "Get Profile - app",
-                                        displayText: "Get My Profile (app permissions)"
-                                    },
-                                    {
-                                        type: ActionTypes.ImBack,
-                                        title: "Get My Profile (delegated permissions)",
-                                        text: "Get Profile - delegated",
-                                        value: "Get Profile - delegated",
-                                        displayText: "Get My Profile (delegated permissions)"
-                                    }
+                                    this.getProfileActionApp(),
+                                    this.getProfileActionDelegated()
                                 ])));
                     break;
                 case "getprofileapp":
@@ -138,7 +109,7 @@ class EchoBot extends TeamsActivityHandler {
 
                     try{
                         const meResponse = await axios.default.get(`https://graph.microsoft.com/v1.0/users/${userAadId}?$select=displayName,department,jobTitle,state,officeLocation`, requestOptions);
-                        const image = await this.getImageUrl(baseUrl, appToken.accessToken, userAadId);
+                        const image = await this.getImageUrl(appToken.accessToken, userAadId);
                         
                         await context.sendActivity(
                             MessageFactory.attachment(
@@ -153,11 +124,8 @@ class EchoBot extends TeamsActivityHandler {
 
                                 await context.sendActivity(
                                     MessageFactory.attachment(
-                                        CardFactory.signinCard("Consent Required!", `${baseUrl}/LoginStart.html?appId=${process.env.MicrosoftAppId}`, "Provide Consent")));
+                                        CardFactory.signinCard("Consent Required!", `${this.baseUrl}/LoginStart.html?appId=${process.env.MicrosoftAppId}`, "Provide Consent")));
 
-                                break;
-                            case "ImageNotFound":
-                                await context.sendActivity("I can't generate a profile card, as there is no profile image for this user. Please add an image for this user via the Office 365 profile screen and try again.");
                                 break;
                         }
                     }
@@ -181,7 +149,7 @@ class EchoBot extends TeamsActivityHandler {
                         const meResponse = await axios.default.get("https://graph.microsoft.com/v1.0/me?$select=displayName,department,jobTitle,state,officeLocation", requestOptions);
                         const presenceResponse = await axios.default.get("https://graph.microsoft.com/v1.0/me/presence", requestOptions);
 
-                        const image = await this.getImageUrl(baseUrl, tokenResult.accessToken);
+                        const image = await this.getImageUrl(tokenResult.accessToken);
 
                         await context.sendActivity(
                             MessageFactory.attachment(
@@ -197,12 +165,7 @@ class EchoBot extends TeamsActivityHandler {
                                         `ERROR: ${e.errorCode}. I need you to provide Consent so I can make some calls to the Graph API to find out some information about you. Please click the button below to complete the Consent process...`,
                                         null,
                                         [
-                                            {
-                                                type: ActionTypes.Signin,
-                                                title: "Provide User Consent",
-                                                text: "Provide User Consent",
-                                                value: `${baseUrl}/LoginStart.html?userConsent=true&appId=${process.env.MicrosoftAppId}`
-                                            }
+                                            this.provideUserConsentAction()
                                         ])));
                         }
                         else if (e.errorCode === "invalid_assertion" || e.errorCode === "invalid_jwt_token") {
@@ -220,7 +183,7 @@ class EchoBot extends TeamsActivityHandler {
         });
     }
 
-    async getImageUrl(baseUrl, token, userId) {
+    async getImageUrl(token, userId) {
         let image = "";
         try {
 
@@ -230,7 +193,7 @@ class EchoBot extends TeamsActivityHandler {
 
         }
         catch(e) {
-            image = `${baseUrl}/missing.jpg`;
+            image = `${this.baseUrl}/missing.jpg`;
         }
 
         return image;
@@ -242,58 +205,87 @@ class EchoBot extends TeamsActivityHandler {
                 CardFactory.oauthCard("AAD", "Sign-in!", "Sign-in!", null, {id:"showAccessToken"})));
     }
 
+    getProfileActionApp() {
+        return {
+            type: ActionTypes.ImBack,
+            title: "Get My Profile (app permissions)",
+            text: "Get Profile - app",
+            value: "Get Profile - app",
+            displayText: "Get My Profile (app permissions)"
+        }
+    }
+
+    getProfileActionDelegated() {
+        return {
+            type: ActionTypes.ImBack,
+            title: "Get My Profile (delegated permissions)",
+            text: "Get Profile - delegated",
+            value: "Get Profile - delegated",
+            displayText: "Get My Profile (delegated permissions)"
+        }
+    }
+
+    provideUserConsentAction() {
+        return {
+            type: ActionTypes.Signin,
+            title: "Provide User Consent",
+            text: "Provide User Consent",
+            value: `${this.baseUrl}/LoginStart.html?userConsent=true&appId=${process.env.MicrosoftAppId}`
+        }
+    }
+
+    provideAdminConsentAction() {
+        return {
+            type: ActionTypes.Signin,
+            title: "Provide Admin Consent",
+            text: "Provide Admin Consent",
+            value: `${this.baseUrl}/LoginStart.html?appId=${process.env.MicrosoftAppId}`
+        }
+    }
+
+    async handleTeamsSigninVerifyState(context, query) {
+        let activity = null;
+        if (context.activity.value.state === "AdminConsent") {
+            activity = MessageFactory.attachment(
+                CardFactory.heroCard(
+                    "Admin Consent Successful", 
+                    "Admin Consent was successful! Click Get Profile to test Graph API functionality now consent has been granted for all users in this tenant.",
+                    null,
+                    [
+                        this.getProfileActionApp(),
+                        this.getProfileActionDelegated()
+                    ]));
+        }
+        else if (context.activity.value.state === "UserConsent") {
+            activity = MessageFactory.attachment(
+                CardFactory.heroCard(
+                    "User Consent Successful", 
+                    "User Consent was successful! Click Get Profile to test Graph API functionality now consent has been granted for this user!",
+                    null,
+                    [
+                        this.getProfileActionDelegated()
+                    ]));
+        }
+        
+        activity.id = context.activity.replyToId;
+        await context.updateActivity(activity);
+    }
+
     async handleTeamsSigninTokenExchange(context, query) {
         if (context.activity.name === "signin/tokenExchange") {
             const token = context.activity.value.token;
             await this.tokenAccessor.set(context, token);
-            await context.sendActivity("You have successfully signed in, and the bot has now saved your access token to user state. Please send your command again to try again.");
-            return;
-        }
-
-        if (context.activity.name === "signin/verifyState") {
-            if (context.activity.value.state === "AdminConsent") {
-                const activity = MessageFactory.attachment(
+            await context.sendActivity(
+                MessageFactory.attachment(
                     CardFactory.heroCard(
-                        "Admin Consent Successful", 
-                        "Admin Consent was successful! Click Get Profile to test Graph API functionality now consent has been granted for all users in this tenant.",
-                        null,
+                        "You have successfully signed in", 
+                        "The bot has now saved your access token to user state. Please send your command again to try again.", null, 
                         [
-                            {
-                                type: ActionTypes.ImBack,
-                                title: "Get My Profile (app permissions)",
-                                text: "Get Profile - app",
-                                value: "Get Profile - app",
-                                displayText: "Get My Profile (app permissions)"
-                            },
-                            {
-                                type: ActionTypes.ImBack,
-                                title: "Get My Profile (delegated permissions)",
-                                text: "Get Profile - delegated",
-                                value: "Get Profile - delegated",
-                                displayText: "Get My Profile (delegated permissions)"
-                            }
-                        ]));
-                activity.replyToId = context.activity.replyToId;
-                await context.updateActivity(activity);
-            }
-            else if (context.activity.value.state === "UserConsent") {
-                const activity = MessageFactory.attachment(
-                    CardFactory.heroCard(
-                        "User Consent Successful", 
-                        "User Consent was successful! Click Get Profile to test Graph API functionality now consent has been granted for this user!",
-                        null,
-                        [
-                            {
-                                type: ActionTypes.ImBack,
-                                title: "Get My Profile (delegated permissions)",
-                                text: "Get Profile - delegated",
-                                value: "Get Profile - delegated",
-                                displayText: "Get My Profile (delegated permissions)"
-                            }
-                        ]));
-                activity.replyToId = context.activity.replyToId;
-                await context.updateActivity(activity);
-            }
+                            this.provideAdminConsentAction(),
+                            this.provideUserConsentAction(),
+                            this.getProfileActionApp(),
+                            this.getProfileActionDelegated()
+                        ])));
         }
     }
 

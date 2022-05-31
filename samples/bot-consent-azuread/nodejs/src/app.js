@@ -55,12 +55,21 @@ adapter.onTurnError = async (context, error) => {
     // in the manifest, the bot will not be allowed to message users.
 };
 
+let baseUrl = process.env.BaseUrl.trim();
+while(baseUrl.charAt(baseUrl.length-1)=="/") {
+    baseUrl = baseUrl.substring(0,baseUrl.length-1);
+}
 // Adding a bot to our app
-const bot = new EchoBot();
+const bot = new EchoBot(baseUrl);
 
 // Listen for incoming requests.
 server.post('/api/messages', (req, res) => {
     adapter.processActivity(req, res, async (context) => {
-        await bot.run(context);
+        try {
+            await bot.run(context);
+        }
+        catch(e) {
+            console.error("Something bad gonna happen! " + e);
+        }
     });
 });
