@@ -26,6 +26,7 @@ function createRowItemsFromCategoryItem(
   return [
     {
       content: inquiry.customerName,
+      truncateContent: true,
       key: `${index}-customerName`,
     },
     {
