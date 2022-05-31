@@ -3,13 +3,16 @@ import * as microsoftTeams from '@microsoft/teams-js';
 import { Flex, Form, FormInput, Header, Text } from '@fluentui/react-northstar';
 import { useMutation } from 'react-query';
 import { createSupportDepartment } from 'api';
+import { ConsentRequest } from 'components/ConsentRequest';
 import {
   ApiErrorCode,
   SupportDepartment,
   SupportDepartmentInput,
 } from 'models';
+import { isError } from 'utils/ErrorUtils';
 
 function Configure() {
+  const [userHasConsented, setUserHasConsented] = useState<boolean>(false);
   const [departmentTitle, setDepartmentTitle] = useState<string>('');
   const [departmentDescription, setDepartmentDescription] =
     useState<string>('');
@@ -32,6 +35,7 @@ function Configure() {
   useEffect(() => {
     if (departmentTitle !== '' && departmentDescription !== '') {
       microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
+        setUserHasConsented(false);
         microsoftTeams.getContext((context) => {
           createSupportDepartmentMutation.mutate(
             {
@@ -51,26 +55,49 @@ function Configure() {
                 });
                 saveEvent.notifySuccess();
               },
+              onError: () => {
+                saveEvent.notifyFailure();
+              },
             },
           );
         });
       });
-      microsoftTeams.settings.setValidityState(true);
+
+      if (
+        isError(
+          ApiErrorCode.ChannelActivityNotFound,
+          createSupportDepartmentMutation.error,
+        ) ||
+        (isError(
+          ApiErrorCode.AuthConsentRequired,
+          createSupportDepartmentMutation.error,
+        ) &&
+          !userHasConsented)
+      ) {
+        microsoftTeams.settings.setValidityState(false);
+      } else {
+        microsoftTeams.settings.setValidityState(true);
+      }
     }
   }, [departmentTitle, departmentDescription, createSupportDepartmentMutation]);
 
-  useEffect(() => {
-    if (isError(ApiErrorCode.ChannelActivityNotFound)) {
-      microsoftTeams.settings.setValidityState(false);
+  const consentCallback = (error?: string, result?: string) => {
+    if (error) {
+      console.log(`Error: ${error}`);
     }
-  }, [createSupportDepartmentMutation]);
-
-  const isError = (errorCode: ApiErrorCode): boolean =>
-    createSupportDepartmentMutation.isError &&
-    createSupportDepartmentMutation.error.message.startsWith(errorCode);
+    if (result) {
+      setUserHasConsented(true);
+      microsoftTeams.settings.setValidityState(true);
+    }
+  };
 
   const getErrorNode = (): ReactNode => {
-    if (isError(ApiErrorCode.ChannelActivityNotFound)) {
+    if (
+      isError(
+        ApiErrorCode.ChannelActivityNotFound,
+        createSupportDepartmentMutation.error,
+      )
+    ) {
       return (
         <>
           <Header
@@ -80,10 +107,13 @@ function Configure() {
           <Text content="To configure the bot, send a message to the bot 'Conversational Tabs' in this channel." />
         </>
       );
-    } else if (isError(ApiErrorCode.AuthConsentRequired)) {
-      return (
-        <Header content="We need you to consent to complete that action." />
-      );
+    } else if (
+      isError(
+        ApiErrorCode.AuthConsentRequired,
+        createSupportDepartmentMutation.error,
+      )
+    ) {
+      return <ConsentRequest callback={consentCallback} />;
     } else {
       return (
         <Header
@@ -96,10 +126,15 @@ function Configure() {
 
   return (
     <Flex column>
-      {createSupportDepartmentMutation.isError && getErrorNode()}
-      {!createSupportDepartmentMutation.isError && (
+      {!userHasConsented &&
+        createSupportDepartmentMutation.isError &&
+        getErrorNode()}
+      {(!createSupportDepartmentMutation.isError || userHasConsented) && (
         <>
           <Header content="Create support department" />
+          {userHasConsented && (
+            <Text success as="p" content="Successfully consented." />
+          )}
           <Form>
             <FormInput
               label="Department name"

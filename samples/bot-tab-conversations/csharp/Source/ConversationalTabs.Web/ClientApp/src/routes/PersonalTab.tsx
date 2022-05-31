@@ -1,28 +1,67 @@
+import { ReactNode, useState } from 'react';
 import { Accordion, Flex, Header, Loader } from '@fluentui/react-northstar';
 import { useQuery } from 'react-query';
 import { getAllSupportDepartments } from 'api';
-import { SupportDepartment } from 'models';
+import { ApiErrorCode, SupportDepartment } from 'models';
 import { CustomerInquiryTable } from 'components/CustomerInquiryTable';
+import { ConsentRequest } from 'components/ConsentRequest';
+import { isError } from 'utils/ErrorUtils';
 
 function PersonalTab() {
-  const { data, error, isLoading } = useQuery<SupportDepartment[], Error>(
+  const [userHasConsented, setUserHasConsented] = useState<boolean>(false);
+  const allSupportDepartments = useQuery<SupportDepartment[], Error>(
     ['getAllSupportDepartments'],
     () => getAllSupportDepartments(),
+    {
+      onSuccess: () => {
+        setUserHasConsented(false);
+      },
+    },
   );
+
+  const consentCallback = (error?: string, result?: string) => {
+    if (error) {
+      console.log(`Error: ${error}`);
+    }
+    if (result) {
+      setUserHasConsented(true);
+      allSupportDepartments.refetch;
+    }
+  };
+
+  const getErrorNode = (): ReactNode => {
+    if (
+      isError(ApiErrorCode.AuthConsentRequired, allSupportDepartments.error) &&
+      !userHasConsented
+    ) {
+      return <ConsentRequest callback={consentCallback} />;
+    } else {
+      <Header
+        content={allSupportDepartments.error?.message ?? 'Unknown error.'}
+      />;
+    }
+  };
 
   return (
     <Flex column>
-      {isLoading && <Loader />}
-      {error && <Header content={error.message} />}
-      {data && data.length === 0 && (
-        <Header content="No support departments found" />
-      )}
-      {data && data.length > 0 && (
+      {allSupportDepartments.isLoading && <Loader />}
+      {allSupportDepartments.error && getErrorNode()}
+      {allSupportDepartments.data &&
+        allSupportDepartments.data.length === 0 && (
+          <Header content="No support departments found" />
+        )}
+      {allSupportDepartments.data && allSupportDepartments.data.length > 0 && (
         <>
-          <Header content="Your support departments" description="Only the first 5 inquiries in each department are shown" />
+          <Header
+            content="Your support departments"
+            description="Only the first 5 inquiries in each department are shown"
+          />
           <Accordion
-            defaultActiveIndex={Array.from(data, (_, i) => i)}
-            panels={getAccordionPanels(data)}
+            defaultActiveIndex={Array.from(
+              allSupportDepartments.data,
+              (_, i) => i,
+            )}
+            panels={getAccordionPanels(allSupportDepartments.data)}
           />
         </>
       )}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import {
   ArrowLeftIcon,
   Button,
@@ -11,10 +11,13 @@ import { useQuery } from 'react-query';
 import * as microsoftTeams from '@microsoft/teams-js';
 import { getSupportDepartment, getSupportDepartmentItem } from 'api';
 import { CustomerInquiryDetail } from 'components/CustomerInquiryDetail';
-import { CustomerInquiry, SupportDepartment } from 'models';
+import { ConsentRequest } from 'components/ConsentRequest';
+import { ApiErrorCode, CustomerInquiry, SupportDepartment } from 'models';
+import { isError } from 'utils/ErrorUtils';
 
 function InquirySubEntityTab() {
   const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
+  const [userHasConsented, setUserHasConsented] = useState<boolean>(false);
   const [onLoadConversationOpened, setOnLoadConversationOpened] =
     useState<boolean>(false);
   const navigate = useNavigate();
@@ -36,6 +39,7 @@ function InquirySubEntityTab() {
           const successful = openConversation();
           setOnLoadConversationOpened(successful);
         }
+        setUserHasConsented(false);
       },
     },
   );
@@ -49,6 +53,7 @@ function InquirySubEntityTab() {
           const successful = openConversation();
           setOnLoadConversationOpened(successful);
         }
+        setUserHasConsented(false);
       },
     },
   );
@@ -77,6 +82,29 @@ function InquirySubEntityTab() {
     setIsChatOpen(false);
   };
 
+  const consentCallback = (error?: string, result?: string) => {
+    if (error) {
+      console.log(`Error: ${error}`);
+    }
+    if (result) {
+      setUserHasConsented(true);
+      inquiry.refetch;
+      supportDepartment.refetch;
+    }
+  };
+
+  const getErrorNode = (): ReactNode => {
+    if (
+      (isError(ApiErrorCode.AuthConsentRequired, inquiry.error) ||
+        isError(ApiErrorCode.AuthConsentRequired, supportDepartment.error)) &&
+      !userHasConsented
+    ) {
+      return <ConsentRequest callback={consentCallback} />;
+    } else {
+      return <Header content={inquiry.error?.message ?? 'Unknown error'} />;
+    }
+  };
+
   return (
     <Flex column>
       <Flex>
@@ -89,9 +117,7 @@ function InquirySubEntityTab() {
         />
       </Flex>
       {inquiry.isLoading && supportDepartment.isLoading && <Loader />}
-      {inquiry.error && supportDepartment.error && (
-        <Header content={inquiry.error.message} />
-      )}
+      {inquiry.error && supportDepartment.error && getErrorNode()}
       {inquiry.data && supportDepartment.data && (
         <CustomerInquiryDetail
           customerInquiry={inquiry.data}
