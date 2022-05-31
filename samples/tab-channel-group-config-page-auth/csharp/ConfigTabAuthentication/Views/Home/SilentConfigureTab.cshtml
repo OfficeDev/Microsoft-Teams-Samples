@@ -27,9 +27,7 @@
     </div>
 </p>
 <script type="text/javascript">
-        microsoftTeams.initialize();
-
-         let msalConfig = {
+        let msalConfig = {
             auth: {
                 clientId: '@ViewBag.ClientId',
                 redirectUri: window.location.origin + "/SilentAuthEnd",     // This should be in the list of redirect uris for the AAD app
@@ -42,11 +40,24 @@
 
         const msalInstance = new msal.PublicClientApplication(msalConfig);
 
-        localStorage.setItem("Client", msalConfig.auth.clientId)
-        let upn = undefined;
-        microsoftTeams.getContext(function (context) {
-            upn = context.upn;
-            loadData(upn);
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+                var radios = document.getElementsByName('notificationType');
+
+                microsoftTeams.pages.config.setConfig({
+                    entityId: 'Silent Authentication',
+                    contentUrl: window.location.origin + "/Home/Index",
+                    configName: 'SilentAuthentication'
+                });
+                saveEvent.notifySuccess();
+            });
+
+            localStorage.setItem("Client", msalConfig.auth.clientId)
+            let upn = undefined;
+            microsoftTeams.app.getContext().then((context) => {
+                upn = context.user.userPrincipalName;
+                loadData(upn);
+            });
         });
 
         // Loads data for the given user
@@ -88,48 +99,46 @@
             microsoftTeams.authentication.authenticate({
                 url: window.location.origin + "/AuthStart",
                 width: 600,
-                height: 535,
-                successCallback: function (result) {
-                    // AuthenticationContext is a singleton
-                    cachedAccounts =  msalInstance.getAllAccounts();
+                height: 535
+            }).then((result) => {
+                // AuthenticationContext is a singleton
+                cachedAccounts =  msalInstance.getAllAccounts();
 
-                    microsoftTeams.getContext(function (context) {
-                        let accountInfo = cachedAccounts.filter(account => account.username === context.upn);
+                microsoftTeams.app.getContext().then((context) => {
+                    let accountInfo = cachedAccounts.filter(account => account.username === context.user.userPrincipalName);
 
-                        if (accountInfo.length > 0) {
-                            const silentRequest = {
-                                account: accountInfo[0]
-                            };
+                    if (accountInfo.length > 0) {
+                        const silentRequest = {
+                            account: accountInfo[0]
+                        };
 
-                            // Acquire Token Silently
-                            msalInstance.acquireTokenSilent(silentRequest)
-                            .then((response) => {
-                                if (response.idToken) {
-                                    showProfileInformation(response.idToken);
-                                } else {
-                                    console.error("Error getting cached id token. This should never happen.");
-                                    // At this point we have to get the user involved, so show the login button
-                                    $("#btnLogin").css({ display: "" });
-                                }
-                            })
-                            .catch((error) => {
-                                console.log(error);
-                            });
-                        }
-                    });
-                },
-                failureCallback: function (reason) {
-                    console.log("Login failed: " + reason);
-                    if (reason === "CancelledByUser" || reason === "FailedToOpenWindow") {
-                        console.log("Login was blocked by popup blocker or canceled by user.");
+                        // Acquire Token Silently
+                        msalInstance.acquireTokenSilent(silentRequest)
+                        .then((response) => {
+                            if (response.idToken) {
+                                showProfileInformation(response.idToken);
+                            } else {
+                                console.error("Error getting cached id token. This should never happen.");
+                                // At this point we have to get the user involved, so show the login button
+                                $("#btnLogin").css({ display: "" });
+                            }
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
                     }
-                    // At this point we have to get the user involved, so show the login button
-                    $("#btnLogin").css({ display: "" });
-
-                    $("#divError").text(reason).css({ display: "" });
-                    $("#divProfile").css({ display: "none" });
-                    $("#divSilentSignOut").css({ display: "none" });
+                });
+            }).catch((reason) => {
+                console.log("Login failed: " + reason);
+                if (reason === "CancelledByUser" || reason === "FailedToOpenWindow") {
+                    console.log("Login was blocked by popup blocker or canceled by user.");
                 }
+                // At this point we have to get the user involved, so show the login button
+                $("#btnLogin").css({ display: "" });
+
+                $("#divError").text(reason).css({ display: "" });
+                $("#divProfile").css({ display: "none" });
+                $("#divSilentSignOut").css({ display: "none" });
             });
         }
 
@@ -148,7 +157,7 @@
                     $("#divProfile").css({ display: "" });
                     $("#divSilentSignOut").css({ display: "" });
                     $("#divError").css({ display: "none" });
-                    microsoftTeams.settings.setValidityState(true);
+                    microsoftTeams.pages.config.setValidityState(true);
 
                     localStorage.setItem("displayName", token.name);
 
@@ -162,22 +171,22 @@
             });
         }
 
-        microsoftTeams.initialize();
-        microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
+    function SilentLogout() {
+        localStorage.clear();
+        window.location.href = "@Url.Action("ChooseAuth", "Home")";
+    }
+
+    microsoftTeams.app.initialize().then(() => {
+        microsoftTeams.pages.config.registerOnSaveHandler(function(saveEvent) {
             var radios = document.getElementsByName('notificationType');
 
-            microsoftTeams.settings.setSettings({
+            microsoftTeams.pages.config.setConfig({
                 entityId: 'Silent Authentication',
                 contentUrl: window.location.origin + "/Home/Index",
                 configName: 'SilentAuthentication'
             });
             saveEvent.notifySuccess();
         });
-
-    function SilentLogout() {
-        localStorage.clear();
-        window.location.href = "@Url.Action("ChooseAuth", "Home")";
-    }
-
+    });
 
 </script>

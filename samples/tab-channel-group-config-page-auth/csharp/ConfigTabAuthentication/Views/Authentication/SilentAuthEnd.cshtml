@@ -1,8 +1,8 @@
-﻿
-@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 <script type="text/javascript">
-    microsoftTeams.initialize();
-
+    microsoftTeams.app.initialize().then(() => {
         let msalConfig = {
             auth: {
                 clientId: '@ViewBag.AuthEndClientId',
@@ -24,6 +24,6 @@
                 return;
             } else
                 microsoftTeams.authentication.notifySuccess();
-            } 
-        });
+        }});
+    });
 </script>
