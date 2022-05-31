@@ -1,7 +1,6 @@
-# QBot
 ---
 page_type: sample
-description:QBot is a solution designed for classroom teaching scenarios which allows teachers, tutors, and students to intelligently answer each other's questions within the Microsoft Teams collaboration platform.
+description: "QBot is a solution designed for classroom teaching scenarios which allows teachers, tutors, and students to intelligently answer each other's questions within the Microsoft Teams collaboration platform."
 products:
 - office-teams
 - office
@@ -10,9 +9,11 @@ languages:
 - csharp
 - typescript
 extensions:
-contentType: samples
-createdDate: "30-05-2022 12:00 PM"
+  contentType: samples
+  createdDate: "30-05-2022 12:00 PM"
 ---
+
+# QBot
 
 | [Documentation](#contents) | [Deployment guide](Deployment/README.md) | [Solution Overview](Documentation/SolutionOverview.md) |
 | ---- | ---- | ---- |
