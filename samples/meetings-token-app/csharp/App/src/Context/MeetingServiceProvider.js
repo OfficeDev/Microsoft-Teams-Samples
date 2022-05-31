@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
-
 import * as microsoftTeams from "@microsoft/teams-js";
-
 import MeetingTokenService from "../Service/MeetingTokenService";
 import Constants from "../Constants";
 

@@ -60,13 +60,12 @@
         <button id="btnLogout" onclick="logout()" style="display: none">Logout (Silent)</button>
 
         <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha384-VC7EHu0lDzZyFfmjTPJq+DFyIn8TUGAJbEtpXquazFVr00Q/OOx//RjiZ9yU9+9m" crossorigin="anonymous"></script>
-        <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js" integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT" crossorigin="anonymous"></script>
+        <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
 
         <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
 
         <script type="text/javascript">
-            microsoftTeams.initialize();
-
+            
             // Parse query parameters
             let queryParams = getQueryParameters();
             let loginHint = queryParams["loginHint"];
@@ -89,36 +88,40 @@
                 }
             };
             const msalInstance = new msal.PublicClientApplication(msalConfig);
-            microsoftTeams.getContext(function (context) {
-                upn = context.upn;
-                let cachedAccounts =  msalInstance.getAllAccounts();
-                let accountInfo = cachedAccounts.filter(account => account.username === upn);
-                if (accountInfo.length > 0) {
-                    const silentRequest = {
-                        account: accountInfo[0]
-                    };
+            
+            microsoftTeams.app.initialize().then(() => {
+                microsoftTeams.app.getContext().then((context) => {
+                    upn = context.user.userPrincipalName;
+                    let cachedAccounts =  msalInstance.getAllAccounts();
+                    let accountInfo = cachedAccounts.filter(account => account.username === upn);
+                    if (accountInfo.length > 0) {
+                        const silentRequest = {
+                            account: accountInfo[0]
+                        };
 
-                    // Acquire Token Silently
-                    msalInstance.acquireTokenSilent(silentRequest)
-                    .then((response) => {
-                        if (response.idToken) {
-                            showUserInformation(response.idToken);
-                        } else {
+                        // Acquire Token Silently
+                        msalInstance.acquireTokenSilent(silentRequest)
+                        .then((response) => {
+                            if (response.idToken) {
+                                showUserInformation(response.idToken);
+                            } else {
+                                console.error("Error getting cached id token. This should never happen.");
+                                // At this point we have to get the user involved, so show the login button
+                                $("#btnLogin").show();
+                            }
+                        })
+                        .catch((error) => {
+                            console.error(error);
                             console.error("Error getting cached id token. This should never happen.");
                             // At this point we have to get the user involved, so show the login button
                             $("#btnLogin").show();
-                        }
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                        console.error("Error getting cached id token. This should never happen.");
-                        // At this point we have to get the user involved, so show the login button
+                        });
+                    } else {
                         $("#btnLogin").show();
-                    });
-                } else {
-                    $("#btnLogin").show();
-                }
+                    }
+                });
             });
+            
             
 
             // To get an access token to a resource like Graph,
@@ -130,14 +133,14 @@
             // Interactive login to Azure AD
             function login() {
                 $(".auth-data").hide();
-
-                microsoftTeams.authentication.authenticate({
+                microsoftTeams.app.initialize().then(() => {
+                    microsoftTeams.authentication.authenticate({
                     url: window.location.origin + "/tab/silent-start",
                     width: 600,
-                    height: 535,
-                    successCallback: function (result) {
-                        microsoftTeams.getContext(function (context) {
-                            upn = context.upn;
+                    height: 535})
+                    .then((result) => {
+                        microsoftTeams.app.getContext().then((context) => {
+                            upn = context.user.userPrincipalName;
                             let cachedAccounts =  msalInstance.getAllAccounts();
                             let accountInfo = cachedAccounts.filter(account => account.username === upn);
                             if (accountInfo.length > 0) {
@@ -169,8 +172,8 @@
                                 $("#btnLogin").show();
                             }
                         });
-                    },
-                    failureCallback: function (reason) {
+                    })
+                    .catch((reason) => {
                         console.log("Login failed: " + reason);
                         if (reason === "CancelledByUser" || reason === "FailedToOpenWindow") {
                             console.log("Login was blocked by popup blocker or canceled by user.");
@@ -180,7 +183,7 @@
 
                         $(".auth-data").hide();
                         $("#divError").text(reason).show();
-                    }
+                    });
                 });
             }
 

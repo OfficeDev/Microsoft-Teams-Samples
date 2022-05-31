@@ -14,34 +14,38 @@ import * as microsoftTeams from "@microsoft/teams-js";
 class TabConfig extends React.Component {
 
     render() {
-      /**
-       * When the user clicks "Save", save the url for your configured tab.
-       * This allows for the addition of query string parameters based on
-       * the settings selected by the user.
-       */
-      microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
-        microsoftTeams.settings.setSettings({
-          "suggestedDisplayName": "Token App",
-          "entityId": "Test",
-          "contentUrl": window.location.origin + "/",
-          "websiteUrl": window.location.origin + "/"
+      microsoftTeams.app.initialize().then(() => {
+        /**
+         * When the user clicks "Save", save the url for your configured tab.
+         * This allows for the addition of query string parameters based on
+         * the settings selected by the user.
+         */
+        microsoftTeams.pages.config.registerOnSaveHandler((saveEvent) => {
+            microsoftTeams.pages.config.setConfig({
+            "suggestedDisplayName": "Token App",
+            "entityId": "Test",
+            "contentUrl": window.location.origin + "/",
+            "websiteUrl": window.location.origin + "/"
+          });
+          saveEvent.notifySuccess();
         });
-        saveEvent.notifySuccess();
-       });
-  
-      /**
-       * After verifying that the settings for your tab are correctly
-       * filled in by the user you need to set the state of the dialog
-       * to be valid.  This will enable the save button in the configuration
-       * dialog.
-       */
-      microsoftTeams.settings.setValidityState(true);
-  
+    
+        /**
+         * After verifying that the settings for your tab are correctly
+         * filled in by the user you need to set the state of the dialog
+         * to be valid.  This will enable the save button in the configuration
+         * dialog.
+         */
+          microsoftTeams.pages.config.setValidityState(true);
+      });
+      
+        
+
       return (
         <div>
           <h1>Tab Configuration</h1>
           <div>
-            This is where you HUNAID add your tab configuration options the user
+            This is where you add your tab configuration options the user
             can choose when the tab is added to your team/group chat.            
           </div>
         </div>

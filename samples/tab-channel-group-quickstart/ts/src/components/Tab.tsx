@@ -21,7 +21,7 @@ class Tab extends React.Component<any, any> {
   //Learn more: https://reactjs.org/docs/react-component.html#componentdidmount
   componentDidMount(){
     // Get the user context from Teams and set it in the state
-    microsoftTeams.getContext((context: microsoftTeams.Context) => {
+    microsoftTeams.app.getContext().then((context: microsoftTeams.app.Context) => {
       this.setState({
         context: context
       });
@@ -31,7 +31,7 @@ class Tab extends React.Component<any, any> {
 
   render() {
 
-      const userName = Object.keys(this.state.context).length > 0 ? this.state.context['upn'] : "";
+      const userName = Object.keys(this.state.context).length > 0 ? this.state.context?.user?.userPrincipalName : "";
 
       return (
       <div>

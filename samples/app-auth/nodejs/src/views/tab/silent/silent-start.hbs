@@ -28,34 +28,34 @@
         <title>Silent Authentication Sample Login</title>
     </head>
     <body>
-        <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js" integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT" crossorigin="anonymous"></script>
+        <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
         <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
 
         <script type="text/javascript">
-            microsoftTeams.initialize();
+            microsoftTeams.app.initialize().then(() => {
+                // Get the tab context, and use the information to navigate to Azure AD login page
+                microsoftTeams.app.getContext().then((context) => {
+                    // MSAL.js configuration
+                    let msalConfig = {
+                        auth: {
+                            clientId: '{{appId}}',
+                            redirectUri: window.location.origin + "/tab/silent-end",     // This should be in the list of redirect uris for the AAD app
+                            navigateToLoginRequestUrl: false,
+                        },
+                        cache: {
+                            cacheLocation: "localStorage",
+                        }
+                    };
 
-            // Get the tab context, and use the information to navigate to Azure AD login page
-            microsoftTeams.getContext(function (context) {
-                // MSAL.js configuration
-                let msalConfig = {
-                    auth: {
-                        clientId: '{{appId}}',
-                        redirectUri: window.location.origin + "/tab/silent-end",     // This should be in the list of redirect uris for the AAD app
-                        navigateToLoginRequestUrl: false,
-                    },
-                    cache: {
-                        cacheLocation: "localStorage",
-                    }
-                };
+                    const msalInstance = new msal.PublicClientApplication(msalConfig);
 
-                const msalInstance = new msal.PublicClientApplication(msalConfig);
+                    var request = {
+                        scopes: ["openid", "profile"],
+                        loginHint: context.user.loginHint
+                    };
 
-                var request = {
-                    scopes: ["openid", "profile"],
-                    loginHint: context.loginHint
-                };
-
-                msalInstance.loginRedirect(request);
+                    msalInstance.loginRedirect(request);
+                });
             });
         </script>
     </body>

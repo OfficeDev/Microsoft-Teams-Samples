@@ -23,17 +23,20 @@ class SurfaceSelector extends Component {
         }
 
         const { SidePanel, PreMeeting } = Constants.Surfaces;
-        const frameContext = this.props.teamsContext.frameContext;
-        switch (frameContext) {
-            case SidePanel:
-                return <SidePanelPage />
-
-            case PreMeeting:
-                return <PreMeetingPage onError={msg => this.setState({ error: { status: true, msg } })} />
-
-            default:
-                return null;
+        if (this.props.teamsContext?.page) {
+            const frameContext = this.props.teamsContext.page.frameContext;
+            switch (frameContext) {
+                case SidePanel:
+                    return <SidePanelPage />
+    
+                case PreMeeting:
+                    return <PreMeetingPage onError={msg => this.setState({ error: { status: true, msg } })} />
+    
+                default:
+                    return null;
+            }
         }
+        
     }
 }
 

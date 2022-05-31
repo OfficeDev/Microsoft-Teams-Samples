@@ -1,9 +1,7 @@
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
-        integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
-        crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
@@ -15,16 +13,17 @@
             let redirectUri = window.location.origin + "/fb-auth";
 
         $(document).ready(function () {
-            microsoftTeams.initialize();
-             microsoftTeams.getContext((context) => {
-                hostClientType = context.hostClientType;
-                if(hostClientType != "web" && hostClientType != "desktop"){
-                    $('.card-container-div').removeClass('card-container-div').addClass('card-container-div-mobile');
-                }
-             });
+            microsoftTeams.app.initialize().then(() => {
+                microsoftTeams.app.getContext().then((context) => {
+                    hostClientType = context.app.host.clientType;
+                    if(hostClientType != "web" && hostClientType != "desktop"){
+                        $('.card-container-div').removeClass('card-container-div').addClass('card-container-div-mobile');
+                    }
+                });
+            });
         });
 
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
         function ssoAuthentication() {
             getClientSideToken()
                 .then((clientSideToken) => {
@@ -53,28 +52,26 @@
 
         function getClientSideToken() {
             return new Promise((resolve, reject) => {
-                microsoftTeams.authentication.getAuthToken({
-                    successCallback: (result) => {
-                        console.log(result);
-                        resolve(result);
-                    },
-                    failureCallback: function (error) {
-                        reject("Error getting token: " + error);
-                    }
+                microsoftTeams.authentication.getAuthToken().then((result) => {
+                    console.log(result);
+                    resolve(result);
+                })
+                .catch((error) => {
+                    reject("Error getting token: " + error);
                 });
             });
         }
 
         function getServerSideToken(clientSideToken) {
             return new Promise((resolve, reject) => {
-                microsoftTeams.getContext((context) => {
+                microsoftTeams.app.getContext().then((context) => {
                     fetch('/getProfileOnBehalfOf', {
                         method: 'post',
                         headers: {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            'tid': context.tid,
+                            'tid': context.user.tenant.id,
                             'token': clientSideToken
                         }),
                         mode: 'cors',
@@ -113,8 +110,8 @@
                     $("#consent").hide();
                     $("#divError").hide();
                     accessToken = data.accessToken;
-                    microsoftTeams.getContext((context) => {
-                        getUserInfo(context.userPrincipalName);
+                    microsoftTeams.app.getContext().then((context) => {
+                        getUserInfo(context.user.userPrincipalName);
                     });
                 });
         }
@@ -125,13 +122,12 @@
                 microsoftTeams.authentication.authenticate({
                     url: window.location.origin + "/auth-start",
                     width: 600,
-                    height: 535,
-                    successCallback: result => {
-                        resolve(result);
-                    },
-                    failureCallback: reason => {
-                        reject(reason);
-                    }
+                    height: 535})
+                .then((result) => {
+                    resolve(result);
+                })
+                .catch((reason) => {
+                    reject(reason);
                 });
             });
         }
@@ -166,7 +162,7 @@
 
         function getServerSideTokenFb(clientSideToken) {
             return new Promise((resolve, reject) => {
-                microsoftTeams.getContext((context) => {
+                microsoftTeams.app.getContext().then((context) => {
                     fetch('/getFbAccessToken', {
                         method: 'post',
                         headers: {
@@ -273,17 +269,16 @@
             microsoftTeams.authentication.authenticate({
                 url: window.location.origin + "/popUpSignin?from=tab",
                 width: 600,
-                height: 535,
-                successCallback: result => {
-                    $("#sname").append("Test User");
-                    $("#susername").append(`Test_User  <i class="fa fa-pencil" aria-hidden="true" onclick="usingIdUserNameToggle()"></i>`);
-                    $("#semail").append("testuser@test.com");
-                    $("#swork").append("Data scientist");
-                    $("#idlogin").hide();
-                },
-                failureCallback: reason => {
-                    console.log(reason);
-                }
+                height: 535})
+            .then((result) => {
+                $("#sname").append("Test User");
+                $("#susername").append(`Test_User  <i class="fa fa-pencil" aria-hidden="true" onclick="usingIdUserNameToggle()"></i>`);
+                $("#semail").append("testuser@test.com");
+                $("#swork").append("Data scientist");
+                $("#idlogin").hide();
+            })
+            .catch((reason) => {
+                console.log(reason);
             });
         }
 
@@ -292,17 +287,16 @@
                 microsoftTeams.authentication.authenticate({
                     url: `https://www.facebook.com/v12.0/dialog/oauth?client_id=${clientId}&redirect_uri=${redirectUri}&state=1234535`,
                     width: 600,
-                    height: 535,
-                    successCallback: result => {
-                        let data = localStorage.getItem(result);
-                        let tokenDetails = JSON.parse(data);
-                        localStorage.removeItem(result);
-                        resolve(tokenDetails);
-                    },
-                    failureCallback: reason => {
-                        reject(reason);
-                    }
-                });
+                    height: 535})
+                .then((result) => {
+                    let data = localStorage.getItem(result);
+                    let tokenDetails = JSON.parse(data);
+                    localStorage.removeItem(result);
+                    resolve(tokenDetails);
+                })
+                .catch((reason) => {
+                    reject(reason);
+                })
             });
         }
 

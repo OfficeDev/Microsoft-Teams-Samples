@@ -2,9 +2,7 @@
 @model AppCompleteAuth.Pages.facebookAuthEnd
 @{
 }
- <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
-            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
-            crossorigin="anonymous"></script>
+ <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script type="text/javascript">
@@ -14,7 +12,7 @@
 
         // Get face book client side token.
         function getAuthToken() {
-            microsoftTeams.initialize();
+            microsoftTeams.app.initialize();
             localStorage.removeItem("auth.error");
             let code = getHashParameters();
             let key = "auth.result";
