@@ -25,6 +25,8 @@ function Configure() {
   );
 
   useEffect(() => {
+    // The Team context is read to default the department title to the channel name
+    // This is set on first load, but can be changed by the user
     microsoftTeams.getContext((context) => {
       if (context.channelName !== undefined) {
         setDepartmentTitle(context.channelName);

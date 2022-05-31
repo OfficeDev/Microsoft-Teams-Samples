@@ -29,7 +29,7 @@ public class AdaptiveCardFactory : IAdaptiveCardFactory
             customerName = inquiry.CustomerName,
             question = inquiry.Question,
             createdUtc = $"{inquiry.CreatedDateTime.DateTime.ToString("s", DateTimeFormatInfo.InvariantInfo)}Z",
-            openDetails = "Open Details",
+            openDetails = "Open details",
             subEntityDeepLink = CreateTabDeepLink(
                 _configuration.GetValue<string>("Bot:MicrosoftAppId"),
                 supportDepartment.Id,
