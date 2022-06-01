@@ -13,11 +13,13 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 
 type CustomerInquiryTableProps = {
   entityId: string;
+  source: string;
   customerInquiries: CustomerInquiry[];
 };
 
 function createRowItemsFromCategoryItem(
   entityId: string,
+  source: string,
   inquiry: CustomerInquiry,
   index: number,
 ): ShorthandCollection<TableCellProps> {
@@ -42,7 +44,7 @@ function createRowItemsFromCategoryItem(
     {
       key: `${index}-button`,
       content: (
-        <Link to={`/support-department/${entityId}/inquiry/${inquiry.subEntityId}`}>
+        <Link to={`/${source}/${entityId}/inquiry/${inquiry.subEntityId}`}>
           <Button
             tabIndex={-1}
             icon={<ArrowRightIcon />}
@@ -59,6 +61,7 @@ function createRowItemsFromCategoryItem(
 
 function CustomerInquiryTable({
   entityId,
+  source,
   customerInquiries,
 }: CustomerInquiryTableProps) {
   const header = {
@@ -86,7 +89,7 @@ function CustomerInquiryTable({
   const customerInquiriesRows = customerInquiries.map((inquiry, index) => {
     return {
       key: index,
-      items: createRowItemsFromCategoryItem(entityId, inquiry, index),
+      items: createRowItemsFromCategoryItem(entityId, source, inquiry, index),
     };
   });
 

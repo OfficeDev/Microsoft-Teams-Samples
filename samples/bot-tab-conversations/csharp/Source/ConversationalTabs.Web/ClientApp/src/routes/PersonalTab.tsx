@@ -79,6 +79,7 @@ function getAccordionPanels(departments: SupportDepartment[]) {
         ) : (
           <CustomerInquiryTable
             entityId={d.supportDepartmentId}
+            source="personal"
             customerInquiries={d.subEntities.slice(0, 5)}
           />
         ),

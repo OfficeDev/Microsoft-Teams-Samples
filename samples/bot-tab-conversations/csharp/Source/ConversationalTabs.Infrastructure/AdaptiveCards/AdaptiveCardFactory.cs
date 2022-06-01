@@ -31,7 +31,7 @@ public class AdaptiveCardFactory : IAdaptiveCardFactory
             createdUtc = $"{inquiry.CreatedDateTime.DateTime.ToString("s", DateTimeFormatInfo.InvariantInfo)}Z",
             openDetails = "Open details",
             subEntityDeepLink = CreateTabDeepLink(
-                _configuration.GetValue<string>("Bot:MicrosoftAppId"),
+                _configuration.GetValue<string>("ExternalTeamsAppId"),
                 supportDepartment.Id,
                 supportDepartment.Title,
                 inquiry.SubEntityId,

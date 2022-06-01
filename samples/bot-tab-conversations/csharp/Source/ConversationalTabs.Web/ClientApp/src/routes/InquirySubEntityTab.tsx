@@ -22,6 +22,7 @@ function InquirySubEntityTab() {
     useState<boolean>(false);
   const navigate = useNavigate();
   const params = useParams();
+  const source: string = params.source ?? 'support-department';
   const entityId: string = params.entityId ?? 'unknown';
   const subEntityId: string = params.subEntityId ?? 'unknown';
 
@@ -113,7 +114,9 @@ function InquirySubEntityTab() {
           icon={<ArrowLeftIcon />}
           secondary
           content="Back"
-          onClick={() => navigate(-1)}
+          onClick={() =>
+            navigate(`/${source}${source === 'personal' ? '' : '/' + entityId}?ignoreContextRedirect`)
+          }
         />
       </Flex>
       {inquiry.isLoading && supportDepartment.isLoading && <Loader />}

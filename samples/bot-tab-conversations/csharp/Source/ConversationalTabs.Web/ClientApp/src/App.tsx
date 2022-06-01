@@ -39,8 +39,9 @@ function App() {
               path="support-department/:entityId"
               element={<SupportDepartmentChannelTab />}
             />
+            {/* Sub entities can be sourced from either support-department or personal */}
             <Route
-              path="support-department/:entityId/inquiry/:subEntityId"
+              path=":source/:entityId/inquiry/:subEntityId"
               element={<InquirySubEntityTab />}
             />
             <Route path="admin" element={<Admin />} />

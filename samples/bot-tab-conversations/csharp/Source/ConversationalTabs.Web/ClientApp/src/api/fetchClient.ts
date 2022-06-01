@@ -1,5 +1,4 @@
 import { merge } from 'lodash';
-import { ApiError } from 'models';
 import * as microsoftTeams from '@microsoft/teams-js';
 
 // This function is for callers where authentication is required.
