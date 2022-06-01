@@ -3,10 +3,10 @@ import * as microsoftTeams from '@microsoft/teams-js';
 import { TaskModuleDimension } from '@microsoft/teams-js';
 import * as ACData from 'adaptivecards-templating';
 import { SignatureConfirmationCard } from 'adaptive-cards';
-import signatureApi from 'api/signatureApi';
-import { useApi } from 'hooks';
+import { postSignDocument, SignDocumentModel } from 'api/signatureApi';
 import { Signature } from 'models';
 import './Signature.css';
+import { useMutation } from 'react-query';
 
 type SignatureInputProps = {
   documentId: string;
@@ -31,7 +31,12 @@ function SignatureInput({
   clickable,
   signature,
 }: SignatureInputProps) {
-  const postSignDocumentApi = useApi(signatureApi.postSignDocument);
+  // We are using https://react-query.tanstack.com/ for handling the calls to our APIs.
+  // To post a call we set-up a mutation, which we then call further down when we want
+  // to make the call to the API.
+  const signDocumentMutation = useMutation<Signature, Error, SignDocumentModel>(
+    (model: SignDocumentModel) => postSignDocument(model),
+  );
 
   const isSignatureForLoggedInPerson: boolean =
     signature.signer.userId === loggedInAadId;
@@ -52,10 +57,13 @@ function SignatureInput({
         console.log(`Signature Confirmation handler - error: '${error}'`);
       } else if (result !== undefined) {
         const signatureSigned = { ...signature };
-        const resultParsed = JSON.parse(result);
+        const resultParsed = typeof result === 'object' ? result : JSON.parse(result);
         signatureSigned.text = resultParsed.confirmation;
 
-        await postSignDocumentApi.request(documentId, signatureSigned);
+        signDocumentMutation.mutate({
+          documentId: documentId,
+          signature: signatureSigned,
+        });
       }
     };
     microsoftTeams.tasks.startTask(
@@ -71,11 +79,11 @@ function SignatureInput({
     <>
       <FormInput
         label={
-          (postSignDocumentApi.data && postSignDocumentApi.data.signer.name) ||
+          (signDocumentMutation.data && signDocumentMutation.data.signer.name) ||
           signature.signer.name
         }
         value={
-          (postSignDocumentApi.data && postSignDocumentApi.data.text) ||
+          (signDocumentMutation.data && signDocumentMutation.data.text) ||
           signature.text
         }
         placeholder={
@@ -86,11 +94,11 @@ function SignatureInput({
         disabled={
           !isSignatureForLoggedInPerson ||
           !clickable ||
-          (postSignDocumentApi.data && postSignDocumentApi.data.isSigned) ||
+          (signDocumentMutation.data && signDocumentMutation.data.isSigned) ||
           signature.isSigned
         }
-        error={postSignDocumentApi.error !== undefined}
-        errorMessage={postSignDocumentApi.error}
+        error={signDocumentMutation.isError}
+        errorMessage={signDocumentMutation.error}
         showSuccessIndicator={false}
         onClick={() => signatureConfirmationTaskModule()}
         input={{

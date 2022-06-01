@@ -1,22 +1,19 @@
-import { DocumentInput } from 'models';
-import fetchClient from './fetchClient';
+import { Document, DocumentInput } from 'models';
+import { authFetch } from './fetchClient';
 
-const getDocument = (token: string, documentId: string): Promise<Response> => {
-  return fetchClient(token, `document/${documentId}/`, { method: 'GET' });
+async function getDocument(documentId: string) {
+  return await authFetch<Document>(`document/${documentId}/`, { method: 'GET' });
 };
 
-const getAllDocuments = (token: string): Promise<Response> => {
-  return fetchClient(token, 'document', { method: 'GET' });
+async function getAllDocuments() {
+  return await authFetch<Document[]>('document', { method: 'GET' });
 };
 
-const createDocument = (
-  token: string,
-  document: DocumentInput,
-): Promise<Response> => {
-  return fetchClient(token, 'document', {
+async function createDocument(document: DocumentInput) {
+  return await authFetch<Document>('document', {
     method: 'POST',
     body: JSON.stringify(document),
   });
 };
 
-export default { getDocument, getAllDocuments, createDocument };
+export { getDocument, getAllDocuments, createDocument };

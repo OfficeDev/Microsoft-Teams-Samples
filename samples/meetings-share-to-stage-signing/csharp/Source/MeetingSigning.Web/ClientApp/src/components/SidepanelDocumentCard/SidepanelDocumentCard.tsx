@@ -39,9 +39,7 @@ export function SidepanelDocumentCard({
   const stateColor: string =
     documentState === DocumentState.Active
       ? theme.siteVariables.naturalColors.green['200']
-      : documentState === DocumentState.Complete
-      ? theme.siteVariables.naturalColors.yellow['500']
-      : theme.siteVariables.naturalColors.grey['600'];
+      : theme.siteVariables.naturalColors.grey['500'];
   const cardInlineStyles = { borderTopColor: stateColor };
 
   const shareToStageCallback = (
@@ -70,12 +68,19 @@ export function SidepanelDocumentCard({
         <Card.Header>
           <Flex vAlign="center">
             <div>
-              <Badge content="Active" backgroundColor={stateColor} />
+              <Badge
+                content={DocumentState[documentState]}
+                backgroundColor={stateColor}
+              />
             </div>
             <Flex.Item push>
               <div>
                 <Badge
-                  content="Unsigned Document"
+                  content={
+                    documentState === DocumentState.Complete
+                      ? 'Signed document'
+                      : 'Unsigned document'
+                  }
                   size="small"
                   rectangular
                   backgroundColor="#616161"
