@@ -7,7 +7,7 @@ import {
   Loader,
 } from '@fluentui/react-northstar';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import * as microsoftTeams from '@microsoft/teams-js';
 import { getSupportDepartment, getSupportDepartmentItem } from 'api';
 import { CustomerInquiryDetail } from 'components/CustomerInquiryDetail';
@@ -20,8 +20,11 @@ function InquirySubEntityTab() {
   const [userHasConsented, setUserHasConsented] = useState<boolean>(false);
   const [onLoadConversationOpened, setOnLoadConversationOpened] =
     useState<boolean>(false);
+
   const navigate = useNavigate();
   const params = useParams();
+  const queryClient = useQueryClient();
+
   const source: string = params.source ?? 'support-department';
   const entityId: string = params.entityId ?? 'unknown';
   const subEntityId: string = params.subEntityId ?? 'unknown';
@@ -89,8 +92,7 @@ function InquirySubEntityTab() {
     }
     if (result) {
       setUserHasConsented(true);
-      inquiry.refetch;
-      supportDepartment.refetch;
+      queryClient.invalidateQueries();
     }
   };
 

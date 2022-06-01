@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState } from 'react';
 import { Flex, Header, Loader } from '@fluentui/react-northstar';
 import * as microsoftTeams from '@microsoft/teams-js';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { getSupportDepartment } from 'api';
 import { CustomerInquiryTable } from 'components/CustomerInquiryTable';
@@ -12,8 +12,9 @@ import { isError } from 'utils/ErrorUtils';
 
 function SupportDepartmentChannelTab() {
   const [userHasConsented, setUserHasConsented] = useState<boolean>(false);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     // If someone opens a sub-entity from an Adaptive Card and then navigates backwards using the 'Back' button on the sub-entity page,
@@ -30,7 +31,7 @@ function SupportDepartmentChannelTab() {
         navigate(navigationUrl);
       });
     }
-  }, []);
+  }, [searchParams, navigate]);
 
   const params = useParams();
   const entityId: string = params.entityId ?? 'unknown';
@@ -51,7 +52,7 @@ function SupportDepartmentChannelTab() {
     }
     if (result) {
       setUserHasConsented(true);
-      supportDepartment.refetch;
+      queryClient.invalidateQueries();
     }
   };
 

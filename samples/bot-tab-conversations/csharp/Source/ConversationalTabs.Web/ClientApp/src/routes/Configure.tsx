@@ -81,7 +81,7 @@ function Configure() {
         microsoftTeams.settings.setValidityState(true);
       }
     }
-  }, [departmentTitle, departmentDescription, createSupportDepartmentMutation]);
+  }, [departmentTitle, departmentDescription, createSupportDepartmentMutation, userHasConsented]);
 
   const consentCallback = (error?: string, result?: string) => {
     if (error) {

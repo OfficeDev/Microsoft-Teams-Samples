@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { Accordion, Flex, Header, Loader } from '@fluentui/react-northstar';
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import { getAllSupportDepartments } from 'api';
 import { ApiErrorCode, SupportDepartment } from 'models';
 import { CustomerInquiryTable } from 'components/CustomerInquiryTable';
@@ -9,6 +9,8 @@ import { isError } from 'utils/ErrorUtils';
 
 function PersonalTab() {
   const [userHasConsented, setUserHasConsented] = useState<boolean>(false);
+  const queryClient = useQueryClient();
+
   const allSupportDepartments = useQuery<SupportDepartment[], Error>(
     ['getAllSupportDepartments'],
     () => getAllSupportDepartments(),
@@ -25,7 +27,7 @@ function PersonalTab() {
     }
     if (result) {
       setUserHasConsented(true);
-      allSupportDepartments.refetch;
+      queryClient.invalidateQueries();
     }
   };
 
