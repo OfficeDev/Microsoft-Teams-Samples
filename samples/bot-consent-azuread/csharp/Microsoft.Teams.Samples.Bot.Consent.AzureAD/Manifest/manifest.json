@@ -37,6 +37,6 @@
   "validDomains": [],
   "webApplicationInfo": {
     "id": "00000000-0000-0000-0000-000000000000",
-    "resource": "api://domain/bot-id00000000-0000-0000-0000-000000000000"
+    "resource": "api://domain/botid-00000000-0000-0000-0000-000000000000"
   }
 }
