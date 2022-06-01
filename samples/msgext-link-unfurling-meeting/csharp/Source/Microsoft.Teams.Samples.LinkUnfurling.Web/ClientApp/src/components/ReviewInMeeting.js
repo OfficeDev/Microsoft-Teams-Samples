@@ -123,7 +123,7 @@ export class ReviewInMeeting extends Component {
 
         this.setState({ loadingLabel: "Almost done..." });
 
-        let serverURL = `${process.env.REACT_APP_BASE_URL}/api/setupMeeting`;
+        let serverURL = `${window.location.origin}/api/setupMeeting`;
         var response = await fetch(serverURL, {
             method: "post",
             headers: {

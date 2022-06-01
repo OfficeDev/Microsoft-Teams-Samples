@@ -16,13 +16,13 @@ class Config extends React.Component {
             microsoftTeams.app.notifySuccess();
 
             // No configuration supported, so set validity state to true.
-            microsoftTeams.pages.cofig.setValidityState(true);
+            microsoftTeams.pages.config.setValidityState(true);
 
             // Save settings..
             microsoftTeams.pages.config.registerOnSaveHandler((saveEvent) => {
                 microsoftTeams.pages.config.setConfig({
-                    websiteUrl: `${process.env.REACT_APP_BASE_URL}`,
-                    contentUrl: `${process.env.REACT_APP_BASE_URL}/SharedDashboard`,
+                    websiteUrl: `${window.location.origin}`,
+                    contentUrl: `${window.location.origin}/SharedDashboard`,
                     entityId: "",
                     suggestedDisplayName: "Shared dashboard",
                 });
