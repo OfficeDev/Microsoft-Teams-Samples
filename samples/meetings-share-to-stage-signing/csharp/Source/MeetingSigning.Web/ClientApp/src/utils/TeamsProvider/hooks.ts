@@ -57,15 +57,3 @@ export function useTheme(): ThemeInput {
   const ctx = useTeamsContext();
   return useMemo(() => getTheme(ctx.app.theme), [ctx.app.theme]);
 }
-
-export const useExecuteDeepLink = createInitDeferredCallbackHook(
-  (teams) => teams.executeDeepLink,
-);
-
-export const useNotifyAppLoaded = createInitDeferredCallbackHook(
-  (teams) => teams.appInitialization.notifyAppLoaded,
-);
-
-export const useNotifySuccess = createInitDeferredCallbackHook(
-  (teams) => teams.appInitialization.notifySuccess,
-);

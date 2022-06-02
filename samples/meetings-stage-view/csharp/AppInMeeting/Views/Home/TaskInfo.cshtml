@@ -7,15 +7,17 @@
     <title>App in a meeting demo</title>
     <link rel="stylesheet" href="/static/styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
-            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
-            crossorigin="anonymous"></script>
+    <script
+  src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
+  integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
+  crossorigin="anonymous"
+></script>
 </head>
 <body>
     <script src="/lib/microsoft/signalr/dist/browser/signalr.js"></script>
     <script src="/lib/microsoft/chat.js"></script>
     <script>
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
 
         // Method to validate form and add the entered details
         function sendTaskDetails() {
@@ -47,7 +49,7 @@
                 "taskDescription": taskDescription.value,
                 "userName": userName.value
             };
-            microsoftTeams.tasks.submitTask(taskDetails);
+            microsoftTeams.dialog.submit(taskDetails);
             return true;
         }
     </script>

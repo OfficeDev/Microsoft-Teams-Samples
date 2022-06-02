@@ -28,10 +28,10 @@
     <script type="text/javascript">
 
         //Default Action On View Render
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
         var userId = "";
         window.onload = function () {
-            microsoftTeams.getContext(function (context) {
+            microsoftTeams.app.getContext().then(function (context) {
                 userId = context.userObjectId;
                 var meetingId = context.meetingId;
                 var tenantId = context.tid;
