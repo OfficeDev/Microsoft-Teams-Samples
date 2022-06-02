@@ -5,9 +5,11 @@
 }
 
 <head>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
-            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
-            crossorigin="anonymous"></script>
+    <script
+          src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
+          integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
+          crossorigin="anonymous">
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
      <script type="text/javascript">
@@ -22,9 +24,9 @@
              const scope = params.substring(params.search("=") + 1);
 
             if (clientId != undefined && clientId != null && clientId !== '') {
-                microsoftTeams.initialize();
+                microsoftTeams.app.initialize();
                 // Get the tab context, and use the information to navigate to Azure AD login page
-                microsoftTeams.getContext(function (context) {
+                microsoftTeams.app.getContext().then(function (context) {
                     // Generate random state string and store it, so we can verify it in the callback
                     let state = _guid();
                     localStorage.setItem("simple.state", state);
@@ -42,12 +44,12 @@
                         state: state,
                         // login_hint pre-fills the username/email address field of the sign in page for the user,
                         // if you know their username ahead of time.
-                        login_hint: context.upn
+                        login_hint: context.user.userPrincipalName
                     };
 
                     // Go to the AzureAD authorization endpoint
                     let authorizeEndpoint =
-                        "https://login.microsoftonline.com/" + context.tid + "/oauth2/v2.0/authorize?" + toQueryString(queryParams);
+                        "https://login.microsoftonline.com/" + context.user.tenant.id + "/oauth2/v2.0/authorize?" + toQueryString(queryParams);
                     window.location.assign(authorizeEndpoint);
                 });
             }
