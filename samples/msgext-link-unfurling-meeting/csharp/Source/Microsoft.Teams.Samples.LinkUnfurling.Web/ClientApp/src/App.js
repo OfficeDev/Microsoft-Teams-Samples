@@ -38,11 +38,11 @@ export const App = () => {
   };
 
   useEffect(() => {
-    microsoftTeams.app.initialize().then(() => {
-      microsoftTeams.app.getContext().then((context) => {
-        themeChangeHandler(context.app.theme);
+    microsoftTeams.initialize(() => {
+      microsoftTeams.getContext((context) => {
+        themeChangeHandler(context.theme);
       });
-      microsoftTeams.app.registerOnThemeChangeHandler(themeChangeHandler);
+      microsoftTeams.registerOnThemeChangeHandler(themeChangeHandler);
     });
   });
 

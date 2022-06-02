@@ -9,35 +9,35 @@ import * as microsoftTeams from "@microsoft/teams-js";
  * Message extension settings.
  */
 class MESettings extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        // This binding is necessary to make `this` work in the callback
-        this.onSignout = this.onSignout.bind(this);
-    }
+    // This binding is necessary to make `this` work in the callback
+    this.onSignout = this.onSignout.bind(this);
+  }
 
-    componentDidMount() {
-        // Initialize the Microsoft Teams SDK
-        microsoftTeams.app.initialize().then(() => {
-            // Notify app initialization completion.
-            microsoftTeams.app.notifySuccess();
-        });
-    }
+  componentDidMount() {
+    // Initialize the Microsoft Teams SDK
+    microsoftTeams.initialize();
 
-    onSignout() {
-        microsoftTeams.authentication.notifySuccess("signout");
-    }
+    // Notify app initialization completion.
+    microsoftTeams.appInitialization.notifySuccess();
+  }
 
-    render() {
-        return (
-            <div>
-                <h1>"Link Unfurling Sample"</h1>
-                <button type="button" onClick={this.onSignout}>
-                    "Sign out"
-                </button>
-            </div>
-        );
-    }
+  onSignout() {
+    microsoftTeams.authentication.notifySuccess("signout");
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>"Link Unfurling Sample"</h1>
+        <button type="button" onClick={this.onSignout}>
+          "Sign out"
+        </button>
+      </div>
+    );
+  }
 }
 
 export default MESettings;

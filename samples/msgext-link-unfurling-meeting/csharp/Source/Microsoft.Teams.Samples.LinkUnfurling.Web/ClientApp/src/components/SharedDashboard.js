@@ -11,8 +11,8 @@ import * as microsoftTeams from "@microsoft/teams-js";
 class SharedDashboard extends React.Component {
   componentDidMount() {
     // Initialize the Microsoft Teams SDK and notify success.
-    microsoftTeams.app.initialize().then(() =>
-      microsoftTeams.app.notifySuccess()
+    microsoftTeams.initialize(() =>
+      microsoftTeams.appInitialization.notifySuccess()
     );
   }
 

@@ -6,13 +6,13 @@
 }
 
 <script>
-    microsoftTeams.app.initialize();
+    microsoftTeams.initialize();
     function validateForm() {
         var feedbackInfo = {
             Topic: '@Model.Topic',
             Feedback: document.querySelector('input[name="inputVal"]:checked').value
         }
-        microsoftTeams.dialog.submit(feedbackInfo);
+        microsoftTeams.tasks.submitTask(feedbackInfo);
         return true;
     }
 </script>
