@@ -1,16 +1,14 @@
 import * as microsoftTeams from "@microsoft/teams-js";
 
 const Detail = () => {
+    microsoftTeams.initialize();
     function validateForm() {
         var pollnfo = {
             title: document.getElementById("title").value,
             option1: document.getElementById("option1").value,
             option2: document.getElementById("option2").value
         }
-        
-        microsoftTeams.app.initialize().then(() => {
-            microsoftTeams.dialog.submit(pollnfo);
-        });
+        microsoftTeams.tasks.submitTask(pollnfo);
         return true;
     }
     return (

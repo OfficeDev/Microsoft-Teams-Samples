@@ -69,14 +69,9 @@ export const useApi = (
       microsoftTeams.authentication.authenticate({
         url: `${window.location.origin}/auth-start`,
         width: 600,
-        height: 535,
-        successCallback: (token) => {
-          callback(token, undefined);
-        },
-        failureCallback: (error) => {
-          callback(undefined, error);
-        },
-      });
+        height: 535
+      }).then((token) => callback(token, undefined))
+        .catch((error) => callback(undefined, error));
     },
     [setState],
   );
