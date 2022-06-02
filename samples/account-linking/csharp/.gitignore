@@ -262,3 +262,6 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+# ASP.NET Core development settings file
+appsettings.[dD]evelopment.json
