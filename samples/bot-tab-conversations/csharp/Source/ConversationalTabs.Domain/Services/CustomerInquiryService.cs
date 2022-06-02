@@ -5,6 +5,7 @@ namespace Microsoft.Teams.Samples.ConversationalTabs.Domain.Services;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Teams.Samples.ConversationalTabs.Domain.Exceptions;
 using Microsoft.Teams.Samples.ConversationalTabs.Domain.Factories;
@@ -17,6 +18,7 @@ public class CustomerInquiryService : ISubEntityService<CustomerInquiry, Custome
     private readonly IRepositoryObjectService<SupportDepartment, SupportDepartmentInput> _supportDepartmentsService;
     private readonly IBotService _botService;
     private readonly IAdaptiveCardFactory _adaptiveCardFactory;
+    private readonly IConfiguration _configuration;
     private readonly ILogger<CustomerInquiry> _logger;
 
     public CustomerInquiryService(
@@ -24,12 +26,14 @@ public class CustomerInquiryService : ISubEntityService<CustomerInquiry, Custome
         IRepositoryObjectService<SupportDepartment, SupportDepartmentInput> customerSupportDepartmentService,
         IBotService botService,
         IAdaptiveCardFactory adaptiveCardFactory,
+        IConfiguration configuration,
         ILogger<CustomerInquiry> logger)
     {
         _customerInquiryRepository = customerInquiryRepository;
         _supportDepartmentsService = customerSupportDepartmentService;
         _botService = botService;
         _adaptiveCardFactory = adaptiveCardFactory;
+        _configuration = configuration;
         _logger = logger;
     }
 
@@ -53,7 +57,7 @@ public class CustomerInquiryService : ISubEntityService<CustomerInquiry, Custome
                 supportDepartment.ProactiveBotData.ServiceUrl,
                 supportDepartment.TeamChannelId,
                 supportDepartment.TenantId,
-                supportDepartment.ProactiveBotData.BotId);
+                $"28:{_configuration.GetValue<string>("Bot:MicrosoftAppId")}");
 
             customerInquiry = customerInquiry with { ConversationId = conversationResponse.ActivityId };
             await _customerInquiryRepository.UpdateSubEntity(entityId, customerInquiry).ConfigureAwait(false);

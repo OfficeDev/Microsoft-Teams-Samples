@@ -51,7 +51,7 @@ public class BotActivityHandler : TeamsActivityHandler
 
         if (turnContext.Activity.TryGetChannelData(out TeamsChannelData channelData))
         {
-            await StoreTeamsChannelData(channelData.Team.Id, turnContext.Activity.ServiceUrl, turnContext.Activity.Recipient.Id);
+            await StoreTeamsChannelData(channelData.Team.Id, turnContext.Activity.ServiceUrl);
         }
         else
         {
@@ -71,7 +71,7 @@ public class BotActivityHandler : TeamsActivityHandler
     {
         if (turnContext.Activity.TryGetChannelData(out TeamsChannelData channelData))
         {
-            await StoreTeamsChannelData(teamInfo.Id, turnContext.Activity.ServiceUrl, turnContext.Activity.Recipient.Id);
+            await StoreTeamsChannelData(teamInfo.Id, turnContext.Activity.ServiceUrl);
         }
         else
         {
@@ -79,8 +79,8 @@ public class BotActivityHandler : TeamsActivityHandler
         }
     }
 
-    private Task StoreTeamsChannelData(string teamId, string serviceUrl, string botId)
+    private Task StoreTeamsChannelData(string teamId, string serviceUrl)
     {
-        return _proactiveBotDataService.Create(new(teamId, new Uri(serviceUrl), botId));
+        return _proactiveBotDataService.Create(new(teamId, new Uri(serviceUrl)));
     }
 }

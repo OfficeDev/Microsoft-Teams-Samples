@@ -11,6 +11,5 @@ using System.Text.Json.Serialization;
 public record MsTeamsBotData(
     [property: JsonPropertyName("teamId")]
     string Id,
-    Uri ServiceUrl,
-    string BotId
+    Uri ServiceUrl
 ) : IRepositoryObject;
