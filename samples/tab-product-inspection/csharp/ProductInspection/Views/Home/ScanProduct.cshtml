@@ -2,11 +2,9 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script
-          src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
-          integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
-          crossorigin="anonymous">
-    </script>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
+            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
+            crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
@@ -18,7 +16,7 @@
             $("#wait").hide();
         });
 
-        microsoftTeams.app.initialize().then(() => {
+        microsoftTeams.initialize(() => {
             scanBarCode();
         });
 
@@ -72,6 +70,7 @@
 
         // Method to capture product image
         function captureImage() {
+            microsoftTeams.initialize();
 
             // Method to ask for image capture permission and then capture image
             microsoftTeams.media.captureImage((error, files) => {

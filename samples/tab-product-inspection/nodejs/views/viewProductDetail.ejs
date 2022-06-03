@@ -12,7 +12,7 @@
             $("#productStatus").hide();
         });
         
-        microsoftTeams.app.initialize().then(() => {
+        microsoftTeams.initialize(() => {
             scanBarCode();
         });
 
