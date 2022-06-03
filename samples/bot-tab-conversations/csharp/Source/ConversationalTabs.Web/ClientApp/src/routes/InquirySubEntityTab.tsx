@@ -13,7 +13,7 @@ import { getSupportDepartment, getSupportDepartmentItem } from 'api';
 import { CustomerInquiryDetail } from 'components/CustomerInquiryDetail';
 import { ConsentRequest } from 'components/ConsentRequest';
 import { ApiErrorCode, CustomerInquiry, SupportDepartment } from 'models';
-import { isError } from 'utils/ErrorUtils';
+import { isApiErrorCode } from 'utils/ErrorUtils';
 
 function InquirySubEntityTab() {
   const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
@@ -98,8 +98,8 @@ function InquirySubEntityTab() {
 
   const getErrorNode = (): ReactNode => {
     if (
-      (isError(ApiErrorCode.AuthConsentRequired, inquiry.error) ||
-        isError(ApiErrorCode.AuthConsentRequired, supportDepartment.error)) &&
+      (isApiErrorCode(ApiErrorCode.AuthConsentRequired, inquiry.error) ||
+        isApiErrorCode(ApiErrorCode.AuthConsentRequired, supportDepartment.error)) &&
       !userHasConsented
     ) {
       return <ConsentRequest callback={consentCallback} />;

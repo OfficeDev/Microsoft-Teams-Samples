@@ -25,8 +25,7 @@ function ConsentRequest({ callback }: ConsentRequestProps) {
   return (
     <Flex column>
       <Header content="To complete that action you must consent" />
-      <Text as="p" content="That action includes a call to an API that we do not have permission to call. To complete it you must allow us to access some details from you Microsoft account." />
-      <Text as="p" content="Clicking 'Consent' will open a dialog window, if you do not see it, please check your pop-up blocker." />
+      <Text as="p" content="We need your permission to access some data from your account." />
       <Button primary content="Consent" onClick={callConsentAuth}/>
     </Flex>
   );

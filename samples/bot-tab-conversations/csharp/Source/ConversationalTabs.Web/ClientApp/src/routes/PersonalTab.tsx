@@ -5,7 +5,7 @@ import { getAllSupportDepartments } from 'api';
 import { ApiErrorCode, SupportDepartment } from 'models';
 import { CustomerInquiryTable } from 'components/CustomerInquiryTable';
 import { ConsentRequest } from 'components/ConsentRequest';
-import { isError } from 'utils/ErrorUtils';
+import { isApiErrorCode } from 'utils/ErrorUtils';
 
 function PersonalTab() {
   const [userHasConsented, setUserHasConsented] = useState<boolean>(false);
@@ -33,7 +33,7 @@ function PersonalTab() {
 
   const getErrorNode = (): ReactNode => {
     if (
-      isError(ApiErrorCode.AuthConsentRequired, allSupportDepartments.error) &&
+      isApiErrorCode(ApiErrorCode.AuthConsentRequired, allSupportDepartments.error) &&
       !userHasConsented
     ) {
       return <ConsentRequest callback={consentCallback} />;

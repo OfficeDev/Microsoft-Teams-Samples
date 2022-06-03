@@ -9,7 +9,7 @@ import {
   SupportDepartment,
   SupportDepartmentInput,
 } from 'models';
-import { isError } from 'utils/ErrorUtils';
+import { isApiErrorCode } from 'utils/ErrorUtils';
 
 function Configure() {
   const [userHasConsented, setUserHasConsented] = useState<boolean>(false);
@@ -66,11 +66,11 @@ function Configure() {
       });
 
       if (
-        isError(
+        isApiErrorCode(
           ApiErrorCode.ChannelActivityNotFound,
           createSupportDepartmentMutation.error,
         ) ||
-        (isError(
+        (isApiErrorCode(
           ApiErrorCode.AuthConsentRequired,
           createSupportDepartmentMutation.error,
         ) &&
@@ -95,7 +95,7 @@ function Configure() {
 
   const getErrorNode = (): ReactNode => {
     if (
-      isError(
+      isApiErrorCode(
         ApiErrorCode.ChannelActivityNotFound,
         createSupportDepartmentMutation.error,
       )
@@ -110,7 +110,7 @@ function Configure() {
         </>
       );
     } else if (
-      isError(
+      isApiErrorCode(
         ApiErrorCode.AuthConsentRequired,
         createSupportDepartmentMutation.error,
       )
