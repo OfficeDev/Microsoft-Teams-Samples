@@ -8,7 +8,7 @@
     },
     {
       "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/Bot/BotActivityHandler.cs",
-      "description": "# Bot Installation\r\n`OnTeamsMembersAddedAsync` is called when a new member is added to a Team or when a bot is installed.  \r\nWe store details from the `turnContext`, like ServiceUrl and Bot Id so we can use this information later to message a channel.  \r\nThis information is indexed on the TeamId. Later when we are creating a Tab we will join this data with channel specific information so we know where to send messages too.",
+      "description": "# Bot Installation\r\n`OnTeamsMembersAddedAsync` is called when a new member is added to a Team or when a bot is installed.  \r\nWe store the ServiceUrl from the `turnContext` so we can use it later to message a channel.  \r\nThis information is indexed on the TeamId. Later when we are creating a Tab we will join this data with channel specific information so we know where to send messages too.",
       "line": 74
     },
     {
@@ -18,23 +18,13 @@
     },
     {
       "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/ClientApp/src/routes/Configure.tsx",
-      "description": "# Support Department Channel Tab configuration\r\nA user can add a Tab to a channel in the Teams client.\r\nThey need to provide a department name and description.",
-      "line": 93,
-      "selection": {
-        "start": {
-          "line": 93,
-          "character": 11
-        },
-        "end": {
-          "line": 117,
-          "character": 18
-        }
-      }
+      "description": "# Support Department Channel Tab configuration\r\nA user can add a Tab to a channel in the Teams client.\r\n\r\nThey need to provide a department name and description.\r\n\r\nWe default the department name to the name of the channel based on the value in the context",
+      "line": 163
     },
     {
       "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/ClientApp/src/routes/Configure.tsx",
       "description": "# Calling the create support department API\r\nThis information, along with the `channelId`, `teamId` and `groupId` from the Teams context are sent to the create support department API.\r\n\r\nNote: we are using [React Query](https://react-query.tanstack.com/) to handle our API calls, you can see the code this calls [under ../api/supportDepartmentApi.ts](./samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/ClientApp/src/api/supportDepartmentApi.ts)",
-      "line": 28
+      "line": 42
     },
     {
       "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/Controllers/SupportDepartmentsController.cs",
@@ -48,33 +38,23 @@
     },
     {
       "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Domain/Services/SupportDepartmentService.cs",
-      "description": "# Get proactive bot data from data store\r\n[In step #2][#2], when we installed the bot, we stored information like the bot's serviceUrl and botId.\r\n\r\nIn this function we will save the support department to our data store. We store the Team specific details, and the details passed in from the tab configure call.\r\n\r\nLater when an inquiry is made this information will be used to create the chat.",
+      "description": "# Get proactive bot data from data store\r\n[In step #2][#2], when we installed the bot, we stored the bot's serviceUrl.\r\n\r\nIn this function we will save the support department to our data store. We store the Team specific details, and the details passed in from the tab configure call.\r\n\r\nLater when an inquiry is made this information will be used to create the bot conversation.",
       "line": 25
     },
     {
       "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/Controllers/ExternalController.cs",
-      "description": "# External 'service' creates a new inquiry\r\nIn our proof of concept we have a simple Admin site that allows you to act as an external service that wants to send a message to a channel.\r\nIn practive this website might be replaced with a service, say a job posting board when there is a new applicant, or an omnichannel support tool when there is a new inquiry.\r\n\r\nHere, we pass the inquiry information to an inquiry service. ",
+      "description": "# External 'service' creates a new inquiry\r\nIn our proof of concept we have a simple Admin site that allows you to act as an external service that wants to send a message to a channel.\r\n\r\nIn practice this website might be replaced with a service, say a job posting board when there is a new applicant, or an omni-channel support tool when there is a new inquiry.\r\n\r\nHere, we pass the inquiry information to an inquiry service. ",
       "line": 69
     },
     {
       "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Domain/Services/CustomerInquiryService.cs",
       "description": "# Creating the inquiry (or sub entity)\r\nWe create and store the customer inquiry in a data store, so that we are able to get the details for future display.",
-      "line": 46
+      "line": 50
     },
     {
       "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Domain/Services/CustomerInquiryService.cs",
       "description": "# Get support department\r\nThe external service tells us which support department to send the inquiry too based on the `entityId`.\r\n\r\nWe fetch that department and use the proactive bot data saved on app install to post the inquiry to the channel",
-      "line": 50,
-      "selection": {
-        "start": {
-          "line": 50,
-          "character": 9
-        },
-        "end": {
-          "line": 55,
-          "character": 63
-        }
-      }
+      "line": 54
     },
     {
       "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Domain/Services/BotService.cs",
@@ -83,18 +63,23 @@
     },
     {
       "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Domain/Services/CustomerInquiryService.cs",
-      "description": "# Adaptive Card\r\nWe create an adaptive card to post to the channel. This card includes a link so the end user is able to naviagate directly to the sub-entity inside the tab.",
-      "line": 52
+      "description": "# Adaptive Card\r\nWe create an adaptive card to post to the channel. This card includes a link so the end user is able to navigate directly to the sub-entity inside the tab.",
+      "line": 56
     },
     {
       "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Domain/Services/CustomerInquiryService.cs",
-      "description": "# Store the Conversation Activity Id\r\nNow that the inquiry has been posted to the channel, we need to associate the conversation with this inquiry in our datastore. This is how we are able to open the conversation in the sidepanel of a channel or personal tab.\r\n\r\nWithout this, we would just be opening a new conversation. This storing of the conversation ID is identical to how the traditional conversation tabs works.",
-      "line": 59
+      "description": "# Store the Conversation Activity Id\r\nNow that the inquiry has been posted to the channel, we need to associate the conversation with this inquiry in our datastore. This is how we are able to open the conversation in the side-panel of a channel or personal tab.\r\n\r\nWithout this, we would just be opening a new conversation.",
+      "line": 62
     },
     {
       "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/ClientApp/src/routes/InquirySubEntityTab.tsx",
-      "description": "# Opening a channel conversation from a Tab\r\nWe can get the conversation id from the API, and use that to get the Teams SDK to open up a conversation sidebar on the tab.",
+      "description": "# Get a channel conversation from an inquiry\r\nWe get the conversation id attached to the inquiry from the API",
       "line": 40
+    },
+    {
+      "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/ClientApp/src/routes/InquirySubEntityTab.tsx",
+      "description": "# Open the conversation tab\r\nWith this conversation ID, we use the Teams SDK to open the conversation in the sidebar",
+      "line": 67
     }
   ]
 }
