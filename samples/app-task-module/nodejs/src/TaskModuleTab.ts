@@ -55,33 +55,33 @@ function createTabUrl(): string {
 }
 
 // Call the initialize API first
-microsoftTeams.initialize();
-
-// Check the initial theme user chose and respect it
-microsoftTeams.getContext(function(context: microsoftTeams.Context): void {
-    if (context && context.theme) {
-        setTheme(context.theme);
-    }
-});
-
-// Handle theme changes
-microsoftTeams.registerOnThemeChangeHandler(function(theme: string): void {
-    setTheme(theme);
-});
-
-// Save configuration changes
-microsoftTeams.settings.registerOnSaveHandler(function(saveEvent: microsoftTeams.settings.SaveEvent): void {
-    // Let the Microsoft Teams platform know what you want to load based on
-    // what the user configured on this page
-    microsoftTeams.settings.setSettings({
-        contentUrl: createTabUrl(), // Mandatory parameter
-        entityId: createTabUrl(), // Mandatory parameter
+microsoftTeams.app.initialize().then(() => {
+    // Check the initial theme user chose and respect it
+    microsoftTeams.app.getContext().then((context: microsoftTeams.app.Context) => {
+        if (context && context.app.theme) {
+            setTheme(context.app.theme);
+        }
     });
 
-    // Tells Microsoft Teams platform that we are done saving our settings. Microsoft Teams waits
-    // for the app to call this API before it dismisses the dialog. If the wait times out, you will
-    // see an error indicating that the configuration settings could not be saved.
-    saveEvent.notifySuccess();
+    // Handle theme changes
+    microsoftTeams.app.registerOnThemeChangeHandler(function (theme: string): void {
+        setTheme(theme);
+    });
+
+    // Save configuration changes
+    microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent: microsoftTeams.pages.config.SaveEvent): void {
+        // Let the Microsoft Teams platform know what you want to load based on
+        // what the user configured on this page
+        microsoftTeams.pages.config.setConfig({
+            contentUrl: createTabUrl(), // Mandatory parameter
+            entityId: createTabUrl(), // Mandatory parameter
+        });
+
+        // Tells Microsoft Teams platform that we are done saving our settings. Microsoft Teams waits
+        // for the app to call this API before it dismisses the dialog. If the wait times out, you will
+        // see an error indicating that the configuration settings could not be saved.
+        saveEvent.notifySuccess();
+    });
 });
 
 // Logic to let the user configure what they want to see in the tab being loaded
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function(): void {
 
             // This API tells Microsoft Teams to enable the 'Save' button. Since Microsoft Teams always assumes
             // an initial invalid state, without this call the 'Save' button will never be enabled.
-            microsoftTeams.settings.setValidityState(selectedTab === "first" || selectedTab === "second" || selectedTab === "taskmodule");
+            microsoftTeams.pages.config.setValidityState(selectedTab === "first" || selectedTab === "second" || selectedTab === "taskmodule");
         };
     }
 
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function(): void {
     let taskModuleButtons = document.getElementsByClassName("taskModuleButton");
     if (taskModuleButtons.length > 0) {
         // Initialize deep links
-        let taskInfo = {
+        let taskCardInfo = {
             title: null,
             height: null,
             width: null,
@@ -113,6 +113,17 @@ document.addEventListener("DOMContentLoaded", function(): void {
             fallbackUrl: null,
             completionBotId: null,
         };
+
+        let taskInfo = {
+            title: null,
+            size: {
+                height: null,
+                width: null
+            },
+            url: null,
+            fallbackUrl: null,
+        };
+        
         let deepLink = document.getElementById("dlYouTube") as HTMLAnchorElement;
         deepLink.href = taskModuleLink(appId, constants.TaskModuleStrings.YouTubeTitle, constants.TaskModuleSizes.youtube.height, constants.TaskModuleSizes.youtube.width, `${appRoot()}/${constants.TaskModuleIds.YouTube}`, null, `${appRoot()}/${constants.TaskModuleIds.YouTube}`);
         deepLink = document.getElementById("dlPowerApps") as HTMLAnchorElement;
@@ -132,24 +143,25 @@ document.addEventListener("DOMContentLoaded", function(): void {
                     document.getElementById("adaptiveResults").style.display = "none";
                     taskInfo.url = `${appRoot()}/${this.id.toLowerCase()}?theme={theme}`;
                     // Define default submitHandler()
+                    let dialogResponse = (dialogResponse: any): void => { console.log(`Err: ${dialogResponse.err}; Result:  + ${dialogResponse.result}`); };
                     let submitHandler = (err: string, result: any): void => { console.log(`Err: ${err}; Result:  + ${result}`); };
                     switch (this.id.toLowerCase()) {
                         case constants.TaskModuleIds.YouTube:
                             taskInfo.title = constants.TaskModuleStrings.YouTubeTitle;
-                            taskInfo.height = constants.TaskModuleSizes.youtube.height;
-                            taskInfo.width = constants.TaskModuleSizes.youtube.width;
-                            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+                            taskInfo.size.height = constants.TaskModuleSizes.youtube.height;
+                            taskInfo.size.width = constants.TaskModuleSizes.youtube.width;
+                            microsoftTeams.dialog.open(taskInfo, dialogResponse);
                             break;
                         case constants.TaskModuleIds.PowerApp:
                             taskInfo.title = constants.TaskModuleStrings.PowerAppTitle;
-                            taskInfo.height = constants.TaskModuleSizes.powerapp.height;
-                            taskInfo.width = constants.TaskModuleSizes.powerapp.width;
-                            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+                            taskInfo.size.height = constants.TaskModuleSizes.powerapp.height;
+                            taskInfo.size.width = constants.TaskModuleSizes.powerapp.width;
+                            microsoftTeams.dialog.open(taskInfo, dialogResponse);
                             break;
                         case constants.TaskModuleIds.CustomForm:
                             taskInfo.title = constants.TaskModuleStrings.CustomFormTitle;
-                            taskInfo.height = constants.TaskModuleSizes.customform.height;
-                            taskInfo.width = constants.TaskModuleSizes.customform.width;
+                            taskInfo.size.height = constants.TaskModuleSizes.customform.height;
+                            taskInfo.size.width = constants.TaskModuleSizes.customform.width;
                             submitHandler = (err: string, result: any): void => {
                                 // Unhide and populate customFormResults
                                 let resultsElement = document.getElementById("customFormResults");
@@ -161,14 +173,14 @@ document.addEventListener("DOMContentLoaded", function(): void {
                                     resultsElement.innerHTML = `Result: Name: "${result.name}"; Email: "${result.email}"; Favorite book: "${result.favoriteBook}"`;
                                 }
                             };
-                            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+                            microsoftTeams.dialog.open(taskInfo, dialogResponse);
                             break;
                         case constants.TaskModuleIds.AdaptiveCard1:
-                            taskInfo.title = constants.TaskModuleStrings.AdaptiveCardTitle;
-                            taskInfo.url = null;
-                            taskInfo.height = constants.TaskModuleSizes.adaptivecard.height;
-                            taskInfo.width = constants.TaskModuleSizes.adaptivecard.width;
-                            taskInfo.card = acAttachment(cardTemplates.adaptiveCard);
+                            taskCardInfo.title = constants.TaskModuleStrings.AdaptiveCardTitle;
+                            taskCardInfo.url = null;
+                            taskCardInfo.height = constants.TaskModuleSizes.adaptivecard.height;
+                            taskCardInfo.width = constants.TaskModuleSizes.adaptivecard.width;
+                            taskCardInfo.card = acAttachment(cardTemplates.adaptiveCard);
                             submitHandler = (err: string, result: any): void => {
                                 // Unhide and populate adaptiveResults
                                 let resultsElement = document.getElementById("adaptiveResults");
@@ -180,17 +192,17 @@ document.addEventListener("DOMContentLoaded", function(): void {
                                     resultsElement.innerHTML = `Result: ${JSON.stringify(result)}`;
                                 }
                             };
-                            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+                            microsoftTeams.tasks.startTask(taskCardInfo, submitHandler);
                             break;
                         case constants.TaskModuleIds.AdaptiveCard2:
-                            taskInfo.title = constants.TaskModuleStrings.AdaptiveCardTitle;
-                            taskInfo.url = null;
-                            taskInfo.height = constants.TaskModuleSizes.adaptivecard.height;
-                            taskInfo.width = constants.TaskModuleSizes.adaptivecard.width;
-                            taskInfo.card = acAttachment(cardTemplates.adaptiveCard);
+                            taskCardInfo.title = constants.TaskModuleStrings.AdaptiveCardTitle;
+                            taskCardInfo.url = null;
+                            taskCardInfo.height = constants.TaskModuleSizes.adaptivecard.height;
+                            taskCardInfo.width = constants.TaskModuleSizes.adaptivecard.width;
+                            taskCardInfo.card = acAttachment(cardTemplates.adaptiveCard);
                             // Send the Adaptive Card as filled in by the user to the bot in this app
-                            taskInfo.completionBotId = appId;
-                            microsoftTeams.tasks.startTask(taskInfo);
+                            taskCardInfo.completionBotId = appId;
+                            microsoftTeams.tasks.startTask(taskCardInfo);
                             break;
                         default:
                             console.log("Unexpected button ID: " + this.id.toLowerCase());

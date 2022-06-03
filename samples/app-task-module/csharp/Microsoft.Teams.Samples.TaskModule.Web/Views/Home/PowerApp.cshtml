@@ -20,17 +20,18 @@
     </ol>
 </div>
 <script>
-    microsoftTeams.initialize();
-    microsoftTeams.getContext(function (context) {
-        // If not running in the Microsoft tenant, show an error message; otherwise, show the PowerApp
-        var showPowerApp = (context.tid === "72f988bf-86f1-41af-91ab-2d7cd011db47"); // Microsoft's tenant ID
-        // Uncomment the line below if you create your own PowerApp and modify the iframe's src= URL
-        // var showPowerApp = true
-        if (showPowerApp) {
-            document.getElementById("powerApp").style.display = "block";
-        } else {
-            document.getElementById("powerAppError").style.display = "block";
-        }
+    microsoftTeams.app.initialize().then(() => {
+        microsoftTeams.app.getContext().then((context) => {
+            // If not running in the Microsoft tenant, show an error message; otherwise, show the PowerApp
+            var showPowerApp = (context.user.tenant.id === "72f988bf-86f1-41af-91ab-2d7cd011db47"); // Microsoft's tenant ID
+            // Uncomment the line below if you create your own PowerApp and modify the iframe's src= URL
+            // var showPowerApp = true
+            if (showPowerApp) {
+                document.getElementById("powerApp").style.display = "block";
+            } else {
+                document.getElementById("powerAppError").style.display = "block";
+            }
+        });
     });
 </script>
 

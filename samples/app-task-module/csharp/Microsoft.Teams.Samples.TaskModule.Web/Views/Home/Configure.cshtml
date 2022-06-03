@@ -11,31 +11,31 @@
     </p>
 </form>
 <script type="text/javascript">
-    microsoftTeams.initialize();
-    microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
+    microsoftTeams.app.initialize().then(() => {
+        microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+            var radios = document.getElementsByName("tabType");
+            if (radios[0].checked) {
+                microsoftTeams.pages.config.setConfig({
+                    entityId: "tasks",
+                    contentUrl: "@(ApplicationSettings.BaseUrl)"+"/tasks",
+                    suggestedDisplayName: "Task Module CSharp",
+                    websiteUrl: "@(ApplicationSettings.BaseUrl)"+"/tasks"
+                });
+            } else {
+                microsoftTeams.pages.config.setConfig({
+                    entityId: "helloworld",
+                    contentUrl: "@(ApplicationSettings.BaseUrl)" +"/helloworld",
+                    suggestedDisplayName: "Hello World",
+                    websiteUrl: "@(ApplicationSettings.BaseUrl)" +"/helloworld"
+                });
+            }
 
-        var radios = document.getElementsByName("tabType");
-        if (radios[0].checked) {
-            microsoftTeams.settings.setSettings({
-                entityId: "tasks",
-                contentUrl: "@(ApplicationSettings.BaseUrl)"+"/tasks",
-                suggestedDisplayName: "Task Module CSharp",
-                websiteUrl: "@(ApplicationSettings.BaseUrl)"+"/tasks"
-            });
-        } else {
-            microsoftTeams.settings.setSettings({
-                entityId: "helloworld",
-                contentUrl: "@(ApplicationSettings.BaseUrl)" +"/helloworld",
-                suggestedDisplayName: "Hello World",
-                websiteUrl: "@(ApplicationSettings.BaseUrl)" +"/helloworld"
-            });
-        }
-
-        saveEvent.notifySuccess();
+            saveEvent.notifySuccess();
+        });
     });
 
     function onClick() {
-        microsoftTeams.settings.setValidityState(true);
+        microsoftTeams.pages.config.setValidityState(true);
     }
 
 </script>

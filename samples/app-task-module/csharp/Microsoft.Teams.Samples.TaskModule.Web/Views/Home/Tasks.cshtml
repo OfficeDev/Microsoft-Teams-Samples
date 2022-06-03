@@ -25,15 +25,20 @@
 <p></p>
 <script src="~/Scripts/teamsapp.js"></script>
 <script>
-    microsoftTeams.initialize();
+    microsoftTeams.app.initialize();
 
     submitHandler = (err, result) => {
             console.log(`Submit handler - err: ${err}`);
             alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
-        };
+    };
+
+    dialogResponse = (dialogResponse) => {
+        console.log(`Submit handler - err: ${dialogResponse.err}`);
+        alert("Result = " + JSON.stringify(dialogResponse.result) + "\nError = " + JSON.stringify(dialogResponse.err));
+    };
 
         function submit(type) {
-            let taskInfo = {
+            let taskCardInfo = {
                 title: null,
                 height: null,
                 width: null,
@@ -43,41 +48,55 @@
                 completionBotId: null,
             };
 
+            let taskInfo = {
+                title: null,
+                size: {
+                    height: null,
+                    width: null
+                },
+                url: null,
+                fallbackUrl: null,
+            };
+
             taskInfo.title = "Task Module Demo";
-            taskInfo.height = "medium";
-            taskInfo.width = "medium";
+            taskInfo.size.height = "medium";
+            taskInfo.size.width = "medium";
 
             if (type.includes('youtube')) {
                 taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/youtube";
                 taskInfo.title = "@(TaskModuleUIConstants.YouTube.Title)";
-                taskInfo.height = "@(TaskModuleUIConstants.YouTube.Height)";
-                taskInfo.width = "@(TaskModuleUIConstants.YouTube.Width)";
+                taskInfo.size.height = "@(TaskModuleUIConstants.YouTube.Height)";
+                taskInfo.size.width = "@(TaskModuleUIConstants.YouTube.Width)";
+                taskInfo.fallbackUrl = taskInfo.url;
+
+                microsoftTeams.dialog.open(taskInfo, dialogResponse);
             }
             else if (type.includes('powerapp')) {
                 taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/powerapp";
                 taskInfo.title = "@(TaskModuleUIConstants.PowerApp.Title)";
-                taskInfo.height = "@(TaskModuleUIConstants.PowerApp.Height)";
-                taskInfo.width = "@(TaskModuleUIConstants.PowerApp.Width)";
+                taskInfo.size.height = "@(TaskModuleUIConstants.PowerApp.Height)";
+                taskInfo.size.width = "@(TaskModuleUIConstants.PowerApp.Width)";
+                taskInfo.fallbackUrl = taskInfo.url;
+
+                microsoftTeams.dialog.open(taskInfo, dialogResponse);
             }
             else if (type.includes('customform')) {
                 taskInfo.url = "@(ApplicationSettings.BaseUrl)" + "/customform";
                 taskInfo.title = "@(TaskModuleUIConstants.CustomForm.Title)";
-                taskInfo.height = "@(TaskModuleUIConstants.CustomForm.Height)";
-                taskInfo.width = "@(TaskModuleUIConstants.CustomForm.Width)";
+                taskInfo.size.height = "@(TaskModuleUIConstants.CustomForm.Height)";
+                taskInfo.size.width = "@(TaskModuleUIConstants.CustomForm.Width)";
+                taskInfo.fallbackUrl = taskInfo.url;
+
+                microsoftTeams.dialog.open(taskInfo, dialogResponse);
             }
             else {
-                taskInfo.card =  @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(AdaptiveCardHelper.GetAdaptiveCard()));
-                taskInfo.title = "@(TaskModuleUIConstants.AdaptiveCard.Title)";
-                taskInfo.height = "@(TaskModuleUIConstants.AdaptiveCard.Height)";
-                taskInfo.width = "@(TaskModuleUIConstants.AdaptiveCard.Width)";
+                taskCardInfo.card =  @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(AdaptiveCardHelper.GetAdaptiveCard()));
+                taskCardInfo.title = "@(TaskModuleUIConstants.AdaptiveCard.Title)";
+                taskCardInfo.height = "@(TaskModuleUIConstants.AdaptiveCard.Height)";
+                taskCardInfo.width = "@(TaskModuleUIConstants.AdaptiveCard.Width)";
+                taskCardInfo.fallbackUrl = taskCardInfo.url;
+
+                microsoftTeams.tasks.startTask(taskCardInfo, submitHandler);
             }
-
-            // Set fallback URL
-            taskInfo.fallbackUrl = taskInfo.url;
-
-            if (type.includes('bot'))
-                taskInfo.completionBotId = "@(ApplicationSettings.MicrosoftAppId)";
-
-            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
         }
 </script>

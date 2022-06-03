@@ -13,9 +13,9 @@ block iframe
       li Replace "a3447344-9220-4868-b45b-07759637be0f" in the <code>src=</code> URL of the &lt;iframe&gt; in this file (src/views/powerapp.pug) with your App ID.
       li Modify the JavaScript function in this file (src/views/powerapp.pug) to override the check for Microsoft's Tenant ID by uncommenting one line.
   script.
-    microsoftTeams.getContext(function(context) {
+    microsoftTeams.app.getContext().then((context) => {
       // If not running in the Microsoft tenant, show an error message; otherwise, show the PowerApp
-      var showPowerApp = (context.tid === "72f988bf-86f1-41af-91ab-2d7cd011db47"); // Microsoft's tenant ID
+      var showPowerApp = (context.user.tenant.id === "72f988bf-86f1-41af-91ab-2d7cd011db47"); // Microsoft's tenant ID
       // Uncomment the line below if you create your own PowerApp and modify the iframe's src= URL
       // var showPowerApp = true
       if (showPowerApp) {

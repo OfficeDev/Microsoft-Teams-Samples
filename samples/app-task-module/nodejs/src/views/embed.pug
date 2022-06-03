@@ -47,12 +47,12 @@ html(lang='en')
         border-style: none;
       }
     script.
-      microsoftTeams.initialize();
+      microsoftTeams.app.initialize();
 
       //- Handle the Esc key
       document.onkeyup = function(event) {
         if ((event.key === 27) || (event.key === "Escape")) {
-          microsoftTeams.tasks.submitTask(null); //- this will return an err object to the completionHandler() 
+          microsoftTeams.dialog.submit(null); //- this will return an err object to the completionHandler() 
         }
       }      
     div(id="embed-container")

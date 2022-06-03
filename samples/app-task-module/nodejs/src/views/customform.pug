@@ -35,15 +35,15 @@ html(lang='en')
     title Microsoft Teams Task Module Tester - Custom Form
     link(rel='stylesheet', type='text/css', href='/styles/msteams-16.css')
     link(rel='stylesheet', type='text/css', href='/styles/custom.css')
-    script(src="https://unpkg.com/@microsoft/teams-js@1.3.7/dist/MicrosoftTeams.min.js" integrity="sha384-glExfvkpce98dO2oN+diZ/Luv/5qrZJiOvWCeR8ng/ZxlhpvBgHKeVFRURrh+NEC" crossorigin="anonymous")
+    script(src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous")
   body(class='theme-light')
     script.
-      microsoftTeams.initialize();
+      microsoftTeams.app.initialize();
 
       //- Handle the Esc key
       document.onkeyup = function(event) {
         if ((event.key === 27) || (event.key === "Escape")) {
-          microsoftTeams.tasks.submitTask(null); //- this will return an err object to the completionHandler() 
+          microsoftTeams.dialog.submit(null); //- this will return an err object to the completionHandler() 
         }
       }
 
@@ -52,9 +52,9 @@ html(lang='en')
       let queryParameters = getQueryParameters();
       if (queryParameters["theme"] === undefined) {
         //- Try getting it from microsoftTeams.GetContext() - this will happen after render time and will flash briefly
-        microsoftTeams.getContext(function(context) {
-            if (context && context.theme) {
-                setTheme(context.theme);
+        microsoftTeams.app.getContext().then((context) => {
+            if (context && context.app.theme) {
+                setTheme(context.app.theme);
             }
         });
       }
@@ -71,10 +71,10 @@ html(lang='en')
         guidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
         let password = document.getElementById("pw").value;
         if (guidRegex.test(password)) {
-          microsoftTeams.tasks.submitTask(customerInfo, password); // hidden feature to test bogus completion appId
+          microsoftTeams.dialog.submit(customerInfo, password); // hidden feature to test bogus completion appId
         }
         else {
-          microsoftTeams.tasks.submitTask(customerInfo, "#{appId}"); //- appId is passed at render time in tabs.ts
+          microsoftTeams.dialog.submit(customerInfo, "#{appId}"); //- appId is passed at render time in tabs.ts
         }
         return true;
       }

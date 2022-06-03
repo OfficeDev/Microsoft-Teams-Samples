@@ -11,7 +11,7 @@
 </head>
 <body >
     <script>
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
 
         function validateForm() {
             var customerInfo = {
@@ -19,7 +19,7 @@
                 email: document.forms["customerForm"]["email"].value,
                 favoriteBook: document.forms["customerForm"]["favoriteBook"].value
             }
-            microsoftTeams.tasks.submitTask(customerInfo, "@Microsoft.Teams.Samples.TaskModule.Web.Helper.ApplicationSettings.MicrosoftAppId"); 
+            microsoftTeams.dialog.submit(customerInfo, "@Microsoft.Teams.Samples.TaskModule.Web.Helper.ApplicationSettings.MicrosoftAppId"); 
             return true;
         }
     </script>
