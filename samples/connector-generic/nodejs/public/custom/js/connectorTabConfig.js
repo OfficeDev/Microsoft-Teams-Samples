@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    microsoftTeams.settings.getSettings(function (settings) {
+    microsoftTeams.pages.getConfig().then((settings) => {
         document.getElementById("webhook").value = settings.webhookUrl;
-        microsoftTeams.settings.setValidityState(true);
+        microsoftTeams.pages.config.setValidityState(true);
     }); 
 });

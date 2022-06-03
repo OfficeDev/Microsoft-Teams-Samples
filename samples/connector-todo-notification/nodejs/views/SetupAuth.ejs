@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js"
-    integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT"
-    crossorigin="anonymous"></script>
+<script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.js"
     integrity="sha384-VC7EHu0lDzZyFfmjTPJq+DFyIn8TUGAJbEtpXquazFVr00Q/OOx//RjiZ9yU9+9m"
     crossorigin="anonymous"></script>
@@ -37,52 +35,53 @@
 </div>
 
 <script type="text/javascript">
-    microsoftTeams.initialize();
-    microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
-        var radios = document.getElementsByName('notificationType');
-        var eventType = '';
-        if (radios[0].checked) {
-            eventType = radios[0].value;
-        } else {
-            eventType = radios[1].value;
-        }
+    microsoftTeams.app.initialize().then(() => {
+        microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+            var radios = document.getElementsByName('notificationType');
+            var eventType = '';
+            if (radios[0].checked) {
+                eventType = radios[0].value;
+            } else {
+                eventType = radios[1].value;
+            }
 
-        microsoftTeams.settings.setSettings({
-            entityId: eventType,
-            contentUrl: window.location.origin + "/SetupAuth",
-            removeUrl: window.location.origin + "/SetupAuth",
-            configName: eventType
-        });
-
-        microsoftTeams.settings.getSettings(function (settings) {
-            // We get the Webhook URL in settings.webhookUrl which needs to be saved.
-            $.ajax({
-                url: '/Connector/Save',
-                type: 'post',
-                contentType: 'application/json',
-                data: JSON.stringify({
-                    webhookUrl: settings.webhookUrl,
-                    eventType: eventType
-                }),
-                success: function (data, textStatus, jQxhr) {
-                    console.log('webhook created successfully.');
-                },
-                error: function (jqXhr, textStatus, errorThrown) {
-                    console.log('error', errorThrown);
-                }
+            microsoftTeams.pages.config.setConfig({
+                entityId: eventType,
+                contentUrl: window.location.origin + "/SetupAuth",
+                removeUrl: window.location.origin + "/SetupAuth",
+                configName: eventType
             });
-        });
 
-        saveEvent.notifySuccess();
+            microsoftTeams.pages.getConfig().then((settings) => {
+                // We get the Webhook URL in settings.webhookUrl which needs to be saved.
+                $.ajax({
+                    url: '/Connector/Save',
+                    type: 'post',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        webhookUrl: settings.webhookUrl,
+                        eventType: eventType
+                    }),
+                    success: function (data, textStatus, jQxhr) {
+                        console.log('webhook created successfully.');
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        console.log('error', errorThrown);
+                    }
+                });
+            });
+
+            saveEvent.notifySuccess();
+        });
     });
 
-    microsoftTeams.settings.registerOnRemoveHandler(function (removeEvent) {
+    microsoftTeams.pages.config.registerOnRemoveHandler(function (removeEvent) {
         var removeCalled = true;
     });
 
     function onClick() {
         // Enable the save button.
-        microsoftTeams.settings.setValidityState(true);
+        microsoftTeams.pages.config.setValidityState(true);
     }
 
     function initiateLogin() {
@@ -94,8 +93,7 @@
         microsoftTeams.authentication.authenticate({
             url: url,
             width: 600,
-            height: 535,
-            successCallback: function (result) {
+            height: 535}).then((result) => {
                 console.log("Login succeeded: " + result);
                 let data = localStorage.getItem(result);
                 localStorage.removeItem(result);
@@ -104,12 +102,10 @@
                 $("#primary").show();
                 $("#divConfig").show();
                 $("#divLogin").hide();
-            },
-            failureCallback: function (reason) {
+            }).catch((reason) => {
                 console.log("Login failed: " + reason);
                 handleAuthError(reason);
-            }
-        });
+            });
     }
 
     function logOut() {
@@ -119,7 +115,7 @@
         $("#primary").hide();
         $("#divConfig").hide();
         $("#divLogin").show();
-        microsoftTeams.settings.setValidityState(false);
+        microsoftTeams.pages.config.setValidityState(false);
     }
 
     function getUserProfile(accessToken) {

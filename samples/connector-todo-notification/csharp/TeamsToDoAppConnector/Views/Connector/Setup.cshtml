@@ -13,17 +13,17 @@
     </section>
 </div>
 
-<script src="@("https://unpkg.com/@microsoft/teams-js@1.3.3/dist/MicrosoftTeams.min.js")"></script>
+<script src="@("https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js")"></script>
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 
 <script type="text/javascript">
 
         function onClick() {
-            microsoftTeams.settings.setValidityState(true);
+            microsoftTeams.pages.config.setValidityState(true);
         }
 
         microsoftTeams.initialize();
-        microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
+        microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
             var radios = document.getElementsByName('notificationType');
 
             var eventType = '';
@@ -33,13 +33,13 @@
                 eventType = radios[1].value;
             }
 
-            microsoftTeams.settings.setSettings({
+            microsoftTeams.pages.config.setConfig({
                  entityId: eventType,
                     contentUrl: "@(TeamsToDoAppConnector.Utils.AppSettings.BaseUrl)/Connector/Setup",
                  configName: eventType
                 });
 
-            microsoftTeams.settings.getSettings(function (settings) {
+            microsoftTeams.pages..getConfig().then((settings) => {
 
                 // We get the Webhook URL in settings.webhookUrl which needs to be saved.
                 $.ajax({
@@ -62,7 +62,7 @@
             saveEvent.notifySuccess();
         });
 
-        microsoftTeams.settings.registerOnRemoveHandler(function (removeEvent) {
+        microsoftTeams.pages.config.registerOnRemoveHandler(function (removeEvent) {
             var removeCalled = true;
         });
 

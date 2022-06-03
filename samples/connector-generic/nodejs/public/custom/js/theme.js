@@ -10,16 +10,17 @@ var TeamsTheme = (function () {
      * Set up themes on a page
      */
     TeamsTheme.fix = function (context) {
-        microsoftTeams.initialize();
-        microsoftTeams.registerOnThemeChangeHandler(TeamsTheme.themeChanged);
-        if (context) {
-            TeamsTheme.themeChanged(context.theme);
-        }
-        else {
-            microsoftTeams.getContext(function (context) {
-                TeamsTheme.themeChanged(context.theme);
-            });
-        }
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.registerOnThemeChangeHandler(TeamsTheme.themeChanged);
+            if (context) {
+                TeamsTheme.themeChanged(context.app.theme);
+            }
+            else {
+                microsoftTeams.app.getContext().then((context) => {
+                    TeamsTheme.themeChanged(context.app.theme);
+                });
+            }
+        });
     };
     /**
      * Manages theme changes

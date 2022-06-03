@@ -9,29 +9,30 @@ html(lang="en")
     link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel="stylesheet")
     link(href="/custom/css/msteams-app.css", rel="stylesheet") 
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js")
-    script(src="https://statics.teams.microsoft.com/sdk/v1.0/js/MicrosoftTeams.min.js")
+    script(src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js")
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
     script(src="/custom/js/theme.js")
     script(src="/custom/js/connectorTabConfig.js")
   body
     script.
-        microsoftTeams.initialize();
-
-        microsoftTeams.getContext(function (context) {
-            TeamsTheme.fix(context);
-        });
-
-        microsoftTeams.settings.registerOnSaveHandler(function(saveEvent) {
-            microsoftTeams.settings.setSettings({
-              entityId: "bing",
-              contentUrl: "[ngrokURL]/connectorconfig",
-              configName: "bing"
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then((context) => {
+                TeamsTheme.fix(context);
             });
-            saveEvent.notifySuccess();
-        });
+
+            microsoftTeams.pages.config.registerOnSaveHandler(function(saveEvent) {
+                microsoftTeams.pages.config.setConfig({
+                  entityId: "bing",
+                  contentUrl: "[ngrokURL]/connectorconfig",
+                  configName: "bing"
+                });
+                
+                saveEvent.notifySuccess();
+            });
         
-        microsoftTeams.settings.registerOnRemoveHandler(function (removeEvent) {
-            alert("remove");
+            microsoftTeams.pages.config.registerOnRemoveHandler(function (removeEvent) {
+                alert("remove");
+            });
         });
 
     div.settings-container
