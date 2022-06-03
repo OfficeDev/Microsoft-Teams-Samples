@@ -18,8 +18,8 @@ const Question = (props: any) => {
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.getContext().then((context:any) =>{
                 setMeetingId(context.meeting.id)
-                getLatestEditorValue(questionNumber,context.meetingId).then((res:any) =>{
-                    setData(res.data.value);
+                getLatestEditorValue(questionNumber,context.meetingId).then((result:any) =>{
+                    setData(result.data.value);
                 })
             });
         });

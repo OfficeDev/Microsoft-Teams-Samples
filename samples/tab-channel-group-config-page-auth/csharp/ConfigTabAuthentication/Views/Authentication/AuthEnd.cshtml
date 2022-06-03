@@ -47,6 +47,7 @@
 
             msalInstance.handleRedirectPromise(window.location.hash).then((tokenResponse) => {
                 const currentAccounts = msalInstance.getAllAccounts();
+
                 if (!currentAccounts || currentAccounts.length === 0) {
                     console.log(msalInstance.getTokenCache());
                     microsoftTeams.authentication.notifyFailure("Unable to login");

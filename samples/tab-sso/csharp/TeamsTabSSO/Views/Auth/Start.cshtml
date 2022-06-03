@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "title";
-    Layout = "_Layout"; 
+    Layout = "_Layout";
 }
 
 @section scripts{
@@ -28,10 +28,10 @@
                         // if you know their username ahead of time.
                         login_hint: context.user.userPrincipalName
                     };
+
                     // Go to the AzureAD authorization endpoint
-                    let authorizeEndpoint =
-                        "https://login.microsoftonline.com/common/oauth2/authorize?" +
-                            toQueryString(queryParams);
+                    let authorizeEndpoint = "https://login.microsoftonline.com/common/oauth2/authorize?" + toQueryString(queryParams);
+
                     window.location.assign(authorizeEndpoint);
                 });
             });

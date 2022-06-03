@@ -22,9 +22,9 @@ const Question =(props :any)=>
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.getContext().then((context: any) => {
                 setMeetingId(context.meeting.id)
-                getLatestEditorValue(questionNumber, context.meeting.id).then((res: any) => {
-                    if (res.data.value != null && res.data.value != "")
-                        setData(res.data.value);
+                getLatestEditorValue(questionNumber, context.meeting.id).then((result: any) => {
+                    if (result.data.value != null && result.data.value != "")
+                        setData(result.data.value);
                 })
             })
         });

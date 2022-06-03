@@ -34,7 +34,6 @@ function requestConsent() {
 }
 
 function getToken() {
-    alert("CALLLING");
     return new Promise((resolve, reject) => {
         microsoftTeams.authentication.authenticate({
             url: window.location.origin + "/Auth/Start",
