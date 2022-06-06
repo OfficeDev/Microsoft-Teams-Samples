@@ -13,7 +13,7 @@ const GetNotificationDesktop = () => {
 
     useEffect(() => {
         // initializing microsoft teams sdk
-        microsoftTeams.initialize()
+        microsoftTeams.app.initialize()
     })
 
     // Method to validate and send notification

@@ -15,13 +15,14 @@ const Question = (props: any) => {
     const [socket, setSocket] = React.useState(io());
 
     React.useEffect(() => {
-        microsoftTeams.initialize();
-        microsoftTeams.getContext((context:any) =>{
-            setMeetingId(context.meetingId)
-            getLatestEditorValue(questionNumber,context.meetingId).then((res:any) =>{
-                setData(res.data.value);
-            })
-        })
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then((context:any) =>{
+                setMeetingId(context.meeting.id)
+                getLatestEditorValue(questionNumber,context.meetingId).then((result:any) =>{
+                    setData(result.data.value);
+                })
+            });
+        });
         setSocket(io());     
     }, [])
 

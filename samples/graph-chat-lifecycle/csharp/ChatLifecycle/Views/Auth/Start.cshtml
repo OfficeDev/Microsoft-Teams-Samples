@@ -7,32 +7,33 @@
     <script type="text/javascript">
         let clientId = '@ViewBag.AzureClientId';
         if (clientId != undefined && clientId != null && clientId !== '') {
-            microsoftTeams.initialize();
-            // Get the tab context, and use the information to navigate to Azure AD login page
-            microsoftTeams.getContext(function (context) {
-                // Generate random state string and store it, so we can verify it in the callback
-                let state = _guid();
-                localStorage.setItem("simple.state", state);
-                localStorage.removeItem("simple.error");
-                // See https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-implicit
-                // for documentation on these query parameters
-                let queryParams = {
-                    client_id: clientId,
-                    response_type: "id_token token",
-                    response_mode: "fragment",
-                    resource: "https://graph.microsoft.com/",
-                    redirect_uri: window.location.origin + "/Auth/End",
-                    nonce: _guid(),
-                    state: state,
-                    // login_hint pre-fills the username/email address field of the sign in page for the user,
-                    // if you know their username ahead of time.
-                    login_hint: context.upn
-                };
-                // Go to the AzureAD authorization endpoint
-                let authorizeEndpoint =
-                    "https://login.microsoftonline.com/common/oauth2/authorize?" +
-                        toQueryString(queryParams);
-                window.location.assign(authorizeEndpoint);
+            microsoftTeams.app.initialize().then(() => {
+                // Get the tab context, and use the information to navigate to Azure AD login page
+                microsoftTeams.app.getContext().then((context) => {
+                    // Generate random state string and store it, so we can verify it in the callback
+                    let state = _guid();
+                    localStorage.setItem("simple.state", state);
+                    localStorage.removeItem("simple.error");
+                    // See https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-implicit
+                    // for documentation on these query parameters
+                    let queryParams = {
+                        client_id: clientId,
+                        response_type: "id_token token",
+                        response_mode: "fragment",
+                        resource: "https://graph.microsoft.com/",
+                        redirect_uri: window.location.origin + "/Auth/End",
+                        nonce: _guid(),
+                        state: state,
+                        // login_hint pre-fills the username/email address field of the sign in page for the user,
+                        // if you know their username ahead of time.
+                        login_hint: context.user.loginHint
+                    };
+                    // Go to the AzureAD authorization endpoint
+                    let authorizeEndpoint =
+                        "https://login.microsoftonline.com/common/oauth2/authorize?" +
+                            toQueryString(queryParams);
+                    window.location.assign(authorizeEndpoint);
+                });
             });
         }
         // Build query string from map of query parameter

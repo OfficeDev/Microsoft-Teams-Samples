@@ -1,7 +1,7 @@
 ﻿let accessToken;
 
 $(document).ready(function () {
-    microsoftTeams.initialize();
+    microsoftTeams.app.initialize();
    
     getClientSideToken()
         .then((clientSideToken) => {           
@@ -26,8 +26,8 @@ function requestConsent() {
         $("#consent").hide();
         $("#divError").hide();
         accessToken = data.accessToken;
-        microsoftTeams.getContext((context) => {
-            getUserInfo(context.userPrincipalName);
+        microsoftTeams.app.getContext().then((context) => {
+            getUserInfo(context.user.userPrincipalName);
         });
     });
 }
@@ -37,15 +37,11 @@ function getToken() {
         microsoftTeams.authentication.authenticate({
             url: window.location.origin + "/Auth/Start",
             width: 600,
-            height: 535,
-            successCallback: result => {
-               
-                resolve(result);
-            },
-            failureCallback: reason => {
-                
-                reject(reason);
-            }
+            height: 535
+        }).then((result) => {
+            resolve(result);
+        }).catch((reason) => {
+            reject(reason);
         });
     });
 }
@@ -53,23 +49,18 @@ function getToken() {
 function getClientSideToken() {
 
     return new Promise((resolve, reject) => {
-        microsoftTeams.authentication.getAuthToken({
-            successCallback: (result) => {               
-                resolve(result);
-                
-            },
-            failureCallback: function (error) {                
-                reject("Error getting token: " + error);
-            }
+        microsoftTeams.authentication.getAuthToken().then((result) => {
+            resolve(result);
+        }).catch((error) => {
+            reject("Error getting token: " + error);
         });
-
     });
 
 }
 
 function getServerSideToken(clientSideToken) {
     return new Promise((resolve, reject) => {
-        microsoftTeams.getContext((context) => {
+        microsoftTeams.app.getContext().then((context) => {
             var scopes = ["https://graph.microsoft.com/User.Read"];
             fetch('/GetUserAccessToken', {
                 method: 'get',
@@ -92,7 +83,7 @@ function getServerSideToken(clientSideToken) {
                             reject(JSON.parse(responseJson).error);
                     } else if (responseJson) {
                         accessToken = responseJson;
-                        getUserInfo(context.userPrincipalName);
+                        getUserInfo(context.user.userPrincipalName);
                     }
                 });
         });

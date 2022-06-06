@@ -7,9 +7,10 @@ import { IQuestionDetails } from '../types/question';
 const Tab = () => {
     const [frameContext, setframeContext] = React.useState<any>('');
     React.useEffect(() => {
-        microsoftTeams.initialize();
-        microsoftTeams.getContext((context) => {
-            setframeContext(context.frameContext);
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then((context) => {
+                setframeContext(context.page.frameContext);
+            });
         });
     }, [])
 

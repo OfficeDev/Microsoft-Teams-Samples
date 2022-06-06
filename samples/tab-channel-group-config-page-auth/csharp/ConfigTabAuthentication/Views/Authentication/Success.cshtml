@@ -15,15 +15,14 @@
         <input type="radio" name="notificationType" value="Create" onclick="onClick()"> Go to Tab
     </section>
 </div>
-<script src="@("https://unpkg.com/@microsoft/teams-js@1.3.3/dist/MicrosoftTeams.min.js")"></script>
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.js" crossorigin="anonymous"></script>
-<script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+<script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 
-    microsoftTeams.initialize();
+    microsoftTeams.app.initialize();
 
-    window.onload = function () {
+    window.onload = function() {
         document.getElementById("greetingMsg").innerHTML = `Welcome ${localStorage.getItem("displayName")}, \n you have successfully signed in...`;
     };
 
@@ -35,42 +34,43 @@
         microsoftTeams.authentication.authenticate({
             url: url,
             width: 600,
-            height: 535,
-            successCallback: function (result) {
+            height: 535
+        })
+            .then((result) => {
                 console.log("Logout succeeded: " + result);
                 window.location.href = "@Url.Action("SilentConfigureTab", "Home")";
-                microsoftTeams.settings.setValidityState(false);
-            },
-            failureCallback: function (reason) {
+                microsoftTeams.pages.config.setValidityState(false);
+            })
+            .catch((reason) => {
                 console.log("Logout failed: " + reason);
                 handleAuthError(reason);
                 window.location.href = "@Url.Action("Failed", "Authentication")";
-            }
-        });
+            });
     }
 
-    
+
 
     function onClick() {
-        microsoftTeams.settings.setValidityState(true);
+        microsoftTeams.pages.config.setValidityState(true);
     }
-    microsoftTeams.initialize();
 
-    microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
-        var radios = document.getElementsByName('notificationType');
+    microsoftTeams.app.initialize().then(() => {
+        microsoftTeams.pages.config.registerOnSaveHandler(function(saveEvent) {
+            var radios = document.getElementsByName('notificationType');
 
-        var eventType = '';
-        if (radios[0].checked) {
-            eventType = radios[0].value;
-        } else {
-            eventType = radios[1].value;
-        }
+            var eventType = '';
+            if (radios[0].checked) {
+                eventType = radios[0].value;
+            } else {
+                eventType = radios[1].value;
+            }
 
-        microsoftTeams.settings.setSettings({
-            entityId: eventType,
-            contentUrl: window.location.origin + "/Setup",
-            configName: eventType
+            microsoftTeams.pages.config.setConfig({
+                entityId: eventType,
+                contentUrl: window.location.origin + "/Setup",
+                configName: eventType
+            });
+            saveEvent.notifySuccess();
         });
-        saveEvent.notifySuccess();
     });
 </script>
