@@ -5,16 +5,16 @@ import * as microsoftTeams from '@microsoft/teams-js';
  * It gathers the required information before calling AAD
  */
 export default function AuthStart() {
-  microsoftTeams.initialize();
+  microsoftTeams.app.initialize();
 
   // Get the tab context, and use the information to navigate to Azure AD login page
-  microsoftTeams.getContext(async function (context) {
+  microsoftTeams.app.getContext().then(async (context) => {
     // Generate random state string and store it, so we can verify it in the callback
     let state = guid();
     localStorage.setItem('auth-state', state);
     localStorage.removeItem('codeVerifier');
 
-    let tenantId = context['tid']; // Tenant ID of the logged in user
+    let tenantId = context.user.tenant.id; // Tenant ID of the logged in user
     let clientId = process.env.REACT_APP_AAD_CLIENT_ID;
 
     const queryParams = {
@@ -25,7 +25,7 @@ export default function AuthStart() {
       redirect_uri: `${window.location.origin}/auth-end`,
       nonce: guid(),
       state: state,
-      login_hint: context.loginHint,
+      login_hint: context.user.loginHint,
       prompt: 'consent',
     };
 

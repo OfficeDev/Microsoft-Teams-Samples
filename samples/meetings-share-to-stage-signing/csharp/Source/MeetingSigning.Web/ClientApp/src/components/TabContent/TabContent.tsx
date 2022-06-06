@@ -101,7 +101,7 @@ export function TabContent() {
         as="h2"
         content="Meeting Signing, sharing to stage programmatically"
         description={{
-          content: `FrameContext: ${context?.frameContext}`,
+          content: `FrameContext: ${context?.page.frameContext}`,
         }}
       />
       <Button

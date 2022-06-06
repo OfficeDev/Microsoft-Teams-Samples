@@ -9,23 +9,23 @@
     </link>
     <link rel="stylesheet" type="text/css" href="/styles/custom.css">
     </link>
-    <script src="https://unpkg.com/@microsoft/teams-js/dist/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
     <script>
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize().then(() => {
+            // Save configuration changes
+            microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+                // Let the Microsoft Teams platform know what you want to load based on
+                // what the user configured on this page
+                microsoftTeams.pages.config.setConfig({
+                    contentUrl: createTabUrl(),
+                    entityId: createTabUrl(),
+                });
 
-        // Save configuration changes
-        microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
-            // Let the Microsoft Teams platform know what you want to load based on
-            // what the user configured on this page
-            microsoftTeams.settings.setSettings({
-                contentUrl: createTabUrl(),
-                entityId: createTabUrl(),
+                // Tells Microsoft Teams platform that we are done saving our settings. Microsoft Teams waits
+                // for the app to call this API before it dismisses the dialog. If the wait times out, you will
+                // see an error indicating that the configuration settings could not be saved.
+                saveEvent.notifySuccess();
             });
-
-            // Tells Microsoft Teams platform that we are done saving our settings. Microsoft Teams waits
-            // for the app to call this API before it dismisses the dialog. If the wait times out, you will
-            // see an error indicating that the configuration settings could not be saved.
-            saveEvent.notifySuccess();
         });
 
         // Method to select a particular tab.
@@ -36,7 +36,7 @@
 
                 // This API tells Microsoft Teams to enable the 'Save' button. Since Microsoft Teams always assumes
                 // an initial invalid state, without this call the 'Save' button will never be enabled.
-                microsoftTeams.settings.setValidityState(
+                microsoftTeams.pages.config.setValidityState(
                     selectedTab === 'conversationTab' || selectedTab === 'conversationTab'
                 );
             }

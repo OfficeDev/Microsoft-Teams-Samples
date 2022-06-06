@@ -51,7 +51,7 @@ function SignatureInput({
 
     const signatureConfirmationSubmitHandler = async (
       error: string,
-      result: string,
+      result: any,
     ) => {
       if (error !== null) {
         console.log(`Signature Confirmation handler - error: '${error}'`);
@@ -66,6 +66,7 @@ function SignatureInput({
         });
       }
     };
+
     microsoftTeams.tasks.startTask(
       {
         width: TaskModuleDimension.Medium,

@@ -1,5 +1,4 @@
 import * as microsoftTeams from '@microsoft/teams-js';
-import { Context } from '@microsoft/teams-js';
 import React, { useEffect, useMemo, useState } from 'react';
 import {
   teamsV2Theme,
@@ -8,12 +7,13 @@ import {
   Provider as FluentUiProvider,
   ThemeInput,
 } from '@fluentui/react-northstar';
+import { Story } from '@storybook/react';
 
 export interface TeamsProviderContext {
-  context: Context;
+  context: microsoftTeams.app.Context;
   microsoftTeams: typeof microsoftTeams;
-  initializePromise: Promise<unknown>;
-  setContext: (ctx: Context) => void;
+  initializePromise: Promise<void>;
+  setContext: (ctx: microsoftTeams.app.Context) => void;
 }
 
 // promise that doesn't resolve.
@@ -23,17 +23,14 @@ const never = new Promise<void>((resolve) => {});
 export const TeamsContext = React.createContext<TeamsProviderContext>({
   microsoftTeams,
   initializePromise: never,
-  context: {
-    entityId: '',
-    locale: '',
-  },
+  context: {} as microsoftTeams.app.Context,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setContext: () => {},
 });
 
 export interface TeamsProviderProps {
   microsoftTeams: typeof microsoftTeams;
-  initialContext?: Partial<Context>;
+  initialContext?: Partial<microsoftTeams.app.Context>;
   children?: JSX.Element | JSX.Element[];
 }
 
@@ -44,7 +41,7 @@ export const themeMap: { [key: string]: ThemeInput } = {
 };
 
 export function getTheme(theme?: string): ThemeInput {
-  const key = theme && theme in themeMap ? theme : 'default';
+  const key = theme && theme in themeMap ? theme : 'dark';
   return themeMap[key];
 }
 
@@ -53,31 +50,25 @@ export function TeamsProvider({
   initialContext,
   children,
 }: TeamsProviderProps): JSX.Element {
-  const contextInit: Context = {
-    entityId: '',
-    locale: 'en',
+  const contextInit: any = {
+    app: {
+      locale: "en-us",
+    },
+    page: {
+      id: ''
+    },
     ...initialContext,
   };
-  const [context, setContext] = useState<Context>(contextInit);
+  const [context, setContext] = useState<microsoftTeams.app.Context>(contextInit);
   const initializePromise = useMemo(
-    () =>
-      Promise.race([
-        new Promise<void>((resolve) => microsoftTeams.initialize(resolve)),
-        new Promise((resolve, reject) =>
-          setTimeout(
-            () =>
-              reject('Failed to initialize connection with Microsoft Teams'),
-            1000,
-          ),
-        ),
-      ]),
+    () => new Promise<void>((resolve) => microsoftTeams.initialize(resolve)),
     [microsoftTeams],
   );
 
   useEffect(() => {
     async function registerHandlers() {
       await initializePromise;
-      microsoftTeams.getContext(setContext);
+      microsoftTeams.app.getContext().then((context) => setContext(context));
       microsoftTeams.registerOnThemeChangeHandler((nextTheme) => {
         setContext((current) => ({
           ...current,
@@ -88,7 +79,7 @@ export function TeamsProvider({
     registerHandlers();
   }, [initializePromise, microsoftTeams, setContext]);
 
-  const theme = getTheme(context.theme);
+  const theme = getTheme(context.app.theme);
 
   return (
     <TeamsContext.Provider
@@ -98,3 +89,17 @@ export function TeamsProvider({
     </TeamsContext.Provider>
   );
 }
+
+export type TeamsThemeProviderProps = {
+  story: Story;
+};
+
+export const withTeamsThemeProvider = (
+  props: TeamsThemeProviderProps,
+): React.ReactElement => {
+  return (
+    <TeamsProvider microsoftTeams={microsoftTeams}>
+      {<props.story />}
+    </TeamsProvider>
+  );
+};
