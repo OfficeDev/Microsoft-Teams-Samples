@@ -8,11 +8,9 @@
   <title>Add to ToDo</title>
   <link rel="stylesheet" href="styles.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script
-  src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
-  integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
-  crossorigin="anonymous">
-  </script>
+  <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js"
+    integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2"
+    crossorigin="anonymous"></script>
   <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
 </head>
 
@@ -37,11 +35,11 @@
       socket.emit('message', taskDetails, status);
     }
 
-    microsoftTeams.app.initialize();
-    microsoftTeams.app.getContext().then((context) => {
+    microsoftTeams.initialize();
+    microsoftTeams.getContext((context) => {
       $(document).ready(function () {
         $.ajax({
-          url: "/getMeetingData?meetingId=" + context.meeting.id + "&status=todo",
+          url: "/getMeetingData?meetingId=" + context.meetingId + "&status=todo",
           type: "GET",
           success: function (response) {
             var html = '';
@@ -58,7 +56,7 @@
             console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
           },
         });
-        if (context.page.frameContext == "sidePanel") {
+        if (context.frameContext == "sidePanel") {
           $(".share-specific-part-button").show();
         }
         else {
@@ -75,10 +73,10 @@
         width: 250,
         url: `${window.location.origin}/index`,
       };
-      microsoftTeams.app.getContext().then((context) => {
+      microsoftTeams.getContext((context) => {
         // Invoking task module to collect status details from participants.
-        microsoftTeams.dialog.open(taskInfo, (submitInfo) => {
-          socketTodo.emit('message', submitInfo.result, status, context.meeting.id);
+        microsoftTeams.tasks.startTask(taskInfo, (err, taskDetails) => {
+          socketTodo.emit('message', taskDetails, status, context.meetingId);
         });
       });
     };
