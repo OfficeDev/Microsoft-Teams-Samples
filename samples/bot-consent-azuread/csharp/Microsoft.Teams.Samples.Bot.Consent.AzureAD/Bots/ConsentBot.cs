@@ -208,7 +208,7 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
                         Name = "Sign-In",
                         Content = new OAuthCard
                         {
-                            ConnectionName = "AAD",
+                            ConnectionName = _appSettings.BotAuthConnectionName,
                             Text = "Sign-in!",
                             TokenExchangeResource = new TokenExchangeResource
                             {
@@ -241,7 +241,7 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
                     Name = "Sign-In",
                     Content = new OAuthCard
                     {
-                        ConnectionName = "AAD",
+                        ConnectionName = _appSettings.BotAuthConnectionName,
                         Text = "Sign-in!",
                         TokenExchangeResource = new TokenExchangeResource
                         {
@@ -389,7 +389,7 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
                         Name = "Sign-In",
                         Content = new OAuthCard
                         {
-                            ConnectionName = "AAD",
+                            ConnectionName = _appSettings.BotAuthConnectionName,
                             Text = "Sign-in!",
                             TokenExchangeResource = new TokenExchangeResource
                             {
@@ -445,7 +445,7 @@ namespace Microsoft.Teams.Samples.Bot.Consent.AzureAD
                                 Name = "Sign-In",
                                 Content = new OAuthCard
                                 {
-                                    ConnectionName = "AAD",
+                                    ConnectionName = _appSettings.BotAuthConnectionName,
                                     Text = "Sign-in!",
                                     TokenExchangeResource = new TokenExchangeResource
                                     {
