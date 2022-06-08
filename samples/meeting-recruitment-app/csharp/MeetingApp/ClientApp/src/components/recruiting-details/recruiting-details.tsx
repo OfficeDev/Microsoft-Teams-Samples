@@ -1,5 +1,5 @@
 import React from 'react';
-import * as microsoftTeams from "@microsoft/teams-js";
+import { app } from "@microsoft/teams-js";
 import { Flex, Menu, Button, Text } from '@fluentui/react-northstar'
 import "../recruiting-details/recruiting-details.css"
 import BasicDetails from "./basic-details/basic-details"
@@ -62,8 +62,8 @@ const RecruitingDetails = () => {
 
     // Method to load the questions in the question container.
     const loadQuestions = () => {
-        microsoftTeams.getContext((context) => {
-            getQuestions(context.meetingId!)
+        app.getContext().then((context) => {
+            getQuestions(context.meeting!.id)
                 .then((res) => {
                     console.log(res)
                     const questions = res.data as IQuestionDetails[];
@@ -93,12 +93,12 @@ const RecruitingDetails = () => {
             }
         })
         const feedbackJson = JSON.stringify(feedback);
-        microsoftTeams.getContext((context) => {
+        app.getContext().then((context) => {
             const feedbackDetails: IFeedbackDetails = {
                 meetingId: questionDetails[0].meetingId,
                 candidateEmail: currentCandidateEmail,
                 feedbackJson: feedbackJson,
-                interviewer: context?.userPrincipalName!
+                interviewer: context?.user!.userPrincipalName!
             }
             saveFeedback(feedbackDetails)
                 .then((res) => {
@@ -131,10 +131,10 @@ const RecruitingDetails = () => {
     }
 
     React.useEffect(() => {
-        microsoftTeams.initialize();
-        microsoftTeams.getContext((context) => {
-            setframeContext(context.frameContext);
-            sethostClientType(context.hostClientType);
+        app.initialize();
+        app.getContext().then((context) => {
+            setframeContext(context.page.frameContext);
+            sethostClientType(context.app.host.clientType);
         });
         loadQuestions();
     }, [])

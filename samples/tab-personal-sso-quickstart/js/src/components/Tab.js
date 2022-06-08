@@ -5,6 +5,7 @@ import React from 'react';
 import './App.css';
 import { app, authentication } from "@microsoft/teams-js";
 import { Avatar, Loader } from '@fluentui/react-northstar'
+import * as microsoftTeams from "@microsoft/teams-js";
 
 /**
  * The 'PersonalTab' component renders the main tab content
@@ -38,6 +39,7 @@ class Tab extends React.Component {
   componentDidMount(){
     // Initialize the Microsoft Teams SDK
     app.initialize();
+   // microsoftTeams.initialize();
 
     // Get the user context from Teams and set it in the state
     app.getContext().then((context) => {

@@ -1,10 +1,11 @@
 ﻿let accessToken;
 
 $(document).ready(function () {
-    microsoftTeams.initialize();
+    microsoftTeams.app.initialize();
+    alert("hello");
    
     getClientSideToken()
-        .then((clientSideToken) => {           
+        .then((clientSideToken) => {
             return getServerSideToken(clientSideToken);
         })
         .catch((error) => {
@@ -30,8 +31,6 @@ function requestConsent() {
             $("#consent").hide();
             $("#divError").hide();
             accessToken = data.accessToken;
-            microsoftTeams.getContext((context) => {
-        });
     });
 }
 
@@ -41,12 +40,10 @@ function getToken() {
             url: window.location.origin + "/Auth/Start",
             width: 600,
             height: 535,
-            successCallback: result => {
-                resolve(result);
-            },
-            failureCallback: reason => {  
-                reject(reason);
-            }
+        }).then((result) => {
+            resolve(result);
+        }).catch((error) => {
+            reject(error);
         });
     });
 }
@@ -54,20 +51,18 @@ function getToken() {
 function getClientSideToken() {
 
     return new Promise((resolve, reject) => {
-        microsoftTeams.authentication.getAuthToken({
-            successCallback: (result) => {
-                resolve(result);     
-            },
-            failureCallback: function (error) {                
-                reject("Error getting token: " + error);
-            }
+        microsoftTeams.authentication.getAuthToken().then((result) => {
+            resolve(result);
+        }).catch((error) => {
+            console.log("error" + error);
+            reject("Error getting token: " + error);
         });
     });
 }
 
 function getServerSideToken(clientSideToken) {
     return new Promise((resolve, reject) => {
-        microsoftTeams.getContext((context) => {
+        microsoftTeams.app.getContext().then((context) => {
             var scopes = ["https://graph.microsoft.com/User.Read"];
             fetch('/GetUserAccessToken', {
                 method: 'get',
@@ -84,7 +79,7 @@ function getServerSideToken(clientSideToken) {
                     reject(response.error);
                 }
             })
-            .then((responseJson) => {
+                .then((responseJson) => {
                 if (IsValidJSONString(responseJson)) {
                     if (JSON.parse(responseJson).error)
                         reject(JSON.parse(responseJson).error);

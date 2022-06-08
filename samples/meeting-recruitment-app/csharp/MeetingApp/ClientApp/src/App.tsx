@@ -5,7 +5,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
-import * as microsoftTeams from "@microsoft/teams-js";
+import { app } from "@microsoft/teams-js";
 import { TeamsThemeContext, getContext, ThemeStyle } from 'msteams-ui-components-react';
 import { Provider, teamsTheme, teamsDarkTheme, teamsHighContrastTheme } from '@fluentui/react-northstar'
 import Configuration from './components/configuration';
@@ -31,9 +31,9 @@ class App extends React.Component<{}, IAppState> {
   }
 
   public componentDidMount() {
-    microsoftTeams.initialize();
-    microsoftTeams.getContext((context) => {
-      let theme = context.theme || "";
+    app.initialize();
+    app.getContext().then((context) => {
+      let theme = context.app.theme || "";
       this.updateTheme(theme);
       this.setState({
         theme: theme

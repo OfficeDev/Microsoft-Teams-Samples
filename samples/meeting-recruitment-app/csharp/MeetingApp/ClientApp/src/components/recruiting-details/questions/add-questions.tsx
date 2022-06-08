@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, Button, Checkbox, Text, formTextAreaClassName } from '@fluentui/react-northstar'
 import "../../recruiting-details/recruiting-details.css"
-import * as microsoftTeams from "@microsoft/teams-js";
+import { app, dialog } from "@microsoft/teams-js";
 
 const AddQuestions = (props: any): React.ReactElement => {
     const [questions, setQuestions] = React.useState<any[]>([
@@ -33,11 +33,11 @@ const AddQuestions = (props: any): React.ReactElement => {
     ]);
   
     React.useEffect(() => {
-        microsoftTeams.initialize();
+        app.initialize();
     }, [])
 
     const saveQuestion = () => {
-        microsoftTeams.tasks.submitTask(JSON.stringify(questions));
+        dialog.submit(JSON.stringify(questions));
         return true;
     }
 

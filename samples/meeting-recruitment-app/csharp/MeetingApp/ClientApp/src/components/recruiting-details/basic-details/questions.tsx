@@ -13,7 +13,7 @@ import {
     Loader
 } from '@fluentui/react-northstar'
 import "../../recruiting-details/recruiting-details.css"
-import * as microsoftTeams from "@microsoft/teams-js";
+import { app, dialog } from "@microsoft/teams-js";
 import { IQuestionSet } from "./basic-details.types";
 import { saveQuestions, getQuestions, deleteQuestion as deleteQuestionDetails, editQuestion } from "../services/recruiting-detail.service";
 
@@ -27,26 +27,28 @@ const Questions = (): React.ReactElement => {
     const addQuestionsTaskModule = () => {
         let taskInfo = {
             title: "Questions",
-            height: 300,
-            width: 400,
+            size: {
+                height: 300,
+                width: 400,
+            },
             url: `${window.location.origin}/questions`,
         };
 
-        microsoftTeams.tasks.startTask(taskInfo, (err, questionsJson) => {
-            if (err) {
-                console.log("Some error occurred in the task module")
-                return
-            }
+        dialog.open(taskInfo, (questionsJson: any) => {
+            //if (err) {
+            //    console.log("Some error occurred in the task module")
+            //    return
+            //}
 
             const questionsObject = JSON.parse(questionsJson);
-            microsoftTeams.getContext((context) => {
+            app.getContext().then((context) => {
                 const questDetails: IQuestionSet[] = questionsObject.map((question: any) => {
                     if (question.checked) {
                         // The question details to save.
                         return {
-                            meetingId: context.meetingId!,
+                            meetingId: context.meeting!.id!,
                             question: question.value,
-                            setBy: context.userPrincipalName!,
+                            setBy: context.user!.userPrincipalName!,
                             isDelete: 0
                         };
                     }
@@ -68,21 +70,23 @@ const Questions = (): React.ReactElement => {
     const editQuestionsTaskModule = (editText: string, rowKey: any) => {
         let taskInfo = {
             title: "Questions",
-            height: 300,
-            width: 400,
+            size: {
+                height: 300,
+                width: 400,
+            },
             url: `${window.location.origin}/edit?editText=` + editText,
         };
 
-        microsoftTeams.tasks.startTask(taskInfo, (err, question: string) => {
-            if (err) {
-                console.log("Some error occurred in the task module")
-                return
-            }
-            microsoftTeams.getContext((context) => {
+        dialog.open(taskInfo, (question: any) => {
+            //if (err) {
+            //    console.log("Some error occurred in the task module")
+            //    return
+            //}
+            app.getContext().then((context) => {
                 const questDetails: IQuestionSet = {
-                    meetingId: context.meetingId!,
+                    meetingId: context.meeting!.id!,
                     question: question,
-                    setBy: context.userPrincipalName!,
+                    setBy: context.user!.userPrincipalName!,
                     isDelete: 0,
                     questionId: rowKey
                 };
@@ -103,8 +107,8 @@ const Questions = (): React.ReactElement => {
 
     // Method to load the questions in the question container.
     const loadQuestions = () => {
-        microsoftTeams.getContext((context) => {
-            getQuestions(context.meetingId!)
+        app.getContext().then((context) => {
+            getQuestions(context.meeting!.id!)
                 .then((res) => {
                     console.log(res)
                     const questions = res.data as any[];
@@ -148,7 +152,7 @@ const Questions = (): React.ReactElement => {
         // Setting ratings to show in the UI.
         setRatingsArray(prevItems);
 
-        microsoftTeams.initialize();
+        app.initialize();
         loadQuestions();
     }, [])
 
