@@ -1,0 +1,44 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.11",
+  "version": "1.0.0",
+  "id": "<<Microsoft-App-Id>>",
+  "packageName": "com.microsoft.teams.meetingstranscription",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Meeting Transcription Bot",
+    "full": "Meeting Transcription Bot"
+  },
+  "description": {
+    "short": "<<TODO>>",
+    "full": "<<TODO>>"
+  },
+  "accentColor": "#235EA5",
+  "bots": [
+    {
+      "botId": "<<Microsoft-App-Id>>",
+      "scopes": [ "groupchat" ],
+      "isNotificationOnly": true
+    }
+  ],
+  "validDomains": [
+    "*.ngrok.io"
+  ],
+  "permissions": [ "messageTeamMembers" ],
+  "webApplicationInfo": {
+    "id": "<<Microsoft-App-Id>>",
+    "resource": "https://RscPermission",
+    "applicationPermissions": [
+      "OnlineMeeting.ReadBasic.Chat"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/index.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <title>Screen</title>
+    <script>
+        //$(document).ready(function () {
+        //    var element = document.getElementById("transcription");
+        //    element.innerHTML = "Hunaid"
+        //});
+    </script>
+</head>
+
+<body>
+    <p>Transcription details: </p>
+    <pre id="transcription">@ViewBag.Transcripts</pre>
+</body>
+
+</html>
