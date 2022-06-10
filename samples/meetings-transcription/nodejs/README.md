@@ -105,7 +105,7 @@ Click on Add Permissions to commit your changes.
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/release-management/nodejs`
+2) In a terminal, navigate to `samples/meetings-transcription/nodejs`
 
 3) Install modules
 
@@ -119,13 +119,12 @@ Click on Add Permissions to commit your changes.
     ```bash
     npm start
     ```
-
-**NOTE: If you are not getting incoming request from Azure DevOps make sure that service webhook is in *Enabled* state.**
-
+    
+**NOTE: If you are not getting option to start transcript. Make sure it is enabled from [Teams Admin center](https://admin.teams.microsoft.com). Under `Meetings -> Meeting Policies -> Applied policy(Default is Global)-> Recording & Transcription -> Transcription`**
 
 ## Interacting with the bot.
-- Login into [Azure DevOps](https://dev.azure.com) and open the project where custom process was applied.
-- Create a new workitem -> Tasks, provide comma seprated email ids in *StakeHolderTeam* (NOTE: The email should belong to tenant where we register Application in step 4)
-- Save
-- Bot will create the group chat with members you added and send the Task details.
+- After uploading the manifest add the bot into meeting.
+- Join meeting and `Start Transcript`
+- Once done, leave the meeting.
+- You will get the card to open task module and see the latest transcript created.
 
