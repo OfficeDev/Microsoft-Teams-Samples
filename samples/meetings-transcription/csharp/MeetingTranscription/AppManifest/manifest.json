@@ -15,12 +15,12 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "Meeting Transcription Bot",
-    "full": "Meeting Transcription Bot"
+    "short": "Meeting Transcript Bot",
+    "full": "Meeting Transcript Bot"
   },
   "description": {
-    "short": "<<TODO>>",
-    "full": "<<TODO>>"
+    "short": "Bot to show the transcript of the meeting using Microsoft Graph API.",
+    "full": "This is a sample application which demonstrates how to get Transcript using Graph API and show it in the task module."
   },
   "accentColor": "#235EA5",
   "bots": [

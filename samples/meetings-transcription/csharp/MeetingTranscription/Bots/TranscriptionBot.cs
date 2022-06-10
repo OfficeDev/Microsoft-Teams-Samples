@@ -115,7 +115,7 @@ namespace MeetingTranscription.Bots
                             Url = $"{this.azureSettings.Value.AppBaseUrl}/home?meetingId={meetingId}",
                             Height = 600,
                             Width = 600,
-                            Title = "Upload file",
+                            Title = "Meeting Transcript",
                         },
                     }
                 };
@@ -134,7 +134,7 @@ namespace MeetingTranscription.Bots
                             Url = this.azureSettings.Value.AppBaseUrl + "/home",
                             Height = 350,
                             Width = 350,
-                            Title = "Upload file",
+                            Title = "Meeting Transcript",
                         },
                     }
                 };
