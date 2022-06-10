@@ -25,6 +25,7 @@ builder.Services.AddOptions<AzureSettings>()
     botOptions.MicrosoftAppPassword = configuration.GetValue<string>("MicrosoftAppPassword");
     botOptions.MicrosoftAppTenantId = configuration.GetValue<string>("MicrosoftAppTenantId");
     botOptions.AppBaseUrl = configuration.GetValue<string>("AppBaseUrl");
+    botOptions.UserId = configuration.GetValue<string>("UserId");
 });
 
 builder.Services.AddHttpClient().AddControllers().AddNewtonsoftJson();

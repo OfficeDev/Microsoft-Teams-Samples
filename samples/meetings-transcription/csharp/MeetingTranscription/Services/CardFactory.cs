@@ -1,4 +1,8 @@
-﻿namespace MeetingTranscription.Services
+﻿// <copyright file="CardFactory.cs" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyright>
+
+namespace MeetingTranscription.Services
 {
     using System.IO;
     using AdaptiveCards;
@@ -28,6 +32,20 @@
             };
 
             return adaptiveCardAttachment;
+        }
+
+        /// <inheritdoc/>
+        public Attachment CreateNotFoundCardAttachement()
+        {
+            var cardJSON = File.ReadAllText(Path.Combine(".", "Resources", "NotFoundCard.json"));
+            var adaptiveCardAttachment = new Attachment
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = JsonConvert.DeserializeObject(cardJSON),
+            };
+
+            return adaptiveCardAttachment;
+
         }
     }
 }

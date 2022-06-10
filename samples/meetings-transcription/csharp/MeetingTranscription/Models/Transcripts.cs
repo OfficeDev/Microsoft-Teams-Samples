@@ -1,6 +1,6 @@
-﻿// <copyright file="AzureSettings.cs" company="Microsoft">
+﻿// <copyright file="Transcripts.cs" company="Microsoft">
 // Copyright (c) Microsoft. All rights reserved.
-// </copyright
+// </copyright>
 
 namespace MeetingTranscription.Models
 {

@@ -9,18 +9,12 @@ namespace MeetingTranscription.Helpers
     using MeetingTranscription.Models.Configuration;
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Net.Http.Headers;
     using System.Threading.Tasks;
     using System.Net.Http;
-    using System.Web;
-    using Newtonsoft.Json;
-    using Microsoft.Bot.Schema;
     using MeetingTranscription.Models;
     using Newtonsoft.Json.Linq;
-    using Microsoft.Bot.Builder;
-    using System.Collections.Concurrent;
 
     public class GraphHelper
     {
@@ -54,12 +48,17 @@ namespace MeetingTranscription.Helpers
             return result.AccessToken;
         }
 
-        public async Task<string> GetMeetingTranscriptionsAsync(string meetingId, string userId)
+        /// <summary>
+        /// Gets the meeting transcript for the passed meeting Id.
+        /// </summary>
+        /// <param name="meetingId">Id of meeting.</param>
+        /// <returns>Meeting transcript if any otherwise return empty string.</returns>
+        public async Task<string> GetMeetingTranscriptionsAsync(string meetingId)
         {
             try
             {
                 string access_Token = await GetToken();
-                var getAllTranscriptsEndpoint = $"{graphBetaEndpoint}/users/{userId}/onlineMeetings/{meetingId}/transcripts";
+                var getAllTranscriptsEndpoint = $"{graphBetaEndpoint}/users/{this.azureSettings.Value.UserId}/onlineMeetings/{meetingId}/transcripts";
                 var getAllTranscriptReq = new HttpRequestMessage(HttpMethod.Get, getAllTranscriptsEndpoint);
                 getAllTranscriptReq.Headers.Authorization = new AuthenticationHeaderValue("Bearer", access_Token);
 
@@ -81,7 +80,7 @@ namespace MeetingTranscription.Helpers
                 }
                 else
                 {
-                    return "Transcripts not found";
+                    return string.Empty;
                 }
             }
             catch (Exception ex)

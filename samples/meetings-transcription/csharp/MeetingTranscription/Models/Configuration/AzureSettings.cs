@@ -1,6 +1,6 @@
 ﻿// <copyright file="AzureSettings.cs" company="Microsoft">
 // Copyright (c) Microsoft. All rights reserved.
-// </copyrigh
+// </copyright>
 
 namespace MeetingTranscription.Models.Configuration
 {
@@ -21,6 +21,14 @@ namespace MeetingTranscription.Models.Configuration
         /// </summary>
         public string MicrosoftAppTenantId { get; set; }
 
+        /// <summary>
+        /// App base Url.
+        /// </summary>
         public string AppBaseUrl { get; set; }
+
+        /// <summary>
+        /// Id of User for which policy is granted.
+        /// </summary>
+        public string UserId { get; set; }
     }
 }
