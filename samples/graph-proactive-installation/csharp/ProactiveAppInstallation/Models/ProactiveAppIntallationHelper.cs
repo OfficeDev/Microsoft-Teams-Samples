@@ -64,7 +64,7 @@ namespace ProactiveBot.Bots
                 {
                     await TriggerConversationUpdate(Userid, MicrosoftTenantId, MicrosoftAppId, MicrosoftAppPassword, MicrosoftTeamAppid);
                 }
-                else throw ex;
+                else throw;
             }
         }
 
@@ -91,7 +91,7 @@ namespace ProactiveBot.Bots
             }
             catch (Microsoft.Graph.ServiceException ex)
             {
-                throw ex;
+                throw;
             }
         }
 
