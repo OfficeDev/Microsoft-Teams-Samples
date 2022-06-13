@@ -12,7 +12,7 @@ class ActivityBot extends TeamsActivityHandler {
             await context.sendActivity(MessageFactory.text(replyText, replyText));
         });
 
-        // Activity handler for task module event.
+        // Activity handler for task module fetch event.
         this.handleTeamsTaskModuleFetch = async (context, taskModuleRequest) => {
           try {
             var meetingId = taskModuleRequest.data.meetingId;

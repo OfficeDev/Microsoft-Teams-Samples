@@ -4,7 +4,6 @@ require('isomorphic-fetch');
 class GraphHelper {
     constructor() {
         this._token = this.GetAccessToken();
-        this.graphBetaEndpoint = "https://graph.microsoft.com/beta";
     }
 
     /**
@@ -50,7 +49,7 @@ class GraphHelper {
         try
         {
             var access_Token = await this._token;
-            var getAllTranscriptsEndpoint = `${this.graphBetaEndpoint}/users/${process.env.UserId}/onlineMeetings/${meetingId}/transcripts`;
+            var getAllTranscriptsEndpoint = `${process.env.GraphApiEndpoint}/users/${process.env.UserId}/onlineMeetings/${meetingId}/transcripts`;
             const getAllTranscriptsConfig = {
                 method: 'get',
                 url: getAllTranscriptsEndpoint,

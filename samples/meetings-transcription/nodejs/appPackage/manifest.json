@@ -31,7 +31,8 @@
     }
   ],
   "validDomains": [
-    "*.ngrok.io"
+    "*.ngrok.io",
+    "<<App-Domain>>"
   ],
   "permissions": [ "messageTeamMembers" ],
   "webApplicationInfo": {
