@@ -60,10 +60,11 @@ To be able to use an identity provider, first you have to register your applicat
 ### Changing app settings
 
 In order to get this sample running in Visual Studio properly, you'll need to populate appsettings.json with some values:
-    - `MicrosoftAppId` - This is the Azure AD Client (application) ID that will be provided to you when you create the Bot Service resource in the Azure AD Portal
-    - `MicrosoftAppPassword` - Again, the Azure Portal will provide this value when you create your Bot Service resource
-    - `BaseUrl` - This is your tunneling URL that will forward traffic to your locally running instance of the Bot. For example it should look like `https://jalew123.eu.ngrok.io/`
-    - `BotAuthConnectionName` - This is the OAuth connection name that you will provision when you are configuring the bot. It is highly likely this will be `AAD`
+
+    1. `MicrosoftAppId` - This is the Azure AD Client (application) ID that will be provided to you when you create the Bot Service resource in the Azure AD Portal
+    1. `MicrosoftAppPassword` - Again, the Azure Portal will provide this value when you create your Bot Service resource
+    1. `BaseUrl` - This is your tunneling URL that will forward traffic to your locally running instance of the Bot. For example it should look like `https://jalew123.eu.ngrok.io/`
+    1. `BotAuthConnectionName` - This is the OAuth connection name that you will provision when you are configuring the bot. It is highly likely this will be `AAD`
 
 ### [Using Azure AD](#using-azure-ad)
 
