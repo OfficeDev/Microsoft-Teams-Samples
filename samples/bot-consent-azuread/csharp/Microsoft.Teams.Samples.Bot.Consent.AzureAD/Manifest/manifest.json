@@ -25,7 +25,7 @@
   "accentColor": "#60A18E",
   "bots": [
     {
-      "botId": "00000000-0000-0000-0000-000000000000",
+      "botId": "<<REGISTERED_BOT_ID>>",
       "needsChannelSelector": false,
       "isNotificationOnly": false,
       "scopes": [
@@ -34,9 +34,12 @@
     }
   ],
   "permissions": [],
-  "validDomains": [],
+  "validDomains": [
+    "<<BASE_URI_DOMAIN>>",
+    "token.botframework.com"
+  ],
   "webApplicationInfo": {
-    "id": "00000000-0000-0000-0000-000000000000",
-    "resource": "api://domain/bot-id00000000-0000-0000-0000-000000000000"
+    "id": "<<REGISTERED_BOT_ID>>",
+    "resource": "api://<<BASE_URI_DOMAIN>>/botid-<<REGISTERED_BOT_ID>>"
   }
 }
