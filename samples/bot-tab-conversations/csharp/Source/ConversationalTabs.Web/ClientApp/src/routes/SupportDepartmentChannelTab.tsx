@@ -40,9 +40,10 @@ function SupportDepartmentChannelTab() {
     ['getSupportDepartment', { entityId }],
     () => getSupportDepartment(entityId),
     {
-      onSuccess: () => {
-        setUserHasConsented(false);
-      },
+      retry: (failureCount: number, error: Error) =>
+        failureCount <= 3 &&
+        isApiErrorCode(ApiErrorCode.AuthConsentRequired, error) &&
+        userHasConsented,
     },
   );
 
@@ -58,7 +59,10 @@ function SupportDepartmentChannelTab() {
 
   const getErrorNode = (): ReactNode => {
     if (
-      isApiErrorCode(ApiErrorCode.AuthConsentRequired, supportDepartment.error) &&
+      isApiErrorCode(
+        ApiErrorCode.AuthConsentRequired,
+        supportDepartment.error,
+      ) &&
       !userHasConsented
     ) {
       return <ConsentRequest callback={consentCallback} />;

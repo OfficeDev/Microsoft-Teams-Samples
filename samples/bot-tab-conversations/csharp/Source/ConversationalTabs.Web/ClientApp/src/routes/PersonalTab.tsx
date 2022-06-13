@@ -18,6 +18,10 @@ function PersonalTab() {
       onSuccess: () => {
         setUserHasConsented(false);
       },
+      retry: (failureCount: number, error: Error) =>
+        failureCount <= 3 &&
+        isApiErrorCode(ApiErrorCode.AuthConsentRequired, error) &&
+        userHasConsented,
     },
   );
 

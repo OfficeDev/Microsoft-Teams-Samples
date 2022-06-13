@@ -1,6 +1,13 @@
 import { ReactNode, useEffect, useState } from 'react';
 import * as microsoftTeams from '@microsoft/teams-js';
-import { Flex, Form, FormInput, Header, Text } from '@fluentui/react-northstar';
+import {
+  Flex,
+  Form,
+  FormInput,
+  Header,
+  Loader,
+  Text,
+} from '@fluentui/react-northstar';
 import { useMutation } from 'react-query';
 import { createSupportDepartment } from 'api';
 import { ConsentRequest } from 'components/ConsentRequest';
@@ -20,8 +27,15 @@ function Configure() {
     SupportDepartment,
     Error,
     SupportDepartmentInput
-  >((supportDepartmentInput: SupportDepartmentInput) =>
-    createSupportDepartment(supportDepartmentInput),
+  >(
+    (supportDepartmentInput: SupportDepartmentInput) =>
+      createSupportDepartment(supportDepartmentInput),
+    {
+      retry: (failureCount: number, error: Error) =>
+        failureCount <= 3 &&
+        isApiErrorCode(ApiErrorCode.AuthConsentRequired, error) &&
+        userHasConsented,
+    },
   );
 
   useEffect(() => {
@@ -37,7 +51,6 @@ function Configure() {
   useEffect(() => {
     if (departmentTitle !== '' && departmentDescription !== '') {
       microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
-        setUserHasConsented(false);
         microsoftTeams.getContext((context) => {
           createSupportDepartmentMutation.mutate(
             {
@@ -81,7 +94,12 @@ function Configure() {
         microsoftTeams.settings.setValidityState(true);
       }
     }
-  }, [departmentTitle, departmentDescription, createSupportDepartmentMutation, userHasConsented]);
+  }, [
+    departmentTitle,
+    departmentDescription,
+    createSupportDepartmentMutation,
+    userHasConsented,
+  ]);
 
   const consentCallback = (error?: string, result?: string) => {
     if (error) {
@@ -113,7 +131,8 @@ function Configure() {
       isApiErrorCode(
         ApiErrorCode.AuthConsentRequired,
         createSupportDepartmentMutation.error,
-      )
+      ) &&
+      !userHasConsented
     ) {
       return <ConsentRequest callback={consentCallback} />;
     } else {
@@ -131,6 +150,7 @@ function Configure() {
       {!userHasConsented &&
         createSupportDepartmentMutation.isError &&
         getErrorNode()}
+      {createSupportDepartmentMutation.isLoading && <Loader />}
       {(!createSupportDepartmentMutation.isError || userHasConsented) && (
         <>
           <Header content="Create support department" />

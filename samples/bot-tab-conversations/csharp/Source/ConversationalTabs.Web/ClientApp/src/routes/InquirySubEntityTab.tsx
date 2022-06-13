@@ -43,8 +43,11 @@ function InquirySubEntityTab() {
           const successful = openConversation();
           setOnLoadConversationOpened(successful);
         }
-        setUserHasConsented(false);
       },
+      retry: (failureCount: number, error: Error) =>
+        failureCount <= 3 &&
+        isApiErrorCode(ApiErrorCode.AuthConsentRequired, error) &&
+        userHasConsented,
     },
   );
 
@@ -57,8 +60,11 @@ function InquirySubEntityTab() {
           const successful = openConversation();
           setOnLoadConversationOpened(successful);
         }
-        setUserHasConsented(false);
       },
+      retry: (failureCount: number, error: Error) =>
+        failureCount <= 3 &&
+        isApiErrorCode(ApiErrorCode.AuthConsentRequired, error) &&
+        userHasConsented,
     },
   );
 
