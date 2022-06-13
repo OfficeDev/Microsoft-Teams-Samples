@@ -45,7 +45,6 @@ namespace MeetingTranscription.Services
             };
 
             return adaptiveCardAttachment;
-
         }
     }
 }

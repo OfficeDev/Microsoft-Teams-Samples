@@ -33,7 +33,7 @@ namespace MeetingTranscription.Controllers
         }
 
         /// <summary>
-        /// Returns view.
+        /// Returns view to be displayed in Task Module.
         /// </summary>
         /// <param name="meetingId">Id of the meeting.</param>
         /// <returns></returns>

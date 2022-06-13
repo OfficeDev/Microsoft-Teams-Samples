@@ -57,9 +57,10 @@ namespace MeetingTranscription.Bots
         /// <summary>
         /// Activity handler for on message activity.
         /// </summary>
-        /// <param name="turnContext"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <param name="turnContext">A strongly-typed context object for this turn.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects
+        /// or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             var replyText = $"Echo: {turnContext.Activity.Text}";
@@ -69,20 +70,21 @@ namespace MeetingTranscription.Bots
         /// <summary>
         /// Activity handler for meeting end event.
         /// </summary>
-        /// <param name="meeting"></param>
-        /// <param name="turnContext"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <param name="meeting">The details of the meeting.</param>
+        /// <param name="turnContext">A strongly-typed context object for this turn.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects
+        /// or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnTeamsMeetingEndAsync(MeetingEndEventDetails meeting, ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
         {
-            var meet = await TeamsInfo.GetMeetingInfoAsync(turnContext);
+            var meetingInfo = await TeamsInfo.GetMeetingInfoAsync(turnContext);
 
-            var result = await graphHelper.GetMeetingTranscriptionsAsync(meet.Details.MsGraphResourceId);
+            var result = await graphHelper.GetMeetingTranscriptionsAsync(meetingInfo.Details.MsGraphResourceId);
             if (result != string.Empty)
             {
-                transcriptsDictionary.AddOrUpdate(meet.Details.MsGraphResourceId, result, (key, newValue) => result);
+                transcriptsDictionary.AddOrUpdate(meetingInfo.Details.MsGraphResourceId, result, (key, newValue) => result);
 
-                var attachment = this.cardFactory.CreateAdaptiveCardAttachement(new { MeetingId = meet.Details.MsGraphResourceId });
+                var attachment = this.cardFactory.CreateAdaptiveCardAttachement(new { MeetingId = meetingInfo.Details.MsGraphResourceId });
                 await turnContext.SendActivityAsync(MessageFactory.Attachment(attachment), cancellationToken);
             }
             else
@@ -93,12 +95,13 @@ namespace MeetingTranscription.Bots
         }
 
         /// <summary>
-        /// Activity handler for Task module fethc event.
+        /// Activity handler for Task module fetch event.
         /// </summary>
-        /// <param name="turnContext"></param>
-        /// <param name="taskModuleRequest"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <param name="turnContext">A strongly-typed context object for this turn.</param>
+        /// <param name="taskModuleRequest">The task module invoke request value payload.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects
+        /// or threads to receive notice of cancellation.</param>
+        /// <returns>A Task Module Response for the request.</returns>
         protected override async Task<TaskModuleResponse> OnTeamsTaskModuleFetchAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
             try

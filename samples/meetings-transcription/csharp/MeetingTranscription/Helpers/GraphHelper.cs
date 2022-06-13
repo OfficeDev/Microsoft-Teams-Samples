@@ -23,7 +23,6 @@ namespace MeetingTranscription.Helpers
         /// </summary>
         private readonly IOptions<AzureSettings> azureSettings;
 
-        const string graphBetaEndpoint = "https://graph.microsoft.com/beta";
         public GraphHelper(IOptions<AzureSettings> azureSettings)
         {
             this.azureSettings = azureSettings;
@@ -36,10 +35,10 @@ namespace MeetingTranscription.Helpers
         public async Task<string> GetToken()
         {
             IConfidentialClientApplication app = ConfidentialClientApplicationBuilder.Create(this.azureSettings.Value.MicrosoftAppId)
-                                                    .WithClientSecret(this.azureSettings.Value.MicrosoftAppPassword)
-                                                    .WithAuthority($"https://login.microsoftonline.com/{this.azureSettings.Value.MicrosoftAppTenantId}")
-                                                    .WithRedirectUri("https://daemon")
-                                                    .Build();
+                .WithClientSecret(this.azureSettings.Value.MicrosoftAppPassword)
+                .WithAuthority($"https://login.microsoftonline.com/{this.azureSettings.Value.MicrosoftAppTenantId}")
+                .WithRedirectUri("https://daemon")
+                .Build();
 
             // TeamsAppInstallation.ReadWriteForChat.All Chat.Create User.Read.All TeamsAppInstallation.ReadWriteForChat.All
             string[] scopes = new string[] { "https://graph.microsoft.com/.default" };
@@ -58,7 +57,7 @@ namespace MeetingTranscription.Helpers
             try
             {
                 string access_Token = await GetToken();
-                var getAllTranscriptsEndpoint = $"{graphBetaEndpoint}/users/{this.azureSettings.Value.UserId}/onlineMeetings/{meetingId}/transcripts";
+                var getAllTranscriptsEndpoint = $"{this.azureSettings.Value.GraphApiEndpoint}/users/{this.azureSettings.Value.UserId}/onlineMeetings/{meetingId}/transcripts";
                 var getAllTranscriptReq = new HttpRequestMessage(HttpMethod.Get, getAllTranscriptsEndpoint);
                 getAllTranscriptReq.Headers.Authorization = new AuthenticationHeaderValue("Bearer", access_Token);
 

@@ -30,5 +30,10 @@ namespace MeetingTranscription.Models.Configuration
         /// Id of User for which policy is granted.
         /// </summary>
         public string UserId { get; set; }
+
+        /// <summary>
+        /// Graph API endpoint.
+        /// </summary>
+        public string GraphApiEndpoint { get; set; }
     }
 }

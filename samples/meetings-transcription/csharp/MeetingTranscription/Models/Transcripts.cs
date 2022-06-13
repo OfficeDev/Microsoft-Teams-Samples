@@ -14,7 +14,7 @@ namespace MeetingTranscription.Models
         public string Id { get; set; }
 
         /// <summary>
-        /// Date of trancript.
+        /// Created date of trancript.
         /// </summary>
         public DateTime CreatedDateTime { get; set; }
     }

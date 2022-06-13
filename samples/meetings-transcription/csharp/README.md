@@ -1,6 +1,6 @@
 ﻿---
 page_type: sample
-description: This is a sample app with capability to send notification when user creates workitem in [Azure DevOps](https://dev.azure.com) via webhooks.
+description: This is a sample application which demonstrates how to get Transcript using Graph API and show it in the task module.
 products:
 - office-teams
 - office
@@ -14,7 +14,7 @@ createdDate: "10-06-2022 00:02:15"
 
 # Bot to show the transcript of the meeting using Microsoft Graph API.
 
-Bot to show the transcript of the meeting using Microsoft Graph API.
+This is a sample application which demonstrates how to get Transcript using Graph API and show it in the task module.
 
 ## Key features
 
@@ -96,7 +96,7 @@ Click on Add Permissions to commit your changes.
 
 
 ### 5. Update the appsettings.json
--  Update the `appsettings.json` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` and `MicrosoftAppTenantId` and `AppBaseUrl` and `UserId` (Note that the MicrosoftAppId is the AppId created in step 2 , the MicrosoftAppPassword is referred to as the "client secret" in step 2 and you can always create a new client secret anytime., MicrosoftAppTenantId is reffered to as Directory tenant Id in step 2, AppBaseUrl is the URL that you get in step 1 after running ngrok, UserId is the Id of user you to grant the policy in step 3). 
+-  Update the `appsettings.json` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` and `MicrosoftAppTenantId` and `AppBaseUrl` and `UserId` (Note that the MicrosoftAppId is the AppId created in step 2 , the MicrosoftAppPassword is referred to as the "client secret" in step 2 and you can always create a new client secret anytime., MicrosoftAppTenantId is reffered to as Directory tenant Id in step 2, AppBaseUrl is the URL that you get in step 1 after running ngrok, UserId of the user used while granting the policy in step 3). 
 
 
 ### 6. Manually update the manifest.json
