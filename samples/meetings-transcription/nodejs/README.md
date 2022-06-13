@@ -19,7 +19,14 @@ This is a sample application which demonstrates how to get Transcript using Grap
 
 ## Key features
 
+1. Schedule the meeting and add "Meeting Transcript Bot in it.
+2. Once everyone join, `Start Transcript`.
+![Start Transcript](Images/StartTranscript.PNG)
+3. As you are done with discussion you can leave the meeting.
+![Leave Meeting](Images/LeaveMeeting.PNG)
+4. Meeting Transcript Bot will sent a card to open task module as you end the meeting.
 ![Meeting Transcript Card](Images/MeetingTranscriptCard.PNG)
+5. After clicking `View Transcript` button, you will see Transcript in the open task module.
 ![Transcript Task Module](Images/TranscriptTaskModule.PNG)
 
 
