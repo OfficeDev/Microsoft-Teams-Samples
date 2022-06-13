@@ -62,7 +62,7 @@ This sample can be run locally but you'll need to set up some environment variab
 MicrosoftAppId=00000000-0000-0000-0000-000000000000
 MicrosoftAppPassword=YourBotAppPassword
 BaseUrl=https://########.ngrok.io
-BotAuthConnectionName=AAD
+OAuthConnectionName=AAD
 ```
 
 Where:
@@ -70,7 +70,7 @@ Where:
     1. `MicrosoftAppId` - This is the Azure AD Client (application) ID that will be provided to you when you create the Bot Service resource in the Azure AD Portal
     2. `MicrosoftAppPassword` - Again, the Azure Portal will provide this value when you create your Bot Service resource
     3. `BaseUrl` - This is your tunneling URL that will forward traffic to your locally running instance of the Bot. For example it should look like `https://jalew123.eu.ngrok.io/`
-    4. `BotAuthConnectionName` - This is the OAuth connection name that you will provision when you are configuring the bot. It is highly likely this will be `AAD`
+    4. `OAuthConnectionName` - This is the OAuth connection name that you will provision when you are configuring the bot. It is highly likely this will be `AAD`
 
 ### [Using Azure AD](#using-azure-ad)
 
@@ -163,7 +163,7 @@ Notes:
     1. For **Scopes**, enter `User.Read`.
 
 1. Click **Save**.
-1. In appsettings.json, set `BotAuthConnectionName` to the name that you chose for this OAuth connection (probably "AAD")
+1. In your .env file, set `OAuthConnectionName` to the name that you chose for this OAuth connection (probably "AAD")
 
 ### Testing the OAuth connections
 
