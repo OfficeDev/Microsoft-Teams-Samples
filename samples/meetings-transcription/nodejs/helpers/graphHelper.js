@@ -59,7 +59,6 @@ class GraphHelper {
             }
 
             var transcripts = (await axios(getAllTranscriptsConfig)).data.value;
-            
 
             if (transcripts.length > 0)
             {
