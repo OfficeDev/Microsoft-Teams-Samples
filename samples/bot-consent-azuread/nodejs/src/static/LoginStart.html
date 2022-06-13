@@ -4,12 +4,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script type="text/javascript">
 
-
-
-
-
         async function loadPage() {
-            console.log("inside loadPage function on LoginStart.html");
             var urlParams = new URLSearchParams(window.location.search);
             var userConsent = urlParams.get('userConsent');
             var appId = urlParams.get('appId');
@@ -34,15 +29,10 @@
 
                 const clientApp = new msal.PublicClientApplication(msalConfig);
 
-                redirectAuth = async () => {
-
                 await clientApp.handleRedirectPromise();
 
                 const accounts = clientApp.getAllAccounts();
                 clientApp.loginRedirect(requestObj);
-                }
-
-                $(this.redirectAuth);
 
             }
             else
@@ -52,7 +42,7 @@
             }
         }
         
-        $(this.loadPage());
+        $(loadPage());
 
     
     </script>

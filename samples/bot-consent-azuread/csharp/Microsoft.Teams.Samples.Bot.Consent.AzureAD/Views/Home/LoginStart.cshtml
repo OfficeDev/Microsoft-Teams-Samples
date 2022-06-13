@@ -4,12 +4,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script type="text/javascript">
 
-
-
-
-
         async function loadPage() {
-            console.log("inside loadPage function on LoginStart.html");
             var urlParams = new URLSearchParams(window.location.search);
             var userConsent = urlParams.get('userConsent');
             var appId = urlParams.get('appId');
@@ -23,7 +18,7 @@
                 const msalConfig = {
                     auth: {
                         clientId: appId,
-                        redirectUri: window.location.origin + "/loginend"
+                        redirectUri: window.location.origin + "/LoginEnd.html"
                     }
                 };
 
@@ -34,25 +29,20 @@
 
                 const clientApp = new msal.PublicClientApplication(msalConfig);
 
-                redirectAuth = async () => {
-
                 await clientApp.handleRedirectPromise();
 
                 const accounts = clientApp.getAllAccounts();
                 clientApp.loginRedirect(requestObj);
-                }
-
-                $(this.redirectAuth);
 
             }
             else
             {
                 console.log("doing the redirect...");
-                window.location.assign("https://login.microsoftonline.com/common/adminconsent?client_id=" + appId + "&redirect_uri=" + window.location.origin + "/loginend");
+                window.location.assign("https://login.microsoftonline.com/common/adminconsent?client_id=" + appId + "&redirect_uri=" + encodeURIComponent(window.location.origin + "/LoginEnd.html"));
             }
         }
         
-        $(this.loadPage());
+        $(loadPage());
 
     
     </script>

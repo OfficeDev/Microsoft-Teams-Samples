@@ -2,43 +2,24 @@
 <p>
     <div>
     </div>
-    <script src="https://statics.teams.microsoft.com/sdk/v1.5.2/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.16.1/js/msal-browser.js"></script>
 
     <script type="text/javascript">
-    //process the result and close the authentication page down...
-
-    initialiseTeams = () => {
-            let rejectPromise = null;
-            let timeout = null;
-
-            const promise = new Promise((resolve, reject) => {
-                rejectPromise = reject;
-                microsoftTeams.initialize(() => {
-                    console.log("Teams has initialised");
-                    window.clearTimeout(timeout);
-                    resolve(true);
-                }
-                )
-            });
-            timeout = window.setTimeout(() => {
-                rejectPromise("Teams Initialise Timeout");
-            }, 2000);
-            return promise;
-        }
-        
+        //process the result and close the authentication page down...    
         async function loadPage() {
-            await initialiseTeams();
+            await microsoftTeams.app.initialize();
+
             var urlParams = new URLSearchParams(window.location.search);
             var adminConsent = urlParams.get('admin_consent');
             var error = urlParams.get('error');
+
+            //Get AppId from local storage - this value doesn't change so could be from config instead
             var appId = window.localStorage.getItem("microsoftAppId");
-            
 
             if (error) {
                 //if admin consent fails, then notify the bot
-                console.log(urlParams);
                 microsoftTeams.authentication.notifyFailure("ConsentFailed");
             }
             if (adminConsent == 'True') {
@@ -46,49 +27,25 @@
                 microsoftTeams.authentication.notifySuccess("AdminConsent");
             }
             
-            console.log("here");
             //do the msal processing
-
             const msalConfig = {
                 auth: {
-                    //todo: ask Scott about appId here...
                     clientId: appId,
                     redirectUri: window.location.origin + "/LoginEnd.html",
                     navigateToLoginRequestUrl: false
                 }
             };
 
-            //MSAL ClientApp is initalized with msalConfig options
+            //MSAL ClientApp is initialized with msalConfig options
             const clientApp = new msal.PublicClientApplication(msalConfig);
 
-            //this function handles the RedirectPromise and provides us with an Access Token
-
-
-            handleLoginPageLoad = async () => {
-
-                clientApp.handleRedirectPromise().then((response) => {
-                    window.localStorage.setItem("userToken", response.accessToken);
-                    //this function notifies success down to the Teams client and closes the authentication window
-                    microsoftTeams.authentication.notifySuccess("UserConsent");
-
-                })};
-
-            handleLoginPageLoad();
-
-
+            await clientApp.handleRedirectPromise();
             
-
-             
-            
+            window.localStorage.setItem("userToken", response.accessToken);  
+            microsoftTeams.authentication.notifySuccess("UserConsent");
         }
 
-        
-        
-        $(this.loadPage());
-
-
-        
-
+        $(loadPage());
     
     </script>
 </p>
