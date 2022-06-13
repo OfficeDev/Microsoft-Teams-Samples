@@ -1,4 +1,4 @@
-﻿---
+---
 page_type: sample
 description: This is a sample application which demonstrates how to get Transcript using Graph API and show it in the task module.
 products:
