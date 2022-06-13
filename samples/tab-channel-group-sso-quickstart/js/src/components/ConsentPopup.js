@@ -14,35 +14,34 @@ class ConsentPopup extends React.Component {
     componentDidMount() {
 
       // Initialize the Microsoft Teams SDK
-      microsoftTeams.initialize();
+      microsoftTeams.app.initialize().then(() => {
+        // Get the user context in order to extract the tenant ID
+        microsoftTeams.app.getContext().then((context) => {
 
-      // Get the user context in order to extract the tenant ID
-      microsoftTeams.getContext((context, error) => {
+          let tenant = context.user.tenant.id; //Tenant ID of the logged in user
+          let client_id = process.env.REACT_APP_AZURE_APP_REGISTRATION_ID; //Client ID of the Azure AD app registration ( may be from different tenant for multitenant apps)
 
-        let tenant = context['tid']; //Tenant ID of the logged in user
-        let client_id = process.env.REACT_APP_AZURE_APP_REGISTRATION_ID; //Client ID of the Azure AD app registration ( may be from different tenant for multitenant apps)
+          //Form a query for the Azure implicit grant authorization flow
+          //https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-implicit-grant-flow      
+          let queryParams = {
+              tenant: `${tenant}`,
+              client_id: `${client_id}`,
+              response_type: "token", //token_id in other samples is only needed if using open ID
+              scope: "https://graph.microsoft.com/User.Read",
+              redirect_uri: window.location.origin + "/auth-end",
+              nonce: crypto.randomBytes(16).toString('base64')
+          }
+          
+          let url = `https://login.microsoftonline.com/${tenant}/oauth2/v2.0/authorize?`;
+          queryParams = new URLSearchParams(queryParams).toString();
+          let authorizeEndpoint = url + queryParams;
+          
+          //Redirect to the Azure authorization endpoint. When that flow completes, the user will be directed to auth-end
+          //Go to ClosePopup.js
+          window.location.assign(authorizeEndpoint);
 
-        //Form a query for the Azure implicit grant authorization flow
-        //https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-implicit-grant-flow      
-        let queryParams = {
-            tenant: `${tenant}`,
-            client_id: `${client_id}`,
-            response_type: "token", //token_id in other samples is only needed if using open ID
-            scope: "https://graph.microsoft.com/User.Read",
-            redirect_uri: window.location.origin + "/auth-end",
-            nonce: crypto.randomBytes(16).toString('base64')
-        }
-        
-        let url = `https://login.microsoftonline.com/${tenant}/oauth2/v2.0/authorize?`;
-        queryParams = new URLSearchParams(queryParams).toString();
-        let authorizeEndpoint = url + queryParams;
-        
-        //Redirect to the Azure authorization endpoint. When that flow completes, the user will be directed to auth-end
-        //Go to ClosePopup.js
-        window.location.assign(authorizeEndpoint);
-
+        });
       });
-    
     }    
 
     render() {

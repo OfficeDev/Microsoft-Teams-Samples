@@ -24,6 +24,12 @@ Through this app, meeting participants can request a "token", which is generated
  - Display the current user's token number
  - Mark a token as done by the user
  - Skip the current token for the organizer of the meeting
+
+ ![config_page](Images/config_page.png)
+
+ ![pre_meeting_tab](Images/pre_meeting_tab.png)
+
+ ![side_panel_tab](Images/side_panel_tab.png)
   
 ### User interactions
 - **Token** - Requests a token for the user
@@ -49,7 +55,7 @@ Through this app, meeting participants can request a "token", which is generated
 - [Ngrok](https://ngrok.com/download) (Only for devbox testing) Latest (any other tunneling software can also be used)
   ```bash
   # run ngrok locally
-  ngrok http -host-header=localhost 3978
+  ngrok http -host-header=rewrite 3978
   ```
 
 ### Technologies
@@ -78,7 +84,7 @@ The app uses the Teams extensibility features described on the following pages:
     - `"AzureAd"."ApplicationId "`: Set to the same value as `MicrosoftAppId` above.
     - `"ContentBubbleUrl "`: Content bubble iframe url (default. `https://[WebAppDomain]/contentBubble.html`). Remember that `[WebAppDomain]` will be your ngrok domain, so the content bubble URL will be similar to `https://f631****.ngrok.io/contentBubble.html`.
 
-2. Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/       bot-service-quickstart-registration?view=azure-bot-service-3.0).
+2. Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
     > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.

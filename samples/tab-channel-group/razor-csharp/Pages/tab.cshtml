@@ -10,10 +10,10 @@
     //initialize microsoftTeams in _Layout page
 
     let saveGray = () => {
-        microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
-            microsoftTeams.settings.setSettings({
-                websiteUrl: "replace with ngrok address",
-                contentUrl: "replace with ngrok address/gray",
+        microsoftTeams.pages.config.registerOnSaveHandler((saveEvent) => {
+            microsoftTeams.pages.config.setConfig({
+                websiteUrl: `${window.location.origin}`,
+                contentUrl: `${window.location.origin}/gray`,
                 entityId: "grayIconTab",
                 suggestedDisplayName: "MyNewTab",
                 removeUrl: ""
@@ -22,10 +22,10 @@
         });
     }
     let saveRed = () => {
-        microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
-            microsoftTeams.settings.setSettings({
-                websiteUrl: "replace with ngrok address",
-                contentUrl: "replace with ngrok address/red",
+        microsoftTeams.pages.config.registerOnSaveHandler((saveEvent) => {
+            microsoftTeams.pages.config.setConfig({
+                websiteUrl: `${window.location.origin}`,
+                contentUrl: `${window.location.origin}/red`,
                 entityId: "redIconTab",
                 suggestedDisplayName: "MyNewTab",
                 removeUrl: ""
@@ -65,16 +65,14 @@
     const colorClickGray = () => {
         gr.display = "block";
         rd.display = "none";
-        microsoftTeams.settings.setValidityState(true);
-        $(".disappear").remove();
+        microsoftTeams.pages.config.setValidityState(true);
         saveGray()
     }
 
     const colorClickRed = () => {
         rd.display = "block";
         gr.display = "none";
-        microsoftTeams.settings.setValidityState(true);
-        $(".disappear").remove();
+        microsoftTeams.pages.config.setValidityState(true);
         saveRed();
     }
 </script>

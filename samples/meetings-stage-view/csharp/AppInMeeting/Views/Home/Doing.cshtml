@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doing</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js" integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2" crossorigin="anonymous"></script>
+</head>
+<body>
+    <script src="/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script src="/lib/microsoft/chat.js"></script>
+    <div class="label">
+        Doing
+    </div>
+
+    <button onclick="openTaskModule('doing')" class="add-card-button">
+        <img class="add-icon" src="../../Images/add_icon.svg" title="Click to continue existing conversation" />
+    </button>
+    <br />
+    <button onclick="shareSpecificPart('doing')" class="share-specific-part-button">
+        Share Doing
+    </button>
+
+    <div id="doing">
+
+    </div>
+    <script src="/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script src="/lib/microsoft/chat.js"></script>
+    <script>
+        microsoftTeams.initialize();
+        microsoftTeams.getContext((context) => {
+            $.ajax({
+                url: "/getMeetingData?meetingId=" + context.meetingId + "&status=doing",
+                type: "GET",
+                success: function (response) {
+                    if (response !== undefined) {
+                        for (var i = 0; i < response.length; i++) {
+                            document.getElementById('doing').innerHTML += (`<div class="details">
+                                <div class="description" title="${response[i].taskDescription}">${response[i].taskDescription}</div>
+                                <div class="userName">--${response[i].userName}</div>
+                          `);
+                        }
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                },
+            });
+            $(document).ready(function () {
+                if (context.frameContext == "sidePanel") {
+                    $(".share-specific-part-button").show();
+                }
+                else {
+                    $(".share-specific-part-button").hide();
+                }
+            });
+        });
+
+        // Task module to collect details from the meeting participants.
+        const openTaskModule = (status) => {
+            let taskInfo = {
+                title: "Status Details",
+                height: 250,
+                width: 250,
+                url: `${window.location.origin}/taskInfo`,
+            };
+
+            microsoftTeams.tasks.startTask(taskInfo, (err, result) => {
+                microsoftTeams.getContext((context) => {
+                    updateDetails(result, status, context.meetingId);
+                });
+            });
+        };
+    </script>
+</body>
+</html>

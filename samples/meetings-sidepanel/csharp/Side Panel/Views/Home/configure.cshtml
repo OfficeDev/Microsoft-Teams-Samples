@@ -15,19 +15,24 @@
         </div>
 
     </header>
-    <script src="https://statics.teams.microsoft.com/sdk/v1.7.0/js/MicrosoftTeams.min.js"></script>
+    <script
+      src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
+      crossorigin="anonymous">
+    </script>
     <script>
-            microsoftTeams.initialize();
-            microsoftTeams.appInitialization.notifySuccess();
-            microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
-                microsoftTeams.settings.setSettings({
-                    entityID: "Side Panel App",
-                    contentUrl: `${window.location.origin}/Home/SidePanel`,
-                    suggestedTabName: "Side Panel App",
-                    websiteUrl: `${window.location.origin}/Home/SidePanel`,
+        microsoftTeams.app.initialize().then(() => {
+                microsoftTeams.app.notifySuccess();
+                microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+                    microsoftTeams.pages.config.setConfig({
+                        entityID: "Side Panel App",
+                        contentUrl: `${window.location.origin}/Home/sidePanel`,
+                        suggestedTabName: "Side Panel App",
+                        websiteUrl: `${window.location.origin}/Home/sidePanel`,
+                    }).then(() => {
+                        saveEvent.notifySuccess();
+                    });
                 });
-                saveEvent.notifySuccess();
+                microsoftTeams.pages.config.setValidityState(true);
             });
-            microsoftTeams.settings.setValidityState(true);
     </script>
 </body>

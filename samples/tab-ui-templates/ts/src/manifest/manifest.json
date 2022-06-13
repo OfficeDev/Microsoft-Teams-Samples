@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.8",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
   "id": "{{APPLICATION_ID}}",
   "version": "{{VERSION}}",
   "packageName": "{{PACKAGE_NAME}}",
@@ -29,32 +29,32 @@
       "entityId": "sample.app.welcome",
       "name": "Welcome",
       "contentUrl": "https://{{HOSTNAME}}/welcome",
-      "scopes": ["personal"]
+      "scopes": [ "personal" ]
     },
     {
       "entityId": "sample.app.dashboard",
       "name": "Dashboard",
       "contentUrl": "https://{{HOSTNAME}}/dashboard",
-      "scopes": ["personal"]
+      "scopes": [ "personal" ]
     },
     {
       "entityId": "sample.app.list",
       "name": "List",
       "contentUrl": "https://{{HOSTNAME}}/list",
-      "scopes": ["personal"]
+      "scopes": [ "personal" ]
     },
     {
       "entityId": "sample.app.boards",
       "name": "Task boards",
       "contentUrl": "https://{{HOSTNAME}}/board",
-      "scopes": ["personal"]
+      "scopes": [ "personal" ]
     }
   ],
   "bots": [],
   "connectors": [],
   "composeExtensions": [],
-  "permissions": ["identity", "messageTeamMembers"],
-  "validDomains": ["{{HOSTNAME}}"],
+  "permissions": [ "identity", "messageTeamMembers" ],
+  "validDomains": [ "{{HOSTNAME}}" ],
   "showLoadingIndicator": true,
   "isFullScreen": true
 }

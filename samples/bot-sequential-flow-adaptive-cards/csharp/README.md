@@ -14,7 +14,7 @@ createdDate: "07-07-2021 13:38:26"
 
 # Sequential workflow adaptive cards
 
-This sample illustrates sequential workflow, user specific views and upto date adaptive cards bot.
+This sample illustrates sequential workflow, user specific views and upto date adaptive cards bot and the list of incident created can be seen in messaging extension and can share a specific incident to the chat/team.
 
 ## Prerequisites
 
@@ -48,7 +48,57 @@ This sample illustrates sequential workflow, user specific views and upto date a
 1) Update appsettings.json file with Microsoft App Id, App Secret.
 2) Run your app, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
-## Interacting with the app in Teams
+## Workflows
+
+### Workflow for bot interaction
+
+```mermaid
+sequenceDiagram
+    participant Teams User B    
+    participant Teams User A
+    participant Teams Client
+    Teams User A->>+Teams Client: Enters create incident bot commands
+    Sample App->>+Teams Client: loads card with option 
+    Teams User A->>+Teams Client: Enters required details and assigns to user B
+    Sample App-->>Teams Client: Posts the incidet card with auto-refresh for user A and user B
+    Teams Client->>Teams User A: loads incident card with loading indicator 
+    Teams Client->>Sample App: Automatically invokes refresh action
+    Sample App-->>Teams User A: Responds with Updated AC for the user A
+    Teams User B->>Teams Client: User opens the chat
+    Teams Client-->>Teams User B: Loads the incident base card
+    Teams Client->>Sample App: Automatically invokes refresh action
+    Sample App-->>Teams User B: Responds with card for user B with option to approve/reject
+```
+
+### Workflow for messaging extension interaction
+
+
+```mermaid
+sequenceDiagram
+    participant Teams User B    
+    participant Teams User A
+    participant Teams Client
+    Teams User A->>+Teams Client: Clicks on Incidents ME action in a group chat
+    opt App not installed flow
+        Teams Client-->>Teams User A: App install dialog
+        Teams User A->>Teams Client: Installs app
+    end   
+    Teams Client->>+Sample App: Launches Task Module
+    Sample App-->>-Teams Client: Loads existing incidents created using Bot
+    Teams User A->>Teams Client: Selects incident to share in chat
+    Teams Client->>Sample App: Invoke action callback composeExtension/submitAction
+    Sample App-->>Teams Client: Posts Base card with auto-refresh for user A and user B
+    Teams Client->>Teams User A: loads incident card with loading indicator 
+    Teams Client->>Sample App: Automatically invokes refresh action
+    Sample App-->>Teams User A: Responds with Updated AC for the user A
+    Teams User B->>Teams Client: User opens the chat
+    Teams Client-->>Teams User B: Loads the incident base card
+    Teams Client->>Sample App: Automatically invokes refresh action
+    Sample App-->>Teams User B: Responds with card for user B with option to approve/reject
+```
+
+
+## Interacting with the bot
 
 1. In Teams, Once the app is successfully installed in a group chat, ping the bot by @mentioning it. Bot will reply with a card showing that the person has initiated the incident. 
 
@@ -76,4 +126,19 @@ This sample illustrates sequential workflow, user specific views and upto date a
 
   ![image](https://user-images.githubusercontent.com/80379013/123652838-4616a200-d84a-11eb-96c4-580979287b63.png)
 
+
+## Interaction from messaging extension.
+
+
+1. On selecting app from messaging extension,it checks whether bot is installed in chat/team. If not installed, user will get a option for justInTimeInstallation card.
+
+   ![just in time installation card](SequentialUserSpecificFlow/Images/justInTimeInstallation.png)
+
+2. After successful installation, list of all incident will be available in messaging extension.
+
+   ![incident list card](SequentialUserSpecificFlow/Images/incidentListCard.png).
+   
+3. User can select any incident from the list and can share to that chat/team.
+
+   ![share incident](SequentialUserSpecificFlow/Images/shareIncidentCard.png).   
 

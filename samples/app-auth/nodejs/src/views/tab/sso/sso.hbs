@@ -61,35 +61,30 @@
     <script src="https://code.jquery.com/jquery-3.1.1.js"
         integrity="sha384-VC7EHu0lDzZyFfmjTPJq+DFyIn8TUGAJbEtpXquazFVr00Q/OOx//RjiZ9yU9+9m"
         crossorigin="anonymous"></script>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js"
-        integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT"
-        crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
     <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"
         integrity="sha384-BIOS/65fbAsb2XiCCSTlZSTTl0ZgqkOU522dpyk5meOnN2EOQ3uH+QpqEtoAtmBn"
         crossorigin="anonymous"></script>
 
     <script type="text/javascript">
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
 
         // Trying to silently login using SSO
         showUserInformationUsingSSO();
 
         function showUserInformationUsingSSO() {
-            var authTokenRequest = {
-                successCallback: function (token) {
-                    $('#btnSSO').hide();
+            microsoftTeams.authentication.getAuthToken().then((token) => {
+                $('#btnSSO').hide();
                     $("#btnGraphAccess").hide();
                     showUserInformationInToken(token);
                     showUserProfileFromGraph(token);
                     showProfilesFromBot(token);
-                },
-                failureCallback: function (error) {
-                    console.log('SSO failureCallback error: ', error);
-                    $('#btnSSO').show();
-                    showAuthError(error, "divError");
-                }
-            };
-            microsoftTeams.authentication.getAuthToken(authTokenRequest);
+            })
+            .catch((error) => {
+                console.log('SSO failureCallback error: ', error);
+                $('#btnSSO').show();
+                showAuthError(error, "divError");
+            });
         }
 
         // Login to Azure AD and get access to Microsoft Graph
@@ -97,16 +92,14 @@
             microsoftTeams.authentication.authenticate({
                 url: window.location.origin + "/tab/simple-start-v2",
                 width: 600,
-                height: 535,
-                successCallback: function (result) {
-                    // Wait 3 seconds to allow for any delays in AAD recording consent
-                    setTimeout(() => showUserInformationUsingSSO(), 3000);
-                },
-                failureCallback: function (reason) {
-                    console.log("Login failed: " + reason);
-                    showAuthError(reason, "divGraphProfileError");
-                }
-            });
+                height: 535}).then((result) => {
+                // Wait 3 seconds to allow for any delays in AAD recording consent
+                setTimeout(() => showUserInformationUsingSSO(), 3000);
+            })
+            .catch((reason) => {
+                console.log("Login failed: " + reason);
+                showAuthError(reason, "divGraphProfileError");
+            })
         }
 
         // Show the token and the user information that it has in its claims

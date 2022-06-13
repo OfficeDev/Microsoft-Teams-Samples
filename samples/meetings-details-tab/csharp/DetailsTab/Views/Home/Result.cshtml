@@ -1,6 +1,6 @@
 @model DetailsTab.Models.TaskInfo;
 <script>
-    microsoftTeams.initialize();
+    microsoftTeams.app.initialize();
 </script>
 @{
     List<string> option1resultValue =  Model.PersonAnswered.ContainsKey(Model.option1) ? Model.PersonAnswered[Model.option1] : new List<string> ();

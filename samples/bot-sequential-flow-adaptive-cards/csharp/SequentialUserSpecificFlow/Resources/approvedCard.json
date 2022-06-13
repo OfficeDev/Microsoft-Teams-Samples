@@ -24,10 +24,10 @@
               "type": "Column",
               "items": [
                 {
-                  "type": "Image",
-                  "url": "https://spsharewithme.azurewebsites.net/Images/approve1.png",
-                  "altText": "www.microsoft.com",
-                  "height": "30px"
+                  "type": "TextBlock",
+                  "size": "Medium",
+                  "weight": "Bolder",
+                  "text": "Approved"
                 }
               ],
               "width": "auto"

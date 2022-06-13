@@ -1,13 +1,17 @@
 <html>
     <head>
         <title></title>
-        <script src='https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js'></script>
+       <script
+  src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
+  integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
+  crossorigin="anonymous"
+></script>
         <script src="DeepLinkModel.js"></script>
     </head>
     <body> 
-        <script>microsoftTeams.initialize();  
-            microsoftTeams.getContext(function (context) {                      
-                 if (context.subEntityId === "topic1") {                                  
+        <script>microsoftTeams.app.initialize();  
+            microsoftTeams.app.getContext().then((context) => {
+			                 if (context.subEntityId === "topic1") {                                  
                      document.getElementById("taskDiv").innerHTML = "Bots";
                      document.getElementById("taskContent").innerHTML = "A bot also referred to as a chatbot or conversational bot is an app that runs simple and repetitive automated tasks performed by the users, such as customer service or support staff. Examples of bots in everyday use include, bots that provide information about the weather, make dinner reservations, or provide travel information. A bot interaction can be a quick question and answer, or it can be a complex conversation that provides access to services.For more details <a href='https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots' target='_blank'>Click here</a>";
                  }
@@ -29,7 +33,8 @@
                     document.write('<a href="' + loc + '">'+x.Desc+'</a><br/>');                            
                 });   
              }
-            }); </script>     
+			})
+			</script>     
         <div id="taskDiv" style="margin-top:10px;width:70px;color:darkslateblue;font-family:'Segoe UI';font-size:20px;"></div>
         <div id="taskContent" style="margin-top:-23px;margin-left:80px;color:Highlight;font-family:'Segoe UI';font-size:15px"></div>   
          <a href="TaskList.html" style="font-family:'Segoe UI';font-size:20px;">Back To List</a>   

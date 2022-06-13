@@ -40,6 +40,9 @@ The feature shown in this sample is currently available in public developer prev
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2#create-the-resource).
 
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+   - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+
+  **NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
 2. Clone the repository
 

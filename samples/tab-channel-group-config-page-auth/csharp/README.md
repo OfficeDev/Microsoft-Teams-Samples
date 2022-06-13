@@ -20,6 +20,15 @@ There are many services that you may wish to consume inside your Teams app, and 
 
 OAuth 2.0 is an open standard for authentication used by Azure AD and many other service providers. Understanding OAuth 2.0 is a prerequisite for working with authentication in Teams and Azure AD. The examples below use the OAuth 2.0 Implicit Grant flow with the goal of eventually reading the user's profile information from Azure AD and Microsoft Graph.
 
+![Initial Config Page](ConfigTabAuthentication/Images/config_page.png)
+
+![Simple SignIn](ConfigTabAuthentication/Images/simple_signin.png)
+
+![Silent SignIn](ConfigTabAuthentication/Images/silent_signin.png)
+
+![Channel Tab](ConfigTabAuthentication/Images/channel_tab.png)
+
+
 ## Initiate Silent and Simple Authentication ConfigurableTab using AAD
 
 Authentication flow should be triggered by a user action. You should not open the authentication pop-up automatically because this is likely to trigger the browser's pop-up blocker as well as confuse the user.
@@ -81,12 +90,22 @@ Azure AD, like most identity providers, does not allow its content to be placed 
    - Visit Manage > API Permissions
    - Make sure you have the following Graph permissions enabled: email, offline_access, openid, profile, and User.Read.
 
-4)  __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your tab earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+4) Set Redirect URIs. Navigate to Authentication from left pane.
+    - Click on Add Platform select *Web*.
+    - Add URI as https://<<BASE-URI>>/SilentAuthEnd it will look like https://contoso.ngrok.io/SilentAuthEnd
+    - Make sure to check *Access tokens* and *ID tokens* checkbox
+    - Add one more URI as https://<<BASE-URI>>/SimpleAuthEnd
+    - Again, Click on Add Platform and this time select *Single-page application*
+    - Enter URI as https://<<BASE-URI>>/AuthEnd
+
+![Authentication Azure AD](ConfigTabAuthentication/Images/authentication_azure_ad.png)
+
+5)  __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the  `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your tab earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` and set your Base URI to the same URI you've created in Ngrok *everywhere* you see the place holder string `<<BASE-URI>>` (depending on the scenario the Microsoft App Id, Base URI may occur multiple times in the `manifest.json`)
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-5) Run your tab, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
+6) Run your tab, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
 
  

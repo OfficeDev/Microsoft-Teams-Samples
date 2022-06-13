@@ -105,12 +105,12 @@ namespace Microsoft.BotBuilderSamples.Bots
                                          Width=AdaptiveColumnWidth.Auto,
                                          Items=new List<AdaptiveElement>()
                                          {
-                                             new AdaptiveTextBlock(){Text="Bot Frawework SDK",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
+                                             new AdaptiveTextBlock(){Text="Bot Framework SDK",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
                                          },
                                            SelectAction = new AdaptiveOpenUrlAction()
                                            {
                                              Url=new Uri(tabUrlTask2),
-                                             Title = "Bot Frawework SDK"
+                                             Title = "Bot Framework SDK"
                                            }
                                     }
                                 }

@@ -1,61 +1,61 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.8",
-    "version": "1.0.0",
-    "id": "90441173-e948-4296-babf-b215af8e6b78",
-    "packageName": "com.microsoft.teams.extension",
-    "developer": {
-        "name": "Teams App, Inc.",
-        "websiteUrl": "https://localhost:3000",
-        "privacyUrl": "https://localhost:3000/privacy",
-        "termsOfUseUrl": "https://localhost:3000/termsofuse"
-    },
-    "icons": {
-        "color": "color.png",
-        "outline": "outline.png"
-    },
-    "name": {
-        "short": "Messaging Extension Search",
-        "full": ""
-    },
-    "description": {
-        "short": "Short description for Messaging Extension Search.",
-        "full": "Full description of Messaging Extension Search."
-    },
-    "accentColor": "#FFFFFF",
-    "composeExtensions": [
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.0",
+  "id": "90441173-e948-4296-babf-b215af8e6b78",
+  "packageName": "com.microsoft.teams.extension",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://localhost:3000",
+    "privacyUrl": "https://localhost:3000/privacy",
+    "termsOfUseUrl": "https://localhost:3000/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Messaging Extension Search",
+    "full": ""
+  },
+  "description": {
+    "short": "Short description for Messaging Extension Search.",
+    "full": "Full description of Messaging Extension Search."
+  },
+  "accentColor": "#FFFFFF",
+  "composeExtensions": [
+    {
+      "botId": "{TODO: BOT_ID}",
+      "canUpdateConfiguration": true,
+      "commands": [
         {
-            "botId": "{TODO: BOT_ID}",
-            "canUpdateConfiguration": true,
-            "commands": [
-                {
-                    "id": "searchQuery",
-                    "type": "query",
-                    "title": "Search",
-                    "description": "Test command to run query",
-                    "initialRun": false,
-                    "fetchTask": false,
-                    "context": [
-                        "compose",
-                        "commandBox"
-                    ],
-                    "parameters": [
-                        {
-                            "name": "searchQuery",
-                            "title": "Search Query",
-                            "description": "Your search query",
-                            "inputType": "text"
-                        }
-                    ]
-                }
-            ]
+          "id": "searchQuery",
+          "type": "query",
+          "title": "Search",
+          "description": "Test command to run query",
+          "initialRun": false,
+          "fetchTask": false,
+          "context": [
+            "compose",
+            "commandBox"
+          ],
+          "parameters": [
+            {
+              "name": "searchQuery",
+              "title": "Search Query",
+              "description": "Your search query",
+              "inputType": "text"
+            }
+          ]
         }
-    ],
-    "permissions": [
-        "identity",
-        "messageTeamMembers"
-    ],
-    "validDomains": [
-        "localhost:3000"
-    ]
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "<<valid-domain>>"
+  ]
 }

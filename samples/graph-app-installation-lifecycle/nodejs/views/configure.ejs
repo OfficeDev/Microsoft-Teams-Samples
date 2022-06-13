@@ -16,25 +16,24 @@
                     </form>
                 </div>
             </div>
-            <script src="https://unpkg.com/@microsoft/teams-js/dist/MicrosoftTeams.min.js"
-                crossorigin="anonymous"></script>
         </header>
-        <script src="https://statics.teams.microsoft.com/sdk/v1.7.0/js/MicrosoftTeams.min.js"></script>
+        <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"></script>
         <script>
             function onClick() {
-                microsoftTeams.settings.setValidityState(true);
+                microsoftTeams.pages.config.setValidityState(true);
             }
-            microsoftTeams.initialize();
-            microsoftTeams.appInitialization.notifySuccess();
-            microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
-                var radios = document.getElementsByName('notificationType');
-                microsoftTeams.settings.setSettings({
-                    entityID: "App Installation Demo",
-                    contentUrl: `${window.location.origin}/installedAppsList?tenantId={tid}`,
-                    suggestedTabName: "App Installation",
-                    websiteUrl: `${window.location.origin}/installedAppsList?tenantId={tid}`,
+            microsoftTeams.app.initialize().then(() => {
+                microsoftTeams.app.notifySuccess();
+                microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+                    var radios = document.getElementsByName('notificationType');
+                    microsoftTeams.pages.config.setConfig({
+                        entityID: "App Installation Demo",
+                        contentUrl: `${window.location.origin}/installedAppsList?tenantId={tid}`,
+                        suggestedTabName: "App Installation",
+                        websiteUrl: `${window.location.origin}/installedAppsList?tenantId={tid}`,
+                    });
+                    saveEvent.notifySuccess();
                 });
-                saveEvent.notifySuccess();
             });
         </script>
 </body>

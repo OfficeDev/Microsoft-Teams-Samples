@@ -1,6 +1,6 @@
 {
-    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.11",
+   "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
+   "manifestVersion": "1.11",
     "version": "1.0.0",
     "id": "{new GUID for this Teams app - not the Azure AD App ID}",
     "packageName": "com.contoso.teamsauthsso",
@@ -11,16 +11,16 @@
       "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
     },
     "name": {
-      "short": "Teams Auth SSO",
-      "full": "Teams Auth SSO"
+      "short": "Tab Auth SSO",
+      "full": "Tab Auth SSO"
     },
     "description": {
-      "short": "Teams Auth SSO app",
-      "full": "The Teams Auth SSO app"
+      "short": "Tab Auth SSO app",
+      "full": "This sample shows sso authentication for tab."
     },
     "icons": {
-      "outline": "contoso20x20.png",
-      "color": "contoso96x96.png"
+      "outline": "outline.png",
+      "color": "color.png"
     },
     "accentColor": "#60A18E",
     "staticTabs": [

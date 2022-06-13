@@ -5,7 +5,7 @@
 
 @section scripts{
     <script type="text/javascript">
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
         localStorage.removeItem("simple.error");
         let hashParams = getHashParameters();
         if (hashParams["error"]) {

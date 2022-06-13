@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <script src='https://statics.teams.microsoft.com/sdk/v1.6.0/js/MicrosoftTeams.min.js'></script>
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
     <script src='https://code.jquery.com/jquery-1.11.3.min.js'></script>
 </head>
 <body>

@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.11",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+ "manifestVersion": "1.12",
   "version": "1.0.1",
   "id": "{{Microsoft-App-Id}}",
   "packageName": "com.microsoft.teams.staggeredpermission",

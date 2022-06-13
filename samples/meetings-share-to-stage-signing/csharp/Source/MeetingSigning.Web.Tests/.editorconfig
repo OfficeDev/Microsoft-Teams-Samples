@@ -1,0 +1,3 @@
+[*.cs]
+# Removes the requirement for no underscores (_) in identifiers for tests
+dotnet_diagnostic.CA1707.severity = none

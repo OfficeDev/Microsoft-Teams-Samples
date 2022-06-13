@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add to Doing</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js"
+        integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+</head>
+
+<body>
+    <script>
+        // Creating socket instance for real time status updates in stage view.
+        const socketTodo = io();
+        socketTodo.on('connection');
+
+        // Updating containers when a status message is received.
+        socketTodo.on('message', (data, status) => {
+            if (data !== undefined) {
+                document.getElementById(status).innerHTML += (`<div class="details">
+            <div class="description" title="${data.taskDescription}">${data.taskDescription}</div>
+            <div class="userName">--${data.userName}</div>
+      `);
+            }
+        })
+        microsoftTeams.initialize();
+        microsoftTeams.getContext((context) => {
+            $(document).ready(function () {
+                $.ajax({
+                    url: "/getMeetingData?meetingId=" + context.meetingId + "&status=doing",
+                    type: "GET",
+                    success: function (response) {
+                        var html = '';
+                        if (response.data != "") {
+                            for (var i = 0; i < response.data.length; i++) {
+                                document.getElementById('doing').innerHTML += (`<div class="details">
+            <div class="description" title="${response.data[i].taskDescription}">${response.data[i].taskDescription}</div>
+            <div class="userName">--${response.data[i].userName}</div>
+      `);
+                            }
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                    },
+                });
+                if (context.frameContext == "sidePanel") {
+                    $(".share-specific-part-button").show();
+                }
+                else {
+                    $(".share-specific-part-button").hide();
+                }
+            });
+        });
+
+        // Task module to collect details from the meeting participants.
+    const openTaskModule = (status) => {
+      let taskInfo = {
+        title: "Status Details",
+        height: 250,
+        width: 250,
+        url: `${window.location.origin}/index`,
+      };
+      microsoftTeams.getContext((context) => {
+        // Invoking task module to collect status details from participants.
+        microsoftTeams.tasks.startTask(taskInfo, (err, taskDetails) => {
+          socketTodo.emit('message', taskDetails, status, context.meetingId);
+        });
+      });
+    };
+    </script>
+    <div class="label">
+        Doing
+    </div>
+
+    <button onclick="openTaskModule('doing')" class="add-card-button">
+        <img class="add-icon" src="/Images/add_icon.svg" title="Click to continue existing conversation" />
+    </button>
+    <br />
+    <button onclick="shareSpecificPart('doing')" class="share-specific-part-button">
+        Share Doing
+    </button>
+
+    <div id="doing">
+        <!-- The status details will be updated here on runtime -->
+    </div>
+</body>
+
+</html>

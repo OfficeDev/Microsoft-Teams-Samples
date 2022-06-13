@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.9.0/js/MicrosoftTeams.min.js" integrity="sha384-bcRxWKfzRyPxg/waVm3IsOnaH2Inoh5gGIJNOat79+wq22/BZ+mFuSTUmVc7l2el" crossorigin="anonymous"></script>
+    <script
+		  src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
+		  crossorigin="anonymous">
+    </script>
     <script src="/socket.io/socket.io.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
@@ -34,8 +37,8 @@
     var socket = io();
    
     $(document).ready(function () {
-        microsoftTeams.initialize();
-        microsoftTeams.getContext(function(context)
+        microsoftTeams.app.initialize();
+        microsoftTeams.app.getContext().then(function(context)
         {
            var userId = context.userObjectId;
            var meetingId = context.meetingId;

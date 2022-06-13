@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App in a meeting demo</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js" integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2" crossorigin="anonymous"></script>
+</head>
+<body id=mainDiv>
+    <div id="chatSection" className="chatSection">
+        <div class="label">
+            Sprint Status
+        </div>
+        <div id="boardDiv" class="chat-window">
+            <div class="part-container">
+                @Html.Partial("ToDo.cshtml")
+            </div>
+            <div class="part-container">
+                @Html.Partial("Doing.cshtml")
+            </div>
+            <div class="part-container">
+                @Html.Partial("Done.cshtml")
+            </div>
+        </div>
+    </div>
+    <script>
+        microsoftTeams.initialize();
+        microsoftTeams.getContext((context) => {
+            $(document).ready(function () {
+                if (context.frameContext == "sidePanel") {
+                    $("#todo, #doing, #done").addClass("grid-item-sidepanel");
+                    $("#todo, #doing, #done").removeClass("grid-item");
+
+                    $("#boardDiv").addClass("chat-window-sidepanel");
+                    $("#boardDiv").removeClass("chat-window");
+                }
+                else {
+                    $("#todo, #doing, #done").addClass("grid-item");
+                    $("#todo, #doing, #done").removeClass("grid-item-sidepanel");
+
+                    $("#boardDiv").addClass("chat-window");
+                    $("#boardDiv").removeClass("chat-window-sidepanel");
+                }
+            });
+        });
+
+        // shareToStage.
+        const shareSpecificPart = (partName) => {
+            var appContentUrl = "";
+            appContentUrl = partName == 'todo' ? `${window.location.origin}/todo` : partName == 'doing' ? `${window.location.origin}/doing` : `${window.location.origin}/done`;
+
+            microsoftTeams.meeting.shareAppContentToStage((err, result) => {
+                if (result) {
+                    // handle success
+                    console.log(result);
+                }
+                if (err) {
+                    // handle error
+                    alert(JSON.stringify(err))
+                }
+            }, appContentUrl);
+        };
+    </script>
+</body>
+</html>

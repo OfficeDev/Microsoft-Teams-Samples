@@ -81,6 +81,7 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
     * TeamsTab.Create
     * TeamsTab.ReadWriteForChat
     * TeamsTab.ReadWrite.All
+    * User.Read.All
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 13. Navigate to **Authentication**
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.

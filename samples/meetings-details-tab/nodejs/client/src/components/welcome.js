@@ -32,8 +32,8 @@ function Welcome (){
             body: JSON.stringify(list),
         })
     }
-    microsoftTeams.initialize();
-     const submitHandler = (err, result) => {
+     const submitHandler = (dialogResponse) => {
+         let result = dialogResponse.result;
          if(!result || !result.title || !result.option1 || !result.option2)
                 return ;
         const taskInfo = {...result, Id: uuidv4()}
@@ -43,21 +43,26 @@ function Welcome (){
         };
     const openTaskModule = () => {
         const baseUrl = `https://${window.location.hostname}:${window.location.port}`;
+
         let taskInfo = {
             title: null,
-            height: null,
-            width: null,
+            size: null,
             url: null,
-            card: null,
             fallbackUrl: null,
-            completionBotId: null,
         };
-            taskInfo.url = baseUrl +"/Detail";
-            taskInfo.title = "Add a Poll";
-            taskInfo.height = "250";
-            taskInfo.width = "500";
-            taskInfo.fallbackUrl = taskInfo.url
-        microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+    
+        taskInfo.url = baseUrl +"/Detail";
+        taskInfo.title = "Add a Poll";
+        taskInfo.size = {
+            height: 250,
+            width: 500,
+        };
+        taskInfo.fallbackUrl = taskInfo.url
+
+            
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.dialog.open(taskInfo, submitHandler);
+        });
     }
     
     return (

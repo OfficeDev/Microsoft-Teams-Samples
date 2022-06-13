@@ -4,11 +4,13 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/styles/msteams-16.css"/>
     <link rel="stylesheet" type="text/css" href="/styles/custom.css"/>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
-        integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
-        crossorigin="anonymous"></script>
+    <script
+          src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
+          integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
+          crossorigin="anonymous">
+    </script>
     <script>
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
 
         function createLink() {
             var appId =  "<%-microsoftAppId%>";
@@ -17,7 +19,7 @@
             // Passing the values and encoding the url while implementing the deeplink from tab
             let url = "https://teams.microsoft.com/l/stage/"+appId+"/0?context={\"contentUrl\":\""+baseUrl+"/content\",\"websiteUrl\":\""+baseUrl+"/content\",\"name\":\"DemoStageView\"}";
             alert("URL - " + url);
-            microsoftTeams.executeDeepLink(url);
+            microsoftTeams.app.openLink(url);
          };
     </script>
 </head>

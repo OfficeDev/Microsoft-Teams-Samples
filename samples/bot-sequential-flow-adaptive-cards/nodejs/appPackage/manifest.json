@@ -1,58 +1,63 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.9",
-    "version": "1.0.0",
-    "id": "<<YOUR-MICROSOFT-APP-ID>>",
-    "packageName": "com.microsoft.teams.adaptive",
-    "developer": {
-      "name": "Microsoft",
-      "websiteUrl": "https://example.azurewebsites.net",
-      "privacyUrl": "https://example.azurewebsites.net/privacy",
-      "termsOfUseUrl": "https://example.azurewebsites.net/termsofuse"
-    },
-    "icons": {
-      "color": "color.png",
-      "outline": "outline.png"
-    },
-    "name": {
-      "short": "Sequential Workflows",
-      "full": "Sequential Workflows"
-    },
-    "description": {
-      "short": "Sequential Workflows in adaptive card Scenario",
-      "full": "Sequential Workflows in adaptive card Scenario"
-    },
-    "accentColor": "#FFFFFF",
-    "bots": [
-      {
-        "botId": "<<YOUR-MICROSOFT-APP-ID>>",
-        "scopes": [
-            "personal",
-            "team",
-            "groupchat"
-        ],
-        "commandLists": [
-          {
-              "scopes": [
-                  "groupchat"
-              ],
-              "commands": [
-                  {
-                      "title": "Incident Management",
-                      "description": "Starts the Incident Management Workflow"
-                  }
-              ]
-          }
-      ],
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.0",
+  "id": "<<YOUR-MICROSOFT-APP-ID>>",
+  "packageName": "com.microsoft.sequentialflowbot",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Sequential flow Adaptive Card",
+    "full": "Sequential WorkFlow and User specific view Adaptive Cards Bot"
+  },
+  "description": {
+    "short": "Sequential flow, User specific view and upto date adaptive cards sample bot",
+    "full": "This sample demos the sequential flow, User specific view and upto date adaptive cards in a bot."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
+
+  "bots": [
+    {
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "needsChannelSelector": false,
       "isNotificationOnly": false,
-      "needsChannelSelector": false
-      }
-    ],
-    "permissions": [
-      "identity",
-      "messageTeamMembers"
-    ],
-    "validDomains": [
-      "*.ngrok.io"
-    ]
-  }
+      "scopes": [
+        "groupchat",
+        "team"
+      ]
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "canUpdateConfiguration": true,
+      "commands": [
+        {
+          "id": "Incident",
+          "type": "action",
+          "title": "Get incidents",
+          "description": "Get list of incidents",
+          "initialRun": false,
+          "fetchTask": true,
+          "context": [
+            "commandBox",
+            "compose"
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": []
+}

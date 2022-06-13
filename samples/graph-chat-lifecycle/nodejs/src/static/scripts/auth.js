@@ -1,4 +1,4 @@
-microsoftTeams.initialize();
+microsoftTeams.app.initialize();
 
 getClientSideToken()
     .then((clientSideToken) => {
@@ -34,21 +34,15 @@ getClientSideToken()
     });
 
 function getClientSideToken() {
-
     return new Promise((resolve, reject) => {
 
-        microsoftTeams.authentication.getAuthToken({
-            successCallback: (result) => {
-                console.log(result);
+        microsoftTeams.authentication.getAuthToken().then((result) => {
+            console.log(result);
                 resolve(result);
-            },
-            failureCallback: function (error) {
-                reject("Error getting token: " + error);
-            }
+        }).catch((error) => {
+            reject("Error getting token: " + error);
         });
-
     });
-
 }
 
 // 2. Exchange that token for a token with the required permissions
@@ -57,7 +51,7 @@ function getServerSideToken(clientSideToken) {
 
     return new Promise((resolve, reject) => {
 
-        microsoftTeams.getContext((context) => {
+        microsoftTeams.app.getContext().then((context) => {
 
             fetch('/auth/token', {
                 method: 'post',
@@ -65,7 +59,7 @@ function getServerSideToken(clientSideToken) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    'tid': context.tid,
+                    'tid': context.user.tenant.id,
                     'token': clientSideToken
                 }),
                 mode: 'cors',
@@ -123,17 +117,14 @@ function useServerSideToken(data) {
 function requestConsent() {
     return new Promise((resolve, reject) => {
         microsoftTeams.authentication.authenticate({
-            url: window.location.origin + "/auth/auth-start",
-            width: 600,
-            height: 535,
-            successCallback: (result) => {
-                let data = localStorage.getItem(result);
-                localStorage.removeItem(result);
-                resolve(data);
-            },
-            failureCallback: (reason) => {
-                reject(JSON.stringify(reason));
-            }
+        url: window.location.origin + "/auth/auth-start",
+        width: 600,
+        height: 535}).then((result) => {
+            let data = localStorage.getItem(result);
+            localStorage.removeItem(result);
+            resolve(data);
+        }).catch((reason) => {
+            reject(JSON.stringify(reason));
         });
     });
 }

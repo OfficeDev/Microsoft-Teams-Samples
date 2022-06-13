@@ -16,7 +16,7 @@ const CaptureImageDesktop = () => {
 
     useEffect(() => {
         // initializing microsoft teams sdk
-        microsoftTeams.initialize()
+        microsoftTeams.app.initialize()
     })
 
     // var imageCapture: ImageCapture;

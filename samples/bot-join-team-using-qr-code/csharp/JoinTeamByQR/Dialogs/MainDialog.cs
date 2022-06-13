@@ -94,7 +94,7 @@ namespace JoinTeamByQR.Dialogs
                 {
                     new AdaptiveTextBlock
                     {
-                        Text = "Generate QR for app and install",
+                        Text = "Generate QR for team",
                         Weight = AdaptiveTextWeight.Bolder,
                         Spacing = AdaptiveSpacing.Medium,
                     }

@@ -35,6 +35,10 @@ Two samples to highlight solutions to two challenges with building proactive mes
 | `README.md`          | This README file.                                                           |
 | `LICENSE`            | The license for the sample.                                                 |
 
+![Conversation details](coordinate-logger/Images/ConversationDetails.png)
+
+![Proactive message](coordinate-logger/Images/ProactiveMessage.png)
+
 ## Prerequisites
 - Microsoft Teams account
 - [.NET Core 3.x SDK](https://dotnet.microsoft.com/download)

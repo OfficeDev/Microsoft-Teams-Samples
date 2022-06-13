@@ -1,21 +1,29 @@
 ---
 page_type: sample
+description: Microsoft Teams sample app for tabs Azure AD SSO which uses OBO flow to call Graph APIs using C#.
 products:
 - office-teams
 - office
 - office-365
 languages:
 - csharp
-title: Tabs Azure AD SSO Sample
-description: Microsoft Teams hello world sample app for tabs Azure AD SSO in Node.js
 extensions:
-  contentType: samples
-  createdDate: 12/3/2021 12:53:17 PM
+contentType: samples
+createdDate: "12/3/2021 12:53:17 PM"
 ---
-
-# Tabs Azure AD Single Sign-On Sample
+# Tabs Azure AD SSO Sample - C#
 
 This sample illustrates how to implement SSO authentication for Teams Tab.
+
+## Key feature.
+
+![SSO](Images/sso_personal.png)
+
+![Success SSO](Images/success_sso_personal.png)
+
+![Config](Images/config_teams.png)
+
+![Config SSO](Images/config_sso_teams.png)
 
 ## Prerequisites
 

@@ -1,42 +1,42 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.8",
-    "version": "1.0.0",
-    "id": "<<Your Microsoft App Id>>",
-    "packageName": "com.microsoft.teams.devapp",
-    "developer": {
-        "name": "Microsoft",
-        "websiteUrl": "https://www.microsoft.com",
-        "privacyUrl": "https://www.microsoft.com/privacy",
-        "termsOfUseUrl": "https://www.microsoft.com/terms"
-    },
-    "icons": {
-        "color": "color.png",
-        "outline": "outline.png"
-    },
-    "name": {
-        "short": "SPListBot",
-        "full": "SharePoint List Bot"
-    },
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.0",
+  "id": "<<Your Microsoft App Id>>",
+  "packageName": "com.microsoft.teams.devapp",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/terms"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "SPListBot",
+    "full": "SharePoint List Bot"
+  },
   "description": {
     "short": "SharePoint Bot app for Microsoft Teams",
     "full": "This app will save conversation data to SharePoint list"
   },
-    "accentColor": "#FFFFFF",
-    "bots": [
-        {
-            "botId": "<<Your Microsoft App Id>>",
-            "scopes": [
-                "personal",
-                "team",
-                "groupchat"
-            ],
-            "supportsFiles": false,
-            "isNotificationOnly": false
-        }
-    ],
-    "permissions": [
-        "identity",
-        "messageTeamMembers"
-    ]
+  "accentColor": "#FFFFFF",
+  "bots": [
+    {
+      "botId": "<<Your Microsoft App Id>>",
+      "scopes": [
+        "personal",
+        "team",
+        "groupchat"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ]
 }

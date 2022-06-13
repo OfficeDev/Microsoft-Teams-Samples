@@ -10,9 +10,9 @@ import { Card, Flex, Text, Button, CardHeader, CardBody } from '@fluentui/react-
  * of your app.
  */
 const GetGeoLocation = () => {
-  const [geoLocationValue, setGeoLocationValue] = useState('');
+  const [geoLocationValue, setGeoLocationValue] = useState<microsoftTeams.location.Location>({} as microsoftTeams.location.Location);
   useEffect(() => {
-    microsoftTeams.initialize()
+    microsoftTeams.app.initialize()
   })
 
   // Method to get current user's geo location
@@ -21,17 +21,17 @@ const GetGeoLocation = () => {
   // If the value of showMap is false, the current location is fetched without displaying the map. 
   // showMap is ignored if allowChooseLocation is set to true.
   function getLocation() {
-    microsoftTeams.location.getLocation({ allowChooseLocation: true, showMap: true }, (error: microsoftTeams.SdkError, location: microsoftTeams.location.Location) => {
-      setGeoLocationValue(JSON.stringify(location))
+    microsoftTeams.location.getLocation({ allowChooseLocation: true, showMap: true }).then((location) => {
+      setGeoLocationValue(location)
+    }).catch((error) => {
+      console.error(error);
     });
   }
 
   // Method to show geo location for given latitude and longitude values.
   function showLocation() {
-    // The method will show location based on latitude and longitute values provided.    
-    let location = { "latitude": 28.704059, "longitude": 77.10249 };
     // Methos to ask for permission and then show current user location
-    microsoftTeams.location.showLocation(location, (error: microsoftTeams.SdkError, result: boolean) => {
+    microsoftTeams.location.showLocation(geoLocationValue).catch((error) => {
       // If there's any error, an alert shows the error message/code
       if (error) {
         if (error.message) {
@@ -58,8 +58,8 @@ const GetGeoLocation = () => {
             <Text content="Method: " weight="semibold" />
             <Text content="navigator.geolocation.getCurrentPosition, teams.location" />
             <Button content="Get Location" onClick={getLocation} />
-            {geoLocationValue !== '' &&
-              <Text styles={{ "word-wrap": "break-word" }} content={geoLocationValue}></Text>}
+            {JSON.stringify(geoLocationValue) !== '{}' &&
+              <Text styles={{ "word-wrap": "break-word" }} content={JSON.stringify(geoLocationValue)}></Text>}
             <Button content="Show Location" onClick={showLocation} />
           </Flex>
         </CardBody>

@@ -1,6 +1,7 @@
 ---
 page_type: sample
 description: This sample app demonstrates sending change notifications to user presence in Teams based on user presence status.
+urlFragment: teams-graph-change-notification-nodejs
 products:
 - office-teams
 - office
@@ -12,7 +13,7 @@ contentType: samples
 createdDate: "07-07-2021 13:38:26"
 ---
 
-# Change Notification sample
+# Change Notification sample using nodejs
 
 Bot Framework v4 ChangeNotification sample.
 

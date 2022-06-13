@@ -132,6 +132,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Images\hero_card.png" />
+    <Content Include="Images\response.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.7/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.7",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
   "version": "1.5",
   "id": "<<REGISTERED_BOT_ID>>",
   "packageName": "com.skype.teams.samples.sampleapp",
@@ -19,8 +19,8 @@
     "full": "This is a small sample app we made for you! This app has samples of all capabilities MS Teams supports."
   },
   "icons": {
-    "outline": "bot_blue.png",
-    "color": "bot_blue.png"
+    "outline": "outline.png",
+    "color": "color.png"
   },
   "accentColor": "#3F487F",
   "staticTabs": [

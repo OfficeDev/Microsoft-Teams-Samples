@@ -7,14 +7,11 @@
 
         return new Promise((resolve, reject) => {
             display("1. Get auth token from Microsoft Teams");
-            microsoftTeams.authentication.getAuthToken({
-                successCallback: (result) => {
-                    display(result)
-                    resolve(result);
-                },
-                failureCallback: function (error) {
-                    reject("Error getting token: " + error);
-                }
+            microsoftTeams.authentication.getAuthToken().then((result) => {
+                display(result)
+                resolve(result);
+            }).catch((error) => {
+                reject("Error getting token: " + error);
             });
         });
     }
@@ -23,14 +20,14 @@
     //    using the web service (see /auth/token handler in app.js)
     function getServerSideToken(clientSideToken) {
         return new Promise((resolve, reject) => {
-            microsoftTeams.getContext((context) => {
+            microsoftTeams.app.getContext().then((context) => {
                 fetch('/getProfileOnBehalfOf', {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        'tid': context.tid,
+                        'tid': context.user.tenant.id,
                         'token': clientSideToken
                     }),
                     mode: 'cors',
@@ -69,15 +66,13 @@
             microsoftTeams.authentication.authenticate({
                 url: window.location.origin + "/auth-start",
                 width: 600,
-                height: 535,
-                successCallback: (result) => {
-                    let data = localStorage.getItem(result);
-                    localStorage.removeItem(result);
-                    resolve(data);
-                },
-                failureCallback: (reason) => {
-                    reject(JSON.stringify(reason));
-                }
+                height: 535})
+            .then((result) => {
+                let data = localStorage.getItem(result);
+                localStorage.removeItem(result);
+                resolve(data);
+            }).catch((reason) => {
+                reject(JSON.stringify(reason));
             });
         });
     }

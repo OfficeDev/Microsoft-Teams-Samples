@@ -14,15 +14,16 @@ import * as microsoftTeams from "@microsoft/teams-js";
 class TabConfig extends React.Component {
 
   render() {
+    microsoftTeams.app.initialize().then(() => {
       /**
        * When the user clicks "Save", save the url for your configured tab.
        * This allows for the addition of query string parameters based on
        * the settings selected by the user.
        */
-      microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
+       microsoftTeams.pages.config.registerOnSaveHandler((saveEvent) => {
         
         const baseUrl = `https://${window.location.hostname}:${window.location.port}`;
-        microsoftTeams.settings.setSettings({
+        microsoftTeams.pages.config.setConfig({
           "suggestedDisplayName": "My Tab",
           "entityId": "Test",
           "contentUrl": baseUrl + "/tab",
@@ -37,8 +38,9 @@ class TabConfig extends React.Component {
        * to be valid.  This will enable the save button in the configuration
        * dialog.
        */
-      microsoftTeams.settings.setValidityState(true);
-  
+      microsoftTeams.pages.config.setValidityState(true);
+    });
+
       return (
         <div>
           <h1>Tab Configuration</h1>

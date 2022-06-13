@@ -7,3 +7,6 @@ node_modules
 .env.teamsfx.local
 subscriptionInfo.json
 build
+.fx/configs/config.local.json
+.fx/states/state.local.json
+.backup

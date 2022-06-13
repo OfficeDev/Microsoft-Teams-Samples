@@ -1,19 +1,18 @@
 ---
 page_type: sample
+description: Microsoft Teams sample app for tabs Azure AD SSO which uses OBO flow to call Graph APIs using Node.js
 products:
 - office-teams
 - office
 - office-365
 languages:
 - nodejs
-title: Tabs Azure AD SSO Sample
-description: Microsoft Teams hello world sample app for tabs Azure AD SSO in Node.js
 extensions:
-  contentType: samples
-  createdDate: 12/3/2021 12:53:17 PM
+contentType: samples
+createdDate: "12/3/2021 12:53:17 PM"
 ---
+# Tabs Azure AD SSO Sample using NodeJS
 
-# Tabs Azure AD Single Sign-On Sample
 
 This sample shows how to implement Azure AD single sign-on support for tabs. It will:
 
@@ -105,8 +104,7 @@ Thhe app should start running on port 3333 or the port you configured
     * `gulp generate-manifest`
     * This will create a zip file in the manifest folder
 2. Install in Teams
-    * Open Teams and visit the app store. Depending on the version of Teams, you may see an "App Store" button in the bottom left of Teams or you can find the app store by visiting `Apps > More Apps` in the left-hand app rail.
-    * Install the app by clicking on the `Upload a custom app` link in the bottom left-hand side of the app store.
+    * Open Teams and visit the app store. Depending on the version of Teams, you may see an "App Store" button in the bottom left of Teams or you can find the app store by visiting `Apps > Manage your apps > Publish App > Upload Custom App`.
     * Upload the manifest zip file created in step #1
 
 ## Trying out the app

@@ -19,6 +19,22 @@ extensions:
 
 This sample demonstrates authentication in Microsoft Teams apps.
 
+Tab authentication
+
+![tab azure ad login v1](Images/TabAzureADLoginV1.png)
+
+![tab azure ad login v2](Images/TabAzureADLoginV2.png)
+
+![tab silent auth](Images/TabSilentAuth.png)
+
+![tab SSO](Images/TabSso.png)
+
+Bot authentication
+
+![Bot SSO](Images/BotSso.png)
+
+![Bot google sign in](Images/BotGoogleProfile.png)
+
 ## Getting started
 
 1. Install some sort of tunnelling service. These instructions assume you are using ngrok: https://ngrok.com/
@@ -63,8 +79,8 @@ Registering a bot with the Microsoft Bot Framework automatically creates a corre
 1. Navigate to **Authentication** under **Manage** and add the following redirect URLs:
 
     - `https://<your_ngrok_url>/tab/simple-end`
-    - `https://<your_ngrok_url>/tab/silent-end`
     - `https://token.botframework.com/.auth/web/redirect`
+    - Add this URL as *Single-page application* `https://<your_ngrok_url>/tab/silent-end`
 
 1. Additionally, under the **Implicit grant** subsection select **Access tokens** and **ID tokens**
 

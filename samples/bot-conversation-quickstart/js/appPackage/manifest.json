@@ -1,80 +1,80 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.8",
-    "version": "1.0.0",
-    "id": "1d2627e8-b122-47e3-9963-72b62f1140ae",
-    "packageName": "com.microsoft.teams.extension",
-    "developer": {
-        "name": "Teams App, Inc.",
-        "websiteUrl": "https://localhost:3000",
-        "privacyUrl": "https://localhost:3000/privacy",
-        "termsOfUseUrl": "https://localhost:3000/termsofuse"
-    },
-    "icons": {
-        "color": "color.png",
-        "outline": "outline.png"
-    },
-    "name": {
-        "short": "Conversation Bot",
-        "full": ""
-    },
-    "description": {
-        "short": "Short description for Conversation Bot.",
-        "full": "Full description of Conversation Bot."
-    },
-    "accentColor": "#FFFFFF",
-    "bots": [
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.0",
+  "id": "1d2627e8-b122-47e3-9963-72b62f1140ae",
+  "packageName": "com.microsoft.teams.extension",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://localhost:3000",
+    "privacyUrl": "https://localhost:3000/privacy",
+    "termsOfUseUrl": "https://localhost:3000/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Conversation Bot",
+    "full": ""
+  },
+  "description": {
+    "short": "Short description for Conversation Bot.",
+    "full": "Full description of Conversation Bot."
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [
+    {
+      "botId": "{TODO: BOT_ID}",
+      "scopes": [
+        "personal",
+        "groupchat",
+        "team"
+      ],
+      "commandLists": [
         {
-            "botId": "{TODO: BOT_ID}",
-            "scopes": [
-                "personal",
-                "groupchat",
-                "team"
-            ],
-            "commandLists": [
-                {
-                    "scopes": [
-                        "personal"
-                    ],
-                    "commands": [
-                        {
-                            "title": "Hello",
-                            "description": "Sends a hello message and @mention the sender"
-                        }
-                    ]
-                },
-                {
-                    "scopes": [
-                        "team"
-                    ],
-                    "commands": [
-                        {
-                            "title": "Hello",
-                            "description": "Sends a hello message and @mention the sender"
-                        }
-                    ]
-                },
-                {
-                    "scopes": [
-                        "groupchat"
-                    ],
-                    "commands": [
-                        {
-                            "title": "Hello",
-                            "description": "Sends a hello message and @mention the sender"
-                        }
-                    ]
-                }
-            ],
-            "supportsFiles": false,
-            "isNotificationOnly": false
+          "scopes": [
+            "personal"
+          ],
+          "commands": [
+            {
+              "title": "Hello",
+              "description": "Sends a hello message and @mention the sender"
+            }
+          ]
+        },
+        {
+          "scopes": [
+            "team"
+          ],
+          "commands": [
+            {
+              "title": "Hello",
+              "description": "Sends a hello message and @mention the sender"
+            }
+          ]
+        },
+        {
+          "scopes": [
+            "groupchat"
+          ],
+          "commands": [
+            {
+              "title": "Hello",
+              "description": "Sends a hello message and @mention the sender"
+            }
+          ]
         }
-    ],
-    "permissions": [
-        "identity",
-        "messageTeamMembers"
-    ],
-    "validDomains": [
-        "localhost:3000"
-    ]
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "localhost:3000"
+  ]
 }

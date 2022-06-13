@@ -89,7 +89,8 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
     - `ChatMessage.Send`
     - `Chat.ReadWrite`
     - `TeamsActivity.Send`
-    - `TeamsAppInstallation.ReadForUser.All`.
+    - `TeamsAppInstallation.ReadForUser.All`
+    - `TeamsTab.Read.All`
 
 **Note** Your need to add `TeamsActivity.Send` as Application level permissions
 
