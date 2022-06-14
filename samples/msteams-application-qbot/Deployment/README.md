@@ -5,8 +5,10 @@
 2. The deployment script uses Az modules, if you have AzureRM installed, remove it before running this script.
 To remove, run this command: `Uninstall -AzureRM`.
 3. Upgrade to Powershell [5.1.22000.653 or later](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2). Run `$PSVersionTable.PSVersion` to check the installed version.
-4. Run the below command in powershell (run-as admin). This will allow you to run `DeployQBotInteractive.ps1`. By default, the execution policy is restricted. You may change it back to restricted after deployment is completed.
-`Set-ExecutionPolicy -ExecutionPolicy RemoteSigned`
+4. Install .Net 3.1 SDK. [Download](https://dotnet.microsoft.com/en-us/download/dotnet/3.1)
+5. Install npm. [Instructions](https://docs.npmjs.com/cli/v8/configuring-npm/install)
+6. Run the below command in powershell (run-as admin).</br>
+`Set-ExecutionPolicy -ExecutionPolicy RemoteSigned` </br> This will allow you to run `DeployQBotInteractive.ps1`. By default, the execution policy is restricted. You may change it back to restricted after deployment is completed. 
 
 ## Deployment
 The Qbot deployment scripts are aimed at providing a quick and painless way of deploying the Qbot app
@@ -33,6 +35,8 @@ The script will next ask you to enter organization's information that will be us
 
 > Note: Deployment will start after this step and may take upto 15 minutes to complete.
 
+The script will ask you to confirm zip deployment. Enter `Y` to proceed.
+
 ### 5. Admin Consent
 Script will launch a url for admin consent to certain application permissions. Login with a user account who has a global admin role in the M365 tenant to grant consent.
 
@@ -48,15 +52,15 @@ Make sure that you have upgraded to Powershell [5.1.22000.653 or later](https://
 
 ## Contents
 
-### QBot.zip
-This is the output of the `dotnet publish` command from the web directory. This is the running code for Qbot. 
-This file is deployed via the `ZipDeploy` arm step.
-
 ### DeployQBotInteractive.ps1
 This interactive script is responsible for installing all the dependencies & gathering the necessary fields from the maintainer to run the `New-QBotDeployment` script.
 
+### QBot.zip
+This is the output of the `dotnet publish` command from the web directory. This is the running code for Qbot. 
+This file is built at runtime and deployed.
+
 ## Update App logic
-If you want to update the application logic (Rest APIs or ReactApp), you can make the changes locally and deploy them to the AppService instance.
+If you want to update the application logic (REST APIs or React App), you can make the changes locally and deploy them to the App Service instance.
 
 You can deploy directly from Visual Studio. Right click the web project and select Publish. [Learn more](https://docs.microsoft.com/en-us/troubleshoot/azure/general/web-apps-deployment-faqs)
 

@@ -52,10 +52,11 @@
 
     # Modules that must be imported into the global environment prior to importing this module
     RequiredModules   = @(
-        @{ModuleName = 'Az.Accounts'; ModuleVersion = '2.7.0' },
+        @{ModuleName = 'Az.Accounts'; ModuleVersion = '2.7.6' },
         @{ModuleName = 'Az.Sql'; ModuleVersion = '3.6.0' },
         @{ModuleName = 'Az.Resources'; ModuleVersion = '5.1.0' },
         @{ModuleName = 'Az.KeyVault'; ModuleVersion = '4.1.0' },
+        @{ModuleName = 'Az.Websites'; ModuleVersion = '2.11.1'},
         @{ModuleName = 'SqlServer'; ModuleVersion = '21.1.18256' },
         @{ModuleName = 'Microsoft.Graph.Applications'; ModuleVersion = '1.9.6' } ,
         @{ModuleName = 'Microsoft.Graph.DirectoryObjects'; ModuleVersion = '1.9.6' },

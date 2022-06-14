@@ -11,8 +11,7 @@ function New-QBotDeployment
         $location = "westus2",
         $searchLocation = "westus2",
         $manifestId = "97c66967-8416-4660-a22d-168a02fa5633",
-        $manifestLocation = "./manifest.zip",
-        $qBotZipUri
+        $manifestLocation = "./manifest.zip"
     )
 
     # Create the resource group
@@ -188,7 +187,6 @@ function New-QBotDeployment
             botHost = "https://${hostname}"
             botCertName = "BotApp"
             manifestId = $manifestId
-            qbotZipUri = $qBotZipUri
     
             "QnAMaker:Endpoint" = $qnaMakerEndpoint 
             "QnAMaker:EndpointKey" = $kbKeys.primaryEndpointKey
@@ -209,6 +207,25 @@ function New-QBotDeployment
             throw "deployment failed"
         }
     }
+
+    # Get the current working directory
+    $currentWorkingDirectory = Get-Location
+
+    # Build and zip the project to deploy.
+    Write-Verbose "Building the web project."
+    $webProjectDirectory = "$($currentWorkingDirectory)/../Source/Microsoft.Teams.Apps.QBot.Web"
+    Set-Location -Path $webProjectDirectory
+    dotnet publish --configuration Release --output .\bin\publish --verbosity quiet
+
+    Write-Verbose "Preparing qbot.zip."
+    Compress-Archive .\bin\publish\* .\bin\qbot.zip -Force
+
+    # Deploy zip to app service
+    Write-Verbose "Deploying zip to app service."
+    $zipFilePath = "$($webProjectDirectory)/bin/qbot.zip"
+    Publish-AzWebApp -ResourceGroupName $resourceGroupName -Name "$($resourceGroupName)-webapp" -ArchivePath $zipFilePath
+
+    Set-Location -Path $currentWorkingDirectory
 
     # Now create the manifest zip file for upload to the catalog for the generated bot
     Write-Verbose "Generating Manifest"
