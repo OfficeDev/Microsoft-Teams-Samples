@@ -16,7 +16,7 @@ import {
   SupportDepartment,
   SupportDepartmentInput,
 } from 'models';
-import { isApiErrorCode } from 'utils/ErrorUtils';
+import { apiRetryQuery, isApiErrorCode } from 'utils/UtilsFunctions';
 
 function Configure() {
   const [userHasConsented, setUserHasConsented] = useState<boolean>(false);
@@ -32,9 +32,12 @@ function Configure() {
       createSupportDepartment(supportDepartmentInput),
     {
       retry: (failureCount: number, error: Error) =>
-        failureCount <= 3 &&
-        isApiErrorCode(ApiErrorCode.AuthConsentRequired, error) &&
-        userHasConsented,
+        apiRetryQuery(
+          failureCount,
+          error,
+          userHasConsented,
+          setUserHasConsented,
+        ),
     },
   );
 

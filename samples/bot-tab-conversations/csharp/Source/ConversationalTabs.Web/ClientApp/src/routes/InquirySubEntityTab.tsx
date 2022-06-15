@@ -13,7 +13,7 @@ import { getSupportDepartment, getSupportDepartmentItem } from 'api';
 import { CustomerInquiryDetail } from 'components/CustomerInquiryDetail';
 import { ConsentRequest } from 'components/ConsentRequest';
 import { ApiErrorCode, CustomerInquiry, SupportDepartment } from 'models';
-import { isApiErrorCode } from 'utils/ErrorUtils';
+import { apiRetryQuery, isApiErrorCode } from 'utils/UtilsFunctions';
 
 function InquirySubEntityTab() {
   const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
@@ -35,7 +35,7 @@ function InquirySubEntityTab() {
   }, []);
 
   const inquiry = useQuery<CustomerInquiry, Error>(
-    ['getSupportDepartmentItem', { entityId }, { subEntityId }],
+    ['getSupportDepartmentItem', { entityId,  subEntityId, userHasConsented }],
     () => getSupportDepartmentItem(entityId, subEntityId),
     {
       onSuccess: () => {
@@ -45,14 +45,17 @@ function InquirySubEntityTab() {
         }
       },
       retry: (failureCount: number, error: Error) =>
-        failureCount <= 3 &&
-        isApiErrorCode(ApiErrorCode.AuthConsentRequired, error) &&
-        userHasConsented,
+        apiRetryQuery(
+          failureCount,
+          error,
+          userHasConsented,
+          setUserHasConsented,
+        ),
     },
   );
 
   const supportDepartment = useQuery<SupportDepartment, Error>(
-    ['getSupportDepartment', { entityId }],
+    ['getSupportDepartment', { entityId, userHasConsented }],
     () => getSupportDepartment(entityId),
     {
       onSuccess: () => {
@@ -105,7 +108,10 @@ function InquirySubEntityTab() {
   const getErrorNode = (): ReactNode => {
     if (
       (isApiErrorCode(ApiErrorCode.AuthConsentRequired, inquiry.error) ||
-        isApiErrorCode(ApiErrorCode.AuthConsentRequired, supportDepartment.error)) &&
+        isApiErrorCode(
+          ApiErrorCode.AuthConsentRequired,
+          supportDepartment.error,
+        )) &&
       !userHasConsented
     ) {
       return <ConsentRequest callback={consentCallback} />;
@@ -123,7 +129,11 @@ function InquirySubEntityTab() {
           secondary
           content="Back"
           onClick={() =>
-            navigate(`/${source}${source === 'personal' ? '' : '/' + entityId}?ignoreContextRedirect`)
+            navigate(
+              `/${source}${
+                source === 'personal' ? '' : '/' + entityId
+              }?ignoreContextRedirect`,
+            )
           }
         />
       </Flex>

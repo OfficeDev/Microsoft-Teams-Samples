@@ -5,23 +5,26 @@ import { getAllSupportDepartments } from 'api';
 import { ApiErrorCode, SupportDepartment } from 'models';
 import { CustomerInquiryTable } from 'components/CustomerInquiryTable';
 import { ConsentRequest } from 'components/ConsentRequest';
-import { isApiErrorCode } from 'utils/ErrorUtils';
+import { apiRetryQuery, isApiErrorCode } from 'utils/UtilsFunctions';
 
 function PersonalTab() {
   const [userHasConsented, setUserHasConsented] = useState<boolean>(false);
   const queryClient = useQueryClient();
 
   const allSupportDepartments = useQuery<SupportDepartment[], Error>(
-    ['getAllSupportDepartments'],
+    ['getAllSupportDepartments', { userHasConsented }],
     () => getAllSupportDepartments(),
     {
       onSuccess: () => {
         setUserHasConsented(false);
       },
       retry: (failureCount: number, error: Error) =>
-        failureCount <= 3 &&
-        isApiErrorCode(ApiErrorCode.AuthConsentRequired, error) &&
-        userHasConsented,
+        apiRetryQuery(
+          failureCount,
+          error,
+          userHasConsented,
+          setUserHasConsented,
+        ),
     },
   );
 
@@ -37,7 +40,10 @@ function PersonalTab() {
 
   const getErrorNode = (): ReactNode => {
     if (
-      isApiErrorCode(ApiErrorCode.AuthConsentRequired, allSupportDepartments.error) &&
+      isApiErrorCode(
+        ApiErrorCode.AuthConsentRequired,
+        allSupportDepartments.error,
+      ) &&
       !userHasConsented
     ) {
       return <ConsentRequest callback={consentCallback} />;

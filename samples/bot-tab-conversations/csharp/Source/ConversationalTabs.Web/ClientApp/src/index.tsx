@@ -12,13 +12,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: (query: Query) => query.state.status === 'success',
-      // Linearly increase duration between retries
-      retryDelay: (attempt: number) => attempt * 2000,
     },
-    mutations: {
-      // Linearly increase duration between retries
-      retryDelay: (attempt: number) => attempt * 2000,
-    }
   },
 });
 

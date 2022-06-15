@@ -8,7 +8,7 @@ import { getSupportDepartment } from 'api';
 import { CustomerInquiryTable } from 'components/CustomerInquiryTable';
 import { ConsentRequest } from 'components/ConsentRequest';
 import { ApiErrorCode, SupportDepartment } from 'models';
-import { isApiErrorCode } from 'utils/ErrorUtils';
+import { apiRetryQuery, isApiErrorCode } from 'utils/UtilsFunctions';
 
 function SupportDepartmentChannelTab() {
   const [userHasConsented, setUserHasConsented] = useState<boolean>(false);
@@ -37,13 +37,16 @@ function SupportDepartmentChannelTab() {
   const entityId: string = params.entityId ?? 'unknown';
 
   const supportDepartment = useQuery<SupportDepartment, Error>(
-    ['getSupportDepartment', { entityId }],
+    ['getSupportDepartment', { entityId, userHasConsented }],
     () => getSupportDepartment(entityId),
     {
       retry: (failureCount: number, error: Error) =>
-        failureCount <= 3 &&
-        isApiErrorCode(ApiErrorCode.AuthConsentRequired, error) &&
-        userHasConsented,
+        apiRetryQuery(
+          failureCount,
+          error,
+          userHasConsented,
+          setUserHasConsented,
+        ),
     },
   );
 
