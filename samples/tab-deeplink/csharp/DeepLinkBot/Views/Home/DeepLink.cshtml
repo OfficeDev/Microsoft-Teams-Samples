@@ -12,7 +12,7 @@
 
         if (context.page.subPageId === "topic1")
         {
-            document.getElementById("taskDiv") = "Bots in Teams:";
+            document.getElementById("taskDiv").innerHTML = "Bots in Teams:";
             document.getElementById("taskContent").innerHTML = "Conversational bots allow users to interact with your web service through text, interactive cards, and task modules. They're incredibly flexible — conversational bots can be scoped to handling a few simple commands or complex, artificial-intelligence-powered and natural-language-processing virtual assistants. They can be one aspect of a larger application, or completely stand-alone."
             var element = document.getElementById('tableList');
             element.style.display = "none";
@@ -36,6 +36,10 @@
             element.style.display = "none";
             context.page.subPageId = null;
         }
+        else if (context.page.subPageId === "deeplinks")
+        {
+            window.location.href = window.location.origin + "/ExtendedDeepLinks";
+        }
         else
         {
             $('#tableList').show();
@@ -54,12 +58,25 @@
 
     @foreach (var item in Model)
     {
-        <tr style="font-family:'Segoe UI';font-size:20px">
+        @if (item.ID != 4)
+        {
+            <tr style="font-family:'Segoe UI';font-size:20px">
             <td>
                 @Html.ActionLink(item.linkTitle, "Detail", new { id = item.ID })
             </td>
-        </tr>
-        <tr></tr>
-        <tr></tr>
+            </tr>
+            <tr></tr>
+            <tr></tr>
+        }
+        else
+        {
+            <tr style="font-family:'Segoe UI';font-size:20px">
+            <td>
+                @Html.ActionLink(item.linkTitle, "ExtendedDeepLinks")
+            </td>
+            </tr>
+            <tr></tr>
+            <tr></tr>
+        }
     }
 </table>

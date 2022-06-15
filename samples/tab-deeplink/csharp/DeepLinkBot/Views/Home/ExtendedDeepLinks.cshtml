@@ -1,0 +1,150 @@
+﻿@{
+    ViewBag.Title = "Detail";
+}
+
+<script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+
+<style>
+    .callDeeplinkButton {
+        background-color: #444791;
+        cursor: pointer;
+        color: white;
+        width: 50px;
+        border-radius: 8px;
+        margin-top: 1rem;
+        padding: 10px 0px;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .inputContainer {
+        margin-top: 10px;
+    }
+
+    #userInput {
+        width: 20rem;
+    }
+
+    .requiredField {
+        margin-left: 0.5rem;
+        color: red;
+    }
+</style>
+
+<script type="text/javascript">
+    microsoftTeams.app.initialize().then(() => {
+        microsoftTeams.app.getContext().then((context) => {
+            console.log(context);
+        });
+    });
+
+    function onCallDeepLinkButtonClick() {
+        var userInput = document.getElementById("userInput");
+
+        if (userInput.value.trim() == "") {
+            document.getElementById("requiredField").innerHTML = "Required";
+        }
+        else {
+            var userString = splitUserWithComma(userInput.value);
+            document.getElementById("requiredField").innerHTML = "";
+
+            var deepLinkUrl = "https://teams.microsoft.com/l/call/0/0?users=" + userString;
+
+            if (document.getElementById("isVideoCall").checked) {
+                deepLinkUrl = deepLinkUrl + "&withVideo=true"
+            }
+
+            document.getElementById("callDeepLink").innerHTML = deepLinkUrl;
+            microsoftTeams.app.openLink(deepLinkUrl)
+        }
+    }
+
+    function onSchedulingDialogClick() {
+        var subjectInput = document.getElementById("Subject");
+        var attendeesInput = document.getElementById("Attendees");
+        var startTimeInput = document.getElementById("StartTime");
+        var endTimeInput = document.getElementById("EndTime");
+        var contentInput = document.getElementById("Content");
+
+        if (subjectInput.value.trim() !== "" && attendeesInput.value.trim() !== "" && startTimeInput.value !== "" && endTimeInput.value !== "") {
+            let deepLinkUrl = `https://teams.microsoft.com/l/meeting/new?subject=${subjectInput.value}&startTime=${startTimeInput.value}&endTime=${endTimeInput.value}&content=${contentInput.value}&attendees=${splitUserWithComma(attendeesInput.value)}`;
+
+            document.getElementById("dialogDeeplink").innerHTML = deepLinkUrl;
+            microsoftTeams.app.openLink(deepLinkUrl);
+        }
+    }
+
+    function splitUserWithComma(userInput) {
+        var users = userInput.split(',');
+        var userString = "";
+        users.forEach((value, index) => {
+            if (index == 0) {
+                userString = value.trim();
+            }
+            else {
+                userString = `${userString},${value.trim()}`
+            }
+        });
+
+        return userString;
+    }
+</script>
+
+<div>
+    <form onsubmit="event.preventDefault();">
+        <div>
+            Please enter user email or PSTN of user comma seperated.
+        </div>
+        <input type="text" id="userInput" required /><span id="requiredField" class="requiredField"></span>
+        <div class="inputContainer">
+            <span id="callDeepLink">
+            </span>
+        </div>
+        <div class="inputContainer">
+            <input type="checkbox" id="isVideoCall" />
+            <span>Make Video call</span>
+        </div>
+        <button type="submit" class="callDeeplinkButton" onclick="onCallDeepLinkButtonClick()">
+            Call
+        </button>
+    </form>
+
+    <div class="inputContainer">
+        <form>
+            <span>Add Details for scheduling dialog</span>
+            <div class="inputContainer">
+                <label for="Subject">Subject:</label>
+                <input type="text" id="Subject" value="" required />
+            </div>
+            <div class="inputContainer">
+                <label for="Content">Content:</label>
+                <input type="text" id="Content" value="" />
+            </div>
+            <div class="inputContainer">
+                <label for="Attendees">Attendees:</label>
+                <input type="text" id="Attendees" value="" required />
+            </div>
+            <div class="inputContainer">
+                <label for="StartTime">Start Time:</label>
+                <input type="datetime-local" id="StartTime" value="" required />
+            </div>
+            <div class="inputContainer">
+                <label for="EndTime">End Time:</label>
+                <input type="datetime-local" id="EndTime" value="" required />
+            </div>
+            <div class="inputContainer">
+                <span id="dialogDeeplink"></span>
+            </div>
+
+            <button type="submit" class="callDeeplinkButton" style="width:125px !important;" onclick="onSchedulingDialogClick()">
+                Schedule Meeting
+            </button>
+        </form>
+
+    </div>
+
+    <p>
+        @Html.ActionLink("Back to List", "TaskList")
+    </p>
+</div>
+

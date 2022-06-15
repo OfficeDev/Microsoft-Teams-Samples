@@ -21,12 +21,12 @@ namespace Microsoft.BotBuilderSamples.Bots
         }
 
         public static string channelID = "";
-        public static string entityIdTab = "com.contoso.DeeplLinkBot.help";
-        public static string entityIdChannel = "DeepLinkApp";
         public string teamsUrl = "https://teams.microsoft.com/l/entity/";
         public string tabUrlTask1;
         public string tabUrlTask2;
         public string tabUrlTask3;
+        public string callingDeeplink;
+        public string allDeeplinks;
 
         DeeplinkHelper deeplinkHelper = new DeeplinkHelper();
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
@@ -51,17 +51,18 @@ namespace Microsoft.BotBuilderSamples.Bots
             if (turnContext.Activity.Conversation.ConversationType == "channel")
             {
                 channelID = turnContext.Activity.Conversation.Id.Split(';')[0];
-                tabUrlTask1 = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, entityIdChannel, "bot1");
-                tabUrlTask2 = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, entityIdChannel, "bot2");
-                tabUrlTask3 = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, entityIdChannel, "bot3");
+                tabUrlTask1 = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, _configuration["ChannelEntityId"], "bot1");
+                tabUrlTask2 = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, _configuration["ChannelEntityId"], "bot2");
+                tabUrlTask3 = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, _configuration["ChannelEntityId"], "bot3");
+                tabUrlTask3 = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, _configuration["ChannelEntityId"], "deeplinks");
             }
             else
             {
-                tabUrlTask1 = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], entityIdTab, "topic1");
-                tabUrlTask2 = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], entityIdTab, "topic2");
-                tabUrlTask3 = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], entityIdTab, "topic3");
+                tabUrlTask1 = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["TabEntityId"], "topic1");
+                tabUrlTask2 = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["TabEntityId"], "topic2");
+                tabUrlTask3 = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["TabEntityId"], "topic3");
+                allDeeplinks = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["TabEntityId"], "deeplinks");
             }
-
             var DeepLinkCard = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
             {
                 Body = new List<AdaptiveElement>()
@@ -96,7 +97,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                                     }
                                 }
                             },
-                             new AdaptiveColumnSet()
+                            new AdaptiveColumnSet()
                             {
                                 Columns=new List<AdaptiveColumn>()
                                 {
@@ -115,25 +116,44 @@ namespace Microsoft.BotBuilderSamples.Bots
                                     }
                                 }
                             },
-                               new AdaptiveColumnSet()
-                               {
-                                    Columns=new List<AdaptiveColumn>()
+                            new AdaptiveColumnSet()
+                            {
+                                Columns=new List<AdaptiveColumn>()
+                                {
+                                    new AdaptiveColumn()
                                     {
-                                        new AdaptiveColumn()
+                                        Width=AdaptiveColumnWidth.Auto,
+                                        Items=new List<AdaptiveElement>()
                                         {
-                                            Width=AdaptiveColumnWidth.Auto,
-                                            Items=new List<AdaptiveElement>()
-                                            {
-                                               new AdaptiveTextBlock(){Text="Teams Apps",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
-                                            },
-                                           SelectAction = new AdaptiveOpenUrlAction()
-                                           {
-                                             Url=new Uri(tabUrlTask3),
-                                             Title = "Teams Apps"
-                                           }
+                                            new AdaptiveTextBlock(){Text="Teams Apps",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
+                                        },
+                                        SelectAction = new AdaptiveOpenUrlAction()
+                                        {
+                                            Url=new Uri(tabUrlTask3),
+                                            Title = "Teams Apps"
                                         }
                                     }
-                               }
+                                }
+                            },
+                            new AdaptiveColumnSet()
+                            {
+                                Columns=new List<AdaptiveColumn>()
+                                {
+                                    new AdaptiveColumn()
+                                    {
+                                        Width=AdaptiveColumnWidth.Auto,
+                                        Items=new List<AdaptiveElement>()
+                                        {
+                                            new AdaptiveTextBlock(){Text="Extended Deeplink features",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
+                                        },
+                                        SelectAction = new AdaptiveOpenUrlAction()
+                                        {
+                                            Url=new Uri(allDeeplinks),
+                                            Title = "Extended Deeplink features"
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }

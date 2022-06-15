@@ -26,7 +26,6 @@
             element.style.display = "none";
             context.subEntityId = null;
         }
-
         else if (context.subEntityId === "bot3") {
             document.getElementById("taskDiv").innerHTML = "Teams Apps:";
             document.getElementById("taskContent").innerHTML = "Teams apps are a combination of capabilities and entry points. For example, people can chat with your app's bot (capability) in a channel (entry point). Some apps are simple(send notifications), while others are complex(manage patient records).When planning your app, remember that Teams is a collaboration hub.The best Teams apps help people express themselves and work better together."
@@ -52,12 +51,25 @@
 
     @foreach (var item in Model)
     {
-        <tr style="font-family:'Segoe UI';font-size:20px">
-            <td>
-                @Html.ActionLink(item.linkTitle, "DetailChannel", new { id = item.ID })
-            </td>
-        </tr>
-        <tr></tr>
-        <tr></tr>
+        @if (item.ID != 4)
+        {
+            <tr style="font-family:'Segoe UI';font-size:20px">
+                <td>
+                    @Html.ActionLink(item.linkTitle, "DetailChannel", new { id = item.ID })
+                </td>
+            </tr>
+            <tr></tr>
+            <tr></tr>
+        }
+        else
+        {
+            <tr style="font-family:'Segoe UI';font-size:20px">
+                <td>
+                    @Html.ActionLink(item.linkTitle, "ExtendedDeepLinks")
+                </td>
+            </tr>
+            <tr></tr>
+            <tr></tr>
+        }
     }
 </table>
