@@ -1,0 +1,487 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "baseResourceName": {
+            "type": "string",
+            "minLength": 1,
+            "metadata": {
+                "description": "The base name to use for the resources that will be provisioned."
+            }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for all resources except qnaMaker which has limited region options."
+            }
+        },
+        "qnaMakerLocation": {
+            "type": "string",
+            "defaultValue": "westus",
+            "metadata": {
+                "description": "Location for qna maker service"
+            }
+        },
+        "hostingPlanSku": {
+            "type": "string",
+            "allowedValues": [
+                "Basic",
+                "Standard",
+                "Premium"
+            ],
+            "defaultValue": "Standard",
+            "metadata": {
+                "description": "The pricing tier for the hosting plan."
+            }
+        },
+        "hostingPlanSize": {
+            "type": "string",
+            "allowedValues": [
+                "1",
+                "2",
+                "3"
+            ],
+            "defaultValue": "1",
+            "metadata": {
+                "description": "The size of the hosting plan (small, medium, or large)."
+            }
+        },
+        "vnetAddressPrefix": {
+            "type": "string",
+            "defaultValue": "10.0.0.0/16",
+            "metadata": {
+                "description": "Address prefix"
+            }
+        },
+        "sqlAdminUserMail": {
+            "type": "string",
+            "metadata": {
+                "description": ""
+            }
+        },
+        "sqlAdminUserId": {
+            "type": "string",
+            "metadata": {
+                "description": ""
+            }
+        },
+        "sqlAdminTenantId": {
+            "type": "string",
+            "defaultValue": "[subscription().tenantId]",
+            "metadata": {
+                "description": ""
+            }
+        },
+        "azureSearchSku": {
+            "type": "string",
+            "defaultValue": "standard"
+        },
+        "searchHostingMode": {
+            "type": "string",
+            "defaultValue": "Default"
+        }
+    },
+    "variables": {
+        "hostingPlanName": "[toLower(concat(parameters('baseResourceName'), '-host'))]",
+        "vNetName": "[concat(parameters('baseResourceName'), '-vnet')]",
+        "skuFamily": "[take(parameters('hostingPlanSku'), 1)]",
+        "webAppName": "[concat(parameters('baseResourceName'), '-webapp')]",
+        "dbName": "[toLower(concat(parameters('baseResourceName'), '-db'))]",
+        "qnaMakerName": "[concat(parameters('baseResourceName'), '-qnaMaker')]",
+        "azureSearchName": "[toLower(concat(replace(parameters('baseResourceName'), '-', ''), 'search'))]",
+        "keyVaultName": "[concat(parameters('baseResourceName'), '-keyvault')]"
+    },
+    "outputs": {
+        "hostname": {
+            "type": "string",
+            "value": "[reference(resourceId('Microsoft.Web/sites', variables('webAppName'))).defaultHostName]"
+        },
+        "keyVaultName": {
+            "type": "string",
+            "value": "[variables('keyVaultName')]"
+        },
+        "qnaMakerName": {
+            "type": "string",
+            "value": "[variables('qnaMakerName')]"
+        },
+        "qnaMakerEndpoint": {
+            "type": "string",
+            "value": "[reference(resourceId('Microsoft.CognitiveServices/accounts', variables('qnaMakerName'))).endpoint]"
+        },
+        "qnaMakerPrimaryKey": {
+            "type": "string",
+            "value": "[listKeys(resourceId('Microsoft.CognitiveServices/accounts/', variables('qnaMakerName')),'2016-02-01-preview').key1]"
+        },
+        "qnaMakerRuntimeEndpoint": {
+            "type": "string",
+            "value": "[reference(resourceId('Microsoft.Web/sites', variables('qnaMakerName'))).defaultHostName]"
+        },
+        "databaseName": {
+            "type": "string",
+            "value": "[variables('dbName')]"
+        },
+        "qbotPrincipalId": {
+            "type": "string",
+            "value": "[reference(resourceId('Microsoft.Web/sites', variables('webAppName')), '2019-08-01', 'full').identity.principalId]"
+        },
+        "qbotPrincipalName": {
+            "type": "string",
+            "value": "[variables('webAppName')]"
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2020-05-01",
+            "name": "[variables('vNetName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('vnetAddressPrefix')]"
+                    ]
+                }
+            },
+            "resources": [
+                {
+                    "type": "Microsoft.Network/virtualNetworks/subnets",
+                    "apiVersion": "2020-11-01",
+                    "name": "[concat(variables('vNetName'), '/Internal-Network')]",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Network/virtualNetworks',  variables('vNetName'))]"
+                    ],
+                    "properties": {
+                        "addressPrefix": "10.0.0.0/24",
+                        "serviceEndpoints": [
+                            {
+                                "service": "Microsoft.Sql",
+                                "locations": [
+                                    "[parameters('location')]"
+                                ]
+                            }
+                        ],
+                        "delegations": [
+                            {
+                                "name": "delegation",
+                                "properties": {
+                                    "serviceName": "Microsoft.Web/serverfarms"
+                                }
+                            }
+                        ],
+                        "privateEndpointNetworkPolicies": "Enabled",
+                        "privateLinkServiceNetworkPolicies": "Enabled"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Microsoft.Web/serverfarms",
+            "apiVersion": "2016-09-01",
+            "name": "[variables('hostingPlanName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "name": "[variables('hostingPlanName')]",
+                "hostingEnvironment": "",
+                "numberOfWorkers": 1
+            },
+            "sku": {
+                "name": "[concat(variables('skuFamily'), parameters('hostingPlanSize'))]",
+                "tier": "[parameters('hostingPlanSku')]",
+                "size": "[concat(variables('skuFamily'), parameters('hostingPlanSize'))]",
+                "family": "[variables('skuFamily')]",
+                "capacity": 0
+            }
+        },
+        {
+            "name": "[variables('azureSearchName')]",
+            "type": "Microsoft.Search/searchServices",
+            "apiVersion": "2015-08-19",
+            "location": "[parameters('qnaMakerLocation')]",
+            "tags": {},
+            "properties": {
+                "replicaCount": 1,
+                "partitionCount": 1,
+                "hostingMode": "[parameters('searchHostingMode')]",
+                "publicNetworkAccess": "Enabled",
+                "networkRuleSet": {
+                    "ipRules": [],
+                    "bypass": "None"
+                },
+                "encryptionWithCmk": {},
+                "disableLocalAuth": false,
+                "authOptions": {
+                    "apiKeyOnly": {}
+                },
+                "disabledDataExfiltrationOptions": [],
+                "semanticSearch": "disabled"
+            },
+            "sku": {
+                "name": "[parameters('azureSearchSku')]"
+            }
+        },
+        {
+            "type": "Microsoft.Sql/servers",
+            "apiVersion": "2020-11-01-preview",
+            "name": "[variables('dbName')]",
+            "location": "[parameters('location')]",
+            "kind": "v12.0",
+            "properties": {
+                "version": "12.0",
+                "minimalTlsVersion": "1.2",
+                "publicNetworkAccess": "Enabled",
+                "administrators": {
+                    "administratorType": "ActiveDirectory",
+                    "login": "[parameters('sqlAdminUserMail')]",
+                    "sid": "[parameters('sqlAdminUserId')]",
+                    "tenantId": "[parameters('sqlAdminTenantId')]",
+                    "principalType": "User",
+                    "azureADOnlyAuthentication": true
+                }
+            },
+            "resources": [
+                {
+                    "type": "Microsoft.Sql/servers/virtualNetworkRules",
+                    "apiVersion": "2020-11-01-preview",
+                    "name": "[concat(variables('dbName'), '/Internal-Network-Access')]",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Sql/servers', variables('dbName'))]",
+                        "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('vNetName')), '/subnets/Internal-Network')]"
+                    ],
+                    "properties": {
+                        "virtualNetworkSubnetId": "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('vNetName')), '/subnets/Internal-Network')]",
+                        "ignoreMissingVnetServiceEndpoint": false
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Microsoft.Sql/servers/databases",
+            "apiVersion": "2020-11-01-preview",
+            "name": "[concat(variables('dbName'), '/qbot')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Sql/servers', variables('dbName'))]"
+            ],
+            "sku": {
+                "name": "GP_S_Gen5",
+                "tier": "GeneralPurpose",
+                "family": "Gen5",
+                "capacity": 1
+            },
+            "kind": "v12.0,user,vcore,serverless",
+            "properties": {
+                "collation": "SQL_Latin1_General_CP1_CI_AS",
+                "maxSizeBytes": 53687091200,
+                "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
+                "autoPauseDelay": 120
+            },
+            "resources": [
+                {
+                    "type": "Microsoft.Sql/servers/databases/geoBackupPolicies",
+                    "apiVersion": "2014-04-01",
+                    "name": "[concat(variables('dbName'), '/qbot/Default')]",
+                    "location": "[parameters('location')]",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Sql/servers/databases', variables('dbName'), 'qbot')]",
+                        "[resourceId('Microsoft.Sql/servers', variables('dbName'))]"
+                    ],
+                    "properties": {
+                        "state": "Enabled"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2016-08-01",
+            "name": "[variables('qnaMakerName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "enabled": true,
+                "siteConfig": {
+                    "numberOfWorkers": 1,
+                    "acrUseManagedIdentityCreds": false,
+                    "alwaysOn": false,
+                    "http20Enabled": false,
+                    "functionAppScaleLimit": 0,
+                    "minimumElasticInstanceCount": 0,
+                    "cors": {
+                        "allowedOrigins": [
+                            "https://www.qnamaker.ai",
+                            "https://qnamaker-service.trafficmanager.net",
+                            "https://qnamaker.ai"
+                        ]
+                    }
+                },
+                "name": "[variables('qnaMakerName')]",
+                "serverFarmId": "[concat('/subscriptions/', subscription().SubscriptionId,'/resourcegroups/', resourceGroup().name, '/providers/Microsoft.Web/serverfarms/', variables('hostingPlanName'))]",
+                "reserved": false,
+                "isXenon": false,
+                "hyperV": false,
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": true,
+                "clientCertEnabled": false,
+                "clientCertMode": "Required",
+                "hostNamesDisabled": false,
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": false,
+                "redundancyMode": "None",
+                "storageAccountRequired": false,
+                "keyVaultReferenceIdentity": "SystemAssigned"
+            },
+            "dependsOn": [
+                "[concat('Microsoft.Web/serverfarms/', variables('hostingPlanName'))]"
+            ],
+            "resources": [
+                {
+                    "apiVersion": "2015-08-01",
+                    "name": "appsettings",
+                    "type": "config",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Web/Sites', variables('qnaMakerName'))]",
+                        "[resourceId('Microsoft.Search/searchServices/', variables('azureSearchName'))]"
+                    ],
+                    "properties": {
+                        "AzureSearchName": "[variables('azureSearchName')]",
+                        "AzureSearchAdminKey": "[listAdminKeys(resourceId('Microsoft.Search/searchServices/', variables('azureSearchName')), '2015-08-19').primaryKey]",
+                        "PrimaryEndpointKey": "[concat(variables('qnaMakerName'), '-PrimaryEndpointKey')]",
+                        "SecondaryEndpointKey": "[concat(variables('qnaMakerName'), '-SecondaryEndpointKey')]",
+                        "DefaultAnswer": "No good match found in KB.",
+                        "QNAMAKER_EXTENSION_VERSION": "latest"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2021-02-01",
+            "name": "[concat(variables('qnaMakerName'), '/ftp')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', variables('qnaMakerName'))]"
+            ],
+            "tags": {},
+            "properties": {
+                "allow": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2021-02-01",
+            "name": "[concat(variables('qnaMakerName'), '/scm')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', variables('qnaMakerName'))]"
+            ],
+            "tags": {},
+            "properties": {
+                "allow": true
+            }
+        },
+        {
+            "type": "Microsoft.CognitiveServices/accounts",
+            "kind": "QnAMaker",
+            "name": "[variables('qnaMakerName')]",
+            "apiVersion": "2017-04-18",
+            "location": "westus",
+            "sku": {
+                "name": "S0"
+            },
+            "properties": {
+                "apiProperties": {
+                    "qnaRuntimeEndpoint": "[concat('https://',reference(resourceId('Microsoft.Web/sites', variables('qnaMakerName'))).hostNames[0])]"
+                },
+                "customSubDomainName": "[variables('qnaMakerName')]",
+                "publicNetworkAccess": "Enabled"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/Sites', variables('qnaMakerName'))]",
+                "[resourceId('Microsoft.Search/searchServices/', variables('azureSearchName'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2016-08-01",
+            "name": "[variables('webAppName')]",
+            "location": "[parameters('location')]",
+            "kind": "app",
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(variables('webAppName'), '.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(variables('webAppName'), '.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[concat('/subscriptions/', subscription().SubscriptionId,'/resourcegroups/', resourceGroup().name, '/providers/Microsoft.Web/serverfarms/', variables('hostingPlanName'))]",
+                "virtualNetworkSubnetId": "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('vNetName')), '/subnets/Internal-Network')]",
+                "vnetRouteAllEnabled": true
+            },
+            "dependsOn": [
+                "[concat('Microsoft.Web/serverfarms/', variables('hostingPlanName'))]",
+                "[concat(resourceId('Microsoft.Network/virtualNetworks', variables('vNetName')), '/subnets/Internal-Network')]"
+            ]
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults",
+            "apiVersion": "2021-06-01-preview",
+            "name": "[variables('keyVaultName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "tenantId": "[subscription().tenantId]",
+                "sku": {
+                    "family": "A",
+                    "name": "standard"
+                },
+                "accessPolicies": [
+                    {
+                        "tenantId": "[parameters('sqlAdminTenantId')]",
+                        "objectId": "[parameters('sqlAdminUserId')]",
+                        "permissions": {
+                            "keys": [],
+                            "secrets": [],
+                            "certificates": [
+                                "Create",
+                                "Get",
+                                "List"
+                            ],
+                            "storage": []
+                        }
+                    },
+                    {
+                        "tenantId": "[reference(resourceId('Microsoft.Web/sites', variables('webAppName')), '2019-08-01', 'full').identity.tenantId]",
+                        "objectId": "[reference(resourceId('Microsoft.Web/sites', variables('webAppName')), '2019-08-01', 'full').identity.principalId]",
+                        "permissions": {
+                            "keys": [
+                                "Get"
+                            ],
+                            "secrets": [
+                                "Get"
+                            ],
+                            "certificates": [
+                                "Get",
+                                "List"
+                            ],
+                            "storage": []
+                        }
+                    }
+                ],
+                "vaultUri": "[concat('https://', variables('keyVaultName'), '.vault.azure.net/')]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', variables('webAppName'))]"
+            ]
+        }
+    ]
+}

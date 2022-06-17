@@ -198,6 +198,12 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |26|Live coding interview using Shared meeting stage |This sample demos a live coding in a teams meeting stage.|[View][meetings-live-code-interview#csharp]|[View][meetings-live-code-interview#nodejs]|
 |27|Release Management     | This is a sample used to send workitem notification using Azure webhook.                                        |[View][release-management#cs]       |[View][release-management#nodejs]
 
+## Application templates
+
+|    | App Name       | Description                                                                      | Code   |
+|:--:|:------------------|:---------------------------------------------------------------------------------------------------|:--------|
+|1|QBot          | QBot is a solution designed for classroom teaching scenarios which allows teachers, tutors, and students to intelligently answer each other's questions within the Microsoft Teams collaboration platform. |[View][msteams-app-qbot]
+
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
 [personal-tab-quickstart#ts]:samples/tab-personal-quickstart/ts
@@ -347,6 +353,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [tab-staggered-permission#nodejs]:samples/tab-staggered-permission/nodejs
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
 [tab-people-picker#nodejs]:samples/tab-people-picker/nodejs
+
+[msteams-app-qbot]:samples/msteams-application-qbot/
 
 ## Submitting issues
 
