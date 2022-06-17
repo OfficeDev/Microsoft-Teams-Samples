@@ -111,6 +111,6 @@
   ],
   "webApplicationInfo": {
     "id": "{TODO: MicrosoftAppId}",
-    "resource": "api://{TODO: SiteUrlDomain}/botid-{TODO: MicrosoftAppId}/{TODO: MicrosoftAppId}"
+    "resource": "api://{TODO: SiteUrlDomain}/botid-{TODO: MicrosoftAppId}"
   }
 }

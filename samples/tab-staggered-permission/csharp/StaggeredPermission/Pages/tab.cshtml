@@ -5,9 +5,11 @@
 
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js"
-            integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv"
-            crossorigin="anonymous"></script>
+    <script
+          src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
+          integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
+          crossorigin="anonymous">
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
@@ -78,19 +80,17 @@
             getClientSideToken();
         });
 
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
 
         // Get the id token.
         function getClientSideToken() {
             return new Promise((resolve, reject) => {
-                microsoftTeams.authentication.getAuthToken({
-                    successCallback: (result) => {
-                        resolve(result);
-                        decodingJWT(result)
-                    },
-                    failureCallback: function (error) {
-                        reject("Error getting token: " + error);
-                    }
+                microsoftTeams.authentication.getAuthToken().then((result) => {
+                    resolve(result);
+                    decodingJWT(result)
+                }).catch((error) => {
+                    console.log("error" + error);
+                    reject("Error getting token: " + error);
                 });
             });
         }
@@ -101,7 +101,7 @@
                 .then(data => {
                     $("#divError").hide();
                     accessToken = data.accessToken;
-                    microsoftTeams.getContext((context) => {
+                    microsoftTeams.app.getContext().then((context) => {
                         if (scope == "User.Read") {
                             getUserPhoto();
                         }
@@ -119,12 +119,10 @@
                     url: window.location.origin + "/auth-start?scope=" + scope,
                     width: 600,
                     height: 535,
-                    successCallback: result => {
-                        resolve(result);
-                    },
-                    failureCallback: reason => {
-                        reject(reason);
-                    }
+                }).then((result) => {
+                    resolve(result);
+                }).catch((error) => {
+                    reject(error);
                 });
             });
         }

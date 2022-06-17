@@ -5,33 +5,37 @@ html
     title Auth Start Page
 
   body
-    script(src="https://unpkg.com/@microsoft/teams-js@1.5.0/dist/MicrosoftTeams.min.js", crossorigin="anonymous")
+    script(src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js", crossorigin="anonymous")
 
     script.
-        microsoftTeams.initialize();
-        // Get the tab context, and use the information to navigate to Azure AD login page
-        microsoftTeams.getContext(function (context) {
-            // Generate random state string and store it, so we can verify it in the callback
-            let state = _guid();
-            localStorage.setItem("auth.state", state);
-            localStorage.removeItem("auth.error");
-            // See https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-implicit
-            // for documentation on these query parameters
-            let queryParams = {
-                client_id: "#{clientId}",
-                response_type: "id_token token",
-                response_mode: "fragment",
-                scope: "https://graph.microsoft.com/User.Read email openid profile offline_access",
-                redirect_uri: window.location.origin + "/auth-end",
-                nonce: _guid(),
-                state: state,
-                login_hint: context.loginHint,
-            };
-            // Go to the AzureAD authorization endpoint (tenant-specific endpoint, not "common")
-            // For guest users, we want an access token for the tenant we are currently in, not the home tenant of the guest. 
-            let authorizeEndpoint = `https://login.microsoftonline.com/${context.tid}/oauth2/v2.0/authorize?${toQueryString(queryParams)}`;
-            window.location.assign(authorizeEndpoint);
+        microsoftTeams.app.initialize().then(() => {
+            // Get the tab context, and use the information to navigate to Azure AD login page
+            microsoftTeams.app.getContext().then((context) => {
+                // Generate random state string and store it, so we can verify it in the callback
+                let state = _guid();
+                localStorage.setItem("auth.state", state);
+                localStorage.removeItem("auth.error");
+                // See https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-implicit
+                // for documentation on these query parameters
+                let queryParams = {
+                    client_id: "#{clientId}",
+                    response_type: "id_token token",
+                    response_mode: "fragment",
+                    scope: "https://graph.microsoft.com/User.Read email openid profile offline_access",
+                    redirect_uri: window.location.origin + "/auth-end",
+                    nonce: _guid(),
+                    state: state,
+                    login_hint: context.user.loginHint,
+                };
+
+                // Go to the AzureAD authorization endpoint (tenant-specific endpoint, not "common")
+                // For guest users, we want an access token for the tenant we are currently in, not the home tenant of the guest. 
+                let authorizeEndpoint = `https://login.microsoftonline.com/${context.user.tenant.id}/oauth2/v2.0/authorize?${toQueryString(queryParams)}`;
+
+                window.location.assign(authorizeEndpoint);
+            });
         });
+        
         // Build query string from map of query parameter
         function toQueryString(queryParams) {
             let encodedQueryParams = [];

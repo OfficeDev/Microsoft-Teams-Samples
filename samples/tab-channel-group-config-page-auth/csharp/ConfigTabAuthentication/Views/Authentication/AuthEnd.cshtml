@@ -28,35 +28,36 @@
     <title>Silent Authentication Sample Login</title>
 </head>
 <body>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
     <script type="text/javascript">
-    microsoftTeams.initialize();
+        microsoftTeams.app.initialize().then(() => {
+            let msalConfig = {
+                auth: {
+                    clientId: '@ViewBag.AuthEndClientId',
+                    redirectUri: window.location.origin + "/AuthEnd",       // This should be in the list of redirect uris for the AAD app
+                    navigateToLoginRequestUrl: false,
+                },
+                cache: {
+                    cacheLocation: "localStorage",
+                }
+            };
 
-        let msalConfig = {
-            auth: {
-                clientId: '@ViewBag.AuthEndClientId',
-                redirectUri: window.location.origin + "/AuthEnd",       // This should be in the list of redirect uris for the AAD app
-                navigateToLoginRequestUrl: false,
-            },
-            cache: {
-                cacheLocation: "localStorage",
-            }
-        };
+            const msalInstance = new msal.PublicClientApplication(msalConfig);
 
-        const msalInstance = new msal.PublicClientApplication(msalConfig);
+            msalInstance.handleRedirectPromise(window.location.hash).then((tokenResponse) => {
+                const currentAccounts = msalInstance.getAllAccounts();
 
-        msalInstance.handleRedirectPromise(window.location.hash).then((tokenResponse) => {
-            const currentAccounts = msalInstance.getAllAccounts();
-            if (!currentAccounts || currentAccounts.length === 0) {
-                console.log(msalInstance.getTokenCache());
-                microsoftTeams.authentication.notifyFailure("Unable to login");
-                return;
-            } else
-            {
-                microsoftTeams.authentication.notifySuccess();
-            }
+                if (!currentAccounts || currentAccounts.length === 0) {
+                    console.log(msalInstance.getTokenCache());
+                    microsoftTeams.authentication.notifyFailure("Unable to login");
+                    return;
+                } else {
+                    microsoftTeams.authentication.notifySuccess();
+                }
+            });
         });
-        </script>
+    </script>
+
 </body>
 </html>

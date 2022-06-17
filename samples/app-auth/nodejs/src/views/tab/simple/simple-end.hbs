@@ -28,10 +28,10 @@
         <title>Simple Authentication Sample Login</title>
     </head>
     <body>
-        <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js" integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT" crossorigin="anonymous"></script>
+        <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
 
         <script type="text/javascript">
-            microsoftTeams.initialize();
+            microsoftTeams.app.initialize();
             localStorage.removeItem("simple.error");
 
             let hashParams = getHashParameters();

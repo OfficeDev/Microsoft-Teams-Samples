@@ -6,7 +6,7 @@ import * as microsoftTeams from '@microsoft/teams-js';
  */
 export default function AuthEnd() {
   (function () {
-    microsoftTeams.initialize();
+    microsoftTeams.app.initialize();
 
     const hashParams = getHashParameters();
     if (hashParams['error']) {

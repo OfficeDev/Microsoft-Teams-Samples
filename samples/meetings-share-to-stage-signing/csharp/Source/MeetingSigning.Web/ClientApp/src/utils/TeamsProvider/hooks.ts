@@ -1,5 +1,5 @@
 import { ThemeInput } from '@fluentui/react-northstar';
-import { Context } from '@microsoft/teams-js';
+import * as microsoftTeams from '@microsoft/teams-js';
 import { useContext, useMemo } from 'react';
 import { TeamsContext, getTheme } from './TeamsProvider';
 
@@ -41,7 +41,7 @@ function createInitDeferredCallbackHook<T extends (...args: any[]) => void>(
   };
 }
 
-export function useTeamsContext(): Context {
+export function useTeamsContext(): microsoftTeams.app.Context {
   const providerContext = useContext(TeamsContext);
   // trigger context refresh?
   // providerContext.microsoftTeams.getContext(providerContext.setContext);
@@ -50,22 +50,10 @@ export function useTeamsContext(): Context {
 
 export function useAADId(): string {
   const ctx = useTeamsContext();
-  return ctx.userObjectId ? ctx.userObjectId : '';
+  return ctx?.user?.id ? ctx?.user?.id : '';
 }
 
 export function useTheme(): ThemeInput {
   const ctx = useTeamsContext();
-  return useMemo(() => getTheme(ctx.theme), [ctx.theme]);
+  return useMemo(() => getTheme(ctx.app.theme), [ctx.app.theme]);
 }
-
-export const useExecuteDeepLink = createInitDeferredCallbackHook(
-  (teams) => teams.executeDeepLink,
-);
-
-export const useNotifyAppLoaded = createInitDeferredCallbackHook(
-  (teams) => teams.appInitialization.notifyAppLoaded,
-);
-
-export const useNotifySuccess = createInitDeferredCallbackHook(
-  (teams) => teams.appInitialization.notifySuccess,
-);

@@ -15,19 +15,19 @@ const Question =(props :any)=>
     const [meetingId, setMeetingId] = React.useState();
     const [connection, setConnection] = useState<null | HubConnection>(null);
     React.useEffect(() => {
-        microsoftTeams.initialize();
-        
+        microsoftTeams.app.initialize();
     }, [])
 
     React.useEffect(() => {
-        microsoftTeams.initialize();
-        microsoftTeams.getContext((context: any) => {
-            setMeetingId(context.meetingId)
-            getLatestEditorValue(questionNumber, context.meetingId).then((res: any) => {
-                if(res.data.value != null && res.data.value != "")
-                setData(res.data.value);
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then((context: any) => {
+                setMeetingId(context.meeting.id)
+                getLatestEditorValue(questionNumber, context.meeting.id).then((result: any) => {
+                    if (result.data.value != null && result.data.value != "")
+                        setData(result.data.value);
+                })
             })
-        })
+        });
 
         // create a new signalr connection
         const connect = new HubConnectionBuilder()

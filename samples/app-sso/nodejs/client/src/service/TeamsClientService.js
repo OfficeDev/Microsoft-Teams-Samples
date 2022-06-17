@@ -3,12 +3,10 @@ import axios from "axios";
 const clientContext = async(teamsClient, timeout = 10000) => {
     return new Promise((resolve, reject) => {
         let shouldReject = true;
-        teamsClient.getContext((teamsContext) => {
+        teamsClient.app.getContext().then((teamsContext) => {
             shouldReject = false;
             resolve({ 
-                ...teamsContext,
-                meetingId: teamsContext.meetingId,
-                conversationId: teamsContext.chatId,
+                ...teamsContext
             });
         });
         setTimeout(() => {
@@ -22,15 +20,13 @@ const clientContext = async(teamsClient, timeout = 10000) => {
 
 const getAuthCode = (teamsClient) => {
     return new Promise((resolve, reject) => {
-        teamsClient.authentication.getAuthToken({
-            successCallback: function (token) {
-                resolve(token)
-            },
-            failureCallback: function (error) {
-                console.error("Failed to get auth: ", error)
-                reject(error);
-            },
+        teamsClient.authentication.getAuthToken().then((token) => {
+            resolve(token)
         })
+        .catch((error) => {
+            console.error("Failed to get auth: ", error)
+            reject(error);
+        });
     });
 }
 

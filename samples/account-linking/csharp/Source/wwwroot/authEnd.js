@@ -2,7 +2,7 @@
 // The following is a helper to wrap the initialize call in a promise and to detect if we're not 
 // running inside of Teams
 const teamsPromise = Promise.race([
-    new Promise(resolve => microsoftTeams.initialize(() => resolve())),
+    new Promise(resolve => microsoftTeams.app.initialize().then(() => resolve())),
     new Promise((resolve, reject) => setTimeout(() => reject('Failed to initialize connection with Microsoft Teams'), 250))]);
 
 // Entrypoint of the script

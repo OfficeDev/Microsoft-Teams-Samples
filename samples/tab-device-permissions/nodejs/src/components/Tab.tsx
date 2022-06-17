@@ -24,16 +24,16 @@ const Tab = () => {
 
   useEffect(() => {
     // initializing microsoft teams sdk
-    microsoftTeams.initialize();
-
-    microsoftTeams.getContext((context) => {
-      if (context.hostClientType! == "web") {
-        setIsWeb(true);
-      }
-      else {
-        setIsWeb(false);
-      }
-    })
+    microsoftTeams.app.initialize().then(() => {
+      microsoftTeams.app.getContext().then((context) => {
+        if (context.app.host.clientType! == "web") {
+          setIsWeb(true);
+        }
+        else {
+          setIsWeb(false);
+        }
+      });
+    });
   })
 
   return (

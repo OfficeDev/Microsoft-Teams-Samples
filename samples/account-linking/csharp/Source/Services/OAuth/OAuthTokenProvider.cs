@@ -76,7 +76,7 @@ public sealed class OAuthTokenProvider
             return GetNeedsConsentResult();
         }
 
-        string accessToken = jsonBody.AccessToken;
+        string accessToken = jsonBody.AccessToken != "" ? jsonBody.AccessToken : tokenDto.AccessToken;
         long expirationSeconds = jsonBody.ExpiresInSeconds;
         // If we get a refresh token in the response, we need to replace the refresh token. Otherwise re-use the current refresh token.
         string nextRefreshToken = jsonBody.RefreshToken ?? tokenDto.RefreshToken;

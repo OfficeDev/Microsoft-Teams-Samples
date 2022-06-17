@@ -13,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@fluentui/react": "^7.134.1",
-    "@microsoft/teams-js": "^1.7.0",
+    "@microsoft/teams-js": "^2.0.0",
     "axios": "^0.20.0",
     "css-loader": "^4.2.2",
     "file-loader": "^6.1.0",

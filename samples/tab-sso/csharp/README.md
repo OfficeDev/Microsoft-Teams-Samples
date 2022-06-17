@@ -1,18 +1,16 @@
 ---
 page_type: sample
+description: Microsoft Teams sample app for tabs Azure AD SSO which uses OBO flow to call Graph APIs using C#.
 products:
 - office-teams
 - office
 - office-365
 languages:
 - csharp
-title: Tabs Azure AD SSO Sample - C#
-description: Microsoft Teams hello world sample app for tabs Azure AD SSO in C#
 extensions:
-  contentType: samples
-  createdDate: 12/3/2021 12:53:17 PM
+contentType: samples
+createdDate: "12/3/2021 12:53:17 PM"
 ---
-
 # Tabs Azure AD SSO Sample - C#
 
 This sample illustrates how to implement SSO authentication for Teams Tab.
@@ -36,13 +34,13 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
 1) Clone the repository
 
     ```bash
-    git clone https://github.com/msft-teams/tools.git
+    git clone https://github.com/officedev/microsoft-teams-samples.git
     ```
 
 1) If you are using Visual Studio
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `TeamsTabSSO` folder
+  - Navigate to `/samples/tab-sso/csharp/TeamsTabSSO` folder
   - Select `TeamsTabSSO.csproj` file
 
 1) Run ngrok - point to port 3978

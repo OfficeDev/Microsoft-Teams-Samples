@@ -1,19 +1,18 @@
 ---
 page_type: sample
+description: Microsoft Teams sample app for tabs Azure AD SSO which uses OBO flow to call Graph APIs using Node.js
 products:
 - office-teams
 - office
 - office-365
 languages:
 - nodejs
-title: Tabs Azure AD SSO Sample using NodeJS
-description: Microsoft Teams hello world sample app for tabs Azure AD SSO in Node.js
 extensions:
-  contentType: samples
-  createdDate: 12/3/2021 12:53:17 PM
+contentType: samples
+createdDate: "12/3/2021 12:53:17 PM"
 ---
-
 # Tabs Azure AD SSO Sample using NodeJS
+
 
 This sample shows how to implement Azure AD single sign-on support for tabs. It will:
 

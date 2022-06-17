@@ -28,27 +28,23 @@
     <title>Silent Authentication Sample Login</title>
 </head>
 <body>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
     <script src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript">
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize().then(() => {
+            let msalConfig = {
+                auth: {
+                    clientId: '@ViewBag.AuthStartClientId',
+                    redirectUri: window.location.origin + "/AuthEnd",       // This should be in the list of redirect uris for the AAD app
+                    navigateToLoginRequestUrl: false,
+                },
+                cache: {
+                    cacheLocation: "localStorage",
+                }
+            };
 
-        // Get the tab context, and use the information to navigate to Azure AD login page
-        microsoftTeams.getContext(function (context) {
-
-        let msalConfig = {
-            auth: {
-                clientId: '@ViewBag.AuthStartClientId',
-                redirectUri: window.location.origin + "/AuthEnd",       // This should be in the list of redirect uris for the AAD app
-                navigateToLoginRequestUrl: false,
-            },
-            cache: {
-                cacheLocation: "localStorage",
-            }
-        };
-
-        const msalInstance = new msal.PublicClientApplication(msalConfig);
-        msalInstance.loginRedirect();
+            const msalInstance = new msal.PublicClientApplication(msalConfig);
+            msalInstance.loginRedirect();
         });
     </script>
 </body>

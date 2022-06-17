@@ -1,11 +1,10 @@
 import { Flex, Header, Loader } from '@fluentui/react-northstar';
 import { useEffect, useState } from 'react';
-import { isEqual } from 'lodash';
-import { useApi, useInterval } from 'hooks';
 import { useAADId } from 'utils/TeamsProvider/hooks';
-import documentApi from 'api/documentApi';
+import { getAllDocuments } from 'api/documentApi';
 import { Document } from 'models';
 import { SidepanelDocumentCard } from 'components/SidepanelDocumentCard';
+import { useQuery } from 'react-query';
 
 /**
  * List documents for use in a Sidepanel
@@ -14,10 +13,15 @@ import { SidepanelDocumentCard } from 'components/SidepanelDocumentCard';
  * @returns A vertical list of documents styled as cards
  */
 export function SidepanelDocumentCardList() {
-  const getAllDocumentsApi = useApi(documentApi.getAllDocuments);
-  const [documents, setDocuments] = useState<Document[]>([]);
-  const loggedInAADId = useAADId();
   const pollingInterval = 5000;
+
+  const { data, error, isError } = useQuery<Document[], Error>(
+    ['getAllDocuments'],
+    () => getAllDocuments(),
+    { refetchInterval: pollingInterval },
+  );
+
+  const loggedInAADId = useAADId();
 
   const [showLoader, setShowLoader] = useState<boolean>(true);
   const showLoaderTimeout = 5000;
@@ -30,43 +34,25 @@ export function SidepanelDocumentCardList() {
     return () => clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    getAllDocumentsApi.request();
-  }, []);
-
-  //using polling
-  useInterval(() => {
-    getAllDocumentsApi.request();
-  }, pollingInterval);
-
-  useEffect(() => {
-    if (
-      getAllDocumentsApi.data &&
-      !isEqual(documents as Document[], getAllDocumentsApi.data as Document[])
-    ) {
-      setDocuments(getAllDocumentsApi.data as []);
-    }
-  }, [getAllDocumentsApi.data, documents]);
-
   return (
     <Flex column gap="gap.medium">
-      {documents.length === 0 && !getAllDocumentsApi.error && (
+      {data && data.length === 0 && (
         <Header
           as="h1"
           content="There are no documents available for you yet."
         />
       )}
 
-      {getAllDocumentsApi.error &&
+      {isError &&
         ((showLoader && <Loader />) || (
           <Header
             as="h1"
             content="Something went wrong"
-            description={JSON.stringify(getAllDocumentsApi)}
+            description={JSON.stringify(error)}
           />
         ))}
 
-      {documents.map((d, index) => (
+      {data && data.map((d, index) => (
         <SidepanelDocumentCard
           key={index}
           {...d}
