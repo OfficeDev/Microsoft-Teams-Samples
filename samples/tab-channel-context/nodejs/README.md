@@ -13,7 +13,7 @@ extensions:
   createdDate: "17/06/2022 12:26:57 PM"
 ---
 
-# Incoming webhook
+# Tab context in channel
 
 This sample shows the contents of context object in a private and shared channel.
 
