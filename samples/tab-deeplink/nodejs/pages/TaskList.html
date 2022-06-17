@@ -5,11 +5,18 @@
     <body>        
         <script>
                var s=DeepLinkModel;
-                    var html ='';
-                    s.forEach(x=> {
+                var html ='';
+                s.forEach(x=> {
                     var loc = "Details.html?id="+x.ID;
                     document.write('<a href="' + loc + '">'+x.Desc+'</a><br/>');                            
-                });               
+                });
+                document.write(`<div style="margin-top:1rem;">
+                    <span class="container" style="font-size:20px;font-weight:700;">
+                        Extended Deep link features
+                    </span>
+                    <object type="text/html" data="ExtendedDeepLink.html" width="1000rem" height="1000rem" style="overflow:auto;">
+                    </object>
+                </div>`);
         </script>
        
     </body>

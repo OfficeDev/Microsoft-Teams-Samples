@@ -1,7 +1,6 @@
 const {TeamsActivityHandler, MessageFactory, CardFactory } = require('botbuilder');
 var ACData = require("adaptivecards-templating");
 var DeepLinkTabHelper=require("../pages/DeepLinkTabHelper.js");
-var DeepLinkModel = require ('../pages/DeepLinkModel.js');
 this.AppID=process.env.MicrosoftAppId;
 
 class DeepLinkTabsnode extends TeamsActivityHandler {
@@ -10,13 +9,12 @@ class DeepLinkTabsnode extends TeamsActivityHandler {
         super();            
         this.onMessage(async (context, next) => {
         const replyText = `Echo: ${ context.activity.text }`;  
-        let conversationType = context.activity.conversation.conversationType; 
-        var EntityID="DeepLinkApp";    
+        let conversationType = context.activity.conversation.conversationType;
         if(context.activity.conversation.conversationType==="channel")
         {
-          var BotsDeepLink = DeepLinkTabHelper.GetDeepLinkTabChannel("topic1",1,"Bots",context.activity.channelData.teamsChannelId,process.env.MicrosoftAppId,EntityID);
-          var MessagingDeepLink = DeepLinkTabHelper.GetDeepLinkTabChannel("topic2",2,"Messaging Extension",context.activity.channelData.teamsChannelId,process.env.MicrosoftAppId,EntityID);
-          var AdaptiveCardDeepLink = DeepLinkTabHelper.GetDeepLinkTabChannel("topic3",3,"Adaptive Card",context.activity.channelData.teamsChannelId,process.env.MicrosoftAppId,EntityID);  
+          var BotsDeepLink = DeepLinkTabHelper.GetDeepLinkTabChannel("topic1",1,"Bots",context.activity.channelData.teamsChannelId,process.env.MicrosoftAppId,process.env.Channel_Entity_Id);
+          var MessagingDeepLink = DeepLinkTabHelper.GetDeepLinkTabChannel("topic2",2,"Messaging Extension",context.activity.channelData.teamsChannelId,process.env.MicrosoftAppId,process.env.Channel_Entity_Id);
+          var AdaptiveCardDeepLink = DeepLinkTabHelper.GetDeepLinkTabChannel("topic3",3,"Adaptive Card",context.activity.channelData.teamsChannelId,process.env.MicrosoftAppId,process.env.Channel_Entity_Id);  
         }       
          else  if(context.activity.conversation.conversationType==="personal")
          {
