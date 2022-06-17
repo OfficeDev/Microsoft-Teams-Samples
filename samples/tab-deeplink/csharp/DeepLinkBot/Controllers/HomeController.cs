@@ -20,13 +20,11 @@ namespace Microsoft.BotBuilderSamples.Controllers
         public DeepLinksModel task1Link;
         public DeepLinksModel task2Link;
         public DeepLinksModel task3Link;
-        public DeepLinksModel task4Link;
 
         public static List<DeepLinkChannelModel> channelDeeplinks = new List<DeepLinkChannelModel>();
         public DeepLinkChannelModel task1ChannelLink;
         public DeepLinkChannelModel task2ChannelLink;
         public DeepLinkChannelModel task3ChannelLink;
-        public DeepLinkChannelModel task4ChannelLink;
 
         DeeplinkHelper deeplinkHelper = new DeeplinkHelper();      
         public IActionResult Index()
@@ -60,17 +58,9 @@ namespace Microsoft.BotBuilderSamples.Controllers
                     linkTitle = "Teams Apps"
                 };
 
-                task4Link = new DeepLinksModel()
-                {
-                    linkUrl = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["TabEntityId"], "deeplinks"),
-                    ID = 4,
-                    linkTitle = "Extended Deep link features"
-                };
-
                 deeplinks.Add(task1Link);
                 deeplinks.Add(task2Link);
                 deeplinks.Add(task3Link);
-                deeplinks.Add(task4Link);
             }
 
             return View(deeplinks);
@@ -104,17 +94,9 @@ namespace Microsoft.BotBuilderSamples.Controllers
                     linkTitle = "Teams Apps"
                 };
 
-                task4ChannelLink = new DeepLinkChannelModel()
-                {
-                    linkUrl = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, _configuration["ChannelEntityId"], "deeplinks"),
-                    ID = 4,
-                    linkTitle = "Extended Deep link features"
-                };
-
                 channelDeeplinks.Add(task1ChannelLink);
                 channelDeeplinks.Add(task2ChannelLink);
                 channelDeeplinks.Add(task3ChannelLink);
-                channelDeeplinks.Add(task4ChannelLink);
             }
 
             return View(channelDeeplinks);
@@ -148,18 +130,9 @@ namespace Microsoft.BotBuilderSamples.Controllers
                     linkTitle = "Teams Apps"
                 };
 
-                task4ChannelLink = new DeepLinkChannelModel()
-                {
-                    linkUrl = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, _configuration["ChannelEntityId"], "deeplinks"),
-                    ID = 4,
-                    linkTitle = "Extended Deep link features"
-                };
-
-
                 channelDeeplinks.Add(task1ChannelLink);
                 channelDeeplinks.Add(task2ChannelLink);
                 channelDeeplinks.Add(task3ChannelLink);
-                channelDeeplinks.Add(task4ChannelLink);
             }
 
             return View(channelDeeplinks);
@@ -198,14 +171,6 @@ namespace Microsoft.BotBuilderSamples.Controllers
                     linkTitle = "Teams Apps"
                 };
 
-                task4Link = new DeepLinksModel()
-                {
-                    linkUrl = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["TabEntityId"], "deeplinks"),
-                    ID = 3,
-                    linkTitle = "Extended Deep link features"
-                };
-
-
                 deeplinks.Add(task1Link);
                 deeplinks.Add(task2Link);
                 deeplinks.Add(task3Link);
@@ -232,9 +197,9 @@ namespace Microsoft.BotBuilderSamples.Controllers
         }
 
         [Route("ExtendedDeepLinks")]
-        public ActionResult ExtendedDeepLinks()
+        public PartialViewResult ExtendedDeepLinks()
         {
-            return View();
+            return PartialView();
         }
     }
 }
