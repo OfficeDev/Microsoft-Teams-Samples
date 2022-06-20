@@ -60,7 +60,7 @@ class GraphHelper {
 
             var transcripts = (await axios(getAllTranscriptsConfig)).data.value;
 
-            if (transcripts.length > 0)
+            if (transcripts.length > 0 && transcripts != null)
             {
                 var getTranscriptEndpoint = `${getAllTranscriptsEndpoint}/${transcripts[0].id}/content?$format=text/vtt`;
                 const getTranscriptConfig = {
