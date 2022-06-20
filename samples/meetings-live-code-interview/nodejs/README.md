@@ -10,7 +10,7 @@ languages:
 - javascript
 extensions:
   contentType: samples
-  createdDate: "24/3/2022 2:36:57 PM"
+  createdDate: "24/03/2022 2:36:57 PM"
 ---
 
 # Live coding interview using Shared meeting stage 
