@@ -48,7 +48,7 @@ namespace MeetingTranscription.Helpers
         }
 
         /// <summary>
-        /// Gets the meeting transcript for the passed meeting Id.
+        /// Gets the meeting transcript's content for the passed meeting Id.
         /// </summary>
         /// <param name="meetingId">Id of meeting.</param>
         /// <returns>Meeting transcript if any otherwise return empty string.</returns>
