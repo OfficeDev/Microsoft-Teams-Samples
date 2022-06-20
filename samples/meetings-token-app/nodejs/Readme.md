@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams meeting extensibility sample: token passing
+description: Microsoft Teams meeting extensibility sample - token passing
 products:
 - office-teams
 - office
@@ -8,8 +8,8 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:27"
+  contentType: samples
+  createdDate: "07-07-2021 13:38:27"
 ---
 
 # Meeting Token Generator

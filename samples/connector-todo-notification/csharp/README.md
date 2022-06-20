@@ -1,5 +1,6 @@
 ---
 page_type: sample
+description: Sample Office 365 Connector generating notifications to teams channel.
 products:
 - office-teams
 - office-365
