@@ -26,7 +26,7 @@ namespace Microsoft.BotBuilderSamples.Bots
         public string tabUrlTask2;
         public string tabUrlTask3;
         public string callingDeeplink;
-        public string allDeeplinks;
+        public string extendedDeepLink;
 
         DeeplinkHelper deeplinkHelper = new DeeplinkHelper();
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
@@ -54,14 +54,14 @@ namespace Microsoft.BotBuilderSamples.Bots
                 tabUrlTask1 = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, _configuration["ChannelEntityId"], "bot1");
                 tabUrlTask2 = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, _configuration["ChannelEntityId"], "bot2");
                 tabUrlTask3 = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, _configuration["ChannelEntityId"], "bot3");
-                allDeeplinks = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, _configuration["ChannelEntityId"], "");
+                extendedDeepLink = deeplinkHelper.GetDeepLinkToChannelTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["BaseURL"], channelID, _configuration["ChannelEntityId"], "");
             }
             else
             {
                 tabUrlTask1 = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["TabEntityId"], "topic1");
                 tabUrlTask2 = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["TabEntityId"], "topic2");
                 tabUrlTask3 = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["TabEntityId"], "topic3");
-                allDeeplinks = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["TabEntityId"], "");
+                extendedDeepLink = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["TabEntityId"], "");
             }
             var DeepLinkCard = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
             {
@@ -148,7 +148,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                                         },
                                         SelectAction = new AdaptiveOpenUrlAction()
                                         {
-                                            Url=new Uri(allDeeplinks),
+                                            Url=new Uri(extendedDeepLink),
                                             Title = "Extended Deeplink features"
                                         }
                                     }
