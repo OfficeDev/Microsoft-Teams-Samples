@@ -1,0 +1,43 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.13",
+  "version": "1.0.0",
+  "id": "19009569-9eef-4513-870b-8e7fa9bac710",
+  "packageName": "com.microsoft.teams.meetingslivecaption",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Meeting Live Caption",
+    "full": "Meeting Live Caption"
+  },
+  "description": {
+    "short": "<<TODO>>",
+    "full": "<<TODO>>"
+  },
+  "accentColor": "#235EA5",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://<<App-Domain>>/Home/Configure",
+      "scopes": [ "groupchat" ],
+      "canUpdateConfiguration": true,
+      "context": [
+        "meetingChatTab",
+        "meetingDetailsTab",
+        "meetingSidePanel"
+      ]
+    }
+  ],
+  "validDomains": [
+    "*.ngrok.io",
+    "<<App-Domain>>"
+  ],
+  "permissions": [ "messageTeamMembers" ]
+}
