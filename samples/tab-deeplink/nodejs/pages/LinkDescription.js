@@ -19,14 +19,14 @@ microsoftTeams.app.getContext().then((context) => {
         var html ='';
         s.forEach(x=> {
             var loc = "ChannelDetails.html?id="+x.ID;
-            document.write('<a href="' + loc + '">'+x.Desc+'</a><br/>');                            
+            let listContent = document.getElementById("list-content");
+            let aTag = document.createElement("a");
+            let brTag = document.createElement("br");
+            aTag.href = loc;
+            aTag.innerHTML = x.Desc;
+
+            listContent.appendChild(aTag);
+            listContent.appendChild(brTag);
         });
-        document.write(`<div style="margin-top:1rem;">
-            <span class="container" style="font-size:20px;font-weight:700;">
-                Extended Deep link features
-            </span>
-            <object type="text/html" data="ExtendedDeepLink.html" width="1000rem" height="1000rem" style="overflow:auto;">
-            </object>
-        </div>`);
- }
+    }
 }); 

@@ -74,33 +74,37 @@
     microsoftTeams.app.initialize();
 
     function selectPeople() {
-        microsoftTeams.people.selectPeople({ setSelected: [], openOrgWideSearchInChatOrChannel: true, singleSelect: false }).then((people) => {
-            if (people) {
-                document.getElementById("Attendee").value = (people.map((p) => p.email)).join(",");
-            }
-        }).catch((error) => {
-            console.log(error);
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.people.selectPeople({ setSelected: [], openOrgWideSearchInChatOrChannel: true, singleSelect: false }).then((people) => {
+                if (people) {
+                    document.getElementById("Attendee").value = (people.map((p) => p.email)).join(",");
+                }
+            }).catch((error) => {
+                console.log(error);
+            });
         });
     }
 
     function onCallDeepLinkButtonClick(callModalities) {
-        microsoftTeams.people.selectPeople({ setSelected: [], openOrgWideSearchInChatOrChannel: true, singleSelect: false }).then((people) => {
-            if (people) {
-                if(microsoftTeams.call.isSupported()) {
-                    microsoftTeams.call.startCall({ targets: people.map((p) => p.email),
-                        requestedModalities: [callModalities]})
-                    .then((result) => {
-                        console.log(result);
-                    }).catch((error) => {
-                            console.log(error);
-                    });
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.people.selectPeople({ setSelected: [], openOrgWideSearchInChatOrChannel: true, singleSelect: false }).then((people) => {
+                if (people) {
+                    if(microsoftTeams.call.isSupported()) {
+                        microsoftTeams.call.startCall({ targets: people.map((p) => p.email),
+                            requestedModalities: [callModalities]})
+                        .then((result) => {
+                            console.log(result);
+                        }).catch((error) => {
+                                console.log(error);
+                        });
+                    }
+                    else {
+                        alert("Call isn't supported");
+                    }
                 }
-                else {
-                    alert("Call isn't supported");
-                }
-            }
-        }).catch((error) => {
-            console.log(error);
+            }).catch((error) => {
+                console.log(error);
+            });
         });
     }
 
@@ -114,18 +118,20 @@
         if (subjectInput.value.trim() !== "" && startTimeInput.value !== "" && endTimeInput.value !== "" && attendeeInput.value !== "") {
             var meetingDetails =
             {
-                attendees: attendeeInput.value,
+                attendees: attendeeInput.value.split(","),
                 content: contentInput.value.trim(),
                 endTime: endTimeInput.value,
                 startTime: startTimeInput.value,
                 subject: subjectInput.value.trim(),
             };
+            
+            microsoftTeams.app.initialize().then(() => {
+                microsoftTeams.calendar.composeMeeting(meetingDetails).
+                   then((result) => { console.log(result); }).
+                   catch((error) => { console.log(error); });
+            });
 
-            //microsoftTeams.calendar.composeMeeting(meetingDetails).
-            //    then((result) => { console.log(result); }).
-            //    catch((error) => { console.log(error); });
-
-            microsoftTeams.app.openLink(`https://teams.microsoft.com/l/meeting/new?subject=${meetingDetails.subject}&startTime=${meetingDetails.startTime}&endTime=${meetingDetails.endTime}&content=${meetingDetails.content}&attendees=${meetingDetails.attendees}`)
+            // microsoftTeams.app.openLink(`https://teams.microsoft.com/l/meeting/new?subject=${meetingDetails.subject}&startTime=${meetingDetails.startTime}&endTime=${meetingDetails.endTime}&content=${meetingDetails.content}&attendees=${meetingDetails.attendees}`)
         }
     }
 
