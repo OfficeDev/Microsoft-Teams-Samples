@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Pro-active Tab Conversation
+description: Proactive Tab Conversation
 products:
 - office-teams
 - office
@@ -12,8 +12,11 @@ contentType: samples
 createdDate: "13-05-2022 15:00:00"
 ---
 
-# Pro-active Tab Conversations - Support Department
-Using a bot to create a new conversation every time a support inquiry is filed. The inquiry will be viewable in a tab, and the conversation can continue using conversational tabs.
+# Proactive Tab Conversations
+The proof of concept demonstrates how to use a bot to proactively create a new conversation each time a support inquiry is filed. The inquiry will be viewable in a tab, and the conversation can continue using conversational tabs.
+This concept can be extended to additional scenarios including proactively creating conversations on a patient, opportunity, incident, etc.
+
+Please see the [Code Tours](#code-tours) section for in-depth explanation of the sample. 
 
 ## Included Features
 * Conversational tabs/Sub-entity conversations
@@ -36,11 +39,9 @@ sequenceDiagram
     participant Service as Service
     participant DataStore as Data Store
     participant Graph as Graph API
-
     Note over Bot,Service: App Installation
     Bot ->> Service: Bot context, for future proactive messages
     Service ->> DataStore: Store bot context
-
     Note over User,DataStore: Create a Tab
     User ->> ChannelTab: Adds Tab
     ChannelTab ->> Service: Save support department tab details
@@ -57,7 +58,6 @@ sequenceDiagram
         Service ->> ChannelTab: Channel bot context not found error message 
     end
     ChannelTab ->> User: Error or tab created successfully
-
     Note over External,DataStore: Post a new inquiry
     External ->> Service: Creates a new inquiry for a support department
     Service ->> DataStore: Support department details and bot context
@@ -67,7 +67,6 @@ sequenceDiagram
     Bot ->> Service: Inquiry conversation reference
     Service ->> DataStore: Store inquiry conversation reference
     Service ->> External: Success
-
     Note over User,DataStore: Open Support Department
     User ->> ChannelTab: Opens Channel Tab
     ChannelTab ->> Service: Get inquiries
@@ -77,7 +76,6 @@ sequenceDiagram
     Graph ->> Service: 
     Service ->> ChannelTab: Support department inquiries
     ChannelTab ->> User: Display list of support department inquiries
-
     User ->> ChannelTab: Select single inquiry, open details
     ChannelTab ->> Service: Get single inquiry
     Service ->> DataStore: Single inquiry
@@ -86,7 +84,6 @@ sequenceDiagram
     Graph ->> Service: 
     Service ->> ChannelTab: Single inquiry
     ChannelTab ->> User: Display single support department inquiry
-
     Note over User,DataStore: Open Personal Tab
     User ->> PersonalTab: Opens Personal Tab
     PersonalTab ->> Service: Get all support departments
@@ -101,7 +98,7 @@ sequenceDiagram
 ## Usage
 ### Channel Tab
 * [Set-up, deploy and sideload the app to a channel.](#steps)
-    * When the app is installed to the team the bot will automatically gather the required info to create pro-active conversations later.
+    * When the app is installed to the team the bot will automatically gather the required info to create proactive conversations later.
 * In a channel, click '*+ Add a tab*', and add a new *Conversational Tab*.
     * Configure your tab, by adding a *Department name* and *Department description*, then click *Save*.
     * The first time running this application you will need to consent twice. Once to use the app initially, and once to call the API. If you see "We need you to consent to complete that action.", ensure that your pop-up blocker isn't blocking a consent dialog.
@@ -118,13 +115,17 @@ There is also a personal tab that will list inquires from all the support depart
 * Once authenticated, the app will list all the support departments from any channel you are a member of. Up to five inquiries from each support department will be listed.
 * Clicking on the -> Arrow will open the inquiry details. From the detail page you can open the channel conversation about the inquiry.
 
-
 ## Known issues
 * When the solution is run on a local web browser (anywhere outside of Teams), it will load a spinner. Instead side-load the application to a teams client, or open up `<<deployment-url>>/admin` to open the admin page
 * Sometimes, the "Open Details" button on a new inquiry's Adaptive Card may not navigate to a the channel tab. This is due to side-loaded apps not having a consistent entityId. This makes deeplinking difficult. If this happens you can open the inquiry in the tab directly.
 * Private channels do not support bots at the moment, therefore this app is not supported on private channels.
 * If in the personal app a user opens a conversation from a channel they are not a member of, the conversation will fail to show. This is not an issue in our sample as we filter support departments based on Team membership.
 * App shows "We need you to consent to complete that action." but provides no action: your pop -up blocker might be blocking a consent dialog from opening, be sure to allow pop-ups from Teams. 
+
+## Code Tours
+This repository uses VSCode [Code Tours](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour#:~:text=A%20%22code%20tour%22%20is%20simply%20a%20series%20of,CONTRIBUTING.md%20file%20and%2For%20rely%20on%20help%20from%20others.) to explain _how_ the code works. 
+
+The tour files can be found in the `.tours` directory.
 
 ## Prerequisites
 * Make sure you have an active [Azure subscription](https://azure.microsoft.com/en-us/free/).
@@ -156,8 +157,8 @@ There is also a personal tab that will list inquires from all the support depart
 * [Update the AAD App to enable Teams SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso?tabs=dotnet#develop-an-sso-microsoft-teams-tab)
     * When creating the Bot above, an AAD app should either have been created for you, or you should have chosen an AAD app to associate with the bot.
     * The updates below will allow for us to authenticate and authorize API calls to limit data returned to only channels the user is a member of.
-    * [Follow the instructions](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso?tabs=dotnet#develop-an-sso-microsoft-teams-tab), but skip actually creating a new AAD application. Instead, create the Application ID URI, scopes, etc.
-    * Once you have followed those instructions, you need to enable Implicit grant. Under the Authentication section, enable `Access tokens` and `ID tokens`.
+    * [Follow the instructions](https://docs.microsoft.com/en-gb/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad#to-expose-an-api), to expose an AAD API, creating an Application ID URI, scopes, etc.
+    * Once you have followed those instructions, you need to [configure the Web authentication platform for the application](https://docs.microsoft.com/en-gb/microsoftteams/platform/tabs/how-to/authentication/tab-sso-graph-api?tabs=dotnet#to-configure-authentication-for-a-platform).
     * Ensure the following API permissions are granted to the app for Microsoft Graph access - `email`, `offline_access`, `openid`, `profile`, `Team.ReadBasic.All`    
     * *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your AAD App*
 * In `appSettings.json`, `manifest.json` and `.env` replace:

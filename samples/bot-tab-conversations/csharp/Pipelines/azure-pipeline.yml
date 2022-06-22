@@ -24,3 +24,4 @@ stages:
     namespace: ${{ variables.namespace }}
     repository: ${{ variables.repository }}
     serviceConnectionName: 'Teams Proof of Concepts Docker Registry 2'
+    dockerBuildArguments: '--build-arg REACT_APP_AAD_CLIENT_ID'

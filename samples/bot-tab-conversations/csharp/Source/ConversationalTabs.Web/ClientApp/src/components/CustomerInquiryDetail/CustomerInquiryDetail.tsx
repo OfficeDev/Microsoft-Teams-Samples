@@ -11,6 +11,8 @@ import { CustomerInquiry } from 'models';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
+dayjs.extend(relativeTime);
+
 type CustomerInquiryDetailProps = {
   customerInquiry: CustomerInquiry;
   isChatOpen: boolean;
@@ -24,8 +26,6 @@ function CustomerInquiryDetail({
   onOpenConversation,
   onCloseConversation,
 }: CustomerInquiryDetailProps) {
-  dayjs.extend(relativeTime)
-
   return (
     <Flex column>
       <Flex vAlign="center" gap="gap.medium">

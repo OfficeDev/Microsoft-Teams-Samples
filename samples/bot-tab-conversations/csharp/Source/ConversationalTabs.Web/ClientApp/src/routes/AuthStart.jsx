@@ -20,7 +20,7 @@ export function AuthStart() {
     const queryParams = {
       tenant: tenantId,
       client_id: clientId,
-      response_type: 'token',
+      response_type: 'code',
       scope: 'https://graph.microsoft.com/.default',
       redirect_uri: `${window.location.origin}/auth-end`,
       nonce: guid(),

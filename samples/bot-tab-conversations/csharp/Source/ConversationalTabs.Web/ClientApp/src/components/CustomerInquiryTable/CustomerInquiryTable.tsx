@@ -11,6 +11,8 @@ import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
+dayjs.extend(relativeTime);
+
 type CustomerInquiryTableProps = {
   entityId: string;
   source: string;
@@ -23,8 +25,6 @@ function createRowItemsFromCategoryItem(
   inquiry: CustomerInquiry,
   index: number,
 ): ShorthandCollection<TableCellProps> {
-  dayjs.extend(relativeTime)
-
   return [
     {
       content: inquiry.customerName,

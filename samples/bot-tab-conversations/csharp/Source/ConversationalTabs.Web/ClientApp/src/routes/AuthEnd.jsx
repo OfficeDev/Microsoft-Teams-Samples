@@ -11,7 +11,7 @@ export function AuthEnd() {
     const hashParams = getHashParameters();
     if (hashParams['error']) {
       microsoftTeams.authentication.notifyFailure(hashParams['error']);
-    } else if (hashParams['access_token']) {
+    } else if (hashParams['code']) {
       // Check the state parameter
       const expectedState = localStorage.getItem('auth-state');
       if (expectedState !== hashParams['state']) {
@@ -19,17 +19,17 @@ export function AuthEnd() {
       } else {
         // State parameter matches, report success
         localStorage.removeItem('auth-state');
-        microsoftTeams.authentication.notifySuccess(hashParams['access_token']);
+        microsoftTeams.authentication.notifySuccess(hashParams['code']);
       }
     } else {
-      microsoftTeams.authentication.notifyFailure('NoTokenInResponse');
+      microsoftTeams.authentication.notifyFailure('NoCodeInResponse');
     }
   })();
 
   // Parse hash parameters into key-value pairs
   function getHashParameters() {
     let hashParams = {};
-    window.location.hash
+    window.location.search
       .substring(1)
       .split('&')
       .forEach(function (item) {

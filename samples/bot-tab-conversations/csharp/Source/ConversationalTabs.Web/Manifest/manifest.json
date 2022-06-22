@@ -42,7 +42,7 @@
   ],
   "bots": [
     {
-      "botId": "<<app-id>>",
+      "botId": "<<aad-id>>",
       "scopes": ["team"],
       "isNotificationOnly": false,
       "supportsCalling": false,
@@ -54,7 +54,7 @@
   "permissions": [],
   "validDomains": ["localhost:44326", "*.ngrok.io"],
   "webApplicationInfo": {
-    "id": "<<app-id>>",
-    "resource": "api://<<deployment-url>>/<<app-id>>"
+    "id": "<<aad-id>>",
+    "resource": "api://<<deployment-url>>/<<aad-id>>"
   }
 }
