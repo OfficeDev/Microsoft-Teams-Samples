@@ -117,7 +117,7 @@ There is also a personal tab that will list inquires from all the support depart
 
 ## Known issues
 * When the solution is run on a local web browser (anywhere outside of Teams), it will load a spinner. Instead side-load the application to a teams client, or open up `<<deployment-url>>/admin` to open the admin page
-* Sometimes, the "Open Details" button on a new inquiry's Adaptive Card may not navigate to a the channel tab. This is due to side-loaded apps not having a consistent entityId. This makes deeplinking difficult. If this happens you can open the inquiry in the tab directly.
+* Sometimes, the "Open Details" button on a new inquiry's Adaptive Card may not navigate to a the channel tab. This is due to side-loaded apps not having a consistent entityId. This makes deeplinking difficult. If this happens you can open the inquiry in the tab directly. If you have submitted the app to either your Org App Store or the Teams App Store you must set the `<<teams-app-store-app-id>>` in appsettings.json to the App ID value as shown in the [Teams Admin Center](https://admin.teams.microsoft.com/policies/manage-apps).
 * Private channels do not support bots at the moment, therefore this app is not supported on private channels.
 * If in the personal app a user opens a conversation from a channel they are not a member of, the conversation will fail to show. This is not an issue in our sample as we filter support departments based on Team membership.
 * App shows "We need you to consent to complete that action." but provides no action: your pop -up blocker might be blocking a consent dialog from opening, be sure to allow pop-ups from Teams. 
@@ -164,7 +164,8 @@ The tour files can be found in the `.tours` directory.
 * In `appSettings.json`, `manifest.json` and `.env` replace:
     * `<<deployment-url>>` with your ngrok url, minus the https://.
     * `<<aad-id>>` with your AAD Application (Client) Id.
-    * `<<client secret>>` with the client secret you created above.
+    * `<<aad-client-secret>>` with the client secret you created above.
+    * `<<teams-app-store-app-id>>` with the App ID assigned to the app in the Teams Admin Center or provided when your app passes validation. If you are sideloading the app you can use the appId from the manifest file, but please note that [deep linking may not work when sideloading](#known-issues).
 * Project Structure
     * The sample contains 3 projects
         * `Web` - Exposes REST APIs for documents and signing scenarios supported in this POC.  
