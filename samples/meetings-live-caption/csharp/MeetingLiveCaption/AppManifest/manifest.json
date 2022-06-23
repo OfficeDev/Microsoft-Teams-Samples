@@ -19,8 +19,8 @@
     "full": "Meeting Live Caption"
   },
   "description": {
-    "short": "<<TODO>>",
-    "full": "<<TODO>>"
+    "short": "Meeting side panel application uses CART link to send caption in live meeting.",
+    "full": "This is a sample meeting side panel application which demonstrates how to enable live caption in the meeting and using the CART link how to send caption in live meeting.Meeting side panel application uses CART link to send caption in live meeting."
   },
   "accentColor": "#235EA5",
   "configurableTabs": [

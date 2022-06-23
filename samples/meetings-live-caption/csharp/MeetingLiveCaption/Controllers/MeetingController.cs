@@ -1,8 +1,5 @@
 ﻿using MeetingLiveCaption.Models;
-using MeetingLiveCaption.Models.Configuration;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using System;
 using System.Net.Http;
 using System.Text;
@@ -14,19 +11,12 @@ namespace MeetingLiveCaption.Controllers
     [ApiController]
     public class MeetingController : ControllerBase
     {
-        public static string MeetingCARTURL;
-
-        private readonly IOptions<MeetingSettings> meetingSetting;
-
-        public MeetingController(IOptions<MeetingSettings> meetingSetting)
-        {
-            this.meetingSetting = meetingSetting;
-        }
+        public static string MeetingCartUrl;
 
         /// <summary>
-        /// Method to send card to team using incoming webhook.
+        /// Method to send caption in the live meeting.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Return status OK if success, else return bad request.</returns>
         [HttpPost("LiveCaption")]
         public async Task<IActionResult> LiveCaptionAsync([FromBody] LiveCaption liveCaption)
         {
@@ -34,7 +24,7 @@ namespace MeetingLiveCaption.Controllers
             {
                 var data = new StringContent(liveCaption.CaptionText, Encoding.UTF8, "text/plain");
                 var httpClient = new HttpClient();
-                var response = await httpClient.PostAsync(MeetingCARTURL, data);
+                var response = await httpClient.PostAsync(MeetingCartUrl, data);
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
@@ -61,9 +51,9 @@ namespace MeetingLiveCaption.Controllers
         {
             try
             {
-                if (!string.IsNullOrEmpty(liveCaption.CARTUrl.Trim()) && liveCaption.CARTUrl.Contains("meetingid") && liveCaption.CARTUrl.Contains("token"))
+                if (!string.IsNullOrEmpty(liveCaption.CartUrl.Trim()) && liveCaption.CartUrl.Contains("meetingid") && liveCaption.CartUrl.Contains("token"))
                 {
-                    MeetingCARTURL = liveCaption.CARTUrl;
+                    MeetingCartUrl = liveCaption.CartUrl;
                     return this.Ok();
                 }
                 else

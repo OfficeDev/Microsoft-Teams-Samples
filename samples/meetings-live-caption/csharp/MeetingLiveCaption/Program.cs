@@ -6,16 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MeetingLiveCaption.Models.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Adds application configuration settings to specified IServiceCollection.
-builder.Services.AddOptions<MeetingSettings>()
-.Configure<IConfiguration>((botOptions, configuration) =>
-{
-    botOptions.CART_URL = configuration.GetValue<string>("CART_URL");
-});
 
 builder.Services.AddHttpClient().AddControllers().AddNewtonsoftJson();
 
