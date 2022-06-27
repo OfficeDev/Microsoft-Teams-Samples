@@ -13,7 +13,14 @@
     "products": [
       "Teams"
     ],
-    "thumbnails": null,
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-auth/nodejs/Images/TabAzureADLoginV1.png",
+        "alt": "Solution UX as Teams tab showing authentication details"
+      }
+    ],
     "authors": [
       {
         "gitHubAccount": null,
