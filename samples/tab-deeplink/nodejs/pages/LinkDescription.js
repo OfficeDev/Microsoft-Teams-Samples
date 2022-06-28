@@ -20,13 +20,13 @@ microsoftTeams.app.getContext().then((context) => {
         s.forEach(x=> {
             var loc = "ChannelDetails.html?id="+x.ID;
             let listContent = document.getElementById("list-content");
-            let aTag = document.createElement("a");
-            let brTag = document.createElement("br");
-            aTag.href = loc;
-            aTag.innerHTML = x.Desc;
+            let anchorTag = document.createElement("a");
+            let lineBreakTag = document.createElement("br");
+            anchorTag.href = loc;
+            anchorTag.innerHTML = x.Desc;
 
-            listContent.appendChild(aTag);
-            listContent.appendChild(brTag);
+            listContent.appendChild(anchorTag);
+            listContent.appendChild(lineBreakTag);
         });
     }
 }); 
