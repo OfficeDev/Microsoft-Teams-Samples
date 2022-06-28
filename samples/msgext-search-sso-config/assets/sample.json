@@ -13,6 +13,24 @@
     "products": [
       "Teams"
     ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": ""
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": ""
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": ""
+      }
+    ],
     "thumbnails": [
       {
         "type": "image",

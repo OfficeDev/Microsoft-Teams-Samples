@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-app-auth-nodejs",
+    "name": "officedev-microsoft-teams-samples-app-complete-sample-nodejs",
     "source": "officeDev",
-    "title": "Microsoft Teams Authentication Sample",
-    "shortDescription": "This sample demonstrates authentication in Microsoft Teams apps.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-auth/nodejs",
+    "title": "Microsoft Teams Bot in Node.js",
+    "shortDescription": "Sample that shows how to use dialog bot with bot sdk v4, messaging extension and facebook auth flow in Nodejs.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-complete-sample/nodejs",
     "longDescription": [
-      "This sample demonstrates authentication in Microsoft Teams apps."
+      "Sample that shows how to use dialog bot with bot sdk v4, messaging extension and facebook auth flow in Nodejs."
     ],
-    "creationDateTime": "2018-02-08",
-    "updateDateTime": "2022-06-20",
+    "creationDateTime": "2017-05-08",
+    "updateDateTime": "2022-06-21",
     "products": [
       "Teams"
     ],
@@ -35,8 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-auth/nodejs/Images/TabAzureADLoginV1.png",
-        "alt": "Solution UX as Teams tab showing authentication details"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-complete-sample/nodejs/images/dialog.png",
+        "alt": null
       }
     ],
     "authors": [
