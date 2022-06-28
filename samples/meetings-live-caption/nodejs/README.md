@@ -18,19 +18,10 @@ createdDate: "24-06-2022 00:15:15"
 This is a sample meeting side panel application which demonstrates how to enable live caption in the meeting and using the CART link how to send caption in live meeting. Meeting side panel application uses CART link to send caption in live meeting.
 
 ## Enable CART Captions
-Once the meeting is scheduled. Follow this doc to enable [CART Catptions](https://support.microsoft.com/office/use-cart-captions-in-a-microsoft-teams-meeting-human-generated-captions-2dd889e8-32a8-4582-98b8-6c96cf14eb47).
+Once the meeting is scheduled. Follow this doc to enable [CART Captions](https://support.microsoft.com/office/use-cart-captions-in-a-microsoft-teams-meeting-human-generated-captions-2dd889e8-32a8-4582-98b8-6c96cf14eb47).
 Copy the CART link it will used while configuring tab for meeting.
 
 ## Key features
-
-1. Schedule the meeting and add Meeting Caption Tab in that particular scheduled meeting.
-![Add Tab](Images/AddMeetingCaption.png)
-2. Once meeting started, turn on live caption.
-![Start live caption](Images/TurnOnLiveCaption.png)
-3. Once the live caption has started, you can use the app to send live caption.
-![Send live caption](Images/MeetingCaptionSidePanel.png)
-4. After clicking on `Submit` button, you will see the caption in the meeting.
-![Caption in meeting](Images/LiveCaption.png)
 
 ![Key Features](Images/MeetingCaption.gif)
 
@@ -46,18 +37,7 @@ Copy the CART link it will used while configuring tab for meeting.
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call the tab.
 
-### 1. Start ngrok on localhost:3978
-- Open ngrok and run command `ngrok http -host-header=rewrite 3978` 
-- Once started you should see URL  `https://41ed-abcd-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
-
-![Ngrok](Images/NgrokScreenshot.png)
-
-### 2. Manually update the manifest.json
-- Edit the `manifest.json` contained in the  `/appPackage` folder to and fill in App Domain (ngrok Url that was created in step 1) Update *everywhere* you see the place holder string `<<App-Domain>>` (depending on the scenario it may occur multiple times in the `manifest.json`)
-- Zip up the contents of the `/appPackage` folder to create a `manifest.zip`
-- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
-
-### 3. Run your tab sample
+### 1. Clone and start your sample sample
 1) Clone the repository
 
     ```bash
@@ -71,6 +51,31 @@ Copy the CART link it will used while configuring tab for meeting.
     ```bash
     npm install
     ```
+4) Run ngrok - point to port 3978
+
+    ```bash
+    ngrok http -host-header=rewrite 3978
+    ```
+5) Run your app
+
+    ```bash
+    npm start
+    ```
+### 2. Manually update the manifest.json
+1. Manually update the manifest.json
+    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace the `<<GUID ID>>` with any guid value and `<<APP-DOMAIN>>` with with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.
+    - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
+    - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Manage your apps -> Upload an app -> Upload a custom app")
 
 **NOTE: If you are unable to send caption, try configuring tab again.**
+
+### Features of the sample.
+1. Schedule the meeting and add Meeting Caption Tab in that particular scheduled meeting.
+![Add Tab](Images/AddMeetingCaption.png)
+2. Once meeting started, turn on live caption.
+![Start live caption](Images/TurnOnLiveCaption.png)
+3. Once the live caption has started, you can use the app to send live caption.
+![Send live caption](Images/MeetingCaptionSidePanel.png)
+4. After clicking on `Submit` button, you will see the caption in the meeting.
+![Caption in meeting](Images/LiveCaption.png)
 

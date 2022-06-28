@@ -41,6 +41,7 @@ server.get('/Home/Configure', async (req, res) => {
 server.post('/api/meeting/SaveCARTUrl', async (req, res) => {
     try
     {
+        if(req.body != null && req.body.CartUrl != null){
         if (req.body.CartUrl.trim() !== "" && req.body.CartUrl.includes("meetingid") && req.body.CartUrl.includes("token"))
         {
             MeetingCartUrl = req.body.CartUrl;
@@ -51,6 +52,7 @@ server.post('/api/meeting/SaveCARTUrl', async (req, res) => {
             return res.status(400).send()
         }
     }
+}
     catch (ex)
     {
         console.log(ex);
@@ -62,7 +64,7 @@ server.post('/api/meeting/SaveCARTUrl', async (req, res) => {
 server.post('/api/meeting/LiveCaption', async (req, res) => {
     try
     {
-        var response = await MeetingApiHelper.PostCaption(req.body.captionText.trim());
+        var response = await MeetingApiHelper.postCaption(req.body.captionText.trim());
         return res.status(response).send();
     }
     catch (ex)

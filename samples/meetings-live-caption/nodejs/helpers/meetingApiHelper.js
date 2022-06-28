@@ -8,7 +8,7 @@ class MeetingApiHelper {
      * @param {string} caption Caption to be post.
      * @returns Status of api operation.
      */
-    static PostCaption(caption) {
+    static postCaption(caption) {
         const config = {
             method: 'post',
             url: MeetingCartUrl,

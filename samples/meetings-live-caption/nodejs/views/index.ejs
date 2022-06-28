@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,14 @@
     <link rel="stylesheet" href="../style.css">
     <style>
         body {
-            font-family:"Segoe UI","Apple Color Emoji","Segoe UI Emoji","Segoe UI Web";
+            font-family: "Segoe UI", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Web";
         }
 
         .container {
             color: white;
             padding: 0.5rem;
         }
+
         .submit-button {
             font-weight: 600;
             background-color: #5B58C7;
@@ -34,7 +36,7 @@
             microsoftTeams.app.getContext().then((context) => {
                 var infoDiv = document.getElementById("show-info");
                 infoDiv.style.color = context.app.theme === "default" ? "black" : "white";
-                if (context.page.frameContext !== "sidePanel"){
+                if (context.page.frameContext !== "sidePanel") {
                     infoDiv.innerHTML = "Please open this application in meeting side panel."
                     document.getElementById("caption-form").hidden = true;
                 }
@@ -54,19 +56,19 @@
                     captionText: captionInput.value.trim()
                 });
                 var requestOptions = {
-                  method: 'POST',
-                  headers: myHeaders,
-                  body: raw,
-                  redirect: 'follow'
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: 'follow'
                 };
                 fetch(`${window.location.origin}/api/meeting/LiveCaption`, requestOptions)
-                    .then(response => { 
+                    .then(response => {
                         if (response.status === 200) {
                             captionInput.value = "";
                             document.getElementById("loader").hidden = true;
                         }
                     })
-                    .catch(error => { 
+                    .catch(error => {
                         document.getElementById("loader").hidden = true;
                         console.log('error', error);
                     });
@@ -74,6 +76,7 @@
         }
         function onTextAreaKeyPress() {
             var key = window.event.keyCode;
+            
             // If the user has pressed enter
             if (key === 13) {
                 onSubmitCaption();
@@ -86,12 +89,13 @@
     <div class="container">
         <div id="show-info"></div>
         <form id="caption-form" onsubmit="event.preventDefault()">
-          <label for="caption">Input caption here:</label><br>
-          <textarea onkeypress="onTextAreaKeyPress()" style="min-height:4rem;width:100%;" id="caption"></textarea>
-          <span style="font-size:12px;">Press Enter or Submit to send</span>
-          <div style="display:flex;">
-            <button class="submit-button" onclick="onSubmitCaption()">Submit</button><div hidden id="loader"></div>
-          </div>
+            <label for="caption">Input caption here:</label><br>
+            <textarea onkeypress="onTextAreaKeyPress()" style="min-height:4rem;width:100%;" id="caption"></textarea>
+            <span style="font-size:12px;">Press Enter or Submit to send</span>
+            <div style="display:flex;">
+                <button class="submit-button" onclick="onSubmitCaption()">Submit</button>
+                <div hidden id="loader"></div>
+            </div>
         </form>
     </div>
 </body>
