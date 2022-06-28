@@ -63,73 +63,94 @@ namespace Microsoft.BotBuilderSamples.Bots
                 tabUrlTask3 = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["TabEntityId"], "topic3");
                 extendedDeepLink = deeplinkHelper.GetDeepLinkToTabTask(teamsUrl, _configuration["MicrosoftAppId"], _configuration["TabEntityId"], "");
             }
+
             var DeepLinkCard = new AdaptiveCard(new AdaptiveSchemaVersion("1.0"))
             {
                 Body = new List<AdaptiveElement>()
                 {
                     new AdaptiveContainer
                     {
-                        Items=new List<AdaptiveElement>()
+                        Items = new List<AdaptiveElement>()
                         {
                             new AdaptiveTextBlock()
                             {
-                                Text=$"Hey {userName}! Please click on below buttons to navigate to a tab!",
-                                Size=AdaptiveTextSize.Large,
-                                Wrap=true
-                            },
-
-                            new AdaptiveColumnSet()
-                            {
-                                Columns=new List<AdaptiveColumn>()
-                                {
-                                   new AdaptiveColumn()
-                                    {
-                                         Width=AdaptiveColumnWidth.Auto,
-                                         Items=new List<AdaptiveElement>()
-                                         {
-                                             new AdaptiveTextBlock(){Text="Bots in Teams",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
-                                         },
-                                           SelectAction = new AdaptiveOpenUrlAction()
-                                         {
-                                             Url=new Uri(tabUrlTask1),
-                                             Title = "Bots in Teams"
-                                         }
-                                    }
-                                }
+                                Text = $"Hey {userName}! Please click on below buttons to navigate to a tab!",
+                                Size = AdaptiveTextSize.Large,
+                                Wrap = true
                             },
                             new AdaptiveColumnSet()
                             {
-                                Columns=new List<AdaptiveColumn>()
-                                {
-                                   new AdaptiveColumn()
-                                    {
-                                         Width=AdaptiveColumnWidth.Auto,
-                                         Items=new List<AdaptiveElement>()
-                                         {
-                                             new AdaptiveTextBlock(){Text="Bot Framework SDK",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
-                                         },
-                                           SelectAction = new AdaptiveOpenUrlAction()
-                                           {
-                                             Url=new Uri(tabUrlTask2),
-                                             Title = "Bot Framework SDK"
-                                           }
-                                    }
-                                }
-                            },
-                            new AdaptiveColumnSet()
-                            {
-                                Columns=new List<AdaptiveColumn>()
+                                Columns = new List<AdaptiveColumn>()
                                 {
                                     new AdaptiveColumn()
                                     {
-                                        Width=AdaptiveColumnWidth.Auto,
-                                        Items=new List<AdaptiveElement>()
+                                        Width = AdaptiveColumnWidth.Auto,
+                                        Items = new List<AdaptiveElement>()
                                         {
-                                            new AdaptiveTextBlock(){Text="Teams Apps",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
+                                            new AdaptiveTextBlock()
+                                            {
+                                                Text = "Bots in Teams",
+                                                Color = AdaptiveTextColor.Accent,
+                                                Size = AdaptiveTextSize.Medium,
+                                                HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
+                                                Spacing = AdaptiveSpacing.None
+                                            }
                                         },
                                         SelectAction = new AdaptiveOpenUrlAction()
                                         {
-                                            Url=new Uri(tabUrlTask3),
+                                            Url = new Uri(tabUrlTask1),
+                                            Title = "Bots in Teams"
+                                        }
+                                    }
+                                }
+                            },
+                            new AdaptiveColumnSet()
+                            {
+                                Columns = new List<AdaptiveColumn>()
+                                {
+                                    new AdaptiveColumn()
+                                    {
+                                        Width = AdaptiveColumnWidth.Auto,
+                                        Items = new List<AdaptiveElement>()
+                                        {
+                                            new AdaptiveTextBlock()
+                                            {
+                                                Text ="Bot Framework SDK",
+                                                Color = AdaptiveTextColor.Accent,
+                                                Size = AdaptiveTextSize.Medium,
+                                                HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
+                                                Spacing = AdaptiveSpacing.None
+                                            }
+                                        },
+                                        SelectAction = new AdaptiveOpenUrlAction()
+                                        {
+                                            Url = new Uri(tabUrlTask2),
+                                            Title = "Bot Framework SDK"
+                                        }
+                                    }
+                                }
+                            },
+                            new AdaptiveColumnSet()
+                            {
+                                Columns = new List<AdaptiveColumn>()
+                                {
+                                    new AdaptiveColumn()
+                                    {
+                                        Width = AdaptiveColumnWidth.Auto,
+                                        Items = new List<AdaptiveElement>()
+                                        {
+                                            new AdaptiveTextBlock()
+                                            {
+                                                Text = "Teams Apps",
+                                                Color = AdaptiveTextColor.Accent,
+                                                Size = AdaptiveTextSize.Medium,
+                                                HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
+                                                Spacing = AdaptiveSpacing.None
+                                            }
+                                        },
+                                        SelectAction = new AdaptiveOpenUrlAction()
+                                        {
+                                            Url = new Uri(tabUrlTask3),
                                             Title = "Teams Apps"
                                         }
                                     }
@@ -137,18 +158,25 @@ namespace Microsoft.BotBuilderSamples.Bots
                             },
                             new AdaptiveColumnSet()
                             {
-                                Columns=new List<AdaptiveColumn>()
+                                Columns = new List<AdaptiveColumn>()
                                 {
                                     new AdaptiveColumn()
                                     {
-                                        Width=AdaptiveColumnWidth.Auto,
-                                        Items=new List<AdaptiveElement>()
+                                        Width = AdaptiveColumnWidth.Auto,
+                                        Items = new List<AdaptiveElement>()
                                         {
-                                            new AdaptiveTextBlock(){Text="Extended Deeplink features",Color=AdaptiveTextColor.Accent,Size=AdaptiveTextSize.Medium,HorizontalAlignment=AdaptiveHorizontalAlignment.Center,Spacing=AdaptiveSpacing.None}
+                                            new AdaptiveTextBlock()
+                                            {
+                                                Text = "Extended Deeplink features",
+                                                Color = AdaptiveTextColor.Accent,
+                                                Size = AdaptiveTextSize.Medium,
+                                                HorizontalAlignment = AdaptiveHorizontalAlignment.Center,
+                                                Spacing = AdaptiveSpacing.None
+                                            }
                                         },
                                         SelectAction = new AdaptiveOpenUrlAction()
                                         {
-                                            Url=new Uri(extendedDeepLink),
+                                            Url = new Uri(extendedDeepLink),
                                             Title = "Extended Deeplink features"
                                         }
                                     }
