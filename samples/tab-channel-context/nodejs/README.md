@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: "This sample shows the contents of context object in a private and shared channel."
+description: "This sample shows the contents of tab context object in a private and shared channel."
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ extensions:
 
 # Tab context in channel
 
-This sample shows the contents of context object in a private and shared channel.
+This sample shows the contents of tab context object in a private and shared channel.
 
 ![tab context in private channel](Images/privateChannel.png)
 
