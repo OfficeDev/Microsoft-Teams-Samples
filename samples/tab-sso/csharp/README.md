@@ -25,6 +25,12 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
 
 ![Config SSO](Images/config_sso_teams.png)
 
+Browser SSO - 
+
+![Browser SSO](Images/browser_sso.png)
+
+![Browser Success SSO](Images/browser_success_sso.png)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -93,7 +99,11 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
     Enable implicit grant by checking the following boxes:  
     ✔ ID Token  
     ✔ Access Token  
-14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
+14. Set another redirect URI:
+    * Select **Add a platform**.
+    * Select **Single-page application**.
+    * Enter the **redirect URI** for the app in the following format: https://%ngrokDomain%.ngrok.io/Home/BrowserRedirect
+15.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
 
 1) __*This step is specific to Teams.*__
