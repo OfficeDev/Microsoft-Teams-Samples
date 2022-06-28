@@ -57,7 +57,7 @@ Copy the CART link it will used while configuring tab for meeting.
 ![Ngrok](MeetingLiveCaption/Images/NgrokScreenshot.png)
 
 4. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
-   - `{{Microsoft-App-Id}}` with Application id generated from Step 1
+   - `{{GUID ID}}` with any guid id value.
    - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
 5. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 6.
