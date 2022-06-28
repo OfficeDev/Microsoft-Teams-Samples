@@ -43,7 +43,7 @@ namespace MeetingLiveCaption.Controllers
         }
 
         /// <summary>
-        /// Method to send card to team using incoming webhook.
+        /// Method to save cart url.
         /// </summary>
         /// <returns></returns>
         [HttpPost("SaveCARTUrl")]

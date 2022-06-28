@@ -21,7 +21,7 @@ namespace MeetingLiveCaption.Controllers
         }
 
         /// <summary>
-        /// Returns view to be displayed in Task Module.
+        /// Returns view to be displayed for meeting tab configuration page.
         /// </summary>
         /// <returns></returns>
         public IActionResult Configure()
