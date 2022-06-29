@@ -58,6 +58,12 @@ This sample shows the contents of tab context object in a private and shared cha
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
+7) Refer below docs for creating private/shared channels in team.
+ - [Shared Channels](https://docs.microsoft.com/en-us/MicrosoftTeams/shared-channels)
+ - [Private Channels](https://docs.microsoft.com/en-us/MicrosoftTeams/private-channels)
+
+ ## Note : Only admins can create private/shared channels for a team.
+
 ## Features of the sample
 
 - Add the tab in private/shared channel.
@@ -69,3 +75,4 @@ This sample shows the contents of tab context object in a private and shared cha
 - [Tab Basics](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
 - [Azure Portal](https://portal.azure.com)
 - [Get-context-for-tabs](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/access-teams-context#retrieve-context-in-private-channels)
+ -[Create a private/shared channel](https://support.microsoft.com/en-gb/office/create-a-standard-or-private-channel-in-teams-fda0b75e-5b90-4fb8-8857-7e102b014525)
