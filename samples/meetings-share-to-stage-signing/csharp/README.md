@@ -21,8 +21,7 @@ This proof of concept demonstrates the use case of sharing a document on Teams S
 * Stage app view depends on the authentication of the user
 * Adaptive Cards
 
-<!-- Include a video documenting the sharing to stage here. -->
-![Video documenting the sharing to stage, including the choosing of a document from the sidepanel, and the signing of the document on the stage](/Docs/Signing-Clip.gif)
+![Video documenting the sharing to stage, including the choosing of a document from the sidepanel, and the signing of the document on the stage](/samples/meetings-share-to-stage-signing/csharp/Docs/Signing-Clip.gif)
 
 ## Workflow
 ```mermaid
