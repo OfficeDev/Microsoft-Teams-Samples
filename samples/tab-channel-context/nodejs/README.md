@@ -26,6 +26,8 @@ This sample shows the contents of tab context object in a private and shared cha
 - [NodeJS](https://nodejs.org/en/)
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+- [Create a private/shared channel](https://support.microsoft.com/en-gb/office/create-a-standard-or-private-channel-in-teams-fda0b75e-5b90-4fb8-8857-7e102b014525) Priave/Shared channel in team
+
 
 
 ## To try this sample
@@ -57,8 +59,10 @@ This sample shows the contents of tab context object in a private and shared cha
    - From the lower left corner, choose Apps -> Manage your apps -> Upload an app.
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+   
+7) Add the tab in private/shared channel.
 
-7) Refer below docs for creating private/shared channels in team.
+8) Refer below docs for creating private/shared channels in team.
  - [Shared Channels](https://docs.microsoft.com/en-us/MicrosoftTeams/shared-channels)
  - [Private Channels](https://docs.microsoft.com/en-us/MicrosoftTeams/private-channels)
 
@@ -75,4 +79,3 @@ This sample shows the contents of tab context object in a private and shared cha
 - [Tab Basics](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
 - [Azure Portal](https://portal.azure.com)
 - [Get-context-for-tabs](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/access-teams-context#retrieve-context-in-private-channels)
-- [Create a private/shared channel](https://support.microsoft.com/en-gb/office/create-a-standard-or-private-channel-in-teams-fda0b75e-5b90-4fb8-8857-7e102b014525)
