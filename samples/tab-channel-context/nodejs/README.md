@@ -62,10 +62,6 @@ This sample shows the contents of tab context object in a private and shared cha
    
 7) Add the tab in private/shared channel.
 
-8) Refer below docs for creating private/shared channels in team.
- - [Shared Channels](https://docs.microsoft.com/en-us/MicrosoftTeams/shared-channels)
- - [Private Channels](https://docs.microsoft.com/en-us/MicrosoftTeams/private-channels)
-
  **NOTE:** Only accounts with admin access can create private/shared channels in team.
 
 ## Features of the sample
@@ -79,3 +75,5 @@ This sample shows the contents of tab context object in a private and shared cha
 - [Tab Basics](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
 - [Azure Portal](https://portal.azure.com)
 - [Get-context-for-tabs](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/access-teams-context#retrieve-context-in-private-channels)
+- [Shared Channels](https://docs.microsoft.com/en-us/MicrosoftTeams/shared-channels)
+- [Private Channels](https://docs.microsoft.com/en-us/MicrosoftTeams/private-channels)
