@@ -63,7 +63,7 @@ Copy the CART link it will used while configuring tab for meeting.
     ```
 ### 2. Manually update the manifest.json
 1. Manually update the manifest.json
-    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace the `<<GUID ID>>` with any guid value and `<<APP-DOMAIN>>` with with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.
+    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace the `<<AppId>>` with any guid value and `<<APP-DOMAIN>>` with with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Manage your apps -> Upload an app -> Upload a custom app")
 
