@@ -88,5 +88,5 @@ Enter text in the emulator.  The text will be echoed back by the bot.
 4. Additional Deep link features using Microsoft Teams SDK v2.0.0
 ![Additional features](Images/DeepLinkTab.png)
 
-![Additional features](Images/DeepLinkTab2.png)
+![Additional features](Images/DeepLinkTab2.PNG)
 
