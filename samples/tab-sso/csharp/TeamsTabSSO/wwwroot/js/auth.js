@@ -15,8 +15,6 @@ $(document).ready(function () {
                     $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
                     $("#divError").show();
                     $("#consent").show();
-                } else {
-                    // Something else went wrong
                 }
             });
     }).catch((error) => {

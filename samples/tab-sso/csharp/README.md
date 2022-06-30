@@ -26,6 +26,7 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
 ![Config SSO](Images/config_sso_teams.png)
 
 Browser SSO - 
+To test this feature open the your App base URI or Ngrok URI on browser- URI should be like `https://%ngrokDomain%.ngrok.io/Home/`
 
 ![Browser SSO](Images/browser_sso.png)
 

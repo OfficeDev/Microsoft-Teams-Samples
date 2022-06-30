@@ -43,6 +43,7 @@ class MsalAuthService {
         } else {
             return this.app.loginPopup(authRequest).then((authResponse) => {
                 this.app.setActiveAccount(authResponse.account);
+
                 return authResponse.account;
             });
         }
@@ -61,11 +62,13 @@ class MsalAuthService {
                 activeAccount = allAccounts[0];
             }
         }
+
         return Promise.resolve(activeAccount);
     }
 
     getToken() {
         const scopes = [this.api];
+
         return this.app
             .acquireTokenSilent({ account: this.app.getActiveAccount() })
             .then((authResponse) => authResponse.accessToken)
@@ -80,11 +83,11 @@ class MsalAuthService {
             });
     }
 
-
     getUserInfo(principalName) {
         this.getToken().then((token) => {
             if (principalName) {
                 let graphUrl = "https://graph.microsoft.com/v1.0/users/" + principalName;
+
                 $.ajax({
                     url: graphUrl,
                     type: "GET",
@@ -94,9 +97,7 @@ class MsalAuthService {
                     success: function (profile) {
                         let profileDiv = $("#divGraphProfile");
                         profileDiv.empty();
-                        //$("<div>")
-                        //    .append($("<pre>").text(JSON.stringify(profile, null, "\t")))
-                        //    .appendTo(profileDiv);
+                        
                         $("<div>")
                             .append($("<h2>").text(`Welcome ${profile["displayName"]},`))
                             .append($("<h3>").text(`Here is your profile details:`))

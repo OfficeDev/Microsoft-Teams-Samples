@@ -7,7 +7,9 @@
 
     <script>
         const authService = new MsalAuthService("@ViewBag.clientId", "@ViewBag.applicationIdURI");
+
         $(document).ready(function() {
+            
             authService
                 .isCallback()
                 .then((isCallback) => {

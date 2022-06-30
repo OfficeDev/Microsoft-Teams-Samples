@@ -24,7 +24,9 @@
     <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
     <script>
         const authService = new MsalAuthService("@ViewBag.clientId", "@ViewBag.applicationIdURI");
+
         $(document).ready(function() {
+
             authService
                 .isCallback()
                 .then((isCallback) => {
@@ -82,10 +84,10 @@
 </head>
 
 <h1>Tab SSO Authentication</h1>
+<div id="browser-signin-text" style="display:none;">Try signing in from browser - <a href="~/Home/" target="_blank">Click here</a></div>
 <div id="divError" style="display: none"></div>
 <button onclick="requestConsent()" id="consent" style="display:none;">Authenticate</button>
 <div id="divGraphProfile" style="display: none"></div>
-<div id="browser-signin-text" style="display:none;">Try signing in from browser - <a href="~/Home/" target="_blank">Click here</a></div>
 <div id="browser-signin-container" style="display:none;">
     <div id="browser-login">
         <h2>Please click on Login button to see your profile details!</h2>
