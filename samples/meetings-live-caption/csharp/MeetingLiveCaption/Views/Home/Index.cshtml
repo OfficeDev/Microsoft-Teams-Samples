@@ -1,0 +1,106 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Live Caption</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .container {
+            color: white;
+            padding: 0.5rem;
+        }
+
+        .submit-button {
+            font-weight: 600;
+            background-color: #5B58C7;
+            padding: 0.5rem 1.5rem;
+            color: white;
+            border-radius: 7px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #7A80EB;
+        }
+    </style>
+    <script type="text/javascript">
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then((context) => {
+                var infoDiv = document.getElementById("show-info");
+                infoDiv.style.color = context.app.theme === "default" ? "black" : "white";
+
+                if (context.page.frameContext !== "sidePanel"){
+                    infoDiv.innerHTML = "Please open this application in meeting side panel."
+                    document.getElementById("caption-form").hidden = true;
+                }
+                else {
+                    infoDiv.innerHTML = ""
+                    document.getElementById("caption-form").hidden = false;
+                }
+            });
+        });
+
+        function onSubmitCaption() {
+            var captionInput = document.getElementById("caption");
+            document.getElementById("loader").hidden = false;
+
+            if (captionInput.value.trim() !== "") {
+                var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+
+                var raw = JSON.stringify({
+                    captionText: captionInput.value.trim()
+                });
+
+                var requestOptions = {
+                  method: 'POST',
+                  headers: myHeaders,
+                  body: raw,
+                  redirect: 'follow'
+                };
+
+                fetch(`${window.location.origin}/api/meeting/LiveCaption`, requestOptions)
+                    .then(response => { 
+                        if (response.status === 200) {
+                            captionInput.value = "";
+                            document.getElementById("loader").hidden = true;
+                        }
+                    })
+                    .catch(error => { 
+                        document.getElementById("loader").hidden = true;
+                        console.log('error', error);
+                    });
+            }
+        }
+
+        function onTextAreaKeyPress() {
+            var key = window.event.keyCode;
+
+            // If the user has pressed enter
+            if (key === 13) {
+                onSubmitCaption();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div id="show-info"></div>
+        <form id="caption-form" onsubmit="event.preventDefault()">
+          <label for="caption">Input caption here:</label><br>
+          <textarea onkeypress="onTextAreaKeyPress()" style="min-height:4rem;width:100%;" id="caption"></textarea>
+          <span style="font-size:12px;">Press Enter or Submit to send</span>
+          <div style="display:flex;">
+            <button class="submit-button" onclick="onSubmitCaption()">Submit</button><div hidden id="loader"></div>
+          </div>
+        </form>
+    </div>
+</body>
+
+</html>
