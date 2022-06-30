@@ -63,7 +63,7 @@ This sample displays how to consume SubEntity Id to DeepLink from Bot to Tab and
 1. Click on Back to List to view all the options. User can select an option which will redirect to the respective Task in static tab/ channel tab.
 
 **Additional Deep link features using Microsoft Teams SDK v2.0.0**
-![Additional Features](DeeplinkBot/images/DeepLinkTab.png)
+![Additional Features](DeepLinkBot/images/DeepLinkTab.png)
 
-![Additional Features](DeeplinkBot/images/DeepLinkTab2.png)
+![Additional Features](DeepLinkBot/images/DeepLinkTab2.png)
 
