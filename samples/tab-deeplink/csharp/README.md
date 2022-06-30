@@ -72,5 +72,5 @@ This sample displays how to consume SubEntity Id to DeepLink from Bot to Tab and
 
 ![Additional Features](DeeplinkBot/images/DeepLinkTab.png)
 
-![Additional Features](DeeplinkBot/images/DeepLinkTab2.png)
+![Additional Features](DeepLinkBot/images/DeepLinkTab2.png)
 
