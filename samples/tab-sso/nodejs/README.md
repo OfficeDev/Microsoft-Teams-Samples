@@ -141,7 +141,11 @@ Thhe app should start running on port 3333 or the port you configured
 
 ![SSO from a mobile device](./doc/images/AAD-SSO-Tab-6-Mobile.png)
 
-* You can have same experience on browser. To test, open your Ngrok URI on browser. The URI shoud be like `https://contoso.ngrok.io/`
+* You can test the SSO in browser as well.
+
+To test SSO in Browser, open your app base URL or Ngrok URI in your browser. 
+
+The URI shoud be like `https://contoso.ngrok.io/`
 
 ![Browser SSO](./doc/images/Browser-SSO.png)
 
