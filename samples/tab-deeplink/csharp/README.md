@@ -55,22 +55,22 @@ This sample displays how to consume SubEntity Id to DeepLink from Bot to Tab and
 ## Interacting with the app in Teams
 1. Interact with DeepLink bot by pinging it in either personal scope or channel by @mentioning bot. 
 
-![Bot deep link card](DeeplinkBot/images/BotCard.png)
+![Bot deep link card](DeepLinkBot/images/BotCard.png)
 
 1. Select the option from the options displayed in the adaptive card. This will redirect to the respective Task in the static tab/ channel tab.
 **Static Tab:**
 
-![Redirect Tab](DeeplinkBot/images/RedirectTab.png)
+![Redirect Tab](DeepLinkBot/images/RedirectTab.png)
 
 **Channel Tab:**
 
-![Channel Tab](DeeplinkBot/images/ChannelTab.png)
+![Channel Tab](DeepLinkBot/images/ChannelTab.png)
 
 1. Click on Back to List to view all the options. User can select an option which will redirect to the respective Task in static tab/ channel tab.
 
 **Additional Deep link features using Microsoft Teams SDK v2.0.0**
 
-![Additional Features](DeeplinkBot/images/DeepLinkTab.png)
+![Additional Features](DeepLinkBot/images/DeepLinkTab.png)
 
 ![Additional Features](DeepLinkBot/images/DeepLinkTab2.png)
 
