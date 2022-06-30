@@ -18,11 +18,11 @@ microsoftTeams.app.getContext().then((context) => {
         var s=DeepLinkModel;
         var html ='';
         s.forEach(x=> {
-            var loc = "ChannelDetails.html?id="+x.ID;
+            var uri = "ChannelDetails.html?id="+x.ID;
             let listContent = document.getElementById("list-content");
             let anchorTag = document.createElement("a");
             let lineBreakTag = document.createElement("br");
-            anchorTag.href = loc;
+            anchorTag.href = uri;
             anchorTag.innerHTML = x.Desc;
 
             listContent.appendChild(anchorTag);

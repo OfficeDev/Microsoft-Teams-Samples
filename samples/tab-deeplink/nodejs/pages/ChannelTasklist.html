@@ -10,12 +10,12 @@
             var deepLinkInfo = DeepLinkModel;
             var html = '';
             deepLinkInfo.forEach(deepLink => {
-                var loc = "ChannelDetails.html?id=" + deepLink.ID;
+                var uri = "ChannelDetails.html?id=" + deepLink.ID;
 
                 let listContent = document.getElementById("list-content");
                 let anchorTag = document.createElement("a");
                 let lineBreakTag = document.createElement("br");
-                anchorTag.href = loc;
+                anchorTag.href = uri;
                 anchorTag.innerHTML = deepLink.Desc;
 
                 listContent.appendChild(anchorTag);
