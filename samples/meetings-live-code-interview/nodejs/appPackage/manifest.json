@@ -25,7 +25,7 @@
   "accentColor": "#5558AF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://c867-116-75-13-29.ngrok.io/config",
+      "configurationUrl": "https://{{Domain Name}}/config",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",

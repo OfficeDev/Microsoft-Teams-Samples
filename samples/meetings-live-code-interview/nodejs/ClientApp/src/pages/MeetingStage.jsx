@@ -88,14 +88,13 @@ const MeetingStage = (props) => {
   const handleClick = emitMessageAction(async (value) => {
     var editorMap = containerValue.initialObjects.editorMap;
     editorMap.set(editorValueKey, value);
-
   }, 2000);
 
   return (
     <>
       {
         IQuestionDetails.questions ? IQuestionDetails.questions.map((question) => {
-          if (question.questionId == questionId) {
+          if (question.questionId === questionId) {
             return <>
               <div>{question.question}</div>
               <div>{question.language}</div>

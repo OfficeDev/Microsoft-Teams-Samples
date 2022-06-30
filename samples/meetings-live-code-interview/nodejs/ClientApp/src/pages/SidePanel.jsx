@@ -20,6 +20,7 @@ const SidePanel = () => {
   const shareSpecificPart = (partName) => {
     var appContentUrl = "";
     appContentUrl = `${window.location.origin}/question/${partName}`;
+
     microsoftTeams.meeting.shareAppContentToStage((error, result) => {
       if (result) {
         // handle success
@@ -35,6 +36,7 @@ const SidePanel = () => {
 
   const flexColumnStyles = getFlexColumnStyles();
   const flexItemStyles = getFlexItemStyles();
+
   return (
     <div
       className={mergeClasses(

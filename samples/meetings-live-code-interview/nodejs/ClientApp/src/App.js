@@ -19,6 +19,7 @@ export default function App() {
     if (!initialized) {
       if (inTeams()) {
         console.log("App.js: initializing client SDK");
+        
         microsoftTeams.app
           .initialize()
           .then(() => {
