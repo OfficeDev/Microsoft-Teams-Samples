@@ -85,4 +85,8 @@ Enter text in the emulator.  The text will be echoed back by the bot.
 ![](https://user-images.githubusercontent.com/50989436/116378517-d5dea680-a82f-11eb-9717-9eeb84942a05.png)
 3. Click on Back to List to view all the options. User can select an option which will redirect to the respective Task in the Tab.
 ![](https://user-images.githubusercontent.com/50989436/116378607-ed1d9400-a82f-11eb-9234-33e307ccf184.png)
+4. Additional Deep link features using Microsoft Teams SDK v2.0.0
+![Additional features](Images/DeepLinkTab.png)
+
+![Additional features](Images/DeepLinkTab2.png)
 

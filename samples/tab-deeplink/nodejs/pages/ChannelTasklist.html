@@ -7,16 +7,16 @@
     <script>
         $(document).ready(function () {
             microsoftTeams.app.initialize();
-            var s = DeepLinkModel;
+            var deepLinkInfo = DeepLinkModel;
             var html = '';
-            s.forEach(x => {
-                var loc = "ChannelDetails.html?id=" + x.ID;
+            deepLinkInfo.forEach(deepLink => {
+                var loc = "ChannelDetails.html?id=" + deepLink.ID;
 
                 let listContent = document.getElementById("list-content");
                 let anchorTag = document.createElement("a");
                 let lineBreakTag = document.createElement("br");
                 anchorTag.href = loc;
-                anchorTag.innerHTML = x.Desc;
+                anchorTag.innerHTML = deepLink.Desc;
 
                 listContent.appendChild(anchorTag);
                 listContent.appendChild(lineBreakTag);

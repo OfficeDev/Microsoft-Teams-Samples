@@ -2,13 +2,16 @@
 
 <head>
     <title></title>
+    
     <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
         integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
         crossorigin="anonymous"></script>
     <script src="DeepLinkModel.js"></script>
+
     <script type="text/javascript">
         microsoftTeams.app.initialize();
     </script>
+
     <script>
         microsoftTeams.app.getContext().then((context) => {
             if (context.page.subPageId === "topic1") {
@@ -24,15 +27,15 @@
                 document.getElementById("taskContent").innerHTML = "Adaptive cards are a new cross product specification for cards in Microsoft products including Bots, Cortana, Outlook, and Windows. They are the recommended card type for new Teams development. For general information from the Adaptive cards team see Adaptive Cards Overview. You can use adaptive cards anywhere you can use existing Hero cards, Office365 cards, and Thumbnail cards.For more details <a href='https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/what-are-cards' target='_blank'>Click here</a>";
             }
             else {
-                var s = DeepLinkModel;
+                var deepLinksInfo = DeepLinkModel;
                 var html = '';
-                s.forEach(x => {
-                    var loc = "./Details.html?id=" + x.ID;
+                deepLinksInfo.forEach(deepLink => {
+                    var loc = "./Details.html?id=" + deepLink.ID;
                     let listContent = document.getElementById("list-content");
                     let anchorTag = document.createElement("a");
                     let lineBreakTag = document.createElement("br");
                     anchorTag.href = loc;
-                    anchorTag.innerHTML = x.Desc;
+                    anchorTag.innerHTML = deepLink.Desc;
 
                     listContent.appendChild(anchorTag);
                     listContent.appendChild(lineBreakTag);
