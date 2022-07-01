@@ -7,8 +7,10 @@
 
         return new Promise((resolve, reject) => {
             display("1. Get auth token from Microsoft Teams");
+            
             microsoftTeams.authentication.getAuthToken().then((result) => {
-                display(result)
+                display(result);
+
                 resolve(result);
             }).catch((error) => {
                 reject("Error getting token: " + error);
@@ -45,6 +47,7 @@
                         reject(responseJson.error);
                     } else {
                         const profile = responseJson;
+
                         resolve(profile);
                     }
                 });
@@ -71,6 +74,7 @@
             .then((result) => {
                 let data = localStorage.getItem(result);
                 localStorage.removeItem(result);
+
                 resolve(data);
             }).catch((reason) => {
                 reject(JSON.stringify(reason));
@@ -101,6 +105,7 @@
                 .catch((error) => {
                     if (error === "invalid_grant") {
                         display(`Error: ${error} - user or admin consent required`);
+
                         // Display in-line button so user can consent
                         let button = display("Consent", "button");
                         button.onclick = (() => {
@@ -116,6 +121,7 @@
                                 })
                                 .catch((error) => {
                                     display(`ERROR ${error}`);
+
                                     // Consent failed - offer to refresh the page
                                     button.disabled = true;
                                     let refreshButton = display("Refresh page", "button");
