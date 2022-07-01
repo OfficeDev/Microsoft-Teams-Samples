@@ -57,7 +57,7 @@ This capability is currently available in developer preview only.
     ```    
 - Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
    - `<<App-ID>>` with some unique GUID   
-   - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
+   - `<<BASE-URL>>` with your application's base url, e.g. `https://1234.ngrok.io`
    - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
 
  - Run solution

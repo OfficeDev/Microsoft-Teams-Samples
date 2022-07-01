@@ -71,7 +71,7 @@ It has meeting details and in-meeting app that helps in the interview process.
     ```
 6) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
    - `<<App-ID>>` with some unique GUID   
-   - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
+   - `<<BASE-URL>>` with your application's base url, e.g. `https://1234.ngrok.io`
    - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
 
 7) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.

@@ -201,7 +201,7 @@ Messaging Extention Authentication
    - `{{Microsoft-App-id}}` - Generated from Step 3 (Application (client) ID)is the application app id
    - `{{TenantId}}` - Generated from Step 3(Directory (tenant) ID) is the tenant id
    - `{{MicrosoftAppPassword}}` - Generated from Step 14, also referred to as Client secret
-   - `{{ApplicationBaseUrll}}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+   - `{{ApplicationBaseUrll}}` - Your application's base url. E.g. `https://12345.ngrok.io` if you are using ngrok.
    - `{{ Connection Name }}` - Generated from step 15.
    - `{{FacebookAppId}} and {{FacebookAppPassword}} and {{ FBConnectionName}}`- Generated from step 16.
 
@@ -213,7 +213,7 @@ Messaging Extention Authentication
 - **Manually update the manifest.json**
     Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
    - `{{Microsoft-App-Id}}` with Application id generated from Step 3
-   - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+   - `{Base_URL}` - Your application's base url. E.g. `https://12345.ngrok.io` if you are using ngrok.
 
     > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 

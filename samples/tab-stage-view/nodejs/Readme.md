@@ -98,7 +98,7 @@ Also update `BaseUrl` according to your code runtime environment.
 - __*This step is specific to Teams.*__
     **Edit** the `manifest.json` in the `appPackage` folder and replace the following details:
    - `<<MANIFEST-ID>>` with some unique GUID   
-   - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
+   - `<<BASE-URL>>` with your application's base url, e.g. `https://1234.ngrok.io`
    - `<<YOUR-MICROSOFT-APP-ID>>` with the `MicrosoftAppId`. 
    - `<<DOMAIN-NAME>>` with the ngrok URL or app hosted base url.
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`

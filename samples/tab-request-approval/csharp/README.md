@@ -130,12 +130,12 @@ Manager Persona:
    - `MicrosoftAppId` - Generated from Step 3 (Application (client) ID)is the application app id
    - `TenantId` - Generated from Step 3(Directory (tenant) ID) is the tenant id
    - `MicrosoftAppPassword` - Generated from Step 14, also referred to as Client secret
-   - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+   - `{Base_URL}` - Your application's base url. E.g. `https://12345.ngrok.io` if you are using ngrok.
    - Press `F5` to run the project
 	 
 19. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
    - `{{Microsoft-App-Id}}` with Application id generated from Step 3
-   - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+   - `{Base_URL}` - Your application's base url. E.g. `https://12345.ngrok.io` if you are using ngrok.
    - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
 20. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 19.

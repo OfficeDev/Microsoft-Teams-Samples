@@ -64,7 +64,7 @@ This sample shows a feature where user can schedule a task from messaging extens
    Modify the `appsettings.json` and fill in the following details:
    - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
    - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
-   - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+   - `{{ Application Base Url }}` - Your application's base url. E.g. `https://12345.ngrok.io` if you are using ngrok.
    - Press `F5` to run the project
 	 
 6) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:

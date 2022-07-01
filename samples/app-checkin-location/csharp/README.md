@@ -78,7 +78,7 @@ This sample shows feature where user can checkin with current location and view 
 7) Modify the `/appsettings.json` and fill in the following details:
   - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
   - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
-  - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+  - `{{ Application Base Url }}` - Your application's base url. E.g. `https://12345.ngrok.io` if you are using ngrok.
 
   
 8) Run the bot from a terminal or from Visual Studio, choose option A or B.
