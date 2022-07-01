@@ -19,7 +19,8 @@ const SidePanel = () => {
 
   const shareSpecificPart = (partName) => {
     var appContentUrl = "";
-    appContentUrl = `${window.location.origin}/question/${partName}`;
+      appContentUrl = `${window.location.origin}/question/${partName}`;
+    microsoftTeams.app.initialize();
     microsoftTeams.meeting.shareAppContentToStage((error, result) => {
       if (result) {
         // handle success

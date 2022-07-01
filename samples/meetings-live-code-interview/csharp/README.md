@@ -60,7 +60,7 @@ sequenceDiagram
 - [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
   ```bash
   # run ngrok locally
-  ngrok http -host-header=localhost 3978
+  ngrok http -host-header=localhost 3001
   ```
 
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
@@ -78,19 +78,25 @@ sequenceDiagram
     # change into project folder
     cd # MeetingLiveCoding
     ```
-3) Run ngrok - point to port 3978
+3) Run ngrok - point to port 3001
 
     ```bash
-    # ngrok http -host-header=rewrite 3978
+    # ngrok http -host-header=rewrite 3001
     ```
-4) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
+4) Inside ClientApp folder execute the below command.
+
+    ```bash
+    # npx @fluidframework/azure-local-service@latest
+    ```
+
+5) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
    - `<<App-ID>>` with some unique GUID   
    - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
    - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
 
-5) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
+6) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
 
-6) Run the app from a terminal or from Visual Studio, choose option A or B.
+7) Run the app from a terminal or from Visual Studio, choose option A or B.
 
   A) From a terminal
 
@@ -107,7 +113,7 @@ sequenceDiagram
   - Select `MeetingLiveCoding.csproj` file
   - Press `F5` to run the project
 
-7) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+8) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.

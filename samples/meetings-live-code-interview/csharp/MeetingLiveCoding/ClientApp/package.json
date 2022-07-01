@@ -38,8 +38,8 @@
   },
   "scripts": {
     "clean": "npx shx rm -rf build",
-    "start": "start-server-and-test start:server 7070 start:client",
-    "start:client": "set PORT=3001 HTTP=true && react-scripts start",
+    "start": "react-scripts start",
+    "start:client": "react-scripts start",
     "start:server": "npx @fluidframework/azure-local-service@latest",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -62,6 +62,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "http://localhost:3000"
+  }
 }
