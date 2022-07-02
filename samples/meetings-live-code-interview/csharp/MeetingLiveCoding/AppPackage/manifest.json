@@ -20,12 +20,12 @@
   },
   "description": {
     "short": "Live coding interview",
-    "full": "This sample demos a live coding in a scheduled teams meeting."
+    "full": "This sample demos a live coding in a teams meeting stage using live share SDK."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://{{Domain Name}}/configure",
+      "configurationUrl": "https://{{Domain Name}}/config",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -46,9 +46,22 @@
   ],
   "authorization": {
     "permissions": {
+      "orgWide": [],
       "resourceSpecific": [
         {
           "name": "MeetingStage.Write.Chat",
+          "type": "Delegated"
+        },
+        {
+          "name": "ChannelMeetingStage.Write.Group",
+          "type": "Delegated"
+        },
+        {
+          "name": "LiveShareSession.ReadWrite.Chat",
+          "type": "Delegated"
+        },
+        {
+          "name": "LiveShareSession.ReadWrite.Group",
           "type": "Delegated"
         }
       ]
