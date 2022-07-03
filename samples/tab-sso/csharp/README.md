@@ -25,14 +25,14 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
 
 ![Config SSO](Images/config_sso_teams.png)
 
-### Browser SSO
+### Login Outside Microsoft Teams
 To test this feature, open your App base URI or Ngrok URI on browser.
 
 URI should be like `https://%ngrokDomain%.ngrok.io/Home/`
 
-![Browser SSO](Images/browser_sso.png)
+![Login Outside Microsoft Teams](Images/outside_teams_sso.png)
 
-![Browser Success SSO](Images/browser_success_sso.png)
+![Login Outside Microsoft Teams Success](Images/outside_teams_success_sso.png)
 
 ## Prerequisites
 
