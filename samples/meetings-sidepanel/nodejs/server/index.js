@@ -55,7 +55,6 @@ const bot = new SidePanelBot();
 // Create HTTP server.
 const server = restify.createServer(
     );
-const io = socketio.listen(server.server);
 
 var agendaPointsInitial = ["Approve 5% dividend payment to shareholders.","Increase research budget by 10%.","Continue with WFH for next 3 months."];
 var agendaPoints = agendaPointsInitial;
@@ -65,29 +64,7 @@ cacheService.myCache.set( "points", agendaPointsInitial, 36000 );
 agendaPoints = cacheService.myCache.get("points");
 console.log(agendaPoints);
 
-server.get('/', function indexHTML(req, res, next) {
-    fs.readFile(__dirname + 'Pages/sidePanel.html',{"baseURL":process.env.BaseURL}, function (err, data) {
-        if (err) {
-            next(err);
-            return;
-        }       
-        res.setHeader('Content-Type', 'text/html');
-        res.writeHead(200);
-        res.end(data);
-        next();
-    });
-});
-
-io.sockets.on('connection', function (socket) {
-    io.emit('chat message', agendaPoints);
-    socket.on('chat message', function (data) {
-        addNewPoint(data);
-        io.emit('chat message', agendaPoints);
-    });
-});
-
-
-server.listen(process.env.port || process.env.PORT || 3978, function() {
+server.listen(process.env.port || process.env.PORT || 3000, function() {
     console.log(`\n${ server.name } listening to ${ server.url }`);
 });
 
@@ -103,10 +80,6 @@ server.use(bodyParser.urlencoded({ extended: true }));
 
 server.post('/api/sendAgenda', Controller.getAgenda);
 server.post('/api/setContext', Controller.setContext);
-
-server.get('/*', restify.plugins.serveStatic({
-    directory: './Pages'
-}));
 
 addNewPoint = (point)=>{
     point? agendaPoints.push(point): null;

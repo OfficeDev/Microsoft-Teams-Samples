@@ -4,8 +4,8 @@
 const {TeamsActivityHandler} = require('botbuilder');
 
 // Initializing conversationID and serviceUrl
-const ConversationID = "";
-const serviceUrl = "";
+let ConversationID = "";
+let serviceUrl = "";
 
 class SidePanelBot extends TeamsActivityHandler {
     constructor() {
