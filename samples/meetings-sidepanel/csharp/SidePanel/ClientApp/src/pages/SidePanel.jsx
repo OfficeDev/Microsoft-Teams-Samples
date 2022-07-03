@@ -70,7 +70,6 @@ const SidePanel = (props) => {
         if (containerValue == null || containerValue == "") {
             agendaValue = ["Approve 5% dividend payment to shareholders.", "Increase research budget by 10%.", "Continue with WFH for next 3 months."];
         }
-
         else {
             agendaValue = containerValue.initialObjects.editorMap.get(agendaValueKey);
         }
