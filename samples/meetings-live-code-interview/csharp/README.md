@@ -14,7 +14,7 @@ extensions:
 
 # Live coding interview using Shared meeting stage 
 
-This sample demos a live coding in a teams meeting stage using live share SDK. In side panel there is a list of question in specific coding language and on share click specific question with language code editor will be shared with other participant in meeting.
+This sample demos a live coding in a Teams meeting stage using [Live Share SDK](https://aka.ms/livesharedocs). In side panel there is a list of question in specific coding language and on share click specific question with language code editor will be shared with other participant in meeting.
 Now any participant in meeting can write code for the question and same will be updated to all the other participants in meeting.
 
 ![side panel ](MeetingLiveCoding/Images/sidePanelView.png)
