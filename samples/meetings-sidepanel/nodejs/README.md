@@ -32,11 +32,12 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
     ```
       
  - [Ngrok](https://ngrok.com/download) (Only for devbox testing) Latest (any other tunneling      software       can also be used)
-    ```bash
 
+    ```bash
      # run ngrok locally
     ngrok http -host-header=localhost 3978
     ```
+    
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).

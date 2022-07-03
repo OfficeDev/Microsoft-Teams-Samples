@@ -1,7 +1,7 @@
 {
-  "name": "live-coding-sample",
+  "name": "meeting-sidepanel",
   "version": "0.3.1",
-  "description": "This sample demonstrates live coding using live share sdk.",
+  "description": "This sample demonstrates meeting sidepanel which uses live share sdk.",
   "license": "Microsoft",
   "author": "Microsoft",
   "dependencies": {
