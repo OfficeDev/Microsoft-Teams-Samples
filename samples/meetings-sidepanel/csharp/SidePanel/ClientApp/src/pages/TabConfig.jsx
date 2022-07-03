@@ -35,7 +35,7 @@ const TabConfig = () => {
       )}
     >
       <Title2 block align="center">
-        Welcome to Contoso Media!
+        Welcome to Meeting Side Panel App !
       </Title2>
       <Subtitle2 block align="center">
         Press the save button to continue.

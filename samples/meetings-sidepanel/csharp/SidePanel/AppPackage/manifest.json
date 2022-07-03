@@ -19,7 +19,7 @@
   },
   "description": {
     "short": "Side Panel",
-    "full": "Side Panel for Meeting Extensibility"
+    "full": "Side Panel for Meeting Extensibility using live share SDK."
   },
   "accentColor": "#5558AF",
   "bots": [

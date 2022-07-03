@@ -22,6 +22,7 @@ const SidePanel = (props) => {
                 var meetingId = context.meeting.id;
                 var tenantId = context.user.tenant.id;
                 agendaListPopulate();
+
                 setMeetingContext(userId, meetingId, tenantId).then((result) => {
                     if (result.data == true) {
                         document.getElementById("agendaButtonDiv").style.display = "block";
@@ -103,7 +104,6 @@ const SidePanel = (props) => {
         var agendas = editorMap.get(agendaValueKey);
         agendas.push(newAgendaItem);
         editorMap.set(agendaValueKey, agendas);
-
     }
 
     // This method is called to publish the agenda in meeting chat.

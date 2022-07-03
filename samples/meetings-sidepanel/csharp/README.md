@@ -1,6 +1,6 @@
 ﻿---
 page_type: sample
-description: Microsoft Teams meeting extensibility sample for iteracting with Side Panel in-meeting
+description: Sample app which demonstrates how to use live share SDK inside meeting side panel.
 products:
 - office-teams
 - office
