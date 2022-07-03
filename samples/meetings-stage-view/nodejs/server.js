@@ -18,15 +18,15 @@ app.use(express.json());
 app.get('/getMeetingData', function(req, res) {
   if(req.query.status === "todo")
   {
-    res.status(200).send({ data: todoData[req.query.meetingId] !== undefined ? todoData[req.query.meetingId]: "" });;
+    res.status(200).send({ data: todoData[req.query.meetingId] !== undefined ? todoData[req.query.meetingId]: undefined });;
   }
   if(req.query.status === "doing")
   {
-    res.status(200).send({ data: doingData[req.query.meetingId] !== undefined ? doingData[req.query.meetingId]: "" });;
+    res.status(200).send({ data: doingData[req.query.meetingId] !== undefined ? doingData[req.query.meetingId]: undefined });;
   }
   if(req.query.status === "done")
   {
-    res.status(200).send({ data: doneData[req.query.meetingId] !== undefined ? doneData[req.query.meetingId]: "" });;
+    res.status(200).send({ data: doneData[req.query.meetingId] !== undefined ? doneData[req.query.meetingId]: undefined });;
   }
 });
 

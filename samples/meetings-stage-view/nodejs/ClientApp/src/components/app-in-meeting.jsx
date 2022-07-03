@@ -33,7 +33,7 @@ const AppInMeeting = props => {
         });
     }, []);
 
-    // shareToStage.
+    // Share the content to meeting stage view.
     const shareSpecificPart = (partName) => {
         var appContentUrl = "";
         microsoftTeams.app.getContext().then((context) => {

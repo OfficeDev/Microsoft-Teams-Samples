@@ -23,8 +23,7 @@ const Done = props => {
                     url: "/getMeetingData?meetingId=" + context.meeting.id + "&status=done",
                     type: "GET",
                     success: function (response) {
-                        var html = '';
-                        if (response.data != "") {
+                        if (response.data) {
                             setMeetingDataArray(response.data);
                         }
                     },
@@ -68,7 +67,6 @@ const Done = props => {
                 containerValue.initialObjects.editorMap.on("valueChanged", updateEditorState);
             }
             catch(err) {
-                alert("not working!!")
                 console.log(err)
             };
         })();
@@ -77,7 +75,9 @@ const Done = props => {
     // This method is called whenever the shared state is updated.
     const updateEditorState = () => {
         const editorValue = containerValue.initialObjects.editorMap.get(editorValueKey);
-        setMeetingDataArray(editorValue);
+        if (editorValue) {
+            setMeetingDataArray(editorValue);
+        }
     };
 
     // Save meeting data.
