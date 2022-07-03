@@ -30,13 +30,6 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
     # determine node version
     node --version
     ```
-      
- - [Ngrok](https://ngrok.com/download) (Only for devbox testing) Latest (any other tunneling      software       can also be used)
-
-    ```bash
-     # run ngrok locally
-    ngrok http -host-header=localhost 3978
-    ```
     
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
