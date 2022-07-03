@@ -147,9 +147,9 @@ To test SSO in Browser, open your app base URL or Ngrok URI in your browser.
 
 The URI shoud be like `https://contoso.ngrok.io/`
 
-![Browser SSO](./doc/images/Browser-SSO.png)
+![Login Outside Microsoft Teams](./doc/images/Outside-Teams-SSO.png)
 
-![Browser SSO](./doc/images/Browser-Success-SSO.png)
+![Login Outside Microsoft Teams Success](./doc/images/Outside-Teams-Success-SSO.png)
 
 ## Testing the consent process
 
