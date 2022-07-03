@@ -59,14 +59,13 @@ const Done = props => {
                 container.initialObjects.editorMap.set(editorValueKey, meetingDataArray);
             }
 
-            try
-            {
+            try {
                 // Joining the container with default schema defined.
                 const { container } = await client.joinContainer(containerSchema, onContainerFirstCreated);
                 containerValue = container;
                 containerValue.initialObjects.editorMap.on("valueChanged", updateEditorState);
             }
-            catch(err) {
+            catch (err) {
                 console.log(err)
             };
         })();
@@ -141,6 +140,7 @@ const Done = props => {
                 </div>);
             })
         }
+
         return elements;
     }
 

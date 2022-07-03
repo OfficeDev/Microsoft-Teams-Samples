@@ -108,7 +108,6 @@ const Doing = props => {
         editorMap.set(editorValueKey, details);
     }
 
-
     // Task module to collect details from the meeting participants.
     const openTaskModule = (meetingStatus) => {
         let taskInfo = {
@@ -141,6 +140,7 @@ const Doing = props => {
                 </div>);
             })
         }
+
         return elements;
     }
 

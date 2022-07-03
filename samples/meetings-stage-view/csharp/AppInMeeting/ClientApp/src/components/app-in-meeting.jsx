@@ -43,6 +43,7 @@ const AppInMeeting = props => {
               // handle success
               console.log(result);
             }
+            
             if (err) {
               // handle error
               alert(JSON.stringify(err))

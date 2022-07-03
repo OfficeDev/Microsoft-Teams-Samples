@@ -12,13 +12,13 @@ const Configure = props => {
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.notifySuccess();
             microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
-                var radios = document.getElementsByName('notificationType');
                 microsoftTeams.pages.config.setConfig({
                     entityID: "App in Meeting Demo",
                     contentUrl: `${window.location.origin}/appInMeeting`,
                     suggestedTabName: "App in meeting",
                     websiteUrl: `${window.location.origin}/appInMeeting`,
                 });
+
                 saveEvent.notifySuccess();
             });
         });
@@ -33,7 +33,7 @@ const Configure = props => {
             <div className="header-inner-container">
                 <div id="divConfig">
                     <br />
-                    <input type="radio" name="notificationType" value="Create" onClick={onClick}/> Add hun in a meeting
+                    <input type="radio" name="notificationType" value="Create" onClick={onClick} /> Add App in a meeting
                 </div>
             </div>
         </header>
