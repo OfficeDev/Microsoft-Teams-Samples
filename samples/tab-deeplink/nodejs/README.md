@@ -80,9 +80,16 @@ This sample displays how to consume SubEntity Id to [DeepLink](https://docs.micr
 
 Enter text in the emulator.  The text will be echoed back by the bot.
 1. Interact with DeepLink bot by pinging it in personal or channel scope. 
-![](https://user-images.githubusercontent.com/50989436/116378355-adef4300-a82f-11eb-865e-1366ad0163c7.png)
+
+![Deep link card](Images/BotCard.png)
+
 2. Select the option from the options displayed in the adaptive card. This will redirect to the respective Task in the Tab.
-![](https://user-images.githubusercontent.com/50989436/116378517-d5dea680-a82f-11eb-9717-9eeb84942a05.png)
-3. Click on Back to List to view all the options. User can select an option which will redirect to the respective Task in the Tab.
-![](https://user-images.githubusercontent.com/50989436/116378607-ed1d9400-a82f-11eb-9234-33e307ccf184.png)
+
+![Redirect Tab](Images/RedirectTab.png)
+
+3. Click on Back to List to view all the options and additional features of deep link using Microsoft teams SDK v2.0.0. User can select an option which will redirect to the respective Task in the Tab.
+
+![Additional features](Images/DeepLinkTab.png)
+
+![Additional features](Images/DeepLinkTab2.png)
 

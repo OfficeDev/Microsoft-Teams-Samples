@@ -30,14 +30,7 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
     # determine node version
     node --version
     ```
-- [socket.io](https://www.npmjs.com/package/socket.io) to update data in real time.
-      
- - [Ngrok](https://ngrok.com/download) (Only for devbox testing) Latest (any other tunneling      software       can also be used)
-    ```bash
-
-     # run ngrok locally
-    ngrok http -host-header=localhost 3978
-    ```
+    
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
@@ -50,35 +43,31 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
       git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
       ```
 
-    - In a terminal, navigate to `samples/meetings-sidepanel/nodejs`
+2. Install node modules
 
-        ```bash
-        cd samples/meetings-sidepanel/nodejs
-        ```
+   Inside node js folder,  navigate to `samples/meetings-sidepanel/nodejs/server` open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
 
-    - Install modules
+   - Repeat the same step in folder `samples/meetings-sidepanel/nodejs/ClientApp`
 
-        ```bash
-        npm install
-        ```
+    ```bash
+    npm install
+    ```
+3. We have two different solutions to run so follow below steps:
+ 
+   A) In a terminal, navigate to `samples/meetings-sidepanel/nodejs/server`
 
-    - Start the bot
+   B) In a different terminal, navigate to `samples/meetings-sidepanel/nodejs/ClientApp`
 
-        ```bash
-        npm start
-        ```
-2. If you are using Visual Studio code
-    - Launch Visual Studio code
-    - Folder -> Open -> Project/Solution
-    - Navigate to ```samples/meetings-sidepanel/nodejs``` folder
-    - Select ```meeting-sidepanel``` Folder
-3. Run ngrok - point to port 3978
-   ```ngrok http -host-header=rewrite 3978```
-4. Create a new Bot by following steps mentioned in [Build a bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots?view=msteams-client-js-latest#build--a-bot-for-teams-with-the-microsoft-bot-framework) documentation.
-5. Go to .env file  and add ```MicrosoftAppId``` and  ```MicrosoftAppPassword``` information.
-6. Run your app, either from Visual Studio code  with ``` npm start``` or using ``` Run``` in the Terminal.
-7. Update the manifest.json file with ```Microsoft-App-ID``` and ```BaseUrl``` value.
-8. [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
+4. Run ngrok - point to port 3001 (pointing to ClientApp)
+
+    ```bash
+    # ngrok http -host-header=rewrite 3001
+    ```
+5. Create a new Bot by following steps mentioned in [Build a bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots?view=msteams-client-js-latest#build--a-bot-for-teams-with-the-microsoft-bot-framework) documentation.
+6. Go to .env file  and add ```MicrosoftAppId``` and  ```MicrosoftAppPassword``` information.
+7. Run your app, either from Visual Studio code  with ``` npm start``` or using ``` Run``` in the Terminal.
+8. Update the manifest.json file with ```Microsoft-App-ID``` and ```BaseUrl``` value.
+9. [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
 ## Interacting with the app in Teams Meeting
 Interact with SidePanel by clicking on the App icon present on the top menu beside the "more actions" during a meeting.

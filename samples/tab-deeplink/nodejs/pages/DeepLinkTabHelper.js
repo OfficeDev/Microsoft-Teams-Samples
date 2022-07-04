@@ -12,7 +12,7 @@ GetDeepLinkTabChannel = (subEntityId, ID, Desc, channelId,AppID,EntityID)=>{
 GetDeepLinkTabStatic = (subEntityId, ID, Desc,AppID)=>{
    let taskContext = encodeURI(`{"subEntityId": "${subEntityId}"}`);
      return {
-      linkUrl:"https://teams.microsoft.com/l/entity/"+AppID+"/com.contoso.DeeplLinkBot.help?context=" + taskContext,
+      linkUrl:"https://teams.microsoft.com/l/entity/"+AppID+"/"+process.env.Tab_Entity_Id +"?context=" + taskContext,
       ID:ID,
       TaskText:Desc
      }    
