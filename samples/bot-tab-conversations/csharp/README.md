@@ -24,7 +24,9 @@ Please see the [Code Tours](#code-tours) section for in-depth explanation of the
 * Proactive conversation creation from a Bot
 * Authorization of API calls based on user's Team membership
 
-<!-- Include a video documenting the scenario here. -->
+![Image of the app in a channel tab, showcasing a user Mark's support ticket, and and the corresponding channel conversation, where Adele has been asked to provide help](/samples/bot-tab-conversations/csharp/Docs/images/ChannelTabSubPageChat.png)
+![Image of the app in a personal app, showing the top incidents from the two channels (IT Department and Sales) that the logged in user has access too](/samples/bot-tab-conversations/csharp/Docs/images/PersonalTabList.png)
+
 
 ## Workflow
 ```mermaid
