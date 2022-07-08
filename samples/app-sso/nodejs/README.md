@@ -85,7 +85,7 @@ Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/az
 1. Run ngrok - point to port `3978`
 
     ```bash
-    ngrok http -host-header=localhost 3978
+    ngrok http --host-header=localhost 3978
     ```
 
 
