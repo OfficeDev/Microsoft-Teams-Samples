@@ -12,7 +12,7 @@ export function useTeamsContext(): microsoftTeams.app.Context {
 
 export function useAADId(): string {
   const ctx = useTeamsContext();
-  return ctx?.user?.id ? ctx.user.id : '';
+  return ctx?.user?.id ?? '';
 }
 
 export function useTheme(): ThemeInput {
