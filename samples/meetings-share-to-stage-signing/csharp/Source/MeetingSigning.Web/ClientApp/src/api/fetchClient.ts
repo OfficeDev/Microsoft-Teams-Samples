@@ -21,7 +21,7 @@ export async function authFetch<T>(urlPath: string, init?: RequestInit) {
   return (await fetchClient(urlPath, mergedInit)) as T;
 }
 
-async function fetchClient(urlPath: string, mergedInit: RequestInit) {
+async function fetchClient(urlPath: string, mergedInit: RequestInit): Promise<any> {
   const response = await fetch(`/${urlPath}`, mergedInit);
 
   if (!response.ok) {
@@ -31,22 +31,22 @@ async function fetchClient(urlPath: string, mergedInit: RequestInit) {
     }
 
     if (errorJson.ErrorCode === ErrorCode.AuthConsentRequired) {
-      microsoftTeams.authentication
-        .authenticate({
+      try {
+        await microsoftTeams.authentication.authenticate({
           url: `${window.location.origin}/auth-start`,
           width: 600,
           height: 535,
-        })
-        .then(async (_) => {
-          console.log('Consent provided.');
-          return await fetchClient(urlPath, mergedInit);
-        })
-        .catch((error) => {
-          console.error("Failed to get consent: '" + error + "'");
         });
+
+        console.log('Consent provided.');
+        return await fetchClient(urlPath, mergedInit);
+      } catch (error) {
+        console.error("Failed to get consent: '" + error + "'");
+      }
     }
 
     throw new Error(`${errorJson.ErrorCode}: ${errorJson.Message}`);
   }
+
   return await response.json();
 }
