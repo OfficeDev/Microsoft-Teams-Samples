@@ -3,7 +3,7 @@
 ## Prerequisites
 1. Clone the repository to your system.
 2. The deployment script uses Az modules, if you have AzureRM installed, remove it before running this script.
-To remove, run this command: `Uninstall -AzureRM`.
+To remove, run this command: `Uninstall-AzureRM`.
 3. Upgrade to Powershell [5.1.22000.653 or later](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2). Run `$PSVersionTable.PSVersion` to check the installed version.
 4. Install .Net 3.1 SDK. [Download](https://dotnet.microsoft.com/en-us/download/dotnet/3.1)
 5. Install npm. [Instructions](https://docs.npmjs.com/cli/v8/configuring-npm/install)
