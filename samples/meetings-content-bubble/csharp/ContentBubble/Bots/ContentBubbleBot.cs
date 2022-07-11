@@ -61,9 +61,21 @@ namespace Content_Bubble_Bot
                     Attachment adaptiveCardAttachment = GetAdaptiveCardAttachment("QuestionTemplate.json", agendaItem);
                     var activity = MessageFactory.Attachment(adaptiveCardAttachment);
 
-                    activity.ChannelData = new TeamsChannelData
+                    var behalfData = new OnBehalfOf { ItemId = 0, MentionType = "person", Mri = turnContext.Activity.From.Id, DisplayName = turnContext.Activity.From.Name};
+
+                    activity.ChannelData = new
                     {
-                        Notification = new NotificationInfo()
+                        OnBehalfOf = new []
+                        {
+                            new
+                            {
+                                ItemId = 0,
+                                MentionType = "person",
+                                Mri = turnContext.Activity.From.Id,
+                                DisplayName = turnContext.Activity.From.Name
+                            }
+                        },
+                        Notification = new
                         {
                             AlertInMeeting = true,
                             ExternalResourceUrl = $"https://teams.microsoft.com/l/bubble/{ _config["MicrosoftAppId"] }?url=" +
