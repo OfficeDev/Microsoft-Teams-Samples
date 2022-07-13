@@ -60,9 +60,7 @@ namespace Content_Bubble_Bot
                     
                     Attachment adaptiveCardAttachment = GetAdaptiveCardAttachment("QuestionTemplate.json", agendaItem);
                     var activity = MessageFactory.Attachment(adaptiveCardAttachment);
-
-                    var behalfData = new OnBehalfOf { ItemId = 0, MentionType = "person", Mri = turnContext.Activity.From.Id, DisplayName = turnContext.Activity.From.Name};
-
+                    
                     activity.ChannelData = new
                     {
                         OnBehalfOf = new []
