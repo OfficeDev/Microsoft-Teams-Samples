@@ -42,9 +42,17 @@ class ContentBubbleBot extends TeamsActivityHandler {
     {
       const replyActivity = MessageFactory.text("**Please provide your valuable feedback**");
       replyActivity.channelData = {
+        onBehalfOf: [
+          { 
+            itemId: 0, 
+            mentionType: 'person', 
+            mri: context.activity.from.id, 
+            displayname: context.activity.from.name 
+          }
+         ],
         notification: {
           alertInMeeting: true,
-          externalResourceUrl: 'https://teams.microsoft.com/l/bubble/'+this.baseUrl+'?url='+this.AppId+'&height=270&width=300&title=ContentBubbleinTeams&completionBotId='+this.AppId
+          externalResourceUrl: 'https://teams.microsoft.com/l/bubble/'+this.AppId+'?url='+this.baseUrl+'&height=270&width=300&title=ContentBubbleinTeams&completionBotId='+this.AppId
         }
       };
       await context.sendActivity(replyActivity);
