@@ -4,7 +4,7 @@ const cors = require('cors');
 const ENV_FILE = path.join(__dirname, '../.env');
 require('dotenv').config({ path: ENV_FILE });
 
-const PORT = process.env.PORT || 3978;
+const PORT = process.env.PORT || 3000;
 const server = express();
 
 server.use(cors());
