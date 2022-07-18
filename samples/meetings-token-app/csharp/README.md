@@ -112,7 +112,12 @@ The app uses the Teams extensibility features described on the following pages:
   
   This generates the dist folder inside the app where the assets will generated/copied. The server will serve the static files from this location.
 
-### Step 4: Build and run the service
+### Step 4: Inside ClientApp folder execute the below command.
+    ```bash
+    # npx @fluidframework/azure-local-service@latest
+    ```
+
+### Step 5: Build and run the service
 You can build and run the project from the command line or an IDE:
 
 A) From a command line:
