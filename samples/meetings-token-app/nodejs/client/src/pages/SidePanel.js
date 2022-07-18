@@ -25,7 +25,6 @@ const SidePanel = props => {
         name: "",
         isOrganizer: false,
     });
-
     const [teamsContext, setTeamsContext] = useState({});
     const [participants, setParticipants] = useState([]);
     const [customError, setCustomError] = useState({
@@ -34,6 +33,7 @@ const SidePanel = props => {
     });
 
     const setErrorFactory = (msg) => ({ status: true, msg });
+
     const clearErrorFactory = () => ({ status: false, msg: "" });
 
     const setError = (msg) => {
@@ -73,6 +73,7 @@ const SidePanel = props => {
     // This method is called whenever the shared state is updated.
     const updateEditorState = async () => {
         const currentToken = containerValue.initialObjects.tokenMap.get(editorValueKey);
+
         if (typeof (currentToken) === "number") {
             let res = await props.meetingTokenService.getMeetingStatusAsync()
             _updateDashboard(res.success, res.msg, false);
@@ -92,16 +93,20 @@ const SidePanel = props => {
         }
 
         const { AadObjectId, Name, Role: { MeetingRole } } = msg.UserInfo;
+
         setUser({ oid: AadObjectId, name: Name, isOrganizer: MeetingRole === Constants.MeetingRoles.Organizer });
         setUserToken({ number: msg.TokenNumber, status: msg.Status || Constants.MeetingTokenStatus.NotUsed });
         setCustomError(clearErrorFactory());
+
         updateCurrentToken(true);
     }
 
     const updateCurrentToken = async (shouldUpdate) => {
-        let res = await props.meetingTokenService.getMeetingStatusAsync()
+        let res = await props.meetingTokenService.getMeetingStatusAsync();
+
         _updateDashboard(res.success, res.msg, shouldUpdate);
         const { MeetingMetadata: { CurrentToken } } = res.msg;
+
         return CurrentToken;
     }
 
