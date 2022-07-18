@@ -16,6 +16,11 @@ extensions:
 
 The Meeting Token Generator app is a sample Microsoft Teams app that extends meetings in Teams.
 Through this app, meeting participants can request a "token", which is generated sequentially so that each participant has a fair opportunity to interact. This can be useful in situations like scrum meetings, Q&A sessions, etc.
+This application also shows the implementation of Live Share SDK to update the data in real-time for all participants in meeting.
+
+- [Live-share-sdk-overview](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-live-share-overview)
+
+**NOTE: This capability is currently available in developer preview only.**
 
 ### Key features
  - Display the current token that is being serviced in the meeting

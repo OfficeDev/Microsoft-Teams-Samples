@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { PrimaryButton } from '@fluentui/react/lib/Button';
+import { Button } from '@fluentui/react-northstar';
 import { withMeetingTokenService } from '../Context/MeetingServiceProvider';
 
 class GetTokenButton extends Component {
@@ -26,9 +26,7 @@ class GetTokenButton extends Component {
             <div className="flex-center">
                 {this.props.show ?
                     (
-                        <PrimaryButton disabled={this.state.disabled} style={{ margin: 10, backgroundColor:"#6264A7", borderColor:"#6264A7" }} title="Get your meeting token" onClick={this.getToken}>
-                            Token
-                        </PrimaryButton>
+                        <Button className="submit-button" content="Token" disabled={this.state.disabled} title="Get your meeting token" onClick={this.getToken} />
                     ) : null
                 }
             </div>
