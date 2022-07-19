@@ -5,10 +5,7 @@ import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { Card, Flex, Text, Button, CardHeader, CardBody, Video } from '@fluentui/react-northstar'
 
-/**
- * The 'CaptureVideo' component
- * of your app.
- */
+// The 'CaptureVideo' component of your app.
 const CaptureVideo = () => {
   const [video, setVideo] = useState('');
 
@@ -23,8 +20,9 @@ const CaptureVideo = () => {
     },
   };
 
+  
   const defaultNativeVideoProps: microsoftTeams.media.VideoProps = {
-    maxDuration: 30,
+    maxDuration: 30, // the maximumDuration is the time in seconds after which the recording should terminate automatically. This value can be changed.
     isFullScreenMode: true,
     isStopButtonVisible: false,
     videoController: new microsoftTeams.media.VideoController(videoControllerCallback)
@@ -42,7 +40,8 @@ const CaptureVideo = () => {
       if (error) {
         if (error.message) {
           alert(" ErrorCode: " + error.errorCode + error.message);
-        } else {
+        } 
+        else {
           alert(" ErrorCode: " + error.errorCode);
         }
       }
@@ -59,7 +58,8 @@ const CaptureVideo = () => {
         if (error) {
             if (error.message) {
                 alert(" ErrorCode: " + error.errorCode + error.message);
-            } else {
+            } 
+            else {
                 alert(" ErrorCode: " + error.errorCode);
             }
         }
