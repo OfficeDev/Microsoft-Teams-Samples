@@ -19,7 +19,6 @@ class TeamsContextProvider extends Component {
         const { PreMeeting, SidePanel } = Constants.Surfaces;
         this.getContext()
             .then((context = {}) => {
-                console.log(context);
                 const frameContext = context.page.frameContext || "";
                 if ([PreMeeting, SidePanel].includes(frameContext)) {
                     this.setState({

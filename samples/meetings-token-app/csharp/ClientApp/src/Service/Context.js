@@ -5,7 +5,6 @@ export default function ContextService(teamsClient, timeout = 10000) {
             teamsClient.app.initialize().then(() => {
                 teamsClient.app.getContext().then((teamsContext) => {
                     shouldReject = false;
-                    console.log(teamsContext);
                     resolve({
                         ...teamsContext,
                         meetingId: teamsContext.meeting.id,

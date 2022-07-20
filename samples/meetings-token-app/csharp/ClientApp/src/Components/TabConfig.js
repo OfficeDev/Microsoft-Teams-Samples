@@ -5,7 +5,7 @@ import React from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 
 /**
- * The 'Config' component is used to display your group tabs
+ * The 'Config' component is used to display your Meeting tabs
  * user configuration options. Here you will allow the user to 
  * make their choices and once they are done you will need to validate
  * their choices and communicate that to Teams to enable the save button.
@@ -46,7 +46,7 @@ class TabConfig extends React.Component {
         <h1>Tab Configuration</h1>
         <div>
           This is where you add your tab configuration options the user
-          can choose when the tab is added to your team/group chat.
+          can choose when the tab is added to your team/group/meeting chat.
         </div>
       </div>
     );

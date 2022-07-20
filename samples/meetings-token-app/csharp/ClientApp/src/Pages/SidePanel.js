@@ -15,6 +15,7 @@ import * as microsoftTeams from "@microsoft/teams-js";
 let containerValue;
 const SidePanel = props => {
     const editorValueKey = "meeting-meta-data";
+
     const [currentToken, setCurrentToken] = useState(0);
     const [userToken, setUserToken] = useState({
         number: null,
@@ -140,10 +141,12 @@ const SidePanel = props => {
 
             setCurrentToken(CurrentToken);
             setParticipants(participants);
+
             setUserToken({
                 number: currentUser.TokenNumber,
                 status: currentUser.Status || Constants.MeetingTokenStatus.NotUsed
             });
+            
             setCustomError(clearErrorFactory());
 
             if (shouldUpdateState) {

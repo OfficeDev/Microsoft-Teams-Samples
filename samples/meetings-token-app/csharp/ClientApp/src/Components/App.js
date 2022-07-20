@@ -9,10 +9,7 @@ import MeetingTokenApp from '../Containers/MeetingTokenApp';
 import TabConfig from "./TabConfig";
 import ContentBubble from "./ContentBubble";
 
-/**
- * The main app which handles the initialization and routing
- * of the app.
- */
+// The main app which handles the initialization and routing of the app.
 function App() {
 
   // Initialize the Microsoft Teams SDK
