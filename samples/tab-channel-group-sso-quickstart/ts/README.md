@@ -40,7 +40,8 @@ Teams needs to access your tab from a publically accessible URL. If you are runn
     - `"REACT_APP_BASE_URL"` : Ngrok URL you get after running the ngrok command.
 
 ## Set up the api-server .env with the following keys:
-Go to thefolder api-server and update following values in .env files
+Go to the folder api-server and update following values in .env files
+
     - `"CLIENT_ID"` : Application ID of the Azure AD application
     - `"CLIENT_SECRET"` : Application secret of the Azure AD application
 
