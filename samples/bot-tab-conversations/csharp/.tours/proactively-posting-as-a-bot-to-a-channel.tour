@@ -79,7 +79,7 @@
     {
       "file": "samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/ClientApp/src/routes/InquirySubEntityTab.tsx",
       "description": "# Open the conversation tab\r\nWith this conversation ID, we use the Teams SDK to open the conversation in the sidebar",
-      "line": 67
+      "line": 76
     }
   ]
 }
