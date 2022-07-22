@@ -146,7 +146,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Bots
         {
             await base.OnTurnAsync(turnContext, cancellationToken);
 
-            // Save any state changes that might have occured during the turn.
+            // Save any state changes that might have occurred during the turn.
             await _conversationState.SaveChangesAsync(turnContext, false, cancellationToken);
         }
 
@@ -195,7 +195,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Bots
             var userStateAccessors = this._conversationState.CreateProperty<UserConversationState>(nameof(UserConversationState));
             var userConversationState = await userStateAccessors.GetAsync(turnContext, () => new UserConversationState());
 
-            if (userConversationState?.IsWelcomeCardSent == null || userConversationState?.IsWelcomeCardSent == false)
+            if (userConversationState?.IsWelcomeCardSent != true)
             {
                 userConversationState.IsWelcomeCardSent = true;
                 await userStateAccessors.SetAsync(turnContext, userConversationState);

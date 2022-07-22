@@ -32,9 +32,9 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
         public async Task<ImageResult> SearchWikiImage(Search wikiSearch)
         {
             // a separate API call to Wikipedia is needed to fetch the page image, if it exists
-            string imageApiUrl = ImageApiUrlFormat.Replace("[title]", wikiSearch.title);
+            var imageApiUrl = ImageApiUrlFormat.Replace("[title]", wikiSearch.title);
 
-            Uri apiUrl = new Uri(imageApiUrl);
+            var apiUrl = new Uri(imageApiUrl);
             return await ProcessRequest<ImageResult>(apiUrl);
         }
 
@@ -46,7 +46,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
 
         public string GetImageURL(ImageResult imageResult)
         {
-            string imageUrl = string.Empty;
+            var imageUrl = string.Empty;
 
             if (imageResult != null && imageResult.query.pages != null && imageResult.query.pages.Count > 0 && imageResult.query.pages[0].thumbnail != null)
             {
@@ -110,7 +110,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
                 initialRunParameter = "true";
             }
 
-            // this is a sitaution where the user's preferences have not been set up yet
+            // this is a situation where the user's preferences have not been set up yet
             if (userData.ComposeExtensionCardType == null)
             {
                 composeExtensionResponse = GetConfig();
@@ -197,9 +197,9 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
                 imageResult = await SearchWikiImage(searchResult);
 
                 //Get the Image Url from imageResult
-                string imageUrl = GetImageURL(imageResult);
+                var imageUrl = GetImageURL(imageResult);
 
-                string cardText = searchResult.snippet + " ...";
+                var cardText = searchResult.snippet + " ...";
 
                 WikiHelperSearchResult wikiSearchResult = new WikiHelperSearchResult(imageUrl, searchResult.title, cardText);
 
@@ -224,7 +224,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
             var userData = await TemplateUtility.GetBotUserDataObject(_userState, turnContext, query);
 
             //Get the Max number of History items from config file
-            int maxComposeExtensionHistoryCount = Convert.ToInt32(ConfigurationManager.AppSettings[MaxComposeExtensionHistoryCountKey]);
+            var maxComposeExtensionHistoryCount = Convert.ToInt32(ConfigurationManager.AppSettings[MaxComposeExtensionHistoryCountKey]);
 
             WikiHelperSearchResult selectedItem = JsonConvert.DeserializeObject<WikiHelperSearchResult>(turnContext.Activity.Value.ToString());
 
