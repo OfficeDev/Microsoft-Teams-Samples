@@ -20,7 +20,7 @@
   },
   "description": {
     "short": "Tab context for private/shared channels",
-    "full": "This sample shows the contents of tab context object in a private and shared channel."
+    "full": "This sample shows the contents of tab context object in a meeting."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [

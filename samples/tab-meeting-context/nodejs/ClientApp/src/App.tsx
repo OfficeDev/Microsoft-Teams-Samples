@@ -96,6 +96,7 @@ class App extends React.Component<{}, IAppState> {
       baseFontSize: 10,
       style: this.state.themeStyle
     });
+    
     return (
       <TeamsThemeContext.Provider value={context}>
         <Suspense fallback={<div></div>}>

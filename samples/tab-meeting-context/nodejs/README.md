@@ -24,8 +24,6 @@ This sample shows the contents of meeeting tab context object.
 - [NodeJS](https://nodejs.org/en/)
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
-- [Create a private/shared channel](https://support.microsoft.com/en-gb/office/create-a-standard-or-private-channel-in-teams-fda0b75e-5b90-4fb8-8857-7e102b014525) Priave/Shared channel in team
-
 
 
 ## To try this sample
@@ -62,14 +60,14 @@ This sample shows the contents of meeeting tab context object.
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
    
-8) Add the tab in private/shared channel.
+8) Add the tab in meeting.
 
  **NOTE:** Only accounts with admin access can create private/shared channels in team.
 
 ## Features of the sample
 
-- Add the tab in private/shared channel.
-- The details of the context object will be shown on tab based on channel type.
+- Add the tab in meeting.
+- The details of the meeting context object will be shown on tab based.
 - You can expand/reduce the JSON for the context object and can also copy a particular object slice.
 
 ## Further reading
