@@ -15,7 +15,7 @@ extensions:
 
 # Tab context in channel
 
-This sample shows the contents of meeeting tab context object.
+This sample shows the contents of meeeting tab context object in a meeting tab.
 
 ![meeting tab context](Images/meetingTabContext.png)
 
