@@ -26,12 +26,15 @@ const getAccessToken = async (req) => {
           .catch(error => {
             reject({ "error": error.errorCode });
         });
+    })
+    .catch((error) => {
+        console.error("Failed to get auth: ", error);
     });
 };
 
 // Parse Request
 const reqData = (req) => {
-    const tenantId = req.body.context.tid;
+    const tenantId = req.body.context.user.tenant.id;
     const authHeader = req.headers.authorization;
     const token = authHeader.split(' ')[1];
     return {

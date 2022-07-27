@@ -13,7 +13,9 @@ module.exports.setup = function (app) {
 
   // Setup home page
   app.get('/', function (req, res) {
-    res.render('hello');
+    var clientId = config.get("tab.appId");
+    var applicationIdUri = config.get("tab.applicationIdUri");
+    res.render('hello', { clientId: clientId, applicationIdUri: applicationIdUri });
   });
 
     // Setup the configure tab, with first and second as content tabs
@@ -37,6 +39,12 @@ module.exports.setup = function (app) {
   app.get('/auth-end', function (req, res) {
     var clientId = config.get("tab.appId");
     res.render('auth-end', { clientId: clientId });
+  });
+
+  app.get('/Home/BrowserRedirect', function (req, res) {
+    var clientId = config.get("tab.appId");
+    var applicationIdUri = config.get("tab.applicationIdUri");
+    res.render('browser-redirect', { clientId: clientId, applicationIdUri: applicationIdUri });
   });
 
   // On-behalf-of token exchange

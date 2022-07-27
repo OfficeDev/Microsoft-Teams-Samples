@@ -1,0 +1,42 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "id": "suggestedAnswer",
+      "type": "RichTextBlock",
+      "inlines": [
+        {
+          "type": "TextRun",
+          "text": "${answer.message}",
+          "strikethrough": true
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "${answer.acceptedBy}",
+      "size": "small",
+      "spacing": "small",
+      "isSubtle": true,
+      "wrap": true
+    },
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.Submit",
+          "title": "${selectAnswer}",
+          "data": {
+            "msteams": {
+              "type": "task/fetch"
+            },
+            "questionId": "${questionId}",
+            "id": "selectAnswer"
+          }
+        }
+      ]
+    }
+  ]
+}

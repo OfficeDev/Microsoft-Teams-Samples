@@ -1,0 +1,71 @@
+﻿{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "id": "suggestedAnswer",
+      "type": "TextBlock",
+      "text": "${answer.message}",
+      "wrap": true
+    },
+    {
+      "type": "ColumnSet",
+      "spacing": "small",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "verticalContentAlignment": "Center",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "✔ ${text.answeredBy}",
+              "size": "small",
+              "weight": "bolder"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "spacing": "small",
+          "verticalContentAlignment": "Center",
+          "items": [
+            {
+              "type": "Image",
+              "style": "person",
+              "imageSize": "small",
+              "width": "18px",
+              "height": "18px",
+              "url": "${answer.authorProfileImage}"
+            }
+          ],
+          "width": "auto"
+        },
+        {
+          "type": "Column",
+          "spacing": "small",
+          "verticalContentAlignment": "Center",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${answer.authorName}",
+              "size": "small",
+              "weight": "bolder",
+              "maxLines": 1
+            }
+          ],
+          "width": "stretch"
+        }
+      ]
+    },
+    {
+      "type": "TextBlock",
+      "text": "${answer.acceptedBy}",
+      "size": "small",
+      "wrap": true,
+      "isSubtle": true,
+      "separator": true
+    }
+  ]
+}

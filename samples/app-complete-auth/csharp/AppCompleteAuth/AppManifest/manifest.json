@@ -15,8 +15,8 @@
     "termsOfUseUrl": "https://example.azurewebsites.net/termsofuse"
   },
   "icons": {
-    "color": "icon-color.png",
-    "outline": "icon-outline.png"
+    "color": "color.png",
+    "outline": "outline.png"
   },
   "name": {
     "short": "App complete auth"
@@ -41,6 +41,27 @@
       "botId": "<<Microsoft-App-Id>>",
       "scopes": [
         "personal"
+      ],
+      "commandLists": [
+        {
+          "scopes": [
+            "personal"
+          ],
+          "commands": [
+            {
+              "title": "sso",
+              "description": "For AAD SSO authentication"
+            },
+            {
+              "title": "facebooklogin",
+              "description": "For Facebook signin"
+            },
+            {
+              "title": "usingcredentials",
+              "description": "For User Id/Password signin"
+            }
+          ]
+        }
       ]
     }
   ],
@@ -109,7 +130,8 @@
           "type": "link",
           "value": {
             "domains": [
-              "*.botframework.com"
+              "*.botframework.com",
+              "<<base-url>>"
             ]
           }
         }
@@ -121,7 +143,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.botframework.com",
-    "<<Domain-name>>"
+    "token.botframework.com",
+    "<<base-url>>"
   ]
 }

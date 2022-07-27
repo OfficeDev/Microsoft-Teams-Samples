@@ -33,7 +33,7 @@
   ],
   "configurableTabs": [
     {
-      "configurationUrl": "<<YOUR-BASE-URL>>/Home/ConfigTab",
+      "configurationUrl": "<<YOUR-BASE-URL>>/Home/Configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team"

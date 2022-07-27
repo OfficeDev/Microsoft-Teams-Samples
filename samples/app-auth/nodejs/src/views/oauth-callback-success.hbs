@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js" integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT" crossorigin="anonymous"></script>
+        <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
         <script type="text/javascript">
             // If the window is still visible after 5 seconds, then we are probably on a platform
             // that does not support automatically passing the verification code using notifySuccess().
@@ -49,8 +49,9 @@
                 document.getElementById("instructionText").style.display = "initial";
             }, 5000);
 
-            microsoftTeams.initialize();
-            microsoftTeams.authentication.notifySuccess("{{verificationCode}}");
+            microsoftTeams.app.initialize().then(() => {
+                microsoftTeams.authentication.notifySuccess("{{verificationCode}}");
+            });
         </script>
     </body>
 </html>

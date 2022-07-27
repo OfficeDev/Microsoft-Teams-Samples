@@ -1,17 +1,38 @@
 <html>
     <head>
         <script src="DeepLinkModel.js"></script>
-        <script src="https://statics.teams.cdn.office.net/sdk/v1.7.0/js/MicrosoftTeams.min.js" integrity="sha384-00JbifySIlPvW32u9rSurgu8PujfL6XFdV9iNn4ZWyurJJ33MFvpwPqmCHDq9ADv" crossorigin="anonymous"></script>
-    </head>
-    <body>        
+        <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-               var s=DeepLinkModel;
-                    var html ='';
-                    s.forEach(x=> {
-                    var loc = "Details.html?id="+x.ID;
-                    document.write('<a href="' + loc + '">'+x.Desc+'</a><br/>');                            
-                });               
+            $(document).ready(function() {
+                microsoftTeams.app.initialize();
+                var s=DeepLinkModel;
+                var html ='';
+                s.forEach(x=> {
+                    var uri = "Details.html?id="+x.ID;
+                    
+                    let listContent = document.getElementById("list-content");
+                    let anchorTag = document.createElement("a");
+                    let lineBreakTag = document.createElement("br");
+                    anchorTag.href = uri;
+                    anchorTag.innerHTML = x.Desc;
+
+                    listContent.appendChild(anchorTag);
+                    listContent.appendChild(lineBreakTag);
+                });
+            });
         </script>
-       
+    </head>
+    <body>
+       <div id="list-content" style="margin-top:1rem;"></div>
+       <div style="margin-top:1rem;">
+            <span class="container" style="font-size:20px;font-weight:700;">
+                Extended Deep link features
+            </span>
+        </div>
+        <div>
+            <object type="text/html" data="ExtendedDeepLink.html" width="1000rem" height="1000rem" style="overflow:auto;">
+            </object>
+        </div>
     </body>
 </html>

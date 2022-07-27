@@ -8,15 +8,16 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "03-09-2022 11:00:00"
+  contentType: samples
+  createdDate: "03-09-2022 11:00:00"
 ---
-### User Specific Views in Adaptive Cards
+
+# User Specific Views in Adaptive Cards
 
 #### About
 This sample illustrates a few different ways developers can consume user-specific views in Adaptive cards.
 
-Specifically, it uses the Universal Action – `Action.Execute` with `refresh` property, which enables developers to build different views for users in a common chat thread. 
+Specifically, it uses the Universal Action `Action.Execute` with `refresh` property, which enables developers to build different views for users in a common chat thread. 
 
 Developers can consume this action to build different experiences in Teams like:
 1. User-specific content in shared contexts like Group chat and Teams Channels.

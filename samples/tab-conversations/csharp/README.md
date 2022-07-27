@@ -74,6 +74,9 @@ This Teams tab app provides a way to allow users to have conversations about sub
          - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
          - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
 
+# Related Samples
+- [Proactive Tab Conversations, using a bot to create conversational tabs programmatically.](.\\..\\..\\bot-tab-conversations\csharp\README.md)
+
 ## Further reading
 
 - [Bot Framework Documentation](https://docs.botframework.com)

@@ -3,6 +3,19 @@
 
 >NOTE: These samples are designed to help understand Microsoft Teams platform capabilities and scenarios. If you are looking for production ready apps then please visit [App Templates for Microsoft Teams](https://docs.microsoft.com/microsoftteams/platform/samples/app-templates)
 
+# Sample lists
+
+1. [Ready to try sample manifests](#try-it-yourself---experience-the-apps-in-your-microsoft-teams-client)
+1. [Teams Toolkit samples](#samples-built-using-new-generation-of-teams-development-tool---teams-toolkit)
+1. [Getting Started Samples and Tutorials](#getting-started---samples-and-tutorials)
+1. [Tabs samples](#Tabs-samples)
+1. [Bots samples (using the v4 SDK)](#Bots-samples-using-the-v4-SDK)
+1. [Messaging Extensions samples (using the v4 SDK)](#Messaging-Extensions-samples-using-the-v4-SDK)
+1. [Webhooks and Connectors samples](#Webhooks-and-Connectors-samples)
+1. [Graph APIs](#Graph-APIs)
+1. [Calls and online meetings bots](#Calls-and-online-meetings-bots)
+1. [Scenario specific samples](#Scenario-specific-samples)
+
 
 ## Try it yourself - experience the Apps in your Microsoft Teams client
 
@@ -33,6 +46,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |20|People picker control in Adaptive Cards | This sample shows the feature of people picker control in Adaptive Cards.|[View](/demo%20manifest/People-Picker-Adaptive-Card.zip) |
 |21|App complete auth|This sample demos authentication feature in bot,tab and messaging extension.|[View](/demo%20manifest/App-Complete-Auth.zip) |
 |22|Meeting signing programmatic share to stage|Demonstrating the programmatic share to stage feature, by means of a document signing in a meeting. |[View](/demo%20manifest/Meeting-Share-To-Stage-Signing.zip) |
+|23|Tab people picker|This is an tab app which shows the feature of client sdk people picker. |[View](/demo%20manifest/Tab-People-Picker.zip) |
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 
 The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) is an extension on Visual Studio Code and Visual Studio. It enable Teams developers to create and deploy Teams apps with integrated identity, access to cloud storage, data from Microsoft Graph, and other services in Azure and M365 with a "zero-configuration" approach to the developer experience. And [Sample Apps](https://github.com/OfficeDev/TeamsFx-Samples) are provided in Teams Toolkit. Download and try it by today! [Learn more about Teams Toolkit](https://docs.microsoft.com/en-us/microsoftteams/platform/toolkit/visual-studio-code-overview).
@@ -64,6 +78,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |15|Create Conversational tab     | Microsoft Teams tab sample app for demonstrating create conversation tab | [View][tab-conversation#csharp]          |           |[View][tab-conversation#nodejs]
 |16| Product inspection | Demonstrating a feature where user can scan a product and mark it as approved/rejected. |[View][tab-product-inspection#csharp]|[View][productinspection#nodejs]|
 |17| Staggered Permission | This sample demos to get staggered graph api permissions. |[View][tab-staggered-permission#csharp]|[View][tab-staggered-permission#nodejs]|
+|18| Tab people picker | This is an tab app which shows the feature of client sdk people picker. |[View][tab-people-picker#csharp]|[View][tab-people-picker#nodejs]|
+|19| Tab channel context | This sample shows the contents of tab context object in a private and shared channel. ||[View][tab-channel-context#nodejs]|
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
@@ -85,9 +101,9 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |12| Bot with SharePoint file to view in Teams file viewer | This sample demos a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer. |[View][botwithsharepointfileviewer#csharp]|[View][botfileviewer#js]
 |13|  Type ahead search control on Adaptive Cards | This sample shows the feature of type ahead search (static and dynamic) control in Adaptive Cards. |[View][typeaheadsearch#csharp]|[View][typeaheadsearchonadaptivecard#js]
 |14|  People picker control in Adaptive Cards | This sample shows the feature of people picker control in Adaptive Cards. |[View][peoplepickeronadaptivecard#csharp]|[View][peoplepickeronadaptivecard#js]
-|15|  Proactive Messaging sample | This sample shows how to save user's conversation reference information to send proactive reminder message using Bots. This uses Teams toolkit for Visual Stuido Code to provide scafolding experience. ||[View][bot-proactive-msg-teamsfx#js]
-|16|  Suggested Actions Bot | This sample shows the feature where user can send suggested actions using bot. ||[View][suggestedactionsbot#nodejs]
-
+|15|  Proactive Messaging sample | This sample shows how to save user's conversation reference information to send proactive reminder message using Bots. This uses Teams toolkit for Visual Studio Code to provide scaffolding experience. ||[View][bot-proactive-msg-teamsfx#js]
+|16|  Proactive Tab Conversations | Using a bot to create and store conversations that can be later used inside a sub-entity, tab conversation. This sample includes the details required to proactively message a channel from a bot, set-up and store details for channel tab conversations, and viewing channel conversations from a personal app. |[View][bot-tab-conversations#csharp]|
+|17|  Suggested Actions Bot | This sample shows the feature where user can send suggested actions using bot. |[View][suggestedactionsbot#csharp]|[View][suggestedactionsbot#nodejs]
 #### Additional samples
 
 |    | Sample Name | Description | .NET Core | JavaScript | 
@@ -120,7 +136,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 ## [Webhooks and Connectors samples](https://docs.microsoft.com/microsoftteams/platform/webhooks-and-connectors/what-are-webhooks-and-connectors)
 
-|    | Sample Name        | Description                                                                      | C#    | TypeScript   |
+|    | Sample Name        | Description                                                                      | C#    | JavaScript   |
 |:--:|:-------------------|:-------------------------------------------------------------------------------------------------|:--------|:-------------|
 |1|Connectors             | Sample Office 365 Connector generating notifications to teams channel.                              |[View][connector#cs]       |[View][connector#ts]
 |2|Generic connectors sample | Sample code for a generic connector that's easy to customize for any system which supports webhooks.   |    |[View][connector-generic#ts]
@@ -182,6 +198,14 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |24|App identity linking with sso|This sample demos mapping with aad id, facebook, and google account of user in bot, ME and tab.||[View][app-identity-link-with-sso#nodejs]|
 |25|Meeting signing programmatic share to stage|Demonstrating the programmatic share to stage feature, by means of a document signing in a meeting.|[View][meetings-share-to-stage-signing#csharp]||
 |26|Live coding interview using Shared meeting stage |This sample demos a live coding in a teams meeting stage.|[View][meetings-live-code-interview#csharp]|[View][meetings-live-code-interview#nodejs]|
+|27|Release Management     | This is a sample used to send workitem notification using Azure webhook.                                        |[View][release-management#cs]       |[View][release-management#nodejs]
+|28|Meeting Live Caption     | This is a sample meeting side panel application which demonstrates how to enable live caption in the meeting and using the CART link how to send caption in live meeting.                                       |[View][meetings-live-caption#cs]       |[View][meetings-live-caption#nodejs]
+
+## Application templates
+
+|    | App Name       | Description                                                                      | Code   |
+|:--:|:------------------|:---------------------------------------------------------------------------------------------------|:--------|
+|1|QBot          | QBot is a solution designed for classroom teaching scenarios which allows teachers, tutors, and students to intelligently answer each other's questions within the Microsoft Teams collaboration platform. |[View][msteams-app-qbot]
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
@@ -213,6 +237,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [tab-stage-view#csharp]:samples/tab-stage-view/csharp
 [tab-product-inspection#csharp]:samples/tab-product-inspection/csharp
 [tab-staggered-permission#csharp]:samples/tab-staggered-permission/csharp
+[tab-people-picker#csharp]:samples/tab-people-picker/csharp
+[tab-channel-context#nodejs]:samples/tab-channel-context/nodejs
 [tab-request-approval#nodejs]:samples/tab-request-approval/nodejs
 [bot-request-approval#nodejs]:samples/bot-request-approval/nodejs
 
@@ -222,6 +248,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 [connector#cs]:samples/connector-todo-notification/csharp
 [incoming-webhook#cs]:samples/incoming-webhook/csharp
+[release-management#cs]:samples/bot-release-management/csharp
+[release-management#nodejs]:samples/bot-release-management/nodejs
 [connector#ts]:samples/connector-github-notification/nodejs
 [connector-generic#ts]:samples/connector-generic/nodejs
 [sequential#workflow#csharp]:samples/bot-sequential-flow-adaptive-cards/csharp
@@ -259,6 +287,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [bot-sharepoint-list#cs]:samples/bot-sharepoint-list/csharp
 [bot-conversation-sso-quickstart#csharp_dotnetcore]:samples/bot-conversation-sso-quickstart/csharp_dotnetcore
 [bot-calling-meeting#csharp]:samples/bot-calling-meeting/csharp
+[bot-tab-conversations#csharp]:samples/bot-tab-conversations/csharp
 [botfileviewer#js]:samples/bot-sharepoint-file-viewer/nodejs
 [meetings-token-app#cs]:samples/meetings-token-app/csharp
 [apps-in-meeting#cs]:samples/apps-in-meeting/csharp
@@ -285,6 +314,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [typeaheadsearchonadaptivecard#js]:samples/bot-type-ahead-search-adaptive-cards/nodejs
 [meetings-live-code-interview#csharp]:samples/meetings-live-code-interview/csharp
 [meetings-live-code-interview#nodejs]:samples/meetings-live-code-interview/nodejs
+[suggestedactionsbot#csharp]:samples/bot-suggested-actions/csharp
 [suggestedactionsbot#nodejs]:samples/bot-suggested-actions/nodejs
 
 [app-localization#cs]:samples/app-localization/csharp
@@ -329,6 +359,11 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [app-identity-link-with-sso#nodejs]:samples/app-identity-link-with-sso/nodejs
 [tab-staggered-permission#nodejs]:samples/tab-staggered-permission/nodejs
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
+[tab-people-picker#nodejs]:samples/tab-people-picker/nodejs
+[meetings-live-caption#cs]:samples/meetings-live-caption/csharp
+[meetings-live-caption#nodejs]:samples/meetings-live-caption/nodejs
+
+[msteams-app-qbot]:samples/msteams-application-qbot/
 
 ## Submitting issues
 

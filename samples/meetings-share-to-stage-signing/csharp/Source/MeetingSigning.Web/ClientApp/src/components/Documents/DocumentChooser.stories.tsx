@@ -15,7 +15,7 @@ const Template: ComponentStory<typeof DocumentChooser> = (args) => (
 export const PurchaseAgreementDocument = Template.bind({});
 PurchaseAgreementDocument.args = {
   documentType: DocumentType.PurchaseAgreement,
-  loggedInAadId: '00000000-0000-0000-0000-000000000001', // eslint-disable-line sonarjs/no-duplicate-string
+  loggedInAadId: '00000000-0000-0000-0000-000000000001',
   signatures: [
     {
       signer: {

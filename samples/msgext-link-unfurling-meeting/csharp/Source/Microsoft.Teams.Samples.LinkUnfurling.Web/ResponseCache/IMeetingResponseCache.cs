@@ -1,4 +1,4 @@
-﻿// <copyright file="IMeetingCache.cs" company="Microsoft Corporation">
+﻿// <copyright file="IMeetingResponseCache.cs" company="Microsoft Corporation">
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // </copyright>
 

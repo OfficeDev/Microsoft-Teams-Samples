@@ -6,7 +6,7 @@
   "packageName": "com.microsoft.teams.sample.meetingtoken",
   "webApplicationInfo": {
     "id": "[MicrosoftAppId]",
-    "resource": "api://[WebAppDomain]"
+    "resource": "api://[WebAppDomain]/[MicrosoftAppId]"
   },
   "developer": {
     "name": "[companyName]",

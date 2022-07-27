@@ -59,7 +59,7 @@ The sample shows a simple implementation of a connector registration implementat
    1. In the command prompt, run the command `ngrok http 3978 --host-header=localhost`.
    1. Ngrok will fill the entire prompt window. Make note of the https:// Forwarding URL. This URL will be your [BASE_URI] referenced below. 
    1. Minimize the ngrok Command Prompt window. It is no longer referenced in these instructions, but it must remain running.
-1. Register a new connector in the [Connector Developer Portal](https://outlook.office.com/connectors/home/login/#/new)
+1. Register a new connector in the [Connector Developer Portal](https://aka.ms/connectorsdashboard)
    1. Fill in all the basic details such as name, logo, descriptions etc. for the new connector.
    1. For the configuration page, you'll use our sample code's setup endpoint: `https://[BASE_URI]/connector/SimpleAuth`
    1. For Valid domains, make entery of your domain's https URL, e.g. XXXXXXXX.ngrok.io.
@@ -71,7 +71,7 @@ The sample shows a simple implementation of a connector registration implementat
 1. Go to the [Application Registration Portal](https://aka.ms/appregistrations) and sign in with the your account to create an application.
 1. Navigate to **Authentication** under **Manage** and add the following redirect URLs:
 
-    - `https://<your_ngrok_url>/Connector/SimpleEnd`
+    - `https://<your_ngrok_url>/SimpleEnd`
 
 1. Additionally, under the **Implicit grant** subsection select **Access tokens** and **ID tokens**
 
