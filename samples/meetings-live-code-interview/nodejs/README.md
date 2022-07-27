@@ -10,12 +10,12 @@ languages:
 - javascript
 extensions:
   contentType: samples
-  createdDate: "24/3/2022 2:36:57 PM"
+  createdDate: "24/03/2022 2:36:57 PM"
 ---
 
 # Live coding interview using Shared meeting stage 
 
-This sample demos a live coding in a teams meeting stage. In side panel there is a list of question in specific coding language and on share click specific question with language code editor will be shared with other participant in meeting.
+This sample demos a live coding in a Teams meeting stage using [Live Share SDK](https://aka.ms/livesharedocs). In side panel there is a list of question in specific coding language and on share click specific question with language code editor will be shared with other participant in meeting.
 Now any participant in meeting can write code for the question and same will be updated to all the other participants in meeting.  
 
 ![side panel ](Images/sidePanelView.png)
@@ -109,4 +109,5 @@ sequenceDiagram
 
 - [Share-app-content-to-stage-api ](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet#share-app-content-to-stage-api)
 - [Enable-and-configure-your-app-for-teams-meetings](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/enable-and-configure-your-app-for-teams-meetings)
+- [Live-share-sdk-overview](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-live-share-overview)
 

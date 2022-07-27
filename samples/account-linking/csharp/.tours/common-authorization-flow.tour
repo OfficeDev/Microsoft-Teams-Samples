@@ -1,0 +1,202 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Common Authorization Flow",
+  "steps": [
+    {
+      "file": "Source/Services/OAuth/OAuthTokenProvider.cs",
+      "description": "This tour will go over the common user consent/authorization flow for all capabilities (tab, bot or messaging extension). We'll refer to the individual capability generically as a 'client' of this flow from here forward. \r\n\r\nWe'll start by looking at the start of the common flow when a user hasn't already authorized the application / linked their account. ",
+      "line": 42
+    },
+    {
+      "file": "Source/Services/OAuth/OAuthTokenProvider.cs",
+      "description": "When we attempt to get the access token from our database, there won't be an entry and we'll send back a `NeedsConsentResult`. \r\n\r\nEach individual client type (tab/task module/conversational bot) will handle this response type differently, but all three will need to direct the user agent to the the `AuthorizeUri` in the `NeedsConsentResult` to interactively get the user's authorization.  ",
+      "line": 49,
+      "selection": {
+        "start": {
+          "line": 152,
+          "character": 9
+        },
+        "end": {
+          "line": 152,
+          "character": 21
+        }
+      }
+    },
+    {
+      "file": "Source/Controllers/OAuthController.cs",
+      "description": "The client is responsible for opening the user agent to this action (E.G. https://acctlinking.contoso.com/oauth/start).\r\nThe client must provide two query string parameters to start the user authorization, `state` and `codeChallenge`\r\n\r\n`state` is an opaque string that we give back to the client at the end of the flow which should be used to prevent cross-site request forgeries. \r\n\r\n`codeChallenge` is a [PKCE](https://datatracker.ietf.org/doc/html/rfc7636) code challenge which we will use to protect against url eavesdroppers. ",
+      "line": 36,
+      "selection": {
+        "start": {
+          "line": 35,
+          "character": 1
+        },
+        "end": {
+          "line": 36,
+          "character": 66
+        }
+      }
+    },
+    {
+      "file": "Source/Controllers/OAuthController.cs",
+      "description": "The first thing we do is create a tamper-evident token we can store the client's state & code challenge in. ",
+      "line": 55,
+      "selection": {
+        "start": {
+          "line": 52,
+          "character": 9
+        },
+        "end": {
+          "line": 55,
+          "character": 12
+        }
+      }
+    },
+    {
+      "file": "Source/Services/AccountLinkingStateService/AccountLinkingStateService.cs",
+      "description": "This sample uses the [ASP.NET Core Data Protection](https://docs.microsoft.com/en-us/aspnet/core/security/data-protection/introduction?view=aspnetcore-6.0) library to create the tamper-evident state. \r\n\r\nYou can also use any other tamper-evident system such as [JSON Web Tokens](https://www.rfc-editor.org/rfc/rfc7519) to encode the information.\r\n\r\nNote: This implementation also creates a fully confidential state object but that is not strictly a requirement",
+      "line": 61,
+      "selection": {
+        "start": {
+          "line": 58,
+          "character": 8
+        },
+        "end": {
+          "line": 61,
+          "character": 53
+        }
+      }
+    },
+    {
+      "file": "Source/Controllers/OAuthController.cs",
+      "description": "We then redirect the user-agent to the underlying OAuth provider's authorization start url.\r\n\r\nWe encode a few query parameters before redirecting\r\n- `client_id` is the id of this client in the external OAuth system\r\n- `redirect_uri` is the full url of the `end` action in this controller.\r\n- `state` is the tamper-evident token we just generated (which includes the client's state)",
+      "line": 69,
+      "selection": {
+        "start": {
+          "line": 58,
+          "character": 9
+        },
+        "end": {
+          "line": 69,
+          "character": 48
+        }
+      }
+    },
+    {
+      "file": "Source/Controllers/OAuthController.cs",
+      "description": "When the user successfully authorizes this application, it redirects the user agent back to the `end` action here (E.G. https://acctlinking.contoso.com/oauth/end). It will attach the `state` value we gave it earlier along with the `code` we will use to complete the OAuth flow. \r\n\r\nWe still need to let out client know we are done with the user's authorization of the application so they can ensure there hasn't been any CSRF issue.",
+      "line": 75,
+      "selection": {
+        "start": {
+          "line": 74,
+          "character": 9
+        },
+        "end": {
+          "line": 75,
+          "character": 34
+        }
+      }
+    },
+    {
+      "file": "Source/Controllers/OAuthController.cs",
+      "description": "Since we're not done yet, we'll add the OAuth `code` to the token. It is safe to transmit this code in the clear as it is useless without the OAuth2.0 client secret.",
+      "line": 95,
+      "selection": {
+        "start": {
+          "line": 93,
+          "character": 9
+        },
+        "end": {
+          "line": 95,
+          "character": 70
+        }
+      }
+    },
+    {
+      "file": "Source/Controllers/OAuthController.cs",
+      "description": "We now build the redirect back to the client's configured end-of auth page. In this sample it is the `authEnd.html` page in the `wwwroot` directory. \r\n\r\nWe encode the original `state` value they gave us along with the tamper-evident token we embedded the OAuth `code` into. We pass this as a `code` to the client so it is more similar to the OAuth flow. ",
+      "line": 108,
+      "selection": {
+        "start": {
+          "line": 97,
+          "character": 9
+        },
+        "end": {
+          "line": 108,
+          "character": 11
+        }
+      }
+    },
+    {
+      "file": "Source/Controllers/AccountLinkingController.cs",
+      "description": "Each of the various clients is responsible for calling the `ClaimTokenAsync` call with\r\n\r\n1. The user's Azure AD identity (for tab, we get this via the access token, Bot and ME get it as part of the activity payload)\r\n2. The PKCE code verifier for the code challenge provided at the start of this flow\r\n3. The `code` value we provided in the previous step which is the tamper-evident state value (that includes the OAuth2.0 code & codeVerifier)\r\n",
+      "line": 54
+    },
+    {
+      "file": "Source/Services/OAuth/OAuthTokenProvider.cs",
+      "description": "We first verify the tamper-evident state hasn't been tampered with and extract both the state and the expiration time",
+      "line": 105
+    },
+    {
+      "file": "Source/Services/OAuth/OAuthTokenProvider.cs",
+      "description": "We then check that the `codeVerifier` provided works for the `codeChallenge` encoded in the tamper-evident state from the start of the flow. \r\n\r\nThis ensures that the same user started the flow as ended the flow.",
+      "line": 113,
+      "selection": {
+        "start": {
+          "line": 107,
+          "character": 9
+        },
+        "end": {
+          "line": 113,
+          "character": 10
+        }
+      }
+    },
+    {
+      "file": "Source/Services/OAuth/OAuthTokenProvider.cs",
+      "description": "Then, we use the unique `Id` of the tamper evident state to ensure that there is at most one claim per start of the flow. This prevents a few replay-style attacks. ",
+      "line": 116,
+      "selection": {
+        "start": {
+          "line": 115,
+          "character": 9
+        },
+        "end": {
+          "line": 116,
+          "character": 64
+        }
+      }
+    },
+    {
+      "file": "Source/Services/OAuth/OAuthTokenProvider.cs",
+      "description": "We then complete the OAuth2.0 flow and retrieve the access and refresh tokens. ",
+      "line": 126,
+      "selection": {
+        "start": {
+          "line": 119,
+          "character": 9
+        },
+        "end": {
+          "line": 126,
+          "character": 11
+        }
+      }
+    },
+    {
+      "file": "Source/Services/OAuth/OAuthTokenProvider.cs",
+      "description": "This data is then saved into the database of tokens described into the [Token Storage Flow][#TOKEN STORAGE]",
+      "line": 130,
+      "selection": {
+        "start": {
+          "line": 128,
+          "character": 9
+        },
+        "end": {
+          "line": 130,
+          "character": 96
+        }
+      }
+    }
+  ],
+  "ref": "nibeauli/account-linking-sample"
+}

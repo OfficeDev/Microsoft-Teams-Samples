@@ -16,9 +16,9 @@ createdDate: "11-10-2021 23:35:25"
 
 This sample demos app installation using QR code.
 
-The user can Generate a new QR code (contains app id information) and then use Install action to scan and install the app.
+The user can Generate a new QR code (contains app id information) and then use Install action to scan and then install the app.
 
-`Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients`
+`Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients`.
 
 ![Card](QRAppInstallation/Images/CardWithButtons.png)
 

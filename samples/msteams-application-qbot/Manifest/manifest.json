@@ -1,0 +1,111 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.9",
+  "version": "1.0.0",
+  "id": "97c66967-8416-4660-a22d-168a02fa5633",
+  "packageName": "com.microsoft.teams.apptemplates.qbot",
+  "developer": {
+    "name": "{{Company_Name}}",
+    "websiteUrl": "{{Website_Url}}",
+    "privacyUrl": "{{Privacy_Url}}",
+    "termsOfUseUrl": "{{Terms_Of_Use_Url}}"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "QBot",
+    "full": "QBot"
+  },
+  "description": {
+    "short": "A Short description of the app",
+    "full": "A Longer description of the app"
+  },
+  "accentColor": "#6BB700",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://{{Host_Name}}/configTab/courses?userObjectId={userObjectId}&theme={theme}&locale={locale}",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team"
+      ],
+      "context": [
+        "channelTab"
+      ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "entityId": "personalTab",
+      "name": "Dashboard",
+      "contentUrl": "https://{{Host_Name}}/personal/courses?userObjectId={userObjectId}&theme={theme}&locale={locale}",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "{{Bot_App_Id}}",
+      "scopes": [
+        "team"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false
+    }
+  ],
+  "activities": {
+    "activityTypes": [
+      {
+        "type": "questionAnswered",
+        "description": "When a question posted by a user is marked as answered.",
+        "templateText": "Question is answered"
+      },
+      {
+        "type": "answerAccepted",
+        "description": "When a response to a question is accepted as the answer.",
+        "templateText": "Answer is accepted"
+      },
+      {
+        "type": "setupCourse",
+        "description": "When course setup is pending.",
+        "templateText": "Setup course"
+      }
+    ]
+  },
+  "composeExtensions": [
+    {
+      "botId": "{{Bot_App_Id}}",
+      "commands": [
+        {
+          "id": "selectthisanswer",
+          "description": "Select the message as answer",
+          "title": "Select this answer",
+          "type": "action",
+          "fetchTask": true,
+          "context": [
+            "message"
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{{Host_Name}}"
+  ],
+  "webApplicationInfo": {
+    "id": "{{Graph_App_Id}}",
+    "resource": "{{Resource_Uri}}",
+    "applicationPermissions": [
+      "TeamSettings.Read.Group",
+      "TeamMember.Read.Group",
+      "ChannelMessage.Read.Group"
+    ]
+  },
+  "showLoadingIndicator": true
+}

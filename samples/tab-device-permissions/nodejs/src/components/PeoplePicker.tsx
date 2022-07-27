@@ -12,22 +12,19 @@ import { Card, Flex, Text, Button, CardHeader, CardBody } from '@fluentui/react-
 const PeoplePicker = () => {
   const [selectedPeople, setSelectedPeople] = useState<microsoftTeams.people.PeoplePickerResult[]>([]);
   useEffect(() => {
-    microsoftTeams.initialize()
+    microsoftTeams.app.initialize()
   })
 
   // Method to select people using people picker control
   function selectPeople() {
-    microsoftTeams.people.selectPeople((error: microsoftTeams.SdkError, people: microsoftTeams.people.PeoplePickerResult[]) => {
-      if (error) {
-        if (error.message) {
-          alert(" ErrorCode: " + error.errorCode + error.message);
-        }
-        else {
-          alert(" ErrorCode: " + error.errorCode);
-        }
+    microsoftTeams.people.selectPeople().then((people) => {
+      setSelectedPeople(people);
+    }).catch((error) => {
+      if (error.message) {
+        alert(" ErrorCode: " + error.errorCode + error.message);
       }
-      if (people) {
-        setSelectedPeople(people);
+      else {
+        alert(" ErrorCode: " + error.errorCode);
       }
     });
   }

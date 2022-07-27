@@ -109,21 +109,21 @@
             </div>
 
         </header>
-        <script src="https://statics.teams.microsoft.com/sdk/v1.7.0/js/MicrosoftTeams.min.js"></script>
+        <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"></script>
         <script>
-            microsoftTeams.initialize();
-            microsoftTeams.appInitialization.notifySuccess();
-            microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
-                microsoftTeams.settings.setSettings({
-                    entityID: "Meeting Token App",
-                    contentUrl: `${window.location.origin}/index.html`,
-                    suggestedTabName: "Meeting Token App",
-                    websiteUrl: `${window.location.origin}/index.html`,
+            microsoftTeams.app.initialize().then(() => {
+                microsoftTeams.app.notifySuccess();
+                microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+                    microsoftTeams.pages.config.setConfig({
+                        entityID: "Meeting Token App",
+                        contentUrl: `${window.location.origin}/index.html`,
+                        suggestedTabName: "Meeting Token App",
+                        websiteUrl: `${window.location.origin}/index.html`,
+                    });
+                    saveEvent.notifySuccess();
                 });
-                saveEvent.notifySuccess();
-                // microsoftTeams.appInitialization.notifyAppLoaded();
+                microsoftTeams.pages.config.setValidityState(true);
             });
-            microsoftTeams.settings.setValidityState(true);
         </script>
 </body>
 

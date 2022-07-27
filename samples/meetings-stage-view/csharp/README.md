@@ -14,11 +14,13 @@ createdDate: "06-10-2021 01:48:56"
 
 # Meetings Stage View
 
-This App helps to enable and configure your apps for Teams meetings. This app covers Shared meeting stage.
+This App helps to enable and configure your apps for Teams meetings. This app covers Shared meeting stage using [Live Share SDK](https://aka.ms/livesharedocs).
 For reference please check [Enable and configure your apps for Teams meetings](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/enable-and-configure-your-app-for-teams-meetings)
 
 This sample also shows how to share specific parts of your app to the meeting stage.
 For reference please check [Share app content to stage API](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet#share-app-content-to-stage-api)
+
+- [Live-share-sdk-overview](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-live-share-overview)
 
 This capability is currently available in developer preview only.
 
@@ -46,6 +48,7 @@ This capability is currently available in developer preview only.
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
+
 - In a terminal, navigate to `samples/meetings-stage-view/csharp`
 
     ```bash
@@ -54,6 +57,16 @@ This capability is currently available in developer preview only.
     ```
 
 - Run ngrok - point to port 3978
+
+    ```bash
+    # ngrok http -host-header=rewrite 3978
+    ```
+
+- Inside ClientApp folder execute the below command.
+
+    ```bash
+    # npx @fluidframework/azure-local-service@latest
+    ```
 
 ```bash
 # ngrok http -host-header=rewrite 3978

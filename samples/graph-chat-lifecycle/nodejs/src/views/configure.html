@@ -1,25 +1,28 @@
 <div class="font-semibold font-title">
-  <label for="tabChoice"> Chat LifeCycle Application</label>
+    <label for="tabChoice"> Chat LifeCycle Application</label>
 </div>
 <div>
-  <label for="tabChoice">
-    | Click Save below to set up the tab
-  </label>
+    <label for="tabChoice">
+        | Click Save below to set up the tab
+    </label>
 </div>
 
-<script src="https://statics.teams.microsoft.com/sdk/v1.7.0/js/MicrosoftTeams.min.js"></script>
+<script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"></script>
 <script>
-  microsoftTeams.initialize();
-  microsoftTeams.appInitialization.notifySuccess();
-  microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
-    microsoftTeams.settings.setSettings({
-      entityID: "Chat Lifecycle App",
-      contentUrl: `${window.location.origin}/chatLifecycle`,
-      suggestedTabName: "Chat Lifecycle App",
-      websiteUrl: `${window.location.origin}/chatLifecycle`,
-    });
-    saveEvent.notifySuccess();
-  });
-  microsoftTeams.settings.setValidityState(true);
+    microsoftTeams.app.initialize().then(() => {
+        microsoftTeams.app.notifySuccess();
 
+        microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+            microsoftTeams.pages.config.setConfig({
+                entityID: "Chat Lifecycle App",
+                contentUrl: `${window.location.origin}/chatLifecycle`,
+                suggestedTabName: "Chat Lifecycle App",
+                websiteUrl: `${window.location.origin}/chatLifecycle`,
+            });
+
+            saveEvent.notifySuccess();
+        });
+
+        microsoftTeams.pages.config.setValidityState(true);
+    });
 </script>

@@ -29,7 +29,6 @@
       "configurationUrl": "https://<<deployment-url>>/configure",
       "canUpdateConfiguration": true,
       "scopes": [
-        "team",
         "groupchat"
       ],
       "context": [

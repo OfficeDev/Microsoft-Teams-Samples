@@ -1,12 +1,13 @@
 import React, { Suspense } from 'react';
+import './App.css';
 import {
   BrowserRouter as Router,
   Route,
   Switch
 } from 'react-router-dom';
-import * as microsoftTeams from "@microsoft/teams-js";
+import { app } from "@microsoft/teams-js";
 import { TeamsThemeContext, getContext, ThemeStyle } from 'msteams-ui-components-react';
-import { Provider, teamsTheme, teamsDarkTheme, teamsHighContrastTheme } from '@fluentui/react-northstar';
+import { Provider, teamsTheme, teamsDarkTheme, teamsHighContrastTheme } from '@fluentui/react-northstar'
 import ConfigureMessage from './components/configure-message';
 
 export interface IAppState {
@@ -25,16 +26,16 @@ class App extends React.Component<{}, IAppState> {
   }
 
   public componentDidMount() {
-    microsoftTeams.initialize();
-    microsoftTeams.getContext((context) => {
-      let theme = context.theme || "";
+    app.initialize();
+    app.getContext().then((context) => {
+      let theme = context.app.theme || "";
       this.updateTheme(theme);
       this.setState({
         theme: theme
       });
     });
 
-    microsoftTeams.registerOnThemeChangeHandler((theme) => {
+    app.registerOnThemeChangeHandler((theme) => {
       this.updateTheme(theme);
       this.setState({
         theme: theme,
@@ -99,9 +100,7 @@ class App extends React.Component<{}, IAppState> {
         <Suspense fallback={<div></div>}>
           <div className="appContainer">
             <Router>
-              <Switch>
-                <Route exact path='/configure-message' component={ConfigureMessage}></Route>
-              </Switch>
+              <Route exact path='/configure-message' component={ConfigureMessage}></Route>
             </Router>
           </div>
         </Suspense>

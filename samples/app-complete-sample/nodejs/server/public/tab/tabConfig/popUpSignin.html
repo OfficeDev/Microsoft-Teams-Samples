@@ -60,9 +60,9 @@
     <input type="submit" class="primary-button" value="Submit" onClick="submit()">
     <input type="submit" class="primary-button" value="Close" onClick="closeWindow()">
 
-    <script src="https://statics.teams.microsoft.com/sdk/v1.2/js/MicrosoftTeams.min.js"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
     <script>
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
         function submit() {
             microsoftTeams.authentication.notifySuccess('PopUpSignInAuthenticationSuccess');
         }

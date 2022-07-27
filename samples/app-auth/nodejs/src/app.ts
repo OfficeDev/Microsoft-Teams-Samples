@@ -133,7 +133,7 @@ app.use(function (err: any, req: Request, res: Response, next: Function): void {
     res.sendStatus(err.status || 500);
 });
 
-http.createServer(app).listen(3333, function (): void {
+http.createServer(app).listen(3978, function (): void {
     console.log("Serve is running!!!");
     logger.verbose("Express server listening on port " + app.get("port"));
     logger.verbose("Bot messaging endpoint: " + config.get("app.baseUri") + "/api/messages");

@@ -1,15 +1,23 @@
 import { Signature } from 'models';
-import fetchClient from './fetchClient';
+import { authFetch } from './fetchClient';
 
-const postSignDocument = (
-  token: string,
-  documentId: string,
-  signature: Signature,
-): Promise<Response> => {
-  return fetchClient(token, `document/${documentId}/sign`, {
+
+// React-Query has a limitation of only allowing one variable for mutations
+// To solve this limitation, we merge the documentId and SignDocumentModel for postSignDocument
+// It is kept separate from the other models in /models because it is not to be used except in this situation.
+type SignDocumentModel = {
+  documentId: string;
+  signature: Signature;
+};
+
+async function postSignDocument(
+  model: SignDocumentModel,
+) {
+  return await authFetch<Signature>(`document/${model.documentId}/sign`, {
     method: 'POST',
-    body: JSON.stringify(signature),
+    body: JSON.stringify(model.signature),
   });
 };
 
-export default { postSignDocument };
+export { postSignDocument };
+export type { SignDocumentModel };

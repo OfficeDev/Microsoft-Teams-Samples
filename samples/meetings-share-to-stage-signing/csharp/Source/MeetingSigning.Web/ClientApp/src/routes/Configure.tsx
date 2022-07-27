@@ -7,15 +7,17 @@ import { Header, Text } from '@fluentui/react-northstar';
  */
 export default function Configure() {
   useEffect(() => {
-    microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
-      microsoftTeams.settings.setSettings({
-        contentUrl: window.location.origin,
-        entityId: window.location.origin,
-      });
+    microsoftTeams.app.initialize().then(() => {
+      microsoftTeams.pages.config.registerOnSaveHandler((saveEvent) => {
+        microsoftTeams.pages.config.setConfig({
+          contentUrl: window.location.origin,
+          entityId: window.location.origin,
+        });
 
-      saveEvent.notifySuccess();
+        saveEvent.notifySuccess();
+      });
+      microsoftTeams.pages.config.setValidityState(true);
     });
-    microsoftTeams.settings.setValidityState(true);
   });
 
   return (

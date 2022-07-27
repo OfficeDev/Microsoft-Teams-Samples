@@ -8,11 +8,11 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "03-04-2022 11:00:00"
+  contentType: samples
+  createdDate: "03-04-2022 11:00:00"
 ---
 
-### Link unfurling meeting sample
+# Link unfurling meeting sample
 
 #### About
 This sample illustrates a common scenario where a user shares a link to a resource (dashboard in this sample) with a group of users, and they collaborate to review it in a meeting.

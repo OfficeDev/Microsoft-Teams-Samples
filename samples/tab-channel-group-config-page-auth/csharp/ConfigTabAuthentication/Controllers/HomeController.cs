@@ -54,7 +54,7 @@ namespace TabAuthentication.Controllers
         [Route("SimpleConfigureTab")]
         public IActionResult SimpleConfigureTab()
         {
-            ViewBag.ClientId = Configuration["SimpleClientId"].ToString();
+            ViewBag.ClientId = Configuration["ClientId"].ToString();
             return View();
         }   
 

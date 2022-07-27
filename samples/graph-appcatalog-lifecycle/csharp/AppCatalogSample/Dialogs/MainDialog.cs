@@ -104,15 +104,15 @@ namespace AppCatalogSample.Dialogs
 
                     switch (command)
                     {
-                        case "listapp": 
-                            teamsApps= await client.GetAllapp();
+                        case "listapp":
+                            teamsApps = await client.GetAllapp();
                             if (teamsApps != null && teamsApps.Count > 0)
                             {
                                 taskInfoData = client.ParseData(teamsApps);
                                 attachData = client.AgendaAdaptiveList("listapp", taskInfoData);
                                 taskInfoData.Clear();
                                 await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(attachData), cancellationToken);
-                                await client.SendListActionAsync(stepContext.Context, cancellationToken);
+                                await client.SendContinueMessageAsync(stepContext.Context, cancellationToken);
                             }
                             else
                             {
@@ -129,7 +129,7 @@ namespace AppCatalogSample.Dialogs
                                 attachData = client.AgendaAdaptiveList("App", taskInfoData);
                                 taskInfoData.Clear();
                                 await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(attachData), cancellationToken);
-                                await client.SendListActionAsync(stepContext.Context, cancellationToken);
+                                await client.SendContinueMessageAsync(stepContext.Context, cancellationToken);
                             }
                             else
                             {
@@ -146,7 +146,7 @@ namespace AppCatalogSample.Dialogs
                                 attachData = client.AgendaAdaptiveList("findapp", taskInfoData);
                                 taskInfoData.Clear();
                                 await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(attachData), cancellationToken);
-                                await client.SendListActionAsync(stepContext.Context, cancellationToken);
+                                await client.SendContinueMessageAsync(stepContext.Context, cancellationToken);
                             }
                             else
                             {
@@ -164,7 +164,7 @@ namespace AppCatalogSample.Dialogs
                                 attachData = client.AgendaAdaptiveList("status", taskInfoData);
                                 taskInfoData.Clear();
                                 await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(attachData), cancellationToken);
-                                await client.SendListActionAsync(stepContext.Context, cancellationToken);
+                                await client.SendContinueMessageAsync(stepContext.Context, cancellationToken);
                             }
                             else
                             {
@@ -181,7 +181,7 @@ namespace AppCatalogSample.Dialogs
                                 attachData = client.AgendaAdaptiveList("bot", taskInfoData);
                                 taskInfoData.Clear();
                                 await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(attachData), cancellationToken);
-                                await client.SendListActionAsync(stepContext.Context, cancellationToken);
+                                await client.SendContinueMessageAsync(stepContext.Context, cancellationToken);
                             }
                             else
                             {
@@ -198,39 +198,35 @@ namespace AppCatalogSample.Dialogs
                             {
                                 attachData = client.AdaptivCardList("Update", upData);
                                 await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(attachData), cancellationToken);
-                                await client.SendSuggestedActionsAsync(stepContext.Context, cancellationToken);
+                                await client.SendContinueMessageAsync(stepContext.Context, cancellationToken);
                             }
                             break;
                         case "publish":
-                           var pubData= await client.UploadFileAsync();
+                            var pubData = await client.UploadFileAsync();
                             if (pubData == "require login")
                                 await stepContext.Context.SendActivityAsync(MessageFactory.Text(logintext, logintext), cancellationToken);
                             else
                             {
                                 attachData = client.AdaptivCardList("publish", pubData);
                                 await stepContext.Context.SendActivityAsync(MessageFactory.Attachment(attachData), cancellationToken);
-                                await client.SendSuggestedActionsAsync(stepContext.Context, cancellationToken);
+                                await client.SendContinueMessageAsync(stepContext.Context, cancellationToken);
                             }
                             break;
 
                         case "delete":
                             var delData = await client.DeleteApp();
-                            if (String.IsNullOrEmpty(delData))
+                            if (delData != "Deleted")
                                 await stepContext.Context.SendActivityAsync(MessageFactory.Text(logintext, logintext), cancellationToken);
                             else
                             {
                                 await stepContext.Context.SendActivityAsync(MessageFactory.Text("Delete app successfully"), cancellationToken);
-                                await client.SendSuggestedActionsAsync(stepContext.Context, cancellationToken);
+                                await client.SendContinueMessageAsync(stepContext.Context, cancellationToken);
                             }
                             break;
                         case "list":
-                            await client.SendListActionAsync(stepContext.Context, cancellationToken);
-                            break;
-                        case "home":
-                            await client.SendSuggestedActionsAsync(stepContext.Context, cancellationToken);
+                            await client.SendContinueMessageAsync(stepContext.Context, cancellationToken);
                             break;
                         default:
-
                             await stepContext.Context.SendActivityAsync(MessageFactory.Text($"Your token is: {tokenResponse.Token}"), cancellationToken);
                             break;
                     }
@@ -244,11 +240,8 @@ namespace AppCatalogSample.Dialogs
             {
                 await stepContext.Context.SendActivityAsync(MessageFactory.Text("We couldn't log you in. Please try again later."), cancellationToken);
             }
-        
 
             return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
         }
-
-
     }
 }

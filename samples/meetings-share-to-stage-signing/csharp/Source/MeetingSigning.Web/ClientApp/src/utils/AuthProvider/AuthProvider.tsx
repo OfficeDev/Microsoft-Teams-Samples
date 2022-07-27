@@ -29,23 +29,20 @@ const AuthProvider: React.FC = ({ children }) => {
   const [authState, setAuthState] = useState<AuthState>(AuthState.Unrequested);
 
   useEffect(() => {
-    microsoftTeams.initialize();
+    microsoftTeams.app.initialize();
   }, []);
 
   useEffect(() => {
     const getAuthTokenFromTeams = () => {
       // Perform single sign-on authentication
       setAuthState(AuthState.Pending);
-      microsoftTeams.authentication.getAuthToken({
-        successCallback: (result: string) => {
+      microsoftTeams.authentication.getAuthToken().then((result) => {
           setAuthState(AuthState.Resolved);
           setToken(result);
-        },
-        failureCallback: (error: string) => {
-          setAuthState(AuthState.Rejected);
-          setToken(undefined);
-          ssoLoginFailure(error);
-        },
+      }).catch((error) => {
+        setAuthState(AuthState.Rejected);
+        setToken(undefined);
+        ssoLoginFailure(error);
       });
     };
 

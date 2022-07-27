@@ -59,30 +59,28 @@
         </p>
 
         <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha384-VC7EHu0lDzZyFfmjTPJq+DFyIn8TUGAJbEtpXquazFVr00Q/OOx//RjiZ9yU9+9m" crossorigin="anonymous"></script>
-        <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js" integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT" crossorigin="anonymous"></script>
-        <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js" integrity="sha384-BIOS/65fbAsb2XiCCSTlZSTTl0ZgqkOU522dpyk5meOnN2EOQ3uH+QpqEtoAtmBn" crossorigin="anonymous"></script>
+        <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
 
         <script type="text/javascript">
-            microsoftTeams.initialize();
+            microsoftTeams.app.initialize();
             // Login to Azure AD and get access to Microsoft Graph
             function login(url) {
                 hideProfileAndError();
                 microsoftTeams.authentication.authenticate({
                     url: url,
                     width: 600,
-                    height: 535,
-                    successCallback: function (result) {
-                        console.log("Login succeeded: " + result);
-                        let data = localStorage.getItem(result);
-                        localStorage.removeItem(result);
-                        let tokenResult = JSON.parse(data);
-                        showIdTokenAndClaims(tokenResult.idToken);
-                        getUserProfile(tokenResult.accessToken);
-                    },
-                    failureCallback: function (reason) {
-                        console.log("Login failed: " + reason);
-                        handleAuthError(reason);
-                    }
+                    height: 535})
+                .then((result) => {
+                    console.log("Login succeeded: " + result);
+                    let data = localStorage.getItem(result);
+                    localStorage.removeItem(result);
+                    let tokenResult = JSON.parse(data);
+                    showIdTokenAndClaims(tokenResult.idToken);
+                    getUserProfile(tokenResult.accessToken);
+                })
+                .catch((reason) => {
+                    console.log("Login failed: " + reason);
+                    handleAuthError(reason);
                 });
             }
             function showIdTokenAndClaims(idToken) {

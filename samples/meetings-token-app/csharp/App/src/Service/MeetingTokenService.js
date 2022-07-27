@@ -30,7 +30,7 @@ export default class MeetingTokenService {
             .then(([token, context]) => {
                 return axios.post('/api/me/token', {}, {
                     params: {
-                        meetingId: context.meetingId,
+                        meetingId: context.meeting.id,
                     },
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -58,7 +58,7 @@ export default class MeetingTokenService {
             .then(([token, context]) => {
                 return axios.get('/api/meeting/summary', {
                     params: {
-                        meetingId: context.meetingId,
+                        meetingId: context.meeting.id,
                     },
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -86,7 +86,7 @@ export default class MeetingTokenService {
             .then(([token, context]) => {
                 return axios.get('/api/me', {
                     params: {
-                        meetingId: context.meetingId,
+                        meetingId: context.meeting.id,
                     },
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -113,7 +113,7 @@ export default class MeetingTokenService {
             .then(([token, context]) => {
                 return axios.post('/api/me/ack-token', {}, {
                     params: {
-                        meetingId: context.meetingId
+                        meetingId: context.meeting.id
                     },
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -140,7 +140,7 @@ export default class MeetingTokenService {
             .then(([token, context]) => {
                 return axios.post('/api/user/skip', {}, {
                     params: {
-                        meetingId: context.meetingId
+                        meetingId: context.meeting.id
                     },
                     headers: {
                         Authorization: `Bearer ${token}`

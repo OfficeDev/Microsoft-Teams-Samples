@@ -32,6 +32,7 @@ var mocha = require('gulp-spawn-mocha');
 var sourcemaps = require('gulp-sourcemaps');
 var zip = require('gulp-zip');
 var browserify = require('browserify');
+var tsify = require("tsify");
 var source = require('vinyl-source-stream');
 var path = require('path');
 var minimist = require('minimist');
@@ -49,7 +50,7 @@ var options = minimist(process.argv.slice(2), knownOptions);
 var filesToWatch = ['**/*.ts', '!node_modules/**'];
 var filesToLint = ['**/*.ts', '!src/typings/**', '!node_modules/**'];
 var staticFiles = ['src/**/*.json', 'src/**/*.pug', '!src/manifest.json'];
-var clientJS = 'build/src/TaskModuleTab.js';
+var clientJS = 'src/TaskModuleTab.ts';
 var bundledJS = 'bundle.js';
 var msTeamsLib = './node_modules/@microsoft/teams-js/dist/MicrosoftTeams.min.js';
 
@@ -97,6 +98,7 @@ gulp.task('ts', gulp.series("clean", (done) => {
         .src()
         .pipe(sourcemaps.init())
         .pipe(tsProject())
+        .js
         .pipe(sourcemaps.write('.', { sourceRoot: function(file) { return file.cwd + '/build'; }}))
         .pipe(gulp.dest('build/src'));
     done();
@@ -116,6 +118,7 @@ gulp.task('statics:copy', gulp.series("clean", (done) => {
  */
 gulp.task('client-js', gulp.series("ts", (done) => {
     var bundler = browserify({
+        basedir: ".",
         entries: clientJS,
         ignoreMissing: true,
         debug: false
@@ -123,6 +126,7 @@ gulp.task('client-js', gulp.series("ts", (done) => {
 
     var bundle = function() {
         return bundler
+            .plugin(tsify)
             .bundle()
             .on('.error', function() {})
             .pipe(source(bundledJS))
