@@ -20,7 +20,11 @@ It also shows Device permissions for the browser. Please refer [Device permissio
 
 **Mobile View**
 
-![Mobile Demo](Images/mainTab1.png)
+![Mobile Demo 1](Images/mainTab1.png)
+
+![Mobile Demo 2](Images/mainTab2.png)
+
+![Mobile Demo 3](Images/mainTab3.png)
 
 **Desktop View**
 ![Desktop View](Images/desktopHome.png)
