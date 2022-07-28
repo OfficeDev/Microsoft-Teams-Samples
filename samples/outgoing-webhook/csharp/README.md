@@ -30,7 +30,7 @@ Example screenshot to show Hero card (using type of card in message):
 2. Choose the Apps tab from the navigation bar.
 3. From the window's lower right corner select Create an outgoing webhook.
 4. In the resulting popup window complete the required fields:
-    - Name - The webhook title and @mention tap.
+    - Name - The webhook title and @mention tab.
     - Callback URL - The HTTPS endpoint that accepts JSON payloads and will receive POST requests from Teams.
     - Description - A detailed string that will appear in the profile card and the team-level App dashboard.
     - Profile Picture (optional) an app icon for your webhook.
