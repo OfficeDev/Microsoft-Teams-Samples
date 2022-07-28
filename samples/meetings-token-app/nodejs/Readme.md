@@ -16,6 +16,11 @@ extensions:
 
 The Meeting Token Generator app is a sample Microsoft Teams app that extends meetings in Teams.
 Through this app, meeting participants can request a "token", which is generated sequentially so that each participant has a fair opportunity to interact. This can be useful in situations like scrum meetings, Q&A sessions, etc.
+This application also shows the implementation of Live Share SDK to update the data in real-time for all participants in meeting.
+
+- [Live-share-sdk-overview](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-live-share-overview)
+
+**NOTE: This capability is currently available in developer preview only.**
 
 ### Key features
  - Display the current token that is being serviced in the meeting
@@ -93,8 +98,8 @@ The app uses the Teams extensibility features described on the following pages:
     ```
 
 ### Step 3: Run Ngrok
-1. The application (client) will run on port 4000
-2. ngrok http -host-header=rewrite 4000
+1. The application (client) will run on port 3978
+2. ngrok http -host-header=rewrite 3978
   
 ### Step 4: Run Client & the Server
 You can build and run the project from the command line or an IDE:
@@ -106,11 +111,11 @@ You can build and run the project from the command line or an IDE:
 3. Run Client
     - Open new terminal
     - npm run client
-    - The client will start running on 4000 port
+    - The client will start running on 3978 port
 4. Run Server
     - Open new terminal
     - npm run server
-    - The server will start running on 3978 port
+    - The server will start running on 3000 port
 5. Update the manifest .zip file under appPackage folder
     - npm run manifest
 6. Now your application is running and ready to upload
