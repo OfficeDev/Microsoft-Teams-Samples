@@ -1,7 +1,32 @@
 body {
     background-color: black;
     color: white;
+    font-family: "Segoe UI","Apple Color Emoji","Segoe UI Emoji","Segoe UI Web";
 }
+.submit-button {
+    font-weight: 600;
+    background-color: #5B58C7;
+    padding: 0.5rem 1.5rem;
+    color: white;
+    border-radius: 7px;
+    border: none;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #7A80EB;
+}
+
+.done-button {
+    background-color: green !important;
+    border: green !important;
+}
+
+.skip-button {
+    background-color: #CC4A31 !important;
+    border: #CC4A31 !important
+}
+
 .app-container {
     display: grid;
     justify-content: center;
@@ -26,10 +51,6 @@ body {
     grid-auto-columns: auto;
     justify-content: center;
     align-content: center;
-}
-
-.primary-button {
-    margin: 10;
 }
 
 .token-indicator-container {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { PrimaryButton } from '@fluentui/react/lib/Button';
+import { Button } from '@fluentui/react-northstar';
 import { withMeetingTokenService } from '../Context/MeetingServiceProvider';
 import { async } from 'regenerator-runtime';
 
@@ -35,9 +35,7 @@ class SkipCurrentTokenButton extends Component {
             <div className="flex-center" >
                 {this.props.isOrganizer ?
                     (
-                        <PrimaryButton disabled={this.state.disabled} style={{ margin: 10, backgroundColor:"#CC4A31", borderColor:"#CC4A31" }} title="Move current token to next" onClick={this.skipToken}>
-                            Skip
-                        </PrimaryButton>
+                        <Button content="Skip" disabled={this.state.disabled} style={{  }} className="submit-buton" label="Move current token to next" onClick={this.skipToken} />
                     ) : null
                 }
             </div>

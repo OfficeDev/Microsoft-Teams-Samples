@@ -2,7 +2,7 @@ export default function ContextService(teamsClient, timeout = 10000) {
     return function () {
         return new Promise((resolve, reject) => {
             let shouldReject = true;
-            teamsClient.app.inittialize().then(() => {
+            teamsClient.app.initialize().then(() => {
                 teamsClient.app.getContext().then((teamsContext) => {
                     shouldReject = false;
                     resolve({

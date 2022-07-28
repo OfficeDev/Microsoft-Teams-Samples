@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import { withMeetingTokenService } from '../Context/MeetingServiceProvider';
 import TokenIndicator from "../Components/TokenIndicator";
-import StatusRefresher from "../Components/StatusRefresher";
 
 class PreMeeting extends Component {
     constructor(props) {
@@ -14,24 +13,30 @@ class PreMeeting extends Component {
             participantCount: "0",
         }
     }
-    
-    onStatusRefresh = ({ success, msg: data }) => {
-        if (!success) {
-            this.props.onError(data);
+
+    componentDidMount() {
+        this.initializePage();
+    }
+
+    initializePage = async () => {
+        let response = await this.props.meetingTokenService.getMeetingStatusAsync();
+
+        if (!response.success) {
+            this.props.onError(response.msg);
             return;
         }
-        const { MeetingMetadata: { CurrentToken, MaxTokenIssued }, UserTokens} = data;
+        const { MeetingMetadata: { CurrentToken, MaxTokenIssued }, UserTokens } = response.msg;
+
         this.setState({
             currentToken: UserTokens.length > 0 ? CurrentToken : "N/A",
             maxTokenIssued: MaxTokenIssued,
             participantCount: (UserTokens.length || "0"),
         });
     }
-    
+
     render() {
         return (
             <div className="app-container" >
-                <StatusRefresher onStatusRefresh={this.onStatusRefresh} />
                 <TokenIndicator show={true} value={this.state.currentToken} title={"Current Token"} />
                 <TokenIndicator show={true} value={this.state.maxTokenIssued} title={"Max Token Issued"} />
                 <TokenIndicator show={true} value={this.state.participantCount} title={"Queue Length"} />
