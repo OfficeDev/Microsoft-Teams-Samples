@@ -1,0 +1,43 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.0",
+  "id": "<<APP-ID>>",
+  "packageName": "com.teams.graphteamstag",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Teams Tag Management",
+    "full": "Teams Tag Management"
+  },
+  "description": {
+    "short": "This example can be used to manage Teams team tags.",
+    "full": "This example can be used to manage Teams team tags. You can create, update, add members or remove them, all of CRUD operations related to tags can be performed with this sample."
+  },
+  "accentColor": "#5558AF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://<<BASE-URL>>/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team",
+        "groupchat"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "<<BASE-URL>>"
+  ]
+}
