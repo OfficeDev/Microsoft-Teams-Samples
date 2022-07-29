@@ -26,3 +26,18 @@
 //       }
 //     ]
 //   }
+
+
+// DTO 
+// {
+//     displayName: "",
+//     membersToAdd: [{
+//         userId: "",
+//         displayName: ""
+//     }],
+//     membersToDelete: [{
+//         teamworkTagMemberId: "",
+//         userId: "",
+//         displayName: ""
+//     }]
+// }

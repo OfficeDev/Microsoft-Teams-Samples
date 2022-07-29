@@ -7,6 +7,7 @@ import {
 import Configure from "../components/configure";
 import * as microsoftTeams from "@microsoft/teams-js";
 import Dashboard from "../components/dashboard";
+import CreateTag from "../components/create-tag";
 
 export const AppRoute = () => {
     // React.useEffect(() => {
@@ -26,6 +27,7 @@ export const AppRoute = () => {
                 <Routes>
                     <Route path="/configure" element={<Configure />}/>
                     <Route path="/dashboard" element={<Dashboard />}/>
+                    <Route path="/create-new-tag" element={<CreateTag />}/>
                 </Routes>
             </BrowserRouter>
         </React.Fragment>

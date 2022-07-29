@@ -7,7 +7,7 @@ import React, { Component } from "react";
 import { Text, Flex, FlexItem, Button, TrashCanIcon, EditIcon, EyeFriendlierIcon } from "@fluentui/react-northstar";
 import * as microsoftTeams from "@microsoft/teams-js";
 import "../style/style.css";
-import ViewTag from "./view-tag";
+import ViewOrEditTag from "./view-or-edit-tag";
 import DashboardState from "../models/dashboard-state";
 
 // Dashboard where user can manage the tags
@@ -23,6 +23,7 @@ class Dashboard extends Component {
     }
 
     componentDidMount() {
+        microsoftTeams.app.initialize();
         this.initializeData();
     }
 
@@ -49,6 +50,19 @@ class Dashboard extends Component {
         })
     }
 
+    onCreateNewTagClick = () => {
+        microsoftTeams.dialog.open({
+            title: "Create new Tag",
+            url: `${window.location.origin}/create-new-tag`,
+            size: {
+                height: 450,
+                width: 500,
+            }
+        }, (result) => {
+            console.log(result);
+        });
+    }
+
     onBackClick = () => {
         this.setState({
             dashboardState: DashboardState.Default,
@@ -73,10 +87,10 @@ class Dashboard extends Component {
     renderBasedOnDashboardState = () => {
         switch (this.state.dashboardState) {
             case DashboardState.View:
-                return <ViewTag onBackClick={this.onBackClick} teamworkTag={this.state.selectedTeamworkTag} dashboardState={DashboardState.View} />
+                return <ViewOrEditTag onBackClick={this.onBackClick} teamworkTag={this.state.selectedTeamworkTag} dashboardState={DashboardState.View} />
                 break;
             case DashboardState.Edit:
-                return <ViewTag onBackClick={this.onBackClick} teamworkTag={this.state.selectedTeamworkTag} dashboardState={DashboardState.Edit} />
+                return <ViewOrEditTag onBackClick={this.onBackClick} teamworkTag={this.state.selectedTeamworkTag} dashboardState={DashboardState.Edit} />
                 break;
             default:
                 return (<Flex column>
@@ -119,7 +133,7 @@ class Dashboard extends Component {
             <Flex vAlign="center"   >
                 <Text content="Team Tag Management" size="larger" weight="semibold" />
                 <FlexItem push>
-                    <Button primary content="Create new Tag" />
+                    <Button primary content="Create new Tag" onClick={this.onCreateNewTagClick}/>
                 </FlexItem>
             </Flex>
 
