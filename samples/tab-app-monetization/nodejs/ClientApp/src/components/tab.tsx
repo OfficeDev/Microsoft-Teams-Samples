@@ -16,7 +16,6 @@ const Tab = () => {
     }
 
     const handlePurchaseDialog = () => {
-
         // This method will invoke the purchase
         monetization.openPurchaseExperience(planInfo);
     }
