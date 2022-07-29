@@ -4,9 +4,10 @@
 // </copyright>
 
 import React, { useEffect } from "react";
+import { Text } from "@fluentui/react-northstar";
 import * as microsoftTeams from "@microsoft/teams-js";
 
-// Handles redirection after successful/failure sign in attempt.
+// Configure page.
 const Configure = props => {
     useEffect(() => {
         microsoftTeams.app.initialize().then(() => {
@@ -14,29 +15,19 @@ const Configure = props => {
             microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
                 microsoftTeams.pages.config.setConfig({
                     entityID: "TeamworkTagsTab",
-                    contentUrl: `${window.location.origin}/home`,
+                    contentUrl: `${window.location.origin}/dashboard`,
                     suggestedTabName: "Teams Tags Management",
-                    websiteUrl: `${window.location.origin}/home`,
+                    websiteUrl: `${window.location.origin}/dashboard`,
                 });
 
                 saveEvent.notifySuccess();
             });
+            microsoftTeams.pages.config.setValidityState(true);
         });
     }, []);
 
-    const onClick = () => {
-        microsoftTeams.pages.config.setValidityState(true);
-    }
-
     return (
-        <header className="header">
-            <div className="header-inner-container">
-                <div id="divConfig">
-                    <br />
-                    <input type="radio" name="notificationType" value="Create" onClick={onClick} /> Add App in a meeting
-                </div>
-            </div>
-        </header>
+        <Text size="larger" content="Please click on save to proceed." weight="semibold" />
     );
 };
 

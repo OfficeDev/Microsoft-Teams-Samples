@@ -5,13 +5,13 @@
   "author": "Microsoft",
   "license": "MIT",
   "dependencies": {
-    "@fluentui/react-northstar": "^0.60.0",
-    "react": "^17.0.2",
+    "@fluentui/react-northstar": "^0.63.1",
     "axios": "^0.21.1",
-    "react-dom": "^17.0.2",
-    "react-i18next": "^11.15.4",
-    "react-router-dom": "^6.2.1",
-    "react-scripts": "5.0.0"
+    "react": "17.0.0",
+    "react-dom": "17.0.0",
+    "react-router-dom": "6.2.2",
+    "react-scripts": "^4.0.0",
+    "@microsoft/teams-js": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -20,10 +20,7 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "extends": "react-app"
   },
   "browserslist": {
     "production": [
@@ -36,6 +33,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "http://localhost:3000"
+  }
 }
