@@ -11,7 +11,7 @@
 
     <script>
         var deepLinkString = "";
-        function callSidepanelDeeplink() {
+        function callSidePanelDeeplink() {
             microsoftTeams.app.initialize().then(() => {
                 microsoftTeams.app.openLink(deepLinkString);
             })
@@ -58,7 +58,7 @@
 
     <div id="side-panel-content" class="container" style="color:white;display:none;margin-top:3rem;">
         <div>
-            This is a side panel tab. 
+            This is a Side Panel tab. 
         </div>
         <button 
             data-id="default"
@@ -76,7 +76,7 @@
                 <div class="card" style="width:100%">
                     <div class="card-body">
                         <div class="card-header">
-                            <b>Open sidepanel using deeplink</b>
+                            <b>Open side panel using deeplink</b>
                         </div>
                         <div class="configure-header">
                             To use this, configure the deeplink with following parameters
@@ -85,15 +85,15 @@
 microsoftTeams.app.openLink("https://teams.microsoft.com/l/entity/{appId}/{entityId}?context={"chatId": "{meetingId}","contextType":"chat"}")
                             </pre>
                         </div>
-                        <div>Click on button to open meeting sidepanel.</div>
+                        <div>Click on button to open meeting side panel.</div>
                     </div>
                     <button 
                         data-id="default"
                         class="callDeeplinkButton"
-                        onclick="callSidepanelDeeplink()"
-                        style="width:120px"
+                        onclick="callSidePanelDeeplink()"
+                        style="width:210px"
                     >
-                        Open side panel
+                        Open Teams meeting side panel
                     </button>
                 </div>
             </div>
