@@ -49,7 +49,7 @@
     "id": "{{App-id}}",
     "resource": "https://RscBasedStoreApp"
     },
-	"authorization": {
+  "authorization": {
     "permissions": {
       "resourceSpecific": [
         {
