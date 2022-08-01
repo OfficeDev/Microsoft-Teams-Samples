@@ -69,40 +69,41 @@ Update configuration with the ```MicrosoftAppId```,  ```MicrosoftAppPassword``` 
 
 ### 4. Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http -host-header=rewrite 3978
-    ```
+```bash
+ngrok http -host-header=rewrite 3978
+```
+
 ![Ngrok screen](Images/NgrokScreenshot.png)
 
 ### 3. Install node modules and run server 
 
-     Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+ Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
 
-    ```bash
-    npm install
-    ```
+```bash
+npm install
+```
 
-    ```bash
-    npm start
-    ```
+```bash
+npm start
+```
 
-### 3. Install node modules and run server 
+### 3. Install node modules and run client 
 
-     Navigate to **client** folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+ Navigate to **client** folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
 
-    ```bash
-    cd client
-    npm install
-    ```
+```bash
+cd client
+npm install
+```
 
-    ```bash
-    npm start
-    ```
+```bash
+npm start
+```
     
 ### 4. Manually update the manifest.json
-    - **Edit** the `manifest.json` contained in the `Manifest` folder to replace your Base url wherever you see the place holder string `<<BASE-URL>>`. Also replace any random guid with the place holder `<<APP-ID>>`.
-    - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+- **Edit** the `manifest.json` contained in the `Manifest` folder to replace your Base url wherever you see the place holder string `<<BASE-URL>>`. Also replace any random guid with the place holder `<<APP-ID>>`.
+- **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
+- **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 
 
