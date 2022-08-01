@@ -38,6 +38,22 @@ This is a sample application where user can create, update, add or remove member
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
+## Run app locally
+
+### Register your application with Azure AD
+
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
+3. Navigate to **API Permissions**, and make sure to add the follow permissions:
+-   Select Add a permission
+-   Select Microsoft Graph -> Application permissions.
+   - `TeamworkTag.ReadWrite.All`
+
+-   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+4.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env file.
+
+
 ## To try this sample
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
@@ -59,19 +75,15 @@ This is a sample application where user can create, update, add or remove member
 
 ![Ngrok](GraphTeamsTag/Images/NgrokScreenshot.png)
 
-4. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
-   - `{{APP-ID}}` with any guid id value.
-   - `{{BASE-URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+### 4. Update appsettings.json
+Update configuration with the ```MicrosoftAppId```,  ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId```.
 
-5. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 6.
-
-6. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
-   - Go to Microsoft Teams and then go to side panel, select Apps
-   - Choose Manage your apps -> Upload an app -> Upload a custom App
-   - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
-   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
-
-**NOTE: If you are not able to send caption, try configuring tab again.**
+### 5. Modify the `manifest.json` in the `/AppPackage` folder 
+Replace the following details:
+- `{{APP-ID}}` with any guid id value.
+- `{{BASE-URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+- **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
+- **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 ## Features of this sample
 
@@ -82,3 +94,6 @@ This is a sample application where user can create, update, add or remove member
 3. User can create new team tags.
 ![Create new Tag](GraphTeamsTag/Images/CreateTagTaskModule.png)
 4. User can delete existing team tags.
+
+## Further reading
+- [teamworkTag resource type](https://docs.microsoft.com/en-us/graph/api/resources/teamworktag?view=graph-rest-beta)

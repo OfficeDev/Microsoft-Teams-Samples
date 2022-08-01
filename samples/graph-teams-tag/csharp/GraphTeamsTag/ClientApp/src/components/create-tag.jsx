@@ -88,8 +88,6 @@ const CreateTag = props => {
                     membersToBeDeleted: []
                 }
 
-                console.log("createTagDto", createTagDto);
-
                 var response = await axios.post(`api/teamtag/${context.team.groupId}`, createTagDto);
                 if (response.status === 201) {
                     microsoftTeams.dialog.submit("Created successfully!");

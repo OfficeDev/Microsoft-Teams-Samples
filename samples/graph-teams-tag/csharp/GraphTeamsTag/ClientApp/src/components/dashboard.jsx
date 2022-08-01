@@ -80,7 +80,6 @@ class Dashboard extends Component {
         var findSelectedTeamworkTag = updatedTagsList.find(tag => tag.id === tempSelectedTeamworkTag.id);
 
         if (findSelectedTeamworkTag) {
-            console.log("findSelectedTeamworkTag", findSelectedTeamworkTag);
             this.setState({ dashboardState: DashboardState.Edit, selectedTeamworkTag: findSelectedTeamworkTag });
         }
     }
