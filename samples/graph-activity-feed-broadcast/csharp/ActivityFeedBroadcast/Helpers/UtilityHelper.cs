@@ -17,13 +17,13 @@ namespace TabActivityFeed.Helpers
         /// </summary>
         /// <typeparam name="T">Type of source data.</typeparam>
         /// <param name="source">Source data.</param>
-        /// <param name="dop">Partition count.</param>
+        /// <param name="partitionCount">Partition count.</param>
         /// <param name="body">Function which process the data.</param>
         /// <returns></returns>
-        public static Task ForEachAsync<T>(IEnumerable<T> source, int dop, Func<T, Task> body)
+        public static Task ForEachAsync<T>(IEnumerable<T> source, int partitionCount, Func<T, Task> body)
         {
             return Task.WhenAll(
-                from partition in Partitioner.Create(source).GetPartitions(dop)
+                from partition in Partitioner.Create(source).GetPartitions(partitionCount)
                 select Task.Run(async delegate
                 {
                     using (partition)
@@ -46,17 +46,17 @@ namespace TabActivityFeed.Helpers
                 throw new ArgumentException("chunkSize must be greater than 0.");
             }
 
-            List<List<T>> retVal = new List<List<T>>();
+            List<List<T>> chunksList = new List<List<T>>();
             int index = 0;
             while (index < list.Count)
             {
                 int count = list.Count - index > chunkSize ? chunkSize : list.Count - index;
-                retVal.Add(list.GetRange(index, count));
+                chunksList.Add(list.GetRange(index, count));
 
                 index += chunkSize;
             }
 
-            return retVal;
+            return chunksList;
         }
     }
 }

@@ -29,6 +29,10 @@ namespace ActivityFeedBroadcast.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ConcurrentDictionary<string, List<BroadcastInfo>> _taskList;
 
+        const int recipientPartitionSize = 85;
+
+        const int partitionCount = 5;
+
         public HomeController(
             IConfiguration configuration,
             IHttpClientFactory httpClientFactory,
@@ -114,7 +118,7 @@ namespace ActivityFeedBroadcast.Controllers
                 var counter = 0;
                 var recipientsList = new List<Dictionary<string, string>>();
 
-                await UtilityHelper.ForEachAsync(usersList, 5, async users => {
+                await UtilityHelper.ForEachAsync(usersList, partitionCount, async users => {
                     try
                     {
                         var installedApp = await graphClient.Users[users.Id].Teamwork.InstalledApps
@@ -142,7 +146,7 @@ namespace ActivityFeedBroadcast.Controllers
                         counter++;
                         recipientsList.Add(new Dictionary<string, string>
                         {
-                            {"@odata.type", "microsoft.graph.aadUserNotificationRecipient" },
+                            {"@odata.type", "microsoft.graph.aadUserNotificationRecipient"},
                             {"userId", users.Id}
                         });
                     }
@@ -155,9 +159,9 @@ namespace ActivityFeedBroadcast.Controllers
                 var url = "https://teams.microsoft.com/l/entity/" + appId.ToList()[0] + "/broadcast?context={\"subEntityId\":\"" + taskInfo.taskId + "\"}";
                 var client = new HttpClient();
 
-                var recipientsChunks = UtilityHelper.SplitIntoChunks(recipientsList, 85);
+                var recipientsChunks = UtilityHelper.SplitIntoChunks(recipientsList, recipientPartitionSize);
 
-                foreach (var recipientChunk in recipientsChunks)
+                foreach (var recipientList in recipientsChunks)
                 {
                     var postData = new
                     {
@@ -180,7 +184,7 @@ namespace ActivityFeedBroadcast.Controllers
                                     Value = taskInfo.title
                                 }
                             },
-                        recipients = recipientChunk
+                        recipients = recipientList
                     };
 
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", taskInfo.access_token);
