@@ -16,7 +16,7 @@ const Configure = props => {
                 microsoftTeams.pages.config.setConfig({
                     entityID: "TeamworkTagsTab",
                     contentUrl: `${window.location.origin}/dashboard`,
-                    suggestedTabName: "Teams Tags Management",
+                    suggestedTabName: "Manage Team Tag",
                     websiteUrl: `${window.location.origin}/dashboard`,
                 });
 

@@ -1,12 +1,13 @@
-// <copyright file="view-tag.tsx" company="Microsoft Corporation">
+// <copyright file="view-or-edittag.tsx" company="Microsoft Corporation">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 // </copyright>
 
 import React, { useEffect, useState } from "react";
-import { Flex, FlexItem, ChevronStartIcon, Text, TrashCanIcon, Input, Button } from "@fluentui/react-northstar";
+import { Flex, FlexItem, ChevronStartIcon, Text, TextArea, TrashCanIcon, Input, Button, Loader } from "@fluentui/react-northstar";
 import * as microsoftTeams from "@microsoft/teams-js";
 import DashboardState from "../models/dashboard-state";
+import axios from "axios";
 
 // Display the tags information
 const ViewOrEditTag = props => {
@@ -14,33 +15,46 @@ const ViewOrEditTag = props => {
     const [membersToAdd, setMembersToAdd] = useState([]);
     const [membersToRemove, setMembersToRemove] = useState([]);
     const [editedTagName, setEditedTagName] = useState("");
+    const [editedDescription, setEditedDescription] = useState("");
     const [isNoteDisabled, setIsNoteDisabled] = useState(true);
+    const [teamId, setTeamId] = useState("");
+    const [isUpdateButtonLoading, setIsUpdateButtonLoading] = useState(false);
+    const [isMemberLoading, setIsMemberLoading] = useState(true);
 
     useEffect(() => {
-        microsoftTeams.app.initialize();
-        initializeData();
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then((context) => {
+                initializeData(context.team.groupId);
+                setTeamId(context.team.groupId);
+            });
+        })
     }, []);
 
-    const initializeData = () => {
-        setTeamworkTagMembers([{
-            "id": "MjQzMmI1N2ItMGFiZC00M2RiLWFhN2ItMTZlYWRkMTE1ZDM0IyNlYjY1M2Y5Mi04MzczLTRkZTYtYmZlYy01YjRkMjE2YjZhZGUjI2QzYjJiM2ViLMW0N2YtNDViOS05NWYyLWIyZjJlZjYyGHVjZQ==",
-            "displayName": "Adele Vance",
-            "userId": "64af9a58-8030-46fb-8388-c2417b8b252a"
-        },
-        {
-            "id": "MjQzMmI1N2ItMGFiZC00M2RiLWFhN2ItMTZlYWRkMTE1ZDM0IyNlYjY1M2Y5Mi04MzczLTRkZTYtYmZlYy01YjRkMjE2YjZhZGUjI2QzYjJiM2ViLMW0N2YtNDViOS05NWYyLWIyZjJlZjYyGHVjZQ==",
-            "displayName": "Diego Siciliani",
-            "userId": "298eb8ce-e0a6-4ba6-a6e9-461632ecb3fd"
-        }]);
-    }
+    // Gets the members of selected tags.
+    const initializeData = async (teamId) => {
+        setIsMemberLoading(true)
+        var response = await axios.get(`api/teamtag/${teamId}/tag/${props.teamworkTag.id}/members`)
 
-    const onDisplayNameUpdate = (updatedText) => {
-        if (updatedText.trim() !== "") {
-            setEditedTagName(updatedText);
-            setIsNoteDisabled(false);
+        if (response.status == 200) {
+            setTeamworkTagMembers(response.data);
         }
+
+        setIsMemberLoading(false);
     }
 
+    // Handler when display name is updated.
+    const onDisplayNameUpdate = (updatedText) => {
+        setEditedTagName(updatedText.trim());
+        setIsNoteDisabled(false);
+    }
+
+    // Handler when description is updated.
+    const onDescriptionUpdate = (updatedText) => {
+        setEditedDescription(updatedText.trim());
+        setIsNoteDisabled(false);
+    }
+
+    // Handler when user remove member.
     const onMemberRemove = (memberToRemove) => {
         var memberToRemoveIndex = temworkTagMembers.findIndex(member => member.userId === memberToRemove.userId);
         if (memberToRemoveIndex !== -1)  {
@@ -51,6 +65,7 @@ const ViewOrEditTag = props => {
         }
     }
 
+    // Handler when user selects to add new member.
     const onUpdateMembers = () => {
         let existingMembers = membersToAdd.map(member => member.userId);
         microsoftTeams.people.selectPeople({ setSelected: existingMembers }).then((peoples) => {
@@ -68,17 +83,39 @@ const ViewOrEditTag = props => {
                 if(temworkTagMembers.findIndex(member => member.userId === people.objectId) === -1)
                 {
                     members.push({
+                        id: "",
                         userId: people.objectId,
                         displayName: people.displayName
                     });
+
                     setIsNoteDisabled(false);
-                }                
+                }
             });
 
             setMembersToAdd(members);
         });
     }
 
+    // Handler when user click on update button.
+    const onUpdateButtonClick = async () => {
+        setIsUpdateButtonLoading(true);
+        var updateTagDto = {
+            id: props.teamworkTag.id,
+            displayName: editedTagName === "" ? props.teamworkTag.displayName : editedTagName,
+            description: editedDescription === "" ? props.teamworkTag.description : editedDescription,
+            MembersToBeAdded: membersToAdd,
+            MembersToBeDeleted: membersToRemove,
+        };
+
+        var response = await axios.patch(`api/teamtag/${teamId}/update`, updateTagDto);
+
+        if (response.status === 204) {
+            props.onTeamworkTagUpdate();
+        }
+        setIsUpdateButtonLoading(false);
+    }
+
+    // Checks if the same member is in both top be added and to be deleted list, if true then removes it.
     const commonAddedRemovedMemberUpdate = (memberToUpdate, isMemberFromAddedList) => {
         if (isMemberFromAddedList) {
             let tempMemberToAddList = [...membersToAdd]
@@ -98,6 +135,7 @@ const ViewOrEditTag = props => {
         }
     }
 
+    // Render members of tag.
     const renderTeamworkTagMemberList = () => {
         var elements = [];
         temworkTagMembers.map((teamworkTagMember, index) => {
@@ -118,10 +156,11 @@ const ViewOrEditTag = props => {
                     <Button content="Select members to add" text onClick={onUpdateMembers} />
                 </FlexItem>}
             </Flex>
-            {elements}
+            {isMemberLoading ? <Loader />: elements}
         </div>);
     }
 
+    // Render members to add list.
     const renderMembersToAddList = () => {
         var elements = [];
         membersToAdd.map((teamworkTagMember, index) => {
@@ -147,6 +186,7 @@ const ViewOrEditTag = props => {
         return <></>;
     }
 
+    // Render members to removed list.
     const renderMembersToRemoveList = () => {
         var elements = [];
         membersToRemove.map((teamworkTagMember, index) => {
@@ -172,27 +212,46 @@ const ViewOrEditTag = props => {
         return <></>;
     }
 
+    // Render tag information.
     const renderTagInformation = () => {
         return (<Flex column gap="gap.medium">
             <Flex gap="gap.small" vAlign="center">
-                <Text content={`Tag display name:`} weight="semibold" />
+                <Text className={props.dashboardState === DashboardState.View ? "text-fields-label" : "input-fields-label"} content={`Tag display name:`} weight="semibold" />
                 {
                     props.dashboardState === DashboardState.View ?
                         <Text content={props.teamworkTag.displayName} /> :
-                        <Input defaultValue={props.teamworkTag.displayName} onChange={(event, data) => { onDisplayNameUpdate(data.value) }} />
+                        <Input fluid defaultValue={props.teamworkTag.displayName} onChange={(event, data) => { onDisplayNameUpdate(data.value) }} />
                 }
             </Flex>
 
             <Flex gap="gap.small" vAlign="center">
-                <Text content={`Tag desciption:`} weight="semibold" />
-                <Text content={props.teamworkTag.description} />
+                <Text className={props.dashboardState === DashboardState.View ? "text-fields-label" : "input-fields-label"} content={`Tag description:`} weight="semibold" />
+                {
+                    props.dashboardState === DashboardState.View ?
+                        <Text content={props.teamworkTag.description} /> :
+                        <TextArea fluid className="input-fields" defaultValue={props.teamworkTag.description} onChange={(event, data) => { onDescriptionUpdate(data.value) }} />
+                }
             </Flex>
 
             <Flex gap="gap.small" vAlign="center">
                 <Text content={`Tag members count:`} weight="semibold" />
-                <Text content={props.teamworkTag.memberCount} />
+                <Text content={props.teamworkTag.membersCount} />
             </Flex>
         </Flex>);
+    }
+
+    const renderBasedOnLoadingState = () => {
+        var elements = [];
+        if (props.isLoading) {
+            return <Loader />
+        }
+        else {
+            elements.push(renderTeamworkTagMemberList());
+            elements.push(renderMembersToAddList());
+            elements.push(renderMembersToRemoveList());
+
+            return elements;
+        }
     }
 
     return (
@@ -203,17 +262,15 @@ const ViewOrEditTag = props => {
             </Flex>
             <Text temporary content="(*To update any field make sure to click on update button)" />
             {renderTagInformation()}
-            
-            {renderTeamworkTagMemberList()}
-            {renderMembersToAddList()}
-            {renderMembersToRemoveList()}
+
+            {renderBasedOnLoadingState()}
 
             {props.dashboardState === DashboardState.Edit && <Flex>
                 <FlexItem push>
                     <div>
                         {!isNoteDisabled && <Flex gap="gap.medium">
                             <Text content='Click on "Update" button to update the fields.' temporary error />
-                            <Button content="Update" primary />
+                            <Button content="Update" primary disabled={isUpdateButtonLoading} isUpdateButtonLoading={isUpdateButtonLoading} onClick={onUpdateButtonClick} />
                         </Flex>}
                     </div>
                 </FlexItem>

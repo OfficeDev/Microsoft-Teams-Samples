@@ -1,14 +1,16 @@
-// <copyright file="configure.tsx" company="Microsoft Corporation">
+// <copyright file="dashboard.jsx" company="Microsoft Corporation">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 // </copyright>
 
 import React, { Component } from "react";
-import { Text, Flex, FlexItem, Button, TrashCanIcon, EditIcon, EyeFriendlierIcon } from "@fluentui/react-northstar";
+import { Text, Flex, FlexItem, Button, TrashCanIcon, EditIcon, EyeFriendlierIcon, Loader } from "@fluentui/react-northstar";
 import * as microsoftTeams from "@microsoft/teams-js";
-import "../style/style.css";
+import axios from "axios";
 import ViewOrEditTag from "./view-or-edit-tag";
 import DashboardState from "../models/dashboard-state";
+
+import "../style/style.css";
 
 // Dashboard where user can manage the tags
 class Dashboard extends Component {
@@ -18,38 +20,36 @@ class Dashboard extends Component {
         this.state = {
             teamworkTags: [],
             dashboardState: DashboardState.Default,
-            selectedTeamworkTag: {}
+            selectedTeamworkTag: {},
+            teamsContext: {},
+            isLoading: true
         }
     }
 
     componentDidMount() {
-        microsoftTeams.app.initialize();
-        this.initializeData();
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then((context) => {
+                this.setState({ teamsContext: context });
+                this.initializeData(context.team.groupId);
+            })
+        });
     }
 
-    initializeData = async () => {
-        this.setState({
-            teamworkTags: [
-                {
-                    "id": "MjQzMmI1N2ItMGFiZC00M2RiLWFhN2ItMTZlYWRkMTE1ZDM0IyM3ZDg4M2Q4Yi1hMTc5LTRkZDctOTNiMy1hOGQzZGUxYTIxMmUjI3RhY29VSjN2RGk==",
-                    "teamId": "53c53217-fe77-4383-bc5a-ed4937a1aecd",
-                    "displayName": "Finance",
-                    "description": "Finance Team for Mach 8 Project",
-                    "memberCount": 2,
-                    "tagType": "standard"
-                },
-                {
-                    "id": "MjQzMmI1N2ItMGFiZC00M2RiLWFhN2ItMTZlYWRkMTE1ZDM0IyNlYjY1M2Y5Mi04MzczLTRkZTYtYmZlYy01YjRkMjE2YjZhZGUjIzk3ZjYyMzQ0LTU3ZGMtNDA5Yy04OGFkLWM0YWYxNDE1OGZmNQ==",
-                    "teamId": "53c53217-fe77-4383-bc5a-ed4937a1aecd",
-                    "displayName": "Legal",
-                    "description": "Legal experts, ask us your legal questions",
-                    "memberCount": 4,
-                    "tagType": "standard"
-                }
-            ]
-        })
+    /**
+     * Initialize the the list of tags.
+     * @param {any} teamId Id of team.
+     */
+    initializeData = async (teamId) => {
+        this.setState({ isLoading: true });
+        var response = await axios.get(`/api/teamtag/${teamId}/list`);
+
+        if (response.status === 200) {
+            this.setState({ teamworkTags: response.data, isLoading: false });
+            return response.data;
+        }
     }
 
+    // Handler when user click on create new tag button.
     onCreateNewTagClick = () => {
         microsoftTeams.dialog.open({
             title: "Create new Tag",
@@ -58,18 +58,43 @@ class Dashboard extends Component {
                 height: 450,
                 width: 500,
             }
-        }, (result) => {
-            console.log(result);
+        }, (dialogResponse) => {
+            if (dialogResponse.result) {
+                this.setState({
+                    dashboardState: DashboardState.Default,
+                    selectedTeamworkTag: {}
+                });
+
+                this.initializeData(this.state.teamsContext.team.groupId);
+            }
         });
     }
 
+    // Handler when tag is updated.
+    onTeamworkTagUpdate = async () => {
+        let tempSelectedTeamworkTag = this.state.selectedTeamworkTag;
+        this.setState({ dashboardState: DashboardState.Default, selectedTeamworkTag: {} });
+
+        var updatedTagsList = await this.initializeData(this.state.teamsContext.team.groupId);
+
+        var findSelectedTeamworkTag = updatedTagsList.find(tag => tag.id === tempSelectedTeamworkTag.id);
+
+        if (findSelectedTeamworkTag) {
+            console.log("findSelectedTeamworkTag", findSelectedTeamworkTag);
+            this.setState({ dashboardState: DashboardState.Edit, selectedTeamworkTag: findSelectedTeamworkTag });
+        }
+    }
+
+    // Handler when user clicks on back icon.
     onBackClick = () => {
         this.setState({
             dashboardState: DashboardState.Default,
             selectedTeamworkTag: {}
         });
+        this.initializeData(this.state.teamsContext.team.groupId);
     }
 
+    // Handler when user clicks on view icon.
     onViewClick = (teamworkTag) => {
         this.setState({
             dashboardState: DashboardState.View,
@@ -77,6 +102,7 @@ class Dashboard extends Component {
         });
     }
 
+    // Handler when user clicks on edit icon.
     onEditClick = (teamworkTag) => {
         this.setState({
             dashboardState: DashboardState.Edit,
@@ -84,13 +110,25 @@ class Dashboard extends Component {
         });
     }
 
+    // Handler when user clicks on delete icon.
+    onDeleteTagClick = async (teamworkTag) => {
+        this.setState({ isLoading: true });
+        var response = await axios.delete(`api/teamtag/${this.state.teamsContext.team.groupId}/tag/${teamworkTag.id}`);
+
+        if (response.status === 204) {
+            await this.initializeData(this.state.teamsContext.team.groupId);
+        }
+        this.setState({ isLoading: false });
+    }
+
+    // Renders the elements based on dashboard state.
     renderBasedOnDashboardState = () => {
         switch (this.state.dashboardState) {
             case DashboardState.View:
-                return <ViewOrEditTag onBackClick={this.onBackClick} teamworkTag={this.state.selectedTeamworkTag} dashboardState={DashboardState.View} />
+                return <ViewOrEditTag isLoading={this.state.isLoading} onBackClick={this.onBackClick} teamworkTag={this.state.selectedTeamworkTag} dashboardState={DashboardState.View} onTeamworkTagUpdate={this.onTeamworkTagUpdate} />
                 break;
             case DashboardState.Edit:
-                return <ViewOrEditTag onBackClick={this.onBackClick} teamworkTag={this.state.selectedTeamworkTag} dashboardState={DashboardState.Edit} />
+                return <ViewOrEditTag isLoading={this.state.isLoading} onBackClick={this.onBackClick} teamworkTag={this.state.selectedTeamworkTag} dashboardState={DashboardState.Edit} onTeamworkTagUpdate={this.onTeamworkTagUpdate} />
                 break;
             default:
                 return (<Flex column>
@@ -100,6 +138,7 @@ class Dashboard extends Component {
         }
     }
 
+    // Renders list of tags available for current team.
     renderTeamworkTagList = () => {
         var elements = [];
         this.state.teamworkTags.map((teamworkTag, index) => {
@@ -112,14 +151,14 @@ class Dashboard extends Component {
                 </Flex.Item>
 
                 <Flex.Item size="size.quarter">
-                    <Text content={`Members count: ${teamworkTag.memberCount}`} />
+                    <Text content={`Members count: ${teamworkTag.membersCount}`} />
                 </Flex.Item>
 
                 <Flex.Item size="size.quarter">
                     <Flex gap="gap.large">
                         <EyeFriendlierIcon className="manage-icons" onClick={() => { this.onViewClick(teamworkTag) }} />
                         <EditIcon className="manage-icons"  onClick={() => { this.onEditClick(teamworkTag) }}/>
-                        <TrashCanIcon className="manage-icons" />
+                        <TrashCanIcon className="manage-icons" onClick={() => { this.onDeleteTagClick(teamworkTag) } }/>
                     </Flex>
                 </Flex.Item>
             </Flex>);
@@ -131,13 +170,13 @@ class Dashboard extends Component {
     render() {
         return (<Flex className="container" column >
             <Flex vAlign="center"   >
-                <Text content="Team Tag Management" size="larger" weight="semibold" />
+                <Text content="Manage Teams Tag" size="larger" weight="semibold" />
                 <FlexItem push>
                     <Button primary content="Create new Tag" onClick={this.onCreateNewTagClick}/>
                 </FlexItem>
             </Flex>
 
-            {this.renderBasedOnDashboardState()}
+            {this.state.isLoading ? <Loader /> : this.renderBasedOnDashboardState()}
         </Flex>)
     }
 }

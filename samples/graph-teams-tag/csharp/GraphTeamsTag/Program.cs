@@ -1,4 +1,5 @@
 using GraphTeamsTag;
+using GraphTeamsTag.Helper;
 using GraphTeamsTag.Models.Configuration;
 using GraphTeamsTag.Provider;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -6,9 +7,12 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllers();
 
 builder.Services.AddTransient<SimpleBetaGraphClient>();
+
+// Helpet
+builder.Services.AddTransient<GraphHelper>();
 
 // Adds application configuration settings to specified IServiceCollection.
 builder.Services.AddOptions<AzureSettings>()
@@ -32,14 +36,9 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-name: "default",
-pattern: "{controller}/{action=Index}/{id?}");
-
-// In production, the React files will be served from this directory
-builder.Services.AddSpaStaticFiles(configuration =>
+app.UseEndpoints(endpoints =>
 {
-    configuration.RootPath = "ClientApp/build";
+    endpoints.MapControllers();
 });
 
 app.UseSpa(spa =>

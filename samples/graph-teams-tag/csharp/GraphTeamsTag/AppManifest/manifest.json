@@ -15,12 +15,12 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "Teams Tag Management",
-    "full": "Teams Tag Management"
+    "short": "Manage Team Tags",
+    "full": "Manage Team Tags"
   },
   "description": {
     "short": "This example can be used to manage Teams team tags.",
-    "full": "This example can be used to manage Teams team tags. You can create, update, add members or remove them, all of CRUD operations related to tags can be performed with this sample."
+    "full": "This example can be used to manage Teams team tags. You can create, update, add or remove members. All of Graph CRUD operations related to tags can be performed within this sample."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [
