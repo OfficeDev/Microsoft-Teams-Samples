@@ -9,6 +9,7 @@ import CaptureImage from './CaptureImage';
 import CaptureImageDesktop from './CaptureImageDesktop';
 import PeoplePicker from './PeoplePicker';
 import CaptureAudio from './CaptureAudio';
+import CaptureVideo from './CaptureVideo';
 import CaptureAudioDesktop from './CaptureAudioDesktop';
 import CaptureVideoDesktop from './CaptureVideoDesktop';
 import GetLocationDesktop from './GetLocationDesktop';
@@ -47,6 +48,10 @@ const Tab = () => {
           <Segment
             /* Component to capture audio */
             content={<CaptureAudio />}
+          />
+          <Segment
+            /* Component to capture video */
+            content={<CaptureVideo />}
           />
           <Segment
             /* Component to scan barcode */

@@ -16,6 +16,11 @@ extensions:
 
 The Meeting Token Generator app is a sample Microsoft Teams app that extends meetings in Teams.
 Through this app, meeting participants can request a "token", which is generated sequentially so that each participant has a fair opportunity to interact. This can be useful in situations like scrum meetings, Q&A sessions, etc.
+This application also shows the implementation of Live Share SDK to update the data in real-time for all participants in meeting.
+
+- [Live-share-sdk-overview](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-live-share-overview)
+
+**NOTE: This capability is currently available in developer preview only.**
 
 ### Key features
  - Display the current token that is being serviced in the meeting
@@ -107,7 +112,12 @@ The app uses the Teams extensibility features described on the following pages:
   
   This generates the dist folder inside the app where the assets will generated/copied. The server will serve the static files from this location.
 
-### Step 4: Build and run the service
+### Step 4: Inside ClientApp folder execute the below command.
+    ```bash
+    # npx @fluidframework/azure-local-service@latest
+    ```
+
+### Step 5: Build and run the service
 You can build and run the project from the command line or an IDE:
 
 A) From a command line:

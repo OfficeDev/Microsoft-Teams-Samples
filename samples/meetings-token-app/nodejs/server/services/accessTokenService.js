@@ -47,6 +47,9 @@ getAccessToken = async(req)=> {
               resolve(json.access_token);
             });
           }
+        })
+        .catch((ex) => {
+          console.log(ex);
         });
     })
         
