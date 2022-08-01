@@ -9,6 +9,8 @@ const { SimpleGraphClient } = require('./simpleGraphClient');
 var delegatedToken = "";
 var applicationToken = "";
 var localdata = [];
+var recipientPartitionSize = 85;
+
 app.use(express.static(path.join(__dirname, 'static')));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
@@ -110,8 +112,10 @@ app.post('/SendNotificationToOrganisation', async (req, res) => {
 
   if (userList.value) {
     await forEachAsync(userList.value, async (users) => {
-      try {
+      try 
+      {
         let appList = await client.getInstalledAppsForUser(users.id);
+
         if (appList) {
           let userAppId = getAppId(appList);
           if (userAppId == undefined) {
@@ -129,11 +133,13 @@ app.post('/SendNotificationToOrganisation', async (req, res) => {
       }
     });
 
-    var recipientsChunks = splitIntoChunks(recipientsList, 85);
+    var recipientsChunks = splitIntoChunks(recipientsList, recipientPartitionSize);
 
-    for (let recipientChunk of recipientsChunks) {
+    for (let recipientChunk of recipientsChunks) 
+    {
       var encodedContext = encodeURI('{"subEntityId": ' + req.body.id + '}');
-      let postData = {
+      let postData = 
+      {
         "topic": {
           "source": "text",
           "value": req.body.title,
