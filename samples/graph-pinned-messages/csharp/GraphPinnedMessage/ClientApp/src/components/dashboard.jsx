@@ -9,7 +9,6 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import axios from "axios";
 import "../style/style.css";
 
-
 var accessToken;
 
 // Dashboard where user can manage the pinned message
@@ -75,7 +74,6 @@ class Dashboard extends Component {
             console.log("error is" , error);
         });
     }
-
 
     // Method to handle radio button change event.
     handleMessageRadioChange = async (e, props) => {

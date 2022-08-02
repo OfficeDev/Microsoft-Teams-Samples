@@ -62,9 +62,9 @@ namespace GraphPinnedMessage.Controllers
                     Messages = topMessages
                 };
 
-                var jsonString = JsonConvert.SerializeObject(MessageData);
+                var responseMessageData = JsonConvert.SerializeObject(MessageData);
 
-                return this.Ok(jsonString);
+                return this.Ok(responseMessageData);
             }
             catch (Exception e)
             {

@@ -6,6 +6,7 @@ namespace GraphPinnedMessage
 {
     public class SimpleGraphClient
     {
+        // Get graph client based on access token.
         public static GraphServiceClient GetGraphClient(string accessToken)
         {
             var graphClient = new GraphServiceClient(new DelegateAuthenticationProvider((requestMessage) =>
@@ -20,6 +21,7 @@ namespace GraphPinnedMessage
             return graphClient;
         }
 
+        // Get graph client based on application configuration.
         public static GraphServiceClient GetGraphClientforApp(string appId, string appPassword, string tenantId)
         {
             var graphClient = new GraphServiceClient(new DelegateAuthenticationProvider((requestMessage) =>
@@ -37,6 +39,8 @@ namespace GraphPinnedMessage
             return graphClient;
         }
 
+
+        // Get the access token based on application configuration.
         private static async Task<string> GetAccessToken(string appId, string appPassword, string tenantId)
         {
             IConfidentialClientApplication app = ConfidentialClientApplicationBuilder.Create(appId)
