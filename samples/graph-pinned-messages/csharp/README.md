@@ -19,15 +19,15 @@ This is an sample application which displays all the pinned messages in group ch
 
 1. Pin new message in chat.
 
-![Create new tag](GraphPinnedMessage/Images/pin-message.png)
+![Pin new message](GraphPinnedMessage/Images/PinMessage.PNG)
 
 2. The pinned message will be shown in tab.
 
-![View/Edit tag](GraphPinnedMessage/Images/tab.png)
+![Tab view](GraphPinnedMessage/Images/tab.png)
 
 2. You can select different message from the list of messages. The message will be pinned in chat.
 
-![View/Edit tag](GraphPinnedMessage/Images/new-message.png)
+![Pinned message in chat](GraphPinnedMessage/Images/NewMessage.png)
 
 
 ## Prerequisites
