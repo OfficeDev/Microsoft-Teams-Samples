@@ -19,15 +19,15 @@ This is an sample application which displays all the pinned messages in group ch
 
 1. Pin new message in chat.
 
-![Create new tag](GraphTeamsTag/Images/pin-message.png)
+![Create new tag](GraphPinnedMessage/Images/pin-message.png)
 
 2. The pinned message will be shown in tab.
 
-![View/Edit tag](GraphTeamsTag/Images/tab.png)
+![View/Edit tag](GraphPinnedMessage/Images/tab.png)
 
 2. You can select different message from the list of messages. The message will be pinned in chat.
 
-![View/Edit tag](GraphTeamsTag/Images/new-message.png)
+![View/Edit tag](GraphPinnedMessage/Images/new-message.png)
 
 
 ## Prerequisites
@@ -40,8 +40,6 @@ This is an sample application which displays all the pinned messages in group ch
     ```
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
-
-## Run app locally
 
 ### Register your Teams Auth SSO with Azure AD
 
@@ -123,14 +121,14 @@ Replace the following details:
 
 1. Pin new message in chat.
 
-![Create new tag](GraphTeamsTag/Images/pin-message.png)
+![Create new tag](GraphPinnedMessage/Images/pin-message.png)
 
 2. The pinned message will be shown in tab.
 
-![View/Edit tag](GraphTeamsTag/Images/tab.png)
+![View/Edit tag](GraphPinnedMessage/Images/tab.png)
 
 2. You can select different message from the list of messages. The message will be pinned in chat.
 
-![View/Edit tag](GraphTeamsTag/Images/new-message.png)
+![View/Edit tag](GraphPinnedMessage/Images/new-message.png)
 ## Further reading
 - [teamworkTag resource type](https://docs.microsoft.com/en-us/graph/api/chat-post-pinnedmessages?view=graph-rest-beta&tabs=csharp)
