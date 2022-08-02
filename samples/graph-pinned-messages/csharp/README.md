@@ -132,4 +132,4 @@ Replace the following details:
 ![View/Edit tag](GraphPinnedMessage/Images/NewMessage.png)
 
 ## Further reading
-- [teamworkTag resource type](https://docs.microsoft.com/en-us/graph/api/chat-post-pinnedmessages?view=graph-rest-beta&tabs=csharp)
+- [Pinned message resource type](https://docs.microsoft.com/en-us/graph/api/chat-post-pinnedmessages?view=graph-rest-beta&tabs=csharp)
