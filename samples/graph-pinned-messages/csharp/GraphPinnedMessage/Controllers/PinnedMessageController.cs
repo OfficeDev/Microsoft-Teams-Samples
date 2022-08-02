@@ -30,7 +30,7 @@ namespace GraphPinnedMessage.Controllers
         /// <returns>Returns Pinned message details</returns>
 
         [HttpGet("getGraphAccessToken")]
-        public async Task<JsonResult> GetUserAccessToken([FromQuery]string ssoToken, string chatId)
+        public async Task<ActionResult> GetUserAccessToken([FromQuery]string ssoToken, string chatId)
         {
             try
             {
@@ -64,11 +64,29 @@ namespace GraphPinnedMessage.Controllers
 
                 var jsonString = JsonConvert.SerializeObject(MessageData);
 
-                return Json(jsonString);
+                return this.Ok(jsonString);
             }
             catch (Exception e)
             {
-                return null;
+                return this.NotFound();
+            }
+        }
+
+        [HttpGet("unpinMessage")]
+        public async Task<string> UnpinMessage([FromQuery] string ssoToken, string chatId, string pinnedMessageId)
+        {
+            try
+            {
+                var token = await SSOAuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor, ssoToken);
+                var graphClient = SimpleGraphClient.GetGraphClient(token);
+
+                await graphClient.Chats[chatId].PinnedMessages[pinnedMessageId].Request().DeleteAsync();
+
+                return "Unpinned Successfully";
+            }
+            catch (Exception e)
+            {
+                return "Error occured";
             }
         }
 
@@ -76,7 +94,7 @@ namespace GraphPinnedMessage.Controllers
         /// Method to pin new message in chat.
         /// </summary>
         /// <returns>Returns Pinned message details</returns>
-    
+
         [HttpGet("pinMessage")]
         public async Task<string> PinMessage([FromQuery] string ssoToken, string chatId, string messageId)
         {

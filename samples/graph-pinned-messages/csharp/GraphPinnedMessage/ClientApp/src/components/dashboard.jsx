@@ -4,7 +4,7 @@
 // </copyright>
 
 import React, { Component } from "react";
-import { Text, Flex, FlexItem, RadioGroup, Button } from "@fluentui/react-northstar";
+import { Text, Flex, FlexItem, RadioGroup, Button, TrashCanIcon } from "@fluentui/react-northstar";
 import * as microsoftTeams from "@microsoft/teams-js";
 import axios from "axios";
 import "../style/style.css";
@@ -18,6 +18,7 @@ class Dashboard extends Component {
         super(props);
 
         this.state = {
+            isError: false,
             context: undefined,
             messageList: [],
             newMessageId: "",
@@ -58,13 +59,20 @@ class Dashboard extends Component {
     // Exchange client token with server token and fetch the pinned message details.
     exchangeClientTokenForServerToken = async (token) => {
         console.log(this.state.context);
-        var response = await axios.get(`/api/chat/getGraphAccessToken?ssoToken=${token}&chatId=${this.state.context.chat.id}`);
-        console.log(response);
-        var responseMessageData = JSON.parse(response.data);
-        this.setState({
-            pinnedMessageId: responseMessageData.Id,
-            pinnedMessage: responseMessageData.Message,
-            messageList: responseMessageData.Messages
+        axios.get(`/api/chat/getGraphAccessToken?ssoToken=${token}&chatId=${this.state.context.chat.id}`).then((response) => {
+            var responseMessageData = response.data;
+
+            this.setState({
+                pinnedMessageId: responseMessageData.Id,
+                pinnedMessage: responseMessageData.Message,
+                messageList: responseMessageData.Messages
+            });
+
+        }).catch((error) => {
+            this.setState({
+                isError: true
+            });
+            console.log("error is" , error);
         });
     }
 
@@ -75,11 +83,17 @@ class Dashboard extends Component {
         this.setState({ newMessageId: props.value });
     }
 
+    // Method to unpin the pinned message.
+    deletePinnedMessage = async () => {
+        var pinnedMessageId = this.state.pinnedMessageId;
+        var response = await axios.get(`/api/chat/unpinMessage?ssoToken=${accessToken}&chatId=${this.state.context.chat.id}&pinnedMessageId=${pinnedMessageId}`)
+    }
+
     // Api call to pin message into chat.
     pinNewMessage = async () => {
+        this.setState({ isError: false });
         var messageId = this.state.newMessageId;
         var response = await axios.get(`/api/chat/pinMessage?ssoToken=${accessToken}&chatId=${this.state.context.chat.id}&messageId=${messageId}`);
-        console.log(response);
         window.location.reload();
     }
 
@@ -99,13 +113,16 @@ class Dashboard extends Component {
 
     render() {
         return (<Flex className="container" column >
-            <Flex vAlign="center"   >
+            <Flex vAlign="center">
                 <Text content="Graph Pinned Message" size="largest" weight="semibold" />
             </Flex>
             <Flex><Text styles={{ marginTop: "1rem" }} weight="semibold" size="large" content="Below message is pinned in chat. Click on the delete icon to unpin the message." /></Flex>
-            <Flex>
-                <Text styles={{ marginTop: "1rem" }} content={`${this.state.pinnedMessage}`} />
-            </Flex>
+            {!this.state.isError ? <Flex>
+                <Flex.Item><Text styles={{ marginTop: "1rem" }} content={`${this.state.pinnedMessage}`} /></Flex.Item>
+                <Flex.Item size="size.quarter">
+                    <TrashCanIcon styles={{ marginTop: "1rem" }} className="manage-icons" onClick={this.deletePinnedMessage} />
+                </Flex.Item>
+            </Flex>: <Flex><Text content="Please pin a message in chat" /></Flex>}
             <Flex><Text styles={{ marginTop: "1rem" }} weight="semibold" size="large" content="You can also pin message from below message list. Select any message and click on Pin new message button." /></Flex>
             <RadioGroup
                 className="container-medium"
