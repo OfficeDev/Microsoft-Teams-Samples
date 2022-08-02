@@ -6,9 +6,9 @@
   "packageName": "com.microsoft.teams.extension",
   "developer": {
     "name": "Teams App, Inc.",
-    "websiteUrl": "https://{TODO: hosted domain}",
-    "privacyUrl": "https://{TODO: hosted domain}/privacy",
-    "termsOfUseUrl": "https://{TODO: hosted domain}/termsofuse"
+    "websiteUrl": "https://<<REACT_APP_BASE_URL>>",
+    "privacyUrl": "https://<<REACT_APP_BASE_URL>>/privacy",
+    "termsOfUseUrl": "https://<<REACT_APP_BASE_URL>>/termsofuse"
   },
   "icons": {
     "color": "color.png",
@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://{TODO: hosted domain}/config",
+      "configurationUrl": "https://<<REACT_APP_BASE_URL>>/config",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -38,10 +38,10 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{TODO: hosted domain}"
+    "<<REACT_APP_BASE_URL>>"
   ],
   "webApplicationInfo": {
-    "id": "d5d4e723-3b12-4d66-8434-efb13eb9bd1c",
-    "resource": "api://{TODO: hosted domain}/d5d4e723-3b12-4d66-8434-efb13eb9bd1c"
+    "id": "<<REACT_APP_AZURE_APP_REGISTRATION_ID>>",
+    "resource": "api://<<REACT_APP_BASE_URL>>/<<REACT_APP_AZURE_APP_REGISTRATION_ID>>"
   }
 }

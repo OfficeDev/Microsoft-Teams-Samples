@@ -26,15 +26,46 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
 ## Prerequisites
 -  [NodeJS](https://nodejs.org/en/)
 
+-  [ngrok](https://ngrok.com/)
+
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
+## ngrok
+
+Teams needs to access your tab from a publically accessible URL. If you are running your app in localhost, you will need to use a tunneling service like ngrok. Run ngrok and point it to localhost.
+  `ngrok http -host-header=rewrite 3000`
+
+## Set up the client .env with the following keys:
+    - `"REACT_APP_AZURE_APP_REGISTRATION_ID"` : Application ID of the Azure AD application
+    - `"REACT_APP_BASE_URL"` : Ngrok URL you get after running the ngrok command.
+
+## Set up the api-server .env with the following keys:
+Go to the folder api-server and update following values in .env files
+
+    - `"CLIENT_ID"` : Application ID of the Azure AD application
+    - `"CLIENT_SECRET"` : Application secret of the Azure AD application
+
 ## Build and Run
+You can build and run the project from the command line or an IDE:
 
-In the project directory, execute:
+1. Navigate to the Project root folder
+2. Build Client
+    - Open terminal
+    - Install pacakge with npm install
+    - npm run build
+3. Run Client
+    - Open new terminal
+    - npm start
+    - The client will start running on 3000 port
+4. Run Server
+    - Open new terminal
+    - Change directory to `api-server` folder with command i.e. `cd api-server`
+    - Install pacakge with npm install
+    - npm start
+    - The server will start running on 5000 port
+5. Update the manifest's `<<REACT_APP_AZURE_APP_REGISTRATION_ID>>` & `<<REACT_APP_BASE_URL>>` with their repective values and zip it under appPackage folder
+6. Now your application is running and ready to upload
 
-`npm install`
-
-`npm start`
 
 ## Deploy to Teams
 Start debugging the project by hitting the `F5` key or click the debug icon in Visual Studio Code and click the `Start Debugging` green arrow button.
