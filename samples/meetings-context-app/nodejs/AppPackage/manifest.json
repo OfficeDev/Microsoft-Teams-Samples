@@ -1,62 +1,40 @@
-{
+﻿{
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
  "manifestVersion": "1.12",
   "version": "1.0.0",
-  "id": "{{Manifest-id}}",
-  "packageName": "com.teams.meetingtabcontext",
+  "id": "{{Microsoft-App-Id}}",
+  "packageName": "com.microsoft.teams.botrequestapproval",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
-    "privacyUrl": "https://www.teams.com/privacy",
-    "termsOfUseUrl": "https://www.teams.com/termsofuser"
-  },
-  "icons": {
-    "color": "color.png",
-    "outline": "outline.png"
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Meeting Tab Context",
-    "full": "This sample shows the contents of a tab context object in a meeting tab."
+    "short": "Bot request approval",
+    "full": "User can send task request to his manager using bot"
   },
   "description": {
-    "short": "Tab context for meeting tab.",
-    "full": "This sample shows the contents of a tab context object in a meeting tab."
+    "short": "Bot request approval",
+    "full": "This sample shows feature where user can send task request to his manager and manager can approve/reject request."
   },
-  "accentColor": "#5558AF",
-  "configurableTabs": [
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#60A18E",
+  "bots": [
     {
-      "configurationUrl": "https://{{Domain Name}}/configure",
-      "canUpdateConfiguration": true,
+      "botId": "{{Microsoft-App-Id}}",
+      "needsChannelSelector": false,
       "scopes": [
-        "team",
         "groupchat"
       ],
-      "context": [
-        "meetingChatTab",
-        "meetingDetailsTab"
-      ]
+      "isNotificationOnly": false
     }
   ],
-  "permissions": [
-    "identity",
-    "messageTeamMembers"
-  ],
+  "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "*.ngrok.io",
-    "<<Domain Name>>"
-  ],
-    "webApplicationInfo": {
-    "id": "<<App id>>",
-    "resource": "https://RscBasedStoreApp"
-    },
-	"authorization": {
-    "permissions": {
-      "resourceSpecific": [
-        {
-          "name": "OnlineMeeting.ReadBasic.Chat",
-          "type": "Delegated"
-        }
-      ]
-    }
-  }
+    "{{domain-name}}"
+  ]
 }
