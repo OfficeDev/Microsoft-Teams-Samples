@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows the contents of meeeting tab context object in a meeting tab and meeting context details where user can see the details of participants and meeting via bot.
+description: This sample shows the contents of meeting tab context object in a meeting tab and using bot's meeting API, meeting participant details and meeting details is sent to user.
 products:
 - office-teams
 - office
@@ -14,7 +14,7 @@ createdDate: "01-07-2022 17:00:25"
 
 # Meeting context
 
-This sample shows the contents of meeeting tab context object in a meeting tab and shows the output of Meeting's API `TeamsInfo.getMeetingParticipant` and `TeamsInfo.getMeetingInfo` using bot commands.
+This sample shows the contents of meeting tab context object in a meeting tab and shows the output of Meeting's API `TeamsInfo.getMeetingParticipant` and `TeamsInfo.getMeetingInfo` using bot commands.
 
 ![meeting tab context](Images/meetingTabContext.png)
 ![Meeting context](Images/MeetingContext.png)

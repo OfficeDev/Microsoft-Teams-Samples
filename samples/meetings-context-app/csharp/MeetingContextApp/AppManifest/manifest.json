@@ -20,7 +20,7 @@
   },
   "description": {
     "short": "Tab and bot context for meeting.",
-    "full": "This sample shows the contents of a meeting context object in a meeting tab and using bot API."
+    "full": "This sample shows the contents of meeting tab context object in a meeting tab and using bot's meeting API, meeting participant details and meeting details is sent to user."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [

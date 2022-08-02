@@ -54,17 +54,18 @@ class TeamsBot extends TeamsActivityHandler {
         let formattedString = "";
         Object.keys(obj).forEach((key) => {
             var block = `<b>${key}:</b> <br>`;
-            var temp = "";
-            // obj[key] === obj.key
+            var storeTemporaryFormattedString = "";
+
             if (typeof (obj[key]) === 'object') {
-                var tempObj = obj[key];
                 Object.keys(obj[key]).forEach((secondKey) => {
-                    temp += ` <b> &nbsp;&nbsp;${secondKey}:</b> ${tempObj[secondKey]}<br/>`;
+                    storeTemporaryFormattedString += ` <b> &nbsp;&nbsp;${secondKey}:</b> ${obj[key][secondKey]}<br/>`;
                 });
-                formattedString += block + temp;
-                temp = "";
+
+                formattedString += block + storeTemporaryFormattedString;
+                storeTemporaryFormattedString = "";
             }
         });
+
         return formattedString;
     }
 }

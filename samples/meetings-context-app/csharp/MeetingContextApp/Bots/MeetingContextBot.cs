@@ -15,6 +15,7 @@ namespace MeetingContext.Bots
     public class MeetingContextBot : TeamsActivityHandler
     {
         public const string commandString = "Please use one of these two commands: **Meeting Context** or **Participant Context**";
+        
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             if (turnContext.Activity.Text != null)
@@ -47,9 +48,7 @@ namespace MeetingContext.Bots
                 {
                     await turnContext.SendActivityAsync(MessageFactory.Text(commandString), cancellationToken);
                 }
-
             }
-
         }
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
@@ -60,6 +59,11 @@ namespace MeetingContext.Bots
             await turnContext.SendActivityAsync(MessageFactory.Text(commandString), cancellationToken);
         }
 
+        /// <summary>
+        /// Gets the serialize formatted object string.
+        /// </summary>
+        /// <param name="obj">Incoming object needs to be formatted.</param>
+        /// <returns>Formatted string.</returns>
         private string GetFormattedSerializeObject (object obj)
         {
             var formattedString = "";
@@ -67,17 +71,19 @@ namespace MeetingContext.Bots
             {
                 var detail = meetingDetails.GetValue(obj, null);
                 var block = $"<b>{meetingDetails.Name}:</b> <br>";
-                var temp = "";
+                var storeTemporaryFormattedString = "";
+
                 if (detail != null)
                 {
                     if (detail.GetType().Name != "String")
                     {
                         foreach (var value in detail.GetType().GetProperties())
                         {
-                            temp += $" <b> &nbsp;&nbsp;{value.Name}:</b> {value.GetValue(detail, null)}<br/>";
+                            storeTemporaryFormattedString += $" <b> &nbsp;&nbsp;{value.Name}:</b> {value.GetValue(detail, null)}<br/>";
                         }
-                        formattedString += block + temp;
-                        temp = String.Empty;
+                        
+                        formattedString += block + storeTemporaryFormattedString;
+                        storeTemporaryFormattedString = String.Empty;
                     }
                 }
             }
