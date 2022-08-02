@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
-const PORT = process.env.PORT || 3978;
+const PORT = process.env.PORT || 3000;
 const server = express();
 
 server.use(cors());
@@ -11,9 +11,6 @@ server.use(express.json());
 server.use(express.urlencoded({
     extended: true
 }));
-server.engine('html', require('ejs').renderFile);
-server.set('view engine', 'ejs');
-server.set('views', __dirname);
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.

@@ -1,40 +1,88 @@
-﻿{
+{
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
  "manifestVersion": "1.12",
   "version": "1.0.0",
-  "id": "{{Microsoft-App-Id}}",
-  "packageName": "com.microsoft.teams.botrequestapproval",
+  "id": "{{Manifest-id}}",
+  "packageName": "com.teams.meetingtabcontext",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
-    "privacyUrl": "https://www.microsoft.com/privacy",
-    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
-  },
-  "name": {
-    "short": "Bot request approval",
-    "full": "User can send task request to his manager using bot"
-  },
-  "description": {
-    "short": "Bot request approval",
-    "full": "This sample shows feature where user can send task request to his manager and manager can approve/reject request."
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
   },
   "icons": {
-    "outline": "outline.png",
-    "color": "color.png"
+    "color": "color.png",
+    "outline": "outline.png"
   },
-  "accentColor": "#60A18E",
+  "name": {
+    "short": "Meeting Context App",
+    "full": "Meeting Context App"
+  },
+  "description": {
+    "short": "Tab and bot context for meeting.",
+    "full": "This sample shows the contents of a meeting context object in a meeting tab and using bot API."
+  },
+  "accentColor": "#5558AF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://{{Domain Name}}/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team",
+        "groupchat"
+      ],
+      "context": [
+        "meetingChatTab",
+        "meetingDetailsTab"
+      ]
+    }
+  ],
   "bots": [
     {
       "botId": "{{Microsoft-App-Id}}",
-      "needsChannelSelector": false,
-      "scopes": [
-        "groupchat"
-      ],
-      "isNotificationOnly": false
+      "scopes": [ "groupchat" ],
+      "commandLists": [
+        {
+          "commands": [
+            {
+              "title": "Meeting Context",
+              "description": "Using TeamsInfo.GetMeetingInfoAsync gets the current meeting details."
+            },
+            {
+              "title": "Participant Context",
+              "description": "Using TeamsInfo.GetMeetingParticipantAsync gets the current user meeting participant details."
+            }
+          ],
+          "scopes": ["groupchat"]
+        }
+      ]
+
     }
   ],
-  "permissions": [ "identity", "messageTeamMembers" ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
   "validDomains": [
-    "{{domain-name}}"
-  ]
+    "*.ngrok.io",
+    "{{Domain Name}}"
+  ],
+    "webApplicationInfo": {
+    "id": "{{Microsoft-App-Id}}",
+    "resource": "https://RscBasedStoreApp"
+    },
+	"authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "OnlineMeeting.ReadBasic.Chat",
+          "type": "Delegated"
+        },
+        {
+          "name": "OnlineMeeting.ReadBasic.Chat",
+          "type": "Application"
+        }
+      ]
+    }
+  }
 }
