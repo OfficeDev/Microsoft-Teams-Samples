@@ -1,4 +1,4 @@
-// <copyright file="create-tag.tsx" company="Microsoft Corporation">
+// <copyright file="create-tag.jsx" company="Microsoft Corporation">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 // </copyright>

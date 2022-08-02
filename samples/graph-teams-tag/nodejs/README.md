@@ -12,7 +12,7 @@ contentType: samples
 createdDate: "02-08-2022 00:02:15"
 ---
 
-# This is a sample application shows the usage of Graph CRUD operations related to team tags.
+# This is a sample application that shows the usage of Graph CRUD operations related to team tags.
 
 This is a sample application where user can create, update, add or remove members of a tag. All of Graph CRUD operations related to tags can be performed within this sample.
 
@@ -30,11 +30,7 @@ This is a sample application where user can create, update, add or remove member
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
--  .[NET 6.0](https://dotnet.microsoft.com/en-us/download) SDK.
-    ```bash
-        # determine dotnet version
-        dotnet --version
-    ```
+-  [NodeJS](https://nodejs.org/en/)
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 

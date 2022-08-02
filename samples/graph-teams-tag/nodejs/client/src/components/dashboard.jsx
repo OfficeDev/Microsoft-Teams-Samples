@@ -7,7 +7,7 @@ import React, { Component } from "react";
 import { Text, Flex, FlexItem, Button, TrashCanIcon, EditIcon, EyeFriendlierIcon, Loader } from "@fluentui/react-northstar";
 import * as microsoftTeams from "@microsoft/teams-js";
 import axios from "axios";
-import ViewOrEditTag from "./view-or-edit-tag";
+import ViewEditTag from "./view-edit-tag";
 import DashboardState from "../models/dashboard-state";
 
 import "../style/style.css";
@@ -123,10 +123,10 @@ class Dashboard extends Component {
     renderBasedOnDashboardState = () => {
         switch (this.state.dashboardState) {
             case DashboardState.View:
-                return <ViewOrEditTag isLoading={this.state.isLoading} onBackClick={this.onBackClick} teamworkTag={this.state.selectedTeamworkTag} dashboardState={DashboardState.View} onTeamworkTagUpdate={this.onTeamworkTagUpdate} />
+                return <ViewEditTag isLoading={this.state.isLoading} onBackClick={this.onBackClick} teamworkTag={this.state.selectedTeamworkTag} dashboardState={DashboardState.View} onTeamworkTagUpdate={this.onTeamworkTagUpdate} />
                 break;
             case DashboardState.Edit:
-                return <ViewOrEditTag isLoading={this.state.isLoading} onBackClick={this.onBackClick} teamworkTag={this.state.selectedTeamworkTag} dashboardState={DashboardState.Edit} onTeamworkTagUpdate={this.onTeamworkTagUpdate} />
+                return <ViewEditTag isLoading={this.state.isLoading} onBackClick={this.onBackClick} teamworkTag={this.state.selectedTeamworkTag} dashboardState={DashboardState.Edit} onTeamworkTagUpdate={this.onTeamworkTagUpdate} />
                 break;
             default:
                 return (<Flex column>
