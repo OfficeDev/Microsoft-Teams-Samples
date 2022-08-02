@@ -15,12 +15,12 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "Meeting Tab Context",
-    "full": "This sample shows the contents of a tab context object in a meeting tab."
+    "short": "Meeting Context App",
+    "full": "Meeting Context App"
   },
   "description": {
-    "short": "Tab context for meeting tab.",
-    "full": "This sample shows the contents of a tab context object in a meeting tab."
+    "short": "Tab and bot context for meeting.",
+    "full": "This sample shows the contents of meeting tab context object in a meeting tab and using bot's meeting API, meeting participant details and meeting details is sent to user."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [
@@ -37,16 +37,38 @@
       ]
     }
   ],
+  "bots": [
+    {
+      "botId": "{{Microsoft-App-Id}}",
+      "scopes": [ "groupchat" ],
+      "commandLists": [
+        {
+          "commands": [
+            {
+              "title": "Meeting Context",
+              "description": "Using TeamsInfo.GetMeetingInfoAsync gets the current meeting details."
+            },
+            {
+              "title": "Participant Context",
+              "description": "Using TeamsInfo.GetMeetingParticipantAsync gets the current user meeting participant details."
+            }
+          ],
+          "scopes": ["groupchat"]
+        }
+      ]
+
+    }
+  ],
   "permissions": [
     "identity",
     "messageTeamMembers"
   ],
   "validDomains": [
     "*.ngrok.io",
-    "<<Domain Name>>"
+    "{{Domain Name}}"
   ],
     "webApplicationInfo": {
-    "id": "<<App id>>",
+    "id": "{{Microsoft-App-Id}}",
     "resource": "https://RscBasedStoreApp"
     },
 	"authorization": {
@@ -55,6 +77,10 @@
         {
           "name": "OnlineMeeting.ReadBasic.Chat",
           "type": "Delegated"
+        },
+        {
+          "name": "OnlineMeeting.ReadBasic.Chat",
+          "type": "Application"
         }
       ]
     }
