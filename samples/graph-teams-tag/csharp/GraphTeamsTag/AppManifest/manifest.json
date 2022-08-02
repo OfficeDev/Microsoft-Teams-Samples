@@ -19,8 +19,8 @@
     "full": "Manage Team Tags"
   },
   "description": {
-    "short": "This example can be used to manage Teams team tags.",
-    "full": "This example can be used to manage Teams team tags. You can create, update, add or remove members. All of Graph CRUD operations related to tags can be performed within this sample."
+    "short": "This example is used to manage Teams team tags.",
+    "full": "This example is used to manage Teams team tags. You can create, update, add or remove members. All of Graph CRUD operations related to tags can be performed within this sample."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [

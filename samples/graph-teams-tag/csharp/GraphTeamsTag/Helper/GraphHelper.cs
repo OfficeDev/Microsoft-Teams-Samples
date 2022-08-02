@@ -130,7 +130,7 @@ namespace GraphTeamsTag.Helper
         }
 
         /// <summary>
-        /// Updates the member of tag.
+        /// Add or removes the members of tag.
         /// </summary>
         /// <param name="teamTag">Updated detials of the tag.</param>
         /// <param name="teamId">Id of the team</param>

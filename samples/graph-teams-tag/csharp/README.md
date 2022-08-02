@@ -12,7 +12,7 @@ contentType: samples
 createdDate: "24-06-2022 00:02:15"
 ---
 
-# This is a sample application shows the usage of Graph CRUD operations related to team tags.
+# This is a sample application that shows the usage of Graph CRUD operations related to team tags.
 
 This is a sample application where user can create, update, add or remove members of a tag. All of Graph CRUD operations related to tags can be performed within this sample.
 

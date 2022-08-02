@@ -1,4 +1,4 @@
-// <copyright file="configure.tsx" company="Microsoft Corporation">
+// <copyright file="configure.jsx" company="Microsoft Corporation">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 // </copyright>

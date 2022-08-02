@@ -30,7 +30,7 @@ namespace GraphTeamsTag.Controllers
         /// <param name="teamTag">Details of the tag to be created.</param>
         /// <returns>If success return 201 status code, otherwise 500 status code</returns>
         [HttpPost("{teamId}")]
-        public async Task<IActionResult> CreateTeamTagAsync([FromRoute] string teamId, [FromBody]TeamTagUpdateDto teamTag)
+        public async Task<IActionResult> CreateTeamTagAsync([FromRoute] string teamId, [FromBody] TeamTagUpdateDto teamTag)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace GraphTeamsTag.Controllers
         /// <param name="teamTagId">Id of tag.</param>
         /// <returns>If success return 200 status code, otherwise 500 status code</returns>
         [HttpGet("{teamId}/tag/{teamTagId}")]
-        public async Task<IActionResult> GetTeamTagAsync(string teamId, string teamTagId)
+        public async Task<IActionResult> GetTeamTagAsync([FromRoute] string teamId, [FromRoute] string teamTagId)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace GraphTeamsTag.Controllers
         /// <param name="teamId">Id of the team.</param>
         /// <returns>If success return list of tags, otherwise 500 status code</returns>
         [HttpGet("{teamId}/list")]
-        public async Task<IActionResult> ListTeamTagAsync([FromRoute]string teamId)
+        public async Task<IActionResult> ListTeamTagAsync([FromRoute] string teamId)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace GraphTeamsTag.Controllers
         /// <param name="teamTag">Updated details of the tag.</param>
         /// <returns>If success return 204 status code, otherwise 500 status code</returns>
         [HttpPatch("{teamId}/update")]
-        public async Task<IActionResult> UpdateTeamTagAsync([FromRoute] string teamId, [FromBody]TeamTagUpdateDto teamTag)
+        public async Task<IActionResult> UpdateTeamTagAsync([FromRoute] string teamId, [FromBody] TeamTagUpdateDto teamTag)
         {
             try
             {

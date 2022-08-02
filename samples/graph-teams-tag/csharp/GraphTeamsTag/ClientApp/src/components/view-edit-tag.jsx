@@ -1,4 +1,4 @@
-// <copyright file="view-or-edittag.tsx" company="Microsoft Corporation">
+// <copyright file="view-edit-tag.jsx" company="Microsoft Corporation">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 // </copyright>
@@ -10,7 +10,7 @@ import DashboardState from "../models/dashboard-state";
 import axios from "axios";
 
 // Display the tags information
-const ViewOrEditTag = props => {
+const ViewEditTag = props => {
     const [temworkTagMembers, setTeamworkTagMembers] = useState([]);
     const [membersToAdd, setMembersToAdd] = useState([]);
     const [membersToRemove, setMembersToRemove] = useState([]);
@@ -279,4 +279,4 @@ const ViewOrEditTag = props => {
     );
 };
 
-export default ViewOrEditTag;
+export default ViewEditTag;
