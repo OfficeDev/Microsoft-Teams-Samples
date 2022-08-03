@@ -53,6 +53,7 @@ class ActivityBot extends TeamsActivityHandler {
           var result = await graphHelper.GetMeetingTranscriptionsAsync(meetingDetails.details.msGraphResourceId);
           if (result != "")
           {
+            result = result.replace("<v", "");
             var foundIndex = transcriptsDictionary.findIndex((x) => x.id === meetingDetails.details.msGraphResourceId);
             
             if (foundIndex != -1) {
