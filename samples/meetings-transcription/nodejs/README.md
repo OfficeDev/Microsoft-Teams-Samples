@@ -10,7 +10,7 @@ languages:
 - javascript
 extensions:
 contentType: samples
-createdDate: "10-06-2022 00:15:15"
+createdDate: "03-08-2022 00:30:15"
 ---
 
 # Bot to show the transcript of the meeting using Microsoft Graph API.
