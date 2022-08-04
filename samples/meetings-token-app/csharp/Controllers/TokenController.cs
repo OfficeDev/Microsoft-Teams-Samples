@@ -58,7 +58,7 @@ namespace TokenApp.Controllers
             // Do NOT rely on the user information in the tab context alone!
             var meetingRoleResponse = await this.meetingService.GetMeetingRoleAsync(meetingId, userId, tenantId);
 
-            var userInfo = this.HttpContext.GetUserInfo(meetingRoleResponse.UserRole.MeetingRole);
+            var userInfo = this.HttpContext.GetUserInfo(meetingRoleResponse.UserRole.Meeting.Role);
             return this.Ok(JsonConvert.SerializeObject(userInfo));
         }
 
@@ -81,7 +81,7 @@ namespace TokenApp.Controllers
             // NOTE: This verifies that the user is actually a participant in the provided meeting.
             var meetingRoleResponse = await this.meetingService.GetMeetingRoleAsync(meetingId, userId, tenantId);
 
-            var userInfo = this.HttpContext.GetUserInfo(meetingRoleResponse.UserRole.MeetingRole);
+            var userInfo = this.HttpContext.GetUserInfo(meetingRoleResponse.UserRole.Meeting.Role);
             var userToken = await this.meetingTokenRepository.GenerateTokenAsync(meetingId, userInfo);
             return this.Ok(JsonConvert.SerializeObject(userToken, new StringEnumConverter()));
         }
@@ -166,7 +166,7 @@ namespace TokenApp.Controllers
             // Only organizers can skip the user with the token
             // NOTE: If your tab is designed to restrict some actions to specific roles, it's important to do the role check
             // in the API action itself, in addition to customizing the tab UX for each role.
-            if (meetingRoleResponse.UserRole.MeetingRole != Constants.UserRoles.Organizer)
+            if (meetingRoleResponse.UserRole.Meeting.Role != Constants.UserRoles.Organizer)
             {
                 return this.Forbid("Only meeting organizers can skip over the user with the current token");
             }
