@@ -52,7 +52,6 @@ const getGraphAccessToken = async (req, res) => {
     
             messageList.push(messageDetails);
         }
-        
     })
 
     var responseMessageData = {

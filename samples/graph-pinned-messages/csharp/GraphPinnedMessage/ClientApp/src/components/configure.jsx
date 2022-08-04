@@ -1,4 +1,4 @@
-// <copyright file="configure.tsx" company="Microsoft Corporation">
+// <copyright file="configure.jsx" company="Microsoft Corporation">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 // </copyright>
@@ -14,9 +14,9 @@ const Configure = props => {
             microsoftTeams.app.notifySuccess();
             microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
                 microsoftTeams.pages.config.setConfig({
-                    entityID: "TeamworkTagsTab",
+                    entityID: "GraphPinnedMessage",
                     contentUrl: `${window.location.origin}/dashboard`,
-                    suggestedTabName: "Teams Tags Management",
+                    suggestedTabName: "Pinned Messages",
                     websiteUrl: `${window.location.origin}/dashboard`,
                 });
 
