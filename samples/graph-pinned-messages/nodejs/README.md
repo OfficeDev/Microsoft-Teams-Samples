@@ -6,40 +6,38 @@ products:
 - office
 - office-365
 languages:
-- csharp
+- nodejs
 extensions:
 contentType: samples
-createdDate: "02-08-2022 17:12:15"
+createdDate: "04-08-2022 13:02:15"
 ---
 
 # This is a sample application which demonstrates how to pin messages in chat using Graph api.
 
 This is an sample application which displays all the pinned messages in group chat. It also demonstrates how to pin new message in the chat.
+
 ## Key features
 
 1. Pin new message in chat.
 
-![Pinned message](GraphPinnedMessage/Images/PinMessage.png)
+![Pinned message](Images/PinMessage.png)
 
 2. The pinned message will be shown in tab.
 
-![Tab page](GraphPinnedMessage/Images/TabImage.png)
+![Tab page](Images/TabImage.png)
 
 3. You can select different message from the list of messages. The message will be pinned in chat.
 
-![Pin new message](GraphPinnedMessage/Images/NewMessage.png)
-
+![Pin new message](Images/NewMessage.png)
 
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
--  .[NET 6.0](https://dotnet.microsoft.com/en-us/download) SDK.
-    ```bash
-        # determine dotnet version
-        dotnet --version
-    ```
+-  [NodeJS](https://nodejs.org/en/)
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+
+## Run app locally
 
 ### Register your Teams Auth SSO with Azure AD
 
@@ -83,8 +81,7 @@ This is an sample application which displays all the pinned messages in group ch
 - Enable implicit grant by checking the following boxes:  
     ✔ ID Token  
     ✔ Access Token  
-14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
-
+14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the env file.
 
 ## To try this sample
 
@@ -96,40 +93,64 @@ This is an sample application which displays all the pinned messages in group ch
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
 
-### 2. Launch Visual Studio
-   - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/graph-pinned-messages/csharp/GraphPinnedMessage.sln`
+### 2. Navigate to project
+In the folder where repository is cloned navigate to `samples/graph-pinned-messages/nodejs`
+
+### 3. Update the `.env`
+Update configuration with the ```MicrosoftAppId```,  ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId```.
+
+### 4. Run ngrok - point to port 3978
+
+```bash
+ngrok http -host-header=rewrite 3978
+```
+
+![Ngrok screen](Images/NgrokScreenshot.png)
+
+### 3. Install node modules and run server 
+
+ Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+
+```bash
+npm install
+```
+
+```bash
+npm start
+```
+
+### 3. Install node modules and run client 
+
+ Navigate to **client** folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+
+```bash
+cd client
+npm install
+```
+
+```bash
+npm start
+```
     
-### 3. Start ngrok on localhost:3978
-- Open ngrok and run command `ngrok http -host-header=rewrite 3978`
-- Once started you should see link  `https://41ed-abcd-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot.
-
-
-![Ngrok](GraphPinnedMessage/Images/NgrokScreenshot.png)
-
-### 4. Update appsettings.json
-Update configuration with the ```MicrosoftAppId```,  ```MicrosoftAppPassword```, ```MicrosoftAppTenantId``` and ```ApplicationIdURI```.
-
-### 5. Modify the `manifest.json` in the `/AppPackage` folder 
-Replace the following details:
-- `{{APP-ID}}` with any guid id value.
-- `{{BASE-URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+### 4. Manually update the manifest.json
+- **Edit** the `manifest.json` contained in the `Manifest` folder to replace your Base url wherever you see the place holder string `<<BASE-URL>>`. Also replace any random guid with the place holder `<<APP-ID>>`.
 - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
 - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+
 
 ## Features of this sample
 
 1. Pin new message in chat.
 
-![Create new tag](GraphPinnedMessage/Images/PinMessage.png)
+![Pinned message](Images/PinMessage.png)
 
 2. The pinned message will be shown in tab.
 
-![View/Edit tag](GraphPinnedMessage/Images/TabImage.png)
+![Tab page](Images/TabImage.png)
 
 3. You can select different message from the list of messages. The message will be pinned in chat.
 
-![View/Edit tag](GraphPinnedMessage/Images/NewMessage.png)
+![Pin new message](Images/NewMessage.png)
 
 ## Further reading
 - [Pinned message resource type](https://docs.microsoft.com/en-us/graph/api/chat-post-pinnedmessages?view=graph-rest-beta&tabs=csharp)

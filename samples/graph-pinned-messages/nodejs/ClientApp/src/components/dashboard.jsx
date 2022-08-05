@@ -60,11 +60,11 @@ class Dashboard extends Component {
         console.log(this.state.context);
         axios.get(`/api/chat/getGraphAccessToken?ssoToken=${token}&chatId=${this.state.context.chat.id}`).then((response) => {
             var responseMessageData = response.data;
-
+            console.log(responseMessageData);
             this.setState({
-                pinnedMessageId: responseMessageData.Id,
-                pinnedMessage: responseMessageData.Message,
-                messageList: responseMessageData.Messages
+                pinnedMessageId: responseMessageData.id,
+                pinnedMessage: responseMessageData.message,
+                messageList: responseMessageData.messages
             });
 
         }).catch((error) => {
@@ -85,6 +85,7 @@ class Dashboard extends Component {
     deletePinnedMessage = async () => {
         var pinnedMessageId = this.state.pinnedMessageId;
         var response = await axios.get(`/api/chat/unpinMessage?ssoToken=${accessToken}&chatId=${this.state.context.chat.id}&pinnedMessageId=${pinnedMessageId}`)
+        this.setState({ isError: true });
     }
 
     // Api call to pin message into chat.
@@ -101,8 +102,8 @@ class Dashboard extends Component {
         this.state.messageList.map((message, index) => {
             elements.push({
                 key: index,
-                label: message.Message,
-                value: message.Id
+                label: message.value,
+                value: message.id
             });
         });
 
@@ -123,10 +124,10 @@ class Dashboard extends Component {
             </Flex>: <Flex><Text content="Please pin a message in chat" /></Flex>}
             <Flex><Text styles={{ marginTop: "1rem" }} weight="semibold" size="large" content="You can also pin message from below message list. Select any message and click on Pin new message button." /></Flex>
             <RadioGroup
-                className="container-medium"
-                styles={{ paddingLeft: "0.5rem", marginTop: "1rem" }}
-                onCheckedValueChange={this.handleMessageRadioChange}
-                items={this.renderMessageList()}
+               className="container-medium"
+               styles={{ paddingLeft: "0.5rem", marginTop: "1rem" }}
+               onCheckedValueChange={this.handleMessageRadioChange}
+               items={this.renderMessageList()}
             />
             <Flex>
                 <FlexItem push>
