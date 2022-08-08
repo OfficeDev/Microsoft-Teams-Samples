@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-connector-todo-notification-csharp",
     "source": "officeDev",
-    "title": "Microsoft Teams Sample Connector",
-    "shortDescription": "Sample Office 365 Connector generating notifications to teams channel.",
+    "title": "To Do notification",
+    "shortDescription": "NOTE: This has no relationship with the Microsoft To Do product. A simple in-memory database holds the to do items.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/connector-todo-notification/csharp",
     "longDescription": [
-      "Sample Office 365 Connector generating notifications to teams channel."
+      "NOTE: This has no relationship with the Microsoft To Do product. A simple in-memory database holds the to do items."
     ],
     "creationDateTime": "2018-01-16",
     "updateDateTime": "2022-06-21",

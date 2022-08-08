@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-bot-conversation-quickstart-js",
     "source": "officeDev",
-    "title": "Bots/Messaging Extension",
-    "shortDescription": "Messaging and conversation event handling hello world.",
+    "title": "Starter solution: Sample bot - Teams Toolkit",
+    "shortDescription": "Simple bot quickstart for Teams Toolkit",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-conversation-quickstart/js",
     "longDescription": [
-      "Messaging and conversation event handling hello world."
+      "Simple bot quickstart for Teams Toolkit"
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-04-05",

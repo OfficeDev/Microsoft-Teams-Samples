@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-app-region-selection-csharp",
     "source": "officeDev",
-    "title": "Region Selection App",
-    "shortDescription": "Microsoft Teams app show end user region selection using Bot and Tab",
+    "title": "Bot and tab to select a region",
+    "shortDescription": "Displays and allows user to choose a region",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-region-selection/csharp",
     "longDescription": [
-      "Microsoft Teams app show end user region selection using Bot and Tab"
+      "Displays and allows user to choose a region"
     ],
     "creationDateTime": "2021-03-19",
     "updateDateTime": "2022-01-12",

@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-app-complete-sample-csharp",
     "source": "officeDev",
-    "title": "Microsoft Teams Bot in C#",
-    "shortDescription": "Sample that shows how to build a bot for Microsoft Teams in C# with bot framework v4.",
+    "title": "Bot, Tabs, and Messaging Extension",
+    "shortDescription": "A very early Teams sample - shows tab, bot, and messaging extension (WARNING uses deprecated version of Bot Builder SDK)",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-complete-sample/csharp",
     "longDescription": [
-      "Sample that shows how to build a bot for Microsoft Teams in C# with bot framework v4."
+      "A very early Teams sample - shows tab, bot, and messaging extension (WARNING uses deprecated version of Bot Builder SDK)"
     ],
     "creationDateTime": "2017-09-22",
     "updateDateTime": "2022-01-12",

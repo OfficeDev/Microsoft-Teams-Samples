@@ -1,14 +1,14 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-bot-sharepoint-list-csharp",
+    "name": "officedev-microsoft-teams-samples-tab-ui-templates-ts",
     "source": "officeDev",
-    "title": "Teams bot saves user input to a SharePoint list",
-    "shortDescription": "This sample app shows the interaction between teams bot and SharePoint List, Bot saves the specified details in SharePoint List as back-end",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-sharepoint-list/csharp",
+    "title": "Teams UI templates",
+    "shortDescription": "This sample app can help you better understand how apps should look and behave in Microsoft Teams. The app includes examples of tested, high-quality UI templates that work across common Teams use cases (such as dashboards or forms)",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-ui-templates/ts",
     "longDescription": [
-      "This sample app shows the interaction between teams bot and SharePoint List, Bot saves the specified details in SharePoint List as back-end"
+      "This sample app can help you better understand how apps should look and behave in Microsoft Teams. The app includes examples of tested, high-quality UI templates that work across common Teams use cases (such as dashboards or forms)"
     ],
-    "creationDateTime": "2021-07-07",
+    "creationDateTime": "2020-12-08",
     "updateDateTime": "2021-11-29",
     "products": [
       "Teams"
@@ -20,24 +20,18 @@
       },
       {
         "key": "TEAMS-SERVER-LANGUAGE",
-        "value": "csharp"
+        "value": ""
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": "netframework"
+        "value": ""
       },
       {
         "key": "TEAMS-FEATURES",
         "value": ""
       }
     ],
-    "thumbnails": [
-      {
-        "type": "image",
-        "order": 100,
-        "url": "https://user-images.githubusercontent.com/50989436/109760014-fe716800-7c13-11eb-932d-9c692d4a67ae.png"
-      }
-    ],
+    "thumbnails": [],
     "authors": [
       {
         "gitHubAccount": "OfficeDev",

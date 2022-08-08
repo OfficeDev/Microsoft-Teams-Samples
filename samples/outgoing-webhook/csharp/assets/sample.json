@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-outgoing-webhook-csharp",
     "source": "officeDev",
-    "title": "Outgoing Webhook",
-    "shortDescription": "Samples to create \"Custom Bots\" to be used in Microsoft Teams.",
+    "title": "Outgoing webhook in C#",
+    "shortDescription": "This project is an implementation of a very simple Outgoing Webhook for Microsoft Teams. All it does is verify that what's sending messages matches the Outgoing Webhook that was created in Teams, and it echoes back whatever is sent to it.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/outgoing-webhook/csharp",
     "longDescription": [
-      "Samples to create \"Custom Bots\" to be used in Microsoft Teams."
+      "This project is an implementation of a very simple Outgoing Webhook for Microsoft Teams. All it does is verify that what's sending messages matches the Outgoing Webhook that was created in Teams, and it echoes back whatever is sent to it."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-04-05",

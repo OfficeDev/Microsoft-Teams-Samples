@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-csharp_dotnetcore",
     "source": "officeDev",
-    "title": "Teams Tab SSO Authentication",
-    "shortDescription": "Sample channel and group tab with SSO hello world app.",
+    "title": "Starter solution: Channel/Group tab with SSO in C#",
+    "shortDescription": "ASP.NET MVC channel/group tab provides a jQuery SPA with an access token using SSO",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-channel-group-sso-quickstart/csharp_dotnetcore",
     "longDescription": [
-      "Sample channel and group tab with SSO hello world app."
+      "ASP.NET MVC channel/group tab provides a jQuery SPA with an access token using SSO"
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-04-03",

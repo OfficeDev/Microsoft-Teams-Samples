@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-outgoing-webhook-nodejs",
     "source": "officeDev",
-    "title": "Outgoing webhook",
-    "shortDescription": "Samples to create \"Custom Bots\" to be used in Microsoft Teams.",
+    "title": "Outgoing webhook in NodeJS",
+    "shortDescription": "This project is an implementation of a very simple Outgoing Webhook for Microsoft Teams. All it does is verify that what's sending messages matches the Outgoing Webhook that was created in Teams, and it echoes back whatever is sent to it.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/outgoing-webhook/nodejs",
     "longDescription": [
-      "Samples to create \"Custom Bots\" to be used in Microsoft Teams."
+      "This project is an implementation of a very simple Outgoing Webhook for Microsoft Teams. All it does is verify that what's sending messages matches the Outgoing Webhook that was created in Teams, and it echoes back whatever is sent to it."
     ],
     "creationDateTime": "2017-12-05",
     "updateDateTime": "2021-11-29",

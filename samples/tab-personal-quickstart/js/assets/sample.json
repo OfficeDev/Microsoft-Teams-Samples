@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-tab-personal-quickstart-js",
     "source": "officeDev",
-    "title": "Personal Tabs",
-    "shortDescription": "Sample personal tab quick-start app.",
+    "title": "Starter solution: Personal tab in JavaScript",
+    "shortDescription": "Create React App personal tab in JavaScript",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-personal-quickstart/js",
     "longDescription": [
-      "Sample personal tab quick-start app."
+      "Create React App personal tab in JavaScript"
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-04-03",

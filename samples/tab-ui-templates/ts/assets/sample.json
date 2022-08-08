@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-tab-ui-templates-ts",
     "source": "officeDev",
-    "title": "Deploying the Microsoft Teams UI templates sample app",
-    "shortDescription": "This sample demonstrates @fluentui/react-teams library in Microsoft Teams apps.",
+    "title": "Teams UI templates",
+    "shortDescription": "This sample app can help you better understand how apps should look and behave in Microsoft Teams. The app includes examples of tested, high-quality UI templates that work across common Teams use cases (such as dashboards or forms)",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-ui-templates/ts",
     "longDescription": [
-      "This sample demonstrates @fluentui/react-teams library in Microsoft Teams apps."
+      "This sample app can help you better understand how apps should look and behave in Microsoft Teams. The app includes examples of tested, high-quality UI templates that work across common Teams use cases (such as dashboards or forms)"
     ],
     "creationDateTime": "2020-12-08",
     "updateDateTime": "2021-11-29",
@@ -17,18 +17,6 @@
       {
         "key": "TEAMS-SAMPLE-SOURCE",
         "value": "OfficeDev"
-      },
-      {
-        "key": "TEAMS-SERVER-LANGUAGE",
-        "value": ""
-      },
-      {
-        "key": "TEAMS-SERVER-PLATFORM",
-        "value": ""
-      },
-      {
-        "key": "TEAMS-FEATURES",
-        "value": ""
       }
     ],
     "thumbnails": [],

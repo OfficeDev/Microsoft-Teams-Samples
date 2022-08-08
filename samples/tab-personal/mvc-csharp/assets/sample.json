@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-tab-personal-mvc-csharp",
     "source": "officeDev",
-    "title": "Personal Tab with ASP. NET Core MVC",
-    "shortDescription": "Sample app showing custom personal Tab with ASP. NET Core",
+    "title": "Personal tabs in ASP.NET Core with MVC",
+    "shortDescription": "In this quickstart we'll walk-through creating a custom channel/group tab with ASP.Net Core and MVC. We'll also use App Studio for Microsoft Teams to finalize your app manifest and deploy your tab to Teams.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-personal/mvc-csharp",
     "longDescription": [
-      "Sample app showing custom personal Tab with ASP. NET Core"
+      "In this quickstart we'll walk-through creating a custom channel/group tab with ASP.Net Core and MVC. We'll also use App Studio for Microsoft Teams to finalize your app manifest and deploy your tab to Teams."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-04-03",

@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-tab-channel-group-quickstart-js",
     "source": "officeDev",
-    "title": "Tabs quick start",
-    "shortDescription": "Sample channel and group tab hello world app.",
+    "title": "Starter solution: Channel/Group tab in JavaScript",
+    "shortDescription": "Create React App channel/group tab in JavaScript",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-channel-group-quickstart/js",
     "longDescription": [
-      "Sample channel and group tab hello world app."
+      "Create React App channel/group tab in JavaScript"
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-04-03",

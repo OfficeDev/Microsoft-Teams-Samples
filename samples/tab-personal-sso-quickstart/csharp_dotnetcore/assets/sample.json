@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-tab-personal-sso-quickstart-csharp_dotnetcore",
     "source": "officeDev",
-    "title": "Teams Tab SSO Authentication",
-    "shortDescription": "Sample personal tab with SSO hello world app.",
+    "title": "Starter solution: Personal tab with SSO  in C#",
+    "shortDescription": "ASP.NET MVC personal tab provides a jQuery SPA with an access token using SSO",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-personal-sso-quickstart/csharp_dotnetcore",
     "longDescription": [
-      "Sample personal tab with SSO hello world app."
+      "ASP.NET MVC personal tab provides a jQuery SPA with an access token using SSO"
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-04-03",

@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-js",
     "source": "officeDev",
-    "title": "Teams Tab SSO Authentication",
-    "shortDescription": "Sample channel and group tab with SSO hello world app.",
+    "title": "Starter solution: Channel/Group tab with SSO in JavaScript",
+    "shortDescription": "Create React App channel/group tab in JavaScript with Azure AD Single Sign-On",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-channel-group-sso-quickstart/js",
     "longDescription": [
-      "Sample channel and group tab with SSO hello world app."
+      "Create React App channel/group tab in JavaScript with Azure AD Single Sign-On"
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-04-03",

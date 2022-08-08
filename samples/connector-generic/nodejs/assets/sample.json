@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-connector-generic-nodejs",
     "source": "officeDev",
-    "title": "Sample Connector",
-    "shortDescription": "Sample code for a generic connector that's easy to customize for any system which supports webhooks.",
+    "title": "Generic Connector",
+    "shortDescription": "Generic connector that's easy to customize for any system which supports webhooks",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/connector-generic/nodejs",
     "longDescription": [
-      "Sample code for a generic connector that's easy to customize for any system which supports webhooks."
+      "Generic connector that's easy to customize for any system which supports webhooks"
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-05-17",

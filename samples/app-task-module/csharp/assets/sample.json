@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-app-task-module-csharp",
     "source": "officeDev",
-    "title": "Microsoft Teams task module",
-    "shortDescription": "A task module allows you to create modal popup experiences in your Teams application.",
+    "title": "Launch task module from tab and bot",
+    "shortDescription": "Launch a task module from a tab or bot  (WARNING uses deprecated version of Bot Builder SDK)",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-task-module/csharp",
     "longDescription": [
-      "A task module allows you to create modal popup experiences in your Teams application."
+      "Launch a task module from a tab or bot  (WARNING uses deprecated version of Bot Builder SDK)"
     ],
     "creationDateTime": "2018-09-26",
     "updateDateTime": "2022-05-17",
