@@ -5,12 +5,12 @@
 </head>
   <body>
   </body>
-    <script src="https://unpkg.com/@microsoft/teams-js@1.5.0/dist/MicrosoftTeams.min.js", crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.1.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
     <script>
-       microsoftTeams.initialize();
+       microsoftTeams.app.initialize();
        var id =  <%-clientId%>
         // Get the tab context, and use the information to navigate to Azure AD login page
-        microsoftTeams.getContext(function (context) {
+        microsoftTeams.app.getContext().then((context) => {
             // Generate random state string and store it, so we can verify it in the callback
             let state = _guid();
             localStorage.setItem("auth.state", state);
@@ -25,11 +25,11 @@
                 redirect_uri: window.location.origin + "/auth-end",
                 nonce: _guid(),
                 state: state,
-                login_hint: context.loginHint,
+                login_hint: context.user.loginHint,
             };
             // Go to the AzureAD authorization endpoint (tenant-specific endpoint, not "common")
             // For guest users, we want an access token for the tenant we are currently in, not the home tenant of the guest. 
-            let authorizeEndpoint = `https://login.microsoftonline.com/${context.tid}/oauth2/v2.0/authorize?${toQueryString(queryParams)}`;
+            let authorizeEndpoint = `https://login.microsoftonline.com/${context.user.tenant.id}/oauth2/v2.0/authorize?${toQueryString(queryParams)}`;
             window.location.assign(authorizeEndpoint);
         });
         // Build query string from map of query parameter

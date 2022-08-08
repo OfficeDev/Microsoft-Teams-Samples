@@ -1,18 +1,14 @@
 (function () {
     'use strict';
-
+    microsoftTeams.app.initialize();
     // Get auth token
     // Ask Teams to get us a token from AAD
     function getClientSideToken() {
-        microsoftTeams.initialize();
         return new Promise((resolve, reject) => {
-            microsoftTeams.authentication.getAuthToken({
-                successCallback: (result) => {
-                    resolve(result);
-                },
-                failureCallback: function (error) {
-                    reject("Error getting token: " + error);
-                }
+            microsoftTeams.authentication.getAuthToken().then((result) => {
+                resolve(result);
+            }).catch((error) => {
+                reject("Error getting token: " + error);
             });
         });
     }
@@ -21,7 +17,7 @@
     // using the web service (see /auth/token handler in app.js)
     function getServerSideToken(clientSideToken) {
         return new Promise((resolve, reject) => {
-            microsoftTeams.getContext((context) => {
+            microsoftTeams.app.getContext().then((context) => {
                 fetch('/auth/token', {
                     method: 'POST',
                     headers: {
@@ -29,7 +25,7 @@
                         'Accept': 'application/json'
                     },
                     body: JSON.stringify({
-                        tid: context.tid,
+                        tid: context.user.tenant.id,
                         token: clientSideToken
                     }),
                 })
@@ -58,15 +54,13 @@
             microsoftTeams.authentication.authenticate({
                 url: window.location.origin + "/auth-start",
                 width: 600,
-                height: 535,
-                successCallback: (result) => {
-                    let data = localStorage.getItem(result);
-                    localStorage.removeItem(result);
-                    resolve(data);
-                },
-                failureCallback: (reason) => {
-                    reject(JSON.stringify(reason));
-                }
+                height: 535
+            }).then(result => {
+                let data = localStorage.getItem(result);
+                localStorage.removeItem(result);
+                resolve(data);
+            }).catch(reason => {
+                reject(JSON.stringify(reason));
             });
         });
     }

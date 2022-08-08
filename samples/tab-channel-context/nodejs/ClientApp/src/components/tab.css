@@ -1,0 +1,13 @@
+.header-container {
+    height: 100% !important;
+    width: 100%;
+    background-color: #fff;
+}
+
+.tab-container {
+    padding: 1rem !important;
+}
+
+.link-text {
+    margin-left: 0.3rem !important;
+}
