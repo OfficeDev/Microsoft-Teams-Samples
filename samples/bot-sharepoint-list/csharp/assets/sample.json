@@ -35,13 +35,12 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://user-images.githubusercontent.com/50989436/109760014-fe716800-7c13-11eb-932d-9c692d4a67ae.png",
-        "alt": null
+        "url": "https://user-images.githubusercontent.com/50989436/109760014-fe716800-7c13-11eb-932d-9c692d4a67ae.png"
       }
     ],
     "authors": [
       {
-        "gitHubAccount": null,
+        "gitHubAccount": "OfficeDev",
         "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
         "name": "OfficeDev"
       }
@@ -49,22 +48,18 @@
     "references": [
       {
         "name": "Teams developer documentation",
-        "description": null,
         "url": "https://aka.ms/TeamsPlatformDocs"
       },
       {
         "name": "Teams developer questions",
-        "description": null,
         "url": "https://aka.ms/TeamsPlatformFeedback"
       },
       {
         "name": "Teams development videos from Microsoft",
-        "description": null,
         "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
       },
       {
         "name": "Teams development videos from the community",
-        "description": null,
         "url": "https://aka.ms/sample-ref-teams-vids-from-community"
       }
     ]
