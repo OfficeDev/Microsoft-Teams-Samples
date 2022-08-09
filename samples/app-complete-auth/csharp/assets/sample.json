@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-app-auth-nodejs",
+    "name": "officedev-microsoft-teams-samples-app-complete-auth-csharp",
     "source": "officeDev",
-    "title": "Microsoft Teams Authentication Sample",
-    "shortDescription": "This sample demonstrates authentication in Microsoft Teams apps.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-auth/nodejs",
+    "title": "Authentication complete sample",
+    "shortDescription": "This sample demos authentication feature in bot,tab and messaging extension.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-complete-auth/csharp",
     "longDescription": [
-      "This sample demonstrates authentication in Microsoft Teams apps."
+      "This sample demos authentication feature in bot,tab and messaging extension."
     ],
-    "creationDateTime": "2018-02-08",
-    "updateDateTime": "2022-06-20",
+    "creationDateTime": "2022-02-25",
+    "updateDateTime": "2022-05-17",
     "products": [
       "Teams"
     ],
@@ -20,11 +20,11 @@
       },
       {
         "key": "TEAMS-SERVER-LANGUAGE",
-        "value": "javascript"
+        "value": "csharp"
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": "express"
+        "value": "netframework"
       },
       {
         "key": "TEAMS-FEATURES",
@@ -35,8 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-auth/nodejs/Images/TabAzureADLoginV1.png",
-        "alt": "Solution UX as Teams tab showing authentication details"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-complete-auth/csharp/AppCompleteAuth/Images/BotLoginOptionCard.png"
       }
     ],
     "authors": [

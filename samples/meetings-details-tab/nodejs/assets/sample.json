@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-app-auth-nodejs",
+    "name": "officedev-microsoft-teams-samples-meetings-details-tab-nodejs",
     "source": "officeDev",
-    "title": "Microsoft Teams Authentication Sample",
-    "shortDescription": "This sample demonstrates authentication in Microsoft Teams apps.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-auth/nodejs",
+    "title": "Meetings Details Tab",
+    "shortDescription": "Microsoft Teams meeting extensibility sample for iteracting with Details Tab in-meeting",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-details-tab/nodejs",
     "longDescription": [
-      "This sample demonstrates authentication in Microsoft Teams apps."
+      "Microsoft Teams meeting extensibility sample for iteracting with Details Tab in-meeting"
     ],
-    "creationDateTime": "2018-02-08",
-    "updateDateTime": "2022-06-20",
+    "creationDateTime": "2021-07-07",
+    "updateDateTime": "2022-01-12",
     "products": [
       "Teams"
     ],
@@ -35,8 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-auth/nodejs/Images/TabAzureADLoginV1.png",
-        "alt": "Solution UX as Teams tab showing authentication details"
+        "url": "https://user-images.githubusercontent.com/50989436/120268903-5af02c00-c2c4-11eb-9061-c8af7436715e.png"
       }
     ],
     "authors": [

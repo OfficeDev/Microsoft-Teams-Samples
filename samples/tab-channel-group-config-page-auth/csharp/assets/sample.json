@@ -1,14 +1,14 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-app-auth-nodejs",
+    "name": "officedev-microsoft-teams-samples-tab-channel-group-config-page-auth-csharp",
     "source": "officeDev",
-    "title": "Microsoft Teams Authentication Sample",
-    "shortDescription": "This sample demonstrates authentication in Microsoft Teams apps.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-auth/nodejs",
+    "title": "Configurable tab using AAD and Silent Authentication",
+    "shortDescription": "Shows pop-up authentication using ADAL, a deprecated auth library",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-channel-group-config-page-auth/csharp",
     "longDescription": [
-      "This sample demonstrates authentication in Microsoft Teams apps."
+      "Shows pop-up authentication using ADAL, a deprecated auth library"
     ],
-    "creationDateTime": "2018-02-08",
+    "creationDateTime": "2021-03-20",
     "updateDateTime": "2022-06-20",
     "products": [
       "Teams"
@@ -20,11 +20,11 @@
       },
       {
         "key": "TEAMS-SERVER-LANGUAGE",
-        "value": "javascript"
+        "value": "csharp"
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": "express"
+        "value": "netframework"
       },
       {
         "key": "TEAMS-FEATURES",
@@ -35,8 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-auth/nodejs/Images/TabAzureADLoginV1.png",
-        "alt": "Solution UX as Teams tab showing authentication details"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-channel-group-config-page-auth/csharp/ConfigTabAuthentication/Images/config_page.png"
       }
     ],
     "authors": [

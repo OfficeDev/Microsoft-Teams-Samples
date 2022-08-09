@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-app-auth-nodejs",
+    "name": "officedev-microsoft-teams-samples-graph-pinned-messages-nodejs",
     "source": "officeDev",
-    "title": "Microsoft Teams Authentication Sample",
-    "shortDescription": "This sample demonstrates authentication in Microsoft Teams apps.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-auth/nodejs",
+    "title": "This is a sample application which demonstrates how to pin messages in chat using Graph api.",
+    "shortDescription": "This is a sample application which demonstrates how to pin messages in chat using Graph api.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-pinned-messages/nodejs",
     "longDescription": [
-      "This sample demonstrates authentication in Microsoft Teams apps."
+      "This is a sample application which demonstrates how to pin messages in chat using Graph api."
     ],
-    "creationDateTime": "2018-02-08",
-    "updateDateTime": "2022-06-20",
+    "creationDateTime": "2022-04-08",
+    "updateDateTime": "2022-08-08",
     "products": [
       "Teams"
     ],
@@ -33,10 +33,9 @@
     ],
     "thumbnails": [
       {
-        "type": "image",
+        "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-auth/nodejs/Images/TabAzureADLoginV1.png",
-        "alt": "Solution UX as Teams tab showing authentication details"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-pinned-messages/nodejs/Images/PinMessage.png"
       }
     ],
     "authors": [

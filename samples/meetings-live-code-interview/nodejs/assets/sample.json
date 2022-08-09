@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-app-auth-nodejs",
+    "name": "officedev-microsoft-teams-samples-meetings-live-code-interview-nodejs",
     "source": "officeDev",
-    "title": "Microsoft Teams Authentication Sample",
-    "shortDescription": "This sample demonstrates authentication in Microsoft Teams apps.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-auth/nodejs",
+    "title": "Live coding interview using Shared meeting stage",
+    "shortDescription": "This sample demos a live coding in a teams meeting stage.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-live-code-interview/nodejs",
     "longDescription": [
-      "This sample demonstrates authentication in Microsoft Teams apps."
+      "This sample demos a live coding in a teams meeting stage."
     ],
-    "creationDateTime": "2018-02-08",
-    "updateDateTime": "2022-06-20",
+    "creationDateTime": "2022-03-24",
+    "updateDateTime": "2022-06-21",
     "products": [
       "Teams"
     ],
@@ -35,8 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-auth/nodejs/Images/TabAzureADLoginV1.png",
-        "alt": "Solution UX as Teams tab showing authentication details"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-live-code-interview/nodejs/Images/stageView.png"
       }
     ],
     "authors": [

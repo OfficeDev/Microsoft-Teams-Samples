@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-app-auth-nodejs",
+    "name": "officedev-microsoft-teams-samples-tab-channel-group-quickstart-ts",
     "source": "officeDev",
-    "title": "Microsoft Teams Authentication Sample",
-    "shortDescription": "This sample demonstrates authentication in Microsoft Teams apps.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-auth/nodejs",
+    "title": "Starter solution: Channel/Group tab in TypeScript",
+    "shortDescription": "Create React App channel/group tab in TypeScript",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-channel-group-quickstart/ts",
     "longDescription": [
-      "This sample demonstrates authentication in Microsoft Teams apps."
+      "Create React App channel/group tab in TypeScript"
     ],
-    "creationDateTime": "2018-02-08",
-    "updateDateTime": "2022-06-20",
+    "creationDateTime": "2021-07-07",
+    "updateDateTime": "2022-04-03",
     "products": [
       "Teams"
     ],
@@ -20,11 +20,11 @@
       },
       {
         "key": "TEAMS-SERVER-LANGUAGE",
-        "value": "javascript"
+        "value": ""
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": "express"
+        "value": ""
       },
       {
         "key": "TEAMS-FEATURES",
@@ -35,8 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-auth/nodejs/Images/TabAzureADLoginV1.png",
-        "alt": "Solution UX as Teams tab showing authentication details"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-channel-group-quickstart/ts/Images/tabconfigure.png"
       }
     ],
     "authors": [

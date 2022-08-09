@@ -1,18 +1,37 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-samples-msteams-application-qbot",
+    "name": "officedev-microsoft-teams-samples-graph-chat-lifecycle-nodejs",
     "source": "officeDev",
-    "title": "QBot",
-    "shortDescription": "QBot is a solution designed for classroom teaching scenarios which allows teachers, tutors, and students to intelligently answer each other's questions within the Microsoft Teams collaboration platform.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msteams-application-qbot",
+    "title": "ChatLifecycle Application",
+    "shortDescription": "This sample illustrates how you can use Teams App Chat Life Cycle by calling Microsoft Graph APIs. .",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-chat-lifecycle/nodejs",
     "longDescription": [
-      "QBot is a solution designed for classroom teaching scenarios which allows teachers, tutors, and students to intelligently answer each other's questions within the Microsoft Teams collaboration platform."
+      "This sample illustrates how you can use Teams App Chat Life Cycle by calling Microsoft Graph APIs. ."
     ],
-    "creationDateTime": "2022-05-30",
+    "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-06-20",
     "products": [
       "Teams"
     ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "javascript"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "express"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": ""
+      }
+    ],
+    "thumbnails": [],
     "authors": [
       {
         "gitHubAccount": "OfficeDev",

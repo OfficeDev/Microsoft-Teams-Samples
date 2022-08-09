@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-app-auth-nodejs",
+    "name": "officedev-microsoft-teams-samples-bot-join-team-using-qr-code-csharp",
     "source": "officeDev",
-    "title": "Microsoft Teams Authentication Sample",
-    "shortDescription": "This sample demonstrates authentication in Microsoft Teams apps.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-auth/nodejs",
+    "title": "Join a team using QR code sample",
+    "shortDescription": "This sample demos a feature where user can join a team using QR code containing the team's id.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-join-team-using-qr-code/csharp",
     "longDescription": [
-      "This sample demonstrates authentication in Microsoft Teams apps."
+      "This sample demos a feature where user can join a team using QR code containing the team's id."
     ],
-    "creationDateTime": "2018-02-08",
-    "updateDateTime": "2022-06-20",
+    "creationDateTime": "2021-12-24",
+    "updateDateTime": "2022-01-12",
     "products": [
       "Teams"
     ],
@@ -20,25 +20,18 @@
       },
       {
         "key": "TEAMS-SERVER-LANGUAGE",
-        "value": "javascript"
+        "value": "csharp"
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": "express"
+        "value": "netframework"
       },
       {
         "key": "TEAMS-FEATURES",
         "value": ""
       }
     ],
-    "thumbnails": [
-      {
-        "type": "image",
-        "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-auth/nodejs/Images/TabAzureADLoginV1.png",
-        "alt": "Solution UX as Teams tab showing authentication details"
-      }
-    ],
+    "thumbnails": [],
     "authors": [
       {
         "gitHubAccount": "OfficeDev",

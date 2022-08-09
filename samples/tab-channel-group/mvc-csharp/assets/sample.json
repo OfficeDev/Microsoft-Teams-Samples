@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-app-auth-nodejs",
+    "name": "officedev-microsoft-teams-samples-tab-channel-group-mvc-csharp",
     "source": "officeDev",
-    "title": "Microsoft Teams Authentication Sample",
-    "shortDescription": "This sample demonstrates authentication in Microsoft Teams apps.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-auth/nodejs",
+    "title": "Channel/group tabs in ASP.NET Core with MVC",
+    "shortDescription": "In this quickstart we'll walk-through creating a custom channel/group tab with ASP.Net Core and MVC. We'll also use App Studio for Microsoft Teams to finalize your app manifest and deploy your tab to Teams.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-channel-group/mvc-csharp",
     "longDescription": [
-      "This sample demonstrates authentication in Microsoft Teams apps."
+      "In this quickstart we'll walk-through creating a custom channel/group tab with ASP.Net Core and MVC. We'll also use App Studio for Microsoft Teams to finalize your app manifest and deploy your tab to Teams."
     ],
-    "creationDateTime": "2018-02-08",
-    "updateDateTime": "2022-06-20",
+    "creationDateTime": "2021-07-07",
+    "updateDateTime": "2022-05-17",
     "products": [
       "Teams"
     ],
@@ -20,11 +20,11 @@
       },
       {
         "key": "TEAMS-SERVER-LANGUAGE",
-        "value": "javascript"
+        "value": ""
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": "express"
+        "value": ""
       },
       {
         "key": "TEAMS-FEATURES",
@@ -35,8 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-auth/nodejs/Images/TabAzureADLoginV1.png",
-        "alt": "Solution UX as Teams tab showing authentication details"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-channel-group/mvc-csharp/Images/Redconfigure.png"
       }
     ],
     "authors": [

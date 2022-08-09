@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-app-auth-nodejs",
+    "name": "officedev-microsoft-teams-samples-app-localization-nodejs",
     "source": "officeDev",
-    "title": "Microsoft Teams Authentication Sample",
-    "shortDescription": "This sample demonstrates authentication in Microsoft Teams apps.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-auth/nodejs",
+    "title": "Teams App Localization",
+    "shortDescription": "Microsoft Teams app localization using Bot and Tab",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-localization/nodejs",
     "longDescription": [
-      "This sample demonstrates authentication in Microsoft Teams apps."
+      "Microsoft Teams app localization using Bot and Tab"
     ],
-    "creationDateTime": "2018-02-08",
-    "updateDateTime": "2022-06-20",
+    "creationDateTime": "2021-07-07",
+    "updateDateTime": "2022-04-19",
     "products": [
       "Teams"
     ],
@@ -35,8 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-auth/nodejs/Images/TabAzureADLoginV1.png",
-        "alt": "Solution UX as Teams tab showing authentication details"
+        "url": "https://user-images.githubusercontent.com/50989436/119711021-a8136e80-be7c-11eb-8d00-ee3f6a050f44.png"
       }
     ],
     "authors": [

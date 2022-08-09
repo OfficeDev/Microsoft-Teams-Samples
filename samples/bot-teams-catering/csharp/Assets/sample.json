@@ -1,18 +1,37 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-samples-msteams-application-qbot",
+    "name": "officedev-microsoft-teams-samples-bot-teams-catering-csharp",
     "source": "officeDev",
-    "title": "QBot",
-    "shortDescription": "QBot is a solution designed for classroom teaching scenarios which allows teachers, tutors, and students to intelligently answer each other's questions within the Microsoft Teams collaboration platform.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msteams-application-qbot",
+    "title": "Teams Catering Bot",
+    "shortDescription": "Teams catering bot demonstrating how to use Universal bots in Teams",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-teams-catering/csharp",
     "longDescription": [
-      "QBot is a solution designed for classroom teaching scenarios which allows teachers, tutors, and students to intelligently answer each other's questions within the Microsoft Teams collaboration platform."
+      "Teams catering bot demonstrating how to use Universal bots in Teams"
     ],
-    "creationDateTime": "2022-05-30",
-    "updateDateTime": "2022-06-20",
+    "creationDateTime": "2021-05-25",
+    "updateDateTime": "2022-01-12",
     "products": [
       "Teams"
     ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "csharp"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "netframework"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": ""
+      }
+    ],
+    "thumbnails": [],
     "authors": [
       {
         "gitHubAccount": "OfficeDev",

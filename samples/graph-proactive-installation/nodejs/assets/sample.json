@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-app-auth-nodejs",
+    "name": "officedev-microsoft-teams-samples-graph-proactive-installation-nodejs",
     "source": "officeDev",
-    "title": "Microsoft Teams Authentication Sample",
-    "shortDescription": "This sample demonstrates authentication in Microsoft Teams apps.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-auth/nodejs",
+    "title": "Proactive Installation Sample App",
+    "shortDescription": "This sample illustrates how you can use Proactive installation of app for user and send proactive notification by calling Microsoft Graph APIs.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-proactive-installation/nodejs",
     "longDescription": [
-      "This sample demonstrates authentication in Microsoft Teams apps."
+      "This sample illustrates how you can use Proactive installation of app for user and send proactive notification by calling Microsoft Graph APIs."
     ],
-    "creationDateTime": "2018-02-08",
-    "updateDateTime": "2022-06-20",
+    "creationDateTime": "2021-07-07",
+    "updateDateTime": "2022-01-12",
     "products": [
       "Teams"
     ],
@@ -31,14 +31,7 @@
         "value": ""
       }
     ],
-    "thumbnails": [
-      {
-        "type": "image",
-        "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-auth/nodejs/Images/TabAzureADLoginV1.png",
-        "alt": "Solution UX as Teams tab showing authentication details"
-      }
-    ],
+    "thumbnails": [],
     "authors": [
       {
         "gitHubAccount": "OfficeDev",

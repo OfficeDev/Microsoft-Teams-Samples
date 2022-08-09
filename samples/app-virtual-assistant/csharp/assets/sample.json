@@ -1,18 +1,37 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-samples-msteams-application-qbot",
+    "name": "officedev-microsoft-teams-samples-app-virtual-assistant-csharp",
     "source": "officeDev",
-    "title": "QBot",
-    "shortDescription": "QBot is a solution designed for classroom teaching scenarios which allows teachers, tutors, and students to intelligently answer each other's questions within the Microsoft Teams collaboration platform.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msteams-application-qbot",
+    "title": "Virtual Assistant",
+    "shortDescription": "Customized virtual assistant template to support teams capabilities.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-virtual-assistant/csharp",
     "longDescription": [
-      "QBot is a solution designed for classroom teaching scenarios which allows teachers, tutors, and students to intelligently answer each other's questions within the Microsoft Teams collaboration platform."
+      "Customized virtual assistant template to support teams capabilities."
     ],
-    "creationDateTime": "2022-05-30",
-    "updateDateTime": "2022-06-20",
+    "creationDateTime": "2021-07-07",
+    "updateDateTime": "2021-11-29",
     "products": [
       "Teams"
     ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "csharp"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "netframework"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": ""
+      }
+    ],
+    "thumbnails": [],
     "authors": [
       {
         "gitHubAccount": "OfficeDev",

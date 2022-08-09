@@ -1,18 +1,37 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-samples-msteams-application-qbot",
+    "name": "officedev-microsoft-teams-samples-graph-rsc-nodeJs",
     "source": "officeDev",
-    "title": "QBot",
-    "shortDescription": "QBot is a solution designed for classroom teaching scenarios which allows teachers, tutors, and students to intelligently answer each other's questions within the Microsoft Teams collaboration platform.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msteams-application-qbot",
+    "title": "Resource Specific Consent with Graph API Javascript",
+    "shortDescription": "Shows how to request RSC permissions and use them to call Microsoft Graph",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-rsc/nodeJs",
     "longDescription": [
-      "QBot is a solution designed for classroom teaching scenarios which allows teachers, tutors, and students to intelligently answer each other's questions within the Microsoft Teams collaboration platform."
+      "Shows how to request RSC permissions and use them to call Microsoft Graph"
     ],
-    "creationDateTime": "2022-05-30",
-    "updateDateTime": "2022-06-20",
+    "creationDateTime": "2021-07-07",
+    "updateDateTime": "2021-11-29",
     "products": [
       "Teams"
     ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": ""
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": ""
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": ""
+      }
+    ],
+    "thumbnails": [],
     "authors": [
       {
         "gitHubAccount": "OfficeDev",
