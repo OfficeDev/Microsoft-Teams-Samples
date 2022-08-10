@@ -26,7 +26,7 @@ createdDate: "05-08-2022 17:00:25"
 
 ## Prerequisites
 
-- [nodejs](https://reactjs.org/en/)
+- [nodejs](https://nodejs.org/en/)
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
 ### 1. App Registration 
