@@ -11,9 +11,13 @@ extensions:
 contentType: samples
 createdDate: "05-08-2022 17:00:25"
 ---
+**Steps:**
 
+ - Add your application to the `meetings` its display as below.
   ![Stage 1](Images/stage1.png)
+ - Select your application and click on `Save` button to configure.
   ![Stage 2](Images/stage2.png)
+ - Your will run and click on `mute/unmute` button to toggle client audio.
   ![Stage 3](Images/stage3.png)
 
 
