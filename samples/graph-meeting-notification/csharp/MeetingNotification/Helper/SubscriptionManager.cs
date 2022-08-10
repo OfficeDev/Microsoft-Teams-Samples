@@ -1,39 +1,50 @@
-﻿using Microsoft.Bot.Builder;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Graph;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Threading;
-using System.Threading.Tasks;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
 
 namespace MeetingNotification.Helper
 {
+    using MeetingNotification.Model.Configuration;
+    using MeetingNotification.Provider;
+    using Microsoft.Bot.Builder;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Options;
+    using Microsoft.Graph;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net.Http.Headers;
+    using System.Threading;
+    using System.Threading.Tasks;
+
     public class SubscriptionManager : BackgroundService
     {
         private const int SubscriptionExpirationTimeInMinutes = 60;
+
         private const int SubscriptionRenewTimeInMinutes = 15;
-        private readonly IConfiguration _config;
+
+        /// <summary>
+        /// Stores the Bot configuration values.
+        /// </summary>
+        private readonly IOptions<BotConfiguration> botSettings;
+
         private readonly ILogger _logger;
-        private readonly string _token;
-        private readonly ITurnContext _turnContext;
+
+        private readonly GraphBetaClient graphBetaClientProvider;
 
         public static readonly Dictionary<string, Subscription> Subscriptions = new Dictionary<string, Subscription>();
 
-        public SubscriptionManager(IConfiguration config, ILogger<SubscriptionManager> logger, string token, ITurnContext turnContext)
+        public SubscriptionManager(IOptions<BotConfiguration> botSettings, ILogger<SubscriptionManager> logger, GraphBetaClient graphBetaClientProvider)
         {
-            _config = config;
+            this.botSettings = botSettings;
+            this.graphBetaClientProvider = graphBetaClientProvider;
             _logger = logger;
-            _token = token;
-            _turnContext = turnContext;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await InitializeAllSubscription();
+            await InitializeAllSubscription("");
 
             while (!stoppingToken.IsCancellationRequested)
             {
@@ -45,7 +56,7 @@ namespace MeetingNotification.Helper
 
         public override async Task StartAsync(CancellationToken stoppingToken)
         {
-            await InitializeAllSubscription();
+            await InitializeAllSubscription("");
 
             while (!stoppingToken.IsCancellationRequested)
             {
@@ -55,24 +66,33 @@ namespace MeetingNotification.Helper
             }
         }
 
-        public async Task InitializeAllSubscription()
+        public async Task InitializeAllSubscription(string meetingJoinUrl)
         {
             _logger.LogWarning("InitializeAllSubscription-started");
-            var UserId = _turnContext.Activity.From.AadObjectId;
 
-            await CreateNewSubscription(UserId);
+            await CreateNewSubscription(meetingJoinUrl);
 
             await this.CheckSubscriptions().ConfigureAwait(false);
             _logger.LogWarning("InitializeAllSubscription-completed");
         }
 
-        private async Task<Subscription> CreateNewSubscription(string userId)
+        public async Task CheckSubscriptions()
         {
-            _logger.LogWarning($"CreateNewSubscription-start: {userId}");
+            _logger.LogWarning($"Checking subscriptions {DateTime.UtcNow.ToString("h:mm:ss.fff")}");
 
-            if (string.IsNullOrEmpty(userId))
+            foreach (var subscription in Subscriptions)
+            {
+                await RenewSubscription(subscription.Value);
+            }
+        }
+
+        private async Task<Subscription> CreateNewSubscription(string meetingJoinUrl)
+        {
+            _logger.LogWarning($"CreateNewSubscription-start: {meetingJoinUrl}");
+
+            if (string.IsNullOrEmpty(meetingJoinUrl))
                 return null;
-            var resource = $"communications/presences/{userId}";
+            var resource = $"/communications/onlineMeetings/?$filter=JoinWebUrl eq '{meetingJoinUrl}'";
             return await CreateSubscriptionWithResource(resource);
         }
 
@@ -81,7 +101,7 @@ namespace MeetingNotification.Helper
             if (string.IsNullOrEmpty(resource))
                 return null;
 
-            var graphServiceClient = GetGraphClient();
+            var graphServiceClient = graphBetaClientProvider.GetGraphClientforApp();
 
             if (Subscriptions.Any(s => s.Value.Resource == resource && s.Value.ExpirationDateTime < DateTime.UtcNow))
                 return null;
@@ -100,7 +120,7 @@ namespace MeetingNotification.Helper
                 return null;
             }
 
-            var notificationUrl = _config["BaseUrl"] + "/api/notifications";
+            var notificationUrl = this.botSettings.Value.BaseUrl + "/api/notifications";
 
             var existingSubscription = existingSubscriptions.FirstOrDefault(s => s.Resource == resource);
             if (existingSubscription != null && existingSubscription.NotificationUrl != notificationUrl)
@@ -114,13 +134,13 @@ namespace MeetingNotification.Helper
                 var sub = new Subscription
                 {
                     Resource = resource,
-                    EncryptionCertificate = null,
-                    EncryptionCertificateId = null,
+                    EncryptionCertificate = this.botSettings.Value.Base64EncodedCertificate,
+                    EncryptionCertificateId = this.botSettings.Value.EncryptionCertificateId,
+                    IncludeResourceData = true,
                     ChangeType = "updated",
                     NotificationUrl = notificationUrl,
                     ClientState = "ClientState",
-                    ExpirationDateTime = DateTime.UtcNow + new TimeSpan(days: 0, hours: 0, minutes: SubscriptionExpirationTimeInMinutes, seconds: 0),
-                    LatestSupportedTlsVersion = "v1_2",
+                    ExpirationDateTime = DateTime.UtcNow + new TimeSpan(days: 1, hours: 0, minutes: SubscriptionExpirationTimeInMinutes, seconds: 0)
                 };
 
                 try
@@ -144,33 +164,15 @@ namespace MeetingNotification.Helper
             return existingSubscription;
         }
 
-        public async Task CheckSubscriptions()
-        {
-            _logger.LogWarning($"Checking subscriptions {DateTime.UtcNow.ToString("h:mm:ss.fff")}");
-
-            //if (Subscriptions.Count != 1)
-            if (Subscriptions.Count <= 0)
-            {
-                _logger.LogWarning($"CheckSubscriptions-Number of subscription={Subscriptions.Count}");
-                // Possible failure.
-                InitializeAllSubscription().RunSynchronously();
-            }
-
-            foreach (var subscription in Subscriptions)
-            {
-                await RenewSubscription(subscription.Value);
-            }
-        }
-
         private async Task RenewSubscription(Subscription subscription)
         {
             _logger.LogWarning($"Current subscription: {subscription.Id}, Expiration: {subscription.ExpirationDateTime}");
 
-            var graphServiceClient = GetGraphClient();
+            var graphServiceClient = graphBetaClientProvider.GetGraphClientforApp();
 
             var newSubscription = new Subscription
             {
-                ExpirationDateTime = DateTime.UtcNow.AddMinutes(60)
+                ExpirationDateTime = DateTime.UtcNow.AddDays(1)
             };
 
             try
@@ -203,7 +205,7 @@ namespace MeetingNotification.Helper
         {
             _logger.LogWarning($"Current subscription: {subscription.Id}, Expiration: {subscription.ExpirationDateTime}");
 
-            var graphServiceClient = GetGraphClient();
+            var graphServiceClient = graphBetaClientProvider.GetGraphClientforApp();
 
             try
             {
@@ -218,23 +220,6 @@ namespace MeetingNotification.Helper
             {
                 _logger.LogError(ex, $"Delete Subscription Failed: {subscription.Id}");
             }
-        }
-
-        private GraphServiceClient GetGraphClient()
-        {
-            var graphClient = new GraphServiceClient(new DelegateAuthenticationProvider((requestMessage) =>
-            {
-                // get an access token for Graph
-                var accessToken = this._token;
-
-                requestMessage
-                    .Headers
-                    .Authorization = new AuthenticationHeaderValue("bearer", accessToken);
-
-                return Task.FromResult(0);
-            }));
-
-            return graphClient;
         }
     }
 }

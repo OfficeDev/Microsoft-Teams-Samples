@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample app demonstrates sending change notifications to user presence in Teams based on user presence status.
+description: This is a sample application which demonstrates use of online meeting subscription and sends you the notifications in chat using bot.
 products:
 - office-teams
 - office
@@ -9,22 +9,73 @@ languages:
 - csharp
 extensions:
 contentType: samples
-createdDate: "07-07-2021 13:38:26"
+createdDate: "10-08-2022 00:16:45"
 ---
 
-# Change Notification sample
+# This is a sample application that shows the usage of Graph CRUD operations related to team tags.
 
-Bot Framework v4 ChangeNotification sample.
+This is a sample application which demonstrates use of online meeting subscription that will post notifications when user joined/left and when meeting start/end.
 
-This sample app demonstrates sending change notifications to user presence in Teams based on user presence status.
+## Concepts introduced in this sample
+- After sucessfully installation of bot in meeting you will get a welcome card and the subscription will be created for meeting it is installed in.
 
+![Welcome Card](MeetingNotification/Images/WelcomeCard.png)
+
+- After that when the metting gets started or user joins the meeting notifications will be sent in chat:
+
+![Meeting Started](MeetingNotification/Images/MeetingStartedCard.png)
+
+- Notifications will also be triggered when someone leaves that meeting or when meeting gets end
+
+![Meeting Ended](MeetingNotification/Images/MeetingEndedCard.png)
 
 ## Prerequisites
 
-- Microsoft Teams is installed and you have an account
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- Microsoft Teams is installed and you have an account (not a guest account)
+-  .[NET 6.0](https://dotnet.microsoft.com/en-us/download) SDK.
+    ```bash
+        # determine dotnet version
+        dotnet --version
+    ```
+-  [ngrok](https://ngrok.com/) or equivalent tunneling solution
+-  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
+## Run app locally
+
+### Register your application with Azure AD
+
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
+3. Navigate to **API Permissions**, and make sure to add the follow permissions:
+-   Select Add a permission
+-   Select Microsoft Graph -> Application permissions.
+   - `OnlineMeetings.Read.All`
+
+-   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+4.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json file.
+
+### Create Azure bot resource
+
+In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+
+    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
+### Create and install Self-Signed certificate
+
+To include resource data of online meeting, this Graph API require self-signed certificate. Follow the below steps to create and manage certificate.
+
+1. You can self-sign the certificate, since Microsoft Graph does not verify the certificate issuer, and uses the public key for only encryption.
+
+2. Use [Azure Key Vault](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-whatis) as the solution to create, rotate, and securely manage certificates. Make sure the keys satisfy the following criteria:
+
+    - The key must be of type `RSA`
+    - The key size must be between 2048 and 4096 bits
+
+3. Follow this documentation for the steps - [**Create and install Self-Signed certificate**](Certificate Documentation/README.md)
+
+
+### Setup code.
 1) Clone the repository
 
     ```bash
@@ -35,8 +86,8 @@ This sample app demonstrates sending change notifications to user presence in Te
 
   - Launch Visual Studio code
   - File -> Open Folder
-  - Navigate to `samples/graph-change-notification/csharp` folder
-  - Select `ChangeNotification` folder
+  - Navigate to `samples/graph-meeting-notification/csharp` folder
+  - Select `MeetingNotification` folder
   - Press `F5` to run the project
 
   B) Run ngrok - point to port 3978
@@ -44,63 +95,17 @@ This sample app demonstrates sending change notifications to user presence in Te
    ```bash
      ngrok http -host-header=rewrite 3978
    ```  
-    
-## Instruction on setting connection string for bot authentication on the behalf of user
-1. In the Azure portal, select your resource group from the dashboard.
-
-2. Select your bot channel registration link.
-
-3. Open the resource page and select Configuration under Settings.
-
-4. Select Add OAuth Connection Settings.
-![image](https://user-images.githubusercontent.com/85864414/121879805-df15cb00-cd2a-11eb-8076-1236ccb1bbfc.PNG)
-5. Complete the form as follows:
-
-![image](https://user-images.githubusercontent.com/85864414/122000240-1d16fb80-cdcc-11eb-8aeb-a1dc898f947e.PNG)
-
-a. Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
-
-b. Service Provider. Select Azure Active Directory. Once you select this, the Azure AD-specific fields will be displayed.
-
-c. Client id. Enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
-
-d. Client secret. Enter the secret that you recorded for your Azure identity provider app in the steps above.
-
-e. Grant Type. Enter authorization_code.
-
-f. Login URL. Enter https://login.microsoftonline.com.
-
-g. Tenant ID, enter the Directory (tenant) ID that you recorded earlier for your Azure identity app or common depending on the supported account type selected when you created the identity provider app.
-h. For Resource URL, enter https://graph.microsoft.com/
-i. Provide  Scopes like "Presence.Read, Presence.Read.All"
-![image](https://user-images.githubusercontent.com/85864414/121880473-af1af780-cd2b-11eb-8166-837425ef186f.PNG)
-
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 ## Instruction for appsetting
-1. Provide appId and appPassword in the appsetting that is created in Azure.
-2. Provide UserId in appsetting for which you want to subscribe the user presence.
-3. Provide the ngrok url as  "BaseUrl" in appsetting on which application is running on.
+1. Provide MicrosoftAppId, MicrosoftAppPassword and MicrosoftAppTenantId in the appsetting that is created in Azure.
+2. Provide the ngrok url as  "BaseUrl" in appsetting on which application is running on.
+3. You should be having Base64EncodedCertificate and CertificateThumbprint value from *Create and install Self-Signed certificate* step.
 
-
-## Concepts introduced in this sample
-- After sucessfully installation of app you will get a sign in button. When sign in is complete then you get your current status in adapative card
-![image](https://user-images.githubusercontent.com/85864414/122000447-741cd080-cdcc-11eb-9833-54f87cd7567f.PNG)
-![image](https://user-images.githubusercontent.com/85864414/121878949-ebe5ef00-cd29-11eb-8ab0-683ce3ffbfcb.PNG)
-
-- After that when the user status chagnes you will get notify about their status: 
-- Change user status from available to busy like
-![image](https://user-images.githubusercontent.com/85864414/121879184-30718a80-cd2a-11eb-88b5-2a422042990b.PNG)
-- Change user status from busy to busy offline
- ![image](https://user-images.githubusercontent.com/85864414/121879374-63b41980-cd2a-11eb-8ed4-1b92035ff9c1.PNG)
-
-
- 
+## Instruction for manifest
+1. Fill any GUID for <APP-ID>. You can also put your MicrosoftAppId here.
+2. Update <MICROSOFT-APP-ID> placeholder with your Microsoft App Id.
  
 ## Further reading
-- [Bot Authentication](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=aadv2%2Ccsharp)
-- [Change Notification](https://docs.microsoft.com/en-us/graph/api/resources/webhooks?view=graph-rest-beta)
-- [App in Catalog](https://docs.microsoft.com/en-us/graph/api/resources/teamsapp?view=graph-rest-1.0)
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Change notifications for Microsoft Teams meeting](https://docs.microsoft.com/en-us/graph/changenotifications-for-onlinemeeting)
+- [Set up change notifications that include resource data](https://docs.microsoft.com/en-us/graph/webhooks-with-resource-data)
 
