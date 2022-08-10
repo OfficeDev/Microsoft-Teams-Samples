@@ -21,11 +21,11 @@ This is a sample application which demonstrates use of online meeting subscripti
 
 ![Welcome Card](MeetingNotification/Images/WelcomeCard.png)
 
-- After that when the metting gets started or user joins the meeting notifications will be sent in chat:
+- After that when the metting gets started or user joins the meeting, notifications will be sent in chat:
 
 ![Meeting Started](MeetingNotification/Images/MeetingStartedCard.png)
 
-- Notifications will also be triggered when someone leaves that meeting or when meeting gets end
+- Notifications will also be triggered when someone leaves that meeting or when meeting gets end:
 
 ![Meeting Ended](MeetingNotification/Images/MeetingEndedCard.png)
 
@@ -59,7 +59,7 @@ This is a sample application which demonstrates use of online meeting subscripti
 
 In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
-    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 ### Create and install Self-Signed certificate
 
@@ -72,7 +72,7 @@ To include resource data of online meeting, this Graph API require self-signed c
     - The key must be of type `RSA`
     - The key size must be between 2048 and 4096 bits
 
-3. Follow this documentation for the steps - [**Create and install Self-Signed certificate**](Certificate Documentation/README.md)
+3. Follow this documentation for the steps - [**Create and install Self-Signed certificate**](MeetingNotification/CertificateDocumentation/README.md)
 
 
 ### Setup code.
