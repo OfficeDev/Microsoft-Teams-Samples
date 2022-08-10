@@ -60,4 +60,4 @@ In Azure portal, [Register an app ](https://portal.azure.com/#view/Microsoft_AAD
 
 - [Toggle incoming audio](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet#toggle-incoming-audio)
 - [Get incoming audio speaker](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet#get-incoming-audio-speaker)
-- 
+
