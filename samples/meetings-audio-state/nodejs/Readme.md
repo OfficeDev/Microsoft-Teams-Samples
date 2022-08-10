@@ -11,7 +11,7 @@ extensions:
 contentType: samples
 createdDate: "05-08-2022 17:00:25"
 ---
-##Mute/Unmute Api Sample
+
   ![Stage 1](Images/stage1.png)
   ![Stage 2](Images/stage2.png)
   ![Stage 3](Images/stage3.png)
