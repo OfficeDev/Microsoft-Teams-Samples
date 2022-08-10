@@ -63,7 +63,9 @@ In Azure portal, [Register an app ](https://portal.azure.com/#view/Microsoft_AAD
 7) Manually update the manifest.json
     - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
-    - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
+    - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app").
+
+**Note : RSC has been enabled post 1.11 hence this feature will not work below 1.12** 
 
 ## Further reading
 
