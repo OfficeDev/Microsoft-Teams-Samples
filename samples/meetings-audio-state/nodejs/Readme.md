@@ -11,6 +11,12 @@ extensions:
 contentType: samples
 createdDate: "05-08-2022 17:00:25"
 ---
+##Mute/Unmute Api Sample
+  ![Stage 1](Images/stage1.png)
+  ![Stage 2](Images/stage2.png)
+  ![Stage 3](Images/stage3.png)
+
+
 ## Prerequisites
 
 - [ReactJs](https://reactjs.org/en/)
@@ -24,7 +30,7 @@ In Azure portal, [Register an app ](https://portal.azure.com/#view/Microsoft_AAD
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In the folder where repository is cloned navigate to `samples/Mute-unmute-API/reactjs`
+2) In the folder where repository is cloned navigate to `samples/meetings-audio-state/nodejs`
 
 3) Install node modules
 
@@ -52,8 +58,6 @@ In Azure portal, [Register an app ](https://portal.azure.com/#view/Microsoft_AAD
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Send Notification to User in Chat](https://docs.microsoft.com/en-us/graph/api/chat-sendactivitynotification?view=graph-rest-beta)
-- [Send Notification to User in Team](https://docs.microsoft.com/en-us/graph/api/team-sendactivitynotification?view=graph-rest-beta&tabs=http)
-- [Send Notification to User](https://docs.microsoft.com/en-us/graph/api/userteamwork-sendactivitynotification?view=graph-rest-beta&tabs=http)
+- [Toggle incoming audio](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet#toggle-incoming-audio)
+- [Get incoming audio speaker](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet#get-incoming-audio-speaker)
+- 
