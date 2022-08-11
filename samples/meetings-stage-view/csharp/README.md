@@ -40,7 +40,7 @@ This capability is currently available in developer preview only.
 
 
 -Screen for share To Do
-![Share Specific part screen](ToDo.jpeg)
+![Share Specific part screen](AppInMeeting/Images/ToDo.jpeg)
 
 -Screen after click on Plus icon in Share TO Do
 ![Share Specific part screen](AppInMeeting/Images/PlusIconTODo.jpeg)
