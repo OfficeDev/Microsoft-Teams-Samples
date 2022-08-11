@@ -73,10 +73,10 @@ code {
 }
 
 .chat-form {
-  display: grid;
-  padding-left: 1rem;
-  color: #fff;
-  font-family: segoe ui;
+    display: grid;
+    padding-left: 1rem;
+    color: #808080;
+    font-family: segoe ui;
 }
 
 #addDetails {
