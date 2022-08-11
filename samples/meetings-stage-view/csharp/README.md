@@ -63,7 +63,36 @@ This capability is currently available in developer preview only.
 
 ![Share Specific part screen](AppInMeeting/Images/PlusIconTODo.jpeg)
 
+# Android Mobile Testing ScreenShots:
 
+#-First Screen shot in Android
+
+![Share Specific part screen](AppInMeeting/Images/AndroidFirstScreeen.jpeg)
+
+
+#-Screen for share To Do
+
+![Share Specific part screen](AppInMeeting/Images/AndroidScreenShareTODo.jpeg)
+
+#-Screen after click on Plus icon in Share TO Do
+
+![Share Specific part screen](AppInMeeting/Images/AndroidPlusIconTODo.jpeg)
+
+#-Screen for share To Doing
+
+![Share Specific part screen](AppInMeeting/Images/AndroidScreenShareDoing.jpeg)
+
+#-Screen after click on Plus icon in Share Doing
+
+![Share Specific part screen](AppInMeeting/Images/AndroidPlusIconDoing.jpeg)
+
+#-Screen for share To Done
+
+![Share Specific part screen](AppInMeeting/Images/AndroidScreenShareDone.jpeg)
+
+#-Screen after click on Plus icon in Share Done
+
+![Share Specific part screen](AppInMeeting/Images/AndroidPlusIconDone.jpeg)
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
