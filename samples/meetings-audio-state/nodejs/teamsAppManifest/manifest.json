@@ -3,7 +3,7 @@
   "manifestVersion": "1.13",
   "version": "1.0.0",
   "id": "{{Manifest Id}}",
-  "packageName": "com.teams.meetingtabcontext",
+  "packageName": "com.teams.meetingaudiocalltoggle",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -15,12 +15,12 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "mute/unmute",
-    "full": "Test Configurable tab"
+    "short": "Mute/Unmute Audio Call",
+    "full": "Mute/Unmute Teams meeting audio call"
   },
   "description": {
-    "short": "Mute/Unmute Client Audio",
-    "full": "This sample shows the congiguration Mute and Unmute Client Incoming Audio."
+    "short": "Mute/Unmute audio call",
+    "full": "This sample shows how to Mute/Unmute Teams meeting audio call."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [
@@ -32,12 +32,7 @@
         "groupchat"
       ],
       "context": [
-        "channelTab",
-        "privateChatTab",
-        "meetingChatTab",
-        "meetingDetailsTab",
-        "meetingSidePanel",
-        "meetingStage"
+        "meetingSidePanel"
       ]
     }
   ],
@@ -46,7 +41,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok.io"
+    "<<DOMAIN-NAME>>"
   ],
   "webApplicationInfo": {
     "id": "{{MicrosoftAppId}}",

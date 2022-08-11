@@ -35,7 +35,6 @@ class MyView extends Component {
                     <div className="tag-container">
                         <h3>Toggle Mute/Unmute Call </h3>
                         <Button primary content="Mute/Un-Mute" onClick={this.togglestate} />
-                        <li className="break"> Status : <b>{this.state.result}</b></li>
                     </div>
                 </FlexItem>
             </Flex>

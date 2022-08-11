@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample is about mute and unmute using toggle Incoming Client Audio API.
+description: This sample shows how to mute/unmute Teams meeting audio using toggle Incoming Client Audio API.
 products:
 - office-teams
 - office
@@ -9,21 +9,21 @@ languages:
 - reactjs
 extensions:
 contentType: samples
-createdDate: "05-08-2022 17:00:25"
+createdDate: "08-08-2022 12:00:01"
 ---
 **Steps:**
 
  - Add your application to the `meetings` as its display as below.
 
-  ![Stage 1](Images/stage1.png)
+  ![Stage 1](Images/SelectApp.png)
 
  - Select your application and click on `Save` button to configure.
 
-  ![Stage 2](Images/stage2.png)
+  ![Stage 2](Images/Setting-Up.png)
 
  - Your application is running now and click on `mute/unmute` button to toggle client audio.
 
-  ![Stage 3](Images/stage3.png)
+  ![Stage 3](Images/App-In-Meeting.png)
 
 
 ## Prerequisites
