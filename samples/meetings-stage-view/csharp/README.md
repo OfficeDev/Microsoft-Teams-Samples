@@ -34,27 +34,27 @@ This capability is currently available in developer preview only.
 
 # IOS Mobile Testing ScreenShots:
 
--First Screen shot in IOS 
+#-First Screen shot in IOS 
 
 ![Share Specific part screen](AppInMeeting/Images/IOSFirstScreen.jpeg)
 
 
--Screen for share To Do
+#-Screen for share To Do
 ![Share Specific part screen](AppInMeeting/Images/ToDo.jpeg)
 
--Screen after click on Plus icon in Share TO Do
+#-Screen after click on Plus icon in Share TO Do
 ![Share Specific part screen](AppInMeeting/Images/PlusIconTODo.jpeg)
 
--Screen for share To Doing
+#-Screen for share To Doing
 ![Share Specific part screen](AppInMeeting/Images/ShareDoing.jpeg)
 
--Screen after click on Plus icon in Share Doing
+#-Screen after click on Plus icon in Share Doing
 ![Share Specific part screen](AppInMeeting/Images/PlusIconToDing.jpeg)
 
--Screen for share To Done
+#-Screen for share To Done
 ![Share Specific part screen](AppInMeeting/Images/ShareDone.jpeg)
 
--Screen after click on Plus icon in Share Done
+#-Screen after click on Plus icon in Share Done
 ![Share Specific part screen](AppInMeeting/Images/PlusIconTODo.jpeg)
 
 
