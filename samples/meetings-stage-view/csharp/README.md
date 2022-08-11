@@ -32,6 +32,12 @@ This capability is currently available in developer preview only.
 
 ![Share Specific part screen](AppInMeeting/Images/share_specific_part.png)
 
+# IOS Mobile Testing ScreenShots:
+
+--First Screen shot in IOS 
+
+(AppInMeeting/Images/IOSFirstScreen.jpeg)
+
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
