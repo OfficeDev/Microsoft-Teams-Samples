@@ -36,7 +36,7 @@ This capability is currently available in developer preview only.
 
 --First Screen shot in IOS 
 
-(AppInMeeting/Images/IOSFirstScreen.jpeg)
+![Share Specific part screen](AppInMeeting/Images/IOSFirstScreen.jpeg)
 
 ## Prerequisites
 
