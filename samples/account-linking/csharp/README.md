@@ -12,7 +12,9 @@ contentType: samples
 createdDate: "22-03-2022 00:00:00"
 ---
 
-# External OAuth identity linking in Teams Apps.
+# Overview of External OAuth identity linking in Teams Apps
+
+This section explains the purpose for this sample. This section will be most helpful for product managers and engineers. The next section below (Technical Implementation) explains the instructions to use this sample. The Technical Implementation section is more helpful for helpful. 
 
 This sample demos linking user's AAD id with their GitHub identity. 
 
@@ -21,9 +23,103 @@ The code generically handles account linking for OAuth2.0, the only GitHub speci
 Please see the [Code Tours](#code-tours) section for in-depth explanation of the sample. 
 
 ## About the sample
-    After the user installs the app, they will be prompted when using any of the capabilities (tab / conversational bot / messaging extension) to log into GitHub. After logging in the app will store the users access and refresh tokens so that they won't need to log in again across the other capabilities or on other devices. 
+After the user installs the app, they will be prompted when using any of the capabilities (tab / conversational bot / messaging extension) to log into GitHub. After logging in the app will store the users access and refresh tokens so that they won't need to log in again across the other capabilities or on other devices. 
 
-    There are example in-memory and Azure implementations of the token persistance. 
+There are both in-memory and Azure example implementations of the token persistence. 
+    
+You will find the implementation details below. 
+
+This sample will help you
+* Show you the architecture to build out more seamless authentication by using SSO in Teams
+* Use this code (if you build in C#) 
+
+### Scope
+SSO is a problem across multiple surface areas and this sample can be used to build solutions in three surface areas:
+* Tabs
+* Bots
+* Messaging extensions
+
+This sample does not cover:
+* Microsoft Graph tokens. These tokens are received by exchanging user access tokens on the server-side.
+* All languages, it is only built in C#
+* Specific auth systems on your (partner) side
+
+### Context
+#### Problem Overview
+AAD SSO is important for three parties:
+* End user: Reduces the number of sign ins and allows for a single sign-in for all devices
+* Developer: Simpler development when it comes to authentication
+* IT Admin: Protect user privacy and security through conditional access policies
+Often, you (a partner) have your own Identity and Access Management systems and your own user account information. For you to build out AAD SSO inside of Teams, you need to associate the users’ accounts with AAD SSO accounts. 
+
+#### SSO Overview
+Teams enacts AAD SSO in the following manner:
+1.  In the tab, call getAuthToken() using the Teams JavaScript SDK. This tells Teams to obtain an auth token.
+2.  If this is the first time the current user has used your tab application, the user will be prompted to consent.
+3.  Microsoft Teams requests a token for the tab application from the Azure AD endpoint for the current user.
+4.  Azure AD sends the tab application token back to Teams.
+5.  Microsoft Teams then sends the token back to the tab application.
+6.  JavaScript in the tab application can parse the token and extract the information it needs, such as the user's email address. The tab app can optionally exchange the token server-side for further Graph permissions.
+
+### Problem Definition
+Teams SSO (https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso?tabs=dotnet) offers a seamless experience for partners to build auth inside of Teams. However, Teams SSO is only available for partners who use AzureAD already in their app. For partners that don't use AAD, they often have to use a workaround. There are two main types of scenarios that we typically see partners face when doing these workarounds:
+1.  the user exists in the third-party app with the same email address
+2.  the user exists in the third-party app with a different email address
+
+#### Scenario #1
+If the email addresses are same, then you can be linked right after the user is signed in with AAD. This is relatively simple for you to implement as you merely must search their own auth system for the user’s email and associated the access token with that email. You need to create a separate attribute or separate table to match a user’s email address with the AAD access token (and token refresh). 
+
+>To add to this difficulty, Microsoft also does not advise email mapping. Emails and User Principal Names (UPNs) can sometimes change.
+ 
+#### Scenario #2
+If the email addresses are different, you must do the following:
+1.  Ask the user to consent/sign with SSO
+2.  Ask the user to sign in with the email they use with your 3P app
+3.  Associate their Teams identity with their app’s identity in a table (or as an attribute on their database)
+Partners have been having some trouble with both of these scenarios. Scenario #2 is especially problematic for several partners. The underlying difficulty is associating a user’s AAD email and associated access token with a different email. For example, the user’s AAD email could be: john@contoso.com, but the email that is registered with the partner is john@gmail.com or even johnmatthews@contoso.com. In both of these examples, the emails don’t match up. The personal email address issue occurs frequently with apps that exist outside of enterprise scope (e.g., Starbucks, Uber, Coda, Observable). This is especially difficult to process as emails/UPNs can change as well for the same individual. 
+
+**As the solution for Scenario #2 will solve Scenario #1 as well, we will focus on solving Scenario #2. 
+
+## Solution
+### Solution Description
+
+As covered earlier, the solution will be targeted to solve Scenario #2. There are four parts to this solution:
+* UI to prompt user to login to/accept SSO 
+* UI to prompt user to login to/accept 3P app
+* Logic to connect user information from the partner’s auth system to SSO
+* Table that contains: AzureAD identity (GUID/UUID) – not the AAD refresh token 
+
+This sample does not store user information from your auth system. Replicating user info can cause a myriad of consistency and data inventory issues. 
+
+Example
+For example, let’s say your auth system uses personal email addresses and its users have no associated Teams identity.
+For this, you would have to build out this entire flow:
+1.  Ask the user to sign into the app
+2.  Ask the user to connect their Teams identity with their app’s identity by going through the SSO flow
+3.  Associate their Teams identity with their app’s identity in a table (or as an attribute on their database
+Which would mean building out three components:
+* UI to prompt user to login to their Teams SSO after logging in with their 3P app credentials
+* Logic to connect user information from 3P auth system to SSO for Teams
+* Table that contains: AzureAD identity (GUID/UUID) – not the AAD access token 
+
+### Flows
+The flows are:
+
+Tab:
+1.  User consents to Teams SSO
+2.  User presented with partner auth popup
+
+Bot:
+1.  SignIn Card 
+2.  Auth popup
+3.  Partner auth 
+
+Message Extension: 
+1.  SignIn response
+2.  Auth popup
+3.  Partner auth
+
+# Technical Implementation
 
 ## Prerequisites
 
@@ -68,13 +164,12 @@ Please follow the instructions on [creating an Azure AD application with Tab SSO
 #### 2.1 Configure the app for v2 tokens
 **IMPORTANT** Please ensure the `accessTokenAcceptedVersion` in the `Manifest` blade is set to `2`.
 
-
 Please save for a future step
 1. The `Application (client) id` from the "Overview" blade for the app
 2. A client secret from the "Certificates & secrets" page
 
 ### 3. Deploy the bot to Azure
-Create a new [Azure Bot Registration]() and [connect it to Microsoft Teams](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+Create a new [Azure Bot Registration]( https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-4.0) and [connect it to Microsoft Teams](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 Please save  
 1. The `Application (client) id` from the "Overview" blade for the bot (called the bot id going forward)
@@ -153,3 +248,5 @@ Add the parameters to the
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Authentication basics](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/authentication/authentication)
+
+
