@@ -32,7 +32,6 @@ namespace Microsoft.BotBuilderSamples
         protected readonly BotState _userState;
         protected readonly BotState _conversationState;
         protected readonly Dialog _dialog;
-        // protected readonly DialogManager _dialogManager;
         private readonly string _connectionName;
         private readonly string _siteUrl;
         private readonly IStatePropertyAccessor<string> _userConfigProperty;
@@ -44,7 +43,6 @@ namespace Microsoft.BotBuilderSamples
             _conversationState = conversationState ?? throw new NullReferenceException(nameof(conversationState));
             _logger = logger;
             _dialog = dialog;
-            // _dialogManager = new DialogManager(dialog) { ConversationState = conversationState, UserState = userState };
             _siteUrl = configuration["SiteUrl"] ?? throw new NullReferenceException("SiteUrl");
             _userConfigProperty = userState.CreateProperty<string>("UserConfiguration");
         }
@@ -65,7 +63,7 @@ namespace Microsoft.BotBuilderSamples
                 Console.Write(ex);
             }
         }
-
+       
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Running dialog with Message Activity.");
