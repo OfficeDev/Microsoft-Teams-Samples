@@ -18,12 +18,16 @@ This is a sample which shows how to save user's conversation reference informati
 
 ## Edit the manifest
 
-You can find the Teams app manifest in `templates/appPackage` folder. The folder contains two manifest files:
-* `manifest.local.template.json`: Manifest file for Teams app running locally.
-* `manifest.remote.template.json`: Manifest file for Teams app running remotely (After deployed to Azure).
+You can find the Teams app manifest in `templates/appPackage` folder. The folder contains a manifest template file:
+* `manifest.template.json`
 
-Both files contain template arguments with `{...}` statements which will be replaced at build time. You may add any extra properties or permissions you require to this file. See the [schema reference](https://docs.microsoft.com/en-us/microsoftteams/platform/resources/schema/manifest-schema) for more information.
+Both files contain template arguments with `{...}` statements which will be replaced at build time. You can hover the prepoerties to see the actual value or preview the manifest. You may add any extra properties or permissions you require to this file. See the [schema reference](https://docs.microsoft.com/en-us/microsoftteams/platform/resources/schema/manifest-schema) for more information.
 
+
+> Important Notes! This sample is under upgrading, please expect errors if you attempted to provision and deploy the app to cloud.
+> Once the sample complete upgrading, this notice will be removed. And the sample will be ready to be deployed to cloud by then.
+> Before that, please debug and run this sample app locally!
+> 
 ## Deploy to Azure
 
 Deploy your project to Azure by following these steps:
