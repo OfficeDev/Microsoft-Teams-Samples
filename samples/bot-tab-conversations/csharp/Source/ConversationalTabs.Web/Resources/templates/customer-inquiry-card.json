@@ -1,0 +1,38 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4",
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "size": "Medium",
+      "weight": "Bolder",
+      "text": "${title}"
+    },
+    {
+      "type": "TextBlock",
+      "weight": "Bolder",
+      "text": "${customerName}",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "spacing": "None",
+      "text": "{{DATE(${createdUtc},SHORT)}} {{TIME(${createdUtc})}}",
+      "isSubtle": true,
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "${question}",
+      "wrap": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "${openDetails}",
+      "url": "${subEntityDeepLink}"
+    }
+  ]
+}

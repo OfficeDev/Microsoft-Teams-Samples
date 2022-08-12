@@ -1,5 +1,6 @@
 ---
 page_type: sample
+description: Sample that shows how to use dialog bot with bot sdk v4, messaging extension and facebook auth flow in Nodejs.
 products:
 - office-teams
 - office-365

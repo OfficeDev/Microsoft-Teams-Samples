@@ -1,7 +1,9 @@
 <head>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.11.0/js/MicrosoftTeams.min.js"
-            integrity="sha384-SCVF3m7OvDKnfAilUzYn2yozEvBeP8n/Oq0yTH8VUI70J4AzrqR70jzjdQ6DI8s2"
-            crossorigin="anonymous"></script>
+    <script
+      src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
+      integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
+      crossorigin="anonymous">
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -11,9 +13,9 @@
         });
 
         let aadId;
-        microsoftTeams.initialize();
-        microsoftTeams.getContext(function (context) {
-            aadId = context.userObjectId
+        microsoftTeams.app.initialize();
+        microsoftTeams.app.getContext().then(function (context) {
+            aadId = context.user.id
         })
 
         // People picker api call.
@@ -24,16 +26,8 @@
                 setSelected = [aadId];
             }
 
-            microsoftTeams.people.selectPeople((error, people) => {
-                if (error) {
-                    if (error.message) {
-                        alert(" ErrorCode: " + error.errorCode + error.message);
-                    }
-                    else {
-                        alert(" ErrorCode: " + error.errorCode);
-                    }
-                }
-                if (people) {
+             microsoftTeams.people.selectPeople({ setSelected: setSelected, openOrgWideSearchInChatOrChannel: openOrgWideSearchInChatOrChannel, singleSelect: singleSelect }).then((people) => {
+                    if (people) {
                     let peopleData = JSON.stringify(people);
 
                     if (id == "default") {
@@ -59,8 +53,8 @@
                         $("#defaultMemberSelected").append("Selected member: " + peopleData)
                         $("#defaultMemberSelected").show();
                     }
-                }
-            }, { setSelected: setSelected, openOrgWideSearchInChatOrChannel: openOrgWideSearchInChatOrChannel, singleSelect: singleSelect });
+                    }
+                });
         }
     </script>
     <style>

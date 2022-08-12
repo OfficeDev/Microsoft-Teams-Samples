@@ -46,7 +46,6 @@ function getToken() {
             width: 600,
             height: 535,
             successCallback: result => {
-                debugger;
                 resolve(result);
             },
             failureCallback: reason => {
@@ -61,8 +60,7 @@ function getClientSideToken() {
 
     return new Promise((resolve, reject) => {
         microsoftTeams.authentication.getAuthToken({
-            successCallback: (result) => {     ;
-                debugger;
+            successCallback: (result) => {
                 resolve(result);
                 
             },
@@ -78,7 +76,6 @@ function getClientSideToken() {
 function getServerSideToken(clientSideToken) {
     return new Promise((resolve, reject) => {
         microsoftTeams.getContext((context) => {
-            debugger;
             var scopes = ["https://graph.microsoft.com/User.Read"];
             fetch('/GetUserAccessToken', {
                 method: 'get',

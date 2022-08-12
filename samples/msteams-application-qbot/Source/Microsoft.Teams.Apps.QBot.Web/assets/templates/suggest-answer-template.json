@@ -1,0 +1,46 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "id": "suggestedAnswer",
+      "type": "TextBlock",
+      "text": "${suggestedAnswer.message}",
+      "wrap": true,
+      "fontType": "Default"
+    },
+    {
+      "type": "TextBlock",
+      "text": "${text.Confidence}",
+      "size": "small",
+      "spacing": "small",
+      "wrap": true,
+      "isSubtle": true
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "${text.helpful}",
+      "data": {
+        "msteams": {
+          "type": "messageBack",
+          "text": "SuggestAnswerAction",
+          "value": "{\"questionId\": \"${question.Id}\", \"action\": \"Helpful\", \"suggestedAnswerMessage\": \"${suggestedAnswer.message}\", \"suggestedAnswerId\":\"${suggestedAnswer.id}\"}"
+        }
+      }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "${text.notHelpful}",
+      "data": {
+        "msteams": {
+          "type": "messageBack",
+          "text": "SuggestAnswerAction",
+          "value": "{\"questionId\": \"${question.Id}\", \"action\": \"NotHelpful\", \"suggestedAnswerMessage\": \"${suggestedAnswer.message}\", \"suggestedAnswerId\":\"${suggestedAnswer.id}\"}"
+        }
+      }
+    }
+  ]
+}

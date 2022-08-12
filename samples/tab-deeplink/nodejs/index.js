@@ -87,9 +87,7 @@ server.on('upgrade', (req, socket, head) => {
 });
 
 server.get('/*', restify.plugins.serveStatic({
-
       directory: './pages'
-
 }));
 
 

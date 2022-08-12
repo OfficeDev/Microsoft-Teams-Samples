@@ -8,9 +8,6 @@
 <body>
 </body>
 <script src="https://unpkg.com/@microsoft/teams-js@1.5.0/dist/MicrosoftTeams.min.js" , crossorigin="anonymous"></script>
-<script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.15/js/adal.min.js" ,
-    integrity="sha384-lIk8T3uMxKqXQVVfFbiw0K/Nq+kt1P3NtGt/pNexiDby2rKU6xnDY8p16gIwKqgI" ,
-    crossorigin="anonymous"></script>
 <script>
     microsoftTeams.initialize();
 
@@ -47,7 +44,6 @@
         return encodedQueryParams.join("&");
     }
     // Converts decimal to hex equivalent
-    // (From ADAL.js: https://github.com/AzureAD/azure-activedirectory-library-for-js/blob/dev/lib/adal.js)
     function _decimalToHex(number) {
         var hex = number.toString(16);
         while (hex.length < 2) {
@@ -55,9 +51,8 @@
         }
         return hex;
     }
-    // Generates RFC4122 version 4 guid (128 bits)
-    // (From ADAL.js: https://github.com/AzureAD/azure-activedirectory-library-for-js/blob/dev/lib/adal.js)
     
+    // Generates RFC4122 version 4 guid (128 bits)
     function _guid() {
 
         var cryptoObj = window.crypto || window.msCrypto; // for IE 11

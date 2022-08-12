@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Flex, Loader } from '@fluentui/react-northstar';
-import { isEqual } from 'lodash';
 import { useParams } from 'react-router-dom';
-import { useApi, useDefaultColorScheme, useInterval } from 'hooks';
+import { useDefaultColorScheme } from 'hooks';
 import { useAADId } from 'utils/TeamsProvider/hooks';
-import documentApi from 'api/documentApi';
+import { getDocument } from 'api/documentApi';
 import { DocumentChooser } from 'components/Documents';
 import { Document } from 'models';
+import { useQuery } from 'react-query';
 
 /**
  * A component that calls the `getDocument` API, get's the document and
@@ -16,14 +16,21 @@ import { Document } from 'models';
  */
 export function DocumentStage() {
   const params = useParams();
-  const getDocumentApi = useApi(documentApi.getDocument);
+  const documentId: string = params.documentId ?? 'unknown';
+  const pollingInterval = 2000;
 
-  const [document, setDocument] = useState<Document | undefined>();
+  // We are using https://react-query.tanstack.com/ for handling the calls to our APIs.
+  // Here when the documentId changes, React Query will fetch the document from the API.
+  // We are also using the `refetchInterval` to query the API every 2 seconds.
+  const { data, error } = useQuery<Document, Error>(
+    ['getDocument', { documentId }],
+    () => getDocument(documentId),
+    { refetchInterval: pollingInterval },
+  );
 
   const colorScheme = useDefaultColorScheme();
   const stageInlineStyles = { background: colorScheme.background };
   const loggedInAADId = useAADId();
-  const pollingInterval = 2000;
 
   const [showLoader, setShowLoader] = useState<boolean>(true);
   const showLoaderTimeout = 5000;
@@ -36,38 +43,20 @@ export function DocumentStage() {
     return () => clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    getDocumentApi.request(params.documentId);
-  }, [params.documentId]);
-
-  //using polling
-  useInterval(() => {
-    getDocumentApi.request(params.documentId);
-  }, pollingInterval);
-
-  useEffect(() => {
-    if (
-      getDocumentApi.data &&
-      !isEqual(document as Document, getDocumentApi.data as Document)
-    ) {
-      setDocument(getDocumentApi.data as Document);
-    }
-  }, [getDocumentApi.data, document]);
-
   return (
     <>
       <Flex styles={stageInlineStyles}>
-        {getDocumentApi.error &&
+        {error &&
           ((showLoader && <Loader />) || (
-            <h1>Error loading document: {getDocumentApi.error}</h1>
+            <h1>Error loading document: {error}</h1>
           ))}
-        {document && (
+        {data && (
           <>
             <DocumentChooser
-              documentId={document.id}
-              documentType={document.documentType}
+              documentId={data.id}
+              documentType={data.documentType}
               loggedInAadId={loggedInAADId}
-              signatures={document.signatures}
+              signatures={data.signatures}
               clickable
             />
           </>

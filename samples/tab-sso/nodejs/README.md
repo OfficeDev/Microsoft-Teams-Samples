@@ -1,19 +1,18 @@
 ---
 page_type: sample
+description: Microsoft Teams sample app for tabs Azure AD SSO which uses OBO flow to call Graph APIs using Node.js
 products:
 - office-teams
 - office
 - office-365
 languages:
 - nodejs
-title: Tabs Azure AD SSO Sample using NodeJS
-description: Microsoft Teams hello world sample app for tabs Azure AD SSO in Node.js
 extensions:
-  contentType: samples
-  createdDate: 12/3/2021 12:53:17 PM
+contentType: samples
+createdDate: "12/3/2021 12:53:17 PM"
 ---
-
 # Tabs Azure AD SSO Sample using NodeJS
+
 
 This sample shows how to implement Azure AD single sign-on support for tabs. It will:
 
@@ -49,7 +48,15 @@ Your tab needs to run as a registered Azure AD application in order to obtain an
         using the application ID that was assigned to your app
     * Setup your redirect URIs. This will allow Azure AD to return authentication results to the correct URI.
         * Visit `Manage > Authentication`. 
+        * Add a platform
+        * Select `Web`
         * Create a redirect URI in the format of: `https://contoso.ngrok.io/auth-end`.
+        * Enable Implicit Grant by selecting `Access Tokens` and `ID Tokens`.
+    * Setup another redirect URIs. This will allow Azure AD to return browser authentication results to the correct URI.
+        * Visit `Manage > Authentication`. 
+        * Add a platform
+        * Select `Single-page application`
+        * Create a redirect URI in the format of: `https://contoso.ngrok.io/Home/BrowserRedirect`.
         * Enable Implicit Grant by selecting `Access Tokens` and `ID Tokens`.
     * Setup a client secret. You will need this when you exchange the token for more API permissions from your backend.
         * Visit `Manage > Certificates & secrets`
@@ -83,6 +90,7 @@ Your tab needs to run as a registered Azure AD application in order to obtain an
 2. Update your `config/default.json` file
     * Replace the `tab.id` property with you Azure AD application ID
     * Replace the `tab.password` property with the "client secret" you were assigned in step #2
+    * Replace the `tab.applicationIdUri` property with the Application ID URI we get in step #1.1 above. It will look like this - `api://contoso.ngrok.io/{appID}`
     * If you want to use a port other than 3333, fill that in here (and in your ngrok command)
 
 ## Running the app locally
@@ -133,6 +141,16 @@ Thhe app should start running on port 3333 or the port you configured
 
 ![SSO from a mobile device](./doc/images/AAD-SSO-Tab-6-Mobile.png)
 
+* You can test the SSO in browser as well.
+
+To test SSO in Browser, open your app base URL or Ngrok URI in your browser. 
+
+The URI shoud be like `https://contoso.ngrok.io/`
+
+![Login Outside Microsoft Teams](./doc/images/Outside-Teams-SSO.png)
+
+![Login Outside Microsoft Teams Success](./doc/images/Outside-Teams-Success-SSO.png)
+
 ## Testing the consent process
 
 If you need to remove all consents for the application for test purposes, simply delete its service principal in the Azure AD portal. It may take a few minutes for cached values to time out. The service principal is created automatically the first time someone consents.
@@ -155,6 +173,10 @@ Compared to the Hello World sample, this app has four additional routes:
     * Once the user has consented to the permissions, AAD redirects the user back to `/auth/end`. This page is responsible for returning the results back to the `/auth` page by calling the `notifySuccess` API.
     * This workflow is only neccessary if you want authorization to use additional Graph APIs. Most apps will find this flow unnesseccary if all they want to do is authenticate the user.
     * This workflow is the same as our standard [web-based authentication flow](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-tab-aad#navigate-to-the-authorization-page-from-your-popup-page) that we've always had in Teams before we had single sign-on support. It just so happens that it's a great way to request additional permissions from the user, so it's left in this sample as an illustration of what that flow looks like.
+
+## msal-auth.js
+
+This Javascript file is served from the `/msal-auth.js` page and handles the browser-side authentication workflow.
 
 ## ssoDemo.js
 

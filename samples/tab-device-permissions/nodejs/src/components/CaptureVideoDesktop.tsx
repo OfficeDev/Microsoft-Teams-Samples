@@ -14,7 +14,7 @@ const CaptureVideoDesktop = () => {
     const [capturedVideo, setCapturedVideo] = useState(new MediaStream);
     useEffect(() => {
         // initializing microsoft teams sdk
-        microsoftTeams.initialize()
+        microsoftTeams.app.initialize()
     })
 
     function captureVideo() {

@@ -1,0 +1,88 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: "Segoe UI","Apple Color Emoji","Segoe UI Emoji","Segoe UI Web";
+}
+.submit-button {
+    font-weight: 600;
+    background-color: #5B58C7;
+    padding: 0.5rem 1.5rem;
+    color: white;
+    border-radius: 7px;
+    border: none;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #7A80EB;
+}
+
+.done-button {
+    background-color: green !important;
+    border: green !important;
+}
+
+.skip-button {
+    background-color: #CC4A31 !important;
+    border: #CC4A31 !important
+}
+
+.app-container {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    margin-top: 15%;
+}
+
+.error-bar {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.flex-center-grid {
+    display: flex;
+    grid-auto-columns: auto;
+    justify-content: center;
+    align-content: center;
+}
+
+.token-indicator-container {
+    display:grid;
+    align-content: center;
+    grid-row: column gap 50px;;
+    justify-content: center;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+}
+
+.token-indicator-title{
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.token-indicator-value {
+    display: inline-flex;
+    grid-row: 2;
+    align-content: center;
+    justify-content: center;
+    margin-top: 200;
+    margin-bottom: 20;
+}
+
+.list-center {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    margin: 10;
+    line-height: 2;
+    grid-row: 4;
+    grid-column: 1;
+    padding-top: 2em;
+}

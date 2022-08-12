@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
 contentType: samples
-createdDate: "25-1-2022 23:30:17"
+createdDate: "25-01-2022 23:30:17"
 ---
 # People picker control in Adaptive Cards
 

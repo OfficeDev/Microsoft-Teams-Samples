@@ -28,33 +28,34 @@
         <title>Silent Authentication Sample Login</title>
     </head>
     <body>
-        <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js" integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT" crossorigin="anonymous"></script>
-        <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js" integrity="sha384-BIOS/65fbAsb2XiCCSTlZSTTl0ZgqkOU522dpyk5meOnN2EOQ3uH+QpqEtoAtmBn" crossorigin="anonymous"></script>
+        <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
 
         <script type="text/javascript">
-            microsoftTeams.initialize();
+            microsoftTeams.app.initialize().then(() => {
+                // Get the tab context, and use the information to navigate to Azure AD login page
+                microsoftTeams.app.getContext().then((context) => {
+                    // MSAL.js configuration
+                    let msalConfig = {
+                        auth: {
+                            clientId: '{{appId}}',
+                            redirectUri: window.location.origin + "/tab/silent-end",     // This should be in the list of redirect uris for the AAD app
+                            navigateToLoginRequestUrl: false,
+                        },
+                        cache: {
+                            cacheLocation: "localStorage",
+                        }
+                    };
 
-            // Get the tab context, and use the information to navigate to Azure AD login page
-            microsoftTeams.getContext(function (context) {
-                // ADAL.js configuration
-                let config = {
-                    // Use the tenant id of the current organization. For guest users, we want an access token for
-                    // the tenant we are currently in, not the home tenant of the guest.
-                    tenant: context.tid,
-                    clientId: "{{appId}}",
-                    redirectUri: window.location.origin + "/tab/silent-end",       // This should be in the list of redirect uris for the AAD app
-                    cacheLocation: "localStorage",
-                    navigateToLoginRequestUrl: false,
+                    const msalInstance = new msal.PublicClientApplication(msalConfig);
 
-                    // Setup extra query parameters for ADAL
-                    // - openid and profile scope adds profile information to the id_token
-                    // - login_hint provides the expected user name
-                    extraQueryParameter: "scope=openid+profile&login_hint=" + encodeURIComponent(context.loginHint),
-                };
+                    var request = {
+                        scopes: ["openid", "profile"],
+                        loginHint: context.user.loginHint
+                    };
 
-                // Navigate to the AzureAD login page
-                let authContext = new AuthenticationContext(config);
-                authContext.login();
+                    msalInstance.loginRedirect(request);
+                });
             });
         </script>
     </body>
