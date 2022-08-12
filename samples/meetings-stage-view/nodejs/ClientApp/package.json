@@ -5,7 +5,6 @@
   "author": "Microsoft",
   "license": "MIT",
   "dependencies": {
-    "@fluentui/react-components": "^9.0.0-rc.10",
     "@microsoft/live-share": "~0.3.1",
     "@microsoft/teams-js": "2.0.0-experimental.0",
     "@testing-library/jest-dom": "^5.16.2",
@@ -13,10 +12,10 @@
     "@testing-library/user-event": "^13.5.0",
     "fluid-framework": "~0.59.0",
     "jquery": "^3.6.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "17.0.0",
+    "react-dom": "17.0.0",
     "react-router-dom": "6.2.2",
-    "react-scripts": "^4.0.0",
+    "react-scripts": "4.0.0",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
   },
@@ -30,8 +29,8 @@
   },
   "scripts": {
     "clean": "npx shx rm -rf build",
-    "start": "start-server-and-test start:server 7070 start:client",
-    "start:client": "set PORT=3978 HTTP=true && react-scripts start",
+    "start": "react-scripts start",
+    "start:client": "react-scripts start",
     "start:server": "npx @fluidframework/azure-local-service@latest",
     "build": "react-scripts build",
     "test": "react-scripts test",
