@@ -156,11 +156,11 @@ The tour files can be found in the `.tours` directory.
     * Set the 'Bot endpoint address' to `https://<randomsubdomain>.ngrok.io/api/messages`.
     * Create a client secret, being sure to copy the secret for replacing in the `appSettings.json` below.
     * *Note: if you restart Ngrok you may have to update the messaging endpoint domain URL you have set in your Bot Configuration*
-* [Update the AAD App to enable Teams SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso?tabs=dotnet#develop-an-sso-microsoft-teams-tab)
+* [Update the AAD App to enable Teams SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad)
     * When creating the Bot above, an AAD app should either have been created for you, or you should have chosen an AAD app to associate with the bot.
     * The updates below will allow for us to authenticate and authorize API calls to limit data returned to only channels the user is a member of.
-    * [Follow the instructions](https://docs.microsoft.com/en-gb/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad#to-expose-an-api), to expose an AAD API, creating an Application ID URI, scopes, etc.
-    * Once you have followed those instructions, you need to [configure the Web authentication platform for the application](https://docs.microsoft.com/en-gb/microsoftteams/platform/tabs/how-to/authentication/tab-sso-graph-api?tabs=dotnet#to-configure-authentication-for-a-platform).
+    * [Follow the instructions](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad#to-expose-an-api), to expose an AAD API, creating an Application ID URI, scopes, etc.
+    * Once you have followed those instructions, you need to [configure the Web authentication platform for the application](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-graph-api?tabs=dotnet#to-configure-authentication-for-a-platform).
     * Ensure the following API permissions are granted to the app for Microsoft Graph access - `email`, `offline_access`, `openid`, `profile`, `Team.ReadBasic.All`    
     * *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your AAD App*
 * In `appSettings.json`, `manifest.json` and `.env` replace:

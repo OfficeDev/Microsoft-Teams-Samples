@@ -38,7 +38,6 @@ This sample has 3 main personas:
 * Adaptive Cards
 * People Picker
 
-<!-- Include a video documenting the sharing to stage here. -->
 ![Video documenting the sharing to stage, including the choosing of a document from the sidepanel, and the signing of the document on the stage](/samples/meetings-share-to-stage-signing/csharp/Docs/Signing-Clip.gif)
 
 ## Workflow
@@ -88,7 +87,6 @@ Currently, this app is not fully supported in the following scenarios:
 ### User Permissions
 * Tenant - If assigned by the document creator, the User will be  able to see and sign the document. 
 * Federated/Guest Users:
-    * The app loads but it's not possible to be authenticated to load the document. This is due to [a bug in Teams SSO](https://github.com/OfficeDev/microsoft-teams-library-js/issues/675)
     * The people picker does not allow users outside of the tenant to be selected. Similarly, if a federated user creates the document, they are only able to select people in their tenant as signers/viewers, and nobody from outside their tenant can view the document.
 * Anonymous Users - Does not work because apps can't get an SSO token for anonymous users.
 
@@ -119,7 +117,7 @@ This happens if you are running the application in a normal browser, and not ins
     ngrok http https://localhost:44326 -host-header=localhost:44326 # For Visual Studio
     ```
     * Make sure to copy and save the `https` url (it should look like `https://<randomsubdomain>.ngrok.io`).
-* [Register an App in AAD that can be used for Teams SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso?tabs=dotnet#develop-an-sso-microsoft-teams-tab)
+* [Register an App in AAD that can be used for Teams SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad)
     * Once the app is registered update Redirect Uris under the Authentication section with the ngrok url, followed by /auth-end (https://<randomsubdomain>.ngrok.io/auth-end)
     * Ensure the following API permissions are granted to the app for Microsoft Graph access - email, offline_access, openid, profile, User.Read, User.ReadBasic.All
     * *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your AAD App*
