@@ -31,7 +31,13 @@
         "value": ""
       }
     ],
-    "thumbnails": [],
+    "thumbnails": [
+      {
+        "type": "Image",
+        "order": 100,
+        "url": "https://user-images.githubusercontent.com/85157377/122392813-d83cc180-cf91-11eb-8484-6271a137b822.png"
+      }
+    ],
     "authors": [
       {
         "gitHubAccount": "OfficeDev",
