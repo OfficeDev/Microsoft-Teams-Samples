@@ -7,7 +7,7 @@ class MyView extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            teamworkTags: "",
+           errorCode:"",
             result: ""
         }
     }
@@ -16,7 +16,7 @@ class MyView extends Component {
     }
     callback = (errcode, bln) => {
         if (errcode) {
-            this.setState({ teamworkTags: JSON.stringify(errcode) })
+            this.setState({ errorCode: JSON.stringify(errcode) })
         }
         else {
             this.setState({ result: JSON.stringify(bln) })
@@ -33,7 +33,7 @@ class MyView extends Component {
             <Flex>
                 <FlexItem push>
                     <div className="tag-container">
-                        <h3>Toggle Mute/Unmute Call </h3>
+                        <h3>Mute/Unmute Audio Call </h3>
                         <Button primary content="Mute/Un-Mute" onClick={this.togglestate} />
                     </div>
                 </FlexItem>
@@ -42,4 +42,4 @@ class MyView extends Component {
     }
 }
 
-export default MyView
+export default ToggleAudioCall

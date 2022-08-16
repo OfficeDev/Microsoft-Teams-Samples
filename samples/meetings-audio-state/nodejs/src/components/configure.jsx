@@ -15,10 +15,10 @@ const Configure = props => {
 
             microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
                 microsoftTeams.pages.config.setConfig({
-                    entityID: "TeamworkTagsTab",
-                    contentUrl: `${window.location.origin}/myview`,
-                    suggestedTabName: "Teams Tab",
-                    websiteUrl: `${window.location.origin}/myview`,
+                    entityID: "MeetingCallAudioToggleTab",
+                    contentUrl: `${window.location.origin}/ToggleAudioCall`,
+                    suggestedTabName: "MeetingCallAudioToggleTab",
+                    websiteUrl: `${window.location.origin}/ToggleAudioCall`,
                 });
                 saveEvent.notifySuccess();
             });

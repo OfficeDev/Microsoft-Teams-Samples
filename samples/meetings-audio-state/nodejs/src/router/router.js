@@ -5,7 +5,7 @@ import {
     Routes
 } from 'react-router-dom';
 import Configure from "../components/configure";
-import MyView from "../components/myview";
+import ToggleAudioCall from "../components/ToggleAudioCall";
 
 export const AppRoute = () => {
     return (
@@ -13,7 +13,7 @@ export const AppRoute = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path="/configure" element={<Configure />}/>
-                    <Route path="/myview" element={<MyView />}/>
+                    <Route path="/ToggleAudioCall" element={<ToggleAudioCall />}/>
                 </Routes>
             </BrowserRouter>
         </React.Fragment>
