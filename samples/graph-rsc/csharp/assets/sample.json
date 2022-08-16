@@ -31,7 +31,13 @@
         "value": ""
       }
     ],
-    "thumbnails": [],
+    "thumbnails": [
+      {
+        "type": "Image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-rsc/csharp/RSCDemo/Images/Picture2.Png"
+      }
+    ],
     "authors": [
       {
         "gitHubAccount": "OfficeDev",
