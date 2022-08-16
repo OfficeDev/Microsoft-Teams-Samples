@@ -1,10 +1,12 @@
 {
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4",
   "type": "AdaptiveCard",
   "body": [
     {
       "type": "TextBlock",
       "text": "Hello and welcome to Meeting Notification Bot",
-      "$when":  "${isWelcomeCard}",
+      "$when": "${isWelcomeCard}",
       "size": "medium",
       "weight": "bolder"
     },
@@ -19,7 +21,5 @@
       "wrap": true,
       "color": "attention"
     }
-  ],
-  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-  "version": "1.4"
+  ]
 }

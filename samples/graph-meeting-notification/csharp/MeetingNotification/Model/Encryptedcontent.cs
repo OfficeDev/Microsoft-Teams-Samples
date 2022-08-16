@@ -14,6 +14,10 @@ namespace MeetingNotification.Model
         /// Encrypted data signature.
         /// </summary>
         public string dataSignature { get; set; }
+
+        /// <summary>
+        /// Data key of encrypted content.
+        /// </summary>
         public string dataKey { get; set; }
 
         /// <summary>

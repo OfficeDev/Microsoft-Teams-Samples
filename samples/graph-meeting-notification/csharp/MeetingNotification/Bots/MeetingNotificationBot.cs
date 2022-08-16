@@ -29,13 +29,13 @@ namespace MeetingNotification.Bots
         /// <summary>
         /// Manages the subscriptions created.
         /// </summary>
-        private readonly SubscriptionManager subscriptionManager;
+        private readonly SubscriptionHelper subscriptionHelper;
 
-        public MeetingNotificationBot(ILogger<MeetingNotificationBot> logger, ConcurrentDictionary<string, ConversationReference> conversationReferences, SubscriptionManager subscriptionManager)
+        public MeetingNotificationBot(ILogger<MeetingNotificationBot> logger, ConcurrentDictionary<string, ConversationReference> conversationReferences, SubscriptionHelper subscriptionHelper)
         {
             this.logger = logger;
             this.conversationReferences = conversationReferences;
-            this.subscriptionManager = subscriptionManager;
+            this.subscriptionHelper = subscriptionHelper;
         }
 
         /// <summary>
@@ -56,29 +56,25 @@ namespace MeetingNotification.Bots
                 var meetingInfo = await TeamsInfo.GetMeetingInfoAsync(turnContext, null, cancellationToken);
                 var decodedMeetingJoinUrl = HttpUtility.UrlDecode(meetingInfo.Details.JoinUrl.ToString());
                 AddConversationReference(turnContext.Activity as Activity, decodedMeetingJoinUrl);
-                await this.subscriptionManager.InitializeAllSubscription(meetingInfo.Details.JoinUrl.ToString());
+                await this.subscriptionHelper.InitializeAllSubscription(meetingInfo.Details.JoinUrl.ToString());
 
                 await turnContext.SendActivityAsync(MessageFactory.Attachment(NotificationCardHelper.GetSubscriptionInitializedCard(true)), cancellationToken);
 
                 while (!cancellationToken.IsCancellationRequested)
                 {
                     await Task.Delay(TimeSpan.FromMinutes(15), cancellationToken).ConfigureAwait(false);
-                    await this.subscriptionManager.CheckSubscriptions().ConfigureAwait(false); ;
+                    await this.subscriptionHelper.CheckSubscriptions().ConfigureAwait(false); ;
                 }
+            }
+            catch (InvalidOperationException ex)
+            {
+                this.logger.LogError(ex.Message);
+                await turnContext.SendActivityAsync(MessageFactory.Text("Please install this bot in meeting chat to get meeting notifications"), cancellationToken);
             }
             catch (Exception ex)
             {
                 this.logger.LogWarning(ex.Message);
-
-                if (ex.Message == "The meetingId can only be null if turnContext is within the scope of a MS Teams Meeting.")
-                {
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Please install this bot in meeting chat to get meeting notifications"), cancellationToken);
-                }
-                else
-                {
-                    await turnContext.SendActivityAsync(MessageFactory.Text("Something went wrong! Please try installing bot again"), cancellationToken);
-                }
-                
+                await turnContext.SendActivityAsync(MessageFactory.Text("Something went wrong! Please try installing bot again"), cancellationToken);
             }
         }
 
@@ -91,7 +87,7 @@ namespace MeetingNotification.Bots
 
                 AddConversationReference(turnContext.Activity as Activity, decodedMeetingJoinUrl);
                 await turnContext.SendActivityAsync(MessageFactory.Attachment(NotificationCardHelper.GetSubscriptionInitializedCard(false)), cancellationToken);
-                await this.subscriptionManager.InitializeAllSubscription(meetingInfo.Details.JoinUrl.ToString());
+                await this.subscriptionHelper.InitializeAllSubscription(meetingInfo.Details.JoinUrl.ToString());
             }
             catch (Exception ex)
             {

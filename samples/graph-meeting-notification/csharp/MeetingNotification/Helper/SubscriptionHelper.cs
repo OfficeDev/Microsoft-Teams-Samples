@@ -18,11 +18,11 @@ namespace MeetingNotification.Helper
     using System.Threading;
     using System.Threading.Tasks;
 
-    public class SubscriptionManager : BackgroundService
+    public class SubscriptionHelper
     {
         private const int SubscriptionExpirationTimeInMinutes = 60;
 
-        private const int SubscriptionRenewTimeInMinutes = 15;
+        private const int SubscriptionExpirationTimeInDays = 1;
 
         /// <summary>
         /// Stores the Bot configuration values.
@@ -35,35 +35,11 @@ namespace MeetingNotification.Helper
 
         public static readonly Dictionary<string, Subscription> Subscriptions = new Dictionary<string, Subscription>();
 
-        public SubscriptionManager(IOptions<BotConfiguration> botSettings, ILogger<SubscriptionManager> logger, GraphBetaClient graphBetaClientProvider)
+        public SubscriptionHelper(IOptions<BotConfiguration> botSettings, ILogger<SubscriptionHelper> logger, GraphBetaClient graphBetaClientProvider)
         {
             this.botSettings = botSettings;
             this.graphBetaClientProvider = graphBetaClientProvider;
             _logger = logger;
-        }
-
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-            await InitializeAllSubscription("");
-
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                await Task.Delay(TimeSpan.FromMinutes(SubscriptionRenewTimeInMinutes), stoppingToken).ConfigureAwait(false);
-                _logger.LogWarning("Renewal started.");
-                await this.CheckSubscriptions().ConfigureAwait(false); ;
-            }
-        }
-
-        public override async Task StartAsync(CancellationToken stoppingToken)
-        {
-            await InitializeAllSubscription("");
-
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                await Task.Delay(TimeSpan.FromMinutes(SubscriptionRenewTimeInMinutes), stoppingToken).ConfigureAwait(false);
-                _logger.LogWarning("Renewal started.");
-                await this.CheckSubscriptions().ConfigureAwait(false); ;
-            }
         }
 
         public async Task InitializeAllSubscription(string meetingJoinUrl)
@@ -92,6 +68,7 @@ namespace MeetingNotification.Helper
 
             if (string.IsNullOrEmpty(meetingJoinUrl))
                 return null;
+
             var resource = $"/communications/onlineMeetings/?$filter=JoinWebUrl eq '{meetingJoinUrl}'";
             return await CreateSubscriptionWithResource(resource);
         }
@@ -123,12 +100,14 @@ namespace MeetingNotification.Helper
             var notificationUrl = this.botSettings.Value.BaseUrl + "/api/notifications";
 
             var existingSubscription = existingSubscriptions.FirstOrDefault(s => s.Resource == resource);
+
             if (existingSubscription != null && existingSubscription.NotificationUrl != notificationUrl)
             {
                 _logger.LogWarning($"CreateNewSubscription-ExistingSubscriptionFound: {resource}");
                 await DeleteSubscription(existingSubscription);
                 existingSubscription = null;
             }
+
             if (existingSubscription == null)
             {
                 var sub = new Subscription
@@ -140,7 +119,7 @@ namespace MeetingNotification.Helper
                     ChangeType = "updated",
                     NotificationUrl = notificationUrl,
                     ClientState = "ClientState",
-                    ExpirationDateTime = DateTime.UtcNow + new TimeSpan(days: 1, hours: 0, minutes: SubscriptionExpirationTimeInMinutes, seconds: 0)
+                    ExpirationDateTime = DateTime.UtcNow + new TimeSpan(days: SubscriptionExpirationTimeInDays, hours: 0, minutes: SubscriptionExpirationTimeInMinutes, seconds: 0)
                 };
 
                 try
@@ -188,9 +167,8 @@ namespace MeetingNotification.Helper
             {
                 if (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
-                    //Subscriptions.Remove(subscription.Id);
+                    Subscriptions.Remove(subscription.Id);
                     _logger.LogError(ex, $"HttpStatusCode.NotFound : Creating new subscription : {subscription.Id}");
-                    // Try and create new resource.
 
                     await CreateSubscriptionWithResource(subscription.Resource);
                 }

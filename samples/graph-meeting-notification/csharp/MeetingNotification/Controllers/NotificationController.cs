@@ -48,7 +48,7 @@ namespace MeetingNotification.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            return Json(SubscriptionManager.Subscriptions.Select(s => new
+            return Json(SubscriptionHelper.Subscriptions.Select(s => new
             {
                 Resource = s.Value.Resource,
                 ExpirationDateTime = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(s.Value.ExpirationDateTime.Value.DateTime, "UTC", "India Standard Time").ToString("MM/dd/yyyy h:mm tt"),
@@ -56,26 +56,14 @@ namespace MeetingNotification.Controllers
             }));
         }
 
-        // Callback
-        [Route("/api/webhookLifecyle")]
-        [HttpPost]
-        public ActionResult WebhookLifecyle([FromQuery] string validationToken = null)
-        {
-            if (validationToken != null)
-            {
-                // Ack the webhook subscription
-                return Ok(validationToken);
-            }
-            else
-            {
-                _logger.LogCritical("To do -- handle authorization challenge");
-                return null;
-            }
-        }
-
+        /// <summary>
+        /// POST method where the online meeting notification will be sent by Graph API.
+        /// </summary>
+        /// <param name="validationToken">Validation token</param>
+        /// <returns>Returns the response based on the operation.</returns>
         public async Task<ActionResult<string>> Post([FromQuery] string validationToken = null)
         {
-            // handle validation
+            // Handle validation
             if (!string.IsNullOrEmpty(validationToken))
             {
                 _logger.LogInformation($"Received Token: '{validationToken}'");
@@ -83,7 +71,7 @@ namespace MeetingNotification.Controllers
                 return Ok(validationToken);
             }
 
-            // handle notifications
+            // Handle notifications
             using (StreamReader reader = new StreamReader(Request.Body))
             {
                 string content = await reader.ReadToEndAsync();
@@ -136,6 +124,11 @@ namespace MeetingNotification.Controllers
             }
         }
 
+        /// <summary>
+        /// Gets the meeting join url from the incoming meeting notification.
+        /// </summary>
+        /// <param name="source">Incoming meeting notification source.</param>
+        /// <returns></returns>
         private string GetMeetingJoinUrl(string source)
         {
             var character = "'";

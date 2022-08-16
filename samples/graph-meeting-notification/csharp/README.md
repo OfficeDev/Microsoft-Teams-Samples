@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample application which demonstrates use of online meeting subscription and sends you the notifications in chat using bot.
+description: This is a sample application which demonstrates the use of online meeting subscription and sends you the notifications in chat using bot.
 products:
 - office-teams
 - office
@@ -12,7 +12,7 @@ contentType: samples
 createdDate: "10-08-2022 00:16:45"
 ---
 
-# This is a sample application that shows the usage of Graph CRUD operations related to team tags.
+# This is a sample demonstrates use of online meeting subscription including resource data.
 
 This is a sample application which demonstrates use of online meeting subscription that will post notifications when user joined/left and when meeting start/end.
 
@@ -104,6 +104,10 @@ To include resource data of online meeting, this Graph API require self-signed c
 ## Instruction for manifest
 1. Fill any GUID for <APP-ID>. You can also put your MicrosoftAppId here.
 2. Update <MICROSOFT-APP-ID> placeholder with your Microsoft App Id.
+3. ZIP the manifest and make sure manifest.json and two icon images are at root.
+4. Upload the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+
+Follow this documentation to get more information on custom apps and uploading them into Teams - [Manage custom apps](https://docs.microsoft.com/en-us/microsoftteams/custom-app-overview) and [Upload an app package](https://docs.microsoft.com/en-us/microsoftteams/upload-custom-apps)
  
 ## Further reading
 - [Change notifications for Microsoft Teams meeting](https://docs.microsoft.com/en-us/graph/changenotifications-for-onlinemeeting)

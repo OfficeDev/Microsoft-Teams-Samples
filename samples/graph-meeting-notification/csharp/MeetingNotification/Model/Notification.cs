@@ -10,9 +10,10 @@ namespace MeetingNotification.Model
     public class Notifications
     {
         [JsonProperty(PropertyName = "value")]
-        public Notification[] Items { get; set; }
+        public NotificationContent[] Items { get; set; }
     }
-    public class Notification
+
+    public class NotificationContent
     {
         // The type of change.
         [JsonProperty(PropertyName = "changeType")]

@@ -22,7 +22,7 @@ builder.Services.AddControllers().AddNewtonsoftJson();
 
 builder.Services.AddTransient<GraphBetaClient>();
 
-builder.Services.AddTransient<SubscriptionManager>();
+builder.Services.AddTransient<SubscriptionHelper>();
 
 // Adds application configuration settings to specified IServiceCollection.
 builder.Services.AddOptions<BotConfiguration>()
