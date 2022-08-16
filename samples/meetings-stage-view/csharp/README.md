@@ -32,67 +32,20 @@ This capability is currently available in developer preview only.
 
 ![Share Specific part screen](AppInMeeting/Images/share_specific_part.png)
 
-# IOS Mobile Testing ScreenShots:
+**NOTE: Currently Live Share SDK is not supported in mobiles.**
 
-#-First Screen shot in IOS 
+## IOS Meeting Side panel and stage view.
 
-![Share Specific part screen](AppInMeeting/Images/IOSFirstScreen.jpeg)
+![IOS Side Panel](AppInMeeting/Images/ios_side_panel.jpeg)
 
+![IOS Stage View](AppInMeeting/Images/ios_share_todo.jpeg)
 
-#-Screen for share To Do
+## Android Meeting Side panel and stage view.
 
-![Share Specific part screen](AppInMeeting/Images/ToDo.jpeg)
+![Android Side Panel](AppInMeeting/Images/android_side_panel.jpeg)
 
-#-Screen after click on Plus icon in Share TO Do
+![Android Stage View](AppInMeeting/Images/android_share_todo.jpeg)
 
-![Share Specific part screen](AppInMeeting/Images/PlusIconTODo.jpeg)
-
-#-Screen for share To Doing
-
-![Share Specific part screen](AppInMeeting/Images/ShareDoing.jpeg)
-
-#-Screen after click on Plus icon in Share Doing
-
-![Share Specific part screen](AppInMeeting/Images/PlusIconToDing.jpeg)
-
-#-Screen for share To Done
-
-![Share Specific part screen](AppInMeeting/Images/ShareDone.jpeg)
-
-#-Screen after click on Plus icon in Share Done
-
-![Share Specific part screen](AppInMeeting/Images/PlusIconTODo.jpeg)
-
-# Android Mobile Testing ScreenShots:
-
-#-First Screen shot in Android
-
-![Share Specific part screen](AppInMeeting/Images/AndroidFirstScreeen.jpeg)
-
-
-#-Screen for share To Do
-
-![Share Specific part screen](AppInMeeting/Images/AndroidScreenShareTODo.jpeg)
-
-#-Screen after click on Plus icon in Share TO Do
-
-![Share Specific part screen](AppInMeeting/Images/AndroidPlusIconTODo.jpeg)
-
-#-Screen for share To Doing
-
-![Share Specific part screen](AppInMeeting/Images/AndroidScreenShareDoing.jpeg)
-
-#-Screen after click on Plus icon in Share Doing
-
-![Share Specific part screen](AppInMeeting/Images/AndroidPlusIconDoing.jpeg)
-
-#-Screen for share To Done
-
-![Share Specific part screen](AppInMeeting/Images/AndroidScreenShareDone.jpeg)
-
-#-Screen after click on Plus icon in Share Done
-
-![Share Specific part screen](AppInMeeting/Images/AndroidPlusIconDone.jpeg)
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
