@@ -32,6 +32,19 @@ This capability is currently available in developer preview only.
 
 ![Share Specific part screen](Images/share_specific_part.png)
 
+**NOTE: Currently Live Share SDK is not supported in mobiles.**
+
+## IOS Meeting Side panel and stage view.
+
+![IOS Side Panel](Images/ios_side_panel.jpeg)
+
+![IOS Stage View](Images/ios_share_todo.jpeg)
+
+## Android Meeting Side panel and stage view.
+
+![Android Side Panel](Images/android_side_panel.jpeg)
+
+![Android Stage View](Images/android_share_todo.jpeg)
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/en/)
