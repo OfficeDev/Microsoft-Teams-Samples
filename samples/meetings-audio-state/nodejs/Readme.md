@@ -23,7 +23,7 @@ createdDate: "08-08-2022 12:00:01"
 
  - Your application is running now and click on `mute/unmute` button to toggle client audio.
 
-  ![Stage 3](Images/App-In-Meeting.png)
+  ![Stage 3](Images/App-InMeeting.png)
 
 
 ## Prerequisites
