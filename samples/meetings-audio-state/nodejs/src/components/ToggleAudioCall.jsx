@@ -34,7 +34,7 @@ class MyView extends Component {
 
     /// <summary>
     /// This method toggleIncomingClientAudio which toggles mute/unmute to client audio.
-    ///The incoming audio is muted if the result is true and unmuted if the result is false.
+    /// Setting for the meeting user from mute to unmute or vice-versa.
     /// </summary>
     toggleState = () => {
         microsoftTeams.meeting.toggleIncomingClientAudio(this.callback);
