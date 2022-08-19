@@ -18,17 +18,9 @@ This is a sample application which demonstrates how to get meeting attendance re
 
 ## Key features
 
-1. Schedule the meeting and add Meeting Attendance Bot from `Apps` section in that particular scheduled meeting.
+When meeting end attendance report card is sent by the bot
 
-![Add Bot](MeetingAttendance/Images/AddMeetingAttendanceBot.png)
-
-2. On installation you will get a welcome card.
-
-![Welcome Card](MeetingAttendance/Images/WelcomeCard.png)
-
-3. Once the bot is installed in the meeting, whenever meeting ends bot will send attendance report 
-
-![Attendance Report](MeetingAttendance/Images/MeetingAttendanceReportCard.png.png)
+![Attendance Report](MeetingAttendance/Images/MeetingAttendanceReportCard.png)
 
 
 ## Prerequisites
@@ -115,7 +107,7 @@ Click on Add Permissions to commit your changes.
 
 Follow this documentation to get more information on custom apps and uploading them into Teams - [Manage custom apps](https://docs.microsoft.com/en-us/microsoftteams/custom-app-overview) and [Upload an app package](https://docs.microsoft.com/en-us/microsoftteams/upload-custom-apps)
 
-### 7. To try this sample
+### 7. Run locally
 
 - In a terminal, navigate to `MeetingAttendance`
 
@@ -148,9 +140,17 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 
 ## Interacting with the bot.
-- After uploading the manifest add the bot into meeting.
-- Once done, leave the meeting.
-- You will get the attendance report card.
+1. Schedule the meeting and add Meeting Attendance Bot from `Apps` section in that particular scheduled meeting.
+
+![Add Bot](MeetingAttendance/Images/AddMeetingAttendanceBot.png)
+
+2. On installation you will get a welcome card.
+
+![Welcome Card](MeetingAttendance/Images/WelcomeCard.png)
+
+3. Once the bot is installed in the meeting, whenever meeting ends bot will send attendance report 
+
+![Attendance Report](MeetingAttendance/Images/MeetingAttendanceReportCard.png)
 
 ## Further reading
 - [List Meeting Attendance Reports](https://docs.microsoft.com/en-us/graph/api/meetingattendancereport-list?view=graph-rest-1.0&tabs=http)
