@@ -50,6 +50,11 @@ The script will write deployment logs to `deployment.log` file in the `scripts` 
 
 Make sure that you have upgraded to Powershell [5.1.22000.653 or later](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2). Run `$PSVersionTable.PSVersion` to check the installed version.
 
+### Max students in a Team
+The solution is tested for upto 1k users in a Team. If your tenant has more than 1k users in a Team, we suggest you to make a few changes to the app logic.
+
+When the application is installed in a Team, it fetches the Team and all the members details in that team (refer to `BotActivityHandler#BotAddedToTeamAsync`), and this can result in a long running task which will timeout if it takes more than 15 seconds to execute. Refer to this [documentation](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-howto-long-operations-guidance?view=azure-bot-service-4.0) to understand how you can handle such long running operations.
+
 ## Contents
 
 ### DeployQBotInteractive.ps1
