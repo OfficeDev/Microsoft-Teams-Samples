@@ -4,7 +4,6 @@ const ACData = require("adaptivecards-templating");
 const WelcomeCard = require('../resources/welcome-card.json');
 const AttendanceSummaryCard = require('../resources/attendance-summary-card.json');
 
-
 class MeetingAttendanceBot extends TeamsActivityHandler {
   constructor() {
     super();
