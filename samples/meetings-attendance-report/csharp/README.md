@@ -12,13 +12,13 @@ contentType: samples
 createdDate: "20-08-2022 00:01:15"
 ---
 
-# Bot to show the transcript of the meeting using Microsoft Graph API.
+# Bot to show the attendance report of the meeting using Microsoft Graph API.
 
 This is a sample application which demonstrates how to get meeting attendance report using Graph API and send it in meeting chat.
 
 ## Key features
 
-When meeting end attendance report card is sent by the bot
+When meeting ends, attendance report card is sent by the bot.
 
 ![Attendance Report](MeetingAttendance/Images/MeetingAttendanceReportCard.png)
 
@@ -101,7 +101,7 @@ Click on Add Permissions to commit your changes.
 
 
 ### 6. Manually update the manifest.json
-- Edit the `manifest.json` contained in the  `/AppManifest` folder to and fill in MicrosoftAppId (that was created in step 2 and it is the same value of MicrosoftAppId as in `appsettings.json` file) *everywhere* you see the place holder string `<<Microsoft-App-Id>>` (depending on the scenario it may occur multiple times in the `manifest.json`)
+- Edit the `manifest.json` contained in the  `/AppManifest` folder to and fill in App-Id this can be any GUID or your MicrosoftAppId and you need to fill MicrosoftAppId (that was created in step 2 and it is the same value of MicrosoftAppId as in `appsettings.json` file) *everywhere* you see the place holder string `<<Microsoft-App-Id>>` (depending on the scenario it may occur multiple times in the `manifest.json`) and
 - Zip up the contents of the `/AppManifest` folder to create a `manifest.zip`
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
 
@@ -129,7 +129,7 @@ Follow this documentation to get more information on custom apps and uploading t
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/meetings-transcription/csharp` folder
+  - Navigate to `samples/meetings-attendance-report/csharp` folder
   - Select `MeetingAttendance.csproj` file
   - Press `F5` to run the project
 

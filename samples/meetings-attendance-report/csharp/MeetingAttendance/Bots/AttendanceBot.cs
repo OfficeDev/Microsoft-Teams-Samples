@@ -27,8 +27,7 @@ namespace MeetingAttendance.Bots
         /// Creates bot instance.
         /// </summary>
         /// <param name="azureSettings">Stores the Azure configuration values.</param>
-        /// <param name="transcriptsDictionary">Store details of meeting transcript.</param>
-        /// <param name="cardFactory">Instance of card factory to create adaptive cards.</param>
+        /// <param name="graphClient">Instance of graph client to make Graph calls.</param>
         public AttendanceBot(IOptions<AzureSettings> azureSettings, GraphClient graphClient)
         {
             graphHelper = new GraphHelper(azureSettings, graphClient);

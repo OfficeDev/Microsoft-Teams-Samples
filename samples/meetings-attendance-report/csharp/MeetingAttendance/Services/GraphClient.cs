@@ -21,7 +21,6 @@ namespace MeetingAttendance.Services
             this.botSettings = botSettings;
         }
 
-
         /// <summary>
         /// Gets the graph client to make Graph API calls.
         /// </summary>
