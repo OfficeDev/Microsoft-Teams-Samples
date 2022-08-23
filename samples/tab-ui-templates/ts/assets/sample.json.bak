@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-meetings-content-bubble-nodejs",
+    "name": "officedev-microsoft-teams-samples-tab-ui-templates-ts",
     "source": "officeDev",
-    "title": "Content Bubble Meeting app",
-    "shortDescription": "Illustrates how to implement the \"content bubble\" in-meeting experience",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-content-bubble/nodejs",
+    "title": "Teams UI templates",
+    "shortDescription": "This sample app can help you better understand how apps should look and behave in Microsoft Teams. The app includes examples of tested, high-quality UI templates that work across common Teams use cases (such as dashboards or forms)",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-ui-templates/ts",
     "longDescription": [
-      "Illustrates how to implement the \"content bubble\" in-meeting experience"
+      "This sample app can help you better understand how apps should look and behave in Microsoft Teams. The app includes examples of tested, high-quality UI templates that work across common Teams use cases (such as dashboards or forms)"
     ],
-    "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-01-12",
+    "creationDateTime": "2020-12-08",
+    "updateDateTime": "2021-11-29",
     "products": [
       "Teams"
     ],
@@ -17,18 +17,6 @@
       {
         "key": "TEAMS-SAMPLE-SOURCE",
         "value": "OfficeDev"
-      },
-      {
-        "key": "TEAMS-SERVER-LANGUAGE",
-        "value": "javascript"
-      },
-      {
-        "key": "TEAMS-SERVER-PLATFORM",
-        "value": "express"
-      },
-      {
-        "key": "TEAMS-FEATURES",
-        "value": "bot"
       }
     ],
     "thumbnails": [],
