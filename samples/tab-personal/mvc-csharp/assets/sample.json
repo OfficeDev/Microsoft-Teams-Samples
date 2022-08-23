@@ -35,7 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-personal/mvc-csharp/Images/Redtab.png"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-personal/mvc-csharp/Images/Redtab.png",
+        "alt": "Solution UX showing personal tabs in asp.net core with mvc"
       }
     ],
     "authors": [

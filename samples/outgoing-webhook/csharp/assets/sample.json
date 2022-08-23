@@ -35,7 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/outgoing-webhook/csharp/WebhookSampleBot/Images/hero_card.png"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/outgoing-webhook/csharp/WebhookSampleBot/Images/hero_card.png",
+        "alt": "Solution UX showing outgoing webhook in c#"
       }
     ],
     "authors": [

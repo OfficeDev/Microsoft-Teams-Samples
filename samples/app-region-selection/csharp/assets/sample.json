@@ -35,7 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://user-images.githubusercontent.com/50989436/108982510-e483d280-76b3-11eb-9501-a382e7fba6e6.png"
+        "url": "https://user-images.githubusercontent.com/50989436/108982510-e483d280-76b3-11eb-9501-a382e7fba6e6.png",
+        "alt": "Solution UX showing bot and tab to select a region"
       }
     ],
     "authors": [

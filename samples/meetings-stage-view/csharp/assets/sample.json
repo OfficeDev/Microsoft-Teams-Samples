@@ -35,7 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-stage-view/csharp/AppInMeeting/Images/stage_view.png"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-stage-view/csharp/AppInMeeting/Images/stage_view.png",
+        "alt": "Solution UX showing meetings stage view"
       }
     ],
     "authors": [

@@ -35,7 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://user-images.githubusercontent.com/50989436/109036739-eb303b00-76ef-11eb-91d2-806c2b180396.png"
+        "url": "https://user-images.githubusercontent.com/50989436/109036739-eb303b00-76ef-11eb-91d2-806c2b180396.png",
+        "alt": "Solution UX showing activity feed notification"
       }
     ],
     "authors": [

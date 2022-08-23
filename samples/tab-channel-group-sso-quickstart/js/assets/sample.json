@@ -35,7 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-channel-group-sso-quickstart/js/Images/tabconfigure.png"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-channel-group-sso-quickstart/js/Images/tabconfigure.png",
+        "alt": "Solution UX showing starter solution: channel/group tab with sso in javascript"
       }
     ],
     "authors": [
