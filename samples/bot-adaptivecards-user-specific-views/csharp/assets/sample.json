@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "bot"
       }
     ],
     "thumbnails": [
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-adaptivecards-user-specific-views/csharp/docs/Me.gif"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-adaptivecards-user-specific-views/csharp/docs/Me.gif",
+        "alt": "Solution UX showing user specific views in adaptive cards"
       }
     ],
     "authors": [

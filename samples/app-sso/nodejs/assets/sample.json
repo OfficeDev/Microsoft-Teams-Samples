@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "tab,bot,msgext"
       }
     ],
     "thumbnails": [
       {
         "type": "image",
         "order": 100,
-        "url": "https://user-images.githubusercontent.com/85108465/122400808-ae879880-cf99-11eb-8cc2-5da9b8e420ca.png"
+        "url": "https://user-images.githubusercontent.com/85108465/122400808-ae879880-cf99-11eb-8cc2-5da9b8e420ca.png",
+        "alt": "Solution UX showing app sso node"
       }
     ],
     "authors": [

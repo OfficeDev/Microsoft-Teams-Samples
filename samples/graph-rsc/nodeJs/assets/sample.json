@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "tab"
       }
     ],
     "thumbnails": [
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-rsc/nodeJs/./Images/image3.PNG"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-rsc/nodeJs/./Images/image3.PNG",
+        "alt": "Solution UX showing resource specific consent with graph api javascript"
       }
     ],
     "authors": [

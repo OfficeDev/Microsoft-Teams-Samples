@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "tab"
       }
     ],
     "thumbnails": [
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-request-approval/csharp/TabRequestApproval/Images/TaskRequest.png"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-request-approval/csharp/TabRequestApproval/Images/TaskRequest.png",
+        "alt": "Solution UX showing send task approvals using activity feed notification (graph apis)"
       }
     ],
     "authors": [

@@ -35,7 +35,8 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-request-approval/nodejs/Images/TaskRequest.png"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-request-approval/nodejs/Images/TaskRequest.png",
+        "alt": "Solution UX showing send task approval request using activity feed notification (graph apis)."
       }
     ],
     "authors": [

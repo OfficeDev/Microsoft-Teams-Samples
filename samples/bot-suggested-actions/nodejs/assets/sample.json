@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "bot"
       }
     ],
     "thumbnails": [
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-suggested-actions/nodejs/Images/WelcomeMessage.PNG"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-suggested-actions/nodejs/Images/WelcomeMessage.PNG",
+        "alt": "Solution UX showing suggested action in Bots"
       }
     ],
     "authors": [

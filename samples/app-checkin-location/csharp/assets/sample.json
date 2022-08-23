@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "bot"
       }
     ],
     "thumbnails": [
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-checkin-location/csharp/AppCheckinLocation/Images/CheckinCard.png"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-checkin-location/csharp/AppCheckinLocation/Images/CheckinCard.png",
+        "alt": "Solution UX showing app check in location"
       }
     ],
     "authors": [

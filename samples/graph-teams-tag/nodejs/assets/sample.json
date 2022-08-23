@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "tab"
       }
     ],
     "thumbnails": [
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-teams-tag/nodejs/Images/CreateTagFlow.gif"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-teams-tag/nodejs/Images/CreateTagFlow.gif",
+        "alt": "Solution UX showing gif animation for teams Tag CRUD operations."
       }
     ],
     "authors": [

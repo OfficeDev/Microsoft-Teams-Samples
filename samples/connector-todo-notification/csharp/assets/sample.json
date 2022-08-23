@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "connector"
       }
     ],
     "thumbnails": [
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/connector-todo-notification/csharp/TeamsToDoAppConnector/Images/TaskCardByConnector.png"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/connector-todo-notification/csharp/TeamsToDoAppConnector/Images/TaskCardByConnector.png",
+        "alt": "Solution UX showing to do notification"
       }
     ],
     "authors": [

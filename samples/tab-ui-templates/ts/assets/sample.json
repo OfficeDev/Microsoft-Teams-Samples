@@ -17,6 +17,18 @@
       {
         "key": "TEAMS-SAMPLE-SOURCE",
         "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "typescript"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "express"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "tab"
       }
     ],
     "thumbnails": [],

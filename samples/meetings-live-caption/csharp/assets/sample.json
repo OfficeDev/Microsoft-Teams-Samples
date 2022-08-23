@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "tab,meeting"
       }
     ],
     "thumbnails": [
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-live-caption/csharp/MeetingLiveCaption/Images/MeetingCaption.gif"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-live-caption/csharp/MeetingLiveCaption/Images/MeetingCaption.gif",
+        "alt": "Solution UX showing meeting side panel application uses cart link to send caption in live meeting."
       }
     ],
     "authors": [

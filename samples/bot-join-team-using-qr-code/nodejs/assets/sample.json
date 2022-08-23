@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "bot"
       }
     ],
     "thumbnails": [
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-join-team-using-qr-code/nodejs/Images/TeamQR.png"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-join-team-using-qr-code/nodejs/Images/TeamQR.png",
+        "alt": "Solution UX showing join a team using qr code sample"
       }
     ],
     "authors": [

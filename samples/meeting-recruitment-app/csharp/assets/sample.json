@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "tab,bot,meeting"
       }
     ],
     "thumbnails": [
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meeting-recruitment-app/csharp/MeetingApp/Images/details.png"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meeting-recruitment-app/csharp/MeetingApp/Images/details.png",
+        "alt": "Solution UX showing recruitment app sample using apps in meetings"
       }
     ],
     "authors": [

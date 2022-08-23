@@ -35,7 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/outgoing-webhook/nodejs/Images/heroCard.png"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/outgoing-webhook/nodejs/Images/heroCard.png",
+        "alt": "Solution UX showing outgoing webhook in nodejs"
       }
     ],
     "authors": [

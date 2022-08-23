@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "tab,bot,msgext"
       }
     ],
     "thumbnails": [
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-hello-world/nodejs/Images/HelloWorld.png"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-hello-world/nodejs/Images/HelloWorld.png",
+        "alt": "Solution UX showing microsoft teams nodejs helloworld sample"
       }
     ],
     "authors": [
