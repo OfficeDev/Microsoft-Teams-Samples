@@ -11,6 +11,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "7-03-2022 00:15:13"
+urlFragment: officedev-microsoft-teams-samples-tab-staggered-permission-nodejs
 ---
 
 # Staggered permission sample

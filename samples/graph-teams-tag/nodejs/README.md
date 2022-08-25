@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "02-08-2022 00:02:15"
+urlFragment: officedev-microsoft-teams-samples-graph-teams-tag-nodejs
 ---
 
 # This is a sample application that shows the usage of Graph CRUD operations related to team tags.

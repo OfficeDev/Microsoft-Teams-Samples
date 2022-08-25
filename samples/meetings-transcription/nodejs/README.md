@@ -11,6 +11,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "03-08-2022 00:30:15"
+urlFragment: officedev-microsoft-teams-samples-meetings-transcription-nodejs
 ---
 
 # Bot to show the transcript of the meeting using Microsoft Graph API.

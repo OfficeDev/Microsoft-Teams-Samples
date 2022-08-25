@@ -11,6 +11,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "07-07-2021 13:38:27"
+urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-ts
 ---
 
 # Teams Tab SSO Authentication

@@ -11,6 +11,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "16-02-2022 00:15:13"
+urlFragment: officedev-microsoft-teams-samples-app-complete-auth-nodejs
 ---
 
 # Authentication complete sample

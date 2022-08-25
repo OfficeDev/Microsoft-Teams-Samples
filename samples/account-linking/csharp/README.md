@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "22-03-2022 00:00:00"
+urlFragment: officedev-microsoft-teams-samples-account-linking-csharp
 ---
 
 # External OAuth identity linking in Teams Apps.

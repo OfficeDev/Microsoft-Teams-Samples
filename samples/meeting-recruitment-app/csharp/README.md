@@ -1,4 +1,4 @@
-﻿---
+---
 page_type: sample
 description: "This sample illustrates a meeting experience for recruitment scenario using Apps In Meetings."
 products:
@@ -10,6 +10,7 @@ languages:
 extensions:
   contentType: samples
   createdDate: "10/1/2021 2:36:57 PM"
+urlFragment: officedev-microsoft-teams-samples-meeting-recruitment-app-csharp
 ---
 
 # Recruitment App Sample using Apps in Meetings

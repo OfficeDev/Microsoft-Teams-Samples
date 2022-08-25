@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "12-04-2022 01:48:56"
+urlFragment: officedev-microsoft-teams-samples-tab-people-picker-nodejs
 ---
 
 # Tab people picker

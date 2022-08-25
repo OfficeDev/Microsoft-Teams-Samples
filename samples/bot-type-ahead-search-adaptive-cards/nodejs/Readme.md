@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "24-12-2021 23:30:17"
+urlFragment: officedev-microsoft-teams-samples-bot-type-ahead-search-adaptive-cards-nodejs
 ---
 # Typeahead search control in Adaptive Cards
 

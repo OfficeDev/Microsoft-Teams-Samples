@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "07-07-2021 13:38:27"
+urlFragment: officedev-microsoft-teams-samples-tab-channel-group-spfx
 ---
 
 # Microsoft Teams tab using SharePoint Framework

@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "11-11-2021 23:30:17"
+urlFragment: officedev-microsoft-teams-samples-tab-graph-toolkit-csharp
 ---
 
 # Teams tab with microsoft graph toolkit

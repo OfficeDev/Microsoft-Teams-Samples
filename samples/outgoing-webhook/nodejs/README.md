@@ -10,6 +10,7 @@ languages:
 extensions:
   contentType: samples
   createdDate: 12/5/2017 6:03:13 PM
+urlFragment: officedev-microsoft-teams-samples-outgoing-webhook-nodejs
 ---
 
 # Outgoing webhook

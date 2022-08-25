@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "20-03-2021 13:38:27"
+urlFragment: officedev-microsoft-teams-samples-tab-channel-group-config-page-auth-csharp
 ---
 
 # Config Tab Authentication

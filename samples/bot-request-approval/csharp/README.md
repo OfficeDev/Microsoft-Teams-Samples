@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "13-12-2021 17:00:25"
+urlFragment: officedev-microsoft-teams-samples-bot-request-approval-csharp
 ---
 
 # Send task request using Universal Adaptive Cards in a group chat

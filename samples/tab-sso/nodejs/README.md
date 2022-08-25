@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "12/3/2021 12:53:17 PM"
+urlFragment: officedev-microsoft-teams-samples-tab-sso-nodejs
 ---
 # Tabs Azure AD SSO Sample using NodeJS
 

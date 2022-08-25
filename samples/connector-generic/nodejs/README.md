@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "07-07-2021 13:38:26"
+urlFragment: officedev-microsoft-teams-samples-connector-generic-nodejs
 ---
 # Sample Connector 
 This contains the source for a generic connector that's easy to customize for any system which supports webhooks. 

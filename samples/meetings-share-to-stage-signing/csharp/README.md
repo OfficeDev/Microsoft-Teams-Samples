@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "09-03-2022 15:56:00"
+urlFragment: officedev-microsoft-teams-samples-meetings-share-to-stage-signing-csharp
 ---
 
 # In-Meeting Document Signing

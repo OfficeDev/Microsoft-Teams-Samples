@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "19-03-2021 13:38:25"
+urlFragment: officedev-microsoft-teams-samples-app-region-selection-csharp
 ---
 
 # Region Selection App
