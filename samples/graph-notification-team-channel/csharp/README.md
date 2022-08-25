@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample application which demonstrates use of team/Channel subscription that will post notifications when user create/edit/delete channel using bot.
+description: This is a sample application which demonstrates use of team/Channel subscription that will post notifications when user create/edit/delete.
 products:
 - office-teams
 - office
@@ -12,14 +12,14 @@ contentType: samples
 createdDate: "25-08-2022 04:30:15"
 ---
 
-# This is a sample application that shows the usage of Graph CRUD operations related to team tags.
+# This is a sample application that shows the usage of Graph API Notifications related to team/channels tab.
 
 This is a sample application which demonstrates use of Team/Channel subscription that will post notifications when user create/edit/delete channel.
 
 ## Concepts introduced in this sample
 - After sucessfully Setup of tab in teams you will get a welcome message and the subscription will be created for channel and configured with teams.
 
-![Welcome Card](ChannelNotification/Images/graphNotifications.gif)
+![Notifications](GraphNotification/Images/graphNotifications.gif)
 
 ## Prerequisites
 
@@ -79,7 +79,7 @@ To include resource data of graph notifications, this Graph API require self-sig
 
   - Launch Visual Studio code
   - File -> Open Folder
-  - Navigate to `samples/graph-notification/csharp` folder
+  - Navigate to `samples/graph-notification-teams-channel/csharp` folder
   - Select `GraphNotification` folder
   - Press `F5` to run the project
 
