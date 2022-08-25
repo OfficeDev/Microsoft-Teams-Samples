@@ -1,4 +1,4 @@
-// <copyright file="dashboard.jsx" company="Microsoft Corporation">
+// <copyright file="channelnotification.jsx" company="Microsoft Corporation">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 // </copyright>
@@ -11,8 +11,6 @@ import "../style/style.css";
 import "../style/card.css";
 
 
-
-// Dashboard where user can manage the tags
 class ChannelNotification extends Component {
     constructor(props) {
         super(props);
@@ -78,7 +76,6 @@ class ChannelNotification extends Component {
     welcomeMessage = () => {
         return (
             <div>
-
                 <h3 className="headcolor">Channel Notifications</h3>
                 <h4>Welcome to Channel Notification Tab</h4>
                 <p>This Tab has successfully configured, you will get notifications of channels delete/edit/create in this team</p>
