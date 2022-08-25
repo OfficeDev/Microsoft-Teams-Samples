@@ -8,8 +8,8 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "24-11-2021 13:50:00"
+ contentType: samples
+ createdDate: "24-11-2021 13:50:00"
 ---
 
 # Bot daily task reminder

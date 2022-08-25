@@ -8,8 +8,8 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "27-07-2021 16:32:33"
+ contentType: samples
+ createdDate: "27-07-2021 16:32:33"
 ---
 
 # Tab Device Permission Demo

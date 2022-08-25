@@ -8,8 +8,8 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "24-11-2021 13:20:00"
+ contentType: samples
+ createdDate: "24-11-2021 13:20:00"
 ---
 
 # Bot task reminder

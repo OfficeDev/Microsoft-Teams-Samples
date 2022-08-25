@@ -9,8 +9,8 @@ languages:
 - nodejs
 - javascript
 extensions:
-contentType: samples
-createdDate: "16-11-2021 00:15:13"
+ contentType: samples
+ createdDate: "16-11-2021 00:15:13"
 ---
 
 # Bot with SharePoint file to view in Teams file viewer

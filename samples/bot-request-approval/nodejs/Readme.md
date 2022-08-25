@@ -8,8 +8,8 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "6-12-2021 17:00:25"
+ contentType: samples
+ createdDate: "6-12-2021 17:00:25"
 ---
 
 # Send task request using Universal Adaptive Cards in group chat

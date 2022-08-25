@@ -9,8 +9,8 @@ languages:
 - csharp
 - typescript
 extensions:
-contentType: samples
-createdDate: "30-05-2022 12:00 PM"
+ contentType: samples
+ createdDate: "30-05-2022 12:00 PM"
 ---
 
 # QBot

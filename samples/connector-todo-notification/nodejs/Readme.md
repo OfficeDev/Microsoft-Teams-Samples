@@ -8,8 +8,8 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "11-11-2021 23:30:17"
+ contentType: samples
+ createdDate: "11-11-2021 23:30:17"
 ---
 
 # Microsoft Teams Sample Connector

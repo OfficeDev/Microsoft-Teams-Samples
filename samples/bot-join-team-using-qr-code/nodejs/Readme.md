@@ -8,8 +8,8 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "24-12-2021 23:35:25"
+ contentType: samples
+ createdDate: "24-12-2021 23:35:25"
 ---
 
 # Join a team using QR code sample

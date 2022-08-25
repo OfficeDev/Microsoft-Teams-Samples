@@ -9,8 +9,8 @@ languages:
 - nodejs
 - javascript
 extensions:
-contentType: samples
-createdDate: "28-04-2022 00:15:15"
+ contentType: samples
+ createdDate: "28-04-2022 00:15:15"
 ---
 
 # Bot to create a group chat and send task notification using Azure webhooks.

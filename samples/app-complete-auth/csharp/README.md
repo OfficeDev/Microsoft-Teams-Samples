@@ -8,8 +8,8 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "25-02-2022 00:15:13"
+ contentType: samples
+ createdDate: "25-02-2022 00:15:13"
 ---
 
 # Authentication complete sample

@@ -8,8 +8,8 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "25-05-2021 13:38:26"
+ contentType: samples
+ createdDate: "25-05-2021 13:38:26"
 ---
 
 # Teams Catering Bot

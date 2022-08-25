@@ -8,8 +8,8 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "20-03-2021 13:38:27"
+ contentType: samples
+ createdDate: "20-03-2021 13:38:27"
 ---
 
 # Config Tab Authentication

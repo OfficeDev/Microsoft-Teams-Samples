@@ -8,8 +8,8 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "13-12-2021 17:00:25"
+ contentType: samples
+ createdDate: "13-12-2021 17:00:25"
 ---
 
 # Send task request using Universal Adaptive Cards in a group chat

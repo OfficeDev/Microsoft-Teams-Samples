@@ -8,8 +8,8 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "02-09-2021 19:54:22"
+ contentType: samples
+ createdDate: "02-09-2021 19:54:22"
 ---
 
 # Tabs with Adaptive Cards

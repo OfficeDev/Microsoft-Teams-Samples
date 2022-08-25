@@ -8,8 +8,8 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "26-11-2021 14:00:00"
+ contentType: samples
+ createdDate: "26-11-2021 14:00:00"
 ---
 
 # Send task approval request using activity feed notification (Graph APIs).

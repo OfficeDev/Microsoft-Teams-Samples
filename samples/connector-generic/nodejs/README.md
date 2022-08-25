@@ -8,8 +8,8 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:26"
+ contentType: samples
+ createdDate: "07-07-2021 13:38:26"
 ---
 # Sample Connector 
 This contains the source for a generic connector that's easy to customize for any system which supports webhooks. 

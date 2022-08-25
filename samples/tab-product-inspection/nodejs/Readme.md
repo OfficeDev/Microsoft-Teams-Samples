@@ -8,8 +8,8 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "16-11-2021 00:15:13"
+ contentType: samples
+ createdDate: "16-11-2021 00:15:13"
 ---
 
 # Product Inspection
