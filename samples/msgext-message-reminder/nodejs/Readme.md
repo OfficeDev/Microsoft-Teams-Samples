@@ -8,8 +8,8 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "24-11-2021 13:10:00"
+ contentType: samples
+ createdDate: "24-11-2021 13:10:00"
 ---
 
 # Message reminder with messaging extension action

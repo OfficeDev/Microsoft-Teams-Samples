@@ -8,8 +8,8 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "29-04-2022 00:02:15"
+ contentType: samples
+ createdDate: "29-04-2022 00:02:15"
 ---
 
 # Bot to create the group chat and send task notification using Azure webhooks.

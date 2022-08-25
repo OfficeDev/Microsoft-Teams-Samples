@@ -1,4 +1,4 @@
-﻿---
+---
 page_type: sample
 description: Microsoft Teams app show end user region selection using Bot and Tab
 products:
@@ -8,8 +8,8 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "19-03-2021 13:38:25"
+ contentType: samples
+ createdDate: "19-03-2021 13:38:25"
 ---
 
 # Region Selection App

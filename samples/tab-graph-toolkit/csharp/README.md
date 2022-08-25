@@ -8,8 +8,8 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "11-11-2021 23:30:17"
+ contentType: samples
+ createdDate: "11-11-2021 23:30:17"
 ---
 
 # Teams tab with microsoft graph toolkit

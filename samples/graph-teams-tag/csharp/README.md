@@ -8,8 +8,8 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "24-06-2022 00:02:15"
+ contentType: samples
+ createdDate: "24-06-2022 00:02:15"
 ---
 
 # This is a sample application that shows the usage of Graph CRUD operations related to team tags.

@@ -9,8 +9,8 @@ languages:
 - nodejs
 - javascript
 extensions:
-contentType: samples
-createdDate: "7-03-2022 00:15:13"
+ contentType: samples
+ createdDate: "7-03-2022 00:15:13"
 ---
 
 # Staggered permission sample

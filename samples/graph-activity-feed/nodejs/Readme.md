@@ -8,8 +8,8 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "06-10-2021 01:48:56"
+ contentType: samples
+ createdDate: "06-10-2021 01:48:56"
 ---
 
 # Activity Feed Notification

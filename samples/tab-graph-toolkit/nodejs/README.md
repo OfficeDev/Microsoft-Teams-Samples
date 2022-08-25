@@ -9,8 +9,8 @@ languages:
 - nodejs
 - typescript
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:27"
+ contentType: samples
+ createdDate: "07-07-2021 13:38:27"
 ---
 
 # Teams tab with microsoft graph toolkit

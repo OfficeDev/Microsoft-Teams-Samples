@@ -8,8 +8,8 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "29-11-2021 17:00:25"
+ contentType: samples
+ createdDate: "29-11-2021 17:00:25"
 ---
 
 # Send task approvals using activity feed notification (Graph APIs)

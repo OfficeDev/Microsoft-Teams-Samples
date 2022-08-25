@@ -8,8 +8,8 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "24-11-2021 14:00:25"
+ contentType: samples
+ createdDate: "24-11-2021 14:00:25"
 ---
 
 # Message reminder with messaging extension action

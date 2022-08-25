@@ -8,8 +8,8 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "13-05-2022 15:00:00"
+ contentType: samples
+ createdDate: "13-05-2022 15:00:00"
 ---
 
 # Proactive Tab Conversations

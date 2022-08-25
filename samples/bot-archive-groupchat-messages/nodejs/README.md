@@ -8,8 +8,8 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "11-10-2021 23:35:25"
+ contentType: samples
+ createdDate: "11-10-2021 23:35:25"
 ---
  
 # Archive groupchat messages

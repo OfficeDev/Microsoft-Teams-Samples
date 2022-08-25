@@ -8,8 +8,8 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "02-08-2022 17:12:15"
+ contentType: samples
+ createdDate: "02-08-2022 17:12:15"
 ---
 
 # This is a sample application which demonstrates how to pin messages in chat using Graph api.

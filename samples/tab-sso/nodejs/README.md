@@ -8,8 +8,8 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "12/3/2021 12:53:17 PM"
+ contentType: samples
+ createdDate: "12/3/2021 12:53:17 PM"
 ---
 # Tabs Azure AD SSO Sample using NodeJS
 

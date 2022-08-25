@@ -8,8 +8,8 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:26"
+ contentType: samples
+ createdDate: "07-07-2021 13:38:26"
 ---
 
 # AppCatalog sample
@@ -89,9 +89,9 @@ We recommend that you copy these values into a text file, using an application l
 -    AppCatalog.ReadWrite.All
 -  AppCatalog.Submit
 
-Click on “Add Permissions” to commit your changes.
+Click on ï¿½Add Permissionsï¿½ to commit your changes.
 
-16.  If you are logged in as the Global Administrator, click on the “Grant admin consent for %tenant-name%” button to grant admin consent else, inform your admin to do the same through the portal or follow the steps provided here to create a link and send it to your admin for consent.
+16.  If you are logged in as the Global Administrator, click on the ï¿½Grant admin consent for %tenant-name%ï¿½ button to grant admin consent else, inform your admin to do the same through the portal or follow the steps provided here to create a link and send it to your admin for consent.
 
 17.  Global Administrator can grant consent using following link:  [https://login.microsoftonline.com/common/adminconsent?client_id=](https://login.microsoftonline.com/common/adminconsent?client_id=)<%appId%> 
 

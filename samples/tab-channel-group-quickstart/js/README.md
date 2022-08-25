@@ -9,8 +9,8 @@ languages:
 - javascript
 - nodejs
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:27"
+ contentType: samples
+ createdDate: "07-07-2021 13:38:27"
 ---
 
 # Tabs quick start

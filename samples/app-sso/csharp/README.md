@@ -8,8 +8,8 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "02-09-2021 19:54:21"
+ contentType: samples
+ createdDate: "02-09-2021 19:54:21"
 ---
 
 # App SSO C#

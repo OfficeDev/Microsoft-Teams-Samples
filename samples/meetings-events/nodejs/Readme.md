@@ -8,8 +8,8 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "11-10-2021 17:35:46"
+ contentType: samples
+ createdDate: "11-10-2021 17:35:46"
 ---
 
 # Realtime meeting events
