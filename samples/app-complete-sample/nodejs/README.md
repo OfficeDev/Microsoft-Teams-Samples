@@ -12,6 +12,7 @@ extensions:
   technologies:
   - Tabs
   createdDate: 5/8/2017 9:41:53 AM
+urlFragment: officedev-microsoft-teams-samples-app-complete-sample-nodejs
 ---
 
 # Microsoft Teams Bot in Node.js

@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "02-09-2021 19:54:22"
+urlFragment: officedev-microsoft-teams-samples-tab-adaptive-cards-nodejs
 ---
 
 # Tabs with Adaptive Cards

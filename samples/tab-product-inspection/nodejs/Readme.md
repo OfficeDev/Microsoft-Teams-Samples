@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "16-11-2021 00:15:13"
+urlFragment: officedev-microsoft-teams-samples-tab-product-inspection-nodejs
 ---
 
 # Product Inspection

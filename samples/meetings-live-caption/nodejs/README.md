@@ -11,6 +11,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "24-06-2022 00:15:15"
+urlFragment: officedev-microsoft-teams-samples-meetings-live-caption-nodejs
 ---
 
 # Meeting side panel application uses CART link to send caption in live meeting.

@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "27-07-2021 16:32:33"
+urlFragment: officedev-microsoft-teams-samples-tab-device-permissions-nodejs
 ---
 
 # Tab Device Permission Demo

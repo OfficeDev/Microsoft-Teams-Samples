@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "11-10-2021 17:35:46"
+urlFragment: officedev-microsoft-teams-samples-meetings-events-nodejs
 ---
 
 # Realtime meeting events

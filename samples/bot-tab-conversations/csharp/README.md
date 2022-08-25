@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "13-05-2022 15:00:00"
+urlFragment: officedev-microsoft-teams-samples-bot-tab-conversations-csharp
 ---
 
 # Proactive Tab Conversations

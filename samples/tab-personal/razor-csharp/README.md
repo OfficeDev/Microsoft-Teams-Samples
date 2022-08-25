@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "07-07-2021 13:38:28"
+urlFragment: officedev-microsoft-teams-samples-tab-personal-razor-csharp
 ---
 
 # Personal Tab with ASP.NET Core

@@ -10,6 +10,7 @@ languages:
 extensions:
   contentType: samples
   createdDate: "03-09-2022 11:00:00"
+urlFragment: officedev-microsoft-teams-samples-bot-adaptivecards-user-specific-views-csharp
 ---
 
 # User Specific Views in Adaptive Cards

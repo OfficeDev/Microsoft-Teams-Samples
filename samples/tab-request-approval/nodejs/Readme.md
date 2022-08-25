@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "26-11-2021 14:00:00"
+urlFragment: officedev-microsoft-teams-samples-tab-request-approval-nodejs
 ---
 
 # Send task approval request using activity feed notification (Graph APIs).

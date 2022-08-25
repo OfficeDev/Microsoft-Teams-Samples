@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "28-01-2022 17:00:25"
+urlFragment: officedev-microsoft-teams-samples-graph-activity-feed-broadcast-csharp
 ---
 
 # Broadcast message to organization using activity feed notification (Graph APIs)

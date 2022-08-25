@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "24-11-2021 13:10:00"
+urlFragment: officedev-microsoft-teams-samples-msgext-message-reminder-nodejs
 ---
 
 # Message reminder with messaging extension action

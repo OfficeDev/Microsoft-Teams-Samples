@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "11-10-2021 23:35:25"
+urlFragment: officedev-microsoft-teams-samples-bot-archive-groupchat-messages-csharp
 ---
 
 # Archive groupchat messages

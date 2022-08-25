@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "02-08-2022 17:12:15"
+urlFragment: officedev-microsoft-teams-samples-graph-pinned-messages-csharp
 ---
 
 # This is a sample application which demonstrates how to pin messages in chat using Graph api.

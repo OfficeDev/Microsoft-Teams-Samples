@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "16-11-2021 00:15:13"
+urlFragment: officedev-microsoft-teams-samples-bot-sharepoint-file-viewer-csharp
 ---
 
 # Bot with SharePoint file to view in Teams file viewer

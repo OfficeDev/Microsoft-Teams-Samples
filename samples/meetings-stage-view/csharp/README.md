@@ -10,6 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "06-10-2021 01:48:56"
+urlFragment: officedev-microsoft-teams-samples-meetings-stage-view-csharp
 ---
 
 # Meetings Stage View
