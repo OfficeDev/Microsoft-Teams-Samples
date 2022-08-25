@@ -1,4 +1,4 @@
-// <copyright file="dashboard.jsx" company="Microsoft Corporation">
+// <copyright file="teamnotification.jsx" company="Microsoft Corporation">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 // </copyright>
@@ -62,7 +62,7 @@ class TeamNotification extends Component {
             <div>
                 <h3 className="headcolor">Team Notifications</h3>
                 <h4>Welcome to Teams Notification Tab</h4>
-                <p>This Tab has successfully configured, you will get notifications of Team Update in this team</p>
+                <p>This Tab has successfully configured, you will get notifications of Team Updates</p>
             </div>
         );
     }
