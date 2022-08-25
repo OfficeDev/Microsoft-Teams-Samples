@@ -66,7 +66,9 @@
 
                 while (result.NextPageRequest != null)
                 {
-                    result = await result.NextPageRequest.GetAsync();
+                    result = await result.NextPageRequest
+                        .WithAppOnly()
+                        .GetAsync();
                     members.AddRange(result.CurrentPage
                         .Where(m => m.Roles != null && m.Roles.Contains("owner"))
                         .Select(m => ((AadUserConversationMember)m).UserId));
