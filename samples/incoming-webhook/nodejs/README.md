@@ -11,6 +11,7 @@ languages:
 extensions:
   contentType: samples
   createdDate: "7/1/2022 2:36:57 PM"
+urlFragment: officedev-microsoft-teams-samples-incoming-webhook-nodejs
 ---
 
 # Incoming webhook

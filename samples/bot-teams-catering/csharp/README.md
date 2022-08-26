@@ -8,8 +8,9 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "25-05-2021 13:38:26"
+ contentType: samples
+ createdDate: "25-05-2021 13:38:26"
+urlFragment: officedev-microsoft-teams-samples-bot-teams-catering-csharp
 ---
 
 # Teams Catering Bot

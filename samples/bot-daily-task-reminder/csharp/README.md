@@ -8,8 +8,9 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "24-11-2021 13:50:00"
+ contentType: samples
+ createdDate: "24-11-2021 13:50:00"
+urlFragment: officedev-microsoft-teams-samples-bot-daily-task-reminder-csharp
 ---
 
 # Bot daily task reminder

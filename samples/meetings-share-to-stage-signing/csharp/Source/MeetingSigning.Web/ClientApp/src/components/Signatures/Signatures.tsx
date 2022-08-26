@@ -1,6 +1,6 @@
 import { Form, FormInput } from '@fluentui/react-northstar';
+import { DialogDimension } from '@microsoft/teams-js';
 import * as microsoftTeams from '@microsoft/teams-js';
-import { TaskModuleDimension } from '@microsoft/teams-js';
 import * as ACData from 'adaptivecards-templating';
 import { SignatureConfirmationCard } from 'adaptive-cards';
 import { postSignDocument, SignDocumentModel } from 'api/signatureApi';
@@ -51,13 +51,14 @@ function SignatureInput({
 
     const signatureConfirmationSubmitHandler = async (
       error: string,
-      result: any,
+      result: string | object,
     ) => {
       if (error !== null) {
         console.log(`Signature Confirmation handler - error: '${error}'`);
       } else if (result !== undefined) {
         const signatureSigned = { ...signature };
-        const resultParsed = typeof result === 'object' ? result : JSON.parse(result);
+        const resultParsed =
+          typeof result === 'object' ? result : JSON.parse(result);
         signatureSigned.text = resultParsed.confirmation;
 
         signDocumentMutation.mutate({
@@ -67,9 +68,10 @@ function SignatureInput({
       }
     };
 
+    // tasks.startTasks is deprecated, but the 2.0 of SDK's dialog.open does not support opening adaptive cards yet.
     microsoftTeams.tasks.startTask(
       {
-        width: TaskModuleDimension.Medium,
+        width: DialogDimension.Medium,
         card: JSON.stringify(card),
       },
       signatureConfirmationSubmitHandler,
@@ -80,7 +82,8 @@ function SignatureInput({
     <>
       <FormInput
         label={
-          (signDocumentMutation.data && signDocumentMutation.data.signer.name) ||
+          (signDocumentMutation.data &&
+            signDocumentMutation.data.signer.name) ||
           signature.signer.name
         }
         value={

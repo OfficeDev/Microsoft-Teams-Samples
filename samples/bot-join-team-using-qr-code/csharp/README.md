@@ -8,8 +8,9 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "24-12-2021 23:35:25"
+ contentType: samples
+ createdDate: "24-12-2021 23:35:25"
+urlFragment: officedev-microsoft-teams-samples-bot-join-team-using-qr-code-csharp
 ---
 
 # Join a team using QR code sample

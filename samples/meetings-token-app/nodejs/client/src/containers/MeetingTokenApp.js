@@ -9,7 +9,6 @@ class MeetingTokenApp extends Component {
         super(props);
     }
 
-
     render() {
         return (
             <Fragment>

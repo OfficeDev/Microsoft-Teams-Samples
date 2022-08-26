@@ -8,8 +8,9 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "12/3/2021 12:53:17 PM"
+ contentType: samples
+ createdDate: "12/3/2021 12:53:17 PM"
+urlFragment: officedev-microsoft-teams-samples-tab-sso-csharp
 ---
 # Tabs Azure AD SSO Sample - C#
 
@@ -17,13 +18,22 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
 
 ## Key feature.
 
-![SSO](Images/sso_personal.png)
+### Tab SSO
 
-![Success SSO](Images/success_sso_personal.png)
+![SSO](Images/sso_personal.png)
 
 ![Config](Images/config_teams.png)
 
 ![Config SSO](Images/config_sso_teams.png)
+
+### Login Outside Microsoft Teams
+To test this feature, open your App base URI or Ngrok URI on browser.
+
+URI should be like `https://%ngrokDomain%.ngrok.io/Home/`
+
+![Login Outside Microsoft Teams](Images/outside_teams_sso.png)
+
+![Login Outside Microsoft Teams Success](Images/outside_teams_success_sso.png)
 
 ## Prerequisites
 
@@ -93,7 +103,11 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
     Enable implicit grant by checking the following boxes:  
     ✔ ID Token  
     ✔ Access Token  
-14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
+14. Set another redirect URI:
+    * Select **Add a platform**.
+    * Select **Single-page application**.
+    * Enter the **redirect URI** for the app in the following format: https://%ngrokDomain%.ngrok.io/Home/BrowserRedirect
+15.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
 
 1) __*This step is specific to Teams.*__

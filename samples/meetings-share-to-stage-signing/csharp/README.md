@@ -8,20 +8,37 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "09-03-2022 15:56:00"
+ contentType: samples
+ createdDate: "09-03-2022 15:56:00"
+urlFragment: officedev-microsoft-teams-samples-meetings-share-to-stage-signing-csharp
 ---
 
 # In-Meeting Document Signing
-This proof of concept demonstrates the use case of sharing a document on Teams Share to Stage with live signing feature in a meeting.
+Meeting Signing is a Teams sample app that demonstrates the scenario of enabling users to sign documents in real time during meetings making possible to review and sign documents in a single session. This sample lets users electronically sign documents with their current tenant identity. Some example documents that can be signed during meetings are Purchase Agreements and Purchase Orders. This template is also applicable, and could be adapted for other scenarios like reviewing and approving code reviews or collaborative reviewing of documents 
+
+The sample app could be customized to incorporate other kind of signatures like handwritten signatures or certificate based signatures. 
+
+## Personas: 
+
+This sample has 3 main personas: 
+
+* Document creator: this role can add their own documents to be signed using the app 
+* Signer: this role will be able to sign documents reviewed during the meeting 
+* Reader: this role will only be able to read the documents reviewed during the meeting 
+
+## Scenarios: 
+
+* Add documents to be reviewed during a meeting 
+* Share documents to be reviewed to main stage 
+* Sign documents using the signer’s identity
 
 ## Included Features
 * Teams SSO
 * Programmatic sharing of content to stage
 * Stage app view depends on the authentication of the user
 * Adaptive Cards
+* People Picker
 
-<!-- Include a video documenting the sharing to stage here. -->
 ![Video documenting the sharing to stage, including the choosing of a document from the sidepanel, and the signing of the document on the stage](/samples/meetings-share-to-stage-signing/csharp/Docs/Signing-Clip.gif)
 
 ## Workflow
@@ -71,7 +88,6 @@ Currently, this app is not fully supported in the following scenarios:
 ### User Permissions
 * Tenant - If assigned by the document creator, the User will be  able to see and sign the document. 
 * Federated/Guest Users:
-    * The app loads but it's not possible to be authenticated to load the document. This is due to [a bug in Teams SSO](https://github.com/OfficeDev/microsoft-teams-library-js/issues/675)
     * The people picker does not allow users outside of the tenant to be selected. Similarly, if a federated user creates the document, they are only able to select people in their tenant as signers/viewers, and nobody from outside their tenant can view the document.
 * Anonymous Users - Does not work because apps can't get an SSO token for anonymous users.
 
@@ -102,7 +118,7 @@ This happens if you are running the application in a normal browser, and not ins
     ngrok http https://localhost:44326 -host-header=localhost:44326 # For Visual Studio
     ```
     * Make sure to copy and save the `https` url (it should look like `https://<randomsubdomain>.ngrok.io`).
-* [Register an App in AAD that can be used for Teams SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso?tabs=dotnet#develop-an-sso-microsoft-teams-tab)
+* [Register an App in AAD that can be used for Teams SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad)
     * Once the app is registered update Redirect Uris under the Authentication section with the ngrok url, followed by /auth-end (https://<randomsubdomain>.ngrok.io/auth-end)
     * Ensure the following API permissions are granted to the app for Microsoft Graph access - email, offline_access, openid, profile, User.Read, User.ReadBasic.All
     * *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your AAD App*

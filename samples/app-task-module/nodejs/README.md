@@ -12,6 +12,7 @@ urlFragment: teams-module-node
 extensions:
   contentType: samples
   createdDate: 9/17/2018 6:53:22 PM
+urlFragment: officedev-microsoft-teams-samples-app-task-module-nodejs
 ---
 
 # Microsoft Teams task module
