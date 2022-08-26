@@ -8,8 +8,9 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "17-03-2022 00:15:13"
+ contentType: samples
+ createdDate: "17-03-2022 00:15:13"
+urlFragment: officedev-microsoft-teams-samples-tab-staggered-permission-csharp
 ---
 
 # Staggered Permission sample

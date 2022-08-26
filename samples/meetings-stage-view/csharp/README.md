@@ -8,8 +8,9 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "06-10-2021 01:48:56"
+ contentType: samples
+ createdDate: "06-10-2021 01:48:56"
+urlFragment: officedev-microsoft-teams-samples-meetings-stage-view-csharp
 ---
 
 # Meetings Stage View
@@ -31,6 +32,20 @@ This capability is currently available in developer preview only.
 - Sharing specific part of your app to the meeting stage.
 
 ![Share Specific part screen](AppInMeeting/Images/share_specific_part.png)
+
+**NOTE: Currently Live Share SDK is not supported in mobiles.**
+
+## IOS Meeting Side panel and stage view.
+
+![IOS Side Panel](AppInMeeting/Images/ios_side_panel.jpeg)
+
+![IOS Stage View](AppInMeeting/Images/ios_share_todo.jpeg)
+
+## Android Meeting Side panel and stage view.
+
+![Android Side Panel](AppInMeeting/Images/android_side_panel.jpeg)
+
+![Android Stage View](AppInMeeting/Images/android_share_todo.jpeg)
 
 ## Prerequisites
 

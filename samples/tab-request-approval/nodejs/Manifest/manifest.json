@@ -27,8 +27,8 @@
     {
       "entityId": "request",
       "name": "Request",
-      "contentUrl": "https://{Base_Url}/request",
-      "websiteUrl": "https://{Base_Url}/request",
+      "contentUrl": "https://{Base_Url}/UserNotification",
+      "websiteUrl": "https://{Base_Url}/UserNotification",
       "scopes": [
         "personal"
       ]

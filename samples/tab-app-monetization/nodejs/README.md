@@ -11,6 +11,7 @@ languages:
 extensions:
   contentType: samples
   createdDate: "20/07/2022 05:26:57 PM"
+urlFragment: officedev-microsoft-teams-samples-tab-app-monetization-nodejs
 ---
 
 # App monetization in tab
