@@ -43,7 +43,7 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 > the Teams service needs to call into the bot.
 
 ### 1. Setup for Bot SSO
-Refer to [Bot SSO Setup document](.../BotSSOSetup.md).
+Refer to [Bot SSO Setup document](../../BotSSOSetup.md).
 
 ### 2. Configure bot sample
 
