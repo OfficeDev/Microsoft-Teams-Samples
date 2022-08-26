@@ -35,7 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-channel-group/spfx/images/display-in-teams-tab.PNG"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-channel-group/spfx/images/display-in-teams-tab.PNG",
+        "alt": "Solution UX showing channel/group tab in sharepoint framework"
       }
     ],
     "authors": [

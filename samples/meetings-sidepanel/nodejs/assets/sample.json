@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "tab,bot,meeting"
       }
     ],
     "thumbnails": [
       {
         "type": "image",
         "order": 100,
-        "url": "https://user-images.githubusercontent.com/50989436/118759535-d7c7e280-b88e-11eb-955b-8843d1a4a814.png"
+        "url": "https://user-images.githubusercontent.com/50989436/118759535-d7c7e280-b88e-11eb-955b-8843d1a4a814.png",
+        "alt": "Solution UX showing meetings sidepanel"
       }
     ],
     "authors": [

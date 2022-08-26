@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "tab,bot"
       }
     ],
     "thumbnails": [
       {
         "type": "image",
         "order": 100,
-        "url": "https://user-images.githubusercontent.com/50989436/119711021-a8136e80-be7c-11eb-8d00-ee3f6a050f44.png"
+        "url": "https://user-images.githubusercontent.com/50989436/119711021-a8136e80-be7c-11eb-8d00-ee3f6a050f44.png",
+        "alt": "Solution UX showing teams app localization"
       }
     ],
     "authors": [

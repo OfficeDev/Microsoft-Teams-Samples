@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "connector"
       }
     ],
     "thumbnails": [
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/connector-todo-notification/nodejs/Images/TaskCreated.PNG"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/connector-todo-notification/nodejs/Images/TaskCreated.PNG",
+        "alt": "Solution UX showing microsoft teams sample connector"
       }
     ],
     "authors": [

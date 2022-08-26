@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "bot"
+        "value": "tab,bot"
       }
     ],
     "thumbnails": [
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-tab-conversations/csharp/Docs/images/ChannelTabSubPageChat.png"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-tab-conversations/csharp/Docs/images/ChannelTabSubPageChat.png",
+        "alt": "Solution UX showing proactive tab conversations"
       }
     ],
     "authors": [

@@ -12,6 +12,7 @@ description: "This sample demonstrates @fluentui/react-teams library in Microsof
 extensions:
   contentType: samples
   createdDate: "12/8/2020 5:06:47 PM"
+urlFragment: officedev-microsoft-teams-samples-tab-ui-templates-ts
 ---
 
 # Deploying the Microsoft Teams UI templates sample app

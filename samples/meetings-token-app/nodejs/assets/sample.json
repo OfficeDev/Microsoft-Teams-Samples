@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "tab,bot,meeting"
       }
     ],
     "thumbnails": [
       {
         "type": "image",
         "order": 100,
-        "url": "https://user-images.githubusercontent.com/50989436/118591053-2909a080-b7c1-11eb-8724-194e2aff2a42.png"
+        "url": "https://user-images.githubusercontent.com/50989436/118591053-2909a080-b7c1-11eb-8724-194e2aff2a42.png",
+        "alt": "Solution UX showing meeting token generator"
       }
     ],
     "authors": [

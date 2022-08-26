@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "bot"
       }
     ],
     "thumbnails": [
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-release-management/nodejs/Images/WorkItemCard.PNG"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-release-management/nodejs/Images/WorkItemCard.PNG",
+        "alt": "Solution UX showing bot to create a group chat and send task notification using azure webhooks."
       }
     ],
     "authors": [

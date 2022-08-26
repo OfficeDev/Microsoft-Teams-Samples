@@ -11,6 +11,7 @@ languages:
 extensions:
   contentType: samples
   createdDate: "10/1/2021 2:36:57 PM"
+urlFragment: officedev-microsoft-teams-samples-meeting-recruitment-app-nodejs
 ---
 
 # Recruitment App Sample using Apps in Meetings

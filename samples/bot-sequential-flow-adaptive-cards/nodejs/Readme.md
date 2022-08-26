@@ -9,8 +9,9 @@ languages:
 - nodejs
 - javascript
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:26"
+ contentType: samples
+ createdDate: "07-07-2021 13:38:26"
+urlFragment: officedev-microsoft-teams-samples-bot-sequential-flow-adaptive-cards-nodejs
 ---
 
 # Sequential workflow adaptive cards

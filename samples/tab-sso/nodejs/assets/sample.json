@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "tab"
       }
     ],
     "thumbnails": [
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-sso/nodejs/./doc/images/AAD-SSO-Tab-5-ConsentPreviouslyGranted.png"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-sso/nodejs/./doc/images/AAD-SSO-Tab-5-ConsentPreviouslyGranted.png",
+        "alt": "Solution UX showing teams tab sso authentication (nodejs)"
       }
     ],
     "authors": [

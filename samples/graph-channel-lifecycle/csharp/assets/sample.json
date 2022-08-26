@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "tab"
       }
     ],
     "thumbnails": [
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-channel-lifecycle/csharp/ChannelLifecycle/Images/Image2.PNG"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-channel-lifecycle/csharp/ChannelLifecycle/Images/Image2.PNG",
+        "alt": "Solution UX showing mvc app creates, updates, deletes teams channels"
       }
     ],
     "authors": [

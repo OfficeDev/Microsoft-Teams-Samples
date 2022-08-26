@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "tab,bot"
       }
     ],
     "thumbnails": [
       {
         "type": "image",
         "order": 100,
-        "url": "https://user-images.githubusercontent.com/50989436/120268903-5af02c00-c2c4-11eb-9061-c8af7436715e.png"
+        "url": "https://user-images.githubusercontent.com/50989436/120268903-5af02c00-c2c4-11eb-9061-c8af7436715e.png",
+        "alt": "Solution UX showing meetings details tab"
       }
     ],
     "authors": [
