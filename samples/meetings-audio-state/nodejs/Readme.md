@@ -10,7 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "08-08-2022 12:00:01"
- urlFragment: officedev-microsoft-teams-samples-meeting-audio-state-nodejs
+urlFragment: officedev-microsoft-teams-samples-meeting-audio-state-nodejs
 ---
 **Steps:**
 
