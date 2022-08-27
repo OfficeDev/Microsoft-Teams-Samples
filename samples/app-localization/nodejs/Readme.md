@@ -9,8 +9,9 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:25"
+ contentType: samples
+ createdDate: "07-07-2021 13:38:25"
+urlFragment: officedev-microsoft-teams-samples-app-localization-nodejs
 ---
 
 # Teams App Localization

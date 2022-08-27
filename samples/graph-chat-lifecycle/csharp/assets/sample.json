@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "tab"
       }
     ],
     "thumbnails": [
       {
         "type": "Image",
         "order": 100,
-        "url": "https://user-images.githubusercontent.com/80379013/120188120-592a5800-c233-11eb-99a8-b761ba60d862.png"
+        "url": "https://user-images.githubusercontent.com/80379013/120188120-592a5800-c233-11eb-99a8-b761ba60d862.png",
+        "alt": "Solution UX showing chat lifecycle application"
       }
     ],
     "authors": [

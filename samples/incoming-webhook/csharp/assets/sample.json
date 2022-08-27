@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "tab"
       }
     ],
     "thumbnails": [
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/incoming-webhook/csharp/IncomingWebhook/Images/cardByWebhook.png"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/incoming-webhook/csharp/IncomingWebhook/Images/cardByWebhook.png",
+        "alt": "Solution UX showing incoming webhook"
       }
     ],
     "authors": [

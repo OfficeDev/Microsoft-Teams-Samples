@@ -28,14 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": ""
+        "value": "tab,bot"
       }
     ],
     "thumbnails": [
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-task-module/csharp/Microsoft.Teams.Samples.TaskModule.Web/Images/youtube.png"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-task-module/csharp/Microsoft.Teams.Samples.TaskModule.Web/Images/youtube.png",
+        "alt": "Solution UX showing launch task module from tab and bot"
       }
     ],
     "authors": [

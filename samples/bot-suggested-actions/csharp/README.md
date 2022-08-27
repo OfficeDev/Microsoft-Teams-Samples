@@ -8,8 +8,9 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "27-04-2022 23:30:17"
+ contentType: samples
+ createdDate: "27-04-2022 23:30:17"
+urlFragment: officedev-microsoft-teams-samples-bot-suggested-actions-csharp
 ---
 
 # Get Suggested Actions

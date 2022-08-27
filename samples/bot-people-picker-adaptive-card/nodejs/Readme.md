@@ -8,8 +8,9 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "25-01-2022 23:30:17"
+ contentType: samples
+ createdDate: "25-01-2022 23:30:17"
+urlFragment: officedev-microsoft-teams-samples-bot-people-picker-adaptive-card-nodejs
 ---
 # People picker control in Adaptive Cards
 

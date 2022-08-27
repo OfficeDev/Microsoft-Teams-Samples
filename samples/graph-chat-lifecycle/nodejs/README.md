@@ -8,8 +8,9 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:26"
+ contentType: samples
+ createdDate: "07-07-2021 13:38:26"
+urlFragment: officedev-microsoft-teams-samples-graph-chat-lifecycle-nodejs
 ---
 
 # ChatLifecycle Application

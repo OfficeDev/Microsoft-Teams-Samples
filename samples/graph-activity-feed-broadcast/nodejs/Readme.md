@@ -8,8 +8,9 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "25-01-2022 01:48:56"
+ contentType: samples
+ createdDate: "25-01-2022 01:48:56"
+urlFragment: officedev-microsoft-teams-samples-graph-activity-feed-broadcast-nodejs
 ---
 
 # Broadcast message to organization using activity feed notification (Graph APIs)

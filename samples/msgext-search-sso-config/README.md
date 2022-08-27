@@ -9,8 +9,9 @@ languages:
 - javascript
 - nodejs
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:27"
+ contentType: samples
+ createdDate: "07-07-2021 13:38:27"
+urlFragment: officedev-microsoft-teams-samples-samples-msgext-search-sso-config
 ---
 
 # Messaging Extension SSO Config Bot

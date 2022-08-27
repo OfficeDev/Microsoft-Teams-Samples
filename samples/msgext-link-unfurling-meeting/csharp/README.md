@@ -10,6 +10,7 @@ languages:
 extensions:
   contentType: samples
   createdDate: "03-04-2022 11:00:00"
+urlFragment: officedev-microsoft-teams-samples-msgext-link-unfurling-meeting-csharp
 ---
 
 # Link unfurling meeting sample
