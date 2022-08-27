@@ -8,8 +8,9 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "12/3/2021 12:53:17 PM"
+ contentType: samples
+ createdDate: "12/3/2021 12:53:17 PM"
+urlFragment: officedev-microsoft-teams-samples-tab-sso-csharp
 ---
 # Tabs Azure AD SSO Sample - C#
 

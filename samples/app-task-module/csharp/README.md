@@ -11,6 +11,7 @@ languages:
 extensions:
   contentType: samples
   createdDate: "9/26/2018 5:27:57 PM"
+urlFragment: officedev-microsoft-teams-samples-app-task-module-csharp
 ---
 
 # Microsoft Teams task module

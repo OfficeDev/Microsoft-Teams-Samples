@@ -8,8 +8,9 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "11-10-2021 23:35:25"
+ contentType: samples
+ createdDate: "11-10-2021 23:35:25"
+urlFragment: officedev-microsoft-teams-samples-app-installation-using-qr-code-nodejs
 ---
 
 # Install app using barcode sample

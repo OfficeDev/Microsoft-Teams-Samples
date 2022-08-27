@@ -8,8 +8,9 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "02-08-2022 17:12:15"
+ contentType: samples
+ createdDate: "02-08-2022 17:12:15"
+urlFragment: officedev-microsoft-teams-samples-graph-pinned-messages-csharp
 ---
 
 # This is a sample application which demonstrates how to pin messages in chat using Graph api.
@@ -19,15 +20,15 @@ This is an sample application which displays all the pinned messages in group ch
 
 1. Pin new message in chat.
 
-![Create new tag](GraphPinnedMessage/Images/PinMessage.png)
+![Pinned message](GraphPinnedMessage/Images/PinMessage.png)
 
 2. The pinned message will be shown in tab.
 
-![View/Edit tag](GraphPinnedMessage/Images/TabImage.png)
+![Tab page](GraphPinnedMessage/Images/TabImage.png)
 
 3. You can select different message from the list of messages. The message will be pinned in chat.
 
-![View/Edit tag](GraphPinnedMessage/Images/NewMessage.png)
+![Pin new message](GraphPinnedMessage/Images/NewMessage.png)
 
 
 ## Prerequisites

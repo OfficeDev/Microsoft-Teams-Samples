@@ -8,8 +8,9 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "12-04-2022 01:48:56"
+ contentType: samples
+ createdDate: "12-04-2022 01:48:56"
+urlFragment: officedev-microsoft-teams-samples-tab-people-picker-csharp
 ---
 
 # Tab people picker
