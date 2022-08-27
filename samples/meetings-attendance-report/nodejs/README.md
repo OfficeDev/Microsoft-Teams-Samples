@@ -9,8 +9,9 @@ languages:
 - nodejs
 - javascript
 extensions:
-contentType: samples
-createdDate: "20-08-2022 00:30:15"
+ contentType: samples
+ createdDate: "20-08-2022 00:30:15"
+urlFragment: officedev-microsoft-teams-samples-meetings-attendance-report-nodejs
 ---
 
 # Bot to show the attendance report of the meeting using Microsoft Graph API.
@@ -40,7 +41,7 @@ When meeting ends, attendance report card is sent by the bot.
 - Open ngrok and run command `ngrok http -host-header=rewrite 3978` 
 - Once started you should see URL  `https://41ed-abcd-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
 
-![Ngrok](Images/NgrokScreenshot.PNG)
+![Ngrok](Images/NgrokScreenshot.png)
 - Go to *Options* and check *Required* and Add.
 
 ### 2. Register Azure AD application
@@ -94,7 +95,7 @@ Click on Add Permissions to commit your changes.
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 ### 5. Manually update the manifest.json
-- Edit the `manifest.json` contained in the  `/appPackage` folder to and fill in MicrosoftAppId (that was created in step 1 and it is the same value of MicrosoftAppId as in `.env` file) *everywhere* you see the place holder string `<<Microsoft-App-Id>>` (depending on the scenario it may occur multiple times in the `manifest.json`)
+- Edit the `manifest.json` contained in the  `/appPackage` folder to and fill in MicrosoftAppId (that was created in step 1 and it is the same value of MicrosoftAppId as in `.env` file) *everywhere* you see the place holder string `<<Microsoft-App-Id>>` (depending on the scenario it may occur multiple times in the `manifest.json`), Also replace the <<GUID>> with any valid GUID or with your MicrosoftAppId
 - Zip up the contents of the `/appPackage` folder to create a `manifest.zip`
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
 
