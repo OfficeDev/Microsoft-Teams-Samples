@@ -8,8 +8,9 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "20-08-2022 00:01:15"
+ contentType: samples
+ createdDate: "20-08-2022 00:01:15"
+urlFragment: officedev-microsoft-teams-samples-meetings-attendance-report-csharp
 ---
 
 # Bot to show the attendance report of the meeting using Microsoft Graph API.
@@ -43,7 +44,7 @@ When meeting ends, attendance report card is sent by the bot.
 - Open ngrok and run command `ngrok http -host-header=rewrite 3978` 
 - Once started you should see URL  `https://41ed-abcd-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
 
-![Ngrok](MeetingAttendance/Images/NgrokScreenshot.PNG)
+![Ngrok](MeetingAttendance/Images/NgrokScreenshot.png)
 
 ### 2. Register Azure AD application
 Register one Azure AD application in your tenant's directory: for the bot and tab app authentication.
@@ -101,7 +102,7 @@ Click on Add Permissions to commit your changes.
 
 
 ### 6. Manually update the manifest.json
-- Edit the `manifest.json` contained in the  `/AppManifest` folder to and fill in App-Id this can be any GUID or your MicrosoftAppId and you need to fill MicrosoftAppId (that was created in step 2 and it is the same value of MicrosoftAppId as in `appsettings.json` file) *everywhere* you see the place holder string `<<Microsoft-App-Id>>` (depending on the scenario it may occur multiple times in the `manifest.json`) and
+- Edit the `manifest.json` contained in the  `/AppManifest` folder to and fill in App-Id this can be any GUID or your MicrosoftAppId and you need to fill MicrosoftAppId (that was created in step 2 and it is the same value of MicrosoftAppId as in `appsettings.json` file) *everywhere* you see the place holder string `<<Microsoft-App-Id>>` (depending on the scenario it may occur multiple times in the `manifest.json`), Also replace the <<GUID>> with any valid GUID or with your MicrosoftAppId and
 - Zip up the contents of the `/AppManifest` folder to create a `manifest.zip`
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
 
