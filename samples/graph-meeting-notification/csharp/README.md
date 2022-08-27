@@ -8,8 +8,9 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "10-08-2022 00:16:45"
+ contentType: samples
+ createdDate: "10-08-2022 00:16:45"
+urlFragment: officedev-microsoft-teams-samples-graph-meeting-notification-csharp
 ---
 
 # This is a sample demonstrates use of online meeting subscription including resource data.
