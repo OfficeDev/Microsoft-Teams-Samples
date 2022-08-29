@@ -39,6 +39,7 @@ class TeamChangeNotification extends Component {
     ///Summary///
     initializeData = async (teamId, pageId) => {
         var response = await axios.post(`/api/team/${teamId}/${pageId}`);
+
         try {
             if (response.status === 200) {
                 var responseData = response.data;
@@ -68,6 +69,9 @@ class TeamChangeNotification extends Component {
         }
     }
 
+    ///Summary///
+    ///welocme message after successfully configured.
+    ///Summary///
     welcomeMessage = () => {
         return (
             <div>
