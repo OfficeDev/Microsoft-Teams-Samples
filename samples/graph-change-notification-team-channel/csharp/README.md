@@ -10,7 +10,7 @@ languages:
 extensions 
 contentType: samples
 createdDate: "25-08-2022 04:30:15"
-urlFragment:officedev-microsoft-teams-samples-graph-change-notification-team-channel
+urlFragment: officedev-microsoft-teams-samples-graph-change-notification-team-channel
 ---
 
 # This is a sample application that shows the usage of change notifications for team and channel using Microsoft Graph.
