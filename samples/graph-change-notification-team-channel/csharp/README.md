@@ -8,8 +8,8 @@ products:
 languages:
 - csharp
 extensions 
-contentType: samples
-createdDate: "25-08-2022 04:30:15"
+ contentType: samples
+ createdDate: "25-08-2022 04:30:15"
 urlFragment: officedev-microsoft-teams-samples-graph-change-notification-team-channel
 ---
 

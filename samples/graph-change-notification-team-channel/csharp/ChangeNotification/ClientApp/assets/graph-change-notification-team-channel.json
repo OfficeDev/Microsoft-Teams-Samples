@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-graph-change-notification-team-channel",
     "source": "officeDev",
-    "title": "change notification team channel",
+    "title": "Graph Change Notification Team/Channel",
     "shortDescription": "graph change notification for team and channel",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-audio-state/nodejs",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-change-notification-team-channel/csharp",
     "longDescription": [
-      "graph change notifications for team and channel"
+      "Graph change notifications for team and channel"
     ],
     "creationDateTime": "2022-08-25",
     "updateDateTime": "2022-08-25",
@@ -24,7 +24,7 @@
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": "express"
+        "value": "netframework"
       },
       {
         "key": "TEAMS-FEATURES",
@@ -35,8 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-audio-state/nodejs/Images/App-InMeeting.png",
-        "alt": "Solution UX showing teams meeting audio mute/unmute node"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-change-notification-team-channel/csharp/ChangeNotification/Images/ChangeNotification.gif",
+        "alt": "Solution UX showing Graph Change Notification Team/Channel"
       }
     ],
     "authors": [
