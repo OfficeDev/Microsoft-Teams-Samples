@@ -8,7 +8,7 @@ using Microsoft.Bot.Builder.TraceExtensions;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Logging;
 
-namespace ChannelNotification.Bots
+namespace ChangeNotification.Bots
 {
     public class AdapterWithErrorHandler : CloudAdapter
     {

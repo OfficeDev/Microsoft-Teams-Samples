@@ -96,6 +96,7 @@ namespace ChangeNotification.Helper
                 Content = adaptiveCard.Card
             };
         }
+
         private static AdaptiveCardTemplate GetCardTemplate(string fileName)
         {
             string templatePath = Path.Combine(Directory.GetCurrentDirectory(), "Resources", fileName);

@@ -1,4 +1,4 @@
-// <copyright file="teamnotification.jsx" company="Microsoft Corporation">
+// <copyright file="team-notification.jsx" company="Microsoft Corporation">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 // </copyright>
@@ -26,8 +26,10 @@ class TeamChangeNotification extends Component {
             microsoftTeams.app.getContext().then((context) => {
                 this.setState({ teamId: context.team.groupId });
                 var url = window.location.href;
+
                 var pageid = url.match(/\d+$/)[0];
                 this.setState({ pageId: pageid });
+
                 this.initializeData(context.team.groupId, this.state.pageId);
             })
         });

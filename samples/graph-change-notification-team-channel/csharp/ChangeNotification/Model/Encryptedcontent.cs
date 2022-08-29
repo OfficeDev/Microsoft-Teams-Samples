@@ -14,6 +14,7 @@ namespace ChangeNotification.Model
         /// Encrypted data signature.
         /// </summary>
         public string dataSignature { get; set; }
+
         public string dataKey { get; set; }
 
         /// <summary>

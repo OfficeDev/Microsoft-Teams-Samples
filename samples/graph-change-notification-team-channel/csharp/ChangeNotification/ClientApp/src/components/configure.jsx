@@ -21,10 +21,8 @@ const Configure = props => {
                         suggestedTabName: "Channel Notification",
                         websiteUrl: `${window.location.origin}/channel/1`,
                     });
-
                     saveEvent.notifySuccess();
                 });
-
                 microsoftTeams.pages.config.setValidityState(true);
             });
         }
@@ -40,10 +38,8 @@ const Configure = props => {
                         suggestedTabName: "Team Notification",
                         websiteUrl: `${window.location.origin}/team/2`,
                     });
-
                     saveEvent.notifySuccess();
                 });
-
                 microsoftTeams.pages.config.setValidityState(true);
             });
         }

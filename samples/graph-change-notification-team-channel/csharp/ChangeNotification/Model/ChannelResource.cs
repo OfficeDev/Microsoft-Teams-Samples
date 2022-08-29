@@ -13,25 +13,25 @@
         public string Id { get; set; }
 
         /// <summary>
-        /// Id of meeting resource notification.
-        /// </summary>
+        /// SubscriptionId of notification.
+        /// </summary
         [JsonProperty(PropertyName = "subscriptionId")]
         public string SubscriptionId { get; set; }
 
         /// <summary>
-        /// The type of meeting resource notification.
+        /// The type of notification.
         /// </summary>
         [JsonProperty(PropertyName = "changeType")]
         public string ChangeType { get; set; }
 
         /// <summary>
-        /// The date and time of meeting resource notification.
+        /// The date and time of resource notification.
         /// </summary>
         [JsonProperty(PropertyName = "dataSignature")]
         public string DataSignature { get; set; }
 
         /// <summary>
-        /// The state of meeting resource notification.
+        /// The state of resource notification.
         /// </summary>
         [JsonProperty(PropertyName = "resource")]
         public string Resource { get; set; }
@@ -40,7 +40,9 @@
         public string DisplayName { get; set; }
 
         [JsonProperty(PropertyName = "webUrl")]
+
         public string webUrl { get; set; }
+
         public DateTime? CreatedDate { get; set; }
     }
 }

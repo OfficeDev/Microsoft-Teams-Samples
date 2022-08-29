@@ -115,8 +115,7 @@ namespace ChangeNotification.Controllers
                 foreach (var notification in notifications.Items)
                 {
                     // Initialize with the private key that matches the encryptionCertificateId.
-                    var data = DecryptionHelper.GetDecryptedContent(notification.EncryptedContent,
-                                                    this.botSettings.Value.CertificateThumbprint);
+                    var data = DecryptionHelper.GetDecryptedContent(notification.EncryptedContent,this.botSettings.Value.CertificateThumbprint);
                     var TeamResource = JsonConvert.DeserializeObject<TeamResource>(data);
                     var changeType = notifications.Items[0].ChangeType;
                     var teamName = TeamResource.DisplayName;

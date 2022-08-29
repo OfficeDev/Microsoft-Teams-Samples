@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-graph-change-notification-team-channel",
     "source": "officeDev",
     "title": "Graph Change Notification Team/Channel",
-    "shortDescription": "graph change notification for team and channel",
+    "shortDescription": "Graph change notification for team and channel",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-change-notification-team-channel/csharp",
     "longDescription": [
-      "Graph change notifications for team and channel"
+      "This sample demonstrates the use of Team/Channel subscription that will post notifications when user Create/Edit/Delete the team/channel."
     ],
     "creationDateTime": "2022-08-25",
     "updateDateTime": "2022-08-25",
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-change-notification-team-channel/csharp/ChangeNotification/Images/ChangeNotification.gif",
-        "alt": "Solution UX showing Graph Change Notification Team/Channel"
+        "alt": "Solution UX showing Graph Change Notification Team/Channel csharp"
       }
     ],
     "authors": [

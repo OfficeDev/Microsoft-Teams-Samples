@@ -1,10 +1,12 @@
 {
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4",
   "type": "AdaptiveCard",
   "body": [
     {
       "type": "TextBlock",
       "text": "Hello and welcome to Teams Channel Notification Bot",
-      "$when":  "${isWelcomeCard}",
+      "$when": "${isWelcomeCard}",
       "size": "medium",
       "weight": "bolder"
     },
@@ -19,9 +21,6 @@
       "text": "You will start getting notification for this Teams for every  Create, Edit and Delete of Channel.",
       "wrap": true,
       "color": "accent"
-      
     }
-  ],
-  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-  "version": "1.4"
+  ]
 }

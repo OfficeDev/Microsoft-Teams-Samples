@@ -18,10 +18,8 @@ namespace ChangeNotification.Helpers
             using (X509Store certStore = new X509Store(StoreName.My, StoreLocation.CurrentUser))
             {
                 certStore.Open(OpenFlags.ReadOnly);
-                X509Certificate2Collection certCollection = certStore.Certificates.Find(
-                                            X509FindType.FindByThumbprint,
-                                            certificateThumbprint,
-                                            false);
+                X509Certificate2Collection certCollection = certStore.Certificates.Find(X509FindType.FindByThumbprint,certificateThumbprint,false);
+               
                 // Get the first cert with the thumbprint
                 if (certCollection.Count > 0)
                 {
@@ -33,6 +31,7 @@ namespace ChangeNotification.Helpers
 
                     // Use certificate
                     Console.WriteLine(cert.FriendlyName);
+
                 }
                 certStore.Close();
             }
@@ -48,7 +47,9 @@ namespace ChangeNotification.Helpers
             }
             if (actualSignature.SequenceEqual(expectedSignature))
             {
+
                 // Continue with decryption of the encryptedPayload.
+
             }
             else
             {
@@ -63,6 +64,7 @@ namespace ChangeNotification.Helpers
                 Padding = PaddingMode.PKCS7,
                 Mode = CipherMode.CBC
             };
+
             // Obtain the initialization vector from the symmetric key itself.
             int vectorSize = 16;
             byte[] iv = new byte[vectorSize];

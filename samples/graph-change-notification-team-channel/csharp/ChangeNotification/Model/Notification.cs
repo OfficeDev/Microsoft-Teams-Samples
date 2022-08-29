@@ -10,9 +10,9 @@ namespace ChangeNotification.Model
     public class Notifications
     {
         [JsonProperty(PropertyName = "value")]
-        public Notification[] Items { get; set; }
+        public Notification_List[] Items { get; set; }
     }
-    public class Notification
+    public class Notification_List
     {
         // The type of change.
         [JsonProperty(PropertyName = "changeType")]
@@ -41,5 +41,4 @@ namespace ChangeNotification.Model
         [JsonProperty(PropertyName = "encryptedContent")]
         public Encryptedcontent EncryptedContent { get; set; }
     }
-
 }

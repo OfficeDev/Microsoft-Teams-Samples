@@ -1,4 +1,4 @@
-// <copyright file="channelnotification.jsx" company="Microsoft Corporation">
+// <copyright file="channel-notification.jsx" company="Microsoft Corporation">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 // </copyright>
