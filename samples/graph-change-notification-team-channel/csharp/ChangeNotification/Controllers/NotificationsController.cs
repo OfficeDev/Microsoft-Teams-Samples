@@ -32,10 +32,10 @@ namespace ChangeNotification.Controllers
         private readonly ILogger _logger;
         private readonly SubscriptionManager _subscriptionManager;
 
-        public NotificationsController(IOptions<BotConfiguration> botSettings,
-           
-            ConcurrentDictionary<string, ConversationReference> conversationReferences, SubscriptionManager subscriptionManager)
+        public TeamController(IOptions<BotConfiguration> botSettings, ILogger<NotificationsController> logger,SubscriptionManager subscriptionManager)
         {
+             this.botSettings = botSettings;
+            _logger = logger;
             _subscriptionManager = subscriptionManager;
         }
 

@@ -31,11 +31,8 @@ namespace ChangeNotification.Controllers
         private readonly IOptions<BotConfiguration> botSettings;
         private readonly ILogger _logger;
         private readonly SubscriptionManager _subscriptionManager;
-        private string pageId;
 
-        public TeamController(IOptions<BotConfiguration> botSettings,
-            ILogger<NotificationsController> logger,
-            SubscriptionManager subscriptionManager)
+        public TeamController(IOptions<BotConfiguration> botSettings,ILogger<NotificationsController> logger,SubscriptionManager subscriptionManager)
         {
             this.botSettings = botSettings;
             _logger = logger;
