@@ -9,7 +9,6 @@ import axios from "axios";
 import moment from 'moment'
 import "../style/style.css";
 
-// Dashboard where user can manage the tags
 class ChangeNotificationChannel extends Component {
     constructor(props) {
         super(props);
@@ -34,47 +33,54 @@ class ChangeNotificationChannel extends Component {
         });
     }
 
+    ///Summary///
+    ///Passing {teamId} and {PageId} to team controller for change notification subscription.
+    ///Summary///
     initializeData = async (teamId) => {
         var response = await axios.post(`/api/Notifications/${teamId}/${this.state.pageId}`);
 
-        if (response.status === 200) {
-            var responseData = response.data;
+        try {
+            if (response.status === 200) {
+                var responseData = response.data;
 
-            if (responseData) {
-                var elements = [];
+                if (responseData) {
+                    var elements = [];
 
-                responseData.forEach(item => {
-                    elements.push(<div>
-                        <p><b>Channel Name :</b> {item.displayName}</p>
-                        {(() => {
-                            if (item.changeType === 'updated') {
-                                return (<div><p><b>Description  : </b> Channel has Renamed</p>
-                                    <p><b>Status         : </b><span className="statusColor"> {item.changeType}</span></p>
-                                </div>);
-                            }
+                    responseData.forEach(item => {
+                        elements.push(<div>
+                            <p><b>Channel Name :</b> {item.displayName}</p>
+                            {(() => {
+                                if (item.changeType === 'updated') {
+                                    return (<div><p><b>Description  : </b> Channel has Renamed</p>
+                                        <p><b>Status         : </b><span className="statusColor"> {item.changeType}</span></p>
+                                    </div>);
+                                }
 
-                            if (item.changeType === 'created') {
-                                return (<div><p><b>Description  : </b> New Channel has Created</p>
-                                    <p><b>Status         : </b><span className="statusColor"> {item.changeType}</span></p>
-                                </div>);
-                            }
+                                if (item.changeType === 'created') {
+                                    return (<div><p><b>Description  : </b> New Channel has Created</p>
+                                        <p><b>Status         : </b><span className="statusColor"> {item.changeType}</span></p>
+                                    </div>);
+                                }
 
-                            if (item.changeType === 'deleted') {
-                                return (<div><p><b>Description  : </b> Channel has deleted</p>
-                                    <p><b>Status         : </b><span className="deleteStatus"> {item.changeType}</span></p>
-                                </div>);
-                            }
-                        })()}
-                        <p><b>Date         :</b> {moment(item.createdDate).format('LLL')} <b>
-                            <span className="headcolor">{moment(item.createdDate).fromNow()}</span></b></p>
-                        <hr></hr>
-                    </div>);
-                });
+                                if (item.changeType === 'deleted') {
+                                    return (<div><p><b>Description  : </b> Channel has deleted</p>
+                                        <p><b>Status         : </b><span className="deleteStatus"> {item.changeType}</span></p>
+                                    </div>);
+                                }
+                            })()}
+                            <p><b>Date         :</b> {moment(item.createdDate).format('LLL')} <b>
+                                <span className="headcolor">{moment(item.createdDate).fromNow()}</span></b></p>
+                            <hr></hr>
+                        </div>);
+                    });
 
-                if (elements.length > 0) {
-                    this.setState({ changeNotifications: elements.reverse()});
+                    if (elements.length > 0) {
+                        this.setState({ changeNotifications: elements.reverse() });
+                    }
                 }
             }
+        } catch (error) {
+            error;
         }
     }
 
@@ -87,7 +93,7 @@ class ChangeNotificationChannel extends Component {
             </div>
         );
     }
-    
+
     render() {
         return (
             <div className="tag-container">
@@ -102,4 +108,4 @@ class ChangeNotificationChannel extends Component {
 }
 
 
-export default ChangeNotificationChannel ;
+export default ChangeNotificationChannel;

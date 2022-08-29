@@ -28,7 +28,7 @@ class TeamChangeNotification extends Component {
                 var url = window.location.href;
                 var pageid = url.match(/\d+$/)[0];
                 this.setState({ pageId: pageid });
-                this.initializeData(context.team.groupId,this.state.pageId);
+                this.initializeData(context.team.groupId, this.state.pageId);
 
             })
         });
@@ -37,30 +37,34 @@ class TeamChangeNotification extends Component {
     ///Summary///
     ///Passing {teamId} and {PageId} to team controller for change notification subscription.
     ///Summary///
-    initializeData = async (teamId,pageId) => {
+    initializeData = async (teamId, pageId) => {
         var response = await axios.post(`/api/team/${teamId}/${pageId}`);
+        try {
+            if (response.status === 200) {
+                var responseData = response.data;
 
-        if (response.status === 200) {
-            var responseData = response.data;
+                if (responseData) {
+                    var elements = [];
 
-            if (responseData) {
-                var elements = [];
+                    responseData.forEach(item => {
+                        elements.push(<div>
+                            <p><b>Team Name :</b> {item.displayName}</p>
+                            <p><b>Status    :</b> <span className="statusColor"> {item.changeType}</span></p>
+                            <p><b>Description : </b> Team Name has Renamed</p>
+                            <p><b>Date         :</b> {moment(item.createdDate).format('LLL')} <b>
+                                <span className="headcolor">{moment(item.createdDate).fromNow()}</span></b></p>
+                            <hr></hr>
+                        </div>);
+                    });
 
-                responseData.forEach(item => {
-                    elements.push(<div>
-                        <p><b>Team Name :</b> {item.displayName}</p>
-                        <p><b>Status    :</b> <span className="statusColor"> {item.changeType}</span></p>
-                        <p><b>Description : </b> Team Name has Renamed</p>
-                        <p><b>Date         :</b> {moment(item.createdDate).format('LLL')} <b>
-                            <span className="headcolor">{moment(item.createdDate).fromNow()}</span></b></p>
-                        <hr></hr>
-                    </div>);
-                });
-
-                if (elements.length > 0) {
-                    this.setState({ notifications: elements.reverse() });
+                    if (elements.length > 0) {
+                        this.setState({ notifications: elements.reverse() });
+                    }
                 }
             }
+        }
+        catch (error) {
+            error;
         }
     }
 
