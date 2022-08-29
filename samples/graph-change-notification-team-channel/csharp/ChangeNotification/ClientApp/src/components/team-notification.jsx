@@ -29,7 +29,6 @@ class TeamChangeNotification extends Component {
                 var pageid = url.match(/\d+$/)[0];
                 this.setState({ pageId: pageid });
                 this.initializeData(context.team.groupId, this.state.pageId);
-
             })
         });
     }
@@ -50,8 +49,19 @@ class TeamChangeNotification extends Component {
                     responseData.forEach(item => {
                         elements.push(<div>
                             <p><b>Team Name :</b> {item.displayName}</p>
-                            <p><b>Status    :</b> <span className="statusColor"> {item.changeType}</span></p>
-                            <p><b>Description : </b> Team Name has Renamed</p>
+                            {(() => {
+                                if (item.changeType === 'updated') {
+                                    return (<div><p><b>Description  : </b> When new Team is Edited and Deleted you will get notification as updated  </p>
+                                        <p><b>Status         : </b><span className="statusColor"> {item.changeType}</span></p>
+                                    </div>);
+                                }
+
+                                if (item.changeType === 'deleted') {
+                                    return (<div><p><b>Description  : </b> Team has deleted</p>
+                                        <p><b>Status         : </b><span className="deleteStatus"> {item.changeType}</span></p>
+                                    </div>);
+                                }
+                            })()}
                             <p><b>Date         :</b> {moment(item.createdDate).format('LLL')} <b>
                                 <span className="headcolor">{moment(item.createdDate).fromNow()}</span></b></p>
                             <hr></hr>
@@ -64,8 +74,8 @@ class TeamChangeNotification extends Component {
                 }
             }
         }
-        catch (error) {
-            error;
+        catch (e) {
+            console.log("error", e);
         }
     }
 

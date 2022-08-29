@@ -36,7 +36,7 @@ namespace ChangeNotification.Helper
             this.graphBetaClientProvider = graphBetaClientProvider;
             _logger = logger;
         }
-
+        
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             await InitializeAllSubscription("", "");
@@ -80,7 +80,10 @@ namespace ChangeNotification.Helper
             _logger.LogWarning("InitializeAllSubscription-completed");
         }
 
-        //channel
+        /// <summary>
+        /// Checking Subsciption for Channel
+        /// </summary>
+        /// <returns></returns>
         public async Task CheckSubscriptions()
         {
             _logger.LogWarning($"Checking subscriptions {DateTime.UtcNow.ToString("h:mm:ss.fff")}");
@@ -90,7 +93,11 @@ namespace ChangeNotification.Helper
                 await RenewSubscription(subscription.Value);
             }
         }
-        //teams
+
+        /// <summary>
+        /// Checking Subsciption for Teams
+        /// </summary>
+        /// <returns></returns>
         public async Task CheckSubscriptionsForTeams()
         {
             _logger.LogWarning($"Checking subscriptions {DateTime.UtcNow.ToString("h:mm:ss.fff")}");
@@ -101,7 +108,11 @@ namespace ChangeNotification.Helper
             }
         }
 
-        //channel
+        /// <summary>
+        /// New Subsciption for using channel resource
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <returns></returns>
         private async Task<Subscription> CreateNewSubscription(string teamId)
         {
             _logger.LogWarning($"CreateNewSubscription-start: {teamId}");
@@ -113,7 +124,12 @@ namespace ChangeNotification.Helper
           
             return await CreateSubscriptionWithResource(resource);
         }
-        //Teams
+
+        /// <summary>
+        /// New Subsciption for Team resource
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <returns></returns>
         private async Task<Subscription> CreateNewSubscriptionForTeam(string teamId)
         {
             _logger.LogWarning($"CreateNewSubscription-start: {teamId}");

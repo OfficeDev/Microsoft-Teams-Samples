@@ -79,8 +79,8 @@ class ChangeNotificationChannel extends Component {
                     }
                 }
             }
-        } catch (error) {
-            error;
+        } catch (e) {
+            console.log("error", e);
         }
     }
 

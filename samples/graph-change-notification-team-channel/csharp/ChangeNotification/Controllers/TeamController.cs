@@ -70,6 +70,11 @@ namespace ChangeNotification.Controllers
             }
         }
 
+        /// <summary>
+        /// Initialize subscription for team
+        /// </summary>
+        /// <param name="teamId" name="pageId></param>
+        /// <returns>ResourceList</returns>
         [Route("{teamId}/{pageId}")]
         [HttpPost]
         public async Task<IActionResult> TeamAsync([FromRoute] string teamId, string pageId)
