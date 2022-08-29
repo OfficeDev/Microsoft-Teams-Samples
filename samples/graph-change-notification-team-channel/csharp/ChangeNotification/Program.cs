@@ -16,7 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Collections.Concurrent;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
-using ChannelNotification.Bots;
+using ChangeNotification.Bots;
 
 var builder = Microsoft.AspNetCore.Builder.WebApplication.CreateBuilder(args);
 
