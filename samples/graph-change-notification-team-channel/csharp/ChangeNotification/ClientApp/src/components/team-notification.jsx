@@ -1,4 +1,4 @@
-// <copyright file="dashboard.jsx" company="Microsoft Corporation">
+// <copyright file="teamnotification.jsx" company="Microsoft Corporation">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 // </copyright>

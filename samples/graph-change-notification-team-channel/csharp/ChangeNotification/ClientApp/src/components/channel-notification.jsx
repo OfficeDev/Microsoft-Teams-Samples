@@ -1,4 +1,4 @@
-// <copyright file="dashboard.jsx" company="Microsoft Corporation">
+// <copyright file="channelnotification.jsx" company="Microsoft Corporation">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 // </copyright>
@@ -81,7 +81,6 @@ class ChangeNotificationChannel extends Component {
     welcomeMessage = () => {
         return (
             <div>
-
                 <h3 className="headcolor">Channel Notifications</h3>
                 <h4>Welcome to Channel Notification Tab</h4>
                 <p>This Tab has successfully configured, you will get notifications of channel delete/edit/create in this tab.</p>
@@ -101,5 +100,6 @@ class ChangeNotificationChannel extends Component {
         )
     }
 }
+
 
 export default ChangeNotificationChannel ;
