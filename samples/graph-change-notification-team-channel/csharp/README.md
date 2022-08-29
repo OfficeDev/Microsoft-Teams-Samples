@@ -80,7 +80,7 @@ To include resource data of graph notifications, this Graph API require self-sig
 
   - Launch Visual Studio code
   - File -> Open Folder
-  - Navigate to `samples/graph-notification-teams-channel/csharp` folder
+  - Navigate to `samples/graph-change-notification-team-channel/csharp` folder
   - Select `ChangeNotiifcation` solution file
   - Press `F5` to run the project
 
