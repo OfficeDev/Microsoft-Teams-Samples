@@ -159,7 +159,7 @@ class App extends Component {
                                     <Input type="text" className="form-control" value={this.state.uploadedFileName} readOnly invalid={this.state.isFormInvalid} />
                                     <FormFeedback>
                                         <Fade in={this.state.isFormInvalid} tag="h6" style={{ fontStyle: "italic" }}>
-                                            Please select a .xlsx file only !
+                                            Please select a .xlsx file only. !
                                         </Fade>
                                     </FormFeedback>
                                 </InputGroup>
