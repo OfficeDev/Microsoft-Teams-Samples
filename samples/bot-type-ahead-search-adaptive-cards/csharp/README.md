@@ -6,7 +6,7 @@ products:
 - office
 - office-365
 languages:
-- C#
+- csharp
 extensions:
  contentType: samples
  createdDate: "24-12-2021 23:30:17"
