@@ -1,0 +1,64 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.0",
+  "id": "e8aafdf9-6d9e-4e66-b7ef-036ee9ab1587",
+  "packageName": "com.teams.channel.notification",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Ch3",
+    "full": "Ch3"
+  },
+  "description": {
+    "short": "This sample uses subscription that will post notifications.",
+    "full": "This sample application which demonstrates use of channel subscription that will post notifications when user Create/Edit/Delete the channel."
+  },
+  "accentColor": "#FFFFFF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://3f63-43-239-200-201.ngrok.io/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team",
+        "groupchat"
+      ],
+      "context": [
+        "channelTab"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "3f63-43-239-200-201.ngrok.io"
+  ],
+  "webApplicationInfo": {
+    "id": "9c411750-4fa3-413c-a71b-5e350516a0ed",
+    "resource": "https://RscPermission"
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "type": "Application",
+          "name": "ChannelSettings.Read.Group"
+        },
+        {
+          "type": "Delegated",
+          "name": "ChannelMeetingParticipant.Read.Group"
+        }
+      ]
+    }
+  }
+}
