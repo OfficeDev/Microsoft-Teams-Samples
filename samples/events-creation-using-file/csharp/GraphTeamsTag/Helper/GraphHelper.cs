@@ -267,5 +267,52 @@ namespace GraphTeamsTag.Helper
             return null;
            
         }
+
+        public async Task<Event> CreateOnlineMeetingUsingForms(MeetingCreation obj)
+        {                      
+                try
+                {
+                    var @event = new Event()
+                    {
+                        Subject = obj.topicName,
+                        //Organizer=obj.trainerName,
+
+                        Attendees = new List<Attendee>()
+                        {
+                            new Attendee
+                            {
+                                EmailAddress = new EmailAddress
+                                {
+                                    Address = obj.participants,
+                                   // Name = "Adele Vance"
+                                },
+                                Type = AttendeeType.Required
+                            }
+                        },
+                        Start = new DateTimeTimeZone
+                        {
+                            DateTime = obj.startdate,
+                            TimeZone = "Asia/Kolkata"
+                        },
+                        End = new DateTimeTimeZone
+                        {
+                            DateTime = obj.enddate,
+                            TimeZone = "Asia/Kolkata"
+                        }
+
+                    };
+                    await graphBetaClient.Users["6702afb6-109b-4c32-a141-6e65469502b9"].Events
+                   .Request()
+                   .Header("Prefer", "outlook.timezone=\"Asia/Kolkata\"")
+                   .AddAsync(@event);
+                }
+                catch (Exception ex)
+                {
+                }
+
+            
+            return null;
+
+        }
     }
 }

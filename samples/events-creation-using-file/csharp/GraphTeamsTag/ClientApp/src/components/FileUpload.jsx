@@ -83,7 +83,7 @@ class App extends Component {
                   
                   excelrows.push(obj);                  
               }
-              var response = await axios.post(`api/metting`, excelrows);
+              var response = await axios.post(`api/meeting`, excelrows);
               if (response.status === 201) {
                   microsoftTeams.dialog.submit("Created successfully!");
               }

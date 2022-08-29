@@ -69,6 +69,25 @@ class Dashboard extends Component {
             }
         });
     }
+    onCreateNewEventClick = () => {
+        microsoftTeams.dialog.open({
+            title: "Create new Event",
+            url: `${window.location.origin}/create-event`,
+            size: {
+                height: 450,
+                width: 500,
+            }
+        }, (dialogResponse) => {
+            if (dialogResponse.result) {
+                this.setState({
+                    dashboardState: DashboardState.Default,
+                    selectedTeamworkTag: {}
+                });
+
+                this.initializeData(this.state.teamsContext.team.groupId);
+            }
+        });
+    }
 
     // Handler when user click on click file upload button.
     onCreateFileUploadClick = () => {
@@ -208,7 +227,16 @@ class Dashboard extends Component {
 
                 </FlexItem>
             </Flex>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
 
+            <Flex vAlign="center">
+                <Text content="" size="larger" weight="semibold" />
+                <FlexItem push>
+                    <Button primary content="Create Meeting" onClick={this.onCreateNewEventClick} />
+
+                </FlexItem>
+            </Flex>
             {this.state.isLoading ? <Loader /> : this.renderBasedOnDashboardState()}
         </Flex>)
     }

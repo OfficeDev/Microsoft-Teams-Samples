@@ -22,7 +22,7 @@ namespace GraphTeamsTag.Controllers
         }
 
 
-        [HttpPost("api/metting")]
+        [HttpPost("api/meeting")]
         public async Task<IActionResult> eventAsync([FromBody]  List<MeetingCreation> obj)
         {
             if (obj != null)
@@ -35,7 +35,23 @@ namespace GraphTeamsTag.Controllers
              }
 
             
-        }        
+        }
+
+        [HttpPost("api/meetings")]
+        public async Task<IActionResult> meetingasync([FromBody] MeetingCreation obj)
+        {
+            if (obj != null)
+            {
+                await this.graphHelper.CreateOnlineMeetingUsingForms(obj);
+                return this.StatusCode(201);
+            }
+            else
+            {
+                return this.StatusCode(500);
+            }
+
+
+        }
 
     }
 }
