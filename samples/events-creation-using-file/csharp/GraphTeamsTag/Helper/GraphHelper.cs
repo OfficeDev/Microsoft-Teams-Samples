@@ -229,7 +229,7 @@ namespace GraphTeamsTag.Helper
                     {
                         Subject = obj.topicName,
                         //Organizer=obj.trainerName,
-                      
+
                         Attendees = new List<Attendee>()
                         {
                             new Attendee
@@ -237,7 +237,7 @@ namespace GraphTeamsTag.Helper
                                 EmailAddress = new EmailAddress
                                 {
                                     Address = obj.participants,
-                                   // Name = "Adele Vance"
+                                    // Name = "Adele Vance"
                                 },
                                 Type = AttendeeType.Required
                             }
@@ -251,7 +251,10 @@ namespace GraphTeamsTag.Helper
                         {
                             DateTime = obj.enddate,
                             TimeZone = "Asia/Kolkata"
-                        }
+                        },
+                        AllowNewTimeProposals = true,
+                        IsOnlineMeeting = true,
+                        OnlineMeetingProvider = OnlineMeetingProviderType.TeamsForBusiness
 
                     };
                      await graphBetaClient.Users["6702afb6-109b-4c32-a141-6e65469502b9"].Events
@@ -310,8 +313,8 @@ namespace GraphTeamsTag.Helper
                 {
                 }
 
-            
             return null;
+           // return Status.Active;
 
         }
     }

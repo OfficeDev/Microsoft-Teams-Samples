@@ -4,6 +4,7 @@ namespace GraphTeamsTag.Controllers
 {
     using GraphTeamsTag.Helper;
     using GraphTeamsTag.Models;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Graph;
     using System.Diagnostics;
@@ -27,6 +28,11 @@ namespace GraphTeamsTag.Controllers
         {
             if (obj != null)
             {
+                //foreach(MeetingCreation meetingCreation in obj)
+                //{
+                //    string str =  meetingCreation.date +  + meetingCreation.timing + ;
+                //    meetingCreation.date = str;
+                //}
                 await this.graphHelper.CreateOnlineMeetingAsync(obj);
                 return this.StatusCode(201);
             }

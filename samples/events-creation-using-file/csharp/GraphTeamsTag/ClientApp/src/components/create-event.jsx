@@ -63,20 +63,20 @@ const CreateEvent = props => {
     }
 
     // Handler when user selects members.
-    const onUpdateMembers = () => {
-        let exisitingMembersId = membersToAdd.map(member => member.userId);
-        microsoftTeams.people.selectPeople({ setSelected: exisitingMembersId }).then((peoples) => {
-            let members = [];
-            peoples.forEach((people) => {
-                members.push({
-                    id: "",
-                    userId: people.objectId,
-                    displayName: people.displayName
-                });
-            });
-            setMembersToAdd(members);
-        });
-    }
+    //const onUpdateMembers = () => {
+    //    let exisitingMembersId = membersToAdd.map(member => member.userId);
+    //    microsoftTeams.people.selectPeople({ setSelected: exisitingMembersId }).then((peoples) => {
+    //        let members = [];
+    //        peoples.forEach((people) => {
+    //            members.push({
+    //                id: "",
+    //                userId: people.objectId,
+    //                displayName: people.displayName
+    //            });
+    //        });
+    //        setMembersToAdd(members);
+    //    });
+    //}
 
     // Handler when user removes members.
     const onRemoveMember = (memberToUpdate) => {
@@ -112,28 +112,28 @@ const CreateEvent = props => {
     }
 
     // Render list of selected members to be added in tag.
-    const renderMembersToAddList = () => {
-        var elements = [];
-        membersToAdd.map((teamworkTagMember, index) => {
-            elements.push(<Flex className="tag-container" vAlign="center">
-                <Text content={teamworkTagMember.displayName} />
-                <Flex.Item push>
-                    <Flex gap="gap.large">
-                        <TrashCanIcon className="manage-icons" onClick={() => { onRemoveMember(teamworkTagMember) }} />
-                    </Flex>
-                </Flex.Item>
-            </Flex>);
-        });
+    //const renderMembersToAddList = () => {
+    //    var elements = [];
+    //    membersToAdd.map((teamworkTagMember, index) => {
+    //        elements.push(<Flex className="tag-container" vAlign="center">
+    //            <Text content={teamworkTagMember.displayName} />
+    //            <Flex.Item push>
+    //                <Flex gap="gap.large">
+    //                    <TrashCanIcon className="manage-icons" onClick={() => { onRemoveMember(teamworkTagMember) }} />
+    //                </Flex>
+    //            </Flex.Item>
+    //        </Flex>);
+    //    });
 
-        if (elements.length > 0) {
-            return (<div>
+    //    if (elements.length > 0) {
+    //        return (<div>
 
-                {elements}
-            </div>);
-        }
+    //            {elements}
+    //        </div>);
+    //    }
 
-        return <></>;
-    }
+    //    return <></>;
+    //}
 
     return (
         <Flex className="container" vAlign="center" gap="gap.medium" column>

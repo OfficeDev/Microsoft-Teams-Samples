@@ -50,25 +50,25 @@ class Dashboard extends Component {
     }
 
     // Handler when user click on create new tag button.
-    onCreateNewTagClick = () => {
-        microsoftTeams.dialog.open({
-            title: "Create new Tag",
-            url: `${window.location.origin}/create-new-tag`,
-            size: {
-                height: 450,
-                width: 500,
-            }
-        }, (dialogResponse) => {
-            if (dialogResponse.result) {
-                this.setState({
-                    dashboardState: DashboardState.Default,
-                    selectedTeamworkTag: {}
-                });
+    //onCreateNewTagClick = () => {
+    //    microsoftTeams.dialog.open({
+    //        title: "",
+    //        url: `${window.location.origin}/create-new-tag`,
+    //        size: {
+    //            height: 450,
+    //            width: 500,
+    //        }
+    //    }, (dialogResponse) => {
+    //        if (dialogResponse.result) {
+    //            this.setState({
+    //                dashboardState: DashboardState.Default,
+    //                selectedTeamworkTag: {}
+    //            });
 
-                this.initializeData(this.state.teamsContext.team.groupId);
-            }
-        });
-    }
+    //            this.initializeData(this.state.teamsContext.team.groupId);
+    //        }
+    //    });
+    //}
     onCreateNewEventClick = () => {
         microsoftTeams.dialog.open({
             title: "Create new Event",
@@ -95,8 +95,8 @@ class Dashboard extends Component {
             title: "Upload File",
             url: `${window.location.origin}/fileupload`,
             size: {
-                height: 450,
-                width: 500,
+                height: 550,
+                width: 700,
             }
         }, (dialogResponse) => {
             if (dialogResponse.result) {
@@ -173,7 +173,7 @@ class Dashboard extends Component {
                 break;
             default:
                 return (<Flex column>
-                    <Text size="large" content="Tags created for current team" style={{ marginTop: "1rem" }} />
+                    <Text size="large" content="Created Meetings for per day trainings" style={{ marginTop: "1rem" }} />
                     {this.renderTeamworkTagList()}
                 </Flex>)
         }
@@ -209,11 +209,13 @@ class Dashboard extends Component {
     }
 
     render() {
-        return (<Flex className="container" column >
-            <Flex vAlign="center"   >
-                <Text content="Manage Teams Tag" size="larger" weight="semibold" />
+        return (<Flex className="container" column >      
+            
+
+            <Flex vAlign="center">
+                <Text content="" size="larger" weight="semibold" />
                 <FlexItem push>
-                    <Button primary content="Create new Tags" onClick={this.onCreateNewTagClick} />
+                    <Button primary content="Import Trainings plan" onClick={this.onCreateFileUploadClick} />
 
                 </FlexItem>
             </Flex>
@@ -223,17 +225,7 @@ class Dashboard extends Component {
             <Flex vAlign="center">
                 <Text content="" size="larger" weight="semibold" />
                 <FlexItem push>
-                    <Button primary content="FileUpload" onClick={this.onCreateFileUploadClick} />
-
-                </FlexItem>
-            </Flex>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;
-
-            <Flex vAlign="center">
-                <Text content="" size="larger" weight="semibold" />
-                <FlexItem push>
-                    <Button primary content="Create Meeting" onClick={this.onCreateNewEventClick} />
+                    <Button primary content="Create Trainings" onClick={this.onCreateNewEventClick} />
 
                 </FlexItem>
             </Flex>
