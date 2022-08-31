@@ -21,7 +21,7 @@ This is a sample application which demonstrates use of Team/Channel subscription
 ## Concepts introduced in this sample
 - After successfully Setup of tab in teams you will get a welcome message and the subscription will be created for team/channel.
 
-![Notifications](ChangeNotification/Images/ChangeNotification.gif)
+![Notifications](ChangeNotification/Images/ChangeNotifications.gif)
 
 ## Prerequisites
 
