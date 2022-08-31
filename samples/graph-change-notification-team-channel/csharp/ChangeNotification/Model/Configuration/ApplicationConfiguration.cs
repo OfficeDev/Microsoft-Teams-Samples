@@ -3,7 +3,7 @@
 
 namespace ChangeNotification.Model.Configuration
 {
-    public class BotConfiguration
+    public class ApplicationConfiguration
     {
         /// <summary>
         /// Gets or sets Microsoft Id.

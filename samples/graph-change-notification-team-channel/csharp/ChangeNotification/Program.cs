@@ -22,12 +22,12 @@ var builder = Microsoft.AspNetCore.Builder.WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers().AddNewtonsoftJson();
 
-builder.Services.AddTransient<GraphBetaClient>();
+builder.Services.AddTransient<GraphClient>();
 
 builder.Services.AddTransient<SubscriptionManager>();
 
 // Adds application configuration settings to specified IServiceCollection.
-builder.Services.AddOptions<BotConfiguration>()
+builder.Services.AddOptions<ApplicationConfiguration>()
 .Configure<IConfiguration>((botOptions, configuration) =>
 {
     botOptions.MicrosoftAppId = configuration.GetValue<string>("MicrosoftAppId");
@@ -50,9 +50,6 @@ builder.Services.AddSingleton<IStorage, MemoryStorage>();
 
 // Create a global hashset for our ConversationReferences
 builder.Services.AddSingleton<ConcurrentDictionary<string, ConversationReference>>();
-
-// Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-builder.Services.AddTransient<IBot, ChangeNotificationBot>();
 
 var app = builder.Build();
 

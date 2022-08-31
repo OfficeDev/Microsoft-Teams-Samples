@@ -8,13 +8,10 @@ namespace ChangeNotification.Controllers
     using ChangeNotification.Model;
     using ChangeNotification.Model.Configuration;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Bot.Builder.Integration.AspNet.Core;
-    using Microsoft.Bot.Schema;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
     using Newtonsoft.Json;
     using System;
-    using System.Collections.Concurrent;
     using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
@@ -28,11 +25,11 @@ namespace ChangeNotification.Controllers
         /// <summary>
         /// Stores the Bot configuration values.
         /// </summary>
-        private readonly IOptions<BotConfiguration> botSettings;
+        private readonly IOptions<ApplicationConfiguration> botSettings;
         private readonly ILogger _logger;
         private readonly SubscriptionManager _subscriptionManager;
 
-        public TeamController(IOptions<BotConfiguration> botSettings, ILogger<NotificationsController> logger,SubscriptionManager subscriptionManager)
+        public NotificationsController(IOptions<ApplicationConfiguration> botSettings, ILogger<NotificationsController> logger,SubscriptionManager subscriptionManager)
         {
              this.botSettings = botSettings;
             _logger = logger;

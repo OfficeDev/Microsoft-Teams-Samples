@@ -24,13 +24,13 @@ namespace ChangeNotification.Helper
         /// <summary>
         /// Stores the Bot configuration values.
         /// </summary>
-        private readonly IOptions<BotConfiguration> botSettings;
+        private readonly IOptions<ApplicationConfiguration> botSettings;
         private readonly ILogger _logger;
-        private readonly GraphBetaClient graphBetaClientProvider;
+        private readonly GraphClient graphBetaClientProvider;
         public static readonly Dictionary<string, Subscription> Subscriptions = new Dictionary<string, Subscription>();
         private string pageId;
 
-        public SubscriptionManager(IOptions<BotConfiguration> botSettings, ILogger<SubscriptionManager> logger, GraphBetaClient graphBetaClientProvider)
+        public SubscriptionManager(IOptions<ApplicationConfiguration> botSettings, ILogger<SubscriptionManager> logger, GraphClient graphBetaClientProvider)
         {
             this.botSettings = botSettings;
             this.graphBetaClientProvider = graphBetaClientProvider;

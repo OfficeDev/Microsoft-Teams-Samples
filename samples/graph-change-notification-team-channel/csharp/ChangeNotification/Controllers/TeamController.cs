@@ -28,11 +28,11 @@ namespace ChangeNotification.Controllers
         /// <summary>
         /// Stores the Bot configuration values.
         /// </summary>
-        private readonly IOptions<BotConfiguration> botSettings;
+        private readonly IOptions<ApplicationConfiguration> botSettings;
         private readonly ILogger _logger;
         private readonly SubscriptionManager _subscriptionManager;
 
-        public TeamController(IOptions<BotConfiguration> botSettings,ILogger<NotificationsController> logger,SubscriptionManager subscriptionManager)
+        public TeamController(IOptions<ApplicationConfiguration> botSettings,ILogger<NotificationsController> logger,SubscriptionManager subscriptionManager)
         {
             this.botSettings = botSettings;
             _logger = logger;

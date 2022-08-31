@@ -8,14 +8,14 @@ namespace ChangeNotification.Provider
     using Microsoft.Extensions.Options;
     using Microsoft.Graph;
 
-    public class GraphBetaClient
+    public class GraphClient
     {
         /// <summary>
         /// Stores the Bot configuration values.
         /// </summary>
-        private readonly IOptions<BotConfiguration> botSettings;
+        private readonly IOptions<ApplicationConfiguration> botSettings;
 
-        public GraphBetaClient(IOptions<BotConfiguration> botSettings)
+        public GraphClient(IOptions<ApplicationConfiguration> botSettings)
         {
             this.botSettings = botSettings;
         }
