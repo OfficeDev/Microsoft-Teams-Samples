@@ -45,18 +45,6 @@ namespace ChangeNotification.Helpers
             {
                 actualSignature = hmac.ComputeHash(encryptedPayload);
             }
-            if (actualSignature.SequenceEqual(expectedSignature))
-            {
-
-                // Continue with decryption of the encryptedPayload.
-
-            }
-            else
-            {
-                throw new CryptographicException("Notification payload has been tampered. Please investigate.");
-                // Log alert
-                // Do not attempt to decrypt encryptedPayload. Assume notification payload has been tampered with and investigate.
-            }
 
             using AesCryptoServiceProvider aesProvider = new AesCryptoServiceProvider
             {

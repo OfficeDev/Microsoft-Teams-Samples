@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-namespace ChangeNotification.Model
 {
     public class Encryptedcontent
     {
@@ -15,6 +14,9 @@ namespace ChangeNotification.Model
         /// </summary>
         public string dataSignature { get; set; }
 
+        /// <summary>
+        /// Encrypted data Key.
+        /// </summary>
         public string dataKey { get; set; }
 
         /// <summary>

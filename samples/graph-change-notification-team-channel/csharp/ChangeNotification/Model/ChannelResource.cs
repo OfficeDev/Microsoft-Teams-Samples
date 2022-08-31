@@ -31,18 +31,26 @@
         public string DataSignature { get; set; }
 
         /// <summary>
-        /// The state of resource notification.
+        /// The Property resource notification.
         /// </summary>
         [JsonProperty(PropertyName = "resource")]
         public string Resource { get; set; }
 
+        /// <summary>
+        /// The DisplayName of resource notification.
+        /// </summary>
         [JsonProperty(PropertyName = "displayName")]
         public string DisplayName { get; set; }
 
+        /// <summary>
+        /// The webUrl of resource notification.
+        /// </summary>
         [JsonProperty(PropertyName = "webUrl")]
-
         public string webUrl { get; set; }
 
+        /// <summary>
+        /// The CreatedDate for change notification.
+        /// </summary>
         public DateTime? CreatedDate { get; set; }
     }
 }

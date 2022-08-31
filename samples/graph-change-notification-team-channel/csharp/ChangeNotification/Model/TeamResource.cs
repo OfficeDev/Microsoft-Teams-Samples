@@ -20,12 +20,15 @@
         [JsonProperty(PropertyName = "changeType")]
         public string ChangeType { get; set; }
 
-         /// <summary>
+        /// <summary>
         /// The type of resource Team DisplayName.
         /// </summary>
         [JsonProperty(PropertyName = "displayName")]
         public string DisplayName { get; set; }
 
+        /// <summary>
+        /// Custom property Datetime for change notification.
+        /// </summary>
         public  DateTime? CreatedDate { get; set; }
     }
 }
