@@ -1,0 +1,63 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.7/MicrosoftTeams.schema.json",
+  "manifestVersion": "devPreview",
+  "version": "1.0.0",
+  "id": "<<GUID ID>>",
+  "packageName": "com.microsoft.teams.videopp",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://microsoft.github.io/teams-videoapp-sample/",
+    "privacyUrl": "https://privacy.microsoft.com/en-us/privacystatement/",
+    "termsOfUseUrl": "https://www.microsoft.com/en-us/servicesagreement/"
+  },
+  "icons": {
+    "color": "icon-color.png",
+    "outline": "icon-outline.png"
+  },
+  "name": {
+    "short": "Teams Meeting AV Filter",
+    "full": "Teams Meeting AV Filter"
+  },
+  "description": {
+    "short": "This repo demonstrate a minimal Teams video app.",
+    "full": "This repo demonstrate a minimal Teams video app, clone this repo and change the video frame processing function"
+  },
+  "accentColor": "#FFFFFF",
+  "permissions": [ "identity", "messageTeamMembers" ],
+  "devicePermissions": [
+    "media"
+  ],
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "CameraStream.Read.User",
+          "type": "Delegated"
+        },
+        {
+          "name": "OutgoingVideoStream.Write.User",
+          "type": "Delegated"
+        }
+      ]
+    }
+  },
+  "validDomains": ["<<VALID DOMAIN>>"],
+  "localizationInfo": {
+    "defaultLanguageTag": "en-us"
+  },
+  "meetingExtensionDefinition": {
+    "filters": [
+      {
+        "id": "c2cf81fd-a1c0-4742-b41a-ef969b3ed490",
+        "name": "Others_half",
+        "thumbnail": "half.png"
+      },
+      {
+        "id": "b0c8896c-7be8-4645-ae02-a8bc9b0355e5",
+        "name": "Others_gray scale",
+        "thumbnail": "gray.png"
+      }
+    ],
+    "videoAppContentUrl": "https://<<VALID DOMAIN>>/"
+  }
+}
