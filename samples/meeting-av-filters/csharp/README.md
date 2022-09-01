@@ -87,10 +87,10 @@ This sample demos the use of av filters for teams meetings.
    - From the lower left corner, choose Upload a custom App
 
 9) Open any teams meeting and navigate to effects page
- -  ![filter-page](MeetingAVFilter/Images/MeetingFilterPage.png)
+  ![filter-page](MeetingAVFilter/Images/MeetingFilterPage.png)
 
 10) From the effects page, select others and select the custom filters we have uploaded.
- - ![custom-filter](MeetingAVFilter/Images/CustomFilters.png)
+  ![custom-filter](MeetingAVFilter/Images/CustomFilters.png)
 
 ## Features of the sample
 
