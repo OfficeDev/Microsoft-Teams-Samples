@@ -6,7 +6,7 @@
     "shortDescription": "This sample shows how to mute/unmute Teams meeting audio using toggle Incoming Client Audio API.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-audio-state/nodejs",
     "longDescription": [
-      "Mute/Unmute Teams meeting audio call"
+      "This sample shows how to mute/unmute Teams meeting audio using toggle Incoming Client Audio API."
     ],
     "creationDateTime": "2022-08-08",
     "updateDateTime": "2022-08-08",
