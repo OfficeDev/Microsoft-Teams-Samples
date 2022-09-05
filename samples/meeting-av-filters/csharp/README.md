@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
   contentType: samples
-  createdDate: "01/08/2022 2:36:57 PM"
+  createdDate: "01/09/2022 2:36:57 PM"
 urlFragment: officedev-microsoft-teams-samples-meeting-av-filters-csharp
 ---
 
@@ -62,6 +62,7 @@ This sample demos the use of av filters for teams meetings.
 5) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
    - `<<GUID ID>>` id any guid id.
    - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
+   - in case of `videoAppContentUrl` the valid domain refers to the page where video frames are captured and processed.
 
 6) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams. Make sure the files `half.png` and `gray.png` are also included inside the zip file.
 
@@ -86,7 +87,7 @@ This sample demos the use of av filters for teams meetings.
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
 
-9) Open any teams meeting and navigate to effects page
+9) Open any Microsoft Teams meeting and navigate to effects page
  -  ![filter-page](MeetingAVFilter/Images/MeetingFilterPage.png)
 
 10) From the effects page, select others and select the custom filters we have uploaded.

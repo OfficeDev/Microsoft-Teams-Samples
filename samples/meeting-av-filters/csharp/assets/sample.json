@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-meeting-av-filters-csharp",
     "source": "officeDev",
-    "title": "Meeting av filter",
-    "shortDescription": "This sample illustrates usage of av filters for teams meetings.",
+    "title": "Meeting AV Filters",
+    "shortDescription": "This sample illustrates the usage of AV filters for Teams meeting.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meeting-av-filters/csharp",
     "longDescription": [
-      "This sample illustrates usage of av filters for teams meetings."
+      "This sample demonstrates use of AV filters for teams meetings by processing the teams meeting video frames."
     ],
     "creationDateTime": "2022-08-30",
     "updateDateTime": "2022-08-30",
@@ -35,8 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/incoming-webhook/csharp/IncomingWebhook/Images/cardByWebhook.png",
-        "alt": "Solution UX showing incoming webhook"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meeting-av-filters/csharp/MeetingAVFilter/Images/CustomFilters.png",
+        "alt": "Teams meeting AV Filters"
       }
     ],
     "authors": [

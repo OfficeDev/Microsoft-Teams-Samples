@@ -25,10 +25,10 @@ export class WebglVideoFilter {
         const width = videoFrame.width;
         const height = videoFrame.height;
         this._setSize(width, height);
+
         gl.viewport(0, 0, this.canvasWidth, this.canvasHeight);
         gl.clearColor(0, 0, 0, 0);
         gl.clear(gl.COLOR_BUFFER_BIT);
-
 
         const uOffset = width * height;
         gl.bindTexture(gl.TEXTURE_2D, this.textureY);
@@ -140,6 +140,7 @@ export class WebglVideoFilter {
         gl.attachShader(program, fragmentShader);
         gl.linkProgram(program);
         gl.useProgram(program);
+
         const success = gl.getProgramParameter(program, gl.LINK_STATUS);
         if (!success) {
             console.error('program fail to link' + gl.getShaderInfoLog(program));
@@ -159,9 +160,11 @@ export class WebglVideoFilter {
         const gl = this.gl;
         const program = this.program;
         const verticeBuffer = gl.createBuffer();
+
         gl.bindBuffer(gl.ARRAY_BUFFER, verticeBuffer);
         gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
         const positionLocation = gl.getAttribLocation(program, "a_vertexPosition");
+
         gl.vertexAttribPointer(positionLocation, 3, gl.FLOAT, false, 5 * 4, 0);
         gl.enableVertexAttribArray(positionLocation);
 
@@ -170,8 +173,10 @@ export class WebglVideoFilter {
             2, 1, 3
         ]);
         const indicesBuffer = gl.createBuffer();
+
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indicesBuffer);
         gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, indices, gl.STATIC_DRAW);
+
         const texcoordLocation = gl.getAttribLocation(program, "a_texturePosition");
         gl.vertexAttribPointer(texcoordLocation, 2, gl.FLOAT, false, 5 * 4, 3 * 4);
         gl.enableVertexAttribArray(texcoordLocation);
@@ -180,6 +185,7 @@ export class WebglVideoFilter {
     _createTexture() {
         const gl = this.gl;
         const texture = gl.createTexture();
+
         gl.bindTexture(gl.TEXTURE_2D, texture);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
@@ -192,6 +198,7 @@ export class WebglVideoFilter {
     _initTexture() {
         const gl = this.gl;
         const program = this.program;
+
         this.textureY = this._createTexture();
         gl.uniform1i(gl.getUniformLocation(program, 'u_samplerY'), 0);
 
@@ -203,9 +210,11 @@ export class WebglVideoFilter {
     _compileShader(shaderSource, shaderType) {
         const gl = this.gl;
         const shader = gl.createShader(shaderType);
+
         gl.shaderSource(shader, shaderSource);
         gl.compileShader(shader);
         const success = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
+
         if (!success) {
             const err = gl.getShaderInfoLog(shader);
             gl.deleteShader(shader);

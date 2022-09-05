@@ -103,6 +103,7 @@ const MeetingAvFilter = () => {
                 if (selectedEffectId === effectIds.half) {
                     return;
                 }
+
                 video.notifySelectedVideoEffectChanged(0, effectIds.half);
             });
 
@@ -111,6 +112,7 @@ const MeetingAvFilter = () => {
                 if (selectedEffectId === effectIds.gray) {
                     return;
                 }
+
                 video.notifySelectedVideoEffectChanged(0, effectIds.gray);
             });
         });

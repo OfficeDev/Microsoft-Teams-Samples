@@ -3,12 +3,12 @@
   "manifestVersion": "devPreview",
   "version": "1.0.0",
   "id": "<<GUID ID>>",
-  "packageName": "com.microsoft.teams.videopp",
+  "packageName": "com.microsoft.teams.avfilter",
   "developer": {
     "name": "Microsoft",
-    "websiteUrl": "https://microsoft.github.io/teams-videoapp-sample/",
-    "privacyUrl": "https://privacy.microsoft.com/en-us/privacystatement/",
-    "termsOfUseUrl": "https://www.microsoft.com/en-us/servicesagreement/"
+    "websiteUrl": "https://<<BASE-URL>>",
+    "privacyUrl": "https://<<BASE-URL>>/privacy",
+    "termsOfUseUrl": "https://<<BASE-URL>>/termsofuse"
   },
   "icons": {
     "color": "icon-color.png",
@@ -19,8 +19,8 @@
     "full": "Teams Meeting AV Filter"
   },
   "description": {
-    "short": "This repo demonstrate a minimal Teams video app.",
-    "full": "This repo demonstrate a minimal Teams video app, clone this repo and change the video frame processing function"
+    "short": "This sample demonstrates use of AV filters for teams meetings",
+    "full": "This sample demonstrates use of AV filters for teams meetings by processing the teams meeting video frames."
   },
   "accentColor": "#FFFFFF",
   "permissions": [ "identity", "messageTeamMembers" ],
@@ -41,7 +41,7 @@
       ]
     }
   },
-  "validDomains": ["<<VALID DOMAIN>>"],
+  "validDomains": ["*.ngrok.io","<<VALID DOMAIN>>"],
   "localizationInfo": {
     "defaultLanguageTag": "en-us"
   },
