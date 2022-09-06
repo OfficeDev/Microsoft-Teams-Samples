@@ -19,8 +19,8 @@
     "full": "Teams Meeting AV Filter"
   },
   "description": {
-    "short": "This sample demonstrates use of AV filters for teams meetings",
-    "full": "This sample demonstrates use of AV filters for teams meetings by processing the teams meeting video frames."
+    "short": "This sample demonstrates the use of AV filters in Teams meetings",
+    "full": "This sample demonstrates use of AV filters for Teams meetings by processing the Teams meeting video frames."
   },
   "accentColor": "#FFFFFF",
   "permissions": [ "identity", "messageTeamMembers" ],

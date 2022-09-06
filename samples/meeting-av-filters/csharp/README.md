@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: "This sample illustrates usage av filters for teams meeting."
+description: "This sample illustrates usage of AV filters in Teams meeting."
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-meeting-av-filters-csharp
 
 # Meeting AV Filters
 
-This sample demos the use of av filters for teams meetings. 
+This sample demos the use of AV filters for Teams meetings. 
 
 ![filter-page](MeetingAVFilter/Images/MeetingFilterPage.png)
 
