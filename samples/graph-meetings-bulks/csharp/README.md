@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample application which demonstrates how to use CRUD Graph operations related to team tags.
+description: This is a sample application which demonstrates how to create multiple meeting using excel sheet upload.
 products:
 - office-teams
 - office
@@ -9,22 +9,22 @@ languages:
 - csharp
 extensions:
 contentType: samples
-createdDate: "24-06-2022 00:02:15"
+createdDate: "07-09-2022 00:02:15"
 ---
 
-# This is a sample application that shows the usage of Graph CRUD operations related to team tags.
+# This is a sample application that shows the usage of create meeting to upload excel sheet.
 
-This is a sample application where user can create, update, add or remove members of a tag. All of Graph CRUD operations related to tags can be performed within this sample.
+This is a sample application where user can create, multiple meeting using excel sheet to  be performed within this sample.
 
 ## Key features
 
-1. Create new tags.
+1. Meeting Event.
 
-![Create new tag](GraphTeamsTag/Images/CreateTagFlow.gif)
+![All Meeting List](EventMeeting/Images/EventMeetingHome.png)
 
 2. View/Edit existing tags.
 
-![View/Edit tag](GraphTeamsTag/Images/ViewOrEditTagFlow.gif)
+![Create Event Meeting](EventMeeting/Images/UploadExcelSheet.png)
 
 
 ## Prerequisites
@@ -47,7 +47,7 @@ This is a sample application where user can create, update, add or remove member
 3. Navigate to **API Permissions**, and make sure to add the follow permissions:
 -   Select Add a permission
 -   Select Microsoft Graph -> Application permissions.
-   - `TeamworkTag.ReadWrite.All`
+   - `Calendars.ReadWrite`
 
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
@@ -87,13 +87,10 @@ Replace the following details:
 
 ## Features of this sample
 
-1. User can see list of tags created for the current team.
-![Manage Tag Dashboard](GraphTeamsTag/Images/Dashboard.png)
-2. User can view/edit the existing team tags.
-![View/Edit Tags](GraphTeamsTag/Images/ViewOrEditTag.png)
-3. User can create new team tags.
-![Create new Tag](GraphTeamsTag/Images/CreateTagTaskModule.png)
-4. User can delete existing team tags.
+1. User can see list of Meeting Event.
+![Event Meeting List](EventMeeting/Images/EventMeetingHome.png)
+2. User can create new Meeting Events.
+![Create new Meeting Event](EventMeeting/Images/UploadExcelSheet.png)
 
 ## Further reading
-- [teamworkTag resource type](https://docs.microsoft.com/en-us/graph/api/resources/teamworktag?view=graph-rest-beta)
+- [Event resource type](https://docs.microsoft.com/en-us/graph/api/user-post-events?view=graph-rest-1.0&tabs=http)

@@ -2,8 +2,8 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
   "manifestVersion": "1.12",
   "version": "1.0.0",
-  "id": "app-id",
-  "packageName": "com.teams.graphteamstag",
+  "id": "app_id",
+  "packageName": "com.teams.eventmeeting",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -19,8 +19,8 @@
     "full": "EventMeeting"
   },
   "description": {
-    "short": "This example is used to manage Teams team tags.",
-    "full": "This example is used to manage Teams team tags. You can create, update, add or remove members. All of Graph CRUD operations related to tags can be performed within this sample."
+    "short": "This example is used to manage event meeting.",
+    "full": "This example is used to manage event meeting."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [
@@ -38,6 +38,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    ""
+    ".*.ngrok.io"
   ]
 }
