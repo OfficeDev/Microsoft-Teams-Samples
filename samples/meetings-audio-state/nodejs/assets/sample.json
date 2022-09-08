@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-meeting-audio-state-nodejs",
     "source": "officeDev",
-    "title": "Meeting Audio Mute/Unmute Node",
-    "shortDescription": "This sample shows how to mute/unmute Teams meeting audio using toggle Incoming Client Audio API.",
+    "title": "Meeting Audio Mute/Unmute",
+    "shortDescription": "This sample shows how to Mute/Unmute Teams meeting audio call.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-audio-state/nodejs",
     "longDescription": [
-      "This sample shows how to mute/unmute Teams meeting audio using toggle Incoming Client Audio API."
+      "This sample shows how to Mute/Unmute Teams meeting audio call."
     ],
     "creationDateTime": "2022-08-08",
     "updateDateTime": "2022-08-08",
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-audio-state/nodejs/Images/App-InMeeting.png",
-        "alt": "Solution UX showing teams meeting audio mute/unmute node"
+        "alt": "Teams meeting audio Mute/Unmute using NodeJS"
       }
     ],
     "authors": [
