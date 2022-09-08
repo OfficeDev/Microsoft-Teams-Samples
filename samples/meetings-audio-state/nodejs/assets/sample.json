@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-audio-state/nodejs/Images/App-InMeeting.png",
-        "alt": "Teams meeting audio Mute/Unmute using NodeJS"
+        "alt": "Teams meeting audio Mute/Unmute using NodeJS."
       }
     ],
     "authors": [
