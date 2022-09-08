@@ -62,6 +62,7 @@ This sample demos the use of AV filters for Teams meetings.
 5) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
    - `<<GUID ID>>` id any guid id.
    - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
+   - Inside the filters section `id` will be random GUID and `name` will be filter name that is displayed inside meeting. We have predefined 2 filters.
    - in case of `videoAppContentUrl` the valid domain refers to the page where video frames are captured and processed.
 
 6) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams. Make sure the files `half.png` and `gray.png` are also included inside the zip file.
