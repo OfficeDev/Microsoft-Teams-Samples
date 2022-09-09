@@ -24,7 +24,7 @@ This is a sample application where user can create, multiple meeting using excel
 
 2. View/Edit existing tags.
 
-![Create Event Meeting](EventMeeting/Images/UploadExcelSheet.png)
+![Create Event Meeting](EventMeeting/Images/UploadExcelSheet.PNG)
 
 
 ## Prerequisites
