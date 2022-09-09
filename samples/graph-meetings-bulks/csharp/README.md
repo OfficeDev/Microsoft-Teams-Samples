@@ -20,7 +20,7 @@ This is a sample application where user can create, multiple meeting using excel
 
 1. Meeting Event.
 
-![All Meeting List](EventMeeting/Images/EventMeetingHome.png)
+![All Meeting List](EventMeeting/Images/EventMeetingHome.PNG)
 
 2. View/Edit existing tags.
 
