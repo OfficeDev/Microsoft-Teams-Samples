@@ -88,9 +88,9 @@ Replace the following details:
 ## Features of this sample
 
 1. User can see list of Meeting Event.
-![Event Meeting List](EventMeeting/Images/EventMeetingHome.png)
+![Event Meeting List](EventMeeting/Images/EventMeetingHome.PNG)
 2. User can create new Meeting Events.
-![Create new Meeting Event](EventMeeting/Images/UploadExcelSheet.png)
+![Create new Meeting Event](EventMeeting/Images/UploadExcelSheet.PNG)
 
 ## Further reading
 - [Event resource type](https://docs.microsoft.com/en-us/graph/api/user-post-events?view=graph-rest-1.0&tabs=http)
