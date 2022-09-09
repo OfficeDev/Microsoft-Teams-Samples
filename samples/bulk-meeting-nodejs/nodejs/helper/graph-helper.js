@@ -3,7 +3,6 @@
 
 const auth = require("../auth");
 const axios = require('axios');
-const uuid = require('uuid');
 
 class GraphHelper {
 
@@ -14,43 +13,8 @@ class GraphHelper {
      */
     static async createMeetingAsync(userId, excelData) {
         var applicationToken = await auth.getAccessToken();
-        const formattedData = {};
-        let Arry = [];
-        Arry = Object.entries(excelData);
-        Arry.foreach(item => {
-            var event = {
-                subject: item.topicName,
-                body: {
-                    contentType: item.topicName,
-                },
-                start: {
-                    dateTime: item.startDate,
-                    timeZone: 'Asia/Kolkata'
-                },
-                end: {
-                    dateTime: item.startDate,
-                    timeZone: 'Asia/Kolkata'
-                },
-                location: {
-                    displayName: item.topicName
-                },
-                attendees: [
-                    {
-                        emailAddress: {
-                            address: item.participants
 
-                        },
-                        type: 'required'
-                    }
-                ],
-                allowNewTimeProposals: true,
-                transactionId: uuid.v1()
-            };
-
-            formattedData = Object.assign({}, Arry)
-        })
-
-        await axios.post(`https://graph.microsoft.com/beta/users/${userId}/events`, formattedData, {
+        await axios.post(`https://graph.microsoft.com/beta/users/${userId}/events`, excelData, {
             headers: {
                 "authorization": "Bearer " + applicationToken,
                 "contentType": 'application/json',

@@ -4,10 +4,11 @@ import { OutTable, ExcelRenderer } from 'react-excel-renderer';
 import { Col, Input, InputGroup, FormGroup, Label, Button, Fade, FormFeedback, Container, Card } from 'reactstrap';
 import * as microsoftTeams from "@microsoft/teams-js";
 import axios from "axios";
+import { v4 as uuidv4 } from 'uuid';
+
 microsoftTeams.initialize();
 
 class App extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -27,7 +28,7 @@ class App extends Component {
         this.openNewPage = this.openNewPage.bind(this);
         this.fileInput = React.createRef();
     }
-    
+
     /**
      * Passing the fileObj as parameter.
      * @param {object} fileObj Details of the Excelfile to be created.
@@ -43,15 +44,14 @@ class App extends Component {
                     cols: resp.cols,
                     rows: resp.rows
                 });
-                console.log(resp.cols, resp.rows);
             }
         });
     }
 
-     /**
-     * file handler to handle uploaded files.
-     * @param {object} event onchange event.
-     */
+    /**
+    * file handler to handle uploaded files.
+    * @param {object} event onchange event.
+    */
     fileHandler = (event) => {
         if (event.target.files.length) {
             let fileObj = event.target.files[0];
@@ -73,26 +73,50 @@ class App extends Component {
             }
         }
     }
-    
+
     // Handler when user click on create button.
     onCreateTeamsButtonClick = (event) => {
         microsoftTeams.app.getContext().then(async (rows) => {
             var excelrows = [];
-            var UserId = rows.user.id;
+            var userId = rows.user.id;
+            var TransactionId = uuidv4();
+
             for (var i = 1; i < this.state.rows.length; i++) {
-                var obj = {
-                    topicName: this.state.rows[i][0],
-                    trainerName: this.state.rows[i][1],
-                    startDate: this.state.rows[i][2],
-                    endDate: this.state.rows[i][3],
-                    participants: this.state.rows[i][4]
+                const obj = {
+                    subject: this.state.rows[i][0],
+                    body: {
+                        content: this.state.rows[i][1]
+                    },
+                    start: {
+                        dateTime: (this.state.rows[i][2]),
+                        timeZone: 'Asia/Kolkata'
+                    },
+                    end: {
+                        dateTime: (this.state.rows[i][2]),
+                        timeZone: 'Asia/Kolkata'
+                    },
+                    location: {
+                        displayName: this.state.rows[i][1]
+                    },
+                    attendees: [
+                        {
+                            emailAddress: {
+                                address: this.state.rows[i][4]
+                            },
+                            type: 'required'
+                        }
+                    ],
+                    allowNewTimeProposals: true,
+                    transactionId: TransactionId
                 }
                 excelrows.push(obj);
             }
 
-            var response = await axios.post(`api/meeting?userId=${UserId}`, excelrows);
+            var response = await axios.post(`api/meeting?userId=${userId}`, excelrows);
+
             if (response.status === 201) {
                 microsoftTeams.dialog.submit("Created successfully!");
+                return response.data;
             }
         });
     }
@@ -125,7 +149,6 @@ class App extends Component {
                                         <Button color="info" style={{ color: "black", zIndex: 0 }} onClick={this.openFileBrowser.bind(this)}><i className="cui-file"></i> Browse&hellip;</Button>
                                         &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
                                         <input type="file" hidden onChange={this.fileHandler.bind(this)} ref={this.fileInput} onClick={(event) => { event.target.value = null }} style={{ marginLeft: 500 }} />
-
                                         <Button className="primary jumbotron-button" onClick={this.onCreateTeamsButtonClick.bind(this)} style={{ marginLeft: 250 }}>Create meetings</Button>
                                     </InputGroup>
                                     <Input type="text" className="form-control" value={this.state.uploadedFileName} readOnly invalid={this.state.isFormInvalid} />
