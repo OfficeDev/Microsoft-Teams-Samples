@@ -20,7 +20,7 @@ This sample application helps to create meetings in bulk using excel file upload
 
 ## Key features
 
-![Bulk Meeting Gif](nodejs/BulkMeeting.gif)
+![Bulk Meeting Gif](Images/BulkMeeting.gif)
 
 ## Prerequisites
 
