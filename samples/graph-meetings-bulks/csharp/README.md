@@ -22,7 +22,7 @@ This is a sample application where user can create, multiple meeting using excel
 
 ![All Meeting List](EventMeeting/Images/EventMeetingHome.PNG)
 
-2. View/Edit existing tags.
+2. Upload excel sheet to create Meeting event.
 
 ![Create Event Meeting](EventMeeting/Images/UploadExcelSheet.PNG)
 
