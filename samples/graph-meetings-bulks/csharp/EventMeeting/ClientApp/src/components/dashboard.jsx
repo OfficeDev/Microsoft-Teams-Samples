@@ -7,18 +7,17 @@ import React, { Component } from "react";
 import { Text, Flex, FlexItem, Button, TrashCanIcon, EditIcon, EyeFriendlierIcon, Loader } from "@fluentui/react-northstar";
 import * as microsoftTeams from "@microsoft/teams-js";
 import axios from "axios";
-import ViewEditTag from "./view-edit-tag";
 import DashboardState from "../models/dashboard-state";
 
 import "../style/style.css";
 
-// Dashboard where user can manage the tags
+// Dashboard where user can create the event and see the list of events
 class Dashboard extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            teamworkTags: [],
+            teamworkEvent: [],
             eventsList: [],
             dashboardState: DashboardState.Default,
             selectedTeamworkTag: {},
@@ -39,7 +38,8 @@ class Dashboard extends Component {
 
    
     /**
-    * Initialize the the list of tags.
+    * Initialize the the list of meeting evetns.
+    * Initialize the the list of meeting evetns.
     * @param {any} teamId Id of team.
     */
     initializeEventListData = async (teamId) => {
@@ -47,7 +47,7 @@ class Dashboard extends Component {
         var response = await axios.get(`api/eventlist/${teamId}`);
 
         if (response.status === 200) {
-            this.setState({ teamworkTags: response.data, isLoading: false });
+            this.setState({ teamworkEvent: response.data, isLoading: false });
             return response.data;
         }
     }
@@ -110,27 +110,27 @@ class Dashboard extends Component {
         this.setState({ isLoading: false });
     }
 
-    // Renders the elements based on dashboard state.
-    renderBasedOnDashboardState = () => {
-        switch (this.state.dashboardState) {
-            case DashboardState.View:
-                return <ViewEditTag isLoading={this.state.isLoading} onBackClick={this.onBackClick} teamworkTag={this.state.selectedTeamworkTag} dashboardState={DashboardState.View} onTeamworkTagUpdate={this.onTeamworkTagUpdate} />
-                break;
-            case DashboardState.Edit:
-                return <ViewEditTag isLoading={this.state.isLoading} onBackClick={this.onBackClick} teamworkTag={this.state.selectedTeamworkTag} dashboardState={DashboardState.Edit} onTeamworkTagUpdate={this.onTeamworkTagUpdate} />
-                break;
-            default:
-                return (<Flex column>
-                    <Text size="large" content="Tags created for current team" style={{ marginTop: "1rem" }} />
-                    {this.renderTeamworkTagList()}
-                </Flex>)
-        }
-    }
+    //// Renders the elements based on dashboard state.
+    //renderBasedOnDashboardState = () => {
+    //    switch (this.state.dashboardState) {
+    //        case DashboardState.View:
+    //            return <ViewEditTag isLoading={this.state.isLoading} onBackClick={this.onBackClick} teamworkTag={this.state.selectedTeamworkTag} dashboardState={DashboardState.View} onTeamworkTagUpdate={this.onTeamworkTagUpdate} />
+    //            break;
+    //        case DashboardState.Edit:
+    //            return <ViewEditTag isLoading={this.state.isLoading} onBackClick={this.onBackClick} teamworkTag={this.state.selectedTeamworkTag} dashboardState={DashboardState.Edit} onTeamworkTagUpdate={this.onTeamworkTagUpdate} />
+    //            break;
+    //        default:
+    //            return (<Flex column>
+    //                <Text size="large" content="Tags created for current team" style={{ marginTop: "1rem" }} />
+    //                {this.renderTeamworkTagList()}
+    //            </Flex>)
+    //    }
+    //}
 
     // Renders list of tags available for current team.
     renderTeamworkTagList = () => {
         var elements = [];
-        this.state.teamworkTags.map((teamworkTag, index) => {
+        this.state.teamworkEvent.map((teamworkTag, index) => {
             elements.push(<Flex className="tag-container" vAlign="center">
 
                 <Flex.Item size="size.quarter" >
@@ -171,7 +171,7 @@ class Dashboard extends Component {
                 </Flex>
             </Flex>
 
-            {this.state.isLoading ? <Loader /> : this.renderBasedOnDashboardState()}
+           {/* {this.state.isLoading ? <Loader /> : this.renderBasedOnDashboardState()}*/}
         </Flex>)
     }
 }

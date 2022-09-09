@@ -71,6 +71,7 @@ namespace EventMeeting.Helper
                 }
                 catch (Exception ex)
                 {
+                    Console.Write("Meeting event not created",ex);
                 }
 
             }

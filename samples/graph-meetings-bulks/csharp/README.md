@@ -20,11 +20,11 @@ This is a sample application where user can create, multiple meeting using excel
 
 1. Meeting Event.
 
-![All Meeting List](EventMeeting/Images/EventMeetingHome.png)
+![All Meeting List](EventMeeting/Images/EventMeetingHome.PNG)
 
-2. View/Edit existing tags.
+2. Upload excel sheet to create Meeting event.
 
-![Create Event Meeting](EventMeeting/Images/UploadExcelSheet.png)
+![Create Event Meeting](EventMeeting/Images/UploadExcelSheet.PNG)
 
 
 ## Prerequisites
@@ -66,14 +66,14 @@ This is a sample application where user can create, multiple meeting using excel
 
 ### 2. Launch Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/graph-teams-tag/csharp/GraphTeamsTag.sln`
+   - Navigate to folder where repository is cloned then `samples/graph-meetings-bulks/csharp/EventMeeting.sln`
     
 ### 3. Start ngrok on localhost:3978
 - Open ngrok and run command `ngrok http -host-header=rewrite 3978` 
 - Once started you should see link  `https://41ed-abcd-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot.
 
 
-![Ngrok](GraphTeamsTag/Images/NgrokScreenshot.png)
+![Ngrok](EventMeeting/Images/NgrokScreenshot.png)
 
 ### 4. Update appsettings.json
 Update configuration with the ```MicrosoftAppId```,  ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId```.
@@ -88,9 +88,9 @@ Replace the following details:
 ## Features of this sample
 
 1. User can see list of Meeting Event.
-![Event Meeting List](EventMeeting/Images/EventMeetingHome.png)
+![Event Meeting List](EventMeeting/Images/EventMeetingHome.PNG)
 2. User can create new Meeting Events.
-![Create new Meeting Event](EventMeeting/Images/UploadExcelSheet.png)
+![Create new Meeting Event](EventMeeting/Images/UploadExcelSheet.PNG)
 
 ## Further reading
 - [Event resource type](https://docs.microsoft.com/en-us/graph/api/user-post-events?view=graph-rest-1.0&tabs=http)
