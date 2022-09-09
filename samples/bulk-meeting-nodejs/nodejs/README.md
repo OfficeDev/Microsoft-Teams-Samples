@@ -11,6 +11,7 @@ extensions:
  contentType: samples
  createdDate: "08-09-2022 00:012:45"
 urlFragment: officedev-microsoft-teams-samples-bulk-meeting-nodejs.
+
 ---
 
 # This is a sample application that shows the usage of Graph CRUD operations related to team tags.
@@ -19,7 +20,7 @@ This sample application helps to create meetings in bulk using excel file upload
 
 ## Key features
 
-![Bulk Meeting GIF](bulk-meeting-nodejs/nodejs/BulkMeeting.gif)
+![Bulk Meeting Gif](nodejs/BulkMeeting.gif)
 
 ## Prerequisites
 
