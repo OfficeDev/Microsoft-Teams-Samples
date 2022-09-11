@@ -88,7 +88,7 @@ Replace the following details:
 ## Features of this sample
 
 1. User can see list of Meeting Event.
-![Event Meeting List](EventMeeting/Images/EventMeetingHome.PNG)
+![Event Meeting List](EventMeeting/Images/Dashboard.PNG)
 2. User can create new Meeting Events.
 ![Create new Meeting Event](EventMeeting/Images/UploadExcelSheet.PNG)
 
