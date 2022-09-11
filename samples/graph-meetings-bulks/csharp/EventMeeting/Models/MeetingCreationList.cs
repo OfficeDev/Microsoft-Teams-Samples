@@ -7,7 +7,21 @@ namespace EventMeeting.Models
     {
         public string id { get; set; }
         public string topicName { get; set; }
-        public string trainerName { get; set; }
+
+        [JsonPropertyName("createdDateTime")]
+        public DateTimeOffset? CreatedDateTime { get; set; }
+        /// <summary>
+        /// Gets or sets organizer.
+        /// </summary>
+        [JsonPropertyName("organizer")]
+        public Recipient Organizer { get; set; }
+         public EmailAddress EmailAddress { get; set; }
+        /// <summary>
+        /// Gets or sets web link.
+        /// </summary>
+      
+        public string meetinglink { get; set; }
+
         [JsonPropertyName("start")]
         public DateTimeTimeZone Start { get; set; }
         [JsonPropertyName("end")]

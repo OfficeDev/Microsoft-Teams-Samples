@@ -4,54 +4,136 @@
 // </copyright>
 
 import React, { Component } from "react";
-import { Text, Flex, FlexItem, Button, TrashCanIcon, EditIcon, EyeFriendlierIcon, Loader } from "@fluentui/react-northstar";
+import { Text, Flex, FlexItem, Button, Divider } from "@fluentui/react-northstar";
+import { CallVideoIcon } from '@fluentui/react-icons-northstar'
 import * as microsoftTeams from "@microsoft/teams-js";
-import axios from "axios";
 import DashboardState from "../models/dashboard-state";
-
+import axios from "axios";
+import moment from 'moment';
+/*import moment from 'moment'*/
 import "../style/style.css";
+import { Link } from 'react-router-dom'
 
-// Dashboard where user can create the event and see the list of events
+// Dashboard
 class Dashboard extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            teamworkEvent: [],
-            eventsList: [],
-            dashboardState: DashboardState.Default,
-            selectedTeamworkTag: {},
-            teamsContext: {},
-            isLoading: true
+            userId: "",
+            teamMeetingEvent: [],
+            meetingList: [],
+            teamsContext: {}
         }
     }
 
+    /**
+    * Component Initilization.
+    */
     componentDidMount() {
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.getContext().then((context) => {
-                this.setState({ teamsContext: context });               
-                this.initializeEventListData(context.user.id);
-
+                this.setState({ teamsContext: context });
+                this.initializeData(context.user.id);
             })
         });
     }
 
-   
     /**
-    * Initialize the the list of meeting evetns.
-    * Initialize the the list of meeting evetns.
-    * @param {any} teamId Id of team.
+    * Initialize list of meetings.
+    * @param {any} teamId Id of user.
     */
-    initializeEventListData = async (teamId) => {
-        this.setState({ isLoading: true });
+    initializeData = async (teamId) => {
         var response = await axios.get(`api/eventlist/${teamId}`);
-
         if (response.status === 200) {
-            this.setState({ teamworkEvent: response.data, isLoading: false });
+            console.log("testing", response.data.value);
+            this.setState({ teamMeetingEvent: response.data });
             return response.data;
         }
+        { this.renderBasedOnMeetingList() }
     }
-   
+
+    // when user click on create new meeting button.
+    onCreateMeeting = () => {
+        microsoftTeams.dialog.open({
+            title: "Create Meeting/Events",
+            url: `${window.location.origin}/fileupload`,
+            size: {
+                height: 450,
+                width: 700,
+            }
+        }, (dialogResponse) => {
+            if (dialogResponse.result) {
+                this.setState({
+                    dashboardState: DashboardState.Default,
+                });
+            }
+        });
+    }
+
+    // Renders the MeetingList.
+    renderBasedOnMeetingList = () => {
+        if (this.state.teamMeetingEvent) {
+            console.log("list", this.state.teamMeetingEvent)
+            return (<Flex column>
+                <Text size="large" className="headColor" content="Meetings List" style={{ marginTop: "1rem" }} weight="bold" />
+                <Divider color="brand" />
+                {this.renderMeetingList()}
+            </Flex>)
+        }
+    }
+
+    // Whne Clicks on Join Url
+    meetingUrl = (url) => {
+        console.log("----->", url.checked);
+        window.open(url, '_blank');
+    }
+
+    // Renders list of meeeting available for current user.
+    renderMeetingList = () => {
+        var elements = [];
+
+        this.state.teamMeetingEvent.map((item, index) => {
+            elements.push(<Flex className="tag-container" vAlign="center">
+                <Flex.Item size="size.small">
+                    <Flex gap="gap.large">                        
+                        <Text content={`Subject : ${item.topicName}`} weight="semibold" />  
+                        {<Text content={`Organizer: ${JSON.stringify(item.organizer.emailAddress.name)}`} weight="semibold" />}
+                    </Flex>
+                </Flex.Item>
+                <Flex gap="gap.large">
+                  {/*  <Link to='/'>{item.meetinglink}Meeting Link</Link>*/}
+                   {/* <Button icon={item.weblink} to={item.meetinglink} variant="raised" color="primary" text primary content="Meeting Link" />*/}
+                   {/* <Button icon={<item.weblink>} text primary content="Meeting Link" />*/}
+                    <Button icon={<CallVideoIcon />} to={item.meetinglink} text primary content="Meeting Link" />
+                   
+                    <Text content={`Created On :  ${moment(item.createdDateTime).format('MMMM Do YYYY')}`} weight="semibold" />
+                    <Text content="" />
+                </Flex>
+                <Flex.Item size="size.quarter">
+                    <Flex gap="gap.large">
+                        <Text content={moment(item.createdDateTime).fromNow()} />
+                    </Flex>
+                </Flex.Item>
+            </Flex>);
+        });
+
+        return elements;
+    }
+
+    render() {
+        return (<Flex className="container" column >
+            <Flex vAlign="center"   >
+                <Text content="Create Meeting/Events" size="larger" weight="semibold" />
+                <FlexItem push>
+                    <Button primary content="Import training plans" onClick={this.onCreateFileUploadClick} />
+                </FlexItem>
+            </Flex>
+            <Flex>
+                {this.renderBasedOnMeetingList()}
+            </Flex>
+        </Flex>)
+    }
 
     // Handler when user click on click file upload button.
     onCreateFileUploadClick = () => {
@@ -66,114 +148,15 @@ class Dashboard extends Component {
             if (dialogResponse.result) {
                 this.setState({
                     dashboardState: DashboardState.Default,
-                    selectedTeamworkTag: {}
+                    selectedEventMeeting: {}                  
                 });
-
-                this.initializeEventListData(this.state.teamsContext.team.groupId);
+                 
+                this.initializeData(this.state.teamsContext.team.app.userId);
+                
             }
+            
         });
     }
 
-    // Handler when user clicks on back icon.
-    onBackClick = () => {
-        this.setState({
-            dashboardState: DashboardState.Default,
-            selectedTeamworkTag: {}
-        });
-        this.initializeData(this.state.teamsContext.team.groupId);
-    }
-
-    // Handler when user clicks on view icon.
-    onViewClick = (teamworkTag) => {
-        this.setState({
-            dashboardState: DashboardState.View,
-            selectedTeamworkTag: teamworkTag
-        });
-    }
-
-    // Handler when user clicks on edit icon.
-    onEditClick = (teamworkTag) => {
-        this.setState({
-            dashboardState: DashboardState.Edit,
-            selectedTeamworkTag: teamworkTag
-        });
-    }
-
-    // Handler when user clicks on delete icon.
-    onDeleteTagClick = async (teamworkTag) => {
-        this.setState({ isLoading: true });
-        var response = await axios.delete(`api/teamtag/${this.state.teamsContext.team.groupId}/tag/${teamworkTag.id}`);
-
-        if (response.status === 204) {
-            await this.initializeData(this.state.teamsContext.team.groupId);
-        }
-        this.setState({ isLoading: false });
-    }
-
-    //// Renders the elements based on dashboard state.
-    //renderBasedOnDashboardState = () => {
-    //    switch (this.state.dashboardState) {
-    //        case DashboardState.View:
-    //            return <ViewEditTag isLoading={this.state.isLoading} onBackClick={this.onBackClick} teamworkTag={this.state.selectedTeamworkTag} dashboardState={DashboardState.View} onTeamworkTagUpdate={this.onTeamworkTagUpdate} />
-    //            break;
-    //        case DashboardState.Edit:
-    //            return <ViewEditTag isLoading={this.state.isLoading} onBackClick={this.onBackClick} teamworkTag={this.state.selectedTeamworkTag} dashboardState={DashboardState.Edit} onTeamworkTagUpdate={this.onTeamworkTagUpdate} />
-    //            break;
-    //        default:
-    //            return (<Flex column>
-    //                <Text size="large" content="Tags created for current team" style={{ marginTop: "1rem" }} />
-    //                {this.renderTeamworkTagList()}
-    //            </Flex>)
-    //    }
-    //}
-
-    // Renders list of tags available for current team.
-    renderTeamworkTagList = () => {
-        var elements = [];
-        this.state.teamworkEvent.map((teamworkTag, index) => {
-            elements.push(<Flex className="tag-container" vAlign="center">
-
-                <Flex.Item size="size.quarter" >
-                    <Text content={`Subject: ${JSON.stringify(teamworkTag.topicName)}`} />
-                </Flex.Item>
-                &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
-
-                <Flex.Item size="size.quarter" >
-                    <Text content={`Start Date: ${JSON.stringify(teamworkTag.start)}`} />
-                </Flex.Item>
-
-
-                <Flex.Item size="size.quarter">
-                    <Text content={`End Date: ${JSON.stringify(teamworkTag.end)}`} />
-                </Flex.Item>
-                <Flex.Item size="size.quarter">
-                    <Text content={`Participants: ${JSON.stringify(teamworkTag.attendees)}`} />
-                </Flex.Item>              
-            </Flex>);
-        });
-
-        return elements;
-    }
-
-    render() {
-        return (<Flex className="container" column >
-            <Flex vAlign="center"   >
-                <Text content="Create Metting Event" size="larger" weight="semibold" />
-               
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <Flex vAlign="center">
-                    <Text content="" size="larger" weight="semibold" />
-                    <FlexItem push>
-                        <Button primary content="Import Trainings plan" onClick={this.onCreateFileUploadClick} />
-
-                    </FlexItem>
-                </Flex>
-            </Flex>
-
-           {/* {this.state.isLoading ? <Loader /> : this.renderBasedOnDashboardState()}*/}
-        </Flex>)
-    }
 }
-
 export default Dashboard;

@@ -83,9 +83,9 @@ namespace EventMeeting.Helper
             var tags = await graphBetaClient.Users[userid].Events
               .Request()
                .Header("Prefer", "outlook.timezone=\"Pacific Standard Time\"")
-               .Select("subject,body,bodyPreview,organizer,attendees,start,end,location")
+               .Select("subject,webLink,createdDateTime,body,bodyPreview,organizer,attendees,start,end,location,")
                .GetAsync();
-            var meetingeventList = new List<MeetingCreationList>();
+        var meetingeventList = new List<MeetingCreationList>();
             do
             {
                 IEnumerable<Event> teamCurrentPage = tags.CurrentPage;
@@ -95,7 +95,10 @@ namespace EventMeeting.Helper
                     meetingeventList.Add(new MeetingCreationList
                     {
                         id = tag.Id,
+                        CreatedDateTime=tag.CreatedDateTime,
                         topicName = tag.Subject,
+                        Organizer=tag.Organizer,
+                        meetinglink = tag.WebLink,
                         Start = tag.Start,
                         End = tag.End,
                         Attendees = tag.Attendees.ToList(),
@@ -110,9 +113,10 @@ namespace EventMeeting.Helper
                 {
                     break;
                 }
-            }
-            while (tags.CurrentPage != null);
-            return meetingeventList;
+             }
+                while (tags.CurrentPage != null) ;
+                return meetingeventList;
         }       
+    
     }
 }
