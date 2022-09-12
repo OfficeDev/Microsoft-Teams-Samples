@@ -23,6 +23,7 @@ This is a sample application which demonstrates how to create meeting in bulk on
 ![Meeting Event](EventMeeting/Images/MeetingEvent.gif)
 
 
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
