@@ -1,42 +1,31 @@
 ---
 page_type: sample
-description: This is a sample application which demonstrates how to create multiple meeting using excel sheet upload.
+description: This is an sample application which shows how to create teams meetings in bulk.
 products:
 - office-teams
 - office
 - office-365
 languages:
-- csharp
+- nodejs
 extensions:
-contentType: samples
-createdDate: "07-09-2022 00:02:15"
+ contentType: samples
+ createdDate: "08-09-2022 00:012:45"
+urlFragment: officedev-microsoft-teams-samples-graph-bulk-meetings-nodejs.
+
 ---
 
-# This is a sample application that shows the usage of create meeting to upload excel sheet.
+# This is an sample application which shows how to create teams meetings in bulk.
 
-This is a sample application where user can create, multiple meeting using excel sheet to  be performed within this sample.
+This is an sample application which shows how to create teams meetings in bulk using file upload method.
 
 ## Key features
 
-1. Meeting Event.
-
-![All Meeting List](EventMeeting/Images/Dashboard.png)
-
-2. Upload excel sheet to create Meeting event.
-
-![Create Event Meeting](EventMeeting/Images/UploadExcelSheet.PNG)
-
+![Bulk Meeting Gif](Images/BulkMeeting.gif)
 
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
--  .[NET 6.0](https://dotnet.microsoft.com/en-us/download) SDK.
-    ```bash
-        # determine dotnet version
-        dotnet --version
-    ```
--  [ngrok](https://ngrok.com/) or equivalent tunneling solution
--  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+-  [NodeJS](https://nodejs.org/en/)
 
 ## Run app locally
 
@@ -47,12 +36,12 @@ This is a sample application where user can create, multiple meeting using excel
 3. Navigate to **API Permissions**, and make sure to add the follow permissions:
 -   Select Add a permission
 -   Select Microsoft Graph -> Application permissions.
-   - `Calendars.ReadWrite`
+   - `Calendar.Read`,
+   - `Calendar.ReadWrite
 
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
-4.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json file.
-
+4.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env file.
 
 ## To try this sample
 
@@ -64,33 +53,50 @@ This is a sample application where user can create, multiple meeting using excel
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
 
-### 2. Launch Visual Studio
-   - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/graph-meetings-bulks/csharp/EventMeeting.sln`
-    
-### 3. Start ngrok on localhost:3978
-- Open ngrok and run command `ngrok http -host-header=rewrite 3978` 
-- Once started you should see link  `https://41ed-abcd-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot.
+### 2. Navigate to project
+In the folder where repository is cloned navigate to `samples/graph-bulk-meetings-nodejs/nodejs`
 
-
-![Ngrok](EventMeeting/Images/NgrokScreenshot.png)
-
-### 4. Update appsettings.json
+### 3. Update the `.env`
 Update configuration with the ```MicrosoftAppId```,  ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId```.
 
-### 5. Modify the `manifest.json` in the `/AppPackage` folder 
-Replace the following details:
-- `{{APP-ID}}` with any guid id value.
-- `{{BASE-URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+### 4. Run ngrok - point to port 3978
+
+```bash
+ngrok http -host-header=rewrite 3978
+```
+
+![Ngrok screen](Images/NgrokScreenshot.png)
+
+### 3. Install node modules and run server 
+
+ Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+
+```bash
+npm install
+```
+
+```bash
+npm start
+```
+
+### 3. Install node modules and run client 
+
+ Navigate to **client** folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+
+```bash
+cd client
+npm install
+```
+
+```bash
+npm start
+```
+    
+### 4. Manually update the manifest.json
+- **Edit** the `manifest.json` contained in the `Manifest` folder to replace your Base url wherever you see the place holder string `<<BASE-URL>>`. Also replace any random guid with the place holder `<<APP-ID>>`.
 - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
 - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-## Features of this sample
-
-1. User can see list of Meeting Event.
-![Event Meeting List](EventMeeting/Images/Dashboard.PNG)
-2. User can create new Meeting Events.
-![Create new Meeting Event](EventMeeting/Images/UploadExcelSheet.PNG)
 
 ## Further reading
-- [Event resource type](https://docs.microsoft.com/en-us/graph/api/user-post-events?view=graph-rest-1.0&tabs=http)
+- [Create Event](https://docs.microsoft.com/en-us/graph/api/user-post-events?view=graph-rest-1.0&tabs=javascript)
