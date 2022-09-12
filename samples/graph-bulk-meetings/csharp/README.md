@@ -20,8 +20,7 @@ This is a sample application which demonstrates how to create meeting in bulk on
 
 1. Meeting Event.
 
-![Meeting Event](EventMeeting/Images/EventMeeting.gif)
-
+![Meeting Event](EventMeeting/Images/MeetingEvent.gif)
 
 
 ## Prerequisites
