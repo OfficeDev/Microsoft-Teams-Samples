@@ -69,7 +69,6 @@ class Dashboard extends Component {
     // Renders the MeetingList.
     renderBasedOnMeetingList = () => {
         if (this.state.meetingList) {
-            console.log(this.state.meetingList)
             return (<Flex column>
                 <Text size="large" className="headColor" content="Meetings List" style={{ marginTop: "1rem" }} weight="bold" />
                 <Divider color="brand" />
@@ -78,7 +77,7 @@ class Dashboard extends Component {
         }
     }
 
-    // When Clicks on Join Url button 
+    // Whne Clicks on Join Url
     meetingUrl = (url) => {
         window.open(url, '_blank');
     }
@@ -96,7 +95,7 @@ class Dashboard extends Component {
                     </Flex>
                 </Flex.Item>
                 <Flex gap="gap.large">
-                    <Button icon={<CallVideoIcon />} text primary content="Meeting Link" />
+                    <Button icon={<CallVideoIcon />} text primary content="Join Meeting" onClick={(e) => this.meetingUrl(item.webLink)} />
                     <Text content={`Created On :  ${moment(item.createdDateTime).format('MMMM Do YYYY')}`} weight="semibold" />
                     <Text content="" />
                 </Flex>
@@ -113,7 +112,7 @@ class Dashboard extends Component {
 
     render() {
         return (<Flex className="container" column >
-            <Flex vAlign="center"   >
+            <Flex vAlign="center">
                 <Text content="Create Meeting/Events" size="larger" weight="semibold" />
                 <FlexItem push>
                     <Button primary content="Create Meeting" onClick={this.onCreateMeeting} />
