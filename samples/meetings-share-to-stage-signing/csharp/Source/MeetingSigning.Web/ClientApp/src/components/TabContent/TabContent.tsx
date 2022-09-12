@@ -1,6 +1,6 @@
 import { Alert, Button, Flex, Header } from '@fluentui/react-northstar';
-import * as microsoftTeams from '@microsoft/teams-js';
 import { TaskInfo } from '@microsoft/teams-js';
+import * as microsoftTeams from '@microsoft/teams-js';
 import * as ACData from 'adaptivecards-templating';
 import { CreateDocumentCard } from 'adaptive-cards';
 import { createDocument } from 'api/documentApi';
@@ -23,12 +23,8 @@ type Choice = {
 export function TabContent() {
   const context = useTeamsContext();
 
-  const createDocumentMutation = useMutation<
-    Document,
-    Error,
-    DocumentInput
-  >((documentInput: DocumentInput) =>
-    createDocument(documentInput),
+  const createDocumentMutation = useMutation<Document, Error, DocumentInput>(
+    (documentInput: DocumentInput) => createDocument(documentInput),
   );
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -89,6 +85,7 @@ export function TabContent() {
       }
     };
 
+    // tasks.startTasks is deprecated, but the 2.0 of SDK's dialog.open does not support opening adaptive cards yet.
     microsoftTeams.tasks.startTask(
       createTaskInfo(documentsCard),
       createDocumentsSubmitHandler,
@@ -112,7 +109,7 @@ export function TabContent() {
       {createDocumentMutation.isError && (
         <Alert
           header="Error"
-          content={createDocumentMutation.error}
+          content={createDocumentMutation.error.message}
           danger
           visible
         />

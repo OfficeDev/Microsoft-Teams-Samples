@@ -8,9 +8,9 @@
         let clientId = '@ViewBag.AzureClientId';
 
         if (clientId != undefined && clientId != null && clientId !== '') {
-            microsoftTeams.initialize();
+            microsoftTeams.app.initialize();
             // Get the tab context, and use the information to navigate to Azure AD login page
-            microsoftTeams.getContext(function (context) {
+            microsoftTeams.app.getContext().then((context) => {
                 // Generate random state string and store it, so we can verify it in the callback
                 let state = _guid();
                 localStorage.setItem("simple.state", state);
@@ -28,7 +28,7 @@
                     state: state,
                     // login_hint pre-fills the username/email address field of the sign in page for the user,
                     // if you know their username ahead of time.
-                    login_hint: context.upn
+                    login_hint: context.user.loginHint
                 };
 
                 // Go to the AzureAD authorization endpoint

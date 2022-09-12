@@ -9,8 +9,9 @@ languages:
 - javascript
 - nodejs
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:26"
+ contentType: samples
+ createdDate: "07-07-2021 13:38:26"
+urlFragment: officedev-microsoft-teams-samples-bot-conversation-sso-quickstart-js
 ---
 # Teams Conversation Bot SSO quick-start
 

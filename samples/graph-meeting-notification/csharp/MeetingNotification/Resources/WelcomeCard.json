@@ -1,0 +1,25 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4",
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Hello and welcome to Meeting Notification Bot",
+      "$when": "${isWelcomeCard}",
+      "size": "medium",
+      "weight": "bolder"
+    },
+    {
+      "type": "TextBlock",
+      "text": "You will start getting notification for this meeting in the chat.",
+      "wrap": true
+    },
+    {
+      "type": "TextBlock",
+      "text": "If the notifications are not coming. Please @mention bot and send message 'Renew' in this meeting chat.",
+      "wrap": true,
+      "color": "attention"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32602.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphPinnedMessage", "GraphPinnedMessage\GraphPinnedMessage.csproj", "{AFC73EB1-C0BB-438E-98BC-31A0CD50C608}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFC73EB1-C0BB-438E-98BC-31A0CD50C608}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFC73EB1-C0BB-438E-98BC-31A0CD50C608}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFC73EB1-C0BB-438E-98BC-31A0CD50C608}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFC73EB1-C0BB-438E-98BC-31A0CD50C608}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {282CF21B-F66A-46B2-A0B1-539113881AEA}
+	EndGlobalSection
+EndGlobal

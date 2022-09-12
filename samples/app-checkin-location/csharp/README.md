@@ -8,11 +8,12 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "11-11-2021 23:30:17"
+  contentType: samples
+  createdDate: "11-11-2021 23:30:17"
+urlFragment: officedev-microsoft-teams-samples-app-checkin-location-csharp
 ---
 
-# Get Checkin info of user
+# App check in location
 
 This sample shows feature where user can checkin with current location and view all previous checkins.
 

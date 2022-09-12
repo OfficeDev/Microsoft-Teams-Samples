@@ -13,6 +13,7 @@ urlFragment: microsoft-teams-auth
 extensions:
     contentType: samples
     createdDate: '2/8/2018 5:06:47 PM'
+urlFragment: officedev-microsoft-teams-samples-app-auth-nodejs
 ---
 
 # Microsoft Teams Authentication Sample

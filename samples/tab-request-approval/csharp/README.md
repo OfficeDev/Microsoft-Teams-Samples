@@ -8,8 +8,9 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "29-11-2021 17:00:25"
+ contentType: samples
+ createdDate: "29-11-2021 17:00:25"
+urlFragment: officedev-microsoft-teams-samples-tab-request-approval-csharp
 ---
 
 # Send task approvals using activity feed notification (Graph APIs)
@@ -101,7 +102,7 @@ Manager Persona:
     Set a redirect URI:
     * Select **Add a platform**.
     * Select **web**.
-    * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/Auth/end`, `https://{Base_Url}/Auth/Start`. This will be the page where a successful implicit grant flow will redirect the user.
+    * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/Auth/End`, `https://{Base_Url}/Auth/Start`. This will be the page where a successful implicit grant flow will redirect the user.
 	Again
 	* Select **Single page application**.
 	* Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/TabAuth`

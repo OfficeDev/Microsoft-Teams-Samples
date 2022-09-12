@@ -1,5 +1,6 @@
 ---
 page_type: sample
+description: This is an example to show how to write a connector for Microsoft Teams using GitHub's APIs.
 products:
 - office-teams
 - office-365
@@ -10,6 +11,7 @@ extensions:
   technologies:
   - Connectors
   createdDate: 8/21/2017 11:52:11 AM
+urlFragment: officedev-microsoft-teams-samples-connector-github-notification-nodejs
 ---
 
 # GitHub Connector for Microsoft Teams

@@ -12,7 +12,7 @@ import { useQuery } from 'react-query';
  * A component that calls the `getDocument` API, get's the document and
  * renders it correctly on the Teams stage.
  *
- * @returns A component with a Document renderd on the stage
+ * @returns A component with a Document rendered on the stage
  */
 export function DocumentStage() {
   const params = useParams();
@@ -48,7 +48,7 @@ export function DocumentStage() {
       <Flex styles={stageInlineStyles}>
         {error &&
           ((showLoader && <Loader />) || (
-            <h1>Error loading document: {error}</h1>
+            <h1>Error loading document: {error.message ?? error}</h1>
           ))}
         {data && (
           <>

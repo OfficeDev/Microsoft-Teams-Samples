@@ -39,7 +39,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{Domain-name}}"
+    "{{Base_URL}}"
   ],
   "activities": {
     "activityTypes": [
@@ -51,7 +51,7 @@
     ]
   },
   "webApplicationInfo": {
-    "id": "<<MicrosoftAppId>>",
+    "id": "{{Microsoft-App-Id}}",
     "resource": "api://{{Base_URL}}/{{Microsoft-App-Id}}"
   }
 }
