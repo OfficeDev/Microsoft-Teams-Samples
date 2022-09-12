@@ -375,7 +375,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-live-caption#nodejs]:samples/meetings-live-caption/nodejs
 
 [msteams-app-qbot]:samples/msteams-application-qbot/
-
+[graph-bulk-meetings#cs]:samples/graph-bulk-meetings/chsarp
+[graph-bulk-meetings#js]:samples/graph-bulk-meetings/nodejs
 ## Submitting issues
 
 The issue tracker is for **[issues](https://github.com/OfficeDev/Microsoft-Teams-Samples/issues)**, in other words, bugs and suggestions.
