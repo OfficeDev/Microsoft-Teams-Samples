@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-bulk-meeting-nodejs",
     "source": "officeDev",
-    "title": "This is a sample application which demonstrates how to create meetings in bulk.",
+    "title": "This is an sample application which shows how to create teams meetings in bulk.",
     "shortDescription": "This is a sample application which demonstrates how to create meetings in bulk using file upload method",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bulk-meeting-nodejs/nodejs",
     "longDescription": [
-      "This is a sample application which demonstrates how to create meetings in bulk using excel file upload"
+      "This is an sample application which shows how to create teams meetings in bulk."
     ],
     "creationDateTime": "2022-09-09",
     "updateDateTime": "2022-09-09",
@@ -36,7 +36,7 @@
         "type": "Image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/v-mfurquan/bulk-meetings-creation-nodejs/samples/bulk-meeting-nodejs/nodejs/Images/BulkMeeting.gif",
-        "alt": "This solution showing gif animation for Bulk Meeting Creation."
+        "alt": "This is an sample application which shows how to create teams meetings in bulk."
       }
     ],
     "authors": [

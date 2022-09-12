@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample application which creates meetings in bulk using Excel file upload method.
+description: This is an sample application which shows how to create teams meetings in bulk.
 products:
 - office-teams
 - office
@@ -10,13 +10,13 @@ languages:
 extensions:
  contentType: samples
  createdDate: "08-09-2022 00:012:45"
-urlFragment: officedev-microsoft-teams-samples-bulk-meeting-nodejs.
+urlFragment: officedev-microsoft-teams-samples-graph-bulk-meetings-nodejs.
 
 ---
 
-# This is a sample application that shows the usage of Graph CRUD operations related to team tags.
+# This is an sample application which shows how to create teams meetings in bulk.
 
-This sample application helps to create meetings in bulk using excel file upload method.
+This is an sample application which shows how to create teams meetings in bulk using file upload method.
 
 ## Key features
 
@@ -26,8 +26,6 @@ This sample application helps to create meetings in bulk using excel file upload
 
 - Microsoft Teams is installed and you have an account (not a guest account)
 -  [NodeJS](https://nodejs.org/en/)
--  [ngrok](https://ngrok.com/) or equivalent tunneling solution
--  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
 ## Run app locally
 
@@ -58,7 +56,7 @@ This sample application helps to create meetings in bulk using excel file upload
    ```
 
 ### 2. Navigate to project
-In the folder where repository is cloned navigate to `samples/bulk-meetings-nodejs/nodejs`
+In the folder where repository is cloned navigate to `samples/graph-bulk-meetings-nodejs/nodejs`
 
 ### 3. Update the `.env`
 Update configuration with the ```MicrosoftAppId```,  ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId```.

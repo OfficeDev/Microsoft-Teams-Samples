@@ -78,9 +78,8 @@ class Dashboard extends Component {
         }
     }
 
-    // Whne Clicks on Join Url
+    // When Clicks on Join Url button 
     meetingUrl = (url) => {
-        console.log("----->", url.checked);
         window.open(url, '_blank');
     }
 

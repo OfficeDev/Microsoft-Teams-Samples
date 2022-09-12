@@ -18,10 +18,10 @@
       "short": "Create Meetings",
       "full": "Create Meetings"
     },
-    "description": {
-      "short": "This sample application which creates meetings in bulk",
-      "full": "his sample application which creates meetings in bulk using Excel file upload method."
-    },
+  "description": {
+    "short": "This is an sample application which shows how to create teams meetings in bulk.",
+    "full": "This sample application which shows how to create meetings in bulk using Excel file upload method."
+  },
     "accentColor": "#5558AF",
     "configurableTabs": [
       {

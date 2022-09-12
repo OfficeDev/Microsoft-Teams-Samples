@@ -1,5 +1,5 @@
 {
-  "name": "createmeeting-nodejs",
+  "name": "graph-bulk-meetings-nodejs",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {

@@ -74,7 +74,7 @@ class App extends Component {
         }
     }
 
-    // Handler when user click on create button.
+    // Handler when user clicks on create button.
     onCreateTeamsButtonClick = (event) => {
         microsoftTeams.app.getContext().then(async (rows) => {
             var excelrows = [];
