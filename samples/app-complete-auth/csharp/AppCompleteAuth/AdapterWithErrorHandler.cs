@@ -2,18 +2,22 @@
 // Licensed under the MIT License.
 // Generated with Bot Builder V4 SDK Template for Visual Studio CoreBot v4.14.0
 
+using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Builder.TraceExtensions;
 using Microsoft.Bot.Connector.Authentication;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace AppCompleteAuth
 {
     public class AdapterWithErrorHandler : CloudAdapter
     {
-        public AdapterWithErrorHandler(BotFrameworkAuthentication auth, ILogger<BotFrameworkHttpAdapter> logger)
+        public AdapterWithErrorHandler(BotFrameworkAuthentication auth, ILogger<BotFrameworkHttpAdapter> logger, IConfiguration configuration, IStorage storage)
             : base(auth, logger)
         {
+            base.Use(new TeamsSSOTokenExchangeMiddleware(storage, configuration["ConnectionName"]));
             OnTurnError = async (turnContext, exception) =>
             {
                 // Log any leaked exception from the application.
