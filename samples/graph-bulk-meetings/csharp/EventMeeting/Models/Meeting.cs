@@ -6,17 +6,17 @@ namespace EventMeeting.Models
     public class Meeting
     {     
         //topic name for the subject of meeting
-        public string topicName { get; set; }
+        public string TopicName { get; set; }
         //trainer name for the who will give the training of the particular training
-        public string trainerName { get; set; }
+        public string TrainerName { get; set; }
         //start date of training
-        public string startdate { get; set; }
+        public string StartDate { get; set; }
         //end date of the training
-        public string enddate { get; set; }
+        public string EndDate { get; set; }
         //timing of the meting
-        public string timing { get; set; }
+        public string Timing { get; set; }
         //participants of the meeting.
-        public string participants { get; set; }
+        public string Participants { get; set; }
        
     }
 

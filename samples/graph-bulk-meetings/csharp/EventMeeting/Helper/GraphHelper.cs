@@ -35,27 +35,26 @@ namespace EventMeeting.Helper
                 {
                     @event = new Event()
                     {
-                        Subject = meeting.topicName,
+                        Subject = meeting.TopicName,
                         Attendees = new List<Attendee>()
                         {
                             new Attendee
                             {
                                 EmailAddress = new EmailAddress
                                 {
-                                    Address = meeting.participants,
-                                    // Name = "Adele Vance"
+                                    Address = meeting.Participants
                                 },
                                 Type = AttendeeType.Required
                             }
                         },
                         Start = new DateTimeTimeZone
                         {
-                            DateTime = meeting.startdate,
+                            DateTime = meeting.StartDate,
                             TimeZone = "Asia/Kolkata"
                         },
                         End = new DateTimeTimeZone
                         {
-                            DateTime = meeting.enddate,
+                            DateTime = meeting.EndDate,
                             TimeZone = "Asia/Kolkata"
                         },
                         AllowNewTimeProposals = true,

@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample application which demonstrates how to create meeting in bulk on teams calendar.
+description: This is a sample application which demonstrates how to create meeting in bulk on Teams calendar.
 products:
 - office-teams
 - office
@@ -9,12 +9,14 @@ languages:
 - csharp
 extensions:
 contentType: samples
-createdDate: "24-06-2022 00:02:15"
+createdDate: "13-09-2022 00:02:15"
+
+urlFragment: officedev-microsoft-teams-samples-graph-bulk-meetings/csharp
 ---
 
-# This is a sample application which demonstrates how to create meeting in bulk on teams calendar.
+# This is a sample application which demonstrates how to create meeting in bulk on Teams calendar.
 
-This is a sample application which demonstrates how to create meeting in bulk on teams calendar use to create meeting to upload excel sheet.
+This is a sample application which demonstrates how to create meeting in bulk on Teams calendar use to create meeting to upload excel sheet.
 
 ## Key features
 

@@ -10,7 +10,6 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import DashboardState from "../models/dashboard-state";
 import axios from "axios";
 import moment from 'moment';
-/*import moment from 'moment'*/
 import "../style/style.css";
 import { Link } from 'react-router-dom'
 
@@ -46,7 +45,6 @@ class Dashboard extends Component {
     initializeData = async (teamId) => {
         var response = await axios.get(`api/eventlist/${teamId}`);
         if (response.status === 200) {
-            console.log("testing", response.data.value);
             this.setState({ teamMeetingEvent: response.data });
             return response.data;
         }
@@ -74,7 +72,6 @@ class Dashboard extends Component {
     // Renders the MeetingList.
     renderBasedOnMeetingList = () => {
         if (this.state.teamMeetingEvent) {
-            console.log("list", this.state.teamMeetingEvent)
             return (<Flex column>
                 <Text size="large" className="headColor" content="Meetings List" style={{ marginTop: "1rem" }} weight="bold" />
                 <Divider color="brand" />
@@ -85,7 +82,6 @@ class Dashboard extends Component {
 
     // Whne Clicks on Join Url
     meetingUrl = (url) => {
-        console.log("----->", url.checked);
         window.open(url, '_blank');
     }
 
@@ -97,16 +93,12 @@ class Dashboard extends Component {
             elements.push(<Flex className="tag-container" vAlign="center">
                 <Flex.Item size="size.small">
                     <Flex gap="gap.large">                        
-                        <Text content={`Subject : ${item.topicName}`} weight="semibold" />  
+                        <Text content={`Subject : ${item.TopicName}`} weight="semibold" />  
                         {<Text content={`Organizer: ${JSON.stringify(item.organizer.emailAddress.name)}`} weight="semibold" />}
                     </Flex>
                 </Flex.Item>
-                <Flex gap="gap.large">
-                  {/*  <Link to='/'>{item.meetinglink}Meeting Link</Link>*/}
-                   {/* <Button icon={item.weblink} to={item.meetinglink} variant="raised" color="primary" text primary content="Meeting Link" />*/}
-                   {/* <Button icon={<item.weblink>} text primary content="Meeting Link" />*/}
-                    <Button icon={<CallVideoIcon />} to={item.meetinglink} text primary content="Meeting Link" />
-                   
+                <Flex gap="gap.large">                 
+                    <Button icon={<CallVideoIcon />} to={item.MeetingLink} text primary content="Meeting Link" />                   
                     <Text content={`Created On :  ${moment(item.createdDateTime).format('MMMM Do YYYY')}`} weight="semibold" />
                     <Text content="" />
                 </Flex>
@@ -149,14 +141,10 @@ class Dashboard extends Component {
                 this.setState({
                     dashboardState: DashboardState.Default,
                     selectedEventMeeting: {}                  
-                });
-                 
-                this.initializeData(this.state.teamsContext.team.app.userId);
-                
-            }
-            
+                });                 
+                this.initializeData(this.state.teamsContext.team.app.userId);                
+            }            
         });
     }
-
 }
 export default Dashboard;

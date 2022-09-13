@@ -5,8 +5,8 @@ namespace EventMeeting.Models
 {
     public class MeetingCreationList
     {
-        public string id { get; set; }
-        public string topicName { get; set; }
+        public string Id { get; set; }
+        public string TopicName { get; set; }
 
         [JsonPropertyName("createdDateTime")]
         public DateTimeOffset? CreatedDateTime { get; set; }
@@ -20,7 +20,7 @@ namespace EventMeeting.Models
         /// Gets or sets web link.
         /// </summary>
       
-        public string meetinglink { get; set; }
+        public string MeetingLink { get; set; }
 
         [JsonPropertyName("start")]
         public DateTimeTimeZone Start { get; set; }

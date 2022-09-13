@@ -1,7 +1,5 @@
 const DashboardState = {
-    Default: 'default',
-    View: 'view',
-    Edit: 'edit',
+    Default: 'default'
 }
 
 export default DashboardState;

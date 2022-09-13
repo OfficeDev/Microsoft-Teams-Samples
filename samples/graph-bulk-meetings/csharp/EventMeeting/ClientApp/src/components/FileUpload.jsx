@@ -67,18 +67,18 @@ class App extends Component {
         }
     }
 
-    // Handler when user click on create button.
-    onCreateTeamsMeetingsButtonClick = (event) => {
+    // Handler when user click on create button.onCreateTeamsMeetingButtonClick
+    onCreateTeamsMeetingButtonClick = (event) => {
         microsoftTeams.app.getContext().then(async (context) => {
             var excelrows = [];
             for (var i = 1; i < this.state.rows.length; i++) {
                 var obj = {
-                    topicName: this.state.rows[i][0],
-                    trainerName: this.state.rows[i][1],
-                    startdate: this.state.rows[i][2],
-                    enddate: this.state.rows[i][3],
-                    timing: this.state.rows[i][4],
-                    participants: this.state.rows[i][5]
+                    TopicName: this.state.rows[i][0],
+                    TrainerName: this.state.rows[i][1],
+                    StartDate: this.state.rows[i][2],
+                    EndDate: this.state.rows[i][3],
+                    Timing: this.state.rows[i][4],
+                    Participants: this.state.rows[i][5]
                 }
                 excelrows.push(obj);               
             }
@@ -105,13 +105,10 @@ class App extends Component {
         window.open(url, '_blank');
     }
 
-
-
     render() {
         return (
             <div>
                 <div>
-
                 </div>
                 <Container>
                     <form>
@@ -124,7 +121,7 @@ class App extends Component {
                                         &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
                                         <input type="file" hidden onChange={this.fileHandler.bind(this)} ref={this.fileInput} onClick={(event) => { event.target.value = null }} style={{ marginLeft: 500 }} />
 
-                                        <Button className="primary jumbotron-button" onClick={this.onCreateTeamsMeetingsButtonClick.bind(this)} style={{ marginLeft: 250 }}>Create meetings</Button>
+                                        <Button className="primary jumbotron-button" onClick={this.onCreateTeamsMeetingButtonClick.bind(this)} style={{ marginLeft: 250 }}>Create meetings</Button>
                                     </InputGroup>
                                     <Input type="text" className="form-control" value={this.state.uploadedFileName} readOnly invalid={this.state.isFormInvalid} />
                                     <FormFeedback>
