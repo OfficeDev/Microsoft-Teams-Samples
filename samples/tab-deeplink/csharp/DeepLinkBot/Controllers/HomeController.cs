@@ -98,7 +98,7 @@ namespace Microsoft.BotBuilderSamples.Controllers
                 channelDeeplinks.Add(task2ChannelLink);
                 channelDeeplinks.Add(task3ChannelLink);
             }
-
+            ViewBag.AppId = _configuration["MicrosoftAppId"];
             return View(channelDeeplinks);
         }
 
