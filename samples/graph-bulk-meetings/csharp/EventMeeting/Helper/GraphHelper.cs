@@ -93,11 +93,11 @@ namespace EventMeeting.Helper
                 {
                     meetingeventList.Add(new MeetingCreationList
                     {
-                        id = tag.Id,
+                        Id = tag.Id,
                         CreatedDateTime=tag.CreatedDateTime,
-                        topicName = tag.Subject,
+                        TopicName = tag.Subject,
                         Organizer=tag.Organizer,
-                        meetinglink = tag.WebLink,
+                        MeetingLink = tag.WebLink,
                         Start = tag.Start,
                         End = tag.End,
                         Attendees = tag.Attendees.ToList(),

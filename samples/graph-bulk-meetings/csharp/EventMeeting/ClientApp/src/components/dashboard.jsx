@@ -13,7 +13,7 @@ import moment from 'moment';
 import "../style/style.css";
 import { Link } from 'react-router-dom'
 
-// Dashboard
+// Dashboard to display created meetings
 class Dashboard extends Component {
     constructor(props) {
         super(props);
