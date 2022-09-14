@@ -17,16 +17,19 @@ function ConsentRequest({ callback }: ConsentRequestProps) {
       console.log('Consent provided.');
       callback(undefined, result);
     } catch (error: any) {
-      console.error("Failed to get consent: '" + error + "'");
+      console.error(`Failed to get consent: "${error}"`);
       callback(error);
     }
-  }
+  };
 
   return (
     <Flex column>
       <Header as="h2" content="To complete that action you must consent" />
-      <Text as="p" content="We need your permission to access some data from your account." />
-      <Button primary content="Consent" onClick={callConsentAuth}/>
+      <Text
+        as="p"
+        content="We need your permission to access some data from your account."
+      />
+      <Button primary content="Consent" onClick={callConsentAuth} />
     </Flex>
   );
 }
