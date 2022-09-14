@@ -15,12 +15,10 @@ namespace Microsoft.BotBuilderSamples
     public class TeamsBot<T> : DialogBot<T> 
         where T : Dialog
     {
-        TokenExchangeHelper _tokenExchangeHelper;
 
-        public TeamsBot(TokenExchangeHelper tokenExchangeHelper, ConversationState conversationState, UserState userState, T dialog, ILogger<DialogBot<T>> logger)
+        public TeamsBot(ConversationState conversationState, UserState userState, T dialog, ILogger<DialogBot<T>> logger)
             : base(conversationState, userState, dialog, logger)
         {
-            _tokenExchangeHelper = tokenExchangeHelper;
         }
 
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
@@ -32,29 +30,6 @@ namespace Microsoft.BotBuilderSamples
                     await turnContext.SendActivityAsync(MessageFactory.Text("Welcome to AuthenticationBot. Type anything to get logged in. Type 'logout' to sign-out."), cancellationToken);
                 }
             }
-        }
-
-        protected override async Task OnTokenResponseEventAsync(ITurnContext<IEventActivity> turnContext, CancellationToken cancellationToken)
-        {
-            await _dialogManager.OnTurnAsync(turnContext, cancellationToken).ConfigureAwait(false);
-        }
-
-        protected override async Task OnSignInInvokeAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
-        {
-            
-            if (turnContext.Activity.Name == SignInConstants.TokenExchangeOperationName)
-            {
-                // The Token Exchange Helper will attempt the exchange, and if successful, it will cache the result
-                // in TurnState.  This is then read by TokenExchangeOAuthPrompt, and processed accordingly.
-                if (! await _tokenExchangeHelper.ShouldProcessTokenExchange(turnContext, cancellationToken))
-                {
-                    // If the token is not exchangeable, do not process this activity further.
-                    // (The Token Exchange Helper will send the appropriate response if the token is not exchangeable)
-                    return;
-                }
-            }
-
-            await _dialogManager.OnTurnAsync(turnContext, cancellationToken).ConfigureAwait(false);
         }
 
         protected override async Task OnTeamsSigninVerifyStateAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)

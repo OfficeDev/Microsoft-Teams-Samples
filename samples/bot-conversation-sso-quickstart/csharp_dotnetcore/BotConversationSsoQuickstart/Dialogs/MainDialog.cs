@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
@@ -8,36 +9,38 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Bot.Schema.Teams;
-using System.Collections.Generic;
-using System;
 
 namespace Microsoft.BotBuilderSamples
 {
     public class MainDialog : LogoutDialog
     {
-        private readonly ILogger _logger;
+        protected readonly ILogger Logger;
 
         public MainDialog(IConfiguration configuration, ILogger<MainDialog> logger)
             : base(nameof(MainDialog), configuration["ConnectionName"])
         {
-            _logger = logger;
+            Logger = logger;
 
-            AddDialog(new TokenExchangeOAuthPrompt(
-                nameof(TokenExchangeOAuthPrompt),
+            AddDialog(new OAuthPrompt(
+                nameof(OAuthPrompt),
                 new OAuthPromptSettings
                 {
                     ConnectionName = ConnectionName,
                     Text = "Please Sign In",
                     Title = "Sign In",
-                    Timeout = 1000 * 60 * 1, // User has 5 minutes to login (1000 * 60 * 5)
-
-                    //EndOnInvalidMessage = true
+                    Timeout = 300000, // User has 5 minutes to login (1000 * 60 * 5)
+                    EndOnInvalidMessage = true
                 }));
 
             AddDialog(new ConfirmPrompt(nameof(ConfirmPrompt)));
 
-            AddDialog(new WaterfallDialog(nameof(WaterfallDialog),  new WaterfallStep[] { PromptStepAsync, LoginStepAsync, DisplayTokenPhase1Async, DisplayTokenPhase2Async }));
+            AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
+            {
+                PromptStepAsync,
+                LoginStepAsync,
+                DisplayTokenPhase1Async,
+                DisplayTokenPhase2Async,
+            }));
 
             // The initial child Dialog to run.
             InitialDialogId = nameof(WaterfallDialog);
@@ -45,16 +48,7 @@ namespace Microsoft.BotBuilderSamples
 
         private async Task<DialogTurnResult> PromptStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            try
-            {
-                return await stepContext.BeginDialogAsync(nameof(TokenExchangeOAuthPrompt), null, cancellationToken);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                throw;
-            }
-            
+            return await stepContext.BeginDialogAsync(nameof(OAuthPrompt), null, cancellationToken);
         }
 
         private async Task<DialogTurnResult> LoginStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
@@ -70,12 +64,14 @@ namespace Microsoft.BotBuilderSamples
                 var title = !string.IsNullOrEmpty(me.JobTitle) ?
                             me.JobTitle : "Unknown";
 
-                await stepContext.Context.SendActivityAsync($"You're logged in as {me.DisplayName} ({me.UserPrincipalName}); you job title is: {title}; your photo is: ");
+                await stepContext.Context.SendActivityAsync($"You're logged in as {me.DisplayName} ({me.UserPrincipalName}); you job title is: {title}");
+
                 var photo = await client.GetPhotoAsync();
                 var cardImage = new CardImage(photo);
-                var card = new ThumbnailCard(images: new List<CardImage>(){ cardImage });
-                var reply = MessageFactory.Attachment(card.ToAttachment()); 
+                var card = new ThumbnailCard(images: new List<CardImage>() { cardImage });
+                var reply = MessageFactory.Attachment(card.ToAttachment());
                 await stepContext.Context.SendActivityAsync(reply, cancellationToken);
+
                 return await stepContext.PromptAsync(nameof(ConfirmPrompt), new PromptOptions { Prompt = MessageFactory.Text("Would you like to view your token?") }, cancellationToken);
             }
 
@@ -98,7 +94,7 @@ namespace Microsoft.BotBuilderSamples
                 //
                 // There is no reason to store the token locally in the bot because we can always just call
                 // the OAuth prompt to get the token or get a new token if needed.
-                return await stepContext.BeginDialogAsync(nameof(TokenExchangeOAuthPrompt), cancellationToken: cancellationToken);
+                return await stepContext.BeginDialogAsync(nameof(OAuthPrompt), cancellationToken: cancellationToken);
             }
 
             return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
