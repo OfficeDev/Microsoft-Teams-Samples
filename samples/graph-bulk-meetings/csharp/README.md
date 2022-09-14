@@ -8,9 +8,8 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "13-09-2022 00:02:15"
-
+ contentType: samples
+ createdDate: "13-09-2022 00:02:15"
 urlFragment: officedev-microsoft-teams-samples-graph-bulk-meetings/csharp
 ---
 
