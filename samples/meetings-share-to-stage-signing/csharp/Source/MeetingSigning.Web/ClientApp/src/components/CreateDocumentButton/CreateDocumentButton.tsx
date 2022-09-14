@@ -48,7 +48,8 @@ const createUserArray = (
 
   return commaArrayOfUsers.split(',').map((u: string) => {
     return {
-      userId: isEmail ? undefined : u
+      userId: isEmail ? undefined : u,
+      name: '',
     } as User;
   });
 };

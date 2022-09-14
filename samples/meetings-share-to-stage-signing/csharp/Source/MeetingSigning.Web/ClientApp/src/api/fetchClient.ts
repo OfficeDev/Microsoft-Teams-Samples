@@ -32,9 +32,13 @@ async function fetchClient(
   const response = await fetch(`/${urlPath}`, mergedInit);
 
   if (!response.ok) {
-    const errorJson: ApiErrorResponse = await response.json();
+    const errorJson: any = await response.json();
     if (!errorJson) {
       throw new Error('Error fetching data.');
+    }
+
+    if (errorJson.title) {
+      throw new Error(`${errorJson.title}`);
     }
 
     throw new Error(`${errorJson.ErrorCode}: ${errorJson.Message}`);
