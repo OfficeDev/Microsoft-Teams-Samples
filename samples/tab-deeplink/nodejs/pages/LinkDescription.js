@@ -1,6 +1,24 @@
 microsoftTeams.app.initialize();  
-microsoftTeams.app.getContext().then((context) => {                        
-     if (context.page.subPageId === "topic1") {                                  
+microsoftTeams.app.getContext().then((context) => { 
+    if (context.page.frameContext === "sidePanel") {
+        document.getElementById("side-panel-content").style.display = "block";
+         document.getElementById('list-content').style.display = "none";
+        document.getElementById('taskList').style.display = "none";
+        document.getElementById("extended-deeplink").style.display = "none";
+        document.getElementById("side-panel-deeplink").style.display = "none";
+     }
+     else if (context.page.frameContext === "meetingStage") {
+
+        fetch(`${window.location.origin}/api/getAppId`).then(response => response.json()).then(data => {
+            deepLinkString = `https://teams.microsoft.com/l/entity/${data.microsoftAppId}/DeepLinkApp?context={"chatId": "${context.chat.id}","contextType":"chat"}`;
+            
+            document.getElementById("side-panel-deeplink").style.display = "block";
+            document.getElementById('list-content').style.display = "none";
+            document.getElementById('taskList').style.display = "none";
+            document.getElementById("extended-deeplink").style.display = "none";
+        });
+    }                       
+    else if (context.page.subPageId === "topic1") {                                  
          document.getElementById("taskDiv").innerHTML = "Bots";
          document.getElementById("taskContent").innerHTML = "A bot also referred to as a chatbot or conversational bot is an app that runs simple and repetitive automated tasks performed by the users, such as customer service or support staff. Examples of bots in everyday use include, bots that provide information about the weather, make dinner reservations, or provide travel information. A bot interaction can be a quick question and answer, or it can be a complex conversation that provides access to services.For more details <a href='https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots' target='_blank'>Click here</a>";
      }

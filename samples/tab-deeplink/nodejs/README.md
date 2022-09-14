@@ -94,3 +94,11 @@ Enter text in the emulator.  The text will be echoed back by the bot.
 
 ![Additional features](Images/DeepLinkTab2.png)
 
+4. Add this application in live meeting and stage the content.
+
+![Meeting side panel](Images/SidePanelTab.png)
+
+5. While it's in stage view, using same [deeplink to open tab](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-links?tabs=teamsjs-v2#generate-a-deep-link-to-your-tab) will open the meeting side panel tab.
+
+![Meeting stage view](Images/MeetingStageView.png)
+
