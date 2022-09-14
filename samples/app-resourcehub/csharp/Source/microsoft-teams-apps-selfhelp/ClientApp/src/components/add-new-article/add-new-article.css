@@ -1,0 +1,34 @@
+﻿.container {
+    padding: 10px;
+}
+
+.delete-container-div-preview {
+    height: 60vh;
+    width: auto;
+    overflow: auto;
+}
+
+.space-delete-message {
+    margin-top: 4rem;
+}
+
+.article-html {
+    height: 100rem;
+    width: auto;
+}
+
+.primary_tag{
+    position: absolute;
+    top: 14rem;
+    left: 10rem;
+}
+
+.secondary_tag{
+    position: absolute;
+    top: 20rem;
+    left: 11rem;
+}
+
+.containerMobile {
+    padding: 5px;
+}
