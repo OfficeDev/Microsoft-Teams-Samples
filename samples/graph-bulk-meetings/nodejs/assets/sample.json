@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/v-mfurquan/bulk-meetings-creation-nodejs/samples/bulk-meeting-nodejs/nodejs/Images/BulkMeeting.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bulk-meeting-nodejs/nodejs/Images/BulkMeeting.gif",
         "alt": "This is an sample application which shows how to create teams meetings in bulk."
       }
     ],
