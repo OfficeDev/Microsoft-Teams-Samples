@@ -129,11 +129,23 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Domain.Documents
                 ISet<User> users = new HashSet<User>(viewersSet);
                 users.UnionWith(signersSet);
 
-                foreach (User? user in users)
+                foreach (User user in users)
                 {
-                    if (!await _userRepository.UserExists(user.UserId))
+                    if (user.UserId == null && user.Email == null)
                     {
-                        await _userRepository.AddUser(await _userService.GetUser(user.UserId));
+                        throw new ApiException(HttpStatusCode.BadRequest, ErrorCode.InvalidOperation, "Unable to add a user who has no UserId or Email.");
+                    }
+
+                    if (!await _userRepository.UserExists(user.UserId ?? user.Email))
+                    {
+                        if (!string.IsNullOrEmpty(user.Email))
+                        {
+                            await _userRepository.AddUser(new User { Name = user.Email, UserId = user.Email, Email = user.Email });
+                        }
+                        else
+                        {
+                            await _userRepository.AddUser(await _userService.GetUser(user.UserId));
+                        }
                     }
                 }
             }
@@ -154,9 +166,9 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Domain.Documents
             try
             {
                 var signatures = new List<Signature>();
-                foreach (User? signer in signersSet)
+                foreach (User signer in signersSet)
                 {
-                    var user = await this._userRepository.GetUser(signer.UserId);
+                    var user = await this._userRepository.GetUser(signer.UserId ?? signer.Email);
                     var signature = new Signature
                     {
                         Signer = user,
@@ -187,9 +199,9 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Domain.Documents
             try
             {
                 var viewers = new List<Viewer>();
-                foreach (User? viewer in viewersSet)
+                foreach (User viewer in viewersSet)
                 {
-                    User? user = await this._userRepository.GetUser(viewer.UserId);
+                    User user = await this._userRepository.GetUser(viewer.UserId ?? viewer.Email);
                     var newViewer = new Viewer
                     {
                         Observer = user

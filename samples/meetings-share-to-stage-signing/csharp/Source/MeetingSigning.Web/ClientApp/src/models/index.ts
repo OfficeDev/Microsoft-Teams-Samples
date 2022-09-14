@@ -1,7 +1,21 @@
 import { ApiErrorCode, ApiErrorResponse } from './ApiErrorResponse';
-import { DocumentType, Document, DocumentInput } from './Document';
+import {
+  DocumentType,
+  Document,
+  DocumentInput,
+  DocumentDto,
+  DocumentListDto,
+} from './Document';
 import { Signature } from './Signature';
 import { User } from './User';
 
 export { ApiErrorCode, DocumentType };
-export type { ApiErrorResponse, Document, DocumentInput, Signature, User };
+export type {
+  ApiErrorResponse,
+  Document,
+  DocumentInput,
+  DocumentDto,
+  DocumentListDto,
+  Signature,
+  User,
+};

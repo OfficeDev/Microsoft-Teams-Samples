@@ -1,3 +1,3 @@
-import { ConsentRequest } from "./ConsentRequest";
+import { ConsentRequest } from './ConsentRequest';
 
 export { ConsentRequest };

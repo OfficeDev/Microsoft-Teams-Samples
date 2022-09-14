@@ -15,10 +15,22 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Web.Authorization
         /// </summary>
         /// <param name="claimsPrincipal">ClaimsPrincipal.</param>
         /// <returns>Return user's id.</returns>
-        public static string GetUserId(this ClaimsPrincipal claimsPrincipal)
+        public static string? GetUserId(this ClaimsPrincipal claimsPrincipal)
         {
             return claimsPrincipal.FindFirstValue(ClaimConstants.Oid) ??
                 claimsPrincipal.FindFirstValue(ClaimConstants.ObjectId);
+        }
+
+        /// <summary>
+        /// Gets user's email from claimsPrincipal. Useful for Anonymous users
+        /// </summary>
+        /// <param name="claimsPrincipal">ClaimsPrincipal.</param>
+        /// <returns>Return user's email.</returns>
+        public static string? GetUserEmail(this ClaimsPrincipal claimsPrincipal)
+        {
+            return claimsPrincipal.FindFirstValue("email") ??
+                claimsPrincipal.FindFirstValue(ClaimConstants.PreferredUserName) ??
+                claimsPrincipal.FindFirstValue("upn");
         }
     }
 }

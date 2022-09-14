@@ -18,7 +18,11 @@ DocumentCard.args = {
   id: '12300000-0000-0000-0000-000000000001',
   documentType: DocumentType.PurchaseAgreement,
   documentState: DocumentState.Active,
-  loggedInAadId: '00000000-0000-0000-0000-000000000002',
+  loggedInUser: {
+    userId: '00000000-0000-0000-0000-000000000001',
+    name: 'You',
+    email: 'you@live.com',
+  },
   signatures: [
     {
       signer: {

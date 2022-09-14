@@ -44,3 +44,13 @@ export type DocumentInput = {
 export type DocumentUpdateInput = {
   documentState: DocumentState;
 };
+
+export type DocumentDto = {
+  document: Document;
+  callerUser: User;
+};
+
+export type DocumentListDto = {
+  documents: Document[];
+  callerUser: User;
+};

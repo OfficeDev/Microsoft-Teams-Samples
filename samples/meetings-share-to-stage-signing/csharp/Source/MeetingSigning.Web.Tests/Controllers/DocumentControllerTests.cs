@@ -13,6 +13,7 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Web.Tests
     using Microsoft.Teams.Samples.MeetingSigning.Domain.Models;
     using Microsoft.Teams.Samples.MeetingSigning.Web.Controllers;
     using Microsoft.Teams.Samples.MeetingSigning.Web.Exceptions;
+    using Microsoft.Teams.Samples.MeetingSigning.Web.Models;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
 
@@ -46,7 +47,7 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Web.Tests
             documentService.Setup( ds => ds.GetDocumentAsync(docId)).ReturnsAsync(document);
             var documentController = new DocumentController(documentService.Object, authorizationService.Object);
 
-            ActionResult<Document>? actionResult = await documentController.GetDocumentAsync(docId).ConfigureAwait(false);
+            ActionResult<DocumentDTO>? actionResult = await documentController.GetDocumentAsync(docId).ConfigureAwait(false);
             var result = (actionResult.Result as OkObjectResult);
             Assert.IsNotNull(result);
             Assert.AreEqual(result.Value, document);
@@ -63,7 +64,7 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Web.Tests
             var documentController = new DocumentController(documentService.Object, authorizationService.Object);
             documentController.ControllerContext.HttpContext = new DefaultHttpContext(){};
 
-            ActionResult<Document[]>? actionResult = await documentController.GetDocumentsAsync();
+            ActionResult<DocumentListDTO>? actionResult = await documentController.GetDocumentsAsync();
             var result = (actionResult.Result as OkObjectResult);
             Assert.IsNotNull(result);
             var returnedDocuments = result.Value as IList<Document>;

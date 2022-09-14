@@ -23,7 +23,7 @@
       "type": "Input.ChoiceSet",
       "id": "viewersValue",
       "isMultiSelect": true,
-      "isRequired": true,
+      "isRequired": false,
       "style": "expanded",
       "label": "Select viewers of the documents",
       "errorMessage": "At least one viewer is required",
@@ -37,7 +37,7 @@
       "type": "Input.ChoiceSet",
       "id": "signersValue",
       "isMultiSelect": true,
-      "isRequired": true,
+      "isRequired": false,
       "style": "expanded",
       "label": "Select signers of the documents",
       "errorMessage": "At least one viewer is required",
@@ -46,6 +46,18 @@
         "type": "Data.Query",
         "dataset": "graph.microsoft.com/users?scope=currentContext"
       }
+    },
+    {
+      "id": "anonymousViewers",
+      "type": "Input.Text",
+      "placeholder": "Email address of anonymous viewers",
+      "label": "Anonymous viewers (separated by commas)"
+    },
+    {
+      "id": "anonymousSigners",
+      "type": "Input.Text",
+      "placeholder": "Email address of anonymous signers",
+      "label": "Anonymous signers (separated by commas)"
     }
   ],
   "actions": [

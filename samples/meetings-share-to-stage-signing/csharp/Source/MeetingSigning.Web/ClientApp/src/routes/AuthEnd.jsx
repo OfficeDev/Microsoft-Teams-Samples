@@ -9,6 +9,7 @@ export default function AuthEnd() {
     microsoftTeams.app.initialize();
 
     const hashParams = getHashParameters();
+
     if (hashParams['error']) {
       microsoftTeams.authentication.notifyFailure(hashParams['error']);
     } else if (hashParams['access_token']) {

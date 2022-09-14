@@ -1,19 +1,42 @@
 import { merge } from 'lodash';
-import { ApiErrorResponse } from 'models/ApiErrorResponse';
 import * as microsoftTeams from '@microsoft/teams-js';
+
+/// This is a wrapper around teamsAuthFetch and fetchWithToken below,
+/// deciding which one to use based on the isAnonymousUser flag.
+export async function authFetch<T>(
+  urlPath: string,
+  isAnonymousUser: boolean,
+  init?: RequestInit,
+  anonToken?: string,
+) {
+  if (isAnonymousUser) {
+    if (!anonToken) {
+      throw new Error('You need to Sign in with Microsoft Account.');
+    }
+
+    return await fetchWithToken<T>(urlPath, anonToken, init);
+  }
+
+  return await teamsAuthFetch<T>(urlPath, init);
+}
 
 // This function is for callers where authentication is required.
 // It makes a fetch client call with an AAD token.
-export async function authFetch<T>(
-  urlPath: string,
-  init?: RequestInit,
-) {
+async function teamsAuthFetch<T>(urlPath: string, init?: RequestInit) {
   const token = await microsoftTeams.authentication
     .getAuthToken()
     .catch((err) => {
       throw new Error(`Unable to get Auth token ${err}`);
     });
 
+  return (await fetchWithToken(urlPath, token, init)) as T;
+}
+
+async function fetchWithToken<T>(
+  urlPath: string,
+  token: string,
+  init?: RequestInit,
+) {
   const mergedInit = merge({}, init, {
     headers: {
       Authorization: `Bearer ${token}`,

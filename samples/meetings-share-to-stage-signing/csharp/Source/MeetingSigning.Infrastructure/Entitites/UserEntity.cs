@@ -17,7 +17,17 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Infrastructure.Entities
         /// Gets or sets UserId / AAD ID
         /// </summary>
 
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
+
+        /// <summary>
+        /// Gets or sets User's Name
+        /// </summary>
+        public string? Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets User's Email
+        /// </summary>
+        public string? Email { get; set; }
 
         public virtual ICollection<DocumentViewerEntity> DocumentViewers { get; set; }
     }

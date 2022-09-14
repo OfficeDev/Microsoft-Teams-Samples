@@ -11,7 +11,7 @@ export type TeamsThemeProviderProps = {
 export const withTeamsThemeProvider = (
   props: TeamsThemeProviderProps,
 ): React.ReactElement => {
-  let mockedMicrosoftTeams: typeof microsoftTeams = {
+  const mockedMicrosoftTeams: typeof microsoftTeams = {
     ...microsoftTeams,
     app: {
       ...microsoftTeams.app,

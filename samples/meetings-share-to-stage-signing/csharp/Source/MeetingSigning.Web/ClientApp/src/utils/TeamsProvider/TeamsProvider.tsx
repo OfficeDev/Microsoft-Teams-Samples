@@ -12,6 +12,8 @@ export interface TeamsProviderContext {
   context: microsoftTeams.app.Context;
   microsoftTeams: typeof microsoftTeams;
   initializePromise: Promise<unknown>;
+  anonymousUserAccessToken?: string;
+  setAnonymousUserAccessToken: (accessToken: string) => void;
 }
 
 // promise that doesn't resolve.
@@ -36,6 +38,9 @@ export const TeamsContext = React.createContext<TeamsProviderContext>({
       id: '',
       frameContext: microsoftTeams.FrameContexts.content,
     },
+  },
+  setAnonymousUserAccessToken: (accessToken: string) => {
+    console.log(accessToken);
   },
 });
 
@@ -90,6 +95,9 @@ export function TeamsProvider({
       ]),
     [microsoftTeams],
   );
+  const [anonymousUserAccessToken, setAnonymousUserAccessToken] = useState<
+    string | undefined
+  >();
 
   useEffect(() => {
     initializePromise.then(() => {
@@ -109,7 +117,13 @@ export function TeamsProvider({
 
   return (
     <TeamsContext.Provider
-      value={{ microsoftTeams, context, initializePromise }}
+      value={{
+        microsoftTeams,
+        context,
+        initializePromise,
+        anonymousUserAccessToken,
+        setAnonymousUserAccessToken,
+      }}
     >
       <FluentUiProvider theme={theme}>{children}</FluentUiProvider>
     </TeamsContext.Provider>

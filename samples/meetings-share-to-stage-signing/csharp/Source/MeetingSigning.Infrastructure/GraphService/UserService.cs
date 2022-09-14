@@ -32,10 +32,10 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Infrastructure.GraphService
             {
                 var result = await _graphServiceClient.Users[userId]
                     .Request()
-                    .Select("DisplayName")
+                    .Select("DisplayName,Mail")
                     .GetAsync();
 
-                return new User { Name = result.DisplayName, UserId = userId };
+                return new User { Name = result.DisplayName, UserId = userId, Email = result.Mail };
             }
             catch (Exception ex)
             {

@@ -22,9 +22,12 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Web.Authorization
                 throw new ApiException(HttpStatusCode.Unauthorized, ErrorCode.Forbidden, "You are not authenticated.");
             }
 
-            // User is the signer
-            var userId = context.User.GetUserId();
-            if (resource.Signer.UserId == userId)
+            // Is User a signer
+            string? userId = context.User.GetUserId();
+            string? userEmail = context.User.GetUserEmail();
+
+            if ((userId != null && resource.Signer.UserId == userId) ||
+                (userEmail != null && resource.Signer.Email == userEmail))
             {
                 context.Succeed(requirement);
                 return Task.CompletedTask;

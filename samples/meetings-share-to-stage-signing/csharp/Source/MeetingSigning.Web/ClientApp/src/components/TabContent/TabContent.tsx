@@ -21,7 +21,7 @@ export function TabContent() {
           content: `FrameContext: ${context?.page.frameContext}`,
         }}
       />
-      <CreateDocumentButton />
+      <CreateDocumentButton userIsAnonymous={false} />
     </Flex>
   );
 }

@@ -18,7 +18,11 @@ DocumentCardList.args = {
       id: '12300000-0000-0000-0000-000000000001',
       documentType: DocumentType.PurchaseAgreement,
       documentState: 'active',
-      loggedInAadId: '00000000-0000-0000-0000-000000000001',
+      loggedInUser: {
+        userId: '00000000-0000-0000-0000-000000000001',
+        name: 'You',
+        email: 'you@live.com',
+      },
       signatures: [
         {
           signer: {
@@ -56,7 +60,11 @@ DocumentCardList.args = {
       id: '12300000-0000-0000-0000-000000000001',
       documentType: DocumentType.TaxFilings,
       documentState: 'active',
-      loggedInAadId: '00000000-0000-0000-0000-000000000001',
+      loggedInUser: {
+        userId: '00000000-0000-0000-0000-000000000001',
+        name: 'You',
+        email: 'you@live.com',
+      },
       signatures: [
         {
           signer: {
