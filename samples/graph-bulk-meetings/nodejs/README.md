@@ -36,8 +36,8 @@ This is an sample application which shows how to create teams meetings in bulk u
 3. Navigate to **API Permissions**, and make sure to add the follow permissions:
 -   Select Add a permission
 -   Select Microsoft Graph -> Application permissions.
-   - `Calendar.Read`,
-   - `Calendar.ReadWrite.All`,
+   - `Calendars.Read`,
+   - `Calendars.ReadWrite.All`,
    - `OnlineMeetings.Read.All`,
    - `OnlineMeetings.ReadWrite.All`
 
