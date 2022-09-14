@@ -69,9 +69,16 @@ This sample displays how to consume SubEntity Id to DeepLink from Bot to Tab and
 
 1. Click on Back to List to view all the options. User can select an option which will redirect to the respective Task in static tab/ channel tab.
 
+**Add this application in live meeting and stage the content.**
+
+![Meeting side panel](DeepLinkBot/images/SidePanelTab.png)
+
+**While it's in stage view, using same [deeplink to open tab](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-links?tabs=teamsjs-v2#generate-a-deep-link-to-your-tab) will open the meeting side panel tab.**
+
+![Meeting stage view](DeepLinkBot/images/MeetingStageView.png)
+
 **Additional Deep link features using Microsoft Teams SDK v2.0.0**
 
 ![Additional Features](DeepLinkBot/images/DeepLinkTab.png)
 
 ![Additional Features](DeepLinkBot/images/DeepLinkTab2.png)
-

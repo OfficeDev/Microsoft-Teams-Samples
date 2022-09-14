@@ -2,22 +2,30 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Net.Http;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Builder.TraceExtensions;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace Microsoft.BotBuilderSamples
 {
-    public class AdapterWithErrorHandler : BotFrameworkHttpAdapter
+    public class AdapterWithErrorHandler : CloudAdapter
     {
-        public AdapterWithErrorHandler(IConfiguration configuration, ILogger<BotFrameworkHttpAdapter> logger, ConversationState conversationState = null)
-            : base(configuration, logger)
+        public AdapterWithErrorHandler(IConfiguration configuration, IHttpClientFactory httpClientFactory, ILogger<IBotFrameworkHttpAdapter> logger, IStorage storage, ConversationState conversationState)
+            : base(configuration, httpClientFactory, logger)
         {
+            base.Use(new TeamsSSOTokenExchangeMiddleware(storage, configuration["ConnectionName"]));
+
             OnTurnError = async (turnContext, exception) =>
             {
                 // Log any leaked exception from the application.
+                // NOTE: In production environment, you should consider logging this to
+                // Azure Application Insights. Visit https://aka.ms/bottelemetry to see how
+                // to add telemetry capture to your bot.
                 logger.LogError(exception, $"[OnTurnError] unhandled error : {exception.Message}");
 
                 // Send a message to the user

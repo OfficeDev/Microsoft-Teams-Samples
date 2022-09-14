@@ -31,11 +31,12 @@ class LogoutDialog extends ComponentDialog {
     async interrupt(innerDc) {
         if (innerDc.context.activity.type === ActivityTypes.Message) {
             const text = innerDc.context.activity.text.toLowerCase();
-            // Remove the line break
-            if (text.replace(/\r?\n|\r/g, '') === 'logout') {
-                // The bot adapter encapsulates the authentication processes.
-                const botAdapter = innerDc.context.adapter;
-                await botAdapter.signOutUser(innerDc.context, this.connectionName);
+            if (text === 'logout') {
+                const userTokenClient = innerDc.context.turnState.get(innerDc.context.adapter.UserTokenClientKey);
+
+                const { activity } = innerDc.context;
+                await userTokenClient.signOutUser(activity.from.id, this.connectionName, activity.channelId);
+
                 await innerDc.context.sendActivity('You have been signed out.');
                 return await innerDc.cancelAllDialogs();
             }
