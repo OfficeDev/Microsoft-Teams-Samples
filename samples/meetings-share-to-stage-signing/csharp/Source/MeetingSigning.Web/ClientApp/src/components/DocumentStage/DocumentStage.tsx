@@ -7,7 +7,7 @@ import { getDocument } from 'api/documentApi';
 import { DocumentChooser } from 'components/Documents';
 import { DocumentDto } from 'models';
 import { useQuery } from 'react-query';
-import { AnonymousPage } from 'ccomponents/AnonymousPage
+import { AnonymousPage } from 'components/AnonymousPage';
 import { TeamsContext } from 'utils/TeamsProvider/TeamsProvider';
 
 /**

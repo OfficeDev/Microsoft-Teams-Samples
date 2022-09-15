@@ -71,6 +71,9 @@ sequenceDiagram
     * Select *Share to Meeting* on a document you want to share to stage.
     * All participants of the meeting will see the app being shared to the stage. Participants who are either signers, viewers or document creators will be able to see the document. Participants not a signer, viewer or creator will see an error stating they do not have permissions to view the document.
     * Signers are able to sign a document, and all viewers will have their view of their document updated to include that signature.
+* Anonymous Users
+    * When you join the meeting, if a document is shared to stage, you will be prompted to log in to your personal Microsoft account.
+    * Once you log in, if your email matches those defined in the document details you will be able to view the document.
 
 ## User specific views
 * A user/meeting attendee can be either a viewer or a signer. If neither, an error message "you aren't allowed to see this document" will be displayed.
@@ -89,12 +92,31 @@ Currently, this app is not fully supported in the following scenarios:
 * Tenant - If assigned by the document creator, the User will be  able to see and sign the document. 
 * Federated/Guest Users:
     * The people picker does not allow users outside of the tenant to be selected. Similarly, if a federated user creates the document, they are only able to select people in their tenant as signers/viewers, and nobody from outside their tenant can view the document.
-* Anonymous Users - Does not work because apps can't get an SSO token for anonymous users.
+* Anonymous Users
+    * Coming soon! When creating a document you can declare the emails of the anonymous users who should view or sign the document. The app prompts anonymous meeting participants to sign in with their Microsoft account, then uses the login information to validate that their email address is allowed to access the document. You can extend this approach to support other identity providers.
+
+Below is a diagram on how the auth flow works for anonymous and non-anonymous users (AAD in-tenant, federated and guest)
+```mermaid
+graph TD
+    Join[User joins meeting] -->|Document is shared to stage| IsUserAnonymous{Is User Anonymous?}
+    IsUserAnonymous -->|No| GetAuthToken[GetAuthToken via Teams SSO]
+    IsUserAnonymous -->|Yes| AnonLogin1[Log in using 3P identity provider]
+    AnonLogin1 --> AnonLogin2[[Login with personal MSA]]
+    AnonLogin2 --> AnonLogin3[[Get auth token]]
+    GetAuthToken & AnonLogin3--> GetDocument[Call GetDocument Api with auth token]
+    GetDocument --> UserAuthorized{Is user authorized?}
+    UserAuthorized --> |Yes| DocumentReturned[Document returned and rendered]
+    UserAuthorized --> |No| NotAuthorised[Unauthorised error]
+    NotAuthorised --> IsAnonymousAndNotAuth{Is User Anonymous?}
+    IsAnonymousAndNotAuth --> |No| AadNotAuth[Show Not Authorised error]
+    IsAnonymousAndNotAuth --> |Yes| MsaNotAuth[Show option to login with 3P Identity provider] 
+```
 
 ### Common Problems
 * When the solution is run on a local web browser (anywhere outside of Teams), it will load an expected error message stating that 
 " Unable to get information about the App.
 This happens if you are running the application in a normal browser, and not inside Teams. Install the app inside teams to test this application. To upload the app to Teams follow the instructions on https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload"
+* "Something went wrong" when opening the app in the meeting. If you have yet to authorise the application, and you open the app in the meeting, Teams doesn't seem to prompt for you to authorise the application. To solve this, if you create a document in the pre-meeting flow, you should be prompted to auth there and the app will be able to get a token when in a meeting next time.
 
 ## Prerequisites
 * Make sure you have an active [Azure subscription](https://azure.microsoft.com/en-us/free/).
@@ -107,6 +129,7 @@ This happens if you are running the application in a normal browser, and not ins
 ## Steps
 * Start Ngrok
 * Create an Azure AAD App Registration
+* Create an Azure AAD App Registration for MSA users.
 * Update URL in Manifest
 * Build C# App
 * Deploy to Teams
@@ -123,10 +146,22 @@ This happens if you are running the application in a normal browser, and not ins
     * Ensure the following API permissions are granted to the app for Microsoft Graph access - email, offline_access, openid, profile, User.Read, User.ReadBasic.All
     * *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your AAD App*
     * After you create an AAD app, under *Certificates & secrets* create a new  *Client secret*. Copy the secret value and set it in `appSettings.json`
+* [Register an App in AAD that can be used for Microsoft Personal account users](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad#to-register-a-new-app-in-azure-ad)
+    * Register the app
+        * We tested using an app that supports "Accounts in any organizational directory (Any Azure AD directory - Multi-tenant) and personal Microsoft accounts"
+        * Expose the API
+        * Configure the API scopes
+        * You do not need "To configure authorized client application"
+    * Ensure the following API permissions are granted to the app for Microsoft Graph access - email, openid
+    * *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your AAD App*
+    * After you create an AAD app, under *Certificates & secrets* create a new  *Client secret*. Copy the secret value and set it in `appSettings.json`
 * In `appSettings.json`, `manifest.json` and `.env` replace:
     * `<<deployment-url>>` with your ngrok url, minus the https://.
     * `<<aad-id>>` with your AAD Application (Client) Id.
     * `<<client secret>>` with the client secret you created above.
+    * `<<msa-only-aad-client-id>>` with the Application (Client) Id from the AAD App for personal users
+    * `<<msa-only-aad-client-secret>>` with the client secret from the AAD App for personal users that you created above
+    * `<<msa-only-scope>>` `api://<<deployment-url>>/<<msa-only-aad-client-id>>/access_as_user email openid`
 * Project Structure
     * The sample contains 3 projects
         * `Web` - Exposes REST APIs for documents and signing scenarios supported in this POC.  
@@ -154,7 +189,7 @@ This happens if you are running the application in a normal browser, and not ins
 ### Docker
 *Note the below instructions are using [Podman](https://podman.io/), but Docker's commands are similar. [There are instructions for setting up Podman on WSL2 here](docs/installing-podman-on-wsl2.md)*
 * From this directory build the Docker image `podman build -f Deployment/Dockerfile
---ignorefile Deployment/.dockerignore ./Source --build-arg REACT_APP_AAD_CLIENT_ID`
+--ignorefile Deployment/.dockerignore ./Source --build-arg REACT_APP_AAD_CLIENT_ID --build-arg REACT_APP_MSA_ONLY_CLIENT_ID --build-arg REACT_APP_MSA_ONLY_SCOPE`
 * Wait for the container to build
 * Run `podman images` to view available images, copy the Image ID
 * Point Ngrok to port 8080: `ngrok http -host-header=rewrite 8080`
