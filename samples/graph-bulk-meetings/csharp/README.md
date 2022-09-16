@@ -10,7 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "13-09-2022 00:02:15"
-urlFragment: officedev-microsoft-teams-samples-graph-bulk-meetings/csharp
+urlFragment: officedev-microsoft-teams-samples-graph-bulk-meetings-csharp
 ---
 
 # This is a sample application which demonstrates how to create meeting in bulk on Teams calendar.
