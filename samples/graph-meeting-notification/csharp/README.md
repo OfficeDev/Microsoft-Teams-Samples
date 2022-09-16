@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-graph-meeting-notification-csharp
 ---
 
-# This is a sample demonstrates use of online meeting subscription including resource data.
+# Online meeting subscription
 
 This is a sample application which demonstrates use of online meeting subscription that will post notifications when user joined/left and when meeting start/end.
 
@@ -45,8 +45,8 @@ This is a sample application which demonstrates use of online meeting subscripti
 
 ### Register your application with Azure AD
 
-1. Register a new application in the [Azure Active Directory ñ App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-2. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. Youíll need those later when updating your Teams application manifest and in the appsettings.json.
+1. Register a new application in the [Azure Active Directory ‚Äì App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You‚Äôll need those later when updating your Teams application manifest and in the appsettings.json.
 3. Navigate to **API Permissions**, and make sure to add the follow permissions:
 -   Select Add a permission
 -   Select Microsoft Graph -> Application permissions.
@@ -54,7 +54,7 @@ This is a sample application which demonstrates use of online meeting subscripti
 
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
-4.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select ìNeverî for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json file.
+4.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select ‚ÄúNever‚Äù for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json file.
 
 ### Create Azure bot resource
 
