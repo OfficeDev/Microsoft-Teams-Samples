@@ -4,11 +4,11 @@ Resources HUB - One single point of view for Product information like Features, 
 Show users Art of Possible in Teams
 
 ## Quick links
-[Solution Overview](/Documentation/SolutionOverview.md)
+[Solution Overview](/samples/msteams-application-resourcehub/Documentation/SolutionOverview.md)
 
-[Deployment Guide](/Documentation/DeploymentGuide.md)
+[Deployment Guide](/samples/msteams-application-resourcehub/Documentation/DeploymentGuide.md)
 
-[App Installation Guide](/Documentation/InstallationGuide.md)
+[App Installation Guide](/samples/msteams-application-resourcehub/Documentation/InstallationGuide.md)
 
 Teams’ app capabilities included are – 
 1.	Custom Bing search
