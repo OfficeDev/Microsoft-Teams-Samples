@@ -156,7 +156,7 @@ Partners and Dependencies
 Solution Overview
 =================
 
-![](/Documentation/SolutionOverview.png)
+![](SolutionOverview.png)
 
 **Store Manager**
 
@@ -200,10 +200,10 @@ Azure resources:
 High level design to show the high-level data workflow and resources
 proposed to be used in app.
 
-![](/Documentation/DataFlowDiagram.png)
+![](DataFlowDiagram.png)
 
 #### Single Sign On authentication (SSO) 
-![](/Documentation/SSOSigninDesign.png)
+![](SSOSigninDesign.png)
 
 App service 
 ============
@@ -252,7 +252,7 @@ Azure bot service 
     subordinates*](https://docs.microsoft.com/en-us/graph/api/user-list-directreports?view=graph-rest-1.0&tabs=http)
     etc. 
 
-![](/Documentation/ListOfGraphAPI.png)
+![](ListOfGraphAPI.png)
 
 Internal APIs 
 ==============
@@ -804,7 +804,7 @@ The proposed solution structure will follow below project skeleton where
 each azure app will be created as a separate web app. Common class
 library will have additional repositories along with Bot builder.
 
-![](/Documentation/SolutionFolderStructure.png)
+![](SolutionFolderStructure.png)
 
 1.  Tables Entity
     =============
