@@ -30,29 +30,29 @@ size/department/industry (filters available).
 
 2.  Navigate to teams’ apps à manage apps à Upload new app
 
-![](/Documentation/UploadAppStep1.png)
-![](/Documentation/UploadAppStep2.png)
+![](UploadAppStep1.png)
+![](UploadAppStep2.png)
 
 1.  Upload the manifest file that we have downloaded in the
     above step\#2.
 
 2.  The app is uploaded and available under the table below
 
-    ![](/Documentation/UploadAppStep3.png)
+    ![](UploadAppStep3.png)
 
 1.   Search for the app and select.
 
 2.  Got to Permissions Tab and review and Approve permissions.
 
-    ![](/Documentation/ReviewPermission.png)
+    ![](ReviewPermission.png)
 
 1.  Click on Review permissions and select admin credentials.
 
-    ![](/Documentation/AdminConsent.png)
+    ![](AdminConsent.png)
 
 1.  Review and approve the permissions.
 
-    ![](/Documentation/AdminConsentApprove.png)
+    ![](AdminConsentApprove.png)
 
 <span id="_Setup_policies_by" class="anchor"><span id="_Toc107827291" class="anchor"></span></span>Setup policies by tenant admin 
 ----------------------------------------------------------------------------------------------------------------------------------
@@ -72,4 +72,4 @@ size/department/industry (filters available).
 -   arrange the application as per requirement this app will be binned
     and available on team’s menu bar
 
-    ![](/Documentation/SetupPolicy.png)
+    ![](SetupPolicy.png)
