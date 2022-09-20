@@ -1,18 +1,7 @@
-const { X509Certificate } = require('crypto');
-let pki = require('node-forge').pki;
+
+const certHelper = require('./certHelper');
 
 class DecryptionHelper {
-    static async getDecryptedContent(notification) {
-
-        if (notification) {
-            this.processEncryptedNotification(notification);
-        }
-        else {
-            require('node-forge').pki.crea
-            var cert = new X509Certificate();
-            cert.checkPrivateKey
-        }
-    }
 
     /**
     * Processes an encrypted notification
@@ -21,29 +10,31 @@ class DecryptionHelper {
     static processEncryptedNotification(notification) {
         // Decrypt the symmetric key sent by Microsoft Graph
         const symmetricKey = certHelper.decryptSymmetricKey(
-            notification.encryptedContent.dataKey,
+            notification[0].encryptedContent.dataKey,
             process.env.PRIVATE_KEY_PATH
         );
 
         // Validate the signature on the encrypted content
         const isSignatureValid = certHelper.verifySignature(
-            notification.encryptedContent.dataSignature,
-            notification.encryptedContent.data,
+            notification[0].encryptedContent.dataSignature,
+            notification[0].encryptedContent.data,
             symmetricKey
         );
 
         if (isSignatureValid) {
             // Decrypt the payload
             const decryptedPayload = certHelper.decryptPayload(
-                notification.encryptedContent.data,
+                notification[0].encryptedContent.data,
                 symmetricKey
             );
-
-            // Send the notification
-            emitNotification(notification.subscriptionId, {
-                resource: JSON.parse(decryptedPayload)
-            });
+            
+            var resource = {};
+            resource = JSON.parse(decryptedPayload);
+            resource.changeType = notification[0].changeType
         }
+
+    // return decrypted object 
+        return resource
     }
 }
 

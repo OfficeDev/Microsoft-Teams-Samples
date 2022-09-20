@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions: 
  contentType: samples
- createdDate: "25-08-2022 04:30:15"
+ createdDate: "19-09-2022 01:30:15"
 urlFragment: officedev-microsoft-teams-samples-graph-change-notification-team-channel
 
 ---
@@ -78,8 +78,15 @@ To include resource data of graph notifications, this Graph API require self-sig
   - Launch Visual Studio code
   - File -> Open Folder
   - Navigate to `samples/graph-change-notification-team-channel/nodejs` folder
-  - Select `ChangeNotiifcation` solution file
-  - Press `F5` to run the project
+  - Select `nodejs` solution file
+   ```Install node modules
+     npm install
+   ``` 
+   - select 'client' folder
+     ```Install node modules
+     npm install
+   ``` 
+  -  `npm start` to run the project
 
   B) Run ngrok - point to port 3978
 
