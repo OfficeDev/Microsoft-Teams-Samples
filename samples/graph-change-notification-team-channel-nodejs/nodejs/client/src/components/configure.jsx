@@ -17,6 +17,7 @@ const Configure = props => {
                 microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
                     microsoftTeams.pages.config.setConfig({
                         entityID: "ChannelNotification",
+                         // passing pageId to Selected channel/team notifications component with route url.
                         contentUrl: `${window.location.origin}/channel/1`,
                         suggestedTabName: "Channel Notification",
                         websiteUrl: `${window.location.origin}/channel/1`,
@@ -32,6 +33,7 @@ const Configure = props => {
                 microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
                     microsoftTeams.pages.config.setConfig({
                         entityID: "TeamNotification",
+                         // passing pageId to Selected channel/team notifications component with route url.
                         contentUrl: `${window.location.origin}/team/2`,
                         suggestedTabName: "Team Notification",
                         websiteUrl: `${window.location.origin}/team/2`,
