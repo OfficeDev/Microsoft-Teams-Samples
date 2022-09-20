@@ -18,34 +18,34 @@ namespace Microsoft.BotBuilderSamples
     // and the requirement is that all BotState objects are saved at the end of a turn.
     public class DialogBot<T> : TeamsActivityHandler where T : Dialog
     {
-        protected readonly BotState ConversationState;
-        protected readonly Dialog Dialog;
-        protected readonly ILogger Logger;
-        protected readonly BotState UserState;
+        protected readonly BotState _conversationstate;
+        protected readonly Dialog _dialog;
+        protected readonly ILogger _logger;
+        protected readonly BotState _userState;
 
         public DialogBot(ConversationState conversationState, UserState userState, T dialog, ILogger<DialogBot<T>> logger)
         {
-            ConversationState = conversationState;
-            UserState = userState;
-            Dialog = dialog;
-            Logger = logger;
+            _conversationstate = conversationState;
+            _userState = userState;
+            _dialog = dialog;
+            _logger = logger;
         }
-
+        // Save any state changes that might have occurred during the turn.
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
         {
             await base.OnTurnAsync(turnContext, cancellationToken);
 
             // Save any state changes that might have occurred during the turn.
-            await ConversationState.SaveChangesAsync(turnContext, false, cancellationToken);
-            await UserState.SaveChangesAsync(turnContext, false, cancellationToken);
+            await _conversationstate.SaveChangesAsync(turnContext, false, cancellationToken);
+            await _userState.SaveChangesAsync(turnContext, false, cancellationToken);
         }
-
+        //  Run the Dialog with the new message Activity.
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            Logger.LogInformation("Running dialog with Message Activity.");
+            _logger.LogInformation("Running dialog with Message Activity.");
 
-            // Run the Dialog with the new message Activity.
-            await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
+           
+            await _dialog.RunAsync(turnContext, _conversationstate.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
         }
     }
 }
