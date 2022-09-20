@@ -37,10 +37,7 @@ namespace Microsoft.BotBuilderSamples
             // The Dialog that will be run by the bot.
             services.AddSingleton<MainDialog>();
 
-            // Dialog Manager handles initiating the Dialog Stack, saving state, etc.
-            services.AddSingleton<DialogManager>();
-
-            // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
+           // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
             services.AddTransient<IBot, TeamsBot<MainDialog>>();
         }
 

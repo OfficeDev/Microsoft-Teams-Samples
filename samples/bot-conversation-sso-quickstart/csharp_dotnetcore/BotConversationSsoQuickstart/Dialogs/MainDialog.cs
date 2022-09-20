@@ -65,13 +65,11 @@ namespace Microsoft.BotBuilderSamples
                             me.JobTitle : "Unknown";
 
                 await stepContext.Context.SendActivityAsync($"You're logged in as {me.DisplayName} ({me.UserPrincipalName}); you job title is: {title}");
-
                 var photo = await client.GetPhotoAsync();
                 var cardImage = new CardImage(photo);
                 var card = new ThumbnailCard(images: new List<CardImage>() { cardImage });
                 var reply = MessageFactory.Attachment(card.ToAttachment());
                 await stepContext.Context.SendActivityAsync(reply, cancellationToken);
-
                 return await stepContext.PromptAsync(nameof(ConfirmPrompt), new PromptOptions { Prompt = MessageFactory.Text("Would you like to view your token?") }, cancellationToken);
             }
 

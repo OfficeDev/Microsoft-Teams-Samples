@@ -16,31 +16,36 @@ namespace Microsoft.BotBuilderSamples
     // each with dependency on distinct IBot types, this way ASP Dependency Injection can glue everything together without ambiguity.
     // The ConversationState is used by the Dialog system. The UserState isn't, however, it might have been used in a Dialog implementation,
     // and the requirement is that all BotState objects are saved at the end of a turn.
-    public class DialogBot<T> : TeamsActivityHandler 
-        where T : Dialog
+    public class DialogBot<T> : TeamsActivityHandler where T : Dialog
     {
-#pragma warning disable SA1401 // Fields should be private
-        protected readonly BotState _conversationState;
-        protected readonly Dialog _dialog;
-        protected readonly ILogger _logger;
-        protected readonly BotState _userState;
-        protected readonly DialogManager _dialogManager;
-#pragma warning restore SA1401 // Fields should be private
+        protected readonly BotState ConversationState;
+        protected readonly Dialog Dialog;
+        protected readonly ILogger Logger;
+        protected readonly BotState UserState;
 
         public DialogBot(ConversationState conversationState, UserState userState, T dialog, ILogger<DialogBot<T>> logger)
         {
-            _conversationState = conversationState;
-            _userState = userState;
-            _dialog = dialog;
-            _logger = logger;
-            _dialogManager = new DialogManager(dialog) { ConversationState = conversationState, UserState = userState };
+            ConversationState = conversationState;
+            UserState = userState;
+            Dialog = dialog;
+            Logger = logger;
+        }
+
+        public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            await base.OnTurnAsync(turnContext, cancellationToken);
+
+            // Save any state changes that might have occurred during the turn.
+            await ConversationState.SaveChangesAsync(turnContext, false, cancellationToken);
+            await UserState.SaveChangesAsync(turnContext, false, cancellationToken);
         }
 
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Running dialog with Message Activity.");
+            Logger.LogInformation("Running dialog with Message Activity.");
 
-            await _dialogManager.OnTurnAsync(turnContext, cancellationToken);
+            // Run the Dialog with the new message Activity.
+            await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
         }
     }
 }

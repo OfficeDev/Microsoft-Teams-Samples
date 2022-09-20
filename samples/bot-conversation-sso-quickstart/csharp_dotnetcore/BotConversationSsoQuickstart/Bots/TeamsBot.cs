@@ -12,10 +12,8 @@ using Microsoft.Extensions.Logging;
 namespace Microsoft.BotBuilderSamples
 {
     // This bot is derived (view DialogBot<T>) from the TeamsActivityHandler class currently included as part of this sample.
-    public class TeamsBot<T> : DialogBot<T> 
-        where T : Dialog
+    public class TeamsBot<T> : DialogBot<T> where T : Dialog
     {
-
         public TeamsBot(ConversationState conversationState, UserState userState, T dialog, ILogger<DialogBot<T>> logger)
             : base(conversationState, userState, dialog, logger)
         {
@@ -34,12 +32,12 @@ namespace Microsoft.BotBuilderSamples
 
         protected override async Task OnTeamsSigninVerifyStateAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Running dialog with signin/verifystate from an Invoke Activity.");
+            Logger.LogInformation("Running dialog with signin/verifystate from an Invoke Activity.");
 
             // The OAuth Prompt needs to see the Invoke Activity in order to complete the login process.
 
             // Run the Dialog with the new Invoke Activity.
-            await _dialogManager.OnTurnAsync(turnContext, cancellationToken).ConfigureAwait(false);
+            await Dialog.RunAsync(turnContext, ConversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
         }
     }
 }

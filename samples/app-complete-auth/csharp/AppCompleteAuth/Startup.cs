@@ -84,8 +84,6 @@ namespace AppCompleteAuth
             // Create the Conversation state. (Used by the Dialog system itself.)
             services.AddSingleton<ConversationState>();
 
-            // Dialog Manager handles initiating the Dialog Stack, saving state, etc.
-            services.AddSingleton<DialogManager>();
 
             // The Dialog that will be run by the bot.
             services.AddSingleton<MainDialog>();
