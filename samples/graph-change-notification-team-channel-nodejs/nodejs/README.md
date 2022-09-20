@@ -73,31 +73,40 @@ To include resource data of graph notifications, this Graph API require self-sig
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-  A) Or from Visual Studio code
-
   - Launch Visual Studio code
   - File -> Open Folder
-  - Navigate to `samples/graph-change-notification-team-channel/nodejs` folder
-  - Select `nodejs` solution file
-   ```Install node modules
-     npm install
-   ``` 
-   - select 'client' folder
-     ```Install node modules
-     npm install
-   ``` 
-  -  `npm start` to run the project
+  - Navigate to `samples/graph-change-notification-team-channel/nodejs` folder.
 
-  B) Run ngrok - point to port 3978
+  - Update the `.env` file
+
+   Update configuration with the ```MicrosoftAppId```, ```MicrosoftAppPassword```, ```MicrosoftAppTenantId```,
+   ```Base64EncodedCertificate```, ```EncryptionCertificateId```, ```PRIVATE_KEY_PATH```
+
+ - Install node modules
+
+    Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same for client folder by opening the project in Visual Studio code.
+
+    ```bash
+    npm install
+    ```
+
+- Run your app
+
+   ```bash
+     npm start
+   ``` 
+
+ - Run ngrok - point to port 3978
 
    ```bash
      ngrok http -host-header=rewrite 3978
    ```  
 
-## Instruction for appsetting
-1. Provide MicrosoftAppId, MicrosoftAppPassword and MicrosoftAppTenantId in the appsetting that is created in Azure.
+## Instruction for .env
+1. Provide MicrosoftAppId, MicrosoftAppPassword and MicrosoftAppTenantId in the .env that is created in Azure.
 2. Provide the ngrok url as  "BaseUrl" in appsetting on which application is running on.
 3. You should be having Base64EncodedCertificate and CertificateThumbprint value from *Create and install Self-Signed certificate* step.
+4. Use Certificate in "PEM" format and add path in this way "PRIVATE_KEY_PATH=PathName.pem" in .env file.
 
 ## Instruction for manifest
 1. Fill any GUID for <APP-ID>. You can also put your MicrosoftAppId here.
