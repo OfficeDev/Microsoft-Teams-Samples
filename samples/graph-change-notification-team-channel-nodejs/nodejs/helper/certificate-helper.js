@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
@@ -19,6 +18,7 @@ function ensureOpenSsl() {
     pem.config({ pathOpenSSL: pathOpenSSL });
   }
 }
+
 /**
  * @param  {string} keyPath - The relative path to the file containing the private key
  * @returns {string} Contents of the private key file
@@ -95,7 +95,7 @@ module.exports = {
       encryptedKey
     );
     return decryptedSymmetricKey;
-  },
+    },
   /**
    * Decrypts the payload data using the one-time use symmetric key
    * @param  {string} encryptedPayload - The base64-encoded encrypted payload

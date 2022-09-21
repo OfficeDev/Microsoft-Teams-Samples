@@ -8,16 +8,13 @@
     "@fluentui/react-northstar": "^0.63.1",
     "@microsoft/teams-js": "^2.1.0",
     "axios": "^0.21.1",
-    "date-fns": "^2.29.2",
     "moment": "^2.29.4",
     "react": "17.0.0",
     "react-dom": "17.0.0",
     "react-excel-renderer": "^1.1.0",
     "react-router-dom": "6.2.2",
     "react-scripts": "^4.0.0",
-    "reactstrap": "^9.1.4",
-    "uuid": "^9.0.0",
-    "xlsx": "^0.18.5"
+    "reactstrap": "^9.1.4"
   },
   "scripts": {
     "start": "react-scripts start",

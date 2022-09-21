@@ -1,8 +1,7 @@
 
-const certHelper = require('./certHelper');
+const certHelper = require('./certificate-helper');
 
 class DecryptionHelper {
-
     /**
     * Processes an encrypted notification
     * @param  {object} notification - The notification containing encrypted content

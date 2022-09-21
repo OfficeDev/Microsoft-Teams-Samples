@@ -24,7 +24,7 @@
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": "netframework"
+        "value": "nodejs"
       },
       {
         "key": "TEAMS-FEATURES",
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/graph-change-notification-team-channel-nodejs/samples/graph-change-notification-team-channel-nodejs/nodejs/Images/ChangeNotifications.gif",
-        "alt": "Graph Change Notification Team/Channel using Nodejs"
+        "alt": "Graph Change Notification for Team/Channel using Nodejs"
       }
     ],
     "authors": [
