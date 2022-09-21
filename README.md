@@ -368,6 +368,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [graph-activity-feed-broadcast#js]:samples/graph-activity-feed-broadcast/nodejs
 [graph-pinned-message#cs]:samples/graph-pinned-messages/csharp
 [graph-pinned-message#js]:samples/graph-pinned-messages/nodejs
+[change-notifications-team/channel#cs]:samples/graph-change-notification-team-channel/csharp
+[change-notifications-team/channel#js]:samples/graph-change-notification-team-channel-nodejs/nodejs
 [app-identity-link-with-sso#nodejs]:samples/app-identity-link-with-sso/nodejs
 [tab-staggered-permission#nodejs]:samples/tab-staggered-permission/nodejs
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
