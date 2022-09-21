@@ -109,7 +109,7 @@ To include resource data of graph notifications, this Graph API require self-sig
    ```  
 
 ## Instruction for manifest
-1. Fill any GUID for <MICROSOFT-APP-ID>. You can also put your MicrosoftAppId here.
+1. Fill any GUID in your manifest for <GUID>. You can also put your MicrosoftAppId here.
 2. Update <MICROSOFT-APP-ID> placeholder with your Microsoft App Id.
  
 ## Further reading

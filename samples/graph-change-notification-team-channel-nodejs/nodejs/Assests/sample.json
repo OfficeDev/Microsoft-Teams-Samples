@@ -20,7 +20,7 @@
       },
       {
         "key": "TEAMS-SERVER-LANGUAGE",
-        "value": "nodejs"
+        "value": "javascript"
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",

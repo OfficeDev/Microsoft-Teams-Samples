@@ -5,8 +5,8 @@ import {
     Routes
 } from 'react-router-dom';
 import Configure from "../components/configure";
-import ChannelNotification from "../components/channelnotification";
-import TeamNotification from "../components/teamnotification";
+import ChannelNotification from "../components/channel-notification";
+import TeamNotification from "../components/team-notification";
 
 export const AppRoute = () => {
     return (
