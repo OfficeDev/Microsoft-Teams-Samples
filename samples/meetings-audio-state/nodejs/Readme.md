@@ -12,6 +12,9 @@ extensions:
  createdDate: "08-08-2022 12:00:01"
 urlFragment: officedev-microsoft-teams-samples-meeting-audio-state-nodejs
 ---
+
+# Meeting Audio Mute/Unmute
+
 **Steps:**
 
  - Add your application to the `meetings` as its display as below.
