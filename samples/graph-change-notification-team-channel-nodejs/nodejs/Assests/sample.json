@@ -20,7 +20,7 @@
       },
       {
         "key": "TEAMS-SERVER-LANGUAGE",
-        "value": "csharp"
+        "value": "nodejs"
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
@@ -35,8 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/v-mfurquan/graph-change-notification-team-channel-nodejs/samples/graph-change-notification-team-channel-nodejs/nodejs/Images/ChangeNotifications.gif",
-        "alt": "Solution UX showing Graph Change Notification Team/Channel nodejs"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/graph-change-notification-team-channel-nodejs/samples/graph-change-notification-team-channel-nodejs/nodejs/Images/ChangeNotifications.gif",
+        "alt": "Graph Change Notification Team/Channel using Nodejs"
       }
     ],
     "authors": [

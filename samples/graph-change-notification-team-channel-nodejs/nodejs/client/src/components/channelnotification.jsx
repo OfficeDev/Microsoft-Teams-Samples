@@ -29,17 +29,17 @@ class ChangeNotificationChannel extends Component {
         });
     }
 
-    ///Summary///
-    ///Passing {teamId} to team controller for change notification subscription.
-    ///Summary///
+    /// </summary>
+    /// <param name="teamId"></param>
+    /// </summary>
     initializeData = async (teamId) => {
-        var response = await axios.post(`/api/changeNotification?teamId=${teamId}`);
+        await axios.post(`/api/changeNotification?teamId=${teamId}`);
+        var response = await axios.post('/api/notifications');
 
         try {
-            if (response.status === 200) {
+            if (response.data) {
                 var responseData = response.data;
 
-                if (responseData) {
                     var elements = [];
 
                     responseData.forEach(item => {
@@ -73,16 +73,15 @@ class ChangeNotificationChannel extends Component {
                     if (elements.length > 0) {
                         this.setState({ changeNotifications: elements.reverse() });
                     }
-                }
             }
         } catch (e) {
             console.log("error", e);
         }
     }
 
-    ///Summary///
-    ///Sends welcome Message for change notification subscription.
-    ///Summary///
+    /// </summary>
+    /// Sends welcome Message for change notification subscription.
+    /// </summary>
     welcomeMessage = () => {
         return (
             <div>

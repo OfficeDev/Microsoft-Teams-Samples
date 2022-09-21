@@ -29,17 +29,17 @@ class TeamChangeNotification extends Component {
         });
     }
 
-    ///Summary///
-    ///Passing {teamId} to team controller for change notification subscription.
-    ///Summary///
+    /// </summary>
+    /// <param name="teamId"></param>
+    /// </summary>
     initializeData = async (teamId, pageId) => {
-        var response = await axios.post(`/api/changeNotification/team?teamId=${teamId}`);
+        await axios.post(`/api/notifications/team?teamId=${teamId}`);
+        var response = await axios.post('/api/notifications');
 
         try {
-            if (response.status === 200) {
+            if (response.data) {
                 var responseData = response.data;
 
-                if (responseData) {
                     var elements = [];
 
                     responseData.forEach(item => {
@@ -67,7 +67,7 @@ class TeamChangeNotification extends Component {
                     if (elements.length > 0) {
                         this.setState({ notifications: elements.reverse() });
                     }
-                }
+                
             }
         }
         catch (e) {
@@ -75,9 +75,9 @@ class TeamChangeNotification extends Component {
         }
     }
 
-    ///Summary///
-    ///welocme message after successfully configured.
-    ///Summary///
+    /// </summary>
+    /// Sends welcome Message for change notification subscription.
+    /// </summary>
     welcomeMessage = () => {
         return (
             <div>

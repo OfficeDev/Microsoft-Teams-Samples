@@ -21,8 +21,8 @@ This is a sample application which demonstrates use of Team/Channel subscription
 ## Concepts introduced in this sample
 - After successfully Setup of tab in teams you will get a welcome message and the subscription will be created for team/channel.
 
-![Notifications](nodejs/Images/ChangeNotifications.gif)
-s
+![Notifications](Images/ChangeNotifications.gif)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
@@ -82,6 +82,12 @@ To include resource data of graph notifications, this Graph API require self-sig
    Update configuration with the ```MicrosoftAppId```, ```MicrosoftAppPassword```, ```MicrosoftAppTenantId```,
    ```Base64EncodedCertificate```, ```EncryptionCertificateId```, ```PRIVATE_KEY_PATH```
 
+### Instruction for .env
+1. Provide MicrosoftAppId, MicrosoftAppPassword and MicrosoftAppTenantId in the .env that is created in Azure.
+2. Provide the ngrok url as  "BaseUrl" in appsetting on which application is running on.
+3. You should be having Base64EncodedCertificate and CertificateThumbprint value from *Create and install Self-Signed certificate* step.
+4. Use Certificate "PEM" format and add path in this way "PRIVATE_KEY_PATH=PathName.pem" in .env file.
+
  - Install node modules
 
     Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same for client folder by opening the project in Visual Studio code.
@@ -101,12 +107,6 @@ To include resource data of graph notifications, this Graph API require self-sig
    ```bash
      ngrok http -host-header=rewrite 3978
    ```  
-
-## Instruction for .env
-1. Provide MicrosoftAppId, MicrosoftAppPassword and MicrosoftAppTenantId in the .env that is created in Azure.
-2. Provide the ngrok url as  "BaseUrl" in appsetting on which application is running on.
-3. You should be having Base64EncodedCertificate and CertificateThumbprint value from *Create and install Self-Signed certificate* step.
-4. Use Certificate in "PEM" format and add path in this way "PRIVATE_KEY_PATH=PathName.pem" in .env file.
 
 ## Instruction for manifest
 1. Fill any GUID for <APP-ID>. You can also put your MicrosoftAppId here.
