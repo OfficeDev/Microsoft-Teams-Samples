@@ -1,5 +1,5 @@
 ## Bot SSO Setup
-This document show how to setup AAD and Azure Bot Services, which are the prerequisites steps to enable Bot SSO.
+This document guide you to setup AAD and Azure Bot Service, which are the pre-requisites steps to enable Bot SSO.
 
 ### 1. Create and configure AAD app
 
@@ -26,13 +26,13 @@ This step will create an AAD app, it will be reused wherever it needs AAD throug
     ![New Secret](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/ClientSecret.png)
 </br>
 
-- _Copy and paste the secret somewhere safe_. You'll need it in a future step
+- _Copy and paste the secret value somewhere safe_. You'll need it in a future step
 
 #### 1.3. Expose API endpoint
 
 - Click "_Expose an API_" in the left rail
 
-    - Update your application ID URL to include your bot id - api://botid-<AppId>, where <AppId> is the id of the bot that will be making the SSO request and found in your Teams Application Manifest, which is the same you create and saved in step1.1:
+    - Set your Application ID URL to include your bot id - api://botid-<AppId>, where <AppId> is the id of the bot that will be making the SSO request and found in your Teams Application Manifest, which is the same you create and saved in step1.1:
     ![Application ID URI](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AppIdUri.png)
 
     - Click "_Add a scope_"
@@ -43,17 +43,17 @@ This step will create an AAD app, it will be reused wherever it needs AAD throug
 
         - Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the access_as_user scope. Suggestions:
 
-            - Admin consent title: Teams can access the user’s profile
+            - Admin consent display name: Teams can access the user’s profile
 
             - Admin consent description: Allows Teams to call the app’s web APIs as the current user.
 
-            - User consent title: Teams can access your user profile and make requests on your behalf
+            - User consent display name: Teams can access your user profile and make requests on your behalf
 
             - User consent description: Enable Teams to call this app’s APIs with the same rights that you have
 
         - Ensure that State is set to Enabled
 
-        - Select Add scope (Note: The domain part of the Scope name displayed just below the text field should automatically match the Application ID URI set in the previous step, with /access_as_user appended to the end)
+        - Click on Add scope button (Note: The domain part of the Scope name displayed just below the text field should automatically match the Application ID URI set in the previous step, with /access_as_user appended to the end)
 
         ![Add Scope](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/CreateScope.png)
 
@@ -79,12 +79,7 @@ Add the following Ids as authorized clients for your application
 
 - Navigate to "Authentication"
 
-- Check the *Access tokens* and *ID tokens* boxes..
-
-#### 1.7 
-- Navigate to "Manifest"
-- Confirm the config item: `"accessTokenAcceptedVersion": 2`, if not, change its value to 2, click "save". (If you are already in testing your bot in Teams, you need to signout this app and signout Teams then signin again to see this change work).
-
+- Check the *Access tokens* and *ID tokens* boxes and click on Save button.
 
 ### 2. Setup bot in Azure Bot Service
 
@@ -94,21 +89,28 @@ Add the following Ids as authorized clients for your application
 ngrok http -host-header=rewrite 3978
 ```
 
-#### 2.2. Create new Bot Channel Registration resource in Azure
+#### 2.2. Create new Azure Bot resource in Azure
 
-Create [Bot Channels registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
-- For the "_Messaging endpoint_", use the current `https` URL you were given by running ngrok. Append with the path `/api/messages`:
+Create [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
+
+- Select Type of App as "Multi Tenant" or as per your need
+- Select Creation type as "Use existing app registration"
+- Use the copied AppId from the above step and fill in AppId.
+- Click on Create on the Azure bot.
+- Go to the created resource, navigate to channels and ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
+- Go to the created resource, navigate to and update the "_Messaging endpoint_", use the current `https` URL you were given by running ngrok. Append with the path `/api/messages`:
 - For "Microsoft App ID and password", click "Create New", fill in the AppId and client secret you created in step1.1 and step 1.2:
-    ![Create Bot Channels Registration](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/CreateBot.png)
+    ![Create Azure Bot](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/CreateBot.png)
 
-    ![Create Bot Channels Registration2](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/CreateBot2.png)
+    ![Create Azure Bot2](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/CreateBot2.png)
 
 - After you select *Create*, it will take a few moments for your bot service to be provisioned. Once you see a notification indicating the validation process is complete, navigate back to *Home > Bot Services* to find your bot. You may have to refresh the page to see your bot listed.
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 ### 3. Setup Bot Service Connection (TokenStore)
 
-- In the Azure Portal, navigate back to the Bot Channels Registration created in Step 2
+- In the Azure Portal, navigate back to the Azure Bot resource created in Step 2
    
     
 - Switch to the "Settings" blade and click "Add Setting" under the OAuth Connection Settings section
