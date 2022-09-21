@@ -369,7 +369,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [graph-pinned-message#cs]:samples/graph-pinned-messages/csharp
 [graph-pinned-message#js]:samples/graph-pinned-messages/nodejs
 [graph-bulk-meetings#cs]:samples/graph-bulk-meetings/csharp
-[graph-bulk-meetings#cs]:samples/graph-bulk-meetings/nodejs
+[graph-bulk-meetings#js]:samples/graph-bulk-meetings/nodejs
 [change-notifications-team/channel#cs]:samples/graph-change-notification-team-channel/csharp
 [change-notifications-team/channel#js]:samples/graph-change-notification-team-channel-nodejs/nodejs
 [app-identity-link-with-sso#nodejs]:samples/app-identity-link-with-sso/nodejs
