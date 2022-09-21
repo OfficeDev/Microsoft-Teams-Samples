@@ -20,22 +20,21 @@ A task module allows you to create modal popup experiences in your Teams applica
 
 Task modules build on the foundation of Microsoft Teams tabs: a task module is essentially a tab in a popup window. It uses the same SDK, so if you've built a tab you are already 90% of the way to being able to create a task module.
 
+## Fetures of the Task module
+
+![TaskModule](Microsoft.Teams.Samples.TaskModule.Web/Images/taskmodule.gif)
+
+![TaskModule](Microsoft.Teams.Samples.TaskModule.Web/Images/TaskModule.png)
+
+![youtube](Microsoft.Teams.Samples.TaskModule.Web/Images/youtube.png)
+
+![youtube](Microsoft.Teams.Samples.TaskModule.Web/Images/powerapps.png)
 
 ![adaptivecard](Microsoft.Teams.Samples.TaskModule.Web/Images/adaptivecard.png)
 
 ![Customform](Microsoft.Teams.Samples.TaskModule.Web/Images/Customform.png)
 
-![customformregister](Microsoft.Teams.Samples.TaskModule.Web/Images/customformregister.png)
 
-![adaptivecard2](Microsoft.Teams.Samples.TaskModule.Web/Images/adaptivecard2.png)
-
-![powerapps](Microsoft.Teams.Samples.TaskModule.Web/Images/powerapps.png)
-
-![TaskModule](Microsoft.Teams.Samples.TaskModule.Web/Images/TaskModule.png)
-
-![tasks](Microsoft.Teams.Samples.TaskModule.Web/Images/tasks.png)
-
-![youtube](Microsoft.Teams.Samples.TaskModule.Web/Images/youtube.png)
 
 ## Run this sample locally
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
