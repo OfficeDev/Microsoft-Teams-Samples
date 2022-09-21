@@ -24,7 +24,7 @@
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": "nodejs"
+        "value": "express"
       },
       {
         "key": "TEAMS-FEATURES",
