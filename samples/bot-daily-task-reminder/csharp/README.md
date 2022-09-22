@@ -16,8 +16,10 @@ urlFragment: officedev-microsoft-teams-samples-bot-daily-task-reminder-csharp
 # Bot daily task reminder
 
 This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time.
-
+## Feature of the sample
 - Use command `create-reminder` to get card with action `Schedule task`.
+
+![Daily Task Reminder ](BotDailyTaskReminder/Images/DailyTaskReminder.gif)
 
 ![Schedule task ](BotDailyTaskReminder/Images/ScheduleTaskCard.png)
 

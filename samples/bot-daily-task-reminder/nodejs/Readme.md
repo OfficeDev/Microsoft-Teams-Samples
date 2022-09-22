@@ -17,15 +17,16 @@ urlFragment: officedev-microsoft-teams-samples-bot-daily-task-reminder-nodejs
 
 This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time.
 
+## Feature of the sample
 Type command `create-reminder` to get card for scheduling the recurring task.
 
-![Schedule task ](Images/ScheduleTaskCard.png)
+![Daily Task Reminder ](BotDailyTaskReminder/Images/DailyTaskReminder.gif)
 
-- Click on schedule task button to open task module for scheduling a task.
-![Task Details ](Images/ScheduleTask.png)
+![Schedule task ](BotDailyTaskReminder/Images/ScheduleTaskCard.png)
 
-- Once task is scheduled, you will be notified about the task at scheduled time.
-![Task reminder](Images/TaskReminder.png)
+![Task Details](BotDailyTaskReminder/Images/ScheduleTask.png)
+
+![Task reminder](BotDailyTaskReminder/Images/TaskReminder.png)
 
 ## Prerequisites
 
