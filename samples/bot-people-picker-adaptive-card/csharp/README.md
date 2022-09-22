@@ -16,19 +16,23 @@ urlFragment: officedev-microsoft-teams-samples-bot-people-picker-adaptive-card-c
 
 This sample shows the feature of people picker on Adaptive Cards.
 
+![people picker card ](PeoplePicker/Images/PepolePickerAdaptiveCard.gif)
+
  Use the bot command `peoplepickercard` to get the card with people picker control 
+
+![people picker card ](PeoplePicker/Images/Welcome.png)
+
+ Adaptive card.
 
 ![people picker card ](PeoplePicker/Images/adaptiveCard.png)
 
+ Adaptive card with details( On `Assign` button click, the bot will return the member id that we have selected.)  
+
+![people picker card ](PeoplePicker/Images/AdaptiveCardSumissionDetails.png)
+
 - Personal scope (get all the users of organisation)
 
-![people picker card ](PeoplePicker/Images/personalPeoplePickerCard.png)
-
-- Team or groupchat scope (get user list to current context)
-
-![people picker card](PeoplePicker/Images/channelPeoplePickerCard.png)
-
- On `Assign` button click, the bot will return the member id that we have selected.
+![people picker card ](PeoplePicker/Images/Organisationlist.png)
 
 ## Prerequisites
 

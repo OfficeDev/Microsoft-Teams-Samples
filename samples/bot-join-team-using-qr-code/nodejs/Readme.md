@@ -13,25 +13,25 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-bot-join-team-using-qr-code-nodejs
 ---
 
-# Join a team using QR code sample
+## Feature of sample.
 
-This sample demos a feature where user can join a team using QR code having team id.
-
-User can generate a new QR code (contains team id information) and then scan the QR code to join the team.
-
-`Currently, Microsoft Teams support for QR or barcode scanner capability is only supported for mobile clients`
+ ![Card](JoinTeamByQR/Images/JoinTeamByQrCode.gif)
 
 - Type a message to get a card to generate the QR code.
 
- ![Card](Images/CardWithButtons.png)
+ ![Card](JoinTeamByQR/Images/WelcomeMessage.png)
 
-- Select the team from dropdown list for which you want to generate the QR code and then click on      'Generate QR' button.
+- Select the team from dropdown list for which you want to generate the QR code and then click on 'Generate QR' button.
 
- ![QR Code](Images/QRCode.png)
+ ![QR Code](JoinTeamByQR/Images/TeamSelectionToGenerateQRCode.png)
 
 - Scan the generated QR code to join the team.
 
- ![Join Team](Images/TeamQR.png)
+ ![Join Team](JoinTeamByQR/Images/GenerateQrCode.png)
+
+- After Scan the Qr Code Added user in team successfully.
+
+ ![Join Team](JoinTeamByQR/Images/SuccessfullyAddedUser.png)
 
 ## Prerequisites
 

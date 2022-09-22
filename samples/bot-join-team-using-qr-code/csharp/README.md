@@ -21,17 +21,25 @@ User can generate a new QR code (contains team id information) and then scan the
 
 `Currently, Microsoft Teams support for QR or barcode scanner capability is only supported for mobile clients`
 
+## Feature of sample.
+
+ ![Card](JoinTeamByQR/Images/JoinTeamByQrCode.gif)
+
 - Type a message to get a card to generate the QR code.
 
- ![Card](JoinTeamByQR/Images/CardWithButtons.png)
+ ![Card](JoinTeamByQR/Images/WelcomeMessage.png)
 
 - Select the team from dropdown list for which you want to generate the QR code and then click on 'Generate QR' button.
 
- ![QR Code](JoinTeamByQR/Images/QRCode.png)
+ ![QR Code](JoinTeamByQR/Images/TeamSelectionToGenerateQRCode.png)
 
 - Scan the generated QR code to join the team.
 
- ![Join Team](JoinTeamByQR/Images/TeamQR.png)
+ ![Join Team](JoinTeamByQR/Images/GenerateQrCode.png)
+
+- After Scan the Qr Code Added user in team successfully.
+
+ ![Join Team](JoinTeamByQR/Images/SuccessfullyAddedUser.png)
 
 ## Prerequisites
 
