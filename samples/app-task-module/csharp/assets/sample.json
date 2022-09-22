@@ -4,7 +4,7 @@
     "source": "officeDev",
     "title": "Launch task module from tab and bot",
     "shortDescription": "Launch a task module from a tab or bot  (WARNING uses deprecated version of Bot Builder SDK)",
-     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-task-module/csharp",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-task-module/csharp",
     "longDescription": [
       "Launch a task module from a tab or bot  (WARNING uses deprecated version of Bot Builder SDK)"
     ],
@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-       "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-task-module/csharp/Microsoft.Teams.Samples.TaskModule.Web/Images/youtube.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-task-module/csharp/Microsoft.Teams.Samples.TaskModule.Web/Images/youtube.png",
         "alt": "Solution UX showing launch task module from tab and bot"
       }
     ],
