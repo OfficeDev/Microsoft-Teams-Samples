@@ -22,19 +22,21 @@ Task modules build on the foundation of Microsoft Teams tabs: a task module is e
 
 ## Fetures of the Task module
 
-![TaskModule](Microsoft.Teams.Samples.TaskModule.Web/Images/taskmodule.gif)
-
-![TaskModule](Microsoft.Teams.Samples.TaskModule.Web/Images/TaskModule.png)
-
-![youtube](Microsoft.Teams.Samples.TaskModule.Web/Images/youtube.png)
-
-![youtube](Microsoft.Teams.Samples.TaskModule.Web/Images/powerapps.png)
-
 ![adaptivecard](Microsoft.Teams.Samples.TaskModule.Web/Images/adaptivecard.png)
 
 ![Customform](Microsoft.Teams.Samples.TaskModule.Web/Images/Customform.png)
 
+![customformregister](Microsoft.Teams.Samples.TaskModule.Web/Images/customformregister.png)
 
+![adaptivecard2](Microsoft.Teams.Samples.TaskModule.Web/Images/adaptivecard2.png)
+
+![powerapps](Microsoft.Teams.Samples.TaskModule.Web/Images/powerapps.png)
+
+![TaskModule](Microsoft.Teams.Samples.TaskModule.Web/Images/TaskModule.png)
+
+![tasks](Microsoft.Teams.Samples.TaskModule.Web/Images/tasks.png)
+
+![youtube](Microsoft.Teams.Samples.TaskModule.Web/Images/youtube.png)
 
 ## Run this sample locally
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
