@@ -23,23 +23,7 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
 
 - Welcome message with feature explanation.
 
-![Welcome Message](Images/welcomeAction.png)
-
-- Adaptive Card with actions.
-
-![Card Actions](Images/cardActions.png)
-
-- Opening stage view from Adaptive Card Action.
-
-![Stage View](Images/viaCardAction.png)
-
-- Opening stage view from Adaptive card via deep link.
-
-![Stage View Deep Link](Images/viaDeeplink.png)
-
-- Tab with execute deep link action to open stage view.
-
-![Tab View](Images/viaTabDeeplink.png)
+![Tab Stage View](Images/tabStageView.jpg)
 
 ## Prerequisites
 
