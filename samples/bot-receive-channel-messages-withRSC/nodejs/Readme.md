@@ -22,9 +22,15 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 ## Key features
 
+![RSC Module](ReceiveMessagesWithRSC/Images/BotWithRSCModule.gif)
+
+- Showing Welcome message 
+
+![Channel messages](ReceiveMessagesWithRSC/Images/Notification.png)
+
 - Showing messages based on option selected
 
-![Channel messages](images/channel_messages.png)
+![Channel messages](ReceiveMessagesWithRSC/Images/botWithRSCFlow.png)
 
 ## Prerequisites
 

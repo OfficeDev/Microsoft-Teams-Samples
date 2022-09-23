@@ -16,23 +16,31 @@ urlFragment: officedev-microsoft-teams-samples-bot-type-ahead-search-adaptive-ca
 
 This sample shows the feature of typeahead search (static and dynamic) control in Adaptive Cards.
 
+![Typedsearch Module](TypeaheadSearch/Images/TypedSearchModule.gif)
+
  Use the bot command `staticsearch` to get the card with static typeahead search control and use bot command `dynamicsearch` to get the card with dynamic typeahead search control.
+
+![Welcome in typedsearch](TypeaheadSearch/Images/welcome.png)
 
 `Static search:`
  Static typeahead search allows users to search from values specified within `input.choiceset` in the Adaptive Card payload.
 
 ![static search card](TypeaheadSearch/Images/staticSearchCard.png)
 
+Static tpyedhead detail after submission
+
+![static search card](TypeaheadSearch/Images/StaticSearchSubmitDetail.png)
+
 `Dynamic search:`
  Dynamic typeahead search is useful to search and select data from large data sets. The data sets are loaded dynamically from the dataset specified in the card payload.
 
-![dynamic search card](TypeaheadSearch/Images/dynamicSearchCard.png)
+![dynamic search card](TypeaheadSearch/Images/dynamicSearch.png)
 
-`Dynamic search results:`
+`On `Submit` button click, the bot will return the choice that we have selected:`
 
-![dynamic search results](TypeaheadSearch/Images/dynamicSearchResults.png)
+![dynamic search results](TypeaheadSearch/Images/dynamicSearchsubmitdetail.png)
 
- On `Submit` button click, the bot will return the choice that we have selected.
+ 
 
 ## Prerequisites
 
