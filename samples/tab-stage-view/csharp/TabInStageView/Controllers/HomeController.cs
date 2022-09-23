@@ -23,7 +23,7 @@
             return View();
         }
 
-        [Route("sampleTab")]
+        [Route("tab")]
         public ActionResult SampleTab()
         {
             // Setting client id to be used in deep link in tab

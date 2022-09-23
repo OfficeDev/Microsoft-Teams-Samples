@@ -94,23 +94,7 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
 
 - Welcome message with feature explanation.
 
-![Welcome Message](TabInStageView/Images/welcomeAction.png)
-
-- Opening stage view in tab with Adaptive card action.
-
-![Card Actions](TabInStageView/Images/cardActions.png)
-
-- Opening stage view from Adaptive Card Action.
-
-![Stage View](TabInStageView/Images/viaCardAction.png)
-
-- Opening stage view from Adaptive card via deep link.
-
-![Stage View Deep Link](TabInStageView/Images/viaDeeplink.png)
-
-- Tab with execute deep link action to open stage view.
-
-![Tab View](TabInStageView/Images/viaTabDeeplink.png)
+![TabInStageView](TabInStageView/Images/tabStageView.png)
 
 ## Deploy the bot to Azure
 
