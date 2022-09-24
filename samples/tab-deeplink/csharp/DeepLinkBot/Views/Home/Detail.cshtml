@@ -2,11 +2,15 @@
 @{ ViewBag.Title = "Detail"; }
 @model Microsoft.BotBuilderSamples.Controllers.DeepLinksModel
 
-<script src="https://statics.teams.microsoft.com/sdk/v1.4.2/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+<script
+  src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
+  integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
+  crossorigin="anonymous"
+></script>
 
 <script>
-    microsoftTeams.initialize();
-    microsoftTeams.executeDeepLink("@Model.linkUrl")
+    microsoftTeams.app.initialize();
+    microsoftTeams.app.openLink("@Model.linkUrl")
 </script>
 
 <p>

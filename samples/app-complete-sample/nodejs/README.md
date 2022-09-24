@@ -1,5 +1,6 @@
 ---
 page_type: sample
+description: Sample that shows how to use dialog bot with bot sdk v4, messaging extension and facebook auth flow in Nodejs.
 products:
 - office-teams
 - office-365
@@ -11,6 +12,7 @@ extensions:
   technologies:
   - Tabs
   createdDate: 5/8/2017 9:41:53 AM
+urlFragment: officedev-microsoft-teams-samples-app-complete-sample-nodejs
 ---
 
 # Microsoft Teams Bot in Node.js

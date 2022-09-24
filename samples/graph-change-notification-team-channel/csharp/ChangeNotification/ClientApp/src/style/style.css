@@ -1,0 +1,30 @@
+.container {
+    padding: 1rem;
+}
+
+.tag-container {
+    margin: 0.5rem;
+    border-radius: 8px;
+    padding: 0.9rem;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+
+.text-fields-label {
+    width: 130px;
+}
+
+.headcolor{
+    color: #5b5fc7; 
+}
+
+.statusColor{
+    color: #5b5fc7; 
+}
+
+.dateColor{
+    color:dodgerblue;
+}
+
+.deleteStatus{
+    color:rgb(161, 45, 68)
+}

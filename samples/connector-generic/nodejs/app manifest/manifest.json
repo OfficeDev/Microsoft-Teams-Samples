@@ -20,8 +20,8 @@
 		"short": "Sample to show how connector works inside teams"
 	},
 	"icons": {
-		"outline": "outline_icon.png",
-		"color": "color_icon.png"
+		"outline": "outline.png",
+		"color": "color.png"
 	},
 	"connectors": [
 		{

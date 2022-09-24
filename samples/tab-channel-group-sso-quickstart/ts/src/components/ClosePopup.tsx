@@ -12,18 +12,18 @@ class ClosePopup extends React.Component {
 
     componentDidMount(){
 
-      microsoftTeams.initialize();
+      microsoftTeams.app.initialize().then(() => {
+        //The Azure implicit grant flow injects the result into the window.location.hash object. Parse it to find the results.
+        let hashParams = this.getHashParameters();
 
-      //The Azure implicit grant flow injects the result into the window.location.hash object. Parse it to find the results.
-      let hashParams = this.getHashParameters();
-
-      //If consent has been successfully granted, the Graph access token should be present as a field in the dictionary.
-      if (hashParams["access_token"]){
-        //Notifify the showConsentDialogue function in Tab.js that authorization succeeded. The success callback should fire. 
-        microsoftTeams.authentication.notifySuccess(hashParams["access_token"]);
-      } else {
-        microsoftTeams.authentication.notifyFailure("Consent failed");
-      }
+        //If consent has been successfully granted, the Graph access token should be present as a field in the dictionary.
+        if (hashParams["access_token"]){
+          //Notifify the showConsentDialogue function in Tab.js that authorization succeeded. The success callback should fire. 
+          microsoftTeams.authentication.notifySuccess(hashParams["access_token"]);
+        } else {
+          microsoftTeams.authentication.notifyFailure("Consent failed");
+        }
+      });
     }
 
     //Helper function that converts window.location.hash into a dictionary

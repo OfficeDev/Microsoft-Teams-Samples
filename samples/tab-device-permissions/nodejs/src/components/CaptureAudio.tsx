@@ -14,7 +14,7 @@ const CaptureAudio = () => {
 
   useEffect(() => {
     // initializing microsoft teams sdk
-    microsoftTeams.initialize()
+    microsoftTeams.app.initialize()
   })
 
   // Method to capture media

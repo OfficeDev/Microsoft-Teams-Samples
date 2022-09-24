@@ -8,8 +8,9 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:26"
+ contentType: samples
+ createdDate: "07-07-2021 13:38:26"
+urlFragment: officedev-microsoft-teams-samples-graph-chat-lifecycle-nodejs
 ---
 
 # ChatLifecycle Application
@@ -109,13 +110,14 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
     * TeamsTab.Create
     * TeamsTab.ReadWriteForChat
     * TeamsTab.ReadWrite.All
+    * User.Read.All
 -   Click on Add permissions.
 13. Navigate to **Authentication**
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
     Set a redirect URI:
     * Select **Add a platform**.
     * Select **web**.
-    * Enter the **redirect URI** for the app in the following format: https://%ngrokDomain%.ngrok.io/End. This will be the page where a successful implicit grant flow will redirect the user.
+    * Enter the **redirect URI** for the app in the following format: https://%ngrokDomain%.ngrok.io/auth/auth-end. This will be the page where a successful implicit grant flow will redirect the user.
     
     Enable implicit grant by checking the following boxes:  
     ✔ ID Token  

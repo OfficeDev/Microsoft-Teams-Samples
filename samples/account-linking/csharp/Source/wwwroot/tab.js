@@ -1,6 +1,6 @@
 // The following are wrappers around Microsoft Teams libraries to make them play nicer
 const teamsPromise = Promise.race([
-  new Promise(resolve => microsoftTeams.initialize(() => resolve())),
+  new Promise(resolve => microsoftTeams.app.initialize().then(() => resolve())),
   new Promise((resolve, reject) => setTimeout(() => reject('Failed to initialize connection with Microsoft Teams'), 250))]);
 
 async function openAuthPopup(redirectUri) {
@@ -9,23 +9,21 @@ async function openAuthPopup(redirectUri) {
   // https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-oauth-provider
   url.searchParams.set('oauthRedirectMethod', '{oauthRedirectMethod}');
   url.searchParams.set('authId', '{authId}');
-  return await new Promise((resolve, reject) => microsoftTeams.authentication.authenticate({
-    url: url.toString(),
-    isExternal: true,
-    height: 500,
-    width: 400,
-    successCallback: resolve, 
-    failureCallback: reject
-  }));
+    return await new Promise((resolve, reject) => microsoftTeams.authentication.authenticate({
+        url: url.toString(),
+        isExternal: true,
+        height: 500,
+        width: 400
+    }).then((result) => resolve(result))
+        .catch((error) => reject(error)));
 }
 
 async function getAccessToken() {
   await teamsPromise;
   const accessToken = await new Promise((resolve, reject) => {
-    microsoftTeams.authentication.getAuthToken({
-      failureCallback: reject,
-      successCallback: resolve,
-    });
+      microsoftTeams.authentication.getAuthToken()
+          .then((result) => resolve(result))
+          .catch((error) => reject(error));
   });
   return accessToken;
 }

@@ -28,32 +28,41 @@
         <title>Silent Authentication Sample Login</title>
     </head>
     <body>
-        <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js" integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT" crossorigin="anonymous"></script>
-        <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js" integrity="sha384-BIOS/65fbAsb2XiCCSTlZSTTl0ZgqkOU522dpyk5meOnN2EOQ3uH+QpqEtoAtmBn" crossorigin="anonymous"></script>
+        <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
 
         <script type="text/javascript">
-            microsoftTeams.initialize();
+            microsoftTeams.app.initialize();
 
-            // ADAL.js configuration
-            let config = {
-                clientId: "{{appId}}",
-                redirectUri: window.location.origin + "/tab/silent-end",       // This should be in the list of redirect uris for the AAD app
-                cacheLocation: "localStorage",
-                navigateToLoginRequestUrl: false,
-            };
-            let authContext = new AuthenticationContext(config);
-
-            if (authContext.isCallback(window.location.hash)) {
-                authContext.handleWindowCallback(window.location.hash);
-                // Only call notifySuccess or notifyFailure if this page is in the authentication popup (not iframed)
-                if (window.parent === window) {
-                    if (authContext.getCachedUser()) {
-                        microsoftTeams.authentication.notifySuccess();
-                    } else {
-                        microsoftTeams.authentication.notifyFailure(authContext.getLoginError());
-                    }
+            // MSAL.js configuration
+            let msalConfig = {
+                auth: {
+                    clientId: '{{appId}}',
+                    redirectUri: window.location.origin + "/tab/silent-end",     // This should be in the list of redirect uris for the AAD app
+                    navigateToLoginRequestUrl: false,
+                },
+                cache: {
+                    cacheLocation: "localStorage",
                 }
-            }
+            };
+
+            const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+            msalInstance.handleRedirectPromise(window.location.hash).then((tokenResponse) => {
+                const currentAccounts = msalInstance.getAllAccounts();
+                if (!currentAccounts || currentAccounts.length === 0) {
+                    microsoftTeams.authentication.notifyFailure("Unable to login");
+                    return;
+                } else
+                {
+                    microsoftTeams.authentication.notifySuccess();
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                microsoftTeams.authentication.notifyFailure(error);
+                return;
+            });
         </script>
     </body>
 </html>

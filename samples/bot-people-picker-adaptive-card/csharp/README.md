@@ -6,10 +6,11 @@ products:
 - office
 - office-365
 languages:
-- C#
+- csharp
 extensions:
-contentType: samples
-createdDate: "25-01-2022 23:30:17"
+ contentType: samples
+ createdDate: "25-01-2022 23:30:17"
+urlFragment: officedev-microsoft-teams-samples-bot-people-picker-adaptive-card-csharp
 ---
 # People picker control in Adaptive Cards
 

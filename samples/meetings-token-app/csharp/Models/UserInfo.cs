@@ -27,7 +27,7 @@ namespace TokenApp.Models
         /// <summary>
         /// Gets or sets the user role.
         /// </summary>
-        public UserRole Role { get; set; }
+        public MeetingDetails Role { get; set; }
 
         /// <summary>
         /// Gets the deep copy of User Info.
@@ -43,5 +43,16 @@ namespace TokenApp.Models
                 Role = this.Role,
             };
         }
+    }
+
+    /// <summary>
+    /// Stores the user role in meeting.
+    /// </summary>
+    public class MeetingDetails
+    {
+        /// <summary>
+        /// Gets or sets meeting role of user.
+        /// </summary>
+        public string MeetingRole { get; set; }
     }
 }

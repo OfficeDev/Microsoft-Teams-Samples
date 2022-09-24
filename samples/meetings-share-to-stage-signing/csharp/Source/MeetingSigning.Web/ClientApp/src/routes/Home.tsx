@@ -22,7 +22,7 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, [context]);
 
-  switch (context?.frameContext) {
+  switch (context?.page.frameContext) {
     case FrameContexts.meetingStage:
       return <StageWithNoDocument />;
     case FrameContexts.sidePanel:

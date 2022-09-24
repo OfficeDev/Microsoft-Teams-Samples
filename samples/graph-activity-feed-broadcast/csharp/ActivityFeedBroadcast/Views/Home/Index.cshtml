@@ -3,7 +3,7 @@
 <html lang="en">
    <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js" integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv" crossorigin="anonymous"></script>
+        <script src="https://res.cdn.office.net/teams-js/2.1.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline' http://localhost:3978; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
@@ -24,28 +24,27 @@
              $('#task-submitted').hide();
          }); 
 
-          microsoftTeams.initialize();
+          microsoftTeams.app.initialize();
             var token = localStorage.getItem("accessToken");
             var userId = "";
             var userName = "";
          
-            microsoftTeams.getContext(function (context) {
-                userId = context.userObjectId;
-                userName = context.upn;
+            microsoftTeams.app.getContext().then((context) => {
+                userId = context.user.id;
+                userName = context.user.userPrincipalName;
 
-                if(context.subEntityId!="" && context.subEntityId!= undefined)
+                if(context.page.subPageId !="" && context.page.subPageId != undefined)
                 {
                     let taskInfo = {
                         title: "Message details",
-                        height: 400,
-                        width: 400,
-                        url: window.location.origin + "/MessageDetails?taskId=" + context.subEntityId,
-                        card: null,
-                        fallbackUrl:null,
-                        completionBotId: null,
-                        };
+                        size: {
+                            height: 400,
+                            width: 400,
+                        },
+                        url: window.location.origin + "/MessageDetails?taskId=" + context.page.subPageId,
+                    };
 
-                    microsoftTeams.tasks.startTask(taskInfo);
+                    microsoftTeams.dialog.open(taskInfo);
                 };
             });       
 
@@ -78,7 +77,7 @@
                  description: $('#description').val(),
                  userId: userId,
                  userName: userName,
-                 access_token: token,
+                 access_token: localStorage.getItem("accessToken"),
              };
 
              $.ajax({

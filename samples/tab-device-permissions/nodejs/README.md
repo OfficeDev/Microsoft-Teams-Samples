@@ -8,8 +8,9 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "27-07-2021 16:32:33"
+ contentType: samples
+ createdDate: "27-07-2021 16:32:33"
+urlFragment: officedev-microsoft-teams-samples-tab-device-permissions-nodejs
 ---
 
 # Tab Device Permission Demo
@@ -20,7 +21,11 @@ It also shows Device permissions for the browser. Please refer [Device permissio
 
 **Mobile View**
 
-![Mobile Demo](Images/mainTab1.png)
+![Mobile Demo 1](Images/mainTab1.png)
+
+![Mobile Demo 2](Images/mainTab2.png)
+
+![Mobile Demo 3](Images/mainTab3.png)
 
 **Desktop View**
 ![Desktop View](Images/desktopHome.png)

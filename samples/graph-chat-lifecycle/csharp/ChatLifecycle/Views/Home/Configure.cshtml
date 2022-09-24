@@ -1,10 +1,9 @@
 ﻿@using ChatLifecycle.Helper;
+@{
     ViewData["Title"] = "Configure";
-
-import * as AdaptiveCards from "adaptivecards";
-
+}
 <head>
-    <script src='https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js'></script>
+    <script src='https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js'></script>
 </head>
 <body>
     <h1>Tab SSO Authentication</h1>
@@ -14,18 +13,18 @@ import * as AdaptiveCards from "adaptivecards";
     <div id="divGraphProfile" style="display: none"></div>
 
     <script>
-        microsoftTeams.initialize();
-
-        microsoftTeams.settings.registerOnSaveHandler((saveEvent) => {
-            microsoftTeams.settings.setSettings({
-                websiteUrl: window.location.origin ,
-                contentUrl: window.location.origin + "/Home/Index",
-                entityId: "Configure",
-                suggestedDisplayName: "Configure"
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.pages.config.registerOnSaveHandler((saveEvent) => {
+                microsoftTeams.pages.config.setConfig({
+                    websiteUrl: window.location.origin ,
+                    contentUrl: window.location.origin + "/Home/Index",
+                    entityId: "Configure",
+                    suggestedDisplayName: "Configure"
+                });
+                saveEvent.notifySuccess();
             });
-            saveEvent.notifySuccess();
-        });
 
-        microsoftTeams.settings.setValidityState(true);
+            microsoftTeams.pages.config.setValidityState(true);
+        });
     </script>
 </body>

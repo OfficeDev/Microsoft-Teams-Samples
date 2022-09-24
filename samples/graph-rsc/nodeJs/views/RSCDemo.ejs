@@ -8,7 +8,7 @@
     <title>RSC Demo</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js" integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT" crossorigin="anonymous"></script>
+<script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"></script>
 
 <style>
     #mainDeiv{
@@ -33,15 +33,16 @@
       var token=  <%-token%>;
 
     $(document).ready(function (){           
-        microsoftTeams.initialize();
-        microsoftTeams.getContext(function(context) { 
-           var tenantId=context.tid;
-           var teamId=context.groupId;
-            console.log("TenantId "+ tenantId);
-            console.log("TeamId "+ teamId);        
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then((context) => {
+                var tenantId = context.user.tenant.id;
+                var teamId = context.team.groupId;
+                    console.log("TenantId "+ tenantId);
+                    console.log("TeamId "+ teamId);        
 
-        getChannelsList(token,teamId);
-        getPermissionsList(token,teamId);
+                getChannelsList(token,teamId);
+                getPermissionsList(token,teamId);
+            });
         });
     });
 

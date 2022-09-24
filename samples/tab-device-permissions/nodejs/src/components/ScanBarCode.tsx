@@ -12,7 +12,7 @@ import { Card, Flex, Text, Button, CardHeader, CardBody } from '@fluentui/react-
 const ScanBarCode = () => {
   const [barCodeValue, setBarCodeValue] = useState('');
   useEffect(() => {
-    microsoftTeams.initialize()
+    microsoftTeams.app.initialize()
   })
 
   // Method to scan barcode

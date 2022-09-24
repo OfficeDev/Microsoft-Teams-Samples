@@ -1,5 +1,4 @@
 import * as microsoftTeams from '@microsoft/teams-js';
-import { Context } from '@microsoft/teams-js';
 import React, { useEffect, useMemo, useState } from 'react';
 import {
   teamsV2Theme,
@@ -8,13 +7,11 @@ import {
   Provider as FluentUiProvider,
   ThemeInput,
 } from '@fluentui/react-northstar';
-import { Story } from '@storybook/react';
 
 export interface TeamsProviderContext {
-  context: Context;
+  context: microsoftTeams.app.Context;
   microsoftTeams: typeof microsoftTeams;
-  initializePromise: Promise<void>;
-  setContext: (ctx: Context) => void;
+  initializePromise: Promise<unknown>;
 }
 
 // promise that doesn't resolve.
@@ -25,16 +22,25 @@ export const TeamsContext = React.createContext<TeamsProviderContext>({
   microsoftTeams,
   initializePromise: never,
   context: {
-    entityId: '',
-    locale: '',
+    app: {
+      theme: 'default',
+      locale: '',
+      sessionId: '',
+      host: {
+        name: microsoftTeams.HostName.teams,
+        clientType: microsoftTeams.HostClientType.desktop,
+        sessionId: '',
+      },
+    },
+    page: {
+      id: '',
+      frameContext: microsoftTeams.FrameContexts.content,
+    },
   },
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setContext: () => {},
 });
 
 export interface TeamsProviderProps {
   microsoftTeams: typeof microsoftTeams;
-  initialContext?: Partial<Context>;
   children?: JSX.Element | JSX.Element[];
 }
 
@@ -51,55 +57,61 @@ export function getTheme(theme?: string): ThemeInput {
 
 export function TeamsProvider({
   microsoftTeams,
-  initialContext,
   children,
 }: TeamsProviderProps): JSX.Element {
-  const contextInit: Context = {
-    entityId: '',
-    locale: 'en',
-    ...initialContext,
-  };
-  const [context, setContext] = useState<Context>(contextInit);
+  const [context, setContext] = useState<microsoftTeams.app.Context>({
+    app: {
+      theme: 'default',
+      locale: '',
+      sessionId: '',
+      host: {
+        name: microsoftTeams.HostName.teams,
+        clientType: microsoftTeams.HostClientType.desktop,
+        sessionId: '',
+      },
+    },
+    page: {
+      id: '',
+      // This is a bad default as it's a possible frameContext value, but in this app we do not use it
+      frameContext: microsoftTeams.FrameContexts.remove,
+    },
+  });
   const initializePromise = useMemo(
-    () => new Promise<void>((resolve) => microsoftTeams.initialize(resolve)),
+    () =>
+      Promise.race([
+        microsoftTeams.app.initialize(),
+        new Promise((_, reject) =>
+          setTimeout(
+            () =>
+              reject('Failed to initialize connection with Microsoft Teams'),
+            1000,
+          ),
+        ),
+      ]),
     [microsoftTeams],
   );
 
   useEffect(() => {
-    async function registerHandlers() {
-      await initializePromise;
-      microsoftTeams.getContext(setContext);
-      microsoftTeams.registerOnThemeChangeHandler((nextTheme) => {
+    initializePromise.then(() => {
+      microsoftTeams.app.getContext().then((context) => {
+        setContext(context);
+      });
+      microsoftTeams.app.registerOnThemeChangeHandler((nextTheme) => {
         setContext((current) => ({
           ...current,
           theme: nextTheme,
         }));
       });
-    }
-    registerHandlers();
-  }, [initializePromise, microsoftTeams, setContext]);
+    });
+  }, [microsoftTeams, setContext, initializePromise]);
 
-  const theme = getTheme(context.theme);
+  const theme = getTheme(context.app.theme);
 
   return (
     <TeamsContext.Provider
-      value={{ microsoftTeams, context, setContext, initializePromise }}
+      value={{ microsoftTeams, context, initializePromise }}
     >
       <FluentUiProvider theme={theme}>{children}</FluentUiProvider>
     </TeamsContext.Provider>
   );
 }
-
-export type TeamsThemeProviderProps = {
-  story: Story;
-};
-
-export const withTeamsThemeProvider = (
-  props: TeamsThemeProviderProps,
-): React.ReactElement => {
-  return (
-    <TeamsProvider microsoftTeams={microsoftTeams}>
-      {<props.story />}
-    </TeamsProvider>
-  );
-};

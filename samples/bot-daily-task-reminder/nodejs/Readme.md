@@ -8,8 +8,9 @@ products:
 languages:
 - nodejs
 extensions:
-contentType: samples
-createdDate: "24-11-2021 13:20:00"
+ contentType: samples
+ createdDate: "24-11-2021 13:20:00"
+urlFragment: officedev-microsoft-teams-samples-bot-daily-task-reminder-nodejs
 ---
 
 # Bot task reminder

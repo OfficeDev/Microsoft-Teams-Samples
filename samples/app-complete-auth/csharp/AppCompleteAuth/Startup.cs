@@ -98,9 +98,6 @@ namespace AppCompleteAuth
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
             services.AddTransient<IBot, AuthBot<MainDialog>>();
-
-            // Register the Token Exchange Helper, for processing TokenExchangeOperation Invoke Activities 
-            services.AddSingleton<TokenExchangeHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
