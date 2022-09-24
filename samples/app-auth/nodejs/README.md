@@ -13,6 +13,7 @@ urlFragment: microsoft-teams-auth
 extensions:
     contentType: samples
     createdDate: '2/8/2018 5:06:47 PM'
+urlFragment: officedev-microsoft-teams-samples-app-auth-nodejs
 ---
 
 # Microsoft Teams Authentication Sample
@@ -79,8 +80,8 @@ Registering a bot with the Microsoft Bot Framework automatically creates a corre
 1. Navigate to **Authentication** under **Manage** and add the following redirect URLs:
 
     - `https://<your_ngrok_url>/tab/simple-end`
-    - `https://<your_ngrok_url>/tab/silent-end`
     - `https://token.botframework.com/.auth/web/redirect`
+    - Add this URL as *Single-page application* `https://<your_ngrok_url>/tab/silent-end`
 
 1. Additionally, under the **Implicit grant** subsection select **Access tokens** and **ID tokens**
 

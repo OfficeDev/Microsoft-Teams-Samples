@@ -8,8 +8,9 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "20-03-2021 13:38:27"
+ contentType: samples
+ createdDate: "20-03-2021 13:38:27"
+urlFragment: officedev-microsoft-teams-samples-tab-channel-group-config-page-auth-csharp
 ---
 
 # Config Tab Authentication
@@ -92,9 +93,11 @@ Azure AD, like most identity providers, does not allow its content to be placed 
 
 4) Set Redirect URIs. Navigate to Authentication from left pane.
     - Click on Add Platform select *Web*.
-    - Add uri as https://<<BASE-URI>>/SilentAuthEnd it will look like https://contoso.ngrok.io/SilentAuthEnd
+    - Add URI as https://<<BASE-URI>>/SilentAuthEnd it will look like https://contoso.ngrok.io/SilentAuthEnd
     - Make sure to check *Access tokens* and *ID tokens* checkbox
-    - Add two more URIs as https://<<BASE-URI>>/SimpleAuthEnd and https://<<BASE-URI>>/AuthEnd
+    - Add one more URI as https://<<BASE-URI>>/SimpleAuthEnd
+    - Again, Click on Add Platform and this time select *Single-page application*
+    - Enter URI as https://<<BASE-URI>>/AuthEnd
 
 ![Authentication Azure AD](ConfigTabAuthentication/Images/authentication_azure_ad.png)
 

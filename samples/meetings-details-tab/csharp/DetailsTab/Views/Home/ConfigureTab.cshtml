@@ -1,16 +1,18 @@
 ﻿<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 
 <script type="text/javascript">
-    microsoftTeams.initialize();
-    microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
-        microsoftTeams.settings.setSettings({
-            entityId: 'DetailsTabDemo',
-            contentUrl: window.location.origin + "/Index",
-            configName: 'DetailsTabDemo'
+    microsoftTeams.app.initialize().then(() => {
+        microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+            microsoftTeams.pages.config.setConfig({
+                entityId: 'DetailsTabDemo',
+                contentUrl: window.location.origin + "/Index",
+                configName: 'DetailsTabDemo'
+            });
+            saveEvent.notifySuccess();
         });
-        saveEvent.notifySuccess();
+        microsoftTeams.pages.config.setValidityState(true);
     });
-    microsoftTeams.settings.setValidityState(true);
+    
 </script>
 <div class="col-md-8">
     <section id="configSection">

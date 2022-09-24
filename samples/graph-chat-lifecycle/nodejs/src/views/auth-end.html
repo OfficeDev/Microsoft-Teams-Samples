@@ -6,13 +6,10 @@
 
 <body>
 
-    <script src="https://unpkg.com/@microsoft/teams-js@1.5.0/dist/MicrosoftTeams.min.js" ,
-        crossorigin="anonymous"></script>
-    <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.15/js/adal.min.js" ,
-        integrity="sha384-lIk8T3uMxKqXQVVfFbiw0K/Nq+kt1P3NtGt/pNexiDby2rKU6xnDY8p16gIwKqgI" ,
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" ,
         crossorigin="anonymous"></script>
     <script>
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
 
         localStorage.removeItem("auth.error");
         let hashParams = getHashParameters();

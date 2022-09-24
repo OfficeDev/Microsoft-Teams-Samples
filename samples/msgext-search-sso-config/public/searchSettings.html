@@ -11,7 +11,7 @@
         <input type="button" onclick="onSubmit()" value="Save"> <br />
     </form>
 
-    <script src='https://statics.teams.cdn.office.net/sdk/v1.5.2/js/MicrosoftTeams.min.js'></script>
+    <script src='https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js'></script>
 
     <script type="text/javascript">
 
@@ -33,7 +33,7 @@
         
     <script type="text/javascript">
         
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
 
         function onSubmit() {
             var newSettings = [];

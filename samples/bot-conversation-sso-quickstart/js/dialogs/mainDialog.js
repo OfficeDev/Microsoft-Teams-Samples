@@ -1,23 +1,22 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const { ConfirmPrompt, DialogSet, DialogTurnStatus, WaterfallDialog } = require('botbuilder-dialogs');
+const { ConfirmPrompt, DialogSet, DialogTurnStatus, OAuthPrompt, WaterfallDialog } = require('botbuilder-dialogs');
 const { LogoutDialog } = require('./logoutDialog');
 
 const CONFIRM_PROMPT = 'ConfirmPrompt';
 const MAIN_DIALOG = 'MainDialog';
 const MAIN_WATERFALL_DIALOG = 'MainWaterfallDialog';
 const OAUTH_PROMPT = 'OAuthPrompt';
-const { SsoOAuthPrompt } = require('./ssoOAuthPrompt');
 const { SimpleGraphClient } = require('../simpleGraphClient');
 const { polyfills } = require('isomorphic-fetch');
-const { CardFactory, MessageFactory } = require('botbuilder-core');
+const { CardFactory } = require('botbuilder-core');
 
 class MainDialog extends LogoutDialog {
     constructor() {
         super(MAIN_DIALOG, process.env.connectionName);
 
-        this.addDialog(new SsoOAuthPrompt(OAUTH_PROMPT, {
+        this.addDialog(new OAuthPrompt(OAUTH_PROMPT, {
             connectionName: process.env.connectionName,
             text: 'Please Sign In',
             title: 'Sign In',

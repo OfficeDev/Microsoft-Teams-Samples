@@ -1,5 +1,6 @@
 ---
 page_type: sample
+description: Sample Office 365 Connector generating notifications to teams channel.
 products:
 - office-teams
 - office-365
@@ -10,6 +11,7 @@ extensions:
   technologies:
   - Connectors
   createdDate: 1/16/2018 10:21:42 PM
+urlFragment: officedev-microsoft-teams-samples-connector-todo-notification-csharp
 ---
 
 # Microsoft Teams Sample Connector

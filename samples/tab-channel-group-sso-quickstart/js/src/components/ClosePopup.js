@@ -12,7 +12,7 @@ class ClosePopup extends React.Component {
 
     componentDidMount(){
 
-      microsoftTeams.initialize();
+      microsoftTeams.app.initialize();
 
       //The Azure implicit grant flow injects the result into the window.location.hash object. Parse it to find the results.
       let hashParams = this.getHashParameters();

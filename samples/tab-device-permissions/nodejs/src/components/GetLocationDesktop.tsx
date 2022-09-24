@@ -15,7 +15,7 @@ const GetLocationDesktop = () => {
 
     useEffect(() => {
         // initializing microsoft teams sdk
-        microsoftTeams.initialize()
+        microsoftTeams.app.initialize()
     })
 
     // Method to validate before capturing media

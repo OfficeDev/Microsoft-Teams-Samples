@@ -19,7 +19,7 @@
   "homepage": "https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-nodejs",
   "dependencies": {
     "@microsoft/microsoft-graph-client": "^2.2.1",
-    "@microsoft/teams-js": "^1.10.0",
+    "@microsoft/teams-js": "^2.0.0",
     "adaptivecards-templating": "^2.1.0",
     "body-parser": "^1.19.0",
     "botbuilder": "^4.13.4",

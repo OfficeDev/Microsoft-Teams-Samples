@@ -1,13 +1,13 @@
 import { Alert, Button, Flex, Header } from '@fluentui/react-northstar';
-import * as microsoftTeams from '@microsoft/teams-js';
 import { TaskInfo } from '@microsoft/teams-js';
+import * as microsoftTeams from '@microsoft/teams-js';
 import * as ACData from 'adaptivecards-templating';
 import { CreateDocumentCard } from 'adaptive-cards';
-import documentApi from 'api/documentApi';
+import { createDocument } from 'api/documentApi';
 import { useTeamsContext } from 'utils/TeamsProvider/hooks';
-import { useApi } from 'hooks';
-import { DocumentInput, DocumentType, User } from 'models';
+import { Document, DocumentInput, DocumentType, User } from 'models';
 import styles from './TabContent.module.css';
+import { useMutation } from 'react-query';
 
 type Choice = {
   name: string;
@@ -22,7 +22,10 @@ type Choice = {
  */
 export function TabContent() {
   const context = useTeamsContext();
-  const createDocumentApi = useApi(documentApi.createDocument);
+
+  const createDocumentMutation = useMutation<Document, Error, DocumentInput>(
+    (documentInput: DocumentInput) => createDocument(documentInput),
+  );
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const createTaskInfo = (card: any): TaskInfo => {
@@ -77,11 +80,12 @@ export function TabContent() {
             signers: signers,
           };
 
-          await createDocumentApi.request(documentInput);
+          createDocumentMutation.mutate(documentInput);
         });
       }
     };
 
+    // tasks.startTasks is deprecated, but the 2.0 of SDK's dialog.open does not support opening adaptive cards yet.
     microsoftTeams.tasks.startTask(
       createTaskInfo(documentsCard),
       createDocumentsSubmitHandler,
@@ -89,12 +93,12 @@ export function TabContent() {
   };
 
   return (
-    <Flex column={true} className={styles.tabContent}>
+    <Flex column className={styles.tabContent}>
       <Header
         as="h2"
         content="Meeting Signing, sharing to stage programmatically"
         description={{
-          content: `FrameContext: ${context?.frameContext}`,
+          content: `FrameContext: ${context?.page.frameContext}`,
         }}
       />
       <Button
@@ -102,15 +106,15 @@ export function TabContent() {
         onClick={() => createDocumentsTaskModule()}
         primary
       />
-      {createDocumentApi.error && (
+      {createDocumentMutation.isError && (
         <Alert
           header="Error"
-          content={createDocumentApi.error}
+          content={createDocumentMutation.error.message}
           danger
           visible
         />
       )}
-      {createDocumentApi.data && (
+      {createDocumentMutation.data && (
         <Alert header="Success" content="Document Created" success visible />
       )}
     </Flex>

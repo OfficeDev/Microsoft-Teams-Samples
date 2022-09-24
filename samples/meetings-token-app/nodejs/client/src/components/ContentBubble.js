@@ -1,5 +1,8 @@
+import React from "react";
+
 function ContentBubble(props) {
-    const query = new URLSearchParams(decodeURIComponent(props.location.search))
+    const query = new URLSearchParams(decodeURIComponent(window.location.search));
+
     return (
         <div>
             <div style={{color: 'white', flexFlow: 'column', textAlign: 'center'}}>Current Token</div>

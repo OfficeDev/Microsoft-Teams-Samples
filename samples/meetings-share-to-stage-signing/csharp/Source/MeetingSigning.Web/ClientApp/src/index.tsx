@@ -1,17 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import * as microsoftTeams from '@microsoft/teams-js';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { TeamsProvider } from 'utils/TeamsProvider/TeamsProvider';
 
+const queryClient = new QueryClient();
+
 ReactDOM.render(
   <React.StrictMode>
     <TeamsProvider microsoftTeams={microsoftTeams}>
       <BrowserRouter>
-        <App />
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
       </BrowserRouter>
     </TeamsProvider>
   </React.StrictMode>,

@@ -8,6 +8,7 @@ products:
 - office-365
 description: "Two samples to highlight solutions to two challenges with building proactive messaging apps in Microsoft Teams"
 urlFragment: "msteams-samples-proactive-messaging"
+urlFragment: officedev-microsoft-teams-samples-bot-proactive-messaging-csharp
 ---
 
 # Teams Proactive Messaging Samples

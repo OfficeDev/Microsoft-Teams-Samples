@@ -7,6 +7,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
@@ -94,12 +95,11 @@ namespace Microsoft.BotBuilderSamples
 
             try
             {
-                tokenExchangeResponse = await (turnContext.Adapter as IExtendedUserTokenProvider).ExchangeTokenAsync(
-                    turnContext,
-                    _oAuthConnectionName,
-                    turnContext.Activity.From.Id,
+                var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
+                tokenExchangeResponse = await userTokenClient.ExchangeTokenAsync(turnContext.Activity.From.Id,
+                    _oAuthConnectionName, turnContext.Activity.ChannelId,
                     new TokenExchangeRequest { Token = tokenExchangeRequest.Token },
-                    cancellationToken).ConfigureAwait(false);
+                    cancellationToken);
             }
 #pragma warning disable CA1031 // Do not catch general exception types (ignoring, see comment below)
             catch(Exception ex)
@@ -107,6 +107,7 @@ namespace Microsoft.BotBuilderSamples
             {
                 // Ignore Exceptions
                 // If token exchange failed for any reason, tokenExchangeResponse above stays null , and hence we send back a failure invoke response to the caller.
+                Console.WriteLine("Error exchanging token.", ex);
             }
 
             if (tokenExchangeResponse == null || string.IsNullOrEmpty(tokenExchangeResponse.Token))

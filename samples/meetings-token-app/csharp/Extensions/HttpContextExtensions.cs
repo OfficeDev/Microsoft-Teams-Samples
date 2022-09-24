@@ -50,7 +50,7 @@ namespace TokenApp.Extensions
             return new Models.UserInfo
             {
                 AadObjectId = userId,
-                Role = new Models.UserRole
+                Role = new Models.MeetingDetails
                 {
                     MeetingRole = meetingRole,
                 },

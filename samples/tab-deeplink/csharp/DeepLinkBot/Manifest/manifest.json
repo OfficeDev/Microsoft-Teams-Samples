@@ -30,6 +30,14 @@
       "scopes": [
         "groupchat",
         "team"
+      ],
+      "context": [
+        "channelTab",
+        "privateChatTab",
+        "meetingSidePanel",
+        "meetingStage",
+        "meetingChatTab",
+        "meetingDetailsTab"
       ]
     }
   ],
@@ -63,5 +71,19 @@
   ],
   "validDomains": [
     "*.ngrok.io"
-  ]
+  ],
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "MeetingStage.Write.Chat",
+          "type": "Delegated"
+        },
+        {
+          "name": "ChannelMeetingStage.Write.Group",
+          "type": "Delegated"
+        }
+      ]
+    }
+  }
 }
