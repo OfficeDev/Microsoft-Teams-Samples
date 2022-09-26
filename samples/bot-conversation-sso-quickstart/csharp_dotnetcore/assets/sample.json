@@ -1,12 +1,12 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-bot-conversation-SSO-quickstart",
+    "name": "officedev-microsoft-teams-samples-bot-conversation-sso-quickstart-csharp_dotnetcore",
     "source": "officeDev",
-    "title": "Starter solution: Sample bot - Teams Toolkit",
-    "shortDescription": "Simple bot SSO quickstart for Teams Toolkit",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-conversation-quickstart/js",
+    "title": "Teams Conversation Bot SSO quick-start",
+    "shortDescription": "Messaging and conversation event handling hello world with SSO.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-conversation-sso-quickstart/csharp_dotnetcore",
     "longDescription": [
-      "Simple Conversation Bot for Teams Toolkit"
+      "Messaging and conversation event handling hello world with SSO."
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-04-05",
@@ -20,11 +20,11 @@
       },
       {
         "key": "TEAMS-SERVER-LANGUAGE",
-        "value": "javascript"
+        "value": "csharp"
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": "express"
+        "value": "netframework"
       },
       {
         "key": "TEAMS-FEATURES",
@@ -35,8 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-quickstart/js/Images/HelloResponse.PNG",
-        "alt": "Solution UX showing starter solution: sample bot - teams toolkit"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/csharp_dotnetcore/BotConversationSsoQuickstart/Images/BotConversationSsoQuickStart.gif",
+        "alt": "Solution UX showing teams conversation bot sso quick-start"
       }
     ],
     "authors": [
