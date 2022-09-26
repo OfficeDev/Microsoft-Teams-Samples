@@ -45,7 +45,7 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
 3. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
    - `<<MANIFEST-ID>>` with some unique GUID   
    - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
-   - `{{BOT-ID}}` with the id from step 2.
+   - `<<MICROSOFT-APP-ID>>` with the id from step 2.
    - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
 
 4. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 7.
@@ -92,9 +92,28 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
 
 ## Features of this sample
 
+![TabInStageView](TabInStageView/Images/tabStageView.gif)
+
 - Welcome message with feature explanation.
 
-![TabInStageView](TabInStageView/Images/tabStageView.png)
+![Welcome Message](TabInStageView/Images/welcomeAction.png)
+
+- Opening stage view in tab with Adaptive card action.
+
+![Card Actions](TabInStageView/Images/cardActions.png)
+
+- Opening stage view from Adaptive Card Action.
+
+![Stage View](TabInStageView/Images/viaCardAction.png)
+
+- Opening stage view from Adaptive card via deep link.
+
+![Stage View Deep Link](TabInStageView/Images/viaDeeplink.png)
+
+- Tab with execute deep link action to open stage view.
+
+![Tab View](TabInStageView/Images/viaTabDeeplink.png)
+
 
 ## Deploy the bot to Azure
 

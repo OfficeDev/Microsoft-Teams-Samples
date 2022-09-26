@@ -35,8 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-stage-view/csharp/TabInStageView/Images/viaCardAction.png",
-        "alt": "Solution UX showing stage view"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/v-mfurquan/stage-view-sample-csharp/samples/tab-stage-view/csharp/TabInStageView/Images/tabStageView.gif",
+        "alt": "This sample app for demonstrating tab in stage view"
       }
     ],
     "authors": [
