@@ -1,5 +1,8 @@
+// <copyright file="decryption-helper.js" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyright>
 
-const certHelper = require('./certHelper');
+const certHelper = require('./certificate-helper');
 
 class DecryptionHelper {
     static async getDecryptedContent(notification) {
@@ -8,7 +11,6 @@ class DecryptionHelper {
             
             var payLoad = this.processEncryptedNotification(notification);
             return payLoad;
-            
         }
     }
 

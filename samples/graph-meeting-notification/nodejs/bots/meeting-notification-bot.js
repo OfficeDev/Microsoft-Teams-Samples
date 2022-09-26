@@ -1,5 +1,7 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
+// <copyright file="meeting-notification-bot.js" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyright>
+
 const { TeamsActivityHandler, CardFactory, TurnContext, TeamsInfo } = require('botbuilder');
 const { GraphHelper } = require('../helper/graph-helper');
 
@@ -20,7 +22,6 @@ class MeetingNotficationBot extends TeamsActivityHandler {
             await next();
         });
     }
-
     
     async onInstallationUpdateAdd(context) {
         var meetingInfo = await TeamsInfo.getMeetingInfo(context);

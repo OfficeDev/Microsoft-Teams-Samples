@@ -115,7 +115,7 @@ To include resource data of graph notifications, this Graph API require self-sig
      ngrok http -host-header=rewrite 3978
 
 ## Instruction for manifest
-1. Fill any GUID for <APP-ID>. You can also put your MicrosoftAppId here.
+1. Fill any GUID for in your manifest. As an alternative, you can also put your Microsoft App Id.
 2. Update <MICROSOFT-APP-ID> placeholder with your Microsoft App Id.
 3. ZIP the manifest and make sure manifest.json and two icon images are at root.
 4. Upload the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")

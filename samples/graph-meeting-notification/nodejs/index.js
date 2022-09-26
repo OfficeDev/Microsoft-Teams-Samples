@@ -1,14 +1,17 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
+// <copyright file="index.js" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyright>
+
 // Import required pckages
 const path = require('path');
+
 // Read botFilePath and botFileSecret from .env file.
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
 const restify = require('restify');
 const express = require('express');
+
 const { MeetingNotficationBot } = require('./bots/meeting-notification-bot');
-//const { MeetingNotficationBot } = require('./bots/meeting-notification-bot');
 const { DecryptionHelper } = require("./helper/decryption-helper");
 
 // Import required bot services.
@@ -54,8 +57,6 @@ adapter.onTurnError = async (context, error) => {
     await conversationState.delete(context);
 };
 
-
-
 // Define the state store for your bot.
 // See https://aka.ms/about-bot-state to learn more about using MemoryStorage.
 // A bot requires a state storage system to persist the dialog and user state between messages.
@@ -68,6 +69,7 @@ const conversationState = new ConversationState(memoryStorage);
 //const dialog = new MainDialog();
 // Create the main dialog.
 const conversationReferences = {};
+
 // Create the bot that will handle incoming messages.
 const bot = new MeetingNotficationBot(conversationReferences);
 
@@ -106,6 +108,7 @@ const notification = async (req, res, next) => {
             if(responsePayload['activeParticipants@delta'].length > 0 || responsePayload['activeParticipants@remove'].length > 0) {
                 for (const conversationReference of Object.values(conversationReferences)) {
                     await adapter.continueConversationAsync(process.env.MicrosoftAppId, conversationReference, async turnContext => {
+
                         if(responsePayload['activeParticipants@delta'].length > 0) {
                             var membersJoined = new Array();
                             responsePayload['activeParticipants@delta'].map((member) => {
@@ -118,6 +121,7 @@ const notification = async (req, res, next) => {
 
                             await MeetingNotficationBot.DisplayMeetingUpdate(turnContext, "Members joined",membersJoined);
                         }
+
                         if(responsePayload['activeParticipants@remove'].length > 0) {
                             var membersLeft = new Array();
                             responsePayload['activeParticipants@remove'].map((member) => {

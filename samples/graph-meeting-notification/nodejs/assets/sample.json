@@ -2,7 +2,7 @@
   {
     "name": "officedev-microsoft-teams-samples-graph-meeting-notification-nodejs",
     "source": "officeDev",
-    "title": "Online meeting subscription",
+    "title": "Online Teams Meeting Subscription",
     "shortDescription": "Online meeting subscription to post notifications when user joined/left meeting.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-meeting-notification/nodejs",
     "longDescription": [

@@ -1,6 +1,6 @@
-// Copyright (c) Microsoft Corporation.
-// Licensed under the MIT License.
-
+// <copyright file="certificate-helper-bot.js" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyright>
 
 const fs = require('fs');
 const path = require('path');
@@ -42,31 +42,31 @@ module.exports = {
     const certFullPath = path.join(__dirname, certPath);
     return new Promise((resolve, reject) => {
       if (!fs.existsSync(certFullPath)) {
-        ensureOpenSsl();
-        pem.createCertificate(
-          {
-            selfSigned: true,
-            serviceKeyPassword: password,
-            days: 365,
-          },
-          (err, result) => {
-            if (err) {
-              console.error(err);
-              reject(err.message);
-            } else {
-              fs.writeFileSync(certFullPath, result.certificate);
-              fs.writeFileSync(
-                path.join(__dirname, keyPath),
-                result.serviceKey
-              );
-              resolve(true);
-            }
+            ensureOpenSsl();
+            pem.createCertificate(
+              {
+                selfSigned: true,
+                serviceKeyPassword: password,
+                days: 365,
+              },
+              (err, result) => {
+                if (err) {
+                  console.error(err);
+                  reject(err.message);
+                } else {
+                  fs.writeFileSync(certFullPath, result.certificate);
+                  fs.writeFileSync(
+                    path.join(__dirname, keyPath),
+                    result.serviceKey
+                  );
+                  resolve(true);
+                }
+              }
+            );
+          } else {
+            resolve(true);
           }
-        );
-      } else {
-        resolve(true);
-      }
-    });
+        });
   },
   /**
    * Gets the certificate contents from the certificate file
