@@ -33,7 +33,7 @@ const adaptiveCardForTabStageView = (baseUrlForOpenUrl) => ({
         }
     ],
     type: 'AdaptiveCard',
-    version: '1.3'
+    version: '1.4'
 });
 
 module.exports = {

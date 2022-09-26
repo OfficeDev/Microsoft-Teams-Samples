@@ -52,8 +52,7 @@ class BotActivityHandler extends TeamsActivityHandler {
     }
 
     async handleTeamsMessagingExtensionQuery(context, query) {
-        // Note: The Teams manifest.json for this sample also inclues a Search Query, in order to enable installing from App Studio.
-        // const searchQuery = query.parameters[0].value;
+
         const heroCard = CardFactory.heroCard('This is a Link Unfurling Sample',
             'This sample demonstrates how to handle link unfurling in Teams.  Please review the readme for more information.');
         heroCard.content.subtitle = 'It will unfurl links from *.BotFramework.com';

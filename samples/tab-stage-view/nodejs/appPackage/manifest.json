@@ -33,9 +33,9 @@
         "channelTab"
       ],
       "name": "Stage View",
-      "contentUrl": "<<Ngrok>>/tab",
-      "websiteUrl": "<<Ngrok>>/tab",
-      "searchUrl": "<<Ngrok>>/tab"
+      "contentUrl": "<<BASE_URL>>/tab",
+      "websiteUrl": "<<BASE_URL>>/tab",
+      "searchUrl": "<<BASE_URL>>/tab"
     }
   ],
   "bots": [
@@ -51,13 +51,13 @@
   ],
   "composeExtensions": [
     {
-      "botId": "<<<<MICROSOFT-APP-ID>>>>",
+      "botId": "<<MICROSOFT-APP-ID>>",
       "messageHandlers": [
         {
           "type": "link",
           "value": {
             "domains": [
-              "<<Ngrok>>"
+              "<<DOMAIN-NAME>>"
             ]
           }
         }
@@ -85,7 +85,7 @@
   "accentColor": "#60A18E",
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "<<Ngrok>>",
+    "<<DOMAIN-NAME>>",
     "token.botframework.com"
   ]
 }

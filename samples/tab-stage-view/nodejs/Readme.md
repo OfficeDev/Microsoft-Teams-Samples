@@ -23,7 +23,7 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
 
 - Welcome message with feature explanation.
 
-![Tab Stage View](Images/tabStageView.jpg)
+![Tab Stage View](Images/tabStageView.gif)
 
 ## Prerequisites
 
