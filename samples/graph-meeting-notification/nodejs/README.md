@@ -20,15 +20,7 @@ This is a sample application which demonstrates use of online meeting subscripti
 ## Concepts introduced in this sample
 - After sucessfully installation of bot in meeting you will get a welcome card and the subscription will be created for meeting it is installed in.
 
-![Welcome Card](Images/WelcomeCard.png)
-
-- After that when the metting gets started or user joins the meeting, notifications will be sent in chat:
-
-![Meeting Started](Images/MeetingStartedCard.png)
-
-- Notifications will also be triggered when someone leaves that meeting or when meeting gets end:
-
-![Meeting Ended](Images/MeetingEndedCard.png)
+![Welcome Card](Images/MeetingNotification.gif)
 
 ## Prerequisites
 
