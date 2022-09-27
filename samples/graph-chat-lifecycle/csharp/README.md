@@ -116,13 +116,13 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 
   ![group chat created](ChatLifecycle/Images/groupchatbuttonclick.png) 
 
-3. created group chat and will be pinned to the chat.
+3. created group chat Details.
 
-   ![static search card](ChatLifecycle/Images/groupchatcreated.png) 
+   ![group chat Details](ChatLifecycle/Images/groupchatcreated.png) 
 
-4. Also, Polly app will be installed to the created group chat and will be pinned to the chat.
+4. Successfully Group chat created.
 
-   ![static search card](ChatLifecycle/Images/groupchatcreated.png)
+   ![chat life cycle](ChatLifecycle/Images/createdgroupchat.png)
 
 
 
