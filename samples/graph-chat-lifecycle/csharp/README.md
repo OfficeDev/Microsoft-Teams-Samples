@@ -106,18 +106,23 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 
 ## Interacting with the app in Teams
 
+![welcome card](ChatLifecycle/Images/Chat Life Cycle Module.gif)
+
 1. In Teams, Once the app is successfully installed, it can be opened in the tab and has option to create group chat if user is authenticated.
 
-  ![image](https://user-images.githubusercontent.com/80379013/120188120-592a5800-c233-11eb-99a8-b761ba60d862.png)
+![welcome card](ChatLifecycle/Images/welcome.png)
 
 2. Once create group chat is clicked, user will be able to add Title of the groupchat and select users from drop down to create a group chat and add members (using different scenarios) and delete member accordingly to depict the lifecycle of chat.
 
-  ![image](https://user-images.githubusercontent.com/80379013/120188158-66dfdd80-c233-11eb-90f9-224a865c910a.png)
+  ![group chat created](ChatLifecycle/Images/groupchatbuttonclick.png) 
 
-  ![image](https://user-images.githubusercontent.com/80379013/120188219-795a1700-c233-11eb-9b2e-fbfeeb3d1480.png)
+3. created group chat and will be pinned to the chat.
 
-3. Also, Polly app will be installed to the created group chat and will be pinned to the chat.
+   ![static search card](ChatLifecycle/Images/groupchatcreated.png) 
 
-  ![image](https://user-images.githubusercontent.com/80379013/120188506-d5bd3680-c233-11eb-97fc-9029385e6458.png)
+4. Also, Polly app will be installed to the created group chat and will be pinned to the chat.
+
+   ![static search card](ChatLifecycle/Images/groupchatcreated.png)
+
 
 
