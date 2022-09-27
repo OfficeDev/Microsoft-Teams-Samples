@@ -63,7 +63,7 @@ To include resource data of graph notifications, this Graph API require self-sig
     - The key must be of type `RSA`
     - The key size must be between 2048 and 4096 bits
 
-3. Follow this documentation for the steps - [**Create and install Self-Signed certificate**](Certificate Documentation/README.md)
+3. Follow this documentation for the steps - [**Create and install Self-Signed certificate**](CertificateDocumentation/README.md)
 
 
 ### Setup code.
@@ -85,8 +85,8 @@ To include resource data of graph notifications, this Graph API require self-sig
 ### Instruction for .env
 1. Provide MicrosoftAppId, MicrosoftAppPassword and MicrosoftAppTenantId in the .env that is created in Azure.
 2. Provide the ngrok url as  "BaseUrl" in appsetting on which application is running on.
-3. You should be having Base64EncodedCertificate and CertificateThumbprint value from *Create and install Self-Signed certificate* step.
-4. Use Certificate "PEM" format and add path in this way "PRIVATE_KEY_PATH=PathName.pem" in .env file.
+3. You should be having Base64EncodedCertificate from *Create and install Self-Signed certificate* step.
+4. Use Certificate "PEM" format and add the certificate name for `PRIVATE_KEY_PATH` For eg  `PRIVATE_KEY_PATH`=PrivateKeyFileName.pem" in .env file. Also make sure the private key file is stored inside helper folder of this project.
 
  - Install node modules
 
