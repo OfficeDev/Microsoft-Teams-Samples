@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-samples-msteams-application-resou
 ---
 
 
-# Introduction 
+# Resource Hub 
 All the help you need to use Teams, all in one place. Get up and running with just the basics, dive into popular topics, master features designed for your work style or industry, get answers to frequently asked questions, and see what’s new.
 Resources HUB - One single point of view for Product information like Features, What’s new, Scenarios, Apps. Available “at hand” to help discover product potential in every moment of organization Teams journey (onboard, adopt or transform) and tailor the message to their business size/department/industry (filters available). 
 Show users Art of Possible in Teams
