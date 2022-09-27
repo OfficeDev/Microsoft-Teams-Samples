@@ -59,13 +59,19 @@ Language Used : C#
 
 
 ### Interacting with the Proactive installation App in Teams
-- Install the Proactive App Installation demo in a Team or GroupChat.
-     ![image](https://user-images.githubusercontent.com/31851992/122173819-cd096900-ce9f-11eb-93a1-8028e6b1a46e.png)
 
-- **Team Scope**: Run Check and install to pro-actively installs the App for all the users in team. After installation send 'Send message' command to send proactive message.
-     ![image](https://user-images.githubusercontent.com/31851992/122173110-0ee5df80-ce9f-11eb-8037-4257afa95406.png)
+![Proactive Installtion Module](ProactiveAppInstallation/Images/ProactiveInstallation.gif)
+
+- Install the Proactive App Installation demo in a Team or GroupChat.
+
+    ![Proactive installation](ProactiveAppInstallation/Images/addtoteams.png)
+
+- **Team Scope**: Run Check and install to pro-actively installs the App for all the users in team. 
+    ![Proactive installation](ProactiveAppInstallation/Images/CheckandInstall.png)
+
 - **Group Chat**:  Run Check and install to pro-actively installs the App for all the users in team. After installation send 'Send message' command to send proactive message.
-    ![image](https://user-images.githubusercontent.com/31851992/122173594-83208300-ce9f-11eb-9100-7e9373d2a531.png)
+
+   ![Proactive installation](ProactiveAppInstallation/Images/sendmessage.png)
 
 
 ## Further Reading
