@@ -28,11 +28,7 @@ class BotActivityHandler extends TeamsActivityHandler {
             content: {
                 title: "Description",
                 text: "Title",
-                images: [
-                    {
-                        url: process.env.BaseUrl + "logo.svg",
-                    },
-                ],
+
             },
             contentType: "application/vnd.microsoft.card.thumbnail",
         }
