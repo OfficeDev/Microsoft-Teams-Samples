@@ -106,7 +106,7 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 
 ## Interacting with the app in Teams
 
-![welcome card](ChatLifecycle/Images/Chat Life Cycle Module.gif)
+![welcome card](ChatLifecycle/Images/ChatLifeCycleModule.gif)
 
 1. In Teams, Once the app is successfully installed, it can be opened in the tab and has option to create group chat if user is authenticated.
 
