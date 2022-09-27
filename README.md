@@ -210,6 +210,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |    | App Name       | Description                                                                      | Code   |
 |:--:|:------------------|:---------------------------------------------------------------------------------------------------|:--------|
 |1|QBot          | QBot is a solution designed for classroom teaching scenarios which allows teachers, tutors, and students to intelligently answer each other's questions within the Microsoft Teams collaboration platform. |[View][msteams-app-qbot]
+|1|Resource Hub          | Resource Hub is a solution designed for all the help you need to use Teams, all in one place. |[View][msteams-app-resource-hub]
+
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
@@ -374,6 +376,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-live-caption#nodejs]:samples/meetings-live-caption/nodejs
 
 [msteams-app-qbot]:samples/msteams-application-qbot/
+[msteams-app-resource-hub]:samples/msteams-application-resourcehub/
 
 ## Submitting issues
 
