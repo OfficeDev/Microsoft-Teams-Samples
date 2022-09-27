@@ -423,7 +423,7 @@ jobs:
               name: 'meetings-events'
               version: '14.x'
 
-            - project_path: 'samples/meetings-sidepanel/nodejs'
+            - project_path: 'samples/meetings-sidepanel/nodejs/server'
               name: 'meetings-sidepanel'
               version: '14.x'
 
