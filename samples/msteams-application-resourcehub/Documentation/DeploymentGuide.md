@@ -516,8 +516,6 @@ Step 6. Create the Teams app packages
     updating.<span id="_Toc62962662" class="anchor"><span
     id="_Toc98137254" class="anchor"></span></span>
 
-9.  
-
 Step 8: Running the bot app in user’s Teams
 -------------------------------------------
 
@@ -525,3 +523,35 @@ Step 8: Running the bot app in user’s Teams
     Teams application.
 
 2.  Upon successful login, Users can see the app under the pinned sites.
+
+Step 9: Import sample data for learning content (To import sample data user need to use the app once to create the database table automatically at backend)
+-------------------------------------------
+
+1.  Download Microsoft Azure Storage Explorer. 
+[*Download*](https://azure.microsoft.com/en-us/products/storage/storage-explorer/#overview)
+
+2.  Open Azure Storage Explorer tool and loging with azure subscription as shown below,
+     ![AzureStorageExplorerLogin](AzureStorageExplorerLogin.png)
+     ![AzureStorageExplorerCred](AzureStorageExplorerCred.png)
+     
+3. Download sample data from here [Sample learning content](/samples/msteams-application-resourcehub/Data/SampleLearningData.csv)
+4. Select Azure Subscription 
+    ![AzureSubscription](AzureSubscription.png)
+5. Expand respective subscription and storage account and select "LearningEntity" table.
+    ![SelectStorageAccount](SelectStorageAccount.png)
+7. Select import option from menu shown below
+    ![ImportSampleData](ImportSampleData.png)
+    ![ImportCSVFile](ImportCSVFile.png)
+    
+ 8. Once import completed update "TitleImageLink" column for all records started with "{App base URL}" shown in below with **BaseResourceName**.
+ 9. Replace the {{App base URL}} with your Bot App Service's domain.
+    This will be \[BaseResourceName\].azurewebsites.net.
+
+ 10. Replace {App base URL} with App service base url e.g.
+    https:// \[BaseResourceName\].azurewebsites.net.
+ 11. Right click on each record and select edit option
+    ![UpdateImageUrl](UpdateImageUrl.png)  
+    ![SelectEdit](SelectEdit.png)
+    ![ReplaceUrl](ReplaceUrl.png)
+ 12. Once replaced click on Update.
+ 13. Do it for all records started with "resourcehubprod" as base URL.
