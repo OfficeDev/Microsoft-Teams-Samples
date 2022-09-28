@@ -80,24 +80,27 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
   - **Valid Scopes:** personal, group chat, team chat
 
   - **Personal Scope Interactions:**
+   **Adding bot UI:**
   ![personal-AddBot ](Images/personal-AddBot.png)
-
+   **Added bot UI:**
   ![personal-AddedBot ](Images/personal-AddedBot.png)
-
+   **Show Welcome command interaction:**
   ![personal-WelcomeCard-Interaction ](Images/personal-WelcomeCard-Interaction.png)
 
    - **Group Chat Scope Interactions:**
+   **Adding bot UI:**
   ![groupChat-AddBot ](Images/groupChat-AddBot.png)
-
+   **Added bot UI:**
   ![groupChat-AddedBot ](Images/groupChat-AddedBot.png)
-
+   **Welcome card command interaction:**
   ![groupChat-BotCommands-interactions ](Images/groupChat-BotCommands-interactions.png)
 
   - **Team Scope Interactions:**
+   **Adding bot UI:**
   ![team-AddBot ](Images/team-AddBot.png)
-
+   **Added bot UI:**
   ![team-AddedBot ](Images/team-AddedBot.png)
-
+   **Welcome card command interaction:**
   ![team-WelcomeCommand-Card ](Images/team-WelcomeCommand-Card.png)
 
 2. **MentionMe**
@@ -105,12 +108,15 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
   - **Valid Scopes:** personal, group chat, team chat
 
   - **Personal Scope Interactions:**
+   **MentionMe command interaction:**
   ![personal-MentionMeCommand ](Images/personal-MentionMeCommand.png)
 
    - **Group Chat Scope Interactions:**
+   **MentionMe command interaction:**
   ![groupChat-BotCommands-interactions ](Images/groupChat-BotCommands-interactions.png)
 
   - **Team Scope Interactions:**
+   **MentionMe command interaction:**
   ![team-MentionCommand-Interaction ](Images/team-MentionCommand-Interaction.png)
 
 3. **MessageAllMembers**
@@ -118,12 +124,15 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
   - **Valid Scopes:** personal, group chat, team chat
 
   - **Personal Scope Interactions:**
+   **MessageAllMembers command interaction:**
   ![personal-MessageAllMembersCommand ](Images/personal-MessageAllMembersCommand.png)
 
    - **Group Chat Scope Interactions:**
+   **MessageAllMembers command interaction:**
   ![groupChat-BotCommands-interactions ](Images/groupChat-BotCommands-interactions.png)
 
   - **Team Scope Interactions:**
+   **MessageAllMembers command interaction:**
   ![team-MessageAllMembers-interaction ](Images/team-MessageAllMembers-interaction.png)
 
 You can select an option from the command list by typing ```@TeamsConversationBot``` into the compose message area and ```What can I do?``` text above the compose area.
