@@ -52,6 +52,8 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
+- In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
+
 ### Create and install Self-Signed certificate
 
 To include resource data of graph notifications, this Graph API require self-signed certificate. Follow the below steps to create and manage certificate.
@@ -107,7 +109,7 @@ To include resource data of graph notifications, this Graph API require self-sig
      ngrok http -host-header=rewrite 3978
 
 ## Instruction for manifest
-1. Fill any GUID for in your manifest. As an alternative, you can also put your Microsoft App Id.
+1. Fill any GUID value in your manifest for <GUID>. As an alternative, you can put your Microsoft App Id.
 2. Update <MICROSOFT-APP-ID> placeholder with your Microsoft App Id.
 3. ZIP the manifest and make sure manifest.json and two icon images are at root.
 4. Upload the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
