@@ -534,7 +534,7 @@ Step 9: Import sample data for learning content (To import sample data user need
      ![AzureStorageExplorerLogin](AzureStorageExplorerLogin.png)
      ![AzureStorageExplorerCred](AzureStorageExplorerCred.png)
      
-3. Download sample data from here [Sample learning content](/samples/msteams-application-resourcehub/Data/SampleLearningData.csv)
+3. Download sample data from here [Sample learning content](/samples/msteams-application-resourcehub/Data)
 4. Select Azure Subscription 
     ![AzureSubscription](AzureSubscription.png)
 5. Expand respective subscription and storage account and select "LearningEntity" table.
@@ -554,4 +554,4 @@ Step 9: Import sample data for learning content (To import sample data user need
     ![SelectEdit](SelectEdit.png)
     ![ReplaceUrl](ReplaceUrl.png)
  12. Once replaced click on Update.
- 13. Do it for all records started with "resourcehubprod" as base URL.
+ 13. Do it for all records started with "{App base URL}" as base URL.
