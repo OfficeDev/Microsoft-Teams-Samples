@@ -99,7 +99,7 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
    **Added bot UI:**
   ![groupChat-AddedBot ](Images/groupChat-AddedBot.png)
 
-   **Welcome card command interaction:**
+   **Show Welcome command interaction:**
   ![groupChat-BotCommands-interactions ](Images/groupChat-BotCommands-interactions.png)
 
   - **Team Scope Interactions:**
@@ -110,7 +110,7 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
    **Added bot UI:**
   ![team-AddedBot ](Images/team-AddedBot.png)
 
-   **Welcome card command interaction:**
+   **Show Welcome command interaction:**
   ![team-WelcomeCommand-Card ](Images/team-WelcomeCommand-Card.png)
 
 2. **MentionMe**
