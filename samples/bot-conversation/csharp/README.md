@@ -78,12 +78,53 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 1. **Show Welcome**
   - **Result:** The bot will send the welcome card for you to interact with
   - **Valid Scopes:** personal, group chat, team chat
+
+  - **Personal Scope Interactions:**
+  ![personal-AddBot ](Images/personal-AddBot.png)
+
+  ![personal-AddedBot ](Images/personal-AddedBot.png)
+
+  ![personal-WelcomeCard-Interaction ](Images/personal-WelcomeCard-Interaction.png)
+
+   - **Group Chat Scope Interactions:**
+  ![groupChat-AddBot ](Images/groupChat-AddBot.png)
+
+  ![groupChat-AddedBot ](Images/groupChat-AddedBot.png)
+
+  ![groupChat-BotCommands-interactions ](Images/groupChat-BotCommands-interactions.png)
+
+  - **Team Scope Interactions:**
+  ![team-AddBot ](Images/team-AddBot.png)
+
+  ![team-AddedBot ](Images/team-AddedBot.png)
+
+  ![team-WelcomeCommand-Card ](Images/team-WelcomeCommand-Card.png)
+
 2. **MentionMe**
   - **Result:** The bot will respond to the message and mention the user
   - **Valid Scopes:** personal, group chat, team chat
+
+  - **Personal Scope Interactions:**
+  ![personal-MentionMeCommand ](Images/personal-MentionMeCommand.png)
+
+   - **Group Chat Scope Interactions:**
+  ![groupChat-BotCommands-interactions ](Images/groupChat-BotCommands-interactions.png)
+
+  - **Team Scope Interactions:**
+  ![team-MentionCommand-Interaction ](Images/team-MentionCommand-Interaction.png)
+
 3. **MessageAllMembers**
   - **Result:** The bot will send a 1-on-1 message to each member in the current conversation (aka on the conversation's roster).
   - **Valid Scopes:** personal, group chat, team chat
+
+  - **Personal Scope Interactions:**
+  ![personal-MessageAllMembersCommand ](Images/personal-MessageAllMembersCommand.png)
+
+   - **Group Chat Scope Interactions:**
+  ![groupChat-BotCommands-interactions ](Images/groupChat-BotCommands-interactions.png)
+
+  - **Team Scope Interactions:**
+  ![team-MessageAllMembers-interaction ](Images/team-MessageAllMembers-interaction.png)
 
 You can select an option from the command list by typing ```@TeamsConversationBot``` into the compose message area and ```What can I do?``` text above the compose area.
 
