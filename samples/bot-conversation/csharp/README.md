@@ -1,4 +1,4 @@
-﻿---
+---
 page_type: sample
 description: This sample app demonstrate the Conversation Bot using Bot Framework v4
 products:
