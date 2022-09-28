@@ -8,8 +8,9 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:26"
+ contentType: samples
+ createdDate: "07-07-2021 13:38:26"
+urlFragment: officedev-microsoft-teams-samples-bot-conversation-sso-quickstart-csharp_dotnetcore
 ---
 
 # Teams Conversation Bot SSO quick-start
@@ -59,17 +60,10 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     - Launch Visual Studio
     - File -> Open -> Project/Solution
     - Navigate to `samples/bot-conversation-sso-quickstart/csharp_dotnetcore` folder
-    - Select `TeamsAuth.csproj` file
+    - Select `BotConversationSsoQuickstart.sln` file and open it in Visual Studio
     - Press `F5` to run this project
 
 ### 4. Configure and run the Teams app
-- **Using App Studio**
-    - Open your app in App Studio's manifest editor.
-    - Open the *Bots* page under *Capabilities*.
-    - Choose *Setup*, then choose the existing bot option. Enter your AAD app registration ID from step 1.1. Select any of the scopes you wish to have the bot be installed.
-    - Open *Domains and permissions* from under *Finish*. Enter the same ID from the step above in *AAD App ID*, then and append it to "api://botid-" and enter the URI into *Single-Sign-On*.
-    - Open *Test and distribute*, then select *Install*.
-
 - **Manually update the manifest.json**
     - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `appsettings.json` file) *everywhere* you see the place holder string `{TODO: MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). The `ConnectionName` is the name of OAuth Connection you configured in step3.
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
@@ -92,4 +86,3 @@ You can interact with this bot by sending it a message. The bot will respond by 
 - [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
 - [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
-

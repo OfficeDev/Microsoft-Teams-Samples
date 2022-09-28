@@ -55,13 +55,6 @@ Under the root of this sample folder, build and run by commands:
 - `npm start`
 
 ### 4. Configure and run the Teams app
-- **Using App Studio**
-    - Open your app in App Studio's manifest editor.
-    - Open the *Bots* page under *Capabilities*.
-    - Choose *Setup*, then choose the existing bot option. Enter your AAD app registration ID from step 1.1. Select any of the scopes you wish to have the bot be installed.
-    - Open *Domains and permissions* from under *Finish*. Enter the same ID from the step above in *AAD App ID*, then and append it to "api://botid-" and enter the URI into *Single-Sign-On*.
-    - Open *Test and distribute*, then select *Install*.
-
 - **Manually update the manifest.json**
     - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{TODO: MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
