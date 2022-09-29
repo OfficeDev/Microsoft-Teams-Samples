@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { Form, FormInput } from '@fluentui/react-northstar';
 import { DialogDimension } from '@microsoft/teams-js';
 import * as microsoftTeams from '@microsoft/teams-js';
@@ -8,7 +7,6 @@ import { useMutation } from 'react-query';
 import { postSignDocument, SignDocumentModel } from 'api/signatureApi';
 import { Signature, User } from 'models';
 import { useUserIsAnonymous } from 'utils/TeamsProvider/hooks';
-import { TeamsContext } from 'utils/TeamsProvider/TeamsProvider';
 import './Signature.css';
 
 type SignatureInputProps = {
@@ -35,13 +33,12 @@ function SignatureInput({
   signature,
 }: SignatureInputProps) {
   const userIsAnonymous = useUserIsAnonymous();
-  const { anonymousUserAccessToken } = useContext(TeamsContext);
+
   // We are using https://react-query.tanstack.com/ for handling the calls to our APIs.
   // To post a call we set-up a mutation, which we then call further down when we want
   // to make the call to the API.
   const signDocumentMutation = useMutation<Signature, Error, SignDocumentModel>(
-    (model: SignDocumentModel) =>
-      postSignDocument(model, userIsAnonymous, anonymousUserAccessToken),
+    (model: SignDocumentModel) => postSignDocument(model, userIsAnonymous),
   );
 
   const isSignatureForLoggedInPerson: boolean =

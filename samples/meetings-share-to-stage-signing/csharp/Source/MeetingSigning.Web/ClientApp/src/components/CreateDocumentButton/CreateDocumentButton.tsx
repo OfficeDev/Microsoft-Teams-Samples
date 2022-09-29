@@ -23,7 +23,6 @@ type Choice = {
 
 export type CreateDocumentButtonProps = {
   userIsAnonymous: boolean;
-  anonymousUserAccessToken?: string;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -67,7 +66,6 @@ const createUserArray = (
  */
 export function CreateDocumentButton({
   userIsAnonymous,
-  anonymousUserAccessToken,
 }: CreateDocumentButtonProps) {
   const [userHasConsented, setUserHasConsented] = useState<boolean>(false);
   const [documentInput, setDocumentInput] = useState<DocumentInput | undefined>(
@@ -75,9 +73,9 @@ export function CreateDocumentButton({
   );
 
   const createDocumentMutation = useMutation<Document, Error, DocumentInput>(
-    ['createDocument', userIsAnonymous, anonymousUserAccessToken],
+    ['createDocument', userIsAnonymous],
     (documentInput: DocumentInput) =>
-      createDocument(documentInput, userIsAnonymous, anonymousUserAccessToken),
+      createDocument(documentInput, userIsAnonymous),
     {
       retry: (failureCount: number, error: Error) =>
         apiRetryQuery(
@@ -114,9 +112,10 @@ export function CreateDocumentButton({
         if (typeof result === 'string') {
           try {
             result = JSON.parse(result);
-          }
-          catch (error: any) {
-            console.error(`Failed to parse task module result, string may not be a valid object: ${error}`);
+          } catch (error: any) {
+            console.error(
+              `Failed to parse task module result, string may not be a valid object: ${error}`,
+            );
           }
         }
 

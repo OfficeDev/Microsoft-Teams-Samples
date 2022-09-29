@@ -12,7 +12,6 @@ type SignDocumentModel = {
 async function postSignDocument(
   model: SignDocumentModel,
   isAnonymousUser: boolean,
-  token?: string,
 ) {
   return await authFetch<Signature>(
     `document/${model.documentId}/sign`,
@@ -21,7 +20,6 @@ async function postSignDocument(
       method: 'POST',
       body: JSON.stringify(model.signature),
     },
-    token,
   );
 }
 

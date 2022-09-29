@@ -5,7 +5,7 @@ import Home from 'routes/Home';
 import { DocumentStage } from 'components/DocumentStage';
 import Configure from 'routes/Configure';
 import { AuthStartAad, AuthStartMsa } from 'routes/AuthStart';
-import AuthEnd from 'routes/AuthEnd';
+import { AuthEndAad, AuthEndMsa } from 'routes/AuthEnd';
 
 export default function App() {
   const colorScheme = useDefaultColorScheme();
@@ -21,7 +21,8 @@ export default function App() {
             <Route path="stage/:documentId" element={<DocumentStage />} />
             <Route path="auth-start/aad" element={<AuthStartAad />} />
             <Route path="auth-start/msa" element={<AuthStartMsa />} />
-            <Route path="auth-end" element={<AuthEnd />} />
+            <Route path="auth-end/aad" element={<AuthEndAad />} />
+            <Route path="auth-end/msa" element={<AuthEndMsa />} />
           </Route>
         </Routes>
       </FlexItem>

@@ -1,8 +1,7 @@
 import { Flex, Header, Loader } from '@fluentui/react-northstar';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useUserIsAnonymous } from 'utils/TeamsProvider/hooks';
-import { TeamsContext } from 'utils/TeamsProvider/TeamsProvider';
 import { getAllDocuments } from 'api/documentApi';
 import { AnonymousPage } from 'components/AnonymousPage';
 import { CreateDocumentButton } from 'components/CreateDocumentButton';
@@ -18,18 +17,17 @@ import { DocumentListDto } from 'models';
 export function SidepanelDocumentCardList() {
   const pollingInterval = 5000;
   const userIsAnonymous = useUserIsAnonymous();
-  const { anonymousUserAccessToken } = useContext(TeamsContext);
 
   const { data, error, isError } = useQuery<DocumentListDto, Error>(
-    ['getAllDocuments', userIsAnonymous, anonymousUserAccessToken],
-    () => getAllDocuments(userIsAnonymous, anonymousUserAccessToken),
+    ['getAllDocuments', userIsAnonymous],
+    () => getAllDocuments(userIsAnonymous),
     { refetchInterval: pollingInterval },
   );
 
   const [showLoader, setShowLoader] = useState<boolean>(true);
   const showLoaderTimeout = 5000;
 
-  const anonymousUserHasToken = (userIsAnonymous && anonymousUserAccessToken !== undefined);
+  const anonymousUserHasToken = userIsAnonymous && data !== undefined;
   const userCanTryViewDocumentList = anonymousUserHasToken || !userIsAnonymous;
 
   useEffect(() => {
@@ -45,10 +43,7 @@ export function SidepanelDocumentCardList() {
       {!userCanTryViewDocumentList && <AnonymousPage />}
       {userCanTryViewDocumentList && (
         <>
-          <CreateDocumentButton
-            userIsAnonymous={userIsAnonymous}
-            anonymousUserAccessToken={anonymousUserAccessToken}
-          />
+          <CreateDocumentButton userIsAnonymous={userIsAnonymous} />
           {data && data.documents.length === 0 && (
             <Header
               as="h1"

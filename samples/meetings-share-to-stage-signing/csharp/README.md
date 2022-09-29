@@ -38,6 +38,8 @@ This sample has 3 main personas:
 * Stage app view depends on the authentication of the user
 * Adaptive Cards
 * People Picker
+* Anonymouse User support
+* MSAL.js 2.0 support
 
 ![Video documenting the sharing to stage, including the choosing of a document from the sidepanel, and the signing of the document on the stage](/samples/meetings-share-to-stage-signing/csharp/Docs/Signing-Clip.gif)
 
@@ -117,6 +119,8 @@ graph TD
 " Unable to get information about the App.
 This happens if you are running the application in a normal browser, and not inside Teams. Install the app inside teams to test this application. To upload the app to Teams follow the instructions on https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload"
 * "Something went wrong" when opening the app in the meeting. If you have yet to authorise the application, and you open the app in the meeting, Teams doesn't seem to prompt for you to authorise the application. To solve this, if you create a document in the pre-meeting flow, you should be prompted to auth there and the app will be able to get a token when in a meeting next time.
+* Anonymous users in private windows are asked to login multiple times.
+    * We use MSAL.js with localStorage to log anonymous users in and to save the login details between contexts (e.g. SidePanel and Stage). However, in private windows third-party cookies and localStorage can not be set, and as the Teams app model is to iframe the tab, the application is considered a third-party.
 
 ## Prerequisites
 * Make sure you have an active [Azure subscription](https://azure.microsoft.com/en-us/free/).

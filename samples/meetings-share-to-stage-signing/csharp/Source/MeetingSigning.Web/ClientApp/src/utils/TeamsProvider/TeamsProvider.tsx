@@ -89,7 +89,7 @@ export function TeamsProvider({
           setTimeout(
             () =>
               reject('Failed to initialize connection with Microsoft Teams'),
-            1000,
+            5000,
           ),
         ),
       ]),

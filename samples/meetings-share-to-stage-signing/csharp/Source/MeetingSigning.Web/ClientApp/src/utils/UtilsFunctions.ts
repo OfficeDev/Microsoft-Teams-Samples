@@ -11,7 +11,7 @@ const apiRetryQuery = (
   userHasConsented: boolean,
   setUserHasConsented: (value: SetStateAction<boolean>) => void,
 ): boolean => {
-  if (failureCount < 3) {
+  if (failureCount < 5) {
     return (
       isApiErrorCode(ApiErrorCode.AuthConsentRequired, error) &&
       userHasConsented

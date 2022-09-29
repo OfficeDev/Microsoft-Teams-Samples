@@ -1,4 +1,5 @@
 import * as microsoftTeams from '@microsoft/teams-js';
+import { MsalAuth } from 'utils/MsalAuth';
 
 function generateAndSetTokenState(prefix) {
   // Generate random state string and store it, so we can verify it in the callback
@@ -37,7 +38,6 @@ export function AuthStartAad() {
     queryParams.append('prompt', 'consent');
 
     let authorizeEndpoint = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/authorize?${queryParams.toString()}`;
-    debugger;
     window.location.assign(authorizeEndpoint);
   });
 
@@ -49,6 +49,8 @@ export function AuthStartAad() {
   );
 }
 
+const msalAuth = new MsalAuth();
+
 /**
  * Component rendered when starting an auth prompt for getting a Microsoft Auth token
  * Used for Anonymous users
@@ -57,15 +59,12 @@ export function AuthStartAad() {
  * world implementation where a 3P provider might be used. If you prefer you could use the same AAD app for both.
  */
 export function AuthStartMsa() {
-  const queryParams = commonQueryParams();
+  (function () {
+    microsoftTeams.app.initialize();
 
-  queryParams.append('client_id', process.env.REACT_APP_MSA_ONLY_CLIENT_ID);
-  queryParams.append('state', generateAndSetTokenState('anon_'));
-  queryParams.append('scope', process.env.REACT_APP_MSA_ONLY_SCOPE);
-
-  // debugger;
-  let authorizeEndpoint = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?${queryParams.toString()}`;
-  window.location.assign(authorizeEndpoint);
+    msalAuth.loadAuthModule();
+    msalAuth.attemptLogIn();
+  })();
 
   return (
     <p>
