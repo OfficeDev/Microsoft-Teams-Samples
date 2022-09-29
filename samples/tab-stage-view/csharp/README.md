@@ -43,10 +43,10 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 3. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
-   - `<<MANIFEST-ID>>` with some unique GUID   
+   - `<<GUID>>` with some unique GUID   
    - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
    - `<<MICROSOFT-APP-ID>>` with the id from step 2.
-   - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
+   - `<<DOMAIN-NAME>>` with your app domain e.g. *.ngrok.io
 
 4. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 7.
 
