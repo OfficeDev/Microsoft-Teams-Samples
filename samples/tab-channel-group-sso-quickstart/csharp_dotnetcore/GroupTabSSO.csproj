@@ -21,8 +21,4 @@
     <LibraryRestore>false</LibraryRestore>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <LibraryRestore>true</LibraryRestore>
-  </PropertyGroup>
-
 </Project>
