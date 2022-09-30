@@ -22,15 +22,19 @@ Using this nodejs sample, you can check how to get staggered graph api permissio
 
 Tab 
 
-![user info card](Images/UserInformationCard.png)
+![Staggered Module](StaggeredPermission/Images/StaggeredModule.gif)
 
-- Consent popup for staggered permission
- 
-![consent popup](Images/ConsentPopup.png)
+  - User basic
+
+![user info card](StaggeredPermission/Images/UserInformationCard.png)
+
+  - User photo
+
+![User mails](StaggeredPermission/Images/user-photo.png)
 
 - User emails
 
-![User mails](Images/UserMails.png)
+![User mails](StaggeredPermission/Images/UserMails.png)
 
 ## Prerequisites
 

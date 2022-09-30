@@ -92,6 +92,8 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
 
 ## Features of this sample
 
+![TabStageView Modules](TabInStageView/Images/tabstageviewmodule.gif)
+
 - Welcome message with feature explanation.
 
 ![Welcome Message](TabInStageView/Images/welcomeAction.png)

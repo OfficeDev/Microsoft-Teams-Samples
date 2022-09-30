@@ -18,13 +18,15 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
 
 ## Key feature.
 
+![Config SSO](Images/tabssomodules.gif)
+
 ### Tab SSO
 
-![SSO](Images/sso_personal.png)
-
-![Config](Images/config_teams.png)
-
 ![Config SSO](Images/config_sso_teams.png)
+
+![Outside Team SSO](Images/outside_teams_sso.png)
+
+![Outside team success](Images/outside_teams_success_sso.png)
 
 ### Login Outside Microsoft Teams
 To test this feature, open your App base URI or Ngrok URI on browser.

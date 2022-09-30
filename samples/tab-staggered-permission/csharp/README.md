@@ -21,13 +21,11 @@ Using this csharp sample, you can check how to get staggered graph api permissio
 
 Tab 
 
+![Staggered Module](StaggeredPermission/Images/StaggeredModule.gif)
+
   - User basic
 
 ![user info card](StaggeredPermission/Images/user-info.png)
-
-- Consent popup for staggered permission
- 
-  ![consent popup](StaggeredPermission/Images/consent-popup.png)
 
   - User photo
 
