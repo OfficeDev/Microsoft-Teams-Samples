@@ -5,13 +5,13 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const app = express();
-const { DecryptionHelper } = require("./helper/decryption-helper");
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true
 }));
+
 var notificationResponse;
 
 const ENV_FILE = path.join(__dirname, '.env');
@@ -24,7 +24,7 @@ app.use(express.json());
 app.use('/api/changeNotification', require('./controller'))
 
 // Listen for incoming requests.
-app.post('/api/notifications', async (req, res) => {
+app.post('/api/messages', async (req, res) => {
     let status;
 
     if (req.query && req.query.validationToken) {
@@ -32,29 +32,53 @@ app.post('/api/notifications', async (req, res) => {
         status = 200;
         res.send(req.query.validationToken);
     }
+
     else {
-        let notification = req.body.value;
+        let response = null;
+        response = req.body;
 
         try {
-            notificationResponse = await DecryptionHelper.processEncryptedNotification(notification);
-            res.status(202).send();
+            if (response.channelData.channel) {
+                notificationResponse = [{
+                    createdDate: new Date().toString(),
+                    displayName: response.channelData.channel.name,
+                    changeType: response.channelData.eventType
+                }]
+            }
+            else {
+                notificationResponse = [{
+                    createdDate: new Date().toString(),
+                    displayName: response.channelData.team.name,
+                    changeType: response.channelData.eventType
+                }]
+            }
         }
-        catch (ex) {
-            console.error(ex);
-            res.status(500).send();
+        catch (e) {
+            console.log('Error', e)
         }
     }
 
-    // send decrypted Response to view
-    var responseMessage = Promise.resolve(notificationResponse);
-    responseMessage.then(function (result) {
-        res.json(result);
-    }, function (err) {
-        console.log(err);
-        res.json(err);
-    });
+    /** Send Response to View */
+    try {
+        if (notificationResponse) {
+            var responseMessage = Promise.resolve(notificationResponse);
+            responseMessage.then(function (result) {
+                res.json(result);
+                res.status(200).send();
+            }, function (err) {
+                console.log(err);
+                res.json(err);
+            });
+        }
+        else {
+            res.status(500).send();
+        }
+    }
+    catch (e) {
+        console.log("Error", e)
+    }
 });
 
-app.listen(3978, function () {
-    console.log('app listening on port 3978!');
+app.listen(3000, function () {
+    console.log('app listening on port 3000!');
 });

@@ -13,11 +13,6 @@
     cursor: pointer;
 }
 
-.manage-icons:hover {
-    color: #5b5fc7;
-    background-color: "#5B00C7";
-}
-
 .text-fields-label {
     width: 130px;
 }
@@ -25,6 +20,14 @@
 .input-fields-label {
     width: 160px;
 }
-.headColor{
-    color: #5b5fc7; 
+.headColor {
+    color: #5b5fc7;
+}
+
+.statusColor {
+    color: seagreen;
+}
+
+.deleteStatus {
+    color: crimson;
 }

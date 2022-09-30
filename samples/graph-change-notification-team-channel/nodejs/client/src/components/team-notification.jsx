@@ -20,6 +20,9 @@ class TeamChangeNotification extends Component {
         }
     }
 
+    /// </summary>
+    /// ComponentDidMount function call On Page Load
+    /// </summary>
     componentDidMount() {
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.getContext().then((context) => {
@@ -32,42 +35,46 @@ class TeamChangeNotification extends Component {
     /// </summary>
     /// <param name="teamId"></param>
     /// </summary>
-    initializeData = async (teamId, pageId) => {
-        await axios.post(`/api/notifications/team?teamId=${teamId}`);
-        var response = await axios.post('/api/notifications');
+    initializeData = async (teamId) => {
+        await axios.post(`/api/changeNotification/team?teamId=${teamId}`);
+        var response = await axios.post('/api/messages');
 
         try {
             if (response.data) {
-                var responseData = response.data;
+                let responseData = response.data;
 
-                    var elements = [];
+                var elements = [];
 
-                    responseData.forEach(item => {
-                        elements.push(<div>
-                            <p><b>Team Name :</b> {item.displayName}</p>
-                            {(() => {
-                                if (item.changeType === 'updated') {
-                                    return (<div><p><b>Description  : </b> When new Team is Edited and Deleted you will get notification as updated  </p>
-                                        <p><b>Status         : </b><span className="statusColor"> {item.changeType}</span></p>
-                                    </div>);
-                                }
+                responseData.forEach(item => {
+                    elements.push(<div>
+                        <p><b>Team Name :</b> {item.displayName}</p>
 
-                                if (item.changeType === 'deleted') {
-                                    return (<div><p><b>Description  : </b> Team has deleted</p>
-                                        <p><b>Status         : </b><span className="deleteStatus"> {item.changeType}</span></p>
-                                    </div>);
-                                }
-                            })()}
-                            <p><b>Date         :</b> {moment(item.createdDate).format('LLL')} <b>
-                                <span className="headcolor">{moment(item.createdDate).fromNow()}</span></b></p>
-                            <hr></hr>
-                        </div>);
-                    });
+                        {(() => {
+                            if (item.changeType === 'teamRenamed') {
+                                return (<div><p><b>Description : </b> When Team name has Renamed you will get notification Team Renamed  </p>
+                                    <p><b>Event Type : </b><span className="statusColor"><b> {item.changeType}</b></span></p>
+                                </div>);
+                            }
 
-                    if (elements.length > 0) {
-                        this.setState({ notifications: elements.reverse() });
-                    }
-                
+                            if (item.changeType === 'teamDeleted') {
+                                return (<div><p><b>Description : </b> When Team has deleted</p>
+                                    <p><b>Event Type : </b><span className="deleteStatus"><b> {item.changeType}</b></span></p>
+                                </div>);
+                            }
+                        })()
+                        }
+
+                        <p><b>Date :</b> {moment(item.createdDate).format('LLL')} <b>
+                            <span className="headColor">{moment(item.createdDate).fromNow()}</span>
+                        </b></p>
+                        <hr></hr>
+
+                    </div >);
+                });
+
+                if (elements.length > 0) {
+                    this.setState({ notifications: elements.reverse() });
+                }
             }
         }
         catch (e) {

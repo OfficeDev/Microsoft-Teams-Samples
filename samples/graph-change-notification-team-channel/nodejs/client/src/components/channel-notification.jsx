@@ -20,6 +20,9 @@ class ChangeNotificationChannel extends Component {
         }
     }
 
+    /// </summary>
+    /// ComponentDidMount function call On Page Load
+    /// </summary>
     componentDidMount() {
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.getContext().then((context) => {
@@ -34,45 +37,48 @@ class ChangeNotificationChannel extends Component {
     /// </summary>
     initializeData = async (teamId) => {
         await axios.post(`/api/changeNotification?teamId=${teamId}`);
-        var response = await axios.post('/api/notifications');
+        var response = await axios.post('/api/messages');
 
         try {
             if (response.data) {
-                var responseData = response.data;
+                let responseData = response.data;
 
-                    var elements = [];
+                var elements = [];
 
-                    responseData.forEach(item => {
-                        elements.push(<div>
-                            <p><b>Channel Name :</b> {item.displayName}</p>
-                            {(() => {
-                                if (item.changeType === 'updated') {
-                                    return (<div><p><b>Description  : </b> Channel has Renamed</p>
-                                        <p><b>Status         : </b><span className="statusColor"> {item.changeType}</span></p>
-                                    </div>);
-                                }
+                responseData.forEach(item => {
+                    elements.push(<div>
+                        <p><b>Channel Name :</b> {item.displayName}</p>
 
-                                if (item.changeType === 'created') {
-                                    return (<div><p><b>Description  : </b> New Channel has Created</p>
-                                        <p><b>Status         : </b><span className="statusColor"> {item.changeType}</span></p>
-                                    </div>);
-                                }
+                        {(() => {
+                            if (item.changeType === 'channelRenamed') {
+                                return (<div><p><b>Description : </b> When channel has Renamed  </p>
+                                    <p><b>Event Type : </b><span className="statusColor"><b> {item.changeType}</b></span></p>
+                                </div>);
+                            }
 
-                                if (item.changeType === 'deleted') {
-                                    return (<div><p><b>Description  : </b> Channel has deleted</p>
-                                        <p><b>Status         : </b><span className="deleteStatus"> {item.changeType}</span></p>
-                                    </div>);
-                                }
-                            })()}
-                            <p><b>Date         :</b> {moment(item.createdDate).format('LLL')} <b>
-                                <span className="headcolor">{moment(item.createdDate).fromNow()}</span></b></p>
-                            <hr></hr>
-                        </div>);
-                    });
+                            if (item.changeType === 'channelCreated') {
+                                return (<div><p><b>Description  : </b> New channel has Created</p>
+                                    <p><b>Event Type : </b><span className="statusColor"><b> {item.changeType}</b></span></p>
+                                </div>);
+                            }
 
-                    if (elements.length > 0) {
-                        this.setState({ changeNotifications: elements.reverse() });
-                    }
+                            if (item.changeType === 'channelDeleted') {
+                                return (<div><p><b>Description : </b> When channel has deleted</p>
+                                    <p><b>Event Type : </b><span className="deleteStatus"> <b>{item.changeType}</b></span></p>
+                                </div>);
+                            }
+                        })()}
+
+                        <p><b>Date :</b> {moment(item.createdDate).format('LLL')} <b>
+                            <span className="headColor">{moment(item.createdDate).fromNow()}</span>
+                        </b></p>
+                        <hr></hr>
+                    </div>);
+                });
+
+                if (elements.length > 0) {
+                    this.setState({ changeNotifications: elements.reverse() });
+                }
             }
         } catch (e) {
             console.log("error", e);

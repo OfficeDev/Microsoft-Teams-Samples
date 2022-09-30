@@ -29,12 +29,15 @@ class GraphHelper {
     static async createSubscription(teamsId, pageId) {
         let applicationToken = await auth.getAccessToken();
         let resource = "";
+        let changeType = "";
 
         if (pageId === "1") {
             resource = `/teams/${teamsId}/channels`;
+            changeType = "created,deleted,updated";
         }
         else {
             resource = `/teams/${teamsId}`;
+            changeType = "deleted,updated"
         }
 
         let existingSubscriptions = null;
@@ -67,7 +70,7 @@ class GraphHelper {
             if (existingSubscription == null) {
 
                 let subscriptionCreationInformation = {
-                    changeType: "created,deleted,updated",
+                    changeType: changeType,
                     notificationUrl: process.env.notificationUrl,
                     resource: resource,
                     includeResourceData: true,
