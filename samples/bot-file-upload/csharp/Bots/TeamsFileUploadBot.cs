@@ -57,7 +57,7 @@ namespace Microsoft.BotBuilderSamples.Bots
             }
             else if (turnContext.Activity.Attachments?[0].ContentType.Contains("image/*") == true)
             {
-                // Inline image se.
+                // Inline image.
                 await ProcessInlineImage(turnContext, cancellationToken);
             }
             else

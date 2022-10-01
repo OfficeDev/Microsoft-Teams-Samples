@@ -32,7 +32,7 @@
       "isNotificationOnly": false,
       "supportsCalling": false,
       "supportsVideo": false,
-      "supportsFiles": false
+      "supportsFiles": true
     }
   ],
   "validDomains": [
