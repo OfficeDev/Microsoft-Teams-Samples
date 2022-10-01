@@ -29,7 +29,7 @@ Tab
 
   - User photo
 
-![User Photo](StaggeredPermission/Images/user-photo.png)
+![User Photo](Images/user-photo.png)
 
 - User emails
 
