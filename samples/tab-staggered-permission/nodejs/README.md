@@ -21,20 +21,19 @@ Using this nodejs sample, you can check how to get staggered graph api permissio
 ## Key features
 
 Tab 
-
-![Staggered Module](StaggeredPermission/Images/StaggeredModule.gif)
+![Staggered Module](Images/StaggeredModule.gif)
 
   - User basic
 
-![user info card](StaggeredPermission/Images/UserInformationCard.png)
+![user info card](Images/UserInformationCard.png)
 
   - User photo
 
-![User mails](StaggeredPermission/Images/user-photo.png)
+![User Photo](StaggeredPermission/Images/user-photo.png)
 
 - User emails
 
-![User mails](StaggeredPermission/Images/UserMails.png)
+![User mails](Images/UserMails.png)
 
 ## Prerequisites
 
