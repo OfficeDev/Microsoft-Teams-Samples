@@ -29,11 +29,11 @@ This Teams tab app provides a way to allow users to have conversations about sub
 
 - Open Conversation - opens a new conversation
 
-![Open Conversation](TabConversation/images/continue.png)
+![Open Conversation](TabConversation/Images/continue.png)
 
 - Close Conversation - closes the conversation view
 
-![Close Conversation](TabConversation/images/close.png)
+![Close Conversation](TabConversation/Images/close.png)
 
 
 > NOTE: We should save the subEntityId and conversationId to continue an existing conversartion.
