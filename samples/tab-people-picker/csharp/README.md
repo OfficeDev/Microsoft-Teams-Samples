@@ -13,7 +13,9 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-tab-people-picker-csharp
 ---
 
-# Tab people picker
+# Tab people picker Feature.
+
+![tab](TabPeoplePicker/Images/PepolePickerModule.gif)
 
 This is an tab app which shows the feature of client sdk people picker.
 
