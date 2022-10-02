@@ -25,8 +25,6 @@ This is an tab app which shows the feature of client sdk people picker.
 
 ![All memberes of organisation search](TabPeoplePicker/Images/AllMemberesOfOrganisationSearch.PNG)
 
-![Single select](TabPeoplePicker/Images/SingleSelect.PNG)
-
 ![Set selected search](TabPeoplePicker/Images/SetSelectedSearch.PNG)
 
 ![Submission details](TabPeoplePicker/Images/submission.png)
