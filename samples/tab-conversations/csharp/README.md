@@ -18,7 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-conversations-csharp
 This Teams tab app provides a way to allow users to have conversations about sub-entities in the tab [Create conversational tabs](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/conversational-tabs?view=msteams-client-js-latest#continue-a-conversation)
 
 ## Key features
-
+------
 ![Tab Conversation Module](TabConversation/images/tabconversationmodule.gif)
 
 - Tab showing actions that can be performed
