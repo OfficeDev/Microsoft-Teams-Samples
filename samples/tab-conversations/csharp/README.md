@@ -25,7 +25,7 @@ This Teams tab app provides a way to allow users to have conversations about sub
 
 - Tab showing actions that can be performed
 
-![Actions Page](TabConversation/Images/actions.png)
+![Actions Page](TabConversation/Images/sampleaction.png)
 
 - Open Conversation - opens a new conversation
 
