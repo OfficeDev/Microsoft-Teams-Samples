@@ -10,8 +10,8 @@ languages:
 - javascript
 extensions:
   contentType: samples
-  createdDate: "10/03/2022 11:51:57 AM"
-urlFragment: officedev-microsoft-teams-samples-meeting-av-filters-nodejs
+  createdDate: "10/04/2022 09:09:10 AM"
+urlFragment: officedev-microsoft-teams-samples-meeting-av-filters-javascript
 ---
 
 # Meeting AV Filters
@@ -49,8 +49,8 @@ This sample demos the use of AV filters for Teams meetings.
     # ngrok http -host-header=rewrite 3978
     ```
 5) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
-   - `{{Manifest-id}}` with some unique GUID.
-   - `{{Domain Name}}` with your application's base url, e.g. https://1234.ngrok.io
+   - `{{GUID}}` with some unique GUID.
+   - `{{VALID DOMAIN}}` with your application's base url, e.g. https://1234.ngrok.io
    - Inside the filters section `id` will be random GUID and `name` will be filter name that is displayed inside meeting. We have predefined 2 filters.
    - In case of `videoAppContentUrl` the valid domain refers to the page where video frames are captured and processed.
 

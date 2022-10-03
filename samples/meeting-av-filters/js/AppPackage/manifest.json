@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.7/MicrosoftTeams.schema.json",
   "manifestVersion": "devPreview",
   "version": "1.0.0",
-  "id": "<<GUID ID>>",
+  "id": "<GUID>",
   "packageName": "com.microsoft.teams.avfilter",
   "developer": {
     "name": "Microsoft",
-    "id": "<<GUID ID>>",
+    "id": "<GUID>",
     "privacyUrl": "https://<<BASE-URL>>/privacy",
     "termsOfUseUrl": "https://<<BASE-URL>>/termsofuse"
   },

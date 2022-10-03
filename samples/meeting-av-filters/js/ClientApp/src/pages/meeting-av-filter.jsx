@@ -70,6 +70,7 @@ const MeetingAvFilter = () => {
                     console.log('effect not changed');
                     return;
                 }
+                
                 selectedEffectId = effectId;
 
                 // Clear the css for selected filter.
