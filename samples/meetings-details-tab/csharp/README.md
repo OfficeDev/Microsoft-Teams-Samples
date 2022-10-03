@@ -62,28 +62,20 @@ This sample shows creating poll in meeting , where memebers of the meeting can a
 ## Interacting with the app in Teams Meeting
 
 ##Feature of the sample.
-![image](DetailsTab/Images/addmcqquestion.png)
+![image](DetailsTab/Images/DetailsTabModule.gif)
 
 Interact with Details Tab in Meeting.
 1. Install the Details Tab manifest in meeting chat.
 2. Add the Details Tab in Meeting
 3. Click on `Add Agenda`
 4. Newly added agenda will be added to Tab.
-![image](DetailsTab/Images/DetailsTabModule.gif)
+![image](DetailsTab/Images/addmcqquestion.png)
 
-5. An Adaptive Card will be posted in meeting chat for feedback
+5. Participants in meeting can submit their response in adaptive card
 ![image](DetailsTab/Images/submitmcqresponse.png)
 
-5. Agenda submission response.
+6.Response will be recorded and Bot will send an new adaptive card with response..
 ![image](DetailsTab/Images/resultmcq.png)
-
-
-7. Participants in meeting can submit their response in adaptive card
-8. Response will be recorded and Bot will send an new adaptive card with response.
-![image](https://user-images.githubusercontent.com/50989436/120431763-92c7a400-c396-11eb-8daf-dce922b380ad.png)
-9. Participants in meeting can view the results from meeting chat or Tab itself.
- 
-  
  
   
   
