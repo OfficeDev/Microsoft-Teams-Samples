@@ -16,9 +16,14 @@ urlFragment: officedev-microsoft-teams-samples-app-task-module-csharp
 
 # Microsoft Teams task module
 
+##Feature of the sample.
+
+![adaptivecard](Microsoft.Teams.Samples.TaskModule.Web/Images/AppTaskModule.gif)
+
 A task module allows you to create modal popup experiences in your Teams application. Inside the popup, you can run your own custom HTML/JavaScript code, show an `<iframe>`-based widget such as a YouTube or Microsoft Stream video, or display an [Adaptive card](https://docs.microsoft.com/en-us/adaptive-cards/).
 
 Task modules build on the foundation of Microsoft Teams tabs: a task module is essentially a tab in a popup window. It uses the same SDK, so if you've built a tab you are already 90% of the way to being able to create a task module.
+
 
 
 ![adaptivecard](Microsoft.Teams.Samples.TaskModule.Web/Images/adaptivecard.png)

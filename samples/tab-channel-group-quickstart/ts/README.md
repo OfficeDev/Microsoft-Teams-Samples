@@ -18,6 +18,10 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-quickstart-ts
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
 
+## Fetures of the sample.
+
+![tabconfigure](Images/TabChannelGroupModule.gif)
+
 ![tabconfigure](Images/tabconfigure.png)
 
 ![setuptab](Images/setuptab.png)

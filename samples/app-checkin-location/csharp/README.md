@@ -15,6 +15,10 @@ urlFragment: officedev-microsoft-teams-samples-app-checkin-location-csharp
 
 # App check in location
 
+##Feature of the sample.
+
+![Check in card](AppCheckinLocation/Images/Appcheckinlocationmodule.gif)
+
 This sample shows feature where user can checkin with current location and view all previous checkins.
 
 `Currently, Microsoft Teams support for get geolocation capability is only available for mobile clients`
