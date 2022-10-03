@@ -20,7 +20,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
 
 ##Feature of the sample
 
-![Sample Module][Images/tab-channel-group-quickstart.gif]
+![Sample Module][Images/tabchannelgroupquickstart.gif]
 
 ![tabconfigure](Images/tabconfigure.png)
 

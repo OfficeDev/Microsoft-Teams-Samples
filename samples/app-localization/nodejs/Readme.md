@@ -65,7 +65,7 @@ In Teams, Once the app is successfully installed, you can interact with tab and 
 To change the language in Microsoft Teams, please click your profile picture at the top of the app, then select Settings -> General and go to the Language section. Choose the preferred language and restart to apply the change. This sample supports en-US, fr-CA, hi-IN and es-MX.
 
 ##Feature of the sample.
-![image](appLocalizationModule.gif)
+![image](Images/appLocalizationModule.gif)
 
 1. **Installation**: You should see your app installation screen content in selected language. 
 ![image](Images/Upload.png)
