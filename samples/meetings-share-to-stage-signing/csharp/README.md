@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "09-03-2022 15:56:00"
+ createdDate: "09/03/2022 03:56:00 PM"
 urlFragment: officedev-microsoft-teams-samples-meetings-share-to-stage-signing-csharp
 ---
 

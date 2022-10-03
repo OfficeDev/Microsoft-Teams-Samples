@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "27-04-2022 23:30:17"
+ createdDate: "04/27/2022 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-bot-suggested-actions-csharp
 ---
 

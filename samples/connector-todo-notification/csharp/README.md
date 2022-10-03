@@ -10,7 +10,7 @@ extensions:
   contentType: samples
   technologies:
   - Connectors
-  createdDate: 1/16/2018 10:21:42 PM
+  createdDate: "01/16/2018 10:21:42 PM"
 urlFragment: officedev-microsoft-teams-samples-connector-todo-notification-csharp
 ---
 

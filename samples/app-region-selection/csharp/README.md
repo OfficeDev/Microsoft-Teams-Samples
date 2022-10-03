@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "19-03-2021 13:38:25"
+ createdDate: "03/19/2021 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-app-region-selection-csharp
 ---
 

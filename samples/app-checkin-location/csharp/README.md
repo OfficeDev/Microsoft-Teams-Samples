@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
   contentType: samples
-  createdDate: 11/11/2021 11:30:17 AM
+  createdDate: "11/11/2021 11:30:17 AM"
 urlFragment: officedev-microsoft-teams-samples-app-checkin-location-csharp
 ---
 

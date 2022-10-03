@@ -10,7 +10,7 @@ languages:
 - javascript
 extensions:
   contentType: samples
-  createdDate: "20/07/2022 05:26:57 PM"
+  createdDate: "07/20/2022 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-tab-app-monetization-nodejs
 ---
 

@@ -10,7 +10,7 @@ languages:
 - javascript
 extensions:
   contentType: samples
-  createdDate: "17/06/2022 12:26:57 PM"
+  createdDate: "06/17/2022 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-tab-channel-context-nodejs
 ---
 

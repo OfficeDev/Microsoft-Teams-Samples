@@ -10,7 +10,7 @@ languages:
 - javascript
 extensions:
  contentType: samples
- createdDate: "20-08-2022 00:30:15"
+ createdDate: "08/20/2022 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-meetings-attendance-report-nodejs
 ---
 
