@@ -8,7 +8,7 @@
     "longDescription": [
       "This sample demonstrates the use of Team/Channel subscription that will post notifications when user Create/Edit/Delete the team/channel."
     ],
-    "creationDateTime": "2022-09-19",
+    "creationDateTime": "2022-10-03",
     "updateDateTime": "2022-10-03",
     "products": [
       "Teams"
