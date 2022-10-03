@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "24-11-2021 14:00:25"
+ createdDate: "11/24/2021 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-msgext-message-reminder-csharp
 ---
 

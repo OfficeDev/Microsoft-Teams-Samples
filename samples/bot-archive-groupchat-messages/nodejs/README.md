@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "11-10-2021 23:35:25"
+ createdDate: "11/10/2021 11:35:25 PM"
 urlFragment: officedev-microsoft-teams-samples-bot-archive-groupchat-messages-nodejs
 ---
  

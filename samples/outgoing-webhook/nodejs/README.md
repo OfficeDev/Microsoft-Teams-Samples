@@ -9,7 +9,7 @@ languages:
 - javascript
 extensions:
   contentType: samples
-  createdDate: 12/5/2017 6:03:13 PM
+  createdDate: "12/05/2017 06:03:13 PM"
 urlFragment: officedev-microsoft-teams-samples-outgoing-webhook-nodejs
 ---
 

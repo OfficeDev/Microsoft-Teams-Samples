@@ -10,7 +10,7 @@ extensions:
   contentType: samples
   technologies:
   - Connectors
-  createdDate: 8/21/2017 11:52:11 AM
+  createdDate: "08/21/2017 11:52:11 AM"
 urlFragment: officedev-microsoft-teams-samples-connector-github-notification-nodejs
 ---
 
