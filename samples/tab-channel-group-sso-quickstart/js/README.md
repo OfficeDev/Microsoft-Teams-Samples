@@ -18,6 +18,10 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are scoped to a single user. They can be pinned to the left navigation bar for easy access.
 
+##Feature of the sample.
+
+![Sample Module](Images/tabchannelgroupssoquickstart.gif)
+
 ![tabconfigure](Images/tabconfigure.png)
 
 ![setuptab](Images/setuptab.png)

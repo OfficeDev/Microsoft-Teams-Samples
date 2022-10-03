@@ -83,6 +83,8 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 
 ## Features of this sample
 
+![Sample Module](Images/msgextmessagereminder.gif)
+
 - Personal scope scenario
  Select `...` over message to get action `create-reminder` for scheduling task.
 
