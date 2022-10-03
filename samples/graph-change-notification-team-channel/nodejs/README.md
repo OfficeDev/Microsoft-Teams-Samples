@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions: 
  contentType: samples
- createdDate: "10-03-2022 11:35:15"
+ createdDate: "10-03-2022 11:30:15 AM"
 urlFragment: officedev-microsoft-teams-samples-graph-change-notification-team-channel
 
 ---
@@ -50,7 +50,7 @@ This is a sample application which demonstrates use of Team/Channel subscription
 
 In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
-    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- Ensure that you've [Enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 ### Create and install Self-Signed certificate
 
