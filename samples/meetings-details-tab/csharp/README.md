@@ -60,15 +60,23 @@ This sample shows creating poll in meeting , where memebers of the meeting can a
 - [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
 ## Interacting with the app in Teams Meeting
+
+##Feature of the sample.
+![image](DetailsTab/Images/addmcqquestion.png)
+
 Interact with Details Tab in Meeting.
 1. Install the Details Tab manifest in meeting chat.
 2. Add the Details Tab in Meeting
 3. Click on `Add Agenda`
 4. Newly added agenda will be added to Tab.
-![image](https://user-images.githubusercontent.com/50989436/120268903-5af02c00-c2c4-11eb-9061-c8af7436715e.png)
-5. Click on Send button in Agenda from Tab.
-6. An Adaptive Card will be posted in meeting chat for feedback
-![image](https://user-images.githubusercontent.com/50989436/120431715-7c214d00-c396-11eb-8919-0dbb6192ce22.png)
+![image](DetailsTab/Images/DetailsTabModule.gif)
+
+5. An Adaptive Card will be posted in meeting chat for feedback
+![image](DetailsTab/Images/submitmcqresponse.png)
+
+5. Agenda submission response.
+![image](DetailsTab/Images/resultmcq.png)
+
 
 7. Participants in meeting can submit their response in adaptive card
 8. Response will be recorded and Bot will send an new adaptive card with response.
