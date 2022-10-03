@@ -20,7 +20,7 @@ urlFragment: officedev-microsoft-teams-samples-msgext-search-quickstart-js
 
 ##Feature of the sample.
 
-![Sample Module](msgextsearchquickstart.gif)
+![Sample Module](Images/msgextsearchquickstart.gif)
 
 ![Search](Images/search.png)
 
