@@ -50,20 +50,20 @@ class ChangeNotificationChannel extends Component {
                         <p><b>Channel Name :</b> {item.displayName}</p>
 
                         {(() => {
-                            if (item.changeType === 'channelRenamed') {
+                            if (item.changeType === 'updated') {
                                 return (<div><p><b>Description : </b> When channel has Renamed  </p>
                                     <p><b>Event Type : </b><span className="statusColor"><b> {item.changeType}</b></span></p>
                                 </div>);
                             }
 
-                            if (item.changeType === 'channelCreated') {
+                            if (item.changeType === 'created') {
                                 return (<div><p><b>Description  : </b> New channel has Created</p>
                                     <p><b>Event Type : </b><span className="statusColor"><b> {item.changeType}</b></span></p>
                                 </div>);
                             }
 
-                            if (item.changeType === 'channelDeleted') {
-                                return (<div><p><b>Description : </b> When channel has deleted</p>
+                            if (item.changeType === 'deleted') {
+                                return (<div><p><b>Description  : </b> When channel has deleted</p>
                                     <p><b>Event Type : </b><span className="deleteStatus"> <b>{item.changeType}</b></span></p>
                                 </div>);
                             }

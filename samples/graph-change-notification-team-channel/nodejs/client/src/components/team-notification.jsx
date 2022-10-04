@@ -50,20 +50,19 @@ class TeamChangeNotification extends Component {
                         <p><b>Team Name :</b> {item.displayName}</p>
 
                         {(() => {
-                            if (item.changeType === 'teamRenamed') {
-                                return (<div><p><b>Description : </b> When Team name has Renamed you will get notification Team Renamed  </p>
+                            if (item.changeType === 'updated') {
+                                return (<div><p><b>Description  : </b> When Team name has Renamed you will get notification Team Renamed  </p>
                                     <p><b>Event Type : </b><span className="statusColor"><b> {item.changeType}</b></span></p>
                                 </div>);
                             }
 
-                            if (item.changeType === 'teamDeleted') {
-                                return (<div><p><b>Description : </b> When Team has deleted</p>
+                            if (item.changeType === 'deleted') {
+                                return (<div><p><b>Description  : </b> When Team has deleted</p>
                                     <p><b>Event Type : </b><span className="deleteStatus"><b> {item.changeType}</b></span></p>
                                 </div>);
                             }
                         })()
                         }
-
                         <p><b>Date :</b> {moment(item.createdDate).format('LLL')} <b>
                             <span className="headColor">{moment(item.createdDate).fromNow()}</span>
                         </b></p>
