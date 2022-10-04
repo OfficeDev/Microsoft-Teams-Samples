@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-content-bubble-csharp
 
 This sample illustrates how to implement [Content Bubble](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience.
 
-[Agenda card](ContentBubble/Images/AgendaCard.png)
+![Agenda card](ContentBubble/Images/AgendaCard.png)
 
 [Feedback card](ContentBubble/Images/FeedbackCard.png)
 
