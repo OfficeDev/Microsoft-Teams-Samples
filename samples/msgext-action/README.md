@@ -1,0 +1,91 @@
+---
+page_type: sample
+description: This is an sample application which showcases action based messaging extension.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- nodejs
+extensions:
+ contentType: samples
+ createdDate: "10-04-2022 17:00:25"
+urlFragment: officedev-microsoft-teams-samples-msgext-action-nodejs
+---
+
+# Teams Messaging Extensions Action
+
+> Note this `manifest.json` specified that the bot will be called from both the `compose` and `message` areas of Teams. Please refer to Teams documentation for more details.
+
+1) Selecting the **Create Card** command from the Compose Box command list. The parameters dialog will be displayed and can be submitted to initiate the card creation within the Messaging Extension code. 
+
+or
+
+2) Selecting the **Share Message** command from the Message command list.
+
+![Messaging Extension](Images/MsgExtAction.gif)
+
+
+## Prerequisites
+
+- Microsoft Teams is installed and you have an account
+- [NodeJS](https://nodejs.org/en/)
+- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+
+## To try this sample
+
+> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
+the Teams service needs to call into the bot.
+
+1) Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
+    - Use the current `https` URL you were given by running ngrok. Append with the path `/api/messages` used by this sample
+    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
+
+## To try this sample
+
+1) Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+1) In a terminal, navigate to `samples/msgext-action/nodejs`
+
+1) Install modules
+
+    ```bash
+    npm install
+    ```
+
+1) Run ngrok - point to port 3978
+
+    ```bash
+    ngrok http --host-header=rewrite 3978
+    ```
+
+1) Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) `MicrosoftAppTenantId` will be the id for the tenant where application is registered.
+
+1) Run your bot at the command line:
+
+    ```bash
+    npm start
+    ```
+
+1) __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
+    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+
+## Deploy the bot to Azure
+
+To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
+
+## Further reading
+
+- [How Microsoft Teams bots work](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-basics-teams?view=azure-bot-service-4.0&tabs=javascript)
+
+- [Messaging Extensions](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) are a special kind of Microsoft Teams application that is supported by the [Bot Framework](https://dev.botframework.com) v4.
+
+There are two basic types of Messaging Extension in Teams: [Search-based](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/search-commands/define-search-command) and [Action-based](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command). This sample illustrates how to
+build an Action-based Messaging Extension.
