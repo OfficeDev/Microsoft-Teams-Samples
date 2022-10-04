@@ -17,6 +17,10 @@ urlFragment: officedev-microsoft-teams-samples-msgext-message-reminder-nodejs
 
 This sample shows a feature where user can schedule a task from messaging extension action and get a reminder card at a scheduled time.
 
+##Feature of the sample.
+
+![Task Details](Images/msgextmessagereminder.gif)
+
 - Personal scope scenario
  Select `...` over message to get action `create-reminder` for scheduling task.
 
