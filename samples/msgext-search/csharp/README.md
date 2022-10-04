@@ -19,6 +19,9 @@ urlFragment: officedev-microsoft-teams-samples-msgext-search-csharp
 There are two basic types of Messaging Extension in Teams: [Search-based](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/search-commands/define-search-command) and [Action-based](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command). This sample illustrates how to
 build a Search-based Messaging Extension.
 
+- **Interaction with Messaging Extension**
+![msgext-search ](Images/msgext-search.gif)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -30,17 +33,28 @@ build a Search-based Messaging Extension.
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 the Teams service needs to call into the bot.
 
+1) Setup for Messaging Extension
+
+   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+    - For bot handle, make up a name.
+    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
+    
+   In the new Azure Bot resource in the Portal, 
+    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
+
 1) Clone the repository
 
     ```bash
-    git clone https://github.com/Microsoft/botbuilder-samples.git
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
 1) If you are using Visual Studio
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples/csharp_dotnetcore/50.teams-messaging-extensions-search` folder
-  - Select `TeamsMessagingExtensionsSearch.csproj` file
+  - Navigate to `samples/msgext-search/csharp` folder
+  - Select `TeamsMessagingExtensionsSearch.csproj` or `TeamsMessagingExtensionsSearch.sln`file
 
 1) Run ngrok - point to port 3978
 
@@ -48,19 +62,20 @@ the Teams service needs to call into the bot.
     ngrok http --host-header=rewrite 3978
     ```
 
-1) Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
-    - Use the current `https` URL you were given by running ngrok. Append with the path `/api/messages` used by this sample
-    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
+1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppTenantId and MicrosoftAppPassword from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+    - Also, set MicrosoftAppType in the `appsettings.json`. 
+    **Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI.**
 
-1) Update the `appsettings.json` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-
-1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+    - Set BaseUrl as per your application like ngrok url: https://1234.ngrok.io
 
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
+
+1) __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip`
+    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+
 
 ## Interacting with the bot in Teams
 
@@ -68,7 +83,19 @@ the Teams service needs to call into the bot.
 
 In Teams, the command bar is located at the top of the window. When you at mention the bot what you type is forwarded (as you type) to the bot for processing. By way of illustration, this sample uses the text it receives to query the NuGet package store.
 
+**Mention In Search CommandBar:**
+  ![8-mention-Search-CommandBar ](Images/8-mention-Search-CommandBar.png)
+
+**Search Result:**
+   ![9-mention-Search-Result ](Images/9-mention-Search-Result.png)
+
+**Selected Item:**
+  ![10-mention-Search-SelectedItem ](Images/10-mention-Search-SelectedItem.png)
+
 There is a secondary, drill down, event illustrated in this sample: clicking on the results from the initial query will result in the bot receiving another event.
+![5-search-Result-ME ](Images/5-search-Result-ME.png)
+
+![6-selected-Item-ME ](Images/6-selected-Item-ME.png)
 
 ## Deploy the bot to Azure
 
