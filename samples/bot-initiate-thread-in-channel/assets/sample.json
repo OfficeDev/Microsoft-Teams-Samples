@@ -1,6 +1,6 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-bot-file-upload-nodejs",
+    "name": "officedev-microsoft-teams-samples-bot-initiate-thread-in-channel",
     "source": "officeDev",
     "title": "Bot Initiate Thread.",
     "shortDescription": "This sample showcases feature on how to start new message thread inside teams channel.",
