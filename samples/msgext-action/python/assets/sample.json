@@ -1,12 +1,12 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-msgext-action-preview-python",
+    "name": "officedev-microsoft-teams-samples-msgext-action-csharp",
     "source": "officeDev",
-    "title": "Action based Messaging Extension with preview using Bot Framework v4",
-    "shortDescription": "This sample app demonstrate how to use action preview in Messaging Extensions using Bot Framework v4",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-action-preview/python",
+    "title": "Action Based Messaging Extensions",
+    "shortDescription": "This sample app demonstrate how to use action based Messaging Extensions",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-action/python",
     "longDescription": [
-      "This sample app demonstrate how to use action preview in Messaging Extensions using Bot Framework v4"
+      "This sample app demonstrate how to use action based Messaging Extensions"
     ],
     "creationDateTime": "2019-10-17",
     "updateDateTime": "2022-09-22",
@@ -35,8 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-action-preview/python/Images/msgactionpreview.png",
-        "alt": "Solution UX showing Action based Messaging Extension with preview using Bot Framework v4"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-action/python/Images/MsgExtAction.gif",
+        "alt": "Solution UX showing action based Messaging Extensions"
       }
     ],
     "authors": [

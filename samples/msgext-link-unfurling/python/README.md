@@ -9,6 +9,9 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 - Microsoft Teams is installed and you have an account
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
+## Concepts introduced in this sample
+![MsgExtLink](Images/LinkUnfurling.gif)
+
 ## To try this sample
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because

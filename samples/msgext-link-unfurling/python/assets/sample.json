@@ -1,12 +1,12 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-msgext-action-csharp",
+    "name": "officedev-microsoft-teams-samples-msgext-link-unfurling-python",
     "source": "officeDev",
-    "title": "Action Based Messaging Extensions",
-    "shortDescription": "This sample app demonstrate how to use action based Messaging Extensions",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-action/python",
+    "title": "Link Unfurling in Messaging Extension using Bot Framework v4",
+    "shortDescription": "This sample app demonstrate how to use link unfurling in Messaging Extension using Bot Framework v4",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-link-unfurling/python",
     "longDescription": [
-      "This sample app demonstrate how to use action based Messaging Extensions"
+      "This sample app demonstrate how to use link unfurling in Messaging Extension using Bot Framework v4"
     ],
     "creationDateTime": "2019-10-17",
     "updateDateTime": "2022-09-22",
@@ -28,15 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "bot,ME"
+        "value": "ME"
       }
     ],
     "thumbnails": [
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-action/python/Images/msgextaction.gif",
-        "alt": "Solution UX showing action based Messaging Extensions"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-link-unfurling/python/Images/LinkUnfurling.png",
+        "alt": "Solution UX showing Link Unfurling in Messaging Extension using Bot Framework v4"
       }
     ],
     "authors": [

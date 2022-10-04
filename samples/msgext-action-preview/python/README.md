@@ -1,15 +1,18 @@
-# Teams Messaging Extensions Action
+# Teams Messaging Extensions Action Preview
 
 [Messaging Extensions](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) are a special kind of Microsoft Teams application that is support by the [Bot Framework](https://dev.botframework.com) v4.
 
 There are two basic types of Messaging Extension in Teams: [Search-based](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/search-commands/define-search-command) and [Action-based](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command). This sample illustrates how to
-build an Action-based Messaging Extension.
+build an Action Based Messaging Extension and demonstrates creating a simple card based on parameters entered by the user from a Task Module.
 
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
 - [Python SDK](https://www.python.org/downloads/) version 3.7
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+
+## Concepts introduced in this sample
+![MsgExtAction](Images/MsgExtPreview.gif)
 
 ## To try this sample
 
@@ -33,7 +36,7 @@ the Teams service needs to call into the bot.
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
 
-1) Bring up a terminal, navigate to `botbuilder-samples\samples\python\51.teams-messaging-extensions-action` folder
+1) Bring up a terminal, navigate to `botbuilder-samples\samples\python\53.teams-messaging-extensions-action-preview` folder
 
 1) Activate your desired virtual environment
 
@@ -50,14 +53,9 @@ the Teams service needs to call into the bot.
 
 ## Interacting with the bot in Teams
 
-> Note this `manifest.json` specified that the bot will be called from both the `compose` and `message` areas of Teams. Please refer to Teams documentation for more details.  Also note this bot does not process incoming Messages, but responds only to Messaging Extension commands. 
+> Note the `manifest.json` specifies that this bot will be available in the `team` scope and the command will be available in the `compose`, `commandBox` and `message` contexts.
 
-1) Selecting the **Create Card** command from the Compose Box command list. The parameters dialog will be displayed and can be submitted to initiate the card creation within the Messaging Extension code. 
-
-or
-
-2) Selecting the **Share Message** command from the Message command list.  
-
+Click the Messaging Extension icon in the Compose Box's Messaging Extension menu.
 
 ## Deploy the bot to Azure
 

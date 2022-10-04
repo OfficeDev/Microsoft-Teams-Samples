@@ -9,7 +9,7 @@
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
 ## Concepts introduced in this sample
-![TaskModule](Images/TaskModule.gif.gif)
+![TaskModule](Images/TaskModule.gif)
 
 Sends Adaptive Cards 
 ![Adaptive Cards](Images/1.PNG)

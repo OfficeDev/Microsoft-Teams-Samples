@@ -12,6 +12,13 @@ how to incorporate basic conversational flow into a Teams application. It also i
 - [Python SDK](https://www.python.org/downloads/) min version 3.6
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
+## Concepts introduced in this sample
+![TeamsThread](Images/TeamsThread.gif)
+
+![AddInTeam](Images/AddInTeam.PNG)
+
+![NewThread](Images/NewThread.PNG)
+
 ## To try this sample
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
