@@ -1,4 +1,4 @@
-﻿---
+---
 page_type: sample
 description: This sample app demonstrate how to use search based Messaging Extension
 products:
@@ -12,6 +12,7 @@ extensions:
  createdDate: "17-10-2019 13:38:25"
 urlFragment: officedev-microsoft-teams-samples-msgext-search-csharp
 ---
+
 # Teams Messaging Extensions Search
 
 [Messaging Extensions](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) are a special kind of Microsoft Teams application that is support by the [Bot Framework](https://dev.botframework.com) v4.
