@@ -17,6 +17,10 @@ urlFragment: officedev-microsoft-teams-samples-msgext-message-reminder-csharp
 
 This sample shows a feature where user can schedule a task from messaging extension action and get a reminder card at a scheduled time.
 
+##Feature of the sample.
+
+![Select message](MessagingExtensionReminder/Images/MessageExtensionReminderModule.gif)
+
 ![Select message](MessagingExtensionReminder/Images/MessageAction.png)
 
 ![Task Details](MessagingExtensionReminder/Images/ScheduleTask.png)
