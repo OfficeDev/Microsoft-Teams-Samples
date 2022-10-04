@@ -21,6 +21,8 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 -   Upload files to Teams from a bot and how to receive a file sent to a bot as an attachment.
 -   How to automatically fetch and save an inline image sent to a bot as a message.
 
+ ![File Upload](Images/FileUpload.gif)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
