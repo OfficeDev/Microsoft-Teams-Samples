@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample showcases feature on how to capture reaction events when reactions are passed to the bot through personal/teams messages.
+description: This sample showcases feature on how to start new message thread inside teams channel.
 products:
 - office-teams
 - office
@@ -10,14 +10,19 @@ languages:
 extensions:
  contentType: samples
  createdDate: "10-04-2022 17:00:25"
-urlFragment: officedev-microsoft-teams-samples-bot-message-reaction-nodejs
+urlFragment: officedev-microsoft-teams-samples-bot-initiate-thread-in-channel-nodejs
 ---
 
-## Message Reactions Bot
+# Teams - Start new thread in a channel (proactive messaging)
 
-Message the bot and it will respond with an 'Echo: [your message]'.  Add a message reaction to the bot's response, and the bot will reply accordingly.
+You can interact with this bot by sending it a message. The bot will respond by sending a reply to the channel, and then responding to that reply.
 
- ![Message Reaction](Images/MessageReactions.gif)
+ ![Teams Thread](Images/TeamsThread.gif)
+
+This Bot Framework v4 bot shows how to create a new thread in a Teams channel by sending a proactive message, then replying to that message.
+
+This bot has been created using [Bot Framework](https://dev.botframework.com). This sample shows
+how to incorporate basic conversational flow into a Teams application. It also illustrates a few of the Teams specific calls you can make from your bot.
 
 ## Prerequisites
 
@@ -42,7 +47,7 @@ the Teams service needs to call into the bot.
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/bot-message-reaction/nodejs`
+1) In a terminal, navigate to `samples/bot-initiate-thread-in-channel/nodejs`
 
 1) Install modules
 
@@ -57,7 +62,8 @@ the Teams service needs to call into the bot.
     ```
 
 1) Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) `MicrosoftAppTenantId` will be the id for the tenant where application is registered.
-- Also, set MicrosoftAppType in the `.env`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+- Set "MicrosoftAppType" in the `.env`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+
 
 1) Run your bot at the command line:
 
@@ -70,29 +76,22 @@ the Teams service needs to call into the bot.
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
-    - Add the app in personal/groupchat/team scope (supported scopes)
+    - Add the app to a any Teams channel
 
-## Interacting with the bot in Teams
+## Interacting with the bot
 
-Message the bot and it will respond with an 'Echo: [your message]'.  Add a message reaction to the bots response, and the bot will reply accordingly.
+You can interact with this bot by sending it a message. The bot will respond by creating a new thread in the channel and replying to that new thread.
 
-- **Personal Scope Interactions:**
+**Adding the bot to a team's channel :**
+![add-App ](Images/add-App.png)
 
-![personalScope-AddApp ](Images/personalScope-AddApp.png)
+![add-App-To-Teams-Channel ](Images/add-App-To-Teams-Channel.png)
 
-![personalScope-Interaction ](Images/personalScope-Interaction.png)
+![added-App ](Images/added-App.png)
 
-- **Group Chat Scope Interactions:**
+**Mention the bot in a team's channel using "@" with any message like: '@yourbotname Hello' :**
+![mentionedBot-NewThread ](Images/mentionedBot-NewThread.png)
 
-![groupChat-AddApp ](Images/groupChat-AddApp.png)
-
-![groupChat-Interaction ](Images/groupChat-Interaction.png)
-
-- **Team Scope Interactions:**
-
-![teamScope-AddApp ](Images/teamScope-AddApp.png)
-
-![teamScope-Interaction ](Images/teamScope-Interaction.png)
 
 ## Deploy the bot to Azure
 
@@ -100,4 +99,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Teams Message Reaction Events](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/subscribe-to-conversation-events?tabs=dotnet#message-reaction-events)
+- [How Microsoft Teams bots work](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-basics-teams?view=azure-bot-service-4.0&tabs=javascript)

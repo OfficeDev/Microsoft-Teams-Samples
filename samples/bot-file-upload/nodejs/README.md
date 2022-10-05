@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample showcases feature on how to capture reaction events when reactions are passed to the bot through personal/teams messages.
+description: This sample showcases file upload/download feature using teams bot.
 products:
 - office-teams
 - office
@@ -10,14 +10,18 @@ languages:
 extensions:
  contentType: samples
  createdDate: "10-04-2022 17:00:25"
-urlFragment: officedev-microsoft-teams-samples-bot-message-reaction-nodejs
+urlFragment: officedev-microsoft-teams-samples-bot-file-upload-nodejs
 ---
 
-## Message Reactions Bot
+# Teams File Upload Bot
 
-Message the bot and it will respond with an 'Echo: [your message]'.  Add a message reaction to the bot's response, and the bot will reply accordingly.
+Bot Framework v4 file upload bot sample for Teams.
 
- ![Message Reaction](Images/MessageReactions.gif)
+This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to -
+-   Upload files to Teams from a bot and how to receive a file sent to a bot as an attachment.
+-   How to automatically fetch and save an inline image sent to a bot as a message.
+
+ ![File Upload](Images/FileUpload.gif)
 
 ## Prerequisites
 
@@ -25,7 +29,7 @@ Message the bot and it will respond with an 'Echo: [your message]'.  Add a messa
 - [NodeJS](https://nodejs.org/en/)
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## To try this sample
+### To try this sample
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 the Teams service needs to call into the bot.
@@ -42,7 +46,7 @@ the Teams service needs to call into the bot.
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/bot-message-reaction/nodejs`
+1) In a terminal, navigate to `samples/bot-file-upload/nodejs`
 
 1) Install modules
 
@@ -66,33 +70,32 @@ the Teams service needs to call into the bot.
     ```
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
-    - Add the app in personal/groupchat/team scope (supported scopes)
+    - Add the app to personal scope (Supported app scope)
 
 ## Interacting with the bot in Teams
 
-Message the bot and it will respond with an 'Echo: [your message]'.  Add a message reaction to the bots response, and the bot will reply accordingly.
+> Note this `manifest.json` specified that the bot will be installed in "personal" scope which is why you immediately entered a one on one chat conversation with the bot. Please refer to Teams documentation for more details.
 
-- **Personal Scope Interactions:**
+1. Adding the bot:
+![add-App ](Images/add-App.png)
 
-![personalScope-AddApp ](Images/personalScope-AddApp.png)
+1. Sending a message to the bot will cause it to respond with a card that will prompt you to upload a file. The file that's being uploaded is the `teams-logo.png` in the `Files` directory in this sample. The `Accept` and `Decline` events illustrated in this sample are specific to Teams. You can message the bot again to receive another prompt.
+![file-Card ](Images/file-Card.png)
+![file-Card-Uploaded ](Images/file-Card-Uploaded.png)
 
-![personalScope-Interaction ](Images/personalScope-Interaction.png)
+1. You can send a file to the bot as an attachment in the message compose section in Teams. This will be delivered to the bot as a Message Activity and the code in this sample fetches and saves the file.
+![attachment-File-Upload ](Images/attachment-File-Upload.png)
+![attachment-File-Uploaded ](Images/attachment-File-Uploaded.png)
 
-- **Group Chat Scope Interactions:**
+1. You can also send an inline image in the message compose section. This will be present in the attachments of the Activity and requires the Bot's access token to fetch the image.
+![inline-Image ](Images/inline-Image.png)
+![inline-Image-Send ](Images/inline-Image-Send.png)
+![inline-Image-Uploaded ](Images/inline-Image-Uploaded.png)
 
-![groupChat-AddApp ](Images/groupChat-AddApp.png)
-
-![groupChat-Interaction ](Images/groupChat-Interaction.png)
-
-- **Team Scope Interactions:**
-
-![teamScope-AddApp ](Images/teamScope-AddApp.png)
-
-![teamScope-Interaction ](Images/teamScope-Interaction.png)
 
 ## Deploy the bot to Azure
 
@@ -100,4 +103,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Teams Message Reaction Events](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/subscribe-to-conversation-events?tabs=dotnet#message-reaction-events)
+- [How Microsoft Teams bots work](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-basics-teams?view=azure-bot-service-4.0&tabs=javascript)

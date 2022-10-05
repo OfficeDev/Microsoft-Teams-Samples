@@ -59,6 +59,7 @@ the Teams service needs to call into the bot.
     ```
 
 1) Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) `MicrosoftAppTenantId` will be the id for the tenant where application is registered.
+- Set "MicrosoftAppType" in the `.env`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
 
 1) Run your bot at the command line:
 
@@ -68,8 +69,21 @@ the Teams service needs to call into the bot.
 
 1) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app"
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+    - Add the app in team scope (Supported app scope)
+
+## Interacting with the bot in Teams
+
+> Note the `manifest.json` specifies that this bot will be available in "personal", "team" and "groupchat" scopes and the command will be available in the "commandBox", "compose" and "message" context.
+
+Click the Messaging Extension icon in the Compose Box's Messaging Extension menu.
+![team-TaskModule ](Images/team-TaskModule.png)
+
+![taskmodule-card-Preview ](Images/taskmodule-card-Preview.png)
+
+![team-PostedCard ](Images/team-PostedCard.png)
 
 ## Deploy the bot to Azure
 
