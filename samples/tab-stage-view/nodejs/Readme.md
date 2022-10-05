@@ -21,6 +21,8 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
 
 ## Key features
 
+![Tab Stage View](Images/tabStageView.gif)
+
 - Welcome message with feature explanation.
 
 ![Welcome Message](Images/welcomeAction.png)
@@ -87,7 +89,7 @@ Also update `BaseUrl` according to your code runtime environment.
 
 - Install modules & Run the `NodeJS` Server 
     - Server will run on PORT:  `3978`
-    - Open a terminal and navigate to project root directory
+    - Open a terminal and navigate to project root directory.
     
     ```bash
     npm run server
@@ -98,7 +100,7 @@ Also update `BaseUrl` according to your code runtime environment.
 
 - __*This step is specific to Teams.*__
     **Edit** the `manifest.json` in the `appPackage` folder and replace the following details:
-   - `<<MANIFEST-ID>>` with some unique GUID   
+   - `<<MANIFEST-ID>>` with some unique GUID. This can be your `MicrosoftAppId` as well.  
    - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
    - `<<YOUR-MICROSOFT-APP-ID>>` with the `MicrosoftAppId`. 
    - `<<DOMAIN-NAME>>` with the ngrok URL or app hosted base url.

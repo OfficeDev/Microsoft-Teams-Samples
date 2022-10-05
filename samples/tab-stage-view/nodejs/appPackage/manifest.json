@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
   "manifestVersion": "1.12",
   "version": "1.0.0",
-  "id": "<<MANIFEST-ID>>",
+  "id": "<<GUID>>",
   "packageName": "com.microsoft.teams.tabstageview",
   "developer": {
     "name": "Microsoft",
@@ -11,12 +11,12 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Tab Stage View",
-    "full": "Tab in stage view"
+    "short": "Stage View Sample",
+    "full": "Stage View Sample Teams App"
   },
   "description": {
-    "short": "View Tab in stage view",
-    "full": "This sample demos the tab in stage view"
+    "short": "Sample app to test the Stage View feature",
+    "full": "View your app content in a pop-out window or dialog called Stage View" 
   },
   "icons": {
     "outline": "outline.png",
@@ -33,20 +33,53 @@
         "channelTab"
       ],
       "name": "Stage View",
-      "contentUrl": "<<BASE-URL>>/tab",
-      "websiteUrl": "<<BASE-URL>>/tab",
-      "searchUrl": "<<BASE-URL>>/tab"
+      "contentUrl": "<<BASE_URL>>/tab",
+      "websiteUrl": "<<BASE_URL>>/tab",
+      "searchUrl": "<<BASE_URL>>/tab"
     }
   ],
   "bots": [
     {
-      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "botId": "<<MICROSOFT-APP-ID>>",
       "scopes": [
         "team",
         "personal",
         "groupchat"
       ],
       "isNotificationOnly": false
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "<<MICROSOFT-APP-ID>>",
+      "messageHandlers": [
+        {
+          "type": "link",
+          "value": {
+            "domains": [
+              "<<DOMAIN-NAME>>"
+            ]
+          }
+        }
+      ],
+      "canUpdateConfiguration": true,
+      "commands": [
+        {
+          "id": "searchQuery",
+          "context": [ "compose", "commandBox" ],
+          "description": "Test command to run query",
+          "title": "Search",
+          "type": "query",
+          "parameters": [
+            {
+              "name": "searchQuery",
+              "title": "Search Query",
+              "description": "Your search query",
+              "inputType": "text"
+            }
+          ]
+        }
+      ]
     }
   ],
   "accentColor": "#60A18E",
