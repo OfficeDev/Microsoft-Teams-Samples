@@ -19,6 +19,9 @@ Bot Framework [message reactions](https://docs.microsoft.com/en-us/microsoftteam
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that responds to Message Reactions.
 
+- **Interaction with bot**
+![bot-message-reaction ](Images/bot-message-reaction.gif)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
@@ -29,40 +32,67 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because the Teams service needs to call into the bot.
 
-1) Clone the repository
-
-    ```bash
-    git clone https://github.com/Microsoft/botbuilder-samples.git
-    ```
-
-1) If you are using Visual Studio
-    - Open the solution `samples\csharp_dotnetcore\csharp_dotnetcore.sln`
-    - Set the Startup Project to `MessageReaction`
-    - The changes specified here will apply to this project
-
 1) Run ngrok - point to port 3978
 
     ```bash
     ngrok http --host-header=rewrite 3978
     ```
 
-1) Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
-    - Use the current `https` URL you were given by running ngrok. Append with the path `/api/messages` used by this sample
-    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
+1) Setup for Bot
 
-1) Update the `appsettings.json` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+    - For bot handle, make up a name.
+    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
+    
+   In the new Azure Bot resource in the Portal, 
+    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
 
-1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+1) Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+1) If you are using Visual Studio
+   - Launch Visual Studio
+   - File -> Open -> Project/Solution
+   - Navigate to `samples/bot-message-reaction/csharp` folder
+   - Select `MessageReaction.csproj` or `MessageReaction.sln`file
+
+1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 1 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+    - Also, set MicrosoftAppType in the `appsettings.json`. **Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI.**
 
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
+
+1) __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+    - Add the app in personal/groupchat/team scope (supported scopes)
 
 ## Interacting with the bot in Teams
 
 Message the bot and it will respond with an 'Echo: [your message]'.  Add a message reaction to the bots response, and the bot will reply accordingly.
+
+- **Personal Scope Interactions:**
+
+![personalScope-AddApp ](Images/personalScope-AddApp.png)
+
+![personalScope-Interaction ](Images/personalScope-Interaction.png)
+
+- **Group Chat Scope Interactions:**
+![groupChat-AddApp ](Images/groupChat-AddApp.png)
+
+![groupChat-Interaction ](Images/groupChat-Interaction.png)
+
+- **Team Scope Interactions:**
+![teamScope-AddApp ](Images/teamScope-AddApp.png)
+
+![teamScope-Interaction ](Images/teamScope-Interaction.png)
+
 
 ## Deploy the bot to Azure
 
