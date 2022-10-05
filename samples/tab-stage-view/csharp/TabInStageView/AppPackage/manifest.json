@@ -1,8 +1,8 @@
 ﻿{
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
   "manifestVersion": "1.12",
-  "version": "1.0.1",
-  "id": "<<MANIFEST-ID>>",
+  "version": "1.0.0",
+  "id": "<<GUID>>",
   "packageName": "com.microsoft.teams.tabstageview",
   "developer": {
     "name": "Microsoft",
@@ -11,12 +11,12 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Tab Stage View",
-    "full": "Tab in stage view"
+    "short": "Stage View Sample",
+    "full": "Stage View Sample Teams App"
   },
   "description": {
-    "short": "View Tab in stage view",
-    "full": "This sample demos the tab in stage view"
+    "short": "Sample app to test the Stage View feature",
+    "full": "View your app content in a pop-out window or dialog called Stage View"
   },
   "icons": {
     "outline": "outline.png",
@@ -33,14 +33,14 @@
         "channelTab"
       ],
       "name": "Stage View",
-      "contentUrl": "<<BASE-URL>>/sampleTab",
-      "websiteUrl": "<<BASE-URL>>/sampleTab",
-      "searchUrl": "<<BASE-URL>>/sampleTab"
+      "contentUrl": "<<BASE_URL>>/tab",
+      "websiteUrl": "<<BASE_URL>>/tab",
+      "searchUrl": "<<BASE_URL>>/tab"
     }
   ],
   "bots": [
     {
-      "botId": "{{BOT-ID}}",
+      "botId": "<<MICROSOFT-APP-ID>>",
       "scopes": [
         "team",
         "personal",
@@ -49,10 +49,43 @@
       "isNotificationOnly": false
     }
   ],
+  "composeExtensions": [
+    {
+      "botId": "<<MICROSOFT-APP-ID>>",
+      "messageHandlers": [
+        {
+          "type": "link",
+          "value": {
+            "domains": [
+              "<<DOMAIN-NAME>>"
+            ]
+          }
+        }
+      ],
+      "canUpdateConfiguration": true,
+      "commands": [
+        {
+          "id": "searchQuery",
+          "context": [ "compose", "commandBox" ],
+          "description": "Test command to run query",
+          "title": "Search",
+          "type": "query",
+          "parameters": [
+            {
+              "name": "searchQuery",
+              "title": "Search Query",
+              "description": "Your search query",
+              "inputType": "text"
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "accentColor": "#60A18E",
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "<<VALID DOMAIN>>",
+    "<<DOMAIN-NAME>>",
     "token.botframework.com"
   ]
 }

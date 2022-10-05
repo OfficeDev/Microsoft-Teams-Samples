@@ -9,7 +9,7 @@
       "Microsoft Teams tab sample app for demonstrating tab in stage view"
     ],
     "creationDateTime": "2021-06-10",
-    "updateDateTime": "2022-05-17",
+    "updateDateTime": "2022-09-28",
     "products": [
       "Teams"
     ],
@@ -28,15 +28,15 @@
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "tab,bot"
+        "value": "tab,bot,ME"
       }
     ],
     "thumbnails": [
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-stage-view/csharp/TabInStageView/Images/viaCardAction.png",
-        "alt": "Solution UX showing stage view"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-stage-view/csharp/TabInStageView/Images/tabStageView.gif",
+        "alt": "Solution UX showing tab stage view functionality"
       }
     ],
     "authors": [

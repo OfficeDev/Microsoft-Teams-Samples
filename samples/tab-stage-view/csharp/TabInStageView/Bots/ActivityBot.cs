@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -11,7 +12,9 @@ using AdaptiveCards;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
+using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Configuration;
+using Microsoft.VisualBasic;
 using TabInStageView.Models;
 
 namespace TabInStageView.Bots
@@ -89,7 +92,7 @@ namespace TabInStageView.Bots
                 {
                     new AdaptiveSubmitAction
                     {
-                        Title = "View via card action",
+                        Title = "View via card",
                         Data = new AdaptiveCardAction
                         {
                             MsteamsCardAction = new CardAction
@@ -98,7 +101,7 @@ namespace TabInStageView.Bots
                                 Value = new TabInfoAction
                                 {
                                     Type = "tab/tabInfoAction",
-                                    TabInfo = new TabInfo
+                                    TabInfo = new Models.TabInfo
                                     {
                                         ContentUrl = $"{_applicationBaseURL}",
                                         WebsiteUrl = $"{_applicationBaseURL}",
@@ -108,11 +111,6 @@ namespace TabInStageView.Bots
                                 }
                             },
                         },
-                    },
-                    new AdaptiveOpenUrlAction
-                    {
-                        Title = "View via deeplink",
-                        Url = new Uri(GetDeeplinkForStageView()),
                     },
                 },
             };
@@ -125,12 +123,62 @@ namespace TabInStageView.Bots
         }
 
         /// <summary>
-        /// Create deeplink for stage view.
+        /// On Search Query Message Command.
         /// </summary>
-        private string GetDeeplinkForStageView()
+        protected override async Task<MessagingExtensionResponse> OnTeamsMessagingExtensionQueryAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionQuery query, CancellationToken cancellationToken)
         {
-            var deepLinkUrl = "https://teams.microsoft.com/l/stage/" + _appId + "/0?context=" + HttpUtility.UrlEncode("{\"contentUrl\":\""+_applicationBaseURL+"\",\"websiteUrl\":\""+_applicationBaseURL+"\",\"name\":\"DemoStageView\"}");
-            return deepLinkUrl;
+            var text = query?.Parameters?[0]?.Value as string ?? string.Empty;
+
+            var packages = new[] {
+            new { title = "A very extensive set of extension methods", value = "FluentAssertions" },
+            new { title = "Fluent UI Library", value = "FluentUI" }};
+            await turnContext.SendActivityAsync(MessageFactory.Attachment(CreateCard()));
+
+            // We take every row of the results and wrap them in cards wrapped in MessagingExtensionAttachment objects.
+            // The Preview is optional, if it includes a Tap, that will trigger the OnTeamsMessagingExtensionSelectItemAsync event back on this bot.
+            var attachments = packages.Select(package =>
+            {
+                var previewCard = new ThumbnailCard { Title = package.title, Tap = new CardAction { Type = "invoke", Value = package } };
+                if (!string.IsNullOrEmpty(package.title))
+                {
+                    previewCard.Images = new List<CardImage>() { new CardImage(package.title, "Icon") };
+                }
+
+                var attachment = new MessagingExtensionAttachment
+                {
+                    ContentType = HeroCard.ContentType,
+                    Content = new HeroCard { Title = package.title },
+                    Preview = previewCard.ToAttachment()
+                };
+
+                return attachment;
+            }).ToList();
+
+            // The list of MessagingExtensionAttachments must we wrapped in a MessagingExtensionResult wrapped in a MessagingExtensionResponse.
+            return new MessagingExtensionResponse
+            {
+                ComposeExtension = new MessagingExtensionResult
+                {
+                    Type = "result",
+                    AttachmentLayout = "list",
+                    Attachments = attachments
+                }
+            };
+        }
+
+        /// <summary>
+        /// Creating Card.
+        /// </summary>
+        private Attachment CreateCard()
+        {
+            return new HeroCard
+            {
+                Title = "This is a Link Unfurling Sample",
+                Subtitle = "It will unfurl links from *.BotFramework.com",
+                Text = "This sample demonstrates how to handle link unfurling in Teams.  Please review the readme for more information."
+
+            }.ToAttachment();
         }
     }
+
 }

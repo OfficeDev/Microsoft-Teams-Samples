@@ -42,11 +42,11 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
 
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-3. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
-   - `<<MANIFEST-ID>>` with some unique GUID   
+3. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details.
+   - `<<GUID>>` with some unique GUID. This can be your MicrosoftAppId as well.
    - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
-   - `{{BOT-ID}}` with the id from step 2.
-   - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
+   - `<<MICROSOFT-APP-ID>>` with the id from step 2.
+   - `<<DOMAIN-NAME>>` with your app domain e.g. *.ngrok.io
 
 4. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 7.
 
@@ -92,6 +92,8 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
 
 ## Features of this sample
 
+![TabInStageView](TabInStageView/Images/tabStageView.gif)
+
 - Welcome message with feature explanation.
 
 ![Welcome Message](TabInStageView/Images/welcomeAction.png)
@@ -111,6 +113,7 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
 - Tab with execute deep link action to open stage view.
 
 ![Tab View](TabInStageView/Images/viaTabDeeplink.png)
+
 
 ## Deploy the bot to Azure
 
