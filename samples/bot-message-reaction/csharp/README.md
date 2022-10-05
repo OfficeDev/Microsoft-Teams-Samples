@@ -61,8 +61,8 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
    - Navigate to `samples/bot-message-reaction/csharp` folder
    - Select `MessageReaction.csproj` or `MessageReaction.sln`file
 
-1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 1 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-    - Also, set MicrosoftAppType in the `appsettings.json`. **Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI.**
+1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+    - Also, set MicrosoftAppType in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
 
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
@@ -84,11 +84,13 @@ Message the bot and it will respond with an 'Echo: [your message]'.  Add a messa
 ![personalScope-Interaction ](Images/personalScope-Interaction.png)
 
 - **Group Chat Scope Interactions:**
+
 ![groupChat-AddApp ](Images/groupChat-AddApp.png)
 
 ![groupChat-Interaction ](Images/groupChat-Interaction.png)
 
 - **Team Scope Interactions:**
+
 ![teamScope-AddApp ](Images/teamScope-AddApp.png)
 
 ![teamScope-Interaction ](Images/teamScope-Interaction.png)

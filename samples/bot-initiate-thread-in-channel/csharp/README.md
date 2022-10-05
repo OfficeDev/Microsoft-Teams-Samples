@@ -32,6 +32,12 @@ This bot has been created using [Bot Framework](https://dev.botframework.com). T
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 the Teams service needs to call into the bot.
 
+1) Run ngrok - point to port 3978
+
+    ```bash
+    ngrok http --host-header=rewrite 3978
+    ```
+
 1) Setup for Bot
 
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
@@ -55,13 +61,8 @@ the Teams service needs to call into the bot.
    - Navigate to `samples/bot-initiate-thread-in-channel/csharp` folder
    - Select `TeamsStartNewThreadInTeam.csproj` or `TeamsStartNewThreadInTeam.sln`file
 
-1) Run ngrok - point to port 3978
-
-    ```bash
-    ngrok http --host-header=rewrite 3978
-    ```
-1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 1 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-    - Set "MicrosoftAppType" in the `appsettings.json`. **Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI.**
+1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+    - Set "MicrosoftAppType" in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
 
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
@@ -77,7 +78,7 @@ the Teams service needs to call into the bot.
 You can interact with this bot by sending it a message. The bot will respond by creating a new thread in the channel and replying to that new thread.
 
 **Adding the bot to a team's channel :**
-![add-App ](Images/personal-AddBot.png)
+![add-App ](Images/add-App.png)
 
 ![add-App-To-Teams-Channel ](Images/add-App-To-Teams-Channel.png)
 
