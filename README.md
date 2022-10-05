@@ -379,7 +379,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [msteams-app-qbot]:samples/msteams-application-qbot/
 
 [bot-conversation#python]:samples/bot-conversation/python
-[bot-file-upload#python]:samples/bot-file-upload/csharp
+[bot-file-upload#python]:samples/bot-file-upload/python
 [bot-initiate-thread-in-channel#python]:samples/bot-initiate-thread-in-channel/python
 [bot-message-reaction#python]:samples/bot-message-reaction/python
 [bot-task-module#python]:samples/bot-task-module/python
