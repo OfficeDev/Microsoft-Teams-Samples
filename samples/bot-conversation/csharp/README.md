@@ -64,7 +64,8 @@ the Teams service needs to call into the bot.
    - Select `TeamsConversationBot.csproj` or `TeamsConversationBot.sln`file
 
 1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 1 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-    - Also, set MicrosoftAppType in the `appsettings.json`. **Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI.**
+    - Also, set MicrosoftAppType in the `appsettings.json`. 
+    **Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI.**
 
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
@@ -73,6 +74,7 @@ the Teams service needs to call into the bot.
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+    - Add the app to personal/team/groupChat scope (Supported scopes)
 
 
 ## Interacting with the bot
