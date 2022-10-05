@@ -19,5 +19,11 @@ namespace TeamsMessagingExtensionsAction.Controllers
         {
             return View("CustomForm");
         }
+
+        [Route("/Home/HtmlPage")]
+        public ActionResult HtmlPage()
+        {
+            return View("HtmlPage");
+        }
     }
 }

@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-action/csharp/Images/<test-image>.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-action/csharp/Images/msgext-action.gif",
         "alt": "Solution UX showing action based Messaging Extensions"
       }
     ],

@@ -156,7 +156,8 @@ namespace Microsoft.BotBuilderSamples.Bots
         {
             // The user has chosen to create a card by choosing the 'Web View' context menu command.
             CustomFormResponse cardData = JsonConvert.DeserializeObject<CustomFormResponse>(action.Data.ToString());
-            var imgUrl = baseUrl + "/MSFT_logo.jpg";
+            var imgUrl = baseUrl + "/profile-image.png";
+
             var card = new ThumbnailCard
             {
                 Title = "ID: " + cardData.EmpId,
@@ -200,7 +201,10 @@ namespace Microsoft.BotBuilderSamples.Bots
             };
         }
 
-        protected override async Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionFetchTaskAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionAction action, CancellationToken cancellationToken)
+        protected override async Task<MessagingExtensionActionResponse> OnTeamsMessagingExtensionFetchTaskAsync(
+            ITurnContext<IInvokeActivity> turnContext, 
+            MessagingExtensionAction action, 
+            CancellationToken cancellationToken)
         {
             switch (action.CommandId)
             {
@@ -286,7 +290,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                         Height = 200,
                         Width = 400,
                         Title = "Task Module HTML Page",
-                        Url = baseUrl + "/htmlpage.html",
+                        Url = baseUrl + "/Home/HtmlPage",
                     },
                 },
             };
