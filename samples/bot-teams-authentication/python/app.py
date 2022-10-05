@@ -19,7 +19,7 @@ from botbuilder.core import (
 from botbuilder.core.integration import aiohttp_error_middleware
 from botbuilder.schema import Activity, ActivityTypes
 
-from bots import TeamsBot
+from bots import AuthBot
 
 # Create the loop and Flask app
 from config import DefaultConfig
@@ -73,7 +73,7 @@ CONVERSATION_STATE = ConversationState(MEMORY)
 DIALOG = MainDialog(CONFIG.CONNECTION_NAME)
 
 # Create Bot
-BOT = TeamsBot(CONVERSATION_STATE, USER_STATE, DIALOG)
+BOT = AuthBot(CONVERSATION_STATE, USER_STATE, DIALOG)
 
 
 # Listen for incoming requests on /api/messages.
@@ -87,9 +87,9 @@ async def messages(req: Request) -> Response:
     activity = Activity().deserialize(body)
     auth_header = req.headers["Authorization"] if "Authorization" in req.headers else ""
 
-    invoke_response = await ADAPTER.process_activity(activity, auth_header, BOT.on_turn)
-    if invoke_response:
-        return json_response(data=invoke_response.body, status=invoke_response.status)
+    response = await ADAPTER.process_activity(activity, auth_header, BOT.on_turn)
+    if response:
+        return json_response(data=response.body, status=response.status)
     return Response(status=HTTPStatus.OK)
 
 

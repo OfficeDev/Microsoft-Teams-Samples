@@ -12,9 +12,7 @@ class LogoutDialog(ComponentDialog):
 
         self.connection_name = connection_name
 
-    async def on_begin_dialog(
-        self, inner_dc: DialogContext, options: object
-    ) -> DialogTurnResult:
+    async def on_begin_dialog(self, inner_dc: DialogContext, options: object) -> DialogTurnResult:
         result = await self._interrupt(inner_dc)
         if result:
             return result

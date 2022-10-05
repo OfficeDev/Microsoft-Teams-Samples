@@ -1,6 +1,6 @@
 ﻿---
 page_type: sample
-description: This sample app demonstrate is how to use the Bot Framework support for oauth in your bot.
+description: This sample app demonstrate iss how to use the Bot Framework support for oauth in your bot.
 products:
 - office-teams
 - office
@@ -10,7 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "12-12-2019 13:38:25"
-urlFragment: officedev-microsoft-teams-samples-bot-teams-authentication-python
+urlFragment: officedev-microsoft-teams-samples-bot-team-teams-authentication--python
 
 ---
 

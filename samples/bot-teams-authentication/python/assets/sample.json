@@ -1,6 +1,6 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-bot-teams-authentication-csharp",
+    "name": "officedev-microsoft-teams-samples-bot-teams-authentication-python",
     "source": "officeDev",
     "title": "Teams authentication for bot using Bot Framework v4",
     "shortDescription": "This sample app demonstrate how an Bot can use Teams authentication",

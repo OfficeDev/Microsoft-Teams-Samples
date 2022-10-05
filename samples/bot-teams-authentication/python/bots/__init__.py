@@ -2,6 +2,6 @@
 # Licensed under the MIT License.
 
 from .dialog_bot import DialogBot
-from .teams_bot import TeamsBot
+from .auth_bot import AuthBot
 
-__all__ = ["DialogBot", "TeamsBot"]
+__all__ = ["DialogBot", "AuthBot"]

@@ -1,13 +1,12 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License.
 
-from botbuilder.core import ConversationState, UserState, TurnContext
-from botbuilder.core.teams import TeamsActivityHandler
+from botbuilder.core import ActivityHandler, ConversationState, UserState, TurnContext
 from botbuilder.dialogs import Dialog
 from helpers.dialog_helper import DialogHelper
 
 
-class DialogBot(TeamsActivityHandler):
+class DialogBot(ActivityHandler):
     def __init__(
         self,
         conversation_state: ConversationState,
