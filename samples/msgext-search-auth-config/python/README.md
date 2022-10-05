@@ -34,7 +34,7 @@ the Teams service needs to call into the bot.
 1) Clone the repository
 
     ```bash
-    git clone https://github.com/Microsoft/botbuilder-samples.git
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
 1) Run ngrok - point to port 3978
@@ -49,7 +49,7 @@ the Teams service needs to call into the bot.
     - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
     - Add an AAD OAuth Connection Setting to the bot. [Add authentication to your bot](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication)  The name of this connection setting will be added to config.py as CONNECTION_NAME.
 
-1) In a terminal, go to `samples\python\52.teams-messaging-extensions-search-auth-config`
+1) In a terminal, go to `Microsoft-Teams-Samples\samples\msgext-search-auth-config\python` folder
 
 1) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)  Also add the OAuth Connection Setting name to config.py as CONNECTION_NAME and the ngrok endpoint url as SITE_URL.
 
