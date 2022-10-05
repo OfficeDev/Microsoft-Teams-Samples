@@ -63,8 +63,7 @@ the Teams service needs to call into the bot.
    - Select `TeamsMessagingExtensionsAction.csproj` or `TeamsMessagingExtensionsAction.sln`file
 
 1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 1 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-   - Set "MicrosoftAppType" in the `appsettings.json`.
-   **Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI.**
+   - Set "MicrosoftAppType" in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
 
    - Set "BaseUrl" in the `appsettings.json` as per your application like the ngrok forwarding url (ie `https://xxxx.ngrok.io`) after starting ngrok
 

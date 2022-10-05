@@ -57,6 +57,7 @@ the Teams service needs to call into the bot.
   - Navigate to `samples/msgext-search/csharp` folder
   - Select `TeamsMessagingExtensionsSearch.csproj` or `TeamsMessagingExtensionsSearch.sln`file
 
+
 1) Run ngrok - point to port 3978
 
     ```bash
@@ -64,8 +65,7 @@ the Teams service needs to call into the bot.
     ```
 
 1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppTenantId and MicrosoftAppPassword from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-    - Also, set MicrosoftAppType in the `appsettings.json`. 
-    **Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI.**
+    - Also, set MicrosoftAppType in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
 
     - Set "BaseUrl" in the `appsettings.json` as per your application like the ngrok forwarding url (ie `https://xxxx.ngrok.io`) after starting ngrok
 

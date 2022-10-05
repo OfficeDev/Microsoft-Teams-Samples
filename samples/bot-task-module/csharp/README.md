@@ -61,9 +61,8 @@ the Teams service needs to call into the bot.
    - Navigate to `samples/bot-task-module/csharp` folder
    - Select `TeamsTaskModule.csproj` or `TeamsTaskModule.sln`file
 
-1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 1 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-    - Set "MicrosoftAppType" in the `appsettings.json`. 
-    **Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI.**
+1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+    - Set "MicrosoftAppType" in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
 
     - Set "BaseUrl" in the `appsettings.json` as per your application like the ngrok forwarding url (ie `https://xxxx.ngrok.io`) after starting ngrok
 
@@ -83,6 +82,7 @@ the Teams service needs to call into the bot.
 You can interact with this bot by sending it a message. The bot will respond with a Hero Card and Adaptive Card with buttons which will display a Task Module when clicked. The Task Modules demonstrate retrieving input from a user, or displaying custom web page content.
 
 - **Personal Scope Interactions:**
+
 ![ps-AddApp ](Images/ps-AddApp.png)
 
 ![ps-Cards ](Images/ps-Cards.png)
@@ -92,9 +92,11 @@ You can interact with this bot by sending it a message. The bot will respond wit
 ![ps-AC-TaskModule-Submit ](Images/ps-AC-TaskModule-Submit.png)
 
 - **Group Chat Scope Interactions:**
+
 ![gc-Interaction ](Images/gc-Interaction.png)
 
 - **Team Scope Interactions:**
+
 ![ts-Interaction ](Images/ts-Interaction.png)
 
 ## Deploy the bot to Azure

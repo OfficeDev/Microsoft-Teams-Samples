@@ -30,7 +30,7 @@ This sample utilizes an app setting `UseSingleSignOn` to add `TeamsSSOTokenExcha
 
 > IMPORTANT: Teams SSO only works in 1-1 chats, and not group contexts.
 
-This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to use a Messaging Extension configuration page, as well as how to sign in from a search Messaging Extension. In this sample we are assuming the OAuth 2 provider is Azure Active Directory v2 (AADv2) and are utilizing the Microsoft Graph API to retrieve data about the user. Check [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication) for information about getting an AADv2 application setup for use in Azure Bot Service. The scopes used in this sample are the following:
+This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to use a bot authentication, as well as how to sign in from a bot. In this sample we are assuming the OAuth 2 provider is Azure Active Directory v2 (AADv2) and are utilizing the Microsoft Graph API to retrieve data about the user. Check [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication) for information about getting an AADv2 application setup for use in Azure Bot Service. The scopes used in this sample are the following:
 
 - `openid`
 - `User.Read`
@@ -76,7 +76,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     ```
 
 1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 1 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-    - Set "MicrosoftAppType" in the `appsettings.json`. **Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI.**
+    - Set "MicrosoftAppType" in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
     - Set "ConnectionName" in the `appsettings.json`. The AAD ConnectionName from the OAuth Connection Settings on Azure Bot registration
 
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
@@ -90,7 +90,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 ## Interacting with the bot in Teams
 
-> Note `manifest.json` specifies the bot will be installed in a "personal" scope only. Please refer to Teams documentation for more details. `sso_manifest.json` contains a `webApplicationInfo` template required for Teams Single Sign On.
+> Note `manifest.json` contains a `webApplicationInfo` template required for Teams Single Sign On.
 
 You can interact with this bot by sending it a message. The bot will respond by requesting you to login to AAD, then making a call to the Graph API on your behalf and returning the results.
 
