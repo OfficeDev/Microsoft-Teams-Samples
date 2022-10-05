@@ -66,7 +66,7 @@ the Teams service needs to call into the bot.
     - Also, set MicrosoftAppType in the `appsettings.json`. 
     **Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI.**
 
-    - Set BaseUrl as per your application like ngrok url: https://1234.ngrok.io
+    - Set "BaseUrl" in the `appsettings.json` as per your application like the ngrok forwarding url (ie `https://xxxx.ngrok.io`) after starting ngrok
 
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
