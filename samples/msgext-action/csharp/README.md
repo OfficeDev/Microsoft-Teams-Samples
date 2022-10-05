@@ -1,4 +1,4 @@
-﻿---
+---
 page_type: sample
 description: This sample app demonstrate how to use action based Messaging Extensions
 products:
