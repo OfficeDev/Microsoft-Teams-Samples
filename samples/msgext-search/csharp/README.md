@@ -12,7 +12,6 @@ extensions:
  createdDate: "17-10-2019 13:38:25"
 urlFragment: officedev-microsoft-teams-samples-msgext-search-csharp
 ---
-
 # Teams Messaging Extensions Search
 
 [Messaging Extensions](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) are a special kind of Microsoft Teams application that is support by the [Bot Framework](https://dev.botframework.com) v4.
@@ -58,10 +57,10 @@ the Teams service needs to call into the bot.
     ```
 
 1) If you are using Visual Studio
-  - Launch Visual Studio
-  - File -> Open -> Project/Solution
-  - Navigate to `samples/msgext-search/csharp` folder
-  - Select `TeamsMessagingExtensionsSearch.csproj` or `TeamsMessagingExtensionsSearch.sln`file
+   - Launch Visual Studio
+   - File -> Open -> Project/Solution
+   - Navigate to `samples/msgext-search/csharp` folder
+   - Select `TeamsMessagingExtensionsSearch.csproj` or `TeamsMessagingExtensionsSearch.sln`file
 
 1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppTenantId and MicrosoftAppPassword from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
     - Also, set MicrosoftAppType in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
