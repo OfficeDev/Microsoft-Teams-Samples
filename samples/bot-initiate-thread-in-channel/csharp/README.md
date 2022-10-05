@@ -1,4 +1,4 @@
-﻿---
+---
 page_type: sample
 description: This sample app demonstrate how to start a thread in a specific Team's channel using Bot Framework v4
 products:
