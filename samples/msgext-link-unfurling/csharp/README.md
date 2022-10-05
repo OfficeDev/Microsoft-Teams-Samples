@@ -33,7 +33,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 the Teams service needs to call into the bot.
 
-1) Setup for Messaging Extension Link Unfurling
+1) Setup for Bot
 
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name.
