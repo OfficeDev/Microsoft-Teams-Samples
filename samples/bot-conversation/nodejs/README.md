@@ -15,7 +15,12 @@ urlFragment: officedev-microsoft-teams-samples-bot-conversation-nodejs
 
 # Teams Conversation Bot
 
-You can select an option from the command list by typing ```@TeamsConversationBot``` into the compose message area and ```What can I do?``` text above the compose area.
+Bot Framework v4 Conversation Bot sample for Teams.
+
+This bot has been created using [Bot Framework](https://dev.botframework.com). This sample shows
+how to incorporate basic conversational flow into a Teams application. It also illustrates a few of the Teams specific calls you can make from your bot.
+
+- **Interaction with bot**
 
 ![Conversation Bot](Images/ConversationBot.gif)
 

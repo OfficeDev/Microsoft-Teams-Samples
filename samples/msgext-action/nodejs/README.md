@@ -101,7 +101,7 @@ the Teams service needs to call into the bot.
 
 3) You can try with other supported commands as well like: **Adaptive Card**, **Web View**, **HTML**, **Razor View**
 
-![Static-Tab ](Images/Static.png)
+![Static-Tab ](Images/StaticPage.png)
 
 ![Web-View ](Images/WebView.png)
 
