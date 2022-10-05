@@ -11,8 +11,8 @@ build a Search-based Messaging Extension.
 - [Python SDK](https://www.python.org/downloads/) version 3.7
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## Concepts introduced in this sample
-![MsgExtLink](Images/LinkUnfurling.gif)
+- **Interaction with Messaging Extension**
+![msgext-search ](Images/msgext-search.gif)
 
 ## To try this sample
 
