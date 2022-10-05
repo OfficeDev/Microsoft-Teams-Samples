@@ -1,3 +1,19 @@
+---
+page_type: sample
+description: This sample app demonstrate how to use Messaging Extensions Search
+products:
+- office-teams
+- office
+- office-365
+languages:
+- python
+extensions:
+ contentType: samples
+ createdDate: "12-12-2019 13:38:25"
+urlFragment: officedev-microsoft-teams-samples-bot-message-extension-python
+
+---
+
 # Teams Messaging Extensions Search
 
 [Messaging Extensions](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) are a special kind of Microsoft Teams application that is support by the [Bot Framework](https://dev.botframework.com) v4.

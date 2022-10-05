@@ -20,11 +20,11 @@
       },
       {
         "key": "TEAMS-SERVER-LANGUAGE",
-        "value": "csharp"
+        "value": "python"
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": "netframework"
+        "value": "python"
       },
       {
         "key": "TEAMS-FEATURES",
@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-initiate-thread-in-channel/csharp/Images/TeamsThread.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-initiate-thread-in-channel/python/Images/TeamsThread.png",
         "alt": "Solution UX showing how to start a thread in a specific Team's channel using Bot Framework v4"
       }
     ],

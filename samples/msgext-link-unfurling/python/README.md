@@ -1,3 +1,19 @@
+---
+page_type: sample
+description: This sample app demonstrate the bot that performs link unfurling in Teams
+products:
+- office-teams
+- office
+- office-365
+languages:
+- python
+extensions:
+ contentType: samples
+ createdDate: "12-12-2019 13:38:25"
+urlFragment: officedev-microsoft-teams-samples-bot-msgext-link-unfurling-python
+
+---
+
 ## TeamsLinkUnfurlingBot
 
 Bot Framework v4 Teams [link unfurling](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=json) bot sample for Teams.

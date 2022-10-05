@@ -1,3 +1,18 @@
+---
+page_type: sample
+description: This sample app demonstrate is how to incorporate basic conversational flow into a Teams application.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- python
+extensions:
+ contentType: samples
+ createdDate: "12-12-2019 13:38:25"
+urlFragment: officedev-microsoft-teams-samples-bot-conversation-python
+
+---
 
 # Teams Conversation Bot
 

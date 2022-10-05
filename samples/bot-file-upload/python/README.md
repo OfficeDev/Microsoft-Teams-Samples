@@ -1,3 +1,19 @@
+---
+page_type: sample
+description: This sample app demonstrate is how to upload files to Teams from a bot.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- python
+extensions:
+ contentType: samples
+ createdDate: "12-12-2019 13:38:25"
+urlFragment: officedev-microsoft-teams-samples-bot-file-upload-python
+
+---
+
 # Teams File Upload Bot
 
 Bot Framework v4 file upload bot sample for Teams.
