@@ -34,6 +34,12 @@ build a Search-based Messaging Extension.
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 the Teams service needs to call into the bot.
 
+1) Run ngrok - point to port 3978
+
+    ```bash
+    ngrok http --host-header=rewrite 3978
+    ```
+
 1) Setup for Messaging Extension
 
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
@@ -56,13 +62,6 @@ the Teams service needs to call into the bot.
   - File -> Open -> Project/Solution
   - Navigate to `samples/msgext-search/csharp` folder
   - Select `TeamsMessagingExtensionsSearch.csproj` or `TeamsMessagingExtensionsSearch.sln`file
-
-
-1) Run ngrok - point to port 3978
-
-    ```bash
-    ngrok http --host-header=rewrite 3978
-    ```
 
 1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppTenantId and MicrosoftAppPassword from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
     - Also, set MicrosoftAppType in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
