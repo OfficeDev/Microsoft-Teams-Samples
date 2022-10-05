@@ -89,7 +89,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 |    | Sample Name | Description | .NET Core | JavaScript | Python |
 |:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|:-------------|
-|1| Teams Conversation Bot quick-start | Messaging and conversation event handling hello world. | | [View][bot-conversation-quickstart#js]|| 
+|1| Teams Conversation Bot quick-start | Messaging and conversation event handling hello world. | | [View][bot-conversation-quickstart#js]|| [View][bot-conversation#python]
 |2| Teams Conversation Bot SSO quick-start | Messaging and conversation event handling hello world with SSO. | [View][bot-conversation-sso-quickstart#csharp_dotnetcore] | [View][bot-conversation-sso-quickstart#js]|| 
 |3| Teams Conversation Bot | Messaging and conversation event handling. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/57.teams-conversation-bot)| [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/javascript_nodejs/57.teams-conversation-bot)| [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/python/57.teams-conversation-bot) | 
 |4| Message Reactions | Demonstrates how to create a simple bot that responds to Message Reactions | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/25.message-reaction)  |  [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/javascript_nodejs/25.message-reaction) |
@@ -377,6 +377,18 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-live-caption#nodejs]:samples/meetings-live-caption/nodejs
 
 [msteams-app-qbot]:samples/msteams-application-qbot/
+
+[bot-conversation#python]:samples/bot-conversation/python
+[bot-file-upload#python]:samples/bot-file-upload/csharp
+[bot-initiate-thread-in-channel#python]:samples/bot-initiate-thread-in-channel/python
+[bot-message-reaction#python]:samples/bot-message-reaction/python
+[bot-task-module#python]:samples/bot-task-module/python
+[bot-teams-authentication#python]:samples/bot-teams-authentication/python
+[msgext-action-preview#python]:samples/msgext-action-preview/python
+[msgext-action#python]:samples/msgext-action/python
+[msgext-link-unfurling#python]:samples/msgext-link-unfurling/python
+[msgext-search-auth-config#python]:samples/msgext-search-auth-config/python
+[msgext-search#python]:samples/msgext-search/python
 
 ## Submitting issues
 
