@@ -10,7 +10,7 @@ languages:
 - javascript
 extensions:
   contentType: samples
-  createdDate: "24/03/2022 2:36:57 PM"
+  createdDate: "03/24/2022 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-meetings-live-code-interview-nodejs
 ---
 

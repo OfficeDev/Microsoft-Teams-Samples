@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "03-08-2022 00:45:15"
+ createdDate: "03/08/2022 12:45:15 AM"
 urlFragment: officedev-microsoft-teams-samples-meetings-transcription-csharp
 ---
 

@@ -160,7 +160,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |8|Change Notification  | This sample app demonstrates sending change notifications to user presence in Teams based on user presence status. | [View][graph-change-notification#cs]                        |[View][graph-change-notification#js]
 |9|Graph Pinned Message  | This is a sample application which demonstrates how to pin messages in chat using Graph api. | [View][graph-pinned-message#cs]|[View][graph-pinned-message#js]|
 |10|Graph Bulk Meetings  | This is an sample application which shows how to create Teams meetings in bulk using Graph api. | [View][graph-bulk-meetings#cs]|[View][graph-bulk-meetings#js]|
-|11|Change Notifications Team/Channel  | This sample application which demonstrates use of Team/Channel subscription that will post notifications when user create/edit/delete team/channel using Graph api. | [View][change-notifications-team/channel#cs]|[View][change-notifications-team/channel#js]|
+|11|Graph Meeting Notification  | This is a sample application which demonstrates the use of online meeting subscription and sends you the notifications in chat using bot. | [View][graph-meeting-notification#cs]|[View][graph-meeting-notification#js]|
+|12|Change Notifications Team/Channel  | This sample application which demonstrates use of Team/Channel subscription that will post notifications when user create/edit/delete team/channel using Graph api. | [View][change-notifications-team/channel#cs]|[View][change-notifications-team/channel#js]|
 
 
 
@@ -363,6 +364,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [graph-activity-feed#js]:samples/graph-activity-feed/nodejs
 [graph-change-notification#cs]:samples/graph-change-notification/csharp
 [graph-change-notification#js]:samples/graph-change-notification/nodejs
+[graph-meeting-notification#cs]:samples/graph-meeting-notification/csharp
+[graph-meeting-notification#js]:samples/graph-meeting-notification/nodejs
 [peoplepickeronadaptivecard#js]:samples/bot-people-picker-adaptive-card/nodejs
 [peoplepickeronadaptivecard#csharp]:samples/bot-people-picker-adaptive-card/csharp
 [graph-activity-feed-broadcast#js]:samples/graph-activity-feed-broadcast/nodejs

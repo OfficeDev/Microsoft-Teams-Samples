@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
   contentType: samples
-  createdDate: "10/1/2021 2:36:57 PM"
+  createdDate: "10/01/2021 02:36:57 PM"
 urlFragment: officedev-microsoft-teams-samples-meeting-recruitment-app-csharp
 ---
 

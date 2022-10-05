@@ -38,7 +38,7 @@ jobs:
 
             - project_path: 'samples/app-sso/csharp/App SSO Sample/App SSO Sample.csproj'
               name: 'app-sso'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/app-virtual-assistant/csharp/TeamsVirtualAssistant.csproj'
               name: 'app-virtual-assistant'
@@ -132,7 +132,7 @@ jobs:
               name: 'meetings-live-code-interview'
               version: '3.1.301'
 
-            - project_path: 'samples/meetings-sidepanel/csharp/Side Panel/SidePanel.csproj'
+            - project_path: 'samples/meetings-sidepanel/csharp/SidePanel/SidePanel.csproj'
               name: 'meetings-sidepanel'
               version: '3.1.301'
 
@@ -259,6 +259,10 @@ jobs:
             - project_path: 'samples/bot-sharepoint-list/csharp/SPListBot/SPListBot.csproj'
               name: 'bot-sharepoint-list'
               version: '3.1.301'
+
+            - project_path: 'samples/graph-meeting-notification/csharp/MeetingNotification/MeetingNotification.csproj'
+              name: 'graph-meeting-notification'
+              version: '6.0.x'
 
       fail-fast: false
     name: Build "${{ matrix.name }}" csharp
@@ -423,7 +427,7 @@ jobs:
               name: 'meetings-events'
               version: '14.x'
 
-            - project_path: 'samples/meetings-sidepanel/nodejs'
+            - project_path: 'samples/meetings-sidepanel/nodejs/server'
               name: 'meetings-sidepanel'
               version: '14.x'
 
@@ -541,6 +545,10 @@ jobs:
 
             - project_path: 'samples\msgext-search-sso-config'
               name: 'msgext-search-sso-config'
+              version: '14.x'
+            
+            - project_path: 'samples/graph-meeting-notification/nodejs'
+              name: 'graph-meeting-notification'
               version: '14.x'
 
       fail-fast: false

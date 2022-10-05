@@ -10,7 +10,7 @@ languages:
 - javascript
 extensions:
  contentType: samples
- createdDate: "16-02-2022 00:15:13"
+ createdDate: "02/16/2022 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-app-complete-auth-nodejs
 ---
 

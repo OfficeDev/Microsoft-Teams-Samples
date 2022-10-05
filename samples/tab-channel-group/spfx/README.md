@@ -9,7 +9,7 @@ languages:
 - javascript
 extensions:
  contentType: samples
- createdDate: "07-07-2021 13:38:27"
+ createdDate: "07/07/2021 01:38:27 PM"
 urlFragment: officedev-microsoft-teams-samples-tab-channel-group-spfx
 ---
 

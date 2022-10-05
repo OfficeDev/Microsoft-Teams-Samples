@@ -10,7 +10,7 @@ languages:
 - javascript
 extensions:
   contentType: samples
-  createdDate: "7/1/2022 2:36:57 PM"
+  createdDate: "07/01/2022 02:36:57 PM"
 urlFragment: officedev-microsoft-teams-samples-incoming-webhook-nodejs
 ---
 
