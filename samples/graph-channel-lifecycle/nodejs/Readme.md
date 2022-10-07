@@ -63,6 +63,11 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
+##Feature of of the sample
+
+   ![](Images/GraphChannelLifeCycleModule.gif)
+
+
    ![](Images/image1.png)
 
 

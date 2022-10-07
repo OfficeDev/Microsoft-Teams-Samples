@@ -59,8 +59,11 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
    - Zip all three files present in manifest folder
 
 - [Upload app manifest file](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#load-your-package-into-teams) (zip file) to your team
-  
-  
+
+  Feature of the sample.
+
+  ![](ChannelLifecycle/Images/ChannelLifeCycleModule.gif  )
+
   ![](ChannelLifecycle/Images/Image1.PNG)
 
   ![](ChannelLifecycle/Images/Image2.PNG)
