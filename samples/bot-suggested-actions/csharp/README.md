@@ -17,7 +17,15 @@ urlFragment: officedev-microsoft-teams-samples-bot-suggested-actions-csharp
 
 This sample shows the feature where user can send suggested actions using bot.
 
-![Initial message](SuggestedActions/Images/WelcomeMessage.PNG)
+##Feature of the sample.
+
+![Module](SuggestedActions/Images/botSuggestedActionModule.gif)
+
+![Welcome Message](SuggestedActions/Images/WelcomeMessage.png)
+
+![Red](SuggestedActions/Images/Red.png)
+
+![Yellow](SuggestedActions/Images/Yellow.png)
 
 ## Prerequisites
 
