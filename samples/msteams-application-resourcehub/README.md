@@ -10,7 +10,7 @@ languages:
 - typescript
 extensions:
  contentType: samples
- createdDate: "19-09-2022 12:00 PM"
+ createdDate: "10/10/2022 02:56:00 PM"
 urlFragment: officedev-microsoft-teams-samples-samples-msteams-application-resourcehub
 ---
 
