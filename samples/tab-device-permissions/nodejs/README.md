@@ -60,6 +60,13 @@ This update will be generally available (GA) by February 01, 2022
     ```bash
     npm install
     ```
+
+    If you face any dependency error while installing node modules, try using below command
+
+    ```bash
+    npm install --legacy-peer-deps
+    ```
+
  4) Run the application in your local terminal (or Visual Studio Code terminal) using following command 
     
      ```bash
