@@ -20,7 +20,7 @@ urlFragment: officedev-microsoft-teams-samples-app-complete-sample-csharp
 
 Sample that shows how to build a bot for Microsoft Teams in C#. 
 
-## Features of this sample
+## Feature of the sample
 
 ![ Module ](template-bot-master-csharp/Images/Sample.gif)
 
