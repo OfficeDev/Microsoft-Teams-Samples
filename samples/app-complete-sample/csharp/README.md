@@ -22,11 +22,17 @@ Sample that shows how to build a bot for Microsoft Teams in C#.
 
 ## Features of this sample
 
+![Module] (template-bot-master-csharp/Images/SampleCsharpModule.gif)
+
+![ Hello ](template-bot-master-csharp/Images/Hello.png)
+
 ![ Dilaog ](template-bot-master-csharp/Images/dialog.png)
 
-![ Tab ](template-bot-master-csharp/Images/static-tab.png)
+![ Quiz1 ](template-bot-master-csharp/Images/Quiz1.png)
 
-![ ME](template-bot-master-csharp/Images/messaging-extension.png)
+![ Quiz2 ](template-bot-master-csharp/Images/Quiz2.png)
+
+![ Tab ](template-bot-master-csharp/Images/static-tab.png)
 
 ## Prerequisites
 
