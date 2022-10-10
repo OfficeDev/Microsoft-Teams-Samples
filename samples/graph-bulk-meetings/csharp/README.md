@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "13-09-2022 00:02:15"
+ createdDate: "09/13/2022 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-graph-bulk-meetings-csharp
 ---
 

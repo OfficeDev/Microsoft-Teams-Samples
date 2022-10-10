@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "08-09-2022 00:012:45"
+ createdDate: "09/08/2022 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-graph-bulk-meetings-nodejs.
 
 ---

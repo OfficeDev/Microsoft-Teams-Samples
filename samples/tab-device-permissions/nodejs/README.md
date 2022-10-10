@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "27-07-2021 16:32:33"
+ createdDate: "07/27/2021 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-tab-device-permissions-nodejs
 ---
 

@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "6-12-2021 17:00:25"
+ createdDate: "06/12/2021 05:00:25 PM"
 urlFragment: officedev-microsoft-teams-samples-bot-request-approval-nodejs
 ---
 

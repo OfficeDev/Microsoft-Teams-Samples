@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
   contentType: samples
-  createdDate: "03-09-2022 11:00:00"
+  createdDate: "03/09/2022 11:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-bot-adaptivecards-user-specific-views-csharp
 ---
 

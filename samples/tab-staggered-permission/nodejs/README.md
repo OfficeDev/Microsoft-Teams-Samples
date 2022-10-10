@@ -10,7 +10,7 @@ languages:
 - javascript
 extensions:
  contentType: samples
- createdDate: "7-03-2022 00:15:13"
+ createdDate: "07/03/2022 12:15:13 AM"
 urlFragment: officedev-microsoft-teams-samples-tab-staggered-permission-nodejs
 ---
 
