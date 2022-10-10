@@ -22,7 +22,7 @@ Sample that shows how to build a bot for Microsoft Teams in C#.
 
 ## Features of this sample
 
-![Module] (template-bot-master-csharp/Images/SampleCsharpModule.gif)
+![ Module ] (template-bot-master-csharp/Images/SampleCsharpModule.gif)
 
 ![ Hello ](template-bot-master-csharp/Images/Hello.png)
 
