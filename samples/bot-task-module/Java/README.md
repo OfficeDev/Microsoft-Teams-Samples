@@ -1,4 +1,20 @@
-﻿# Teams Task Module
+﻿---
+page_type: sample
+description: This sample app demonstrate is how to use Task Module using Bot Framework.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- java
+extensions:
+ contentType: samples
+ createdDate: "12-12-2019 13:38:25"
+urlFragment: officedev-microsoft-teams-samples-bot-task-module-java
+
+---
+
+# Teams Task Module
 
 Bot Framework v4 Teams Task Module sample.
 
@@ -13,6 +29,9 @@ This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven p
 - An account on Azure if you want to deploy to Azure.
 - Microsoft Teams is installed and you have an account
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+
+## Concepts introduced in this sample
+![TaskModule](Images/TaskModule.gif)
 
 ## To try this sample
 
@@ -44,6 +63,20 @@ the Teams service needs to call into the bot.
 > Note this `manifest.json` specified that the bot will be installed in "personal", "team" and "groupchat" scope which is why you immediately entered a one on one chat conversation with the bot. You can at mention the bot in a group chat or in a Channel in the Team you installed it in. Please refer to Teams documentation for more details.
 
 You can interact with this bot by sending it a message. The bot will respond with a Hero Card with a button which will display a Task Module when clicked.  The Task Module demonstrates retrieving input from a user through a Text Block and a Submit button.
+1.Sends Adaptive Cards 
+![Adaptive Cards](Images/1.PNG)
+
+2.Adaptive Card Input
+![Card Input](Images/2.PNG)
+
+3.Response from the card
+![Card Form](Images/3.PNG)
+
+4.Adaptive card from input
+![Card Youtube](Images/4.PNG)
+
+5.Adaptive card youtube
+![Card Youtube](Images/5.PNG)
 
 ## Deploy the bot to Azure
 

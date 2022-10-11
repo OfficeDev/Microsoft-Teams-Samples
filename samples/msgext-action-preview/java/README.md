@@ -1,4 +1,20 @@
-﻿# Teams Messaging Extensions Action Preview
+﻿---
+page_type: sample
+description: This sample app demonstrate the bot that performs simple card based on parameters entered by the user from a Task Module
+products:
+- office-teams
+- office
+- office-365
+languages:
+- java
+extensions:
+ contentType: samples
+ createdDate: "12-12-2019 13:38:25"
+urlFragment: officedev-microsoft-teams-samples-bot-msgext-action-preview-java
+
+---
+
+# Teams Messaging Extensions Action Preview
 
 Bot Framework v4 Teams Messaging Extension Action Preview sample.
 
@@ -15,6 +31,9 @@ This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven p
 - An account on [Azure](https://azure.microsoft.com) if you want to deploy to Azure.
 - Microsoft Teams is installed and you have an account
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+
+## Concepts introduced in this sample
+![MsgExtAction](Images/MsgExtPreview.gif)
 
 ## To try this sample
 

@@ -1,4 +1,20 @@
-﻿# Teams Authentication Bot
+﻿---
+page_type: sample
+description: This sample app demonstrate iss how to use the Bot Framework support for oauth in your bot.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- java
+extensions:
+ contentType: samples
+ createdDate: "12-12-2019 13:38:25"
+urlFragment: officedev-microsoft-teams-samples-bot-team-teams-authentication--java
+
+---
+
+# Teams Authentication Bot
 
 Bot Framework v4 bot using Teams authentication.
 
@@ -18,6 +34,9 @@ This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven p
 - An account on [Azure](https://azure.microsoft.com) if you want to deploy to Azure.
 - Microsoft Teams is installed and you have an account
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+
+## Concepts introduced in this sample
+![TeamAuth](Images/TeamAuth.gif)
 
 ## To try this sample
 
@@ -52,6 +71,7 @@ the Teams service needs to call into the bot.
 You can interact with this bot by sending it a message. The bot will respond by requesting you to login to AAD, then making a call to the Graph API on your behalf and returning the results.
 
 When signed in, sending `logout` will cause the bot to sign you out.
+![TeamAuth](Images/1.PNG)
 
 ## Deploy the bot to Azure
 

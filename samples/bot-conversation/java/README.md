@@ -1,4 +1,20 @@
-﻿# Teams Conversation Bot
+﻿---
+page_type: sample
+description: This sample app demonstrate is how to incorporate basic conversational flow into a Teams application.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- java
+extensions:
+ contentType: samples
+ createdDate: "12-12-2019 13:38:25"
+urlFragment: officedev-microsoft-teams-samples-bot-conversation-java
+
+---
+
+# Teams Conversation Bot
 
 Bot Framework v4 Conversation Bot sample for Teams.
 
@@ -14,6 +30,9 @@ This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven p
 - An account on [Azure](https://azure.microsoft.com) if you want to deploy to Azure.
 - Microsoft Teams is installed and you have an account
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+
+## Concepts introduced in this sample
+![BotConversation](Images/BotConversation.gif)
 
 ## To try this sample
 
@@ -45,12 +64,17 @@ the Teams service needs to call into the bot.
 You can interact with this bot by sending it a message, or selecting a command from the command list. The bot will respond to the following strings. 
 
 1. **Show Welcome**
+    ![WelcomeCard](Images/2.WelcomeCard.PNG)
   - **Result:** The bot will send the welcome card for you to interact with
   - **Valid Scopes:** personal, group chat, team chat
+
 2. **MentionMe**
+    ![MentionMe](Images/3.MentionMe.PNG)
   - **Result:** The bot will respond to the message and mention the user
   - **Valid Scopes:** personal, group chat, team chat
+
 3. **MessageAllMembers**
+    ![MessageAllMembers](Images/4.MessageAllMembers.PNG)
   - **Result:** The bot will send a 1-on-1 message to each member in the current conversation (aka on the conversation's roster).
   - **Valid Scopes:** personal, group chat, team chat
 

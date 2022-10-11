@@ -1,4 +1,19 @@
-﻿
+﻿---
+page_type: sample
+description: This sample app demonstrate the bot that performs build an Action-based Messaging Extension
+products:
+- office-teams
+- office
+- office-365
+languages:
+- java
+extensions:
+ contentType: samples
+ createdDate: "12-12-2019 13:38:25"
+urlFragment: officedev-microsoft-teams-samples-bot-msgext-action-java
+
+---
+
 # Teams Message Extension Action Bot
 
 Bot Framework v4 Conversation Bot sample for Teams.
@@ -15,6 +30,9 @@ This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven p
 - An account on [Azure](https://azure.microsoft.com) if you want to deploy to Azure.
 - Microsoft Teams is installed and you have an account
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+
+## Concepts introduced in this sample
+![MsgExtAction](Images/MsgExtAction.gif)
 
 ## To try this sample
 

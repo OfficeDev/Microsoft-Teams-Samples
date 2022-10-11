@@ -1,4 +1,20 @@
-﻿# Teams File Upload Bot
+﻿---
+page_type: sample
+description: This sample app demonstrate is how to upload files to Teams from a bot.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- java
+extensions:
+ contentType: samples
+ createdDate: "12-12-2019 13:38:25"
+urlFragment: officedev-microsoft-teams-samples-bot-file-upload-java
+
+---
+
+# Teams File Upload Bot
 
 Bot Framework v4 file upload bot sample for Teams.
 
@@ -13,6 +29,9 @@ This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven p
 - An account on [Azure](https://azure.microsoft.com) if you want to deploy to Azure.
 - Microsoft Teams is installed and you have an account
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+
+## Concepts introduced in this sample
+![Bot-file-upload](Images/botfileupload.gif)
 
 ## To try this sample
 
@@ -44,10 +63,13 @@ the Teams service needs to call into the bot.
 > Note this `manifest.json` specified that the bot will be installed in "personal" scope which is why you immediately entered a one on one chat conversation with the bot. Please refer to Teams documentation for more details.
 
 1. Sending a message to the bot will cause it to respond with a card that will prompt you to upload a file. The file that's being uploaded is the `teams-logo.png` in the `Files` directory in this sample. The `Accept` and `Decline` events illustrated in this sample are specific to Teams. You can message the bot again to receive another prompt.
+![WelcomeCard](Images/WelcomeCard.PNG)
 
-1. You can send a file to the bot as an attachment in the message compose section in Teams. This will be delivered to the bot as a Message Activity and the code in this sample fetches and saves the file.
+2. You can send a file to the bot as an attachment in the message compose section in Teams. This will be delivered to the bot as a Message Activity and the code in this sample fetches and saves the file.
+![ReadyToDownload](Images/ReadyToDownload.PNG)
 
-1. You can also send an inline image in the message compose section. This will be present in the attachments of the Activity and requires the Bot's access token to fetch the image.
+3. You can also send an inline image in the message compose section. This will be present in the attachments of the Activity and requires the Bot's access token to fetch the image.
+![FileUploadInMessageSection](Images/FileUploadInMessageSection.PNG)
 
 ## Deploy the bot to Azure
 

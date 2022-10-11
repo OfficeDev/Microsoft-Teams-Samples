@@ -1,4 +1,20 @@
-﻿# Microsoft Teams - Start Thread In A Specific Channel of a Team
+﻿---
+page_type: sample
+description: This sample app demonstrate is how to start a thread in a specific Team's channel using Bot Framework v4.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- java
+extensions:
+ contentType: samples
+ createdDate: "12-12-2019 13:38:25"
+urlFragment: officedev-microsoft-teams-samples-bot-initiate-thread-in-channel-java
+
+---
+
+# Microsoft Teams - Start Thread In A Specific Channel of a Team
 
 Bot Framework v4 Conversation Bot sample for Teams.
 
@@ -14,6 +30,9 @@ This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven p
 - An account on [Azure](https://azure.microsoft.com) if you want to deploy to Azure.
 - Microsoft Teams is installed and you have an account
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+
+## Concepts introduced in this sample
+![TeamsThread](Images/TeamsThread.gif)
 
 ## To try this sample
 
@@ -45,6 +64,8 @@ the Teams service needs to call into the bot.
 > Note this `manifest.json` specified that the bot will be installed in "personal", "team" and "groupchat" scope which is why you immediately entered a one on one chat conversation with the bot. You can at mention the bot in a group chat or in a Channel in the Team you installed it in. Please refer to Teams documentation for more details.
 
 You can interact with this bot by sending it a message. The bot will respond by creating a new thread in the channel and replying to that new thread.
+![AddInTeam](Images/AddInTeam.PNG)
+![NewThread](Images/NewThread.PNG)
 
 ## Deploy the bot to Azure
 
