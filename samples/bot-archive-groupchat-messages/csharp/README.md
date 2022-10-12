@@ -23,6 +23,12 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 - Sending archive chat messages text file of a groupchat to user
 
+![GroupChatModule](FetchGroupChatMessages/Images/FetchGroupChatModule.gif)
+
+![setup bot](FetchGroupChatMessages/Images/setupbot.png)
+
+![Welcome](FetchGroupChatMessages/Images/welcome.png)
+
 ![Bot command](FetchGroupChatMessages/Images/botCommandToGetChatMessages.png)
 
 ![Bot reply](FetchGroupChatMessages/Images/replyFromBot.png)
@@ -53,7 +59,17 @@ This feature shown in this sample is currently available in Public Developer Pre
 # ngrok http -host-header=rewrite 3978
 ```
 
-4. Create a Bot Registration
+4.Enter the following details to configure the admin and user consent prompts with values that are appropriate for the access_as_userscope.
+
+Admin consent display name: Teams can access the user’s profile.
+Admin consent description: Teams can call the app’s web APIs as the current user.
+User consent display name: Teams can access your profile and make requests on your behalf.
+User consent description: Teams can call this app’s APIs with the same rights as you have.
+
+5.Added the WebApplication Info Resource and Application id uri in expose and API like: api://Ngrokbaseurl/App_id"
+
+
+6. Create a Bot Registration
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
@@ -76,7 +92,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 
     e. Provide **Scopes** like "User.Read Chat.ReadWrite ChatMessage.Read"
 
-6. Go to the Azure portal where app registration is created.
+7. Go to the Azure portal where app registration is created.
  
     a. Add this permission to app registration
     - Chat.ReadWrite
@@ -89,15 +105,15 @@ This feature shown in this sample is currently available in Public Developer Pre
     -  Add  `https://token.botframework.com/.auth/web/redirect`  under Redirect URLs and click Configure button.
     -  Once the flyout menu close, scroll bottom to section 'Implicit Grant' and select check boxes "Access tokens" and "ID tokens" and click "Save" at the top bar.
 
-7. Modify the `manifest.json` in the `/AppManifest` folder and replace the `<<MICROSOFT-APP-ID>>` with the id from step 4 `(Azure AAD Id)`.
+8. Modify the `manifest.json` in the `/AppManifest` folder and replace the `<<MICROSOFT-APP-ID>>` with the id from step 4 `(Azure AAD Id)`.
 
-8. Zip the contents of `AppManifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
+9. Zip the contents of `AppManifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
 
-9. Modify the `/appsettings.json` and fill in the `{{ MICROSOFT-APP-ID }}`,`{{ MICROSOFT-APP-PASSWORD }}` and `{{ Connection Name }}` with the id from step 4.
+10. Modify the `/appsettings.json` and fill in the `{{ MICROSOFT-APP-ID }}`,`{{ MICROSOFT-APP-PASSWORD }}` and `{{ Connection Name }}` with the id from step 4.
 
-10. In the valid domains section of the manifest update your ngrok url `{<<ngrokid>>.ngrok.io}`. 
+11. In the valid domains section of the manifest update your ngrok url `{<<ngrokid>>.ngrok.io}`. 
 
-11. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+12. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
