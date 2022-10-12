@@ -5,7 +5,7 @@
   "id": "{Bot Id}",
   "packageName": "com.microsoft.teams.extension",
   "developer": {
-    "name": "Microsoft",
+    "name": "{{Company_Name}}",
     "websiteUrl": "{websiteUrl}",
     "privacyUrl": "{websiteUrl}",
     "termsOfUseUrl": "{websiteUrl}"
