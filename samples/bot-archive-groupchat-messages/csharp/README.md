@@ -59,12 +59,14 @@ This feature shown in this sample is currently available in Public Developer Pre
 # ngrok http -host-header=rewrite 3978
 ```
 
-4.Enter the following details to configure the admin and user consent prompts with values that are appropriate for the access_as_userscope.
+## 4.Enter the following details to configure the admin and user consent prompts with values that are appropriate for the access_as_userscope.
 
-Admin consent display name: Teams can access the user’s profile.
-Admin consent description: Teams can call the app’s web APIs as the current user.
-User consent display name: Teams can access your profile and make requests on your behalf.
-User consent description: Teams can call this app’s APIs with the same rights as you have.
+1. Admin consent display name: Teams can access the user’s profile.
+2. Admin consent description: Teams can call the app’s web APIs as the current user.
+3. User consent display name: Teams can access your profile and make requests on your behalf.
+4. User consent description: Teams can call this app’s APIs with the same rights as you have.
+
+
 
 5.Added the WebApplication Info Resource and Application id uri in expose and API like: api://Ngrokbaseurl/App_id"
 
