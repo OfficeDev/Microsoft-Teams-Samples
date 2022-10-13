@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "04-08-2022 13:02:15"
+ createdDate: "04/08/2022 01:02:15 PM"
 urlFragment: officedev-microsoft-teams-samples-graph-pinned-messages-nodejs
 ---
 

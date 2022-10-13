@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "22-03-2022 00:00:00"
+ createdDate: "03/22/2022 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-account-linking-csharp
 ---
 

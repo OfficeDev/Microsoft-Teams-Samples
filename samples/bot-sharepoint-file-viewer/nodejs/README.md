@@ -10,7 +10,7 @@ languages:
 - javascript
 extensions:
  contentType: samples
- createdDate: "16-11-2021 00:15:13"
+ createdDate: "11/16/2021 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-bot-sharepoint-file-viewer-nodejs
 ---
 

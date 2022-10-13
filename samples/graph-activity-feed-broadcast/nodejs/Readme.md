@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "25-01-2022 01:48:56"
+ createdDate: "01/25/2022 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-graph-activity-feed-broadcast-nodejs
 ---
 

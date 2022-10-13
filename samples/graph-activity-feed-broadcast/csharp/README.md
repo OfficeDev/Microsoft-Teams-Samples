@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "28-01-2022 17:00:25"
+ createdDate: "01/28/2022 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-graph-activity-feed-broadcast-csharp
 ---
 
