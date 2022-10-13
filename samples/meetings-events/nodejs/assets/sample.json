@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-events/nodejs/images/meeting-start.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-events/nodejs/images/MeetingsEventsGif.gif",
         "alt": "Solution UX showing realtime meeting events"
       }
     ],

@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "11/10/2021 05:35:46 PM"
+ createdDate: "11-10-2021 17:35:46"
 urlFragment: officedev-microsoft-teams-samples-meetings-events-csharp
 ---
 
@@ -19,6 +19,10 @@ Using this C# sample, a bot can receive real-time meeting events.
 For reference please check [Real-time Teams meeting events](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet)
 
 The feature shown in this sample is currently available in public developer preview only.
+
+# Key features
+
+![Meetings EventsGif](MeetingEvents/Images/MeetingsEventsGif.gif)
 
 ![Meeting start event](MeetingEvents/Images/meeting-start.png)
 ![Meeting end event](MeetingEvents/Images/meeting-end.png)

@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "06/10/2021 01:48:56 AM"
+ createdDate: "06-10-2021 01:48:56"
 urlFragment: officedev-microsoft-teams-samples-bot-receive-channel-messages-withRSC-nodejs
 ---
 
@@ -24,7 +24,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 - Showing messages based on option selected
 
-![Channel messages](images/channel_messages.png)
+![Bot Receive Channel MessagesWithRSCGif](images/BotReceiveChannelMessagesWithRSCGif.gif)
 
 ## Prerequisites
 
@@ -96,7 +96,9 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
  ![App installation](images/installApp.png)
 
- ![Permissions](images/permissions1.png)
+ ![Permissions](images/botWithRSCFlow.png)
+
+ ![Permissions](images/Notification.png) 
 
 ## Interacting with the bot in Teams
 
