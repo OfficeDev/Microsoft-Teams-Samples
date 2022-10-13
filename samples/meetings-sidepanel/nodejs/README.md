@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "07/07/2021 01:38:27 PM"
+ createdDate: "07-07-2021 13:38:27"
 urlFragment: officedev-microsoft-teams-samples-meetings-sidepanel-nodejs
 ---
 
@@ -17,6 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-sidepanel-nodejs
 
 This sample illustrates how to implement [Side Panel](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience.
 
+![Preview Image](images/Preview.gif)
   
 ### User interactions(Meeting Organizer)
 - **Add New Agenda Item** - Gives provision to add new Agenda point.
@@ -74,9 +75,9 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
 Interact with SidePanel by clicking on the App icon present on the top menu beside the "more actions" during a meeting.
 1. Once the app is clicked, sidepanel appears with the default agenda list. Only organizer gets the feasibility to add new agenda points to the list using "Add New Agenda Item" button.
 
-![](https://user-images.githubusercontent.com/50989436/118759535-d7c7e280-b88e-11eb-955b-8843d1a4a814.png)
+![](Images/Dashboard.png)
 
-2. On click of "Add" button, agenda point will be added to the agenda list by organizer.![](https://user-images.githubusercontent.com/50989436/118760002-ad2a5980-b88f-11eb-821d-3a1f74d9fa71.png)![](https://user-images.githubusercontent.com/50989436/118759709-28d7d680-b88f-11eb-9aa7-a6b67daa639c.png)
+2. On click of "Add" button, agenda point will be added to the agenda list by organizer.![](Images/AddNewAgendaItem.png)![](Images/Added New.png)
 
-3. On click of "Publish Agenda", the agenda list will be sent to the meeting chat.![](https://user-images.githubusercontent.com/50989436/118759762-3e4d0080-b88f-11eb-8880-b0ed3739cbe0.png)
+3. On click of "Publish Agenda", the agenda list will be sent to the meeting chat.![](Images/Notification.png)
 

@@ -10,11 +10,13 @@ languages:
 - javascript
 extensions:
   contentType: samples
-  createdDate: "06/17/2022 12:00:00 AM"
+  createdDate: "17/06/2022 12:26:57 PM"
 urlFragment: officedev-microsoft-teams-samples-tab-channel-context-nodejs
 ---
 
 # Tab context in channel
+
+![Preview Image](images/Preview.gif)
 
 This sample shows the contents of tab context object in a private and shared channel.
 
