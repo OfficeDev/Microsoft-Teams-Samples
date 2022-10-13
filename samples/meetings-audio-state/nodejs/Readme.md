@@ -11,21 +11,13 @@ extensions:
  contentType: samples
  createdDate: "08-08-2022 12:00:01"
 urlFragment: officedev-microsoft-teams-samples-meeting-audio-state-nodejs
+
 ---
-**Steps:**
+## Concepts introduced in this sample
 
- - Add your application to the `meetings` as its display as below.
+Select your application and click on `Save` button to configure,Your application will run and click on `mute/unmute` button to toggle client audio.
 
-  ![Stage 1](Images/SelectApp.png)
-
- - Select your application and click on `Save` button to configure.
-
-  ![Stage 2](Images/Setting-Up.png)
-
- - Your application is running now and click on `mute/unmute` button to toggle client audio.
-
-  ![Stage 3](Images/App-InMeeting.png)
-
+![mute-unmute](Images/mute-unmute-audiostate.gif)
 
 ## Prerequisites
 
