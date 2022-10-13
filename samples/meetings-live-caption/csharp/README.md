@@ -21,9 +21,8 @@ This is a sample meeting side panel application which demonstrates how to enable
 Once the meeting is scheduled. Follow this doc to enable [Provide Cart Catptions]("https://support.microsoft.com/office/use-cart-captions-in-a-microsoft-teams-meeting-human-generated-captions-2dd889e8-32a8-4582-98b8-6c96cf14eb47").
 Copy the CART link it will used while configuring tab for meeting.
 
-## Key features
-
-![Key Features](MeetingLiveCaption/Images/MeetingCaption.gif)
+## - **Interaction with sample**
+![bot-conversations ](MeetingLiveCaption/Images/MeetingCaption.gif)
 
 ## Prerequisites
 
@@ -41,21 +40,38 @@ Copy the CART link it will used while configuring tab for meeting.
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
 
-### 1. Clone the repository
-   ```bash
-   git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-   ```
+1) Run ngrok - point to port 3978
 
-### 2. Launch Visual Studio
-   - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/meeting-live-caption/csharp/MeetingLiveCaption.sln`
+    ```bash
+    ngrok http --host-header=rewrite 3978
+    ```
+
+## Setup for Bot
+
+   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+    - For bot handle, make up a name.
+    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
     
-### 3. Start ngrok on localhost:3978
-- Open ngrok and run command `ngrok http -host-header=rewrite 3978` 
-- Once started you should see link  `https://41ed-abcd-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot.
+   In the new Azure Bot resource in the Portal, 
+    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
 
 
-![Ngrok](MeetingLiveCaption/Images/NgrokScreenshot.png)
+## Register your Teams Auth SSO with Azure AD
+
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+
+1) Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
 
 4. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
    - `{{AppId}}` with any guid id value.
@@ -81,3 +97,7 @@ Copy the CART link it will used while configuring tab for meeting.
 ![Send live caption](MeetingLiveCaption/Images/MeetingCaptionSidePanel.png)
 4. After clicking on `Submit` button, you will see the caption in the meeting.
 ![Caption in meeting](MeetingLiveCaption/Images/LiveCaption.png)
+
+## Further reading
+
+- [Live Meeting Caption](https://support.microsoft.com/en-us/office/use-live-captions-in-a-teams-meeting-4be2d304-f675-4b57-8347-cbd000a21260)
