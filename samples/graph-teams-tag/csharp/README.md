@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-teams-tag-csharp
 
 This is a sample application where user can create, update, add or remove members of a tag. All of Graph CRUD operations related to tags can be performed within this sample.
 
-## Key features
+## Features of samples Graph Team Tag
 
 1. Create new tags.
 
@@ -27,6 +27,14 @@ This is a sample application where user can create, update, add or remove member
 
 ![View/Edit tag](GraphTeamsTag/Images/ViewOrEditTagFlow.gif)
 
+## Features of this sample
+
+1. User can see list of tags created for the current team.
+![Manage Tag Dashboard](GraphTeamsTag/Images/Dashboard.png)
+2. User can view/edit the existing team tags.
+![View/Edit Tags](GraphTeamsTag/Images/ViewOrEditTag.png)
+3. User can create new team tags.
+![Create new Tag](GraphTeamsTag/Images/CreateTagTaskModule.png)
 
 ## Prerequisites
 
@@ -86,14 +94,6 @@ Replace the following details:
 - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
 - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-## Features of this sample
-
-1. User can see list of tags created for the current team.
-![Manage Tag Dashboard](GraphTeamsTag/Images/Dashboard.png)
-2. User can view/edit the existing team tags.
-![View/Edit Tags](GraphTeamsTag/Images/ViewOrEditTag.png)
-3. User can create new team tags.
-![Create new Tag](GraphTeamsTag/Images/CreateTagTaskModule.png)
 4. User can delete existing team tags.
 
 ## Further reading

@@ -17,6 +17,10 @@ urlFragment: officedev-microsoft-teams-samples-graph-activity-feed-broadcast-csh
 
 This sample shows a feature where user can broadcast a message to all members of organization using activty feed notification.
 
+## Features of samples Activity Feed
+
+![Broadcast from user](ActivityFeedBroadcast/Images/ActivityFeedBroadcast.gif)
+
 - Broadcast message for all the members.
 
   ![Broadcast from user](ActivityFeedBroadcast/Images/BroadcastToBeSendToOraganisation.png)

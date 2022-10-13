@@ -18,6 +18,19 @@ urlFragment: officedev-microsoft-teams-samples-graph-rsc-nodeJs
 This sample illustrates you can use [Resource Specific Consent](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph API.
 
 
+## Features of samples RSC
+
+    ![Broadcast from user](./Images/RSCDemo.gif)
+
+##  Features of samples
+
+    ![](./Images/Overview.png)
+
+    ![](./Images/Permission.png)
+
+    ![](./Images/PermissionList.png)
+
+
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/en/)
@@ -59,13 +72,7 @@ This sample illustrates you can use [Resource Specific Consent](https://docs.mic
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-   ![](./Images/image1.PNG)
-
-
-   ![](./Images/image2.PNG)
-
-
-   ![](./Images/image3.PNG)
+   
 
 
 

@@ -19,6 +19,10 @@ This sample shows a feature where:
 1. Requester : Can request for any task approval from manager by sending activity feed notification and can see his request status.
 2. Manager : Can see the pending approval request raised by user on the click of activity feed notification and can approve or reject the request.
 
+## Features of samples Tab Request Approval
+
+![Broadcast from user](TabRequestApproval/Images/TabRequestApproval.gif)
+
 User Persona:
 
 - Send request to the manger for task approval.

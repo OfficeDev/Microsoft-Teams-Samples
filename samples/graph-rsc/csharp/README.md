@@ -17,6 +17,18 @@ urlFragment: officedev-microsoft-teams-samples-graph-rsc-csharp
 
 This sample illustrates you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs.
 
+## Features of samples RSC
+
+    ![Broadcast from user](RSCDemo/Images/RSCDemo.gif)
+
+##  Features of samples
+
+    ![](RSCDemo/Images/Overview.png)
+
+    ![](RSCDemo/Images/Permission.png)
+
+    ![](RSCDemo/Images/PermissionList.png)
+
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
@@ -58,9 +70,7 @@ This sample illustrates you can use [Resource Specific Consent (RSC)](https://do
 
 
 1. [Upload app manifest file](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#load-your-package-into-teams) (zip file) to your team
-    ![](RSCDemo/Images/Picture1.png)
-
-    ![](RSCDemo/Images/Picture2.Png)
+   
 
 
 
