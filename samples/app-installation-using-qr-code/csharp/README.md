@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "11/10/2021 11:35:25 PM"
+ createdDate: "11-10-2021 23:35:25"
 urlFragment: officedev-microsoft-teams-samples-app-installation-using-qr-code-csharp
 ---
 
@@ -21,15 +21,33 @@ The user can Generate a new QR code (contains app id information) and then use I
 
 `Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients`.
 
-## Feature of the sample.
+# Feature of the sample - Desktop View
 
-![Module](QRAppInstallation/Images/QRAppInstallationModule.gif)
+![App Installation Using QRCodeDesktopGif](QRAppInstallation/Images/AppInstallationUsingQRCodeDesktopGif.gif)
+
+# Feature of the sample - Mobile View
+
+![App Installation Using QRCodeGif](QRAppInstallation/Images/AppInstallationUsingQRCodeGif.gif)
+
+**Desktop View**
 
 ![Card](QRAppInstallation/Images/CardWithButtons.png)
 
 ![QR Code](QRAppInstallation/Images/QRCode.png)
 
 ![Install App](QRAppInstallation/Images/AppInstallation.png)
+
+**Mobile View**
+
+![CardWithButtonsMobile](QRAppInstallation/Images/CardWithButtonsMobile.png)
+
+![Permission](QRAppInstallation/Images/Permission.png)
+
+![QRCodeMobile](QRAppInstallation/Images/QRCodeMobile.png)
+
+![AppAddedMobile](QRAppInstallation/Images/AppAddedMobile.png)
+
+![AppInstallationMobile](QRAppInstallation/Images/AppInstallationMobile.png)
 
 ## Prerequisites
 

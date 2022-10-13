@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "11/10/2021 11:35:25 PM"
+ createdDate: "11-10-2021 23:35:25"
 urlFragment: officedev-microsoft-teams-samples-app-installation-using-qr-code-nodejs
 ---
 
@@ -21,15 +21,33 @@ The user can Generate a new QR code (contains app id information) and then use I
 
 `Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients`
 
-## Feature of the sample.
+# Feature of the sample - Desktop View
 
-![Card](Images/AppInstallationModule.gif)
+![App Installation Using QRCodeDesktopGif](Images/AppInstallationUsingQRCodeDesktopGif.gif)
+
+# Feature of the sample - Mobile View
+
+![App Installation Using QRCodeGif](Images/AppInstallationUsingQRCodeGif.gif)
+
+**Desktop View**
 
 ![Card](Images/CardWithButtons.png)
 
 ![QR Code](Images/QRCode.png)
 
 ![Install App](Images/AppInstallation.png)
+
+**Mobile View**
+
+![CardWithButtonsMobile](Images/CardWithButtonsMobile.png)
+
+![Permission](Images/Permission.png)
+
+![QRCodeMobile](Images/QRCodeMobile.png)
+
+![AppAddedMobile](Images/AppAddedMobile.png)
+
+![AppInstallationMobile](Images/AppInstallationMobile.png)
 
 ## Prerequisites
 

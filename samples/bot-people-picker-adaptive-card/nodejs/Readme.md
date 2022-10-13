@@ -18,9 +18,11 @@ This sample shows the feature of people picker on Adaptive Cards.
 
  Use the bot command `peoplepickercard` to get the card with people picker control 
 
-##Feature of the sample.
+ # Key features
 
-![Sample Module ](Images/botpeoplepickeradaptivecard.gif)
+ ![Bot People Picker Adaptive CardGif ](Images/BotPeoplePickerAdaptiveCardGif.png)
+
+**Desktop View**
 
 ![people picker card ](Images/adaptiveCard.png)
 
@@ -32,9 +34,9 @@ This sample shows the feature of people picker on Adaptive Cards.
 
 ![people picker card](Images/channelPeoplePickerCard.png)
 
- - On `Assign` button click, the bot will return the member id that we have selected.
+- On `Assign` button click, the bot will return the member id that we have selected.
 
- ![people picker card](Images/TaskAssign.png)
+![Task Assign](Images/TaskAssign.png)
 
 ## Prerequisites
 
