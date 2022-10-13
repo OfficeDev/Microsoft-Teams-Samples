@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "12-12-2019 13:38:25"
+ createdDate: "12/12/2019 13:38:25 PM"
 urlFragment: officedev-microsoft-teams-samples-bot-message-reaction-csharp
 ---
 
@@ -28,7 +28,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 - [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## To try this sample
+## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because the Teams service needs to call into the bot.
 
@@ -73,7 +73,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app in personal/groupchat/team scope (supported scopes)
 
-## Interacting with the bot in Teams
+## Running the sample
 
 Message the bot and it will respond with an 'Echo: [your message]'.  Add a message reaction to the bots response, and the bot will reply accordingly.
 

@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "17-10-2019 13:38:25"
+ createdDate: "10/17/2019 13:38:25 PM"
 urlFragment: officedev-microsoft-teams-samples-msgext-link-unfurling-csharp
 ---
 
@@ -28,7 +28,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 - [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## To try this sample
+## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 the Teams service needs to call into the bot.
@@ -74,7 +74,7 @@ the Teams service needs to call into the bot.
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
 
-## Interacting with the bot in Teams
+## Running the sample
 
 > Note the Teams `manifest.json` for this sample also includes a Search Query. This Messaging Extension is only introduced in order to enable installation, because there is no mechanism for installing a link unfurling feature in isolation.
 

@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "17-10-2019 13:38:25"
+ createdDate: "10/17/2019 13:38:25 PM"
 urlFragment: officedev-microsoft-teams-samples-msgext-search-csharp
 ---
 # Teams Messaging Extensions Search
@@ -28,7 +28,7 @@ build a Search-based Messaging Extension.
 - [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## To try this sample
+## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 the Teams service needs to call into the bot.
@@ -76,7 +76,7 @@ the Teams service needs to call into the bot.
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
 
-## Interacting with the bot in Teams
+## Running the sample
 
 > Note this `manifest.json` specified that the feature will be available from both the `compose` and `commandBox` areas of Teams. Please refer to Teams documentation for more details.
 

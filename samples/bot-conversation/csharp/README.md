@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "17-10-2019 13:38:25"
+ createdDate: "10/17/2019 13:38:25 PM"
 urlFragment: officedev-microsoft-teams-samples-bot-conversation-csharp
 ---
 
@@ -29,7 +29,7 @@ how to incorporate basic conversational flow into a Teams application. It also i
 - [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## To try this sample
+## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 the Teams service needs to call into the bot.
@@ -76,7 +76,7 @@ the Teams service needs to call into the bot.
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
 
-## Interacting with the bot
+## Running the sample
 
 You can interact with this bot in Teams by sending it a message, or selecting a command from the command list. The bot will respond to the following strings.
 

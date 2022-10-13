@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "10-07-2019 13:38:25"
+ createdDate: "07/10/2019 13:38:25 PM"
 urlFragment: officedev-microsoft-teams-samples-bot-teams-authentication-csharp
 ---
 # Teams Auth Bot
@@ -49,7 +49,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
   ```
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## To try this sample
+## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
@@ -88,7 +88,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal scope or 1:1 chat (Supported scope)
 
-## Interacting with the bot in Teams
+## Running the sample
 
 > Note `manifest.json` contains a `webApplicationInfo` template required for Teams Single Sign On.
 

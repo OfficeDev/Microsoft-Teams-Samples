@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "23-01-2020 13:38:25"
+ createdDate: "01/23/2020 13:38:25 PM"
 urlFragment: officedev-microsoft-teams-samples-bot-initiate-thread-in-channel-csharp
 ---
 # Microsoft Teams - Start Thread In A Specific Channel of a Team
@@ -27,7 +27,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com). T
 - [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## To try this sample
+## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 the Teams service needs to call into the bot.
@@ -73,7 +73,7 @@ the Teams service needs to call into the bot.
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to a any Teams channel
 
-## Interacting with the bot
+## Running the sample
 
 You can interact with this bot by sending it a message. The bot will respond by creating a new thread in the channel and replying to that new thread.
 
