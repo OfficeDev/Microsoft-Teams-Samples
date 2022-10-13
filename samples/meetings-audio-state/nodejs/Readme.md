@@ -9,25 +9,30 @@ languages:
 - reactjs
 extensions:
  contentType: samples
- createdDate: "08/08/2022 12:00:01 PM"
+ createdDate: "08-08-2022 12:00:01"
 urlFragment: officedev-microsoft-teams-samples-meeting-audio-state-nodejs
+
 ---
 
-# Meeting Audio Mute/Unmute
+## Concepts introduced in this sample
 
-**Steps:**
+Select your application and click on `Save` button to configure,Your application will run and click on `mute/unmute` button to toggle client audio.
+
+![mute-unmute](Images/mute-unmute-audiostate.gif)
+
+## Steps
 
  - Add your application to the `meetings` as its display as below.
 
-  ![Stage 1](Images/SelectApp.png)
+  ![Stage 1](Images/joinTheCall.png)
 
- - Select your application and click on `Save` button to configure.
+ - Toggle button to mute state its looks like below.
 
-  ![Stage 2](Images/Setting-Up.png)
+  ![Stage 2](Images/ToggleMutepng)
 
- - Your application is running now and click on `mute/unmute` button to toggle client audio.
+ - Toggle button to Unmute state it will unmute client audio.
 
-  ![Stage 3](Images/App-InMeeting.png)
+  ![Stage 3](Images/ToggleUnMute.png)
 
 
 ## Prerequisites
