@@ -76,13 +76,12 @@ Interact with SidePanel by clicking on the App icon present on the top menu besi
 
 ##Feature of the sample.
 
-![Customform](Microsoft.Teams.Samples.TaskModule.Web/Images/SidePanelModule.gif)
-
+![Customform](SidePanel/Images/SidePanelModule.gif)
 1. Welcome image to added side panel.
-![Customform](Microsoft.Teams.Samples.TaskModule.Web/Images/welcome.png)
+![Customform](Images/welcome.png)
 2. Screen ready to added the agenda.
-![Customform](Microsoft.Teams.Samples.TaskModule.Web/Images/addnewagenda.png)
+![Customform](Images/addnewagenda.png)
 3. On click of "Add" button, agenda point will be added to the agenda list.
-![Customform](Microsoft.Teams.Samples.TaskModule.Web/Images/addagendabutton.png)
+![Customform]Images/addagendabutton.png)
 4. On click of "Publish Agenda", the agenda list will be sent to the meeting chat.
-![Customform](Microsoft.Teams.Samples.TaskModule.Web/Images/agendacard.png)
+![Customform](Images/agendacard.png)
