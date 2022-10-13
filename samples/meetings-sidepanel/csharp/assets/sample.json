@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-sidepanel/csharp/Images/SidePanelModule.gif",
+        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-sidepanel/csharp/SidePanel/Images/SidePanelModule.gif",
         "alt": "Solution UX showing meetings sidepanel"
       }
     ],
