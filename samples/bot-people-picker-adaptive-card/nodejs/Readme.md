@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "01/25/2022 12:00:00 AM"
+ createdDate: "25-01-2022 23:30:17"
 urlFragment: officedev-microsoft-teams-samples-bot-people-picker-adaptive-card-nodejs
 ---
 # People picker control in Adaptive Cards
@@ -17,6 +17,10 @@ urlFragment: officedev-microsoft-teams-samples-bot-people-picker-adaptive-card-n
 This sample shows the feature of people picker on Adaptive Cards.
 
  Use the bot command `peoplepickercard` to get the card with people picker control 
+
+##Feature of the sample.
+
+![Sample Module ](Images/botpeoplepickeradaptivecard.gif)
 
 ![people picker card ](Images/adaptiveCard.png)
 
@@ -28,7 +32,9 @@ This sample shows the feature of people picker on Adaptive Cards.
 
 ![people picker card](Images/channelPeoplePickerCard.png)
 
- On `Assign` button click, the bot will return the member id that we have selected.
+ - On `Assign` button click, the bot will return the member id that we have selected.
+
+ ![people picker card](Images/TaskAssign.png)
 
 ## Prerequisites
 

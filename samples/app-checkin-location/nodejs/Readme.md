@@ -12,6 +12,10 @@ extensions:
  createdDate: "11/11/2021 11:30:17 PM"
 urlFragment: officedev-microsoft-teams-samples-app-checkin-location-nodejs
 ---
+##Feature of the sample.
+
+![Sample Module](Images/AppCheckInLocationModule.gif)
+
 # Get Checkin info of user
 
 This sample shows feature where user can checkin with current location and view all previous checkins.

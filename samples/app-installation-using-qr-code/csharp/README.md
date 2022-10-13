@@ -21,6 +21,10 @@ The user can Generate a new QR code (contains app id information) and then use I
 
 `Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients`.
 
+## Feature of the sample.
+
+![Module](QRAppInstallation/Images/QRAppInstallationModule.gif)
+
 ![Card](QRAppInstallation/Images/CardWithButtons.png)
 
 ![QR Code](QRAppInstallation/Images/QRCode.png)
