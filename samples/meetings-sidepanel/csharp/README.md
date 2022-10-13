@@ -77,11 +77,15 @@ Interact with SidePanel by clicking on the App icon present on the top menu besi
 ##Feature of the sample.
 
 ![Customform](SidePanel/Images/SidePanelModule.gif)
+
 1. Welcome image to added side panel.
-![Customform](Images/welcome.png)
+![Customform](SidePanel/Images/welcome.png)
+
 2. Screen ready to added the agenda.
-![Customform](Images/addnewagenda.png)
+![AddNewAgenda](SidePanel/Images/addnewagenda.png)
+
 3. On click of "Add" button, agenda point will be added to the agenda list.
-![Customform]Images/addagendabutton.png)
+![AgendaSubmit](SidePanel/Images/addagendabutton.png)
+
 4. On click of "Publish Agenda", the agenda list will be sent to the meeting chat.
-![Customform](Images/agendacard.png)
+![AgendaCard](SidePanel/Images/agendacard.png)
