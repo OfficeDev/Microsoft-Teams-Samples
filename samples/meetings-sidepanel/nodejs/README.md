@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-sidepanel-nodejs
 
 This sample illustrates how to implement [Side Panel](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience.
 
-![Preview Image](images/Preview.gif)
+![Preview Image](Images/Preview.gif)
   
 ### User interactions(Meeting Organizer)
 - **Add New Agenda Item** - Gives provision to add new Agenda point.
@@ -77,7 +77,11 @@ Interact with SidePanel by clicking on the App icon present on the top menu besi
 
 ![](Images/Dashboard.png)
 
-2. On click of "Add" button, agenda point will be added to the agenda list by organizer.![](Images/AddNewAgendaItem.png)![](Images/Added New.png)
+2. On click of "Add" button, agenda point will be added to the agenda list by organizer.
+![](Images/AddNewAgendaItem.png)
 
-3. On click of "Publish Agenda", the agenda list will be sent to the meeting chat.![](Images/Notification.png)
+![](Images/Added New.png)
+
+3. On click of "Publish Agenda", the agenda list will be sent to the meeting chat.!
+[](Images/Notification.png)
 

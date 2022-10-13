@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-context-nodejs
 
 # Tab context in channel
 
-![Preview Image](images/Preview.gif)
+![Preview Image](Images/Preview.gif)
 
 This sample shows the contents of tab context object in a private and shared channel.
 
