@@ -91,10 +91,13 @@ Copy the CART link it will used while configuring tab for meeting.
 
 1. Schedule the meeting and add Meeting Caption Tab in that particular scheduled meeting.
 ![Add Tab](MeetingLiveCaption/Images/AddMeetingCaption.png)
+
 2. Once meeting started, turn on live caption.
 ![Start live caption](MeetingLiveCaption/Images/TurnOnLiveCaption.png)
+
 3. Once the live caption has started, you can use the app to send live caption.
 ![Send live caption](MeetingLiveCaption/Images/MeetingCaptionSidePanel.png)
+
 4. After clicking on `Submit` button, you will see the caption in the meeting.
 ![Caption in meeting](MeetingLiveCaption/Images/LiveCaption.png)
 
