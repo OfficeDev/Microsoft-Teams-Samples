@@ -54,7 +54,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
 
-### 1. Setup for Messaging Extension Auth
+### 1. Setup for Bot Auth
 Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md).
 
 1) Clone the repository
