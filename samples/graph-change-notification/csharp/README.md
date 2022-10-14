@@ -59,6 +59,24 @@ This sample app demonstrates sending change notifications to user presence in Te
 ![image](https://user-images.githubusercontent.com/85864414/121879805-df15cb00-cd2a-11eb-8076-1236ccb1bbfc.PNG)
 5. Complete the form as follows:
 
+##.Setup Bot Service Connection (TokenStore)
+
+a. Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
+
+b. Service Provider. Select Azure Active Directory. Once you select this, the Azure AD-specific fields will be displayed.
+
+c. Client id. Enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
+
+d. Client secret. Enter the secret that you recorded for your Azure identity provider app in the steps above.
+
+e. Grant Type. Enter authorization_code.
+
+f. Login URL. Enter https://login.microsoftonline.com.
+
+g. Tenant ID, enter the Directory (tenant) ID that you recorded earlier for your Azure identity app or common depending on the supported account type selected when you created the identity provider app.
+h. For Resource URL, enter https://graph.microsoft.com/
+i. Provide  Scopes like "Presence.Read, Presence.Read.All"
+
 ![image](https://user-images.githubusercontent.com/85864414/122000240-1d16fb80-cdcc-11eb-8aeb-a1dc898f947e.PNG)
 
 ## App Registration.
@@ -132,32 +150,13 @@ Add the following Ids as authorized clients for your application
 
 - Add any user delegated permissions that your app will need to downstream APIs. This quick start only requires User.Read.
 
-    ![Add Permissions](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/image013.png)
+    ![Add Permissions](https://user-images.githubusercontent.com/85864414/121880473-af1af780-cd2b-11eb-8166-837425ef186f.PNG)
 
 #### 1.6. Enable implicit grant
 
 - Navigate to "Authentication"
 
 - Check the *Access tokens* and *ID tokens* boxes and click on Save button.
-
-##.Setup Bot Service Connection (TokenStore)
-
-a. Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
-
-b. Service Provider. Select Azure Active Directory. Once you select this, the Azure AD-specific fields will be displayed.
-
-c. Client id. Enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
-
-d. Client secret. Enter the secret that you recorded for your Azure identity provider app in the steps above.
-
-e. Grant Type. Enter authorization_code.
-
-f. Login URL. Enter https://login.microsoftonline.com.
-
-g. Tenant ID, enter the Directory (tenant) ID that you recorded earlier for your Azure identity app or common depending on the supported account type selected when you created the identity provider app.
-h. For Resource URL, enter https://graph.microsoft.com/
-i. Provide  Scopes like "Presence.Read, Presence.Read.All"
-![image](https://user-images.githubusercontent.com/85864414/121880473-af1af780-cd2b-11eb-8166-837425ef186f.PNG)
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
