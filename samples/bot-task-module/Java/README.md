@@ -1,4 +1,4 @@
-﻿---
+---
 page_type: sample
 description: This sample app demonstrate is how to use Task Module using Bot Framework.
 products:

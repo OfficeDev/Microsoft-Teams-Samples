@@ -1,4 +1,4 @@
-﻿---
+---
 page_type: sample
 description: This sample app demonstrate iss how to use the Bot Framework support for oauth in your bot.
 products:
