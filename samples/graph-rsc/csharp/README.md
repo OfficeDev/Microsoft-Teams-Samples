@@ -19,15 +19,15 @@ This sample illustrates you can use [Resource Specific Consent (RSC)](https://do
 
 ## Features of samples RSC
 
-    ![Broadcast from user](RSCDemo/Images/RSCDemo.gif)
+ ![Broadcast from user](RSCDemo/Images/RSCDemo.gif)
 
 ##  Features of samples
 
-    ![](RSCDemo/Images/Overview.png)
+ ![Overview](RSCDemo/Images/Overview.png)
 
-    ![](RSCDemo/Images/Permission.png)
+ ![Permossion](RSCDemo/Images/Permission.png)
 
-    ![](RSCDemo/Images/PermissionList.png)
+ ![Permissionlist](RSCDemo/Images/PermissionList.png)
 
 ## Prerequisites
 

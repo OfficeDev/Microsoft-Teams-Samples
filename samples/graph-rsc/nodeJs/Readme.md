@@ -20,15 +20,15 @@ This sample illustrates you can use [Resource Specific Consent](https://docs.mic
 
 ## Features of samples RSC
 
-    ![Broadcast from user](./Images/RSCDemo.gif)
+![Broadcast from user](./Images/RSCDemo.gif)
 
 ##  Features of samples
 
-    ![](./Images/Overview.png)
+![Overview](./Images/Overview.png)
 
-    ![](./Images/Permission.png)
+![Permission](./Images/Permission.png)
 
-    ![](./Images/PermissionList.png)
+![Permissionlist](./Images/PermissionList.png)
 
 
 ## Prerequisites
