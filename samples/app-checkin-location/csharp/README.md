@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
   contentType: samples
-  createdDate: "11/11/2021 11:30:17 AM"
+  createdDate: 11/11/2021 11:30:17 AM
 urlFragment: officedev-microsoft-teams-samples-app-checkin-location-csharp
 ---
 
@@ -19,13 +19,9 @@ This sample shows feature where user can checkin with current location and view 
 
 `Currently, Microsoft Teams support for get geolocation capability is only available for mobile clients`
 
-![Check in card](AppCheckinLocation/Images/CheckinCard.png)
+# Key features
 
-![Geo Location](AppCheckinLocation/Images/GeoLocation.png)
-
-![User details card](AppCheckinLocation/Images/UserDetailsCard.png)
-
-![User last checkin card](AppCheckinLocation/Images/UserLastCheckInCard.png)
+![App checkin LocationGif](AppCheckinLocation/Images/AppcheckinLocationGif.gif)
 
 ## Prerequisites
 
