@@ -36,9 +36,27 @@ This is a sample application which demonstrates how to create meeting in bulk on
 
 ## Run app locally
 
-### Register your application with Azure AD
+## Setup for Bot
+
+   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+    - For bot handle, make up a name.
+    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
+    
+   In the new Azure Bot resource in the Portal, 
+    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
+
+
+## Register your Teams Auth SSO with Azure AD
 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+
 2. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
 3. Navigate to **API Permissions**, and make sure to add the follow permissions:
 -   Select Add a permission
@@ -82,6 +100,17 @@ Replace the following details:
 - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
 - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
+1. Here we can view a list of meettings and import the meetings.
+  ![Meeting Event](EventMeeting/Images/Dashboardwithoutlist.png)
+
+2. Imported Meetings view from the excel sheet.
+  ![Meeting Event](EventMeeting/Images/UploadExcelSheet.png)
+
+3. Dashborad of the Meetings Here is the all created meetings list.
+   ![Meeting Event](EventMeeting/Images/Dashboard.png)
+
+4. Created Meeting view in teams.
+   ![Meeting Event](EventMeeting/Images/createdmeeting.png)
 
 ## Further reading
 - [Event resource type](https://docs.microsoft.com/en-us/graph/api/resources/event?view=graph-rest-1.0)

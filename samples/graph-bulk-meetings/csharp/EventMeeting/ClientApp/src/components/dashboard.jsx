@@ -88,12 +88,12 @@ class Dashboard extends Component {
     // Renders list of meeeting available for current user.
     renderMeetingList = () => {
         var elements = [];
-
+        debugger;
         this.state.teamMeetingEvent.map((item, index) => {
             elements.push(<Flex className="tag-container" vAlign="center">
                 <Flex.Item size="size.small">
                     <Flex gap="gap.large">                        
-                        <Text content={`Subject : ${item.TopicName}`} weight="semibold" />  
+                        <Text content={`Subject : ${item.topicName}`} weight="semibold" />  
                         {<Text content={`Organizer: ${JSON.stringify(item.organizer.emailAddress.name)}`} weight="semibold" />}
                     </Flex>
                 </Flex.Item>
