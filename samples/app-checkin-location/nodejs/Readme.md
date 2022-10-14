@@ -9,18 +9,18 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "11/11/2021 11:30:17 PM"
+ createdDate: "11-11-2021 23:30:17"
 urlFragment: officedev-microsoft-teams-samples-app-checkin-location-nodejs
 ---
-##Feature of the sample.
-
-![Sample Module](Images/AppCheckInLocationModule.gif)
-
 # Get Checkin info of user
 
 This sample shows feature where user can checkin with current location and view all previous checkins.
 
 `Currently, Microsoft Teams support for get geolocation capability is only available for mobile clients`
+
+# Key features
+
+![App checkin LocationGif](Images/AppcheckinLocationGif.gif)
 
 ![Check in card](Images/CheckinCard.png)
 
