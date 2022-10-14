@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation/java/Images/BotConversation.gif",
-        "alt": "Solution UX showing Conversation Bot using java"
+        "alt": "Solution UX showing Conversation Bot using Java"
       }
     ],
     "authors": [
