@@ -1,4 +1,4 @@
-﻿---
+---
 page_type: sample
 description: This sample app demonstrate is how to upload files to Teams from a bot.
 products:
