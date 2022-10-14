@@ -87,8 +87,7 @@ class Dashboard extends Component {
 
     // Renders list of meeeting available for current user.
     renderMeetingList = () => {
-        var elements = [];
-        debugger;
+        var elements = [];        
         this.state.teamMeetingEvent.map((item, index) => {
             elements.push(<Flex className="tag-container" vAlign="center">
                 <Flex.Item size="size.small">

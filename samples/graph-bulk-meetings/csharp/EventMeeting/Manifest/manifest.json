@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
   "manifestVersion": "1.11",
   "version": "1.0.0",
-  "id": "App_id",
+  "id": "<<Your Microsoft App Id>>",
   "packageName": "com.microsoft.teams.botmeetingevents",
   "developer": {
     "name": "Microsoft",
@@ -21,7 +21,7 @@
   "accentColor": "#5558AF",
   "configurableTabs": [
     {
-      "configurationUrl": "Base_url/configure",
+      "configurationUrl": "https://yourNgrok.ngrok.io/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -35,7 +35,7 @@
   },
   "bots": [
     {
-      "botId": "App_id",
+      "botId": "<<Your Microsoft App Id>>",
       "scopes": [
         "team",
         "personal",
@@ -50,8 +50,8 @@
     "token.botframework.com"
   ],
   "webApplicationInfo": {
-    "id": "App_id",
-    "resource": "base_url",
+    "id": "<<Your Microsoft App Id>>",
+    "resource": "https://yourNgrok.ngrok.io",
     "applicationPermissions": [
       "OnlineMeeting.ReadBasic.Chat"
     ]
