@@ -19,6 +19,8 @@ Bot Framework v4 ChangeNotification sample.
 
 This sample app demonstrates sending change notifications to user presence in Teams based on user presence status.
 
+## Feature of the sample.
+ ![image](ChangeNotification/Images/ChangeNotificationModule.gif)
 
 ## Prerequisites
 
@@ -59,6 +61,87 @@ This sample app demonstrates sending change notifications to user presence in Te
 
 ![image](https://user-images.githubusercontent.com/85864414/122000240-1d16fb80-cdcc-11eb-8aeb-a1dc898f947e.PNG)
 
+## App Registration.
+
+This step will create an AAD app, it will be reused wherever it needs AAD throughout this sample to simpler the steps.
+
+- Navigate to [Azure _App Registration_ Blade](https://ms.portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade)
+
+- Click "New Registration" on the upper left corner
+
+- Fill out name and select third option for supported account type 
+- Set Redirect Uri to "https://token.botframework.com/.auth/web/redirect" and click "Register":
+
+    ![App Registration Organization](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AppRegistration.png)
+
+- Navigate to the AAD app you just created, _copy and paste the Application ID(will referred as **AppId** in this document) somewhere safe_. You'll need it in a future step:
+    ![Save Application ID](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AppId.png)
+
+#### 1.2 Create Client Secret
+
+- Navigate to the "Certificates & secrets" blade and add a client secret by clicking "New Client Secret"
+
+    ![New Secret](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/ClientSecret.png)
+</br>
+
+- _Copy and paste the secret value somewhere safe_. You'll need it in a future step
+
+
+#### 1.3. Expose API endpoint
+
+- Click "_Expose an API_" in the left rail
+
+    - Set your Application ID URL to include your bot id - api://botid-<AppId>, where <AppId> is the id of the bot that will be making the SSO request and found in your Teams Application Manifest, which is the same you create and saved in step1.1:
+    ![Application ID URI](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AppIdUri.png)
+
+    - Click "_Add a scope_"
+
+        - access_as_user as the Scope name.
+
+        - Set Who can consent? to Admins and users
+
+        - Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the access_as_user scope. Suggestions:
+
+            - Admin consent display name: Teams can access the user’s profile
+
+            - Admin consent description: Allows Teams to call the app’s web APIs as the current user.
+
+            - User consent display name: Teams can access your user profile and make requests on your behalf
+
+            - User consent description: Enable Teams to call this app’s APIs with the same rights that you have
+
+        - Ensure that State is set to Enabled
+
+        - Click on Add scope button (Note: The domain part of the Scope name displayed just below the text field should automatically match the Application ID URI set in the previous step, with /access_as_user appended to the end)
+
+        ![Add Scope](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/CreateScope.png)
+
+#### 1.4. Authorize client applications
+
+Add the following Ids as authorized clients for your application
+
+- 1fec8e78-bce4-4aaf-ab1b-5451cc387264 (Teams mobile/desktop application)
+
+- 5e3ce6c0-2b1f-4285-8d4b-75ee78787346 (Teams web application)
+
+    ![Add Client Application](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AddClient.png)
+
+#### 1.5. Add any necessary API permissions for downstream calls
+
+- Navigate to "API permissions" blade on the left hand side
+
+- Add any user delegated permissions that your app will need to downstream APIs. This quick start only requires User.Read.
+
+    ![Add Permissions](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/image013.png)
+
+#### 1.6. Enable implicit grant
+
+- Navigate to "Authentication"
+
+- Check the *Access tokens* and *ID tokens* boxes and click on Save button.
+
+##.Setup Bot Service Connection (TokenStore)
+
 a. Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
 
 b. Service Provider. Select Azure Active Directory. Once you select this, the Azure AD-specific fields will be displayed.
@@ -90,12 +173,17 @@ i. Provide  Scopes like "Presence.Read, Presence.Read.All"
 ![image](https://user-images.githubusercontent.com/85864414/121878949-ebe5ef00-cd29-11eb-8ab0-683ce3ffbfcb.PNG)
 
 - After that when the user status chagnes you will get notify about their status: 
-- Change user status from available to busy like
-![image](https://user-images.githubusercontent.com/85864414/121879184-30718a80-cd2a-11eb-88b5-2a422042990b.PNG)
-- Change user status from busy to busy offline
- ![image](https://user-images.githubusercontent.com/85864414/121879374-63b41980-cd2a-11eb-8ed4-1b92035ff9c1.PNG)
+- user to available.
+![image](ChangeNotification/Images/BeRightBackPresence.png)
 
+- Change user status Busy from DoNotDistrub.
+ ![image](ChangeNotification/Images/BusywithstatusScreen.png)
 
+- Change user status DoNotDistrub from Available.
+ ![image](ChangeNotification/Images/DoNotDistrub.png)
+
+- Change user status BeRightBack from Available.
+ ![image](ChangeNotification/Images/BeRightBackPresence.png)
  
  
 ## Further reading
