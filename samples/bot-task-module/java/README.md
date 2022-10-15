@@ -79,19 +79,20 @@ the Teams service needs to call into the bot.
 > Note this `manifest.json` specified that the bot will be installed in "personal", "team" and "groupchat" scope which is why you immediately entered a one on one chat conversation with the bot. You can at mention the bot in a group chat or in a Channel in the Team you installed it in. Please refer to Teams documentation for more details.
 
 You can interact with this bot by sending it a message. The bot will respond with a Hero Card with a button which will display a Task Module when clicked.  The Task Module demonstrates retrieving input from a user through a Text Block and a Submit button.
-1.Sends Adaptive Cards 
+
+- **Sends Adaptive Cards:**   
 ![Adaptive Cards](Images/1.PNG)
 
-2.Adaptive Card Input
+- **Opened Task Module with Input via clicking on Adaptive Card button:**   
 ![Card Input](Images/2.PNG)
 
-3.Response from the card
+- **Submitted response card:**
 ![Card Form](Images/3.PNG)
 
-4.Adaptive card from input
+- **Opened Task Module with Custom form via clicking on Adaptive Card's "Custom form" button:**
 ![Card Youtube](Images/4.PNG)
 
-5.Adaptive card youtube
+- **Opened Task Module to play YouTube video via clicking on Adaptive Card's "YouTube" button:**
 ![Card Youtube](Images/5.PNG)
 
 ## Deploy the bot to Azure

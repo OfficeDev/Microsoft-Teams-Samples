@@ -78,13 +78,13 @@ the Teams service needs to call into the bot.
 In Teams, the command bar is located at the top of the window. When you at mention the bot what you type is forwarded (as you type) to the bot for processing. By way of illustration, this sample uses the text it receives to query the NuGet package store.
 
 **Mention In Search CommandBar:**
-  ![8-mention-Search-CommandBar ](Images/8-mention-Search-CommandBar.PNG)
+  ![8-mention-Search-CommandBar ](Images/8-mention-Search-CommandBar.png)
 
 **Search Result:**
-   ![9-mention-Search-Result ](Images/9-mention-Search-Result.PNG)
+   ![9-mention-Search-Result ](Images/9-mention-Search-Result.png)
 
 **Selected Item:**
-  ![10-mention-Search-SelectedItem ](Images/10-mention-Search-SelectedItem.PNG)
+  ![10-mention-Search-SelectedItem ](Images/10-mention-Search-SelectedItem.png)
 
 There is a secondary, drill down, event illustrated in this sample: clicking on the results from the initial query will result in the bot receiving another event.
 

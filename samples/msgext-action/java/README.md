@@ -62,25 +62,38 @@ the Teams service needs to call into the bot.
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-- Update the `resources/application.properties` file configuration in your project, for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+1) Update the `resources/application.properties` file configuration in your project, for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
 1) From the root of this project folder: (`samples/msgext-action/java`)
     - Open a terminal and build the sample using `mvn package` command
     - Install the packages in the local cache by using `mvn install` command in a terminal
     - Run it by using `java -jar .\target\bot-teams-messaging-extensions-action-sample.jar` command in a terminal
 
-- __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+1) __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
-## Interacting with the bot
+## Running the sample
 
 > Note this `manifest.json` specified that the bot will be called from both the `compose` and `message` areas of Teams. Please refer to Teams documentation for more details.
 
 1. Selecting the **Create Card** command from the Compose Box command list. The parameters dialog will be displayed and can be submitted to initiate the card creation within the Messaging Extension code.
-2. Selecting the **Share Message** command from the Message command list.
+
+![ActionPreviewOptions](Images/ActionPreviewOptions.PNG)
+
+![CreateCard](Images/CreateCard.PNG)
+
+![AdaptiveCardPreview](Images/AdaptiveCardPreview.PNG)
+
+2. Selecting the **Web View** command from the Message command list.
+![WebView](Images/WebView.PNG)
+
 3. Selecting the **FetchRoster** command from the Message command list. *Even though this action is being shown on the contextual menu, it's not implemented and is expected to fail.*
+![FetchRoster](Images/FetchRoster.PNG)
+
+**Note:** Likewise you can try with all other configured commands in you manifest.
 
 ## Deploy the bot to Azure
 
