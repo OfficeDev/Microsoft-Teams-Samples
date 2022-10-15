@@ -29,18 +29,26 @@ The user can Generate a new QR code (contains app id information) and then use I
 
 ![App Installation Using QRCodeGif](QRAppInstallation/Images/AppInstallationUsingQRCodeGif.gif)
 
-**Desktop View**
+## Desktop View
+
+- Card with actions `Generate QR code` and `Install App`. 
 
 ![Card](QRAppInstallation/Images/CardWithButtons.png)
 
+- `Generate QR code` is used to generate a QR code by selecting the app.
+
 ![QR Code](QRAppInstallation/Images/QRCode.png)
+
+- `Install App` is used to Scan the QR code and it then installs the app.
 
 ![Install App](QRAppInstallation/Images/AppInstallation.png)
 
-**Mobile View**
+## Mobile View
 
 ![CardWithButtonsMobile](QRAppInstallation/Images/CardWithButtonsMobile.png)
 
+- `Permission App` Also add following permission
+   
 ![Permission](QRAppInstallation/Images/Permission.png)
 
 ![QRCodeMobile](QRAppInstallation/Images/QRCodeMobile.png)
@@ -71,10 +79,6 @@ The user can Generate a new QR code (contains app id information) and then use I
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-   
-   Also add following permission in app registration. (used for App installation in a team)
-   
-   ![Permission](QRAppInstallation/Images/Permission.png)
 
 2) Clone the repository
    ```bash
@@ -129,20 +133,6 @@ The user can Generate a new QR code (contains app id information) and then use I
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
-
-## Features of this sample
-
-- Card with actions `Generate QR code` and `Install App`. 
-
-![Card](QRAppInstallation/Images/CardWithButtons.png)
-
-- `Generate QR code` is used to generate a QR code by selecting the app.
-
-![QR Code](QRAppInstallation/Images/QRCode.png)
-
-- `Install App` is used to Scan the QR code and it then installs the app.
-
-![Install App](QRAppInstallation/Images/AppInstallation.png)
 
 ## Deploy the bot to Azure
 

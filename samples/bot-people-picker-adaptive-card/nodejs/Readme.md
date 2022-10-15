@@ -20,7 +20,7 @@ This sample shows the feature of people picker on Adaptive Cards.
 
  # Key features
 
- ![Bot People Picker Adaptive CardGif ](Images/BotPeoplePickerAdaptiveCardGif.png)
+ ![Bot People Picker Adaptive CardGif ](Images/BotPeoplePickerAdaptiveCardGif.gif)
 
 **Desktop View**
 

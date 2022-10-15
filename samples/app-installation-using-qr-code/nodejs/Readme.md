@@ -29,19 +29,27 @@ The user can Generate a new QR code (contains app id information) and then use I
 
 ![App Installation Using QRCodeGif](Images/AppInstallationUsingQRCodeGif.gif)
 
-**Desktop View**
+## Desktop View
+
+- Card with actions `Generate QR code` and `Install App`. 
 
 ![Card](Images/CardWithButtons.png)
 
+- `Generate QR code` is used to generate a QR code by selecting the app.
+
 ![QR Code](Images/QRCode.png)
+
+- `Install App` is used to Scan the QR code and it then installs the app.
 
 ![Install App](Images/AppInstallation.png)
 
-**Mobile View**
+## Mobile View 
 
 ![CardWithButtonsMobile](Images/CardWithButtonsMobile.png)
 
-![Permission](Images/Permission.png)
+- `Permission App`  Add the following permission
+
+![Install App](Images/Permission.png)
 
 ![QRCodeMobile](Images/QRCodeMobile.png)
 
@@ -67,9 +75,7 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-Add the following permission in app registration
 
-![Install App](Images/Permission.png)
 
 ### 2. Run your bot sample
 1) Clone the repository
@@ -104,18 +110,3 @@ Add the following permission in app registration
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
     > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
-
-## Features of this sample
-
-- Card with actions `Generate QR code` and `Install App`. 
-
-![Card](Images/CardWithButtons.png)
-
-- `Generate QR code` is used to generate a QR code by selecting the app.
-
-![QR Code](Images/QRCode.png)
-
-- `Install App` is used to Scan the QR code and it then installs the app.
-
-![Install App](Images/AppInstallation.png)
-

@@ -22,14 +22,6 @@ This sample shows feature where user can checkin with current location and view 
 
 ![App checkin LocationGif](Images/AppcheckinLocationGif.gif)
 
-![Check in card](Images/CheckinCard.png)
-
-![Geo Location](Images/GeoLocation.png)
-
-![User details card](Images/UserDetailsCard.png)
-
-![User last checkin card](Images/UserLastCheckInCard.png)
-
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
@@ -98,4 +90,6 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 - `viewcheckindetails` of user.
 
 ![User last checkin card](Images/UserLastCheckInCard.png)
+
+
 
