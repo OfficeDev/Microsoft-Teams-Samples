@@ -78,7 +78,7 @@ Interact with SidePanel by clicking on the App icon present on the top menu besi
 ![](Images/Dashboard.png)
 
 2. On click of "Add" button, agenda point will be added to the agenda list by organizer.
-![](Images/AddNewAgendaItem.png)
+![](Images/Dashboard.png)
 
 ![](Images/Added New.png)
 
