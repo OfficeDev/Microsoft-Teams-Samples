@@ -1,4 +1,4 @@
-﻿---
+---
 page_type: sample
 description: This sample app demonstrate the bot that performs build an Action-based Messaging Extension
 products:
