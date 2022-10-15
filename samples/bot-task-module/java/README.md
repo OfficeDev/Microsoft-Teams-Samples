@@ -80,16 +80,16 @@ the Teams service needs to call into the bot.
 
 You can interact with this bot by sending it a message. The bot will respond with a Hero Card with a button which will display a Task Module when clicked.  The Task Module demonstrates retrieving input from a user through a Text Block and a Submit button.
 
-- **Sends Adaptive Cards:**   
+- **Send Adaptive Cards:**   
 ![Adaptive Cards](Images/1.PNG)
 
-- **Opened Task Module with Input via clicking on Adaptive Card button:**   
+- **Opened Task Module with input field via clicking on Adaptive Card button:**   
 ![Card Input](Images/2.PNG)
 
 - **Submitted response card:**
 ![Card Form](Images/3.PNG)
 
-- **Opened Task Module with Custom form via clicking on Adaptive Card's "Custom form" button:**
+- **Opened Task Module with custom form via clicking on Adaptive Card's "Custom Form" button:**
 ![Card Youtube](Images/4.PNG)
 
 - **Opened Task Module to play YouTube video via clicking on Adaptive Card's "YouTube" button:**

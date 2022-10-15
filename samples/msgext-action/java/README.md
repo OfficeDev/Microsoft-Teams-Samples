@@ -81,11 +81,11 @@ the Teams service needs to call into the bot.
 
 1. Selecting the **Create Card** command from the Compose Box command list. The parameters dialog will be displayed and can be submitted to initiate the card creation within the Messaging Extension code.
 
-![ActionPreviewOptions](Images/ActionPreviewOptions.PNG)
+![ActionPreviewOptions](Images/ActionPreviewOptions.png)
 
-![CreateCard](Images/CreateCard.PNG)
+![CreateCard](Images/CreateCard.png)
 
-![AdaptiveCardPreview](Images/AdaptiveCardPreview.PNG)
+![AdaptiveCardPreview](Images/AdaptiveCardPreview.png)
 
 2. Selecting the **Web View** command from the Message command list.
 ![WebView](Images/WebView.PNG)
