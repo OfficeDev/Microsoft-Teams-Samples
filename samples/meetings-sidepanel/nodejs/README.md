@@ -79,9 +79,11 @@ Interact with SidePanel by clicking on the App icon present on the top menu besi
 
 2. On click of "Add" button, agenda point will be added to the agenda list by organizer.
 
-![](Images/Dashboard.png)
+![](Images/AddNewAgendaItem.png)
+
+![](Images/AddedNew.png)
 
 3. On click of "Publish Agenda", the agenda list will be sent to the meeting chat.!
 
-[](Images/Notification.png)
+![](Images/Notification.png)
 
