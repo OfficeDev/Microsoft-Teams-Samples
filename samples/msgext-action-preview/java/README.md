@@ -1,4 +1,4 @@
-﻿---
+---
 page_type: sample
 description: This sample app demonstrate the bot that performs simple card based on parameters entered by the user from a Task Module
 products:
