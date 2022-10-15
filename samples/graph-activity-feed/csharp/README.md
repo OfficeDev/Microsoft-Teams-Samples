@@ -19,6 +19,21 @@ Bot Framework v4 Activity Feed sample using Tab.
 
 This sample has been created using [Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-beta), it shows how trigger a Activity feed notification from your Tab, it triggers the feed notification for User, Chat and Team scope and send back to conversation.
 
+## User Interaction with Tab Activity Feed App
+
+- Install TabActivityFeed manifest in Teams
+- Add Tab in Personal, GroupChat or Team scope
+- Fill the Details in Page and click on Send notification button
+![image](ActivityFeedNotification/Images/TeamsNotification.png)
+
+- Notification triggred by Tab App will appear in Teams Activity Feed
+
+![image](ActivityFeedNotification/Images/ActivityFeedNotification.png)
+
+## Features of samples Tab Activity Feed
+
+![Broadcast from user](ActivityFeedNotification/Images/ActivityFeed.gif)
+
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
@@ -135,11 +150,15 @@ Teams Activity feed notification API uses activity to which user want a notifica
 - Install TabActivityFeed manifest in Teams
 - Add Tab in Personal, GroupChat or Team scope
 - Fill the Details in Page and click on Send notification button
-![image](https://user-images.githubusercontent.com/50989436/109036739-eb303b00-76ef-11eb-91d2-806c2b180396.png)
+![image](ActivityFeedNotification/Images/TeamsNotification.png)
 
 - Notification triggred by Tab App will appear in Teams Activity Feed
 
-![image](https://user-images.githubusercontent.com/50989436/109036793-fb481a80-76ef-11eb-9fc5-eafc763a67d8.png)
+![image](ActivityFeedNotification/Images/ActivityFeedNotification.png)
+
+## Features of samples Tab Activity Feed
+
+![Broadcast from user](ActivityFeedNotification/Images/ActivityFeed.gif)
 
 ## Further reading
 
