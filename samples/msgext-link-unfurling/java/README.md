@@ -1,4 +1,4 @@
-﻿---
+---
 page_type: sample
 description: This sample app demonstrate the bot that performs link unfurling in Teams
 products:
