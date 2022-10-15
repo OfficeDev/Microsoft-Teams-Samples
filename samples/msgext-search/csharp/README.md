@@ -39,7 +39,7 @@ the Teams service needs to call into the bot.
     ngrok http --host-header=rewrite 3978
     ```
 
-1) Setup for Messaging Extension
+1) Setup for Bot
 
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name.
