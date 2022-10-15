@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-archive-groupchat-messages/nodejs/Images/botCommandToGetChatMessages.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-archive-groupchat-messages/nodejs/Images/botArchiveGroupchatMessagesGif.gif",
         "alt": "Solution UX showing archive groupchat messages"
       }
     ],

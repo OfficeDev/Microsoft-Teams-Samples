@@ -31,7 +31,14 @@
         "value": "bot"
       }
     ],
-    "thumbnails": [],
+   "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-hello-world/nodejs/Images/MeetingsContentBubbleGif.gif",
+        "alt": "Solution UX showing microsoft teams nodejs meetings-content-bubble sample"
+      }
+    ],
     "authors": [
       {
         "gitHubAccount": "OfficeDev",

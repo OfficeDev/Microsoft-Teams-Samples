@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "02/09/2021 07:54:22 PM"
+ createdDate: "02-09-2021 19:54:22"
 urlFragment: officedev-microsoft-teams-samples-tab-adaptive-cards-nodejs
 ---
 
@@ -23,7 +23,15 @@ This feature shown in this sample is in Public Developer Preview and is supporte
 
 ## Key features
 
+![Tab Adaptive CardsGif](Images/tabAdaptiveCardsGif.gif)
+
 - Tab showing Adaptive card with action controls
+
+- Sign in card
+
+![Sign in Card](Images/sign-in.png)
+
+- Home Page
 
 ![Home Page](Images/home-page.png)
 
@@ -31,13 +39,17 @@ This feature shown in this sample is in Public Developer Preview and is supporte
 
 ![Task Module](Images/task-module.png)
 
-- Sign in card
+- Task module close
 
-![Sign in Card](Images/sign-in.png)
+![Task Module Close](Images/task-moduleclose.png)
 
-- Sign in popup
+- Show Task module
 
-![Sing in popup](Images/sign-in-popup.png)
+![Task Module](Images/task-moduleyoutube.png)
+
+- YouTube Tab
+
+![Task Module](Images/youtube-tab.png)
 
 - Sign out card
 

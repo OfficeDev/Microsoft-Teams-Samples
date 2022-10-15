@@ -10,7 +10,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "07/07/2021 01:38:26 PM"
+ createdDate: "07-07-2021 13:38:26"
 urlFragment: officedev-microsoft-teams-samples-bot-conversation-sso-quickstart-js
 ---
 # Teams Conversation Bot SSO quick-start
@@ -25,11 +25,9 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
-![bot signin card](sso_media/BotSignInCard.png)
+# Feature of the sample
 
-![user details card](sso_media/UserDetailsCard.png)
-
-![token](sso_media/Token.png)
+![Bot Conversation SSO QuickstartGif](sso_media/BotConversationSSOQuickstartGif.gif)
 
 ## Prerequisites
 
@@ -59,6 +57,14 @@ Under the root of this sample folder, build and run by commands:
     - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{TODO: MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
+
+![Install](bot-conversation-sso-quickstart/js/Images/Install.png)
+
+![bot signin card](bot-conversation-sso-quickstart/js/Images/BotSignInCard.png)
+
+![user details card](bot-conversation-sso-quickstart/js/Images/UserDetailsCard.png)
+
+![token](bot-conversation-sso-quickstart/js/Images/Token.png)
 
 You can interact with this bot by sending it a message. The bot will respond by asking for your consent, by this consent the Bot will exchange an SSO token, then making a call to the Graph API on your behalf and returning the results. It will keep you loggined unless you send a message "logout". 
 

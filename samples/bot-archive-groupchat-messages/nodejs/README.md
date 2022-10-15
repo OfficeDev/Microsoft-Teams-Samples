@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "11/10/2021 11:35:25 PM"
+ createdDate: "11-10-2021 23:35:25"
 urlFragment: officedev-microsoft-teams-samples-bot-archive-groupchat-messages-nodejs
 ---
  
@@ -23,9 +23,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 - Sending archive chat messages text file of a groupchat to user
 
-![Bot command](Images/botCommandToGetChatMessages.png)
-
-![Bot reply](Images/replyFromBot.png)
+![Bot Archive Group ChatMessagesGif](Images/botArchiveGroupchatMessagesGif.gif)
 
 ## Prerequisites
 
@@ -109,6 +107,18 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
     > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
+
+![Bot Welcome](Images/welcome.png)
+
+![Bot LoginSuccessful](Images/loginsuccessful.png)
+
+![Bot Setupbot](Images/setupbot.png)
+
+![Bot BotCommandToGetChatMessages](Images/botCommandToGetChatMessages.png)
+
+![Bot Getchat](Images/getchat.png)
+
+![Bot ReplyFromBot](Images/replyFromBot.png)
 
 ## Interacting with the bot in GroupChat
 

@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "12/04/2022 01:48:56 AM"
+ createdDate: "12-04-2022 01:48:56"
 urlFragment: officedev-microsoft-teams-samples-tab-people-picker-nodejs
 ---
 
@@ -17,17 +17,9 @@ urlFragment: officedev-microsoft-teams-samples-tab-people-picker-nodejs
 
 This sample shows tab capability with the feature of client sdk people picker.
 
-![tab](Images/Tab.PNG)
+# Feature of the sample
 
-![scope vise search](Images/ScopeSearch.PNG)
-
-![All memberes of organisation search](Images/AllMemberesOfOrganisationSearch.PNG)
-
-![Single select](Images/SingleSelect.PNG)
-
-![Set selected search](Images/SetSelectedSearch.PNG)
-
-![Mobile View](Images/MobileView.PNG)
+![Tab People PickerGif](Images/TabPeoplePickerGif.gif)
 
 ## Prerequisites
 
@@ -66,3 +58,15 @@ This sample shows tab capability with the feature of client sdk people picker.
     - **Edit** the `manifest.json` contained in the  `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Manifest-id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)and ngrok url *everywhere* you see the place holder string `<<base-url>>`
     - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+
+![Install](Images/Install.PNG)
+
+![tab](Images/Tab.PNG)
+
+![All memberes of organisation search](Images/AllMemberesOfOrganisationSearch.PNG)
+
+![scope vise search](Images/ScopeSearch.PNG)
+
+![Single select](Images/SingleSelect.PNG)
+
+![Set selected search](Images/SetSelectedSearch.PNG)

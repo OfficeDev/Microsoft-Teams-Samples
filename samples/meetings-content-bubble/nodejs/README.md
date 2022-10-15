@@ -9,13 +9,17 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "07/07/2021 01:38:26 PM"
+ createdDate: "07-07-2021 13:38:26"
 urlFragment: officedev-microsoft-teams-samples-meetings-content-bubble-nodejs
 ---
 
 # Meetings Content Bubble
 
 This sample illustrates how to implement [Content Bubble](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience.
+
+# Feature of the sample
+
+![Meetings Content BubbleGif](Images/MeetingsContentBubbleGif.gif)
 
 ## Prerequisites
 
@@ -66,6 +70,14 @@ This sample illustrates how to implement [Content Bubble](https://docs.microsoft
         }
  ```
 6) [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
+
+![Meetings AgendaCard](Images/AgendaCard.png)
+
+![Meetings Feedback Submit](Images/FeedbackSubmit.png)
+
+![Meetings Feedback CardYes](Images/FeedbackCardYes.png)
+
+![Meetings Feedback CardNo](Images/FeedbackCardNo.png)
 
 ## Interacting with the app in Teams Meeting
 

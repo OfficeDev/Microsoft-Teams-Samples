@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/Token.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/bot-conversation-sso-quickstart/js/Images/BotConversationSSOQuickstartGif.gif",
         "alt": "Solution UX showing teams conversation bot sso quick-start"
       }
     ],

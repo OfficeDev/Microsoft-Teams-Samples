@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "06/10/2021 01:48:56 AM"
+ createdDate: "06-10-2021 01:48:56"
 urlFragment: officedev-microsoft-teams-samples-tab-stage-view-nodejs
 ---
 
@@ -21,13 +21,11 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
 
 ## Key features
 
-- Welcome message with feature explanation.
+![Tab Stage ViewGif](Images/TabStageViewGif.gif)
+
+- Welcome message with feature explanation and Adaptive Card with actions.
 
 ![Welcome Message](Images/welcomeAction.png)
-
-- Adaptive Card with actions.
-
-![Card Actions](Images/cardActions.png)
 
 - Opening stage view from Adaptive Card Action.
 

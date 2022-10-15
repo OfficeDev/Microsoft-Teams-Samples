@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-adaptive-cards/nodejs/Images/home-page.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-adaptive-cards/nodejs/Images/tabAdaptiveCardsGif.gif",
         "alt": "Solution UX showing tabs with adaptive cards"
       }
     ],

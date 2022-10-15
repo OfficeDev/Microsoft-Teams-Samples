@@ -34,7 +34,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-people-picker/nodejs/Images/Tab.PNG",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-people-picker/nodejs/Images/TabPeoplePickerGif.gif",
         "alt": "Solution UX showing tab people picker"
       }
     ],
