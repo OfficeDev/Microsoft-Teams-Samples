@@ -9,13 +9,15 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "07/07/2021 01:38:27 PM"
+ createdDate: "07-07-2021 13:38:27"
 urlFragment: officedev-microsoft-teams-samples-tab-deeplink-nodejs
 ---
 
 # DeepLink
 
 This sample displays how to consume SubEntity Id to [DeepLink](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-links#deep-linking-to-your-tab) from Bot to Tab and Tab to Tab.
+
+![Preview Image](Images/Preview.gif)
 
 ## Prerequisites
 
@@ -64,8 +66,8 @@ This sample displays how to consume SubEntity Id to [DeepLink](https://docs.micr
 1. If you are using Visual Studio code
     - Launch Visual Studio code
     - Folder -> Open -> Project/Solution
-    - Navigate to ```samples\DeepLinkBotnode\``` folder
-    - Select ```DeepLinkBotnode``` Folder
+    - Navigate to ```samples/tab-deeplink/nodejs``` folder
+    - Select ```nodejs``` Folder
 1. To run the application required  node modules.Please use this command to install modules npm i
 1. Run ngrok - point to port 3978 (This is your Base_URL)
    ```ngrok http -host-header=rewrite 3978```

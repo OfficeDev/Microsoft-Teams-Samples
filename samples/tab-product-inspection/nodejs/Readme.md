@@ -9,19 +9,15 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "11/16/2021 12:00:00 AM"
+ createdDate: "16-11-2021 00:15:13"
 urlFragment: officedev-microsoft-teams-samples-tab-product-inspection-nodejs
 ---
 
 # Product Inspection
 
 This sample app demonstrate a feature where user can scan a product, capture a image and mark it as approved/rejected.
-
-   ![](Images/product-list.png)
-
-   ![](Images/product-status.png)
-
-   ![](Images/view-product-status.png)
+	
+	![Preview Image](Images/Preview.gif)
 
 ## Prerequisites
 
@@ -55,6 +51,20 @@ This sample app demonstrate a feature where user can scan a product, capture a i
     ```bash
     npm start
     ```
+## Interacting with the app in Teams Meeting
+Interact with Product Inspection by clicking on the App icon.
+1. Once the app is clicked, Product Inspection appears with the default product list.
+
+   ![](Images/product-list.png)
+   
+2. On click on "Inspect product" button, scanner will open when scan the product bar code user can Approve or Reject the product.
+
+	![](Images/product-status.png)
+
+3. On click on "View product status" button, scanner will open when scan the product bar code and user can view the detail of the product.
+
+   ![](Images/view-product-status.png)
+
 
 1) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Manifest-id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)and ngrok url *everywhere* you see the place holder string `<<base-url>>`
