@@ -6,12 +6,11 @@ products:
 - office
 - office-365
 languages:
-- java
+- Java
 extensions:
  contentType: samples
- createdDate: "12-12-2019 13:38:25"
+ createdDate: "12/12/2019 13:38:25 PM"
 urlFragment: officedev-microsoft-teams-samples-bot-msgext-action-java
-
 ---
 
 # Teams Message Extension Action Bot
@@ -23,41 +22,57 @@ build an Action-based Messaging Extension.
 
 This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven plugin to deploy to Azure.
 
+- **Interaction with Messaging Extension action**
+![MsgExtAction](Images/MsgExtAction.gif)
+
 ## Prerequisites
 
-- Java 1.8+
+- Intall Java 1.8+ [Java](https://www.oracle.com/java/technologies/downloads/#java8-windows)
 - Install [Maven](https://maven.apache.org/)
 - An account on [Azure](https://azure.microsoft.com) if you want to deploy to Azure.
 - Microsoft Teams is installed and you have an account
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## Concepts introduced in this sample
-![MsgExtAction](Images/MsgExtAction.gif)
-
-## To try this sample
+## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 the Teams service needs to call into the bot.
 
-- Run `ngrok http --host-header=rewrite 3978`
+1) Run ngrok - point to port 3978
 
-- Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
-    - Use the current `https` URL you were given by running ngrok. Append with the path `/api/messages` used by this sample
-    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
+    ```bash
+    ngrok http --host-header=rewrite 3978
+    ```
 
-- Update the `resources/application.properties` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+1) Setup for Bot
+
+   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+    - For bot handle, make up a name.
+    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - Choose "Accounts in any organizational directory (Any Azure AD directory - Multitenant)" in Authentication section in your App Registration to run this sample smoothly.
+    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
+
+   In the new Azure Bot resource in the Portal, 
+    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
+
+1) Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+- Update the `resources/application.properties` file configuration in your project, for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+
+1) From the root of this project folder: (`samples/msgext-action/java`)
+    - Open a terminal and build the sample using `mvn package` command
+    - Install the packages in the local cache by using `mvn install` command in a terminal
+    - Run it by using `java -jar .\target\bot-teams-messaging-extensions-action-sample.jar` command in a terminal
 
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
-
-- From the root of this project folder:
-    - Build the sample using `mvn package`
-    - Unless done previously, install the packages in the local cache by using `mvn install`
-    - Run it by using `java -jar .\target\bot-teams-messaging-extensions-action-sample.jar`
-
 
 ## Interacting with the bot
 

@@ -26,12 +26,11 @@ This sample is a Spring Boot app and uses the Azure CLI and azure-webapp Maven p
 ![Bot-file-upload](Images/botfileupload.gif)
 
 ## Prerequisites
-- Java 1.8+
+- Intall Java 1.8+ [Java](https://www.oracle.com/java/technologies/downloads/#java8-windows)
 - Install [Maven](https://maven.apache.org/)
 - An account on [Azure](https://azure.microsoft.com) if you want to deploy to Azure.
 - Microsoft Teams is installed and you have an account
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
-
 
 ## Setup
 
@@ -59,18 +58,18 @@ the Teams service needs to call into the bot.
 1) Clone the repository
 
     ```bash
-    git clone https://github.com/Microsoft/botbuilder-samples.git
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
 1) Update the `resources/application.properties` file configuration in your project, for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
-1) From the root of this project folder:
-    - Build the sample using `mvn package`
-    - Unless done previously, install the packages in the local cache by using `mvn install`
-    - Run it by using `java -jar .\target\bot-teams-file-upload-sample.jar`
+1) From the root of this project folder: (`samples/bot-file-upload/java`)
+    - Open a terminal and build the sample using `mvn package` command
+    - Install the packages in the local cache by using `mvn install` command in a terminal
+    - Run it by using `java -jar .\target\bot-teams-file-upload-sample.jar` command in a terminal
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` contained in the `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
