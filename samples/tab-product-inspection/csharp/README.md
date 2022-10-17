@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-product-inspection-csharp
 
 This sample app demonstrate a feature where user can scan a product, capture a image and mark it as approved/rejected.
 
-	![PreviewImage](ProductInspection/Images/PreviewImg.gif)
+	![ProductInspection](ProductInspection/Images/PreviewImg.gif)
 
 ## Prerequisites
 
