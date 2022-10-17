@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-product-inspection-csharp
 
 This sample app demonstrate a feature where user can scan a product, capture a image and mark it as approved/rejected.
 
-	![Preview Image](Images/Preview.gif)
+	![Preview Image](ProductInspection/Images/Preview.gif)
 
 ## Prerequisites
 
@@ -59,15 +59,15 @@ This sample app demonstrate a feature where user can scan a product, capture a i
 Interact with Product Inspection by clicking on the App icon.
 1. Once the app is clicked, Product Inspection appears with the default product list.
 
-   ![](Images/product-list.png)
+   ![](ProductInspection/Images/product-list.png)
    
 2. On click on "Inspect product" button, scanner will open when scan the product bar code user can Approve or Reject the product.
 
-	![](Images/product-status.png)
+	![](ProductInspection/Images/product-status.png)
 
 3. On click on "View product status" button, scanner will open when scan the product bar code and user can view the detail of the product.
 
-   ![](Images/view-product-status.png)
+   ![](ProductInspection/Images/view-product-status.png)
 
 
 
