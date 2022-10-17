@@ -44,6 +44,7 @@ namespace BotWithSharePointFileViewer
 
             // The Dialog that will be run by the bot.
             services.AddSingleton<MainDialog>();
+            services.AddSingleton<DialogManager>();
 
             // Create the Bot Framework Adapter with error handling enabled.
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
