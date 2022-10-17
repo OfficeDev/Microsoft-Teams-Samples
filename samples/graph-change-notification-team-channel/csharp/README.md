@@ -6,7 +6,7 @@ products:
 - office
 - office-365
 languages:
-- csharp
+- Csharp
 extensions: 
  contentType: samples
  createdDate: "08/25/2022 11:30:00 AM"
@@ -33,6 +33,7 @@ This is a sample application which demonstrates use of Team/Channel subscription
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
 ## Setup
+
 > Note these instructions are for running the sample on your local machine.
 
 1) Run ngrok - point to port 3978
@@ -55,7 +56,7 @@ This is a sample application which demonstrates use of Team/Channel subscription
 
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
-4.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select �Never� for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json file.
+4. Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select �Never� for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json file.
 
 ### Create Azure bot resource
 
@@ -90,11 +91,11 @@ To include resource data of graph notifications, this Graph API require self-sig
   - Navigate to `samples/graph-change-notification-team-channel/csharp` folder
   - Select `ChangeNotiifcation` solution file
 
-  - Instruction for appsetting
-     1. Provide MicrosoftAppId, MicrosoftAppPassword and MicrosoftAppTenantId in the appsetting that is created in Azure.
-     (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-     2. Provide the ngrok url as  "BaseUrl" in appsetting on which application is running on.
-     3. You should be having Base64EncodedCertificate and CertificateThumbprint value from *Create and install Self-Signed certificate* step.
+  **Instruction for appsetting**
+    1. Provide MicrosoftAppId, MicrosoftAppPassword and MicrosoftAppTenantId in the appsetting that is created in Azure.
+    (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+    2. Provide the ngrok url as  "BaseUrl" in appsetting on which application is running on.
+    3. You should be having Base64EncodedCertificate and CertificateThumbprint value from *Create and install Self-Signed certificate* step.
 
   - Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
@@ -107,18 +108,24 @@ To include resource data of graph notifications, this Graph API require self-sig
 
 
 ## Running the sample
+
+You can interact with Teams Tab by subscribing the teams/channel for notifications.
+
+1. **Show Welcome - Channel**
 - Welcome Message when Channel selected for subscription.
 ![Channel-Welcome](ChangeNotification/Images/Channel-Welcome.png)
 
+2. **Channel Notifications**
 - Channel Created Update Delete Message
 ![CreatedDeletedUpdated-Channel](ChangeNotification/Images/CreatedDeletedUpdated-Channel.png)
 
+3. **Show Welcome - Team**
 - Welcome Message when Team selected for subscription.
 ![Team-Welcome](ChangeNotification/Images/Team-Welcome.png)
 
+4. **Team Notifications**
 - Team Update Edit Message
 ![TeamEditUpdate](ChangeNotification/Images/TeamEditUpdate.png)
-
 
 
 ## Further reading
