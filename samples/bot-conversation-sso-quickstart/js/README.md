@@ -58,13 +58,14 @@ Under the root of this sample folder, build and run by commands:
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
-![Install](bot-conversation-sso-quickstart/js/Images/Install.png)
 
-![bot signin card](bot-conversation-sso-quickstart/js/Images/BotSignInCard.png)
+![Install](sso_media/Install.png)
 
-![user details card](bot-conversation-sso-quickstart/js/Images/UserDetailsCard.png)
+![BotSigninCard](sso_media/BotSignInCard.png)
 
-![token](bot-conversation-sso-quickstart/js/Images/Token.png)
+![UserDetailsCard](sso_media/UserDetailsCard.png)
+
+![Token](sso_media/Token.png)
 
 You can interact with this bot by sending it a message. The bot will respond by asking for your consent, by this consent the Bot will exchange an SSO token, then making a call to the Graph API on your behalf and returning the results. It will keep you loggined unless you send a message "logout". 
 
