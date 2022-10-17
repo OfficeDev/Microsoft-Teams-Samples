@@ -67,7 +67,7 @@ Interact with Product Inspection by clicking on the App icon.
 
 3. On click on "View product status" button, scanner will open when scan the product bar code and user can view the detail of the product.
 
-   ![ProductInspection](ProductInspection/Images/view-product-statusImg.png)
+   <img src="ProductInspection/Images/view-product-statusImg.png" alt="drawing" width="200"/>
 
 
 
