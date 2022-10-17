@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-activity-feed-broadcast-nod
 
 This sample shows a feature where user can broadcast a message to all members of organization using activty feed notification.
 
-- **Interaction with bot**
+- **Interaction with app**
 ![activity-feed-app ](Images/feed-broadcast.gif)
 
 ## Prerequisites
@@ -101,6 +101,12 @@ This sample shows a feature where user can broadcast a message to all members of
 
     ```bash
     npm install
+    ```
+
+    If you face any dependency error while installing node modules, try using below command
+
+    ```bash
+    npm install --legacy-peer-deps
     ```
 
 4) Update the `.env` configuration with the ```ClientId``` (MicrosoftAppId),  ```ClientSecret```(MicrosoftAppPassword) and ```TenantId``` generated in step 1 while doing App Registration.
