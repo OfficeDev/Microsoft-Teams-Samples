@@ -59,7 +59,7 @@ This sample shows tab capability with the feature of client sdk people picker.
     - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-![Install](Images/Install.PNG)
+![Install](Images/Install.png)
 
 ![tab](Images/Tab.PNG)
 
