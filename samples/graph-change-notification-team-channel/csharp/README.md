@@ -13,6 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-graph-change-notification-team-channel
 
 ---
+
 ## change notifications for team and channel using Microsoft Graph.
 
 This is a sample application which demonstrates use of Team/Channel subscription that will post notifications when user create/edit/delete team/channel.
