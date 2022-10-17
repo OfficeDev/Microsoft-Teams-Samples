@@ -22,6 +22,17 @@ This is an sample application which shows how to create teams meetings in bulk u
 
 ![Bulk Meeting Gif](Images/BulkMeeting.gif)
 
+## Features of samples Graph Bulk Meetings
+
+![Dashboard](Images/Dashboard.png)
+
+![Create Meeting](Images/CreateMeeting.png)
+
+![Meeting upolad](Images/MeetingDetailUpload.png)
+
+![Meeting detail](Images/MeetingDetail.png)
+
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
@@ -92,6 +103,10 @@ npm install
 
 ```bash
 npm start
+```
+
+```bash
+npm install moment --save
 ```
     
 ### 4. Manually update the manifest.json

@@ -36,11 +36,31 @@ Two samples to highlight solutions to two challenges with building proactive mes
 | `CHANGELOG.md`       | List of changes to the sample.                                              |
 | `CONTRIBUTING.md`    | Guidelines for contributing to the sample.                                  |
 | `README.md`          | This README file.                                                           |
-| `LICENSE`            | The license for the sample.                                                 |
+| `LICENSE`            | The license for the sample. 
+
+## Features of samples Bot Proactive Message
+
+ ![Broadcast from user](coordinate-logger/Images/ProactivemessageGIF.gif)
+                                                |
+## User Conversation log info
 
 ![Conversation details](coordinate-logger/Images/ConversationDetails.png)
 
+## Channel Conversation log info
+
+![Conversation details](coordinate-logger/Images/ConversationDetails_Channel.png)
+
+## Proactive message
+
 ![Proactive message](coordinate-logger/Images/ProactiveMessage.png)
+
+## Team name in which message will post
+
+![Proactive message](coordinate-logger/Images/TeamInfo.png)
+
+## Meesages in other Team 
+
+![Proactive message](coordinate-logger/Images/Teammessage.png)
 
 ## Prerequisites
 - Microsoft Teams account
@@ -88,7 +108,7 @@ Either through [App Studio](https://docs.microsoft.com/en-us/microsoftteams/plat
     - Select `Upload a custom app` and select the manifest.json file
     - Click the `Add` Button on the consent screen
 
-    The coordinates of the user should be in the console window
+    The coordinates of the user should be log in the console window(refer above image)
 
 3. Install the app to a Team
     - Go to the `Apps` in the left rail
@@ -97,7 +117,7 @@ Either through [App Studio](https://docs.microsoft.com/en-us/microsoftteams/plat
     - Select a Team to install to. 
 
     The app will send a message to each channel in the Team & log the coordinates
-    for each new thread to the console window.
+    for each new thread to the console window.(refer above image)
 
 ## Proactive CMD
 

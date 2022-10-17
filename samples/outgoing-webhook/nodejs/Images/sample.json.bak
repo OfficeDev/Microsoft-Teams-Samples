@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-bot-proactive-messaging-csharp",
+    "name": "officedev-microsoft-teams-samples-outgoing-webhook-nodejs",
     "source": "officeDev",
-    "title": "Teams Proactive Messaging Samples",
-    "shortDescription": "Two samples to highlight solutions to two challenges with building proactive messaging apps in Microsoft Teams",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-proactive-messaging/csharp",
+    "title": "Outgoing webhook in NodeJS",
+    "shortDescription": "This project is an implementation of a very simple Outgoing Webhook for Microsoft Teams. All it does is verify that what's sending messages matches the Outgoing Webhook that was created in Teams, and it echoes back whatever is sent to it.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/outgoing-webhook/nodejs",
     "longDescription": [
-      "Two samples to highlight solutions to two challenges with building proactive messaging apps in Microsoft Teams"
+      "This project is an implementation of a very simple Outgoing Webhook for Microsoft Teams. All it does is verify that what's sending messages matches the Outgoing Webhook that was created in Teams, and it echoes back whatever is sent to it."
     ],
-    "creationDateTime": "2022-05-17",
-    "updateDateTime": "2022-05-17",
+    "creationDateTime": "2017-12-05",
+    "updateDateTime": "2021-11-29",
     "products": [
       "Teams"
     ],
@@ -20,23 +20,23 @@
       },
       {
         "key": "TEAMS-SERVER-LANGUAGE",
-        "value": "csharp"
+        "value": "javascript"
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": "netframework"
+        "value": "express"
       },
       {
         "key": "TEAMS-FEATURES",
-        "value": "bot"
+        "value": ""
       }
     ],
     "thumbnails": [
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-proactive-messaging/csharp/coordinate-logger/Images/ProactivemessageGIF.gif",
-        "alt": "Solution UX showing teams proactive messaging samples"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/outgoing-webhook/nodejs/Images/heroCard.png",
+        "alt": "Solution UX showing outgoing webhook in nodejs"
       }
     ],
     "authors": [
