@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "11/16/2021 12:00:00 AM"
+ createdDate: "16/11/2021 00:15:13"
 urlFragment: officedev-microsoft-teams-samples-tab-product-inspection-csharp
 ---
 
@@ -17,14 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-product-inspection-csharp
 
 This sample app demonstrate a feature where user can scan a product, capture a image and mark it as approved/rejected.
 
-
-   ![](ProductInspection/Images/product-list.png)
-
-
-   ![](ProductInspection/Images/product-status.png)
-
-
-   ![](ProductInspection/Images/view-product-status.png)
+	![Preview Image](ProductInspection/Images/Preview.gif)
 
 ## Prerequisites
 
@@ -62,4 +55,23 @@ This sample app demonstrate a feature where user can scan a product, capture a i
    - Update the ngrok in manifest
    - Zip all three files present in manifest folder
 
-- [Upload app manifest file](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#load-your-package-into-teams) (zip file) to your team
+## Interacting with the app in Teams Meeting
+Interact with Product Inspection by clicking on the App icon.
+1. Once the app is clicked, Product Inspection appears with the default product list.
+
+   ![](ProductInspection/Images/product-list.png)
+   
+2. On click on "Inspect product" button, scanner will open when scan the product bar code user can Approve or Reject the product.
+
+	![](ProductInspection/Images/product-status.png)
+
+3. On click on "View product status" button, scanner will open when scan the product bar code and user can view the detail of the product.
+
+   ![](ProductInspection/Images/view-product-status.png)
+
+
+
+- [Upload app manifest file]
+ - **Edit** the `manifest.json` contained in the  `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Manifest-id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)and ngrok url *everywhere* you see the place holder string `<<base-url>>`
+    - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
+    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")

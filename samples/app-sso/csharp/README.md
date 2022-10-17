@@ -35,6 +35,10 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
+## Feature of the sample.
+
+![image](Images/AppSSOModule.gif)
+
 ## Prerequisites
 
 1. A global administrator account for an Office 365 tenant. Testing in a production tenant is not recommended! You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program) (not a guest account).
@@ -50,7 +54,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
         * For permissions `Manage > API Permissions`
         * Our SSO flow will give you access to the first 4 permissions, and we will have to exchange the token server-side to get an elevated token for the `profile` permission (for example, if we want access to the user's profile photo).
         
-![image](https://user-images.githubusercontent.com/85108465/121638666-f80f4980-caa8-11eb-9b75-09b0e86c6d6a.png)
+
 
 ## To try this sample
 
@@ -93,63 +97,46 @@ Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/az
 
 You can interact with this bot by sending it a message. The bot will respond by requesting you to login to AAD, then making a call to the Graph API on your behalf and returning the results.
 - Install App
-
-![image](https://user-images.githubusercontent.com/85157377/123594509-6d02b300-d80d-11eb-865f-bf8f87e40237.png)
+![image](Images/first.png)
 
 - Type *anything* on the compose box and send
 - The bot will perform `Single Sign-On` and Profile card will be displayed along with the option prompt to view the `token`
 
-![image](https://user-images.githubusercontent.com/85157377/123762636-a0fad880-d8e0-11eb-9e72-9368a7fd1357.png)
+![image](Images/second.png)
 
 > **NOTE:** 
 If the user is using the application for the first time and user consent is required for additional permissions, the following dialog box appears to continue with the consent experience
-![image](https://user-images.githubusercontent.com/85157377/123250055-468c0180-d507-11eb-9bc6-b07aadac1adb.png)
-![image](https://user-images.githubusercontent.com/85108465/122557279-3503af00-d05a-11eb-981d-bf8db77ff2ac.png)
+![image](Images/third.png)
+![image](Images/four.png)
 
 >If the bot couldn't perform `SSO` then it will fallback to normal Authentication method and show a `Sign In` card like below
-![image](https://user-images.githubusercontent.com/85157377/123595419-86582f00-d80e-11eb-8a2e-5f6d8ce7dcfd.png)
+![image](Images/five.png)
 
 - Open `Messaging Extension`(Search), it will show profile details
 
-![image](https://user-images.githubusercontent.com/85108465/121668748-3ddc0a00-cac9-11eb-8c0e-cc3d60f2b5a8.png)
-![image](https://user-images.githubusercontent.com/85157377/123323562-4ade0c00-d553-11eb-9b71-e24438a7e98f.png)
-![image](https://user-images.githubusercontent.com/85157377/123762879-d99ab200-d8e0-11eb-89ee-1b4776aaa191.png)
+![image](Images/six.png)
+![image](Images/seven.png)
+![image](Images/eight.png)
 
 - Open `Messaging Extension`(Action), it will show profile details
 
-![image](https://user-images.githubusercontent.com/85157377/123763436-69d8f700-d8e1-11eb-920c-f512d8610d8c.png)
-![image](https://user-images.githubusercontent.com/85157377/123763500-7eb58a80-d8e1-11eb-942f-f1692697c507.png)
-
-__*or*__
+![image](Images/nine.png)
+![image](Images/ten.png)
 
 
-![image](https://user-images.githubusercontent.com/85157377/123763765-bf150880-d8e1-11eb-8b64-3cd23b7b1101.png)
-![image](https://user-images.githubusercontent.com/85157377/123763500-7eb58a80-d8e1-11eb-942f-f1692697c507.png)
 
 - Open `Messaging Extension`(linkunfurl), The link will unfurl and show profile details
 
 **Paste** https://profile.botframework.com on the compose box
 
-![image](https://user-images.githubusercontent.com/85108465/121669972-93fd7d00-caca-11eb-87bb-e07e0e7aa5e4.png)
-![image](https://user-images.githubusercontent.com/85157377/123764050-0c917580-d8e2-11eb-99f3-6e8b7b7769ca.png)
-
 > NOTE: If `SSO` couldn't be performed then it will fallback to normal Authentication method and you will get a default `Sign In` action
 
 Consent the *ME Search* by clicking the `Sign In` link like below 
 
-![image](https://user-images.githubusercontent.com/85108465/121671255-f2772b00-cacb-11eb-9321-1317696eaccc.png)
 
 Consent the *ME Action* by clicking the `Setup` button like below 
 
-
-![image](https://user-images.githubusercontent.com/85157377/123597524-11d2bf80-d811-11eb-88c1-f69c349e0a73.png)
-
 - Open `SSO Tab`, Continue and then Accept and it'll show the profile details
-
-![image](https://user-images.githubusercontent.com/85108465/121671560-5568c200-cacc-11eb-954b-44155e039915.png)
-![image](https://user-images.githubusercontent.com/85108465/121671603-61ed1a80-cacc-11eb-9754-ff0b2aaac671.png)
-![image](https://user-images.githubusercontent.com/85157377/123764361-5712f200-d8e2-11eb-92e7-0255ab48097d.png)
-
 
 
 ## Deploy the bot to Azure

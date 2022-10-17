@@ -9,13 +9,17 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "07/07/2021 01:38:26 PM"
+ createdDate: "07-07-2021 13:38:26"
 urlFragment: officedev-microsoft-teams-samples-graph-app-installation-lifecycle-csharp
 ---
 
 # App Installation
 
 This sample app demonstarte the installation lifecycle for Teams [Apps](https://docs.microsoft.com/en-us/graph/api/resources/teamsappinstallation?view=graph-rest-1.0) which includes create, update delete Apps
+
+# Feature of the sample
+
+![](AppInstallation/Images/GraphAppInstallationLifecycleGif.gif)
 
 ## Prerequisites
 
@@ -61,6 +65,23 @@ This sample app demonstarte the installation lifecycle for Teams [Apps](https://
    - Zip all three files present in manifest folder
 
 - [Upload app manifest file](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#load-your-package-into-teams) (zip file) to your team
+
+![](AppInstallation/Images/Install.png)
+
+
+![](AppInstallation/Images/AddAppListTab.png)
+
+
+![](AppInstallation/Images/ListApp.png)
+
+
+![](AppInstallation/Images/GetUserApp.png)
+
+
+![](AppInstallation/Images/AppDescription.png)
+
+
+![](AppInstallation/Images/DeleteApp.png)
   
  
   

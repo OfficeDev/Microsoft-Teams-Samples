@@ -9,13 +9,16 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "06/10/2021 01:48:56 AM"
+ createdDate: "06-10-2021 01:48:56"
 urlFragment: officedev-microsoft-teams-samples-graph-app-installation-lifecycle-nodejs
 ---
 # App Installation
 
 This sample app demonstarte the installation lifecycle for Teams [Apps](https://docs.microsoft.com/en-us/graph/api/resources/teamsappinstallation?view=graph-rest-1.0) which includes create, update delete Apps
 
+# Feature of the sample
+
+   ![](Images/GraphAppInstallationLifecycleGif.gif)
 
 ## Prerequisites
 
@@ -64,19 +67,25 @@ This sample app demonstarte the installation lifecycle for Teams [Apps](https://
     - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-   ![](Images/image1.png)
+   ![](Images/Install.png)
 
 
-   ![](Images/image2.png)
+   ![](Images/AddAppListTab.png)
 
 
-   ![](Images/image3.png)
+   ![](Images/ListApp.png)
 
 
-   ![](Images/image4.png)
+   ![](Images/AppAddSuccess.png)
 
 
-   ![](Images/image5.png)
+   ![](Images/AppDescription.png)
 
 
-   ![](Images/image6.png)
+   ![](Images/AppUpdateSuccess.png)
+
+
+    ![](Images/DeleteApp.png)
+
+
+    ![](Images/AppDeleteSuccess.png)

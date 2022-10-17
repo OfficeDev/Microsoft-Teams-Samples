@@ -16,6 +16,8 @@ urlFragment: officedev-microsoft-teams-samples-app-sso-nodejs
 
 This app talks about the Teams Tab, Bot, ME - search, action, linkunfurl SSO with Node JS
 
+
+
 __Tab SSO__
 This sample shows how to implement Azure AD single sign-on support for tabs. It will
 
@@ -33,6 +35,10 @@ The focus of this sample is how to use the Bot Framework support for oauth in yo
 The sample uses the bot authentication capabilities in [Azure Bot Service](https://docs.botframework.com), providing features to make it easier to develop a bot that authenticates users to various identity providers such as Azure AD (Azure Active Directory), GitHub, Uber, etc. The OAuth token is then used to make basic Microsoft Graph queries. Refer the **SSO** setup [documentation](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=node-js%2Cnode-js-dialog-sample).
 
 > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
+
+## Feature of the sample.
+
+![image](app-sso/nodejs/Images/APP_SSO_Node.gif)
 
 ## Prerequisites
 
@@ -136,37 +142,33 @@ You can interact with this bot by sending it a message. The bot will respond by 
 - Type *anything* on the compose box and send
 - The bot will perform `Single Sign-On` and Profile card will be displayed along with the option prompt to view the `token`
 
-![image](https://user-images.githubusercontent.com/85108465/122400808-ae879880-cf99-11eb-8cc2-5da9b8e420ca.png)
+![image](app-sso/nodejs/Images/Login.png)
 
 > **NOTE:** 
 If the user is using the application for the first time and user consent is required for additional permissions, the following dialog box appears to continue with the consent experience
-![image](https://user-images.githubusercontent.com/85108465/122513983-c3f7d380-d028-11eb-913c-1794c5ff851a.png)
-![image](https://user-images.githubusercontent.com/85108465/122557279-3503af00-d05a-11eb-981d-bf8db77ff2ac.png)
 
 >If the bot couldn't perform `SSO` then it will fallback to normal Authentication method and show a `Sign In` card like below
 ![image](https://user-images.githubusercontent.com/85108465/122401855-9a906680-cf9a-11eb-94f1-87840c6662b4.png)
 
 - Open `Messaging Extension`(Search), it will show profile details
 
-![image](https://user-images.githubusercontent.com/85108465/121668748-3ddc0a00-cac9-11eb-8c0e-cc3d60f2b5a8.png)
-![image](https://user-images.githubusercontent.com/85108465/121669133-a32ffb00-cac9-11eb-9427-50321a317550.png)
-![image](https://user-images.githubusercontent.com/85108465/121669220-bc38ac00-cac9-11eb-982e-880ebb8258a8.png)
+![image](app-sso/nodejs/Images/MELogin.png)
+![image](app-sso/nodejs/Images/MEProfile.png)
 
 - Open `Messaging Extension`(Action), it will show profile details
 
-![image](https://user-images.githubusercontent.com/85108465/121669676-2f422280-caca-11eb-8659-3f8f08d11bbd.png)
+![image](app-sso/nodejs/Images/MEProfile2.png)
 
-__*or*__
+![image](app-sso/nodejs/Images/Profile.png)
 
-![image](https://user-images.githubusercontent.com/85108465/121669730-3e28d500-caca-11eb-9ba5-fca1b97e7f20.png)
-![image](https://user-images.githubusercontent.com/85108465/121669695-32d5a980-caca-11eb-9893-2d3a3a3b1821.png)
+![image](app-sso/nodejs/Images/MECompose.png)
 
 - Open `Messaging Extension`(linkunfurl), The link will unfurl and show profile details
 
 **Paste** https://profile.botframework.com on the compose box
 
-![image](https://user-images.githubusercontent.com/85108465/121669972-93fd7d00-caca-11eb-87bb-e07e0e7aa5e4.png)
-![image](https://user-images.githubusercontent.com/85108465/121669990-98c23100-caca-11eb-9a31-30c3d5065853.png)
+![image](app-sso/nodejs/Images/Tab.png)
+
 
 > NOTE: If `SSO` couldn't be performed then it will fallback to normal Authentication method and you will get a default `Sign In` action
 

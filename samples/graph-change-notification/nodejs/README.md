@@ -10,7 +10,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "07/07/2021 01:38:26 PM"
+createdDate: "07/07/2021 01:38:26 PM"
 urlFragment: officedev-microsoft-teams-samples-graph-change-notification-nodejs
 ---
 
@@ -20,6 +20,7 @@ Bot Framework v4 ChangeNotification sample.
 
 This sample app demonstrates sending notifications to users when presence status is changed.
 
+	![Preview Image](Images/Preview.gif)
 
 ## Prerequisites
 
@@ -62,10 +63,11 @@ This sample app demonstrates sending notifications to users when presence status
 
 4. Select Add OAuth Connection Settings.
 
-    ![image](https://user-images.githubusercontent.com/85864414/121879805-df15cb00-cd2a-11eb-8076-1236ccb1bbfc.PNG)
+    ![image](Images/configuration.PNG)
+	
 5. Complete the form as follows:
 
-    ![image](https://user-images.githubusercontent.com/85864414/122000240-1d16fb80-cdcc-11eb-8aeb-a1dc898f947e.PNG)
+    ![image](Images/BotConnection.PNG)
 
 a. Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
 
@@ -82,7 +84,7 @@ f. Login URL. Enter https://login.microsoftonline.com.
 g. Tenant ID, enter the Directory (tenant) ID that you recorded earlier for your Azure identity app or common depending on the supported account type selected when you created the identity provider app.
 h. For Resource URL, enter https://graph.microsoft.com/
 i. Provide  Scopes like "Presence.Read, Presence.Read.All"
-![image](https://user-images.githubusercontent.com/85864414/121880473-af1af780-cd2b-11eb-8166-837425ef186f.PNG)
+![image](Images/ApiPermission.PNG)
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
@@ -94,14 +96,19 @@ i. Provide  Scopes like "Presence.Read, Presence.Read.All"
 
 ### Concepts introduced in this sample
 - After sucessfully installation of app you will get a sign in button. When sign in is complete then you get your current status in adapative card
-![image](https://user-images.githubusercontent.com/85864414/122000447-741cd080-cdcc-11eb-9833-54f87cd7567f.PNG)
-![image](https://user-images.githubusercontent.com/85864414/121878949-ebe5ef00-cd29-11eb-8ab0-683ce3ffbfcb.PNG)
+
+![image](Images/Login.PNG)
+
+![image](Images/BeRightBack_validate.PNG)
 
 - After that when the user status chagnes you will get notify about their status: 
 - Change user status from available to busy like
-![image](https://user-images.githubusercontent.com/85864414/121879184-30718a80-cd2a-11eb-88b5-2a422042990b.PNG)
+
+![image](Images/Busy.PNG)
+
 - Change user status from busy to busy offline
- ![image](https://user-images.githubusercontent.com/85864414/121879374-63b41980-cd2a-11eb-8ed4-1b92035ff9c1.PNG)
+
+![image](Images/Offline.PNG)
 
 
 ## Further reading
