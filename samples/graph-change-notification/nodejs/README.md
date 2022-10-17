@@ -99,7 +99,7 @@ i. Provide  Scopes like "Presence.Read, Presence.Read.All"
 
 ![image](Images/Login.PNG)
 
-![image](Images/BeRightBack_validate.PNG)
+![image](graph-change-notification/nodejs/Images/BeRightBack_validate.PNG)
 
 - After that when the user status chagnes you will get notify about their status: 
 - Change user status from available to busy like
