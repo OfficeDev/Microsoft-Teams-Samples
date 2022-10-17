@@ -9,18 +9,15 @@ languages:
 - csharp
 extensions: 
  contentType: samples
- createdDate: "08/25/2022 12:00:00 AM"
+ createdDate: "08/25/2022 11:30:00 AM"
 urlFragment: officedev-microsoft-teams-samples-graph-change-notification-team-channel
 
 ---
-
-# This is a sample application that shows the usage of change notifications for team and channel using Microsoft Graph.
+## change notifications for team and channel using Microsoft Graph.
 
 This is a sample application which demonstrates use of Team/Channel subscription that will post notifications when user create/edit/delete team/channel.
 
-## Concepts introduced in this sample
-- After successfully Setup of tab in teams you will get a welcome message and the subscription will be created for team/channel.
-
+- **Interaction with bot**
 ![Notifications](ChangeNotification/Images/ChangeNotifications.gif)
 
 ## Prerequisites
@@ -34,7 +31,16 @@ This is a sample application which demonstrates use of Team/Channel subscription
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-## Run app locally
+## Setup
+> Note these instructions are for running the sample on your local machine.
+
+1) Run ngrok - point to port 3978
+
+   ```bash
+     ngrok http -host-header=rewrite 3978
+   ```  
+
+2) Setup for Bot
 
 ### Register your application with Azure AD
 
@@ -54,7 +60,8 @@ This is a sample application which demonstrates use of Team/Channel subscription
 
 In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
-    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0).
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
 
 ### Create and install Self-Signed certificate
 
@@ -69,37 +76,50 @@ To include resource data of graph notifications, this Graph API require self-sig
 
 3. Follow this documentation for the steps - [**Create and install Self-Signed certificate**](Certificate Documentation/README.md)
 
-
-### Setup code.
-1) Clone the repository
+3) Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-  A) Or from Visual Studio code
+  A) If you are using Visual Studio
 
-  - Launch Visual Studio code
+  - Launch Visual Studio
   - File -> Open Folder
   - Navigate to `samples/graph-change-notification-team-channel/csharp` folder
   - Select `ChangeNotiifcation` solution file
-  - Press `F5` to run the project
 
-  B) Run ngrok - point to port 3978
+  - Instruction for appsetting
+     1. Provide MicrosoftAppId, MicrosoftAppPassword and MicrosoftAppTenantId in the appsetting that is created in Azure.
+     (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+     2. Provide the ngrok url as  "BaseUrl" in appsetting on which application is running on.
+     3. You should be having Base64EncodedCertificate and CertificateThumbprint value from *Create and install Self-Signed certificate* step.
 
-   ```bash
-     ngrok http -host-header=rewrite 3978
-   ```  
+  - Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
-## Instruction for appsetting
-1. Provide MicrosoftAppId, MicrosoftAppPassword and MicrosoftAppTenantId in the appsetting that is created in Azure.
-2. Provide the ngrok url as  "BaseUrl" in appsetting on which application is running on.
-3. You should be having Base64EncodedCertificate and CertificateThumbprint value from *Create and install Self-Signed certificate* step.
+  B) __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+    - Add the app to personal/team/groupChat scope (Supported scopes)
 
-## Instruction for manifest
-1. Fill any GUID for <APP-ID>. You can also put your MicrosoftAppId here.
-2. Update <MICROSOFT-APP-ID> placeholder with your Microsoft App Id.
- 
+
+## Running the sample
+- Welcome Message when Channel selected for subscription.
+![Channel-Welcome](ChangeNotification/Images/Channel-Welcome.png)
+
+- Channel Created Update Delete Message
+![CreatedDeletedUpdated-Channel](ChangeNotification/Images/CreatedDeletedUpdated-Channel.png)
+
+- Welcome Message when Team selected for subscription.
+![Team-Welcome](ChangeNotification/Images/Team-Welcome.png)
+
+- Team Update Edit Message
+![TeamEditUpdate](ChangeNotification/Images/TeamEditUpdate.png)
+
+
+
 ## Further reading
 - [Change notifications for Microsoft Teams channel](https://docs.microsoft.com/en-us/graph/teams-changenotifications-team-and-channel)
 - [Create subscription permissions for supported resource](https://docs.microsoft.com/en-us/graph/api/subscription-post-subscriptions?view=graph-rest-1.0&tabs=http#team-channel-and-chat)
