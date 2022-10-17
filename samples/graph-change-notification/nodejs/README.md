@@ -20,7 +20,7 @@ Bot Framework v4 ChangeNotification sample.
 
 This sample app demonstrates sending notifications to users when presence status is changed.
 
-	![Preview Image](Images/Preview.gif)
+	![PreviewImage](Images/Preview.gif)
 
 ## Prerequisites
 
@@ -63,11 +63,11 @@ This sample app demonstrates sending notifications to users when presence status
 
 4. Select Add OAuth Connection Settings.
 
-    ![image](Images/configuration.PNG)
+    ![image](Images/configuration.png)
 	
 5. Complete the form as follows:
 
-    ![image](Images/BotConnection.PNG)
+    ![image](Images/BotConnection.png)
 
 a. Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
 
@@ -84,7 +84,7 @@ f. Login URL. Enter https://login.microsoftonline.com.
 g. Tenant ID, enter the Directory (tenant) ID that you recorded earlier for your Azure identity app or common depending on the supported account type selected when you created the identity provider app.
 h. For Resource URL, enter https://graph.microsoft.com/
 i. Provide  Scopes like "Presence.Read, Presence.Read.All"
-![image](Images/ApiPermission.PNG)
+![image](Images/ApiPermission.png)
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
@@ -97,18 +97,18 @@ i. Provide  Scopes like "Presence.Read, Presence.Read.All"
 ### Concepts introduced in this sample
 - After sucessfully installation of app you will get a sign in button. When sign in is complete then you get your current status in adapative card
 
-![image](Images/Login.PNG)
+![image](Images/Login.png)
 
-![image](graph-change-notification/nodejs/Images/BeRightBack_validate.PNG)
+![image](Images/BeRightBack_validate.png)
 
 - After that when the user status chagnes you will get notify about their status: 
 - Change user status from available to busy like
 
-![image](Images/Busy.PNG)
+![image](Images/Busy.png)
 
 - Change user status from busy to busy offline
 
-![image](Images/Offline.PNG)
+![image](Images/Offline.png)
 
 
 ## Further reading
