@@ -84,7 +84,7 @@ We have added Live Share to this demo to showcase some features of the SDK. The 
 * Take Control allows for other viewers to become the scroll controller. Only those that have an approved role (in our example Organiser and Presenter) will be able to claim control. 
 * Shared Cursors shares presenters cursors across every attendees screen. The approach we are using is primitive and uses DOM manipulation to position the cursors. If you plan to implement cursor support in your app using the [live-share-canvas SDK](https://github.com/microsoft/live-share-sdk/tree/main/packages/live-share-canvas) is recommended.
 
-*[We have discussed are some more thoughts on Live Share here](docs/live-share.md)*
+*[We have discussed some more thoughts on Live Share here](docs/live-share.md)*
 
 ## Known issues
 ### Feature Rollout
