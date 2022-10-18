@@ -77,6 +77,15 @@ sequenceDiagram
 * A viewer can only view the document.
 * All signers can view and sign a document.
 
+## Live Share integration
+We have added Live Share to this demo to showcase some features of the SDK. The examples we are showing are scroll syncing, taking control and shared cursors.
+
+* Scroll Offset Syncing, when the person in control scrolls their view of the document, everyone following will see their document scroll too. We the controller scrolls we send an EphemeralEvent that viewers listen for, and if the viewer is following the controller their view will update. If the viewer has scrolled to a different part of the document, their following of the controller will be suspended until they follow the controller again.
+* Take Control allows for other viewers to become the scroll controller. Only those that have an approved role (in our example Organiser and Presenter) will be able to claim control. 
+* Shared Cursors shares presenters cursors across every attendees screen. The approach we are using is primitive and uses DOM manipulation to position the cursors. If you plan to implement cursor support in your app using the [live-share-canvas SDK](https://github.com/microsoft/live-share-sdk/tree/main/packages/live-share-canvas) is recommended.
+
+*[We have discussed some more thoughts on Live Share here](docs/live-share.md)*
+
 ## Known issues
 ### Feature Rollout
 Currently, this app is not fully supported in the following scenarios:
@@ -95,6 +104,11 @@ Currently, this app is not fully supported in the following scenarios:
 * When the solution is run on a local web browser (anywhere outside of Teams), it will load an expected error message stating that 
 " Unable to get information about the App.
 This happens if you are running the application in a normal browser, and not inside Teams. Install the app inside teams to test this application. To upload the app to Teams follow the instructions on https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload"
+
+## Code Tours
+This repository uses VSCode [Code Tours](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour#:~:text=A%20%22code%20tour%22%20is%20simply%20a%20series%20of,CONTRIBUTING.md%20file%20and%2For%20rely%20on%20help%20from%20others.) to explain _how_ the code works. 
+
+The tour files can be found in the `.tours` directory.
 
 ## Prerequisites
 * Make sure you have an active [Azure subscription](https://azure.microsoft.com/en-us/free/).
