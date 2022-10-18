@@ -97,7 +97,7 @@ Replace the following details:
 ## Running the sample
 
 1. Imported Meetings view from the excel sheet.
-  ![Meeting Event](EventMeeting/Images/UploadExcelSheet.png)
+  ![Meeting Event](EventMeeting/Images/UploadExcelsheets.png)
 
 2. Dashborad of the Meetings Here is the all created meetings list.
    ![Meeting Event](EventMeeting/Images/Dashboard.png)
