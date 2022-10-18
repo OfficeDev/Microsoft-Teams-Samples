@@ -99,5 +99,5 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
 
 ## Further Reading.
 
--  (https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meetings-sidepanel?tabs=vs)
+- [Meeting Live Caption](https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meetings-sidepanel?tabs=vs)
 

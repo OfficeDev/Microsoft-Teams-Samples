@@ -21,41 +21,13 @@ The user can Generate a new QR code (contains app id information) and then use I
 
 `Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients`.
 
-# Feature of the sample - Desktop View
+## Interaction with bot - Desktop View
 
 ![App Installation Using QRCodeDesktopGif](QRAppInstallation/Images/AppInstallationUsingQRCodeDesktopGif.gif)
 
-# Feature of the sample - Mobile View
+## Interaction with bot - Mobile View
 
 ![App Installation Using QRCodeGif](QRAppInstallation/Images/AppInstallationUsingQRCodeGif.gif)
-
-## Desktop View
-
-- Card with actions `Generate QR code` and `Install App`. 
-
-![Card](QRAppInstallation/Images/CardWithButtons.png)
-
-- `Generate QR code` is used to generate a QR code by selecting the app.
-
-![QR Code](QRAppInstallation/Images/QRCode.png)
-
-- `Install App` is used to Scan the QR code and it then installs the app.
-
-![Install App](QRAppInstallation/Images/AppInstallation.png)
-
-## Mobile View
-
-![CardWithButtonsMobile](QRAppInstallation/Images/CardWithButtonsMobile.png)
-
-- `Permission App` Also add following permission
-   
-![Permission](QRAppInstallation/Images/Permission.png)
-
-![QRCodeMobile](QRAppInstallation/Images/QRCodeMobile.png)
-
-![AppAddedMobile](QRAppInstallation/Images/AppAddedMobile.png)
-
-![AppInstallationMobile](QRAppInstallation/Images/AppInstallationMobile.png)
 
 ## Prerequisites
 
@@ -73,7 +45,7 @@ The user can Generate a new QR code (contains app id information) and then use I
   ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-## To try this sample
+## Setup
 
 1) Create a Bot Registration
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
@@ -133,6 +105,35 @@ The user can Generate a new QR code (contains app id information) and then use I
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+
+## Running the sample
+
+- Desktop View
+**Card with actions Generate QR code and Install App:**
+![Card](QRAppInstallation/Images/CardWithButtons.png)
+
+**Generate QR code is used to generate a QR code by selecting the app:**
+![QR Code](QRAppInstallation/Images/QRCode.png)
+
+**Install App is used to Scan the QR code and it then installs the app:**
+![Install App](QRAppInstallation/Images/AppInstallation.png)
+
+
+-  Mobile View
+**Hey command interaction:**
+![CardWithButtonsMobile](QRAppInstallation/Images/CardWithButtonsMobile.png)
+
+**Permission App Also add following permission:**
+![Permission](QRAppInstallation/Images/Permission.png)
+
+**QR Code:**
+![QRCodeMobile](QRAppInstallation/Images/QRCodeMobile.png)
+
+**App added:**
+![AppAddedMobile](QRAppInstallation/Images/AppAddedMobile.png)
+
+**Polly App Install:**
+![AppInstallationMobile](QRAppInstallation/Images/AppInstallationMobile.png)
 
 ## Deploy the bot to Azure
 

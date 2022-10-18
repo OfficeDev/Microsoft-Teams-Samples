@@ -19,7 +19,7 @@ This sample shows feature where user can checkin with current location and view 
 
 `Currently, Microsoft Teams support for get geolocation capability is only available for mobile clients`
 
-# Key features
+## Interaction with bot
 
 ![App checkin LocationGif](AppCheckinLocation/Images/AppcheckinLocationGif.gif)
 
@@ -39,7 +39,7 @@ This sample shows feature where user can checkin with current location and view 
   ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-## To try this sample
+## Setup
 
 1) Create a Bot Registration
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
@@ -99,23 +99,25 @@ This sample shows feature where user can checkin with current location and view 
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-## Features of this sample
+## Running the sample
 
-- Card with actions `check in`. 
-
+**Card with actions check in:**
 ![Check in card](AppCheckinLocation/Images/CheckinCard.png)
 
-- `Geo Location` of user.
-
+**Geo Location of user:**
 ![Geo Location](AppCheckinLocation/Images/GeoLocation.png)
 
-- User details.
-
+**User details:**
 ![User details card](AppCheckinLocation/Images/UserDetailsCard.png)
 
-- `viewcheckindetails` of user.
-
+**Viewcheckin Details of user:**
 ![User last checkin card](AppCheckinLocation/Images/UserLastCheckInCard.png)
+
+**Geo Location of user:**
+![Geo Location](AppCheckinLocation/Images/GeoLocation.png)
+
+**View Location UI:**
+![View Location](AppCheckinLocation/Images/ViewLocation.png)
 
 ## Deploy the bot to Azure
 

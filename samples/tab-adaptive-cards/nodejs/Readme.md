@@ -21,45 +21,17 @@ This bot has been created using [Bot Framework v4](https://dev.botframework.com)
 
 This feature shown in this sample is in Public Developer Preview and is supported in desktop and mobile.
 
-## Key features
+- Interaction with Adaptive Cards
+
+## Interaction with app.
 
 ![Tab Adaptive CardsGif](Images/tabAdaptiveCardsGif.gif)
-
-- Tab showing Adaptive card with action controls
-
-- Sign in card
-
-![Sign in Card](Images/sign-in.png)
-
-- Home Page
-
-![Home Page](Images/home-page.png)
-
-- Task module
-
-![Task Module](Images/task-module.png)
-
-- Task module close
-
-![Task Module Close](Images/task-moduleclose.png)
-
-- Show Task module
-
-![Task Module](Images/task-moduleyoutube.png)
-
-- YouTube Tab
-
-![Task Module](Images/youtube-tab.png)
-
-- Sign out card
-
-![Sign out Card](Images/sign-out.png)
 
 ## Prerequisites
 
 1. Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
 
-2. To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 10.14 or higher).
+2. To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2 or higher).
 
     ```bash
     # determine node version
@@ -71,7 +43,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 > NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
 
-## To try this sample
+## Setup
 
 - Register Azure AD applications
     -   Register your bot using bot channel registration in Azure AD portal, following the instructions [here](Wiki/azure-bot-channels-registration.md).
@@ -120,6 +92,29 @@ Also update `BaseUrl` according to your code runtime environment and `Connection
          - From the lower left corner, choose Upload a custom App
          - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
          - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
+
+## Running the sample
+
+**Sign in card:**
+![Sign in Card](Images/sign-in.png)
+
+**Home Page:**
+![Home Page](Images/home-page.png)
+
+**Task module:**
+![Task Module](Images/task-module.png)
+
+**Task module close:**
+![Task Module Close](Images/task-moduleclose.png)
+
+**Show Task module:**
+![Task Module](Images/task-moduleyoutube.png)
+
+**YouTube Tab:**
+![Task Module](Images/youtube-tab.png)
+
+**Sign out card:**
+![Sign out Card](Images/sign-out.png)
 
 ## Interacting with the tab in Teams
 

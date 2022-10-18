@@ -21,51 +21,23 @@ The user can Generate a new QR code (contains app id information) and then use I
 
 `Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients`
 
-# Feature of the sample - Desktop View
+## Interaction with bot - Desktop View
 
 ![App Installation Using QRCodeDesktopGif](Images/AppInstallationUsingQRCodeDesktopGif.gif)
 
-# Feature of the sample - Mobile View
+## Interaction with bot - Mobile View
 
 ![App Installation Using QRCodeGif](Images/AppInstallationUsingQRCodeGif.gif)
-
-## Desktop View
-
-- Card with actions `Generate QR code` and `Install App`. 
-
-![Card](Images/CardWithButtons.png)
-
-- `Generate QR code` is used to generate a QR code by selecting the app.
-
-![QR Code](Images/QRCode.png)
-
-- `Install App` is used to Scan the QR code and it then installs the app.
-
-![Install App](Images/AppInstallation.png)
-
-## Mobile View 
-
-![CardWithButtonsMobile](Images/CardWithButtonsMobile.png)
-
-- `Permission App`  Add the following permission
-
-![Install App](Images/Permission.png)
-
-![QRCodeMobile](Images/QRCodeMobile.png)
-
-![AppAddedMobile](Images/AppAddedMobile.png)
-
-![AppInstallationMobile](Images/AppInstallationMobile.png)
 
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
--  [NodeJS](https://nodejs.org/en/)
+-  To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
    appropriate permissions to install an app.
 
-## To try this sample
+## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
@@ -74,8 +46,6 @@ The user can Generate a new QR code (contains app id information) and then use I
 In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-
-
 
 ### 2. Run your bot sample
 1) Clone the repository
@@ -110,3 +80,49 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
     > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
+
+## Running the sample
+
+- Desktop View
+**Card with actions Generate QR code and Install App:**
+![Card](Images/CardWithButtons.png)
+
+**Generate QR code is used to generate a QR code by selecting the app:**
+![QR Code](Images/QRCode.png)
+
+**Install App is used to Scan the QR code and it then installs the app:**
+![Install App](Images/AppInstallation.png)
+
+
+-  Mobile View
+**Hey command interaction:**
+![CardWithButtonsMobile](Images/CardWithButtonsMobile.png)
+
+**Permission App Also add following permission:**
+![Install App](Images/Permission.png)
+
+**QR Code:**
+![QRCodeMobile](Images/QRCodeMobile.png)
+
+**App added:**
+![AppAddedMobile](Images/AppAddedMobile.png)
+
+**Polly App Install:**
+![AppInstallationMobile](Images/AppInstallationMobile.png)
+
+## Deploy the bot to Azure
+
+To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
+
+## Further reading
+
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [.NET Core CLI tools](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x)
+- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
+- [Azure Portal](https://portal.azure.com)
+- [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
+- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)

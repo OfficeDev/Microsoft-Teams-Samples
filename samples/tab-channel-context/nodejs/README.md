@@ -13,17 +13,6 @@ extensions:
   createdDate: "17/06/2022 12:26:57 PM"
 urlFragment: officedev-microsoft-teams-samples-tab-channel-context-nodejs
 ---
-
-# Tab context in channel
-
-![Preview Image](Images/Preview.gif)
-
-This sample shows the contents of tab context object in a private and shared channel.
-
-![tab context in private channel](Images/privateChannel.png)
-
-![tab context in regular channel](Images/regularChannel.png)
-
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/en/)
@@ -31,7 +20,12 @@ This sample shows the contents of tab context object in a private and shared cha
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 - [Create a private/shared channel](https://support.microsoft.com/en-gb/office/create-a-standard-or-private-channel-in-teams-fda0b75e-5b90-4fb8-8857-7e102b014525) Priave/Shared channel in team
 
+# Tab context in channel
+This sample shows the contents of tab context object in a private and shared channel.
 
+## Interaction with app
+
+![Preview Image](Images/Preview.gif)
 
 ## To try this sample
 
@@ -66,6 +60,15 @@ This sample shows the contents of tab context object in a private and shared cha
 7) Add the tab in private/shared channel.
 
  **NOTE:** Only accounts with admin access can create private/shared channels in team.
+
+# Running the sample
+1) Configure in Private channel
+
+![tab context in private channel](Images/privateChannel.png)
+
+2) Configure in Public channel
+
+![tab context in private channel](Images/regularChannel.png)
 
 ## Features of the sample
 

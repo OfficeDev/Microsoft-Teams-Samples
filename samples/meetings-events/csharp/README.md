@@ -20,12 +20,9 @@ For reference please check [Real-time Teams meeting events](https://docs.microso
 
 The feature shown in this sample is currently available in public developer preview only.
 
-# Key features
+- Interaction with bot
 
 ![Meetings EventsGif](MeetingEvents/Images/MeetingsEventsGif.gif)
-
-![Meeting start event](MeetingEvents/Images/meeting-start.png)
-![Meeting end event](MeetingEvents/Images/meeting-end.png)
 
 ## Prerequisites
 
@@ -39,7 +36,7 @@ The feature shown in this sample is currently available in public developer prev
 
 > NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
 
-## To try this sample
+## Setup
 
 1. Create a Bot Registration
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2#create-the-resource).
@@ -95,6 +92,14 @@ The feature shown in this sample is currently available in public developer prev
          - Then select **Upload a custom app** from the lower right corner.
          - Then select the `manifest.zip` file from `appPackage`. 
          - After installation, add the bot to a meeting.
+
+## Running the sample
+
+**MeetingEvents command interaction:**   
+![Meeting start event](MeetingEvents/Images/meeting-start.png)
+
+**End meeting events details:**   
+![Meeting end event](MeetingEvents/Images/meeting-end.png)
 
 ## Interacting with the bot in Teams
 

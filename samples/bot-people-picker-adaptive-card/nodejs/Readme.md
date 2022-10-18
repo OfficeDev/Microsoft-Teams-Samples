@@ -18,30 +18,19 @@ This sample shows the feature of people picker on Adaptive Cards.
 
  Use the bot command `peoplepickercard` to get the card with people picker control 
 
- # Key features
+## Interaction with bot
 
  ![Bot People Picker Adaptive CardGif ](Images/BotPeoplePickerAdaptiveCardGif.gif)
 
-**Desktop View**
-
-![people picker card ](Images/adaptiveCard.png)
-
-- Personal scope (get all the users of organisation)
-
-![people picker card ](Images/personalPeoplePickerCard.png)
-
-- Team or groupchat scope (get user list to current context)
-
-![people picker card](Images/channelPeoplePickerCard.png)
-
-- On `Assign` button click, the bot will return the member id that we have selected.
-
-![Task Assign](Images/TaskAssign.png)
-
 ## Prerequisites
 
-- [NodeJS](https://nodejs.org/en/)
+- To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+
+## Setup
+
+> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
+> the Teams service needs to call into the bot.
 
 ### 1. Setup for Bot
 In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
@@ -80,6 +69,20 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step 1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`).
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
+
+## Running the sample
+
+**Peoplepickercard command interaction:**
+![people picker card ](Images/adaptiveCard.png)
+
+**Personal scope get all the users of organisation:**
+![people picker card ](Images/personalPeoplePickerCard.png)
+
+**Team or groupchat scope get user list to current context:**
+![people picker card](Images/channelPeoplePickerCard.png)
+
+**On Assign button click the bot will return the member id that we have selected:**
+![Task Assign](Images/TaskAssign.png)
 
 ## Further reading
 

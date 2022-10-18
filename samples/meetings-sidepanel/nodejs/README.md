@@ -17,12 +17,9 @@ urlFragment: officedev-microsoft-teams-samples-meetings-sidepanel-nodejs
 
 This sample illustrates how to implement [Side Panel](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience.
 
-![Preview Image](Images/Preview.gif)
-  
-### User interactions(Meeting Organizer)
-- **Add New Agenda Item** - Gives provision to add new Agenda point.
-- **Add** - Adds the agenda from Textinput to the SidePanel agenda list.
-- **Publish Agenda** - Sends the agenda list to the meeting chat.
+## Interaction with app
+
+![Preview Image](Images/Preview.gif) 
 
 ## Prerequisites
 
@@ -35,8 +32,12 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
     
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
+## To try this sample
+
 - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
 - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
     > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
@@ -66,9 +67,13 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
     # ngrok http -host-header=rewrite 3001
     ```
 5. Create a new Bot by following steps mentioned in [Build a bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots?view=msteams-client-js-latest#build--a-bot-for-teams-with-the-microsoft-bot-framework) documentation.
+
 6. Go to .env file  and add ```MicrosoftAppId``` and  ```MicrosoftAppPassword``` information.
+
 7. Run your app, either from Visual Studio code  with ``` npm start``` or using ``` Run``` in the Terminal.
+
 8. Update the manifest.json file with ```Microsoft-App-ID``` and ```BaseUrl``` value.
+
 9. [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
 ## Interacting with the app in Teams Meeting
@@ -83,7 +88,20 @@ Interact with SidePanel by clicking on the App icon present on the top menu besi
 
 ![](Images/AddedNew.png)
 
-3. On click of "Publish Agenda", the agenda list will be sent to the meeting chat.!
+3. On click of "Publish Agenda", the agenda list will be sent to the meeting chat.
 
 ![](Images/Notification.png)
 
+
+### User interactions(Meeting Organizer)
+- **Add New Agenda Item** - Gives provision to add new Agenda point.
+- **Add** - Adds the agenda from Textinput to the SidePanel agenda list.
+- **Publish Agenda** - Sends the agenda list to the meeting chat.
+
+## Deploy the bot to Azure
+
+-  To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
+
+## Further Reading.
+
+-  (https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meetings-sidepanel?tabs=vs)

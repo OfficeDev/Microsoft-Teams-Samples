@@ -20,17 +20,14 @@ For reference please check [Real-time Teams meeting events](https://docs.microso
 
 This feature shown in this sample is currently available in public developer preview only.
 
-# Key features
+- Interaction with bot
 
 ![Meetings EventsGif](images/MeetingsEventsGif.gif)
-
-![Meeting start event](images/meeting-start.png)
-![Meeting end event](images/meeting-end.png)
 
 ## Prerequisites
 1. Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
 
-2. To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 10.14 or higher).
+2. To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2 or higher).
 
     ```bash
     # determine node version
@@ -42,7 +39,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 > NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
 
-## To try this sample
+## Setup
 
 - Register Azure AD applications
     -   Register your bot using bot channel registration in Azure AD portal, following the instructions [here](Wiki/azure-bot-channels-registration.md).
@@ -93,6 +90,14 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
          - Select **Apps** from the left panel.
          - Then select **Upload a custom app** from the lower right corner.
          - Then select the `manifest.zip` file from `appPackage`. 
+
+## Running the sample
+
+**MeetingEvents command interaction:**         
+![Meeting start event](images/meeting-start.png)
+
+**End meeting events details:**   
+![Meeting end event](images/meeting-end.png)
 
  ## Interacting with the bot in Teams
 

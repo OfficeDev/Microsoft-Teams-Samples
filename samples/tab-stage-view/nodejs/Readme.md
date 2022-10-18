@@ -18,32 +18,15 @@ urlFragment: officedev-microsoft-teams-samples-tab-stage-view-nodejs
 This App talks about the Teams tab in stage view with Nodejs.
 For reference please check [Tabs link unfurling and Stage View](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling)
 
-
-## Key features
+- Interaction with bot
 
 ![Tab Stage ViewGif](Images/TabStageViewGif.gif)
-
-- Welcome message with feature explanation and Adaptive Card with actions.
-
-![Welcome Message](Images/welcomeAction.png)
-
-- Opening stage view from Adaptive Card Action.
-
-![Stage View](Images/viaCardAction.png)
-
-- Opening stage view from Adaptive card via deep link.
-
-![Stage View Deep Link](Images/viaDeeplink.png)
-
-- Tab with execute deep link action to open stage view.
-
-![Tab View](Images/viaTabDeeplink.png)
 
 ## Prerequisites
 
 1. Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
 
-2. To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 10.14 or higher).
+2. To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2 or higher).
 
     ```bash
     # determine node version
@@ -55,7 +38,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 > NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
 
-## To try this sample
+## Setup
 
 - Register Azure AD applications
     -   Register your bot using bot channel registration in Azure AD portal, following the instructions [here](Wiki/azure-bot-channels-registration.md).
@@ -106,6 +89,20 @@ Also update `BaseUrl` according to your code runtime environment.
          - From the lower left corner, choose Upload a custom App
          - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
          - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
+
+## Running the sample
+
+**Welcome message with feature explanation and Adaptive Card with actions:**
+![Welcome Message](Images/welcomeAction.png)
+
+**Opening stage view from Adaptive Card Action:**
+![Stage View](Images/viaCardAction.png)
+
+**Opening stage view from Adaptive card via deep link:**
+![Stage View Deep Link](Images/viaDeeplink.png)
+
+**Tab with execute deep link action to open stage view:**
+![Tab View](Images/viaTabDeeplink.png)         
 
 ## Interacting with the bot in Teams
 

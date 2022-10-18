@@ -17,16 +17,16 @@ urlFragment: officedev-microsoft-teams-samples-tab-people-picker-nodejs
 
 This sample shows tab capability with the feature of client sdk people picker.
 
-# Feature of the sample
+## Interaction with app.
 
 ![Tab People PickerGif](Images/TabPeoplePickerGif.gif)
 
 ## Prerequisites
 
-- [NodeJS](https://nodejs.org/en/)
+- To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher).
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## To try this sample
+## Setup
 
 1) Clone the repository
 
@@ -59,14 +59,26 @@ This sample shows tab capability with the feature of client sdk people picker.
     - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
+## Running the sample
+
+**Adding tab people picker UI:**
 ![Install](Images/Install.png)
 
+**Tab UI:**
 ![tab](Images/Tab.PNG)
 
+**All Memberes Of Organisation Search:**
 ![All memberes of organisation search](Images/AllMemberesOfOrganisationSearch.PNG)
 
+**Scope search:**
 ![scope vise search](Images/ScopeSearch.PNG)
 
+**Single Select:**
 ![Single select](Images/SingleSelect.PNG)
 
+**Set Selected Search:**
 ![Set selected search](Images/SetSelectedSearch.PNG)
+
+## Further reading.
+
+- [Tab Pepole picker] (https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/device-capabilities/people-picker-capability?tabs=Samplemobileapp%2Cteamsjs-v2)

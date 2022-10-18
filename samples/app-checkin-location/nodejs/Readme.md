@@ -18,19 +18,19 @@ This sample shows feature where user can checkin with current location and view 
 
 `Currently, Microsoft Teams support for get geolocation capability is only available for mobile clients`
 
-# Key features
+- Interaction with bot
 
 ![App checkin LocationGif](Images/AppcheckinLocationGif.gif)
 
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
--  [NodeJS](https://nodejs.org/en/)
--  [ngrok](https://ngrok.com/) or equivalent tunneling solution
--  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
+- To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
+- [ngrok](https://ngrok.com/) or equivalent tunneling solution
+- [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
    appropriate permissions to install an app.
 
-## To try this sample
+## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
@@ -73,23 +73,22 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
-## Features of this sample
+## Running the sample
 
-- Card with actions `check in`. 
-
+**Card with actions check in:**
 ![Check in card](Images/CheckinCard.png)
 
-- `Geo Location` of user.
-
+**Geo Location of user:**
 ![Geo Location](Images/GeoLocation.png)
 
-- User details.
-
+**User details:**
 ![User details card](Images/UserDetailsCard.png)
 
-- `viewcheckindetails` of user.
-
+**Viewcheckin Details of user:**
 ![User last checkin card](Images/UserLastCheckInCard.png)
+
+**View Location UI:**
+![View Location](Images/ViewLocation.png)
 
 
 

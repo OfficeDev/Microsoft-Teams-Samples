@@ -25,18 +25,18 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
-# Feature of the sample
+## Interaction with bot
 
 ![Bot Conversation SSO QuickstartGif](sso_media/BotConversationSSOQuickstartGif.gif)
 
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
--  [NodeJS](https://nodejs.org/en/)
+-  To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-## To try this sample
+## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
@@ -58,13 +58,18 @@ Under the root of this sample folder, build and run by commands:
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
+## Running the sample
 
+**Adding bot UI:**
 ![Install](sso_media/Install.png)
 
+**Welcome to teamsBot:**
 ![BotSigninCard](sso_media/BotSignInCard.png)
 
+**Login command interaction:**
 ![UserDetailsCard](sso_media/UserDetailsCard.png)
 
+**View your token:**
 ![Token](sso_media/Token.png)
 
 You can interact with this bot by sending it a message. The bot will respond by asking for your consent, by this consent the Bot will exchange an SSO token, then making a call to the Graph API on your behalf and returning the results. It will keep you loggined unless you send a message "logout". 

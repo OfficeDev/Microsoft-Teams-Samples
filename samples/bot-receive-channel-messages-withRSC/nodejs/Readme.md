@@ -20,9 +20,7 @@ For reference please check [Receive Channel messages with RSC](https://docs.micr
 
 This feature shown in this sample is currently available in Public Developer Preview only.
 
-## Key features
-
-- Showing messages based on option selected
+## Interaction with bot
 
 ![Bot Receive Channel MessagesWithRSCGif](images/BotReceiveChannelMessagesWithRSCGif.gif)
 
@@ -30,7 +28,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 1. Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
 
-2. To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 10.14 or higher).
+2. To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher).
 
     ```bash
     # determine node version
@@ -42,7 +40,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 > NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
 
-## To try this sample
+## Setup
 
 - Register Azure AD applications
     -   Register your bot using bot channel registration in Azure AD portal, following the instructions [here](Wiki/azure-bot-channels-registration.md).
@@ -94,10 +92,15 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
          - Then select **Upload a custom app** from the lower right corner.
          - Then select the `manifest.zip` file from `appPackage`, and then select **Add** to add the bot to your selected team.
 
+## Running the sample
+
+**Adding bot UI:**
  ![App installation](images/installApp.png)
 
+**Hey command interaction:**
  ![Permissions](images/botWithRSCFlow.png)
 
+**1 or 2 command interaction:**
  ![Permissions](images/Notification.png) 
 
 ## Interacting with the bot in Teams

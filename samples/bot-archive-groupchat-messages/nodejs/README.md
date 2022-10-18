@@ -19,20 +19,18 @@ Using this nodejs sample, a bot can archive chat messages of groupchat and send 
 
 This feature shown in this sample is currently available in Public Developer Preview only.
 
-## Key features
-
-- Sending archive chat messages text file of a groupchat to user
+## Interaction with bot
 
 ![Bot Archive Group ChatMessagesGif](Images/botArchiveGroupchatMessagesGif.gif)
 
 ## Prerequisites
 
-- Microsoft Teams is installed and you have an account (not a guest account)
--  [NodeJS](https://nodejs.org/en/)
+-  Microsoft Teams is installed and you have an account (not a guest account)
+-  To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-## To try this sample
+## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
@@ -108,16 +106,24 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
 
     > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
+## Running the sample
+
+**Login command interaction:**
 ![Bot Welcome](Images/welcome.png)
 
+**Login successful:**
 ![Bot LoginSuccessful](Images/loginsuccessful.png)
 
+**Set up a bot:**
 ![Bot Setupbot](Images/setupbot.png)
 
+**Getchat command interaction:**
 ![Bot BotCommandToGetChatMessages](Images/botCommandToGetChatMessages.png)
 
+**Bot is added to fetch messages:**
 ![Bot Getchat](Images/getchat.png)
 
+**Ready to download:**
 ![Bot ReplyFromBot](Images/replyFromBot.png)
 
 ## Interacting with the bot in GroupChat
@@ -125,4 +131,17 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
 Select a groupchat and add the bot to chat.
 
 Send `getchat` message to the bot, you will recieve a consent card by the bot in your personal scope.
+
+## Interacting with the bot in GroupChat
+
+Select a groupchat and add the bot to chat.
+
+Send `getchat` message to the bot, you will recieve a consent card by the bot in your personal scope.
+
+
+## Deploy the bot to Azure
+
+To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
+
+
 

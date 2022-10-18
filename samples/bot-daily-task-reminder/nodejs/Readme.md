@@ -17,28 +17,18 @@ urlFragment: officedev-microsoft-teams-samples-bot-daily-task-reminder-nodejs
 
 This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time.
 
-# Key features
+- Interaction with bot
 
 ![Bot Daily Task ReminderGif ](Images/BotDailyTaskReminderGif.gif)
 
-Type command `create-reminder` to get card for scheduling the recurring task.
-
-![Schedule task ](Images/ScheduleTaskCard.png)
-
-- Click on schedule task button to open task module for scheduling a task.
-![Task Details ](Images/ScheduleTask.png)
-
-- Once task is scheduled, you will be notified about the task at scheduled time.
-![Task reminder](Images/TaskReminder.png)
-
 ## Prerequisites
 
-- Microsoft Teams is installed and you have an account (not a guest account)
--  [NodeJS](https://nodejs.org/en/)
+-  Microsoft Teams is installed and you have an account (not a guest account)
+-  To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher).
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-## To try this sample
+## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
@@ -81,16 +71,30 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
-## Features of this sample
+## Running the sample
 
-- Type command `create-reminder` to get card for scheduling the recurring task.
-
+**Type command create-reminder to get card for scheduling the recurring task:**
 ![Schedule task ](Images/ScheduleTaskCard.png)
 
-- Click on schedule task button to open task module for scheduling a task
+**Click on schedule task button to open task module for scheduling a task:**
 ![Task Details ](Images/ScheduleTask.png)
 
-- Task reminder
-
+**Once task is scheduled, you will be notified about the task at scheduled time:**
 ![Task reminder](Images/TaskReminder.png)
 
+## Deploy the bot to Azure
+
+To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
+
+## Further reading
+
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [.NET Core CLI tools](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x)
+- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
+- [Azure Portal](https://portal.azure.com)
+- [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
+- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
