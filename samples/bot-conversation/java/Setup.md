@@ -1,12 +1,11 @@
 
-## Setup/Configure the Maven and Java JDK for Java samples.
+## Setup/Configure the Maven and Java JDK.
 
 ## Description
 This document helps you to setup/configure the Java JDK and Maven (download, install, configure and run) setup process for your Java samples.
 
 ## Setup Java-JDK
- - Install Java JDK **32 bit / 64 bit** as per your PC configuration (Minimum Required version is - Java 1.8+).
-
+ - Install Java JDK **32 bit / 64 bit** as per your PC configuration (Minimum Required version is - Java 1.8+) 
 [Java-JDK Link](https://www.oracle.com/java/technologies/downloads/#java8-windows).
 
  - After Successful installation, search **Environment variable** in windows search bar.
@@ -17,16 +16,16 @@ This document helps you to setup/configure the Java JDK and Maven (download, ins
 
 ![System vairable](SetupImages/JAVA_HOME.png).
 
-## Setup MAVEN 
+## Setup Maven 
  - Install [Maven](https://maven.apache.org/)
 
 ![Download Maven](SetupImages/download-maven.png).
  
- - Extract the Maven archive to a directory of your choice once the is complete.
+ - Extract the Maven archive to a directory of your choice once the download is completed.
 
 ![Maven](SetupImages/extract-maven.png).
 
- - Open the Start menu and search for environment variables,Click the Edit the system environment variables result.
+ - Open the Start menu and search for environment variables, click the Edit the system environment variables result.
 
 ![Maven](SetupImages/install-maven-edit-environment-variable-new.png).
 
@@ -38,7 +37,7 @@ This document helps you to setup/configure the Java JDK and Maven (download, ins
 
 ![Maven](SetupImages/install-maven-edit-environment-variable-new.png).
 
- - Enter MAVEN_HOME as the variable name and the path to the Maven directory as the variable value. Click OK to save the new system     variable.
+ - Enter MAVEN_HOME as the variable name and the path to the Maven directory as the variable value. Click OK to save the new system variable.
 
 ![Maven](SetupImages/install-maven-on-windows-maven-home-variable.png).
 
