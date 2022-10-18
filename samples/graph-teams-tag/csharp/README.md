@@ -90,4 +90,4 @@ Replace the following details:
 ![Create new Tag](GraphTeamsTag/Images/CreateTagTaskModule.png)
 
 ## Further reading
-- [teamworkTag resource type](https://docs.microsoft.com/en-us/graph/api/resources/teamworktag?view=graph-rest-beta)
+- [TeamworkTag resource type](https://docs.microsoft.com/en-us/graph/api/resources/teamworktag?view=graph-rest-beta)
