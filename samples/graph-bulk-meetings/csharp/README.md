@@ -27,8 +27,8 @@ This is a sample application which demonstrates how to create meeting in bulk on
 -  .[NET 6.0](https://dotnet.microsoft.com/en-us/download) SDK.
     ```bash
         # determine dotnet version
-        dotnet --version
-    ```
+        dotnet --version```
+
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
@@ -36,9 +36,9 @@ This is a sample application which demonstrates how to create meeting in bulk on
 
 Note these instructions are for running the sample on your local machine, the tunnelling solution is required because the Teams service needs to call into the bot.
 
-1.Run ngrok - point to port 3978
+1) Run ngrok - point to port 3978
 
- ```bash
+    ```bash
     ngrok http --host-header=rewrite 3978
     ```
 
