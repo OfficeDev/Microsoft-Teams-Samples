@@ -16,11 +16,18 @@ urlFragment: officedev-microsoft-teams-samples-meetings-sidepanel-csharp
 # Meetings SidePanel
 
 This sample illustrates how to implement [Side Panel](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience and uses [Live Share SDK](https://aka.ms/livesharedocs) to share data in realtime.
+
+## Interaction with app.
+
+![Customform](SidePanel/Images/SidePanelModule.gif)
+
   
 ### User interactions(Meeting Organizer)
 - **Add New Agenda Item** - Gives provision to add new Agenda point.
 - **Add** - Adds the agenda from Textinput to the SidePanel agenda list.
 - **Publish Agenda** - Sends the agenda list to the meeting chat.
+
+
 
 ## Prerequisites
 
@@ -31,6 +38,7 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
   # determine dotnet version
   dotnet --version
   ```
+## Setup.
 
   - [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
   ```bash
@@ -70,13 +78,8 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
 
-## Interacting with the app in Teams Meeting
-Interact with SidePanel by clicking on the App icon present on the top menu beside the "more actions" during a meeting.
-1. Once the app is clicked, sidepanel appears with the default agenda list. Only organizer gets the feasibility to add new agenda points to the list using "Add New Agenda Item" button.
 
-##Feature of the sample.
-
-![Customform](SidePanel/Images/SidePanelModule.gif)
+## Running the sample
 
 1. Welcome image to added side panel.
 ![Customform](SidePanel/Images/welcome.png)
@@ -89,3 +92,12 @@ Interact with SidePanel by clicking on the App icon present on the top menu besi
 
 4. On click of "Publish Agenda", the agenda list will be sent to the meeting chat.
 ![AgendaCard](SidePanel/Images/agendacard.png)
+
+## Deploy the bot to Azure
+
+-  To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
+
+## Further Reading.
+
+-  (https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meetings-sidepanel?tabs=vs)
+
