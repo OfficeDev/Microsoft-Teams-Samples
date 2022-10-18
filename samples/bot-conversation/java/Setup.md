@@ -9,11 +9,9 @@ This document helps you to setup/configure the Java JDK and Maven (download, ins
 [Java-JDK download link](https://www.oracle.com/java/technologies/downloads/#java8-windows).
 
 1) After Successful installation, search **Environment variable** in pc windows search bar and open system properties window.
-
 ![Environment vairable](SetupImages/environment-variables.png)
 
 1) Open Environment variable configuration and add JAVA_HOME System Variable and it's value as the installed JDK path.
-
 ![System vairable](SetupImages/JAVA_HOME.png)
 
 ## Steps for Maven setup
@@ -21,7 +19,7 @@ This document helps you to setup/configure the Java JDK and Maven (download, ins
 
 ![Download Maven](SetupImages/download-maven.png)
  
-1) Once the download has completed, extract the Maven archive to a directory of your choice.
+2) Once the download has completed, extract the Maven archive to a directory of your choice.
 
 ![extract-maven](SetupImages/extract-maven.png)
 
