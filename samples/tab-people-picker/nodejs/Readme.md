@@ -81,4 +81,4 @@ This sample shows tab capability with the feature of client sdk people picker.
 
 ## Further reading.
 
-- [Tab Pepole picker] (https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/device-capabilities/people-picker-capability?tabs=Samplemobileapp%2Cteamsjs-v2)
+- [Tab Pepole picker](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/device-capabilities/people-picker-capability?tabs=Samplemobileapp%2Cteamsjs-v2)
