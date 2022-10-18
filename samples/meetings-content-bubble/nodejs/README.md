@@ -17,20 +17,20 @@ urlFragment: officedev-microsoft-teams-samples-meetings-content-bubble-nodejs
 
 This sample illustrates how to implement [Content Bubble](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience.
 
-# Feature of the sample
+## Interaction with bot
 
 ![Meetings Content BubbleGif](Images/MeetingsContentBubbleGif.gif)
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org) version 10.14 or higher
+- To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher).
 
     ```bash
     # determine node version
     node --version
     ```
 
-## To try this sample
+## Setup
 
 - Clone the repository
 
@@ -71,12 +71,18 @@ This sample illustrates how to implement [Content Bubble](https://docs.microsoft
  ```
 6) [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
+## Running the sample
+
+**Hello command interaction:**
 ![Meetings AgendaCard](Images/AgendaCard.png)
 
+**Provide your feedback:**
 ![Meetings Feedback Submit](Images/FeedbackSubmit.png)
 
+**Provide your feedback Yes:**
 ![Meetings Feedback CardYes](Images/FeedbackCardYes.png)
 
+**Provide your feedback No:**
 ![Meetings Feedback CardNo](Images/FeedbackCardNo.png)
 
 ## Interacting with the app in Teams Meeting
@@ -85,3 +91,7 @@ Message the Bot by @ mentioning to interact with the content bubble.
 1. You will see agenda items listed in an Adaptive Card.
 2. Select any option and click on Push Agenda button
 3. You can submit your feedback on either Content Bubble/Adaptive card sent in chat.
+
+## Further Reading.
+
+-[Meeitng content bubble] (https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meeting-content-bubble)

@@ -17,21 +17,9 @@ urlFragment: officedev-microsoft-teams-samples-graph-activity-feed-broadcast-csh
 
 This sample shows a feature where user can broadcast a message to all members of organization using activty feed notification.
 
-## Features of samples Activity Feed
+- ## Interaction with app.
 
 ![Broadcast from user](ActivityFeedBroadcast/Images/ActivityFeedBroadcast.gif)
-
-- Broadcast message for all the members.
-
-  ![Broadcast from user](ActivityFeedBroadcast/Images/BroadcastToBeSendToOraganisation.png)
-
-- Activity feed notification.
-
-  ![Notification](ActivityFeedBroadcast/Images/BroadcastNotification.png)
-
-- Broadcast details available for members.
-
-  ![Broadcast details](ActivityFeedBroadcast/Images/BroadcastDetails.png)
 
 ## Prerequisites
 
@@ -49,9 +37,9 @@ This sample shows a feature where user can broadcast a message to all members of
   ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-## To try this sample
+## Setup
 
-### Register your Teams Auth SSO with Azure AD
+- Register your Teams Auth SSO with Azure AD
 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
@@ -139,6 +127,20 @@ This sample shows a feature where user can broadcast a message to all members of
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.    
 
  ** Note: App display name is used to get app id.
+
+ ## Running the sample
+
+ - Broadcast message for all the members.
+
+  ![Broadcast from user](ActivityFeedBroadcast/Images/BroadcastToBeSendToOraganisation.png)
+
+- Activity feed notification.
+
+  ![Notification](ActivityFeedBroadcast/Images/BroadcastNotification.png)
+
+- Broadcast details available for members.
+
+  ![Broadcast details](ActivityFeedBroadcast/Images/BroadcastDetails.png)
 
 ## Further reading
 

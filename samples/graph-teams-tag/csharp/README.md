@@ -17,24 +17,11 @@ urlFragment: officedev-microsoft-teams-samples-graph-teams-tag-csharp
 
 This is a sample application where user can create, update, add or remove members of a tag. All of Graph CRUD operations related to tags can be performed within this sample.
 
-## Features of samples Graph Team Tag
-
-1. Create new tags.
+## Interaction with app.
 
 ![Create new tag](GraphTeamsTag/Images/CreateTagFlow.gif)
 
-2. View/Edit existing tags.
-
 ![View/Edit tag](GraphTeamsTag/Images/ViewOrEditTagFlow.gif)
-
-## Features of this sample
-
-1. User can see list of tags created for the current team.
-![Manage Tag Dashboard](GraphTeamsTag/Images/Dashboard.png)
-2. User can view/edit the existing team tags.
-![View/Edit Tags](GraphTeamsTag/Images/ViewOrEditTag.png)
-3. User can create new team tags.
-![Create new Tag](GraphTeamsTag/Images/CreateTagTaskModule.png)
 
 ## Prerequisites
 
@@ -47,7 +34,7 @@ This is a sample application where user can create, update, add or remove member
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-## Run app locally
+## Setup
 
 ### Register your application with Azure AD
 
@@ -61,9 +48,6 @@ This is a sample application where user can create, update, add or remove member
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
 4.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json file.
-
-
-## To try this sample
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the app.
@@ -95,6 +79,15 @@ Replace the following details:
 - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 4. User can delete existing team tags.
+
+## Running the sample
+
+1. User can see list of tags created for the current team.
+![Manage Tag Dashboard](GraphTeamsTag/Images/Dashboard.png)
+2. User can view/edit the existing team tags.
+![View/Edit Tags](GraphTeamsTag/Images/ViewOrEditTag.png)
+3. User can create new team tags.
+![Create new Tag](GraphTeamsTag/Images/CreateTagTaskModule.png)
 
 ## Further reading
 - [teamworkTag resource type](https://docs.microsoft.com/en-us/graph/api/resources/teamworktag?view=graph-rest-beta)

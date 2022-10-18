@@ -13,30 +13,21 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-graph-rsc-nodeJs
 ---
 
-# RSC with Graph API
+# Resource specific consent with Graph API
 
 This sample illustrates you can use [Resource Specific Consent](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph API.
 
 
-## Features of samples RSC
+## Interaction with app.
 
 ![Broadcast from user](./Images/RSCDemo.gif)
 
-##  Features of samples
-
-![Overview](./Images/Overview.png)
-
-![Permission](./Images/Permission.png)
-
-![Permissionlist](./Images/PermissionList.png)
-
-
 ## Prerequisites
 
-- [NodeJS](https://nodejs.org/en/)
+- [NodeJS](https://nodejs.org/en/) version v16.14.2 or Higher Version
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## To try this sample
+## Setup
 
 1) Clone the repository
 
@@ -72,7 +63,19 @@ This sample illustrates you can use [Resource Specific Consent](https://docs.mic
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-   
+##  Running the sample
 
+**App review:**
+![Overview](./Images/Overview.png)
+
+**App permission:**
+![Permission](./Images/Permission.png)
+
+**Permission list:**
+![Permissionlist](./Images/PermissionList.png)
+   
+## Further Reading.
+
+-[Graph RSC](https://learn.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent)
 
 

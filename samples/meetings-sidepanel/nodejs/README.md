@@ -104,4 +104,4 @@ Interact with SidePanel by clicking on the App icon present on the top menu besi
 
 ## Further Reading.
 
--  (https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meetings-sidepanel?tabs=vs)
+-[Meeting Side Panel] (https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meetings-sidepanel?tabs=vs)

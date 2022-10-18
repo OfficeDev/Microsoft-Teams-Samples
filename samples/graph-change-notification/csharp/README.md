@@ -19,7 +19,8 @@ Bot Framework v4 ChangeNotification sample.
 
 This sample app demonstrates sending change notifications to user presence in Teams based on user presence status.
 
-## Feature of the sample.
+## Interact with app.
+
  ![image](ChangeNotification/Images/ChangeNotificationModule.gif)
 
 ## Prerequisites
@@ -27,6 +28,8 @@ This sample app demonstrates sending change notifications to user presence in Te
 - Microsoft Teams is installed and you have an account
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+
+## Setup.
 
 1) Clone the repository
 

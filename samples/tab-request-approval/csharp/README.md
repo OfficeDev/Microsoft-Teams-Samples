@@ -19,29 +19,9 @@ This sample shows a feature where:
 1. Requester : Can request for any task approval from manager by sending activity feed notification and can see his request status.
 2. Manager : Can see the pending approval request raised by user on the click of activity feed notification and can approve or reject the request.
 
-## Features of samples Tab Request Approval
+- Interaction with app.
 
 ![Broadcast from user](TabRequestApproval/Images/TabRequestApproval.gif)
-
-User Persona:
-
-- Send request to the manger for task approval.
-
-  ![Request from user](TabRequestApproval/Images/TaskRequest.png)
-
-- Request status
-
-  ![Request status](TabRequestApproval/Images/RequestStatus.png)
-
-Manager Persona:
-
-- Activity feed notification of approval request.
-
-  ![Notification](TabRequestApproval/Images/RequestNotification.png)
-
-- Pending task approval request.
-
-  ![Pending request list](TabRequestApproval/Images/RequestDetails.png)
 
 ## Prerequisites
 
@@ -59,7 +39,8 @@ Manager Persona:
   ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-## To try this sample
+
+## Setup
 
 ### Register your Teams Auth SSO with Azure AD
 
@@ -152,6 +133,30 @@ Manager Persona:
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.    
 
 Note: App should be installed for user's manager also to get task approval notification.
+
+## Running the sample
+
+User Persona:
+
+- Send request to the manger for task approval.
+
+  ![Request from user](TabRequestApproval/Images/TaskRequest.png)
+
+- Request status
+
+  ![Request status](TabRequestApproval/Images/RequestStatus.png)
+
+Manager Persona:
+
+- Activity feed notification of approval request.
+
+  ![Notification](TabRequestApproval/Images/RequestNotification.png)
+
+- Pending task approval request.
+
+  ![Pending request list](TabRequestApproval/Images/RequestDetails.png)
+
+
 ## Further reading
 
 - [Bot Framework Documentation](https://docs.botframework.com)

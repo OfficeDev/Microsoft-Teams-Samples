@@ -17,19 +17,11 @@ urlFragment: officedev-microsoft-teams-samples-graph-rsc-csharp
 
 This sample illustrates you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs.
 
-## Features of samples RSC
+## Interaction with app.
 
  ![Broadcast from user](RSCDemo/Images/RSCDemo.gif)
 
-##  Features of samples
-
- ![Overview](RSCDemo/Images/Overview.png)
-
- ![Permossion](RSCDemo/Images/Permission.png)
-
- ![Permissionlist](RSCDemo/Images/PermissionList.png)
-
-## Prerequisites
+ ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
 
@@ -37,10 +29,9 @@ This sample illustrates you can use [Resource Specific Consent (RSC)](https://do
   # determine dotnet version
   dotnet --version
   ```
-- [Graph explorer](https://developer.microsoft.com/en-us/graph/graph-explorer)  
-  
+- [Graph explorer](https://developer.microsoft.com/en-us/graph/graph-explorer)    
 
-## To try this sample
+## Setup
 
 1. Register your app with Microsoft identity platform via the Azure AD portal
     - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2). 
@@ -70,6 +61,21 @@ This sample illustrates you can use [Resource Specific Consent (RSC)](https://do
 
 
 1. [Upload app manifest file](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#load-your-package-into-teams) (zip file) to your team
+
+## Running the sample
+
+**App review:**
+ ![Overview](RSCDemo/Images/Overview.png)
+
+**App permission:**
+ ![Permossion](RSCDemo/Images/Permission.png)
+
+**Permission list:**
+ ![Permissionlist](RSCDemo/Images/PermissionList.png)
+
+## Further Reading.
+
+-[Graph RSC](https://learn.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent)
    
 
 
