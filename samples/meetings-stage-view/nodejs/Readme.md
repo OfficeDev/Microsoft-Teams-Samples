@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "11/10/2021 05:35:46 PM"
+ createdDate: "11/10/2021 17:35:46"
 urlFragment: officedev-microsoft-teams-samples-meetings-stage-view-nodejs
 ---
 
@@ -17,6 +17,22 @@ urlFragment: officedev-microsoft-teams-samples-meetings-stage-view-nodejs
 
 This App helps to enable and configure your apps for Teams meetings. This app covers Shared meeting stage using [Live Share SDK](https://aka.ms/livesharedocs).
 For reference please check [Enable and configure your apps for Teams meetings](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/enable-and-configure-your-app-for-teams-meetings)
+
+## Meeting Preview Web
+
+![Preview Image](Images/preview_web.gif)
+
+## Meeting Preview Web
+
+![Preview Image](Images/preview_mobile.gif)
+
+
+## Prerequisites
+
+- [NodeJS](https://nodejs.org/en/)
+- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+    
 
 This sample also shows how to share specific parts of your app to the meeting stage.
 For reference please check [Share app content to stage API](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet#share-app-content-to-stage-api)
@@ -46,19 +62,14 @@ This capability is currently available in developer preview only.
 ![Android Side Panel](Images/android_side_panel.jpeg)
 
 ![Android Stage View](Images/android_share_todo.jpeg)
-## Prerequisites
 
-- [NodeJS](https://nodejs.org/en/)
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
-- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
-    
 ## To try this sample
 -  Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-
+	
 - In a terminal, navigate to `samples/meetings-stage-view/nodejs`
 
 - Install modules
@@ -108,7 +119,6 @@ This capability is currently available in developer preview only.
 ![Share Icon](Images/share_icon.png)
 
     - You can now interact with the app.
-
 
 ## Features of this sample
 

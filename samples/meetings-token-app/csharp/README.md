@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
   contentType: samples
-  createdDate: "07/07/2021 01:38:27 PM"
+  createdDate: "07-07-2021 13:38:27"
 urlFragment: officedev-microsoft-teams-samples-meetings-token-app-csharp
 ---
 
@@ -23,24 +23,9 @@ This application also shows the implementation of Live Share SDK to update the d
 
 **NOTE: This capability is currently available in developer preview only.**
 
-### Key features
- - Display the current token that is being serviced in the meeting
- - Display the user list sorted by the token number in ascending order
- - Generate a token for the user upon request
- - Display the current user's token number
- - Mark a token as done by the user
- - Skip the current token for the organizer of the meeting
-
- ![config_page](Images/config_page.png)
-
- ![pre_meeting_tab](Images/pre_meeting_tab.png)
-
- ![side_panel_tab](Images/side_panel_tab.png)
-  
-### User interactions
-- **Token** - Requests a token for the user
-- **Done** - Acknowledges that the user is done with the token
-- **Skip** - Skips the current user and moves on to the next person in line for a token. This button is only shown to users with the meeting Organizer role.
+## Interaction with app
+ 
+![Preview](Images/Preview.gif)
 
 ## Prerequisites
 
@@ -63,25 +48,21 @@ This application also shows the implementation of Live Share SDK to update the d
   # run ngrok locally
   ngrok http -host-header=rewrite 3978
   ```
-
-### Technologies
-
-We assume working knowledge of the following technologies to gain full understanding of the app
-- [C#](https://docs.microsoft.com/en-us/dotnet/csharp/tutorials/)
-- [ECMAScript6](http://es6-features.org/)
-- [Asp.NET core](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1) version 3.1
-- [React.JS](https://reactjs.org/tutorial/tutorial.html) version 16+ 
-
-The app uses the Teams extensibility features described on the following pages:
-- [Apps in Teams meetings](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings)
-- [Create apps for Teams meetings](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?tabs=json)
-- [Tab single sign-on](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso) to get the identity of the user accessing the tab, in a way that can be verified in the server APIs
-
-## Running the sample
+## Setup
 
 ### Step 1: Register Azure AD applications
 1. Start an ngrok session as indicated above. Note the ngrok domain, as you will use this in the registration steps below, where it will be the value of `WebAppDomain`.
-1. Register your bot using bot channel registration in Azure AD portal, following the instructions [here](Wiki/azure-bot-channels-registration.md).
+1. Setup for Bot
+
+   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+    - For bot handle, make up a name.
+    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
+    
+   In the new Azure Bot resource in the Portal, 
+    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
+    
 1. Update the AAD app registration for tab SSO, following the  instructions [here](Wiki/auth-aad-sso.md). The "fully qualified domain name" in the instructions will be your ngrok domain.
 1. Set up the appsettings.json with the following keys:
     - `"MicrosoftAppId"`: Application (client) ID of the bot's Azure AD application
@@ -104,21 +85,8 @@ The app uses the Teams extensibility features described on the following pages:
       "id": "[MicrosoftAppId]",  
       "resource": "api://[WebAppDomainName]/[MicrosoftAppId]"  
     }
-    ```
-
-### Step 3: Build the client app
-1. Navigate to the `App` folder in a terminal
-2. Run `npm install`
-3. Run `npm run build` to build the app. 
-  
-  This generates the dist folder inside the app where the assets will generated/copied. The server will serve the static files from this location.
-
-### Step 4: Inside ClientApp folder execute the below command.
-    ```bash
-    # npx @fluidframework/azure-local-service@latest
-    ```
-
-### Step 5: Build and run the service
+    ``` 
+### Step 3: Build and run the service
 You can build and run the project from the command line or an IDE:
 
 A) From a command line:
@@ -135,12 +103,13 @@ B) From an IDE:
 4. Select `TokenApp.csproj` file
 5. Press `F5` to run the project
 
-### Step 5: Enable developer preview in your desktop Teams client
+### Step 4: Enable developer preview in your desktop Teams client
 Follow [these instructions](https://docs.microsoft.com/en-us/microsoftteams/platform/resources/dev-preview/developer-preview-intro#enable-developer-preview) to enable developer preview. Note that Developer preview mode must be enabled on each Teams client app or browser.
 
 > In-meeting tabs are only available in the Teams desktop client. They will not be visible when you run Teams in a web browser.
 
-### Step 6: Sideload the app in a Teams desktop client
+  
+### Step 5: Sideload the app in a Teams desktop client
 1. Create a .zip using the below files, which are in the `Resources/Manifest` folder.
   - manifest.json
   - icon-outline.png
@@ -153,6 +122,38 @@ Follow [these instructions](https://docs.microsoft.com/en-us/microsoftteams/plat
 1. Select the Meeting Token app.
 1. Now the app will be visible in the meeting chat.
 1. Start the meeting and the icon should be visible in the meeting control bar.
+
+### Running the sample
+ - Display the current token that is being serviced in the meeting
+ - Display the user list sorted by the token number in ascending order
+ - Generate a token for the user upon request
+ - Display the current user's token number
+ - Mark a token as done by the user
+ - Skip the current token for the organizer of the meeting
+
+ ![config_page](Images/config_page.png)
+
+ ![pre_meeting_tab](Images/pre_meeting_tab.png)
+
+ ![side_panel_tab](Images/side_panel_tab.png)
+  
+### User interactions
+- **Token** - Requests a token for the user
+- **Done** - Acknowledges that the user is done with the token
+- **Skip** - Skips the current user and moves on to the next person in line for a token. This button is only shown to users with the meeting Organizer role.
+
+### Technologies
+
+We assume working knowledge of the following technologies to gain full understanding of the app
+- [C#](https://docs.microsoft.com/en-us/dotnet/csharp/tutorials/)
+- [ECMAScript6](http://es6-features.org/)
+- [Asp.NET core](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-3.1) version 3.1
+- [React.JS](https://reactjs.org/tutorial/tutorial.html) version 16+ 
+
+The app uses the Teams extensibility features described on the following pages:
+- [Apps in Teams meetings](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings)
+- [Create apps for Teams meetings](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?tabs=json)
+- [Tab single sign-on](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso) to get the identity of the user accessing the tab, in a way that can be verified in the server APIs
 
 ## Troubleshooting
 The sample app uses an in-memory store to maintain token information and the service URL for the tenant. If you restart the project, you must run the following command to recapture the service URL: `@[BotName] reset`
