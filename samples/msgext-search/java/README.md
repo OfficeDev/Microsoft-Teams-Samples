@@ -23,6 +23,7 @@ build a Search-based Messaging Extension.
 ## Prerequisites
 - Intall Java 1.8+ [Java](https://www.oracle.com/java/technologies/downloads/#java8-windows)
 - Install [Maven](https://maven.apache.org/)
+- Setup for Java and Maven [Setup](Setup.md)
 - An account on [Azure](https://azure.microsoft.com) if you want to deploy to Azure.
 - Microsoft Teams is installed and you have an account
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
