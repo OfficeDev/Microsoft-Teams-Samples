@@ -17,9 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-bulk-meetings-csharp
 
 This is a sample application which demonstrates how to create meeting in bulk on Teams calendar use to create meeting to upload excel sheet.
 
-## Key features
-
-1. Meeting Event.
+## Interact with app.
 
 ![Meeting Event](EventMeeting/Images/MeetingEvent.gif)
 
@@ -34,9 +32,17 @@ This is a sample application which demonstrates how to create meeting in bulk on
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-## Run app locally
+## Setup
 
-## Setup for Bot
+Note these instructions are for running the sample on your local machine, the tunnelling solution is required because the Teams service needs to call into the bot.
+
+1.Run ngrok - point to port 3978
+
+ ```bash
+    ngrok http --host-header=rewrite 3978
+    ```
+
+1) Setup for Bot
 
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name.
@@ -46,28 +52,6 @@ This is a sample application which demonstrates how to create meeting in bulk on
    In the new Azure Bot resource in the Portal, 
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
-
-
-## Register your Teams Auth SSO with Azure AD
-
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-2. Select **New Registration** and on the *register an application page*, set following values:
-    * Set **name** to your app name.
-    * Choose the **supported account types** (any account type will work)
-    * Leave **Redirect URI** empty.
-    * Choose **Register**.
-
-2. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
-3. Navigate to **API Permissions**, and make sure to add the follow permissions:
--   Select Add a permission
--   Select Microsoft Graph -> Application permissions.
-   - `Calendars.ReadWrite`
-   - `Calendars.Read`
-
--   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
-
-4.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json file.
-
 
 ## To try this sample
 
@@ -99,6 +83,18 @@ Replace the following details:
 - `{{BASE-URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
 - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+
+1) Navigate to **API Permissions**, and make sure to add the follow permissions:
+-   Select Add a permission
+-   Select Microsoft Graph -> Application permissions.
+   - `Calendars.ReadWrite`
+   - `Calendars.Read`
+
+-   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+1).  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json file.
+
+## Running the sample
 
 1. Here we can view a list of meettings and import the meetings.
   ![Meeting Event](EventMeeting/Images/Dashboardwithoutlist.png)
