@@ -96,17 +96,17 @@ Replace the following details:
 
 ## Running the sample
 
-1. Here we can view a list of meettings and import the meetings.
-  ![Meeting Event](EventMeeting/Images/Dashboardwithoutlist.png)
-
-2. Imported Meetings view from the excel sheet.
+1. Imported Meetings view from the excel sheet.
   ![Meeting Event](EventMeeting/Images/UploadExcelSheet.png)
 
-3. Dashborad of the Meetings Here is the all created meetings list.
+2. Dashborad of the Meetings Here is the all created meetings list.
    ![Meeting Event](EventMeeting/Images/Dashboard.png)
 
-4. Created Meeting view in teams.
+3. Created Meeting view in teams.
    ![Meeting Event](EventMeeting/Images/createdmeeting.png)
+
+## Deploy the bot to Azure
+To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 
 ## Further reading
 - [Event resource type](https://docs.microsoft.com/en-us/graph/api/resources/event?view=graph-rest-1.0)
