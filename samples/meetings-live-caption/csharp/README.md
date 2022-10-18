@@ -21,7 +21,8 @@ This is a sample meeting side panel application which demonstrates how to enable
 Once the meeting is scheduled. Follow this doc to enable [Provide Cart Catptions]("https://support.microsoft.com/office/use-cart-captions-in-a-microsoft-teams-meeting-human-generated-captions-2dd889e8-32a8-4582-98b8-6c96cf14eb47").
 Copy the CART link it will used while configuring tab for meeting.
 
-## - **Interaction with sample**
+## -Interaction with app
+
 ![bot-conversations ](MeetingLiveCaption/Images/MeetingCaption.gif)
 
 ## Prerequisites
@@ -35,7 +36,7 @@ Copy the CART link it will used while configuring tab for meeting.
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-## To try this sample
+## Setup.
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
@@ -46,7 +47,7 @@ Copy the CART link it will used while configuring tab for meeting.
     ngrok http --host-header=rewrite 3978
     ```
 
-## Setup for Bot
+1) Setup for Bot
 
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name.
@@ -57,29 +58,19 @@ Copy the CART link it will used while configuring tab for meeting.
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
 
-
-## Register your Teams Auth SSO with Azure AD
-
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-2. Select **New Registration** and on the *register an application page*, set following values:
-    * Set **name** to your app name.
-    * Choose the **supported account types** (any account type will work)
-    * Leave **Redirect URI** empty.
-    * Choose **Register**.
-
 1) Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-4. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
+1) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
    - `{{AppId}}` with any guid id value.
    - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
-5. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 6.
+1) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 6.
 
-6. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+1) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps
    - Choose Manage your apps -> Upload an app -> Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
@@ -87,7 +78,8 @@ Copy the CART link it will used while configuring tab for meeting.
 
 **NOTE: If you are not able to send caption, try configuring tab again.**
 
-## Features of this sample
+
+## Running the sample
 
 1. Schedule the meeting and add Meeting Caption Tab in that particular scheduled meeting.
 ![Add Tab](MeetingLiveCaption/Images/AddMeetingCaption.png)
