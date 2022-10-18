@@ -38,7 +38,7 @@ This sample shows the contents of meeting tab context object in a meeting tab an
 
 2) Setup for Bot
 
-##Register your application with Azure AD
+Register your application with Azure AD
 
 - Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 - On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
