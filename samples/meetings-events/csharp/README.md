@@ -20,7 +20,7 @@ For reference please check [Real-time Teams meeting events](https://docs.microso
 
 The feature shown in this sample is currently available in public developer preview only.
 
-- Interaction with bot
+## Interaction with bot
 
 ![Meetings EventsGif](MeetingEvents/Images/MeetingsEventsGif.gif)
 
