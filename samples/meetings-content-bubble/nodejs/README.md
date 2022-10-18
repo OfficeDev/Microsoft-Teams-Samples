@@ -94,4 +94,4 @@ Message the Bot by @ mentioning to interact with the content bubble.
 
 ## Further Reading.
 
--[Meeitng content bubble] (https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meeting-content-bubble)
+-[Meeitng content bubble](https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meeting-content-bubble)
