@@ -42,7 +42,7 @@ This sample shows feature where user can checkin with current location and view 
 - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-    > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
+    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
 ### 2. Setup NGROK
 - Run ngrok - point to port 3978
@@ -59,7 +59,12 @@ This sample shows feature where user can checkin with current location and view 
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) Run the bot from a terminal or from Visual Studio:
+2) Modify the `/appsettings.json` and fill in the following details:
+  - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
+  - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
+  - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+
+3) Run the bot from a terminal or from Visual Studio:
 
   A) From a terminal, navigate to `samples/app-checkin-location/csharp`
 
@@ -73,12 +78,6 @@ This sample shows feature where user can checkin with current location and view 
      - Navigate to `AppCheckinLocation` folder
      - Select `AppCheckinLocation.csproj` file
      - Press `F5` to run the project 
-
-3) Modify the `/appsettings.json` and fill in the following details:
-  - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
-  - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
-  - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
-
 
 4) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps

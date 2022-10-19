@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "11-10-2021 23:35:25"
+ createdDate: "10/11/2021 23:35:25 PM"
 urlFragment: officedev-microsoft-teams-samples-app-installation-using-qr-code-nodejs
 ---
 
@@ -46,8 +46,10 @@ The user can Generate a new QR code (contains app id information) and then use I
 In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
-### 2. Run your bot sample
+### 2. Setup for code
 1) Clone the repository
 
     ```bash
@@ -67,6 +69,7 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
+
 5) Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`, `connectionName` from the Bot Framework registration and `BaseUrl` with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot SSO), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot SSO) and you can always create a new client secret anytime.)
 
 6) Run your app
@@ -74,6 +77,7 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
     ```bash
     npm start
     ```
+
 - **Manually update the manifest.json**
     - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
@@ -83,31 +87,39 @@ In Azure portal, create a [Bot Framework registration resource](https://docs.mic
 
 ## Running the sample
 
-- Desktop View
+- **Desktop View**
 **Card with actions Generate QR code and Install App:**
+
 ![Card](Images/CardWithButtons.png)
 
 **Generate QR code is used to generate a QR code by selecting the app:**
+
 ![QR Code](Images/QRCode.png)
 
 **Install App is used to Scan the QR code and it then installs the app:**
+
 ![Install App](Images/AppInstallation.png)
 
 
--  Mobile View
+-  **Mobile View**
 **Hey command interaction:**
+
 ![CardWithButtonsMobile](Images/CardWithButtonsMobile.png)
 
 **Permission App Also add following permission:**
+
 ![Install App](Images/Permission.png)
 
 **QR Code:**
+
 ![QRCodeMobile](Images/QRCodeMobile.png)
 
 **App added:**
+
 ![AppAddedMobile](Images/AppAddedMobile.png)
 
 **Polly App Install:**
+
 ![AppInstallationMobile](Images/AppInstallationMobile.png)
 
 ## Deploy the bot to Azure

@@ -39,7 +39,7 @@ This sample shows feature where user can checkin with current location and view 
 - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-**NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
+**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
 
 ### 2. Setup NGROK
 1) Run ngrok - point to port 3978
