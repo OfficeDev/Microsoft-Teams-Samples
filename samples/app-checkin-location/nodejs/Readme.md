@@ -80,18 +80,23 @@ This sample shows feature where user can checkin with current location and view 
 ## Running the sample
 
 **Card with actions check in:**
+
 ![Check in card](Images/CheckinCard.png)
 
 **Geo Location of user:**
+
 ![Geo Location](Images/GeoLocation.png)
 
 **User details:**
+
 ![User details card](Images/UserDetailsCard.png)
 
 **Viewcheckin Details of user:**
+
 ![User last checkin card](Images/UserLastCheckInCard.png)
 
 **View Location UI:**
+
 ![View Location](Images/ViewLocation.png)
 
 ## Deploy the bot to Azure
