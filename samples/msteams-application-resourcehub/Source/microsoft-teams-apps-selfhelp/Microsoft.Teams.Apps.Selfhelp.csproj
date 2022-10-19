@@ -1,0 +1,255 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
+		<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+		<TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+		<IsPackable>false</IsPackable>
+		<SpaRoot>ClientApp\</SpaRoot>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
+	</PropertyGroup>
+
+	<Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+		<!-- Ensure Node.js is installed -->
+		<Exec Command="node --version" ContinueOnError="true">
+			<Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+		</Exec>
+		<Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+		<Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+		<Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+	</Target>
+
+	<Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+		<!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+		<Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+		<Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" />
+
+		<!-- Include the newly-built files in the publish output -->
+		<ItemGroup>
+			<DistFiles Include="$(SpaRoot)build\**" />
+			<ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+				<RelativePath>%(DistFiles.Identity)</RelativePath>
+				<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+				<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			</ResolvedFileToPublish>
+		</ItemGroup>
+	</Target>
+	<ItemGroup>
+		<None Remove="ClientApp\src\api\article-api.ts" />
+		<None Remove="ClientApp\src\api\bing-search-api.ts" />
+		<None Remove="ClientApp\src\api\feedback-api.ts" />
+		<None Remove="ClientApp\src\api\learning-path-api.ts" />
+		<None Remove="ClientApp\src\api\log-event-api.ts" />
+		<None Remove="ClientApp\src\api\share-article-api.ts" />
+		<None Remove="ClientApp\src\api\telemetry-api.ts" />
+		<None Remove="ClientApp\src\api\user-reaction-api.ts" />
+		<None Remove="ClientApp\src\components\add-new-article\add-new-article.tsx" />
+		<None Remove="ClientApp\src\components\add-new-article\delete-article-dialog.tsx" />
+		<None Remove="ClientApp\src\components\add-new-article\edit-article.tsx" />
+		<None Remove="ClientApp\src\components\models\carousel-card-item.ts" />
+		<None Remove="ClientApp\src\components\admin-dashboard\admin-dashboard.tsx" />
+		<None Remove="ClientApp\src\components\notification-preview\notification-preview.tsx" />
+		<None Remove="ClientApp\src\components\search-result\search-result.tsx" />
+		<None Remove="ClientApp\src\models\article.ts" />
+		<None Remove="ClientApp\src\models\complete-state.ts" />
+		<None Remove="ClientApp\src\models\feedback-excel.ts" />
+		<None Remove="ClientApp\src\models\feedback-helpful-status.ts" />
+		<None Remove="ClientApp\src\models\feedback-type.ts" />
+		<None Remove="ClientApp\src\models\feedback.ts" />
+		<None Remove="ClientApp\src\models\item-type.ts" />
+		<None Remove="ClientApp\src\models\learning-path.ts" />
+		<None Remove="ClientApp\src\models\reaction-state.ts" />
+		<None Remove="ClientApp\src\models\selection-type.ts" />
+		<None Remove="ClientApp\src\models\source-type.ts" />
+		<None Remove="ClientApp\src\models\telemetry-excel.ts" />
+		<None Remove="ClientApp\src\models\telemetry.ts" />
+		<None Remove="ClientApp\src\models\user-reaction.ts" />
+		<None Remove="ClientApp\src\components\user-feedback\user-feedback.tsx" />
+		<None Remove="ClientApp\src\components\view-content-share\view-content-share.tsx" />
+		<None Remove="ClientApp\src\components\view-image-content\view-image-content.tsx" />
+		<None Remove="ClientApp\src\components\view-video-content\view-video-content.tsx" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="HtmlAgilityPack" Version="1.11.43" />
+		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.20.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.AzureAD.UI" Version="6.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="6.0.4" />
+		<PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.4" />
+		<PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.15.2" />
+		<PackageReference Include="Microsoft.Graph.Core" Version="2.0.8" />
+		<PackageReference Include="Microsoft.Identity.Web" Version="1.24.1" />
+		<PackageReference Include="Microsoft.Identity.Web.MicrosoftGraph" Version="1.24.1" />
+		<PackageReference Include="Microsoft.Net.Http.Headers" Version="2.2.8" />
+		<PackageReference Include="Microsoft.OpenApi" Version="1.3.1" />
+		<PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.6.4">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.3.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.3.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Microsoft.Teams.Apps.Selfhelp.Shared\Microsoft.Teams.Apps.Selfhelp.Shared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<TypeScriptCompile Include="ClientApp\src\api\feedback-api.ts">
+			<SubType>Code</SubType>
+		</TypeScriptCompile>
+		<TypeScriptCompile Include="ClientApp\src\api\user-reaction-api.ts">
+			<SubType>Code</SubType>
+		</TypeScriptCompile>
+		<TypeScriptCompile Include="ClientApp\src\api\learning-path-api.ts">
+			<SubType>Code</SubType>
+		</TypeScriptCompile>
+		<TypeScriptCompile Include="ClientApp\src\api\article-api.ts" />
+		<TypeScriptCompile Include="ClientApp\src\components\models\carousel-card-item.ts" />
+		<TypeScriptCompile Include="ClientApp\src\components\user-dashboard\carousel-card.tsx" />
+		<TypeScriptCompile Include="ClientApp\src\components\user-dashboard\trending-topic-card.tsx" />
+		<TypeScriptCompile Include="ClientApp\src\components\user-dashboard\user-dashboard.tsx" />
+		<TypeScriptCompile Include="ClientApp\src\models\feedback-helpful-status.ts">
+			<SubType>Code</SubType>
+		</TypeScriptCompile>
+		<TypeScriptCompile Include="ClientApp\src\models\feedback.ts">
+			<SubType>Code</SubType>
+		</TypeScriptCompile>
+		<TypeScriptCompile Include="ClientApp\src\models\reaction-state.ts">
+			<SubType>Code</SubType>
+		</TypeScriptCompile>
+		<TypeScriptCompile Include="ClientApp\src\models\user-reaction.ts">
+			<SubType>Code</SubType>
+		</TypeScriptCompile>
+		<TypeScriptCompile Include="ClientApp\src\models\learning-path.ts">
+			<SubType>Code</SubType>
+		</TypeScriptCompile>
+		<TypeScriptCompile Include="ClientApp\src\models\item-type.ts" />
+		<TypeScriptCompile Include="ClientApp\src\models\article.ts" />
+		<TypeScriptCompile Include="ClientApp\src\models\selection-type.ts" />
+		<TypeScriptCompile Include="ClientApp\src\models\complete-state.ts">
+			<SubType>Code</SubType>
+		</TypeScriptCompile>
+		<TypeScriptCompile Include="ClientApp\src\models\feedback-type.ts">
+			<SubType>Code</SubType>
+		</TypeScriptCompile>
+		<TypeScriptCompile Include="ClientApp\src\models\source-type.ts" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="ClientApp\public\images\Application1.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\Building.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\Card1.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\Card2.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\Card3.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\Card4.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\Card5.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\Card6.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\Card7.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\Chat.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\Chat2.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\CREAM_MSFUI_001.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\CREAM_MSFUI_002.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\CREAM_MSFUI_003.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\Desk1.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\Desk2.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\Docs1.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\Docs2.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\Events.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\HomePage.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\images.jpg">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\List.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\Mobile1.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\Mobile2.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\Projects.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\Reactions.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\Rectangle 3468051.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\Tasks.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\TeamsOutlook.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\TeamsOutlook2.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="ClientApp\public\images\thank-you.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<TypeScriptCompile Include="ClientApp\src\components\user-feedback\user-feedback.tsx" />
+		<TypeScriptCompile Include="ClientApp\src\components\view-content-share\view-content-share.tsx" />
+		<TypeScriptCompile Include="ClientApp\src\components\view-image-content\view-image-content.tsx" />
+		<TypeScriptCompile Include="ClientApp\src\components\view-video-content\view-video-content.tsx" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<TypeScriptCompile Update="ClientApp\src\components\add-new-article\delete-article-dialog.tsx">
+			<SubType>Code</SubType>
+		</TypeScriptCompile>
+		<TypeScriptCompile Update="ClientApp\src\components\add-new-article\edit-article.tsx">
+			<SubType>Code</SubType>
+		</TypeScriptCompile>
+	</ItemGroup>
+</Project>

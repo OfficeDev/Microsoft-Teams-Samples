@@ -1,0 +1,35 @@
+﻿.heading{
+    color:Black;
+}
+.view-image{
+    height:100px;
+    width:200px;
+}
+.image-content {
+    word-break: keep-all;
+}
+.pill{
+    width:30px;
+}
+.image-icon{
+    height:16px;
+    width:16px;
+}
+.pill-right{
+    padding-bottom:3px;
+    margin-left: 4rem;
+    cursor:pointer;
+    .ui-box{
+        margin-right: "0.5rem !important";
+    }
+}
+a{
+    text-decoration:none;
+}
+.image-pill{
+    justify-content: center;
+}
+.pill-rightMobile{
+    padding-bottom:3px;
+    cursor:pointer;
+}
