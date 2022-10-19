@@ -19,19 +19,9 @@ Using this C# sample, a bot can archive chat messages of groupchat and send it t
 
 This feature shown in this sample is currently available in Public Developer Preview only.
 
-## Key features
-
-- Sending archive chat messages text file of a groupchat to user
+## Interaction with app
 
 ![GroupChatModule](FetchGroupChatMessages/Images/FetchGroupChatModule.gif)
-
-![setup bot](FetchGroupChatMessages/Images/setupbot.png)
-
-![Welcome](FetchGroupChatMessages/Images/welcome.png)
-
-![Bot command](FetchGroupChatMessages/Images/botCommandToGetChatMessages.png)
-
-![Bot reply](FetchGroupChatMessages/Images/replyFromBot.png)
 
 ## Prerequisites
 
@@ -59,17 +49,14 @@ This feature shown in this sample is currently available in Public Developer Pre
 # ngrok http -host-header=rewrite 3978
 ```
 
-## 4.Enter the following details to configure the admin and user consent prompts with values that are appropriate for the access_as_userscope.
+## 4.Enter the following details to configure the admin and user consent prompts with values that are appropriate for the access_as_user scope.
 
 1. Admin consent display name: Teams can access the user’s profile.
 2. Admin consent description: Teams can call the app’s web APIs as the current user.
 3. User consent display name: Teams can access your profile and make requests on your behalf.
 4. User consent description: Teams can call this app’s APIs with the same rights as you have.
 
-
-
 5.Added the WebApplication Info Resource and Application id uri in expose and API like: api://Ngrokbaseurl/App_id"
-
 
 6. Create a Bot Registration
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
@@ -147,12 +134,24 @@ This feature shown in this sample is currently available in Public Developer Pre
   - Select `FetchGroupChatMessages.csproj` file
   - Press `F5` to run the project
 
+
+## Running the Sample.
+
+- Sending archive chat messages text file of a groupchat to user
+
+![setup bot](FetchGroupChatMessages/Images/setupbot.png)
+
+![Welcome](FetchGroupChatMessages/Images/welcome.png)
+
+![Bot command](FetchGroupChatMessages/Images/botCommandToGetChatMessages.png)
+
+![Bot reply](FetchGroupChatMessages/Images/replyFromBot.png)
+
 ## Interacting with the bot in GroupChat
 
 Select a groupchat and add the bot to chat.
 
 Send `getchat` message to the bot, you will recieve a consent card by the bot in your personal scope.
-
 
 ## Deploy the bot to Azure
 
