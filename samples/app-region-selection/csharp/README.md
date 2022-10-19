@@ -19,7 +19,7 @@ Bot Framework v4 Region Selection sample.
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), for the region selection for the app's data center using Bot and Tab.
 
-- **Interaction with bot**
+- **Interaction with app**
 ![region-selection-bot ](RegionSectionApp/Images/region-selection.gif)
 
 ## Prerequisites
@@ -30,11 +30,13 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), f
   # determine dotnet version
   dotnet --version
   ```
-- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay)
+
+- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 ## Setup
 
-### 1. Setup for Bot SSO
+### 1. Setup for Bot
 
 - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)

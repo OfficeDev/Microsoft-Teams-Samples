@@ -18,89 +18,19 @@ urlFragment: officedev-microsoft-teams-samples-app-complete-auth-nodejs
 
 Using this C# sample, you can check authenticate in bot,tab and messaging extention with sso, facebook and using user name and password.
 
-## Key features
-
-Bot Authentication
-
-![Login option card](Images/BotLoginOptionCard.png)
-
-  - SSO
-  
-  ![SSO login](Images/BotSsoCard.png)
-  
-  - Using user name and password
-  
-  ![using credentials](Images/BotUsingCredentials.png)
-  
-  ![using credentials details](Images/BotUsingCredentialsDetails.png)
-  
-Tab Authentication
-
-![Tab](Images/Tab.png)
-
-![Tab mobile view](Images/TabMobileView.png)
-
-  - SSO
-  
-  ![Tab SSO login](Images/TabSsoLogin.png)
-  
-  - Authentication using user name and password
-  
-  ![Tab using credentials](Images/TabUsingCredentials.png)
-
-Messaging Extention Authentication
-
-- ME Action
-
-  ![ME action](Images/MEActions.png)
-
-  - SSO
-  
-  ![ME SSO login](Images/MESsoCard.png)
-  
-  - Authentication using user name and password
-  
-  ![ME using credentials](Images/MEUsingCredentials.png)
-  
-  ![ME using credentials details](Images/MEUsingCredentialsDetails.png)
-  
-- ME Search
-
-  ![ME search](Images/MESearch.png)
-  
-  - SSO
-  
-  ![ME search SSO login](Images/MESearchSSOCard.png)
-  
-  - Authentication using user name and password
-  
-   ![ME search using credentials details](Images/MESearchUsingCredentialsDetailsCard.png)
-   
-- ME Link unfurling
-
-  ![ME Link unfurling](Images/MELinkUnfurlingLoginLink.png)
-  
-  - SSO
-  
-  ![ME Link unfurling SSO login](Images/MELinkUnfurlSSOCard.png)
-  
-  - Authentication using user name and password
-  
-   ![ME Link unfurling using credentials details](Images/MELinkUnfurlUsingCredentialsDetails.png)
+- **Interaction with app**
+![app-complete-auth-sample ](Images/app-complete-auth.gif)
 
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
--  [NodeJS](https://nodejs.org/en/)
--  [ngrok](https://ngrok.com/) or equivalent tunneling solution
--  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+- [NodeJS](https://nodejs.org/en/)
+- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-## To try this sample
+## Setup
 
-> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
-> the Teams service needs to call into the bot.
-
-### Register your Teams Auth SSO with Azure AD
+### 1. Setup for App Registration
 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
@@ -130,54 +60,32 @@ Messaging Extention Authentication
 -   Select Add a permission
 -   Select Microsoft Graph -\> Delegated permissions.
     - `User.Read` (enabled by default)
+    - `ChannelMessage.Send`
+    - `ChatMessage.Send`
+    - `Chat.ReadWrite`
+    - `TeamsActivity.Send`    
+    - `TeamsAppInstallation.ReadForUser`.
+
+-  You need to add `TeamsActivity.Send` and `Directory.Read.All` as Application level permissions
+
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 13. Navigate to **Authentication**
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
-- Set a redirect URI:
+    Set a redirect URI:
     * Select **Add a platform**.
     * Select **web**.
     * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-end`. This will be the page where a successful implicit grant flow will redirect the user.
-- Set another redirect URI:
-    * Select **Add a platform**.
-    * Select **web**.
-    * Enter the **redirect URI** `https://token.botframework.com/.auth/web/redirect`. This will be use for bot authenticaiton. 
-- Enable implicit grant by checking the following boxes:  
-    ✔ ID Token  
-    ✔ Access Token  
-14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
+      
+14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env file.
 
-15. Create a Bot Registration
-   In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+### 2. Setup NGROK
+1) Run ngrok - point to port 3978
 
-   - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-   - Select Configuration section.
-   - Under Configuration, select add OAuth Connection Setting.
-   - Complete the form as follows:
+```bash
+# ngrok http -host-header=rewrite 3978
+```
 
-    a. **Name:** Enter a name for the connection. You'll use this name in your bot in the .env file.
-    b. **Client id:** Enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
-    c. **Client secret:** Enter the secret that you recorded for your Azure identity provider app in the steps above.
-    d. Provide **Scopes** like "User.Read openid"
-  
-
-16. To test facebook auth flow [create a facebookapp](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-facebook?view=azure-bot-service-4.0) and get client id and secret for facebook app.
-    Now go to your bot channel registartion -> configuration -> Add OAuth connection string
-   - Provide connection Name : for eg `facebookconnection`
-   - Select service provider ad `facebook`
-   - Add clientid and secret of your facebook app that was created using Step 16.
-
-17. After creating the app and getting client id and secret, make sure you add facebook login service under products section.
-     ![FacebookProduct](Images/FacebookProduct.png)
-
-18. Go to facebook settings and under valid domains, make sure to add the following url's
-     - `https://token.botframework.com/.auth/web/redirect`
-     - `https://<<base url>>`
-     - `https://<<base url>>/fb-auth`
-     
-    ![validDomains](Images/ValidDomains.png)
-
-
-### Run your bot sample
+### 3. Setup for code
 1) Clone the repository
 
     ```bash
@@ -193,32 +101,112 @@ Messaging Extention Authentication
     ```bash
     npm install
     ```
-4) Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http -host-header=rewrite 3978
-    ```
-5)  Modify the `.env` file in your project folder (or in Visual Studio Code) and fill in below details:
-   - `{{Microsoft-App-id}}` - Generated from Step 3 (Application (client) ID)is the application app id
-   - `{{TenantId}}` - Generated from Step 3(Directory (tenant) ID) is the tenant id
+4)  Modify the `.env` file in your project folder (or in Visual Studio Code) and fill in below details:
+   - `{{MicrosoftAppId}}` - Generated from Step 1 (Application (client) ID)is the application app id
+   - `{{TenantId}}` - Generated from Step 1(Directory (tenant) ID) is the tenant id
    - `{{MicrosoftAppPassword}}` - Generated from Step 14, also referred to as Client secret
    - `{{ApplicationBaseUrll}}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
    - `{{ Connection Name }}` - Generated from step 15.
    - `{{FacebookAppId}} and {{FacebookAppPassword}} and {{ FBConnectionName}}`- Generated from step 16.
+   - `{{AppType}}` - The value for app type will me `MultiTenant`.
 
-6) Run your app
+5) Run your app
 
     ```bash
     npm start
     ```
-- **Manually update the manifest.json**
-    Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
-   - `{{Microsoft-App-Id}}` with Application id generated from Step 3
-   - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
 
-    > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
+### 4. Setup Manifest for Teams
+
+1. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
+   - `{{Microsoft-App-Id}}` with Application id generated from Step 3
+   - `{Base_URL}` - Your application's base url. E.g. for https://12345.ngrok.io the base url will be 12345.ngrok.io if you are using ngrok.
+
+2. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
+
+3. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams and then go to side panel, select Apps
+   - Choose Upload a custom App
+   - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 - Note: To test facebook auth flow please setup the sample locally as due to limitations from facebook you cannot test the facebook auth flow in the deployed version of app.
+
+## Running the sample
+
+Bot Authentication
+
+Install the bot in personal scope. A welcome card will be sent.
+![Welcome card](Images/welcome-message.png)
+
+Type `login`.  A login card will be sent to user.
+![Login card](Images/login-card.png)
+
+- **SSO**
+  
+Select AAD SSO login option. A consent popup will be sent. Click continue.
+![SSO login](Images/bot-consent.png)
+
+After the consent is granted, card will be sent containing user's profile details.
+![SSO profile](Images/sso-bot.png)
+
+- **Authentication using user name and password**
+  
+![using credentials](Images/bot-user.png)
+  
+**Tab Authentication**
+
+![Tab](Images/tab-page.png)
+
+- **SSO**
+  
+![Tab SSO login](Images/tab-sso.png)
+  
+- **Authentication using user name and password**
+  
+![Tab using credentials](Images/tab-user.png)
+
+Messaging Extention Authentication
+
+- **ME Action**
+
+![ME action](Images/me-action-config.png)
+
+- SSO
+  
+![ME SSO login](Images/me-action-sso.png)
+  
+- Authentication using user name and password
+  
+![ME using credentials](Images/me-action-user-config.png)
+  
+![ME using credentials details](Images/me-action-user.png)
+  
+- ME Search
+
+![ME search](Images/me-auth-config.png)
+![ME search](Images/me-tab.png)
+  
+- SSO
+  
+![ME search SSO login](Images/me-sso.png)
+  
+- Authentication using user name and password
+  
+![ME search using credentials details](Images/me-user.png)
+   
+- ME Link unfurling
+
+![ME Link unfurling](Images/link-unfurl-config.png)
+  
+- SSO
+  
+![ME Link unfurling SSO login](Images/sso-unfurl.png)
+  
+- Authentication using user name and password
+  
+![ME Link unfurling using credentials details](Images/user-unfurl.png)
 
 ## Deploy the bot to Azure
 
@@ -229,4 +217,3 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Authentication basics](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/authentication/authentication)
-
