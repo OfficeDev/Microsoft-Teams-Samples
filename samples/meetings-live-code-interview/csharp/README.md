@@ -18,9 +18,26 @@ urlFragment: officedev-microsoft-teams-samples-meetings-live-code-interview-csha
 This sample demos a live coding in a Teams meeting stage using [Live Share SDK](https://aka.ms/livesharedocs). In side panel there is a list of question in specific coding language and on share click specific question with language code editor will be shared with other participant in meeting.
 Now any participant in meeting can write code for the question and same will be updated to all the other participants in meeting.
 
-![side panel ](MeetingLiveCoding/Images/sidePanelView.png)
+## Interact with app.
 
-![shared content](MeetingLiveCoding/Images/stageView.png)
+![side panel ](MeetingLiveCoding/Images/MeetinLiveCodeInterview.gif)
+
+## Prerequisites
+
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+
+  ```bash
+  # determine dotnet version
+  dotnet --version
+  ```
+
+- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+  ```bash
+  # run ngrok locally
+  ngrok http -host-header=localhost 3001
+  ```
+
+- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 ## Workflow
 
@@ -46,27 +63,10 @@ sequenceDiagram
 
     Teams Client->>+Code Editor Stage: Tells the app which coding question to open
 
-    Code Editor Stage-->>-Live Coding App: Shares the question to share to stage in the meeting
+    Code Editor Stage-->>-Live Coding App: Shares the question to share to stage in the meeting```
 
-```
-## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
-
-  ```bash
-  # determine dotnet version
-  dotnet --version
-  ```
-
-- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
-  ```bash
-  # run ngrok locally
-  ngrok http -host-header=localhost 3001
-  ```
-
-- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
-
-## To try this sample
+## Setup
 
 1) Clone the repository
    ```bash
@@ -118,6 +118,19 @@ sequenceDiagram
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
+
+**Note** Run the app on desktop client with developer preview on.   
+
+## Running the sample
+
+**Side panel view:**
+![side panel ](MeetingLiveCoding/Images/sidePanelView.png)
+
+**Question view on click of share:**
+![shared content](MeetingLiveCoding/Images/stageView.png)
+
+**Question view for other participant in meeting:**
+![shared content second user](MeetingLiveCoding/Images/stageViewseconduser.png)
 
 ## Further reading
 
