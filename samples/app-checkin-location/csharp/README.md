@@ -42,6 +42,7 @@ This sample shows feature where user can checkin with current location and view 
 - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+
     > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
 ### 2. Setup NGROK

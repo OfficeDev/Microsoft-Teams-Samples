@@ -98,7 +98,7 @@ The user can Generate a new QR code (contains app id information) and then use I
   - `{{Microsoft-App-Id}}` with Application id generated from Step 1
   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok.io`
 
-6) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 9.
+6) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 7.
 
 7) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
@@ -127,7 +127,7 @@ The user can Generate a new QR code (contains app id information) and then use I
 
 ![CardWithButtonsMobile](QRAppInstallation/Images/CardWithButtonsMobile.png)
 
-**Permission App Also add following permission:**
+**Permission UI:**
 
 ![Permission](QRAppInstallation/Images/Permission.png)
 
