@@ -94,7 +94,7 @@ Using this C# sample, you can check authenticate in bot,tab and messaging extent
     f. Provide **Scopes** like "User.Read openid"
   
 
-16. To test facebook auth flow [create a facebookapp](AppCompleteAuth/FacebookDocumentation/README.md) and get client id and secret for facebook app.
+16. To test facebook auth flow [create a facebookapp](FacebookDocumentation/README.md) and get client id and secret for facebook app.
     Now go to your bot channel registartion -> configuration -> Add OAuth connection string
    - Provide connection Name : for eg `facebookconnection`. You'll use this name in your bot in the appsettings.json file.
    - Select service provider ad `facebook`
