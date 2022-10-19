@@ -9,7 +9,7 @@ languages:
 - reactjs
 extensions:
  contentType: samples
- createdDate: "08-08-2022 12:00:01"
+ createdDate: "08/08/2022 12:00:01 PM"
 urlFragment: officedev-microsoft-teams-samples-meeting-audio-state-nodejs
 ---
 

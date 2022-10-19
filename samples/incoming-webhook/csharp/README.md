@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
   contentType: samples
-  createdDate: "04/1/2022 2:36:57 PM"
+  createdDate: "04/01/2022 02:36:57 PM"
 urlFragment: officedev-microsoft-teams-samples-incoming-webhook-csharp
 ---
 

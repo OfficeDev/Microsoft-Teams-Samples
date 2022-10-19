@@ -1,0 +1,71 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.14",
+  "version": "1.0.0",
+  "id": "{Bot Id}",
+  "packageName": "com.microsoft.teams.extension",
+  "developer": {
+    "name": "{{Company_Name}}",
+    "websiteUrl": "{websiteUrl}",
+    "privacyUrl": "{websiteUrl}",
+    "termsOfUseUrl": "{websiteUrl}"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Resources Hub",
+    "full": "Microsoft Teams Help and Learning"
+  },
+  "description": {
+    "short": "Get help using Teams with FAQs, troubleshooting, and video tutorials.",
+    "full": "All the help you need to use Teams, all in one place. Get up and running with just the basics, dive into popular topics, master features designed for your work style or industry, get answers to frequently asked questions, and see what’s new."
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "index1",
+      "name": "Home",
+      "contentUrl": "{App base URL}/user-dashboard",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "entityId": "conversations",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "entityId": "about",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "{Bot ID}",
+      "scopes": [
+        "personal",
+        "team"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": true
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{app domain}",
+    "token.botframework.com"
+  ],
+  "webApplicationInfo": {
+    "id": "{Bot Id}",
+    "resource": "api://{app domain}/{Bot Id}"
+  }
+}

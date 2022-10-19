@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "27-07-2021 16:32:33"
+ createdDate: "07/27/2021 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-tab-device-permissions-nodejs
 ---
 
@@ -60,6 +60,13 @@ This update will be generally available (GA) by February 01, 2022
     ```bash
     npm install
     ```
+
+    If you face any dependency error while installing node modules, try using below command
+
+    ```bash
+    npm install --legacy-peer-deps
+    ```
+
  4) Run the application in your local terminal (or Visual Studio Code terminal) using following command 
     
      ```bash

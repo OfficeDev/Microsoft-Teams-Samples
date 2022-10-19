@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "07-07-2021 13:38:25"
+ createdDate: "07/07/2021 01:38:25 PM"
 urlFragment: officedev-microsoft-teams-samples-app-sso-nodejs
 ---
 # App SSO Node

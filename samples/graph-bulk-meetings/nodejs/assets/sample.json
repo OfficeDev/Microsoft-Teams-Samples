@@ -4,7 +4,7 @@
     "source": "officeDev",
     "title": "This is an sample application which shows how to create teams meetings in bulk.",
     "shortDescription": "This is a sample application which demonstrates how to create meetings in bulk using file upload method",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bulk-meeting-nodejs/nodejs",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/edit/main/samples/graph-bulk-meetings/nodejs",
     "longDescription": [
       "This is an sample application which shows how to create teams meetings in bulk."
     ],
@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bulk-meeting-nodejs/nodejs/Images/BulkMeeting.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-bulk-meetings/nodejs/Images/BulkMeeting.gif",
         "alt": "This is an sample application which shows how to create teams meetings in bulk."
       }
     ],

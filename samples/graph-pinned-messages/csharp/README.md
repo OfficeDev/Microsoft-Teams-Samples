@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "02-08-2022 17:12:15"
+ createdDate: "02/08/2022 05:12:15 PM"
 urlFragment: officedev-microsoft-teams-samples-graph-pinned-messages-csharp
 ---
 

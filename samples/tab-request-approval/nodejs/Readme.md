@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "26-11-2021 14:00:00"
+ createdDate: "11/26/2021 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-tab-request-approval-nodejs
 ---
 

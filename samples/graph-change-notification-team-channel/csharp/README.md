@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions: 
  contentType: samples
- createdDate: "25-08-2022 04:30:15"
+ createdDate: "08/25/2022 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-graph-change-notification-team-channel
 
 ---

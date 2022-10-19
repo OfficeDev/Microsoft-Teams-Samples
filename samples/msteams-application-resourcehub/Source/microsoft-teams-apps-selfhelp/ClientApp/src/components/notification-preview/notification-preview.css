@@ -1,0 +1,38 @@
+﻿.preview-box {
+    height: 320px;
+    border: 1px solid black;
+    padding:10px;
+}
+
+.title-box{
+    padding-top:1rem;
+}
+
+.preview-box-internal {
+    height: 298px;
+    border: 1px solid black;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.preview-box-internal-text {
+    padding-left: 1rem;
+    padding-top:1rem;
+}
+
+.send-notification-image {
+    height: 190px;
+    width: 190px;
+    padding-top:10rem;
+}
+
+.close-button-footer {
+    position: absolute;
+    width: 91%;
+    bottom: 4rem;
+    margin-top: 1rem;
+    font-family: 'Segoe UI';
+    line-height: 1.9rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+}

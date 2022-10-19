@@ -1,5 +1,6 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
+﻿// <copyright file="SimpleGraphClient.cs" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyright>
 
 using System;
 using System.Collections.Generic;
@@ -105,7 +106,7 @@ namespace Microsoft.BotBuilderSamples
             else
             {
                 return "";
-            }            
+            }
         }
 
         // Get an Authenticated Microsoft Graph client using the token issued to the user.
@@ -123,6 +124,7 @@ namespace Microsoft.BotBuilderSamples
 
                         return Task.CompletedTask;
                     }));
+
             return graphClient;
         }
     }

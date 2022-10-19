@@ -11,7 +11,7 @@ description: "A task module allows you to create modal popup experiences in your
 urlFragment: teams-module-node
 extensions:
   contentType: samples
-  createdDate: 9/17/2018 6:53:22 PM
+  createdDate: "09/17/2018 06:53:22 PM"
 urlFragment: officedev-microsoft-teams-samples-app-task-module-nodejs
 ---
 
