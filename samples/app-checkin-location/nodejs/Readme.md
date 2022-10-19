@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "11-11-2021 23:30:17"
+ createdDate: "11/11/2021 23:30:17 PM"
 urlFragment: officedev-microsoft-teams-samples-app-checkin-location-nodejs
 ---
 # Get Checkin info of user
@@ -18,7 +18,7 @@ This sample shows feature where user can checkin with current location and view 
 
 `Currently, Microsoft Teams support for get geolocation capability is only available for mobile clients`
 
-## Interaction with bot
+- Interaction with app
 
 ![App checkin LocationGif](Images/AppcheckinLocationGif.gif)
 
@@ -36,12 +36,18 @@ This sample shows feature where user can checkin with current location and view 
 > the Teams service needs to call into the bot.
 
 ### 1. Setup for Bot
-In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 **NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
-### 2. Run your bot sample
+### 2. Setup NGROK
+1) Run ngrok - point to port 3978
+
+    ```bash
+    ngrok http -host-header=rewrite 3978
+    ```
+### 3. Setup for code
 1) Clone the repository
 
     ```bash
@@ -56,20 +62,18 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     npm install
     ```
 
-4) Run ngrok - point to port 3978
+4) Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`, `BaseUrl` with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
-    ```bash
-    ngrok http -host-header=rewrite 3978
-    ```
-5) Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`, `BaseUrl` with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
-
-6) Run your app
+5) Run your app
 
     ```bash
     npm start
     ```
-- **Manually update the manifest.json**
-    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+
+### 4. Setup Manifest for Teams
+
+- **This step is specific to Teams.**
+    - Edit the `manifest.json` contained in the `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
@@ -106,7 +110,3 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Portal](https://portal.azure.com)
 - [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
 - [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
-
-
-
-
