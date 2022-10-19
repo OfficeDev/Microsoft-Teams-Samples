@@ -109,6 +109,7 @@ This sample shows feature where user can checkin with current location and view 
 ![Geo Location](AppCheckinLocation/Images/GeoLocation.png)
 
 **User details:**
+
 ![User details card](AppCheckinLocation/Images/UserDetailsCard.png)
 
 **Viewcheckin Details of user:**

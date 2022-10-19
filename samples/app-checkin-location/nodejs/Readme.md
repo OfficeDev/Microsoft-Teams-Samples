@@ -18,7 +18,7 @@ This sample shows feature where user can checkin with current location and view 
 
 `Currently, Microsoft Teams support for get geolocation capability is only available for mobile clients`
 
-- Interaction with app
+## Interaction with app
 
 ![App checkin LocationGif](Images/AppcheckinLocationGif.gif)
 
