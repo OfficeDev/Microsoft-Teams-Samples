@@ -45,7 +45,7 @@ This sample shows feature where user can checkin with current location and view 
     > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
 ### 2. Setup NGROK
-1) Run ngrok - point to port 3978
+- Run ngrok - point to port 3978
 
 ```bash
 # ngrok http -host-header=rewrite 3978
