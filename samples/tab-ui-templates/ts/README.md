@@ -11,7 +11,7 @@ languages:
 description: "This sample demonstrates @fluentui/react-teams library in Microsoft Teams apps."
 extensions:
   contentType: samples
-  createdDate: "12/8/2020 5:06:47 PM"
+  createdDate: "12/08/2020 05:06:47 PM"
 urlFragment: officedev-microsoft-teams-samples-tab-ui-templates-ts
 ---
 

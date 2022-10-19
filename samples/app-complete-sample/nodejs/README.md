@@ -11,7 +11,7 @@ extensions:
   contentType: samples
   technologies:
   - Tabs
-  createdDate: 5/8/2017 9:41:53 AM
+  createdDate: "05/08/2017 09:41:53 AM"
 urlFragment: officedev-microsoft-teams-samples-app-complete-sample-nodejs
 ---
 

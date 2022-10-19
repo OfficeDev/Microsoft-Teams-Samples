@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "29-04-2022 00:02:15"
+ createdDate: "04/29/2022 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-bot-release-management-csharp
 ---
 

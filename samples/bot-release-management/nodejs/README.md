@@ -10,7 +10,7 @@ languages:
 - javascript
 extensions:
  contentType: samples
- createdDate: "28-04-2022 00:15:15"
+ createdDate: "04/28/2022 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-bot-release-management-nodejs
 ---
 

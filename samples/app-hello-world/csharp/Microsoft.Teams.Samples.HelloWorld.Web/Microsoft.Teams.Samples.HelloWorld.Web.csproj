@@ -25,7 +25,8 @@
   </ItemGroup>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-      <Exec Command="powershell.exe Compress-Archive -Path \&quot;$(ProjectDir)Manifest\*\&quot; -DestinationPath \&quot;$(TargetDir)helloworldapp.zip\&quot; -Force" />
+      <Exec Condition="'$(OS)' == 'Windows_NT'" Command="powershell.exe Compress-Archive -Path \&quot;$(ProjectDir)Manifest\*\&quot; -DestinationPath \&quot;$(TargetDir)helloworldapp.zip\&quot; -Force" />
+      <Exec Condition="'$(OS)' == 'Unix'" Command="pwsh -Command Compress-Archive -Path &quot;$(ProjectDir)Manifest/*&quot; -DestinationPath &quot;$(TargetDir)helloworldapp.zip&quot; -Force" />
     </Target>
 
 </Project>

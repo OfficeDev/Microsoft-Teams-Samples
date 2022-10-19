@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "24-09-2022 00:16:45"
+ createdDate: "09/24/2022 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-graph-meeting-notification-nodejs
 ---
 

@@ -89,14 +89,14 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 |    | Sample Name | Description | .NET Core | JavaScript | Python |
 |:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|:-------------|
-|1| Teams Conversation Bot quick-start | Messaging and conversation event handling hello world. | | [View][bot-conversation-quickstart#js]|| 
+|1| Teams Conversation Bot quick-start | Messaging and conversation event handling hello world. | | [View][bot-conversation-quickstart#js]||
 |2| Teams Conversation Bot SSO quick-start | Messaging and conversation event handling hello world with SSO. | [View][bot-conversation-sso-quickstart#csharp_dotnetcore] | [View][bot-conversation-sso-quickstart#js]|| 
-|3| Teams Conversation Bot | Messaging and conversation event handling. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/57.teams-conversation-bot)| [View][bot-conversation#js]| [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/python/57.teams-conversation-bot) | 
+|3| Teams Conversation Bot | Messaging and conversation event handling. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/57.teams-conversation-bot)| [View][bot-conversation#js]| [View][bot-conversation#python] | 
 |4| Message Reactions | Demonstrates how to create a simple bot that responds to Message Reactions | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/25.message-reaction)  |  [View][bot-message-reaction#js] |
-|5| Authentication with OAuthPrompt| Authentication and basic messaging in Bot Framework v4. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/46.teams-auth)| [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/javascript_nodejs/46.teams-auth)| [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/python/46.teams-auth) | 
-|6| Teams File Upload | Exchanging files with a bot in a one-to-one conversation. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/56.teams-file-upload) | [View][bot-file-upload#js] | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/python/56.teams-file-upload) |
-|7| Task Module | Demonstrating how to retrieve a Task Module and values from cards in it, for a Messaging Extension. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/54.teams-task-module) | [View][bot-task-module#js] | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/python/54.teams-task-module) |
-|8| Start new thread in a channel | Demonstrating how to create a new thread in a channel. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/58.teams-start-new-thread-in-channel) | [View][bot-initiate-thread-in-channel#js] | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/python/58.teams-start-thread-in-channel) |
+|5| Authentication with OAuthPrompt| Authentication and basic messaging in Bot Framework v4. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/46.teams-auth)| [View][bot-conversation-sso-quickstart#js] | [View][bot-teams-authentication#python] | 
+|6| Teams File Upload | Exchanging files with a bot in a one-to-one conversation. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/56.teams-file-upload) | [View][bot-file-upload#js] | [View][bot-file-upload#python] |
+|7| Task Module | Demonstrating how to retrieve a Task Module and values from cards in it, for a Messaging Extension. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/54.teams-task-module) | [View][bot-task-module#js] | [View][bot-task-module#python] |
+|8| Start new thread in a channel | Demonstrating how to create a new thread in a channel. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/58.teams-start-new-thread-in-channel) | [View][bot-initiate-thread-in-channel#js] | [View][bot-initiate-thread-in-channel#python] |
 |9| Universal bots  | Teams catering bot demonstrating how to use Universal bots in Teams | [View](samples/bot-teams-catering/csharp) |  | |
 |10| Sequential workflow adaptive cards | Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot. | [View][sequential#workflow#csharp] | [View][sequential#workflow#js]
 |11| Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. | [View][messageswithrsc#csharp] |[View][messageswithrsc#js]
@@ -121,13 +121,13 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |    | Sample Name | Description | .NET Core | JavaScript | Python|
 |:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|:-------------|
 |1|Messaging extensions - search quick-start | Hello world Messaging Extension that accepts search requests and returns results. | | [View][msgext-search-quickstart#js] | |
-|2|Messaging extensions - search | Messaging Extension that accepts search requests and returns results. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/50.teams-messaging-extensions-search) | [View][msgext-search#js] | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/python/50.teams-messaging-extension-search) |
+|2|Messaging extensions - search | Messaging Extension that accepts search requests and returns results. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/50.teams-messaging-extensions-search) | [View][msgext-search#js] | [View][msgext-search#python] |
 |3|Messaging extensions - action quick-start | Hello world Messaging Extension that accepts parameters and returns a card. Also, how to receive a forwarded message as a parameter in a Messaging Extension. | | [View][msgext-action-quickstart#js] | |
-|4|Messaging extensions - action | Messaging Extension that accepts parameters and returns a card. Also, how to receive a forwarded message as a parameter in a Messaging Extension. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/51.teams-messaging-extensions-action) | [View][msgext-action#js] | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/python/51.teams-messaging-extensions-action) |
+|4|Messaging extensions - action | Messaging Extension that accepts parameters and returns a card. Also, how to receive a forwarded message as a parameter in a Messaging Extension. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/51.teams-messaging-extensions-action) | [View][msgext-action#js] | [View][msgext-action#python] |
 |5|Messaging extensions - auth and config | Messaging Extension that has a configuration page, accepts search requests and returns results after the user has signed in. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/52.teams-messaging-extensions-search-auth-config) | [View][msgext-search-sso-config#js] |
 |6|Messaging extensions - auth and config | Messaging Extension that has a configuration page, accepts search requests and returns results with SSO. |     | [View][msgext-search-sso-config#js] |
-|7|Messaging extensions - action preview | Demonstrates how to create a Preview and Edit flow for a Messaging Extension. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/53.teams-messaging-extensions-action-preview) | [View][msgext-action-preview#js] | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/python/53.teams-messaging-extensions-action-preview) |
-|8|Link unfurling | Messaging Extension that performs link unfurling. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/55.teams-link-unfurling) | [View][msgext-link-unfurling#js] | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/python/55.teams-link-unfurling) |
+|7|Messaging extensions - action preview | Demonstrates how to create a Preview and Edit flow for a Messaging Extension. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/53.teams-messaging-extensions-action-preview) | [View][msgext-action-preview#js] | [View][msgext-action-preview#python] |
+|8|Link unfurling | Messaging Extension that performs link unfurling. | [View](https://github.com/microsoft/BotBuilder-Samples/tree/main/samples/csharp_dotnetcore/55.teams-link-unfurling) | [View][msgext-link-unfurling#js] | [View][msgext-link-unfurling#python] |
 
 #### Additional samples
 
@@ -161,6 +161,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |9|Graph Pinned Message  | This is a sample application which demonstrates how to pin messages in chat using Graph api. | [View][graph-pinned-message#cs]|[View][graph-pinned-message#js]|
 |10|Graph Bulk Meetings  | This is an sample application which shows how to create Teams meetings in bulk using Graph api. | [View][graph-bulk-meetings#cs]|[View][graph-bulk-meetings#js]|
 |11|Graph Meeting Notification  | This is a sample application which demonstrates the use of online meeting subscription and sends you the notifications in chat using bot. | [View][graph-meeting-notification#cs]|[View][graph-meeting-notification#js]|
+|12|Change Notifications Team/Channel  | This sample application which demonstrates use of Team/Channel subscription that will post notifications when user create/edit/delete team/channel using Graph api. | [View][change-notifications-team/channel#cs]|[View][change-notifications-team/channel#js]|
 
 
 
@@ -212,6 +213,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |    | App Name       | Description                                                                      | Code   |
 |:--:|:------------------|:---------------------------------------------------------------------------------------------------|:--------|
 |1|QBot          | QBot is a solution designed for classroom teaching scenarios which allows teachers, tutors, and students to intelligently answer each other's questions within the Microsoft Teams collaboration platform. |[View][msteams-app-qbot]
+|2|Resource Hub          | Resource Hub is a solution designed for all the help you need to use Teams, all in one place. |[View][msteams-app-resource-hub]
+
 
 [app-hello-world#cs]:samples/app-hello-world/csharp
 [app-hello-world#ts]:samples/app-hello-world/nodejs
@@ -372,6 +375,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [graph-pinned-message#js]:samples/graph-pinned-messages/nodejs
 [graph-bulk-meetings#cs]:samples/graph-bulk-meetings/csharp
 [graph-bulk-meetings#js]:samples/graph-bulk-meetings/nodejs
+[change-notifications-team/channel#cs]:samples/graph-change-notification-team-channel/csharp
+[change-notifications-team/channel#js]:samples/graph-change-notification-team-channel-nodejs/nodejs
 [app-identity-link-with-sso#nodejs]:samples/app-identity-link-with-sso/nodejs
 [tab-staggered-permission#nodejs]:samples/tab-staggered-permission/nodejs
 [botframework]:https://github.com/microsoft/BotBuilder-Samples#teams-samples
@@ -380,6 +385,19 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-live-caption#nodejs]:samples/meetings-live-caption/nodejs
 
 [msteams-app-qbot]:samples/msteams-application-qbot/
+[msteams-app-resource-hub]:samples/msteams-application-resourcehub/
+
+[bot-conversation#python]:samples/bot-conversation/python
+[bot-file-upload#python]:samples/bot-file-upload/python
+[bot-initiate-thread-in-channel#python]:samples/bot-initiate-thread-in-channel/python
+[bot-message-reaction#python]:samples/bot-message-reaction/python
+[bot-task-module#python]:samples/bot-task-module/python
+[bot-teams-authentication#python]:samples/bot-teams-authentication/python
+[msgext-action-preview#python]:samples/msgext-action-preview/python
+[msgext-action#python]:samples/msgext-action/python
+[msgext-link-unfurling#python]:samples/msgext-link-unfurling/python
+[msgext-search-auth-config#python]:samples/msgext-search-auth-config/python
+[msgext-search#python]:samples/msgext-search/python
 
 [bot-conversation#js]:samples/bot-conversation/nodejs
 [bot-file-upload#js]:samples/bot-file-upload/nodejs
@@ -390,6 +408,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [msgext-action-preview#js]:samples/msgext-action-preview/nodejs
 [msgext-action#js]:samples/msgext-action/nodejs
 [msgext-link-unfurling#js]:samples/msgext-link-unfurling/nodejs
+[bot-conversation-sso-quickstart#js]:samples/bot-conversation-sso-quickstart/js
 
 ## Submitting issues
 

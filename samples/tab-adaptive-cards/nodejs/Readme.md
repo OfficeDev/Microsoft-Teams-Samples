@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "02-09-2021 19:54:22"
+ createdDate: "02/09/2021 07:54:22 PM"
 urlFragment: officedev-microsoft-teams-samples-tab-adaptive-cards-nodejs
 ---
 
