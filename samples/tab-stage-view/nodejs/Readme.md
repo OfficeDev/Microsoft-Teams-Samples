@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "06-10-2021 01:48:56"
+ createdDate: "10/06/2021 01:48:56 AM"
 urlFragment: officedev-microsoft-teams-samples-tab-stage-view-nodejs
 ---
 
@@ -18,7 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-stage-view-nodejs
 This App talks about the Teams tab in stage view with Nodejs.
 For reference please check [Tabs link unfurling and Stage View](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling)
 
-## Interaction with bot
+## Interaction with app
 
 ![Tab Stage ViewGif](Images/TabStageViewGif.gif)
 
@@ -36,49 +36,54 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
 3. To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
 Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
-> NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
-
 ## Setup
 
-- Register Azure AD applications
-    -   Register your bot using bot channel registration in Azure AD portal, following the instructions [here](Wiki/azure-bot-channels-registration.md).
-    
-- Clone the repository
+> NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
 
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
+### 1. Setup for Bot
+    - Register Azure AD application
+    - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+    - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+   
+    > NOTE: When you create your app registration in Azure portal, you will create an App ID and App password - make sure you keep these for later.
 
-- In a console, navigate to `samples/tab-stage-view/nodejs`
-
-    ```bash
-    cd samples/tab-stage-view/nodejs
-    ```
-
+### 2. Setup NGROK
 - Run ngrok - point to port `3978`
 
     ```bash
     ngrok http -host-header=localhost 3978
     ```
 
+### 3. Setup for code    
+- Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+- In a console, navigate to `samples/tab-stage-view/nodejs` folder
+
+- Install modules
+
+    ```bash
+    npm install
+    ```
 
 - Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the Bot Framework registration. 
 Also update `BaseUrl` according to your code runtime environment.
 > NOTE: the App Password is referred to as the `client secret` in the azure portal and you can always create a new client secret anytime.
 
-- Install modules & Run the `NodeJS` Server 
-    - Server will run on PORT:  `3978`
-    - Open a terminal and navigate to project root directory
-    
-    ```bash
-    npm run server
-    ```
-    
-    > **This command is equivalent to:**
-    _npm install  > npm start_
+- Run your bot at the command line:
 
-- __*This step is specific to Teams.*__
-    **Edit** the `manifest.json` in the `appPackage` folder and replace the following details:
+    ```bash
+    npm start
+    ```
+
+### 4. Setup Manifest for Teams
+
+- **This step is specific to Teams.**
+
+   -  Edit the `manifest.json` in the `appPackage` folder and replace the following details:
    - `<<MANIFEST-ID>>` with some unique GUID   
    - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
    - `<<YOUR-MICROSOFT-APP-ID>>` with the `MicrosoftAppId`. 
@@ -93,15 +98,19 @@ Also update `BaseUrl` according to your code runtime environment.
 ## Running the sample
 
 **Welcome message with feature explanation and Adaptive Card with actions:**
+
 ![Welcome Message](Images/welcomeAction.png)
 
 **Opening stage view from Adaptive Card Action:**
+
 ![Stage View](Images/viaCardAction.png)
 
 **Opening stage view from Adaptive card via deep link:**
+
 ![Stage View Deep Link](Images/viaDeeplink.png)
 
 **Tab with execute deep link action to open stage view:**
+
 ![Tab View](Images/viaTabDeeplink.png)         
 
 ## Interacting with the bot in Teams

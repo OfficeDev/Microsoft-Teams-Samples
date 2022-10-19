@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "11-10-2021 17:35:46"
+ createdDate: "11/10/2021 23:35:25 PM"
 urlFragment: officedev-microsoft-teams-samples-meetings-events-csharp
 ---
 
@@ -20,7 +20,7 @@ For reference please check [Real-time Teams meeting events](https://docs.microso
 
 The feature shown in this sample is currently available in public developer preview only.
 
-## Interaction with bot
+## Interaction with app
 
 ![Meetings EventsGif](MeetingEvents/Images/MeetingsEventsGif.gif)
 
@@ -34,43 +34,36 @@ The feature shown in this sample is currently available in public developer prev
   ```
 - Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
 
+## Setup
 > NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
 
-## Setup
+### 1. Setup for Bot
+   - Register Azure AD application resource in Azure portal
+   - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
-1. Create a Bot Registration
-   In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2#create-the-resource).
 
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
    - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
   **NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
-2. Clone the repository
-
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-
-3. In a terminal, navigate to `samples/meetings-events/csharp`
-
-    ```bash
-    # change into project folder
-    cd # MeetingEvents
-    ```
-4. Run ngrok - point to port 3978
+### 2. Setup NGROK  
+1. Run ngrok - point to port 3978
 
 ```bash
 # ngrok http -host-header=rewrite 3978
 ```
-5. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
-   - `<<App-ID>>` with your app id   
-   - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
 
-6. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 9.
+### 3. Setup for code   
+1. Clone the repository
 
-7. Modify the `/appsettings.json` and fill in the `{{ MicrosoftAppId }}`,`{{ MicrosoftAppPassword }}` with the id from step 2.
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
 
-8. 5. Run the app from a terminal or from Visual Studio, choose option A or B.
+2. Navigate to `samples/meetings-events/csharp` 
+ - Modify the `/appsettings.json` and fill in the `{{ MicrosoftAppId }}`,`{{ MicrosoftAppPassword }}` with the id from step 1.
+
+3. Run the app from a terminal or from Visual Studio, choose option A or B.
 
   A) From a terminal
 
@@ -87,7 +80,17 @@ The feature shown in this sample is currently available in public developer prev
   - Select `MeetingEvents.csproj` file
   - Press `F5` to run the project
 
-9. **Add** in a meeting to test
+### 4. Setup Manifest for Teams
+
+- **This step is specific to Teams.**
+
+Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
+
+   - `<<App-ID>>` with your app id   
+   - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
+   Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store
+
+         - Add in a meeting to test
          - Select **Apps** from the left panel.
          - Then select **Upload a custom app** from the lower right corner.
          - Then select the `manifest.zip` file from `appPackage`. 
@@ -96,9 +99,11 @@ The feature shown in this sample is currently available in public developer prev
 ## Running the sample
 
 **MeetingEvents command interaction:**   
+
 ![Meeting start event](MeetingEvents/Images/meeting-start.png)
 
 **End meeting events details:**   
+
 ![Meeting end event](MeetingEvents/Images/meeting-end.png)
 
 ## Interacting with the bot in Teams

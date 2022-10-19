@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "11-10-2021 17:35:46"
+ createdDate: "10/11/2021 17:35:46 PM"
 urlFragment: officedev-microsoft-teams-samples-meetings-events-nodejs
 ---
 
@@ -20,11 +20,12 @@ For reference please check [Real-time Teams meeting events](https://docs.microso
 
 This feature shown in this sample is currently available in public developer preview only.
 
-## Interaction with bot
+## Interaction with app
 
 ![Meetings EventsGif](images/MeetingsEventsGif.gif)
 
 ## Prerequisites
+
 1. Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
 
 2. To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2 or higher).
@@ -37,50 +38,51 @@ This feature shown in this sample is currently available in public developer pre
 3. To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
 Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
-> NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
-
 ## Setup
 
-- Register Azure AD applications
-    -   Register your bot using bot channel registration in Azure AD portal, following the instructions [here](Wiki/azure-bot-channels-registration.md).
+> NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
+
+### 1. Setup for Bot
+    - Register Azure AD application resource in Azure portal
+    - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
      **NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
-- Clone the repository
 
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
-
-- In a console, navigate to `samples/meeting-events/nodejs`
-
-    ```bash
-    cd samples/meeting-events/nodejs
-    ```
-
-- Run ngrok - point to port `3978`
+### 2. Setup NGROK  
+    - Run ngrok - point to port `3978`
 
     ```bash
     ngrok http -host-header=localhost 3978
     ```
 
-- Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the Bot Framework registration. 
+### 3. Setup for code   
+- Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+- Install modules
+
+    ```bash
+    npm install
+    ```
+
+- Navigate to `samples/meeting-events/nodejs` and update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the app registration in your Azure portal or from Bot Framework registration. 
 
 > NOTE: the App Password is referred to as the `client secret` in the azure portal and you can always create a new client secret anytime.
 
-- Install modules & Run the `NodeJS` Server 
-    - Server will run on PORT:  `3978`
-    - Open a terminal and navigate to project root directory
-    
-    ```bash
-    npm run server
-    ```
-    
-    > **This command is equivalent to:**
-    _npm install  > npm start_
+5) Run your bot at the command line:
 
-- __*This step is specific to Teams.*__
+    ```bash
+    npm start
+    ```
+
+### 4. Setup Manifest for Teams
+
+- **This step is specific to Teams.**
+
 - Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
    - `<<App-ID>>` with your app id   
    - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
@@ -93,10 +95,12 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 ## Running the sample
 
-**MeetingEvents command interaction:**         
+**MeetingEvents command interaction:**  
+
 ![Meeting start event](images/meeting-start.png)
 
 **End meeting events details:**   
+
 ![Meeting end event](images/meeting-end.png)
 
  ## Interacting with the bot in Teams

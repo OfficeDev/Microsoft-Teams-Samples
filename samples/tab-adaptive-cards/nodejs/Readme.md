@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "02-09-2021 19:54:22"
+ createdDate: "09/02/2021 19:54:22 PM"
 urlFragment: officedev-microsoft-teams-samples-tab-adaptive-cards-nodejs
 ---
 
@@ -21,9 +21,7 @@ This bot has been created using [Bot Framework v4](https://dev.botframework.com)
 
 This feature shown in this sample is in Public Developer Preview and is supported in desktop and mobile.
 
-- Interaction with Adaptive Cards
-
-## Interaction with app.
+## Interaction with Adaptive Cards
 
 ![Tab Adaptive CardsGif](Images/tabAdaptiveCardsGif.gif)
 
@@ -41,15 +39,26 @@ This feature shown in this sample is in Public Developer Preview and is supporte
 3. To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
 Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
-> NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
-
 ## Setup
 
-- Register Azure AD applications
-    -   Register your bot using bot channel registration in Azure AD portal, following the instructions [here](Wiki/azure-bot-channels-registration.md).
+> NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
+
+### 1. Setup for Bot
+    - Register Azure AD application
+    - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - For authentication flow please check [Add authentication to bot](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2)
-    
+    - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+
+    > NOTE: When you create your Azure AD application registration, you will create an App ID and App password - make sure you keep these for later.
+
+### 2. Setup NGROK 
+- Run ngrok - point to port `3978`
+
+    ```bash
+    ngrok http -host-header=localhost 3978
+    ```
+
+### 3. Setup for code     
 - Clone the repository
 
     ```bash
@@ -58,36 +67,29 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 - In a console, navigate to `samples/tab-adaptive-cards/nodejs`
 
-    ```bash
-    cd samples/tab-adaptive-cards/nodejs
-    ```
-
-- Run ngrok - point to port `3978`
+    
+- Install modules
 
     ```bash
-    ngrok http -host-header=localhost 3978
+    npm install
     ```
-
 
 - Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the Bot Framework registration. 
 Also update `BaseUrl` according to your code runtime environment and `ConnectionName` with Bot Channel Registration connection name.
 > NOTE: the App Password is referred to as the `client secret` in the azure portal and you can always create a new client secret anytime.
 
-- Install modules & Run the `NodeJS` Server 
-    - Server will run on PORT:  `3978`
-    - Open a terminal and navigate to project root directory
-    
+- Run your bot at the command line:
     ```bash
-    npm run server
+    npm start
     ```
-    
-    > **This command is equivalent to:**
-    _npm install  > npm start_
 
-- __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) also update the `<<DOMAIN-NAME>>` with the ngrok URL
-    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+### 4. Setup Manifest for Teams
+
+- **This step is specific to Teams.**
+
+    - Edit the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) also update the `<<DOMAIN-NAME>>` with the ngrok URL
+    - Zip up the contents of the `appPackage` folder to create a `manifest.zip`
+    - Upload the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
          - Go to Microsoft Teams. From the lower left corner, select Apps
          - From the lower left corner, choose Upload a custom App
          - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
@@ -96,24 +98,31 @@ Also update `BaseUrl` according to your code runtime environment and `Connection
 ## Running the sample
 
 **Sign in card:**
+
 ![Sign in Card](Images/sign-in.png)
 
 **Home Page:**
+
 ![Home Page](Images/home-page.png)
 
 **Task module:**
+
 ![Task Module](Images/task-module.png)
 
 **Task module close:**
+
 ![Task Module Close](Images/task-moduleclose.png)
 
 **Show Task module:**
+
 ![Task Module](Images/task-moduleyoutube.png)
 
 **YouTube Tab:**
+
 ![Task Module](Images/youtube-tab.png)
 
 **Sign out card:**
+
 ![Sign out Card](Images/sign-out.png)
 
 ## Interacting with the tab in Teams

@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "07-07-2021 13:38:26"
+ createdDate: "07/07/2021 13:38:26 PM"
 urlFragment: officedev-microsoft-teams-samples-meetings-content-bubble-nodejs
 ---
 
@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-content-bubble-nodejs
 
 This sample illustrates how to implement [Content Bubble](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience.
 
-## Interaction with bot
+## Interaction with app
 
 ![Meetings Content BubbleGif](Images/MeetingsContentBubbleGif.gif)
 
@@ -29,9 +29,35 @@ This sample illustrates how to implement [Content Bubble](https://docs.microsoft
     # determine node version
     node --version
     ```
+- Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
+
+- To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
+Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
+
+- [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
 ## Setup
 
+> NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
+
+### 1. Setup for Bot
+- Register Azure AD application resource in Azure portal
+- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
+- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+    
+    > NOTE: When you create your app registration in Azure portal, you will create an App ID and App password - make sure you keep these for later.
+
+### 2. Setup NGROK  
+    - Run ngrok - point to port `3978`
+
+    ```bash
+    ngrok http -host-header=localhost 3978
+    ```
+
+### 3. Setup for code   
 - Clone the repository
 
     ```bash
@@ -50,39 +76,42 @@ This sample illustrates how to implement [Content Bubble](https://docs.microsoft
     npm install
     ```
 
+- Go to .env file in your project folder and update `MicrosoftAppId`, `MicrosoftAppPassword` and `BaseUrl` information collected from step 1 and update the BaseUrl as per your domain like ngrok url: https://1234.ngrok.io 
+
 - Start the bot
 
     ```bash
     npm start
     ```
+ 
+### 4. Setup Manifest for Teams
 
-1) Create a new Bot by following steps mentioned in [Build a bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots?view=msteams-client-js-latest#build--a-bot-for-teams-with-the-microsoft-bot-framework) documentation.
+- **This step is specific to Teams.**
 
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-
-2) Go to appsettings.json and add `MicrosoftAppId`, `MicrosoftAppPassword` and `BaseUrl` information.
-3) Update the manifest.json file with MICROSOFT-APP-ID value.
-4) You need to set the `externalResourceUrl` in notification payload to load the content bubble page in-meeting pop up
- ```
- notification: {
-          alertInMeeting: true,
-          externalResourceUrl: 'https://teams.microsoft.com/l/bubble/<<APP_ID>>?url=<<ENDPOINT_URL>>&height=270&width=300&title=ContentBubbleinTeams&completionBotId=<<APP_ID>>'
-        }
- ```
-6) [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
+- Modify the `manifest.json` file placed in `/teamsAppManifest` folder and replace the <<APP_ID>> with your Microsoft App Id received via doing app registration in Azure Portal.
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
+    - **Add** in a meeting to test
+         - Select **Apps** from the left panel.
+         - Then select **Upload a custom app** from the lower right corner.
+         - Then select the `manifest.zip` file from `teamsAppManifest`. 
 
 ## Running the sample
 
 **Hello command interaction:**
+
 ![Meetings AgendaCard](Images/AgendaCard.png)
 
 **Provide your feedback:**
+
 ![Meetings Feedback Submit](Images/FeedbackSubmit.png)
 
 **Provide your feedback Yes:**
+
 ![Meetings Feedback CardYes](Images/FeedbackCardYes.png)
 
 **Provide your feedback No:**
+
 ![Meetings Feedback CardNo](Images/FeedbackCardNo.png)
 
 ## Interacting with the app in Teams Meeting
@@ -92,6 +121,15 @@ Message the Bot by @ mentioning to interact with the content bubble.
 2. Select any option and click on Push Agenda button
 3. You can submit your feedback on either Content Bubble/Adaptive card sent in chat.
 
-## Further Reading.
+## Further reading
 
 -[Meeitng content bubble](https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meeting-content-bubble)
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Azure Portal](https://portal.azure.com)
+- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
+- [dotenv](https://www.npmjs.com/package/dotenv)
+- [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)

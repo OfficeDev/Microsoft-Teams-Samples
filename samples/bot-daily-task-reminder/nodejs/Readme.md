@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "24-11-2021 13:20:00"
+ createdDate: "11-24-2021 13:20:00 PM"
 urlFragment: officedev-microsoft-teams-samples-bot-daily-task-reminder-nodejs
 ---
 
@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-daily-task-reminder-nodejs
 
 This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time.
 
-## Interaction with bot
+## Interaction with app
 
 ![Bot Daily Task ReminderGif ](Images/BotDailyTaskReminderGif.gif)
 
@@ -34,11 +34,27 @@ This sample shows a feature where user can schedule a recurring task and get the
 > the Teams service needs to call into the bot.
 
 ### 1. Setup for Bot
-In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+     **NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
-### 2. Run your bot sample
+- To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
+Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
+
+- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+    
+    > NOTE: When you create your app registration in Azure portal, you will create an App ID and App password - make sure you keep these for later.
+
+### 2. Setup NGROK  
+1) Run ngrok - point to port 3978
+
+    ```bash
+    ngrok http -host-header=rewrite 3978
+    ```
+
+### 3. Setup for code  
 1) Clone the repository
 
     ```bash
@@ -49,24 +65,24 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 
 3) Install node modules
 
-   Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+   Inside nodejs folder, open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
 
     ```bash
     npm install
     ```
-4) Run ngrok - point to port 3978
 
-    ```bash
-    ngrok http -host-header=rewrite 3978
-    ```
-5) Update the `.env` configuration file in your project folder for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`, `BaseUrl` with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+4) Update the `.env` configuration file in your project folder for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`, `BaseUrl` with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
-6) Run your app
+5) Run your app
 
     ```bash
     npm start
     ```
-7) Manually update the manifest.json
+
+### 4. Setup Manifest for Teams
+
+- **This step is specific to Teams.**
+
     - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
@@ -74,12 +90,15 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 ## Running the sample
 
 **Type command create-reminder to get card for scheduling the recurring task:**
+
 ![Schedule task ](Images/ScheduleTaskCard.png)
 
 **Click on schedule task button to open task module for scheduling a task:**
+
 ![Task Details ](Images/ScheduleTask.png)
 
 **Once task is scheduled, you will be notified about the task at scheduled time:**
+
 ![Task reminder](Images/TaskReminder.png)
 
 ## Deploy the bot to Azure
