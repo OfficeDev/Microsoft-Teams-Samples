@@ -24,6 +24,6 @@
 ![Facebook Service](products-page.png)
 
 9. In the prodcuts section, `Facebook Login` will be added. Go to its settings section and add the below valid domains inside the valid domain area. (Note here base-url refers to your app's base url. For eg when using ngrok if our url is `https://1234.ngrok.io` then base-url will be `1234.ngrok.io`).
-`https://<base-url>/`, `https://<base-url>/facebook-auth-end`, `https://token.botframework.com/.auth/web/redirect`.
+`https://<base-url>/`, `https://<base-url>/fb-auth`, `https://token.botframework.com/.auth/web/redirect`.
 
 ![Valid Domains](valid-domains.png)
