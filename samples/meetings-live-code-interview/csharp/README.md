@@ -41,8 +41,7 @@ Now any participant in meeting can write code for the question and same will be 
 
 ## Workflow
 
-```mermaid sequenceDiagram
-    Teams User->>+Teams Client: Schedules a Teams Meeting with candidate
+```Teams User->>+Teams Client: Schedules a Teams Meeting with candidate
 
     Teams Client->>+Live Coding App: Installs the App
 
