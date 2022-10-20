@@ -94,14 +94,10 @@ This is an sample application which displays all the pinned messages in group ch
 
 ### 3.1. Install node modules and run server 
 
- Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+ Inside node js folder (samples/graph-pinned-messages/nodejs), open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
 
 ```bash
 npm install
-```
-
-```bash
-npm start
 ```
 
 If you face any dependency error while installing node modules, try using below command
