@@ -100,6 +100,10 @@ This is an sample application which displays all the pinned messages in group ch
 npm install
 ```
 
+```bash
+npm start
+```
+
 If you face any dependency error while installing node modules, try using below command
 
 ```bash
