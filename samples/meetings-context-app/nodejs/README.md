@@ -20,7 +20,6 @@ This sample shows the contents of meeting tab context object in a meeting tab an
 
 - **Interaction with bot**
 ![meeting-context](Images/meeting-context.gif)  
- 
 
 ## Prerequisites
 
@@ -78,7 +77,7 @@ Register your application with Azure AD
     ```
 
 
-4) Update the `.env`
+4) Update the `.env` configuration file.
 
    Update configuration with the ```MicrosoftAppId```,  ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId```.
 
@@ -101,9 +100,10 @@ Register your application with Azure AD
 
 ## Running the sample
 
-- Add the app in meeting.
+- Add the app in meeting/group channel.
 - The details of the meeting context object will be shown on tab based.
 ![participant context](Images/Setup-Tab-Bot.png)
+
 - You can expand/reduce the JSON for the context object and can also copy a particular object slice.
 - You can send one of these two commands: **Meeting Context** or **Participant Context**
 - It will send you the output of `TeamsInfo.getMeetingInfo` and `TeamsInfo.getMeetingParticipant`
@@ -116,7 +116,6 @@ Register your application with Azure AD
 
 
 ## Further reading
-
 - [Tab Basics](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
 - [Azure Portal](https://portal.azure.com)
 - [Get-context-for-tabs](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/access-teams-context#retrieve-context-in-private-channels)
