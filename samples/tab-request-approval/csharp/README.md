@@ -31,14 +31,15 @@ This sample shows a feature where:
   ```bash
   dotnet --version
   ```
+
 - [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
   
   run ngrok locally
   ```bash
   ngrok http -host-header=localhost 3978
   ```
-- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
+- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 ## Setup
 
@@ -62,12 +63,15 @@ This sample shows a feature where:
     * **User consent title**: Teams can access the user profile and make requests on the user's behalf.
     * **User consent description:** Enable Teams to call this app’s APIs with the same rights as the user.
 9. Ensure that **State** is set to **Enabled**
+
 10. Select **Add scope**
     * The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end:
         * `api://[ngrokDomain].ngrok.io/00000000-0000-0000-0000-000000000000/access_as_user.
+
 11. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
     * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
     * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
+
 12. Navigate to **API Permissions**, and make sure to add the follow permissions:
 -   Select Add a permission
 -   Select Microsoft Graph -\> Delegated permissions.
@@ -92,26 +96,32 @@ This sample shows a feature where:
 	* Select **Single page application**.
 	* Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/TabAuth`
     Enable implicit grant by checking the following boxes:  
-    ✔ ID Token  
-    ✔ Access Token  
+    ✔ ID Token
+    ✔ Access Token
 14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
-15. Clone the repository
+15. Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+
+    > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
+
+16. Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
 
-16. Open the code in Visual Studio
+17. Open the code in Visual Studio
    - File -> Open -> Project/Solution
    - Navigate to folder where repository is cloned then `samples/tab-request-approval/csharp/TabRequestApproval.sln`
     
-17. Run ngrok - point to port 3978
+18. Run ngrok - point to port 3978
 
     ```bash
     # ngrok http -host-header=rewrite 3978
     ```
  
-18. Setup and run the bot from Visual Studio: 
+19. Setup and run the bot from Visual Studio: 
    Modify the `appsettings.json` and fill in the following details:
    - `MicrosoftAppId` - Generated from Step 3 (Application (client) ID)is the application app id
    - `TenantId` - Generated from Step 3(Directory (tenant) ID) is the tenant id
@@ -119,14 +129,14 @@ This sample shows a feature where:
    - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
    - Press `F5` to run the project
 	 
-19. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
+20. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
    - `{{Microsoft-App-Id}}` with Application id generated from Step 3
    - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
    - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
-20. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 19.
+21. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 19.
 
-21. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+22. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps
    - Choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
@@ -140,21 +150,21 @@ User Persona:
 
 - Send request to the manger for task approval.
 
-  ![Request from user](TabRequestApproval/Images/TaskRequest.png)
+![Request from user](TabRequestApproval/Images/TaskRequest.png)
 
 - Request status
 
-  ![Request status](TabRequestApproval/Images/RequestStatus.png)
+![Request status](TabRequestApproval/Images/RequestStatus.png)
 
 Manager Persona:
 
 - Activity feed notification of approval request.
 
-  ![Notification](TabRequestApproval/Images/RequestNotification.png)
+![Notification](TabRequestApproval/Images/RequestNotification.png)
 
 - Pending task approval request.
 
-  ![Pending request list](TabRequestApproval/Images/RequestDetails.png)
+![Pending request list](TabRequestApproval/Images/RequestDetails.png)
 
 
 ## Further reading

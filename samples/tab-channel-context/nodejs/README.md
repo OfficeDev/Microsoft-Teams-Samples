@@ -27,12 +27,13 @@ This sample shows the contents of tab context object in a private and shared cha
 
 ![Preview Image](Images/Preview.gif)
 
-## To try this sample
+## Setup
 
 1) Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
+
 2) Install node modules
 
    Inside node js folder,  navigate to `samples/tab-channel-context/nodejs/ClientApp` open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
@@ -45,12 +46,13 @@ This sample shows the contents of tab context object in a private and shared cha
     ```
     npm start
     ```
+
 4) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
    - `{{Manifest-id}}` with some unique GUID.
    - `{{Domain Name}}` with your application's base url, e.g. https://1234.ngrok.io
 
 5) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
-    
+
 6) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Apps -> Manage your apps -> Upload an app.

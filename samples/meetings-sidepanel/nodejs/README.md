@@ -32,21 +32,29 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
     
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-## To try this sample
-
-- Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+## Setup
+- Register an AAD app in Azure portal and also register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
     > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
-1. Clone the repository
+1. Run ngrok - point to port 3001 (pointing to ClientApp)
+
+    ```bash
+    # ngrok http -host-header=rewrite 3001
+    ```
+
+2. Clone the repository
       ```bash
       git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
       ```
 
-2. Install node modules
+3. Go to .env file  and add ```MicrosoftAppId```,  ```MicrosoftAppPassword``` and ```BaseURL``` information with values generated while doing App Registration.
+- ```BaseURL``` will be your application domain URL like ngrok URL: https://xxxx.ngrok.io
+
+4. Install node modules
 
    Inside node js folder,  navigate to `samples/meetings-sidepanel/nodejs/server` open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
 
@@ -55,43 +63,69 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
     ```bash
     npm install
     ```
-3. We have two different solutions to run so follow below steps:
+
+5. We have two different solutions to run, so follow below steps:
  
-   A) In a terminal, navigate to `samples/meetings-sidepanel/nodejs/server`
+- In a terminal, navigate to `samples/meetings-sidepanel/nodejs/server` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code
+```bash
+npm install
+```
 
-   B) In a different terminal, navigate to `samples/meetings-sidepanel/nodejs/ClientApp`
+```bash
+npm start
+```
 
-4. Run ngrok - point to port 3001 (pointing to ClientApp)
+If you face any dependency error while installing node modules, try using below command
 
-    ```bash
-    # ngrok http -host-header=rewrite 3001
-    ```
-5. Create a new Bot by following steps mentioned in [Build a bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots?view=msteams-client-js-latest#build--a-bot-for-teams-with-the-microsoft-bot-framework) documentation.
+```bash
+npm install --legacy-peer-deps
+```
 
-6. Go to .env file  and add ```MicrosoftAppId``` and  ```MicrosoftAppPassword``` information.
+- In a different terminal, navigate to `samples/meetings-sidepanel/nodejs/ClientApp` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+```bash
+cd client
+npm install
+```
 
-7. Run your app, either from Visual Studio code  with ``` npm start``` or using ``` Run``` in the Terminal.
+```bash
+npm start
+```
 
-8. Update the manifest.json file with ```Microsoft-App-ID``` and ```BaseUrl``` value.
+If you face any dependency error while installing node modules, try using below command
 
-9. [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
+```bash
+npm install --legacy-peer-deps
+```
 
-## Interacting with the app in Teams Meeting
+6. Run your app, either from Visual Studio code  with ``` npm start``` or using ``` Run``` in the Terminal.
+
+## Setup Manifest for Teams
+1) __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the `teamsAppManifest` folder and replace your Microsoft App Id (that was created when you registered your app earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `configurationUrl` inside `configurableTabs` . Replace `{{BASE-URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Update** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Update** the `manifest.json` for `<<Manifest-id>>` with any GUID or with your MicrosoftAppId, generated during App registration in Azure portal.
+
+    - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+
+##Running the sample
+
+### Interacting with the app in Teams Meeting
 Interact with SidePanel by clicking on the App icon present on the top menu beside the "more actions" during a meeting.
 1. Once the app is clicked, sidepanel appears with the default agenda list. Only organizer gets the feasibility to add new agenda points to the list using "Add New Agenda Item" button.
 
-![](Images/Dashboard.png)
+![Dashboard](Images/Dashboard.png)
 
 2. On click of "Add" button, agenda point will be added to the agenda list by organizer.
 
-![](Images/AddNewAgendaItem.png)
+![AddNewAgendaItem](Images/AddNewAgendaItem.png)
 
-![](Images/AddedNew.png)
+![AddedNew](Images/AddedNew.png)
 
 3. On click of "Publish Agenda", the agenda list will be sent to the meeting chat.
 
-![](Images/Notification.png)
-
+![Notification](Images/Notification.png)
 
 ### User interactions(Meeting Organizer)
 - **Add New Agenda Item** - Gives provision to add new Agenda point.
@@ -104,4 +138,5 @@ Interact with SidePanel by clicking on the App icon present on the top menu besi
 
 ## Further Reading.
 
--[Meeting Side Panel](https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meetings-sidepanel?tabs=vs)
+- [Meeting Side Panel](https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meetings-sidepanel?tabs=vs)
+- [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
