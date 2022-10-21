@@ -36,6 +36,7 @@ namespace CallingBotSample.Helpers
             this.logger = logger;
             this.configuration = configuration;
             this.users = configuration.GetSection("Users").Get<Configuration.User[]>().AsEnumerable();
+            this.options = options;
             this.graphServiceClient = graphServiceClient;
         }
 
@@ -214,7 +215,7 @@ namespace CallingBotSample.Helpers
                 {
                     MediaInfo = new MediaInfo
                     {
-                        Uri = new Uri(options.BotBaseUrl, "callback").ToString(),
+                        Uri = new Uri(options.BotBaseUrl, "audio/speech.wav").ToString(),
                         ResourceId = Guid.NewGuid().ToString(),
                     }
                 }
