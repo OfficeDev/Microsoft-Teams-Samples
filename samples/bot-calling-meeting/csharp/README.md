@@ -42,10 +42,10 @@ Calling and Meeting Bot provides basic functionality like Create Call, Join a ca
   - Navigate to `samples/bot-calling-meeting/csharp` folder
   - Select `CallingBotSample.csproj` file
 
-1) Run ngrok - point to port 3978
+1) Run ngrok - point to port 44346
 
     ```bash
-    ngrok http -host-header=rewrite 3978
+    ngrok http --host-header=rewrite 44346
     ```
     
 ## Disclaimer
@@ -67,25 +67,24 @@ Calling and Meeting Bot provides basic functionality like Create Call, Join a ca
 
 ```
 	Import-Module MicrosoftTeams
-	$userCredential = Get-Credential
-	Connect-MicrosoftTeams -Credential $userCredential
+	# Calling Connect-MicrosoftTeams using no parameters will open a window allowing for MFA accounts to authenticate
+	Connect-MicrosoftTeams
 
-	New-CsApplicationAccessPolicy -Identity “<<policy-identity/policy-name>>” -AppIds "<<azure-client-id>>" -Description "<<Policy-description>>"
-	Grant-CsApplicationAccessPolicy -PolicyName “<<policy-identity/policy-name>>” -Identity "<<object-id-of-the-user-to-whom-policy-need-to-be-granted >>"
+	New-CsApplicationAccessPolicy -Identity “<<policy-identity/policy-name>>” -AppIds "<<microsoft-app-id>>" -Description "<<Policy-description>>"
+	Grant-CsApplicationAccessPolicy -PolicyName “<<policy-identity/policy-name>>” -Identity "<<object-id-of-the-user-to-whom-policy-need-to-be-granted>>"
 
-  ex:
+  eg:
   Import-Module MicrosoftTeams
-	$userCredential = Get-Credential
-	Connect-MicrosoftTeams -Credential $userCredential
+	Connect-MicrosoftTeams
 
 	New-CsApplicationAccessPolicy -Identity Meeting-policy-dev -AppIds "d0bdaa0f-8be2-4e85-9e0d-2e446676b88c" -Description "Online meeting policy - contoso town"
 	Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "782f076f-f6f9-4bff-9673-ea1997283e9c"
 	
 ```
-* Update `PolicyName`, `azure-client-id`, `policy-description`, `object-id for user` in powershell script.
+* Update `PolicyName`, `microsoft-app-id`, `policy-description`, `object-id for user` in powershell script.
 * Run `Windows Powershell PSI` as an administrator and execute above script.
 * Run following command to verify policy is create successfully or not
-`Get-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "<<azure-client-Id>>"
+`Get-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "<<microsoft-app-id>>"
 	`
 * Add following Graph API Applications permissions to your Azure App.
 - `Calls.AccessMedia.All`

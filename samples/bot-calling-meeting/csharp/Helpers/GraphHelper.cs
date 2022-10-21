@@ -6,22 +6,13 @@ namespace CallingBotSample.Helpers
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
-    using System.Net;
-    using System.Runtime.Serialization.Json;
-    using System.Text;
-    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
-    using CallingBotSample.Configuration;
     using CallingBotSample.Interfaces;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
     using Microsoft.Graph;
-    using Microsoft.Graph.Auth;
-    using Microsoft.Graph.Communications.Calls;
-    using Microsoft.Identity.Client;
 
     /// <summary>
     /// Helper class for Graph.
@@ -31,6 +22,7 @@ namespace CallingBotSample.Helpers
         private readonly ILogger<GraphHelper> logger;
         private readonly IConfiguration configuration;
         private readonly IEnumerable<Configuration.User> users;
+        private readonly BotOptions options;
         private readonly IGraphServiceClient graphServiceClient;
 
         /// <summary>
@@ -39,7 +31,7 @@ namespace CallingBotSample.Helpers
         /// <param name="httpClientFactory">IHttpClientFactory instance.</param>
         /// <param name="logger">ILogger instance.</param>
         /// <param name="configuration">IConfiguration instance.</param>
-        public GraphHelper(ILogger<GraphHelper> logger, IConfiguration configuration, IOptions<Configuration.Users> users, IGraphServiceClient graphServiceClient)
+        public GraphHelper(ILogger<GraphHelper> logger, IConfiguration configuration, IOptions<Configuration.Users> users, BotOptions options, IGraphServiceClient graphServiceClient)
         {
             this.logger = logger;
             this.configuration = configuration;
@@ -213,5 +205,25 @@ namespace CallingBotSample.Helpers
             });
         }
 
+        /// <inheritdoc />
+        public async Task PlayPrompt(string meetingId)
+        {
+            var prompts = new List<Microsoft.Graph.Prompt>()
+            {
+                new MediaPrompt
+                {
+                    MediaInfo = new MediaInfo
+                    {
+                        Uri = new Uri(options.BotBaseUrl, "callback").ToString(),
+                        ResourceId = Guid.NewGuid().ToString(),
+                    }
+                }
+            };
+
+            await graphServiceClient.Communications.Calls[meetingId]
+                .PlayPrompt(prompts)
+                .Request()
+                .PostAsync();
+        }
     }
 }
