@@ -21,7 +21,7 @@ Now any participant in meeting can write code for the question and same will be 
 
 ## Interact with app
 
-![side panel ](MeetingLiveCoding/Images/MeetinLiveCodeInterview.gif)
+![side panel ](MeetingLiveCoding/Images/MeetingLiveCodeInterview.gif)
 
 ## Prerequisites
 
