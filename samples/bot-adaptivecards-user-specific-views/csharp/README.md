@@ -64,13 +64,13 @@ Workflow:
 
 In the case of `All Users`, the refresh will automatically be invoked for all users (in this case for user B as well).
 
-####Teams Conversation Bot
+#### Teams Conversation Bot
 Bot Framework v4 Conversation Bot sample for Teams.
 
 This bot has been created using [Bot Framework](https://dev.botframework.com). This sample shows
 how to incorporate basic conversational flow into a Teams application. It also illustrates a few of the Teams specific calls you can make from your bot.
 
-##Interaction with bot
+## Interaction with bot
 
 ![bot-conversations ](docs/UserSpecificView_Me.gif)
 
