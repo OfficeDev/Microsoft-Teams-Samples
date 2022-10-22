@@ -21,7 +21,7 @@ Now any participant in meeting can write code for the question and same will be 
 
 ## Interact with app
 
-![side panel ](meetings-live-code-interview/nodejs/Images/MeetingLiveCodeInterview.gif)
+![side panel ](nodejs/Images/MeetingLiveCodeInterview.gif)
 
 ## Prerequisites
 
@@ -116,13 +116,13 @@ sequenceDiagram
 ## Running the sample
 
 **Side panel view:**
-![side panel ](MeetingLiveCoding/Images/sidePanelView.png)
+![side panel ](nodejs/Images/Images/sidePanelView.png)
 
 **Question view on click of share:**
-![shared content](MeetingLiveCoding/Images/stageView.png)
+![shared content](nodejs/Images/stageView.png)
 
 **Question view for other participant in meeting:**
-![shared content second user](MeetingLiveCoding/Images/stageViewseconduser.png)
+![shared content second user](nodejs/Images/stageViewseconduser.png)
 
 ## Further reading
 
