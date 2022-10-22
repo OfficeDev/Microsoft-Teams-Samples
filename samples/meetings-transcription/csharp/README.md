@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "03/08/2022 12:45:15 AM"
+ createdDate: "03/08/2022 00:45:15"
 urlFragment: officedev-microsoft-teams-samples-meetings-transcription-csharp
 ---
 
@@ -17,42 +17,69 @@ urlFragment: officedev-microsoft-teams-samples-meetings-transcription-csharp
 
 This is a sample application which demonstrates how to get Transcript using Graph API and show it in the task module.
 
-## Key features
+## Interaction with app
 
-1. Schedule the meeting and add Meeting Transcript Bot from `Apps` section in that particular scheduled meeting.
-![Add Bot](MeetingTranscription/Images/AddMeetingTranscriptBot.PNG)
-2. Once meeting started, start the Transcript for the meeting.
-![Start Transcript](MeetingTranscription/Images/StartTranscript.PNG)
-3. Once the transcription has started, you can see the live transcription it the meeting UI.
-![Leave Meeting](MeetingTranscription/Images/LeaveMeeting.PNG)
-4. Once the Meeting ended, Meeting Transcript Bot will sent a card having a button to open task module.
-![Meeting Transcript Card](MeetingTranscription/Images/MeetingTranscriptCard.PNG)
-5. After clicking on `View Transcript` button, you will see the recorded Transcript in the opened Task Module.
-![Transcript Task Module](MeetingTranscription/Images/TranscriptTaskModule.PNG)
+![Meetings TranscriptionGif](MeetingTranscription/Images/MeetingsTranscriptionGif.gif)
 
 ## Prerequisites
 
-- Microsoft Teams is installed and you have an account (not a guest account)
--  .[NET 6.0](https://dotnet.microsoft.com/en-us/download) SDK.
-    ```bash
-        # determine dotnet version
-        dotnet --version
-    ```
--  [ngrok](https://ngrok.com/) or equivalent tunneling solution
--  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
-## To try this sample
+  ```bash
+  # determine dotnet version
+  dotnet --version
+  ```
+- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
 
-> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
-> the Teams service needs to call into the bot.
+## Setup
 
-### 1. Start ngrok on localhost:3978
-- Open ngrok and run command `ngrok http -host-header=rewrite 3978` 
+### 1. Setup for Bot
+- Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0)
+
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
+- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+    > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
+
+### 2. Setup NGROK
+1) Run ngrok - point to port 3978
+
+```bash
+# ngrok http -host-header=rewrite 3978
+```
 - Once started you should see URL  `https://41ed-abcd-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
 
-![Ngrok](MeetingTranscription/Images/NgrokScreenshot.PNG)
+### 3. Setup for code
+- Clone the repository
 
-### 2. Register Azure AD application
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+- Run the bot from a terminal or from Visual Studio:
+
+  A) From a terminal, navigate to `MeetingTranscription`
+
+  ```bash
+  # run the bot
+  dotnet run
+  ```
+
+  B) Or from Visual Studio
+
+  - Launch Visual Studio
+  - File -> Open -> Project/Solution
+  - Navigate to `samples/meetings-transcription/csharp` folder
+  - Select `MeetingTranscription.csproj` file
+  - Press `F5` to run the project
+
+  - Update the `appsettings.json` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` and `MicrosoftAppTenantId` and `AppBaseUrl` and `UserId` (Note that the MicrosoftAppId is the AppId created in step 4 , the MicrosoftAppPassword is referred to as the "client secret" in step 4 and you can always create a new client secret anytime., MicrosoftAppTenantId is reffered to as Directory tenant Id in step 4, AppBaseUrl is the URL that you get in step 2 after running ngrok, UserId of the user used while granting the policy in step 5). 
+
+**NOTE: If you are not getting option to start transcript. Make sure it is enabled from [Teams Admin center](https://admin.teams.microsoft.com). Under `Meetings -> Meeting Policies -> Applied policy(Default is Global)-> Recording & Transcription -> Transcription`**
+
+**NOTE: The feature is only available only be used from the desktop app**
+
+### 4. Register Azure AD application
 Register one Azure AD application in your tenant's directory: for the bot and tab app authentication.
 
 -  Log in to the Azure portal from your subscription, and go to the "App registrations" blade  [here](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps). Ensure that you use a tenant where admin consent for API permissions can be provided.
@@ -67,7 +94,7 @@ Register one Azure AD application in your tenant's directory: for the bot and ta
 
 - Click on the "Register" button.
 
-7.  When the app is registered, you'll be taken to the app's "Overview" page. Copy the  **Application (client) ID**; we will need it later. Verify that the "Supported account types" is set to  **Multiple organizations**.
+- When the app is registered, you'll be taken to the app's "Overview" page. Copy the  **Application (client) ID**; we will need it later. Verify that the "Supported account types" is set to  **Multiple organizations**.
 
 -  On the side rail in the Manage section, navigate to the "Certificates & secrets" section. In the Client secrets section, click on "+ New client secret". Add a description for the secret and select Expires as "Never". Click "Add".
 
@@ -90,63 +117,54 @@ Click on Add Permissions to commit your changes.
 
 - Global Administrator can grant consent using following link:  [https://login.microsoftonline.com/common/adminconsent?client_id=](https://login.microsoftonline.com/common/adminconsent?client_id=)<%appId%> 
 
-### 3. Allow applications to access online meetings on behalf of a user
+### 5. Allow applications to access online meetings on behalf of a user
+
 - Follow this link- [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
+
 - **Note**: Copy the User Id you used to granting the policy. You need while configuring the appsettings.json file.
 
-### 4. Setup a Azure bot resource
-- Create new Azure Bot resource in Azure.
-- Select Type of App as "Multi Tenant"
--  Select Creation type as "Use existing app registration"
-- Use the copied App Id and Client secret from above step and fill in App Id and App secret respectively.
-- Click on Create on the Azure bot.   
-- Go to the created resource, navigate to channels and add "Microsoft Teams".
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+### 6. Setup Manifest for Teams
 
+- **This step is specific to Teams.**
+    - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Your Microsoft App Id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app to your org's app catalog". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+    - Add the app to personal/team/groupChat scope (Supported scopes)
 
-### 5. Update the appsettings.json
--  Update the `appsettings.json` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` and `MicrosoftAppTenantId` and `AppBaseUrl` and `UserId` (Note that the MicrosoftAppId is the AppId created in step 2 , the MicrosoftAppPassword is referred to as the "client secret" in step 2 and you can always create a new client secret anytime., MicrosoftAppTenantId is reffered to as Directory tenant Id in step 2, AppBaseUrl is the URL that you get in step 1 after running ngrok, UserId of the user used while granting the policy in step 3). 
+## Running the sample
 
+**Upload an app to your org's app catalog:**
 
-### 6. Manually update the manifest.json
-- Edit the `manifest.json` contained in the  `/AppManifest` folder to and fill in MicrosoftAppId (that was created in step 2 and it is the same value of MicrosoftAppId as in `appsettings.json` file) *everywhere* you see the place holder string `<<Microsoft-App-Id>>` (depending on the scenario it may occur multiple times in the `manifest.json`)
-- Zip up the contents of the `/AppManifest` folder to create a `manifest.zip`
-- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+![Upload AppOrg](MeetingTranscription/Images/UploadAppOrg.PNG)
 
+**Schedule the meeting and add Meeting Transcript Bot from Apps section in that particular scheduled meeting:**
 
+![Add BotApp](MeetingTranscription/Images/AddMeetingTranscriptBot.PNG)
 
-### 7. To try this sample
+**Created and approved by your organization:**
 
-- In a terminal, navigate to `MeetingTranscription`
+![Install OrgsApps](MeetingTranscription/Images/InstallOrgsApps.PNG)
 
-    ```bash
-    # change into project folder
-    cd # MeetingTranscription
-    ```
+**Welcome echo UI:**
 
-- Run the bot from a terminal or from Visual Studio, choose option A or B.
+![Add Bot](MeetingTranscription/Images/WelcomeEcho.PNG)
 
-  A) From a terminal
+**Once meeting started, start the Transcript for the meeting:**
 
-  ```bash
-  # run the bot
-  dotnet run
-  ```
+![Start Transcript](MeetingTranscription/Images/StartTranscript.PNG)
 
-  B) Or from Visual Studio
+**Once the transcription has started, you can see the live transcription it the meeting UI:**
 
-  - Launch Visual Studio
-  - File -> Open -> Project/Solution
-  - Navigate to `samples/meetings-transcription/csharp` folder
-  - Select `MeetingTranscription.csproj` file
-  - Press `F5` to run the project
+![Add Bot](MeetingTranscription/Images/LeaveMeeting.PNG)
 
-**NOTE: If you are not getting option to start transcript. Make sure it is enabled from [Teams Admin center](https://admin.teams.microsoft.com). Under `Meetings -> Meeting Policies -> Applied policy(Default is Global)-> Recording & Transcription -> Transcription`**
+**Once the Meeting ended, Meeting Transcript Bot will sent a card having a button to open task module:**
 
-## Deploy the bot to Azure
+![Add Bot](MeetingTranscription/Images/MeetingTranscriptCard.PNG)
 
-To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
+**After clicking on `View Transcript` button, you will see the recorded Transcript in the opened Task Module:**
 
+![Add Bot](MeetingTranscription/Images/TranscriptTaskModule.PNG)
 
 ## Interacting with the bot.
 - After uploading the manifest add the bot into meeting.
@@ -154,3 +172,23 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - Once done, leave the meeting.
 - You will get the card to open task module and see the transcript created.
 
+## Deploy the bot to Azure
+To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
+
+## Further reading
+- [List Meeting Attendance Reports](https://docs.microsoft.com/en-us/graph/api/meetingattendancereport-list?view=graph-rest-1.0&tabs=http)
+- [List Attendance Records](https://docs.microsoft.com/en-us/graph/api/attendancerecord-list?view=graph-rest-1.0&tabs=http)
+- [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Azure Portal](https://portal.azure.com)
+- [Add Authentication to Your Bot Via Azure Bot Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp)
+- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [.NET Core CLI tools](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x)
+- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
+- [Azure Portal](https://portal.azure.com)
+- [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
+- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
+- [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)

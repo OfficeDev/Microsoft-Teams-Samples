@@ -17,11 +17,19 @@ urlFragment: officedev-microsoft-teams-samples-meetings-live-code-interview-node
 # Live coding interview using Shared meeting stage 
 
 This sample demos a live coding in a Teams meeting stage using [Live Share SDK](https://aka.ms/livesharedocs). In side panel there is a list of question in specific coding language and on share click specific question with language code editor will be shared with other participant in meeting.
-Now any participant in meeting can write code for the question and same will be updated to all the other participants in meeting.  
+Now any participant in meeting can write code for the question and same will be updated to all the other participants in meeting. 
 
-![side panel ](Images/sidePanelView.png)
+## Interact with app
 
-![shared content](Images/stageView.png)
+![side panel ](MeetingLiveCoding/Images/MeetinLiveCodeInterview.gif)
+
+## Prerequisites
+
+ - Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
+
+- To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher).
+
+- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
 ## Workflow
 
@@ -51,14 +59,17 @@ sequenceDiagram
 
 ```
 
-## Prerequisites
+## Setup
 
-- [NodeJS](https://nodejs.org/en/)
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
-- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+### 1. Setup NGROK
 
+1) Run ngrok - point to port 3000 (pointing to ClientApp)
 
-## To try this sample
+    ```bash
+    # ngrok http -host-header=rewrite 3000
+    ```
+
+### 2. Setup for code
 
 1) Clone the repository
    ```bash
@@ -79,32 +90,39 @@ sequenceDiagram
 
    B) In a different terminal, navigate to `samples/meetings-live-code-interview/nodejs/ClientApp`
 
-4) Run ngrok - point to port 3000 (pointing to ClientApp)
-
-    ```bash
-    # ngrok http -host-header=rewrite 3000
+ 4) Run both solutions i.e. `samples/meetings-live-code-interview/nodejs/api` and `samples/meetings-live-code-interview/nodejs/clientapp`
     ```
-5) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
+    npm start
+    ``` 
+
+ ### 3. Setup Manifest for Teams  
+
+
+1) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
    - `{{Manifest-id}}` with some unique GUID.
    - `{{Domain Name}}` with your application's base url, e.g. https://1234.ngrok.io
 
-6) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
+2) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
 
-7) Run both solutions i.e. `samples/meetings-live-code-interview/nodejs/api` and `samples/meetings-live-code-interview/nodejs/clientapp`
-    ```
-    npm start
-    ```
-8) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+
+3) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-## Testing the bot using Bot Framework Emulator
+**Note** Run the app on Teams with developer preview on.   
 
-[Bot Framework Emulator](https://github.com/microsoft/botframework-emulator) is a desktop application that allows bot developers to test and debug their bots on localhost or running remotely through a tunnel.
+## Running the sample
 
-- Install the Bot Framework Emulator version 4.5.0 or greater from [here](https://github.com/Microsoft/BotFramework-Emulator/releases)
+**Side panel view:**
+![side panel ](MeetingLiveCoding/Images/sidePanelView.png)
+
+**Question view on click of share:**
+![shared content](MeetingLiveCoding/Images/stageView.png)
+
+**Question view for other participant in meeting:**
+![shared content second user](MeetingLiveCoding/Images/stageViewseconduser.png)
 
 ## Further reading
 

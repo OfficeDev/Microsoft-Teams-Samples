@@ -8,19 +8,19 @@ products:
 languages:
 - csharp
 extensions:
-  contentType: samples
-  createdDate: "02/08/2022 12:26:57 PM"
+ contentType: samples
+ createdDate: "21/10/2022 05:00:25 PM"
 urlFragment: officedev-microsoft-teams-samples-meetings-context-app-csharp
+
 ---
 
-# Meeting context
+## Meeting context
 
-This sample shows the contents of meeting tab context object in a meeting tab and shows the output of Meeting's API `TeamsInfo.GetMeetingParticipantAsync` and `TeamsInfo.GetMeetingInfoAsync` using bot commands.
+This sample shows the contents of meeting tab context object in a meeting tab and shows the output of Meeting's API `TeamsInfo.getMeetingParticipant` and `TeamsInfo.getMeetingInfo` using bot commands.
 
-![meeting tab context](MeetingContextApp/Images/meetingTabContext.png)
-![Meeting context](MeetingContextApp/Images/MeetingContext.png)
-![Participant context](MeetingContextApp/Images/ParticipantContext.png)
-
+- **Interaction with bot**
+![meeting-context](Images/meeting_context_csharp.gif)  
+ 
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
@@ -32,8 +32,8 @@ This sample shows the contents of meeting tab context object in a meeting tab an
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-
-## To try this sample
+### Setup 
+> Note these instructions are for running the sample on your local machine.
 
 1) Register your application with Azure AD
 
@@ -73,15 +73,24 @@ Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/
 8) Add the app in meeting.
 
  **NOTE:** Only accounts with admin access can create private/shared channels in team.
+     
 
-## Features of the sample
+## Running the sample
 
 - Add the app in meeting.
 - The details of the meeting context object will be shown on tab based.
-- You can expand/reduce the JSON for the context object and can also copy a particular object slice.
+![participant context](Images/Setup-Tab-Bot.png)
 
+- You can expand/reduce the JSON for the context object and can also copy a particular object slice.
 - You can send one of these two commands: **Meeting Context** or **Participant Context**
-- It will send you the output of `TeamsInfo.GetMeetingInfoAsync` and `TeamsInfo.GetMeetingParticipantAsync`
+- It will send you the output of `TeamsInfo.getMeetingInfo` and `TeamsInfo.getMeetingParticipant`
+
+1. **Particpant Details :** User can see the details of current participant by the name id and other feilds respectively.
+![participant context](Images/Participant-Details.png)
+
+2. **Meeting Details :** In this user can track the detials of meeting start time, end time, joining url and other details respectively.
+![meeting context](Images/Meeting-Details.png) 
+
 
 ## Further reading
 
@@ -89,3 +98,4 @@ Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/
 - [Azure Portal](https://portal.azure.com)
 - [Get-context-for-tabs](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/access-teams-context#retrieve-context-in-private-channels)
 - [Meeting API reference](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet)
+
