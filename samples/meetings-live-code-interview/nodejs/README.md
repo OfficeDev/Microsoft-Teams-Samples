@@ -116,13 +116,13 @@ sequenceDiagram
 ## Running the sample
 
 **Side panel view:**
-![side panel ](nodejs/Images/Images/sidePanelView.png)
+![side panel ](Images/sidePanelView.png)
 
 **Question view on click of share:**
-![shared content](nodejs/Images/stageView.png)
+![shared content](Images/stageView.png)
 
 **Question view for other participant in meeting:**
-![shared content second user](nodejs/Images/stageViewseconduser.png)
+![shared content second user](Images/stageViewseconduser.png)
 
 ## Further reading
 
