@@ -9,7 +9,7 @@
       "Microsoft Teams tab sample code which demonstrates how to build tabs with Adaptive Cards."
     ],
     "creationDateTime": "2021-02-09",
-    "updateDateTime": "2022-01-12",
+    "updateDateTime": "2022-10-21",
     "products": [
       "Teams"
     ],
@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-adaptive-cards/nodejs/Images/tabAdaptiveCardsGif.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-adaptive-cards/nodejs/Images/tabAdaptiveCards.gif",
         "alt": "Solution UX showing tabs with adaptive cards"
       }
     ],

@@ -22,7 +22,7 @@ The feature shown in this sample is currently available in public developer prev
 
 ## Interaction with app
 
-![Meetings EventsGif](MeetingEvents/Images/MeetingsEventsGif.gif)
+![Meetings Events](MeetingEvents/Images/MeetingsEvents.gif)
 
 ## Prerequisites
 
@@ -37,33 +37,32 @@ The feature shown in this sample is currently available in public developer prev
 ## Setup
 > NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
 
-### 1. Setup for Bot
+1) Setup for Bot
    - Register Azure AD application resource in Azure portal
    - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
-
 
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
    - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
   **NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
-### 2. Setup NGROK  
-1. Run ngrok - point to port 3978
+2) Setup NGROK  
+Run ngrok - point to port 3978
 
 ```bash
 # ngrok http -host-header=rewrite 3978
 ```
 
-### 3. Setup for code   
-1. Clone the repository
+3) Setup for code   
+- Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
 
-2. Navigate to `samples/meetings-events/csharp` 
- - Modify the `/appsettings.json` and fill in the `{{ MicrosoftAppId }}`,`{{ MicrosoftAppPassword }}` with the id from step 1.
+- Navigate to `samples/meetings-events/csharp` 
+    - Modify the `/appsettings.json` and fill in the `{{ MicrosoftAppId }}`,`{{ MicrosoftAppPassword }}` with the values received while doing AAD app registration in step 1.
 
-3. Run the app from a terminal or from Visual Studio, choose option A or B.
+- Run the app from a terminal or from Visual Studio, choose option A or B.
 
   A) From a terminal
 
@@ -80,20 +79,20 @@ The feature shown in this sample is currently available in public developer prev
   - Select `MeetingEvents.csproj` file
   - Press `F5` to run the project
 
-### 4. Setup Manifest for Teams
+4) Setup Manifest for Teams
 
 - **This step is specific to Teams.**
 
 Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
 
-   - `<<App-ID>>` with your app id   
-   - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
+   - `<<App-ID>>` with your AAD app registration id   
+   - `<<VALID DOMAIN>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
    Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store
 
          - Add in a meeting to test
          - Select **Apps** from the left panel.
          - Then select **Upload a custom app** from the lower right corner.
-         - Then select the `manifest.zip` file from `appPackage`. 
+         - Then select the `manifest.zip` file from `AppPackage` folder. 
          - After installation, add the bot to a meeting.
 
 ## Running the sample
@@ -106,7 +105,7 @@ Modify the `manifest.json` in the `/AppPackage` folder and replace the following
 
 ![Meeting end event](MeetingEvents/Images/meeting-end.png)
 
-## Interacting with the bot in Teams
+**Interacting with the bot in Teams**
 
 Once the meeting where the bot is added starts or ends, real-time updates are posted in the chat.
 
@@ -126,4 +125,3 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Portal](https://portal.azure.com)
 - [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
 - [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
-

@@ -19,7 +19,7 @@ This sample shows tab capability with the feature of client sdk people picker.
 
 ## Interaction with app
 
-![Tab People PickerGif](Images/TabPeoplePickerGif.gif)
+![Tab People PickerGif](Images/TabPeoplePicker.gif)
 
 ## Prerequisites
 
@@ -31,40 +31,43 @@ This sample shows tab capability with the feature of client sdk people picker.
 
 ## Setup
 
-### 1. Setup NGROK
-1) Run ngrok - point to port 3978
+1) Setup NGROK
+Run ngrok - point to port 3978
 
     ```bash
     ngrok http -host-header=rewrite 3978
     
     ```
 
-### 2. Setup for code    
-1) Clone the repository
+1) Setup for code    
+- Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In a terminal, navigate to `samples/tab-people-picker/nodejs`
+- In a terminal, navigate to `samples/tab-people-picker/nodejs`
 
-3) Install modules
+- Install modules
 
     ```bash
     npm install
     ```
 
-4) Run your bot at the command line:
+- Run your bot at the command line:
 
     ```bash
     npm start
     ```
 
-### 3. Setup Manifest for Teams
+## Setup Manifest for Teams
 
 - **This step is specific to Teams.**
 
-    -  Edit the `manifest.json` contained in the `Manifest` folder to replace {{Manifest-id}} with any GUID and ngrok url *everywhere* you see the place holder string `{{base-url}}`
+    -  Edit the `manifest.json` contained in the `Manifest` folder to replace {{Manifest-id}} with any GUID
+    - `{{base-url}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`. Replace *everywhere* you see the place holder string `{{base-url}}`
+       Note => Update `validDomains` as per your application domain, if needed.
+
     -  Zip up the contents of the `Manifest` folder to create a `manifest.zip`
     -  Upload the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 

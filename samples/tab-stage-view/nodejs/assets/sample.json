@@ -9,7 +9,7 @@
       "Microsoft Teams tab sample app for demonstrating tab in stage view"
     ],
     "creationDateTime": "2021-06-10",
-    "updateDateTime": "2022-05-17",
+    "updateDateTime": "2022-10-21",
     "products": [
       "Teams"
     ],
@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-stage-view/nodejs/Images/TabStageViewGif.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-stage-view/nodejs/Images/TabStageView.gif",
         "alt": "Solution UX showing stage view"
       }
     ],

@@ -8,7 +8,7 @@
     "longDescription": [
       "This sample shows tab capability with the feature of client sdk people picker."
     ],
-    "updateDateTime": "2022-05-17",
+    "updateDateTime": "2022-10-21",
     "products": [
       "Teams"
     ],
@@ -34,7 +34,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-people-picker/nodejs/Images/TabPeoplePickerGif.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-people-picker/nodejs/Images/TabPeoplePicker.gif",
         "alt": "Solution UX showing tab people picker"
       }
     ],

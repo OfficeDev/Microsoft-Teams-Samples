@@ -19,7 +19,7 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
 
 ## Interaction with app
 
-![Preview Image](Images/Preview.gif) 
+![Preview Image](Images/Preview.gif)
 
 ## Prerequisites
 
@@ -51,8 +51,8 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
       git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
       ```
 
-3. Go to .env file  and add ```MicrosoftAppId```,  ```MicrosoftAppPassword``` and ```BaseURL``` information with values generated while doing App Registration.
-- ```BaseURL``` will be your application domain URL like ngrok URL: https://xxxx.ngrok.io
+3. Open .env file from this path folder (samples/meetings-sidepanel/nodejs/server) and update ```MicrosoftAppId```,  ```MicrosoftAppPassword``` information with values generated values while doing AAD App Registration.
+- Update ```BaseURL``` with your application domain URL like ngrok URL: https://xxxx.ngrok.io
 
 4. Install node modules
 
@@ -111,8 +111,9 @@ npm install --legacy-peer-deps
 
 ##Running the sample
 
-### Interacting with the app in Teams Meeting
+**Interacting with the app in Teams Meeting**
 Interact with SidePanel by clicking on the App icon present on the top menu beside the "more actions" during a meeting.
+
 1. Once the app is clicked, sidepanel appears with the default agenda list. Only organizer gets the feasibility to add new agenda points to the list using "Add New Agenda Item" button.
 
 ![Dashboard](Images/Dashboard.png)
@@ -127,7 +128,7 @@ Interact with SidePanel by clicking on the App icon present on the top menu besi
 
 ![Notification](Images/Notification.png)
 
-### User interactions(Meeting Organizer)
+**User interactions(Meeting Organizer)**
 - **Add New Agenda Item** - Gives provision to add new Agenda point.
 - **Add** - Adds the agenda from Textinput to the SidePanel agenda list.
 - **Publish Agenda** - Sends the agenda list to the meeting chat.

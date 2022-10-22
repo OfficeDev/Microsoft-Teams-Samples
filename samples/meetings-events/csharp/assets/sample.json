@@ -9,7 +9,7 @@
       "Get real time meeting events"
     ],
     "creationDateTime": "2021-11-10",
-    "updateDateTime": "2022-04-20",
+    "updateDateTime": "2022-10-21",
     "products": [
       "Teams"
     ],
@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-events/csharp/MeetingEvents/Images/MeetingsEventsGif.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-events/csharp/MeetingEvents/Images/MeetingsEvents.gif",
         "alt": "Solution UX showing realtime meeting events"
       }
     ],

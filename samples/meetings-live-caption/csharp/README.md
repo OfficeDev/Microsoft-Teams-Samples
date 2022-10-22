@@ -47,17 +47,6 @@ Copy the CART link it will used while configuring tab for meeting.
     ngrok http --host-header=rewrite 3978
     ```
 
-1) Setup for Bot
-
-   Register an AAD app in Azure portal and also create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
-    - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
-    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
-    
-   In the new Azure Bot resource in the Portal, 
-    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
-
 1) Clone the repository
 
     ```bash
@@ -68,14 +57,14 @@ Copy the CART link it will used while configuring tab for meeting.
    - File -> Open -> Project/Solution
    - Navigate to folder where repository is cloned then `samples/meetings-live-caption/csharp/MeetingLiveCaption.sln`
 
-1) Run the bot from Visual Studio: 
+1) Run the bot from Visual Studio:
    - Press `F5` to run the project
 
-1) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
-   - `{{AppId}}` with any guid id value.
-   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+1) Modify the `manifest.json` in the `/AppManifest` folder and replace the following details:
+   - `<<AppId>>` with any GUID id value.
+   - `<<App-Domain>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
-1) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 6.
+1) Zip the contents of `AppManifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 6.
 
 1) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps

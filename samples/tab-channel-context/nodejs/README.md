@@ -29,37 +29,46 @@ This sample shows the contents of tab context object in a private and shared cha
 
 ## Setup
 
-1) Clone the repository
+1) Setup NGROK
+Run ngrok - point to port 3978
+
+    ```bash
+    ngrok http -host-header=rewrite 3978
+    
+    ```
+
+2) Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
 
-2) Install node modules
+3) Install node modules
 
    Inside node js folder,  navigate to `samples/tab-channel-context/nodejs/ClientApp` open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
 
     ```bash
     npm install
 
-3) Run the solution from the same path terminal using below command.
+4) Run the solution from the same path terminal using below command.
 
     ```
     npm start
     ```
 
-4) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
+5) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
    - `{{Manifest-id}}` with some unique GUID.
-   - `{{Domain Name}}` with your application's base url, e.g. https://1234.ngrok.io
+   - `{{base-url}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+   - `<<Domain Name>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
-5) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
+6) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
 
-6) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+7) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Apps -> Manage your apps -> Upload an app.
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
    
-7) Add the tab in private/shared channel.
+8) Add the tab in private/shared channel.
 
  **NOTE:** Only accounts with admin access can create private/shared channels in team.
 
@@ -72,7 +81,7 @@ This sample shows the contents of tab context object in a private and shared cha
 
 ![tab context in private channel](Images/regularChannel.png)
 
-## Features of the sample
+**Features of the sample**
 
 - Add the tab in private/shared channel.
 - The details of the context object will be shown on tab based on channel type.

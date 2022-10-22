@@ -35,7 +35,7 @@
   ],
   "configurableTabs": [
     {
-      "configurationUrl": "{{BASE-URL}}/config",
+      "configurationUrl": "https://{{BASE-URL}}/config",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",

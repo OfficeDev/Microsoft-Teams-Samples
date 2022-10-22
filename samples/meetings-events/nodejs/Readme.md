@@ -22,7 +22,7 @@ This feature shown in this sample is currently available in public developer pre
 
 ## Interaction with app
 
-![Meetings EventsGif](images/MeetingsEventsGif.gif)
+![Meetings EventsGif](images/MeetingsEvents.gif)
 
 ## Prerequisites
 
@@ -83,9 +83,9 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 - **This step is specific to Teams.**
 
-- Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
-   - `<<App-ID>>` with your app id   
-   - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
+- Modify the `manifest.json` in the `/appPackage` folder and replace the following details
+   - `<<App-ID>>` with your AAD app registration id   
+   - `<<VALID DOMAIN>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
     - **Add** in a meeting to test

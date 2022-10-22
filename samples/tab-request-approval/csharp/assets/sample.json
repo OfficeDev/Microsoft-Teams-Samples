@@ -9,7 +9,7 @@
       "This sample shows a feature where requester can request for any task approval from manager and manager can see the pending request by user on the click of activity feed notification and can approve or reject the request."
     ],
     "creationDateTime": "2021-11-29",
-    "updateDateTime": "2022-01-12",
+    "updateDateTime": "2022-10-21",
     "products": [
       "Teams"
     ],
