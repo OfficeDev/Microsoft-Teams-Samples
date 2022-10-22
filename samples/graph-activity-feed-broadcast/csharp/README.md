@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-activity-feed-broadcast-csh
 
 This sample shows a feature where user can broadcast a message to all members of organization using activty feed notification.
 
-- ## Interaction with app.
+## Interaction with app
 
 ![Broadcast from user](ActivityFeedBroadcast/Images/ActivityFeedBroadcast.gif)
 
@@ -30,14 +30,14 @@ This sample shows a feature where user can broadcast a message to all members of
   dotnet --version
   ```
 - [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
-  
-  run ngrok locally
-  ```bash
-  ngrok http -host-header=localhost 3978
-  ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 ## Setup
+
+- run ngrok locally
+  ```bash
+  ngrok http -host-header=localhost 3978
+  ```
 
 - Register your Teams Auth SSO with Azure AD
 
@@ -115,7 +115,7 @@ This sample shows a feature where user can broadcast a message to all members of
 	 
 19. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
    - `{{Microsoft-App-Id}}` with Application id generated from Step 3
-   - `{{Base_URL}}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+   - `{{Base_URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
    - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
 20. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 19.
@@ -128,19 +128,16 @@ This sample shows a feature where user can broadcast a message to all members of
 
  ** Note: App display name is used to get app id.
 
- ## Running the sample
+## Running the sample
 
- - Broadcast message for all the members.
-
-  ![Broadcast from user](ActivityFeedBroadcast/Images/BroadcastToBeSendToOraganisation.png)
+- Broadcast message for all the members.
+![Broadcast from user](ActivityFeedBroadcast/Images/BroadcastToBeSendToOraganisation.png)
 
 - Activity feed notification.
-
-  ![Notification](ActivityFeedBroadcast/Images/BroadcastNotification.png)
+![Notification](ActivityFeedBroadcast/Images/BroadcastNotification.png)
 
 - Broadcast details available for members.
-
-  ![Broadcast details](ActivityFeedBroadcast/Images/BroadcastDetails.png)
+![Broadcast details](ActivityFeedBroadcast/Images/BroadcastDetails.png)
 
 ## Further reading
 

@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-bulk-meetings-csharp
 
 This is a sample application which demonstrates how to create meeting in bulk on Teams calendar use to create meeting to upload excel sheet.
 
-## Interact with app.
+## Interact with app
 
 ![Meeting Event](EventMeeting/Images/MeetingEvent.gif)
 
@@ -42,8 +42,20 @@ Note these instructions are for running the sample on your local machine, the tu
     ngrok http --host-header=rewrite 3978
     ```
 
-1) Setup for Bot
+![Ngrok](EventMeeting/Images/NgrokScreenshot.png)
 
+1) Setup for AAD app registration
+    In Azure portal, create a AAD app registration
+        - Navigate to **API Permissions**, and make sure to add the below permissions:
+        - Select Add a permission, select Microsoft Graph -> Application permissions.
+            - `Calendars.ReadWrite`
+            - `Calendars.Read`
+
+        - Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+
+    Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json file.
+
+1) Setup for Bot
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name.
     - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
@@ -53,46 +65,26 @@ Note these instructions are for running the sample on your local machine, the tu
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
 
-## To try this sample
-
-> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
-> the Teams service needs to call into the app.
-
-### 1. Clone the repository
+1) Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
 
-### 2. Launch Visual Studio
+1) Launch Visual Studio
    - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/EventMeeting/csharp/EventMeeting.sln`
-    
-### 3. Start ngrok on localhost:3978
-- Open ngrok and run command `ngrok http -host-header=rewrite 3978` 
-- Once started you should see link  `https://41ed-abcd-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot.
+   - Navigate to folder where repository is cloned and then open this file `samples/EventMeeting/csharp/EventMeeting.sln`
 
+1) Setup and run the bot from Visual Studio:
+Modify the `appsettings.json` file with the following details:
+    - Update configuration with the ```MicrosoftAppId```, ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId``` values received while doing AAD app registration.
+    - Press `F5` to run the project
 
-![Ngrok](EventMeeting/Images/NgrokScreenshot.png)
-
-### 4. Update appsettings.json
-Update configuration with the ```MicrosoftAppId```,  ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId```.
-
-### 5. Modify the `manifest.json` in the `/AppPackage` folder 
+1) Modify the `manifest.json` in the `/Manifest` folder 
 Replace the following details:
-- `{{APP-ID}}` with any guid id value.
-- `{{BASE-URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-- **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
-- **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
-
-1) Navigate to **API Permissions**, and make sure to add the follow permissions:
--   Select Add a permission
--   Select Microsoft Graph -> Application permissions.
-   - `Calendars.ReadWrite`
-   - `Calendars.Read`
-
--   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
-
-1).  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json file.
+    - `<<Your Microsoft App Id>>` with your MicrosoftAppId received after doing AAD app registration in Azure portal.
+    - `{{BASE-URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
+    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 ## Running the sample
 

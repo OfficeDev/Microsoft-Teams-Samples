@@ -39,7 +39,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{Base_URL}}"
+    "{{domain-name}}"
   ],
   "activities": {
     "activityTypes": [

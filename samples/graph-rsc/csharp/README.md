@@ -19,9 +19,9 @@ This sample illustrates you can use [Resource Specific Consent (RSC)](https://do
 
 ## Interaction with app.
 
- ![Broadcast from user](RSCDemo/Images/RSCDemo.gif)
+![Broadcast from user](RSCDemo/Images/RSCDemo.gif)
 
- ## Prerequisites
+## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
 
@@ -29,6 +29,7 @@ This sample illustrates you can use [Resource Specific Consent (RSC)](https://do
   # determine dotnet version
   dotnet --version
   ```
+
 - [Graph explorer](https://developer.microsoft.com/en-us/graph/graph-explorer)    
 
 ## Setup
@@ -53,14 +54,18 @@ This sample illustrates you can use [Resource Specific Consent (RSC)](https://do
       ngrok http -host-header=rewrite 3978
       ```
 
-1. Config changes: 
-    - Add your client id, client secret  in appsettings.json
+1.  Update appsettings.json
+    - Update configuration for <<Client Id>> and <<Client Secret>> with the ```MicrosoftAppId``` and ```MicrosoftAppPassword``` which was generated while doing app registration in Azure Portal.
+
+1. Run the bot from Visual Studio: 
     - Press `F5` to run the project
-    - Update the ngrok in manifest 
-    - Zip all three files present in manifest folder.
 
-
-1. [Upload app manifest file](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#load-your-package-into-teams) (zip file) to your team
+## Setup the `manifest.json` in the `/AppPackage` folder 
+   Replace the following details:
+    - `<<Your Microsoft APP Id>>` with any guid id value.
+    - `[Your Ngrok Domain]` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
+    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 ## Running the sample
 
@@ -75,11 +80,5 @@ This sample illustrates you can use [Resource Specific Consent (RSC)](https://do
 
 ## Further Reading.
 
--[Graph RSC](https://learn.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent)
-   
-
-
-
-
-
-
+- [Graph RSC](https://learn.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent)
+- [Upload app manifest file](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#load-your-package-into-teams) (zip file) to your team.

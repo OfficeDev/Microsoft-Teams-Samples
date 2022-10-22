@@ -21,7 +21,7 @@
   "accentColor": "#5558AF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://yourNgrok.ngrok.io/configure",
+      "configurationUrl": "https://{{BASE-URL}}/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -51,7 +51,7 @@
   ],
   "webApplicationInfo": {
     "id": "<<Your Microsoft App Id>>",
-    "resource": "https://yourNgrok.ngrok.io",
+    "resource": "https://{{BASE-URL}}",
     "applicationPermissions": [
       "OnlineMeeting.ReadBasic.Chat"
     ]

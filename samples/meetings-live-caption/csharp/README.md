@@ -49,7 +49,7 @@ Copy the CART link it will used while configuring tab for meeting.
 
 1) Setup for Bot
 
-   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+   Register an AAD app in Azure portal and also create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name.
     - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
     - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
@@ -64,6 +64,13 @@ Copy the CART link it will used while configuring tab for meeting.
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
+1) Open the code in Visual Studio
+   - File -> Open -> Project/Solution
+   - Navigate to folder where repository is cloned then `samples/meetings-live-caption/csharp/MeetingLiveCaption.sln`
+
+1) Run the bot from Visual Studio: 
+   - Press `F5` to run the project
+
 1) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
    - `{{AppId}}` with any guid id value.
    - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
@@ -77,7 +84,6 @@ Copy the CART link it will used while configuring tab for meeting.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 **NOTE: If you are not able to send caption, try configuring tab again.**
-
 
 ## Running the sample
 
