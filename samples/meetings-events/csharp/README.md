@@ -81,19 +81,16 @@ Run ngrok - point to port 3978
 
 4) Setup Manifest for Teams
 
-- **This step is specific to Teams.**
-
 Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
 
    - `<<App-ID>>` with your AAD app registration id   
    - `<<VALID DOMAIN>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
    Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store
-
-         - Add in a meeting to test
-         - Select **Apps** from the left panel.
-         - Then select **Upload a custom app** from the lower right corner.
-         - Then select the `manifest.zip` file from `AppPackage` folder. 
-         - After installation, add the bot to a meeting.
+	- Add in a meeting to test
+	- Select **Apps** from the left panel.
+	- Then select **Upload a custom app** from the lower right corner.
+	- Then select the `manifest.zip` file from `AppPackage` folder.
+	- After installation, add the bot to a meeting.
 
 ## Running the sample
 
