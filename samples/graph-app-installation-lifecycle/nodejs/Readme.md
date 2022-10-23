@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-app-installation-lifecycle-
 
 This sample app demonstarte the installation lifecycle for Teams [Apps](https://docs.microsoft.com/en-us/graph/api/resources/teamsappinstallation?view=graph-rest-1.0) which includes create, update delete Apps
 
-# Feature of the sample
+# Interact with app.
 
    ![](Images/GraphAppInstallationLifecycleGif.gif)
 
@@ -25,7 +25,7 @@ This sample app demonstarte the installation lifecycle for Teams [Apps](https://
 - [NodeJS](https://nodejs.org/en/)
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## To try this sample
+## Setup.
 
 1) Clone the repository
 
@@ -66,26 +66,24 @@ This sample app demonstarte the installation lifecycle for Teams [Apps](https://
     - **Edit** the `manifest.json` contained in the  `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Manifest-id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)and ngrok url *everywhere* you see the place holder string `<<base-URL>>`
     - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+  
+## Running the sample.
 
    ![](Images/Install.png)
 
-
    ![](Images/AddAppListTab.png)
-
 
    ![](Images/ListApp.png)
 
-
    ![](Images/AppAddSuccess.png)
 
-
    ![](Images/AppDescription.png)
-
-
+   
    ![](Images/AppUpdateSuccess.png)
-
 
     ![](Images/DeleteApp.png)
 
-
     ![](Images/AppDeleteSuccess.png)
+ 
+## Further Reading
+[Graph-app-installation](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)
