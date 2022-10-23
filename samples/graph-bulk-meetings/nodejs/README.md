@@ -105,8 +105,6 @@ npm install moment --save
 
 ## Running the sample.
 
-## Features of samples Graph Bulk Meetings
-
 ![Dashboard](Images/Dashboard.png)
 
 ![Create Meeting](Images/CreateMeeting.png)
