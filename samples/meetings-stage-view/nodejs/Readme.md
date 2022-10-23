@@ -22,7 +22,7 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 
 ![Preview Image](Images/preview_web.gif)
 
-## Interact with app- Mobile Web
+## Interact with app- Web
 
 ![Preview Image](Images/preview_mobile.gif)
 
