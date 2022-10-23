@@ -85,18 +85,19 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
  
 4) Setup Manifest for Teams
 
-- **This step is specific to Teams.**
-
 - Modify the `manifest.json` file placed in `/teamsAppManifest` folder and replace the <<APP_ID>> with your Microsoft App Id received via doing AAD app registration in your Azure Portal.
     - **Edit** the `manifest.json` for `validDomains` and replace <<Valid-Domain>> with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
-    - **Add** in a meeting to test
+    - - **Upload** the `manifest.zip` to Teams
          - Select **Apps** from the left panel.
          - Then select **Upload a custom app** from the lower right corner.
-         - Then select the `manifest.zip` file from `teamsAppManifest`. 
+         - Then select the `manifest.zip` file from `teamsAppManifest`.
+         - Add the app to Teams meeting
+         
+- [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
 ## Running the sample
-- [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
+
 
 **Hello command interaction:**
 
@@ -123,7 +124,7 @@ Message the Bot by @ mentioning to interact with the content bubble.
 
 ## Further reading
 
--[Meeitng content bubble](https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meeting-content-bubble)
+- [Meeitng content bubble](https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meeting-content-bubble)
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Portal](https://portal.azure.com)

@@ -19,8 +19,10 @@ This is a sample application where user can create, update, add or remove member
 
 ## Interaction with app
 
+**Tag creation flow*
 ![Create new tag](GraphTeamsTag/Images/CreateTagFlow.gif)
 
+**Tag updation flow*
 ![View/Edit tag](GraphTeamsTag/Images/ViewOrEditTagFlow.gif)
 
 ## Prerequisites
