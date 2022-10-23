@@ -71,10 +71,10 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 ![profile in search](Images/ProfileFromSearch.PNG)
 
 **Profile card:**
-![link unfurling](Images/Profilecard.png)
+![link unfurling](Images/Profilecard.PNG)
 
 **Signout:**
-![link unfurling](Images/Signout.png)
+![link unfurling](Images/Signout.PNG)
 
 ## Further reading
 

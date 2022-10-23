@@ -13,29 +13,20 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-outgoing-webhook-nodejs
 ---
 
-# Outgoing webhook
+## Outgoing webhook
 
 This project is an implementation of a very simple [Outgoing Webhook](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/custom-bot) for Microsoft Teams. All it does is verify that what's sending messages matches the Outgoing Webhook that was created in Teams, and it echoes back whatever is sent to it.
 
-## Features of samples Outgoing Webhook
+## Interaction with app.
 
 ![Broadcast from user](./Images/Outgoingwebhook.gif)
 
-Example screenshot to show Hero card:
-![Hero card](Images/heroCard.png)
-
-* Supported <card type>: "adaptive-card", "hero-card", "list-card", "o365-card", "thumbnail-card"
-
-* If you type anything else apart from above mentioned type, it will echo back what you typed.
-
-Example screenshot to show Echo message:
-![Echo message](Images/echoMessage.png)
-
-## Steps to run locally
-
 ### Prerequisites
 
-* Install Git for windows: https://git-for-windows.github.io/
+- Install Git for windows: https://git-for-windows.github.io/
+- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+
+## Setup
 
 * Clone this repo:
   ```bash
@@ -60,6 +51,19 @@ Example screenshot to show Echo message:
 * In Microsoft Teams, in any channel in the team in which you created the Outgoing Webhook, you can type `@<botname> <card-type>` then it will respond back a card with specified card type.
   
   Supported <card type>: "adaptive-card", "hero-card", "list-card", "o365-card", "thumbnail-card"
+
+## Running the sample
+
+- Example screenshot to show Hero card:
+![Hero card](Images/heroCard.png)
+
+* Supported <card type>: "adaptive-card", "hero-card", "list-card", "o365-card", "thumbnail-card"
+
+* If you type anything else apart from above mentioned type, it will echo back what you typed.
+
+- Example screenshot to show Echo message:
+![Echo message](Images/echoMessage.png)
+
 
 ## Contributing
 

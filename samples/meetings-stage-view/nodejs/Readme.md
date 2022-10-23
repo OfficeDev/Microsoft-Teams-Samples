@@ -120,8 +120,6 @@ This capability is currently available in developer preview only.
 
     - You can now interact with the app.
 
-## Features of this sample
-
 
 - Add Details for collaboration.
 

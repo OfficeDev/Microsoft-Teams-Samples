@@ -17,13 +17,13 @@ urlFragment: officedev-microsoft-teams-samples-graph-teams-tag-nodejs
 
 This is a sample application where user can create, update, add or remove members of a tag. All of Graph CRUD operations related to tags can be performed within this sample.
 
-## Key features
+## Interaction with app
 
-1. Create new tags.
+- Create new tags.
 
 ![Create new tag](Images/CreateTagFlow.gif)
 
-2. View/Edit existing tags.
+- View/Edit existing tags.
 
 ![View/Edit tag](Images/ViewOrEditTagFlow.gif)
 
@@ -35,7 +35,7 @@ This is a sample application where user can create, update, add or remove member
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-## Run app locally
+## Setup.
 
 ### Register your application with Azure AD
 
@@ -104,9 +104,7 @@ npm start
 - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
 - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-
-
-## Features of this sample
+## Running the sample
 
 1. User can see list of tags created for the current team.
 ![Manage Tag Dashboard](Images/Dashboard.png)

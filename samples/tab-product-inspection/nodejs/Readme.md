@@ -17,14 +17,16 @@ urlFragment: officedev-microsoft-teams-samples-tab-product-inspection-nodejs
 
 This sample app demonstrate a feature where user can scan a product, capture a image and mark it as approved/rejected.
 	
-	![Preview Image](Images/Preview.gif)
+## Interaction with app
+
+![Preview Image](Images/Preview.gif)
 
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/en/)
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## To try this sample
+## Setup.
 
 1) Clone the repository
 
@@ -51,23 +53,31 @@ This sample app demonstrate a feature where user can scan a product, capture a i
     ```bash
     npm start
     ```
-## Interacting with the app in Teams Meeting
-Interact with Product Inspection by clicking on the App icon.
-1. Once the app is clicked, Product Inspection appears with the default product list.
-
-   ![](Images/product-list.png)
-   
-2. On click on "Inspect product" button, scanner will open when scan the product bar code user can Approve or Reject the product.
-
-	![](Images/product-status.png)
-
-3. On click on "View product status" button, scanner will open when scan the product bar code and user can view the detail of the product.
-
-   ![](Images/view-product-status.png)
-
 
 1) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Manifest-id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)and ngrok url *everywhere* you see the place holder string `<<base-url>>`
     - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+
+## Running the sample.
+
+Interact with Product Inspection by clicking on the App icon.
+
+1. Once the app is clicked, Product Inspection appears with the default product list.
+
+   ![Product List](Images/product-list.png)
+   
+2. On click on "Inspect product" button, scanner will open when scan the product bar code user can Approve or Reject the product.
+
+	![Product Status](Images/product-status.png)
+
+3. On click on "View product status" button, scanner will open when scan the product bar code and user can view the detail of the product.
+
+   ![View Product Status](Images/view-product-status.png)
+
+## Further Read.
+
+[Product inspection](https://learn.microsoft.com/en-us/power-apps/teams/inspection)
+
+
 

@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "06/10/2021 01:48:56 AM"
+ createdDate: "06-10-2021 01:48:56"
 urlFragment: officedev-microsoft-teams-samples-tab-conversations-nodejs
 ---
 
@@ -17,29 +17,9 @@ urlFragment: officedev-microsoft-teams-samples-tab-conversations-nodejs
 
 This Teams tab app provides a way to allow users to have conversations about sub-entities in the tab [Create conversational tabs](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/conversational-tabs?view=msteams-client-js-latest#continue-a-conversation)
 
-## Key features
+## Interaction with app
 
-- Tab showing actions that can be performed
-
-![Actions Page](images/actions.png)
-
-- Open Conversation - opens a new conversation
-
-![Open Conversation](images/open.png)
-
-- Close Conversation - closes the conversation view
-
-![Close Conversation](images/close.png)
-
-- Continue Conversation - continues old conversation based on conversation id
-
-![Continue Conversation](images/continue.png)
-
-> NOTE: We should save the subEntityId and conversationId to continue an existing conversartion.
-
-- Deeplink to Conversation - opens the conversation in channel
-
-![Deeplink to Conversation](images/deeplink.png)
+![Preview Image](Images/Preview.gif) 
 
 ## Prerequisites
 
@@ -96,6 +76,30 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
          - From the lower left corner, choose Upload a custom App
          - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
          - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
+
+## Key features
+
+- Tab showing actions that can be performed
+
+![Actions Page](Images/actions.png)
+
+- Open Conversation - opens a new conversation
+
+![Open Conversation](Images/open.png)
+
+- Close Conversation - closes the conversation view
+
+![Close Conversation](images/close.png)
+
+- Continue Conversation - continues old conversation based on conversation id
+
+![Continue Conversation](Images/continue.png)
+
+> NOTE: We should save the subEntityId and conversationId to continue an existing conversartion.
+
+- Deeplink to Conversation - opens the conversation in channel
+
+![Deeplink to Conversation](Images/deeplink.png)
 
 ## Interacting with the tab in Teams
 

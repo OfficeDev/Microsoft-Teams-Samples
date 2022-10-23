@@ -17,6 +17,8 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-nodejs
 
 This sample displays how to consume SubEntity Id to [DeepLink](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-links#deep-linking-to-your-tab) from Bot to Tab and Tab to Tab.
 
+## Interaction with bot
+
 ![Preview Image](Images/Preview.gif)
 
 ## Prerequisites
@@ -27,12 +29,16 @@ This sample displays how to consume SubEntity Id to [DeepLink](https://docs.micr
     # determine node version
     node --version
     ```
-
       
  - [Ngrok](https://ngrok.com/download) (Only for devbox testing) Latest (any other tunneling      software       can also be used)
-    ```bash
+   
 
-     # run ngrok locally
+## Setup.
+
+
+ # run ngrok locally
+
+     ```bash
     ngrok http -host-header=localhost 3978
     ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
@@ -79,7 +85,7 @@ This sample displays how to consume SubEntity Id to [DeepLink](https://docs.micr
 1. Install the app in Teams.
 
 
-## Interacting with the bot
+## Running the sample.
 
 Enter text in the emulator.  The text will be echoed back by the bot.
 1. Interact with DeepLink bot by pinging it in personal or channel scope. 
@@ -103,4 +109,7 @@ Enter text in the emulator.  The text will be echoed back by the bot.
 5. While it's in stage view, using same [deeplink to open tab](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-links?tabs=teamsjs-v2#generate-a-deep-link-to-your-tab) will open the meeting side panel tab.
 
 ![Meeting stage view](Images/MeetingStageView.png)
+
+## Further Read.
+[Tab Deeplink](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-links?tabs=teamsjs-v2)
 
