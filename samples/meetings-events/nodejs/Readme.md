@@ -42,22 +42,23 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 > NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
 
-### 1. Setup for Bot
-    - Register Azure AD application resource in Azure portal
-    - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+1) Setup for Bot
+- Register Azure AD application resource in Azure portal
+- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
-    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-     **NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
-### 2. Setup NGROK  
+    **NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
+
+2) Setup NGROK  
     - Run ngrok - point to port `3978`
 
     ```bash
     ngrok http -host-header=localhost 3978
     ```
 
-### 3. Setup for code   
+3) Setup for code   
 - Clone the repository
 
     ```bash
@@ -73,13 +74,13 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 > NOTE: the App Password is referred to as the `client secret` in the azure portal and you can always create a new client secret anytime.
 
-5) Run your bot at the command line:
+- Run your bot at the command line:
 
     ```bash
     npm start
     ```
 
-### 4. Setup Manifest for Teams
+4) Setup Manifest for Teams
 
 - **This step is specific to Teams.**
 
