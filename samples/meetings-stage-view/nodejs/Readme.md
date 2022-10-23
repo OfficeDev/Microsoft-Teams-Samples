@@ -18,11 +18,11 @@ urlFragment: officedev-microsoft-teams-samples-meetings-stage-view-nodejs
 This App helps to enable and configure your apps for Teams meetings. This app covers Shared meeting stage using [Live Share SDK](https://aka.ms/livesharedocs).
 For reference please check [Enable and configure your apps for Teams meetings](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/enable-and-configure-your-app-for-teams-meetings)
 
-## Meeting Preview Web
+## Interact with app- Mobile
 
 ![Preview Image](Images/preview_web.gif)
 
-## Meeting Preview Web
+## Interact with app- Mobile Web
 
 ![Preview Image](Images/preview_mobile.gif)
 
@@ -41,27 +41,7 @@ For reference please check [Share app content to stage API](https://docs.microso
 
 This capability is currently available in developer preview only.
 
-- App in stage view.
 
-![Stage View Screen](Images/stage_view.png)
-
-- Sharing specific part of your app to the meeting stage.
-
-![Share Specific part screen](Images/share_specific_part.png)
-
-**NOTE: Currently Live Share SDK is not supported in mobiles.**
-
-## IOS Meeting Side panel and stage view.
-
-![IOS Side Panel](Images/ios_side_panel.jpeg)
-
-![IOS Stage View](Images/ios_share_todo.jpeg)
-
-## Android Meeting Side panel and stage view.
-
-![Android Side Panel](Images/android_side_panel.jpeg)
-
-![Android Stage View](Images/android_share_todo.jpeg)
 
 ## To try this sample
 -  Clone the repository
@@ -104,6 +84,30 @@ This capability is currently available in developer preview only.
 ## Interacting with the app in Teams
     You can use this app by following the below steps:
     - Edit a meeting and select `+` icon at the top right corner.
+    
+## Running the sample.
+
+- App in stage view.
+
+![Stage View Screen](Images/stage_view.png)
+
+- Sharing specific part of your app to the meeting stage.
+
+![Share Specific part screen](Images/share_specific_part.png)
+
+**NOTE: Currently Live Share SDK is not supported in mobiles.**
+
+## IOS Meeting Side panel and stage view.
+
+![IOS Side Panel](Images/ios_side_panel.jpeg)
+
+![IOS Stage View](Images/ios_share_todo.jpeg)
+
+## Android Meeting Side panel and stage view.
+
+![Android Side Panel](Images/android_side_panel.jpeg)
+
+![Android Stage View](Images/android_share_todo.jpeg)
 
 ![Add icon in meeting](Images/add_icon.png)
 
@@ -136,3 +140,7 @@ This capability is currently available in developer preview only.
 - Sharing specific parts of app.
 
 ![Share specific part](Images/share_specific_part_sidepanel.png)
+
+## Further Reading.
+
+[Meeting stage view](https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meetings-stage-view)
