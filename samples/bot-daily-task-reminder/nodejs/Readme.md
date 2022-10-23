@@ -19,7 +19,7 @@ This sample shows a feature where user can schedule a recurring task and get the
 
 ## Interaction with app
 
-![Bot Daily Task ReminderGif ](Images/BotDailyTaskReminderGif.gif)
+![Bot Daily Task ReminderGif ](Images/BotDailyTaskReminder.gif)
 
 ## Prerequisites
 
@@ -33,7 +33,8 @@ This sample shows a feature where user can schedule a recurring task and get the
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
 
-### 1. Setup for Bot
+1) Setup for Bot
+- In Azure portal, create AAD app registraion and it will generate MicrosoftAppId and MicrosoftAppPassword for you.
 - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
@@ -47,23 +48,23 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     
     > NOTE: When you create your app registration in Azure portal, you will create an App ID and App password - make sure you keep these for later.
 
-### 2. Setup NGROK  
-1) Run ngrok - point to port 3978
+2) Setup NGROK  
+ Run ngrok - point to port 3978
 
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
 
-### 3. Setup for code  
-1) Clone the repository
+3) Setup for code  
+- Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In the folder where repository is cloned navigate to `samples/bot-daily-task-reminder/nodejs`
+- In the folder where repository is cloned navigate to `samples/bot-daily-task-reminder/nodejs`
 
-3) Install node modules
+- Install node modules
 
    Inside nodejs folder, open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
 
@@ -71,19 +72,21 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     npm install
     ```
 
-4) Update the `.env` configuration file in your project folder for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`, `BaseUrl` with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+- Update the `.env` configuration file in your project folder for the bot to use the `MicrosoftAppId`, `MicrosoftAppPassword` (Note the MicrosoftAppId is the AppId created while doing AAD app registration in Azure portal, the MicrosoftAppPassword is referred to as the "client secret" generated while creating Secret in AAD app registration.
+ `BaseUrl` with application base url. For e.g., your ngrok url https://xxx.ngrok.io
 
-5) Run your app
+- Run your app
 
     ```bash
     npm start
     ```
 
-### 4. Setup Manifest for Teams
+4) Setup Manifest for Teams
 
 - **This step is specific to Teams.**
 
-    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - Relace {{domain-name}} with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 

@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-teams-tag-csharp
 
 This is a sample application where user can create, update, add or remove members of a tag. All of Graph CRUD operations related to tags can be performed within this sample.
 
-## Interaction with app.
+## Interaction with app
 
 ![Create new tag](GraphTeamsTag/Images/CreateTagFlow.gif)
 
@@ -36,7 +36,7 @@ This is a sample application where user can create, update, add or remove member
 
 ## Setup
 
-### 1. Register your application with Azure AD
+1) Register your application with Azure AD
 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
@@ -61,46 +61,46 @@ This is a sample application where user can create, update, add or remove member
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
 
-### 2. Clone the repository
+2) Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
 
-### 3. Launch Visual Studio
+3) Launch Visual Studio
    - File -> Open -> Project/Solution
    - Navigate to folder where repository is cloned then `samples/graph-teams-tag/csharp/GraphTeamsTag.sln`
     
-### 4. Start ngrok on localhost:3978
+4) Start ngrok on localhost:3978
 - Open ngrok and run command `ngrok http -host-header=rewrite 3978` 
 - Once started you should see link `https://xxxxx.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot.
 
 ![Ngrok](GraphTeamsTag/Images/NgrokScreenshot.png)
 
-### 5. Update appsettings.json
-Update configuration with the ```MicrosoftAppId```,  ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId``` with the values generated while doing app registration in Azure Portal.
+5) Update appsettings.json
+Update configuration with the ```MicrosoftAppId```,  ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId``` with the values generated while doing AAD app registration in Azure Portal.
 
-### 6. Run the bot from Visual Studio: 
+6) Run the bot from Visual Studio: 
    - Press `F5` to run the project
 
-### 7. Setup the `manifest.json` in the `/AppPackage` folder 
+7) Setup the `manifest.json` in the `/AppPackage` folder 
 Replace the following details:
-- `{{APP-ID}}` with any guid id value.
+- `{{APP-ID}}` with any GUID id value or your MicrosoftAppId.
 - `{{BASE-URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
 - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 ## Running the sample
 
-1. User can see list of tags created for the current team.
+**User can see list of tags created for the current team.**
 ![Manage Tag Dashboard](GraphTeamsTag/Images/Dashboard.png)
 
-2. User can view/edit the existing team tags.
+**User can view/edit the existing team tags.**
 ![View/Edit Tags](GraphTeamsTag/Images/ViewOrEditTag.png)
 
-3. User can create new team tags.
+**User can create new team tags.**
 ![Create new Tag](GraphTeamsTag/Images/CreateTagTaskModule.png)
 
-4. User can delete existing team tags.
+**User can delete existing team tags.**
 
 ## Further reading
 - [TeamworkTag resource type](https://docs.microsoft.com/en-us/graph/api/resources/teamworktag?view=graph-rest-beta)

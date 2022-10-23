@@ -37,13 +37,13 @@ This sample app demonstrates sending change notifications to user presence in Te
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) Run ngrok - point to port 3978
+2) Run ngrok - point to port 3978
 
    ```bash
      ngrok http -host-header=rewrite 3978
    ```
 
-1) Setup App Registration
+3) Setup App Registration
 This step will create an AAD app, it will be reused wherever it needs AAD throughout this sample to simpler the steps.
 
     - Navigate to [Azure _App Registration_ Blade](https://ms.portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade)
@@ -117,7 +117,7 @@ This step will create an AAD app, it will be reused wherever it needs AAD throug
 
     - Check the *Access tokens* and *ID tokens* boxes and click on Save button.
 
-1) Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+4) Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
@@ -149,21 +149,21 @@ This step will create an AAD app, it will be reused wherever it needs AAD throug
         i. Provide  Scopes like "Presence.Read, Presence.Read.All"
 ![image](https://user-images.githubusercontent.com/85864414/122000240-1d16fb80-cdcc-11eb-8aeb-a1dc898f947e.PNG)
 
-1)  Open the code in Visual Studio
+5)  Open the code in Visual Studio
 
   - Launch Visual Studio code
   - File -> Open Folder
   - Navigate to `samples/graph-change-notification/csharp` folder
   - Select `ChangeNotification.sln` and open it in Visual Studio
    
-1) Setup and run the bot from Visual Studio:
+6) Setup and run the bot from Visual Studio:
 Modify the `appsettings.json` file with the following details:
     - Provide MicrosoftAppId and MicrosoftAppPassword in the appsetting that is created in Azure while doing AAD app registration.
     - Provide ConnectionName in appsetting that is created in Azure wile creating connect for your Azure bot.
     - Provide the ngrok url as "BaseUrl" in appsetting on which application is running on like URL: https://xxxx.ngrok.io
     - Press `F5` to run the project
 
-1) __*This step is specific to Teams.*__
+7) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json`file contained in the `Manifest` folder to replace your Microsoft App Id (that was created when you registered your AAD app registration earlier) *everywhere* you see the place holder string `<<app id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - `[Your Ngrok Domain]` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`

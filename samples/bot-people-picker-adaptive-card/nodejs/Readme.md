@@ -20,47 +20,45 @@ This sample shows the feature of people picker on Adaptive Cards.
 
 ## Interaction with app
 
- ![Bot People Picker Adaptive CardGif ](Images/BotPeoplePickerAdaptiveCardGif.gif)
+ ![Bot People Picker Adaptive CardGif ](Images/BotPeoplePickerAdaptiveCard.gif)
 
 ## Prerequisites
 
 - To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+
+- You'll need [Ngrok](https://ngrok.com/) installed on your development machine.
+Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
 ## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
 
-### 1. Setup for Bot
+1) Setup for Bot
+- In Azure portal, create AAD app registraion and it will generate MicrosoftAppId and MicrosoftAppPassword for you.
 - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-
-- To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
-Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
-
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+    While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
     
     > NOTE: When you create your app registration in Azure portal, you will create an App ID and App password - make sure you keep these for later.
 
-### 2. Setup NGROK  
-1) Run ngrok - point to port 3978
+2) Setup NGROK  
+Run ngrok - point to port 3978
 
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
 
-### 3. Setup for code
-1) Clone the repository
+3) Setup for code
+- Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
+- In the folder where repository is cloned navigate to `samples/bot-people-picker-adaptive-card/nodejs`
 
-2) In the folder where repository is cloned navigate to `samples/bot-people-picker-adaptive-card/nodejs`
-
-3) Install node modules
+- Install node modules
 
    Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
 
@@ -68,15 +66,15 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     npm install
     ```
 
-4) Open the `.env` configuration file in your project folder (or in Visual Studio Code) and update the `MicrosoftAppId` and `MicrosoftAppPassword` with your app's base url. (Note the ClientId is the AppId created in step 1 (Setup for Bot), the ClientSecret is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+- Open the `.env` configuration file in your project folder (or in Visual Studio Code) and update the `MicrosoftAppId` and `MicrosoftAppPassword` with the values generated while doing AAD app registration including Secret creation.(ClientSecret is referred to as the "client secret" generated from your AAD app registrationin.
 
-5) Run your app
+- Run your app
 
     ```bash
     npm start
     ```
 
-### 4. Setup Manifest for Teams
+4) Setup Manifest for Teams
 
 - **This step is specific to Teams.**
 

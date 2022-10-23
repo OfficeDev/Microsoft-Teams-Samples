@@ -19,7 +19,7 @@ This is a sample application which demonstrates how to create meeting in bulk on
 
 ## Interact with app
 
-![Meeting Event](EventMeeting/Images/MeetingEvent.gif)
+![Meeting Event](EventMeeting/Images/graph-bulk-meetings.gif)
 
 ## Prerequisites
 
@@ -76,12 +76,12 @@ Note these instructions are for running the sample on your local machine, the tu
 
 1) Setup and run the bot from Visual Studio:
 Modify the `appsettings.json` file with the following details:
-    - Update configuration with the ```MicrosoftAppId```, ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId``` values received while doing AAD app registration.
+    - Update configuration with the ```MicrosoftAppId```, ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId``` values received while doing AAD app registration in your Azure portal.
     - Press `F5` to run the project
 
 1) Modify the `manifest.json` in the `/Manifest` folder 
 Replace the following details:
-    - `<<Your Microsoft App Id>>` with your MicrosoftAppId received after doing AAD app registration in Azure portal.
+    - `<<Your Microsoft App Id>>` with your MicrosoftAppId received after doing AAD app registration in your Azure portal.
     - `{{BASE-URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")

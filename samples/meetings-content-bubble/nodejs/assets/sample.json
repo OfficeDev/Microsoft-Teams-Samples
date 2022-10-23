@@ -9,7 +9,7 @@
       "Illustrates how to implement the \"content bubble\" in-meeting experience"
     ],
     "creationDateTime": "2021-07-07",
-    "updateDateTime": "2022-01-12",
+    "updateDateTime": "2022-10-21",
     "products": [
       "Teams"
     ],
@@ -32,12 +32,12 @@
       }
     ],
    "thumbnails": [
-      {
-        "type": "image",
-        "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-hello-world/nodejs/Images/MeetingsContentBubbleGif.gif",
-        "alt": "Solution UX showing microsoft teams nodejs meetings-content-bubble sample"
-      }
+    {
+      "type": "image",
+      "order": 100,
+      "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-hello-world/nodejs/Images/MeetingsContentBubble.gif",
+      "alt": "Solution UX showing microsoft teams nodejs meetings-content-bubble sample"
+    }
     ],
     "authors": [
       {

@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-checkin-location/csharp/AppCheckinLocation/Images/AppcheckinLocationGif.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-checkin-location/csharp/AppCheckinLocation/Images/AppcheckinLocation.gif",
         "alt": "Solution UX showing app check in location"
       }
     ],

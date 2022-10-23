@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-installation-using-qr-code/nodejs/Images/AppInstallationUsingQRCodeGif.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-installation-using-qr-code/nodejs/Images/AppInstallationUsingQRCode.gif",
         "alt": "Solution UX showing app installation using QR code."
       }
     ],

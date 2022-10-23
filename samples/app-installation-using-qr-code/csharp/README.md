@@ -21,13 +21,13 @@ The user can Generate a new QR code (contains app id information) and then use I
 
 `Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients`.
 
-## Interaction with bot - Desktop View
+**Interaction with bot - Desktop View**
 
-![App Installation Using QRCodeDesktopGif](QRAppInstallation/Images/AppInstallationUsingQRCodeDesktopGif.gif)
+![App Installation Using QRCodeDesktopGif](QRAppInstallation/Images/AppInstallationUsingQRCodeDesktop.gif)
 
-## Interaction with bot - Mobile View
+**Interaction with bot - Mobile View**
 
-![App Installation Using QRCodeGif](QRAppInstallation/Images/AppInstallationUsingQRCodeGif.gif)
+![App Installation Using QRCodeGif](QRAppInstallation/Images/AppInstallationUsingQRCode.gif)
 
 ## Prerequisites
 
@@ -43,43 +43,45 @@ The user can Generate a new QR code (contains app id information) and then use I
 
 ## Setup
 
-### 1. Setup for Bot
-   In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+1) Setup for Bot SSO
+- Refer to [Bot SSO Setup document](../BotSSOSetup.md)
 
-   - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-   - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-### 2. Setup NGROK
+- While registering the Azure bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+    
+    > NOTE: When you create your app registration in Azure portal, you will create an App ID and App password - make sure you keep these for later.
+
+2) Setup NGROK
 - Run ngrok - point to port 3978
 
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
 
-### 3. Setup for code
-1) Clone the repository
+3) Setup for code
+- Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
    
-2) In a terminal, navigate to `samples/app-installation-using-qr-code/csharp`
+- In a terminal, navigate to `samples/app-installation-using-qr-code/csharp`
 
     change into project folder
     ```bash
     cd # QRAppInstallation
     ```
  
-3) Modify the `/appsettings.json` and fill in the following details:
-  - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
-  - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
-  - `{{Connection Name}}` - The OAuthConnection setting 
+- Modify the `/appsettings.json` and fill in the following details:
+  - `{{Microsoft-App-Id}}` - Generated from Step 1 from AAD app registration in Azure portal
+  - `{{Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
   - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+  - `{{ Auth Connection Name }}` - The OAuthConnection setting from step 1, from Azure Bot SSO setup
 
-    The `Connection Name` referred to is the name that we provide while adding OAuth connection setting in the Bot channel registration.
-    Please follow link [Add authentication to your bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2) to see how we can add the setting.
+The `Connection Name` referred to is the name that we provide while adding OAuth connection setting in the Bot channel registration.
+Please follow link [Add authentication to your bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2) to see how we can add the setting.
  
-4) Run the bot from a terminal or from Visual Studio, choose option A or B.
+- Run the bot from a terminal or from Visual Studio, choose option A or B.
  
    A) From a terminal
      ```bash
@@ -94,13 +96,13 @@ The user can Generate a new QR code (contains app id information) and then use I
      - Select `QRAppInstallation.csproj` file
      - Press `F5` to run the project 
 
-5) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
-  - `{{Microsoft-App-Id}}` with Application id generated from Step 1
-  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok.io`
+- Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
+  - `{{Microsoft-App-Id}}` with AAD app registration Application id, generated from Step 1
+  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
-6) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 7.
+- Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 7.
 
-7) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
