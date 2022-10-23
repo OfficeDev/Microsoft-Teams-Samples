@@ -18,27 +18,16 @@ urlFragment: officedev-microsoft-teams-samples-graph-bulk-meetings-nodejs.
 
 This is an sample application which shows how to create teams meetings in bulk using file upload method.
 
-## Key features
+## Interact with app.
 
 ![Bulk Meeting Gif](Images/BulkMeeting.gif)
-
-## Features of samples Graph Bulk Meetings
-
-![Dashboard](Images/Dashboard.png)
-
-![Create Meeting](Images/CreateMeeting.png)
-
-![Meeting upolad](Images/MeetingDetailUpload.png)
-
-![Meeting detail](Images/MeetingDetail.png)
-
 
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
 -  [NodeJS](https://nodejs.org/en/)
 
-## Run app locally
+## Setup.
 
 ### Register your application with Azure AD
 
@@ -113,6 +102,18 @@ npm install moment --save
 - **Edit** the `manifest.json` contained in the `Manifest` folder to replace your Base url wherever you see the place holder string `<<BASE-URL>>`. Also replace any random guid with the place holder `<<APP-ID>>`.
 - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
 - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+
+## Running the sample.
+
+## Features of samples Graph Bulk Meetings
+
+![Dashboard](Images/Dashboard.png)
+
+![Create Meeting](Images/CreateMeeting.png)
+
+![Meeting upolad](Images/MeetingDetailUpload.png)
+
+![Meeting detail](Images/MeetingDetail.png)
 
 
 ## Further reading
