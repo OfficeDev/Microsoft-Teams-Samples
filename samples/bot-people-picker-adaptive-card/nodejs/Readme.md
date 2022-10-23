@@ -76,8 +76,6 @@ Run ngrok - point to port 3978
 
 4) Setup Manifest for Teams
 
-- **This step is specific to Teams.**
-
     - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step 1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`).
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")

@@ -55,12 +55,12 @@ This sample illustrates you can use [Resource Specific Consent (RSC)](https://do
       ```
 
 5)  Update appsettings.json
-    - Update configuration for <<Client Id>> and <<Client Secret>> with the ```MicrosoftAppId``` and ```MicrosoftAppPassword``` which was generated while doing AAD pp registration in your Azure Portal.
+    - Update configuration for `<<Client Id>>` and `<<Client Secret>>` with the ```MicrosoftAppId``` and ```MicrosoftAppPassword``` which was generated while doing AAD pp registration in your Azure Portal.
 
 6) Run the bot from Visual Studio: 
     - Press `F5` to run the project
 
-## Setup the `manifest.json` in the `/AppPackage` folder 
+7) Setup the `manifest.json` in the `/AppPackage` folder 
    Replace the following details:
     - Replace `<<Your Microsoft APP Id>>` at all the places with your MicrosoftAppId received while doing AAD app registration in Azure portal
     - `[Your Ngrok Domain]` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.

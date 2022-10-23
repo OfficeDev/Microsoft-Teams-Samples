@@ -65,7 +65,7 @@ This step will create an AAD app, it will be reused wherever it needs AAD throug
     ![New Secret](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/ClientSecret.png)
 </br>
 
-    - _Copy and paste the secret value somewhere safe_. You'll need it in a future step
+    - Copy and paste the secret value somewhere safe. You'll need it in a future step
 
 - Expose API endpoint
     - Click "_Expose an API_" in the left rail

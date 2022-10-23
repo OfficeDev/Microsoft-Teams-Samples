@@ -38,7 +38,8 @@ This sample shows the feature where user can send suggested actions using bot.
 - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-**NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
+
+	**NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
 2) Setup NGROK  
 Run ngrok - point to port 3978
@@ -71,8 +72,6 @@ Run ngrok - point to port 3978
     ```
 
 6) Setup Manifest for Teams
-
-- **This step is specific to Teams.**
 
     - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `<<MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - `<<DOMAIN-NAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
