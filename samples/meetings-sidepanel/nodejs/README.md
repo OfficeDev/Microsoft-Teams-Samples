@@ -99,8 +99,7 @@ npm install --legacy-peer-deps
 
 6. Run your app, either from Visual Studio code  with ``` npm start``` or using ``` Run``` in the Terminal.
 
-## Setup Manifest for Teams
-1) __*This step is specific to Teams.*__
+7) Setup Manifest for Teams (__*This step is specific to Teams.*__)
     - **Edit** the `manifest.json` contained in the `teamsAppManifest` folder and replace your Microsoft App Id (that was created when you registered your app earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `configurationUrl` inside `configurableTabs` . Replace `{{BASE-URL}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - **Update** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
@@ -109,7 +108,7 @@ npm install --legacy-peer-deps
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
-##Running the sample
+## Running the sample
 
 **Interacting with the app in Teams Meeting**
 Interact with SidePanel by clicking on the App icon present on the top menu beside the "more actions" during a meeting.
