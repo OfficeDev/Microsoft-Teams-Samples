@@ -80,19 +80,19 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     npm start
     ```
 
-4) Setup Manifest for Teams
-
-- **This step is specific to Teams.**
+4) Setup Manifest for Teams (**This step is specific to Teams.**)
 
 - Modify the `manifest.json` in the `/appPackage` folder and replace the following details
    - `<<App-ID>>` with your AAD app registration id   
    - `<<VALID DOMAIN>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
-    - **Add** in a meeting to test
+    - - **Upload** the `manifest.zip` to Teams
          - Select **Apps** from the left panel.
          - Then select **Upload a custom app** from the lower right corner.
-         - Then select the `manifest.zip` file from `appPackage`. 
+         - Then select the `manifest.zip` file from `appPackage`.
+
+- **Add** in a meeting to test [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
 ## Running the sample
 
