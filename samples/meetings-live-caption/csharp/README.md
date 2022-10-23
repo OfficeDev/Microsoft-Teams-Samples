@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-live-caption-csharp
 
 This is a sample meeting side panel application which demonstrates how to enable live caption in the meeting and using the CART link how to send caption in live meeting. Meeting side panel application uses CART link to send caption in live meeting.
 
-## Enable CART Captions
+**Enable CART Captions**
 Once the meeting is scheduled. Follow this doc to enable [Provide Cart Catptions]("https://support.microsoft.com/office/use-cart-captions-in-a-microsoft-teams-meeting-human-generated-captions-2dd889e8-32a8-4582-98b8-6c96cf14eb47").
 Copy the CART link it will used while configuring tab for meeting.
 
