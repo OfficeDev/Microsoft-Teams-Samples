@@ -51,7 +51,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
     > NOTE: When you create your Azure AD application registration, you will create an App ID and App password - make sure you keep these for later.
 
-Setup [Azure Bot connection](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/368ef561bad496948b30ac0c23b38ad207adf891/samples/msgext-search-sso-config/nodejs/BotSSOSetup.md#3-setup-bot-service-connection-tokenstore)
+    Setup [Azure Bot connection](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/368ef561bad496948b30ac0c23b38ad207adf891/samples/msgext-search-sso-config/nodejs/BotSSOSetup.md#3-setup-bot-service-connection-tokenstore)
 
 2) Setup NGROK 
 - Run ngrok - point to port `3978`
@@ -86,9 +86,7 @@ Setup [Azure Bot connection](https://github.com/OfficeDev/Microsoft-Teams-Sample
     npm start
     ```
 
-4) Setup Manifest for Teams
-
-- **This step is specific to Teams.**
+4) Setup Manifest for Teams (**This step is specific to Teams.**)
 
     - Edit the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) 
     - Update the `<<DOMAIN-NAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
@@ -100,6 +98,10 @@ Setup [Azure Bot connection](https://github.com/OfficeDev/Microsoft-Teams-Sample
          - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
 
 ## Running the sample
+**Interacting with the tab in Teams**
+
+You can use this tab by following the below steps:
+- In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
 
 **Sign in card:**
 
@@ -128,11 +130,6 @@ Setup [Azure Bot connection](https://github.com/OfficeDev/Microsoft-Teams-Sample
 **Sign out card:**
 
 ![Sign out Card](Images/sign-out.png)
-
-**Interacting with the tab in Teams**
-
-You can use this tab by following the below steps:
-- In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
 
 ## Deploy the bot to Azure
 
