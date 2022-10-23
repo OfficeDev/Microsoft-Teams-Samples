@@ -93,6 +93,7 @@ Modify the `manifest.json` in the `/AppPackage` folder and replace the following
          - [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
 ## Running the sample
+Once the meeting where the bot is added starts or ends, real-time updates are posted in the chat.
 
 **MeetingEvents command interaction:**   
 
@@ -101,10 +102,6 @@ Modify the `manifest.json` in the `/AppPackage` folder and replace the following
 **End meeting events details:**   
 
 ![Meeting end event](MeetingEvents/Images/meeting-end.png)
-
-**Interacting with the bot in Teams**
-
-Once the meeting where the bot is added starts or ends, real-time updates are posted in the chat.
 
 ## Deploy the bot to Azure
 
