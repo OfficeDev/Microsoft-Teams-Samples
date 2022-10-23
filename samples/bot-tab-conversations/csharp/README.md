@@ -105,7 +105,6 @@ sequenceDiagram
   * [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 * Install [ngrok](https://ngrok.com/download) for local setup. (or any other tunneling solution)
 
-## Setup.
 
 ### Channel Tab
 
@@ -137,7 +136,7 @@ There is also a personal tab that will list inquires from all the support depart
 * Build C# App
 * Deploy to Teams
 
-## Set up.
+## Setup.
 * Run Ngrok
     * Run ngrok and point it to the port the Web App is listening on. Note the port will change depending on how you are deploying.
     ```bash

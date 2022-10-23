@@ -136,7 +136,7 @@ Click on Add Permissions to commit your changes.
 
 **Upload an app to your org's app catalog:**
 
-![Upload AppOrg](MeetingTranscription/Images/UploadAppOrg.PNG)
+![Upload AppOrg](MeetingTranscription/Images/UploadAppOrg.png)
 
 **Schedule the meeting and add Meeting Transcript Bot from Apps section in that particular scheduled meeting:**
 
@@ -144,11 +144,11 @@ Click on Add Permissions to commit your changes.
 
 **Created and approved by your organization:**
 
-![Install OrgsApps](MeetingTranscription/Images/InstallOrgsApps.PNG)
+![Install OrgsApps](MeetingTranscription/Images/InstallOrgsApps.png)
 
 **Welcome echo UI:**
 
-![Add Bot](MeetingTranscription/Images/WelcomeEcho.PNG)
+![Add Bot](MeetingTranscription/Images/WelcomeEcho.png)
 
 **Once meeting started, start the Transcript for the meeting:**
 

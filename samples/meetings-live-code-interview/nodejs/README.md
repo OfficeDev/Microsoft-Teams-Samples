@@ -21,7 +21,7 @@ Now any participant in meeting can write code for the question and same will be 
 
 ## Interact with app
 
-![side panel ](MeetingLiveCoding/Images/MeetinLiveCodeInterview.gif)
+![side panel ](Images/MeetinLiveCodeInterview.gif)
 
 ## Prerequisites
 
@@ -116,13 +116,13 @@ sequenceDiagram
 ## Running the sample
 
 **Side panel view:**
-![side panel ](MeetingLiveCoding/Images/sidePanelView.png)
+![side panel ](Images/sidePanelView.png)
 
 **Question view on click of share:**
-![shared content](MeetingLiveCoding/Images/stageView.png)
+![shared content](Images/stageView.png)
 
 **Question view for other participant in meeting:**
-![shared content second user](MeetingLiveCoding/Images/stageViewseconduser.png)
+![shared content second user](Images/stageViewseconduser.png)
 
 ## Further reading
 

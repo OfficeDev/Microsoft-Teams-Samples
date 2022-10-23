@@ -19,24 +19,20 @@ This sample app demonstrate a feature where user can scan a product, capture a i
 
 ## Interact with app.
 
-![PreviewImage](ProductInspection/Images/PreviewImg.gif)
+![ProductInspection](ProductInspection/Images/PreviewImg.gif)
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+## Prerequisites
 
-  ```bash
-  # determine dotnet version
-  dotnet --version
-  ```
+- Microsoft Teams is installed and you have an account
+- [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
+- [ngrok](https://ngrok.com/) or equivalent tunnelling solution.
 
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
-
-## To try this sample
+## Setup.
   
 - Clone the repository 
    ```bash
    git clone https://github.com/OfficeDev/microsoft-teams-samples.git
    ```
-
 - Build your solution
 
   - Launch Visual Studio
@@ -54,6 +50,13 @@ This sample app demonstrate a feature where user can scan a product, capture a i
    - Press F5 to run the project
    - Update the ngrok in manifest
    - Zip all three files present in manifest folder
+   
+- [Upload app manifest file]
+ - **Edit** the `manifest.json` contained in the  `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Manifest-id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)and ngrok url *everywhere* you see the place holder string `<<base-url>>`
+    - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
+    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+
+## Running the sample.
 
 ## Interacting with the app in Teams Meeting
 Interact with Product Inspection by clicking on the App icon.
@@ -68,10 +71,7 @@ Interact with Product Inspection by clicking on the App icon.
 3. On click on "View product status" button, scanner will open when scan the product bar code and user can view the detail of the product.
 
    <img src="ProductInspection/Images/view-product-statusImg.png" alt="drawing" width="100px"/>
+   
+## Further Read.
 
-
-
-- [Upload app manifest file]
- - **Edit** the `manifest.json` contained in the  `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Manifest-id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)and ngrok url *everywhere* you see the place holder string `<<base-url>>`
-    - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+[Product inspection](https://learn.microsoft.com/en-us/power-apps/teams/inspection)
