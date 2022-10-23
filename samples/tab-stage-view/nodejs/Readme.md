@@ -96,7 +96,6 @@ Also update `BaseUrl` according to your code runtime environment.
          - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
 
 ## Running the sample
-You can use this tab by following the below steps:
 - In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
 
 **Welcome message with feature explanation and Adaptive Card with actions:**
