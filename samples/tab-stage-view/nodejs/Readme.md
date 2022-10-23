@@ -47,14 +47,14 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
    
     > NOTE: When you create your app registration in Azure portal, you will create an App ID and App password - make sure you keep these for later.
 
-1) Setup NGROK
+2) Setup NGROK
 - Run ngrok - point to port `3978`
 
     ```bash
     ngrok http -host-header=localhost 3978
     ```
 
-1) Setup for code    
+3) Setup for code    
 - Clone the repository
 
     ```bash
@@ -81,7 +81,7 @@ Also update `BaseUrl` according to your code runtime environment.
 
 1) Setup Manifest for Teams
 
-- **This step is specific to Teams.**
+4) **This step is specific to Teams.**
 
    -  Edit the `manifest.json` in the `appPackage` folder and replace the following details:
    - `<<MANIFEST-ID>>` with some unique GUID or `MicrosoftAppId`
@@ -96,6 +96,8 @@ Also update `BaseUrl` according to your code runtime environment.
          - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
 
 ## Running the sample
+You can use this tab by following the below steps:
+- In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
 
 **Welcome message with feature explanation and Adaptive Card with actions:**
 
@@ -112,11 +114,6 @@ Also update `BaseUrl` according to your code runtime environment.
 **Tab with execute deep link action to open stage view:**
 
 ![Tab View](Images/viaTabDeeplink.png)         
-
-1) Interacting with the bot in Teams
-
-You can use this tab by following the below steps:
-- In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
 
 ## Deploy the bot to Azure
 

@@ -98,7 +98,6 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
          - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
 
 ## Running the sample
-**Interacting with the tab in Teams**
 
 You can use this tab by following the below steps:
 - In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
