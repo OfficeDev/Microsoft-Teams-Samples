@@ -85,12 +85,12 @@ Modify the `manifest.json` in the `/AppPackage` folder and replace the following
 
    - `<<App-ID>>` with your AAD app registration id   
    - `<<VALID DOMAIN>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-   Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store
-	- Add in a meeting to test
-	- Select **Apps** from the left panel.
-	- Then select **Upload a custom app** from the lower right corner.
-	- Then select the `manifest.zip` file from `AppPackage` folder.
-	- After installation, add the bot to a meeting.
+   - Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store
+   - - **Upload** the `manifest.zip` to Teams
+         - Select **Apps** from the left panel.
+         - Then select **Upload a custom app** from the lower right corner.
+         - Then select the `manifest.zip` file from `AppPackage`.
+         - [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
 ## Running the sample
 
