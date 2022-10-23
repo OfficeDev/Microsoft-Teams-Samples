@@ -21,7 +21,7 @@ User can generate a new QR code (contains team id information) and then scan the
 
 `Currently, Microsoft Teams support for QR or barcode scanner capability is only supported for mobile clients`
 
-# Feature of the sample
+## Interact with app.
 
  ![Bot Join TeamUsing QRCodeGif](Images/BotJoinTeamUsingQRCodeGif.gif)
 
@@ -33,7 +33,7 @@ User can generate a new QR code (contains team id information) and then scan the
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
    appropriate permissions to install an app.
 
-## To try this sample
+## Setup.
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
@@ -94,7 +94,7 @@ b) Navigate to **API Permissions**, and make sure to add the follow permissions:
 
          > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework   OAuth flow.
 
-## Features of this sample
+## Running the sample.
 
  ![Card With Buttons](Images/CardWithButtons.png)
 
@@ -113,3 +113,6 @@ b) Navigate to **API Permissions**, and make sure to add the follow permissions:
  ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
+
+## Further Reading.
+[Bot-join-team-using-qr-code](https://learn.microsoft.com/en-us/samples/officedev/microsoft-teams-samples/officedev-microsoft-teams-samples-bot-join-team-using-qr-code-csharp/)
