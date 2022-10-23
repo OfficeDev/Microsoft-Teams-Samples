@@ -27,6 +27,8 @@ This sample shows a feature where user can schedule a recurring task and get the
 -  To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher).
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+- To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
+    Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
 ## Setup
 
@@ -38,11 +40,6 @@ This sample shows a feature where user can schedule a recurring task and get the
 - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-     **NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
-
-- To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
-Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
 - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
     
@@ -82,8 +79,6 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     ```
 
 4) Setup Manifest for Teams
-
-- **This step is specific to Teams.**
 
     - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - Relace {{domain-name}} with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
