@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-app-installation-lifecycle-
 
 This sample app demonstarte the installation lifecycle for Teams [Apps](https://docs.microsoft.com/en-us/graph/api/resources/teamsappinstallation?view=graph-rest-1.0) which includes create, update delete Apps
 
-# Feature of the sample
+## Interact with app.
 
 ![](AppInstallation/Images/GraphAppInstallationLifecycleGif.gif)
 
@@ -33,7 +33,7 @@ This sample app demonstarte the installation lifecycle for Teams [Apps](https://
 
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## To try this sample
+## Setup.
 
 - Register your app with Microsoft identity platform via the Azure AD portal
   - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2). 
@@ -66,22 +66,23 @@ This sample app demonstarte the installation lifecycle for Teams [Apps](https://
 
 - [Upload app manifest file](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#load-your-package-into-teams) (zip file) to your team
 
-![](AppInstallation/Images/Install.png)
+## Running the sample.
 
+![](AppInstallation/Images/Install.png)
 
 ![](AppInstallation/Images/AddAppListTab.png)
 
-
 ![](AppInstallation/Images/ListApp.png)
-
 
 ![](AppInstallation/Images/GetUserApp.png)
 
-
 ![](AppInstallation/Images/AppDescription.png)
 
-
 ![](AppInstallation/Images/DeleteApp.png)
+
+## Further Reading.
+
+[Graph-app-installation](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)
   
  
   
