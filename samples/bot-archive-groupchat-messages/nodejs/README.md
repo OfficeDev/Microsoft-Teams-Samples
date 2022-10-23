@@ -66,7 +66,7 @@ This feature shown in this sample is currently available in Public Developer Pre
     a. Add this permission to app registration
     - Chat.ReadWrite
     - ChatMessage.Read
-    ![Permissions](Images/permissions.png)
+![Permissions](Images/permissions.png)
 
     b.  Under left menu, select  **Authentication**  under  **Manage**  section.
     - Select 'Accounts in any organizational directory (Any Azure AD directory - Multitenant)' under Supported account types and click "+Add a platform".
