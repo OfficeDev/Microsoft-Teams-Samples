@@ -104,7 +104,7 @@ Enter text in the emulator.  The text will be echoed back by the bot.
 
 ![Meeting stage view](Images/MeetingStageView.png)
 
-## Further Read.
+## Further Reading.
 
 [Tab Deeplink](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-links?tabs=teamsjs-v2)
 
