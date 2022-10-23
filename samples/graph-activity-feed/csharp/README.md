@@ -149,11 +149,11 @@ Teams Activity feed notification API uses activity to which user want a notifica
 
 ## Running the sample.
 
-![image](ActivityFeedNotification/Images/TeamsNotification.png)
+![image](Images/TeamsNotification.png)
 
 - Notification triggred by Tab App will appear in Teams Activity Feed
 
-![image](ActivityFeedNotification/Images/ActivityFeedNotification.png)
+![image](Images/ActivityFeedNotification.png)
 
 
 ## Further reading
