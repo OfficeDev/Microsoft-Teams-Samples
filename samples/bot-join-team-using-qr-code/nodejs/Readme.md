@@ -21,7 +21,7 @@ User can generate a new QR code (contains team id information) and then scan the
 
 `Currently, Microsoft Teams support for QR or barcode scanner capability is only supported for mobile clients`
 
-## Interact with app.
+## Interaction with app.
 
  ![Bot Join TeamUsing QRCodeGif](Images/BotJoinTeamUsingQRCodeGif.gif)
 
