@@ -20,7 +20,7 @@ Bot Framework v4 ChangeNotification sample.
 
 This sample app demonstrates sending notifications to users when presence status is changed.
 
-## Feature of the sample.
+## Interact with app.
 
 ![PreviewImage](Images/Preview.gif)
 
@@ -35,6 +35,7 @@ This sample app demonstrates sending notifications to users when presence status
     ```
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
+## Setup.
 1. Clone the repository
 
     ```bash
@@ -96,7 +97,7 @@ i. Provide  Scopes like "Presence.Read, Presence.Read.All"
 3. Update `notificationUrl` as  `{NgrokBaseURL}/api/notifications`
 
 
-### Concepts introduced in this sample
+## Running with sample
 - After sucessfully installation of app you will get a sign in button. When sign in is complete then you get your current status in adapative card
 
 ![image](Images/Login.png)
