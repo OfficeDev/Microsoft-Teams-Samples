@@ -111,6 +111,7 @@ npm install --legacy-peer-deps
 ## Running the sample
 
 **Interacting with the app in Teams Meeting**
+
 Interact with SidePanel by clicking on the App icon present on the top menu beside the "more actions" during a meeting.
 
 1. Once the app is clicked, sidepanel appears with the default agenda list. Only organizer gets the feasibility to add new agenda points to the list using "Add New Agenda Item" button.
