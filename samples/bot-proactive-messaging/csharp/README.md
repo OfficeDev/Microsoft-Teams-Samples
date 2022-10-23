@@ -38,29 +38,11 @@ Two samples to highlight solutions to two challenges with building proactive mes
 | `README.md`          | This README file.                                                           |
 | `LICENSE`            | The license for the sample. 
 
-## Features of samples Bot Proactive Message
+## Interact with app.
 
  ![Broadcast from user](coordinate-logger/Images/ProactivemessageGIF.gif)
                                                 |
-## User Conversation log info
 
-![Conversation details](coordinate-logger/Images/ConversationDetails.png)
-
-## Channel Conversation log info
-
-![Conversation details](coordinate-logger/Images/ConversationDetails_Channel.png)
-
-## Proactive message
-
-![Proactive message](coordinate-logger/Images/ProactiveMessage.png)
-
-## Team name in which message will post
-
-![Proactive message](coordinate-logger/Images/TeamInfo.png)
-
-## Meesages in other Team 
-
-![Proactive message](coordinate-logger/Images/Teammessage.png)
 
 ## Prerequisites
 - Microsoft Teams account
@@ -138,6 +120,28 @@ Either through [App Studio](https://docs.microsoft.com/en-us/microsoftteams/plat
     ```
 
     This will send a message to the thread
+    
+## Running the sample.
+
+## User Conversation log info
+
+![Conversation details](coordinate-logger/Images/ConversationDetails.png)
+
+## Channel Conversation log info
+
+![Conversation details](coordinate-logger/Images/ConversationDetails_Channel.png)
+
+## Proactive message
+
+![Proactive message](coordinate-logger/Images/ProactiveMessage.png)
+
+## Team name in which message will post
+
+![Proactive message](coordinate-logger/Images/TeamInfo.png)
+
+## Meesages in other Team 
+
+![Proactive message](coordinate-logger/Images/Teammessage.png)
 
 ## Key concepts
 
