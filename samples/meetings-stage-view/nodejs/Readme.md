@@ -57,6 +57,18 @@ This capability is currently available in developer preview only.
     ```
     npm install
     ```
+- App Registration on azure portal.
+1) Setup for Bot
+
+   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+    - For bot handle, make up a name.
+    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
+    
+   In the new Azure Bot resource in the Portal, 
+    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
+
 - Run ngrok - point to port 3978
 
     ```
@@ -79,13 +91,12 @@ This capability is currently available in developer preview only.
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
-   - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
-
-## Interacting with the app in Teams
-    You can use this app by following the below steps:
-    - Edit a meeting and select `+` icon at the top right corner.
+   - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.  
     
 ## Running the sample.
+
+You can use this app by following the below steps:
+    - Edit a meeting and select `+` icon at the top right corner.
 
 - App in stage view.
 
