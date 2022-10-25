@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "02/09/2021 07:54:21 PM"
+ createdDate: "21/10/2022 07:54:21 PM"
 urlFragment: officedev-microsoft-teams-samples-app-sso-csharp
 ---
 
@@ -18,6 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-app-sso-csharp
 This app talks about the Teams Tab, Bot, ME - search, action, linkunfurl SSO with C#
 
 __Tab SSO__
+
 This sample shows how to implement Azure AD single sign-on support for tabs. It will
 
 - Obtain an access token for the logged-in user using SSO
@@ -25,6 +26,7 @@ This sample shows how to implement Azure AD single sign-on support for tabs. It 
 - Call Graph and retrieve the user's profile
 
 __Bot, ME SSO__
+
 Bot Framework v4 bot using Teams authentication
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to get started with authentication in a bot for Microsoft Teams.
@@ -35,9 +37,9 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
-## Feature of the sample.
+## Interaction with bot
 
-![image](Images/AppSSOModule.gif)
+![Preview Image](Images/Preview_App_SSO_C#.gif)
 
 ## Prerequisites
 
@@ -54,9 +56,9 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
         * For permissions `Manage > API Permissions`
         * Our SSO flow will give you access to the first 4 permissions, and we will have to exchange the token server-side to get an elevated token for the `profile` permission (for example, if we want access to the user's profile photo).
         
+![image](https://user-images.githubusercontent.com/85108465/121638666-f80f4980-caa8-11eb-9b75-09b0e86c6d6a.png)
 
-
-## To try this sample
+## Setup
 
 - Setup for Bot SSO
 Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md).
@@ -92,51 +94,69 @@ Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/az
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 
-## Interacting with the bot in Teams
+## Running the sample.
+
 > Note: This `manifest.json` specified that the bot will be installed in a "personal" scope only. Please refer to Teams documentation for more details.
 
 You can interact with this bot by sending it a message. The bot will respond by requesting you to login to AAD, then making a call to the Graph API on your behalf and returning the results.
 - Install App
-![image](Images/first.png)
+
+![Install App](Images/add_app.png)
 
 - Type *anything* on the compose box and send
 - The bot will perform `Single Sign-On` and Profile card will be displayed along with the option prompt to view the `token`
 
-![image](Images/second.png)
+![image](Images/Single_SignIn.png)
 
 > **NOTE:** 
 If the user is using the application for the first time and user consent is required for additional permissions, the following dialog box appears to continue with the consent experience
-![image](Images/third.png)
-![image](Images/four.png)
+![image](Images/permission.png)
+![image](Images/Grantpermission.png)
 
 >If the bot couldn't perform `SSO` then it will fallback to normal Authentication method and show a `Sign In` card like below
-![image](Images/five.png)
+![image](Images/SignIn.png)
 
 - Open `Messaging Extension`(Search), it will show profile details
 
-![image](Images/six.png)
-![image](Images/seven.png)
-![image](Images/eight.png)
+![image](Images/ME_Add.png)
+![image](Images/MEProfile.png)
+
 
 - Open `Messaging Extension`(Action), it will show profile details
 
-![image](Images/nine.png)
-![image](Images/ten.png)
+![image](Images/MEProfile1.png)
+![image](Images/Profile_details.png)
 
 
+__*or*__
+
+
+![image](Images/profile_action.png)
+![image](Images/Profile_details.png)
 
 - Open `Messaging Extension`(linkunfurl), The link will unfurl and show profile details
 
 **Paste** https://profile.botframework.com on the compose box
 
+![image](Images/ME_Botlink.png)
+
 > NOTE: If `SSO` couldn't be performed then it will fallback to normal Authentication method and you will get a default `Sign In` action
 
 Consent the *ME Search* by clicking the `Sign In` link like below 
 
+![image](Images/ME_SignIn.png)
 
 Consent the *ME Action* by clicking the `Setup` button like below 
 
+
+![image](Images/ME_SignIn1.png)
+
 - Open `SSO Tab`, Continue and then Accept and it'll show the profile details
+
+![image](Images/almost.png)
+![image](Images/permission_request.png)
+![image](Images/Tab.png)
+
 
 
 ## Deploy the bot to Azure

@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-sso/nodejs/Images/APP_SSO_Node.gif",
+        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-sso/nodejs/Images/preview_APP_SSO_Node.gif",
         "alt": "Solution UX showing app sso node"
       }
     ],

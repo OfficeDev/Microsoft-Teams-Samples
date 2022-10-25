@@ -16,8 +16,6 @@ urlFragment: officedev-microsoft-teams-samples-app-sso-nodejs
 
 This app talks about the Teams Tab, Bot, ME - search, action, linkunfurl SSO with Node JS
 
-
-
 __Tab SSO__
 This sample shows how to implement Azure AD single sign-on support for tabs. It will
 
@@ -36,9 +34,9 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
-## Feature of the sample.
+## Interaction with bot
 
-![image](app-sso/nodejs/Images/APP_SSO_Node.gif)
+![Preview Image](Images/preview_APP_SSO_Node.gif)
 
 ## Prerequisites
 
@@ -63,7 +61,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
         
 ![image](https://user-images.githubusercontent.com/85108465/121638666-f80f4980-caa8-11eb-9b75-09b0e86c6d6a.png)
 
-## To try this sample
+## Setup
 
 1. Setup for Bot SSO
 Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md).
@@ -131,61 +129,64 @@ Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/az
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 
-## Interacting with the bot in Teams
+## Running the sample
 > Note: This `manifest.json` specified that the bot will be installed in a "personal" scope only. Please refer to Teams documentation for more details.
 
 You can interact with this bot by sending it a message. The bot will respond by requesting you to login to AAD, then making a call to the Graph API on your behalf and returning the results.
 - Install App
 
-![image](https://user-images.githubusercontent.com/85108465/121664976-acb76400-cac5-11eb-8256-53a8d7980476.png)
+![image](Images/add_app.png)
 
 - Type *anything* on the compose box and send
 - The bot will perform `Single Sign-On` and Profile card will be displayed along with the option prompt to view the `token`
 
-![image](app-sso/nodejs/Images/Login.png)
+![image](Images/Single_SignIn.png)
 
 > **NOTE:** 
 If the user is using the application for the first time and user consent is required for additional permissions, the following dialog box appears to continue with the consent experience
+![image](Images/permission.png)
+![image](Images/Grantpermission.png)
 
 >If the bot couldn't perform `SSO` then it will fallback to normal Authentication method and show a `Sign In` card like below
-![image](https://user-images.githubusercontent.com/85108465/122401855-9a906680-cf9a-11eb-94f1-87840c6662b4.png)
+![image](Images/SignIn1.png)
 
 - Open `Messaging Extension`(Search), it will show profile details
 
-![image](app-sso/nodejs/Images/MELogin.png)
-![image](app-sso/nodejs/Images/MEProfile.png)
+![image](Images/MELogin.png)
+![image](Images/MEProfile.png)
 
 - Open `Messaging Extension`(Action), it will show profile details
 
-![image](app-sso/nodejs/Images/MEProfile2.png)
+![image](Images/MEProfile2.png)
 
-![image](app-sso/nodejs/Images/Profile.png)
+__*or*__
 
-![image](app-sso/nodejs/Images/MECompose.png)
+![image](Images/profile_action.png)
+![image](Images/Profile.png)
 
 - Open `Messaging Extension`(linkunfurl), The link will unfurl and show profile details
 
 **Paste** https://profile.botframework.com on the compose box
 
-![image](app-sso/nodejs/Images/Tab.png)
+![image](Images/MECompose.png)
 
 
 > NOTE: If `SSO` couldn't be performed then it will fallback to normal Authentication method and you will get a default `Sign In` action
 
 Consent the *ME Search* by clicking the `Sign In` link like below 
 
-![image](https://user-images.githubusercontent.com/85108465/121671255-f2772b00-cacb-11eb-9321-1317696eaccc.png)
+![image](Images/ME_SignIn.png)
 
 Consent the *ME Action* by clicking the `Setup` button like below 
 
-![image](https://user-images.githubusercontent.com/85108465/122556633-6039ce80-d059-11eb-9fa5-e0fe4db4939d.png)
+
+![image](Images/ME_SignIn1.png)
 
 - Open `SSO Tab`, Continue and then Accept and it'll show the profile details
 
-![image](https://user-images.githubusercontent.com/85108465/121671560-5568c200-cacc-11eb-954b-44155e039915.png)
-![image](https://user-images.githubusercontent.com/85108465/121671603-61ed1a80-cacc-11eb-9754-ff0b2aaac671.png)
-![image](https://user-images.githubusercontent.com/85108465/121672009-e344ad00-cacc-11eb-860f-c0ed5153edc7.png)
-
+![image](Images/almost.png)
+![image](Images/permission_request.png)
+![image](Images/Tab.png)
 
 
 ## Deploy the bot to Azure
