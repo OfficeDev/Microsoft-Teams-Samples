@@ -39,7 +39,7 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 ## Interaction with bot
 
- ![Preview](csharp/Images/PreviewAppSSOCsharp.gif)
+ ![Preview](csharp/App SSO Sample/Images/PreviewAppSSOCsharp.gif)
 
 ## Prerequisites
 
