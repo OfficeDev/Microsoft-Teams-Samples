@@ -42,12 +42,12 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 
-1) Create an outgoing webhook
+### Create an outgoing webhook
 
-1. Select the appropriate team and select Manage team from the (•••) drop-down menu.
-2. Choose the Apps tab from the navigation bar.
-3. From the window's lower right corner select Create an outgoing webhook.
-4. In the resulting popup window complete the required fields:
+    - Select the appropriate team and select Manage team from the (•••) drop-down menu.
+    - Choose the Apps tab from the navigation bar.
+    - From the window's lower right corner select Create an outgoing webhook.
+    - In the resulting popup window complete the required fields:
     - Name - The webhook title and @mention tap.
     - Callback URL - The HTTPS endpoint that accepts JSON payloads and will receive POST requests from Teams.
     - Callback URL should be like: <ngrokurl>/api/Sample or  yourappsiteurl/api/Sample
