@@ -4,10 +4,11 @@
 
 namespace CallingBotSample.Helpers
 {
+    using AdaptiveCards;
+    using AdaptiveCards.Templating;
     using CallingBotSample.Interfaces;
     using Microsoft.Bot.Schema;
     using Microsoft.Extensions.Logging;
-    using Newtonsoft.Json;
     using System.IO;
 
     /// <summary>
@@ -24,20 +25,26 @@ namespace CallingBotSample.Helpers
 
         public Attachment GetWelcomeCardAttachment()
         {
-            var welcomeCardAttachment = new Attachment();
-            try
-            {
-                string[] welcomeCardPaths = { ".", "Resources", "WelcomeCard.json" };
-                var welcomeCardString = File.ReadAllText(Path.Combine(welcomeCardPaths));
-                welcomeCardAttachment.ContentType = "application/vnd.microsoft.card.adaptive";
-                welcomeCardAttachment.Content = JsonConvert.DeserializeObject(welcomeCardString);
-            }
-            catch (System.Exception ex)
-            {
-                this.logger.LogError(ex, ex.Message);
-            }
+            var template = GetCardTemplate("WelcomeCard.json");
 
-            return welcomeCardAttachment;
+            var serializedJson = template.Expand(new {});
+            return CreateAttachment(serializedJson);
+        }
+
+        private AdaptiveCardTemplate GetCardTemplate(string fileName)
+        {
+            string templatePath = Path.Combine(Directory.GetCurrentDirectory(), "Resources", fileName);
+            return new AdaptiveCardTemplate(File.ReadAllText(templatePath));
+        }
+
+        private Attachment CreateAttachment(string adaptiveCardJson)
+        {
+            var adaptiveCard = AdaptiveCard.FromJson(adaptiveCardJson);
+            return new Attachment
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = adaptiveCard.Card,
+            };
         }
     }
 }

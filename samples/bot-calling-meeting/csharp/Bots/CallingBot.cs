@@ -6,10 +6,7 @@ using CallingBotSample.Utility;
 using CallingMeetingBot.Extenstions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Builder.Teams;
-using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Graph;
 using Microsoft.Graph.Communications.Client.Authentication;
 using Microsoft.Graph.Communications.Common.Telemetry;
@@ -26,7 +23,6 @@ namespace CallingBotSample.Bots
 {
     public class CallingBot : ActivityHandler
     {
-        private readonly IConfiguration configuration;
         public IGraphLogger GraphLogger { get; }
 
         private IRequestAuthenticationProvider AuthenticationProvider { get; }
@@ -34,18 +30,16 @@ namespace CallingBotSample.Bots
         private INotificationProcessor NotificationProcessor { get; }
         private CommsSerializer Serializer { get; }
         private readonly BotOptions options;
-
         private readonly ICard card;
         private readonly IGraph graph;
-        private readonly IGraphServiceClient graphServiceClient;
+        private readonly GraphServiceClient graphServiceClient;
 
 
 
 
-        public CallingBot(BotOptions options, IConfiguration configuration, ICard card, IGraph graph, IGraphServiceClient graphServiceClient, IGraphLogger graphLogger)
+        public CallingBot(BotOptions options, ICard card, IGraph graph, GraphServiceClient graphServiceClient, IGraphLogger graphLogger)
         {
             this.options = options;
-            this.configuration = configuration;
             this.card = card;
             this.graph = graph;
             this.graphServiceClient = graphServiceClient;
@@ -89,46 +83,6 @@ namespace CallingBotSample.Bots
             {
                 response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 await response.WriteAsync(e.ToString()).ConfigureAwait(false);
-            }
-        }
-
-        protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
-        {
-            var credentials = new MicrosoftAppCredentials(this.configuration[Common.Constants.MicrosoftAppIdConfigurationSettingsKey], this.configuration[Common.Constants.MicrosoftAppPasswordConfigurationSettingsKey]);
-            ConversationReference conversationReference = null;
-            foreach (var member in membersAdded)
-            {
-
-                if (member.Id != turnContext.Activity.Recipient.Id)
-                {
-                    var proactiveMessage = MessageFactory.Attachment(this.card.GetWelcomeCardAttachment());
-                    proactiveMessage.TeamsNotifyUser();
-                    var conversationParameters = new ConversationParameters
-                    {
-                        IsGroup = false,
-                        Bot = turnContext.Activity.Recipient,
-                        Members = new ChannelAccount[] { member },
-                        TenantId = turnContext.Activity.Conversation.TenantId
-                    };
-                    await ((BotFrameworkAdapter)turnContext.Adapter).CreateConversationAsync(
-                        turnContext.Activity.TeamsGetChannelId(),
-                        turnContext.Activity.ServiceUrl,
-                        credentials,
-                        conversationParameters,
-                        async (t1, c1) =>
-                        {
-                            conversationReference = t1.Activity.GetConversationReference();
-                            await ((BotFrameworkAdapter)turnContext.Adapter).ContinueConversationAsync(
-                                configuration[Common.Constants.MicrosoftAppIdConfigurationSettingsKey],
-                                conversationReference,
-                                async (t2, c2) =>
-                                {
-                                    await t2.SendActivityAsync(proactiveMessage, c2);
-                                },
-                                cancellationToken);
-                        },
-                        cancellationToken);
-                }
             }
         }
 
@@ -196,6 +150,7 @@ namespace CallingBotSample.Bots
                     break;
                 default:
                     await turnContext.SendActivityAsync("Welcome to bot");
+                    await turnContext.SendActivityAsync(MessageFactory.Attachment(this.card.GetWelcomeCardAttachment()));
                     break;
             }
         }
@@ -248,7 +203,6 @@ namespace CallingBotSample.Bots
 
                 if (antecedent.Status == System.Threading.Tasks.TaskStatus.RanToCompletion)
                 {
-                    await Task.Delay(5000);
                     await graphServiceClient.Communications.Calls[callId].PlayPrompt(
                        prompts: new List<Microsoft.Graph.Prompt>()
                        {
