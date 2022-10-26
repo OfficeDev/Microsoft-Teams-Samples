@@ -9,14 +9,9 @@ using CallingMediaBot.Web.Bots;
 using CallingMediaBot.Web.Extensions;
 using CallingMediaBot.Web.Helpers;
 using CallingMediaBot.Web.Interfaces;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Graph.Communications.Common.Telemetry;
 
 namespace CallingMediaBot.Web
