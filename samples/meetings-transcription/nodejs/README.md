@@ -18,19 +18,9 @@ urlFragment: officedev-microsoft-teams-samples-meetings-transcription-nodejs
 
 This is a sample application which demonstrates how to get Transcript using Graph API and show it in the task module.
 
-## Key features
+## Interaction with app.
 
-1. Schedule the meeting and add Meeting Transcript Bot from `Apps` section in that particular scheduled meeting.
-![Add Bot](Images/AddMeetingTranscriptBot.PNG)
-2. Once meeting started, start the Transcript for the meeting.
-![Start Transcript](Images/StartTranscript.PNG)
-3. Once the transcription has started, you can see the live transcription it the meeting UI.
-![Leave Meeting](Images/LeaveMeeting.PNG)
-4. Once the Meeting ended, Meeting Transcript Bot will sent a card having a button to open task module.
-![Meeting Transcript Card](Images/MeetingTranscriptCard.PNG)
-5. After clicking on `View Transcript` button, you will see the recorded Transcript in the opened Task Module.
-![Transcript Task Module](Images/TranscriptTaskModule.PNG)
-
+![MeetingTranscript Module](Images/MeetingTranscript.gif)
 
 ## Prerequisites
 
@@ -39,7 +29,7 @@ This is a sample application which demonstrates how to get Transcript using Grap
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-## To try this sample
+## Setup.
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
@@ -131,9 +121,26 @@ Click on Add Permissions to commit your changes.
     
 **NOTE: If you are not getting option to start transcript. Make sure it is enabled from [Teams Admin center](https://admin.teams.microsoft.com). Under `Meetings -> Meeting Policies -> Applied policy(Default is Global)-> Recording & Transcription -> Transcription`**
 
+## Running the sample.
+
+1. Schedule the meeting and add Meeting Transcript Bot from `Apps` section in that particular scheduled meeting.
+![Add Bot](Images/AddMeetingTranscriptBot.PNG)
+2. Once meeting started, start the Transcript for the meeting.
+![Start Transcript](Images/StartTranscript.PNG)
+3. Once the transcription has started, you can see the live transcription it the meeting UI.
+![Leave Meeting](Images/LeaveMeeting.PNG)
+4. Once the Meeting ended, Meeting Transcript Bot will sent a card having a button to open task module.
+![Meeting Transcript Card](Images/MeetingTranscriptCard.PNG)
+5. After clicking on `View Transcript` button, you will see the recorded Transcript in the opened Task Module.
+![Transcript Task Module](Images/TranscriptTaskModule.PNG)
+
 ## Interacting with the bot.
 - After uploading the manifest add the bot into meeting.
 - Join meeting and `Start Transcript`
 - Once done, leave the meeting.
 - You will get the card to open task module and see the latest transcript created.
+
+## Further Reading.
+
+[Meeting Transcript](https://support.microsoft.com/en-us/office/view-live-transcription-in-a-teams-meeting-dc1a8f23-2e20-4684-885e-2152e06a4a8b)
 
