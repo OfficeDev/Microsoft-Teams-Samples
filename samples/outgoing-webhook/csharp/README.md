@@ -42,8 +42,7 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 
-### Create an outgoing webhook
-
+1) Create an outgoing webhook.
     - Select the appropriate team and select Manage team from the (•••) drop-down menu.
     - Choose the Apps tab from the navigation bar.
     - From the window's lower right corner select Create an outgoing webhook.
@@ -56,7 +55,6 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
     - Select the Create button from lower right corner of the pop-up window and the outgoing webhook will be added to the current team's channels.
     - The next dialog window will display an [Hash-based Message Authentication Code](https://security.stackexchange.com/questions/20129/how-and-when-do-i-use-hmac/20301) security token that will be used to authenticate calls between Teams and the designated outside service. This token in used in `AuthProvider.cs`.
     - If the URL is valid and the server and client authentication tokens are equal (i.e., an HMAC handshake), the outgoing webhook will be available to the team's users.
-
 
 1) Clone the repository
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
