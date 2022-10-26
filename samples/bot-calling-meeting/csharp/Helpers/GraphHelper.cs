@@ -23,7 +23,7 @@ namespace CallingBotSample.Helpers
         private readonly IConfiguration configuration;
         private readonly IEnumerable<Configuration.User> users;
         private readonly BotOptions options;
-        private readonly IGraphServiceClient graphServiceClient;
+        private readonly GraphServiceClient graphServiceClient;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GraphHelper"/> class.
@@ -31,7 +31,7 @@ namespace CallingBotSample.Helpers
         /// <param name="httpClientFactory">IHttpClientFactory instance.</param>
         /// <param name="logger">ILogger instance.</param>
         /// <param name="configuration">IConfiguration instance.</param>
-        public GraphHelper(ILogger<GraphHelper> logger, IConfiguration configuration, IOptions<Configuration.Users> users, BotOptions options, IGraphServiceClient graphServiceClient)
+        public GraphHelper(ILogger<GraphHelper> logger, IConfiguration configuration, IOptions<Configuration.Users> users, BotOptions options, GraphServiceClient graphServiceClient)
         {
             this.logger = logger;
             this.configuration = configuration;
@@ -209,7 +209,7 @@ namespace CallingBotSample.Helpers
         /// <inheritdoc />
         public async Task PlayPrompt(string meetingId)
         {
-            var prompts = new List<Microsoft.Graph.Prompt>()
+            var prompts = new List<Prompt>()
             {
                 new MediaPrompt
                 {
