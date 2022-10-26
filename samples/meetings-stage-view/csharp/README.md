@@ -18,11 +18,11 @@ urlFragment: officedev-microsoft-teams-samples-meetings-stage-view-csharp
 This App helps to enable and configure your apps for Teams meetings. This app covers Shared meeting stage using [Live Share SDK](https://aka.ms/livesharedocs).
 For reference please check [Enable and configure your apps for Teams meetings](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/enable-and-configure-your-app-for-teams-meetings)
 
-## Interact with app- Mobile
+## Interaction with app- Mobile
 
 ![Preview Image](Images/preview_web.gif)
 
-## Interact with app- Web
+## Interaction with app- Web
 
 ![Preview Image](Images/preview_mobile.gif)
 
