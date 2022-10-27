@@ -1,10 +1,6 @@
-﻿using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Net.Http;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
 using System.Security.Claims;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.Graph.Communications.Client.Authentication;
 using Microsoft.Graph.Communications.Common;
 using Microsoft.Graph.Communications.Common.Telemetry;
@@ -98,6 +94,7 @@ namespace CallingMediaBot.Web.Utility
         /// <returns>
         /// The <see cref="RequestValidationResult" /> structure.
         /// </returns>
+        [Obsolete]
         public async Task<RequestValidationResult> ValidateInboundRequestAsync(HttpRequestMessage request)
         {
             var token = request?.Headers?.Authorization?.Parameter;
