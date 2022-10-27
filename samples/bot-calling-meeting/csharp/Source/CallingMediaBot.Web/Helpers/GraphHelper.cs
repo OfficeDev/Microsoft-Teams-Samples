@@ -107,9 +107,13 @@ public class GraphHelper : IGraph
             {
                 new InvitationParticipantInfo
                 {
-                    Identity = new IdentitySet
+                    User = new Identity
                     {
-                        User = new Identity
+                        DisplayName = this.users.ElementAt(1).DisplayName,
+                        Id = this.users.ElementAt(1).Id
+                    }
+                },
+                AdditionalData = new Dictionary<string, object>()
                         {
                             DisplayName = this.users.ElementAt(2).DisplayName,
                             Id = this.users.ElementAt(2).Id

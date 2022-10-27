@@ -13,7 +13,7 @@ public class AdaptiveCardFactory : IAdaptiveCardFactory
     {
         var template = GetCardTemplate("WelcomeCard.json");
 
-        var serializedJson = template.Expand(new {});
+        var serializedJson = template.Expand(new { });
         return CreateAttachment(serializedJson);
     }
 
