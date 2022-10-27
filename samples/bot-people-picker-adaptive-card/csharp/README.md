@@ -90,10 +90,6 @@ Use the bot command `peoplepickercard` to get the card with people picker contro
 
 ![people picker card ](PeoplePicker/Images/AdaptiveCardSumissionDetails.png)
 
-- Personal scope (get all the users of organisation)
-
-![people picker card ](PeoplePicker/Images/Organisationlist.png)
-
 
 ## Further reading
 
