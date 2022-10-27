@@ -1,15 +1,15 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-bot-daily-task-reminder-nodejs",
+    "name": "officedev-microsoft-teams-samples-bot-people-picker-adaptive-card-nodejs",
     "source": "officeDev",
-    "title": "Bot task reminder",
-    "shortDescription": "This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-daily-task-reminder/nodejs",
+    "title": "People picker control in Adaptive Cards",
+    "shortDescription": "Demonstrating the feature of people picker on Adaptive Cards.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-people-picker-adaptive-card/nodejs",
     "longDescription": [
-      "This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time."
+      "Demonstrating the feature of people picker on Adaptive Cards."
     ],
-    "creationDateTime": "2021-11-24",
-    "updateDateTime": "2022-01-12",
+    "creationDateTime": "2022-01-25",
+    "updateDateTime": "2022-06-21",
     "products": [
       "Teams"
     ],
@@ -35,8 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-daily-task-reminder/nodejs/Images/ScheduleTask.png",
-        "alt": "Solution UX showing bot task reminder"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-people-picker-adaptive-card/nodejs/Images/adaptiveCard.png",
+        "alt": "Solution UX showing people picker control in adaptive cards"
       }
     ],
     "authors": [

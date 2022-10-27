@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "06-10-2021 01:48:56"
+ createdDate: "06/10/2021 01:48:56 AM"
 urlFragment: officedev-microsoft-teams-samples-bot-receive-channel-messages-withRSC-nodejs
 ---
 
@@ -22,15 +22,9 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 ## Key features
 
-![RSC Module](ReceiveMessagesWithRSC/Images/BotWithRSCModule.gif)
-
-- Showing Welcome message 
-
-![Channel messages](ReceiveMessagesWithRSC/Images/Notification.png)
-
 - Showing messages based on option selected
 
-![Channel messages](ReceiveMessagesWithRSC/Images/botWithRSCFlow.png)
+![Channel messages](images/channel_messages.png)
 
 ## Prerequisites
 
