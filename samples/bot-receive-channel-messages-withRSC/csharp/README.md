@@ -63,8 +63,6 @@ This feature shown in this sample is currently available in Public Developer Pre
          - Select **Manage Team**, then select **Apps** 
          - Then select **Upload a custom app** from the lower right corner.
          - Then select the `manifest.zip` file from `appPackage`, and then select **Add** to add the bot to your selected team.
-    
-## To try this sample
 
 - In a terminal, navigate to `ReceiveMessagesWithRSC`
 
@@ -75,14 +73,14 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 - Run the bot from a terminal or from Visual Studio, choose option A or B.
 
-  A) From a terminal
+6. From a terminal
 
   ```bash
   # run the bot
   dotnet run
   ```
 
-  B) Or from Visual Studio
+ 7. Or from Visual Studio
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
