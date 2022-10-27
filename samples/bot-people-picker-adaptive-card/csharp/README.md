@@ -16,24 +16,11 @@ urlFragment: officedev-microsoft-teams-samples-bot-people-picker-adaptive-card-c
 
 This sample shows the feature of people picker on Adaptive Cards.
 
+## Interaction with app.
+
 ![people picker card ](PeoplePicker/Images/PepolePickerAdaptiveCard.gif)
 
- Use the bot command `peoplepickercard` to get the card with people picker control 
-
-![people picker card ](PeoplePicker/Images/Welcome.png)
-
- Adaptive card.
-
-![people picker card ](PeoplePicker/Images/adaptiveCard.png)
-
- Adaptive card with details( On `Assign` button click, the bot will return the member id that we have selected.)  
-
-![people picker card ](PeoplePicker/Images/AdaptiveCardSumissionDetails.png)
-
-- Personal scope (get all the users of organisation)
-
-![people picker card ](PeoplePicker/Images/Organisationlist.png)
-
+ 
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
@@ -50,14 +37,12 @@ This sample shows the feature of people picker on Adaptive Cards.
   ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-## To try this sample
+## Setup.
 
 ### 1. Setup for Bot
 In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-
-### 2. Run your bot sample
 
 1. Clone the repository
    ```bash
@@ -89,7 +74,26 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
    - Go to Microsoft Teams and then go to side panel, select Apps
    - Choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
-   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.    
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams. 
+   
+## Running the sample.
+
+Use the bot command `peoplepickercard` to get the card with people picker control 
+
+![people picker card ](PeoplePicker/Images/Welcome.png)
+
+ Adaptive card.
+
+![people picker card ](PeoplePicker/Images/adaptiveCard.png)
+
+ Adaptive card with details( On `Assign` button click, the bot will return the member id that we have selected.)  
+
+![people picker card ](PeoplePicker/Images/AdaptiveCardSumissionDetails.png)
+
+- Personal scope (get all the users of organisation)
+
+![people picker card ](PeoplePicker/Images/Organisationlist.png)
+
 
 ## Further reading
 
