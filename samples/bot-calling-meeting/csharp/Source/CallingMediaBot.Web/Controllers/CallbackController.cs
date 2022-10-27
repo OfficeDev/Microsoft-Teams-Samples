@@ -17,7 +17,7 @@ namespace CallingMeetingBot.Controllers
         [HttpPost, HttpGet]
         public async Task HandleCallbackRequestAsync()
         {
-            await this.bot.ProcessNotificationAsync(this.Request, this.Response).ConfigureAwait(false);
+            await bot.ProcessNotificationAsync(Request, Response).ConfigureAwait(false);
         }
     }
 }
