@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-join-team-using-qr-code/nodejs/Images/JoinTeamByQrCode.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-join-team-using-qr-code/nodejs/Images/QRCode.png",
         "alt": "Solution UX showing join a team using qr code sample"
       }
     ],
