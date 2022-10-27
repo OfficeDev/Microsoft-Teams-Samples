@@ -44,7 +44,7 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
 
 3. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
    - `<<MANIFEST-ID>>` with some unique GUID   
-   - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
+   - `<<BASE-URL>>` with your application's base url, e.g. `https://1234.ngrok.io`
    - `{{BOT-ID}}` with the id from step 2.
    - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
 

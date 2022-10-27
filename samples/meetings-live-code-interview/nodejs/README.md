@@ -86,7 +86,7 @@ sequenceDiagram
     ```
 5) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
    - `{{Manifest-id}}` with some unique GUID.
-   - `{{Domain Name}}` with your application's base url, e.g. https://1234.ngrok.io
+   - `{{Domain Name}}` with your application's base url, e.g. `https://1234.ngrok.io`
 
 6) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
 

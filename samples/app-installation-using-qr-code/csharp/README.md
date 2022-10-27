@@ -82,7 +82,7 @@ The user can Generate a new QR code (contains app id information) and then use I
   - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
   - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
   - `{{Connection Name}}` - The OAuthConnection setting 
-  - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+  - `{{ Application Base Url }}` - Your application's base url. E.g. `https://12345.ngrok.io` if you are using ngrok.
 
     The `Connection Name` referred to is the name that we provide while adding OAuth connection setting in the Bot channel registration.
     Please follow link [Add authentication to your bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2) to see how we can add the setting.
