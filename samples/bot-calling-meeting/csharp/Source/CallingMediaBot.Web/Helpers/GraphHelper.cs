@@ -42,7 +42,7 @@ namespace CallingMediaBot.Web.Helpers
         }
 
         /// <inheritdoc/>
-        public async Task<OnlineMeeting> CreateOnlineMeetingAsync()
+        public async Task<OnlineMeeting?> CreateOnlineMeetingAsync()
         {
             try
             {
@@ -101,42 +101,38 @@ namespace CallingMediaBot.Web.Helpers
 
         public async Task TransferCallAsync(string replaceCallId)
         {
-            _ = Task.Run(async () =>
+            var transferTarget = new InvitationParticipantInfo
             {
-                await Task.Delay(15000);
-                var transferTarget = new InvitationParticipantInfo
+                Identity = new IdentitySet
                 {
-                    Identity = new IdentitySet
+                    User = new Identity
                     {
-                        User = new Identity
+                        DisplayName = this.users.ElementAt(1).DisplayName,
+                        Id = this.users.ElementAt(1).Id
+                    }
+                },
+                AdditionalData = new Dictionary<string, object>()
                         {
-                            DisplayName = this.users.ElementAt(1).DisplayName,
-                            Id = this.users.ElementAt(1).Id
-                        }
-                    },
-                    AdditionalData = new Dictionary<string, object>()
-                         {
-                            {"endpointType", "default"}
-                         },
-                    //ReplacesCallId = targetCallResponse.Id
-                };
+                        {"endpointType", "default"}
+                        },
+                //ReplacesCallId = targetCallResponse.Id
+            };
 
-                try
-                {
-                    await graphServiceClient.Communications.Calls[replaceCallId]
-                        .Transfer(transferTarget)
-                        .Request()
-                        .PostAsync();
-                }
-                catch (System.Exception ex)
-                {
+            try
+            {
+                await graphServiceClient.Communications.Calls[replaceCallId]
+                    .Transfer(transferTarget)
+                    .Request()
+                    .PostAsync();
+            }
+            catch (System.Exception ex)
+            {
 
-                    throw ex;
-                }
-            });
+                throw;
+            }
         }
 
-        public async Task<Call> JoinScheduledMeeting(string meetingUrl)
+        public async Task<Call?> JoinScheduledMeeting(string meetingUrl)
         {
             try
             {
@@ -172,39 +168,34 @@ namespace CallingMediaBot.Web.Helpers
             }
         }
 
-        public void InviteParticipant(string meetingId)
+        public async Task InviteParticipant(string meetingId)
         {
-            _ = Task.Run(async () =>
+            try
             {
-                await Task.Delay(10000);
-
-                try
+                var participants = new List<InvitationParticipantInfo>()
+            {
+                new InvitationParticipantInfo
                 {
-                    var participants = new List<InvitationParticipantInfo>()
-                {
-                    new InvitationParticipantInfo
+                    Identity = new IdentitySet
                     {
-                        Identity = new IdentitySet
+                        User = new Identity
                         {
-                            User = new Identity
-                            {
-                                DisplayName = this.users.ElementAt(2).DisplayName,
-                                Id = this.users.ElementAt(2).Id
-                            }
+                            DisplayName = this.users.ElementAt(2).DisplayName,
+                            Id = this.users.ElementAt(2).Id
                         }
                     }
-                };
+                }
+            };
 
-                    var statefulCall = await graphServiceClient.Communications.Calls[meetingId].Participants
-                       .Invite(participants)
-                       .Request()
-                       .PostAsync();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            });
+                var statefulCall = await graphServiceClient.Communications.Calls[meetingId].Participants
+                    .Invite(participants)
+                    .Request()
+                    .PostAsync();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         /// <inheritdoc />

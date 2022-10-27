@@ -1,22 +1,20 @@
 ﻿using Microsoft.Graph;
 using Microsoft.Graph.Communications.Client.Authentication;
 using Microsoft.Graph.Communications.Common;
-using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace CallingMediaBot.Web.Authentication
 {
     public class AuthenticationWrapper : IRequestAuthenticationProvider, IAuthenticationProvider
     {
         private readonly IRequestAuthenticationProvider authenticationProvider;
-        private readonly string tenant;
+        private readonly string? tenant;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AuthenticationWrapper"/> class.
         /// </summary>
         /// <param name="authenticationProvider">The authentication provider.</param>
         /// <param name="tenant">The tenant.</param>
-        public AuthenticationWrapper(IRequestAuthenticationProvider authenticationProvider, string tenant = null)
+        public AuthenticationWrapper(IRequestAuthenticationProvider authenticationProvider, string? tenant = null)
         {
             this.authenticationProvider = authenticationProvider.NotNull(nameof(authenticationProvider));
             this.tenant = tenant;
