@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom';
 import { Provider } from "@fluentui/react-teams";
 import { themeNames } from "@fluentui/react-teams";
 import { About } from "./about";
@@ -45,23 +49,23 @@ function App() {
 
   return (
     <Provider themeName={appAppearance} lang="en-US">
-      <Switch>
-        {/* 
+       <Router>
+          {/* 
           Default app pages     
         */}
-        <Route exact path="/" component={About} />
-        <Route exact path="/privacy" component={Privacy} />
-        <Route exact path="/termsofuse" component={TermsOfUse} />
+          <Route exact path="/privacy" component={Privacy} />
+          <Route exact path="/termsofuse" component={TermsOfUse} />
 
-        {/* 
+          {/* 
           Static Tabs 
           To configure it use manifest.json "staticTabs"
         */}
-        <Route path="/welcome" component={WelcomeTab} />
-        <Route path="/dashboard" component={DashboardTab} />
-        <Route path="/list" component={ListTab} />
-        <Route path="/board" component={BoardsTab} />
-      </Switch>
+          <Route path="/welcome" component={WelcomeTab} />
+          <Route path="/dashboard" component={DashboardTab} />
+          <Route path="/list" component={ListTab} />
+          <Route path="/board" component={BoardsTab} />
+          <Route path="/" component={About} />
+        </Router>
     </Provider>
   );
 }

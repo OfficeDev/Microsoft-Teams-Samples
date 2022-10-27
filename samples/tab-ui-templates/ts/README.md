@@ -17,13 +17,10 @@ urlFragment: officedev-microsoft-teams-samples-tab-ui-templates-ts
 
 # Deploying the Microsoft Teams UI templates sample app
 
-<img align="right" width="400" src="https://i.ibb.co/xSLQP14/app-sample.png" />
-
 This sample app can help you better understand how apps should look and behave in Microsoft Teams. The app includes examples of tested, high-quality UI templates that work across common Teams use cases (such as dashboards or forms).
 
-To use the sample app, you need to host it somewhere. We'll focus on deploying the app to a local web server since that's the fastest way to get started.
-
-(If you want to make it easier for others to use the app, consider deploying to [Microsoft Azure](https://azure.microsoft.com/get-started/web-app/) or another hosting service.)
+- **Interaction with tab**
+![Tab-page](Images/tab-ui-templates.gif)
 
 ## Prerequisites
 
@@ -49,11 +46,6 @@ You can find the app source code in `./src`:
 
 - `assets`: Includes the app assets.
 
-- `.env`: Contains the app configurations. When you create the app package, the manifest is dynamically populated with values from this file.
-
-  > [!NOTE]
-  > The `.env` file is excluded from source control. If you're deploying to Azure, make sure that you include the `.env` configurations as application settings in your Azure web app (except the `PORT` variable, which is used for local testing and debugging).
-
 ## Run the app
 
 1. In the root directory of your project, run the following command.
@@ -66,34 +58,32 @@ You can find the app source code in `./src`:
 
    ```
      You can now view microsoft-teams-app-sample in the browser.
-       Local:            http://localhost:3000
-       On Your Network:  http://192.168.0.10:3000
+       Local:            http://localhost:3978
+       On Your Network:  http://192.168.0.10:3978
    ```
-
-   If you see a port number other than `3000`, it's because the `PORT` environment variable in the `.env` file has a different value. You can use that port or change it to 3000.
 
 2. Open a browser and verify that all of the following URLs load:
    - **Required Teams app pages**:
-     - About: [http://localhost:3000](http://localhost:3000)
-     - Privacy: [http://localhost:3000/#/privacy](http://localhost:3000/#/privacy)
-     - Terms of use: [http://localhost:3000/#/termsofuse](http://localhost:3000/#/termsofuse)
+     - About: [http://localhost:3978](http://localhost:3978)
+     - Privacy: [http://localhost:3978/#/privacy](http://localhost:3978/#/privacy)
+     - Terms of use: [http://localhost:3978/#/termsofuse](http://localhost:3978/#/termsofuse)
    - **Sample app tabs**:
-     - [http://localhost:3000/#/welcome](http://localhost:3000/#/welcome)
-     - [http://localhost:3000/#/dashboard](http://localhost:3000/#/dashboard)
-     - [http://localhost:3000/#/list](http://localhost:3000/#/list)
-     - [http://localhost:3000/#/board](http://localhost:3000/#/board)
+     - [http://localhost:3978/#/welcome](http://localhost:3978/#/welcome)
+     - [http://localhost:3978/#/dashboard](http://localhost:3978/#/dashboard)
+     - [http://localhost:3978/#/list](http://localhost:3978/#/list)
+     - [http://localhost:3978/#/board](http://localhost:3978/#/board)
 
 ## Set up a secure tunnel to the app
 
-Teams doesn't display app content unless it's accessible via HTTPS. We recommend using ngrok to establish a secure tunnel to where you're hosting the app locally (for example, `http://localhost:3000`).
+Teams doesn't display app content unless it's accessible via HTTPS. We recommend using ngrok to establish a secure tunnel to where you're hosting the app locally (for example, `http://localhost:3978`).
 
 1. Install [ngrok](https://ngrok.io).
 
-1. Run the following command to create the tunnel to your `localhost`.
+1. Run ngrok - point to port 3978
 
-   ```bash
-   yarn serve
-   ```
+```bash
+# ngrok http -host-header=rewrite 3978
+```
 
 1. Save the HTTPS URL in the output (for example, https://468b9ab725e9.ngrok.io). You may need this later if you plan to register the app with App Studio.
 
@@ -101,18 +91,14 @@ Teams doesn't display app content unless it's accessible via HTTPS. We recommend
 > If you're using the free version of ngrok and plan to share the app with others, remember that ngrok quits if your machine shuts down or goes to sleep. When you restart ngrok, the URL also will be different. (A paid version of ngrok provides persistent URLs.)
 
 ## Create the app package
+1) __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the  `src/manifest` folder to replace `<<GUID_ID>>` with any GUID value.
+    - **Edit** the `manifest.json` for `staticTabs` inside `contentUrl` . Replace `<<HOSTNAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+    - Add the app to personal/team/groupChat scope (Supported scopes)
 
-You need an app package to sideload the app in Teams.
-
-1. Open a separate terminal so that you don't interfere with the running app.
-
-1. Run the following command to generate the app package.
-
-   ```bash
-   yarn package
-   ```
-
-   This process validates the manifest and saves the package as a `zip` file in the `package` folder.
 
 ## Sideload the app in Teams
 
@@ -122,19 +108,19 @@ You need an app package to sideload the app in Teams.
 
    <img type="content" src="https://docs.microsoft.com/en-us/microsoftteams/platform/assets/images/build-your-first-app/upload-custom-app-closeup.png" alt-text="Illustration showing where in Teams you can upload a custom app." />
 
-## Enable logging
+## Running the sample
 
-To view app logs, the `DEBUG` environment variable must be set to `msteams`. This is enabled by default in your project's `.env` file.
+- Welcome Page
+- ![welcome-page ](Images/tabui-welcome.png)
 
-If disabled, run the following command in a terminal to see logs.
+- Dashboard Page
+- ![dashboard-page ](Images/tabui-dashboard.png)
 
-```bash
-SET DEBUG=msteams
-```
+- List Page
+- ![list-page ](Images/tabui-list.png)
 
-If you're hosting the app in Azure, set `DEBUG` to `msteams` in application settings.
-
-For more information, read about the [debug package](https://www.npmjs.com/package/debug).
+- Board Page
+- ![board-page ](Images/tabui-board.png)
 
 ## Next steps
 
