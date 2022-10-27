@@ -20,17 +20,9 @@ For reference please check [Receive Channel messages with RSC](https://docs.micr
 
 This feature shown in this sample is currently available in Public Developer Preview only.
 
-## Key features
+## Interaction with app.
 
 ![RSC Module](ReceiveMessagesWithRSC/Images/BotWithRSCModule.gif)
-
-- Showing Welcome message 
-
-![Channel messages](ReceiveMessagesWithRSC/Images/Notification.png)
-
-- Showing messages based on option selected
-
-![Channel messages](ReceiveMessagesWithRSC/Images/botWithRSCFlow.png)
 
 ## Prerequisites
 
@@ -107,6 +99,16 @@ This feature shown in this sample is currently available in Public Developer Pre
 Select a channel and enter a message in the channel for your bot.
 
 The bot receives the message without being @mentioned.
+
+## Running the sample.
+
+- Showing Welcome message 
+
+![Channel messages](ReceiveMessagesWithRSC/Images/Notification.png)
+
+- Showing messages based on option selected
+
+![Channel messages](ReceiveMessagesWithRSC/Images/botWithRSCFlow.png)
 
 ## Deploy the bot to Azure
 
