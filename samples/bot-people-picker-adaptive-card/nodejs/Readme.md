@@ -9,30 +9,26 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "25-01-2022 23:30:17"
+ createdDate: "01/25/2022 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-bot-people-picker-adaptive-card-nodejs
 ---
 # People picker control in Adaptive Cards
 
 This sample shows the feature of people picker on Adaptive Cards.
 
-![people picker card ](PeoplePicker/Images/PepolePickerAdaptiveCard.gif)
-
  Use the bot command `peoplepickercard` to get the card with people picker control 
 
-![people picker card ](PeoplePicker/Images/Welcome.png)
-
- Adaptive card.
-
-![people picker card ](PeoplePicker/Images/adaptiveCard.png)
-
- Adaptive card with details( On `Assign` button click, the bot will return the member id that we have selected.)  
-
-![people picker card ](PeoplePicker/Images/AdaptiveCardSumissionDetails.png)
+![people picker card ](Images/adaptiveCard.png)
 
 - Personal scope (get all the users of organisation)
 
-![people picker card ](PeoplePicker/Images/Organisationlist.png)
+![people picker card ](Images/personalPeoplePickerCard.png)
+
+- Team or groupchat scope (get user list to current context)
+
+![people picker card](Images/channelPeoplePickerCard.png)
+
+ On `Assign` button click, the bot will return the member id that we have selected.
 
 ## Prerequisites
 
