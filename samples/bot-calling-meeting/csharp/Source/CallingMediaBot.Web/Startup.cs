@@ -12,6 +12,9 @@ using CallingMediaBot.Web.Interfaces;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Graph.Communications.Common.Telemetry;
 
 namespace CallingMediaBot.Web
@@ -36,6 +39,9 @@ namespace CallingMediaBot.Web
             services.AddOptions();
 
             services.AddSingleton<IGraphLogger>(this.logger);
+
+            // Create the Bot Framework Authentication to be used with the Bot Adapter.
+            services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
 
             // Create the Bot Framework Authentication to be used with the Bot Adapter.
             services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
