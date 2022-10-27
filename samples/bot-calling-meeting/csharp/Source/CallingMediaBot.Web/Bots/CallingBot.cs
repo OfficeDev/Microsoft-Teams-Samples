@@ -6,7 +6,6 @@ using CallingMediaBot.Web.Interfaces;
 using CallingMediaBot.Web.Options;
 using CallingMediaBot.Web.Utility;
 using CallingMeetingBot.Extensions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.Graph;
@@ -14,12 +13,7 @@ using Microsoft.Graph.Communications.Client.Authentication;
 using Microsoft.Graph.Communications.Common.Telemetry;
 using Microsoft.Graph.Communications.Core.Notifications;
 using Microsoft.Graph.Communications.Core.Serialization;
-using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace CallingMediaBot.Web.Bots
 {
@@ -32,7 +26,7 @@ namespace CallingMediaBot.Web.Bots
         private INotificationProcessor NotificationProcessor { get; }
         private CommsSerializer Serializer { get; }
         private readonly BotOptions options;
-        private readonly IAdaptiveCardFactory _adaptiveCardFactory;
+        private readonly IAdaptiveCardFactory adaptiveCardFactory;
         private readonly IGraph graph;
         private readonly GraphServiceClient graphServiceClient;
 
@@ -42,7 +36,7 @@ namespace CallingMediaBot.Web.Bots
         public CallingBot(BotOptions options, IAdaptiveCardFactory adaptiveCardFactory, IGraph graph, GraphServiceClient graphServiceClient, IGraphLogger graphLogger)
         {
             this.options = options;
-            _adaptiveCardFactory = adaptiveCardFactory;
+            this.adaptiveCardFactory = adaptiveCardFactory;
             this.graph = graph;
             this.graphServiceClient = graphServiceClient;
             this.GraphLogger = graphLogger;
@@ -77,8 +71,7 @@ namespace CallingMediaBot.Web.Bots
                 }
                 else
                 {
-                    var httpResponse = httpRequest.CreateResponse(HttpStatusCode.Forbidden);
-                    await httpResponse.CreateHttpResponseAsync(response).ConfigureAwait(false);
+                    response.StatusCode = StatusCodes.Status403Forbidden;
                 }
             }
             catch (Exception e)
@@ -152,7 +145,7 @@ namespace CallingMediaBot.Web.Bots
                     break;
                 default:
                     await turnContext.SendActivityAsync("Welcome to bot");
-                    await turnContext.SendActivityAsync(MessageFactory.Attachment(_adaptiveCardFactory.CreateWelcomeCard()));
+                    await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardFactory.CreateWelcomeCard()));
                     break;
             }
         }
