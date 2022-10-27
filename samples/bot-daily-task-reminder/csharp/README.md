@@ -16,16 +16,10 @@ urlFragment: officedev-microsoft-teams-samples-bot-daily-task-reminder-csharp
 # Bot daily task reminder
 
 This sample shows a feature where user can schedule a recurring task and get the reminder at scheduled time.
-## Feature of the sample
-- Use command `create-reminder` to get card with action `Schedule task`.
+
+## Interaction with app.
 
 ![Daily Task Reminder ](BotDailyTaskReminder/Images/DailyTaskReminder.gif)
-
-![Schedule task ](BotDailyTaskReminder/Images/ScheduleTaskCard.png)
-
-![Task Details](BotDailyTaskReminder/Images/ScheduleTask.png)
-
-![Task reminder](BotDailyTaskReminder/Images/TaskReminder.png)
 
 ## Prerequisites
 
@@ -43,7 +37,7 @@ This sample shows a feature where user can schedule a recurring task and get the
   ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-## To try this sample
+## Setup.
 
 1) Setup for Bot
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
@@ -84,7 +78,7 @@ This sample shows a feature where user can schedule a recurring task and get the
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-## Features of this sample
+## Running the sample.
 
 - Use command `create-reminder` to get card with action `Schedule task`. 
 
