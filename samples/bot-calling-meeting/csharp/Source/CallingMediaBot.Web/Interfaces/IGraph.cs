@@ -40,7 +40,7 @@ namespace CallingMediaBot.Web.Interfaces
         /// Invite Participant to Meeting.
         /// </summary>
         /// <returns>JoinScheduledMeeting.</returns>
-        void InviteParticipant(string meetingId);
+        Task InviteParticipant(string meetingId);
 
         /// <summary>
         /// Play a defined prompt in a meeting

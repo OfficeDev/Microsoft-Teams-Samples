@@ -47,7 +47,7 @@ namespace CallingMediaBot.Web
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-            services.AddTransient<IBot, CallingBot>();
+            services.AddTransient<IBot, MessageBot>();
 
             services.AddBot(options => this.Configuration.Bind("Bot", options));
 
