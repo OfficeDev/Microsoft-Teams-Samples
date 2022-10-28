@@ -19,11 +19,9 @@ This sample illustrates a meeting experience for recruitment.
 
 It has meeting details and in-meeting app that helps in the interview process.
 
-![Details](MeetingApp/Images/details.png)
+## Interaction with app.
 
-![Sidepanel Overview](MeetingApp/Images/sidepanel_overview.png)
-
-![Sidepanel Questions](MeetingApp/Images/sidepanel_questions.png)
+![Details](Images/meetingrecruitment.gif)
 
 ## Prerequisites
 
@@ -33,55 +31,61 @@ It has meeting details and in-meeting app that helps in the interview process.
   # determine dotnet version
   dotnet --version
   ```
-
-- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
-  ```bash
-  # run ngrok locally
-  ngrok http -host-header=localhost 3978
-  ```
-
+- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-## To try this sample
-1) Create a Bot Registration
-   In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2#create-the-resource).
 
-   - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+## Setup
 
-2) Create a Azure Storage account(This is needed to store/retrieve data that is used in the app) 
+### 1. Setup NGROK
+
+Run ngrok - point to port 3978
+
+    ```bash
+    # ngrok http -host-header=rewrite 3000
+    ```
+
+### 2. Setup Bot
+
+1) Go to App registrations and create a new app registration in a different tab.
+Register an application.
+Fill out name and select third option for supported account type and click "Register".
+
+![AppRegistration](Images/AppRegistration.png)
+
+* Copy and paste the App Id and Tenant ID somewhere safe. You will need it in a future step.
+
+2) Create Client Secret.
+   * Navigate to the "Certificates & secrets" blade and add a client secret by clicking "New Client Secret".
+
+![ClientSecret](Images/clientsecret.png) 
+
+* Copy and paste the secret somewhere safe. You will need it in a future step.
+
+3) Create a Bot Registration in Azure portal. [Bot Framework registration](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2#create-the-resource)
+
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    
+4) Create a Azure Storage account(This is needed to store/retrieve data that's used in the app) 
   [Create storage account](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal)
 
-  This step will create a storage account. You will require storage account name and keys in following steps.
-  Please follow [View account keys](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to see the keys info.
+   This step will create a storage account. You will require storage account name and keys in next steps.
+  
+   Please follow [View account keys](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to see the   
+   keys info.
 
-3) Clone the repository
+### 3. Setup for code   
+
+1) Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
 
-4) In a terminal, navigate to `samples/meeting-recruitment-app/csharp`
+2) Modify the `/appsettings.json` and fill in the `{{ MicrosoftAppId }}`,`{{ MicrosoftAppPassword }}` with the id from step 1.
 
-    ```bash
-    # change into project folder
-    cd # MeetingApp
-    ```
-5) Run ngrok - point to port 3978
+3) Modify the `/appsettings.json` and fill in the `{{ StorageConnectionString }}` from step 2.
 
-    ```bash
-    # ngrok http -host-header=rewrite 3978
-    ```
-6) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
-   - `<<App-ID>>` with some unique GUID   
-   - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
-   - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
-
-7) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
-
-8) Modify the `/appsettings.json` and fill in the `{{ MicrosoftAppId }}`,`{{ MicrosoftAppPassword }}` with the id from step 1.
-
-9) Modify the `/appsettings.json` and fill in the `{{ StorageConnectionString }}` from step 2.
-
-10) Run the app from a terminal or from Visual Studio, choose option A or B.
+4) Run the app from a terminal or from Visual Studio, choose option A or B.
 
   A) From a terminal
 
@@ -98,69 +102,86 @@ It has meeting details and in-meeting app that helps in the interview process.
   - Select `MeetingApp.csproj` file
   - Press `F5` to run the project
 
-11) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+### 4. Setup Manifest for Teams  
+   
+1) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
+   - `<<APP-ID>>` with some unique GUID. e.g. your app id generated in Step-1 
+   - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
+   - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
+
+2) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
+
+3) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add to meeting in the pop-up dialog box. Your app is uploaded to Teams.
 
-## Features of this sample
+## Running the sample
 
 1) Details page:
    The details page shows basic information of the candidate, timeline, Questions (that can be added for meeting), Notes (provided by peers)
 
-   ![Details](MeetingApp/Images/details.png)
+   ![Details](Images/details.png)
 
 2) Action on Questions:
-   The interviewer can Add/Edit or Delete question.
+   
+   - The interviewer can Add/Edit or Delete question.
 
-   ![Add Question](MeetingApp/Images/add_question.png)
+   ![Add Question](Images/add_question.png)
 
    - Add Questions Task Module
-   ![Add Question Task](MeetingApp/Images/add_task.png)
+   
+   ![Add Question Task](Images/add_task.png)
 
-   ![Edit Delete Question](MeetingApp/Images/edit_questions.png)
+   ![Edit Delete Question](Images/edit_questions.png)
 
    - Edit Question Task Module
-   ![Edit Task](MeetingApp/Images/edit_task.png)
+   
+   ![Edit Task](Images/edit_task.png)
 
 3) Add Notes:
+   
    The interviewer can add notes that will appear to other peers.
 
-   ![Add Notes](MeetingApp/Images/add_note.png)
+   ![Add Notes](Images/add_note.png)
 
    Add Note Task Module
-   ![Add Notes](MeetingApp/Images/add_note_task.png)
+  
+   ![Add Notes](Images/add_note_task.png)
 
 4) Sidepanel:
+    
     The in-meeting side panel shows two sections as follows:
+    
     A) Overview: Shows the basic details of the candidate.
+    
     B) Questions: The questions set in the details page appear here. The interviewer can use this to provide rating and submit final feedback.
 
-    ![Sidepanel Overview](MeetingApp/Images/sidepanel_overview.png)
+    ![Sidepanel Overview](Images/sidepanel_overview.png)
 
-    ![Sidepanel Questions](MeetingApp/Images/sidepanel_questions.png)
+    ![Sidepanel Questions](Images/sidepanel_questions.png)
 
 5) Share assets:
+
    This is used to share assets to the candidate.
-   ![Share Assets](MeetingApp/Images/share_assets.png)
    
+   ![Share Assets](Images/share_assets.png)
+
 6) Mobile view: Details tab
-   ![Details tab](MeetingApp/Images/details_tab_mobile.png)
-   
-   - Action on Questions:
-   
-   ![Question](MeetingApp/Images/question_mobile.png)
+
+   ![Details tab](Images/details_tab_mobile.png)
+
+   ![Note](Images/Note_mobile.png)
+
+   ![Share Doc](Images/ShareDoc_mobile.png)
    
    - Sidepanel view
    
-   ![Sidepanel mobile](MeetingApp/Images/sidepanel_mobile.png)
-  
-## Testing the bot using Bot Framework Emulator
+   ![Sidepanel Overview mobile](Images/sidepanel_mobile.png)
 
-[Bot Framework Emulator](https://github.com/microsoft/botframework-emulator) is a desktop application that allows bot developers to test and debug their bots on localhost or running remotely through a tunnel.
+   ![Sidepanel Question mobile](Images/question_mobile.png)
 
-- Install the Bot Framework Emulator version 4.5.0 or greater from [here](https://github.com/Microsoft/BotFramework-Emulator/releases)
 
 ## Further reading
 
