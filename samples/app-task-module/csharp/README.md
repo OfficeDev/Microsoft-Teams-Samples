@@ -15,43 +15,25 @@ urlFragment: officedev-microsoft-teams-samples-app-task-module-csharp
 ---
 
 # Microsoft Teams task module
-
-##Feature of the sample.
-
-![adaptivecard](Microsoft.Teams.Samples.TaskModule.Web/Images/AppTaskModule.gif)
-
 A task module allows you to create modal popup experiences in your Teams application. Inside the popup, you can run your own custom HTML/JavaScript code, show an `<iframe>`-based widget such as a YouTube or Microsoft Stream video, or display an [Adaptive card](https://docs.microsoft.com/en-us/adaptive-cards/).
 
 Task modules build on the foundation of Microsoft Teams tabs: a task module is essentially a tab in a popup window. It uses the same SDK, so if you've built a tab you are already 90% of the way to being able to create a task module.
 
 
+## Interaction with app.
 
-![adaptivecard](Microsoft.Teams.Samples.TaskModule.Web/Images/adaptivecard.png)
+![adaptivecard](Microsoft.Teams.Samples.TaskModule.Web/Images/AppTaskModule.gif)
 
-![Customform](Microsoft.Teams.Samples.TaskModule.Web/Images/Customform.png)
 
-![customformregister](Microsoft.Teams.Samples.TaskModule.Web/Images/customformregister.png)
-
-![adaptivecard2](Microsoft.Teams.Samples.TaskModule.Web/Images/adaptivecard2.png)
-
-![powerapps](Microsoft.Teams.Samples.TaskModule.Web/Images/powerapps.png)
-
-![TaskModule](Microsoft.Teams.Samples.TaskModule.Web/Images/TaskModule.png)
-
-![tasks](Microsoft.Teams.Samples.TaskModule.Web/Images/tasks.png)
-
-![youtube](Microsoft.Teams.Samples.TaskModule.Web/Images/youtube.png)
-
-## Run this sample locally
+## Setup.
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
 
-### 1. Setup for Bot
+### Bot Setup
 In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/abs-quickstart?view=azure-bot-service-4.0&tabs=userassigned).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-### 2. Run your bot sample
 1) Clone the repository
 
     ```bash
@@ -120,6 +102,25 @@ The sample app also contains a bot with cards allowing you to invoke these task 
   * Metadata used to generate [TaskInfo objects](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/task-modules/task-modules-overview#the-taskinfo-object) is in [TaskModel.cs](Microsoft.Teams.Samples.TaskModule.Web/Models/TaskModel.cs).
   * Model classes for handling [Bot Framework card actions vs. Adaptive card Action.Submit actions](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/task-modules/task-modules-bots#bot-framework-card-actions-vs-adaptive-card-actionsubmit-actions) are defined in [CardActionValue.cs](Microsoft.Teams.Samples.TaskModule.Web/Models/CardActionValue.cs)
   * Deeplink is generated in [DeeplinkHelper.cs](Microsoft.Teams.Samples.TaskModule.Web/Helper/DeeplinkHelper.cs)
+
+## Running the sample.
+
+![adaptivecard](Microsoft.Teams.Samples.TaskModule.Web/Images/adaptivecard.png)
+
+![Customform](Microsoft.Teams.Samples.TaskModule.Web/Images/Customform.png)
+
+![customformregister](Microsoft.Teams.Samples.TaskModule.Web/Images/customformregister.png)
+
+![adaptivecard2](Microsoft.Teams.Samples.TaskModule.Web/Images/adaptivecard2.png)
+
+![powerapps](Microsoft.Teams.Samples.TaskModule.Web/Images/powerapps.png)
+
+![TaskModule](Microsoft.Teams.Samples.TaskModule.Web/Images/TaskModule.png)
+
+![tasks](Microsoft.Teams.Samples.TaskModule.Web/Images/tasks.png)
+
+![youtube](Microsoft.Teams.Samples.TaskModule.Web/Images/youtube.png)
+
 
 ## Contributing
 
