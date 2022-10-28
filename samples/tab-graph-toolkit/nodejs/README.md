@@ -25,10 +25,16 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
 -  [NodeJS](https://nodejs.org/en/)
 
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+-  1) Run ngrok - point to port 3978
 
-## Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+    ```bash
+    ngrok http --host-header=rewrite 3978
+    ```
 
- - Register an App in Azure. Navigate to App registeration click on New registeration.
+## Setup.
+
+-  Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+- Register an App in Azure. Navigate to App registeration click on New registeration.
 - Update your App Name `mgtteamstab`
 - Click on Add a Platform in redirect URI section.
 - Select Single Page Application and add following URL `https://localhost:3000/`
