@@ -18,19 +18,36 @@ urlFragment: officedev-microsoft-teams-samples-tab-personal-sso-quickstart-ts
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
 
-![personaltab](Images/personaltab.png)
 
-## Prerequisites
+ ## Prerequisites
+
+- Microsoft Teams is installed and you have an account (not a guest account)
 -  [NodeJS](https://nodejs.org/en/)
-
+-  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+
+## Setup.
+1) Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+
+2) Setup for Bot
+
+   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+    - For bot handle, make up a name.
+    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
+    
+   In the new Azure Bot resource in the Portal, 
+    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
+
+-  [Create an Azure AD App registration to support SSO and the User.Read Graph API](https://aka.ms/teams-toolkit-sso-appreg)
 
 ## ngrok
 
 Teams needs to access your tab from a publically accessible URL. If you are running your app in localhost, you will need to use a tunneling service like ngrok.
 
 -  Run ngrok and point it to localhost:
--  `ngrok http https://localhost:3000`
+-  `ngrok http https://localhost:3978`
 
 Note: It may be worth purchasing a basic subscription to ngrok so you can get a fixed subdomain ( see the --subdomain ngrok parameter)
 
@@ -62,6 +79,10 @@ Ensure you have the Debugger for Chrome/Edge extension installed for Visual Stud
 ### Build for production
 `npm run build`
 
+## Running the sample.
+
+![personaltab](Images/personaltab.png)
+
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
@@ -69,4 +90,7 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+## Further Reading.
+[Tab-personal-quickStart](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-overview)
 
