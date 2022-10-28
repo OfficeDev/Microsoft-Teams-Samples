@@ -21,7 +21,7 @@ It has meeting details and in-meeting app that helps in the interview process.
 
 ## Interaction with app.
 
-![Details](Images/meetingrecruitment.gif)
+![Details](MeetingApp/Images/meetingrecruitment.gif)
 
 ## Prerequisites
 
