@@ -17,21 +17,15 @@ urlFragment: officedev-microsoft-teams-samples-graph-meeting-notification-nodejs
 
 This is a sample application which demonstrates use of online meeting subscription that will post notifications when user joined/left and when meeting start/end.
 
-## Concepts introduced in this sample
-- After sucessfully installation of bot in meeting you will get a welcome card and the subscription will be created for meeting it is installed in.
-
-![Welcome Card](Images/MeetingNotification.gif)
+- **Interaction with app**
+![Meeting Notification](Images/MeetingNotification.gif)
 
 ## Prerequisites
 
-- Microsoft Teams is installed and you have an account
-- [Node.js](https://nodejs.org) version 10.14 or higher
-
-    ```bash
-    #determine node version
-    node --version
-    ```
+- Microsoft Teams is installed and you have an account (not a guest account)
+- [NodeJS](https://nodejs.org/en/)
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
 ### Register your application with Azure AD
 
@@ -66,6 +60,13 @@ To include resource data of graph notifications, this Graph API require self-sig
     - The key size must be between 2048 and 4096 bits
 
 3. Follow this documentation for the steps - [**Create and install Self-Signed certificate**](CertificateDocumentation/README.md)
+
+###  Setup NGROK
+1) Run ngrok - point to port 3978
+
+```bash
+# ngrok http -host-header=rewrite 3978
+```
 
 ### Setup code.
 1) Clone the repository
@@ -103,18 +104,23 @@ To include resource data of graph notifications, this Graph API require self-sig
      npm start
    ``` 
 
- - Run ngrok - point to port 3978
-
-   ```bash
-     ngrok http -host-header=rewrite 3978
-
 ## Instruction for manifest
-1. Fill any GUID value in your manifest for <GUID>. As an alternative, you can put your Microsoft App Id.
-2. Update <MICROSOFT-APP-ID> placeholder with your Microsoft App Id.
-3. ZIP the manifest and make sure manifest.json and two icon images are at root.
-4. Upload the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+1. Update <MICROSOFT-APP-ID> placeholder with your Microsoft App Id.
+2. ZIP the manifest and make sure manifest.json and two icon images are at root.
+3. Upload the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
-Follow this documentation to get more information on custom apps and uploading them into Teams - [Manage custom apps](https://docs.microsoft.com/en-us/microsoftteams/custom-app-overview) and [Upload an app package](https://docs.microsoft.com/en-us/microsoftteams/upload-custom-apps)
+## Running the sample
+- After sucessfully installation of bot in meeting you will get a welcome card and the subscription will be created for meeting it is installed in.
+![Welcome Card](Images/MeetingWelcome.png)
+
+- Bot will send card for meeting start end events. Bot will also send card when members joined/left the meeting
+ ![Meeting start Card](Images/MeetingStarted.png)
+
+  ![Meeting start Card](Images/MeetingEnded.png)
+
+- Bot will also send card when members joined/left the meeting
+ ![Meeting start Card](Images/MeetingEnded.png)
+
  
 ## Further reading
 - [Change notifications for Microsoft Teams meeting](https://docs.microsoft.com/en-us/graph/changenotifications-for-onlinemeeting)
