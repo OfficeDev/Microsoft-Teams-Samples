@@ -96,7 +96,7 @@ This sample shows the feature where user can send suggested actions using bot.
 
 ## Running the sample.
 
-![Welcome Message](SuggestedActions/Images/WelcomeMessage.png)
+![Welcome Message](SuggestedActions/Images/WelcomeMessage.PNG)
 
 ![Red](SuggestedActions/Images/Red.png)
 
