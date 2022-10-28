@@ -17,9 +17,17 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-razor-csharp
 
 In this quickstart we'll walk-through creating a custom channel/group tab with C# and ASP.Net Core Razor page. We'll also use App Studio for Microsoft Teams to finalize your app manifest and deploy your tab to Teams.
 
-## Feature of the sample.
+## Interaction with app.
 
 ![Group Channel Tab](Images/ChannelGroupTabModule.gif)
+
+## Setup.
+
+For complete instructions on running this sample see:
+
+[Create a Custom Channel and Group Tab with ASP.NET Core](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=razor-csharp)
+
+## Running the sample
 
 ![configureteams](Images/configureteams.png)
 
@@ -33,8 +41,7 @@ In this quickstart we'll walk-through creating a custom channel/group tab with C
 
 ![RedTab](Images/RedTab.png)
 
-## Running the sample
+## Further Reading.
+[Tab-channel-group](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/what-are-tabs)
 
-For complete instructions on running this sample see:
 
-[Create a Custom Channel and Group Tab with ASP.NET Core](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=razor-csharp)
