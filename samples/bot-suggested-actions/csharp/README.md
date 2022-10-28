@@ -17,15 +17,9 @@ urlFragment: officedev-microsoft-teams-samples-bot-suggested-actions-csharp
 
 This sample shows the feature where user can send suggested actions using bot.
 
-##Feature of the sample.
+## Interaction with app.
 
 ![Module](SuggestedActions/Images/botSuggestedActionModule.gif)
-
-![Welcome Message](SuggestedActions/Images/WelcomeMessage.png)
-
-![Red](SuggestedActions/Images/Red.png)
-
-![Yellow](SuggestedActions/Images/Yellow.png)
 
 ## Prerequisites
 
@@ -43,7 +37,7 @@ This sample shows the feature where user can send suggested actions using bot.
   ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-## To try this sample
+## Setup.
 
 1) Create a Bot Registration
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
@@ -100,9 +94,13 @@ This sample shows the feature where user can send suggested actions using bot.
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-## Features of this sample
+## Running the sample.
 
-![Initial Message](SuggestedActions/Images/WelcomeMessage.PNG)
+![Welcome Message](SuggestedActions/Images/WelcomeMessage.png)
+
+![Red](SuggestedActions/Images/Red.png)
+
+![Yellow](SuggestedActions/Images/Yellow.png)
 
 ## Deploy the bot to Azure
 
