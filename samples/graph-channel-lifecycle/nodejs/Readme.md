@@ -27,7 +27,7 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
 - [NodeJS](https://nodejs.org/en/)
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## To try this sample
+## Setup.
 
 1) Clone the repository
 
