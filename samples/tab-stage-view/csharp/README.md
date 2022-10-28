@@ -18,6 +18,9 @@ urlFragment: officedev-microsoft-teams-samples-tab-stage-view-csharp
 This App talks about the Teams tab in stage view with CSharp.
 For reference please check [Tabs link unfurling and Stage View](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling)
 
+## Interaction with app.
+
+![TabStageView Modules](TabInStageView/Images/tabstageviewmodule.gif)
 
 ## Prerequisites
 
@@ -90,9 +93,7 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
     You can use this tab by following the below steps:
     - In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
 
-## Features of this sample
-
-![TabStageView Modules](TabInStageView/Images/tabstageviewmodule.gif)
+## Running the sample.
 
 - Welcome message with feature explanation.
 
