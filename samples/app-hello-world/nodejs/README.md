@@ -12,7 +12,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-app-hello-world-nodejs
 ---
 
-# Microsoft Teams hello world sample app.
+# Interaction with app.
 
 ![HelloWorld](Images/HelloWorld.png)
 
@@ -24,7 +24,7 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-nodejs
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
    appropriate permissions to install an app.
 
-## To try this sample
+## Setup.
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
@@ -50,10 +50,10 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     npm install
     ```
 
-4) Run ngrok - point to port 3333
+4) Run ngrok - point to port 3978
 
     ```bash
-    ngrok http -host-header=rewrite 3333
+    ngrok http -host-header=rewrite 3978
     ```
 5) Update the `custom-environment-variables` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`, `BaseUrl` with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 

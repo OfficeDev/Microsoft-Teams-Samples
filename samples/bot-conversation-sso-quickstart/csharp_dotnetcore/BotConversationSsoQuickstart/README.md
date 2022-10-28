@@ -21,17 +21,12 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 The focus of this sample is how to use the Bot Framework support for OAuth SSO in your bot. Teams behaves slightly differently than other channels in this regard. Specifically an Invoke Activity is sent to the bot rather than the Event Activity used by other channels. _This Invoke Activity must be forwarded to the dialog if the OAuthPrompt is being used._ This is done by subclassing the ActivityHandler and this sample includes a reusable TeamsActivityHandler. This class is a candidate for future inclusion in the Bot Framework SDK.
 
 The sample uses the bot authentication capabilities in [Azure Bot Service](https://docs.botframework.com), providing features to make it easier to develop a bot that authenticates users to various identity providers such as Azure AD (Azure Active Directory), GitHub, Uber, etc. The OAuth token is then used to make basic Microsoft Graph queries.
-## Feture of the sample
-
-![Teams Conversation Bot SSO Sample](Images/BotConversationSsoQuickStart.gif)
-
-![bot signin card](Images/BotSignInCard.png)
-
-![user details card](Images/UserDetailsCard.png)
-
-![token](Images/Token.png)
 
 > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
+
+## Interaction with app.
+
+![Teams Conversation Bot SSO Sample](Images/BotConversationSsoQuickStart.gif)
 
 ## Prerequisites
 
@@ -40,12 +35,13 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-## To try this sample
+## Setup.
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
 
 ### 1. Setup for Bot SSO
+
 Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md).
 
 ### 2. Configure bot sample
@@ -79,6 +75,14 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
 You can interact with this bot by sending it a message. The bot will respond by asking for your consent, by this consent the Bot will exchange an SSO token, then making a call to the Graph API on your behalf and returning the results. It will keep you loggined unless you send a message "logout". 
+
+## Running the sample.
+
+![bot signin card](Images/BotSignInCard.png)
+
+![user details card](Images/UserDetailsCard.png)
+
+![token](Images/Token.png)
 
 ## Further reading
 
