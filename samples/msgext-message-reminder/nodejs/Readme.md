@@ -17,22 +17,9 @@ urlFragment: officedev-microsoft-teams-samples-msgext-message-reminder-nodejs
 
 This sample shows a feature where user can schedule a task from messaging extension action and get a reminder card at a scheduled time.
 
-##Feature of the sample.
+## Interaction with app.
 
 ![Task Details](Images/msgextmessagereminder.gif)
-
-- Personal scope scenario
- Select `...` over message to get action `create-reminder` for scheduling task.
-
-![Select message](Images/MessageAction.png)
-
- Task module to schedule a task.
-
-![Task Details](Images/ScheduleTask.png)
-
- Reminder card of task at scheduled date and time.
- 
-![Task reminder](Images/TaskReminder.png)
 
 ## Prerequisites
 
@@ -42,15 +29,19 @@ This sample shows a feature where user can schedule a task from messaging extens
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
    appropriate permissions to install an app.
 
-## To try this sample
+## Setup.
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
 
-### 1. Setup for Bot
+### 1. Azure app Registration.
+
+    Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+
+### 2. Setup for Bot
 In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
-### 2. Run your bot sample
+### 3. Run your bot sample
 1) Clone the repository
 
     ```bash
@@ -85,9 +76,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
-## Features of this sample
-
-![Sample Module](Images/msgextmessagereminder.gif)
+## Running the sample.
 
 - Personal scope scenario
  Select `...` over message to get action `create-reminder` for scheduling task.
@@ -116,3 +105,16 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
  Reminder card of task at scheduled date and time.
 
 ![ TeamTask reminder](Images/TaskReminderTeam.png)
+
+## Further reading
+
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [.NET Core CLI tools](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x)
+- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
+- [Azure Portal](https://portal.azure.com)
+- [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
+- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
