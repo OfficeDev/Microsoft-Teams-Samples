@@ -13,19 +13,13 @@ extensions:
  createdDate: "07-07-2021 13:38:27"
 urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-ts
 ---
-## Fetures of the samples 
+## Interaction with app. 
 
 ![setupteams](Images/TabChannelGroupSSOModule.gif)
 
 # Teams Tab SSO Authentication
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
-
-![tabconfigure](Images/tabconfigure.png)
-
-![setuptab](Images/setuptab.png)
-
-![Mytab](Images/Mytab.png)
 
 ## Prerequisites
 -  [NodeJS](https://nodejs.org/en/)
@@ -34,10 +28,11 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
 
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-## ngrok
 
 Teams needs to access your tab from a publically accessible URL. If you are running your app in localhost, you will need to use a tunneling service like ngrok. Run ngrok and point it to localhost.
-  `ngrok http -host-header=rewrite 3000`
+  `ngrok http -host-header=rewrite 3978`
+  
+## Setup.
 
 ### Register your application with Azure AD
 
@@ -86,6 +81,17 @@ Go to the folder `api-server` and update following values in .env files
 
     - `"CLIENT_ID"` : Application ID of the Azure AD application
     - `"CLIENT_SECRET"` : Application secret of the Azure AD application
+    
+## Setup for Bot
+
+   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+    - For bot handle, make up a name.
+    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
+    
+   In the new Azure Bot resource in the Portal, 
+    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path
 
 ## Build and Run
 You can build and run the project from the command line or an IDE:
@@ -111,6 +117,14 @@ You can build and run the project from the command line or an IDE:
 ### Build for production
 `npm run build`
 
+## Running the sample.
+
+![tabconfigure](Images/tabconfigure.png)
+
+![setuptab](Images/setuptab.png)
+
+![Mytab](Images/Mytab.png)
+
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
@@ -118,4 +132,8 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+## Further Reading.
+[Tab-channel-group-SSO-QuickStart](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
+
 

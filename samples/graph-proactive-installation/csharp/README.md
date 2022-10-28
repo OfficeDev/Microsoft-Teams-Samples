@@ -19,6 +19,9 @@ This sample app illustartes the proactive installation of app using Graph API an
 
 Language Used : C#
 
+## Interaction with app.
+![Proactive Installtion Module](ProactiveAppInstallation/Images/ProactiveInstallation.gif)
+
 ## Prerequisites
 ### Tools
 
@@ -26,7 +29,7 @@ Language Used : C#
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## To try this sample
+## Setup.
 
 - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
@@ -56,11 +59,9 @@ Language Used : C#
 7. [Get consent for the Application permissions](https://docs.microsoft.com/en-us/graph/auth-v2-service?context=graph%2Fapi%2F1.0&view=graph-rest-1.0#3-get-administrator-consent) by following steps mentioned here.
 8. Run your app, either from Visual Studio with ```F5``` or using ```dotnet run``` in the appropriate folder.
 
-
+## Running the sample.
 
 ### Interacting with the Proactive installation App in Teams
-
-![Proactive Installtion Module](ProactiveAppInstallation/Images/ProactiveInstallation.gif)
 
 - Install the Proactive App Installation demo in a Team or GroupChat.
 

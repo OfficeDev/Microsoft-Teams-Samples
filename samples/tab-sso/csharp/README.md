@@ -16,26 +16,9 @@ urlFragment: officedev-microsoft-teams-samples-tab-sso-csharp
 
 This sample illustrates how to implement SSO authentication for Teams Tab.
 
-## Key feature.
+## Interaction with app.
 
 ![Config SSO](Images/tabssomodules.gif)
-
-### Tab SSO
-
-![Config SSO](Images/config_sso_teams.png)
-
-![Outside Team SSO](Images/outside_teams_sso.png)
-
-![Outside team success](Images/outside_teams_success_sso.png)
-
-### Login Outside Microsoft Teams
-To test this feature, open your App base URI or Ngrok URI on browser.
-
-URI should be like `https://%ngrokDomain%.ngrok.io/Home/`
-
-![Login Outside Microsoft Teams](Images/outside_teams_sso.png)
-
-![Login Outside Microsoft Teams Success](Images/outside_teams_success_sso.png)
 
 ## Prerequisites
 
@@ -49,6 +32,7 @@ URI should be like `https://%ngrokDomain%.ngrok.io/Home/`
     git clone https://github.com/officedev/microsoft-teams-samples.git
     ```
 
+
 1) If you are using Visual Studio
   - Launch Visual Studio
   - File -> Open -> Project/Solution
@@ -60,6 +44,8 @@ URI should be like `https://%ngrokDomain%.ngrok.io/Home/`
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
+## Setup.
+
 ### Register your Teams Auth SSO with Azure AD
 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
@@ -116,9 +102,33 @@ URI should be like `https://%ngrokDomain%.ngrok.io/Home/`
     - **Edit** the `manifest.json` contained in the `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+    
+## Running the sample.
+
+### Tab SSO
+
+![Config SSO](Images/config_sso_teams.png)
+
+![Outside Team SSO](Images/outside_teams_sso.png)
+
+![Outside team success](Images/outside_teams_success_sso.png)
+
+### Login Outside Microsoft Teams
+To test this feature, open your App base URI or Ngrok URI on browser.
+
+URI should be like `https://%ngrokDomain%.ngrok.io/Home/`
+
+![Login Outside Microsoft Teams](Images/outside_teams_sso.png)
+
+![Login Outside Microsoft Teams Success](Images/outside_teams_success_sso.png)
 
 1) Run your app, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
 ## Interacting with the app in Teams
 
 In Teams, Once the app is succefully installed, it can be opened and the tab should show the logged in user's profile.
+
+## Further Reading.
+[Tab-SSO](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-overview)
+
+

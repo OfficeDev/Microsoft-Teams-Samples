@@ -17,23 +17,9 @@ urlFragment: officedev-microsoft-teams-samples-tab-graph-toolkit-csharp
 
 This is the demo app for [Teams tab using miscrosoft graph toolkit](https://docs.microsoft.com/en-us/graph/toolkit/get-started/build-a-microsoft-teams-tab?tabs=unpkg%2Cjs)
 
-##Feature of the sample.
+## Interaction with app.
 
 ![Module](TabGraphToolkit/Images/TabGraphToolKit.gif)
-
-![Login](TabGraphToolkit/Images/login.png)
-
-![agenda](TabGraphToolkit/Images/agenda.png)
-
-![people-picker](TabGraphToolkit/Images/people-picker.png)
-
-![tasks](TabGraphToolkit/Images/tasks.png)
-
-![todo](TabGraphToolkit/Images/todo.png)
-
-![person-card](TabGraphToolkit/Images/person-card.png)
-
-![person](TabGraphToolkit/Images/person.png)
 
 ## Prerequisites
 
@@ -110,7 +96,7 @@ This is the demo app for [Teams tab using miscrosoft graph toolkit](https://docs
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
    
-## Features of this sample
+## Running the sample.
 Once you access the Tab within your app you will be able to see following microsoft-graph-toolkit component. 
 
 - `<mgt-login>`
@@ -140,3 +126,6 @@ Once you access the Tab within your app you will be able to see following micros
 - `<mgt-person>`
 
 ![person](TabGraphToolkit/Images/person.png)
+
+## Further Reading.
+[Tab-graph-toolkit](https://learn.microsoft.com/en-us/graph/toolkit/get-started/build-a-microsoft-teams-tab?tabs=unpkg%2Chtml)

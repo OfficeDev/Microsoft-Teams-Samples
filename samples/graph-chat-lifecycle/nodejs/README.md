@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-chat-lifecycle-nodejs
 
 This sample illustrates Lifecycle of chat in Teams (Creating chat, adding members with all scenarios, deleting member).
 
-# Feature of the sample
+## Interaction with app.
 
 ![](Images/GraphChatLifecycleGif.gif)
 
@@ -39,7 +39,7 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
     ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-## To try this sample
+## Setup.
 
 - Clone the repository
 
@@ -138,7 +138,7 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
     * Replace the `tab.password` property with the "client secret" you were assigned.
     * If you want to use a port other than 3978, fill that in here (and in your ngrok command)
 
-## Interacting with the app in Teams
+## Running the sample.
 
 1. In Teams, Install App
 
@@ -164,3 +164,5 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 
    ![](Images/PinnedTabSuccessfully.png)
 
+## Further Reading.
+[Graph-Chat-Life-Cycle](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)

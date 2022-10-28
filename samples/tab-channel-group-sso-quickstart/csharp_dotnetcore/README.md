@@ -12,21 +12,9 @@ extensions:
  createdDate: "07-07-2021 13:38:27"
 urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-csharp_dotnetcore
 ---
-## Fetures of the samples 
+## Interaction with app.
 
 ![setupteams](Images/TabChannelGroupSsoQuickStartModule.gif)
-
-# Teams Tab SSO Authentication
-
-This sample illustrates how to implement SSO authentication for Teams Tab.
-
-![setupteams](Images/setupteams.png)
-
-![setuptab](Images/setuptab.png)
-
-![tabsso](Images/tabsso.png)
-
-![configuretab](Images/configuretab.png)
 
 ## Prerequisites
 
@@ -51,6 +39,8 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
+## Setup.    
+    
 ### Register your Teams Auth SSO with Azure AD
 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
@@ -99,6 +89,17 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
 14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the `appsettings.json`.
 
 
+15) Setup for Bot
+
+   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+    - For bot handle, make up a name.
+    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
+    
+   In the new Azure Bot resource in the Portal, 
+    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path
+
 1) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the `appPackage/` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
@@ -106,6 +107,19 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
 
 1) Run your app, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
-## Interacting with the app in Teams
+## Running the sample.
 
-In Teams, Once the app is succefully installed, it can be opened and the tab should show the logged in user's profile.
+# Teams Tab SSO Authentication
+
+This sample illustrates how to implement SSO authentication for Teams Tab.
+
+![setupteams](Images/setupteams.png)
+
+![setuptab](Images/setuptab.png)
+
+![tabsso](Images/tabsso.png)
+
+![configuretab](Images/configuretab.png)
+
+## Further Reading.
+[Tab-channel-group-SSO-QuickStart](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)

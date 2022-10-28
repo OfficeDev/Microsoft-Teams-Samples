@@ -18,13 +18,9 @@ urlFragment: officedev-microsoft-teams-samples-msgext-search-quickstart-js
 
 *Bots* allow users to interact with your web service through text, interactive cards, and task modules. *Messaging extensions* allow users to interact with your web service through buttons and forms in the Microsoft Teams client. They can search, or initiate actions, in an external system from the compose message area, the command box, or directly from a message.
 
-##Feature of the sample.
+## Interaction with app.
 
 ![Sample Module](Images/msgextsearchquickstart.gif)
-
-![Search](Images/search.png)
-
-![Result](Images/result.png)
 
 ## Prerequisites
 
@@ -32,6 +28,8 @@ urlFragment: officedev-microsoft-teams-samples-msgext-search-quickstart-js
 -  [NodeJS](https://nodejs.org/en/)
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+
+## Setup.
 
 **Configure Ngrok**
 
@@ -46,6 +44,15 @@ Run ngrok - point to port 3978
 **Update Bot Framework Messaging Endpoint**
 
   Note: You can also do this with the Manifest Editor in App Studio if you are familiar with the process.
+  
+  1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  2. Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+    
+   3. Azure Bot [Azure Bot] (https://learn.microsoft.com/en-us/azure/bot-service/abs-quickstart?view=azure-bot-service-4.0&tabs=userassigned)
 
 - For the Messaging endpoint URL, use the current `https` URL you were given by running ngrok and append it with the path `/api/messages`. It should like something work `https://{subdomain}.ngrok.io/api/messages`.
 
@@ -63,9 +70,15 @@ Run ngrok - point to port 3978
     - Update the env file with Microsoft-App-Id(or Client Id) and Microsoft-App-Password(or Client Secret)
 ## Build and run
 
-### `npm install`
+- `npm install`
 
-### `npm start`
+- `npm start`
+
+## Running the sample.
+
+![Search](Images/search.png)
+
+![Result](Images/result.png)
 
 ## Deploy to Teams
 Start debugging the project by hitting the `F5` key or click the debug icon in Visual Studio Code and click the `Start Debugging` green arrow button.

@@ -16,6 +16,8 @@ urlFragment: officedev-microsoft-teams-samples-app-localization-csharp
 # Teams App Localization
 This sample illustrates how to implement [Localization for Microsoft Teams apps](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/apps-localization).
 
+## Interaction with app.
+
 ![Preview Image](Images/Preview.gif)
 
 ## Prerequisites
@@ -30,6 +32,8 @@ Verify you have the right account for building Teams apps and install some recom
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
    > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
+
+## Setup.
 
 1) Clone the repository
 
@@ -57,7 +61,8 @@ Verify you have the right account for building Teams apps and install some recom
 
 5) Run your app, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
-## Interacting with the app in Teams
+## Running the sample.
+
 In Teams, Once the app is successfully installed, you can interact with tab and bot in your preferred language.
 
 #### To change language in Teams

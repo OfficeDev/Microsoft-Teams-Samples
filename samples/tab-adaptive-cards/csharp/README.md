@@ -20,6 +20,8 @@ For reference please check [Build tabs with Adaptive Cards](https://docs.microso
 
 This feature shown in this sample is in Public Developer Preview and is supported in desktop and mobile.
 
+## Interaction with app.
+
 ![Adaptive Card](TabWithAdpativeCardFlow/Images/Tabwithadaptivecard.gif)
 
 ## Prerequisites
@@ -89,7 +91,7 @@ This feature shown in this sample is in Public Developer Preview and is supporte
     You can use this tab by following the below steps:
     - In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
 
-## Features of this sample
+## Running the sample.
 
 - Tab showing Adaptive card with action controls.
 

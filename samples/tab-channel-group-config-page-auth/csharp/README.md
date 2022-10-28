@@ -21,18 +21,9 @@ There are many services that you may wish to consume inside your Teams app, and 
 
 OAuth 2.0 is an open standard for authentication used by Azure AD and many other service providers. Understanding OAuth 2.0 is a prerequisite for working with authentication in Teams and Azure AD. The examples below use the OAuth 2.0 Implicit Grant flow with the goal of eventually reading the user's profile information from Azure AD and Microsoft Graph.
 
-##Feature of the sample.
+## Interaction with app
 
 ![Initial Config Page](ConfigTabAuthentication/Images/Configtabauthenticatonmodule.gif)
-
-![Initial Config Page](ConfigTabAuthentication/Images/config_page.png)
-
-![Simple SignIn](ConfigTabAuthentication/Images/simple_signin.png)
-
-![Silent SignIn](ConfigTabAuthentication/Images/silent_signin.png)
-
-![Channel Tab](ConfigTabAuthentication/Images/channel_tab.png)
-
 
 ## Initiate Silent and Simple Authentication ConfigurableTab using AAD
 
@@ -58,12 +49,13 @@ Azure AD, like most identity providers, does not allow its content to be placed 
 
 - Asp.net Core
 
-## To try this sample
+## Setup.
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 
 1) Clone the repository
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    
 
 2) If you are using Visual Studio
     - Launch Visual Studio
@@ -77,6 +69,8 @@ Azure AD, like most identity providers, does not allow its content to be placed 
     ngrok http -host-header=rewrite 3978
     ```
 4) Update the `appsettings.json` configuration for the tab to use the Microsoft App Id in TabAuthentication folder, App Password and Connection Name from the Bot Framework           registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+
+
 
 ### Register an Azure AD Application for both Silent and Simple Authencation
 
@@ -104,13 +98,38 @@ Azure AD, like most identity providers, does not allow its content to be placed 
     - Enter URI as https://<<BASE-URI>>/AuthEnd
 
 ![Authentication Azure AD](ConfigTabAuthentication/Images/authentication_azure_ad.png)
+ 
+ 5) Setup for Bot
 
-5)  __*This step is specific to Teams.*__
+   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+    - For bot handle, make up a name.
+    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
+    
+   In the new Azure Bot resource in the Portal, 
+    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
+
+6)  __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your tab earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` and set your Base URI to the same URI you've created in Ngrok *everywhere* you see the place holder string `<<BASE-URI>>` (depending on the scenario the Microsoft App Id, Base URI may occur multiple times in the `manifest.json`)
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-6) Run your tab, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
+7) Run your tab, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
+
+## Running the sample.
+
+![Initial Config Page](ConfigTabAuthentication/Images/config_page.png)
+
+![Simple SignIn](ConfigTabAuthentication/Images/simple_signin.png)
+
+![Silent SignIn](ConfigTabAuthentication/Images/silent_signin.png)
+
+![Channel Tab](ConfigTabAuthentication/Images/channel_tab.png)
+
+## Further Reading.
+
+[Tab-Channle-Group-config-auth](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
 
 
  

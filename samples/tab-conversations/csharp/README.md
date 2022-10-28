@@ -17,29 +17,11 @@ urlFragment: officedev-microsoft-teams-samples-tab-conversations-csharp
 
 This Teams tab app provides a way to allow users to have conversations about sub-entities in the tab [Create conversational tabs](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/conversational-tabs?view=msteams-client-js-latest#continue-a-conversation)
 
-## Key features
+## Interaction with app.
 
 - Full Features of the sample
 
 ![TabConversationModule](TabConversation/Images/tabconversationmodule.gif)
-
-- Tab showing actions that can be performed
-
-![Actions Page](TabConversation/Images/sampleaction.png)
-
-- Open Conversation - opens a new conversation
-
-![Open Conversation](TabConversation/Images/continues.png)
-
-- Close Conversation - closes the conversation view
-
-![Close Conversation](TabConversation/Images/closes.png)
-
-
-> NOTE: We should save the subEntityId and conversationId to continue an existing conversartion.
-- Deeplink to Conversation - opens the conversation in channel
-
-![Deeplink to Conversation](TabConversation/images/deeplink.png)
 
 ## Prerequisites
 
@@ -66,7 +48,19 @@ This Teams tab app provides a way to allow users to have conversations about sub
     ```bash
     ngrok http -host-header=localhost 3978
     ```
+ ## Setup.
+ 
+- Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+- Setup for Bot
 
+   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+    - For bot handle, make up a name.
+    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
+    
+   In the new Azure Bot resource in the Portal, 
+    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace `<<your base url>>` with your ngrok url or hosted app url and also update the `<<DOMAIN-NAME>>` for allowed domains.
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
@@ -75,6 +69,26 @@ This Teams tab app provides a way to allow users to have conversations about sub
          - From the lower left corner, choose Upload a custom App
          - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
          - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
+         
+## Running the sample.
+
+- Tab showing actions that can be performed
+
+![Actions Page](TabConversation/Images/sampleaction.png)
+
+- Open Conversation - opens a new conversation
+
+![Open Conversation](TabConversation/Images/continues.png)
+
+- Close Conversation - closes the conversation view
+
+![Close Conversation](TabConversation/Images/closes.png)
+
+
+> NOTE: We should save the subEntityId and conversationId to continue an existing conversartion.
+- Deeplink to Conversation - opens the conversation in channel
+
+![Deeplink to Conversation](TabConversation/images/deeplink.png)
 
 # Related Samples
 - [Proactive Tab Conversations, using a bot to create conversational tabs programmatically.](.\\..\\..\\bot-tab-conversations\csharp\README.md)

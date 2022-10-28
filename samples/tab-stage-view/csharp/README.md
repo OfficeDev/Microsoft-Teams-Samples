@@ -18,6 +18,9 @@ urlFragment: officedev-microsoft-teams-samples-tab-stage-view-csharp
 This App talks about the Teams tab in stage view with CSharp.
 For reference please check [Tabs link unfurling and Stage View](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/tabs-link-unfurling)
 
+## Interaction with app.
+
+![TabStageView Modules](TabInStageView/Images/tabstageviewmodule.gif)
 
 ## Prerequisites
 
@@ -36,25 +39,26 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
 ```bash
 # ngrok http -host-header=rewrite 3978
 ```
+2.Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
-2. Create a Bot Registration
+3. Create a Bot Registration
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2#create-the-resource).
 
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-3. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
+4. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
    - `<<MANIFEST-ID>>` with some unique GUID   
    - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
    - `{{BOT-ID}}` with the id from step 2.
    - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
 
-4. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 7.
+5. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 7.
 
-5. Modify the `/appsettings.json` and fill in the `{{ Bot Id }}` and `{{ Bot Password }}` with the id from step 2.
+6. Modify the `/appsettings.json` and fill in the `{{ Bot Id }}` and `{{ Bot Password }}` with the id from step 2.
 
-6. Add `{{ Application Base URL }}`in appsetting.json with ngrok tunnel url or deployed application base url. 
+7. Add `{{ Application Base URL }}`in appsetting.json with ngrok tunnel url or deployed application base url. 
 
-7. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+8. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
@@ -90,9 +94,7 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
     You can use this tab by following the below steps:
     - In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
 
-## Features of this sample
-
-![TabStageView Modules](TabInStageView/Images/tabstageviewmodule.gif)
+## Running the sample.
 
 - Welcome message with feature explanation.
 
