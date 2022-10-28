@@ -24,6 +24,12 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are sco
 -  [NodeJS](https://nodejs.org/en/)
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+## ngrok
+
+Teams needs to access your tab from a publically accessible URL. If you are running your app in localhost, you will need to use a tunneling service like ngrok.
+
+-  Run ngrok and point it to localhost:
+-  `ngrok http https://localhost:3978`
 
 ## Setup.
 1) Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
@@ -41,12 +47,6 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are sco
 
 -  [Create an Azure AD App registration to support SSO and the User.Read Graph API](https://aka.ms/teams-toolkit-sso-appreg)
 
-## ngrok
-
-Teams needs to access your tab from a publically accessible URL. If you are running your app in localhost, you will need to use a tunneling service like ngrok.
-
--  Run ngrok and point it to localhost:
--  `ngrok http https://localhost:3978`
 
 Note: It may be worth purchasing a basic subscription to ngrok so you can get a fixed subdomain ( see the --subdomain ngrok parameter)
 
