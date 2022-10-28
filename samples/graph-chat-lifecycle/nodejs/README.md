@@ -164,4 +164,5 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 
    ![](Images/PinnedTabSuccessfully.png)
 
+## Further Reading.
 [Graph-Chat-Life-Cycle](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)
