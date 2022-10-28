@@ -16,6 +16,9 @@ urlFragment: officedev-microsoft-teams-samples-app-localization-nodejs
 
 # Teams App Localization
 This sample illustrates how to implement [Localization for Microsoft Teams apps](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/apps-localization).
+## Interaction with app.
+##Feature of the sample.
+![image](Images/appLocalizationModule.gif)
 
 ## Prerequisites
 
@@ -26,7 +29,7 @@ This sample illustrates how to implement [Localization for Microsoft Teams apps]
     node --version
     ```
 
-## To try this sample
+## Setup.
 
 - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
@@ -64,8 +67,7 @@ In Teams, Once the app is successfully installed, you can interact with tab and 
 #### To change language in Teams
 To change the language in Microsoft Teams, please click your profile picture at the top of the app, then select Settings -> General and go to the Language section. Choose the preferred language and restart to apply the change. This sample supports en-US, fr-CA, hi-IN and es-MX.
 
-##Feature of the sample.
-![image](Images/appLocalizationModule.gif)
+## Running the sample.
 
 1. **Installation**: You should see your app installation screen content in selected language. 
 ![image](Images/Upload.png)
