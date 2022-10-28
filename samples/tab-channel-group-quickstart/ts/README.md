@@ -26,15 +26,13 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
 
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-
-
-## Setup.
-
 Run ngrok - point to port 3978
 
     ```bash
     ngrok http --host-header=rewrite 3978
     ```
+
+## Setup.
 
 In the project directory, execute:
 
