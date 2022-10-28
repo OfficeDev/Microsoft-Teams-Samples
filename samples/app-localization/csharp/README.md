@@ -16,6 +16,8 @@ urlFragment: officedev-microsoft-teams-samples-app-localization-csharp
 # Teams App Localization
 This sample illustrates how to implement [Localization for Microsoft Teams apps](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/apps-localization).
 
+![Preview Image](Images/Preview.gif)
+
 ## Prerequisites
 
 Verify you have the right account for building Teams apps and install some recommended development tools.
@@ -61,12 +63,12 @@ In Teams, Once the app is successfully installed, you can interact with tab and 
 #### To change language in Teams
 To change the language in Microsoft Teams, please click your profile picture at the top of the app, then select Settings -> General and go to the Language section. Choose the preferred language and restart to apply the change. This sample supports en-US, fr-CA, hi-IN and es-MX.
 1. **Installation**: You should see your app installation screen content in selected language. 
-![image](https://user-images.githubusercontent.com/31851992/115969498-d68aea80-a55a-11eb-9cb4-23e8b7bcdda9.png)
+![image](Images/Upload.png)
 
 1. **Bot**: send any message to see localized 
-![image](https://user-images.githubusercontent.com/31851992/115969313-ec4be000-a559-11eb-814b-0a5b4e5f96ad.png)
+![image](Images/Reply.png)
 1. **Tab**: click on tab to see localized info.  
-![image](https://user-images.githubusercontent.com/31851992/115969438-8dd33180-a55a-11eb-9307-5287e626c215.png)
+![image](Images/Hindi.png)
 
 #### To Add more languages for localization in Teams through Code.
  
