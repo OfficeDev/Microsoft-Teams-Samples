@@ -17,15 +17,9 @@ urlFragment: officedev-microsoft-teams-samples-msgext-message-reminder-csharp
 
 This sample shows a feature where user can schedule a task from messaging extension action and get a reminder card at a scheduled time.
 
-##Feature of the sample.
+## Interaction with app.
 
 ![Select message](MessagingExtensionReminder/Images/MessageExtensionReminderModule.gif)
-
-![Select message](MessagingExtensionReminder/Images/MessageAction.png)
-
-![Task Details](MessagingExtensionReminder/Images/ScheduleTask.png)
-
-![Task reminder](MessagingExtensionReminder/Images/TaskReminder.png)
 
 ## Prerequisites
 
@@ -43,7 +37,7 @@ This sample shows a feature where user can schedule a task from messaging extens
   ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-## To try this sample
+## Setup.
 
 1) Setup for Bot
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
@@ -117,6 +111,14 @@ Team scope scenario
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
+
+## Running the sample.
+
+![Select message](MessagingExtensionReminder/Images/MessageAction.png)
+
+![Task Details](MessagingExtensionReminder/Images/ScheduleTask.png)
+
+![Task reminder](MessagingExtensionReminder/Images/TaskReminder.png)
 
 ## Further reading
 
