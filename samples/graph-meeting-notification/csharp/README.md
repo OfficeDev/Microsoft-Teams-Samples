@@ -20,19 +20,9 @@ This is a sample application which demonstrates use of online meeting subscripti
 ## Concepts introduced in this sample
 - After sucessfully installation of bot in meeting you will get a welcome card and the subscription will be created for meeting it is installed in.
 
-## Feature of the sample.
+## Interaction with app.
 
 ![Feature](MeetingNotification/Images/MeetingNotificaionAppModule.gif)
-
-![Welcome Card](MeetingNotification/Images/WelcomeCard.png)
-
-- After that when the metting gets started or user joins the meeting, notifications will be sent in chat:
-
-![Meeting Started](MeetingNotification/Images/MeetingStartedCard.png)
-
-- Notifications will also be triggered when someone leaves that meeting or when meeting gets end:
-
-![Meeting Ended](MeetingNotification/Images/MeetingEndedCard.png)
 
 ## Prerequisites
 
@@ -80,7 +70,8 @@ To include resource data of online meeting, this Graph API require self-signed c
 3. Follow this documentation for the steps - [**Create and install Self-Signed certificate**](MeetingNotification/CertificateDocumentation/README.md)
 
 
-### Setup code.
+## Setup.
+
 1) Clone the repository
 
     ```bash
@@ -113,6 +104,17 @@ To include resource data of online meeting, this Graph API require self-signed c
 4. Upload the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 Follow this documentation to get more information on custom apps and uploading them into Teams - [Manage custom apps](https://docs.microsoft.com/en-us/microsoftteams/custom-app-overview) and [Upload an app package](https://docs.microsoft.com/en-us/microsoftteams/upload-custom-apps)
+
+## Running the sample.
+![Welcome Card](MeetingNotification/Images/WelcomeCard.png)
+
+- After that when the metting gets started or user joins the meeting, notifications will be sent in chat:
+
+![Meeting Started](MeetingNotification/Images/MeetingStartedCard.png)
+
+- Notifications will also be triggered when someone leaves that meeting or when meeting gets end:
+
+![Meeting Ended](MeetingNotification/Images/MeetingEndedCard.png)
  
 ## Further reading
 - [Change notifications for Microsoft Teams meeting](https://docs.microsoft.com/en-us/graph/changenotifications-for-onlinemeeting)
