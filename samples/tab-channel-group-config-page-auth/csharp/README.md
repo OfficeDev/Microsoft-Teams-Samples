@@ -55,6 +55,7 @@ Azure AD, like most identity providers, does not allow its content to be placed 
 
 1) Clone the repository
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    
 
 2) If you are using Visual Studio
     - Launch Visual Studio
@@ -68,6 +69,17 @@ Azure AD, like most identity providers, does not allow its content to be placed 
     ngrok http -host-header=rewrite 3978
     ```
 4) Update the `appsettings.json` configuration for the tab to use the Microsoft App Id in TabAuthentication folder, App Password and Connection Name from the Bot Framework           registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+
+5) Setup for Bot
+
+   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+    - For bot handle, make up a name.
+    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
+    
+   In the new Azure Bot resource in the Portal, 
+    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
 
 ### Register an Azure AD Application for both Silent and Simple Authencation
 
