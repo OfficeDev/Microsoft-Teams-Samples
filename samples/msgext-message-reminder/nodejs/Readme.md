@@ -34,13 +34,13 @@ This sample shows a feature where user can schedule a task from messaging extens
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
 
-### 1. Azure app Registration
-    Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-
-### 2. Setup for Bot
+  
+### 1. Setup for Bot and app Registration
 In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
-### 3. Run your bot sample
+  Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+
+### 2. Run your bot sample
 1) Clone the repository
 
     ```bash
