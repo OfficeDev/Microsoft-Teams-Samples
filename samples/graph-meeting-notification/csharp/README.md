@@ -35,7 +35,7 @@ This is a sample application which demonstrates use of online meeting subscripti
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-## Run app locally
+## Setup.
 
 ### Register your application with Azure AD
 
@@ -69,8 +69,6 @@ To include resource data of online meeting, this Graph API require self-signed c
 
 3. Follow this documentation for the steps - [**Create and install Self-Signed certificate**](MeetingNotification/CertificateDocumentation/README.md)
 
-
-## Setup.
 
 1) Clone the repository
 
