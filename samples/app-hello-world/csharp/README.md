@@ -18,7 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-csharp
 
 # Microsoft Teams hello world sample app.
 
-- Microsoft Teams hello world sample app.
+## Interaction with app.
 
 ![HelloTab](Microsoft.Teams.Samples.HelloWorld.Web/Images/HelloTab.png)
 
@@ -30,15 +30,9 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-csharp
   ```bash
   dotnet --version
   ```
-- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
-  
-  run ngrok locally
-  ```bash
-  ngrok http -host-header=localhost 3333
-  ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-## To try this sample
+## Setup.
 
 1) Create a Bot Registration
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
@@ -52,10 +46,10 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-csharp
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
    
-3) Run ngrok - point to port 5000
+3) Run ngrok - point to port 3978
 
     ```bash
-    # ngrok http -host-header=rewrite 5000
+    # ngrok http -host-header=rewrite 3978
     ```
  
 4) Modify the `manifest.json` in the `/Manifest` folder and replace the following details:
