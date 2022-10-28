@@ -15,7 +15,11 @@ urlFragment: officedev-microsoft-teams-samples-graph-channel-lifecycle-nodejs
 
 # Channel life cycle using Node js
 
-This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-1.0) life cycle which includes create, update delete a channel
+This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-1.0) life cycle which includes create, update delete a channel.
+
+## Interaction with app.
+   
+  ![](Images/GraphChannelLifeCycleModule.gif)
 
 
 ## Prerequisites
@@ -63,18 +67,14 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-##Feature of of the sample
-
-   ![](Images/GraphChannelLifeCycleModule.gif)
-
+## Running the sample.
 
    ![](Images/image1.png)
 
-
    ![](Images/image2.png)
-
 
    ![](Images/image3.png)
 
 
+  [Grpah-Channel-lifecycel](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)
 
