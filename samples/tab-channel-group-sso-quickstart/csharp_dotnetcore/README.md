@@ -39,6 +39,8 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
+## Setup.    
+    
 ### Register your Teams Auth SSO with Azure AD
 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
