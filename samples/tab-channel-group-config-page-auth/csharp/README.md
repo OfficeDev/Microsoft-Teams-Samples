@@ -21,18 +21,9 @@ There are many services that you may wish to consume inside your Teams app, and 
 
 OAuth 2.0 is an open standard for authentication used by Azure AD and many other service providers. Understanding OAuth 2.0 is a prerequisite for working with authentication in Teams and Azure AD. The examples below use the OAuth 2.0 Implicit Grant flow with the goal of eventually reading the user's profile information from Azure AD and Microsoft Graph.
 
-##Feature of the sample.
+## Interaction with app
 
 ![Initial Config Page](ConfigTabAuthentication/Images/Configtabauthenticatonmodule.gif)
-
-![Initial Config Page](ConfigTabAuthentication/Images/config_page.png)
-
-![Simple SignIn](ConfigTabAuthentication/Images/simple_signin.png)
-
-![Silent SignIn](ConfigTabAuthentication/Images/silent_signin.png)
-
-![Channel Tab](ConfigTabAuthentication/Images/channel_tab.png)
-
 
 ## Initiate Silent and Simple Authentication ConfigurableTab using AAD
 
@@ -58,7 +49,7 @@ Azure AD, like most identity providers, does not allow its content to be placed 
 
 - Asp.net Core
 
-## To try this sample
+## Setup.
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 
@@ -111,6 +102,20 @@ Azure AD, like most identity providers, does not allow its content to be placed 
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 6) Run your tab, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
+
+## Running the sample.
+
+![Initial Config Page](ConfigTabAuthentication/Images/config_page.png)
+
+![Simple SignIn](ConfigTabAuthentication/Images/simple_signin.png)
+
+![Silent SignIn](ConfigTabAuthentication/Images/silent_signin.png)
+
+![Channel Tab](ConfigTabAuthentication/Images/channel_tab.png)
+
+## Further Reading.
+
+[Tab-Channle-Group-config-auth](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
 
 
  
