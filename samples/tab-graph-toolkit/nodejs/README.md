@@ -17,31 +17,35 @@ urlFragment: officedev-microsoft-teams-samples-tab-graph-toolkit-nodejs
 # Teams tab with microsoft graph toolkit
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
-##Feature of the sample.
+## Interaction with app.
 
 ![Sign in card](Images/TabGraphToolKitModule.gif)
-
-![Sign in card](Images/SignInOption.png)
-
-![Agenda](Images/Agenda.png)
-
-![People picker](Images/PeoplePicker.png)
-
-![Tasks](Images/Tasks.png)
 
 ## Prerequisites
 -  [NodeJS](https://nodejs.org/en/)
 
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-## Configuring MSAL2.0 Auth Provider
-- Register an App in Azure. Navigate to App registeration click on New registeration.
+## Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+
+ - Register an App in Azure. Navigate to App registeration click on New registeration.
 - Update your App Name `mgtteamstab`
 - Click on Add a Platform in redirect URI section.
 - Select Single Page Application and add following URL `https://localhost:3000/`
 - Save and register.
 - Once App is registerd copy the `client_Id` for your app and update in the app.
 
+## Setup for Bot
+
+   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+    - For bot handle, make up a name.
+    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
+    
+   In the new Azure Bot resource in the Portal, 
+    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok.
+    
 ## Build and Run
 
 In the project directory, execute:
@@ -67,6 +71,16 @@ On the first time running and debugging your app you need allow the localhost ce
 - Click the `Advanced` button
 - Select the `Continue to localhost`
 
+## Running the sample.
+
+![Sign in card](Images/SignInOption.png)
+
+![Agenda](Images/Agenda.png)
+
+![People picker](Images/PeoplePicker.png)
+
+![Tasks](Images/Tasks.png)
+
 ### NOTE: Debugging
 Ensure you have the Debugger for Chrome/Edge extension installed for Visual Studio Code from the marketplace.
 
@@ -80,4 +94,7 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+## Further Reading.
+[Tab-graph-toolkit](https://learn.microsoft.com/en-us/graph/toolkit/get-started/build-a-microsoft-teams-tab?tabs=unpkg%2Chtml)
 
