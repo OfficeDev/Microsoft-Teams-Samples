@@ -20,17 +20,9 @@ For reference please check [Receive Channel messages with RSC](https://docs.micr
 
 This feature shown in this sample is currently available in Public Developer Preview only.
 
-## Key features
+## Interaction with app.
 
 ![RSC Module](ReceiveMessagesWithRSC/Images/BotWithRSCModule.gif)
-
-- Showing Welcome message 
-
-![Channel messages](ReceiveMessagesWithRSC/Images/Notification.png)
-
-- Showing messages based on option selected
-
-![Channel messages](ReceiveMessagesWithRSC/Images/botWithRSCFlow.png)
 
 ## Prerequisites
 
@@ -72,12 +64,6 @@ This feature shown in this sample is currently available in Public Developer Pre
          - Then select **Upload a custom app** from the lower right corner.
          - Then select the `manifest.zip` file from `appPackage`, and then select **Add** to add the bot to your selected team.
 
-![App Installation](ReceiveMessagesWithRSC/Images/installApp.png)
-
-![Permissions](ReceiveMessagesWithRSC/Images/permissions1.png)
-    
-## To try this sample
-
 - In a terminal, navigate to `ReceiveMessagesWithRSC`
 
     ```bash
@@ -87,14 +73,14 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 - Run the bot from a terminal or from Visual Studio, choose option A or B.
 
-  A) From a terminal
+6. From a terminal
 
   ```bash
   # run the bot
   dotnet run
   ```
 
-  B) Or from Visual Studio
+ 7. Or from Visual Studio
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
@@ -107,6 +93,20 @@ This feature shown in this sample is currently available in Public Developer Pre
 Select a channel and enter a message in the channel for your bot.
 
 The bot receives the message without being @mentioned.
+
+## Running the sample.
+
+![App Installation](ReceiveMessagesWithRSC/Images/installApp.png)
+
+![Permissions](ReceiveMessagesWithRSC/Images/permissions1.png)
+
+- Showing Welcome message 
+
+![Channel messages](ReceiveMessagesWithRSC/Images/Notification.png)
+
+- Showing messages based on option selected
+
+![Channel messages](ReceiveMessagesWithRSC/Images/botWithRSCFlow.png)
 
 ## Deploy the bot to Azure
 

@@ -16,31 +16,9 @@ urlFragment: officedev-microsoft-teams-samples-bot-type-ahead-search-adaptive-ca
 
 This sample shows the feature of typeahead search (static and dynamic) control in Adaptive Cards.
 
-![Typedsearch Module](TypeaheadSearch/Images/TypedSearchModule.gif)
+## Interaction with app.
 
- Use the bot command `staticsearch` to get the card with static typeahead search control and use bot command `dynamicsearch` to get the card with dynamic typeahead search control.
-
-![Welcome in typedsearch](TypeaheadSearch/Images/welcome.png)
-
-`Static search:`
- Static typeahead search allows users to search from values specified within `input.choiceset` in the Adaptive Card payload.
-
-![static search card](TypeaheadSearch/Images/staticSearchCard.png)
-
-Static tpyedhead detail after submission
-
-![static search card](TypeaheadSearch/Images/StaticSearchSubmitDetail.png)
-
-`Dynamic search:`
- Dynamic typeahead search is useful to search and select data from large data sets. The data sets are loaded dynamically from the dataset specified in the card payload.
-
-![dynamic search card](TypeaheadSearch/Images/dynamicSearch.png)
-
-`On `Submit` button click, the bot will return the choice that we have selected:`
-
-![dynamic search results](TypeaheadSearch/Images/dynamicSearchsubmitdetail.png)
-
- 
+![Typedsearch Module](TypeaheadSearch/Images/TypedSearchModule.gif) 
 
 ## Prerequisites
 
@@ -58,7 +36,7 @@ Static tpyedhead detail after submission
   ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-## To try this sample
+## Setup.
 
 ### 1. Setup for Bot
 In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
@@ -99,7 +77,31 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
    - Go to Microsoft Teams and then go to side panel, select Apps
    - Choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
-   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.    
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.   
+   
+## Running the sample.
+
+Use the bot command `staticsearch` to get the card with static typeahead search control and use bot command `dynamicsearch` to get the card with dynamic typeahead search control.
+
+![Welcome in typedsearch](TypeaheadSearch/Images/welcome.png)
+
+`Static search:`
+ Static typeahead search allows users to search from values specified within `input.choiceset` in the Adaptive Card payload.
+
+![static search card](TypeaheadSearch/Images/staticSearchCard.png)
+
+Static tpyedhead detail after submission
+
+![static search card](TypeaheadSearch/Images/StaticSearchSubmitDetail.png)
+
+`Dynamic search:`
+ Dynamic typeahead search is useful to search and select data from large data sets. The data sets are loaded dynamically from the dataset specified in the card payload.
+
+![dynamic search card](TypeaheadSearch/Images/dynamicSearch.png)
+
+`On `Submit` button click, the bot will return the choice that we have selected:`
+
+![dynamic search results](TypeaheadSearch/Images/dynamicSearchsubmitdetail.png)
 
 ## Further reading
 
