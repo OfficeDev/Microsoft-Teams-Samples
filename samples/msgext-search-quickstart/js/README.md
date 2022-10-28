@@ -70,9 +70,9 @@ Run ngrok - point to port 3978
     - Update the env file with Microsoft-App-Id(or Client Id) and Microsoft-App-Password(or Client Secret)
 ## Build and run
 
-### `npm install`
+- `npm install`
 
-### `npm start`
+- `npm start`
 
 ## Running the sample.
 
