@@ -18,8 +18,6 @@ urlFragment: officedev-microsoft-teams-samples-tab-personal-sso-quickstart-js
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are scoped to a single user. They can be pinned to the left navigation bar for easy access.
 
-![personaltab](Images/personaltab.png)
-
 ## Prerequisites
 -  [NodeJS](https://nodejs.org/en/)
 
@@ -60,6 +58,13 @@ On the first time running and debugging your app you need allow the localhost ce
 - Select the `Continue to localhost`
 - You may also need to enable popups in the browser to see the auth consent page.
 
+## Running the sample.
+
+![personaltab](Images/personaltab.png)
+
 ### NOTE: Debugging
 Ensure you have the Debugger for Chrome/Edge extension installed for Visual Studio Code from the marketplace.
+
+## Further Reading.
+[Tab-personal-quickStart](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-overview)
 
