@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "07-07-2021 13:38:26"
+ createdDate: "07/07/2021 01:38:26 PM"
 urlFragment: officedev-microsoft-teams-samples-graph-rsc-csharp
 ---
 
@@ -57,19 +57,10 @@ This sample illustrates you can use [Resource Specific Consent (RSC)](https://do
     - Zip all three files present in manifest folder.
 
 
-1. [Upload app manifest file](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#load-your-package-into-teams) (zip file) to your team.
-    
-    -- Feature of the RSC Sample
-     
-    ![](RSCDemo/Images/RSCModule.gif)  
-
+1. [Upload app manifest file](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#load-your-package-into-teams) (zip file) to your team
     ![](RSCDemo/Images/Picture1.png)
 
     ![](RSCDemo/Images/Picture2.Png)
-
-    ![](RSCDemo/Images/Picture3.png)
-
-    ![](RSCDemo/Images/Picture4.png)
 
 
 
