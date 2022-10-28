@@ -18,17 +18,9 @@ urlFragment: officedev-microsoft-teams-samples-msgext-action-quickstart-js
 
 *Bots* allow users to interact with your web service through text, interactive cards, and task modules. *Messaging extensions* allow users to interact with your web service through buttons and forms in the Microsoft Teams client. They can search, or initiate actions, in an external system from the compose message area, the command box, or directly from a message.
 
-##Feature of the sample.
+## Interaction with app.
 
 ![message ext module](Images/msgextactionquickstartModule.gif)
-
-![action command compose](Images/ActionCommandParameter.PNG)
-
-![compose extension result](Images/ComposeExtensionResultCard.PNG)
-
-![action command from message](Images/ActionCommandFromMessage.PNG)
-
-![compose result from message action](Images/HeroCardResult.PNG)
 
 ## Prerequisites
 
@@ -36,6 +28,8 @@ urlFragment: officedev-microsoft-teams-samples-msgext-action-quickstart-js
 -  [NodeJS](https://nodejs.org/en/)
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+
+## Setup.
 
 **Configure Ngrok**
 
@@ -62,6 +56,16 @@ Run ngrok - point to port 3978
 ### `npm install`
 
 ### `npm start`
+
+## Running the sample.
+
+![action command compose](Images/ActionCommandParameter.PNG)
+
+![compose extension result](Images/ComposeExtensionResultCard.PNG)
+
+![action command from message](Images/ActionCommandFromMessage.PNG)
+
+![compose result from message action](Images/HeroCardResult.PNG)
 
 ## Deploy to Teams
 Start debugging the project by hitting the `F5` key or click the debug icon in Visual Studio Code and click the `Start Debugging` green arrow button.
