@@ -17,24 +17,10 @@ urlFragment: officedev-microsoft-teams-samples-tab-staggered-permission-csharp
 
 Using this csharp sample, you can check how to get staggered graph api permissions
 
-## Key features
-
-Tab 
+## Interaction with app.
 
 ![Staggered Module](StaggeredPermission/Images/StaggeredModule.gif)
-
-  - User basic
-
-![user info card](StaggeredPermission/Images/user-info.png)
-
-  - User photo
-
-![User mails](StaggeredPermission/Images/user-photo.png)
-
-- User emails
-
-![User mails](StaggeredPermission/Images/user-mails.png)
-   
+ 
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
@@ -50,6 +36,8 @@ Tab
   ngrok http -host-header=localhost 3978
   ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+
+## Setup.
 
 ### Register your Teams Auth SSO with Azure AD
 
@@ -92,23 +80,35 @@ Tab
     ✔ ID Token  
     ✔ Access Token  
 14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json. 
+
+15.  Setup for Bot
+
+   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+    - For bot handle, make up a name.
+    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
+    
+   In the new Azure Bot resource in the Portal, 
+    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok.
   
-15. Clone the repository
+16. Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
+ 
 
-16. Open the code in Visual Studio
+17. Open the code in Visual Studio
    - File -> Open -> Project/Solution
    - Navigate to folder where repository is cloned then `samples/tab-staggered-permission/csharp/StaggeredPermission.sln`
     
-17. Run ngrok - point to port 3978
+18. Run ngrok - point to port 3978
 
     ```bash
     # ngrok http -host-header=rewrite 3978
     ```
  
-18. Setup and run the bot from Visual Studio: 
+19. Setup and run the bot from Visual Studio: 
     Modify the `appsettings.json` and fill in the following details:
    - `{{Microsoft-App-id}}` - Generated from Step 3 (Application (client) ID)is the application app id
    - `{{TenantId}}` - Generated from Step 3(Directory (tenant) ID) is the tenant id
@@ -116,12 +116,12 @@ Tab
    - `{{base-url}}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
    - Press `F5` to run the project
 	 
-19. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
+20. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
    - `{{Microsoft-App-Id}}` with Application id generated from Step 3
    - `{Base_URL}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
    - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 
-20. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step
+21. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step
 
 21. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps
@@ -130,6 +130,21 @@ Tab
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 - Note: To test facebook auth flow please setup the sample locally as due to limitations from facebook you cannot test the facebook auth flow in the deployed version of app.
+
+## Running the sample.
+
+ - User basic
+
+![user info card](StaggeredPermission/Images/user-info.png)
+
+  - User photo
+
+![User mails](StaggeredPermission/Images/user-photo.png)
+
+- User emails
+
+![User mails](StaggeredPermission/Images/user-mails.png)
+   
 
 ## Deploy the bot to Azure
 
