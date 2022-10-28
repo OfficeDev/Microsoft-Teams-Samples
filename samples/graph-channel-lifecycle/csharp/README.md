@@ -16,6 +16,9 @@ urlFragment: officedev-microsoft-teams-samples-graph-channel-lifecycle-csharp
 # Channel life cycle
 
 This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-1.0) life cycle which includes create, update delete a channel
+## Interaction with app.
+
+ ![](ChannelLifecycle/Images/ChannelLifeCycleModule.gif)
 
 ## Prerequisites
 
@@ -29,7 +32,7 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
 
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## To try this sample
+## Setup.
 
 - Register your app with Microsoft identity platform via the Azure AD portal
   - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2). 
@@ -60,15 +63,15 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
 
 - [Upload app manifest file](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#load-your-package-into-teams) (zip file) to your team
 
-  Feature of the sample.
-
-  ![](ChannelLifecycle/Images/ChannelLifeCycleModule.gif  )
+## Running the sample.
 
   ![](ChannelLifecycle/Images/Image1.PNG)
 
   ![](ChannelLifecycle/Images/Image2.PNG)
 
   ![](ChannelLifecycle/Images/Image3.PNG)
+  
+  [Grpah-Channel-lifecycel](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)
   
   
  
