@@ -17,11 +17,16 @@ urlFragment: officedev-microsoft-teams-samples-graph-chat-lifecycle-csharp
 
 This sample illustrates Lifecycle of chat in Teams (Creating chat, adding members with all scenarios, deleting member).
 
+## Interaction with app.
+![welcome card](ChatLifecycle/Images/ChatLifeCycleModule.gif)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+
+## Setup.
 
 1) Clone the repository
 
@@ -104,9 +109,7 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 1) Update appsettings.json file with Microsoft App Id, App Secret, Tenant Id (from app created earlier).
 2) Run your app, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
-## Interacting with the app in Teams
-
-![welcome card](ChatLifecycle/Images/ChatLifeCycleModule.gif)
+## Running the sample.
 
 1. In Teams, Once the app is successfully installed, it can be opened in the tab and has option to create group chat if user is authenticated.
 
@@ -123,6 +126,9 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 4. Successfully Group chat created.
 
    ![chat life cycle](ChatLifecycle/Images/createdgroupchat.png)
+   
+## Further Reading.
+[Graph-Chat-Lifecycle](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)
 
 
 
