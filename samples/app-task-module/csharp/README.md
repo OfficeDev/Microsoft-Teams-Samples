@@ -24,6 +24,21 @@ Task modules build on the foundation of Microsoft Teams tabs: a task module is e
 
 ![adaptivecard](Microsoft.Teams.Samples.TaskModule.Web/Images/AppTaskModule.gif)
 
+## Prerequisites
+
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+
+  determine dotnet version
+  ```bash
+  dotnet --version
+  ```
+- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+  
+  run ngrok locally
+  ```bash
+  ngrok http -host-header=localhost 3978
+  ```
+- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 ## Setup.
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
