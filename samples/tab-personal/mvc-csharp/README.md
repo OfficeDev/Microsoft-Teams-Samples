@@ -25,7 +25,7 @@ In this quickstart we'll walk-through creating a custom personal tab with C# and
 
 For complete instructions on running this sample see:
 
-[Create a Custom Personal Tab with ASP. NET Core MVC](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/quickstarts/create-personal-tab-dotnet-core-mvc)
+[Create a Custom Personal Tab with ASP. NET Core MVC](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-personal-tab?pivots=mvc-csharp)
 
 ## Running the sample
 
