@@ -37,7 +37,7 @@ Using this csharp sample, you can check how to get staggered graph api permissio
   ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-## Setup.
+## Setup
 
 ### Register your Teams Auth SSO with Azure AD
 
@@ -131,7 +131,7 @@ Using this csharp sample, you can check how to get staggered graph api permissio
 
 - Note: To test facebook auth flow please setup the sample locally as due to limitations from facebook you cannot test the facebook auth flow in the deployed version of app.
 
-## Running the sample.
+## Running the sample
 
  - User basic
 
