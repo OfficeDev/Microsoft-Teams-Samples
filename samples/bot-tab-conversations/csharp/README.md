@@ -161,13 +161,6 @@ There is also a personal tab that will list inquires from all the support depart
     * `<<aad-client-secret>>` with the client secret you created above.
     * `<<teams-app-store-app-id>>` with the App ID assigned to the app in the Teams Admin Center or provided when your app passes validation. If you are sideloading the app you can use the appId from the manifest file, but please note that [deep linking may not work when sideloading](#known-issues).
 
-* Project Structure
-    * The sample contains 3 projects
-        * `Web` - Exposes REST APIs for documents and signing scenarios supported in this POC.  
-            * `Web\ClientApp` contains the Front End code to support document sharing in a meeting via share to stage. 
-        * `Domain` - Contains the business logic to support the REST APIs.
-        * `Infrastructure` - Fulfils `Domain`'s dependencies like data repositories, graph support needed.
-
 * Deploying
     * There are detailed instructions for deploying locally below.
 * Sideloading the App
@@ -187,6 +180,13 @@ There is also a personal tab that will list inquires from all the support depart
 This repository uses VSCode [Code Tours](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour#:~:text=A%20%22code%20tour%22%20is%20simply%20a%20series%20of,CONTRIBUTING.md%20file%20and%2For%20rely%20on%20help%20from%20others.) to explain _how_ the code works. 
 
 The tour files can be found in the `.tours` directory.
+
+* Project Structure
+    * The sample contains 3 projects
+        * `Web` - Exposes REST APIs for documents and signing scenarios supported in this POC.  
+            * `Web\ClientApp` contains the Front End code to support document sharing in a meeting via share to stage. 
+        * `Domain` - Contains the business logic to support the REST APIs.
+        * `Infrastructure` - Fulfils `Domain`'s dependencies like data repositories, graph support needed.
 
 ## Deployment
 ### Locally in Visual Studio
