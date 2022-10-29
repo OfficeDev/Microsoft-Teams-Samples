@@ -17,11 +17,11 @@ urlFragment: officedev-microsoft-teams-samples-tab-personal-razor-csharp
 
 In this quickstart we'll walk-through creating a custom personal tab with C# and ASP.Net Core Razor pages. We'll also use App Studio for Microsoft Teams to finalize your app manifest and deploy your tab to Teams.
 
-## Interaction with app.
+## Interaction with app
 
 ![personaltabmodule](Images/PersonalTabModule.gif)
 
-## Setup.
+## Setup
 
 For complete instructions on running this sample see:
 
@@ -33,7 +33,7 @@ For complete instructions on running this sample see:
 
 ![personaltab](Images/personaltab.png)
 
-## Fruther Reading.
+## Fruther Reading
 [Tab-personal](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/what-are-tabs)
 
 
