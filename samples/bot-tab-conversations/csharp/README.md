@@ -105,7 +105,6 @@ sequenceDiagram
   * [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 * Install [ngrok](https://ngrok.com/download) for local setup. (or any other tunneling solution)
 
-
 ### Channel Tab
 
 * [Set-up, deploy and sideload the app to a channel.](#steps)
@@ -128,29 +127,24 @@ There is also a personal tab that will list inquires from all the support depart
 * Once authenticated, the app will list all the support departments from any channel you are a member of. Up to five inquiries from each support department will be listed.
 * Clicking on the -> Arrow will open the inquiry details. From the detail page you can open the channel conversation about the inquiry.
 
-## Steps
-* Start Ngrok
-* Create a new Bot Registration
-* Create the Azure AAD App Registration (Accounts in any organizational directory (Any Azure AD directory - Multitenant))
-* Update URL in Manifest
-* Build C# App
-* Deploy to Teams
-
 ## Setup
+
 * Run Ngrok
     * Run ngrok and point it to the port the Web App is listening on. Note the port will change depending on how you are deploying.
     ```bash
     ngrok http https://localhost:44326 -host-header=localhost:44326 # For Visual Studio
     ```
     * Make sure to copy and save the `https` url (it should look like `https://<randomsubdomain>.ngrok.io`).
-* Create a Bot. [We recommend using Developer Portal for Microsoft Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/teams-developer-portal), but you can use create a Azure Bot in [Azure Portal](https://portal.azure.com).
-    * Set the 'Bot endpoint address' to `https://<randomsubdomain>.ngrok.io/api/messages`.
-    * Create a client secret, being sure to copy the secret for replacing in the `appSettings.json` below.
-    * *Note: if you restart Ngrok you may have to update the messaging endpoint domain URL you have set in your Bot Configuration*
+
+* Create a Azure bot in [Azure Portal](https://portal.azure.com) or in [Developer Portal for Microsoft Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/teams-developer-portal).
+    * Set the 'Messaging endpoint' for your Azure Bot with `https://<your application domain/api/messages` like your ngrok URL `https://xxxxx.ngrok.io` .
+    * *Note: if you restart Ngrok you may have to update the messaging endpoint domain URL aginn in your Azure Bot for local running*
+
 * [Update the AAD App to enable Teams SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad)
     * When creating the Bot above, an AAD app should either have been created for you, or you should have chosen an AAD app to associate with the bot.
     * The updates below will allow for us to authenticate and authorize API calls to limit data returned to only channels the user is a member of.
     * [Follow the instructions](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad#to-expose-an-api), to expose an AAD API, creating an Application ID URI, scopes, etc.
+
     * Once you have followed those instructions, you need to [configure the Web authentication platform for the application](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-graph-api?tabs=dotnet#to-configure-authentication-for-a-platform). Ensure that you have added the `redirect URI` in this format `https://<<fully-qualified-domain-name.com>>/auth-end` like your ngrok URL 'https://xxxxx-590a-c1b2.ngrok.io/auth-end'
 
     * Ensure the following API permissions are granted to the app for Microsoft Graph access - `email`, `offline_access`, `openid`, `profile`, `Team.ReadBasic.All`    
@@ -199,7 +193,6 @@ The tour files can be found in the `.tours` directory.
 * Point Ngrok to port 5001: `ngrok http -host-header=rewrite 5001`
 * In a terminal, navigate to `Source\ConversationalTabs.Web`
 * Run `dotnet run`
-
 
 ## Running the sample. 
 
