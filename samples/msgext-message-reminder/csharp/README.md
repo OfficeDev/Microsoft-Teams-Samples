@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-msgext-message-reminder-csharp
 
 This sample shows a feature where user can schedule a task from messaging extension action and get a reminder card at a scheduled time.
 
-## Interaction with app.
+## Interaction with app
 
 ![Select message](MessagingExtensionReminder/Images/MessageExtensionReminderModule.gif)
 
@@ -31,13 +31,9 @@ This sample shows a feature where user can schedule a task from messaging extens
   ```
 - [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
   
-  run ngrok locally
-  ```bash
-  ngrok http -host-header=localhost 3978
-  ```
-- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+ - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-## Setup.
+## Setup
 
 1) Azure app Registration.
 
