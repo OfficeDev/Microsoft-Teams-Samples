@@ -100,7 +100,7 @@ eg: https://smba.trafficmanager.net/amer/v3
 
 **4. Setup bot in Service**
 
-1. Update messaging endpoint in the Azure Bots Channel Registration. Open the Bot channel registration, click on Configuration/Settings on the left pane, whichever is available and update the messaging endpoint to the endpoint that bot app will be listening on. Update the ngrok URL in the below format for the messaging endpoint.
+1. Update messaging endpoint in the Azure Bot Registration. Open the Azure Bot registration, click on Configuration/Settings on the left pane, whichever is available and update the messaging endpoint to the endpoint that bot app will be listening on. Update the ngrok URL in the below format for the messaging endpoint.
 
 <img src="./Assets/Images/BotChannelConfig.png" alt="Bot Channel Reg">
 
