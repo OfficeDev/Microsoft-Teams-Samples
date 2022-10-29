@@ -23,12 +23,9 @@ This sample shows the feature where user can send suggested actions using bot.
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
-
-  determine dotnet version
-  ```bash
-  dotnet --version
-  ```
+- Microsoft Teams is installed and you have an account
+- [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
+- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
