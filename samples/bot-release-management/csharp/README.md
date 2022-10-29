@@ -57,7 +57,7 @@ Register one Azure AD application in your tenant's directory: for the bot and ta
 
 -  Click on "New registration", and create an Azure AD application.
 
--  **Name:**  The name of your Teams app - if you are following the template for a default deployment, we recommend "App catalog lifecycle".
+-  **Name:**  The name of your Teams app - if you are following the template for a default deployment, we recommend "Bot release management".
 
 -  **Supported account types:**  Select "Accounts in any organizational directory"
 
