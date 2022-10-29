@@ -103,11 +103,11 @@ This step will create an AAD app, it will be reused wherever it needs AAD throug
 
 ![Add Client Application](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AddClient.png)
 
-- Add any necessary API permissions for downstream calls
+- Add required Graph API permissions:
 
     - Navigate to "API permissions" blade on the left hand side
 
-    - Add any user delegated permissions that your app will need to downstream APIs. This quick start only requires User.Read.
+    - Add `Presence.Read` and `Presence.Read.All` as delegated permissions
 
         ![Add Permissions](https://user-images.githubusercontent.com/85864414/121880473-af1af780-cd2b-11eb-8166-837425ef186f.PNG)
 
