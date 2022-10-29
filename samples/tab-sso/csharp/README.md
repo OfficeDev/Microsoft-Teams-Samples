@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-sso-csharp
 
 This sample illustrates how to implement SSO authentication for Teams Tab.
 
-## Interaction with app.
+## Interaction with app
 
 ![Config SSO](Images/tabssomodules.gif)
 
@@ -44,7 +44,7 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
-## Setup.
+## Setup
 
 ### Register your Teams Auth SSO with Azure AD
 
@@ -103,7 +103,7 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
     
-## Running the sample.
+## Running the sample
 
 ### Tab SSO
 
