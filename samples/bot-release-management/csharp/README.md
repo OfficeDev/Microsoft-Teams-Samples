@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample app with capability to send notification when user creates workitem in [Azure DevOps](https://dev.azure.com) via webhooks.
+description: This is a sample app with capability to send notification when user creates workitem in Azure DevOps via webhooks.
 products:
 - office-teams
 - office
@@ -109,7 +109,7 @@ Click on Add Permissions to commit your changes.
 
 - Go to *Options* and check *Required* and Add.
 
-**NOTE:Make sure you create a new task, click save and verify the stakeholderTeam value**
+**NOTE: Make sure you create a new task, click save and verify the stakeholderTeam value**
 ![Execute Webhook](ReleaseManagement/Images/ExecuteWebhook.png)
 
 ### 6. Setup for code
