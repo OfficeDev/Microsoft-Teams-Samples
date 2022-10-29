@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-tab-people-picker-csharp
 ---
 
-## Interaction with app.
+## Interaction with app
 
 ![tab](TabPeoplePicker/Images/PepolePickerModule.gif)
 
@@ -31,7 +31,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-people-picker-csharp
     ngrok http --host-header=rewrite 3978
     ```
 
-## Setup.
+## Setup
   
 - Clone the repository 
    ```bash
@@ -66,7 +66,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-people-picker-csharp
 
 - [Upload app manifest file](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#load-your-package-into-teams) (zip file) to your team
 
-## Running the sample.
+## Running the sample
 
 This is an tab app which shows the feature of client sdk people picker.
 
@@ -80,6 +80,6 @@ This is an tab app which shows the feature of client sdk people picker.
 
 ![Submission details](TabPeoplePicker/Images/submission.png)
 
-## Further Reading.
+## Further Reading
 [Tab-people-picker](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/device-capabilities/people-picker-capability?tabs=Samplemobileapp%2Cteamsjs-v2)
 
