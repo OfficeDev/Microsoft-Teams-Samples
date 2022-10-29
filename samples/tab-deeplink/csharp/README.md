@@ -96,7 +96,7 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 
 		**Adding bot UI:**
     
-		![personal-AddBot ](DeepLinkBot/images/personal-01_P_app.png)
+		![personal-AddBot ](DeepLinkBot/images/01_P_app.png)
 
 		**Added bot UI:**
     
