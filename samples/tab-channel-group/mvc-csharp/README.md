@@ -17,11 +17,11 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-mvc-csharp
 
 In this quickstart we'll walk-through creating a custom channel/group tab with ASP.Net Core and MVC. We'll also use App Studio for Microsoft Teams to finalize your app manifest and deploy your tab to Teams.
 
-## Interaction with app.
+## Interaction with app
 
 ![configureteams](Images/ChannelGroupTabModule.gif)
 
-## Setup.
+## Setup
 
 For complete instructions on running this sample see:
 
@@ -41,6 +41,6 @@ For complete instructions on running this sample see:
 
 ![RedTab](Images/RedTab.png)
 
-## Further Reading.
+## Further Reading
 [Tab-channel-group](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/what-are-tabs)
 
