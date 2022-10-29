@@ -48,7 +48,7 @@ This is a sample application which demonstrates how to create a webhook on [Azur
 ```bash
 # ngrok http -host-header=rewrite 3978
 ```
-2) Once started you should see URL  `https://41ed-abcd-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
+2) Once started you should see ngrok URL like `https://xxxxx-xxx-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
 
 ### 3. Setup for code
 - Clone the repository
