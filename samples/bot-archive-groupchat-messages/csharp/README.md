@@ -37,7 +37,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 1 Clone the repository
 
-    ```bash
+    ```
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
