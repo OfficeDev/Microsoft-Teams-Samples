@@ -27,7 +27,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
 
-  ```bash
+  ```
   # determine dotnet version
   dotnet --version
   ```
@@ -35,15 +35,15 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 ## Setup
 
-1 Clone the repository
+1) Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2 In a terminal, navigate to `samples/bot-archive-groupchat-messages/csharp`
+2) In a terminal, navigate to `samples/bot-archive-groupchat-messages/csharp`
 
-3 Run ngrok - point to port 3978
+3) Run ngrok - point to port 3978
 
 ```bash
 # ngrok http -host-header=rewrite 3978
