@@ -20,19 +20,9 @@ urlFragment: officedev-microsoft-teams-samples-app-complete-sample-csharp
 
 Sample that shows how to build a bot for Microsoft Teams in C#. 
 
-## Feature of the sample
+## Interaction with app.
 
 ![ Module ](template-bot-master-csharp/Images/Sample.gif)
-
-![ Hello ](template-bot-master-csharp/Images/Hello.png)
-
-![ Dilaog ](template-bot-master-csharp/Images/dialog.png)
-
-![ Quiz1 ](template-bot-master-csharp/Images/Quiz1.png)
-
-![ Quiz2 ](template-bot-master-csharp/Images/Quiz2.png)
-
-![ Tab ](template-bot-master-csharp/Images/static-tab.png)
 
 ## Prerequisites
 
@@ -66,6 +56,8 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
 3. Once the code is running, connect with the Bot Emulator to the default endpoint, "http://localhost:3979/api/messages", leaving "Microsoft App ID" and "Microsoft App Password" blank
 
 Congratulations!!! You can now chat with the bot in the Bot Emulator!
+
+## Setup.
 
 ## Steps to see the full app in Microsoft Teams
 
@@ -172,6 +164,18 @@ This file is a configuration file that can be used to update the config keys glo
 4. Added dilaogBot.cs. DialogExtension.cs, AdapterWithErrorHandler.cs
 
 5. Updated Dialog files into waterfall model dialog.
+
+## Running the sample.
+
+![ Hello ](template-bot-master-csharp/Images/Hello.png)
+
+![ Dilaog ](template-bot-master-csharp/Images/dialog.png)
+
+![ Quiz1 ](template-bot-master-csharp/Images/Quiz1.png)
+
+![ Quiz2 ](template-bot-master-csharp/Images/Quiz2.png)
+
+![ Tab ](template-bot-master-csharp/Images/static-tab.png)
 
 
 ## Contributing
