@@ -27,7 +27,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
 
-  ```bash
+  ```
   # determine dotnet version
   dotnet --version
   ```
