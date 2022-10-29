@@ -20,11 +20,11 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-csharp
 
  ##### Welcome Card Flow
 
- ![bot-conversations](images/Personal_CardDeeplink.gif)
+ ![bot-conversations](DeepLinkBot/images/Personal_CardDeeplink.gif)
 
  ##### Deeplink Tab Flow
 
- ![bot-conversations ](images/Team_DeepLink)
+ ![bot-conversations ](DeepLinkBot/images/Team_DeepLink.gif)
 
 
  ## Prerequisites
