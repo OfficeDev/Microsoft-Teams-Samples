@@ -21,7 +21,7 @@ It has meeting details and in-meeting app that helps in the interview process.
 
 ## Interaction with app.
 
-![Details](Images/meetingrecruitment.gif)
+![Details](MeetingApp/Images/meetingrecruitment.gif)
 
 ## Prerequisites
 
@@ -51,14 +51,14 @@ Run ngrok - point to port 3978
 Register an application.
 Fill out name and select third option for supported account type and click "Register".
 
-![AppRegistration](Images/AppRegistration.png)
+![AppRegistration](MeetingApp/Images/AppRegistration.png)
 
 * Copy and paste the App Id and Tenant ID somewhere safe. You will need it in a future step.
 
 2) Create Client Secret.
    * Navigate to the "Certificates & secrets" blade and add a client secret by clicking "New Client Secret".
 
-![ClientSecret](Images/clientsecret.png) 
+![ClientSecret](MeetingApp/Images/clientsecret.png) 
 
 * Copy and paste the secret somewhere safe. You will need it in a future step.
 
@@ -122,33 +122,33 @@ Fill out name and select third option for supported account type and click "Regi
 1) Details page:
    The details page shows basic information of the candidate, timeline, Questions (that can be added for meeting), Notes (provided by peers)
 
-   ![Details](Images/details.png)
+   ![Details](MeetingApp/Images/details.png)
 
 2) Action on Questions:
    
    - The interviewer can Add/Edit or Delete question.
 
-   ![Add Question](Images/add_question.png)
+   ![Add Question](MeetingApp/Images/add_question.png)
 
    - Add Questions Task Module
    
-   ![Add Question Task](Images/add_task.png)
+   ![Add Question Task](MeetingApp/Images/add_task.png)
 
-   ![Edit Delete Question](Images/edit_questions.png)
+   ![Edit Delete Question](MeetingApp/Images/edit_questions.png)
 
    - Edit Question Task Module
    
-   ![Edit Task](Images/edit_task.png)
+   ![Edit Task](MeetingApp/Images/edit_task.png)
 
 3) Add Notes:
    
    The interviewer can add notes that will appear to other peers.
 
-   ![Add Notes](Images/add_note.png)
+   ![Add Notes](MeetingApp/Images/add_note.png)
 
    Add Note Task Module
   
-   ![Add Notes](Images/add_note_task.png)
+   ![Add Notes](MeetingApp/Images/add_note_task.png)
 
 4) Sidepanel:
     
@@ -158,29 +158,29 @@ Fill out name and select third option for supported account type and click "Regi
     
     B) Questions: The questions set in the details page appear here. The interviewer can use this to provide rating and submit final feedback.
 
-    ![Sidepanel Overview](Images/sidepanel_overview.png)
+    ![Sidepanel Overview](MeetingApp/Images/sidepanel_overview.png)
 
-    ![Sidepanel Questions](Images/sidepanel_questions.png)
+    ![Sidepanel Questions](MeetingApp/Images/sidepanel_questions.png)
 
 5) Share assets:
 
    This is used to share assets to the candidate.
    
-   ![Share Assets](Images/share_assets.png)
+   ![Share Assets](MeetingApp/Images/share_assets.png)
 
 6) Mobile view: Details tab
 
    ![Details tab](Images/details_tab_mobile.png)
 
-   ![Note](Images/Note_mobile.png)
+   ![Note](MeetingApp/Images/Note_mobile.png)
 
-   ![Share Doc](Images/ShareDoc_mobile.png)
+   ![Share Doc](MeetingApp/Images/ShareDoc_mobile.png)
    
    - Sidepanel view
    
-   ![Sidepanel Overview mobile](Images/sidepanel_mobile.png)
+   ![Sidepanel Overview mobile](MeetingApp/Images/sidepanel_mobile.png)
 
-   ![Sidepanel Question mobile](Images/question_mobile.png)
+   ![Sidepanel Question mobile](MeetingApp/Images/question_mobile.png)
 
 
 ## Further reading
