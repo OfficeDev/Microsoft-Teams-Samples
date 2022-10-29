@@ -44,6 +44,8 @@ Install some sort of tunnelling service. These instructions assume you are using
 * (Only needed if wanting to run in the Bot Emulator)<br>
 Install the Bot Emulator - click on "Bot Framework Emulator (Mac and Windows)": https://docs.botframework.com/en-us/downloads/#navtitle  
     * NOTE: make sure to pin the emulator to your task bar because it can sometimes be difficult to find again 
+    
+## Setup.
 
 ## Steps to see the bot running in the Bot Emulator
 
@@ -57,7 +59,6 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
 
 Congratulations!!! You can now chat with the bot in the Bot Emulator!
 
-## Setup.
 
 ## Steps to see the full app in Microsoft Teams
 
