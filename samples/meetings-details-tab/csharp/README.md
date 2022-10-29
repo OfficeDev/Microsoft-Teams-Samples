@@ -63,7 +63,7 @@ This sample shows creating poll in meeting , where memebers of the meeting can a
 - Run your app, either from Visual Studio with ```F5``` or using ```dotnet run``` in the appropriate folder.
 - [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
-## Running the sample.
+## Running the sample
 
 Interact with Details Tab in Meeting.
 1. Install the Details Tab manifest in meeting chat.
