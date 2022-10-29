@@ -134,19 +134,21 @@ This step will create an AAD app, it will be reused wherever it needs AAD throug
 
         a. Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
 
-        b. Service Provider. Select Azure Active Directory. Once you select this, the Azure AD-specific fields will be displayed.
+        b. Service Provider: select Azure Active Directory. Once you select this, the Azure AD-specific fields will be displayed.
 
-        c. Client id. Enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
+        c. Client id: enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
 
-        d. Client secret. Enter the secret that you recorded for your Azure identity provider app in the steps above.
+        d. Client secret: enter the secret that you recorded for your Azure identity provider app in the steps above.
 
-        e. Grant Type. Enter authorization_code.
+        e. Grant Type: `authorization_code`
 
-        f. Login URL. Enter https://login.microsoftonline.com.
+        f. Login URL: https://login.microsoftonline.com
 
         g. Tenant ID, enter the Directory (tenant) ID that you recorded earlier for your Azure identity app or common depending on the supported account type selected when you created the identity provider app.
-        h. For Resource URL, enter https://graph.microsoft.com/
-        i. Provide  Scopes like "Presence.Read, Presence.Read.All"
+        
+        h. Resource URL: https://graph.microsoft.com/
+
+        i. Provide Scopes: "Presence.Read Presence.Read.All"
 ![image](https://user-images.githubusercontent.com/85864414/122000240-1d16fb80-cdcc-11eb-8aeb-a1dc898f947e.PNG)
 
 5)  Open the code in Visual Studio
