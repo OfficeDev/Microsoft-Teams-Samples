@@ -41,20 +41,22 @@ Teams Catering bot is a sample app that provides an experience of ordering food 
 
 ## Setup
 
-### 1. Setup for Bot
+**1. Setup for Bot**
 
+- Register AAD app registration in Azure portal.
 - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
     > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
-### 2. Setup NGROK
+
+**2. Setup NGROK**
 1) Run ngrok - point to port 2978
 
 ```bash
 # ngrok http -host-header=rewrite 2978
 ```
 
-### 3. Setup for code
+**3. Setup for code**
 
 - Clone the repository
 
@@ -96,7 +98,7 @@ Teams Catering bot is a sample app that provides an experience of ordering food 
 **NOTE:** The Bot Service Url needs to be dynamically fetched (and stored) from the Team. Recommendation is to capture the serviceUrl from the bot Payload and later re-use it to send proactive messages.
 eg: https://smba.trafficmanager.net/amer/v3
 
-### 4. Setup bot in Service
+**4. Setup bot in Service**
 
 1. Update messaging endpoint in the Azure Bots Channel Registration. Open the Bot channel registration, click on Configuration/Settings on the left pane, whichever is available and update the messaging endpoint to the endpoint that bot app will be listening on. Update the ngrok URL in the below format for the messaging endpoint.
 
@@ -106,7 +108,7 @@ eg: https://smba.trafficmanager.net/amer/v3
 
 <img src="./Assets/Images/BotChannels.png" alt="Bot Channels">
 
-### 5. Register your Teams
+**5. Register your Teams**
 1. Go to App registrations and create a new app registration in a different tab.
 
 2. Register an application.
@@ -122,7 +124,7 @@ eg: https://smba.trafficmanager.net/amer/v3
 **NOTE:** Copy and paste the secret somewhere safe. You will need it in a future step:
 <img src="./Assets/Images/CertificatesAndSecrets.png" alt="Certificates And Secrets">
 
-### 6. Create Azure Cosoms Database account
+**6. Create Azure Cosoms Database account**
 
 1. Create an Azure Cosmos DB account
    * Choose an existing resource group or create a new one.
@@ -143,7 +145,7 @@ eg: https://smba.trafficmanager.net/amer/v3
 
 <img src="./Assets/Images/CosmosKeys.png" alt="Cosmos Db keys">
 
-### 7. Setup Manifest for Teams
+**7. Setup Manifest for Teams**
 - **This step is specific to Teams.**
 
     - **Edit** the `manifest.json` contained in the  `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Your Microsoft App Id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
