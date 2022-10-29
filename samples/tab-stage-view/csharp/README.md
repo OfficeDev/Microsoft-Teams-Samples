@@ -94,11 +94,7 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
     You can use this tab by following the below steps:
     - In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
 
-## Running the sample.
-
-- Welcome message with feature explanation.
-
-![Welcome Message](TabInStageView/Images/welcomeAction.png)
+## Running the sample
 
 - Opening stage view in tab with Adaptive card action.
 
