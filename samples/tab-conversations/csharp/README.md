@@ -19,8 +19,6 @@ This Teams tab app provides a way to allow users to have conversations about sub
 
 ## Interaction with app
 
-- Full Features of the sample
-
 ![TabConversationModule](TabConversation/Images/tabconversationmodule.gif)
 
 ## Prerequisites
