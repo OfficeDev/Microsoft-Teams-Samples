@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-conversations-csharp
 
 This Teams tab app provides a way to allow users to have conversations about sub-entities in the tab [Create conversational tabs](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/conversational-tabs?view=msteams-client-js-latest#continue-a-conversation)
 
-## Interaction with app.
+## Interaction with app
 
 - Full Features of the sample
 
@@ -48,7 +48,7 @@ This Teams tab app provides a way to allow users to have conversations about sub
     ```bash
     ngrok http -host-header=localhost 3978
     ```
- ## Setup.
+ ## Setup
  
 - Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 - Setup for Bot
@@ -70,7 +70,7 @@ This Teams tab app provides a way to allow users to have conversations about sub
          - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
          - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
          
-## Running the sample.
+## Running the sample
 
 - Tab showing actions that can be performed
 
