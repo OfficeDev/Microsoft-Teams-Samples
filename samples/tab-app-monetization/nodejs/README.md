@@ -18,9 +18,8 @@ urlFragment: officedev-microsoft-teams-samples-tab-app-monetization-nodejs
 
 This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk.
 
-![tab page](Images/tabPage.png)
-
-![triggered purchase popup](Images/purchasePopup.png)
+- **Interaction with tab**
+![tab-app-monetization](Images/tab-app-monetization.gif)
 
 ## Prerequisites
 
@@ -30,11 +29,26 @@ This sample shows how to open purchase dialog and trigger purchase flow using te
 - [Publish an offer to marketplace](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/appsource/prepare/include-saas-offer)
 
 
+## 1) Setup for App registration
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+3. On the overview page, copy and save the **Application (client) ID**. You’ll need this later when updating your Teams application manifest.
 
-## To try this sample
-
+## 2) Setup for SAAS offer
 1) Register a SAAS offer in market place and generate an plan id for it [Create SAAS Offer](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/appsource/prepare/include-saas-offer)
 
+###  3) Setup NGROK
+1) Run ngrok - point to port 3978
+
+```bash
+# ngrok http -host-header=rewrite 3978
+```
+
+## 4) Setup for code
 2) Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
@@ -45,31 +59,41 @@ This sample shows how to open purchase dialog and trigger purchase flow using te
 
     ```bash
     npm install
+    ```
+   **_Note_** - Navigate to `samples/tab-app-monetization/nodejs/ClientApp/src/components/tab.tsx` and update the planId and term on line 14 and 15 with plan details created in step 2
 
-4) Run the solution from the same path terminal using below command.
+5) Run the solution from the same path terminal using below command.
 
     ```
     npm start
     ```
-5) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
-   - `{{Manifest-id}}` with some unique GUID.
-   - `{{Domain Name}}` with your application's base url, e.g. https://1234.ngrok.io
-   - `{{Plan-id}}` with plan id generated in step 1.
 
-6) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
+###  5) Setup Manifest for Teams
+1. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
+   - `{{App-id}}` with your application id created in step 1.
+   - `{{Domain Name}}` with your application's base url, e.g. For https://1234.ngrok.io the Domain Name will be 1234.ngrok.io
+   - `{{Plan-id}}` with plan id generated in step 2.
+
+2. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
     
-7) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+3. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Apps -> Manage your apps -> Upload an app.
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
    
-8) Add the tab in personal scope.
+4. Add the tab in personal scope.
 
-## Features of the sample
+## 6) Features of the sample
 
 - Add the tab in personal scope.
+![app-install](Images/app-purchase-install.png)
+![tab-page](Images/app-purchase-tab.png)
+
 - On click of upgrade button will trigger the purchase flow.
+![offer-region](Images/app-purchase-popup1.png)
+![offer-popup](Images/app-purchase-popup2.png)
+![offer-popup-checkout](Images/app-purchase-popup3.png)
 
 ## Further reading
 

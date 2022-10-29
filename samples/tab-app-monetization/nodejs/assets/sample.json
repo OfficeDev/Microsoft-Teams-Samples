@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-app-monetization/nodejs/Images/tabPage.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-app-monetization/nodejs/Images/tab-app-monetization.gif",
         "alt": "Solution UX showing Open Purchase experience in Tab."
       }
     ],
