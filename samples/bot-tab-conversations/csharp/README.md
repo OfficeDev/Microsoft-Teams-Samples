@@ -25,7 +25,7 @@ Please see the [Code Tours](#code-tours) section for in-depth explanation of the
 * Proactive conversation creation from a Bot
 * Authorization of API calls based on user's Team membership
 
- ## Interact with app.
+ ## Interaction with app
 
 ![Sample Module](/samples/bot-tab-conversations/csharp/Docs/images/BotTabConversationTab.gif)
 
@@ -151,7 +151,8 @@ There is also a personal tab that will list inquires from all the support depart
     * When creating the Bot above, an AAD app should either have been created for you, or you should have chosen an AAD app to associate with the bot.
     * The updates below will allow for us to authenticate and authorize API calls to limit data returned to only channels the user is a member of.
     * [Follow the instructions](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad#to-expose-an-api), to expose an AAD API, creating an Application ID URI, scopes, etc.
-    * Once you have followed those instructions, you need to [configure the Web authentication platform for the application](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-graph-api?tabs=dotnet#to-configure-authentication-for-a-platform).
+    * Once you have followed those instructions, you need to [configure the Web authentication platform for the application](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-graph-api?tabs=dotnet#to-configure-authentication-for-a-platform). Ensure that you have added the `redirect URI` in this format `https://<<fully-qualified-domain-name.com>>/auth-end` like your ngrok URL 'https://xxxxx-590a-c1b2.ngrok.io/auth-end'
+
     * Ensure the following API permissions are granted to the app for Microsoft Graph access - `email`, `offline_access`, `openid`, `profile`, `Team.ReadBasic.All`    
     * *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your AAD App*
 * In `appSettings.json`, `manifest.json` and `.env` replace:
@@ -159,12 +160,14 @@ There is also a personal tab that will list inquires from all the support depart
     * `<<aad-id>>` with your AAD Application (Client) Id.
     * `<<aad-client-secret>>` with the client secret you created above.
     * `<<teams-app-store-app-id>>` with the App ID assigned to the app in the Teams Admin Center or provided when your app passes validation. If you are sideloading the app you can use the appId from the manifest file, but please note that [deep linking may not work when sideloading](#known-issues).
+
 * Project Structure
     * The sample contains 3 projects
         * `Web` - Exposes REST APIs for documents and signing scenarios supported in this POC.  
             * `Web\ClientApp` contains the Front End code to support document sharing in a meeting via share to stage. 
         * `Domain` - Contains the business logic to support the REST APIs.
         * `Infrastructure` - Fulfils `Domain`'s dependencies like data repositories, graph support needed.
+
 * Deploying
     * There are detailed instructions for deploying locally below.
 * Sideloading the App
@@ -174,8 +177,10 @@ There is also a personal tab that will list inquires from all the support depart
 ## Known issues
 * When the solution is run on a local web browser (anywhere outside of Teams), it will load a spinner. Instead side-load the application to a teams client, or open up `<<ngrok-url>>/admin` to open the admin page
 * Sometimes, the "Open Details" button on a new inquiry's Adaptive Card may not navigate to a the channel tab. This is due to side-loaded apps not having a consistent entityId. This makes deeplinking difficult. If this happens you can open the inquiry in the tab directly. If you have submitted the app to either your Org App Store or the Teams App Store you must set the `<<teams-app-store-app-id>>` in appsettings.json to the App ID value as shown in the [Teams Admin Center](https://admin.teams.microsoft.com/policies/manage-apps).
+
 * Private channels do not support bots at the moment, therefore this app is not supported on private channels.
 * If in the personal app a user opens a conversation from a channel they are not a member of, the conversation will fail to show. This is not an issue in our sample as we filter support departments based on Team membership.
+
 * App shows "We need you to consent to complete that action." but provides no action: your pop -up blocker might be blocking a consent dialog from opening, be sure to allow pop-ups from Teams. 
 
 ## Code Tours
@@ -215,5 +220,5 @@ The tour files can be found in the `.tours` directory.
 * Run `podman run -d -p 8080:80 --name ConversationalTabs <IMAGE_ID>` to start the container
 * Open [http://localhost:8080/](http://localhost:8080/) to view the service running
 
-## Further Read.
+## Further reading
 * [Create conversational tabs](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/conversational-tabs) 
