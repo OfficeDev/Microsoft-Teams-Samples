@@ -49,11 +49,11 @@ All the cards display the following information:
 
 You can extend the `Me` card to automatically refresh for a list of users by adding a list of user MRIs to `userIds` in Adaptive Card.
 
-###### User specific view - workflow
+##### User specific view - workflow
 
 The following GIF captures `Automatic refresh`, `Manual refresh`, and `Update Base Card` actions in `Me` card.
 
-![UML](docs/UserSpecificView_Me.png)
+![bot-conversations ](docs/UserSpecificView_Me.png)
 
 The diagram above captures the sequence of events for `Me` card.
 
@@ -64,7 +64,7 @@ Workflow:
 
 In the case of `All Users`, the refresh will automatically be invoked for all users (in this case for user B as well).
 
-#### Teams Conversation Bot
+## Teams Conversation Bot
 Bot Framework v4 Conversation Bot sample for Teams.
 
 This bot has been created using [Bot Framework](https://dev.botframework.com). This sample shows
@@ -72,8 +72,10 @@ how to incorporate basic conversational flow into a Teams application. It also i
 
 ## Interaction with bot
 
+#### Me Action
 ![bot-conversations ](docs/UserSpecificView_Me.gif)
 
+#### AllUser Action
 ![bot-conversations ](docs/UserSpecificView_all.gif)
 
 ## Prerequisites
@@ -128,14 +130,14 @@ the Teams service needs to call into the bot.
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/chat/Meeting scope (Supported scopes)
 
-#### Basic Tests
+## Basic Tests
 * Tag the bot and send any message. The bot should respond with an adaptive card which should have options to try out the different cards.
 * `Me` card should automatically refresh for sender only.
 * `All Users` card should automatically refresh for all users in the chat. (as long as total number of users are <= 60)
 * `Manual refresh` action should update the user-specific view for the user.
 * `Update Base Card` action should update the message for all the users. The user should not have any option to refresh the message after this.
 
-#### Implementation:
+## Implementation:
 * `BotActivityHandler`: Has the logic to handle incoming bot messages (Invokes and user messages).
 * `CardFactory`: Has the logic to prepare different types of Adaptive Cards (using Template library).
 * `assets\templates\*`: contains all the adaptive cards definitions.
@@ -145,15 +147,22 @@ the Teams service needs to call into the bot.
 You can interact with this bot in Teams by sending it a message, or selecting a command from the command list. The bot will respond to the following strings.
 
 1. **Show Welcome**
+
   - **Result:** The bot will send the welcome card for you to interact with
   - **Valid Scopes:** personal, group chat, team chat
 
   - **Personal Scope Interactions:**
-![Serach-App ](docs/01_SearchApp.png)
+  
+  **Search Application:**
+  
+  ![Serach-App ](docs/01_SearchApp.png)
 
-![personal-AddBot ](docs/02_AddAppaspersonal.png)
+  **Add Application:**
+  
+  ![personal-AddBot ](docs/02_AddAppaspersonal.png)
 
-*** Flow with Me***
+  ****Me Flow****
+
  **Show Welcome command interaction:**
  
   ![personal-WelcomeCard-Interaction ](docs/03_defaultcard.png)
@@ -176,9 +185,9 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
  
  **Response Update Base Card Click:**
  
- ![personal-WelcomeCard-ResponseUpdatebaseCardClick](docs/12_responseBasecard)
+ ![personal-WelcomeCard-ResponseUpdatebaseCardClick](docs/12_responseBasecard.png)
  
-*** Flow with all Users***
+**** Flow with all Users****
 
  **Show Action command interaction with All Users:**
  
@@ -196,12 +205,14 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
  
  ![personal-WelcomeCard-allUpdatebaseCardClick](docs/all_08_UpdateBaseCard.png)
  
+ 
   - **Team Scope Interactions:**
   
   *** About UI***
-  ![Team-scope-app](docs/01_TeamScope.png)
   
-    *** Team Selection ***
+  ![Team-scope-app](docs/01_TeamScope.png)
+ 
+  *** Team Selection ***
 	
   ![Team-scope-app](docs/02_TeamScope_teamselection.png)
   
@@ -213,13 +224,14 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
   
   ![Team-scope-app](docs/04_TeamScope_command.png)
   
+  
   - **Chat Scope Interactions:**
   
   *** About UI***
   
   ![Chat-scope-app](docs/chatscope_01.png)
   
-    *** Chat Selection ***
+  *** Chat Selection ***
 	
   ![Chat-scope-app](docs/chatscope_02.png)
   
@@ -238,7 +250,7 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 
   ![Meeting-scope-app](docs/Meetingscop_01.png)
   
-    *** Meeting Selection ***
+  *** Meeting Selection ***
 	
   ![Meeting-scope-app](docs/Meetingscop_02.png)
   
@@ -250,7 +262,7 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
   
   ![Meeting-scope-app](docs/Meetingscop_04.png)
   
-#### FAQ
+## FAQ
 
 ##### How to implement user-specific views in a group of >60 users?
 If your scenario requires a user-specific view for all the users in a chat, we recommend you do the following:
