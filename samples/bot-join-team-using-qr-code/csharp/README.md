@@ -21,25 +21,9 @@ User can generate a new QR code (contains team id information) and then scan the
 
 `Currently, Microsoft Teams support for QR or barcode scanner capability is only supported for mobile clients`
 
-## Feature of sample.
+## Interaction with app.
 
  ![Card](JoinTeamByQR/Images/JoinTeamByQrCode.gif)
-
-- Type a message to get a card to generate the QR code.
-
- ![Card](JoinTeamByQR/Images/WelcomeMessage.png)
-
-- Select the team from dropdown list for which you want to generate the QR code and then click on 'Generate QR' button.
-
- ![QR Code](JoinTeamByQR/Images/TeamSelectionToGenerateQRCode.png)
-
-- Scan the generated QR code to join the team.
-
- ![Join Team](JoinTeamByQR/Images/GenerateQrCode.png)
-
-- After Scan the Qr Code Added user in team successfully.
-
- ![Join Team](JoinTeamByQR/Images/SuccessfullyAddedUser.png)
 
 ## Prerequisites
 
@@ -66,8 +50,10 @@ User can generate a new QR code (contains team id information) and then scan the
    ```bash
    # ngrok http -host-header=rewrite 3978
    ```
+   
+4. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
-4. Create a Azure Bot resource
+5. Create a Azure Bot resource
 
   a) In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?   view=azure-bot-service-4.0&tabs=userassigned%2Caadv2%2Ccsharp).
 
@@ -84,18 +70,18 @@ User can generate a new QR code (contains team id information) and then scan the
 
    ![Permissions](JoinTeamByQR/Images/Permission.png)
 
-5. Modify the `manifest.json` in the `/AppManifest` folder and replace the `<<Microsoft-App-Id>>` with the id from step 2.
+6. Modify the `manifest.json` in the `/AppManifest` folder and replace the `<<Microsoft-App-Id>>` with the id from step 2.
 
-6. Zip the contents of `AppManifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 
+7. Zip the contents of `AppManifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams as in step 
 
-7. Modify the `/appsettings.json` and fill in the following details:
+8. Modify the `/appsettings.json` and fill in the following details:
    - `{{ MicrosoftAppId }}` - Generated from Step 4.a is the application app id
    - `{{ MicrosoftAppPassword }}` - Generated from Step 4.a, also referred to as Client secret
    - `{{ ConnectionName }}` - Generated from Step 4.a, is the name that we provide while adding OAuth connection setting in Azure Bot resource.
     Please follow [Add authentication to bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2) to configure the connection.
    - `{{ ApplicationBaseUrl }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
 
-8. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+9. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
@@ -126,6 +112,25 @@ User can generate a new QR code (contains team id information) and then scan the
   - Navigate to `samples/bot-join-team-using-qr-code/csharp` folder
   - Select `JoinTeamByQR.csproj` file
   - Press `F5` to run the project
+  
+## Running the sample.
+
+- Type a message to get a card to generate the QR code.
+
+ ![Card](JoinTeamByQR/Images/WelcomeMessage.png)
+
+- Select the team from dropdown list for which you want to generate the QR code and then click on 'Generate QR' button.
+
+ ![QR Code](JoinTeamByQR/Images/TeamSelectionToGenerateQRCode.png)
+
+- Scan the generated QR code to join the team.
+
+ ![Join Team](JoinTeamByQR/Images/GenerateQrCode.png)
+
+- After Scan the Qr Code Added user in team successfully.
+
+ ![Join Team](JoinTeamByQR/Images/SuccessfullyAddedUser.png)
+
 
 ## Deploy the bot to Azure
 
