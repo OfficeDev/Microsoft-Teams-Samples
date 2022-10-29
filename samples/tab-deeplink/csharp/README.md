@@ -24,7 +24,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-csharp
 
  ##### Deeplink Tab Flow
 
- ![bot-conversations ](Images/Team_DeepLink)
+ ![bot-conversations ](images/Team_DeepLink)
 
 
  ## Prerequisites
@@ -96,7 +96,7 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 
 		**Adding bot UI:**
     
-		![personal-AddBot ](Images/personal-01_P_app.png)
+		![personal-AddBot ](images/personal-01_P_app.png)
 
 		**Added bot UI:**
     
