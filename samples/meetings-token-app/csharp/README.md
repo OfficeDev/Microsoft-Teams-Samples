@@ -87,7 +87,7 @@ The app uses the Teams extensibility features described on the following pages:
     - `"MicrosoftAppId"`: Application (client) ID of the bot's Azure AD application
     - `"MicrosoftAppPassword"`: client secret of the bot's Azure AD application
     - `"AzureAd"."TenantId"`: Tenant ID of the tenant where the app will be used. Note that the sample will only work in this tenant.
-    - `"AzureAd"."ApplicationId "`: Set to the same value as `MicrosoftAppId` above.
+    - `"AzureAd"."ApplicationIdURI"`: Configured in your AAD app registration and it's format is like: api://[WebAppDomain]/[MicrosoftAppId].
     - `"ContentBubbleUrl "`: Content bubble iframe url (default. `https://[WebAppDomain]/contentBubble.html`). Remember that `[WebAppDomain]` will be your ngrok domain, so the content bubble URL will be similar to `https://f631****.ngrok.io/contentBubble.html`.
 
 2. Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
