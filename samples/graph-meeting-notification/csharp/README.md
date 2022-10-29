@@ -20,7 +20,7 @@ This is a sample application which demonstrates use of online meeting subscripti
 ## Concepts introduced in this sample
 - After sucessfully installation of bot in meeting you will get a welcome card and the subscription will be created for meeting it is installed in.
 
-## Interaction with app.
+## Interaction with app
 
 ![Feature](MeetingNotification/Images/MeetingNotificaionAppModule.gif)
 
@@ -35,7 +35,7 @@ This is a sample application which demonstrates use of online meeting subscripti
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-## Setup.
+## Setup
 
 ### Register your application with Azure AD
 
@@ -103,7 +103,7 @@ To include resource data of online meeting, this Graph API require self-signed c
 
 Follow this documentation to get more information on custom apps and uploading them into Teams - [Manage custom apps](https://docs.microsoft.com/en-us/microsoftteams/custom-app-overview) and [Upload an app package](https://docs.microsoft.com/en-us/microsoftteams/upload-custom-apps)
 
-## Running the sample.
+## Running the sample
 ![Welcome Card](MeetingNotification/Images/WelcomeCard.png)
 
 - After that when the metting gets started or user joins the meeting, notifications will be sent in chat:
