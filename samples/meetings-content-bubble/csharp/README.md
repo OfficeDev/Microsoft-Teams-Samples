@@ -67,10 +67,10 @@ Message the Bot by @ mentioning to interact with the content bubble.
 
 ![Agenda card](ContentBubble/Images/AgendaCard.png)
 
-![Feedback submit(ContentBubble/Images/FeedbackSubmit.png)
+![Feedback submit](ContentBubble/Images/FeedbackSubmit.png)
 
 ![Feedback card](ContentBubble/Images/FeedbackCard.png)
 
-## Further Reading.
+## Further Reading
 
 [Meetings-content-bubble](https://techcommunity.microsoft.com/t5/microsoft-teams/introducing-chat-bubbles-in-microsoft-teams-meetings/m-p/2447271)
