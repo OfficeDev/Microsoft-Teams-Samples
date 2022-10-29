@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-details-tab-csharp
 
 This sample shows creating poll in meeting , where memebers of the meeting can answer poll question and can see the results.
 
-## Interaction with app.
+## Interaction with app
 
 ![image](DetailsTab/Images/DetailsTabModule.gif)
 
@@ -31,7 +31,7 @@ This sample shows creating poll in meeting , where memebers of the meeting can a
   ```
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## Setup.
+## Setup
 
 - Register your app with Microsoft identity platform via the Azure AD portal
   - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2).
@@ -63,7 +63,7 @@ This sample shows creating poll in meeting , where memebers of the meeting can a
 - Run your app, either from Visual Studio with ```F5``` or using ```dotnet run``` in the appropriate folder.
 - [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
-## Running the sample.
+## Running the sample
 
 Interact with Details Tab in Meeting.
 1. Install the Details Tab manifest in meeting chat.
@@ -78,7 +78,7 @@ Interact with Details Tab in Meeting.
 6.Response will be recorded and Bot will send an new adaptive card with response..
 ![image](DetailsTab/Images/resultmcq.png)
 
-## Further Reading.
+## Further Reading
 
 [Meetings-details-tab](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/build-tabs-for-meeting?tabs=desktop)
  

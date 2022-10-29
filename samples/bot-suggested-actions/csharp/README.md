@@ -23,44 +23,38 @@ This sample shows the feature where user can send suggested actions using bot.
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- Microsoft Teams is installed and you have an account
+- [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
+- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-  determine dotnet version
-  ```bash
-  dotnet --version
-  ```
-- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
-  
-  run ngrok locally
-  ```bash
-  ngrok http -host-header=localhost 3978
-  ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 ## Setup.
 
-1) Create a Bot Registration
+    
+1) Run ngrok - point to port 3978
+
+    ```bash
+    # ngrok http -host-header=rewrite 3978
+    ```
+
+2) Create a Bot Registration
    In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
    
 
-2) Clone the repository
+3) Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
    
-3) In a terminal, navigate to `samples/bot-suggested-actions/csharp`
+4) In a terminal, navigate to `samples/bot-suggested-actions/csharp`
 
     change into project folder
     ```bash
     cd # SuggestedActions
     ```
-    
-4) Run ngrok - point to port 3978
 
-    ```bash
-    # ngrok http -host-header=rewrite 3978
-    ```
  
 5) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
   - `{{Microsoft-App-Id}}` with Application id generated from Step 1

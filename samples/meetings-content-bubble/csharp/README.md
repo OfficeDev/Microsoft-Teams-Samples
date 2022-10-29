@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-content-bubble-csharp
 
 This sample illustrates how to implement [Content Bubble](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience.
 
-## Interaction with app.
+## Interaction with app
 
 ![Content Bubble](ContentBubble/Images/ContentBubbleModule.gif)
 
@@ -27,7 +27,7 @@ This sample illustrates how to implement [Content Bubble](https://docs.microsoft
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## Setup.
+## Setup
 
 1) Clone the repository
 
@@ -62,15 +62,15 @@ Message the Bot by @ mentioning to interact with the content bubble.
 1. Select any option and click on Push Agenda button
 1. You can submit your feedback on either Content Bubble/Adaptive card sent in chat.
 
-## Running the sample.
+## Running the sample
 ![Welcome](ContentBubble/Images/Welcome.png)
 
 ![Agenda card](ContentBubble/Images/AgendaCard.png)
 
-![Feedback submit(ContentBubble/Images/FeedbackSubmit.png)
+![Feedback submit](ContentBubble/Images/FeedbackSubmit.png)
 
 ![Feedback card](ContentBubble/Images/FeedbackCard.png)
 
-## Further Reading.
+## Further Reading
 
 [Meetings-content-bubble](https://techcommunity.microsoft.com/t5/microsoft-teams/introducing-chat-bubbles-in-microsoft-teams-meetings/m-p/2447271)
