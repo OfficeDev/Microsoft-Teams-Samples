@@ -50,33 +50,7 @@ This is a sample application which demonstrates how to create a webhook on [Azur
 ```
 2) Once started you should see ngrok URL like `https://xxxxx-xxx-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
 
-### 3. Setup for code
-- Clone the repository
-
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
-
-- Run the bot from a terminal or from Visual Studio:
-
-  A) From a terminal, navigate to `ReleaseManagement`
-
-  ```bash
-  # run the bot
-  dotnet run
-  ```
-
-  B) Or from Visual Studio
-
-  - Launch Visual Studio
-  - File -> Open -> Project/Solution
-  - Navigate to `samples/release-management/csharp` folder
-  - Select `ReleaseManagement.csproj` file
-  - Press `F5` to run the project
-
-- Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword MicrosoftAppTenantId generated in Step 1 (Setup for Bot). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-
-### 4. Register Azure AD application
+### 3. Register Azure AD application
 Register one Azure AD application in your tenant's directory: for the bot and tab app authentication.
 
 -  Log in to the Azure portal from your subscription, and go to the "App registrations" blade  [here](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps). Ensure that you use a tenant where admin consent for API permissions can be provided.
@@ -116,7 +90,7 @@ Click on Add Permissions to commit your changes.
 
 - Global Administrator can grant consent using following link:  [https://login.microsoftonline.com/common/adminconsent?client_id=](https://login.microsoftonline.com/common/adminconsent?client_id=)<%appId%> 
 
-### 5. Setup Azure DevOps service hook
+### 4. Setup Azure DevOps service hook
 - Follow this document- [Create Webhooks](https://docs.microsoft.com/en-us/azure/devops/service-hooks/services/webhooks?view=azure-devops) to service hook. 
 
 - Make sure to select trigger as *Work item created*
@@ -124,7 +98,7 @@ Click on Add Permissions to commit your changes.
 - Make sure to add URL as https://{baseUrl}/api/workItem. It will look somethihng as https://41ed-abcd-e125.ngrok.io/api/workItem. *Here baseUrl is referred to URL we get in step 2*.
 **NOTE: If you are not getting incoming request from Azure DevOps make sure that service webhook is in *Enabled* state.**
 
-### 6. Setup custom work item type
+### 5. Setup custom work item type
 - Follow the doc to [Add a custom field to an inherited process - Azure DevOps Services](https://docs.microsoft.com/en-us/azure/devops/organizations/settings/work/add-custom-field?view=azure-devops). 
 
 - Make sure to give name as *StakeholderTeam* and Type *Text (Single line)*
@@ -136,6 +110,32 @@ Click on Add Permissions to commit your changes.
 
 **NOTE:Make sure you create a new task, click save and verify the stakeholderTeam value**
 ![Execute Webhook](ReleaseManagement/Images/ExecuteWebhook.png)
+
+### 6. Setup for code
+- Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+- Run the bot from a terminal or from Visual Studio:
+
+  A) From a terminal, navigate to `ReleaseManagement`
+
+  ```bash
+  # run the bot
+  dotnet run
+  ```
+
+  B) Or from Visual Studio
+
+  - Launch Visual Studio
+  - File -> Open -> Project/Solution
+  - Navigate to `samples/release-management/csharp` folder
+  - Select `ReleaseManagement.csproj` file
+  - Press `F5` to run the project
+
+- Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword MicrosoftAppTenantId generated in Step 1 (Setup for Bot). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
 ### 7. Setup Manifest for Teams
 
@@ -171,7 +171,7 @@ Click on Add Permissions to commit your changes.
 
 ## Interacting with the bot.
 - Login into [Azure DevOps](https://dev.azure.com) and open the project where custom process was applied.
-- Create a new workitem -> Tasks, provide comma seprated email ids in *StakeHolderTeam* (NOTE: The email should belong to tenant where we register Application in step 4)
+- Create a new workitem -> Tasks, provide comma seprated email ids in *StakeHolderTeam* (NOTE: The email should belong to tenant where we register Application in step 4
 - Save
 - Bot will create the group chat with members you added and send the Task details.
 
