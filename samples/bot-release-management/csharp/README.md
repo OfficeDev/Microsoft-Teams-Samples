@@ -96,6 +96,7 @@ Click on Add Permissions to commit your changes.
 - Make sure to select trigger as *Work item created*
 
 - Make sure to add URL as https://{baseUrl}/api/workItem. It will look somethihng as https://41ed-abcd-e125.ngrok.io/api/workItem. *Here baseUrl is referred to URL we get in step 2*.
+
 **NOTE: If you are not getting incoming request from Azure DevOps make sure that service webhook is in *Enabled* state.**
 
 ### 5. Setup custom work item type
