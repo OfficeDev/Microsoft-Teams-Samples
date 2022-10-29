@@ -21,7 +21,7 @@ In this quickstart we'll walk-through creating a custom personal tab with C# and
 
 ![personaltab](Images/PersonalTabModule.gif)
 
-## Setup.
+## Setup
 
 For complete instructions on running this sample see:
 
@@ -35,7 +35,7 @@ For complete instructions on running this sample see:
 
 ![tab](Images/Redtab.png)
 
-## Fruther Reading.
+## Fruther Reading
 [Tab-personal](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/what-are-tabs)
 
 
