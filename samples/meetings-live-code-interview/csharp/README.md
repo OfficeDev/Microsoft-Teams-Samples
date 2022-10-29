@@ -41,7 +41,11 @@ Now any participant in meeting can write code for the question and same will be 
 
 ## Workflow
 
-```Teams User->>+Teams Client: Schedules a Teams Meeting with candidate
+```mermaid
+
+sequenceDiagram
+
+    Teams User->>+Teams Client: Schedules a Teams Meeting with candidate
 
     Teams Client->>+Live Coding App: Installs the App
 
@@ -59,9 +63,10 @@ Now any participant in meeting can write code for the question and same will be 
 
     Teams Client->>+Code Editor Stage: Tells the app which coding question to open
 
-    Code Editor Stage-->>-Live Coding App: Shares the question to share to stage in the meeting```
+    Code Editor Stage-->>-Live Coding App: Shares the question to share to stage in the meeting
 
-
+```
+    
 ## Setup
 
 1) Clone the repository
@@ -75,6 +80,7 @@ Now any participant in meeting can write code for the question and same will be 
     # change into project folder
     cd # MeetingLiveCoding
     ```
+
 3) Run ngrok - point to port 3001
 
     ```bash
