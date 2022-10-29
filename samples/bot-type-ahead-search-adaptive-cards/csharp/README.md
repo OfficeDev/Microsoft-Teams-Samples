@@ -28,12 +28,8 @@ This sample shows the feature of typeahead search (static and dynamic) control i
   ```bash
   dotnet --version
   ```
-- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
-  
-  run ngrok locally
-  ```bash
-  ngrok http -host-header=localhost 3978
-  ```
+- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)  
+ 
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 ## Setup.
@@ -45,20 +41,21 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 
 ### 2. Run your bot sample
 
-1. Clone the repository
-   ```bash
-   git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-   ```
-
-2. Open the code in Visual Studio
-   - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/bot-type-ahead-search-adaptive-cards/csharp/TypeaheadSearch.sln`
-
-3. Run ngrok - point to port 3978
+1. Run ngrok - point to port 3978
 
     ```bash
     # ngrok http -host-header=rewrite 3978
     ```
+
+2. Clone the repository
+   ```bash
+   git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+   ```
+
+3. Open the code in Visual Studio
+   - File -> Open -> Project/Solution
+   - Navigate to folder where repository is cloned then `samples/bot-type-ahead-search-adaptive-cards/csharp/TypeaheadSearch.sln`
+
 4. Open your Azure Bot settings on the Azure Portal and change the "Messaging endpoint" for the HTTPS URL from the ngrok with `/api/messages` appended. E. g. for ngrok forwarding URL `https://1234.ngrok.io` the "Messaging endpoint" would be `https://1234.ngrok.io/api/messages`
 
 5. Setup and run the bot from Visual Studio: 
