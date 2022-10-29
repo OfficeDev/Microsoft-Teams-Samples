@@ -10,7 +10,7 @@ languages:
 - javascript
 extensions:
  contentType: samples
- createdDate: "7-03-2022 00:15:13"
+ createdDate: "03/07/2022 00:15:13"
 urlFragment: officedev-microsoft-teams-samples-tab-staggered-permission-nodejs
 ---
 
@@ -18,36 +18,66 @@ urlFragment: officedev-microsoft-teams-samples-tab-staggered-permission-nodejs
 
 Using this nodejs sample, you can check how to get staggered graph api permissions
 
-## Key features
+## Interaction with app
 
-Tab 
-![Staggered Module](Images/StaggeredModule.gif)
-
-  - User basic
-
-![user info card](Images/UserInformationCard.png)
-
-  - User photo
-
-![User Photo](Images/user-photo.png)
-
-- User emails
-
-![User mails](Images/UserMails.png)
+![Tab Staggered PermissionGif](Images/TabStaggeredPermissionGif.gif)
 
 ## Prerequisites
 
-- Microsoft Teams is installed and you have an account (not a guest account)
--  [NodeJS](https://nodejs.org/en/)
+-  Microsoft Teams is installed and you have an account (not a guest account)
+-  To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher).
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-## To try this sample
+## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
 
-### Register your Teams Auth SSO with Azure AD
+### 1. Setup for Bot
+- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
+- To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
+Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
+
+### 2. Setup NGROK  
+1) Run ngrok - point to port 3978
+
+    ```bash
+    ngrok http -host-header=rewrite 3978
+    ```
+2) Once started you should see URL  `https://41ed-abcd-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
+
+### 3. Setup for code  
+1) Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+2) In the folder where repository is cloned navigate to `samples\tab-staggered-permission\nodejs`
+
+3) Install node modules
+
+   Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+
+    ```bash
+    npm install
+    ```
+
+4)  Modify the `.env` file in your project folder (or in Visual Studio Code) and fill in below details:
+   - `MicrosoftAppId` - Generated from Step 3 (Application (client) ID)is the application app id
+   - `MicrosoftAppPassword` - Generated from Step 14, also referred to as Client secret
+
+5) Run your app
+
+    ```bash
+    npm start
+    ```
+
+### 4. Register your Teams Auth SSO with Azure AD
 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
@@ -89,41 +119,39 @@ Tab
     ✔ Access Token  
 14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json. 
 
-### Run your bot sample
-1) Clone the repository
+### 5. Setup Manifest for Teams
 
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
-
-2) In a terminal, navigate to `samples/tab-staggered-permission/nodejs`
-
-3) Install node modules
-
-   Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
-
-    ```bash
-    npm install
-    ```
-4) Run ngrok - point to port 3978
-
-    ```bash
-    ngrok http -host-header=rewrite 3978
-    ```
-5)  Modify the `.env` file in your project folder (or in Visual Studio Code) and fill in below details:
-   - `MicrosoftAppId` - Generated from Step 3 (Application (client) ID)is the application app id
-   - `MicrosoftAppPassword` - Generated from Step 14, also referred to as Client secret
-
-6) Run your app
-
-    ```bash
-    npm start
-    ```
-- **Manually update the manifest.json**
+- **This step is specific to Teams.**
     Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
    - `{{Microsoft-App-Id}}` with Application id generated from Step 3
    - `{Base_URL}}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
    - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+
+## Running the sample
+
+**Install App:**
+
+![user info card](Images/InstallApp.png)
+
+**Tab:** 
+
+![user info card](Images/UserInformationCard.png)
+
+**Consent popup for staggered permission:**
+ 
+![consent popup](Images/ConsentPopup.png)
+
+**User emails:**
+
+![User mails](Images/UserMails.png)
+
+**Get photo:**
+
+![User Information Card GetPhoto](Images/UserInformationCardGetPhoto.png)
+
+**Get photo and User emails:**
+
+![User Information Card Get PhotoAndUserMail](Images/UserInformationCardGetPhotoAndUserMail.png)
 
 ## Deploy the bot to Azure
 
@@ -132,4 +160,19 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 ## Further reading
 
 - [Authentication basics](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/authentication/authentication)
-
+- [List Meeting Attendance Reports](https://docs.microsoft.com/en-us/graph/api/meetingattendancereport-list?view=graph-rest-1.0&tabs=http)
+- [List Attendance Records](https://docs.microsoft.com/en-us/graph/api/attendancerecord-list?view=graph-rest-1.0&tabs=http)
+- [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Azure Portal](https://portal.azure.com)
+- [Add Authentication to Your Bot Via Azure Bot Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp)
+- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [.NET Core CLI tools](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x)
+- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
+- [Azure Portal](https://portal.azure.com)
+- [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
+- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
+- [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
