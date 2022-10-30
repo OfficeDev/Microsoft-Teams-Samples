@@ -118,7 +118,7 @@ You can interact with Teams Tab by subscribing the teams/channel for notificatio
 
 1. **Show Welcome - Channel**
 - Welcome Message when Channel selected for subscription.
-![Channel-Welcome](ChangeNotification/Images/Channel-Welcome.png)
+![Channel-Welcome](ChangeNotification/Images/Channel-Welcome.PNG)
 
 2. **Channel Notifications**
 - Channel Created Update Delete Message
@@ -126,7 +126,7 @@ You can interact with Teams Tab by subscribing the teams/channel for notificatio
 
 3. **Show Welcome - Team**
 - Welcome Message when Team selected for subscription.
-![Team-Welcome](ChangeNotification/Images/Team-Welcome.png)
+![Team-Welcome](ChangeNotification/Images/Team-Welcome.PNG)
 
 4. **Team Notifications**
 - Team Update Edit Message
