@@ -98,7 +98,7 @@ This sample illustrates a common scenario where a user shares a link to a resour
   * `BaseUrl` - ngrok url saved earlier.
   * `TenantId` - Tenant ID where you wll run the Teams application.
   * `CatalogAppId` - App ID in organization's app store saved earlier.
-  * `GraphApiBeta.Scopes`  add the following graph permission(TeamsAppInstallation.ReadWriteSelfForChat,TeamsTab.ReadWriteForChat,Chat.ReadBasic,OnlineMeetings.ReadWrite)
+  * `GraphApiBeta.Scopes` add the following graph permission(`TeamsAppInstallation.ReadWriteSelfForChat TeamsTab.ReadWriteForChat Chat.ReadBasic OnlineMeetings.ReadWrite`)
 * Update the following in `.env` under ClientApp.
   * `REACT_APP_BASE_URL` - ngrok url saved earlier.
   * `REACT_APP_AZURE_APP_REGISTRATION_ID` - App ID saved earlier.
