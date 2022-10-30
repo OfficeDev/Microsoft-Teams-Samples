@@ -48,6 +48,7 @@ urlFragment: officedev-microsoft-teams-samples-msgext-search-quickstart-js
     ngrok http -host-header=rewrite 3978
     ```
 4. Setup for code
+
   - Clone the repository
 
     ```bash
