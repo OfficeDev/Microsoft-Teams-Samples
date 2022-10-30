@@ -20,7 +20,7 @@ namespace Microsoft.BotBuilderSamples.Bots
             _configuration = configuration;
         }
 
-        public static string channelID = "19:787993ede7dd48718a049acd303b05a7@thread.tacv2";
+        public static string channelID = "<AddYourTeamsChannelId>";
         public string teamsUrl = "https://teams.microsoft.com/l/entity/";
         public string tabUrlTask1;
         public string tabUrlTask2;
