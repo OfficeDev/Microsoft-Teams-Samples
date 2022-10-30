@@ -84,6 +84,11 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
 		<add key="MicrosoftAppPassword" value="aaaa22229999dddd0000999" />
 		<add key="BaseUri" value="https://#####abc.ngrok.io" />
 		
+6. To test facebook auth flow [create a facebookapp](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-facebook?view=azure-bot-service-4.0) and get client id and secret for facebook app.
+    Now go to your bot channel registartion -> configuration -> Add OAuth connection string
+   - Provide connection Name : for eg `FBConnectionName`
+   - Provide FBProfileUrl: for eg `FBProfileUrl`
+   
 6. Run the bot from a terminal or from Visual Studio:
 
     A) From a terminal, navigate to `samples/app-checkin-location/csharp`
