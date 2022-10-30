@@ -64,9 +64,8 @@ Two samples to highlight solutions to two challenges with building proactive mes
 
 5. Modify the `/coordinate-logger/appsettings.local.json` file and fill in the `{{ Bot Id }}` and `{{ Bot Password }}` with the id's received while doing AAD app registration in previous steps.
 
-## Running the samples
 
-### Coordinate Logger
+**Coordinate Logger**
 ***Note this is a noisy application, it is recommended you not run this in shared teams where you would disturb other users!***
 
 1. Start the application
@@ -99,7 +98,7 @@ Two samples to highlight solutions to two challenges with building proactive mes
     The app will send a message to each channel in the Team & log the coordinates
     for each new thread to the console window.(refer above image)
 
-## Proactive CMD
+**Proactive CMD**
 
 1. Send a message to a user
     Using the values from the Coordinate Logger for a User's conversation coordinates & Bot registration fill in the parameters to the following command.
@@ -121,24 +120,19 @@ Two samples to highlight solutions to two challenges with building proactive mes
     
 ## Running the sample.
 
-## User Conversation log info
-
+**User Conversation log info**
 ![Conversation details](coordinate-logger/Images/ConversationDetails.png)
 
-## Channel Conversation log info
-
+**Channel Conversation log info**
 ![Conversation details](coordinate-logger/Images/ConversationDetails_Channel.png)
 
-## Proactive message
-
+**Proactive message**
 ![Proactive message](coordinate-logger/Images/ProactiveMessage.png)
 
-## Team name in which message will post
-
+**Team name in which message will post**
 ![Proactive message](coordinate-logger/Images/TeamInfo.png)
 
-## Meesages in other Team 
-
+**Meesages in other Team **
 ![Proactive message](coordinate-logger/Images/Teammessage.png)
 
 ## Key concepts
