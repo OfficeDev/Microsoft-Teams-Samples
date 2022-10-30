@@ -16,10 +16,9 @@ urlFragment: officedev-microsoft-teams-samples-bot-people-picker-adaptive-card-c
 
 This sample shows the feature of people picker on Adaptive Cards.
 
-## Interaction with app.
+## Interaction with app
 
 ![people picker card ](PeoplePicker/Images/PepolePickerAdaptiveCard.gif)
-
  
 ## Prerequisites
 
@@ -30,50 +29,53 @@ This sample shows the feature of people picker on Adaptive Cards.
   dotnet --version
   ```
 - [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
-  
-  run ngrok locally
-  ```bash
-  ngrok http -host-header=localhost 3978
-  ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 ## Setup.
 
-### 1. App Registration
+1. App Registration
 Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
-### 2. Setup for Bot
+2. Setup for Bot
 In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-1. Clone the repository
-   ```bash
-   git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-   ```
+2) Setup NGROK
+- Run ngrok - point to port 3978
 
-2. Open the code in Visual Studio
-   - File -> Open -> Project/Solution
-   - Navigate to folder where repository is cloned then `samples/bot-people-picker-adaptive-card/csharp/PeoplePicker.sln`
-    
+```bash
+# ngrok http -host-header=rewrite 3978
+```
 
- 
-3. Setup and run the bot from Visual Studio: 
-   Modify the `appsettings.json` and fill in the following details:
+3) Setup for code
+
+- Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+- Modify the `/appsettings.json` and fill in the following details:
+
    - `MicrosoftAppId` - Generated from Step 1 (Application (client) ID)is the application app id
    - `MicrosoftAppPassword` - Generated from Step 1, also referred to as Client secret
    - Press `F5` to run the project
-	 
-4. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
-   - `{{Microsoft-App-Id}}` with Application id generated from Step 3
 
-5. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 
+- Open the code in Visual Studio
+   - File -> Open -> Project/Solution
+   - Navigate to folder where repository is cloned then `samples/bot-people-picker-adaptive-card/csharp/PeoplePicker.sln`
+ 
+4) Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)   
+    - **Zip** up the contents of the `AppPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
-6. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
-   - Go to Microsoft Teams and then go to side panel, select Apps
-   - Choose Upload a custom App
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
-   - Select Add in the pop-up dialog box. Your app is uploaded to Teams. 
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
    
 ## Running the sample.
 
