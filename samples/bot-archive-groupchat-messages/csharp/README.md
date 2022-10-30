@@ -59,14 +59,14 @@ This feature shown in this sample is currently available in Public Developer Pre
     - **Client secret:** Enter the Application (client) secret.
     -  Provide **Scopes** like "User.Read Chat.ReadWrite ChatMessage.Read"
 
-  ### Go to the Azure portal where app registration is created and click on API Permissions.
+  ### Go to the Azure portal where app registration is created and click on API Permissions
  
     - Add this Delegated permission to app registration
     - Chat.ReadWrite
     - ChatMessage.Read
     ![Permissions](FetchGroupChatMessages/Images/permissions.png)
 
-  ### Under left menu, select  **Authentication**  under  **Manage**  section.
+  ### Under left menu, select  **Authentication**  under  **Manage**  section
     - Select 'Accounts in any organizational directory (Any Azure AD directory - Multitenant)' under Supported account types and click "+Add a platform".
     -  On the flyout menu, Select "Web"    
     -  Add  `https://token.botframework.com/.auth/web/redirect`  under Redirect URLs and click Configure button.
