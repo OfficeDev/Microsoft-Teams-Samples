@@ -67,6 +67,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-csharp
    - Navigate to `samples/Tab-deeplink/csharp` folder
    - Select `DeeplinkBot.csproj` or `DeeplinkBot.sln`file
 
+1) Update channelID placeholer `<AddYourTeamsChannelId>` value in your DeepLinkBot.cs file with your particular channel id from any Team in Teams. (You can get it manually by clicking on 3 dots in any team's channel and fetch it's link and extract the channel id ) like `General` channel)
 1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, BaseURL ,
 	ChannelEntityId is a unique identifier ,TabEntityId as EntityId from Manifest file ,MannifestAppId as manifest ID from manifest file,
 	generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" 
