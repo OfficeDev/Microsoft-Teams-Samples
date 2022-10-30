@@ -26,7 +26,7 @@
 	"connectors": [
 		{
 			"connectorId": "<<CONNECTOR_ID>>",
-			"configurationUrl": "https://<<NGROK>>/connectorconfig",
+			"configurationUrl": "https://<<AppDomain>>/connectorconfig",
 			"scopes": [
 				"team"
 			]
