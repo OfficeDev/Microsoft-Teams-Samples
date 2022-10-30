@@ -113,8 +113,6 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
   - `{{ YOUR-TENANT-ID}}` - Generated from Step 1, also referred to as Directory (tenant) ID
   - `{{ ApplicationIdURI}}` - Generated from Step 1 , eg.(api://<<BASE-URL-DOMAIN>>/<<YOUR-APP-ID>>)
 
-- Run the bot from from Visual Studio:  
-
 - If you are using Visual Studio
   - Launch Visual Studio
   - File -> Open -> Project/Solution
