@@ -167,7 +167,7 @@ This sample illustrates a common scenario where a user shares a link to a resour
 * Follow steps to add OAuth connection setting on [this page](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2)
 
   * Make sure to copy and save OAuth connection name.
-  * For `Scopes`, enter all the delegated graph permissions configured in the app(TeamsAppInstallation.ReadWriteSelfForChat,TeamsTab.ReadWriteForChat,Chat.ReadBasic,OnlineMeetings.ReadWrite).
+  * For `Scopes`, enter all the delegated graph permissions configured in the app(`TeamsAppInstallation.ReadWriteSelfForChat TeamsTab.ReadWriteForChat Chat.ReadBasic OnlineMeetings.ReadWrite`).
 * Update Bot messaging endpoint to ngrok url with messaging endpoint. (ex. `https://<randomsubdomain>.ngrok.io/api/messages`
 
 **Add OAuth connection:**
