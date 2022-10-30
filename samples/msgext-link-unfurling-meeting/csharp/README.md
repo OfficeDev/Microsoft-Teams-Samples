@@ -126,17 +126,19 @@ This sample illustrates a common scenario where a user shares a link to a resour
 6. Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
 7. Set **Who can consent?** to `Admins and users`
 8. Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
-    * **Admin consent title:** Teams can access the user’s profile.
+    * **Admin consent display name:** Teams can access the user’s profile.
     * **Admin consent description**: Allows Teams to call the app’s web APIs as the current user.
-    * **User consent title**: Teams can access the user profile and make requests on the user's behalf.
+    * **User consent display name**: Teams can access the user profile and make requests on the user's behalf.
     * **User consent description:** Enable Teams to call this app’s APIs with the same rights as the user.
 9. Ensure that **State** is set to **Enabled**
 10. Select **Add scope**
     * The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end:
         * `api://[ngrokDomain].ngrok.io/00000000-0000-0000-0000-000000000000/access_as_user.
+
 11. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
     * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
     * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
+
 12. Navigate to **API Permissions**, and make sure to add the follow permissions:
 -   Select Add a permission
 -   Select Microsoft Graph -\> Delegated permissions.
@@ -163,6 +165,7 @@ This sample illustrates a common scenario where a user shares a link to a resour
 
 ### 7. Add authentication to your Teams bot
 * Follow steps to add OAuth connection setting on [this page](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2)
+
   * Make sure to copy and save OAuth connection name.
   * For `Scopes`, enter all the delegated graph permissions configured in the app(TeamsAppInstallation.ReadWriteSelfForChat,TeamsTab.ReadWriteForChat,Chat.ReadBasic,OnlineMeetings.ReadWrite).
 * Update Bot messaging endpoint to ngrok url with messaging endpoint. (ex. `https://<randomsubdomain>.ngrok.io/api/messages`
@@ -175,8 +178,10 @@ This sample illustrates a common scenario where a user shares a link to a resour
 
 - **This step is specific to Teams.**
     - **Edit** the `manifest.json` contained in the  `samples\msgext-link-unfurling-meeting\csharp\Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Your Microsoft App Id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+
     - **Edit** the `manifest.json` for `websiteUrl`,`privacyUrl`,`termsOfUseUrl` inside `DeveloperTabs` . Replace `<yourNgrok.ngrok.io>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+
     - **Edit** the `manifest.json` for  `showLoadingIndicator` Replace `false`.
     - **Zip** up the contents of the `samples\msgext-link-unfurling-meeting\csharp\Manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
