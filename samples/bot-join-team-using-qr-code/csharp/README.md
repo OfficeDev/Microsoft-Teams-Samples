@@ -21,7 +21,7 @@ User can generate a new QR code (contains team id information) and then scan the
 
 `Currently, Microsoft Teams support for QR or barcode scanner capability is only supported for mobile clients`
 
-## Interaction with app.
+## Interaction with app
 
  ![Card](JoinTeamByQR/Images/JoinTeamByQrCode.gif)
 
@@ -46,7 +46,7 @@ User can generate a new QR code (contains team id information) and then scan the
        * User.Read (enabled by default)
        * Directory.AccessAsUser.All
        * TeamMember.ReadWrite.All
-   - Click on Add permissions.
+       * Click on Add permissions.
 
    ![Permissions](JoinTeamByQR/Images/Permission.png)
 
@@ -57,6 +57,9 @@ User can generate a new QR code (contains team id information) and then scan the
 	- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
     > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
+    
+  -In the Azure Portal, navigate back to the Azure Bot resource created in Step 2.
+  -Switch to the "Settings" blade and click "Add Setting" under the OAuth Connection Settings section
   - Enter a name for your new Connection setting.  
     - In the Service Provider dropdown, select Azure Active Directory V2
     - Enter in the client id and client secret obtained in step 1 and 1
