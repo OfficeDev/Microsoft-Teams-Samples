@@ -131,6 +131,7 @@
   "validDomains": [
     "*.githubusercontent.com",
     "*.ngrok.io",
-    "*.botframework.com"
+    "*.botframework.com",
+    "<<DOMAIN-NAME>>"
   ]
 }
