@@ -61,7 +61,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 
   ### Go to the Azure portal where app registration is created and click on API Permissions.
  
-    a. Add this Delegated permission to app registration
+    - Add this Delegated permission to app registration
     - Chat.ReadWrite
     - ChatMessage.Read
     ![Permissions](FetchGroupChatMessages/Images/permissions.png)
