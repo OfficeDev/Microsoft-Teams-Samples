@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-app-sso-nodejs
 ---
 # App SSO Node
 
-This app talks about the Teams Tab, Bot, ME - search, action, linkunfurl SSO with Node JS
+This app talks about the Teams Tab, Bot, Messaging Extension - search, action, linkunfurl SSO with Node JS
 
 __Tab SSO__
 This sample shows how to implement Azure AD single sign-on support for tabs. It will
@@ -34,7 +34,7 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
-## Interaction with bot
+## Interaction with app
 
 ![Preview Image](Images/preview_APP_SSO_Node.gif)
 
@@ -67,11 +67,11 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md).
 
 > **NOTE:**
-Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
-    - Use the current `https` URL you were given by running ngrok. Append with the path `/api/messages` used by this sample
+Create [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
+    - Use the current `https` URL you were given by running ngrok. Append with the path `/api/messages` and update messaging endpoint in your Azure bot.
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
-    >**Important**: As we are building app with Bot & Tab in [Step 1.3](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md#13-expose-api-endpoint) change the `api://botid-{YourBotId` to  `api://fully-qualified-domain-name.com/botid-{YourBotId}`
+    >**Important**: As we are building app with Bot & Tab in [Step 1](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md#13-expose-api-endpoint) change the `api://botid-{YourBotId` to  `api://fully-qualified-domain-name.com/botid-{YourBotId}`
     >
     >**Sample Application Id URI:** `api://43dfa1bc0d1e.ngrok.io/botid-eddbe35e-4878-99d2-.......946c4aac7`
 
@@ -94,9 +94,8 @@ Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/az
     ```
 
 
-1. Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id), `MicrosoftAppPassword` (App Password) and `connectionName` (OAuth Connection Name) from the Bot Framework registration. 
+1. Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id), `MicrosoftAppPassword` (App Password) and `connectionName` (OAuth Connection Name) from the Azure Bot registration. 
     > NOTE: the App Password is referred to as the `client secret` in the azure portal and you can always create a new client secret anytime.
-
 
 1. Install modules & Run the `NodeJS` Server 
     - Server will run on PORT:  `4001`
@@ -124,13 +123,13 @@ Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/az
         ![image](https://user-images.githubusercontent.com/85108465/122787796-502d2380-d2d3-11eb-832f-b50d317a4869.png)
 
 1. __*Teams manifest changes.*__
-    - **Edit** the `manifest.json` contained in the  `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) also update the `<<DOMAIN-NAME>>` with the ngrok URL
+    - **Edit** the `manifest.json` contained in the  `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) also update the `<<DOMAIN-NAME>>` with the ngrok URL domain like `xxx111.ngrok.io` excluding http/https.
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
+> Note: This `manifest.json` specified that the bot will be installed in a "personal" scope only. Please refer to Teams documentation for more details.
 
 ## Running the sample
-> Note: This `manifest.json` specified that the bot will be installed in a "personal" scope only. Please refer to Teams documentation for more details.
 
 You can interact with this bot by sending it a message. The bot will respond by requesting you to login to AAD, then making a call to the Graph API on your behalf and returning the results.
 - Install App
@@ -169,7 +168,6 @@ __*or*__
 **Paste** https://profile.botframework.com on the compose box
 
 ![image](Images/MECompose.png)
-
 
 > NOTE: If `SSO` couldn't be performed then it will fallback to normal Authentication method and you will get a default `Sign In` action
 
