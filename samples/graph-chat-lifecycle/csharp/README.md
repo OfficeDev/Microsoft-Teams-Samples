@@ -145,12 +145,10 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
   ![group chat created](ChatLifecycle/Images/groupchatbuttonclick.png) 
 
 3. created group chat Details.
-
-   ![group chat Details](ChatLifecycle/Images/groupchatcreated.png) 
+![group chat Details](ChatLifecycle/Images/groupchatcreated.png) 
 
 4. Successfully Group chat created.
-
-   ![chat life cycle](ChatLifecycle/Images/createdgroupchat.png)
+![chat life cycle](ChatLifecycle/Images/createdgroupchat.png)
    
 ## Further Reading
 [Graph-Chat-Lifecycle](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)
