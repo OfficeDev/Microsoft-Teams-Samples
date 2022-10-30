@@ -103,16 +103,16 @@ The sample shows a simple implementation of a connector registration implementat
 **Configured**
 ![Configured](TeamsToDoAppConnector/Images/7.connector_charp_configured.png)
 
-**Task manager portal**
+**Connector added successfully in Team's channel**
 ![Task manager portal](TeamsToDoAppConnector/Images/8.welcome_message_on_conversation.png)
 
-**Create new task**
+**Task manager portal** => **Create new task**
 ![New Task Creation](TeamsToDoAppConnector/Images/9.creating_new_task.png)
 
-**Task Details**
+**Task manager portal** => **Task Details**
 ![Task Details](TeamsToDoAppConnector/Images/10.after_creation_task_details.png)
 
-**Task List**
+**Task manager portal** => **Task List**
 ![Task List](TeamsToDoAppConnector/Images/11.task_list.png)
 
 **Notification Of Task**
