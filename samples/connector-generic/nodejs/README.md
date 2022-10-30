@@ -45,7 +45,6 @@ To complete this tutorial, you need the following tools. If you don't already ha
 
 ### Configure your own connector
 
-1. [Register a new connector](https://docs.microsoft.com/microsoftteams/platform/webhooks-and-connectors/how-to/connectors-creating#adding-a-connector-to-your-teams-app)
    ![connector_setup](Images/Connector_Setup/Connector_Setup.gif) 
 
    1. Open [Connector Developer Portal](https://aka.ms/connectorsdashboard) and select New Connector.
