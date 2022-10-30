@@ -55,7 +55,7 @@ b) Navigate to **API Permissions**, and make sure to add the follow permissions:
 
    ![Install App](Images/Permission.png)
 
-**Run your bot sample**
+**Code setup**
 1) Clone the repository
 
     ```bash
@@ -88,7 +88,7 @@ b) Navigate to **API Permissions**, and make sure to add the follow permissions:
     npm start
     ```
 
-- **Manually update the manifest.json**
+**Manually update the manifest.json**
     - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in previous step while doing AAD app registration and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - Also, update {{domain-name}} in your manifest `validDomains` section with your app domain like ngrok domain `1234.ngrok.io` excluding http/https.
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
