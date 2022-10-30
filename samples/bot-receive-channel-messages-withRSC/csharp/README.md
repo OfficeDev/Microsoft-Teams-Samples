@@ -77,7 +77,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 5. This step is specific to Teams.
     - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) also update the `<<DOMAIN-NAME>>` with the ngrok URL`
-    - **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://botid-{{MicrosoftAppId}}"` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `"api://botid-{{MicrosoftAppId}}"`.
+    - **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://botid-{{MicrosoftAppId}}"` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your resource will be `"api://botid-{{MicrosoftAppId}}"`.
     
     - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip`
     - **Sideload** in a team to test
