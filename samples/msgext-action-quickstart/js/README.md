@@ -40,7 +40,6 @@ urlFragment: officedev-microsoft-teams-samples-msgext-action-quickstart-js
 	- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
     > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
-**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
 
 3. Setup NGROK
   - Run ngrok - point to port 3978
@@ -73,7 +72,7 @@ urlFragment: officedev-microsoft-teams-samples-msgext-action-quickstart-js
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
-## Running the sample.
+## Running the sample
 
 ![action command compose](Images/ActionCommandParameter.PNG)
 
