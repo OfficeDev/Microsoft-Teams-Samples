@@ -43,6 +43,10 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 ## Prerequisites
 
+- Microsoft Teams is installed and you have an account
+- [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
+- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- 
 1. A global administrator account for an Office 365 tenant. Testing in a production tenant is not recommended! You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program) (not a guest account).
 
 
@@ -50,13 +54,6 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
 > NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
-
-3. Required Permissions
-        * Make sure you have the following Graph permissions enabled: `email`, `offline_access`, `openid`, `profile`, and `User.Read` (default).
-        * For permissions `Manage > API Permissions`
-        * Our SSO flow will give you access to the first 4 permissions, and we will have to exchange the token server-side to get an elevated token for the `profile` permission (for example, if we want access to the user's profile photo).
-        
-![image](https://user-images.githubusercontent.com/85108465/121638666-f80f4980-caa8-11eb-9b75-09b0e86c6d6a.png)
 
 ## Setup
 
@@ -75,29 +72,36 @@ Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/az
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
 
-3. Clone the repository
+3. Required Permissions
+        * Make sure you have the following Graph permissions enabled: `email`, `offline_access`, `openid`, `profile`, and `User.Read` (default).
+        * For permissions `Manage > API Permissions`
+        * Our SSO flow will give you access to the first 4 permissions, and we will have to exchange the token server-side to get an elevated token for the `profile` permission (for example, if we want access to the user's profile photo).
+        
+![image](https://user-images.githubusercontent.com/85108465/121638666-f80f4980-caa8-11eb-9b75-09b0e86c6d6a.png)
+
+4. Clone the repository
    ```bash
     git clone https://github.com/OfficeDev/microsoft-teams-samples.git
     ```
     
-4. Run the bot from a terminal or from Visual Studio:
+5. Run the bot from a terminal or from Visual Studio:
     - Launch Visual Studio
     - File -> Open -> Project/Solution  
     - Navigate to `samples/app-sso/csharp` folder
     - Select `App SSO Sample.sln` file
     - Press `F5` to run the project
 
-5. Update the `appsettings.json` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id), `MicrosoftAppPassword` (App Password) and `connectionName` (OAuth Connection Name) and SiteUrl eg.(123.Ngrok.io),TenantId (We can get from Azure app registration),ClientId (Is same appid),AppSecret (App Password) and ApplicationIdURI (api://botid-xxxxxxxxxxxxxxxxxxxxx) from the Bot Framework registration. 
+6. Update the `appsettings.json` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id), `MicrosoftAppPassword` (App Password) and `connectionName` (OAuth Connection Name) and SiteUrl eg.(123.Ngrok.io),TenantId (We can get from Azure app registration),ClientId (Is same appid),AppSecret (App Password) and ApplicationIdURI (api://botid-xxxxxxxxxxxxxxxxxxxxx) from the Bot Framework registration. 
 > NOTE: the App Password is referred to as the `client secret` in the azure portal and you can always create a new client secret anytime.
 
-6. *This step is specific to Teams.*__
+7. *This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     
 
-## Running the sample.
+## Running the sample
 
 > Note: This `manifest.json` specified that the bot will be installed in a "personal" scope only. Please refer to Teams documentation for more details.
 
