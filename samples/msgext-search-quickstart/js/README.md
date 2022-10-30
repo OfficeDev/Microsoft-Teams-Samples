@@ -33,11 +33,11 @@ urlFragment: officedev-microsoft-teams-samples-msgext-search-quickstart-js
 
   1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   
-   - Select **New Registration** and on the *register an application page*, set following values:
-    * Set **name** to your app name.
-    * Choose the **supported account types** (any account type will work)
-    * Leave **Redirect URI** empty.
-    * Choose **Register**.
+   - Select **New Registration** and on the *register an application page*, set following values
+    - Set **name** to your app name.
+    - Choose the **supported account types** (any account type will work)
+    - Leave **Redirect URI** empty.
+    - Choose **Register**.
     
   2. Azure Bot [Azure Bot] (https://learn.microsoft.com/en-us/azure/bot-service/abs-quickstart?view=azure-bot-service-4.0&tabs=userassigned)
 
