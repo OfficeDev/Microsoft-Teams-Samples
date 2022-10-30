@@ -66,6 +66,7 @@ Two samples to highlight solutions to two challenges with building proactive mes
 
 
 **Coordinate Logger**
+
 ***Note this is a noisy application, it is recommended you not run this in shared teams where you would disturb other users!***
 
 1. Start the application
