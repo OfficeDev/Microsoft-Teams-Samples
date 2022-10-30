@@ -14,11 +14,11 @@ urlFragment: officedev-microsoft-teams-samples-connector-generic-nodejs
 
 ---
 
-# Sample Connector 
+#Generic Connector 
 
 This contains the source for a generic connector that's easy to customize for any system which supports webhooks. 
 
-- **Interaction with bot**
+**Interaction with bot**
 ![connector_generic](Images/connector_generic.gif) 
  
 ## Prerequisites
@@ -41,9 +41,9 @@ To complete this tutorial, you need the following tools. If you don't already ha
       ```bash
        ngrok http -host-header=rewrite 3978
        ```
-   4. Make note of the https:// Forwarding URL. This URL will be your [BASE_URI] referenced below.
+   4. Make note of the https:// Forwarding URL. This URL will be your [BASE_URI] like `https://1234.ngrok.io` which will be used in later steps.
 
-### Configure your own connector
+**Configure your own connector**
 
    ![connector_setup](Images/Connector_Setup/Connector_Setup.gif) 
 
@@ -57,6 +57,7 @@ To complete this tutorial, you need the following tools. If you don't already ha
    1. For Valid domains, make enter your domain's http or https URL, e.g. XXXXXXXX.ngrok.io.
    1. Click on Save. After the save completes, you will see your connector ID in address bar.
 1. In the `~/views/connectorconfig.jade` file line 27 and replace `ngrokURL` to the ngrok https forwarding url from the above.
+
    ![connector_setup](Images/Connector_Setup/5.view_update.png)
 
 1. Install all the dependencies by running `npm install` in root directory.
@@ -70,33 +71,43 @@ To complete this tutorial, you need the following tools. If you don't already ha
    node server.js
    ```
 
-7) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `app manifest` folder to replace your Microsoft Replace `ConnectorId` field in `~/app manifest/manifest.json` file with your newly registered
-    - **Edit** the `manifest.json` for `<<CONNECTOR_ID>>` with the registered connector id and `<<AppDomain>>` . E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your app domain-name will be `1234.ngrok.io`.
-    - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+9) __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the  `app manifest` folder to replace your Microsoft Replace `<<CONNECTOR_ID>>` field in `~/app manifest/manifest.json` file with your newly registered
+    - **Edit** the `manifest.json` and update `<<AppDomain>>`
+      Example. if you are using ngrok it would be `https://1234.ngrok.io` then your app domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `app manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes).
    
 
 ## Running the sample
 
-- **Setup your App in Teams**.
+**Setup your App in Teams**
+
 ![setup](Images/1.Setup.png)
 
 **App list to connect for notifications**
+
 Select App from the list which you want to connect for notifications.
+
 ![setup](Images/3.connectors_list.png)
 
 **Select App to get notifications**
+
 Configure your selected application.
+
 ![setup](Images/8.connect_bing_news.png)
 
 **Selected App configuration**
+
 Give some digest name and select topics to get connect. 
+
 ![Configure](Images/9.bing_news_configuration.png)
 
 **App is now configured for notification**
-you will be get notify of that app which is connected with channel. 
+
+you will be get notify of that app which is connected with channel.
+
 ![Connected](Images/10.bing_news_connected.png)
 
 
