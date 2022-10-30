@@ -38,11 +38,9 @@ Two samples to highlight solutions to two challenges with building proactive mes
 | `README.md`          | This README file.                                                           |
 | `LICENSE`            | The license for the sample. 
 
-## Interact with app.
+## Interact with app
 
  ![Broadcast from user](coordinate-logger/Images/ProactivemessageGIF.gif)
-                                                |
-
 
 ## Prerequisites
 - Microsoft Teams account
@@ -55,16 +53,16 @@ Two samples to highlight solutions to two challenges with building proactive mes
 # ngrok http -host-header=rewrite 5000
 ```
 
-2. Create a Bot Registration
-Either through [App Studio](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/app-studio-overview) or the Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration). (The 'Bot' tab in App Studio).
+2. Create a AAD app registration and Azure Bot in Azure portal: [Azure Bot registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- configure the messaging endpoint in Azure bot with your application domain URL and append `/api/messages` like: `https://111xxx.ngrok.io/api/messages`
 
-3. Modify the `manifest.json` in the `/teamsAppManifest` folder and replace the `{{BOT-ID}}` with the id from step 2.
+3. Modify the `manifest.json` in the `/teamsAppManifest` folder and replace the `{{BOT-ID}}` with the id received while doing AAD app registration in previous steps and also update the `<<App Domain>>` with your application domain like ngrok domain: `111xxx.ngrok.io` excluding http/https.
 
 4. Zip the contents of `teamsAppManifest` into a `manifest.zip`.
 
-5. Modify the `/coordinate-logger/appsettings.local.json` and fill in the `{{ Bot Id }}` and `{{ Bot Password }}` with the id from step 2.
+5. Modify the `/coordinate-logger/appsettings.local.json` file and fill in the `{{ Bot Id }}` and `{{ Bot Password }}` with the id's received while doing AAD app registration in previous steps.
 
 ## Running the samples
 
