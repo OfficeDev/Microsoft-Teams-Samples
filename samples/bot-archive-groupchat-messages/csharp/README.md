@@ -53,11 +53,11 @@ This feature shown in this sample is currently available in Public Developer Pre
    - Select Add OAuth Connection Settings.
    - Complete the form as follows:
 
-    a. **Name:** Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
-    b. **Service Provider:** Select Azure Active Directory v2. Once you select this, the Azure AD-specific fields will be displayed.
-    c. **Client id:** Enter the Application (client) ID .
-    d. **Client secret:** Enter the Application (client) secret.
-    e. Provide **Scopes** like "User.Read Chat.ReadWrite ChatMessage.Read"
+    - **Name:** Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv1.
+    - **Service Provider:** Select Azure Active Directory v2. Once you select this, the Azure AD-specific fields will be displayed.
+    - **Client id:** Enter the Application (client) ID .
+    - **Client secret:** Enter the Application (client) secret.
+    -  Provide **Scopes** like "User.Read Chat.ReadWrite ChatMessage.Read"
 
   ### Go to the Azure portal where app registration is created and click on API Permissions.
  
