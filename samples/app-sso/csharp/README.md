@@ -60,7 +60,13 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 ## Setup
 
-- Setup for Bot SSO
+1. Run ngrok - point to port `3978`
+
+    ```bash
+    ngrok http -host-header=localhost 4000
+    ```
+
+2. Setup for Bot SSO
 Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md).
 
 > **NOTE:**
@@ -69,30 +75,27 @@ Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/az
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
 
--  Clone the repository
+3. Clone the repository
    ```bash
     git clone https://github.com/OfficeDev/microsoft-teams-samples.git
     ```
--  Run the bot from a terminal or from Visual Studio:
+    
+4. Run the bot from a terminal or from Visual Studio:
     - Launch Visual Studio
     - File -> Open -> Project/Solution  
-    - Navigate to `samples/csharp_dotnetcore/app_sso` folder
-    - Select `app_sso.sln` file
+    - Navigate to `samples/app-sso/csharp` folder
+    - Select `App SSO Sample.sln` file
     - Press `F5` to run the project
 
-- Run ngrok - point to port `3978`
-
-    ```bash
-    ngrok http -host-header=localhost 4000
-    ```
-- Update the `appsettings.json` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id), `MicrosoftAppPassword` (App Password) and `connectionName` (OAuth Connection Name) from the Bot Framework registration. 
+5. Update the `appsettings.json` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id), `MicrosoftAppPassword` (App Password) and `connectionName` (OAuth Connection Name) and SiteUrl eg.(123.Ngrok.io),TenantId (We can get from Azure app registration),ClientId (Is same appid),AppSecret (App Password) and ApplicationIdURI (api://botid-xxxxxxxxxxxxxxxxxxxxx) from the Bot Framework registration. 
 > NOTE: the App Password is referred to as the `client secret` in the azure portal and you can always create a new client secret anytime.
 
-- __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) also update the `<<DOMAIN-NAME>>` with the ngrok URL
-    - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
-
+6. *This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+    
 
 ## Running the sample.
 
