@@ -93,7 +93,7 @@ Select a channel and enter a message in the channel for your bot.
 
 The bot receives the message without being @mentioned.
 
-## Running the sample.
+## Running the sample
 
 ![App Installation](ReceiveMessagesWithRSC/Images/installApp.png)
 
