@@ -14,7 +14,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-app-localization-nodejs
 ---
 
-## Interaction with app.
+## Interaction with app
 ![image](Images/appLocalizationModule.gif)
 
 ## Prerequisites
@@ -25,7 +25,7 @@ urlFragment: officedev-microsoft-teams-samples-app-localization-nodejs
 - [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
    appropriate permissions to install an app.
 
-## Setup.
+## Setup
 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
@@ -86,7 +86,7 @@ In Teams, Once the app is successfully installed, you can interact with tab and 
 #### To change language in Teams
 To change the language in Microsoft Teams, please click your profile picture at the top of the app, then select Settings -> General and go to the Language section. Choose the preferred language and restart to apply the change. This sample supports en-US, fr-CA, hi-IN and es-MX.
 
-## Running the sample.
+## Running the sample
 
 1. **Installation**: You should see your app installation screen content in selected language. 
 ![image](Images/Upload.png)
