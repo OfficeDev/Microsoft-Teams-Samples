@@ -58,7 +58,7 @@ User can generate a new QR code (contains team id information) and then scan the
 
     > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
     
-  -In the Azure Portal, navigate back to the Azure Bot resource created in Step 2.
+  -In the Azure Portal, navigate back to the Azure Bot resource created (https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2)
   -Switch to the "Settings" blade and click "Add Setting" under the OAuth Connection Settings section
   - Enter a name for your new Connection setting.  
     - In the Service Provider dropdown, select Azure Active Directory V2
