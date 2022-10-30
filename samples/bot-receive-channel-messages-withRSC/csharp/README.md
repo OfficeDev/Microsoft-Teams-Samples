@@ -97,8 +97,6 @@ The bot receives the message without being @mentioned.
 
 ![App Installation](ReceiveMessagesWithRSC/Images/installApp.png)
 
-![Permissions](ReceiveMessagesWithRSC/Images/permissions1.png)
-
 - Showing Welcome message 
 
 ![Channel messages](ReceiveMessagesWithRSC/Images/Notification.png)
