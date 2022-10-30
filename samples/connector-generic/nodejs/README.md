@@ -84,7 +84,6 @@ To complete this tutorial, you need the following tools. If you don't already ha
 ## Running the sample
 
 **Setup your App in Teams**
-
 ![setup](Images/1.Setup.png)
 
 **App list to connect for notifications** (Select App from the list which you want to connect for notifications.)
