@@ -64,17 +64,9 @@ This feature shown in this sample is currently available in Public Developer Pre
   - `{{BOT-ID}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
   - `{{BOT-PASSWORD}}` -Generated from Step 1, also referred to as Client secret 
 
-- In a terminal, navigate to `ReceiveMessagesWithRSC`
 
-    ```bash
-    # change into project folder
-    cd # R
- -```bash
-  # run the bot
-  dotnet run
-  ```
 
-- Or from Visual Studio
+- Run in Visual Studio
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
