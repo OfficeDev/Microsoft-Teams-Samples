@@ -77,7 +77,7 @@ To include resource data of graph notifications, this Graph API require self-sig
     - The key size must be between 2048 and 4096 bits
 
 3. Follow this documentation for the steps - 
-[Create and install Self-Signed certificate](Certificate Documentation/README.md)
+[Create and install Self-Signed certificate](CertificateDocumentation/README.md)
 
 3) Clone the repository
 
