@@ -18,7 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-conversation-quickstart-js
 
 *Bots* allow users to interact with your web service through text, interactive cards, and task modules. *Messaging extensions* allow users to interact with your web service through buttons and forms in the Microsoft Teams client. They can search, or initiate actions, in an external system from the compose message area, the command box, or directly from a message.
 
-## Interaction with app.
+## Interaction with app
 
 ![BotConversationQuickStart](Images/ezgif.com-gif-maker.gif)
 
@@ -29,7 +29,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-conversation-quickstart-js
 -  [ngrok](https://ngrok.com/download) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-## Setup.
+## Setup
 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
    
@@ -71,7 +71,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-conversation-quickstart-js
 
 
 
-## Running the sample.
+## Running the sample
 
 ![hello response](Images/HelloResponse.PNG)
 
