@@ -43,35 +43,36 @@ To complete this tutorial, you need the following tools. If you don't already ha
        ```
    4. Make note of the https:// Forwarding URL. This URL will be your [BASE_URI] like `https://1234.ngrok.io` which will be used in later steps.
 
-**Configure your own connector**
+   5. **Configure your own connector**
 
    ![connector_setup](Images/Connector_Setup/Connector_Setup.gif) 
 
-   1. Open [Connector Developer Portal](https://aka.ms/connectorsdashboard) and select New Connector.
+   - Open [Connector Developer Portal](https://aka.ms/connectorsdashboard) and select New Connector.
    ![connector_setup](Images/Connector_Setup/1.New_Connector.png)
 
-   1. Fill in all the basic details such as name, logo, descriptions etc. for the new connector.
-   1. For the configuration page, you'll use our sample code's setup endpoint: `https://[BASE_URI]/connector/setup`
+   - Fill in all the basic details such as name, logo, descriptions etc. for the new connector.
+   - For the configuration page, you'll use our sample code's setup endpoint: `https://[BASE_URI]/connector/setup`
    ![connector_setup](Images/Connector_Setup/3.connector.png)
 
-   1. For Valid domains, make enter your domain's http or https URL, e.g. XXXXXXXX.ngrok.io.
-   1. Click on Save. After the save completes, you will see your connector ID in address bar.
-1. In the `~/views/connectorconfig.jade` file line 27 and replace `ngrokURL` to the ngrok https forwarding url from the above.
+   - For Valid domains, make enter your domain's http or https URL, e.g. XXXXXXXX.ngrok.io.
+   - Click on Save. After the save completes, you will see your connector ID in address bar.
+
+  6. In the `~/views/connectorconfig.jade` file line 27 and replace `ngrokURL` to the ngrok https forwarding url from the above.
 
    ![connector_setup](Images/Connector_Setup/5.view_update.png)
 
-1. Install all the dependencies by running `npm install` in root directory.
+  7. Install all the dependencies by running `npm install` in root directory.
 
    ```bash
    npm install
    ```
-1. Run the sample using 
+ 8. Run the sample using 
 
    ```bash
    node server.js
    ```
 
-9) __*This step is specific to Teams.*__
+ 9. __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `app manifest` folder to replace your Microsoft Replace `<<CONNECTOR_ID>>` field in `~/app manifest/manifest.json` file with your newly registered
     - **Edit** the `manifest.json` and update `<<AppDomain>>`
       Example. if you are using ngrok it would be `https://1234.ngrok.io` then your app domain-name will be `1234.ngrok.io`.
@@ -86,28 +87,16 @@ To complete this tutorial, you need the following tools. If you don't already ha
 
 ![setup](Images/1.Setup.png)
 
-**App list to connect for notifications**
+**App list to connect for notifications** (Select App from the list which you want to connect for notifications.)
+![setup](Images/3.connectors_list.png) 
 
-Select App from the list which you want to connect for notifications.
-
-![setup](Images/3.connectors_list.png)
-
-**Select App to get notifications**
-
-Configure your selected application.
-
+**Select App to get notifications** (Configure your selected application.)
 ![setup](Images/8.connect_bing_news.png)
 
-**Selected App configuration**
-
-Give some digest name and select topics to get connect. 
-
+**Selected App configuration** (Give some digest name and select topics to get connect)
 ![Configure](Images/9.bing_news_configuration.png)
 
-**App is now configured for notification**
-
-you will be get notify of that app which is connected with channel.
-
+**App is now configured for notification** (you will be get notify of that app which is connected with channel.)
 ![Connected](Images/10.bing_news_connected.png)
 
 
