@@ -18,7 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-msgext-action-quickstart-js
 
 *Bots* allow users to interact with your web service through text, interactive cards, and task modules. *Messaging extensions* allow users to interact with your web service through buttons and forms in the Microsoft Teams client. They can search, or initiate actions, in an external system from the compose message area, the command box, or directly from a message.
 
-## Interaction with app.
+## Interaction with app
 
 ![message ext module](Images/msgextactionquickstartModule.gif)
 
@@ -29,33 +29,49 @@ urlFragment: officedev-microsoft-teams-samples-msgext-action-quickstart-js
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-## Setup.
+## Setup
 
-**Configure Ngrok**
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
-Your app will be run from a localhost server. You will need to setup Ngrok in order to tunnel from the Teams client to localhost. 
+2. Setup for Bot
+	- Register a AAD aap registration in Azure portal.
+	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-               registration?view=azure-bot-service-3.0).
+	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+	- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
-**Run Ngrok**
+    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
+**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
 
-Run ngrok - point to port 3978
+3. Setup NGROK
+  - Run ngrok - point to port 3978
 
-`ngrok http -host-header=rewrite 3978`
+    ```bash
+    ngrok http -host-header=rewrite 3978
+    ```
+4. Setup for code
 
-**Update Bot Framework Messaging Endpoint**
+ - Clone the repository
 
-  Note: You can also do this with the Manifest Editor in App Studio if you are familiar with the process.
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+ -In a terminal, navigate to `samples/msgext-action-quickstart/js`
+- Build
+  `npm install`
+  
+- Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
-- For the Messaging endpoint URL, use the current `https` URL you were given by running ngrok and append it with the path `/api/messages`. It should like something work `https://{subdomain}.ngrok.io/api/messages`.
+5) Run your app
 
-- Click on the `Bots` menu item from the toolkit and select the bot you are using for this project.  Update the messaging endpoint and press enter to save the value in the Bot Framework.
+    ```bash
+    npm start
+    ```
+6) Setup Manifest for Teams
 
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-
-## Build and run
-
-### `npm install`
-
-### `npm start`
+- **This step is specific to Teams.**
+    - Edit the `manifest.json` contained in the `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
+    - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
 ## Running the sample.
 
