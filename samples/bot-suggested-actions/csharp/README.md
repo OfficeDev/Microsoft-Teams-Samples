@@ -89,7 +89,7 @@ This sample shows the feature where user can send suggested actions using bot.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 
-## Running the sample.
+## Running the sample
 
 ![Welcome Message](SuggestedActions/Images/WelcomeMessage.PNG)
 
