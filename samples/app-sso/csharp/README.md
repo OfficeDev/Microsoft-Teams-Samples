@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-app-sso-csharp
 
 # App SSO C#
 
-This app talks about the Teams Tab, Bot, ME - search, action, linkunfurl SSO with C#
+This app talks about the Teams Tab, Bot, Messaging Extension (ME) - search, action, linkunfurl SSO with C#
 
 __Tab SSO__
 
@@ -37,7 +37,7 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
-## Interaction with bot
+## Interaction with app
 
  ![Preview](Images/PreviewAppSSOCsharp.gif)
 
@@ -46,9 +46,8 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 - Microsoft Teams is installed and you have an account
 - [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
-- 
-1. A global administrator account for an Office 365 tenant. Testing in a production tenant is not recommended! You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program) (not a guest account).
 
+1. A global administrator account for an Office 365 tenant. Testing in a production tenant is not recommended! You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program) (not a guest account).
 
 2. To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
 Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
@@ -67,8 +66,8 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md).
 
 > **NOTE:**
-Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
-    - Use the current `https` URL you were given by running ngrok. Append with the path `/api/messages` used by this sample
+Create [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
+    - Use the current `https` URL you were given by running ngrok. Append with the path `/api/messages` and update the messaging endpoint in your Azure Bot.
     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
 
@@ -84,19 +83,19 @@ Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/az
     git clone https://github.com/OfficeDev/microsoft-teams-samples.git
     ```
     
-5. Run the bot from a terminal or from Visual Studio:
+5. Update the `appsettings.json` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id), `MicrosoftAppPassword` (App Password) and `connectionName` (OAuth Connection Name) and SiteUrl eg.(123.Ngrok.io), TenantId (We can get from Azure app registration), ClientId (Is same appid), AppSecret (App Password) and ApplicationIdURI (`api://botid-xxxxxxxxxxxxxxxxxxxxx`) from the AAD app registration or from Bot Framework registration. SiteUrl as your application base URL.
+> NOTE: the App Password is referred to as the `client secret` in the azure portal and you can always create a new client secret anytime.
+
+6. Run the bot from a terminal or from Visual Studio:
     - Launch Visual Studio
-    - File -> Open -> Project/Solution  
+    - File -> Open -> Project/Solution
     - Navigate to `samples/app-sso/csharp` folder
     - Select `App SSO Sample.sln` file
     - Press `F5` to run the project
 
-6. Update the `appsettings.json` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id), `MicrosoftAppPassword` (App Password) and `connectionName` (OAuth Connection Name) and SiteUrl eg.(123.Ngrok.io),TenantId (We can get from Azure app registration),ClientId (Is same appid),AppSecret (App Password) and ApplicationIdURI (api://botid-xxxxxxxxxxxxxxxxxxxxx) from the Bot Framework registration. 
-> NOTE: the App Password is referred to as the `client secret` in the azure portal and you can always create a new client secret anytime.
-
 7. *This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Edit** the `manifest.json` for `validDomains` and `<<DOMAIN-NAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     
@@ -155,7 +154,6 @@ Consent the *ME Search* by clicking the `Sign In` link like below
 
 Consent the *ME Action* by clicking the `Setup` button like below 
 
-
 ![image](Images/ME_SignIn1.png)
 
 - Open `SSO Tab`, Continue and then Accept and it'll show the profile details
@@ -163,7 +161,6 @@ Consent the *ME Action* by clicking the `Setup` button like below
 ![image](Images/almost.png)
 ![image](Images/permission_request.png)
 ![image](Images/Tab.png)
-
 
 
 ## Deploy the bot to Azure
