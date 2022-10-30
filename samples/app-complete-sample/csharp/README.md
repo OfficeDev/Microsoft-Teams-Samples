@@ -28,6 +28,16 @@ Sample that shows how to build a bot for Microsoft Teams in C#.
 
 * Install Git for windows: https://git-for-windows.github.io/
 
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+
+  determine dotnet version
+  ```bash
+  dotnet --version
+  ```
+- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+  
+- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+
 * Clone this repo:<br>
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
@@ -45,7 +55,7 @@ Install some sort of tunnelling service. These instructions assume you are using
 Install the Bot Emulator - click on "Bot Framework Emulator (Mac and Windows)": https://docs.botframework.com/en-us/downloads/#navtitle  
     * NOTE: make sure to pin the emulator to your task bar because it can sometimes be difficult to find again 
     
-## Setup.
+## Setup
 
 ## Steps to see the bot running in the Bot Emulator
 
