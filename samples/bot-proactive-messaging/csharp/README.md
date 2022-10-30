@@ -133,8 +133,9 @@ Two samples to highlight solutions to two challenges with building proactive mes
 **Team name in which message will post**
 ![Proactive message](coordinate-logger/Images/TeamInfo.png)
 
-**Meesages in other Team **
+**Meesages in other Team**
 ![Proactive message](coordinate-logger/Images/Teammessage.png)
+
 
 ## Key concepts
 
