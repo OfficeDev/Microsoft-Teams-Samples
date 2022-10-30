@@ -83,6 +83,8 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
 		<add key="MicrosoftAppId" value="88888888-8888-8888-8888-888888888888" />
 		<add key="MicrosoftAppPassword" value="aaaa22229999dddd0000999" />
 		<add key="BaseUri" value="https://#####abc.ngrok.io" />
+		<add key="FBConnectionName" value="connectionname" />
+		<add key="FBProfileUrl" value="profileurl" />
 		
 6. To test facebook auth flow [create a facebookapp](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-facebook?view=azure-bot-service-4.0) and get client id and secret for facebook app.
     Now go to your bot channel registartion -> configuration -> Add OAuth connection string
