@@ -50,7 +50,6 @@ This sample shows the feature where user can send suggested actions using bot.
 4. Setup for code
 
   - Clone the repository
-
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
@@ -58,19 +57,19 @@ This sample shows the feature where user can send suggested actions using bot.
      - `{{MicrosoftAppId}}` - Generated from Step 1 is the application app id
      - `{{MicrosoftAppPassword}}` - Generated from Step 1, also referred to as Client secret
    
-   -In a terminal, navigate to `samples/bot-suggested-actions/csharp`
+   - In a terminal, navigate to `samples/bot-suggested-actions/csharp`
 
      change into project folder
       ```bash
       cd # SuggestedActions
       ```
-   -From a terminal
+   - From a terminal
      ```bash
      # run the bot
      dotnet run
      ```
 
-   -Or from Visual Studio
+   - Or from Visual Studio
      - Launch Visual Studio
      - File -> Open -> Project/Solution
      - Navigate to `SuggestedActions` folder
