@@ -91,7 +91,7 @@ This is a sample connector application which demonstarates how to add authentica
     ```
 
 8. __*This step is specific to Teams.*__
- - **Edit** the `manifest.json` contained in the  `app manifest` folder to replace your `ConnectorId` field in `~/app manifest/manifest.json` file with      your ConnectorId in `connectors` section.
+ - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your `ConnectorId` field in `~/app manifest/manifest.json` file with      your ConnectorId in `connectors` section.
     - **Edit** the `manifest.json` for `validDomains`. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
  
         Example :
