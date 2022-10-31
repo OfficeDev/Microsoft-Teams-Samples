@@ -109,7 +109,7 @@ the Teams service needs to call into the bot.
 4) Go to .env file  and add `MicrosoftAppId` ,  `MicrosoftAppPassword` and `AppCatalogTeamAppId` information. 
     - To get `AppCatalogTeamAppId` navigate to following link in your browser [Get TeamsAppCatalogId](https://developer.microsoft.com/en-us/graph/graph-explorer?request=appCatalogs%2FteamsApps%3F%24filter%3DdistributionMethod%20eq%20'organization'&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) from Microsoft Graph explorer.
     And then search with app name or based on Manifest App id in Graph Explorer response and copy the `Id` [i.e teamApp.Id]
-    ![GetAppCatalogTeamAppId ](Images/GetAppCatalogTeamAppId.png)
+    ![GetAppCatalogTeamAppId ](Images/GetAppCatalogTeamAppId.PNG)
 
 5) Run your bot at the command line
 
@@ -126,12 +126,12 @@ the Teams service needs to call into the bot.
 
 ## Running the sample
 - Install the Proactive App Installation demo app in a Team or GroupChat.
-    ![AddToTeamGroup ](Images/AddToTeamGroup.png)
+    ![AddToTeamGroup ](Images/AddToTeamGroup.PNG)
 
 - **Team Scope**: Run 'Check and Install' to pro-actively install the App for all the users in team. After installation send 'Send message' command to send proactive message.
-    ![TeamScope ](Images/TeamScope.png)
+    ![TeamScope ](Images/TeamScope.PNG)
 - **Group Chat**:  Run 'Check and Install' to pro-actively install the App for all the users in team. After installation send 'Send message' command to send proactive message.
-   ![GroupScope ](Images/GroupScope.png)
+   ![GroupScope ](Images/GroupScope.PNG)
 
 ## Deploy the bot to Azure
 
