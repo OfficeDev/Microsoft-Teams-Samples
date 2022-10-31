@@ -74,7 +74,7 @@ This feature shown in this sample is currently available in Public Developer Pre
     -  Once the flyout menu close, scroll bottom to section 'Implicit Grant' and select check boxes "Access tokens" and "ID tokens" and click "Save" at the top bar.
 
 2. Setup for Bot
-	- Register a AAD aap registration in Azure portal.
+	
 	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-               registration?view=azure-bot-service-3.0).
 	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 	- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
@@ -85,7 +85,7 @@ This feature shown in this sample is currently available in Public Developer Pre
       - Run ngrok - point to port 3978
 
 	```bash
-	# ngrok http -host-header=rewrite 3978
+	  ngrok http -host-header=rewrite 3978
 	```   
 4. Setup for code
 
