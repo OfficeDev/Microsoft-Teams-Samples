@@ -43,10 +43,10 @@ urlFragment: officedev-microsoft-teams-samples-graph-channel-lifecycle-csharp
 - Run ngrok - point to port 3978
 
 ```bash
-# ngrok http -host-header=rewrite 3978
+  ngrok http -host-header=rewrite 3978
 ```
 
-4.Setup for code
+4. Setup for code
 
 - Clone the repository
 
@@ -74,13 +74,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-channel-lifecycle-csharp
   - Select `ChannelLifecycle.csproj` file
   - Press `F5` to run the project
 
-   Config changes
-   - Add your client id, client secret in appsettings.json
-   - Press F5 to run the project
-   - Update the ngrok in manifest
-   - Zip all three files present in manifest folder
-   
-5. Setup Manifest for Teams
+ 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./Manifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
