@@ -19,7 +19,7 @@ This sample app illustartes the proactive installation of app using Graph API an
 
 Language Used : C#
 
-## Interaction with app.
+## Interaction with app
 ![Proactive Installtion Module](ProactiveAppInstallation/Images/ProactiveInstallation.gif)
 
 ## Prerequisites
