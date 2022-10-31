@@ -82,7 +82,7 @@ This is a sample connector application which demonstarates how to add authentica
 6. Setting up .env configuration 
    - Update the `.env` configuration with the `ClientId` and `BaseUrl`
 
-   >Note: `ClientId` is your **Microsoft-App-ID** and `BaseUrl` is your **Ngrok**.
+   > Note: `ClientId` is your **Microsoft-App-ID** and `BaseUrl` is your **Ngrok**.
 
 7. Run your app for server and client
 
