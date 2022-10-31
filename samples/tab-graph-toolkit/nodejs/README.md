@@ -65,9 +65,13 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
 
   In the project directory, execute:
 
-     ```npm install```
+     ``` bash
+     npm install
+     ```
 
-     ```npm start```
+     ``` bash
+     npm start
+     ```
 
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
