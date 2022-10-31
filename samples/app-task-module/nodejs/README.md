@@ -77,6 +77,17 @@ Task modules build on the foundation of Microsoft Teams tabs: a task module is e
     ```bash
     npm start
     ```
+5. Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./src folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `src` opy that file and paste someother folder then zip `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./src folder, copy that file and paste someother folder then zip, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams. 
    
  ## Overview of this sample
 
@@ -88,7 +99,7 @@ This sample app was developed in conjunction with the task module feature itself
 
 The tab shows how to invoke the task module using the Teams SDK. Source code for the tab is found in [TaskModuleTab.ts](src/TaskModuleTab.ts); the view definition is in [taskmodule.pug](src/views/taskmodule.pug). This sample app uses [Pug](https://pugjs.org) (formerly Jade) for HTML rendering.
 
-The following task modules are supported:
+## Running the sample
 
 * YouTube, which is comprised of a [generic template for embedded `<iframe>` experiences](src/views/embed.pug) (also used for the PowerApp task module below) plus a [four-line stub containing the YouTube embed URL](src/views/youtube.pug)
 
@@ -130,18 +141,6 @@ You can invoke them from an Adaptive card (using the _tasks_ command) or from a 
   * Adaptive card chaining &mdash; showing multiple adaptive cards in a sequence &mdash; is implemented using the `data.taskResponse` property on an Adaptive card `Action.Submit` button. With _Adaptive Card - Single_, the card is rendered with `data.taskResponse` set to "message" (show a message to the user); for _Adaptive Card - Sequence_, the same Adaptive card is rendered with `data.taskResponse` set to "continue" (show another Adaptive card). This is the only difference between `fetchTemplates.adaptivecard1` and `fetchTemplates.adaptivecard2`. The second Adaptive card (`cardTemplates.acSubmitResponse` in [CardTemplates.ts](src/dialogs/CardTemplates.ts)) in the sequence just shows the JSON submitted in the first; its `data.taskResponse` is set to "final". The logic for handling the various values of `data.taskResponse` is in [TeamsBot.ts](src/TeamsBot.ts). The `taskResponse` values form a simple "protocol" for responding to the different ways to respond to `task/submit` messages: do nothing (complete), show a message to the user, load a subsequent adaptive card in a sequence, or load the final adaptive card in a sequence.
 * To avoid hardcoding an `appId` in [customform.pug](src/views/customform.pug), the `appId` is passed in at Pug template rendering time by [tabs.ts, the TypeScript  which implements the tab routes](src/tabs.ts).
 * Theming and simple keyboard handling for the Esc key are supported.
-
-5. Setup Manifest for Teams
-- __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./src folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-    - **Zip** up the contents of the `src` opy that file and paste someother folder then zip `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
-
-- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
-   - Go to Microsoft Teams. From the lower left corner, select Apps
-   - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./src folder, copy that file and paste someother folder then zip, and choose Open.
-   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 ## Bonus features
 
