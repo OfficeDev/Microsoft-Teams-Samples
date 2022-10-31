@@ -16,13 +16,13 @@ urlFragment: officedev-microsoft-teams-samples-app-task-module-nodejs
 ---
 
 
-# Microsoft Teams task module.
+# Microsoft Teams task module
 
 A task module allows you to create modal popup experiences in your Teams application. Inside the popup, you can run your own custom HTML/JavaScript code, show an `<iframe>`-based widget such as a YouTube or Microsoft Stream video, or display an [Adaptive card](https://docs.microsoft.com/en-us/adaptive-cards/).
 
 Task modules build on the foundation of Microsoft Teams tabs: a task module is essentially a tab in a popup window. It uses the same SDK, so if you've built a tab you are already 90% of the way to being able to create a task module.
 
-## Interaction with app.
+## Interaction with app
 
 ![adaptivecard](Images/AppTaskModule.gif)
 
@@ -30,7 +30,7 @@ Task modules build on the foundation of Microsoft Teams tabs: a task module is e
 
 - Microsoft Teams is installed and you have an account (not a guest account)
 -  [NodeJS](https://nodejs.org/en/)
--  [ngrok](https://ngrok.com/) or equivalent tunneling solution
+-  [ngrok](https://ngrok.com/download) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
    appropriate permissions to install an app.
    
