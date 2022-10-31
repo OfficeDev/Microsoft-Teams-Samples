@@ -56,18 +56,18 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
     ```
 4. Setup for code
 
-- Clone the repository
+  - Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-- Build and Run
+  - Build and Run
 
-In the project directory, execute:
+  In the project directory, execute:
 
-`npm install`
+   `npm install`
 
-`npm start`
+   `npm start`
 
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
