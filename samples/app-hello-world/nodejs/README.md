@@ -44,13 +44,11 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
    - In a terminal, navigate to  `samples/app-hello-world/nodejs`
    
    - Install modules
-
     ```bash
     npm install
     ```
 
    - Run your app
-
     ```bash
     npm start
     ```
