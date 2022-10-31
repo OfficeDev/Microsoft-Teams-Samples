@@ -35,8 +35,8 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 **NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
 3. Setup for code
+4. 
   - Clone the repository
-
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
@@ -44,6 +44,7 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
    - In a terminal, navigate to  `samples/app-hello-world/nodejs`
    
    - Install modules
+   
     ```bash
     npm install
     ```
