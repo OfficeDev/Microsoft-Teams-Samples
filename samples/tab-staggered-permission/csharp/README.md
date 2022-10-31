@@ -75,7 +75,7 @@ Using this csharp sample, you can check how to get staggered graph api permissio
     ✔ Access Token  
  - Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json. 
 
-2 .  Setup for Bot
+2. Setup for Bot
 
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name.
@@ -84,8 +84,7 @@ Using this csharp sample, you can check how to get staggered graph api permissio
     
    In the new Azure Bot resource in the Portal, 
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok.
-  
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok.  
 3. Setup NGROK
 
 - Run ngrok - point to port 3978
