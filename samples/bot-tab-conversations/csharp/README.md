@@ -136,7 +136,7 @@ There is also a personal tab that will list inquires from all the support depart
     ```
     * Make sure to copy and save the `https` url (it should look like `https://<randomsubdomain>.ngrok.io`).
 
-* Create a Azure bot in [Azure Portal](https://portal.azure.com) or in [Developer Portal for Microsoft Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/teams-developer-portal).
+* Create an AAD app registration in Azure Portal and also create Azure bot in [Azure Portal](https://portal.azure.com) or in [Developer Portal for Microsoft Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/teams-developer-portal).
     * Set the 'Messaging endpoint' for your Azure Bot with `https://<your application domain/api/messages` like your ngrok URL `https://xxxxx.ngrok.io` .
     * *Note: if you restart Ngrok you may have to update the messaging endpoint domain URL aginn in your Azure Bot for local running*
     * Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
@@ -150,11 +150,42 @@ There is also a personal tab that will list inquires from all the support depart
 
     * Ensure the following API permissions are granted to the app for Microsoft Graph access - `email`, `offline_access`, `openid`, `profile`, `Team.ReadBasic.All`    
     * *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your AAD App*
-* In `appSettings.json`, `manifest.json` and `.env` replace:
+
+**Setup for code**
+- Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+- Run the bot from a terminal or from Visual Studio:
+
+  A) From a terminal, navigate to `Source\ConversationalTabs.Web`
+
+  ```bash
+  # run the bot
+  dotnet run
+  ```
+
+  B) Or from Visual Studio
+
+  - Launch Visual Studio
+  - File -> Open -> Project/Solution
+  - Navigate to `samples\bot-tab-conversations\csharp\Source\ConversationalTabs.Web` folder
+  - Select `Microsoft.Teams.Samples.ConversationalTabs.Web.csproj` file
+  - Press `F5` to run the project
+
+* In `appSettings.json` and `.env` file replace:
     * `<<ngrok-url>>` with your minus the https://.
     * `<<aad-id>>` with your AAD Application (Client) Id.
     * `<<aad-client-secret>>` with the client secret you created above.
+    * `<<tenant-id>>` with the directory id received via creating AAD app registration in your Azure Portal.
     * `<<teams-app-store-app-id>>` with the App ID assigned to the app in the Teams Admin Center or provided when your app passes validation. If you are sideloading the app you can use the appId from the manifest file, but please note that [deep linking may not work when sideloading](#known-issues).
+
+* Setup Manifest for Teams
+
+    - **Edit** the `manifest.json` contained in the  `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string ``<<aad-id>>`` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `<<ngrok-url>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`. Replace it at all the places you see in your `mainfest.json`.
 
 * Deploying
     * There are detailed instructions for deploying locally below.
