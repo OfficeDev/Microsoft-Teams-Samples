@@ -136,8 +136,6 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-
 
 ## Running the sample.
 
-# Teams Tab SSO Authentication
-
 This sample illustrates how to implement SSO authentication for Teams Tab.
 
 ![setupteams](Images/setupteams.png)
