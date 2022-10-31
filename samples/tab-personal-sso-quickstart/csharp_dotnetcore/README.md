@@ -81,21 +81,21 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
 
  2. Setup for Bot
 
-   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
-    - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
-    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
-    
-   In the new Azure Bot resource in the Portal, 
-    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok.
+    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+     - For bot handle, make up a name.
+     - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+     - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
+
+    In the new Azure Bot resource in the Portal, 
+     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+     - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok.
 
 3. Setup NGROK
- - Run ngrok - point to port 3978
+  - Run ngrok - point to port 3978
 
-  ```bash
-  # ngrok http -host-header=rewrite 3978
-  ```
+   ```bash
+   # ngrok http -host-header=rewrite 3978
+   ```
 
 4. Setup for code
 
