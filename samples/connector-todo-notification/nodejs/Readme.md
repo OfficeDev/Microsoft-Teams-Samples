@@ -28,89 +28,86 @@ This is a sample connector application which demonstarates how to add authentica
    appropriate permissions to install an app.
 
 ### Setup 
+> Note these instructions are for running the sample on your local machine.
 
-### How to see the connector working in Microsoft Teams
-1) [Upload your custom app in Microsoft Teams](https://docs.microsoft.com/microsoftteams/platform/concepts/apps/apps-upload) using [this manifest file](TeamsToDoAppConnector/TeamsAppPackages/manifest.json).
-2) Configure the [Connector](https://docs.microsoft.com/microsoftteams/platform/concepts/connectors#accessing-office-365-connectors-from-microsoft-teams).
-![Connector_Configuration](Images/Connector_Setup/Connecter_Todo_Setup.gif)
+1. Run ngrok - point to port 3978
 
-3) Select either Create or Update on the registration page and click Save. 
-4) Once the connector is configured, you will get a notification in channel for the configured connector.
-
->**Note**: With the above instructions, you can use sample connector which is deployed on Azure. Please follow the instructions below to create your own connector.
-
-### [Configure your own connector](https://docs.microsoft.com/microsoftteams/platform/webhooks-and-connectors/how-to/connectors-creating)
-The sample shows a simple implementation of a connector registration implementation. It also sends a connector card to the registered connector via a process triggered "externally."
-
-1. Clone the repository
    ```bash
-   git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-   ```
-1. In a terminal, navigate to `samples/connector-todo-notification/nodejs`
-1. Install node modules using command npm install.
-1. Run your app using command npm start.
-1. Begin your tunnelling service to get an https endpoint. 
-   1. Open a new command prompt window. 
-   1. Change to the directory that contains the ngrok.exe application. 
-   1. Run ngrok - point to port 3978
+     ngrok http -host-header=rewrite 3978
+   ```  
+2. Clone the repository
 
-      ```bash
-      ngrok http -host-header=rewrite 3978
-      ```
-   1. Ngrok will fill the entire prompt window. Make note of the https:// Forwarding URL. This URL will be your [BASE_URI] referenced below. 
-   1. Minimize the ngrok Command Prompt window. It is no longer referenced in these instructions, but it must remain running.
-1. Register a new connector in the [Connector Developer Portal](https://aka.ms/connectorsdashboard)
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+    
+3. Install node modules
+
+   Navigate to `samples/connector-todo-notification/nodejs`
+   
+   Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
+
+    ```bash
+    npm install
+    ```
+   
+4. Configure your own connector : 
+  >**Note**:The below gif file shows a simple implementation of a connector registration implementation. It also sends a connector card to the registered       connector via a process triggered "externally". 
+  ![Connector_Configuration](Images/Connector_Setup/Connecter_Todo_Setup.gif)
+   1. Register a new connector in the [Connector Developer Portal](https://aka.ms/connectorsdashboard)
    1. Fill in all the basic details such as name, logo, descriptions etc. for the new connector.
    1. For the configuration page, you'll use our sample code's setup endpoint: `https://[BASE_URI]/connector/SimpleAuth`
    1. For Valid domains, make entery of your domain's https URL, e.g. XXXXXXXX.ngrok.io.
-   1. Click on Save. After the save completes, download the zip file for your connector which will contain the connector id.
-1. Now you can sideload your app package and test your new connector.
+   1. Click on Save. After the save completes, you will see your connector id.
 
-### [Using Azure AD](#using-azure-ad)
+5. [Using Azure AD](#using-azure-ad)
 
-1. Go to the [Application Registration Portal](https://aka.ms/appregistrations) and sign in with the your account to create an application.
-1. Navigate to **Authentication** under **Manage** and add the following redirect URLs:
+   - Go to the [Application Registration Portal](https://aka.ms/appregistrations) and sign in with the your account to create an application.
+   - Navigate to **Authentication** under **Manage** and add the following redirect URLs:
 
-    - `https://<your_ngrok_url>/SimpleEnd`
+    - `https://<Your_Ngrok_Domain>/SimpleEnd`
 
-1. Additionally, under the **Implicit grant** subsection select **Access tokens** and **ID tokens**
+   - Additionally, under the **Implicit grant** subsection select **Access tokens** and **ID tokens**
 
-1. Click on **Expose an API** under **Manage**. Select the Set link to generate the Application ID URI in the form of api://{AppID}. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: api://<your_ngrok_url>/{AppID}
+   - Click on **Expose an API** under **Manage**. Select the Set link to generate the Application ID URI in the form of api://{AppID}. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: api://<your_ngrok_domain>/{AppID}
 
-1. Navigate to **API Permissions**, and make sure to add the following delegated permissions:
-    - User.Read
-    - email
-    - offline_access
-    - openid
-    - profile
-1. Scroll to the bottom of the page and click on "Add Permissions".
+   - Navigate to **API Permissions**, and make sure to add the following delegated permissions:
+     - User.Read
+     - email
+     - offline_access
+     - openid
+     - profile
+   - Scroll to the bottom of the page and click on "Add Permissions".
 
-## Setting up .env configuration 
-1. Update the `.env` configuration with the `ClientId` and `BaseUrl`
+6. Setting up .env configuration 
+   - Update the `.env` configuration with the `ClientId` and `BaseUrl`
 
->Note: `ClientId` is your **Microsoft-App-ID** and `BaseUrl` is your **Ngrok**.
+   >Note: `ClientId` is your **Microsoft-App-ID** and `BaseUrl` is your **Ngrok**.
 
-1. Run your app for server and client
+7. Run your app for server and client
 
     ```bash
     npm start
     ```
 
-7) __*This step is specific to Teams.*__
-1. Add your ngrok URL to validDomains. Teams will only show the sign-in popup if its from a whitelisted domain.
-- **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+8. __*This step is specific to Teams.*__
+ - **Edit** the `manifest.json` contained in the  `app manifest` folder to replace your `ConnectorId` field in `~/app manifest/manifest.json` file with      your ConnectorId in `connectors` section.
+    - **Edit** the `manifest.json` for `validDomains`. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+ 
+        Example :
 
-   ```json
-    "connectors": [
-    {
-      "connectorId": "<<connector-Id>>",
-      "configurationUrl": "https://<<base-url>>/SetupAuth",
-    }
-  ]
-    ```
-- **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
-- **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
-- Add the app to personal/team/groupChat scope (Supported scopes)
+        ```json
+          "connectors": [
+          {
+            "connectorId": "<<CONNECTOR_ID>>",
+            "configurationUrl": "https://<<VALID-DOMAIN>>/Connector/Setup"
+          }
+        ]
+        ```
+    
+    - **Zip** up the contents of the `app manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+    - Add the app to personal/team/groupChat scope (Supported scopes)
 
 ## Running the sample
 
