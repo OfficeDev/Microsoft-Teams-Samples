@@ -76,7 +76,7 @@ urlFragment: officedev-microsoft-teams-samples-msgext-search-quickstart-js
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-## Running the sample.
+## Running the sample
 
 ![Search](Images/search.png)
 
