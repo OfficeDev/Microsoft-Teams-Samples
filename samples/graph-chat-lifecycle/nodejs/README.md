@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-chat-lifecycle-nodejs
 
 This sample illustrates Lifecycle of chat in Teams (Creating chat, adding members with all scenarios, deleting member).
 
-## Interaction with app.
+## Interaction with app
 
 ![](Images/GraphChatLifecycleGif.gif)
 
@@ -134,7 +134,7 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
     - **Zip** up the contents of the `manifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-## Running the sample.
+## Running the sample
 
 1. In Teams, Install App
 
@@ -160,5 +160,5 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 
    ![](Images/PinnedTabSuccessfully.png)
 
-## Further Reading.
+## Further Reading
 [Graph-Chat-Life-Cycle](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)
