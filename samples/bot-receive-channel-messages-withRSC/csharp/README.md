@@ -49,7 +49,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 - Run ngrok - point to port 3978
 
 ```bash
-# ngrok http -host-header=rewrite 3978
+ ngrok http -host-header=rewrite 3978
 ```
 
 4. Setup for code
