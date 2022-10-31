@@ -90,7 +90,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are sco
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-   - Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`, `BaseUrl` with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+  - Update the `.env` configuration for the bot to use the `REACT_APP_AZURE_APP_REGISTRATION_ID` and `REACT_APP_BASE_URL`, `BaseUrl` with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the REACT_APP_AZURE_APP_REGISTRATION_ID created in step 1.
 
  - In a terminal, navigate to `tab-channel-group-sso-quickstart/js`
  - Install modules
@@ -98,9 +98,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are sco
     ```bash
     npm install
     ```
-
-- Update the `.env` configuration for the bot to use the `REACT_APP_AZURE_APP_REGISTRATION_ID` and `REACT_APP_BASE_URL`, `BaseUrl` with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the REACT_APP_AZURE_APP_REGISTRATION_ID created in step 1 (Setup for Bot).
-
+    
 - Build and Run
 You can build and run the project from the command line or an IDE:
 
