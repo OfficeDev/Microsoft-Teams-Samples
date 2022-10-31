@@ -30,25 +30,25 @@ This sample shows how to mute/unmute Teams meeting audio using toggle Incoming C
 
 > Note these instructions are for running the sample on your local machine.
 
-1) Run ngrok - point to port 3978
+1. Run ngrok - point to port 3978
 
    ```bash
      ngrok http -host-header=rewrite 3978
    ```  
 
-2) Setup for Bot
+2. Setup for Bot
 
-  **App Registration** 
+ - App Registration 
  - In Azure portal, [Register an app ](https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade)
 
-1) Clone the repository
+3. Clone the repository
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In the folder where repository is cloned navigate to `samples/meetings-audio-state/nodejs`
+4. In the folder where repository is cloned navigate to `samples/meetings-audio-state/nodejs`
 
-3) Install node modules
+5. Install node modules
 
    Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
 
@@ -56,15 +56,15 @@ This sample shows how to mute/unmute Teams meeting audio using toggle Incoming C
     npm install
     ```
 
-4) Update the `.env` with `PORT=3978`
+6. Update the `.env` with `PORT=3978`
 
-5) Run your app
+7. Run your app
 
     ```bash
     npm start
     ```
 
- B) __*This step is specific to Teams.*__
+ 8. __*This step is specific to Teams.*__
 
 - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
 
