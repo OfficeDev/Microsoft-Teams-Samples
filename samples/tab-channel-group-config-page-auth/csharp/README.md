@@ -46,7 +46,7 @@ Azure AD, like most identity providers, does not allow its content to be placed 
   
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-## Setup.
+## Setup
 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   - Your tab needs to run as a registered Azure AD application in order to obtain an access token from Azure AD. In this step you'll register the app in your tenant and give Teams   permission to obtain access tokens on its behalf.
@@ -86,7 +86,7 @@ Azure AD, like most identity providers, does not allow its content to be placed 
 - Run ngrok - point to port 3978
 
 ```bash
-# ngrok http -host-header=rewrite 3978
+ ngrok http -host-header=rewrite 3978
 ```
 
 4. Setup for code
@@ -106,14 +106,22 @@ Azure AD, like most identity providers, does not allow its content to be placed 
     - Press `F5` to run the project
 
 
-5.  __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your tab earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` and set your Base URI to the same URI you've created in Ngrok *everywhere* you see the place holder string `<<BASE-URI>>` (depending on the scenario the Microsoft App Id, Base URI may occur multiple times in the `manifest.json`)
-    - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+5. Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./Manifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+  - **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://<<BASE-URI>>/<<YOUR-MICROSOFT-APP-ID>>"` with MicrosoftAppId. E.g. `""api://1235.ngrok.io/0000000000-0000000-000000""`.
+    - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./Manifest folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 7) Run your tab, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
-## Running the sample.
+## Running the sample
 
 ![Initial Config Page](ConfigTabAuthentication/Images/config_page.png)
 
@@ -123,7 +131,7 @@ Azure AD, like most identity providers, does not allow its content to be placed 
 
 ![Channel Tab](ConfigTabAuthentication/Images/channel_tab.png)
 
-## Further Reading.
+## Further Reading
 
 [Tab-Channle-Group-config-auth](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
 
