@@ -14,7 +14,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-connector-todo-notification-csharp
 ---
 
-# Microsoft Teams Sample Connector
+# Microsoft Teams Sample Connector Todo
 
 This application simulates a real task management system and allows users to create and view tasks. The content is randomly generated to simulate how notification can be sent into Microsoft Teams channel using connector.
 
