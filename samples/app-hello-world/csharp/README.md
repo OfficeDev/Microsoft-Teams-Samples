@@ -42,7 +42,7 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-csharp
 3. Run ngrok - point to port 3978
 
     ```bash
-    # ngrok http -host-header=rewrite 3978
+      ngrok http -host-header=rewrite 3978
     ```
 4. Setup for code
 
@@ -52,7 +52,7 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-csharp
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
- Modify the `/appsettings.json` and fill in the following details:
+ - Modify the `/appsettings.json` and fill in the following details:
   - `{{MicrosoftAppId}}` - Generated from Step 1 is the application app id
   - `{{ MicrosoftAppPassword}}` - Generated from Step 1, also referred to as Client secret
   
