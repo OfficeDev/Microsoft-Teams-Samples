@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample app with capability to send notification in Teams when user creates a workitem in Azure DevOps via webhooks.
+description: This is a sample app with capability to send notification in Teams when user creates a workitem in Azure DevOps via service hook.
 products:
 - office-teams
 - office
@@ -13,9 +13,9 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-bot-release-management-csharp
 ---
 
-# Bot to create the group chat and send task notification using Azure webhooks.
+# Bot to create the group chat and send task notification using Azure service hook.
 
-This is a sample application which demonstrates how to create a webhook/service hooks on [Azure DevOps](https://dev.azure.com) and connect with Teams bot that creates a group chat and send workitems details.
+This is a sample application which demonstrates how to create a service hooks on [Azure DevOps](https://dev.azure.com) and connect with Teams bot that creates a group chat and send workitems details.
 
 ## Interaction with app
 
@@ -33,14 +33,6 @@ This is a sample application which demonstrates how to create a webhook/service 
 - [Azure DevOps](https://dev.azure.com) access to set up service hooks and add custom field in workitem.
 
 ## Setup
-
-**Setup for Bot**
-- Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-    > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
 **Setup NGROK**
 1) Run ngrok - point to port 3978
@@ -89,6 +81,14 @@ Click on Add Permissions to commit your changes.
 - If you are logged in as the Global Administrator, click on the Grant admin consent for %tenant-name% button to grant admin consent else, inform your admin to do the same through the portal or follow the steps provided here to create a link and send it to your admin for consent.
 
 - Global Administrator can grant consent using following link:  [https://login.microsoftonline.com/common/adminconsent?client_id=](https://login.microsoftonline.com/common/adminconsent?client_id=)<%appId%> 
+
+**Setup for Bot**
+- Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
+- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+    > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
 **Setup Azure DevOps service hook**
 - Follow this document- [Create Webhooks](https://docs.microsoft.com/en-us/azure/devops/service-hooks/services/webhooks?view=azure-devops) to service hook. 
