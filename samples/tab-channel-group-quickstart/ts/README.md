@@ -22,38 +22,53 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
 ![tabconfigure](Images/TabChannelGroupModule.gif)
 
 ## Prerequisites
--  [NodeJS](https://nodejs.org/en/)
+- Microsoft Teams is installed and you have an account (not a guest account)
+- To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
+- [ngrok](https://ngrok.com/download) or equivalent tunneling solution
+- [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
 
--  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
-Run ngrok - point to port 3978
+2. Setup for Bot
+- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
+
+3. Setup NGROK
+ - Run ngrok - point to port 3978
 
     ```bash
-    ngrok http --host-header=rewrite 3978
+    ngrok http -host-header=rewrite 3978
+    ```
+4. Setup for code
+- Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-## Setup.
+- In a terminal, navigate to `samples/tab-channel-group-quickstart/ts`
 
-In the project directory, execute:
+- Install modules
 
-`npm install`
+    ```bash
+    npm install
+    ```
 
-`npm start`
+- Run your app
 
-## Azure app Registration.
+    ```bash
+    npm start
 
-In Azure portal, Create a[App Registration](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/walkthrough-register-app-azure-active-directory
+5. Setup Manifest for Teams
 
-## Setup for Bot
-
-   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
-    - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
-    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
+- **This step is specific to Teams.**
+    - Edit the `manifest.json` contained in the `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
+    - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")```
     
-   In the new Azure Bot resource in the Portal, 
-    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok.
 
 ## Deploy to Teams
 Start debugging the project by hitting the `F5` key or click the debug icon in Visual Studio Code and click the `Start Debugging` green arrow button.
