@@ -30,64 +30,65 @@ The minimum prerequisites to run this sample are:
 >**Note**: some features in the sample require that you using [Public Developer Preview mode](https://docs.microsoft.com/en-us/microsoftteams/platform/resources/dev-preview/developer-preview-intro) in Microsoft Teams.
 
 ### Setup 
+> Note these instructions are for running the sample on your local machine.
 
-### How to see the connector working in Microsoft Teams
-1) [Upload your custom app in Microsoft Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/apps/apps-upload) using [this manifest file](TeamsToDoAppConnector/TeamsAppPackages/manifest.json).
-2) Configure the [Teams ToDo Notification](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/connectors#accessing-office-365-connectors-from-microsoft-teams) connector.
-3) Select either Create or Update on the registration page and click Save. 
-4) Once the connector is configured, you will get a notification in channel with link to the Task Manager application.
-5) Go to Task Manager portal and click on Create New and enter the task details and Save.
-6) You will see the MessageCard in the registered Teams channel.
-7) You can try the actionable buttons available on the message card.
-![Connector_Configuration](TeamsToDoAppConnector/Images/Connector_Setup/connector_setup_csharp.gif)
+1. Run ngrok - point to port 3978
 
->**Note**: With the above instructions, you can use sample connector which is deployed on Azure. Please follow the instructions below to create your own connector.
-
-1) Clone the repository
+   ```bash
+     ngrok http -host-header=rewrite 3978
+   ```  
+2. Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-   A) If you are using Visual Studio
-
+3. If you are using Visual Studio
+ 
   - Launch Visual Studio
   - File -> Open Folder
   - Navigate to `samples/connector-todo-notification/csharp` folder
   - Select `TeamsToDoAppConnector.sln` solution file
 
-  The main connector code is found here:
-* ConnectorController.cs - `Setup` & `Save` actions
-* TaskController.cs - `Create` & `Update` actions
+  > Note The main connector code is found here:
+  * ConnectorController.cs - `Setup` & `Save` actions
+  * TaskController.cs - `Create` & `Update` actions
 
-### Configure your own connector
-The sample shows a simple implementation of a connector registration implementation. It also sends a connector card to the registered connector via a process triggered "externally."
-   1. Minimize the ngrok Command Prompt window. It is no longer referenced in these instructions, but it must remain running.
-1. Register a new connector in the [Connector Developer Portal](https://aka.ms/connectorsdashboard)
+4. Configure your own connector : 
+  >**Note**:The below gif file shows a simple implementation of a connector registration implementation. It also sends a connector card to the registered       connector via a process triggered "externally". 
+  ![Connector_Configuration](TeamsToDoAppConnector/Images/Connector_Setup/connector_setup_csharp.gif)
+   1. Register a new connector in the [Connector Developer Portal](https://aka.ms/connectorsdashboard)
    1. Fill in all the basic details such as name, logo, descriptions etc. for the new connector.
    1. For the configuration page, you'll use our sample code's setup endpoint: `https://[BASE_URI]/connector/setup`
    1. For Valid domains, make enter your domain's http or https URL, e.g. XXXXXXXX.ngrok.io.
    1. Enable the action on connector card by selecting the Yes radio button and enter the update endpoint: `https://[BASE_URI]/Task/Update`
    1. Click on Save. After the save completes, you will see your connector id.
-1. In the Web.config file, set the `configuration.appSettings.Base_Uri` variable to the ngrok https forwarding url from the above.
-1. In Visual Studio, click the play button.
-1. Now you can sideload your app package and test your new connector.
+   1. In the Web.config file, set the `configuration.appSettings.Base_Uri` variable to the ngrok https forwarding url from the above.
+   1. In Visual Studio, click the play button.
+   1. Now you can sideload your app package and test your new connector.
+   1. Once the connector is configured, you will get a notification in Team channel with link to the `Task Manager application`.
+   1. Go to Task Manager portal and click on Create New and enter the task details and Save.
+   1. You will see the MessageCard in the registered Teams channel.
+   1. You can try the actionable buttons available on the message card.
+   
+5. __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the  `app manifest` folder to replace your `ConnectorId` field in `~/app manifest/manifest.json` file with      your ConnectorId in `connectors` section.
+    - **Edit** the `manifest.json` for `validDomains`. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+ 
+        Example :
 
-2) __*This step is specific to Teams.*__
-1. Add your ngrok URL to validDomains. Teams will only show the sign-in popup if its from a whitelisted domain.
-- **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-
-   ```json
-    "connectors": [
-    {
-      "connectorId": "<<CONNECTOR_ID>>",
-      "configurationUrl": "https://<<NGROK>>/Connector/Setup",
-    }
-  ]
-    ```
-- **Zip** up the contents of the `TeamsAppPackages` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
-- **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
-- Add the app to personal/team/groupChat scope (Supported scopes)
+        ```json
+          "connectors": [
+          {
+            "connectorId": "<<CONNECTOR_ID>>",
+            "configurationUrl": "https://<<VALID-DOMAIN>>/Connector/Setup"
+          }
+        ]
+        ```
+    
+    - **Zip** up the contents of the `app manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+    - Add the app to personal/team/groupChat scope (Supported scopes)
 
 ## Running the sample
 
@@ -126,8 +127,9 @@ The sample shows a simple implementation of a connector registration implementat
 
 
 ## Further Information
-- For more information on developing apps for Microsoft Teams, please review the Microsoft Teams [developer documentation](https://docs.microsoft.com/en-us/microsoftteams/platform/overview).**
-For more information about getting started with Teams, please review the following resources:
+- For more information on developing apps for Microsoft Teams, please review the Microsoft Teams [developer documentation](https://docs.microsoft.com/en-us/microsoftteams/platform/overview).
+- Configure the [Teams ToDo Notification](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/connectors#accessing-office-365-connectors-from-microsoft-teams) connector.
+- For more information about getting started with Teams, please review the following resources:
 - Review [Getting Started with Teams](https://msdn.microsoft.com/en-us/microsoft-teams/setup)
 - Review [Getting Started with Bot Framework](https://docs.microsoft.com/en-us/bot-framework/bot-builder-overview-getstarted)
 - Review [Testing your bot with Teams](https://msdn.microsoft.com/en-us/microsoft-teams/botsadd)
