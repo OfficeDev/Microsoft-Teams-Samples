@@ -65,7 +65,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
     npm start
     ```
 
-### 4. Setup Manifest for Teams
+ 5. Setup Manifest for Teams
 
 - **This step is specific to Teams.**
     - Edit the `manifest.json` contained in the `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
@@ -89,7 +89,7 @@ Ensure you have the Debugger for Chrome/Edge extension installed for Visual Stud
 ### Build for production
 `npm run build`
 
-## Running the sample.
+## Running the sample
 
 ![PersonalTab](Images/PersonalTab.png)
 
