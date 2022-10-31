@@ -121,25 +121,23 @@ Click on Add Permissions to commit your changes.
 
 5. Complete the form as follows:
 
-    - Name: Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. 
-    For example BotTeamsAuthADv1.
+- Fill out the Connection Setting form
 
-    - Service Provider: Select Azure Active Directory. Once you select this, the Azure AD-specific fields will be displayed.
+    - Enter a name for your new Connection setting. This will be the name that gets referenced inside the settings of your bot service code in step 5
 
-    - Client id: Enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
+    - In the Service Provider dropdown, select Azure Active Directory V2
 
-    - Client secret: Enter the secret that you recorded for your Azure identity provider app in the steps above.
+    - Enter in the client id and client secret obtained in step 1.1 and 1.2
 
-    - Grant Type: Enter `authorization_code`
+    - For the Token Exchange URL keep the field blank
 
-    - Login URL: Enter https://login.microsoftonline.com
-
-    - Tenant ID: Enter the Directory (tenant) ID that you recorded earlier for your Azure identity app or `common` depending on the supported account type selected when you created the identity provider app.
-
-    - Resource URL: Enter https://graph.microsoft.com/
+    - Specify "common" as the Tenant ID
 
     - Scopes: Add these Scopes "AppCatalog.Submit, AppCatalog.Read.All,  AppCatalog.ReadWrite.All"
-    ![OAuthConnectionSettings ](AppCatalogSample/Images/OAuthConnectionSettings.png)
+
+    - Click "Save"
+
+    ![SSO Connection Settings](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/image017.png)
 
 ### Configuring the sample:
 

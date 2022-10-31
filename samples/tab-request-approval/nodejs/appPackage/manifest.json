@@ -27,8 +27,8 @@
     {
       "entityId": "request",
       "name": "Request",
-      "contentUrl": "https://<<YOUR-BASE-URL>>/UserNotification",
-      "websiteUrl": "https://<<YOUR-BASE-URL>>/UserNotification",
+      "contentUrl": "https://<<BASE-URL-DOMAIN>>/UserNotification",
+      "websiteUrl": "https://<<BASE-URL-DOMAIN>>/UserNotification",
       "scopes": [
         "personal"
       ]
@@ -40,7 +40,7 @@
   ],
   "validDomains": [
     "*.ngrok.io",
-	"<<YOUR-BASE-URL>>"
+	"<<BASE-URL-DOMAIN>>"
   ],
   "activities": {
     "activityTypes": [
@@ -53,6 +53,6 @@
   },
   "webApplicationInfo": {
     "id": "<<YOUR-MICROSOFT-APP-ID>>",
-    "resource": "api://<<YOUR-BASE-URL>>/<<YOUR-MICROSOFT-APP-ID>>"
+    "resource": "api://<<BASE-URL-DOMAIN>>/<<YOUR-MICROSOFT-APP-ID>>"
   }
 }

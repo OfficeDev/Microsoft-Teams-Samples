@@ -75,7 +75,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), f
   - Select `RegionSelectionApp.sln` file
   - Press `F5` to run the project
 
- - Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword generated in Step 1 (Setup for Bot SSO). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+ - Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword generated in Step 1 (Setup for Bot). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
  ### 4. Setup Manifest for Teams
 1) __*This step is specific to Teams.*__

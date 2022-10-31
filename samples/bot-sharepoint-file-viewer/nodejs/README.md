@@ -105,7 +105,7 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 ![View files](Images/viewfile.png)
 
 1) The `uploadfile` command will return a card, which will open a task module from where new files can be uploaded to sharepoint.
-![Upload file](Images/uploadfile.png)
+![Upload file](Images/uploadFile.png)
 ![Upload file page](Images/uploadfile-taskmodule.png)
 
 1) The files will be uploaded to sharepoint.

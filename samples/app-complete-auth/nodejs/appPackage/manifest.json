@@ -6,7 +6,7 @@
   "packageName": "com.microsoft.teams.appcompleteauth",
   "webApplicationInfo": {
     "id": "<<Microsoft-App-Id>>",
-    "resource": "api://{Base_URL}/botid-<<Microsoft-App-Id>>"
+    "resource": "api://{Base_URL_Domain}/botid-<<Microsoft-App-Id>>"
   },
   "developer": {
     "name": "Microsoft",
@@ -27,7 +27,7 @@
   },
   "staticTabs": [
     {
-      "contentUrl": "https://{Base_URL}/AuthTab",
+      "contentUrl": "https://{Base_URL_Domain}/AuthTab",
       "entityId": "Auth",
       "name": "Auth",
       "scopes": [
@@ -135,7 +135,7 @@
           "value": {
             "domains": [
               "*.botframework.com",
-              "{Base_URL}"
+              "{Base_URL_Domain}"
             ]
           }
         }
@@ -145,7 +145,7 @@
   "accentColor": "#60A18E",
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "{Base_URL}",
+    "{Base_URL_Domain}",
     "token.botframework.com"
   ]
 }

@@ -29,37 +29,7 @@ This sample app illustrates the proactive installation of app using Graph API an
     node --version
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## Setup
-> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
-the Teams service needs to call into the bot.
 
-1) Clone the repository
-
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
-
-2) In a terminal, navigate to `samples/javascript_nodejs/graph-proactive-installation`
-    ```bash
-    cd samples/graph-proactive-installation/nodejs
-    ```
-3)  Install modules
-
-    ```bash
-    npm install
-    ```
-4) Run ngrok - point to port 3978
-
-    ```bash
-    ngrok http -host-header=rewrite 3978
-    ```
-5) Update the `.env` configuration with the ```ClientId``` and ```ClientSecret```
-
-6) Run your bot at the command line
-
-    ```bash
-    npm start
-    ```
 ## Register Azure AD application
 Register one Azure AD application in your tenant's directory for the bot and tab app authentication.
 
@@ -107,22 +77,47 @@ Click on Add Permissions to commit your changes.
 4. Use the copied App Id and Client secret from above step and fill in App Id and App secret respectively.
 5. Click on 'Create' on the Azure bot.   
 6. Go to the created resource, ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-7. In Settings/Configuration/Messaging endpoint, enter the current `https` URL you have given by running ngrok. Append with the path `/api/messages`     
+7. In Settings/Configuration/Messaging endpoint, enter the current `https` URL you have given by running ngrok. Append with the path `/api/messages`
 
-### Configuring the sample:
+###  Setup NGROK
+1) Run ngrok - point to port 3978
 
-1. Update the manifest.json file with ```Microsoft-App-ID``` value and to get TeamsAppCatalogId upload your Manifest as `Submit an app to your org`.
+```bash
+# ngrok http -host-header=rewrite 3978
+```
 
-![UploadtoOrg ](Images/UploadtoOrg.png)
+## Setup the Code
+> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
+the Teams service needs to call into the bot.
 
-![UploadtoOrg2 ](Images/UploadtoOrg2.png)
+1) Clone the repository
 
-3. Go to .env file  and add `MicrosoftAppId` ,  `MicrosoftAppPassword` and `AppCatalogTeamAppId` information. 
-   - To get `AppCatalogTeamAppId` navigate to following link in your browser [Get TeamsAppCatalogId](https://developer.microsoft.com/en-us/graph/graph-explorer?request=appCatalogs%2FteamsApps%3F%24filter%3DdistributionMethod%20eq%20'organization'&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) from Microsoft Graph explorer.
-And then search with app name or based on Manifest App id in Graph Explorer response and copy the `Id` [i.e teamApp.Id]
-![GetAppCatalogTeamAppId ](Images/GetAppCatalogTeamAppId.png)
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
 
-3) __*This step is specific to Teams.*__
+2) In a terminal, navigate to `samples/javascript_nodejs/graph-proactive-installation`
+    ```bash
+    cd samples/graph-proactive-installation/nodejs
+    ```
+3)  Install modules
+
+    ```bash
+    npm install
+    ```
+
+4) Go to .env file  and add `MicrosoftAppId` ,  `MicrosoftAppPassword` and `AppCatalogTeamAppId` information. 
+    - To get `AppCatalogTeamAppId` navigate to following link in your browser [Get TeamsAppCatalogId](https://developer.microsoft.com/en-us/graph/graph-explorer?request=appCatalogs%2FteamsApps%3F%24filter%3DdistributionMethod%20eq%20'organization'&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) from Microsoft Graph explorer.
+    And then search with app name or based on Manifest App id in Graph Explorer response and copy the `Id` [i.e teamApp.Id]
+    ![GetAppCatalogTeamAppId ](Images/GetAppCatalogTeamAppId.png)
+
+5) Run your bot at the command line
+
+    ```bash
+    npm start
+    ```
+
+## Upload the Manifest
     - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)

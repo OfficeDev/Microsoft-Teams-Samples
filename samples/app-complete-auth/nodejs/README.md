@@ -142,11 +142,11 @@ Using this C# sample, you can check authenticate in bot,tab and messaging extent
 
 ### 4. Setup Manifest for Teams
 
-1. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
+1. Modify the `manifest.json` in the `/appPackage` folder and replace the following details:
    - `{{Microsoft-App-Id}}` with Application id generated from Step 3
-   - `{Base_URL}` - Your application's base url. E.g. for https://12345.ngrok.io the base url will be 12345.ngrok.io if you are using ngrok.
+   - `{Base_URL_Domain}` - Your application's base url domain. E.g. for https://12345.ngrok.io the base url domain will be 12345.ngrok.io if you are using ngrok.
 
-2. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
+2. Zip the contents of `appPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
 
 3. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps

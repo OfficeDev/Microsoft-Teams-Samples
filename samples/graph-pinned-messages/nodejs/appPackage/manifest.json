@@ -25,7 +25,7 @@
   "accentColor": "#5558AF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://{{BASE-URL}}/configure",
+      "configurationUrl": "https://{{BASE-URL-DOMAIN}}/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -38,10 +38,10 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{BASE-URL}}"
+    "{{BASE-URL-DOMAIN}}"
   ],
   "webApplicationInfo": {
     "id": "<<YOUR-MICROSOFT-APP-ID>>",
-    "resource": "api://{{BASE-URL}}/<<YOUR-MICROSOFT-APP-ID>>"
+    "resource": "api://{{BASE-URL-DOMAIN}}/<<YOUR-MICROSOFT-APP-ID>>"
   }
 }

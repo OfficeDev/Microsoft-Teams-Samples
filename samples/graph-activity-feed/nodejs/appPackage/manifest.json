@@ -25,7 +25,7 @@
   "accentColor": "#235EA5",
   "configurableTabs": [
     {
-      "configurationUrl": "https://<<YOUR-BASE-URL>>/configure",
+      "configurationUrl": "https://<<BASE-URL-DOMAIN>>/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -41,8 +41,8 @@
     {
 		"entityId": "personal",
 		"name": "UserNotification",
-		"contentUrl": "https://<<YOUR-BASE-URL>>/UserNotification",
-		"websiteUrl": "https://<<YOUR-BASE-URL>>/UserNotification",
+		"contentUrl": "https://<<BASE-URL-DOMAIN>>/UserNotification",
+		"websiteUrl": "https://<<BASE-URL-DOMAIN>>/UserNotification",
 		"scopes": [
 			"personal"
 		]
@@ -54,7 +54,7 @@
   ],
   "validDomains": [
     "*.ngrok.io",
-    "<<appDomain>>"
+    "<<BASE-URL-DOMAIN>>"
   ],
   "activities": {
     "activityTypes": [
@@ -87,6 +87,6 @@
   },
   "webApplicationInfo": {
     "id": "<<YOUR-MICROSOFT-APP-ID>>",
-    "resource": "api://<<YOUR-BASE-URL>>/<<YOUR-MICROSOFT-APP-ID>>"
+    "resource": "api://<<BASE-URL-DOMAIN>>/<<YOUR-MICROSOFT-APP-ID>>"
   }
 }

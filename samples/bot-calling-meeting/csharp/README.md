@@ -191,20 +191,20 @@ For example `https://contoso.com/teamsapp/callback`
 ![CallingBotInstallation ](Images/CallingBotInstallation.png)
 
 * Bot will send adaptive card as mentioned below.
-![WelcomeCard ](Images/WelcomeCard.png)
+![WelcomeCard ](Images/WelcomeCard.PNG)
 
 * User can ask Bot to create a call and can join that call.
-![CreateCall ](Images/CreateCall.png)
-![CallPlaced ](Images/CallPlaced.png)
-![CallJoined ](Images/CallJoined.png)
+![CreateCall ](Images/CreateCall.PNG)
+![CallPlaced ](Images/CallPlaced.PNG)
+![CallJoined ](Images/CallJoined.PNG)
 
 * User can ask Bot to transfer the call.
- ![TransferCall ](Images/TransferCall.png)
+ ![TransferCall ](Images/TransferCall.PNG)
 
 * User can ask Bot to schedule a meeting and invite the participants
 
-   ![JoinScheduledCall ](Images/JoinScheduledCall.png)
-   ![InviteParticipant ](Images/InviteParticipant.png)
+   ![JoinScheduledCall ](Images/JoinScheduledCall.PNG)
+   ![InviteParticipant ](Images/InviteParticipant.PNG)
 
 ## Deploy the bot to Azure
 

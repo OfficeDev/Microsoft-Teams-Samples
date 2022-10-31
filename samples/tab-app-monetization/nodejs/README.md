@@ -49,11 +49,11 @@ This sample shows how to open purchase dialog and trigger purchase flow using te
 ```
 
 ## 4) Setup for code
-2) Clone the repository
+1) Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
-3) Install node modules
+2) Install node modules
 
    Inside node js folder,  navigate to `samples/tab-app-monetization/nodejs/ClientApp` open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
 
@@ -62,7 +62,7 @@ This sample shows how to open purchase dialog and trigger purchase flow using te
     ```
    **_Note_** - Navigate to `samples/tab-app-monetization/nodejs/ClientApp/src/components/tab.tsx` and update the planId and term on line 14 and 15 with plan details created in step 2
 
-5) Run the solution from the same path terminal using below command.
+3) Run the solution from the same path terminal using below command.
 
     ```
     npm start
@@ -71,7 +71,7 @@ This sample shows how to open purchase dialog and trigger purchase flow using te
 ###  5) Setup Manifest for Teams
 1. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
    - `{{App-id}}` with your application id created in step 1.
-   - `{{Domain Name}}` with your application's base url, e.g. For https://1234.ngrok.io the Domain Name will be 1234.ngrok.io
+   - `{{Domain-Name}}` with your application's base url domain, e.g. For https://1234.ngrok.io the Domain Name will be 1234.ngrok.io
    - `{{Plan-id}}` with plan id generated in step 2.
 
 2. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
