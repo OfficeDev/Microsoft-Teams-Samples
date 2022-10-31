@@ -26,7 +26,7 @@
   "connectors": [
     {
       "connectorId": "<<connector-Id>>",
-      "configurationUrl": "https://<<base-url>>/SetupAuth",
+      "configurationUrl": "https://<<App-Domain>>/SetupAuth",
       "scopes": [
         "team"
       ]
