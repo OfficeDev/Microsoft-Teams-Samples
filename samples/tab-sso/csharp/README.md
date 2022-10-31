@@ -84,15 +84,22 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
     * Enter the **redirect URI** for the app in the following format: https://%ngrokDomain%.ngrok.io/Home/BrowserRedirect
   14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
+2. Setup for Bot
+- Register a AAD aap registration in Azure portal.
+- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
-2) Setup NGROK
+    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
+    
+3. Setup NGROK
 - Run ngrok - point to port 3978
 
 ```bash
 # ngrok http -host-header=rewrite 3978
 ```
 
-3) Setup for code
+4. Setup for code
 
 - Clone the repository
 
@@ -114,7 +121,7 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
   - Select `TeamsTabSSO.csproj` file
 
 
-4) Setup Manifest for Teams
+5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./Manifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
