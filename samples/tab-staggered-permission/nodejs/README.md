@@ -109,12 +109,19 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     ```bash
     npm start
     ```
-5. Setup Manifest for Teams
 
-- **This step is specific to Teams.**
-    - Edit the `manifest.json` contained in the `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
-    - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
+5. Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    -  **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://{{Base_URL}}/{{Microsoft-App-Id}}"` with MicrosoftAppId. E.g. `"api://ngrok.io/00000-0000-0000"`
+    - **Zip** up the contents of the `AppPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 ## Running the sample
 
