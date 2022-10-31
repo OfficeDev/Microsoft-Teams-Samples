@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-bot-release-management-csharp
 ---
 
-# Bot to create the group chat and send task notification using Azure service hook.
+# Bot to create the group chat and send task notification using Azure service hook
 
 This is a sample application which demonstrates how to create a service hooks on [Azure DevOps](https://dev.azure.com) and connect with Teams bot that creates a group chat and send workitems details.
 
