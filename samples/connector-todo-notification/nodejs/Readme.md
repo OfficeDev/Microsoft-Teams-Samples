@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-connector-todo-notification-nodej
 
 This is a sample connector application which demonstarates how to add authentication to connector configuration page and send notification on task creation.
 
-- **Interaction with bot**
+**Interaction with bot**
 ![Connector_Todo](Images/Connector_Todo_Nodejs.gif) 
 
 ## Prerequisites
@@ -111,34 +111,34 @@ This is a sample connector application which demonstarates how to add authentica
 
 ## Running the sample
 
-- **Setup your App in Teams**
+**Setup your App in Teams**
 ![setup](Images/1.Setup.png)
 
-- **Click to `Setup a Connector` as given in the below image**. 
+**Click to `Setup a Connector` as given in the below image**. 
 ![Setup_connector](Images/2.Setup_connector.png)
 
-- **Sign In.**
+**Sign In.**
 ![Connector_App_SigIn](Images/3.Connector_App_SigIn.png)
 
-- **Welcome message after successfull SignIn**
+**Welcome message after successfull SignIn**
 ![Welcome_Save](Images/4.Welcome_Save.png)
 
-- **Now connector todo is configured.**
+**Now connector todo is configured.**
 ![Added_to_channel](Images/5.Added_to_channel.png)
 
-- **Task Details will displayed.**
+**Task Details will displayed.**
 ![Task_details](Images/6.Task_details.png)
 
-- **Click Create button to create a new task.** 
+**Click Create button to create a new task.** 
 ![Task_Creation](Images/7.Task_Creation.png)
 
-- **Task add successfull message.**
+**Task add successfull message.**
 ![Task_Added_Successfully](Images/8.Task_Added_Successfully.png)
 
-- **Created task list will displayed as below image shows.** 
+**Created task list will displayed as below image shows.** 
 ![Task_List](Images/9.Task_List.png)
 
-- **This is notify you in the channel group.**
+**This is notify you in the channel group.**
 ![Task_Notification](Images/10.Task_Notification.png)
 
 
