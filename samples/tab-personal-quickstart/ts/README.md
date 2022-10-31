@@ -24,18 +24,11 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
 
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-#### ngrok
+## Setup
 
-Teams needs to access your tab from a publically accessible URL. If you are running your app in localhost, you will need to use a tunneling service like ngrok.
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
--  Run ngrok and point it to localhost:
--  `ngrok http https://localhost:3978`
-
-
-## Setup.
-1) Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-
-2) Setup for Bot
+2. Setup for Bot
 
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name.
@@ -44,20 +37,40 @@ Teams needs to access your tab from a publically accessible URL. If you are runn
     
    In the new Azure Bot resource in the Portal, 
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. 
+    
+ 3. Setup NGROK
+  - Run ngrok - point to port 3978
 
--  [Create an Azure AD App registration to support SSO and the User.Read Graph API](https://aka.ms/teams-toolkit-sso-appreg)
+    ```bash
+    ngrok http -host-header=rewrite 3978
+    ```
+ 4. Setup for code
+ - Clone the repository
 
-## Build and Run
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
 
-In the project directory, execute:
+-  In a terminal, navigate to `samples/tab-personal-quickstart/ts`
 
-`npm install`
+ - Install modules
 
-`npm start`
+    ```bash
+    npm install
+    ```
+ - Run your app
 
-## Deploy to Teams
-Start debugging the project by hitting the `F5` key or click the debug icon in Visual Studio Code and click the `Start Debugging` green arrow button.
+    ```bash
+    npm start
+    ```
+
+ 5. Setup Manifest for Teams
+
+- **This step is specific to Teams.**
+    - Edit the `manifest.json` contained in the `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
+    - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
 ### NOTE: First time debug step
 On the first time running and debugging your app you need allow the localhost certificate.  After starting debugging when Chrome is launched and you have installed your app it will fail to load.
