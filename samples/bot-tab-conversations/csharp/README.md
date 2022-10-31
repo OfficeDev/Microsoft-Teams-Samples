@@ -190,7 +190,7 @@ There is also a personal tab that will list inquires from all the support depart
 * Deploying
     * There are detailed instructions for deploying locally below.
 * Sideloading the App
-    * Create a zip containing `manifest.json`, `colorIcon.png` and `outlineIcon.png` from `Source\MeetingSigning.Web\Manifest`.
+    * Create a zip containing `manifest.json`, `colorIcon.png` and `outlineIcon.png` from `Source\ConversationalTabs.Web\Manifest`.
     * [You can upload you app by following these instructions](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload)
 
 ## Known issues
