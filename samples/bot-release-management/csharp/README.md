@@ -43,6 +43,7 @@ This is a sample application which demonstrates how to create a service hooks on
 2) Once started you should see ngrok URL like `https://xxxxx-xxx-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
 
 **Register Azure AD application**
+
 Register one Azure AD application in your tenant's directory: for the bot and tab app authentication.
 
 -  Log in to the Azure portal from your subscription, and go to the "App registrations" blade  [here](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps). Ensure that you use a tenant where admin consent for API permissions can be provided.
@@ -83,6 +84,7 @@ Click on Add Permissions to commit your changes.
 - Global Administrator can grant consent using following link:  [https://login.microsoftonline.com/common/adminconsent?client_id=](https://login.microsoftonline.com/common/adminconsent?client_id=)<%appId%> 
 
 **Setup for Bot**
+
 - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
@@ -91,6 +93,7 @@ Click on Add Permissions to commit your changes.
     > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
 **Setup Azure DevOps service hook**
+
 - Follow this document- [Create Webhooks](https://docs.microsoft.com/en-us/azure/devops/service-hooks/services/webhooks?view=azure-devops) to service hook. 
 
 - Make sure to select trigger as *Work item created*
@@ -100,6 +103,7 @@ Click on Add Permissions to commit your changes.
 **NOTE: If you are not getting incoming request from Azure DevOps make sure that service webhook is in *Enabled* state.**
 
 **Setup custom work item type**
+
 - Follow the doc to [Add a custom field to an inherited process - Azure DevOps Services](https://docs.microsoft.com/en-us/azure/devops/organizations/settings/work/add-custom-field?view=azure-devops). 
 
 - Make sure to give name as *StakeholderTeam* and Type *Text (Single line)*
