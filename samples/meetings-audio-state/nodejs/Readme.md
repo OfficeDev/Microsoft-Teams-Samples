@@ -18,7 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-meeting-audio-state-nodejs
 
 This sample shows how to mute/unmute Teams meeting audio using toggle Incoming Client Audio API.
 
-- **Interaction with bot**
+**Interaction with bot**
 ![mute-unmute](Images/mute-unmute-audiostate.gif)
 
 ## Prerequisites
@@ -38,8 +38,7 @@ This sample shows how to mute/unmute Teams meeting audio using toggle Incoming C
 
 2) Setup for Bot
 
-### 1. App Registration 
-
+  **App Registration** 
  - In Azure portal, [Register an app ](https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade)
 
 1) Clone the repository
@@ -84,15 +83,15 @@ This sample shows how to mute/unmute Teams meeting audio using toggle Incoming C
 You can interact with Teams Tab meeting sidepanel.
 
 1. **Select your app**
-- Add your application to the `meetings` as its display as below.
+Add your application to the `meetings` as its display as below.
 ![Stage 1](Images/joinTheCall.png)
 
 2. **Toggle To Mute**
-- Toggle button to mute state its looks like below.
-![Stage 2](Images/ToggleMutepng)
+Toggle button to mute state its looks like below.
+![Stage 2](Images/ToggleMute.png)
 
 3. **Toggle To Unmute**
-- Toggle button to Unmute state it will unmute client audio.
+Toggle button to Unmute state it will unmute client audio.
 ![Stage 3](Images/ToggleUnMute.png)
 
 
