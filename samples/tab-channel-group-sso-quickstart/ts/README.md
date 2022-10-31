@@ -13,7 +13,7 @@ extensions:
  createdDate: "07-07-2021 13:38:27"
 urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-ts
 ---
-## Interaction with app. 
+## Interaction with app
 
 ![setupteams](Images/TabChannelGroupSSOModule.gif)
 
@@ -22,24 +22,19 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-
 Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
 
 ## Prerequisites
--  [NodeJS](https://nodejs.org/en/)
-
--  [ngrok](https://ngrok.com/)
-
--  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
-
-
-Teams needs to access your tab from a publically accessible URL. If you are running your app in localhost, you will need to use a tunneling service like ngrok. Run ngrok and point it to localhost.
-  `ngrok http -host-header=rewrite 3978`
+- Microsoft Teams is installed and you have an account (not a guest account)
+- To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
+- [ngrok](https://ngrok.com/) or equivalent tunneling solution
+- [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
   
-## Setup.
+## Setup
 
 ### Register your application with Azure AD
 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-2. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the .env file at both client and server.
-3. Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json file.
-4. Navigate to **Authentication**
+  - On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the .env file at both client and server.
+  - Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json file.
+  - Navigate to **Authentication**
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
 
     Set a redirect URI:
@@ -52,8 +47,8 @@ Teams needs to access your tab from a publically accessible URL. If you are runn
     ✔ ID Token  
     ✔ Access Token
 
-5. Under **Manage**, select **Expose an API**. 
-    - Select the **Set** link to generate the Application ID URI in the form of `api://{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name.com/{AppID}`
+   - Under **Manage**, select **Expose an API**. 
+   - Select the **Set** link to generate the Application ID URI in the form of `api://{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name.com/{AppID}`
         * ex: `api://subdomain.example.com/00000000-0000-0000-0000-000000000000`.
         
         The fully qualified domain name is the human readable domain name from which your app is served. If you are using a tunneling service such as ngrok, you will need to update this value whenever your ngrok subdomain changes.
@@ -72,17 +67,17 @@ Teams needs to access your tab from a publically accessible URL. If you are runn
         * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
         * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
 
-## Set up the client .env with the following keys:
+  ## Set up the client .env with the following keys:
     - `"REACT_APP_AZURE_APP_REGISTRATION_ID"` : Application ID of the Azure AD application
     - `"REACT_APP_BASE_URL"` : Ngrok URL you get after running the ngrok command.
 
-## Set up the `api-server` .env with the following keys:
-Go to the folder `api-server` and update following values in .env files
+  ## Set up the `api-server` .env with the following keys:
+   Go to the folder `api-server` and update following values in .env files
 
     - `"CLIENT_ID"` : Application ID of the Azure AD application
     - `"CLIENT_SECRET"` : Application secret of the Azure AD application
     
-## Setup for Bot
+2. Setup for Bot
 
    In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
     - For bot handle, make up a name.
@@ -93,26 +88,53 @@ Go to the folder `api-server` and update following values in .env files
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path
 
-## Build and Run
+3. Setup NGROK
+  - Run ngrok - point to port 3978
+
+    ```bash
+    ngrok http -host-header=rewrite 3978
+    ```
+4. Setup for code
+ - Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+  - In a terminal, navigate to `samples/tab-channel-group-sso-quickstart/ts`
+  -Update the `.env` configuration for the bot to use the `REACT_APP_AZURE_APP_REGISTRATION_ID` `, `REACT_APP_BASE_URL` with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot).
+  
+  - Build and Run
 You can build and run the project from the command line or an IDE:
 
-1. Navigate to the Project root folder
-2. Build Client
+- Navigate to the Project root folder
+- Build Client
     - Open terminal
     - Install pacakge with npm install
     - npm run build
-3. Run Client
+- Run Client
     - Open new terminal
     - npm start
     - The client will start running on 3000 port
-4. Run Server
+- Run Server
     - Open new terminal
     - Change directory to `api-server` folder with command i.e. `cd api-server`
     - Install pacakge with npm install
     - npm start
     - The server will start running on 5000 port
-5. Update the manifest's `<<REACT_APP_AZURE_APP_REGISTRATION_ID>>` & `<<REACT_APP_BASE_URL>>` with their repective values and zip it under appPackage folder
-6. Now your application is running and ready to upload
+    
+ 5. Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+     - **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://<<REACT_APP_BASE_URL>>/<<REACT_APP_AZURE_APP_REGISTRATION_ID>>"` with MicrosoftAppId. E.g. `"api://1234.ngrok.io/000000000000-00000000-00"`.
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 ### Build for production
 `npm run build`

@@ -21,52 +21,57 @@ This Teams tab app provides a way to allow users to have conversations about sub
 
 ![TabConversationModule](TabConversation/Images/tabconversationmodule.gif)
 
-## Prerequisites
+## Setup
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2. Setup for Bot
+- Register a AAD aap registration in Azure portal.
+- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
-- Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
+    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
-- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+3. Setup NGROK
+- Run ngrok - point to port 3978
 
-## To try this sample
+```bash
+# ngrok http -host-header=rewrite 3978
+```
+
+4. Setup for code
 
 - Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
+- Run the bot from a terminal or from Visual Studio:
 
-- In a console, navigate to `samples/tab-conversations/csharp`
+  A) From a terminal, navigate to `samples/tab-conversations/csharp`
 
-    ```bash
-    cd samples/tab-conversations/ch
-    ```
+  ```bash
+  # run the bot
+  dotnet run
+  ```
+  B) Or from Visual Studio
+     - Launch Visual Studio
+     - File -> Open -> Project/Solution
+     - Navigate to `tab-conversations` folder
+     - Select `TabConversation.csproj` file
+     - Press `F5` to run the project
 
-- Run ngrok - point to port `3978`
-
-    ```bash
-    ngrok http -host-header=localhost 3978
-    ```
- ## Setup
- 
-- Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-- Setup for Bot
-
-   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
-    - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
-    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
-    
-   In the new Azure Bot resource in the Portal, 
-    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages
+5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace `<<your base url>>` with your ngrok url or hosted app url and also update the `<<DOMAIN-NAME>>` for allowed domains.
-    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
-         - Go to Microsoft Teams. From the lower left corner, select Apps
-         - From the lower left corner, choose Upload a custom App
-         - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
-         - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
+    - **Edit** the `manifest.json` contained in the ./AppManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+
          
 ## Running the sample
 

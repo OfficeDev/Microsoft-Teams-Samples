@@ -21,6 +21,18 @@ In this quickstart we'll walk-through creating a custom channel/group tab with C
 
 ![Group Channel Tab](Images/ChannelGroupTabModule.gif)
 
+## Prerequisites
+
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+
+  determine dotnet version
+  ```bash
+  dotnet --version
+  ```
+- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+  
+- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+
 ## Setup
 
 For complete instructions on running this sample see:

@@ -26,42 +26,51 @@ Verify you have the right account for building Teams apps and install some recom
 
 - You need a Teams account that allows [custom app sideloading](https://docs.microsoft.com/en-us/microsoftteams/platform/build-your-first-app/build-first-app-overview#set-up-your-development-account).
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [ngrok](https://ngrok.com/download) or equivalent tunnelling solution
 
-- Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-   > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
+## Setup
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
-## Setup.
+2. Setup for Bot
+	- Register a AAD aap registration in Azure portal.
+	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-               registration?view=azure-bot-service-3.0).
+	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+	- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
-1) Clone the repository
+    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
+
+3. Setup NGROK
+      - Run ngrok - point to port 3978
+
+	```bash
+	# ngrok http -host-header=rewrite 3978
+	```   
+4. Setup for code
+
+  - Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
+  - Modify the `/appsettings.json` and fill in the following details:
+  - `{{MicrosoftAppId}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
+  - `{{ClientSecret}}` - Generated from Step 1, also referred to as Client secret 
 
-2) If you are using Visual Studio
+- Run the bot from a terminal or from Visual Studio:
+
+5. If you are using Visual Studio
   - Launch Visual Studio
   - File -> Open -> Project/Solution
   - Navigate to `app-localization\csharp` folder
   - Select `Localization.csproj` file
 
-3) Run ngrok - point to port 3978
-
-    ```bash
-    ngrok http --host-header=localhost
-    ```
-
-4) This step is related to Microsoft Teams app manifest
-    - **Edit** the `manifest.json` contained in the `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+6. This step is related to Microsoft Teams app manifest
+    - **Edit** the `manifest.json` contained in the `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` and <<Azure Bot ID>> and for the contentUrl "<<1234.ngrok.io>>?culture={locale}" (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Provide ngrok Url** (turnnelling Url) in `manifest.json` for contentUrl in case of tabs and for messaging endpoint in case of bots if enabled. 
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-5) Run your app, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
-
-## Running the sample.
+# Running the sample
 
 In Teams, Once the app is successfully installed, you can interact with tab and bot in your preferred language.
 
