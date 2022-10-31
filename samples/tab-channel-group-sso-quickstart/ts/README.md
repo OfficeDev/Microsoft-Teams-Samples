@@ -95,7 +95,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
     ngrok http -host-header=rewrite 3978
     ```
 4. Setup for code
-1) Clone the repository
+ - Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
