@@ -34,6 +34,8 @@ Task modules build on the foundation of Microsoft Teams tabs: a task module is e
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
    appropriate permissions to install an app.
    
+ ## Setup
+ 
  1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
    
  2. Setup for Bot
@@ -50,17 +52,33 @@ Task modules build on the foundation of Microsoft Teams tabs: a task module is e
     ngrok http -host-header=rewrite 3978
     ```
 4. Setup for code
-1) Clone the repository
+  - Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
+  - In a terminal, navigate to `samples/app-task-module/nodejs`
+  
+  - Update the `.env` configuration for the bot to use the `MICROSOFT_APP_ID` and `MICROSOFT_APP_PASSWORD` from the Azure Bot resource. (Note that the MicrosoftAppId is the AppId created in step 1, the MicrosoftAppPassword is referred to as the "client secret" in step 1 and you can always create a new client secret anytime.). For `BASE_URI` provide the application base url, you get by running ngrok it should look something like `https://abc21-hun-12ef.ngrok.io`
+
+  - Install modules
+
+    ```bash
+    npm install
+    ```
+  - Build application:
+
+    ```bash
+    npm run build
+    ```
+
+  - Run your app.
+  
+    ```bash
+    npm start
+    ```
    
-## Try it yourself
-
-This sample is deployed on Microsoft Azure and you can try it yourself by uploading [TaskModule.zip](./TaskModule.zip) to one of your teams and/or as a personal app. (Sideloading must be enabled for your tenant; see [step 6 here](https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-tenant#turn-on-microsoft-teams-for-your-organization).) The app is running on the free Azure tier, so it may take a while to load if you haven't used it recently and it goes back to sleep quickly if it's not being used, but once it's loaded it's pretty snappy.
-
-## Overview of this sample
+ ## Overview of this sample
 
 This sample app was developed in conjunction with the task module feature itself to exercise as much of it as possible. Here's what's included:
 
@@ -98,48 +116,6 @@ You can invoke them from an Adaptive card (using the _tasks_ command) or from a 
 * _Adaptive Card - Single_ returns the results to the conversation as a message.
 * _Adaptive Card - Sequence_ shows how adaptive cards can be chained together: instead of returning the result to the chat, the result is shown in another Adaptive card.
 
-## Run this sample locally.
-> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
-> the Teams service needs to call into the bot.
-
-### 1. Setup for Bot
-In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/abs-quickstart?view=azure-bot-service-4.0&tabs=userassigned).
-
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-
-### 2. Run your bot sample
-1) Clone the repository
-
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
-
-2) In a terminal, navigate to `samples/app-task-module/nodejs`
-
-3) Install modules
-
-    ```bash
-    npm install
-    ```
-6) Build application:
-
-    ```bash
-    npm run build
-    ```
-
-4) Run ngrok - point to port 3978
-
-    ```bash
-    ngrok http -host-header=rewrite 3978
-    ```
-    This will be used as baseURI.
-5) Update the `.env` configuration for the bot to use the `MICROSOFT_APP_ID` and `MICROSOFT_APP_PASSWORD` from the Azure Bot resource. (Note that the MicrosoftAppId is the AppId created in step 1, the MicrosoftAppPassword is referred to as the "client secret" in step 1 and you can always create a new client secret anytime.). For `BASE_URI` provide the application base url, you get by running ngrok it should look something like `https://abc21-hun-12ef.ngrok.io`
-
-6) Run your bot at the command line:
-
-    ```bash
-    npm start
-    ```
 
 ## Implementation notes
 
@@ -155,9 +131,22 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
 * To avoid hardcoding an `appId` in [customform.pug](src/views/customform.pug), the `appId` is passed in at Pug template rendering time by [tabs.ts, the TypeScript  which implements the tab routes](src/tabs.ts).
 * Theming and simple keyboard handling for the Esc key are supported.
 
+5. Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./src folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `src` opy that file and paste someother folder then zip `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./src folder, copy that file and paste someother folder then zip, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+
 ## Bonus features
 
 There's also an _actester_ bot command. It's a handy way of seeing what an Adaptive card looks like in Teams - simply copy/paste the JSON of Adaptive cards, e.g. the [Samples page on the Adaptive card site](http://adaptivecards.io/samples/), and the bot will render it as a reply.
+
 
 ## Contributing
 
