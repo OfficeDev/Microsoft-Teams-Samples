@@ -1,4 +1,3 @@
-﻿
 ---
 page_type: sample
 description: Demonstrating the feature of typeahead search (static and dynamic) control in Adaptive Cards.
