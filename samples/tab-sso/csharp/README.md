@@ -37,24 +37,24 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
    1. Select **New Registration** and on the *register an application page*, set following values:
-    * Set **name** to your app name.
-    * Choose the **supported account types** (any account type will work)
-    * Leave **Redirect URI** empty.
-    * Choose **Register**.
+     * Set **name** to your app name.
+     * Choose the **supported account types** (any account type will work)
+     * Leave **Redirect URI** empty.
+     * Choose **Register**.
    2. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
    3. Under **Manage**, select **Expose an API**. 
    4. Select the **Set** link to generate the Application ID URI in the form of `api://{AppID}`. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: `api://fully-qualified-domain-name/{AppID}`
-    * ex: `api://%ngrokDomain%.ngrok.io/00000000-0000-0000-0000-000000000000`.
+     * ex: `api://%ngrokDomain%.ngrok.io/00000000-0000-0000-0000-000000000000`.
    5. Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
    6. Set **Who can consent?** to `Admins and users`
    7. Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
-    * **Admin consent title:** Teams can access the user’s profile.
-    * **Admin consent description**: Allows Teams to call the app’s web APIs as the current user.
-    * **User consent title**: Teams can access the user profile and make requests on the user's behalf.
-    * **User consent description:** Enable Teams to call this app’s APIs with the same rights as the user.
+     * **Admin consent title:** Teams can access the user’s profile.
+     * **Admin consent description**: Allows Teams to call the app’s web APIs as the current user.
+     * **User consent title**: Teams can access the user profile and make requests on the user's behalf.
+     * **User consent description:** Enable Teams to call this app’s APIs with the same rights as the user.
    8. Ensure that **State** is set to **Enabled**
    9. Select **Add scope**
-    * The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end:
+     * The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end:
         * `api://[ngrokDomain].ngrok.io/00000000-0000-0000-0000-000000000000/access_as_user.
    10. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
     * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
@@ -104,7 +104,7 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
   - `{{AzureAD Client Id}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
   - `{{ Azure App secret}}` - Generated from Step 1, also referred to as Client secret
   - `{{ AzureAD Tenant Id}}` - Generated from Step 1, also referred to as Directory Tenant Id
-  - `{{ Application ID URI }}` - Your Application ID URI. E.g. api://1245.ngrok.io/App-id
+  - `{{ Application ID URI }}` - Your Application ID URI.  ex: `api://%ngrokDomain%.ngrok.io/00000000-0000-0000-0000-000000000000`
 
 
  - If you are using Visual Studio
