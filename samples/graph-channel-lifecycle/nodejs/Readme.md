@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-channel-lifecycle-nodejs
 
 This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-1.0) life cycle which includes create, update delete a channel.
 
-## Interaction with app.
+## Interaction with app
    
   ![](Images/GraphChannelLifeCycleModule.gif)
 
@@ -52,7 +52,7 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
     ```
   - In a terminal, navigate to `samples/graph-channel-lifecycle/nodejs
  
- - Update the `.env` configuration for the bot to use the `ClientId` and `ClientSecret (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+ - Update the `.env` configuration for the bot to use the `ClientId` and `ClientSecret` (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
 - Install modules
 
