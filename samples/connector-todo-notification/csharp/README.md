@@ -92,7 +92,7 @@ The minimum prerequisites to run this sample are:
 
 ## Running the sample
 
-- **Setup your App in Teams**
+**Setup your App in Teams**
 ![Setup App](TeamsToDoAppConnector/Images/1.Setup.png)
 
 **Setup Connector**
