@@ -45,7 +45,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
-4. Setup for code
+ 4. Setup for code
  - Clone the repository
 
     ```bash
