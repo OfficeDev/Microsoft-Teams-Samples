@@ -90,7 +90,7 @@ Using this csharp sample, you can check how to get staggered graph api permissio
 - Run ngrok - point to port 3978
 
 ```bash
-# ngrok http -host-header=rewrite 3978
+ ngrok http -host-header=rewrite 3978
 ```
 
 4. Setup for code
