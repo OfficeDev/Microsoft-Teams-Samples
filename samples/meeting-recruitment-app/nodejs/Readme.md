@@ -27,42 +27,37 @@ It has meeting details and in-meeting app that helps in the interview process.
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/en/) must be installed on your development machine (version 16.14.2  or higher).
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [ngrok](https://ngrok.com/download) or equivalent tunnelling solution
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 
 ## Setup
 
-### 1. Setup NGROK
+ 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal. 
+  
+         Go to App registrations and create a new app registration in a different tab.
+      Register an application.
+      Fill out name and select third option for supported account type and click "Register".
 
-Run ngrok - point to port 3000
+      ![AppRegistration](Images/AppRegistration.gif)
 
-    ```bash
-    # ngrok http -host-header=rewrite 3000
-    ```
+      * Copy and paste the App Id and Tenant ID somewhere safe. You will need it in a future step.
 
-### 2. Setup Bot
+      - Create Client Secret.
+         * Navigate to the "Certificates & secrets" blade and add a client secret by clicking "New Client Secret".
 
-1) Go to App registrations and create a new app registration in a different tab.
-Register an application.
-Fill out name and select third option for supported account type and click "Register".
+      ![ClientSecret](Images/clientsecret.gif) 
 
-![AppRegistration](Images/AppRegistration.gif)
+      * Copy and paste the secret somewhere safe. You will need it in a future step.
 
-* Copy and paste the App Id and Tenant ID somewhere safe. You will need it in a future step.
-
-2) Create Client Secret.
-   * Navigate to the "Certificates & secrets" blade and add a client secret by clicking "New Client Secret".
-
-![ClientSecret](Images/clientsecret.gif) 
-
-* Copy and paste the secret somewhere safe. You will need it in a future step.
-
-3) Create a Bot Registration in Azure portal. [Bot Framework registration](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2#create-the-resource)
-
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+ 
+ 2. Setup for Bot
+    - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+    **NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
     
-4) Create a Azure Storage account(This is needed to store/retrieve data that's used in the app) 
+ 3. Create a Azure Storage account(This is needed to store/retrieve data that's used in the app) 
   [Create storage account](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal)
 
    This step will create a storage account. You will require storage account name and keys in next steps.
@@ -70,44 +65,47 @@ Fill out name and select third option for supported account type and click "Regi
    Please follow [View account keys](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to see the   
    keys info.
 
-### 3. Setup for code   
+4. Setup NGROK
+   - Run ngrok - point to port 3978
 
-1) Clone the repository
-   ```bash
-   git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-   ```
+    ```bash
+    ngrok http -host-header=rewrite 3978
+    ```
+5. Setup for code
 
-2) Modify the `.env` file in the location `samples/meeting-app/nodejs/api` and fill in the `{{ MicrosoftAppId }}`, `{{ MicrosoftAppPassword }}` generated from step 1 
-   i.e. (Create a bot registration step).
+  - Clone the repository
 
-3) Modify the `keys.js` file in the location `samples/meeting-app/nodejs/api/server` and fill in the `[STORAGE ACCOUNT NAME]` and `[ACCESS KEY]` for azure table storage.
-
-4) We have two different solutions to run so follow below steps:
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+   
+   -Modify the `keys.js` file in the location `samples/meeting-app/nodejs/api/server` and fill in the `[STORAGE ACCOUNT NAME]` and `[ACCESS KEY]` for azure table storage.
  
-   A) In a terminal, navigate to `samples/meeting-recruitment-app/nodejs/api`
 
-   B) In a different terminal, navigate to `samples/meeting-recruitment-app/nodejs/clientapp`
+  - We have two different solutions to run so follow below steps:
+ 
+    A) In a terminal, navigate to `samples/meeting-recruitment-app/nodejs/api`
 
-   * In both the terminal run 
+    B) In a different terminal, navigate to `samples/meeting-recruitment-app/nodejs/clientapp`
+
+     * In both the terminal run 
    
-   npm install
+       npm install
 
-   npm start
+       npm start
 
-### 4. Setup Manifest for Teams  
-   
-1) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
-   - `<<APP-ID>>` with some unique GUID. e.g. your app id generated in Step-1 
-   - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
-   - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
-
-2) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
-
-3) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+6. Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `<<APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `<<BASE-URL>>` and replace `<<BASE-URL>>` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `AppPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)    
+    
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
-   - Select Add to meeting in the pop-up dialog box. Your app is uploaded to Teams.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+
 
 ## Running the sample
 
