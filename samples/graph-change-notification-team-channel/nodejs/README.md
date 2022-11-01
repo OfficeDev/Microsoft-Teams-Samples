@@ -75,7 +75,7 @@ To include resource data of graph notifications, this Graph API require self-sig
 3. Follow this documentation for the steps - [**Create and install Self-Signed certificate**](CertificateDocumentation/README.md)
 
 
-3) Clone the repository
+4. Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
@@ -103,18 +103,24 @@ To include resource data of graph notifications, this Graph API require self-sig
     npm install
     ```
 
-   - Run your app
+    Run your app
 
-   ```bash
+    ```bash
      npm start
-   ``` 
+    ``` 
 
- B) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-    - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
-    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
-    - Add the app to personal/team/groupChat scope (Supported scopes). 
+
+ B) _**This step is specific to Teams.**_
+ 
+   - **Edit** the `manifest.json` contained in the `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`).
+    
+   - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    
+   - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    
+   - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+    
+   - Add the app to personal/team/groupChat scope (Supported scopes). 
 
 ## Running the sample
 
@@ -130,7 +136,7 @@ Channel Created Update Delete Message
 
 3. **Show Welcome - Team**
 Welcome Message when Team selected for subscription.
-![Team-Welcome](Images/Team-Welcome.png)
+![Team-Welcome](Images/Team-Welcome.PNG)
 
 4. **Team Notifications**
 - Team Update Edit Message
