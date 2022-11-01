@@ -88,7 +88,7 @@ This sample app demonstarte the installation lifecycle for Teams [Apps](https://
 
 - [Upload app manifest file](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#load-your-package-into-teams) (zip file) to your team
 
-## Running the sample.
+## Running the sample
 
 ![](AppInstallation/Images/Install.png)
 
@@ -102,7 +102,7 @@ This sample app demonstarte the installation lifecycle for Teams [Apps](https://
 
 ![](AppInstallation/Images/DeleteApp.png)
 
-## Further Reading.
+## Further Reading
 
 [Graph-app-installation](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)
   
