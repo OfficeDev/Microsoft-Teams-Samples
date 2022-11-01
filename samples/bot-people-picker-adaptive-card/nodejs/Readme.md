@@ -20,7 +20,7 @@ This sample shows the feature of people picker on Adaptive Cards.
 
 ## Interaction with app
 
- ![Bot People Picker Adaptive CardGif ](Images/BotPeoplePickerAdaptiveCard.gif)
+ ![Bot People Picker Adaptive CardGif ](Images/botpeoplepickeradaptivecard.gif)
 
 ## Prerequisites
 
