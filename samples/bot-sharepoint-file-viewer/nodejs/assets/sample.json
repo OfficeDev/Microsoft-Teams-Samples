@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-sharepoint-file-viewer/nodejs/Images/uploadFile.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-sharepoint-file-viewer/nodejs/Images/sharepoint-viewer.gif",
         "alt": "Solution UX showing bot with sharepoint file to view in teams file viewer"
       }
     ],

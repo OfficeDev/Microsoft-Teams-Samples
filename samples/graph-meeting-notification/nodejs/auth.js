@@ -18,7 +18,7 @@ auth.getAccessToken = function () {
     scope: 'https://graph.microsoft.com/.default'
   };
 
-  var url = "https://login.microsoftonline.com/" + process.env.MicrosoftAppTenantId + "/oauth2/v2.0/token";
+    var url = "https://login.microsoftonline.com/" + process.env.MicrosoftAppTenantId + "/oauth2/v2.0/token";
   request.post({ url: url, form: requestParams }, function (err, response, body) {
     var parsedBody = JSON.parse(body);
 

@@ -4,6 +4,7 @@ const auth = require('./auth');
 const app = express();
 const msal = require('@azure/msal-node');
 const axios = require('axios');
+const isomorphicFetch = require('isomorphic-fetch');
 const { SimpleGraphClient } = require('./simpleGraphClient');
 
 var delegatedToken = "";
