@@ -3,8 +3,17 @@
 
 name: Build - All Samples
 on:
-  schedule:
-    - cron: '00 08 24 * *'  # 24th every month at 8:00 AM UTC
+  push:
+    #Change the branch name to <<main>>
+    #Change the path to the folder where your code resides. Any change here will start the activity. 
+    branches:
+      - main
+    paths:
+      - 'samples/**'  
+  workflow_dispatch:
+  
+env:
+    CI: false
 jobs:
   build-csharp-samples:
     runs-on: windows-latest
@@ -265,7 +274,7 @@ jobs:
               version: '6.0.x'
 
       fail-fast: false
-    name: Build "${{ matrix.name }}" csharp
+    name: Build All "${{ matrix.name }}" csharp
     steps:
       - uses: actions/checkout@v2
 
@@ -548,7 +557,7 @@ jobs:
               version: '14.x'
 
       fail-fast: false
-    name: Build "${{ matrix.name }}" nodejs
+    name: Build all "${{ matrix.name }}" nodejs
     defaults:
       run:
         working-directory: "${{ matrix.project_path }}"
@@ -564,5 +573,3 @@ jobs:
         run: |
           npm install
           npm run build --if-present
-        env:
-         CI: ""
