@@ -483,7 +483,7 @@ jobs:
               name: 'meetings-live-code-interview'
               version: '14.x'
 
-            - project_path: 'samples\msgext-search-sso-config'
+            - project_path: 'samples/msgext-search-sso-config/nodejs'
               name: 'msgext-search-sso-config'
               version: '14.x'
 
@@ -542,10 +542,6 @@ jobs:
             - project_path: 'samples/tab-graph-toolkit/nodejs'
               name: 'tab-graph-toolkit'
               version: '14.x'
-
-            - project_path: 'samples\msgext-search-sso-config'
-              name: 'msgext-search-sso-config'
-              version: '14.x'
             
             - project_path: 'samples/graph-meeting-notification/nodejs'
               name: 'graph-meeting-notification'
@@ -568,3 +564,5 @@ jobs:
         run: |
           npm install
           npm run build --if-present
+        env:
+         CI: ""
