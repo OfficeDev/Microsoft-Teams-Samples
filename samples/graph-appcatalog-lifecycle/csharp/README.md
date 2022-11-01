@@ -155,25 +155,25 @@ Click on Add Permissions to commit your changes.
 ## Running the sample
 
 - Welcome card along with commands.
-![WelcomeMessage](AppCatalogSample/Images/WelcomeMessage.png)
+![WelcomeMessage](AppCatalogSample/Images/WelcomeMessage.PNG)
 
 - Publish app to catalog
 type "publish" and upload the mainfest.zip of the teamsApp and app uploaded to appcatalog
-![PublishApp](AppCatalogSample/Images/PublishApp.png)
+![PublishApp](AppCatalogSample/Images/PublishApp.PNG)
 - Update app in catalog
 type "update" and upload the mainfest.zip of the teamsApp and app updated to appcatalog against of the app id
 - Delete app from catalog
-![DeleteApp](AppCatalogSample/Images/DeleteApp.png)
+![DeleteApp](AppCatalogSample/Images/DeleteApp.PNG)
 - List all applications specific to the tenant : type "listapp" in chat and get all the app available in the same tenant.
-![ListApp](AppCatalogSample/Images/ListApp.png)
+![ListApp](AppCatalogSample/Images/ListApp.PNG)
 - List applications with a given ID : type "app" in the chat and get details of app according to their appId.
-![ListAppbyId](AppCatalogSample/Images/ListAppbyId.png)
+![ListAppbyId](AppCatalogSample/Images/ListAppbyId.PNG)
 - Find application based on the Teams app manifest ID :  type "findapp" in the chat and get details of app according to their manifest Id.
-![ListAppbyManifestId](AppCatalogSample/Images/ListAppbyManifestId.png)
+![ListAppbyManifestId](AppCatalogSample/Images/ListAppbyManifestId.PNG)
 - List applications with a given ID, and return the submission review state: type "status" in the chat and get details of app either published or not.
-![AppStatus](AppCatalogSample/Images/AppStatus.png)
+![AppStatus](AppCatalogSample/Images/AppStatus.PNG)
 - List the details of only those apps in the catalog that contain a bot: type "bot" in the chat and get details of available bot in app catalog.
-![ListBotApp](AppCatalogSample/Images/ListBotApp.png)
+![ListBotApp](AppCatalogSample/Images/ListBotApp.PNG)
 
  ## Deploy the bot to Azure
 

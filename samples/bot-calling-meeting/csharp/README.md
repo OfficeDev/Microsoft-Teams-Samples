@@ -114,7 +114,7 @@ Click on Add Permissions to commit your changes.
     New-CsApplicationAccessPolicy -Identity Meeting-policy-dev -AppIds "fdcd8287-4e77-4d4c-8be7-eb0ae94d5342" -Description "Online meeting policy - contoso town"
     Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "e652dd92-dd63-4fcc-b5b2-2005681e8e9f"
 ```
-![PoliySetup ](Images/PoliySetup.png)
+![PoliySetup ](Images/PoliySetup.PNG)
 
 14. Update `PolicyName`, `azure-client-id`, `policy-description`, `object-id for user` in powershell script.
 15. Run `Windows Powershell PSI` as an administrator and execute above script.
