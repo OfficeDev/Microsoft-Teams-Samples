@@ -132,7 +132,7 @@ Click on Add Permissions to commit your changes.
 7. In Settings/Configuration/Messaging endpoint, enter the current `https` URL you have given by running ngrok. Append with the path `/api/messages`     
 8. Select the Calling tab on the Teams channel page. Select Enable calling, and then update Webhook (for calling) with your HTTPS URL (`https://yourNgrok/callback`) where you receive incoming notifications.
 For example `https://contoso.com/teamsapp/callback`
-![EnableCallingEndpoint ](Images/EnableCallingEndpoint.png)
+![EnableCallingEndpoint ](Images/EnableCallingEndpoint.iPNG)
 9. Save your changes.
 
 ### Configuring the sample:
@@ -188,7 +188,7 @@ For example `https://contoso.com/teamsapp/callback`
  ## Running the sample
 
 * Install 'Calling Bot' in Teams.
-![CallingBotInstallation ](Images/CallingBotInstallation.png)
+![CallingBotInstallation ](Images/CallingBotInstallation.PNG)
 
 * Bot will send adaptive card as mentioned below.
 ![WelcomeCard ](Images/WelcomeCard.PNG)
