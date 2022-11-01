@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://user-images.githubusercontent.com/85864414/121878949-ebe5ef00-cd29-11eb-8ab0-683ce3ffbfcb.PNG",
+        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-change-notification/nodejs/Images/Preview.gif",
         "alt": "Solution UX showing change notification sample using nodejs"
       }
     ],

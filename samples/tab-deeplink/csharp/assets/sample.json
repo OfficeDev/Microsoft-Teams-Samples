@@ -35,9 +35,9 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://user-images.githubusercontent.com/50989436/115546429-a4f7f200-a2c2-11eb-879f-36cccde4a03f.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-deeplink/csharp/DeepLinkBot/images/Team_DeepLink.gif",
         "alt": "Solution UX showing deeplink"
-      }
+      }	  
     ],
     "authors": [
       {

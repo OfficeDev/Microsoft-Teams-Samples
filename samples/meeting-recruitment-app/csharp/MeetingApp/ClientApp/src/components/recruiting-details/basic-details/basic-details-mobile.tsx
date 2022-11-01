@@ -25,7 +25,7 @@ const BasicDetailsMobile = (props: IBasicDetailsMobileProps) => {
             url: `${window.location.origin}/shareAssets`,
         };
 
-        microsoftTeams.tasks.startTask(taskInfo, (err, note) => {
+        microsoftTeams.tasks.startTask(taskInfo, (err: any, note: any) => {
             if (err) {
                 console.log("Some error occurred in the task module")
                 return

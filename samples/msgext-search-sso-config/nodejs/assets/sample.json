@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-search-sso-config/Images/LinkUnfurlingCard.PNG",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-search-sso-config/Images/MsgextSSO.gif",
         "alt": "Search driven messaging extension in Teams"
       }
     ],

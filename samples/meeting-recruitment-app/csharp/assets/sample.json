@@ -1,6 +1,6 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-meeting-recruitment-app-csharp",
+    "name": "officedev-microsoft-teams-samples-meeting-recruitment-app-nodejs",
     "source": "officeDev",
     "title": "Recruitment App Sample using Apps in Meetings",
     "shortDescription": "This sample illustrates a meeting experience for recruitment scenario using Apps In Meetings.",
@@ -20,11 +20,11 @@
       },
       {
         "key": "TEAMS-SERVER-LANGUAGE",
-        "value": "csharp"
+        "value": "javascript"
       },
       {
         "key": "TEAMS-SERVER-PLATFORM",
-        "value": "netframework"
+        "value": "express"
       },
       {
         "key": "TEAMS-FEATURES",
@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meeting-recruitment-app/csharp/MeetingApp/Images/details.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meeting-recruitment-app/csharp/Images/meetingrecruitment.gif",
         "alt": "Solution UX showing recruitment app sample using apps in meetings"
       }
     ],
