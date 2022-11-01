@@ -139,7 +139,6 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     * profile
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 ![APIpermissions](Images/APIpermissions.png)
-
 13. Navigate to **Authentication**
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
     Set a redirect URI:
@@ -218,7 +217,7 @@ You can interact with this bot by sending it a message. The bot will respond by 
 
 ![MECompose](Images/MECompose.png)
 
-**TOpen SSO Tab Continue and then Accept and it'll show the profile details:**
+**Open SSO Tab Continue and then Accept and it'll show the profile details:**
 
 ![Tab](Images/Tab.png)
 
