@@ -33,30 +33,83 @@ Teams Catering bot is a sample app that provides an experience of ordering food 
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
 
+  determine dotnet version
   ```bash
-  # determine dotnet version
   dotnet --version
   ```
-- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+  
+- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 ## Setup
 
-### 1. Setup for Bot
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
-- Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-    > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
-### 2. Setup NGROK
-1) Run ngrok - point to port 2978
+    - Go to App registrations and create a new app registration in a different tab.
 
-```bash
-# ngrok http -host-header=rewrite 2978
-```
+   - Register an application.
+	* Fill out name and select third option for supported account type and click "Register".
 
-### 3. Setup for code
+    <img src="./Assets/Images/RegisterAnApplication.png" alt="Register An Application">
 
-- Clone the repository
+    **NOTE:** Copy and paste the App Id and Tenant ID somewhere safe. You will need it in a future step.
+
+    - Create Client Secret.
+      * Navigate to the "Certificates & secrets" blade and add a client secret by clicking "New Client Secret".
+
+     **NOTE:** Copy and paste the secret somewhere safe. You will need it in a future step:
+       <img src="./Assets/Images/CertificatesAndSecrets.png" alt="Certificates And Secrets">
+
+2. Setup for Bot
+
+	 * Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+       * Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+       * While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+
+       * Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+       * Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+       * While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.       
+
+        <img src="./Assets/Images/BotChannelConfig.png" alt="Bot Channel Reg">
+
+        **Go to the created resource, navigate to channels and add "Microsoft Teams" and “Web chat” channels:**
+
+       <img src="./Assets/Images/BotChannels.png" alt="Bot Channels">
+
+       > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.        
+
+3. Create Azure Cosoms Database account**
+
+	 - Create an Azure Cosmos DB account
+	   * Choose an existing resource group or create a new one.
+	   * Choose an account name for your cosmos db account.
+	   * Select `Azure Cosmos DB for NoSQL` as API.
+
+   **Create an Azure Cosmos DB account:**
+
+      <img src="./Assets/Images/CreateAzureCosmosAccount.png" alt="Cosmos Db account creation">
+
+   **Azure Cosmos DB for NoSQL:**
+
+     <img src="./Assets/Images/CosmosDbCreation.png" alt="Cosmos Db account creation">
+
+4. Get Cosmos DB enpoint `Uri` and read write `Primary Key`
+   * Open your newly created Cosmos DB account. Navigate to "Keys" section.
+   * Copy paste your URI and read write Primary_Key for further use.
+
+    <img src="./Assets/Images/CosmosKeys.png" alt="Cosmos Db keys">
+
+
+5. Setup NGROK
+
+  - Run ngrok - point to port 3978
+
+	```bash
+	# ngrok http -host-header=rewrite 3978
+	```
+6. Setup for code
+
+  - Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
@@ -94,56 +147,10 @@ Teams Catering bot is a sample app that provides an experience of ordering food 
 **NOTE:** The App id to be installed into Teams meeting can be retrieved using the graph explorer. As this sample uses the same app to be added to the teams meeting, app needs to be installed into Teams (follow step 4 on how to package and install the app to teams) and use the app's ID generated by Teams (different from the external ID). For more information, see the [List teamsApp](https://docs.microsoft.com/en-us/graph/api/appcatalogs-list-teamsapps?view=graph-rest-1.0&tabs=http) refernce article
 
 **NOTE:** The Bot Service Url needs to be dynamically fetched (and stored) from the Team. Recommendation is to capture the serviceUrl from the bot Payload and later re-use it to send proactive messages.
-eg: https://smba.trafficmanager.net/amer/v3
+eg: https://smba.trafficmanager.net/amer/v3 
 
-### 4. Setup bot in Service
 
-1. Update messaging endpoint in the Azure Bots Channel Registration. Open the Bot channel registration, click on Configuration/Settings on the left pane, whichever is available and update the messaging endpoint to the endpoint that bot app will be listening on. Update the ngrok URL in the below format for the messaging endpoint.
-
-<img src="./Assets/Images/BotChannelConfig.png" alt="Bot Channel Reg">
-
-2. Go to the created resource, navigate to channels and add "Microsoft Teams" and “Web chat” channels.
-
-<img src="./Assets/Images/BotChannels.png" alt="Bot Channels">
-
-### 5. Register your Teams
-1. Go to App registrations and create a new app registration in a different tab.
-
-2. Register an application.
-	* Fill out name and select third option for supported account type and click "Register".
-
-<img src="./Assets/Images/RegisterAnApplication.png" alt="Register An Application">
-
-**NOTE:** Copy and paste the App Id and Tenant ID somewhere safe. You will need it in a future step.
-
-3. Create Client Secret.
-   * Navigate to the "Certificates & secrets" blade and add a client secret by clicking "New Client Secret".
-
-**NOTE:** Copy and paste the secret somewhere safe. You will need it in a future step:
-<img src="./Assets/Images/CertificatesAndSecrets.png" alt="Certificates And Secrets">
-
-### 6. Create Azure Cosoms Database account
-
-1. Create an Azure Cosmos DB account
-   * Choose an existing resource group or create a new one.
-   * Choose an account name for your cosmos db account.
-   * Select `Azure Cosmos DB for NoSQL` as API.
-
-**Create an Azure Cosmos DB account:**
-
-<img src="./Assets/Images/CreateAzureCosmosAccount.png" alt="Cosmos Db account creation">
-
-**Azure Cosmos DB for NoSQL:**
-
-<img src="./Assets/Images/CosmosDbCreation.png" alt="Cosmos Db account creation">
-
-2. Get Cosmos DB enpoint `Uri` and read write `Primary Key`
-   * Open your newly created Cosmos DB account. Navigate to "Keys" section.
-   * Copy paste your URI and read write Primary_Key for further use.
-
-<img src="./Assets/Images/CosmosKeys.png" alt="Cosmos Db keys">
-
-### 7. Setup Manifest for Teams
+**7. Setup Manifest for Teams**
 - **This step is specific to Teams.**
 
     - **Edit** the `manifest.json` contained in the  `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Your Microsoft App Id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)

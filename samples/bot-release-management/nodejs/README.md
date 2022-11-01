@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This is a sample app with capability to send notification when user creates a work item in [Azure DevOps](https://dev.azure.com) via webhooks.
+description: This is a sample app with capability to send notification when user creates a work item in Azure DevOps via service hook.
 products:
 - office-teams
 - office
@@ -14,9 +14,9 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-bot-release-management-nodejs
 ---
 
-# Bot to create a group chat and send task notification using Azure webhooks.
+# Bot to create a group chat and send a task notification using Azure service hook
 
-This is a sample application which demonstrates how to create a webhook on [Azure DevOps](https://dev.azure.com) and connect with Teams bot that creates a group chat and send workitems details.
+This is a sample application which demonstrates how to create a service hook on Azure DevOps and connect with Teams bot that creates a group chat and send workitems details.
 
 ## Interaction with app
 
@@ -35,15 +35,7 @@ This is a sample application which demonstrates how to create a webhook on [Azur
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
 
-### 1. Setup for Bot
-- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
-
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-
-- To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
-Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
-
-### 2. Setup NGROK  
+**Setup NGROK**
 1) Run ngrok - point to port 3978
 
     ```bash
@@ -51,25 +43,9 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     ```
 2) Once started you should see URL  `https://41ed-abcd-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
 
-### 3. Setup for code  
-1) Clone the repository
 
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
+**Register Azure AD application**
 
-2) In the folder where repository is cloned navigate to `samples/release-management/nodejs`
-
-3) Install node modules
-
-   Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
-
-    ```bash
-    npm install
-    ```
-4) Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` and `MicrosoftAppTenantId` (Note that the MicrosoftAppId is the AppId created in step 4 , the MicrosoftAppPassword is referred to as the "client secret" in step 4 and you can always create a new client secret anytime., MicrosoftAppTenantId is reffered to as Directory tenant Id in step 4).
-
-### 4. Register Azure AD application
 Register one Azure AD application in your tenant's directory: for the bot and tab app authentication.
 
 -  Log in to the Azure portal from your subscription, and go to the "App registrations" blade  [here](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps). Ensure that you use a tenant where admin consent for API permissions can be provided.
@@ -109,7 +85,16 @@ Click on Add Permissions to commit your changes.
 
 - Global Administrator can grant consent using following link:  [https://login.microsoftonline.com/common/adminconsent?client_id=](https://login.microsoftonline.com/common/adminconsent?client_id=)<%appId%> 
 
-### 5. Setup Azure DevOps service hook
+**Setup for Bot**
+
+- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
+- To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
+Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
+
+**Setup Azure DevOps service hook**
 - Follow this document- [Create Webhooks](https://docs.microsoft.com/en-us/azure/devops/service-hooks/services/webhooks?view=azure-devops) to service hook. 
 
 - Make sure to select trigger as *Work item created*
@@ -117,7 +102,8 @@ Click on Add Permissions to commit your changes.
 - Make sure to add URL as https://{baseUrl}/api/workItem. It will look somethihng as https://41ed-abcd-e125.ngrok.io/api/workItem. *Here baseUrl is referred to URL we get in step 1*.
 **NOTE: If you are not getting incoming request from Azure DevOps make sure that service webhook is in *Enabled* state.**
 
-### 6. Setup custom work item type.
+**Setup custom work item type**
+
 - Follow the doc to [Add a custom field to an inherited process - Azure DevOps Services](https://docs.microsoft.com/en-us/azure/devops/organizations/settings/work/add-custom-field?view=azure-devops)
 
 - Make sure to give name as *StakeholderTeam* and Type *Text (Single line)*
@@ -130,10 +116,30 @@ Click on Add Permissions to commit your changes.
 **NOTE:Make sure you create a new task, click save and verify the stakeholderTeam value**
 ![Execute Webhook](Images/ExecuteWebhook.png)
 
-### 7. Setup Manifest for Teams
+**Setup for code**
+
+1) Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+2) In the folder where repository is cloned navigate to `samples/release-management/nodejs`
+
+3) Install node modules
+
+   Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+
+    ```bash
+    npm install
+    ```
+4) Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` and `MicrosoftAppTenantId` (Note that the MicrosoftAppId is the AppId created in step 4 , the MicrosoftAppPassword is referred to as the "client secret" in previous steps and you can always create a new client secret anytime., MicrosoftAppTenantId is reffered to as Directory tenant Id in previous steps).
+
+**Setup Manifest for Teams**
 
 - **This step is specific to Teams.**
 - Edit the `manifest.json` contained in the  `/appPackage` folder to and fill in MicrosoftAppId (that was created in step 1 and it is the same value of MicrosoftAppId as in `.env` file) *everywhere* you see the place holder string `<<Microsoft-App-Id>>` (depending on the scenario it may occur multiple times in the `manifest.json`)
+- **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
 - Zip up the contents of the `/appPackage` folder to create a `manifest.zip`
 - Upload the manifest.zip to Teams (in the Apps view click "Upload an app to your org's app catalog")
 
@@ -155,7 +161,7 @@ Click on Add Permissions to commit your changes.
 
 ![InstallApp](Images/View.png)
 
-## Interacting with the bot.
+**Interacting with the bot**
 - Login into [Azure DevOps](https://dev.azure.com) and open the project where custom process was applied.
 - Create a new workitem -> Tasks, provide comma seprated email ids in *StakeHolderTeam* (NOTE: The email should belong to tenant where we register Application in step 4)
 - Save
@@ -166,19 +172,12 @@ Click on Add Permissions to commit your changes.
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 
 ## Further reading
-- [List Meeting Attendance Reports](https://docs.microsoft.com/en-us/graph/api/meetingattendancereport-list?view=graph-rest-1.0&tabs=http)
-- [List Attendance Records](https://docs.microsoft.com/en-us/graph/api/attendancerecord-list?view=graph-rest-1.0&tabs=http)
-- [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
+- [Integrate with service hooks](https://learn.microsoft.com/en-us/azure/devops/service-hooks/overview?source=recommendations&view=azure-devops)
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Portal](https://portal.azure.com)
 - [Add Authentication to Your Bot Via Azure Bot Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp)
-- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [.NET Core CLI tools](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x)
-- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
-- [Azure Portal](https://portal.azure.com)
-- [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
-- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)

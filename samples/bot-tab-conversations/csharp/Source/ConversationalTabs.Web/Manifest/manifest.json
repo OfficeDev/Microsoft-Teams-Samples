@@ -52,7 +52,7 @@
   ],
   "composeExtensions": [],
   "permissions": [],
-  "validDomains": ["*.ngrok.io"],
+  "validDomains": ["*.ngrok.io", "<<ngrok-url>>"],
   "webApplicationInfo": {
     "id": "<<aad-id>>",
     "resource": "api://<<ngrok-url>>/<<aad-id>>"

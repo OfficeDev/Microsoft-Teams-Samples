@@ -25,7 +25,7 @@ Please see the [Code Tours](#code-tours) section for in-depth explanation of the
 * Proactive conversation creation from a Bot
 * Authorization of API calls based on user's Team membership
 
- ## Interact with app.
+ ## Interaction with app
 
 ![Sample Module](/samples/bot-tab-conversations/csharp/Docs/images/BotTabConversationTab.gif)
 
@@ -105,7 +105,6 @@ sequenceDiagram
   * [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 * Install [ngrok](https://ngrok.com/download) for local setup. (or any other tunneling solution)
 
-
 ### Channel Tab
 
 * [Set-up, deploy and sideload the app to a channel.](#steps)
@@ -128,60 +127,92 @@ There is also a personal tab that will list inquires from all the support depart
 * Once authenticated, the app will list all the support departments from any channel you are a member of. Up to five inquiries from each support department will be listed.
 * Clicking on the -> Arrow will open the inquiry details. From the detail page you can open the channel conversation about the inquiry.
 
-## Steps
-* Start Ngrok
-* Create a new Bot Registration
-* Create the Azure AAD App Registration (Accounts in any organizational directory (Any Azure AD directory - Multitenant))
-* Update URL in Manifest
-* Build C# App
-* Deploy to Teams
+## Setup
 
-## Setup.
 * Run Ngrok
     * Run ngrok and point it to the port the Web App is listening on. Note the port will change depending on how you are deploying.
     ```bash
     ngrok http https://localhost:44326 -host-header=localhost:44326 # For Visual Studio
     ```
     * Make sure to copy and save the `https` url (it should look like `https://<randomsubdomain>.ngrok.io`).
-* Create a Bot. [We recommend using Developer Portal for Microsoft Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/teams-developer-portal), but you can use create a Azure Bot in [Azure Portal](https://portal.azure.com).
-    * Set the 'Bot endpoint address' to `https://<randomsubdomain>.ngrok.io/api/messages`.
-    * Create a client secret, being sure to copy the secret for replacing in the `appSettings.json` below.
-    * *Note: if you restart Ngrok you may have to update the messaging endpoint domain URL you have set in your Bot Configuration*
+
+* Create an AAD app registration in Azure Portal and also create Azure bot in [Azure Portal](https://portal.azure.com) or in [Developer Portal for Microsoft Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/teams-developer-portal).
+    * Set the 'Messaging endpoint' for your Azure Bot with `https://<your application domain/api/messages` like your ngrok URL `https://xxxxx.ngrok.io` .
+    * *Note: if you restart Ngrok you may have to update the messaging endpoint domain URL aginn in your Azure Bot for local running*
+    * Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
 * [Update the AAD App to enable Teams SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad)
     * When creating the Bot above, an AAD app should either have been created for you, or you should have chosen an AAD app to associate with the bot.
     * The updates below will allow for us to authenticate and authorize API calls to limit data returned to only channels the user is a member of.
     * [Follow the instructions](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad#to-expose-an-api), to expose an AAD API, creating an Application ID URI, scopes, etc.
-    * Once you have followed those instructions, you need to [configure the Web authentication platform for the application](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-graph-api?tabs=dotnet#to-configure-authentication-for-a-platform).
+
+    * Once you have followed those instructions, you need to [configure the Web authentication platform for the application](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-graph-api?tabs=dotnet#to-configure-authentication-for-a-platform). Ensure that you have added the `redirect URI` in this format `https://<<fully-qualified-domain-name.com>>/auth-end` like your ngrok URL 'https://xxxxx-590a-c1b2.ngrok.io/auth-end'
+
     * Ensure the following API permissions are granted to the app for Microsoft Graph access - `email`, `offline_access`, `openid`, `profile`, `Team.ReadBasic.All`    
     * *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your AAD App*
-* In `appSettings.json`, `manifest.json` and `.env` replace:
+
+**Setup for code**
+- Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+- Run the bot from a terminal or from Visual Studio:
+
+  A) From a terminal, navigate to `Source\ConversationalTabs.Web`
+
+  ```bash
+  # run the bot
+  dotnet run
+  ```
+
+  B) Or from Visual Studio
+
+  - Launch Visual Studio
+  - File -> Open -> Project/Solution
+  - Navigate to `samples\bot-tab-conversations\csharp\Source\ConversationalTabs.Web` folder
+  - Select `Microsoft.Teams.Samples.ConversationalTabs.Web.csproj` file
+  - Press `F5` to run the project
+
+* In `appSettings.json` and `.env` file replace:
     * `<<ngrok-url>>` with your minus the https://.
     * `<<aad-id>>` with your AAD Application (Client) Id.
     * `<<aad-client-secret>>` with the client secret you created above.
+    * `<<tenant-id>>` with the directory id received via creating AAD app registration in your Azure Portal.
     * `<<teams-app-store-app-id>>` with the App ID assigned to the app in the Teams Admin Center or provided when your app passes validation. If you are sideloading the app you can use the appId from the manifest file, but please note that [deep linking may not work when sideloading](#known-issues).
-* Project Structure
-    * The sample contains 3 projects
-        * `Web` - Exposes REST APIs for documents and signing scenarios supported in this POC.  
-            * `Web\ClientApp` contains the Front End code to support document sharing in a meeting via share to stage. 
-        * `Domain` - Contains the business logic to support the REST APIs.
-        * `Infrastructure` - Fulfils `Domain`'s dependencies like data repositories, graph support needed.
+
+* Setup Manifest for Teams
+
+    - **Edit** the `manifest.json` contained in the  `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string ``<<aad-id>>`` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `<<ngrok-url>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`. Replace it at all the places you see in your `mainfest.json`.
+
 * Deploying
     * There are detailed instructions for deploying locally below.
 * Sideloading the App
-    * Create a zip containing `manifest.json`, `colorIcon.png` and `outlineIcon.png` from `Source\MeetingSigning.Web\Manifest`.
+    * Create a zip containing `manifest.json`, `colorIcon.png` and `outlineIcon.png` from `Source\ConversationalTabs.Web\Manifest`.
     * [You can upload you app by following these instructions](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload)
 
 ## Known issues
 * When the solution is run on a local web browser (anywhere outside of Teams), it will load a spinner. Instead side-load the application to a teams client, or open up `<<ngrok-url>>/admin` to open the admin page
 * Sometimes, the "Open Details" button on a new inquiry's Adaptive Card may not navigate to a the channel tab. This is due to side-loaded apps not having a consistent entityId. This makes deeplinking difficult. If this happens you can open the inquiry in the tab directly. If you have submitted the app to either your Org App Store or the Teams App Store you must set the `<<teams-app-store-app-id>>` in appsettings.json to the App ID value as shown in the [Teams Admin Center](https://admin.teams.microsoft.com/policies/manage-apps).
+
 * Private channels do not support bots at the moment, therefore this app is not supported on private channels.
 * If in the personal app a user opens a conversation from a channel they are not a member of, the conversation will fail to show. This is not an issue in our sample as we filter support departments based on Team membership.
+
 * App shows "We need you to consent to complete that action." but provides no action: your pop -up blocker might be blocking a consent dialog from opening, be sure to allow pop-ups from Teams. 
 
 ## Code Tours
 This repository uses VSCode [Code Tours](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour#:~:text=A%20%22code%20tour%22%20is%20simply%20a%20series%20of,CONTRIBUTING.md%20file%20and%2For%20rely%20on%20help%20from%20others.) to explain _how_ the code works. 
 
 The tour files can be found in the `.tours` directory.
+
+* Project Structure
+    * The sample contains 3 projects
+        * `Web` - Exposes REST APIs for documents and signing scenarios supported in this POC.  
+            * `Web\ClientApp` contains the Front End code to support document sharing in a meeting via share to stage. 
+        * `Domain` - Contains the business logic to support the REST APIs.
+        * `Infrastructure` - Fulfils `Domain`'s dependencies like data repositories, graph support needed.
 
 ## Deployment
 ### Locally in Visual Studio
@@ -194,7 +225,6 @@ The tour files can be found in the `.tours` directory.
 * Point Ngrok to port 5001: `ngrok http -host-header=rewrite 5001`
 * In a terminal, navigate to `Source\ConversationalTabs.Web`
 * Run `dotnet run`
-
 
 ## Running the sample. 
 
@@ -215,5 +245,5 @@ The tour files can be found in the `.tours` directory.
 * Run `podman run -d -p 8080:80 --name ConversationalTabs <IMAGE_ID>` to start the container
 * Open [http://localhost:8080/](http://localhost:8080/) to view the service running
 
-## Further Read.
+## Further reading
 * [Create conversational tabs](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/conversational-tabs) 

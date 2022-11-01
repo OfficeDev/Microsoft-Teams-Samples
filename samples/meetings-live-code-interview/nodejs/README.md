@@ -19,7 +19,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-live-code-interview-node
 This sample demos a live coding in a Teams meeting stage using [Live Share SDK](https://aka.ms/livesharedocs). In side panel there is a list of question in specific coding language and on share click specific question with language code editor will be shared with other participant in meeting.
 Now any participant in meeting can write code for the question and same will be updated to all the other participants in meeting. 
 
-## Interact with app
+## Interaction with app
 
 ![side panel ](Images/MeetinLiveCodeInterview.gif)
 
@@ -29,7 +29,7 @@ Now any participant in meeting can write code for the question and same will be 
 
 - To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher).
 
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [ngrok](https://ngrok.com/download) or equivalent tunnelling solution
 
 ## Workflow
 
@@ -61,21 +61,32 @@ sequenceDiagram
 
 ## Setup
 
-### 1. Setup NGROK
+ 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+ 
+    - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2).
+    - You need to add following permissions mentioned in the below screenshots to call respective Graph   API
+![](https://user-images.githubusercontent.com/50989436/116188975-e155a300-a745-11eb-9ce5-7f467007e243.png) 
+ 
+ 2. Setup for Bot
+- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
 
-1) Run ngrok - point to port 3000 (pointing to ClientApp)
+3. Setup NGROK
+   - Run ngrok - point to port 3978
 
     ```bash
-    # ngrok http -host-header=rewrite 3000
+    ngrok http -host-header=rewrite 3978
     ```
+4. Setup for code
 
-### 2. Setup for code
+  - Clone the repository
 
-1) Clone the repository
-   ```bash
-   git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-   ```
-2) Install node modules
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+  
+  Install node modules
 
    Inside node js folder,  navigate to `samples/meetings-live-code-interview/nodejs/api` open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
 
@@ -84,31 +95,27 @@ sequenceDiagram
     ```bash
     npm install
     ```
-3) We have two different solutions to run so follow below steps:
- 
-   A) In a terminal, navigate to `samples/meetings-live-code-interview/nodejs/api`
+  - We have two different solutions to run so follow below steps:
 
-   B) In a different terminal, navigate to `samples/meetings-live-code-interview/nodejs/ClientApp`
+     A) In a terminal, navigate to `samples/meetings-live-code-interview/nodejs/api`
 
- 4) Run both solutions i.e. `samples/meetings-live-code-interview/nodejs/api` and `samples/meetings-live-code-interview/nodejs/clientapp`
+     B) In a different terminal, navigate to `samples/meetings-live-code-interview/nodejs/ClientApp`
+
+ - Run both solutions i.e. `samples/meetings-live-code-interview/nodejs/api` and `samples/meetings-live-code-interview/nodejs/clientapp`
     ```
     npm start
     ``` 
 
- ### 3. Setup Manifest for Teams  
+5. Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./Manifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
-
-1) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
-   - `{{Manifest-id}}` with some unique GUID.
-   - `{{Domain Name}}` with your application's base url, e.g. https://1234.ngrok.io
-
-2) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
-
-
-3) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
-   - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./Manifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 **Note** Run the app on Teams with developer preview on.   

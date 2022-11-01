@@ -20,66 +20,69 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-csharp
 
  ##### Welcome Card Flow
 
- ![bot-conversations](Images/Personal_CardDeeplink.gif)
+ ![bot-conversations](DeepLinkBot/images/Personal_CardDeeplink.gif)
 
  ##### Deeplink Tab Flow
 
- ![bot-conversations ](Images/Team_DeepLink)
+ ![bot-conversations ](DeepLinkBot/images/Team_DeepLink.gif)
 
 
  ## Prerequisites
 
- - Microsoft Teams is installed and you have an account
- - [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
- - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- Microsoft Teams is installed and you have an account (not a guest account)
+- To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
+- [ngrok](https://ngrok.com/download) or equivalent tunneling solution
+- [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
 
  ## Setup
 
  > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
  the Teams service needs to call into the bot.
 
-1) Run ngrok - point to port 3978
-
-    ```bash
-    ngrok http --host-header=rewrite 3978
-    ```
-
-1) Setup for Bot
-
-   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
-    - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
-    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
     
-   In the new Azure Bot resource in the Portal, 
-    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
+2. Setup for Bot
+  - Register a AAD aap registration in Azure portal.
+  - Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+  - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+  - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
-1) Clone the repository
+    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
+
+3. Setup NGROK
+  - Run ngrok - point to port 3978
+
+	```bash
+	# ngrok http -host-header=rewrite 3978
+	```
+
+4. Setup for code
+
+  - Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-
-1) If you are using Visual Studio
-   - Launch Visual Studio
-   - File -> Open -> Project/Solution
-   - Navigate to `samples/Tab-deeplink/csharp` folder
-   - Select `DeeplinkBot.csproj` or `DeeplinkBot.sln`file
-
-1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, BaseURL ,
+   - Update channelID placeholer `<AddYourTeamsChannelId>` value in your `DeepLinkBot.cs` file with your particular channel id from any Team in Teams. (You can get it manually by clicking on 3 dots in any team's channel and fetch it's link and extract the channel id ) like `General` channel) Example: `19:cbe3683f25094106b826c9cada3afbe0@thread.skype`
+   
+   - Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, BaseURL ,
 	ChannelEntityId is a unique identifier ,TabEntityId as EntityId from Manifest file ,MannifestAppId as manifest ID from manifest file,
-	generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" 
+	generated in Step 1 (App Registration creation). (Note the App Password is referred to as the "client secret" 
 	in the azure portal and you can always create a new client secret anytime.)
     - Also, set MicrosoftAppType in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
 
-1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
+  - If you are using Visual Studio
+    - Launch Visual Studio
+    - File -> Open -> Project/Solution
+    - Navigate to `samples/Tab-deeplink/csharp` folder
+    - Select `DeeplinkBot.csproj` or `DeeplinkBot.sln`file
+    - Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
-1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* 
+5. __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the  `Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* 
 	  you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` ,`<<Content-Url>>`, `<<Website-Url>>` and `<<Entity-ID>>` value(depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-    - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
@@ -96,80 +99,80 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 
 		**Adding bot UI:**
     
-		![personal-AddBot ](Images/personal-01_P_app.png)
+		![personal-AddBot ](DeepLinkBot/images/01_P_app.png)
 
 		**Added bot UI:**
     
-		![personal-AddedBot ](Images/02_P_Welecomecard.png)
+		![personal-AddedBot ](DeepLinkBot/images/02_P_Welecomecard.png)
 
 		**Show Welcome command interaction:**
     
-		![personal-WelcomeCard-Interaction ](Images/05_P_ResponseCard.png)
+		![personal-WelcomeCard-Interaction ](DeepLinkBot/images/05_P_ResponseCard.png)
 
 		**Show Deeplink Tab:**
     
-		![personal-WelcomeCard-Interaction ](Images/08_P_Teamappslink.png)
+		![personal-WelcomeCard-Interaction ](DeepLinkBot/images/08_P_Teamappslink.png)
 
 
 	- **Teams Scope Interactions:**
 
 		**Adding bot UI:**
    
-		![Team-AddBot ](Images/02_Team_AddtoTeam.png)
+		![Team-AddBot ](DeepLinkBot/images/02_Team_AddtoTeam.png)
 
 		**Team Selection for app:**
    
-		![Team-AddedBot ](Images/03_Team_SelectTeam.png)
+		![Team-AddedBot ](DeepLinkBot/images/03_Team_SelectTeam.png)
 
 		**App Setup for the specific Team:**
    
-		![Team-AddedBot ](Images/04_Team_AppSetupforTeam.png)
+		![Team-AddedBot ](DeepLinkBot/images/04_Team_AppSetupforTeam.png)
 
 		**Show instraction for the team:**
 
-		![Team-WelcomeCard-Interaction ](Images/06_Team_Page.png)
+		![Team-WelcomeCard-Interaction ](DeepLinkBot/images/06_Team_Page.png)
    
 		**Show Deeplink Tab:**
    
-		![Team-WelcomeCard-Interaction ](Images/08_P_Teamappslink.png)
+		![Team-WelcomeCard-Interaction ](DeepLinkBot/images/08_P_Teamappslink.png)
 
 
 	- **Chat Scope Interactions:**
 
 		**Adding bot UI:**
    
-		![Chat-AddBot ](Images/01_Chat_Addapp.png)
+		![Chat-AddBot ](DeepLinkBot/images/01_Chat_Addapp.png)
 
 		**Chat User Selection:**
    
-		![Chat-AddedBot ](Images/02_Chat_Addmember.png)
+		![Chat-AddedBot ](DeepLinkBot/images/02_Chat_Addmember.png)
 
 		**App setup for the specific chat user:**
    
-		![Chat-AddedBot ](Images/03_Chat_appopen.png)
+		![Chat-AddedBot ](DeepLinkBot/images/03_Chat_appopen.png)
 
 		**Show user instraction tab:**
    
-		![Chat-WelcomeCard-Interaction ](Images/04_Chat_defaultapp.png)
+		![Chat-WelcomeCard-Interaction ](DeepLinkBot/images/04_Chat_defaultapp.png)
 
 
 	- **Meeting Scope Interactions:**
 
 		**Adding bot UI:**
    
-		![Meeting-AddBot ](Images/01_meeting_appopen.png)
+		![Meeting-AddBot ](DeepLinkBot/images/01_meeting_appopen.png)
 
 		**Meeting Selection:**
    
-		![Meeting-AddedBot ](Images/02_Meeting_selectapp.png)
+		![Meeting-AddedBot ](DeepLinkBot/images/02_Meeting_selectapp.png)
 
 		**App setup for the specific chat sser:**
    
-		![Meeting-AddedBot ](Images/03_meeting_configuretab.png)
+		![Meeting-AddedBot ](DeepLinkBot/images/03_meeting_configuretab.png)
 
 		**Show user instraction tab:**
    
-		![Meeting-WelcomeCard-Interaction ](Images/04_Meeting_defaultpage.png)
+		![Meeting-WelcomeCard-Interaction ](DeepLinkBot/images/04_Meeting_defaultpage.png)
 
  ## Deploy the bot to Azure
 

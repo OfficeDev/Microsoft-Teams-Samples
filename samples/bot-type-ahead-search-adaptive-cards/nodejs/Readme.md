@@ -1,4 +1,3 @@
-﻿
 ---
 page_type: sample
 description: Demonstrating the feature of typeahead search (static and dynamic) control in Adaptive Cards.
@@ -18,61 +17,68 @@ urlFragment: officedev-microsoft-teams-samples-bot-type-ahead-search-adaptive-ca
 
 This sample shows the feature of typeahead search (static and dynamic) control in Adaptive Cards.
 
-- **Interaction with bot**
+## Interaction with bot
  ![Bot Typeahead Search Adaptive Cards](Images/BotTypeaheadSearchAdaptiveCards.gif)
 
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
 - [NodeJS](https://nodejs.org/en/)
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [ngrok](https://ngrok.com/download) or equivalent tunnelling solution
 
 ## Setup
 
-> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
-the Teams service needs to call into the bot.
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
-1) Run ngrok - point to port 3978
+2. Setup for Bot
+- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
+
+3. Setup NGROK
+ - Run ngrok - point to port 3978
 
     ```bash
-    ngrok http --host-header=rewrite 3978
+    ngrok http -host-header=rewrite 3978
     ```
-
-## Setup for bot
-In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
-    - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
-    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
     
-   In the new Azure Bot resource in the Portal, 
-    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
-
-## Setup for code
-1) Clone the repository
+4. Setup for code
+  - Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-1) In a terminal, navigate to `samples/bot-type-ahead-search-adaptive-cards/nodejs`
+ - In a terminal, navigate to `samples/app-checkin-location/nodejs`
 
-1) Install modules
+ - Install modules
 
     ```bash
     npm install
     ```
 
-1) Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.) `MicrosoftAppTenantId` will be the id for the tenant where application is registered.
-- Also, set MicrosoftAppType in the `.env`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+- Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
-1) Run your bot at the command line:
+-Also, set MicrosoftAppType in the `.env`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+
+
+- In a terminal, navigate to `samples/bot-type-ahead-search-adaptive-cards/nodejs`
+
+- Install modules
+
+    ```bash
+    npm install
+    ```
+
+
+- Run your bot at the command line:
 
     ```bash
     npm start
     ```
 
-1) __*This step is specific to Teams.*__
+- __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)

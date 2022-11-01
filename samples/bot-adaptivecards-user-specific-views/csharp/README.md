@@ -84,7 +84,7 @@ how to incorporate basic conversational flow into a Teams application. It also i
 - [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## Setup.
+## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 the Teams service needs to call into the bot.
@@ -118,26 +118,25 @@ the Teams service needs to call into the bot.
    - Navigate to `samples/user-specific-views/csharp` folder
    - Select `UserSpecificViews.csproj` or `UserSpecificViews.sln`file
 
-1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-    - Also, set MicrosoftAppType in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+1) Update the `appsettings.json` configuration for the bot to use the `MicrosoftAppId`, `MicrosoftAppPassword` generated in previous steps (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
 1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-    - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Edit** the `manifest.json` contained in the  `AppPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    
+    - **Zip** up the contents of the `AppPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/chat/Meeting scope (Supported scopes)
 
-## Basic Tests
+**Basic Tests**
 * Tag the bot and send any message. The bot should respond with an adaptive card which should have options to try out the different cards.
 * `Me` card should automatically refresh for sender only.
 * `All Users` card should automatically refresh for all users in the chat. (as long as total number of users are <= 60)
 * `Manual refresh` action should update the user-specific view for the user.
 * `Update Base Card` action should update the message for all the users. The user should not have any option to refresh the message after this.
 
-## Implementation:
+**Implementation:**
 * `BotActivityHandler`: Has the logic to handle incoming bot messages (Invokes and user messages).
 * `CardFactory`: Has the logic to prepare different types of Adaptive Cards (using Template library).
 * `assets\templates\*`: contains all the adaptive cards definitions.
@@ -161,7 +160,7 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
   
   ![personal-AddBot ](docs/02_AddAppaspersonal.png)
 
-  ****Me Flow****
+  **Me Flow**
 
  **Show Welcome command interaction:**
  
@@ -187,7 +186,7 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
  
  ![personal-WelcomeCard-ResponseUpdatebaseCardClick](docs/12_responseBasecard.png)
  
-**** Flow with all Users****
+**Flow with all Users**
 
  **Show Action command interaction with All Users:**
  
@@ -208,57 +207,57 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
  
   - **Team Scope Interactions:**
   
-  *** About UI***
+  **About UI**
   
   ![Team-scope-app](docs/01_TeamScope.png)
  
-  *** Team Selection ***
+  **Team Selection**
 	
   ![Team-scope-app](docs/02_TeamScope_teamselection.png)
   
-  *** Selected Team  ***
+  **Selected Team**
   
   ![Team-scope-app](docs/03_TeamScope_teamselect.png)
   
-  *** Welcome intraction card  ***
+  **Welcome intraction card**
   
   ![Team-scope-app](docs/04_TeamScope_command.png)
   
   
   - **Chat Scope Interactions:**
   
-  *** About UI***
+  **About UI**
   
   ![Chat-scope-app](docs/chatscope_01.png)
   
-  *** Chat Selection ***
+  **Chat Selection**
 	
   ![Chat-scope-app](docs/chatscope_02.png)
   
-  *** Selected Chat  ***
+  **Selected Chat**
   
   ![Chat-scope-app](docs/chatscope_03.png)
   
-  *** Welcome intraction card  ***
+  **Welcome intraction card**
   
   ![Chat-scope-app](docs/04_TeamScope_command.png)
   
   
   - **Meeting Scope Interactions:**
   
-  *** About UI***
+  **About UI**
 
   ![Meeting-scope-app](docs/Meetingscop_01.png)
   
-  *** Meeting Selection ***
+  **Meeting Selection**
 	
   ![Meeting-scope-app](docs/Meetingscop_02.png)
   
-  *** Selected Meeting  ***
+  **Selected Meeting**
   
   ![Meeting-scope-app](docs/Meetingscop_03.png)
   
-  *** Welcome intraction card  ***
+  **Welcome intraction card**
   
   ![Meeting-scope-app](docs/Meetingscop_04.png)
   
@@ -289,3 +288,6 @@ Consider following:
 3. User A will see the base card and the Teams client will trigger auto-refresh and display the updated refresh card received from the bot.
 4. When the same user A logins to Teams mobile/web application, and opens the chat, he/she will see the base card, and Teams client will trigger an auto-refresh to get the updated card from the bot.
 If User A opens the chat again on either of these clients, it will show the cached card (updated refresh card).
+
+## Further reading
+[User Specific Views](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/user-specific-views?tabs=mobile%2CC)
