@@ -132,7 +132,7 @@ To make your web part available in Microsoft Teams, you'll have synchronize your
 
 Your custom tab has been added on the Microsoft Teams channel and you can see how the code is reacting that it's in Microsoft Teams context. Theme of the web part is by default coming from the underlying SharePoint site.
 
-![Custom tab added](images/11.helloworld_tab.png)
+   ![Custom tab added](images/11.helloworld_tab.png)
 
 > [!NOTE]
 > You can control the initial configuration option visibility from the web part manifest by setting `canUpdateConfiguration` property as `false`. By default this setting is `true` which is taken into account when the Teams manifest is automatically created as part of the *Sync* process.
