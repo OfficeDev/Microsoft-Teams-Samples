@@ -11,93 +11,111 @@ extensions:
  contentType: samples
  createdDate: "01/07/2022 05:00:25 PM"
 urlFragment: officedev-microsoft-teams-samples-meetings-context-app-nodejs
+
 ---
 
-# Meeting context
+## Meeting context
 
 This sample shows the contents of meeting tab context object in a meeting tab and shows the output of Meeting's API `TeamsInfo.getMeetingParticipant` and `TeamsInfo.getMeetingInfo` using bot commands.
 
-![meeting tab context](Images/meetingTabContext.png)
-![Meeting context](Images/MeetingContext.png)
-![Participant context](Images/ParticipantContext.png)  
+- **Interaction with bot**
+![meeting-context](Images/meeting-context.gif)  
 
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/en/)
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-### Setup for Bot
+### Setup 
+> Note these instructions are for running the sample on your local machine.
+
+1) Run ngrok - point to port 3978
+
+    ```bash
+    ngrok http -host-header=rewrite 3978
+    ```
+
+2) Setup for Bot
+
 Register your application with Azure AD
 
 - Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 - On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
--  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env file.
+- Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env file.
 
-In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-### To try this sample
-1) Clone the repository
+3) Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-2) In the folder where repository is cloned navigate to `samples/meetings-context-app/nodejs`
+   A) If you are using Visual Studio Code
 
-3) Run ngrok - point to port 3978
+    - Launch Visual Studio code
+    - File -> Open Folder
+    - Navigate to `samples/meeting-context-app` folder
+    - Select `nodejs` folder
 
-    ```bash
-    ngrok http -host-header=rewrite 3978
-    ```
-4) Update the `.env`
-
-   Update configuration with the ```MicrosoftAppId```,  ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId```.
-
-5) Install node modules and start server
+   B) Install node modules For Server
 
    Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
 
     ```bash
     npm install
-    npm start
     ```
-Your server will start running on 3000 PORT.
 
-6) Install node modules and start client
+   C) Install node modules For Client
 
    Navigate to folder `client` folder, open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
 
     ```bash
-    cd client
     npm install
+    ```
+
+
+4) Update the `.env` configuration file.
+
+   Update configuration with the ```MicrosoftAppId```,  ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId```.
+
+6) Run your app for server and client
+
+    ```bash
     npm start
     ```
-Your client will start running on 3978 PORT.
 
-7) 6) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
-   - `{{Manifest-id}}` with some unique GUID.
-   - `{{Microsoft-App-Id}}`Registerd for app in step 1.
-   - `{{Domain Name}}` with your application's base url, e.g. https://1234.ngrok.io
-    - Zip up the contents of the `AppPackage/` folder to create a `manifest.zip`
-    - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
+    - Your server will start running on 3000 PORT
+    - Your client will start running on 3978 PORT.
 
-8) Add the app in meeting.
+7) __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+    - Add the app to personal/team/groupChat scope (Supported scopes)
+     
 
- **NOTE:** Only accounts with admin access can create private/shared channels in team.
+## Running the sample
 
-## Features of the sample
-
-- Add the app in meeting.
+- Add the app in meeting/group channel.
 - The details of the meeting context object will be shown on tab based.
-- You can expand/reduce the JSON for the context object and can also copy a particular object slice.
+![participant context](Images/Setup-Tab-Bot.png)
 
+- You can expand/reduce the JSON for the context object and can also copy a particular object slice.
 - You can send one of these two commands: **Meeting Context** or **Participant Context**
 - It will send you the output of `TeamsInfo.getMeetingInfo` and `TeamsInfo.getMeetingParticipant`
 
-## Further reading
+1. **Particpant Details :** User can see the details of current participant by the name id and other feilds respectively.
+![participant context](Images/Participant-Details.png)
 
+2. **Meeting Details :** In this user can track the detials of meeting start time, end time, joining url and other details respectively.
+![meeting context](Images/Meeting-Details.png) 
+
+
+## Further reading
 - [Tab Basics](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
 - [Azure Portal](https://portal.azure.com)
 - [Get-context-for-tabs](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/access-teams-context#retrieve-context-in-private-channels)

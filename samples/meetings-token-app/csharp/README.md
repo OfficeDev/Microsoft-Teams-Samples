@@ -42,7 +42,7 @@ This application also shows the implementation of Live Share SDK to update the d
 ## Setup
 ** This app should work in developer preview only**
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Azure Active Directory � App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
     
 2. Setup for Bot

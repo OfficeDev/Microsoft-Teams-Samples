@@ -21,6 +21,6 @@ app.use(express.json());
 // Define route for the controller.
 app.use('/api/chat', require('./controller'))
 
-app.listen(3978, function () {
-  console.log('app listening on port 3978!');
+app.listen(3000, function () {
+  console.log('app listening on port 3000!');
 });

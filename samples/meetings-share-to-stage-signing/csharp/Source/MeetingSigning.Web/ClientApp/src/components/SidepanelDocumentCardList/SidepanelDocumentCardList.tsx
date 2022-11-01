@@ -1,10 +1,12 @@
 import { Flex, Header, Loader } from '@fluentui/react-northstar';
 import { useEffect, useState } from 'react';
-import { useAADId } from 'utils/TeamsProvider/hooks';
+import { useTeamsContext } from 'utils/TeamsProvider/hooks';
 import { getAllDocuments } from 'api/documentApi';
 import { Document } from 'models';
 import { SidepanelDocumentCard } from 'components/SidepanelDocumentCard';
 import { useQuery } from 'react-query';
+import { useLiveShare, useTakeControl } from 'hooks';
+import { LiveSharePage } from 'components/LiveSharePage';
 
 /**
  * List documents for use in a Sidepanel
@@ -13,6 +15,7 @@ import { useQuery } from 'react-query';
  * @returns A vertical list of documents styled as cards
  */
 export function SidepanelDocumentCardList() {
+  const teamsContext = useTeamsContext();
   const pollingInterval = 5000;
 
   const { data, error, isError } = useQuery<Document[], Error>(
@@ -21,10 +24,19 @@ export function SidepanelDocumentCardList() {
     { refetchInterval: pollingInterval },
   );
 
-  const loggedInAADId = useAADId();
-
   const [showLoader, setShowLoader] = useState<boolean>(true);
   const showLoaderTimeout = 5000;
+
+  const {
+    takeControlState,
+    container,
+    audience,
+  } = useLiveShare();
+
+  const {
+    takeControlStarted,
+    takeControl,
+  } = useTakeControl(takeControlState, teamsContext?.user, audience);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -35,6 +47,11 @@ export function SidepanelDocumentCardList() {
   }, []);
 
   return (
+    <LiveSharePage
+      context={teamsContext}
+      container={container}
+      started={takeControlStarted}
+    >
     <Flex column gap="gap.medium">
       {data && data.length === 0 && (
         <Header
@@ -56,9 +73,13 @@ export function SidepanelDocumentCardList() {
         <SidepanelDocumentCard
           key={index}
           {...d}
-          loggedInAadId={loggedInAADId}
+          // You should not use user information from the context if you need to prove a user's identity.
+          // Here, we are using it control the UI to highlight a user's signature box, so we feel comfortable using it.
+          loggedInAadId={teamsContext?.user?.id ?? ''}
+          takeControl={takeControl}
         />
       ))}
-    </Flex>
+      </Flex>
+    </LiveSharePage>
   );
 }
