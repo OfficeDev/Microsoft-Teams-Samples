@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-activity-feed-broadcast/csharp/ActivityFeedBroadcast/Images/BroadcastDetails.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-activity-feed-broadcast/csharp/ActivityFeedBroadcast/Images/ActivityFeedBroadcast.gif",
         "alt": "Solution UX showing broadcast message to organization using activity feed notification (graph apis)"
       }
     ],

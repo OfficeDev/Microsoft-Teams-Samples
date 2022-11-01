@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "bots": [
     {
-      "botId": "<<Bot Id>>",
+      "botId": "<<App Id>>",
       "scopes": [
         "personal",
         "team"
@@ -40,6 +40,6 @@
   ],
   "validDomains": [
     "token.botframework.com",
-    "*.ngrok.io"
+    "[Your Ngrok Domain]"
   ]
 }

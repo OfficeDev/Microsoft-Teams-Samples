@@ -10,7 +10,7 @@ extensions:
   technologies:
   - Tabs
   - Microsoft Bot Framework v4
-  createdDate: 9/22/2017 5:54:09 PM
+  createdDate: "09/22/2017 05:54:09 PM"
   updateDate: 9/15/2021 
 description: "Sample that shows how to build a bot for Microsoft Teams in C# with bot framework v4."
 urlFragment: officedev-microsoft-teams-samples-app-complete-sample-csharp

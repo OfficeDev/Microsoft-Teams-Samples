@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meeting-recruitment-app/nodejs/Images/details.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meeting-recruitment-app/nodejs/Images/meetingrecruitment.gif",
         "alt": "Solution UX showing recruitment app sample using apps in meetings"
       }
     ],

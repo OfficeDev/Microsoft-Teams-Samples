@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-type-ahead-search-adaptive-cards/nodejs/Images/staticSearchCard.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-type-ahead-search-adaptive-cards/nodejs/Images/BotTypeaheadSearchAdaptiveCards.gif",
         "alt": "Solution UX showing typeahead search control in adaptive cards"
       }
     ],

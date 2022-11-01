@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "24-11-2021 13:50:00"
+ createdDate: "11/24/2021 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-bot-daily-task-reminder-csharp
 ---
 

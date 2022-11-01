@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-live-code-interview/csharp/MeetingLiveCoding/Images/sidePanelView.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-live-code-interview/csharp/MeetingLiveCoding/Images/MeetinLiveCodeInterview.gif",
         "alt": "Solution UX showing live coding interview using shared meeting stage"
       }
     ],
