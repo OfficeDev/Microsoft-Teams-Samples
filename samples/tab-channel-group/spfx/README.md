@@ -78,12 +78,12 @@ Ensure that your console is activated in the root folder of the solution where w
 
 1. Select **Deploy**.
 
-  ![Trust client-side solution deployment](images/3.deploy_app.png)
+   ![Trust client-side solution deployment](images/3.deploy_app.png)
 
     Notice that you can see if there's any exceptions or issues in the package by looking the **App Package Error Message** column in the App Catalog.
 
-At this point, the web part is deployed and is automatically available cross the SharePoint Online sites.
-  ![Successfully Deployed](images/4.upload_successfull.png)
+   At this point, the web part is deployed and is automatically available cross the SharePoint Online sites.
+   ![Successfully Deployed](images/4.upload_successfull.png)
 
 > [!NOTE]
 > In this tutorial, we're using tenant wide deployment option of the SharePoint Framework solution. This will ensure that the development and usage experience is as easy as possible.
