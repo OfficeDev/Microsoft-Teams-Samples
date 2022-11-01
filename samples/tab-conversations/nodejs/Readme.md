@@ -19,7 +19,7 @@ This Teams tab app provides a way to allow users to have conversations about sub
 
 ## Interaction with app
 
-![Preview Image](Images/Preview.gif) 
+![Preview Image](images/Preview.gif) 
 
 ## Prerequisites
 
