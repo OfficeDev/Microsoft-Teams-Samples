@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-graph-toolkit/nodejs/Images/Agenda.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-graph-toolkit/nodejs/Images/TabGraphToolKitModule.gif",
         "alt": "Solution UX showing teams tab with microsoft graph toolkit"
       }
     ],

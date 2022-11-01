@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "10/06/2021 01:48:56 AM"
+ createdDate: "06/10/2021 01:48:56 AM"
 urlFragment: officedev-microsoft-teams-samples-bot-receive-channel-messages-withRSC-nodejs
 ---
 

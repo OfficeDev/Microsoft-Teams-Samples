@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://user-images.githubusercontent.com/31851992/115969498-d68aea80-a55a-11eb-9cb4-23e8b7bcdda9.png",
+        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-localization/csharp/Images/Preview.gif",
         "alt": "Solution UX showing teams app localization"
       }
     ],

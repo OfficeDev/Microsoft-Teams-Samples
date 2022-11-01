@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "24-12-2021 23:35:25"
+ createdDate: "12/24/2021 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-bot-join-team-using-qr-code-nodejs
 ---
 

@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "11-24-2021 13:20:00 PM"
+ createdDate: "11/24/2021 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-bot-daily-task-reminder-nodejs
 ---
 
