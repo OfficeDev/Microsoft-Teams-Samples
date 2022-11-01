@@ -86,7 +86,7 @@ This sample shows a feature where user can schedule a task from messaging extens
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
   
-## Features of this sample
+## Running the sample
 
 Personal scope scenario 
 
@@ -120,14 +120,6 @@ Team scope scenario
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
-
-## Running the sample
-
-![Select message](MessagingExtensionReminder/Images/MessageAction.png)
-
-![Task Details](MessagingExtensionReminder/Images/ScheduleTask.png)
-
-![Task reminder](MessagingExtensionReminder/Images/TaskReminder.png)
 
 ## Further reading
 
