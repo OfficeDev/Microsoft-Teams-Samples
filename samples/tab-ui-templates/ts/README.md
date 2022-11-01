@@ -110,16 +110,16 @@ Teams doesn't display app content unless it's accessible via HTTPS. We recommend
 ## Running the sample
 
 - Welcome Page
-- ![welcome-page ](Images/tabui-welcome.png)
+![welcome-page ](Images/tabui-welcome.png)
 
 - Dashboard Page
-- ![dashboard-page ](Images/tabui-dashboard.png)
+![dashboard-page ](Images/tabui-dashboard.png)
 
 - List Page
-- ![list-page ](Images/tabui-list.png)
+![list-page ](Images/tabui-list.png)
 
 - Board Page
-- ![board-page ](Images/tabui-board.png)
+![board-page ](Images/tabui-board.png)
 
 ## Next steps
 
