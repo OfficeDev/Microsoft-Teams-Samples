@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-change-notification-team-channel/csharp/ChangeNotification/Images/ChangeNotification.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-change-notification-team-channel/csharp/ChangeNotification/Images/ChangeNotifications.gif",
         "alt": "Solution UX showing Graph Change Notification Team/Channel csharp"
       }
     ],

@@ -12,7 +12,9 @@ app.use(express.json());
 app.use(express.urlencoded({
     extended: true
 }));
-var notificationResponse;
+
+var notificationResponse = [];
+var notificationList = [];
 
 const ENV_FILE = path.join(__dirname, '.env');
 require('dotenv').config({ path: ENV_FILE });
@@ -26,46 +28,38 @@ app.use('/api/changeNotification', require('./controller'))
 // Listen for incoming requests.
 app.post('/api/notifications', async (req, res) => {
     let status;
-    let decryptedData;
+    var decryptedData = [];
+
     if (req.query && req.query.validationToken) {
         status = 200;
         res.send(req.query.validationToken);
     }
-
     else {
-        let notification = req.body.value;
-        try {
+        var notification = req.body;
+
+        if (JSON.stringify(notification) === '{}') {
+            console.log("please create/update/delete channel/team to get response data");
+            res.send(notificationList);
+
+        }
+        else {
+            notification = req.body.value;
             decryptedData = await DecryptionHelper.processEncryptedNotification(notification);
-            res.status(202).send();
-        }
-        catch (ex) {
-            console.error(ex);
-            res.status(500).send();
-        }
-    }
+            notificationResponse.push(decryptedData);
 
-    /** Send Response to View */
-    try {
-        if (decryptedData) {
-            notificationResponse = [{
-                createdDate: decryptedData.createdDateTime,
-                displayName: decryptedData.displayName,
-                changeType: decryptedData.changeType
-            }]
-
-            var responseMessage = Promise.resolve(notificationResponse);
-
-            responseMessage.then(function (result) {
-                res.json(result);
-                res.status();
-            }, function (err) {
-                console.log(err);
-                res.json(err);
+            notificationResponse.forEach(element => {
+                notificationList.push({
+                    createdDate: element.createdDateTime,
+                    displayName: element.displayName,
+                    changeType: element.changeType
+                })
             });
+
+            console.log("Graph Api Notifications For Team and Channel");
+
+            /** Send Respond to view **/
+            res.send(notificationList);
         }
-    }
-    catch (e) {
-        console.log("Error", e)
     }
 });
 

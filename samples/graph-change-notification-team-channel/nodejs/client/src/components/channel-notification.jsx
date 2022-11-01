@@ -37,7 +37,7 @@ class ChangeNotificationChannel extends Component {
     /// </summary>
     initializeData = async (teamId) => {
         await axios.post(`/api/changeNotification?teamId=${teamId}`);
-        var response = await axios.post('/api/messages');
+        var response = await axios.post('/api/notifications');
 
         try {
             if (response.data) {
