@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-stage-view/csharp/TabInStageView/Images/viaCardAction.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-stage-view/csharp/TabInStageView/Images/tabstageviewmodule.gif",
         "alt": "Solution UX showing stage view"
       }
     ],

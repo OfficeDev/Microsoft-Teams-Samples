@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-suggested-actions/csharp/SuggestedActions/Images/WelcomeMessage.PNG",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-suggested-actions/csharp/SuggestedActions/Images/botSuggestedActionModule.gif",
         "alt": "Solution UX showing suggested action in Bots."
       }
     ],

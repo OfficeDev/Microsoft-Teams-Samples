@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "07/07/2021 01:38:27 PM"
+ createdDate: "07-07-2021 13:38:27"
 urlFragment: officedev-microsoft-teams-samples-tab-deeplink-nodejs
 ---
 
@@ -17,31 +17,40 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-nodejs
 
 This sample displays how to consume SubEntity Id to [DeepLink](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-links#deep-linking-to-your-tab) from Bot to Tab and Tab to Tab.
 
+## Interaction with app.
+
+![Preview Image](Images/Preview.gif)
+
 ## Prerequisites
+- Microsoft Teams is installed and you have an account (not a guest account)
+- To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
+- [ngrok](https://ngrok.com/download) or equivalent tunneling solution
+- [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
 
-- [Node.js](https://nodejs.org) version 10.14 or higher
+## Setup.
+
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal. 
+    
+2. Setup for Bot
+- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
+
+3. Setup NGROK
+   - Run ngrok - point to port 3978
 
     ```bash
-    # determine node version
-    node --version
+    ngrok http -host-header=rewrite 3978
     ```
+4. Setup for code
 
-      
- - [Ngrok](https://ngrok.com/download) (Only for devbox testing) Latest (any other tunneling      software       can also be used)
-    ```bash
-
-     # run ngrok locally
-    ngrok http -host-header=localhost 3978
-    ```
-- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
-
-## To try this sample
-
-1. Clone the repository
+  - Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
+  - Update the `.env` configuration for the bot to use the `YOUR-MICROSOFT-APP-ID`, `YOUR-MICROSOFT-APP-PASSWORD` and 'BASE-URL' is ngrok url eg. 124.ngrok.io. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
     - In a terminal, navigate to `samples/tab-deeplink/nodejs`
 
@@ -60,23 +69,25 @@ This sample displays how to consume SubEntity Id to [DeepLink](https://docs.micr
         ```bash
         npm start
         ```
+    - If you are using Visual Studio code
+     - Launch Visual Studio code
+     - Folder -> Open -> Project/Solution
+     - Navigate to ```samples/tab-deeplink/nodejs``` folder
+     - Select ```nodejs``` Folder
+     
+     - To run the application required  node modules.Please use this command to install modules npm i.
 
-1. If you are using Visual Studio code
-    - Launch Visual Studio code
-    - Folder -> Open -> Project/Solution
-    - Navigate to ```samples\DeepLinkBotnode\``` folder
-    - Select ```DeepLinkBotnode``` Folder
-1. To run the application required  node modules.Please use this command to install modules npm i
-1. Run ngrok - point to port 3978 (This is your Base_URL)
-   ```ngrok http -host-header=rewrite 3978```
-1. Create a new Bot by following steps mentioned in [Build a bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots?view=msteams-client-js-latest#build--a-bot-for-teams-with-the-microsoft-bot-framework) documentation.
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-1. Go to .env file  and add ```MicrosoftAppId``` ,  ```MicrosoftAppPassword``` and ```Base_URL``` information.
-1. Run your app, either from Visual Studio code  with ``` npm start``` or using ``` Run``` in the Terminal.
-1. Update the manifest.json file with ```Microsoft-App-ID```,```ContentUrl```, ```WebsiteUrl``` and ```EntityID``` value.
-1. Install the app in Teams.
+5. Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./teamsAppManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
-
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./teamsAppManifest folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 ## Interacting with the bot
 
 Enter text in the emulator.  The text will be echoed back by the bot.

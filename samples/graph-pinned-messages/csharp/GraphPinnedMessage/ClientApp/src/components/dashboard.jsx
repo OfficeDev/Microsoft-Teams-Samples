@@ -57,7 +57,6 @@ class Dashboard extends Component {
 
     // Exchange client token with server token and fetch the pinned message details.
     exchangeClientTokenForServerToken = async (token) => {
-        console.log(this.state.context);
         axios.get(`/api/chat/getGraphAccessToken?ssoToken=${token}&chatId=${this.state.context.chat.id}`).then((response) => {
             var responseMessageData = response.data;
 

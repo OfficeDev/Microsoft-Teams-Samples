@@ -1,6 +1,6 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-Meeting-Event-csharp",
+    "name": "officedev-microsoft-teams-samples-graph-bulk-meetings-csharp",
     "source": "officeDev",
     "title": "This is a sample application which demonstrates how to create meetings in bulk for Teams.",
     "shortDescription": "This is an sample application which demonstrates how to create multiple Teams meetings at one click (using excel sheet upload file).",
@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-bulk-meetings/csharp/EventMeeting/Images/MeetingEvent.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-bulk-meetings/csharp/EventMeeting/Images/graph-bulk-meetings.gif",
         "alt": "Solution UX showing gif animation for teams meeting event creation operations."
       }
     ],

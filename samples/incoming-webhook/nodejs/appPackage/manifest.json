@@ -27,8 +27,8 @@
     {
       "entityId": "incomingwebhook",
       "name": "Incoming webhook",
-      "contentUrl": "https://{{Domain Name}}/configure-message",
-      "websiteUrl": "https://{{Domain Name}}/configure-message",
+      "contentUrl": "https://{{Domain-Name}}/configure-message",
+      "websiteUrl": "https://{{Domain-Name}}/configure-message",
       "scopes": [
         "personal"
       ]
@@ -39,6 +39,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{Domain Name}}"
+    "{{Domain-Name}}"
   ]
 }

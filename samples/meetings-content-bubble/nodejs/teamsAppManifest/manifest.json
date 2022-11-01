@@ -39,5 +39,5 @@
     "identity",
     "messageTeamMembers"
   ],
-  "validDomains": [ "<<ENDPOINT_URL>>" ]
+  "validDomains": [ "<<Valid-Domain>>" ]
 }

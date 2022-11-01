@@ -28,12 +28,12 @@ class GraphHelper {
      * @param {string} meetingJoinUrl join url of the meeting.
      */
     static async createSubscription(meetingJoinUrl) {
-        let applicationToken = await auth.getAccessToken();
-        let resource = `/communications/onlineMeetings/?$filter=JoinWebUrl eq '${meetingJoinUrl}'`;
-
         let existingSubscriptions = null;
-
+        let applicationToken = "";
+        let resource = "";
         try {
+        applicationToken = await auth.getAccessToken();
+        resource = `/communications/onlineMeetings/?$filter=JoinWebUrl eq '${meetingJoinUrl}'`;
 
             var apiResponse = await axios.get(`https://graph.microsoft.com/beta/subscriptions`, {
                 headers: {

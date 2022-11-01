@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
   "manifestVersion": "1.12",
   "version": "1.0.0",
-  "id": "{{Manifest-id}}",
+  "id": "c7229567-6c0a-4912-8fe5-d338af585b42",
   "packageName": "com.microsoft.teams.tabpeoplepicker",
   "developer": {
     "name": "Microsoft",
@@ -25,7 +25,7 @@
   "accentColor": "#235EA5",
   "configurableTabs": [
     {
-      "configurationUrl": "https://{{base-url}}/configure",
+      "configurationUrl": "https://4e89-2401-4900-eae-1545-2175-5641-4242-12c4.ngrok.io/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -37,8 +37,8 @@
     {
       "entityId": "peoplepickertab",
       "name": "Tab",
-      "contentUrl": "https://{{base-url}}/index",
-      "websiteUrl": "https://{{base-url}}/index",
+      "contentUrl": "https://4e89-2401-4900-eae-1545-2175-5641-4242-12c4.ngrok.io/index",
+      "websiteUrl": "https://4e89-2401-4900-eae-1545-2175-5641-4242-12c4.ngrok.io/index",
       "scopes": [
         "personal"
       ]

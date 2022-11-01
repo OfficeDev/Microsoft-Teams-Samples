@@ -9,7 +9,7 @@
       "This sample shows how to Mute/Unmute Teams meeting audio call."
     ],
     "creationDateTime": "2022-08-08",
-    "updateDateTime": "2022-08-08",
+    "updateDateTime": "2022-10-13",
     "products": [
       "Teams"
     ],
@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-audio-state/nodejs/Images/App-InMeeting.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-audio-state/nodejs/Images/mute-unmute-audiostate.gif",
         "alt": "Teams meeting audio Mute/Unmute using NodeJS."
       }
     ],

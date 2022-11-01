@@ -294,11 +294,17 @@ class TeamsBot extends DialogBot {
             const graphClient = new SimpleGraphClient(tokenResponse.token);
             const profile = await graphClient.getMeAsync();
             var userPhoto = await graphClient.getUserPhoto();
+            var imageString = "";
+            var img2 = "";
+            await userPhoto.arrayBuffer().then(result => {
+                imageString = Buffer.from(result).toString('base64');
+                img2 = "data:image/png;base64," + imageString;
+            })
             const attachment = CardFactory.thumbnailCard(
                 'User Profile card',
                 profile.displayName,
                 CardFactory.images([
-                    userPhoto
+                    img2
                 ])
             );
             const result = {
@@ -319,7 +325,9 @@ class TeamsBot extends DialogBot {
                     const attachment = CardFactory.thumbnailCard(
                         'Test user',
                         'Data scientist',
-                        undefined,
+                        CardFactory.images([
+                          "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg"
+                        ])
                     );
                     const result = {
                         attachmentLayout: 'list',
@@ -659,8 +667,8 @@ class TeamsBot extends DialogBot {
             }
             else {
                 var data = JSON.parse(action.state);
-                if (data.userName == "test" && data.password == "test") {
-                    const card = CardFactory.adaptiveCard(this.getAdaptiveCardUserDetails());
+                if (data.userName == "testaccount@test123.onmicrosoft.com" && data.password == "testpassword") {
+                    const card = CardFactory.adaptiveCard(this.getAdaptiveCardUserDetails(data));
 
                     return {
                         task: {
@@ -715,7 +723,7 @@ class TeamsBot extends DialogBot {
         return data;
     };
 
-    getAdaptiveCardUserDetails = () => ({
+    getAdaptiveCardUserDetails = (data) => ({
         $schema: 'http://adaptivecards.io/schemas/adaptive-card.json',
         body: [
             {
@@ -734,7 +742,7 @@ class TeamsBot extends DialogBot {
                 size: "Medium",
                 weight: "Bolder",
                 wrap: true,
-                text: "Hello! Test user"
+                text: `Hello! Test user`
             },
             {
                 type: "TextBlock",
@@ -746,7 +754,7 @@ class TeamsBot extends DialogBot {
                 type: "TextBlock",
                 size: "Medium",
                 weight: "Bolder",
-                text: 'Email: testaccount@test123.onmicrosoft.com'
+                text: `Email: ${data.userName}`
             }
         ],
         type: 'AdaptiveCard',

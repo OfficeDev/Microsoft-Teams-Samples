@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-receive-channel-messages-withRSC/csharp/ReceiveMessagesWithRSC/Images/botWithRSCFlow.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-receive-channel-messages-withRSC/csharp/ReceiveMessagesWithRSC/Images/BotWithRSCModule.gif",
         "alt": "Solution UX showing receive channel messages with rsc permissions"
       }
     ],

@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-app-installation-lifecycle/nodejs/Images/image2.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-app-installation-lifecycle/csharp/AppInstallation/Images/GraphAppInstallationLifecycleGif.gif",
         "alt": "Solution UX showing app installation"
       }
     ],
