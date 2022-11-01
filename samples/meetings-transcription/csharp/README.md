@@ -33,7 +33,48 @@ This is a sample application which demonstrates how to get Transcript using Grap
 
 ## Setup
 
-### 1. Setup for Bot
+**NOTE: The feature is only available only be used from the desktop app*
+
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+    
+  -  Register one Azure AD application in your tenant's directory: for the bot and tab app authentication.
+
+  -  Log in to the Azure portal from your subscription, and go to the "App registrations" blade  [here](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps). Ensure that you use a tenant where admin consent for API permissions can be provided.
+
+ -  Click on "New registration", and create an Azure AD application.
+
+ -  **Name:**  The name of your Teams app - if you are following the template for a default deployment, we recommend "App catalog lifecycle".
+
+ -  **Supported account types:**  Select "Accounts in any organizational directory"
+
+ -  Leave the "Redirect URL" field blank.   
+
+ - Click on the "Register" button.
+
+ - When the app is registered, you'll be taken to the app's "Overview" page. Copy the  **Application (client) ID**; we will need it later. Verify that the "Supported account types" is set to  **Multiple organizations**.
+
+ -  On the side rail in the Manage section, navigate to the "Certificates & secrets" section. In the Client secrets section, click on "+ New client secret". Add a description for the secret and select Expires as "Never". Click "Add".
+
+ -  Once the client secret is created, copy its  **Value**, please take a note of the secret as it will be required later.
+
+
+ - At this point you have 3 unique values:
+ -   Application (client) ID which will be later used during Azure bot creation
+ -   Client secret for the bot which will be later used during Azure bot creation
+ - Directory (tenant) ID
+       We recommend that you copy these values into a text file, using an application like Notepad. We will need these values later.
+
+  -  Under left menu, navigate to  **API Permissions**, and make sure to add the following permissions of Microsoft Graph API > Application permissions:
+     -  OnlineMeetings.Read.All
+     -  OnlineMeetingTranscript.Read.All
+
+       Click on Add Permissions to commit your changes.
+
+   - If you are logged in as the Global Administrator, click on the Grant admin consent for %tenant-name% button to grant admin consent else, inform your admin to do the same through the portal or follow the steps provided here to create a link and send it to your admin for consent.
+
+ - Global Administrator can grant consent using following link:  [https://login.microsoftonline.com/common/adminconsent?client_id=](https://login.microsoftonline.com/common/adminconsent?client_id=)<%appId%> 
+    
+2. Setup for Bot
 - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0)
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
@@ -41,23 +82,25 @@ This is a sample application which demonstrates how to get Transcript using Grap
 - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
     > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
-### 2. Setup NGROK
-1) Run ngrok - point to port 3978
+3. Setup NGROK
+
+- Run ngrok - point to port 3978
 
 ```bash
 # ngrok http -host-header=rewrite 3978
 ```
 - Once started you should see URL  `https://41ed-abcd-e125.ngrok.io`. Copy it, this is your baseUrl that will used as endpoint for Azure bot and webhook.
 
-### 3. Setup for code
+4. Setup for code
 - Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-- Run the bot from a terminal or from Visual Studio:
+-  Update the `appsettings.json` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` and `MicrosoftAppTenantId` and `AppBaseUrl` and `UserId` (Note that the MicrosoftAppId is the AppId created in step 1 , the MicrosoftAppPassword is referred to as the "client secret" in step 1 and you can always create a new client secret anytime., MicrosoftAppTenantId is reffered to as Directory tenant Id in step 1, AppBaseUrl is the URL that you get in step 3 after running ngrok, UserId of the user used while granting the policy in step 5). 
 
+- Run the bot from a terminal or from Visual Studio:
   A) From a terminal, navigate to `MeetingTranscription`
 
   ```bash
@@ -73,64 +116,31 @@ This is a sample application which demonstrates how to get Transcript using Grap
   - Select `MeetingTranscription.csproj` file
   - Press `F5` to run the project
 
-  - Update the `appsettings.json` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` and `MicrosoftAppTenantId` and `AppBaseUrl` and `UserId` (Note that the MicrosoftAppId is the AppId created in step 4 , the MicrosoftAppPassword is referred to as the "client secret" in step 4 and you can always create a new client secret anytime., MicrosoftAppTenantId is reffered to as Directory tenant Id in step 4, AppBaseUrl is the URL that you get in step 2 after running ngrok, UserId of the user used while granting the policy in step 5). 
+
 
 **NOTE: If you are not getting option to start transcript. Make sure it is enabled from [Teams Admin center](https://admin.teams.microsoft.com). Under `Meetings -> Meeting Policies -> Applied policy(Default is Global)-> Recording & Transcription -> Transcription`**
 
-**NOTE: The feature is only available only be used from the desktop app**
-
-### 4. Register Azure AD application
-Register one Azure AD application in your tenant's directory: for the bot and tab app authentication.
-
--  Log in to the Azure portal from your subscription, and go to the "App registrations" blade  [here](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps). Ensure that you use a tenant where admin consent for API permissions can be provided.
-
--  Click on "New registration", and create an Azure AD application.
-
--  **Name:**  The name of your Teams app - if you are following the template for a default deployment, we recommend "App catalog lifecycle".
-
--  **Supported account types:**  Select "Accounts in any organizational directory"
-
--  Leave the "Redirect URL" field blank.   
-
-- Click on the "Register" button.
-
-- When the app is registered, you'll be taken to the app's "Overview" page. Copy the  **Application (client) ID**; we will need it later. Verify that the "Supported account types" is set to  **Multiple organizations**.
-
--  On the side rail in the Manage section, navigate to the "Certificates & secrets" section. In the Client secrets section, click on "+ New client secret". Add a description for the secret and select Expires as "Never". Click "Add".
-
--  Once the client secret is created, copy its  **Value**, please take a note of the secret as it will be required later.
+**NOTE: The feature is only available only be used from the desktop app*
 
 
-- At this point you have 3 unique values:
-    -   Application (client) ID which will be later used during Azure bot creation
-    -   Client secret for the bot which will be later used during Azure bot creation
-    -   Directory (tenant) ID
-We recommend that you copy these values into a text file, using an application like Notepad. We will need these values later.
-
--  Under left menu, navigate to  **API Permissions**, and make sure to add the following permissions of Microsoft Graph API > Application permissions:
-    -  OnlineMeetings.Read.All
-    -  OnlineMeetingTranscript.Read.All
-
-Click on Add Permissions to commit your changes.
-
-- If you are logged in as the Global Administrator, click on the Grant admin consent for %tenant-name% button to grant admin consent else, inform your admin to do the same through the portal or follow the steps provided here to create a link and send it to your admin for consent.
-
-- Global Administrator can grant consent using following link:  [https://login.microsoftonline.com/common/adminconsent?client_id=](https://login.microsoftonline.com/common/adminconsent?client_id=)<%appId%> 
-
-### 5. Allow applications to access online meetings on behalf of a user
+5. Allow applications to access online meetings on behalf of a user
 
 - Follow this link- [Configure application access policy](https://docs.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy)
 
 - **Note**: Copy the User Id you used to granting the policy. You need while configuring the appsettings.json file.
 
-### 6. Setup Manifest for Teams
 
-- **This step is specific to Teams.**
-    - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Your Microsoft App Id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+6. Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./AppManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
-    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app to your org's app catalog". Browse to and Open the .zip file. At the next dialog, click the Add button.)
-    - Add the app to personal/team/groupChat scope (Supported scopes)
+
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 ## Running the sample
 
