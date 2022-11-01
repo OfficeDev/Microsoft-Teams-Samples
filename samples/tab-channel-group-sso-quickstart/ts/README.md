@@ -52,11 +52,12 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
         * ex: `api://subdomain.example.com/00000000-0000-0000-0000-000000000000`.
         
         The fully qualified domain name is the human readable domain name from which your app is served. If you are using a tunneling service such as ngrok, you will need to update this value whenever your ngrok subdomain changes.
-        * ex: `api://f631****.ngrok.io/9051a142-901a-4384-a83c-556c2888b071`.
- 
-    - Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
-    - Set **Who can consent?** to `Admins and users`
-    - Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
+        - ex: api://f631****.ngrok.io/00000000-0000-0000-0000-000000000000
+    
+  
+    -Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
+    -Set **Who can consent?** to `Admins and users`
+    -Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
         * **Admin consent display name:** Teams can access the user’s profile.
         * **Admin consent description**: Allows Teams to call the app’s web APIs as the current user.
     - Ensure that **State** is set to **Enabled**
