@@ -18,7 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-change-notification-team-ch
 
 This is a sample application which demonstrates use of Team/Channel subscription that will post notifications when user create/edit/delete team/channel.
 
-- **Interaction with bot**
+**Interaction with bot**
 ![Notifications](Images/ChangeNotifications.gif)
 
 
@@ -121,15 +121,15 @@ To include resource data of graph notifications, this Graph API require self-sig
 You can interact with Teams Tab by subscribing the teams/channel for notifications.
 
 1. **Show Welcome - Channel**
-- Welcome Message when Channel selected for subscription.
+Welcome Message when Channel selected for subscription.
 ![Channel-Welcome](Images/Channel-Welcome.png)
 
 2. **Channel Notifications**
-- Channel Created Update Delete Message
+Channel Created Update Delete Message
 ![CreatedDeletedUpdated-Channel](Images/CreatedDeletedUpdated-Channel.png)
 
 3. **Show Welcome - Team**
-- Welcome Message when Team selected for subscription.
+Welcome Message when Team selected for subscription.
 ![Team-Welcome](Images/Team-Welcome.png)
 
 4. **Team Notifications**
