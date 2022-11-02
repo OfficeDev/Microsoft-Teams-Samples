@@ -22,7 +22,7 @@ namespace CallingMediaBot.Web.Helpers
     {
         private readonly ILogger<GraphHelper> logger;
         private readonly IConfiguration configuration;
-        private readonly IEnumerable<Configuration.User> users;
+        private readonly IEnumerable<Web.Options.UserOptions> users;
         private readonly BotOptions options;
         private readonly GraphServiceClient graphServiceClient;
 
@@ -32,12 +32,12 @@ namespace CallingMediaBot.Web.Helpers
         /// <param name="httpClientFactory">IHttpClientFactory instance.</param>
         /// <param name="logger">ILogger instance.</param>
         /// <param name="configuration">IConfiguration instance.</param>
-        public GraphHelper(ILogger<GraphHelper> logger, IConfiguration configuration, IOptions<Configuration.Users> users, BotOptions options, GraphServiceClient graphServiceClient)
+        public GraphHelper(ILogger<GraphHelper> logger, IConfiguration configuration, IOptions<List<UserOptions>> users, IOptions<BotOptions> options, GraphServiceClient graphServiceClient)
         {
             this.logger = logger;
             this.configuration = configuration;
-            this.users = configuration.GetSection("Users").Get<Configuration.User[]>().AsEnumerable();
-            this.options = options;
+            this.users = users.Value;
+            this.options = options.Value;
             this.graphServiceClient = graphServiceClient;
         }
 
@@ -67,36 +67,7 @@ namespace CallingMediaBot.Web.Helpers
 
         public async Task<Call> CreateCallAsync()
         {
-            var call = new Call
-            {
-                CallbackUri = $"{this.configuration[Common.Constants.BotBaseUrlConfigurationSettingsKey]}/callback",
-                TenantId = this.configuration[Common.Constants.TenantIdConfigurationSettingsKey],
-                Targets = new List<InvitationParticipantInfo>()
-                    {
-                        new InvitationParticipantInfo
-                        {
-                            Identity = new IdentitySet
-                            {
-                                User = new Identity
-                                {
-                                    DisplayName = this.users.FirstOrDefault().DisplayName,
-                                    Id = this.users.FirstOrDefault().Id
-                                }
-                            }
-                        }
-                    },
-                RequestedModalities = new List<Modality>()
-                    {
-                        Modality.Audio
-                    },
-                MediaConfig = new ServiceHostedMediaConfig
-                {
-                }
-            };
-
-            return await graphServiceClient.Communications.Calls
-                .Request()
-                .AddAsync(call);
+            throw new NotImplementedException();
         }
 
         public async Task TransferCallAsync(string replaceCallId)
