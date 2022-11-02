@@ -10,7 +10,6 @@ using CallingMediaBot.Web.Utility;
 using Microsoft.Bot.Builder;
 using Microsoft.Extensions.Options;
 using Microsoft.Graph;
-using Microsoft.Graph.Communications.Calls;
 using Microsoft.Graph.Communications.Client.Authentication;
 using Microsoft.Graph.Communications.Common.Telemetry;
 using Microsoft.Graph.Communications.Core.Notifications;
