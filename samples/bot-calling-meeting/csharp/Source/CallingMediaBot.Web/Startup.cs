@@ -9,10 +9,15 @@ using CallingMediaBot.Web.Bots;
 using CallingMediaBot.Web.Extensions;
 using CallingMediaBot.Web.Helpers;
 using CallingMediaBot.Web.Interfaces;
+using CallingMediaBot.Web.Options;
+using CallingMediaBot.Web.Services.MicrosoftGraph;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Graph.Communications.Common.Telemetry;
+using Microsoft.Identity.Web;
 
 namespace CallingMediaBot.Web
 {
@@ -35,6 +40,12 @@ namespace CallingMediaBot.Web
             services.AddControllers();
             services.AddOptions();
 
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"))
+                    .EnableTokenAcquisitionToCallDownstreamApi()
+                    .AddMicrosoftGraph(Configuration.GetSection("Graph"))
+                    .AddInMemoryTokenCaches();
+
             services.AddSingleton<IGraphLogger>(this.logger);
 
             // Create the Bot Framework Authentication to be used with the Bot Adapter.
@@ -48,15 +59,18 @@ namespace CallingMediaBot.Web
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
             services.AddTransient<IBot, MessageBot>();
+            services.AddTransient<CallingBot>();
 
-            services.AddBot(options => this.Configuration.Bind("Bot", options));
+            services.Configure<AzureAdOptions>(Configuration.GetSection("AzureAd"));
+            services.Configure<BotOptions>(Configuration.GetSection("Bot"));
+            services.Configure<List<UserOptions>>(Configuration.GetSection("Users"));
 
             services.AddScoped<IGraph, GraphHelper>();
 
             services.AddDomainServices();
             services.AddInfrastructureServices();
 
-            services.AddGraphServiceClient(options => this.Configuration.Bind("AzureAd", options));
+            services.AddMicrosoftGraphServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
