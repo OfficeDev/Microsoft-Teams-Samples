@@ -42,11 +42,9 @@ namespace BotWithSharePointFileViewer
             // Create a global hashset for our Roster and notes information
             services.AddSingleton<ConcurrentDictionary<string, TokenState>>();
 
-            // Dialog Manager handles initiating the Dialog Stack, saving state, etc.
-            services.AddSingleton<DialogManager>();
-
             // The Dialog that will be run by the bot.
             services.AddSingleton<MainDialog>();
+            services.AddSingleton<DialogManager>();
 
             // Create the Bot Framework Adapter with error handling enabled.
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();

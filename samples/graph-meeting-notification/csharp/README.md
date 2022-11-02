@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "10-08-2022 00:16:45"
+ createdDate: "10/08/2022 12:16:45 AM"
 urlFragment: officedev-microsoft-teams-samples-graph-meeting-notification-csharp
 ---
 

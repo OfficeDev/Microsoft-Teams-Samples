@@ -31,7 +31,14 @@
         "value": "connector"
       }
     ],
-    "thumbnails": [],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/connector-generic/nodejs/Images/connector_generic.gif",
+        "alt": "Solution UX showing microsoft teams sample connector"
+      }
+    ],
     "authors": [
       {
         "gitHubAccount": "OfficeDev",

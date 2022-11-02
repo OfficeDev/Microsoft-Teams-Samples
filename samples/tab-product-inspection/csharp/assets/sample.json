@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-product-inspection/csharp/ProductInspection/Images/product-list.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-product-inspection/csharp/ProductInspection/Images/PreviewImg.gif",
         "alt": "Solution UX showing product inspection"
       }
     ],

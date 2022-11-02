@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "20-03-2021 13:38:27"
+ createdDate: "03/20/2021 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-tab-channel-group-config-page-auth-csharp
 ---
 

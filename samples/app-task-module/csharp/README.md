@@ -10,7 +10,7 @@ languages:
 - csharp
 extensions:
   contentType: samples
-  createdDate: "9/26/2018 5:27:57 PM"
+  createdDate: "09/26/2018 05:27:57 PM"
 urlFragment: officedev-microsoft-teams-samples-app-task-module-csharp
 ---
 

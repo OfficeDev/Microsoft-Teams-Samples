@@ -8,8 +8,9 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:26"
+ contentType: samples
+ createdDate: "07-07-2021 13:38:26"
+urlFragment: officedev-microsoft-teams-samples-bot-conversation-sso-quickstart-csharp_dotnetcore
 ---
 
 # Teams Conversation Bot SSO quick-start
@@ -66,7 +67,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     - Launch Visual Studio
     - File -> Open -> Project/Solution
     - Navigate to `samples/bot-conversation-sso-quickstart/csharp_dotnetcore` folder
-    - Select `TeamsAuth.csproj` file
+    - Select `BotConversationSsoQuickstart.sln` file and open it in Visual Studio
     - Press `F5` to run this project
     
 4.  Manually update the manifest.json
@@ -88,4 +89,3 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Portal](https://portal.azure.com)
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
-

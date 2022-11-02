@@ -12,7 +12,7 @@ extensions:
   contentType: samples
   platforms:
   - CSS
-  createdDate: 10/16/2017 10:02:21 PM
+  createdDate: "10/16/2017 10:02:21 PM"
 urlFragment: officedev-microsoft-teams-samples-app-hello-world-csharp
 ---
 

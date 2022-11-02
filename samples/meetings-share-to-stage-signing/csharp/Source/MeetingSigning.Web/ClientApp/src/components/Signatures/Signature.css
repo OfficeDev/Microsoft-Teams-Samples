@@ -7,6 +7,9 @@
 .signature-input input {
   background-color: #d9f1fc;
   color: black;
+  border-radius: 0.25em;
+  padding: 0.3125em 2.1875em 0.3125em 0.75em;
+  border-bottom-width: 0.125em;
 }
 
 .signature-input input:disabled {
@@ -19,4 +22,6 @@
 
 .signature-list {
   max-width: fit-content;
+  justify-content: space-between !important;
+  height: auto !important;
 }

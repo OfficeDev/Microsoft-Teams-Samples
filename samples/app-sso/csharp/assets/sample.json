@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://user-images.githubusercontent.com/85157377/123597524-11d2bf80-d811-11eb-88c1-f69c349e0a73.png",
+        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-sso/csharp/Images/PreviewAppSSOCsharp.gif",
         "alt": "Solution UX showing app sso c#"
       }
     ],
