@@ -161,10 +161,6 @@ jobs:
               name: 'msgext-link-unfurling-reddit'
               version: '2.1.x'
 
-            - project_path: 'samples/msgext-link-unfurling-reddit/csharp/dotnet_user_auth/RLU.csproj'
-              name: 'msgext-link-unfurling-reddit'
-              version: '2.1.x'
-
             - project_path: 'samples/app-region-selection/csharp/RegionSectionApp/RegionSelectionApp.csproj'
               name: 'app-region-selection'
               version: '3.1.301'
@@ -260,23 +256,7 @@ jobs:
             - project_path: 'samples/account-linking/csharp/Source/Microsoft.Teams.Samples.AccountLinking.Sample.csproj'
               name: 'account-linking'
               version: '6.0.x'
-
-            - project_path: 'samples/app-task-module/csharp/Microsoft.Teams.Samples.TaskModule.Web/Microsoft.Teams.Samples.TaskModule.Web.csproj'
-              name: 'app-task-module'
-              version: '4.6.1'
-
-            - project_path: 'samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Domain/Microsoft.Teams.Samples.ConversationalTabs.Domain.csproj'
-              name: 'bot-tab-conversations'
-              version: '4.6.1'
-
-            - project_path: 'samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Infrastructure/Microsoft.Teams.Samples.ConversationalTabs.Infrastructure.csproj'
-              name: 'bot-tab-conversations'
-              version: '4.6.1'
-
-            - project_path: 'samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/Microsoft.Teams.Samples.ConversationalTabs.Web.csproj'
-              name: 'bot-tab-conversations'
-              version: '4.6.1'
-              
+             
             - project_path: 'samples/bot-conversation/csharp/TeamsConversationBot.csproj'
               name: 'bot-conversation'
               version: '6.0.x'
@@ -317,10 +297,6 @@ jobs:
               name: 'bot-teams-catering'
               version: '3.1'
 
-            - project_path: 'samples/connector-todo-notification/csharp/TeamsToDoAppConnector/TeamsToDoAppConnector.csproj'
-              name: 'connector-todo-notification'
-              version: '4.6.1' 
-
             - project_path: 'samples/graph-bulk-meetings/csharp/EventMeeting/EventMeeting.csproj'
               name: 'graph-bulk-meetings'
               version: '6.0.x' 
@@ -332,10 +308,6 @@ jobs:
             - project_path: 'samples/graph-pinned-messages/csharp/GraphPinnedMessage/GraphPinnedMessage.csproj'
               name: 'graph-pinned-messages'
               version: '6.0.x'
-
-            - project_path: 'samples/graph-proactive-installation/csharp/ProactiveAppInstallation/ProactiveAppInstallation.cspro'
-              name: 'graph-proactive-installation'
-              version: '3.1'
 
             - project_path: 'samples/graph-teams-tag/csharp/GraphTeamsTag/GraphTeamsTag.csproj'
               name: 'graph-teams-tag'
@@ -373,7 +345,7 @@ jobs:
               name: 'meetings-share-to-stage-signing'
               version: '6.0.x'
               
-            - project_path: 'samples/mmeetings-share-to-stage-signing/csharp/Source/MeetingSigning.Infrastructure/Microsoft.Teams.Samples.MeetingSigning.Infrastructure.csproj'
+            - project_path: 'samples/meetings-share-to-stage-signing/csharp/Source/MeetingSigning.Infrastructure/Microsoft.Teams.Samples.MeetingSigning.Infrastructure.csproj'
               name: 'meetings-share-to-stage-signing'
               version: '6.0.x'
 
@@ -709,10 +681,6 @@ jobs:
               name: 'app-auth'
               version: '16.x'
 
-            - project_path: 'samples/app-localization/nodejs'
-              name: 'app-localization'
-              version: '16.x'
-
             - project_path: 'samples/bot-conversation/nodejs'
               name: 'bot-conversation'
               version: '16.x'
@@ -765,20 +733,24 @@ jobs:
               name: 'graph-teams-tag'
               version: '16.x'
 
-            - project_path: 'samples/incoming-webhook/nodejs'
-              name: 'incoming-webhook'
+            - project_path: 'samples/incoming-webhook/nodejs/ClientApp'
+              name: 'incoming-webhook-client-app'
+              version: '16.x'
+
+            - project_path: 'samples/incoming-webhook/nodejs/api'
+              name: 'incoming-webhook-server-apis'
               version: '16.x'
 
             - project_path: 'samples/meetings-attendance-report/nodejs'
               name: 'meetings-attendance-report'
               version: '16.x'
 
-            - project_path: 'samples/meetings-audio-state/nodejs'
-              name: 'meetings-audio-state'
+            - project_path: 'samples/meetings-context-app/nodejs/client'
+              name: 'meetings-context-app-client'
               version: '16.x'
 
-            - project_path: 'samples/meetings-context-app/nodejs'
-              name: 'meetings-context-app'
+            - project_path: 'samples/meetings-context-app/nodejs/server'
+              name: 'meetings-context-app-server'
               version: '16.x'
 
             - project_path: 'samples/meetings-details-tab/nodejs'
@@ -809,20 +781,12 @@ jobs:
               name: 'msgext-search'
               version: '16.x'
 
-            - project_path: 'samples/outgoing-webhook/nodejs'
-              name: 'outgoing-webhook'
-              version: '16.x'
-
-            - project_path: 'samples/tab-app-monetization/nodejs'
+            - project_path: 'samples/tab-app-monetization/nodejs/ClientApp'
               name: 'tab-app-monetization'
               version: '16.x'
 
-            - project_path: 'samples/tab-channel-context/nodejs'
+            - project_path: 'samples/tab-channel-context/nodejs/ClientApp'
               name: 'tab-channel-context'
-              version: '16.x'
-
-            - project_path: 'samples/tab-device-permissions/nodejs'
-              name: 'tab-device-permissions'
               version: '16.x'
 
       fail-fast: false
