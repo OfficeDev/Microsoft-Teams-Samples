@@ -377,10 +377,6 @@ jobs:
               name: 'msgext-search'
               version: '6.0.x'
 
-            - project_path: 'samples/outgoing-webhook/csharp/WebhookSampleBot/WebhookSampleBot.csproj'
-              name: 'outgoing-webhook'
-              version: '6.0.x'
-
             - project_path: 'samples/msteams-application-qbot/Source/Microsoft.Teams.App.Domain/Microsoft.Teams.Apps.QBot.Domain.csproj'
               name: 'msteams-application-qbot'
               version: '2.0'
@@ -783,10 +779,6 @@ jobs:
 
             - project_path: 'samples/tab-app-monetization/nodejs/ClientApp'
               name: 'tab-app-monetization'
-              version: '16.x'
-
-            - project_path: 'samples/tab-channel-context/nodejs/ClientApp'
-              name: 'tab-channel-context'
               version: '16.x'
 
       fail-fast: false
