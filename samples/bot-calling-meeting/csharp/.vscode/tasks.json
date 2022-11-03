@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/CallingMediaBot.Web/CallingMediaBot.Web.csproj",
+                "${workspaceFolder}/Source/CallingMediaBot.Web/CallingMediaBot.Web.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/CallingMediaBot.Web/CallingMediaBot.Web.csproj",
+                "${workspaceFolder}/Source/CallingMediaBot.Web/CallingMediaBot.Web.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/CallingMediaBot.Web/CallingMediaBot.Web.csproj"
+                "${workspaceFolder}/Source/CallingMediaBot.Web/CallingMediaBot.Web.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
