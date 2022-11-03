@@ -119,8 +119,7 @@ public class GraphHelper : IGraph
                             Id = this.users.ElementAt(2).Id
                         }
                     }
-                }
-            };
+                };
 
             var statefulCall = await graphServiceClient.Communications.Calls[meetingId].Participants
                 .Invite(participants)

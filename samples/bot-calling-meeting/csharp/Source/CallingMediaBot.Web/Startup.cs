@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Graph.Communications.Common.Telemetry;
 using Microsoft.Identity.Web;
 
