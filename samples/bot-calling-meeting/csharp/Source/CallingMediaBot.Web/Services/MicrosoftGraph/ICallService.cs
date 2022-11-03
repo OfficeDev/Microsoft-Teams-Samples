@@ -6,28 +6,62 @@ using Microsoft.Graph;
 
 public interface ICallService
 {
+    /// <summary>
+    /// Answer a call
+    /// </summary>
+    /// <param name="id">The ID of the call to answer</param>
+    /// <param name="preFetchMedia">Media that Teams will prefetch.</param>
+    /// <returns>Task</returns>
     Task Answer(string id, params MediaInfo[]? preFetchMedia);
 
+    /// <summary>
+    /// Create a new call
+    /// </summary>
+    /// <param name="users">Users to add to the call</param>
+    /// <returns>The calls details</returns>
     Task<Call> Create(params Identity[] users);
 
+    /// <summary>
+    /// Get a calls details
+    /// </summary>
+    /// <param name="id">The ID of the call</param>
+    /// <returns>The calls details</returns>
     Task<Call> Get(string id);
 
     /// <summary>
     /// Delete/Hang up a call
     /// </summary>
-    /// <returns></returns>
+    /// <returns>Task</returns>
     Task HangUp(string id);
 
+    /// <summary>
+    /// Plays a media prompt in a call
+    /// </summary>
+    /// <param name="id">The ID of the call where you want to play the prompt</param>
+    /// <param name="mediaPrompts">The Media to play</param>
+    /// <returns>The Play Prompt Operation</returns>
     Task<PlayPromptOperation> PlayPrompt(string id, params MediaInfo[] mediaPrompts);
 
+    /// <summary>
+    /// Reject a call
+    /// </summary>
+    /// <param name="id">The ID of the call to reject</param>
+    /// <returns></returns>
     Task<Call> Reject(string id);
 
     /// <summary>
     /// Redirect a call that has not been answered yet
     /// </summary>
-    /// <param name="id"></param>
+    /// <param name="id">The ID of the call to redirect</param>
     /// <returns></returns>
     Task<Call> Redirect(string id);
 
+    /// <summary>
+    /// Transfer an ongoing call to another user
+    /// </summary>
+    /// <param name="id">The ID of the call to transfer</param>
+    /// <param name="transferIdentity"></param>
+    /// <param name="transfereeIdentity"></param>
+    /// <returns></returns>
     Task Transfer(string id, Identity transferIdentity, Identity? transfereeIdentity = null);
 }

@@ -22,6 +22,7 @@ public class CallService : ICallService
         callbackUri = new Uri(botOptions.Value.BotBaseUrl, "callback").ToString();
     }
 
+    /// <inheritdoc/>
     public async Task Answer(string id, params MediaInfo[]? preFetchMedia)
     {
         await graphServiceClient.Communications.Calls[id]
@@ -37,6 +38,7 @@ public class CallService : ICallService
             .PostAsync();
     }
 
+    /// <inheritdoc/>
     public async Task<Call> Create(params Identity[] users)
     {
         var call = new Call
@@ -65,6 +67,7 @@ public class CallService : ICallService
             .AddAsync(call);
     }
 
+    /// <inheritdoc/>
     public async Task<Call> Get(string id)
     {
         return await graphServiceClient.Communications.Calls[id]
@@ -73,6 +76,7 @@ public class CallService : ICallService
             .GetAsync();
     }
 
+    /// <inheritdoc/>
     public async Task HangUp(string id)
     {
         await graphServiceClient.Communications.Calls[id]
@@ -81,6 +85,7 @@ public class CallService : ICallService
             .DeleteAsync();
     }
 
+    /// <inheritdoc />
     public async Task<PlayPromptOperation> PlayPrompt(string id, params MediaInfo[] mediaPrompts)
     {
         var prompts = mediaPrompts.Select(mediaPrompt =>
@@ -96,11 +101,13 @@ public class CallService : ICallService
             .PostAsync();
     }
 
+    /// <inheritdoc/>
     public Task<Call> Redirect(string id)
     {
         throw new NotImplementedException();
     }
 
+    /// <inheritdoc/>
     public async Task Reject(string id, RejectReason rejectReason)
     {
         await graphServiceClient.Communications.Calls[id]
@@ -110,11 +117,13 @@ public class CallService : ICallService
             .PostAsync();
     }
 
+    /// <inheritdoc/>
     public Task<Call> Reject(string id)
     {
         throw new NotImplementedException();
     }
 
+    /// <inheritdoc/>
     public async Task Transfer(string id, Identity transferIdentity, Identity? transfereeIdentity = null)
     {
         var transferTarget = new InvitationParticipantInfo

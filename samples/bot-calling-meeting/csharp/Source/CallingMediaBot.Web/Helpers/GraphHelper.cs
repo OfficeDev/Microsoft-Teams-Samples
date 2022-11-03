@@ -8,7 +8,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using CallingMediaBot.Web.Interfaces;
 using CallingMediaBot.Web.Options;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Graph;
@@ -16,6 +15,8 @@ using Microsoft.Graph;
 /// <summary>
 /// Helper class for Graph.
 /// </summary>
+///
+/// NOTE: This file will be slowly removed and placed into files similar to CallService
 public class GraphHelper : IGraph
 {
     private readonly ILogger<GraphHelper> logger;
