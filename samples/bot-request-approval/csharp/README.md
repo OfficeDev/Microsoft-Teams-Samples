@@ -12,7 +12,7 @@ extensions:
  createdDate: "13-12-2021 17:00:25"
 urlFragment: officedev-microsoft-teams-samples-bot-request-approval-csharp
 ---
-# Interaction with app.
+# Interaction with app
 
 ![Preview Image](BotRequestApproval/Images/Preview.gif)
 
@@ -40,7 +40,7 @@ This sample shows a feature where:
   ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-## Setup.
+## Setup
 
 ### Register your Teams Auth SSO with Azure AD
 1. Register your app with Microsoft identity platform via the Azure AD portal
@@ -81,7 +81,7 @@ This sample shows a feature where:
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.   
    
-## Running the sample**Requester:**
+## Running the sample
 
 - Initiated request using bot command `request` in group chat.
 
