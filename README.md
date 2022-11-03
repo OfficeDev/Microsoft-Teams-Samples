@@ -60,6 +60,15 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |33|Meetings Details Tab|Microsoft Teams meeting extensibility sample for iteracting with Details Tab in-meeting. |[View](/demo%20manifest/meetings-details-tab.zip) |
 |34|Tab Channel Goup Config Page Auth|Configurable Tab using AAD and Silent Authentication. |[View](/demo%20manifest/tab-channel-group-config-page-auth.zip) |
 |35|Tab Chanel Group|Sample app showing custom group and channel Tab with ASP. NET Core. |[View](/demo%20manifest/tab-channel-group.zip) |
+|36|Bot Initiate Thread in Channel|This sample app demonstrate how to start a thread in a specific Team's channel using Bot Framework v4 |[View](/demo%20manifest/bot-initiate-thread-in-channel.zip) |
+|37|Bot Task Module|This sample app demonstrate how to use Task Module using Bot Framework v4. |[View](/demo%20manifest/bot-task-module.zip) |
+|38|Messaging Extension Action Preview|This sample app demonstrate how to use action preview in Messaging Extensions using Bot Framework v4s. |[View](/demo%20manifest/msgext-action-preview.zip) |
+|39|Messaging Extension Search|This sample app demonstrate how to use search based Messaging Extension. |[View](/demo%20manifest/msgext-search.zip) |
+|40|Messaging Extension Search Auth Config|This sample app demonstrate how to use search auth config in Messaging Extension. |[View](/demo%20manifest/msgext-search-auth-config.zip) |
+|41|Bot File Upload|This sample app demonstrate the file upload with bot using Bot Framework v4. |[View](/demo%20manifest/bot-file-upload.zip) |
+|42|Bot Message Reaction|This sample app demonstrate how to use message reactions bot. |[View](/demo%20manifest/bot-message-reaction.zip) |
+|43|Messaging Extension Link Unfurling|This sample app demonstrate how to use link unfurling in Messaging Extension using Bot Framework v4. |[View](/demo%20manifest/msgext-link-unfurling.zip) |
+
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 
 The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) is an extension on Visual Studio Code and Visual Studio. It enable Teams developers to create and deploy Teams apps with integrated identity, access to cloud storage, data from Microsoft Graph, and other services in Azure and M365 with a "zero-configuration" approach to the developer experience. And [Sample Apps](https://github.com/OfficeDev/TeamsFx-Samples) are provided in Teams Toolkit. Download and try it by today! [Learn more about Teams Toolkit](https://docs.microsoft.com/en-us/microsoftteams/platform/toolkit/visual-studio-code-overview).
