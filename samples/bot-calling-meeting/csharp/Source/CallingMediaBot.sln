@@ -5,10 +5,6 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CallingMediaBot.Web", "CallingMediaBot.Web\CallingMediaBot.Web.csproj", "{ACA36300-B09B-4937-92C4-4E6CB095BEEB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CallingMediaBot.Domain", "CallingMediaBot.Domain\CallingMediaBot.Domain.csproj", "{D858C04F-5AD1-40E6-B8CF-A0219B86ACB0}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CallingMediaBot.Infrastructure", "CallingMediaBot.Infrastructure\CallingMediaBot.Infrastructure.csproj", "{F296E139-683C-41D2-BF67-29371FAF0F16}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{33C72F09-71AA-471D-99D2-C018BFACF90E}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
@@ -24,14 +20,6 @@ Global
 		{ACA36300-B09B-4937-92C4-4E6CB095BEEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACA36300-B09B-4937-92C4-4E6CB095BEEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACA36300-B09B-4937-92C4-4E6CB095BEEB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D858C04F-5AD1-40E6-B8CF-A0219B86ACB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D858C04F-5AD1-40E6-B8CF-A0219B86ACB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D858C04F-5AD1-40E6-B8CF-A0219B86ACB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D858C04F-5AD1-40E6-B8CF-A0219B86ACB0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F296E139-683C-41D2-BF67-29371FAF0F16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F296E139-683C-41D2-BF67-29371FAF0F16}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F296E139-683C-41D2-BF67-29371FAF0F16}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F296E139-683C-41D2-BF67-29371FAF0F16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

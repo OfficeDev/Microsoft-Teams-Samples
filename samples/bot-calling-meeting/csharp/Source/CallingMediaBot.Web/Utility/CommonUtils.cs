@@ -1,7 +1,9 @@
-﻿using System.Runtime.CompilerServices;
-using Microsoft.Graph.Communications.Common.Telemetry;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace CallingMediaBot.Web.Utility;
+using System.Runtime.CompilerServices;
+using Microsoft.Graph.Communications.Common.Telemetry;
 
 public static class CommonUtils
 {

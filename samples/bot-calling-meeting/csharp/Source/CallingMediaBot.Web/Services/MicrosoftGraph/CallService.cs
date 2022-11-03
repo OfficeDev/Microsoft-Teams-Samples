@@ -1,10 +1,11 @@
-﻿using CallingMediaBot.Domain.Interfaces;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+namespace CallingMediaBot.Web.Services.MicrosoftGraph;
 using CallingMediaBot.Web.Options;
 using Microsoft.Extensions.Options;
 using Microsoft.Graph;
 using Microsoft.Identity.Web;
-
-namespace CallingMediaBot.Web.Services.MicrosoftGraph;
 
 public class CallService : ICallService
 {

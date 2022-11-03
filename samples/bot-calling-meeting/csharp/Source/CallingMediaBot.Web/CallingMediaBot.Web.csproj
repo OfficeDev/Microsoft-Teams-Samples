@@ -27,9 +27,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\CallingMediaBot.Domain\CallingMediaBot.Domain.csproj" />
-    <ProjectReference Include="..\CallingMediaBot.Infrastructure\CallingMediaBot.Infrastructure.csproj" />
-  </ItemGroup>
-
 </Project>
