@@ -171,5 +171,3 @@ Calling and Meeting Bot provides basic functionality like Create Call, Join a ca
 ## Further reading
 - [Register a calling Bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/calls-and-meetings/registering-calling-bot#create-new-bot-or-add-calling-capabilities)
 - [Cloud Communications API](https://docs.microsoft.com/en-us/graph/api/resources/call?view=graph-rest-1.0)
-
-
