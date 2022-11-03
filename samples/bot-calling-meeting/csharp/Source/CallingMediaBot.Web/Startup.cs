@@ -1,10 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
-//
-// Generated with Bot Builder V4 SDK Template for Visual Studio EmptyBot v4.11.1
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using CallingMediaBot.Domain;
-using CallingMediaBot.Infrastructure;
+namespace CallingMediaBot.Web;
+using CallingMediaBot.Web.AdaptiveCards;
 using CallingMediaBot.Web.Bots;
 using CallingMediaBot.Web.Helpers;
 using CallingMediaBot.Web.Interfaces;
@@ -17,82 +15,76 @@ using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Graph.Communications.Common.Telemetry;
 using Microsoft.Identity.Web;
 
-namespace CallingMediaBot.Web
+public class Startup
 {
+    private readonly GraphLogger logger;
 
-    public class Startup
+    public Startup(IConfiguration configuration)
     {
-        private readonly GraphLogger logger;
+        Configuration = configuration;
+        this.logger = new GraphLogger(typeof(Startup).Assembly.GetName().Name);
+    }
 
-        public Startup(IConfiguration configuration)
+    public IConfiguration Configuration { get; }
+
+    // This method gets called by the runtime. Use this method to add services to the container.
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddControllers();
+        services.AddOptions();
+
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"))
+                .EnableTokenAcquisitionToCallDownstreamApi()
+                .AddMicrosoftGraph(Configuration.GetSection("Graph"))
+                .AddInMemoryTokenCaches();
+
+        services.AddSingleton<IGraphLogger>(this.logger);
+
+        // Create the Bot Framework Authentication to be used with the Bot Adapter.
+        services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
+
+        // Create the Bot Framework Authentication to be used with the Bot Adapter.
+        services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
+
+        // Create the Bot Framework Adapter with error handling enabled.
+        services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
+
+        // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
+        services.AddTransient<IBot, MessageBot>();
+        services.AddTransient<CallingBot>();
+
+        services.Configure<AzureAdOptions>(Configuration.GetSection("AzureAd"));
+        services.Configure<BotOptions>(Configuration.GetSection("Bot"));
+        services.Configure<List<UserOptions>>(Configuration.GetSection("Users"));
+
+        services.AddScoped<IGraph, GraphHelper>();
+
+        services.AddSingleton<IAdaptiveCardFactory, AdaptiveCardFactory>();
+        services.AddMicrosoftGraphServices();
+    }
+
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        if (env.IsDevelopment())
         {
-            Configuration = configuration;
-            this.logger = new GraphLogger(typeof(Startup).Assembly.GetName().Name);
+            app.UseDeveloperExceptionPage();
         }
 
-        public IConfiguration Configuration { get; }
+        app.UseHttpsRedirection();
+        app.UseCookiePolicy();
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddControllers();
-            services.AddOptions();
-
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"))
-                    .EnableTokenAcquisitionToCallDownstreamApi()
-                    .AddMicrosoftGraph(Configuration.GetSection("Graph"))
-                    .AddInMemoryTokenCaches();
-
-            services.AddSingleton<IGraphLogger>(this.logger);
-
-            // Create the Bot Framework Authentication to be used with the Bot Adapter.
-            services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
-
-            // Create the Bot Framework Authentication to be used with the Bot Adapter.
-            services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
-
-            // Create the Bot Framework Adapter with error handling enabled.
-            services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
-
-            // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-            services.AddTransient<IBot, MessageBot>();
-            services.AddTransient<CallingBot>();
-
-            services.Configure<AzureAdOptions>(Configuration.GetSection("AzureAd"));
-            services.Configure<BotOptions>(Configuration.GetSection("Bot"));
-            services.Configure<List<UserOptions>>(Configuration.GetSection("Users"));
-
-            services.AddScoped<IGraph, GraphHelper>();
-
-            services.AddDomainServices();
-            services.AddInfrastructureServices();
-
-            services.AddMicrosoftGraphServices();
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
+        app.UseDefaultFiles()
+            .UseStaticFiles()
+            .UseWebSockets()
+            .UseRouting()
+            .UseAuthorization()
+            .UseEndpoints(endpoints =>
             {
-                app.UseDeveloperExceptionPage();
-            }
+                endpoints.MapControllers();
+            });
 
-            app.UseHttpsRedirection();
-            app.UseCookiePolicy();
-
-            app.UseDefaultFiles()
-                .UseStaticFiles()
-                .UseWebSockets()
-                .UseRouting()
-                .UseAuthorization()
-                .UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllers();
-                });
-
-            // app.UseHttpsRedirection();
-        }
+        // app.UseHttpsRedirection();
     }
 }

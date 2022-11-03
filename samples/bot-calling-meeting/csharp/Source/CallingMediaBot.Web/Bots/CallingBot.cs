@@ -1,10 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+namespace CallingMediaBot.Web.Bots;
 using System.Net;
-using CallingMediaBot.Domain.Interfaces;
 using CallingMediaBot.Web.Extensions;
 using CallingMediaBot.Web.Options;
+using CallingMediaBot.Web.Services.MicrosoftGraph;
 using CallingMediaBot.Web.Utility;
 using Microsoft.Bot.Builder;
 using Microsoft.Extensions.Options;
@@ -13,8 +14,6 @@ using Microsoft.Graph.Communications.Client.Authentication;
 using Microsoft.Graph.Communications.Common.Telemetry;
 using Microsoft.Graph.Communications.Core.Notifications;
 using Microsoft.Graph.Communications.Core.Serialization;
-
-namespace CallingMediaBot.Web.Bots;
 
 public class CallingBot : ActivityHandler
 {

@@ -1,133 +1,131 @@
-﻿// <copyright file="GraphHelper.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace CallingMediaBot.Web.Helpers
+
+namespace CallingMediaBot.Web.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using CallingMediaBot.Web.Interfaces;
+using CallingMediaBot.Web.Options;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Microsoft.Graph;
+
+/// <summary>
+/// Helper class for Graph.
+/// </summary>
+public class GraphHelper : IGraph
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using CallingMediaBot.Web.Interfaces;
-    using CallingMediaBot.Web.Options;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.Logging;
-    using Microsoft.Extensions.Options;
-    using Microsoft.Graph;
+    private readonly ILogger<GraphHelper> logger;
+    private readonly IEnumerable<Web.Options.UserOptions> users;
+    private readonly BotOptions botOptions;
+    private readonly GraphServiceClient graphServiceClient;
 
     /// <summary>
-    /// Helper class for Graph.
+    /// Initializes a new instance of the <see cref="GraphHelper"/> class.
     /// </summary>
-    public class GraphHelper : IGraph
+    /// <param name="httpClientFactory">IHttpClientFactory instance.</param>
+    /// <param name="logger">ILogger instance.</param>
+    public GraphHelper(ILogger<GraphHelper> logger, IOptions<List<UserOptions>> users, IOptions<BotOptions> botOptions, GraphServiceClient graphServiceClient)
     {
-        private readonly ILogger<GraphHelper> logger;
-        private readonly IEnumerable<Web.Options.UserOptions> users;
-        private readonly BotOptions botOptions;
-        private readonly GraphServiceClient graphServiceClient;
+        this.logger = logger;
+        this.users = users.Value;
+        this.botOptions = botOptions.Value;
+        this.graphServiceClient = graphServiceClient;
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GraphHelper"/> class.
-        /// </summary>
-        /// <param name="httpClientFactory">IHttpClientFactory instance.</param>
-        /// <param name="logger">ILogger instance.</param>
-        public GraphHelper(ILogger<GraphHelper> logger, IOptions<List<UserOptions>> users, IOptions<BotOptions> botOptions, GraphServiceClient graphServiceClient)
+    /// <inheritdoc/>
+    public async Task<OnlineMeeting?> CreateOnlineMeetingAsync()
+    {
+        try
         {
-            this.logger = logger;
-            this.users = users.Value;
-            this.botOptions = botOptions.Value;
-            this.graphServiceClient = graphServiceClient;
+            var onlineMeeting = new OnlineMeeting
+            {
+                StartDateTime = DateTime.UtcNow,
+                EndDateTime = DateTime.UtcNow.AddMinutes(30),
+                Subject = "Calling bot meeting",
+            };
+
+            var userId = users.First().Id;
+
+            var onlineMeetingResponse = await graphServiceClient.Users[userId].OnlineMeetings
+                       .Request()
+                       .AddAsync(onlineMeeting);
+            return onlineMeetingResponse;
         }
-
-        /// <inheritdoc/>
-        public async Task<OnlineMeeting?> CreateOnlineMeetingAsync()
+        catch (Exception ex)
         {
-            try
-            {
-                var onlineMeeting = new OnlineMeeting
-                {
-                    StartDateTime = DateTime.UtcNow,
-                    EndDateTime = DateTime.UtcNow.AddMinutes(30),
-                    Subject = "Calling bot meeting",
-                };
-
-                var userId = users.First().Id;
-
-                var onlineMeetingResponse = await graphServiceClient.Users[userId].OnlineMeetings
-                           .Request()
-                           .AddAsync(onlineMeeting);
-                return onlineMeetingResponse;
-            }
-            catch (Exception ex)
-            {
-                this.logger.LogError(ex, ex.Message);
-                return null;
-            }
+            this.logger.LogError(ex, ex.Message);
+            return null;
         }
+    }
 
-        public async Task<Call?> JoinScheduledMeeting(string meetingUrl)
+    public async Task<Call?> JoinScheduledMeeting(string meetingUrl)
+    {
+        try
         {
-            try
+            MeetingInfo meetingInfo;
+            ChatInfo chatInfo;
+
+            (chatInfo, meetingInfo) = JoinInfo.ParseJoinURL(meetingUrl);
+
+            var call = new Call
             {
-                MeetingInfo meetingInfo;
-                ChatInfo chatInfo;
-
-                (chatInfo, meetingInfo) = JoinInfo.ParseJoinURL(meetingUrl);
-
-                var call = new Call
+                CallbackUri = new Uri(botOptions.BotBaseUrl, "callback").ToString(),
+                RequestedModalities = new List<Modality>()
                 {
-                    CallbackUri = new Uri(botOptions.BotBaseUrl, "callback").ToString(),
-                    RequestedModalities = new List<Modality>()
-                    {
-                        Modality.Audio
-                    },
-                    MediaConfig = new ServiceHostedMediaConfig
-                    {
-                    },
-                    ChatInfo = chatInfo,
-                    MeetingInfo = meetingInfo,
-                    TenantId = (meetingInfo as OrganizerMeetingInfo)?.Organizer.GetPrimaryIdentity()?.GetTenantId()
-                };
+                    Modality.Audio
+                },
+                MediaConfig = new ServiceHostedMediaConfig
+                {
+                },
+                ChatInfo = chatInfo,
+                MeetingInfo = meetingInfo,
+                TenantId = (meetingInfo as OrganizerMeetingInfo)?.Organizer.GetPrimaryIdentity()?.GetTenantId()
+            };
 
-                var statefulCall = await graphServiceClient.Communications.Calls
-                        .Request()
-                        .AddAsync(call);
+            var statefulCall = await graphServiceClient.Communications.Calls
+                    .Request()
+                    .AddAsync(call);
 
-                return statefulCall;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            return statefulCall;
         }
-
-        public async Task InviteParticipant(string meetingId)
+        catch (Exception)
         {
-            try
+            return null;
+        }
+    }
+
+    public async Task InviteParticipant(string meetingId)
+    {
+        try
+        {
+            var participants = new List<InvitationParticipantInfo>()
             {
-                var participants = new List<InvitationParticipantInfo>()
+                new InvitationParticipantInfo
                 {
-                    new InvitationParticipantInfo
+                    Identity = new IdentitySet
                     {
-                        Identity = new IdentitySet
+                        User = new Identity
                         {
-                            User = new Identity
-                            {
-                                DisplayName = this.users.ElementAt(2).DisplayName,
-                                Id = this.users.ElementAt(2).Id
-                            }
+                            DisplayName = this.users.ElementAt(2).DisplayName,
+                            Id = this.users.ElementAt(2).Id
                         }
                     }
-                };
+                }
+            };
 
-                var statefulCall = await graphServiceClient.Communications.Calls[meetingId].Participants
-                    .Invite(participants)
-                    .Request()
-                    .PostAsync();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            var statefulCall = await graphServiceClient.Communications.Calls[meetingId].Participants
+                .Invite(participants)
+                .Request()
+                .PostAsync();
+        }
+        catch (Exception ex)
+        {
+            throw;
         }
     }
 }

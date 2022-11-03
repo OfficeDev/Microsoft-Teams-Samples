@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+namespace CallingMediaBot.Web.Bots;
 using System.Collections;
-using CallingMediaBot.Domain.Factories;
-using CallingMediaBot.Domain.Interfaces;
+using CallingMediaBot.Web.AdaptiveCards;
 using CallingMediaBot.Web.Interfaces;
 using CallingMediaBot.Web.Options;
 using CallingMediaBot.Web.Services.MicrosoftGraph;
@@ -12,14 +12,12 @@ using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Options;
 using Microsoft.Graph;
 
-namespace CallingMediaBot.Web.Bots;
-
 public class MessageBot : ActivityHandler
 {
     private readonly IAdaptiveCardFactory adaptiveCardFactory;
     private readonly IGraph graph;
     private readonly ICallService callService;
-    private readonly IEnumerable<Options.UserOptions> users;
+    private readonly IEnumerable<UserOptions> users;
 
     public MessageBot(IAdaptiveCardFactory adaptiveCardFactory, IGraph graph, ICallService callService, IOptions<List<UserOptions>> users)
     {
