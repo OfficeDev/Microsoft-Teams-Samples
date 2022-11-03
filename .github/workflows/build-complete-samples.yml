@@ -9,9 +9,7 @@ on:
     branches:
       - main
     paths:
-      - 'samples/**'  
-  workflow_dispatch:
-  
+      - 'samples/**'
 env:
     CI: false
 jobs:
