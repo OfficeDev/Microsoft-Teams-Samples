@@ -9,9 +9,12 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "06/12/2021 05:00:25 PM"
+ createdDate: "6-12-2021 17:00:25"
 urlFragment: officedev-microsoft-teams-samples-bot-request-approval-nodejs
 ---
+# Bot Request Approval
+
+![Preview Image](images/Preview.gif)
 
 # Send task request using Universal Adaptive Cards in group chat
 
