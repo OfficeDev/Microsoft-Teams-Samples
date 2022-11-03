@@ -62,7 +62,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |35|Tab Chanel Group|Sample app showing custom group and channel Tab with ASP. NET Core. |[View](/demo%20manifest/tab-channel-group.zip) |
 |36|Bot Initiate Thread in Channel|This sample app demonstrate how to start a thread in a specific Team's channel using Bot Framework v4 |[View](/demo%20manifest/bot-initiate-thread-in-channel.zip) |
 |37|Bot Task Module|This sample app demonstrate how to use Task Module using Bot Framework v4. |[View](/demo%20manifest/bot-task-module.zip) |
-|38|This sample app demonstrate how to use action preview in Messaging Extensions using Bot Framework v4s. |[View](/demo%20manifest/msgext-action-preview.zip) |
+|38|Messaging Extension Action Preview|This sample app demonstrate how to use action preview in Messaging Extensions using Bot Framework v4s. |[View](/demo%20manifest/msgext-action-preview.zip) |
 |39|Messaging Extension Search|This sample app demonstrate how to use search based Messaging Extension. |[View](/demo%20manifest/msgext-search.zip) |
 |40|Messaging Extension Search Auth Config|This sample app demonstrate how to use search auth config in Messaging Extension. |[View](/demo%20manifest/msgext-search-auth-config.zip) |
 |41|Bot File Upload|This sample app demonstrate the file upload with bot using Bot Framework v4. |[View](/demo%20manifest/bot-file-upload.zip) |
