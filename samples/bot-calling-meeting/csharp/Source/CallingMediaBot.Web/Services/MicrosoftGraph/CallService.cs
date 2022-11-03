@@ -21,21 +21,14 @@ public class CallService : ICallService
         callbackUri = new Uri(botOptions.Value.BotBaseUrl, "callback").ToString();
     }
 
-    public async Task Answer(string id)
+    public async Task Answer(string id, params MediaInfo[]? preFetchMedia)
     {
         await graphServiceClient.Communications.Calls[id]
             .Answer(
                 callbackUri: callbackUri,
                 mediaConfig: new ServiceHostedMediaConfig
                 {
-                    //PreFetchMedia = new List<MediaInfo>()
-                    //{
-                    //    new MediaInfo()
-                    //    {
-                    //        Uri = new Uri(options.BotBaseUrl, "audio/speech.wav").ToString(),
-                    //        ResourceId = resourceId,
-                    //    }
-                    //}
+                    PreFetchMedia = preFetchMedia
                 },
                 acceptedModalities: new List<Modality> { Modality.Audio })
             .Request()
@@ -90,10 +83,10 @@ public class CallService : ICallService
     public async Task<PlayPromptOperation> PlayPrompt(string id, params MediaInfo[] mediaPrompts)
     {
         var prompts = mediaPrompts.Select(mediaPrompt =>
-                new MediaPrompt
-                {
-                    MediaInfo = mediaPrompt
-                });
+            new MediaPrompt
+            {
+                MediaInfo = mediaPrompt
+            });
 
         return await graphServiceClient.Communications.Calls[id]
             .PlayPrompt(prompts)
@@ -121,8 +114,43 @@ public class CallService : ICallService
         throw new NotImplementedException();
     }
 
-    public Task Transfer(string id)
+    public async Task Transfer(string id, Identity transferIdentity, Identity? transfereeIdentity = null)
     {
-        throw new NotImplementedException();
+        var transferTarget = new InvitationParticipantInfo
+        {
+            Identity = new IdentitySet
+            {
+                User = transferIdentity
+            },
+            AdditionalData = new Dictionary<string, object>()
+            {
+                {"endpointType", "default"}
+            }
+        };
+
+        ParticipantInfo? transferee = null;
+        if (transfereeIdentity != null)
+        {
+            if (transfereeIdentity.AdditionalData == null)
+            {
+                transfereeIdentity.AdditionalData = new Dictionary<string, object>();
+            }
+            transfereeIdentity.AdditionalData["tenantId"] = azureAdOptions.TenantId;
+
+            transferee = new ParticipantInfo
+            {
+                Identity = new IdentitySet
+                {
+                    User = transfereeIdentity
+                },
+                // ParticipantId = "909c6581-5130-43e9-88f3-fcb3582cde37"
+            };
+        }
+
+        await graphServiceClient.Communications.Calls[id]
+            .Transfer(transferTarget, transferee)
+            .Request()
+            .WithAppOnly()
+            .PostAsync();
     }
 }

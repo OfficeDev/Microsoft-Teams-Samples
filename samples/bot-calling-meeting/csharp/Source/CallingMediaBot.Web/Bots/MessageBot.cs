@@ -1,6 +1,7 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections;
 using CallingMediaBot.Domain.Factories;
 using CallingMediaBot.Domain.Interfaces;
 using CallingMediaBot.Web.Interfaces;
@@ -10,7 +11,6 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Microsoft.Extensions.Options;
 using Microsoft.Graph;
-using System.Collections;
 
 namespace CallingMediaBot.Web.Bots;
 
@@ -61,21 +61,25 @@ public class MessageBot : ActivityHandler
 
                 if (call != null)
                 {
-                    await turnContext.SendActivityAsync("Placed a call Successfully.");
+                    await turnContext.SendActivityAsync("Placed a call Successfully.", cancellationToken: cancellationToken);
                 }
                 break;
             case "transfercall":
                 throw new NotImplementedException();
                 //var sourceCallResponse = await callService.Create(new Identity
                 //{
-                //    DisplayName = users.Value.users.FirstOrDefault()?.DisplayName,
-                //    Id = users.Value.users.FirstOrDefault()?.Id
+                //    DisplayName = users.FirstOrDefault()?.DisplayName,
+                //    Id = users.FirstOrDefault()?.Id
                 //});
 
                 //if (sourceCallResponse != null)
                 //{
                 //    await turnContext.SendActivityAsync("Transferring the call!");
-                //    await graph.TransferCallAsync(sourceCallResponse.Id);
+                //    await callService.Transfer(sourceCallResponse.Id, new Identity
+                //    {
+                //        DisplayName = users.ElementAt(1).DisplayName,
+                //        Id = users.ElementAt(1).Id
+                //    });
                 //}
                 break;
             case "joinscheduledmeeting":
@@ -105,8 +109,8 @@ public class MessageBot : ActivityHandler
                 //}
                 break;
             default:
-                await turnContext.SendActivityAsync("Welcome to bot");
-                await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardFactory.CreateWelcomeCard()));
+                await turnContext.SendActivityAsync("Welcome to bot", cancellationToken: cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardFactory.CreateWelcomeCard()), cancellationToken);
                 break;
         }
     }
