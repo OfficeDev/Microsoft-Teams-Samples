@@ -34,7 +34,6 @@ public class AuthenticationProvider : ObjectRoot, IRequestAuthenticationProvider
     /// </summary>
     private OpenIdConnectConfiguration openIdConfiguration;
 
-
     public AuthenticationProvider(string appName, string appId, string appSecret, IGraphLogger logger)
        : base(logger.NotNull(nameof(logger)).CreateShim(nameof(AuthenticationProvider)))
     {
