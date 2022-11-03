@@ -19,16 +19,8 @@ urlFragment: officedev-microsoft-teams-samples-app-complete-sample-nodejs
 
 Sample that shows how to use dialog bot with bot sdk v4, messaging extension, facebook auth flow in Nodejs.
 
-## Features of this sample
-
-![](images/dialog.png)
-
-![](images/static-tab.png)
-
-![](images/messaging-extension.png)
-
-![](images/facebook-auth-flow.png)
-
+- **Interaction with app**
+![app-complete-sample ](Images/app-complete-sample.gif)
 
 ## Prerequisites
 
@@ -57,11 +49,9 @@ Sample that shows how to use dialog bot with bot sdk v4, messaging extension, fa
     ngrok http -host-header=rewrite 3979
     ```
 
-5) Register a new bot (or update an existing one) with Bot Framework by using the full endpoint as the bot's "Messaging endpoint". Make sure to add Teams as a channel for the bot. Bot registration is here (open in a new browser tab): https://dev.botframework.com/bots
-
-    > **NOTE**: When you create your bot you will create an App ID and App password - make sure you keep these for later.
-
+5) - Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+   - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
 6) Once you have saved your bot and gotten the confirmation that it is created, navigate back to your  project. Open the ".env" file. There, copy/paste your App ID and App password from the step above.
     ```
@@ -110,6 +100,26 @@ This directory holds static html, image, and javascript files used by the tabs a
 
 * **src**<br><br>
 This directory holds all of the TypeScript files, which run the entire application.  These files, at build, are transpiled and their transpiled javascript files are placed in the build directory.
+
+## Running the sample
+
+![](images/app-complete-sample1.png)
+
+![](images/app-complete-sample2.png)
+
+![](images/app-complete-sample3.png)
+
+![](images/app-complete-sample4.png)
+
+![](images/app-complete-sample5.png)
+
+![](images/app-complete-sample6.png)
+
+![](images/app-complete-sample7.png)
+
+![](images/app-complete-sample8.png)
+
+![](images/app-complete-sample-tab.png)
 
 ## Contributing
 
