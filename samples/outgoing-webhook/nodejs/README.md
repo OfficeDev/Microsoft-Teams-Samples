@@ -21,17 +21,12 @@ This project is an implementation of a very simple [Outgoing Webhook](https://do
 
 ![Broadcast from user](./Images/Outgoingwebhook.gif)
 
-### Prerequisites
+## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
-
-  determine dotnet version
-  ```bash
-  dotnet --version
-  ```
-- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
-  
-- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+- Microsoft Teams is installed and you have an account (not a guest account)
+- [NodeJS](https://nodejs.org/en/)
+- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
 ## Setup
 
