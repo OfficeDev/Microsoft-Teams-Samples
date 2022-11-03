@@ -6,7 +6,6 @@
 using CallingMediaBot.Domain;
 using CallingMediaBot.Infrastructure;
 using CallingMediaBot.Web.Bots;
-using CallingMediaBot.Web.Extensions;
 using CallingMediaBot.Web.Helpers;
 using CallingMediaBot.Web.Interfaces;
 using CallingMediaBot.Web.Options;
@@ -15,7 +14,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Graph.Communications.Common.Telemetry;
 using Microsoft.Identity.Web;
 

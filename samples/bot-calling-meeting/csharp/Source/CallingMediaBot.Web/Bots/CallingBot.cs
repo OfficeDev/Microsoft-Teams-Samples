@@ -1,10 +1,11 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Net;
 using CallingMediaBot.Domain.Interfaces;
+using CallingMediaBot.Web.Extensions;
 using CallingMediaBot.Web.Options;
 using CallingMediaBot.Web.Utility;
-using CallingMeetingBot.Extensions;
 using Microsoft.Bot.Builder;
 using Microsoft.Extensions.Options;
 using Microsoft.Graph;
@@ -12,7 +13,6 @@ using Microsoft.Graph.Communications.Client.Authentication;
 using Microsoft.Graph.Communications.Common.Telemetry;
 using Microsoft.Graph.Communications.Core.Notifications;
 using Microsoft.Graph.Communications.Core.Serialization;
-using System.Net;
 
 namespace CallingMediaBot.Web.Bots;
 
@@ -106,15 +106,15 @@ public class CallingBot : ActivityHandler
         // https://microsoftgraph.github.io/microsoft-graph-comms-samples/docs/articles/index.html#answer-incoming-call-with-service-hosted-media
         Task.Run(async () =>
         {
-            var resourceId = Guid.NewGuid().ToString();
-
-            await callService.Answer(callId);
-
-            await callService.PlayPrompt(callId, new MediaInfo
+            var promptAudio = new MediaInfo
             {
                 Uri = new Uri(botOptions.BotBaseUrl, "audio/speech.wav").ToString(),
-                ResourceId = resourceId,
-            });
+                ResourceId = Guid.NewGuid().ToString(),
+            };
+
+            await callService.Answer(callId, promptAudio);
+
+            await callService.PlayPrompt(callId, promptAudio);
         });
     }
 }

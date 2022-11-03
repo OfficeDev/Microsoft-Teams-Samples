@@ -19,18 +19,6 @@ namespace CallingMediaBot.Web.Interfaces
         Task<OnlineMeeting> CreateOnlineMeetingAsync();
 
         /// <summary>
-        /// Creates call.
-        /// </summary>
-        /// <returns>Call.</returns>
-        Task<Call> CreateCallAsync();
-
-        /// <summary>
-        /// Transfer call.
-        /// </summary>
-        /// <returns>Call.</returns>
-        Task TransferCallAsync(string replaceCallId);
-
-        /// <summary>
         /// Join Scheduled Meeting.
         /// </summary>
         /// <returns>JoinScheduledMeeting.</returns>
@@ -41,12 +29,5 @@ namespace CallingMediaBot.Web.Interfaces
         /// </summary>
         /// <returns>JoinScheduledMeeting.</returns>
         Task InviteParticipant(string meetingId);
-
-        /// <summary>
-        /// Play a defined prompt in a meeting
-        /// </summary>
-        /// <param name="meetingId"></param>
-        /// <returns></returns>
-        Task PlayPrompt(string meetingId);
     }
 }
