@@ -4,7 +4,7 @@ namespace CallingMediaBot.Domain.Interfaces;
 
 public interface ICallService
 {
-    Task Answer(string id);
+    Task Answer(string id, params MediaInfo[]? preFetchMedia);
 
     Task<Call> Create(params Identity[] users);
 
@@ -27,5 +27,5 @@ public interface ICallService
     /// <returns></returns>
     Task<Call> Redirect(string id);
 
-    Task Transfer(string id);
+    Task Transfer(string id, Identity transferIdentity, Identity? transfereeIdentity = null);
 }

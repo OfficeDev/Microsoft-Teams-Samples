@@ -5,9 +5,14 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CallingMediaBot.Web", "CallingMediaBot.Web\CallingMediaBot.Web.csproj", "{ACA36300-B09B-4937-92C4-4E6CB095BEEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallingMediaBot.Domain", "CallingMediaBot.Domain\CallingMediaBot.Domain.csproj", "{D858C04F-5AD1-40E6-B8CF-A0219B86ACB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CallingMediaBot.Domain", "CallingMediaBot.Domain\CallingMediaBot.Domain.csproj", "{D858C04F-5AD1-40E6-B8CF-A0219B86ACB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallingMediaBot.Infrastructure", "CallingMediaBot.Infrastructure\CallingMediaBot.Infrastructure.csproj", "{F296E139-683C-41D2-BF67-29371FAF0F16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CallingMediaBot.Infrastructure", "CallingMediaBot.Infrastructure\CallingMediaBot.Infrastructure.csproj", "{F296E139-683C-41D2-BF67-29371FAF0F16}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{33C72F09-71AA-471D-99D2-C018BFACF90E}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -21,9 +21,8 @@ namespace CallingMediaBot.Web.Helpers
     public class GraphHelper : IGraph
     {
         private readonly ILogger<GraphHelper> logger;
-        private readonly IConfiguration configuration;
         private readonly IEnumerable<Web.Options.UserOptions> users;
-        private readonly BotOptions options;
+        private readonly BotOptions botOptions;
         private readonly GraphServiceClient graphServiceClient;
 
         /// <summary>
@@ -31,13 +30,11 @@ namespace CallingMediaBot.Web.Helpers
         /// </summary>
         /// <param name="httpClientFactory">IHttpClientFactory instance.</param>
         /// <param name="logger">ILogger instance.</param>
-        /// <param name="configuration">IConfiguration instance.</param>
-        public GraphHelper(ILogger<GraphHelper> logger, IConfiguration configuration, IOptions<List<UserOptions>> users, IOptions<BotOptions> options, GraphServiceClient graphServiceClient)
+        public GraphHelper(ILogger<GraphHelper> logger, IOptions<List<UserOptions>> users, IOptions<BotOptions> botOptions, GraphServiceClient graphServiceClient)
         {
             this.logger = logger;
-            this.configuration = configuration;
             this.users = users.Value;
-            this.options = options.Value;
+            this.botOptions = botOptions.Value;
             this.graphServiceClient = graphServiceClient;
         }
 
@@ -53,7 +50,9 @@ namespace CallingMediaBot.Web.Helpers
                     Subject = "Calling bot meeting",
                 };
 
-                var onlineMeetingResponse = await graphServiceClient.Users[this.configuration[Common.Constants.UserIdConfigurationSettingsKey]].OnlineMeetings
+                var userId = users.First().Id;
+
+                var onlineMeetingResponse = await graphServiceClient.Users[userId].OnlineMeetings
                            .Request()
                            .AddAsync(onlineMeeting);
                 return onlineMeetingResponse;
@@ -62,44 +61,6 @@ namespace CallingMediaBot.Web.Helpers
             {
                 this.logger.LogError(ex, ex.Message);
                 return null;
-            }
-        }
-
-        public async Task<Call> CreateCallAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task TransferCallAsync(string replaceCallId)
-        {
-            var transferTarget = new InvitationParticipantInfo
-            {
-                Identity = new IdentitySet
-                {
-                    User = new Identity
-                    {
-                        DisplayName = this.users.ElementAt(1).DisplayName,
-                        Id = this.users.ElementAt(1).Id
-                    }
-                },
-                AdditionalData = new Dictionary<string, object>()
-                        {
-                        {"endpointType", "default"}
-                        },
-                //ReplacesCallId = targetCallResponse.Id
-            };
-
-            try
-            {
-                await graphServiceClient.Communications.Calls[replaceCallId]
-                    .Transfer(transferTarget)
-                    .Request()
-                    .PostAsync();
-            }
-            catch (System.Exception ex)
-            {
-
-                throw;
             }
         }
 
@@ -114,7 +75,7 @@ namespace CallingMediaBot.Web.Helpers
 
                 var call = new Call
                 {
-                    CallbackUri = $"{this.configuration[Common.Constants.BotBaseUrlConfigurationSettingsKey]}/callback",
+                    CallbackUri = new Uri(botOptions.BotBaseUrl, "callback").ToString(),
                     RequestedModalities = new List<Modality>()
                     {
                         Modality.Audio
@@ -144,19 +105,19 @@ namespace CallingMediaBot.Web.Helpers
             try
             {
                 var participants = new List<InvitationParticipantInfo>()
-            {
-                new InvitationParticipantInfo
                 {
-                    Identity = new IdentitySet
+                    new InvitationParticipantInfo
                     {
-                        User = new Identity
+                        Identity = new IdentitySet
                         {
-                            DisplayName = this.users.ElementAt(2).DisplayName,
-                            Id = this.users.ElementAt(2).Id
+                            User = new Identity
+                            {
+                                DisplayName = this.users.ElementAt(2).DisplayName,
+                                Id = this.users.ElementAt(2).Id
+                            }
                         }
                     }
-                }
-            };
+                };
 
                 var statefulCall = await graphServiceClient.Communications.Calls[meetingId].Participants
                     .Invite(participants)
@@ -167,27 +128,6 @@ namespace CallingMediaBot.Web.Helpers
             {
                 throw;
             }
-        }
-
-        /// <inheritdoc />
-        public async Task PlayPrompt(string meetingId)
-        {
-            var prompts = new List<Prompt>()
-            {
-                new MediaPrompt
-                {
-                    MediaInfo = new MediaInfo
-                    {
-                        Uri = new Uri(options.BotBaseUrl, "audio/speech.wav").ToString(),
-                        ResourceId = Guid.NewGuid().ToString(),
-                    }
-                }
-            };
-
-            await graphServiceClient.Communications.Calls[meetingId]
-                .PlayPrompt(prompts)
-                .Request()
-                .PostAsync();
         }
     }
 }
