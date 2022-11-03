@@ -12,9 +12,9 @@ extensions:
  createdDate: "6-12-2021 17:00:25"
 urlFragment: officedev-microsoft-teams-samples-bot-request-approval-nodejs
 ---
-# Bot Request Approval
+## Interaction with app
 
-![Preview Image](images/Preview.gif)
+![Preview Image](Images/Preview.gif)
 
 # Send task request using Universal Adaptive Cards in group chat
 
@@ -23,46 +23,14 @@ This sample shows a feature where:
 2. **Manager :** Can see the request raised by user in the same group chat with an option of approve or reject.
 3. **Others:** Other members in the group chat can see the request details only.
 
-**Requester:**
-
-- Initiated request using bot command `request` in group chat.
-
-  ![Initial Card](Images/InitialCard.png)
-
-- Card will refresh for requester to fill details.
-
-  ![Request Card](Images/CreateTask.png)
-  
-- After submitting the request, requester can edit or cancel the request.
-
-    **Note:** Users who created the card will only be able to see the buttons to edit or cancel the request.
-
-  ![Edit/Cancel Card](Images/UserCard.png)
-
-**Manager:**
-
-- After requester submit the request, manager can approve/reject the request.
-
-    **Note:** Manager of the task request will only be able to see the buttons to approve or reject the request.
-
-  ![Approve/Reject Card](Images/ManagerCard.png)
-
-- If manager approves or rejects the request, card will be refreshed for all the members in group chat.
-
-  ![Status Card](Images/ApprovedRequest.png)
-  
-**Others:**
-
-- Other members in group chat will only be able to see the request details.
-
-  ![Members Card](Images/OtherMembers.png)
 
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/en/)
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-### 1. Setup for Bot
+## Setup
+1. Setup for Bot
 In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
@@ -98,6 +66,35 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
+ 
+ ## Running the sample.
+ 
+- Initiated request using bot command `request` in group chat.
+
+  ![Initial Card](Images/InitialCard.png)
+
+- Card will refresh for requester to fill details.
+
+  ![Request Card](Images/CreateTask.png)
+  
+- After submitting the request, requester can edit or cancel the request.
+
+    **Note:** Users who created the card will only be able to see the buttons to edit or cancel the request.
+
+  ![Edit/Cancel Card](Images/UserCard.png)
+
+**Manager:**
+
+- After requester submit the request, manager can approve/reject the request.
+
+    **Note:** Manager of the task request will only be able to see the buttons to approve or reject the request.
+
+  ![Approve/Reject Card](Images/ManagerCard.png)
+
+- If manager approves or rejects the request, card will be refreshed for all the members in group chat.
+
+  ![Status Card](Images/ApprovedRequest.png)
+  
 
 ## Further reading
 
