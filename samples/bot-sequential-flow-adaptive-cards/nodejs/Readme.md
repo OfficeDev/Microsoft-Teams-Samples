@@ -10,11 +10,13 @@ languages:
 - javascript
 extensions:
  contentType: samples
- createdDate: "07/07/2021 01:38:26 PM"
+ createdDate: "07-07-2021 13:38:26"
 urlFragment: officedev-microsoft-teams-samples-bot-sequential-flow-adaptive-cards-nodejs
 ---
 
 # Sequential workflow adaptive cards
+
+![Preview Image](Images/Preview.gif)
 
 This App talks about the Teams Bot User Specific Views and Sequential Workflows in adaptive card with Node JS
 
@@ -147,7 +149,7 @@ You can interact with this bot by `@Sequential Workflows` (BotName). The bot wil
 - Install App
 
 Navigate to `Manage apps` > `Upload a custom app` (Bottom-Right of the screen) > Upload `manifest.zip` > `Add`
-![image](https://user-images.githubusercontent.com/85108465/123583709-b6e39d00-d7fd-11eb-83bc-737a17fbbadd.png)
+![image](Images/ManageApp.png)
 
 ![image](https://user-images.githubusercontent.com/85108465/123583855-f3af9400-d7fd-11eb-87df-a69d880680aa.png)
 
@@ -155,35 +157,35 @@ Navigate to `Manage apps` > `Upload a custom app` (Bottom-Right of the screen) >
 
 Type in Chat: `@Sequential Workflows` (BotName) and Enter
 
-![image](https://user-images.githubusercontent.com/85108465/123767041-d0abdf80-d8e4-11eb-8cb3-3fa3eb0680ce.png)
+![image](Images/AddAppIntoGroup.png)
 
 Create New Incident
 
-![image](https://user-images.githubusercontent.com/85108465/123586591-936f2100-d802-11eb-9d38-a43fc13672ee.png)
-![image](https://user-images.githubusercontent.com/85108465/123586786-e34de800-d802-11eb-9355-ea12ebc67388.png)
-![image](https://user-images.githubusercontent.com/85108465/123586874-06789780-d803-11eb-843b-76e69b9afad6.png)
-![image](https://user-images.githubusercontent.com/85108465/123591452-9d485280-d809-11eb-83cd-412f4e6aaf5a.png)
+![image](Images/CreateIncident.png)
+![image](Images/chooseSoftware.png)
+![image](Images/ChooseEmail.png)
+![image](Images/EnterIncidentDetails.png)
 
 > Only the `Created By` person have the option to `Edit`
 
-![image](https://user-images.githubusercontent.com/85108465/123591565-c668e300-d809-11eb-829c-23a6396e0cfe.png)
+![image](Images/SavedIncident.png)
 
 Edit Incident
 
-![image](https://user-images.githubusercontent.com/85108465/123591600-d385d200-d809-11eb-9edd-23f76a8687d8.png)
+![image](Images/EditIncident.png)
 
 `Approve` or `Reject` Incidents
 
 > Only the `Assigned To` person have the option to `Approve` or `Reject`
 
-![image](https://user-images.githubusercontent.com/85108465/123768720-351b6e80-d8e6-11eb-9f6e-7525c761d034.png)
-![image](https://user-images.githubusercontent.com/85108465/123768103-a9a1dd80-d8e5-11eb-8ec5-154eb36a8d62.png)
-![image](https://user-images.githubusercontent.com/85108465/123768181-baeaea00-d8e5-11eb-9f79-4854c409edd3.png)
+![image](Images/ApprovedOrReject.png)
+![image](Images/ApprovedIncident.png)
+![image](Images/RejectedIncident.png)
 
 List Incidents
 
-![image](https://user-images.githubusercontent.com/85108465/123595684-d0d9ab80-d80e-11eb-9798-82f535ba6486.png)
-![image](https://user-images.githubusercontent.com/85108465/123769386-e28e8200-d8e6-11eb-96e0-3d1f8365c7ef.png)
+![image](Images/listIncidentoption.png)
+![image](Images/listIncident.png)
 
 
 ## Interaction from messaging extension.
@@ -200,7 +202,7 @@ You can also interact with this app using messaging extension action which allow
    
 3. User can select any incident from the list and can share to that chat/team.
 
-   ![image](https://user-images.githubusercontent.com/85108465/123768720-351b6e80-d8e6-11eb-9f6e-7525c761d034.png)
+   ![image](Images/ApprovedOrReject.png)
 
 ## Deploy the bot to Azure
 

@@ -9,11 +9,13 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "07/07/2021 01:38:26 PM"
+ createdDate: "07-07-2021 13:38:26"
 urlFragment: officedev-microsoft-teams-samples-bot-sequential-flow-adaptive-cards-csharp
 ---
 
-# Sequential workflow adaptive cards
+## Interaction with app
+
+![Preview Image](SequentialUserSpecificFlow/Images/Preview.gif)
 
 This sample illustrates sequential workflow, user specific views and upto date adaptive cards bot and the list of incident created can be seen in messaging extension and can share a specific incident to the chat/team.
 
@@ -21,7 +23,9 @@ This sample illustrates sequential workflow, user specific views and upto date a
 
 - Microsoft Teams is installed and you have an account
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [ngrok](https://ngrok.com/download) or equivalent tunnelling solution
+
+## Setup
 
 1) Clone the repository
 
@@ -99,36 +103,36 @@ sequenceDiagram
 ```
 
 
-## Interacting with the bot
+## Running the sample
 
 1. In Teams, Once the app is successfully installed in a group chat, ping the bot by @mentioning it. Bot will reply with a card showing that the person has initiated the incident. 
 
-  ![image](https://user-images.githubusercontent.com/80379013/123651438-19ae5600-d849-11eb-9024-3897bf833d39.png)
+  ![image](SequentialUserSpecificFlow/Images/AddAppIntoGroup.png)
   
 2. Using refresh activity only the person who has initiated will be able to proceed further by entering the details of the incident and assign it to a person from the group chat, while others in the group chat will still be able to see only the initiated card.
 
-  ![image](https://user-images.githubusercontent.com/80379013/123651344-0307ff00-d849-11eb-98e5-029daa7dc49f.png)
+  ![image](SequentialUserSpecificFlow/Images/CreateIncident.png)
 
 3. User who has initiated the incident will be able to enter the details using the series of cards in a sequential flow and submit it for the further approval/rejection process.
 
-  ![image](https://user-images.githubusercontent.com/80379013/123651705-5417f300-d849-11eb-89e2-b99564c30b43.png)
-  ![image](https://user-images.githubusercontent.com/80379013/123651751-5f6b1e80-d849-11eb-889c-e08bcdd37540.png)
-  ![image](https://user-images.githubusercontent.com/80379013/123652355-da343980-d849-11eb-817b-87ad8f4598f8.png)
+  ![image](SequentialUserSpecificFlow/Images/EnterIncidentDetails.png)
+  ![image](SequentialUserSpecificFlow/Images/chooseSoftware.png)
+  ![image](SequentialUserSpecificFlow/Images/ChooseEmail.png)
   
 4. Once the details are submitted and assigned to a person from the group chat, it will send an updated card to the chat with all the entered details.
 
-  ![image](https://user-images.githubusercontent.com/80379013/123652434-eb7d4600-d849-11eb-9e02-e9d3496f3e66.png)
+  ![image](SequentialUserSpecificFlow/Images/SavedIncident.png)
   
 5. Now, only the person assigned to will be able to either approve or reject it.
 
-  ![image](https://user-images.githubusercontent.com/80379013/123652525-02239d00-d84a-11eb-8d43-f45607b1ef2f.png)  
+  ![image](SequentialUserSpecificFlow/Images/ApprovedOrReject.png)  
 
 6. After the approval/rejection of the card, the final updated card will be sent to the group chat.
 
-  ![image](https://user-images.githubusercontent.com/80379013/123652838-4616a200-d84a-11eb-96c4-580979287b63.png)
+  ![image](SequentialUserSpecificFlow/Images/ApprovedIncident.png)
 
 
-## Interaction from messaging extension.
+## Running the sample( Interaction with message extension)
 
 
 1. On selecting app from messaging extension,it checks whether bot is installed in chat/team. If not installed, user will get a option for justInTimeInstallation card.
@@ -142,4 +146,7 @@ sequenceDiagram
 3. User can select any incident from the list and can share to that chat/team.
 
    ![share incident](SequentialUserSpecificFlow/Images/shareIncidentCard.png).   
+
+## Further Reading
+   [Bot-Sequential-flow-adaptive-card](https://learn.microsoft.com/en-us/power-automate/create-adaptive-cards)
 
