@@ -256,7 +256,7 @@ jobs:
             - project_path: 'samples/graph-meeting-notification/csharp/MeetingNotification/MeetingNotification.csproj'
               name: 'graph-meeting-notification'
               version: '6.0.x'
-            #Nov 03
+
             - project_path: 'samples/account-linking/csharp/Source/Microsoft.Teams.Samples.AccountLinking.Sample.csproj'
               name: 'account-linking'
               version: '6.0.x'
@@ -710,7 +710,7 @@ jobs:
             - project_path: 'samples/graph-meeting-notification/nodejs'
               name: 'graph-meeting-notification'
               version: '14.x'
-            #Nov03
+
             - project_path: 'samples/app-auth/nodejs'
               name: 'app-auth'
               version: '16.x'
@@ -830,11 +830,6 @@ jobs:
             - project_path: 'samples/tab-device-permissions/nodejs'
               name: 'tab-device-permissions'
               version: '16.x'
-              
-
-
-
-
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
