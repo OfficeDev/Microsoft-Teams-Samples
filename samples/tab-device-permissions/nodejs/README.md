@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "07/27/2021 12:00:00 AM"
+ createdDate: "27-07-2021 16:32:33"
 urlFragment: officedev-microsoft-teams-samples-tab-device-permissions-nodejs
 ---
 
@@ -19,92 +19,117 @@ This sample shows [tab device permissions](https://docs.microsoft.com/microsoftt
 
 It also shows Device permissions for the browser. Please refer [Device permissions for browser](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/device-capabilities/browser-device-permissions) for more information.
 
-**Mobile View**
-
-![Mobile Demo 1](Images/mainTab1.png)
-
-![Mobile Demo 2](Images/mainTab2.png)
-
-![Mobile Demo 3](Images/mainTab3.png)
-
-**Desktop View**
-![Desktop View](Images/desktopHome.png)
-
 ```
 The latest update on how device permissions are handled in the browser is currently available in public developer preview
 only.
 
 This update will be generally available (GA) by February 01, 2022
 ```
+## Interaction with app - Desktop View
+
+![Tab Device PermissionsGif](Images/TabDevicePermissionsGif.gif) 
+
+## Interaction with app - Mobile View
+
+![Tab Device PermissionsGif Mobile](Images/TabDevicePermissionsGifMobile.gif)
+
 ## Prerequisites
-- Microsoft Teams is installed and you have an account (not a guest account)
--  [NodeJS](https://nodejs.org/en/)
--  [ngrok](https://ngrok.com/) or equivalent tunneling solution
--  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
-   appropriate permissions to install an app.
+ To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher).
+
+    ```bash
+    # determine node version
+    node --version
+    ```
+- To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
+Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
+
+- [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
     
-## To try this sample
-1) Clone the repository
+## Setup
+ NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
+
+### 1. Setup for Bot
+- Create a new Bot by following steps mentioned in [Build a bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots?view=msteams-client-js-latest#build--a-bot-for-teams-with-the-microsoft-bot-framework) documentation.
+
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
+- [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
+
+ ### 2. Setup NGROK  
+    - Run ngrok - point to port `3000`
+
+    ```bash
+    ngrok http -host-header=localhost 3000
+    ```
+### 3. Setup for code   
+- Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
+ - In a terminal, navigate to `samples/tab-device-permissions/nodejs`
 
-2) In the folder where repository is cloned navigate to `samples/tab-device-permissions/nodejs`.
-
-3) Install modules
-
-   Inside node js folder, open your local terminal and run the below command to install node modules. 
-   You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+- Install modules
 
     ```bash
     npm install
     ```
 
-    If you face any dependency error while installing node modules, try using below command
+- Start the bot
 
     ```bash
-    npm install --legacy-peer-deps
-    ```
-
- 4) Run the application in your local terminal (or Visual Studio Code terminal) using following command 
-    
-     ```bash
     npm start
     ```
- 5) Begin your tunnelling service to get an https endpoint. For this example ngrok is used. Start an ngrok tunnel with the following command (you'll need the https endpoint     to update the manifest file):<br>
-    ```bash
-    ngrok http 3000 --host-header=localhost
-    ```
- 6) Create an app manifest. Navigate to the file, appPackage/manifest.json and change the following:
-    1. <<BASE_URI_DOMAIN>> to your https endpoint from ngrok excluding the "https://" part
-    2. Save the file and zip this file along with both the png icons (located next to it) together to create a manifest.zip file.
- 
- 6) Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app") ans start using the app.
+### 4. Setup Manifest for Teams
 
-Local Running App:
+- **This step is specific to Teams.**
+- Modify the `manifest.json` in the `/appPackage` folder and replace the following details
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
+    - **Add** in a meeting to test
+         - Select **Apps** from the left panel.
+         - Then select **Upload a custom app** from the lower right corner.
+         - Then select the `manifest.zip` file from `appPackage`. 
 
-1. [Upload an app package](https://docs.microsoft.com/microsoftteams/platform/concepts/deploy-and-publish/apps-upload) (Zip file created in step 3 above) to Microsoft Teams
+## Running the sample - Desktop View
+
+**Install app:** 
+
 ![Install App](Images/install.png)
-1. Go to Device permission tab.
-1. Click on respective button to test the scenario. You will get prompt to accept permission request.
-![Accept Permissions](Images/allowPermission.png)
-1. Try this on Mobile. Screenshot of available features: <br/> 
-![Mobile Demo](Images/mainTab1.png)
 
-1. Device permissions on browser
+**Device permission tab:** 
 
-![Desktop View](Images/desktopHome.png)
+![desktopHome](Images/desktopHome.png)
 
-![Error View](Images/errorView.png)
+**Tab device permission:** 
 
-![Permission View](Images/deviceBrowser.PNG)
+![deviceBrowser](Images/deviceBrowser.png)
 
-![Final View](Images/devicePermBrowser.PNG)
+**Device permission tab:** 
+
+![devicePermBrowser](Images/devicePermBrowser.png)
+
+## Running the sample - Mobile View
+
+**Tab device permission(Capture Image and Media):** 
+
+![mainTab1](Images/mainTab1.png)
+
+**Tab device permission(Scan Barcode):** 
+
+![mainTab2](Images/mainTab2)
+
+**Tab device permission(People Picker and Get Location):** 
+
+![mainTab3](Images/mainTab3.png)
+
+**Device permission tab:** 
+
+![allowPermission](Images/allowPermission.png)
 
 Similary, you can try out for other features.
 > [!IMPORTANT]
   > Please take a look at [notes section in Device Permissions](https://docs.microsoft.com/microsoftteams/platform/concepts/device-capabilities/native-device-permissions?tabs=desktop) documentation as not all devices support these permissions.
+
 # Contributing
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
@@ -115,3 +140,20 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+# Further reading
+
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Azure Portal](https://portal.azure.com)
+- [Add Authentication to Your Bot Via Azure Bot Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp)
+- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [.NET Core CLI tools](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x)
+- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
+- [Azure Portal](https://portal.azure.com)
+- [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
+- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
+- [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
+

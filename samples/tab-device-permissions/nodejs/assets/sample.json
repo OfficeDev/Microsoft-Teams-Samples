@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-device-permissions/nodejs/Images/desktopHome.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-device-permissions/nodejs/Images/TabDevicePermissionsGif.gif",
         "alt": "Solution UX showing tab device permission demo"
       }
     ],
