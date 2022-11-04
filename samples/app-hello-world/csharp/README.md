@@ -12,76 +12,98 @@ extensions:
   contentType: samples
   platforms:
   - CSS
-  createdDate: "10/16/2017 10:02:21 PM"
+  createdDate: 10/19/2022 10:02:21 PM
 urlFragment: officedev-microsoft-teams-samples-app-hello-world-csharp
 ---
 
 # Microsoft Teams hello world sample app.
 
+- Microsoft Teams hello world sample app.
+
 ## Interaction with app
 
-![HelloTab](Microsoft.Teams.Samples.HelloWorld.Web/Images/HelloTab.png)
+![HelloTabGif](Microsoft.Teams.Samples.HelloWorld.Web/Images/AppHelloWorldGif.gif)
 
 ## Prerequisites
 
-- Microsoft Teams is installed and you have an account (not a guest account)
-- To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
-- [ngrok](https://ngrok.com/) or equivalent tunneling solution
-- [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+
+  ```bash
+  # determine dotnet version
+  dotnet --version
+  ```
+- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay)
 
 ## Setup
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
-2. Create a Bot Registration
-   In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
-   - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-   - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+### 1. Setup for Bot
+- Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 
-  **NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
-   
-3. Run ngrok - point to port 3978
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
+- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+    > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
+
+### 2. Setup NGROK
+1) Run ngrok - point to port 5000
 
     ```bash
-      ngrok http -host-header=rewrite 3978
+    # ngrok http -host-header=rewrite 5000
     ```
-4. Setup for code
-
+### 3. Setup for code
 - Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
+ Run the bot from a terminal or from Visual Studio:
 
- - Modify the `/appsettings.json` and fill in the following details:
-  - `{{MicrosoftAppId}}` - Generated from Step 1 is the application app id
-  - `{{ MicrosoftAppPassword}}` - Generated from Step 1, also referred to as Client secret
-  
-- Run the bot from a terminal or from Visual Studio, choose option A or B.
+  A) From a terminal, navigate to `Microsoft.Teams.Samples.HelloWorld.Web`
+
+  ```bash
+  # run the bot
+  dotnet run
+  ```
+
+  B) Or from Visual Studio
+
+  - Launch Visual Studio
+  - File -> Open -> Project/Solution
+  - Navigate to `Microsoft.Teams.Samples.HelloWorld.Web` folder
+  - Select `Microsoft.Teams.Samples.HelloWorld.Web.csproj` file
+  - Press `F5` to run the project   
+
+
+### 4. Setup Manifest for Teams
+
+- **This step is specific to Teams.**
  
-   A) From a terminal
-     ```bash
-     # run the bot
-     dotnet run
-     ```
+1) Modify the `manifest.json` in the `/Manifest` folder and replace the following details:
+  - `{{Microsoft-App-Id}}` with Application id generated from Step 1
+  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok.io`
 
-   B) Or from Visual Studio
-     - Launch Visual Studio
-     - File -> Open -> Project/Solution
-     - Navigate to `Microsoft.Teams.Samples.HelloWorld.Web` folder
-     - Select `Microsoft.Teams.Samples.HelloWorld.Web.csproj` file
-     - Press `F5` to run the project 
-     
-5.  Setup Manifest for Teams
-- __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./Manifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-    - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+2) Zip the contents of `Manifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 9.
 
-- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+3) Modify the `/appsettings.json` and fill in the following details:
+  - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
+  - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
+  - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+  
+5) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./Manifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+
+## Running the sample
+
+**Install App:**
+
+![InstallApp](Microsoft.Teams.Samples.HelloWorld.Web/Images/Install.png)
+
+**Welcome UI:**
+
+![HelloTab](Microsoft.Teams.Samples.HelloWorld.Web/Images/HelloTab.png)
 
 ## Deploy the bot to Azure
 
