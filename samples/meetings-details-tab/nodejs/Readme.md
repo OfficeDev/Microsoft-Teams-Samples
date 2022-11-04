@@ -9,13 +9,17 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "07/07/2021 01:38:27 PM"
+ createdDate: "07-07-2021 13:38:27"
 urlFragment: officedev-microsoft-teams-samples-meetings-details-tab-nodejs
 ---
 
 # Meetings Details Tab
 
+![Preview Image](Images/Preview.gif)
+
 This sample app illustrates the implementation of Details Tab in Meeting. User can create a poll and post poll in meeting chat and participants can submit their feedback in Meeting.
+
+![Preview Image](images/Preview.gif)
 
 ## Prerequisites
 
@@ -85,13 +89,14 @@ Interact with Details Tab in Meeting.
 1. Install the Details Tab manifest in meeting chat.
 2. Add the Details Tab in Meeting
 3. Click on Add Agenda
+![Image](Images/SetAgenda.png)
 4. Newly added agenda will be added to Tab.
-![Image](https://user-images.githubusercontent.com/50989436/120268903-5af02c00-c2c4-11eb-9061-c8af7436715e.png)
+![Image](Images/AgendasuccessfullySet.png)
 5. Click on Send button in Agenda from Tab.
 6. An Adaptive Card will be posted in meeting chat for feedback.
-![Image](https://user-images.githubusercontent.com/50989436/120431715-7c214d00-c396-11eb-8919-0dbb6192ce22.png)
+![Image](Images/SelectPleasant.png)
 7. Participants in meeting can submit their response in adaptive card
 8. Response will be recorded and Bot will send an new adaptive card with response.
-![Image](https://user-images.githubusercontent.com/50989436/120431763-92c7a400-c396-11eb-8daf-dce922b380ad.png)
+![Image](Images/Response.png)
 9. Participants in meeting can view the results from meeting chat or Tab itself.
 

@@ -6,7 +6,7 @@ products:
 - office
 - office-365
 languages:
-- python
+- Python
 extensions:
  contentType: samples
  createdDate: "12-12-2019 13:38:25"
@@ -26,12 +26,16 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
+## Interaction with app
+
+![bot-teams-auth ](Images/TeamAuth.gif)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [ngrok](https://ngrok.com/download) or equivalent tunnelling solution
 
-## To try this sample
+## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
@@ -67,11 +71,17 @@ git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
 
 - Run your bot with `python app.py`
 
-## Interacting with the bot in Teams
-
 > Note this `manifest.json` specified that the bot will be installed in a "personal" scope only. Please refer to Teams documentation for more details.
 
+## Running the sample
+
 You can interact with this bot by sending it a message. The bot will respond by requesting you to login to AAD, then making a call to the Graph API on your behalf and returning the results.
+
+![add-App ](Images/1.Add_App.png)
+
+![add-to-teams ](Images/2.Add_Teams.png)
+
+![auth-login ](Images/3.Welcome_Signout.png)
 
 ## Deploy the bot to Azure
 
