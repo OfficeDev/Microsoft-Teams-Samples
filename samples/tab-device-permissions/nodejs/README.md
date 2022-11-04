@@ -113,7 +113,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 **Tab device permission(Scan Barcode):** 
 
-![mainTab2](Images/mainTab2)
+![mainTab2](Images/mainTab2.png)
 
 **Tab device permission(People Picker and Get Location):** 
 
