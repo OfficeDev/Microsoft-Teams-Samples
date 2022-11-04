@@ -6,7 +6,7 @@ products:
 - office
 - office-365
 languages:
-- python
+- Python
 extensions:
  contentType: samples
  createdDate: "12-12-2019 13:38:25"
@@ -19,6 +19,9 @@ urlFragment: officedev-microsoft-teams-samples-bot-msgext-search-auth-config-pyt
 [Messaging Extensions](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/what-are-messaging-extensions) are a special kind of Microsoft Teams application that is support by the [Bot Framework](https://dev.botframework.com) v4.
 
 There are two basic types of Messaging Extension in Teams: [Search-based](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/search-commands/define-search-command) and [Action-based](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/action-commands/define-action-command). This sample is built on sample 50.teams-messaging-extension-search, and illustrates how to build a Search-based Messaging Extension with a configuration page, as well as how to sign in from a search Messaging Extension.
+
+- **Interaction With Messaging Extension Auth**
+![msgext-search-auth-config ](Images/msgext-auth-config-gif.gif)
 
 ## Prerequisites
 
@@ -62,11 +65,24 @@ the Teams service needs to call into the bot.
 1) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.
 1) Run your bot, either from Visual Studio or terminal with `python app.py`.
 
-## Interacting with the bot in Teams
-
 > Note this `manifest.json` specified that the feature will be available from both the `compose`, `message` and `commandBox` areas of Teams. Please refer to Teams documentation for more details.
 
+## Running the sample
+
 Once the Messaging Extension is installed, click the icon for **Config Auth Search** in the Compose Box's Messaging Extension menu to display the search window.  Right click to choose **Settings** and view the Config page.  The default search is Pypi, and can be changed to Email from the Config page.
+
+**Adding bot UI:**
+![Add-App ](Images/1-add_app.png)
+
+![Successfully-added ](Images/2.added_Successfully.PNG)
+
+![search ](Images/3.search.PNG)
+
+![search ](Images/4.search.PNG)
+
+![search ](Images/5.search.PNG)
+
+![search ](Images/6.search.PNG)
 
 
 ## Deploy the bot to Azure

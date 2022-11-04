@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/search-auth-config/python/Images/msgauthconfig.jpg",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/search-auth-config/python/Images/msgext-auth-config-gif.gif",
         "alt": "Solution UX showing search auth config in messaging extension"
       }
     ],
