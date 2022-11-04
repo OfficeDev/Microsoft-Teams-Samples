@@ -17,7 +17,11 @@ urlFragment: officedev-microsoft-teams-samples-tab-personal-sso-quickstart-cshar
 
 This sample illustrates how to implement SSO authentication for Teams Tab.
 
+## Interaction with app
 
+![Tab Personal SSO QuickstartGif](Images/TabPersonalSSOQuickstartGif.gif)  
+  
+ 
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
@@ -61,11 +65,7 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
   - Navigate to **API Permissions**, and make sure to add the follow permissions:
     -   Select Add a permission
     -   Select Microsoft Graph -\> Delegated permissions.
-    * User.Read (enabled by default)
-    * email
-    * offline_access
-    * OpenId
-    * profile
+    * User.Read (enabled by default)    
     - Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
     - Navigate to **Authentication**
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
@@ -135,11 +135,29 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
 
 ## Running the sample.
 
+**Install App:**
+
+![InstallApp](Images/InstallApp.png)
+
+**Tab SSO Authentication UI:**
 ![personaltabsso](Images/personaltabsso.png)
 
 ## Interacting with the app in Teams
 
 In Teams, Once the app is succefully installed, it can be opened and the tab should show the logged in user's profile.
 
-## Further Reading.
+## Further Reading
 [Tab-personal-quickStart](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-overview)
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Azure Portal](https://portal.azure.com)
+- [Add Authentication to Your Bot Via Azure Bot Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp)
+- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [.NET Core CLI tools](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x)
+- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
+- [Azure Portal](https://portal.azure.com)
+- [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
+- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
+- [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)

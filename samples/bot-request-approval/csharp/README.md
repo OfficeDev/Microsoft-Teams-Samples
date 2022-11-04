@@ -9,9 +9,12 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "12/13/2021 12:00:00 AM"
+ createdDate: "13-12-2021 17:00:25"
 urlFragment: officedev-microsoft-teams-samples-bot-request-approval-csharp
 ---
+# Interaction with app
+
+![Preview Image](BotRequestApproval/Images/Preview.gif)
 
 # Send task request using Universal Adaptive Cards in a group chat
 
@@ -20,39 +23,6 @@ This sample shows a feature where:
 2. **Manager :** Can see the request raised by user in the same group chat with an option of approve or reject.
 3. **Others:** Other members in the group chat can see the request details only.
 
-**Requester:**
-
-- Initiated request using bot command `request` in group chat.
-
-  ![Initial Card](BotRequestApproval/Images/InitialCard.png)
-
-- Card will refresh for requester to fill details.
-
-  ![Request Card](BotRequestApproval/Images/RequestCard.png)
-  
-- After submitting the request, requester can edit or cancel the request.
-	
-	**Note:** Users who created the card will only be able to see the buttons to edit or cancel the request.
-
-  ![Edit/Cancel Card](BotRequestApproval/Images/EditCancelCard.png)
-
-**Manager:**
-
-- After requester submit the request, manager can approve/reject the request.
-	
-	**Note:** Manager of the task request will only be able to see the buttons to approve or reject the request.
-  
-  ![Approve/Reject Card](BotRequestApproval/Images/ApproveRejectCard.png)
-
-- If manager approves or rejects the request, card will be refreshed for all the members in group chat.
-
-  ![Status Card](BotRequestApproval/Images/StatusCard.png)
-  
-**Others:**
-
-- Other members in group chat will only be able to see the request details.
-
-![Other member Card](BotRequestApproval/Images/OtherMemberCard.png)
 
 ## Prerequisites
 
@@ -70,7 +40,7 @@ This sample shows a feature where:
   ```
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-## To try this sample
+## Setup
 
 ### Register your Teams Auth SSO with Azure AD
 1. Register your app with Microsoft identity platform via the Azure AD portal
@@ -99,17 +69,46 @@ This sample shows a feature where:
    - `MicrosoftAppPassword` - Generated from Step 1, also referred to as Client secret
    - Press `F5` to run the project
 	 
-6. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
-   - `{{Microsoft-App-Id}}` with Application id generated from Step 3
-   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+6. Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `AppPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
-7. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 8.
-
-8. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
-   - Go to Microsoft Teams and then go to side panel, select Apps
-   - Choose Upload a custom App
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
-   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.    
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.  
+   
+## Running the sample
+
+- Initiated request using bot command `request` in group chat.
+
+  ![Initial Card](BotRequestApproval/Images/InitialCard.png)
+
+- Card will refresh for requester to fill details.
+
+  ![Request Card](BotRequestApproval/Images/EditTask.png)
+  
+- After submitting the request, requester can edit or cancel the request.
+	
+	**Note:** Users who created the card will only be able to see the buttons to edit or cancel the request.
+
+  ![Edit/Cancel Card](BotRequestApproval/Images/UserCard.png)
+
+**Manager:**
+
+- After requester submit the request, manager can approve/reject the request.
+	
+	**Note:** Manager of the task request will only be able to see the buttons to approve or reject the request.
+  
+  ![Approve/Reject Card](BotRequestApproval/Images/ManagerCard.png)
+
+- If manager approves or rejects the request, card will be refreshed for all the members in group chat.
+
+  ![Status Card](BotRequestApproval/Images/ApprovedRequest.png)
+  
 
 ## Further reading
 

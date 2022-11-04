@@ -6,7 +6,7 @@ products:
 - office
 - office-365
 languages:
-- python
+- Python
 extensions:
  contentType: samples
  createdDate: "12-12-2019 13:38:25"
@@ -26,52 +26,80 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
+## Interaction with app
+
+![bot-teams-auth ](Images/TeamAuth.gif)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [ngrok](https://ngrok.com/download) or equivalent tunnelling solution
 
-## To try this sample
+## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
-1) Clone the repository
-```bash
-git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-```
+2. Setup for Bot
+ Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
+    - Use the current `https` URL you were given by running ngrok. Append with the path `/api/messages` used by this sample
+    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
 
-1) In a terminal, navigate to `Microsoft-Teams-samples\samples\bot-teams-authentication\python` folder
+    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
-1) Activate your desired virtual environment
+3. Setup NGROK
+      - Run ngrok - point to port 3978
 
-1) In the terminal, type `pip install -r requirements.txt`
+	```bash
+	# ngrok http -host-header=rewrite 3978
+	```   
+4. Setup for code
 
-1) Run ngrok - point to port 3978
+  - Clone the repository
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+  - In a terminal, navigate to `Microsoft-Teams-samples\samples\bot-teams-authentication\python` folder
+
+  - Activate your desired virtual environment
+
+  - In the terminal, type `pip install -r requirements.txt`
+
+  - Run ngrok - point to port 3978
 
     ```bash
     ngrok http --host-header=rewrite 3978
     ```
 
-1) Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
-    - Use the current `https` URL you were given by running ngrok. Append with the path `/api/messages` used by this sample
-    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
+  - Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
-1) Update the `config.py` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+5. Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./teams_app_manifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `teams_app_manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
-1) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./teams_app_manifest folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 - Run your bot with `python app.py`
 
-## Interacting with the bot in Teams
-
 > Note this `manifest.json` specified that the bot will be installed in a "personal" scope only. Please refer to Teams documentation for more details.
 
+## Running the sample
+
 You can interact with this bot by sending it a message. The bot will respond by requesting you to login to AAD, then making a call to the Graph API on your behalf and returning the results.
+
+![add-App ](Images/1.Add_App.png)
+
+![add-to-teams ](Images/2.Add_Teams.png)
+
+![auth-login ](Images/3.Welcome_Signout.png)
 
 ## Deploy the bot to Azure
 
