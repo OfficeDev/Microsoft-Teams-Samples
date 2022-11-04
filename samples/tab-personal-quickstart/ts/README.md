@@ -18,6 +18,9 @@ urlFragment: officedev-microsoft-teams-samples-tab-personal-quickstart-ts
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
 
+## Interaction with app
+
+![Tab Personal QuickstartGif](Images/TabPersonalQuickstartGif.gif)
 
 ## Prerequisites
 -  [NodeJS](https://nodejs.org/en/)
@@ -92,9 +95,15 @@ Ensure you have the Debugger for Chrome/Edge extension installed for Visual Stud
 ### Build for production
 `npm run build`
 
-## Running the sample.
+## Running the sample
 
-![PersonalTab](Images/PersonalTab.png)
+**Install App:**
+
+![InstallApp](Images/InstallApp.png)
+
+**Personal Tab UI:**
+
+![PersonalTabUI](Images/PersonalTab.png)
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
