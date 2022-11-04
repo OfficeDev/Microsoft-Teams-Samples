@@ -17,7 +17,11 @@ urlFragment: officedev-microsoft-teams-samples-tab-personal-sso-quickstart-cshar
 
 This sample illustrates how to implement SSO authentication for Teams Tab.
 
+## Interaction with app
 
+![Tab Personal SSO QuickstartGif](Images/TabPersonalSSOQuickstartGif.gif)  
+  
+ 
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
@@ -135,6 +139,11 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
 
 ## Running the sample.
 
+**Install App:**
+
+![InstallApp](Images/InstallApp.png)
+
+**Tab SSO Authentication UI:**
 ![personaltabsso](Images/personaltabsso.png)
 
 ## Interacting with the app in Teams

@@ -18,6 +18,10 @@ urlFragment: officedev-microsoft-teams-samples-tab-personal-sso-quickstart-js
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are scoped to a single user. They can be pinned to the left navigation bar for easy access.
 
+## Interaction with app
+
+![Tab Personal SSO QuickstartGif](Images/TabPersonalSSOQuickstartGif.gif)
+
  ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
@@ -93,6 +97,10 @@ On the first time running and debugging your app you need allow the localhost ce
 - You may also need to enable popups in the browser to see the auth consent page.
 
 ## Running the sample.
+
+**Install App:**
+
+![InstallApp](Images/InstallApp.png)
 
 ![personaltab](Images/personaltab.png)
 

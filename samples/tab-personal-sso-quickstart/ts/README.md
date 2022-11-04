@@ -19,6 +19,10 @@ urlFragment: officedev-microsoft-teams-samples-tab-personal-sso-quickstart-ts
 Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
 
 
+## Interaction with app
+
+![Tab Personal SSO QuickstartGif](Images/TabPersonalSSOQuickstartGif.gif)
+
  ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
@@ -26,7 +30,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-## Setup.
+## Setup
 1) Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
 2) Setup for Bot
@@ -106,8 +110,13 @@ Ensure you have the Debugger for Chrome/Edge extension installed for Visual Stud
 ### Build for production
 `npm run build`
 
-## Running the sample.
+## Running the sample
 
+**Install App:**
+
+![InstallApp](Images/InstallApp.png)
+
+**Tab SSO Authentication UI:**
 ![personaltab](Images/personaltab.png)
 
 Builds the app for production to the `build` folder.\
