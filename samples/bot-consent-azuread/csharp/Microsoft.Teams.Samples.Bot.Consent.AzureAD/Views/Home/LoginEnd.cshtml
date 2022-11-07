@@ -39,7 +39,7 @@
             //MSAL ClientApp is initialized with msalConfig options
             const clientApp = new msal.PublicClientApplication(msalConfig);
 
-            await clientApp.handleRedirectPromise();
+            var response = await clientApp.handleRedirectPromise();
             
             window.localStorage.setItem("userToken", response.accessToken);  
             microsoftTeams.authentication.notifySuccess("UserConsent");
