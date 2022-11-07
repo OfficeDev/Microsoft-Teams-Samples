@@ -24,14 +24,11 @@
 
                 var requestObj = {
                     scopes: ["https://graph.microsoft.com/User.Read", "https://graph.microsoft.com/Presence.Read"],
+                    //we use select_account for debug purposes, can be removed in prod...
                     prompt: "select_account"
                 };
 
                 const clientApp = new msal.PublicClientApplication(msalConfig);
-
-                await clientApp.handleRedirectPromise();
-
-                const accounts = clientApp.getAllAccounts();
                 clientApp.loginRedirect(requestObj);
 
             }
