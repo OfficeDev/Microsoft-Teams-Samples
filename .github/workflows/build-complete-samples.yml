@@ -808,6 +808,10 @@ jobs:
               name: 'tab-channel-context'
               version: '16.x'
 
+            - project_path: 'samples/app-localization/nodejs/client'
+              name: 'app-localization'
+              version: '16.x'
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
     defaults:
