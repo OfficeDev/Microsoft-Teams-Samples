@@ -407,6 +407,18 @@ jobs:
               name: 'connector-todo-notification'
               version: '4.6.1'
 
+            - project_path: 'samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Domain/Microsoft.Teams.Samples.ConversationalTabs.Domain.csproj'
+              name: 'bot-tab-conversations'
+              version: '4.6.1'
+
+            - project_path: 'samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Infrastructure/Microsoft.Teams.Samples.ConversationalTabs.Infrastructure.csproj'
+              name: 'bot-tab-conversations'
+              version: '4.6.1'
+
+            - project_path: 'samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/Microsoft.Teams.Samples.ConversationalTabs.Web.csproj'
+              name: 'bot-tab-conversations'
+              version: '4.6.1'
+
                   
 
       fail-fast: false
