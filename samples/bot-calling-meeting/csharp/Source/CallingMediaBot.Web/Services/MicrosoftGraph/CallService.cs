@@ -5,7 +5,6 @@ namespace CallingMediaBot.Web.Services.MicrosoftGraph;
 using CallingMediaBot.Web.Options;
 using Microsoft.Extensions.Options;
 using Microsoft.Graph;
-using Microsoft.Identity.Web;
 
 public class CallService : ICallService
 {
@@ -84,16 +83,44 @@ public class CallService : ICallService
     /// <inheritdoc />
     public Task<PlayPromptOperation> PlayPrompt(string id, params MediaInfo[] mediaPrompts)
     {
-        var prompts = mediaPrompts.Select(mediaPrompt =>
-            new MediaPrompt
-            {
-                MediaInfo = mediaPrompt
-            });
-
         return graphServiceClient.Communications.Calls[id]
-            .PlayPrompt(prompts)
+            .PlayPrompt(
+                CreatePromptsFromMediaInfos(mediaPrompts),
+                clientContext: id)
             .Request()
             .PostAsync();
+    }
+
+    /// <inheritdoc/>
+    public Task<RecordOperation> Record(
+        string id,
+        MediaInfo mediaPrompt,
+        int maxRecordDurationInSeconds = 10,
+        IEnumerable<string>? stopTones = null)
+    {
+        if (stopTones == null)
+        {
+            stopTones = new List<string>()
+            {
+                "#",
+                "1",
+                "*"
+            };
+        }
+
+        return graphServiceClient.Communications.Calls[id]
+            .RecordResponse(
+                CreatePromptsFromMediaInfos(new List<MediaInfo>() { mediaPrompt }),
+                bargeInAllowed: null,
+                initialSilenceTimeoutInSeconds: null,
+                maxSilenceTimeoutInSeconds: null,
+                maxRecordDurationInSeconds,
+                playBeep: null,
+                stopTones,
+                clientContext: id)
+            .Request()
+            .PostAsync();
+
     }
 
     /// <inheritdoc/>
@@ -155,5 +182,14 @@ public class CallService : ICallService
             .Transfer(transferTarget, transferee)
             .Request()
             .PostAsync();
+    }
+
+    private IEnumerable<Prompt> CreatePromptsFromMediaInfos(IEnumerable<MediaInfo> mediaInfos)
+    {
+        return mediaInfos.Select(mediaPrompt =>
+            new MediaPrompt
+            {
+                MediaInfo = mediaPrompt
+            });
     }
 }

@@ -8,11 +8,15 @@ using CallingMediaBot.Web.Helpers;
 using CallingMediaBot.Web.Interfaces;
 using CallingMediaBot.Web.Options;
 using CallingMediaBot.Web.Services.MicrosoftGraph;
+using CallingMediaBot.Web.Services.TeamsRecordingService;
+using CallingMediaBot.Web.Utility;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
+using Microsoft.Graph;
 using Microsoft.Graph.Communications.Common.Telemetry;
+using Microsoft.Identity.Client;
 using Microsoft.Identity.Web;
 
 public class Startup
@@ -32,6 +36,7 @@ public class Startup
     {
         services.AddControllers();
         services.AddOptions();
+        services.AddHttpClient<ITeamsRecordingService, TeamsRecordingService>("TeamsRecordingService");
 
         services.AddSingleton<IGraphLogger>(logger);
 
@@ -42,15 +47,14 @@ public class Startup
         services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
         // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-        services.AddTransient<IBot, MessageBot>();
-        services.AddTransient<CallingBot>();
+        services.AddScoped<IBot, MessageBot>();
+        services.AddScoped<CallingBot>();
 
         services.Configure<AzureAdOptions>(Configuration.GetSection("AzureAd"));
         services.Configure<BotOptions>(Configuration.GetSection("Bot"));
         services.Configure<List<UserOptions>>(Configuration.GetSection("Users"));
 
         services.AddScoped<IGraph, GraphHelper>();
-
         services.AddSingleton<IAdaptiveCardFactory, AdaptiveCardFactory>();
         services.AddMicrosoftGraphServices(options => Configuration.Bind("AzureAd", options));
     }
@@ -75,7 +79,5 @@ public class Startup
             {
                 endpoints.MapControllers();
             });
-
-        // app.UseHttpsRedirection();
     }
 }
