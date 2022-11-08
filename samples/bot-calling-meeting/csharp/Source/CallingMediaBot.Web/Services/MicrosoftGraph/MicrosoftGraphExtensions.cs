@@ -30,6 +30,7 @@ public static class MicrosoftGraphExtensions
         });
 
         services.AddTransient<ICallService, CallService>();
+        services.AddSingleton<AudioRecordingConstants>();
         return services;
     }
 }

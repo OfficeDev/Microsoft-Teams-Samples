@@ -28,15 +28,21 @@ public class CallingBot : ActivityHandler
     private readonly CommsSerializer serializer;
     private readonly BotOptions botOptions;
     private readonly ICallService callService;
+    private readonly AudioRecordingConstants audioRecordingConstants;
     private readonly ITeamsRecordingService teamsRecordingService;
     private readonly ILogger<CallingBot> logger;
 
-    private readonly IHttpClientFactory httpClientFactory;
-
-    public CallingBot(ICallService callService, ITeamsRecordingService teamsRecordingService, IGraphLogger graphLogger, IOptions<BotOptions> botOptions, ILogger<CallingBot> logger, IHttpClientFactory httpClientFactory)
+    public CallingBot(
+        ICallService callService,
+        AudioRecordingConstants audioRecordingConstants,
+        ITeamsRecordingService teamsRecordingService,
+        IGraphLogger graphLogger,
+        IOptions<BotOptions> botOptions,
+        ILogger<CallingBot> logger)
     {
         this.botOptions = botOptions.Value;
         this.callService = callService;
+        this.audioRecordingConstants = audioRecordingConstants;
         this.teamsRecordingService = teamsRecordingService;
         this.graphLogger = graphLogger;
         this.logger = logger;
@@ -47,8 +53,6 @@ public class CallingBot : ActivityHandler
         serializer = new CommsSerializer();
         notificationProcessor = new NotificationProcessor(serializer);
         notificationProcessor.OnNotificationReceived += this.NotificationProcessor_OnNotificationReceived;
-
-        this.httpClientFactory = httpClientFactory;
     }
 
     /// <summary>
@@ -103,23 +107,13 @@ public class CallingBot : ActivityHandler
             {
                 await AnswerIncomingCallAsync(call.Id, args.TenantId, args.ScenarioId).ConfigureAwait(false); ;
             }
-            else if (args.ChangeType == ChangeType.Updated && call.State == CallState.Established)
+            else if (
+                args.ChangeType == ChangeType.Updated
+                && call.State == CallState.Established
+                // The below helps to distinguish between two similar Established notifications that are sent
+                && call.MediaState?.Audio == MediaState.Active)
             {
-                //await callService.PlayPrompt(GetCallIdFromNotification(args), new MediaInfo
-                //{
-                //    Uri = new Uri(botOptions.BotBaseUrl, "audio/speech.wav").ToString(),
-                //    ResourceId = Guid.NewGuid().ToString(),
-                //});
-                var recordYourMessageAudio = new MediaInfo
-                {
-                    Uri = new Uri(botOptions.BotBaseUrl, "audio/please-record-your-message.wav").ToString(),
-                    ResourceId = Guid.NewGuid().ToString(),
-                };
-                var result = await callService.Record(GetCallIdFromNotification(args), recordYourMessageAudio);
-            }
-            else
-            {
-                logger.LogInformation($"ChangeType: {args.ChangeType}; State: {call.State}; ");
+                await callService.Record(GetCallIdFromNotification(args), audioRecordingConstants.PleaseRecordYourMessage);
             }
         }
         else if (args.ResourceData is RecordOperation recording)
@@ -139,26 +133,11 @@ public class CallingBot : ActivityHandler
                     ResourceId = Guid.NewGuid().ToString(),
                 });
         }
-        else
-        {
-            logger.LogInformation($"ChangeType: {args.ChangeType}; ResourceData: {args.ResourceData}; ");
-        }
     }
 
     private async Task AnswerIncomingCallAsync(string callId, string tenantId, Guid scenarioId)
     {
-        var speechAudio = new MediaInfo
-        {
-            Uri = new Uri(botOptions.BotBaseUrl, "audio/speech.wav").ToString(),
-            ResourceId = Guid.NewGuid().ToString(),
-        };
-        var recordYourMessageAudio = new MediaInfo
-        {
-            Uri = new Uri(botOptions.BotBaseUrl, "audio/please-record-your-message.wav").ToString(),
-            ResourceId = Guid.NewGuid().ToString(),
-        };
-
-        await callService.Answer(callId, speechAudio, recordYourMessageAudio);
+        await callService.Answer(callId, audioRecordingConstants.Speech, audioRecordingConstants.PleaseRecordYourMessage);
     }
 
     private string GetCallIdFromNotification(NotificationEventArgs notificationArgs)
