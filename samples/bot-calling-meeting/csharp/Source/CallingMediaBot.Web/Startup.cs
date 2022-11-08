@@ -33,12 +33,6 @@ public class Startup
         services.AddControllers();
         services.AddOptions();
 
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"))
-                .EnableTokenAcquisitionToCallDownstreamApi()
-                .AddMicrosoftGraph(Configuration.GetSection("Graph"))
-                .AddInMemoryTokenCaches();
-
         services.AddSingleton<IGraphLogger>(this.logger);
 
         // Create the Bot Framework Authentication to be used with the Bot Adapter.
@@ -61,7 +55,7 @@ public class Startup
         services.AddScoped<IGraph, GraphHelper>();
 
         services.AddSingleton<IAdaptiveCardFactory, AdaptiveCardFactory>();
-        services.AddMicrosoftGraphServices();
+        services.AddMicrosoftGraphServices(options => Configuration.Bind("AzureAd", options));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
