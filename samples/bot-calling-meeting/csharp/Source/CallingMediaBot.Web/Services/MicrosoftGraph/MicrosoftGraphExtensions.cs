@@ -2,7 +2,12 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace CallingMediaBot.Web.Services.MicrosoftGraph;
+
+using Azure.Identity;
+using CallingMediaBot.Web.Options;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Graph;
+using Microsoft.Identity.Client;
 
 public static class MicrosoftGraphExtensions
 {
@@ -11,10 +16,21 @@ public static class MicrosoftGraphExtensions
     /// Include this in your Startup.cs ConfigureServices if you need to access these services.
     /// </summary>
     /// <param name="services">Service collection.</param>
+    /// <param name="azureAdOptionsAction">AzureAD Options.</param>
     /// <returns>Service collections.</returns>
-    public static IServiceCollection AddMicrosoftGraphServices(this IServiceCollection services)
+    public static IServiceCollection AddMicrosoftGraphServices(this IServiceCollection services, Action<AzureAdOptions> azureAdOptionsAction)
     {
-        services.AddScoped<ICallService, CallService>();
+        var options = new AzureAdOptions();
+        azureAdOptionsAction(options);
+
+        ClientSecretCredential authenticationProvider = new ClientSecretCredential(options.TenantId, options.ClientId, options.ClientSecret);
+
+        services.AddScoped<GraphServiceClient, GraphServiceClient>(sp =>
+        {
+            return new GraphServiceClient(authenticationProvider);
+        });
+
+        services.AddTransient<ICallService, CallService>();
         return services;
     }
 }

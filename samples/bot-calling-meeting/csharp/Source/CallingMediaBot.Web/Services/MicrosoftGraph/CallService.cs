@@ -23,9 +23,9 @@ public class CallService : ICallService
     }
 
     /// <inheritdoc/>
-    public async Task Answer(string id, params MediaInfo[]? preFetchMedia)
+    public Task Answer(string id, params MediaInfo[]? preFetchMedia)
     {
-        await graphServiceClient.Communications.Calls[id]
+        return graphServiceClient.Communications.Calls[id]
             .Answer(
                 callbackUri: callbackUri,
                 mediaConfig: new ServiceHostedMediaConfig
@@ -34,12 +34,11 @@ public class CallService : ICallService
                 },
                 acceptedModalities: new List<Modality> { Modality.Audio })
             .Request()
-            .WithAppOnly()
             .PostAsync();
     }
 
     /// <inheritdoc/>
-    public async Task<Call> Create(params Identity[] users)
+    public Task<Call> Create(params Identity[] users)
     {
         var call = new Call
         {
@@ -61,44 +60,72 @@ public class CallService : ICallService
             }
         };
 
-        return await graphServiceClient.Communications.Calls
+        return graphServiceClient.Communications.Calls
             .Request()
             .WithAppOnly()
             .AddAsync(call);
     }
 
     /// <inheritdoc/>
-    public async Task<Call> Get(string id)
+    public Task<Call> Get(string id)
     {
-        return await graphServiceClient.Communications.Calls[id]
+        return graphServiceClient.Communications.Calls[id]
             .Request()
             .WithAppOnly()
             .GetAsync();
     }
 
     /// <inheritdoc/>
-    public async Task HangUp(string id)
+    public Task HangUp(string id)
     {
-        await graphServiceClient.Communications.Calls[id]
+        return graphServiceClient.Communications.Calls[id]
             .Request()
             .WithAppOnly()
             .DeleteAsync();
     }
 
     /// <inheritdoc />
-    public async Task<PlayPromptOperation> PlayPrompt(string id, params MediaInfo[] mediaPrompts)
+    public Task<PlayPromptOperation> PlayPrompt(string id, params MediaInfo[] mediaPrompts)
     {
-        var prompts = mediaPrompts.Select(mediaPrompt =>
-            new MediaPrompt
-            {
-                MediaInfo = mediaPrompt
-            });
+        return graphServiceClient.Communications.Calls[id]
+            .PlayPrompt(
+                CreatePromptsFromMediaInfos(mediaPrompts),
+                clientContext: id)
+            .Request()
+            .PostAsync();
+    }
 
-        return await graphServiceClient.Communications.Calls[id]
-            .PlayPrompt(prompts)
+    /// <inheritdoc/>
+    public Task<RecordOperation> Record(
+        string id,
+        MediaInfo mediaPrompt,
+        int maxRecordDurationInSeconds = 10,
+        IEnumerable<string>? stopTones = null)
+    {
+        if (stopTones == null)
+        {
+            stopTones = new List<string>()
+            {
+                "#",
+                "1",
+                "*"
+            };
+        }
+
+        return graphServiceClient.Communications.Calls[id]
+            .RecordResponse(
+                CreatePromptsFromMediaInfos(new List<MediaInfo>() { mediaPrompt }),
+                bargeInAllowed: null,
+                initialSilenceTimeoutInSeconds: null,
+                maxSilenceTimeoutInSeconds: null,
+                maxRecordDurationInSeconds,
+                playBeep: null,
+                stopTones,
+                clientContext: id)
             .Request()
             .WithAppOnly()
             .PostAsync();
+
     }
 
     /// <inheritdoc/>
@@ -108,9 +135,9 @@ public class CallService : ICallService
     }
 
     /// <inheritdoc/>
-    public async Task Reject(string id, RejectReason rejectReason)
+    public Task Reject(string id, RejectReason rejectReason)
     {
-        await graphServiceClient.Communications.Calls[id]
+        return graphServiceClient.Communications.Calls[id]
             .Reject(rejectReason, null)
             .Request()
             .WithAppOnly()
@@ -124,7 +151,7 @@ public class CallService : ICallService
     }
 
     /// <inheritdoc/>
-    public async Task Transfer(string id, Identity transferIdentity, Identity? transfereeIdentity = null)
+    public Task Transfer(string id, Identity transferIdentity, Identity? transfereeIdentity = null)
     {
         var transferTarget = new InvitationParticipantInfo
         {
@@ -157,10 +184,19 @@ public class CallService : ICallService
             };
         }
 
-        await graphServiceClient.Communications.Calls[id]
+        return graphServiceClient.Communications.Calls[id]
             .Transfer(transferTarget, transferee)
             .Request()
             .WithAppOnly()
             .PostAsync();
+    }
+
+    private IEnumerable<Prompt> CreatePromptsFromMediaInfos(IEnumerable<MediaInfo> mediaInfos)
+    {
+        return mediaInfos.Select(mediaPrompt =>
+            new MediaPrompt
+            {
+                MediaInfo = mediaPrompt
+            });
     }
 }

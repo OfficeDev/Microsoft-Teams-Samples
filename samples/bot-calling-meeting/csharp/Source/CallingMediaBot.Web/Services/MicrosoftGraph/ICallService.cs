@@ -43,6 +43,20 @@ public interface ICallService
     Task<PlayPromptOperation> PlayPrompt(string id, params MediaInfo[] mediaPrompts);
 
     /// <summary>
+    /// Play the provided prompt in a call, and then record what is said.
+    /// </summary>
+    /// <param name="id">The ID of the call where you want to record</param>
+    /// <param name="mediaPrompt">The media to play before recording</param>
+    /// <param name="maxRecordDurationInSeconds">The maximum duration to record the response before stopping the recording</param>
+    /// <param name="stopTones">Stop tones to stop the recording</param>
+    /// <returns>The record operation with access token to and file location of the recording</returns>
+    Task<RecordOperation> Record(
+        string id,
+        MediaInfo mediaPrompt,
+        int maxRecordDurationInSeconds = 10,
+        IEnumerable<string>? stopTones = null);
+
+    /// <summary>
     /// Reject a call
     /// </summary>
     /// <param name="id">The ID of the call to reject</param>

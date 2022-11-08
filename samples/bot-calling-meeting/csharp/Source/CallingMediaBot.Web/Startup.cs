@@ -8,11 +8,15 @@ using CallingMediaBot.Web.Helpers;
 using CallingMediaBot.Web.Interfaces;
 using CallingMediaBot.Web.Options;
 using CallingMediaBot.Web.Services.MicrosoftGraph;
+using CallingMediaBot.Web.Services.TeamsRecordingService;
+using CallingMediaBot.Web.Utility;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
+using Microsoft.Graph;
 using Microsoft.Graph.Communications.Common.Telemetry;
+using Microsoft.Identity.Client;
 using Microsoft.Identity.Web;
 
 public class Startup
@@ -32,17 +36,9 @@ public class Startup
     {
         services.AddControllers();
         services.AddOptions();
+        services.AddHttpClient<ITeamsRecordingService, TeamsRecordingService>("TeamsRecordingService");
 
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"))
-                .EnableTokenAcquisitionToCallDownstreamApi()
-                .AddMicrosoftGraph(Configuration.GetSection("Graph"))
-                .AddInMemoryTokenCaches();
-
-        services.AddSingleton<IGraphLogger>(this.logger);
-
-        // Create the Bot Framework Authentication to be used with the Bot Adapter.
-        services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
+        services.AddSingleton<IGraphLogger>(logger);
 
         // Create the Bot Framework Authentication to be used with the Bot Adapter.
         services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
@@ -51,17 +47,16 @@ public class Startup
         services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
         // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-        services.AddTransient<IBot, MessageBot>();
-        services.AddTransient<CallingBot>();
+        services.AddScoped<IBot, MessageBot>();
+        services.AddScoped<CallingBot>();
 
         services.Configure<AzureAdOptions>(Configuration.GetSection("AzureAd"));
         services.Configure<BotOptions>(Configuration.GetSection("Bot"));
         services.Configure<List<UserOptions>>(Configuration.GetSection("Users"));
 
         services.AddScoped<IGraph, GraphHelper>();
-
         services.AddSingleton<IAdaptiveCardFactory, AdaptiveCardFactory>();
-        services.AddMicrosoftGraphServices();
+        services.AddMicrosoftGraphServices(options => Configuration.Bind("AzureAd", options));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,7 +79,5 @@ public class Startup
             {
                 endpoints.MapControllers();
             });
-
-        // app.UseHttpsRedirection();
     }
 }

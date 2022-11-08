@@ -9,7 +9,8 @@ public static class CommonUtils
 {
     public static async Task ForgetAndLogExceptionAsync(
         this Task task,
-        IGraphLogger logger,
+        IGraphLogger graphLogger,
+        ILogger logger,
         string? description = null,
         [CallerMemberName] string? memberName = null,
         [CallerFilePath] string? filePath = null,
@@ -18,21 +19,26 @@ public static class CommonUtils
         try
         {
             await task.ConfigureAwait(false);
-            logger?.Verbose(
+            graphLogger?.Verbose(
                 $"Completed running task successfully: {description ?? string.Empty}",
                 memberName: memberName,
                 filePath: filePath,
                 lineNumber: lineNumber);
+            logger?.LogTrace(
+                $"Completed running task successfully: {description ?? string.Empty}; memberName: {memberName}; filePath: {filePath}; lineNumber: {lineNumber};");
         }
         catch (Exception e)
         {
             // Log and absorb all exceptions here.
-            logger?.Error(
+            graphLogger?.Error(
                 e,
                 $"Caught an Exception running the task: {description ?? string.Empty}",
                 memberName: memberName,
                 filePath: filePath,
                 lineNumber: lineNumber);
+            logger?.LogError(
+                e,
+                $"Caught an Exception running the task: {description ?? string.Empty}; memberName: {memberName}; filePath: {filePath}; lineNumber: {lineNumber};");
         }
     }
 }
