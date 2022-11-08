@@ -81,12 +81,15 @@ public class CallingBot : ActivityHandler
 
     private async Task NotificationProcessor_OnNotificationReceivedAsync(NotificationEventArgs args)
     {
+        // Should look to run async as not to block subsequent notifications.
+        // https://microsoftgraph.github.io/microsoft-graph-comms-samples/docs/articles/index.html#answer-incoming-call-with-service-hosted-media
+
         graphLogger.CorrelationId = args.ScenarioId;
         if (args.ResourceData is Call call)
         {
             if (args.ChangeType == ChangeType.Created && call.State == CallState.Incoming)
             {
-                AnswerIncomingCallAsync(call.Id, args.TenantId, args.ScenarioId);
+                await AnswerIncomingCallAsync(call.Id, args.TenantId, args.ScenarioId);
             }
             else if (args.ChangeType == ChangeType.Updated && call.State == CallState.Established)
             {
@@ -99,21 +102,16 @@ public class CallingBot : ActivityHandler
         }
     }
 
-    private void AnswerIncomingCallAsync(string callId, string tenantId, Guid scenarioId)
+    private async Task AnswerIncomingCallAsync(string callId, string tenantId, Guid scenarioId)
     {
-        // Run async as not to block subsequent notifications.
-        // https://microsoftgraph.github.io/microsoft-graph-comms-samples/docs/articles/index.html#answer-incoming-call-with-service-hosted-media
-        Task.Run(async () =>
+        var promptAudio = new MediaInfo
         {
-            var promptAudio = new MediaInfo
-            {
-                Uri = new Uri(botOptions.BotBaseUrl, "audio/speech.wav").ToString(),
-                ResourceId = Guid.NewGuid().ToString(),
-            };
+            Uri = new Uri(botOptions.BotBaseUrl, "audio/speech.wav").ToString(),
+            ResourceId = Guid.NewGuid().ToString(),
+        };
 
-            await callService.Answer(callId, promptAudio);
+        await callService.Answer(callId, promptAudio);
 
-            await callService.PlayPrompt(callId, promptAudio);
-        });
+        await callService.PlayPrompt(callId, promptAudio);
     }
 }
