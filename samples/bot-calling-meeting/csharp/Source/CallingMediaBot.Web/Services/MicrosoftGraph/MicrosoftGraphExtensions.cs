@@ -7,7 +7,6 @@ using Azure.Identity;
 using CallingMediaBot.Web.Options;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Graph;
-using Microsoft.Identity.Client;
 
 public static class MicrosoftGraphExtensions
 {

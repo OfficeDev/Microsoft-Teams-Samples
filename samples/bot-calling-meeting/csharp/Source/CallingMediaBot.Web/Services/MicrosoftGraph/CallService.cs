@@ -62,7 +62,6 @@ public class CallService : ICallService
 
         return graphServiceClient.Communications.Calls
             .Request()
-            .WithAppOnly()
             .AddAsync(call);
     }
 
@@ -71,7 +70,6 @@ public class CallService : ICallService
     {
         return graphServiceClient.Communications.Calls[id]
             .Request()
-            .WithAppOnly()
             .GetAsync();
     }
 
@@ -80,7 +78,6 @@ public class CallService : ICallService
     {
         return graphServiceClient.Communications.Calls[id]
             .Request()
-            .WithAppOnly()
             .DeleteAsync();
     }
 
@@ -123,7 +120,6 @@ public class CallService : ICallService
                 stopTones,
                 clientContext: id)
             .Request()
-            .WithAppOnly()
             .PostAsync();
 
     }
@@ -140,7 +136,6 @@ public class CallService : ICallService
         return graphServiceClient.Communications.Calls[id]
             .Reject(rejectReason, null)
             .Request()
-            .WithAppOnly()
             .PostAsync();
     }
 
@@ -187,7 +182,6 @@ public class CallService : ICallService
         return graphServiceClient.Communications.Calls[id]
             .Transfer(transferTarget, transferee)
             .Request()
-            .WithAppOnly()
             .PostAsync();
     }
 
