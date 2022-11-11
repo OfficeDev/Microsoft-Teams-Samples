@@ -18,7 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-app-cache-meetings-nodejs
 
 This sample feature is to improve the subsequent loading time of an App that the user has visited during the current Meeting (specifically Apps loaded in the SidePanel of a Meeting).
 
-**Interaction with bot**
+**Interaction with App**
 ![App-Cache](Images/AppCacheSample_GIF.gif)  
  
 ## Prerequisites
