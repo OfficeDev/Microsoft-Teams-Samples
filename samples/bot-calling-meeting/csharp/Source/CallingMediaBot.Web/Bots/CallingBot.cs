@@ -4,7 +4,6 @@
 namespace CallingMediaBot.Web.Bots;
 using System.Net;
 using System.Text.Json;
-using Antlr4.Runtime.Misc;
 using CallingMediaBot.Web.Extensions;
 using CallingMediaBot.Web.Options;
 using CallingMediaBot.Web.Services.MicrosoftGraph;
