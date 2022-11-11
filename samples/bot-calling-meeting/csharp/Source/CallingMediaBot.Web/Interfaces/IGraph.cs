@@ -21,10 +21,4 @@ public interface IGraph
     /// </summary>
     /// <returns>JoinScheduledMeeting.</returns>
     Task<Call> JoinScheduledMeeting(string meetingUrl);
-
-    /// <summary>
-    /// Invite Participant to Meeting.
-    /// </summary>
-    /// <returns>JoinScheduledMeeting.</returns>
-    Task InviteParticipant(string meetingId);
 }

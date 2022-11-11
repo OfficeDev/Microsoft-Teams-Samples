@@ -80,6 +80,22 @@ public class CallService : ICallService
             .DeleteAsync();
     }
 
+    /// <inheritdoc/>
+    public Task InviteParticipant(string id, params IdentitySet[] participants)
+    {
+        var invitationParticipants = participants.Select(participant =>
+            new InvitationParticipantInfo
+            {
+                // ReplacesCallId = "a7ebfb2d-871e-419c-87af-27290b22e8db",
+                Identity = participant
+            });
+
+        return graphServiceClient.Communications.Calls[id].Participants
+            .Invite(invitationParticipants, id)
+            .Request()
+            .PostAsync();
+    }
+
     /// <inheritdoc />
     public Task<PlayPromptOperation> PlayPrompt(string id, params MediaInfo[] mediaPrompts)
     {

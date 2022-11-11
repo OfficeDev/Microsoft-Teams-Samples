@@ -1,4 +1,4 @@
-{
+﻿{
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
   "version": "1.4",
   "type": "AdaptiveCard",
@@ -7,21 +7,16 @@
       "type": "TextBlock",
       "size": "Medium",
       "weight": "Bolder",
-      "text": "Calling Bot"
-    },
-    {
-      "type": "TextBlock",
-      "text": "Sample Calling Bot",
-      "wrap": true
+      "text": "Control this meeting"
     }
   ],
   "actions": [
     {
       "type": "Action.Submit",
-      "title": "Create Call",
-      "id": "createcall",
+      "title": "Transfer call",
+      "id": "transfercall",
       "data": {
-        "action": "createcall",
+        "action": "transfercall",
         "msteams": {
           "type": "task/fetch"
         }
@@ -29,10 +24,13 @@
     },
     {
       "type": "Action.Submit",
-      "title": "Join scheduled meeting",
-      "id": "joinscheduledmeeting",
+      "title": "Invite participant to meeting",
+      "id": "inviteparticipant",
       "data": {
-        "type": "joinscheduledmeeting"
+        "action": "inviteparticipant",
+        "msteams": {
+          "type": "task/fetch"
+        }
       }
     }
   ]

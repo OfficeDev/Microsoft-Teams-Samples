@@ -31,8 +31,17 @@ public interface ICallService
     /// <summary>
     /// Delete/Hang up a call
     /// </summary>
+    /// <param name="id">The ID of the call</param>
     /// <returns>Task</returns>
     Task HangUp(string id);
+
+    /// <summary>
+    /// Invite participants to a call
+    /// </summary>
+    /// <param name="id">The ID of the call</param>
+    /// <param name="participants">The participants to invite</param>
+    /// <returns>Task</returns>
+    Task InviteParticipant(string id, params IdentitySet[] participants);
 
     /// <summary>
     /// Plays a media prompt in a call

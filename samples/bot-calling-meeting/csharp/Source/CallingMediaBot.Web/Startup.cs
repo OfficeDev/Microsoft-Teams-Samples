@@ -9,15 +9,10 @@ using CallingMediaBot.Web.Interfaces;
 using CallingMediaBot.Web.Options;
 using CallingMediaBot.Web.Services.MicrosoftGraph;
 using CallingMediaBot.Web.Services.TeamsRecordingService;
-using CallingMediaBot.Web.Utility;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Connector.Authentication;
-using Microsoft.Graph;
 using Microsoft.Graph.Communications.Common.Telemetry;
-using Microsoft.Identity.Client;
-using Microsoft.Identity.Web;
 
 public class Startup
 {
@@ -49,6 +44,9 @@ public class Startup
         // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
         services.AddScoped<IBot, MessageBot>();
         services.AddScoped<CallingBot>();
+
+        // Create the Conversation state passing in the storage layer.
+        services.AddSingleton(new ConversationState(new MemoryStorage()));
 
         services.Configure<AzureAdOptions>(Configuration.GetSection("AzureAd"));
         services.Configure<BotOptions>(Configuration.GetSection("Bot"));
