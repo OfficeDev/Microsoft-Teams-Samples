@@ -1,0 +1,19 @@
+.container {
+    padding: 1rem;
+}
+
+.manage-icons {
+    cursor: pointer;
+}
+
+.text-fields-label {
+    width: 130px;
+}
+
+.input-fields-label {
+    width: 160px;
+}
+
+.break {
+    margin-top: 10px;
+}

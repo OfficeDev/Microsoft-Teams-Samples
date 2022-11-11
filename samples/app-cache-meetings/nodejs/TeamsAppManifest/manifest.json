@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
+  "version": "1.0.0",
+  "manifestVersion": "1.11",
+  "id": "<<MANIFEST_ID>>",
+  "packageName": "com.package.name",
+  "name": { "short": "AppCachingTestApp", "full": "App Caching Test App" },
+  "developer": {
+    "name": "App Caching Inc",
+    "mpnId": "",
+    "websiteUrl": "https://jolly-sea-0e533fe1e.2.azurestaticapps.net/",
+    "privacyUrl": "https://jolly-sea-0e533fe1e.2.azurestaticapps.net/privacy",
+    "termsOfUseUrl": "https://jolly-sea-0e533fe1e.2.azurestaticapps.net/termsofuse"
+  },
+  "description": {
+    "short": "App Caching App",
+    "full": "App Caching Test App"
+  },
+  "icons": { "outline": "outline.png", "color": "color.png" },
+  "accentColor": "#FFFFFF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://<<Valid_Domain>>/configure",
+      "canUpdateConfiguration": true,
+      "scopes": ["groupchat", "team"],
+      "context": [
+        "channelTab",
+        "meetingChatTab",
+        "meetingDetailsTab",
+        "meetingSidePanel",
+        "meetingStage",
+        "privateChatTab"
+      ]
+    }
+  ],
+  "validDomains": ["<<Valid_Domain>>"],
+  "showLoadingIndicator": true
+}
