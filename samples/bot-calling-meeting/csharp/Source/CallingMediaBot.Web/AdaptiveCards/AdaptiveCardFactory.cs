@@ -16,9 +16,26 @@ public class AdaptiveCardFactory : IAdaptiveCardFactory
         return CreateAttachment(serializedJson);
     }
 
+    public Attachment CreateMeetingActionsCard()
+    {
+        var template = GetCardTemplate("MeetingActions.json");
+
+        var serializedJson = template.Expand(new { });
+        return CreateAttachment(serializedJson);
+    }
+
+    public Attachment CreatePeoplePickerCard(string choiceLabel, string action, bool isMultiSelect = false)
+    {
+        var template = GetCardTemplate("PeoplePicker.json");
+
+        var serializedJson = template.Expand(new { choiceLabel, action, isMultiSelect });
+        return CreateAttachment(serializedJson);
+
+    }
+
     private AdaptiveCardTemplate GetCardTemplate(string fileName)
     {
-        string templatePath = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "templates", fileName);
+        string templatePath = Path.Combine(Directory.GetCurrentDirectory(), "Resources", fileName);
         return new AdaptiveCardTemplate(File.ReadAllText(templatePath));
     }
 

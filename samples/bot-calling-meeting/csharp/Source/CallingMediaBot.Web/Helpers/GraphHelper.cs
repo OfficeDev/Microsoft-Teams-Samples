@@ -98,34 +98,4 @@ public class GraphHelper : IGraph
             return null;
         }
     }
-
-    public async Task InviteParticipant(string meetingId)
-    {
-        try
-        {
-            var participants = new List<InvitationParticipantInfo>()
-            {
-                new InvitationParticipantInfo
-                {
-                    Identity = new IdentitySet
-                    {
-                        User = new Identity
-                        {
-                            DisplayName = this.users.ElementAt(2).DisplayName,
-                            Id = this.users.ElementAt(2).Id
-                        }
-                    }
-                }
-            };
-
-            var statefulCall = await graphServiceClient.Communications.Calls[meetingId].Participants
-                .Invite(participants)
-                .Request()
-                .PostAsync();
-        }
-        catch (Exception ex)
-        {
-            throw;
-        }
-    }
 }

@@ -7,4 +7,6 @@ using Microsoft.Bot.Schema;
 public interface IAdaptiveCardFactory
 {
     Attachment CreateWelcomeCard();
+    Attachment CreateMeetingActionsCard();
+    Attachment CreatePeoplePickerCard(string choiceLabel, string action, bool isMultiSelect = false);
 }
