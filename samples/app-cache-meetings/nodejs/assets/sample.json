@@ -1,6 +1,6 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-connector-generic-nodejs",
+    "name": "officedev-microsoft-teams-samples-app-cache-meetings-nodejs",
     "source": "officeDev",
     "title": "App Cahce In Meeting",
     "shortDescription": "This sample feature is to improve the subsequent loading time of an App",
@@ -35,8 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-cache-meetings/nodejs/Images/AppCacheSample_GIF",
-        "alt": "Solution UX showing microsoft teams sample connector"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-cache-meetings/nodejs/Images/AppCacheSample.gif",
+        "alt": "Solution UX showing microsoft teams sample for App Cahce In Meeting."
       }
     ],
     "authors": [

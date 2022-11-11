@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample feature is to improve the subsequent loading time of an App that the user has visited during the current Meeting.
+description: This sample feature is to improve the subsequent loading time of an App that the user has visited during the current meeting.
 products:
 - office-teams
 - office
@@ -16,10 +16,10 @@ urlFragment: officedev-microsoft-teams-samples-app-cache-meetings-nodejs
 
 ## App Caching In Meetings
 
-This sample feature is to improve the subsequent loading time of an App that the user has visited during the current Meeting (specifically Apps loaded in the SidePanel of a Meeting).
+This sample feature is to improve the subsequent loading time of an App that the user has visited during the current meeting (Specifically Apps loaded in the side panel of a meeting).
 
 **Interaction with App**
-![App-Cache](Images/AppCacheSample_GIF.gif)  
+![App-Cache](Images/AppCacheSample.gif)  
  
 ## Prerequisites
 
@@ -41,31 +41,30 @@ This sample feature is to improve the subsequent loading time of an App that the
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-   A) If you are using Visual Studio Code
+   **Open your project in Visual Studio Code (Optional Step)**
 
     - Launch Visual Studio code
     - File -> Open Folder
     - Navigate to `samples/app-cache-meetings` folder
-    - Select `nodejs` folder
+    - Select `nodejs` folder and open it
 
-   B) Install node modules
-
-   Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
+   B) Install node modules (Either open any local terminal inside your `nodejs` folder or open Visual Studio Code terminal by opening the project in Visual Studio Code)
 
     ```bash
     npm install
     ```
 
-3) Run your app
+3) Run your app (Either from any local terminal or from Visual Studio Code terminal)
 
     ```bash
     npm start
     ```
+
     - Your App will start running on 3978 PORT.
 
 4) __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your `<<MANIFEST-ID>>`, You can use any GUID Id in place of `<<Manifest-ID>>`
-    - **Edit** the `manifest.json` for `ValidDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your `<<MANIFEST-ID>>`, You can use any GUID Id in place of `<<Manifest-ID>>` or ![Generate Guid](https://guidgenerator.com/)
+    - **Edit** the `manifest.json` for `<<Valid_Domain>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`. Replace it at all the places in your manifest.json.
     - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Sideload the app In meetings (Supported scopes)
@@ -95,5 +94,6 @@ This Panel queries the state of the Cache and updates the table on a periodic ba
 
 
 ## Further reading
+![Upload your app in Teams](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload)
 
-
+![Manage custom and sideloaded apps in Teams admin center](https://learn.microsoft.com/en-us/microsoftteams/teams-custom-app-policies-and-settings)
