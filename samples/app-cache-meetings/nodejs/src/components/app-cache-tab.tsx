@@ -27,15 +27,17 @@ function logItem(action: string, actionColor: string, message: string) {
 /// </summary>
 const beforeUnloadHandler = (
   setItems: React.Dispatch<React.SetStateAction<string[]>>,
-  readyToUnload: () => void
-) => {
-  console.log("got beforeUnload from TEAMS");
+  readyToUnload: () => void) => {
+
   let newItem = logItem("OnBeforeUnload", "purple", "Started");
-  setItems((oldItems) => [...oldItems, newItem]);
+  setItems((Items) => [...Items, newItem]);
+
   newItem = logItem("OnBeforeUnload", "purple", "Completed");
-  setItems((oldItems) => [...oldItems, newItem]);
+  setItems((Items) => [...Items, newItem]);
+
   console.log("sending readyToUnload to TEAMS");
   readyToUnload();
+
   return true;
 };
 
@@ -44,12 +46,12 @@ const beforeUnloadHandler = (
 /// </summary>
 const loadHandler = (
   setItems: React.Dispatch<React.SetStateAction<string[]>>,
-  data: microsoftTeams.LoadContext
-) => {
-  console.log("got load from TEAMS", data);
+  data: microsoftTeams.LoadContext) => {
   logItem("OnLoad", "blue", "Started for " + data.entityId);
+
   let newItem = logItem("OnLoad", "blue", "Completed for " + data.entityId);
-  setItems((oldItems) => [...oldItems, newItem]);
+  setItems((Items) => [...Items, newItem]);
+
   microsoftTeams.app.notifySuccess();
 };
 
@@ -66,11 +68,13 @@ const AppCacheTab = () => {
     // get context
     microsoftTeams.app.initialize().then(() => {
       microsoftTeams.app.getContext().then((context) => {
+
         const newItem = logItem("Success", "green", "Loaded Teams context");
-        setItems((oldItems) => [...oldItems, newItem]);
+        setItems((Items) => [...Items, newItem]);
         setTitle(title);
-        const newItem2 = logItem("FrameContext", "orange", "Frame context is " + context.page.frameContext);
-        setItems((oldItems) => [...oldItems, newItem2]);
+
+        const newLogItem = logItem("FrameContext", "orange", "Frame context is " + context.page.frameContext);
+        setItems((Items) => [...Items, newLogItem]);
 
         if (context.page.frameContext === "sidePanel") {
           // OnBeforeUnload
@@ -83,18 +87,24 @@ const AppCacheTab = () => {
           microsoftTeams.teamsCore.registerOnLoadHandler((data) => {
             loadHandler(setItems, data);
           });
+
           const newItem = logItem("Handlers", "orange", "Registered load and before unload handlers. Ready for app caching.");
-          setItems((oldItems) => [...oldItems, newItem]);
+          setItems((Items) => [...Items, newItem]);
         }
-        else {
+        
+        else 
+        {
           let newItem = logItem("ERROR", "red", "could not get context");
-          setItems((oldItems) => [...oldItems, newItem]);
+          setItems((Items) => [...Items, newItem]);
         }
+
       });
     });
+
     return () => {
       console.log("useEffect cleanup - Tab");
     };
+
   }, [initState]);
 
   const jsx = initState ? (

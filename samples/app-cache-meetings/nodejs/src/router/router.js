@@ -1,3 +1,8 @@
+// <copyright file="router.js" company="Microsoft Corporation">
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+// </copyright>
+
 import * as React from "react";
 import {
     BrowserRouter,
