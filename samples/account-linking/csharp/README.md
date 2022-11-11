@@ -17,7 +17,9 @@ urlFragment: officedev-microsoft-teams-samples-account-linking-csharp
 
 This sample demos linking user's AAD id with their GitHub identity. 
 
-The code generically handles account linking for OAuth2.0, the only GitHub specifics are related to calling the GitHub API. 
+The code generically handles account linking for OAuth2.0, the only GitHub specifics are related to calling the GitHub API.
+
+![Account Linking Sample](Source/Images/account-linking-sample.gif)
 
 Please see the [Code Tours](#code-tours) section for in-depth explanation of the sample. 
 
@@ -98,6 +100,8 @@ Please fill in the following values into the `Manifest/Manifest.json` file (call
 | Bot Id  | The "Application (client) id" from step 3. |
 | Tab domain | The domain from step 1 |
 | Azure Ad Application Id | the "Application (client) id" from step 2| 
+|Base Url | The base url for your application. For this example, the base url is `https://590a2d6f8b31.ngrok.io`
+|Base Url Domain| The base url domain for your application. For this example, we'll use the `590a2d6f8b31.ngrok.io` as our domain name.
 
 ### 6. Filling in the app settings
 Please copy the `Source/appsettings.json` into a new file `appsettings.development.json` and fill in the following parameters. 
@@ -136,6 +140,24 @@ The `StateReplay:Endpoint`, `TokenStorage:Endpoint` values and `KeyRing` section
 This repository uses VSCode [Code Tours](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour#:~:text=A%20%22code%20tour%22%20is%20simply%20a%20series%20of,CONTRIBUTING.md%20file%20and%2For%20rely%20on%20help%20from%20others.) to explain _how_ the code works. 
 
 The tour files can be found in the `.tours` directory.
+
+### 10. Features of the sample
+
+**Tab that will prompt to github authentication:**
+
+![Tab Auth](Source/Images/account-linking2.png)
+
+**Github details for the user:**
+
+![Tab details](Source/Images/account-linking3.png)
+
+**Github Auth using Bot authentication**
+
+![Account Linking Sample](Source/Images/account-linking4.png)
+
+**The user can view the detaiks from ME also:**
+
+![Account Linking Sample](Source/Images/account-linking5.png)
 
 ## OAuth Issues
 
