@@ -48,7 +48,7 @@ This sample feature is to improve the subsequent loading time of an App that the
     - Navigate to `samples/app-cache-meetings` folder
     - Select `nodejs` folder and open it
 
-   B) Install node modules (Either open any local terminal inside your `nodejs` folder or open Visual Studio Code terminal by opening the project in Visual Studio Code)
+   Install node modules (Either open any local terminal inside your `nodejs` folder or open Visual Studio Code terminal by opening the project in Visual Studio Code)
 
     ```bash
     npm install
