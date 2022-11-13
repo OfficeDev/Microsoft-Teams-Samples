@@ -36,7 +36,7 @@ Azure AD, like most identity providers, does not allow its content to be placed 
 
 ## Pre-requisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash
