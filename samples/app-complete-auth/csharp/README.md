@@ -23,7 +23,7 @@ Using this C# sample, you can check authenticate in bot,tab and messaging extent
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   ```bash
   # determine dotnet version
