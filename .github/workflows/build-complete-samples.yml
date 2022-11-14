@@ -51,6 +51,10 @@ jobs:
               name: 'app-virtual-assistant'
               version: '3.1.301'
 
+            - project_path: 'samples/app-task-module/csharp/Microsoft.Teams.Samples.TaskModule.Web/Microsoft.Teams.Samples.TaskModule.Web.csproj'
+              name: 'app-task-module'
+              version: '4.6.1'
+
             - project_path: 'samples/bot-archive-groupchat-messages/csharp/FetchGroupChatMessages/FetchGroupChatMessages.csproj'
               name: 'bot-archive-groupchat-messages'
               version: '3.1.301'
@@ -156,6 +160,10 @@ jobs:
               version: '3.1.301'
 
             - project_path: 'samples/msgext-link-unfurling-reddit/csharp/dotnet/RLU.csproj'
+              name: 'msgext-link-unfurling-reddit'
+              version: '2.1.x'
+
+            - project_path: 'samples/msgext-link-unfurling-reddit/csharp/dotnet_user_auth/RLU.csproj'
               name: 'msgext-link-unfurling-reddit'
               version: '2.1.x'
 
@@ -385,7 +393,32 @@ jobs:
 
             - project_path: 'samples/msteams-application-qbot/Source/Microsoft.Teams.Apps.QBot.Web/Microsoft.Teams.Apps.QBot.Web.csproj'
               name: 'msteams-application-qbot'
-              version: '3.1'         
+              version: '3.1'  
+              
+            - project_path: 'samples/graph-proactive-installation/csharp/ProactiveAppInstallation/ProactiveAppInstallation.cspro'
+              name: 'graph-proactive-installation'
+              version: '3.1'
+
+            - project_path: 'samples/outgoing-webhook/csharp/WebhookSampleBot/WebhookSampleBot.csproj'
+              name: 'outgoing-webhook'
+              version: '4.6.1'
+
+            - project_path: 'samples/connector-todo-notification/csharp/TeamsToDoAppConnector/TeamsToDoAppConnector.csproj'
+              name: 'connector-todo-notification'
+              version: '4.6.1'
+
+            - project_path: 'samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Domain/Microsoft.Teams.Samples.ConversationalTabs.Domain.csproj'
+              name: 'bot-tab-conversations'
+              version: '4.6.1'
+
+            - project_path: 'samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Infrastructure/Microsoft.Teams.Samples.ConversationalTabs.Infrastructure.csproj'
+              name: 'bot-tab-conversations'
+              version: '4.6.1'
+
+            - project_path: 'samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/Microsoft.Teams.Samples.ConversationalTabs.Web.csproj'
+              name: 'bot-tab-conversations'
+              version: '4.6.1'
+
                   
 
       fail-fast: false
@@ -777,6 +810,18 @@ jobs:
 
             - project_path: 'samples/tab-app-monetization/nodejs/ClientApp'
               name: 'tab-app-monetization'
+              version: '16.x'
+
+            - project_path: 'samples/meetings-audio-state/nodejs'
+              name: 'meetings-audio-state'
+              version: '16.x'
+
+            - project_path: 'samples/tab-channel-context/nodejs/ClientApp'
+              name: 'tab-channel-context'
+              version: '16.x'
+
+            - project_path: 'samples/app-localization/nodejs/client'
+              name: 'app-localization'
               version: '16.x'
 
       fail-fast: false
