@@ -24,7 +24,7 @@ For reference please check [Tabs link unfurling and Stage View](https://docs.mic
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash
