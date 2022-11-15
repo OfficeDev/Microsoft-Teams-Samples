@@ -12,6 +12,9 @@ extensions:
  createdDate: "07/07/2021 01:38:27 PM"
 urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-csharp_dotnetcore
 ---
+
+# Teams Tab SSO Authentication Sample C#
+
 ## Interaction with app.
 
 ![setupteams](Images/TabChannelGroupSsoQuickStartModule.gif)
