@@ -9,7 +9,7 @@ on:
     branches:
       - main
     paths:
-      - 'samples/**'
+      - '**'
 env:
     CI: false
 jobs:
