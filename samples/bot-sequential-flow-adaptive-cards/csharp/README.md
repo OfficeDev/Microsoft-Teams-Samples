@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-bot-sequential-flow-adaptive-cards-csharp
 ---
 
-## Interaction with app
+# Sequential workflow adaptive cards C#
 
 ![Preview Image](SequentialUserSpecificFlow/Images/Preview.gif)
 
