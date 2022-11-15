@@ -14,7 +14,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-tab-personal-sso-quickstart-ts
 ---
 
-# Teams Tab SSO Authentication
+# Teams Personal Tab SSO Authentication Sample TS
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
 
