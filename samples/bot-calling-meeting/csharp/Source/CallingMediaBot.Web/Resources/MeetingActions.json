@@ -32,6 +32,14 @@
           "type": "task/fetch"
         }
       }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Play prompt to record",
+      "id": "playrecordprompt",
+      "data": {
+        "type": "playrecordprompt"
+      }
     }
   ]
 }

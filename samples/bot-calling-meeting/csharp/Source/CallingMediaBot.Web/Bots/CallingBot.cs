@@ -6,10 +6,13 @@ using System.Net;
 using System.Text.Json;
 using CallingMediaBot.Web.Extensions;
 using CallingMediaBot.Web.Options;
+using CallingMediaBot.Web.Services.BotFramework;
+using CallingMediaBot.Web.Services.CognitiveServices;
 using CallingMediaBot.Web.Services.MicrosoftGraph;
 using CallingMediaBot.Web.Services.TeamsRecordingService;
 using CallingMediaBot.Web.Utility;
 using Microsoft.Bot.Builder;
+using Microsoft.CognitiveServices.Speech;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Graph;
@@ -17,6 +20,7 @@ using Microsoft.Graph.Communications.Client.Authentication;
 using Microsoft.Graph.Communications.Common.Telemetry;
 using Microsoft.Graph.Communications.Core.Notifications;
 using Microsoft.Graph.Communications.Core.Serialization;
+using Participant = Microsoft.Graph.Participant;
 
 public class CallingBot : ActivityHandler
 {
@@ -26,15 +30,21 @@ public class CallingBot : ActivityHandler
     private readonly INotificationProcessor notificationProcessor;
     private readonly CommsSerializer serializer;
     private readonly BotOptions botOptions;
+
     private readonly ICallService callService;
     private readonly AudioRecordingConstants audioRecordingConstants;
     private readonly ITeamsRecordingService teamsRecordingService;
+    private readonly ISpeechService speechService;
+    private readonly IBotService botService;
+
     private readonly ILogger<CallingBot> logger;
 
     public CallingBot(
         ICallService callService,
         AudioRecordingConstants audioRecordingConstants,
         ITeamsRecordingService teamsRecordingService,
+        ISpeechService speechService,
+        IBotService botService,
         IGraphLogger graphLogger,
         IOptions<BotOptions> botOptions,
         ILogger<CallingBot> logger)
@@ -43,6 +53,8 @@ public class CallingBot : ActivityHandler
         this.callService = callService;
         this.audioRecordingConstants = audioRecordingConstants;
         this.teamsRecordingService = teamsRecordingService;
+        this.speechService = speechService;
+        this.botService = botService;
         this.graphLogger = graphLogger;
         this.logger = logger;
 
@@ -104,14 +116,17 @@ public class CallingBot : ActivityHandler
         {
             if (args.ChangeType == ChangeType.Created && call.State == CallState.Incoming)
             {
-                await AnswerIncomingCallAsync(call.Id, args.TenantId, args.ScenarioId).ConfigureAwait(false); ;
+                await AnswerIncomingCallAsync(call.Id, args.TenantId, args.ScenarioId).ConfigureAwait(false);
             }
             else if (
                 args.ChangeType == ChangeType.Updated
                 && call.State == CallState.Established
-                // The below helps to distinguish between two similar Established notifications that are sent
-                && call.MediaState?.Audio == MediaState.Active)
+                // The below helps to distinguish between two similar Established notifications that are sent for incoming 1:1 meetings
+                && (call.MediaState?.Audio == MediaState.Active
+                // And this covers calls that the bot creates
+                || call.Direction == CallDirection.Outgoing))
             {
+                var callDetails = await callService.Get(GetCallIdFromNotification(args));
                 await callService.Record(GetCallIdFromNotification(args), audioRecordingConstants.PleaseRecordYourMessage);
             }
         }
@@ -122,16 +137,50 @@ public class CallingBot : ActivityHandler
                 return;
             }
 
+            var callId = GetCallIdFromNotification(args);
             var recordingLocation = await teamsRecordingService.DownloadRecording(recording.RecordingLocation, recording.RecordingAccessToken);
 
+            try
+            {
+                var callDetails = callService.Get(callId);
+                var result = await speechService.ConvertWavToText(recordingLocation);
+
+                if (result.Reason == ResultReason.RecognizedSpeech)
+                {
+                    var threadId = (await callDetails)?.ChatInfo?.ThreadId;
+
+                    if (threadId != null)
+                    {
+                        await botService.SendToConversation($"You said: {result.Text}", threadId);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("Here");
+            }
+
             await callService.PlayPrompt(
-                GetCallIdFromNotification(args),
+                callId,
                 new MediaInfo
                 {
                     Uri = new Uri(botOptions.BotBaseUrl, recordingLocation).ToString(),
                     ResourceId = Guid.NewGuid().ToString(),
                 });
         }
+        //else if (args.ChangeType == ChangeType.Updated && args.ResourceData is object[] objs)
+        //{
+        //    if (objs.Length >0 && objs is Participant[] participants)
+        //    {
+        //        logger.LogInformation(objs[0].ToString());
+        //    }
+            // If there is only one participant remaining, and it's an application, it's probably this bot, so hang up
+            //if (participants.Count == 1 && participants[0].Info.Identity.Application != null)
+            //{
+            //    await callService.HangUp(GetCallIdFromNotification(args));
+            //    return;
+            //}
+        //}
     }
 
     private async Task AnswerIncomingCallAsync(string callId, string tenantId, Guid scenarioId)

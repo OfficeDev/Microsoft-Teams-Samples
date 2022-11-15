@@ -6,11 +6,13 @@ namespace CallingMediaBot.Web.Bots;
 using System.Threading;
 using CallingMediaBot.Web.AdaptiveCards;
 using CallingMediaBot.Web.Models;
+using CallingMediaBot.Web.Options;
 using CallingMediaBot.Web.Services.MicrosoftGraph;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
+using Microsoft.Extensions.Options;
 using Microsoft.Graph;
 using Newtonsoft.Json.Linq;
 
@@ -18,14 +20,24 @@ public class MessageBot : TeamsActivityHandler
 {
     private readonly ConversationState conversationState;
     private readonly IAdaptiveCardFactory adaptiveCardFactory;
+    private readonly AudioRecordingConstants audioRecordingConstants;
     private readonly ICallService callService;
+    private readonly AzureAdOptions azureAdOptions;
     private readonly ILogger<MessageBot> logger;
 
-    public MessageBot(ConversationState conversationState, IAdaptiveCardFactory adaptiveCardFactory, ICallService callService, ILogger<MessageBot> logger)
+    public MessageBot(
+        ConversationState conversationState,
+        IAdaptiveCardFactory adaptiveCardFactory,
+        AudioRecordingConstants audioRecordingConstants,
+        ICallService callService,
+        IOptions<AzureAdOptions> azureAdOptions,
+        ILogger<MessageBot> logger)
     {
         this.conversationState = conversationState;
         this.adaptiveCardFactory = adaptiveCardFactory;
+        this.audioRecordingConstants = audioRecordingConstants;
         this.callService = callService;
+        this.azureAdOptions = azureAdOptions.Value;
         this.logger = logger;
     }
 
@@ -117,7 +129,7 @@ public class MessageBot : TeamsActivityHandler
                 {
                     case "create":
                         var peoplePickerAadIds = peoplePicker.Split(',');
-                        var call = await callService.Create(peoplePickerAadIds.Select(p => new Identity { Id = p }).ToArray());
+                        var call = await callService.Create(null, null, peoplePickerAadIds.Select(p => new Identity { Id = p }).ToArray());
 
                         if (call != null)
                         {
@@ -168,12 +180,12 @@ public class MessageBot : TeamsActivityHandler
 
     private async Task SendResponse(ITurnContext<IMessageActivity> turnContext, string input, CancellationToken cancellationToken)
     {
+        var conversationStateAccessors = conversationState.CreateProperty<MeetingActionDetails>(nameof(MeetingActionDetails));
+        var conversationData = await conversationStateAccessors.GetAsync(turnContext, () => new MeetingActionDetails());
+
         switch (input)
         {
             case "showmeetingactions":
-                var conversationStateAccessors = conversationState.CreateProperty<MeetingActionDetails>(nameof(MeetingActionDetails));
-                var conversationData = await conversationStateAccessors.GetAsync(turnContext, () => new MeetingActionDetails());
-
                 if (conversationData.MeetingId == null)
                 {
                     // Without the Meeting ID we are unable to transfer or invite people to the call
@@ -183,20 +195,46 @@ public class MessageBot : TeamsActivityHandler
 
                 await SendMeetingActionsCard(turnContext, cancellationToken);
                 break;
-            //case "joinscheduledmeeting":
-                //throw new NotImplementedException();
-                //var onlineMeeting = await graph.CreateOnlineMeetingAsync();
-                //if (onlineMeeting != null)
-                //{
-                //    var statefullCall = await graph.JoinScheduledMeeting(onlineMeeting.JoinWebUrl);
-                //    if (statefullCall != null)
-                //    {
-                //        await turnContext.SendActivityAsync($"[Click here to Join the meeting]({onlineMeeting.JoinWebUrl})");
-                //    }
-                //}
-                //break;
+            case "playrecordprompt":
+                if (conversationData.MeetingId == null)
+                {
+                    // Without the Meeting ID we are unable to transfer or invite people to the call
+                    await turnContext.SendActivityAsync("Meeting ID not found, please use the 'Create call' button to create the call.");
+                    return;
+                }
+
+                await callService.Record(conversationData.MeetingId, audioRecordingConstants.PleaseRecordYourMessage);
+                break;
+            case "joinscheduledmeeting":
+                if (turnContext.Activity.ChannelData["meeting"] != null)
+                {
+                    var users = await TeamsInfo.GetPagedMembersAsync(turnContext, cancellationToken: cancellationToken);
+
+                    var call = await callService.Create(
+                        turnContext.Activity.Conversation.Id,
+                        new Identity {
+                            Id = users.Members[0].AadObjectId,
+                            AdditionalData = new Dictionary<string, object> { {"tenantId", azureAdOptions.TenantId }}
+                        });
+
+                    if (call != null)
+                    {
+                        // Save the meeting ID so it can be used for transferring/inviting participants to the call later.
+                        conversationData.MeetingId = call.Id;
+                        await conversationState.SaveChangesAsync(turnContext, false, cancellationToken);
+
+                        await turnContext.SendActivityAsync("Placed a call Successfully.", cancellationToken: cancellationToken);
+                    }
+                }
+                else
+                {
+                    await turnContext.SendActivityAsync("Meeting not found. Are you calling this from a meeting chat?", cancellationToken: cancellationToken);
+                }
+                break;
             default:
-                await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardFactory.CreateWelcomeCard()), cancellationToken);
+                await turnContext.SendActivityAsync(
+                    MessageFactory.Attachment(
+                        adaptiveCardFactory.CreateWelcomeCard(turnContext.Activity.ChannelData["meeting"] != null)), cancellationToken);
                 break;
         }
     }

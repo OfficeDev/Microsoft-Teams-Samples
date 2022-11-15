@@ -33,7 +33,8 @@
       "id": "joinscheduledmeeting",
       "data": {
         "type": "joinscheduledmeeting"
-      }
+      },
+      "$when": "${showJoinMeetingButton}"
     }
   ]
 }

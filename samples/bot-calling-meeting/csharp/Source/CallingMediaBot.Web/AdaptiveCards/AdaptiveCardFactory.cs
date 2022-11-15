@@ -8,11 +8,11 @@ using Microsoft.Bot.Schema;
 
 public class AdaptiveCardFactory : IAdaptiveCardFactory
 {
-    public Attachment CreateWelcomeCard()
+    public Attachment CreateWelcomeCard(bool showJoinMeetingButton)
     {
         var template = GetCardTemplate("WelcomeCard.json");
 
-        var serializedJson = template.Expand(new { });
+        var serializedJson = template.Expand(new { showJoinMeetingButton });
         return CreateAttachment(serializedJson);
     }
 

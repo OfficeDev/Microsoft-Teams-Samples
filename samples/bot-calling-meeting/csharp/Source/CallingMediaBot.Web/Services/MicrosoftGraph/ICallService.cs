@@ -17,9 +17,11 @@ public interface ICallService
     /// <summary>
     /// Create a new call
     /// </summary>
+    /// <param name="threadId">Thread Id of the meeting, provide if you want to join a meeting</param>
+    /// <param name="meetingOrganiser">Organiser of the meeting</param>
     /// <param name="users">Users to add to the call</param>
     /// <returns>The calls details</returns>
-    Task<Call> Create(params Identity[] users);
+    Task<Call> Create(string? threadId = null, Identity? meetingOrganiser = null, params Identity[] users);
 
     /// <summary>
     /// Get a calls details

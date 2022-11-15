@@ -2,6 +2,8 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace CallingMediaBot.Web.Services.MicrosoftGraph;
+
+using System.Threading;
 using CallingMediaBot.Web.Options;
 using Microsoft.Extensions.Options;
 using Microsoft.Graph;
@@ -10,6 +12,7 @@ public class CallService : ICallService
 {
     private readonly GraphServiceClient graphServiceClient;
     private readonly AzureAdOptions azureAdOptions;
+    private readonly BotOptions botOptions;
 
     private readonly string callbackUri;
 
@@ -17,6 +20,7 @@ public class CallService : ICallService
     {
         this.graphServiceClient = graphServiceClient;
         this.azureAdOptions = azureAdOptions.Value;
+        this.botOptions = botOptions.Value;
 
         callbackUri = new Uri(botOptions.Value.BotBaseUrl, "callback").ToString();
     }
@@ -37,19 +41,34 @@ public class CallService : ICallService
     }
 
     /// <inheritdoc/>
-    public Task<Call> Create(params Identity[] users)
+    public Task<Call> Create(string? threadId = null, Identity? meetingOrganiser = null, params Identity[] users)
     {
         var call = new Call
         {
+            Direction = CallDirection.Outgoing,
             CallbackUri = callbackUri,
+            ChatInfo = new ChatInfo
+            {
+                ThreadId = threadId,
+                MessageId = "0"
+            },
             TenantId = azureAdOptions.TenantId,
-            Targets = users.Select(user => new InvitationParticipantInfo
+            // If the meetingOrganiser is provided we don't need to invite people directly.
+            Targets = meetingOrganiser != null ? null : users.Select(user => new InvitationParticipantInfo
             {
                 Identity = new IdentitySet
                 {
                     User = user
                 }
             }),
+            MeetingInfo = meetingOrganiser == null ? null : new OrganizerMeetingInfo()
+            {
+                Organizer = new IdentitySet
+                {
+                    User = meetingOrganiser
+                }
+            },
+
             RequestedModalities = new List<Modality>()
             {
                 Modality.Audio

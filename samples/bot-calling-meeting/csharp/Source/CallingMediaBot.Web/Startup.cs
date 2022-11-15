@@ -5,6 +5,8 @@ namespace CallingMediaBot.Web;
 using CallingMediaBot.Web.AdaptiveCards;
 using CallingMediaBot.Web.Bots;
 using CallingMediaBot.Web.Options;
+using CallingMediaBot.Web.Services.BotFramework;
+using CallingMediaBot.Web.Services.CognitiveServices;
 using CallingMediaBot.Web.Services.MicrosoftGraph;
 using CallingMediaBot.Web.Services.TeamsRecordingService;
 using Microsoft.Bot.Builder;
@@ -48,10 +50,16 @@ public class Startup
 
         services.Configure<AzureAdOptions>(Configuration.GetSection("AzureAd"));
         services.Configure<BotOptions>(Configuration.GetSection("Bot"));
+        services.Configure<CognitiveServicesOptions>(Configuration.GetSection("CognitiveServices"));
         services.Configure<List<UserOptions>>(Configuration.GetSection("Users"));
 
         services.AddSingleton<IAdaptiveCardFactory, AdaptiveCardFactory>();
         services.AddMicrosoftGraphServices(options => Configuration.Bind("AzureAd", options));
+
+        services.AddSingleton<IConnectorClientFactory, ConnectorClientFactory>();
+        services.AddScoped<ISpeechService, SpeechService>();
+
+        services.AddTransient<IBotService, BotService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
