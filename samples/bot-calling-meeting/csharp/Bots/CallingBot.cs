@@ -226,7 +226,6 @@ namespace CallingBotSample.Bots
 
         private async Task BotAnswerIncomingCallAsync(string callId, string tenantId, Guid scenarioId)
         {
-            var resourceId = Guid.NewGuid().ToString();
             Task answerTask = Task.Run(async () =>
                                 await this.graphServiceClient.Communications.Calls[callId].Answer(
                                     callbackUri: new Uri(options.BotBaseUrl, "callback").ToString(),
@@ -237,7 +236,7 @@ namespace CallingBotSample.Bots
                                             new MediaInfo()
                                             {
                                                 Uri = new Uri(options.BotBaseUrl, "audio/speech.wav").ToString(),
-                                                ResourceId = resourceId,
+                                                ResourceId = Guid.NewGuid().ToString(),
                                             }
                                         }
                                     },
@@ -258,7 +257,7 @@ namespace CallingBotSample.Bots
                                MediaInfo = new MediaInfo
                                {
                                    Uri = new Uri(options.BotBaseUrl, "audio/speech.wav").ToString(),
-                                   ResourceId = resourceId,
+                                   ResourceId = Guid.NewGuid().ToString(),
                                }
                            }
                        })
