@@ -35,7 +35,7 @@
   ],
   "configurableTabs": [
     {
-      "configurationUrl": "https://{{Domain Name}}/config",
+      "configurationUrl": "https://{{Base_URL}}/config",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -52,7 +52,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{Domain-name}}"
+    "{{domain-name}}"
   ],
   "authorization": {
     "permissions": {

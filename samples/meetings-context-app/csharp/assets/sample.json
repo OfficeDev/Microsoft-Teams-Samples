@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-context-app/csharp/MeetingContextApp/Images/meetingTabContext.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-context-app/csharp/MeetingContextApp/Images/meeting_context_csharp.gif",
         "alt": "Solution UX showing meeting context"
       }
     ],

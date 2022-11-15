@@ -32,7 +32,7 @@ const Questions = (): React.ReactElement => {
             url: `${window.location.origin}/questions`,
         };
 
-        microsoftTeams.tasks.startTask(taskInfo, (err, questionsJson) => {
+        microsoftTeams.tasks.startTask(taskInfo, (err: any, questionsJson: any) => {
             if (err) {
                 console.log("Some error occurred in the task module")
                 return
@@ -73,7 +73,7 @@ const Questions = (): React.ReactElement => {
             url: `${window.location.origin}/edit?editText=` + editText,
         };
 
-        microsoftTeams.tasks.startTask(taskInfo, (err, question: string) => {
+        microsoftTeams.tasks.startTask(taskInfo, (err: any, question: any) => {
             if (err) {
                 console.log("Some error occurred in the task module")
                 return

@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-adaptivecards-user-specific-views/csharp/docs/Me.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-adaptivecards-user-specific-views/csharp/docs/UserSpecificView_all.gif",
         "alt": "Solution UX showing user specific views in adaptive cards"
       }
     ],

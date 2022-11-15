@@ -9,7 +9,7 @@
       "This sample shows the contents of tab context object in a private and shared channel."
     ],
     "creationDateTime": "2022-06-17",
-    "updateDateTime": "2022-08-08",
+    "updateDateTime": "2022-10-21",
     "products": [
       "Teams"
     ],
@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-channel-context/nodejs/Images/privateChannel.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-channel-context/nodejs/Images/Preview.gif",
         "alt": "Solution UX showing tab context in channel"
       }
     ],

@@ -12,9 +12,6 @@ extensions:
   createdDate: "03/09/2022 11:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-bot-adaptivecards-user-specific-views-csharp
 ---
-
-# User Specific Views in Adaptive Cards
-
 #### About
 This sample illustrates a few different ways developers can consume user-specific views in Adaptive cards.
 
@@ -52,13 +49,11 @@ All the cards display the following information:
 
 You can extend the `Me` card to automatically refresh for a list of users by adding a list of user MRIs to `userIds` in Adaptive Card.
 
-###### User specific view - workflow
+##### User specific view - workflow
 
 The following GIF captures `Automatic refresh`, `Manual refresh`, and `Update Base Card` actions in `Me` card.
 
-![OnlyMe](docs/Me.gif)
-
-![UML](docs/UserSpecificView_Me.png)
+![bot-conversations ](docs/UserSpecificView_Me.png)
 
 The diagram above captures the sequence of events for `Me` card.
 
@@ -69,53 +64,204 @@ Workflow:
 
 In the case of `All Users`, the refresh will automatically be invoked for all users (in this case for user B as well).
 
-#### Prerequisites
-* Make sure you have an active [Azure subscription](https://azure.microsoft.com/en-us/free/).
-* Install [Visual Studio](https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio?view=vs-2022) or [Visual Studio Code](https://code.visualstudio.com/download) to run and debug the sample code.
-  * [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
-* Install [ngrok](https://ngrok.com/download) for local setup. (or any other tunneling solution). 
->Note: You may need a paid version of ngrok to be able to run the setup locally.
+## Teams Conversation Bot
+Bot Framework v4 Conversation Bot sample for Teams.
 
-#### Setup
+This bot has been created using [Bot Framework](https://dev.botframework.com). This sample shows
+how to incorporate basic conversational flow into a Teams application. It also illustrates a few of the Teams specific calls you can make from your bot.
 
-##### Bot setup
-* [Register a bot with Azure](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-4.0&tabs=userassigned).
-  * Make sure you copy and save the Azure Bot resource App ID and password.
-* [Connect the bot to Microsoft Teams](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0).
-* Run ngrok and point it to port: 3978.
+## Interaction with bot
+
+#### Me Action
+![bot-conversations ](docs/UserSpecificView_Me.gif)
+
+#### AllUser Action
+![bot-conversations ](docs/UserSpecificView_all.gif)
+
+## Prerequisites
+
+- Microsoft Teams is installed and you have an account
+- [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
+- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+
+## Setup
+
+> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
+the Teams service needs to call into the bot.
+
+1) Run ngrok - point to port 3978
+
+    ```bash
+    ngrok http --host-header=rewrite 3978
     ```
-    ngrok http -host-header=rewrite 3978 
+
+1) Setup for Bot
+
+   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+    - For bot handle, make up a name.
+    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
+    
+   In the new Azure Bot resource in the Portal, 
+    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
+
+1) Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-    * Make sure you copy and save the `HTTPS` url (it should look like `https://<randomsubdomain>.ngrok.io`).
 
-* Update Bot messaging endpoint to ngrok URL with the messaging endpoint. (ex. `https://<randomsubdomain>.ngrok.io/api/messages`
+1) If you are using Visual Studio
+   - Launch Visual Studio
+   - File -> Open -> Project/Solution
+   - Navigate to `samples/user-specific-views/csharp` folder
+   - Select `UserSpecificViews.csproj` or `UserSpecificViews.sln`file
 
-##### Project setup
-* Clone the repo or download the sample code to your machine.
-* Update the following settings in `appsettings.json`
-  * `MicrosoftAppId` - App ID saved earlier.
-  * `MicrosoftAppPassword` - App secret saved earlier.
-* Build and run the sample code in Visual studio / Visual studio code.
+1) Update the `appsettings.json` configuration for the bot to use the `MicrosoftAppId`, `MicrosoftAppPassword` generated in previous steps (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
 
-##### Add AppPackage to Teams
-* Update the following in the manifest.json.
-  * `{AppId}` - Replace with app ID saved earlier.
-* Zip the manifest and app icons. (say `sample.zip`)
-* Side load the application or add the application to application catalog to try it.
+1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
-#### Basic Tests
+1) __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the  `AppPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    
+    - **Zip** up the contents of the `AppPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+    - Add the app to personal/team/chat/Meeting scope (Supported scopes)
+
+**Basic Tests**
 * Tag the bot and send any message. The bot should respond with an adaptive card which should have options to try out the different cards.
 * `Me` card should automatically refresh for sender only.
 * `All Users` card should automatically refresh for all users in the chat. (as long as total number of users are <= 60)
 * `Manual refresh` action should update the user-specific view for the user.
 * `Update Base Card` action should update the message for all the users. The user should not have any option to refresh the message after this.
 
-#### Implementation:
+**Implementation:**
 * `BotActivityHandler`: Has the logic to handle incoming bot messages (Invokes and user messages).
 * `CardFactory`: Has the logic to prepare different types of Adaptive Cards (using Template library).
 * `assets\templates\*`: contains all the adaptive cards definitions.
 
-#### FAQ
+## Running the sample
+
+You can interact with this bot in Teams by sending it a message, or selecting a command from the command list. The bot will respond to the following strings.
+
+1. **Show Welcome**
+
+  - **Result:** The bot will send the welcome card for you to interact with
+  - **Valid Scopes:** personal, group chat, team chat
+
+  - **Personal Scope Interactions:**
+  
+  **Search Application:**
+  
+  ![Serach-App ](docs/01_SearchApp.png)
+
+  **Add Application:**
+  
+  ![personal-AddBot ](docs/02_AddAppaspersonal.png)
+
+  **Me Flow**
+
+ **Show Welcome command interaction:**
+ 
+  ![personal-WelcomeCard-Interaction ](docs/03_defaultcard.png)
+  
+ **Show Action command interaction with Me:**
+ 
+ ![personal-WelcomeCard-Me](docs/04_clickonMe.png)
+ 
+ **Show Response Card :**
+ 
+ ![personal-WelcomeCard-Response](docs/05_meclickresponsecard.png)
+ 
+  **On Manual Refresh Click:**
+  
+ ![personal-WelcomeCard-ManualRefresh](docs/05_meclickresponsecard.png)
+ 
+ **On Update Base Card Click:**
+ 
+ ![personal-WelcomeCard-UpdatebaseCardClick](docs/11_updateBasecard.png)
+ 
+ **Response Update Base Card Click:**
+ 
+ ![personal-WelcomeCard-ResponseUpdatebaseCardClick](docs/12_responseBasecard.png)
+ 
+**Flow with all Users**
+
+ **Show Action command interaction with All Users:**
+ 
+ ![personal-WelcomeCard-alluser](docs/all_02_onclickallUsers.png)
+ 
+ **Show Response Card :**
+ 
+ ![personal-WelcomeCard-allResponse](docs/all_03_responseclickallUsers.png)
+ 
+  **On Manual Refresh Click:**
+  
+ ![personal-WelcomeCard-allManualRefresh](docs/all_04_onmanualclick.png)
+ 
+ **On Update Base Card Click:**
+ 
+ ![personal-WelcomeCard-allUpdatebaseCardClick](docs/all_08_UpdateBaseCard.png)
+ 
+ 
+  - **Team Scope Interactions:**
+  
+  **About UI**
+  
+  ![Team-scope-app](docs/01_TeamScope.png)
+ 
+  **Team Selection**
+	
+  ![Team-scope-app](docs/02_TeamScope_teamselection.png)
+  
+  **Selected Team**
+  
+  ![Team-scope-app](docs/03_TeamScope_teamselect.png)
+  
+  **Welcome intraction card**
+  
+  ![Team-scope-app](docs/04_TeamScope_command.png)
+  
+  
+  - **Chat Scope Interactions:**
+  
+  **About UI**
+  
+  ![Chat-scope-app](docs/chatscope_01.png)
+  
+  **Chat Selection**
+	
+  ![Chat-scope-app](docs/chatscope_02.png)
+  
+  **Selected Chat**
+  
+  ![Chat-scope-app](docs/chatscope_03.png)
+  
+  **Welcome intraction card**
+  
+  ![Chat-scope-app](docs/04_TeamScope_command.png)
+  
+  
+  - **Meeting Scope Interactions:**
+  
+  **About UI**
+
+  ![Meeting-scope-app](docs/Meetingscop_01.png)
+  
+  **Meeting Selection**
+	
+  ![Meeting-scope-app](docs/Meetingscop_02.png)
+  
+  **Selected Meeting**
+  
+  ![Meeting-scope-app](docs/Meetingscop_03.png)
+  
+  **Welcome intraction card**
+  
+  ![Meeting-scope-app](docs/Meetingscop_04.png)
+  
+## FAQ
 
 ##### How to implement user-specific views in a group of >60 users?
 If your scenario requires a user-specific view for all the users in a chat, we recommend you do the following:
@@ -141,5 +287,7 @@ Consider following:
 2. User A logins to Teams desktop application and opens the chat.
 3. User A will see the base card and the Teams client will trigger auto-refresh and display the updated refresh card received from the bot.
 4. When the same user A logins to Teams mobile/web application, and opens the chat, he/she will see the base card, and Teams client will trigger an auto-refresh to get the updated card from the bot.
-
 If User A opens the chat again on either of these clients, it will show the cached card (updated refresh card).
+
+## Further reading
+[User Specific Views](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/user-specific-views?tabs=mobile%2CC)

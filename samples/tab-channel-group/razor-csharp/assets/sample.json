@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-channel-group/razor-csharp/Images/Redconfigure.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-channel-group/razor-csharp/Images/ChannelGroupTabModule.gif",
         "alt": "Solution UX showing channel/group tabs in asp.net core with razor"
       }
     ],

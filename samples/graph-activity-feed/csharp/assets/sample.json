@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://user-images.githubusercontent.com/50989436/109036739-eb303b00-76ef-11eb-91d2-806c2b180396.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-activity-feed/csharp/ActivityFeedNotification/Images/ActivityFeed.gif"",
         "alt": "Solution UX showing activity feed notification"
       }
     ],

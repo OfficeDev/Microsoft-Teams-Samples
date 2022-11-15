@@ -12,6 +12,10 @@
     <script>
         microsoftTeams.initialize();
 
+        microsoftTeams.getContext((context) => {
+            console.log("context is " + JSON.stringify(context));
+        });
+
         function submit() {
             const input = document.querySelector('input[type="file"]');
             const file = input.files[0];

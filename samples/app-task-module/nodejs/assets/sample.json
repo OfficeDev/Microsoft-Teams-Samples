@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-task-module/nodejs/Images/YoutubeTaskModule.PNG",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-task-module/nodejs/Images/AppTaskModule.gif",
         "alt": "Solution UX showing microsoft teams task module"
       }
     ],

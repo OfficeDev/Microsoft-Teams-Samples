@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-activity-feed/nodejs/Images/GroupChatNotification.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-activity-feed/nodejs/Images/activity-feed.gif",
         "alt": "Solution UX showing activity feed notification"
       }
     ],
