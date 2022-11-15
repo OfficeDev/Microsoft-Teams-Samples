@@ -5,7 +5,6 @@ namespace CallingMediaBot.Web.Bots;
 
 using System.Threading;
 using CallingMediaBot.Web.AdaptiveCards;
-using CallingMediaBot.Web.Interfaces;
 using CallingMediaBot.Web.Models;
 using CallingMediaBot.Web.Services.MicrosoftGraph;
 using Microsoft.Bot.Builder;
@@ -19,15 +18,13 @@ public class MessageBot : TeamsActivityHandler
 {
     private readonly ConversationState conversationState;
     private readonly IAdaptiveCardFactory adaptiveCardFactory;
-    private readonly IGraph graph;
     private readonly ICallService callService;
     private readonly ILogger<MessageBot> logger;
 
-    public MessageBot(ConversationState conversationState, IAdaptiveCardFactory adaptiveCardFactory, IGraph graph, ICallService callService, ILogger<MessageBot> logger)
+    public MessageBot(ConversationState conversationState, IAdaptiveCardFactory adaptiveCardFactory, ICallService callService, ILogger<MessageBot> logger)
     {
         this.conversationState = conversationState;
         this.adaptiveCardFactory = adaptiveCardFactory;
-        this.graph = graph;
         this.callService = callService;
         this.logger = logger;
     }
