@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-msgext-link-unfurling
 ---
 
-## TeamsLinkUnfurlingBot
+# Teams Link Unfurl Bot Node.js
 
 If you copy and paste a link from `https://www.botframework.com` or your ngrok base url, it wil unfurl inside compose area.
 
