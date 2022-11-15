@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-context-app-nodejs
 
 ---
 
-## Meeting context
+# Teams Meeting Context Sample Node.js
 
 This sample shows the contents of meeting tab context object in a meeting tab and shows the output of Meeting's API `TeamsInfo.getMeetingParticipant` and `TeamsInfo.getMeetingInfo` using bot commands.
 
