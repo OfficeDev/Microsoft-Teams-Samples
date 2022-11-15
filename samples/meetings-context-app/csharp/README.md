@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-context-app-csharp
 
 ---
 
-## Meeting context
+# Teams Meeting Context Sample C# 
 
 This sample shows the contents of meeting tab context object in a meeting tab and shows the output of Meeting's API `TeamsInfo.getMeetingParticipant` and `TeamsInfo.getMeetingInfo` using bot commands.
 
