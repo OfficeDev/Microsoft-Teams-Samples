@@ -98,7 +98,6 @@ Please fill in the following values into the `Manifest/Manifest.json` file (call
 | Parameter  | Value |
 |---|---|
 | Bot Id  | The "Application (client) id" from step 3. |
-| Tab domain | The domain from step 1 |
 | Azure Ad Application Id | the "Application (client) id" from step 2| 
 |Base Url | The base url of your application. For example, if you are using ngrok then your base URL will be like: `https://590a2d6f8b31.ngrok.io`.
 |Base Url Domain| The base url domain of your application. For example, if you are using ngrok then your domain name will be like: `590a2d6f8b31.ngrok.io`.
