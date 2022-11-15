@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-tab-personal-sso-quickstart-csharp_dotnetcore
 ---
 
-# Teams Tab SSO Authentication
+# Teams Personal Tab SSO Authentication Sample C#
 
 This sample illustrates how to implement SSO authentication for Teams Tab.
 
