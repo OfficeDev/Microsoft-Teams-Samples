@@ -13,13 +13,13 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-meetings-details-tab-nodejs
 ---
 
-## Interaction with app
-
-![Preview Image](Images/Preview.gif)
+# Meeting Details Tab Sample Node.js 
 
 This sample app illustrates the implementation of Details Tab in Meeting. User can create a poll and post poll in meeting chat and participants can submit their feedback in Meeting.
 
-![Preview Image](images/Preview.gif)
+## Interaction with app
+
+![Preview Image](Images/Preview.gif)
 
 ## Prerequisites
 
