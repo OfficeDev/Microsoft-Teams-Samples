@@ -4,8 +4,6 @@
 namespace CallingMediaBot.Web;
 using CallingMediaBot.Web.AdaptiveCards;
 using CallingMediaBot.Web.Bots;
-using CallingMediaBot.Web.Helpers;
-using CallingMediaBot.Web.Interfaces;
 using CallingMediaBot.Web.Options;
 using CallingMediaBot.Web.Services.MicrosoftGraph;
 using CallingMediaBot.Web.Services.TeamsRecordingService;
@@ -52,7 +50,6 @@ public class Startup
         services.Configure<BotOptions>(Configuration.GetSection("Bot"));
         services.Configure<List<UserOptions>>(Configuration.GetSection("Users"));
 
-        services.AddScoped<IGraph, GraphHelper>();
         services.AddSingleton<IAdaptiveCardFactory, AdaptiveCardFactory>();
         services.AddMicrosoftGraphServices(options => Configuration.Bind("AzureAd", options));
     }
