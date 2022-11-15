@@ -389,11 +389,7 @@ jobs:
 
             - project_path: 'samples/msteams-application-qbot/Source/Microsoft.Teams.Apps.QBot.Web/Microsoft.Teams.Apps.QBot.Web.csproj'
               name: 'msteams-application-qbot'
-              version: '3.1'  
-              
-            - project_path: 'samples/graph-proactive-installation/csharp/ProactiveAppInstallation/ProactiveAppInstallation.cspro'
-              name: 'graph-proactive-installation'
-              version: '3.1'                  
+              version: '3.1'                
 
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
