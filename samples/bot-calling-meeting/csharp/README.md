@@ -104,7 +104,7 @@ Click on Add Permissions to commit your changes.
 	# Calling Connect-MicrosoftTeams using no parameters will open a window allowing for MFA accounts to authenticate
 	Connect-MicrosoftTeams
 
-	New-CsApplicationAccessPolicy -Identity “<<policy-identity/policy-name>>” -AppIds "<<microsoft-app-id>>" -Description "<<Policy-description>>"
+	New-CsApplicationAccessPolicy -Identity “<<policy-identity/policy-name>>” -AppIds "<<microsoft-app-id>>" -Description "<<policy-description>>"
 	Grant-CsApplicationAccessPolicy -PolicyName “<<policy-identity/policy-name>>” -Identity "<<object-id-of-the-user-to-whom-policy-need-to-be-granted>>"
 
   eg:
@@ -114,13 +114,12 @@ Click on Add Permissions to commit your changes.
 	New-CsApplicationAccessPolicy -Identity Meeting-policy-dev -AppIds "d0bdaa0f-8be2-4e85-9e0d-2e446676b88c" -Description "Online meeting policy - contoso town"
 	Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "782f076f-f6f9-4bff-9673-ea1997283e9c"
 ```
-![PolicySetup ](Images/PolicySetup.PNG)
+![PolicySetup](Images/PolicySetup.PNG)
 
-14. Update `PolicyName`, `azure-client-id`, `policy-description`, `object-id for user` in powershell script.
+14. Update `PolicyName`, `microsoft-app-id`, `policy-description`, `object-id-of-the-user-to-whom-policy-need-to-be-granted` in powershell script.
 15. Run `Windows Powershell PSI` as an administrator and execute above script.
 16. Run following command to verify policy is create successfully or not
-`Get-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "<<azure-client-Id>>"
-	`
+`Get-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "<<microsoft-app-id>>"`
 ## Setup Bot Service
 
 1. In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration)
@@ -136,7 +135,7 @@ For example `https://contoso.com/teamsapp/callback`
 9. Save your changes.
 
 ### Configuring the sample:
-1. __*Update appsetting.json for calling Bot*__
+1. __*Update appsettings.json for calling Bot*__
 ````
 {
   "MicrosoftAppId": "",
