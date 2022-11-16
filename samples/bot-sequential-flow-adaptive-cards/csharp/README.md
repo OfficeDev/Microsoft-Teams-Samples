@@ -15,9 +15,10 @@ urlFragment: officedev-microsoft-teams-samples-bot-sequential-flow-adaptive-card
 
 # Sequential workflow adaptive cards C#
 
-![Preview Image](SequentialUserSpecificFlow/Images/Preview.gif)
-
 This sample illustrates sequential workflow, user specific views and upto date adaptive cards bot and the list of incident created can be seen in messaging extension and can share a specific incident to the chat/team.
+
+## Interaction with app
+![Preview Image](SequentialUserSpecificFlow/Images/Preview.gif)
 
 ## Prerequisites
 
