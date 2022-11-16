@@ -51,7 +51,7 @@ public class Startup
         services.Configure<AzureAdOptions>(Configuration.GetSection("AzureAd"));
         services.Configure<BotOptions>(Configuration.GetSection("Bot"));
         services.Configure<CognitiveServicesOptions>(Configuration.GetSection("CognitiveServices"));
-        services.Configure<List<UserOptions>>(Configuration.GetSection("Users"));
+        services.Configure<UsersOptions>(Configuration.GetSection("Users"));
 
         services.AddSingleton<IAdaptiveCardFactory, AdaptiveCardFactory>();
         services.AddMicrosoftGraphServices(options => Configuration.Bind("AzureAd", options));

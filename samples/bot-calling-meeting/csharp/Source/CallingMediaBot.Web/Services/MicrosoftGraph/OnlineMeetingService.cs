@@ -11,9 +11,9 @@ using Microsoft.Graph;
 public class OnlineMeetingService : IOnlineMeetingService
 {
     private readonly GraphServiceClient graphServiceClient;
-    private readonly IEnumerable<UserOptions> users;
+    private readonly UsersOptions users;
 
-    public OnlineMeetingService(GraphServiceClient graphServiceClient, IOptions<List<UserOptions>> users)
+    public OnlineMeetingService(GraphServiceClient graphServiceClient, IOptions<UsersOptions> users)
     {
         this.graphServiceClient = graphServiceClient;
         this.users = users.Value;
@@ -29,7 +29,7 @@ public class OnlineMeetingService : IOnlineMeetingService
             Subject = subject,
         };
 
-        var userId = users.First().Id;
+        var userId = users.UserIdWithAssignedOnlineMeetingPolicy;
 
         return graphServiceClient.Users[userId].OnlineMeetings
             .Request()
@@ -39,7 +39,7 @@ public class OnlineMeetingService : IOnlineMeetingService
     /// <inheritdoc/>
     public Task<OnlineMeeting> Get(string meetingId)
     {
-        var userId = users.First().Id;
+        var userId = users.UserIdWithAssignedOnlineMeetingPolicy;
 
         return graphServiceClient.Users[userId].OnlineMeetings[meetingId]
             .Request()
