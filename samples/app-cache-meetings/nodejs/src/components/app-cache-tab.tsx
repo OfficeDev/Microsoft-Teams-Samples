@@ -91,9 +91,8 @@ const AppCacheTab = () => {
           const newItem = logItem("Handlers", "orange", "Registered load and before unload handlers. Ready for app caching.");
           setItems((Items) => [...Items, newItem]);
         }
-        
-        else 
-        {
+
+        else {
           let newItem = logItem("ERROR", "red", "could not get context");
           setItems((Items) => [...Items, newItem]);
         }
@@ -105,6 +104,10 @@ const AppCacheTab = () => {
       console.log("useEffect cleanup - Tab");
     };
 
+  /// </summary>
+  /// Below Comment line no. 110 is to disable warning from Eslint.
+  /// </summary>
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initState]);
 
   const jsx = initState ? (
