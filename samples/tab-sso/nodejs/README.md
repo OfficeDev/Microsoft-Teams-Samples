@@ -141,14 +141,14 @@ Tab auth in browser with user details
 
 Compared to the Hello World sample, this app has four additional routes:
 1. `/ssoDemo` renders the tab UI. 
-    * This is the tab called `Auth Tab` in personal app inside Teams. The purpose of this page is primarily to execute the `auth.js` file that handles initiates the authentication flow.
+    * This is the tab called `Auth Tab` in personal app inside Teams. The purpose of this page is primarily to execute the `ssoDemo.js` file that handles and initiates the authentication flow.
     * This tab can also be added to Teams channels
 2. `/getProfileOnBehalfOf` does not render anything but instead is the server-side route for initiating the [on-behalf-of flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-oauth2-on-behalf-of-flow). 
     * It takes the token it receives from the `/ssoDemo` page and attemps to exchange it for a new token that has elevated permissions to access the `profile` Graph API (which is usually used to retrieve the users profile photo).
     * If it fails (because the user hasn't granted permission to access the `profile` API), it returns an error to the `/ssoDemo` page. This error is used to display the "Consent" button which uses the Teams SDK to open the `/auth/start` page in a pop-up window.
 3. `/auth/start` and `/auth/end` routes are used if the user needs to grant further permissions. This experience happens in a seperate window. 
     * The `/auth/start` page merely creates a valid AAD authorization endpoint and redirects to that AAD consent page.
-    * Once the user has consented to the permissions, AAD redirects the user back to `/auth/end`. This page is responsible for returning the results back to the `/auth` page by calling the `notifySuccess` API.
+    * Once the user has consented to the permissions, AAD redirects the user back to `/auth/end`. This page is responsible for returning the results back to the `/ssoDemo` page by calling the `notifySuccess` API.
     * This workflow is only neccessary if you want authorization to use additional Graph APIs. Most apps will find this flow unnesseccary if all they want to do is authenticate the user.
     * This workflow is the same as our standard [web-based authentication flow](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-tab-aad#navigate-to-the-authorization-page-from-your-popup-page) that we've always had in Teams before we had single sign-on support. It just so happens that it's a great way to request additional permissions from the user, so it's left in this sample as an illustration of what that flow looks like.
 
@@ -164,7 +164,7 @@ This Javascript file is served from the `/ssoDemo` page and handles most of the 
 This function asks Teams for an authentication token from AAD. The token is displayed so you can try it in Postman.
 
 2. getServerSideToken() -
-This function sends the token to the backend to exchange for elevated permissions using AAD's [on-behalf-of flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-oauth2-on-behalf-of-flow). In this case, it sends the token to the `/auth/token` route.
+This function sends the token to the backend to exchange for elevated permissions using AAD's [on-behalf-of flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-oauth2-on-behalf-of-flow). In this case, it sends the token to the `/getProfileOnBehalfOf` route.
 
 3. useServerSideToken() -
 This function uses the token to call the Microsoft Graph and display the resulting JSON.
