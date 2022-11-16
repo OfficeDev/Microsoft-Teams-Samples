@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-tab-stage-view-nodejs",
+    "source": "officeDev",
+    "title": "Stage View",
+    "shortDescription": "Microsoft Teams tab sample app for demonstrating tab in stage view",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-stage-view/nodejs",
+    "longDescription": [
+      "Microsoft Teams tab sample app for demonstrating tab in stage view"
+    ],
+    "creationDateTime": "2021-06-10",
+    "updateDateTime": "2022-10-21",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "javascript"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "express"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "tab,bot"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-stage-view/nodejs/Images/TabStageView.gif",
+        "alt": "Solution UX showing stage view"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+      }
+    ]
+  }
+]

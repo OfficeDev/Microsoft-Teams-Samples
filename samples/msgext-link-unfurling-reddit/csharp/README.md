@@ -8,8 +8,9 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:27"
+ contentType: samples
+ createdDate: "07/07/2021 01:38:27 PM"
+urlFragment: officedev-microsoft-teams-samples-msgext-link-unfurling-reddit-csharp
 ---
 
 # Link Unfurling for Reddit Links

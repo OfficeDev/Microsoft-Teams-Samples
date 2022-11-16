@@ -3,7 +3,7 @@
 ## Prerequisites
 1. Clone the repository to your system.
 2. The deployment script uses Az modules, if you have AzureRM installed, remove it before running this script.
-To remove, run this command: `Uninstall -AzureRM`.
+To remove, run this command: `Uninstall-AzureRM`.
 3. Upgrade to Powershell [5.1.22000.653 or later](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2). Run `$PSVersionTable.PSVersion` to check the installed version.
 4. Install .Net 3.1 SDK. [Download](https://dotnet.microsoft.com/en-us/download/dotnet/3.1)
 5. Install npm. [Instructions](https://docs.npmjs.com/cli/v8/configuring-npm/install)
@@ -49,6 +49,11 @@ The script will create an application package and drop the zip file in the `scri
 The script will write deployment logs to `deployment.log` file in the `scripts` folder. If a deployment fails, check the `deployment.log` file for failure reason.
 
 Make sure that you have upgraded to Powershell [5.1.22000.653 or later](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.2). Run `$PSVersionTable.PSVersion` to check the installed version.
+
+### Max students in a team
+The solution is tested for upto 1,000 users in a team. If your tenant has more than 1,000 users in a team, we suggest you to make a few changes to the app logic.
+
+When the application is installed in a team, it fetches the team and all the members details in that team (refer to `BotActivityHandler#BotAddedToTeamAsync`), and this can result in a long running task which will timeout if it takes more than 15 seconds to execute. Refer to this [documentation](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-howto-long-operations-guidance?view=azure-bot-service-4.0) to understand how you can handle such long running operations.
 
 ## Contents
 

@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-msgext-action-quickstart-js",
+    "source": "officeDev",
+    "title": "Action messaging extension",
+    "shortDescription": "Simple action messaging extension",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-action-quickstart/js",
+    "longDescription": [
+      "Simple action messaging extension"
+    ],
+    "creationDateTime": "2021-07-07",
+    "updateDateTime": "2022-04-05",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "javascript"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "express"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "msgext"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-action-quickstart/js/Images/msgextactionquickstartModule.gif",
+        "alt": "Solution UX showing action messaging extension"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+      }
+    ]
+  }
+]

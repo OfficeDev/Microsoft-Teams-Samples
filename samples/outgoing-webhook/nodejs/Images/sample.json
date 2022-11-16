@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-outgoing-webhook-nodejs",
+    "source": "officeDev",
+    "title": "Outgoing webhook in NodeJS",
+    "shortDescription": "This project is an implementation of a very simple Outgoing Webhook for Microsoft Teams. All it does is verify that what's sending messages matches the Outgoing Webhook that was created in Teams, and it echoes back whatever is sent to it.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/outgoing-webhook/nodejs",
+    "longDescription": [
+      "This project is an implementation of a very simple Outgoing Webhook for Microsoft Teams. All it does is verify that what's sending messages matches the Outgoing Webhook that was created in Teams, and it echoes back whatever is sent to it."
+    ],
+    "creationDateTime": "2017-12-05",
+    "updateDateTime": "2021-11-29",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "javascript"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "express"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": ""
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/outgoing-webhook/nodejs/Images/Outgoingwebhook.gif",
+        "alt": "Solution UX showing outgoing webhook in nodejs"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+      }
+    ]
+  }
+]

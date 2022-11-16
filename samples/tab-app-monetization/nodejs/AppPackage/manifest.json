@@ -1,0 +1,62 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+ "manifestVersion": "1.12",
+  "version": "1.0.0",
+  "id": "{{App-id}}",
+  "packageName": "com.teams.appmonetization",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "App Purchase.",
+    "full": "This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk."
+  },
+  "description": {
+    "short": "App Monetization in tab.",
+    "full": "This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk."
+  },
+  "accentColor": "#5558AF",
+    "staticTabs": [
+    {
+      "entityId": "index",
+      "name": "App purchase tab",
+      "contentUrl": "https://{{Domain-Name}}/tab",
+      "websiteUrl": "https://{{Domain-Name}}/tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.ngrok.io",
+    "{Domain-Name}}"
+  ],
+  "subscriptionOffer": {
+     "offerId": "{{Plan-id}}"  
+     },
+    "webApplicationInfo": {
+    "id": "{{App-id}}",
+    "resource": "https://RscBasedStoreApp"
+    },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "InAppPurchase.Allow.User",
+          "type": "Delegated"
+        }
+      ]
+    }
+  }
+}

@@ -1,18 +1,18 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
   "manifestVersion": "1.12",
-  "id": "{{APPLICATION_ID}}",
-  "version": "{{VERSION}}",
-  "packageName": "{{PACKAGE_NAME}}",
+  "id": "{{GUID_ID}}",
+  "version": "1.0.0",
+  "packageName": "com.teams.tabuitemplates",
   "developer": {
-    "name": "Alexander Katrukhin",
+    "name": "microsoft",
     "websiteUrl": "https://{{HOSTNAME}}",
     "privacyUrl": "https://{{HOSTNAME}}/privacy.html",
     "termsOfUseUrl": "https://{{HOSTNAME}}/tou.html"
   },
   "name": {
-    "short": "Teams Sample App",
-    "full": "Teams Sample App"
+    "short": "Tab UI Templates",
+    "full": "Tab UI Templates"
   },
   "description": {
     "short": "Experience how Teams apps should look and behave in common scenarios.",
@@ -23,7 +23,6 @@
     "color": "icon-color.png"
   },
   "accentColor": "#D85028",
-  "configurableTabs": [],
   "staticTabs": [
     {
       "entityId": "sample.app.welcome",
@@ -50,11 +49,5 @@
       "scopes": [ "personal" ]
     }
   ],
-  "bots": [],
-  "connectors": [],
-  "composeExtensions": [],
-  "permissions": [ "identity", "messageTeamMembers" ],
-  "validDomains": [ "{{HOSTNAME}}" ],
-  "showLoadingIndicator": true,
-  "isFullScreen": true
+  "validDomains": [ "{{HOSTNAME}}" ]
 }

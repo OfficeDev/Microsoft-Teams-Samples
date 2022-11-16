@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-tab-request-approval-csharp",
+    "source": "officeDev",
+    "title": "Send task approvals using activity feed notification (Graph APIs)",
+    "shortDescription": "This sample shows a feature where requester can request for any task approval from manager and manager can see the pending request by user on the click of activity feed notification and can approve or reject the request.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-request-approval/csharp",
+    "longDescription": [
+      "This sample shows a feature where requester can request for any task approval from manager and manager can see the pending request by user on the click of activity feed notification and can approve or reject the request."
+    ],
+    "creationDateTime": "2021-11-29",
+    "updateDateTime": "2022-10-21",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "csharp"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "netframework"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "tab"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "Image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-request-approval/csharp/TabRequestApproval/Images/TabRequestApproval.gif",
+        "alt": "Solution UX showing send task approvals using activity feed notification (graph apis)"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+      }
+    ]
+  }
+]

@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-app-complete-sample-nodejs",
+    "source": "officeDev",
+    "title": "Bot, Tabs, and Messaging Extension",
+    "shortDescription": "A very early Teams sample - shows tab, bot, and messaging extension (WARNING uses deprecated version of Bot Builder SDK)",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-complete-sample/nodejs",
+    "longDescription": [
+      "A very early Teams sample - shows tab, bot, and messaging extension (WARNING uses deprecated version of Bot Builder SDK)"
+    ],
+    "creationDateTime": "2017-05-08",
+    "updateDateTime": "2022-06-21",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "javascript"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "express"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "tab,bot,msgext"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-complete-sample/nodejs/images/app-complete-sample.gif",
+        "alt": "Solution UX showing bot, tabs, and messaging extension"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+      }
+    ]
+  }
+]

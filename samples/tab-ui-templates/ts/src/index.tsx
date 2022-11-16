@@ -9,9 +9,7 @@ import { HashRouter } from "react-router-dom";
 microsoftTeams.app.initialize();
 
 ReactDOM.render(
-  <HashRouter>
-    <App />
-  </HashRouter>,
+    <App />,
   document.getElementById("root")
 );
 

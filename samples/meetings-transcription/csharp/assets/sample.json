@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-meetings-transcription-csharp",
+    "source": "officeDev",
+    "title": "Bot to show the transcript of the meeting using Microsoft Graph API.",
+    "shortDescription": "This is a sample application which demonstrates how to get Transcript using Graph API and show it in the task module.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-transcription/csharp",
+    "longDescription": [
+      "This is a sample application which demonstrates how to get Transcript using Graph API and show it in the task module."
+    ],
+    "creationDateTime": "2022-03-08",
+    "updateDateTime": "2022-08-08",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "csharp"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "netframework"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "bot"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "Image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-transcription/csharp/MeetingTranscription/Images/MeetingsTranscriptionGif.gif",
+        "alt": "Solution UX showing transcript of the meeting using Microsoft Graph APIs."
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+      }
+    ]
+  }
+]

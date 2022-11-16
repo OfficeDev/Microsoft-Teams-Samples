@@ -14,12 +14,9 @@
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.113" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
-  <PropertyGroup>
-    <LibraryRestore>false</LibraryRestore>
-  </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <LibraryRestore>true</LibraryRestore>
-  </PropertyGroup>
+	<PropertyGroup>
+		<LibraryRestore>false</LibraryRestore>
+	</PropertyGroup>
 
 </Project>

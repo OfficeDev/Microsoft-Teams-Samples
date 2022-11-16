@@ -27,8 +27,8 @@
     {
       "entityId": "broadcast",
       "name": "BroadcastTab",
-      "contentUrl": "https://{{Base_URL}}/broadcast",
-      "websiteUrl": "https://{{Base_URL}}/broadcast",
+      "contentUrl": "https://{{Base_URL_Domain}}/broadcast",
+      "websiteUrl": "https://{{Base_URL_Domain}}/broadcast",
       "scopes": [
         "personal"
       ]
@@ -39,7 +39,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "{{Domain-name}}"
+    "{{Base_URL_Domain}}"
   ],
   "activities": {
     "activityTypes": [
@@ -51,7 +51,7 @@
     ]
   },
   "webApplicationInfo": {
-    "id": "<<MicrosoftAppId>>",
-    "resource": "api://{{Base_URL}}/{{Microsoft-App-Id}}"
+    "id": "{{Microsoft-App-Id}}",
+    "resource": "api://{{Base_URL_Domain}}/{{Microsoft-App-Id}}"
   }
 }

@@ -3,9 +3,9 @@
     <title> Auth End Page</title>
 </head>
 <body>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.10.0/js/MicrosoftTeams.min.js" integrity="sha384-6oUzHUqESdbT3hNPDDZUa/OunUj5SoxuMXNek1Dwe6AmChzqc6EJhjVrJ93DY/Bv" crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.1.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
     <script>
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
         localStorage.removeItem("auth.error");
         let hashParams = getHashParameters();
         if (hashParams["error"]) {

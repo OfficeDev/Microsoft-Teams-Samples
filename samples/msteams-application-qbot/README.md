@@ -9,8 +9,9 @@ languages:
 - csharp
 - typescript
 extensions:
-contentType: samples
-createdDate: "30-05-2022 12:00 PM"
+ contentType: samples
+ createdDate: "05/30/2022 12:00:00 AM"
+urlFragment: officedev-microsoft-teams-samples-samples-msteams-application-qbot
 ---
 
 # QBot

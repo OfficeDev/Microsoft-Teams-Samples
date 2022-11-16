@@ -57,7 +57,7 @@ const Home = props => {
                 <input type="text" className="user-name" />
             </div>
             <div className="chat-label">
-                Description:
+                Description:&nbsp;
                 <input type="text" className="task-description" />
             </div>
             <input type="submit" id="addDetails" value="Add" />

@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-bot-join-team-using-qr-code-nodejs",
+    "source": "officeDev",
+    "title": "Join a team using QR code sample",
+    "shortDescription": "This sample demos a feature where user can join a team using QR code containing the team's id.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-join-team-using-qr-code/nodejs",
+    "longDescription": [
+      "This sample demos a feature where user can join a team using QR code containing the team's id."
+    ],
+    "creationDateTime": "2021-12-24",
+    "updateDateTime": "2022-01-12",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "javascript"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "express"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "bot"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "Image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-join-team-using-qr-code/nodejs/Images/BotJoinTeamUsingQRCodeGif.gif",
+        "alt": "Solution UX showing join a team using qr code sample"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+      }
+    ]
+  }
+]

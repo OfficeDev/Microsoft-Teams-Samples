@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-graph-meeting-notification-csharp",
+    "source": "officeDev",
+    "title": "Online meeting subscription",
+    "shortDescription": "Online meeting subscription to post notifications when user joined/left meeting.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-meeting-notification/csharp",
+    "longDescription": [
+      "This is a sample application which demonstrates use of online meeting subscription that will post notifications when user joined/left and when meeting start/end."
+    ],
+    "creationDateTime": "2022-08-10",
+    "updateDateTime": "2022-08-10",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "csharp"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "netframework"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "bot"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "Image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-meeting-notification/csharp/MeetingNotification/Images/MeetingNotificaionAppModule.gif",
+        "alt": "Solution UX showing graph meeting notification in meeting chat tab csharp"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+      }
+    ]
+  }
+]

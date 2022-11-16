@@ -1,0 +1,60 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.13",
+  "version": "1.0.0",
+  "id": "<<MANIFEST-ID>>",
+  "packageName": "com.teams.meetingaudiocalltoggle",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Mute/Unmute Audio Call",
+    "full": "Mute/Unmute Teams meeting audio call"
+  },
+  "description": {
+    "short": "Mute/Unmute audio call",
+    "full": "This sample shows how to Mute/Unmute Teams meeting audio call."
+  },
+  "accentColor": "#5558AF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://{{ngrok}}/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team",
+        "groupchat"
+      ],
+      "context": [
+        "meetingSidePanel"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "<<DOMAIN-NAME>>"
+  ],
+  "webApplicationInfo": {
+    "id": "<<YOUR-MICROSOFT-APP-ID>>",
+    "resource": "https://RscPermission"
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "OnlineMeetingParticipant.ToggleIncomingAudio.Chat",
+          "type": "Delegated"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "name": "officedev-microsoft-teams-samples-bot-release-management-nodejs",
+    "source": "officeDev",
+    "title": "Bot to create a group chat and send task notification using Azure webhooks.",
+    "shortDescription": "This is a sample app with capability to send notification when user creates a work item in [Azure DevOps](https://dev.azure.com) via webhooks.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-release-management/nodejs",
+    "longDescription": [
+      "This is a sample app with capability to send notification when user creates a work item in [Azure DevOps](https://dev.azure.com) via webhooks."
+    ],
+    "creationDateTime": "2022-04-28",
+    "updateDateTime": "2022-05-17",
+    "products": [
+      "Teams"
+    ],
+    "metadata": [
+      {
+        "key": "TEAMS-SAMPLE-SOURCE",
+        "value": "OfficeDev"
+      },
+      {
+        "key": "TEAMS-SERVER-LANGUAGE",
+        "value": "javascript"
+      },
+      {
+        "key": "TEAMS-SERVER-PLATFORM",
+        "value": "express"
+      },
+      {
+        "key": "TEAMS-FEATURES",
+        "value": "bot"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-release-management/nodejs/Images/BotReleaseManagementGif.gif",
+        "alt": "Solution UX showing bot to create a group chat and send task notification using azure webhooks."
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "OfficeDev",
+        "pictureUrl": "https://avatars.githubusercontent.com/u/6789362?s=200&v=4",
+        "name": "OfficeDev"
+      }
+    ],
+    "references": [
+      {
+        "name": "Teams developer documentation",
+        "url": "https://aka.ms/TeamsPlatformDocs"
+      },
+      {
+        "name": "Teams developer questions",
+        "url": "https://aka.ms/TeamsPlatformFeedback"
+      },
+      {
+        "name": "Teams development videos from Microsoft",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-microsoft"
+      },
+      {
+        "name": "Teams development videos from the community",
+        "url": "https://aka.ms/sample-ref-teams-vids-from-community"
+      }
+    ]
+  }
+]
