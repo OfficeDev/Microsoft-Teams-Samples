@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-graph-change-notification-team-ch
 
 ---
 
-## change notifications for team and channel using Microsoft Graph.
+# Change Notifications For Team and Channel Using Microsoft Graph Node.js
 
 This is a sample application which demonstrates use of Team/Channel subscription that will post notifications when user create/edit/delete team/channel.
 
