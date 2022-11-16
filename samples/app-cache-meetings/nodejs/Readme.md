@@ -81,16 +81,7 @@ This sample feature is to improve the subsequent loading time of an App that the
 **loading Team Context :** 
 ![Team Context](Images/3.Loaded_Context.png) 
 
-**Waiting For Cache State to load in Proto Task Manager view :**
-Open Debug Panel **Proto Task Manager** ( `Ctrl+Shift+Alt+8` on Windows, `Cmd+Shift+Option+8` on Mac), navigate to App Caching section you should see these apps getting cached/loaded. Non-cacheable apps will not appear in this panel.
-![Waiting For Load](Images/4.Waiting_For_Load.png)
-
-**App Caching Sideloaded  :**
-![Loaded context](Images/5.Proto_Task_Manager_Loaded.png)
-
-**The state is now Cached :**
-This Panel queries the state of the Cache and updates the table on a periodic basis (every second for now)
-![App Cahced](Images/6.Cached.png)
+> Note open debug panel **Proto Task Manager** ( `Ctrl+Shift+Alt+8` on Windows, `Cmd+Shift+Option+8` on Mac), navigate to App Caching section you should see these apps getting cached/loaded. Non-cacheable apps will not appear in this panel.
 
 
 ## Further reading
