@@ -10,6 +10,7 @@ on:
       - main
     paths:
       - '**'
+  workflow_dispatch:
 env:
     CI: false
 jobs:
