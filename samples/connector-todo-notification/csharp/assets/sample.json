@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/connector-todo-notification/csharp/TeamsToDoAppConnector/Images/TaskCardByConnector.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/connector-todo-notification/csharp/TeamsToDoAppConnector/Images/connector_todo_notification_csharp.gif",
         "alt": "Solution UX showing to do notification"
       }
     ],

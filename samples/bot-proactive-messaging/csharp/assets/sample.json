@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-proactive-messaging/csharp/coordinate-logger/Images/ProactiveMessage.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-proactive-messaging/csharp/coordinate-logger/Images/ProactivemessageGIF.gif",
         "alt": "Solution UX showing teams proactive messaging samples"
       }
     ],

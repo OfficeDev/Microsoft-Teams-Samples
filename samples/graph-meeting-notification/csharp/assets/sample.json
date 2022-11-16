@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-meeting-notification/csharp/MeetingNotification/Images/MeetingStartedCard.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-meeting-notification/csharp/MeetingNotification/Images/MeetingNotificaionAppModule.gif",
         "alt": "Solution UX showing graph meeting notification in meeting chat tab csharp"
       }
     ],

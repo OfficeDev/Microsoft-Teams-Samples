@@ -17,13 +17,13 @@ urlFragment: officedev-microsoft-teams-samples-graph-teams-tag-nodejs
 
 This is a sample application where user can create, update, add or remove members of a tag. All of Graph CRUD operations related to tags can be performed within this sample.
 
-## Key features
+## Interaction with app
 
-1. Create new tags.
+- Create new tags.
 
 ![Create new tag](Images/CreateTagFlow.gif)
 
-2. View/Edit existing tags.
+- View/Edit existing tags.
 
 ![View/Edit tag](Images/ViewOrEditTagFlow.gif)
 
@@ -32,81 +32,87 @@ This is a sample application where user can create, update, add or remove member
 
 - Microsoft Teams is installed and you have an account (not a guest account)
 -  [NodeJS](https://nodejs.org/en/)
--  [ngrok](https://ngrok.com/) or equivalent tunneling solution
+-  [ngrok](https://ngrok.com/download) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-## Run app locally
+## Setup
 
 ### Register your application with Azure AD
 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-2. On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
-3. Navigate to **API Permissions**, and make sure to add the follow permissions:
--   Select Add a permission
--   Select Microsoft Graph -> Application permissions.
-   - `TeamworkTag.ReadWrite.All`
+  - On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
+  - Navigate to **API Permissions**, and make sure to add the follow permissions:
+     - Select Add a permission
+     -  Select Microsoft Graph -> Application permissions.
+     - `TeamworkTag.ReadWrite.All`
 
--   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
+   - Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 
-4.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env file.
+   - Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the .env file.
 
-## To try this sample
+ 2. Setup for Bot
+- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
-> the Teams service needs to call into the app.
+**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
 
-### 1. Clone the repository
+3. Setup NGROK
+   - Run ngrok - point to port 3978
+
+    ```bash
+    ngrok http -host-header=rewrite 3978
+    ```
+4. Setup for code
+
+  - Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+  - Update the `.env` configuration for the bot to use the `MicrosoftAppId`, `MicrosoftAppPassword` and `MicrosoftAppTenantId`. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.) MicrosoftAppTenantId  created in step 1 (Setup for Bot), the MicrosoftAppTenantId is referred to as the "Directory (tenant) ID"
+
+  - Navigate to project
+    In the folder where repository is cloned navigate to `samples/graph-teams-tag/nodejs`
+
+
+ - Install node modules and run server 
+
+    Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+
    ```bash
-   git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+   npm install
    ```
 
-### 2. Navigate to project
-In the folder where repository is cloned navigate to `samples/graph-teams-tag/nodejs`
+   ```bash
+   npm start
+   ```
 
-### 3. Update the `.env`
-Update configuration with the ```MicrosoftAppId```,  ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId```.
+   - Install node modules and run client 
 
-### 4. Run ngrok - point to port 3978
+    Navigate to **client** folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
 
-```bash
-ngrok http -host-header=rewrite 3978
-```
+    ```bash
+     cd client
+     npm install
+     ```
 
-![Ngrok screen](Images/NgrokScreenshot.png)
-
-### 3. Install node modules and run server 
-
- Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
-
-```bash
-npm install
-```
-
-```bash
-npm start
-```
-
-### 3. Install node modules and run client 
-
- Navigate to **client** folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
-
-```bash
-cd client
-npm install
-```
-
-```bash
-npm start
-```
+     ```bash
+      npm start
+     ```
     
-### 4. Manually update the manifest.json
-- **Edit** the `manifest.json` contained in the `Manifest` folder to replace your Base url wherever you see the place holder string `<<BASE-URL>>`. Also replace any random guid with the place holder `<<APP-ID>>`.
-- **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
-- **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+5. Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./teamsAppManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./teamsAppManifest folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-
-## Features of this sample
+## Running the sample
 
 1. User can see list of tags created for the current team.
 ![Manage Tag Dashboard](Images/Dashboard.png)

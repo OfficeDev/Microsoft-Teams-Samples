@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://user-images.githubusercontent.com/80379013/123652525-02239d00-d84a-11eb-8d43-f45607b1ef2f.png",
+        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-sequential-flow-adaptive-cards/csharp/Images/Preview.gif",
         "alt": "Solution UX showing sequential workflow adaptive cards"
       }
     ],

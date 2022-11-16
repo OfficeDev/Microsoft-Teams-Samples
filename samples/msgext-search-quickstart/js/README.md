@@ -18,30 +18,22 @@ urlFragment: officedev-microsoft-teams-samples-msgext-search-quickstart-js
 
 *Bots* allow users to interact with your web service through text, interactive cards, and task modules. *Messaging extensions* allow users to interact with your web service through buttons and forms in the Microsoft Teams client. They can search, or initiate actions, in an external system from the compose message area, the command box, or directly from a message.
 
-![Search](Images/search.png)
+## Interaction with app
 
-![Result](Images/result.png)
+![Sample Module](Images/msgextsearchquickstart.gif)
 
 ## Prerequisites
 
 **Dependencies**
 -  [NodeJS](https://nodejs.org/en/)
--  [ngrok](https://ngrok.com/) or equivalent tunneling solution
+-  [ngrok](https://ngrok.com/download) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-**Configure Ngrok**
+## Setup
 
-Your app will be run from a localhost server. You will need to setup Ngrok in order to tunnel from the Teams client to localhost. 
-
-**Run Ngrok**
-
-Run ngrok - point to port 3978
-
-`ngrok http -host-header=rewrite 3978`
-
-**Update Bot Framework Messaging Endpoint**
-
-  Note: You can also do this with the Manifest Editor in App Studio if you are familiar with the process.
+  1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.  
+ 
+  2. Azure Bot [Azure Bot] (https://learn.microsoft.com/en-us/azure/bot-service/abs-quickstart?view=azure-bot-service-4.0&tabs=userassigned)
 
 - For the Messaging endpoint URL, use the current `https` URL you were given by running ngrok and append it with the path `/api/messages`. It should like something work `https://{subdomain}.ngrok.io/api/messages`.
 
@@ -49,19 +41,46 @@ Run ngrok - point to port 3978
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-- **Manually update the manifest.json**
-    - Edit the `manifest.json` contained in the  `appPackage/` and update BOT_ID with your Microsoft-App-Id or Client-Id created from Azure Bot service.
-    Also Update <valid-domain>> with your application's domain e.g. *.ngrok.io if you are using ngrok.
-    - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
-    - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
+ 3. Setup NGROK
+   - Run ngrok - point to port 3978
 
-- **Manually update the env file**
-    - Update the env file with Microsoft-App-Id(or Client Id) and Microsoft-App-Password(or Client Secret)
-## Build and run
+    ```bash
+    ngrok http -host-header=rewrite 3978
+    ```
+4. Setup for code
+  - Clone the repository
 
-### `npm install`
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
 
-### `npm start`
+  - In a terminal, navigate to `samples/msgext-search-quickstart/js`
+  
+  - Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`, `BaseUrl` with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+  
+ - Run your app
+
+    ```bash
+    npm start
+    ```
+
+5. Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `AppPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+
+## Running the sample
+
+![Search](Images/search.png)
+
+![Result](Images/result.png)
 
 ## Deploy to Teams
 Start debugging the project by hitting the `F5` key or click the debug icon in Visual Studio Code and click the `Start Debugging` green arrow button.

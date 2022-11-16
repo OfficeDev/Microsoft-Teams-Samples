@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-channel-group-sso-quickstart/csharp_dotnetcore/Images/configuretab.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-channel-group-sso-quickstart/csharp_dotnetcore/Images/TabChannelGroupSsoQuickStartModule.gif",
         "alt": "Solution UX showing starter solution: channel/group tab with sso in c#"
       }
     ],

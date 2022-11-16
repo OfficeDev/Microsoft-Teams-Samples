@@ -43,7 +43,7 @@
     "token.botframework.com"
   ],
     "webApplicationInfo": {
-    "id": "{{MicrosoftAppId}}",
-    "resource": "api://botid-{{MicrosoftAppId}}"
+    "id": "{{Microsoft-App-Id}}",
+    "resource": "api://botid-{{Microsoft-App-Id}}"
   }
 }
