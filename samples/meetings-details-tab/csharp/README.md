@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-meetings-details-tab-csharp
 ---
 
-# Meetings Details Tab
+# Meetings Details Tab Sample C#
 
 This sample shows creating poll in meeting , where memebers of the meeting can answer poll question and can see the results.
 
