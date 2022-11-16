@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-bot-type-ahead-search-adaptive-cards-nodejs
 ---
 
-## Typeahead search control in Adaptive Cards
+# Typeahead search control in Adaptive Cards Node.js
 
 This sample shows the feature of typeahead search (static and dynamic) control in Adaptive Cards.
 
