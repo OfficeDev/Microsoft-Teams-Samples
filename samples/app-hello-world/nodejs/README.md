@@ -8,99 +8,107 @@ title: Microsoft Teams NodeJS Helloworld Sample
 description: Microsoft Teams hello world sample app in Node.js
 extensions:
   contentType: samples
-  createdDate: "11/03/2017 12:53:17 PM"
+  createdDate: 10/19/2022 10:02:21 PM
 urlFragment: officedev-microsoft-teams-samples-app-hello-world-nodejs
 ---
 
 # Microsoft Teams hello world sample app.
 
+- Microsoft Teams hello world sample app.
+
+## Interaction with app
+
+![HelloWorldGif](Images/AppHelloWorldGif.gif)
+
+## Prerequisites
+
+-  Microsoft Teams is installed and you have an account (not a guest account)
+
+-  To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
+
+-  [ngrok](https://ngrok.com/) or equivalent tunneling solution
+
+-  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+
+## Setup
+
+> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
+> the Teams service needs to call into the bot.
+
+### 1. Setup for Bot
+- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2)
+
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
+- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+    > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
+
+### 2. Setup NGROK
+1) Run ngrok - point to port 3333
+
+    ```bash
+    ngrok http -host-header=rewrite 3333
+    ```
+
+### 3. Setup for code
+1) Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+2) In a terminal, navigate to `samples/app-hello-world/nodejs`
+
+3) Install modules
+
+    ```bash
+    npm install
+    ```
+
+4) Update the `custom-environment-variables` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`, `BaseUrl` with application base url.
+
+5) Update the `default` configuration for the bot to use the `appId` and `appPassword`.
+
+5) Run your app
+
+    ```bash
+    npm start
+    ```
+### 4. Setup Manifest for Teams
+
+ - **This step is specific to Teams.**
+
+    - **Edit** the `manifest.json` contained in the  `app-hello-world/nodejs/appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Your Microsoft App Id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `configurationUrl` inside `configurableTabs` . Replace `<yourNgrok.ngrok.io>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `app-hello-world/nodejs/appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+    - Add the app to personal/team/groupChat scope (Supported scopes)
+
+## Running the sample
+
+**Install App:**
+
+![InstallApp](Images/Install.png)
+
+**Welcome UI:**
+
 ![HelloWorld](Images/HelloWorld.png)
 
-## Official documentation
+## Deploy the bot to Azure
 
-More information for this sample - and for how to get started with Microsoft Teams development in general - is found in [Get started on the Microsoft Teams platform with Node.js and App Studio](https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-nodejs-app-studio).
+To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 
-## Using this sample locally
+## Further reading
 
-This sample can be run locally using `ngrok` as described in the [official documentation](https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-nodejs-app-studio), but you'll need to set up some environment variables. There are many ways to do this, but the easiest, if you are using Visual Studio Code, is to add a [launch configuration](https://code.visualstudio.com/Docs/editor/debugging#_launch-configurations):
-
-```json
-[...]
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch - Teams Debug",
-            "program": "${workspaceRoot}/src/app.js",
-            "cwd": "${workspaceFolder}/src",
-            "env": {
-                "BASE_URI": "https://########.ngrok.io",
-                "MICROSOFT_APP_ID": "00000000-0000-0000-0000-000000000000",
-                "MICROSOFT_APP_PASSWORD": "yourBotAppPassword",
-                "NODE_DEBUG": "botbuilder",
-                "SUPPRESS_NO_CONFIG_WARNING": "y",
-                "NODE_CONFIG_DIR": "../config"
-            }
-[...]
-```
-
-Where:
-
-* `########` matches your actual ngrok URL
-* `MICROSOFT_APP_ID` and `MICROSOFT_APP_PASSWORD` is the ID and password, respectively, for your bot
-* `NODE_DEBUG` will show you what's happening in your bot in the Visual Studio Code debug console
-* `NODE_CONFIG_DIR` points to the directory at the root of the repository (by default, when the app is run locally, it looks for it in the `src` folder)
-
-## Deploying to Azure App Service
-
-### Visual Studio Code extensions
-
-The easiest way to deploy to Azure is to use Visual Studio Code with Azure extensions. There are many extensions for Azure - you can get all of them at once by installing the [Node Pack for Azure](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack) or you can install just the [Azure App Service](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice) extension.
-
-### Creating a new Node.js web app
-
-Once you've installed the extensions, you'll see a new Azure icon on the left in Visual Studio Code. Click on the + icon to create a new web app. Once you've created your web app:
-
-1. Add the following Application Settings (environment variables):
-
-    ```
-    MICROSOFT_APP_ID=<YOUR BOT'S APP ID>
-    MICROSOFT_APP_PASSWORD=<YOUR BOT'S APP PASSWORD>
-    WEBSITE_NODE_DEFAULT_VERSION=8.9.4
-    ```
-
-1. Configure the Deployment Source for your app (either your local copy of this repository or one you've forked on GitHub).
-1. Deploy your web app. Visual Studio Code will tell you when you are done.
-
-## Deploying to Azure for Node.js on Windows
-
-Since this repo was optimized for Azure App Service, which runs on Linux, the `.deployment` file references `bash deploy.sh`. There's also a `deploy.cmd` if you want to deploy to Azure running Node.js on Windows. If you do, change `.deployment` to this instead:
-
-```
-[config]
-command = deploy.cmd
-```
-
-# Contributing
-
-This project welcomes contributions and suggestions. Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.microsoft.com.
-
-When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
-# Common Issues
-
-* If you are getting an error with `npm install` try deleting `package-lock.json` and re-running `npm install`
-
-* If you are getting `Uncaught SyntaxError: Unexpected identifier` for the first import statement in `app.js`
-run
-
-    ```
-    npm install --save-dev @babel/core @babel/cli @babel/preset-env @babel/node
-    ```
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Azure Portal](https://portal.azure.com)
+- [Add Authentication to Your Bot Via Azure Bot Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp)
+- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
+- [Azure Portal](https://portal.azure.com)
+- [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
+- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
+- [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)    

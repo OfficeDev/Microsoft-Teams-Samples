@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-personal/razor-csharp/Images/personaltab.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-personal/razor-csharp/Images/PersonalTabModule.gif",
         "alt": "Solution UX showing personal tabs in asp.net core with razor"
       }
     ],

@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-message-reminder/nodejs/Images/MessageAction.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-message-reminder/nodejs/Images/msgextmessagereminder.gif",
         "alt": "Solution UX showing message reminder with messaging extension action"
       }
     ],

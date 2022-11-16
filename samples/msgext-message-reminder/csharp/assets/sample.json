@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-message-reminder/csharp/MessagingExtensionReminder/Images/MessageAction.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-message-reminder/csharp/MessagingExtensionReminder/Images/MessageExtensionReminderModule.gif",
         "alt": "Solution UX showing message reminder with messaging extension action"
       }
     ],

@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-pinned-messages/nodejs/Images/PinMessage.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-pinned-messages/nodejs/Images/pinned-messages.png",
         "alt": "Solution UX showing pinning of chat messages."
       }
     ],

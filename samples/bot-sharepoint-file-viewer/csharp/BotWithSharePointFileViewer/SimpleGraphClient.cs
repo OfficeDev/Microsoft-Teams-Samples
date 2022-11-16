@@ -31,36 +31,44 @@ namespace BotWithSharePointFileViewer
         {
             var graphClient = GetAuthenticatedClient();
 
-           var site =await graphClient.Sites[sharepointTenantName].Sites[sharepointSiteName]
-                             .Request()
-                             .GetAsync();
-            if (site != null)
+            try
             {
-                var drive = await graphClient.Sites[site.Id].Drives
-                                    .Request()
-                                    .GetAsync();
-
-                if(drive != null)
+                var site = await graphClient.Sites[sharepointTenantName].Sites[sharepointSiteName]
+                                  .Request()
+                                  .GetAsync();
+                if (site != null)
                 {
-                    var children = await graphClient.Sites[site.Id].Drives[drive.CurrentPage[0].Id].Root.Children
-                                            .Request()
-                                            .GetAsync();
+                    var drive = await graphClient.Sites[site.Id].Drives
+                                        .Request()
+                                        .GetAsync();
 
-                    var fileName = new List<string>();
-                    foreach (var file in children.CurrentPage)
+                    if (drive != null)
                     {
-                        fileName.Add(file.Name);
-                    }
+                        var children = await graphClient.Sites[site.Id].Drives[drive.CurrentPage[0].Id].Root.Children
+                                                .Request()
+                                                .GetAsync();
 
-                    return fileName;
+                        var fileName = new List<string>();
+                        foreach (var file in children.CurrentPage)
+                        {
+                            fileName.Add(file.Name);
+                        }
+
+                        return fileName;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
                 else
                 {
                     return null;
                 }
             }
-            else
+            catch(Exception e)
             {
+                Console.WriteLine("Exception is " + e);
                 return null;
             }
         }

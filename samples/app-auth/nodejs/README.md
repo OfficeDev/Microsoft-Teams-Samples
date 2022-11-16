@@ -20,21 +20,8 @@ urlFragment: officedev-microsoft-teams-samples-app-auth-nodejs
 
 This sample demonstrates authentication in Microsoft Teams apps.
 
-Tab authentication
-
-![tab azure ad login v1](Images/TabAzureADLoginV1.png)
-
-![tab azure ad login v2](Images/TabAzureADLoginV2.png)
-
-![tab silent auth](Images/TabSilentAuth.png)
-
-![tab SSO](Images/TabSso.png)
-
-Bot authentication
-
-![Bot SSO](Images/BotSso.png)
-
-![Bot google sign in](Images/BotGoogleProfile.png)
+## Interaction with App
+![app-auth-sample](Images/app-auth.gif)
 
 ## Getting started
 
@@ -210,6 +197,27 @@ Before proceeding, it's wise to test the OAuth connections that you have configu
 1. Sign in and authorize your app when prompted.
 
 If the connection was configured correctly, you will be taken to a page with the access token that your bot would have received.
+
+
+## Running the sample
+
+Tab authentication
+
+![tab azure ad login page](Images/app-auth-tab.png)
+
+![tab azure ad login v1](Images/tabv1.png)
+
+![tab azure ad login v2](Images/tabv2.png)
+
+![tab silent auth](Images/tab-silent.png)
+
+![tab SSO](Images/tab-sso.png)
+
+Bot authentication
+
+![Bot SSO](Images/appbot.png)
+
+![Bot AAD login](Images/appbot2.png)
 
 ## Security notes
 

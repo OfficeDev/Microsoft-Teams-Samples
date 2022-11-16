@@ -2,6 +2,8 @@ const tableStore = require('azure-storage');
 const { Console } = require('console');
 const authStore = require('../keys');
 const authObject = new authStore();
+// unique identifiers for our PartitionKey
+const { v4: uuidv4 } = require('uuid')
 
 const tableClient = tableStore.createTableService(authObject.accountName, authObject.accessKey);
 
@@ -76,19 +78,24 @@ function saveCandidateDetails(candidateDetails) {
     candidateDetails.forEach(function (obj) {
         var entity = {}
         if (obj != null) {
-            obj.PartitionKey = "CandidateDetails";
+            obj.PartitionKey = obj.Email;
             obj.RowKey = uuidv4();
-
-            // Use { echoContent: true } if you want to return the created item including the Timestamp & etag
-            tableClient.insertEntity(tableName, entity, { echoContent: true }, function (error, result, response) {
-                if (!error) {
-                    // sending response once all entries are created
-                    Console.log("Candidate details inserted for -" + obj.Email)
-                } else {
-                    // In case of an error we return an appropriate status code and the error returned by the DB
-                    Console.log("Candidate details insert error for -" + obj.Email)
-                }
-            });
+try {
+    // Use { echoContent: true } if you want to return the created item including the Timestamp & etag
+    tableClient.insertEntity(tableName, obj, { echoContent: true }, function (error, result, response) {
+        if (!error) {
+            // sending response once all entries are created
+            console.log("Candidate details inserted for -" + obj.Email)
+        } else {
+            // In case of an error we return an appropriate status code and the error returned by the DB
+            console.log("Candidate details insert error for -" + obj.Email)
+        }
+    });
+    
+} catch (error) {
+    Console.log("errormsg:-" + error)
+}
+            
         }
     })
 }

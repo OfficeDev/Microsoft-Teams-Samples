@@ -18,9 +18,20 @@ urlFragment: officedev-microsoft-teams-samples-meetings-live-code-interview-csha
 This sample demos a live coding in a Teams meeting stage using [Live Share SDK](https://aka.ms/livesharedocs). In side panel there is a list of question in specific coding language and on share click specific question with language code editor will be shared with other participant in meeting.
 Now any participant in meeting can write code for the question and same will be updated to all the other participants in meeting.
 
-![side panel ](MeetingLiveCoding/Images/sidePanelView.png)
+## Interaction with app
 
-![shared content](MeetingLiveCoding/Images/stageView.png)
+![side panel ](MeetingLiveCoding/Images/MeetinLiveCodeInterview.gif)
+
+## Prerequisites
+
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+
+  ```bash
+  # determine dotnet version
+  dotnet --version
+  ```
+- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+ - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account.
 
 ## Workflow
 
@@ -47,57 +58,41 @@ sequenceDiagram
     Teams Client->>+Code Editor Stage: Tells the app which coding question to open
 
     Code Editor Stage-->>-Live Coding App: Shares the question to share to stage in the meeting
-
-```
-## Prerequisites
-
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
-
-  ```bash
-  # determine dotnet version
-  dotnet --version
-  ```
-
-- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
-  ```bash
-  # run ngrok locally
-  ngrok http -host-header=localhost 3001
-  ```
-
-- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
-
-## To try this sample
-
-1) Clone the repository
-   ```bash
-   git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
+    
+## Setup
 
-2) In a terminal, navigate to `samples/meeting-live-coding-interview/csharp`
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+
+2. Setup for Bot
+- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+
+    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
+
+3. Setup NGROK
+   - Run ngrok - point to port 3978
+
+  ```bash
+   ngrok http -host-header=rewrite 3978
+  ```
+
+4. Setup for code
+
+- Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+    
+     In a terminal, navigate to `samples/meeting-live-coding-interview/csharp`
 
     ```bash
     # change into project folder
     cd # MeetingLiveCoding
-    ```
-3) Run ngrok - point to port 3001
-
-    ```bash
-    # ngrok http -host-header=rewrite 3001
-    ```
-4) Inside ClientApp folder execute the below command.
-
-    ```bash
-    # npx @fluidframework/azure-local-service@latest
-    ```
-
-5) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
-   - `<<App-ID>>` with some unique GUID   
-   - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
-   - `<<VALID DOMAIN>>` with your app domain e.g. *.ngrok.io
-
-6) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
-
-7) Run the app from a terminal or from Visual Studio, choose option A or B.
+    
+    Run the app from a terminal or from Visual Studio, choose option A or B.
 
   A) From a terminal
 
@@ -114,10 +109,36 @@ sequenceDiagram
   - Select `MeetingLiveCoding.csproj` file
   - Press `F5` to run the project
 
-8) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+- Inside ClientApp folder execute the below command.
+
+    ```bash
+    # npx @fluidframework/azure-local-service@latest
+    ```
+5. Setup Manifest for Teams
+ - __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `AppPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+
+
+**Note** Run the app on desktop client with developer preview on.   
+
+## Running the sample
+
+**Side panel view:**
+![side panel ](MeetingLiveCoding/Images/sidePanelView.png)
+
+**Question view on click of share:**
+![shared content](MeetingLiveCoding/Images/stageView.png)
+
+**Question view for other participant in meeting:**
+![shared content second user](MeetingLiveCoding/Images/stageViewseconduser.png)
 
 ## Further reading
 

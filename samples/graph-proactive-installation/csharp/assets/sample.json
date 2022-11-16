@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://user-images.githubusercontent.com/31851992/122173594-83208300-ce9f-11eb-9100-7e9373d2a531.png",
+        "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/graph-proactive-installation/csharp/Images/ProactiveInstallation.gif",
         "alt": "Solution UX showing proactive installation sample app"
       }
     ],

@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-sso/csharp/Images/success_sso_personal.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-sso/csharp/Images/tabssomodules.gif",
         "alt": "Solution UX showing teams tab sso authentication (c#)"
       }
     ],

@@ -12,8 +12,8 @@ extensions:
  createdDate: "12/03/2021 12:53:17 PM"
 urlFragment: officedev-microsoft-teams-samples-tab-sso-nodejs
 ---
-# Tabs Azure AD SSO Sample using NodeJS
 
+# Tabs Azure AD SSO Sample using NodeJS
 
 This sample shows how to implement Azure AD single sign-on support for tabs. It will:
 
@@ -23,7 +23,8 @@ This sample shows how to implement Azure AD single sign-on support for tabs. It 
 
 3. Call Graph and retrieve the user's profile
 
-![Screen shot of solution](./doc/images/AAD-SSO-Tab-5-ConsentPreviouslyGranted.png)
+- **Interaction with app**
+![tab-sso-sample ](./doc/images/tab-sso.gif)
 
 ## Prerequisites
 
@@ -97,8 +98,8 @@ Your tab needs to run as a registered Azure AD application in order to obtain an
 ## Running the app locally
 
 1. Run Ngrok to expose your local web server via a public URL. Make sure to point it to your Ngrok URI. For example, if you're using port 3333 locally, run: 
-    * Win: `./ngrok http 3333 -host-header=localhost:3333 -subdomain="contoso"`
-    * Mac: `/ngrok http 3333 -host-header=localhost:3333 -subdomain="contoso"`
+    * Win: `./ngrok http 3978 -host-header=localhost:3978 -subdomain="contoso"`
+    * Mac: `/ngrok http 3978 -host-header=localhost:3978 -subdomain="contoso"`
 
 Leave this running while you're running the application locally, and open another command prompt for the steps which follow.
 
@@ -106,7 +107,7 @@ Leave this running while you're running the application locally, and open anothe
     * `npm install`
     * `npm start`
 
-Thhe app should start running on port 3333 or the port you configured
+Thhe app should start running on port 3978 or the port you configured
 
 ## Packaging and installing your app to Teams
 
@@ -117,46 +118,22 @@ Thhe app should start running on port 3333 or the port you configured
     * Open Teams and visit the app store. Depending on the version of Teams, you may see an "App Store" button in the bottom left of Teams or you can find the app store by visiting `Apps > Manage your apps > Publish App > Upload Custom App`.
     * Upload the manifest zip file created in step #1
 
-## Trying out the app
+## Running the sample
 
 1. Once you've installed the app, it should automatically open for you. Visit the `Auth Tab` to begin testing out the authentication flow.
 2. Follow the onscreen prompts. The authentication flow will print the output to your screen.
 
- * The first time you run the app it should get an access token from Microsoft Teams, but it won't be able to get one from the server unless the user or an administrator consents. If this is necessary, you will see a consent button.
+Tab auth in personal scope
+![tab-sso-page ](./doc/images/tab-sso-details.png)
 
- ![Screen with consent button](./doc/images/AAD-SSO-Tab-1-NeedsConsent.png)
+Tab auth in group scope
+![tab-sso-teams ](./doc/images/tab-sso-teams.png)
 
- * Click the consent button and a pop-up window will display the consent dialog from Azure AD.
+Tab auth in browser
+![tab-sso-browser ](./doc/images/tab-sso-browser.png)
 
-![Azure AD pop-up window](./doc/images/AAD-SSO-Tab-2-ConsentPopup.png)
-
- * Once you've granted all the permissions, the page will use the access token it received to make a Graph API call.
-
- ![Graph call following consent](./doc/images/AAD-SSO-Tab-4-ConsentGranted.png)
-
- * Once you've granted all the permissions, you can revisit this tab and you will notice that you will automatically be logged in.
-
-![Subsequent visit to tab](./doc/images/AAD-SSO-Tab-5-ConsentPreviouslyGranted.png)
-
-* The SSO even works on mobile devices.
-
-![SSO from a mobile device](./doc/images/AAD-SSO-Tab-6-Mobile.png)
-
-* You can test the SSO in browser as well.
-
-To test SSO in Browser, open your app base URL or Ngrok URI in your browser. 
-
-The URI shoud be like `https://contoso.ngrok.io/`
-
-![Login Outside Microsoft Teams](./doc/images/Outside-Teams-SSO.png)
-
-![Login Outside Microsoft Teams Success](./doc/images/Outside-Teams-Success-SSO.png)
-
-## Testing the consent process
-
-If you need to remove all consents for the application for test purposes, simply delete its service principal in the Azure AD portal. It may take a few minutes for cached values to time out. The service principal is created automatically the first time someone consents.
-
-![Service principal](./doc/images/AAD-SSO-Tab-7-DeletingConsentForTesting.png)
+Tab auth in browser with user details
+![tab-sso-teams ](./doc/images/tab-sso-browser-auth.png)
 
 # App structure
 
@@ -216,4 +193,3 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-

@@ -3,7 +3,7 @@
   "manifestVersion": "1.12",
   "version": "1.0.0",
   "showLoadingIndicator": false,
-  "id": "602854a9-1b44-4301-b2b9-4dd6be4ea614",
+  "id": "{{BOT-ID}}",
   "packageName": "com.example.contoso",
   "developer": {
     "name": "Contoso",
@@ -40,5 +40,5 @@
     "identity",
     "messageTeamMembers"
   ],
-  "validDomains": []
+  "validDomains": ["<<App Domain>>"]
 }

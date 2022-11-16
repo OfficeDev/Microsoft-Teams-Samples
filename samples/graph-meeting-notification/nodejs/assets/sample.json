@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-meeting-notification/nodejs/MeetingNotification/Images/MeetingNotification.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/graph-meeting-notification/nodejs/Images/MeetingNotification.gif",
         "alt": "Solution UX showing graph meeting notification in meeting chat"
       }
     ],

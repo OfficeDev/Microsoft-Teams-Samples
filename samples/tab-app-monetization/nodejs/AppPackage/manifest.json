@@ -27,8 +27,8 @@
     {
       "entityId": "index",
       "name": "App purchase tab",
-      "contentUrl": "https://{{Domain Name}}/tab",
-      "websiteUrl": "https://{{Domain Name}}/tab",
+      "contentUrl": "https://{{Domain-Name}}/tab",
+      "websiteUrl": "https://{{Domain-Name}}/tab",
       "scopes": [
         "personal"
       ]
@@ -40,7 +40,7 @@
   ],
   "validDomains": [
     "*.ngrok.io",
-    "{Domain Name}}"
+    "{Domain-Name}}"
   ],
   "subscriptionOffer": {
      "offerId": "{{Plan-id}}"  

@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-staggered-permission/csharp/StaggeredPermission/Images/user-mails.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-staggered-permission/csharp/StaggeredPermission/Images/StaggeredModule.gif",
         "alt": "Solution UX showing staggered permission sample"
       }
     ],

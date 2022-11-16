@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://user-images.githubusercontent.com/50989436/108982510-e483d280-76b3-11eb-9501-a382e7fba6e6.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-region-selection/csharp/RegionSectionApp/Images/region-selection.gif",
         "alt": "Solution UX showing bot and tab to select a region"
       }
     ],
