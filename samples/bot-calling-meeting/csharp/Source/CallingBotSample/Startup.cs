@@ -4,8 +4,6 @@
 using System.Collections.Generic;
 using CallingBotSample.AdaptiveCards;
 using CallingBotSample.Bots;
-using CallingBotSample.Helpers;
-using CallingBotSample.Interfaces;
 using CallingBotSample.Options;
 using CallingBotSample.Services.MicrosoftGraph;
 using Microsoft.AspNetCore.Builder;
