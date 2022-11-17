@@ -1,19 +1,18 @@
-﻿// <copyright file="GraphHelper.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using CallingBotSample.Interfaces;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Microsoft.Graph;
 
 namespace CallingBotSample.Helpers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using CallingBotSample.Interfaces;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.Logging;
-    using Microsoft.Extensions.Options;
-    using Microsoft.Graph;
-
     /// <summary>
     /// Helper class for Graph.
     /// </summary>
@@ -130,7 +129,7 @@ namespace CallingBotSample.Helpers
                 catch (System.Exception ex)
                 {
 
-                    throw ex;
+                    throw;
                 }
             });
         }
@@ -201,7 +200,7 @@ namespace CallingBotSample.Helpers
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
+                    throw;
                 }
             });
         }

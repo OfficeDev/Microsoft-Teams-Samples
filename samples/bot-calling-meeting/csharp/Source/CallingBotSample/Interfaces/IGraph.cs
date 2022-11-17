@@ -1,12 +1,11 @@
-﻿// <copyright file="IGraph.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using System.Threading.Tasks;
+using Microsoft.Graph;
 
 namespace CallingBotSample.Interfaces
 {
-    using System.Threading.Tasks;
-    using Microsoft.Graph;
-
     /// <summary>
     /// Interface for Graph.
     /// </summary>
