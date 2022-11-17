@@ -40,7 +40,6 @@ namespace CallingBotSample
 
             services.AddSingleton<IGraphLogger>(this.logger);
 
-
             // Create the Bot Framework Authentication to be used with the Bot Adapter.
             services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
 

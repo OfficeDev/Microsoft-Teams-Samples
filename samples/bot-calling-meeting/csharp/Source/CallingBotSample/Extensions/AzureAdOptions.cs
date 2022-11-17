@@ -3,7 +3,7 @@
 // Licensed under the MIT license.
 // </copyright>
 
-namespace Microsoft.AspNetCore.Authentication
+namespace CallingBotSample.Extensions
 {
     /// <summary>
     /// The Azure AD options class.

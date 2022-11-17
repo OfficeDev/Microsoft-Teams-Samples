@@ -13,7 +13,7 @@ using Microsoft.IdentityModel.Protocols;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 
-namespace CallingBotSample.Utility
+namespace CallingBotSample.Authentication
 {
     public class AuthenticationProvider : ObjectRoot, IRequestAuthenticationProvider
     {

@@ -1,7 +1,8 @@
-﻿namespace Microsoft.Extensions.DependencyInjection
+﻿namespace CallingBotSample.Extensions
 {
     using CallingBotSample.Bots;
     using Microsoft.Bot.Builder;
+    using Microsoft.Extensions.DependencyInjection;
     using System;
     public static class BotBuilderExtensions
     {
