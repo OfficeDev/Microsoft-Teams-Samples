@@ -3,7 +3,7 @@
 
 using System;
 
-namespace CallingBotSample.Model
+namespace CallingBotSample.Options
 {
     public class BotOptions
     {
@@ -28,7 +28,7 @@ namespace CallingBotSample.Model
         public Uri? PlaceCallEndpointUrl { get; set; }
 
         /// <summary>
-        /// Gets the grapg resource url.
+        /// Gets the graph resource url.
         /// </summary>
         public string? GraphApiResourceUrl { get; set; }
 

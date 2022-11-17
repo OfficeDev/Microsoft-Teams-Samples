@@ -13,11 +13,11 @@ using Microsoft.Bot.Builder.Integration.AspNet.Core;
 namespace CallingMeetingBot.Controllers
 {
     [Route("callback")]
-    public class CallbackController : Controller
+    public class CallingCallbackController : Controller
     {
         private readonly CallingBot bot;
 
-        public CallbackController(CallingBot bot)
+        public CallingCallbackController(CallingBot bot)
         {
             this.bot = bot;
         }
@@ -25,7 +25,7 @@ namespace CallingMeetingBot.Controllers
         [HttpPost, HttpGet]
         public async Task HandleCallbackRequestAsync()
         {
-            await this.bot.ProcessNotificationAsync(this.Request, this.Response).ConfigureAwait(false);
+            await bot.ProcessNotificationAsync(Request, Response).ConfigureAwait(false);
         }
     }
 }

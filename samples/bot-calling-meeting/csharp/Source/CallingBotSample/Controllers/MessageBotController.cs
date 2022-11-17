@@ -13,12 +13,12 @@ namespace CallingBotSample.Controllers
     // achieved by specifying a more specific type for the bot constructor argument.
     [Route("api/messages")]
     [ApiController]
-    public class BotController : ControllerBase
+    public class MessageBotController : ControllerBase
     {
         private readonly IBotFrameworkHttpAdapter Adapter;
         private readonly IBot Bot;
 
-        public BotController(IBotFrameworkHttpAdapter adapter, IBot bot)
+        public MessageBotController(IBotFrameworkHttpAdapter adapter, IBot bot)
         {
             Adapter = adapter;
             Bot = bot;
