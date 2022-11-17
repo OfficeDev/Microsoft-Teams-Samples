@@ -1,8 +1,8 @@
 {
-  "$schema": "https://github.com/OfficeDev/microsoft-teams-app-schema/blob/preview/DevPreview/MicrosoftTeams.schema.json",
-  "manifestVersion": "devPreview",
-  "version": "1.0.0",
-  "id": "<<app-id>>",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
+  "version": "1.0.2",
+  "manifestVersion": "1.14",
+  "id": "00b0bd52-bbe8-4848-a7eb-c3a3f3dfdf11",
   "packageName": "com.acs.sample",
   "developer": {
     "name": "Contoso",
@@ -25,14 +25,43 @@
   "accentColor": "#FFFFFF",
   "bots": [
     {
-      "botId": "<<microsoft-app-id>>",
-      "scopes": [ "personal", "team", "groupchat" ],
+      "botId": "87585103-0dc5-4b42-8a62-4a13df1ce092",
+      "scopes": ["personal", "team", "groupchat"],
+      "commandLists": [
+        {
+          "commands": [
+            {
+              "title": "welcome",
+              "description": "Resend welcome card of this Bot"
+            }
+          ],
+          "scopes": ["personal"]
+        }
+      ],
       "supportsFiles": false,
       "isNotificationOnly": false,
       "supportsCalling": true,
       "supportsVideo": true
     }
   ],
-  "permissions": [ "identity", "messageTeamMembers" ],
-  "validDomains": [ "*.ngrok.io" ]
+  "permissions": ["identity", "messageTeamMembers"],
+  "validDomains": ["*.ngrok.io"],
+  "webApplicationInfo": {
+    "id": "87585103-0dc5-4b42-8a62-4a13df1ce092",
+    "resource": "https://RscString"
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "type": "Application",
+          "name": "OnlineMeeting.ReadBasic.Chat"
+        },
+        {
+            "name": "ChannelMeeting.ReadBasic.Group",
+            "type": "Application"
+        }
+      ]
+    }
+  }
 }
