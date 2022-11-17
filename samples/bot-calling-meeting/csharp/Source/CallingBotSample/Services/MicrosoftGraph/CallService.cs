@@ -212,7 +212,6 @@ namespace CallingBotSample.Services.MicrosoftGraph
                     {
                         User = transfereeIdentity
                     },
-                    // ParticipantId = "909c6581-5130-43e9-88f3-fcb3582cde37"
                 };
             }
 
