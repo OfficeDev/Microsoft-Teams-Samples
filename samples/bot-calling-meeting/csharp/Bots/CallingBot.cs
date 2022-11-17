@@ -146,6 +146,7 @@ namespace CallingBotSample.Bots
             }
             else
             {
+                turnContext.Activity.RemoveRecipientMention();
                 await SendReponse(turnContext, turnContext.Activity.Text.Trim().ToLower(), cancellationToken);
             }
         }
@@ -215,13 +216,16 @@ namespace CallingBotSample.Bots
                 {
                     await this.BotAnswerIncomingCallAsync(call.Id, args.TenantId, args.ScenarioId).ConfigureAwait(false);
                 }
+                else if (args.ChangeType == ChangeType.Updated && call.State == CallState.Established)
+                {
+                    await graph.PlayPrompt(call.Id);
+                }
             }
 
         }
 
         private async Task BotAnswerIncomingCallAsync(string callId, string tenantId, Guid scenarioId)
         {
-
             Task answerTask = Task.Run(async () =>
                                 await this.graphServiceClient.Communications.Calls[callId].Answer(
                                     callbackUri: new Uri(options.BotBaseUrl, "callback").ToString(),

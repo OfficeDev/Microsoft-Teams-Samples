@@ -42,5 +42,11 @@ namespace CallingBotSample.Interfaces
         /// <returns>JoinScheduledMeeting.</returns>
         void InviteParticipant(string meetingId);
 
+        /// <summary>
+        /// Play a defined prompt in a meeting
+        /// </summary>
+        /// <param name="meetingId"></param>
+        /// <returns></returns>
+        Task PlayPrompt(string meetingId);
     }
 }

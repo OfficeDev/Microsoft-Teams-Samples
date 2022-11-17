@@ -52,7 +52,8 @@ the Teams service needs to call into the bot.
 
     ```bash
     ngrok http --host-header=rewrite 3978
-  
+    ```
+
 ## Register Azure AD application
 Register one Azure AD application in your tenant's directory for the bot and tab app authentication.
 
@@ -84,7 +85,7 @@ At this point you have 3 unique values:
 We recommend that you copy these values into a text file, using an application like Notepad. We will need these values later.
 
 10.  Under left menu, navigate to **API Permissions**, and make sure to add the following permissions of Microsoft Graph API > Application permissions:
--   `Calls.AccessMedia.All`
+- `Calls.AccessMedia.All`
 - `Calls.Initiate.All`
 - `Calls.InitiateGroupCall.All`
 - `Calls.JoinGroupCall.All`
@@ -100,27 +101,25 @@ Click on Add Permissions to commit your changes.
 
 ```
 	Import-Module MicrosoftTeams
-	$userCredential = Get-Credential
-	Connect-MicrosoftTeams -Credential $userCredential
+	# Calling Connect-MicrosoftTeams using no parameters will open a window allowing for MFA accounts to authenticate
+	Connect-MicrosoftTeams
 
-    New-CsApplicationAccessPolicy -Identity “<<policy-identity/policy-name>>” -AppIds "<<azure-client-id>>" -Description "<<Policy-description>>"
-	Grant-CsApplicationAccessPolicy -PolicyName “<<policy-identity/policy-name>>” -Identity "<<object-id-of-the-user-to-whom-policy-need-to-be-granted >>"
+	New-CsApplicationAccessPolicy -Identity “<<policy-identity/policy-name>>” -AppIds "<<microsoft-app-id>>" -Description "<<policy-description>>"
+	Grant-CsApplicationAccessPolicy -PolicyName “<<policy-identity/policy-name>>” -Identity "<<object-id-of-the-user-to-whom-policy-need-to-be-granted>>"
 
-  ex:
-    Import-Module MicrosoftTeams
-	$userCredential = Get-Credential
-	Connect-MicrosoftTeams -Credential $userCredential
+  eg:
+  Import-Module MicrosoftTeams
+	Connect-MicrosoftTeams
 
-    New-CsApplicationAccessPolicy -Identity Meeting-policy-dev -AppIds "fdcd8287-4e77-4d4c-8be7-eb0ae94d5342" -Description "Online meeting policy - contoso town"
-    Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "e652dd92-dd63-4fcc-b5b2-2005681e8e9f"
+	New-CsApplicationAccessPolicy -Identity Meeting-policy-dev -AppIds "d0bdaa0f-8be2-4e85-9e0d-2e446676b88c" -Description "Online meeting policy - contoso town"
+	Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "782f076f-f6f9-4bff-9673-ea1997283e9c"
 ```
-![PoliySetup ](Images/PoliySetup.PNG)
+![PolicySetup](Images/PolicySetup.PNG)
 
-14. Update `PolicyName`, `azure-client-id`, `policy-description`, `object-id for user` in powershell script.
+14. Update `PolicyName`, `microsoft-app-id`, `policy-description`, `object-id-of-the-user-to-whom-policy-need-to-be-granted` in powershell script.
 15. Run `Windows Powershell PSI` as an administrator and execute above script.
 16. Run following command to verify policy is create successfully or not
-`Get-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "<<azure-client-Id>>"
-	`
+`Get-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "<<microsoft-app-id>>"`
 ## Setup Bot Service
 
 1. In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration)
@@ -136,7 +135,7 @@ For example `https://contoso.com/teamsapp/callback`
 9. Save your changes.
 
 ### Configuring the sample:
-1. __*Update appsetting.json for calling Bot*__
+1. __*Update appsettings.json for calling Bot*__
 ````
 {
   "MicrosoftAppId": "",
@@ -173,9 +172,10 @@ For example `https://contoso.com/teamsapp/callback`
   ]
 }
 ````
-- Update `MicrosoftAppId, MicrosoftAppPassword, AppId, AppSecret` with your client_id and client_secret app registered in demo tenant.
+- Update `microsoft-app-id`, `microsoft-app-client-secret` with your app's client id and client secret registered in demo tenant.
 - Update `BotBaseUrl` with your `ngrok` URL.
-- Update `UserId` and `DisplayName` of the users from where you want to initiate the call and to whom you want to redirect or transfer the call
+- Update `object-id-of-the-user-to-whom-online-meeting-policy-has-been-granted` with the ID of the user who has had the policy assigned to them above
+- Update `UserId` and `UserName` of the users from where you want to initiate the call and to whom you want to redirect or transfer the call
 
 2. __*This step is specific to Teams*__
     - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
