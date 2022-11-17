@@ -104,7 +104,13 @@ namespace CallingBotSample.Bots
                 {
                     await callService.Answer(GetCallIdFromNotification(args), audioRecordingConstants.Speech, audioRecordingConstants.PleaseRecordYourMessage);
                 }
-                else if (args.ChangeType == ChangeType.Updated && call.State == CallState.Established)
+                else if (
+                    args.ChangeType == ChangeType.Updated
+                    && call.State == CallState.Established
+                    // The below helps to distinguish between two similar Established notifications that are sent for incoming 1:1 meetings
+                    && (call.MediaState?.Audio == MediaState.Active
+                    // And this covers calls that the bot creates
+                    || call.Direction == CallDirection.Outgoing))
                 {
                     await callService.PlayPrompt(GetCallIdFromNotification(args), audioRecordingConstants.Speech);
                 }
