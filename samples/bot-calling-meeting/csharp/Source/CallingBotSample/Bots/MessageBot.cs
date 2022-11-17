@@ -1,13 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CallingBotSample.AdaptiveCards;
-using CallingBotSample.Interfaces;
 using CallingBotSample.Options;
 using CallingBotSample.Services.MicrosoftGraph;
 using Microsoft.Bot.Builder;
@@ -20,14 +18,12 @@ namespace CallingBotSample.Bots
     public class MessageBot : ActivityHandler
     {
         private readonly IAdaptiveCardFactory adaptiveCardFactory;
-        private readonly IGraph graph;
         private readonly ICallService callService;
         private readonly IEnumerable<UserOptions> users;
 
-        public MessageBot(IAdaptiveCardFactory adaptiveCardFactory, IGraph graph, ICallService callService, IOptions<List<UserOptions>> users)
+        public MessageBot(IAdaptiveCardFactory adaptiveCardFactory, ICallService callService, IOptions<List<UserOptions>> users)
         {
             this.adaptiveCardFactory = adaptiveCardFactory;
-            this.graph = graph;
             this.callService = callService;
             this.users = users.Value;
         }
