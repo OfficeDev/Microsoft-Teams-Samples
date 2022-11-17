@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CallingBotSample.Authentication;
 using CallingBotSample.Interfaces;
+using CallingBotSample.Model;
 using CallingBotSample.Utility;
 using CallingMeetingBot.Extenstions;
 using Microsoft.AspNetCore.Http;
