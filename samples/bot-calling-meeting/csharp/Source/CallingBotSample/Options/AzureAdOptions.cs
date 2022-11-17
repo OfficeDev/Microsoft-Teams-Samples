@@ -1,7 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace CallingBotSample.Extensions
+namespace CallingBotSample.Options
 {
     /// <summary>
     /// The Azure AD options class.

@@ -1,28 +1,16 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.IO;
-using AdaptiveCards;
-using AdaptiveCards.Templating;
-using CallingBotSample.Interfaces;
+using global::AdaptiveCards;
+using global::AdaptiveCards.Templating;
 using Microsoft.Bot.Schema;
-using Microsoft.Extensions.Logging;
 
-namespace CallingBotSample.Helpers
+namespace CallingBotSample.AdaptiveCards
 {
-    /// <summary>
-    /// Helper for cards.
-    /// </summary>
-    public class CardHelper : ICard
+    public class AdaptiveCardFactory : IAdaptiveCardFactory
     {
-        private readonly ILogger<CardHelper> logger;
-
-        public CardHelper(ILogger<CardHelper> logger)
-        {
-            this.logger = logger;
-        }
-
-        public Attachment GetWelcomeCardAttachment()
+        public Attachment CreateWelcomeCard()
         {
             var template = GetCardTemplate("WelcomeCard.json");
 

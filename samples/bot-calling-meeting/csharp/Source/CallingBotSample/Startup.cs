@@ -1,10 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Collections.Generic;
+using CallingBotSample.AdaptiveCards;
 using CallingBotSample.Bots;
-using CallingBotSample.Extensions;
 using CallingBotSample.Helpers;
 using CallingBotSample.Interfaces;
+using CallingBotSample.Options;
+using CallingBotSample.Services.MicrosoftGraph;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
@@ -45,13 +48,16 @@ namespace CallingBotSample
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-            services.AddTransient<IBot, CallingBot>();
+            services.AddTransient<IBot, MessageBot>();
+            services.AddTransient<CallingBot>();
 
-            services.AddBot(options => this.Configuration.Bind("Bot", options));
+            services.Configure<AzureAdOptions>(Configuration.GetSection("AzureAd"));
+            services.Configure<BotOptions>(Configuration.GetSection("Bot"));
+            services.Configure<List<UserOptions>>(Configuration.GetSection("Users"));
 
-            services.AddSingleton<ICard, CardHelper>();
-            services.AddScoped<IGraph, GraphHelper>();
-            services.ConfigureGraphComponent(options => this.Configuration.Bind("AzureAd", options));
+            services.AddSingleton<IAdaptiveCardFactory, AdaptiveCardFactory>();
+
+            services.AddMicrosoftGraphServices(options => Configuration.Bind("AzureAd", options));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
