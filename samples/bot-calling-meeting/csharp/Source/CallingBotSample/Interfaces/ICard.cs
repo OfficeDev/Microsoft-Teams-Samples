@@ -1,11 +1,10 @@
-﻿// <copyright file="ICard.cs" company="Microsoft">
-// Copyright (c) Microsoft. All rights reserved.
-// </copyright>
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using Microsoft.Bot.Schema;
 
 namespace CallingBotSample.Interfaces
 {
-    using Microsoft.Bot.Schema;
-
     /// <summary>
     /// Interface for cards.
     /// </summary>

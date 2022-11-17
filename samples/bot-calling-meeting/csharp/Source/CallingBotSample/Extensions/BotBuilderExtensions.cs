@@ -1,9 +1,13 @@
-﻿namespace CallingBotSample.Extensions
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using System;
+using CallingBotSample.Bots;
+using Microsoft.Bot.Builder;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace CallingBotSample.Extensions
 {
-    using CallingBotSample.Bots;
-    using Microsoft.Bot.Builder;
-    using Microsoft.Extensions.DependencyInjection;
-    using System;
     public static class BotBuilderExtensions
     {
         public static IServiceCollection AddBot(this IServiceCollection services)

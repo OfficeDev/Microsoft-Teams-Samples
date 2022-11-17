@@ -1,18 +1,17 @@
-﻿// <copyright file="JoinInfo.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using System;
+using System.IO;
+using System.Net;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+using System.Text;
+using System.Text.RegularExpressions;
+using Microsoft.Graph;
 
 namespace CallingBotSample.Helpers
 {
-    using System;
-    using System.IO;
-    using System.Net;
-    using System.Runtime.Serialization;
-    using System.Runtime.Serialization.Json;
-    using System.Text;
-    using System.Text.RegularExpressions;
-    using Microsoft.Graph;
-
     /// <summary>
     /// Gets the join information.
     /// </summary>
