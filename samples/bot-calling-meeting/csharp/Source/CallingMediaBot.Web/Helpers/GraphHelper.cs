@@ -20,7 +20,7 @@ using Microsoft.Graph;
 public class GraphHelper : IGraph
 {
     private readonly ILogger<GraphHelper> logger;
-    private readonly IEnumerable<Web.Options.UserOptions> users;
+    private readonly IEnumerable<UserOptions> users;
     private readonly BotOptions botOptions;
     private readonly GraphServiceClient graphServiceClient;
 
@@ -107,13 +107,9 @@ public class GraphHelper : IGraph
             {
                 new InvitationParticipantInfo
                 {
-                    User = new Identity
+                    Identity = new IdentitySet
                     {
-                        DisplayName = this.users.ElementAt(1).DisplayName,
-                        Id = this.users.ElementAt(1).Id
-                    }
-                },
-                AdditionalData = new Dictionary<string, object>()
+                        User = new Identity
                         {
                             DisplayName = this.users.ElementAt(2).DisplayName,
                             Id = this.users.ElementAt(2).Id

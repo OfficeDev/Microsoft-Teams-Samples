@@ -18,7 +18,7 @@ public class AdaptiveCardFactory : IAdaptiveCardFactory
 
     private AdaptiveCardTemplate GetCardTemplate(string fileName)
     {
-        string templatePath = Path.Combine(Directory.GetCurrentDirectory(), "Resources", "templates", fileName);
+        string templatePath = Path.Combine(Directory.GetCurrentDirectory(), "Resources", fileName);
         return new AdaptiveCardTemplate(File.ReadAllText(templatePath));
     }
 
