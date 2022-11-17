@@ -5,14 +5,10 @@
 
 namespace CallingBotSample.Extensions
 {
-    using CallingBotSample.Configuration;
+    using Azure.Identity;
     using Microsoft.AspNetCore.Authentication;
-    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Options;
     using Microsoft.Graph;
-    using Microsoft.Graph.Auth;
-    using Microsoft.Identity.Client;
     using System;
 
     /// <summary>
@@ -31,15 +27,9 @@ namespace CallingBotSample.Extensions
             var options = new AzureAdOptions();
             azureAdOptionsAction(options);
 
-            IConfidentialClientApplication confidentialClientApplication = ConfidentialClientApplicationBuilder
-            .Create(options.ClientId)
-            .WithTenantId(options.TenantId)
-            .WithClientSecret(options.ClientSecret)
-            .Build();
+            ClientSecretCredential authenticationProvider = new ClientSecretCredential(options.TenantId, options.ClientId, options.ClientSecret);
 
-            ClientCredentialProvider authenticationProvider = new ClientCredentialProvider(confidentialClientApplication);
-
-            services.AddScoped<IGraphServiceClient, GraphServiceClient>(sp =>
+            services.AddScoped<GraphServiceClient, GraphServiceClient>(sp =>
             {
                 return new GraphServiceClient(authenticationProvider);
             });

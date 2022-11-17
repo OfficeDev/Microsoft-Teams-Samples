@@ -4,19 +4,17 @@
 // Generated with Bot Builder V4 SDK Template for Visual Studio EmptyBot v4.11.1
 
 using CallingBotSample.Bots;
-using CallingBotSample.Configuration;
 using CallingBotSample.Extensions;
 using CallingBotSample.Helpers;
 using CallingBotSample.Interfaces;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
 using Microsoft.Graph.Communications.Common.Telemetry;
 
 namespace CallingBotSample
@@ -37,11 +35,14 @@ namespace CallingBotSample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddNewtonsoftJson();
+            services.AddControllers();
             services.AddOptions();
 
             services.AddSingleton<IGraphLogger>(this.logger);
 
+
+            // Create the Bot Framework Authentication to be used with the Bot Adapter.
+            services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
 
             // Create the Bot Framework Adapter with error handling enabled.
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
