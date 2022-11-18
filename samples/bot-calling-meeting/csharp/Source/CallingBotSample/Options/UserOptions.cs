@@ -5,7 +5,7 @@ namespace CallingBotSample.Options
 {
     public class UserOptions
     {
-        public string DisplayName { get; set; }
-        public string Id { get; set; }
+        public string? DisplayName { get; set; }
+        public string? Id { get; set; }
     }
 }
