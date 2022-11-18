@@ -23,7 +23,7 @@ This sample demos UI to type in Incoming Webhook URL and message card payload, w
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   ```bash
   # determine dotnet version

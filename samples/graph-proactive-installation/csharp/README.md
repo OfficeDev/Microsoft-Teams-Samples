@@ -25,7 +25,7 @@ Language Used : C#
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 - [ngrok](https://ngrok.com/download) or equivalent tunnelling solution
 
 ## Setup

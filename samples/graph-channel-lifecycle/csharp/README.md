@@ -22,7 +22,7 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
  ![](ChannelLifecycle/Images/ChannelLifeCycleModule.gif)
 
 ## Prerequisites
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash

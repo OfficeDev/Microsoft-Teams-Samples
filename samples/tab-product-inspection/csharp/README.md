@@ -23,14 +23,14 @@ This sample app demonstrate a feature where user can scan a product, capture a i
 
 ## Prerequisites
 - Microsoft Teams is installed and you have an account (not a guest account)
-- To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 - [ngrok](https://ngrok.com/download) or equivalent tunneling solution
 - [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
 
 ## Setup.
   
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-> NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
+    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
 
 2. Setup NGROK

@@ -19,7 +19,7 @@ In this quickstart we'll walk-through creating a custom channel/group tab with A
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash

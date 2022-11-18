@@ -23,7 +23,7 @@ Using this csharp sample, you can check how to get staggered graph api permissio
  
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash

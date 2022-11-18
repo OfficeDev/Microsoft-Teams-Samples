@@ -23,7 +23,7 @@ This is the demo app for [Teams tab using miscrosoft graph toolkit](https://docs
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash
