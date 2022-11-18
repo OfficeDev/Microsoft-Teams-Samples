@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using CallingBotSample.Authentication;
 using CallingBotSample.Options;
 using CallingBotSample.Services.MicrosoftGraph;
+using CallingBotSample.Services.TeamsRecordingService;
 using CallingBotSample.Utility;
 using CallingMeetingBot.Extensions;
 using Microsoft.AspNetCore.Http;
@@ -34,11 +35,13 @@ namespace CallingBotSample.Bots
         private readonly ICallService callService;
         private readonly AudioRecordingConstants audioRecordingConstants;
         private readonly IMemoryCache callBotCache;
+        private readonly ITeamsRecordingService teamsRecordingService;
         private readonly ILogger<CallingBot> logger;
 
         public CallingBot(
         ICallService callService,
         AudioRecordingConstants audioRecordingConstants,
+        ITeamsRecordingService teamsRecordingService,
         IGraphLogger graphLogger,
         IMemoryCache callBotCache,
         IOptions<BotOptions> botOptions,
@@ -47,6 +50,7 @@ namespace CallingBotSample.Bots
             this.botOptions = botOptions.Value;
             this.callService = callService;
             this.audioRecordingConstants = audioRecordingConstants;
+            this.teamsRecordingService = teamsRecordingService;
             this.graphLogger = graphLogger;
             this.callBotCache = callBotCache;
             this.logger = logger;
@@ -121,9 +125,26 @@ namespace CallingBotSample.Bots
                     if (!callBotCache.Get<bool>(key))
                     {
                         callBotCache.Set(key, true);
-                        await callService.PlayPrompt(callId, audioRecordingConstants.Speech);
+                        await callService.Record(callId, audioRecordingConstants.Speech);
                     }
                 }
+            }
+            else if (args.ResourceData is RecordOperation recording)
+            {
+                if (recording.ResultInfo.Code >= 400)
+                {
+                    return;
+                }
+
+                var recordingLocation = await teamsRecordingService.DownloadRecording(recording.RecordingLocation, recording.RecordingAccessToken);
+
+                await callService.PlayPrompt(
+                    callId,
+                    new MediaInfo
+                    {
+                        Uri = new Uri(botOptions.BotBaseUrl, recordingLocation).ToString(),
+                        ResourceId = Guid.NewGuid().ToString(),
+                    });
             }
             else if (args.ChangeType == ChangeType.Updated &&
                 args.Notification.ResourceUrl.Contains("/participants") &&

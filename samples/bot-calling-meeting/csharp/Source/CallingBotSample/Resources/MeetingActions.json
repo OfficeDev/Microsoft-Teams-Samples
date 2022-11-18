@@ -35,10 +35,10 @@
     },
     {
       "type": "Action.Submit",
-      "title": "Play prompt",
-      "id": "playprompt",
+      "title": "Play record prompt",
+      "id": "playrecordprompt",
       "data": {
-        "type": "playprompt"
+        "type": "playrecordprompt"
       }
     },
     {
