@@ -74,17 +74,28 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     ```bash
     npm install
     ```
-
-4) Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the AAD app registration in Azure portal or from Bot Framework registration. 
+- Update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the AAD app registration in Azure portal or from Bot Framework registration. 
 > NOTE: the App Password is referred to as the `client secret` in the azure portal app registration service and you can always create a new client secret anytime.
 
-5) Run your app
+- Run your app
+    ```bash
+    npm start
+    ```
+- Install modules & Run the NodeJS Server
+  - Server will run on PORT: 3978
+  - Open a terminal and navigate to project root directory
+  
+  ```bash
+    npm run server
+  ```
+> NOTE:This command is equivalent to: npm install > npm start
+
+4) Run your app
 
     ```bash
     npm start
     ```
-
-6) Setup Manifest for Teams
+5) Setup Manifest for Teams
 
     - **Edit** the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) 
         `<<DOMAIN-NAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.

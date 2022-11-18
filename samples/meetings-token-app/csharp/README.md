@@ -38,7 +38,7 @@ This application also shows the implementation of Live Share SDK to update the d
 - [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
   
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
-  ```
+
 ## Setup
 ** This app should work in developer preview only**
 

@@ -78,9 +78,16 @@ Also update `BaseUrl` according to your code runtime environment.
     ```bash
     npm start
     ```
+- Install modules & Run the NodeJS Server
+  - Server will run on PORT: 3978
+  - Open a terminal and navigate to project root directory
+ 
+    ```bash
+    npm run server
+    ```
+- This command is equivalent to: npm install > npm start
 
-1) Setup Manifest for Teams
-
+- Setup Manifest for Teams
 4) **This step is specific to Teams.**
 
    -  Edit the `manifest.json` in the `appPackage` folder and replace the following details:

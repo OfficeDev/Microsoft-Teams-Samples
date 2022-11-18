@@ -72,24 +72,14 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
     ✔ ID Token  
     ✔ Access Token  
 -  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
-2. Setup for Bot
-
-   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
-    - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
-    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
     
-   In the new Azure Bot resource in the Portal, 
-    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. 
-    
- 3. Setup NGROK
+2. Setup NGROK
   - Run ngrok - point to port 3978
 
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
- 4. Setup for code
+3. Setup for code
  - Clone the repository
 
     ```bash
@@ -108,8 +98,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
     ```bash
     npm start
     ```
-
- 5. Setup Manifest for Teams
+4. Setup Manifest for Teams
 
 - **This step is specific to Teams.**
     - Edit the `manifest.json` contained in the `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)

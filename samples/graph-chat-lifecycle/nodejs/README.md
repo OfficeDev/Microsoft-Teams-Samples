@@ -83,19 +83,13 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
     ✔ Access Token  
 -  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
-2. Setup for Bot
-- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
-
-3. Setup NGROK
+2. Setup NGROK
   - Run ngrok - point to port 3978
 
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
-4. Setup for code
+3. Setup for code
   - Clone the repository
 
     ```bash
@@ -129,7 +123,7 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
   - Select ```graph-chat-lifecycle\nodejs``` Folder
 
   
-5.  __*This step is specific to Teams.*__
+4.  __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the `Manifest` folder in src folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). Also, replace your Base url wherever you see the place holder string `<<YOUR-BASE-URL>>`.
     - **Zip** up the contents of the `manifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")

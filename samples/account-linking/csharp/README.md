@@ -28,7 +28,7 @@ Please see the [Code Tours](#code-tours) section for in-depth explanation of the
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash

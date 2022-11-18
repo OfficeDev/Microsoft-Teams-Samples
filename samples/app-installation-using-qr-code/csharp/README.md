@@ -31,7 +31,7 @@ The user can Generate a new QR code (contains app id information) and then use I
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash

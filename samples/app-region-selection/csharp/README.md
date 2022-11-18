@@ -24,7 +24,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), f
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   ```bash
   # determine dotnet version

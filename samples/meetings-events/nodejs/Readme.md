@@ -64,12 +64,12 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-- Install modules
+- In a console, navigate to samples/meeting-events/nodejs    
+- Install modules 
 
     ```bash
     npm install
     ```
-
 - Navigate to `samples/meeting-events/nodejs` and update the `.env` configuration for the bot to use the `MicrosoftAppId` (Microsoft App Id) and `MicrosoftAppPassword` (App Password) from the app registration in your Azure portal or from Bot Framework registration. 
 
 > NOTE: the App Password is referred to as the `client secret` in the azure portal and you can always create a new client secret anytime.
@@ -79,6 +79,14 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     ```bash
     npm start
     ```
+- Install modules & Run the NodeJS Server
+    - Server will run on PORT: 3978
+    - Open a terminal and navigate to project root directory
+
+    ```bash
+    npm run server
+    ```
+- This command is equivalent to: npm install > npm start
 
 4) Setup Manifest for Teams (**This step is specific to Teams.**)
 

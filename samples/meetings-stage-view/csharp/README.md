@@ -44,25 +44,19 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 
 **This capability is currently available in developer preview only**
 
+
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-
-    
-2. Setup for Bot
-  - Register a AAD aap registration in Azure portal.
-  - Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-  - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-  - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-
     > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
-3. Setup NGROK
+
+2. Setup NGROK
 - Run ngrok - point to port 3978
 
 ```bash
 # ngrok http -host-header=rewrite 3978
 ```
 
-4. Setup for code
+3. Setup for code
 
 - Clone the repository
 
@@ -100,7 +94,7 @@ For reference please check [Enable and configure your apps for Teams meetings](h
   - Select `AppInMeeting.csproj` file
   - Press `F5` to run the project
 
-5. Setup Manifest for Teams
+4. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.

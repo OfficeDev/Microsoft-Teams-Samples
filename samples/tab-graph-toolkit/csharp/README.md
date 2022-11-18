@@ -34,8 +34,10 @@ This is the demo app for [Teams tab using miscrosoft graph toolkit](https://docs
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 ## Setup
- 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-  -  Configuring MSAL2.0 Auth Provider
+
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+> NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
+
   - Register your app with Microsoft identity platform via the Azure AD portal
   - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2).
   - Click on Add a Platform in redirect URI section.
@@ -43,22 +45,14 @@ This is the demo app for [Teams tab using miscrosoft graph toolkit](https://docs
   - Save and register.
   - Once App is registerd copy the `client_Id` for your app and update in the app.
 
- 2. Setup for Bot
-- Register a AAD aap registration in Azure portal.
-- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-
-
-    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
-
-3. Setup NGROK
+2. Setup NGROK
  - Run ngrok - point to port 3978
 
   ```bash
    ngrok http -host-header=rewrite 3978
   ```
 
-4. Setup for code
+3. Setup for code
 
 - Clone the repository
 
@@ -93,7 +87,7 @@ This is the demo app for [Teams tab using miscrosoft graph toolkit](https://docs
      - Select `TabGraphToolkit.csproj` file
      - Press `F5` to run the project 
      
-5. Setup Manifest for Teams
+4. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
