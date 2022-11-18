@@ -210,7 +210,6 @@ namespace CallingBotSample.Bots
                     }
 
                     await callService.Record(conversationData.MeetingId, audioRecordingConstants.PleaseRecordYourMessage);
-<<<<<<< HEAD
                     break;
                 case "hangup":
                     if (conversationData.MeetingId == null)
@@ -221,8 +220,6 @@ namespace CallingBotSample.Bots
                     }
 
                     await callService.HangUp(conversationData.MeetingId);
-=======
->>>>>>> 2a170132 (Calling Bot: Prompt for Recording and echo response)
                     break;
                 case "joinscheduledmeeting":
                     if (turnContext.Activity.ChannelData["meeting"] != null)

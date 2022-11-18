@@ -172,23 +172,6 @@ namespace CallingBotSample.Bots
                     }
                 }
             }
-            else if (args.ResourceData is RecordOperation recording)
-            {
-                if (recording.ResultInfo.Code >= 400)
-                {
-                    return;
-                }
-
-                var recordingLocation = await teamsRecordingService.DownloadRecording(recording.RecordingLocation, recording.RecordingAccessToken);
-
-                await callService.PlayPrompt(
-                    GetCallIdFromNotification(args),
-                    new MediaInfo
-                    {
-                        Uri = new Uri(botOptions.BotBaseUrl, recordingLocation).ToString(),
-                        ResourceId = Guid.NewGuid().ToString(),
-                    });
-            }
         }
 
         private string GetCallIdFromNotification(NotificationEventArgs notificationArgs)
