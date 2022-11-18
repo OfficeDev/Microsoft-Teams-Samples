@@ -34,8 +34,8 @@ namespace CallingBotSample.Bots
         private readonly BotOptions botOptions;
         private readonly ICallService callService;
         private readonly AudioRecordingConstants audioRecordingConstants;
-        private readonly IMemoryCache callBotCache;
         private readonly ITeamsRecordingService teamsRecordingService;
+        private readonly IMemoryCache callBotCache;
         private readonly ILogger<CallingBot> logger;
 
         public CallingBot(
@@ -125,7 +125,7 @@ namespace CallingBotSample.Bots
                     if (!callBotCache.Get<bool>(key))
                     {
                         callBotCache.Set(key, true);
-                        await callService.Record(callId, audioRecordingConstants.Speech);
+                        await callService.Record(callId, audioRecordingConstants.PleaseRecordYourMessage);
                     }
                 }
             }
@@ -171,6 +171,23 @@ namespace CallingBotSample.Bots
                         return;
                     }
                 }
+            }
+            else if (args.ResourceData is RecordOperation recording)
+            {
+                if (recording.ResultInfo.Code >= 400)
+                {
+                    return;
+                }
+
+                var recordingLocation = await teamsRecordingService.DownloadRecording(recording.RecordingLocation, recording.RecordingAccessToken);
+
+                await callService.PlayPrompt(
+                    GetCallIdFromNotification(args),
+                    new MediaInfo
+                    {
+                        Uri = new Uri(botOptions.BotBaseUrl, recordingLocation).ToString(),
+                        ResourceId = Guid.NewGuid().ToString(),
+                    });
             }
         }
 
