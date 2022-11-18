@@ -39,6 +39,7 @@
       "id": "playrecordprompt",
       "data": {
         "type": "playrecordprompt"
+<<<<<<< HEAD
       }
     },
     {
@@ -47,6 +48,8 @@
       "id": "hangup",
       "data": {
         "type": "hangup"
+=======
+>>>>>>> 2a170132 (Calling Bot: Prompt for Recording and echo response)
       }
     }
   ]
