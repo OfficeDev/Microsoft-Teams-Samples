@@ -60,7 +60,7 @@ namespace CallingBotSample.Bots
 
                     if (call != null)
                     {
-                        await turnContext.SendActivityAsync("Placed a call Successfully.", cancellationToken: cancellationToken);
+                        await turnContext.SendActivityAsync("Placed a call successfully.", cancellationToken: cancellationToken);
                     }
                     break;
                 default:

@@ -36,6 +36,7 @@ namespace CallingBotSample
         {
             services.AddControllers();
             services.AddOptions();
+            services.AddMemoryCache();
 
             services.AddSingleton<IGraphLogger>(this.logger);
 

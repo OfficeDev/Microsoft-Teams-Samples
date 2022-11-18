@@ -11,6 +11,7 @@ using CallingBotSample.Utility;
 using CallingMeetingBot.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Bot.Builder;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Graph;
@@ -31,12 +32,14 @@ namespace CallingBotSample.Bots
         private readonly BotOptions botOptions;
         private readonly ICallService callService;
         private readonly AudioRecordingConstants audioRecordingConstants;
+        private readonly IMemoryCache callBotCache;
         private readonly ILogger<CallingBot> logger;
 
         public CallingBot(
         ICallService callService,
         AudioRecordingConstants audioRecordingConstants,
         IGraphLogger graphLogger,
+        IMemoryCache callBotCache,
         IOptions<BotOptions> botOptions,
         ILogger<CallingBot> logger)
         {
@@ -44,6 +47,7 @@ namespace CallingBotSample.Bots
             this.callService = callService;
             this.audioRecordingConstants = audioRecordingConstants;
             this.graphLogger = graphLogger;
+            this.callBotCache = callBotCache;
             this.logger = logger;
 
             var name = this.GetType().Assembly.GetName().Name;
@@ -100,19 +104,23 @@ namespace CallingBotSample.Bots
             graphLogger.CorrelationId = args.ScenarioId;
             if (args.ResourceData is Call call)
             {
+                var callId = GetCallIdFromNotification(args);
+
                 if (args.ChangeType == ChangeType.Created && call.State == CallState.Incoming)
                 {
-                    await callService.Answer(GetCallIdFromNotification(args), audioRecordingConstants.Speech, audioRecordingConstants.PleaseRecordYourMessage);
+                    await callService.Answer(callId, audioRecordingConstants.Speech, audioRecordingConstants.PleaseRecordYourMessage);
                 }
                 else if (
                     args.ChangeType == ChangeType.Updated
-                    && call.State == CallState.Established
-                    // The below helps to distinguish between two similar Established notifications that are sent for incoming 1:1 meetings
-                    && (call.MediaState?.Audio == MediaState.Active
-                    // And this covers calls that the bot creates
-                    || call.Direction == CallDirection.Outgoing))
+                    && call.State == CallState.Established)
                 {
-                    await callService.PlayPrompt(GetCallIdFromNotification(args), audioRecordingConstants.Speech);
+                    // Some scenarios fire two CallState.Established events. The use of a cache ensures we only play the prompt once on meeting join
+                    string key = $"established:{callId}";
+                    if (!callBotCache.Get<bool>(key))
+                    {
+                        callBotCache.Set(key, true);
+                        await callService.PlayPrompt(callId, audioRecordingConstants.Speech);
+                    }
                 }
             }
         }
