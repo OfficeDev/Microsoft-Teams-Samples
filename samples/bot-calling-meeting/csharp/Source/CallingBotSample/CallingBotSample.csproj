@@ -3,6 +3,9 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <AnalysisLevel>preview-recommended</AnalysisLevel>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,7 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.17.2" />
-    <PackageReference Include="Microsoft.Graph" Version="4.45.0" /> 
+    <PackageReference Include="Microsoft.Graph" Version="4.45.0" />
     <PackageReference Include="Azure.Identity" Version="1.7.0" />
     <PackageReference Include="Microsoft.Graph.Communications.Core" Version="1.2.0.5304" />
     <PackageReference Include="Microsoft.Graph.Communications.Calls" Version="1.2.0.5304" />

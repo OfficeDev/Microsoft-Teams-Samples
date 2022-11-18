@@ -11,7 +11,7 @@ using CallingBotSample.Authentication;
 using CallingBotSample.Interfaces;
 using CallingBotSample.Model;
 using CallingBotSample.Utility;
-using CallingMeetingBot.Extenstions;
+using CallingMeetingBot.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;

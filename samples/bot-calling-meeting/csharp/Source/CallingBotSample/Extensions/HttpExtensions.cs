@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 
-namespace CallingMeetingBot.Extenstions
+namespace CallingMeetingBot.Extensions
 {
     public static class HttpExtensions
     {

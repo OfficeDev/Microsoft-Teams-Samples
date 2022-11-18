@@ -15,9 +15,9 @@ namespace CallingBotSample.Utility
         public static async Task ForgetAndLogExceptionAsync(
             this Task task,
             IGraphLogger logger,
-            string description = null,
-            [CallerMemberName] string memberName = null,
-            [CallerFilePath] string filePath = null,
+            string? description = null,
+            [CallerMemberName] string? memberName = null,
+            [CallerFilePath] string? filePath = null,
             [CallerLineNumber] int lineNumber = 0)
         {
             try

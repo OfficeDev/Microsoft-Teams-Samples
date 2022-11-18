@@ -19,7 +19,7 @@ namespace CallingBotSample.Authentication
         /// </summary>
         /// <param name="authenticationProvider">The authentication provider.</param>
         /// <param name="tenant">The tenant.</param>
-        public AuthenticationWrapper(IRequestAuthenticationProvider authenticationProvider, string tenant = null)
+        public AuthenticationWrapper(IRequestAuthenticationProvider authenticationProvider, string? tenant = null)
         {
             this.authenticationProvider = authenticationProvider.NotNull(nameof(authenticationProvider));
             this.tenant = tenant;

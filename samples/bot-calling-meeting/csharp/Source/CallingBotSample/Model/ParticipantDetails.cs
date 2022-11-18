@@ -8,21 +8,21 @@ namespace CallingBotSample.Model
         /// <summary>
         /// Gets or sets the name of participant.
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// Gets or sets the user id of participant.
         /// </summary>
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
         /// <summary>
         /// Gets or sets the email of participant.
         /// </summary>
-        public string EmailId { get; set; }
+        public string? EmailId { get; set; }
 
         /// <summary>
         /// Gets or sets the tenant id of participant.
         /// </summary>
-        public string TenantId { get; set; }
+        public string? TenantId { get; set; }
     }
 }

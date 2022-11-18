@@ -3,6 +3,7 @@
 
 using System;
 using CallingBotSample.Bots;
+using CallingBotSample.Model;
 using Microsoft.Bot.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
