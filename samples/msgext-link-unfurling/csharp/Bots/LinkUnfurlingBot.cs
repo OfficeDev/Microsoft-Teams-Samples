@@ -46,7 +46,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                              ContentType = AdaptiveCard.ContentType,
                              Preview = attachments,
                                    
-                        },        
+                        },       
                     },
                 },
             }); 
