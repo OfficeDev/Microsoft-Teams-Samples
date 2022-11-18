@@ -103,32 +103,36 @@ namespace CallingBotSample.Bots
 
         private async Task NotificationProcessor_OnNotificationReceivedAsync(NotificationEventArgs args)
         {
-            // Should look to run async as not to block subsequent notifications.
-            // https://microsoftgraph.github.io/microsoft-graph-comms-samples/docs/articles/index.html#answer-incoming-call-with-service-hosted-media
-
             graphLogger.CorrelationId = args.ScenarioId;
             var callId = GetCallIdFromNotification(args);
 
             if (args.ResourceData is Call call)
             {
-
+                // If the notification is a newly created, incoming call, answer it
                 if (args.ChangeType == ChangeType.Created && call.State == CallState.Incoming)
                 {
                     await callService.Answer(callId, audioRecordingConstants.Speech, audioRecordingConstants.PleaseRecordYourMessage);
                 }
+                // If the notification is established (answered), fire a recording prompt
                 else if (
                     args.ChangeType == ChangeType.Updated
                     && call.State == CallState.Established)
                 {
                     // Some scenarios fire two CallState.Established events. The use of a cache ensures we only play the prompt once on meeting join
+                    // This works by keeping track of when the record prompt on meeting established is sent, and if another notifications comes in
+                    // we do not send the prompt any more.
                     string key = $"{callId}:established";
                     if (!callBotCache.Get<bool>(key))
                     {
-                        callBotCache.Set(key, true);
+                        callBotCache.Set(key, true, new MemoryCacheEntryOptions
+                        {
+                            AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30)
+                        });
                         await callService.Record(callId, audioRecordingConstants.PleaseRecordYourMessage);
                     }
                 }
             }
+            // If the notification is a recording, download from the Teams Recording Service, and then echo the audio back to the call
             else if (args.ResourceData is RecordOperation recording)
             {
                 if (recording.ResultInfo.Code >= 400)
@@ -146,6 +150,9 @@ namespace CallingBotSample.Bots
                         ResourceId = Guid.NewGuid().ToString(),
                     });
             }
+            // If the notification is participants change, keep track of if a User has joined the call at some point
+            // if at least one user has joined, and only the bot is remaining in the call, get the bot to hang up.
+            // This ensures that the Bot doesn't keep a call active for a long period of time.
             else if (args.ChangeType == ChangeType.Updated &&
                 args.Notification.ResourceUrl.Contains("/participants") &&
                 args.ResourceData is object[] objs)
@@ -159,7 +166,13 @@ namespace CallingBotSample.Bots
 
                     if (!atLeastOneUserJoined && participants.Any(p => p.Info.Identity.User != null))
                     {
-                        callBotCache.Set(key, true);
+                        callBotCache.Set(key, true, new MemoryCacheEntryOptions
+                        {
+                            // This 1 hour cache is sufficient for this sample.
+                            // If you are replicating this code, you might want to consider an alternative value which takes into account
+                            // the meeting's scheduled length.
+                            AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1)
+                        });
                     }
 
                     // If there is only one participant remaining, and it's this application, and at least one user has joined at some point, hang up
