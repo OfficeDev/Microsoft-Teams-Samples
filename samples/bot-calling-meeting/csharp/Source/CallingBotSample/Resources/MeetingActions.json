@@ -40,6 +40,14 @@
       "data": {
         "type": "playprompt"
       }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Hang up",
+      "id": "hangup",
+      "data": {
+        "type": "hangup"
+      }
     }
   ]
 }

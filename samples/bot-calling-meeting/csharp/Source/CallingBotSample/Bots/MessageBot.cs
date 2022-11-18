@@ -209,6 +209,16 @@ namespace CallingBotSample.Bots
 
                     await callService.PlayPrompt(conversationData.MeetingId, audioRecordingConstants.Speech);
                     break;
+                case "hangup":
+                    if (conversationData.MeetingId == null)
+                    {
+                        // Without the Meeting ID we are unable to play the prompt
+                        await turnContext.SendActivityAsync("Meeting ID not found, unable to end meeting.");
+                        return;
+                    }
+
+                    await callService.HangUp(conversationData.MeetingId);
+                    break;
                 case "joinscheduledmeeting":
                     if (turnContext.Activity.ChannelData["meeting"] != null)
                     {
@@ -228,7 +238,7 @@ namespace CallingBotSample.Bots
                             conversationData.MeetingId = call.Id;
                             await conversationState.SaveChangesAsync(turnContext, false, cancellationToken);
 
-                            await turnContext.SendActivityAsync("Placed a call Successfully.", cancellationToken: cancellationToken);
+                            await turnContext.SendActivityAsync("Joined meeting successfully.", cancellationToken: cancellationToken);
                         }
                     }
                     else
