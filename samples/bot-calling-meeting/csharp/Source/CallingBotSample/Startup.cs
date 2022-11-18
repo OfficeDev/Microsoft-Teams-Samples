@@ -6,6 +6,7 @@ using CallingBotSample.AdaptiveCards;
 using CallingBotSample.Bots;
 using CallingBotSample.Options;
 using CallingBotSample.Services.MicrosoftGraph;
+using CallingBotSample.Services.TeamsRecordingService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
@@ -36,6 +37,7 @@ namespace CallingBotSample
         {
             services.AddControllers();
             services.AddOptions();
+            services.AddHttpClient<ITeamsRecordingService, TeamsRecordingService>("TeamsRecordingService");
 
             services.AddSingleton<IGraphLogger>(this.logger);
 

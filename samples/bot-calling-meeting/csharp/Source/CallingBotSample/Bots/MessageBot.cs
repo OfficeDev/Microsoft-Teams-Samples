@@ -199,7 +199,7 @@ namespace CallingBotSample.Bots
 
                     await SendMeetingActionsCard(turnContext, cancellationToken);
                     break;
-                case "playprompt":
+                case "playrecordprompt":
                     if (conversationData.MeetingId == null)
                     {
                         // Without the Meeting ID we are unable to play the prompt
@@ -207,7 +207,7 @@ namespace CallingBotSample.Bots
                         return;
                     }
 
-                    await callService.PlayPrompt(conversationData.MeetingId, audioRecordingConstants.Speech);
+                    await callService.Record(conversationData.MeetingId, audioRecordingConstants.PleaseRecordYourMessage);
                     break;
                 case "joinscheduledmeeting":
                     if (turnContext.Activity.ChannelData["meeting"] != null)
