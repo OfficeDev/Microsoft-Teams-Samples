@@ -39,7 +39,6 @@ namespace CallingBotSample.Bots
         private readonly AudioRecordingConstants audioRecordingConstants;
         private readonly ITeamsRecordingService teamsRecordingService;
         private readonly IMemoryCache callBotCache;
-        private readonly ITeamsRecordingService teamsRecordingService;
         private readonly ISpeechService speechService;
         private readonly IBotService botService;
         private readonly ILogger<CallingBot> logger;
