@@ -45,7 +45,7 @@ This sample shows a feature where user can schedule a recurring task and get the
  3. Run ngrok - point to port 3978
 
     ```bash
-    # ngrok http -host-header=rewrite 3978
+    # ngrok http --host-header=rewrite 3978
     ```
  4. Setup for code
   - Clone the repository
