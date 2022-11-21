@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CallingBotSample.AdaptiveCards;
+using CallingBotSample.Helpers;
 using CallingBotSample.Models;
 using CallingBotSample.Options;
 using CallingBotSample.Services.MicrosoftGraph;
@@ -13,10 +14,12 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Graph;
 using Newtonsoft.Json.Linq;
+using MeetingInfo = Microsoft.Graph.MeetingInfo;
 
 namespace CallingBotSample.Bots
 {
@@ -25,7 +28,12 @@ namespace CallingBotSample.Bots
         private readonly ConversationState conversationState;
         private readonly IAdaptiveCardFactory adaptiveCardFactory;
         private readonly AudioRecordingConstants audioRecordingConstants;
+
         private readonly ICallService callService;
+        private readonly IChatService chatService;
+        private readonly IOnlineMeetingService onlineMeetingService;
+        private readonly IMemoryCache callBotCache;
+
         private readonly AzureAdOptions azureAdOptions;
         private readonly ILogger<MessageBot> logger;
 
@@ -34,13 +42,21 @@ namespace CallingBotSample.Bots
             IAdaptiveCardFactory adaptiveCardFactory,
             AudioRecordingConstants audioRecordingConstants,
             ICallService callService,
+            IChatService chatService,
+            IOnlineMeetingService onlineMeetingService,
+            IMemoryCache callBotCache,
             IOptions<AzureAdOptions> azureAdOptions,
             ILogger<MessageBot> logger)
         {
             this.conversationState = conversationState;
             this.adaptiveCardFactory = adaptiveCardFactory;
             this.audioRecordingConstants = audioRecordingConstants;
+
             this.callService = callService;
+            this.chatService = chatService;
+            this.onlineMeetingService = onlineMeetingService;
+            this.callBotCache = callBotCache;
+
             this.azureAdOptions = azureAdOptions.Value;
             this.logger = logger;
         }
@@ -103,6 +119,10 @@ namespace CallingBotSample.Bots
                     taskInfo.Card = adaptiveCardFactory.CreatePeoplePickerCard("Choose who to invite to the call:", "Invite");
                     taskInfo.Title = "Select the user to invite";
                     break;
+                case "openincidenttask":
+                    taskInfo.Card = adaptiveCardFactory.CreateIncidentCard();
+                    taskInfo.Title = "Create incident";
+                    break;
                 default:
                     break;
             }
@@ -119,20 +139,22 @@ namespace CallingBotSample.Bots
         protected override async Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
             var asJobject = JObject.FromObject(taskModuleRequest.Data);
-            var peoplePicker = asJobject.ToObject<TaskModuleSubmitData>()?.PeoplePicker;
-            var action = asJobject.ToObject<TaskModuleSubmitData>()?.Action.ToLowerInvariant();
+            var moduleSubmitData = asJobject.ToObject<TaskModuleSubmitData>();
+            var peoplePicker = moduleSubmitData?.PeoplePicker;
 
             var conversationStateAccessors = conversationState.CreateProperty<MeetingActionDetails>(nameof(MeetingActionDetails));
             var conversationData = await conversationStateAccessors.GetAsync(turnContext, () => new MeetingActionDetails());
 
             if (peoplePicker != null)
             {
+                var peoplePickerAadIds = peoplePicker.Split(',');
+                var action = moduleSubmitData?.Action?.ToLowerInvariant();
+
                 try
                 {
                     switch (action)
                     {
                         case "create":
-                            var peoplePickerAadIds = peoplePicker.Split(',');
                             var call = await callService.Create(users: peoplePickerAadIds.Select(p => new Identity { Id = p }).ToArray());
 
                             if (call != null)
@@ -168,6 +190,38 @@ namespace CallingBotSample.Bots
                             {
                                 return CreateTaskModuleResponse("Something went wrong 😖. We were unable to get the meeting id of this meeting.");
                             }
+                        case "createincident":
+                            var subject = moduleSubmitData?.IncidentName;
+                            var onlineMeeting = await onlineMeetingService.Create(subject, peoplePickerAadIds);
+
+                            if (onlineMeeting != null)
+                            {
+                                (ChatInfo chatInfo, MeetingInfo meetingInfo) = JoinInfo.ParseJoinURL(onlineMeeting.JoinWebUrl);
+                                var meetingCall = await callService.Create(chatInfo, meetingInfo);
+
+                                if (meetingCall != null)
+                                {
+                                    // Save the meeting ID so it can be used for transferring/inviting participants to the call later.
+                                    conversationData.MeetingId = meetingCall.Id;
+                                    await conversationState.SaveChangesAsync(turnContext, false, cancellationToken);
+
+                                    callBotCache.Set($"{meetingCall.Id}:incident", new IncidentDetails
+                                    {
+                                        CallId = meetingCall.Id,
+                                        IncidentSubject = subject,
+                                        MeetingInfo = meetingInfo,
+                                        ChatInfo = chatInfo,
+                                        Participants = peoplePickerAadIds.Select(p => new Identity
+                                        {
+                                            Id = p,
+                                        })
+                                    });
+
+                                    await turnContext.SendActivityAsync("Placed a call Successfully.", cancellationToken: cancellationToken);
+                                }
+                                return CreateTaskModuleResponse("Working on that, you can close this dialog now.");
+                            }
+                            break;
                         default:
                             break;
                     }
@@ -225,11 +279,17 @@ namespace CallingBotSample.Bots
                         var users = await TeamsInfo.GetPagedMembersAsync(turnContext, cancellationToken: cancellationToken);
 
                         var call = await callService.Create(
-                            turnContext.Activity.Conversation.Id,
-                            new Identity
+                            new ChatInfo { ThreadId = turnContext.Activity.Conversation.Id },
+                            new OrganizerMeetingInfo
                             {
-                                Id = users.Members[0].AadObjectId,
-                                AdditionalData = new Dictionary<string, object> { { "tenantId", azureAdOptions.TenantId } }
+                                Organizer = new IdentitySet
+                                {
+                                    User = new Identity
+                                    {
+                                        Id = users.Members[0].AadObjectId,
+                                        AdditionalData = new Dictionary<string, object> { { "tenantId", azureAdOptions.TenantId } }
+                                    },
+                                },
                             });
 
                         if (call != null)

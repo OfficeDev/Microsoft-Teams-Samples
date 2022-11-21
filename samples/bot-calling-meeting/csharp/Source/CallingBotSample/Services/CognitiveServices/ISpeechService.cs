@@ -8,6 +8,7 @@ namespace CallingBotSample.Services.CognitiveServices
 {
     public interface ISpeechService
     {
-        Task<SpeechRecognitionResult> ConvertWavToText(string fileName);
+        Task<string?> ConvertWavToText(string fileName);
+        Task<string?> ConvertTextToSpeech(string text);
     }
 }

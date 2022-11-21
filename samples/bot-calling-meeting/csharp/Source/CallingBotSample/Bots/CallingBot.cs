@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using CallingBotSample.Authentication;
+using CallingBotSample.Models;
 using CallingBotSample.Options;
 using CallingBotSample.Services.BotFramework;
 using CallingBotSample.Services.CognitiveServices;
@@ -15,7 +16,6 @@ using CallingBotSample.Utility;
 using CallingMeetingBot.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Bot.Builder;
-using Microsoft.CognitiveServices.Speech;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -120,7 +120,6 @@ namespace CallingBotSample.Bots
 
             if (args.ResourceData is Call call)
             {
-
                 if (args.ChangeType == ChangeType.Created && call.State == CallState.Incoming)
                 {
                     await callService.Answer(callId, audioRecordingConstants.Speech, audioRecordingConstants.PleaseRecordYourMessage);
@@ -135,6 +134,11 @@ namespace CallingBotSample.Bots
                     {
                         callBotCache.Set(key, true);
                         await callService.Record(callId, audioRecordingConstants.PleaseRecordYourMessage);
+                    }
+
+                    if (callBotCache.TryGetValue($"{callId}:incident", out IncidentDetails incidentDetails))
+                    {
+                        await callService.InviteParticipant(callId, incidentDetails.Participants.Select(p => new IdentitySet { User = p }).ToArray());
                     }
                 }
             }
@@ -152,13 +156,14 @@ namespace CallingBotSample.Bots
                     var callDetails = callService.Get(callId);
                     var result = await speechService.ConvertWavToText(recordingLocation);
 
-                    if (result.Reason == ResultReason.RecognizedSpeech)
+                    if (result != null)
                     {
                         var threadId = (await callDetails)?.ChatInfo?.ThreadId;
                         if (threadId != null)
                         {
-                            await botService.SendToConversation($"You said: {result.Text}", threadId);
+                            await botService.SendToConversation($"You said: {result}", threadId);
                         }
+
                     }
                 }
                 catch (Exception ex)
@@ -188,6 +193,28 @@ namespace CallingBotSample.Bots
                     if (!atLeastOneUserJoined && participants.Any(p => p.Info.Identity.User != null))
                     {
                         callBotCache.Set(key, true);
+
+                        if (callBotCache.TryGetValue($"{callId}:incident", out IncidentDetails incidentDetails))
+                        {
+                            string? textToSpeechRecordingLocation = await speechService.ConvertTextToSpeech(
+                                $"There is an ongoing incident for {incidentDetails.IncidentSubject}. Your assistance is required.");
+
+                            if (textToSpeechRecordingLocation != null)
+                            {
+                                await callService.PlayPrompt(
+                                    callId,
+                                    new MediaInfo
+                                    {
+                                        Uri = new Uri(botOptions.BotBaseUrl, textToSpeechRecordingLocation).ToString(),
+                                        ResourceId = Guid.NewGuid().ToString(),
+                                    });
+                            }
+                        }
+                        else
+                        {
+                            // Play the record prompt only when the first user joins the call
+                            await callService.Record(callId, audioRecordingConstants.PleaseRecordYourMessage);
+                        }
                     }
 
                     // If there is only one participant remaining, and it's this application, and at least one user has joined at some point, hang up

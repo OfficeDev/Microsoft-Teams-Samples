@@ -20,11 +20,17 @@ namespace CallingBotSample.Services.MicrosoftGraph
         /// <summary>
         /// Create a new call
         /// </summary>
-        /// <param name="threadId">Thread Id of the meeting, provide if you want to join a meeting</param>
-        /// <param name="meetingOrganiser">Organiser of the meeting</param>
         /// <param name="users">Users to add to the call</param>
         /// <returns>The calls details</returns>
-        Task<Call> Create(string? threadId = null, Identity? meetingOrganiser = null, params Identity[] users);
+        Task<Call> Create(params Identity[] users);
+
+        /// <summary>
+        /// Create a new call
+        /// </summary>
+        /// <param name="chatInfo">Chat info of the call</param>
+        /// <param name="meetingInfo">Meeting info</param>
+        /// <returns>The calls details</returns>
+        Task<Call> Create(ChatInfo chatInfo, MeetingInfo meetingInfo);
 
         /// <summary>
         /// Get a calls details

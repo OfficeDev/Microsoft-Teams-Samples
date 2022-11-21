@@ -18,6 +18,14 @@ namespace CallingBotSample.AdaptiveCards
             return CreateAttachment(serializedJson);
         }
 
+        public Attachment CreateIncidentCard()
+        {
+            var template = GetCardTemplate("CreateIncidentCard.json");
+
+            var serializedJson = template.Expand(new { });
+            return CreateAttachment(serializedJson);
+        }
+
         public Attachment CreateMeetingActionsCard()
         {
             var template = GetCardTemplate("MeetingActions.json");

@@ -8,6 +8,7 @@ namespace CallingBotSample.AdaptiveCards
     public interface IAdaptiveCardFactory
     {
         Attachment CreateWelcomeCard(bool showJoinMeetingButton);
+        Attachment CreateIncidentCard();
         Attachment CreateMeetingActionsCard();
         Attachment CreatePeoplePickerCard(string choiceLabel, string action, bool isMultiSelect = false);
     }
