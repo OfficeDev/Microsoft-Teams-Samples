@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, 'client')));
 
 // Decide which port to use
 var port = process.env.PORT ||
-  config.has("port") ? config.get("port") : 3333;
+  config.has("port") ? config.get("port") : 3978;
 
 // Listen for incoming requests
 app.listen(port, function() {
