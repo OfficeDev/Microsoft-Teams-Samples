@@ -18,7 +18,7 @@ module.exports.setup = function (app) {
 
   // ------------------
   // SSO demo page
-  app.get('/ssodemo', function (req, res) {
+  app.get('/ssoDemo', function (req, res) {
     var clientId = config.get("tab.appId");
     var applicationIdUri = config.get("tab.applicationIdUri");
     res.render('ssoDemo', { clientId: clientId, applicationIdUri: applicationIdUri });
