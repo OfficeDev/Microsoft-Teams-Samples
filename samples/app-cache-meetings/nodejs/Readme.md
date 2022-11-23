@@ -78,8 +78,11 @@ This sample feature is to improve the subsequent loading time of an App that the
 **App Caching Sideloaded  :**
 ![participant context](Images/2.Ready_For_App_Caching.png)
 
-**loading Team Context :** 
-![Team Context](Images/3.Loaded_Context.png) 
+**AppCache in first tab with Unique Id Loaded :** 
+![Team Context](Images/4.TabOne_UniqueId.png)
+
+**AppCache in second tab with Unique Id Loaded :** 
+![Team Context](Images/5.TabTwo_UniqueId.png)
 
 > Note open debug panel **Proto Task Manager** ( `Ctrl+Shift+Alt+8` on Windows, `Cmd+Shift+Option+8` on Mac), navigate to App Caching section you should see these apps getting cached/loaded. Non-cacheable apps will not appear in this panel.
 

@@ -29,12 +29,6 @@ const beforeUnloadHandler = (
   setItems: React.Dispatch<React.SetStateAction<string[]>>,
   readyToUnload: () => void) => {
 
-  let newItem = logItem("OnBeforeUnload", "purple", "Started");
-  setItems((Items) => [...Items, newItem]);
-
-  newItem = logItem("OnBeforeUnload", "purple", "Completed");
-  setItems((Items) => [...Items, newItem]);
-
   console.log("sending readyToUnload to TEAMS");
   readyToUnload();
 
@@ -42,17 +36,17 @@ const beforeUnloadHandler = (
 };
 
 /// </summary>
-/// loadHandler 
+/// loadHandler using setItems to set values
 /// </summary>
 const loadHandler = (
-  setItems: React.Dispatch<React.SetStateAction<string[]>>,
-  data: microsoftTeams.LoadContext) => {
-  logItem("OnLoad", "blue", "Started for " + data.entityId);
+    setItems: React.Dispatch<React.SetStateAction<string[]>>,
+    data: microsoftTeams.LoadContext) => {
+    logItem("OnLoad", "blue", "Started for " + data.entityId);
 
-  let newItem = logItem("OnLoad", "blue", "Completed for " + data.entityId);
-  setItems((Items) => [...Items, newItem]);
+    let newItem = logItem("OnLoad", "blue", "Completed for " + data.entityId);
+    setItems((Items) => [...Items, newItem]);
 
-  microsoftTeams.app.notifySuccess();
+    microsoftTeams.app.notifySuccess();
 };
 
 const AppCacheTab = () => {
@@ -65,7 +59,6 @@ const AppCacheTab = () => {
       return;
     }
 
-    // get context
     microsoftTeams.app.initialize().then(() => {
       microsoftTeams.app.getContext().then((context) => {
 
@@ -77,13 +70,11 @@ const AppCacheTab = () => {
         setItems((Items) => [...Items, newLogItem]);
 
         if (context.page.frameContext === "sidePanel") {
-          // OnBeforeUnload
           microsoftTeams.teamsCore.registerBeforeUnloadHandler((readyToUnload) => {
             const result = beforeUnloadHandler(setItems, readyToUnload);
             return result;
           });
 
-          // OnLoad
           microsoftTeams.teamsCore.registerOnLoadHandler((data) => {
             loadHandler(setItems, data);
           });
@@ -104,9 +95,6 @@ const AppCacheTab = () => {
       console.log("useEffect cleanup - Tab");
     };
 
-  /// </summary>
-  /// Below Comment line no. 110 is to disable warning from Eslint.
-  /// </summary>
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initState]);
 

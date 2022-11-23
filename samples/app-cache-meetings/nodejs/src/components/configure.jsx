@@ -15,7 +15,8 @@ const Configure = props => {
 
             microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
                 microsoftTeams.pages.config.setConfig({
-                    entityID: "AppCache",
+                    //entityId : Generating a random id so that each tab instance has a unique ID.
+                    entityId: Date.now(),
                     contentUrl: `${window.location.origin}/appCacheTab`,
                     suggestedTabName: "Cache-Tab",
                     websiteUrl: `${window.location.origin}/appCacheTab`,
@@ -28,7 +29,7 @@ const Configure = props => {
     return (
         <div>
             <Text size="larger" weight="semibold" content="App Caching" /><br />
-            <Text size="small" content="This is the test app for app caching. This app only works in the side panel for testing purposes." weight="semibold" /><br />
+            <Text size="small" content="This sample app only supports app caching in the side panel, but the feature is available in the following contexts (Chats, Channels, Personal Apps) " weight="semibold" /><br />
             <Text size="small" content="Please click save button to proceed." weight="semibold" />
         </div>
     );
