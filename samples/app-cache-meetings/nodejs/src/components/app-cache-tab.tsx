@@ -26,9 +26,7 @@ function logItem(action: string, actionColor: string, message: string) {
 /// In beforeUnloadHandler using setItems and readyToUnload callback function
 /// </summary>
 const beforeUnloadHandler = (
-  setItems: React.Dispatch<React.SetStateAction<string[]>>,
   readyToUnload: () => void) => {
-
   console.log("sending readyToUnload to TEAMS");
   readyToUnload();
 
@@ -71,7 +69,7 @@ const AppCacheTab = () => {
 
         if (context.page.frameContext === "sidePanel") {
           microsoftTeams.teamsCore.registerBeforeUnloadHandler((readyToUnload) => {
-            const result = beforeUnloadHandler(setItems, readyToUnload);
+            const result = beforeUnloadHandler(readyToUnload);
             return result;
           });
 
