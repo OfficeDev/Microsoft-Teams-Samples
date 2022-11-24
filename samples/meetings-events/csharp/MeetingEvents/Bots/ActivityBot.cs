@@ -17,7 +17,7 @@ namespace MeetingEvents.Bots
     public class ActivityBot : TeamsActivityHandler
     {
         private BotState _conversationState;
-        private BotState _userState;
+        //private BotState _userState;
 
         public ActivityBot(ConversationState conversationState)
         {

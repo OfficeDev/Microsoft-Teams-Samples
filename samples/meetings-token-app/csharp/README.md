@@ -29,7 +29,7 @@ This application also shows the implementation of Live Share SDK to update the d
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash
@@ -42,7 +42,7 @@ This application also shows the implementation of Live Share SDK to update the d
 ## Setup
 ** This app should work in developer preview only**
 
-1. Register a new application in the [Azure Active Directory � App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Azure Active Directory   App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
     
 2. Setup for Bot
@@ -120,15 +120,17 @@ Follow [these instructions](https://docs.microsoft.com/en-us/microsoftteams/plat
 > In-meeting tabs are only available in the Teams desktop client. They will not be visible when you run Teams in a web browser.
 
   
--- Sideload the app in a Teams desktop client
-    1. Create a meeting with few test participants, ideally with a mix of Presenters and Attendees.
-    1. Once meeting is created, go to the meeting details page and click on the "Add tab" (+) button.
-    1. In the pop-up that opens, click on "Manage apps".
-    1. Click on "Upload a custom app" and upload the .zip file that was created in the previous steps. This adds the app to the meeting.
-    1. Click on the "Add tab" button again. Now in the app selection page, the app should be visible as a "Meeting optimized tab".
-    1. Select the Meeting Token app.
-    1. Now the app will be visible in the meeting chat.
-    1. Start the meeting and the icon should be visible in the meeting control bar.
+### Sideload the app in a Teams desktop client.
+
+    1. First we create and group chat the added a app in group chat.
+    2. Create a meeting with few test participants, ideally with a mix of Presenters and Attendees.
+    3. Once meeting is created, go to the meeting details page and click on the "Add tab" (+) button.
+    4. In the pop-up that opens, click on "Manage apps".
+    5. Click on "Upload a custom app" and upload the .zip file that was created in the previous steps. This adds the app to the meeting.
+    6. Click on the "Add tab" button again. Now in the app selection page, the app should be visible as a "Meeting optimized tab".
+    7. Select the Meeting Token app.
+    8. Now the app will be visible in the meeting chat.
+    9. Start the meeting and the icon should be visible in the meeting control bar.
 
 ### Running the sample
  - Display the current token that is being serviced in the meeting

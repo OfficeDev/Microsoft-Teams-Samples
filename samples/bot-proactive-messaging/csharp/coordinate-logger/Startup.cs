@@ -57,10 +57,8 @@ namespace msteams_app_coordinatelogger
             services
                 .AddTransient<IBot, CoordinateLoggerActivityHandler>();
 
-            services
-                .AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
+            services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 
         /// <summary>

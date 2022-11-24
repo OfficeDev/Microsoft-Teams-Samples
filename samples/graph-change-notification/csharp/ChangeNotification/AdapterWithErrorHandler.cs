@@ -13,8 +13,8 @@ namespace ChangeNotification.Bots
 {
     public class AdapterWithErrorHandler : CloudAdapter
     {
-        public AdapterWithErrorHandler(BotFrameworkAuthentication auth, ILogger<IBotFrameworkHttpAdapter> logger, ConversationState conversationState = null)
-            : base(auth, logger)
+        public AdapterWithErrorHandler(IConfiguration configuration, ILogger<IBotFrameworkHttpAdapter> logger, ConversationState conversationState = null)
+            : base(configuration,null, logger)
         {
             OnTurnError = async (turnContext, exception) =>
             {
