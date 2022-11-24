@@ -77,8 +77,8 @@ Add the following Ids as authorized clients for your application
 
 #### 1.6. Enable implicit grant
 
-- Navigate to "Authentication"
-
+- Navigate to "Authentication".
+- Add a platform select web enter Redirect URIs "https://token.botframework.com/.auth/web/redirect"
 - Check the *Access tokens* and *ID tokens* boxes and click on Save button.
 
 ### 2. Setup bot in Azure Bot Service
