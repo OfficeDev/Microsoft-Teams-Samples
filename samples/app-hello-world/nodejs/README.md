@@ -81,9 +81,9 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-nodejs
     - **Edit** the `manifest.json` for `configurationUrl` inside `configurableTabs` . Replace `<yourNgrok.ngrok.io>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     
-    **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest_hub.json` in the `app-hello-world/nodejs/appPackage` folder with the required values and rename it as `manifest`.json and zip it accordingly.
+    **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-hello-world/nodejs/Manifest_Hub` folder with the required values.
 
-    - **Zip** up the contents of the `app-hello-world/nodejs/appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Zip** up the contents of the `app-hello-world/nodejs/appPackage` folder to create a `manifest.zip` or `app-hello-world/nodejs/Manifest_hub` folder into a `Manifest_Hub.zip`.(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 

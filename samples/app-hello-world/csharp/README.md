@@ -82,9 +82,9 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-csharp
   - `{{Microsoft-App-Id}}` with Application id generated from Step 1
   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok.io`
 
-  **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest_hub.json` in the `/Manifest` folder with the required values and rename it as `manifest`.json and zip it accordingly.
+  **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/Manifest_Hub` folder with the required values.
 
-2) Zip the contents of `Manifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 9.
+2) Zip the contents of `Manifest` or `Manifest_Hub` folder into a `manifest.zip`.
 
 3) Modify the `/appsettings.json` and fill in the following details:
   - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
