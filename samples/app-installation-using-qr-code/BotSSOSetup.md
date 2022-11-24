@@ -101,9 +101,9 @@ Create [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/b
 
 - Go to the created resource, navigate to and update the "_Messaging endpoint_", use the current `https` URL you were given by running ngrok. Append with the path `/api/messages`:
 
-    ![Create Azure Bot](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/CreateBot.png)
+    ![Create Azure Bot](csharp/QRAppInstallation/Images/CreateBot.png)
 
-    ![Create Azure Bot2](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/CreateBot2.png)
+    ![Create Azure Bot2](csharp/QRAppInstallation/Images/CreateBot2.png)
 
 - After you select *Create*, it will take a few moments for your bot service to be provisioned. Once you see a notification indicating the validation process is complete, navigate back to *Home > Bot Services* to find your bot. You may have to refresh the page to see your bot listed.
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
@@ -132,4 +132,4 @@ Create [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/b
 
     - Click "Save"
 
-    ![SSO Connection Settings](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/image017.png)
+  ![SSO Connection Settings](csharp/QRAppInstallation/Images/image017.png)
