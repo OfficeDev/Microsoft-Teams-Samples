@@ -1,9 +1,12 @@
-﻿import React from 'react';
+﻿import React, { useRef } from 'react';
 import { app, video } from "@microsoft/teams-js";
 import "./meeting-av-filter.css"
 import { WebglVideoFilter } from "./webgl-video-filter";
 
 const MeetingAvFilter = () => {
+
+    const filterHalf = useRef();
+    const filterGray = useRef();
 
     React.useEffect(() => {
         app.initialize().then(() => {
@@ -58,8 +61,8 @@ const MeetingAvFilter = () => {
 
             // Clear the selected effect
             function clearSelect() {
-                document.getElementById("filter-half").classList.remove("selected");
-                document.getElementById("filter-gray").classList.remove("selected");
+                filterHalf.current.classList.remove("selected");
+                filterGray.current.classList.remove("selected");
             }
 
             // This method is invoked when filter is changed
@@ -78,11 +81,11 @@ const MeetingAvFilter = () => {
                 switch (selectedEffectId) {
                     case effectIds.half:
                         console.log('current effect: half');
-                        document.getElementById("filter-half").classList.add("selected");
+                        filterHalf.current.classList.add("selected");
                         break;
                     case effectIds.gray:
                         console.log('current effect: gray');
-                        document.getElementById("filter-gray").classList.add("selected");
+                        filterGray.current.classList.add("selected");
                         break;
                     default:
                         console.log('effect cleared');
@@ -99,7 +102,7 @@ const MeetingAvFilter = () => {
             });
 
             // Any changes to the UI filter should be notified back to Teams client.
-            const filterHalf = document.getElementById("filter-half");
+            const filterHalf = filterHalf.current;
             filterHalf.addEventListener("click", function () {
                 if (selectedEffectId === effectIds.half) {
                     return;
@@ -108,7 +111,7 @@ const MeetingAvFilter = () => {
                 video.notifySelectedVideoEffectChanged(0, effectIds.half);
             });
 
-            const filterGray = document.getElementById("filter-gray");
+            const filterGray = filterGray.current;
             filterGray.addEventListener("click", function () {
                 if (selectedEffectId === effectIds.gray) {
                     return;
@@ -123,10 +126,10 @@ const MeetingAvFilter = () => {
         <>
             <h1 className="app-title">Video app sample</h1>
             <div className="horizontal">
-                <div className="filter" id="filter-half">
+                <div className="filter" id="filter-half" ref={filterHalf}>
                     <a className="thumbnail"></a>
                 </div>
-                <div className="filter" id="filter-gray">
+                <div className="filter" id="filter-gray" ref={filterGray}>
                     <a className="thumbnail"></a>
                 </div>
             </div>

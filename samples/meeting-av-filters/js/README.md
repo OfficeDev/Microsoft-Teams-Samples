@@ -50,27 +50,21 @@ This sample demos the use of AV filters for Teams meetings.
     ```
 5) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details
    - `{{GUID}}` with some unique GUID.
-   - `{{VALID DOMAIN}}` with your application's base url, e.g. https://1234.ngrok.io
+   - `{{VALID DOMAIN}}` with your application's base url, e.g. For `https://1234.ngrok.io`, the valid domain will be `1234.ngrok.io`.
    - Inside the filters section `id` will be random GUID and `name` will be filter name that is displayed inside meeting. We have predefined 2 filters.
-   - In case of `videoAppContentUrl` the valid domain refers to the page where video frames are captured and processed.
+   - In case of `videoFiltersConfigurationUrl` the valid domain refers to the page where video frames are captured and processed.
 
 6) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams. Make sure the files `half.png` and `gray.png` are also included inside the zip file.
 
-7) Run the solution i.e. `samples/meeting-av-filters/nodejs/ClientApp`
+7) Run the solution i.e. `samples/meeting-av-filters/js/ClientApp`
     ```
     npm start
     ```
-8) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+8) Zip the contents of your manifest folder and upload the zip file to Teams (in the Apps view click     "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in meeting in the pop-up dialog box. Select the meeting where you want to add the filters. Select Done.
-
-## Testing the bot using Bot Framework Emulator
-
-[Bot Framework Emulator](https://github.com/microsoft/botframework-emulator) is a desktop application that allows bot developers to test and debug their bots on localhost or running remotely through a tunnel.
-
-- Install the Bot Framework Emulator version 4.5.0 or greater from [here](https://github.com/Microsoft/BotFramework-Emulator/releases)
 
 ## Further reading
 

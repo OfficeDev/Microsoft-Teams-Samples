@@ -1,14 +1,14 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.7/MicrosoftTeams.schema.json",
+  "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
   "manifestVersion": "devPreview",
   "version": "1.0.0",
   "id": "<GUID>",
   "packageName": "com.microsoft.teams.avfilter",
   "developer": {
     "name": "Microsoft",
-    "id": "<GUID>",
-    "privacyUrl": "https://<<BASE-URL>>/privacy",
-    "termsOfUseUrl": "https://<<BASE-URL>>/termsofuse"
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "icons": {
     "color": "icon-color.png",
@@ -23,10 +23,6 @@
     "full": "This sample demonstrates use of AV filters for Teams meetings by processing the Teams meeting video frames."
   },
   "accentColor": "#FFFFFF",
-  "permissions": [ "identity", "messageTeamMembers" ],
-  "devicePermissions": [
-    "media"
-  ],
   "authorization": {
     "permissions": {
       "resourceSpecific": [
@@ -41,7 +37,7 @@
       ]
     }
   },
-   "validDomains": ["*.ngrok.io","<<VALID DOMAIN>>"],
+  "validDomains": [ "*.ngrok.io", "<<VALID DOMAIN>>" ],
   "localizationInfo": {
     "defaultLanguageTag": "en-us"
   },
