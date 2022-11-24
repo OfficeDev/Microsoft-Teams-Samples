@@ -41,6 +41,7 @@ class MsalAuthService {
         if (window.navigator.standalone) {
             return this.app.loginRedirect(authRequest);
         } else {
+            // This method is called for browser auth only outside teams
             return this.app.loginPopup(authRequest).then((authResponse) => {
                 this.app.setActiveAccount(authResponse.account);
                 
@@ -70,7 +71,7 @@ class MsalAuthService {
         const scopes = [this.api];
         
         return this.app
-            .acquireTokenSilent({ account: this.app.getActiveAccount() })
+            .acquireTokenSilent({ account: this.app.getActiveAccount() }) // This method is called for browser auth outside teams only.
             .then((authResponse) => authResponse.accessToken)
             .catch((error) => {
                 if (error.errorMessage.indexOf("interaction_required") >= 0) {
