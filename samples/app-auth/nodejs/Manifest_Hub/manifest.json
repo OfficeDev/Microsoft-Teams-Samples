@@ -1,0 +1,66 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.13",
+  "version": "1.0",
+  "id": "<<<REGISTERED_BOT_ID>>",
+  "packageName": "com.microsoft.teams.samples.auth",
+  "developer": {
+    "name": "Your Name Here",
+    "websiteUrl": "https://<<BASE_URI_DOMAIN>>",
+    "privacyUrl": "https://<<BASE_URI_DOMAIN>>/PrivacyStatement",
+    "termsOfUseUrl": "https://<<BASE_URI_DOMAIN>>/TermsOfUse"
+  },
+  "name": {
+    "short": "Teams AuthBot"
+  },
+  "description": {
+    "short": "Authentication sample for Microsoft Teams",
+    "full": "Authentication sample for Microsoft Teams"
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#F3F4F6",
+  "configurableTabs": [
+
+  ],
+  "staticTabs": [
+    {
+      "contentUrl": "https://<<BASE_URI_DOMAIN>>/tab/simple",
+      "entityId": "simpleAuth",
+      "name": "Simple Auth",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "contentUrl": "https://<<BASE_URI_DOMAIN>>/tab/silent?loginHint={loginHint}&userObjectId={userObjectId}&tenantId={tid}",
+      "entityId": "silentAuth",
+      "name": "Silent Auth",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "contentUrl": "https://<<BASE_URI_DOMAIN>>/tab/sso",
+      "entityId": "ssoAuth",
+      "name": "SSO Auth",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "messageTeamMembers",
+    "identity"
+  ],
+  "validDomains": [
+    "<<BASE_URI_DOMAIN>>",
+    "token.botframework.com"
+  ],
+  "webApplicationInfo": {
+    "id": "<<<REGISTERED_BOT_ID>>",
+    "resource": "api://<<BASE_URI_DOMAIN>>/<<<REGISTERED_BOT_ID>>"
+  }
+}
