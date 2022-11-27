@@ -22,7 +22,7 @@ This sample shows the feature of people picker on Adaptive Cards.
  
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
 
   determine dotnet version
   ```bash
