@@ -14,12 +14,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="AppManifest\Icon-outline.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AppManifest\Icon-color.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="AppManifest\manifest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>

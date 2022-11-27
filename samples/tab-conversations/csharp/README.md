@@ -21,6 +21,15 @@ This Teams tab app provides a way to allow users to have conversations about sub
 
 ![TabConversationModule](TabConversation/Images/tabconversationmodule.gif)
 
+## Prerequisites
+
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
+
+  ```bash
+  # determine dotnet version
+  dotnet --version
+  ```
+
 ## Setup
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
