@@ -30,12 +30,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-csharp
  ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
-
-  ```bash
-  # determine dotnet version
-  dotnet --version
-  ```
+- To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
 - [ngrok](https://ngrok.com/download) or equivalent tunneling solution
 - [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
 

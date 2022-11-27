@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-msgext-link-unfurling-csharp
 ---
 
-## TeamsLinkUnfurlingBot
+# Teams Link Unfurl Bot C#
 
 Bot Framework v4 Teams [link unfurling](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=json) bot sample for Teams.
 

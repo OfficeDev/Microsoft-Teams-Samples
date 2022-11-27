@@ -25,7 +25,7 @@ It has meeting details and in-meeting app that helps in the interview process.
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
 
   ```bash
   # determine dotnet version
@@ -169,7 +169,7 @@ It has meeting details and in-meeting app that helps in the interview process.
 
 6) Mobile view: Details tab
 
-   ![Details tab](Images/details_tab_mobile.png)
+   ![Details tab](MeetingApp/Images/details_tab_mobile.png)
 
    ![Note](MeetingApp/Images/Note_mobile.png)
 

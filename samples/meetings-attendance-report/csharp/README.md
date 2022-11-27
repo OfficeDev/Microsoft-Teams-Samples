@@ -19,7 +19,7 @@ This is a sample application which demonstrates how to get meeting attendance re
 
 ## Interaction with app
 
-When meeting ends,  attendance report card is sent by the bot.
+When meeting ends, attendance report card is sent by the bot.
 
 ![Attendance Report](MeetingAttendance/Images/MeetingAttendanceReportCardGif.gif)
 
