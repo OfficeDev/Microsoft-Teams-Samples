@@ -25,7 +25,7 @@ This sample shows feature where user can checkin with current location and view 
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
 
   determine dotnet version
   ```bash
