@@ -11,6 +11,6 @@ namespace CallingBotSample.Options
         /// <summary>
         /// A user id that has been assigned an online meeting policy
         /// </summary>
-        public string UserIdWithAssignedOnlineMeetingPolicy { get; set; }
+        public string? UserIdWithAssignedOnlineMeetingPolicy { get; set; }
     }
 }

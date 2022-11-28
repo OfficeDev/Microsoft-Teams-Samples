@@ -67,7 +67,7 @@ namespace CallingBotSample.Services.CognitiveServices
 
                 if (result.Reason == ResultReason.SynthesizingAudioCompleted)
                 {
-                   AudioDataStream stream = AudioDataStream.FromResult(result);
+                    AudioDataStream stream = AudioDataStream.FromResult(result);
 
                     var outputFile = $"temp/{Guid.NewGuid()}.wav";
                     await stream.SaveToWaveFileAsync(Path.Combine(environment.WebRootPath, outputFile));

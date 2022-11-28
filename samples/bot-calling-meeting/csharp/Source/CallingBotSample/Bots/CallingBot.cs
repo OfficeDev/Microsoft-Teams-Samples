@@ -179,9 +179,7 @@ namespace CallingBotSample.Bots
                         ResourceId = Guid.NewGuid().ToString(),
                     });
             }
-            else if (args.ChangeType == ChangeType.Updated &&
-                args.Notification.ResourceUrl.Contains("/participants") &&
-                args.ResourceData is object[] objs)
+            else if (args.IsParticipantsNotification() && args.ResourceData is object[] objs)
             {
                 string key = $"{callId}:atLeastOneUserJoined";
                 Participant[] participants = Array.ConvertAll(objs, (object obj) => (Participant)obj);
