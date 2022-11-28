@@ -98,7 +98,7 @@ const CreateTag = props => {
             }).then(() => {
                 microsoftTeams.authentication.getAuthToken().then((result) => {
                     accessToken = result;
-                    ssoLoginSuccess(result, createcreateNewTagTagDto);
+                    ssoLoginSuccess(result, createNewTag);
                 }).catch((error) => {
                     if (error.response.status == 500) {
                         alert("Error occured");
