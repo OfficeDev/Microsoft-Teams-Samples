@@ -1,7 +1,0 @@
-Remove below images for Images folder 
-
-start-conversation.svg
-close.svg
-continue-conversation.svg
-link.svg
-
