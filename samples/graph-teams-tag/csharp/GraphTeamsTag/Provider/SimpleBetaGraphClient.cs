@@ -4,11 +4,6 @@
 
 namespace GraphTeamsTag.Provider
 {
-    using Azure.Identity;
-    using GraphTeamsTag.Models.Configuration;
-    using Microsoft.Extensions.Options;
-    using Microsoft.Graph;
-
     public class SimpleBetaGraphClient
     {
         /// <summary>
@@ -16,10 +11,19 @@ namespace GraphTeamsTag.Provider
         /// </summary>
         private readonly IConfiguration _configuration;
 
+        /// <summary>
+        ///Client Id for the application.
+        /// </summary>
         private static readonly string ClientIdConfigurationSettingsKey = "AzureAd:ClientId";
 
+        /// <summary>
+        /// Client secret for the application.
+        /// </summary>
         private static readonly string ClientSecretConfigurationSettingsKey = "AzureAd:AppSecret";
 
+        /// <summary>
+        /// Tenant Id for the application.
+        /// </summary>
         private static readonly string TenantIdConfigurationSettingsKey = "AzureAd:TenantId";
 
         public SimpleBetaGraphClient(IConfiguration configuration)

@@ -6,26 +6,39 @@ namespace GraphTeamsTag.Controllers
 {
     using GraphTeamsTag.Helper;
     using GraphTeamsTag.Models;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Graph;
-    using Newtonsoft.Json;
-    using System.Net.Http;
 
     [Route("api/teamtag")]
     [ApiController]
     public class TeamTagController : Controller
     {
+        /// <summary>
+        /// Gets app details.
+        /// </summary>
         private readonly ILogger<TeamTagController> _logger;
 
+        /// <summary>
+        /// Graph helper class using graph api's.
+        /// </summary>
         private readonly GraphHelper graphHelper;
 
+        /// <summary>
+        /// Stores the Azure configuration values.
+        /// </summary>
         private readonly IConfiguration _configuration;
 
+        /// <summary>
+        /// HttpClientFactory dependency for the app.
+        /// </summary>
         private readonly IHttpClientFactory _httpClientFactory;
 
+        /// <summary>
+        /// Used to access the http context from the request.
+        /// </summary>
         private readonly IHttpContextAccessor _httpContextAccessor;
 
+        /// <summary>
+        /// client Id for the application.
+        /// </summary>
         private static readonly string ClientIdConfigurationSettingsKey = "AzureAd:ClientId";
 
         public TeamTagController(ILogger<TeamTagController> logger, IConfiguration configuration, IHttpClientFactory httpClientFactory,

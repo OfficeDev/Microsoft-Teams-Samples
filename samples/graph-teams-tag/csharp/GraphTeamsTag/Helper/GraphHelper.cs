@@ -6,7 +6,6 @@ namespace GraphTeamsTag.Helper
 {
     using GraphTeamsTag.Models;
     using GraphTeamsTag.Provider;
-    using Microsoft.Graph;
 
     public class GraphHelper
     {
@@ -106,14 +105,14 @@ namespace GraphTeamsTag.Helper
                .Request()
                .GetAsync();
 
-                var teamwTagDto = new TeamTag
+                var teamTag = new TeamTag
                 {
                     Id = teamworkTag.Id,
                     DisplayName = teamworkTag.DisplayName,
                     Description = teamworkTag.Description
                 };
 
-                return teamwTagDto;
+                return teamTag;
             }
             catch (Exception ex)
             {

@@ -1,8 +1,6 @@
-using GraphTeamsTag;
 using GraphTeamsTag.Helper;
 using GraphTeamsTag.Models.Configuration;
 using GraphTeamsTag.Provider;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,9 +19,9 @@ builder.Services.AddTransient<GraphHelper>();
 builder.Services.AddOptions<AzureSettings>()
 .Configure<IConfiguration>((botOptions, configuration) =>
 {
-    botOptions.MicrosoftAppId = configuration.GetValue<string>("ClientId");
-    botOptions.MicrosoftAppPassword = configuration.GetValue<string>("AppSecret");
-    botOptions.MicrosoftAppTenantId = configuration.GetValue<string>("TenantId");
+    botOptions.MicrosoftAppId = configuration.GetValue<string>("AzureAd:ClientId");
+    botOptions.MicrosoftAppPassword = configuration.GetValue<string>("AzureAd:AppSecret");
+    botOptions.MicrosoftAppTenantId = configuration.GetValue<string>("AzureAd:TenantId");
 });
 
 var app = builder.Build();
