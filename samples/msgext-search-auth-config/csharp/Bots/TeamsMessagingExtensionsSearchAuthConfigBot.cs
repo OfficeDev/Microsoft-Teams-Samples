@@ -41,6 +41,20 @@ namespace Microsoft.BotBuilderSamples.Bots
             await _userState.SaveChangesAsync(turnContext);
         }
 
+        protected override Task<MessagingExtensionResponse> OnTeamsAnonymousAppBasedLinkQueryAsync(ITurnContext<IInvokeActivity> turnContext, AppBasedLinkQuery query, CancellationToken cancellationToken)
+        {
+            var heroCard = new ThumbnailCard
+            {
+                Title = "Zero Installation Link Unfurling Card",
+                Text = "Install the app or sign in to view full content of the card.",
+            };
+
+            var attachments = new MessagingExtensionAttachment(HeroCard.ContentType, null, heroCard);
+            var result = new MessagingExtensionResult("list", "auth", new[] { attachments });
+
+            return Task.FromResult(new MessagingExtensionResponse(result));
+        }
+
         protected async override Task<MessagingExtensionResponse> OnTeamsAppBasedLinkQueryAsync(ITurnContext<IInvokeActivity> turnContext, AppBasedLinkQuery query, CancellationToken cancellationToken)
         {
 
