@@ -9,7 +9,7 @@
       "Demonstrating on how a bot can receive all channel messages with RSC without @mention."
     ],
     "creationDateTime": "2021-06-10",
-    "updateDateTime": "2022-01-12",
+    "updateDateTime": "2022-11-28",
     "products": [
       "Teams"
     ],
@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-receive-channel-messages-withRSC/nodejs/images/BotReceiveChannelMessagesWithRSC.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-receive-channel-messages-withRSC/nodejs/images/BotWithRSCModule.gif",
         "alt": "Solution UX showing receive channel messages with rsc permissions"
       }
     ],
