@@ -24,17 +24,6 @@ const CaptureImageDesktop = () => {
     // Method to validate before capturing media
     function captureMedia() {
         // Method to ask for image capture permission and then select media
-
-        navigator.permissions.query({ name: 'camera' }).then(function (result) {
-            if (result.state == 'denied') {
-                alert("failed");
-            }
-            else {
-                console.log("result is" + result);
-                alert("success");
-            }
-        });
-
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(mediaStream => {
                 const track = mediaStream.getVideoTracks()[0];
