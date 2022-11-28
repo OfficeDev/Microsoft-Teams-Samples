@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
- "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+ "manifestVersion": "1.13",
   "version": "1.0.0",
   "id": "{{MicrosoftAppId}}",
   "packageName": "com.microsoft.teams.appcompleteauth",
@@ -10,9 +10,9 @@
   },
   "developer": {
     "name": "Microsoft",
-    "websiteUrl": "https://example.azurewebsites.net",
-    "privacyUrl": "https://example.azurewebsites.net/privacy",
-    "termsOfUseUrl": "https://example.azurewebsites.net/termsofuse"
+    "websiteUrl": "https://{{Base_URL_Domain}}",
+    "privacyUrl": "https://{{Base_URL_Domain}}/privacy",
+    "termsOfUseUrl": "https://{{Base_URL_Domain}}/termsofuse"
   },
   "icons": {
     "color": "color.png",
@@ -27,43 +27,12 @@
   },
   "staticTabs": [
     {
-      "contentUrl": "https://{Base_URL_Domain}/AuthTab",
+      "contentUrl": "https://{{Base_URL_Domain}}/AuthTab",
       "entityId": "Auth",
       "name": "Auth",
       "scopes": [
         "personal"
       ]
-    }
-  ],
-  "bots": [
-    {
-      "botId": "{{MicrosoftAppId}}",
-      "scopes": [
-        "personal"
-      ],
-      "commandLists": [
-        {
-          "scopes": [
-            "personal"
-          ],
-          "commands": [
-            {
-              "title": "sso",
-              "description": "For AAD SSO authentication"
-            },
-            {
-              "title": "facebooklogin",
-              "description": "For Facebook signin"
-            },
-            {
-              "title": "usingcredentials",
-              "description": "For User Id/Password signin"
-            }
-          ]
-        }
-      ],
-      "isNotificationOnly": false,
-      "supportsFiles": true
     }
   ],
   "composeExtensions": [
@@ -135,7 +104,7 @@
           "value": {
             "domains": [
               "*.botframework.com",
-              "{Base_URL_Domain}"
+              "{{Base_URL_Domain}}"
             ]
           }
         }
@@ -145,7 +114,8 @@
   "accentColor": "#60A18E",
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-    "{Base_URL_Domain}",
-    "token.botframework.com"
+    "*.ngrok.io",
+    "token.botframework.com",
+    "{{Base_URL_Domain}}"
   ]
 }
