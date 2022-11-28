@@ -80,13 +80,13 @@ const CreateTag = props => {
 
     // Handler when user click on create button.
     const onCreateTagButtonClick = () => {
-        var createTagDto;
+        var createNewTag;
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.getContext().then((context) => {
                 if (tagName !== "" && tagDescription !== "") {
                             var membersToBeAdded = addSelfIfNotAdded(context.user.id);
             
-                            createTagDto = {
+                            createNewTag = {
                                 id: "",
                                 displayName: tagName,
                                 description: tagDescription,
@@ -98,7 +98,7 @@ const CreateTag = props => {
             }).then(() => {
                 microsoftTeams.authentication.getAuthToken().then((result) => {
                     accessToken = result;
-                    ssoLoginSuccess(result, createTagDto);
+                    ssoLoginSuccess(result, createcreateNewTagTagDto);
                 }).catch((error) => {
                     if (error.response.status == 500) {
                         alert("Error occured");
@@ -112,9 +112,9 @@ const CreateTag = props => {
     }
 
     // Success callback for getAuthtoken method
-    const ssoLoginSuccess = async (result, createTagDto) => {
+    const ssoLoginSuccess = async (result, createNewTag) => {
         accessToken = result;
-        exchangeClientTokenForServerToken(result, createTagDto);
+        exchangeClientTokenForServerToken(result, createNewTag);
     }
 
    // Failure callback for getAuthtoken method
@@ -123,12 +123,12 @@ const CreateTag = props => {
    }
 
     // Exchange client token with server token and fetch the pinned message details.
-    const exchangeClientTokenForServerToken = async (token, createTagDto) => {
+    const exchangeClientTokenForServerToken = async (token, createNewTag) => {
        // setIsMemberLoading(true)
     
         var id = groupId;
         idToken = token;
-        var response = await axios.post(`api/teamtag?ssoToken=${token}&teamId=${groupId}`, createTagDto)
+        var response = await axios.post(`api/teamtag?ssoToken=${token}&teamId=${groupId}`, createNewTag)
 
         if (response.status === 201) {
             microsoftTeams.dialog.submit("Created successfully!");
