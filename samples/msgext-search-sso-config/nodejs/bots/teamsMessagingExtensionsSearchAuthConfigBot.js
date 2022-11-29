@@ -358,7 +358,6 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
         }
 
         if(context.activity.name === "composeExtension/anonymousQueryLink") {
-
             const card = CardFactory.adaptiveCard({
                 "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
                 "type": "AdaptiveCard",
@@ -377,7 +376,6 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
                     }
                 ]
             });
-
 
             const attachment = {...card, card};
 
