@@ -43,13 +43,21 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         protected override Task<MessagingExtensionResponse> OnTeamsAnonymousAppBasedLinkQueryAsync(ITurnContext<IInvokeActivity> turnContext, AppBasedLinkQuery query, CancellationToken cancellationToken)
         {
-            var heroCard = new ThumbnailCard
-            {
-                Title = "Zero Installation Link Unfurling Card",
-                Text = "Install the app or sign in to view full content of the card.",
-            };
+            AdaptiveCard adaptiveCard = new AdaptiveCard(new AdaptiveSchemaVersion(1, 5));
 
-            var attachments = new MessagingExtensionAttachment(HeroCard.ContentType, null, heroCard);
+            adaptiveCard.Body.Add(new AdaptiveTextBlock()
+            {
+                Text = "Zero Installation Link Unfurling Card",
+                Size = AdaptiveTextSize.ExtraLarge
+            });
+
+            adaptiveCard.Body.Add(new AdaptiveTextBlock()
+            {
+                Text = "Install the app or sign in to view full content of the card.",
+                Size = AdaptiveTextSize.Medium
+            });
+
+            var attachments = new MessagingExtensionAttachment(AdaptiveCard.ContentType, null, adaptiveCard);
             var result = new MessagingExtensionResult("list", "auth", new[] { attachments });
 
             return Task.FromResult(new MessagingExtensionResponse(result));
