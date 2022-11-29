@@ -1,18 +1,17 @@
-﻿// <copyright file="JoinInfo.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using System;
+using System.IO;
+using System.Net;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+using System.Text;
+using System.Text.RegularExpressions;
+using Microsoft.Graph;
 
 namespace CallingBotSample.Helpers
 {
-    using System;
-    using System.IO;
-    using System.Net;
-    using System.Runtime.Serialization;
-    using System.Runtime.Serialization.Json;
-    using System.Text;
-    using System.Text.RegularExpressions;
-    using Microsoft.Graph;
-
     /// <summary>
     /// Gets the join information.
     /// </summary>
@@ -71,19 +70,19 @@ namespace CallingBotSample.Helpers
             /// Gets or sets the Tenant Id.
             /// </summary>
             [DataMember]
-            public string Tid { get; set; }
+            public string? Tid { get; set; }
 
             /// <summary>
             /// Gets or sets the AAD object id of the user.
             /// </summary>
             [DataMember]
-            public string Oid { get; set; }
+            public string? Oid { get; set; }
 
             /// <summary>
             /// Gets or sets the chat message id.
             /// </summary>
             [DataMember]
-            public string MessageId { get; set; }
+            public string? MessageId { get; set; }
         }
     }
 }

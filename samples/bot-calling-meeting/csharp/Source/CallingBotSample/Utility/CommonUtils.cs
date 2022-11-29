@@ -1,9 +1,12 @@
-﻿using Microsoft.Graph.Communications.Common.Telemetry;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Microsoft.Graph.Communications.Common.Telemetry;
 
 namespace CallingBotSample.Utility
 {
@@ -12,9 +15,9 @@ namespace CallingBotSample.Utility
         public static async Task ForgetAndLogExceptionAsync(
             this Task task,
             IGraphLogger logger,
-            string description = null,
-            [CallerMemberName] string memberName = null,
-            [CallerFilePath] string filePath = null,
+            string? description = null,
+            [CallerMemberName] string? memberName = null,
+            [CallerFilePath] string? filePath = null,
             [CallerLineNumber] int lineNumber = 0)
         {
             try

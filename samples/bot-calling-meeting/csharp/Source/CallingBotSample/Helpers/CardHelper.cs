@@ -1,16 +1,15 @@
-﻿// <copyright file="CardHelper.cs" company="Microsoft">
-// Copyright (c) Microsoft. All rights reserved.
-// </copyright>
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using System.IO;
+using AdaptiveCards;
+using AdaptiveCards.Templating;
+using CallingBotSample.Interfaces;
+using Microsoft.Bot.Schema;
+using Microsoft.Extensions.Logging;
 
 namespace CallingBotSample.Helpers
 {
-    using AdaptiveCards;
-    using AdaptiveCards.Templating;
-    using CallingBotSample.Interfaces;
-    using Microsoft.Bot.Schema;
-    using Microsoft.Extensions.Logging;
-    using System.IO;
-
     /// <summary>
     /// Helper for cards.
     /// </summary>
@@ -27,7 +26,7 @@ namespace CallingBotSample.Helpers
         {
             var template = GetCardTemplate("WelcomeCard.json");
 
-            var serializedJson = template.Expand(new {});
+            var serializedJson = template.Expand(new { });
             return CreateAttachment(serializedJson);
         }
 
