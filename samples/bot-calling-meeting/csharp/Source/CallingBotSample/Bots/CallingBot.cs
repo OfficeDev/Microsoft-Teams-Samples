@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using CallingBotSample.Authentication;
 using CallingBotSample.Interfaces;
 using CallingBotSample.Utility;
 using CallingMeetingBot.Extenstions;
@@ -33,9 +34,6 @@ namespace CallingBotSample.Bots
         private readonly ICard card;
         private readonly IGraph graph;
         private readonly GraphServiceClient graphServiceClient;
-
-
-
 
         public CallingBot(BotOptions options, ICard card, IGraph graph, GraphServiceClient graphServiceClient, IGraphLogger graphLogger)
         {
@@ -173,7 +171,7 @@ namespace CallingBotSample.Bots
                 }
                 else if (args.ChangeType == ChangeType.Updated && call.State == CallState.Established)
                 {
-                    await graph.PlayPrompt(call.Id);
+                    await graph.PlayPrompt(GetCallIdFromNotification(args));
                 }
             }
 
@@ -204,7 +202,7 @@ namespace CallingBotSample.Bots
                 if (antecedent.Status == System.Threading.Tasks.TaskStatus.RanToCompletion)
                 {
                     await graphServiceClient.Communications.Calls[callId].PlayPrompt(
-                       prompts: new List<Microsoft.Graph.Prompt>()
+                       prompts: new List<Prompt>()
                        {
                            new MediaPrompt
                            {
@@ -220,6 +218,19 @@ namespace CallingBotSample.Bots
                 }
             }
           );
+        }
+
+        private string GetCallIdFromNotification(NotificationEventArgs notificationArgs)
+        {
+            if (notificationArgs.ResourceData is CommsOperation operation && !string.IsNullOrEmpty(operation.ClientContext))
+            {
+                return operation.ClientContext;
+            }
+
+            // Resource URLs are in the format below, with the call id in the 3rd postion (position 0 will be empty)
+            // #microsoft.graph.call: /communications/calls/<<call-id-as-guid>>
+            // #microsoft.graph.recordOperation: /communications/calls/<<call-id-as-guid>>/operations/<<operation-id-as-guid>>
+            return notificationArgs.Notification.ResourceUrl.Split('/')[3];
         }
     }
 }
