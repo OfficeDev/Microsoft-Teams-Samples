@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { List } from '@fluentui/react-northstar';
-import Constants from '../constants';
+import Constants from '../constants'; 
+import ReactList from 'react-list'; 
 
 class TokenActionButtons extends Component {
     
@@ -13,11 +14,15 @@ class TokenActionButtons extends Component {
     }
 
     render() {
+        const listItems = this.props.items.map((myList)=>{   
+            return <li>{`${myList.TokenNumber}. ${this.markIfOrganizer(myList)}`}</li>;   
+        });  
         return (
             <div className="flex-center">
-                <List className="list-center" title="Get your token"
+                  {/* <ul className="list list-center"> {listItems} </ul>   */}
+               <List className="list-center" title="Get your token"
                     items={this.props.items.map(item => (`${item.TokenNumber}. ${this.markIfOrganizer(item)}`))}
-                />
+                /> 
             </div>
         );
     }
