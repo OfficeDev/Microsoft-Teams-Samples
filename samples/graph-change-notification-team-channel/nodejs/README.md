@@ -10,7 +10,7 @@ languages:
 extensions: 
  contentType: samples
  createdDate: "10-03-2022 11:30:15 AM"
-urlFragment: officedev-microsoft-teams-samples-graph-change-notification-team-channel.
+urlFragment: officedev-microsoft-teams-samples-graph-change-notification-team-channel-nodejs
 
 ---
 
