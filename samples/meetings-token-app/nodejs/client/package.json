@@ -7,7 +7,6 @@
   "dependencies": {
     "@fluentui/react": "^8.103.2",
     "@fluentui/react-components": "^9.0.0-rc.10",
-    "@fluentui/react-northstar": "^0.65.0",
     "@microsoft/live-share": "~0.3.1",
     "@microsoft/teams-js": "^2.0.0-experimental.0",
     "@testing-library/jest-dom": "^5.16.2",
