@@ -90,14 +90,14 @@ Your tab needs to run as a registered Azure AD application in order to obtain an
 
 
 2. Update your `config/default.json` file
-    * Replace the `tab.id` property with you Azure AD application ID
-    * Replace the `tab.password` property with the "client secret" you were assigned in step #2
+    * Replace the `tab.appId` property with you Azure AD application ID
+    * Replace the `tab.clientSecret` property with the "client secret" you were assigned in step #2
     * Replace the `tab.applicationIdUri` property with the Application ID URI we get in step #1.1 above. It will look like this - `api://contoso.ngrok.io/{appID}`
-    * If you want to use a port other than 3333, fill that in here (and in your ngrok command)
+    * If you want to use a port other than 3978, fill that in here (and in your ngrok command)
 
 ## Running the app locally
 
-1. Run Ngrok to expose your local web server via a public URL. Make sure to point it to your Ngrok URI. For example, if you're using port 3333 locally, run: 
+1. Run Ngrok to expose your local web server via a public URL. Make sure to point it to your Ngrok URI. For example, if you're using port 3978 locally, run: 
     * Win: `./ngrok http 3978 -host-header=localhost:3978 -subdomain="contoso"`
     * Mac: `/ngrok http 3978 -host-header=localhost:3978 -subdomain="contoso"`
 
