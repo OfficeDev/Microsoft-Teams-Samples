@@ -14,8 +14,8 @@
     "jquery": "^3.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "6.2.2",
-    "react-scripts": "^4.0.0",
+    "react-router-dom": "6.4.3",
+    "react-scripts": "^5.0.1",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
   },
@@ -29,8 +29,8 @@
   },
   "scripts": {
     "clean": "npx shx rm -rf build",
-    "start": "react-scripts start",
-    "start:client": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
+    "start:client": "react-scripts --openssl-legacy-provider start",
     "start:server": "npx @fluidframework/azure-local-service@latest",
     "build": "react-scripts build",
     "test": "react-scripts test",
