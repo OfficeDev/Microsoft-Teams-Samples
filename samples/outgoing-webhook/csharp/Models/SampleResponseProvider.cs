@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+
 namespace WebhookSampleBot.Models
 {
     using System;
@@ -52,9 +53,9 @@ namespace WebhookSampleBot.Models
         /// </summary>
         /// <param name="inputContainingTriggers">The input containing triggers.</param>
         /// <returns>Activity containing response to triggers.</returns>
-        public static Activity GetResponseActivity(Activity inputContainingTriggers)
+        public static Microsoft.Bot.Connector.Activity GetResponseActivity(Microsoft.Bot.Connector.Activity inputContainingTriggers)
         {
-            var sampleResponseActivity = new Activity
+            var sampleResponseActivity = new Microsoft.Bot.Connector.Activity
             {
                 Text = "Here's your response: " + inputContainingTriggers.From.Name,
                 Attachments = SampleResponseProvider.GetAttachments(inputContainingTriggers.Text)
@@ -161,6 +162,7 @@ namespace WebhookSampleBot.Models
                         var useHTML = false;
 
                         var args = input.Split((string[]) null, StringSplitOptions.RemoveEmptyEntries);
+
                         if( args.Length >= 3)
                         {
                             useTitle = args.Any("title".Equals);
@@ -213,6 +215,7 @@ namespace WebhookSampleBot.Models
                             useAttribution ? "attribution" : null,
                             useImage ? new[] { "https://c.s-microsoft.com/en-us/CMSImages/DesktopContent-04_UPDATED.png?version=43c80870-99dd-7fb1-48c0-59aced085ab6" } : null,
                             useButtons ? new[] { "View in article", "See more like this", "/test ipsum" } : null);
+
                             if (useTap)
                             {
                                 var heroCard = card.Content as HeroCard;
@@ -222,6 +225,7 @@ namespace WebhookSampleBot.Models
                                 }
                             }
                         }
+
                         return new List<Attachment>() {card};
                     }
                 },

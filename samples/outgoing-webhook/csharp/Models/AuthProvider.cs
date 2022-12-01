@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+
 namespace WebhookSampleBot.Models
 {
     using System;
@@ -82,6 +83,7 @@ namespace WebhookSampleBot.Models
                         "AuthHeaderValueMismatch. Expected:'{0}' Provided:'{1}'",
                         calculatedHmacValue,
                         providedHmacValue);
+
                     return new AuthResponse(false, errorMessage);
                 }
             }
