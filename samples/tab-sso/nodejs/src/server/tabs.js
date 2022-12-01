@@ -1,11 +1,18 @@
 'use strict';
 const fetch = require("node-fetch");
-const querystring = require("querystring");
 var config = require('config');
 const msal = require('@azure/msal-node');
 
 module.exports.setup = function (app) {
   var express = require('express')
+
+  // Creating MSAL client
+  const msalClient = new msal.ConfidentialClientApplication({
+    auth: {
+      clientId: config.get("tab.appId"),
+      clientSecret: config.get("tab.clientSecret")
+    }
+  });
 
   // Configure the view engine, views folder and the statics path
   // Use the JSON middleware
@@ -47,14 +54,6 @@ module.exports.setup = function (app) {
     var tid = req.body.tid;
     var token = req.body.token;
     var scopes = ["https://graph.microsoft.com/User.Read"];
-
-    // Creating MSAL client
-    const msalClient = new msal.ConfidentialClientApplication({
-      auth: {
-        clientId: config.get("tab.appId"),
-        clientSecret: config.get("tab.appPassword")
-      }
-    });
     
     var oboPromise = new Promise((resolve, reject) => {
       msalClient.acquireTokenOnBehalfOf({
