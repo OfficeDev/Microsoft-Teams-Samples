@@ -49,9 +49,9 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
     - In the resulting popup window complete the required fields:
     - Name - The webhook title and @mention tap.
     - Callback URL - The HTTPS endpoint that accepts JSON payloads and will receive POST requests from Teams.
-    **Test Scenarios 1** Callback URL should be like: <ngrokurl>/api/Sample or yourappsiteurl/api/Sample
+    - **Test Scenarios 1** Callback URL should be like: <ngrokurl>/api/Sample or yourappsiteurl/api/Sample
       ![Api Sample](Images/ApiSample.png)
-    **Test Scenarios 2** Callback URL should be like: <ngrokurl>/api/authenticatedSample?id=contoso or yourappsiteurl/api/authenticatedSample?id=contoso
+    - **Test Scenarios 2** Callback URL should be like: <ngrokurl>/api/authenticatedSample?id=contoso or yourappsiteurl/api/authenticatedSample?id=contoso
       ![Api Auth](Images/ApiAuthenticated.png)   
     - Description - A detailed string that will appear in the profile card and the team-level App dashboard.
     - Profile Picture (optional) an app icon for your webhook.
