@@ -171,3 +171,4 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 ## Further Reading.
 
 [Meeting stage view](https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meetings-stage-view)
+[Deeplink to meeting share to stage](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/build-apps-for-teams-meeting-stage#generate-a-deep-link-to-share-content-to-stage-in-meetings)

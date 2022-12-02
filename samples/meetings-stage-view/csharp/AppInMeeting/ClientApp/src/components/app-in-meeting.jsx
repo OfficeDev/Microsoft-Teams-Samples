@@ -33,6 +33,7 @@ const AppInMeeting = props => {
         });
     }, []);
 
+    // Method to open share to stage content using deep link.
     const openDeepLink = () => {
         microsoftTeams.app.initialize();
         var appContext = JSON.stringify({
