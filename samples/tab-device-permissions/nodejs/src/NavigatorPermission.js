@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. 
-function NavigatorPermission() {
+function CheckAndAlertForCameraPermission() {
     navigator.permissions.query({ name: "camera" }).then(function (result) {
       if (result.state == 'denied') {
           alert("failed");
@@ -11,4 +11,4 @@ function NavigatorPermission() {
       }
   });
 } 
-export default NavigatorPermission;
+export default CheckAndAlertForCameraPermission;
