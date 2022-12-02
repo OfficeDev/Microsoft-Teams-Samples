@@ -146,9 +146,38 @@ namespace CallingBotSample.Bots
                     callId,
                     new MediaInfo
                     {
+                        // This URL needs to be publically accessible, so Microsoft Teams can play the audio.
                         Uri = new Uri(botOptions.BotBaseUrl, recordingLocation).ToString(),
                         ResourceId = Guid.NewGuid().ToString(),
                     });
+            }
+            // If the notification is a play prompt operation, we should check if the prompt is temporary and delete the file
+            else if (args.ResourceData is PlayPromptOperation playPromptOperation)
+            {
+                if (playPromptOperation.ResultInfo.Code >= 400 ||
+                    playPromptOperation.Status != OperationStatus.Completed)
+                {
+                    return;
+                }
+
+                if (playPromptOperation.AdditionalData.TryGetValue("prompts", out object? obj))
+                {
+                    object[] objs = obj as object[] ?? new object[0];
+                    MediaPrompt[] prompts = Array.ConvertAll(objs, (object o) => (MediaPrompt)o);
+
+                    foreach (MediaPrompt prompt in prompts)
+                    {
+                        if (prompt.MediaInfo.Uri.Contains(botOptions.RecordingDownloadDirectory) &&
+                            botOptions.BotBaseUrl != null &&
+                            prompt.MediaInfo.Uri.StartsWith(botOptions.BotBaseUrl.ToString()))
+                        {
+                            var relativeRecordingPath = prompt.MediaInfo.Uri.Substring(botOptions.BotBaseUrl.ToString().Length);
+
+                            // If this deletion attempt fails we do not reattempt. If you implement this pattern you should improve the resiliency of this call.
+                            teamsRecordingService.DeleteRecording(relativeRecordingPath);
+                        }
+                    }
+                }
             }
             // If the notification is participants change, keep track of if a User has joined the call at some point
             // if at least one user has joined, and only the bot is remaining in the call, get the bot to hang up.
