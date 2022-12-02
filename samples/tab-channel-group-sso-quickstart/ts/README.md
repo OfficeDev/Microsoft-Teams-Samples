@@ -13,13 +13,14 @@ extensions:
  createdDate: "07/07/2021 01:38:27 PM"
 urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-ts
 ---
+
+# Teams Tab SSO Authentication Sample TS
+
+Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
+
 ## Interaction with app
 
 ![setupteams](Images/TabChannelGroupSSOModule.gif)
-
-# Teams Tab SSO Authentication
-
-Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
 
 ## Prerequisites
 - Microsoft Teams is installed and you have an account (not a guest account)

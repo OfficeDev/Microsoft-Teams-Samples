@@ -14,7 +14,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-tab-channel-group-quickstart-js
 ---
 
-# Tabs quick start
+# Tabs quick start Node.js
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
 

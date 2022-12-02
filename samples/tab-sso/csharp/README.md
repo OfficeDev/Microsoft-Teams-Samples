@@ -22,7 +22,7 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash
@@ -59,6 +59,11 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
    - In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
     * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
     * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
+   **Note** If you want to test or extend your Teams apps across Office and Outlook, kindly add below client application identifiers while doing Azure AD app registration in your tenant:
+   * `4765445b-32c6-49b0-83e6-1d93765276ca` (Office web)
+   * `0ec893e0-5785-4de6-99da-4ed124e5296c` (Office desktop)
+   * `bc59ab01-8403-45c6-8796-ac3ef710b3e3` (Outlook web)
+   * `d3590ed6-52b3-4102-aeff-aad2292ab01c` (Outlook desktop)
   - Navigate to **API Permissions**, and make sure to add the follow permissions:
 -   Select Add a permission
 -   Select Microsoft Graph -\> Delegated permissions.
@@ -83,23 +88,17 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
     * Select **Single-page application**.
     * Enter the **redirect URI** for the app in the following format: https://%ngrokDomain%.ngrok.io/Home/BrowserRedirect
   - Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
-
-2. Setup for Bot
-- Register a AAD aap registration in Azure portal.
-- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-
-    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
+  - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+  > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
     
-3. Setup NGROK
+2. Setup NGROK
 - Run ngrok - point to port 3978
 
 ```bash
 # ngrok http -host-header=rewrite 3978
 ```
 
-4. Setup for code
+3. Setup for code
 
 - Clone the repository
 
@@ -121,14 +120,13 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
   - Select `TeamsTabSSO.csproj` file
 
 
-5. Setup Manifest for Teams
+4. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./Manifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-    
-     - **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://{ngrokSubdomain}.ngrok.io/{Azure AD AppId}"` with MicrosoftAppId. E.g. `"api://1245.ngrok.io/app-id`.
-
-    - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-sso\csharp\TeamsTabSSO\Manifest_Hub` folder with the required values.
+    - **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://{{domain-name}}/{{Microsoft-App-Id}}"` with MicrosoftAppId. E.g. `"api://1245.ngrok.io/{{Microsoft-App-Id}}`.
+    - **Zip** up the contents of the `Manifest` folder to create a `Manifest.zip` or `Manifest_Hub` folder to create a `Manifest_Hub.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
@@ -157,11 +155,43 @@ URI should be like `https://%ngrokDomain%.ngrok.io/Home/`
 
 1) Run your app, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
+## Outlook on the web
+
+- To view your app in Outlook on the web.
+
+- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
+
+**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+
+![InstallOutlook](Images/InstallOutlook.png)
+
+**Select your app icon to launch and preview your app running in Outlook on the web**
+
+![AppOutlook](Images/AppOutlook.png)
+
+**Note:** Similarly, you can test your application in the Outlook desktop app as well.
+
+## Office on the web
+
+- To preview your app running in Office on the web.
+
+- Log into office.com with test tenant credentials
+
+**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+
+![InstallOffice](Images/InstallOffice.png)
+
+**Select your app icon to launch your app in Office on the web**
+
+![AppOffice](Images/AppOffice.png) 
+
+**Note:** Similarly, you can test your application in the Office 365 desktop app as well.
+
 ## Interacting with the app in Teams
 
 In Teams, Once the app is succefully installed, it can be opened and the tab should show the logged in user's profile.
 
 ## Further Reading.
 [Tab-SSO](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-overview)
-
+[Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 
