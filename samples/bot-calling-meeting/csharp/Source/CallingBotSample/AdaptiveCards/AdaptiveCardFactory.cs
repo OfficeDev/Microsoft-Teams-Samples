@@ -10,12 +10,29 @@ namespace CallingBotSample.AdaptiveCards
 {
     public class AdaptiveCardFactory : IAdaptiveCardFactory
     {
-        public Attachment CreateWelcomeCard()
+        public Attachment CreateWelcomeCard(bool showJoinMeetingButton)
         {
             var template = GetCardTemplate("WelcomeCard.json");
 
+            var serializedJson = template.Expand(new { showJoinMeetingButton });
+            return CreateAttachment(serializedJson);
+        }
+
+        public Attachment CreateMeetingActionsCard()
+        {
+            var template = GetCardTemplate("MeetingActions.json");
+
             var serializedJson = template.Expand(new { });
             return CreateAttachment(serializedJson);
+        }
+
+        public Attachment CreatePeoplePickerCard(string choiceLabel, string action, bool isMultiSelect = false)
+        {
+            var template = GetCardTemplate("PeoplePicker.json");
+
+            var serializedJson = template.Expand(new { choiceLabel, action, isMultiSelect });
+            return CreateAttachment(serializedJson);
+
         }
 
         private AdaptiveCardTemplate GetCardTemplate(string fileName)
