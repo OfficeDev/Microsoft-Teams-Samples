@@ -4,7 +4,7 @@
 import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { Card, Flex, Text, Button, CardHeader, CardBody, Image } from '@fluentui/react-northstar'
-
+import NavigatorPermission from '../NavigatorPermission';
 /**
  * The 'CaptureImageDesktop' component
  * of your app.
@@ -17,13 +17,11 @@ const CaptureImageDesktop = () => {
     useEffect(() => {
         // initializing microsoft teams sdk
         microsoftTeams.app.initialize()
-    })
-
-    // var imageCapture: ImageCapture;
-
+    }) 
     // Method to validate before capturing media
     function captureMedia() {
         // Method to ask for image capture permission and then select media
+        NavigatorPermission();
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(mediaStream => {
                 const track = mediaStream.getVideoTracks()[0];
