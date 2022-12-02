@@ -12,18 +12,18 @@
       },
       "id": "peoplePicker",
       "isMultiSelect": "${isMultiSelect}"
-    },
-    {
-      "type": "Input.Text",
-      "value": "${action}",
-      "id": "action",
-      "isVisible": false
     }
   ],
   "actions": [
     {
       "type": "Action.Submit",
-      "title": "${action}"
+      "title": "${action}",
+      "data": {
+        "action": "${action}",
+        "msteams": {
+            "type": "task/submit"
+        }
+      }
     }
   ]
 }

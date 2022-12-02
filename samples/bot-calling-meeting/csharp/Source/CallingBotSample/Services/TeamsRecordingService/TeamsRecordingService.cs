@@ -4,30 +4,36 @@
 using System;
 using System.IO;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using CallingBotSample.Options;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace CallingBotSample.Services.TeamsRecordingService
 {
+    /// <inheritdoc/>
     public class TeamsRecordingService : ITeamsRecordingService
     {
         private readonly IWebHostEnvironment environment;
         private readonly HttpClient httpClient;
+        private readonly BotOptions botOptions;
         private readonly ILogger<TeamsRecordingService> logger;
-        private const string DOWNLOAD_DIRECTORY = "temp";
 
-        public TeamsRecordingService(IWebHostEnvironment environment, HttpClient httpClient, ILogger<TeamsRecordingService> logger)
+        public TeamsRecordingService(IWebHostEnvironment environment, HttpClient httpClient, IOptions<BotOptions> botOptions, ILogger<TeamsRecordingService> logger)
         {
             this.environment = environment;
             this.httpClient = httpClient;
+            this.botOptions = botOptions.Value;
             this.logger = logger;
         }
 
+        /// <inheritdoc/>
         public async Task<string> DownloadRecording(string recordingUrl, string accessToken)
         {
             var fileName = $"{Guid.NewGuid()}.wav";
-            var downloadDirectory = Path.Combine(environment.WebRootPath, DOWNLOAD_DIRECTORY);
+            var downloadDirectory = Path.Combine(environment.WebRootPath, botOptions.RecordingDownloadDirectory);
             var downloadPath = $"{downloadDirectory}/{fileName}";
 
             var content = await GetUrlContent(recordingUrl, accessToken);
@@ -43,14 +49,35 @@ namespace CallingBotSample.Services.TeamsRecordingService
             }
             await File.WriteAllBytesAsync(downloadPath, content);
 
-            return $"{DOWNLOAD_DIRECTORY}/{fileName}";
+            return $"{botOptions.RecordingDownloadDirectory}/{fileName}";
+        }
+
+        public bool DeleteRecording(string recordingRelativePath)
+        {
+            var recordingPath = Path.Combine(environment.WebRootPath, recordingRelativePath);
+
+            try
+            {
+                File.Delete(recordingPath);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error deleting recording.");
+
+                return false;
+            }
         }
 
         private async Task<byte[]?> GetUrlContent(string url, string accessToken)
         {
-            httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
-            using (var result = await httpClient.GetAsync(url))
+            using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, url))
             {
+                requestMessage.Headers.Authorization =
+                    new AuthenticationHeaderValue("Bearer", accessToken);
+
+                var result = await httpClient.SendAsync(requestMessage);
+
                 return result.IsSuccessStatusCode ? await result.Content.ReadAsByteArrayAsync() : null;
             }
         }

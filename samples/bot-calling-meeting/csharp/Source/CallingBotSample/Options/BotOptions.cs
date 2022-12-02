@@ -33,8 +33,13 @@ namespace CallingBotSample.Options
         public string? GraphApiResourceUrl { get; set; }
 
         /// <summary>
-        ///  Gets The Microsoft login url
+        /// Gets The Microsoft login url
         /// </summary>
         public string? MicrosoftLoginUrl { get; set; }
+
+        /// <summary>
+        /// The download directory of recordings
+        /// </summary>
+        public string RecordingDownloadDirectory { get; set; } = "temp";
     }
 }

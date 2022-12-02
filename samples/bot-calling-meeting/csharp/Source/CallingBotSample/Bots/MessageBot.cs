@@ -119,8 +119,8 @@ namespace CallingBotSample.Bots
         protected override async Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
             var asJobject = JObject.FromObject(taskModuleRequest.Data);
-            var peoplePicker = asJobject.ToObject<TaskModuleSubmitData>()?.PeoplePicker;
-            var action = asJobject.ToObject<TaskModuleSubmitData>()?.Action.ToLowerInvariant();
+            var moduleSubmitData = asJobject.ToObject<TaskModuleSubmitData>();
+            var peoplePicker = moduleSubmitData?.PeoplePicker;
 
             var conversationStateAccessors = conversationState.CreateProperty<MeetingActionDetails>(nameof(MeetingActionDetails));
             var conversationData = await conversationStateAccessors.GetAsync(turnContext, () => new MeetingActionDetails());
@@ -129,6 +129,8 @@ namespace CallingBotSample.Bots
             {
                 try
                 {
+                    var action = moduleSubmitData?.Action?.ToLowerInvariant();
+
                     switch (action)
                     {
                         case "create":
