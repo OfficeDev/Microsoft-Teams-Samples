@@ -6,7 +6,7 @@ products:
 - office
 - office-365
 languages:
-- reactjs
+- js
 extensions:
  contentType: samples
  createdDate: "08-08-2022 10:00:01"

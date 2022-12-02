@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 
 namespace CallingBotSample.Services.CognitiveServices
 {
+    /// <inheritdoc/>
     public class SpeechService : ISpeechService
     {
         private readonly IWebHostEnvironment environment;
@@ -26,6 +27,7 @@ namespace CallingBotSample.Services.CognitiveServices
             this.logger = logger;
         }
 
+        /// <inheritdoc/>
         public async Task<string?> ConvertWavToText(string fileName)
         {
             if (!cognitiveServicesOptions.Enabled)

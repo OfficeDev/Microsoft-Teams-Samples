@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CallingBotSample.Services.BotFramework
 {
+    /// <inheritdoc/>
     public class BotService : IBotService
     {
         private readonly IConnectorClientFactory connectorClientFactory;
@@ -17,6 +18,7 @@ namespace CallingBotSample.Services.BotFramework
         /// <summary>
         /// Initializes a new instance of the <see cref="BotService"/> class.
         /// </summary>
+        /// <param name="connectorClientFactory">Connector client factory</param>
         /// <param name="logger">Logger.</param>
         public BotService(IConnectorClientFactory connectorClientFactory, ILogger<BotService> logger)
         {
@@ -24,11 +26,13 @@ namespace CallingBotSample.Services.BotFramework
             this.logger = logger;
         }
 
+        /// <inheritdoc/>
         public Task<ResourceResponse> SendToConversation(string message, string conversationId)
         {
             return SendToConversation(MessageFactory.Text(message), conversationId);
         }
 
+        /// <inheritdoc/>
         public Task<ResourceResponse> SendToConversation(Attachment attachment, string conversationId)
         {
             return SendToConversation(MessageFactory.Attachment(attachment), conversationId);

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 
 namespace CallingBotSample.Services.BotFramework
 {
+    /// <inheritdoc/>
     public class ConnectorClientFactory : IConnectorClientFactory
     {
         private readonly BotOptions botOptions;
@@ -28,11 +29,7 @@ namespace CallingBotSample.Services.BotFramework
             this.logger = logger;
         }
 
-        /// <summary>
-        /// Creates a connector client based on the service url.
-        /// Ensures only one client per serviceUrl/appId/scope is created
-        /// </summary>
-        /// <returns>A Connector Client</returns>
+        /// <inheritdoc/>
         public ConnectorClient CreateConnectorClient()
         {
             return CreateConnectorClient(
