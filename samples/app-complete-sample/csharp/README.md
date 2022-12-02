@@ -135,14 +135,26 @@ This directory holds the skeleton of a manifest.json file that can be altered in
 * **middleware**<br><br>
 This directory holds the stripping at mention for channel class and Invoke message processing.
 
-* **public**<br><br>
-This directory holds static html, image, and javascript files used by the tabs and bot.  This is not the only public directory that is used for the tabs, though.  This directory holds the html and javascript used for the configuration page of the configurable tab.  The main content of the static and configurable comes from the static files placed in /public/tab/tabConfig.
+* **Views**<br><br>
+The main content of the static comes from the static files placed in /Views/BotInfo/BotInfo.cshtml.
 
 * **src**<br><br>
 This directory holds all the code files, which run the entire application.
 
 * **utility**<br><br>
 This directory holds utility functions for the project.
+
+## Steps included in migration of Bot framework from v3 to V4
+1. Updated the following packages:
+  * Microsoft.Bot.Builder.Azure and Microsoft.Bot.Builder.Integration.AspNet.WebApi
+  * Autofac.WebApi2
+  * Bot.Builder.Community.Dialogs.Formflow
+
+2. Updated messageController.cs
+
+3. Added dilaogBot.cs. DialogExtension.cs, AdapterWithErrorHandler.cs
+
+4. Updated Dialog files into waterfall model dialog.
 
 ## Running the sample.
 
