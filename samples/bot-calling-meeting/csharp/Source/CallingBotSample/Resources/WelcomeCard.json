@@ -21,8 +21,20 @@
       "title": "Create Call",
       "id": "createcall",
       "data": {
-        "type": "createcall"
+        "action": "createcall",
+        "msteams": {
+          "type": "task/fetch"
+        }
       }
+    },
+    {
+      "type": "Action.Submit",
+      "title": "Join scheduled meeting",
+      "id": "joinscheduledmeeting",
+      "data": {
+        "type": "joinscheduledmeeting"
+      },
+      "$when": "${showJoinMeetingButton}"
     }
   ]
 }

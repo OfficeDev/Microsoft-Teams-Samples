@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using CallingBotSample.Authentication;
@@ -102,9 +103,10 @@ namespace CallingBotSample.Bots
             // https://microsoftgraph.github.io/microsoft-graph-comms-samples/docs/articles/index.html#answer-incoming-call-with-service-hosted-media
 
             graphLogger.CorrelationId = args.ScenarioId;
+            var callId = GetCallIdFromNotification(args);
+
             if (args.ResourceData is Call call)
             {
-                var callId = GetCallIdFromNotification(args);
 
                 if (args.ChangeType == ChangeType.Created && call.State == CallState.Incoming)
                 {
@@ -115,11 +117,37 @@ namespace CallingBotSample.Bots
                     && call.State == CallState.Established)
                 {
                     // Some scenarios fire two CallState.Established events. The use of a cache ensures we only play the prompt once on meeting join
-                    string key = $"established:{callId}";
+                    string key = $"{callId}:established";
                     if (!callBotCache.Get<bool>(key))
                     {
                         callBotCache.Set(key, true);
                         await callService.PlayPrompt(callId, audioRecordingConstants.Speech);
+                    }
+                }
+            }
+            else if (args.ChangeType == ChangeType.Updated &&
+                args.Notification.ResourceUrl.Contains("/participants") &&
+                args.ResourceData is object[] objs)
+            {
+                string key = $"{callId}:atLeastOneUserJoined";
+                Participant[] participants = Array.ConvertAll(objs, (object obj) => (Participant)obj);
+
+                if (participants.Length > 0)
+                {
+                    bool atLeastOneUserJoined = callBotCache.Get<bool>(key);
+
+                    if (!atLeastOneUserJoined && participants.Any(p => p.Info.Identity.User != null))
+                    {
+                        callBotCache.Set(key, true);
+                    }
+
+                    // If there is only one participant remaining, and it's this application, and at least one user has joined at some point, hang up
+                    if (participants.Length == 1 &&
+                        participants[0]?.Info?.Identity?.Application?.Id == botOptions.AppId &&
+                        atLeastOneUserJoined)
+                    {
+                        await callService.HangUp(callId);
+                        return;
                     }
                 }
             }

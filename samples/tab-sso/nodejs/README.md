@@ -32,9 +32,9 @@ You will need:
 
 1. A global administrator account for an Office 365 tenant. Testing in a production tenant is not recommended! You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
 
-1. To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine.
+2. To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine.
 
-1. To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
+3. To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
 Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
 > NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
@@ -74,6 +74,11 @@ Your tab needs to run as a registered Azure AD application in order to obtain an
         * Next, add two client applications. This is for the Teams desktop/mobile clients and the web client.
             * 5e3ce6c0-2b1f-4285-8d4b-75ee78787346
             * 1fec8e78-bce4-4aaf-ab1b-5451cc387264
+    **Note** If you want to test or extend your Teams apps across Office and Outlook, kindly add below client application identifiers while doing Azure AD app registration in your tenant:
+      * `4765445b-32c6-49b0-83e6-1d93765276ca` (Office web)
+      * `0ec893e0-5785-4de6-99da-4ed124e5296c` (Office desktop)
+      * `bc59ab01-8403-45c6-8796-ac3ef710b3e3` (Outlook web)
+      * `d3590ed6-52b3-4102-aeff-aad2292ab01c` (Outlook desktop)
 
 ## Update the app manifest and config.js file
 
@@ -84,10 +89,11 @@ Your tab needs to run as a registered Azure AD application in order to obtain an
      [guid]::NewGuid()
     ~~~
     * Ensure the package name is unique within the tenant where you will run the app
+    * Edit the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{AppId}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     * Replace `{ngrokSubdomain}` with the subdomain you've assigned to your Ngrok account in step #1 above.
-    * Update your `webApplicationInfo` section with your Azure AD application ID that you were assigned in step #2 above.
-
-
+    * Edit the `manifest.json` for `webApplicationInfo` resource `"api://{ngrokSubdomain}/{{AppId}}"` with MicrosoftAppId. E.g. `"api://1245.ngrok.io/{{AppId}}`.
+    **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-sso\nodejs\Manifest_Hub` folder with the required values.
+    **Zip** up the contents of the `appPackage` folder to create a `Manifest.zip` or `Manifest_Hub` folder to create a `Manifest_Hub.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 2. Update your `config/default.json` file
     * Replace the `tab.id` property with you Azure AD application ID
@@ -134,6 +140,38 @@ Tab auth in browser
 
 Tab auth in browser with user details
 ![tab-sso-teams ](./doc/images/tab-sso-browser-auth.png)
+
+## Outlook on the web
+
+- To view your app in Outlook on the web.
+
+- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
+
+**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+
+![InstallOutlook](./doc/images/InstallOutlook.png)
+
+**Select your app icon to launch and preview your app running in Outlook on the web**
+
+![AppOutlook](./doc/images/AppOutlook.png)
+
+**Note:** Similarly, you can test your application in the Outlook desktop app as well.
+
+## Office on the web
+
+- To preview your app running in Office on the web.
+
+- Log into office.com with test tenant credentials
+
+**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+
+![InstallOffice](./doc/images/InstallOffice.png)
+
+**Select your app icon to launch your app in Office on the web**
+
+![AppOffice](./doc/images/AppOffice.png) 
+
+**Note:** Similarly, you can test your application in the Office 365 desktop app as well.
 
 # App structure
 
@@ -193,3 +231,6 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+## Further Reading.
+[Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
