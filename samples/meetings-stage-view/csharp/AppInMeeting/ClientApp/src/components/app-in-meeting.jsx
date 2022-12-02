@@ -16,6 +16,7 @@ const AppInMeeting = props => {
     useEffect(() => {
         microsoftTeams.app.initialize();
         microsoftTeams.app.getContext().then((context) => {
+            console.log("context is: " + JSON.stringify(context));
             if (context.page.frameContext === "sidePanel") {
                 // Adding and removing classes based on screen width, to show app in stage view and in side panel
                 $("#todo, #doing, #done").addClass("grid-item-sidepanel");
@@ -32,6 +33,23 @@ const AppInMeeting = props => {
             }
         });
     }, []);
+
+    const openDeepLink = () => {
+        microsoftTeams.app.initialize();
+        var appContext = JSON.stringify({
+            "appSharingUrl": `${window.location.origin}/todoView`,
+            "appId": "<<App id>>", "useMeetNow": false
+        });
+
+        alert(appContext);
+
+        var encodedContext = encodeURIComponent(appContext).replace(/'/g, "%27").replace(/"/g, "%22");
+
+        var shareToStageLink = `https://teams.microsoft.com/l/meeting-share?deeplinkId={sampleid}&fqdn=teams.microsoft.com&lm=deeplink%22&appContext=${encodedContext}`;
+
+        microsoftTeams.app.openLink(shareToStageLink);
+        
+    }
 
     // Share the content to meeting stage view.
     const shareSpecificPart = (partName) => {
@@ -67,6 +85,7 @@ const AppInMeeting = props => {
                 <div className="part-container">
                     <Done shareSpecificPart={shareSpecificPart}/>
                 </div>
+                <button onClick={openDeepLink}>Share todo list (Deeplink)</button>
             </div>
         </div>
     );
