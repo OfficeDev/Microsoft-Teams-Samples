@@ -96,7 +96,7 @@
             "domains": [
               "*.botframework.com",
             ],
-			"supportsAnonymizedPayloads": true
+	   "supportsAnonymizedPayloads": true
           }
         }
       ]
