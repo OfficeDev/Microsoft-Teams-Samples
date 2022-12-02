@@ -26,7 +26,7 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-csharp
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   ```bash
   # determine dotnet version
@@ -77,12 +77,14 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-csharp
 ### 4. Setup Manifest for Teams
 
 - **This step is specific to Teams.**
- 
+
 1) Modify the `manifest.json` in the `/Manifest` folder and replace the following details:
   - `{{Microsoft-App-Id}}` with Application id generated from Step 1
   - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok.io`
 
-2) Zip the contents of `Manifest` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 9.
+  **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/Manifest_Hub` folder with the required values.
+
+2) Zip the contents of `Manifest` or `Manifest_Hub` folder into a `manifest.zip`.
 
 3) Modify the `/appsettings.json` and fill in the following details:
   - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
@@ -105,6 +107,38 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-csharp
 
 ![HelloTab](Microsoft.Teams.Samples.HelloWorld.Web/Images/HelloTab.png)
 
+## Outlook on the web
+
+- To view your app in Outlook on the web.
+
+- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
+
+**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+
+![InstallOutlook](Microsoft.Teams.Samples.HelloWorld.Web/Images/InstallOutlook.png)
+
+**Select your app icon to launch and preview your app running in Outlook on the web**
+
+![AppOutlook](Microsoft.Teams.Samples.HelloWorld.Web/Images/AppOutlook.png)
+
+**Note:** Similarly, you can test your application in the Outlook desktop app as well.
+
+## Office on the web
+
+- To preview your app running in Office on the web.
+
+- Log into office.com with test tenant credentials
+
+**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+
+![InstallOffice](Microsoft.Teams.Samples.HelloWorld.Web/Images/InstallOffice.png)
+
+**Select your app icon to launch your app in Office on the web**
+
+![AppOffice](Microsoft.Teams.Samples.HelloWorld.Web/Images/AppOffice.png) 
+
+**Note:** Similarly, you can test your application in the Office 365 desktop app as well.
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
@@ -124,3 +158,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
 - [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
+- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
