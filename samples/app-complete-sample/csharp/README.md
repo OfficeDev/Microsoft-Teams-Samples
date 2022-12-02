@@ -28,7 +28,7 @@ Sample that shows how to build a bot for Microsoft Teams in C#.
 
 * Install Git for windows: https://git-for-windows.github.io/
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash
@@ -46,7 +46,7 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
 
 2. Setup for Bot
 	- Register a AAD aap registration in Azure portal.
-	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-               registration?view=azure-bot-service-3.0).
+	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 	- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
@@ -65,20 +65,13 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-5. You project needs to run with a configuration that matches your registered bot's configuration. To do this, you will need to update the web.config file:
-
-	* In Visual Studio, open the Web.config file. Locate the `<appSettings>` section. 
- 
-	* Enter the BotId value. Generated from Step 1 while doing AAd app registration in Azure portal. 
- 
-	* Enter the MicrosoftAppId. Generated from Step 1 while doing AAd app registration in Azure portal. 
- 
-	* Enter the MicrosoftAppPassword. Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok .
-	
-	* Enter the BaseUri. The BaseUri is the https endpoint generated from ngrok.
+5. Modify the `/appsettings.json` and fill in the following details:
+  - `{{BotId}}` - Generated from Step 1 is the application app id
+  - `{{MicrosoftAppId}}` - Generated from Step 1 is the application app id
+  - `{{MicrosoftAppPassword}}` - Generated from Step 1, also referred to as Client secret
+  - `{{BaseUri}}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
 
 	Here is an example for reference:
-	
 		<add key="BotId" value="Bot_Handle_Here" />
 		<add key="MicrosoftAppId" value="88888888-8888-8888-8888-888888888888" />
 		<add key="MicrosoftAppPassword" value="aaaa22229999dddd0000999" />
