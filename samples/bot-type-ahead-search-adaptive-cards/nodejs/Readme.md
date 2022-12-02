@@ -95,7 +95,7 @@ Use the bot command `staticsearch` to get the card with static typeahead search 
 
 ![2](Images/staticSearchCard.png)
 
-![3](Images/staticSearchResult.png.png)
+![3](Images/staticSearchResult.png)
 
 `Dynamic search:` Dynamic typeahead search is useful to search and select data from large data sets. The data sets are loaded dynamically from the dataset specified in the card payload.
 
