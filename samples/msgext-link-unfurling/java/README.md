@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-bot-msgext-link-unfurling-java
 ---
 
-# Teams Link Unfurl Bot
+# Teams Link Unfurl Bot Java
 
 Bot Framework v4 Teams [link unfurling](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=json) bot sample for Teams.
 
