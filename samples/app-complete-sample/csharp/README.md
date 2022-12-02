@@ -144,23 +144,6 @@ This directory holds all the code files, which run the entire application.
 * **utility**<br><br>
 This directory holds utility functions for the project.
 
-* **web.config**<br><br>
-This file is a configuration file that can be used to update the config keys globally used in Application.
-
-## Steps included in migration of Bot framework from v3 to V4
-1. Updated the following packages:
-  * Microsoft.Bot.Builder.Azure and Microsoft.Bot.Builder.Integration.AspNet.WebApi
-  * Autofac.WebApi2
-  * Bot.Builder.Community.Dialogs.Formflow
-
-2. Updated the Global.asax.cs file
-
-3. Updated messageController.cs
-
-4. Added dilaogBot.cs. DialogExtension.cs, AdapterWithErrorHandler.cs
-
-5. Updated Dialog files into waterfall model dialog.
-
 ## Running the sample.
 
 ![ Hello ](template-bot-master-csharp/Images/Hello.png)
@@ -172,7 +155,6 @@ This file is a configuration file that can be used to update the config keys glo
 ![ Quiz2 ](template-bot-master-csharp/Images/Quiz2.png)
 
 ![ Tab ](template-bot-master-csharp/Images/static-tab.png)
-
 
 ## Contributing
 
@@ -187,3 +169,19 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+## Further reading
+
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Azure Portal](https://portal.azure.com)
+- [Add Authentication to Your Bot Via Azure Bot Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp)
+- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [.NET Core CLI tools](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x)
+- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
+- [Azure Portal](https://portal.azure.com)
+- [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
+- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
+- [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
