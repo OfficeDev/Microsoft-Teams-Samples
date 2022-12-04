@@ -17,18 +17,18 @@ import TabConfig from "./TabConfig";
  */
 function App() {
 
-    // Initialize the Microsoft Teams SDK
-    microsoftTeams.app.initialize();
+  // Initialize the Microsoft Teams SDK
+  microsoftTeams.app.initialize();
 
-    // Display the app home page hosted in Teams
-    return (
-        <Router>
-            <Route exact path="/privacy" component={Privacy} />
-            <Route exact path="/termsofuse" component={TermsOfUse} />
-            <Route exact path="/tab" component={Tab} />
-            <Route exact path="/config" component={TabConfig} />
-        </Router>
-    );
+  // Display the app home page hosted in Teams
+  return (
+    <Router>
+      <Route exact path="/privacy" component={Privacy} />
+      <Route exact path="/termsofuse" component={TermsOfUse} />
+      <Route exact path="/tab" component={Tab} />
+      <Route exact path="/config" component={TabConfig} />
+    </Router>
+  );
 }
 
 export default App;
