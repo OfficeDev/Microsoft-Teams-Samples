@@ -50,18 +50,9 @@ This sample shows the feature of typeahead search (static and dynamic) control i
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
- - In a terminal, navigate to `samples/app-checkin-location/nodejs`
-
- - Install modules
-
-    ```bash
-    npm install
-    ```
-
 - Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
 -Also, set MicrosoftAppType in the `.env`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
-
 
 - In a terminal, navigate to `samples/bot-type-ahead-search-adaptive-cards/nodejs`
 
@@ -70,14 +61,11 @@ This sample shows the feature of typeahead search (static and dynamic) control i
     ```bash
     npm install
     ```
-
-
 - Run your bot at the command line:
 
     ```bash
     npm start
     ```
-
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.

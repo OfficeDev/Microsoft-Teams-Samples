@@ -88,9 +88,7 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
     * Select **Single-page application**.
     * Enter the **redirect URI** for the app in the following format: https://%ngrokDomain%.ngrok.io/Home/BrowserRedirect
   - Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
-  - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-  > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
-    
+
 2. Setup NGROK
 - Run ngrok - point to port 3978
 
