@@ -14,7 +14,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-bot-sequential-flow-adaptive-cards-nodejs
 ---
 
-# Sequential workflow adaptive cards
+# Sequential workflow adaptive cards Node.js
 
 ![Preview Image](Images/Preview.gif)
 

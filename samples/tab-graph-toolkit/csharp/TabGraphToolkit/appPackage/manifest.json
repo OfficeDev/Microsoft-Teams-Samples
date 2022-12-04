@@ -27,8 +27,8 @@
     {
       "entityId": "index",
       "name": "Personal Tab",
-      "contentUrl": "{{base-URl}}/tab",
-      "websiteUrl": "{{base-URl}}/tab",
+      "contentUrl": "https://{{domain-name}}/tab",
+      "websiteUrl": "https://{{domain-name}}/tab",
       "scopes": [
         "personal"
       ]

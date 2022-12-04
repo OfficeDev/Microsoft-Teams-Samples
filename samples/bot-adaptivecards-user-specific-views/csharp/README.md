@@ -12,7 +12,9 @@ extensions:
   createdDate: "03/09/2022 11:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-bot-adaptivecards-user-specific-views-csharp
 ---
-#### About
+
+# Teams Adaptive Card Views
+
 This sample illustrates a few different ways developers can consume user-specific views in Adaptive cards.
 
 Specifically, it uses the Universal Action `Action.Execute` with `refresh` property, which enables developers to build different views for users in a common chat thread. 
@@ -24,7 +26,7 @@ Developers can consume this action to build different experiences in Teams like:
 
 For more details, refer to our [documentation](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/user-specific-views?tabs=mobile%2CC).
 
-##### How does it work?
+## How does it work?
 
 Apps can define `refresh` property with details about the refresh event and optionally add a list of users for whom the card should automatically refresh. (Refer to the image below).
 
@@ -49,7 +51,7 @@ All the cards display the following information:
 
 You can extend the `Me` card to automatically refresh for a list of users by adding a list of user MRIs to `userIds` in Adaptive Card.
 
-##### User specific view - workflow
+## User specific view - workflow
 
 The following GIF captures `Automatic refresh`, `Manual refresh`, and `Update Base Card` actions in `Me` card.
 

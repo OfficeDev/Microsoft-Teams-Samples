@@ -39,14 +39,14 @@ It has meeting details and in-meeting app that helps in the interview process.
       Register an application.
       Fill out name and select third option for supported account type and click "Register".
 
-      ![AppRegistration](Images/AppRegistration.gif)
+      ![AppRegistration](Images/AppRegistration.png)
 
       * Copy and paste the App Id and Tenant ID somewhere safe. You will need it in a future step.
 
       - Create Client Secret.
          * Navigate to the "Certificates & secrets" blade and add a client secret by clicking "New Client Secret".
 
-      ![ClientSecret](Images/clientsecret.gif) 
+      ![ClientSecret](Images/clientsecret.png) 
 
       * Copy and paste the secret somewhere safe. You will need it in a future step.
 

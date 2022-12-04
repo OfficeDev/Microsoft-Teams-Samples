@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-msgext-reaction-java
 ---
 
-## Message Reactions Bot
+# Teams Message Reactions Bot Java Sample
 
 Bot Framework v4 core bot sample.
 
