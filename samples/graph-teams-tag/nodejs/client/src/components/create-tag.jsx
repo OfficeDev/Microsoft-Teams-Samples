@@ -9,6 +9,10 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import "../style/style.css";
 import axios from "axios";
 
+var accessToken;
+var idToken;
+var groupId;
+
 // This page allow user to create new tag in task module.
 const CreateTag = props => {
     const [tagName, setTagName] = useState("");
@@ -76,24 +80,60 @@ const CreateTag = props => {
 
     // Handler when user click on create button.
     const onCreateTagButtonClick = () => {
-        microsoftTeams.app.getContext().then(async (context) => {
-            if (tagName !== "" && tagDescription !== "") {
-                var membersToBeAdded = addSelfIfNotAdded(context.user.id);
-
-                var createTagDto = {
-                    id: "",
-                    displayName: tagName,
-                    description: tagDescription,
-                    membersToBeAdded: membersToBeAdded,
-                    membersToBeDeleted: []
-                };
-
-                var response = await axios.post(`api/teamtag?teamId=${context.team.groupId}`, createTagDto);
-                if (response.status === 201) {
-                    microsoftTeams.dialog.submit("Created successfully!");
-                }
-            }
+        var createNewTag;
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then((context) => {
+                if (tagName !== "" && tagDescription !== "") {
+                            var membersToBeAdded = addSelfIfNotAdded(context.user.id);
+            
+                            createNewTag = {
+                                id: "",
+                                displayName: tagName,
+                                description: tagDescription,
+                                membersToBeAdded: membersToBeAdded,
+                                membersToBeDeleted: []
+                            };
+                        }
+                groupId = context.team.groupId;
+            }).then(() => {
+                microsoftTeams.authentication.getAuthToken().then((result) => {
+                    accessToken = result;
+                    ssoLoginSuccess(result, createNewTag);
+                }).catch((error) => {
+                    if (error.response.status == 500) {
+                        alert("Error occured");
+                    }
+                    else {
+                        ssoLoginFailure(error)
+                    }
+                });
+            });
         });
+    }
+
+    // Success callback for getAuthtoken method
+    const ssoLoginSuccess = async (result, createNewTag) => {
+        accessToken = result;
+        exchangeClientTokenForServerToken(result, createNewTag);
+    }
+
+   // Failure callback for getAuthtoken method
+   const ssoLoginFailure = (error) => {
+    console.log("sso failed. Error is"+error);
+   }
+
+    // Exchange client token with server token and fetch the pinned message details.
+    const exchangeClientTokenForServerToken = async (token, createNewTag) => {
+       // setIsMemberLoading(true)
+    
+        var id = groupId;
+        idToken = token;
+        var response = await axios.post(`api/teamtag?ssoToken=${token}&teamId=${groupId}`, createNewTag)
+
+        if (response.status === 201) {
+            microsoftTeams.dialog.submit("Created successfully!");
+        }
+
     }
 
     // Render list of selected members to be added in tag.
