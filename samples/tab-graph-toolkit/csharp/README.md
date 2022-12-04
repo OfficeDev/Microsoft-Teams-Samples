@@ -91,9 +91,9 @@ This is the demo app for [Teams tab using miscrosoft graph toolkit](https://docs
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-    - **Zip** up the contents of the `AppPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
-
-- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+    - **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-graph-toolkit\csharp\TabGraphToolkit` folder with the required values.
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` or `Manifest_Hub` folder into a `manifest.zip`.(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package) 
+ - Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
@@ -130,5 +130,46 @@ Once you access the Tab within your app you will be able to see following micros
 
 ![person](TabGraphToolkit/Images/person.png)
 
+## Outlook on the web
+
+- To view your app in Outlook on the web.
+
+- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
+
+**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+
+![InstallOutlook](TabGraphToolkit/Images/InstallOutlook.png)
+
+**Select your app icon to launch and preview your app running in Outlook on the web**
+
+![AppOutlookLogin](TabGraphToolkit/Images/AppOutlookLogin.png)
+
+![AppOutlook](TabGraphToolkit/Images/AppOutlook.png)
+
+![AppOutlookDetails](TabGraphToolkit/Images/AppOutlookDetails.png)
+
+**Note:** Similarly, you can test your application in the Outlook desktop app as well.
+
+## Office on the web
+
+- To preview your app running in Office on the web.
+
+- Log into office.com with test tenant credentials
+
+**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+
+![InstallOffice](TabGraphToolkit/Images/InstallOffice.png)
+
+**Select your app icon to launch your app in Office on the web**
+
+![AppOfficeLogin](TabGraphToolkit/Images/AppOfficeLogin.png) 
+
+![AppOffice](TabGraphToolkit/Images/AppOffice.png) 
+
+![AppOfficeDetails](TabGraphToolkit/Images/AppOfficeDetails.png) 
+
+**Note:** Similarly, you can test your application in the Office 365 desktop app as well.
+
 ## Further Reading
 [Tab-graph-toolkit](https://learn.microsoft.com/en-us/graph/toolkit/get-started/build-a-microsoft-teams-tab?tabs=unpkg%2Chtml)
+[Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)

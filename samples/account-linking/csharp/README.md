@@ -17,14 +17,16 @@ urlFragment: officedev-microsoft-teams-samples-account-linking-csharp
 
 This sample demos linking user's AAD id with their GitHub identity. 
 
-The code generically handles account linking for OAuth2.0, the only GitHub specifics are related to calling the GitHub API. 
+The code generically handles account linking for OAuth2.0, the only GitHub specifics are related to calling the GitHub API.
+
+![Account Linking Sample](Source/Images/account-linking-sample.gif)
 
 Please see the [Code Tours](#code-tours) section for in-depth explanation of the sample. 
 
 ## About the sample
-    After the user installs the app, they will be prompted when using any of the capabilities (tab / conversational bot / messaging extension) to log into GitHub. After logging in the app will store the users access and refresh tokens so that they won't need to log in again across the other capabilities or on other devices. 
+After the user installs the app, they will be prompted when using any of the capabilities (tab / conversational bot / messaging extension) to log into GitHub. After logging in the app will store the users access and refresh tokens so that they won't need to log in again across the other capabilities or on other devices. 
 
-    There are example in-memory and Azure implementations of the token persistance. 
+There are example in-memory and Azure implementations of the token persistance. 
 
 ## Prerequisites
 
@@ -74,7 +76,7 @@ Please save for a future step
 1. The `Application (client) id` from the "Overview" blade for the app
 2. A client secret from the "Certificates & secrets" page
 
-### 3. Deploy the bot to Azure
+### 3. Configure Azure Bot
 Create a new [Azure Bot Registration]() and [connect it to Microsoft Teams](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 Please save  
@@ -96,10 +98,17 @@ Please fill in the following values into the `Manifest/Manifest.json` file (call
 | Parameter  | Value |
 |---|---|
 | Bot Id  | The "Application (client) id" from step 3. |
-| Tab domain | The domain from step 1 |
 | Azure Ad Application Id | the "Application (client) id" from step 2| 
+|Base Url | The base url of your application. For example, if you are using ngrok then your base URL will be like: `https://590a2d6f8b31.ngrok.io`.
+|Base Url Domain| The base url domain of your application. For example, if you are using ngrok then your domain name will be like: `590a2d6f8b31.ngrok.io`.
 
-### 6. Filling in the app settings
+### 6. Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+### 7. Filling in the app settings
 Please copy the `Source/appsettings.json` into a new file `appsettings.development.json` and fill in the following parameters. 
 
 | Parameter | Value |
@@ -114,18 +123,18 @@ Please copy the `Source/appsettings.json` into a new file `appsettings.developme
 
 Please note the `StateReplay`, `TokenStorage` and `Keyring` sections are unused unless the `UseAzure` setting is `true`.
 
-### 7. Running the app
+### 8. Running the app (navigate to `samples/account-linking/csharp/Source`)
+
 ```bash
-cd /Source
 dotnet run
 ```
 
-### 8. Installing the app
+### 9. Installing the app
 Please follow the documentation on [creating a Microsoft Teams app package](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/apps-package) and [sideloading your app in Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/apps-package). 
 
 The "manifest" in question is the `Manifest` directory filled out in step 5.
 
-### 9. (Optional) Enable the Azure Ad version of the integration
+### 10. (Optional) Enable the Azure Ad version of the integration
 If you want to try out the implementation using Azure you will need to provision a few resources first
 
 1. [Storage account (with table storage)](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-overview)
@@ -136,6 +145,24 @@ The `StateReplay:Endpoint`, `TokenStorage:Endpoint` values and `KeyRing` section
 This repository uses VSCode [Code Tours](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour#:~:text=A%20%22code%20tour%22%20is%20simply%20a%20series%20of,CONTRIBUTING.md%20file%20and%2For%20rely%20on%20help%20from%20others.) to explain _how_ the code works. 
 
 The tour files can be found in the `.tours` directory.
+
+### 11. Features of the sample
+
+**Tab that will prompt to github authentication:**
+
+![Tab Auth](Source/Images/account-linking2.png)
+
+**Github details for the user:**
+
+![Tab details](Source/Images/account-linking3.png)
+
+**Github Auth using Bot authentication**
+
+![Account Linking Sample](Source/Images/account-linking4.png)
+
+**The user can view the detaiks from ME also:**
+
+![Account Linking Sample](Source/Images/account-linking5.png)
 
 ## OAuth Issues
 

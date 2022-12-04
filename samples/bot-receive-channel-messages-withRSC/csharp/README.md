@@ -77,6 +77,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 5. This step is specific to Teams.
     - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) also update the `<<DOMAIN-NAME>>` with the ngrok URL`
+    - **Edit** the `manifest.json` for `<<MANIFEST-ID>>` replace it with any `GUID` using guid generator.
     - **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://botid-{{MicrosoftAppId}}"` with MicrosoftAppId. E.g. `"api://botid-{{MicrosoftAppId}}"`.
     
     - **Zip** up the contents of the `AppManifest` folder to create a `manifest.zip`
@@ -95,15 +96,23 @@ The bot receives the message without being @mentioned.
 
 ## Running the sample
 
-![App Installation](ReceiveMessagesWithRSC/Images/installApp.png)
+![App Installation](ReceiveMessagesWithRSC/Images/1.RSC_Install_Scopes.png)
 
 - Showing Welcome message 
 
-![Channel messages](ReceiveMessagesWithRSC/Images/Notification.png)
+![Channel messages](ReceiveMessagesWithRSC/Images/3.Notification.png)
 
 - Showing messages based on option selected
 
-![Channel messages](ReceiveMessagesWithRSC/Images/botWithRSCFlow.png)
+![Channel messages](ReceiveMessagesWithRSC/Images/2.botWithRSCFlow.png)
+
+- Adding to group chat
+
+![Add To Group Chat ](ReceiveMessagesWithRSC/Images/4.RSC_Groupchat.png)
+
+- Receives messages in group chat without being @mentioned.
+
+![Channel messages](ReceiveMessagesWithRSC/Images/5.RSC_GroupConversation.png)
 
 ## Deploy the bot to Azure
 

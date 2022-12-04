@@ -129,6 +129,11 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 11. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
     * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
     * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
+**Note** If you want to test or extend your Teams apps across Office and Outlook, kindly add below client application identifiers while doing Azure AD app registration in your tenant:
+   * `4765445b-32c6-49b0-83e6-1d93765276ca` (Office web)
+   * `0ec893e0-5785-4de6-99da-4ed124e5296c` (Office desktop)
+   * `bc59ab01-8403-45c6-8796-ac3ef710b3e3` (Outlook web)
+   * `d3590ed6-52b3-4102-aeff-aad2292ab01c` (Outlook desktop)      
 12. Navigate to **API Permissions**, and make sure to add the follow permissions:
 -   Select Add a permission
 -   Select Microsoft Graph -\> Delegated permissions.
@@ -158,7 +163,8 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 - **This step is specific to Teams.**
     - **Edit** the `manifest.json` contained in the  `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`) also update the `<<DOMAIN-NAME>>` with the ngrok URL domain like `xxx111.ngrok.io` excluding http/https.
-    - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
+    - **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-sso\nodejs` folder with the required values.
+    - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip` or `Manifest_Hub` 
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 > Note: This `manifest.json` specified that the bot will be installed in a "personal" scope only. Please refer to Teams documentation for more details.
@@ -234,6 +240,37 @@ You can interact with this bot by sending it a message. The bot will respond by 
 **Consent the ME Action by clicking the Setup button like below:**
 
 ![MESignIn1](Images/ME_SignIn1.png)
+## Outlook on the web
+
+- To view your app in Outlook on the web.
+
+- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
+
+**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+
+![InstallOutlook](Images/InstallOutlook.png)
+
+**Select your app icon to launch and preview your app running in Outlook on the web**
+
+![AppOutlook](Images/AppOutlook.png)
+
+**Note:** Similarly, you can test your application in the Outlook desktop app as well.
+
+## Office on the web
+
+- To preview your app running in Office on the web.
+
+- Log into office.com with test tenant credentials
+
+**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+
+![InstallOffice](Images/InstallOffice.png)
+
+**Select your app icon to launch your app in Office on the web**
+
+![AppOffice](Images/AppOffice.png) 
+
+**Note:** Similarly, you can test your application in the Office 365 desktop app as well.
 
 ## Deploy the bot to Azure
 
@@ -257,4 +294,5 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
 - [dotenv](https://www.npmjs.com/package/dotenv)
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
+- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
 

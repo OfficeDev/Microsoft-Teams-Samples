@@ -56,7 +56,7 @@ jobs:
               name: 'bot-archive-groupchat-messages'
               version: '6.0.x'
 
-            - project_path: 'samples/bot-calling-meeting/csharp/CallingBotSample.csproj'
+            - project_path: 'samples/bot-calling-meeting/csharp/Source/CallingBotSample/CallingBotSample.csproj'
               name: 'bot-calling-meeting'
               version: '6.0.x'
 

@@ -29,6 +29,10 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 - [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
 
 ## Setup
+
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
+
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   - Select **New Registration** and on the *register an application page*, set following values:
     * Set **name** to your app name.
@@ -53,6 +57,11 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
  - In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
     * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
     * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
+- **Note** If you want to test or extend your Teams apps across Office and Outlook, kindly add below client application identifiers while doing Azure AD app registration in your tenant:
+   * `4765445b-32c6-49b0-83e6-1d93765276ca` (Office web)
+   * `0ec893e0-5785-4de6-99da-4ed124e5296c` (Office desktop)
+   * `bc59ab01-8403-45c6-8796-ac3ef710b3e3` (Outlook web)
+   * `d3590ed6-52b3-4102-aeff-aad2292ab01c` (Outlook desktop)   
 - Navigate to **API Permissions**, and make sure to add the follow permissions:
 -   Select Add a permission
 -   Select Microsoft Graph -\> Delegated permissions.
@@ -124,8 +133,9 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 
   
 4.  __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the `Manifest` folder in src folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). Also, replace your Base url wherever you see the place holder string `<<YOUR-BASE-URL>>`.
-    - **Zip** up the contents of the `manifest` folder to create a `manifest.zip`
+    - **Edit** the `manifest.json` contained in the `graph-chat-lifecycle\nodejs\src\Manifest` folder in src folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). Also, replace your Base url wherever you see the place holder string `<<YOUR-BASE-URL>>`.
+    **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `graph-chat-lifecycle\nodejs\src\Manifest_Hub` folder with the required values.
+    - **Zip** up the contents of the `Manifest` folder to create a `Manifest.zip` or `Manifest_Hub` folder to create a `Manifest_Hub.zip`(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
 ## Running the sample
@@ -154,5 +164,38 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
 
    ![](Images/PinnedTabSuccessfully.png)
 
+## Outlook on the web
+
+- To view your app in Outlook on the web.
+
+- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
+
+**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+
+![InstallOutlook](Images/InstallOutlook.png)
+
+**Select your app icon to launch and preview your app running in Outlook on the web**
+
+![AppOutlook](Images/AppOutlook.png)
+
+**Note:** Similarly, you can test your application in the Outlook desktop app as well.
+
+## Office on the web
+
+- To preview your app running in Office on the web.
+
+- Log into office.com with test tenant credentials
+
+**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+
+![InstallOffice](Images/InstallOffice.png)
+
+**Select your app icon to launch your app in Office on the web**
+
+![AppOffice](Images/AppOffice.png) 
+
+**Note:** Similarly, you can test your application in the Office 365 desktop app as well.   
+
 ## Further Reading
 [Graph-Chat-Life-Cycle](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)
+[Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
