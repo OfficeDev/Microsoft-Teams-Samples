@@ -94,7 +94,8 @@ Teams doesn't display app content unless it's accessible via HTTPS. We recommend
 1) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `src/manifest` folder to replace `<<GUID_ID>>` with any GUID value.
     - **Edit** the `manifest.json` for `staticTabs` inside the `contentUrl` replace `<<HOSTNAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`. Replace the same value for `<<HOSTNAME>>` inside `validDomains` section.
-    - **Zip** up the contents of the `manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-ui-templates\ts\src\Manifest_Hub` folder with the required values.
+    - **Zip** up the contents of the `Manifest` folder to create a `Manifest.zip` or `Manifest_Hub` folder to create a `Manifest_Hub.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal scope.
 
@@ -121,7 +122,43 @@ Teams doesn't display app content unless it's accessible via HTTPS. We recommend
 - Board Page
 ![board-page ](Images/tabui-board.png)
 
+## Outlook on the web
+
+- To view your app in Outlook on the web.
+
+- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
+
+**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+
+![InstallOutlook](Images/InstallOutlook.png)
+
+**Select your app icon to launch and preview your app running in Outlook on the web**
+
+![AppOutlook](Images/AppOutlook.png)
+
+**Note:** Similarly, you can test your application in the Outlook desktop app as well.
+
+## Office on the web
+
+- To preview your app running in Office on the web.
+
+- Log into office.com with test tenant credentials
+
+**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+
+![InstallOffice](Images/InstallOffice.png)
+
+**Select your app icon to launch your app in Office on the web**
+
+![AppOffice](Images/AppOffice.png) 
+
+**Note:** Similarly, you can test your application in the Office 365 desktop app as well.
+
 ## Next steps
 
 - Design your Teams app with [UI templates](https://docs.microsoft.com/microsoftteams/platform/concepts/design/design-teams-app-ui-templates).
 - Implement UI templates with the [Microsoft Teams UI Library](https://www.npmjs.com/package/@fluentui/react-teams).
+
+ ## Further reading
+
+- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)

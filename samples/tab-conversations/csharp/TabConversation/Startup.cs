@@ -44,24 +44,14 @@ namespace TabConversation
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseRouting();
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
+            app.UseDefaultFiles()
+            .UseStaticFiles()
+            .UseWebSockets()
+            .UseRouting()
+            .UseAuthorization()
+            .UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-            });
-
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "images")),
-                RequestPath = new PathString("/images")
-            });
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "static")),
-                RequestPath = new PathString("/static")
             });
         }
     }
