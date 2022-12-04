@@ -6,8 +6,7 @@
   },
   "private": true,
   "dependencies": {
-    "@microsoft/teams-js": "^2.5.0",
-    "@fluentui/react-northstar": "^0.49.0",
+    "@microsoft/teams-js": "^2.0.0",
     "@fluentui/react-components": "^9.0.0-rc.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
