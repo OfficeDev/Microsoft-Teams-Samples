@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
   "manifestVersion": "1.12",
   "version": "1.0.0",
-  "id": "c69434a5-fc52-471a-af42-ad5706de502f",
+  "id": "7f11d424-fd85-4a4a-95ab-32c6288e0711",
   "packageName": "com.microsoft.teams.extension",
   "developer": {
     "name": "Teams App, Inc.",
@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://localhost:3000/config",
+      "configurationUrl": "https://0616-2405-201-3009-1109-a53b-5866-a767-f702.ngrok.io/config",
       "canUpdateConfiguration": true,
       "scopes": [
         "team",
@@ -38,7 +38,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "localhost",
-    "localhost:3000"
+    "*.ngrok.io"
   ]
 }
