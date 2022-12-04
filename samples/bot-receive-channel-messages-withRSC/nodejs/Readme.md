@@ -22,7 +22,7 @@ This feature shown in this sample is currently available in Public Developer Pre
 
 ## Interaction with app
 
-![Bot Receive Channel MessagesWithRSCGif](images/BotReceiveChannelMessagesWithRSC.gif)
+![Bot Receive Channel MessagesWithRSCGif](images/BotWithRSCModule.gif)
 
 ## Prerequisites
 
@@ -102,15 +102,23 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 **Adding bot UI:**
 
-![App installation](images/installApp.png)
+![App installation](images/1.RSC_Install_Scopes.png)
 
 **Hey command interaction:**
 
-![Permissions](images/botWithRSCFlow.png)
+![Permissions](images/2.botWithRSCFlow.png)
 
 **1 or 2 command interaction:**
 
-![Permissions](images/Notification.png) 
+![Permissions](images/3.Notification.png) 
+
+**Adding App to group chat:**
+
+![Adding To Groupchat](images/4.RSC_Groupchat.png) 
+
+**Group chat interaction with bot without being @mentioned:**
+
+![Group Chat](images/5.RSC_GroupConversation.png) 
 
 **Interacting with the bot in Teams**
 
