@@ -6,7 +6,7 @@ products:
 - office
 - office-365
 languages:
-- reactjs
+- js
 extensions:
  contentType: samples
  createdDate: "08-08-2022 10:00:01"
@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-meeting-audio-state-nodejs
 
 ---
 
-## Meeting Audio State
+# Meeting Audio State Sample
 
 This sample shows how to mute/unmute Teams meeting audio using toggle Incoming Client Audio API.
 

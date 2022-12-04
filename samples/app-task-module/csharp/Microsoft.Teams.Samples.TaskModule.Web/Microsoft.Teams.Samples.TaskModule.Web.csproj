@@ -255,7 +255,6 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Manifest\manifest.json" />
-    <Content Include="Manifest\TaskModuleCSharp.zip" />
     <None Include="packages.config" />
     <Content Include="Views\Home\Tasks.cshtml" />
     <Content Include="Views\Home\CustomForm.cshtml" />

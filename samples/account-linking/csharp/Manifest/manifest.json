@@ -33,8 +33,8 @@
     {
       "entityId": "f8ccc905-6e42-47d4-a488-52b20ba2c8be",
       "name": "Personal Tab",
-      "contentUrl": "{{ uri for the tab here }}",
-      "websiteUrl": "{{ uri for the tab here }}",
+      "contentUrl": "{{ Base Url }}",
+      "websiteUrl": "{{ Base Url }}",
       "scopes": [
         "personal"
       ]
@@ -87,7 +87,7 @@
       "messageHandlers": []
     }
   ],
-  "validDomains": [],
+  "validDomains": [{{Base Url Domain}}],
   "webApplicationInfo": {
     "id": "{{ Azure Ad Application here }}",
     "resource": "api://{{ Tab domain here }}/botid-{{ Bot Id here }}"

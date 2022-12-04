@@ -14,7 +14,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-tab-personal-sso-quickstart-js
 ---
 
-# Teams Tab SSO Authentication
+# Teams Personal Tab SSO Authentication Sample Node.js
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are scoped to a single user. They can be pinned to the left navigation bar for easy access.
 

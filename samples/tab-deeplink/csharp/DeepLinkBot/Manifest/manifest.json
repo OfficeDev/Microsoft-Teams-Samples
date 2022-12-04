@@ -25,7 +25,7 @@
   "accentColor": "#60A18E",
   "configurableTabs": [
     {
-      "configurationUrl": "https://<<BASE-URL>>/Configure",
+      "configurationUrl": "https://{{domain-name}}/Configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "groupchat",
@@ -43,8 +43,8 @@
   ],
   "staticTabs": [
     {
-      "contentUrl": "https://<<BASE-URL>>/DeepLink",
-      "websiteUrl": "https://<<BASE-URL>>",
+      "contentUrl": "https://{{domain-name}}/DeepLink",
+      "websiteUrl": "https://{{domain-name}}",
       "entityId": "com.contoso.DeeplLinkBot.help",
       "name": "Deep Link Tab",
       "scopes": [
@@ -70,7 +70,8 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.ngrok.io"
+    "*.ngrok.io",
+    "{{domain-name}}"
   ],
   "authorization": {
     "permissions": {

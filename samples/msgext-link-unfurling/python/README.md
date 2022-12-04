@@ -14,7 +14,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-msgext-link-unfurling-python
 
 ---
 
-## TeamsLinkUnfurlingBot
+# Teams Link Unfurl Bot Python
 
 Bot Framework v4 Teams [link unfurling](https://docs.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=json) bot sample for Teams.
 
@@ -75,6 +75,6 @@ If you copy and paste a link from https://www.BotFramework.com into the compose 
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 
-# Further reading
+## Further reading
 
 - [How Microsoft Teams bots work](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-basics-teams?view=azure-bot-service-4.0&tabs=javascript)
