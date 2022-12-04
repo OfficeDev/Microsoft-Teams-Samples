@@ -16,10 +16,10 @@
         "url": "https://github.com/Microsoft/BotBuilder-Samples.git"
     },
     "dependencies": {
-        "@microsoft/microsoft-graph-client": "^2.2.1",
+        "@microsoft/microsoft-graph-client": "^3.0.3",
         "axios": "^0.21.0",
-        "botbuilder": "~4.11.0",
-        "botbuilder-dialogs": "^4.11.2",
+        "botbuilder": "^4.18.0",
+        "botbuilder-dialogs": "^4.18.0",
         "cors": "^2.8.5",
         "dotenv": "^8.2.0",
         "ejs": "^3.1.6",
