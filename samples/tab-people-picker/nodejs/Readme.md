@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-tab-people-picker-nodejs
 ---
 
-# Tab people picker
+# Tab people picker Node.js
 
 This sample shows tab capability with the feature of client sdk people picker.
 

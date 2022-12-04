@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-attendance-report/nodejs/Images/MeetingAttendanceReportCard.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-attendance-report/nodejs/Images/MeetingAttendanceReportCardGif.gif",
         "alt": "Solution UX showing meeting attendance report in chat node"
       }
     ],

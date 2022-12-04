@@ -12,7 +12,7 @@ extensions:
  createdDate: "12/24/2021 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-bot-type-ahead-search-adaptive-cards-csharp
 ---
-# Typeahead search control in Adaptive Cards
+# Typeahead search control in Adaptive Cards C#
 
 This sample shows the feature of typeahead search (static and dynamic) control in Adaptive Cards.
 

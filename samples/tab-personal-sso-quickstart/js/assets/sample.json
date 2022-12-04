@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-personal-sso-quickstart/js/Images/personaltab.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-personal-sso-quickstart/js/Images/TabPersonalSSOQuickstartGif.gif",
         "alt": "Solution UX showing personal tab with sso  in javascript"
       }
     ],

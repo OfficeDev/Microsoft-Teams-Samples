@@ -19,16 +19,8 @@ urlFragment: officedev-microsoft-teams-samples-app-complete-sample-nodejs
 
 Sample that shows how to use dialog bot with bot sdk v4, messaging extension, facebook auth flow in Nodejs.
 
-## Features of this sample
-
-![](images/dialog.png)
-
-![](images/static-tab.png)
-
-![](images/messaging-extension.png)
-
-![](images/facebook-auth-flow.png)
-
+- **Interaction with app**
+![app-complete-sample ](images/app-complete-sample.gif)
 
 ## Prerequisites
 
@@ -36,52 +28,13 @@ Sample that shows how to use dialog bot with bot sdk v4, messaging extension, fa
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
 ## To try this sample
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
-1) Clone the repository
-
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
-
-2) In a terminal, navigate to `samples/app-complete-sample/nodejs`
-
-3) Install modules
-
-    ```bash
-    npm install
-    ```
-
-4) Run ngrok - point to port 3979
-
-    ```bash
-    ngrok http -host-header=rewrite 3979
-    ```
-
-5) Register a new bot (or update an existing one) with Bot Framework by using the full endpoint as the bot's "Messaging endpoint". Make sure to add Teams as a channel for the bot. Bot registration is here (open in a new browser tab): https://dev.botframework.com/bots
-
-    > **NOTE**: When you create your bot you will create an App ID and App password - make sure you keep these for later.
-
+2.  Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-
-6) Once you have saved your bot and gotten the confirmation that it is created, navigate back to your  project. Open the ".env" file. There, copy/paste your App ID and App password from the step above.
-    ```
-    MicrosoftAppId=
-    MicrosoftAppPassword=
-    BaseUri=https://#####abc.ngrok.io
-    ```
-
-7) Run your bot at the command line:
-
-    ```bash
-    npm start
-    ```
-
-8) __*This step is specific to Teams.*__
-- **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<REGISTERED_BOT_ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)and ngrok url *everywhere* you see the place holder string `<<BASE_URI>>`
-- **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
-- **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app") 
-
-9) To test facebook auth flow [create a facebookapp](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-facebook?view=azure-bot-service-4.0) and get client id and secret for facebook app.
+   - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+ 
+ 3. To test facebook auth flow [create a facebookapp](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-facebook?view=azure-bot-service- 4.0) and get client id and secret for facebook app.
 Now go to your bot channel registartion -> configuration -> Add OAuth connection string
 - Provide connection Name : for eg `facebookconnection`
 - Select service provider ad `facebook`
@@ -89,6 +42,51 @@ Now go to your bot channel registartion -> configuration -> Add OAuth connection
  
 Open the ".env" file in the project and add connection name which we have provided in bot channel registration
 E.g. ConnectionName = facebookconnection
+
+4. Setup NGROK
+      - Run ngrok - point to port 3978
+
+	```bash
+	# ngrok http -host-header=rewrite 3978
+	```     
+5. Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+ - In a terminal, navigate to `samples/app-complete-sample/nodejs`
+ 
+ - Once you have saved your bot and gotten the confirmation that it is created, navigate back to your  project. Open the ".env" file. There, copy/paste your App ID and App password from the step above.
+    ```
+    MicrosoftAppId=
+    MicrosoftAppPassword=
+    BaseUri=https://#####abc.ngrok.io
+    ```
+ - Install modules
+
+    ```bash
+    npm install
+    ```
+- Run your bot at the command line:
+
+    ```bash
+    npm start
+    ```
+
+5. Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `AppPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+
+
  
 ## Overview
 
@@ -110,6 +108,26 @@ This directory holds static html, image, and javascript files used by the tabs a
 
 * **src**<br><br>
 This directory holds all of the TypeScript files, which run the entire application.  These files, at build, are transpiled and their transpiled javascript files are placed in the build directory.
+
+## Running the sample
+
+![](images/app-complete-sample1.png)
+
+![](images/app-complete-sample2.png)
+
+![](images/app-complete-sample3.png)
+
+![](images/app-complete-sample4.png)
+
+![](images/app-complete-sample5.png)
+
+![](images/app-complete-sample6.png)
+
+![](images/app-complete-sample7.png)
+
+![](images/app-complete-sample8.png)
+
+![](images/app-complete-sample-tab.png)
 
 ## Contributing
 

@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-complete-sample/nodejs/images/dialog.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-complete-sample/nodejs/images/app-complete-sample.gif",
         "alt": "Solution UX showing bot, tabs, and messaging extension"
       }
     ],

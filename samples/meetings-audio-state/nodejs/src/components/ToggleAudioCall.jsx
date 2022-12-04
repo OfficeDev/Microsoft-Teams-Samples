@@ -3,7 +3,7 @@ import { Flex, FlexItem, Button } from "@fluentui/react-northstar";
 import * as microsoftTeams from "@microsoft/teams-js";
 import "../style/style.css";
 
-class MyView extends Component {
+class ToggleAudioCall extends Component {
     constructor(props) {
         super(props)
         this.state = {

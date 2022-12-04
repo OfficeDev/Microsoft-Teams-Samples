@@ -13,6 +13,10 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-graph-channel-lifecycle-csharp
 ---
 
+# Channel life cycle using C#
+
+This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-1.0) life cycle which includes create, update delete a channel.
+
 ## Interaction with app
 
  ![](ChannelLifecycle/Images/ChannelLifeCycleModule.gif)

@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-sso/nodejs/./doc/images/AAD-SSO-Tab-5-ConsentPreviouslyGranted.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-sso/nodejs/./doc/images/tab-sso.gif",
         "alt": "Solution UX showing teams tab sso authentication (nodejs)"
       }
     ],
