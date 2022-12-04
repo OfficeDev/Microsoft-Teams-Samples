@@ -78,21 +78,29 @@ Also update `BaseUrl` according to your code runtime environment.
     ```bash
     npm start
     ```
+- Install modules & Run the NodeJS Server
+  - Server will run on PORT: 3978
+  - Open a terminal and navigate to project root directory
+ 
+    ```bash
+    npm run server
+    ```
+- This command is equivalent to: npm install > npm start
 
-1) Setup Manifest for Teams
-
+- Setup Manifest for Teams
 4) **This step is specific to Teams.**
 
-   -  Edit the `manifest.json` in the `appPackage` folder and replace the following details:
+   -  Edit the `manifest.json` in the `Manifest` folder and replace the following details:
    - `<<MANIFEST-ID>>` with some unique GUID or `MicrosoftAppId`
    - `<<BASE-URL>>` with your application's base url, e.g. https://1234.ngrok.io
    - `<<YOUR-MICROSOFT-APP-ID>>` with the `MicrosoftAppId` received from AAD app registration in Azure portal.
    - `<<DOMAIN-NAME>>` with the ngrok URL or app hosted base url.
-    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+   **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `tab-stage-view\nodejs\Manifest_Hub` folder with the required values.
+   - **Zip** up the contents of the `Manifest` folder to create a `Manifest.zip` or `Manifest_Hub` folder to create a `Manifest_Hub.zip`
+   - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
          - Go to Microsoft Teams. From the lower left corner, select Apps
          - From the lower left corner, choose Upload a custom App
-         - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
+         - Go to your project directory, the ./Manifest folder, select the zip folder, and choose Open.
          - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
 
 ## Running the sample
@@ -113,6 +121,38 @@ Also update `BaseUrl` according to your code runtime environment.
 **Tab with execute deep link action to open stage view:**
 
 ![Tab View](Images/viaTabDeeplink.png)         
+
+## Outlook on the web
+
+- To view your app in Outlook on the web.
+
+- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
+
+**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+
+![InstallOutlook](Images/InstallOutlook.png)
+
+**Select your app icon to launch and preview your app running in Outlook on the web**
+
+![AppOutlook](Images/AppOutlook.png)
+
+**Note:** Similarly, you can test your application in the Outlook desktop app as well.
+
+## Office on the web
+
+- To preview your app running in Office on the web.
+
+- Log into office.com with test tenant credentials
+
+**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+
+![InstallOffice](Images/InstallOffice.png)
+
+**Select your app icon to launch your app in Office on the web**
+
+![AppOffice](Images/AppOffice.png) 
+
+**Note:** Similarly, you can test your application in the Office 365 desktop app as well.
 
 ## Deploy the bot to Azure
 
@@ -137,3 +177,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
 - [dotenv](https://www.npmjs.com/package/dotenv)
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
+- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
