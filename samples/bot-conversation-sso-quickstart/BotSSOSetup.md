@@ -101,9 +101,9 @@ Create [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/b
 
 - Go to the created resource, navigate to and update the "_Messaging endpoint_", use the current `https` URL you were given by running ngrok. Append with the path `/api/messages`:
 - For "Microsoft App ID and password", click "Create New", fill in the AppId and client secret you created in step1.1 and step 1.2:
-    ![Create Azure Bot](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/CreateBot.png)
+    ![Create Azure Bot](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AzureBotCreate.png)
 
-    ![Create Azure Bot2](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/CreateBot2.png)
+    ![Create Azure Bot2](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AzureBotCreate2.png)
 
 - After you select *Create*, it will take a few moments for your bot service to be provisioned. Once you see a notification indicating the validation process is complete, navigate back to *Home > Bot Services* to find your bot. You may have to refresh the page to see your bot listed.
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
@@ -114,7 +114,7 @@ Create [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/b
    
 - Switch to the "Settings" blade and click "Add Setting" under the OAuth Connection Settings section
 
-    ![Add OAuth Settings](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AddOauth.png)
+    ![Add OAuth Settings](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AzureBotConfigurationPage.png)
 
 - Fill out the Connection Setting form
 
@@ -132,4 +132,4 @@ Create [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/b
 
     - Click "Save"
 
-    ![SSO Connection Settings](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/image017.png)
+    ![SSO Connection Settings](https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-conversation-sso-quickstart/js/sso_media/AzureBotConnectionString.png)
