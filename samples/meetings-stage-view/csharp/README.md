@@ -100,6 +100,19 @@ For reference please check [Enable and configure your apps for Teams meetings](h
   - Select `AppInMeeting.csproj` file
   - Press `F5` to run the project
 
+## Getting the App id for share to stage deeplink.
+
+1) Navigate to [Teams admin portal]("https://admin.teams.microsoft.com/dashboard")
+
+2) Under Teams Apps section, select Manage apps.
+
+3) Search the uploaded app and copy the `App ID`
+![Admin Center](Images/adminCenter.png)
+
+4) Navigate to `samples/meetings-stage-view/csharp/AppInMeeting/ClientApp/src/components/app-in-meeting.jsx`
+
+5) On line 41, replace `<<App id>>` with `Id` obtained in step 3.
+
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
