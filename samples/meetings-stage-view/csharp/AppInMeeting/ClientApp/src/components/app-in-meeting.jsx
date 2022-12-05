@@ -43,7 +43,7 @@ const AppInMeeting = props => {
 
         var encodedContext = encodeURIComponent(appContext).replace(/'/g, "%27").replace(/"/g, "%22");
 
-        var shareToStageLink = `https://teams.microsoft.com/l/meeting-share?deeplinkId={sampleid}&fqdn=teams.microsoft.com&lm=deeplink%22&appContext=${encodedContext}`;
+        var shareToStageLink = `https://teams.microsoft.com/l/meeting-share?appContext=${encodedContext}`;
 
         microsoftTeams.app.openLink(shareToStageLink);
         
