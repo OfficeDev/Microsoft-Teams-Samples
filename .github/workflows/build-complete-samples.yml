@@ -471,10 +471,6 @@ jobs:
               name: 'bot-archive-groupchat-messages'
               version: '14.x'
 
-            - project_path: 'samples/bot-conversation-sso-quickstart/js'
-              name: 'bot-conversation-sso-quickstart'
-              version: '14.x'
-
             - project_path: 'samples/bot-daily-task-reminder/nodejs'
               name: 'bot-daily-task-reminder'
               version: '14.x'
@@ -687,6 +683,10 @@ jobs:
               name: 'bot-conversation'
               version: '16.x'
 
+            - project_path: 'samples/bot-conversation-sso-quickstart/js'
+              name: 'bot-conversation-sso-quickstart'
+              version: '16.x'
+
             - project_path: 'samples/bot-file-upload/nodejs'
               name: 'bot-file-upload'
               version: '16.x'
@@ -787,6 +787,14 @@ jobs:
               name: 'tab-app-monetization'
               version: '16.x'
 
+            - project_path: 'samples/tab-device-permissions/nodejs'
+              name: 'tab-device-permissions'
+              version: '16.x'
+            
+            - project_path: 'samples/tab-ui-templates/ts'
+              name: 'tab-ui-templates'
+              version: '16.x'
+            
             - project_path: 'samples/meetings-audio-state/nodejs'
               name: 'meetings-audio-state'
               version: '16.x'
