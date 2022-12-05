@@ -10,8 +10,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@microsoft/microsoft-graph-client": "^2.2.1",
-    "@microsoft/teams-js": "^1.9.0",
+    "@microsoft/microsoft-graph-client": "^3.0.4",
+    "@microsoft/teams-js": "^2.5.0",
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",

@@ -25,7 +25,7 @@ This sample illustrates how to implement [Localization for Microsoft Teams apps]
 Verify you have the right account for building Teams apps and install some recommended development tools.
 
 - You need a Teams account that allows [custom app sideloading](https://docs.microsoft.com/en-us/microsoftteams/platform/build-your-first-app/build-first-app-overview#set-up-your-development-account).
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 - [ngrok](https://ngrok.com/download) or equivalent tunnelling solution
 
 ## Setup
@@ -33,7 +33,7 @@ Verify you have the right account for building Teams apps and install some recom
 
 2. Setup for Bot
 	
-	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-               registration?view=azure-bot-service-3.0).
+	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0)
 	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 	- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 

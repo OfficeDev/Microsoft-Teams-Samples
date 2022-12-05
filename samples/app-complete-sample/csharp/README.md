@@ -28,7 +28,7 @@ Sample that shows how to build a bot for Microsoft Teams in C#.
 
 * Install Git for windows: https://git-for-windows.github.io/
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash
@@ -46,7 +46,7 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
 
 2. Setup for Bot
 	- Register a AAD aap registration in Azure portal.
-	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-               registration?view=azure-bot-service-3.0).
+	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 	- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
@@ -65,20 +65,13 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-5. You project needs to run with a configuration that matches your registered bot's configuration. To do this, you will need to update the web.config file:
-
-	* In Visual Studio, open the Web.config file. Locate the `<appSettings>` section. 
- 
-	* Enter the BotId value. Generated from Step 1 while doing AAd app registration in Azure portal. 
- 
-	* Enter the MicrosoftAppId. Generated from Step 1 while doing AAd app registration in Azure portal. 
- 
-	* Enter the MicrosoftAppPassword. Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok .
-	
-	* Enter the BaseUri. The BaseUri is the https endpoint generated from ngrok.
+5. Modify the `/appsettings.json` and fill in the following details:
+  - `{{BotId}}` - Generated from Step 1 is the application app id
+  - `{{MicrosoftAppId}}` - Generated from Step 1 is the application app id
+  - `{{MicrosoftAppPassword}}` - Generated from Step 1, also referred to as Client secret
+  - `{{BaseUri}}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
 
 	Here is an example for reference:
-	
 		<add key="BotId" value="Bot_Handle_Here" />
 		<add key="MicrosoftAppId" value="88888888-8888-8888-8888-888888888888" />
 		<add key="MicrosoftAppPassword" value="aaaa22229999dddd0000999" />
@@ -142,8 +135,8 @@ This directory holds the skeleton of a manifest.json file that can be altered in
 * **middleware**<br><br>
 This directory holds the stripping at mention for channel class and Invoke message processing.
 
-* **public**<br><br>
-This directory holds static html, image, and javascript files used by the tabs and bot.  This is not the only public directory that is used for the tabs, though.  This directory holds the html and javascript used for the configuration page of the configurable tab.  The main content of the static and configurable comes from the static files placed in /public/tab/tabConfig.
+* **Views**<br><br>
+The main content of the static comes from the static files placed in /Views/BotInfo/BotInfo.cshtml.
 
 * **src**<br><br>
 This directory holds all the code files, which run the entire application.
@@ -151,22 +144,17 @@ This directory holds all the code files, which run the entire application.
 * **utility**<br><br>
 This directory holds utility functions for the project.
 
-* **web.config**<br><br>
-This file is a configuration file that can be used to update the config keys globally used in Application.
-
 ## Steps included in migration of Bot framework from v3 to V4
 1. Updated the following packages:
   * Microsoft.Bot.Builder.Azure and Microsoft.Bot.Builder.Integration.AspNet.WebApi
   * Autofac.WebApi2
   * Bot.Builder.Community.Dialogs.Formflow
 
-2. Updated the Global.asax.cs file
+2. Updated messageController.cs
 
-3. Updated messageController.cs
+3. Added dilaogBot.cs. DialogExtension.cs, AdapterWithErrorHandler.cs
 
-4. Added dilaogBot.cs. DialogExtension.cs, AdapterWithErrorHandler.cs
-
-5. Updated Dialog files into waterfall model dialog.
+4. Updated Dialog files into waterfall model dialog.
 
 ## Running the sample.
 
@@ -179,7 +167,6 @@ This file is a configuration file that can be used to update the config keys glo
 ![ Quiz2 ](template-bot-master-csharp/Images/Quiz2.png)
 
 ![ Tab ](template-bot-master-csharp/Images/static-tab.png)
-
 
 ## Contributing
 
@@ -194,3 +181,19 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+## Further reading
+
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Azure Portal](https://portal.azure.com)
+- [Add Authentication to Your Bot Via Azure Bot Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp)
+- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [.NET Core CLI tools](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x)
+- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
+- [Azure Portal](https://portal.azure.com)
+- [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
+- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
+- [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)

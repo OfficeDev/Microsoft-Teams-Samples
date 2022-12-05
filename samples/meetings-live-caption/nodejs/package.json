@@ -16,7 +16,7 @@
         "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
     },
     "dependencies": {
-        "axios": "^0.27.2",
+        "axios": "^1.1.3",
         "cors": "^2.8.5",
         "dotenv": "^8.2.0",
         "ejs": "^3.1.8",
@@ -26,7 +26,7 @@
         "path": "^0.12.7",
         "q": "^1.5.1",
         "request": "^2.88.2",
-        "restify": "^8.5.1"
+        "restify": "^8.6.1"
     },
     "devDependencies": {
         "eslint": "^7.0.0",

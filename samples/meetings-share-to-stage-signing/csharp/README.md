@@ -39,7 +39,9 @@ This sample has 3 main personas:
 * Adaptive Cards
 * People Picker
 
-![Video documenting the sharing to stage, including the choosing of a document from the sidepanel, and the signing of the document on the stage](/samples/meetings-share-to-stage-signing/csharp/Docs/Signing-Clip.gif)
+## Interaction with app
+
+![Video documenting the sharing to stage, including the choosing of a document from the sidepanel, and the signing of the document on the stage](/samples/meetings-share-to-stage-signing/csharp/Docs/MeetingsShareStageSigningGif.gif)
 
 ## Workflow
 ```mermaid
@@ -59,6 +61,165 @@ sequenceDiagram
     Teams Client->>+Document Stage: Tells the app which document to open
     Document Stage-->>-MeetingSigning App: Shares the document to share to stage in the meeting
 ```
+## Prerequisites
+
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
+
+  ```bash
+  # determine dotnet version
+  dotnet --version
+  ```
+- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
+
+## Setup
+> NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure AD registration, the Teams app manifest, and the project configuration. A paid account with a permanent ngrok URL is recommended.
+
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+
+    > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
+
+### 2. Setup for app registration 
+- Make sure to copy and save the `https` url (it should look like `https://<randomsubdomain>.ngrok.io`)
+
+- Register an App in AAD that can be used for Teams SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad)
+
+- Once the app is registered update Redirect Uris under the Authentication section with the ngrok url, followed by /auth-end (https://<randomsubdomain>.ngrok.io/auth-end)
+
+- Ensure the following API permissions are granted to the app for Microsoft Graph access
+    - email
+    - offline_access,
+    - openid,
+    - profile, 
+    - User.Read,
+    - User.ReadBasic.All
+
+- After you create an AAD app, under *Certificates & secrets* create a new  *Client secret*. Copy the secret value and set it in `appSettings.json`    
+
+- *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your AAD App*
+
+### 3. Setup NGROK
+```bash
+# ngrok http https://localhost:44326 --host-header=localhost:44326
+```
+### 4. Project Structure
+    - The sample contains 3 projects
+        * `Web` - Exposes REST APIs for documents and signing scenarios supported in this POC.  
+            * `Web\ClientApp` contains the Front End code to support document sharing in a meeting via share to stage. 
+        * `Domain` - Contains the business logic to support the REST APIs.
+        * `Infrastructure` - Fulfils `Domain`'s dependencies like data repositories, graph support needed.
+
+### 5. Setup for code
+- Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+- Install modules
+ navigate to `samples/meetings-share-to-stage-signing/csharp/Source/MeetingSigning/ClientApp`
+
+    ```bash
+    npm install
+    ```
+- In `appSettings.json`, `manifest.json` and `.env` replace:
+    * `<<deployment-url>>` with your ngrok url, minus the https://.
+    * `<<aad-id>>` with your AAD Application (Client) Id.
+    * `<<client secret>>` with the client secret you created above.
+
+- Run the bot from a terminal, Visual Studio or Docker choose one of the following options:
+
+    ### Locally using .NET SDK
+    * Point Ngrok to port 5001: `ngrok http -host-header=rewrite 5001`
+    * In a terminal, navigate to `samples/meetings-share-to-stage-signing/csharp/Source/MeetingSigning`
+    * Run `dotnet run`
+
+    ### Locally in Visual Studio
+    * Point Ngrok to port 44326: `ngrok http https://localhost:44326 -host-header=localhost:44326`
+    * Launch Visual Studio
+    * File -> Open -> Project/Solution
+    * Navigate to `samples/meetings-share-to-stage-signing/csharp/Source` folder
+    * Select `MeetingSigning.sln` file
+    * Ensure the start-up project is set to `Microsoft.Teams.Samples.MeetingSigning.Web`
+    * Press `F5` to start Debugging using IIS Express
+
+    ### Docker
+    *Note the below instructions are using [Podman](https://podman.io/), but Docker's commands are similar. [There are instructions for setting up Podman on WSL2 here](docs/installing-podman-on-wsl2.md)*
+    * From this directory build the Docker image `podman build -f Deployment/Dockerfile
+    --ignorefile Deployment/.dockerignore ./Source --build-arg REACT_APP_AAD_CLIENT_ID`
+    * Wait for the container to build
+    * Run `podman images` to view available images, copy the Image ID
+    * Point Ngrok to port 8080: `ngrok http -host-header=rewrite 8080`
+    * Run `podman run -d -p 8080:80 --name MeetingSigning <IMAGE_ID>` to start the container
+    * Open [http://localhost:8080/](http://localhost:8080/) to view the service running
+
+### 4. Setup Manifest for Teams
+
+- **This step is specific to Teams.**
+
+    - **Edit** the `manifest.json` contained in the  `Source\MeetingSigning.Web\Manifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<Your Microsoft App Id>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `configurationUrl` inside `configurableTabs` . Replace `<yourNgrok.ngrok.io>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `Source\MeetingSigning.Web\Manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+
+## Running the sample
+
+**Install app:**
+
+![Teams app install dialog for 'Meeting Signing', with a 'Add to a meeting' button](/samples/meetings-share-to-stage-signing/csharp/Docs/InstallApp1.png)
+
+**Add Meeting Signing:**
+
+![Teams dialog titled 'Add Meeting Signing to a meeting'](/samples/meetings-share-to-stage-signing/csharp/Docs/AddMeeting.png)
+
+**Create documents:**
+
+![Meeting Signing app tab in meeting chat, with a button title 'Create Documents'](/samples/meetings-share-to-stage-signing/csharp/Docs/HomeCreateDoc.png)
+
+**Empty create documents UI:**
+![Create document dialog, with no documents selected and viewers or signer selected](/samples/meetings-share-to-stage-signing/csharp/Docs/CreateDocuments.png)
+
+**Create documents UI:**
+![Create document dialog, with 'Payroll' and 'Invoice' documents selected, and 'Debra Berger' selected as a viewer and signer](/samples/meetings-share-to-stage-signing/csharp/Docs/SelectDocuments.png)
+
+**Documents created success:**
+![Meeting Signing app tab with a 'Success Document Created' banner](/samples/meetings-share-to-stage-signing/csharp/Docs/DocumentsCreatedSuccess.png)
+
+**Join call and add app:**
+
+![Add app dialog inside a meeting](/samples/meetings-share-to-stage-signing/csharp/Docs/AddAppCalling.png)
+
+**App meeting side panel:**
+
+![Meeting Signing app side panel with two documents stylised as cards. Each card has a button titled "Share to meeting"](/samples/meetings-share-to-stage-signing/csharp/Docs/DocumentsShow.png)
+
+**Click Share Meeting:**
+
+![Meeting stage showing a document available to sign](/samples/meetings-share-to-stage-signing/csharp/Docs/ShareMeeting.png)
+
+**Click to sign:**
+
+![Dialog with checked checkbox for 'I confirm that I am Debra Berger' and a button titled 'Done'](/samples/meetings-share-to-stage-signing/csharp/Docs/ConfirmMetting.png)
+
+**Click done:**
+
+![Meeting stage with the same document as before but the text box for Debra Berger now contains Debra's name](/samples/meetings-share-to-stage-signing/csharp/Docs/ConfirmDone.png)
+
+**Create multiple document:**
+
+![Create document dialog with every document selected](/samples/meetings-share-to-stage-signing/csharp/Docs/SelectDocumentsMultiple.png)
+
+**Create multiple signing and document:**
+
+![Create document dialog with multiple documents selected and multiple viewers](/samples/meetings-share-to-stage-signing/csharp/Docs/SelectDocumentsMultipleValue.png)
+
+**Multiple document UI:**
+
+![Meeting stage with a 'Purchase Order Document' and has two Signature boxes, one which is clickable and one which isn't](/samples/meetings-share-to-stage-signing/csharp/Docs/MultipleDocuments.png)
+
+**Multiple share meeting UI:**
+
+![Meeting stage with a 'Default Agreement' document and has two Signature boxes, one which is clickable and one which isn't](/samples/meetings-share-to-stage-signing/csharp/Docs/MultipleShareMeeting.png)
 
 ## Usage
 * Sideload the app to a meeting.
@@ -105,75 +266,26 @@ Currently, this app is not fully supported in the following scenarios:
 " Unable to get information about the App.
 This happens if you are running the application in a normal browser, and not inside Teams. Install the app inside teams to test this application. To upload the app to Teams follow the instructions on https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload"
 
-## Code Tours
-This repository uses VSCode [Code Tours](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour#:~:text=A%20%22code%20tour%22%20is%20simply%20a%20series%20of,CONTRIBUTING.md%20file%20and%2For%20rely%20on%20help%20from%20others.) to explain _how_ the code works. 
-
-The tour files can be found in the `.tours` directory.
-
-## Prerequisites
-* Make sure you have an active [Azure subscription](https://azure.microsoft.com/en-us/free/).
-* Make sure [Publish to organization's app store](https://docs.microsoft.com/en-us/MicrosoftTeams/manage-apps?toc=%2Fmicrosoftteams%2Fplatform%2Ftoc.json&bc=%2Fmicrosoftteams%2Fplatform%2Fbreadcrumb%2Ftoc.json#publish-a-custom-app-to-your-organizations-app-store) is available in Teams.
-[Publish a custom app](https://docs.microsoft.com/en-us/MicrosoftTeams/submit-approve-custom-apps) to publish the custom app. 
-* Install [Visual Studio](https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio?view=vs-2022) or [Visual Studio Code](https://code.visualstudio.com/download) to run and debug the sample code.
-  * [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
-* Install [ngrok](https://ngrok.com/download) for local setup. (or any other tunneling solution)
-
-## Steps
-* Start Ngrok
-* Create an Azure AAD App Registration
-* Update URL in Manifest
-* Build C# App
-* Deploy to Teams
-
-## Set up
-* Run Ngrok
-    * Run ngrok and point it to the port the Web App is listening on.
-    ```bash
-    ngrok http https://localhost:44326 --host-header=localhost:44326 # For Visual Studio
-    ```
-    * Make sure to copy and save the `https` url (it should look like `https://<randomsubdomain>.ngrok.io`).
-* [Register an App in AAD that can be used for Teams SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad)
-    * Once the app is registered update Redirect Uris under the Authentication section with the ngrok url, followed by /auth-end (https://<randomsubdomain>.ngrok.io/auth-end)
-    * Ensure the following API permissions are granted to the app for Microsoft Graph access - email, offline_access, openid, profile, User.Read, User.ReadBasic.All
-    * *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your AAD App*
-    * After you create an AAD app, under *Certificates & secrets* create a new  *Client secret*. Copy the secret value and set it in `appSettings.json`
-* In `appSettings.json`, `manifest.json` and `.env` replace:
-    * `<<deployment-url>>` with your ngrok url, minus the https://.
-    * `<<aad-id>>` with your AAD Application (Client) Id.
-    * `<<client secret>>` with the client secret you created above.
-* Project Structure
-    * The sample contains 3 projects
-        * `Web` - Exposes REST APIs for documents and signing scenarios supported in this POC.  
-            * `Web\ClientApp` contains the Front End code to support document sharing in a meeting via share to stage. 
-        * `Domain` - Contains the business logic to support the REST APIs.
-        * `Infrastructure` - Fulfils `Domain`'s dependencies like data repositories, graph support needed.
-* Deploying
-    * There are detailed instructions for deploying locally below.
-* Sideloading the App
-    * Create a zip containing `manifest.json`, `colorIcon.png` and `outlineIcon.png` from `Source\MeetingSigning.Web\Manifest`.
-    * [You can upload you app by following these instructions](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload)
-
-## Deployment
-### Locally in Visual Studio
-* Point Ngrok to port 44326: `ngrok http https://localhost:44326 -host-header=localhost:44326`
-* Open the solution in Visual Studio.
-* Ensure the start-up project is set to `Microsoft.Teams.Samples.MeetingSigning.Web`
-* Start Debugging using IIS Express
-
-### Locally using .NET SDK
-* Point Ngrok to port 5001: `ngrok http -host-header=rewrite 5001`
-* In a terminal, navigate to `Source\MeetingSigning.Web`
-* Run `dotnet run`
-
-### Docker
-*Note the below instructions are using [Podman](https://podman.io/), but Docker's commands are similar. [There are instructions for setting up Podman on WSL2 here](docs/installing-podman-on-wsl2.md)*
-* From this directory build the Docker image `podman build -f Deployment/Dockerfile
---ignorefile Deployment/.dockerignore ./Source --build-arg REACT_APP_AAD_CLIENT_ID`
-* Wait for the container to build
-* Run `podman images` to view available images, copy the Image ID
-* Point Ngrok to port 8080: `ngrok http -host-header=rewrite 8080`
-* Run `podman run -d -p 8080:80 --name MeetingSigning <IMAGE_ID>` to start the container
-* Open [http://localhost:8080/](http://localhost:8080/) to view the service running
 
 ## Additional links
 * [Share to stage](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/enable-and-configure-your-app-for-teams-meetings) 
+
+
+## Further reading
+
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [User Specific Views](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/user-specific-views)
+- [Sequential Workflows](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/sequential-workflows)
+- [Up to date cards](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/up-to-date-views)
+- [Universal Bot Action Model](https://docs.microsoft.com/en-us/adaptive-cards/authoring-cards/universal-action-model#actionexecute)
+- [Azure Portal](https://portal.azure.com)
+- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
+- [Azure Portal](https://portal.azure.com)
+- [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
+- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
+- [dotenv](https://www.npmjs.com/package/dotenv)
+- [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
