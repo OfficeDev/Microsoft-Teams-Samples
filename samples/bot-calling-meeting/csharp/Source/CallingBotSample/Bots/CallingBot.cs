@@ -146,7 +146,9 @@ namespace CallingBotSample.Bots
                     callId,
                     new MediaInfo
                     {
-                        // This URL needs to be publically accessible, so Microsoft Teams can play the audio.
+                        // This URL needs to be publicly accessible, so Microsoft Teams can play the audio.
+                        // In a production environment, you might want to consider a better location than
+                        // this server's content directory.
                         Uri = new Uri(botOptions.BotBaseUrl, recordingLocation).ToString(),
                         ResourceId = Guid.NewGuid().ToString(),
                     });

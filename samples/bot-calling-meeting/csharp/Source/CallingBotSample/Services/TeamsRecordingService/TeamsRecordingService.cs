@@ -47,6 +47,10 @@ namespace CallingBotSample.Services.TeamsRecordingService
             {
                 Directory.CreateDirectory(downloadDirectory);
             }
+
+            // In our sample we are downloading the recording to the server's content directory. In an actual deployment
+            // if might be better to upload the file to blob storage where you can use SAS tokens and policies to limit
+            // access to the files
             await File.WriteAllBytesAsync(downloadPath, content);
 
             return $"{botOptions.RecordingDownloadDirectory}/{fileName}";
