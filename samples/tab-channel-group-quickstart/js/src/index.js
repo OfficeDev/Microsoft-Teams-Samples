@@ -5,10 +5,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
-import { FluentProvider, teamsDarkTheme } from '@fluentui/react-components' //https://fluentsite.z22.web.core.windows.net/quick-start
+import { Provider, themes } from '@fluentui/react-northstar' //https://fluentsite.z22.web.core.windows.net/quick-start
 
 ReactDOM.render(
-    <FluentProvider theme={teamsDarkTheme}>
+    <Provider theme={themes.teams}>
         <App />
-    </FluentProvider>, document.getElementById('root')
+    </Provider>, document.getElementById('root')
 );
