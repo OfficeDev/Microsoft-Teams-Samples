@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text } from '@fluentui/react-northstar';
+import { Text } from '@fluentui/react-components';
 import { withMeetingTokenService } from '../context/MeetingServiceProvider';
 
 class ErrorMessageBar extends Component {
