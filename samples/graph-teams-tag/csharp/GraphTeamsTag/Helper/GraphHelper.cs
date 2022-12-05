@@ -6,6 +6,7 @@ namespace GraphTeamsTag.Helper
 {
     using GraphTeamsTag.Models;
     using GraphTeamsTag.Provider;
+    using Microsoft.Graph;
 
     public class GraphHelper
     {

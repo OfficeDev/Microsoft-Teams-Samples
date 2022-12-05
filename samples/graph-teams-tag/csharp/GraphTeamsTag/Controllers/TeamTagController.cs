@@ -6,6 +6,8 @@ namespace GraphTeamsTag.Controllers
 {
     using GraphTeamsTag.Helper;
     using GraphTeamsTag.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Graph;
 
     [Route("api/teamtag")]
     [ApiController]

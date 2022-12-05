@@ -4,6 +4,8 @@
 
 namespace GraphTeamsTag.Provider
 {
+    using Azure.Identity;
+    using Microsoft.Graph;
     public class SimpleBetaGraphClient
     {
         /// <summary>
