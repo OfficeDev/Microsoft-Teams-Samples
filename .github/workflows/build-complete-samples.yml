@@ -471,6 +471,10 @@ jobs:
               name: 'bot-archive-groupchat-messages'
               version: '14.x'
 
+            - project_path: 'samples/bot-conversation-sso-quickstart/js'
+              name: 'bot-conversation-sso-quickstart'
+              version: '14.x'
+
             - project_path: 'samples/bot-daily-task-reminder/nodejs'
               name: 'bot-daily-task-reminder'
               version: '14.x'
