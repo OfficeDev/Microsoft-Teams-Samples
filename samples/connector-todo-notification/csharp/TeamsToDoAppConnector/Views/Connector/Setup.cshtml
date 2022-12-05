@@ -1,4 +1,7 @@
-﻿@{
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+@{
     Layout = "";
 }
 <h2>Send notifications when tasks are:</h2>
@@ -14,7 +17,7 @@
 </div>
 
 <script src="@("https://unpkg.com/@microsoft/teams-js@1.3.3/dist/MicrosoftTeams.min.js")"></script>
-<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/lib/jquery/jquerymin.js"></script>
 
 <script type="text/javascript">
 
@@ -32,31 +35,39 @@
             } else {
                 eventType = radios[1].value;
             }
-
+        
             microsoftTeams.settings.setSettings({
                  entityId: eventType,
-                    contentUrl: "@(TeamsToDoAppConnector.Utils.AppSettings.BaseUrl)/Connector/Setup",
+                 contentUrl: @Json.Serialize(Configuration["BaseUrl"])+"/Connector/Setup",
                  configName: eventType
                 });
 
             microsoftTeams.settings.getSettings(function (settings) {
+              try{
+                  var webhookdata = {
+                        webhookUrl:settings.webhookUrl,
+                        eventType: settings.configName
+                    };
 
-                // We get the Webhook URL in settings.webhookUrl which needs to be saved.
-                $.ajax({
+                  $.ajax({
+                    type: "POST",
                     url: '/Connector/Save',
-                    type: 'post',
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        webhookUrl: settings.webhookUrl,
-                        eventType: eventType
-                    }),
+                    data: webhookdata,
+                    datatype: "html",
+                    contentType: 'application/x-www-form-urlencoded',
+
+                    
                     success: function (data, textStatus, jQxhr) {
                         console.log('webhook created successfully.');
                     },
                     error: function (jqXhr, textStatus, errorThrown) {
                         console.log('error', errorThrown);
                     }
-                });
+                  });
+              }
+              catch(e){
+                    console.log("-----Debugging Test------->",e);
+              }
             });
 
             saveEvent.notifySuccess();

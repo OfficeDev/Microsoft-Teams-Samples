@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
   "manifestVersion": "1.12",
   "version": "1.0.0",
-  "id": "d61ca023-5aa4-423c-8fd6-1a29d332616e",
+  "id": "c5f12998-f395-4eaa-ad7c-5f5bab2d47bb",
   "packageName": "com.microsoft.teams.samples.sampleapp",
   "developer": {
     "name": "Microsoft",
@@ -25,8 +25,8 @@
   "accentColor": "#3F487F",
   "connectors": [
     {
-      "connectorId": "d61ca023-5aa4-423c-8fd6-1a29d332616e",
-      "configurationUrl": "https://teamstodoappconnectorwithinlineconfig.azurewebsites.net/Connector/Setup",
+      "connectorId": "<<CONNECTOR-ID>>",
+      "configurationUrl": "https://<<VALID-DOMAIN>>/Connector/Setup",
       "scopes": [
         "team"
       ]

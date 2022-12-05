@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web.Mvc;
+﻿using Bogus;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using TeamsToDoAppConnector.Models;
+using TeamsToDoAppConnector.Models.Configuration;
 using TeamsToDoAppConnector.Repository;
 using TeamsToDoAppConnector.Utils;
 
@@ -13,6 +13,16 @@ namespace TeamsToDoAppConnector.Controllers
     /// </summary>
     public class ConnectorController : Controller
     {
+
+        /// <summary>
+        /// Stores the AppSettings configuration values.
+        /// </summary>
+        private readonly IOptions<AppSettings> appSettings;
+        public ConnectorController(IOptions<AppSettings> app)
+        {
+            appSettings = app;
+        }
+
         /// <summary>
         /// This is the landing page when user tries to setup the connector.
         /// You could implement login here, if required.
@@ -53,7 +63,7 @@ namespace TeamsToDoAppConnector.Controllers
                     subscription.EventType = webhookInfo.EventType;
                 }
 
-                await TaskHelper.PostWelcomeMessage(webhookInfo.WebhookUrl);
+                await TaskHelper.PostWelcomeMessage(webhookInfo.WebhookUrl, appSettings.Value.BaseUrl);
 
                 return View();
             }

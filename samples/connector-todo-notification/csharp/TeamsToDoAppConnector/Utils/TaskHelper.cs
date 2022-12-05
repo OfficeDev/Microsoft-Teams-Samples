@@ -1,15 +1,17 @@
 ﻿using Bogus;
+using Microsoft.Extensions.Options;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using TeamsToDoAppConnector.Models;
+using TeamsToDoAppConnector.Models.Configuration;
 
 namespace TeamsToDoAppConnector.Utils
 {
     public static class TaskHelper
     {
-
         public static TaskItem CreateTaskItem()
         {
             var faker = new Faker();
@@ -22,20 +24,20 @@ namespace TeamsToDoAppConnector.Utils
             };
         }
 
-        public static async Task PostTaskNotification(string webhook, TaskItem item, string title)
+        public static async Task PostTaskNotification(string webhook, TaskItem item, string title, string baseUrl)
         {
-            string cardJson = GetConnectorCardJson(item, title);
+            string cardJson = GetConnectorCardJson(item, title, baseUrl);
             await PostCardAsync(webhook, cardJson);
         }
 
-        public static async Task PostWelcomeMessage(string webhookUrl)
+        public static async Task PostWelcomeMessage(string webhookUrl, string baseUrl)
         {
             string cardJson = @"{
             ""@type"": ""MessageCard"",
             ""summary"": ""Welcome Message"",
             ""sections"": [{ 
                 ""activityTitle"": ""Welcome Message"",
-                ""text"": ""Teams ToDo connector has been set up. We will send you notification whenever new task is added in [Task Manager Portal]("+AppSettings.BaseUrl+ @" ).""}]}";
+                ""text"": ""Teams ToDo connector has been set up. We will send you notification whenever new task is added in [Task Manager Portal]("+ baseUrl + "/task/create" + @").""}]}";
 
             await PostCardAsync(webhookUrl, cardJson);
         }
@@ -52,8 +54,9 @@ namespace TeamsToDoAppConnector.Utils
             }
         }
 
-        public static string GetConnectorCardJson(TaskItem task, string title)
+        public static string GetConnectorCardJson(TaskItem task, string title, string baseUrl)
         {
+            AppSettings appsettings = new AppSettings();
             //prepare the json payload
             return @"
                 {
@@ -83,7 +86,7 @@ namespace TeamsToDoAppConnector.Utils
                             '@type': 'ViewAction',
                             'name': 'View Task Details',
                             'target': [
-                                '" + AppSettings.BaseUrl + "/task/detail/" + task.Guid + @"'
+                                '" + baseUrl + "/task/detail/" + task.Guid + @"'
                             ]
                         },
                         {
@@ -102,7 +105,7 @@ namespace TeamsToDoAppConnector.Utils
                               '@type': 'HttpPOST',
                               'name': 'Update Title',
                               'isPrimary': true,
-                              'target': '" + AppSettings.BaseUrl + "/task/update?id=" + task.Guid + @"',
+                              'target': '" + baseUrl + "/task/update?id=" + task.Guid + @"',
                               'body': '{""Title"":""{{title.value}}""}',
                                 'bodyContentType': 'application/json'
                             }

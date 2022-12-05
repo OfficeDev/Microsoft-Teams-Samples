@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using TeamsToDoAppConnector.Models;
+using TeamsToDoAppConnector.Models.Configuration;
 using TeamsToDoAppConnector.Repository;
 using TeamsToDoAppConnector.Utils;
 
@@ -15,6 +13,15 @@ namespace TeamsToDoAppConnector.Controllers
     /// </summary>
     public class TaskController : Controller
     {
+
+        /// <summary>
+        /// Stores the AppSettings configuration values.
+        /// </summary>
+        private readonly IOptions<AppSettings> appSettings;
+        public TaskController(IOptions<AppSettings> app)
+        {
+            appSettings = app;
+        }
 
         [Route("task/index")]
         [HttpGet]
@@ -40,7 +47,7 @@ namespace TeamsToDoAppConnector.Controllers
             // Loop through subscriptions and notify each channel that task is created.
             foreach (var sub in SubscriptionRepository.Subscriptions)
             {
-                await TaskHelper.PostTaskNotification(sub.WebHookUri, item, "Created");
+                await TaskHelper.PostTaskNotification(sub.WebHookUri, item, "Created",appSettings.Value.BaseUrl);
             }
 
             return RedirectToAction("Detail", new { id = item.Guid });
@@ -55,24 +62,25 @@ namespace TeamsToDoAppConnector.Controllers
 
         [Route("task/update")]
         [HttpPost]
-        public async Task Update([System.Web.Http.FromBody]Request request, string id)
+        public async Task Update([FromBody]Request request, string id)
         {
+            //Task<HttpResponseMessage>
             var task = TaskRepository.Tasks.First(t => t.Guid == id);
             task.Title = request.Title;
 
-            string json = TaskHelper.GetConnectorCardJson(task, "Updated");
+            string json = TaskHelper.GetConnectorCardJson(task, "Updated", appSettings.Value.BaseUrl);
 
             Response.Clear();
             Response.ContentType = "application/json; charset=utf-8";
             Response.Headers.Add("CARD-ACTION-STATUS", "The task is uppdate.");
             Response.Headers.Add("CARD-UPDATE-IN-BODY", "true");
-            Response.Write(json);
-            Response.End();
-
+            Response.WriteAsync(json);
+            Response.StatusCode = StatusCodes.Status200OK;
+            
             // Send Task updated notification to all Subscriptions.
             foreach (var sub in SubscriptionRepository.Subscriptions.Where(s => s.EventType == EventType.Update))
             {
-                await TaskHelper.PostTaskNotification(sub.WebHookUri, task, "Updated");
+                await TaskHelper.PostTaskNotification(sub.WebHookUri, task, "Updated", appSettings.Value.BaseUrl);
             }
         }
     }
