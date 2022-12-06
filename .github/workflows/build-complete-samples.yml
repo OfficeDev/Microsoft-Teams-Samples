@@ -396,14 +396,6 @@ jobs:
               name: 'msteams-application-qbot'
               version: '3.1'    
 
-            - project_path: 'samples/app-task-module/csharp/Microsoft.Teams.Samples.TaskModule.Web/Microsoft.Teams.Samples.TaskModule.Web.csproj'
-              name: 'app-task-module'
-              version: '3.1'         
-
-            - project_path: 'samples/connector-todo-notification/csharp/TeamsToDoAppConnector/TeamsToDoAppConnector.csproj'
-              name: 'connector-todo-notification'
-              version: '3.1'  
-
             - project_path: 'samples/graph-activity-feed/csharp/ActivityFeedNotification/TabActivityFeed.csproj'
               name: 'graph-activity-feed'
               version: '3.1' 
