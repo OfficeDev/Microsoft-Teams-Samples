@@ -99,7 +99,7 @@ sequenceDiagram
 
 ### 3. Setup NGROK
 ```bash
-# ngrok http -host-header=rewrite 44326
+# ngrok http https://localhost:44326 --host-header=localhost:44326
 ```
 ### 4. Project Structure
     - The sample contains 3 projects
@@ -126,21 +126,31 @@ sequenceDiagram
     * `<<aad-id>>` with your AAD Application (Client) Id.
     * `<<client secret>>` with the client secret you created above.
 
-- Run the bot from a terminal or from Visual Studio, choose option A or B:
+- Run the bot from a terminal, Visual Studio or Docker choose one of the following options:
 
-  A) From a terminal, navigate to `samples/meetings-share-to-stage-signing/csharp/Source/MeetingSigning`
+    ### Locally using .NET SDK
+    * Point Ngrok to port 5001: `ngrok http -host-header=rewrite 5001`
+    * In a terminal, navigate to `samples/meetings-share-to-stage-signing/csharp/Source/MeetingSigning`
+    * Run `dotnet run`
 
-  ```bash
-  # run the bot
-  dotnet run
-  ```
-  B) Or from Visual Studio
+    ### Locally in Visual Studio
+    * Point Ngrok to port 44326: `ngrok http https://localhost:44326 -host-header=localhost:44326`
+    * Launch Visual Studio
+    * File -> Open -> Project/Solution
+    * Navigate to `samples/meetings-share-to-stage-signing/csharp/Source` folder
+    * Select `MeetingSigning.sln` file
+    * Ensure the start-up project is set to `Microsoft.Teams.Samples.MeetingSigning.Web`
+    * Press `F5` to start Debugging using IIS Express
 
-  - Launch Visual Studio
-  - File -> Open -> Project/Solution
-  - Navigate to `samples/meetings-share-to-stage-signing/csharp/Source` folder
-  - Select `MeetingSigning.sln` file
-  - Press `F5` to run the project
+    ### Docker
+    *Note the below instructions are using [Podman](https://podman.io/), but Docker's commands are similar. [There are instructions for setting up Podman on WSL2 here](docs/installing-podman-on-wsl2.md)*
+    * From this directory build the Docker image `podman build -f Deployment/Dockerfile
+    --ignorefile Deployment/.dockerignore ./Source --build-arg REACT_APP_AAD_CLIENT_ID`
+    * Wait for the container to build
+    * Run `podman images` to view available images, copy the Image ID
+    * Point Ngrok to port 8080: `ngrok http -host-header=rewrite 8080`
+    * Run `podman run -d -p 8080:80 --name MeetingSigning <IMAGE_ID>` to start the container
+    * Open [http://localhost:8080/](http://localhost:8080/) to view the service running
 
 ### 4. Setup Manifest for Teams
 
@@ -156,60 +166,60 @@ sequenceDiagram
 
 **Install app:**
 
-![Install](/samples/meetings-share-to-stage-signing/csharp/Docs/InstallApp1.png)
+![Teams app install dialog for 'Meeting Signing', with a 'Add to a meeting' button](/samples/meetings-share-to-stage-signing/csharp/Docs/InstallApp1.png)
 
 **Add Meeting Signing:**
 
-![Install](/samples/meetings-share-to-stage-signing/csharp/Docs/AddMeeting.png)
+![Teams dialog titled 'Add Meeting Signing to a meeting'](/samples/meetings-share-to-stage-signing/csharp/Docs/AddMeeting.png)
 
 **Create documents:**
 
-![Install](/samples/meetings-share-to-stage-signing/csharp/Docs/HomeCreateDoc.png)
+![Meeting Signing app tab in meeting chat, with a button title 'Create Documents'](/samples/meetings-share-to-stage-signing/csharp/Docs/HomeCreateDoc.png)
 
 **Empty create documents UI:**
-![Install](/samples/meetings-share-to-stage-signing/csharp/Docs/CreateDocuments.png)
+![Create document dialog, with no documents selected and viewers or signer selected](/samples/meetings-share-to-stage-signing/csharp/Docs/CreateDocuments.png)
 
 **Create documents UI:**
-![Install](/samples/meetings-share-to-stage-signing/csharp/Docs/SelectDocuments.png)
+![Create document dialog, with 'Payroll' and 'Invoice' documents selected, and 'Debra Berger' selected as a viewer and signer](/samples/meetings-share-to-stage-signing/csharp/Docs/SelectDocuments.png)
 
 **Documents created success:**
-![Install](/samples/meetings-share-to-stage-signing/csharp/Docs/DocumentsCreatedSuccess.png)
+![Meeting Signing app tab with a 'Success Document Created' banner](/samples/meetings-share-to-stage-signing/csharp/Docs/DocumentsCreatedSuccess.png)
 
 **Join call and add app:**
 
-![Install](/samples/meetings-share-to-stage-signing/csharp/Docs/AddAppCalling.png)
+![Add app dialog inside a meeting](/samples/meetings-share-to-stage-signing/csharp/Docs/AddAppCalling.png)
 
-**App install success UI:**
+**App meeting side panel:**
 
-![Install](/samples/meetings-share-to-stage-signing/csharp/Docs/DocumentsShow.png)
+![Meeting Signing app side panel with two documents stylised as cards. Each card has a button titled "Share to meeting"](/samples/meetings-share-to-stage-signing/csharp/Docs/DocumentsShow.png)
 
 **Click Share Meeting:**
 
-![Install](/samples/meetings-share-to-stage-signing/csharp/Docs/ShareMeeting.png)
+![Meeting stage showing a document available to sign](/samples/meetings-share-to-stage-signing/csharp/Docs/ShareMeeting.png)
 
 **Click to sign:**
 
-![Install](/samples/meetings-share-to-stage-signing/csharp/Docs/ConfirmMetting.png)
+![Dialog with checked checkbox for 'I confirm that I am Debra Berger' and a button titled 'Done'](/samples/meetings-share-to-stage-signing/csharp/Docs/ConfirmMetting.png)
 
 **Click done:**
 
-![Install](/samples/meetings-share-to-stage-signing/csharp/Docs/ConfirmDone.png)
+![Meeting stage with the same document as before but the text box for Debra Berger now contains Debra's name](/samples/meetings-share-to-stage-signing/csharp/Docs/ConfirmDone.png)
 
 **Create multiple document:**
 
-![Install](/samples/meetings-share-to-stage-signing/csharp/Docs/SelectDocumentsMultiple.png)
+![Create document dialog with every document selected](/samples/meetings-share-to-stage-signing/csharp/Docs/SelectDocumentsMultiple.png)
 
 **Create multiple signing and document:**
 
-![Install](/samples/meetings-share-to-stage-signing/csharp/Docs/SelectDocumentsMultipleValue.png)
+![Create document dialog with multiple documents selected and multiple viewers](/samples/meetings-share-to-stage-signing/csharp/Docs/SelectDocumentsMultipleValue.png)
 
 **Multiple document UI:**
 
-![Install](/samples/meetings-share-to-stage-signing/csharp/Docs/MultipleDocuments.png)
+![Meeting stage with a 'Purchase Order Document' and has two Signature boxes, one which is clickable and one which isn't](/samples/meetings-share-to-stage-signing/csharp/Docs/MultipleDocuments.png)
 
 **Multiple share meeting UI:**
 
-![Install](/samples/meetings-share-to-stage-signing/csharp/Docs/MultipleShareMeeting.png)
+![Meeting stage with a 'Default Agreement' document and has two Signature boxes, one which is clickable and one which isn't](/samples/meetings-share-to-stage-signing/csharp/Docs/MultipleShareMeeting.png)
 
 ## Usage
 * Sideload the app to a meeting.
@@ -231,7 +241,7 @@ sequenceDiagram
 ## Live Share integration
 We have added Live Share to this demo to showcase some features of the SDK. The examples we are showing are scroll syncing, taking control and shared cursors.
 
-* Scroll Offset Syncing, when the person in control scrolls their view of the document, everyone following will see their document scroll too. We the controller scrolls we send an EphemeralEvent that viewers listen for, and if the viewer is following the controller their view will update. If the viewer has scrolled to a different part of the document, their following of the controller will be suspended until they follow the controller again.
+* Scroll Offset Syncing, when the person in control scrolls their view of the document, everyone following will see their document scroll too. We the controller scrolls we send an LiveEvent that viewers listen for, and if the viewer is following the controller their view will update. If the viewer has scrolled to a different part of the document, their following of the controller will be suspended until they follow the controller again.
 * Take Control allows for other viewers to become the scroll controller. Only those that have an approved role (in our example Organiser and Presenter) will be able to claim control. 
 * Shared Cursors shares presenters cursors across every attendees screen. The approach we are using is primitive and uses DOM manipulation to position the cursors. If you plan to implement cursor support in your app using the [live-share-canvas SDK](https://github.com/microsoft/live-share-sdk/tree/main/packages/live-share-canvas) is recommended.
 
@@ -256,27 +266,11 @@ Currently, this app is not fully supported in the following scenarios:
 " Unable to get information about the App.
 This happens if you are running the application in a normal browser, and not inside Teams. Install the app inside teams to test this application. To upload the app to Teams follow the instructions on https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload"
 
-## Deployment
-### Locally in Visual Studio
-* Point Ngrok to port 44326: `ngrok http https://localhost:44326 -host-header=localhost:44326`
-* Open the solution in Visual Studio.
-* Ensure the start-up project is set to `Microsoft.Teams.Samples.MeetingSigning.Web`
-* Start Debugging using IIS Express
 
-### Locally using .NET SDK
-* Point Ngrok to port 5001: `ngrok http -host-header=rewrite 5001`
-* In a terminal, navigate to `Source\MeetingSigning.Web`
-* Run `dotnet run`
+## Code Tours
+This repository uses VSCode [Code Tours](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour#:~:text=A%20%22code%20tour%22%20is%20simply%20a%20series%20of,CONTRIBUTING.md%20file%20and%2For%20rely%20on%20help%20from%20others.) to explain _how_ the code works. 
 
-### Docker
-*Note the below instructions are using [Podman](https://podman.io/), but Docker's commands are similar. [There are instructions for setting up Podman on WSL2 here](docs/installing-podman-on-wsl2.md)*
-* From this directory build the Docker image `podman build -f Deployment/Dockerfile
---ignorefile Deployment/.dockerignore ./Source --build-arg REACT_APP_AAD_CLIENT_ID`
-* Wait for the container to build
-* Run `podman images` to view available images, copy the Image ID
-* Point Ngrok to port 8080: `ngrok http -host-header=rewrite 8080`
-* Run `podman run -d -p 8080:80 --name MeetingSigning <IMAGE_ID>` to start the container
-* Open [http://localhost:8080/](http://localhost:8080/) to view the service running
+The tour files can be found in the `.tours` directory.
 
 ## Additional links
 * [Share to stage](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/enable-and-configure-your-app-for-teams-meetings) 
