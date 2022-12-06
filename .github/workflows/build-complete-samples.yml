@@ -671,8 +671,16 @@ jobs:
               name: 'tab-graph-toolkit'
               version: '14.x'
             
+            - project_path: 'samples/tab-ui-templates/ts'
+              name: 'tab-ui-templates'
+              version: '14.x'
+            
             - project_path: 'samples/graph-meeting-notification/nodejs'
               name: 'graph-meeting-notification'
+              version: '14.x'
+
+            - project_path: 'samples/outgoing-webhook/nodejs'
+              name: 'outgoing-webhook'
               version: '14.x'
 
             - project_path: 'samples/app-auth/nodejs'
@@ -791,16 +799,8 @@ jobs:
               name: 'tab-device-permissions'
               version: '16.x'
             
-            - project_path: 'samples/tab-ui-templates/ts'
-              name: 'tab-ui-templates'
-              version: '16.x'
-            
-            - project_path: 'samples/outgoing-webhook/nodejs'
-              name: 'outgoing-webhook'
-              version: '16.x'
-
             - project_path: 'samples/tab-channel-context/nodejs'
-              name: 'outgoing-webhook'
+              name: 'tab-channel-context'  
               version: '16.x'
             
             - project_path: 'samples/meetings-audio-state/nodejs'
