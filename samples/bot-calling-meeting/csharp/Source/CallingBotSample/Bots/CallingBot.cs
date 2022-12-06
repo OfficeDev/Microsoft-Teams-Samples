@@ -15,6 +15,7 @@ using CallingBotSample.Utility;
 using CallingMeetingBot.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Schema;
 using Microsoft.CognitiveServices.Speech;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
@@ -142,6 +143,7 @@ namespace CallingBotSample.Bots
                 }
             }
             // If the notification is a recording, download from the Teams Recording Service, and then echo the audio back to the call
+            // We also convert the recording to text and send it to the meeting chat.
             else if (args.ResourceData is RecordOperation recording)
             {
                 if (recording.ResultInfo.Code >= 400)
@@ -151,19 +153,34 @@ namespace CallingBotSample.Bots
 
                 var recordingLocation = await teamsRecordingService.DownloadRecording(recording.RecordingLocation, recording.RecordingAccessToken);
 
+                // Here we are transcribing the recording and sending it as a message in the call chat.
                 try
                 {
                     var callDetails = callService.Get(callId);
-                    var result = await speechService.ConvertWavToText(recordingLocation);
+                    var threadId = (await callDetails)?.ChatInfo?.ThreadId;
 
-                    if (result.Reason == ResultReason.RecognizedSpeech)
+                    // Calls initiated in a 1:1 chat with the bot do not have a threadId
+                    if (threadId != null)
                     {
-                        var threadId = (await callDetails)?.ChatInfo?.ThreadId;
-                        if (threadId != null)
+                        var result = await speechService.ConvertWavToText(recordingLocation);
+
+                        if (result.Reason == ResultReason.RecognizedSpeech)
                         {
                             await botService.SendToConversation($"You said: {result.Text}", threadId);
                         }
+                        else if (result.Reason == ResultReason.NoMatch)
+                        {
+                            await botService.SendToConversation($"Sorry, we are unable to transcribe what you just said.", threadId);
+                        }
+                        else
+                        {
+                            await botService.SendToConversation($"Sorry, something went wrong while trying to transcribe your recording.", threadId);
+                        }
                     }
+                }
+                catch (ErrorResponseException ex)
+                {
+                    logger.LogError(ex, "Failure while sending a message to the coversation. The app might not be installed in the conversation scope.");
                 }
                 catch (Exception ex)
                 {

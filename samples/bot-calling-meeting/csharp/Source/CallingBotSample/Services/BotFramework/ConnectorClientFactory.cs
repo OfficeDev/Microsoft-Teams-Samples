@@ -33,6 +33,8 @@ namespace CallingBotSample.Services.BotFramework
         public ConnectorClient CreateConnectorClient()
         {
             return CreateConnectorClient(
+                // We are using the Global Service URL endpoint which will work if you only call public clouds. If you need to support government clouds,
+                // you will need to keep track of the serviceUrl used in MessageBot handler, and pass it here.
                 new Uri("https://smba.trafficmanager.net/teams/"),
                 new MicrosoftAppCredentials(botOptions.AppId, botOptions.AppSecret));
         }

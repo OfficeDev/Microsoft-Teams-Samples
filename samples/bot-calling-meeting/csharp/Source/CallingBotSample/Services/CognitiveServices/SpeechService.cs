@@ -29,7 +29,7 @@ namespace CallingBotSample.Services.CognitiveServices
         {
             if (!cognitiveServicesOptions.Enabled)
             {
-                throw new Exception();
+                throw new Exception("Cognitive services is not enabled.");
             }
 
             var speechConfig = SpeechConfig.FromSubscription(cognitiveServicesOptions.SpeechKey, cognitiveServicesOptions.SpeechRegion);
