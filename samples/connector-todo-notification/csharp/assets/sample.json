@@ -9,7 +9,7 @@
       "NOTE: This has no relationship with the Microsoft To Do product. A simple in-memory database holds the to do items."
     ],
     "creationDateTime": "2018-01-16",
-    "updateDateTime": "2022-06-21",
+    "updateDateTime": "2022-12-05",
     "products": [
       "Teams"
     ],
@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/connector-todo-notification/csharp/TeamsToDoAppConnector/Images/connector_todo_notification_csharp.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/connector-todo-notification/csharp/Images/connector_todo_notification_csharp.gif",
         "alt": "Solution UX showing to do notification"
       }
     ],

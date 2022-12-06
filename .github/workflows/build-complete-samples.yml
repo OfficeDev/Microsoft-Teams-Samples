@@ -408,6 +408,10 @@ jobs:
               name: 'bot-conversation-sso-quickstart'
               version: '6.0.x'           
 
+            - project_path: 'samples/connector-todo-notification/csharp/TeamsToDoAppConnector.csproj'
+              name: 'connector-todo-notification'
+              version: '6.0.x'
+
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
     steps:
