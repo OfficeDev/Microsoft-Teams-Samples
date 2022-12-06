@@ -276,14 +276,6 @@ jobs:
               name: 'bot-message-reaction'
               version: '6.0.x'
 
-            - project_path: 'samples/bot-people-picker-adaptive-card/csharp/PeoplePicker/PeoplePicker.csproj'
-              name: 'bot-people-picker-adaptive-card'
-              version: '3.1'
-
-            - project_path: 'samples/bot-people-picker-adaptive-card/csharp/PeoplePicker/PeoplePicker.csproj'
-              name: 'bot-people-picker-adaptive-card'
-              version: '3.1'
-
             - project_path: 'samples/bot-suggested-actions/csharp/SuggestedActions/SuggestedActionsBot.csproj'
               name: 'bot-suggested-actions'
               version: '3.1'
@@ -390,7 +382,35 @@ jobs:
 
             - project_path: 'samples/msteams-application-qbot/Source/Microsoft.Teams.Apps.QBot.Web/Microsoft.Teams.Apps.QBot.Web.csproj'
               name: 'msteams-application-qbot'
-              version: '3.1'                
+              version: '3.1'    
+
+            - project_path: 'samples/app-task-module/csharp/Microsoft.Teams.Samples.TaskModule.Web/Microsoft.Teams.Samples.TaskModule.Web.csproj'
+              name: 'app-task-module'
+              version: '3.1'         
+
+            - project_path: 'samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/Microsoft.Teams.Samples.ConversationalTabs.Web.csproj'
+              name: 'bot-tab-conversations'
+              version: '3.1'      
+                    
+            - project_path: 'samples/connector-todo-notification/csharp/TeamsToDoAppConnector/TeamsToDoAppConnector.csproj'
+              name: 'connector-todo-notification'
+              version: '3.1'  
+
+            - project_path: 'samples/graph-activity-feed/csharp/ActivityFeedNotification/TabActivityFeed.csproj'
+              name: 'graph-activity-feed'
+              version: '3.1' 
+
+            - project_path: 'samples/graph-proactive-installation/csharp/ProactiveAppInstallation/ProactiveAppInstallation.csproj'
+              name: 'graph-proactive-installation'
+              version: '3.1' 
+
+            - project_path: 'samples/msteams-application-resourcehub/Source/microsoft-teams-apps-selfhelp/Microsoft.Teams.Apps.Selfhelp.csproj'
+              name: 'msteams-application-resourcehub'
+              version: '3.1' 
+
+            - project_path: 'samples/outgoing-webhook/csharp/WebhookSampleBot.csproj'
+              name: 'outgoing-webhook'
+              version: '3.1' 
 
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
@@ -683,6 +703,10 @@ jobs:
               name: 'outgoing-webhook'
               version: '14.x'
 
+            - project_path: 'samples/bot-proactive-messaging-teamsfx'
+              name: 'bot-proactive-messaging-teamsfx'
+              version: '14.x'              
+
             - project_path: 'samples/app-auth/nodejs'
               name: 'app-auth'
               version: '16.x'
@@ -714,10 +738,6 @@ jobs:
             - project_path: 'samples/bot-suggested-actions/nodejs'
               name: 'bot-suggested-actions'
               version: '16.x'
-
-            - project_path: 'samples/bot-task-module/nodejs'
-              name: 'bot-task-module'
-              version: '16.x' 
 
             - project_path: 'samples/bot-task-module/nodejs'
               name: 'bot-task-module'
