@@ -29,7 +29,7 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash
@@ -44,25 +44,19 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 
 **This capability is currently available in developer preview only**
 
+
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-
-    
-2. Setup for Bot
-  - Register a AAD aap registration in Azure portal.
-  - Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-  - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-  - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-
     > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
-3. Setup NGROK
+
+2. Setup NGROK
 - Run ngrok - point to port 3978
 
 ```bash
 # ngrok http -host-header=rewrite 3978
 ```
 
-4. Setup for code
+3. Setup for code
 
 - Clone the repository
 

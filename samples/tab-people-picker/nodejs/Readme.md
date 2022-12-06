@@ -39,7 +39,7 @@ Run ngrok - point to port 3978
     
     ```
 
-1) Setup for code    
+2) Setup for code    
 - Clone the repository
 
     ```bash

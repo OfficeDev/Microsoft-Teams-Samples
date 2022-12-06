@@ -120,12 +120,17 @@ namespace StaggeredPermission.Controllers
 
                 foreach (var mail in mails.CurrentPage)
                 {
-                    entity = new UserEmail();
-                    entity.FromMail = mail.Sender.EmailAddress.Address.ToString();
-                    entity.ToMail = mail.ToRecipients.ElementAt(0).EmailAddress.Address.ToString();
-                    entity.Subject = mail.Subject.ToString();
-                    entity.Time = mail.SentDateTime.ToString();
-                    emails.Add(entity);
+                    if (mail.Sender != null &&
+                        mail.ToRecipients.Any() &&
+                        mail.Subject.Any())
+                    {
+                        entity = new UserEmail();
+                        entity.FromMail = mail.Sender.EmailAddress.Address.ToString();
+                        entity.ToMail = mail.ToRecipients.ElementAt(0).EmailAddress.Address.ToString();
+                        entity.Subject = mail.Subject.ToString();
+                        entity.Time = mail.SentDateTime.ToString();
+                        emails.Add(entity);
+                    }
                 }
 
                 var userInfo = new UserData()

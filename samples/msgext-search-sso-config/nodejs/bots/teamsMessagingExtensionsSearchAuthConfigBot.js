@@ -4,7 +4,8 @@
 const {
     TeamsActivityHandler,
     CardFactory,
-    ActionTypes
+    ActionTypes,
+    ActivityHandler
 } = require('botbuilder');
 
 const {
@@ -94,6 +95,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
         const response = {
             composeExtension: result
         };
+
         return response;
     }
     async handleTeamsMessagingExtensionConfigurationQuerySettingUrl(
@@ -261,6 +263,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
                     },
                 };
             }
+
             const graphClient = new SimpleGraphClient(tokenResponse.token);
             const profile = await graphClient.GetMyProfile();
             const userPhoto = await graphClient.GetPhotoAsync(tokenResponse.token);
@@ -326,6 +329,7 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
                 },
             };
         }
+
         return null;
     }
 
@@ -352,7 +356,42 @@ class TeamsMessagingExtensionsSearchAuthConfigBot extends TeamsActivityHandler {
                 }
             }
         }
-        return await super.onInvokeActivity(context);
+
+        if(context.activity.name === "composeExtension/anonymousQueryLink") {
+            const card = CardFactory.adaptiveCard({
+                "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                "type": "AdaptiveCard",
+                "version": "1.5",
+                "body": [
+                    {
+                    "type": "TextBlock",
+                    "text": "Zero Link unfurling card",
+                    "weight": "bolder",
+                    "size": "extraLarge"
+                    },
+                    {
+                    "type": "TextBlock",
+                    "text": "Install the app to view full content of the card.",
+                    "size": "large"
+                    }
+                ]
+            });
+
+            const attachment = {...card, card};
+
+                return ActivityHandler.createInvokeResponse({
+                    composeExtension: {
+                        type: 'auth',
+                        attachmentLayout: 'list',
+                        attachments: [
+                            attachment
+                        ]
+                    }
+                });
+        }
+        else {
+                return await super.onInvokeActivity(context);
+             }
     }
 
     async tokenIsExchangeable(context) {

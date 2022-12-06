@@ -5,11 +5,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 //import './index.css';
 import App from './components/App';
-import { Provider, themes } from '@fluentui/react-northstar' //https://fluentsite.z22.web.core.windows.net/quick-start
+import { FluentProvider,   teamsLightTheme } from '@fluentui/react-components' //https://fluentsite.z22.web.core.windows.net/quick-start
 import "./style.css";
 
 ReactDOM.render(
-    <Provider >
+    <FluentProvider >
         <App />
-    </Provider>, document.getElementById('root')
+    </FluentProvider>, document.getElementById('root')
 );

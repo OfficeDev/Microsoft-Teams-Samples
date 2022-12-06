@@ -26,7 +26,7 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
 ## Pre-requisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   ```bash
   # determine dotnet version
@@ -49,7 +49,10 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
     - In the resulting popup window complete the required fields:
     - Name - The webhook title and @mention tap.
     - Callback URL - The HTTPS endpoint that accepts JSON payloads and will receive POST requests from Teams.
-    - Callback URL should be like: <ngrokurl>/api/Sample or  yourappsiteurl/api/Sample
+    - **Test Scenarios 1** Callback URL should be like: <ngrokurl>/api/Sample or yourappsiteurl/api/Sample
+      ![Api Sample](Images/ApiSample.png)
+    - **Test Scenarios 2** Callback URL should be like: <ngrokurl>/api/authenticatedSample?id=contoso or yourappsiteurl/api/authenticatedSample?id=contoso
+      ![Api Auth](Images/ApiAuthenticated.png)   
     - Description - A detailed string that will appear in the profile card and the team-level App dashboard.
     - Profile Picture (optional) an app icon for your webhook.
     - Select the Create button from lower right corner of the pop-up window and the outgoing webhook will be added to the current team's channels.
@@ -78,11 +81,11 @@ Webhooks are a great way for Teams to integrate with external apps. A webhook is
 
 Example screenshot to reply to any message:
  
-![Basic response](WebhookSampleBot/Images/response.png)
+![Basic response](Images/response.png)
 
 Example screenshot to show Hero card (using type of card in message):
  
-![Hero card](WebhookSampleBot/Images/hero_card.png)
+![Hero card](Images/hero_card.png)
 
 ## Further Reading
 

@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
   "manifestVersion": "1.12",
   "version": "1.0.0",
-  "id": "00000000-0000-0000-0000-000000000000",
+  "id": "<<Microsoft-App-Id>>",
   "packageName": "com.contoso.helloworld",
   "developer": {
     "name": "Contoso",
@@ -27,7 +27,7 @@
     {
       "entityId": "com.contoso.helloworld.hellotab",
       "name": "Hello Tab",
-      "contentUrl": "https://yourteamsapp.ngrok.io/hello",
+      "contentUrl": "https://{{domain-name}}/hello",
       "scopes": [
         "personal"
       ]
@@ -35,7 +35,7 @@
   ],
   "configurableTabs": [
     {
-      "configurationUrl": "https://yourteamsapp.ngrok.io/configure",
+      "configurationUrl": "https://{{domain-name}}/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team"
@@ -44,7 +44,7 @@
   ],
   "bots": [
     {
-      "botId": "00000000-0000-0000-0000-000000000000",
+      "botId": "<<Microsoft-App-Id>>",
       "needsChannelSelector": false,
       "isNotificationOnly": false,
       "scopes": [
@@ -55,7 +55,7 @@
   ],
   "composeExtensions": [
     {
-      "botId": "00000000-0000-0000-0000-000000000000",
+      "botId": "<<Microsoft-App-Id>>",
       "commands": [
         {
           "id": "getRandomText",
@@ -74,5 +74,7 @@
     }
   ],
   "permissions": [],
-  "validDomains": []
+  "validDomains": [
+    "{{domain-name}}"
+  ]
 }
