@@ -99,6 +99,14 @@ You can interact with this bot by sending it a message. The bot will respond wit
 
 ![ts-Interaction ](Images/ts-Interaction.png)
 
+![tasks](Images/tasks.png)
+
+![youtube](Images/youtube.png)
+
+![Customform](Images/Customform.png)
+
+![customformregister](Images/customformregister.png)
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
