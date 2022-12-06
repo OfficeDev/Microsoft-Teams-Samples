@@ -21,7 +21,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash
@@ -32,7 +32,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 ## Setup
-  ### Register your Teams Auth SSO with Azure AD
+### Register your Teams Auth SSO with Azure AD
 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   - Select **New Registration** and on the *register an application page*, set following values:
@@ -79,26 +79,13 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-
     ✔ Access Token  
  -  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the `appsettings.json`.
 
-
-2. Setup for Bot
-
-   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
-    - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
-    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
-    
-   In the new Azure Bot resource in the Portal, 
-    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path
-  
-3. Setup NGROK
+2. Setup NGROK
 - Run ngrok - point to port 3978
 
 ```bash
   ngrok http -host-header=rewrite 3978
 ```
-
-4. Setup for code
+3. Setup for code
 
 - Clone the repository
 
@@ -112,7 +99,6 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-
   - `{{ YOUR-CLIENT-SECRET}}` - Generated from Step 1, also referred to as Client secret
   - `{{ ApplicationIdURI}}` - Your application's ApplicationIdURI. E.g. api://%ngrokDomain%.ngrok.io/00000000-0000-0000-0000-000000000000`
 
-
 -  If you are using Visual Studio
    - Launch Visual Studio
    - File -> Open -> Project/Solution
@@ -124,7 +110,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-sso-quickstart-
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
-5. Setup Manifest for Teams
+4. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.

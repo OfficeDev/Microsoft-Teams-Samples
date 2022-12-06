@@ -29,7 +29,7 @@ Calling and Meeting Bot provides basic functionality like Create Call, Join a ca
 * [Office 365 tenant](https://developer.microsoft.com/en-us/microsoft-365/dev-program)
 
 * Microsoft Teams is installed and you have an account
-* [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+* [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 * [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
 ## Setup

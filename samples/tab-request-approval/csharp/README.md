@@ -25,7 +25,7 @@ This sample shows a feature where:
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash
@@ -100,17 +100,10 @@ This sample shows a feature where:
     ✔ Access Token
 14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
-15. Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-
-    > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
-
 16. Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
-
 17. Open the code in Visual Studio
    - File -> Open -> Project/Solution
    - Navigate to folder where repository is cloned then `samples/tab-request-approval/csharp/TabRequestApproval.sln`

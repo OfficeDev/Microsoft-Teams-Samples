@@ -135,6 +135,10 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     ```
 4) Update the `.env` configuration for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword` and `MicrosoftAppTenantId` (Note that the MicrosoftAppId is the AppId created in step 4 , the MicrosoftAppPassword is referred to as the "client secret" in previous steps and you can always create a new client secret anytime., MicrosoftAppTenantId is reffered to as Directory tenant Id in previous steps).
 
+5) Run your bot at the command line:
+    ```bash
+   npm start
+    ```
 **Setup Manifest for Teams**
 
 - **This step is specific to Teams.**

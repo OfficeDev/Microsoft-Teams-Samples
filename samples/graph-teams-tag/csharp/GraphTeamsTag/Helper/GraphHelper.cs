@@ -51,38 +51,45 @@ namespace GraphTeamsTag.Helper
         /// <returns>List of tags in specified team.</returns>
         public async Task<IEnumerable<TeamTag>> ListTeamworkTagsAsync(string teamId)
         {
-            var tags = await this.graphBetaClient.Teams[teamId].Tags.Request().GetAsync();
-            var teamworkTagList = new List<TeamTag>();
-            do
+            try
             {
-                IEnumerable<TeamworkTag> teamTagCurrentPage = tags.CurrentPage;
-
-                foreach (var tag in teamTagCurrentPage)
+                var tags = await this.graphBetaClient.Teams[teamId].Tags.Request().GetAsync();
+                var teamworkTagList = new List<TeamTag>();
+                do
                 {
-                    var teamworkTagMembersList = new List<TeamworkTagMember>();
+                    IEnumerable<TeamworkTag> teamTagCurrentPage = tags.CurrentPage;
 
-                    teamworkTagList.Add(new TeamTag
+                    foreach (var tag in teamTagCurrentPage)
                     {
-                        Id = tag.Id,
-                        DisplayName = tag.DisplayName,
-                        Description = tag.Description,
-                        MembersCount = tag.MemberCount == null ? 0 : (int)tag.MemberCount,
-                    });
-                }
+                        var teamworkTagMembersList = new List<TeamworkTagMember>();
 
-                // If there are more result.
-                if (tags.NextPageRequest != null)
-                {
-                    tags = await tags.NextPageRequest.GetAsync();
+                        teamworkTagList.Add(new TeamTag
+                        {
+                            Id = tag.Id,
+                            DisplayName = tag.DisplayName,
+                            Description = tag.Description,
+                            MembersCount = tag.MemberCount == null ? 0 : (int)tag.MemberCount,
+                        });
+                    }
+
+                    // If there are more result.
+                    if (tags.NextPageRequest != null)
+                    {
+                        tags = await tags.NextPageRequest.GetAsync();
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
-                else
-                {
-                    break;
-                }
+                while (tags.CurrentPage != null);
+
+                return teamworkTagList;
             }
-            while (tags.CurrentPage != null);
-
-            return teamworkTagList;
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -93,18 +100,26 @@ namespace GraphTeamsTag.Helper
         /// <returns>Team tag details.</returns>
         public async Task<TeamTag> GetTeamworkTagsAsync(string teamTagId, string teamId)
         {
-            var teamworkTag = await this.graphBetaClient.Teams[teamId].Tags[teamTagId]
-                .Request()
-                .GetAsync();
-
-            var teamwTagDto = new TeamTag
+            try
             {
-                Id = teamworkTag.Id,
-                DisplayName = teamworkTag.DisplayName,
-                Description = teamworkTag.Description
-            };
+                var teamworkTag = await this.graphBetaClient.Teams[teamId].Tags[teamTagId]
+               .Request()
+               .GetAsync();
 
-            return teamwTagDto;
+                var teamTag = new TeamTag
+                {
+                    Id = teamworkTag.Id,
+                    DisplayName = teamworkTag.DisplayName,
+                    Description = teamworkTag.Description
+                };
+
+                return teamTag;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
         }
 
         /// <summary>
