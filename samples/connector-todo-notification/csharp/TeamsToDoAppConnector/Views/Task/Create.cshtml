@@ -9,21 +9,21 @@
 @using (Html.BeginForm("create", "task", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="row">
-        <div class="form-group">
+        <div class="form-group col-md-4">
             <label class="control-label">Title</label>
             @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="row">
-        <div class="form-group">
+        <div class="form-group col-md-4">
             <label class="control-label">Description</label>
             @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="row">
-        <div class="form-group">
+        <div class="form-group col-md-4">
             <label class="control-label">Assign To</label>
             @Html.EditorFor(model => model.Assigned, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Assigned, "", new { @class = "text-danger" })

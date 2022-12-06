@@ -24,7 +24,8 @@ This application simulates a real task management system and allows users to cre
 ## Prerequisites
 The minimum prerequisites to run this sample are:
 * The latest update of Visual Studio. You can download the community version [here](http://www.visualstudio.com) for free.
-* [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
+* An Office 365 account with access to Microsoft Teams, with [sideloading enabled](https://msdn.microsoft.com/en-us/microsoft-teams/setup).
+* [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0.
 
   determine dotnet version
   ```bash
@@ -54,7 +55,7 @@ The minimum prerequisites to run this sample are:
  
   - Launch Visual Studio
   - File -> Open Folder
-  - Navigate to `samples/connector-todo-notification/csharp/TeamsToDoAppConnector` folder
+  - Navigate to `samples/connector-todo-notification/csharp` folder
   - Select `TeamsToDoAppConnector.sln` solution file
 
   > Note The main connector code is found here:
