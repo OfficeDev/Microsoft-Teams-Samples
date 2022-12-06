@@ -94,7 +94,20 @@ For reference please check [Enable and configure your apps for Teams meetings](h
   - Select `AppInMeeting.csproj` file
   - Press `F5` to run the project
 
-4. Setup Manifest for Teams
+## Getting the App id for share to stage deeplink.
+
+1) Navigate to [Teams admin portal]("https://admin.teams.microsoft.com/dashboard")
+
+2) Under Teams Apps section, select Manage apps.
+
+3) Search the uploaded app and copy the `App ID`
+![Admin Center](Images/adminCenter.png)
+
+4) Navigate to `samples/meetings-stage-view/csharp/AppInMeeting/ClientApp/src/components/app-in-meeting.jsx`
+
+5) On line 41, replace `<<App id>>` with `Id` obtained in step 3.
+
+5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
@@ -165,3 +178,4 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 ## Further Reading.
 
 [Meeting stage view](https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meetings-stage-view)
+[Deeplink to meeting share to stage](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/build-apps-for-teams-meeting-stage#generate-a-deep-link-to-share-content-to-stage-in-meetings)
