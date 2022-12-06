@@ -829,7 +829,7 @@ jobs:
               
             - project_path: 'samples/tab-ui-templates/ts'
               name: 'tab-ui-templates'
-              version: '16.x'
+              version: '18.x'
             
 
       fail-fast: false
