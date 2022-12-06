@@ -795,6 +795,14 @@ jobs:
               name: 'tab-ui-templates'
               version: '16.x'
             
+            - project_path: 'samples/outgoing-webhook/nodejs'
+              name: 'outgoing-webhook'
+              version: '16.x'
+
+            - project_path: 'samples/tab-channel-context/nodejs'
+              name: 'outgoing-webhook'
+              version: '16.x'
+            
             - project_path: 'samples/meetings-audio-state/nodejs'
               name: 'meetings-audio-state'
               version: '16.x'
