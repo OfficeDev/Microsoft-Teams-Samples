@@ -25,7 +25,7 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash

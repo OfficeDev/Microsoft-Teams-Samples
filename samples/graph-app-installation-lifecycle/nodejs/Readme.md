@@ -61,12 +61,6 @@ This sample app demonstarte the installation lifecycle for Teams [Apps](https://
     ```bash
     npm install
     ```
-    
- - Install modules
-
-    ```bash
-    npm install
-    ```
 - Run your bot at the command line:
 
     ```bash

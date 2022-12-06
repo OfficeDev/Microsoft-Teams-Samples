@@ -23,7 +23,7 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
   ```bash
   # determine dotnet version
   dotnet --version

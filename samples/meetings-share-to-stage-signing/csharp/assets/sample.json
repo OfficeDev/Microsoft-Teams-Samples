@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-share-to-stage-signing/csharp/Docs/Signing-Clip.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meetings-share-to-stage-signing/csharp/Docs/MeetingsShareStageSigningGif.gif",
         "alt": "Solution UX showing in-meeting document signing"
       }
     ],
