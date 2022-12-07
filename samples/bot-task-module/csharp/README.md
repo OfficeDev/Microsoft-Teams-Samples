@@ -11,6 +11,7 @@ extensions:
  contentType: samples
  createdDate: "10/17/2019 13:38:25 PM"
 urlFragment: officedev-microsoft-teams-samples-bot-task-module-csharp
+
 ---
 # Teams Task Module
 
@@ -19,7 +20,7 @@ Bot Framework Teams Task Module sample.
 This bot has been created using [Bot Framework](https://dev.botframework.com). It shows how to fetch a Task Module from Hero Card or Adaptive Card buttons and receive input from the Task Module in the bot.
 
 - **Interaction with bot**
-![bot-task-module ](Images/bot-task-module.gif)
+![bot-task-module ](Images/Bot_Tab_TaskModule.gif)
 
 ## Prerequisites
 
@@ -106,6 +107,8 @@ You can interact with this bot by sending it a message. The bot will respond wit
 ![Customform](Images/Customform.png)
 
 ![customformregister](Images/customformregister.png)
+
+![TabAdaptiveCard](Images/Tab_AdaptiveCard.png)
 
 ## Deploy the bot to Azure
 
