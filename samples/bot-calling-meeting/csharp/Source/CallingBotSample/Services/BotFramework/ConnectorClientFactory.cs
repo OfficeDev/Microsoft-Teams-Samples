@@ -35,6 +35,7 @@ namespace CallingBotSample.Services.BotFramework
             return CreateConnectorClient(
                 // We are using the Global Service URL endpoint which will work if you only call public clouds. If you need to support government clouds,
                 // you will need to keep track of the serviceUrl used in MessageBot handler, and pass it here.
+                // You can learn more about this in the documentation: https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/send-proactive-messages?tabs=dotnet#create-the-conversation
                 new Uri("https://smba.trafficmanager.net/teams/"),
                 new MicrosoftAppCredentials(botOptions.AppId, botOptions.AppSecret));
         }
