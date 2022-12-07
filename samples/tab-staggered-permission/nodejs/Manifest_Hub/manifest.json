@@ -1,0 +1,48 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+ "manifestVersion": "1.13",
+  "version": "1.0.1",
+  "id": "{{Microsoft-App-Id}}",
+  "packageName": "com.microsoft.teams.staggeredpermission",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.teams.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+   "name": {
+    "short": "Staggered permission",
+    "full": "App to get staggered permissions"
+  },
+  "description": {
+    "short": "App to get staggered permissions",
+    "full": "This sample demos to get staggered graph api permissions"
+  },
+  "accentColor": "#235EA5",
+ "staticTabs": [
+    {
+      "entityId": "Staggered permission",
+      "name": "tab",
+      "contentUrl": "https://{{domain-name}}/tab",
+      "websiteUrl": "https://{{domain-name}}/tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{{domain-name}}"
+  ],
+  "webApplicationInfo": {
+    "id": "{{Microsoft-App-Id}}",
+    "resource": "api://{{domain-name}}/{{Microsoft-App-Id}}"
+  }
+}

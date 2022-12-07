@@ -23,7 +23,7 @@ Using this C# sample, you can check authenticate in bot,tab and messaging extent
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   ```bash
   # determine dotnet version
@@ -61,6 +61,11 @@ Using this C# sample, you can check authenticate in bot,tab and messaging extent
 11. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
     * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
     * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
+    **Note** If you want to test or extend your Teams apps across Office and Outlook, kindly add below client application identifiers while doing Azure AD app registration in your tenant:
+   * `4765445b-32c6-49b0-83e6-1d93765276ca` (Office web)
+   * `0ec893e0-5785-4de6-99da-4ed124e5296c` (Office desktop)
+   * `bc59ab01-8403-45c6-8796-ac3ef710b3e3` (Outlook web)
+   * `d3590ed6-52b3-4102-aeff-aad2292ab01c` (Outlook desktop)
 12. Navigate to **API Permissions**, and make sure to add the follow permissions:
 -   Select Add a permission
 -   Select Microsoft Graph -\> Delegated permissions.
@@ -136,16 +141,18 @@ Using this C# sample, you can check authenticate in bot,tab and messaging extent
 
 ### 4. Setup Manifest for Teams
 
-1. Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
+1. Modify the `manifest.json` in the `/AppManifest` folder and replace the following details:
    - `{{Microsoft-App-Id}}` with Application id generated from Step 3
    - `{Base_URL_Domain}` - Your application's base url domain. E.g. for https://12345.ngrok.io the base url domain will be 12345.ngrok.io if you are using ngrok.
 
-2. Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
+**Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `app-complete-auth\csharp\AppCompleteAuth\Manifest_Hub` folder with the required values.
+
+2. Zip up the contents of the `AppManifest` folder to create a `manifest.zip` or `Manifest_Hub` folder into a `Manifest_Hub.zip`. (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package) 
 
 3. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams and then go to side panel, select Apps
    - Choose Upload a custom App
-   - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
+   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 - Note: To test facebook auth flow please setup the sample locally as due to limitations from facebook you cannot test the facebook auth flow in the deployed version of app.
@@ -225,6 +232,50 @@ Messaging Extention Authentication
   
 ![ME Link unfurling using credentials details](AppCompleteAuth/Images/user-unfurl.png)
 
+## Outlook on the web
+
+- To view your app in Outlook on the web.
+
+- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
+
+**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+
+![InstallOutlook](AppCompleteAuth/Images/InstallOutlook.png)
+
+**Select your app icon to launch and preview your app running in Outlook on the web**
+
+![AppOutlook](AppCompleteAuth/Images/AppOutlook.png)
+
+![InstallOutlookSSOAuth](AppCompleteAuth/Images/InstallOutlookSSOAuth.png)
+
+![InstallOutlookSignIn](AppCompleteAuth/Images/InstallOutlookSignIn.png)
+
+![InstallOutlookSSOAuth](AppCompleteAuth/Images/InstallOutlookSSOAuth.png)
+
+**Note:** Similarly, you can test your application in the Outlook desktop app as well.
+
+## Office on the web
+
+- To preview your app running in Office on the web.
+
+- Log into office.com with test tenant credentials
+
+**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+
+![InstallOffice](AppCompleteAuth/Images/InstallOffice.png)
+
+**Select your app icon to launch your app in Office on the web**
+
+![AppOffice](AppCompleteAuth/Images/AppOffice.png) 
+
+![InstallOfficeSSOAUth](AppCompleteAuth/Images/InstallOfficeSSOAUth.png) 
+
+![InstallOfficeSignIn](AppCompleteAuth/Images/InstallOfficeSignIn.png) 
+
+![InstallOfficeSignInUSer](AppCompleteAuth/Images/InstallOfficeSignInUSer.png) 
+
+**Note:** Similarly, you can test your application in the Office 365 desktop app as well.
+
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
@@ -234,3 +285,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Authentication basics](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/authentication/authentication)
+- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)

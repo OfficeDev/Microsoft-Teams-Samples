@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-request-approval/nodejs/Images/CreateTask.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-request-approval/nodejs/Images/Preview.gif",
         "alt": "Solution UX showing send task request using universal adaptive cards in group chat"
       }
     ],

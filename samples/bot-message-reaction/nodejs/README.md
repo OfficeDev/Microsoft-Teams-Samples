@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-bot-message-reaction-nodejs
 ---
 
-## Message Reactions Bot
+# Teams Message Reactions Bot Node.js Sample
 
 Message the bot and it will respond with an 'Echo: [your message]'.  Add a message reaction to the bot's response, and the bot will reply accordingly.
 

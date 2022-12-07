@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-outgoing-webhook-csharp
 ---
 
-# Outgoing Webhook
+# Outgoing Webhook Sample C#
 
 ## Summary
 
