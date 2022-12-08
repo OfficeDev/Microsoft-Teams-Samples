@@ -308,6 +308,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-live-code-interview#nodejs]:samples/meetings-live-code-interview/nodejs
 [suggestedactionsbot#csharp]:samples/bot-suggested-actions/csharp
 [suggestedactionsbot#nodejs]:samples/bot-suggested-actions/nodejs
+[bot-adaptivecards-user-specific-views#csharp]:samples/bot-adaptivecards-user-specific-views/csharp
 
 [app-localization#cs]:samples/app-localization/csharp
 [app-localization#js]:samples/app-localization/nodejs
@@ -364,6 +365,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [tab-people-picker#nodejs]:samples/tab-people-picker/nodejs
 [meetings-live-caption#cs]:samples/meetings-live-caption/csharp
 [meetings-live-caption#nodejs]:samples/meetings-live-caption/nodejs
+[meetings-audio-state#nodejs]:samples/meetings-audio-state/nodejs
 
 [msteams-app-qbot]:samples/msteams-application-qbot/
 [msteams-app-resource-hub]:samples/msteams-application-resourcehub/
