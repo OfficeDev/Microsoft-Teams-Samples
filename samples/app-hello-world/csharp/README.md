@@ -64,7 +64,6 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-csharp
   # run the bot
   dotnet run
   ```
-
   B) Or from Visual Studio
 
   - Launch Visual Studio
@@ -72,7 +71,6 @@ urlFragment: officedev-microsoft-teams-samples-app-hello-world-csharp
   - Navigate to `Microsoft.Teams.Samples.HelloWorld.Web` folder
   - Select `Microsoft.Teams.Samples.HelloWorld.Web.csproj` file
   - Press `F5` to run the project   
-
 
 ### 4. Setup Manifest for Teams
 
