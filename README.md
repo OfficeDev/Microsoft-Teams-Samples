@@ -22,15 +22,6 @@
 
 Here are all the samples which are deployed on Microsoft Azure and you can try it yourself by uploading respective app packages (.zip files links below) to one of your teams and/or as a personal app. (Sideloading must be enabled for your tenant; [see steps here](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading).) These apps are running on the free Azure tier, so it may take a while to load (warm up) if you haven't used it recently and it goes back to sleep quickly if it's not being used. Rest assured, once it's loaded it's pretty snappy.
 
-
-|    | Sample Name        | Description                                                                                                                | Manifest| 
-|:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|
-|28|Bot AdaptiveCards User Specific View|This sample illustrates a few different ways developers can consume user-specific views in Adaptive cards. |[View](/demo%20manifest/bot-adaptivecards-user-specific-views.zip) |
-|34|Tab Channel Goup Config Page Auth|Configurable Tab using AAD and Silent Authentication. |[View](/demo%20manifest/tab-channel-group-config-page-auth.zip) |
-|45|Tab UI Templates|This sample demonstrates @fluentui/react-teams library in Microsoft Teams apps. |[View](/demo%20manifest/tab-ui-templates.zip) |
-|46|Meetings Audio State|This sample shows how to mute/unmute Teams meeting audio using toggle Incoming Client Audio API. |[View](/demo%20manifest/meetings-audio-state.zip) |
-|47|Tab Conversations|This Teams tab app provides a way to allow users to have conversations about sub-entities in the tab Create conversational tabs. |[View](/demo%20manifest/tab-conversations.zip) |
-
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 
 The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) is an extension on Visual Studio Code and Visual Studio. It enable Teams developers to create and deploy Teams apps with integrated identity, access to cloud storage, data from Microsoft Graph, and other services in Azure and M365 with a "zero-configuration" approach to the developer experience. And [Sample Apps](https://github.com/OfficeDev/TeamsFx-Samples) are provided in Teams Toolkit. Download and try it by today! [Learn more about Teams Toolkit](https://docs.microsoft.com/en-us/microsoftteams/platform/toolkit/visual-studio-code-overview).
@@ -66,6 +57,9 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |19| Tab channel context | This sample shows the contents of tab context object in a private and shared channel. ||[View][tab-channel-context#nodejs]|
 |20| Tab meeting context | This sample shows the contents of meeting tab context object. ||[View][tab-meeting-context#nodejs]|
 |21| Tab app monetization | This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk. ||[View][tab-app-monetization#nodejs]||[View](/demo%20manifest/tab-app-monetization.zip)
+|22| Tab Channel Goup Config Page Auth | Configurable Tab using AAD and Silent Authentication. |[View][tab-channel-group-config-page-auth#csharp]|   |  |[View](/demo%20manifest/tab-channel-group-config-page-auth.zip)
+|23| Tab UI Templates | This sample demonstrates @fluentui/react-teams library in Microsoft Teams apps. |   |   |[View][tab-ui-templates#ts]|[View](/demo%20manifest/tab-ui-templates.zip)
+|24| Tab Conversations | This Teams tab app provides a way to allow users to have conversations about sub-entities in the tab Create conversational tabs. |[View][tab-conversations#csharp]|[View][tab-conversations#nodejs]|  |[View](/demo%20manifest/tab-conversations.zip)
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
@@ -90,6 +84,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |15|  Proactive Messaging sample | This sample shows how to save user's conversation reference information to send proactive reminder message using Bots. This uses Teams toolkit for Visual Studio Code to provide scaffolding experience. ||[View][bot-proactive-msg-teamsfx#js]
 |16|  Proactive Tab Conversations | Using a bot to create and store conversations that can be later used inside a sub-entity, tab conversation. This sample includes the details required to proactively message a channel from a bot, set-up and store details for channel tab conversations, and viewing channel conversations from a personal app. |[View][bot-tab-conversations#csharp]|
 |17|  Suggested Actions Bot | This sample shows the feature where user can send suggested actions using bot. |[View][suggestedactionsbot#csharp]|[View][suggestedactionsbot#nodejs]|    |    |[View](/demo%20manifest/bot-suggested-actions.zip)
+|18|  Bot AdaptiveCards User Specific View | This sample illustrates a few different ways developers can consume user-specific views in Adaptive cards. |[View][bot-adaptivecards-user-specific-views#csharp]   |   |    |    |[View](/demo%20manifest/bot-adaptivecards-user-specific-views.zip)
 #### Additional samples
 
 |    | Sample Name | Description | .NET Core | JavaScript | 
@@ -191,6 +186,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |26|Live coding interview using Shared meeting stage |This sample demos a live coding in a teams meeting stage.|[View][meetings-live-code-interview#csharp]|[View][meetings-live-code-interview#nodejs]|
 |27|Release Management     | This is a sample used to send workitem notification using Azure webhook.                                        |[View][release-management#cs]       |[View][release-management#nodejs]
 |28|Meeting Live Caption     | This is a sample meeting side panel application which demonstrates how to enable live caption in the meeting and using the CART link how to send caption in live meeting.                                       |[View][meetings-live-caption#cs]       |[View][meetings-live-caption#nodejs]
+|29|Meetings Audio State     | This sample shows how to mute/unmute Teams meeting audio using toggle Incoming Client Audio API.| |[View][meetings-audio-state#nodejs]|[View](/demo%20manifest/meetings-audio-state.zip)
 
 ## Application templates
 
