@@ -50,7 +50,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |12|Device permissions      | Microsoft Teams tab sample app for demonstrating device permissions |                      | [View][tab-device-permissions#js]|
 |13|Build tabs with Adaptive Cards | Microsoft Teams tab sample code which demonstrates how to [Build tabs with Adaptive Cards](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs) | [View][tab-adaptive-cards#csharp]|| [View][tab-adaptive-cards#js]|   |[View](/demo%20manifest/JSON-based-Tabs.zip)|
 |14|Tab in stage view   | Microsoft Teams tab sample app for demonstrating tab in stage view |[View][tab-stage-view#csharp] |          | [View][tab-stage-view#js] |
-|15|Create Conversational tab     | Microsoft Teams tab sample app for demonstrating create conversation tab | [View][tab-conversation#csharp]          |           |[View][tab-conversation#nodejs]
+|15|Create Conversational tab     | Microsoft Teams tab sample app for demonstrating create conversation tab | [View][tab-conversation#csharp]          |           |[View][tab-conversation#nodejs]|[View](/demo%20manifest/tab-conversations.zip)
 |16| Product inspection | Demonstrating a feature where user can scan a product and mark it as approved/rejected. |[View][tab-product-inspection#csharp]|[View][productinspection#nodejs]|       |[View](/demo%20manifest/Tab-Product-Inspection.zip)|
 |17| Staggered Permission | This sample demos to get staggered graph api permissions. |[View][tab-staggered-permission#csharp]|[View][tab-staggered-permission#nodejs]|
 |18| Tab people picker | This is an tab app which shows the feature of client sdk people picker. |[View][tab-people-picker#csharp]|[View][tab-people-picker#nodejs] |                      | [View](/demo%20manifest/Tab-People-Picker.zip)|
@@ -59,7 +59,6 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |21| Tab app monetization | This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk. ||[View][tab-app-monetization#nodejs]||[View](/demo%20manifest/tab-app-monetization.zip)
 |22| Tab Channel Goup Config Page Auth | Configurable Tab using AAD and Silent Authentication. |[View][tab-channel-group-config-page-auth#csharp]|   |  |[View](/demo%20manifest/tab-channel-group-config-page-auth.zip)
 |23| Tab UI Templates | This sample demonstrates @fluentui/react-teams library in Microsoft Teams apps. |   |   |[View][tab-ui-templates#ts]|[View](/demo%20manifest/tab-ui-templates.zip)
-|24| Tab Conversations | This Teams tab app provides a way to allow users to have conversations about sub-entities in the tab Create conversational tabs. |[View][tab-conversations#csharp]|[View][tab-conversations#nodejs]|  |[View](/demo%20manifest/tab-conversations.zip)
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
@@ -227,6 +226,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [tab-product-inspection#csharp]:samples/tab-product-inspection/csharp
 [tab-staggered-permission#csharp]:samples/tab-staggered-permission/csharp
 [tab-people-picker#csharp]:samples/tab-people-picker/csharp
+[tab-channel-group-config-page-auth#csharp]:samples/tab-channel-group-config-page-auth/csharp
 [tab-channel-context#nodejs]:samples/tab-channel-context/nodejs
 [tab-meeting-context#nodejs]:samples/tab-meeting-context/nodejs
 [tab-app-monetization#nodejs]:samples/tab-app-monetization/nodejs
@@ -268,6 +268,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 [tab-sso#ts]:samples/tabs-sso/nodejs
 [tab-sso#cs]:samples/tab-sso/csharp
+[tab-ui-templates#ts]:samples/tab-ui-templates/ts
 
 [app-virtual-assistant#cs]:samples/app-virtual-assistant/csharp
 [identity-linking-with-sso#cs]:samples/app-identity-linking-with-sso/csharp
