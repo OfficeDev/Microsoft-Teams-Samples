@@ -2,11 +2,16 @@
 @using Microsoft.Teams.Samples.TaskModule.Web.Helper;
 @using Microsoft.Extensions.Configuration
 @inject IConfiguration Configuration
+
 @{
     ViewData["Title"] = "Tasks";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
+@{
+    @*Passing BaseUrl and MicrosoftAppId to DeepLnkHelper as a parameter*@
+    DeeplinkHelper deepLinkHelper = new DeeplinkHelper(@Json.Serialize(Configuration["MicrosoftAppId"]).ToString(), @Json.Serialize(Configuration["BaseUrl"]).ToString());
+}
 
 <div class="font-semibold font-title">Microsoft Teams Task Modules Demo</div>
 <p>
@@ -28,7 +33,7 @@
         <button class="button-primary" onclick="submit('adaptivecard bot');">Adaptive Card (results &rarr; bot)</button>
         <p></p>
         <p></p>
-       
+        <a target="_blank" href="@(deepLinkHelper.DeepLink)">Deep link to Custom Form page</a>
     </div>
 <p></p>
 <script src="~/Scripts/teamsapp.js"></script>

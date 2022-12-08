@@ -21,7 +21,7 @@ namespace Microsoft.BotBuilderSamples.Controllers
     {
         private readonly IBotFrameworkHttpAdapter Adapter;
         private readonly IBot Bot;
-
+       
         public BotController(IBotFrameworkHttpAdapter adapter, IBot bot)
         {
             Adapter = adapter;
