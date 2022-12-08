@@ -18,7 +18,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-calling-meeting-csharp
 
 Calling and Meeting Bot provides basic functionality like Create Call, Join a call, Transfer/Redirect a call, Join a scheduled meeting and invite the participants by integrating cloud communications API Graph API.
 - **Interaction with bot**
-![bot-calling-meeting ](Images/bot-calling-meeting.gif)
+![bot-calling-meeting ](docs/Images/bot-calling-meeting.gif)
 ## Frameworks
 
 ![drop](https://img.shields.io/badge/.NET&nbsp;Core-3.1-green.svg)
@@ -114,7 +114,7 @@ Click on Add Permissions to commit your changes.
 	New-CsApplicationAccessPolicy -Identity Meeting-policy-dev -AppIds "d0bdaa0f-8be2-4e85-9e0d-2e446676b88c" -Description "Online meeting policy - contoso town"
 	Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "782f076f-f6f9-4bff-9673-ea1997283e9c"
 ```
-![PolicySetup](Images/PolicySetup.PNG)
+![PolicySetup](docs/Images/PolicySetup.PNG)
 
 14. Update `PolicyName`, `microsoft-app-id`, `policy-description`, `object-id-of-the-user-to-whom-policy-need-to-be-granted` in powershell script.
 15. Run `Windows Powershell PSI` as an administrator and execute above script.
@@ -131,7 +131,7 @@ Click on Add Permissions to commit your changes.
 7. In Settings/Configuration/Messaging endpoint, enter the current `https` URL you have given by running ngrok. Append with the path `/api/messages`     
 8. Select the Calling tab on the Teams channel page. Select Enable calling, and then update Webhook (for calling) with your HTTPS URL (`https://yourNgrok/callback`) where you receive incoming notifications.
 For example `https://contoso.com/teamsapp/callback`
-![EnableCallingEndpoint ](Images/EnableCallingEndpoint.PNG)
+![EnableCallingEndpoint ](docs/Images/EnableCallingEndpoint.PNG)
 9. Save your changes.
 
 ### Configuring the sample:
@@ -188,23 +188,23 @@ For example `https://contoso.com/teamsapp/callback`
  ## Running the sample
 
 * Install 'Calling Bot' in Teams.
-![CallingBotInstallation ](Images/CallingBotInstallation.PNG)
+![CallingBotInstallation ](docs/Images/CallingBotInstallation.PNG)
 
 * Bot will send adaptive card as mentioned below.
-![WelcomeCard ](Images/WelcomeCard.PNG)
+![WelcomeCard ](docs/Images/WelcomeCard.PNG)
 
 * User can ask Bot to create a call and can join that call.
-![CreateCall ](Images/CreateCall.PNG)
-![CallPlaced ](Images/CallPlaced.PNG)
-![CallJoined ](Images/CallJoined.PNG)
+![CreateCall ](docs/Images/CreateCall.PNG)
+![CallPlaced ](docs/Images/CallPlaced.PNG)
+![CallJoined ](docs/Images/CallJoined.PNG)
 
 * User can ask Bot to transfer the call.
- ![TransferCall ](Images/TransferCall.PNG)
+ ![TransferCall ](docs/Images/TransferCall.PNG)
 
 * User can ask Bot to schedule a meeting and invite the participants
 
-   ![JoinScheduledCall ](Images/JoinScheduledCall.PNG)
-   ![InviteParticipant ](Images/InviteParticipant.PNG)
+   ![JoinScheduledCall ](docs/Images/JoinScheduledCall.PNG)
+   ![InviteParticipant ](docs/Images/InviteParticipant.PNG)
 
 ## Deploy the bot to Azure
 
