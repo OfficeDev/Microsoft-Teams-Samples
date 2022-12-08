@@ -25,8 +25,6 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 
 |    | Sample Name        | Description                                                                                                                | Manifest| 
 |:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|
-|1|SSO Demo        | Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl |[View](/demo%20manifest/SSO-Demo.zip)     |
-|2|Complete sample Demo       | Complete sample to showcase various capabilities including bots, tabs, messaging extension |[View](/demo%20manifest/Complete-Sample.zip)     |
 |28|Bot AdaptiveCards User Specific View|This sample illustrates a few different ways developers can consume user-specific views in Adaptive cards. |[View](/demo%20manifest/bot-adaptivecards-user-specific-views.zip) |
 |34|Tab Channel Goup Config Page Auth|Configurable Tab using AAD and Silent Authentication. |[View](/demo%20manifest/tab-channel-group-config-page-auth.zip) |
 |45|Tab UI Templates|This sample demonstrates @fluentui/react-teams library in Microsoft Teams apps. |[View](/demo%20manifest/tab-ui-templates.zip) |
@@ -166,14 +164,14 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |:--:|:------------------|:---------------------------------------------------------------------------------------------------|:--------|:-------------|:-------------|
 |1|Task Modules          | Sample app showing off the Teams Task Module, a way to invoke custom code from a bot, a tab, or both! |[View][app-task-module#cs]     |[View][app-task-module#ts] |  [View](/demo%20manifest/Task-Module.zip) 
 |2|Authentication        | Sample illustrating seamless inline authentication for Microsoft Teams apps.                      | | [View][app-auth#ts]
-|3|Complete Samples      | Sample covering multiple scenarios - dialogs, ME, and facebook auth.                                      |[View][app-complete#cs]        |[View][app-complete#ts]
+|3|Complete Samples      | Sample covering multiple scenarios - dialogs, ME, and facebook auth.                                      |[View][app-complete#cs]        |[View][app-complete#ts]      |[View](/demo%20manifest/Complete-Sample.zip)
 |4|Meetings Extensibility | Microsoft Teams meeting extensibility sample: token passing |[View][meetings-token-app#cs]     |[View][meetings-token-app#js]
 |5|Meetings Content Bubble Bot | Microsoft Teams meeting extensibility sample for iteracting with Content Bubble Bot in-meeting |[View][meetings-content-bubble#cs]    |[View][meetings-content-bubble#js]
 |6|Meetings SidePanel | Microsoft Teams meeting extensibility sample for iteracting with Side Panel in-meeting |[View][meetings-sidepanel#cs]     | [View][meetings-sidepanel#js]
 |7|Region Selection App | This app contains a bot and Tab which is helpful to set the region |[View][region-selection-app#cs]     |   |[View](/demo%20manifest/app-region-selection.zip)|
 |8|App Localization | Microsoft Teams app localization using Bot and Tab |[View][app-localization#cs]  | [View][app-localization#js]  |[View](/demo%20manifest/app-localization.zip)
 |9|Details Tab in Meetings | Microsoft Teams meeting extensibility sample for iteracting with Details Tab in-meeting |[View][meetings-details-tab#cs]  |[View][meetings-details-tab#js]  |[View](/demo%20manifest/meetings-details-tab.zip)|
-|10|App SSO | Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl |[View][app-sso#cs] |[View][app-sso#js] 
+|10|App SSO | Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl |[View][app-sso#cs] |[View][app-sso#js] |[View](/demo%20manifest/SSO-Demo.zip)
 |11|Meetings Stage View | Enable and configure your apps for Teams meetings to use in stage view |[View][meetings-stage-view#cs] |[View][meetings-stage-view#js] |[View](/demo%20manifest/Meetings-StageView.zip)
 |12|Meeting Events | Get real time meeting events  |[View][meetings-events#cs] | [View][meetings-events#js] | [View](/demo%20manifest/Meetings-Events.zip) |
 |13|Meeting Recruitment App | Sample app showing meeting app experience for interview scenario.|[View][meeting-recruitment-app#cs] |[View][meeting-recruitment-app#js]|[View](/demo%20manifest/Meeting-Recruitment-App.zip)|
