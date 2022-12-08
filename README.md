@@ -33,13 +33,9 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |6|Meetings Stage View Demo  | Enable and configure your apps for Teams meetings to use in stage view. |[View](/demo%20manifest/Meetings-StageView.zip)     |
 |7|Meeting Events | Microsoft Teams sample app to get real time meeting events. |[View](/demo%20manifest/Meetings-Events.zip)     |
 |8|Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. |[View](/demo%20manifest/Bot-RSC.zip)     |
-
 |12|Teams tab graph toolkit | This sample demos building teams tab using microsoft graph toolkit|[View](/demo%20manifest/Teams-tab-graph-toolkit.zip)     |
-
-
 |17| Task approval using activity feed notification|Demonstrating a feature where user can raise the requests and manager will be notified about the requests and manager will be redirected to approve/reject the request from received notification.|[View](/demo%20manifest/Tab-Request-Approval.zip)     |
 |20|People picker control in Adaptive Cards | This sample shows the feature of people picker control in Adaptive Cards.|[View](/demo%20manifest/People-Picker-Adaptive-Card.zip) |
-
 |24|Tab Product Inspection|Feature of this sample where user can scan a product and mark it as approved/rejected. |[View](/demo%20manifest/Tab-Product-Inspection.zip) |
 |27|Region Selection|Feature of the sample Microsoft Teams app show end user region selection using Bot and Tab |[View](/demo%20manifest/app-region-selection.zip) |
 |28|Bot AdaptiveCards User Specific View|This sample illustrates a few different ways developers can consume user-specific views in Adaptive cards. |[View](/demo%20manifest/bot-adaptivecards-user-specific-views.zip) |
