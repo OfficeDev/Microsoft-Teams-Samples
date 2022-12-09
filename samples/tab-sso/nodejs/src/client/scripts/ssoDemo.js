@@ -73,10 +73,8 @@ function ssoAuth() {
                 height: 535
             })
             .then((result) => {
-                let data = localStorage.getItem(result);
-                localStorage.removeItem(result);
-
-                resolve(data);
+                let tokenData = result;
+                resolve(tokenData);
             }).catch((reason) => {
                 reject(JSON.stringify(reason));
             });

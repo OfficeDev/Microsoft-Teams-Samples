@@ -51,14 +51,9 @@ Your tab needs to run as a registered Azure AD application in order to obtain an
     * Setup your redirect URIs. This will allow Azure AD to return authentication results to the correct URI.
         * Visit `Manage > Authentication`. 
         * Add a platform
-        * Select `Web`
-        * Create a redirect URI in the format of: `https://contoso.ngrok.io/auth-end`.
-        * Enable Implicit Grant by selecting `Access Tokens` and `ID Tokens`.
-    * Setup another redirect URIs. This will allow Azure AD to return browser authentication results to the correct URI.
-        * Visit `Manage > Authentication`. 
-        * Add a platform
         * Select `Single-page application`
-        * Create a redirect URI in the format of: `https://contoso.ngrok.io/Home/BrowserRedirect`.
+        * Create a redirect URI in the format of: `https://contoso.ngrok.io/auth-end`.
+        * Within same `Single-page-application` add another url in the format of: `https://contoso.ngrok.io/Home/BrowserRedirect`.
     * Setup a client secret. You will need this when you exchange the token for more API permissions from your backend.
         * Visit `Manage > Certificates & secrets`
         * Create a new client secret.
@@ -93,6 +88,7 @@ Your tab needs to run as a registered Azure AD application in order to obtain an
     * Replace the `tab.clientSecret` property with the "client secret" you were assigned in step #2
     * Replace the `tab.applicationIdUri` property with the Application ID URI we get in step #1.1 above. It will look like this - `api://contoso.ngrok.io/{appID}`
     * If you want to use a port other than 3978, fill that in here (and in your ngrok command)
+    * Note : Do not push the `clientId` and `clientSecret` values inside your repo. Instead we recommend to store them at some secure location like Azure key vault.
 
 ## Running the app locally
 
