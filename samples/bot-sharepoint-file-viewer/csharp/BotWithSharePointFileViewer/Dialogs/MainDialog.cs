@@ -74,7 +74,7 @@ namespace BotWithSharePointFileViewer.Dialogs
 
                         if (fileNameList.Count == 0)
                         {
-                            await stepContext.Context.SendActivityAsync(MessageFactory.Text("No files found. Please type 'uploadfile' to upload file to SharePoint site"), cancellationToken);
+                            await stepContext.Context.SendActivityAsync(MessageFactory.Text("No files found. Please type 'uploadfile' to upload file to SharePoint site Testing YML"), cancellationToken);
                         }
                         else
                         {
@@ -116,7 +116,7 @@ namespace BotWithSharePointFileViewer.Dialogs
             }
 
             await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login successful"), cancellationToken);
-            await stepContext.Context.SendActivityAsync(MessageFactory.Text("Please type 'uploadfile' to upload file to SharePoint site or 'viewfile' to get card for file viewer"), cancellationToken);
+            await stepContext.Context.SendActivityAsync(MessageFactory.Text("Please type 'uploadfile' to upload file to SharePoint site or 'viewfile' to get card for file viewer Testing YML"), cancellationToken);
 
             return await stepContext.EndDialogAsync();
         }

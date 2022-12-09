@@ -22,8 +22,8 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
-            var teamsChannelId = turnContext.Activity.TeamsGetChannelId();
-            var activity = MessageFactory.Text("This will start a new thread in a channel");
+            var teamsChannelId = turnContext.Activity.TeamsGetChannelId(); 
+            var activity = MessageFactory.Text("This will start a new thread in a channel Testing YMAL");
 
             var details = await TeamsInfo.SendMessageToTeamsChannelAsync(turnContext, activity, teamsChannelId, _appId, cancellationToken);
             await ((CloudAdapter)turnContext.Adapter).ContinueConversationAsync(
@@ -31,7 +31,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                 reference: details.Item1,
                 callback: async (t, ct) =>
                 {
-                    await t.SendActivityAsync(MessageFactory.Text("This will be the first response to the new thread"), ct);
+                    await t.SendActivityAsync(MessageFactory.Text("This will be the first response to the new thread Testing YMAL"), ct);
                 },
                 cancellationToken: cancellationToken);
         }

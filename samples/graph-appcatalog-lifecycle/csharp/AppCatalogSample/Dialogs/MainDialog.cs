@@ -64,7 +64,7 @@ namespace AppCatalogSample.Dialogs
             {
                 var client = new AppCatalogHelper(tokenResponse.Token);
                 await client.SendSuggestedActionsAsync(stepContext.Context, cancellationToken);
-                return await stepContext.PromptAsync(nameof(TextPrompt), new PromptOptions { Prompt = MessageFactory.Text("Type your actions") }, cancellationToken);
+                return await stepContext.PromptAsync(nameof(TextPrompt), new PromptOptions { Prompt = MessageFactory.Text("Type your actions Testing YML") }, cancellationToken);
             }
             await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login was not successful please try again."), cancellationToken);
             return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
