@@ -60,7 +60,7 @@ module.exports.setup = function (app) {
         authority: `https://login.microsoftonline.com/${tid}`,
         oboAssertion: token,
         scopes: scopes,
-        skipCache: true
+        skipCache: false
       }).then(result => {
             fetch("https://graph.microsoft.com/v1.0/me/",
               {

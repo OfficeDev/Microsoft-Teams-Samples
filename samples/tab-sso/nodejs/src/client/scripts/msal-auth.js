@@ -71,7 +71,7 @@ class MsalAuthService {
         const scopes = [this.api];
         
         return this.app
-            .acquireTokenSilent({ account: this.app.getActiveAccount() }) // This method is called for browser auth outside teams only.
+            .acquireTokenSilent({ account: this.app.getActiveAccount() }) // This method is called for browser auth outside only Teams app.
             .then((authResponse) => authResponse.accessToken)
             .catch((error) => {
                 if (error.errorMessage.indexOf("interaction_required") >= 0) {

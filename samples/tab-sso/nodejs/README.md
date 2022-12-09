@@ -59,7 +59,6 @@ Your tab needs to run as a registered Azure AD application in order to obtain an
         * Add a platform
         * Select `Single-page application`
         * Create a redirect URI in the format of: `https://contoso.ngrok.io/Home/BrowserRedirect`.
-        * Enable Implicit Grant by selecting `Access Tokens` and `ID Tokens`.
     * Setup a client secret. You will need this when you exchange the token for more API permissions from your backend.
         * Visit `Manage > Certificates & secrets`
         * Create a new client secret.
