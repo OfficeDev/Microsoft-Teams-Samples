@@ -17,6 +17,7 @@ env:
     #Change the project path to your project file path.
     AZURE_WEBAPP_PACKAGE_PATH: 'samples/app-complete-auth/csharp/published'
     PROJECT_PATH: 'samples/app-complete-auth/csharp/AppCompleteAuth/AppCompleteAuth.csproj'
+    AZURE_WEBAPP_NAME: 'app-complete-auth-sample'
 jobs:
   build:
     runs-on: windows-latest

@@ -17,6 +17,7 @@ env:
     #Change the project path to your project file path.
     AZURE_WEBAPP_PACKAGE_PATH: 'samples/msgext-message-reminder/csharp/published'
     PROJECT_PATH: 'samples/msgext-message-reminder/csharp/MessagingExtensionReminder/MessagingExtensionReminder.csproj'
+    AZURE_WEBAPP_NAME: 'Message-Reminder-ME'
 jobs:
   build:
     runs-on: windows-latest

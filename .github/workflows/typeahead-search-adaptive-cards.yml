@@ -16,6 +16,7 @@ env:
     #Change the project path to your project file path.
     AZURE_WEBAPP_PACKAGE_PATH: 'samples/bot-typeahead-search-adaptive-card/csharp/published'
     PROJECT_PATH: 'samples/bot-typeahead-search-adaptive-card/csharp/TypeaheadSearch/TypeaheadSearch.csproj'
+    AZURE_WEBAPP_NAME: 'TypeAheadSearchDemo'
 jobs:
   build:
     runs-on: windows-latest
