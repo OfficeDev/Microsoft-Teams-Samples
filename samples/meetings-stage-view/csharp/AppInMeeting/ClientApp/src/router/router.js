@@ -29,7 +29,7 @@ export const AppRoute = () => {
         <React.Fragment>
             <BrowserRouter>
                 <Routes>
-					<Route path="/" element={<ShareToMeeting />}/>
+		    <Route path="/" element={<ShareToMeeting />}/>
                     <Route path="/appInMeeting" element={<AppInMeeting />}/>
                     <Route path="/configure" element={<Configure />}/>
                     <Route path="/home" element={<Home />}/>
