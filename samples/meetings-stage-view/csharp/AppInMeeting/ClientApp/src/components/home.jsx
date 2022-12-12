@@ -51,7 +51,7 @@ const Home = props => {
     }
 
     return (
-        <form className="chat-form" onSubmit={(event) => { return sendTaskDetails(event) }}>
+          <form className="chat-form" onSubmit={(event) => { return sendTaskDetails(event) }}>
             <div className="chat-label">
                 Assigned To:
                 <input type="text" className="user-name" />
@@ -61,7 +61,7 @@ const Home = props => {
                 <input type="text" className="task-description" />
             </div>
             <input type="submit" id="addDetails" value="Add" />
-        </form>
+       </form>
     );
 };
 
