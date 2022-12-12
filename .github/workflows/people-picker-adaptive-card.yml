@@ -16,6 +16,7 @@ env:
     #Change the project path to your project file path.
     AZURE_WEBAPP_PACKAGE_PATH: 'samples/people-picker-adaptive-card/csharp/published'
     PROJECT_PATH: 'samples/people-picker-adaptive-card/csharp/PeoplePicker/PeoplePicker.csproj'
+    AZURE_WEBAPP_NAME: 'peoplepickerprod'
 jobs:
   build:
     runs-on: windows-latest

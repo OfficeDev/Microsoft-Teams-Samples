@@ -16,6 +16,7 @@ env:
     #Change the project path to your project file path.
     AZURE_WEBAPP_PACKAGE_PATH: 'samples/bot-join-a-team-using-qr/csharp/published'
     PROJECT_PATH: 'samples/bot-join-a-team-using-qr/csharp/JoinTeamByQR/JoinTeamByQR.csproj'
+    AZURE_WEBAPP_NAME: 'Join-team-using-qr'
 jobs:
   build:
     runs-on: windows-latest
