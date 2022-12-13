@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useState, useRef } from 'react';
 import {
-  EphemeralEvent,
-  EphemeralState,
-  IEphemeralEvent,
+  LiveEvent,
+  LiveState,
+  ILiveEvent,
   UserMeetingRole,
 } from '@microsoft/live-share';
 import { throttle } from 'lodash';
 import { ScrollOffset } from './useScrollOffsetDom';
 import { UserInControl } from 'hooks';
 
-export interface ScrollOffsetEvent extends ScrollOffset, IEphemeralEvent {
+export interface ScrollOffsetEvent extends ScrollOffset, ILiveEvent {
   userId?: string;
 }
 
@@ -31,9 +31,9 @@ export interface ScrollOffsetEvent extends ScrollOffset, IEphemeralEvent {
  * - `sendScrollOffset`: A callback function that will send the scroll offset to the Live Share event
  */
 export const useScrollOffsetLiveShare = (
-  scrollOffsetEvent: EphemeralEvent<ScrollOffsetEvent>,
+  scrollOffsetEvent: LiveEvent<ScrollOffsetEvent>,
   setPosition: (position: ScrollOffset) => void,
-  takeControlState: EphemeralState<UserInControl>,
+  takeControlState: LiveState<UserInControl>,
   localUserInControl: boolean,
   localUserId?: string,
 ) => {
@@ -47,7 +47,7 @@ export const useScrollOffsetLiveShare = (
       scrollOffsetEvent?.sendEvent({
         ...latestPosition.current,
         userId: localUserId,
-        timestamp: EphemeralEvent.getTimestamp(),
+        timestamp: LiveEvent.getTimestamp(),
       });
 
       // We set the scroll offset to undefined to prevent resending the same data multiple times.

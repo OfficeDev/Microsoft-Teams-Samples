@@ -23,7 +23,7 @@ In this quickstart we'll walk-through creating a custom personal tab with C# and
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash
@@ -35,9 +35,30 @@ In this quickstart we'll walk-through creating a custom personal tab with C# and
 
 ## Setup
 
-For complete instructions on running this sample see:
+1. Run ngrok - point to port 3978
+   ```ngrok http -host-header=rewrite 3978```
 
-[Create a Custom Personal Tab with ASP. NET Core MVC](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-personal-tab?pivots=mvc-csharp)
+2. Clone the repository
+   ```bash
+   git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+   ```
+
+3. If you are using Visual Studio
+ - Launch Visual Studio
+ - File -> Open -> Project/Solution
+ - Navigate to ```samples\tab-personal\mvc-csharp``` folder
+ - Select ```PersonalTabMVC.sln``` file and open the solution
+
+4. Modify the `manifest.json` in the `/AppManifest` folder and replace the following details:
+   - <<Guid>> with any random GUID.
+   - `<<Base-url>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+   - `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+
+5. Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
+
 
 ## Running the sample
 
@@ -49,5 +70,6 @@ For complete instructions on running this sample see:
 
 ## Fruther Reading
 [Tab-personal](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/what-are-tabs)
+[Create a Custom Personal Tab with ASP. NET Core MVC](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-personal-tab?pivots=mvc-csharp)
 
 

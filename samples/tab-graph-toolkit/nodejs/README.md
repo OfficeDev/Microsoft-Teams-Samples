@@ -33,20 +33,9 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
    - Register an App in Azure. Navigate to App registeration click on New registeration.
    - Update your App Name `mgtteamstab`
    - Click on Add a Platform in redirect URI section.
-   - Select Single Page Application and add following URL `https://localhost:3000/`
+   - Select Single Page Application and add following URL  `<<base-url>>/tabauth`
    - Save and register.
    - Once App is registerd copy the `client_Id` for your app and update in the app.
-
-2. Setup for Bot
-
-   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
-    - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
-    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
-    
-   In the new Azure Bot resource in the Portal, 
-    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok.
 
 3. Setup NGROK
  - Run ngrok - point to port 3978

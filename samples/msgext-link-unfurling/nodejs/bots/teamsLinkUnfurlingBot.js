@@ -8,20 +8,39 @@ class TeamsLinkUnfurlingBot extends TeamsActivityHandler {
     // https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/messaging-extensions/search-extensions#receive-requests-from-links-inserted-into-the-compose-message-box
     // By specifying domains under the messageHandlers section in the manifest, the bot can receive
     // events when a user enters in a domain in the compose box.
+
     handleTeamsAppBasedLinkQuery(context, query) {
-        const attachment = CardFactory.thumbnailCard('Thumbnail Card',
-            query.url,
-            ['https://raw.githubusercontent.com/microsoft/botframework-sdk/master/icon.png']);
+        const card = CardFactory.adaptiveCard({
+            "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+            "type": "AdaptiveCard",
+            "version": "1.3"
+        });
+
+        const attachment = CardFactory.adaptiveCard(card);
+        attachment.preview = {
+            content: {
+                title: "Thumbnail Card",
+                text: query.url,
+                images: [
+                    {
+                        url: "https://raw.githubusercontent.com/microsoft/botframework-sdk/master/icon.png",
+                    },
+                ],
+            },
+            contentType: "application/vnd.microsoft.card.thumbnail",
+        }
 
         const result = {
             attachmentLayout: 'list',
             type: 'result',
-            attachments: [attachment]
+            attachments: [attachment],
+            responseType: "composeExtension"
         };
 
         const response = {
             composeExtension: result
         };
+
         return response;
     }
 
@@ -34,18 +53,18 @@ class TeamsLinkUnfurlingBot extends TeamsActivityHandler {
         const attachment = { ...heroCard, heroCard };
 
         switch (query.commandId) {
-        case 'searchQuery':
-            return {
-                composeExtension: {
-                    type: 'result',
-                    attachmentLayout: 'list',
-                    attachments: [
-                        attachment
-                    ]
-                }
-            };
-        default:
-            throw new Error('NotImplemented');
+            case 'searchQuery':
+                return {
+                    composeExtension: {
+                        type: 'result',
+                        attachmentLayout: 'list',
+                        attachments: [
+                            attachment
+                        ]
+                    }
+                };
+            default:
+                throw new Error('NotImplemented');
         }
     }
 }

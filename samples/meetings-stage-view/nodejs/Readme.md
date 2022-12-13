@@ -39,29 +39,21 @@ For reference please check [Share app content to stage API](https://docs.microso
 
 - [Live-share-sdk-overview](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-live-share-overview)
 
-
-
-
-
 ## Setup
 
 **This capability is currently available in developer preview only.**
 
- 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal. 
-    
- 2. Setup for Bot
-- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal. 
+    **NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
 
-3. Setup NGROK
+2. Setup NGROK
    - Run ngrok - point to port 3978
 
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
-4. Setup for code
+3. Setup for code
 
   - Clone the repository
 
@@ -76,15 +68,12 @@ For reference please check [Share app content to stage API](https://docs.microso
     ```
     npm install
     ```
-
-
  - Run both solutions i.e. samples/meetings-stage-view/nodejs/ and samples/meetings-stage-view/nodejs/Clientapp
 
     ```
     npm start
     ```
-
-5. Setup Manifest for Teams
+4. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./Manifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.

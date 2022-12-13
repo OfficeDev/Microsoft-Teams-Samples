@@ -44,7 +44,7 @@ Two samples to highlight solutions to two challenges with building proactive mes
 
 ## Prerequisites
 - Microsoft Teams account
-- [.NET Core 3.x SDK](https://dotnet.microsoft.com/download)
+- [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
 - Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
 
 ## Setup

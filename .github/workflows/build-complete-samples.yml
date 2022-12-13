@@ -22,27 +22,27 @@ jobs:
         include:
             - project_path: 'samples/meetings-events/csharp/MeetingEvents/MeetingEvents.csproj'
               name: 'meetings-events'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/app-complete-auth/csharp/AppCompleteAuth/AppCompleteAuth.csproj'
               name: 'app-complete-auth'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/app-hello-world/csharp/Microsoft.Teams.Samples.HelloWorld.Web/Microsoft.Teams.Samples.HelloWorld.Web.csproj'
               name: 'app-hello-world'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/app-checkin-location/csharp/AppCheckinLocation/AppCheckinLocation.csproj'
               name: 'app-checkin-location'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/app-installation-using-qr-code/csharp/QRAppInstallation/QRAppInstallation.csproj'
               name: 'app-installation-using-qr-code'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/app-localization/csharp/Localization/Localization.csproj'
               name: 'app-localization'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/app-sso/csharp/App SSO Sample/App SSO Sample.csproj'
               name: 'app-sso'
@@ -50,11 +50,11 @@ jobs:
 
             - project_path: 'samples/app-virtual-assistant/csharp/TeamsVirtualAssistant.csproj'
               name: 'app-virtual-assistant'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/bot-archive-groupchat-messages/csharp/FetchGroupChatMessages/FetchGroupChatMessages.csproj'
               name: 'bot-archive-groupchat-messages'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/bot-calling-meeting/csharp/Source/CallingBotSample/CallingBotSample.csproj'
               name: 'bot-calling-meeting'
@@ -62,155 +62,155 @@ jobs:
 
             - project_path: 'samples/bot-daily-task-reminder/csharp/BotDailyTaskReminder/BotDailyTaskReminder.csproj'
               name: 'bot-daily-task-reminder'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/bot-join-team-using-qr-code/csharp/JoinTeamByQR/JoinTeamByQR.csproj'
               name: 'bot-join-team-using-qr-code'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/bot-people-picker-adaptive-card/csharp/PeoplePicker/PeoplePicker.csproj'
               name: 'bot-people-picker-adaptive-card'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/bot-receive-channel-messages-withRSC/csharp/ReceiveMessagesWithRSC/ReceiveMessagesWithRSC.csproj'
               name: 'bot-receive-channel-messages-withRSC'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/bot-request-approval/csharp/BotRequestApproval/BotRequestApproval.csproj'
               name: 'bot-request-approval'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/bot-sequential-flow-adaptive-cards/csharp/SequentialUserSpecificFlow/SequentialUserSpecificFlow.csproj'
               name: 'bot-sequential-flow-adaptive-cards'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/bot-sharepoint-file-viewer/csharp/BotWithSharePointFileViewer/BotWithSharePointFileViewer.csproj'
               name: 'bot-sharepoint-file-viewer'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/bot-sharepoint-list/csharp/SPListBot/SPListBot.csproj'
               name: 'bot-sharepoint-list'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/bot-type-ahead-search-adaptive-cards/csharp/TypeaheadSearch/TypeaheadSearch.csproj'
               name: 'bot-type-ahead-search-adaptive-cards'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/graph-activity-feed-broadcast/csharp/ActivityFeedBroadcast/ActivityFeedBroadcast.csproj'
               name: 'graph-activity-feed-broadcast'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/graph-app-installation-lifecycle/csharp/AppInstallation/AppInstallation.csproj'
               name: 'graph-app-installation-lifecycle'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/graph-appcatalog-lifecycle/csharp/AppCatalogSample/AppCatalogSample.csproj'
               name: 'graph-appcatalog-lifecycle'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/graph-change-notification/csharp/ChangeNotification/ChangeNotification.csproj'
               name: 'graph-change-notification'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/graph-channel-lifecycle/csharp/ChannelLifecycle/ChannelLifecycle.csproj'
               name: 'graph-channel-lifecycle'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/graph-chat-lifecycle/csharp/ChatLifecycle/ChatLifecycle.csproj'
               name: 'graph-chat-lifecycle'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/graph-rsc/csharp/RSCDemo/RSCDemo.csproj'
               name: 'graph-rsc'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/meeting-recruitment-app/csharp/MeetingApp/MeetingApp.csproj'
               name: 'meeting-recruitment-app'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/meetings-content-bubble/csharp/ContentBubble/Content Bubble Bot.csproj'
               name: 'meetings-content-bubble'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/meetings-details-tab/csharp/DetailsTab/DetailsTab.csproj'
               name: 'meetings-details-tab'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/meetings-live-code-interview/csharp/MeetingLiveCoding/MeetingLiveCoding.csproj'
               name: 'meetings-live-code-interview'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/meetings-sidepanel/csharp/SidePanel/SidePanel.csproj'
               name: 'meetings-sidepanel'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/meetings-stage-view/csharp/AppInMeeting/AppInMeeting.csproj'
               name: 'meetings-stage-view'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/meetings-token-app/csharp/TokenApp.csproj'
               name: 'meetings-token-app'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/msgext-link-unfurling-meeting/csharp/Source/Microsoft.Teams.Samples.LinkUnfurling.Web./Microsoft.Teams.Samples.LinkUnfurling.Web.csproj'
               name: 'msgext-link-unfurling-meeting'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/msgext-link-unfurling-reddit/csharp/dotnet/RLU.csproj'
               name: 'msgext-link-unfurling-reddit'
-              version: '2.1.x'
+              version: '6.0.x'
 
             - project_path: 'samples/msgext-link-unfurling-reddit/csharp/dotnet_user_auth/RLU.csproj'
               name: 'msgext-link-unfurling-reddit'
-              version: '2.1.x'
+              version: '6.0.x'
 
             - project_path: 'samples/app-region-selection/csharp/RegionSectionApp/RegionSelectionApp.csproj'
               name: 'app-region-selection'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/tab-adaptive-cards/csharp/TabWithAdpativeCardFlow/TabWithAdpativeCardFlow.csproj'
               name: 'tab-adaptive-cards'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/tab-conversations/csharp/TabConversation/TabConversation.csproj'
               name: 'tab-conversations'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/tab-product-inspection/csharp/ProductInspection/ProductInspection.csproj'
               name: 'tab-product-inspection'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/tab-request-approval/csharp/TabRequestApproval/TabRequestApproval.csproj'
               name: 'tab-request-approval'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/tab-staggered-permission/csharp/StaggeredPermission/StaggeredPermission.csproj'
               name: 'tab-staggered-permission'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/msgext-message-reminder/csharp/MessagingExtensionReminder/MessagingExtensionReminder.csproj'
               name: 'msgext-message-reminder'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/tab-channel-group-config-page-auth/csharp/ConfigTabAuthentication/TabAuthentication.csproj'
               name: 'tab-channel-group-config-page-auth'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/tab-deeplink/csharp/DeepLinkBot/DeepLinkBot.csproj'
               name: 'tab-deeplink'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/tab-graph-toolkit/csharp/TabGraphToolkit/TabGraphToolkit.csproj'
               name: 'tab-graph-toolkit'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/tab-sso/csharp/TeamsTabSSO/TeamsTabSSO.csproj'
               name: 'tab-sso'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/tab-stage-view/csharp/TabInStageView/TabInStageView.csproj'
               name: 'tab-stage-view'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/bot-adaptivecards-user-specific-views/csharp/Microsoft.Teams.Samples.UserSpecificViews/Microsoft.Teams.Samples.UserSpecificViews.csproj'
               name: 'bot-adaptivecards-user-specific-views'
@@ -218,7 +218,7 @@ jobs:
 
             - project_path: 'samples/bot-proactive-messaging/csharp/proactive-cmd/msteams-app-proactivecmd.csproj'
               name: 'bot-proactive-messaging'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/bot-release-management/csharp/ReleaseManagement/ReleaseManagement.csproj'
               name: 'bot-release-management'
@@ -226,31 +226,31 @@ jobs:
 
             - project_path: 'samples/tab-people-picker/csharp/TabPeoplePicker/TabPeoplePicker.csproj'
               name: 'tab-people-picker'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/tab-personal/mvc-csharp/PersonalTabMVC.csproj'
               name: 'tab-personal'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/tab-personal/razor-csharp/PersonalTab.csproj'
               name: 'tab-personal'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/tab-personal-sso-quickstart/csharp_dotnetcore/PersonalTabSSO.csproj'
               name: 'tab-personal-sso-quickstart'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/tab-channel-group/mvc-csharp/ChannelGroupTabMVC.csproj'
               name: 'tab-channel-group'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/tab-channel-group/razor-csharp/channelGroupTab.csproj'
               name: 'tab-channel-group'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/tab-channel-group-sso-quickstart/csharp_dotnetcore/GroupTabSSO.csproj'
               name: 'tab-channel-group-sso-quickstart'
-              version: '3.1.301'
+              version: '6.0.x'
 
             - project_path: 'samples/graph-meeting-notification/csharp/MeetingNotification/MeetingNotification.csproj'
               name: 'graph-meeting-notification'
@@ -276,17 +276,9 @@ jobs:
               name: 'bot-message-reaction'
               version: '6.0.x'
 
-            - project_path: 'samples/bot-people-picker-adaptive-card/csharp/PeoplePicker/PeoplePicker.csproj'
-              name: 'bot-people-picker-adaptive-card'
-              version: '3.1'
-
-            - project_path: 'samples/bot-people-picker-adaptive-card/csharp/PeoplePicker/PeoplePicker.csproj'
-              name: 'bot-people-picker-adaptive-card'
-              version: '3.1'
-
             - project_path: 'samples/bot-suggested-actions/csharp/SuggestedActions/SuggestedActionsBot.csproj'
               name: 'bot-suggested-actions'
-              version: '3.1'
+              version: '6.0.x'
 
             - project_path: 'samples/bot-task-module/csharp/TeamsTaskModule.csproj'
               name: 'bot-task-module'
@@ -298,7 +290,7 @@ jobs:
 
             - project_path: 'samples/bot-teams-catering/csharp/Catering/Catering.csproj'
               name: 'bot-teams-catering'
-              version: '3.1'
+              version: '6.0.x'
 
             - project_path: 'samples/graph-bulk-meetings/csharp/EventMeeting/EventMeeting.csproj'
               name: 'graph-bulk-meetings'
@@ -318,7 +310,7 @@ jobs:
 
             - project_path: 'samples/incoming-webhook/csharp/IncomingWebhook/IncomingWebhook.csproj'
               name: 'incoming-webhook'
-              version: '3.1'
+              version: '6.0.x'
 
             - project_path: 'samples/meetings-attendance-report/csharp/MeetingAttendance/MeetingAttendance.csproj'
               name: 'meetings-attendance-report'
@@ -380,6 +372,18 @@ jobs:
               name: 'msgext-search'
               version: '6.0.x'
 
+            - project_path: 'samples/bot-tab-conversations/csharp/Source/ConversationalTabs.Web/Microsoft.Teams.Samples.ConversationalTabs.Web.csproj'
+              name: 'bot-tab-conversations'
+              version: '6.0.x'      
+                    
+            - project_path: 'samples/msteams-application-resourcehub/Source/microsoft-teams-apps-selfhelp/Microsoft.Teams.Apps.Selfhelp.csproj'
+              name: 'msteams-application-resourcehub'
+              version: '6.0.x' 
+
+            - project_path: 'samples/outgoing-webhook/csharp/WebhookSampleBot.csproj'
+              name: 'outgoing-webhook'
+              version: '6.0.x' 
+
             - project_path: 'samples/msteams-application-qbot/Source/Microsoft.Teams.App.Domain/Microsoft.Teams.Apps.QBot.Domain.csproj'
               name: 'msteams-application-qbot'
               version: '2.0'
@@ -390,7 +394,23 @@ jobs:
 
             - project_path: 'samples/msteams-application-qbot/Source/Microsoft.Teams.Apps.QBot.Web/Microsoft.Teams.Apps.QBot.Web.csproj'
               name: 'msteams-application-qbot'
-              version: '3.1'                
+              version: '3.1'    
+
+            - project_path: 'samples/graph-activity-feed/csharp/ActivityFeedNotification/TabActivityFeed.csproj'
+              name: 'graph-activity-feed'
+              version: '6.0.x' 
+
+            - project_path: 'samples/graph-proactive-installation/csharp/ProactiveAppInstallation/ProactiveAppInstallation.csproj'
+              name: 'graph-proactive-installation'
+              version: '6.0.x' 
+
+            - project_path: 'samples/bot-conversation-sso-quickstart/csharp_dotnetcore/BotConversationSsoQuickstart/BotConversationSsoQuickstart.csproj'
+              name: 'bot-conversation-sso-quickstart'
+              version: '6.0.x'           
+
+            - project_path: 'samples/connector-todo-notification/csharp/TeamsToDoAppConnector.csproj'
+              name: 'connector-todo-notification'
+              version: '6.0.x'
 
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
@@ -675,12 +695,24 @@ jobs:
               name: 'graph-meeting-notification'
               version: '14.x'
 
+            - project_path: 'samples/outgoing-webhook/nodejs'
+              name: 'outgoing-webhook'
+              version: '14.x'
+
+            - project_path: 'samples/bot-proactive-messaging-teamsfx'
+              name: 'bot-proactive-messaging-teamsfx'
+              version: '14.x'              
+
             - project_path: 'samples/app-auth/nodejs'
               name: 'app-auth'
               version: '16.x'
 
             - project_path: 'samples/bot-conversation/nodejs'
               name: 'bot-conversation'
+              version: '16.x'
+
+            - project_path: 'samples/bot-conversation-sso-quickstart/js'
+              name: 'bot-conversation-sso-quickstart'
               version: '16.x'
 
             - project_path: 'samples/bot-file-upload/nodejs'
@@ -702,10 +734,6 @@ jobs:
             - project_path: 'samples/bot-suggested-actions/nodejs'
               name: 'bot-suggested-actions'
               version: '16.x'
-
-            - project_path: 'samples/bot-task-module/nodejs'
-              name: 'bot-task-module'
-              version: '16.x' 
 
             - project_path: 'samples/bot-task-module/nodejs'
               name: 'bot-task-module'
@@ -783,6 +811,14 @@ jobs:
               name: 'tab-app-monetization'
               version: '16.x'
 
+            - project_path: 'samples/tab-device-permissions/nodejs'
+              name: 'tab-device-permissions'
+              version: '16.x'
+            
+            - project_path: 'samples/tab-channel-context/nodejs'
+              name: 'tab-channel-context'  
+              version: '16.x'
+            
             - project_path: 'samples/meetings-audio-state/nodejs'
               name: 'meetings-audio-state'
               version: '16.x'
@@ -790,6 +826,11 @@ jobs:
             - project_path: 'samples/app-localization/nodejs/client'
               name: 'app-localization'
               version: '16.x'
+              
+            - project_path: 'samples/tab-ui-templates/ts'
+              name: 'tab-ui-templates'
+              version: '18.x'
+            
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs

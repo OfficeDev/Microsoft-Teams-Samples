@@ -29,7 +29,7 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash
@@ -44,25 +44,19 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 
 **This capability is currently available in developer preview only**
 
+
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-
-    
-2. Setup for Bot
-  - Register a AAD aap registration in Azure portal.
-  - Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-  - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-  - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-
     > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
-3. Setup NGROK
+
+2. Setup NGROK
 - Run ngrok - point to port 3978
 
 ```bash
 # ngrok http -host-header=rewrite 3978
 ```
 
-4. Setup for code
+3. Setup for code
 
 - Clone the repository
 
@@ -99,6 +93,19 @@ For reference please check [Enable and configure your apps for Teams meetings](h
   - Navigate to `AppInMeeting` folder
   - Select `AppInMeeting.csproj` file
   - Press `F5` to run the project
+
+## Getting the App id for share to stage deeplink.
+
+1) Navigate to [Teams admin portal]("https://admin.teams.microsoft.com/dashboard")
+
+2) Under Teams Apps section, select Manage apps.
+
+3) Search the uploaded app and copy the `App ID`
+![Admin Center](Images/adminCenter.png)
+
+4) Navigate to `samples/meetings-stage-view/csharp/AppInMeeting/ClientApp/src/components/app-in-meeting.jsx`
+
+5) On line 41, replace `<<App id>>` with `Id` obtained in step 3.
 
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
@@ -171,3 +178,4 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 ## Further Reading.
 
 [Meeting stage view](https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meetings-stage-view)
+[Deeplink to meeting share to stage](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/build-apps-for-teams-meeting-stage#generate-a-deep-link-to-share-content-to-stage-in-meetings)

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.0",
+  "id": "c5f12998-f395-4eaa-ad7c-5f5bab2d47bb",
+  "packageName": "com.microsoft.teams.samples.sampleapp",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "TeamsToDo Connector in .NET/C#",
+    "full": "TeamsToDo Connector in .NET/C# - full name"
+  },
+  "description": {
+    "short": "This is a small sample app we made for you, in .NET/C#!",
+    "full": "This is a small sample app we made for you, in .NET/C#! This app has connector. The task content is hosted for illustrative purposes only."
+  },
+  "icons": {
+    "outline": "outline_icon.png",
+    "color": "color_icon.png"
+  },
+  "accentColor": "#3F487F",
+  "connectors": [
+    {
+      "connectorId": "<<CONNECTOR-ID>>",
+      "configurationUrl": "https://<<VALID-DOMAIN>>/Connector/Setup",
+      "scopes": [
+        "team"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ]
+}

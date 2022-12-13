@@ -85,6 +85,11 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 Once the Messaging Extension is installed, click the icon for **Config Auth Search** in the Compose Box's Messaging Extension menu to display the search window. Left click to choose **Settings** and view the Sign-In page.
 
 **Adding bot UI:**
+
+**Zero install link unfurling card**
+
+![zero install](Images/zero-unfurling.png)
+
 ![3-ME-Open ](Images/3-ME-Open.png)
 
 ![4-ME-Search-Config ](Images/4-ME-Search-Config.png)
@@ -100,3 +105,5 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 ## Further reading
 
 - [How Microsoft Teams bots work](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-basics-teams?view=azure-bot-service-4.0&tabs=javascript)
+
+- [Zero Install Link Unfurling](https://learn.microsoft.com/en-us/microsoftteams/platform/messaging-extensions/how-to/link-unfurling?tabs=dotnet%2Cadvantages#zero-install-for-link-unfurling)
