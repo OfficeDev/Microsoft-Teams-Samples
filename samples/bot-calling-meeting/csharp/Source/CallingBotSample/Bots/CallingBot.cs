@@ -17,7 +17,6 @@ using CallingMeetingBot.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
-using Microsoft.CognitiveServices.Speech;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -170,13 +169,9 @@ namespace CallingBotSample.Bots
                     {
                         var result = await speechService.ConvertWavToText(recordingLocation);
 
-                        if (result.Reason == ResultReason.RecognizedSpeech)
+                        if (result != null)
                         {
                             await botService.SendToConversation($"You said: {result}", threadId);
-                        }
-                        else if (result.Reason == ResultReason.NoMatch)
-                        {
-                            await botService.SendToConversation($"Sorry, we are unable to transcribe what you just said.", threadId);
                         }
                         else
                         {
