@@ -40,7 +40,6 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 - Teams Messaging Extension Auth Configuration [AAD Authentication] for search, action and link unfurling combined in the sample. 
 -[Add Authentication to your Bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#create-the-bot-channels-registration)
 
-
 ## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
