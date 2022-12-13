@@ -33,6 +33,22 @@ const AppInMeeting = props => {
         });
     }, []);
 
+    // Method to open share to stage content using deep link.
+    const openDeepLink = () => {
+        microsoftTeams.app.initialize();
+        var appContext = JSON.stringify({
+            "appSharingUrl": `${window.location.origin}/todoView`,
+            "appId": "<<App id>>", "useMeetNow": false
+        });
+    
+        var encodedContext = encodeURIComponent(appContext).replace(/'/g, "%27").replace(/"/g, "%22");
+    
+        var shareToStageLink = `https://teams.microsoft.com/l/meeting-share?appContext=${encodedContext}`;
+    
+        microsoftTeams.app.openLink(shareToStageLink);
+            
+    }
+
     // Share the content to meeting stage view.
     const shareSpecificPart = (partName) => {
         var appContentUrl = "";
@@ -66,6 +82,7 @@ const AppInMeeting = props => {
                 <div className="part-container">
                     <Done shareSpecificPart={shareSpecificPart}/>
                 </div>
+                <button onClick={openDeepLink}>Share todo list (Deeplink)</button>
             </div>
         </div>
     );
