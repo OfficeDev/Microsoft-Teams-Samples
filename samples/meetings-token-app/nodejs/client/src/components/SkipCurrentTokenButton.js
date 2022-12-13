@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from '@fluentui/react-northstar';
+import { Button } from '@fluentui/react-components';
 import { withMeetingTokenService } from '../context/MeetingServiceProvider';
 
 class SkipCurrentTokenButton extends Component {

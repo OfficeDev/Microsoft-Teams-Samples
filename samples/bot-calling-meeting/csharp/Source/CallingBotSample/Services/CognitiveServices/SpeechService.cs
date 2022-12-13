@@ -8,6 +8,7 @@ using CallingBotSample.Options;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.CognitiveServices.Speech;
 using Microsoft.CognitiveServices.Speech.Audio;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace CallingBotSample.Services.CognitiveServices
@@ -17,15 +18,17 @@ namespace CallingBotSample.Services.CognitiveServices
     {
         private readonly IWebHostEnvironment environment;
         private readonly CognitiveServicesOptions cognitiveServicesOptions;
+        private readonly ILogger<SpeechService> logger;
 
-        public SpeechService(IWebHostEnvironment environment, IOptions<CognitiveServicesOptions> cognitiveServicesOptions)
+        public SpeechService(IWebHostEnvironment environment, IOptions<CognitiveServicesOptions> cognitiveServicesOptions, ILogger<SpeechService> logger)
         {
             this.environment = environment;
             this.cognitiveServicesOptions = cognitiveServicesOptions.Value;
+            this.logger = logger;
         }
 
         /// <inheritdoc/>
-        public async Task<SpeechRecognitionResult> ConvertWavToText(string fileName)
+        public async Task<string?> ConvertWavToText(string fileName)
         {
             if (!cognitiveServicesOptions.Enabled)
             {
@@ -40,7 +43,43 @@ namespace CallingBotSample.Services.CognitiveServices
             using var audioConfig = AudioConfig.FromWavFileInput(fullFilePath);
             using var speechRecognizer = new SpeechRecognizer(speechConfig, audioConfig);
 
-            return await speechRecognizer.RecognizeOnceAsync();
+            var result = await speechRecognizer.RecognizeOnceAsync();
+
+            if (result.Reason == ResultReason.RecognizedSpeech)
+            {
+                return result.Text;
+            }
+
+            logger.LogTrace($"Speech was not recognized, result reason: {result.Reason}");
+            return null;
+        }
+
+        public async Task<string?> ConvertTextToSpeech(string text)
+        {
+            if (!cognitiveServicesOptions.Enabled)
+            {
+                throw new Exception();
+            }
+
+            var speechConfig = SpeechConfig.FromSubscription(cognitiveServicesOptions.SpeechKey, cognitiveServicesOptions.SpeechRegion);
+            speechConfig.SpeechSynthesisVoiceName = "en-US-JennyNeural";
+
+            using (var speechSynthesizer = new SpeechSynthesizer(speechConfig))
+            {
+                SpeechSynthesisResult result = await speechSynthesizer.SpeakTextAsync(text);
+
+                if (result.Reason == ResultReason.SynthesizingAudioCompleted)
+                {
+                    AudioDataStream stream = AudioDataStream.FromResult(result);
+
+                    var outputFile = $"temp/{Guid.NewGuid()}.wav";
+                    await stream.SaveToWaveFileAsync(Path.Combine(environment.WebRootPath, outputFile));
+
+                    return outputFile;
+                }
+            }
+
+            return null;
         }
     }
 }

@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System;
 using System.IO;
 using global::AdaptiveCards;
 using global::AdaptiveCards.Templating;
@@ -18,19 +19,45 @@ namespace CallingBotSample.AdaptiveCards
             return CreateAttachment(serializedJson);
         }
 
-        public Attachment CreateMeetingActionsCard()
+        public Attachment CreateIncidentCard()
         {
-            var template = GetCardTemplate("MeetingActions.json");
+            var template = GetCardTemplate("CreateIncidentCard.json");
 
             var serializedJson = template.Expand(new { });
             return CreateAttachment(serializedJson);
         }
 
-        public Attachment CreatePeoplePickerCard(string choiceLabel, string action, bool isMultiSelect = false)
+        public Attachment CreateIncidentMeetingCard(string title, string callId, DateTime startTime, DateTime? endTime)
+        {
+            var template = GetCardTemplate("IncidentMeetingActionsCard.json");
+
+            var serializedJson = template.Expand(new {
+                title,
+                callId,
+                startTime = startTime.ToString("yyyy-MM-dd'T'HH:mm:ssK"),
+                endTime = endTime?.ToString("yyyy-MM-dd'T'HH:mm:ssK") ?? string.Empty
+            });
+            return CreateAttachment(serializedJson);
+        }
+
+        public Attachment CreateMeetingActionsCard(string? callId)
+        {
+            var template = GetCardTemplate("MeetingActions.json");
+
+            var serializedJson = template.Expand(new { callId = callId ?? string.Empty });
+            return CreateAttachment(serializedJson);
+        }
+
+        public Attachment CreatePeoplePickerCard(string choiceLabel, string action, string? callId, bool isMultiSelect = false)
         {
             var template = GetCardTemplate("PeoplePicker.json");
 
-            var serializedJson = template.Expand(new { choiceLabel, action, isMultiSelect });
+            var serializedJson = template.Expand(new {
+                choiceLabel,
+                action,
+                callId = callId ?? string.Empty,
+                isMultiSelect
+            });
             return CreateAttachment(serializedJson);
 
         }

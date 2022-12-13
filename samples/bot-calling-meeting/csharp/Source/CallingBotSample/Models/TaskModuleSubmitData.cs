@@ -7,6 +7,7 @@ namespace CallingBotSample.Models
     {
         public string? PeoplePicker { get; set; }
         public string? Action { get; set; }
+        public string? CallId { get; set; }
+        public string? IncidentName { get; set; }
     }
-
 }

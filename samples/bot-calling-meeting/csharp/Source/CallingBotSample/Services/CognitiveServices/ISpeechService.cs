@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Threading.Tasks;
-using Microsoft.CognitiveServices.Speech;
 
 namespace CallingBotSample.Services.CognitiveServices
 {
@@ -15,7 +14,14 @@ namespace CallingBotSample.Services.CognitiveServices
         /// Convert the speech of a Wav recording to the text value of the recording
         /// </summary>
         /// <param name="fileName">The file name of the recording</param>
-        /// <returns>The result of the recognition of the recording</returns>
-        Task<SpeechRecognitionResult> ConvertWavToText(string fileName);
+        /// <returns>The result text of the recognition of the recording. Null if recognition failed</returns>
+        Task<string?> ConvertWavToText(string fileName);
+
+        /// <summary>
+        /// Convert text to speech recording
+        /// </summary>
+        /// <param name="text">The text to covert to speech</param>
+        /// <returns>The path to the audio file of the converted text. Null if conversion failed</returns>
+        Task<string?> ConvertTextToSpeech(string text);
     }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text } from '@fluentui/react-northstar';
+import { Text } from '@fluentui/react-components';
 
 class TokenIndicator extends Component {
     render() {

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebhookSampleBot", "WebhookSampleBot\WebhookSampleBot.csproj", "{BC776607-BF07-4E1C-B7F9-A8732B401068}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebhookSampleBot", "WebhookSampleBot.csproj", "{E47B4DBB-A5C4-419B-9DDD-BE8F2C877F02}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DFE0F6D2-DA73-4D49-ADBF-904CF6E485C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,12 +13,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BC776607-BF07-4E1C-B7F9-A8732B401068}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BC776607-BF07-4E1C-B7F9-A8732B401068}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BC776607-BF07-4E1C-B7F9-A8732B401068}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BC776607-BF07-4E1C-B7F9-A8732B401068}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E47B4DBB-A5C4-419B-9DDD-BE8F2C877F02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E47B4DBB-A5C4-419B-9DDD-BE8F2C877F02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E47B4DBB-A5C4-419B-9DDD-BE8F2C877F02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E47B4DBB-A5C4-419B-9DDD-BE8F2C877F02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9DEB55E2-E51D-4BD5-AB09-2D4DA7FA3A3A}
 	EndGlobalSection
 EndGlobal

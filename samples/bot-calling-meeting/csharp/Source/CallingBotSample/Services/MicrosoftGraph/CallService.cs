@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using CallingBotSample.Options;
 using Microsoft.Extensions.Options;
@@ -45,38 +44,48 @@ namespace CallingBotSample.Services.MicrosoftGraph
         }
 
         /// <inheritdoc/>
-        public Task<Call> Create(string? threadId = null, Identity? meetingOrganiser = null, params Identity[] users)
+        public Task<Call> Create(params Identity[] users)
         {
             var call = new Call
             {
                 Direction = CallDirection.Outgoing,
                 CallbackUri = callbackUri,
-                ChatInfo = new ChatInfo
-                {
-                    ThreadId = threadId,
-                    MessageId = "0"
-                },
                 TenantId = azureAdOptions.TenantId,
-                // If the meetingOrganiser is provided we don't need to invite people directly.
-                Targets = meetingOrganiser != null ? null : users.Select(user => new InvitationParticipantInfo
+                Targets = users.Select(user => new InvitationParticipantInfo
                 {
                     Identity = new IdentitySet
                     {
                         User = user
                     }
                 }),
-                MeetingInfo = meetingOrganiser == null ? null : new OrganizerMeetingInfo()
-                {
-                    Organizer = new IdentitySet
-                    {
-                        User = meetingOrganiser
-                    }
-                },
-
                 RequestedModalities = new List<Modality>()
+                {
+                    Modality.Audio
+                },
+                MediaConfig = new ServiceHostedMediaConfig
+                {
+                }
+            };
+
+            return graphServiceClient.Communications.Calls
+                .Request()
+                .AddAsync(call);
+        }
+
+        /// <inheritdoc/>
+        public Task<Call> Create(ChatInfo chatInfo, MeetingInfo meetingInfo)
+        {
+            var call = new Call
             {
-                Modality.Audio
-            },
+                Direction = CallDirection.Outgoing,
+                CallbackUri = callbackUri,
+                ChatInfo = chatInfo,
+                TenantId = azureAdOptions.TenantId,
+                MeetingInfo = meetingInfo,
+                RequestedModalities = new List<Modality>()
+                {
+                    Modality.Audio
+                },
                 MediaConfig = new ServiceHostedMediaConfig
                 {
                 }

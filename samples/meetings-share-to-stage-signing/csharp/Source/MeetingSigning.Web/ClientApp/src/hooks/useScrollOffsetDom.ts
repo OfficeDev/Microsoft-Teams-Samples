@@ -31,7 +31,7 @@ export function useScrollOffsetDom(divElement: HTMLDivElement | undefined | null
 
   // Save the div elements scroll position in state
   var callback = useCallback(() => {
-    if (divElement !== undefined && divElement !== null) {
+    if (divElement) {
       setPosition({
         scrollXPercentage: window.scrollX / divElement.offsetWidth,
         scrollYPercentage: window.scrollY / divElement.offsetHeight,

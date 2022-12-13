@@ -14,7 +14,7 @@ namespace Microsoft.BotBuilderSamples
     public class ProactiveBot : TeamsActivityHandler
     {
         public readonly IConfiguration _configuration;
-        private readonly ProactiveAppIntallationHelper _helper = new();
+        private readonly ProactiveAppIntallationHelper _helper = new ProactiveAppIntallationHelper();
         private readonly ConcurrentDictionary<string, ConversationReference> _conversationReferences;
 
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)

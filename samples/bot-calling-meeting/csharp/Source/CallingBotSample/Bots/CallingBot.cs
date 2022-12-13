@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using CallingBotSample.Authentication;
+using CallingBotSample.Models;
 using CallingBotSample.Options;
 using CallingBotSample.Services.BotFramework;
 using CallingBotSample.Services.CognitiveServices;
@@ -16,7 +17,6 @@ using CallingMeetingBot.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
-using Microsoft.CognitiveServices.Speech;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -140,6 +140,11 @@ namespace CallingBotSample.Bots
                         });
                         await callService.Record(callId, audioRecordingConstants.PleaseRecordYourMessage);
                     }
+
+                    if (callBotCache.TryGetValue($"{callId}:incident", out IncidentDetails incidentDetails))
+                    {
+                        await callService.InviteParticipant(callId, incidentDetails.Participants.Select(p => new IdentitySet { User = p }).ToArray());
+                    }
                 }
             }
             // If the notification is a recording, download from the Teams Recording Service, and then echo the audio back to the call
@@ -164,13 +169,9 @@ namespace CallingBotSample.Bots
                     {
                         var result = await speechService.ConvertWavToText(recordingLocation);
 
-                        if (result.Reason == ResultReason.RecognizedSpeech)
+                        if (result != null)
                         {
-                            await botService.SendToConversation($"You said: {result.Text}", threadId);
-                        }
-                        else if (result.Reason == ResultReason.NoMatch)
-                        {
-                            await botService.SendToConversation($"Sorry, we are unable to transcribe what you just said.", threadId);
+                            await botService.SendToConversation($"You said: {result}", threadId);
                         }
                         else
                         {
@@ -229,9 +230,7 @@ namespace CallingBotSample.Bots
             // If the notification is participants change, keep track of if a User has joined the call at some point
             // if at least one user has joined, and only the bot is remaining in the call, get the bot to hang up.
             // This ensures that the Bot doesn't keep a call active for a long period of time.
-            else if (args.ChangeType == ChangeType.Updated &&
-                args.Notification.ResourceUrl.Contains("/participants") &&
-                args.ResourceData is object[] objs)
+            else if (args.IsParticipantsNotification() && args.ResourceData is object[] objs)
             {
                 string key = $"{callId}:atLeastOneUserJoined";
                 Participant[] participants = Array.ConvertAll(objs, (object obj) => (Participant)obj);
@@ -249,6 +248,28 @@ namespace CallingBotSample.Bots
                             // the meeting's scheduled length.
                             AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1)
                         });
+
+                        if (callBotCache.TryGetValue($"{callId}:incident", out IncidentDetails incidentDetails))
+                        {
+                            string? textToSpeechRecordingLocation = await speechService.ConvertTextToSpeech(
+                                $"There is an ongoing incident for {incidentDetails.IncidentSubject}. Your assistance is required.");
+
+                            if (textToSpeechRecordingLocation != null)
+                            {
+                                await callService.PlayPrompt(
+                                    callId,
+                                    new MediaInfo
+                                    {
+                                        Uri = new Uri(botOptions.BotBaseUrl, textToSpeechRecordingLocation).ToString(),
+                                        ResourceId = Guid.NewGuid().ToString(),
+                                    });
+                            }
+                        }
+                        else
+                        {
+                            // Play the record prompt only when the first user joins the call
+                            await callService.Record(callId, audioRecordingConstants.PleaseRecordYourMessage);
+                        }
                     }
 
                     // If there is only one participant remaining, and it's this application, and at least one user has joined at some point, hang up

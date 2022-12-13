@@ -54,12 +54,10 @@ namespace CallingBotSample
             services.AddTransient<IBot, MessageBot>();
             services.AddTransient<CallingBot>();
 
-            // Create the Conversation state passing in the storage layer.
-            services.AddSingleton(new ConversationState(new MemoryStorage()));
-
             services.Configure<AzureAdOptions>(Configuration.GetSection("AzureAd"));
             services.Configure<BotOptions>(Configuration.GetSection("Bot"));
             services.Configure<CognitiveServicesOptions>(Configuration.GetSection("CognitiveServices"));
+            services.Configure<UsersOptions>(Configuration.GetSection("Users"));
 
             services.AddSingleton<IAdaptiveCardFactory, AdaptiveCardFactory>();
             services.AddMicrosoftGraphServices(options => Configuration.Bind("AzureAd", options));

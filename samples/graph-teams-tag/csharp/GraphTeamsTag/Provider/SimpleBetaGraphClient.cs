@@ -5,20 +5,32 @@
 namespace GraphTeamsTag.Provider
 {
     using Azure.Identity;
-    using GraphTeamsTag.Models.Configuration;
-    using Microsoft.Extensions.Options;
     using Microsoft.Graph;
-
     public class SimpleBetaGraphClient
     {
         /// <summary>
         /// Stores the Azure configuration values.
         /// </summary>
-        private readonly IOptions<AzureSettings> azureSettings;
+        private readonly IConfiguration _configuration;
 
-        public SimpleBetaGraphClient(IOptions<AzureSettings> azureSettings)
+        /// <summary>
+        ///Client Id for the application.
+        /// </summary>
+        private static readonly string ClientIdConfigurationSettingsKey = "AzureAd:ClientId";
+
+        /// <summary>
+        /// Client secret for the application.
+        /// </summary>
+        private static readonly string ClientSecretConfigurationSettingsKey = "AzureAd:AppSecret";
+
+        /// <summary>
+        /// Tenant Id for the application.
+        /// </summary>
+        private static readonly string TenantIdConfigurationSettingsKey = "AzureAd:TenantId";
+
+        public SimpleBetaGraphClient(IConfiguration configuration)
         {
-            this.azureSettings = azureSettings;
+            this._configuration = configuration;
         }
 
         public GraphServiceClient GetGraphClientforApp()
@@ -37,9 +49,9 @@ namespace GraphTeamsTag.Provider
 
             // https://docs.microsoft.com/dotnet/api/azure.identity.clientsecretcredential
             var clientSecretCredential = new ClientSecretCredential(
-                this.azureSettings.Value.MicrosoftAppTenantId, 
-                this.azureSettings.Value.MicrosoftAppId, 
-                this.azureSettings.Value.MicrosoftAppPassword, 
+                _configuration[TenantIdConfigurationSettingsKey],
+                _configuration[ClientIdConfigurationSettingsKey],
+                _configuration[ClientSecretConfigurationSettingsKey],
                 options);
 
             var graphClient = new GraphServiceClient(clientSecretCredential, scopes);
