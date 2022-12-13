@@ -48,8 +48,6 @@ the Teams service needs to call into the bot.
     ```bash
     ngrok http --host-header=rewrite 3978
     ```
-
- 
 ## Register Azure AD application
 Register one Azure AD application in your tenant's directory for the bot and tab app authentication.
 
