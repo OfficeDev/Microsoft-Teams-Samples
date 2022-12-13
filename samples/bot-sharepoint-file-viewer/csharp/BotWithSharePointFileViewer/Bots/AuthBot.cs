@@ -33,7 +33,7 @@ namespace BotWithSharePointFileViewer.Bots
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! Please type 'login' for initiating the authentication flow Testing YML."), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! Please type 'login' for initiating the authentication flow."), cancellationToken);
                 }
             }
         }

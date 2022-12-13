@@ -49,7 +49,7 @@ namespace AppCatalogSample.Bots
         }
         protected static async Task SendSuggestedActionsAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
-            var reply = MessageFactory.Text("Your Action Testing YML:" + " \r" + "-" + " Publish: publish" + " \r" + "-" + " Update: update" + " \r" + "-" + " Delete: delete" + " \r" + " \r" + "-" + " ListApp: listapp" + " \r" + "-" + " ListApp by ID: app" + " \r" + "-" + " App based on manifest Id: findapp" + " \r" + "-" + " App Status:status" + " \r" + "-" + " List of bot:bot" + " \r");
+            var reply = MessageFactory.Text("Your Action :" + " \r" + "-" + " Publish: publish" + " \r" + "-" + " Update: update" + " \r" + "-" + " Delete: delete" + " \r" + " \r" + "-" + " ListApp: listapp" + " \r" + "-" + " ListApp by ID: app" + " \r" + "-" + " App based on manifest Id: findapp" + " \r" + "-" + " App Status:status" + " \r" + "-" + " List of bot:bot" + " \r");
 
             reply.SuggestedActions = new SuggestedActions()
             {

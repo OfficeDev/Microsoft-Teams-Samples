@@ -20,6 +20,7 @@ This sample demos UI to type in Incoming Webhook URL and message card payload, w
 - **Interaction with tab**
 ![webhook-tab ](IncomingWebhook/Images/webhook-app.gif)
 
+
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0

@@ -124,6 +124,8 @@ This feature shown in this sample is in Public Developer Preview and is supporte
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
+
+
 ## Interacting with the tab in Teams
     You can use this tab by following the below steps:
     - In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.

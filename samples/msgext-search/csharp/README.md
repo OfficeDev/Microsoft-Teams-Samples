@@ -75,6 +75,7 @@ the Teams service needs to call into the bot.
     - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
+
 ## Running the sample
 
 > Note this `manifest.json` specified that the feature will be available from both the `compose` and `commandBox` areas of Teams. Please refer to Teams documentation for more details.

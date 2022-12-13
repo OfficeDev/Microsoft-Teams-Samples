@@ -23,6 +23,7 @@ This sample shows creating poll in meeting , where memebers of the meeting can a
 
 ## Prerequisites
 
+
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version

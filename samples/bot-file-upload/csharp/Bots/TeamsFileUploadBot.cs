@@ -62,7 +62,7 @@ namespace Microsoft.BotBuilderSamples.Bots
             }
             else
             {
-                string filename = "teams-logoYML.png";
+                string filename = "teams-logo.png";
                 string filePath = Path.Combine("Files", filename);
                 long fileSize = new FileInfo(filePath).Length;
                 await SendFileCardAsync(turnContext, filename, fileSize, cancellationToken);

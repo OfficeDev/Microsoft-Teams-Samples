@@ -79,6 +79,7 @@ Azure AD, like most identity providers, does not allow its content to be placed 
 ```bash
  ngrok http -host-header=rewrite 3978
 ```
+
 3. Setup for code
 
 - Clone the repository

@@ -87,3 +87,7 @@ To change the language in Microsoft Teams, please click your profile picture at 
 #### To Add more languages for localization in Teams through Code.
  
  Add Resource files for the respective languages, Check culture fallback behaviour and how to add other cultures refer [Globalization and localization Fundamentals](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/localization?view=aspnetcore-5.0). 
+
+
+  
+

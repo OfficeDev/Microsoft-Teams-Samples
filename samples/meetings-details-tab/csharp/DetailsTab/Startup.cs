@@ -66,6 +66,7 @@ namespace DetailsTab
                    pattern: "{controller=Home}/{action=Index}/{id?}");
 
             });
+
             //app.UseHttpsRedirection();
 
         }

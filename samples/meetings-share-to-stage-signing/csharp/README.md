@@ -275,6 +275,7 @@ The tour files can be found in the `.tours` directory.
 ## Additional links
 * [Share to stage](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/enable-and-configure-your-app-for-teams-meetings) 
 
+
 ## Further reading
 
 - [Bot Framework Documentation](https://docs.botframework.com)

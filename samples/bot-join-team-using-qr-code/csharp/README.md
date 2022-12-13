@@ -125,6 +125,7 @@ User can generate a new QR code (contains team id information) and then scan the
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+
  
 ## Running the sample
 
