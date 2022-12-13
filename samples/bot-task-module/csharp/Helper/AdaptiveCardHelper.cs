@@ -27,7 +27,6 @@ using Microsoft.Extensions.Hosting.Internal;
 using System;
 using System.IO;
 
-
 namespace Microsoft.Teams.Samples.TaskModule.Web.Helper
 {
     /// <summary>
@@ -44,7 +43,6 @@ namespace Microsoft.Teams.Samples.TaskModule.Web.Helper
             {
                 ContentType = AdaptiveCard.ContentType,
                 Content = result.Card
-
             };
         }
 
