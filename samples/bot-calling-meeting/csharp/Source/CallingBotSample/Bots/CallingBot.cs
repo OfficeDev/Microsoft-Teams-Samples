@@ -7,12 +7,16 @@ using System.Net;
 using System.Threading.Tasks;
 using CallingBotSample.Authentication;
 using CallingBotSample.Options;
+using CallingBotSample.Services.BotFramework;
+using CallingBotSample.Services.CognitiveServices;
 using CallingBotSample.Services.MicrosoftGraph;
 using CallingBotSample.Services.TeamsRecordingService;
 using CallingBotSample.Utility;
 using CallingMeetingBot.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Bot.Builder;
+using Microsoft.Bot.Schema;
+using Microsoft.CognitiveServices.Speech;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -36,6 +40,8 @@ namespace CallingBotSample.Bots
         private readonly AudioRecordingConstants audioRecordingConstants;
         private readonly ITeamsRecordingService teamsRecordingService;
         private readonly IMemoryCache callBotCache;
+        private readonly ISpeechService speechService;
+        private readonly IBotService botService;
         private readonly ILogger<CallingBot> logger;
 
         public CallingBot(
@@ -44,6 +50,8 @@ namespace CallingBotSample.Bots
         ITeamsRecordingService teamsRecordingService,
         IGraphLogger graphLogger,
         IMemoryCache callBotCache,
+        ISpeechService speechService,
+        IBotService botService,
         IOptions<BotOptions> botOptions,
         ILogger<CallingBot> logger)
         {
@@ -53,6 +61,8 @@ namespace CallingBotSample.Bots
             this.teamsRecordingService = teamsRecordingService;
             this.graphLogger = graphLogger;
             this.callBotCache = callBotCache;
+            this.speechService = speechService;
+            this.botService = botService;
             this.logger = logger;
 
             var name = this.GetType().Assembly.GetName().Name;
@@ -133,6 +143,7 @@ namespace CallingBotSample.Bots
                 }
             }
             // If the notification is a recording, download from the Teams Recording Service, and then echo the audio back to the call
+            // We also convert the recording to text and send it to the meeting chat.
             else if (args.ResourceData is RecordOperation recording)
             {
                 if (recording.ResultInfo.Code >= 400)
@@ -141,6 +152,40 @@ namespace CallingBotSample.Bots
                 }
 
                 var recordingLocation = await teamsRecordingService.DownloadRecording(recording.RecordingLocation, recording.RecordingAccessToken);
+
+                // Here we are transcribing the recording and sending it as a message in the call chat.
+                try
+                {
+                    var callDetails = callService.Get(callId);
+                    var threadId = (await callDetails)?.ChatInfo?.ThreadId;
+
+                    // Calls initiated in a 1:1 chat with the bot do not have a threadId
+                    if (threadId != null)
+                    {
+                        var result = await speechService.ConvertWavToText(recordingLocation);
+
+                        if (result.Reason == ResultReason.RecognizedSpeech)
+                        {
+                            await botService.SendToConversation($"You said: {result.Text}", threadId);
+                        }
+                        else if (result.Reason == ResultReason.NoMatch)
+                        {
+                            await botService.SendToConversation($"Sorry, we are unable to transcribe what you just said.", threadId);
+                        }
+                        else
+                        {
+                            await botService.SendToConversation($"Sorry, something went wrong while trying to transcribe your recording.", threadId);
+                        }
+                    }
+                }
+                catch (ErrorResponseException ex)
+                {
+                    logger.LogError(ex, "Failure while sending a message to the coversation. The app might not be installed in the conversation scope.");
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, "Failure converting speech to text.");
+                }
 
                 await callService.PlayPrompt(
                     callId,
