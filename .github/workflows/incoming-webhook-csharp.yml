@@ -17,7 +17,7 @@ env:
     #Change the project path to your project file path.
     AZURE_WEBAPP_PACKAGE_PATH: 'samples/incoming-webhook/csharp/published'
     PROJECT_PATH: 'samples/incoming-webhook/csharp/IncomingWebhook/IncomingWebhook.csproj'
-    AZURE_WEBAPP_NAME: 'incomingwebhook'
+    AZURE_WEBAPP_NAME: 'incomingwebhookprod'
 jobs:
   build:
     runs-on: windows-latest
