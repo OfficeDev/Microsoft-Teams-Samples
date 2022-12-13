@@ -10,7 +10,6 @@ namespace CallingBotSample.Services.CognitiveServices
     /// </summary>
     public interface ISpeechService
     {
-
         /// <summary>
         /// Convert the speech of a Wav recording to the text value of the recording
         /// </summary>

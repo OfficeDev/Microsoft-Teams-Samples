@@ -50,6 +50,7 @@ namespace CallingBotSample.Services.CognitiveServices
                 return result.Text;
             }
 
+            logger.LogTrace($"Speech was not recognized, result reason: {result.Reason}");
             return null;
         }
 
