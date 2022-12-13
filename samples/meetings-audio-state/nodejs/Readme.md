@@ -101,7 +101,6 @@ Toggle button to mute state its looks like below.
 Toggle button to Unmute state it will unmute client audio.
 ![Stage 3](Images/ToggleUnMute.png)
 
-
 ## Further reading
 
 - [Toggle incoming audio](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet#toggle-incoming-audio)
