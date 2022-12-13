@@ -59,8 +59,6 @@ In this quickstart we'll walk-through creating a custom channel/group tab with C
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
 
-
-
 ## Running the sample
 
 ![configureteams](Images/configureteams.png)
