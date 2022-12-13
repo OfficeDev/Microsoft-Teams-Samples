@@ -59,7 +59,6 @@ This sample shows feature where user can checkin with current location and view 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-
 - Modify the `/appsettings.json` and fill in the following details:
   - `{{Microsoft-App-Id}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
   - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
