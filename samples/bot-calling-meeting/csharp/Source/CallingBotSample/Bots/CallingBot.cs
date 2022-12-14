@@ -291,7 +291,7 @@ namespace CallingBotSample.Bots
                 return operation.ClientContext;
             }
 
-            // Resource URLs are in the format below, with the call id in the 3rd postion (position 0 will be empty)
+            // Resource URLs are in the format below, with the call id in the 3rd position (position 0 will be empty)
             // #microsoft.graph.call: /communications/calls/<<call-id-as-guid>>
             // #microsoft.graph.recordOperation: /communications/calls/<<call-id-as-guid>>/operations/<<operation-id-as-guid>>
             return notificationArgs.Notification.ResourceUrl.Split('/')[3];
