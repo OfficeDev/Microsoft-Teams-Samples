@@ -12,7 +12,6 @@ extensions:
  createdDate: "16/11/2021 00:15:13"
 urlFragment: officedev-microsoft-teams-samples-tab-product-inspection-csharp
 ---
-
 # Product Inspection
 
 This sample app demonstrate a feature where user can scan a product, capture a image and mark it as approved/rejected.
