@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP.Net Core app (Tab with Adaptive cards) to Azure Web App - json-tabs
+name: Build and deploy ASP.Net Core app (Tab-Product-Inspection) to Azure Web App - json-tabs
 
 on:
   push:
@@ -17,7 +17,7 @@ env:
     #Change the project path to your project file path.
     AZURE_WEBAPP_PACKAGE_PATH: 'samples/tab-product-inspection/csharp/published'
     PROJECT_PATH: 'samples/tab-product-inspection/csharp/ProductInspection/ProductInspection.csproj'
-    AZURE_WEBAPP_NAME: 'tab-product-inspection'
+    AZURE_WEBAPP_NAME: 'tab-product-inspection-prod'
 jobs:
   build:
     runs-on: windows-latest
