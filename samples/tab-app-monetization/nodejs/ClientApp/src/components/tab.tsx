@@ -1,6 +1,6 @@
 import React from 'react';
 import { app, monetization } from "@microsoft/teams-js";
-import { Text, Button } from '@fluentui/react-components'
+import { Text, Button, Flex } from '@fluentui/react-northstar'
 import './tab.css'
 
 const Tab = () => {
@@ -11,8 +11,8 @@ const Tab = () => {
 
 
     var planInfo = {
-        planId: "westleysystemsinc1614967134606.pig_latin", // Plan Id of the published SAAS Offer
-        term: "6" // Term of the plan.
+        planId: "<Plan id>", // Plan Id of the published SAAS Offer
+        term: "<Plan Term>" // Term of the plan.
     }
 
     const handlePurchaseDialog = () => {
@@ -23,18 +23,16 @@ const Tab = () => {
     return (
         <div className="tab-container">
             <div className="header-container">
-                <Text weight="bold" size={500} >{"App monetization"}</Text>
+                <Text weight="bold" size="larger" content="App monetization" />
             </div>
             <br></br>
-            <div>
-                <Text weight="regular">
-                    {"This app showcases how to trigger the purchase experience within the app. Refer below code. Click on the upgrade button to open purchase dialog."}
-                </Text>
-            </div>
+            <Flex>
+                <Text weight="regular" content="This app showcases how to trigger the purchase experience within the app. Refer below code. Click on the upgrade button to open purchase dialog." />
+            </Flex>
             <br></br>
             <pre className="code-block">monetization.openPurchaseExperience(planInfo) where planInfo is an object with properties planId and term.
  </pre>
-            <Button onClick={handlePurchaseDialog}>{"Upgrade"}</Button>
+            <Button onClick={handlePurchaseDialog} content="Upgrade" />
         </div>
     )
 }
