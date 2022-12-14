@@ -16,7 +16,7 @@ on:
 env:
     #AZURE_WEBAPP_PATH is the project path
     #Web app name is your azure app service name.
-    AZURE_WEBAPP_PATH: 'samples/tab-app-monetization/nodejs'
+    AZURE_WEBAPP_PATH: 'samples/tab-app-monetization/nodejs/ClientApp'
     AZURE_WEBAPP_NAME: 'tab-app-monetization'
 
 jobs:
