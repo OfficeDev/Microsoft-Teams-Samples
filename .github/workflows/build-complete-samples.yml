@@ -38,5 +38,5 @@ jobs:
         with:
           python-version: "${{ matrix.version }}"
           cache: 'pip'
-
-      - run: pip install -r requirements.txt
+      - name: Install dependencies
+        run: pip install -r requirements.txt
