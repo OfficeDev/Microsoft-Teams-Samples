@@ -24,6 +24,9 @@ jobs:
             - project_path: 'samples/bot-conversation/java'
               name: 'bot-conversation'
               version: '18'
+            - project_path: 'samples/bot-message-reaction/java'
+              name: 'bot-message-reaction'
+              version: '18'
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" java
