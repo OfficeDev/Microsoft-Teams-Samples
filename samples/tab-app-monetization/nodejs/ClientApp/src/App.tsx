@@ -1,9 +1,13 @@
 import React, { Suspense } from 'react';
 import './App.css';
-import { BrowserRouter , Routes, Route   } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom';
 import { app } from "@microsoft/teams-js";
 import { TeamsThemeContext, getContext, ThemeStyle } from 'msteams-ui-components-react';
-import { FluentProvider, teamsDarkTheme ,teamsHighContrastTheme ,teamsLightTheme } from '@fluentui/react-components';
+import { Provider, teamsTheme, teamsDarkTheme, teamsHighContrastTheme } from '@fluentui/react-northstar'
 import Tab from './components/tab';
 
 export interface IAppState {
@@ -44,28 +48,28 @@ class App extends React.Component<{}, IAppState> {
   public setThemeComponent = () => {
     if (this.state.theme === "dark") {
       return (
-        <FluentProvider theme={teamsDarkTheme}>
+        <Provider theme={teamsDarkTheme}>
           <div className="darkContainer">
             {this.getAppDom()}
           </div>
-        </FluentProvider>
+        </Provider>
       );
     }
     else if (this.state.theme === "contrast") {
       return (
-        <FluentProvider theme={teamsHighContrastTheme}>
+        <Provider theme={teamsHighContrastTheme}>
           <div className="highContrastContainer">
             {this.getAppDom()}
           </div>
-        </FluentProvider>
+        </Provider>
       );
     } else {
       return (
-        <FluentProvider theme={teamsLightTheme}>
+        <Provider theme={teamsTheme}>
           <div className="defaultContainer">
             {this.getAppDom()}
           </div>
-        </FluentProvider>
+        </Provider>
       );
     }
   }
@@ -95,11 +99,9 @@ class App extends React.Component<{}, IAppState> {
       <TeamsThemeContext.Provider value={context}>
         <Suspense fallback={<div></div>}>
           <div className="appContainer">
-            <BrowserRouter>
-              <Routes>
-                  <Route path="/tab" element={<Tab/>}></Route>
-              </Routes>
-            </BrowserRouter>
+            <Router>
+                <Route exact path='/tab' component={Tab}></Route>
+            </Router>
           </div>
         </Suspense>
       </TeamsThemeContext.Provider>
