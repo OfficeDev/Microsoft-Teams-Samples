@@ -1,3 +1,14 @@
+// import React from 'react';
+// //import ReactDOM from 'react-dom';
+// import './index.css';
+// import App from './components/App';
+// import { FluentProvider, teamsLightTheme } from '@fluentui/react-components'; //https://fluentsite.z22.web.core.windows.net/quick-start
+// import ReactDOM from "react-dom/client";
+
+// const root = ReactDOM.createRoot(document.getElementById("root")!)
+
+// root.render(<App />);
+
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
@@ -5,10 +16,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
-import { Provider, themes } from '@fluentui/react-northstar' //https://fluentsite.z22.web.core.windows.net/quick-start
+import { FluentProvider,  teamsLightTheme } from '@fluentui/react-components' //https://fluentsite.z22.web.core.windows.net/quick-start
 
 ReactDOM.render(
-    <Provider theme={themes.teams}>
+    <FluentProvider theme={teamsLightTheme}>
         <App />
-    </Provider>, document.getElementById('root')
+    </FluentProvider>, document.getElementById('root')
 );

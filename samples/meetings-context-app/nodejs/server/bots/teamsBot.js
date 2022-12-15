@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const { TeamsActivityHandler, TeamsInfo } = require("botbuilder");
+const { TeamsActivityHandler, TeamsInfo,TurnContext,MessageFactory } = require("botbuilder");
 
 class TeamsBot extends TeamsActivityHandler {
     constructor() {
@@ -9,9 +9,12 @@ class TeamsBot extends TeamsActivityHandler {
 
         /**  Handler invoked on member added. */
         this.onMembersAdded(async (context, next) => {
+            debugger;
             const membersAdded = context.activity.membersAdded;
             for (let member = 0; member < membersAdded.length; member++) {
                 if (membersAdded[member].id !== context.activity.recipient.id) {
+                    
+                    console.log("member added")
                     await context.sendActivity("Hello and welcome!");
                     await context.sendActivity("Please use one of these two commands : " + `<b>Participant Context</b>` + " and " + `<b>Meeting Context</b> <br>` + "Thank you");
                 }
@@ -26,17 +29,16 @@ class TeamsBot extends TeamsActivityHandler {
             let tenantId = context.activity.channelData.tenant.id;
             let participantId = context.activity.from.aadObjectId;
 
-            var text = context.activity.removeRecipientMention();
-            if (text.includes("participant context")) {
+            var text = TurnContext.removeRecipientMention(context.activity);
+            if (text.includes("Participant Context")) {
                 let participant = await TeamsInfo.getMeetingParticipant(context, meetingId, participantId, tenantId);
-                var formattedString = this.formatObject(participant);
+                var formattedString =await this.formatObject(participant); 
                 await context.sendActivity(formattedString);
             }
-            else if (text.includes("meeting context")) {
+            else if (text.includes("Meeting Context")) {
                 let meetingsInfo = await TeamsInfo.getMeetingInfo(context);
-                var formattedString = this.formatObject(meetingsInfo);
-                await context.sendActivity(formattedString);
-
+                var formattedString =await this.formatObject(meetingsInfo);                
+                await context.sendActivity(JSON.stringify(formattedString));
             }
             else {
                 await context.sendActivity("Please use one of these two commands : " + `<b>Participant Context</b>` + " and " + `<b>Meeting Context</b> <br>` + "Thank you");
@@ -54,8 +56,7 @@ class TeamsBot extends TeamsActivityHandler {
         let formattedString = "";
         Object.keys(obj).forEach((key) => {
             var block = `<b>${key}:</b> <br>`;
-            var storeTemporaryFormattedString = "";
-
+            var storeTemporaryFormattedString = "";           
             if (typeof (obj[key]) === 'object') {
                 Object.keys(obj[key]).forEach((secondKey) => {
                     storeTemporaryFormattedString += ` <b> &nbsp;&nbsp;${secondKey}:</b> ${obj[key][secondKey]}<br/>`;
