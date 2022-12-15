@@ -69,7 +69,7 @@ jobs:
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots package
         
-build-python-samples:
+  build-python-samples:
     runs-on: windows-latest
     #Add project path, name and version as below for any new additions
     strategy:
