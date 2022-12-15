@@ -35,6 +35,8 @@ namespace Microsoft.BotBuilderSamples.Bots
 
         private readonly string _adaptiveCardTemplate = Path.Combine(".", "Resources", "UserMentionCardTemplate.json");
 
+        private readonly string _immersiveReaderCardTemplate = Path.Combine(".", "Resources", "ImmersiveReaderCard.json");
+
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             turnContext.Activity.RemoveRecipientMention();
@@ -50,6 +52,8 @@ namespace Microsoft.BotBuilderSamples.Bots
                 await CardActivityAsync(turnContext, true, cancellationToken);
             else if(text.Contains("message"))
                 await MessageAllMembersAsync(turnContext, cancellationToken);
+            else if(text.Contains("immersivereader"))
+                await SendImmersiveReaderCardAsync(turnContext, cancellationToken);
             else if(text.Contains("delete"))
                 await DeleteCardActivityAsync(turnContext, cancellationToken);
             else
@@ -292,6 +296,18 @@ namespace Microsoft.BotBuilderSamples.Bots
                 ContentType = "application/vnd.microsoft.card.adaptive",
                 Content = JsonConvert.DeserializeObject(cardJSON),
             };
+            await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardAttachment), cancellationToken);
+        }
+
+        private async Task SendImmersiveReaderCardAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
+        {
+            var cardJSON = File.ReadAllText(_immersiveReaderCardTemplate);
+            var adaptiveCardAttachment = new Attachment
+            {
+                ContentType = "application/vnd.microsoft.card.adaptive",
+                Content = JsonConvert.DeserializeObject(cardJSON),
+            };
+
             await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardAttachment), cancellationToken);
         }
 
