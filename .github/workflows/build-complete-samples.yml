@@ -23,7 +23,7 @@ jobs:
         include:
             - project_path: 'samples/bot-conversation/python'
               name: 'bot-conversation'
-              version: '3.6'
+              version: '3.x'
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" python
