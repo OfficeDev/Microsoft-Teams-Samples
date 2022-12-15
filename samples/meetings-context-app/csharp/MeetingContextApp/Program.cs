@@ -18,6 +18,11 @@ builder.Services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>
 // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
 builder.Services.AddTransient<IBot, MeetingContextBot>();
 
+builder.Services.AddSpaStaticFiles(configuration =>
+{
+    configuration.RootPath = "ClientApp/build";
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
