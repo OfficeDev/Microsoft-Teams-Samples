@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-const { TeamsActivityHandler, TeamsInfo,TurnContext,MessageFactory } = require("botbuilder");
+const { TeamsActivityHandler, TeamsInfo, TurnContext, MessageFactory } = require("botbuilder");
 
 class TeamsBot extends TeamsActivityHandler {
     constructor() {
@@ -9,12 +9,9 @@ class TeamsBot extends TeamsActivityHandler {
 
         /**  Handler invoked on member added. */
         this.onMembersAdded(async (context, next) => {
-            debugger;
             const membersAdded = context.activity.membersAdded;
             for (let member = 0; member < membersAdded.length; member++) {
-                if (membersAdded[member].id !== context.activity.recipient.id) {
-                    
-                    console.log("member added")
+                if (membersAdded[member].id !== context.activity.recipient.id) {                  
                     await context.sendActivity("Hello and welcome!");
                     await context.sendActivity("Please use one of these two commands : " + `<b>Participant Context</b>` + " and " + `<b>Meeting Context</b> <br>` + "Thank you");
                 }

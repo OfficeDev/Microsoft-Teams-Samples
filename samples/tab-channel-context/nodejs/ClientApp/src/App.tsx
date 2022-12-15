@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react';
 import './App.css';
-import {BrowserRouter,Route, Routes} from 'react-router-dom';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import { app } from "@microsoft/teams-js";
-import { TeamsThemeContext, ThemeStyle , getContext } from 'msteams-ui-components-react';
-import { FluentProvider, teamsDarkTheme ,teamsHighContrastTheme ,teamsLightTheme } from '@fluentui/react-components';
+import { TeamsThemeContext, ThemeStyle, getContext } from 'msteams-ui-components-react';
+import { FluentProvider, teamsDarkTheme, teamsHighContrastTheme, teamsLightTheme } from '@fluentui/react-components';
 import Tab from './components/tab';
 import TabConfig from './components/tab-config';
 

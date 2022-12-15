@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { FluentProvider,   teamsDarkTheme } from '@fluentui/react-components'
+import { FluentProvider, teamsDarkTheme } from '@fluentui/react-components'
 
 ReactDOM.render(
   <React.StrictMode>

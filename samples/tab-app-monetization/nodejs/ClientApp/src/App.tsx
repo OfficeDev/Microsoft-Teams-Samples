@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react';
 import './App.css';
-import { BrowserRouter , Routes, Route   } from 'react-router-dom';
+import { BrowserRouter, Routes, Route   } from 'react-router-dom';
 import { app } from "@microsoft/teams-js";
 import { TeamsThemeContext, getContext, ThemeStyle } from 'msteams-ui-components-react';
-import { FluentProvider, teamsDarkTheme ,teamsHighContrastTheme ,teamsLightTheme } from '@fluentui/react-components';
+import { FluentProvider, teamsDarkTheme, teamsHighContrastTheme, teamsLightTheme } from '@fluentui/react-components';
 import Tab from './components/tab';
 
 export interface IAppState {
