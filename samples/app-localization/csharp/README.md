@@ -30,6 +30,7 @@ Verify you have the right account for building Teams apps and install some recom
 
 ## Setup
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+    > NOTE: When you create your app registration, you will create an App ID and App password (Secret) - make sure you keep these for later.
 
 2. Setup for Bot
 	
@@ -37,14 +38,13 @@ Verify you have the right account for building Teams apps and install some recom
 	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 	- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
-    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
-
 3. Setup NGROK
       - Run ngrok - point to port 3978
 
 	```bash
 	ngrok http -host-header=rewrite 3978
 	```   
+
 4. Setup for code
 
   - Clone the repository
