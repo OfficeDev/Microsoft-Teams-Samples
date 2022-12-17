@@ -13,12 +13,19 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-app-localization-csharp
 ---
 
-# Teams App Localization
+# Teams App Localization [[Try It Yourself](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/v-chetsharma/Linking-demo-manifests-samples--MicrosoftDocs/samples/app-localization/csharp/Try-It-Yourself.md)]
 This sample illustrates how to implement [Localization for Microsoft Teams apps](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/apps-localization).
 
 ## Interaction with app.
 
 ![Preview Image](Images/Preview.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Here is the sample which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant; [see steps here](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading).) This app is running on the free Azure tier, so it may take a while to load (warm up) if you haven't used it recently and it goes back to sleep quickly if it's not being used. Rest assured, once it's loaded it's pretty snappy.
+
+| Sample Name        | Description                                                                                                                | Manifest| 
+|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|
+|App Localization|Feature of this sample Microsoft Teams app localization using Bot and Tab. |[View](/demo%20manifest/app-localization.zip) |
 
 ## Prerequisites
 
