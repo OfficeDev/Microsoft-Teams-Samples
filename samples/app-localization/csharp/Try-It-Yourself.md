@@ -5,4 +5,4 @@ Here is the sample which is deployed on Microsoft Azure and you can try it yours
 
 | Sample Name        | Description                                                                                                                | Manifest| 
 |:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|
-|App Localization|Feature of this sample Microsoft Teams app localization using Bot and Tab. |[View](/demo%20manifest/app-localization.zip) |
+|App Localization|Feature of this sample Microsoft Teams app localization using Bot and Tab. |[View](/samples/app-localization/csharp/demo-manifest/app-localization.zip) |
