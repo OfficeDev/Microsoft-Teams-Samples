@@ -40,6 +40,7 @@ app.UseDefaultFiles()
         endpoints.MapControllers();
     });
 
+app.UseSpaStaticFiles();
 app.UseSpa(spa =>
 {
     spa.Options.SourcePath = "ClientApp";
