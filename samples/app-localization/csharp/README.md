@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-app-localization-csharp
 ---
 
-# Teams App Localization [[Try It Yourself](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/v-chetsharma/Linking-demo-manifests-samples--MicrosoftDocs/samples/app-localization/csharp/Try-It-Yourself.md)]
+# Teams App Localization [[Try It Yourself](/samples/app-localization/csharp/Try-It-Yourself.md)]
 This sample illustrates how to implement [Localization for Microsoft Teams apps](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/apps-localization).
 
 ## Interaction with app.
