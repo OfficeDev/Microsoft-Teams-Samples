@@ -10,6 +10,82 @@ There are a number of scenarios supported by this app:
 1. Adding a bot to a scheduled meeting
 1. Using the bot to create an online meeting, and inviting people to it.
 
+# Creating a simple service hosted media bot, with an echo
+The first part of this sample bot was to allow users to create a call using the Graph Communications APIs. Once that was working, we added the support for recording a response from a user, and then echoing the recording back to the user.
+
+The *Create call* action opens an [Adaptive Card with a People Picker](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/people-picker), which allows you to choose who the bot should create a call with. The bot will then [create a call](https://learn.microsoft.com/en-us/graph/api/application-post-calls?view=graph-rest-1.0&tabs=http) with the desired targets receiving a call notification.
+
+The calling bot is essentially a notification event handler. The bot will receive notifications for different call events and the bot can decide to act on those events or not.
+
+The is a wide range of notifications that can possibly be fired. Including, call state changes (incoming, established), information about a recording, details about a prompt that has been played, and updates to participants. Other notifications could be fired but it depends on what can happen in your call.
+
+## Getting the call ID from a notification
+For most of the Cloud Communications API, you will need to know the call's ID to complete an action. It is possible to get this from incoming notifications but the ID might appear in a number of places. In our sample, we first check the `ClientContext` of the CommsOperation, however if that is not provided we can also check the `resourceUrl`. 
+
+Resource URLs are in the format below, with the call id in the 3rd position when split on `/` (position 0 will be empty) `#microsoft.graph.call: /communications/calls/<<call-id-as-guid>>` or
+`#microsoft.graph.recordOperation: /communications/calls/<<call-id-as-guid>>/operations/<<operation-id-as-guid>>`.
+
+## Answering an incoming call
+If you set `supportsCalling` in your App Manifest, the Teams client will show users a Call button in their 1:1 chats with your bot. If a user calls your bot using this button, your calling bot will receive [an `incoming` call notification](https://learn.microsoft.com/en-us/graph/api/call-answer?view=graph-rest-1.0&tabs=http#notification---incoming). You can then [use the answer API](https://learn.microsoft.com/en-us/graph/api/call-answer?view=graph-rest-1.0) to join the call.
+
+## Recording a snippet
+One type of notification is when the call is established. When we receive that notification we play a [prompt asking the user to record a response using the Interactive Voice Response (IVR) capabilities](https://learn.microsoft.com/en-us/graph/api/call-record?view=graph-rest-1.0). 
+
+When the recording is completed, we get a different notification. This notification includes the recordings location and an access token to be able to download it. We download this file for it then to be used in future stages. 
+
+## Playing a prompt
+The first thing we do is to echo the recording back to the users in the call. This is similar to the record response API, but instead we use the [play prompt API](https://learn.microsoft.com/en-us/graph/api/call-playprompt?view=graph-rest-1.0&tabs=http).
+
+The prompt tells the Teams client to download the WAV file from a publicly accessible location and to play it to the users on the call. We download this to our service, but if you are releasing publicly you may want to use blob storage or similar which would provide policies on accessing the data or deleting old files.
+
+After the prompt is played, we receive a notification telling us of it's success. When we receive this we delete the recording file. You should be sure to comply with laws and regulations when it comes to handling recordings. 
+
+
+## In-Call Actions
+
+### Transfer call
+
+### Invite participant
+Inviting a user is done using the [participant APIs](https://learn.microsoft.com/en-us/graph/api/resources/participant?view=graph-rest-1.0). There is a big caveat when inviting a user to a adhoc call created by the bot. The invitee will see a different chat than original members of the call.
+- If the call is only user A, the bot, and the invitee, user A will see the chat between them and the bot, while the invitee will see their 1:1 chat with user A.
+- If it's a group call, user A and B will see their 1:1 chat with the bot, while the invitee will see a group chat with themselves, user A and B. If there is no group chat one will be created.
+
+
+### Play Record Prompt
+This simply replays the prompt for the use to record a message. It will kick off the same flow for echoing the recording and sending message with the recording contents where applicable.
+
+### Hang up
+[Get's the bot to hang up the call](https://learn.microsoft.com/en-us/graph/api/call-delete?view=graph-rest-1.0&tabs=http)
+
+
+# Adding a media bot to a scheduled meeting
+When a scheduled meeting exists a media bot can join it by passing in the chat info and meeting organiser. We get these details from the turn context when this user clicks on "Join scheduled meeting". 
+
+When creating the default welcome card we check if the turnContext contains a value for `turnContext.Activity.ChannelData["meeting"]`. If this is not null we show the button to join the meeting.
+
+Using a scheduled meeting, ensures that all users in the meeting has access to the same chat. Which currently can not be guaranteed for the simple calls above.
+
+## Converting the Speech to Text
+When the recording is download to our service we also pass it to the [Cognitive Services Speech to Text API](https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/index-speech-to-text). If the service is able to transcribe the text we then send the value in a message to the chat using Bot Framework.
+
+This is only possible on scheduled calls as we get the call `threadId` from the Call service, but that is not defined for adhoc calls with the bot.
+
+
+# Creating an online meeting, inviting people to it, and sending messages to the chat.
+*TODO: Add code tour and link to it here*
+In our sample, we created an incident call management app. The app, when prompted, will create a meeting, invite people to it, and then send details about the incident to the meeting chat. It also uses text to speech to describe the incident details.
+
+> **Note:** We are using [onlineMeeting](https://learn.microsoft.com/en-us/graph/api/resources/onlinemeeting?view=graph-rest-1.0) to create this meeting. [OnlineMeetings are different to calendar events](https://learn.microsoft.com/en-us/graph/choose-online-meeting-api), if you want the meeting to appear in a user's calendar you may wish to use the Calendar API instead.
+
+After we create the meeting, we [install the teams app to the chat](https://learn.microsoft.com/en-us/graph/api/chat-post-installedapps?view=graph-rest-1.0), this allows us to send bot messages to the chat. We use this to share an adaptive card with the incident details.
+
+> **Note:** Due to using this API we are unable to support meeting start and end events. These events are granted using resource-specific consent permissions (RSC) and you are unable to install apps with RSCs using the API.
+
+
+
+
+
+
 This sample media app uses two types of bot endpoints:
 
 - Messaging
@@ -52,14 +128,13 @@ sequenceDiagram
         App->>Graph: Invokes "Play prompt" API, <br>to play recorded message
         Graph-->>Teams: Plays recorded message as prompt
         Teams-->>User: User hears their recorded message
-    and Transcribe recording
+    and Transcribe recording (for scheduled calls)
         App->>Cognitive: Invokes Speech Recognizer API
         Cognitive-->>App: Recognised speech
         App-->>BotFramework: Send activity to meeting<br>chat with recognised speech
         BotFramework-->>Teams: <br>
-        Teams-->>User: See message with recognised text
+        Teams-->>User: See message with recognised <br>text in the chat
     end
-
 
     Note over User,Cognitive: Bot creates a call with the user
     User->>+Teams: Invokes "Create call" on Adaptive Card
@@ -76,69 +151,6 @@ sequenceDiagram
     Teams-->>-User: Gets call invite
 ```
 
-# Calling Bot
-
-The calling bot is essentially a notification event handler. The bot will receive notifications for different call events and the bot can decide to act on those events or not.
-
-The is a wide range of notifications that can possibly be fired. Including, call state changes (incoming, established), information about a recording, details about a prompt that has been played, and updates to participants. Other notifications could be fired but it depends on what can happen in your call.
-
-## Getting the call ID from a notification
-
-The call's ID might appear in multiple places in a communication notification. First we check the ClientContext of the CommsOperation, however if that is not provided we check the resourceUrl.
-
-Resource URLs are in the format below, with the call id in the 3rd position when split on `/` (position 0 will be empty) `#microsoft.graph.call: /communications/calls/<<call-id-as-guid>>` or
-`#microsoft.graph.recordOperation: /communications/calls/<<call-id-as-guid>>/operations/<<operation-id-as-guid>>`.
-
-## Answering a call
-
-When a bot is called an incoming notification similar to the below is fired. [Complete notification example](https://learn.microsoft.com/en-us/graph/api/call-answer?view=graph-rest-1.0&tabs=http#notification---incoming). When the state is Incoming, we extract the callId from the notification and then use that to call the [answer call API](https://learn.microsoft.com/en-us/graph/api/call-answer?view=graph-rest-1.0&tabs=http).
-
-```json
-{
-  "@odata.type": "#microsoft.graph.commsNotifications",
-  "value": [
-    {
-      "@odata.type": "#microsoft.graph.commsNotification",
-      "changeType": "created",
-      "resourceUrl": "/communications/calls/57DAB8B1894C409AB240BD8BEAE78896",
-      "resourceData": {
-        "@odata.type": "#microsoft.graph.call",
-        "@odata.id": "/communications/calls/57DAB8B1894C409AB240BD8BEAE78896",
-        "@odata.etag": "W/\"5445\"",
-        "state": "incoming",
-        "direction": "incoming",
-        ...
-        "requestedModalities": [ "audio" ]
-      }
-    }
-  ]
-}
-```
-
-## When a call is established
-
-[A notification (complete example)](https://learn.microsoft.com/en-us/graph/api/call-answer?view=graph-rest-1.0&tabs=http#notification---established-1) like the below is fired when a call is established correctly. Sometimes this event can be fired multiple times depending on the scenario.
-
-In our sample we listen for established events, and then
-
-```json
-{
-  "@odata.type": "#microsoft.graph.commsNotifications",
-  "value": [
-    {
-      "@odata.type": "#microsoft.graph.commsNotification",
-      "changeType": "updated",
-      "resourceUrl": "/communications/calls/57DAB8B1894C409AB240BD8BEAE78896",
-      "resourceData": {
-        "@odata.type": "#microsoft.graph.call",
-        "@odata.id": "/communications/calls/57DAB8B1894C409AB240BD8BEAE78896",
-        "@odata.etag": "W/\"5445\"",
-        "state": "established"
-      }
-    }
-  ]
-}
-```
 
 ## Requesting a recording
 
