@@ -2,12 +2,12 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using CallingBotSample.AdaptiveCards;
+using CallingBotSample.Cache;
 using CallingBotSample.Helpers;
 using CallingBotSample.Models;
 using CallingBotSample.Options;
@@ -16,7 +16,6 @@ using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Graph;
@@ -33,9 +32,10 @@ namespace CallingBotSample.Bots
         private readonly ICallService callService;
         private readonly IChatService chatService;
         private readonly IOnlineMeetingService onlineMeetingService;
-        private readonly IMemoryCache callBotCache;
+        private readonly IIncidentCache incidentCache;
 
         private readonly AzureAdOptions azureAdOptions;
+        private readonly BotOptions botOptions;
         private readonly ILogger<MessageBot> logger;
 
         public MessageBot(
@@ -44,8 +44,9 @@ namespace CallingBotSample.Bots
             ICallService callService,
             IChatService chatService,
             IOnlineMeetingService onlineMeetingService,
-            IMemoryCache callBotCache,
+            IIncidentCache incidentCache,
             IOptions<AzureAdOptions> azureAdOptions,
+            IOptions<BotOptions> botOptions,
             ILogger<MessageBot> logger)
         {
             this.adaptiveCardFactory = adaptiveCardFactory;
@@ -54,9 +55,10 @@ namespace CallingBotSample.Bots
             this.callService = callService;
             this.chatService = chatService;
             this.onlineMeetingService = onlineMeetingService;
-            this.callBotCache = callBotCache;
+            this.incidentCache = incidentCache;
 
             this.azureAdOptions = azureAdOptions.Value;
+            this.botOptions = botOptions.Value;
             this.logger = logger;
         }
 
@@ -142,7 +144,7 @@ namespace CallingBotSample.Bots
                             {
                                 await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardFactory.CreateMeetingActionsCard(call.Id)));
 
-                                return await CreateTaskModuleResponse("Working on that, you can close this dialog now.");
+                                return await CreateTaskModuleMessageResponse("Working on that, you can close this dialog now.");
                             }
                             break;
                         case "transfer":
@@ -151,14 +153,14 @@ namespace CallingBotSample.Bots
                                         callId!,
                                         new Identity { Id = peoplePicker }),
                                 callId,
-                                CreateTaskModuleResponse);
+                                CreateTaskModuleMessageResponse);
                         case "invite":
                             return await MakeGraphCallThatMightNotBeFound(
                                 () => callService.InviteParticipant(
                                         callId!,
                                         new IdentitySet { User = new Identity { Id = peoplePicker } }),
                                 callId,
-                                CreateTaskModuleResponse);
+                                CreateTaskModuleMessageResponse);
                         case "createincident":
                             if (moduleSubmitData?.IncidentName != null)
                             {
@@ -176,11 +178,11 @@ namespace CallingBotSample.Bots
                 catch (ServiceException ex)
                 {
                     logger.LogError(ex, "Failure while making Graph Call");
-                    return await CreateTaskModuleResponse($"Something went wrong 😖. {ex.Message}");
+                    return await CreateTaskModuleMessageResponse($"Something went wrong 😖. {ex.Message}");
                 }
             }
 
-            return await CreateTaskModuleResponse("Something went wrong 😖");
+            return await CreateTaskModuleMessageResponse("Something went wrong 😖");
         }
 
         private async Task SendResponse(ITurnContext<IMessageActivity> turnContext, string input, string? callId, CancellationToken cancellationToken)
@@ -281,7 +283,7 @@ namespace CallingBotSample.Bots
 
                 if (meetingCall != null)
                 {
-                    await chatService.InstallApp(meetingCall.ChatInfo.ThreadId, "60413772-76b9-48c3-b7e5-2ecc82f60f41");
+                    await chatService.InstallApp(meetingCall.ChatInfo.ThreadId, botOptions.CatalogAppId);
 
                     var incidentDetails = new IncidentDetails
                     {
@@ -295,7 +297,7 @@ namespace CallingBotSample.Bots
                             Id = p,
                         })
                     };
-                    callBotCache.Set($"{meetingCall.Id}:incident", incidentDetails);
+                    incidentCache.Set(meetingCall.Id, incidentDetails);
 
                     await SendActivityToConversation(
                         turnContext,
@@ -311,10 +313,10 @@ namespace CallingBotSample.Bots
                     await turnContext.SendActivityAsync("Created incident call successfully.", cancellationToken: cancellationToken);
                 }
 
-                return await CreateTaskModuleResponse("Working on that, you can close this dialog now.");
+                return await CreateTaskModuleMessageResponse("Working on that, you can close this dialog now.");
             }
 
-            return await CreateTaskModuleResponse("Something went wrong 😖");
+            return await CreateTaskModuleMessageResponse("Something went wrong 😖");
         }
 
         private async Task SendActivityToConversation(ITurnContext turnContext, string conversationId, IActivity activity, CancellationToken cancellationToken)
@@ -343,7 +345,7 @@ namespace CallingBotSample.Bots
                 cancellationToken);
         }
 
-        private async Task<TaskModuleResponse> CreateTaskModuleResponse(string value)
+        private async Task<TaskModuleResponse> CreateTaskModuleMessageResponse(string value)
         {
             return new TaskModuleResponse
             {

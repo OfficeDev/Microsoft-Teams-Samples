@@ -11,6 +11,10 @@ namespace CallingBotSample.AdaptiveCards
 {
     public class AdaptiveCardFactory : IAdaptiveCardFactory
     {
+        // Date Time must be in RFC 3389 format https://learn.microsoft.com/en-us/adaptive-cards/authoring-cards/text-features#datetime-function-rules
+        public const string DATE_TIME_STRING_FORMAT = "yyyy-MM-dd'T'HH:mm:ssK";
+
+        /// <inheritdoc />
         public Attachment CreateWelcomeCard(bool showJoinMeetingButton)
         {
             var template = GetCardTemplate("WelcomeCard.json");
@@ -19,6 +23,7 @@ namespace CallingBotSample.AdaptiveCards
             return CreateAttachment(serializedJson);
         }
 
+        /// <inheritdoc />
         public Attachment CreateIncidentCard()
         {
             var template = GetCardTemplate("CreateIncidentCard.json");
@@ -27,6 +32,7 @@ namespace CallingBotSample.AdaptiveCards
             return CreateAttachment(serializedJson);
         }
 
+        /// <inheritdoc />
         public Attachment CreateIncidentMeetingCard(string title, string callId, DateTime startTime, DateTime? endTime)
         {
             var template = GetCardTemplate("IncidentMeetingActionsCard.json");
@@ -34,12 +40,13 @@ namespace CallingBotSample.AdaptiveCards
             var serializedJson = template.Expand(new {
                 title,
                 callId,
-                startTime = startTime.ToString("yyyy-MM-dd'T'HH:mm:ssK"),
-                endTime = endTime?.ToString("yyyy-MM-dd'T'HH:mm:ssK") ?? string.Empty
+                startTime = startTime.ToString(DATE_TIME_STRING_FORMAT),
+                endTime = endTime?.ToString(DATE_TIME_STRING_FORMAT) ?? string.Empty
             });
             return CreateAttachment(serializedJson);
         }
 
+        /// <inheritdoc />
         public Attachment CreateMeetingActionsCard(string? callId)
         {
             var template = GetCardTemplate("MeetingActions.json");
@@ -48,6 +55,7 @@ namespace CallingBotSample.AdaptiveCards
             return CreateAttachment(serializedJson);
         }
 
+        /// <inheritdoc />
         public Attachment CreatePeoplePickerCard(string choiceLabel, string action, string? callId, bool isMultiSelect = false)
         {
             var template = GetCardTemplate("PeoplePicker.json");

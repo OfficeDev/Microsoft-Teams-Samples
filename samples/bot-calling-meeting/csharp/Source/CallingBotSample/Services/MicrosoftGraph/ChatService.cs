@@ -18,13 +18,13 @@ namespace CallingBotSample.Services.MicrosoftGraph
         }
 
         /// <inheritdoc/>
-        public Task<TeamsAppInstallation> InstallApp(string chatId, string teamsAppId)
+        public Task<TeamsAppInstallation> InstallApp(string chatId, string teamsCatalogAppId)
         {
             var teamsAppInstallation = new TeamsAppInstallation
             {
                 AdditionalData = new Dictionary<string, object>()
                 {
-                    {"teamsApp@odata.bind", $"https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/{teamsAppId}"}
+                    {"teamsApp@odata.bind", $"https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/{teamsCatalogAppId}"}
                 }
             };
 

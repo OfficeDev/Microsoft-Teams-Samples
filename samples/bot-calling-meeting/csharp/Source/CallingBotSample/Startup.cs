@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Collections.Generic;
 using CallingBotSample.AdaptiveCards;
 using CallingBotSample.Bots;
+using CallingBotSample.Cache;
 using CallingBotSample.Options;
 using CallingBotSample.Services.BotFramework;
 using CallingBotSample.Services.CognitiveServices;
@@ -39,7 +39,6 @@ namespace CallingBotSample
         {
             services.AddControllers();
             services.AddOptions();
-            services.AddMemoryCache();
             services.AddHttpClient<ITeamsRecordingService, TeamsRecordingService>("TeamsRecordingService");
 
             services.AddSingleton<IGraphLogger>(this.logger);
@@ -66,6 +65,7 @@ namespace CallingBotSample
             services.AddScoped<ISpeechService, SpeechService>();
 
             services.AddTransient<IBotService, BotService>();
+            services.AddCaches();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

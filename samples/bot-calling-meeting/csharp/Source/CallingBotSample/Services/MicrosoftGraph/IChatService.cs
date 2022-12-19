@@ -12,8 +12,12 @@ namespace CallingBotSample.Services.MicrosoftGraph
         /// Install a Teams app to a chat
         /// </summary>
         /// <param name="chatId">The chat Id to install the app to</param>
-        /// <param name="teamsApp">The app to install to the chat</param>
+        /// <param name="teamsCatalogAppId">
+        /// The app Id to install to the chat.
+        /// This should be the external app id defined in Teams Admin Center or Platform Center.
+        /// You need to upload your app to either your org or Teams app store to test this API
+        /// </param>
         /// <returns></returns>
-        Task<TeamsAppInstallation> InstallApp(string chatId, string teamsApp);
+        Task<TeamsAppInstallation> InstallApp(string chatId, string teamsCatalogAppId);
     }
 }
