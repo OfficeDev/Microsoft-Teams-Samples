@@ -8,11 +8,14 @@
 		<DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Azure.Identity" Version="1.6.0" />
-		<PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.27" />
-		<PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.7" />
+		<Compile Remove="Controllers\TeamTagController.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Azure.Identity" Version="1.8.0" />
+		<PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.31" />
+		<PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.11" />
 		<PackageReference Include="Microsoft.Graph.Beta" Version="4.52.0-preview" />
-		<PackageReference Include="Microsoft.Identity.Client" Version="4.45.0" />
+		<PackageReference Include="Microsoft.Identity.Client" Version="4.48.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<!-- Don't publish the SPA source files, but do show them in the project files list -->
@@ -25,6 +28,8 @@
 		<None Remove="ClientApp\src\components\configure.jsx" />
 		<None Remove="ClientApp\src\components\dashboard.jsx" />
 		<None Remove="ClientApp\src\components\FileUpload.jsx" />
+		<None Remove="ClientApp\src\components\create-event.jsx" />
+		<None Remove="ClientApp\src\components\create-tag.jsx" />
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="wwwroot\" />

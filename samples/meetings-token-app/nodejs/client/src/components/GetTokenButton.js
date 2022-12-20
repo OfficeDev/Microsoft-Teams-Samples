@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from '@fluentui/react-northstar';
+import { Button } from '@fluentui/react-components';
 import { withMeetingTokenService } from '../context/MeetingServiceProvider';
 
 class GetTokenButton extends Component {
@@ -26,7 +26,7 @@ class GetTokenButton extends Component {
             <div className="flex-center">
                 {this.props.show ?
                     (
-                        <Button className="submit-button" content="Token" disabled={this.state.disabled} title="Get your meeting token" onClick={this.getToken} />
+                        <Button className="primary-button submit-button" content="Token" disabled={this.state.disabled} title="Get your meeting token" onClick={this.getToken}>Token</Button>
                     ) : null
                 }
             </div>

@@ -5,7 +5,10 @@ using System.Collections.Generic;
 using CallingBotSample.AdaptiveCards;
 using CallingBotSample.Bots;
 using CallingBotSample.Options;
+using CallingBotSample.Services.BotFramework;
+using CallingBotSample.Services.CognitiveServices;
 using CallingBotSample.Services.MicrosoftGraph;
+using CallingBotSample.Services.TeamsRecordingService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
@@ -37,6 +40,7 @@ namespace CallingBotSample
             services.AddControllers();
             services.AddOptions();
             services.AddMemoryCache();
+            services.AddHttpClient<ITeamsRecordingService, TeamsRecordingService>("TeamsRecordingService");
 
             services.AddSingleton<IGraphLogger>(this.logger);
 
@@ -55,10 +59,15 @@ namespace CallingBotSample
 
             services.Configure<AzureAdOptions>(Configuration.GetSection("AzureAd"));
             services.Configure<BotOptions>(Configuration.GetSection("Bot"));
+            services.Configure<CognitiveServicesOptions>(Configuration.GetSection("CognitiveServices"));
 
             services.AddSingleton<IAdaptiveCardFactory, AdaptiveCardFactory>();
-
             services.AddMicrosoftGraphServices(options => Configuration.Bind("AzureAd", options));
+
+            services.AddSingleton<IConnectorClientFactory, ConnectorClientFactory>();
+            services.AddScoped<ISpeechService, SpeechService>();
+
+            services.AddTransient<IBotService, BotService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

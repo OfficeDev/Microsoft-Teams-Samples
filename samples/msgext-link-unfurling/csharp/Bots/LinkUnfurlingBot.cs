@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using AdaptiveCards;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
@@ -16,17 +17,39 @@ namespace Microsoft.BotBuilderSamples.Bots
     {
         protected override Task<MessagingExtensionResponse> OnTeamsAppBasedLinkQueryAsync(ITurnContext<IInvokeActivity> turnContext, AppBasedLinkQuery query, CancellationToken cancellationToken)
         {
-            var heroCard = new ThumbnailCard
+            AdaptiveCard adaptiveCard = new AdaptiveCard(new AdaptiveSchemaVersion(1, 3));
+            adaptiveCard.Body.Add(new AdaptiveTextBlock()
             {
-                Title = "Thumbnail Card",
-                Text = query.Url,
-                Images = new List<CardImage> { new CardImage("https://raw.githubusercontent.com/microsoft/botframework-sdk/master/icon.png") },
+                Text = "Adaptive Card",
+                Size = AdaptiveTextSize.ExtraLarge
+            });
+            adaptiveCard.Body.Add(new AdaptiveImage()
+            {
+                Url = new Uri("https://raw.githubusercontent.com/microsoft/botframework-sdk/master/icon.png")
+            });
+            var attachments = new MessagingExtensionAttachment()
+            {
+                Content = adaptiveCard,
+                ContentType = AdaptiveCard.ContentType
             };
-
-            var attachments = new MessagingExtensionAttachment(HeroCard.ContentType, null, heroCard);
-            var result = new MessagingExtensionResult("list", "result", new[] { attachments });
-
-            return Task.FromResult(new MessagingExtensionResponse(result));
+            return Task.FromResult(new MessagingExtensionResponse
+            {
+                ComposeExtension = new MessagingExtensionResult
+                {
+                    AttachmentLayout = "list",
+                    Type = "result",
+                    Attachments = new List<MessagingExtensionAttachment>
+                    {
+                        new MessagingExtensionAttachment
+                        {
+                             Content = adaptiveCard,
+                             ContentType = AdaptiveCard.ContentType,
+                             Preview = attachments,
+                                   
+                        },       
+                    },
+                },
+            }); 
         }
 
         protected override Task<MessagingExtensionResponse> OnTeamsMessagingExtensionQueryAsync(ITurnContext<IInvokeActivity> turnContext, MessagingExtensionQuery query, CancellationToken cancellationToken)
@@ -44,6 +67,7 @@ namespace Microsoft.BotBuilderSamples.Bots
                         Text = "This sample demonstrates how to handle link unfurling in Teams.  Please review the readme for more information.",
                     };
 
+
                     return Task.FromResult(new MessagingExtensionResponse
                     {
                         ComposeExtension = new MessagingExtensionResult
@@ -51,14 +75,14 @@ namespace Microsoft.BotBuilderSamples.Bots
                             AttachmentLayout = "list",
                             Type = "result",
                             Attachments = new List<MessagingExtensionAttachment>
+                        {
+                            new MessagingExtensionAttachment
                             {
-                                new MessagingExtensionAttachment
-                                {
-                                    Content = card,
-                                    ContentType = HeroCard.ContentType,
-                                    Preview = card.ToAttachment(),
-                                },
+                                Content = card,
+                                ContentType = HeroCard.ContentType,
+                                Preview = card.ToAttachment(),
                             },
+                        },
                         },
                     });
 

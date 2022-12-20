@@ -1,0 +1,80 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+@{
+    Layout = "";
+}
+<h2>Send notifications when tasks are:</h2>
+<div class="col-md-8">
+    <section id="configSection">
+        <form id="configForm">
+            <input type="radio" name="notificationType" value="Create" onclick="onClick()"> Created
+            <br>
+            <br>
+            <input type="radio" name="notificationType" value="Update" onclick="onClick()"> Updated
+        </form>
+    </section>
+</div>
+
+<script src="@("https://unpkg.com/@microsoft/teams-js@1.3.3/dist/MicrosoftTeams.min.js")"></script>
+<script src="~/lib/jquery/jquerymin.js"></script>
+
+<script type="text/javascript">
+
+        function onClick() {
+            microsoftTeams.settings.setValidityState(true);
+        }
+
+        microsoftTeams.initialize();
+        microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
+            var radios = document.getElementsByName('notificationType');
+
+            var eventType = '';
+            if (radios[0].checked) {
+                eventType = radios[0].value;
+            } else {
+                eventType = radios[1].value;
+            }
+        
+            microsoftTeams.settings.setSettings({
+                 entityId: eventType,
+                 contentUrl: @Json.Serialize(Configuration["BaseUrl"])+"/Connector/Setup",
+                 configName: eventType
+                });
+
+            microsoftTeams.settings.getSettings(function (settings) {
+              try{
+                  var webhookdata = {
+                        webhookUrl:settings.webhookUrl,
+                        eventType: settings.configName
+                    };
+
+                  $.ajax({
+                    type: "POST",
+                    url: '/Connector/Save',
+                    data: webhookdata,
+                    datatype: "html",
+                    contentType: 'application/x-www-form-urlencoded',
+
+                    
+                    success: function (data, textStatus, jQxhr) {
+                        console.log('webhook created successfully.');
+                    },
+                    error: function (jqXhr, textStatus, errorThrown) {
+                        console.log('error', errorThrown);
+                    }
+                  });
+              }
+              catch(e){
+                    console.log("-----Debugging Test------->",e);
+              }
+            });
+
+            saveEvent.notifySuccess();
+        });
+
+        microsoftTeams.settings.registerOnRemoveHandler(function (removeEvent) {
+            var removeCalled = true;
+        });
+
+</script>

@@ -15,13 +15,9 @@ const GetGeoLocation = () => {
     microsoftTeams.app.initialize()
   })
 
-  // Method to get current user's geo location
-  // If the value of allowChooseLocation is true, then the users can choose any location of their choice.
-  // If the value of allowChooseLocation is false, then the users cannot change their current location.
-  // If the value of showMap is false, the current location is fetched without displaying the map. 
-  // showMap is ignored if allowChooseLocation is set to true.
+  // Method to get current user's geo location 
   function getLocation() {
-    microsoftTeams.location.getLocation({ allowChooseLocation: true, showMap: true }).then((location) => {
+    microsoftTeams.geoLocation.getCurrentLocation().then((location) => {
       setGeoLocationValue(location)
     }).catch((error) => {
       console.error(error);
@@ -31,7 +27,7 @@ const GetGeoLocation = () => {
   // Method to show geo location for given latitude and longitude values.
   function showLocation() {
     // Methos to ask for permission and then show current user location
-    microsoftTeams.location.showLocation(geoLocationValue).catch((error) => {
+    microsoftTeams.geoLocation.map.showLocation(geoLocationValue).catch((error) => {
       // If there's any error, an alert shows the error message/code
       if (error) {
         if (error.message) {
