@@ -170,8 +170,8 @@ class Tab extends React.Component {
       let consentMessage = (this.state.consentRequired && !this.state.consentProvided) ?
         <Spinner label='Consent required.'/> : null;
 
-      let avatar = this.state.photo !== "" ?
-        <Avatar image={this.state.photo} size='largest'/> : null;
+      /* let avatar = this.state.photo !== "" ?
+        <Avatar image={this.state.photo} size='largest'/> : null; */
 
       let content;
       if(this.state.error){
@@ -183,7 +183,7 @@ class Tab extends React.Component {
             <h3>{ssoMessage}</h3>
             <h3>{serverExchangeMessage}</h3>          
             <h3>{consentMessage}</h3>
-            <h1>{avatar}</h1>
+            <img src={this.state.photo} width="200" />
           </div>
       }
       
