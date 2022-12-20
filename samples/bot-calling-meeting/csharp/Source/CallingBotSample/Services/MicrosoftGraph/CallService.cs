@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using CallingBotSample.Options;
 using Microsoft.Extensions.Options;
@@ -29,7 +30,7 @@ namespace CallingBotSample.Services.MicrosoftGraph
         }
 
         /// <inheritdoc/>
-        public Task Answer(string id, params MediaInfo[]? preFetchMedia)
+        public Task Answer(string id, IEnumerable<MediaInfo>? preFetchMedia)
         {
             return graphServiceClient.Communications.Calls[id]
                 .Answer(
@@ -44,7 +45,7 @@ namespace CallingBotSample.Services.MicrosoftGraph
         }
 
         /// <inheritdoc/>
-        public Task<Call> Create(params Identity[] users)
+        public Task<Call> Create(IEnumerable<Identity> users)
         {
             var call = new Call
             {
@@ -113,7 +114,7 @@ namespace CallingBotSample.Services.MicrosoftGraph
         }
 
         /// <inheritdoc/>
-        public Task InviteParticipant(string id, params IdentitySet[] participants)
+        public Task InviteParticipant(string id, IEnumerable<IdentitySet> participants)
         {
             var invitationParticipants = participants.Select(participant =>
                 new InvitationParticipantInfo
@@ -128,7 +129,7 @@ namespace CallingBotSample.Services.MicrosoftGraph
         }
 
         /// <inheritdoc />
-        public Task<PlayPromptOperation> PlayPrompt(string id, params MediaInfo[] mediaPrompts)
+        public Task<PlayPromptOperation> PlayPrompt(string id, IEnumerable<MediaInfo> mediaPrompts)
         {
             return graphServiceClient.Communications.Calls[id]
                 .PlayPrompt(
@@ -237,6 +238,78 @@ namespace CallingBotSample.Services.MicrosoftGraph
                 {
                     MediaInfo = mediaPrompt
                 });
+        }
+
+        /// <summary>
+        /// Wrapper around Graph calls. Handles cases where a call is not found.
+        /// This might happen when an API call is made using a CallId that has already ended
+        /// </summary>
+        /// <param name="callId">Call's id</param>
+        /// <param name="function">Function to call</param>
+        /// <param name="errorHandler">Handler for when there is an error</param>
+        /// <returns>A Task</returns>
+        public static async Task HandleTeamsCallNotBeingFound(string? callId, Func<string, Task> function, Func<string, Task> errorHandler)
+        {
+            string? errorString = await MakeGraphCallThatMightNotBeFound(callId, function);
+
+            if (errorString != null)
+            {
+                await errorHandler(errorString);
+            }
+        }
+
+        /// <summary>
+        /// Wrapper around Graph calls. Handles cases where a call is not found.
+        /// This might happen when an API call is made using a CallId that has already ended
+        /// </summary>
+        /// <typeparam name="TResult">Return value <paramref name="errorHandler"/></typeparam>
+        /// <param name="callId">Call's id</param>
+        /// <param name="function">Function to call</param>
+        /// <param name="errorHandler">Handler for when there is an error. </param>
+        /// <returns>A Task, when there is an error a <typeparamref name="TResult"/> will be returned</returns>
+        public static async Task<TResult> HandleTeamsCallNotBeingFound<TResult>(string? callId, Func<string, Task> function, Func<string, Task<TResult>> errorHandler)
+        {
+            string? errorString = await MakeGraphCallThatMightNotBeFound(callId, function);
+
+            if (errorString != null)
+            {
+                return await errorHandler(errorString);
+            }
+
+            return default;
+        }
+
+        /// <summary>
+        /// Wrapper around Graph calls. Handles cases where a call is not found.
+        /// This might happen when an API call is made using a CallId that has already ended
+        /// </summary>
+        /// <param name="callId">Call's id</param>
+        /// <param name="function">Function to call</param>
+        /// <returns>A Task, when there is an error a string will be returned</returns>
+        private static async Task<string?> MakeGraphCallThatMightNotBeFound(string? callId, Func<string, Task> function)
+        {
+            if (callId == null)
+            {
+                // Without the Meeting ID we are unable to call the API
+                return "Meeting ID not found, please use the 'Create call' button to create the call.";
+            }
+
+            try
+            {
+                await function(callId);
+            }
+            catch (ServiceException ex)
+            {
+                if (ex.StatusCode != HttpStatusCode.NotFound)
+                {
+                    // If it's not a NotFound error please ignore
+                    throw ex;
+                }
+
+                return "That action failed. Unable to find call";
+            }
+
+            return default;
         }
     }
 }
