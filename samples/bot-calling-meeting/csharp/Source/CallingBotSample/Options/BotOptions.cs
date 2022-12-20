@@ -45,6 +45,6 @@ namespace CallingBotSample.Options
         /// <summary>
         /// The ID assigned to the app in the catalog
         /// </summary>
-        public string? CatalogAppId { get; set; }
+        public string CatalogAppId { get; set; }
     }
 }

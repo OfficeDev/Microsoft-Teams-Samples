@@ -42,6 +42,6 @@ namespace CallingBotSample.Models
         /// <summary>
         /// Meeting participants, used to ensure the participants are invited to the call
         /// </summary>
-        public IEnumerable<Identity>? Participants { get; set; }
+        public IEnumerable<Identity> Participants { get; set; } = new List<Identity>();
     }
 }

@@ -143,7 +143,7 @@ namespace CallingBotSample.Bots
                     switch (action)
                     {
                         case "create":
-                            var call = await callService.Create(users: peoplePickerAadIds.Select(p => new Identity { Id = p }).ToArray());
+                            var call = await callService.Create(users: peoplePickerAadIds.Select(p => new Identity { Id = p }));
 
                             if (call != null)
                             {

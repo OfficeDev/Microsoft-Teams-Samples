@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -124,7 +125,13 @@ namespace CallingBotSample.Bots
                 // If the notification is a newly created, incoming call, answer it
                 if (args.ChangeType == ChangeType.Created && call.State == CallState.Incoming)
                 {
-                    await callService.Answer(callId, new[] { audioRecordingConstants.Speech, audioRecordingConstants.PleaseRecordYourMessage });
+                    await callService.Answer(
+                        callId,
+                        new List<MediaInfo>
+                        {
+                            audioRecordingConstants.Speech,
+                            audioRecordingConstants.PleaseRecordYourMessage
+                        });
                 }
                 // If the notification is established (answered), fire a recording prompt
                 else if (
@@ -142,7 +149,7 @@ namespace CallingBotSample.Bots
 
                     if (incidentCache.TryGetValue(callId, out IncidentDetails incidentDetails))
                     {
-                        await callService.InviteParticipant(callId, incidentDetails.Participants.Select(p => new IdentitySet { User = p }).ToArray());
+                        await callService.InviteParticipant(callId, incidentDetails.Participants.Select(p => new IdentitySet { User = p }));
                     }
                 }
             }
@@ -189,7 +196,7 @@ namespace CallingBotSample.Bots
 
                 await callService.PlayPrompt(
                     callId,
-                    new[]
+                    new List<MediaInfo>
                     {
                         new MediaInfo {
                             // This URL needs to be publicly accessible, so Microsoft Teams can play the audio.
@@ -252,7 +259,7 @@ namespace CallingBotSample.Bots
                             {
                                 await callService.PlayPrompt(
                                     callId,
-                                    new[]
+                                    new List<MediaInfo>
                                     {
                                         new MediaInfo
                                         {
@@ -287,7 +294,7 @@ namespace CallingBotSample.Bots
                 return operation.ClientContext;
             }
 
-            // Resource URLs are in the format below, with the call id in the 3rd postion (position 0 will be empty)
+            // Resource URLs are in the format below, with the call id in the 3rd position (position 0 will be empty)
             // #microsoft.graph.call: /communications/calls/<<call-id-as-guid>>
             // #microsoft.graph.recordOperation: /communications/calls/<<call-id-as-guid>>/operations/<<operation-id-as-guid>>
             return notificationArgs.Notification.ResourceUrl.Split('/')[3];

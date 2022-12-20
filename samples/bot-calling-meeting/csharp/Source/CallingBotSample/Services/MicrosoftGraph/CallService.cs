@@ -30,7 +30,7 @@ namespace CallingBotSample.Services.MicrosoftGraph
         }
 
         /// <inheritdoc/>
-        public Task Answer(string id, params MediaInfo[]? preFetchMedia)
+        public Task Answer(string id, IEnumerable<MediaInfo>? preFetchMedia)
         {
             return graphServiceClient.Communications.Calls[id]
                 .Answer(
@@ -45,7 +45,7 @@ namespace CallingBotSample.Services.MicrosoftGraph
         }
 
         /// <inheritdoc/>
-        public Task<Call> Create(Identity[] users)
+        public Task<Call> Create(IEnumerable<Identity> users)
         {
             var call = new Call
             {
@@ -114,7 +114,7 @@ namespace CallingBotSample.Services.MicrosoftGraph
         }
 
         /// <inheritdoc/>
-        public Task InviteParticipant(string id, IdentitySet[] participants)
+        public Task InviteParticipant(string id, IEnumerable<IdentitySet> participants)
         {
             var invitationParticipants = participants.Select(participant =>
                 new InvitationParticipantInfo
@@ -129,7 +129,7 @@ namespace CallingBotSample.Services.MicrosoftGraph
         }
 
         /// <inheritdoc />
-        public Task<PlayPromptOperation> PlayPrompt(string id, MediaInfo[] mediaPrompts)
+        public Task<PlayPromptOperation> PlayPrompt(string id, IEnumerable<MediaInfo> mediaPrompts)
         {
             return graphServiceClient.Communications.Calls[id]
                 .PlayPrompt(
