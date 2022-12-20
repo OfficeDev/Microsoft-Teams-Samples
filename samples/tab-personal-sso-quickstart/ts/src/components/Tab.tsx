@@ -162,8 +162,8 @@ class Tab extends React.Component<ITabProps, ITabState> {
         <Spinner label='Exchanging SSO access token for Graph access token...'/> : null;
       let consentMessage = (this.state.consentRequired && !this.state.consentProvided) ?
         <Spinner label='Consent required.'/> : null;
-      let avatar = this.state.photo !== "" ?
-        <Avatar image={{src:'this.state.photo'}} size={40}/> : null;
+      // let avatar = this.state.photo !== "" ?
+      //   <Avatar image={{src:'this.state.photo'}} size={40}/> : null;
       let content;
       if(this.state.error){
         content = <h1>ERROR: Please ensure pop-ups are allowed for this website and retry</h1>
@@ -174,7 +174,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
             <h3>{ssoMessage}</h3>
             <h3>{serverExchangeMessage}</h3>          
             <h3>{consentMessage}</h3>
-            <h1>{avatar}</h1>
+            <img src={this.state.photo} width="200" />
           </div>
       }
       return (
