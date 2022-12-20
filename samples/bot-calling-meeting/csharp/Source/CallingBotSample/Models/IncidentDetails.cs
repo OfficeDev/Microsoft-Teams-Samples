@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System;
+using System.Collections.Generic;
 using Microsoft.Graph;
 
 namespace CallingBotSample.Models
@@ -35,6 +37,7 @@ namespace CallingBotSample.Models
         /// <summary>
         /// The end time of the meeting, used in the Adaptive Card with the details shown in the chat
         /// </summary>
+        public DateTime? EndTime { get; set; }
         public DateTime? EndTime { get; set; }
 
         /// <summary>
