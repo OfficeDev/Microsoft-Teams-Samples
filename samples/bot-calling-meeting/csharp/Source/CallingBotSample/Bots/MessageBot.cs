@@ -153,18 +153,18 @@ namespace CallingBotSample.Bots
                             }
                             break;
                         case "transfer":
-                            return await MakeGraphCallThatMightNotBeFound(
-                                () => callService.Transfer(
-                                        callId!,
-                                        new Identity { Id = peoplePicker }),
+                            return await CallService.HandleTeamsCallNotBeingFound(
                                 callId,
+                                (nonNullCallId) => callService.Transfer(
+                                        nonNullCallId,
+                                        new Identity { Id = peoplePicker }),
                                 CreateTaskModuleMessageResponse);
                         case "invite":
-                            return await MakeGraphCallThatMightNotBeFound(
-                                () => callService.InviteParticipant(
-                                        callId!,
+                            return await CallService.HandleTeamsCallNotBeingFound(
+                                        callId,
+                                (nonNullCallId) => callService.InviteParticipant(
+                                        nonNullCallId,
                                         new IdentitySet { User = new Identity { Id = peoplePicker } }),
-                                callId,
                                 CreateTaskModuleMessageResponse);
                         case "createincident":
                             if (moduleSubmitData?.IncidentName != null)
@@ -195,15 +195,15 @@ namespace CallingBotSample.Bots
             switch (input)
             {
                 case "playrecordprompt":
-                    await MakeGraphCallThatMightNotBeFound(
-                        () => callService.Record(callId!, audioRecordingConstants.PleaseRecordYourMessage),
+                    await CallService.HandleTeamsCallNotBeingFound(
                         callId,
+                        (nonNullCallId) => callService.Record(nonNullCallId, audioRecordingConstants.PleaseRecordYourMessage),
                         (message) => UpdateActivityAsync(message, turnContext, cancellationToken));
                     break;
                 case "hangup":
-                    await MakeGraphCallThatMightNotBeFound(
-                        () => callService.HangUp(callId!),
+                    await CallService.HandleTeamsCallNotBeingFound(
                         callId,
+                        (nonNullCallId) => callService.HangUp(nonNullCallId),
                         (message) => UpdateActivityAsync(message, turnContext, cancellationToken));
                     break;
                 case "joinscheduledmeeting":
@@ -227,42 +227,6 @@ namespace CallingBotSample.Bots
                             adaptiveCardFactory.CreateWelcomeCard(turnContext.Activity.ChannelData["meeting"] != null)), cancellationToken);
                     break;
             }
-        }
-
-        /// <summary>
-        /// Wrapper around Graph calls. Handles cases where a call is not found.
-        /// This might happen when an API call is made using a CallId that has already ended
-        /// </summary>
-        /// <typeparam name="TResult">Return value <paramref name="errorHandler"/></typeparam>
-        /// <param name="function">Function to call</param>
-        /// <param name="callId">Call's id</param>
-        /// <param name="errorHandler">Handler for when there is an error</param>
-        /// <returns>A Task, except when there is an error when <typeparamref name="TResult"/> will be returned</returns>
-        private async Task<TResult> MakeGraphCallThatMightNotBeFound<TResult>(Func<Task> function, string? callId, Func<string, Task<TResult>> errorHandler)
-        {
-            if (callId == null)
-            {
-                // Without the Meeting ID we are unable to play the prompt
-                return await errorHandler("Meeting ID not found, please use the 'Create call' button to create the call.");
-            }
-
-            try
-            {
-                await function();
-            }
-            catch (ServiceException ex)
-            {
-                if (ex.StatusCode != HttpStatusCode.NotFound)
-                {
-                    // If it's not a NotFound error please ignore
-                    throw ex;
-                }
-
-                logger.LogError("Call not found. Return error");
-                return await errorHandler("That action failed. Unable to find call");
-            }
-
-            return default;
         }
 
         private async Task<Call> JoinScheduledMeeting(ITurnContext turnContext, CancellationToken cancellationToken)
@@ -373,12 +337,11 @@ namespace CallingBotSample.Bots
             };
         }
 
-        private async Task<bool> UpdateActivityAsync(string responseText, ITurnContext turnContext, CancellationToken cancellationToken)
+        private async Task UpdateActivityAsync(string responseText, ITurnContext turnContext, CancellationToken cancellationToken)
         {
             var updatedActivity = MessageFactory.Text(responseText);
             updatedActivity.Id = turnContext.Activity.ReplyToId;
             await turnContext.UpdateActivityAsync(updatedActivity, cancellationToken);
-            return true;
         }
     }
 }
