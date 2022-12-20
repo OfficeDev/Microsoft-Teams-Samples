@@ -21,8 +21,9 @@ This sample illustrates how to implement [Localization for Microsoft Teams apps]
 ![Preview Image](Images/Preview.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
-Here is the sample which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant; [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading).).
-App Localization Manifest[View](/demo%20manifest/app-localization.zip)
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant; [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading).).
+
+[App Localization Manifest](/demo%20manifest/app-localization.zip)
 
 ## Prerequisites
 
@@ -95,4 +96,3 @@ To change the language in Microsoft Teams, please click your profile picture at 
 ## Further reading
 
 - [Localize your app](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/apps-localization)
-- [Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)
