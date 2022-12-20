@@ -4,7 +4,6 @@
 // </copyright>
 
 import React, { useEffect } from "react";
-import * as microsoftTeams from "@microsoft/teams-js";
 
 // Default browser page from where content can directly shared to meeting.
 const ShareToMeeting = props => {
