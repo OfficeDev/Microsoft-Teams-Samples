@@ -38,7 +38,6 @@ namespace CallingBotSample.Models
         /// The end time of the meeting, used in the Adaptive Card with the details shown in the chat
         /// </summary>
         public DateTime? EndTime { get; set; }
-        public DateTime? EndTime { get; set; }
 
         /// <summary>
         /// Meeting participants, used to ensure the participants are invited to the call
