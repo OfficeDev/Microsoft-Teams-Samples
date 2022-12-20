@@ -17,20 +17,20 @@ const ShareToMeeting = props => {
 
     return (
         <>
-		<div class="surface">
-        <h3 id="tabheader"> Share to Meeting Page</h3>
-        <img id="reportimg" src="/report.png" width="500" height="425" />
-		<div
-                class="teams-share-in-meeting-button"
-                data-href="<Application-Base-URL>"
-                data-app-id="<Application-ID>"
-                data-entity-name="meeting-test-app"
-				data-button-type="medium"
-				data-icon-px-size="160"
-                data-entity-description="meeting test page to showcase the use of share to meeting functionality"
-            >
-            </div>
-		</div>
+		    <div class="surface">
+                <h3 id="tabheader"> Share to Meeting Page</h3>
+                <img id="reportimg" src="/report.png" width="500" height="425" />
+		        <div
+                        class="teams-share-in-meeting-button"
+                        data-href="<Application-Base-URL>"
+                        data-app-id="<Application-ID>"
+                        data-entity-name="meeting-test-app"
+				        data-button-type="medium"
+				        data-icon-px-size="160"
+                        data-entity-description="meeting test page to showcase the use of share to meeting functionality"
+                    >
+                </div>
+		    </div>
 		</>
     );
 };
