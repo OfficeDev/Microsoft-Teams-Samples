@@ -19,6 +19,7 @@ using Microsoft.Bot.Schema.Teams;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Graph;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using MeetingInfo = Microsoft.Graph.MeetingInfo;
 
@@ -91,18 +92,22 @@ namespace CallingBotSample.Bots
 
             switch (fetchData?.Action)
             {
+                // Opens a module with a people picker where users can be selected. Later those user will be used to create a call
                 case "createcall":
-                    taskInfo.Card = adaptiveCardFactory.CreatePeoplePickerCard("Choose who to create a call with:", "Create", null, isMultiSelect: true);
+                    taskInfo.Card = adaptiveCardFactory.CreatePeoplePickerCard("Choose who to create a call with:", "Create", callId: null, isMultiSelect: true);
                     taskInfo.Title = "Create call";
                     break;
+                // Opens a module with a people picker where a user can be selected to transfer the current call to
                 case "transfercall":
                     taskInfo.Card = adaptiveCardFactory.CreatePeoplePickerCard("Choose who to transfer the call to:", "Transfer", fetchData?.CallId);
                     taskInfo.Title = "Transfer call";
                     break;
+                // Opens a module with a people picker where a user can be selected to invite a participant to the current call
                 case "inviteparticipant":
                     taskInfo.Card = adaptiveCardFactory.CreatePeoplePickerCard("Choose who to invite to the call:", "Invite", fetchData?.CallId);
                     taskInfo.Title = "Select the user to invite";
                     break;
+                // Opens a modules with a form to create an incident. This includes a incident title, and those who should be on the call.
                 case "openincidenttask":
                     taskInfo.Card = adaptiveCardFactory.CreateIncidentCard();
                     taskInfo.Title = "Create incident";
@@ -193,13 +198,13 @@ namespace CallingBotSample.Bots
                     await MakeGraphCallThatMightNotBeFound(
                         () => callService.Record(callId!, audioRecordingConstants.PleaseRecordYourMessage),
                         callId,
-                        (message) => SendActivityResponse(message, turnContext, cancellationToken));
+                        (message) => UpdateActivityAsync(message, turnContext, cancellationToken));
                     break;
                 case "hangup":
                     await MakeGraphCallThatMightNotBeFound(
                         () => callService.HangUp(callId!),
                         callId,
-                        (message) => SendActivityResponse(message, turnContext, cancellationToken));
+                        (message) => UpdateActivityAsync(message, turnContext, cancellationToken));
                     break;
                 case "joinscheduledmeeting":
                     if (turnContext.Activity.ChannelData["meeting"] != null)
@@ -224,12 +229,20 @@ namespace CallingBotSample.Bots
             }
         }
 
+        /// <summary>
+        /// Wrapper around Graph calls. Handles cases where a call is not found.
+        /// This might happen when an API call is made using a CallId that has already ended
+        /// </summary>
+        /// <typeparam name="TResult">Return value <paramref name="errorHandler"/></typeparam>
+        /// <param name="function">Function to call</param>
+        /// <param name="callId">Call's id</param>
+        /// <param name="errorHandler">Handler for when there is an error</param>
+        /// <returns>A Task, except when there is an error when <typeparamref name="TResult"/> will be returned</returns>
         private async Task<TResult> MakeGraphCallThatMightNotBeFound<TResult>(Func<Task> function, string? callId, Func<string, Task<TResult>> errorHandler)
         {
             if (callId == null)
             {
                 // Without the Meeting ID we are unable to play the prompt
-                //await turnContext.SendActivityAsync("Meeting ID not found, please use the 'Create call' button to create the call.");
                 return await errorHandler("Meeting ID not found, please use the 'Create call' button to create the call.");
             }
 
@@ -256,17 +269,26 @@ namespace CallingBotSample.Bots
         {
             var users = await TeamsInfo.GetPagedMembersAsync(turnContext, cancellationToken: cancellationToken);
 
+            var organiser = new Identity
+            {
+                // This needs to be the organiser of the meeting, so you can't use the activity invoker
+                Id = users.Members[0].AadObjectId,
+            };
+
+            var channelDataTenant = JObject.Parse(JsonConvert.SerializeObject(turnContext.Activity.ChannelData)).SelectToken("tenant");
+            organiser.SetTenantId(channelDataTenant["id"].ToString());
+
             return await callService.Create(
-                new ChatInfo { ThreadId = turnContext.Activity.Conversation.Id },
+                new ChatInfo {
+                    ThreadId = turnContext.Activity.Conversation.Id,
+                    // NOTE: If you don't provide a Message Id, users will not be able to join the call the bot creates.
+                    MessageId = "0"
+                },
                 new OrganizerMeetingInfo
                 {
                     Organizer = new IdentitySet
                     {
-                        User = new Identity
-                        {
-                            Id = users.Members[0].AadObjectId,
-                            AdditionalData = new Dictionary<string, object> { { "tenantId", azureAdOptions.TenantId } }
-                        },
+                        User = organiser
                     },
                 });
         }
@@ -323,16 +345,11 @@ namespace CallingBotSample.Bots
         {
             var newReference = new ConversationReference
             {
-                Bot = new ChannelAccount
-                {
-                    Id = azureAdOptions.ClientId
-                },
                 Conversation = new ConversationAccount
                 {
                     Id = conversationId
                 },
-                ServiceUrl = turnContext.Activity.ServiceUrl,
-                ChannelId = turnContext.Activity.ChannelId,
+                ServiceUrl = turnContext.Activity.ServiceUrl
             };
 
             await (turnContext.Adapter).ContinueConversationAsync(
@@ -356,7 +373,7 @@ namespace CallingBotSample.Bots
             };
         }
 
-        private async Task<bool> SendActivityResponse(string responseText, ITurnContext turnContext, CancellationToken cancellationToken)
+        private async Task<bool> UpdateActivityAsync(string responseText, ITurnContext turnContext, CancellationToken cancellationToken)
         {
             var updatedActivity = MessageFactory.Text(responseText);
             updatedActivity.Id = turnContext.Activity.ReplyToId;
