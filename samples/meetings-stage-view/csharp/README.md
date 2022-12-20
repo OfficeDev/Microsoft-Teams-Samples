@@ -109,9 +109,9 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 
 6) Navigate to `samples/meetings-stage-view/csharp/AppInMeeting/ClientApp/src/components/share-to-meeting.jsx`
 
-7) On line 25, replace `<Application-Base-URL>` with your application's base url whrre app is running. E.g. if you are using ngrok it would be something like `https://1234.ngrok.io`.
+7) On line 24, replace `<Application-Base-URL>` with your application's base url whrre app is running. E.g. if you are using ngrok it would be something like `https://1234.ngrok.io`.
 
-8) On line 26, replace `<<Application-ID>>` with `Id` obtained in step 3.
+8) On line 25, replace `<<Application-ID>>` with `Id` obtained in step 3.
 
 9) When the app is running, the home page will contain a `share to teams` button. Clicking it will share the page content directly to meeting. (Make sure the app's base url is added in manifest's valid domains section and app is published to store).
 
