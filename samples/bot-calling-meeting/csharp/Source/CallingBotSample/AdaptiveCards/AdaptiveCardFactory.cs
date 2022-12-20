@@ -11,8 +11,10 @@ namespace CallingBotSample.AdaptiveCards
 {
     public class AdaptiveCardFactory : IAdaptiveCardFactory
     {
-        // Date Time must be in RFC 3389 format https://learn.microsoft.com/en-us/adaptive-cards/authoring-cards/text-features#datetime-function-rules
-        public const string DATE_TIME_STRING_FORMAT = "yyyy-MM-dd'T'HH:mm:ssK";
+        /// <summary>
+        /// Date Time must be in RFC 3389 format https://learn.microsoft.com/en-us/adaptive-cards/authoring-cards/text-features#datetime-function-rules
+        /// </summary>
+        public const string DateTimeStringFormat = "yyyy-MM-dd'T'HH:mm:ssK";
 
         /// <inheritdoc />
         public Attachment CreateWelcomeCard(bool showJoinMeetingButton)
@@ -37,11 +39,12 @@ namespace CallingBotSample.AdaptiveCards
         {
             var template = GetCardTemplate("IncidentMeetingActionsCard.json");
 
-            var serializedJson = template.Expand(new {
+            var serializedJson = template.Expand(new
+            {
                 title,
                 callId,
-                startTime = startTime.ToString(DATE_TIME_STRING_FORMAT),
-                endTime = endTime?.ToString(DATE_TIME_STRING_FORMAT) ?? string.Empty
+                startTime = startTime.ToString(DateTimeStringFormat),
+                endTime = endTime?.ToString(DateTimeStringFormat) ?? string.Empty
             });
             return CreateAttachment(serializedJson);
         }
@@ -60,7 +63,8 @@ namespace CallingBotSample.AdaptiveCards
         {
             var template = GetCardTemplate("PeoplePicker.json");
 
-            var serializedJson = template.Expand(new {
+            var serializedJson = template.Expand(new
+            {
                 choiceLabel,
                 action,
                 callId = callId ?? string.Empty,

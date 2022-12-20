@@ -164,7 +164,7 @@ namespace CallingBotSample.Bots
                                         callId,
                                 (nonNullCallId) => callService.InviteParticipant(
                                         nonNullCallId,
-                                        new IdentitySet { User = new Identity { Id = peoplePicker } }),
+                                        new[] { new IdentitySet { User = new Identity { Id = peoplePicker } } }),
                                 CreateTaskModuleMessageResponse);
                         case "createincident":
                             if (moduleSubmitData?.IncidentName != null)
@@ -231,19 +231,14 @@ namespace CallingBotSample.Bots
 
         private async Task<Call> JoinScheduledMeeting(ITurnContext turnContext, CancellationToken cancellationToken)
         {
-            var users = await TeamsInfo.GetPagedMembersAsync(turnContext, cancellationToken: cancellationToken);
-
-            var organiser = new Identity
-            {
-                // This needs to be the organiser of the meeting, so you can't use the activity invoker
-                Id = users.Members[0].AadObjectId,
-            };
+            var organiser = await GetMeetingOrganiser(turnContext, cancellationToken);
 
             var channelDataTenant = JObject.Parse(JsonConvert.SerializeObject(turnContext.Activity.ChannelData)).SelectToken("tenant");
             organiser.SetTenantId(channelDataTenant["id"].ToString());
 
             return await callService.Create(
-                new ChatInfo {
+                new ChatInfo
+                {
                     ThreadId = turnContext.Activity.Conversation.Id,
                     // NOTE: If you don't provide a Message Id, users will not be able to join the call the bot creates.
                     MessageId = "0"
@@ -255,6 +250,27 @@ namespace CallingBotSample.Bots
                         User = organiser
                     },
                 });
+        }
+
+        private async Task<Identity?> GetMeetingOrganiser(ITurnContext turnContext, CancellationToken cancellationToken)
+        {
+            var users = await TeamsInfo.GetPagedMembersAsync(turnContext, cancellationToken: cancellationToken);
+
+            foreach(TeamsChannelAccount user in users.Members)
+            {
+                TeamsMeetingParticipant participant = await TeamsInfo.GetMeetingParticipantAsync(turnContext, participantId: user.AadObjectId).ConfigureAwait(false);
+
+                if (participant.Meeting.Role == "Organiser")
+                {
+                    return new Identity
+                    {
+                        // This needs to be the organiser of the meeting, so you can't use the activity invoker
+                        Id = user.AadObjectId,
+                    };
+                }
+            }
+
+            return null;
         }
 
         private async Task<TaskModuleResponse> CreateIncidentCall(ITurnContext turnContext, string incidentSubject, string[] peoplePickerAadIds, CancellationToken cancellationToken)

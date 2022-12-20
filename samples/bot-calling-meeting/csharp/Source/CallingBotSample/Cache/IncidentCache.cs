@@ -12,7 +12,7 @@ namespace CallingBotSample.Cache
     {
         private readonly IMemoryCache cache;
         private readonly ILogger<IncidentCache> logger;
-        private const string INCIDENT_KEY = "incident:";
+        private const string IncidentKey = "incident:";
 
         public IncidentCache(IMemoryCache cache, ILogger<IncidentCache> logger)
         {
@@ -23,13 +23,13 @@ namespace CallingBotSample.Cache
         /// <inheritdoc />
         public bool TryGetValue(string callId, out IncidentDetails incidentDetails)
         {
-            return cache.TryGetValue<IncidentDetails>(INCIDENT_KEY + callId, out incidentDetails);
+            return cache.TryGetValue<IncidentDetails>(IncidentKey + callId, out incidentDetails);
         }
 
         /// <inheritdoc />
         public void Set(string callId, IncidentDetails incidentDetails)
         {
-            cache.Set(INCIDENT_KEY + callId, incidentDetails, new MemoryCacheEntryOptions
+            cache.Set(IncidentKey + callId, incidentDetails, new MemoryCacheEntryOptions
             {
                 // This 1 hour cache is sufficient for this sample.
                 // If you are replicating this code, you might want to consider an alternative value which takes into account

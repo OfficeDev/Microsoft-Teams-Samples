@@ -12,8 +12,8 @@ namespace CallingBotSample.Cache
         private readonly IMemoryCache cache;
         private readonly ILogger<CallCache> logger;
 
-        private const string AT_LEAST_ONE_USER_JOINED = "atLeastOneUserJoined:";
-        private const string IS_ESTABLISHED_KEY = "established:";
+        private const string AtLeastOneUserJoinedKey = "atLeastOneUserJoined:";
+        private const string IsEstablishedKey = "established:";
 
         public CallCache(IMemoryCache cache, ILogger<CallCache> logger)
         {
@@ -24,13 +24,13 @@ namespace CallingBotSample.Cache
         /// <inheritdoc />
         public bool GetIsEstablished(string callId)
         {
-            return cache.Get<bool>(IS_ESTABLISHED_KEY + callId);
+            return cache.Get<bool>(IsEstablishedKey + callId);
         }
 
         /// <inheritdoc />
         public void SetIsEstablished(string callId, bool isEstablished = true)
         {
-            cache.Set(IS_ESTABLISHED_KEY + callId, isEstablished, new MemoryCacheEntryOptions
+            cache.Set(IsEstablishedKey + callId, isEstablished, new MemoryCacheEntryOptions
             {
                 AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30)
             });
@@ -39,13 +39,13 @@ namespace CallingBotSample.Cache
         /// <inheritdoc />
         public bool GetAtLeastOneUserJoined(string callId)
         {
-            return cache.Get<bool>(AT_LEAST_ONE_USER_JOINED + callId);
+            return cache.Get<bool>(AtLeastOneUserJoinedKey + callId);
         }
 
         /// <inheritdoc />
         public void SetAtLeastOneUserJoined(string callId, bool hasAtLeastOneUserJoined = true)
         {
-            cache.Set(AT_LEAST_ONE_USER_JOINED + callId, hasAtLeastOneUserJoined, new MemoryCacheEntryOptions
+            cache.Set(AtLeastOneUserJoinedKey + callId, hasAtLeastOneUserJoined, new MemoryCacheEntryOptions
             {
                 // This 1 hour cache is sufficient for this sample.
                 // If you are replicating this code, you might want to consider an alternative value which takes into account

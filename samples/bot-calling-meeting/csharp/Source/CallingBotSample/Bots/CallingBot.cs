@@ -124,7 +124,7 @@ namespace CallingBotSample.Bots
                 // If the notification is a newly created, incoming call, answer it
                 if (args.ChangeType == ChangeType.Created && call.State == CallState.Incoming)
                 {
-                    await callService.Answer(callId, audioRecordingConstants.Speech, audioRecordingConstants.PleaseRecordYourMessage);
+                    await callService.Answer(callId, new[] { audioRecordingConstants.Speech, audioRecordingConstants.PleaseRecordYourMessage });
                 }
                 // If the notification is established (answered), fire a recording prompt
                 else if (
@@ -189,13 +189,15 @@ namespace CallingBotSample.Bots
 
                 await callService.PlayPrompt(
                     callId,
-                    new MediaInfo
+                    new[]
                     {
-                        // This URL needs to be publicly accessible, so Microsoft Teams can play the audio.
-                        // In a production environment, you might want to consider a better location than
-                        // this server's content directory.
-                        Uri = new Uri(botOptions.BotBaseUrl, recordingLocation).ToString(),
-                        ResourceId = Guid.NewGuid().ToString(),
+                        new MediaInfo {
+                            // This URL needs to be publicly accessible, so Microsoft Teams can play the audio.
+                            // In a production environment, you might want to consider a better location than
+                            // this server's content directory.
+                            Uri = new Uri(botOptions.BotBaseUrl, recordingLocation).ToString(),
+                            ResourceId = Guid.NewGuid().ToString(),
+                        }
                     });
             }
             // If the notification is a play prompt operation, we should check if the prompt is temporary and delete the file
@@ -250,11 +252,13 @@ namespace CallingBotSample.Bots
                             {
                                 await callService.PlayPrompt(
                                     callId,
-                                    new MediaInfo
+                                    new[]
                                     {
-                                        Uri = new Uri(botOptions.BotBaseUrl, textToSpeechRecordingLocation).ToString(),
-                                        ResourceId = Guid.NewGuid().ToString(),
-                                    });
+                                        new MediaInfo
+                                        {
+                                            Uri = new Uri(botOptions.BotBaseUrl, textToSpeechRecordingLocation).ToString(),
+                                            ResourceId = Guid.NewGuid().ToString(),
+                                    } });
                             }
                         }
                         else

@@ -15,7 +15,7 @@ namespace CallingBotSample.Services.MicrosoftGraph
         /// <param name="id">The ID of the call to answer</param>
         /// <param name="preFetchMedia">Media that Teams will prefetch.</param>
         /// <returns>Task</returns>
-        Task Answer(string id, params MediaInfo[]? preFetchMedia);
+        Task Answer(string id, MediaInfo[]? preFetchMedia);
 
         /// <summary>
         /// Create a new call
@@ -52,7 +52,7 @@ namespace CallingBotSample.Services.MicrosoftGraph
         /// <param name="id">The ID of the call</param>
         /// <param name="participants">The participants to invite</param>
         /// <returns>Task</returns>
-        Task InviteParticipant(string id, params IdentitySet[] participants);
+        Task InviteParticipant(string id, IdentitySet[] participants);
 
         /// <summary>
         /// Plays a media prompt in a call
@@ -60,7 +60,7 @@ namespace CallingBotSample.Services.MicrosoftGraph
         /// <param name="id">The ID of the call where you want to play the prompt</param>
         /// <param name="mediaPrompts">The Media to play</param>
         /// <returns>The Play Prompt Operation</returns>
-        Task<PlayPromptOperation> PlayPrompt(string id, params MediaInfo[] mediaPrompts);
+        Task<PlayPromptOperation> PlayPrompt(string id, MediaInfo[] mediaPrompts);
 
         /// <summary>
         /// Play the provided prompt in a call, and then record what is said.

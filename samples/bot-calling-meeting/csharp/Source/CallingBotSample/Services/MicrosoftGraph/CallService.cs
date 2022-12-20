@@ -45,7 +45,7 @@ namespace CallingBotSample.Services.MicrosoftGraph
         }
 
         /// <inheritdoc/>
-        public Task<Call> Create(params Identity[] users)
+        public Task<Call> Create(Identity[] users)
         {
             var call = new Call
             {
@@ -114,7 +114,7 @@ namespace CallingBotSample.Services.MicrosoftGraph
         }
 
         /// <inheritdoc/>
-        public Task InviteParticipant(string id, params IdentitySet[] participants)
+        public Task InviteParticipant(string id, IdentitySet[] participants)
         {
             var invitationParticipants = participants.Select(participant =>
                 new InvitationParticipantInfo
@@ -129,7 +129,7 @@ namespace CallingBotSample.Services.MicrosoftGraph
         }
 
         /// <inheritdoc />
-        public Task<PlayPromptOperation> PlayPrompt(string id, params MediaInfo[] mediaPrompts)
+        public Task<PlayPromptOperation> PlayPrompt(string id, MediaInfo[] mediaPrompts)
         {
             return graphServiceClient.Communications.Calls[id]
                 .PlayPrompt(
