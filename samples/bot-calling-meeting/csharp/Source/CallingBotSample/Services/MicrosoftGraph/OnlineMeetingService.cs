@@ -25,7 +25,7 @@ namespace CallingBotSample.Services.MicrosoftGraph
         }
 
         /// <inheritdoc/>
-        public Task<OnlineMeeting> Create(string subject, params string[] participantsIds)
+        public Task<OnlineMeeting> Create(string subject, IEnumerable<string> participantsIds)
         {
             var onlineMeeting = new OnlineMeeting
             {
