@@ -3,7 +3,9 @@
 
 import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Card, Flex, Text, Button, CardHeader, CardBody } from '@fluentui/react-northstar'
+import { Text, Button } from '@fluentui/react-components'
+import { Card, CardPreview, CardHeader, CardFooter } from "@fluentui/react-components/unstable"
+import { CardBody } from 'reactstrap';
 
 /**
  * The 'PeoplePicker' component for 
@@ -32,18 +34,16 @@ const PeoplePicker = () => {
   return (
     <>
       {/* Card for People Picker */}
-      <Card>
-        <CardHeader>
-          <Text content="People Picker (Mobile Only)" weight="bold" />
-        </CardHeader>
+      <Card>       
+          <Text weight="bold">People Picker (Mobile Only)</Text>        
         <CardBody>
-          <Flex column gap="gap.small">
-            <Text content="SDK used: " weight="semibold" />
-            <Text content="microsoftTeams" />
-            <Text content="Method: " weight="semibold" />
-            <Text content="teams.people" />
-            <Button content="People Picker" onClick={selectPeople} />
-          </Flex>
+          <div className='flex divcss'>
+            <Text weight="semibold">SDK used:</Text>
+            <Text>microsoftTeams</Text>
+            <Text weight="semibold" >Method</Text>
+            <Text>teams.people</Text>
+            <Button onClick={selectPeople} > People Picker</Button>
+          </div>
           <Text>Selected {selectedPeople.length} people</Text>
           {selectedPeople.length !== 0 && selectedPeople.map((item: microsoftTeams.people.PeoplePickerResult, index) => {
             return (

@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 import { useEffect, useState } from 'react';
-import { Grid, Segment } from '@fluentui/react-northstar'
 import ScanBarCode from './ScanBarCode';
 import GetGeoLocation from './GetGeoLocation';
 import CaptureImage from './CaptureImage';
@@ -15,7 +14,9 @@ import CaptureVideoDesktop from './CaptureVideoDesktop';
 import GetLocationDesktop from './GetLocationDesktop';
 import GetNotificationDesktop from './GetNotificationDesktop';
 import * as microsoftTeams from "@microsoft/teams-js";
-
+import Segment from 'react-segment-analytics';
+//import Grid from 'fluentui-react-grid';
+import Grid from "react-grid"
 /**
  * The 'Tab' contains all the components
  * of your app.
@@ -36,62 +37,93 @@ const Tab = () => {
       });
     });
   })
-
+  const styles = {
+    columns: {
+      float: 'left',
+      width: '33.33%',
+      padding: '10px',
+      height: '300px',
+    },
+  } as const;
+  
+  const rowq = {
+    rowd: {
+      width:'100%',
+      display: 'table', 
+    },
+  } as const;
   return (
-    <Grid columns={isWeb ? 3 : 1}>
-      {!isWeb &&
-        <>
-          <Segment
-            /* Component to capture image(s) */
-            content={<CaptureImage />}
-          />
-          <Segment
-            /* Component to capture audio */
-            content={<CaptureAudio />}
-          />
-          <Segment
-            /* Component to capture video */
-            content={<CaptureVideo />}
-          />
-          <Segment
-            /* Component to scan barcode */
-            content={<ScanBarCode />}
-          />
-          <Segment
-            /* Component to show selected people */
-            content={<PeoplePicker />}
-          />
-          <Segment
-            /* Component to Get/Show geo-Location */
-            content={<GetGeoLocation />}
-          />
-        </>
-      }
-      {isWeb &&
+   
+    <div style={rowq.rowd} >
+    {!isWeb &&
       <>
+      <div className="Grid"> 
         <Segment
-          /* Component to capture image in browser */
-          content={<CaptureImageDesktop />}
+          /* Component to capture image(s) */
+          children={<CaptureImage />} writeKey={''}
         />
         <Segment
-          /* Component to capture audio in browser */
-          content={<CaptureAudioDesktop />}
+          /* Component to Get/Show geo-Location */
+          children={<GetGeoLocation />} writeKey={''}
         />
-        <Segment
-          /* Component to capture video in browser */
-          content={<CaptureVideoDesktop />}
+         <Segment 
+          /* Component to capture audio */
+          children={<CaptureAudio />} writeKey={''}
         />
-        <Segment
-          /* Component to Get/Show geo-Location in browser */
-          content={<GetLocationDesktop />}
+        
+      </div>
+      <div>
+         <Segment
+          /* Component to scan barcode */
+          children={<ScanBarCode />} writeKey={''}
         />
-        <Segment
-          /* Component to Get notification in browser */
-          content={<GetNotificationDesktop />}
+         <Segment
+          /* Component to capture video */
+          children={<CaptureVideo />} writeKey={''}
         />
-        </>
-      }
-    </Grid>
+         <Segment
+          /* Component to show selected people */
+          children={<PeoplePicker />} writeKey={''}
+        />
+      </div>
+      </>
+    }
+    {isWeb &&
+    <>
+    <div className='Grid'>
+    <Segment 
+        /* Component to capture image in browser */
+        children={<CaptureImageDesktop />} writeKey={''}
+      />
+      <Segment
+        /* Component to Get/Show geo-Location in browser */
+        children={<GetLocationDesktop />} writeKey={''}
+      />
+     
+    </div>
+      <div className='Grid'>
+      <Segment 
+        /* Component to capture audio in browser */
+        children={<CaptureAudioDesktop />} writeKey={''}
+      />
+      <Segment 
+        /* Component to Get notification in browser */
+        children={<GetNotificationDesktop />} writeKey={''}
+      />
+     
+      
+      </div>
+      <div className='Grid'>
+      <Segment 
+        /* Component to capture video in browser */
+        children={<CaptureVideoDesktop />} writeKey={''}
+       
+      />
+      </div>
+      
+      </>
+    }
+  </div>
   );
 }
 

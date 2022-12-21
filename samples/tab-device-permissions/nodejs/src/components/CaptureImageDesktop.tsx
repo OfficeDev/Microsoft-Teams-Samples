@@ -3,8 +3,10 @@
 
 import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Card, Flex, Text, Button, CardHeader, CardBody, Image } from '@fluentui/react-northstar'
+import { Text, Button, Image } from '@fluentui/react-components'
 import CheckAndAlertForCameraPermission from '../NavigatorPermission';
+import { Card, CardPreview, CardHeader, CardFooter } from "@fluentui/react-components/unstable";
+import { CardBody } from 'reactstrap';
 /**
  * The 'CaptureImageDesktop' component
  * of your app.
@@ -38,22 +40,21 @@ const CaptureImageDesktop = () => {
         <>
             {/* Card for capturing single image */}
             <Card>
-                <CardHeader>
-                    <Text content="Capture Image" weight="bold" />
-                </CardHeader>
+              <Text weight='bold' as="h1">Capture Image</Text>
                 <CardBody>
-                    <Flex column gap="gap.small">
-                        <Text content="Checks for permission before capturing image." />
-                        <Text content="SDK used: " weight="semibold"/>
-                        <Text content="navigator, microsoftTeams" />
-                        <Text content="Method: " weight="semibold"/>
-                        <Text content="navigator.mediaDevices.getUserMedia, teams.getmedia" />
-                        <Button content="Capture image" onClick={captureMedia} />
+                    <div className='flex divcss'>
+                    <Text>Checks for permission before capturing image.</Text>
+
+                        <Text weight='medium'>SDK used: </Text>
+                        <Text>navigator, microsoftTeams </Text>
+                        <Text weight='medium'>Method: </Text>
+                        <Text>navigator.mediaDevices.getUserMedia, teams.getmedia</Text>                   
+                        <Button onClick={captureMedia}>Capture image</Button>
                         <Image
-                            fluid
+                            
                             src={capturedImage}
                         />
-                    </Flex>
+                    </div>
                 </CardBody>
             </Card>
         </>

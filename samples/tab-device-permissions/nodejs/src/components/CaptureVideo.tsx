@@ -3,7 +3,9 @@
 
 import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Card, Flex, Text, Button, CardHeader, CardBody, Video } from '@fluentui/react-northstar'
+import { Text, Button } from '@fluentui/react-components'
+import { Card, CardPreview, CardHeader, CardFooter } from "@fluentui/react-components/unstable"
+import { CardBody } from 'reactstrap';
 
 // The 'CaptureVideo' component of your app.
 const CaptureVideo = () => {
@@ -73,19 +75,19 @@ const CaptureVideo = () => {
       {/* Card for showing Video */}
       <Card>
         <CardHeader>
-          <Text content="Media" weight="bold" />
+          <Text weight="bold">Media</Text>
         </CardHeader>
         <CardBody>
-          <Flex column gap="gap.small">
-            <Text content="Checks for permission to use media input" />
-            <Text content="SDK used: " weight="semibold" />
-            <Text content="navigator, microsoftTeams" />
-            <Text content="Method: " weight="semibold" />
-            <Text content="navigator.mediaDevices.getUserMedia, teams.getmedia" />
-            <Button content="Capture video" onClick={captureVideo} />
-          </Flex>
-          {video !== '' && <Video src={video} variables={{ height: '300px', width: '100%', }} />}
-        </CardBody>
+          <div className='flex divcss'>
+            <Text>Checks for permission to use media input</Text>
+            <Text weight='medium'>SDK used: </Text>
+            <Text weight='medium'>navigator, microsoftTeams</Text>
+            <Text>Method</Text>
+            <Text>navigator.mediaDevices.getUserMedia, teams.getmedia</Text>
+            <Button onClick={captureVideo}>Capture video</Button>
+          </div>          
+          <video controls src={video} height={'300px'} width={'width: 100%'}  />          
+       </CardBody>
       </Card>
     </>
   );

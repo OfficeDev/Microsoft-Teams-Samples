@@ -3,8 +3,9 @@
 
 import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Card, Flex, Text, Button, CardHeader, CardBody } from '@fluentui/react-northstar'
-
+import { Text, Button} from '@fluentui/react-components'
+import { Card, CardPreview, CardHeader, CardFooter } from "@fluentui/react-components/unstable"
+import { CardBody } from 'reactstrap';
 /**
  * The 'GetGeoLocation' component
  * of your app.
@@ -15,16 +16,24 @@ const GetGeoLocation = () => {
     microsoftTeams.app.initialize()
   })
 
-  // Method to get current user's geo location 
+  // Method to get current user's geo location
+  // If the value of allowChooseLocation is true, then the users can choose any location of their choice.
+  // If the value of allowChooseLocation is false, then the users cannot change their current location.
+  // If the value of showMap is false, the current location is fetched without displaying the map. 
+  // showMap is ignored if allowChooseLocation is set to true.
   function getLocation() {
+
     microsoftTeams.geoLocation.getCurrentLocation().then((location) => {
+      debugger;
       setGeoLocationValue(location)
     }).catch((error) => {
+      debugger;
       console.error(error);
     });
   }
 
   // Method to show geo location for given latitude and longitude values.
+    // Method to show geo location for given latitude and longitude values.
   function showLocation() {
     // Methos to ask for permission and then show current user location
     microsoftTeams.geoLocation.map.showLocation(geoLocationValue).catch((error) => {
@@ -43,21 +52,19 @@ const GetGeoLocation = () => {
   return (
     <>
       {/* Card for Get/Show Geo-Location */}
-      <Card>
-        <CardHeader>
-          <Text content="Get Location" weight="bold" />
-        </CardHeader>
+      <Card>        
+          <Text weight="bold">Get Location</Text>       
         <CardBody>
-          <Flex column gap="gap.small">
-            <Text content="SDK used: " weight="semibold" />
-            <Text content="navigator, microsoftTeams" />
-            <Text content="Method: " weight="semibold" />
-            <Text content="navigator.geolocation.getCurrentPosition, teams.location" />
-            <Button content="Get Location" onClick={getLocation} />
+        <div className='flex divcss'>
+            <Text weight="semibold">SDK used:</Text>
+            <Text>navigator, microsoftTeams</Text>
+            <Text weight="semibold">Method</Text>
+            <Text>navigator.geolocation.getCurrentPosition, teams.location</Text>
+            <Button onClick={getLocation} >Get Location</Button>
             {JSON.stringify(geoLocationValue) !== '{}' &&
-              <Text styles={{ "word-wrap": "break-word" }} content={JSON.stringify(geoLocationValue)}></Text>}
-            <Button content="Show Location" onClick={showLocation} />
-          </Flex>
+              <Text>{geoLocationValue}</Text>}               
+            <Button  onClick={showLocation}>Show Location</Button>
+        </div>
         </CardBody>
       </Card>
     </>
