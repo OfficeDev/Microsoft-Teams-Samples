@@ -48,6 +48,8 @@ namespace CallingBotSample.Services.MicrosoftGraph
                 }
             };
 
+            // To call this API the user (UserIdWithAssignedOnlineMeetingPolicy) must have been granted an application access policy
+            // https://learn.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy
             return graphServiceClient.Users[usersOptions.UserIdWithAssignedOnlineMeetingPolicy].OnlineMeetings
                 .Request()
                 .AddAsync(onlineMeeting);
