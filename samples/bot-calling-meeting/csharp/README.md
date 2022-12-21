@@ -16,13 +16,27 @@ urlFragment: officedev-microsoft-teams-samples-bot-calling-meeting-csharp
 
 ## Summary
 
-Calling and Meeting Bot provides basic functionality like Create Call, Join a call, Transfer/Redirect a call, Join a scheduled meeting and invite the participants by integrating cloud communications API Graph API.
+Calling and Meeting bot integrates [Microsoft Graph Cloud Communications APIs](https://learn.microsoft.com/en-us/graph/api/resources/communications-api-overview?view=graph-rest-1.0) with the Teams' Platform. It runs through scenarios for service hosted media bots.
+
+Some features of this sample includes:
+- Creating a call
+- Answering a call
+- Transferring calls
+- Inviting people to an ongoing call
+- Playing audio in a call
+- Recording audio from a call
+- Join a scheduled meeting as a bot
+- Creating online meetings
+- Speech to text using Cognitive Services
+- Text to speech
+- Sending messages in a meeting that you created
+
 - **Interaction with bot**
-![bot-calling-meeting ](docs/Images/bot-calling-meeting.gif)
+<!-- TODO REPLACE VIDEO ![bot-calling-meeting ](docs/Images/bot-calling-meeting.gif) -->
 ## Frameworks
 
-![drop](https://img.shields.io/badge/.NET&nbsp;Core-3.1-green.svg)
-![drop](https://img.shields.io/badge/Bot&nbsp;Framework-3.0-green.svg)
+![drop](https://img.shields.io/badge/.NET-6-green.svg)
+![drop](https://img.shields.io/badge/Bot&nbsp;Framework-v4-green.svg)
 
 ## Prerequisites
 
@@ -184,27 +198,6 @@ For example `https://contoso.com/teamsapp/callback`
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
-
- ## Running the sample
-
-* Install 'Calling Bot' in Teams.
-![CallingBotInstallation ](docs/Images/CallingBotInstallation.PNG)
-
-* Bot will send adaptive card as mentioned below.
-![WelcomeCard ](docs/Images/WelcomeCard.PNG)
-
-* User can ask Bot to create a call and can join that call.
-![CreateCall ](docs/Images/CreateCall.PNG)
-![CallPlaced ](docs/Images/CallPlaced.PNG)
-![CallJoined ](docs/Images/CallJoined.PNG)
-
-* User can ask Bot to transfer the call.
- ![TransferCall ](docs/Images/TransferCall.PNG)
-
-* User can ask Bot to schedule a meeting and invite the participants
-
-   ![JoinScheduledCall ](docs/Images/JoinScheduledCall.PNG)
-   ![InviteParticipant ](docs/Images/InviteParticipant.PNG)
 
 ## Deploy the bot to Azure
 
