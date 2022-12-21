@@ -129,6 +129,41 @@ The prompt tells the Teams client to download the WAV file from a publicly acces
 After the prompt is played, we receive a notification telling us of it's success. When we receive this we delete the recording file. You should be sure to comply with laws and regulations when it comes to handling recordings. 
 
 
+# Adding a media bot to a scheduled meeting
+When a scheduled meeting exists a media bot can join it by passing in the chat info and meeting organiser. We get these details from the turn context when this user clicks on "Join scheduled meeting". 
+
+When creating the default welcome card we check if the turnContext contains a value for `turnContext.Activity.ChannelData["meeting"]`. If this is not null we show the button to join the meeting.
+
+Using a scheduled meeting, ensures that all users in the meeting has access to the same chat. Which currently can not be guaranteed for the simple calls above.
+
+When joining a scheduled meeting using `chatInfo` and `meetingInfo`, there are a few quirks:
+- You need to include a `messageId` even if it's just `"0"` otherwise the call will be created but it will not be the meeting's call which the attendees can then join.
+- If you set someone other than the organiser as the `organizer.user` the call will not be created correctly. The easiest way to get the meeting organiser is to use [get meeting details API](https://learn.microsoft.com/en-gb/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet#get-real-time-teams-meeting-events-api). This API requires an resource-specific consent permissions (RSC), so if you (like this sample) plan to install the app using a Graph API it is not supported (more on this below) that API won't work. We, instead, used a combination of [GetPagedMembersAsync](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/get-teams-context?tabs=dotnet#fetch-the-roster-or-user-profile) and [GetMeetingParticipantAsync](https://learn.microsoft.com/en-gb/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet#get-participant-api) to get the meeting organiser.
+
+
+## Converting the Speech to Text
+In the simple call we just echo the recording back to the call. In scheduled calls, after the recording is download to our service we pass it to the [Cognitive Services Speech to Text API](https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/index-speech-to-text). If the service is able to transcribe the text we then send the value in a message to the chat using Bot Framework.
+
+This is only possible on scheduled calls as we get the call `threadId` from the Call service, but that is not defined for adhoc calls with the bot.
+
+
+# Creating an online meeting, inviting people to it, and sending messages to the chat.
+[*We have created a Code Tour running through this scenario, it's available at .tours/creating-a-incident-management-app.tour*](/samples/bot-calling-meeting/csharp/.tours/creating-a-incident-management-app.tour)
+
+In our sample, we created an incident call management app. The app, when prompted, will create a meeting, invite people to it, and then send details about the incident to the meeting chat. It also uses text to speech to describe the incident details.
+
+> **Note:** We are using [onlineMeeting](https://learn.microsoft.com/en-us/graph/api/resources/onlinemeeting?view=graph-rest-1.0) to create this meeting. [OnlineMeetings are different to calendar events](https://learn.microsoft.com/en-us/graph/choose-online-meeting-api), if you want the meeting to appear in a user's calendar you may wish to use the Calendar API instead.
+
+The online meetings created with the above API are standalone, and are not associated with any event in a user's calendar. The user id used in this call must be granted [application access policy](https://learn.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy) to be able to complete the request.
+
+After we create the meeting, we [install the teams app to the chat](https://learn.microsoft.com/en-us/graph/api/chat-post-installedapps?view=graph-rest-1.0), this allows us to send bot messages to the chat. We use this to share an adaptive card with the incident details.
+
+> **Note:** Due to using this API we are unable to support meeting details and meeting start and end events. These events are granted using resource-specific consent permissions (RSC) and you are unable to install apps with RSCs using the API.
+
+## Converting text to speech
+As part of this more advanced implementation of a media bot, we use a text to speech (TTS) service to convert a string including the incident name to speech. This audio is then played in the call. We use the [Cognitive Services Text to Speech apis](https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/index-text-to-speech) to convert the text to audio. We then save the audio locally, and get Teams to play the audio using the [play prompt API](https://learn.microsoft.com/en-us/graph/api/call-playprompt?view=graph-rest-1.0&tabs=http).
+
+
 ## In-Call Actions
 
 ### Transfer call
@@ -150,36 +185,9 @@ This simply replays the prompt for the use to record a message. It will kick off
 
 
 ### Hang up
-[Get's the bot to hang up the call](https://learn.microsoft.com/en-us/graph/api/call-delete?view=graph-rest-1.0&tabs=http). 
+[Get's the bot to hang up the call](https://learn.microsoft.com/en-us/graph/api/call-delete?view=graph-rest-1.0&tabs=http).
 
-
-# Adding a media bot to a scheduled meeting
-When a scheduled meeting exists a media bot can join it by passing in the chat info and meeting organiser. We get these details from the turn context when this user clicks on "Join scheduled meeting". 
-
-When creating the default welcome card we check if the turnContext contains a value for `turnContext.Activity.ChannelData["meeting"]`. If this is not null we show the button to join the meeting.
-
-Using a scheduled meeting, ensures that all users in the meeting has access to the same chat. Which currently can not be guaranteed for the simple calls above.
-
-When joining a scheduled meeting using `chatInfo` and `meetingInfo`, there are a few quirks:
-- You need to include a `messageId` even if it's just `"0"` otherwise the call will be created but it will not be the meeting's call which the attendees can then join.
-- If you set someone other than the organiser as the `organizer.user` the call will not be created correctly. The easiest way to get the meeting organiser is to use [get meeting details API](https://learn.microsoft.com/en-gb/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet#get-real-time-teams-meeting-events-api). This API requires an resource-specific consent permissions (RSC), so if you (like this sample) plan to install the app using a Graph API it is not supported (more on this below) that API won't work. We, instead, used a combination of [GetPagedMembersAsync](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/get-teams-context?tabs=dotnet#fetch-the-roster-or-user-profile) and [GetMeetingParticipantAsync](https://learn.microsoft.com/en-gb/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet#get-participant-api) to get the meeting organiser.
-
-
-## Converting the Speech to Text
-In the simple call we just echo the recording back to the call. In scheduled calls, after the recording is download to our service we pass it to the [Cognitive Services Speech to Text API](https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/index-speech-to-text). If the service is able to transcribe the text we then send the value in a message to the chat using Bot Framework.
-
-This is only possible on scheduled calls as we get the call `threadId` from the Call service, but that is not defined for adhoc calls with the bot.
-
-
-# Creating an online meeting, inviting people to it, and sending messages to the chat.
-*TODO: Add code tour and link to it here*
-In our sample, we created an incident call management app. The app, when prompted, will create a meeting, invite people to it, and then send details about the incident to the meeting chat. It also uses text to speech to describe the incident details.
-
-> **Note:** We are using [onlineMeeting](https://learn.microsoft.com/en-us/graph/api/resources/onlinemeeting?view=graph-rest-1.0) to create this meeting. [OnlineMeetings are different to calendar events](https://learn.microsoft.com/en-us/graph/choose-online-meeting-api), if you want the meeting to appear in a user's calendar you may wish to use the Calendar API instead.
-
-After we create the meeting, we [install the teams app to the chat](https://learn.microsoft.com/en-us/graph/api/chat-post-installedapps?view=graph-rest-1.0), this allows us to send bot messages to the chat. We use this to share an adaptive card with the incident details.
-
-> **Note:** Due to using this API we are unable to support meeting details and meeting start and end events. These events are granted using resource-specific consent permissions (RSC) and you are unable to install apps with RSCs using the API.
+When we get a notification saying the number of participants in a call has changed, we check to see if the bot is the last participant remaining. If so, and if a real user has joined at least once (we don't want to create a call and immediately leave), the bot will hang up the call.
 
 
 # Non Teams APIs that we are using

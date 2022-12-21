@@ -1,0 +1,106 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Creating a incident management app",
+  "steps": [
+    {
+      "file": "samples/bot-calling-meeting/csharp/Source/CallingBotSample/Bots/MessageBot.cs",
+      "description": "# Welcome message\r\n\r\nWhen the app is installed in a scope, a Welcome card is sent. This is how users can interact with the Sample app.",
+      "line": 104
+    },
+    {
+      "file": "samples/bot-calling-meeting/csharp/Source/CallingBotSample/Resources/WelcomeCard.json",
+      "description": "#Create incident action\r\n\r\nThe welcome card, includes an action to create an incident.\r\n\r\n\r\n![Activity Card in a chat with a \"Calling Bot\" heading, \"Sample Calling Bot\" text, and three buttons \"Create Call\", \"Create Incident\" and \"Join scheduled meeting\"](./samples/bot-calling-meeting/csharp/docs/Images/welcome-message-scheduled-meeting.png)\r\n",
+      "line": 30
+    },
+    {
+      "file": "samples/bot-calling-meeting/csharp/Source/CallingBotSample/Resources/CreateIncidentCard.json",
+      "description": "# Create incident task module\r\n\r\nWhen a user clicks \"Create incident\", the task module shown to the user contains a text box to allow the user to enter an incident name, and a People Picker to select who should be added to the meeting\r\n\r\n![Task Module with an Adaptive Card that has a subtitle \"Create an incident\", a text box to provide an \"Incident Name\" and a people picker to \"Choose incident attendees\"](./samples/bot-calling-meeting/csharp/docs/Images/create-incident-task-module.png)",
+      "line": 23
+    },
+    {
+      "file": "samples/bot-calling-meeting/csharp/Source/CallingBotSample/Bots/MessageBot.cs",
+      "description": "# Creating an incident\r\n\r\nWhen a user submits the create incident task module, the request ends up in this `CreateIncidentCall` method.",
+      "line": 320
+    },
+    {
+      "file": "samples/bot-calling-meeting/csharp/Source/CallingBotSample/Bots/MessageBot.cs",
+      "description": "# Creating the online meeting\r\n\r\nFirstly, we create an online meeting. This uses the [create onlineMeeting API](https://learn.microsoft.com/en-us/graph/api/application-post-onlinemeetings?view=graph-rest-1.0&tabs=http) to create a meeting that is not associated with an event in a user's calendar. This means the event will not be shown in the user's calendar.\r\n\r\nThe user making the request needs to have been granted an [application access policy](https://learn.microsoft.com/en-us/graph/cloud-communication-online-meeting-application-access-policy) otherwise the request will fail.",
+      "line": 322
+    },
+    {
+      "file": "samples/bot-calling-meeting/csharp/Source/CallingBotSample/Bots/MessageBot.cs",
+      "description": "# Parsing the meeting info\r\n\r\nAfter we create the meeting, we parse the MeetingInfo from the Join URL. We need to get the meeting organiser if we want to join the call as the bot.",
+      "line": 326
+    },
+    {
+      "file": "samples/bot-calling-meeting/csharp/Source/CallingBotSample/Bots/MessageBot.cs",
+      "description": "# Creating the call\r\n\r\nHere, the media bot is creating the call. At this stage the call will exist and invitees will see the meeting as started in their chat sidebar. But it's not until a bit later that they will get a notification to join the call (more on that in moment).",
+      "line": 328
+    },
+    {
+      "file": "samples/bot-calling-meeting/csharp/Source/CallingBotSample/Bots/MessageBot.cs",
+      "description": "# Installing the app to the meeting\r\n\r\nBefore we invite people we want to install our app to the meeting. Even though our app created the meeting, and is a participant (as a bot) of the meeting, we don't have access to the chat.\r\n\r\nBecause we want to provide details in the chat, we install the app to the chat here. To call this API your app needs to be uploaded to either the Org or Teams' App Store, and the App cannot use RSC permissions.",
+      "line": 332
+    },
+    {
+      "file": "samples/bot-calling-meeting/csharp/Source/CallingBotSample/Bots/MessageBot.cs",
+      "description": "# Caching details about the incident\r\n\r\nWe cache an object containing details about the incident. This is used to create the incident details card that is shared to chat below, and for inviting the participants to the call once it starts.",
+      "line": 346
+    },
+    {
+      "file": "samples/bot-calling-meeting/csharp/Source/CallingBotSample/Bots/MessageBot.cs",
+      "description": "# Send an Adaptive Card about the incident\r\n\r\nWe use this details to create an Adaptive Card with the incident details. You might want to expand it with graphs about an outage, or include links to investigate the issue more. We use it just to provide basic details of the incident and show some actions on the meeting.\r\n\r\n![An adaptive card showing the incident's details, including status, start time, end time and title](./samples/bot-calling-meeting/csharp/docs/Images/incident-details-card.png)",
+      "line": 357
+    },
+    {
+      "file": "samples/bot-calling-meeting/csharp/Source/CallingBotSample/Bots/MessageBot.cs",
+      "description": "# Sending an activity to the meeting conversation \r\n\r\nBecause we know the threadId/Conversation Id from the ChatInfo of the online meeting we can use that to continue the conversation in the meeting.",
+      "line": 379
+    },
+    {
+      "file": "samples/bot-calling-meeting/csharp/Source/CallingBotSample/Bots/CallingBot.cs",
+      "description": "# Call is established\r\n\r\nWhen a call is established, we receive a notification here.\r\n\r\nThere a number of call notifications we can receive, like `Establishing` when the call is first created (by the API). `Established` is sent when the call is actually set up correctly.",
+      "line": 139
+    },
+    {
+      "file": "samples/bot-calling-meeting/csharp/Source/CallingBotSample/Bots/CallingBot.cs",
+      "description": "# Invite participant to the notification\r\n\r\nIf we can find information about the incident in the cache (from when we stored it earlier), we can then be sure we pull the people into the call and invite them directly. This will send the users an invite. Without this users will see the meeting as started, but may not get a notification to join.",
+      "line": 150
+    },
+    {
+      "file": "samples/bot-calling-meeting/csharp/Source/CallingBotSample/Bots/CallingBot.cs",
+      "description": "# Participant Notifications\r\n\r\nAnother notification we can get is when the list of participants changes. This can be either when a user joins or leaves the call.",
+      "line": 241
+    },
+    {
+      "file": "samples/bot-calling-meeting/csharp/Source/CallingBotSample/Bots/CallingBot.cs",
+      "description": "# At least one user joined\r\n\r\nWe can't blindly look at the count of participants to see if any human users has joined. This is because, we as a media bot, are also counted in the list of participants. \r\n\r\nInstead, we check to see if a participant who has a `User` object has joined, and if so we store this information. Caching this ensures that we don't play the same prompt multiple times, and it allows us to end the call the only participant left is our bot.",
+      "line": 249
+    },
+    {
+      "file": "samples/bot-calling-meeting/csharp/Source/CallingBotSample/Bots/CallingBot.cs",
+      "description": "# Text to speech\r\n\r\nFor incidents, we get the incident details from the cache and use that to create a string that we want to say in the call. For our sample we simply use the incident's subject, but in a real application you could expand to include details on what is actually degraded.\r\n\r\nWe send this text to Azure Cognitive Services, where we get them to convert the text to speech.",
+      "line": 256
+    },
+    {
+      "file": "samples/bot-calling-meeting/csharp/Source/CallingBotSample/Services/CognitiveServices/SpeechService.cs",
+      "description": "# Saving the TTS to a file\r\n\r\nIf Cognitive Services are able to convert the text to speech, they return an Audio Stream. We save that stream to a wav file in our local service (you might want to store this in a blob storage with security policies if you are productising this).",
+      "line": 76
+    },
+    {
+      "file": "samples/bot-calling-meeting/csharp/Source/CallingBotSample/Bots/CallingBot.cs",
+      "description": "# Playing the TTS to the users\r\n\r\nWe then play text to speech (TTS) as a prompt in the call. Users will be able to hear it in the flow.",
+      "line": 260
+    },
+    {
+      "file": "samples/bot-calling-meeting/csharp/Source/CallingBotSample/Bots/CallingBot.cs",
+      "description": "# Deleting the audio file\r\n\r\nA play prompt notification is fired when the audio is played. Here we find out the audio that was played and if it's audio stored in the temporary downloaded folder we delete the WAV file. This ensures that we aren't storing the recording for longer than we need. This is especially important when it comes to recording calls, as that data needs to be handled in accordance with local laws.\r\n\r\nIf you are productising something similar, we suggest using something like blob storage to ensure the data stored compliant security and data retention policies.",
+      "line": 233
+    },
+    {
+      "file": "samples/bot-calling-meeting/csharp/Source/CallingBotSample/Bots/CallingBot.cs",
+      "description": "# Ending the call when all participants leave\r\n\r\nWhen all the participants bar one has left the call, check to see if that remaining participant is this bot. If so, and if we've previously had at least one real user join, the bot hangs up the call. If we didn't check for this, the bot would keep calls active unnecessarily. ",
+      "line": 279
+    }
+  ]
+}
