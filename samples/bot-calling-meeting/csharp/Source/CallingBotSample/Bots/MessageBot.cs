@@ -323,9 +323,9 @@ namespace CallingBotSample.Bots
 
             if (onlineMeeting != null)
             {
-                (ChatInfo chatInfo, MeetingInfo meetingInfo) = JoinInfo.ParseJoinURL(onlineMeeting.JoinWebUrl);
+                MeetingInfo meetingInfo = JoinInfo.ParseMeetingInfo(onlineMeeting.JoinWebUrl);
 
-                var meetingCall = await callService.Create(chatInfo, meetingInfo);
+                var meetingCall = await callService.Create(onlineMeeting.ChatInfo, meetingInfo);
 
                 if (meetingCall != null)
                 {
@@ -336,7 +336,7 @@ namespace CallingBotSample.Bots
                         CallId = meetingCall.Id,
                         IncidentSubject = incidentSubject,
                         MeetingInfo = meetingInfo,
-                        ChatInfo = chatInfo,
+                        ChatInfo = onlineMeeting.ChatInfo,
                         StartTime = DateTime.Now,
                         Participants = peoplePickerAadIds.Select(p => new Identity
                         {
@@ -347,7 +347,7 @@ namespace CallingBotSample.Bots
 
                     await SendActivityToConversation(
                         turnContext,
-                        chatInfo.ThreadId,
+                        onlineMeeting.ChatInfo.ThreadId,
                         MessageFactory.Attachment(adaptiveCardFactory.CreateIncidentMeetingCard(
                             incidentDetails.IncidentSubject,
                             incidentDetails.CallId,
