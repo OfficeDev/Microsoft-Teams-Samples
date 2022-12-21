@@ -2,8 +2,8 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using CallingBotSample.AdaptiveCards;
@@ -63,6 +63,12 @@ namespace CallingBotSample.Bots
             this.logger = logger;
         }
 
+        /// <summary>
+        /// Called when a message is sent to the bot. 
+        /// </summary>
+        /// <param name="turnContext"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(turnContext.Activity.Text))
@@ -83,6 +89,31 @@ namespace CallingBotSample.Bots
             }
         }
 
+        /// <summary>
+        /// Called when a new user is added to the chat/channel, or when the application is first installed
+        /// We are using this to send the welcome card on first install
+        /// </summary>
+        /// <param name="teamsMembersAdded">Users added</param>
+        /// <param name="teamInfo"></param>
+        /// <param name="turnContext"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        protected override async Task OnTeamsMembersAddedAsync(IList<TeamsChannelAccount> teamsMembersAdded, Microsoft.Bot.Schema.Teams.TeamInfo teamInfo, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
+        {
+            // Only send the welcome message when this app is added. In Bot Framework, Bots are prefixed with "28:"
+            if (teamsMembersAdded.Any(member => member.Id == $"28:{botOptions.AppId}"))
+            {
+                await SendResponse(turnContext, "welcome", callId: null, cancellationToken: cancellationToken);
+            }
+        }
+
+        /// <summary>
+        /// Called when Teams is fetching a Task Module
+        /// </summary>
+        /// <param name="turnContext"></param>
+        /// <param name="taskModuleRequest"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         protected override Task<TaskModuleResponse> OnTeamsTaskModuleFetchAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
             var asJobject = JObject.FromObject(taskModuleRequest.Data);
@@ -125,6 +156,13 @@ namespace CallingBotSample.Bots
             });
         }
 
+        /// <summary>
+        /// Called when the task module is submitted.
+        /// </summary>
+        /// <param name="turnContext"></param>
+        /// <param name="taskModuleRequest"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         protected override async Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
             var asJobject = JObject.FromObject(taskModuleRequest.Data);
@@ -153,11 +191,16 @@ namespace CallingBotSample.Bots
                             }
                             break;
                         case "transfer":
+                            Identity transferee = new Identity { Id = turnContext.Activity.From.AadObjectId };
+                            JObject channelData = JObject.Parse(JsonConvert.SerializeObject(turnContext.Activity.ChannelData));
+                            transferee.SetTenantId(channelData.SelectToken("tenant")?["id"]?.ToString());
+
                             return await CallService.HandleTeamsCallNotBeingFound(
                                 callId,
                                 (nonNullCallId) => callService.Transfer(
                                         nonNullCallId,
-                                        new Identity { Id = peoplePicker }),
+                                        new Identity { Id = peoplePicker },
+                                        transferee),
                                 CreateTaskModuleMessageResponse);
                         case "invite":
                             return await CallService.HandleTeamsCallNotBeingFound(
@@ -190,8 +233,10 @@ namespace CallingBotSample.Bots
             return await CreateTaskModuleMessageResponse("Something went wrong 😖");
         }
 
-        private async Task SendResponse(ITurnContext<IMessageActivity> turnContext, string input, string? callId, CancellationToken cancellationToken)
+        private async Task SendResponse(ITurnContext turnContext, string input, string? callId, CancellationToken cancellationToken)
         {
+            JObject channelData = JObject.Parse(JsonConvert.SerializeObject(turnContext.Activity.ChannelData));
+
             switch (input)
             {
                 case "playrecordprompt":
@@ -207,7 +252,7 @@ namespace CallingBotSample.Bots
                         (message) => UpdateActivityAsync(message, turnContext, cancellationToken));
                     break;
                 case "joinscheduledmeeting":
-                    if (turnContext.Activity.ChannelData["meeting"] != null)
+                    if (channelData.SelectToken("meeting") != null)
                     {
                         var call = await JoinScheduledMeeting(turnContext, cancellationToken);
 
@@ -224,7 +269,7 @@ namespace CallingBotSample.Bots
                 default:
                     await turnContext.SendActivityAsync(
                         MessageFactory.Attachment(
-                            adaptiveCardFactory.CreateWelcomeCard(turnContext.Activity.ChannelData["meeting"] != null)), cancellationToken);
+                            adaptiveCardFactory.CreateWelcomeCard(channelData.SelectToken("meeting") != null)), cancellationToken);
                     break;
             }
         }
@@ -232,9 +277,8 @@ namespace CallingBotSample.Bots
         private async Task<Call> JoinScheduledMeeting(ITurnContext turnContext, CancellationToken cancellationToken)
         {
             var organiser = await GetMeetingOrganiser(turnContext, cancellationToken);
-
-            var channelDataTenant = JObject.Parse(JsonConvert.SerializeObject(turnContext.Activity.ChannelData)).SelectToken("tenant");
-            organiser.SetTenantId(channelDataTenant["id"].ToString());
+            JObject channelData = JObject.Parse(JsonConvert.SerializeObject(turnContext.Activity.ChannelData));
+            organiser.SetTenantId(channelData.SelectToken("tenant")?["id"]?.ToString());
 
             return await callService.Create(
                 new ChatInfo
@@ -256,7 +300,7 @@ namespace CallingBotSample.Bots
         {
             var users = await TeamsInfo.GetPagedMembersAsync(turnContext, cancellationToken: cancellationToken);
 
-            foreach(TeamsChannelAccount user in users.Members)
+            foreach (TeamsChannelAccount user in users.Members)
             {
                 TeamsMeetingParticipant participant = await TeamsInfo.GetMeetingParticipantAsync(turnContext, participantId: user.AadObjectId).ConfigureAwait(false);
 

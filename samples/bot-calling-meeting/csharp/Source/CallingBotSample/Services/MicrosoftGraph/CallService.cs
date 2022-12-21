@@ -210,12 +210,6 @@ namespace CallingBotSample.Services.MicrosoftGraph
             ParticipantInfo? transferee = null;
             if (transfereeIdentity != null)
             {
-                if (transfereeIdentity.AdditionalData == null)
-                {
-                    transfereeIdentity.AdditionalData = new Dictionary<string, object>();
-                }
-                transfereeIdentity.AdditionalData["tenantId"] = azureAdOptions.TenantId;
-
                 transferee = new ParticipantInfo
                 {
                     Identity = new IdentitySet
