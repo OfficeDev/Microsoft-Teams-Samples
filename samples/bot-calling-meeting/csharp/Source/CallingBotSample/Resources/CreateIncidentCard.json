@@ -4,26 +4,30 @@
   "type": "AdaptiveCard",
   "body": [
     {
+      "type": "Input.Text",
+      "id": "incidentName",
+      "label": "Incident Name"
+    },
+    {
       "type": "Input.ChoiceSet",
-      "label": "${choiceLabel}",
+      "label": "Choose incident attendees",
       "choices.data": {
         "type": "Data.Query",
         "dataset": "graph.microsoft.com/users"
       },
       "id": "peoplePicker",
-      "isMultiSelect": "${isMultiSelect}"
+      "isMultiSelect": "true"
     }
   ],
   "actions": [
     {
       "type": "Action.Submit",
-      "title": "${action}",
+      "title": "Create incident",
       "data": {
-        "action": "${action}",
+        "action": "createincident",
         "msteams": {
           "type": "task/submit"
-        },
-        "callId": "${callId}"
+        }
       }
     }
   ]
