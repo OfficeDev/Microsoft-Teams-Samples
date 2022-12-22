@@ -54,8 +54,7 @@ const CaptureAudio = () => {
             <Text>navigator.mediaDevices.getUserMedia, teams.getmedia</Text>                   
               <Button onClick={captureMedia}>Capture audio</Button>
           </div> 
-          <audio controls src={audio} />               
-           {/* //{audio !== '' && <video src={audio}  height={'50px'} width={'width: 100%'} />} */}
+          <audio controls src={audio} />    
       </CardBody>
       </Card>
     </>

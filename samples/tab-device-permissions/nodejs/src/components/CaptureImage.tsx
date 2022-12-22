@@ -87,12 +87,10 @@ const CaptureImage = () => {
               <Image                
                 src={"data:image/png;base64," + capturedImage}
               />
-            )}</div>
-          
+            )}</div>          
         </div>
         }
       </Card>
-
       {/* Card for showing multiple images */}
       <Card>
         <CardHeader>
@@ -101,12 +99,9 @@ const CaptureImage = () => {
         <CardBody>
           <div>
             <Button onClick={() => captureMultipleImages(2)}>Capture multiple images</Button>
-          </div>
-           
-          {capturedImages.length !== 0 &&
-             
-            <Carousel className="custom-slider">
-             
+          </div>           
+          {capturedImages.length !== 0 &&             
+            <Carousel className="custom-slider">             
             {capturedImages}
           </Carousel>
           }

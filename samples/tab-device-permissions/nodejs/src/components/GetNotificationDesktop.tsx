@@ -19,8 +19,7 @@ const GetNotificationDesktop = () => {
 
     // Method to validate and send notification
     function sendNotification() {
-        // Method to ask for validating notification permission and then sending notification.
-          debugger;
+        // Method to ask for validating notification permission and then sending notification.        
         navigator.permissions.query({ name: 'notifications' }).then(function (result) {
             if (result.state == 'denied') {
                 alert("failed");

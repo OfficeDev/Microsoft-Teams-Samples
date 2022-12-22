@@ -22,12 +22,9 @@ const GetGeoLocation = () => {
   // If the value of showMap is false, the current location is fetched without displaying the map. 
   // showMap is ignored if allowChooseLocation is set to true.
   function getLocation() {
-
-    microsoftTeams.geoLocation.getCurrentLocation().then((location) => {
-      debugger;
+    microsoftTeams.geoLocation.getCurrentLocation().then((location) => {     
       setGeoLocationValue(location)
-    }).catch((error) => {
-      debugger;
+    }).catch((error) => {    
       console.error(error);
     });
   }

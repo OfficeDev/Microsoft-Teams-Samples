@@ -20,8 +20,7 @@ const GetLocationDesktop = () => {
     })
 
     // Method to validate before capturing media
-    function getCurrentLocation() {
-        debugger;
+    function getCurrentLocation() {        
         navigator.permissions.query({ name: 'geolocation' }).then(function (result) {
             if (result.state == 'denied') {
                 setShowComments(true);

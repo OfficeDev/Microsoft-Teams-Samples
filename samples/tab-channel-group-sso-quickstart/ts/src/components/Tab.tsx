@@ -78,13 +78,10 @@ class Tab extends React.Component<ITabProps, ITabState> {
   //Exchange the SSO access token for a Graph access token
   //Learn more: https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow
   exchangeClientTokenForServerToken = async (token: string) => {
-
     let serverURL = `${process.env.REACT_APP_BASE_URL}/getGraphAccessToken?ssoToken=${token}&upn=${this.state.context?.user?.userPrincipalName}`;
-   // console.log('here ' + serverURL);
-    let response = await fetch(serverURL); //This calls getGraphAccessToken route in /api-server/app.js
+     let response = await fetch(serverURL); //This calls getGraphAccessToken route in /api-server/app.js
     if (response) {
       let data = await response.json().catch(this.unhandledFetchError);
-
       if(!response.ok && data.error==='consent_required'){
         //A consent_required error means it's the first time a user is logging into to the app, so they must consent to sharing their Graph data with the app.
         //They may also see this error if MFA is required.
@@ -176,12 +173,9 @@ class Tab extends React.Component<ITabProps, ITabState> {
     console.error("Unhandled fetch error: ",err);
     this.setState({error:true});
   }
-
   render() {
-
       let title = this.state.context && Object.keys(this.state.context).length > 0 ?
         'Congratulations ' + this.state.context?.user?.userPrincipalName + '! This is your tab' : <Spinner/>;
-
       let ssoMessage = this.state.ssoToken === "" ?
         <Spinner label='Performing Azure AD single sign-on authentication...'/>: null;
       

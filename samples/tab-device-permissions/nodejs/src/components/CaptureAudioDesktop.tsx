@@ -17,7 +17,6 @@ const CaptureAudioDesktop = () => {
         // initializing microsoft teams sdk
         microsoftTeams.app.initialize()
     })
-
     function captureAudio() {
         navigator.mediaDevices.getUserMedia({ audio: true })
             .then(mediaStream => {
@@ -27,7 +26,6 @@ const CaptureAudioDesktop = () => {
             })
             .catch(error => console.log(error));
     }
-
     return (
         <>
             {/* Card for showing Audio */}
@@ -40,8 +38,7 @@ const CaptureAudioDesktop = () => {
                     <Text>navigator, microsoftTeams</Text>
                     <Text weight='medium'>Method:</Text>
                     <Text>navigator.mediaDevices.getUserMedia, teams.getmedia</Text>
-                    <Button onClick={captureAudio}>Capture audio</Button>           
-                   
+                    <Button onClick={captureAudio}>Capture audio</Button> 
                         <audio controls></audio>
                     </div>
                 </CardBody>
