@@ -67,14 +67,25 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are sco
     - In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Select *Add a client application*. Enter each of the following client IDs and select the authorized scope you created in the previous step:
         * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
         * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
+        
+ 2. Setup for Bot
+
+   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
+    - For bot handle, make up a name.
+    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
+    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
     
- 2. Setup NGROK
+   In the new Azure Bot resource in the Portal, 
+    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
+    
+ 3. Setup NGROK
    - Run ngrok - point to port 3978
 
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
- 3. Setup for code
+ 4. Setup for code
    - Clone the repository
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
@@ -97,7 +108,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are sco
     - npm start
     - The server will start running on 5000 port
     
-4 Setup Manifest for Teams
+5. Setup Manifest for Teams
 
 - **This step is specific to Teams.**
     - Edit the `manifest.json` contained in the `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
