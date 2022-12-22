@@ -21,17 +21,17 @@
 <p>
     Let's try it out!
     <div style="text-align: center; margin-left: auto; margin-right: auto;">
-        <button class="button-primary" onclick="submit('youtube');">YouTube</button>
+        <button class="button-primary" onclick="Submit('youtube');">YouTube</button>
         <p></p>
-        <button class="button-primary" onclick="submit('powerapp');">PowerApp</button>
+        <button class="button-primary" onclick="Submit('powerapp');">PowerApp</button>
         <p></p>
-        <button class="button-primary" onclick="submit('customform');">Custom Form (results &rarr; tab)</button>
+        <button class="button-primary" onclick="Submit('customform');">Custom Form (results &rarr; tab)</button>
         <p></p>
-        <button class="button-primary" onclick="submit('customform bot');">Custom Form (results &rarr; bot)</button>
+        <button class="button-primary" onclick="Submit('customform bot');">Custom Form (results &rarr; bot)</button>
         <p></p>
-        <button class="button-primary" onclick="submit('adaptivecard');">Adaptive Card (results &rarr; tab)</button>
+        <button class="button-primary" onclick="Submit('adaptivecard');">Adaptive Card (results &rarr; tab)</button>
         <p></p>
-        <button class="button-primary" onclick="submit('adaptivecard bot');">Adaptive Card (results &rarr; bot)</button>
+        <button class="button-primary" onclick="Submit('adaptivecard bot');">Adaptive Card (results &rarr; bot)</button>
         <p></p>
         <p></p>
         <a target="_blank" href="@(deepLinkHelper.DeepLink)">Deep link to Custom Form page</a>
@@ -43,10 +43,9 @@
 
     submitHandler = (err, result) => {
             console.log(`Submit handler - err: ${err}`);
-            alert("Result = " + JSON.stringify(result) + "\nError = " + JSON.stringify(err));
         };
 
-        function submit(type) {
+        function Submit(type) {
             let taskInfo = {
                 title: null,
                 height: null,

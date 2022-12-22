@@ -10,7 +10,6 @@ namespace Microsoft.Teams.Samples.TaskModule.Web.Helper
     {
         public  string DeepLink { get; set; }
         public  string DeepLinkToAdaptiveCard { get; set; }
-
         public DeeplinkHelper(string MicrosoftAppId ,string BaseUrl)
         {
             MicrosoftAppId = MicrosoftAppId.Replace('"', ' ').Trim();

@@ -21,10 +21,9 @@
     microsoftTeams.initialize();
     microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
      
-
         var radios = document.getElementsByName("tabType");
-        if (radios[0].checked) {
 
+        if (radios[0].checked) {
             microsoftTeams.settings.setSettings({
                 entityId: "tasks",
                 contentUrl: @Json.Serialize(Configuration["BaseUrl"])+"/tasks",

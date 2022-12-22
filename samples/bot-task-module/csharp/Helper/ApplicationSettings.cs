@@ -11,7 +11,6 @@ namespace Microsoft.Teams.Samples.TaskModule.Web.Helper
     public  class ApplicationSettings
     {
         public string BaseUrl { get; set; }
-
         public string MicrosoftAppId { get; set; }
 
     }
