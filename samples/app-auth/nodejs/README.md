@@ -33,14 +33,14 @@ This sample demonstrates authentication in Microsoft Teams apps.
     ```
 ### Setup for code
 
-1) Clone the repository
+ - Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-2) In a terminal, navigate to `samples/app-auth/nodejs`
+ - In a terminal, navigate to `samples/app-auth/nodejs`
 
-3) Install modules
+ - Install modules
 
     ```bash
     npm install
