@@ -162,6 +162,17 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
    **MessageAllMembers command interaction:**
   ![team-MessageAllMembers-interaction ](Images/team-MessageAllMembers-interaction.png)
 
+ 4. **ImmersiveReader**
+- You can use the immersive reader property of adaptive cards by using the speak property.
+`immersivereader` command will send an adpative card in teams chat.
+![immersive-reader-card](Images/immersiveReaderCard.png)
+
+- Select the immersive reader option for running the speak property.
+![immersive-reader-option](Images/immersiveReaderOption.png)
+
+- A new screen will be open and the text will be read by default which is mentioned inside the speak property of adaptive card.
+![immersive-reader-screen](Images/immersiveReaderScreen.png)
+
 You can select an option from the command list by typing ```@TeamsConversationBot``` into the compose message area and ```What can I do?``` text above the compose area.
 
 ## Deploy the bot to Azure
