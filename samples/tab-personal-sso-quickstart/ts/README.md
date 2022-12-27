@@ -70,6 +70,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
     Enable implicit grant by checking the following boxes:  
     ✔ ID Token  
     ✔ Access Token  
+    ![AppRegistrations](Images/AppRegistrations.png)
    - Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
 2. Setup NGROK

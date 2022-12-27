@@ -76,15 +76,18 @@ Registering a bot with the Microsoft Bot Framework automatically creates a corre
 5. Click on **Expose an API** under **Manage**. Select the Set link to generate the Application ID URI in the form of api://{AppID}. Insert your fully qualified domain name (with a forward slash "/" appended to the end) between the double forward slashes and the GUID. The entire ID should have the form of: api://<your_ngrok_url>/{AppID}
 6. Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
 7. Set Who can consent? to Admins and users
+
 8. Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope. Suggestions:
     - **Admin consent title:** Teams can access the user’s profile
     - **Admin consent description**: Allows Teams to call the app’s web APIs as the current user.
     - **User consent title**: Teams can access your user profile and make requests on your behalf
     - **User consent description:** Enable Teams to call this app’s APIs with the same rights that you have
 9. Ensure that **State** is set to **Enabled**
+
 10. Select **Add scope**
     - Note: The domain part of the **Scope name** displayed just below the text field should automatically match the **Application ID** URI set in the previous step, with `/access_as_user` appended to the end; for example:
         - `api://<your_ngrok_url>/<aad_application_id>/access_as_user`
+
 11. In the **Authorized client applications** section, you identify the applications that you want to authorize to your app’s web application. Each of the following IDs needs to be entered:
     - `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
     - `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
@@ -92,7 +95,8 @@ Registering a bot with the Microsoft Bot Framework automatically creates a corre
     * `4765445b-32c6-49b0-83e6-1d93765276ca` (Office web)
     * `0ec893e0-5785-4de6-99da-4ed124e5296c` (Office desktop)
     * `bc59ab01-8403-45c6-8796-ac3ef710b3e3` (Outlook web)
-    * `d3590ed6-52b3-4102-aeff-aad2292ab01c` (Outlook desktop)    
+    * `d3590ed6-52b3-4102-aeff-aad2292ab01c` (Outlook desktop)
+    
 12. Navigate to **API Permissions**, and make sure to add the following delegated permissions:
     - User.Read
     - email
@@ -138,7 +142,7 @@ Notes:
 
 ### Add the Azure AD OAuth connection to the bot
 
-1. Navigate to your bot's Bot Channels Registration page on the [Azure Portal](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.BotService%2FbotServices).
+1. Navigate to your Azure bot's service page on the [Azure Portal](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.BotService%2FbotServices).
 2. Click **Settings**.
 3. Under **OAuth Connection Settings** near the bottom of the page, click **Add Setting**.
 4. Fill in the form as follows:
@@ -158,7 +162,7 @@ Notes:
 1. Follow the instructions [here](https://docs.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow?context=linkedin/context#step-1-configure-your-application) to create and configure a LinkedIn application for OAuth 2.
 2. In "Authorized Redirect URLs", add `https://token.botframework.com/.auth/web/redirect`.
 3. Note your app's "Client ID" and "Client Secret".
-4. Navigate to your bot's Bot Channels Registration page on the [Azure Portal](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.BotService%2FbotServices).
+4. Navigate to your Azure bot's service page on the [Azure Portal](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.BotService%2FbotServices).
 5. Click **Settings**.
 6. Under **OAuth Connection Settings** near the bottom of the page, click **Add Setting**.
 7. Fill in the form as follows:
@@ -177,7 +181,7 @@ Notes:
 1. Obtain OAuth2 client credentials from the [Google API Console](https://console.developers.google.com). Enable access to the [Google People API](https://developers.google.com/people/).
 2. In "Authorized redirect URLs", add `https://token.botframework.com/.auth/web/redirect`.
 3. Note your app's "Client ID" and "Client Secret".
-4. Navigate to your bot's Bot Channels Registration page on the [Azure Portal](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.BotService%2FbotServices).
+4. Navigate to your Azure bot's service page on the [Azure Portal](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.BotService%2FbotServices).
 5. Click **Settings**.
 6. Under **OAuth Connection Settings** near the bottom of the page, click **Add Setting**.
 7. Fill in the form as follows:
@@ -195,8 +199,8 @@ Notes:
 
 Before proceeding, it's wise to test the OAuth connections that you have configured with the Azure Bot Service.
 
-1. Open the [Bot Channels Registrations](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.BotService%2FbotServices) blade on the Azure Portal
-2. Navigate to your Bot Channels Registration resource.
+1. Open the [Azure Bot](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.BotService%2FbotServices) blade on the Azure Portal.
+2. Navigate to your Azure Bot resource.
 3. Click **Settings**.
 4. Under **OAuth Connection Settings** near the bottom of the page, click on the connection.
 5. Click on **Test connection**.

@@ -4,7 +4,7 @@
         microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
 
             var tabUrl = window.location.protocol +
-                '//' + window.location.host + '/ssodemo';
+                '//' + window.location.host + '/ssoDemo/?inTeams=true';
 
             // Let the Microsoft Teams platform know what you want to load based on
             // what the user configured on this page

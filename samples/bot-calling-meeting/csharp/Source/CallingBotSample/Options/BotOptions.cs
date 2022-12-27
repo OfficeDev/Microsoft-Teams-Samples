@@ -41,5 +41,10 @@ namespace CallingBotSample.Options
         /// The download directory of recordings
         /// </summary>
         public string RecordingDownloadDirectory { get; set; } = "temp";
+
+        /// <summary>
+        /// The ID assigned to the app in the catalog
+        /// </summary>
+        public string CatalogAppId { get; set; }
     }
 }

@@ -1,10 +1,11 @@
 ---
 page_type: sample
-description: This sample demos linking user's AAD id with Facebook and google account of user from bot, ME and tab.
+description: This sample demos linking user's Azure AD ID with Facebook and Google account of user from bot, ME and tab.
 products:
 - office-teams
 - office
 - office-365
+- microsoft-teams
 languages:
 - csharp
 extensions:
