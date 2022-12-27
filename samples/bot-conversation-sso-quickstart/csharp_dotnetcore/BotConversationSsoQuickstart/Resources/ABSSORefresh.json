@@ -1,0 +1,35 @@
+﻿{
+  "type": "AdaptiveCard",
+  "refresh": {
+    "action": {
+      "type": "Action.Execute",
+      "verb": "initiateSSO",
+      "title": "RefreshTitle"
+    }
+  },
+  "authentication": {
+    "text": "Signin Text",
+    "connectionName": "newConnection",
+    "tokenExchangeResource": {
+      "id": "9b6dcf71-df47-4756-b486-47ca94dbacee"
+    },
+    "buttons": [
+      {
+        "type": "signin",
+        "title": "Please sign in",
+        "value": "https://token.botframework.com/api/oauth/signin?signin=9b6dcf71-df47-4756-b486-47ca94dbacee"
+      }
+    ]
+  },
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Welcome Universal Card",
+      "size": "Medium",
+      "weight": "Bolder"
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "appId": "9b6dcf71-df47-4756-b486-47ca94dbacee",
+  "version": "1.4"
+}
