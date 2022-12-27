@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-bot-adaptivecard-actions-csharp
 ---
 
-# AdaptiveCard Actions
+# Get Adaptive Card and Suggested Actions
 
 This sample shows the feature where user can send Adaptive Card actions using bot.
 

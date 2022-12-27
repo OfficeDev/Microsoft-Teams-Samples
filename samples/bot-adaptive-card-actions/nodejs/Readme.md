@@ -18,7 +18,7 @@ This sample shows the feature where user can send suggested actions using bot.
 
 ## Interaction with app
 
-![Bot Suggested ActionsGif](Images/AdaptiveCardActions.gif)
+![Bot Adaptive ActionsGif](Images/AdaptiveCardActions.gif)
 
 ## Prerequisites
 
