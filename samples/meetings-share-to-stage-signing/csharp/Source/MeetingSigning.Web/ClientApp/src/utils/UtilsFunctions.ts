@@ -1,6 +1,5 @@
 import { ErrorCode } from 'models';
 import { SetStateAction } from 'react';
-
 /// Function to determine if React Query should retry a API call when an error is returned
 /// The backend API attempts to get an on-behalf-off token for the newly granted scopes immediately after the user consents.
 /// Rarely, but sometimes, AAD has not propagated the consent completely, so it returns a token without the new scopes.
@@ -13,8 +12,7 @@ const apiRetryQuery = (
 ): boolean => {
   if (failureCount < 3) {
     return (
-      isApiErrorCode(ErrorCode.AuthConsentRequired, error) &&
-      userHasConsented
+      isApiErrorCode(ErrorCode.AuthConsentRequired, error) && userHasConsented
     );
   }
 
@@ -25,9 +23,7 @@ const apiRetryQuery = (
 };
 
 /// Checks if a request error is a specific ApiErrorCode
-const isApiErrorCode = (
-  errorCode: ErrorCode,
-  error?: Error | null,
-): boolean => (error && error.message.startsWith(errorCode)) ?? false;
+const isApiErrorCode = (errorCode: ErrorCode, error?: Error | null): boolean =>
+  (error && error.message.startsWith(errorCode)) ?? false;
 
 export { apiRetryQuery, isApiErrorCode };

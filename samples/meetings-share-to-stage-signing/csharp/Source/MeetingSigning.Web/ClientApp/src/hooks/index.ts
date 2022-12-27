@@ -5,7 +5,10 @@ import {
 } from './useColorScheme';
 import { useLiveShare } from './useLiveShare';
 import { CursorLocation, useCursorLocationDom } from './useCursorLocationDom';
-import { CursorLocationEvent, useCursorLocationsLiveShare } from './useCursorLocationsLiveShare';
+import {
+  CursorLocationEvent,
+  useCursorLocationsLiveShare,
+} from './useCursorLocationsLiveShare';
 import { ScrollOffset, useScrollOffsetDom } from './useScrollOffsetDom';
 import {
   ScrollOffsetEvent,
@@ -23,4 +26,10 @@ export {
   useScrollOffsetLiveShare,
   useTakeControl,
 };
-export type { CursorLocation, CursorLocationEvent, ScrollOffset, ScrollOffsetEvent, UserInControl };
+export type {
+  CursorLocation,
+  CursorLocationEvent,
+  ScrollOffset,
+  ScrollOffsetEvent,
+  UserInControl,
+};

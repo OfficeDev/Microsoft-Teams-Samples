@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Button, Flex } from '@fluentui/react-northstar';
 import styles from './StageControls.module.css';
 
@@ -46,16 +45,16 @@ export function StageControls({
               localUserInControl
                 ? 'Stop controlling'
                 : followSuspended && userInControl
-                  ? `Follow ${nameOfUserInControl}`
-                  : 'Take control'
+                ? `Follow ${nameOfUserInControl}`
+                : 'Take control'
             }
             size="small"
             onClick={() => {
               localUserInControl
                 ? clearControl()
                 : followSuspended && userInControl
-                  ? endSuspension()
-                  : takeControl();
+                ? endSuspension()
+                : takeControl();
             }}
           />
         ) : (

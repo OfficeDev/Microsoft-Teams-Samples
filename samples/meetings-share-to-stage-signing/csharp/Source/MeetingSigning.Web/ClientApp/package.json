@@ -15,7 +15,6 @@
     "@types/react-dom": "^17.0.0",
     "adaptivecards-templating": "^2.2.0",
     "classnames": "^2.3.1",
-    "eslint-plugin-sonarjs": "^0.17.0",
     "fluid-framework": "^1.2.3",
     "lodash": "^4.17.21",
     "react": "^17.0.2",
@@ -84,6 +83,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-sonarjs": "0.16.0",
     "webpack": "^5.68.0"
   }
 }

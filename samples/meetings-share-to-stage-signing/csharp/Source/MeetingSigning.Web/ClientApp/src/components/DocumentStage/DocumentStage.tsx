@@ -32,7 +32,7 @@ export function DocumentStage() {
   const params = useParams();
   const documentId: string = params.documentId ?? 'unknown';
   const pollingInterval = 2000;
-  var documentStageRef = useRef<HTMLDivElement>(null!);
+  const documentStageRef = useRef<HTMLDivElement>(null!);
 
   const { position, setPosition } = useScrollOffsetDom(
     documentStageRef.current,

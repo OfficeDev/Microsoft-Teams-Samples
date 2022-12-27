@@ -23,14 +23,16 @@ export interface ScrollOffset {
  * - position: Current scroll position as a percentage of the element
  * - setPosition: Callback to set the scroll position in the DOM
  */
-export function useScrollOffsetDom(divElement: HTMLDivElement | undefined | null) {
-  var [position, setPosition] = useState<ScrollOffset>({
+export function useScrollOffsetDom(
+  divElement: HTMLDivElement | undefined | null,
+) {
+  const [position, setPosition] = useState<ScrollOffset>({
     scrollXPercentage: 0,
     scrollYPercentage: 0,
   });
 
   // Save the div elements scroll position in state
-  var callback = useCallback(() => {
+  const callback = useCallback(() => {
     if (divElement) {
       setPosition({
         scrollXPercentage: window.scrollX / divElement.offsetWidth,
@@ -46,7 +48,7 @@ export function useScrollOffsetDom(divElement: HTMLDivElement | undefined | null
   }, [callback]);
 
   // Scroll the div element to a specific div
-  var externalCallback = useCallback(
+  const externalCallback = useCallback(
     (position: ScrollOffset) => {
       if (divElement === undefined || divElement === null) {
         return;

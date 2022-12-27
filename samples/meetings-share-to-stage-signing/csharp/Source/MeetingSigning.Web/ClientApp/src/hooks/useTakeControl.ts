@@ -1,10 +1,6 @@
 import { useCallback, useEffect, useState, useRef } from 'react';
 import { app } from '@microsoft/teams-js';
-import {
-  LiveEvent,
-  LiveState,
-  UserMeetingRole,
-} from '@microsoft/live-share';
+import { LiveEvent, LiveState, UserMeetingRole } from '@microsoft/live-share';
 import { IAzureAudience } from '@fluidframework/azure-client';
 import { throttle } from 'lodash';
 
@@ -76,7 +72,7 @@ export const useTakeControl = (
         // First we get the user's clientId from the audience.
         // Note this value will change if the client reconnects to the container,
         // and a user can have multiple clientIds, one for each connection.
-        let currentUserClientId = audience?.getMyself()?.connections[0]?.id;
+        const currentUserClientId = audience?.getMyself()?.connections[0]?.id;
 
         if (currentUserClientId === undefined) {
           return false;
@@ -84,7 +80,7 @@ export const useTakeControl = (
 
         // Next we call getClientRoles to get the user's roles based on their clientId.
         // This call is cached for up to 5 minutes
-        let currentUserRoles = await LiveEvent.getClientRoles(
+        const currentUserRoles = await LiveEvent.getClientRoles(
           currentUserClientId,
         );
 

@@ -52,7 +52,7 @@ DocumentCardList.args = {
         },
       ],
     },
-    {
+      {
       id: '12300000-0000-0000-0000-000000000001',
       documentType: DocumentType.TaxFilings,
       documentState: 'active',

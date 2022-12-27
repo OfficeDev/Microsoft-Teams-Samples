@@ -3,10 +3,7 @@ import * as microsoftTeams from '@microsoft/teams-js';
 
 // This function is for callers where authentication is required.
 // It makes a fetch client call with an AAD token.
-export async function authFetch<T>(
-  urlPath: string,
-  init?: RequestInit,
-) {
+export async function authFetch<T>(urlPath: string, init?: RequestInit) {
   const token = await microsoftTeams.authentication
     .getAuthToken()
     .catch((err) => {
@@ -28,7 +25,7 @@ async function fetchClient(
   urlPath: string,
   mergedInit: RequestInit,
 ): Promise<any> {
-  const response = await fetch(`/${urlPath}`, mergedInit);
+  const response = await fetch(`${urlPath}`, mergedInit);
 
   if (!response.ok) {
     const errorJson: any = await response.json();

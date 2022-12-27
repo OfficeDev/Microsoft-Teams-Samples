@@ -27,7 +27,10 @@ export const useCursorLocationsLiveShare = (
   const latestCursorLocation = useRef<CursorLocation | undefined>(undefined);
 
   const sendLatestCursorLocations = useCallback(() => {
-    if (latestCursorLocation.current !== undefined && cursorLocationsEvent?.isInitialized) {
+    if (
+      latestCursorLocation.current !== undefined &&
+      cursorLocationsEvent?.isInitialized
+    ) {
       // Using context to get the user's information is not guaranteed to be accurate, as the
       // local user could alter it before the state is updated. Today, there is no way in Live Share to
       // prove who sent the update, so this is relying on meeting participants being good citizens.

@@ -22,24 +22,25 @@ export function CursorsRenderer({
 }: CursorsRendererProps) {
   return (
     <>
-      {cursors
-        .map((p) => {
-          let X = p.data?.X ?? 0;
-          let Y = p.data?.Y ?? 0;
+      {cursors.map((p) => {
+        let X = p.data?.X ?? 0;
+        let Y = p.data?.Y ?? 0;
 
-          if (parentBoundingBox) {
-            // If the cursor is outside the bounds of the document, limit the rendering to the document.
-            X = Math.min(X, parentBoundingBox.width) + parentBoundingBox.left;
-            Y = Y + parentBoundingBox.top;
-          }
+        if (parentBoundingBox) {
+          // If the cursor is outside the bounds of the document, limit the rendering to the document.
+          X = Math.min(X, parentBoundingBox.width) + parentBoundingBox.left;
+          Y = Y + parentBoundingBox.top;
+        }
 
-          return <Cursor
+        return (
+          <Cursor
             key={p.userId}
             X={X}
             Y={Y}
             displayName={p.data?.displayName ?? p.userId}
           />
-        })}
+        );
+      })}
     </>
   );
 }

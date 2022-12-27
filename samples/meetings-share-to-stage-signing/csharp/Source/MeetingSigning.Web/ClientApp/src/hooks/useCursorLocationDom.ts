@@ -19,22 +19,27 @@ export interface CursorLocation {
  * @returns an object containing:
  * - cursorlocation: The X, Y location of the cursor's position
  */
-export function useCursorLocationDom(divElement: HTMLDivElement | undefined | null) {
-  var [cursorLocation, setCursorLocation] = useState<CursorLocation>({
+export function useCursorLocationDom(
+  divElement: HTMLDivElement | undefined | null,
+) {
+  const [cursorLocation, setCursorLocation] = useState<CursorLocation>({
     X: 0,
     Y: 0,
   });
 
-  var callback = useCallback((event: MouseEvent) => {
-    if (divElement) {
-      const divBoundingClient = divElement.getBoundingClientRect();
-      // Mouse Events contain multiple coordinates. We use pageX/pageY and subtract the bounding boxes position
-      setCursorLocation({
-        X: event.pageX - divBoundingClient.left,
-        Y: event.pageY - divBoundingClient.top,
-      });
-    }
-  }, [divElement]);
+  const callback = useCallback(
+    (event: MouseEvent) => {
+      if (divElement) {
+        const divBoundingClient = divElement.getBoundingClientRect();
+        // Mouse Events contain multiple coordinates. We use pageX/pageY and subtract the bounding boxes position
+        setCursorLocation({
+          X: event.pageX - divBoundingClient.left,
+          Y: event.pageY - divBoundingClient.top,
+        });
+      }
+    },
+    [divElement],
+  );
 
   useEffect(() => {
     if (divElement) {

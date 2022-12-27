@@ -6,13 +6,7 @@ import * as microsoftTeams from '@microsoft/teams-js';
 import * as ACData from 'adaptivecards-templating';
 import { CreateDocumentCard } from 'adaptive-cards';
 import { createDocument } from 'api/documentApi';
-import {
-  ErrorCode,
-  Document,
-  DocumentInput,
-  DocumentType,
-  User,
-} from 'models';
+import { ErrorCode, Document, DocumentInput, DocumentType, User } from 'models';
 import { apiRetryQuery, isApiErrorCode } from 'utils/UtilsFunctions';
 import { ConsentRequest } from 'components/ConsentRequest';
 

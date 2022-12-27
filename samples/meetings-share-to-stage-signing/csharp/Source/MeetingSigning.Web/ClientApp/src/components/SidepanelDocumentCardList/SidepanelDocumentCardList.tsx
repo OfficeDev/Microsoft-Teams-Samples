@@ -27,16 +27,13 @@ export function SidepanelDocumentCardList() {
   const [showLoader, setShowLoader] = useState<boolean>(true);
   const showLoaderTimeout = 5000;
 
-  const {
-    takeControlState,
-    container,
-    audience,
-  } = useLiveShare();
+  const { takeControlState, container, audience } = useLiveShare();
 
-  const {
-    takeControlStarted,
-    takeControl,
-  } = useTakeControl(takeControlState, teamsContext?.user, audience);
+  const { takeControlStarted, takeControl } = useTakeControl(
+    takeControlState,
+    teamsContext?.user,
+    audience,
+  );
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -52,33 +49,34 @@ export function SidepanelDocumentCardList() {
       container={container}
       started={takeControlStarted}
     >
-    <Flex column gap="gap.medium">
-      {data && data.length === 0 && (
-        <Header
-          as="h1"
-          content="There are no documents available for you yet."
-        />
-      )}
-
-      {isError &&
-        ((showLoader && <Loader />) || (
+      <Flex column gap="gap.medium">
+        {data && data.length === 0 && (
           <Header
             as="h1"
-            content="Something went wrong"
-            description={JSON.stringify(error)}
+            content="There are no documents available for you yet."
           />
-        ))}
+        )}
 
-      {data && data.map((d, index) => (
-        <SidepanelDocumentCard
-          key={index}
-          {...d}
-          // You should not use user information from the context if you need to prove a user's identity.
-          // Here, we are using it control the UI to highlight a user's signature box, so we feel comfortable using it.
-          loggedInAadId={teamsContext?.user?.id ?? ''}
-          takeControl={takeControl}
-        />
-      ))}
+        {isError &&
+          ((showLoader && <Loader />) || (
+            <Header
+              as="h1"
+              content="Something went wrong"
+              description={JSON.stringify(error)}
+            />
+          ))}
+
+        {data &&
+          data.map((d, index) => (
+            <SidepanelDocumentCard
+              key={index}
+              {...d}
+              // You should not use user information from the context if you need to prove a user's identity.
+              // Here, we are using it control the UI to highlight a user's signature box, so we feel comfortable using it.
+              loggedInAadId={teamsContext?.user?.id ?? ''}
+              takeControl={takeControl}
+            />
+          ))}
       </Flex>
     </LiveSharePage>
   );
