@@ -45,19 +45,19 @@
       }
     ],
     "@typescript-eslint/brace-style": [
-      "error"
+      "off"
     ],
     "@typescript-eslint/adjacent-overload-signatures": [
-      "error"
+      "off"
     ],
     "@typescript-eslint/array-type": [
       "off"
     ],
     "@typescript-eslint/await-thenable": [
-      "error"
+      "off"
     ],
     "@typescript-eslint/no-unused-vars": [
-      "error"
+      "off"
     ],
     "@typescript-eslint/no-explicit-any": [
       "off"
