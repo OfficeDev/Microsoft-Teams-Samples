@@ -18,10 +18,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Bot.AdaptiveCards\Microsoft.Bot.AdaptiveCards.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Resources\RecentOrders.json" />
-  </ItemGroup>
   <ItemGroup>
     <Content Update="appsettings*.json">
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
