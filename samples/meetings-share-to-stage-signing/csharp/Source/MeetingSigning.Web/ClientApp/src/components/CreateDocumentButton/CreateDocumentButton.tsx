@@ -7,7 +7,7 @@ import * as ACData from 'adaptivecards-templating';
 import { CreateDocumentCard } from 'adaptive-cards';
 import { createDocument } from 'api/documentApi';
 import {
-  ApiErrorCode,
+  ErrorCode,
   Document,
   DocumentInput,
   DocumentType,
@@ -135,7 +135,7 @@ export function CreateDocumentButton() {
 
   const displayConsentRequest =
     isApiErrorCode(
-      ApiErrorCode.AuthConsentRequired,
+      ErrorCode.AuthConsentRequired,
       createDocumentMutation.error,
     ) && !userHasConsented;
 

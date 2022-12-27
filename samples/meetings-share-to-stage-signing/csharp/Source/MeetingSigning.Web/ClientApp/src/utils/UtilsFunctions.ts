@@ -1,4 +1,4 @@
-import { ApiErrorCode } from 'models';
+import { ErrorCode } from 'models';
 import { SetStateAction } from 'react';
 
 /// Function to determine if React Query should retry a API call when an error is returned
@@ -13,7 +13,7 @@ const apiRetryQuery = (
 ): boolean => {
   if (failureCount < 3) {
     return (
-      isApiErrorCode(ApiErrorCode.AuthConsentRequired, error) &&
+      isApiErrorCode(ErrorCode.AuthConsentRequired, error) &&
       userHasConsented
     );
   }
@@ -26,7 +26,7 @@ const apiRetryQuery = (
 
 /// Checks if a request error is a specific ApiErrorCode
 const isApiErrorCode = (
-  errorCode: ApiErrorCode,
+  errorCode: ErrorCode,
   error?: Error | null,
 ): boolean => (error && error.message.startsWith(errorCode)) ?? false;
 
