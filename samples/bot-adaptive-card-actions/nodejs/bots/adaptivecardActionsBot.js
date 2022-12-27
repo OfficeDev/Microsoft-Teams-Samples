@@ -4,7 +4,7 @@
 const { ActivityHandler, MessageFactory, CardFactory } = require('botbuilder');
 const { ActionTypes } = require('botframework-schema');
 
-class AdaptiveCardActionsBot extends ActivityHandler {
+class SuggestedActionsBot extends ActivityHandler {
     constructor() {
         super();
 
@@ -17,33 +17,38 @@ class AdaptiveCardActionsBot extends ActivityHandler {
 
         this.onMessage(async (context, next) => {
             const text = context.activity.text;
+
             if (text.includes("1")) {
                 const userCard = CardFactory.adaptiveCard(this.adaptiveCardActions());
                 await context.sendActivity({ attachments: [userCard] });
             }
+
             else if (text.includes("2")) {
                 const userCard = CardFactory.adaptiveCard(this.SuggestedActionsCard());
                 await context.sendActivity({ attachments: [userCard] });
-
             }
-            else if (text.includes("red") || text.includes("blue") || text.includes("yellow")) {
+
+            else if (text.includes("Red") || text.includes("Blue") || text.includes("Yellow")) {
                 // Create an array with the valid color options.
-                const validColors = ['red', 'blue', 'yellow'];
+                const validColors = ['Red', 'Blue', 'Yellow'];
 
                 // If the `text` is in the Array, a valid color was selected and send agreement.
                 if (validColors.includes(text)) {
                     await context.sendActivity(`I agree, ${text} is the best color.`);
-                } 
+                }
+                await this.sendSuggestedActions(context);
             }
+
             else if (text.includes("3")) {
                 const userCard = CardFactory.adaptiveCard(this.ToggleVisibleCard());
                 await context.sendActivity({ attachments: [userCard] });
             }
+
             else {
                 await context.sendActivity("Please use one of these commands: **1** for  Adaptive Card Actions, **2** for Bot Suggested Actions and **3** for Toggle Visible Card");
             }
-           
-             // By calling next() you ensure that the next BotHandler is run.
+
+            // By calling next() you ensure that the next BotHandler is run.
             await next();
         });
     }
@@ -60,10 +65,36 @@ class AdaptiveCardActionsBot extends ActivityHandler {
             if (activity.membersAdded[idx].id !== activity.recipient.id) {
                 const welcomeMessage = `Welcome to Adaptive Card Action and Suggested Action Bot. This bot will introduce you to suggested actions.` +
                     'Please select an option:';
-                await context.sendActivity("Please use one of these commands: **1** for  Adaptive Card Actions, **2** for Bot Suggested Actions and **3** for Toggle Visible Card");
+
                 await turnContext.sendActivity(welcomeMessage);
+                await turnContext.sendActivity("Please use one of these commands: **1** for  Adaptive Card Actions, **2** for Bot Suggested Actions and **3** for Toggle Visible Card");
+                await this.sendSuggestedActions(turnContext);
             }
         }
+    }
+
+    async sendSuggestedActions(turnContext) {
+        const cardActions = [
+            {
+                type: ActionTypes.ImBack,
+                title: 'Red',
+                value: 'Red'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'Yellow',
+                value: 'Yellow'
+            },
+            {
+                type: ActionTypes.ImBack,
+                title: 'Blue',
+                value: 'Blue'
+            }
+        ];
+
+        var reply = MessageFactory.text("What is your favorite color ?");
+        reply.suggestedActions = { "actions": cardActions, "to": [turnContext.activity.from.id] };
+        await turnContext.sendActivity(reply);
     }
 
     // Adaptive Card Actions
@@ -128,6 +159,10 @@ class AdaptiveCardActionsBot extends ActivityHandler {
                                     {
                                         "type": "TextBlock",
                                         "text": "**Welcome To New Card**"
+                                    },
+                                    {
+                                        "type": "TextBlock",
+                                        "text": "This is your new card inside another card"
                                     }
                                 ]
                             }
@@ -164,7 +199,7 @@ class AdaptiveCardActionsBot extends ActivityHandler {
             }
         ]
     })
- 
+
     // Suggest Actions Card
     SuggestedActionsCard = () => ({
 
@@ -189,4 +224,4 @@ class AdaptiveCardActionsBot extends ActivityHandler {
     })
 }
 
-module.exports.AdaptiveCardActionsBot = AdaptiveCardActionsBot;
+module.exports.SuggestedActionsBot = SuggestedActionsBot;

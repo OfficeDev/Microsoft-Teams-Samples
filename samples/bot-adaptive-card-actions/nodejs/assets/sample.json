@@ -8,8 +8,8 @@
     "longDescription": [
       "Demonstrating the feature where user can send adaptivecard actions using bot."
     ],
-    "creationDateTime": "2022-04-27",
-    "updateDateTime": "2022-08-08",
+    "creationDateTime": "2022-12-27",
+    "updateDateTime": "2022-12-27",
     "products": [
       "Teams"
     ],
@@ -35,7 +35,7 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-adaptivecard-actions/nodejs/Images/gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-adaptivecard-actions/nodejs/Images/AdaptiveCardActions.gif",
         "alt": "Solution UX showing suggested action in Bots"
       }
     ],

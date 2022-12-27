@@ -25,7 +25,7 @@
   "accentColor": "#60A18E",
   "bots": [
     {
-      "botId": "<<Bot-Id>>",
+      "botId": "<<Microsoft-AppId>>",
       "scopes": [
         "personal"
       ],
@@ -34,6 +34,7 @@
   ],
   "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
-	"*ngrok.io"
+    "<<Domain-Name>>",
+    "*ngrok.io"
   ]
 }

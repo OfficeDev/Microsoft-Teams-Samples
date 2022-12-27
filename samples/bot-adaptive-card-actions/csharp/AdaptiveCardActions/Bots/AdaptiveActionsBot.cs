@@ -8,13 +8,8 @@ using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using AdaptiveCards.Templating;
 using System;
-using Microsoft.Bot.Connector.Authentication;
-using Microsoft.AspNetCore.Mvc;
-using AdaptiveCards;
-using System.Net.Mime;
 
 namespace Microsoft.BotBuilderSamples
 {
@@ -49,6 +44,11 @@ namespace Microsoft.BotBuilderSamples
                 {
                     //Respond to the user.
                     await turnContext.SendActivityAsync("Please Enter a color from the suggested action choices", cancellationToken: cancellationToken);
+
+                    string[] path = { ".", "Cards", "SuggestedActions.json" };
+                    var adaptiveCardForPersonalScope = GetFirstOptionsAdaptiveCard(path, turnContext.Activity.From.Name);
+                    await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardForPersonalScope), cancellationToken);
+
                     await SendSuggestedActionsAsync(turnContext, cancellationToken);
 
                 }
@@ -124,6 +124,7 @@ namespace Microsoft.BotBuilderSamples
                 throw (e);
             }
         }
+
         // Get text.input submitted value from card.
         private async Task SendDataOnCardActions(ITurnContext turnContext, CancellationToken cancellationToken)
         {
@@ -156,6 +157,5 @@ namespace Microsoft.BotBuilderSamples
 
             return adaptiveCardAttachment;
         }
-
     }
 }
