@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-content-bubble-nodejs
 
 # Meetings Content Bubble
 
-This sample illustrates how to implement [Content Bubble](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience.
+This sample illustrates how to implement [Content Bubble](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience.
 
 ## Interaction with app
 
@@ -29,7 +29,7 @@ This sample illustrates how to implement [Content Bubble](https://docs.microsoft
     # determine node version
     node --version
     ```
-- Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/en-us/microsoft-365/dev-program).
+- Office 365 tenant. You can get a free tenant for development use by signing up for the [Office 365 Developer Program](https://developer.microsoft.com/microsoft-365/dev-program).
 
 - To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
 Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
@@ -40,9 +40,9 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 1) Setup for Bot
 - Register Azure AD application resource in Azure portal
-- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
     
@@ -92,7 +92,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
          - Select **Apps** from the left panel.
          - Then select **Upload a custom app** from the lower right corner.
          - Then select the `manifest.zip` file from `teamsAppManifest`.
-         - [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
+         - [Install the App in Teams Meeting](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
 ## Running the sample
 
@@ -121,13 +121,14 @@ Message the Bot by @ mentioning to interact with the content bubble.
 
 ## Further reading
 
-- [Meeitng content bubble](https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meeting-content-bubble)
+- [Meeting content bubble](https://learn.microsoft.com/microsoftteams/platform/sbs-meeting-content-bubble)
+- [Build in-meeting notification for Teams meeting](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/in-meeting-notification-for-meeting)
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Portal](https://portal.azure.com)
-- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
+- [Activity processing](https://docs.microsoft.com/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
 - [dotenv](https://www.npmjs.com/package/dotenv)
-- [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
+- [Microsoft Teams Developer Platform](https://docs.microsoft.com/microsoftteams/platform/)
