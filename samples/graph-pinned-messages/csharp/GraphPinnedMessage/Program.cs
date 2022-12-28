@@ -18,6 +18,11 @@ builder.Services.AddOptions<AzureSettings>()
     botOptions.MicrosoftAppTenantId = configuration.GetValue<string>("MicrosoftAppTenantId");
 });
 
+builder.Services.AddSpaStaticFiles(configuration =>
+{
+    configuration.RootPath = "ClientApp/build";
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,6 +32,7 @@ if (!app.Environment.IsDevelopment())
 }
 app.UseStaticFiles();
 
+app.UseSpaStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();

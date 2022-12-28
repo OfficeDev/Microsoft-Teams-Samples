@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { EphemeralPresence, PresenceState } from '@microsoft/live-share';
+import { LivePresence, PresenceState } from '@microsoft/live-share';
 import { throttle } from 'lodash';
 import { CursorLocation } from './useCursorLocationDom';
 
@@ -18,7 +18,7 @@ export interface CursorLocationEvent extends CursorLocation {
  * - `sendCursorLocation` A callback function that will send the cursor location to the Live Share event
  */
 export const useCursorLocationsLiveShare = (
-  cursorLocationsEvent: EphemeralPresence<CursorLocationEvent>,
+  cursorLocationsEvent: LivePresence<CursorLocationEvent>,
   userDisplayName: string | undefined,
   userId?: string,
 ) => {

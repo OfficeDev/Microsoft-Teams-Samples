@@ -12,6 +12,10 @@ import DashboardState from "../models/dashboard-state";
 
 import "../style/style.css";
 
+var accessToken;
+var consentLink;
+var idToken;
+
 // Dashboard where user can manage the tags
 class Dashboard extends Component {
     constructor(props) {
@@ -19,10 +23,13 @@ class Dashboard extends Component {
 
         this.state = {
             teamworkTags: [],
+            appId: "",
+            context: undefined,
             dashboardState: DashboardState.Default,
             selectedTeamworkTag: {},
             teamsContext: {},
-            isLoading: true
+            isLoading: true,
+            isError: false
         }
     }
 
@@ -30,8 +37,53 @@ class Dashboard extends Component {
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.getContext().then((context) => {
                 this.setState({ teamsContext: context });
-                this.initializeData(context.team.groupId);
+            }).then(() => {
+                // Fetch id token
+                microsoftTeams.authentication.getAuthToken().then((result) => {
+                    console.log(this.state.teamsContext);
+                    accessToken = result;
+                    this.ssoLoginSuccess(result);
+                }).catch((error) => {
+                    if (error.response.status == 500) {
+                        this.setState({ isLoading: false, isError: true, dashboardState: DashboardState.Error });
+                    }
+                    else {
+                        this.ssoLoginFailure(error)
+                    }
+                });
             })
+        });
+    }
+
+    // Success callback for getAuthtoken method
+        ssoLoginSuccess = async (result) => {
+            accessToken = result;
+            this.exchangeClientTokenForServerToken(result);
+    }
+
+    // Failure callback for getAuthtoken method
+    ssoLoginFailure(error) {
+        alert("SSO failed: ", error);
+    }
+
+    // Exchange client token with server token and fetch the pinned message details.
+    exchangeClientTokenForServerToken = async (token) => {
+        var id = this.state.teamsContext.team.groupId;
+        idToken = token;
+        var appDataResponse = await axios.get(`/api/teamtag/getAppData`);
+        consentLink = `https://login.microsoftonline.com/common/adminconsent?client_id=${appDataResponse.data}`;
+        this.setState({ appId: appDataResponse.data });
+        await axios.get(`/api/teamtag/list?ssoToken=${token}&teamId=${id}`).then((response) => {
+            if (response.status === 200) {
+                this.setState({ teamworkTags: response.data, isLoading: false });
+                return response.data;
+            }
+
+        }).catch((error) => {
+            if (error.response.status == 500) {
+                this.setState({ isLoading: false, isError: true, dashboardState: DashboardState.Error });
+            }
+            console.log("error is", error);
         });
     }
 
@@ -112,7 +164,7 @@ class Dashboard extends Component {
     // Handler when user clicks on delete icon.
     onDeleteTagClick = async (teamworkTag) => {
         this.setState({ isLoading: true });
-        var response = await axios.delete(`api/teamtag/${this.state.teamsContext.team.groupId}/tag/${teamworkTag.id}`);
+        var response = await axios.delete(`api/teamtag?ssoToken=${idToken}&teamId=${this.state.teamsContext.team.groupId}&tagId=${teamworkTag.id}`);
 
         if (response.status === 204) {
             await this.initializeData(this.state.teamsContext.team.groupId);
@@ -129,6 +181,8 @@ class Dashboard extends Component {
             case DashboardState.Edit:
                 return <ViewEditTag isLoading={this.state.isLoading} onBackClick={this.onBackClick} teamworkTag={this.state.selectedTeamworkTag} dashboardState={DashboardState.Edit} onTeamworkTagUpdate={this.onTeamworkTagUpdate} />
                 break;
+            case DashboardState.Error:
+                return <Flex><Text content="Error occured admin consent required for application permissions." /><a href={consentLink} target="_blank" rel="noopener noreferrer">Click here to grant consent.</a></Flex>
             default:
                 return (<Flex column>
                     <Text size="large" content="Tags created for current team" style={{ marginTop: "1rem" }} />

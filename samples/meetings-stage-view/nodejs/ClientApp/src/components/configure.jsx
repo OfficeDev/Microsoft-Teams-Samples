@@ -33,7 +33,7 @@ const Configure = props => {
             <div className="header-inner-container">
                 <div id="divConfig">
                     <br />
-                    <input type="radio" name="notificationType" value="Create" onClick={onClick}/> Add App in a meeting
+                    <input type="radio" name="notificationType" value="Create" onClick={onClick} /> Add App in a meeting
                 </div>
             </div>
         </header>

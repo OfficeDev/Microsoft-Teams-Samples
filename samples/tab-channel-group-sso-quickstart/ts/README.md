@@ -55,7 +55,6 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
         The fully qualified domain name is the human readable domain name from which your app is served. If you are using a tunneling service such as ngrok, you will need to update this value whenever your ngrok subdomain changes.
         - ex: api://f631****.ngrok.io/00000000-0000-0000-0000-000000000000
     
-  
     -Select the **Add a scope** button. In the panel that opens, enter `access_as_user` as the **Scope name**.
     -Set **Who can consent?** to `Admins and users`
     -Fill in the fields for configuring the admin and user consent prompts with values that are appropriate for the `access_as_user` scope:
@@ -78,25 +77,14 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
 
     - `"CLIENT_ID"` : Application ID of the Azure AD application
     - `"CLIENT_SECRET"` : Application secret of the Azure AD application
-    
-2. Setup for Bot
 
-   In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
-    - For bot handle, make up a name.
-    - Select "Use existing app registration" (Create the app registration in Azure Active Directory beforehand.)
-    - __*If you don't have an Azure account*__ create an [Azure free account here](https://azure.microsoft.com/en-us/free/)
-    
-   In the new Azure Bot resource in the Portal, 
-    - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path
-
-3. Setup NGROK
+2. Setup NGROK
   - Run ngrok - point to port 3978
 
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
-4. Setup for code
+3. Setup for code
  - Clone the repository
 
     ```bash
@@ -104,6 +92,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
     ```
 
   - In a terminal, navigate to `samples/tab-channel-group-sso-quickstart/ts`
+  
   -Update the `.env` configuration for the bot to use the `REACT_APP_AZURE_APP_REGISTRATION_ID` `, `REACT_APP_BASE_URL` with application base url. For e.g., your ngrok url. (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot).
   
   - Build and Run
@@ -125,7 +114,7 @@ You can build and run the project from the command line or an IDE:
     - npm start
     - The server will start running on 5000 port
     
- 5. Setup Manifest for Teams
+ 4. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./appPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.

@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState, useRef } from 'react';
 import { app } from '@microsoft/teams-js';
 import {
-  EphemeralEvent,
-  EphemeralState,
+  LiveEvent,
+  LiveState,
   UserMeetingRole,
 } from '@microsoft/live-share';
 import { IAzureAudience } from '@fluidframework/azure-client';
@@ -31,7 +31,7 @@ export interface UserInControl {
  * - `takeControl` - Callback to allow a user to take control of the presentation
  */
 export const useTakeControl = (
-  takeControlState: EphemeralState<UserInControl>,
+  takeControlState: LiveState<UserInControl>,
   userInfo?: app.UserInfo,
   audience?: IAzureAudience,
 ) => {
@@ -84,7 +84,7 @@ export const useTakeControl = (
 
         // Next we call getClientRoles to get the user's roles based on their clientId.
         // This call is cached for up to 5 minutes
-        let currentUserRoles = await EphemeralEvent.getClientRoles(
+        let currentUserRoles = await LiveEvent.getClientRoles(
           currentUserClientId,
         );
 

@@ -33,10 +33,9 @@ Add a button to your [configuration](https://docs.microsoft.com/en-us/microsoftt
 
 Azure AD, like most identity providers, does not allow its content to be placed in an iframe. This means that you will need to add a pop-up page to host the identity provider. In the following example this page is /tab-auth/simple-start. Use the microsoftTeams.authenticate() function of the Microsoft Teams client SDK to launch this page when your button is selected.
 
-
 ## Pre-requisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash
@@ -51,7 +50,7 @@ Azure AD, like most identity providers, does not allow its content to be placed 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   - Your tab needs to run as a registered Azure AD application in order to obtain an access token from Azure AD. In this step you'll register the app in your tenant and give Teams   permission to obtain access tokens on its behalf.
 
-  -Create an [AAD application](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso#1-create-your-aad-application-in-azure) in           Azure. You can do this by visiting the "Azure AD app registration" portal in Azure.
+  - Create an [AAD application](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso#1-create-your-aad-application-in-azure) in           Azure. You can do this by visiting the "Azure AD app registration" portal in Azure.
 
  - Set your application URI to the same URI you've created in Ngrok.
    - Ex: api://contoso.ngrok.io/{appId} using the application ID that was assigned to your app
@@ -73,23 +72,15 @@ Azure AD, like most identity providers, does not allow its content to be placed 
     - Enter URI as https://<<BASE-URI>>/AuthEnd
 
 ![Authentication Azure AD](ConfigTabAuthentication/Images/authentication_azure_ad.png)
- 
-2. Setup for Bot
-- Register a AAD aap registration in Azure portal.
-- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
-    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
-
-3. Setup NGROK
+2. Setup NGROK
 - Run ngrok - point to port 3978
 
 ```bash
  ngrok http -host-header=rewrite 3978
 ```
 
-4. Setup for code
+3. Setup for code
 
 - Clone the repository
 
@@ -105,8 +96,7 @@ Azure AD, like most identity providers, does not allow its content to be placed 
     - Select `TabAuthentication.csproj` file
     - Press `F5` to run the project
 
-
-5. Setup Manifest for Teams
+4. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./Manifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
@@ -119,7 +109,7 @@ Azure AD, like most identity providers, does not allow its content to be placed 
    - Go to your project directory, the ./Manifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-7) Run your tab, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
+5) Run your tab, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
 ## Running the sample
 

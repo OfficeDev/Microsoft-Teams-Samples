@@ -27,8 +27,17 @@ body {
 
 .done-button {
     background-color: green !important;
-    border: green !important;
+    border: green !important; 
 }
+.primary-button {
+    background-color: #5B58C7 !important;
+    padding: 0.5rem 1.5rem !important;
+    color: white !important;
+    border-radius: 7px !important;
+    border: none !important;
+    cursor: pointer !important;
+}
+
 
 .skip-button {
     background-color: #CC4A31 !important;
@@ -69,7 +78,7 @@ body {
 }
 
 .token-indicator-value {
-    display: inline-flex;
+    display: inline-flex !important;
     grid-row: 2;
     align-content: center;
     justify-content: center;
@@ -78,7 +87,7 @@ body {
 }
 
 .list-center {
-    display: grid;
+    display: grid !important;
     align-content: center;
     justify-content: center;
     margin: 10;
@@ -86,4 +95,9 @@ body {
     grid-row: 4;
     grid-column: 1;
     padding-top: 2em;
+}
+.list{
+    list-style: none !important;
+    padding-top: 0em !important;
+    margin-right: 2em !important;
 }

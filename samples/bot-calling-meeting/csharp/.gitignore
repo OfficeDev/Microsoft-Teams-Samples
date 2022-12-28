@@ -458,4 +458,6 @@ $RECYCLE.BIN/
 ##
 ## Microsoft Teams development
 ##
-Manifest/*.zip
+**/Manifest/*.zip
+
+Source/CallingBotSample/wwwroot/temp/*
