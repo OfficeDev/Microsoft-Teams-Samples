@@ -1,5 +1,6 @@
-(function () {
+function ssoAuth() {
     'use strict';
+    microsoftTeams.app.initialize();
 
     // 1. Get auth token
     // Ask Teams to get us a token from AAD
@@ -72,10 +73,8 @@
                 height: 535
             })
             .then((result) => {
-                let data = localStorage.getItem(result);
-                localStorage.removeItem(result);
-
-                resolve(data);
+                let tokenData = result;
+                resolve(tokenData);
             }).catch((reason) => {
                 reject(JSON.stringify(reason));
             });
@@ -138,4 +137,4 @@
         });
     });
 
-})();
+}

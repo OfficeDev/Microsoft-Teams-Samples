@@ -1,0 +1,158 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.4",
+  "body": [
+      {
+          "type": "ColumnSet",
+          "columns": [
+              {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                      {
+                          "type": "TextBlock",
+                          "text": "Incident Title",
+                          "isSubtle": true,
+                          "wrap": true
+                      },
+                      {
+                          "type": "TextBlock",
+                          "text": "${title}",
+                          "spacing": "None",
+                          "size": "Large",
+                          "wrap": true,
+                          "weight": "Bolder"
+                      }
+                  ]
+              },
+              {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                      {
+                          "type": "TextBlock",
+                          "text": "Status",
+                          "horizontalAlignment": "Right",
+                          "isSubtle": true,
+                          "wrap": true
+                      },
+                      {
+                          "type": "TextBlock",
+                          "text": "${if(endTime != '', 'RESOLVED', 'ACTIVE')}",
+                          "horizontalAlignment": "Right",
+                          "spacing": "None",
+                          "size": "Large",
+                          "color": "${if(endTime != '', 'good', 'attention')}",
+                          "wrap": true
+                      }
+                  ]
+              }
+          ]
+      },
+      {
+          "type": "ColumnSet",
+          "spacing": "Medium",
+          "separator": true,
+          "columns": [
+              {
+                  "type": "Column",
+                  "width": 1,
+                  "items": [
+                      {
+                          "type": "TextBlock",
+                          "text": "Start time",
+                          "isSubtle": true,
+                          "weight": "Bolder",
+                          "wrap": true
+                      },
+                      {
+                          "type": "TextBlock",
+                          "text": "{{TIME(${string(startTime)})}}",
+                          "color": "${if(endTime != '', '', 'attention')}",
+                          "weight": "Bolder",
+                          "spacing": "Small",
+                          "wrap": true
+                      }
+                  ]
+              },
+              {
+                  "type": "Column",
+                  "width": 1,
+                  "items": [
+                      {
+                          "type": "TextBlock",
+                          "text": "End time",
+                          "isSubtle": true,
+                          "horizontalAlignment": "Right",
+                          "weight": "Bolder",
+                          "wrap": true
+                      },
+                      {
+                          "type": "TextBlock",
+                          "text": "--",
+                          "$when": "${endTime == ''}",
+                          "horizontalAlignment": "Right",
+                          "weight": "Bolder",
+                          "spacing": "Small",
+                          "wrap": true
+                      },
+                      {
+                          "type": "TextBlock",
+                          "text": "{{TIME(${string(endTime)})}}",
+                          "$when": "${endTime != ''}",
+                          "color": "Good",
+                          "horizontalAlignment": "Right",
+                          "weight": "Bolder",
+                          "spacing": "Small",
+                          "wrap": true
+                      }
+                  ]
+              }
+          ]
+      }
+  ],
+  "actions": [
+      {
+          "type": "Action.Submit",
+          "title": "Transfer call",
+          "id": "transfercall",
+          "data": {
+              "action": "transfercall",
+              "msteams": {
+                  "type": "task/fetch"
+              }
+          }
+      },
+      {
+          "type": "Action.Submit",
+          "title": "Invite participant to meeting",
+          "id": "inviteparticipant",
+        "data": {
+          "action": "inviteparticipant",
+          "msteams": {
+            "type": "task/fetch"
+          },
+          "callId": "${callId}"
+        }
+      },
+      {
+          "type": "Action.Submit",
+          "title": "Play record prompt",
+          "id": "playrecordprompt",
+          "data": {
+            "type": "playrecordprompt",
+            "callId": "${callId}"
+          }
+      },
+      {
+          "type": "Action.Submit",
+          "title": "Hang up",
+          "id": "hangup",
+          "data": {
+              "type": "hangup",
+              "callId":  "${callId}"
+          }
+      }
+  ]
+}

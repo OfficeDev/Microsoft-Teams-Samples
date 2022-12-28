@@ -849,3 +849,128 @@ jobs:
         run: |
           npm install
           npm run build --if-present
+
+  build-java-samples:
+    runs-on: windows-latest
+    #Add project path, name and version as below for any new additions
+    strategy:
+      matrix:
+        include:
+            - project_path: 'samples/bot-conversation/java'
+              name: 'bot-conversation'
+              version: '18'
+
+            - project_path: 'samples/bot-message-reaction/java'
+              name: 'bot-message-reaction'
+              version: '18'
+
+            - project_path: 'samples/bot-teams-authentication/java'
+              name: 'bot-teams-authentication'
+              version: '18'
+
+            - project_path: 'samples/bot-file-upload/java'
+              name: 'bot-file-upload'
+              version: '18'   
+
+            - project_path: 'samples/bot-task-module/java'
+              name: 'bot-task-module'
+              version: '18'
+
+            - project_path: 'samples/bot-initiate-thread-in-channel/java'
+              name: 'bot-initiate-thread-in-channel'
+              version: '18'
+
+            - project_path: 'samples/msgext-search/java'
+              name: 'msgext-search'
+              version: '18'
+
+            - project_path: 'samples/msgext-action/java'
+              name: 'msgext-action'
+              version: '18'  
+
+            - project_path: 'samples/msgext-action-preview/java'
+              name: 'msgext-action-preview'
+              version: '18'
+
+            - project_path: 'samples/msgext-link-unfurling/java'
+              name: 'msgext-link-unfurling'
+              version: '18' 
+
+      fail-fast: false
+    name: Build all "${{ matrix.name }}" java
+    defaults:
+      run:
+        working-directory: "${{ matrix.project_path }}"
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 18 version
+        uses: actions/setup-java@v2
+        with:
+          java-version: "${{ matrix.version }}"
+          distribution: 'adopt'
+
+      - name: Build with Maven
+        run: mvn --batch-mode --update-snapshots package
+
+  build-python-samples:
+    runs-on: windows-latest
+    #Add project path, name and version as below for any new additions
+    strategy:
+      matrix:
+        include:
+            - project_path: 'samples/bot-conversation/python'
+              name: 'bot-conversation'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-teams-authentication/python'
+              name: 'bot-teams-authentication'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-file-upload/python'
+              name: 'bot-file-upload'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-task-module/python'
+              name: 'bot-task-module'
+              version: '3.10.x'
+
+            - project_path: 'samples/bot-initiate-thread-in-channel/python'
+              name: 'bot-initiate-thread-in-channel'
+              version: '3.10.x'
+
+            - project_path: 'samples/msgext-search/python'
+              name: 'msgext-search'
+              version: '3.10.x'
+
+            - project_path: 'samples/msgext-action/python'
+              name: 'msgext-action'
+              version: '3.10.x'
+
+            - project_path: 'samples/msgext-action-preview/python'
+              name: 'msgext-action-preview'
+              version: '3.10.x'
+
+            - project_path: 'samples/msgext-link-unfurling/python'
+              name: 'msgext-link-unfurling'
+              version: '3.10.x'
+              
+            - project_path: 'samples/msgext-search-auth-config/python'
+              name: 'msgext-search-auth-config'
+              version: '3.10.x'
+
+      fail-fast: false
+    name: Build all "${{ matrix.name }}" python
+    defaults:
+      run:
+        working-directory: "${{ matrix.project_path }}"
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "${{ matrix.version }}"
+          cache: 'pip'
+      - name: Install dependencies
+        run: pip install -r requirements.txt

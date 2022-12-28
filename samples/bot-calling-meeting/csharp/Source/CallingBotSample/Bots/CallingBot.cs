@@ -2,10 +2,13 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using CallingBotSample.Authentication;
+using CallingBotSample.Cache;
+using CallingBotSample.Models;
 using CallingBotSample.Options;
 using CallingBotSample.Services.BotFramework;
 using CallingBotSample.Services.CognitiveServices;
@@ -16,8 +19,6 @@ using CallingMeetingBot.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
-using Microsoft.CognitiveServices.Speech;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Graph;
@@ -39,28 +40,31 @@ namespace CallingBotSample.Bots
         private readonly ICallService callService;
         private readonly AudioRecordingConstants audioRecordingConstants;
         private readonly ITeamsRecordingService teamsRecordingService;
-        private readonly IMemoryCache callBotCache;
+        private readonly ICallCache callCache;
+        private readonly IIncidentCache incidentCache;
         private readonly ISpeechService speechService;
         private readonly IBotService botService;
         private readonly ILogger<CallingBot> logger;
 
         public CallingBot(
-        ICallService callService,
-        AudioRecordingConstants audioRecordingConstants,
-        ITeamsRecordingService teamsRecordingService,
-        IGraphLogger graphLogger,
-        IMemoryCache callBotCache,
-        ISpeechService speechService,
-        IBotService botService,
-        IOptions<BotOptions> botOptions,
-        ILogger<CallingBot> logger)
+            ICallService callService,
+            AudioRecordingConstants audioRecordingConstants,
+            ITeamsRecordingService teamsRecordingService,
+            IGraphLogger graphLogger,
+            ICallCache callCache,
+            IIncidentCache incidentCache,
+            ISpeechService speechService,
+            IBotService botService,
+            IOptions<BotOptions> botOptions,
+            ILogger<CallingBot> logger)
         {
             this.botOptions = botOptions.Value;
             this.callService = callService;
             this.audioRecordingConstants = audioRecordingConstants;
             this.teamsRecordingService = teamsRecordingService;
             this.graphLogger = graphLogger;
-            this.callBotCache = callBotCache;
+            this.callCache = callCache;
+            this.incidentCache = incidentCache;
             this.speechService = speechService;
             this.botService = botService;
             this.logger = logger;
@@ -121,7 +125,13 @@ namespace CallingBotSample.Bots
                 // If the notification is a newly created, incoming call, answer it
                 if (args.ChangeType == ChangeType.Created && call.State == CallState.Incoming)
                 {
-                    await callService.Answer(callId, audioRecordingConstants.Speech, audioRecordingConstants.PleaseRecordYourMessage);
+                    await callService.Answer(
+                        callId,
+                        new List<MediaInfo>
+                        {
+                            audioRecordingConstants.Speech,
+                            audioRecordingConstants.PleaseRecordYourMessage
+                        });
                 }
                 // If the notification is established (answered), fire a recording prompt
                 else if (
@@ -131,14 +141,15 @@ namespace CallingBotSample.Bots
                     // Some scenarios fire two CallState.Established events. The use of a cache ensures we only play the prompt once on meeting join
                     // This works by keeping track of when the record prompt on meeting established is sent, and if another notifications comes in
                     // we do not send the prompt any more.
-                    string key = $"{callId}:established";
-                    if (!callBotCache.Get<bool>(key))
+                    if (!callCache.GetIsEstablished(callId))
                     {
-                        callBotCache.Set(key, true, new MemoryCacheEntryOptions
-                        {
-                            AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30)
-                        });
+                        callCache.SetIsEstablished(callId);
                         await callService.Record(callId, audioRecordingConstants.PleaseRecordYourMessage);
+                    }
+
+                    if (incidentCache.TryGetValue(callId, out IncidentDetails incidentDetails))
+                    {
+                        await callService.InviteParticipant(callId, incidentDetails.Participants.Select(p => new IdentitySet { User = p }));
                     }
                 }
             }
@@ -164,13 +175,9 @@ namespace CallingBotSample.Bots
                     {
                         var result = await speechService.ConvertWavToText(recordingLocation);
 
-                        if (result.Reason == ResultReason.RecognizedSpeech)
+                        if (result != null)
                         {
-                            await botService.SendToConversation($"You said: {result.Text}", threadId);
-                        }
-                        else if (result.Reason == ResultReason.NoMatch)
-                        {
-                            await botService.SendToConversation($"Sorry, we are unable to transcribe what you just said.", threadId);
+                            await botService.SendToConversation($"You said: {result}", threadId);
                         }
                         else
                         {
@@ -189,13 +196,15 @@ namespace CallingBotSample.Bots
 
                 await callService.PlayPrompt(
                     callId,
-                    new MediaInfo
+                    new List<MediaInfo>
                     {
-                        // This URL needs to be publicly accessible, so Microsoft Teams can play the audio.
-                        // In a production environment, you might want to consider a better location than
-                        // this server's content directory.
-                        Uri = new Uri(botOptions.BotBaseUrl, recordingLocation).ToString(),
-                        ResourceId = Guid.NewGuid().ToString(),
+                        new MediaInfo {
+                            // This URL needs to be publicly accessible, so Microsoft Teams can play the audio.
+                            // In a production environment, you might want to consider a better location than
+                            // this server's content directory.
+                            Uri = new Uri(botOptions.BotBaseUrl, recordingLocation).ToString(),
+                            ResourceId = Guid.NewGuid().ToString(),
+                        }
                     });
             }
             // If the notification is a play prompt operation, we should check if the prompt is temporary and delete the file
@@ -229,26 +238,41 @@ namespace CallingBotSample.Bots
             // If the notification is participants change, keep track of if a User has joined the call at some point
             // if at least one user has joined, and only the bot is remaining in the call, get the bot to hang up.
             // This ensures that the Bot doesn't keep a call active for a long period of time.
-            else if (args.ChangeType == ChangeType.Updated &&
-                args.Notification.ResourceUrl.Contains("/participants") &&
-                args.ResourceData is object[] objs)
+            else if (args.IsParticipantsNotification() && args.ResourceData is object[] objs)
             {
-                string key = $"{callId}:atLeastOneUserJoined";
                 Participant[] participants = Array.ConvertAll(objs, (object obj) => (Participant)obj);
 
                 if (participants.Length > 0)
                 {
-                    bool atLeastOneUserJoined = callBotCache.Get<bool>(key);
+                    bool atLeastOneUserJoined = callCache.GetAtLeastOneUserJoined(callId);
 
                     if (!atLeastOneUserJoined && participants.Any(p => p.Info.Identity.User != null))
                     {
-                        callBotCache.Set(key, true, new MemoryCacheEntryOptions
+                        callCache.SetAtLeastOneUserJoined(callId);
+
+                        if (incidentCache.TryGetValue(callId, out IncidentDetails incidentDetails))
                         {
-                            // This 1 hour cache is sufficient for this sample.
-                            // If you are replicating this code, you might want to consider an alternative value which takes into account
-                            // the meeting's scheduled length.
-                            AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1)
-                        });
+                            string? textToSpeechRecordingLocation = await speechService.ConvertTextToSpeech(
+                                $"There is an ongoing incident for {incidentDetails.IncidentSubject}. Your assistance is required.");
+
+                            if (textToSpeechRecordingLocation != null)
+                            {
+                                await callService.PlayPrompt(
+                                    callId,
+                                    new List<MediaInfo>
+                                    {
+                                        new MediaInfo
+                                        {
+                                            Uri = new Uri(botOptions.BotBaseUrl, textToSpeechRecordingLocation).ToString(),
+                                            ResourceId = Guid.NewGuid().ToString(),
+                                    } });
+                            }
+                        }
+                        else
+                        {
+                            // Play the record prompt only when the first user joins the call
+                            await callService.Record(callId, audioRecordingConstants.PleaseRecordYourMessage);
+                        }
                     }
 
                     // If there is only one participant remaining, and it's this application, and at least one user has joined at some point, hang up
@@ -270,7 +294,7 @@ namespace CallingBotSample.Bots
                 return operation.ClientContext;
             }
 
-            // Resource URLs are in the format below, with the call id in the 3rd postion (position 0 will be empty)
+            // Resource URLs are in the format below, with the call id in the 3rd position (position 0 will be empty)
             // #microsoft.graph.call: /communications/calls/<<call-id-as-guid>>
             // #microsoft.graph.recordOperation: /communications/calls/<<call-id-as-guid>>/operations/<<operation-id-as-guid>>
             return notificationArgs.Notification.ResourceUrl.Split('/')[3];

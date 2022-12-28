@@ -21,8 +21,9 @@
       "data": {
         "action": "${action}",
         "msteams": {
-            "type": "task/submit"
-        }
+          "type": "task/submit"
+        },
+        "callId": "${callId}"
       }
     }
   ]

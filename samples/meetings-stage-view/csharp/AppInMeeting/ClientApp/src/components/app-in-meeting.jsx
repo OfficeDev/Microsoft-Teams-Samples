@@ -46,27 +46,27 @@ const AppInMeeting = props => {
         var shareToStageLink = `https://teams.microsoft.com/l/meeting-share?appContext=${encodedContext}`;
 
         microsoftTeams.app.openLink(shareToStageLink);
-        
+
     }
 
     // Share the content to meeting stage view.
     const shareSpecificPart = (partName) => {
         var appContentUrl = "";
         microsoftTeams.app.getContext().then((context) => {
-          appContentUrl = partName == 'todo' ? `${window.location.origin}/todoView?meetingId=${context.meeting.id}` : partName == 'doing' ? `${window.location.origin}/doingView?meetingId=${context.meeting.id}` : `${window.location.origin}/doneView?meetingId=${context.meeting.id}`;
-          microsoftTeams.meeting.shareAppContentToStage((err, result) => {
-            if (result) {
-              // handle success
-              console.log(result);
-            }
-            
-            if (err) {
-              // handle error
-              alert(JSON.stringify(err))
-            }
-          }, appContentUrl);
+            appContentUrl = partName == 'todo' ? `${window.location.origin}/todoView?meetingId=${context.meeting.id}` : partName == 'doing' ? `${window.location.origin}/doingView?meetingId=${context.meeting.id}` : `${window.location.origin}/doneView?meetingId=${context.meeting.id}`;
+            microsoftTeams.meeting.shareAppContentToStage((err, result) => {
+                if (result) {
+                    // handle success
+                    console.log(result);
+                }
+
+                if (err) {
+                    // handle error
+                    alert(JSON.stringify(err))
+                }
+            }, appContentUrl);
         });
-      };
+    };
 
     return (
         <div id="chatSection" className="chatSection">
@@ -75,13 +75,13 @@ const AppInMeeting = props => {
             </div>
             <div id="boardDiv" className="chat-window">
                 <div className="part-container">
-                    <Todo shareSpecificPart={shareSpecificPart}/>
+                    <Todo shareSpecificPart={shareSpecificPart} />
                 </div>
                 <div className="part-container">
-                    <Doing shareSpecificPart={shareSpecificPart}/>
+                    <Doing shareSpecificPart={shareSpecificPart} />
                 </div>
                 <div className="part-container">
-                    <Done shareSpecificPart={shareSpecificPart}/>
+                    <Done shareSpecificPart={shareSpecificPart} />
                 </div>
                 <button onClick={openDeepLink}>Share todo list (Deeplink)</button>
             </div>
