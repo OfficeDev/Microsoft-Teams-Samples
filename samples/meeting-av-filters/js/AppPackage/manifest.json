@@ -1,0 +1,59 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
+  "manifestVersion": "devPreview",
+  "version": "1.0.0",
+  "id": "<GUID>",
+  "packageName": "com.microsoft.teams.avfilter",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "icons": {
+    "color": "icon-color.png",
+    "outline": "icon-outline.png"
+  },
+  "name": {
+    "short": "Teams Meeting AV Filter",
+    "full": "Teams Meeting AV Filter"
+  },
+  "description": {
+    "short": "This sample demonstrates the use of AV filters in Teams meetings",
+    "full": "This sample demonstrates use of AV filters for Teams meetings by processing the Teams meeting video frames."
+  },
+  "accentColor": "#FFFFFF",
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "CameraStream.Read.User",
+          "type": "Delegated"
+        },
+        {
+          "name": "OutgoingVideoStream.Write.User",
+          "type": "Delegated"
+        }
+      ]
+    }
+  },
+  "validDomains": [ "*.ngrok.io", "<<VALID DOMAIN>>" ],
+  "localizationInfo": {
+    "defaultLanguageTag": "en-us"
+  },
+  "meetingExtensionDefinition": {
+    "videoFilters": [
+      {
+        "id": "c2cf81fd-a1c0-4742-b41a-ef969b3ed491",
+        "name": "Others_half",
+        "thumbnail": "half.png"
+      },
+      {
+        "id": "b0c8896c-7be8-4645-ae02-a8bc9b0355e2",
+        "name": "Others_gray scale",
+        "thumbnail": "gray.png"
+      }
+    ],
+    "videoFiltersConfigurationUrl": "https://<<VALID DOMAIN>>/"
+  }
+}
