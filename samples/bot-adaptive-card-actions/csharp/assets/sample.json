@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-bot-adaptivecard-actions-csharp",
     "source": "officeDev",
-    "title": "Get adaptivecard Actions",
-    "shortDescription": "Demonstrating the feature where user can send adaptivecard actions using bot.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-adaptivecard-actions/csharp",
+    "title": "Send Adaptive Card Including Different Actions",
+    "shortDescription": "Demonstrating the feature where user can send adaptive card actions using bot.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-adaptive-card-actions/csharp",
     "longDescription": [
-      "Demonstrating the feature where user can send adaptivecard actions using bot."
+      "Demonstrating the feature where user can send adaptive card with actions using bot."
     ],
     "creationDateTime": "2022-12-27",
     "updateDateTime": "2022-12-27",
@@ -35,8 +35,8 @@
       {
         "type": "Image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-suggested-actions/csharp/SuggestedActions/Images/AdaptiveCardActions.gif",
-        "alt": "Solution UX showing suggested action in Bots."
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-adaptive-card-actions/csharp/AdaptiveCardActions/Images/AdaptiveCardActions.gif",
+        "alt": "Solution UX showing Adaptive Card supported actions in bot."
       }
     ],
     "authors": [

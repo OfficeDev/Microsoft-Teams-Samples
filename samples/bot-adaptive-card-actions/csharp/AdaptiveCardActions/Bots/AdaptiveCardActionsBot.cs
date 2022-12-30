@@ -16,17 +16,27 @@ namespace Microsoft.BotBuilderSamples
     // This bot will respond to the user's input with suggested actions.
     // Suggested actions enable your bot to present buttons that the user
     // can tap to provide input. 
-    public class AdaptiveActionsBot : ActivityHandler
+    public class AdaptiveCardActionsBot : ActivityHandler
     {
-        public string commandString = "Please use one of these commands: **1** for  Adaptive Card Actions, **2** for Bot Suggested Actions and **3** for Toggle Visible Card";
+        public string commandString = "Please use one of these commands: **Card Actions** for  Adaptive Card Actions, **Suggested Actions** for Bot Suggested Actions and **ToggleVisibility** for Action ToggleVisible Card";
 
+        /// <summary>
+        /// provide logic for when members other than the bot join the conversation
+        /// </summary>
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             // Send a welcome message to the user and tell them what actions they may perform to use this bot
             var welcomeText = "Hello and Welcome!";
+
+            // Sends an activity to the sender of the incoming activity.
             await turnContext.SendActivityAsync(MessageFactory.Text(welcomeText), cancellationToken);
+
             await turnContext.SendActivityAsync(MessageFactory.Text(commandString), cancellationToken);
         }
+
+        /// <summary>
+        /// provide logic specific to Message activities,
+        /// </summary>
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             if (turnContext.Activity.Text != null)
@@ -34,25 +44,28 @@ namespace Microsoft.BotBuilderSamples
                 // Extract the text from the message activity the user sent.
                 var text = turnContext.Activity.Text.ToLowerInvariant();
 
-                if (text.Contains("1"))
+                if (text.Contains("card actions"))
                 {
                     string[] path = { ".", "Cards", "AdaptiveCardActions.json" };
                     var adaptiveCardForPersonalScope = GetFirstOptionsAdaptiveCard(path, turnContext.Activity.From.Name);
                     await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardForPersonalScope), cancellationToken);
                 }
-                else if (text.Contains("2"))
+                else if (text.Contains("suggested actions"))
                 {
                     //Respond to the user.
                     await turnContext.SendActivityAsync("Please Enter a color from the suggested action choices", cancellationToken: cancellationToken);
 
                     string[] path = { ".", "Cards", "SuggestedActions.json" };
                     var adaptiveCardForPersonalScope = GetFirstOptionsAdaptiveCard(path, turnContext.Activity.From.Name);
+
+                    // Sends an activity to the sender of the incoming activity.
                     await turnContext.SendActivityAsync(MessageFactory.Attachment(adaptiveCardForPersonalScope), cancellationToken);
 
+                    //sends a suggested action card
                     await SendSuggestedActionsAsync(turnContext, cancellationToken);
 
                 }
-                else if (text.Contains("3"))
+                else if (text.Contains("togglevisibility"))
                 {
                     string[] path = { ".", "Cards", "ToggleVisibleCard.json" };
                     var adaptiveCardForPersonalScope = GetFirstOptionsAdaptiveCard(path, turnContext.Activity.From.Name);
@@ -69,10 +82,12 @@ namespace Microsoft.BotBuilderSamples
                     await turnContext.SendActivityAsync(MessageFactory.Text(commandString), cancellationToken);
                 }
             }
-
             await SendDataOnCardActions(turnContext, cancellationToken);
         }
 
+        /// <summary>
+        /// ProcessInput takes input string and returns message
+        /// <summary>
         private static string ProcessInput(string text)
         {
             const string colorText = "is the best color, I agree.";
@@ -97,10 +112,12 @@ namespace Microsoft.BotBuilderSamples
             }
         }
 
-        // Creates and sends an activity with suggested actions to the user. When the user
+        /// <summary>
+        /// Creates and sends an activity with suggested actions to the user. When the user
         /// clicks one of the buttons the text value from the "CardAction" will be
         /// displayed in the channel just as if the user entered the text. There are multiple
         /// "ActionTypes" that may be used for different situations.
+        /// </summary>
         private static async Task SendSuggestedActionsAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
             try
@@ -109,11 +126,11 @@ namespace Microsoft.BotBuilderSamples
                 reply.SuggestedActions = new SuggestedActions()
                 {
                     Actions = new List<CardAction>()
-                {
+                    {
                     new CardAction() { Title = "Red", Type = ActionTypes.ImBack, Value = "Red" },
                     new CardAction() { Title = "Yellow", Type = ActionTypes.ImBack, Value = "Yellow" },
                     new CardAction() { Title = "Blue", Type = ActionTypes.ImBack, Value = "Blue" },
-                },
+                    },
                     To = new List<string> { turnContext.Activity.From.Id },
                 };
 
@@ -125,7 +142,9 @@ namespace Microsoft.BotBuilderSamples
             }
         }
 
-        // Get text.input submitted value from card.
+        /// <summary>
+        /// sends the response on card action.submit
+        /// </summary>
         private async Task SendDataOnCardActions(ITurnContext turnContext, CancellationToken cancellationToken)
         {
             if (turnContext.Activity.Value != null)
@@ -136,7 +155,9 @@ namespace Microsoft.BotBuilderSamples
             }
         }
 
-        // Get intial card.
+        /// <summary>
+        /// Get the initial card
+        /// </summary>
         private Attachment GetFirstOptionsAdaptiveCard(string[] filepath, string name = null, string userMRI = null)
         {
             var adaptiveCardJson = File.ReadAllText(Path.Combine(filepath));

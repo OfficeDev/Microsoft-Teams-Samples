@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Demonstrating the feature where user can send adaptivecard actions using bot.
+description: Demonstrating the feature where user can send adaptive card with different actions using bot.
 products:
 - office-teams
 - office
@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-bot-adaptivecard-actions-csharp
 ---
 
-# Get Adaptive Card and Suggested Actions
+# Send Adaptive Card Including Different Actions
 
 This sample shows the feature where user can send Adaptive Card actions using bot.
 
@@ -30,53 +30,40 @@ This sample shows the feature where user can send Adaptive Card actions using bo
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 ## Setup
-    
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-
-2. Setup for Bot
-	- Register a AAD aap registration in Azure portal.
+   
+1. Setup for Bot
+	- Register a AAD aap registration in Azure portal [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908).
 	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 	- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
     > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
-3. Setup NGROK
-      - Run ngrok - point to port 3978
+1. Run ngrok - point to port 3978
 
-	```bash
-	 #ngrok http -host-header=rewrite 3978
-	```   
-4. Setup for code
+   ```bash
+     ngrok http -host-header=rewrite 3978
+   ``` 
+3. Setup for code
 
   - Clone the repository
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
+
+  - If you are using Visual Studio
+ 
+  - Launch Visual Studio
+  - File -> Open Folder
+  - Navigate to `samples/bot-adaptive-card-actions/csharp/AdaptiveCardActions` folder
+  - Select `AdaptiveCardActions.sln` solution file
+
    - Modify the `/appsettings.json` and fill in the following details:
      - `{{MicrosoftAppId}}` - Generated from Step 1 is the application app id
      - `{{MicrosoftAppPassword}}` - Generated from Step 1, also referred to as Client secret
-   
-   - In a terminal, navigate to `samples/bot-adaptivecard-actions/csharp`
-
-     change into project folder
-      ```bash
-      cd # AdaptiveCardActions
-      ```
-   - From a terminal
-     ```bash
-     # run the bot
-     dotnet run
-     ```
-
-   - Or from Visual Studio
-     - Launch Visual Studio
-     - File -> Open -> Project/Solution
-     - Navigate to `AdaptiveCardActions` folder
-     - Select `AdaptiveCardActions.csproj` file
      - Press `F5` to run the project
      
-5. Setup Manifest for Teams
+4. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{Domain-Name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
@@ -119,10 +106,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
-- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
-- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [Actions](https://learn.microsoft.com/en-us/adaptive-cards/rendering-cards/actions)
+- [Send suggested actions](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet#send-suggested-actions)
 
 

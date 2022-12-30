@@ -18,16 +18,14 @@ class SuggestedActionsBot extends ActivityHandler {
         this.onMessage(async (context, next) => {
             const text = context.activity.text;
 
-            if (text.includes("1")) {
+            if (text.includes("Card Actions")) {
                 const userCard = CardFactory.adaptiveCard(this.adaptiveCardActions());
                 await context.sendActivity({ attachments: [userCard] });
             }
-
-            else if (text.includes("2")) {
+            else if (text.includes("Suggested Actions")) {
                 const userCard = CardFactory.adaptiveCard(this.SuggestedActionsCard());
                 await context.sendActivity({ attachments: [userCard] });
             }
-
             else if (text.includes("Red") || text.includes("Blue") || text.includes("Yellow")) {
                 // Create an array with the valid color options.
                 const validColors = ['Red', 'Blue', 'Yellow'];
@@ -38,16 +36,13 @@ class SuggestedActionsBot extends ActivityHandler {
                 }
                 await this.sendSuggestedActions(context);
             }
-
-            else if (text.includes("3")) {
+            else if (text.includes("ToggleVisibility")) {
                 const userCard = CardFactory.adaptiveCard(this.ToggleVisibleCard());
                 await context.sendActivity({ attachments: [userCard] });
             }
-
             else {
-                await context.sendActivity("Please use one of these commands: **1** for  Adaptive Card Actions, **2** for Bot Suggested Actions and **3** for Toggle Visible Card");
+                await context.sendActivity("Please use one of these commands: **Card Actions** for  Adaptive Card Actions, **Suggested Actions** for Bot Suggested Actions and **ToggleVisibility** for Action ToggleVisible Card");
             }
-
             // By calling next() you ensure that the next BotHandler is run.
             await next();
         });

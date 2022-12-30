@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "SuggestedActions": {
+    "AdaptiveCardActions": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

@@ -11,12 +11,12 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "AdaptiveCard Actions",
+    "short": "Adaptive Card Actions",
     "full": "Adaptive Card Actions"
   },
   "description": {
     "short": "Adaptive Card Actions",
-    "full": "This sample shows the feature where user can send Adaptive actions using bot."
+    "full": "This sample shows the feature where user can send different adaptive card actions using bot."
   },
   "icons": {
     "outline": "outline.png",
@@ -32,7 +32,6 @@
       "isNotificationOnly": false
     }
   ],
-  "permissions": [ "identity", "messageTeamMembers" ],
   "validDomains": [
     "<<Domain-Name>>",
     "*ngrok.io"
