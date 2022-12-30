@@ -105,6 +105,12 @@ namespace Microsoft.BotBuilderSamples.Bots
                             new CardAction
                             {
                                 Type = ActionTypes.MessageBack,
+                                Title = "Send Immersive Reader Card",
+                                Text = "ImmersiveReader"
+                            },
+                            new CardAction
+                            {
+                                Type = ActionTypes.MessageBack,
                                 Title = "Find me in Adaptive Card",
                                 Text = "mention me"
                             },
