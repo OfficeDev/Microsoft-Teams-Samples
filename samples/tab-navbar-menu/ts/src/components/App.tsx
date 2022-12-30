@@ -13,7 +13,7 @@ import Tab from "./Tab";
 function App() {
 
   // Initialize the Microsoft Teams SDK
-  microsoftTeams.initialize();
+  microsoftTeams.app.initialize();
 
   // Display the app home page hosted in Teams
   return (

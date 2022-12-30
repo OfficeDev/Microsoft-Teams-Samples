@@ -78,7 +78,7 @@ Add multiple actions to the upper right NavBar and build an overflow menu for ex
 ![MainPage](Images/MainPage.png)
 
 **Clik 3 small dots (Includes other app options and information):**
-![Manu1](Images/Manu1.png)
+![Manu1](Images/Menu1.png)
 
 **Click About Menu:**
 ![Menu2](Images/Menu2.png)

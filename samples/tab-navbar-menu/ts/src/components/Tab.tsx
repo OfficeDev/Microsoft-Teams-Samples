@@ -1,39 +1,7 @@
 import React from 'react';
 import * as microsoftTeams from '@microsoft/teams-js';
-const navItems = [
-  {
-    id: '1',
-    title: 'Home',
-    icon: "there is an <svg></svg> tag here but I shortened it for easier reading",
-    enabled: true,
-    viewData: null as any,
-    selected: false,
-  },
-  {
-    id: '2',
-    title: 'News',
-    icon: "there is an <svg></svg> tag here but I shortened it for easier reading",
-    enabled: true,
-    viewData: null as any,
-    selected: false,
-  },
-  {
-    id: '3',
-    title: 'Contact',
-    icon: "there is an <svg></svg> tag here but I shortened it for easier reading",
-    enabled: true,
-    viewData: null as any,
-    selected: false,
-  },
-  {
-    id: '4',
-    title: 'About',
-    icon: "there is an <svg></svg> tag here but I shortened it for easier reading",
-    enabled: true,
-    viewData: null as any,
-    selected: false,
-  }
-];
+import { navItems } from "./Constants";
+
 export interface INavProps {
 }
 interface INavState {
@@ -47,7 +15,6 @@ class TermsOfUse extends React.Component<INavProps, INavState> {
     }
   }
   public async componentDidMount() {
-    microsoftTeams.app.initialize();
     microsoftTeams.menus.initialize();
     this.navBarMenu();
   }
@@ -62,7 +29,7 @@ class TermsOfUse extends React.Component<INavProps, INavState> {
   public render() {
     let content;
     if(this.state.menuId === "0"){
-      content = <h1>Dashboard-Q</h1>
+      content = <h1>Dashboard</h1>
     }else if(this.state.menuId === "1"){
       content = <h1>Home</h1>
     }else if(this.state.menuId === "2"){
