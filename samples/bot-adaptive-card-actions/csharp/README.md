@@ -31,7 +31,7 @@ This sample shows the feature where user can send Adaptive Card actions using bo
 
 ## Setup
    
-1. Setup for Bot
+1. Setup For Bot
 	- Register a AAD aap registration in Azure portal [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908).
 	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
@@ -44,7 +44,7 @@ This sample shows the feature where user can send Adaptive Card actions using bo
    ```bash
      ngrok http -host-header=rewrite 3978
    ``` 
-3. Setup for code
+3. Setup For Code
 
   - Clone the repository
     ```bash
@@ -61,7 +61,7 @@ This sample shows the feature where user can send Adaptive Card actions using bo
    - Modify the `/appsettings.json` and fill in the following details:
      - `{{MicrosoftAppId}}` - Generated from Step 1 is the application app id
      - `{{MicrosoftAppPassword}}` - Generated from Step 1, also referred to as Client secret
-     - Press `F5` to run the project
+  - Press `F5` to run the project
      
 4. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
