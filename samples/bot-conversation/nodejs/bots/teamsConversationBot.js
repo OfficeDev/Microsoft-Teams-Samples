@@ -105,6 +105,12 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 title: 'Delete card',
                 value: null,
                 text: 'Delete'
+            },
+            {
+                type: ActionTypes.MessageBack,
+                title: 'Send Immersive Reader Card',
+                value: null,
+                text: 'ImmersiveReader'
             }
         ];
 
