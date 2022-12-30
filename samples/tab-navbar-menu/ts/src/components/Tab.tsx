@@ -7,13 +7,14 @@ export interface INavProps {
 interface INavState {
   menuId: string;
 }
-class TermsOfUse extends React.Component<INavProps, INavState> {
+class Tab extends React.Component<INavProps, INavState> {
   constructor(props: any) {
     super(props);
     this.state = {
       menuId: "0"
     }
   }
+  
   public async componentDidMount() {
     microsoftTeams.menus.initialize();
     this.navBarMenu();
@@ -46,4 +47,4 @@ class TermsOfUse extends React.Component<INavProps, INavState> {
     );
   }
   }
-export default TermsOfUse;
+export default Tab;

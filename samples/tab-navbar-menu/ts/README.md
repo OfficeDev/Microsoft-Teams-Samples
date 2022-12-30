@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Sample personal tab navbar-menu.
+description: Sample to show navbar-menu in personal tab app.
 products:
 - office-teams
 - office
@@ -58,7 +58,7 @@ Add multiple actions to the upper right NavBar and build an overflow menu for ex
 
 4. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your GuId and you see the place holder string `{{GuID}}` in the `manifest.json`
+    - **Edit** the `manifest.json` contained in the ./AppPackage folder to replace your GUID and you see the place holder string `{{GUID}}` in the `manifest.json`
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - **Zip** up the contents of the `AppPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
@@ -67,7 +67,7 @@ Add multiple actions to the upper right NavBar and build an overflow menu for ex
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
-   **Note** The navbar menu app is supported only persona scopes.
+   **Note** The navbar menu app is supported only personal scopes.
 ## Running the sample
 
 **Install App:**

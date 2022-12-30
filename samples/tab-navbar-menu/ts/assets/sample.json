@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-tab-navbar-menu-ts",
     "source": "officeDev",
-    "title": "Starter solution: Personal tab with Navbar Menu in TypeScript",
-    "shortDescription": "Add multiple actions to the upper right NavBar and build an overflow menu for extra actions in an app",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples//tab-navbar-menu/ts",
+    "title": "Teams Personal Tab Navbar-Menu Sample TS",
+    "shortDescription": "Add multiple actions to the upper right in Nav-Bar and build an overflow menu for extra actions in an app.",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-navbar-menu/",
     "longDescription": [
-      "Add multiple actions to the upper right NavBar and build an overflow menu for extra actions in an app"
+      "Add multiple actions to the upper right in Nav-Bar and build an overflow menu for extra actions in an app."
     ],
     "creationDateTime": "2022-29-12",
     "updateDateTime": "2022-29-12",
