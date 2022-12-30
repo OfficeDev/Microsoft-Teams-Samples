@@ -75,21 +75,27 @@ Add multiple actions to the upper right NavBar and build an overflow menu for ex
 ![InstallApp](Images/InstallApp.png)
 
 **MainPage UI:**
+
 ![MainPage](Images/MainPage.png)
 
 **Clik 3 small dots (Includes other app options and information):**
+
 ![Manu1](Images/Menu1.png)
 
 **Click About Menu:**
+
 ![Menu2](Images/Menu2.png)
 
 **Clik 3 small dots (Includes other app options and information):**
+
 ![Menu3](Images/Menu3.png)
 
 **Click Contact Menu:**
+
 ![Menu4](Images/Menu4.png)
 
 **Clik 3 small dots (Includes other app options and information):**
+
 ![Menu5](Images/Menu5.png)
 
 
