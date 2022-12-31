@@ -23,6 +23,27 @@
     "full": "Simple Task Module Scenario Test"
   },
   "accentColor": "#FFFFFF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://<<Valid-Domain>>/configure.html",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team",
+        "groupchat"
+      ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "entityId": "com.microsoft.teams.taskmoduletester",
+      "name": "Tasks!",
+      "contentUrl": "https://<<Valid-Domain>>/taskmodule.html",
+      "websiteUrl": "https://<<Valid-Domain>>/taskmodule.html",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
   "bots": [
     {
       "botId": "<<YOUR-MICROSOFT-APP-ID>>",

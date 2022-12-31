@@ -5,6 +5,8 @@
 
 // Import required pckages
 const path = require('path');
+// const express = require("express");
+// const pug = require('pug');
 
 // Read botFilePath and botFileSecret from .env file.
 const ENV_FILE = path.join(__dirname, '.env');
@@ -31,12 +33,12 @@ adapter.onTurnError = async (context, error) => {
     // NOTE: In production environment, you should consider logging this to Azure
     //       application insights. See https://aka.ms/bottelemetry for telemetry
     //       configuration instructions.
-    console.error(`\n [onTurnError] unhandled error: ${ error }`);
+    console.error(`\n [onTurnError] unhandled error: ${error}`);
 
     // Send a trace activity, which will be displayed in Bot Framework Emulator
     await context.sendTraceActivity(
         'OnTurnError Trace',
-        `${ error }`,
+        `${error}`,
         'https://www.botframework.com/schemas/error',
         'TurnError'
     );
@@ -53,8 +55,8 @@ const bot = new TeamsTaskModuleBot();
 const server = restify.createServer();
 server.use(restify.plugins.bodyParser());
 
-server.listen(process.env.port || process.env.PORT || 3978, function() {
-    console.log(`\n${ server.name } listening to ${ server.url }`);
+server.listen(process.env.port || process.env.PORT || 3978, function () {
+    console.log(`\n${server.name} listening to ${server.url}`);
 });
 
 // Listen for incoming requests.
