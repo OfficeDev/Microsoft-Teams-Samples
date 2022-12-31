@@ -31,7 +31,7 @@
     microsoftTeams.app.initialize().then(() => {
       microsoftTeams.app.getContext().then((context) => {
         // If not running in the Microsoft tenant, show an error message; otherwise, show the PowerApp
-        var showPowerApp = (context.tid === "569188aa-58a1-40d3-bb39-5a0c569ea981"); // Microsoft's tenant ID
+        var showPowerApp = (context.tid === "<<Microsoft-Tenant-ID>>"); // Microsoft's tenant ID
         // Uncomment the line below if you create your own PowerApp and modify the iframe's src= URL
         // var showPowerApp = true
         if (showPowerApp) {
