@@ -82,11 +82,10 @@ This sample illustrates Lifecycle of chat in Teams (Creating chat, adding member
     * User.Read.All
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 - Navigate to **Authentication**
-    If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
     Set a redirect URI:
     * Select **Add a platform**.
     * Select **Single Page Application**.
-    * Enter the **redirect URI** for the app in the following format: https://%ngrokDomain%.ngrok.io/Auth/End. This will be the page where a successful implicit grant flow will redirect the user.
+    * Enter the **redirect URI** for the app in the following format: https://%ngrokDomain%.ngrok.io/Auth/End.
     
 -  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 

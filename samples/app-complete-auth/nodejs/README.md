@@ -71,7 +71,7 @@ Using this C# sample, you can check authenticate in bot,tab and messaging extent
 - Set a redirect URI:
     * Select **Add a platform**.
     * Select **Single-page application**.
-    * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-end`. This will be the page where a successful implicit grant flow will redirect the user.
+    * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-end`.
 - Set another redirect URI:
     * Select **Add a platform**.
     * Select **web**.
