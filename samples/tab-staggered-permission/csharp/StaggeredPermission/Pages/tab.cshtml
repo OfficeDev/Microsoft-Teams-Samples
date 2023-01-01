@@ -74,7 +74,7 @@
         }
     </style>
     <script>
-        let accessToken;
+        let idToken;
         $(document).ready(function () {
             $("#mails").hide();
             getClientSideToken();
@@ -86,6 +86,7 @@
         function getClientSideToken() {
             return new Promise((resolve, reject) => {
                 microsoftTeams.authentication.getAuthToken().then((result) => {
+                    idToken = result;
                     resolve(result);
                     decodingJWT(result)
                 }).catch((error) => {
@@ -100,7 +101,6 @@
             getToken(scope)
                 .then(data => {
                     $("#divError").hide();
-                    accessToken = data.accessToken;
                     microsoftTeams.app.getContext().then((context) => {
                         if (scope == "User.Read") {
                             getUserPhoto();
@@ -134,7 +134,7 @@
                 url: '/GetUserPhoto',
                 dataType: 'json',
                 data: {
-                    'accessToken': accessToken,
+                    'idToken': idToken,
                 },
                 success: function (responseJson) {
                     userDetails = JSON.parse(responseJson);
@@ -154,7 +154,7 @@
                     url: '/GetUserMails',
                     dataType: 'json',
                     data: {
-                        'accessToken': accessToken,
+                    'idToken': idToken,
                     },
                     success: function (responseJson) {
                         userDetails = JSON.parse(responseJson);
