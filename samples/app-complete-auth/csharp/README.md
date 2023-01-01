@@ -74,8 +74,8 @@ Using this C# sample, you can check authenticate in bot,tab and messaging extent
 13. Navigate to **Authentication**
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
 - Set a redirect URI:
+    * Select **Add a platform**.
     * Select **Single-page application**.
-    * Select **web**.
     * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-end`. This will be the page where a successful implicit grant flow will redirect the user.
 - Set another redirect URI:
     * Select **Add a platform**.
