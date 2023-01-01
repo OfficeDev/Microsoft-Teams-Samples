@@ -39,7 +39,7 @@ const Tab = () => {
             </div>
             <br></br>
             <div>
-                <Text weight="regular">{"Click on the url to know more details about the contextv object."}</Text>
+                <Text weight="regular">{"Click on the url to know more details about the context object."}</Text>
                 <a href={tabLink} target="_blank" rel="noopener noreferrer">
                     <Text className="link-text" weight="regular" >{"Microsoft Teams Context Object." }</Text>
                 </a>
