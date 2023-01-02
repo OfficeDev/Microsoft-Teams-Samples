@@ -815,7 +815,7 @@ jobs:
               name: 'tab-device-permissions'
               version: '16.x'
             
-            - project_path: 'samples/tab-channel-context/nodejs'
+            - project_path: 'samples/tab-channel-context/nodejs/ClientApp'
               name: 'tab-channel-context'  
               version: '16.x'
             
