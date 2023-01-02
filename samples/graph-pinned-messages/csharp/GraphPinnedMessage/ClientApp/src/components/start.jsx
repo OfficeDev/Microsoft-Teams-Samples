@@ -18,6 +18,7 @@ class Start extends React.Component {
                 var currentURL = new URL(window.location);
                 var scope = "User.Read email openid profile offline_access Chat.Read Chat.ReadWrite ChatMessage.Send";
                 var loginHint = context.user.loginHint;
+				
                 const msalConfig = {
                     auth: {
                         clientId: process.env.REACT_APP_MICROSOFT_APP_ID,
@@ -28,13 +29,16 @@ class Start extends React.Component {
                         cacheLocation: "sessionStorage",
                     },
                 };
+				
                 const msalInstance = new msal.PublicClientApplication(msalConfig);
+				
                 const scopesArray = scope.split(" ");
                 const scopesRequest = {
                     scopes: scopesArray,
                     redirectUri: window.location.origin + `/auth-end`,
                     loginHint: loginHint
                 };
+				
                 await msalInstance.loginRedirect(scopesRequest);
             });
         });

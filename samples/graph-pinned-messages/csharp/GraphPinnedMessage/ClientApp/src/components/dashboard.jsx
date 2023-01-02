@@ -55,7 +55,7 @@ class Dashboard extends Component {
         this.setState({ ssoError: true });
     }
 
-    //Callback function for a successful authorization
+    // Callback function for successful authorization
     consentSuccess = async (result) => {
         this.setState({ ssoError: false });
         microsoftTeams.app.initialize();
@@ -64,7 +64,7 @@ class Dashboard extends Component {
         })
     }
 
-    //Callback function for a failure authorization
+    // Callback function for failure authorization
     consentFailure(error) {
         console.log("Consent failed: ", error);
     }  

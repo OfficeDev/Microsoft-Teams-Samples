@@ -2,25 +2,22 @@
 
 $(document).ready(function () {
     microsoftTeams.app.initialize();
-    $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
-    $("#divError").show();
-    $("#consent").show();
-    //getClientSideToken()
-    //    .then((clientSideToken) => {
-    //        console.log("clientSideToken: " + clientSideToken);
-    //        return getServerSideToken(clientSideToken);
-    //    })
-    //    .catch((error) => {
-    //        console.log(error);
-    //        if (error === "invalid_grant") {
-    //            // Display in-line button so user can consent
-    //            $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
-    //            $("#divError").show();
-    //            $("#consent").show();
-    //        } else {
-    //            console.log("Authentication failed. Something went wrong");
-    //        }
-    //    });
+    getclientsidetoken()
+       .then((clientsidetoken) => {
+           console.log("clientsidetoken: " + clientsidetoken);
+           return getserversidetoken(clientsidetoken);
+       })
+       .catch((error) => {
+           console.log(error);
+           if (error === "invalid_grant") {
+               // display in-line button so user can consent
+               $("#diverror").text("error while exchanging for server token - invalid_grant - user or admin consent is required.");
+               $("#diverror").show();
+               $("#consent").show();
+           } else {
+               console.log("authentication failed. something went wrong");
+           }
+       });
 });
 
 function requestConsent() {

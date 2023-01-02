@@ -23,10 +23,11 @@ class End extends React.Component {
                         cacheLocation: "sessionStorage",
                     },
                 }
+				
                 const msalInstance = new msal.PublicClientApplication(msalConfig);
+				
                 msalInstance.handleRedirectPromise()
                     .then((tokenResponse) => {
-                        alert(JSON.stringify(tokenResponse));
                         if (tokenResponse !== null) {
                             microsoftTeams.authentication.notifySuccess("Authentication succedded");
                         } else {

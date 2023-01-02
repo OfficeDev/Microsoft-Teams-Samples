@@ -22,8 +22,10 @@ class End extends React.Component {
                     cache: {
                         cacheLocation: "sessionStorage",
                     },
-                }
+                };
+				
                 const msalInstance = new msal.PublicClientApplication(msalConfig);
+				
                 msalInstance.handleRedirectPromise()
                     .then((tokenResponse) => {
                         alert(JSON.stringify(tokenResponse));
