@@ -99,5 +99,5 @@ Add multiple actions to the upper right NavBar and build an overflow menu for ex
 ![Menu5](Images/Menu5.png)
 
 
-## Further Reading.
-[NavBar-Menu](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/design/personal-apps?view=msteams-client-js-1.12.1#use-a-personal-app-private-workspace)
+## Further Reading
+[Configure and add multiple actions in NavBar](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/design/personal-apps?view=msteams-client-js-1.12.1#configure-and-add-multiple-actions-in-navbar)
