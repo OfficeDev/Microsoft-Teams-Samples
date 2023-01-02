@@ -35,7 +35,7 @@
   ],
   "staticTabs": [
     {
-      "entityId": "com.microsoft.teams.taskmoduletester",
+      "entityId": "com.microsoft.teams.taskmodule.statictab",
       "name": "Tasks!",
       "contentUrl": "https://<<Valid-Domain>>/taskmodule.html",
       "websiteUrl": "https://<<Valid-Domain>>/taskmodule.html",

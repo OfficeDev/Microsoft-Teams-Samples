@@ -18,9 +18,9 @@
   <script>
     microsoftTeams.app.initialize().then(() => {
       //get value of radio button
-      var radios = document.getElementsByName("tabType");
+        var tabType = document.getElementsByName("tabType");
 
-      if (radios[0].checked) {
+        if (tabType[0].checked) {
         microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
           microsoftTeams.pages.config.setConfig({
             entityID: "Task",

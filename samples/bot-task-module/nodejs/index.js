@@ -5,8 +5,6 @@
 
 // Import required pckages
 const path = require('path');
-// const express = require("express");
-// const pug = require('pug');
 
 // Read botFilePath and botFileSecret from .env file.
 const ENV_FILE = path.join(__dirname, '.env');
