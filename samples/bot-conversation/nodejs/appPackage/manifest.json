@@ -16,10 +16,10 @@
   },
   "name": {
     "short": "TeamsConversationBot",
-    "full": "This sample showcases usage of various conversation events for teams bot for both personal and teams scope."
+    "full": "This sample showcases usage of various conversation events for teams bot."
   },
   "description": {
-    "short": "This sample showcases usage of various conversation events for teams bot for both personal and teams scope.",
+    "short": "This sample showcases usage of various conversation events for teams bot.",
     "full": "This sample showcases usage of various conversation events for teams bot for both personal and teams scope."
   },
   "accentColor": "#FFFFFF",
