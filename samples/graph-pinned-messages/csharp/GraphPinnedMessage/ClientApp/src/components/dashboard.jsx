@@ -18,7 +18,7 @@ class Dashboard extends Component {
 
         this.state = {
             isError: false,
-            ssoError: true,
+            ssoError: false,
             context: undefined,
             messageList: [],
             newMessageId: "",
@@ -57,7 +57,6 @@ class Dashboard extends Component {
 
     //Callback function for a successful authorization
     consentSuccess = async (result) => {
-        alert("inside success");
         this.setState({ ssoError: false });
         microsoftTeams.app.initialize();
         microsoftTeams.authentication.getAuthToken().then((result) => {
@@ -76,10 +75,8 @@ class Dashboard extends Component {
             width: 600,
             height: 535
         }).then((result) => {
-            alert("in success");
             this.consentSuccess(result)
         }).catch((error) => {
-            alert("in failure");
             this.consentFailure(error)
         });
     }

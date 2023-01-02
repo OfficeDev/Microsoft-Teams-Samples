@@ -5,6 +5,7 @@
   "author": "Microsoft",
   "license": "MIT",
   "dependencies": {
+    "@azure/msal-browser": "^2.11.0",
     "@fluentui/react-northstar": "^0.63.1",
     "axios": "^0.21.1",
     "react": "17.0.0",
