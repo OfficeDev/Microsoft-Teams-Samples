@@ -18,6 +18,7 @@ class Dashboard extends Component {
 
         this.state = {
             isError: false,
+            ssoError: true,
             context: undefined,
             messageList: [],
             newMessageId: "",
@@ -29,12 +30,10 @@ class Dashboard extends Component {
     componentDidMount() {
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.getContext().then((context) => {
-                console.log(context.chat.id);
                 this.setState({ context: context });
             }).then(() => {
                 // Fetch id token
                 microsoftTeams.authentication.getAuthToken().then((result) => {
-                    console.log(this.state.context);
                     accessToken = result;
                     this.ssoLoginSuccess(result);
                 }).catch((error) => {
@@ -52,7 +51,37 @@ class Dashboard extends Component {
 
     // Failure callback for getAuthtoken method
     ssoLoginFailure(error) {
-        alert("SSO failed: ", error);
+        console.log("SSO failed: ", error);
+        this.setState({ ssoError: true });
+    }
+
+    //Callback function for a successful authorization
+    consentSuccess = async (result) => {
+        alert("inside success");
+        this.setState({ ssoError: false });
+        microsoftTeams.app.initialize();
+        microsoftTeams.authentication.getAuthToken().then((result) => {
+            this.ssoLoginSuccess(result);
+        })
+    }
+
+    //Callback function for a failure authorization
+    consentFailure(error) {
+        console.log("Consent failed: ", error);
+    }  
+
+    grantConsent = async() => {
+        microsoftTeams.authentication.authenticate({
+            url: window.location.origin + "/auth-start",
+            width: 600,
+            height: 535
+        }).then((result) => {
+            alert("in success");
+            this.consentSuccess(result)
+        }).catch((error) => {
+            alert("in failure");
+            this.consentFailure(error)
+        });
     }
 
     // Exchange client token with server token and fetch the pinned message details.
@@ -113,26 +142,29 @@ class Dashboard extends Component {
             <Flex vAlign="center">
                 <Text content="Graph Pinned Message" size="largest" weight="semibold" />
             </Flex>
-            <Flex><Text styles={{ marginTop: "1rem" }} weight="semibold" size="large" content="Below message is pinned in chat. Click on the delete icon to unpin the message." /></Flex>
+            {this.state.ssoError ? <><Flex>Invalid grant Error occured. Please click on consent to grant consent.</Flex><Flex><Button hidden={!this.state.ssoError} content="consent" onClick={this.grantConsent} /></Flex></>
+                : <><Flex><Text styles={{ marginTop: "1rem" }} weight="semibold" size="large" content="Below message is pinned in chat. Click on the delete icon to unpin the message." /></Flex>
             {!this.state.isError ? <Flex>
                 <Flex.Item><Text styles={{ marginTop: "1rem" }} content={`${this.state.pinnedMessage}`} /></Flex.Item>
                 <Flex.Item size="size.quarter">
                     <TrashCanIcon styles={{ marginTop: "1rem" }} className="manage-icons" onClick={this.deletePinnedMessage} />
                 </Flex.Item>
-            </Flex>: <Flex><Text content="Please pin a message in chat" /></Flex>}
-            <Flex><Text styles={{ marginTop: "1rem" }} weight="semibold" size="large" content="You can also pin message from below message list. Select any message and click on Pin new message button." /></Flex>
-            <RadioGroup
-                className="container-medium"
-                styles={{ paddingLeft: "0.5rem", marginTop: "1rem" }}
-                onCheckedValueChange={this.handleMessageRadioChange}
-                items={this.renderMessageList()}
-            />
-            <Flex>
-                <FlexItem push>
-                    <Button primary content="Pin new message" onClick={this.pinNewMessage} />
-                </FlexItem>
-            </Flex>
-        </Flex>)
+            </Flex> : <>
+                <Flex><Text content="Please pin a message in chat" /></Flex>
+                <Flex><Text styles={{ marginTop: "1rem" }} weight="semibold" size="large" content="You can also pin message from below message list. Select any message and click on Pin new message button." /></Flex>
+                <RadioGroup
+                    className="container-medium"
+                    styles={{ paddingLeft: "0.5rem", marginTop: "1rem" }}
+                    onCheckedValueChange={this.handleMessageRadioChange}
+                    items={this.renderMessageList()}
+                />
+                <Flex>
+                    <FlexItem push>
+                        <Button primary content="Pin new message" onClick={this.pinNewMessage} />
+                    </FlexItem>
+                        </Flex></>}</>}
+
+            </Flex>)
     }
 }
 
