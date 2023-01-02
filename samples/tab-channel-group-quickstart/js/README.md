@@ -31,21 +31,17 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
 
 ## Setup
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
-2. Setup for Bot
-- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 **NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
 
-3. Setup NGROK
+2. Setup NGROK
  - Run ngrok - point to port 3978
 
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
-4. Setup for code
+3. Setup for code
 - Clone the repository
 
     ```bash
@@ -65,7 +61,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
     ```bash
     npm start
 
-5. Setup Manifest for Teams
+4. Setup Manifest for Teams
 
 - **This step is specific to Teams.**
     - Edit the `manifest.json` contained in the `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)

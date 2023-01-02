@@ -28,11 +28,10 @@ This sample app demonstrate a feature where user can scan a product, capture a i
 - [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
 
 ## Setup.
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
   
-> NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
-
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
+
 
 2. Setup NGROK
   - Run ngrok - point to port 3978

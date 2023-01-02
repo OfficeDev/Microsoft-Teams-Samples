@@ -6,5 +6,6 @@ namespace CallingBotSample.Models
     public class TaskModuleFetchData
     {
         public string? Action { get; set; }
+        public string? CallId { get; set; }
     }
 }

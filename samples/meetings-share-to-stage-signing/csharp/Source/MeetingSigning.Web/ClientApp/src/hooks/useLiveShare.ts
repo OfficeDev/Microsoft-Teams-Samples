@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react';
 import {
-  EphemeralEvent,
-  EphemeralPresence,
-  EphemeralState,
-  TeamsFluidClient,
+  LiveEvent,
+  LivePresence,
+  LiveState,
+  LiveShareClient,
 } from '@microsoft/live-share';
 import { IFluidContainer } from 'fluid-framework';
 import { IAzureAudience } from '@fluidframework/azure-client';
 import { ScrollOffsetEvent } from './useScrollOffsetLiveShare';
 import { CursorLocationEvent } from './useCursorLocationsLiveShare';
 import { UserInControl } from './useTakeControl';
+import { LiveShareHost } from '@microsoft/teams-js';
 
 type LiveShareContainerSchema = {
-  scrollOffsetEvent: EphemeralEvent<ScrollOffsetEvent>;
-  cursorLocationsEvent: EphemeralPresence<CursorLocationEvent>;
-  takeControlState: EphemeralState<UserInControl>;
+  scrollOffsetEvent: LiveEvent<ScrollOffsetEvent>;
+  cursorLocationsEvent: LivePresence<CursorLocationEvent>;
+  takeControlState: LiveState<UserInControl>;
 };
 
 /**
@@ -37,14 +38,14 @@ export function useLiveShare() {
     // Define container schema
     const schema = {
       initialObjects: {
-        scrollOffsetEvent: EphemeralEvent,
-        cursorLocationsEvent: EphemeralPresence,
-        takeControlState: EphemeralState,
+        scrollOffsetEvent: LiveEvent,
+        cursorLocationsEvent: LivePresence,
+        takeControlState: LiveState,
       },
     };
 
     // Join Teams container
-    const client = new TeamsFluidClient();
+    const client = new LiveShareClient(LiveShareHost.create());
     client
       .joinContainer(schema)
       .then(({ container, services }) => {

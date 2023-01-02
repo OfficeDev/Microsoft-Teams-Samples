@@ -39,29 +39,21 @@ For reference please check [Share app content to stage API](https://docs.microso
 
 - [Live-share-sdk-overview](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-live-share-overview)
 
-
-
-
-
 ## Setup
 
 **This capability is currently available in developer preview only.**
 
- 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal. 
-    
- 2. Setup for Bot
-- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal. 
+    **NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
 
-3. Setup NGROK
+2. Setup NGROK
    - Run ngrok - point to port 3978
 
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
-4. Setup for code
+3. Setup for code
 
   - Clone the repository
 
@@ -76,15 +68,34 @@ For reference please check [Share app content to stage API](https://docs.microso
     ```
     npm install
     ```
-
-
  - Run both solutions i.e. samples/meetings-stage-view/nodejs/ and samples/meetings-stage-view/nodejs/Clientapp
 
     ```
     npm start
     ```
 
-5. Setup Manifest for Teams
+## Getting the App id for share to stage deeplink.
+
+1) Navigate to [Teams admin portal]("https://admin.teams.microsoft.com/dashboard")
+
+2) Under Teams Apps section, select Manage apps.
+
+3) Search the uploaded app and copy the `App ID`
+![Admin Center](Images/adminCenter.png)
+
+4) Navigate to `samples/samples/meetings-stage-view/nodejs/ClientApp/src/components/app-in-meeting.jsx`
+
+5) On line 41, replace `<<App id>>` with `Id` obtained in step 3.
+
+6) Navigate to `samples/samples/meetings-stage-view/nodejs/ClientApp/src/components/share-to-meeting.jsx`
+
+7) On line 25, replace `<Application-Base-URL>` with your application's base url whrre app is running. E.g. if you are using ngrok it would be something like `https://1234.ngrok.io`.
+
+8) On line 26, replace `<<Application-ID>>` with `Id` obtained in step 3.
+
+9) When the app is running, the home page will contain a `share to teams` button. Clicking it will share the page content directly to meeting. (Make sure the app's base url is added in manifest's valid domains section and app is published to store).
+
+4. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the ./Manifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
@@ -100,6 +111,15 @@ For reference please check [Share app content to stage API](https://docs.microso
 
 You can use this app by following the below steps:
     - Edit a meeting and select `+` icon at the top right corner.
+
+- Default home page
+![Home page](Images/share-to-meeting-page.png)
+
+- It will redirect to consent popup to share screen
+![Share consent popup](Images/meeting-deeplink-popup.png)
+
+- The page will be shared in meeting
+![Shared page](Images/meeting-shared.png)
 
 - App in stage view.
 

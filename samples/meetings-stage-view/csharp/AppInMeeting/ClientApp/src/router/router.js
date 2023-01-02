@@ -7,6 +7,7 @@ import {
 import AppInMeeting from "../components/app-in-meeting";
 import Configure from "../components/configure";
 import Home from "../components/home";
+import ShareToMeeting from "../components/share-to-meeting";
 import * as microsoftTeams from "@microsoft/teams-js";
 import Done from "../components/done";
 import Doing from "../components/doing";
@@ -28,12 +29,13 @@ export const AppRoute = () => {
         <React.Fragment>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/appInMeeting" element={<AppInMeeting />}/>
-                    <Route path="/configure" element={<Configure />}/>
-                    <Route path="/home" element={<Home />}/>
-                    <Route path="/doneView" element={<Done shareSpecificPart={(meetingStatus) => {}} />}/>
-                    <Route path="/doingView" element={<Doing shareSpecificPart={(meetingStatus) => {}} />}/>
-                    <Route path="/todoView" element={<Todo shareSpecificPart={(meetingStatus) => {}} />}/>
+		    <Route path="/" element= { <ShareToMeeting /> }/>
+                    <Route path="/appInMeeting" element= { <AppInMeeting /> }/>
+                    <Route path="/configure" element= { <Configure /> }/>
+                    <Route path="/home" element= { <Home /> }/>
+                    <Route path="/doneView" element= { <Done shareSpecificPart={(meetingStatus) => {}} /> }/>
+                    <Route path="/doingView" element= { <Doing shareSpecificPart={(meetingStatus) => {}} /> }/>
+                    <Route path="/todoView" element= { <Todo shareSpecificPart={(meetingStatus) => {}} /> }/>
                 </Routes>
             </BrowserRouter>
         </React.Fragment>

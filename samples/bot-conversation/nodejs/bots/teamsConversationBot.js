@@ -12,6 +12,7 @@ const {
 const TextEncoder = require('util').TextEncoder;
 const ACData = require('adaptivecards-templating');
 const AdaptiveCardTemplate = require('../resources/UserMentionCardTemplate.json');
+const ImmersiveReaderCardTemplate = require('../resources/ImmersiveReaderCard.json');
 
 class TeamsConversationBot extends TeamsActivityHandler {
     constructor() {
@@ -33,6 +34,8 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 await this.messageAllMembersAsync(context);
             } else if (text.includes('who')) {
                 await this.getSingleMember(context);
+            } else if (text.includes('immersivereader')) {
+                await this.getImmersivereaderCard(context);
             } else {
                 await this.cardActivityAsync(context, false);
             }
@@ -102,6 +105,12 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 title: 'Delete card',
                 value: null,
                 text: 'Delete'
+            },
+            {
+                type: ActionTypes.MessageBack,
+                title: 'Send Immersive Reader Card',
+                value: null,
+                text: 'ImmersiveReader'
             }
         ];
 
@@ -212,6 +221,14 @@ class TeamsConversationBot extends TeamsActivityHandler {
         const replyActivity = MessageFactory.text(`Hi ${ mention.text }`);
         replyActivity.entities = [mention];
         await context.sendActivity(replyActivity);
+    }
+
+    async getImmersivereaderCard(context) {
+        const adaptiveCard = new ACData.Template(AdaptiveCardTemplate);
+
+        await context.sendActivity({
+            attachments: [CardFactory.adaptiveCard(adaptiveCard)]
+        });
     }
 
     async deleteCardActivityAsync(context) {

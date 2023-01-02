@@ -29,7 +29,7 @@ This application also shows the implementation of Live Share SDK to update the d
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash
@@ -38,7 +38,7 @@ This application also shows the implementation of Live Share SDK to update the d
 - [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
   
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
-  ```
+  
 ## Setup
 ** This app should work in developer preview only**
 
@@ -71,7 +71,7 @@ This application also shows the implementation of Live Share SDK to update the d
     - `"MicrosoftAppId"`: Application (client) ID of the bot's Azure AD application
     - `"MicrosoftAppPassword"`: client secret of the bot's Azure AD application
     - `"AzureAd"."TenantId"`: Tenant ID of the tenant where the app will be used. Note that the sample will only work in this tenant.
-    - `"AzureAd"."ApplicationId "`: Set to the same value as `MicrosoftAppId` above.
+    - `"AzureAd"."ApplicationIdURI "`: Set to the same value as `api://[WebAppDomain]/MicrosoftAppId`.
     - `"ContentBubbleUrl "`: Content bubble iframe url (default. `https://[WebAppDomain]/contentBubble.html`). Remember that `[WebAppDomain]` will be your ngrok domain, so the content bubble URL will be similar to `https://f631****.ngrok.io/contentBubble.html`.
  
  -- Build and run the service

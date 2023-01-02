@@ -85,6 +85,14 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     ```bash
     npm start
     ```
+- Install modules & Run the NodeJS Server
+  - Server will run on PORT: 3978
+  - Open a terminal and navigate to project root directory
+
+  ```bash
+    npm run server
+  ```
+- This command is equivalent to: npm install > npm start
 
 4) Setup Manifest for Teams (**This step is specific to Teams.**)
 

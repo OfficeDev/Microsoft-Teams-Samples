@@ -22,7 +22,7 @@ namespace CallingBotSample.Helpers
         /// </summary>
         /// <param name="joinURL">Join URL from Team's meeting body.</param>
         /// <returns>Parsed data.</returns>
-        public static (ChatInfo, MeetingInfo) ParseJoinURL(string joinURL)
+        public static MeetingInfo ParseMeetingInfo(string joinURL)
         {
             var decodedURL = WebUtility.UrlDecode(joinURL);
 
@@ -40,12 +40,6 @@ namespace CallingBotSample.Helpers
             using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(match.Groups["context"].Value)))
             {
                 var ctxt = (Context)new DataContractJsonSerializer(typeof(Context)).ReadObject(stream);
-                var chatInfo = new ChatInfo
-                {
-                    ThreadId = match.Groups["thread"].Value,
-                    MessageId = match.Groups["message"].Value,
-                    ReplyChainMessageId = ctxt.MessageId,
-                };
 
                 var meetingInfo = new OrganizerMeetingInfo
                 {
@@ -56,7 +50,7 @@ namespace CallingBotSample.Helpers
                 };
                 meetingInfo.Organizer.User.SetTenantId(ctxt.Tid);
 
-                return (chatInfo, meetingInfo);
+                return meetingInfo;
             }
         }
 

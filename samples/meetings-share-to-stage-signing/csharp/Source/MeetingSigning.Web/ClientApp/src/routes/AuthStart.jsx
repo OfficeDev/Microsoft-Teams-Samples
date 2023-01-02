@@ -10,7 +10,7 @@ export default function AuthStart() {
   // Get the tab context, and use the information to navigate to Azure AD login page
   microsoftTeams.app.getContext().then(async (context) => {
     // Generate random state string and store it, so we can verify it in the callback
-    let state = self.crypto.randomUUID();
+    let state = window.self.crypto.randomUUID();
     localStorage.setItem('auth-state', state);
     localStorage.removeItem('codeVerifier');
 
@@ -23,7 +23,7 @@ export default function AuthStart() {
       response_type: 'token',
       scope: 'https://graph.microsoft.com/.default',
       redirect_uri: `${window.location.origin}/auth-end`,
-      nonce: self.crypto.randomUUID(),
+      nonce: window.self.crypto.randomUUID(),
       state: state,
       login_hint: context.user.loginHint,
       prompt: 'consent',

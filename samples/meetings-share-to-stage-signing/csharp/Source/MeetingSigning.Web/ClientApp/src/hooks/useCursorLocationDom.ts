@@ -26,7 +26,7 @@ export function useCursorLocationDom(divElement: HTMLDivElement | undefined | nu
   });
 
   var callback = useCallback((event: MouseEvent) => {
-    if (divElement !== undefined) {
+    if (divElement) {
       const divBoundingClient = divElement.getBoundingClientRect();
       // Mouse Events contain multiple coordinates. We use pageX/pageY and subtract the bounding boxes position
       setCursorLocation({
@@ -37,7 +37,7 @@ export function useCursorLocationDom(divElement: HTMLDivElement | undefined | nu
   }, [divElement]);
 
   useEffect(() => {
-    if (divElement !== undefined && divElement !== null) {
+    if (divElement) {
       divElement.addEventListener('mousemove', callback);
       return () => divElement.removeEventListener('mousemove', callback);
     }
