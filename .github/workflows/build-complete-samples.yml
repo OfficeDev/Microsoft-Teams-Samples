@@ -412,7 +412,7 @@ jobs:
               name: 'connector-todo-notification'
               version: '6.0.x'
 
-            - project_path: 'samples/bot-adaptive-card-actions/csharp/AdaptiveCardActions.csproj'
+            - project_path: 'samples/bot-adaptive-card-actions/csharp/AdaptiveCardActions/AdaptiveCardActions.csproj'
               name: 'bot-adaptive-card-actions'
               version: '6.0.x'
 
