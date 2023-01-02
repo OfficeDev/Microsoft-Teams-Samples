@@ -1,6 +1,5 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-
 import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { Text, Button} from '@fluentui/react-components'
@@ -30,7 +29,7 @@ const GetGeoLocation = () => {
   }
 
   // Method to show geo location for given latitude and longitude values.
-    // Method to show geo location for given latitude and longitude values.
+  // Method to show geo location for given latitude and longitude values.
   function showLocation() {
     // Methos to ask for permission and then show current user location
     microsoftTeams.geoLocation.map.showLocation(geoLocationValue).catch((error) => {
@@ -52,7 +51,7 @@ const GetGeoLocation = () => {
       <Card>        
           <Text weight="bold">Get Location</Text>       
         <CardBody>
-        <div className='flex divcss'>
+        <div className='flex columngap'>
             <Text weight="semibold">SDK used:</Text>
             <Text>navigator, microsoftTeams</Text>
             <Text weight="semibold">Method</Text>

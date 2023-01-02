@@ -1,6 +1,5 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-
 import { useEffect } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import {Text, Button, Image } from '@fluentui/react-components'
@@ -48,7 +47,7 @@ const GetNotificationDesktop = () => {
             <Card>
             <Text weight='bold' as="h1">Notifications (Web only)</Text>                
                 <CardBody>
-                    <div className='flex divcss'>
+                    <div className='flex columngap'>
                         <Text>Checks for permission before getting notification.</Text>
                         <Text weight="semibold">SDK used: </Text>
                         <Text>Navigator</Text>

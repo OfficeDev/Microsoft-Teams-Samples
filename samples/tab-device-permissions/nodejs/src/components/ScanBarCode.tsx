@@ -44,7 +44,7 @@ const ScanBarCode = () => {
       <Card>       
           <Text weight="bold">Scan Barcode (Mobile Only) </Text>       
         <CardBody>
-          <div className='flex divcss'>
+          <div className='flex columngap'>
             <Text>Scan any barcode to get information related to it</Text>
             <Text weight="semibold">SDK used:</Text>
             <Text>microsoftTeams</Text>

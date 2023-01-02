@@ -6,6 +6,7 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import { Text, Button, Image} from '@fluentui/react-components'
 import { Card, CardPreview, CardHeader, CardFooter } from "@fluentui/react-components/unstable"
 import { CardBody } from 'reactstrap';
+
 /**
  * The 'GetLocationDesktop' component
  * of your app.
@@ -48,12 +49,12 @@ const GetLocationDesktop = () => {
                 <Text weight='bold' as="h1">Get Location</Text>
                   
                     <CardBody>
-                        <div className='flex divcss'>
+                        <div className='flex columngap'>
                             <Text>You need to enable these permissions using App permissions icon at the top for these permissions to take effect</Text>
                             <Text>After you change the app's device permissions, you will be prompted to reload the application in Teams.</Text>
-                            <Text weight="semibold" >SDK used:</Text>
+                            <Text weight="semibold">SDK used:</Text>
                             <Text> navigator, microsoftTeams</Text>
-                            <Text weight="semibold" >Method</Text>
+                            <Text weight="semibold">Method</Text>
                             <Text>navigator.geolocation.getCurrentPosition, teams.location</Text>
                             <Button onClick={() => getCurrentLocation()} disabled={showComments}>Get Location</Button>
                         </div>

@@ -37,7 +37,7 @@ const PeoplePicker = () => {
       <Card>       
           <Text weight="bold">People Picker (Mobile Only)</Text>        
         <CardBody>
-          <div className='flex divcss'>
+          <div className='flex columngap'>
             <Text weight="semibold">SDK used:</Text>
             <Text>microsoftTeams</Text>
             <Text weight="semibold" >Method</Text>

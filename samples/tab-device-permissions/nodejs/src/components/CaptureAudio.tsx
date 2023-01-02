@@ -46,7 +46,7 @@ const CaptureAudio = () => {
       <Card>
       <Text weight='bold' as="h1">Media</Text>  
        <CardBody>          
-          <div className='flex divcss'>
+          <div className='flex columngap'>
             <Text>Checks for permission to use media input</Text>
             <Text weight='medium'>SDK used</Text>
             <Text>navigator, microsoftTeams</Text>

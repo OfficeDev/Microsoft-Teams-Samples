@@ -8,7 +8,6 @@ import { Card, CardPreview, CardHeader, CardFooter } from "@fluentui/react-compo
 import { CardBody, Label, CarouselCaption, CarouselProps} from 'reactstrap';
 import Swiper, { Navigation, Pagination } from 'swiper';
 import { SliderThumb } from '@mui/material';
-//import { Carousel } from 'reactstrap';
 import { Carousel } from 'rsuite';
 
 /**
@@ -75,7 +74,7 @@ const CaptureImage = () => {
           <Text weight="bold">Capture Image</Text>
         
         <CardBody>
-          <div className='divcss'>
+          <div className='columngap'>
             <Text>Checks for permission before capturing image.</Text>
             <Button onClick={() => captureMultipleImages(1)} >Capture Image</Button>
           </div>

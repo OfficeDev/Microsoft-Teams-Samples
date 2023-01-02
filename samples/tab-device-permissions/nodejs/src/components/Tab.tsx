@@ -15,8 +15,8 @@ import GetLocationDesktop from './GetLocationDesktop';
 import GetNotificationDesktop from './GetNotificationDesktop';
 import * as microsoftTeams from "@microsoft/teams-js";
 import Segment from 'react-segment-analytics';
-//import Grid from 'fluentui-react-grid';
 import Grid from "react-grid"
+
 /**
  * The 'Tab' contains all the components
  * of your app.

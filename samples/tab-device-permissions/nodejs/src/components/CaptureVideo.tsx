@@ -78,7 +78,7 @@ const CaptureVideo = () => {
           <Text weight="bold">Media</Text>
         </CardHeader>
         <CardBody>
-          <div className='flex divcss'>
+          <div className='flex columngap'>
             <Text>Checks for permission to use media input</Text>
             <Text weight='medium'>SDK used: </Text>
             <Text weight='medium'>navigator, microsoftTeams</Text>

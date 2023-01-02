@@ -79,7 +79,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
   //Learn more: https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow
   exchangeClientTokenForServerToken = async (token: string) => {
     let serverURL = `${process.env.REACT_APP_BASE_URL}/getGraphAccessToken?ssoToken=${token}&upn=${this.state.context?.user?.userPrincipalName}`;
-     let response = await fetch(serverURL); //This calls getGraphAccessToken route in /api-server/app.js
+     let response = await fetch(serverURL).catch(this.unhandledFetchError);; //This calls getGraphAccessToken route in /api-server/app.js
     if (response) {
       let data = await response.json().catch(this.unhandledFetchError);
       if(!response.ok && data.error==='consent_required'){
