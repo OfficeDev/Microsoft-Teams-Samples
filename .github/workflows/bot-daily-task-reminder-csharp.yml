@@ -1,8 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Deploy - csharp Tab-Adaptive-Cards
-
+name: Deploy - csharp Bot-Daily-Task-Reminder
 on:
   push:
     #Change the branch name to <<main>>
@@ -10,13 +9,14 @@ on:
     branches:
       - main
     paths:
-      - 'samples/tab-adaptive-cards/csharp/**'  
+      - 'samples/bot-daily-task-reminder/csharp/**'  
   workflow_dispatch:
 env:
     #Change the webapp package path. This will contain the code to be published after build
     #Change the project path to your project file path.
-    AZURE_WEBAPP_PACKAGE_PATH: 'samples/tab-adaptive-cards/csharp/published'
-    PROJECT_PATH: 'samples/tab-adaptive-cards/csharp/TabWithAdpativeCardFlow/TabWithAdpativeCardFlow.csproj'
+    AZURE_WEBAPP_PACKAGE_PATH: 'samples/bot-daily-task-reminder/csharp/published'
+    PROJECT_PATH: 'samples/bot-daily-task-reminder/csharp/BotDailyTaskReminder/BotDailyTaskReminder.csproj'
+    AZURE_WEBAPP_NAME: 'bot-daily-task-reminder'
 jobs:
   build:
     runs-on: windows-latest
@@ -49,7 +49,6 @@ jobs:
       name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
-  #Change the app-name which is the azure web app name
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
@@ -60,7 +59,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'tab-adaptive-cards'
+          app-name:  ${{ env.AZURE_WEBAPP_NAME }}
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_Tab_Adaptive_Cards}}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BOT_DAILY_TASK_REMINDER }}
           package: .
