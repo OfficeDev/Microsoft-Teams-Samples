@@ -25,7 +25,6 @@ function App() {
     console.log("App.js: initializing client SDK initialized");
     microsoftTeams.app.notifyAppLoaded();
     microsoftTeams.app.notifySuccess();
-   // setInitialized(true);
   })
   .catch((error) => console.error(error));
 

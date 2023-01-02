@@ -170,10 +170,7 @@ class Tab extends React.Component {
       let consentMessage = (this.state.consentRequired && !this.state.consentProvided) ?
         <Spinner label='Consent required.'/> : null;
 
-      /* let avatar = this.state.photo !== "" ?
-        <Avatar image={this.state.photo} size='largest'/> : null; */
-
-      let content;
+          let content;
       if(this.state.error){
         content = <h1>ERROR: Please ensure pop-ups are allowed for this website and retry</h1>
       } else {
