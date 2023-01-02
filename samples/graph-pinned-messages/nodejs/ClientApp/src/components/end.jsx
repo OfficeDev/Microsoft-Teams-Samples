@@ -15,7 +15,7 @@ class End extends React.Component {
             microsoftTeams.app.getContext().then(async (context) => {
                 const msalConfig = {
                     auth: {
-                        clientId: "<client-id>",
+                        clientId: process.env.REACT_APP_MICROSOFT_APP_ID,
                         authority: `https://login.microsoftonline.com/${context.tid}`,
                         navigateToLoginRequestUrl: false
                     },

@@ -20,7 +20,7 @@ class Start extends React.Component {
                 var loginHint = context.user.loginHint;
                 const msalConfig = {
                     auth: {
-                        clientId: "<client-id>",
+                        clientId: process.env.REACT_APP_MICROSOFT_APP_ID,
                         authority: `https://login.microsoftonline.com/${context.user.tenant.id}`,
                         navigateToLoginRequestUrl: false
                     },
