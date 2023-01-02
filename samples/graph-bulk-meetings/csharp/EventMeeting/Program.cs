@@ -23,6 +23,11 @@ builder.Services.AddOptions<AzureSettings>()
     botOptions.MicrosoftAppTenantId = configuration.GetValue<string>("MicrosoftAppTenantId");
 });
 
+builder.Services.AddSpaStaticFiles(configuration =>
+{
+    configuration.RootPath = "ClientApp/build";
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,17 +35,18 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
 }
-app.UseStaticFiles();
 
-app.UseRouting();
+app.UseDefaultFiles()
+    .UseStaticFiles()
+    .UseWebSockets()
+    .UseRouting() 
+    .UseAuthorization()
+    .UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllers();
+    });
 
-app.UseAuthorization();
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
-
+app.UseSpaStaticFiles();
 app.UseSpa(spa =>
 {
     spa.Options.SourcePath = "ClientApp";

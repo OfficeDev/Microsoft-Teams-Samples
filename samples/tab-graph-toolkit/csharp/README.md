@@ -35,11 +35,9 @@ This is the demo app for [Teams tab using miscrosoft graph toolkit](https://docs
 
 ## Setup
 
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   - Register your app with Microsoft identity platform via the Azure AD portal
   - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2).
   - Click on Add a Platform in redirect URI section.

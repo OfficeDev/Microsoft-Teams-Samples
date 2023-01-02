@@ -78,7 +78,6 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
     ✔ ID Token  
     ✔ Access Token  
 -  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
-- Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     
 2. Setup NGROK
   - Run ngrok - point to port 3978

@@ -9,6 +9,9 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import DashboardState from "../models/dashboard-state";
 import axios from "axios";
 
+var idToken;
+var groupId;
+
 // Display the tags information
 const ViewEditTag = props => {
     const [temworkTagMembers, setTeamworkTagMembers] = useState([]);
@@ -24,16 +27,39 @@ const ViewEditTag = props => {
     useEffect(() => {
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.getContext().then((context) => {
-                initializeData(context.team.groupId);
-                setTeamId(context.team.groupId);
+                groupId = context.team.groupId;
+            }).then(() => {
+                microsoftTeams.authentication.getAuthToken().then((result) => {
+                    ssoLoginSuccess(result);
+                }).catch((error) => {
+                    if (error.response.status == 500) {
+                        alert("Error occured");
+                    }
+                    else {
+                        ssoLoginFailure(error)
+                    }
+                });
             });
         })
     }, []);
 
-    // Gets the members of selected tags.
-    const initializeData = async (teamId) => {
+    // Success callback for getAuthtoken method
+    const ssoLoginSuccess = async (result) => {
+            exchangeClientTokenForServerToken(result);
+    }
+    
+    // Failure callback for getAuthtoken method
+     const ssoLoginFailure = (error) => {
+        console.log("SSO failed, Error occured is "+error);
+    }
+    
+    // Exchange client token with server token and fetch the pinned message details.
+    const exchangeClientTokenForServerToken = async (token) => {
         setIsMemberLoading(true)
-        var response = await axios.get(`api/teamtag/members?teamId=${teamId}&tagId=${props.teamworkTag.id}`)
+       
+        var id = groupId;
+        idToken = token;
+        var response = await axios.get(`api/teamtag/members?ssoToken=${token}&teamId=${groupId}&tagId=${props.teamworkTag.id}`)
 
         if (response.status == 200) {
             setTeamworkTagMembers(response.data);
@@ -107,11 +133,12 @@ const ViewEditTag = props => {
             membersToBeDeleted: membersToRemove,
         };
 
-        var response = await axios.patch(`api/teamtag/update?teamId=${teamId}`, updateTagDto);
+        var response = await axios.patch(`api/teamtag/update?ssoToken=${idToken}&teamId=${groupId}`, updateTagDto);
 
         if (response.status === 204) {
             props.onTeamworkTagUpdate();
         }
+
         setIsUpdateButtonLoading(false);
     }
 

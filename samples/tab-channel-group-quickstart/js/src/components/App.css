@@ -3,6 +3,7 @@
 }
 h1 {
   color: gray;
+  line-height: 2rem;
 }
 h2 {
   font-size: .8em;

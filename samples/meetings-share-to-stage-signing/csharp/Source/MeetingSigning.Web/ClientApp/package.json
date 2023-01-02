@@ -4,8 +4,9 @@
   "private": true,
   "dependencies": {
     "@fluentui/react-northstar": "^0.64.0",
-    "@microsoft/live-share": "^0.5.1",
-    "@microsoft/teams-js": "2.0.0-experimental.1",
+    "@fluidframework/azure-client": "~1.0.2",
+    "@microsoft/live-share": "1.0.0-preview.4",
+    "@microsoft/teams-js": "^2.5.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",

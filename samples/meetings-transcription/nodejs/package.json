@@ -16,9 +16,9 @@
         "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples.git"
     },
     "dependencies": {
-        "@microsoft/microsoft-graph-client": "^3.0.2",
+        "@microsoft/microsoft-graph-client": "^3.0.4",
         "axios": "^0.27.2",
-        "botbuilder": "^4.16.0",
+        "botbuilder": "^4.18.0",
         "cors": "^2.8.5",
         "dotenv": "^8.2.0",
         "ejs": "^3.1.8",

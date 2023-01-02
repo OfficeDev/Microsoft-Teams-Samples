@@ -150,7 +150,7 @@ const Todo = props => {
                 </div>);
             })
         }
-        
+
         return elements;
     }
 
@@ -159,11 +159,11 @@ const Todo = props => {
             <div className="label">
                 To Do
             </div>
-            <button onClick={ () => {openTaskModule('todo')}} className="add-card-button">
+            <button onClick={() => { openTaskModule('todo') }} className="add-card-button">
                 <img className="add-icon" src="/add_icon.svg" title="Click to continue existing conversation" />
             </button>
             <br />
-            <button onClick={() => {props.shareSpecificPart('todo')}} className="share-specific-part-button">
+            <button onClick={() => { props.shareSpecificPart('todo') }} className="share-specific-part-button">
                 Share To Do
             </button>
             <div id="todo">
