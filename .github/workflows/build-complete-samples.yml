@@ -741,7 +741,7 @@ jobs:
 
             - project_path: 'samples/bot-task-module/nodejs'
               name: 'bot-task-module'
-              version: '16.x' 
+              version: '18.x' 
 
             - project_path: 'samples/connector-todo-notification/nodejs'
               name: 'connector-todo-notification'
