@@ -412,6 +412,10 @@ jobs:
               name: 'connector-todo-notification'
               version: '6.0.x'
 
+            - project_path: 'samples/bot-adaptive-card-actions/csharp/AdaptiveCardActions/AdaptiveCardActions.csproj'
+              name: 'bot-adaptive-card-actions'
+              version: '6.0.x'
+
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
     steps:
@@ -451,6 +455,7 @@ jobs:
       
       - name: Build
         run: msbuild ${{ matrix.project_path }} /p:Configuration=Release
+
 
   build-nodejs-samples:
     runs-on: windows-latest
@@ -680,11 +685,11 @@ jobs:
 
             - project_path: 'samples/tab-personal-sso-quickstart/js'
               name: 'tab-personal-sso-quickstart'
-              version: '14.x'
+              version: '18.x'
 
             - project_path: 'samples/tab-personal-sso-quickstart/ts'
               name: 'tab-personal-sso-quickstart'
-              version: '14.x'
+              version: '18.x'
 
             - project_path: 'samples/tab-graph-toolkit/nodejs'
               name: 'tab-graph-toolkit'
@@ -808,13 +813,13 @@ jobs:
 
             - project_path: 'samples/tab-app-monetization/nodejs/ClientApp'
               name: 'tab-app-monetization'
-              version: '16.x'
+              version: '18.x'
 
             - project_path: 'samples/tab-device-permissions/nodejs'
               name: 'tab-device-permissions'
               version: '16.x'
             
-            - project_path: 'samples/tab-channel-context/nodejs'
+            - project_path: 'samples/tab-channel-context/nodejs/ClientApp'
               name: 'tab-channel-context'  
               version: '16.x'
             
@@ -829,7 +834,14 @@ jobs:
             - project_path: 'samples/tab-ui-templates/ts'
               name: 'tab-ui-templates'
               version: '18.x'
+
+            - project_path: 'samples/bot-adaptive-card-actions/nodejs'
+              name: 'bot-adaptive-card-actions'
+              version: '18.x'
             
+            - project_path: 'samples/tab-navbar-menu/ts'
+              name: 'tab-navbar-menu'
+              version: '16.x'
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
@@ -858,30 +870,39 @@ jobs:
             - project_path: 'samples/bot-conversation/java'
               name: 'bot-conversation'
               version: '18'
+
             - project_path: 'samples/bot-message-reaction/java'
               name: 'bot-message-reaction'
               version: '18'
+
             - project_path: 'samples/bot-teams-authentication/java'
               name: 'bot-teams-authentication'
               version: '18'
+
             - project_path: 'samples/bot-file-upload/java'
               name: 'bot-file-upload'
               version: '18'   
+
             - project_path: 'samples/bot-task-module/java'
               name: 'bot-task-module'
               version: '18'
+
             - project_path: 'samples/bot-initiate-thread-in-channel/java'
               name: 'bot-initiate-thread-in-channel'
               version: '18'
+
             - project_path: 'samples/msgext-search/java'
               name: 'msgext-search'
               version: '18'
+
             - project_path: 'samples/msgext-action/java'
               name: 'msgext-action'
-              version: '18'   
+              version: '18'  
+
             - project_path: 'samples/msgext-action-preview/java'
               name: 'msgext-action-preview'
               version: '18'
+
             - project_path: 'samples/msgext-link-unfurling/java'
               name: 'msgext-link-unfurling'
               version: '18' 
@@ -912,30 +933,39 @@ jobs:
             - project_path: 'samples/bot-conversation/python'
               name: 'bot-conversation'
               version: '3.10.x'
+
             - project_path: 'samples/bot-teams-authentication/python'
               name: 'bot-teams-authentication'
               version: '3.10.x'
+
             - project_path: 'samples/bot-file-upload/python'
               name: 'bot-file-upload'
               version: '3.10.x'
+
             - project_path: 'samples/bot-task-module/python'
               name: 'bot-task-module'
               version: '3.10.x'
+
             - project_path: 'samples/bot-initiate-thread-in-channel/python'
               name: 'bot-initiate-thread-in-channel'
               version: '3.10.x'
+
             - project_path: 'samples/msgext-search/python'
               name: 'msgext-search'
               version: '3.10.x'
+
             - project_path: 'samples/msgext-action/python'
               name: 'msgext-action'
               version: '3.10.x'
+
             - project_path: 'samples/msgext-action-preview/python'
               name: 'msgext-action-preview'
               version: '3.10.x'
+
             - project_path: 'samples/msgext-link-unfurling/python'
               name: 'msgext-link-unfurling'
               version: '3.10.x'
+              
             - project_path: 'samples/msgext-search-auth-config/python'
               name: 'msgext-search-auth-config'
               version: '3.10.x'
