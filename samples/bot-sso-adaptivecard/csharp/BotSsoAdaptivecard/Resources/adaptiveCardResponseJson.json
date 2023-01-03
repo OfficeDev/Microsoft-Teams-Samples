@@ -1,0 +1,34 @@
+﻿{
+  "type": "AdaptiveCard",
+  "refresh": {
+    "action": {
+      "type": "Action.Execute",
+      "verb": "basicRefresh",
+      "title": "RefreshTitle"
+    }
+  },
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "You are successfully logged-in !!",
+      "size": "Medium",
+      "weight": "Bolder"
+
+    },
+    {
+      "type": "TextBlock",
+      "text": "User Name : ${UserName}",
+      "size": "Medium",
+      "weight": "Bolder"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Job Title : ${UserTitle}",
+      "size": "Medium",
+      "weight": "Bolder"
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "appId": "<<YOUR-MICROSOFT-APP-ID>>",
+  "version": "1.5"
+}
