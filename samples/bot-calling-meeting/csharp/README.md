@@ -16,7 +16,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-calling-meeting-csharp
 
 ## Summary
 
-Calling and Meeting bot integrates [Microsoft Graph Cloud Communications APIs](https://learn.microsoft.com/en-us/graph/api/resources/communications-api-overview?view=graph-rest-1.0) with the Teams' Platform. It runs through scenarios for service hosted media bots.
+Calling and Meeting bot integrates [Microsoft Graph Cloud Communications APIs](https://learn.microsoft.com/en-us/graph/api/resources/communications-api-overview?view=graph-rest-1.0) with the Teams' Platform. It supports different scenarios for service hosted media bots.
 
 Some features of this sample includes:
 - Creating a call
@@ -31,8 +31,8 @@ Some features of this sample includes:
 - Text to speech
 - Sending messages in a meeting that you created
 
-- **Interaction with bot**
-<!-- TODO REPLACE VIDEO ![bot-calling-meeting ](docs/Images/bot-calling-meeting.gif) -->
+## Interaction with bot
+<!-- TODO REPLACE VIDEO  ![bot-calling-meeting ](docs/Images/bot-calling-meeting.gif) -->
 ## Frameworks
 
 ![drop](https://img.shields.io/badge/.NET-6-green.svg)
@@ -40,168 +40,147 @@ Some features of this sample includes:
 
 ## Prerequisites
 
-* [Office 365 tenant](https://developer.microsoft.com/en-us/microsoft-365/dev-program)
-
-* Microsoft Teams is installed and you have an account
-* [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
-* [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [Microsoft 365 Developer tenant](https://developer.microsoft.com/en-us/microsoft-365/dev-program)
+- Installed Microsoft Teams client
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
+  ```bash
+  # determine dotnet version
+  dotnet --version
+  ```
+- Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
 
 ## Setup
 
-> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
-the Teams service needs to call into the bot.
+> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because the Teams service needs to call into the bot.
 
-1) Clone the repository
+1. Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-2) If you are using Visual Studio
-  - Launch Visual Studio
-  - File -> Open -> Project/Solution
-  - Navigate to `samples/bot-calling-meeting/csharp` folder
-  - Select `CallingBotSample.csproj` file
+1. If you are using Visual Studio
+    - Launch Visual Studio
+    - File -> Open -> Project/Solution
+    - Navigate to `samples/bot-calling-meeting/csharp` folder
+    - Select `CallingBotSample.csproj` file
 
-3) Run ngrok - point to port 3978
+1. Run ngrok - point to port 3978
+    // TODO Verify the port number below.
 
     ```bash
     ngrok http --host-header=rewrite 3978
     ```
 
-## Register Azure AD application
-Register one Azure AD application in your tenant's directory for the bot and tab app authentication.
+    - Keep track of your `https` ngrok deployment URL. You will need it when configuring your bot below. It should look like `https://<<randomsubdomain>>.ngrok.io`. 
+    > NOTE: The free ngrok plan will generate a new URL every time you run it, which requires you to update your Azure Bot, and the project configuration. A paid account with a permanent ngrok URL is recommended.
 
-1.  Log in to the Azure portal from your subscription, and go to the "App registrations" blade  [here](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps). Ensure that you use a tenant where admin consent for API permissions can be provided.
+## Create an Azure Bot and register AAD application
+Follow the first two steps of [Create Teams conversation bot tutorial](https://learn.microsoft.com/en-gb/microsoftteams/platform/sbs-teams-conversation-bot). In particular complete the *Create and register your bot* section.
 
-2.  Click on "New registration", and create an Azure AD application.
+There are few adjustments to this tutorial to make this sample work.
 
-3.  **Name:**  The name of your Teams app - if you are following the template for a default deployment, we recommend "App catalog lifecycle".
+1. Be sure to keep track of the
+    - "*Microsoft App ID*" of your newly created AAD App
+    - "*Directory (tenant) ID*" shown in the AAD App overview page
+    - "*Client secret*" you created
 
-4.  **Supported account types:**  Select "Accounts in any organizational directory"
+1. When asked "*To add API permissions for downstream calls*", include the following Microsoft Graph Application permissions
+    - `Calls.AccessMedia.All`
+    - `Calls.Initiate.All`
+    - `Calls.InitiateGroupCall.All`
+    - `Calls.JoinGroupCall.All`
+    - `Calls.JoinGroupCallAsGuest.All`
+    - `OnlineMeetings.ReadWrite.All`
 
-5.  Leave the "Redirect URL" field blank.   
+1.  After you add the API permissions, some need to be granted Admin consent.
+    1. If you are logged in as the Global Administrator, you can click on the `Grant admin consent for <<tenant-name>>`.
+    1. If you are not an admin, ask your admin to grant the permissions through the portal or you can share a link with them that is in the following format `https://login.microsoftonline.com/common/adminconsent?client_id=<<appId>>`. This link will allow them to grant the permissions in one click.
 
-6.  Click on the "Register" button.
+1. To create an online meeting (used in the creating of incidents), we need to give a user that right. This is done by creating a policy. The policy allows your app to create an online meeting on behalf of that user. You can create the policy using the following PowerShell script
 
-7.  When the app is registered, you'll be taken to the app's "Overview" page. Copy the  **Application (client) ID**; we will need it later. Verify that the "Supported account types" is set to **Multiple organizations**.
-
-8.  On the side rail in the Manage section, navigate to the "Certificates & secrets" section. In the Client secrets section, click on "+ New client secret". Add a description for the secret and select Expires as "Never". Click "Add".
-
-9.  Once the client secret is created, copy its **Value**, please take a note of the secret as it will be required later.
-
-
-At this point you have 3 unique values:
--   Application (client) ID which will be later used during Azure bot creation
--   Client secret for the bot which will be later used during Azure bot creation
--   Directory (tenant) ID
-
-
-We recommend that you copy these values into a text file, using an application like Notepad. We will need these values later.
-
-10.  Under left menu, navigate to **API Permissions**, and make sure to add the following permissions of Microsoft Graph API > Application permissions:
-- `Calls.AccessMedia.All`
-- `Calls.Initiate.All`
-- `Calls.InitiateGroupCall.All`
-- `Calls.JoinGroupCall.All`
-- `Calls.JoinGroupCallAsGuest.All`
-- `OnlineMeetings.ReadWrite.All`
-
-Click on Add Permissions to commit your changes.
-
-11.  If you are logged in as the Global Administrator, click on the "Grant admin consent for <%tenant-name%>" button to grant admin consent else, inform your admin to do the same through the portal or follow the steps provided here to create a link and send it to your admin for consent.
+    - Run the following script in an administrator Powershell window, replacing: 
+        - `<<policy-name>>` with a name to describe the policy
+        - `<<microsoft-app-id>>` with the ID of the AAD App created above
+        - `<<policy-description>>` with a description of the policy
+        - `<<object-id-of-the-user-to-whom-policy-need-to-be-granted>>` with the user id of the user who should have the policy granted to them.
+        - // TODO is MicrosoftTeams module available by default or do users need to install it? 
+        ```powershell
+        	Import-Module MicrosoftTeams
+        	# Calling Connect-MicrosoftTeams using no parameters will open a window allowing for MFA accounts to authenticate
+        	Connect-MicrosoftTeams
+        
+        	New-CsApplicationAccessPolicy -Identity "<<policy-name>>" -AppIds "<<microsoft-app-id>>" -Description "<<policy-description>>"
+        	Grant-CsApplicationAccessPolicy -PolicyName "<<policy-name>>" -Identity "<<object-id-of-the-user-to-whom-policy-need-to-be-granted>>"
+        ```
     
-12.  Global Administrator can grant consent using following link:  [https://login.microsoftonline.com/common/adminconsent?client_id=](https://login.microsoftonline.com/common/adminconsent?client_id=)<%appId%> 
-13. Create a policy for a demo tenant user for creating the online meeting on behalf of that user using the following PowerShell script
+    - For example :
+        ```powershell
+          Import-Module MicrosoftTeams
+        	Connect-MicrosoftTeams
+        
+        	New-CsApplicationAccessPolicy -Identity Meeting-policy-dev -AppIds "d0bdaa0f-8be2-4e85-9e0d-2e446676b88c" -Description "Online meeting policy - contoso town"
+        	Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "782f076f-f6f9-4bff-9673-ea1997283e9c"
+        ```
+    ![PolicySetup](docs/Images/PolicySetup.PNG)
 
-```
-	Import-Module MicrosoftTeams
-	# Calling Connect-MicrosoftTeams using no parameters will open a window allowing for MFA accounts to authenticate
-	Connect-MicrosoftTeams
+    - You can verify the policy was created successfully by running the following  command.
+        ```powershell
+        Get-CsApplicationAccessPolicy -PolicyName "<<policy-name>>" -Identity "<<microsoft-app-id>>"
+        ```
 
-	New-CsApplicationAccessPolicy -Identity “<<policy-identity/policy-name>>” -AppIds "<<microsoft-app-id>>" -Description "<<policy-description>>"
-	Grant-CsApplicationAccessPolicy -PolicyName “<<policy-identity/policy-name>>” -Identity "<<object-id-of-the-user-to-whom-policy-need-to-be-granted>>"
+1. Finally we need to enable support for Calling on your Bot.
+    - When asked "*To add the Microsoft Teams channel*", after you have agreed to the Terms of Service and selected apply under the messaging tab, you have enabled the bot for messaging.
+    - Select the `Calling` tab.
+    - Check `Enable calling`
+    - Set the "Webhook (for calling)" to `https://<<deployment-url>>/callback`
+        - ![Screenshot of the Azure portal with the Webhook (for calling) set to https://a83b-103-163-178-242.ngrok.io/callback](docs/Images/enable-calling-endpoint.png)
+    - Select "Apply"
 
-  eg:
-  Import-Module MicrosoftTeams
-	Connect-MicrosoftTeams
+### Configuring the sample
 
-	New-CsApplicationAccessPolicy -Identity Meeting-policy-dev -AppIds "d0bdaa0f-8be2-4e85-9e0d-2e446676b88c" -Description "Online meeting policy - contoso town"
-	Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "782f076f-f6f9-4bff-9673-ea1997283e9c"
-```
-![PolicySetup](docs/Images/PolicySetup.PNG)
+#### Create Teams Application
+1. Update `manifest.json` in `Source\CallingBotSample\Manifest`. Replace:
+    - `<<app-id>>` with a random guid
+    - `<<microsoft-app-id>>` with the AAD Application Client ID for the app you created above
 
-14. Update `PolicyName`, `microsoft-app-id`, `policy-description`, `object-id-of-the-user-to-whom-policy-need-to-be-granted` in powershell script.
-15. Run `Windows Powershell PSI` as an administrator and execute above script.
-16. Run following command to verify policy is create successfully or not
-`Get-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "<<microsoft-app-id>>"`
-## Setup Bot Service
+1. Zip the contents of `Source\CallingBotSample\Manifest` to create a `manifest.zip` that can be installed in Teams. The zipped folder should contain `manifest.json`, `color.png` and `outline.png` and no subdirectories.
 
-1. In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration)
-2. Select Type of App as "Multi Tenant"
-3.  Select Creation type as "Use existing app registration"
-4. Use the copied App Id and Client secret from above step and fill in App Id and App secret respectively.
-5. Click on 'Create' on the Azure bot.   
-6. Go to the created resource, ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-7. In Settings/Configuration/Messaging endpoint, enter the current `https` URL you have given by running ngrok. Append with the path `/api/messages`     
-8. Select the Calling tab on the Teams channel page. Select Enable calling, and then update Webhook (for calling) with your HTTPS URL (`https://yourNgrok/callback`) where you receive incoming notifications.
-For example `https://contoso.com/teamsapp/callback`
-![EnableCallingEndpoint ](docs/Images/EnableCallingEndpoint.PNG)
-9. Save your changes.
+1. For initial testing, you can upload the `manifest.zip` to Teams.
+    1. In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.
 
-### Configuring the sample:
-1. __*Update appsettings.json for calling Bot*__
-````
-{
-  "MicrosoftAppId": "",
-  "MicrosoftAppPassword": "",
-  "BotBaseUrl": "https://{yourngrok}.ngrok.io",
-  "AzureAd": {
-    "Instance": "https://login.microsoftonline.com/",
-    "TenantId": "",
-    "ClientId": "",
-    "ClientSecret": ""
-  },
-  "Bot": {
-    "AppId": "",
-    "AppSecret": "",
-    "PlaceCallEndpointUrl": "https://graph.microsoft.com/v1.0",
-    "BotBaseUrl": "https://{yourngrok}.ngrok.io",
-    "GraphApiResourceUrl": "https://graph.microsoft.com",
-    "MicrosoftLoginUrl": "https://login.microsoftonline.com/"
-  },
-  "UserId": "",
-  "Users": [
-    {
-      "DisplayName": "",
-      "Id": ""
-    },
-    {
-      "DisplayName": "",
-      "Id": ""
-    },
-    {
-      "DisplayName": "",
-      "Id": ""
-    }
-  ]
-}
-````
-- Update `microsoft-app-id`, `microsoft-app-client-secret` with your app's client id and client secret registered in demo tenant.
-- Update `BotBaseUrl` with your `ngrok` URL.
-- Update `object-id-of-the-user-to-whom-online-meeting-policy-has-been-granted` with the ID of the user who has had the policy assigned to them above
-- Update `UserId` and `UserName` of the users from where you want to initiate the call and to whom you want to redirect or transfer the call
+1. To support the "Create incident" flow you need to upload the app to an app store. This because we use the [install app to chat API](https://learn.microsoft.com/en-us/graph/api/chat-post-installedapps?view=graph-rest-1.0&tabs=http) which requires the app to be in a store.
+    1. For testing we recommend using your Org's app store. [You can find the instructions on adding an app to your org app store here](https://learn.microsoft.com/en-gb/microsoftteams/upload-custom-apps#upload).
+    1. Under the [manage apps section in the Teams admin center](https://admin.teams.microsoft.com/policies/manage-apps) find your newly uploaded app, and keep track of the App's ID, this is the value you should use for the `<<teams-catalog-app-id>>` in `appsettings.json`. ![Screenshot of Teams Admin Center with the App ID highlighted.](docs/Images/teams-admin-center-app-id.png)
 
-2. __*This step is specific to Teams*__
-    - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-   - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-    - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
-    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
-    - Add the app to personal/team/groupChat scope (Supported scopes)
-
+#### Update App Settings
+1. Update `appsettings.json` replacing the below values:
+    - `<<microsoft-app-id>>` the AAD Application Client ID for the app you created above
+    - `<<microsoft-app-client-secret>>` the secret created after creating the Azure bot
+    - `<<tenant-id>>` the tenant id of your application
+    
+    - `<<deployment-url>>` the deployment url of your application, if you are using ngrok use this url. It will be in the format of https://randomsubdomain.ngrok.io
+    
+    - `<<object-id-of-the-user-to-whom-online-meeting-policy-has-been-granted>>` the object id of the user who was granted the online meeting policy above
+    
+    - `<<teams-catalog-app-id>>` This is the external application id of the app once it has been added to either your organisation app store or the public Team's app store.
+    
+1. If you wish to support Speech to Text and Text to Speech scenarios you need to [create an Azure Cognitive Speech Services recourse (documentation)](https://learn.microsoft.com/en-gb/azure/cognitive-services/cognitive-services-apis-create-account?tabs=speech%2Canomaly-detector%2Clanguage-service%2Ccomputer-vision%2Cwindows#create-a-new-azure-cognitive-services-resource), and you need to replace the below:
+    - Change `CognitiveServices.Enabled` to `true`
+    - `<<cognitive-speech-key>>` the key of the speech service. This can be found under "Keys and Endpoint" under the speech service resource. ![Screenshot of Speech Service in the Azure portal with the two keys shown.](docs/Images/cognitive-speech-service-keys.png)
+    - `<<cognitive-speech-region>>` the region you choose for your cognitive service instance during creation
+    - `<<cognitive-speech-language>>` the language of the speech being passed into the service
+    
+## Using the app
+// TODO update this
 
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
+
+## Code Tours
+This repository uses VSCode [Code Tours](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour#:~:text=A%20%22code%20tour%22%20is%20simply%20a%20series%20of,CONTRIBUTING.md%20file%20and%2For%20rely%20on%20help%20from%20others.) to explain _how_ the code works. 
+
+The tour files can be found in the `.tours` directory.
 
 ## Disclaimer
 
