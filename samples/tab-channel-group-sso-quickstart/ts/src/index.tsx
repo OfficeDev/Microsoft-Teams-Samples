@@ -1,14 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
-import { Provider, themes } from '@fluentui/react-northstar' //https://fluentsite.z22.web.core.windows.net/quick-start
+import { FluentProvider, teamsLightTheme } from '@fluentui/react-components';
+import ReactDOM from "react-dom/client";
 
-ReactDOM.render(
-    <Provider theme={themes.teams}>
-        <App />
-    </Provider>, document.getElementById('root')
-);
+const root = ReactDOM.createRoot(document.getElementById("root")!)
+root.render(<App />);

@@ -17,7 +17,9 @@ let handleQueryError = function (err) {
         message: 'Stupid network Error'
     }));
 };
+
 app.get('/getGraphAccessToken', async (req,res) => {
+
     const msalClient = new msal.ConfidentialClientApplication({
         auth: {
             clientId: clientId,
