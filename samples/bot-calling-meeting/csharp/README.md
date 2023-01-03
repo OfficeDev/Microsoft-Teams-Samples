@@ -103,25 +103,24 @@ There are few adjustments to this tutorial to make this sample work.
         - `<<microsoft-app-id>>` with the ID of the AAD App created above
         - `<<policy-description>>` with a description of the policy
         - `<<object-id-of-the-user-to-whom-policy-need-to-be-granted>>` with the user id of the user who should have the policy granted to them.
-        - // TODO is MicrosoftTeams module available by default or do users need to install it? 
+        - *If you do not have the MicrosoftTeams PowerShell Module installed, please [install it before continuing](https://learn.microsoft.com/en-us/microsoftteams/teams-powershell-install)*
         ```powershell
-        	Import-Module MicrosoftTeams
-        	# Calling Connect-MicrosoftTeams using no parameters will open a window allowing for MFA accounts to authenticate
-        	Connect-MicrosoftTeams
-        
-        	New-CsApplicationAccessPolicy -Identity "<<policy-name>>" -AppIds "<<microsoft-app-id>>" -Description "<<policy-description>>"
-        	Grant-CsApplicationAccessPolicy -PolicyName "<<policy-name>>" -Identity "<<object-id-of-the-user-to-whom-policy-need-to-be-granted>>"
+        Import-Module MicrosoftTeams
+        # Calling Connect-MicrosoftTeams using no parameters will open a window allowing for MFA accounts to authenticate
+        Connect-MicrosoftTeams
+      
+        New-CsApplicationAccessPolicy -Identity "<<policy-name>>" -AppIds "<<microsoft-app-id>>" -Description "<<policy-description>>"
+        Grant-CsApplicationAccessPolicy -PolicyName "<<policy-name>>" -Identity "<<object-id-of-the-user-to-whom-policy-need-to-be-granted>>"
         ```
-    
-    - For example :
+        - For example:
         ```powershell
-          Import-Module MicrosoftTeams
-        	Connect-MicrosoftTeams
-        
-        	New-CsApplicationAccessPolicy -Identity Meeting-policy-dev -AppIds "d0bdaa0f-8be2-4e85-9e0d-2e446676b88c" -Description "Online meeting policy - contoso town"
-        	Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "782f076f-f6f9-4bff-9673-ea1997283e9c"
+        Import-Module MicrosoftTeams
+        Connect-MicrosoftTeams
+      
+        New-CsApplicationAccessPolicy -Identity Meeting-policy-dev -AppIds "d0bdaa0f-8be2-4e85-9e0d-2e446676b88c" -Description "Online meeting policy - contoso town"
+        Grant-CsApplicationAccessPolicy -PolicyName Meeting-policy-dev -Identity "782f076f-f6f9-4bff-9673-ea1997283e9c"
         ```
-    ![PolicySetup](docs/Images/PolicySetup.PNG)
+        ![PolicySetup](docs/Images/PolicySetup.PNG)
 
     - You can verify the policy was created successfully by running the following  command.
         ```powershell
