@@ -5,12 +5,13 @@
     "author": "Microsoft",
     "license": "MIT",
     "main": "index.js",
-    "scripts": {
-        "start": "node ./index.js",
-        "watch": "nodemon ./index.js",
-        "lint": "eslint .",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
+  "scripts": {
+    "start": "node ./index.js",
+    "build": "node ./index.js",
+    "watch": "nodemon ./index.js",
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
     "repository": {
         "type": "git",
         "url": "https://github.com/Microsoft/BotBuilder-Samples.git"
