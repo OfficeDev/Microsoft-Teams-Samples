@@ -30,4 +30,5 @@ namespace StaggeredPermission.Pages
         {
             ClientId = _configuration["MicrosoftAppId"];
         }
+	}
 }
