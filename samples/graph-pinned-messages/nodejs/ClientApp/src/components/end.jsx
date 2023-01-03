@@ -1,20 +1,21 @@
-﻿@{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
-}
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
 
-@section scripts{
-     <script src="https://res.cdn.office.net/teams-js/2.5.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
-     <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-     <script type="text/javascript">
-        let clientId = '@ViewBag.AzureClientId';
+import React from 'react';
+import * as microsoftTeams from "@microsoft/teams-js";
+import * as msal from "@azure/msal-browser";
+
+/**
+ * This component is used to redirect the user to the Azure authorization endpoint from a popup
+ */
+class End extends React.Component {
+
+    componentDidMount() {
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.getContext().then(async (context) => {
                 const msalConfig = {
                     auth: {
-                        clientId: clientId,
+                        clientId: process.env.REACT_APP_MICROSOFT_APP_ID,
                         authority: `https://login.microsoftonline.com/${context.tid}`,
                         navigateToLoginRequestUrl: false
                     },
@@ -23,10 +24,11 @@
                     },
                 };
 				
-            const msalInstance = new msal.PublicClientApplication(msalConfig);
-			
+                const msalInstance = new msal.PublicClientApplication(msalConfig);
+				
                 msalInstance.handleRedirectPromise()
                     .then((tokenResponse) => {
+                        alert(JSON.stringify(tokenResponse));
                         if (tokenResponse !== null) {
                             microsoftTeams.authentication.notifySuccess("Authentication succedded");
                         } else {
@@ -38,5 +40,15 @@
                     });
             });
         });
-    </script>
+    }     
+
+    render() {
+      return (
+        <div>
+            <h1>Consent flow complete.</h1>
+        </div>
+      );
+    }
 }
+
+export default End;

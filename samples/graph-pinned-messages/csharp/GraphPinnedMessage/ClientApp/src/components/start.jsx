@@ -1,21 +1,27 @@
-﻿@{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
-}
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
 
-@section scripts{
-    <script src="https://res.cdn.office.net/teams-js/2.5.0/js/MicrosoftTeams.min.js", crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
-    <script type="text/javascript">
+import React from 'react';
+import * as microsoftTeams from "@microsoft/teams-js";
+import * as msal from "@azure/msal-browser";
+
+/**
+ * This component is loaded to grant consent for graph permissions.
+ */
+class Start extends React.Component {
+
+    componentDidMount() {
+
         microsoftTeams.app.initialize().then(() => {
+            // Get the tab context, and use the information to navigate to Azure AD login page
             microsoftTeams.app.getContext().then(async (context) => {
                 var currentURL = new URL(window.location);
-                var scope = "User.Read email openid profile offline_access";
+                var scope = "User.Read email openid profile offline_access Chat.Read Chat.ReadWrite ChatMessage.Send";
                 var loginHint = context.user.loginHint;
-
+				
                 const msalConfig = {
                     auth: {
-                        clientId: "@ViewBag.AzureClientId",
+                        clientId: process.env.REACT_APP_MICROSOFT_APP_ID,
                         authority: `https://login.microsoftonline.com/${context.user.tenant.id}`,
                         navigateToLoginRequestUrl: false
                     },
@@ -23,18 +29,28 @@
                         cacheLocation: "sessionStorage",
                     },
                 };
-
+				
                 const msalInstance = new msal.PublicClientApplication(msalConfig);
 				
                 const scopesArray = scope.split(" ");
                 const scopesRequest = {
                     scopes: scopesArray,
-                    redirectUri: window.location.origin + `/Auth/End`,
+                    redirectUri: window.location.origin + `/auth-end`,
                     loginHint: loginHint
                 };
 				
                 await msalInstance.loginRedirect(scopesRequest);
             });
         });
-    </script>
+    }
+
+    render() {
+      return (
+        <div>
+          <h1>Redirecting to consent page.</h1>
+        </div>
+      );
+    }
 }
+
+export default Start;
