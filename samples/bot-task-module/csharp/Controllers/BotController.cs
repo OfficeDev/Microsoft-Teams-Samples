@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using Microsoft.Extensions.Options;
+using Microsoft.Teams.Samples.TaskModule.Web.Helper;
 
 namespace Microsoft.BotBuilderSamples.Controllers
 {
@@ -19,7 +21,7 @@ namespace Microsoft.BotBuilderSamples.Controllers
     {
         private readonly IBotFrameworkHttpAdapter Adapter;
         private readonly IBot Bot;
-
+       
         public BotController(IBotFrameworkHttpAdapter adapter, IBot bot)
         {
             Adapter = adapter;
@@ -33,5 +35,6 @@ namespace Microsoft.BotBuilderSamples.Controllers
             // The adapter will invoke the bot.
             await Adapter.ProcessAsync(Request, Response, Bot);
         }
+
     }
 }

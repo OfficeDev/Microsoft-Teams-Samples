@@ -839,6 +839,9 @@ jobs:
               name: 'bot-adaptive-card-actions'
               version: '18.x'
             
+            - project_path: 'samples/tab-navbar-menu/ts'
+              name: 'tab-navbar-menu'
+              version: '16.x'
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
