@@ -412,6 +412,10 @@ jobs:
               name: 'connector-todo-notification'
               version: '6.0.x'
 
+            - project_path: 'samples/bot-adaptive-card-actions/csharp/AdaptiveCardActions/AdaptiveCardActions.csproj'
+              name: 'bot-adaptive-card-actions'
+              version: '6.0.x'
+
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
     steps:
@@ -831,6 +835,10 @@ jobs:
               name: 'tab-ui-templates'
               version: '18.x'
 
+            - project_path: 'samples/bot-adaptive-card-actions/nodejs'
+              name: 'bot-adaptive-card-actions'
+              version: '18.x'
+            
             - project_path: 'samples/tab-navbar-menu/ts'
               name: 'tab-navbar-menu'
               version: '16.x'

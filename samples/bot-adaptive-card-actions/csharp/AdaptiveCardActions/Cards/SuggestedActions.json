@@ -1,0 +1,20 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "**Welcome to bot Suggested actions**"
+    },
+    {
+      "type": "TextBlock",
+      "text": "please use below commands, to get response form the bot."
+    },
+    {
+      "type": "TextBlock",
+      "text": "- Red \r- Blue \r - Yellow",
+      "wrap": true
+    }
+  ]
+}
