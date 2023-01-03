@@ -25,55 +25,39 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 
 |    | Sample Name        | Description                                                                                                                | Manifest| 
 |:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|
-|1|SSO Demo        | Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl |[View](/demo%20manifest/SSO-Demo.zip)     |
-|2|Complete sample Demo       | Complete sample to showcase various capabilities including bots, tabs, messaging extension |[View](/demo%20manifest/Complete-Sample.zip)     |
-|3|Task Module Demo       | Sample app showing off the Teams Task Module, a way to invoke custom code from a bot, a tab, or both |[View](/demo%20manifest/Task-Module.zip)     |
-|4|Connectors        | Sample Office 365 Connector generating notifications to teams channel. |[View](/demo%20manifest/Connector.zip)     |
-|5|Tabs with Adaptive Cards  | Microsoft Teams tab sample code which demonstrates how to Build tabs with Adaptive Cards. |[View](/demo%20manifest/JSON-based-Tabs.zip)     |
-|6|Meetings Stage View Demo  | Enable and configure your apps for Teams meetings to use in stage view. |[View](/demo%20manifest/Meetings-StageView.zip)     |
-|7|Meeting Events | Microsoft Teams sample app to get real time meeting events. |[View](/demo%20manifest/Meetings-Events.zip)     |
-|8|Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. |[View](/demo%20manifest/Bot-RSC.zip)     |
-|9|Meeting Recruitment App | Sample app showing meeting app experience for interview scenario. |[View](/demo%20manifest/Meeting-Recruitment-App.zip)     |
-|10|App installation using QR code | Sample app that generates a QR or installs app using the QR code.|[View](/demo%20manifest/App-Installation-Using-QR.zip)     |
-|11|App checkin location | Demonstrating feature where user can checkin with current location and view all previous checkins.|[View](/demo%20manifest/App-checkin-location.zip)     |
-|12|Teams tab graph toolkit | This sample demos building teams tab using microsoft graph toolkit|[View](/demo%20manifest/Teams-tab-graph-toolkit.zip)     |
-|13| Product inspection | Demonstrating a feature where user can scan a product and mark it as approved/rejected. |[View](/demo%20manifest/Tab-Product-Inspection.zip)     |
-|14| Bot with SharePoint file to view in Teams file viewer| This sample demos a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer.|[View](/demo%20manifest/Bot-SharePoint-File-Viewer.zip)     |
-|15|Bot daily task reminder | This sample demos a feature where user can schedule a recurring task and get a reminder on the scheduled time|[View](/demo%20manifest/Bot-Daily-Task-Reminder.zip)     |
-|16| Message reminder setup through messaging extension | This sample demos a feature where user can schedule a task from messaging extension action command and get a reminder card at scheduled date and time.|[View](/demo%20manifest/Message-Reminder-Messaging-extension.zip)     |
-|17| Task approval using activity feed notification|Demonstrating a feature where user can raise the requests and manager will be notified about the requests and manager will be redirected to approve/reject the request from received notification.|[View](/demo%20manifest/Tab-Request-Approval.zip)     |
-|18|Bot request approval|Demonstrating a feature where user can send task request to his manager using universal adaptive card and manager can approve/reject the request.|[View](/demo%20manifest/Bot-Request-Approval.zip) |
-|19|Incoming Webhook|This sample is used to send card using incoming webhook.|[View](/demo%20manifest/Incoming-Webhook.zip) |
-|20|People picker control in Adaptive Cards | This sample shows the feature of people picker control in Adaptive Cards.|[View](/demo%20manifest/People-picker-adaptive-card.zip) |
-|21|App complete auth|This sample demos authentication feature in bot,tab and messaging extension.|[View](/demo%20manifest/App-Complete-Auth.zip) |
-|22|Meeting signing programmatic share to stage|Demonstrating the programmatic share to stage feature, by means of a document signing in a meeting. |[View](/demo%20manifest/Meeting-Share-To-Stage-Signing.zip) |
-|23|Tab people picker|This is an tab app which shows the feature of client sdk people picker. |[View](/demo%20manifest/Tab-People-Picker.zip) |
-|24|Bot Join Team Using QR|This sample demos a feature where user can join a team using QR code containing the team's id. |[View](/demo%20manifest/Bot-Join-Team-By-QR.zip) |
-|25|App Hello World|Feature of this sample to display Hello Word. |[View](/demo%20manifest/app-hello-world.zip) |
-|26|App Localization|Feature of this sample Microsoft Teams app localization using Bot and Tab. |[View](/demo%20manifest/app-localization.zip) |
-|27|Region Selection|Feature of the sample Microsoft Teams app show end user region selection using Bot and Tab |[View](/demo%20manifest/app-region-selection.zip) |
-|28|Bot AdaptiveCards User Specific View|This sample illustrates a few different ways developers can consume user-specific views in Adaptive cards. |[View](/demo%20manifest/bot-adaptivecards-user-specific-views.zip) |
-|29|Bot Suggested Action|feature where user can send suggested actions using bot. |[View](/demo%20manifest/bot-suggested-actions.zip) |
-|30|Connector Generic|Sample code for a generic connector that's easy to customize for any system which supports webhooks. |[View](/demo%20manifest/connector-generic.zip) |
-|31|Graph AppCatalog Life Cycle|Manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs |[View](/demo%20manifest/graph-appcatalog-lifecycle.zip)|
-|32|Graph RSC|how you can use Resource Specific Consent (RSC) to call Graph APIs. |[View](/demo%20manifest/graph-rsc.zip) |
-|33|Meetings Details Tab|Microsoft Teams meeting extensibility sample for iteracting with Details Tab in-meeting. |[View](/demo%20manifest/meetings-details-tab.zip) |
-|34|Tab Channel Group Config Page Auth|Configurable Tab using AAD and Silent Authentication. |[View](/demo%20manifest/tab-channel-group-config-page-auth.zip) |
-|35|Tab Chanel Group|Sample app showing custom group and channel Tab with ASP. NET Core. |[View](/demo%20manifest/tab-channel-group.zip) |
-|36|Bot Initiate Thread in Channel|This sample app demonstrate how to start a thread in a specific Team's channel using Bot Framework v4 |[View](/demo%20manifest/bot-initiate-thread-in-channel.zip) |
-|37|Bot Task Module|This sample app demonstrate how to use Task Module using Bot Framework v4. |[View](/demo%20manifest/bot-task-module.zip) |
-|38|Messaging Extension Action Preview|This sample app demonstrate how to use action preview in Messaging Extensions using Bot Framework v4s. |[View](/demo%20manifest/msgext-action-preview.zip) |
-|39|Messaging Extension Search|This sample app demonstrate how to use search based Messaging Extension. |[View](/demo%20manifest/msgext-search.zip) |
-|40|Messaging Extension Search Auth Config|This sample app demonstrate how to use search auth config in Messaging Extension. |[View](/demo%20manifest/msgext-search-auth-config.zip) |
-|41|Bot File Upload|This sample app demonstrate the file upload with bot using Bot Framework v4. |[View](/demo%20manifest/bot-file-upload.zip) |
-|42|Bot Message Reaction|This sample app demonstrate how to use message reactions bot. |[View](/demo%20manifest/bot-message-reaction.zip) |
-|43|Messaging Extension Link Unfurling|This sample app demonstrate how to use link unfurling in Messaging Extension using Bot Framework v4. |[View](/demo%20manifest/msgext-link-unfurling.zip) |
-|44|Tab App Monetization|This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk. |[View](/demo%20manifest/tab-app-monetization.zip) |
-|45|Tab UI Templates|This sample demonstrates @fluentui/react-teams library in Microsoft Teams apps. |[View](/demo%20manifest/tab-ui-templates.zip) |
-|46|Meetings Audio State|This sample shows how to mute/unmute Teams meeting audio using toggle Incoming Client Audio API. |[View](/demo%20manifest/meetings-audio-state.zip) |
-|47|Tab Conversations|This Teams tab app provides a way to allow users to have conversations about sub-entities in the tab Create conversational tabs. |[View](/demo%20manifest/tab-conversations.zip) |
-|48|Fetch GroupChat Messages|Demonstrating on how a bot can archive groupchat messages and send it to user as a file. |[View](/demo%20manifest/Fetch-GroupChat-Messages.zip) |
-|49|Typeahead Search AdaptiveCards|This Teams tab app provides a way to allow users to have conversations about sub-entities in the tab Create conversational tabs. |[View](/demo%20manifest/Typeahead-search-adaptive-cards.zip) |
+|1|Task Module Demo       | Sample app showing off the Teams Task Module, a way to invoke custom code from a bot, a tab, or both |[View](/demo%20manifest/Task-Module.zip)     |
+|2|Meeting Recruitment App | Sample app showing meeting app experience for interview scenario. |[View](/demo%20manifest/Meeting-Recruitment-App.zip)     |
+|3| Product inspection | Demonstrating a feature where user can scan a product and mark it as approved/rejected. |[View](/demo%20manifest/Tab-Product-Inspection.zip)     |
+|4|Bot daily task reminder | This sample demos a feature where user can schedule a recurring task and get a reminder on the scheduled time|[View](/demo%20manifest/Bot-Daily-Task-Reminder.zip)     |
+|5| Message reminder setup through messaging extension | This sample demos a feature where user can schedule a task from messaging extension action command and get a reminder card at scheduled date and time.|[View](/demo%20manifest/Message-Reminder-Messaging-extension.zip)     |
+|6| Task approval using activity feed notification|Demonstrating a feature where user can raise the requests and manager will be notified about the requests and manager will be redirected to approve/reject the request from received notification.|[View](/demo%20manifest/Tab-Request-Approval.zip)     |
+|7|People picker control in Adaptive Cards | This sample shows the feature of people picker control in Adaptive Cards.|[View](/demo%20manifest/People-picker-adaptive-card.zip) |
+|8|App complete auth|This sample demos authentication feature in bot,tab and messaging extension.|[View](/demo%20manifest/App-Complete-Auth.zip) |
+|9|Tab people picker|This is an tab app which shows the feature of client sdk people picker. |[View](/demo%20manifest/Tab-People-Picker.zip) |
+|10|App Hello World|Feature of this sample to display Hello Word. |[View](/demo%20manifest/app-hello-world.zip) |
+|11|Graph RSC|how you can use Resource Specific Consent (RSC) to call Graph APIs. |[View](/demo%20manifest/graph-rsc.zip) |
+|12|Meetings Details Tab|Microsoft Teams meeting extensibility sample for iteracting with Details Tab in-meeting. |[View](/demo%20manifest/meetings-details-tab.zip) |
+|13|Tab Chanel Group|Sample app showing custom group and channel Tab with ASP. NET Core. |[View](/demo%20manifest/tab-channel-group.zip) |
+|14|Tab App Monetization|This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk. |[View](/demo%20manifest/tab-app-monetization.zip) |
+|15|Tab UI Templates|This sample demonstrates @fluentui/react-teams library in Microsoft Teams apps. |[View](/demo%20manifest/tab-ui-templates.zip) |
+|16|Tab Conversations|This Teams tab app provides a way to allow users to have conversations about sub-entities in the tab Create conversational tabs. |[View](/demo%20manifest/tab-conversations.zip) |
+|17|Typeahead Search AdaptiveCards|This Teams tab app provides a way to allow users to have conversations about sub-entities in the tab Create conversational tabs. |[View](/demo%20manifest/Typeahead-search-adaptive-cards.zip) |
+|18|Personal tabs|This Teams app showing the custom personal Tab with ASP. NET Core. |[View](/demo%20manifest/tab-personal.zip) |
+|19|Channel and group tab quick-start|This Teams app showing the channel and group tab hello world app. |[View](/demo%20manifest/tab-channel-group-quickstart.zip) |
+|20|Device permissions|This Teams app demonstrating the device permissions. |[View](/demo%20manifest/tab-device-permissions.zip) |
+|21|Tab in stage view|This Teams app demonstrating the tab in stage view. |[View](/demo%20manifest/tab-stage-view.zip) |
+|22|Staggered Permission|This Teams app demonstrating to get staggered graph api permissions. |[View](/demo%20manifest/tab-staggered-permission.zip) |
+|23|Teams Conversation Bot|This Teams app demonstrating messaging and conversation event handling. |[View](/demo%20manifest/bot-conversation.zip) |
+|24|Authentication with OAuthPrompt|This Teams app demonstrating authentication and basic messaging in Bot Framework v4. |[View](/demo%20manifest/bot-teams-authentication.zip) |
+|25|Messaging extensions - search quick-start|This Teams app demonstrating hello world Messaging Extension that accepts search requests and returns results. |[View](/demo%20manifest/msgext-search-quickstart.zip) |
+|26|Messaging extensions - action quick-start|This Teams app demonstrating hello world Messaging Extension that accepts parameters and returns a card. Also, how to receive a forwarded message as a parameter in a Messaging Extension. |[View](/demo%20manifest/msgext-action-quickstart.zip) |
+|27|Messaging extensions - action|This Teams app demonstrating Messaging Extension that accepts parameters and returns a card. Also, how to receive a forwarded message as a parameter in a Messaging Extension. |[View](/demo%20manifest/msgext-action.zip) |
+|28|Message Extension - Message Reminder|This Teams app demonstrating Messaging Extension that performs link unfurling. |[View](/demo%20manifest/msgext-message-reminder.zip) |
+|29|Proactive installation of App and sending proactive notifications|This Teams app demonstrating how you can use [Proactive installation of app for user and send proactive notification](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages?tabs=csharp) by calling Microsoft Graph APIs. |[View](/demo%20manifest/graph-proactive-installation.zip) |
+|30|Meetings Extensibility|This Teams app demonstrating Microsoft Teams meeting extensibility sample: token passing. |[View](/demo%20manifest/meetings-token-app.zip) |
+|31|Meetings Content Bubble Bot|This Teams app demonstrating Microsoft Teams meeting extensibility iteracting with Content Bubble Bot in-meeting. |[View](/demo%20manifest/meetings-content-bubble.zip) |
+|32|Live coding interview using Shared meeting stage|This Teams app demonstrating a live coding in a Teams meeting stage. |[View](/demo%20manifest/meetings-live-code-interview.zip) |
+|33|Meetings-Context-app|This Teams app demonstrating the contents of meeting tab context object in a meeting tab. |[View](/demo%20manifest/meetings-context-app.zip) |
 
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 
