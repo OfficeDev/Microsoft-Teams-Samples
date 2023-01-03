@@ -105,6 +105,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |6|Messaging extensions - auth and config | Messaging Extension that has a configuration page, accepts search requests and returns results with SSO. |     | [View][msgext-search-sso-config#js] |
 |7|Messaging extensions - action preview | Demonstrates how to create a Preview and Edit flow for a Messaging Extension. | [View][msgext-action-preview#cs] | [View][msgext-action-preview#js] | [View][msgext-action-preview#python] |[View][msgext-action-preview#java]||
 |8|Link unfurling | Messaging Extension that performs link unfurling. | [View][msgext-link-unfurling#cs] | [View][msgext-link-unfurling#js] | [View][msgext-link-unfurling#python] | [View][msgext-link-unfurling#java]||
+|9|Message Extension - Message Reminder | Messaging Extension that performs link unfurling. | [View][msgext-msg-reminder#cs] | [View][msgext-msg-reminder#js] | | |[View](/demo%20manifest/msgext-message-reminder.zip)|
 
 
 #### Additional samples
@@ -392,6 +393,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [msgext-action#js]:samples/msgext-action/nodejs
 [msgext-link-unfurling#js]:samples/msgext-link-unfurling/nodejs
 [bot-conversation-sso-quickstart#js]:samples/bot-conversation-sso-quickstart/js
+[msgext-msg-reminder#js]:samples/msgext-message-reminder/nodejs
 
 [bot-conversation#java]:samples/bot-conversation/java
 [bot-file-upload#java]:samples/bot-file-upload/java
@@ -416,6 +418,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [msgext-search-auth-config#cs]:samples/msgext-search-auth-config/csharp
 [msgext-search#cs]:samples/msgext-search/csharp
 [msgext-action#cs]:samples/msgext-action/csharp
+[msgext-msg-reminder#cs]:samples/msgext-message-reminder/csharp
+
 
 ## Submitting issues
 
