@@ -98,7 +98,6 @@ This sample app illustrates the implementation of Details Tab in Meeting. User c
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
 
-
 ## Running the sample
 
 Interact with Details Tab in Meeting.
@@ -117,3 +116,9 @@ Interact with Details Tab in Meeting.
 ![Image](Images/Response.png)
 9. Participants in meeting can view the results from meeting chat or Tab itself.
 
+## Further reading
+
+- [Build tabs for meeting](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/build-tabs-for-meeting?tabs=desktop)
+- [Meeting apps APIs](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet)
+- [Meeting Side Panel](https://learn.microsoft.com/en-us/microsoftteams/platform/sbs-meetings-sidepanel?tabs=vs)
+- [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)

@@ -121,14 +121,7 @@ Message the Bot by @ mentioning to interact with the content bubble.
 
 ## Further reading
 
+- [Meeting apps APIs](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet)
 - [Meeting content bubble](https://learn.microsoft.com/microsoftteams/platform/sbs-meeting-content-bubble)
+- [Build tabs for meeting](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/build-tabs-for-meeting?tabs=desktop)
 - [Build in-meeting notification for Teams meeting](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/in-meeting-notification-for-meeting)
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Azure Portal](https://portal.azure.com)
-- [Activity processing](https://docs.microsoft.com/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
-- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
-- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
-- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
-- [dotenv](https://www.npmjs.com/package/dotenv)
-- [Microsoft Teams Developer Platform](https://docs.microsoft.com/microsoftteams/platform/)

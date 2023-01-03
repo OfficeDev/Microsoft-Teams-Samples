@@ -115,7 +115,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 >NOTE:
 >Visit the [Bot Framework Samples repository][botframework] to view Microsoft Bot Framework v4 SDK task-focused samples for C#, JavaScript, TypeScript, and Python.
 
-|    | Sample Name | Description | .NET Core | JavaScript | Python | Java |
+|    | Sample Name | Description | .NET | JavaScript | Python | Java |
 |:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|:-------------|:-------------|
 |1| Teams Conversation Bot quick-start | Messaging and conversation event handling hello world. | | [View][bot-conversation-quickstart#js]| | |
 |2| Teams Conversation Bot SSO quick-start | Messaging and conversation event handling hello world with SSO. | [View][bot-conversation-sso-quickstart#csharp_dotnetcore] | [View][bot-conversation-sso-quickstart#js]| | |
@@ -136,7 +136,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |17|  Suggested Actions Bot | This sample shows the feature where user can send suggested actions using bot. |[View][suggestedactionsbot#csharp]|[View][suggestedactionsbot#nodejs]
 #### Additional samples
 
-|    | Sample Name | Description | .NET Core | JavaScript | 
+|    | Sample Name | Description | .NET | JavaScript | 
 |:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|
 |1|Proactive Messaging   | Sample to highlight solutions to two challenges with building proactive messaging apps in Microsoft Teams.                                      |[View][bot-proactive-msg#cs]        |
 |2| Sharepoint List Bot| This sample app shows the interaction between teams bot and SharePoint List, Bot saves the specified details in SharePoint List as back-end| [View][bot-sharepoint-list#cs] |  |  |
@@ -146,7 +146,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 >NOTE:
 >Visit the [Bot Framework Samples repository][botframework] to view Microsoft Bot Framework v4 SDK task-focused samples for C#, JavaScript, TypeScript, and Python.
 
-|    | Sample Name | Description | .NET Core | JavaScript | Python| Java |
+|    | Sample Name | Description | .NET | JavaScript | Python| Java |
 |:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|:-------------|:-------------|
 |1|Messaging extensions - search quick-start | Hello world Messaging Extension that accepts search requests and returns results. | | [View][msgext-search-quickstart#js] | |
 |2|Messaging extensions - search | Messaging Extension that accepts search requests and returns results. | [View][msgext-search#cs] | [View][msgext-search#js] | [View][msgext-search#python] | [View][msgext-search#java]|
@@ -159,7 +159,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 #### Additional samples
 
-|    | Sample Name | Description | .NET Core | JavaScript | Python |
+|    | Sample Name | Description | .NET | JavaScript | Python |
 |:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|:-------------|
 |1|Link unfurling demo of Reddit        | Messaging Extension with Link Unfurling Samples for Reddit Links                              |[View][msgext-link-unfurl#cs]        |
 |2|Link unfurling - setup a meeting     | This sample illustrates a common scenario where a user shares a link to a resource with a group of users, and they collaborate to review it in a meeting.                              |[View][msgext-link-unfurl-meeting#cs]        |
