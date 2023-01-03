@@ -21,11 +21,6 @@
         "dotenv": "^8.2.0",
         "express": "^4.18.2",
         "prisma": "^4.7.1",
-        "restify": "^10.0.0",
-        "send": "^0.18.0",
-        "typescript": "^4.9.4"
-        "botbuilder": "^4.18.0",
-        "dotenv": "^8.2.0",
         "restify": "^10.0.0"
     },
     "devDependencies": {
