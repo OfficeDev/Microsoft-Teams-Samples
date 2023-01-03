@@ -10,31 +10,25 @@
   "body": [
     {
       "type": "TextBlock",
-      "text": "Happy Testing",
-      "size": "Medium",
-      "weight": "Bolder"
-    },
-    {
-      "type": "TextBlock",
-      "text": "Refreshed Card",
-      "size": "Medium",
-      "weight": "Bolder"
-    },
-    {
-      "type": "TextBlock",
-      "text": "Welcome Universal Card",
+      "text": "You are successfully logged-in !!",
       "size": "Medium",
       "weight": "Bolder"
 
     },
     {
       "type": "TextBlock",
-      "text": "${authResult}",
+      "text": "User Name : ${UserName}",
+      "size": "Medium",
+      "weight": "Bolder"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Job Title : ${UserTitle}",
       "size": "Medium",
       "weight": "Bolder"
     }
   ],
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-  "appId": "ecc9fe9e-03df-4597-9c7d-22828d713d68",
-  "version": "1.4"
+  "appId": "<<YOUR-MICROSOFT-APP-ID>>",
+  "version": "1.5"
 }

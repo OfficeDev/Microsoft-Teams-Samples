@@ -26,6 +26,6 @@
     }
   ],
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-  "appId": "9b6dcf71-df47-4756-b486-47ca94dbacee",
-  "version": "1.4"
+  "appId": "<<YOUR-MICROSOFT-APP-ID>>",
+  "version": "1.5"
 }
