@@ -13,17 +13,20 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-bot-sso-adaptivecard-csharp
 ---
 
-# Teams Conversation Bot SSO Adaptivecard
+# Teams Auth Bot
 
-Teams Bot with SSO using Bot Framework v5.
+Bot Framework v4 bot using Teams authentication
 
-This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to get started with SSO in a bot for Microsoft Teams.
+This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to get started with authentication in a bot for Microsoft Teams.
 
-The focus of this sample is how to use the Bot Framework support for OAuth SSO in your bot. Teams behaves slightly differently than other channels in this regard. Specifically an Invoke Activity is sent to the bot rather than the Event Activity used by other channels. _This Invoke Activity must be forwarded to the dialog if the OAuthPrompt is being used._ This is done by subclassing the ActivityHandler and this sample includes a reusable TeamsActivityHandler. This class is a candidate for future inclusion in the Bot Framework SDK.
+The focus of this sample is how to use the Bot Framework support for oauth in your bot. Teams behaves slightly differently than other channels in this regard. Specifically an Invoke Activity is sent to the bot rather than the Event Activity used by other channels. This Invoke Activity must be forwarded to the dialog if the OAuthPrompt is being used. This is done by subclassing the ActivityHandler and this sample includes a reusable TeamsActivityHandler. This class is a candidate for future inclusion in the Bot Framework SDK.
 
-The sample uses the bot authentication capabilities in [Azure Bot Service](https://docs.botframework.com), providing features to make it easier to develop a bot that authenticates users to various identity providers such as Azure AD (Azure Active Directory), GitHub, Uber, etc. The OAuth token is then used to make basic Microsoft Graph queries.
+The sample uses the bot authentication capabilities in [Azure Bot Service](https://docs.botframework.com),providing features to make it easier to develop a bot that authenticates users to various identity providers such as Azure AD (Azure Active Directory), GitHub, Uber, etc. The OAuth token is then used to make basic Microsoft Graph queries.
 
-> IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
+> IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of validDomains. This must be included in any bot that uses the Bot Framework OAuth flow.
+
+> IMPORTANT: Teams SSO only works in 1-1 chats, and not group contexts.
+
 
 ## Interaction with app
 
