@@ -232,7 +232,7 @@ namespace Microsoft.BotBuilderSamples
             var oAuthCard = new OAuthCard
             {
                 Text = "Signin Text",
-                ConnectionName = "<<YOUR-CONNECTION-NAME>>",
+                ConnectionName = _connectionName,
                 TokenExchangeResource = new TokenExchangeResource
                 {
                     Id = Guid.NewGuid().ToString()
