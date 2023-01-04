@@ -29,7 +29,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |2|Meeting Recruitment App | Sample app showing meeting app experience for interview scenario. |[View](/demo%20manifest/Meeting-Recruitment-App.zip)     |
 |3| Product inspection | Demonstrating a feature where user can scan a product and mark it as approved/rejected. |[View](/demo%20manifest/Tab-Product-Inspection.zip)     |
 |4|Bot daily task reminder | This sample demos a feature where user can schedule a recurring task and get a reminder on the scheduled time|[View](/demo%20manifest/Bot-Daily-Task-Reminder.zip)     |
-|5| Message reminder setup through messaging extension | This sample demos a feature where user can schedule a task from messaging extension action command and get a reminder card at scheduled date and time.|[View](/demo%20manifest/Message-Reminder-Messaging-extension.zip)     |
+|5| Tab Channel Goup Config Page Auth | Configurable Tab using AAD and Silent Authentication.|[View](/demo%20manifest/tab-channel-group-config-page-auth.zip)     |
 |6| Task approval using activity feed notification|Demonstrating a feature where user can raise the requests and manager will be notified about the requests and manager will be redirected to approve/reject the request from received notification.|[View](/demo%20manifest/Tab-Request-Approval.zip)     |
 |7|People picker control in Adaptive Cards | This sample shows the feature of people picker control in Adaptive Cards.|[View](/demo%20manifest/People-picker-adaptive-card.zip) |
 |8|App complete auth|This sample demos authentication feature in bot,tab and messaging extension.|[View](/demo%20manifest/App-Complete-Auth.zip) |
@@ -53,11 +53,14 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |26|Messaging extensions - action quick-start|This Teams app demonstrating hello world Messaging Extension that accepts parameters and returns a card. Also, how to receive a forwarded message as a parameter in a Messaging Extension. |[View](/demo%20manifest/msgext-action-quickstart.zip) |
 |27|Messaging extensions - action|This Teams app demonstrating Messaging Extension that accepts parameters and returns a card. Also, how to receive a forwarded message as a parameter in a Messaging Extension. |[View](/demo%20manifest/msgext-action.zip) |
 |28|Message Extension - Message Reminder|This Teams app demonstrating Messaging Extension that performs link unfurling. |[View](/demo%20manifest/msgext-message-reminder.zip) |
-|29|Proactive installation of App and sending proactive notifications|This Teams app demonstrating how you can use [Proactive installation of app for user and send proactive notification](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages?tabs=csharp) by calling Microsoft Graph APIs. |[View](/demo%20manifest/graph-proactive-installation.zip) |
-|30|Meetings Extensibility|This Teams app demonstrating Microsoft Teams meeting extensibility sample: token passing. |[View](/demo%20manifest/meetings-token-app.zip) |
-|31|Meetings Content Bubble Bot|This Teams app demonstrating Microsoft Teams meeting extensibility iteracting with Content Bubble Bot in-meeting. |[View](/demo%20manifest/meetings-content-bubble.zip) |
-|32|Live coding interview using Shared meeting stage|This Teams app demonstrating a live coding in a Teams meeting stage. |[View](/demo%20manifest/meetings-live-code-interview.zip) |
-|33|Meetings-Context-app|This Teams app demonstrating the contents of meeting tab context object in a meeting tab. |[View](/demo%20manifest/meetings-context-app.zip) |
+|29|Messaging extensions - search|This sample app demonstrate how to use search based Messaging Extension. |[View](/demo%20manifest/msgext-search.zip) |
+|30|Messaging extensions - Link unfurling|This sample app demonstrate how to use link unfurling in Messaging Extension using Bot Framework v4. |[View](/demo%20manifest/msgext-link-unfurling.zip) |
+|31|Messaging extensions - action preview|This sample app demonstrate how to use action preview in Messaging Extensions using Bot Framework v4 |[View](/demo%20manifest/msgext-action-preview.zip) |
+|32|Proactive installation of App and sending proactive notifications|This Teams app demonstrating how you can use [Proactive installation of app for user and send proactive notification](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages?tabs=csharp) by calling Microsoft Graph APIs. |[View](/demo%20manifest/graph-proactive-installation.zip) |
+|33|Meetings Extensibility|This Teams app demonstrating Microsoft Teams meeting extensibility sample: token passing. |[View](/demo%20manifest/meetings-token-app.zip) |
+|34|Meetings Content Bubble Bot|This Teams app demonstrating Microsoft Teams meeting extensibility iteracting with Content Bubble Bot in-meeting. |[View](/demo%20manifest/meetings-content-bubble.zip) |
+|35|Live coding interview using Shared meeting stage|This Teams app demonstrating a live coding in a Teams meeting stage. |[View](/demo%20manifest/meetings-live-code-interview.zip) |
+|36|Meetings-Context-app|This Teams app demonstrating the contents of meeting tab context object in a meeting tab. |[View](/demo%20manifest/meetings-context-app.zip) |
 
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 
