@@ -81,7 +81,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 - Update the appsettings.json configuration for the bot to use the MicrosoftAppId (Microsoft App Id), MicrosoftAppPassword (App Password) and connectionName (OAuth Connection Name).
 - Navigate to samples/bot-sso-adaptivecard/csharp/BotSsoAdaptivecard/Bots/DialogBot.cs
-- On line 34, replace <<YOUR-CONNECTION-NAME>>.
+- On line 34, replace <YOUR-CONNECTION-NAME>.
 
 **Bot Configuration:**
 
