@@ -34,6 +34,7 @@ adapter.onTurnError = async (context, error) => {
     //       application insights. See https://aka.ms/bottelemetry for telemetry 
     //       configuration instructions.
     console.error(`\n [onTurnError] unhandled error: ${error}`);
+    await context.sendTraceActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
 
     // Send a trace activity, which will be displayed in Bot Framework Emulator
     await context.sendTraceActivity(
