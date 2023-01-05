@@ -261,7 +261,7 @@ namespace CallingBotSample.Services.MicrosoftGraph
         /// <param name="function">Function to call</param>
         /// <param name="errorHandler">Handler for when there is an error. </param>
         /// <returns>A Task, when there is an error a <typeparamref name="TResult"/> will be returned</returns>
-        public static async Task<TResult> HandleTeamsCallNotBeingFound<TResult>(string? callId, Func<string, Task> function, Func<string, Task<TResult>> errorHandler)
+        public static async Task<TResult?> HandleTeamsCallNotBeingFound<TResult>(string? callId, Func<string, Task> function, Func<string, Task<TResult>> errorHandler)
         {
             string? errorString = await MakeGraphCallThatMightNotBeFound(callId, function);
 

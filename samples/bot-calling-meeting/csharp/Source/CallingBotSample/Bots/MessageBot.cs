@@ -304,7 +304,7 @@ namespace CallingBotSample.Bots
             {
                 TeamsMeetingParticipant participant = await TeamsInfo.GetMeetingParticipantAsync(turnContext, participantId: user.AadObjectId).ConfigureAwait(false);
 
-                if (participant.Meeting.Role == "Organiser")
+                if (participant.Meeting.Role == "Organizer")
                 {
                     return new Identity
                     {

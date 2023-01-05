@@ -4,7 +4,7 @@ Teams supports the usage of media bots inside a meeting. Media bots uses the [Cl
 
 This app is to showcase how these APIs work together with the Teams client and Platform.
 
-![Activity Card in a chat with a "Calling Bot" heading, "Sample Calling Bot" text, and three buttons "Create Call", "Create Incident" and "Join scheduled meeting"](Images/welcome-message-scheduled-meeting.png)
+![Activity Card in a chat with a "Calling Bot" heading, "Sample Calling Bot" text, and three buttons "Create Call", "Create Incident" and "Join scheduled meeting"](./Images/2.welcome-message-scheduled-meeting.png)
 
 There are a number of scenarios supported by this app:
 

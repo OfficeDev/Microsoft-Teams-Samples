@@ -31,8 +31,11 @@ Some features of this sample includes:
 - Text to speech
 - Sending messages in a meeting that you created
 
+[We've expanded on how this sample works in a Design Document](docs/design-doc.md)
+
 ## Interaction with bot
-<!-- TODO REPLACE VIDEO  ![bot-calling-meeting ](docs/Images/bot-calling-meeting.gif) -->
+![Video showing the Scheduled Call flow. User installs app; User clicks "Join scheduled meeting" button; Bot starts the scheduled meeting; User joins; Bot prompts the user for a message; User speaks a message; Bot plays recording of message and sends chat message with transcript; User 2 is invited by User 1; User 2 joins and then hangs up the call](docs/Images/scheduled-call-flow.gif)
+
 ## Frameworks
 
 ![drop](https://img.shields.io/badge/.NET-6-green.svg)
@@ -61,8 +64,8 @@ Some features of this sample includes:
 1. If you are using Visual Studio
     - Launch Visual Studio
     - File -> Open -> Project/Solution
-    - Navigate to `samples/bot-calling-meeting/csharp` folder
-    - Select `CallingBotSample.csproj` file
+    - Navigate to `samples/bot-calling-meeting/csharp/Source` folder
+    - Select the `CallingBotSample.sln` file
 
 1. Run ngrok - point to port 3978
     // TODO Verify the port number below.
@@ -170,7 +173,9 @@ There are few adjustments to this tutorial to make this sample work.
     - `<<cognitive-speech-language>>` the language of the speech being passed into the service
     
 ## Using the app
-// TODO update this
+1. 
+1. 
+1. 
 
 ## Deploy the bot to Azure
 
