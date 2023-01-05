@@ -81,7 +81,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 - Update the appsettings.json configuration for the bot to use the MicrosoftAppId (Microsoft App Id), MicrosoftAppPassword (App Password) and connectionName (OAuth Connection Name).
 - Navigate to samples/bot-sso-adaptivecard/csharp/BotSsoAdaptivecard/Bots/DialogBot.cs
-- On line 34, replace <YOUR-CONNECTION-NAME>.
+- On line 34, replace `YOUR-CONNECTION-NAME`.
 
 **Bot Configuration:**
 
@@ -139,7 +139,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
    - **Edit** the `manifest.json` for `validDomains` and `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
    - **Edit** he manifest.json for webApplicationInfo resource "api://{{domain-name}}/botid-<<YOUR-MICROSOFT-APP-ID>>" with base Url of your domain. E.g. if you are using ngrok it would be https://1234.ngrok.io then your domain-name will be "api://{{domain-name}}/botid-<<YOUR-MICROSOFT-APP-ID>>".
    - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` folder into a `manifest.zip`.(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
-   - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+   - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app to your org's app catalog'". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
 > Note: This `manifest.json` specified that the bot will be installed in a "personal" scope only. Please refer to Teams documentation for more details.   
 
