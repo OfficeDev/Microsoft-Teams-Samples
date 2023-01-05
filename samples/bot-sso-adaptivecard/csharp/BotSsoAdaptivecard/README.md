@@ -117,18 +117,8 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 11. In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
     * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
     * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
-12. Navigate to **API Permissions**, and make sure to add the follow permissions:
--   Select Add a permission
--   Select Microsoft Graph -\> Delegated permissions.
-    * User.Read (enabled by default)
-    * email
-    * offline_access
-    * OpenId
-    * profile
--   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
-![APIpermissions](Images/APIpermissions.png)
 
-13. Navigate to **Authentication**
+12. Navigate to **Authentication**
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
     Set a redirect URI:
     * Select **Add a platform**.
@@ -140,7 +130,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     ✔ ID Token  
     ✔ Access Token  
 ![Authentication](Images/Authentication.png)
-14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
+13.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
  ### 5. Setup Manifest for Teams
 
