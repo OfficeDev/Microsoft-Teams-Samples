@@ -83,14 +83,14 @@ This sample shows a feature where:
     - `TeamsActivity.Send`
     - `TeamsAppInstallation.ReadWriteForUser`
     - `TeamsAppInstallation.ReadWriteSelfForUser`
-    - `TeamsAppInstallation.ReadForUser`
+    - `TeamsAppInstallation.ReadForUser`.
 
 -   Select Microsoft Graph -\> Application permissions.
     - `TeamsActivity.Send`
     - `Directory.Read.All`
     - `TeamsAppInstallation.ReadWriteForUser.All`
     - `TeamsAppInstallation.ReadWriteSelfForUser.All`
-    - `TeamsAppInstallation.ReadForUser.All`
+    - `TeamsAppInstallation.ReadForUser.All`.
 
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 13. Navigate to **Authentication**
