@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "07-07-2021 13:38:26"
+ createdDate: "07/07/2021 01:38:26 PM"
 urlFragment: officedev-microsoft-teams-samples-bot-sharepoint-list-csharp
 ---
 
@@ -21,7 +21,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   ```bash
   # determine dotnet version

@@ -1,0 +1,36 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "speak": "This card mentions a user by User Principle Name: Hello ${userName}",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Mention a user by User Principle Name: Hello <at>${userName} UPN</at>"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Mention a user by AAD Object Id: Hello <at>${userName} AAD</at>"
+    }
+  ],
+  "msteams": {
+    "entities": [
+      {
+        "type": "mention",
+        "text": "<at>${userName} UPN</at>",
+        "mentioned": {
+          "id": "${userUPN}",
+          "name": "${userName}"
+        }
+      },
+      {
+        "type": "mention",
+        "text": "<at>${userName} AAD</at>",
+        "mentioned": {
+          "id": "${userAAD}",
+          "name": "${userName}"
+        }
+      }
+    ]
+  }
+}

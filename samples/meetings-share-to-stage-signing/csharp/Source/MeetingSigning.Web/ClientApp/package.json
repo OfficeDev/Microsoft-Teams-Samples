@@ -5,7 +5,9 @@
   "dependencies": {
     "@azure/msal-browser": "^2.28.3",
     "@fluentui/react-northstar": "^0.64.0",
-    "@microsoft/teams-js": "^2.0.0",
+    "@fluidframework/azure-client": "~1.0.2",
+    "@microsoft/live-share": "1.0.0-preview.4",
+    "@microsoft/teams-js": "^2.5.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -14,6 +16,7 @@
     "@types/react-dom": "^17.0.0",
     "adaptivecards-templating": "^2.2.0",
     "classnames": "^2.3.1",
+    "fluid-framework": "^1.2.3",
     "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

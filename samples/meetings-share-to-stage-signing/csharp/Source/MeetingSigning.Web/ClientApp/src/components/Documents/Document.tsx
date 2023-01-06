@@ -38,7 +38,7 @@ export function Document({
   const documentClasses = classnames(styles.document, className);
 
   return (
-    <Flex column fill styles={documentInlineStyles} className={documentClasses}>
+    <Flex column styles={documentInlineStyles} className={documentClasses}>
       <Header as="h1" content={title} styles={headerInlineStyles} />
       <div>{content}</div>
       <Flex.Item align="start">

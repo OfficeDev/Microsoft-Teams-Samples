@@ -80,7 +80,7 @@ const CreateTag = props => {
             if (tagName !== "" && tagDescription !== "") {
                 var membersToBeAdded = addSelfIfNotAdded(context.user.id);
 
-                var createTagDto = {
+                var createNewTag = {
                     id: "",
                     displayName: tagName,
                     description: tagDescription,
@@ -88,7 +88,7 @@ const CreateTag = props => {
                     membersToBeDeleted: []
                 }
 
-                var response = await axios.post(`api/teamtag/${context.team.groupId}`, createTagDto);
+                var response = await axios.post(`api/teamtag/${context.team.groupId}`, createNewTag);
                 if (response.status === 201) {
                     microsoftTeams.dialog.submit("Created successfully!");
                 }

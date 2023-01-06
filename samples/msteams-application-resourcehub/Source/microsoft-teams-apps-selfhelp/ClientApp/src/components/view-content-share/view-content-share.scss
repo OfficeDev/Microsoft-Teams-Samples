@@ -1,0 +1,198 @@
+﻿.text-area{
+    height: 200px;
+}
+.thank-you-image {
+    height: 150px;
+    width: 150px;
+    padding-top: 10px;
+}
+.default-container .success-message-container {
+    background: #FFFFFF !important;
+    margin-top: 8rem;
+}
+
+.dark-container .success-message-container {
+    background: #292929;
+    margin-top: 8rem;
+}
+
+.high-contrast-container .success-message-container {
+    background: black !important;
+    margin-top: 8rem;
+}
+
+.thank-you-close-button {
+    position: absolute;
+    width: 91%;
+    bottom: 4rem;
+    margin-top: 1rem;
+    font-family: 'Segoe UI';
+    line-height: 1.9rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 11rem;
+}
+.thank-you-close-button-share{
+    position: absolute;
+    width: 91%;
+    bottom: 4rem;
+    margin-top: 1rem;
+    font-family: 'Segoe UI';
+    line-height: 1.9rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 9rem;
+}
+.default-container .text-shareTo{
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: #616161;
+}
+.dark-container .text-shareTo{
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+}
+.high-contrast-container .text-shareTo{
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+}
+.default-container .containershare-Content{
+    background: #FFFFFF;
+    .ms-Toggle
+{
+    margin-left: 2rem !important;
+    margin-top: 3rem !important;
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: #616161;
+}
+.ms-Label{
+    color: black;
+}
+}
+.dark-container  .containershare-Content{
+    background: #292929;
+    .ms-Toggle
+    {
+        margin-left: 2rem !important;
+        margin-top: 3rem !important;
+        font-family: 'Segoe UI';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 16px;
+        display: flex;
+        align-items: center;
+        color: #FFFFFF;
+    }
+    .ms-Label{
+        color: #FFFFFF;
+    }
+}
+.high-contrast-container .containershare-Content{
+    background: black;
+    .ms-Toggle
+    {
+        margin-left: 2rem !important;
+        margin-top: 3rem !important;
+        font-family: 'Segoe UI';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 16px;
+        display: flex;
+        align-items: center;
+        color: #FFFFFF;
+    }
+    .ms-Label{
+        color: #FFFFFF;
+    }
+}
+.view-content-dropdown-details-share {
+    margin-left:2rem;
+    margin-right:2rem;
+    margin-top: 1rem;
+}
+.view-content-dropdown-details-button {
+    margin-left:2rem;
+    margin-right:2rem;
+    margin-top: 3.5rem;
+}
+.view-content-dropdown-details-textArea {
+    margin-left:2rem;
+    margin-right:2rem;
+}
+.view-share-content-details {
+    margin-top: 1rem !important;
+    height:20rem !important;
+    background-color: "rgb(243, 242, 241) !important";
+}
+.default-container .typeMessage-Text{
+    font-family: 'Segoe UI';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+
+display: flex;
+align-items: center;
+margin-bottom: 1rem !important;
+
+color: #616161;
+}
+.dark-container .typeMessage-Text{
+    font-family: 'Segoe UI';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+
+display: flex;
+align-items: center;
+margin-bottom: 1rem !important;
+color: #FFFFFF;
+}
+.high-contrast-container  .typeMessage-Text{
+    font-family: 'Segoe UI';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+margin-bottom: 1rem !important;
+display: flex;
+align-items: center;
+
+color: #FFFFFF;
+}
+.LoaderUser{
+    .ui-loader {
+    margin-top:"4rem" !important;
+    }
+}
+.LoaderTeam{
+    .ui-loader {
+        margin-top:"4rem" !important;
+        }
+}

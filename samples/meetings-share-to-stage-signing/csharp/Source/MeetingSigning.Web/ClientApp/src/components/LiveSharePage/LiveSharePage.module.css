@@ -1,0 +1,11 @@
+.liveSharePage {
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  z-index: 9999;
+  color: white;
+  padding: 0.5rem;
+  text-align: center;
+}

@@ -1,6 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
+﻿// <copyright file="MainDialog.cs" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyright>
 
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,12 +16,12 @@ namespace Microsoft.BotBuilderSamples
 {
     public class MainDialog : LogoutDialog
     {
-        protected readonly ILogger Logger;
+        protected readonly ILogger _logger;
 
         public MainDialog(IConfiguration configuration, ILogger<MainDialog> logger)
             : base(nameof(MainDialog), configuration["ConnectionName"])
         {
-            Logger = logger;
+            _logger = logger;
 
             AddDialog(new OAuthPrompt(
                 nameof(OAuthPrompt),
@@ -48,6 +50,7 @@ namespace Microsoft.BotBuilderSamples
 
         private async Task<DialogTurnResult> PromptStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
+            _logger.LogInformation("PromptStepAsync() called.");
             return await stepContext.BeginDialogAsync(nameof(OAuthPrompt), null, cancellationToken);
         }
 
@@ -58,29 +61,50 @@ namespace Microsoft.BotBuilderSamples
             var tokenResponse = (TokenResponse)stepContext.Result;
             if (tokenResponse?.Token != null)
             {
-                // Pull in the data from the Microsoft Graph.
-                var client = new SimpleGraphClient(tokenResponse.Token);
-                var me = await client.GetMeAsync();
-                var title = !string.IsNullOrEmpty(me.JobTitle) ?
-                            me.JobTitle : "Unknown";
+                try
+                {
+                    // Pull in the data from the Microsoft Graph.
+                    var client = new SimpleGraphClient(tokenResponse.Token);
+                    var me = await client.GetMeAsync();
+                    var title = !string.IsNullOrEmpty(me.JobTitle) ?
+                                me.JobTitle : "Unknown";
 
-                await stepContext.Context.SendActivityAsync($"You're logged in as {me.DisplayName} ({me.UserPrincipalName}); you job title is: {title}");
+                    await stepContext.Context.SendActivityAsync($"You're logged in as {me.DisplayName} ({me.UserPrincipalName}); you job title is: {title}");
 
-                var photo = await client.GetPhotoAsync();
-                var cardImage = new CardImage(photo);
-                var card = new ThumbnailCard(images: new List<CardImage>() { cardImage });
-                var reply = MessageFactory.Attachment(card.ToAttachment());
-                await stepContext.Context.SendActivityAsync(reply, cancellationToken);
+                    var photo = await client.GetPhotoAsync();
+                    var cardImage = new CardImage(photo);
+                    var card = new ThumbnailCard(images: new List<CardImage>() { cardImage });
+                    var reply = MessageFactory.Attachment(card.ToAttachment());
 
-                return await stepContext.PromptAsync(nameof(ConfirmPrompt), new PromptOptions { Prompt = MessageFactory.Text("Would you like to view your token?") }, cancellationToken);
+                    await stepContext.Context.SendActivityAsync(reply, cancellationToken);
+
+                    return await stepContext.PromptAsync(
+                        nameof(ConfirmPrompt),
+                        new PromptOptions { Prompt = MessageFactory.Text("Would you like to view your token?") },
+                        cancellationToken);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError("Error occurred while processing your request.", ex.Message);
+
+                }
+
+            }
+            else
+            {
+                _logger.LogInformation("Response token is null or empty.");
             }
 
             await stepContext.Context.SendActivityAsync(MessageFactory.Text("Login was not successful please try again."), cancellationToken);
             return await stepContext.EndDialogAsync(cancellationToken: cancellationToken);
         }
 
-        private async Task<DialogTurnResult> DisplayTokenPhase1Async(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        private async Task<DialogTurnResult> DisplayTokenPhase1Async(
+            WaterfallStepContext stepContext,
+            CancellationToken cancellationToken)
         {
+            _logger.LogInformation("DisplayTokenPhase1Async() method called.");
+
             await stepContext.Context.SendActivityAsync(MessageFactory.Text("Thank you."), cancellationToken);
 
             var result = (bool)stepContext.Result;
@@ -102,6 +126,8 @@ namespace Microsoft.BotBuilderSamples
 
         private async Task<DialogTurnResult> DisplayTokenPhase2Async(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
+            _logger.LogInformation("DisplayTokenPhase2Async() method called.");
+
             var tokenResponse = (TokenResponse)stepContext.Result;
             if (tokenResponse != null)
             {

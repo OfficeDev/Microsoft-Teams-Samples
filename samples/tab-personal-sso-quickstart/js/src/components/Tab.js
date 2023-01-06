@@ -4,7 +4,7 @@
 import React from 'react';
 import './App.css';
 import { app, authentication } from "@microsoft/teams-js";
-import { Avatar, Loader } from '@fluentui/react-northstar'
+import { Avatar, Spinner } from '@fluentui/react-components'
 
 /**
  * The 'PersonalTab' component renders the main tab content
@@ -159,21 +159,18 @@ class Tab extends React.Component {
   render() {
 
       let title = Object.keys(this.state.context).length > 0 ?
-        'Congratulations ' + this.state.context.user.userPrincipalName + '! This is your tab' : <Loader/>;
+        'Congratulations ' + this.state.context.user.userPrincipalName + '! This is your tab' : <Spinner/>;
 
       let ssoMessage = this.state.ssoToken === "" ?
-        <Loader label='Performing Azure AD single sign-on authentication...'/>: null;
+        <Spinner label='Performing Azure AD single sign-on authentication...'/>: null;
       
       let serverExchangeMessage = (this.state.ssoToken !== "") && (!this.state.consentRequired) && (this.state.photo==="") ?
-        <Loader label='Exchanging SSO access token for Graph access token...'/> : null;
+        <Spinner label='Exchanging SSO access token for Graph access token...'/> : null;
 
       let consentMessage = (this.state.consentRequired && !this.state.consentProvided) ?
-        <Loader label='Consent required.'/> : null;
+        <Spinner label='Consent required.'/> : null;
 
-      let avatar = this.state.photo !== "" ?
-        <Avatar image={this.state.photo} size='largest'/> : null;
-
-      let content;
+          let content;
       if(this.state.error){
         content = <h1>ERROR: Please ensure pop-ups are allowed for this website and retry</h1>
       } else {
@@ -183,7 +180,7 @@ class Tab extends React.Component {
             <h3>{ssoMessage}</h3>
             <h3>{serverExchangeMessage}</h3>          
             <h3>{consentMessage}</h3>
-            <h1>{avatar}</h1>
+            <img src={this.state.photo} width="200" />
           </div>
       }
       

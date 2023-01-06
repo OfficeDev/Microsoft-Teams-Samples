@@ -1,0 +1,8 @@
+.documentChooser {
+  margin: 0 auto;
+}
+
+.stageControlsDiv {
+  position: sticky;
+  top:0;
+}

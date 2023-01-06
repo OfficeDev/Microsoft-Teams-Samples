@@ -1,5 +1,6 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
+﻿// <copyright file="TeamsBot.cs" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyright>
 
 using System.Collections.Generic;
 using System.Threading;
@@ -12,10 +13,8 @@ using Microsoft.Extensions.Logging;
 namespace Microsoft.BotBuilderSamples
 {
     // This bot is derived (view DialogBot<T>) from the TeamsActivityHandler class currently included as part of this sample.
-    public class TeamsBot<T> : DialogBot<T> 
-        where T : Dialog
+    public class TeamsBot<T> : DialogBot<T> where T : Dialog
     {
-
         public TeamsBot(ConversationState conversationState, UserState userState, T dialog, ILogger<DialogBot<T>> logger)
             : base(conversationState, userState, dialog, logger)
         {
@@ -37,9 +36,8 @@ namespace Microsoft.BotBuilderSamples
             _logger.LogInformation("Running dialog with signin/verifystate from an Invoke Activity.");
 
             // The OAuth Prompt needs to see the Invoke Activity in order to complete the login process.
-
             // Run the Dialog with the new Invoke Activity.
-            await _dialogManager.OnTurnAsync(turnContext, cancellationToken).ConfigureAwait(false);
+            await _dialog.RunAsync(turnContext, _conversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
         }
     }
 }

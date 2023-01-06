@@ -9,7 +9,7 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "20-03-2021 13:38:27"
+ createdDate: "03/20/2021 12:00:00 AM"
 urlFragment: officedev-microsoft-teams-samples-tab-channel-group-config-page-auth-csharp
 ---
 
@@ -21,14 +21,9 @@ There are many services that you may wish to consume inside your Teams app, and 
 
 OAuth 2.0 is an open standard for authentication used by Azure AD and many other service providers. Understanding OAuth 2.0 is a prerequisite for working with authentication in Teams and Azure AD. The examples below use the OAuth 2.0 Implicit Grant flow with the goal of eventually reading the user's profile information from Azure AD and Microsoft Graph.
 
-![Initial Config Page](ConfigTabAuthentication/Images/config_page.png)
+## Interaction with app
 
-![Simple SignIn](ConfigTabAuthentication/Images/simple_signin.png)
-
-![Silent SignIn](ConfigTabAuthentication/Images/silent_signin.png)
-
-![Channel Tab](ConfigTabAuthentication/Images/channel_tab.png)
-
+![Initial Config Page](ConfigTabAuthentication/Images/Configtabauthenticatonmodule.gif)
 
 ## Initiate Silent and Simple Authentication ConfigurableTab using AAD
 
@@ -38,60 +33,37 @@ Add a button to your [configuration](https://docs.microsoft.com/en-us/microsoftt
 
 Azure AD, like most identity providers, does not allow its content to be placed in an iframe. This means that you will need to add a pop-up page to host the identity provider. In the following example this page is /tab-auth/simple-start. Use the microsoftTeams.authenticate() function of the Microsoft Teams client SDK to launch this page when your button is selected.
 
-
 ## Pre-requisites
 
-- Microsoft Teams is installed and you have an account (not a guest account)
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
+  determine dotnet version
   ```bash
-  # determine dotnet version
   dotnet --version
   ```
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+  
+- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-- Visual Studio
+## Setup
 
-- Asp.net Core
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+  - Your tab needs to run as a registered Azure AD application in order to obtain an access token from Azure AD. In this step you'll register the app in your tenant and give Teams   permission to obtain access tokens on its behalf.
 
-## To try this sample
+  - Create an [AAD application](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso#1-create-your-aad-application-in-azure) in           Azure. You can do this by visiting the "Azure AD app registration" portal in Azure.
 
-> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
-
-1) Clone the repository
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-
-2) If you are using Visual Studio
-    - Launch Visual Studio
-    - File -> Open -> Project/Solution
-    - Navigate to `tab-channel-group-config-page-auth` folder
-    - Select `TabAuthentication.csproj` file
-    - Press `F5` to run the project
-
-3) Run ngrok - point to port 3978
-    ```bash
-    ngrok http -host-header=rewrite 3978
-    ```
-4) Update the `appsettings.json` configuration for the tab to use the Microsoft App Id in TabAuthentication folder, App Password and Connection Name from the Bot Framework           registration. (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-
-### Register an Azure AD Application for both Silent and Simple Authencation
-
-  Your tab needs to run as a registered Azure AD application in order to obtain an access token from Azure AD. In this step you'll register the app in your tenant and give Teams   permission to obtain access tokens on its behalf.
-
-  Create an [AAD application](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso#1-create-your-aad-application-in-azure) in           Azure. You can do this by visiting the "Azure AD app registration" portal in Azure.
-
-1) Set your application URI to the same URI you've created in Ngrok.
+ - Set your application URI to the same URI you've created in Ngrok.
    - Ex: api://contoso.ngrok.io/{appId} using the application ID that was assigned to your app
                     
-2) Setup a client secret. You will need this when you exchange the token for more API permissions from your backend.
+ - Setup a client secret. You will need this when you exchange the token for more API permissions from your backend.
    - Visit Manage > Certificates & secrets
    - Create a new client secret.
           
-3) Setup your API permissions. This is what your application is allowed to request permission to access.
+- Setup your API permissions. This is what your application is allowed to request permission to access.
    - Visit Manage > API Permissions
    - Make sure you have the following Graph permissions enabled: email, offline_access, openid, profile, and User.Read.
 
-4) Set Redirect URIs. Navigate to Authentication from left pane.
+- Set Redirect URIs. Navigate to Authentication from left pane.
     - Click on Add Platform select *Web*.
     - Add URI as https://<<BASE-URI>>/SilentAuthEnd it will look like https://contoso.ngrok.io/SilentAuthEnd
     - Make sure to check *Access tokens* and *ID tokens* checkbox
@@ -101,12 +73,57 @@ Azure AD, like most identity providers, does not allow its content to be placed 
 
 ![Authentication Azure AD](ConfigTabAuthentication/Images/authentication_azure_ad.png)
 
-5)  __*This step is specific to Teams.*__
-    - **Edit** the `manifest.json` contained in the  `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your tab earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` and set your Base URI to the same URI you've created in Ngrok *everywhere* you see the place holder string `<<BASE-URI>>` (depending on the scenario the Microsoft App Id, Base URI may occur multiple times in the `manifest.json`)
-    - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
-    - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+2. Setup NGROK
+- Run ngrok - point to port 3978
 
-6) Run your tab, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
+```bash
+ ngrok http -host-header=rewrite 3978
+```
+
+3. Setup for code
+
+- Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+ - Update the `appsettings.json` configuration for the tab to use the <<YOUR-MICROSOFT-APP-ID>> get from the step 1 Mircosoft App Id in TabAuthentication folder update
+ 
+- If you are using Visual Studio
+    - Launch Visual Studio
+    - File -> Open -> Project/Solution
+    - Navigate to `tab-channel-group-config-page-auth` folder
+    - Select `TabAuthentication.csproj` file
+    - Press `F5` to run the project
+
+4. Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./Manifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+  - **Edit** the `manifest.json` for `webApplicationInfo` resource `"api://<<BASE-URI>>/<<YOUR-MICROSOFT-APP-ID>>"` with MicrosoftAppId. E.g. `""api://1235.ngrok.io/0000000000-0000000-000000""`.
+    - **Zip** up the contents of the `Manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./Manifest folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+
+5) Run your tab, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
+
+## Running the sample
+
+![Initial Config Page](ConfigTabAuthentication/Images/config_page.png)
+
+![Simple SignIn](ConfigTabAuthentication/Images/simple_signin.png)
+
+![Silent SignIn](ConfigTabAuthentication/Images/silent_signin.png)
+
+![Channel Tab](ConfigTabAuthentication/Images/channel_tab.png)
+
+## Further Reading
+
+[Tab-Channle-Group-config-auth](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
 
 
  

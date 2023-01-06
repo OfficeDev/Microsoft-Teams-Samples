@@ -10,33 +10,65 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "07-07-2021 13:38:27"
+ createdDate: "07/07/2021 01:38:27 PM"
 urlFragment: officedev-microsoft-teams-samples-tab-channel-group-quickstart-js
 ---
 
-# Tabs quick start
+# Tabs quick start Node.js
 
 Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab delivers content to channels and group chats, and are a great way to create collaborative spaces around dedicated web-based content.
 
-![tabconfigure](Images/tabconfigure.png)
+## Interaction with app
 
-![setuptab](Images/setuptab.png)
-
-![Helloworld](Images/Helloworld.png)
+![Sample Module](Images/tabchannelgroupquickstart.gif)
 
 ## Prerequisites
--  [NodeJS](https://nodejs.org/en/)
 
--  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+- Microsoft Teams is installed and you have an account (not a guest account)
+- To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
+- [ngrok](https://ngrok.com/download) or equivalent tunneling solution
+- [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the     
 
-## Build and Run
+## Setup
 
-In the project directory, execute:
 
-`npm install`
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+**NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
 
-`npm start`
+2. Setup NGROK
+ - Run ngrok - point to port 3978
 
+    ```bash
+    ngrok http -host-header=rewrite 3978
+    ```
+3. Setup for code
+- Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+- In a terminal, navigate to `samples/tab-channel-group-quickstart/js`
+
+- Install modules
+
+    ```bash
+    npm install
+    ```
+
+- Run your app
+
+    ```bash
+    npm start
+
+4. Setup Manifest for Teams
+
+- **This step is specific to Teams.**
+    - Edit the `manifest.json` contained in the `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
+    - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")```
+    
 ## Deploy to Teams
 Start debugging the project by hitting the `F5` key or click the debug icon in Visual Studio Code and click the `Start Debugging` green arrow button.
 
@@ -59,6 +91,14 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
+
+## Running the sample
+
+![tabconfigure](Images/tabconfigure.png)
+
+![setuptab](Images/setuptab.png)
+
+![Helloworld](Images/Helloworld.png)
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 

@@ -9,7 +9,7 @@ languages:
 - nodejs
 extensions:
  contentType: samples
- createdDate: "04-08-2022 13:02:15"
+ createdDate: "04/08/2022 01:02:15 PM"
 urlFragment: officedev-microsoft-teams-samples-graph-pinned-messages-nodejs
 ---
 
@@ -17,30 +17,19 @@ urlFragment: officedev-microsoft-teams-samples-graph-pinned-messages-nodejs
 
 This is an sample application which displays all the pinned messages in group chat. It also demonstrates how to pin new message in the chat.
 
-## Key features
-
-1. Pin new message in chat.
-
-![Pinned message](Images/PinMessage.png)
-
-2. The pinned message will be shown in tab.
-
-![Tab page](Images/TabImage.png)
-
-3. You can select different message from the list of messages. The message will be pinned in chat.
-
-![Pin new message](Images/NewMessage.png)
+- **Interaction with app**
+![pinned-messages ](Images/pinned-messages.gif)
 
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
--  [NodeJS](https://nodejs.org/en/)
--  [ngrok](https://ngrok.com/) or equivalent tunneling solution
--  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+- [NodeJS](https://nodejs.org/en/)
+- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 
-## Run app locally
+## Setup
 
-### Register your Teams Auth SSO with Azure AD
+### 1. Setup for App Registration
 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2. Select **New Registration** and on the *register an application page*, set following values:
@@ -77,40 +66,32 @@ This is an sample application which displays all the pinned messages in group ch
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
 - Set a redirect URI:
     * Select **Add a platform**.
-    * Select **web**.
-    * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-end`. This will be the page where a successful implicit grant flow will redirect the user.
-- Enable implicit grant by checking the following boxes:  
-    ✔ ID Token  
-    ✔ Access Token  
+    * Select **Single Page Application**.
+    * Enter the **redirect URI** for the app in the following format: `https://{Base_Url_Domain}/auth-end`. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your `{Base_Url_Domain}` will be`1234.ngrok.io`.
 14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the env file.
 
-## To try this sample
+### 2. Setup NGROK
+1) Run ngrok - point to port 3978
 
-> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
-> the Teams service needs to call into the app.
+```bash
+# ngrok http -host-header=rewrite 3978
+```
+
+### 3. Setup for code
 
 ### 1. Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
 
-### 2. Navigate to project
-In the folder where repository is cloned navigate to `samples/graph-pinned-messages/nodejs`
+1) In the folder where repository is cloned navigate to `samples/graph-pinned-messages/nodejs`
 
-### 3. Update the `.env`
-Update configuration with the ```MicrosoftAppId```,  ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId```.
+1) Update the `.env` configuration with the ```MicrosoftAppId```,  ```MicrosoftAppPassword``` and ```MicrosoftAppTenantId``` with values generated in step 1 while doing App Registration.
 
-### 4. Run ngrok - point to port 3978
 
-```bash
-ngrok http -host-header=rewrite 3978
-```
+### 3.1. Install node modules and run server 
 
-![Ngrok screen](Images/NgrokScreenshot.png)
-
-### 3. Install node modules and run server 
-
- Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+ Inside node js folder (samples/graph-pinned-messages/nodejs), open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
 
 ```bash
 npm install
@@ -120,9 +101,15 @@ npm install
 npm start
 ```
 
-### 3. Install node modules and run client 
+If you face any dependency error while installing node modules, try using below command
 
- Navigate to **client** folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
+```bash
+npm install --legacy-peer-deps
+```
+
+### 3.2. Install node modules and run client 
+
+ Navigate to `samples/graph-pinned-messages/nodejs/ClientApp` folder, Open your local terminal and run the below command to install node modules. You can do the same in Visual studio code terminal by opening the project in Visual studio code 
 
 ```bash
 cd client
@@ -132,26 +119,36 @@ npm install
 ```bash
 npm start
 ```
+
+If you face any dependency error while installing node modules, try using below command
+
+```bash
+npm install --legacy-peer-deps
+```
     
-### 4. Manually update the manifest.json
-- **Edit** the `manifest.json` contained in the `Manifest` folder to replace your Base url wherever you see the place holder string `<<BASE-URL>>`. Also replace any random guid with the place holder `<<APP-ID>>`.
-- **Zip** up the contents of the `Manifest` folder to create a `manifest.zip`
-- **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
+### 4. Setup Manifest for Teams
+1) __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the  `appPackage` folder to replace your Microsoft App Id (that was created when you registered your app earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    - **Edit** the `manifest.json` for `configurationUrl` inside `configurableTabs` . Replace `{{BASE-URL-DOMAIN}}` with your app's base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your base url domain will be `1234.ngrok.io`.
+    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Zip** up the contents of the `appPackage` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
+    - Add the app to personal/team/groupChat scope (Supported scopes)
 
 
-## Features of this sample
+## Running the sample
 
-1. Pin new message in chat.
+1) Add the app in group scope.
+![pinned-messages-install ](Images/pin-message-installation.png)
 
-![Pinned message](Images/PinMessage.png)
+1) Install the configurable tab inside the group.
+![pinned-messages-install ](Images/pin-message-config-page.png)
 
-2. The pinned message will be shown in tab.
+1) Pin chat message
+![pinned-messages ](Images/pin-chat-message.png)
 
-![Tab page](Images/TabImage.png)
-
-3. You can select different message from the list of messages. The message will be pinned in chat.
-
-![Pin new message](Images/NewMessage.png)
+1) Pinned Message will be shown in tab page.
+![pinned-messages-details ](Images/pinned-message.png)
 
 ## Further reading
 - [Pinned message resource type](https://docs.microsoft.com/en-us/graph/api/chat-post-pinnedmessages?view=graph-rest-beta&tabs=csharp)

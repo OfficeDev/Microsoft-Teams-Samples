@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-complete-auth/nodejs/Images/BotLoginOptionCard.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/app-complete-auth/nodejs/Images/app-complete-auth.gif",
         "alt": "Solution UX showing authentication complete sample"
       }
     ],

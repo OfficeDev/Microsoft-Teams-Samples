@@ -1,5 +1,4 @@
-﻿
-using StaggeredPermission.helper;
+﻿using StaggeredPermission.helper;
 using StaggeredPermission.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,59 +30,16 @@ namespace StaggeredPermission.Controllers
 
         }
 
-        // Get user access token.
-        [HttpPost]
-        [Route("GetUserAccessToken")]
-        public async Task<JsonResult> GetUserAccessToken(string accessToken)
-        {
-            try
-            {
-                var bearerToken = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor, accessToken);
-                var emails = new List<UserEmail>();
-                UserEmail entity;
-                var client = new SimpleGraphClient(bearerToken);
-                var me = await client.GetMeAsync();
-                var title = !string.IsNullOrEmpty(me.JobTitle) ?
-                            me.JobTitle : "Unknown";
-
-                var photo = await client.GetPhotoAsync();
-                var mails = await client.GetMailsAsync();
-
-                foreach (var mail in mails.CurrentPage)
-                {
-                    entity = new UserEmail();
-                    entity.FromMail = mail.Sender.EmailAddress.Address.ToString();
-                    entity.ToMail = mail.ToRecipients.ElementAt(0).EmailAddress.Address.ToString();
-                    entity.Subject = mail.Subject.ToString();
-                    entity.Time = mail.SentDateTime.ToString();
-                    emails.Add(entity);
-                }
-
-                var userInfo = new UserData()
-                {
-                    Photo = photo,
-                    Details = emails
-                };
-
-                var jsonString = JsonConvert.SerializeObject(userInfo);
-                return Json(jsonString);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                return null;
-            }
-        }
-
         // Get user's profile photo.
         [HttpPost]
         [Route("GetUserPhoto")]
-        public async Task<JsonResult> GetUserPhoto(string accessToken)
+        public async Task<JsonResult> GetUserPhoto(string idToken)
         {
             try
             {
+                var bearerToken = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor, idToken);
                 var emails = new List<UserEmail>();
-                var client = new SimpleGraphClient(accessToken);
+                var client = new SimpleGraphClient(bearerToken);
                 var me = await client.GetMeAsync();
                 var title = !string.IsNullOrEmpty(me.JobTitle) ?
                             me.JobTitle : "Unknown";
@@ -108,24 +64,30 @@ namespace StaggeredPermission.Controllers
         // Get user's mails.
         [HttpPost]
         [Route("GetUserMails")]
-        public async Task<JsonResult> GetUserMails(string accessToken)
+        public async Task<JsonResult> GetUserMails(string idToken)
         {
             try
             {
+                var bearerToken = await AuthHelper.GetAccessTokenOnBehalfUserAsync(_configuration, _httpClientFactory, _httpContextAccessor, idToken);
                 var emails = new List<UserEmail>();
                 UserEmail entity;
-                var client = new SimpleGraphClient(accessToken);
+                var client = new SimpleGraphClient(bearerToken);
 
                 var mails = await client.GetMailsAsync();
 
                 foreach (var mail in mails.CurrentPage)
                 {
-                    entity = new UserEmail();
-                    entity.FromMail = mail.Sender.EmailAddress.Address.ToString();
-                    entity.ToMail = mail.ToRecipients.ElementAt(0).EmailAddress.Address.ToString();
-                    entity.Subject = mail.Subject.ToString();
-                    entity.Time = mail.SentDateTime.ToString();
-                    emails.Add(entity);
+                    if (mail.Sender != null &&
+                        mail.ToRecipients.Any() &&
+                        mail.Subject.Any())
+                    {
+                        entity = new UserEmail();
+                        entity.FromMail = mail.Sender.EmailAddress.Address.ToString();
+                        entity.ToMail = mail.ToRecipients.ElementAt(0).EmailAddress.Address.ToString();
+                        entity.Subject = mail.Subject.ToString();
+                        entity.Time = mail.SentDateTime.ToString();
+                        emails.Add(entity);
+                    }
                 }
 
                 var userInfo = new UserData()
@@ -155,14 +117,14 @@ namespace StaggeredPermission.Controllers
                 object nameObj = null, emailObj = null;
                 var handler = new JwtSecurityTokenHandler();
                 var decodedValue = handler.ReadJwtToken(accessToken);
-                if (decodedValue.Payload.ContainsKey("upn"))
+                if (decodedValue.Payload.ContainsKey("name"))
                 {
                     decodedValue.Payload.TryGetValue("name", out nameObj);
                 }
 
-                if (decodedValue.Payload.ContainsKey("upn"))
+                if (decodedValue.Payload.ContainsKey("preferred_username"))
                 {
-                    decodedValue.Payload.TryGetValue("upn", out emailObj);
+                    decodedValue.Payload.TryGetValue("preferred_username", out emailObj);
                 }
 
                 var userInfo = new UserData()

@@ -64,6 +64,7 @@ export function TeamsProvider({
   microsoftTeams,
   children,
 }: TeamsProviderProps): JSX.Element {
+  const [initialized, setInitialized] = useState<boolean>(false);
   const [context, setContext] = useState<microsoftTeams.app.Context>({
     app: {
       theme: 'default',
@@ -101,6 +102,7 @@ export function TeamsProvider({
 
   useEffect(() => {
     initializePromise.then(() => {
+      setInitialized(true);
       microsoftTeams.app.getContext().then((context) => {
         setContext(context);
       });
@@ -114,6 +116,10 @@ export function TeamsProvider({
   }, [microsoftTeams, setContext, initializePromise]);
 
   const theme = getTheme(context.app.theme);
+
+  if (!initialized) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <TeamsContext.Provider

@@ -27,8 +27,8 @@
     {
       "entityId": "incomingwebhook",
       "name": "Incoming webhook",
-      "contentUrl": "https://{{Domain Name}}/configure-message",
-      "websiteUrl": "https://{{Domain Name}}/configure-message",
+      "contentUrl": "https://{{Domain-Name}}/configure-message",
+      "websiteUrl": "https://{{Domain-Name}}/configure-message",
       "scopes": [
         "personal"
       ]
@@ -40,6 +40,6 @@
   ],
   "validDomains": [
     "*.ngrok.io",
-    "<<Domain Name>>"
+    "<<Domain-Name>>"
   ]
 }

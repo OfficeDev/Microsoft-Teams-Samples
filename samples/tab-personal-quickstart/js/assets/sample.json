@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-personal-quickstart/js/Images/PersonalTab.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-personal-quickstart/js/Images/TabPersonalQuickstartGif.gif",
         "alt": "Solution UX showing personal tab in javascript"
       }
     ],

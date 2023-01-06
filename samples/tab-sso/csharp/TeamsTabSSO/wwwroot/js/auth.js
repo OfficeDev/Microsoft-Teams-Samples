@@ -2,6 +2,7 @@
 
 $(document).ready(function () {
     microsoftTeams.app.initialize().then(() => {
+        // Display in-line button so user can consent
         $("#browser-signin-text").show();
         $("#browser-signin-container").hide();
         getClientSideToken()

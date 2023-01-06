@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-daily-task-reminder/csharp/BotDailyTaskReminder/Images/ScheduleTask.png",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-daily-task-reminder/csharp/BotDailyTaskReminder/Images/DailyTaskReminder.gif",
         "alt": "Solution UX showing bot daily task reminder"
       }
     ],
