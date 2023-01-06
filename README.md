@@ -64,9 +64,11 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |37|Region Selection App|This app show Microsoft Teams app show end user region selection using Bot and Tab. |[View](/demo%20manifest/app-region-selection.zip) |
 |38|Sequential workflow adaptive cards|This Teams app demonstrating the contents of meeting tab context object in a meeting tab. |[View](/demo%20manifest/bot-adaptivecards-user-specific-views.zip) |
 |39|Meetings-Context-app|This Teams app demonstrating the contents of meeting tab context object in a meeting tab. |[View](/demo%20manifest/meetings-context-app.zip) |
-|40|Teams File Upload|This sample app demonstrate the file upload with bot using Bot Framework v4. |[View](/demo%20manifest/bot-adaptivecards-user-specific-views.zip) |
+|40|Teams File Upload|This sample app demonstrate the file upload with bot using Bot Framework v4. |[View](/demo%20manifest/bot-file-upload.zip) |
 |41|Message Reactions|This sample app demonstrate how to use message reactions bot. |[View](/demo%20manifest/bot-adaptivecards-user-specific-views.zip) |
-|42|Sequential workflow adaptive cards|Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot. |[View](/demo%20manifest/bot-adaptivecards-user-specific-views.zip) |
+|42|bot-initiate-thread-in-channel|This sample app demonstrate how to start a thread in a specific Team's channel using Bot Framework v4. |[View](/demo%20manifest/bot-initiate-thread-in-channel.zip) |
+|43|Bot Suggested Action|Demonstrating the feature where user can send suggested actions using bot. |[View](/demo%20manifest/bot-suggested-actions.zip) |
+|44|Bot Task Module|This sample app demonstrate how to use Task Module using Bot Framework v4. |[View](/demo%20manifest/bot-task-module.zip) |
 
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 
