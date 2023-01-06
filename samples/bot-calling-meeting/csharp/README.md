@@ -34,7 +34,7 @@ Some features of this sample includes:
 [We've expanded on how this sample works in a Design Document](docs/design-doc.md)
 
 ## Interaction with bot
-![Video showing the Scheduled Call flow. User installs app; User clicks "Join scheduled meeting" button; Bot starts the scheduled meeting; User joins; Bot prompts the user for a message; User speaks a message; Bot plays recording of message and sends chat message with transcript; User 2 is invited by User 1; User 2 joins and then hangs up the call](docs/Images/scheduled-call-flow.gif)
+![Video showing the Scheduled Call flow. User installs app; User clicks "Join scheduled meeting" button; Bot starts the scheduled meeting; User joins; Bot prompts the user for a message; User speaks a message; Bot plays recording of message and sends chat message with transcript; User 2 is invited by User 1; User 2 joins and then hangs up the call](docs/Images/2.scheduled-call-flow.gif)
 
 ## Frameworks
 
@@ -173,9 +173,67 @@ There are few adjustments to this tutorial to make this sample work.
     - `<<cognitive-speech-language>>` the language of the speech being passed into the service
     
 ## Using the app
-1. 
-1. 
-1. 
+
+### Create Call
+1. Install the app to the desired context
+1. Invoke the bot in a supported context (personal, group chat, or meeting)
+1. Select "Create Call"  
+    ![Adaptive card that is titled "Calling Bot", subtitled "Sample calling bot" and has two buttons "Create Call" and "Create Incident"](./docs/Images/1.welcome-message-non-scheduled-meeting.png)
+1. In the open task dialog, pick who you want to be added to the call, and click "Create"
+1. The bot will create a new call and call the people selected in the previous step
+1. Answer the call  
+    ![A calling notification that says "Calling bot AAD App Id is calling you", and contains answer and decline icon buttons](./docs/Images/1.bot-is-calling-you.png)
+1. When you join the call the bot will say a prompt asking you to record a message after the beep.
+1. After the beep speak a message.
+1. The bot will play a recording of your message back to you.
+
+### Joining Scheduled Meeting
+![Video showing the Scheduled Call flow. User installs app; User clicks "Join scheduled meeting" button; Bot starts the scheduled meeting; User joins; Bot prompts the user for a message; User speaks a message; Bot plays recording of message and sends chat message with transcript; User 2 is invited by User 1; User 2 joins and then hangs up the call](./docs/Images/2.scheduled-call-flow.gif)
+1. Install the app to the desired context
+1. In scheduled meetings, a different action card is returned when the bot is invoked.  
+    ![Activity Card in a chat with a "Calling Bot" heading, "Sample Calling Bot" text, and three buttons "Create Call", "Create Incident" and "Join scheduled meeting"](./docs/Images/2.welcome-message-scheduled-meeting.png)
+1. Select "Join scheduled meeting"
+1. The bot will start the meeting, and participants will get a meeting started notification
+1. Join the meeting
+1. When you join the call the bot will say a prompt asking you to record a message after the beep.
+1. After the beep speak a message.
+1. The bot will play a recording of your message back to you.
+1. If you have enabled Cognitive services and if the bot is able to transcribe your message, it will send the content of the message in the meeting's chat  
+    ![A meeting chat message from the bot that reads: "You said: This is my test. This is my test message. I hope you can hear me clearly"](./docs/Images/2.recording-transcription-message.png)
+
+### Create an Incident
+![](./docs/Images/3.incident-call-flow.gif)
+1. Install the app to the desired context
+1. Select the "Create Incident" action in the bot's welcome message
+1. In the open dialog, choose a Incident title, and the people who should be invited
+1. Select "Create incident"
+1. The bot will create a meeting, start the call, install the app, share the incidents details via chat, and invite the participants
+1. Join the meeting
+1. If you have cognitive services enabled, the bot will speak some details of the incident.
+1. In the chat, you can view an adaptive card of the incident's details 
+    ![Adaptive card that has an Incident Title that says "The house is on fire", an "Active" status, a start time of "19:29", a blank end time, and 4 actions: "Transfer call", "Invite participant to meeting", "Play record prompt", and "Hang up"](./docs/Images/3.incident-details-chat-message.png)
+1. If desired choose one of the actions.
+
+### Transferring the call/Inviting someone to the call
+1. When the bot creates a call, it will send a message to the chat with actions the user can perform.  
+    ![Adaptive card in a chat with a title "Control this meeting", and 4 actions: "Transfer call", "Invite participant to meeting", "Play record prompt", and "Hang up"](./docs/Images/4.meeting-actions.png)
+1. Select "Transfer call" or "Invite participant to meeting"
+1. In the open dialog, pick the user you want to transfer the call to/invite to the call, and click "Transfer"/"Invite"
+1. Once the dialog shows a success message, you can close it
+    1. Transfer: The bot will transfer the call to the user, and you will be left talking to the transfer target.
+        1. Note: As the bot is doing the transfer it will leave the call
+    1. Invite: The invitee will get a call notification from the bot which they can answer if they like
+
+### Replaying the prompt to record a message
+1. In the meeting chat, select the "Play record prompt" action in the meeting actions card
+1. The bot will replay it's prompt asking you to record a message.
+1. After the beep speak a message.
+1. The bot will play a recording of your message back to you.
+
+### Get the bot to hang up a call
+1. In the meeting chat, select the "Hang up" action in the meeting actions card
+1. The bot will hang up the call, and leave the meeting.
+
 
 ## Deploy the bot to Azure
 
