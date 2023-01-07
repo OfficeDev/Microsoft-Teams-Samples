@@ -99,6 +99,18 @@ sequenceDiagram
 
 - *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your AAD App*
 
+### 2a. Setup app registration for Anonymous users
+- For anonymous users we authorize who the user is by having them log in to a Microsoft Personal account. You can use the same AAD App as above, but we have separated the apps so things are clearer.
+- [Register an App in AAD that can be used for Microsoft Personal account users](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad#to-register-a-new-app-in-azure-ad)
+    - Register the app
+        - We tested with an app that supports "Accounts in any organizational directory (Any Azure AD directory - Multi-tenant) and personal Microsoft accounts"
+        - Expose the API
+        - Configure the API scopes
+        - You do not need "To configure authorized client application"
+    - Ensure the following API permissions are granted to the app for Microsoft Graph access - email, openid
+    - *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your AAD App*
+    - After you create an AAD app, under *Certificates & secrets* create a new  *Client secret*. Copy the secret value and set it in `appSettings.json`
+
 ### 3. Setup NGROK
 ```bash
 # ngrok http https://localhost:44326 --host-header=localhost:44326
@@ -127,6 +139,9 @@ sequenceDiagram
     * `<<deployment-url>>` with your ngrok url, minus the https://.
     * `<<aad-id>>` with your AAD Application (Client) Id.
     * `<<client secret>>` with the client secret you created above.
+    * `<<msa-only-aad-client-id>>` with the Application (Client) Id from the AAD App for personal users
+    * `<<msa-only-aad-client-secret>>` with the client secret from the AAD App for personal users that you created above
+    * `<<msa-only-scope>>` `api://<<deployment-url>>/<<msa-only-aad-client-id>>/access_as_user email openid`
 
 - Run the bot from a terminal, Visual Studio or Docker choose one of the following options:
 
@@ -146,8 +161,7 @@ sequenceDiagram
 
     ### Docker
     *Note the below instructions are using [Podman](https://podman.io/), but Docker's commands are similar. [There are instructions for setting up Podman on WSL2 here](docs/installing-podman-on-wsl2.md)*
-    * From this directory build the Docker image `podman build -f Deployment/Dockerfile
-    --ignorefile Deployment/.dockerignore ./Source --build-arg REACT_APP_AAD_CLIENT_ID`
+    * From this directory build the Docker image `podman build -f Deployment/Dockerfile --ignorefile Deployment/.dockerignore ./Source --build-arg REACT_APP_AAD_CLIENT_ID --build-arg REACT_APP_MSA_ONLY_CLIENT_ID --build-arg REACT_APP_MSA_ONLY_SCOPE`
     * Wait for the container to build
     * Run `podman images` to view available images, copy the Image ID
     * Point Ngrok to port 8080: `ngrok http -host-header=rewrite 8080`

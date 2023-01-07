@@ -53,6 +53,7 @@ export function SidepanelDocumentCardList() {
       context={teamsContext}
       container={container}
       started={takeControlStarted}
+      userIsAnonymous={userIsAnonymous}
     >
       <Flex column gap="gap.medium">
         {!userCanTryViewDocumentList && <AnonymousPage />}

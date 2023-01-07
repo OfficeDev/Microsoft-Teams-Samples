@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
   "manifestVersion": "devPreview",
   "version": "1.0.2",
-  "id": "20685f45-2cb6-4115-9449-f9b34bb40f0c",
+  "id": "<<teams-app-id>>",
   "packageName": "com.microsoft.teams.meetingsigning",
   "developer": {
     "name": "Contoso",
@@ -48,7 +48,7 @@
       "<<deployment-url>>"
   ],
   "meetingExtensionDefinition": {
-    "isAnonymousAccessAllowed": true
+    "supportsAnonymousGuestUsers": true
   },
   "authorization": {
     "permissions": {

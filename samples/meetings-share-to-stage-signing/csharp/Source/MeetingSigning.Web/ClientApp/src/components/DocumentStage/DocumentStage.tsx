@@ -17,7 +17,7 @@ import { DocumentChooser } from 'components/Documents';
 import { LiveSharePage } from 'components/LiveSharePage';
 import { CursorsRenderer } from 'components/Cursor';
 import { StageControls } from 'components/StageControls';
-import { Document, DocumentDto } from 'models';
+import { DocumentDto } from 'models';
 import { useQuery } from 'react-query';
 import { AnonymousPage } from 'components/AnonymousPage';
 import styles from './DocumentStage.module.css';
@@ -108,12 +108,16 @@ export function DocumentStage() {
   }, [setShowLoader]);
 
   useEffect(() => {
-    // When position is changed, we need to send the new scrollOffset to the other users via Live Share.
-    sendScrollOffset(position);
+    if (!userIsAnonymous) {
+      // When position is changed, we need to send the new scrollOffset to the other users via Live Share.
+      sendScrollOffset(position);
+    }
   }, [position, sendScrollOffset]);
 
   useEffect(() => {
-    sendCursorLocation(cursorLocation);
+    if (!userIsAnonymous) {
+      sendCursorLocation(cursorLocation);
+    }
   }, [cursorLocation, sendCursorLocation]);
 
   return (
@@ -122,6 +126,7 @@ export function DocumentStage() {
         context={teamsContext}
         container={container}
         started={started}
+        userIsAnonymous={userIsAnonymous}
       >
         <Flex
           className={styles.stageControlsDiv}
@@ -134,6 +139,7 @@ export function DocumentStage() {
             userInControl={takeControlState?.data?.userId !== undefined}
             nameOfUserInControl={takeControlState?.data?.displayName}
             followSuspended={followSuspended}
+            isLiveShareSupported={!userIsAnonymous}
             endSuspension={endSuspension}
             takeControl={takeControl}
             clearControl={clearControl}

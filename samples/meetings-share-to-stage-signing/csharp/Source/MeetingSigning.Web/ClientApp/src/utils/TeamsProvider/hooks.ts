@@ -22,9 +22,5 @@ export function useTheme(): ThemeInput {
 
 export function useUserIsAnonymous(): boolean {
   const ctx = useTeamsContext();
-  return (
-    (ctx?.user?.licenseType === 'Unknown' &&
-      ctx?.user?.id.indexOf(':anon:') > -1) ??
-    false
-  );
+  return ctx?.user?.licenseType === 'Anonymous' ?? false;
 }

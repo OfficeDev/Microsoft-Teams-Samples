@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import { Button, Flex } from '@fluentui/react-northstar';
+import { useDefaultColorScheme } from 'hooks';
 import styles from './StageControls.module.css';
 
 export type StageControlsProps = {
@@ -8,6 +8,7 @@ export type StageControlsProps = {
   userInControl: boolean;
   nameOfUserInControl?: string;
   followSuspended: boolean;
+  isLiveShareSupported: boolean;
   takeControl: () => void;
   clearControl: () => void;
   endSuspension: () => void;
@@ -21,6 +22,7 @@ export type StageControlsProps = {
  * @param userInControl Boolean that any user is in control
  * @param nameOfUserInControl The name of the user currently in control
  * @param followSuspended Boolean if the current user is no longer following the user in control
+ * @param isLiveShareSupported Boolean if Live Share is supported in this scenario. e.g. Anonymous users are not supported by Live Share
  * @param takeControl Function to take control of the presentation
  * @param clearControl Function to stop controlling of the presentation
  * @param endSuspension Function to end the follow suspension and to follow the current presenter again
@@ -33,29 +35,39 @@ export function StageControls({
   userInControl,
   nameOfUserInControl,
   followSuspended,
+  isLiveShareSupported,
   takeControl,
   clearControl,
   endSuspension,
 }: StageControlsProps) {
+  const colorScheme = useDefaultColorScheme();
+  const backgroundColorStyles = { backgroundColor: colorScheme.background };
+
   return (
-    <Flex className={styles.stageControls} vAlign="center">
+    <Flex
+      className={styles.stageControls}
+      style={backgroundColorStyles}
+      vAlign="center"
+    >
       <>
-        {localUserCanTakeControl ? (
+        {!isLiveShareSupported ? (
+          <Button content="Following presenter is not supported" size="small" />
+        ) : localUserCanTakeControl ? (
           <Button
             content={
               localUserInControl
                 ? 'Stop controlling'
                 : followSuspended && userInControl
-                  ? `Follow ${nameOfUserInControl}`
-                  : 'Take control'
+                ? `Follow ${nameOfUserInControl}`
+                : 'Take control'
             }
             size="small"
             onClick={() => {
               localUserInControl
                 ? clearControl()
                 : followSuspended && userInControl
-                  ? endSuspension()
-                  : takeControl();
+                ? endSuspension()
+                : takeControl();
             }}
           />
         ) : (
