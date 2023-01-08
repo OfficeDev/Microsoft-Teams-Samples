@@ -21,7 +21,7 @@ namespace Microsoft.BotBuilderSamples
                 logger.LogError($"Exception caught : {exception.Message}");
 
                 // Uncomment this for local debugging.
-                await turnContext.SendActivityAsync($"Sorry, it looks like something went wrong. Exception Caught: {exception.Message}");
+                // await turnContext.SendActivityAsync($"Sorry, it looks like something went wrong. Exception Caught: {exception.Message}");
             };
         }
     }

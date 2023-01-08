@@ -24,14 +24,12 @@ namespace AppCheckinLocation
                 // NOTE: In production environment, you should consider logging this to
                 // Azure Application Insights. Visit https://aka.ms/bottelemetry to see how
                 // to add telemetry capture to your bot.
-                logger.LogError(exception, $"[OnTurnError] unhandled error : {exception.Message}");
-
-                // Send a message to the user
-                await turnContext.SendActivityAsync("The bot encountered an error or bug.");
+                logger.LogError(exception, $"[OnTurnError] unhandled error : {exception.Message}");   
                 await turnContext.SendActivityAsync("To continue to run this bot, please fix the bot source code.");
-
                 // Send a trace activity, which will be displayed in the Bot Framework Emulator
                 await SendTraceActivityAsync(turnContext, exception);
+                // Uncomment this for local debugging.
+               //  await turnContext.SendActivityAsync($"Sorry, it looks like something went wrong. Exception Caught: {exception.Message}");
             };
         }
 
