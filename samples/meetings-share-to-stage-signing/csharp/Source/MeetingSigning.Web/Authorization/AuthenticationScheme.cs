@@ -18,7 +18,7 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Web.Authorization
         public const string Msa = "MSA";
 
         /// <summary>
-        /// Authentication scheme for both AAD and Msa.
+        /// Authentication scheme for both AzureAD and Msa.
         /// </summary>
         public const string AadAndMsa = Aad + "," + Msa;
     }

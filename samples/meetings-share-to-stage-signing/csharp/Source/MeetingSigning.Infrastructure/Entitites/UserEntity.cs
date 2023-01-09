@@ -14,9 +14,8 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Infrastructure.Entities
         }
 
         /// <summary>
-        /// Gets or sets UserId / AAD ID
+        /// Gets or sets UserId / AzureAD Object ID
         /// </summary>
-
         public string? UserId { get; set; }
 
         /// <summary>
@@ -28,6 +27,17 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Infrastructure.Entities
         /// Gets or sets User's Email
         /// </summary>
         public string? Email { get; set; }
+
+        /// <summary>
+        /// Unique ID for this user.
+        /// </summary>
+        public string Id
+        {
+            get
+            {
+                return UserId != null ? $"azureAd://{UserId}" : $"email://{Email}";
+            }
+        }
 
         public virtual ICollection<DocumentViewerEntity> DocumentViewers { get; set; }
     }

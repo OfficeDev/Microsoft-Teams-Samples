@@ -44,7 +44,7 @@ function SignatureInput({
   const isSignatureForLoggedInPerson: boolean =
     loggedInUser &&
     (signature.signer.userId === loggedInUser.userId ||
-      signature.signer.userId === loggedInUser.email);
+      signature.signer.email === loggedInUser.email);
 
   const signatureConfirmationTaskModule = () => {
     const template = new ACData.Template(SignatureConfirmationCard);

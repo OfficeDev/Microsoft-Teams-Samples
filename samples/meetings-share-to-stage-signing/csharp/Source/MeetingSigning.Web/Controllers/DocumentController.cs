@@ -35,7 +35,7 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Web.Controllers
         /// <exception cref="ApiException">If no matching document for the specific document Id is found
         /// A Http Not found 404 exception with Document Not found error type is thrown</exception>
         [HttpGet("{documentId}", Name = "GetDocument")]
-        public async Task<ActionResult<DocumentDTO>> GetDocumentAsync([FromRoute] Guid documentId)
+        public async Task<ActionResult<DocumentListDTO>> GetDocumentAsync([FromRoute] Guid documentId)
         {
             ApiArgumentNullException.ThrowIfNull(documentId);
             if (documentId == default)
@@ -46,10 +46,10 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Web.Controllers
             var document = await this.documentService.GetDocumentAsync(documentId);
             await authorizationService.AuthorizeAsync(User, document, AuthZPolicy.GetDocumentPolicy);
 
-            DocumentDTO response = new DocumentDTO
+            DocumentListDTO response = new DocumentListDTO
             {
-                Document = document,
-                CallerUser = new User { UserId = GetAuthenticatedUserId(), Name = string.Empty, Email = User.GetUserEmail() ?? string.Empty  }
+                Documents = new[] { document },
+                CallerUser = new User { UserId = GetAuthenticatedUserId(), Name = string.Empty, Email = User.GetUserEmail() ?? string.Empty }
             };
 
             return new OkObjectResult(response);
@@ -119,7 +119,8 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Web.Controllers
             return new OkObjectResult(signatureResult);
         }
 
-        private string GetAuthenticatedUserId() {
+        private string GetAuthenticatedUserId()
+        {
             string? authenticatedUserId = User.GetUserId();
             if (authenticatedUserId == null)
             {

@@ -3,7 +3,6 @@ import {
   DocumentType,
   Document,
   DocumentInput,
-  DocumentDto,
   DocumentListDto,
 } from './Document';
 import { Signature } from './Signature';
@@ -14,7 +13,6 @@ export type {
   ApiErrorResponse,
   Document,
   DocumentInput,
-  DocumentDto,
   DocumentListDto,
   Signature,
   User,

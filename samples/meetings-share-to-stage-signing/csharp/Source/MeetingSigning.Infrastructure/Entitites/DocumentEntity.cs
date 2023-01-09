@@ -30,7 +30,7 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Infrastructure.Entities
 
         /// <summary>
         /// Gets or sets OwnerId
-        /// The fetched AAD Id of the user creating the document
+        /// The fetched AzureAD Object Id of the user creating the document
         /// </summary>
         public string OwnerId { get; set; }
 

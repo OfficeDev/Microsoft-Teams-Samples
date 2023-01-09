@@ -1,8 +1,8 @@
-import { Document, DocumentDto, DocumentListDto, DocumentInput } from 'models';
+import { Document, DocumentListDto, DocumentInput } from 'models';
 import { authFetch } from './fetchClient';
 
 async function getDocument(documentId: string, isAnonymousUser: boolean) {
-  return await authFetch<DocumentDto>(
+  return await authFetch<DocumentListDto>(
     `document/${documentId}/`,
     isAnonymousUser,
     { method: 'GET' },

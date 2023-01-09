@@ -32,14 +32,12 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Infrastructure.Data.Repositorie
                 throw new ApiException(HttpStatusCode.BadRequest, ErrorCode.InvalidOperation, "Unable to add a user which has no UserId or Email.");
             }
 
-            string id = user.UserId ?? user.Email;
-
-            if (await UserExists(id))
+            if (await UserExists(user.Id))
             {
                 return;
             }
 
-            _userDictionary.Add(id, user);
+            _userDictionary.Add(user.Id, user);
         }
 
         /// <summary>

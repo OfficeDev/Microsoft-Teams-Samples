@@ -55,8 +55,8 @@ const msalAuth = new MsalAuth();
  * Component rendered when starting an auth prompt for getting a Microsoft Auth token
  * Used for Anonymous users
  *
- * We are using a different AAD App for anonymous users than in-tenant users. This is to better reflect a real
- * world implementation where a 3P provider might be used. If you prefer you could use the same AAD app for both.
+ * We are using a different AzureAD App for anonymous users than in-tenant users. This is to better reflect a real
+ * world implementation where a 3P provider might be used. If you prefer you could use the same AzureAD app for both.
  */
 export function AuthStartMsa() {
   (function () {

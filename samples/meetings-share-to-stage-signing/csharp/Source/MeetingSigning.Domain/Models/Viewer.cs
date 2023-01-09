@@ -12,7 +12,7 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Domain.Models
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Observer object that contains information like AAD User UserId
+        /// Observer object that contains information like AzureAD User UserId
         /// </summary>
         public User Observer { get; set; }
 

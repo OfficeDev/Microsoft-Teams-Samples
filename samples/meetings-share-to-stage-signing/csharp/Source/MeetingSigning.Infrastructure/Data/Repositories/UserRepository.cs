@@ -25,7 +25,7 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Infrastructure.Data.Repositorie
             try
             {
                 var userEntity = _mapper.Map<UserEntity>(user);
-                var exists = await UserExists(userEntity.UserId ?? userEntity.Email);
+                var exists = await UserExists(userEntity.Id);
                 if (!exists)
                 {
                     _dbContext.Users.Add(userEntity);

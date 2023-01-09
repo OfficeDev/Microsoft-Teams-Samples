@@ -27,7 +27,7 @@ export const LiveSharePage = ({
   const loadText = useMemo(() => {
     if (userIsAnonymous)
     {
-      // Anonymous users do not have an AAD account are not supported by Live Share, so skip waiting for it to load
+      // Anonymous users do not have an AzureAD account are not supported by Live Share, so skip waiting for it to load
       return undefined;
     }
 

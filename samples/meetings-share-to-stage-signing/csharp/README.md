@@ -83,7 +83,7 @@ sequenceDiagram
 ### 2. Setup for app registration 
 - Make sure to copy and save the `https` url (it should look like `https://<randomsubdomain>.ngrok.io`)
 
-- Register an App in AAD that can be used for Teams SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad)
+- Register an App in AzureAD that can be used for Teams SSO](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad)
 
 - Once the app is registered update Redirect Uris under the Authentication section with the ngrok url, followed by /auth-end (https://<randomsubdomain>.ngrok.io/auth-end)
 
@@ -95,21 +95,21 @@ sequenceDiagram
     - User.Read,
     - User.ReadBasic.All
 
-- After you create an AAD app, under *Certificates & secrets* create a new  *Client secret*. Copy the secret value and set it in `appSettings.json`    
+- After you create an AzureAD app, under *Certificates & secrets* create a new  *Client secret*. Copy the secret value and set it in `appSettings.json`    
 
-- *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your AAD App*
+- *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your AzureAD App*
 
 ### 2a. Setup app registration for Anonymous users
-- For anonymous users we authorize who the user is by having them log in to a Microsoft Personal account. You can use the same AAD App as above, but we have separated the apps so things are clearer.
-- [Register an App in AAD that can be used for Microsoft Personal account users](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad#to-register-a-new-app-in-azure-ad)
+- For anonymous users we authorize who the user is by having them log in to a Microsoft Personal account. You can use the same AzureAD App as above, but we have separated the apps so things are clearer.
+- [Register an App in AzureAD that can be used for Microsoft Personal account users](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/tab-sso-register-aad#to-register-a-new-app-in-azure-ad)
     - Register the app
         - We tested with an app that supports "Accounts in any organizational directory (Any Azure AD directory - Multi-tenant) and personal Microsoft accounts"
         - Expose the API
         - Configure the API scopes
         - You do not need "To configure authorized client application"
     - Ensure the following API permissions are granted to the app for Microsoft Graph access - email, openid
-    - *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your AAD App*
-    - After you create an AAD app, under *Certificates & secrets* create a new  *Client secret*. Copy the secret value and set it in `appSettings.json`
+    - *Note: if you restart Ngrok you may have to update any fully qualified domain name you have set in your AzureAD App*
+    - After you create an AzureAD app, under *Certificates & secrets* create a new  *Client secret*. Copy the secret value and set it in `appSettings.json`
 
 ### 3. Setup NGROK
 ```bash
@@ -137,10 +137,10 @@ sequenceDiagram
     ```
 - In `appSettings.json`, `manifest.json` and `.env` replace:
     * `<<deployment-url>>` with your ngrok url, minus the https://.
-    * `<<aad-id>>` with your AAD Application (Client) Id.
+    * `<<aad-id>>` with your AzureAD Application (Client) Id.
     * `<<client secret>>` with the client secret you created above.
-    * `<<msa-only-aad-client-id>>` with the Application (Client) Id from the AAD App for personal users
-    * `<<msa-only-aad-client-secret>>` with the client secret from the AAD App for personal users that you created above
+    * `<<msa-only-aad-client-id>>` with the Application (Client) Id from the AzureAD App for personal users
+    * `<<msa-only-aad-client-secret>>` with the client secret from the AzureAD App for personal users that you created above
     * `<<msa-only-scope>>` `api://<<deployment-url>>/<<msa-only-aad-client-id>>/access_as_user email openid`
 
 - Run the bot from a terminal, Visual Studio or Docker choose one of the following options:
@@ -281,7 +281,7 @@ Currently, this app is not fully supported in the following scenarios:
 * Anonymous Users
     * Coming soon! When creating a document you can declare the emails of the anonymous users who should view or sign the document. The app prompts anonymous meeting participants to sign in with their Microsoft account, then uses the login information to validate that their email address is allowed to access the document. You can extend this approach to support other identity providers.
 
-Below is a diagram on how the auth flow works for anonymous and non-anonymous users (AAD in-tenant, federated and guest)
+Below is a diagram on how the auth flow works for anonymous and non-anonymous users (AzureAD in-tenant, federated and guest)
 ```mermaid
 graph TD
     Join[User joins meeting] -->|Document is shared to stage| IsUserAnonymous{Is User Anonymous?}

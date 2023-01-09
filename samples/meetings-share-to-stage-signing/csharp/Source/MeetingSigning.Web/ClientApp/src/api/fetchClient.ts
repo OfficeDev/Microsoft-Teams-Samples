@@ -1,7 +1,6 @@
 import { merge } from 'lodash';
 import * as microsoftTeams from '@microsoft/teams-js';
 import { MsalAuth } from 'utils/MsalAuth';
-import { ApiErrorResponse } from 'models/ApiErrorResponse';
 
 const msalAuth = new MsalAuth();
 
@@ -31,7 +30,7 @@ export async function authFetch<T>(
 }
 
 // This function is for callers where authentication is required.
-// It makes a fetch client call with an AAD token.
+// It makes a fetch client call with an AzureAD token.
 async function teamsAuthFetch<T>(urlPath: string, init?: RequestInit) {
   const token = await microsoftTeams.authentication
     .getAuthToken()

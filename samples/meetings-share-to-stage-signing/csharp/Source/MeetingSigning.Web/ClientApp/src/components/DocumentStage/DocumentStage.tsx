@@ -17,7 +17,7 @@ import { DocumentChooser } from 'components/Documents';
 import { LiveSharePage } from 'components/LiveSharePage';
 import { CursorsRenderer } from 'components/Cursor';
 import { StageControls } from 'components/StageControls';
-import { DocumentDto } from 'models';
+import { DocumentListDto } from 'models';
 import { useQuery } from 'react-query';
 import { AnonymousPage } from 'components/AnonymousPage';
 import styles from './DocumentStage.module.css';
@@ -87,7 +87,7 @@ export function DocumentStage() {
   // We are using https://react-query.tanstack.com/ for handling the calls to our APIs.
   // Here when the documentId changes, React Query will fetch the document from the API.
   // We are also using the `refetchInterval` to query the API every 2 seconds.
-  const { data, error } = useQuery<DocumentDto, Error>(
+  const { data, error } = useQuery<DocumentListDto, Error>(
     ['getDocument', { documentId, userIsAnonymous }],
     () => getDocument(documentId, userIsAnonymous),
     { refetchInterval: pollingInterval },
@@ -155,12 +155,12 @@ export function DocumentStage() {
           {data && (
             <div className={styles.documentChooser} ref={documentStageRef}>
               <DocumentChooser
-                documentId={data.document.id}
-                documentType={data.document.documentType}
+                documentId={data.documents[0].id}
+                documentType={data.documents[0].documentType}
                 // You should not use user information from the context if you need to prove a user's identity.
                 // Here, we are using it control the UI to highlight a user's signature box, so we feel comfortable using it.
                 loggedInUser={data.callerUser}
-                signatures={data.document.signatures}
+                signatures={data.documents[0].signatures}
                 clickable
               />
               {cursorLocationsEvent && (

@@ -9,7 +9,7 @@ namespace Microsoft.Teams.Samples.MeetingSigning.Infrastructure.Entitites
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Gets Observer object that contains information like AAD User UserId of the Signer
+        /// Gets Observer object that contains information like AzureAD Object ID of the Signer
         /// </summary>
         public UserEntity Observer { get; set; }
     }
