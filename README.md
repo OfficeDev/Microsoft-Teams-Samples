@@ -69,6 +69,13 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |42|bot-initiate-thread-in-channel|This sample app demonstrate how to start a thread in a specific Team's channel using Bot Framework v4. |[View](/demo%20manifest/bot-initiate-thread-in-channel.zip) |
 |43|Bot Suggested Action|Demonstrating the feature where user can send suggested actions using bot. |[View](/demo%20manifest/bot-suggested-actions.zip) |
 |44|Bot Task Module|This sample app demonstrate how to use Task Module using Bot Framework v4. |[View](/demo%20manifest/bot-task-module.zip) |
+|45|Bot Request approval|This sample shows a feature where user can send task request to his manager and manager can approve/reject the request in group chat.. |[View](/demo%20manifest/Bot-Request-Approval.zip) |
+|46|Channel messages with RSC permissions|Demonstrating on how a bot can receive all channel messages with RSC without @mention. |[View](/demo%20manifest/Bot-RSC.zip) |
+|47|Meeting Events|This sample app Get real time meetings events. |[View](/demo%20manifest/Meetings-Events.zip) |
+|48|App check in location|This sample app Demonstrating feature where user can checkin with current location and view all previous checkins. |[View](/demo%20manifest/App-checkin-location.zip) |
+|49|App Complete auth|This sample demos authentication feature in bot,tab and messaging extension.(Facebook authentication you have to setup the app in local) |[View](/demo%20manifest/App-Complete-Auth.zip) |
+|50|App Installtion using QR code|This sample demos app installation using QR code of application's app id. |[View](/demo%20manifest/App-Installation-Using-QR.zip) |
+
 
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 
