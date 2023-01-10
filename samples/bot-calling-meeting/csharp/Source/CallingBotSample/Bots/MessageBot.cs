@@ -63,12 +63,7 @@ namespace CallingBotSample.Bots
             this.logger = logger;
         }
 
-        /// <summary>
-        /// Called when a message is sent to the bot. 
-        /// </summary>
-        /// <param name="turnContext"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <inheritdoc />
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(turnContext.Activity.Text))
@@ -89,31 +84,17 @@ namespace CallingBotSample.Bots
             }
         }
 
-        /// <summary>
-        /// Called when a new user is added to the chat/channel, or when the application is first installed
-        /// We are using this to send the welcome card on first install
-        /// </summary>
-        /// <param name="teamsMembersAdded">Users added</param>
-        /// <param name="teamInfo"></param>
-        /// <param name="turnContext"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        protected override async Task OnTeamsMembersAddedAsync(IList<TeamsChannelAccount> teamsMembersAdded, Microsoft.Bot.Schema.Teams.TeamInfo teamInfo, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
+        /// <inheritdoc />
+        protected override async Task OnInstallationUpdateActivityAsync(ITurnContext<IInstallationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
-            // Only send the welcome message when this app is added. In Bot Framework, Bots are prefixed with "28:"
-            if (teamsMembersAdded.Any(member => member.Id == $"28:{botOptions.AppId}"))
+            var activity = turnContext.Activity;
+            if (string.Equals(activity.Action, "Add", StringComparison.InvariantCultureIgnoreCase))
             {
                 await SendResponse(turnContext, "welcome", callId: null, cancellationToken: cancellationToken);
             }
         }
 
-        /// <summary>
-        /// Called when Teams is fetching a Task Module
-        /// </summary>
-        /// <param name="turnContext"></param>
-        /// <param name="taskModuleRequest"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <inheritdoc />
         protected override Task<TaskModuleResponse> OnTeamsTaskModuleFetchAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
             var asJobject = JObject.FromObject(taskModuleRequest.Data);
@@ -156,13 +137,7 @@ namespace CallingBotSample.Bots
             });
         }
 
-        /// <summary>
-        /// Called when the task module is submitted.
-        /// </summary>
-        /// <param name="turnContext"></param>
-        /// <param name="taskModuleRequest"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <inheritdoc />
         protected override async Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
             var asJobject = JObject.FromObject(taskModuleRequest.Data);
