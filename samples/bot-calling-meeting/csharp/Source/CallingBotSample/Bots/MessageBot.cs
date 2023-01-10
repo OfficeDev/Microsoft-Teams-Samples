@@ -2,8 +2,8 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using CallingBotSample.AdaptiveCards;
@@ -63,6 +63,7 @@ namespace CallingBotSample.Bots
             this.logger = logger;
         }
 
+        /// <inheritdoc />
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(turnContext.Activity.Text))
@@ -83,6 +84,17 @@ namespace CallingBotSample.Bots
             }
         }
 
+        /// <inheritdoc />
+        protected override async Task OnInstallationUpdateActivityAsync(ITurnContext<IInstallationUpdateActivity> turnContext, CancellationToken cancellationToken)
+        {
+            var activity = turnContext.Activity;
+            if (string.Equals(activity.Action, "Add", StringComparison.InvariantCultureIgnoreCase))
+            {
+                await SendResponse(turnContext, "welcome", callId: null, cancellationToken: cancellationToken);
+            }
+        }
+
+        /// <inheritdoc />
         protected override Task<TaskModuleResponse> OnTeamsTaskModuleFetchAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
             var asJobject = JObject.FromObject(taskModuleRequest.Data);
@@ -125,6 +137,7 @@ namespace CallingBotSample.Bots
             });
         }
 
+        /// <inheritdoc />
         protected override async Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
             var asJobject = JObject.FromObject(taskModuleRequest.Data);
@@ -153,11 +166,16 @@ namespace CallingBotSample.Bots
                             }
                             break;
                         case "transfer":
+                            Identity transferee = new Identity { Id = turnContext.Activity.From.AadObjectId };
+                            JObject channelData = JObject.Parse(JsonConvert.SerializeObject(turnContext.Activity.ChannelData));
+                            transferee.SetTenantId(channelData.SelectToken("tenant")?["id"]?.ToString());
+
                             return await CallService.HandleTeamsCallNotBeingFound(
                                 callId,
                                 (nonNullCallId) => callService.Transfer(
                                         nonNullCallId,
-                                        new Identity { Id = peoplePicker }),
+                                        new Identity { Id = peoplePicker },
+                                        transferee),
                                 CreateTaskModuleMessageResponse);
                         case "invite":
                             return await CallService.HandleTeamsCallNotBeingFound(
@@ -190,8 +208,10 @@ namespace CallingBotSample.Bots
             return await CreateTaskModuleMessageResponse("Something went wrong 😖");
         }
 
-        private async Task SendResponse(ITurnContext<IMessageActivity> turnContext, string input, string? callId, CancellationToken cancellationToken)
+        private async Task SendResponse(ITurnContext turnContext, string input, string? callId, CancellationToken cancellationToken)
         {
+            JObject channelData = JObject.Parse(JsonConvert.SerializeObject(turnContext.Activity.ChannelData));
+
             switch (input)
             {
                 case "playrecordprompt":
@@ -207,7 +227,7 @@ namespace CallingBotSample.Bots
                         (message) => UpdateActivityAsync(message, turnContext, cancellationToken));
                     break;
                 case "joinscheduledmeeting":
-                    if (turnContext.Activity.ChannelData["meeting"] != null)
+                    if (channelData.SelectToken("meeting") != null)
                     {
                         var call = await JoinScheduledMeeting(turnContext, cancellationToken);
 
@@ -224,7 +244,7 @@ namespace CallingBotSample.Bots
                 default:
                     await turnContext.SendActivityAsync(
                         MessageFactory.Attachment(
-                            adaptiveCardFactory.CreateWelcomeCard(turnContext.Activity.ChannelData["meeting"] != null)), cancellationToken);
+                            adaptiveCardFactory.CreateWelcomeCard(channelData.SelectToken("meeting") != null)), cancellationToken);
                     break;
             }
         }
@@ -232,9 +252,8 @@ namespace CallingBotSample.Bots
         private async Task<Call> JoinScheduledMeeting(ITurnContext turnContext, CancellationToken cancellationToken)
         {
             var organiser = await GetMeetingOrganiser(turnContext, cancellationToken);
-
-            var channelDataTenant = JObject.Parse(JsonConvert.SerializeObject(turnContext.Activity.ChannelData)).SelectToken("tenant");
-            organiser.SetTenantId(channelDataTenant["id"].ToString());
+            JObject channelData = JObject.Parse(JsonConvert.SerializeObject(turnContext.Activity.ChannelData));
+            organiser.SetTenantId(channelData.SelectToken("tenant")?["id"]?.ToString());
 
             return await callService.Create(
                 new ChatInfo
@@ -256,11 +275,11 @@ namespace CallingBotSample.Bots
         {
             var users = await TeamsInfo.GetPagedMembersAsync(turnContext, cancellationToken: cancellationToken);
 
-            foreach(TeamsChannelAccount user in users.Members)
+            foreach (TeamsChannelAccount user in users.Members)
             {
                 TeamsMeetingParticipant participant = await TeamsInfo.GetMeetingParticipantAsync(turnContext, participantId: user.AadObjectId).ConfigureAwait(false);
 
-                if (participant.Meeting.Role == "Organiser")
+                if (participant.Meeting.Role == "Organizer")
                 {
                     return new Identity
                     {
