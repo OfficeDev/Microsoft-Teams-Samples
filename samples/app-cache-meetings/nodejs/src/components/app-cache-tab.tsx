@@ -26,8 +26,18 @@ function logItem(action: string, actionColor: string, message: string) {
 /// In beforeUnloadHandler using setItems and readyToUnload callback function
 /// </summary>
 const beforeUnloadHandler = (
+    setItems: React.Dispatch<React.SetStateAction<string[]>>,
     readyToUnload: () => void) => {
+
+    let newItem = logItem("OnBeforeUnload", "purple", "Started");
+    setItems((Items) => [...Items, newItem]);
+
+    newItem = logItem("OnBeforeUnload", "purple", "Completed");
+    setItems((Items) => [...Items, newItem]);
+
+    console.log("sending readyToUnload to TEAMS");
     readyToUnload();
+
     return true;
 };
 
@@ -47,7 +57,7 @@ const loadHandler = (
 
 const AppCacheTab = () => {
     const [items, setItems] = useState<string[]>([]);
-    const [title] = useState("App Cache Testing Sample");
+    const [title, setTitle] = useState("App Cache Sample");
     const [initState] = useState(true);
 
     React.useEffect(() => {
@@ -57,24 +67,34 @@ const AppCacheTab = () => {
 
         microsoftTeams.app.initialize().then(() => {
 
-            try {
-                microsoftTeams.teamsCore.registerBeforeUnloadHandler((readyToUnload) => {
-                    const result = beforeUnloadHandler(readyToUnload);
-                    return result;
-                });
+            microsoftTeams.app.getContext().then((context) => {
+                try {
+                    if (context.page.frameContext === "sidePanel") {
+                        const loadContext = logItem("Success", "green", "Loaded Teams context");
+                        setItems((Items) => [...Items, loadContext]);
 
-                microsoftTeams.teamsCore.registerOnLoadHandler((data) => {
-                    loadHandler(setItems, data);
-                    console.log(data.contentUrl, data.entityId);
-                });
+                        const newLogItem = logItem("FrameContext", "orange", "Frame context is " + context.page.frameContext);
+                        setItems((Items) => [...Items, newLogItem]);
 
-                const newItem = logItem("Handlers", "orange", "Registered load and before unload handlers. Ready for app caching.");
-                setItems((Items) => [...Items, newItem]);
+                        microsoftTeams.teamsCore.registerBeforeUnloadHandler((readyToUnload) => {
+                            const result = beforeUnloadHandler(setItems, readyToUnload);
+                            return result;
+                        });
 
-            }
-            catch (error) {
-                console.log(error, "could not registered handlers");
-            }
+                        microsoftTeams.teamsCore.registerOnLoadHandler((data) => {
+                            loadHandler(setItems, data);
+                            setTitle("Entity Id : " + data.entityId);
+                            console.log(data.contentUrl, data.entityId);
+                        });
+
+                        const newItem = logItem("Handlers", "orange", "Registered load and before unload handlers. Ready for app caching.");
+                        setItems((Items) => [...Items, newItem]);
+                    }
+                }
+                catch (error) {
+                    console.log(error, "could not registered handlers");
+                }
+            });
         });
 
         return () => {

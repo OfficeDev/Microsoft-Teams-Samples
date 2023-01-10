@@ -16,7 +16,7 @@ const Configure = props => {
             microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
                 microsoftTeams.pages.config.setConfig({
                     //entityId : Generating a random id so that each tab instance has a unique ID.
-                    entityId: Date.now(),
+                    entityId: "AppInstance_" + Math.floor(Math.random() * 100 + 1),
                     contentUrl: `${window.location.origin}/appCacheTab`,
                     suggestedTabName: "Cache-Tab",
                     websiteUrl: `${window.location.origin}/appCacheTab`,
