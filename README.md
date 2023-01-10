@@ -22,6 +22,7 @@
 
 Here are all the samples which are deployed on Microsoft Azure and you can try it yourself by uploading respective app packages (.zip files links below) to one of your teams and/or as a personal app. (Sideloading must be enabled for your tenant; [see steps here](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading).) These apps are running on the free Azure tier, so it may take a while to load (warm up) if you haven't used it recently and it goes back to sleep quickly if it's not being used. Rest assured, once it's loaded it's pretty snappy.
 
+Note: With sample Name added * Admin consent follow the links(https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/grant-admin-consent?pivots=portal).
 
 |    | Sample Name        | Description                                                                                                                | Manifest| 
 |:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|
@@ -73,7 +74,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |46|Channel messages with RSC permissions|Demonstrating on how a bot can receive all channel messages with RSC without @mention. |[View](/demo%20manifest/Bot-RSC.zip) |
 |47|Meeting Events|This sample app Get real time meetings events. |[View](/demo%20manifest/Meetings-Events.zip) |
 |48|App check in location|This sample app Demonstrating feature where user can checkin with current location and view all previous checkins. |[View](/demo%20manifest/App-checkin-location.zip) |
-|49|App Complete auth|This sample demos authentication feature in bot,tab and messaging extension.(Facebook authentication you have to setup the app in local) |[View](/demo%20manifest/App-Complete-Auth.zip) |
+|49|App Complete auth*|This sample demos authentication feature in bot,tab and messaging extension.(Facebook authentication you have to setup the app in local) |[View](/demo%20manifest/App-Complete-Auth.zip) |
 |50|App Installtion using QR code|This sample demos app installation using QR code of application's app id. |[View](/demo%20manifest/App-Installation-Using-QR.zip) |
 
 
