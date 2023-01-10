@@ -43,6 +43,8 @@ adapter.onTurnError = async (context, error) => {
         'https://www.botframework.com/schemas/error',
         'TurnError'
     );
+     // Uncomment this for local debugging.
+    //  await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
 
     // Send a message to the user
     await context.sendActivity('The bot encountered an error or bug.');

@@ -24,7 +24,8 @@ namespace Microsoft.BotBuilderSamples
                 // Send a message to the user
                 await turnContext.SendActivityAsync("The bot encountered an error or bug.");
                 await turnContext.SendActivityAsync("To continue to run this bot, please fix the bot source code.");
-
+                // Uncomment this for local debugging.
+                //  await turnContext.SendActivityAsync($"Sorry, it looks like something went wrong. Exception Caught: {exception.Message}");
                 if (conversationState != null)
                 {
                     try
