@@ -22,8 +22,6 @@ $(document).ready(function () {
                 $("#divError").show();
                 $("#consent").show();
                 $("#adaptiveBtn").hide();
-
-                // Something else went wrong
             }
         });
 });
@@ -58,20 +56,16 @@ function getToken() {
 }
 
 function getClientSideToken() {
-
     return new Promise((resolve, reject) => {
         microsoftTeams.authentication.getAuthToken({
             successCallback: (result) => {
                 resolve(result);
-
             },
             failureCallback: function (error) {
                 reject("Error getting token: " + error);
             }
         });
-
     });
-
 }
 
 function getServerSideToken(clientSideToken) {

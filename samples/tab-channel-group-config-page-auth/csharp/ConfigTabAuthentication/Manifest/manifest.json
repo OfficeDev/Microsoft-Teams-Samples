@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
   "manifestVersion": "1.12",
   "version": "1.0.0",
-  "id": "2698bd08-2f03-4472-a8b5-b16cec89a9e9",
+  "id": "<<YOUR-MICROSOFT-APP-ID>>",
   "packageName": "contoso.com",
   "developer": {
     "name": "contoso",
@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "configurableTabs": [
     {
-      "configurationUrl": "https://8830-118-185-176-154.ngrok.io/ChooseAuth",
+      "configurationUrl": "https://<<BASE-URI>>/ChooseAuth",
       "canUpdateConfiguration": true,
       "scopes": [
         "team"
@@ -43,7 +43,7 @@
     "*.ngrok.io"
   ],
   "webApplicationInfo": {
-    "id": "a30b1d5d-1b03-4756-bdaa-77a4ef8a82a8",
-    "resource": "api://8830-118-185-176-154.ngrok.io/botid-a30b1d5d-1b03-4756-bdaa-77a4ef8a82a8"
+    "id": "<<YOUR-MICROSOFT-APP-ID>>",
+    "resource": "api://<<BASE-URI>>/<<YOUR-MICROSOFT-APP-ID>>"
   }
 }

@@ -1,4 +1,4 @@
-(function () {
+(function() {
     'use strict';
     microsoftTeams.app.initialize();
     // Get auth token
@@ -19,31 +19,30 @@
         return new Promise((resolve, reject) => {
             microsoftTeams.app.getContext().then((context) => {
                 fetch('/auth/token', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        tid: context.user.tenant.id,
-                        token: clientSideToken
-                    }),
-                })
-                .then((response) => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        reject(response.error);
-                    }
-                })
-                .then((responseJson) => {
-                    if (responseJson.error) {
-                        reject(responseJson.error);
-                    }
-                    else {
-                        resolve();
-                    }
-                });
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            tid: context.user.tenant.id,
+                            token: clientSideToken
+                        }),
+                    })
+                    .then((response) => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            reject(response.error);
+                        }
+                    })
+                    .then((responseJson) => {
+                        if (responseJson.error) {
+                            reject(responseJson.error);
+                        } else {
+                            resolve();
+                        }
+                    });
             });
         });
     }
@@ -63,7 +62,7 @@
         });
     }
 
-    // method invoked on sso authentication.
+    // Method invoked on sso authentication.
     getClientSideToken()
         .then((clientSideToken) => {
             return getServerSideToken(clientSideToken);
@@ -75,15 +74,14 @@
                 requestConsent()
                     .then((result) => {
                         getClientSideToken()
-                        .then((clientSideToken) => {
-                            return getServerSideToken(clientSideToken);
-                        })
+                            .then((clientSideToken) => {
+                                return getServerSideToken(clientSideToken);
+                            })
                     })
                     .catch((error) => {
                         console.log(`ERROR ${error}`);
                     });
-            } 
-            else {
+            } else {
                 // Something else went wrong
                 console.log(`Error from web service: ${error}`);
             }

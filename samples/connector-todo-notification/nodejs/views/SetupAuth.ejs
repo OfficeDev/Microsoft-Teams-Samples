@@ -99,7 +99,6 @@
                 console.log("Login succeeded: " + result);
                 microsoftTeams.authentication.getAuthToken().then((result) => {
                     idToken = result;
-                    //resolve(result);
                     decodingJWT(result)
                     $("#primary").show();
                     $("#divConfig").show();
@@ -123,7 +122,6 @@
                 },
                 success: function (responseJson) {
                     const userDetails = responseJson;
-                    alert(JSON.stringify(userDetails));
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
