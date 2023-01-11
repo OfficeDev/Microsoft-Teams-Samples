@@ -60,8 +60,6 @@
                 width: 600,
                 height: 535,
                 successCallback: (result) => {
-                    let data = localStorage.getItem(result);
-                    localStorage.removeItem(result);
                     resolve(data);
                 },
                 failureCallback: (reason) => {
@@ -82,9 +80,10 @@
                 // Display in-line button so user can consent
                 requestConsent()
                     .then((result) => {
-                        // Consent succeeded - use the token we got back
-                        let accessToken = JSON.parse(result).accessToken;
-                        console.log(`Received access token ${accessToken}`);
+                        getClientSideToken()
+                        .then((clientSideToken) => {
+                            return getServerSideToken(clientSideToken);
+                        })
                     })
                     .catch((error) => {
                         console.log(`ERROR ${error}`);

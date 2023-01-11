@@ -52,7 +52,7 @@ app.get('/auth-start', function (req, res) {
 // End of the pop-up dialog auth flow, returns the results back to parent window
 app.get('/auth-end', function (req, res) {
   var clientId = process.env.ClientId;
-  res.render('./views/auth-end', { clientId: clientId });
+  res.render('./views/auth-end', { clientId: JSON.stringify(process.env.ClientId) });
 });
 
 // On-behalf-of token exchange

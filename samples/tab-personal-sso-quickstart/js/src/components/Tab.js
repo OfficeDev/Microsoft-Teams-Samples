@@ -43,9 +43,6 @@ class Tab extends React.Component {
         this.setState({ context: context });
       });
 
-      this.setState({ consentRequired: true }); //This displays the consent required message.
-      this.showConsentDialog(); //Proceed to show the consent dialogue.
-
       authentication.getAuthToken().then((result) => {
         this.ssoLoginSuccess(result)
       }).catch((error) => {

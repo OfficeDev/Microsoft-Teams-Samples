@@ -3,7 +3,7 @@
 
 import React from 'react';
 import './App.css';
-import * as microsoftTeams from "@microsoft/teams-js";
+import { app, authentication } from "@microsoft/teams-js";
 import { Avatar, Spinner } from '@fluentui/react-components'
 
 /**
@@ -37,14 +37,14 @@ class Tab extends React.Component {
   //Learn more: https://reactjs.org/docs/react-component.html#componentdidmount
   componentDidMount(){
     // Initialize the Microsoft Teams SDK
-    microsoftTeams.app.initialize().then(() => {
+    app.initialize().then(() => {
       // Get the user context from Teams and set it in the state
-      microsoftTeams.app.getContext().then((context) => {
+      app.getContext().then((context) => {
         this.setState({context:context});
       });
 
       //Perform Azure AD single sign-on authentication
-      microsoftTeams.authentication.getAuthToken().then((result) => {
+      authentication.getAuthToken().then((result) => {
         this.ssoLoginSuccess(result)
       }).catch((error) => {
         this.ssoLoginFailure(error)
@@ -106,8 +106,13 @@ class Tab extends React.Component {
   consentSuccess(result){
     //Save the Graph access token in state
     this.setState({
-      graphAccessToken: result,
       consentProvided: true
+    });
+
+    authentication.getAuthToken().then((result) => {
+      this.ssoLoginSuccess(result)
+    }).catch((error) => {
+      this.ssoLoginFailure(error)
     });
   }
 
