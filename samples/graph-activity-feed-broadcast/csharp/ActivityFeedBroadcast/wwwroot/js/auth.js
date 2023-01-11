@@ -48,7 +48,6 @@ function getToken() {
                 resolve(result);
             },
             failureCallback: reason => {
-
                 reject(reason);
             }
         });
