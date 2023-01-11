@@ -125,7 +125,7 @@ User can generate a new QR code (contains team id information) and then scan the
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppManifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
-
+Note:- If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-join-team-using-qr-code/csharp/JoinTeamByQR/AdapterWithErrorHandler.cs#L23) and put your debugger for local debug.
  
 ## Running the sample
 
