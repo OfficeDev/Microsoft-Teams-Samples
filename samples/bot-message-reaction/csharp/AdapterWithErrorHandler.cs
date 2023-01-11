@@ -20,8 +20,8 @@ namespace Microsoft.BotBuilderSamples
                 // to add telemetry capture to your bot.
                 logger.LogError($"Exception caught : {exception.Message}");
 
-                // Uncomment this for local debugging.
-                //await turnContext.SendActivityAsync($"Sorry, it looks like something went wrong. Exception Caught: {exception.Message}");
+                // Uncomment below commented line for local debugging..
+                // await turnContext.SendActivityAsync($"Sorry, it looks like something went wrong. Exception Caught: {exception.Message}");
             };
         }
     }
