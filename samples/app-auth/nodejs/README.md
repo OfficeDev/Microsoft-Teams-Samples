@@ -153,7 +153,7 @@ Notes:
 -   The resource for an AAD app will usually just be the root of its site URL and the appID (e.g. api://subdomain.example.com/6789/c6c1f32b-5e55-4997-881a-753cc1d563b7). We also use this value to ensure your request is coming from the same domain. Therefore make sure that your contentURL for your tab uses the same domains as your resource property.
 -   You need to be using manifest version 1.5 or higher for these fields to be used.
 -   Scopes aren’t supported in the manifest and instead should be specified in the API Permissions section in the Azure portal
--   If you are facing any issue in your app, please uncomment this line [Application Registration Portal]([https://aka.ms/appregistrations](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/b689ff7297474664104f3dee6371817f86d71f80/samples/app-auth/nodejs/src/AuthBot.ts#L119)) and put your debugger for local debug.
+-   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/b689ff7297474664104f3dee6371817f86d71f80/samples/app-auth/nodejs/src/AuthBot.ts#L119) and put your debugger for local debug.
 ### Add the Azure AD OAuth connection to the bot
 
 1. Navigate to your Azure bot's service page on the [Azure Portal](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.BotService%2FbotServices).
