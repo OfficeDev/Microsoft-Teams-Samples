@@ -416,6 +416,10 @@ jobs:
               name: 'bot-adaptive-card-actions'
               version: '6.0.x'
 
+            - project_path: 'samples/bot-all-cards/csharp/BotAllCards/BotAllCards.csproj'
+              name: 'bot-all-cards'
+              version: '6.0.x'
+
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
     steps:

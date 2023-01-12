@@ -1,0 +1,43 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.6",
+  "id": "{{Microsoft-App-Id}}",
+  "packageName": "com.microsoft.teams.allbotcards",
+  "developer": {
+    "name": "Teams App, Inc.",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "All Bot Cards",
+    "full": "All Bot Cards"
+  },
+  "description": {
+    "short": "Short description for all bot cards.",
+    "full": "Full description of Adaptive, hero, list, Office 365 Connector, receipt, sign in, and thumbnail cards and card collections are supported in bots for Microsoft Teams."
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [
+    {
+      "botId": "{{Microsoft-App-Id}}",
+      "scopes": [
+        "personal"
+      ],
+      "supportsFiles": false,
+      "isNotificationOnly": false
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{{domain-name}}"
+  ]
+}
