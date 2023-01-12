@@ -6,6 +6,8 @@ products:
 - office-365
 languages:
 - csharp
+title: Microsoft Teams C# Type of Bot Cards
+description: Microsoft Teams "Type of Bot Cards" application for .NET/C#
 extensions:
   contentType: samples
   createdDate: 01/11/2023 10:02:21 PM
