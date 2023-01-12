@@ -33,12 +33,12 @@ Note: With sample Name added * Admin consent follow the links (https://learn.mic
 |5| Tab Channel Goup Config Page Auth | Configurable Tab using AAD and Silent Authentication.|[View](/demo%20manifest/tab-channel-group-config-page-auth.zip)     |
 |6| Task approval using activity feed notification|Demonstrating a feature where user can raise the requests and manager will be notified about the requests and manager will be redirected to approve/reject the request from received notification.|[View](/demo%20manifest/Tab-Request-Approval.zip)     |
 |7|People picker control in Adaptive Cards | This sample shows the feature of people picker control in Adaptive Cards.|[View](/demo%20manifest/People-picker-adaptive-card.zip) |
-|8|App complete auth|This sample demos authentication feature in bot,tab and messaging extension.|[View](/demo%20manifest/App-Complete-Auth.zip) |
+|8|App complete auth*|This sample demos authentication feature in bot,tab and messaging extension.|[View](/demo%20manifest/App-Complete-Auth.zip) |
 |9|Tab people picker|This is an tab app which shows the feature of client sdk people picker. |[View](/demo%20manifest/Tab-People-Picker.zip) |
 |10|App Hello World|Feature of this sample to display Hello Word. |[View](/demo%20manifest/app-hello-world.zip) |
 |11|Graph RSC|how you can use Resource Specific Consent (RSC) to call Graph APIs. |[View](/demo%20manifest/graph-rsc.zip) |
 |12|Meetings Details Tab|Microsoft Teams meeting extensibility sample for iteracting with Details Tab in-meeting. |[View](/demo%20manifest/meetings-details-tab.zip) |
-|13|Tab Chanel Group|Sample app showing custom group and channel Tab with ASP. NET Core. |[View](/demo%20manifest/tab-channel-group.zip) |
+|13|Tab Channel Group|Sample app showing custom group and channel Tab with ASP. NET Core. |[View](/demo%20manifest/tab-channel-group.zip) |
 |14|Tab App Monetization|This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk. |[View](/demo%20manifest/tab-app-monetization.zip) |
 |15|Tab UI Templates|This sample demonstrates @fluentui/react-teams library in Microsoft Teams apps. |[View](/demo%20manifest/tab-ui-templates.zip) |
 |16|Tab Conversations|This Teams tab app provides a way to allow users to have conversations about sub-entities in the tab Create conversational tabs. |[View](/demo%20manifest/tab-conversations.zip) |
@@ -47,7 +47,7 @@ Note: With sample Name added * Admin consent follow the links (https://learn.mic
 |19|Channel and group tab quick-start|This Teams app showing the channel and group tab hello world app. |[View](/demo%20manifest/tab-channel-group-quickstart.zip) |
 |20|Device permissions|This Teams app demonstrating the device permissions. |[View](/demo%20manifest/tab-device-permissions.zip) |
 |21|Tab in stage view|This Teams app demonstrating the tab in stage view. |[View](/demo%20manifest/tab-stage-view.zip) |
-|22|Staggered Permission|This Teams app demonstrating to get staggered graph api permissions. |[View](/demo%20manifest/tab-staggered-permission.zip) |
+|22|Staggered Permission*|This Teams app demonstrating to get staggered graph api permissions. |[View](/demo%20manifest/tab-staggered-permission.zip) |
 |23|Teams Conversation Bot|This Teams app demonstrating messaging and conversation event handling. |[View](/demo%20manifest/bot-conversation.zip) |
 |24|Authentication with OAuthPrompt|This Teams app demonstrating authentication and basic messaging in Bot Framework v4. |[View](/demo%20manifest/bot-teams-authentication.zip) |
 |25|Messaging extensions - search quick-start|This Teams app demonstrating hello world Messaging Extension that accepts search requests and returns results. |[View](/demo%20manifest/msgext-search-quickstart.zip) |
@@ -66,7 +66,7 @@ Note: With sample Name added * Admin consent follow the links (https://learn.mic
 |38|Sequential workflow adaptive cards|This Teams app demonstrating the contents of meeting tab context object in a meeting tab. |[View](/demo%20manifest/bot-adaptivecards-user-specific-views.zip) |
 |39|Meetings-Context-app|This Teams app demonstrating the contents of meeting tab context object in a meeting tab. |[View](/demo%20manifest/meetings-context-app.zip) |
 |40|Teams File Upload|This sample app demonstrate the file upload with bot using Bot Framework v4. |[View](/demo%20manifest/bot-file-upload.zip) |
-|41|Message Reactions|This sample app demonstrate how to use message reactions bot. |[View](/demo%20manifest/bot-adaptivecards-user-specific-views.zip) |
+|41|Message Reactions|This sample app demonstrate how to use message reactions bot. |[View](/demo%20manifest/bot-message-reaction.zip) |
 |42|bot-initiate-thread-in-channel|This sample app demonstrate how to start a thread in a specific Team's channel using Bot Framework v4. |[View](/demo%20manifest/bot-initiate-thread-in-channel.zip) |
 |43|Bot Suggested Action|Demonstrating the feature where user can send suggested actions using bot. |[View](/demo%20manifest/bot-suggested-actions.zip) |
 |44|Bot Task Module|This sample app demonstrate how to use Task Module using Bot Framework v4. |[View](/demo%20manifest/bot-task-module.zip) |
@@ -76,7 +76,11 @@ Note: With sample Name added * Admin consent follow the links (https://learn.mic
 |48|App check in location|This sample app Demonstrating feature where user can checkin with current location and view all previous checkins. |[View](/demo%20manifest/App-checkin-location.zip) |
 |49|App Complete auth*|This sample demos authentication feature in bot,tab and messaging extension.(Facebook authentication you have to setup the app in local) |[View](/demo%20manifest/App-Complete-Auth.zip) |
 |50|App Installtion using QR code|This sample demos app installation using QR code of application's app id. |[View](/demo%20manifest/App-Installation-Using-QR.zip) |
-
+|51|Join the Team using QR code|This sample demos a feature where user can join a team using QR code containing the team's id. |[View](/demo%20manifest/Bot-Join-Team-By-QR.zip) |
+|52|Complete Samples|Sample covering multiple scenarios - dialogs, ME, and facebook auth. |[View](/demo%20manifest/Complete-Sample.zip) |
+|53|Messaging extensions - auth and config|Messaging Extension that has a configuration page, accepts search requests and returns results after the user has signed in. |[View](/demo%20manifest/msgext-search-auth-config.zip) |
+|54|Tab request approval*|Demonstrating a feature where user can raise the requests and manager will be notified about the requests and manager will be redirected to approve/reject the request from received notification. |[View](/demo%20manifest/Tab-Request-Approval.zip) |
+|55|Graph API Teams App Installation Life Cycle|This sample illustrates how you can use Teams App Installation Life Cycle by calling Microsoft Graph APIs.|[View](/demo%20manifest/graph-app-installation-lifecycle.zip) |
 
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 
@@ -189,7 +193,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |4|Graph API Teams App Catalog Life Cycle | This sample illustrates how you programmatically manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs. .                               |[View][graph#appctaloglifecycle#cs]       | [View][graph#appcataloglifecycle#js]
 |5|Graph API Chat Life Cycle | This sample illustrates how you can use [Teams App Chat Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/chat?view=graph-rest-1.0) by calling Microsoft Graph APIs. .                              |[View][graph#chatlifecyle#cs]      |[View][graph#chatlifecycle#js]
 |6|Activity Feed Notification  | Microsoft Teams sample app for Sending Activity feed notification using Graph API in a Teams Tab. | [View][graph-activity-feed#cs]                       | [View][graph-activity-feed#js]| 
-|7|Proactive installation of App and sending proactive notifications | This sample illustrates how you can use [Proactive installation of app for user and send proactive notification](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages?tabs=csharp) by calling Microsoft Graph APIs. .                              |[View][graph#graphproactiveinstallation#cs]       |[View][graph#graphproactiveinstallation#js]
+|7|Proactive installation of App and sending proactive notifications | This sample illustrates how you can use [Proactive installation of app for user and send proactive notification](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages?tabs=csharp) by calling Microsoft Graph APIs.                              |[View][graph#graphproactiveinstallation#cs]       |[View][graph#graphproactiveinstallation#js]
 |8|Change Notification  | This sample app demonstrates sending change notifications to user presence in Teams based on user presence status. | [View][graph-change-notification#cs]                        |[View][graph-change-notification#js]
 |9|Graph Pinned Message  | This is a sample application which demonstrates how to pin messages in chat using Graph api. | [View][graph-pinned-message#cs]|[View][graph-pinned-message#js]|
 |10|Graph Bulk Meetings  | This is an sample application which shows how to create Teams meetings in bulk using Graph api. | [View][graph-bulk-meetings#cs]|[View][graph-bulk-meetings#js]|
