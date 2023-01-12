@@ -31,7 +31,7 @@ Note: With sample Name added * Admin consent follow the links (https://learn.mic
 |3| Product inspection | Demonstrating a feature where user can scan a product and mark it as approved/rejected. |[View](/demo%20manifest/Tab-Product-Inspection.zip)     |
 |4|Bot daily task reminder | This sample demos a feature where user can schedule a recurring task and get a reminder on the scheduled time|[View](/demo%20manifest/Bot-Daily-Task-Reminder.zip)     |
 |5| Tab Channel Goup Config Page Auth | Configurable Tab using AAD and Silent Authentication.|[View](/demo%20manifest/tab-channel-group-config-page-auth.zip)     |
-|6| Task approval using activity feed notification|Demonstrating a feature where user can raise the requests and manager will be notified about the requests and manager will be redirected to approve/reject the request from received notification.|[View](/demo%20manifest/Tab-Request-Approval.zip)     |
+|6| Task approval using activity feed notification*|Demonstrating a feature where user can raise the requests and manager will be notified about the requests and manager will be redirected to approve/reject the request from received notification.|[View](/demo%20manifest/Tab-Request-Approval.zip)     |
 |7|People picker control in Adaptive Cards | This sample shows the feature of people picker control in Adaptive Cards.|[View](/demo%20manifest/People-picker-adaptive-card.zip) |
 |8|App complete auth*|This sample demos authentication feature in bot,tab and messaging extension.|[View](/demo%20manifest/App-Complete-Auth.zip) |
 |9|Tab people picker|This is an tab app which shows the feature of client sdk people picker. |[View](/demo%20manifest/Tab-People-Picker.zip) |
@@ -74,13 +74,13 @@ Note: With sample Name added * Admin consent follow the links (https://learn.mic
 |46|Channel messages with RSC permissions|Demonstrating on how a bot can receive all channel messages with RSC without @mention. |[View](/demo%20manifest/Bot-RSC.zip) |
 |47|Meeting Events|This sample app Get real time meetings events. |[View](/demo%20manifest/Meetings-Events.zip) |
 |48|App check in location|This sample app Demonstrating feature where user can checkin with current location and view all previous checkins. |[View](/demo%20manifest/App-checkin-location.zip) |
-|49|App Complete auth*|This sample demos authentication feature in bot,tab and messaging extension.(Facebook authentication you have to setup the app in local) |[View](/demo%20manifest/App-Complete-Auth.zip) |
-|50|App Installtion using QR code|This sample demos app installation using QR code of application's app id. |[View](/demo%20manifest/App-Installation-Using-QR.zip) |
-|51|Join the Team using QR code|This sample demos a feature where user can join a team using QR code containing the team's id. |[View](/demo%20manifest/Bot-Join-Team-By-QR.zip) |
-|52|Complete Samples|Sample covering multiple scenarios - dialogs, ME, and facebook auth. |[View](/demo%20manifest/Complete-Sample.zip) |
-|53|Messaging extensions - auth and config|Messaging Extension that has a configuration page, accepts search requests and returns results after the user has signed in. |[View](/demo%20manifest/msgext-search-auth-config.zip) |
-|54|Tab request approval*|Demonstrating a feature where user can raise the requests and manager will be notified about the requests and manager will be redirected to approve/reject the request from received notification. |[View](/demo%20manifest/Tab-Request-Approval.zip) |
-|55|Graph API Teams App Installation Life Cycle|This sample illustrates how you can use Teams App Installation Life Cycle by calling Microsoft Graph APIs.|[View](/demo%20manifest/graph-app-installation-lifecycle.zip) |
+
+|49|App Installtion using QR code|This sample demos app installation using QR code of application's app id. |[View](/demo%20manifest/App-Installation-Using-QR.zip) |
+|50|Join the Team using QR code|This sample demos a feature where user can join a team using QR code containing the team's id. |[View](/demo%20manifest/Bot-Join-Team-By-QR.zip) |
+|51|Complete Samples|Sample covering multiple scenarios - dialogs, ME, and facebook auth. |[View](/demo%20manifest/Complete-Sample.zip) |
+|52|Messaging extensions - auth and config|Messaging Extension that has a configuration page, accepts search requests and returns results after the user has signed in. |[View](/demo%20manifest/msgext-search-auth-config.zip) |
+
+|53|Graph API Teams App Installation Life Cycle|This sample illustrates how you can use Teams App Installation Life Cycle by calling Microsoft Graph APIs.|[View](/demo%20manifest/graph-app-installation-lifecycle.zip) |
 
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 
