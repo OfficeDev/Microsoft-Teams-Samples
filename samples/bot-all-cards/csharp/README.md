@@ -13,6 +13,20 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-app-sso-csharp
 ---
 
+---
+page_type: sample
+description: Adaptive, hero, list, Office 365 Connector, receipt, sign in, and thumbnail cards and card collections are supported in bots for Microsoft Teams.
+products:
+- dotnet
+- office-teams
+languages:
+- csharp
+extensions:
+ contentType: samples
+ createdDate: "21/10/2022 07:54:21 PM"
+urlFragment: officedev-microsoft-teams-samples-bot-all-cards-csharp
+---
+
 # Using Cards
 
 Bot Framework v4 using cards bot sample
