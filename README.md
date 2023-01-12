@@ -74,7 +74,6 @@ Note: With sample Name added * Admin consent follow the links (https://learn.mic
 |46|Channel messages with RSC permissions|Demonstrating on how a bot can receive all channel messages with RSC without @mention. |[View](/demo%20manifest/Bot-RSC.zip) |
 |47|Meeting Events|This sample app Get real time meetings events. |[View](/demo%20manifest/Meetings-Events.zip) |
 |48|App check in location|This sample app Demonstrating feature where user can checkin with current location and view all previous checkins. |[View](/demo%20manifest/App-checkin-location.zip) |
-
 |49|App Installtion using QR code|This sample demos app installation using QR code of application's app id. |[View](/demo%20manifest/App-Installation-Using-QR.zip) |
 |50|Join the Team using QR code|This sample demos a feature where user can join a team using QR code containing the team's id. |[View](/demo%20manifest/Bot-Join-Team-By-QR.zip) |
 |51|Complete Samples|Sample covering multiple scenarios - dialogs, ME, and facebook auth. |[View](/demo%20manifest/Complete-Sample.zip) |
