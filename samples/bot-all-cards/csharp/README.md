@@ -1,6 +1,6 @@
 ﻿---
 page_type: sample
-description: Adaptive, hero, list, Office 365 Connector, sign in, and thumbnail cards and card collections are supported in bots for Microsoft Teams.
+description: Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl
 products:
 - office-teams
 - office
@@ -9,8 +9,8 @@ languages:
 - csharp
 extensions:
  contentType: samples
- createdDate: "01/11/2023 07:54:21 PM"
-urlFragment: officedev-microsoft-teams-samples-bot-all-cards-csharp
+ createdDate: "21/10/2022 07:54:21 PM"
+urlFragment: officedev-microsoft-teams-samples-app-sso-csharp
 ---
 
 # Using Cards
