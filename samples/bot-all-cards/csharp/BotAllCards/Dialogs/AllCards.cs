@@ -128,7 +128,7 @@ namespace BotAllCards.Dialogs
             var oauthCard = new OAuthCard
             {
                 Text = "BotFramework OAuth Card",
-                ConnectionName = "GetOAuthCard", // Replace with the name of your Azure AD connection.
+                ConnectionName = "YOUR-CONNECTION-NAME", // Replace with the name of your Azure AD connection.
                 Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, "Sign In", value: "https://login.microsoftonline.com/") },
             };
 

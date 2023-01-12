@@ -116,6 +116,8 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 ![HeroCard](BotAllCards/Images/HeroCard.png)
 
 **OAuth Card:**
+  - Navigate to samples\bot-all-cards\csharp\BotAllCards\Dialogs\AllCards.cs
+  - On line 131, replace `YOUR-CONNECTION-NAME`.
 
 ![OAuthCard](BotAllCards/Images/OAuthCard.png)
 
