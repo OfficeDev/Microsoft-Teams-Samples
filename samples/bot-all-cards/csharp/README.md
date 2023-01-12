@@ -10,6 +10,7 @@ extensions:
  contentType: samples
  createdDate: "21/10/2022 07:54:21 PM"
 urlFragment: officedev-microsoft-teams-samples-bot-all-cards-csharp
+
 ---
 
 # Using Cards
