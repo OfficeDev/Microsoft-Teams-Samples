@@ -14,12 +14,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.BotBuilderSamples
 {
-    public class MainDialog : LogoutDialog
+    public class MainDialog : ComponentDialog
     {
         protected readonly ILogger _logger;
 
-        public MainDialog(IConfiguration configuration, ILogger<MainDialog> logger)
-            : base(nameof(MainDialog), configuration["ConnectionName"])
+        public MainDialog(ILogger<MainDialog> logger)
+            : base(nameof(MainDialog))
         {
             // The initial child Dialog to run.
             InitialDialogId = nameof(WaterfallDialog);

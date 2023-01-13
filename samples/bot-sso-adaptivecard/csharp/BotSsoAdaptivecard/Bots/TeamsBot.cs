@@ -13,9 +13,9 @@ using Microsoft.Extensions.Logging;
 namespace Microsoft.BotBuilderSamples
 {
     // This bot is derived (view DialogBot<T>) from the TeamsActivityHandler class currently included as part of this sample.
-    public class TeamsBot<T> : DialogBot<T> where T : Dialog
+    public class TeamsBot : DialogBot<MainDialog>
     {
-        public TeamsBot(ConversationState conversationState, UserState userState, T dialog, ILogger<DialogBot<T>> logger)
+        public TeamsBot(ConversationState conversationState, UserState userState, MainDialog dialog, ILogger<DialogBot<MainDialog>> logger)
             : base(conversationState, userState, dialog, logger)
         {
         }

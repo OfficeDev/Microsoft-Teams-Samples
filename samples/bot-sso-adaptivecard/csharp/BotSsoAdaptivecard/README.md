@@ -161,9 +161,9 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 ![SignButton](Images/SignButton.png)
 
-**UserDetails:**
+**Login Successfully:**
 
-![InstallApp](Images/UserDetails.png)
+![InstallApp](Images/loginsuccess.png)
 
 ## Deploy the bot to Azure
 
