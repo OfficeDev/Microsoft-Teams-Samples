@@ -15,7 +15,7 @@
     "color": "icon-color.png"
   },
   "name": {
-    "short": "TeamsConversationBot",
+    "short": "TeamsConversatiobBot",
     "full": "TeamsConversationBot"
   },
   "description": {
@@ -25,7 +25,7 @@
   "accentColor": "#FFFFFF",
   "bots": [
     {
-      "botId": "<<YOUR-MICROSOFT-APP-ID>>",
+      "id": "<<YOUR-MICROSOFT-APP-ID>>",
       "scopes": [
         "personal",
         "groupchat",
@@ -64,5 +64,5 @@
     "identity",
     "messageTeamMembers"
   ],
-  "validDomains": []
+  "validDomains": [ "*.ngrok.io" ]
 }

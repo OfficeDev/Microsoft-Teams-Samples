@@ -70,6 +70,21 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 // Save information about the sent message and its ID (resourceResponse.id).
             }));
         });
+
+        this.onTeamsMessageEditEvent(async (context, next) => {
+            await context.sendActivity("Message is edited");
+            next();
+          });
+
+          this.onTeamsMessageUndeleteEvent(async (context, next) => {
+            await context.sendActivity("Message is undeleted");
+            next();
+        });
+
+        this.onTeamsMessageSoftDeleteEvent(async (context, next) => {
+              await context.sendActivity("Message is deleted");
+            next();
+        });
     }
 
     async onInstallationUpdateActivity(context) {
