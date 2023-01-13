@@ -9,7 +9,7 @@
   },
   "authentication": {
     "text": "Signin Text",
-    "connectionName": "<<YOUR-CONNECTION-NAME>>",
+    "connectionName": "BotSSOAdaptivecardConnection",
     "tokenExchangeResource": {
       "id": "<<YOUR-MICROSOFT-APP-ID>>"
     },

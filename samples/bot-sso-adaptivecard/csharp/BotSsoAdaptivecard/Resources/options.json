@@ -17,7 +17,7 @@
             "msteams": {
               "type": "messageBack",
               "displayText": "Sign in Universal SSO",
-              "text": "ABSSORefresh",
+              "text": "PerformSSO",
               "value": "{\"bfKey\": \"bfVal\", \"conflictKey\": \"from value\"}"
             }
           }

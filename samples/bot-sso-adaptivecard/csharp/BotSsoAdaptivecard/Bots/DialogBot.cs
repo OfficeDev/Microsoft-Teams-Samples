@@ -64,7 +64,7 @@ namespace Microsoft.BotBuilderSamples
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
         {
             await base.OnTurnAsync(turnContext, cancellationToken);
-            
+
             // Save any state changes that might have occurred during the turn.
             await _conversationState.SaveChangesAsync(turnContext, false, cancellationToken);
             await _userState.SaveChangesAsync(turnContext, false, cancellationToken);
@@ -86,9 +86,9 @@ namespace Microsoft.BotBuilderSamples
                 var initialAdaptiveCard = GetFirstOptionsAdaptiveCard(path, signInLink, turnContext.Activity.From.Name, member.Id);
                 await turnContext.SendActivityAsync(MessageFactory.Attachment(initialAdaptiveCard), cancellationToken);
             }
-            else if (turnContext.Activity.Text.Contains("ABSSORefresh"))
+            else if (turnContext.Activity.Text.Contains("PerformSSO"))
             {
-                string[] striPath = { ".", "Resources", "ABSSORefresh.json" };
+                string[] striPath = { ".", "Resources", "AdaptiveCardWithSSOInRefresh.json" };
                 var varMember = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
                 var varInitialAdaptiveCard = GetFirstOptionsAdaptiveCard(striPath, signInLink, turnContext.Activity.From.Name, varMember.Id);
                 await turnContext.SendActivityAsync(MessageFactory.Attachment(varInitialAdaptiveCard), cancellationToken);
@@ -107,15 +107,7 @@ namespace Microsoft.BotBuilderSamples
         /// <returns></returns>
         protected override async Task<InvokeResponse> OnInvokeActivityAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
         {
-            if (turnContext.Activity.Name == "signin/verifyState")
-            {
-                _logger.LogInformation("Running dialog with signin/verifystate from an Invoke Activity.");
-
-                // Run the Dialog with the new Invoke Activity.
-                await _dialog.RunAsync(turnContext, _conversationState.CreateProperty<DialogState>(nameof(DialogState)), cancellationToken);
-            }
-
-            else if (turnContext.Activity.Name == "adaptiveCard/action")
+            if (turnContext.Activity.Name == "adaptiveCard/action")
             {
 
                 if (turnContext.Activity.Value == null)
@@ -131,18 +123,18 @@ namespace Microsoft.BotBuilderSamples
                 if (actiondata["verb"] == null)
                     return null;
 
+                //When adaptiveCard/action invoke activity from teams contains sso token
                 string verb = actiondata["verb"].ToString();
                 JObject authentication = null;
                 if (value["authentication"] != null)
                 {
                     authentication = JsonConvert.DeserializeObject<JObject>(value["authentication"].ToString());
-                    string token = authentication["token"].ToString();
-                    var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
-                    var tokenResource = await userTokenClient.ExchangeTokenAsync(turnContext.Activity.From.Id, _connectionName, turnContext.Activity.ChannelId, new TokenExchangeRequest(null, token), cancellationToken).ConfigureAwait(false);
                 }
+                
                 string state = null;
                 if (value["state"] != null)
                 {
+                    //when token is absent in the invoke. We can initiate SSO in response to the invoke
                     state = value["state"].ToString();
                 }
                 // authToken and state are absent, handle verb
@@ -156,7 +148,7 @@ namespace Microsoft.BotBuilderSamples
                 }
                 else
                 {
-                    return await createAdaptiveCardInvokeResponseAsync(authentication, state, turnContext,cancellationToken);
+                    return await createAdaptiveCardInvokeResponseAsync(authentication, state, turnContext, cancellationToken);
 
                 }
             }
