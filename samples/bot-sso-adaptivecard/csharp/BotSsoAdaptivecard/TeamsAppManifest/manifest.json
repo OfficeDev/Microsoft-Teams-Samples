@@ -3,7 +3,7 @@
   "manifestVersion": "1.12",
   "version": "1.0.6",
   "id": "<<YOUR-MICROSOFT-APP-ID>>",
-  "packageName": "com.microsoft.teams.extension",
+  "packageName": "com.microsoft.teams.botssoadaptivecard",
   "developer": {
     "name": "Teams App, Inc.",
     "websiteUrl": "https://www.microsoft.com",
@@ -43,6 +43,6 @@
   ],
   "webApplicationInfo": {
     "id": "<<YOUR-MICROSOFT-APP-ID>>",
-    "resource": "api://{{domain-name}}/botid-<<YOUR-MICROSOFT-APP-ID>>"
+    "resource": "api://botid-<<YOUR-MICROSOFT-APP-ID>>"
   }
 }

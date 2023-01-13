@@ -14,18 +14,6 @@
       "size": "Medium",
       "weight": "Bolder"
 
-    },
-    {
-      "type": "TextBlock",
-      "text": "User Name : ${UserName}",
-      "size": "Medium",
-      "weight": "Bolder"
-    },
-    {
-      "type": "TextBlock",
-      "text": "Job Title : ${UserTitle}",
-      "size": "Medium",
-      "weight": "Bolder"
     }
   ],
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",

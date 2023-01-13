@@ -148,7 +148,7 @@ namespace Microsoft.BotBuilderSamples
                 }
                 else
                 {
-                    return await createAdaptiveCardInvokeResponseAsync(authentication, state, turnContext, cancellationToken);
+                    return createAdaptiveCardInvokeResponseAsync(authentication, state);
 
                 }
             }
@@ -167,7 +167,7 @@ namespace Microsoft.BotBuilderSamples
         /// <param name="isBasicRefresh"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        private async Task<InvokeResponse> createAdaptiveCardInvokeResponseAsync(JObject authentication, string state, ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken, bool isBasicRefresh = false, string fileName = "adaptiveCardResponseJson.json")
+        private InvokeResponse createAdaptiveCardInvokeResponseAsync(JObject authentication, string state, bool isBasicRefresh = false, string fileName = "adaptiveCardResponseJson.json")
         {
             //verify token is present or not
 
@@ -185,20 +185,9 @@ namespace Microsoft.BotBuilderSamples
             {
                 authResultData = "Refresh done";
             }
-            // Pull in the data from the Microsoft Graph.
-            string token = authentication["token"].ToString();
-            var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
-            var tokenResource = await userTokenClient.ExchangeTokenAsync(turnContext.Activity.From.Id, _connectionName, turnContext.Activity.ChannelId, new TokenExchangeRequest(null, token), cancellationToken).ConfigureAwait(false);
-            var client = new SimpleGraphClient(tokenResource.Token);
-            var me = await client.GetMeAsync();
-            var title = !string.IsNullOrEmpty(me.JobTitle) ?
-                                me.JobTitle : "Unknown";
-
             var payloadData = new
             {
                 authResult = authResultData,
-                UserName = me.DisplayName,
-                UserTitle = title
             };
 
             var cardJsonstring = template.Expand(payloadData);
