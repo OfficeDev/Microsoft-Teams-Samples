@@ -79,6 +79,8 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |51|Complete Samples|Sample covering multiple scenarios - dialogs, ME, and facebook auth. |[View](/demo%20manifest/Complete-Sample.zip) |
 |52|Messaging extensions - auth and config|Messaging Extension that has a configuration page, accepts search requests and returns results after the user has signed in. |[View](/demo%20manifest/msgext-search-auth-config.zip) |
 |53|Graph API Teams App Installation Life Cycle|This sample illustrates how you can use Teams App Installation Life Cycle by calling Microsoft Graph APIs.|[View](/demo%20manifest/graph-app-installation-lifecycle.zip) |
+|54|App SSO|Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl.|[View](/demo%20manifest/App-SSO.zip) |
+|55|Tabs with Adaptive Cards|Microsoft Teams tab sample code which demonstrates how to Build tabs with Adaptive Cards.|[View](/demo%20manifest/tab-adaptive-card.zip) |
 
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 
