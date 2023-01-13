@@ -83,14 +83,14 @@ namespace Microsoft.BotBuilderSamples
             {
                 string[] path = { ".", "Resources", "options.json" };
                 var member = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
-                var initialAdaptiveCard = GetFirstOptionsAdaptiveCard(path, signInLink, turnContext.Activity.From.Name, member.Id);
+                var initialAdaptiveCard = GetAdaptiveCardWithAuthOptions(path, signInLink, turnContext.Activity.From.Name, member.Id);
                 await turnContext.SendActivityAsync(MessageFactory.Attachment(initialAdaptiveCard), cancellationToken);
             }
             else if (turnContext.Activity.Text.Contains("PerformSSO"))
             {
                 string[] striPath = { ".", "Resources", "AdaptiveCardWithSSOInRefresh.json" };
                 var varMember = await TeamsInfo.GetMemberAsync(turnContext, turnContext.Activity.From.Id, cancellationToken);
-                var varInitialAdaptiveCard = GetFirstOptionsAdaptiveCard(striPath, signInLink, turnContext.Activity.From.Name, varMember.Id);
+                var varInitialAdaptiveCard = GetAdaptiveCardWithAuthOptions(striPath, signInLink, turnContext.Activity.From.Name, varMember.Id);
                 await turnContext.SendActivityAsync(MessageFactory.Attachment(varInitialAdaptiveCard), cancellationToken);
             }
             else
@@ -130,18 +130,17 @@ namespace Microsoft.BotBuilderSamples
                 {
                     authentication = JsonConvert.DeserializeObject<JObject>(value["authentication"].ToString());
                 }
-                
+                //when adaptiveCard/action invoke activity from teams contains 6 digit state in response to nominal sign in flow from bot  
                 string state = null;
                 if (value["state"] != null)
                 {
-                    //when token is absent in the invoke. We can initiate SSO in response to the invoke
                     state = value["state"].ToString();
                 }
                 // authToken and state are absent, handle verb
                 if (authentication == null && state == null)
                 {
                     switch (verb)
-                    {
+                    {   //when token is absent in the invoke. We can initiate SSO in response to the invoke
                         case "initiateSSO":
                             return await initiateSSOAsync(turnContext, cancellationToken);
                     }
@@ -248,7 +247,7 @@ namespace Microsoft.BotBuilderSamples
         /// <param name="name"></param>
         /// <param name="userMRI"></param>
         /// <returns></returns>
-        private Attachment GetFirstOptionsAdaptiveCard(string[] filepath, string signInLink, string name = null, string userMRI = null)
+        private Attachment GetAdaptiveCardWithAuthOptions(string[] filepath, string signInLink, string name = null, string userMRI = null)
         {
             var adaptiveCardJson = File.ReadAllText(Path.Combine(filepath));
             AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
@@ -259,10 +258,6 @@ namespace Microsoft.BotBuilderSamples
             };
             var cardJsonstring = template.Expand(payloadData);
             var card = JsonConvert.DeserializeObject<JObject>(cardJsonstring);
-            if (card["authentication"] != null && card["authentication"]["buttons"] != null && card["authentication"]["buttons"][0] != null)
-            {
-                card["authentication"]["buttons"][0]["value"] = signInLink;
-            }
             var adaptiveCardAttachment = new Attachment()
             {
                 ContentType = "application/vnd.microsoft.card.adaptive",
