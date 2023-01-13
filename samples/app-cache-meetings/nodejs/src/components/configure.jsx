@@ -4,7 +4,6 @@
 // </copyright>
 
 import { useEffect } from "react";
-import { Text } from "@fluentui/react-northstar";
 import * as microsoftTeams from "@microsoft/teams-js";
 
 // Configure page.
@@ -28,9 +27,9 @@ const Configure = props => {
     }, []);
     return (
         <div>
-            <Text size="larger" weight="semibold" content="App Caching" /><br />
-            <Text size="small" content="This sample app only supports app caching in the side panel, but the feature is available in the following contexts (Chats, Channels, Personal Apps) " weight="semibold" /><br />
-            <Text size="small" content="Please click save button to proceed." weight="semibold" />
+            <h2>App Caching</h2><br />
+            <h3>This sample app only supports app caching in the side panel.</h3><br />
+            <p>Please click save button to proceed.</p>
         </div>
     );
 };

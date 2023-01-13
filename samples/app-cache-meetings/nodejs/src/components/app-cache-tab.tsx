@@ -65,36 +65,33 @@ const AppCacheTab = () => {
             return;
         }
 
-        microsoftTeams.app.initialize().then(() => {
+        let app = microsoftTeams.app;
+        app.initialize().then(app.getContext).then((context) => {
 
-            microsoftTeams.app.getContext().then((context) => {
-                try {
-                    if (context.page.frameContext === "sidePanel") {
-                        const loadContext = logItem("Success", "green", "Loaded Teams context");
-                        setItems((Items) => [...Items, loadContext]);
+            if (context.page.frameContext === "sidePanel") {
+                const loadContext = logItem("Success", "green", "Loaded Teams context");
+                setItems((Items) => [...Items, loadContext]);
 
-                        const newLogItem = logItem("FrameContext", "orange", "Frame context is " + context.page.frameContext);
-                        setItems((Items) => [...Items, newLogItem]);
+                const newLogItem = logItem("FrameContext", "orange", "Frame context is " + context.page.frameContext);
+                setItems((Items) => [...Items, newLogItem]);
 
-                        microsoftTeams.teamsCore.registerBeforeUnloadHandler((readyToUnload) => {
-                            const result = beforeUnloadHandler(setItems, readyToUnload);
-                            return result;
-                        });
+                microsoftTeams.teamsCore.registerBeforeUnloadHandler((readyToUnload) => {
+                    const result = beforeUnloadHandler(setItems, readyToUnload);
+                    return result;
+                });
 
-                        microsoftTeams.teamsCore.registerOnLoadHandler((data) => {
-                            loadHandler(setItems, data);
-                            setTitle("Entity Id : " + data.entityId);
-                            console.log(data.contentUrl, data.entityId);
-                        });
+                microsoftTeams.teamsCore.registerOnLoadHandler((data) => {
+                    loadHandler(setItems, data);
+                    setTitle("Entity Id : " + data.entityId);
+                    console.log(data.contentUrl, data.entityId);
+                });
 
-                        const newItem = logItem("Handlers", "orange", "Registered load and before unload handlers. Ready for app caching.");
-                        setItems((Items) => [...Items, newItem]);
-                    }
-                }
-                catch (error) {
-                    console.log(error, "could not registered handlers");
-                }
-            });
+                const newItem = logItem("Handlers", "orange", "Registered load and before unload handlers. Ready for app caching.");
+                setItems((Items) => [...Items, newItem]);
+            }
+
+        }).catch(function (error) {
+            console.log(error, "could not register handlers");
         });
 
         return () => {
