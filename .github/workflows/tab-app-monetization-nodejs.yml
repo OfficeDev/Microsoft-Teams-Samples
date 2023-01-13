@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Deploy - Nodejs Connector-Generic 
+name: Deploy - Nodejs Tab-App-Monetization
 
 on:
   push:
@@ -10,14 +10,14 @@ on:
     branches:
       - main
     paths:
-      - 'samples/connector-generic/**'  
+      - 'samples/tab-app-monetization/**'  
   workflow_dispatch:
   
 env:
     #AZURE_WEBAPP_PATH is the project path
     #Web app name is your azure app service name.
-    AZURE_WEBAPP_PATH: 'samples/connector-generic/nodejs'
-    AZURE_WEBAPP_NAME: 'connector-generic'
+    AZURE_WEBAPP_PATH: 'samples/tab-app-monetization/nodejs'
+    AZURE_WEBAPP_NAME: 'tab-app-monetization'
 
 jobs:
   build:
@@ -64,5 +64,5 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_Connector_Generic }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_Tab_App_Monetization }}
           package: .
