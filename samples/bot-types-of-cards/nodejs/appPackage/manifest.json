@@ -3,7 +3,7 @@
   "manifestVersion": "1.14",
   "version": "1.0.0",
   "id": "{{Microsoft-App-Id}}",
-  "packageName": "com.microsoft.teams.bottypesofcards",
+  "packageName": "com.microsoft.teams.typesofcards",
   "developer": {
     "name": "Microsoft",
     "websiteUrl": "https://www.microsoft.com",
@@ -16,7 +16,7 @@
   },
   "description": {
     "short": "Types Of Cards",
-    "full": "This sample shows the feature where user can send types of cards using bot."
+    "full": "This sample shows the feature where user can send different types of cards using bot."
   },
   "icons": {
     "outline": "outline.png",
@@ -33,6 +33,6 @@
     }
   ],
   "validDomains": [
-	"{{domain-name}}"
+    "{{domain-name}}"
   ]
 }

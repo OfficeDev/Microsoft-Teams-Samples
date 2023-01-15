@@ -2,11 +2,11 @@
   {
     "name": "officedev-microsoft-teams-samples-bot-types-of-cards-nodejs",
     "source": "officeDev",
-    "title": "Types of Cards",
+    "title": "Types of Cards - NodeJS",
     "shortDescription": "Demonstrating the feature where user can send types of cards using bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-types-of-cards/nodejs",
     "longDescription": [
-      "Demonstrating the feature where user can send types of cards using bot."
+      "Demonstrating the feature where user can send different types of cards using bot."
     ],
     "creationDateTime": "2023-01-13",
     "updateDateTime": "2023-01-13",
@@ -36,7 +36,7 @@
         "type": "Image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-types-of-cards/nodejs/Images/TypesOfCards.gif",
-        "alt": "Solution UX showing types of cards in Bots"
+        "alt": "Solution UX showing different types of cards using bot."
       }
     ],
     "authors": [

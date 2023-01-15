@@ -13,7 +13,7 @@ server.use(express.urlencoded({
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
 const { BotFrameworkAdapter } = require('botbuilder');
 
-const { BotSuggestedCards } = require('./bots/botsuggestedCards');
+const { BotTypeOfCards } = require('./bots/botTypeOfCards');
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
@@ -40,10 +40,11 @@ adapter.onTurnError = async (context, error) => {
     // Send a message to the user
     await context.sendActivity('The bot encountered an error or bug.');
     await context.sendActivity('To continue to run this bot, please fix the bot source code.');
+    
 };
 
 // Create the bot that will handle incoming messages.
-const bot = new BotSuggestedCards();
+const bot = new BotTypeOfCards();
 
 server.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);

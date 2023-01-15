@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Demonstrating the feature where user can send types of cards using bot.
+description: Demonstrating the feature where user can send different types of cards using bot.
 products:
 - office-teams
 - office
@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-bot-types-of-cards-nodejs
 ---
 # Types of Cards
 
-This sample shows the feature where user can send types of cards using bot.
+This sample shows the feature where user can send different types of cards using bot.
 
 ## Interaction with app
 
@@ -34,13 +34,12 @@ This sample shows the feature where user can send types of cards using bot.
 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
+**NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
+
 2. Setup for Bot
-- Register Azure AD application resource in Azure portal
 - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-
-	**NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
 3. Setup NGROK  
 Run ngrok - point to port 3978
@@ -58,7 +57,7 @@ Run ngrok - point to port 3978
 
   - In a terminal, navigate to `samples/bot-types-of-cards/nodejs`
 
-  - Update the `.env` configuration file for the bot to use the `MicrosoftAppId` and `MicrosoftAppPassword`.  (Note the MicrosoftAppId is the AppId created in step 1 (Setup AAD app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+  - Update the `.env` configuration file for the bot to use the `{{Microsoft-App-Id}}` and `{{Microsoft-App-Password}}`.  (Note the MicrosoftAppId is the AppId created in step 1 (Setup AAD app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
   - Install modules
 
@@ -109,7 +108,7 @@ Run ngrok - point to port 3978
 
 **Office365 Card:**
 
-![Office365 Connector Card](Images/5.Off356ConnCard.png)
+![Office365 Connector Card](Images/5.Office365ConnectorCard.png)
 
 **SignIn Card:**
 

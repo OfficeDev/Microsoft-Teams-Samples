@@ -6,16 +6,15 @@ const { ActionTypes } = require('botframework-schema');
 const AdaptiveCard = require('../resources/adaptiveCard.json');
 const Office365ConnectorCard = require('../resources/o365ConnectorCard.json');
 const ThumbnailCard = require('../resources/thumbnailCard.json');
-const ReceiptCard = require('../resources/receiptCard.json');
 const ListCard = require('../resources/listCard.json');
 const CollectionCard = require('../resources/collectionsCard.json');
 
-class BotSuggestedCards extends ActivityHandler {
+class BotTypeOfCards extends ActivityHandler {
     constructor() {
         super();
 
         this.onMembersAdded(async (context, next) => {
-            //Send welcome message when app installed
+            // Send welcome message when app installed
             await this.sendWelcomeMessage(context);
 
             // By calling next() you ensure that the next BotHandler is run.
@@ -90,12 +89,12 @@ class BotSuggestedCards extends ActivityHandler {
         // Iterate over all new members added to the conversation.
         for (const idx in activity.membersAdded) {
             if (activity.membersAdded[idx].id !== activity.recipient.id) {
-                const welcomeMessage = `Welcome to Cards. This bot will introduce you to suggested cards. Please select the cards from given options` +
+                const welcomeMessage = `Welcome to Cards. This bot will introduce you to different types of cards. Please select the cards from given options` +
                     'Please select an option:';
 
                 await turnContext.sendActivity(welcomeMessage);
 
-                //send the suggested Cards.
+                // send the suggested Cards.
                 await this.sendSuggestedCards(turnContext);
             }
         }
@@ -111,7 +110,7 @@ class BotSuggestedCards extends ActivityHandler {
         return CardFactory.o365ConnectorCard(Office365ConnectorCard);
     }
 
-    //OAuthCard
+    // OAuthCard
     sendOAuthCard() {
         return CardFactory.oauthCard(
             'Sign In',
@@ -120,7 +119,7 @@ class BotSuggestedCards extends ActivityHandler {
         );
     }
 
-    //SignInCard
+    // SignInCard
     sendSignInCard() {
         return CardFactory.signinCard(
             'Sign In',
@@ -129,12 +128,7 @@ class BotSuggestedCards extends ActivityHandler {
         );
     }
 
-    //ReceiptCard
-    sendReceiptCard() {
-        return CardFactory.receiptCard(ReceiptCard);
-    }
-
-    //HeroCard
+    // HeroCard
     sendHeroCard() {
         return CardFactory.heroCard(
             'BotFramework Hero Card',
@@ -149,7 +143,7 @@ class BotSuggestedCards extends ActivityHandler {
         );
     }
 
-    //CollectionCard
+    // CollectionCard
     sendCollectionCard() {
         return CardFactory.adaptiveCard(CollectionCard);
     }
@@ -194,15 +188,11 @@ class BotSuggestedCards extends ActivityHandler {
                 type: ActionTypes.ImBack,
                 title: 'ThumbnailCard',
                 value: 'ThumbnailCard'
-            },
-            {
-                type: ActionTypes.ImBack,
-                title: 'Cards',
-                value: 'Cards'
             }
+           
         ];
 
-        //Returns a simple text message.
+        // Returns a simple text message.
         var reply = MessageFactory.text("Please select a card from given options. ");
         reply.suggestedActions = { "actions": cardActions, "to": [turnContext.activity.from.id] };
 
@@ -210,4 +200,4 @@ class BotSuggestedCards extends ActivityHandler {
     }
 }
 
-module.exports.BotSuggestedCards = BotSuggestedCards;
+module.exports.BotTypeOfCards = BotTypeOfCards;
