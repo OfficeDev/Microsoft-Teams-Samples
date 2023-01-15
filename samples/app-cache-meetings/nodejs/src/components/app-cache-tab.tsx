@@ -32,6 +32,7 @@ const beforeUnloadHandler = (
     let newItem = logItem("OnBeforeUnload", "purple", "Started");
     setItems((Items) => [...Items, newItem]);
 
+    // dispose resources and cleanup
     newItem = logItem("OnBeforeUnload", "purple", "Completed");
     setItems((Items) => [...Items, newItem]);
 

@@ -1,14 +1,13 @@
-import { Provider, teamsTheme } from '@fluentui/react-northstar';
+import { FluentProvider, teamsLightTheme } from '@fluentui/react-components';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { AppRoute } from './router/router';
 
 ReactDOM.render(
-  <Provider theme={teamsTheme}>
-    <React.StrictMode>
-      <AppRoute />
-    </React.StrictMode>
-  </Provider>,
-  document.getElementById('root')
+    <FluentProvider theme={teamsLightTheme}>
+        <React.StrictMode>
+            <AppRoute />
+        </React.StrictMode>
+    </FluentProvider>, document.getElementById('root')
 );
