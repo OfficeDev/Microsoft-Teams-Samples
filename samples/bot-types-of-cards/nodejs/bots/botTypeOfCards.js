@@ -25,9 +25,9 @@ class BotTypeOfCards extends ActivityHandler {
             const text = context.activity.text;
 
             // Create an array with the valid card options.
-            const suggestedCards = ['AdaptiveCard', 'HeroCard', 'ListCard', 'Office365', 'CollectionCard', 'SignIn', 'ThumbnailCard'];
+            const suggestedCards = ['AdaptiveCard', 'HeroCard', 'ListCard', 'Office365', 'CollectionCard', 'SignIn','OAuth', 'ThumbnailCard'];
 
-            // If the `text` is in the Array, a valid color was selected and send agreement.
+            // If the `text` is in the Array, a valid card was selected and send agreement.
             if (suggestedCards.includes(text)) {
 
                 switch (text) {
@@ -52,7 +52,7 @@ class BotTypeOfCards extends ActivityHandler {
                         break;
 
                     case "SignIn":
-                        await context.sendActivity({ attachments: [this.sendOAuthCard()] });
+                        await context.sendActivity({ attachments: [this.sendSignInCard()] });
                         break;
 
                     case "OAuth":
@@ -113,9 +113,9 @@ class BotTypeOfCards extends ActivityHandler {
     // OAuthCard
     sendOAuthCard() {
         return CardFactory.oauthCard(
+            'OAuth connection', // Replace with the name of your Azure AD connection
             'Sign In',
-            'OAuth connection',// Replace with the name of your Azure AD connection
-            'BotFramework OAuth Card'
+            'BotFramework OAuth Card',
         );
     }
 
