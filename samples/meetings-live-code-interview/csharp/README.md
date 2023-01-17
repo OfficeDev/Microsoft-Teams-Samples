@@ -22,6 +22,11 @@ Now any participant in meeting can write code for the question and same will be 
 
 ![side panel ](MeetingLiveCoding/Images/MeetinLiveCodeInterview.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Live coding interview using Shared meeting stage:** [Manifest](/samples/meetings-live-code-interview/csharp/demo-manifest/meetings-live-code-interview.zip)
+
 ## Prerequisites
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
@@ -141,4 +146,3 @@ sequenceDiagram
 - [Share-app-content-to-stage-api ](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet#share-app-content-to-stage-api)
 - [Enable-and-configure-your-app-for-teams-meetings](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/enable-and-configure-your-app-for-teams-meetings)
 - [Live-share-sdk-overview](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-live-share-overview)
-

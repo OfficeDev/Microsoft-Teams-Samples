@@ -15,11 +15,16 @@ urlFragment: officedev-microsoft-teams-samples-graph-rsc-csharp
 
 # RSC with Graph API
 
-This sample illustrates you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs.
+This sample illustrates you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs.
 
 ## Interaction with app
 
 ![Broadcast from user](RSCDemo/Images/RSCDemo.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**RSC with Graph API:** [Manifest](/samples/graph-rsc/csharp/demo-manifest/graph-rsc.zip)
 
 ## Prerequisites
 
@@ -30,12 +35,12 @@ This sample illustrates you can use [Resource Specific Consent (RSC)](https://do
   dotnet --version
   ```
 
-- [Graph explorer](https://developer.microsoft.com/en-us/graph/graph-explorer)    
+- [Graph explorer](https://developer.microsoft.com//graph/graph-explorer)    
 
 ## Setup
 
 1) Register your app with Microsoft identity platform via the Azure AD portal (AAD app registration)
-    - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2). 
+    - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/graph/auth-register-app-v2). 
 
 2) Clone the repository
    ```bash
@@ -80,5 +85,5 @@ This sample illustrates you can use [Resource Specific Consent (RSC)](https://do
 
 ## Further Reading.
 
-- [Graph RSC](https://learn.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent)
-- [Upload app manifest file](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#load-your-package-into-teams) (zip file) to your team.
+- [Graph RSC](https://learn.microsoft.com/microsoftteams/platform/graph-api/rsc/resource-specific-consent)
+- [Upload app manifest file](https://docs.microsoft.com/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#load-your-package-into-teams) (zip file) to your team.
