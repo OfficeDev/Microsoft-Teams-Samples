@@ -86,7 +86,7 @@ This sample illustrates how to implement SSO authentication for Teams Tab.
   - Set another redirect URI:
     * Select **Add a platform**.
     * Select **Single-page application**.
-    * Enter the **redirect URI** for the app in the following format: https://%ngrokDomain%.ngrok.io/Home/BrowserRedirect
+    * Enter the **redirect URI** for the app in the following format: https://%ngrokDomain%.ngrok.io/Home/BrowserRedirect.
   - Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
 2. Setup NGROK

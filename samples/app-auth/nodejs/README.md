@@ -31,7 +31,22 @@ This sample demonstrates authentication in Microsoft Teams apps.
     ```bash
     ngrok http 3978 --host-header=localhost
     ```
+### Setup for code
 
+ - Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+ - In a terminal, navigate to `samples/app-auth/nodejs`
+
+ - Install modules
+
+    ```bash
+    npm install
+    npm start
+    ```
+    
 3. Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.

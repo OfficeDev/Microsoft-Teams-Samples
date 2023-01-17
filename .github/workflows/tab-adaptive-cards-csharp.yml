@@ -60,7 +60,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'json-tabs'
+          app-name: 'tab-adaptive-cards'
           slot-name: 'production'
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_Tab_Adaptive_Cards}}
           package: .

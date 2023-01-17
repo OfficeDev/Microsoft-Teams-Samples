@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Primitives;
 using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -79,7 +80,7 @@ namespace StaggeredPermission.helper
         /// <param name="httpClientFactory">IHttpClientFactory instance.</param>
         /// <param name="httpContextAccessor">IHttpContextAccessor instance.</param>
         /// <returns>App access token on behalf of user.</returns>
-        public static async Task<string> GetAccessTokenOnBehalfUserAsync(IConfiguration configuration, IHttpClientFactory httpClientFactory, IHttpContextAccessor httpContextAccessor, string accessToken)
+        public static async Task<string> GetAccessTokenOnBehalfUserAsync(IConfiguration configuration, IHttpClientFactory httpClientFactory, IHttpContextAccessor httpContextAccessor, string idToken)
         {
             var tenantId = configuration["AzureAd:TenantId"];
             IConfidentialClientApplication app = ConfidentialClientApplicationBuilder.Create(configuration["AzureAd:MicrosoftAppId"])
@@ -90,8 +91,6 @@ namespace StaggeredPermission.helper
             try
             {
                 var httpContext = httpContextAccessor.HttpContext;
-                //   httpContext.Request.Headers.TryGetValue("Authorization", out StringValues assertion);
-                var idToken = accessToken;
                 UserAssertion assert = new UserAssertion(idToken);
                 List<string> scopes = new List<string>();
                 scopes.Add("https://graph.microsoft.com/User.Read");

@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Provider, teamsTheme } from '@fluentui/react-northstar';
+import { FluentProvider, teamsLightTheme } from '@fluentui/react-components';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider theme={teamsTheme}>
+    <FluentProvider  theme={teamsLightTheme}>
       <App />
-    </Provider>
+    </FluentProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

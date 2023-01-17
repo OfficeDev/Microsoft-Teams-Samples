@@ -2,7 +2,6 @@ var auth;
 
 function msalAuth(authService) {
     auth = authService;
-    alert(a);
     document.getElementById("browser-signin-container").hidden = false;
     document.getElementById("browser-signin-text").hidden = true;
     authService

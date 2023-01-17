@@ -1,6 +1,6 @@
 import React from 'react';
 import { app, meeting } from "@microsoft/teams-js";
-import { Text } from '@fluentui/react-northstar'
+import { Text } from '@fluentui/react-components'
 import ReactJson from 'react-json-view';
 import './tab.css'
 
@@ -20,7 +20,7 @@ const Tab = () => {
     return (
         <div className="tab-container">
             <div className="header-container">
-                <Text weight="bold" size="larger" content="Meeting context" />
+                <Text size={600} weight="bold">{"Meeting context"}</Text> 
             </div>
             <br></br>
             <div>
