@@ -5,7 +5,7 @@
   "id": "<<YOUR-MICROSOFT-APP-ID>>",
   "packageName": "com.teams.sample.teamsconversationbot",
   "developer": {
-    "name": "teamsConversationBot",
+    "name": "TeamsConversationBot",
     "websiteUrl": "https://www.microsoft.com",
     "privacyUrl": "https://www.teams.com/privacy",
     "termsOfUseUrl": "https://www.teams.com/termsofuser"
@@ -15,7 +15,7 @@
     "color": "icon-color.png"
   },
   "name": {
-    "short": "TeamsConversatiobBot",
+    "short": "TeamsConversationBot",
     "full": "TeamsConversationBot"
   },
   "description": {

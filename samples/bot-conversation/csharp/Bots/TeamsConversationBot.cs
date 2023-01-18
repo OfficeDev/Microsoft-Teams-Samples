@@ -392,17 +392,21 @@ namespace Microsoft.BotBuilderSamples.Bots
             }
         }
 
+        // This method is invoked when message sent by user is updated in chat.
         protected override async Task OnTeamsMessageEditAsync(ITurnContext<IMessageUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             var replyActivity = MessageFactory.Text("Message is updated");
             await turnContext.SendActivityAsync(replyActivity, cancellationToken);
         }
 
+        // This method is invoked when message sent by user is undeleted/restored in chat.
         protected override async Task OnTeamsMessageUndeleteAsync(ITurnContext<IMessageUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             var replyActivity = MessageFactory.Text("Message is undeleted");
             await turnContext.SendActivityAsync(replyActivity, cancellationToken);
         }
+
+        // This method is invoked when message sent by user is soft deleted in chat.
         protected override async Task OnTeamsMessageSoftDeleteAsync(ITurnContext<IMessageDeleteActivity> turnContext, CancellationToken cancellationToken)
         {
             var replyActivity = MessageFactory.Text("Message is soft deleted");

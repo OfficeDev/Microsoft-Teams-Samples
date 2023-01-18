@@ -166,7 +166,7 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 - A new screen will be open and the text will be read by default which is mentioned inside the speak property of adaptive card.
 ![immersive-reader-screen](Images/immersiveReaderScreen.png)
 
- 5. **Message Update Events**
+ 5. **Message update events for user messages**
 - You will recieve event updates for message edit/delete features.
 
 - Message is edited

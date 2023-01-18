@@ -71,16 +71,19 @@ class TeamsConversationBot extends TeamsActivityHandler {
             }));
         });
 
+        // This method is invoked when message sent by user is updated in chat.
         this.onTeamsMessageEditEvent(async (context, next) => {
             await context.sendActivity("Message is edited");
             next();
           });
 
+          // This method is invoked when message sent by user is undeleted/restored in chat.
           this.onTeamsMessageUndeleteEvent(async (context, next) => {
             await context.sendActivity("Message is undeleted");
             next();
         });
 
+        // This method is invoked when message sent by user is soft deleted in chat.
         this.onTeamsMessageSoftDeleteEvent(async (context, next) => {
               await context.sendActivity("Message is deleted");
             next();
