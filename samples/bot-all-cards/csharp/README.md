@@ -1,8 +1,9 @@
 ---
 page_type: sample
-description: Type of Cards.
+description: Demonstrating the feature where user can send different types of cards using bot.
 products:
-- dotnet
+- office-teams
+- office
 - office-teams
 languages:
 - csharp
@@ -13,17 +14,17 @@ urlFragment: officedev-microsoft-teams-samples-bot-all-cards-csharp
 
 ---
 
-# Using Cards
+# Types of Cards
 
-Bot Framework v4 using cards bot sample
-
-This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a bot that uses rich cards to enhance your bot design.
+This sample shows the feature where user can send different types of cards using bot.
 
 ## Interaction with app
 
 ![all-cards-sample ](BotAllCards/Images/allBotCardsGif.gif)
 
 ## Prerequisites
+
+- Microsoft Teams is installed and you have an account (not a guest account).
 
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
@@ -35,21 +36,25 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 
 ## Setup
 
-### 1. Setup for Bot
-- Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
+> the Teams service needs to call into the bot.
 
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+
+**NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
+
+2. Setup for Bot
+- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-
 - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-    > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
-### 2. Setup NGROK
-1) Run ngrok - point to port 5000
+3. Setup NGROK 
+1) Run ngrok - point to port 3978
 
     ```bash
-    # ngrok http -host-header=rewrite 5000
+    # ngrok http -host-header=rewrite 3978
     ```
-### 3. Setup for code
+4. Setup for code 
 - Clone the repository
 
     ```bash

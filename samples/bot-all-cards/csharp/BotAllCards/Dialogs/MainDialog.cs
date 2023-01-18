@@ -59,8 +59,6 @@ namespace Microsoft.BotBuilderSamples
         // This method is only called when a valid prompt response is parsed from the user's response to the ChoicePrompt.
         private async Task<DialogTurnResult> SelectCardAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-
-
             _logger.LogInformation("MainDialog.ShowCardStepAsync");
 
             // Cards are sent as Attachments in the Bot Framework.

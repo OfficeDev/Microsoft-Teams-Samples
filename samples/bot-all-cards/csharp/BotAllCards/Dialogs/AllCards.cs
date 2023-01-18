@@ -12,9 +12,9 @@ namespace BotAllCards.Dialogs
     public static class AllCards
     {
         /// <summary>
-        /// Adaptive Card
+        /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
         public static Attachment CreateAdaptiveCardAttachment()
         {
             var paths = new[] { ".", "Resources", "adaptiveCard.json" };
@@ -30,9 +30,9 @@ namespace BotAllCards.Dialogs
         }
 
         /// <summary>
-        /// Hero Card
+        /// This card typically contains a single large image, one or more buttons, and a small amount of text.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
         public static Attachment GetHeroCard()
         {
             var paths = new[] { ".", "Resources", "heroCard.json" };
@@ -48,9 +48,9 @@ namespace BotAllCards.Dialogs
         }
 
         /// <summary>
-        /// Thumbnail Card
+        /// This card typically contains a single thumbnail image, some short text, and one or more buttons.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
         public static Attachment GetThumbnailCard()
         {
             var paths = new[] { ".", "Resources", "heroCard.json" };
@@ -66,9 +66,9 @@ namespace BotAllCards.Dialogs
         }
 
         /// <summary>
-        /// Signin Card
+        /// This card enables a bot to request that a user signs in.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Return Microsoft.Bot.Schema.SigninCard results.</returns>
         public static SigninCard GetSigninCard()
         {
             var signinCard = new SigninCard
@@ -84,9 +84,9 @@ namespace BotAllCards.Dialogs
         }
 
         /// <summary>
-        /// Card collections
+        /// This card collection is used to return multiple items in a single response.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results</returns>
         public static Attachment CollectionsCardAttachment()
         {
             var paths = new[] { ".", "Resources", "collectionsCard.json" };
@@ -102,9 +102,9 @@ namespace BotAllCards.Dialogs
         }
 
         /// <summary>
-        /// Office 365 connector card
+        /// This card has a flexible layout with multiple sections, fields, images, and actions.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Return Microsoft.Bot.Schema.Attachment results</returns>
         public static Attachment Office365ConnectorCard()
         {
             var paths = new[] { ".", "Resources", "o365ConnectorCard.json" };
@@ -120,9 +120,9 @@ namespace BotAllCards.Dialogs
         }
 
         /// <summary>
-        /// OAuth Card
+        /// This card enables a bot to request that a user OAuth Card
         /// </summary>
-        /// <returns></returns>
+        /// <returns>>Return Microsoft.Bot.Schema.Attachment results</returns>
         public static OAuthCard GetOAuthCard()
         {
             var oauthCard = new OAuthCard
@@ -136,9 +136,9 @@ namespace BotAllCards.Dialogs
         }
 
         /// <summary>
-        /// List card
+        /// This card contains a scrolling list of items.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>>Return Microsoft.Bot.Schema.Attachment results</returns>
         public static Attachment CreateListCardAttachment()
         {
             var paths = new[] { ".", "Resources", "listCard.json" };

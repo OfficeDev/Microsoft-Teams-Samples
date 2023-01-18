@@ -1,7 +1,7 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
-  "version": "1.0.6",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.14",
+  "version": "1.0.0",
   "id": "{{Microsoft-App-Id}}",
   "packageName": "com.microsoft.teams.allbotcards",
   "developer": {
@@ -15,12 +15,12 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "All Bot Cards",
-    "full": "All Bot Cards"
+    "short": "Types Of Cards",
+    "full": "Types Of Cards"
   },
   "description": {
-    "short": "Short description for all bot cards.",
-    "full": "Full description of Adaptive, hero, list, Office 365 Connector, receipt, sign in, and thumbnail cards and card collections are supported in bots for Microsoft Teams."
+    "short": "Types Of Cards.",
+    "full": "This sample shows the feature where user can send different types of cards using bot."
   },
   "accentColor": "#FFFFFF",
   "bots": [
@@ -29,13 +29,8 @@
       "scopes": [
         "personal"
       ],
-      "supportsFiles": false,
       "isNotificationOnly": false
     }
-  ],
-  "permissions": [
-    "identity",
-    "messageTeamMembers"
   ],
   "validDomains": [
     "{{domain-name}}"

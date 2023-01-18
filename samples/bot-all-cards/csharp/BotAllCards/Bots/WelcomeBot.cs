@@ -19,6 +19,13 @@ namespace Microsoft.BotBuilderSamples
         {
         }
 
+        /// <summary>
+        /// Override this in a derived class to provide logic for when members other than the bot join the conversation, such as your bot's welcome logic.
+        /// </summary>
+        /// <param name="membersAdded"></param>
+        /// <param name="turnContext"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             foreach (var member in membersAdded)

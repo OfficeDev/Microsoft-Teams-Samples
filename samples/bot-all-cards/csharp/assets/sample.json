@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-bot-all-cards-csharp",
     "source": "officeDev",
     "title": "Bot All Cards",
-    "shortDescription": "Adaptive, hero, list, Office 365 Connector, receipt, sign in, and thumbnail cards and card collections are supported in bots for Microsoft Teams.",
+    "shortDescription": "Demonstrating the feature where user can send different types of cards using bot.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-all-cards/csharp",
     "longDescription": [
-      "Adaptive, hero, list, Office 365 Connector, receipt, sign in, and thumbnail cards and card collections are supported in bots for Microsoft Teams.They're based on cards defined by the Bot Framework, but Teams doesn't support all Bot Framework cards and has added some of its own."
+      "Demonstrating the feature where user can send different types of cards using bot."
     ],
     "creationDateTime": "2023-11-01",
     "updateDateTime": "2023-11-01",
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-all-cards/csharp/BotAllCards/Images/allBotCardsGif.gif",
-        "alt": "Solution UX showing types of cards"
+        "alt": "Solution UX showing different types of cards using bot."
       }
     ],
     "authors": [

@@ -30,6 +30,15 @@ namespace Microsoft.BotBuilderSamples
             Logger = logger;
         }
 
+        /// <summary>
+        /// Handles an incoming activity.
+        /// </summary>
+        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
+        /// <remarks>
+        /// Reference link: https://docs.microsoft.com/en-us/dotnet/api/microsoft.bot.builder.activityhandler.onturnasync?view=botbuilder-dotnet-stable.
+        /// </remarks>
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
         {
             await base.OnTurnAsync(turnContext, cancellationToken);
@@ -39,6 +48,16 @@ namespace Microsoft.BotBuilderSamples
             await UserState.SaveChangesAsync(turnContext, false, cancellationToken);
         }
 
+        /// <summary>
+        /// Handle when a message is addressed to the bot.
+        /// </summary>
+        /// <param name="turnContext">Context object containing information cached for a single turn of conversation with a user.</param>
+        /// <param name="cancellationToken">Propagates notification that operations should be canceled.</param>
+        /// <returns>A Task resolving to either a login card or the adaptive card of the Reddit post.</returns>
+        /// <remarks>
+        /// For more information on bot messaging in Teams, see the documentation
+        /// https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/conversations/conversation-basics?tabs=dotnet#receive-a-message .
+        /// </remarks>
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             Logger.LogInformation("Running dialog with Message Activity.");
