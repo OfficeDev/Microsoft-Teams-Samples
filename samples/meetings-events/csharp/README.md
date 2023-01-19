@@ -26,7 +26,7 @@ The feature shown in this sample is currently available in public developer prev
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   ```bash
   # determine dotnet version

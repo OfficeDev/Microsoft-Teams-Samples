@@ -10,7 +10,7 @@ extensions:
   contentType: samples
   technologies:
   - Connectors
-  createdDate: "01/16/2018 10:21:42 PM"
+  createdDate: "12/02/2022 10:21:42 PM"
 urlFragment: officedev-microsoft-teams-samples-connector-todo-notification-csharp
 ---
 
@@ -19,13 +19,21 @@ urlFragment: officedev-microsoft-teams-samples-connector-todo-notification-cshar
 This application simulates a real task management system and allows users to create and view tasks. The content is randomly generated to simulate how notification can be sent into Microsoft Teams channel using connector.
 
 **Interaction with bot**
-![Connector_Todo](TeamsToDoAppConnector/Images/connector_todo_notification_csharp.gif) 
+![Connector_Todo](Images/connector_todo_notification_csharp.gif) 
 
 ## Prerequisites
 The minimum prerequisites to run this sample are:
 * The latest update of Visual Studio. You can download the community version [here](http://www.visualstudio.com) for free.
 * An Office 365 account with access to Microsoft Teams, with [sideloading enabled](https://msdn.microsoft.com/en-us/microsoft-teams/setup).
-* If you want to run this code locally, use a tunnelling service. These instructions assume you are using [ngrok](https://ngrok.com/). 
+* [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0.
+
+  determine dotnet version
+  ```bash
+  dotnet --version
+  ```
+* [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+  
+* [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account 
 
 >**Note**: some features in the sample require that you using [Public Developer Preview mode](https://docs.microsoft.com/en-us/microsoftteams/platform/resources/dev-preview/developer-preview-intro) in Microsoft Teams.
 
@@ -93,37 +101,37 @@ The minimum prerequisites to run this sample are:
 ## Running the sample
 
 **Setup your App in Teams**
-![Setup App](TeamsToDoAppConnector/Images/1.Setup.png)
+![Setup App](Images/1.Setup.png)
 
 **Setup Connector**
-![Setup Connector](TeamsToDoAppConnector/Images/2.click_setup_connector.png)
+![Setup Connector](Images/2.click_setup_connector.png)
 
 **Select Update/Create**
-![Selecting Update/Create](TeamsToDoAppConnector/Images/5.select_update.png)
+![Selecting Update/Create](Images/5.select_update.png)
 
 **Configured**
-![Configured](TeamsToDoAppConnector/Images/7.connector_charp_configured.png)
+![Configured](Images/7.connector_charp_configured.png)
 
 **Connector added successfully in Team's channel**
-![Task manager portal](TeamsToDoAppConnector/Images/8.welcome_message_on_conversation.png)
+![Task manager portal](Images/8.welcome_message_on_conversation.png)
 
 **Task manager portal** => **Create new task**
-![New Task Creation](TeamsToDoAppConnector/Images/9.creating_new_task.png)
+![New Task Creation](Images/9.creating_new_task.png)
 
 **Task manager portal** => **Task Details**
-![Task Details](TeamsToDoAppConnector/Images/10.after_creation_task_details.png)
+![Task Details](Images/10.after_creation_task_details.png)
 
 **Task manager portal** => **Task List**
-![Task List](TeamsToDoAppConnector/Images/11.task_list.png)
+![Task List](Images/11.task_list.png)
 
 **Notification Of Task**
-![Notification Of Task](TeamsToDoAppConnector/Images/12.notification_of_task_in_channel.png)
+![Notification Of Task](Images/12.notification_of_task_in_channel.png)
 
 **Update From Notification Card**
-![Update From Notification Card](TeamsToDoAppConnector/Images/13.update_title_from_channel.png)
+![Update From Notification Card](Images/13.update_title_from_channel.png)
 
 **Updated Notification**
-![Updated Message](TeamsToDoAppConnector/Images/14.task_title_updated.png)
+![Updated Message](Images/14.task_title_updated.png)
 
 
 ## Further Information

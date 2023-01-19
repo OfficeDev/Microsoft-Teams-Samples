@@ -53,7 +53,6 @@ namespace TabWithAdpativeCardFlow.Bots
                 if (tokenResponse == null || string.IsNullOrEmpty(tokenResponse.Token))
                 {
                     // There is no token, so the user has not signed in yet.
-
                     var resource = await userTokenClient.GetSignInResourceAsync(_connectionName, turnContext.Activity as Activity, null, cancellationToken);
 
                     // Retrieve the OAuth Sign in Link to use in the MessagingExtensionResult Suggested Actions

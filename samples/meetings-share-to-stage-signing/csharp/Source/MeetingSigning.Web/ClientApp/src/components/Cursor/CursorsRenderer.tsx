@@ -1,9 +1,9 @@
-import { EphemeralPresenceUser } from '@microsoft/live-share';
+import { LivePresenceUser } from '@microsoft/live-share';
 import { CursorLocationEvent } from 'hooks';
 import { Cursor } from './Cursor';
 
 export interface CursorsRendererProps {
-  cursors: EphemeralPresenceUser<CursorLocationEvent>[];
+  cursors: LivePresenceUser<CursorLocationEvent>[];
   parentBoundingBox: DOMRect | undefined;
 }
 

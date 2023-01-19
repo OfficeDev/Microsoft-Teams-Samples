@@ -71,6 +71,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
     Enable implicit grant by checking the following boxes:  
     ✔ ID Token  
     ✔ Access Token  
+    ![AppRegistrations](Images/AppRegistrations.png)
    - Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
 2) Setup for Bot
@@ -84,7 +85,6 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. A channel/group tab d
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
     - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
 
--  [Create an Azure AD App registration to support SSO and the User.Read Graph API](https://aka.ms/teams-toolkit-sso-appreg)
 
 3. Setup NGROK
 

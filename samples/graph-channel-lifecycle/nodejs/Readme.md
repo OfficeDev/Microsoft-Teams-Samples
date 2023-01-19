@@ -21,7 +21,6 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
    
   ![](Images/GraphChannelLifeCycleModule.gif)
 
-
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
@@ -32,19 +31,15 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
 ## Setup.
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
   - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2).
-2. Setup for Bot
-- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 **NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
 
-3. Setup NGROK
+2. Setup NGROK
   -  Run ngrok - point to port 3978
 
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
-4. Setup for code
+3. Setup for code
   - Clone the repository
 
     ```bash
@@ -52,7 +47,7 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
     ```
   - In a terminal, navigate to `samples/graph-channel-lifecycle/nodejs
  
- - Update the `.env` configuration for the bot to use the `ClientId` and `ClientSecret` (Note the MicrosoftAppId is the AppId created in step 1 (Setup for Bot), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+ - Update the `.env` configuration with the Microsoft `ClientId` and `ClientSecret`
 
 - Install modules
 
@@ -64,7 +59,7 @@ This sample show the [Channel](https://docs.microsoft.com/en-us/graph/api/resour
     ```bash
     npm start
     ```
- 5. Setup Manifest for Teams
+ 4. Setup Manifest for Teams
 
 - **This step is specific to Teams.**
     - Edit the `manifest.json` contained in the `teamsManifest/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)

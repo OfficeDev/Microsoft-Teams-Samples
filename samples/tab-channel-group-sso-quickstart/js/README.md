@@ -30,7 +30,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are sco
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
   
 ## Setup
-  
+
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
   - On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the .env file at both client and server.
@@ -77,7 +77,7 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are sco
     
    In the new Azure Bot resource in the Portal, 
     - Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path
+    - In Settings/Configuration/Messaging endpoint, enter the current `https` URL you were given by running ngrok. Append with the path `/api/messages`
     
  3. Setup NGROK
    - Run ngrok - point to port 3978
@@ -98,18 +98,8 @@ Tabs are Teams-aware webpages embedded in Microsoft Teams. Personal tabs are sco
     ```bash
     npm install
     ```
-    
-- Build and Run
-You can build and run the project from the command line or an IDE:
-
--Navigate to the Project root folder
-- uild Client
-    - Open terminal
-    - Install pacakge with npm install
-    - npm run build
 - Run Client
-    - Open new terminal
-    - npm start
+    - Run `npm start` command in terminal
     - The client will start running on 3000 port
 - Run Server
     - Open new terminal
@@ -118,7 +108,7 @@ You can build and run the project from the command line or an IDE:
     - npm start
     - The server will start running on 5000 port
     
-5 Setup Manifest for Teams
+5. Setup Manifest for Teams
 
 - **This step is specific to Teams.**
     - Edit the `manifest.json` contained in the `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)

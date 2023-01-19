@@ -87,22 +87,26 @@ namespace AppCompleteAuth.helper
                                                 .WithClientSecret(configuration["AzureAd:MicrosoftAppPassword"])
                                                 .WithAuthority($"https://login.microsoftonline.com/{tenantId}")
                                                 .Build();
-           
+
             try
             {
                 var httpContext = httpContextAccessor.HttpContext;
                 httpContext.Request.Headers.TryGetValue("Authorization", out StringValues assertion);
                 var idToken = assertion.ToString().Split(" ")[1];
                 UserAssertion assert = new UserAssertion(idToken);
-                List<string> scopes = new List<string>();
-                scopes.Add("https://graph.microsoft.com/User.Read");
+                List<string> scopes = new List<string>
+                {
+                    "User.Read"
+                };
+
                 var responseToken = await app.AcquireTokenOnBehalfOf(scopes, assert).ExecuteAsync();
 
                 return responseToken.AccessToken.ToString();
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                Console.WriteLine(ex);
+                return null;
             }
         }
 

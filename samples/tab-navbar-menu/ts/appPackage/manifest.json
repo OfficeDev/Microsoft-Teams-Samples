@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.0",
+  "id": "{{GUID}}",
+  "packageName": "com.microsoft.teams.extension",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuser"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Nav-bar menu in personal tab.",
+    "full": "Nav-bar menu in personal tab."
+  },
+  "description": {
+    "short": "Show Nav-bar menu in personal tab.",
+    "full": "Show Nav-bar menu in personal tab."
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "index",
+      "name": "Personal Tab",
+      "contentUrl": "https://{{domain-name}}/tab",
+      "websiteUrl": "https://{{domain-name}}/tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "validDomains": [
+    "{{domain-name}}"
+  ]
+}

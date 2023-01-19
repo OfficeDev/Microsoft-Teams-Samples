@@ -1,10 +1,11 @@
 ---
 page_type: sample
-description: This sample demos linking user's AAD id with Facebook and google account of user from bot, ME and tab.
+description: This sample demos linking user's Azure AD ID with Facebook and Google account of user from bot, ME and tab.
 products:
 - office-teams
 - office
 - office-365
+- microsoft-teams
 languages:
 - csharp
 extensions:
@@ -30,7 +31,7 @@ There are example in-memory and Azure implementations of the token persistance.
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash

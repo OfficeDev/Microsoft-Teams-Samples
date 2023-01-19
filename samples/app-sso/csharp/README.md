@@ -149,17 +149,18 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 
 13. Navigate to **Authentication**
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
-    Set a redirect URI:
+    - Set a redirect URI:
+    * Select **Add a platform**.
+    * Select **Single-page application**.
+    * Enter the **redirect URI** for the app in the following format: 
+      1) https://%ngrokDomain%.ngrok.io/Auth/End
+
+    - Set another redirect URI:
     * Select **Add a platform**.
     * Select **web**.
     * Enter the **redirect URI** for the app in the following format: 
-    1) https://%ngrokDomain%.ngrok.io/Auth/End
-    2) https://token.botframework.com/.auth/web/redirect
+      1) https://token.botframework.com/.auth/web/redirect
     
-    Enable implicit grant by checking the following boxes:  
-    ✔ ID Token  
-    ✔ Access Token  
-![Authentication](Images/Authentication.png)
 14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
  ### 5. Setup Manifest for Teams
