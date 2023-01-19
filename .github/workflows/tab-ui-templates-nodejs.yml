@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Deploy - Nodejs Meetings-Audio-State
+name: Deploy - Nodejs Tab-Ui-Templates
 
 on:
   push:
@@ -10,14 +10,14 @@ on:
     branches:
       - main
     paths:
-      - 'samples/meetings-audio-state/**'  
+      - 'samples/tab-ui-templates/**'  
   workflow_dispatch:
   
 env:
     #AZURE_WEBAPP_PATH is the project path
     #Web app name is your azure app service name.
-    AZURE_WEBAPP_PATH: 'samples/meetings-audio-state/nodejs'
-    AZURE_WEBAPP_NAME: 'meetings-audio-state'
+    AZURE_WEBAPP_PATH: 'samples/tab-ui-templates/ts'
+    AZURE_WEBAPP_NAME: 'tab-ui-templates'
 
 jobs:
   build:
@@ -32,7 +32,7 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v1
         with:
-          node-version: '16.x'
+          node-version: '18.x'
           
       - name: npm install, build, and test
         run: |
@@ -64,5 +64,5 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_Meetings_Audio_State }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_Tab_Ui_Templates }}
           package: .
