@@ -104,7 +104,7 @@ namespace Microsoft.BotBuilderSamples
                             new AdaptiveChoice() { Title = data.Option3, Value = data.Option3 },
                         },
                     },
-                  new AdaptiveTextBlock("Sending card on behalf of user is set to Testing YMAL:"+$"{data.UserAttributionSelect}") {
+                  new AdaptiveTextBlock("Sending card on behalf of user is set to:"+$"{data.UserAttributionSelect}") {
                       Id = "AttributionChoice"
                   },
                 },

@@ -79,7 +79,7 @@ namespace Microsoft.BotBuilderSamples.Bots
             }
             else
             {
-                await turnContext.SendActivityAsync("Welcome to Microsoft Teams conversationUpdate events demo bot. Testing YAML");
+                await turnContext.SendActivityAsync("Welcome to Microsoft Teams conversationUpdate events demo bot.");
             }
         }
 
