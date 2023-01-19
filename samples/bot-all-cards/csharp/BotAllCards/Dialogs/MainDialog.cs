@@ -42,7 +42,6 @@ namespace Microsoft.BotBuilderSamples
         private async Task<DialogTurnResult> ShowAllCardAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
 
-
             // Create the PromptOptions which contain the prompt and re-prompt messages.
             // PromptOptions also contains the list of choices available to the user.
             var options = new PromptOptions()
