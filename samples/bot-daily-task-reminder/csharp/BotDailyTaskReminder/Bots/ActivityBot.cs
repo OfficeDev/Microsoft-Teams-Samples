@@ -83,7 +83,7 @@ namespace BotDailyTaskReminder.Bots
             {
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
-                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample you can schedule a recurring task and get reminder on the scheduled time.(use command 'create-reminder'). - Testing YMAL"), cancellationToken);
+                    await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample you can schedule a recurring task and get reminder on the scheduled time.(use command 'create-reminder')."), cancellationToken);
                 }
             }
         }

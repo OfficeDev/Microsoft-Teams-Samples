@@ -15,7 +15,7 @@ namespace ReceiveMessagesWithRSC.Bots
         /// <summary>
         /// Sample description text.
         /// </summary>
-        private const string SampleDescription = "With this sample your bot can receive user messages across standard channels in a team without being @mentioned - Testing YMAL";
+        private const string SampleDescription = "With this sample your bot can receive user messages across standard channels in a team without being @mentioned";
 
         /// <summary>
         /// Options text.
