@@ -31,13 +31,15 @@ namespace Microsoft.BotBuilderSamples
         protected readonly Dialog _dialog;
         protected readonly ILogger _logger;
         protected readonly BotState _userState;
-        private readonly string _connectionName = "<<YOUR-CONNECTION-NAME>>";
-        public DialogBot(ConversationState conversationState, UserState userState, T dialog, ILogger<DialogBot<T>> logger)
+        protected string _connectionName { get; }
+
+        public DialogBot(ConversationState conversationState, UserState userState, T dialog, ILogger<DialogBot<T>> logger, string connectionName)
         {
             _conversationState = conversationState;
             _userState = userState;
             _dialog = dialog;
             _logger = logger;
+            _connectionName = connectionName;
         }
 
         /// <summary>
@@ -109,7 +111,6 @@ namespace Microsoft.BotBuilderSamples
         {
             if (turnContext.Activity.Name == "adaptiveCard/action")
             {
-
                 if (turnContext.Activity.Value == null)
                     return null;
 
@@ -125,11 +126,14 @@ namespace Microsoft.BotBuilderSamples
 
                 //When adaptiveCard/action invoke activity from teams contains sso token
                 string verb = actiondata["verb"].ToString();
+
                 JObject authentication = null;
+
                 if (value["authentication"] != null)
                 {
                     authentication = JsonConvert.DeserializeObject<JObject>(value["authentication"].ToString());
                 }
+
                 //when adaptiveCard/action invoke activity from teams contains 6 digit state in response to nominal sign in flow from bot  
                 string state = null;
                 if (value["state"] != null)

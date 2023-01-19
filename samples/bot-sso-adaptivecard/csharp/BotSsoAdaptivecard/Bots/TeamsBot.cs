@@ -6,8 +6,8 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace Microsoft.BotBuilderSamples
@@ -15,8 +15,8 @@ namespace Microsoft.BotBuilderSamples
     // This bot is derived (view DialogBot<T>) from the TeamsActivityHandler class currently included as part of this sample.
     public class TeamsBot : DialogBot<MainDialog>
     {
-        public TeamsBot(ConversationState conversationState, UserState userState, MainDialog dialog, ILogger<DialogBot<MainDialog>> logger)
-            : base(conversationState, userState, dialog, logger)
+        public TeamsBot(ConversationState conversationState, UserState userState, MainDialog dialog, ILogger<DialogBot<MainDialog>> logger, IConfiguration configuration)
+            : base(conversationState, userState, dialog, logger, configuration["ConnectionName"])
         {
         }
 

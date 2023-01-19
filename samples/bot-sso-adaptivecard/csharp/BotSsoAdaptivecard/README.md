@@ -69,13 +69,11 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
   - Press `F5` to run the project
 
 1. Update the appsettings.json configuration for the bot to use the MicrosoftAppId (Microsoft App Id), MicrosoftAppPassword (App Password) and connectionName (OAuth Connection Name).
-2. Navigate to samples/bot-sso-adaptivecard/csharp/BotSsoAdaptivecard/Bots/DialogBot.cs
-   - On line 35, replace `YOUR-CONNECTION-NAME`.
-3. Navigate to samples\bot-sso-adaptivecard\csharp\BotSsoAdaptivecard\Resources\adaptiveCardResponseJson.json
+2. Navigate to samples\bot-sso-adaptivecard\csharp\BotSsoAdaptivecard\Resources\adaptiveCardResponseJson.json
    - On line 32, replace `<<YOUR-MICROSOFT-APP-ID>>`.
-4. Navigate to samples\bot-sso-adaptivecard\csharp\BotSsoAdaptivecard\Resources\AdaptiveCardWithSSOInRefresh.json
-   - *Update everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>`
-5. Navigate to samples\bot-sso-adaptivecard\csharp\BotSsoAdaptivecard\Resources\options.json
+3. Navigate to samples\bot-sso-adaptivecard\csharp\BotSsoAdaptivecard\Resources\AdaptiveCardWithSSOInRefresh.json
+   - *Update everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` and Update On line 12, replace `<<YOUR-CONNECTION-NAME>>`.
+4. Navigate to samples\bot-sso-adaptivecard\csharp\BotSsoAdaptivecard\Resources\options.json
    - On line 29, replace `<<YOUR-MICROSOFT-APP-ID>>`.
 
 **Bot Configuration:**
@@ -135,7 +133,7 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
 **This step is specific to Teams.**
    - **Edit** the `manifest.json` contained in the  `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
    - **Edit** the `manifest.json` for `validDomains` and `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-   - **Edit** he manifest.json for webApplicationInfo resource "api://botid-<<YOUR-MICROSOFT-APP-ID>>" with base Url of your domain. E.g. if you are using ngrok it would be https://1234.ngrok.io then your domain-name will be "api://botid-<<YOUR-MICROSOFT-APP-ID>>".
+   - **Edit** he manifest.json for webApplicationInfo resource "api://botid-`<<YOUR-MICROSOFT-APP-ID>>`" with base Url of your domain. E.g. if you are using ngrok it would be https://1234.ngrok.io then your domain-name will be "api://botid-`<<YOUR-MICROSOFT-APP-ID>>`".
    - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` folder into a `manifest.zip`.(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
    - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app to your org's app catalog'". Browse to and Open the .zip file. At the next dialog, click the Add button.)
 
