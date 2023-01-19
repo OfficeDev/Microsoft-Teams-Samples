@@ -82,6 +82,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |54|App SSO|Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl.|[View](/demo%20manifest/App-SSO.zip) |
 |55|Tabs with Adaptive Cards|Microsoft Teams tab sample code which demonstrates how to Build tabs with Adaptive Cards.|[View](/demo%20manifest/tab-adaptive-card.zip) |
 |56|Graph API Teams App Catalog Life Cycle|This sample illustrates how you programmatically manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs.|[View](/demo%20manifest/graph-appcatalog-lifecycle.zip) |
+|57|Meetings Stage View|Enable and configure your apps for Teams meetings to use in stage view.|[View](/demo%20manifest/Meeting-stage-view.zip) |
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 
 The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) is an extension on Visual Studio Code and Visual Studio. It enable Teams developers to create and deploy Teams apps with integrated identity, access to cloud storage, data from Microsoft Graph, and other services in Azure and M365 with a "zero-configuration" approach to the developer experience. And [Sample Apps](https://github.com/OfficeDev/TeamsFx-Samples) are provided in Teams Toolkit. Download and try it by today! [Learn more about Teams Toolkit](https://docs.microsoft.com/en-us/microsoftteams/platform/toolkit/visual-studio-code-overview).
