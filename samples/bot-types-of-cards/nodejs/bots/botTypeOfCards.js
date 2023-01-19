@@ -43,10 +43,6 @@ class BotTypeOfCards extends ActivityHandler {
                         await context.sendActivity({ attachments: [this.sendOffice356Card()] });
                         break;
 
-                    case "ReceiptCard":
-                        await context.sendActivity({ attachments: [ReceiptCard] });
-                        break;
-
                     case "ThumbnailCard":
                         await context.sendActivity({ attachments: [ThumbnailCard] });
                         break;
@@ -100,35 +96,45 @@ class BotTypeOfCards extends ActivityHandler {
         }
     }
 
-    // Adaptive Card 
+    /**
+    * Sends a Adaptive Card 
+    */
     sendAdaptiveCard() {
         return CardFactory.adaptiveCard(AdaptiveCard);
     }
 
-    // Office356 Connector Card 
+    /**
+    * Sends a Office356 Connector Card  
+    */
     sendOffice356Card() {
         return CardFactory.o365ConnectorCard(Office365ConnectorCard);
     }
 
-    // OAuthCard
+    /**
+    * Sends a OAuthCard  
+    */
     sendOAuthCard() {
         return CardFactory.oauthCard(
-            'OAuth connection', // Replace with the name of your Azure AD connection
+            'OAuth connection', // Replace with the name of your Azure bot connection name
             'Sign In',
             'BotFramework OAuth Card',
         );
     }
 
-    // SignInCard
+    /**
+    * Sends a SignInCard  
+    */
     sendSignInCard() {
         return CardFactory.signinCard(
             'Sign In',
-            'Azure AD connection', // Replace with the name of your Azure AD connection
+            'https://login.microsoftonline.com',
             'BotFramework SignIn Card'
         );
     }
 
-    // HeroCard
+    /**
+    * Sends a HeroCard  
+    */
     sendHeroCard() {
         return CardFactory.heroCard(
             'BotFramework Hero Card',
@@ -143,13 +149,15 @@ class BotTypeOfCards extends ActivityHandler {
         );
     }
 
-    // CollectionCard
+    /**
+    * Sends a CollectionCard  
+    */
     sendCollectionCard() {
         return CardFactory.adaptiveCard(CollectionCard);
     }
 
     /**
-   * Send suggested Carfs to the user.
+   * Send suggested Cards to the user.
    * @param {TurnContext} turnContext A TurnContext instance containing all the data needed for processing this conversation turn.
    */
     async sendSuggestedCards(turnContext) {
@@ -189,7 +197,6 @@ class BotTypeOfCards extends ActivityHandler {
                 title: 'ThumbnailCard',
                 value: 'ThumbnailCard'
             }
-           
         ];
 
         // Returns a simple text message.
