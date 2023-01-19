@@ -12,9 +12,9 @@ namespace Microsoft.BotBuilderSamples
 {
     // RichCardsBot prompts a user to select a Rich Card and then returns the card
     // that matches the user's selection.
-    public class WelcomeBot : DialogBot<MainDialog>
+    public class TeamsBot : DialogBot<MainDialog>
     {
-        public WelcomeBot(ConversationState conversationState, UserState userState, MainDialog dialog, ILogger<DialogBot<MainDialog>> logger)
+        public TeamsBot(ConversationState conversationState, UserState userState, MainDialog dialog, ILogger<DialogBot<MainDialog>> logger)
             : base(conversationState, userState, dialog, logger)
         {
         }

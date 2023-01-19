@@ -7,7 +7,7 @@ using Microsoft.Bot.Schema;
 using Microsoft.Bot.Schema.Teams;
 using Newtonsoft.Json;
 
-namespace BotAllCards.Dialogs
+namespace BotAllCards.Cards
 {
     public static class AllCards
     {
@@ -123,12 +123,12 @@ namespace BotAllCards.Dialogs
         /// This card enables a bot to request that a user OAuth Card
         /// </summary>
         /// <returns>>Return Microsoft.Bot.Schema.Attachment results</returns>
-        public static OAuthCard GetOAuthCard()
+        public static OAuthCard GetOAuthCard(string ConnectionName)
         {
             var oauthCard = new OAuthCard
             {
                 Text = "BotFramework OAuth Card",
-                ConnectionName = "YOUR-CONNECTION-NAME", // Replace with the name of your Azure AD connection.
+                ConnectionName = ConnectionName,
                 Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, "Sign In", value: "https://login.microsoftonline.com/") },
             };
 
@@ -152,6 +152,6 @@ namespace BotAllCards.Dialogs
 
             return listCardAttachment;
         }
-        
+
     }
 }

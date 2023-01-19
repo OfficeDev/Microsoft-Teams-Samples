@@ -60,7 +60,7 @@ This sample shows the feature where user can send different types of cards using
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
- Run the bot from a terminal or from Visual Studio:
+  Run the bot from a terminal or from Visual Studio:
 
   A) From a terminal, navigate to `samples/bot-all-cards/csharp/BotAllCards`
 
@@ -77,7 +77,27 @@ This sample shows the feature where user can send different types of cards using
   - Select `BotAllCards.csproj` file
   - Press `F5` to run the project   
 
-### 4. Setup Manifest for Teams
+5. App Registrations
+
+1) Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2) Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+3) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
+4) Navigate to **Authentication**
+    If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
+    
+    - Set another redirect URI:
+    * Select **Add a platform**.
+    * Select **web**.
+    * Enter the **redirect URI** for the app in the following format: 
+      1) https://token.botframework.com/.auth/web/redirect
+
+![Authentication](BotAllCards/Images/Authentication.png)
+    
+5) Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
 - **This step is specific to Teams.**
 
@@ -91,7 +111,12 @@ This sample shows the feature where user can send different types of cards using
   - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
   - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
   - `{{ Microsoft-App-TenantId }}` - Generated from Step 1 is the tenantId id
-  
+  - `{{ ConnectionName }}` - ConnectionName (OAuth Connection Name) 
+
+  **Bot OAuth Connection:**
+
+  ![Installapp](BotAllCards/Images/OauthConnection.png)
+
 5) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
@@ -121,8 +146,6 @@ This sample shows the feature where user can send different types of cards using
 ![HeroCard](BotAllCards/Images/HeroCard.png)
 
 **OAuth Card:**
-  - Navigate to samples\bot-all-cards\csharp\BotAllCards\Dialogs\AllCards.cs
-  - On line 131, replace `YOUR-CONNECTION-NAME`.
 
 ![OAuthCard](BotAllCards/Images/OAuthCard.png)
 
@@ -145,7 +168,6 @@ This sample shows the feature where user can send different types of cards using
 **Connector Card:**
 
 ![ConnectorCards](BotAllCards/Images/ConnectorCards.png)
-
 
 ## Deploy the bot to Azure
 

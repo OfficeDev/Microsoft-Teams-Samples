@@ -33,7 +33,7 @@ builder.Services.AddSingleton<ConversationState>();
 builder.Services.AddSingleton<MainDialog>();
 
 // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-builder.Services.AddTransient<IBot, WelcomeBot>();
+builder.Services.AddTransient<IBot, TeamsBot>();
 
 var app = builder.Build();
 

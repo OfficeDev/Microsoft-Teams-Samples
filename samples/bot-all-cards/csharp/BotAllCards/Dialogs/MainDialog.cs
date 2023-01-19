@@ -5,11 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using BotAllCards.Dialogs;
+using BotAllCards.Cards;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Choices;
 using Microsoft.Bot.Schema;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
@@ -17,12 +18,12 @@ namespace Microsoft.BotBuilderSamples
 {
     public class MainDialog : ComponentDialog
     {
-        protected readonly ILogger _logger;
+        protected string ConnectionName { get; }
 
-        public MainDialog(ILogger<MainDialog> logger)
-            : base(nameof(MainDialog))
+        public MainDialog(IConfiguration configuration)
+             : base(configuration["ConnectionName"])
         {
-            _logger = logger;
+            ConnectionName = configuration["ConnectionName"];
 
             // Define the main dialog and its related components.
             AddDialog(new ChoicePrompt(nameof(ChoicePrompt)));
@@ -40,7 +41,7 @@ namespace Microsoft.BotBuilderSamples
         // 2. Re-prompts the user when an invalid input is received.
         private async Task<DialogTurnResult> ShowAllCardAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("MainDialog.ChoiceCardStepAsync");
+
 
             // Create the PromptOptions which contain the prompt and re-prompt messages.
             // PromptOptions also contains the list of choices available to the user.
@@ -59,8 +60,6 @@ namespace Microsoft.BotBuilderSamples
         // This method is only called when a valid prompt response is parsed from the user's response to the ChoicePrompt.
         private async Task<DialogTurnResult> SelectCardAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("MainDialog.ShowCardStepAsync");
-
             // Cards are sent as Attachments in the Bot Framework.
             // So we need to create a list of attachments for the reply activity.
             var attachments = new List<Attachment>();
@@ -81,7 +80,7 @@ namespace Microsoft.BotBuilderSamples
                     break;
                 case "OAuth Card":
                     // Display an OAuthCard
-                    reply.Attachments.Add(AllCards.GetOAuthCard().ToAttachment());
+                    reply.Attachments.Add(AllCards.GetOAuthCard(ConnectionName).ToAttachment());
                     break;
                 case "Signin Card":
                     // Display a SignInCard.
@@ -108,7 +107,7 @@ namespace Microsoft.BotBuilderSamples
                     reply.AttachmentLayout = AttachmentLayoutTypes.Carousel;
                     reply.Attachments.Add(AllCards.CreateAdaptiveCardAttachment());
                     reply.Attachments.Add(AllCards.GetHeroCard());
-                    reply.Attachments.Add(AllCards.GetOAuthCard().ToAttachment());
+                    reply.Attachments.Add(AllCards.GetOAuthCard(ConnectionName).ToAttachment());
                     reply.Attachments.Add(AllCards.GetSigninCard().ToAttachment());
                     reply.Attachments.Add(AllCards.GetThumbnailCard());
                     reply.Attachments.Add(AllCards.CreateListCardAttachment());
@@ -150,7 +149,7 @@ namespace Microsoft.BotBuilderSamples
             }
             catch (Exception Exc)
             {
-                _logger.LogInformation(Exc.Message.ToString());
+
                 return null;
             }
         }
