@@ -32,7 +32,31 @@ This sample shows the feature where user can send different types of cards using
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
 
-1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+##App Registrations
+
+1) Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+2) Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+3) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
+4) Navigate to **Authentication**
+    If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
+    
+    - Set another redirect URI:
+    * Select **Add a platform**.
+    * Select **web**.
+    * Enter the **redirect URI** for the app in the following format: 
+      1) https://token.botframework.com/.auth/web/redirect
+
+![Authentication](BotAllCards/Images/Authentication.png)
+    
+5) Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
+
+**Bot OAuth Connection:**
+
+  ![Installapp](BotAllCards/Images/OauthConnection.png)
 
 **NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
@@ -48,7 +72,7 @@ Run ngrok - point to port 3978
     ngrok http -host-header=rewrite 3978
     ```
 
-4. Setup for code  
+4. Setup for code
   - Clone the repository
 
     ```bash
@@ -57,7 +81,7 @@ Run ngrok - point to port 3978
 
   - In a terminal, navigate to `samples/bot-types-of-cards/nodejs`
 
-  - Update the `.env` configuration file for the bot to use the `{{Microsoft-App-Id}}` and `{{Microsoft-App-Password}}`.  (Note the MicrosoftAppId is the AppId created in step 1 (Setup AAD app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+  - Update the `.env` configuration file for the bot to use the `{{Microsoft-App-Id}}`, `{{Microsoft-App-Password}}` and `{{ConnectionName}}`.  (Note the MicrosoftAppId is the AppId created in step 1 (Setup AAD app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
   **NOTE:** In `index.js` file at line number 40 Uncomment below commented line for local debugging.
 

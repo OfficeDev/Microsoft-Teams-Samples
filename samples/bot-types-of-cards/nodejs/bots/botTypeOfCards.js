@@ -8,6 +8,9 @@ const Office365ConnectorCard = require('../resources/o365ConnectorCard.json');
 const ThumbnailCard = require('../resources/thumbnailCard.json');
 const ListCard = require('../resources/listCard.json');
 const CollectionCard = require('../resources/collectionsCard.json');
+const path = require('path');
+const ENV_FILE = path.join(__dirname, '.env');
+require('dotenv').config({ path: ENV_FILE });
 
 class BotTypeOfCards extends ActivityHandler {
     constructor() {
@@ -115,7 +118,7 @@ class BotTypeOfCards extends ActivityHandler {
     */
     sendOAuthCard() {
         return CardFactory.oauthCard(
-            'OAuth connection', // Replace with the name of your Azure bot connection name
+            process.env.ConnectionName,  // Your Azure bot connection name
             'Sign In',
             'BotFramework OAuth Card',
         );
