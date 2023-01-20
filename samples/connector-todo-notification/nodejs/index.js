@@ -90,6 +90,7 @@ server.post('/Task/Save', (req, res, next) => {
             }
         ]
     }
+    
     axios.post(webhookUrl, card)
         .then(res => {
             console.log(`statusCode: ${res.status}`)
@@ -116,13 +117,14 @@ server.get('*', (req, res) => {
     res.json({ error: 'Route not found' });
 });
 
+// This is used to decode the id token passed from client side.
 server.post('/decodeToken',(req, res)=>{
     var token = req.body.idToken;
+
     if(token !== null || token !== undefined){
       const base64String = token.split('.')[1];
-      const decodedValue = JSON.parse(Buffer.from(base64String,    
-        'base64').toString('ascii'));
-        res.json(decodedValue);
+      const decodedValue = JSON.parse(Buffer.from(base64String, 'base64').toString('ascii'));
+      res.json(decodedValue);
       }
   })
 

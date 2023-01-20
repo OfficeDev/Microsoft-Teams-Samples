@@ -89,7 +89,7 @@ namespace TabAuthentication.Controllers
             {
                 var token = jwtHandler.ReadJwtToken(jwtInput);
 
-                //Extract the payload of the JWT
+                // Extract the payload of the JWT.
                 var claims = token.Claims;
                 var jwtPayload = "{";
                 foreach (Claim c in claims)

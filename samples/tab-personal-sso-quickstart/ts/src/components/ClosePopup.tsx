@@ -6,7 +6,7 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import * as msal from "@azure/msal-browser";
 
 /**
- * This component is used to redirect the user to the Azure authorization endpoint from a popup
+ * This component is used to redirect the user to the Azure authorization endpoint from a popup.
  */
 class ClosePopup extends React.Component {
 

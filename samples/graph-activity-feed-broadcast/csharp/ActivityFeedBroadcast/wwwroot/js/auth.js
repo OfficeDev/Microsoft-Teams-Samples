@@ -2,7 +2,7 @@
 let accessToken;
 
 $(document).ready(function () {
-    microsoftTeams.initialize();
+    microsoftTeams.app.initialize();
 
     getClientSideToken()
         .then((clientSideToken) => {

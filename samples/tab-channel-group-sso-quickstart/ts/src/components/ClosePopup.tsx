@@ -6,13 +6,14 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import * as msal from "@azure/msal-browser";
 
 /**
- * This component is used to redirect the user to the Azure authorization endpoint from a popup
+ * This component is used to redirect the user to the Azure authorization endpoint from a popup.
  */
 class ClosePopup extends React.Component {
 
     componentDidMount() {
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.getContext().then(async (context) => {
+                
                 const msalConfig : msal.Configuration = {
                     auth: {
                         clientId: process.env.REACT_APP_AZURE_APP_REGISTRATION_ID!,
@@ -29,7 +30,7 @@ class ClosePopup extends React.Component {
                 msalInstance.handleRedirectPromise()
                     .then((tokenResponse) => {
                         if (tokenResponse !== null) {
-                            microsoftTeams.authentication.notifySuccess("Authentication succedded");
+                            microsoftTeams.authentication.notifySuccess("Authentication succeeded");
                         } else {
                             microsoftTeams.authentication.notifyFailure("Get empty response.");
                         }

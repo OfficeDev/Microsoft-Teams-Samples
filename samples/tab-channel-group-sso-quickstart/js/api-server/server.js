@@ -17,6 +17,7 @@ let handleQueryError = function (err) {
         message: 'Stupid network Error'
     }));
 };
+
 app.get('/getGraphAccessToken', async (req,res) => {
     const msalClient = new msal.ConfidentialClientApplication({
         auth: {
@@ -24,8 +25,9 @@ app.get('/getGraphAccessToken', async (req,res) => {
             clientSecret: clientSecret
         }
     });
-    let tenantId = jwt_decode(req.query.ssoToken)['tid']; //Get the tenant ID from the decoded toke
 
+    let tenantId = jwt_decode(req.query.ssoToken)['tid']; // Get the tenant ID from the decoded token.
+    
     msalClient.acquireTokenOnBehalfOf({
         authority: `https://login.microsoftonline.com/${tenantId}`,
         oboAssertion: req.query.ssoToken,

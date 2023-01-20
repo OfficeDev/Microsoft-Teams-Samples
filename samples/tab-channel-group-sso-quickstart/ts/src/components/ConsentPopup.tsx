@@ -13,6 +13,7 @@ class ConsentPopup extends React.Component {
     componentDidMount() {
 
         microsoftTeams.app.initialize().then(() => {
+            
             // Get the tab context, and use the information to navigate to Azure AD login page
             microsoftTeams.app.getContext().then(async (context) => {
                 var scope = "User.Read email openid profile offline_access Chat.Read Chat.ReadWrite ChatMessage.Send";

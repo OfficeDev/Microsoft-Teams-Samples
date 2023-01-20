@@ -17,7 +17,6 @@ class ConsentPopup extends React.Component {
             microsoftTeams.app.getContext().then(async (context) => {
                 var scope = "User.Read email openid profile offline_access Chat.Read Chat.ReadWrite ChatMessage.Send";
                 var loginHint = context.user!.loginHint;
-                //alert(process.env.REACT_APP_MICROSOFT_APP_ID!);
 				
                 const msalConfig: msal.Configuration = {
                     auth: {
@@ -29,8 +28,6 @@ class ConsentPopup extends React.Component {
                         cacheLocation: "sessionStorage",
                     },
                 };
-
-               // alert(JSON.stringify(msalConfig));
 				
                 const msalInstance = new msal.PublicClientApplication(msalConfig);
 				

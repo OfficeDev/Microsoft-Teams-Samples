@@ -5,12 +5,13 @@
  }
 
 @section scripts{
-    <script src="https://res.cdn.office.net/teams-js/2.5.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.6.1/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         let clientId = '@ViewBag.AzureClientId';
+
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.getContext().then(async (context) => {
                 const msalConfig = {
@@ -29,12 +30,15 @@
                 msalInstance.handleRedirectPromise()
                     .then((tokenResponse) => {
                         if (tokenResponse !== null) {
-                            microsoftTeams.authentication.notifySuccess("Authentication succedded");
+                            alert("success");
+                            microsoftTeams.authentication.notifySuccess("Authentication succeeded");
                         } else {
+                            alert("empty");
                             microsoftTeams.authentication.notifyFailure("Get empty response.");
                         }
                     })
                     .catch((error) => {
+                        alert("error");
                         microsoftTeams.authentication.notifyFailure(JSON.stringify(error));
                     });
             });
