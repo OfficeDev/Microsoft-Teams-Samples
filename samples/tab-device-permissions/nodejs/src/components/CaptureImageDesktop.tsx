@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { Text, Button, Image } from '@fluentui/react-components'
 import CheckAndAlertForCameraPermission from '../NavigatorPermission';
-import { Card, CardPreview, CardHeader, CardFooter } from "@fluentui/react-components/unstable";
+import { Card } from "@fluentui/react-components/unstable";
 import { CardBody } from 'reactstrap';
 /**
  * The 'CaptureImageDesktop' component
@@ -14,7 +14,6 @@ import { CardBody } from 'reactstrap';
 const CaptureImageDesktop = () => {
     var imageCapture: ImageCapture;
     const [capturedImage, setCapturedImage] = useState('');
-    const [capturedImages, setCapturedImages] = useState<any[]>([]);
 
     useEffect(() => {
         // initializing microsoft teams sdk

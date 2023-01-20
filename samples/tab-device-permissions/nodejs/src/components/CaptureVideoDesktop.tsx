@@ -1,10 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { Text, Button } from '@fluentui/react-components'
-import { Card, CardPreview, CardHeader, CardFooter } from "@fluentui/react-components/unstable"
+import { Card} from "@fluentui/react-components/unstable"
 import { CardBody } from 'reactstrap';
 /**
  * The 'captureVideoDesktop' component
@@ -12,7 +12,6 @@ import { CardBody } from 'reactstrap';
  */
 const CaptureVideoDesktop = () => {
     //  var stream: MediaStream = null;
-    const [capturedVideo, setCapturedVideo] = useState(new MediaStream);
     useEffect(() => {
         // initializing microsoft teams sdk
         microsoftTeams.app.initialize()
@@ -23,7 +22,6 @@ const CaptureVideoDesktop = () => {
             .then(mediaStream => {
                 const videoElement = document.querySelector("video");
                 videoElement!.srcObject = mediaStream;
-                setCapturedVideo(mediaStream);
             })
             .catch(error => console.log(error));
     }

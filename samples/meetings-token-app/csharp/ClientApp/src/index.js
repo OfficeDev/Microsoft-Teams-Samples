@@ -5,7 +5,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 //import './index.css';
 import App from './Components/App';
-import { Provider, themes } from '@fluentui/react-northstar' //https://fluentsite.z22.web.core.windows.net/quick-start
+import { Provider } from '@fluentui/react-northstar' //https://fluentsite.z22.web.core.windows.net/quick-start
 import "./style.css";
 
 ReactDOM.render(

@@ -15,8 +15,6 @@ import GetLocationDesktop from './GetLocationDesktop';
 import GetNotificationDesktop from './GetNotificationDesktop';
 import * as microsoftTeams from "@microsoft/teams-js";
 import Segment from 'react-segment-analytics';
-import Grid from "react-grid"
-
 /**
  * The 'Tab' contains all the components
  * of your app.
@@ -28,7 +26,7 @@ const Tab = () => {
     // initializing microsoft teams sdk
     microsoftTeams.app.initialize().then(() => {
       microsoftTeams.app.getContext().then((context) => {
-        if (context.app.host.clientType! == "web") {
+        if (context.app.host.clientType! === "web") {
           setIsWeb(true);
         }
         else {
@@ -37,14 +35,6 @@ const Tab = () => {
       });
     });
   })
-  const styles = {
-    columns: {
-      float: 'left',
-      width: '33.33%',
-      padding: '10px',
-      height: '300px',
-    },
-  } as const;
   
   const rowq = {
     rowd: {

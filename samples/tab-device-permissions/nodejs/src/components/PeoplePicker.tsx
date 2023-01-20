@@ -4,7 +4,7 @@
 import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { Text, Button } from '@fluentui/react-components'
-import { Card, CardPreview, CardHeader, CardFooter } from "@fluentui/react-components/unstable"
+import { Card } from "@fluentui/react-components/unstable"
 import { CardBody } from 'reactstrap';
 
 /**

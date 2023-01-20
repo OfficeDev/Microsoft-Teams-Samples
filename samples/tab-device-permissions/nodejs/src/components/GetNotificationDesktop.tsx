@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 import { useEffect } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
-import {Text, Button, Image } from '@fluentui/react-components'
-import { Card, CardPreview, CardHeader, CardFooter } from "@fluentui/react-components/unstable"
+import {Text, Button } from '@fluentui/react-components'
+import { Card } from "@fluentui/react-components/unstable"
 import { CardBody } from 'reactstrap';
 /**
  * The 'GetNotificationDesktop' component
@@ -20,7 +20,7 @@ const GetNotificationDesktop = () => {
     function sendNotification() {
         // Method to ask for validating notification permission and then sending notification.        
         navigator.permissions.query({ name: 'notifications' }).then(function (result) {
-            if (result.state == 'denied') {
+            if (result.state === 'denied') {
                 alert("failed");
             }
             else {

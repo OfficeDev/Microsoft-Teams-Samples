@@ -2,7 +2,7 @@
 // Licensed under the MIT License. 
 function CheckAndAlertForCameraPermission() {
     navigator.permissions.query({ name: "camera" }).then(function (result) {
-      if (result.state == 'denied') {
+      if (result.state === 'denied') {
           alert("failed");
       }
       else {

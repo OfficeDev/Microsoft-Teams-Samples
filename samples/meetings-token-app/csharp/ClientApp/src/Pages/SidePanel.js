@@ -42,7 +42,7 @@ const SidePanel = props => {
 
     useEffect(() => {
         onInitializeContianer();
-    }, [])
+    })
 
     const onInitializeContianer = () => {
         (async function () {

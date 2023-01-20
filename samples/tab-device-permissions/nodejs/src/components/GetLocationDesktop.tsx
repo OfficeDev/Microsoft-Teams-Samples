@@ -3,8 +3,8 @@
 
 import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Text, Button, Image} from '@fluentui/react-components'
-import { Card, CardPreview, CardHeader, CardFooter } from "@fluentui/react-components/unstable"
+import { Text, Button} from '@fluentui/react-components'
+import { Card, CardHeader } from "@fluentui/react-components/unstable"
 import { CardBody } from 'reactstrap';
 
 /**
@@ -23,7 +23,7 @@ const GetLocationDesktop = () => {
     // Method to validate before capturing media
     function getCurrentLocation() {        
         navigator.permissions.query({ name: 'geolocation' }).then(function (result) {
-            if (result.state == 'denied') {
+            if (result.state === 'denied') {
                 setShowComments(true);
             }
             else {

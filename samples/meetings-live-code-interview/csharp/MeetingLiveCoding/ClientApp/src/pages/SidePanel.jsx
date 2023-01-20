@@ -11,7 +11,7 @@ import {
   CardPreview,
   CardFooter,
 } from "@fluentui/react-components/unstable";
-import { Image, Text, Button } from "@fluentui/react-components";
+import { Text, Button } from "@fluentui/react-components";
 import { getFlexColumnStyles, getFlexItemStyles, getFlexRowStyles } from "../styles/layouts";
 
 const SidePanel = () => {
