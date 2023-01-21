@@ -45,8 +45,8 @@ const Todo = props => {
 
     // Initial setup for using fluid container.
     useEffect(() => {
-        (async function () {
-            await microsoftTeams.app.initialize();
+         microsoftTeams.app.initialize();
+        (async function () {            
             window.localStorage.debug = "fluid:*";
             // Define Fluid document schema and create container
             const client = new TeamsFluidClient();
@@ -96,7 +96,7 @@ const Todo = props => {
         });
     }
 
-    // Update meeting data state.
+     // Update meeting data state.
     const updateState = (meetingData, meetingId) => {
         var editorMap = containerValue.initialObjects.editorMap;
 
