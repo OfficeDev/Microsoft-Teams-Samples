@@ -1,0 +1,8 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.Localization.schema.json",
+  "name.short": "स्थानीयकरण",
+  "name.full": "स्थानीयकरण अनुप्रयोग",
+  "description.short": "माइक्रोसॉफ्ट टीमों के लिए स्थानीयकरण ऐप",
+  "description.full": "यह नमूना ऐप एक बहुत ही सरल स्थानीयकरण ऐप प्रदान करता है। अधिक सामग्री और क्षमताओं को जोड़ने के लिए आप इसे बढ़ा सकते हैं।",
+  "staticTabs[0].name": "हिंदी"
+}
