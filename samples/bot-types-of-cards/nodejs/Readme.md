@@ -32,7 +32,7 @@ This sample shows the feature where user can send different types of cards using
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
 
-##App Registrations
+## App Registrations
 
 1) Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 2) Select **New Registration** and on the *register an application page*, set following values:
@@ -50,13 +50,13 @@ This sample shows the feature where user can send different types of cards using
     * Enter the **redirect URI** for the app in the following format: 
       1) https://token.botframework.com/.auth/web/redirect
 
-![Authentication](BotAllCards/Images/Authentication.png)
+![Authentication](Images/Authentication.png)
     
 5) Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
 **Bot OAuth Connection:**
 
-  ![Installapp](BotAllCards/Images/OauthConnection.png)
+  ![Installapp](Images/OauthConnection.png)
 
 **NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
