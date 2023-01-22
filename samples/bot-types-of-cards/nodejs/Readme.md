@@ -56,7 +56,7 @@ This sample shows the feature where user can send different types of cards using
 
 **Bot OAuth Connection:**
 
-  ![Installapp](Images/OauthConnection.png)
+![Installapp](Images/OauthConnection.png)
 
 **NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
