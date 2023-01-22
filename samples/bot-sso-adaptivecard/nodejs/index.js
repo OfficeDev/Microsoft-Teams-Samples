@@ -29,7 +29,7 @@ adapter.onTurnError = async (context, error) => {
     //       application insights. See https://aka.ms/bottelemetry for telemetry
     //       configuration instructions.
     // Uncomment below commented line for local debugging.
-    // await context.sendActivity("Sorry, it looks like something went wrong. Exception Caught:" error);
+    // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
 
     // Send a trace activity, which will be displayed in Bot Framework Emulator
     await context.sendTraceActivity(
