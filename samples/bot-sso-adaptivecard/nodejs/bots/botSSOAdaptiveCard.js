@@ -36,6 +36,7 @@ class BotSSOAdativeCard extends ActivityHandler {
                         break;
                 }
             }
+
             // By calling next() you ensure that the next BotHandler is run.
             await next();
         });
@@ -47,10 +48,9 @@ class BotSSOAdativeCard extends ActivityHandler {
      */
     async sendWelcomeMessage(turnContext) {
         const { activity } = turnContext;
-        console.log('onsendWelcomeMessagenvoke, ' + turnContext);
         // Iterate over all new members added to the conversation.
-        for (const idx in activity.membersAdded) {
-            if (activity.membersAdded[idx].id !== activity.recipient.id) {
+        for (const id in activity.membersAdded) {
+            if (activity.membersAdded[id].id !== activity.recipient.id) {
                 const welcomeMessage = `Welcome to Universal Adaptive Cards. Type 'login' to get sign in universal sso.`;
 
                 await turnContext.sendActivity(welcomeMessage);
