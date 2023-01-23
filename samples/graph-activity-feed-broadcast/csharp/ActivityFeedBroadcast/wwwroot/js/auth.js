@@ -69,7 +69,7 @@ function getClientSideToken() {
 
 function getServerSideToken(clientSideToken) {
     return new Promise((resolve, reject) => {
-        microsoftTeams.getContext((context) => {
+         microsoftTeams.app.getContext().then((context) => {
             var scopes = ["https://graph.microsoft.com/User.Read"];
             fetch('/GetUserAccessToken', {
                 method: 'get',

@@ -42,7 +42,6 @@ function getToken() {
             width: 600,
             height: 535,
         }).then((result) => {
-            alert(JSON.stringify(result));
             resolve(result);
         }).catch((error) => {
             reject(error);
