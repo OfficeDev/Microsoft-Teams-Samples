@@ -399,7 +399,7 @@ namespace Microsoft.BotBuilderSamples.Bots
             await turnContext.SendActivityAsync(replyActivity, cancellationToken);
         }
 
-        // This method is invoked when message sent by user is undeleted/restored in chat.
+        // This method is invoked when message sent by user is undeleted in chat.
         protected override async Task OnTeamsMessageUndeleteAsync(ITurnContext<IMessageUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             var replyActivity = MessageFactory.Text("Message is undeleted");
