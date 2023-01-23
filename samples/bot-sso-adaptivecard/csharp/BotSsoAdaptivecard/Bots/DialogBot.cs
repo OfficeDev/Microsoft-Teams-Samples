@@ -134,12 +134,13 @@ namespace Microsoft.BotBuilderSamples
                     authentication = JsonConvert.DeserializeObject<JObject>(value["authentication"].ToString());
                 }
 
-                //when adaptiveCard/action invoke activity from teams contains 6 digit state in response to nominal sign in flow from bot  
+                // When adaptiveCard/action invoke activity from teams contains 6 digit state in response to nominal sign in flow from bot.
                 string state = null;
                 if (value["state"] != null)
                 {
                     state = value["state"].ToString();
                 }
+
                 // authToken and state are absent, handle verb
                 if (authentication == null && state == null)
                 {
