@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP.Net Core app (bot-adaptive-card-actions) to Azure Web App
+name: Build and deploy ASP.Net Core app (Meetings-Token-App) to Azure Web App
 
 on:
   push:
@@ -10,14 +10,14 @@ on:
     branches:
       - main
     paths:
-      - 'samples/bot-adaptive-card-actions/csharp/**'  
+      - 'samples/meetings-token-app/csharp/**'  
   workflow_dispatch:
 env:
     #Change the webapp package path. This will contain the code to be published after build
     #Change the project path to your project file path.
-    AZURE_WEBAPP_PACKAGE_PATH: 'samples/bot-adaptive-card-actions/csharp/AdaptiveCardActions/published'    # set this to the path to your web app project, defaults to the repository root
-    PROJECT_PATH: 'samples/bot-adaptive-card-actions/csharp/AdaptiveCardActions/AdaptiveCardActions.csproj'
-    AZURE_WEBAPP_NAME: 'bot-adaptive-card-actions'  # set this to your application's name
+    AZURE_WEBAPP_PACKAGE_PATH: 'samples/meetings-token-app/csharp/published'    # set this to the path to your web app project, defaults to the repository root
+    PROJECT_PATH: 'samples/meetings-token-app/csharp/TokenApp.csproj'
+    AZURE_WEBAPP_NAME: 'meetings-token-app'  # set this to your application's name
     DOTNET_VERSION: '6.0.x'           # set this to the dot net version to use
 jobs:
   build:
@@ -66,5 +66,5 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}  # Replace with your app name
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_bot_adaptive_card_actions }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_Meetings_Token_App }}
           package: .
