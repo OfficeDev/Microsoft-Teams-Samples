@@ -13,9 +13,9 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-bot-sso-adaptivecard-csharp
 ---
 
-# SSO for your Adaptive Cards Universal Actions
+# SSO for your Adaptive Cards
 
-This sample code demonstrates how to get enable SSO authentication for your Adaptive Cards Universal Actions in bot.
+This sample code demonstrates how to get enable SSO authentication for your Adaptive Cards.
 
 ## Interaction with app
 

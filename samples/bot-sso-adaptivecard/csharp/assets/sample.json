@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-bot-sso-adaptivecard-csharp",
     "source": "officeDev",
     "title": "Teams Bot-SSO-Adaptivecard",
-    "shortDescription": "SSO for your Adaptive Cards Universal Actions.",
+    "shortDescription": "SSO authentication for your Adaptive Cards.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/bot-sso-adaptivecard/csharp",
     "longDescription": [
-      "This sample code demonstrates how to get enable SSO authentication for your Adaptive Cards Universal Actions in bot."
+      "This sample code demonstrates how to get enable SSO authentication for your Adaptive Cards."
     ],
     "creationDateTime": "2023-01-02",
     "updateDateTime": "2023-01-03",
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/bot-sso-adaptivecard/csharp/BotSsoAdaptivecard/Images/PreviewAppSSOCsharp.gif",
-        "alt": "Solution UX showing teams bot-sso-adaptivecard"
+        "alt": "Solution UX showing SSO authentication for your Adaptive Cards"
       }
     ],
     "authors": [
