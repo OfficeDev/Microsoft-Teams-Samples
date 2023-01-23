@@ -416,6 +416,10 @@ jobs:
               name: 'bot-adaptive-card-actions'
               version: '6.0.x'
 
+            - project_path: 'samples/meeting-tabs/csharp/AppInMeeting/AppInMeeting.csproj'
+              name: 'meeting-tabs'
+              version: '6.0.x'
+
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
     steps:
