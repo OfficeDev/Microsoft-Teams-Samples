@@ -28,7 +28,14 @@ namespace BotSsoAdaptivecard.Helper
             _token = token;
         }
 
-        // Sends an email on the users behalf using the Microsoft Graph API
+        /// <summary>
+        /// Sends an email on the users behalf using the Microsoft Graph API
+        /// </summary>
+        /// <param name="toAddress">to address</param>
+        /// <param name="subject">mail subject</param>
+        /// <param name="content">body content</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public async Task SendMailAsync(string toAddress, string subject, string content)
         {
             if (string.IsNullOrWhiteSpace(toAddress))

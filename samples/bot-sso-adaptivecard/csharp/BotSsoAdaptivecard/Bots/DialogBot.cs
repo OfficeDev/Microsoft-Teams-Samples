@@ -45,9 +45,9 @@ namespace Microsoft.BotBuilderSamples
         /// <summary>
         /// Get sign in link
         /// </summary>
-        /// <param name="turnContext"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <param name="turnContext">The context for the current turn.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         private async Task<string> GetSignInLinkAsync(ITurnContext turnContext, CancellationToken cancellationToken)
         {
             var userTokenClient = turnContext.TurnState.Get<UserTokenClient>();
@@ -58,11 +58,9 @@ namespace Microsoft.BotBuilderSamples
         /// <summary>
         /// Add logic to apply after the type-specific logic after the call to the base class method.
         /// </summary>
-        /// <param name="turnContext"></param>
-        /// The context object for this turn.
-        /// <param name="cancellationToken"></param>
-        /// A cancellation token that can be used by other objects or threads to receive notice of cancellation.
-        /// <returns></returns>
+        /// <param name="turnContext">The context for the current turn.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         public override async Task OnTurnAsync(ITurnContext turnContext, CancellationToken cancellationToken = default(CancellationToken))
         {
             await base.OnTurnAsync(turnContext, cancellationToken);
@@ -75,9 +73,9 @@ namespace Microsoft.BotBuilderSamples
         /// <summary>
         /// Override this in a derived class to provide logic specific to Message activities, such as the conversational logic.
         /// </summary>
-        /// <param name="turnContext"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <param name="turnContext">The context for the current turn.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             var signInLink = await GetSignInLinkAsync(turnContext, cancellationToken).ConfigureAwait(false);
@@ -104,9 +102,9 @@ namespace Microsoft.BotBuilderSamples
         /// <summary>
         /// The OAuth Prompt needs to see the Invoke Activity in order to complete the login process.
         /// </summary>
-        /// <param name="turnContext"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <param name="turnContext">The context for the current turn.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task<InvokeResponse> OnInvokeActivityAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
         {
             if (turnContext.Activity.Name == "adaptiveCard/action")
@@ -164,13 +162,13 @@ namespace Microsoft.BotBuilderSamples
         /// Authentication success.
         /// AuthToken or state is present. Verify token/state in invoke payload and return AC response
         /// </summary>
-        /// <param name="authentication"></param>
-        /// <param name="state"></param>
-        /// <param name="turnContext"></param>
-        /// <param name="cancellationToken"></param>
-        /// <param name="isBasicRefresh"></param>
-        /// <param name="fileName"></param>
-        /// <returns></returns>
+        /// <param name="authentication">authToken are absent, handle verb</param>
+        /// <param name="state">state are absent, handle verb</param>
+        /// <param name="turnContext">The context for the current turn.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <param name="isBasicRefresh">Refresh type</param>
+        /// <param name="fileName">adaptiveCardResponseJson.json</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         private InvokeResponse createAdaptiveCardInvokeResponseAsync(JObject authentication, string state, bool isBasicRefresh = false, string fileName = "adaptiveCardResponseJson.json")
         {
             //verify token is present or not
@@ -202,15 +200,16 @@ namespace Microsoft.BotBuilderSamples
                 Type = AdaptiveCard.ContentType,
                 Value = JsonConvert.DeserializeObject(cardJsonstring)
             };
+
             return CreateInvokeResponse(adaptiveCardResponse);
         }
 
         /// <summary>
-        /// 
+        /// when token is absent in the invoke. We can initiate SSO in response to the invoke
         /// </summary>
-        /// <param name="turnContext"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <param name="turnContext">The context for the current turn.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         private async Task<InvokeResponse> initiateSSOAsync(ITurnContext<IInvokeActivity> turnContext, CancellationToken cancellationToken)
         {
             var signInLink = await GetSignInLinkAsync(turnContext, cancellationToken).ConfigureAwait(false);
@@ -247,10 +246,10 @@ namespace Microsoft.BotBuilderSamples
         /// <summary>
         /// Get Adaptive Card
         /// </summary>
-        /// <param name="filepath"></param>
-        /// <param name="signInLink"></param>
-        /// <param name="name"></param>
-        /// <param name="userMRI"></param>
+        /// <param name="filepath">json path</param>
+        /// <param name="signInLink">Get sign in link</param>
+        /// <param name="name">createdBy</param>
+        /// <param name="userMRI">createdById</param>
         /// <returns></returns>
         private Attachment GetAdaptiveCardWithAuthOptions(string[] filepath, string signInLink, string name = null, string userMRI = null)
         {

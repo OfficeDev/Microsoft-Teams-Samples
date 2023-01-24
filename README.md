@@ -74,6 +74,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |47|Tab Conversations|This Teams tab app provides a way to allow users to have conversations about sub-entities in the tab Create conversational tabs. |[View](/demo%20manifest/tab-conversations.zip) |
 |48|Fetch GroupChat Messages|Demonstrating on how a bot can archive groupchat messages and send it to user as a file. |[View](/demo%20manifest/Fetch-GroupChat-Messages.zip) |
 |49|Typeahead Search AdaptiveCards|This Teams tab app provides a way to allow users to have conversations about sub-entities in the tab Create conversational tabs. |[View](/demo%20manifest/Typeahead-search-adaptive-cards.zip) |
+|50|SSO for your Adaptive Cards|Implement SSO authentication for your Adaptive Cards.|[View](/demo%20manifest/bot-sso-adaptivecard.zip) |
 
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 
@@ -136,7 +137,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |16|  Proactive Tab Conversations | Using a bot to create and store conversations that can be later used inside a sub-entity, tab conversation. This sample includes the details required to proactively message a channel from a bot, set-up and store details for channel tab conversations, and viewing channel conversations from a personal app. |[View][bot-tab-conversations#csharp]|
 |17|  Suggested Actions Bot | This sample shows the feature where user can send suggested actions using bot. |[View][suggestedactionsbot#csharp]|[View][suggestedactionsbot#nodejs]
 |18| Adaptive Card Actions Bot | This sample shows the feature where user can send adaptive card with different actions using bot. |[View][AdaptiveCardActions#csharp]|[View][AdaptiveCardActions#nodejs]
-|19| SSO for your Adaptive Cards | Enable SSO authentication for your Adaptive Cards.|[View][AdaptiveCardSSO#csharp]
+|19| SSO for your Adaptive Cards | Implement SSO authentication for your Adaptive Cards.|[View][AdaptiveCardSSO#csharp]
 #### Additional samples
 
 |    | Sample Name | Description | .NET Core | JavaScript | 
