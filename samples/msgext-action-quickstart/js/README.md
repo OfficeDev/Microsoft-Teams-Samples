@@ -34,7 +34,7 @@ urlFragment: officedev-microsoft-teams-samples-msgext-action-quickstart-js
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
 2. Setup for Bot
-	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-               registration?view=azure-bot-service-3.0).
+	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
 	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 	- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
@@ -83,6 +83,3 @@ urlFragment: officedev-microsoft-teams-samples-msgext-action-quickstart-js
 
 ## Deploy to Teams
 Start debugging the project by hitting the `F5` key or click the debug icon in Visual Studio Code and click the `Start Debugging` green arrow button.
-
-
-

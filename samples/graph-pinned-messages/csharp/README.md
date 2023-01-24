@@ -70,11 +70,8 @@ This is an sample application which displays all the pinned messages in group ch
     If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
 - Set a redirect URI:
     * Select **Add a platform**.
-    * Select **web**.
-    * Enter the **redirect URI** for the app in the following format: `https://{Base_Url_Domain}/auth-end`. This will be the page where a successful implicit grant flow will redirect the user. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your `{Base_Url_Domain}` will be`1234.ngrok.io`.
-- Enable implicit grant by checking the following boxes:  
-    ✔ ID Token  
-    ✔ Access Token  
+    * Select **Single Page Application**.
+    * Enter the **redirect URI** for the app in the following format: `https://{Base_Url_Domain}/auth-end`. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your `{Base_Url_Domain}` will be`1234.ngrok.io`.
 14.  Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
 

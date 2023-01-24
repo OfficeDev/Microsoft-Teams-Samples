@@ -11,6 +11,7 @@ extensions:
  contentType: samples
  createdDate: "10/17/2019 13:38:25 PM"
 urlFragment: officedev-microsoft-teams-samples-bot-task-module-csharp
+
 ---
 # Teams Task Module
 
@@ -19,7 +20,7 @@ Bot Framework Teams Task Module sample.
 This bot has been created using [Bot Framework](https://dev.botframework.com). It shows how to fetch a Task Module from Hero Card or Adaptive Card buttons and receive input from the Task Module in the bot.
 
 - **Interaction with bot**
-![bot-task-module ](Images/bot-task-module.gif)
+![bot-task-module ](Images/Bot_Tab_TaskModule.gif)
 
 ## Prerequisites
 
@@ -61,16 +62,16 @@ the Teams service needs to call into the bot.
    - Navigate to `samples/bot-task-module/csharp` folder
    - Select `TeamsTaskModule.csproj` or `TeamsTaskModule.sln`file
 
-1) Update the `appsettings.json` configuration for the bot to use the MicrosoftAppId, MicrosoftAppPassword, MicrosoftAppTenantId generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
-    - Set "MicrosoftAppType" in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
+1) Update the `appsettings.json` configuration for the bot to use the `<<MicrosoftAppId>>`, `<<MicrosoftAppPassword>>`, `<<MicrosoftAppTenantId>>` generated in Step 2 (App Registration creation). (Note the App Password is referred to as the "client secret" in the azure portal and you can always create a new client secret anytime.)
+    - Set `<<MicrosoftAppType>>` in the `appsettings.json`. (**Allowed values are: MultiTenant(default), SingleTenant, UserAssignedMSI**)
 
-    - Set "BaseUrl" in the `appsettings.json` as per your application like the ngrok forwarding url (ie `https://xxxx.ngrok.io`) after starting ngrok
+    - Set `<<BaseUrl>>` in the `appsettings.json` as per your application like the ngrok forwarding url (ie `https://xxxx.ngrok.io`) after starting ngrok
 
 1) Run your bot, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
 1) __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the `TeamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
-    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+    - **Edit** the `manifest.json` for `<<Domain-Name>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app in personal/groupchat/team scope (supported scopes)
@@ -98,6 +99,16 @@ You can interact with this bot by sending it a message. The bot will respond wit
 - **Team Scope Interactions:**
 
 ![ts-Interaction ](Images/ts-Interaction.png)
+
+![tasks](Images/tasks.png)
+
+![youtube](Images/youtube.png)
+
+![Customform](Images/Customform.png)
+
+![customformregister](Images/customformregister.png)
+
+![TabAdaptiveCard](Images/Tab_AdaptiveCard.png)
 
 ## Deploy the bot to Azure
 

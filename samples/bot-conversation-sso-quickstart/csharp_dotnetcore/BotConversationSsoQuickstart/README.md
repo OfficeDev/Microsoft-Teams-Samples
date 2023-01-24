@@ -31,8 +31,8 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 ## Prerequisites
 
-- Microsoft Teams is installed and you have an account (not a guest account)
--  [.Net](https://dotnet.microsoft.com/en-us/download/dotnet/3.1)
+-  Microsoft Teams is installed and you have an account (not a guest account)
+-  [.Net](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) version 6.0
 -  [ngrok](https://ngrok.com/download) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
 

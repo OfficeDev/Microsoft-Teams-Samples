@@ -80,7 +80,7 @@ namespace Microsoft.BotBuilderSamples.Bots
             // Create a Hero Card with TaskModuleActions for each Task Module
             return new HeroCard()
             {
-                Title = "Task Module Invocation from Hero Card",
+                Title = "Task Module Invocation from Hero Card - Testing YMAL",
                 Buttons = new[] { TaskModuleUIConstants.AdaptiveCard, TaskModuleUIConstants.CustomForm, TaskModuleUIConstants.YouTube }
                             .Select(cardType => new TaskModuleAction(cardType.ButtonTitle, new CardTaskFetchValue<string>() { Data = cardType.Id }))
                             .ToList<CardAction>(),

@@ -19,7 +19,8 @@
         "action": "transfercall",
         "msteams": {
           "type": "task/fetch"
-        }
+        },
+        "callId": "${callId}"
       }
     },
     {
@@ -30,15 +31,17 @@
         "action": "inviteparticipant",
         "msteams": {
           "type": "task/fetch"
-        }
+        },
+        "callId": "${callId}"
       }
     },
     {
       "type": "Action.Submit",
-      "title": "Play prompt",
-      "id": "playprompt",
+      "title": "Play record prompt",
+      "id": "playrecordprompt",
       "data": {
-        "type": "playprompt"
+        "type": "playrecordprompt",
+        "callId": "${callId}"
       }
     },
     {
@@ -46,7 +49,8 @@
       "title": "Hang up",
       "id": "hangup",
       "data": {
-        "type": "hangup"
+        "type": "hangup",
+        "callId": "${callId}"
       }
     }
   ]

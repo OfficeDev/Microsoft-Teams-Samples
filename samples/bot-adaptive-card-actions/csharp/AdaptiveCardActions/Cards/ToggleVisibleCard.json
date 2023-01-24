@@ -1,0 +1,25 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "**Action.ToggleVisibility example**: click the button to show or hide a welcome message"
+    },
+    {
+      "type": "TextBlock",
+      "id": "helloWorld",
+      "isVisible": false,
+      "text": "**Hello World!**",
+      "size": "extraLarge"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.ToggleVisibility",
+      "title": "Click me!",
+      "targetElements": [ "helloWorld" ]
+    }
+  ]
+}

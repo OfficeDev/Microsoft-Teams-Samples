@@ -31,6 +31,8 @@ namespace CallingBotSample.Services.MicrosoftGraph
             });
 
             services.AddTransient<ICallService, CallService>();
+            services.AddTransient<IChatService, ChatService>();
+            services.AddTransient<IOnlineMeetingService, OnlineMeetingService>();
             services.AddSingleton<AudioRecordingConstants>();
             return services;
         }

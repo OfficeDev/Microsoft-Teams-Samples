@@ -59,7 +59,7 @@ namespace msteams_app_coordinatelogger
 
             services
                 .AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                .SetCompatibilityVersion(CompatibilityVersion.Latest);
 
         }
 

@@ -1,7 +1,7 @@
 ﻿{
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
   "manifestVersion": "1.12",
-  "id": "8afaaf35-4e36-4ec5-a675-7de23e88c00e",
+  "id": "<<Guid>>",
   "version": "1.0.0",
   "packageName": "com.custom.tab",
   "developer": {
@@ -19,13 +19,13 @@
     "full": "full description here"
   },
   "icons": {
-    "outline": "icon-outline.png",
-    "color": "icon-color.png"
+    "outline": "outline.png",
+    "color": "color.png"
   },
   "accentColor": "#D85028",
   "configurableTabs": [
     {
-      "configurationUrl": "https://<<BASE-URL>>/tab",
+      "configurationUrl": "https://<Base-url>/tab",
       "canUpdateConfiguration": true,
       "scopes": [
         "groupchat",
@@ -38,6 +38,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "toDo.ngrok.io"
+    "*.ngrok.io"
   ]
 }

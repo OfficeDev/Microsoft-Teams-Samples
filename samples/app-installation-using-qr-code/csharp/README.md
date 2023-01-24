@@ -31,7 +31,7 @@ The user can Generate a new QR code (contains app id information) and then use I
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash
@@ -108,6 +108,9 @@ Please follow link [Add authentication to your bot](https://docs.microsoft.com/e
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
+ - **Note**
+ Kindly add the app/bot in personal scope and login there, afterwards add the app/bot in any Teams channel.
+
 ## Running the sample
 
 - **Desktop View**
@@ -122,7 +125,6 @@ Please follow link [Add authentication to your bot](https://docs.microsoft.com/e
 **Install App is used to Scan the QR code and it then installs the app:**
 
 ![Install App](QRAppInstallation/Images/AppInstallation.png)
-
 
 -  **Mobile View**
 **Hey command interaction:**

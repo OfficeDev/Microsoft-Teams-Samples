@@ -111,7 +111,7 @@ server.get('/auth-start', function (req, res) {
 // End of the pop-up dialog auth flow, returns the results back to parent window
 server.get('/auth-end', function (req, res) {
   var clientId = process.env.MicrosoftAppId;
-  res.render('./views/auth-end', { clientId: clientId });
+  res.render('./views/auth-end', { clientId: JSON.stringify(clientId) });
 });
 
 // Endpoint to facebook auth redirect page.

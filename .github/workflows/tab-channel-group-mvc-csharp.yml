@@ -1,0 +1,70 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy ASP.Net Core app (Tab-Channel-Group-MVC) to Azure Web App
+
+on:
+  push:
+    #Change the branch name to <<main>>
+    #Change the path to the folder where your code resides. Any change here will start the activity. 
+    branches:
+      - main
+    paths:
+      - 'samples/tab-channel-group/mvc-csharp/**'  
+  workflow_dispatch:
+env:
+    #Change the webapp package path. This will contain the code to be published after build
+    #Change the project path to your project file path.
+    AZURE_WEBAPP_PACKAGE_PATH: 'samples/tab-channel-group/mvc-csharp/published'    # set this to the path to your web app project, defaults to the repository root
+    PROJECT_PATH: 'samples/tab-channel-group/mvc-csharp/ChannelGroupTabMVC.csproj'
+    AZURE_WEBAPP_NAME: 'tab-channel-group'  # set this to your application's name
+    DOTNET_VERSION: '6.0.x'           # set this to the dot net version to use
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    # Checkout the repo
+      - uses: actions/checkout@v2
+
+     # Setup .NET Core SDK
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }} 
+          include-prerelease: true
+
+      - name: Build app
+        run: dotnet build "${{ env.PROJECT_PATH }}" --configuration Release
+
+      - name: dotnet publish
+        run: dotnet publish "${{ env.PROJECT_PATH }}" -c Release --no-build --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: .net-app
+          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+  deploy:
+    runs-on: windows-latest
+    needs: build
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+  #Change the app-name which is the azure web app name
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: .net-app
+  # Deploy to Azure Web apps
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}  # Replace with your app name
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_Tab_Channel_Group_MVC }}
+          package: .

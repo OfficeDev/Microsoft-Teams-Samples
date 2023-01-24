@@ -36,7 +36,7 @@ class Tab extends React.Component {
       return (
       <div>
         <h3>Hello World!</h3>
-        <h1>Congratulations {userName}!</h1> <h3>This is the tab you made :-)</h3>
+        <h1>Congratulations -  Testing YMAL{userName}!</h1> <h3>This is the tab you made :-)</h3>
       </div>
       );
   }

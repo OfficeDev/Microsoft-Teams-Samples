@@ -23,6 +23,26 @@
     "full": "Simple Task Module Scenario Test"
   },
   "accentColor": "#FFFFFF",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://<<Domain-Name>>/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team"
+      ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "entityId": "com.contoso.taskmodule.task",
+      "name": "Tasks!",
+      "contentUrl": "https://<<Domain-Name>>/tasks",
+      "websiteUrl": "https://<<Domain-Name>>/tasks",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
   "bots": [
     {
       "botId": "<<YOUR-MICROSOFT-APP-ID>>",
@@ -41,5 +61,5 @@
     "identity",
     "messageTeamMembers"
   ],
-  "validDomains": [ "YourDeployedBotUrl.com" ]
+  "validDomains": [ "<<domain-name>>" ]
 }

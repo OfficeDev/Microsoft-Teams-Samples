@@ -29,6 +29,17 @@
     },
     {
       "type": "Action.Submit",
+      "title": "Create Incident",
+      "id": "openincidenttask",
+      "data": {
+        "action": "openincidenttask",
+        "msteams": {
+          "type": "task/fetch"
+        }
+      }
+    },
+    {
+      "type": "Action.Submit",
       "title": "Join scheduled meeting",
       "id": "joinscheduledmeeting",
       "data": {

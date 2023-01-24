@@ -3,7 +3,7 @@
 The below are some experiences I have had while working with Live Share, sharing here in an informal manner in case it is useful to someone else.
 
 ## Getting a user's roles
-Getting a user's roles is very helpful if you have an Ephemeral Object that is limited to specific roles and you want to alter the UI based on those roles. For example, you might not want to show a "take control" button to someone who cannot take control.
+Getting a user's roles is very helpful if you have an Live Share Object that is limited to specific roles and you want to alter the UI based on those roles. For example, you might not want to show a "take control" button to someone who cannot take control.
 
 In the response from `joinContainer` a `services` object is returned. That object contains a `audience` that can be used to get a user's clientIds. One of those clientIds in turn can be used to get the user's roles.
 
@@ -32,7 +32,7 @@ Example:
       }
 
       // Next we call getClientRoles to get the user's roles based on their clientId.
-      let currentUserRoles = await EphemeralEvent.getClientRoles(
+      let currentUserRoles = await LiveEvent.getClientRoles(
         currentUserClientId,
       );
 
@@ -49,7 +49,7 @@ Example:
 ```
 
 ## Inability to know who sent an event
-The Live Share SDK is unable to verify who sent an event. Ephemeral Objects are limited by role, and it's impossible for a user to send an event for something that they do not have the correct role for. However, someone with the correct role could send an event that impersonates someone else.
+The Live Share SDK is unable to verify who sent an event. Live Share Objects are limited by role, and it's impossible for a user to send an event for something that they do not have the correct role for. However, someone with the correct role could send an event that impersonates someone else.
 
 For example, if you are sending an event for cursor movements on the screen and you want to include the user's name, you have to use send the user's name in the data object sent with the event. Therefore, someone could send an event saying their cursor is someone else.
 

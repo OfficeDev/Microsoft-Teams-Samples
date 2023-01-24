@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { Provider, teamsTheme } from '@fluentui/react-northstar'
+import { FluentProvider, teamsDarkTheme } from '@fluentui/react-components'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider theme={teamsTheme}>
+    <FluentProvider theme={teamsDarkTheme}>
       <App />
-    </Provider>
+    </FluentProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

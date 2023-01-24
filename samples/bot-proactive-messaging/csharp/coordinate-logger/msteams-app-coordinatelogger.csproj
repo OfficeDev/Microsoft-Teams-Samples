@@ -1,14 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <UserSecretsId>888d5f46-7261-42b7-a03a-f4a06a44e8b9</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.12.0" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.7.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
+    <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="4.18.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
   </ItemGroup>
   <PropertyGroup>
     <CodeAnalysisRuleSet>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), .gitignore))\Build\Analyzer.ruleset</CodeAnalysisRuleSet>
