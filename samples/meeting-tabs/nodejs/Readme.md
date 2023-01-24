@@ -6,11 +6,11 @@ products:
 - office
 - office-365
 languages:
-- csharp
+- js
 extensions:
  contentType: samples
  createdDate: "24-01-2023 10:00:01"
-urlFragment: officedev-microsoft-teams-samples-meeting-tabs-csharp
+urlFragment: officedev-microsoft-teams-samples-meeting-tabs-nodejs
 
 ---
 
@@ -19,23 +19,17 @@ urlFragment: officedev-microsoft-teams-samples-meeting-tabs-csharp
 This sample shows app stage view, Mute/Unmute Teams meeting audio call and Side panel.
 
 **Interaction with bot**
-![MeetingTabsGif](Images/MeetingTabsGif.gif)
+![mute-unmute](Images/MeetingTabsGif.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Meeting-Tabs:** [Manifest](/samples/meeting-tabs/csharp/demo-manifest/meeting-tabs.zip)
+**Meeting-Tabs:** [Manifest](/samples/meeting-tabs/nodejs/demo-manifest/meeting-tabs.zip)
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
-
-  determine dotnet version
-  ```bash
-  dotnet --version
-  ```
+- [nodejs](https://nodejs.org/en/)
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
-- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
 ## Setup
 
@@ -60,31 +54,26 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-    
-4. Run the app from a terminal or from Visual Studio, choose option A or B.
 
-  A) From a terminal, navigate to `samples/meeting-tabs/csharp`
+4. In the folder where repository is cloned navigate to `samples/meeting-tabs/nodejs`
 
-  ```bash
-  # run the app
-  dotnet run
-  ```
-  B) Or from Visual Studio
+5. Install node modules
 
-  - Launch Visual Studio
-  - File -> Open -> Project/Solution
-  - Navigate to `samples/meeting-tabs/csharp` folder
-  - Select `AppInMeeting.sln` file
-  - Press `F5` to run the project
-
-5. In a terminal, navigate to `samples/meeting-tabs/csharp/ClientApp`
-
-- Inside ClientApp folder execute the below command.
+   Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
 
     ```bash
-    # npm install
+    npm install
     ```
- 6. __*This step is specific to Teams.*__
+
+6. Update the `.env` with `PORT=3978`
+
+7. Run your app
+
+    ```bash
+    npm start
+    ```
+
+ 8. __*This step is specific to Teams.*__
 
 - **Edit** the `manifest.json` contained in the  `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
 
