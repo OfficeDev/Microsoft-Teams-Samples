@@ -117,7 +117,7 @@ This application also shows the implementation of Live Share SDK to update the d
 -- Enable developer preview in your desktop Teams client
 Follow [these instructions](https://docs.microsoft.com/en-us/microsoftteams/platform/resources/dev-preview/developer-preview-intro#enable-developer-preview) to enable developer preview. Note that Developer preview mode must be enabled on each Teams client app or browser.
 
-Note: In Which meeting we have added the manifest of the Meeting token app, In meeting chat section type @MeetingTokenApp Hello.
+Note: Open the meeting chat section and type @MeetingTokenApp Hello (It will send back the required information to you).
 
 > In-meeting tabs are only available in the Teams desktop client. They will not be visible when you run Teams in a web browser.
 
