@@ -1,0 +1,68 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Deploy - Nodejs Msgext-Action-Quickstart
+
+on:
+  push:
+    #Change the branch name to <<main>>
+    #Change the path to the folder where your code resides. Any change here will start the activity. 
+    branches:
+      - main
+    paths:
+      - 'samples/msgext-action-quickstart/**'  
+  workflow_dispatch:
+  
+env:
+    #AZURE_WEBAPP_PATH is the project path
+    #Web app name is your azure app service name.
+    AZURE_WEBAPP_PATH: 'samples/msgext-action-quickstart/js'
+    AZURE_WEBAPP_NAME: 'msgext-action-quickstart'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ${{ env.AZURE_WEBAPP_PATH }}
+        
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: '18.x'
+          
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run build --if-present
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: node-app
+          path: ${{ env.AZURE_WEBAPP_PATH }}/
+
+  deploy:
+    runs-on: windows-latest
+    needs: build
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: node-app
+
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_Msgext_Action_Quickstart }}
+          package: .
