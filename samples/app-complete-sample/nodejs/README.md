@@ -145,6 +145,10 @@ This directory holds all of the TypeScript files, which run the entire applicati
 
 ![AppOutlook](Images/AppOutlook.png)
 
+**Select your app icon from message extension and find ward, it will show all options**
+
+![AppOutlook](Images/AppOutlook_msgext.png)
+
 **Note:** Similarly, you can test your application in the Outlook desktop app as well.
 
 ## Office on the web

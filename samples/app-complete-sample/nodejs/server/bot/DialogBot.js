@@ -81,13 +81,14 @@ class DialogBot extends TeamsActivityHandler {
       // then the word setting will not retrigger the config experience
       queryParameter = "";
       initialRunParameter = "true";
-    }
+      }
 
-    if (!userData.composeExtensionCardType) {
+    // This is for MS-Teams support
+    if (!userData.composeExtensionCardType && userData.channelId == "msteams") {
       let configResponse = this.getConfigResponse();
       return configResponse;
     }
-
+   
     // this is the situation where the user has entered the word 'reset' and wants
     // to clear his/her settings
     // resetKeyword for English is "reset"
@@ -162,15 +163,22 @@ class DialogBot extends TeamsActivityHandler {
 
           // HeroCard extends ThumbnailCard so we can use ThumbnailCard as the overarching type
           let card = null;
-          // check user preference for which type of card to create
 
+          // This is for multi hub support (outlook and office)
+          if(userData.channelId != "msteams")
+          {
+            userData.composeExtensionCardType = "thumbnail";            
+          }
+
+          // check user preference for which type of card to create
           if (userData.composeExtensionCardType === "thumbnail") {
             card = CardFactory.thumbnailCard(highlightedTitle, undefined, null, { text: cardText });
-          } else {
+          } 
+          else {
             // at this point session.userData.composeExtensionCardType === "hero"
             card = CardFactory.heroCard(highlightedTitle, undefined, null, { text: cardText });
           }
-
+ 
           // build the preview card that will show in the search results
           // Note: this is only needed if you want the cards in the search results to look
           // different from what is placed in the compose box
