@@ -111,7 +111,7 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
 	   - Go to your project directory, the ./manifest folder, select the zip folder, and choose Open.
 	   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
    		
-  **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/manifest_Hub` folder with the required values.
+  **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/manifest_hub` folder with the required values.
 
 Congratulations!!! You have just created and sideloaded your first Microsoft Teams app! Try adding a configurable tab, at-mentioning your bot by its registered name, or viewing your static tabs.<br><br>
 NOTE: Most of this sample app's functionality will now work. The only limitations are the authentication examples because your app is not registered with AAD nor Visual Studio Team Services.
@@ -183,6 +183,10 @@ This directory holds utility functions for the project.
 **Select your app icon to launch and preview your app running in Outlook on the web**
 
 ![AppOutlook](Images/AppOutlook.png)
+
+**Select your app icon from message extension and find ward, it will show all options**
+
+![AppOutlook](Images/AppOutlook_msgext.png)
 
 **Note:** Similarly, you can test your application in the Outlook desktop app as well.
 

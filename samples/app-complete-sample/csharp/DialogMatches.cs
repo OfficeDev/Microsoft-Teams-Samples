@@ -79,5 +79,9 @@
         public const string DisplayCardO365ConnectorCard3 = "connector card 3";
 
         public const string DisplayCardO365ConnectorActionableCard2 = "connector card actions 2";
+
+        public const string MsteamsChannelId = "msteams";
+
+        public const string MultiHubComposeExtensionCardType = "thumbnail";
     }
 }
