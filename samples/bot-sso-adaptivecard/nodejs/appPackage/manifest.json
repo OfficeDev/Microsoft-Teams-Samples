@@ -19,8 +19,8 @@
     "full": "SSO Adaptive Card"
   },
   "description": {
-    "short": "Short description for SSO Adaptive Card.",
-    "full": "Full description of SSO Adaptive Card."
+    "short": "Implement SSO authentication for your Adaptive Cards.",
+    "full": "Implement SSO authentication for your Adaptive Cards."
   },
   "accentColor": "#FFFFFF",
   "bots": [
@@ -34,7 +34,7 @@
     }
   ],
   "validDomains": [
-    "*.ngrok.io"
+    "{{domain-name}}"
   ],
   "webApplicationInfo": {
     "id": "<<YOUR-MICROSOFT-APP-ID>>",
