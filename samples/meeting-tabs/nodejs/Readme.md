@@ -43,29 +43,29 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 2. Setup
 
- **Register your application with Azure AD:**
+    **Register your application with Azure AD:**
 
-  - Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+     - Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
-  - On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
+     - On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
 
-  - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+     - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 3. Clone the repository
 
-  ```bash
-  git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-  ```
+     ```bash
+      git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+     ```
 
 4. In the folder where repository is cloned navigate to `samples/meeting-tabs/nodejs`
 
 5. Install node modules
 
-  Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
+     Inside node js folder, open your local terminal and run the below command to install node modules. You can do the same in Visual Studio code terminal by opening the project in Visual Studio code.
 
-  ```bash
-  npm install
-  ```
+     ```bash
+      npm install
+     ```
 
 6. Update the `.env` with `PORT=3978`
 
