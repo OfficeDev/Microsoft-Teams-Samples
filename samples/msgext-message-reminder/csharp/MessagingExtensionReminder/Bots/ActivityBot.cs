@@ -90,7 +90,7 @@ namespace MessagingExtensionReminder.Bots
         {
             if (turnContext.Activity.MembersAdded != null && turnContext.Activity.MembersAdded.Any(member => member.Id == turnContext.Activity.Recipient.Id))
             {
-                await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample you can schedule a message reminder by selecting `...` over the message then select more action and then create-reminder and you wil get reminder of the message at scheduled date and time."), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text($"Hello and welcome! With this sample you can schedule a message reminder by selecting `...` over the message then select more action and then create-reminder and you wil get reminder of the message at scheduled date and time. Testing YMAL"), cancellationToken);
             }
         }
 

@@ -4,7 +4,7 @@
     "source": "officeDev",
     "title": "Messaging Extension SSO Config Bot",
     "shortDescription": "Messaging Extension that has a configuration page, accepts search requests and returns results with SSO.",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-search-sso-config",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/msgext-search-sso-config/nodejs",
     "longDescription": [
       "Messaging Extension that has a configuration page, accepts search requests and returns results with SSO."
     ],
@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-search-sso-config/Images/MsgextSSO.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/msgext-search-sso-config/nodejs/Images/MsgextSSO.gif",
         "alt": "Search driven messaging extension in Teams"
       }
     ],

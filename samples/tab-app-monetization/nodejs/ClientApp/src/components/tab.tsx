@@ -28,7 +28,7 @@ const Tab = () => {
             <br></br>
             <div>
                 <Text weight="regular">
-                    {"This app showcases how to trigger the purchase experience within the app. Refer below code. Click on the upgrade button to open purchase dialog."}
+                    {"This app showcases how to trigger the purchase experience within the app. Refer below code. Click on the upgrade button to open purchase dialog. Testing YMAL"}
                 </Text>
             </div>
             <br></br>
