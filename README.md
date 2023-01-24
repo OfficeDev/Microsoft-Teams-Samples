@@ -120,7 +120,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |16|  Proactive Tab Conversations | Using a bot to create and store conversations that can be later used inside a sub-entity, tab conversation. This sample includes the details required to proactively message a channel from a bot, set-up and store details for channel tab conversations, and viewing channel conversations from a personal app. |[View][bot-tab-conversations#csharp]|
 |17|  Suggested Actions Bot | This sample shows the feature where user can send suggested actions using bot. |[View][suggestedactionsbot#csharp]|[View][suggestedactionsbot#nodejs]
 |18| Adaptive Card Actions Bot | This sample shows the feature where user can send adaptive card with different actions using bot. |[View][AdaptiveCardActions#csharp]|[View][AdaptiveCardActions#nodejs]
-|19| SSO AdaptiveCard Using Bot | This sample code demonstrates how to get enable SSO authentication for your Adaptive Cards Universal Actions in bot. ||[View][BotSSOAdaptiveCard#nodejs]
+|19| SSO On AdaptiveCard Using Bot | This sample code demonstrates how to get enable SSO authentication for your Adaptive Cards Universal Actions in bot. ||[View][BotSSOAdaptiveCard#nodejs]
 #### Additional samples
 
 |    | Sample Name | Description | .NET Core | JavaScript | 
