@@ -49,41 +49,43 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 2. Setup
 
- Register your application with Azure AD
+   **Register your application with Azure AD:**
 
-- Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
-- On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
+    - Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
+
+    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 3. Clone the repository
+
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
     
 4. Run the app from a terminal or from Visual Studio, choose option A or B.
 
-  A) From a terminal, navigate to `samples/meeting-tabs/csharp`
+    A) From a terminal, navigate to `samples/meeting-tabs/csharp`
 
-  ```bash
-  # run the app
-  dotnet run
-  ```
-  B) Or from Visual Studio
+    ```bash
+    # run the app
+    dotnet run
+    ```
+    B) Or from Visual Studio
 
-  - Launch Visual Studio
-  - File -> Open -> Project/Solution
-  - Navigate to `samples/meeting-tabs/csharp` folder
-  - Select `AppInMeeting.sln` file
-  - Press `F5` to run the project
+    - Launch Visual Studio
+    - File -> Open -> Project/Solution
+    - Navigate to `samples/meeting-tabs/csharp` folder
+    - Select `AppInMeeting.sln` file
+    - Press `F5` to run the project
 
 5. In a terminal, navigate to `samples/meeting-tabs/csharp/ClientApp`
 
-- Inside ClientApp folder execute the below command.
+    - Inside ClientApp folder execute the below command.
 
-    ```bash
-    # npm install
-    ```
+        ```bash
+        # npm install
+        ```
  6. __*This step is specific to Teams.*__
 
 - **Edit** the `manifest.json` contained in the  `teamsAppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)

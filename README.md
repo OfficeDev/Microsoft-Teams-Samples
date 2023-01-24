@@ -81,6 +81,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |53|Graph API Teams App Installation Life Cycle|This sample illustrates how you can use Teams App Installation Life Cycle by calling Microsoft Graph APIs.|[View](/demo%20manifest/graph-app-installation-lifecycle.zip) |
 |54|App SSO|Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl.|[View](/demo%20manifest/App-SSO.zip) |
 |55|Tabs with Adaptive Cards|Microsoft Teams tab sample code which demonstrates how to Build tabs with Adaptive Cards.|[View](/demo%20manifest/tab-adaptive-card.zip) |
+|58|Meeting-Tabs|This sample shows app stage view, Mute/Unmute Teams meeting audio call and Side panel.|[View](/demo%20manifest/meeting-tabs.zip) |
 
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 
@@ -244,6 +245,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |27|Live coding interview using Shared meeting stage |This sample demos a live coding in a teams meeting stage.|[View][meetings-live-code-interview#csharp]|[View][meetings-live-code-interview#nodejs]|
 |28|Release Management     | This is a sample used to send workitem notification using Azure webhook.                                        |[View][release-management#cs]       |[View][release-management#nodejs]
 |29|Meeting Live Caption     | This is a sample meeting side panel application which demonstrates how to enable live caption in the meeting and using the CART link how to send caption in live meeting.                                       |[View][meetings-live-caption#cs]       |[View][meetings-live-caption#nodejs]
+|30|Meeting-Tabs|This sample shows app stage view, Mute/Unmute Teams meeting audio call and Side panel.|[View][meetingtabs#csharp]|[View][meetingtabs#nodejs]
 
 ## Application templates
 
@@ -388,6 +390,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [qrjointeam#csharp]:samples/bot-join-team-using-qr-code/csharp
 [qrjointeam#nodejs]:samples/bot-join-team-using-qr-code/nodejs
 [incoming-webhook#nodejs]:samples/incoming-webhook/nodejs
+[meetingtabs#csharp]:samples/meeting-tabs/csharp
+[meetingtabs#nodejs]:samples/meeting-tabs/nodejs
 
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#rsc#js]:samples/graph-rsc/nodeJs

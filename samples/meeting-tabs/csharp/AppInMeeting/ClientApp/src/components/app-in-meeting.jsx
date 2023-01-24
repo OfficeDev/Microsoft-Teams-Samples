@@ -15,7 +15,6 @@ class AppInMeeting extends Component {
     }
 
     callback = (errcode, bln) => {
-        alert("callback method called");
         if (errcode) {
             this.setState({ errorCode: JSON.stringify(errcode) })
         }
@@ -48,7 +47,7 @@ class AppInMeeting extends Component {
             microsoftTeams.meeting.shareAppContentToStage((err, result) => {
                 if (result) {
                     // handle success
-                    alert("Shared successfully!");
+                    console.log("Shared successfully!");
                 }
                 if (err) {
                     // handle error
