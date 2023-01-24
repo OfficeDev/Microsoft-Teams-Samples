@@ -41,7 +41,6 @@ namespace Microsoft.BotBuilderSamples
         // 2. Re-prompts the user when an invalid input is received.
         private async Task<DialogTurnResult> ShowAllCardAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-
             // Create the PromptOptions which contain the prompt and re-prompt messages.
             // PromptOptions also contains the list of choices available to the user.
             var options = new PromptOptions()
@@ -55,8 +54,14 @@ namespace Microsoft.BotBuilderSamples
             return await stepContext.PromptAsync(nameof(ChoicePrompt), options, cancellationToken);
         }
 
-        // Send a Rich Card response to the user based on their choice.
-        // This method is only called when a valid prompt response is parsed from the user's response to the ChoicePrompt.
+        /// <summary>
+        /// Send a Rich Card response to the user based on their choice.
+        /// This method is only called when a valid prompt response is parsed from the user's response to the ChoicePrompt.
+        /// </summary>
+        /// <param name="stepContext"> Initializes a new instance of the <see cref="WaterfallStepContext"/> class.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects
+        /// or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         private async Task<DialogTurnResult> SelectCardAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             // Cards are sent as Attachments in the Bot Framework.

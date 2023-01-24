@@ -58,6 +58,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |31|Meetings Content Bubble Bot|This Teams app demonstrating Microsoft Teams meeting extensibility iteracting with Content Bubble Bot in-meeting. |[View](/demo%20manifest/meetings-content-bubble.zip) |
 |32|Live coding interview using Shared meeting stage|This Teams app demonstrating a live coding in a Teams meeting stage. |[View](/demo%20manifest/meetings-live-code-interview.zip) |
 |33|Meetings-Context-app|This Teams app demonstrating the contents of meeting tab context object in a meeting tab. |[View](/demo%20manifest/meetings-context-app.zip) |
+|34|Different types of cards|This sample shows the feature where user can interact with different types of cards using bot like Adaptive, hero, list, Office 365 Connector, receipt, sign in, and thumbnail cards and card collections. |[View](/demo%20manifest/bot-all-cards.zip) |
 
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 

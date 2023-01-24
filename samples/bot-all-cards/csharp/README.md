@@ -41,7 +41,24 @@ This sample shows the feature where user can send different types of cards using
 
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
-**NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
+1) Select **New Registration** and on the *register an application page*, set following values:
+    * Set **name** to your app name.
+    * Choose the **supported account types** (any account type will work)
+    * Leave **Redirect URI** empty.
+    * Choose **Register**.
+2) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
+3) Navigate to **Authentication**
+    If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
+    
+    - Set another redirect URI:
+    * Select **Add a platform**.
+    * Select **web**.
+    * Enter the **redirect URI** for the app in the following format: 
+      1) https://token.botframework.com/.auth/web/redirect
+
+![Authentication](BotAllCards/Images/Authentication.png)
+    
+4) Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
 2. Setup for Bot
 - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
@@ -76,27 +93,6 @@ This sample shows the feature where user can send different types of cards using
   - Navigate to `samples/bot-all-cards/csharp/BotAllCards` folder
   - Select `BotAllCards.csproj` file
   - Press `F5` to run the project   
-
-5. App Registrations
-
-1) Select **New Registration** and on the *register an application page*, set following values:
-    * Set **name** to your app name.
-    * Choose the **supported account types** (any account type will work)
-    * Leave **Redirect URI** empty.
-    * Choose **Register**.
-2) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
-3) Navigate to **Authentication**
-    If an app hasn't been granted IT admin consent, users will have to provide consent the first time they use an app.
-    
-    - Set another redirect URI:
-    * Select **Add a platform**.
-    * Select **web**.
-    * Enter the **redirect URI** for the app in the following format: 
-      1) https://token.botframework.com/.auth/web/redirect
-
-![Authentication](BotAllCards/Images/Authentication.png)
-    
-4) Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
 - **This step is specific to Teams.**
 
@@ -175,3 +171,4 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 ## Further reading
 
 - [Types of cards](https://learn.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-reference#receipt-card)
+- [Create bot connection](https://learn.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=userassigned%2Caadv2%2Ccsharp) 
