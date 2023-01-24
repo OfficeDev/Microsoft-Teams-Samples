@@ -7,7 +7,7 @@ products:
 - office-365
 languages:
 - nodejs
-extssions:
+extensions:
  contentType: samples
  createdDate: "06-10-2021 01:48:56"
 urlFragment: officedev-microsoft-teams-samples-graph-app-installation-lifecycle-nodejs
@@ -102,10 +102,10 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
     ![](Images/AppDeleteSuccess.png)
  
-## Further Reading
+## Further reading
 
+- [Graph-app-installation](https://learn.microsoft.com/microsoftteams/plan-teams-lifecycle)
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
-- [Graph-app-installation](https://learn.microsoft.com/microsoftteams/plan-teams-lifecycle)

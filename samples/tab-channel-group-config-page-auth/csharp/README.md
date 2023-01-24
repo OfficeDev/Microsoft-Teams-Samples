@@ -126,6 +126,6 @@ Azure AD, like most identity providers, does not allow its content to be placed 
 
 ![Channel Tab](ConfigTabAuthentication/Images/channel_tab.png)
 
-## Further Reading
+## Further reading
 
-[Tab-Channle-Group-config-auth](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
+[Tab-Channel-Group-config-auth](https://learn.microsoft.com/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)

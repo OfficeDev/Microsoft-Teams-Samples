@@ -193,7 +193,7 @@ For reference please check [Enable and configure your apps for Teams meetings](h
 
 ![Share specific part](Images/share_specific_part_sidepanel.png)
 
-## Further Reading
+## Further reading
 
 - [Build apps for Teams meeting stage](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/build-apps-for-teams-meeting-stage)
 - [Build tabs for meeting](https://learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/build-tabs-for-meeting?tabs=desktop)

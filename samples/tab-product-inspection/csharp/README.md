@@ -126,7 +126,7 @@ Interact with Product Inspection by clicking on the App icon.
 
 **Note:** Similarly, you can test your application in the Office 365 desktop app as well.
    
-## Further Read.
+## Further reading.
 
 [Product inspection](https://learn.microsoft.com/power-apps/teams/inspection)
 
