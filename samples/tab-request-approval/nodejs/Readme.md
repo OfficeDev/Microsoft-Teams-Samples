@@ -152,7 +152,7 @@ Manager Persona:
 
   ![RequestTaskNotification](Images/request-notification.png)
 
-  ## Further reading
+## Further reading
 
 - [Create Personal Tabs](https://learn.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-personal-tab?pivots=node-java-script)
 - [Send Notification to User in Chat](https://docs.microsoft.com/graph/api/chat-sendactivitynotification?view=graph-rest-beta)
