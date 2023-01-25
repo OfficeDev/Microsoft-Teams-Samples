@@ -115,10 +115,11 @@ export class AuthBot extends builder.TeamsActivityHandler {
             'https://www.botframework.com/schemas/error',
             'TurnError'
         );
-        // Uncomment below commented line for local debugging.
-       //  await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
 
-        // Clear out state
+       // Uncomment below commented line for local debugging.
+       // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
+
+       // Clear out state
         await this.conversationState.clear(context);
     }
 }
