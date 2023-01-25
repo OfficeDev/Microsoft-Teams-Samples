@@ -26,7 +26,7 @@ namespace Content_Bubble_Bot
         {
             services.AddControllers();
             services.AddMvc();
-            services.AddControllers().AddNewtonsoftJson();
+            services.AddHttpClient().AddControllers().AddNewtonsoftJson();
             services.AddRazorPages();
 
             // Create the Bot Framework Adapter with error handling enabled.

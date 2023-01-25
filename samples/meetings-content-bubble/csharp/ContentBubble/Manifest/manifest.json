@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.15/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.15",
   "version": "1.0.0",
   "id": "<<MICROSOFT-APP-ID>>",
   "packageName": "com.microsoft.teams.samples",
@@ -31,13 +31,45 @@
         "team",
         "groupchat"
       ],
+      "needsChannelSelector": false,
+      "isNotificationOnly": false,
       "supportsFiles": false,
-      "isNotificationOnly": false
+      "commandLists": [
+        {
+          "scopes": [
+            "personal",
+            "groupchat",
+            "team"
+          ],
+          "commands": [
+            {
+              "title": "SendNotification",
+              "description": "Sends targeted meeting notification to selected members."
+            }
+          ]
+        }
+      ]
     }
   ],
   "permissions": [
     "identity",
     "messageTeamMembers"
   ],
-  "validDomains": [ "*.ngrok.io" ]
+  "validDomains": [
+    "*.ngrok.io"
+  ],
+  "webApplicationInfo": {
+    "id": "<<MICROSOFT-APP-ID>>",
+    "resource": "https://RscBasedStoreApp"
+  },
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "OnlineMeetingNotification.Send.Chat",
+          "type": "Application"
+        }
+      ]
+    }
+  }
 }

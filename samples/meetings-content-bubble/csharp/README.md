@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-meetings-content-bubble-csharp
 
 # Meetings Content Bubble
 
-This sample illustrates how to implement [Content Bubble](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience.
+This sample illustrates how to implement [Content Bubble](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience. This app also showcase sending targeted notification to meeting participants.
 
 ## Interaction with app
 
@@ -89,6 +89,13 @@ Message the Bot by @ mentioning to interact with the content bubble.
 ![Feedback submit](ContentBubble/Images/FeedbackSubmit.png)
 
 ![Feedback card](ContentBubble/Images/FeedbackCard.png)
+
+
+## Send targeted meeting notification
+![Meeting card](ContentBubble/Images/MeetingCard.png)
+
+![Target notification](ContentBubble/Images/TargetNotification.png)
+
 
 ## Further Reading
 
