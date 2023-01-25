@@ -42,7 +42,7 @@ namespace Microsoft.BotBuilderSamples
                 if (member.Id != turnContext.Activity.Recipient.Id)
                 {
                     await turnContext.SendActivityAsync(
-                        $"Welcome to suggested actions bot. This bot will introduce you to suggested actions. Please answer the question:",
+                        $"Welcome to suggested actions bot. This bot will introduce you to suggested actions. Please answer the question: Testing - YMAL",
                         cancellationToken: cancellationToken);
                     await SendSuggestedActionsAsync(turnContext, cancellationToken);
                 }
