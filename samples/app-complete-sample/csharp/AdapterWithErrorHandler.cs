@@ -3,9 +3,6 @@
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder.TraceExtensions;
-using Microsoft.Bot.Schema;
-using System.Linq;
-using System.Runtime.InteropServices;
 
 namespace template_bot_master_csharp
 {
