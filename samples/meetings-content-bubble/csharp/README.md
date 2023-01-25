@@ -74,7 +74,7 @@ This sample illustrates how to implement [Content Bubble](https://docs.microsoft
    - Go to your project directory, the ./Manifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-Note:- If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-content-bubble/csharp/ContentBubble/AdapterWithErrorHandler.cs#L26) and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-content-bubble/csharp/ContentBubble/AdapterWithErrorHandler.cs#L26) and put your debugger for local debug.
 
 ## Interacting with the app in Teams Meeting
 

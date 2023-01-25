@@ -78,7 +78,7 @@ This sample illustrates how to implement [Side Panel](https://docs.microsoft.com
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
 
-Note - If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-sidepanel/csharp/SidePanel/AdapterWithErrorHandler.cs#L26) and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-sidepanel/csharp/SidePanel/AdapterWithErrorHandler.cs#L26) and put your debugger for local debug.
 
 ## Running the sample
 User interactions(Meeting Organizer)

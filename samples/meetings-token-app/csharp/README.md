@@ -119,7 +119,7 @@ Follow [these instructions](https://docs.microsoft.com/en-us/microsoftteams/plat
 
 > In-meeting tabs are only available in the Teams desktop client. They will not be visible when you run Teams in a web browser.
 
-Note:- If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-token-app/csharp/AdapterWithErrorHandler.cs#L32) and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-token-app/csharp/AdapterWithErrorHandler.cs#L32) and put your debugger for local debug.
   
 -- Sideload the app in a Teams desktop client
     1. Create a meeting with few test participants, ideally with a mix of Presenters and Attendees.

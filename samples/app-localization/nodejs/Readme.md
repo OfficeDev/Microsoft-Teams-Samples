@@ -74,7 +74,7 @@ This sample illustrates how to implement [Localization for Microsoft Teams apps]
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
-Note: If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-localization/nodejs/server/api/botController.js#L24) and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-localization/nodejs/server/api/botController.js#L24) and put your debugger for local debug.
 
 7. Run your app.
 - Start the bot

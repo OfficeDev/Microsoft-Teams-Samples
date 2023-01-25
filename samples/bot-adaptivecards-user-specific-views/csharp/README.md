@@ -131,7 +131,7 @@ the Teams service needs to call into the bot.
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/chat/Meeting scope (Supported scopes)
 
-Note: If you are facing any issue in your app [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-adaptivecards-user-specific-views/csharp/Microsoft.Teams.Samples.UserSpecificViews/Bot/BotHttpAdapter.cs#L37) and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-adaptivecards-user-specific-views/csharp/Microsoft.Teams.Samples.UserSpecificViews/Bot/BotHttpAdapter.cs#L37) and put your debugger for local debug.
 
 **Basic Tests**
 * Tag the bot and send any message. The bot should respond with an adaptive card which should have options to try out the different cards.

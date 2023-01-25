@@ -87,7 +87,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), f
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
 
-Note: If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-region-selection/csharp/RegionSectionApp/AdapterWithErrorHandler.cs#L25) and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-region-selection/csharp/RegionSectionApp/AdapterWithErrorHandler.cs#L25) and put your debugger for local debug.
 
 ## Running the sample
 
