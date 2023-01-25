@@ -77,8 +77,6 @@ This sample shows a feature where user can schedule a recurring task and get the
 
 **Note**: If you are facing any issue in your app, [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-daily-task-reminder/csharp/BotDailyTaskReminder/AdapterWithErrorHandler.cs#L30) and put your debugger for local debug.
 
-
-
 ## Running the sample
 
 - Use command `create-reminder` to get card with action `Schedule task`.
