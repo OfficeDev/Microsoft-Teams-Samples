@@ -80,7 +80,7 @@ This sample shows feature where user can checkin with current location and view 
      - Select `AppCheckinLocation.csproj` file
      - Press `F5` to run the project
 
-**Note**: If you are facing any issue in your app, [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-checkin-location/csharp/AppCheckinLocation/AdapterWithErrorHandler.cs#L33) and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-checkin-location/csharp/AppCheckinLocation/AdapterWithErrorHandler.cs#L33) line and put your debugger for local debug.
 
 4) Setup Manifest for Teams
 - __*This step is specific to Teams.*__
