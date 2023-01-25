@@ -1,9 +1,5 @@
 import * as React from "react";
-import {
-    BrowserRouter,
-    Route,
-    Routes
-} from 'react-router-dom';
+import { BrowserRouter,  Route, Routes } from "react-router-dom";
 import AppInMeeting from "../components/app-in-meeting";
 import Configure from "../components/configure";
 import ShareToMeeting from "../components/share-to-meeting";

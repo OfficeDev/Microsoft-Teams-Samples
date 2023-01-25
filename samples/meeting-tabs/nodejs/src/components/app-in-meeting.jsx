@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Flex, FlexItem, Button } from "@fluentui/react-northstar";
+import { Button } from '@fluentui/react-components';
 
 class AppInMeeting extends Component {
     constructor(props) {
@@ -64,23 +64,19 @@ class AppInMeeting extends Component {
     render() {
         return (
             <>
-                <Flex>
-                    <FlexItem push>
-                        <div className="tag-container">
-                            <h3>Share To Stage View</h3>
-                            <Button primary content="Share" onClick={this.shareSpecificPart} />
-                        </div>
-                    </FlexItem>
-                </Flex>
-                <Flex>
-                    <FlexItem push>
-                        <div className="tag-container">
-                            <h3>Mute/Unmute Audio Call </h3>
-                            <Button primary content="Mute/Un-Mute" onClick={this.toggleState} />
-                            <li className="break"> Mute State: <b>{this.state.result}</b></li>
-                        </div>
-                    </FlexItem>
-                </Flex>
+                <div>
+                    <div className="tag-container">
+                        <h3>Share To Stage View</h3>
+                        <Button appearance="primary" onClick={this.shareSpecificPart} >Share</Button>
+                    </div>
+                </div>
+                <div>
+                    <div className="tag-container">
+                        <h3>Mute/Unmute Audio Call </h3>
+                        <Button appearance="primary" onClick={this.toggleState} >Mute/Un-Mute</Button>
+                        <li className="break"> Mute State: <b>{this.state.result}</b></li>
+                    </div>
+                </div>
             </>
         )
     }
