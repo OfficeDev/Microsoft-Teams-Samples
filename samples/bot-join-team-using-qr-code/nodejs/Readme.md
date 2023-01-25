@@ -30,6 +30,13 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 **Join a team using QR code:** [Manifest](/samples/bot-join-team-using-qr-code/csharp/demo-manifest/Bot-Join-Team-By-QR.zip)
 
+## Prerequisites
+
+- Microsoft Teams is installed and you have an account (not a guest account)
+-  [NodeJS](https://nodejs.org/en/)
+-  [ngrok](https://ngrok.com/) or equivalent tunneling solution
+-  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+
 ## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
