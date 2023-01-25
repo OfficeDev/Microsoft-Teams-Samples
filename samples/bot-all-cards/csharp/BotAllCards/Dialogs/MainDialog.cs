@@ -153,7 +153,6 @@ namespace Microsoft.BotBuilderSamples
             }
             catch (Exception Exc)
             {
-
                 return null;
             }
         }
