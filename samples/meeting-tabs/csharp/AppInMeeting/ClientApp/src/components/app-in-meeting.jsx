@@ -10,10 +10,14 @@ class AppInMeeting extends Component {
             result: ""
         }
     }
+    //Allows us to execute the React code when the component is already placed in the DOM.
     componentDidMount() {
         microsoftTeams.app.initialize();
     }
 
+    // First callback
+    // function with two
+    // arguments error and data
     callback = (errcode, bln) => {
         if (errcode) {
             this.setState({ errorCode: JSON.stringify(errcode) })
