@@ -1,4 +1,4 @@
-﻿---
+---
 page_type: sample
 description: This sample code demonstrates how to get enable SSO authentication for your Adaptive Cards
 products:
