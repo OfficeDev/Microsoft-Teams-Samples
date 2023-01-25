@@ -1,14 +1,14 @@
 ﻿{
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
   "manifestVersion": "1.13",
-  "id": "29f3f5e0-2674-4685-b919-4ea5bbed6ed2",
+  "id": "<<Guid>>",
   "version": "1.0.0",
   "packageName": "com.custom.tab",
   "developer": {
     "name": "Contoso",
-    "websiteUrl": "https://6dd4-14-142-36-202.ngrok.io",
-    "privacyUrl": "https://6dd4-14-142-36-202.ngrok.io/privacy",
-    "termsOfUseUrl": "https://6dd4-14-142-36-202.ngrok.io/tou",
+    "websiteUrl": "https://<<Base-url>>",
+    "privacyUrl": "https://<<Base-url>>/privacy",
+    "termsOfUseUrl": "https://<<Base-url>>/tou",
     "mpnId": ""
   },
   "name": {
@@ -29,8 +29,8 @@
     {
       "entityId": "index",
       "name": "Personal Tab",
-      "contentUrl": "https://6dd4-14-142-36-202.ngrok.io/PersonalTab",
-      "websiteUrl": "https://6dd4-14-142-36-202.ngrok.io/PersonalTab",
+      "contentUrl": "https://<<Base-url>>/PersonalTab",
+      "websiteUrl": "https://<<Base-url>>/PersonalTab",
       "scopes": [
         "personal"
       ]

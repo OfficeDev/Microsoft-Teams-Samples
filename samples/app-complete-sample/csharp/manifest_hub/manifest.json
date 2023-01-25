@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
   "manifestVersion": "1.13",
   "version": "1.5",
-  "id": "34f5fd56-4f98-4dc7-ba75-3bd55a16368a",
+  "id": "{{Microsoft-App-Id}}",
   "packageName": "com.skype.teams.samples.sampleapp",
   "developer": {
     "name": "Microsoft",
@@ -25,7 +25,7 @@
   "accentColor": "#3F487F",
   "staticTabs": [
     {
-      "contentUrl": "https://8be3-113-193-169-184.ngrok.io/BotInfo",
+      "contentUrl": "https://{{domain-name}}/BotInfo",
       "entityId": "statictab",
       "name": "Bot Info",
       "scopes": [
@@ -34,119 +34,9 @@
       ]
     }
   ],
-  "configurableTabs": [
-    {
-      "configurationUrl": "https://8be3-113-193-169-184.ngrok.io/Page/index.html",
-      "canUpdateConfiguration": false,
-      "scopes": [ "team", "groupchat" ]
-    }
-  ],
-  "bots": [
-    {
-      "botId": "34f5fd56-4f98-4dc7-ba75-3bd55a16368a",
-      "isNotificationOnly": false,
-      "scopes": [ "team", "personal", "groupchat" ],
-      "commandLists": [
-        {
-          "scopes": [
-            "team"
-          ],
-          "commands": [
-            {
-              "title": "help",
-              "description": "To show the list of command for user interactions"
-            },
-            {
-              "title": "hello",
-              "description": "Runs the simplest hello dialog"
-            },
-            {
-              "title": "multi dialog 2",
-              "description": "Displays a card with invoke buttons"
-            },
-            {
-              "title": "roster",
-              "description": "Fetches the full roster payload for the current conversation"
-            },
-            {
-              "title": "names",
-              "description": "Lists the names of the users for the current conversation"
-            },
-            {
-              "title": "last dialog",
-              "description": "Shows which dialog sent the last message"
-            },
-            {
-              "title": "send message to 1:1",
-              "description": "Send the user a 1:1 message"
-            },
-            {
-              "title": "setup text message",
-              "description": "Sets up a text message that can be updated"
-            },
-            {
-              "title": "update text message",
-              "description": "Updates a text message once it is setup to be updated"
-            },
-            {
-              "title": "setup card message",
-              "description": "Sets up a card that can be updated"
-            }
-          ]
-        },
-        {
-          "scopes": [
-            "personal"
-          ],
-          "commands": [
-            {
-              "title": "help",
-              "description": "To show the list of command for user interactions"
-            },
-            {
-              "title": "hello",
-              "description": "Runs the simplest hello dialog"
-            },
-            {
-              "title": "multi dialog 2",
-              "description": "Displays a card with invoke buttons"
-            },
-            {
-              "title": "roster",
-              "description": "Fetches the full roster payload for the current conversation"
-            },
-            {
-              "title": "names",
-              "description": "Lists the names of the users for the current conversation"
-            },
-            {
-              "title": "last dialog",
-              "description": "Shows which dialog sent the last message"
-            },
-            {
-              "title": "send message to 1:1",
-              "description": "Send the user a 1:1 message"
-            },
-            {
-              "title": "setup text message",
-              "description": "Sets up a text message that can be updated"
-            },
-            {
-              "title": "update text message",
-              "description": "Updates a text message once it is setup to be updated"
-            },
-            {
-              "title": "setup card message",
-              "description": "Sets up a card that can be updated"
-            }
-          ]
-        }
-      ]
-    }
-  ],
   "composeExtensions": [
     {
-      "botId": "34f5fd56-4f98-4dc7-ba75-3bd55a16368a",
+      "botId": "{{Microsoft-App-Id}}",
       "canUpdateConfiguration": true,
       "commands": [
         {
@@ -170,6 +60,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "8be3-113-193-169-184.ngrok.io"
+    "{{domain-name}}"
   ]
 }
