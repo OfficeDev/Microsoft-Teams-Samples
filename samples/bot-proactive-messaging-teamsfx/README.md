@@ -25,8 +25,6 @@ Both files contain template arguments with `{...}` statements which will be repl
 
 **Note**: If you are facing any issue in your app, [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-proactive-messaging-teamsfx/bot/index.js#L28) and put your debugger for local debug.
 
-
-
 > Important Notes! This sample is under upgrading, please expect errors if you attempted to provision and deploy the app to cloud.
 > Once the sample complete upgrading, this notice will be removed. And the sample will be ready to be deployed to cloud by then.
 > Before that, please debug and run this sample app locally!
