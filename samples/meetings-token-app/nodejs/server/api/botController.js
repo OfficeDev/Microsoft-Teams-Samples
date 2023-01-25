@@ -22,7 +22,7 @@ adapter.onTurnError = async (context, error) => {
     );
 
    // Uncomment below commented line for local debugging.
-  // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
+   // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
 
 };
 

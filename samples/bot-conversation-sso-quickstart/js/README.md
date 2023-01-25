@@ -93,7 +93,6 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 **Note**: If you are facing any issue in your app, [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/js/index.js#L60) and put your debugger for local debug.
 
-
 ## Running the sample
 
 **Adding bot UI:**

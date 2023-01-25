@@ -79,7 +79,6 @@ urlFragment: officedev-microsoft-teams-samples-bot-conversation-quickstart-js
 
 **Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-quickstart/js/index.js#L43) line and put your debugger for local debug.
 
-
 ## Running the sample
 
 ![hello response](Images/HelloResponse.PNG)

@@ -20,9 +20,8 @@ adapter.onTurnError = async (context, error) => {
         'TurnError'
     );
 
-    // Uncomment below commented line for local debugging.
+   // Uncomment below commented line for local debugging.
    // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
-
 };
 
 // Create bot handlers
