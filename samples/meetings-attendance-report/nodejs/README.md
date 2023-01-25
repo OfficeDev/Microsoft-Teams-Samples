@@ -127,7 +127,7 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
     - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
     - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-**Note**: If you are facing any issue in your app, [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-attendance-report/nodejs/index.js#L52) and put your debugger for local debug.
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-attendance-report/nodejs/index.js#L52) line and put your debugger for local debug.
 
 ## Running the sample
 
