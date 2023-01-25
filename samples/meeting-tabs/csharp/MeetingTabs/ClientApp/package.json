@@ -1,0 +1,37 @@
+{
+  "name": "meeting-tabs",
+  "version": "0.0.1",
+  "private": true,
+  "author": "Microsoft",
+  "license": "MIT",
+  "dependencies": {
+    "@fluentui/react-components": "^9.0.0-rc.10",
+    "@microsoft/teams-js": "^2.7.1",
+    "axios": "^0.21.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.3",
+    "react-scripts": "^5.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
