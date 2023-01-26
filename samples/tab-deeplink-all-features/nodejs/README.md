@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-all-features-nodejs
 
  This sample app for demonstrating for deeplink all features using Tab.
 
-- **Interaction with bot**
+- **Interaction with App**
 
  ![Deeplink-All-Features](Images/DeeplinkAllFeatures.gif)
 
@@ -53,31 +53,33 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-all-features-nodejs
         cd samples/tab-deeplink-all-features/nodejs
         ```
 
-    - Install modules
-
-        ```bash
-        npm install
-        ```
-
-    - Start the bot
-
-        ```bash
-        npm start
-        ```
     - If you are using Visual Studio code
      - Launch Visual Studio code
      - Folder -> Open -> Project/Solution
      - Navigate to ```samples/tab-deeplink-all-features/nodejs``` folder
      - Select ```nodejs``` Folder
-     
-     - To run the application required node modules. Please use this command to install modules `npm i`.
+
+    - Install modules
+
+        ```bash
+        npm install
+        ```
+    - Update AppId placeholer `<<Your_App_ID>>` value in your `Pages/DeepLinkAllFeatures.js` file at line no. 48  with your          particular App Id from any Team in Teams. (You can get it form [teams admin portal](https://admin.teams.microsoft.com/).
+    - [Application](Images/11.TeamsAdminPortal.png)
+	- Update MicrosoftAppID placeholer `<<Microsoft-App-ID>>` value in your `WWWroot/js/DeepLinkAllFeatures.js` file at line no. 75  with your particular Microsoft-App-ID which you have generated in Step 1 (App Registration creation). 
+
+    - Run the App
+
+        ```bash
+        npm start
+        ```
 
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the `appPackage` folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
     - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - **Zip** up the contents of the `Manifest` folder to create a `Manifest.zip` or `Manifest_Hub` folder to create a `Manifest_Hub.zip`(Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
-    
+
 
  ## Running the sample
 

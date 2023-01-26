@@ -17,7 +17,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-all-features-csharp
 
  This sample app for demonstrating for deeplink all features using Tab.
 
-- **Interaction with bot**
+- **Interaction with App**
 
  ![Deeplink-All-Features](DeepLinkAllFeatures/Images/DeeplinkAllFeatures.gif)
 
