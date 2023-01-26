@@ -19,7 +19,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-all-features-csharp
 
 - **Interaction with App**
 
- ![Deeplink-All-Features](DeepLinkAllFeatures/Images/DeeplinkAllFeatures.gif)
+ ![Deeplink-All-Features](DeeplinkAllFeatures/Images/DeeplinkAllFeatures.gif)
 
  ## Prerequisites
 
@@ -63,7 +63,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-all-features-csharp
     - Navigate to `samples/tab-deeplink-all-features/csharp` folder
     - Select `DeeplinkAllFeatures.csproj` or `DeeplinkAllFeatures.sln` file
 	- Update AppId placeholer `<<Your_App_ID>>` value in your `WWWroot/js/DeepLinkAllFeatures.js` file at line no. 48  with your          particular App Id from any Team in Teams. (You can get it manually form [teams admin portal](https://admin.teams.microsoft.com/).
-  - [Application](DeepLinkAllFeatures/Images/11.TeamsAdminPortal.png)
+  - [Application](DeeplinkAllFeatures/Images/11.TeamsAdminPortal.png)
 	- Update MicrosoftAppID placeholer `<<Microsoft-App-ID>>` value in your `WWWroot/js/DeepLinkAllFeatures.js` file at line no. 75  with your particular Microsoft-App-ID which you have generated in Step 1 (App Registration creation).
 
 
@@ -81,31 +81,31 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-all-features-csharp
 ![Application ](DeeplinkAllFeatures/Images/1.App.png)
 
 **DeeplinkTab**
-![DeeplinkTab](DeepLinkAllFeatures/Images/3.DeeplinkTab.png)
+![DeeplinkTab](DeeplinkAllFeatures/Images/3.DeeplinkTab.png)
 
 **AppProfilePage**
-![AppProfilePage](DeepLinkAllFeatures/Images/4.AppProfilePage.png)
+![AppProfilePage](DeeplinkAllFeatures/Images/4.AppProfilePage.png)
 
 **AudioCallSelectPeople**
-![AudioCallSelectPeople](DeepLinkAllFeatures/Images/5.AudioCallSelectPeople.png)
+![AudioCallSelectPeople](DeeplinkAllFeatures/Images/5.AudioCallSelectPeople.png)
 
 **AudioCallStart**
 ![AudioCallStart](DeepLinkAllFeatures/Images/6.AudioCallStart.png)
 
 **AudioCallStarted**
-![AudioCallStarted](DeepLinkAllFeatures/Images/7.AudioCallStarted.png)
+![AudioCallStarted](DeeplinkAllFeatures/Images/7.AudioCallStarted.png)
 
 **ScheduleMeeting**
-![ScheduleMeeting](DeepLinkAllFeatures/Images/8.ScheduleMeeting.png)
+![ScheduleMeeting](DeeplinkAllFeatures/Images/8.ScheduleMeeting.png)
 
 **ScheduleMeetingDeeplink**
-![ScheduleMeetingDeeplink](DeepLinkAllFeatures/Images/9.ScheduleMeetingDeeplink.png)
+![ScheduleMeetingDeeplink](DeeplinkAllFeatures/Images/9.ScheduleMeetingDeeplink.png)
 
 **StartNewChat**
-![StartNewChat](DeepLinkAllFeatures/Images/10.StartNewChat.png)
+![StartNewChat](DeeplinkAllFeatures/Images/10.StartNewChat.png)
 
 **VideoCall**
-![VideoCall](DeepLinkAllFeatures/Images/12.VideoCall.png)
+![VideoCall](DeeplinkAllFeatures/Images/12.VideoCall.png)
 
  ## Further reading
 

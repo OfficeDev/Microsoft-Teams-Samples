@@ -84,34 +84,34 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-all-features-nodejs
  ## Running the sample
 
 **Application Setup**
-![Application ](DeeplinkAllFeatures/Images/1.App.png)
+![Application ](Images/1.App.png)
 
 **DeeplinkTab**
-![DeeplinkTab](DeepLinkAllFeatures/Images/3.DeeplinkTab.png)
+![DeeplinkTab](Images/3.DeeplinkTab.png)
 
 **AppProfilePage**
-![AppProfilePage](DeepLinkAllFeatures/Images/4.AppProfilePage.png)
+![AppProfilePage](Images/4.AppProfilePage.png)
 
 **AudioCallSelectPeople**
-![AudioCallSelectPeople](DeepLinkAllFeatures/Images/5.AudioCallSelectPeople.png)
+![AudioCallSelectPeople](Images/5.AudioCallSelectPeople.png)
 
 **AudioCallStart**
-![AudioCallStart](DeepLinkAllFeatures/Images/6.AudioCallStart.png)
+![AudioCallStart](Images/6.AudioCallStart.png)
 
 **AudioCallStarted**
-![AudioCallStarted](DeepLinkAllFeatures/Images/7.AudioCallStarted.png)
+![AudioCallStarted](Images/7.AudioCallStarted.png)
 
 **ScheduleMeeting**
-![ScheduleMeeting](DeepLinkAllFeatures/Images/8.ScheduleMeeting.png)
+![ScheduleMeeting](Images/8.ScheduleMeeting.png)
 
 **ScheduleMeetingDeeplink**
-![ScheduleMeetingDeeplink](DeepLinkAllFeatures/Images/9.ScheduleMeetingDeeplink.png)
+![ScheduleMeetingDeeplink](Images/9.ScheduleMeetingDeeplink.png)
 
 **StartNewChat**
-![StartNewChat](DeepLinkAllFeatures/Images/10.StartNewChat.png)
+![StartNewChat](Images/10.StartNewChat.png)
 
 **VideoCall**
-![VideoCall](DeepLinkAllFeatures/Images/12.VideoCall.png)
+![VideoCall](Images/12.VideoCall.png)
 
  ## Further reading
 
