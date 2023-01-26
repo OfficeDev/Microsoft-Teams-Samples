@@ -6,9 +6,9 @@
   "packageName": "com.custom.tab",
   "developer": {
     "name": "Contoso",
-    "websiteUrl": "https://<<Base-url>>",
-    "privacyUrl": "https://<<Base-url>>/privacy",
-    "termsOfUseUrl": "https://<<Base-url>>/tou",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
     "mpnId": ""
   },
   "name": {
