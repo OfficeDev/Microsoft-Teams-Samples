@@ -1,7 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿// <copyright file="DeeplinkController.cs" company="Microsoft">
+// Copyright (c) Microsoft. All rights reserved.
+// </copyright>
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace DeeplinkAllFeatures.Controllers
 {
+    /// <summary>
+    /// Deeplink controller to handle multiple views. 
+    /// </summary>
     public class DeeplinkController : Controller
     {
         private readonly ILogger<DeeplinkController> _logger;

@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "DeeplinkAllFeatures": {
+    "Deeplinks": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

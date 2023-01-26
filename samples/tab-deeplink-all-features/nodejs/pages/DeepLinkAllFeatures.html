@@ -1,31 +1,38 @@
-<!-- // Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. -->
+<!-- Copyright (c) Microsoft Corporation. All rights reserved.
+ Licensed under the MIT License. -->
 
-<script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+<script src="https://res.cdn.office.net/teams-js/2.7.1/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/style.css" />
 
 <!-- Import DeeplinkActions.js file -->
 <script type="text/javascript" src="DeepLinkAllFeatures.js"></script>
 
 <div style="text-align: center; margin-left: auto; margin-right: auto;">
+
     <button class="callDeeplinkButton" onclick="onApplicationProfileDialog()">Open the application profile
         dialog</button><br>
+
     <button class="callDeeplinkButton" onclick="navigateToChatWithApplication()">Navigate to a chat with the
         application</button><br>
+
     <button class="callDeeplinkButton" onclick="navigateToTeamsChat()">Deep link to Teams chat <br><span
             style="font-size: smaller;color: yellow;">(Works in Teams
             chat)</span></button><br>
+
     <button class="callDeeplinkButton" onclick="navigateOnStartNewChat()">Deep link to start a new chat</button><br>
+
     <button data-id="default" class="callDeeplinkButton"
         onclick="onCallDeepLinkButtonClick(microsoftTeams.call.CallModalities.Audio)">
         Deep link to start an audio call with users
     </button>
+
     <button data-id="default" class="callDeeplinkButton"
         onclick="onCallDeepLinkButtonClick(microsoftTeams.call.CallModalities.Video)">
         Deep link to start an video call with users
-    </button>
-    <br>
+    </button><br>
+
     <div><b>Open a scheduling dialog</b></div>
+
     <div>
         <form>
             <span>Add Details for scheduling dialog</span>

@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.12",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.14",
   "version": "1.0",
   "id": "<<Microsoft-App-ID>>",
   "packageName": "com.microsoft.deeplink",
@@ -11,12 +11,12 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Deeplink All Features",
-    "full": "All features for Deeplink using tab"
+    "short": "Deep links features",
+    "full": "Different Deep link features using tab"
   },
   "description": {
-    "short": "DeepLink with all features for Microsoft Teams",
-    "full": "This sample DeepLink app for demonstrating deeplink all features using tab."
+    "short": "Different Deep Link features for Microsoft Teams.",
+    "full": "This sample app demonstrating the different deep links features using tab."
   },
   "icons": {
     "outline": "icon-outline.png",
@@ -45,7 +45,6 @@
     }
   ],
   "validDomains": [
-    "*.ngrok.io",
     "{{domain-name}}"
   ]
 }

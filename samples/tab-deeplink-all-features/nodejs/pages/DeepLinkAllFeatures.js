@@ -46,6 +46,7 @@ function onCallDeepLinkButtonClick(callModalities) {
 // Opens aplication profile dialog. 
 function onApplicationProfileDialog() {
     let appId = "<<Your_App_ID>>"; // you will get app-Id from teams admin portal, app profile page.
+
     microsoftTeams.app.openLink(`https://teams.microsoft.com/l/app/${appId}`);
 }
 
@@ -58,6 +59,7 @@ function onSchedulingDialogClick() {
     var attendeeInput = document.getElementById("Attendee");
 
     if (subjectInput.value.trim() !== "" && startTimeInput.value !== "" && endTimeInput.value !== "" && attendeeInput.value !== "") {
+
         var meetingDetails =
         {
             attendees: attendeeInput.value,
@@ -66,6 +68,7 @@ function onSchedulingDialogClick() {
             startTime: startTimeInput.value,
             subject: subjectInput.value.trim(),
         };
+
         microsoftTeams.app.openLink(`https://teams.microsoft.com/l/meeting/new?subject=${meetingDetails.subject}&startTime=${meetingDetails.startTime}&endTime=${meetingDetails.endTime}&content=${meetingDetails.content}&attendees=${meetingDetails.attendees}`)
     }
 }
@@ -73,12 +76,14 @@ function onSchedulingDialogClick() {
 // function to navigate chat with application
 function navigateToChatWithApplication() {
     let MicrosoftAppID = "<<Microsoft-App-ID>>"; // Replace placeholder <<Microsoft-App-ID>> with your MicrosoftAppId / Bot-Id.
+
     microsoftTeams.app.openLink(`https://teams.microsoft.com/l/entity/${MicrosoftAppID}/conversations`);
 }
 
 // navigates to new chat window where you can start new chat.
 function navigateOnStartNewChat() {
     let app = microsoftTeams.app;
+
     app.initialize().then(app.getContext).then((context) => {
         let currentUser = context.user.loginHint;
         microsoftTeams.app.openLink(`https://teams.microsoft.com/l/chat/0/0?users=${currentUser}`)
@@ -88,6 +93,7 @@ function navigateOnStartNewChat() {
 // navigates to teams chat window.
 function navigateToTeamsChat() {
     let app = microsoftTeams.app;
+
     app.initialize().then(app.getContext).then((context) => {
         const queryParameters = {
             channelId: context.channel.id,
@@ -97,6 +103,7 @@ function navigateToTeamsChat() {
             teamName: context.team.displayName,
             channelName: context.channel.displayName
         }
+
         microsoftTeams.app.openLink(`https://teams.microsoft.com/l/message/${queryParameters.channelId}/1648741500652?tenantId=${queryParameters.tenantId}&groupId=${queryParameters.groupId}&parentMessageId=${queryParameters.parentMessageId}&teamName=${queryParameters.teamName}&channelName=${queryParameters.channelName}`)
     });
 }

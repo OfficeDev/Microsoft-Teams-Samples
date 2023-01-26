@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams sample app for demonstrating deeplink all features using Tab
+description: Microsoft Teams sample app for demonstrating deep link features using tab
 products:
 - office-teams
 - office
@@ -13,13 +13,13 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-tab-deeplink-all-features-nodejs
 
 ---
- # DeepLink All Features
+ # Deep Links Features
 
- This sample app for demonstrating for deeplink all features using Tab.
+ This sample app for demonstrating for deep links features using tab.
 
 - **Interaction with App**
 
- ![Deeplink-All-Features](Images/DeeplinkAllFeatures.gif)
+ ![Deeplink-Features](Images/DeeplinkFeatures.gif)
 
 ## Prerequisites
 - Microsoft Teams is installed and you have an account (not a guest account)

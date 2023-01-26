@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Microsoft Teams sample app for demonstrating deeplink all features using Tab
+description: Microsoft Teams sample app for demonstrating different deep-link features using tab.
 products:
 - office-teams
 - office
@@ -10,16 +10,16 @@ languages:
 extensions:
  contentType: samples
  createdDate: "26/01/2023 01:38:27 PM"
-urlFragment: officedev-microsoft-teams-samples-tab-deeplink-all-features-csharp
+urlFragment: officedev-microsoft-teams-samples-tab-deeplink-features-csharp
 
 ---
- # DeepLink All Features
+ # Deep-Link Features
 
- This sample app for demonstrating for deeplink all features using Tab.
+ This sample app for demonstrating for dee-plink features using tab.
 
 - **Interaction with App**
 
- ![Deeplink-All-Features](DeeplinkAllFeatures/Images/DeeplinkAllFeatures.gif)
+ ![Deeplink-Features](DeeplinkAllFeatures/Images/DeeplinkFeatures.gif)
 
  ## Prerequisites
 
@@ -70,7 +70,6 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-all-features-csharp
 4. __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* 
 	  you see the place holder string `<<YOUR-MICROSOFT-APP-ID>>` value(depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json` and `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok.io`) 
-    - **Edit** the `manifest.json` for `validDomains` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - **Zip** up the contents of the `Manifest` folder to create a `Manifest.zip` or `Manifest_Hub` folder into a `Manifest_Hub.zip`. (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)

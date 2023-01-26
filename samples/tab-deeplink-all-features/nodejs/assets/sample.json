@@ -1,12 +1,12 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-tab-deeplink-all-features-nodejs",
+    "name": "officedev-microsoft-teams-samples-tab-deeplink-features-nodejs",
     "source": "officeDev",
-    "title": "DeepLink All Features",
-    "shortDescription": "Microsoft Teams sample app for demonstrating deeplink all features",
+    "title": "Deep Links Features",
+    "shortDescription": "Microsoft Teams sample app for demonstrating deep links features",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-deeplink/csharp",
     "longDescription": [
-      "Microsoft Teams sample app for demonstrating deeplink all features using tab"
+      "Microsoft Teams sample app for demonstrating deep links features using tab."
     ],
     "creationDateTime": "2023-01-26",
     "updateDateTime": "2023-01-26",
@@ -35,8 +35,8 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-deeplink-all-features/nodejs/Images/DeepLinkAllFeatures.gif",
-        "alt": "Solution UX showing deeplink all features using tab"
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-deeplink-all-features/nodejs/Images/DeepLinkFeatures.gif",
+        "alt": "Solution UX showing deep links features using tab."
       }
     ],
     "authors": [
