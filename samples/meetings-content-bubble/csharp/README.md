@@ -99,4 +99,4 @@ Message the Bot by @ mentioning to interact with the content bubble.
 
 ## Further Reading
 
-[Meetings-content-bubble](https://techcommunity.microsoft.com/t5/microsoft-teams/introducing-chat-bubbles-in-microsoft-teams-meetings/m-p/2447271)
+- [Meetings-content-bubble](https://techcommunity.microsoft.com/t5/microsoft-teams/introducing-chat-bubbles-in-microsoft-teams-meetings/m-p/2447271)

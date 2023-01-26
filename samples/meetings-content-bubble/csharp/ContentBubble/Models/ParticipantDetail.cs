@@ -1,4 +1,9 @@
-﻿namespace Content_Bubble_Bot.Models
+﻿// <copyright file="ParticipantDetail.cs" company="Microsoft">
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+// </copyright>
+
+namespace Content_Bubble_Bot.Models
 {
     public class ParticipantDetail
     {

@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-meetings-content-bubble-csharp",
     "source": "officeDev",
     "title": "Content Bubble Meeting app",
-    "shortDescription": "Illustrates how to implement the \"content bubble\" in-meeting experience",
+    "shortDescription": "Illustrates how to implement the \"content bubble\" and \"targeted notifications\" in-meeting experience",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-content-bubble/csharp",
     "longDescription": [
-      "Illustrates how to implement the \"content bubble\" in-meeting experience"
+      "Illustrates how to implement the \"content bubble\" and \"targeted notifications\" in-meeting experience"
     ],
     "creationDateTime": "2021-07-07",
     "updateDateTime": "2022-04-05",

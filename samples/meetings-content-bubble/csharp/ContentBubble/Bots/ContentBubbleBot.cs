@@ -1,5 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// <copyright file="ContentBubbleBot.cs" company="Microsoft">
+// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
+// </copyright>
 
 using AdaptiveCards;
 using AdaptiveCards.Templating;
@@ -44,6 +46,14 @@ namespace Content_Bubble_Bot
             };
             _httpClientFactory = httpClientFactory;
         }
+
+        /// <summary>
+        /// Invoked when a message activity is recieved in chat.
+        /// </summary>
+        /// <param name="turnContext">The context object for this turn.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects
+        /// or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             if (turnContext.Activity.Value == null)
@@ -92,6 +102,13 @@ namespace Content_Bubble_Bot
             }
         }
 
+        /// <summary>
+        /// Method to handle different notification actions in meeting.
+        /// </summary>
+        /// <param name="turnContext">The context object for this turn.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects
+        /// or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         private async Task HandleActions(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             var action = Newtonsoft.Json.JsonConvert.DeserializeObject<ActionBase>(turnContext.Activity.Value.ToString());
@@ -184,6 +201,14 @@ namespace Content_Bubble_Bot
             }
         }
 
+        /// <summary>
+        /// Invoked when new member is added to conversation.
+        /// </summary>
+        /// <param name="membersAdded">List of members added to the conversation.</param>
+        /// <param name="turnContext">The context object for this turn.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects
+        /// or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task OnMembersAddedAsync(IList<ChannelAccount> membersAdded, ITurnContext<IConversationUpdateActivity> turnContext, CancellationToken cancellationToken)
         {
             var welcomeText = "Hello and welcome to Content Bubble Sample Bot! Send my hello to see today's agenda. - Testing YMAL";
@@ -196,6 +221,14 @@ namespace Content_Bubble_Bot
             }
         }
 
+        /// <summary>
+        /// Invoked when submit activity is recieved from task module.
+        /// </summary>
+        /// <param name="turnContext">The context object for this turn.</param>
+        /// <param name="taskModuleRequest">The request object for task module.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects
+        /// or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>
         protected override async Task<TaskModuleResponse> OnTeamsTaskModuleSubmitAsync(ITurnContext<IInvokeActivity> turnContext, TaskModuleRequest taskModuleRequest, CancellationToken cancellationToken)
         {
             var submitFeedback = Newtonsoft.Json.JsonConvert.DeserializeObject<SubmitFeedbackAction>(taskModuleRequest.Data.ToString());
@@ -204,6 +237,13 @@ namespace Content_Bubble_Bot
             return null;
         }
 
+        /// <summary>
+        /// Invoked when submit activity is recieved from task module.
+        /// </summary>
+        /// <param name="fileName">Name of the file containing adaptive card.</param>
+        /// <param name="cardData">The data that needs to be binded with the card.</param>
+        /// or threads to receive notice of cancellation.</param>
+        /// <returns>A an adaptive card attachment.</returns>
         private Attachment GetAdaptiveCardAttachment(string fileName, object cardData)
         {
             var templateJson = File.ReadAllText("./Cards/" + fileName);
