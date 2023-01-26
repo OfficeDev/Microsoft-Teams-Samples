@@ -65,7 +65,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-all-features-nodejs
         npm install
         ```
     - Update AppId placeholer `<<Your_App_ID>>` value in your `Pages/DeepLinkAllFeatures.js` file at line no. 48  with your          particular App Id from any Team in Teams. (You can get it form [teams admin portal](https://admin.teams.microsoft.com/).
-    - [Application](Images/11.TeamsAdminPortal.png)
+    - [TeamsAdminPortal-AppID](Images/11.TeamsAdminPortal.png)
 	- Update MicrosoftAppID placeholer `<<Microsoft-App-ID>>` value in your `WWWroot/js/DeepLinkAllFeatures.js` file at line no. 75  with your particular Microsoft-App-ID which you have generated in Step 1 (App Registration creation). 
 
     - Run the App

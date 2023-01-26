@@ -63,7 +63,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-all-features-csharp
     - Navigate to `samples/tab-deeplink-all-features/csharp` folder
     - Select `DeeplinkAllFeatures.csproj` or `DeeplinkAllFeatures.sln` file
 	- Update AppId placeholer `<<Your_App_ID>>` value in your `WWWroot/js/DeepLinkAllFeatures.js` file at line no. 48  with your          particular App Id from any Team in Teams. (You can get it manually form [teams admin portal](https://admin.teams.microsoft.com/).
-  - [Application](DeeplinkAllFeatures/Images/11.TeamsAdminPortal.png)
+    - [TeamsAdminPortal-AppID](DeeplinkAllFeatures/Images/11.TeamsAdminPortal.png)
 	- Update MicrosoftAppID placeholer `<<Microsoft-App-ID>>` value in your `WWWroot/js/DeepLinkAllFeatures.js` file at line no. 75  with your particular Microsoft-App-ID which you have generated in Step 1 (App Registration creation).
 
 
