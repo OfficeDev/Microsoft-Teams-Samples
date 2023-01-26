@@ -1,0 +1,25 @@
+﻿@page
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+
+<div class="font-semibold font-title">Click on save to Configure your app here</div>
+
+<script type="text/javascript">
+   microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+                microsoftTeams.pages.config.setConfig({
+                    entityId: "DeepLinkApp",
+                    contentUrl: window.location.origin + "/DeepLink",
+                    suggestedDisplayName: "DeepLink App",
+                    websiteUrl: window.location.origin + "/Deeplink",
+                }).then(() => {
+                    saveEvent.notifySuccess();
+                });
+            });
+            microsoftTeams.pages.config.setValidityState(true);
+    });
+
+</script>

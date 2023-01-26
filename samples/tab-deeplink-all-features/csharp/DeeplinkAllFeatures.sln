@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeeplinkAllFeatures", "DeeplinkAllFeatures\DeeplinkAllFeatures.csproj", "{1F1928C1-2F7F-4043-9BDE-B71FBD7F6EEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1F1928C1-2F7F-4043-9BDE-B71FBD7F6EEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F1928C1-2F7F-4043-9BDE-B71FBD7F6EEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F1928C1-2F7F-4043-9BDE-B71FBD7F6EEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F1928C1-2F7F-4043-9BDE-B71FBD7F6EEF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E5D8DF4D-7EBC-4880-8867-FFF2D390DFC9}
+	EndGlobalSection
+EndGlobal

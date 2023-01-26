@@ -1,0 +1,76 @@
+﻿@page
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+
+<!-- Import DeeplinkActions.js file -->
+<script type="text/javascript" src="DeepLinkAllFeatures.js"></script>
+
+<!-- Import style.css file -->
+<link href="~/css/style.css" rel="stylesheet" />
+
+<div style="text-align: center; margin-left: auto; margin-right: auto;">
+    <button class="callDeeplinkButton" onclick="onApplicationProfileDialog()">
+        Open the application profile
+        dialog
+    </button><br>
+    <button class="callDeeplinkButton" onclick="navigateToChatWithApplication()">
+        Navigate to a chat with the
+        application
+    </button><br>
+    <button class="callDeeplinkButton" onclick="navigateToTeamsChat()">
+        Deep link to Teams chat <br><span style="font-size: smaller;color: yellow;">
+            (Works in Teams
+            chat)
+        </span>
+    </button><br>
+    <button class="callDeeplinkButton" onclick="navigateOnStartNewChat()">Deep link to start a new chat</button><br>
+    <button data-id="default" class="callDeeplinkButton"
+            onclick="onCallDeepLinkButtonClick(microsoftTeams.call.CallModalities.Audio)">
+        Deep link to start an audio call with users
+    </button>
+    <button data-id="default" class="callDeeplinkButton"
+            onclick="onCallDeepLinkButtonClick(microsoftTeams.call.CallModalities.Video)">
+        Deep link to start an video call with users
+    </button>
+    <br>
+    <div><b>Open a scheduling dialog</b></div>
+    <div>
+        <form>
+            <span>Add Details for scheduling dialog</span>
+            <div class="inputContainer">
+                <label for="Subject">Subject:</label>
+                <input type="text" id="Subject" value="" required />
+            </div>
+            <div class="inputContainer">
+                <label for="Content">Content:</label>
+                <input type="text" id="Content" value="" />
+            </div>
+            <div class="inputContainer">
+                <label for="Attendee">Attendees: </label>
+                <input type="text" id="Attendee" value="" disabled required />
+                <button onclick="selectPeople()" style="margin:0px 4px;">
+                    Select
+                </button>
+            </div>
+            <div class="inputContainer">
+                <label for="StartTime">Start Time:</label>
+                <input type="datetime-local" id="StartTime" value="" required />
+            </div>
+            <div class="inputContainer">
+                <label for="EndTime">End Time:</label>
+                <input type="datetime-local" id="EndTime" value="" required />
+            </div>
+            <div class="inputContainer">
+                <span id="dialogDeeplink"></span>
+            </div>
+        </form>
+    </div>
+
+    <button data-id="singleSelect" type="submit" class="callDeeplinkButton" onclick="onSchedulingDialogClick()">
+        Deep link to open a meeting scheduling dialog <br>
+        <span style="font-size: smaller;color: yellow;">(*please fill the form to open scheduling dialog)</span>
+    </button>
+</div>

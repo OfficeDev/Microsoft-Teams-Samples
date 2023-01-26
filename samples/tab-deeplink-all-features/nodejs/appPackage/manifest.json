@@ -1,0 +1,51 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0",
+  "id": "<<Microsoft-App-ID>>",
+  "packageName": "com.microsoft.deeplink",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Deeplink All Features",
+    "full": "All features for Deeplink using tab"
+  },
+  "description": {
+    "short": "DeepLink with all features for Microsoft Teams",
+    "full": "This sample DeepLink app for demonstrating deeplink all features using tab."
+  },
+  "icons": {
+    "outline": "icon-outline.png",
+    "color": "icon-color.png"
+  },
+  "accentColor": "#ffffff",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://{{domain-name}}/Configure.html",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "groupchat",
+        "team"
+      ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "contentUrl": "https://{{domain-name}}/DeepLink.html",
+      "websiteUrl": "https://{{domain-name}}/DeepLink.html",
+      "entityId": "com.contoso.DeeplLink.help",
+      "name": "Deep Link Tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "validDomains": [
+    "*.ngrok.io",
+    "{{domain-name}}"
+  ]
+}
