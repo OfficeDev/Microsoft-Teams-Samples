@@ -1,8 +1,8 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-app-cache-meetings-nodejs",
+    "name": "officedev-microsoft-teams-samples-app-caching-in-meetings-nodejs",
     "source": "officeDev",
-    "title": "App Cahce In Meetings",
+    "title": "App Caching in Meetings",
     "shortDescription": "This sample feature is to improve the subsequent loading time of an App",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/app-cache-meetings/nodejs",
     "longDescription": [
