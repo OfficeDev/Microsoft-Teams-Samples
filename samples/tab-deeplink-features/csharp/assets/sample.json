@@ -4,7 +4,7 @@
     "source": "officeDev",
     "title": "Deep Links Features",
     "shortDescription": "Microsoft Teams sample app for demonstrating deep links features",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-deeplink/csharp",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/tab-deeplink-features/csharp",
     "longDescription": [
       "Microsoft Teams sample app for demonstrating deep link features using tab"
     ],

@@ -10,7 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "26/01/2023 01:38:27 PM"
-urlFragment: officedev-microsoft-teams-samples-tab-deeplink-all-features-nodejs
+urlFragment: officedev-microsoft-teams-samples-tab-deeplink-features-nodejs
 
 ---
  # Deep Links Features
@@ -47,16 +47,16 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-all-features-nodejs
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
 
-    - In a terminal, navigate to `samples/tab-deeplink-all-features/nodejs`
+    - In a terminal, navigate to `samples/tab-deeplink-features/nodejs`
 
         ```bash
-        cd samples/tab-deeplink-all-features/nodejs
+        cd samples/tab-deeplink-features/nodejs
         ```
 
     - If you are using Visual Studio code
      - Launch Visual Studio code
      - Folder -> Open -> Project/Solution
-     - Navigate to ```samples/tab-deeplink-all-features/nodejs``` folder
+     - Navigate to ```samples/tab-deeplink-features/nodejs``` folder
      - Select ```nodejs``` Folder
 
     - Install modules
