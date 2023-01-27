@@ -19,7 +19,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-features-csharp
 
 - **Interaction with App**
 
- ![Deeplink-Features](DeeplinkAllFeatures/Images/DeeplinkFeatures.gif)
+ ![Deeplink-Features](DeeplinkFeatures/Images/DeeplinkFeatures.gif)
 
  ## Prerequisites
 
@@ -60,10 +60,10 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-features-csharp
   - If you are using Visual Studio
     - Launch Visual Studio
     - File -> Open -> Project/Solution
-    - Navigate to `samples/tab-deeplink-all-features/csharp` folder
-    - Select `DeeplinkAllFeatures.csproj` or `DeeplinkAllFeatures.sln` file
+    - Navigate to `samples/tab-deeplink-features/csharp` folder
+    - Select `DeeplinkFeatures.csproj` or `DeeplinkFeatures.sln` file
 	- Navigate to `wwwroot/js/env.js` file and update MicrosoftAppID at placeholer `<<Microsoft-App-ID>>` which you have generated in Step 1 (App Registration creation) and update your AppId at placeholder `<<App-ID>>` (You can get it manually frrm [teams admin portal](https://admin.teams.microsoft.com/).
-    - [TeamsAdminPortal-AppID](DeeplinkAllFeatures/Images/11.TeamsAdminPortal.png)
+    - [TeamsAdminPortal-AppID](DeeplinkFeatures/Images/11.TeamsAdminPortal.png)
     - Run your app, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
 4. __*This step is specific to Teams.*__
@@ -76,34 +76,34 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-features-csharp
  ## Running the sample
 
 **Application Setup**
-![Application ](DeeplinkAllFeatures/Images/1.App.png)
+![Application ](DeeplinkFeatures/Images/1.App.png)
 
 **DeeplinkTab**
-![DeeplinkTab](DeeplinkAllFeatures/Images/3.DeeplinkTab.png)
+![DeeplinkTab](DeeplinkFeatures/Images/3.DeeplinkTab.png)
 
 **AppProfilePage**
-![AppProfilePage](DeeplinkAllFeatures/Images/4.AppProfilePage.png)
+![AppProfilePage](DeeplinkFeatures/Images/4.AppProfilePage.png)
 
 **AudioCallSelectPeople**
-![AudioCallSelectPeople](DeeplinkAllFeatures/Images/5.AudioCallSelectPeople.png)
+![AudioCallSelectPeople](DeeplinkFeatures/Images/5.AudioCallSelectPeople.png)
 
 **AudioCallStart**
-![AudioCallStart](DeepLinkAllFeatures/Images/6.AudioCallStart.png)
+![AudioCallStart](DeeplinkFeatures/Images/6.AudioCallStart.png)
 
 **AudioCallStarted**
-![AudioCallStarted](DeeplinkAllFeatures/Images/7.AudioCallStarted.png)
+![AudioCallStarted](DeeplinkFeatures/Images/7.AudioCallStarted.png)
 
 **ScheduleMeeting**
-![ScheduleMeeting](DeeplinkAllFeatures/Images/8.ScheduleMeeting.png)
+![ScheduleMeeting](DeeplinkFeatures/Images/8.ScheduleMeeting.png)
 
 **ScheduleMeetingDeeplink**
-![ScheduleMeetingDeeplink](DeeplinkAllFeatures/Images/9.ScheduleMeetingDeeplink.png)
+![ScheduleMeetingDeeplink](DeeplinkFeatures/Images/9.ScheduleMeetingDeeplink.png)
 
 **StartNewChat**
-![StartNewChat](DeeplinkAllFeatures/Images/10.StartNewChat.png)
+![StartNewChat](DeeplinkFeatures/Images/10.StartNewChat.png)
 
 **VideoCall**
-![VideoCall](DeeplinkAllFeatures/Images/12.VideoCall.png)
+![VideoCall](DeeplinkFeatures/Images/12.VideoCall.png)
 
  ## Further reading
 

@@ -35,7 +35,7 @@
       {
         "type": "image",
         "order": 100,
-        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-deeplink-all-features/nodejs/Images/DeepLinkFeatures.gif",
+        "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/tab-deeplink-features/nodejs/Images/DeepLinkFeatures.gif",
         "alt": "Solution UX showing deep links features using tab."
       }
     ],
