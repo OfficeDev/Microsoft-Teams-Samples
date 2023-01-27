@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample shows app stage view, Mute/Unmute Teams meeting audio call and Side panel.
+description: This sample shows app stage view, Mute/Unmute Teams meeting audio call in meeting Side panel tab.
 products:
 - office-teams
 - office
@@ -14,9 +14,9 @@ urlFragment: officedev-microsoft-teams-samples-meeting-tabs-nodejs
 
 ---
 
-# Meeting Tabs Sample
+## Meeting Tabs Sample
 
-This sample shows app stage view, Mute/Unmute Teams meeting audio call and Side panel.
+This sample shows app stage view, Mute/Unmute Teams meeting audio call in meeting Side panel tab.
 
 **Interaction with bot**
 ![mute-unmute](Images/MeetingTabsGif.gif)
@@ -46,6 +46,12 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     **Register your application with Azure AD:**
 
      - Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+
+     - Select **New Registration** and on the *register an application page*, set following values:
+           * Set **name** to your app name.
+           * Choose the **supported account types** (any account type will work)
+           * Leave **Redirect URI** empty.
+           * Choose **Register**.
 
      - On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
 

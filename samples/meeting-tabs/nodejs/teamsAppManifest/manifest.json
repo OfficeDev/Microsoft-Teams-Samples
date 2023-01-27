@@ -1,6 +1,6 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.13",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.15/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.15",
   "version": "1.0.0",
   "id": "<<YOUR-MICROSOFT-APP-ID>>",
   "packageName": "com.teams.meetingtabs",
@@ -20,7 +20,7 @@
   },
   "description": {
     "short": "Meeting-Tabs",
-    "full": "This sample shows app stage view, Mute/Unmute Teams meeting audio call and Side panel."
+    "full": "This sample shows app stage view, Mute/Unmute Teams meeting audio call in meeting Side panel tab."
   },
   "accentColor": "#5558AF",
   "configurableTabs": [

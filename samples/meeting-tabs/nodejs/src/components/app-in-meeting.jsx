@@ -1,3 +1,8 @@
+// <copyright file="app-in-meeting.jsx" company="Microsoft Corporation">
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+// </copyright>
+
 import React, { Component } from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
 import { Button } from '@fluentui/react-components';
@@ -10,6 +15,7 @@ class AppInMeeting extends Component {
             result: ""
         }
     }
+
      //Allows us to execute the React code when the component is already placed in the DOM.
     componentDidMount() {
         microsoftTeams.app.initialize();
@@ -53,6 +59,7 @@ class AppInMeeting extends Component {
                     // handle success
                     console.log("Shared successfully!");
                 }
+                
                 if (err) {
                     // handle error
                     alert(+JSON.stringify(err))

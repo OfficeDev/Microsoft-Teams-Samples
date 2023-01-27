@@ -8,6 +8,7 @@ import * as microsoftTeams from "@microsoft/teams-js";
 
 // Handles redirection after successful/failure sign in attempt.
 const Configure = props => {
+    
     useEffect(() => {
         microsoftTeams.app.initialize().then(() => {
             microsoftTeams.app.notifySuccess();

@@ -3,10 +3,10 @@
     "name": "officedev-microsoft-teams-samples-meeting-tabs-csharp",
     "source": "officeDev",
     "title": "Meeting-Tabs",
-    "shortDescription": "This sample shows app stage view, Mute/Unmute Teams meeting audio call and Side panel.",
+    "shortDescription": "This sample shows app stage view, Mute/Unmute Teams meeting audio call in meeting Side panel tab.",
     "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meeting-tabs/csharp",
     "longDescription": [
-      "This sample shows app stage view, Mute/Unmute Teams meeting audio call and Side panel."
+      "This sample shows app stage view, Mute/Unmute Teams meeting audio call in meeting Side panel tab."
     ],
     "creationDateTime": "2023-01-22",
     "updateDateTime": "2023-01-23",
@@ -36,7 +36,7 @@
         "type": "image",
         "order": 100,
         "url": "https://raw.githubusercontent.com/OfficeDev/Microsoft-Teams-Samples/main/samples/meeting-tabs/csharp/Images/MeetingTabsGif.gif",
-        "alt": "Solution UX showing Meeting Tabs"
+        "alt": "Solution UX showing Meeting Tab with different features"
       }
     ],
     "authors": [

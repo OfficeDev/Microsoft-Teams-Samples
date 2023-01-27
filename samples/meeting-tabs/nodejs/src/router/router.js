@@ -1,3 +1,8 @@
+// <copyright file="router.js" company="Microsoft Corporation">
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+// </copyright>
+
 import * as React from "react";
 import { BrowserRouter,  Route, Routes } from "react-router-dom";
 import AppInMeeting from "../components/app-in-meeting";
@@ -7,6 +12,7 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import ShareView from "../components/shareview";
 
 export const AppRoute = () => {
+
     React.useEffect(() => {
         microsoftTeams.app
             .initialize()
