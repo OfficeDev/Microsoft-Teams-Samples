@@ -115,4 +115,5 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-all-features-nodejs
  ## Further reading
 
 - [Deep link to an application](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-link-application?tabs=teamsjs-v2)
+- [Deep link to Teams chat](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-link-teams)
 

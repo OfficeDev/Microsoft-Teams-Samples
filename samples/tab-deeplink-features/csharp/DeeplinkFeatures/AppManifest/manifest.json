@@ -35,8 +35,8 @@
   ],
   "staticTabs": [
     {
-      "contentUrl": "https://{{domain-name}}/deep-links",
-      "websiteUrl": "https://{{domain-name}}/deep-links",
+      "contentUrl": "https://{{domain-name}}/deeplinkfeatures",
+      "websiteUrl": "https://{{domain-name}}/deeplinkfeatures",
       "entityId": "com.contoso.DeeplLink.help",
       "name": "Deep Links Tab",
       "scopes": [
