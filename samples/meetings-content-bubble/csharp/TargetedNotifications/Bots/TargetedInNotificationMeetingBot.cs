@@ -37,14 +37,16 @@ namespace TargetedInNotificationMeetingBot
         public TargetedInNotificationMeetingBot(IConfiguration configuration, IHttpClientFactory httpClientFactory)
         {
             _config = configuration;
+            _httpClientFactory = httpClientFactory;
             _agenda = new MeetingAgenda
             {
-                AgendaItems = new List<AgendaItem>() {
-                                        new AgendaItem { Topic = "Approve 5% dividend payment to shareholders" , Id = 1 },
-                                        new AgendaItem { Topic = "Increase research budget by 10%" , Id = 2},
-                                        new AgendaItem { Topic = "Continue with WFH for next 3 months" , Id = 3}},
+                AgendaItems = new List<AgendaItem>()
+                {
+                     new AgendaItem { Topic = "Approve 5% dividend payment to shareholders" , Id = 1 },
+                     new AgendaItem { Topic = "Increase research budget by 10%" , Id = 2},
+                     new AgendaItem { Topic = "Continue with WFH for next 3 months" , Id = 3}
+                },
             };
-            _httpClientFactory = httpClientFactory;
         }
 
         /// <summary>
