@@ -3,7 +3,7 @@
 // Licensed under the MIT License.
 // </copyright>
 
-namespace Content_Bubble_Bot.Models
+namespace TargetedInNotificationMeetingBot.Models
 {
     public class ParticipantDetail
     {

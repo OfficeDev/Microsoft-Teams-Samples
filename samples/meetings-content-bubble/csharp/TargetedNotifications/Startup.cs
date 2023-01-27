@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.BotBuilderSamples;
 
-namespace Content_Bubble_Bot
+namespace TargetedInNotificationMeetingBot
 {
     public class Startup
     {
@@ -33,7 +33,7 @@ namespace Content_Bubble_Bot
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
             // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-            services.AddTransient<IBot, ContentBubbleBot>();
+            services.AddTransient<IBot, TargetedInNotificationMeetingBot>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,8 +58,6 @@ namespace Content_Bubble_Bot
                        name: "default",
                        pattern: "{controller=Home}/{action=CustomForm}/{id?}");
                 });
-            
-            // app.UseHttpsRedirection();
         }
     }
 }

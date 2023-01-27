@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Content_Bubble_Bot
+namespace TargetedInNotificationMeetingBot
 {
     public class Program
     {

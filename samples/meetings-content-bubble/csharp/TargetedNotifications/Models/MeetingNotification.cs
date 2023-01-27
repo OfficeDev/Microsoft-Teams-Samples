@@ -5,7 +5,7 @@
 
 using System.Collections.Generic;
 
-namespace Content_Bubble_Bot.Models
+namespace TargetedInNotificationMeetingBot.Models
 {
     public class MeetingNotification
     {   

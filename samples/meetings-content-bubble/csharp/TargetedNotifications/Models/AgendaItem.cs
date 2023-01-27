@@ -1,4 +1,4 @@
-﻿namespace Content_Bubble_Bot.Models
+﻿namespace TargetedInNotificationMeetingBot.Models
 {
     public class AgendaItem
     {

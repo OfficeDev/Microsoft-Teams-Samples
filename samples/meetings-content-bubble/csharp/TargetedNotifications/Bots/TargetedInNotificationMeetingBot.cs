@@ -1,11 +1,11 @@
-﻿// <copyright file="ContentBubbleBot.cs" company="Microsoft">
+﻿// <copyright file="TargetedInNotificationMeetingBot.cs" company="Microsoft">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 // </copyright>
 
 using AdaptiveCards;
 using AdaptiveCards.Templating;
-using Content_Bubble_Bot.Models;
+using TargetedInNotificationMeetingBot.Models;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Connector.Authentication;
@@ -26,15 +26,15 @@ using System.Threading.Tasks;
 using System.Web;
 
 
-namespace Content_Bubble_Bot
+namespace TargetedInNotificationMeetingBot
 {
-    public class ContentBubbleBot : TeamsActivityHandler
+    public class TargetedInNotificationMeetingBot : TeamsActivityHandler
     {
         private readonly IConfiguration _config;
         private readonly MeetingAgenda _agenda;
         private IHttpClientFactory _httpClientFactory;
 
-        public ContentBubbleBot(IConfiguration configuration, IHttpClientFactory httpClientFactory)
+        public TargetedInNotificationMeetingBot(IConfiguration configuration, IHttpClientFactory httpClientFactory)
         {
             _config = configuration;
             _agenda = new MeetingAgenda
@@ -149,7 +149,7 @@ namespace Content_Bubble_Bot
                     var item = _agenda.AgendaItems.First(a => a.Id.ToString() == submitFeedback.Choice);
                     await turnContext.SendActivityAsync($"{turnContext.Activity.From.Name} voted **{submitFeedback.Feedback}** for '{item.Topic}'");
                     break;
-                case "SendNotification":
+                case "SendTargetedMeetingNotification":
                     try
                     {
                         var actionSet = JsonConvert.DeserializeObject<ActionBase>(turnContext.Activity.Value.ToString());

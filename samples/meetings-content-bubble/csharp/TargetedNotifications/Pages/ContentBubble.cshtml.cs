@@ -6,7 +6,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Content_Bubble_Bot.Pages
+namespace TargetedInNotificationMeetingBot.Pages
 {
     public class ContentBubbleModel : PageModel
     {

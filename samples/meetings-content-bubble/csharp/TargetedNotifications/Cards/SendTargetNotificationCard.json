@@ -29,7 +29,7 @@
       "id": "submit",
       "title": "Send Notification",
       "data": {
-        "Type": "SendNotification"
+        "Type": "SendTargetedMeetingNotification"
       }
     }
   ]
