@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeeplinkAllFeatures", "DeeplinkAllFeatures\DeeplinkAllFeatures.csproj", "{1F1928C1-2F7F-4043-9BDE-B71FBD7F6EEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeeplinkFeatures", "DeeplinkFeatures\DeeplinkFeatures.csproj", "{1F1928C1-2F7F-4043-9BDE-B71FBD7F6EEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

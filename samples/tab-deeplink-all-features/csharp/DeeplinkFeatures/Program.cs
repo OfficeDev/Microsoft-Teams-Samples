@@ -17,6 +17,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Deeplink}/{action=Index}/{id?}");
+    pattern: "{controller=Deeplink}/{action=Index}");
 
 app.Run();

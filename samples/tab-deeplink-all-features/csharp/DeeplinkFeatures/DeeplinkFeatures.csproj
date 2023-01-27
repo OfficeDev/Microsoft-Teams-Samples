@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\js\DeeplinkAllFeatures.js" />
+    <None Include="wwwroot\js\DeeplinkFeatures.js" />
   </ItemGroup>
 
 </Project>

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DeeplinkAllFeatures.Controllers
 {
     /// <summary>
-    /// Deeplink controller to handle multiple views. 
+    /// Deeplink controller to handle views. 
     /// </summary>
     public class DeeplinkController : Controller
     {
@@ -17,14 +17,13 @@ namespace DeeplinkAllFeatures.Controllers
         {
             _logger = logger;
         }
-
         public IActionResult Index()
         {
             return View();
         }
 
-        [Route("DeepLinkAllFeatures")]
-        public IActionResult DeepLinkAllFeatures()
+        [Route("DeepLinkFeatures")]
+        public IActionResult DeepLinkFeatures()
         {
             return View();
         }

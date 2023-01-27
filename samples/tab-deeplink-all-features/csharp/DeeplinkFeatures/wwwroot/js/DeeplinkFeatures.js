@@ -45,9 +45,39 @@ function onCallDeepLinkButtonClick(callModalities) {
 
 // Opens aplication profile dialog. 
 function onApplicationProfileDialog() {
-    let appId = "<<Your_App_ID>>"; // you will get app-Id from teams admin portal, app profile page.
+    // Initilize appInstallDialog from microsoftteams.
+    var appInstallDialog = microsoftTeams.appInstallDialog;
 
-    microsoftTeams.app.openLink(`https://teams.microsoft.com/l/app/${appId}`);
+    if (appInstallDialog.isSupported()) {
+        const dialogPromise = appInstallDialog.openAppInstallDialog({ appId: env.AppId });
+        dialogPromise.
+            then((result) => { console.log(result) }).
+            catch((error) => { console.log(error) });
+    }
+    else {
+        console.log("openAppInstallDialog isn't supported");
+    }
+}
+
+// Genereate deeplink to naviagte within your app
+function onNavigatewithinyourapp() {
+    // Initilize microsoftTeams Pages 
+    var pages = microsoftTeams.pages;
+
+    // Initilize microsoftTeams app
+    var app = microsoftTeams.app;
+
+    app.initialize().then(app.getContext).then((context) => {
+        if (pages.isSupported()) {
+            const navPromise = pages.navigateToApp({ appId: env.AppId, pageId: context.page.id, subPageId: context.page.subPageId, channelId: context.channel.id });
+            navPromise.
+                then((result) => { console.log(result) }).
+                catch((error) => { console.log(error) });
+        }
+        else {
+            console.log("navigateToApp isn't supported");
+        }
+    });
 }
 
 // Opens a meeting dialog to schedule meetings 
@@ -75,18 +105,31 @@ function onSchedulingDialogClick() {
 
 // function to navigate chat with application
 function navigateToChatWithApplication() {
-    let MicrosoftAppID = "<<Microsoft-App-ID>>"; // Replace placeholder <<Microsoft-App-ID>> with your MicrosoftAppId / Bot-Id.
-
-    microsoftTeams.app.openLink(`https://teams.microsoft.com/l/entity/${MicrosoftAppID}/conversations`);
+    microsoftTeams.app.openLink(`https://teams.microsoft.com/l/entity/${env.AppId}/conversations`);
 }
 
 // navigates to new chat window where you can start new chat.
 function navigateOnStartNewChat() {
-    let app = microsoftTeams.app;
+    // Declare microsoftTeams chat
+    var chat = microsoftTeams.chat;
+
+    // Declare microsoftTeams.app
+    var app = microsoftTeams.app;
 
     app.initialize().then(app.getContext).then((context) => {
-        let currentUser = context.user.loginHint;
-        microsoftTeams.app.openLink(`https://teams.microsoft.com/l/chat/0/0?users=${currentUser}`)
+        // get the current user.
+        let user = context.user.loginHint;
+
+        if (chat.isSupported()) {
+            const chatPromise = chat.openGroupChat({ users: [user] });
+            chatPromise.
+                then((result) => { console.log(result) }).
+                catch((error) => { console.log(error) });
+        }
+        else {
+            console.log("openGroupChat isn't supported");
+        }
+
     });
 }
 
@@ -104,6 +147,6 @@ function navigateToTeamsChat() {
             channelName: context.channel.displayName
         }
 
-        microsoftTeams.app.openLink(`https://teams.microsoft.com/l/message/${queryParameters.channelId}/1648741500652?tenantId=${queryParameters.tenantId}&groupId=${queryParameters.groupId}&parentMessageId=${queryParameters.parentMessageId}&teamName=${queryParameters.teamName}&channelName=${queryParameters.channelName}`)
+        microsoftTeams.app.openLink(`https://teams.microsoft.com/l/message/${queryParameters.channelId}/tenantId=${queryParameters.tenantId}&groupId=${queryParameters.groupId}&parentMessageId=${queryParameters.parentMessageId}&teamName=${queryParameters.teamName}&channelName=${queryParameters.channelName}`)
     });
 }

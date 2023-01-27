@@ -15,7 +15,7 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-features-csharp
 ---
  # Deep-Link Features
 
- This sample app for demonstrating for dee-plink features using tab.
+ This sample app for demonstrating for deep-link features using tab.
 
 - **Interaction with App**
 
@@ -62,10 +62,9 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-features-csharp
     - File -> Open -> Project/Solution
     - Navigate to `samples/tab-deeplink-all-features/csharp` folder
     - Select `DeeplinkAllFeatures.csproj` or `DeeplinkAllFeatures.sln` file
-	- Update AppId placeholer `<<Your_App_ID>>` value in your `WWWroot/js/DeepLinkAllFeatures.js` file at line no. 48  with your          particular App Id from any Team in Teams. (You can get it manually form [teams admin portal](https://admin.teams.microsoft.com/).
+	- Navigate to `wwwroot/js/env.js` file and update MicrosoftAppID at placeholer `<<Microsoft-App-ID>>` which you have generated in Step 1 (App Registration creation) and update your AppId at placeholder `<<App-ID>>` (You can get it manually frrm [teams admin portal](https://admin.teams.microsoft.com/).
     - [TeamsAdminPortal-AppID](DeeplinkAllFeatures/Images/11.TeamsAdminPortal.png)
-	- Update MicrosoftAppID placeholer `<<Microsoft-App-ID>>` value in your `WWWroot/js/DeepLinkAllFeatures.js` file at line no. 75  with your particular Microsoft-App-ID which you have generated in Step 1 (App Registration creation).
-
+    - Run your app, either from Visual Studio with `F5` or using `dotnet run` in the appropriate folder.
 
 4. __*This step is specific to Teams.*__
     - **Edit** the `manifest.json` contained in the  `AppManifest` folder to replace your Microsoft App Id (that was created when you registered your bot earlier) *everywhere* 

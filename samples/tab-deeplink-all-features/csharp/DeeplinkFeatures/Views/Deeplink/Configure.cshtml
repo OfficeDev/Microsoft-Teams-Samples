@@ -1,9 +1,14 @@
-﻿@page
+﻿@*Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the MIT License.*@
+
+@page
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script src="https://res.cdn.office.net/teams-js/2.7.1/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+<script src="https://res.cdn.office.net/teams-js/2.7.1/js/MicrosoftTeams.min.js"
+        integrity="sha384-4Gy2G+qxzDVdrdemcVqKVQvaSK1Ghg3x6xcsaMLPc/pw7KPtiogHGM97LTWF2PWg"
+        crossorigin="anonymous"></script>
 
 <div class="font-semibold font-title">Click on save to Configure your app here</div>
 
@@ -12,9 +17,9 @@
             microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
                 microsoftTeams.pages.config.setConfig({
                     entityId: "DeepLinkApp",
-                    contentUrl: window.location.origin + "/DeepLink",
+                    contentUrl: window.location.origin + "/deeplinkfeatures",
                     suggestedDisplayName: "DeepLink App",
-                    websiteUrl: window.location.origin + "/Deeplink",
+                    websiteUrl: window.location.origin + "/deeplinkfeatures",
                 }).then(() => {
                     saveEvent.notifySuccess();
                 });
