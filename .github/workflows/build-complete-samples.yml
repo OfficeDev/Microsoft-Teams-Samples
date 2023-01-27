@@ -845,7 +845,7 @@ jobs:
 
             - project_path: 'samples/app-cache-meetings/nodejs'
               name: 'app-cache-meetings'
-              version: '16.x'
+              version: '18.x'
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
