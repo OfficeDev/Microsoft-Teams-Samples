@@ -70,6 +70,26 @@ class TeamsConversationBot extends TeamsActivityHandler {
                 // Save information about the sent message and its ID (resourceResponse.id).
             }));
         });
+
+        // This method registers the lambda function, which will be invoked when message sent by user is updated in chat.
+        this.onTeamsMessageEditEvent(async (context, next) => {
+            let editedMessage = context.activity.text;
+            await context.sendActivity(`The edited message is ${editedMessage}"`);
+            next();
+          });
+
+          // This method registers the lambda function, which will be invoked when message sent by user is undeleted in chat.
+          this.onTeamsMessageUndeleteEvent(async (context, next) => {
+            let undeletedMessage = context.activity.text;
+            await context.sendActivity(`Previously the message was deleted. After undeleting, the message is now: "${undeletedMessage}"`);
+            next();
+        });
+
+        // This method registers the lambda function, which will be invoked when message sent by user is soft deleted in chat.
+        this.onTeamsMessageSoftDeleteEvent(async (context, next) => {
+            await context.sendActivity("Message is soft deleted");
+            next();
+        });
     }
 
     async onInstallationUpdateActivity(context) {
