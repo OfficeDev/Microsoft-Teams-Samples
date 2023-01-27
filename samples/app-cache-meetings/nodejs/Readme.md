@@ -10,7 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "11/11/2022 11:50:25 AM"
-urlFragment: officedev-microsoft-teams-samples-app-cache-meetings-nodejs
+urlFragment: officedev-microsoft-teams-samples-app-caching-in-meetings-nodejs
 
 ---
 
