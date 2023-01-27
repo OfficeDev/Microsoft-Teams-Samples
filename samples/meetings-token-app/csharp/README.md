@@ -117,6 +117,8 @@ This application also shows the implementation of Live Share SDK to update the d
 -- Enable developer preview in your desktop Teams client
 Follow [these instructions](https://docs.microsoft.com/en-us/microsoftteams/platform/resources/dev-preview/developer-preview-intro#enable-developer-preview) to enable developer preview. Note that Developer preview mode must be enabled on each Teams client app or browser.
 
+Note: Open the meeting chat section and type @MeetingTokenApp Hello (It will send back the required information to you).
+
 > In-meeting tabs are only available in the Teams desktop client. They will not be visible when you run Teams in a web browser.
 
   
@@ -130,6 +132,7 @@ Follow [these instructions](https://docs.microsoft.com/en-us/microsoftteams/plat
     1. Now the app will be visible in the meeting chat.
     1. Start the meeting and the icon should be visible in the meeting control bar.
 
+
 ### Running the sample
  - Display the current token that is being serviced in the meeting
  - Display the user list sorted by the token number in ascending order
@@ -139,6 +142,8 @@ Follow [these instructions](https://docs.microsoft.com/en-us/microsoftteams/plat
  - Skip the current token for the organizer of the meeting
 
  ![config_page](Images/config_page.png)
+
+ ![chat_page](Images/chat_meeting_tab.png)
 
  ![pre_meeting_tab](Images/pre_meeting_tab.png)
 
