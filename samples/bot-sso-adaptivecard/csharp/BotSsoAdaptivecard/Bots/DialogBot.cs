@@ -1,6 +1,7 @@
-﻿// <copyright file="DialogBot.cs" company="Microsoft">
+// <copyright file="DialogBot.cs" company="Microsoft">
 // Copyright (c) Microsoft. All rights reserved.
 // </copyright>
+
 using System;
 using System.IO;
 using System.Threading;
@@ -151,7 +152,6 @@ namespace Microsoft.BotBuilderSamples
                 else
                 {
                     return createAdaptiveCardInvokeResponseAsync(authentication, state);
-
                 }
             }
 
@@ -171,22 +171,22 @@ namespace Microsoft.BotBuilderSamples
         /// <returns>A task that represents the work queued to execute.</returns>
         private InvokeResponse createAdaptiveCardInvokeResponseAsync(JObject authentication, string state, bool isBasicRefresh = false, string fileName = "adaptiveCardResponseJson.json")
         {
-            //verify token is present or not
+            // Verify token is present or not.
 
             bool isTokenPresent = authentication != null ? true : false;
             bool isStatePresent = state != null && state != "" ? true : false;
-
-            // TODO : Use token or state to perform operation on behalf of user
 
             string[] filepath = { ".", "Resources", fileName };
 
             var adaptiveCardJson = File.ReadAllText(Path.Combine(filepath));
             AdaptiveCardTemplate template = new AdaptiveCardTemplate(adaptiveCardJson);
             var authResultData = isTokenPresent ? "SSO success" : isStatePresent ? "OAuth success" : "SSO/OAuth failed";
+            
             if (isBasicRefresh)
             {
                 authResultData = "Refresh done";
             }
+            
             var payloadData = new
             {
                 authResult = authResultData,
@@ -232,7 +232,6 @@ namespace Microsoft.BotBuilderSamples
                     }
             };
 
-
             var loginReqResponse = JObject.FromObject(new
             {
                 statusCode = 401,
@@ -260,6 +259,7 @@ namespace Microsoft.BotBuilderSamples
                 createdById = userMRI,
                 createdBy = name
             };
+            
             var cardJsonstring = template.Expand(payloadData);
             var card = JsonConvert.DeserializeObject<JObject>(cardJsonstring);
             var adaptiveCardAttachment = new Attachment()
