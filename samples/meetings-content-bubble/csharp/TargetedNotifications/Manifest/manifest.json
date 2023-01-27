@@ -15,12 +15,12 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "Content Bubble Demo",
-    "full": "Content Bubble Demo"
+    "short": "Targeted Meeting Notification",
+    "full": "Targeted Meeting Notification Demo"
   },
   "description": {
-    "short": "Content bubble demo",
-    "full": " Sample app to demo how content bubble works."
+    "short": "Targeted Meeting Notification demo",
+    "full": " Sample app to demo how to send in meeting targeted notifications."
   },
   "accentColor": "#FFFFFF",
   "bots": [

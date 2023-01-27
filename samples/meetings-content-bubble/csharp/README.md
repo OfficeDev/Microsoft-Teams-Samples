@@ -13,13 +13,13 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-meetings-content-bubble-csharp
 ---
 
-# Meetings Content Bubble
+# Meeting Targeted Notification
 
 This sample illustrates how to implement [Content Bubble](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience. This app also showcase sending targeted notification to meeting participants.
 
 ## Interaction with app
 
-![Content Bubble](ContentBubble/Images/ContentBubbleModule.gif)
+![Meeting Targeted Notification](TargetedNotifications/Images/ContentBubbleModule.gif)
 
 ## Prerequisites
 
@@ -82,19 +82,19 @@ Message the Bot by @ mentioning to interact with the content bubble.
 1. You can submit your feedback on either Content Bubble/Adaptive card sent in chat.
 
 ## Running the sample
-![Welcome](ContentBubble/Images/Welcome.png)
+![Welcome](TargetedNotifications/Images/Welcome.png)
 
-![Agenda card](ContentBubble/Images/AgendaCard.png)
+![Agenda card](TargetedNotifications/Images/AgendaCard.png)
 
-![Feedback submit](ContentBubble/Images/FeedbackSubmit.png)
+![Feedback submit](TargetedNotifications/Images/FeedbackSubmit.png)
 
-![Feedback card](ContentBubble/Images/FeedbackCard.png)
+![Feedback card](TargetedNotifications/Images/FeedbackCard.png)
 
 
 ## Send targeted meeting notification
-![Meeting card](ContentBubble/Images/MeetingCard.png)
+![Meeting card](TargetedNotifications/Images/MeetingCard.png)
 
-![Target notification](ContentBubble/Images/TargetNotification.png)
+![Target notification](TargetedNotifications/Images/TargetNotification.png)
 
 
 ## Further Reading
