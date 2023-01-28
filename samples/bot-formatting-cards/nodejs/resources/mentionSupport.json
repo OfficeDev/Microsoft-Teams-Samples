@@ -1,0 +1,37 @@
+﻿{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.0",
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "size": "large",
+      "text": "Mention Support Card"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Hi <at>Adele UPN</at>, <at>Adele Azure AD</at>"
+    }
+  ],
+  "msteams": {
+    "entities": [
+      {
+        "type": "mention",
+        "text": "<at>Adele UPN</at>",
+        "mentioned": {
+          "id": "AdeleV@contoso.onmicrosoft.com",
+          "name": "Adele Vance"
+        }
+      },
+      {
+        "type": "mention",
+        "text": "<at>Adele Azure AD</at>",
+        "mentioned": {
+          "id": "87d349ed-44d7-43e1-9a83-5f2406dee5bd",
+          "name": "Adele Vance"
+        }
+      }
+    ]
+  }
+}
