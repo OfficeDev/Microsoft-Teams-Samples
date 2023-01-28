@@ -128,7 +128,7 @@ jobs:
               name: 'meeting-recruitment-app'
               version: '6.0.x'
 
-            - project_path: 'samples/meetings-content-bubble/csharp/ContentBubble/Content Bubble Bot.csproj'
+            - project_path: 'samples/meetings-content-bubble/csharp/TargetedNotifications/Targeted Meeting Notification Bot.csproj'
               name: 'meetings-content-bubble'
               version: '6.0.x'
 
