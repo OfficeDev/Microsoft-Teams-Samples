@@ -57,7 +57,7 @@ Run ngrok - point to port 3978
   - In a terminal, navigate to `samples/bot-formatting-cards/nodejs`
   - Update the `.env` configuration file and replace with placeholder `{{Microsoft-App-Id}}` and `{{Microsoft-App-Password}}`. (Note the MicrosoftAppId is the AppId created in step 1 (Setup AAD app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
-   **NOTE:** In `index.js` file at line number 40, uncomment commented line for local debugging.
+> In `index.js` file at line number 40, uncomment commented line for local debugging.
 
   - Install modules
 
