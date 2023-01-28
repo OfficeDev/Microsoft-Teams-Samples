@@ -68,7 +68,9 @@ const AppCacheTab = () => {
 
         let app = microsoftTeams.app;
         app.initialize().then(app.getContext).then((context) => {
+            app.notifySuccess();
 
+            // check condition of framecontext to sidepanel
             if (context.page.frameContext === "sidePanel") {
                 const loadContext = logItem("Success", "green", "Loaded Teams context");
                 setItems((Items) => [...Items, loadContext]);
