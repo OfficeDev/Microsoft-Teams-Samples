@@ -87,7 +87,7 @@ This sample shows the feature where user can send different formatting on cards 
 On line 31, replace {{Microsoft-App-Id}}.
 
 **Note:**
--   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/7336b195da6ea77299d220612817943551065adb/samples/bot-all-cards/csharp/BotAllCards/AdapterWithErrorHandler.cs#L27) and put your debugger for local debug.
+-   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/5a6093539bead5e38c1a19e00d4a2ef8ac1df7d2/samples/bot-formatting-cards/csharp/BotFormattingCards/AdapterWithErrorHandler.cs#L27) and put your debugger for local debug.
 
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
