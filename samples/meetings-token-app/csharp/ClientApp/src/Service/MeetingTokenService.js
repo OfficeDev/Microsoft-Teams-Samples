@@ -5,11 +5,13 @@ import ContextService from "./Context";
 const defaultOptions = {
     timeout: 10000,
 }
-
 export default class MeetingTokenService {
     constructor(teamsClient, options = defaultOptions) {
         if (!teamsClient) {
-            throw "teams client not initialized";
+            throw Object.assign(
+                new Error("teams client not initialized"),
+                { code: 403 }
+            ); 
         }
         this.options = options;
         this.client = axios.create({
