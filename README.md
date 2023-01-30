@@ -59,7 +59,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |31|Messaging extensions - action preview|This sample app demonstrate how to use action preview in Messaging Extensions using Bot Framework v4 |[View](/demo%20manifest/msgext-action-preview.zip) |
 |32|Proactive installation of App and sending proactive notifications|This Teams app demonstrating how you can use [Proactive installation of app for user and send proactive notification](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages?tabs=csharp) by calling Microsoft Graph APIs. |[View](/demo%20manifest/graph-proactive-installation.zip) |
 |33|Meetings Extensibility|This Teams app demonstrating Microsoft Teams meeting extensibility sample: token passing. |[View](/demo%20manifest/meetings-token-app.zip) |
-|34|Meetings Content Bubble Bot|This Teams app demonstrating Microsoft Teams meeting extensibility iteracting with Content Bubble Bot in-meeting. |[View](/demo%20manifest/meetings-content-bubble.zip) |
+34|Meetings Content Bubble Bot|This Teams app demonstrating Microsoft Teams meeting extensibility iteracting with Content Bubble Bot in-meeting. |[View](/demo%20manifest/meetings-content-bubble.zip) |
 |35|Live coding interview using Shared meeting stage|This Teams app demonstrating a live coding in a Teams meeting stage. |[View](/demo%20manifest/meetings-live-code-interview.zip) |
 |36|App Localization|This Teams Microsoft Teams app localization using Bot and Tab.|[View](/demo%20manifest/app-localization.zip) |
 |37|Region Selection App|This app show Microsoft Teams app show end user region selection using Bot and Tab. |[View](/demo%20manifest/app-region-selection.zip) |
@@ -219,7 +219,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |2|Authentication        | Sample illustrating seamless inline authentication for Microsoft Teams apps.                      | | [View][app-auth#ts]
 |3|Complete Samples      | Sample covering multiple scenarios - dialogs, ME, and facebook auth.                                      |[View][app-complete#cs]        |[View][app-complete#ts]
 |4|Meetings Extensibility | Microsoft Teams meeting extensibility sample: token passing |[View][meetings-token-app#cs]     |[View][meetings-token-app#js]
-|5|Meetings Content Bubble Bot | Microsoft Teams meeting extensibility sample for iteracting with Content Bubble Bot in-meeting |[View][meetings-content-bubble#cs]    |[View][meetings-content-bubble#js]
+|5|Meetings  Notification Bot|This Teams app demonstrating Microsoft Teams meeting extensibility iteracting with in-meeting notifications. |[View][meetings-notification#cs]    |[View][meetings-notification#js]
 |6|Meetings SidePanel | Microsoft Teams meeting extensibility sample for iteracting with Side Panel in-meeting |[View][meetings-sidepanel#cs]     | [View][meetings-sidepanel#js]
 |7|Region Selection App | This app contains a bot and Tab which is helpful to set the region |[View][region-selection-app#cs]     |
 |8|App Localization | Microsoft Teams app localization using Bot and Tab |[View][app-localization#cs]  | [View][app-localization#js]
@@ -342,10 +342,10 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [apps-in-meeting#cs]:samples/apps-in-meeting/csharp
 [meetings-token-app#js]:samples/meetings-token-app/nodejs
 [region-selection-app#cs]: samples/app-region-selection/csharp  
-[meetings-content-bubble#cs]:samples/meetings-content-bubble/csharp
+[meetings-notification#cs]:samples/meetings-notification/csharp
 [meetings-sidepanel#cs]:samples/meetings-sidepanel/csharp
 [meetings-sidepanel#js]:samples/meetings-sidepanel/nodejs
-[meetings-content-bubble#js]:samples/meetings-content-bubble/nodejs
+[meetings-notification#js]:samples/meetings-notification/nodejs
 [messageswithrsc#csharp]:samples/bot-receive-channel-messages-withRSC/csharp
 [messageswithrsc#js]:samples/bot-receive-channel-messages-withRSC/nodejs
 [app-in-meeting#cs]:samples/app-in-meeting/csharp

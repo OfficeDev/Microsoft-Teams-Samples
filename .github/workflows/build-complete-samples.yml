@@ -128,8 +128,8 @@ jobs:
               name: 'meeting-recruitment-app'
               version: '6.0.x'
 
-            - project_path: 'samples/meetings-content-bubble/csharp/TargetedNotifications/Targeted Meeting Notification Bot.csproj'
-              name: 'meetings-content-bubble'
+            - project_path: 'samples/meetings-notification/csharp/TargetedNotifications/Targeted Meeting Notification Bot.csproj'
+              name: 'meetings-notification'
               version: '6.0.x'
 
             - project_path: 'samples/meetings-details-tab/csharp/DetailsTab/DetailsTab.csproj'
@@ -571,8 +571,8 @@ jobs:
               name: 'graph-rsc'
               version: '14.x'
 
-            - project_path: 'samples/meetings-content-bubble/nodejs'
-              name: 'meetings-content-bubblek'
+            - project_path: 'samples/meetings-notification/nodejs'
+              name: 'meetings-notification'
               version: '14.x'
 
             - project_path: 'samples/meetings-events/nodejs'

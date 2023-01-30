@@ -1,10 +1,10 @@
 [
   {
-    "name": "officedev-microsoft-teams-samples-meetings-content-bubble-csharp",
+    "name": "officedev-microsoft-teams-samples-meetings-notification-csharp",
     "source": "officeDev",
-    "title": "Content Bubble Meeting app",
+    "title": "In-meeting notification app",
     "shortDescription": "Illustrates how to implement the \"in-meeting notification\" and \"targeted meeting notification\" experience",
-    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-content-bubble/csharp",
+    "url": "https://github.com/OfficeDev/Microsoft-Teams-Samples/tree/main/samples/meetings-notification/csharp",
     "longDescription": [
       "Illustrate how to implement the \"targeted in-meeting notifications\" experience"
     ],

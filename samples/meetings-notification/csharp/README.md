@@ -10,7 +10,7 @@ languages:
 extensions:
  contentType: samples
  createdDate: "07/07/2021 01:38:26 PM"
-urlFragment: officedev-microsoft-teams-samples-meetings-content-bubble-csharp
+urlFragment: officedev-microsoft-teams-samples-meetings-notification-csharp
 ---
 
 # Targeted In-Meeting Notification
