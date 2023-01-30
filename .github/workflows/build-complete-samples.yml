@@ -843,6 +843,10 @@ jobs:
               name: 'tab-navbar-menu'
               version: '16.x'
 
+            - project_path: 'samples/app-cache-meetings/nodejs'
+              name: 'app-cache-meetings'
+              version: '18.x'
+
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
     defaults:
