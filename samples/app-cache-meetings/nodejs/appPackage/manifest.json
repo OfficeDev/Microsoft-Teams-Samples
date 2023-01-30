@@ -16,7 +16,7 @@
   },
   "description": {
     "short": "App Caching In Meeting",
-    "full": "This sample feature is to improve the subsequent loading time of an App that the user has visited during the current meeting (Specifically Apps loaded in the side panel of a meeting)."
+    "full": "This sample shows how to improve the subsequent loading time of an App that the user has visited during the current meeting (Specifically Apps loaded in the side panel of a meeting)."
   },
   "icons": {
     "outline": "outline.png",

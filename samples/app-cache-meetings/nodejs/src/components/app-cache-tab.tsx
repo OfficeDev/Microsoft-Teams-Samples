@@ -8,18 +8,17 @@ import React from "react";
 import * as microsoftTeams from "@microsoft/teams-js";
 
 /// </summary>
-/// function logitem
+///  logitem to show the activity log
 /// </summary>
 function logItem(action: string, actionColor: string, message: string) {
-    const newItem =
-        "<span style='font-weight:bold;color:" +
-        actionColor +
-        "'>" +
-        action +
-        "</span> " +
-        message +
-        "</br>";
-    return newItem;
+   
+    return ("<span style='font-weight:bold;color:" +
+    actionColor +
+    "'>" +
+    action +
+    "</span> " +
+    message +
+    "</br>");
 }
 
 /// </summary>
@@ -28,14 +27,12 @@ function logItem(action: string, actionColor: string, message: string) {
 const beforeUnloadHandler = (
     setItems: React.Dispatch<React.SetStateAction<string[]>>,
     readyToUnload: () => void) => {
+    setItems((Items) => [...Items, logItem("OnBeforeUnload", "purple", "Started")]);
 
-    let newItem = logItem("OnBeforeUnload", "purple", "Started");
-    setItems((Items) => [...Items, newItem]);
-
-    // dispose resources and cleanup
-    newItem = logItem("OnBeforeUnload", "purple", "Completed");
-    setItems((Items) => [...Items, newItem]);
-
+    // Dispose resources and cleanup
+    // Write your custom code to perform resource cleanup.
+    setItems((Items) => [...Items, logItem("OnBeforeUnload", "purple", "Dispose resources and cleanup")]);
+    setItems((Items) => [...Items, logItem("OnBeforeUnload", "purple", "Completed")]);
     console.log("sending readyToUnload to TEAMS");
     readyToUnload();
 
@@ -47,30 +44,25 @@ const beforeUnloadHandler = (
 /// </summary>
 const loadHandler = (
     setItems: React.Dispatch<React.SetStateAction<string[]>>,
-    data: microsoftTeams.LoadContext) => {
-    logItem("OnLoad", "blue", "Started for " + data.entityId);
+    data: microsoftTeams.LoadContext) => { 
+    setItems((Items) => [...Items, logItem("OnLoad", "blue", "Started for " + data.entityId)]);
 
-    let newItem = logItem("OnLoad", "blue", "Completed for " + data.entityId);
-    setItems((Items) => [...Items, newItem]);
-
+    // Use the entityId, contentUrl to route to the correct page within your App and then invoke notifySuccess
+    setItems((Items) => [...Items, logItem("OnLoad", "blue", "Route to specific page")]);
+    setItems((Items) => [...Items, logItem("OnLoad", "blue", "Completed for " + data.entityId)]);
     microsoftTeams.app.notifySuccess();
 };
 
 const AppCacheTab = () => {
     const [items, setItems] = useState<string[]>([]);
-    const [title, setTitle] = useState("App Cache Sample");
-    const [initState] = useState(true);
-
+    const [title, setTitle] = useState("App Caching Sample");
+  
     React.useEffect(() => {
-        if (!initState) {
-            return;
-        }
-
         let app = microsoftTeams.app;
-        app.initialize().then(app.getContext).then((context) => {
+        app.initialize().then(app.getContext).then((context: any) => {
             app.notifySuccess();
 
-            // check condition of framecontext to sidepanel
+            // Check if the framecontext is set to sidepanel
             if (context.page.frameContext === "sidePanel") {
                 const loadContext = logItem("Success", "green", "Loaded Teams context");
                 setItems((Items) => [...Items, loadContext]);
@@ -78,12 +70,13 @@ const AppCacheTab = () => {
                 const newLogItem = logItem("FrameContext", "orange", "Frame context is " + context.page.frameContext);
                 setItems((Items) => [...Items, newLogItem]);
 
-                microsoftTeams.teamsCore.registerBeforeUnloadHandler((readyToUnload) => {
+                microsoftTeams.teamsCore.registerBeforeUnloadHandler((readyToUnload: any) => {
                     const result = beforeUnloadHandler(setItems, readyToUnload);
+                   
                     return result;
                 });
 
-                microsoftTeams.teamsCore.registerOnLoadHandler((data) => {
+                microsoftTeams.teamsCore.registerOnLoadHandler((data: any) => {
                     loadHandler(setItems, data);
                     setTitle("Entity Id : " + data.entityId);
                     console.log(data.contentUrl, data.entityId);
@@ -93,27 +86,24 @@ const AppCacheTab = () => {
                 setItems((Items) => [...Items, newItem]);
             }
 
-        }).catch(function (error) {
-            console.log(error, "could not register handlers");
+        }).catch(function (error: any) {
+            console.log(error, "Could not register handlers.");
         });
 
         return () => {
             console.log("useEffect cleanup - Tab");
         };
 
-    }, [initState]);
+    }, []);
 
-    const jsx = initState ? (
+    return (
         <div>
             <h3>{title}</h3>
             {items.map((item) => {
                 return <div dangerouslySetInnerHTML={{ __html: item }} />;
             })}
         </div>
-    ) : (
-        <div style={{ color: "white" }}>loading</div>
     );
-    return jsx;
 };
 
 export default AppCacheTab;
