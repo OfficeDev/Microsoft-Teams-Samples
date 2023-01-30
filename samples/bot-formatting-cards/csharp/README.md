@@ -1,4 +1,3 @@
-
 ---
 page_type: sample
 description: This sample demonstrates the use of different formatting on cards
@@ -49,42 +48,42 @@ This sample shows the feature where user can send different formatting on cards 
     3) Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
 2. Setup for Bot
-- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+    - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+   - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+   - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
 3. Setup NGROK  
-Run ngrok - point to port 3978
+   Run ngrok - point to port 3978
 
     ```bash
     ngrok http -host-header=rewrite 3978
     ```
 
 4. Setup for code  
-  - Clone the repository
+   - Clone the repository
 
     ```bash
     git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-  Run the bot from a terminal or from Visual Studio:
+    Run the bot from a terminal or from Visual Studio:
 
   A) From a terminal, navigate to `samples/bot-formatting-cards/csharp/BotFormattingCards`
 
-  ```bash
-  # run the bot
-  dotnet run
-  ```
+     ```bash
+     # run the bot
+     dotnet run
+     ```
   B) Or from Visual Studio
 
-  - Launch Visual Studio
-  - File -> Open -> Project/Solution
-  - Navigate to `samples/bot-formatting-cards/csharp/BotFormattingCards` folder
-  - Select `BotFormattingCards.csproj` file
-  - Press `F5` to run the project   
+    - Launch Visual Studio
+    - File -> Open -> Project/Solution
+    - Navigate to `samples/bot-formatting-cards/csharp/BotFormattingCards` folder
+    - Select `BotFormattingCards.csproj` file
+    - Press `F5` to run the project   
   
-  - Update the `.env` configuration file and replace with placeholder `{{Microsoft-App-Id}}` and `{{Microsoft-App-Password}}`. (Note the MicrosoftAppId is the AppId created in step 1 (Setup AAD app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+- Update the `.env` configuration file and replace with placeholder `{{Microsoft-App-Id}}` and `{{Microsoft-App-Password}}`. (Note the MicrosoftAppId is the AppId created in step 1 (Setup AAD app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
-  - Navigate to samples\bot-formatting-cards\csharp\BotFormattingCards\Resources\mentionSupport.json
+- Navigate to samples\bot-formatting-cards\csharp\BotFormattingCards\Resources\mentionSupport.json
 On line 31, replace {{Microsoft-App-Id}}.
 
 **Note:**
