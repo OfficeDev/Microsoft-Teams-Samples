@@ -705,7 +705,7 @@ jobs:
 
             - project_path: 'samples/bot-proactive-messaging-teamsfx'
               name: 'bot-proactive-messaging-teamsfx'
-              version: '14.x'              
+              version: '18.x'              
 
             - project_path: 'samples/app-auth/nodejs'
               name: 'app-auth'
