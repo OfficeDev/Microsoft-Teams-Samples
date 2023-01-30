@@ -1,4 +1,4 @@
-// <copyright file="ContentBubble.cshtml.cs" company="Microsoft">
+// <copyright file="InMeetingNotificationModel.cshtml.cs" company="Microsoft">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 // </copyright>
