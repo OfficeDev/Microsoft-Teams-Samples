@@ -28,13 +28,13 @@ using System.Web;
 
 namespace TargetedInMeetingNotificationBot
 {
-    public class TargetedInNotificationMeetingBot : TeamsActivityHandler
+    public class TargetedInMeetingNotificationBot : TeamsActivityHandler
     {
         private readonly IConfiguration _config;
         private readonly MeetingAgenda _agenda;
         private IHttpClientFactory _httpClientFactory;
 
-        public TargetedInNotificationMeetingBot(IConfiguration configuration, IHttpClientFactory httpClientFactory)
+        public TargetedInMeetingNotificationBot(IConfiguration configuration, IHttpClientFactory httpClientFactory)
         {
             _config = configuration;
             _httpClientFactory = httpClientFactory;
