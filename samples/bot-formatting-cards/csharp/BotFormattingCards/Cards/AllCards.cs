@@ -27,6 +27,7 @@ namespace BotAllCards.Cards
 
             return mentionSupportAdaptiveCardAttachment;
         }
+
         /// <summary>
         /// Sends InfoMasking Card
         /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields
@@ -45,6 +46,7 @@ namespace BotAllCards.Cards
 
             return sendsInfoMaskingAdaptiveCardAttachment;
         }
+
         /// <summary>
         /// Sends Sample Adaptive Card With Full Width
         /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields
@@ -63,6 +65,7 @@ namespace BotAllCards.Cards
 
             return fullWidthAdaptiveCardAttachment;
         }
+
         /// <summary>
         /// Stage view for images in Adaptive Cards
         /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields
@@ -81,6 +84,7 @@ namespace BotAllCards.Cards
 
             return adaptiveCardAttachment;
         }
+
         /// <summary>
         /// Sends OverFlow Menu Card
         /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields
@@ -99,6 +103,7 @@ namespace BotAllCards.Cards
 
             return sendsOverFlowMenuAdaptiveCardAttachment;
         }
+
         /// <summary>
         /// Format sample for HTML connector cards
         /// The following code shows an example of formatting for HTML connector cards.
@@ -117,6 +122,7 @@ namespace BotAllCards.Cards
 
             return htmlConnectorAdaptiveCardAttachment;
         }
+
         /// <summary>
         /// Sends Card With Emoji
         /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields
