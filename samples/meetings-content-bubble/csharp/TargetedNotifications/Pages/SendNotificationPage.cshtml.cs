@@ -5,9 +5,9 @@
 
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace TargetedInNotificationMeetingBot.Pages
+namespace TargetedInMeetingNotificationBot.Pages
 {
-    public class SendNotificationPage : PageModel
+    public class TargetedInMeetingNotificationModel : PageModel
     {
         public void OnGet()
         {

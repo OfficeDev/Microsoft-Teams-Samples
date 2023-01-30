@@ -6,9 +6,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace TargetedInNotificationMeetingBot.Pages
+namespace TargetedInMeetingNotificationBot.Pages
 {
-    public class ContentBubbleModel : PageModel
+    public class InMeetingNotificationModel : PageModel
     {
         [FromQuery(Name = "topic")]
         public string Topic { get; set; }

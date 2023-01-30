@@ -1,11 +1,11 @@
-﻿// <copyright file="TargetedInNotificationMeetingBot.cs" company="Microsoft">
+﻿// <copyright file="TargetedInNotifiTargetedInNotificationMeetingBotcationMeetingBot.cs" company="Microsoft">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 // </copyright>
 
 using AdaptiveCards;
 using AdaptiveCards.Templating;
-using TargetedInNotificationMeetingBot.Models;
+using TargetedInMeetingNotificationBot.Models;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Connector.Authentication;
@@ -26,7 +26,7 @@ using System.Threading.Tasks;
 using System.Web;
 
 
-namespace TargetedInNotificationMeetingBot
+namespace TargetedInMeetingNotificationBot
 {
     public class TargetedInNotificationMeetingBot : TeamsActivityHandler
     {
@@ -140,8 +140,8 @@ namespace TargetedInNotificationMeetingBot
                         {
                             AlertInMeeting = true,
                             ExternalResourceUrl = $"https://teams.microsoft.com/l/bubble/{_config["MicrosoftAppId"]}?url=" +
-                                                  HttpUtility.UrlEncode($"{_config["BaseUrl"]}/ContentBubble?topic={agendaItem.Topic}") +
-                                                  $"&height=270&width=250&title=ContentBubble&completionBotId={_config["MicrosoftAppId"]}"
+                                                  HttpUtility.UrlEncode($"{_config["BaseUrl"]}/InMeetingNotificationPage?topic={agendaItem.Topic}") +
+                                                  $"&height=270&width=250&title=InMeetingNotification&completionBotId={_config["MicrosoftAppId"]}"
                         }
                     };
                     await turnContext.SendActivityAsync(activity);

@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.BotBuilderSamples;
 
-namespace TargetedInNotificationMeetingBot
+namespace TargetedInMeetingNotificationBot
 {
     public class Startup
     {

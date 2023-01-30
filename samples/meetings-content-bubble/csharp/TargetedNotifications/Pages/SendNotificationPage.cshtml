@@ -1,5 +1,5 @@
 ﻿@page
-@model TargetedInNotificationMeetingBot.Pages.SendNotificationPage
+@model TargetedInMeetingNotificationBot.Pages.TargetedInMeetingNotificationModel 
 @{
     ViewData["Title"] = "Layout";
 }
@@ -8,7 +8,7 @@
     microsoftTeams.app.initialize();
     function validateForm() {
         var feedbackInfo = {
-            Topic: 'Meeting Targeted Notification',
+            Topic: 'Targeted In-Meeting Notification',
             Feedback: document.querySelector('input[name="inputVal"]:checked').value
         }
         microsoftTeams.tasks.submitTask(feedbackInfo);

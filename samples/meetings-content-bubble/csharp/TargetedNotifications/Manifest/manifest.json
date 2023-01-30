@@ -15,11 +15,11 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "Targeted Meeting Notification",
+    "short": "Targeted In-Meeting Notification",
     "full": "Targeted Meeting Notification Demo"
   },
   "description": {
-    "short": "Targeted Meeting Notification demo",
+    "short": "Targeted In-Meeting Notification demo",
     "full": " Sample app to demo how to send in meeting targeted notifications."
   },
   "accentColor": "#FFFFFF",

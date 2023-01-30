@@ -13,13 +13,12 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-meetings-content-bubble-csharp
 ---
 
-# Meeting Targeted Notification
+# Targeted In-Meeting Notification
 
-This sample illustrates how to implement [Content Bubble](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?view=msteams-client-js-latest&tabs=dotnet#notificationsignal-api) In-Meeting Experience. This app also showcase sending targeted notification to meeting participants.
-
+This sample illustrates how to implement [Targeted In-Meeting Notification](https://review.learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-7615&tabs=dotnet#targeted-meeting-notification-api)  In-Meeting Experience.
 ## Interaction with app
 
-![Meeting Targeted Notification](TargetedNotifications/Images/ContentBubbleModule.gif)
+![Targeted In-Meeting Notification](TargetedNotifications/Images/ContentBubbleModule.gif)
 
 ## Prerequisites
 

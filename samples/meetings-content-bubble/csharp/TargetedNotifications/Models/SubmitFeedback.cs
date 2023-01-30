@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TargetedInNotificationMeetingBot.Models
+namespace TargetedInMeetingNotificationBot.Models
 {
     public class SubmitFeedbackAction : PushAgendaAction
     {

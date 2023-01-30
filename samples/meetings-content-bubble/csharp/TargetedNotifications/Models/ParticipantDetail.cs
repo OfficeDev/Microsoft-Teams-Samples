@@ -3,7 +3,7 @@
 // Licensed under the MIT License.
 // </copyright>
 
-namespace TargetedInNotificationMeetingBot.Models
+namespace TargetedInMeetingNotificationBot.Models
 {
     public class ParticipantDetail
     {
