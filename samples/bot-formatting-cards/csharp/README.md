@@ -13,13 +13,18 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-bot-formatting-cards-csharp
 
 ---
-# Different Formatting Cards
+## Different Formatting Cards
 
 This sample shows the feature where user can send different formatting on cards using bot.
 
 ## Interaction with app
 
 ![Types Of Cards](BotFormattingCards/Images/DifferentFormattingCards.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Send different formatting on cards:** [Manifest](/samples/bot-formatting-cards/csharp/demo-manifest/bot-formatting-cards.zip)
 
 ## Prerequisites
 
@@ -73,6 +78,7 @@ This sample shows the feature where user can send different formatting on cards 
      # run the bot
      dotnet run
      ```
+     
   B) Or from Visual Studio
 
     - Launch Visual Studio
