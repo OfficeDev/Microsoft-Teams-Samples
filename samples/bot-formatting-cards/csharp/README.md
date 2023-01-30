@@ -19,7 +19,7 @@ This sample shows the feature where user can send different formatting on cards 
 
 ## Interaction with app
 
-![Types Of Cards](Images/DifferentFormattingCards.gif)
+![Types Of Cards](BotFormattingCards/Images/DifferentFormattingCards.gif)
 
 ## Prerequisites
 
@@ -105,39 +105,43 @@ On line 31, replace {{Microsoft-App-Id}}.
 
 **Install App:**
 
-![InstallApp](Images/1.InstallApp.png)
+![InstallApp](BotFormattingCards/Images/InstallApp.png)
 
 **Welcome Message:**
 
-![WelcomeMessage](Images/2.WelcomeMessage.png)
+![WelcomeMessage](BotFormattingCards/Images/WelcomeMessage.png)
+
+**Type Of Cards:**
+
+![TypeOfCards](BotFormattingCards/Images/TypeOfCards.png)
 
 **Mention Card:**
 
-![MentionCard](Images/3.MentionCard.png)
+![MentionCard](BotFormattingCards/Images/MentionCard.png)
 
 **Information Mask Card:**
 
-![InformationMaskCard](Images/4.InformationMaskCard.png)
+![InformationMaskCard](BotFormattingCards/Images/InformationMaskCard.png)
 
 **FullWidth Adaptive Card:**
 
-![FullWidthCard](Images/5.FullWidthCard.png)
+![FullWidthCard](BotFormattingCards/Images/FullWidthCard.png)
 
 **Stage View Card:**
 
-![StageViewCard](Images/6.StageViewCard.png)
+![StageViewCard](BotFormattingCards/Images/StageViewCard.png)
 
 **Overflow Menu Card:**
 
-![OverflowMenuCard](Images/7.OverflowMenuCard.png)
+![OverflowMenuCard](BotFormattingCards/Images/OverflowMenuCard.png)
 
 **HTML Connector Card:**
 
-![HTMLFormatCard](Images/8.HTMLFormatCard.png)
+![HTMLFormatCard](BotFormattingCards/Images/HTMLFormatCard.png)
 
 **AdaptiveCard With Emoji:**
 
-![CardWithEmoji](Images/9.CardWithEmoji.png)
+![CardWithEmoji](BotFormattingCards/Images/CardWithEmoji.png)
 
 ## Deploy the bot to Azure
 
