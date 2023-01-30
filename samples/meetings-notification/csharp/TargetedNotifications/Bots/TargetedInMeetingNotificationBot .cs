@@ -1,4 +1,4 @@
-﻿// <copyright file="TargetedInNotifiTargetedInNotificationMeetingBotcationMeetingBot.cs" company="Microsoft">
+﻿// <copyright file="TargetedInMeetingNotificationBot.cs" company="Microsoft">
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 // </copyright>
