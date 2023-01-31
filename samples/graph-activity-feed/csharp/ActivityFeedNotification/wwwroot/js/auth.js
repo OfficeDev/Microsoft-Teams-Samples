@@ -1,10 +1,11 @@
-﻿let accessToken;
+﻿let idToken;
+let accessToken;
 
 $(document).ready(function () {
-    microsoftTeams.initialize();
-   
+    microsoftTeams.app.initialize();
+
     getClientSideToken()
-        .then((clientSideToken) => {           
+        .then((clientSideToken) => {
             return getServerSideToken(clientSideToken);
         })
         .catch((error) => {
@@ -30,13 +31,13 @@ $(document).ready(function () {
 function requestConsent() {
     getToken()
         .then(data => {
-        $("#consent").hide();
-        $("#divError").hide();
-        accessToken = data.accessToken;
-        microsoftTeams.getContext((context) => {
-            getUserInfo(context.userPrincipalName);
+            $("#consent").hide();
+            $("#divError").hide();
+            getClientSideToken()
+                .then((clientSideToken) => {
+                    return getServerSideToken(clientSideToken);
+                })
         });
-    });
 }
 
 function getToken() {
@@ -49,7 +50,7 @@ function getToken() {
                 resolve(result);
             },
             failureCallback: reason => {
-                
+
                 reject(reason);
             }
         });
@@ -62,9 +63,9 @@ function getClientSideToken() {
         microsoftTeams.authentication.getAuthToken({
             successCallback: (result) => {
                 resolve(result);
-                
+
             },
-            failureCallback: function (error) {                
+            failureCallback: function (error) {
                 reject("Error getting token: " + error);
             }
         });

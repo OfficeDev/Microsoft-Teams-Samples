@@ -23,7 +23,7 @@ namespace Microsoft.BotBuilderSamples.Bots
         protected override async Task OnMessageActivityAsync(ITurnContext<IMessageActivity> turnContext, CancellationToken cancellationToken)
         {
             var teamsChannelId = turnContext.Activity.TeamsGetChannelId();
-            var activity = MessageFactory.Text("This will start a new thread in a channel");
+            var activity = MessageFactory.Text("This will start a new thread in a channel - Testing YMAL");
 
             var details = await TeamsInfo.SendMessageToTeamsChannelAsync(turnContext, activity, teamsChannelId, _appId, cancellationToken);
             await ((CloudAdapter)turnContext.Adapter).ContinueConversationAsync(

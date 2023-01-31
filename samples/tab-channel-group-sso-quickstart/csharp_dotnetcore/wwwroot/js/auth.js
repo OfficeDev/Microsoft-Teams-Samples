@@ -2,10 +2,9 @@
 
 $(document).ready(function () {
     microsoftTeams.app.initialize();
-   
+
     getClientSideToken()
         .then((clientSideToken) => {
-            console.log("clientSideToken: " + clientSideToken);
             return getServerSideToken(clientSideToken);
         })
         .catch((error) => {
@@ -16,7 +15,10 @@ $(document).ready(function () {
                 $("#divError").show();
                 $("#consent").show();
             } else {
-                // Something else went wrong
+                // Display in-line button so user can consent
+                $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
+                $("#divError").show();
+                $("#consent").show();
             }
         });
 });
@@ -24,14 +26,13 @@ $(document).ready(function () {
 function requestConsent() {
     getToken()
         .then(data => {
-        $("#consent").hide();
-        $("#divError").hide();
-        accessToken = data.accessToken;
-        microsoftTeams.app.getContext().then((context) => {
-            getUserInfo(context.user.userPrincipalName);
-            getPhotoAsync(accessToken);
+            $("#consent").hide();
+            $("#divError").hide();
+            getClientSideToken()
+                .then((clientSideToken) => {
+                    return getServerSideToken(clientSideToken);
+                })
         });
-    });
 }
 
 function getToken() {
@@ -73,7 +74,7 @@ function getServerSideToken(clientSideToken) {
                 cache: 'default'
             })
                 .then((response) => {
-                    if (response.ok) {                        
+                    if (response.ok) {
                         return response.text();
                     } else {
                         reject(response.error);

@@ -80,7 +80,7 @@
         {
           "type": "Action.Execute",
           "verb": "approved",
-          "title": "Approve",
+          "title": "Approve - Testing YML",
           "data": {
             "CreatedBy": "${createdBy}",
             "RequestTitle": "${requestTitle}",

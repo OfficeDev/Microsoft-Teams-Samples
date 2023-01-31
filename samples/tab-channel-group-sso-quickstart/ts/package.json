@@ -5,6 +5,7 @@
   "dependencies": {
     "@fluentui/react-components": "^9.0.0-rc.10",
     "@microsoft/teams-js": "^2.5.0",
+    "@azure/msal-browser": "^2.11.0",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
