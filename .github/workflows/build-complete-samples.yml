@@ -416,6 +416,10 @@ jobs:
               name: 'bot-adaptive-card-actions'
               version: '6.0.x'
 
+            - project_path: 'samples/tab-deeplink-features/csharp/DeeplinkFeatures/DeeplinkFeatures.csproj'
+              name: 'tab-deeplink-features'
+              version: '6.0.x'
+
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
     steps:
@@ -842,6 +846,10 @@ jobs:
             - project_path: 'samples/tab-navbar-menu/ts'
               name: 'tab-navbar-menu'
               version: '16.x'
+
+            - project_path: 'samples/tab-deeplink-features/nodejs'
+              name: 'tab-deeplink-features'
+              version: '18.x'
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs

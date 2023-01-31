@@ -13,13 +13,18 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-tab-deeplink-features-csharp
 
 ---
- # Deep-Link Features
+ ## Deep-Link Features
 
  This sample app for demonstrating for deep-link features using tab.
 
 - **Interaction with App**
 
  ![Deeplink-Features](DeeplinkFeatures/Images/DeeplinkFeatures.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Deep-Link Features:** [Manifest](/samples/tab-deeplink-features/csharp/demo-manifest/tab-deeplink-features.zip)
 
  ## Prerequisites
 
