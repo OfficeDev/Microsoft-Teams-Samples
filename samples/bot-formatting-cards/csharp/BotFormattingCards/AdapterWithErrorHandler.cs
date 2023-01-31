@@ -1,5 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
+﻿/// <summary>
+/// Copyright(c) Microsoft. All Rights Reserved.
+/// Licensed under the MIT License.
+/// </summary>
 
 using System;
 using Microsoft.Bot.Builder;

@@ -11,12 +11,12 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Different Formatting Cards",
-    "full": "Different Formatting Cards"
+    "short": "Cards Formatting",
+    "full": "Cards Formatting"
   },
   "description": {
-    "short": "This sample demonstrates the use of different formatting on cards.",
-    "full": "This sample demonstrates the use of different formatting on adaptive Cards and Different Formatting Adaptive Cards."
+    "short": "This sample shows how to use different formatting on cards.",
+    "full": "This sample shows how to use different formatting on Adaptive Cards."
   },
   "icons": {
     "outline": "outline.png",

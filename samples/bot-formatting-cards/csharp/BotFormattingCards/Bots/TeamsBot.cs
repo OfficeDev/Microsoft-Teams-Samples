@@ -1,5 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
+﻿/// <summary>
+/// Copyright(c) Microsoft. All Rights Reserved.
+/// Licensed under the MIT License.
+/// </summary>
 
 using System.Collections.Generic;
 using System.Threading;
@@ -10,8 +12,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.BotBuilderSamples
 {
-    // RichCardsBot prompts a user to select a Rich Card and then returns the card
-    // that matches the user's selection.
+
+    /// <summary>
+    /// RichCardsBot prompts a user to select a Rich Card and then returns the card
+    /// that matches the user's selection.
+    /// </summary>
     public class TeamsBot : DialogBot<MainDialog>
     {
         public TeamsBot(ConversationState conversationState, UserState userState, MainDialog dialog, ILogger<DialogBot<MainDialog>> logger)

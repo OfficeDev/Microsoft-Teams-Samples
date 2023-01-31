@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates the use of different formatting on cards
+description: This sample shows how to use different formatting on cards.
 products:
 - office-teams
 - office
@@ -13,9 +13,9 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-bot-formatting-cards-csharp
 
 ---
-## Different Formatting Cards
+## Different formatting on cards
 
-This sample shows the feature where user can send different formatting on cards using bot.
+This sample feature shows how to use different formatting on cards using bot.
 
 ## Interaction with app
 
@@ -50,7 +50,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
     2) On the overview page, copy and save the **Application (client) ID, Directory (tenant) ID**. You’ll need those later when updating your Teams application manifest and in the appsettings.json.
 
-    3) Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description      (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
+    3) Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description (Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json.
 
 2. Setup for Bot
     - In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
@@ -87,13 +87,42 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     - Select `BotFormattingCards.csproj` file
     - Press `F5` to run the project   
   
-- Update the `.env` configuration file and replace with placeholder `{{Microsoft-App-Id}}` and `{{Microsoft-App-Password}}`. (Note the MicrosoftAppId is the AppId created in step 1 (Setup AAD app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+- Update the `appsettings.json` configuration file and replace with placeholder `{{Microsoft-App-Id}}` and `{{Microsoft-App-Password}}`. (Note the MicrosoftAppId is the AppId created in step 1 (Setup AAD app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
 
-- Navigate to samples\bot-formatting-cards\csharp\BotFormattingCards\Resources\mentionSupport.json
-On line 31, replace {{Microsoft-App-Id}}.
+**Update mentionSupport json**
+- Bots support user mention with the Azure AD Object ID and UPN, in addition to the existing IDs. The support for two new IDs is available in bots for text messages, Adaptive Cards body, and message extension response. Bots support the mention IDs in conversation and invoke scenarios. The user gets activity feed notification when being @mentioned with the IDs.
 
+   - Navigate to samples\bot-formatting-cards\csharp\BotFormattingCards\Resources\mentionSupport.json
+      1) On line 14, replace {{new-Ids}}  
+      2) On line 23, replace {{Email-Id}}
+      3) On line 31, replace {{Microsoft-App-Id}}
+        - E.g. 
+        ```
+        "text": "Hi <at>Adele UPN</at>, <at>Adele Azure AD</at>"
+            }
+        ],
+        "msteams": {
+            "entities": [
+            {
+                "type": "mention",
+                "text": "<at>Adele UPN</at>",
+                "mentioned": {
+                "id": "AdeleV@contoso.onmicrosoft.com",
+                "name": "Adele Vance"
+                }
+            },
+            {
+                "type": "mention",
+                "text": "<at>Adele Azure AD</at>",
+                "mentioned": {
+                "id": "87d349ed-44d7-43e1-9a83-5f2406dee5bd",
+                "name": "Adele Vance"
+                }
+            }
+            ]
+        ```
 **Note:**
--   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/5a6093539bead5e38c1a19e00d4a2ef8ac1df7d2/samples/bot-formatting-cards/csharp/BotFormattingCards/AdapterWithErrorHandler.cs#L27) and put your debugger for local debug.
+-   If you are facing any issue in your app,  [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/fb5beb01271099430655ea0e56e8b6230c0e424e/samples/bot-formatting-cards/csharp/BotFormattingCards/AdapterWithErrorHandler.cs#L27) and put your debugger for local debug.
 
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__

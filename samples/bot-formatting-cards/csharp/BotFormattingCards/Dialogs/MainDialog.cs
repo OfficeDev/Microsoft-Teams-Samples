@@ -1,5 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
+﻿/// <summary>
+/// Copyright(c) Microsoft. All Rights Reserved.
+/// Licensed under the MIT License.
+/// </summary>
 
 using System;
 using System.Collections.Generic;
@@ -33,8 +35,13 @@ namespace Microsoft.BotBuilderSamples
             InitialDialogId = nameof(WaterfallDialog);
         }
 
-        // 1. Prompts the user if the user is not in the middle of a dialog.
-        // 2. Re-prompts the user when an invalid input is received.
+        /// <summary>
+        /// Prompts the user if the user is not in the middle of a dialog.
+        /// Re-prompts the user when an invalid input is received.
+        /// </summary>
+        /// <param name="stepContext">Creates a new WaterfallStepContext instance.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>A task that represents the work queued to execute.</returns>>
         private async Task<DialogTurnResult> ShowAllCardAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
             // Create the PromptOptions which contain the prompt and re-prompt messages.
@@ -43,7 +50,7 @@ namespace Microsoft.BotBuilderSamples
             {
                 Prompt = MessageFactory.Text("What card would you like to see? You can click the card name"),
                 RetryPrompt = MessageFactory.Text("That was not a valid choice, please select a card or number from 1 to 7."),
-                Choices = lodingAllCards(),
+                Choices = loadAllCards(),
             };
 
             // Prompt the user with the configured PromptOptions.
@@ -78,7 +85,7 @@ namespace Microsoft.BotBuilderSamples
                     reply.Attachments.Add(AllCards.sendMentionSupportCard());
                     break;
                 case "InfoMasking":
-                    // Sends InfoMasking Card
+                    // Sends Information masking in Adaptive Cards
                     reply.Attachments.Add(AllCards.sendInfoMasking());
                     break;
                 case "FullWidthCard":
@@ -126,8 +133,8 @@ namespace Microsoft.BotBuilderSamples
         /// <summary>
         /// Load All Cards
         /// </summary>
-        /// <returns></returns>
-        private IList<Choice> lodingAllCards()
+        /// <returns>Return the value of all cards on the list.</returns>
+        private IList<Choice> loadAllCards()
         {
             try
             {

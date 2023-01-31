@@ -1,5 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
+﻿/// <summary>
+/// Copyright(c) Microsoft. All Rights Reserved.
+/// Licensed under the MIT License.
+/// </summary>
 
 using System.IO;
 using Microsoft.Bot.Schema;
@@ -29,8 +31,8 @@ namespace BotAllCards.Cards
         }
 
         /// <summary>
-        /// Sends InfoMasking Card
-        /// An Adaptive Card is a customizable card that can contain any combination of text, speech, images, buttons, and input fields
+        /// Sends Information masking in Adaptive Cards
+        /// Use the information masking property to mask specific information, such as password or sensitive information from users within the Adaptive Card Input.Text input element.
         /// </summary>
         /// <returns>Return Microsoft.Bot.Schema.Attachment results.</returns>
         public static Attachment sendInfoMasking()

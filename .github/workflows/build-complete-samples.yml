@@ -849,7 +849,7 @@ jobs:
             
             - project_path: 'samples/bot-formatting-cards/nodejs'
               name: 'bot-formatting-cards'
-              version: '16.x'
+              version: '18.x'
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs
