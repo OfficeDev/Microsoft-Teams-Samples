@@ -4,8 +4,7 @@
 import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import {  Text, Button} from '@fluentui/react-components'
-import { Card, CardPreview, CardHeader, CardFooter } from "@fluentui/react-components/unstable"
-import { getFlexColumnStyles } from "..//styles/layouts"
+import { Card } from "@fluentui/react-components/unstable"
 import { CardBody } from 'reactstrap';
 /**
  * The 'CaptureAudio' component
@@ -47,7 +46,7 @@ const CaptureAudio = () => {
       <Text weight='bold' as="h1">Media</Text>  
        <CardBody>          
           <div className='flex columngap'>
-            <Text>Checks for permission to use media input</Text>
+            <Text>Checks for permission to use media input Testing YMAL</Text>
             <Text weight='medium'>SDK used</Text>
             <Text>navigator, microsoftTeams</Text>
             <Text weight='medium'>Method:</Text>

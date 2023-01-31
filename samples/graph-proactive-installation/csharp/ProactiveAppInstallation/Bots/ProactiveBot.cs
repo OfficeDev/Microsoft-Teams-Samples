@@ -25,7 +25,7 @@ namespace Microsoft.BotBuilderSamples
             if (text.Contains("install"))
             {
                 var result = await InstalledAppsinPersonalScopeAsync(turnContext, cancellationToken);
-                await turnContext.SendActivityAsync(MessageFactory.Text($"Existing: {result.Existing} \n\n Newly Installed: {result.New}"), cancellationToken);
+                await turnContext.SendActivityAsync(MessageFactory.Text($"Existing - Testing YMAL: {result.Existing} \n\n Newly Installed: {result.New}"), cancellationToken);
             }
             else if (text.Contains("send"))
             {

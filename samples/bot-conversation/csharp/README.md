@@ -168,6 +168,18 @@ You can interact with this bot in Teams by sending it a message, or selecting a 
 - A new screen will be open and the text will be read by default which is mentioned inside the speak property of adaptive card.
 ![immersive-reader-screen](Images/immersiveReaderScreen.png)
 
+ 5. **Message update events for user messages**
+- You will recieve event updates for message edit/delete features.
+
+- Message is edited
+![message-edit](Images/messageEditEvent.png)
+
+- Message is soft-deleted
+![message-soft-delete](Images/softDeleteMessage.png)
+
+- Message is restored
+![message-undelete](Images/messageUndelete.png)
+
 You can select an option from the command list by typing ```@TeamsConversationBot``` into the compose message area and ```What can I do?``` text above the compose area.
 
 ## Deploy the bot to Azure
@@ -177,4 +189,3 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 ## Further reading
 
 - [How Microsoft Teams bots work](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-basics-teams?view=azure-bot-service-4.0&tabs=javascript)
-

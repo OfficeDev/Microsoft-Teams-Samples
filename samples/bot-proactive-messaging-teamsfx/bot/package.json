@@ -5,6 +5,9 @@
     "teamsAppId": null
   },
   "description": "Microsoft Teams Toolkit hello world Bot sample",
+  "engines": {
+    "node": "14 || 16 || 18"
+  },
   "author": "Microsoft",
   "license": "MIT",
   "main": "index.js",
@@ -19,7 +22,7 @@
     "botbuilder": "~4.15.0",
     "botbuilder-dialogs": "~4.5.0",
     "isomorphic-fetch": "^3.0.0",
-    "restify": "~8.5.1"
+    "restify": "^10.0.0"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",

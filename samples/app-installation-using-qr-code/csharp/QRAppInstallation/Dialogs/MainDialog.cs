@@ -85,7 +85,7 @@ namespace QRAppInstallation.Dialogs
                 {
                     new AdaptiveTextBlock
                     {
-                        Text = "Generate QR for app and install",
+                        Text = "Generate QR for app and install - Testing YMAL",
                         Weight = AdaptiveTextWeight.Bolder,
                         Spacing = AdaptiveSpacing.Medium,
                     }

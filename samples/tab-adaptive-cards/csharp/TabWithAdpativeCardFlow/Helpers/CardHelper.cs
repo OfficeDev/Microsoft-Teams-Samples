@@ -61,7 +61,7 @@ namespace TabWithAdpativeCardFlow.Helpers
                 {
                     new AdaptiveSubmitAction
                     {
-                        Title = "Show Task Module",
+                        Title = "Show Task Module Testing YMAL",
                         Data = new AdaptiveCardAction
                         {
                             MsteamsCardAction = new CardAction
@@ -155,13 +155,13 @@ namespace TabWithAdpativeCardFlow.Helpers
                     },
                     new AdaptiveTextBlock
                     {
-                        Text = "tab/fetch is the first invoke request that your bot receives when a user opens an Adaptive Card tab. When your bot receives the request, it either sends a tab continue response or a tab auth response",
+                        Text = "'tab/fetch' is the first invoke request that your bot receives when a user opens an Adaptive Card tab. When your bot receives the request, it either sends a tab continue response or a tab auth response.",
                         Wrap = true,
                         Spacing = AdaptiveSpacing.Medium,
                     },
                     new AdaptiveTextBlock
                     {
-                        Text = "tab/submit request is triggered to your bot with the corresponding data through the Action.Submit function of Adaptive Card",
+                        Text = "'tab/submit' request is triggered to your bot with the corresponding data through the Action.Submit function of Adaptive Card.",
                         Spacing = AdaptiveSpacing.Medium,
                         Wrap = true,
                     },

@@ -33,6 +33,8 @@ This application also shows the implementation of Live Share SDK to update the d
 
  ![config_page](Images/config_page.png)
 
+ ![chat_page](Images/chat_meeting_tab.png)
+
  ![pre_meeting_tab](Images/pre_meeting_tab.png)
 
  ![side_panel_tab](Images/side_panel_tab.png)
@@ -125,6 +127,8 @@ You can build and run the project from the command line or an IDE:
 
 ### Step 5: Enable developer preview in your desktop Teams client
 Follow [these instructions](https://docs.microsoft.com/en-us/microsoftteams/platform/resources/dev-preview/developer-preview-intro#enable-developer-preview) to enable developer preview. Note that Developer preview mode must be enabled on each Teams client app or browser.
+
+Note: Open the meeting chat section and type @MeetingTokenApp Hello (It will send back the required information to you).
 
 > In-meeting tabs are only available in the Teams desktop client. They will not be visible when you run Teams in a web browser.
 
