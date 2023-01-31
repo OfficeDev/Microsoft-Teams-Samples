@@ -22,6 +22,7 @@ function onCallDeepLinkButtonClick(callModalities) {
     microsoftTeams.app.initialize().then(() => {
         microsoftTeams.people.selectPeople({ setSelected: [], openOrgWideSearchInChatOrChannel: true, singleSelect: false }).then((people) => {
             if (people) {
+
                 if (microsoftTeams.call.isSupported()) {
                     microsoftTeams.call.startCall({
                         targets: people.map((p) => p.email),
@@ -68,6 +69,7 @@ function onNavigatewithinyourapp() {
     var app = microsoftTeams.app;
 
     app.initialize().then(app.getContext).then((context) => {
+
         if (pages.isSupported()) {
             const navPromise = pages.navigateToApp({ appId: env.AppId, pageId: context.page.id, subPageId: context.page.subPageId, channelId: context.channel.id });
             navPromise.
@@ -109,6 +111,7 @@ function navigateToChatWithApplication() {
 
 // navigates to new chat window where you can start new chat.
 function navigateOnStartNewChat() {
+
     // Declare microsoftTeams chat
     var chat = microsoftTeams.chat;
 
@@ -116,6 +119,7 @@ function navigateOnStartNewChat() {
     var app = microsoftTeams.app;
 
     app.initialize().then(app.getContext).then((context) => {
+
         // get the current user.
         let user = context.user.loginHint;
 
