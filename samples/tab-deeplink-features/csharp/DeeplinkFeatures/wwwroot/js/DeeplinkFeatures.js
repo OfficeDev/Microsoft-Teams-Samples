@@ -87,7 +87,6 @@ function onSchedulingDialogClick() {
     var endTimeInput = document.getElementById("EndTime");
     var contentInput = document.getElementById("Content");
     var attendeeInput = document.getElementById("Attendee");
-
     if (subjectInput.value.trim() !== "" && startTimeInput.value !== "" && endTimeInput.value !== "" && attendeeInput.value !== "") {
 
         var meetingDetails =

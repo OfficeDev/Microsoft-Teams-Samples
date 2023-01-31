@@ -14,7 +14,6 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-features-nodejs
 
 ---
  ## Deep Links Features
-
  This sample app for demonstrating for deep links features using tab.
 
 - **Interaction with App**
