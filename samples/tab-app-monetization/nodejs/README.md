@@ -21,12 +21,17 @@ This sample shows how to open purchase dialog and trigger purchase flow using te
 - **Interaction with tab**
 ![tab-app-monetization](Images/tab-app-monetization.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**App monetization in tab:** [Manifest](/samples/tab-app-monetization/csharp/demo-manifest/tab-app-monetization.zip)
+
 ## Prerequisites
 
 - [NodeJS](https://nodejs.org/en/)
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
-- [Publish an offer to marketplace](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/appsource/prepare/include-saas-offer)
+- [Publish an offer to marketplace](https://docs.microsoft.com/microsoftteams/platform/concepts/deploy-and-publish/appsource/prepare/include-saas-offer)
 
 
 ## 1) Setup for App registration
@@ -39,7 +44,7 @@ This sample shows how to open purchase dialog and trigger purchase flow using te
 3. On the overview page, copy and save the **Application (client) ID**. You’ll need this later when updating your Teams application manifest.
 
 ## 2) Setup for SAAS offer
-1) Register a SAAS offer in market place and generate an plan id for it [Create SAAS Offer](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/appsource/prepare/include-saas-offer)
+1) Register a SAAS offer in market place and generate an plan id for it [Create SAAS Offer](https://docs.microsoft.com/microsoftteams/platform/concepts/deploy-and-publish/appsource/prepare/include-saas-offer)
 
 ###  3) Setup NGROK
 1) Run ngrok - point to port 3978
@@ -97,6 +102,6 @@ This sample shows how to open purchase dialog and trigger purchase flow using te
 
 ## Further reading
 
-- [Tab Basics](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
+- [Inapp Purchases](https://docs.microsoft.com/microsoftteams/platform/concepts/deploy-and-publish/appsource/prepare/in-app-purchase-flow)
+- [Tab Basics](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)
 - [Azure Portal](https://portal.azure.com)
-- [Inapp Purchases](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/appsource/prepare/in-app-purchase-flow)

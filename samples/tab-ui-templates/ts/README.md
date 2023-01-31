@@ -22,6 +22,11 @@ This sample app can help you better understand how apps should look and behave i
 - **Interaction with tab**
 ![Tab-page](Images/tab-ui-templates.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Teams UI templates:** [Manifest](/samples/tab-ui-templates/ts/demo-manifest/tab-ui-templates.zip)
+
 ## Prerequisites
 
 - <a href="https://git-scm.com/" target="_blank">Install Git</a>
@@ -161,4 +166,5 @@ Teams doesn't display app content unless it's accessible via HTTPS. We recommend
 
  ## Further reading
 
-- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
+- [Tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
+- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)

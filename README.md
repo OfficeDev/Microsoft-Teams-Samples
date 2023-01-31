@@ -92,31 +92,31 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 ## [Getting Started - Samples and Tutorials](https://docs.microsoft.com/microsoftteams/platform/tutorials/get-started-dotnet-app-studio)
 
-|    | Sample Name        | Description                                                                                                                | C#    | TypeScript   
-|:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|
-|1|Hello World            | Microsoft Teams hello world sample app.                                           |[View][app-hello-world#cs]     |[View][app-hello-world#ts]
+|    | Sample Name        | Description                                                                                                                | C#    | TypeScript | Manifest  
+|:--:|:-------------------|:---------------------------------------------------------------------------------------------------------------------------|:--------|:-------------|:-------------|
+|1|Hello World            | Microsoft Teams hello world sample app.                                           |[View][app-hello-world#cs]     |[View][app-hello-world#ts]|[View](/samples/app-hello-world/csharp/demo-manifest/app-hello-world.zip)
 
 ## [Tabs samples](https://docs.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
-|    | Sample Name        | Description                                                                      | C#    | TypeScript   | JavaScript
-|:--:|:-------------------|:----------------------------------------------------------------------------------------------|:--------|:-------------|:---------
-|1|Personal tabs            | Sample app showing custom personal Tab with ASP. NET Core                      |[MVC][personal-tab#cs#mvc], [Razor][personal-tab#cs#razor]     | [Yeoman Generator](https://docs.microsoft.com/microsoftteams/platform/tabs/quickstarts/create-personal-tab-node-yeoman#generate-your-project) |
+|    | Sample Name        | Description                                                                      | C#    | TypeScript   | JavaScript|Manifest| 
+|:--:|:-------------------|:----------------------------------------------------------------------------------------------|:--------|:-------------|:---------|:--------|
+|1|Personal tabs            | Sample app showing custom personal Tab with ASP. NET Core                      |[MVC][personal-tab#cs#mvc], [Razor][personal-tab#cs#razor]     | [Yeoman Generator](https://docs.microsoft.com/microsoftteams/platform/tabs/quickstarts/create-personal-tab-node-yeoman#generate-your-project) | |[View](/samples/tab-personal/mvc-csharp/demo-manifest/tab-personal.zip) |
 |2|Personal tab quick-start| Sample personal tab quick-start app.                                            |                               |[View][personal-tab-quickstart#ts]|[View][personal-tab-quickstart#js]
 |3|Personal tab with SSO quick-start| Sample personal tab with SSO hello world app.                          |[View][personal-tab-sso-quickstart#csharp]|[View][personal-tab-sso-quickstart#ts]|[View][personal-tab-sso-quickstart#js]
-|4|Channel and group tabs   | Sample app showing custom group and channel Tab with ASP. NET Core                                    |[MVC][group-channel-tab#cs#mvc], [Razor][group-channel-tab#cs#razor]     | [Yeoman Generator](https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-yeoman) |
-|5|Channel and group tab quick-start| Sample channel and group tab hello world app.                          |                               |[View][group-tab-quickstart#ts]|[View][group-tab-quickstart#js]
+|4|Channel and group tabs   | Sample app showing custom group and channel Tab with ASP. NET Core                                    |[MVC][group-channel-tab#cs#mvc], [Razor][group-channel-tab#cs#razor]     | [Yeoman Generator](https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-yeoman) | |[View](/samples/tab-channel-group/mvc-csharp/demo-manifest/tab-channel-group.zip) |
+|5|Channel and group tab quick-start| Sample channel and group tab hello world app.                          |                               |[View][group-tab-quickstart#ts]|[View][group-tab-quickstart#js]|[View](/samples/tab-channel-group-quickstart/js/demo-manifest/tab-channel-group-quickstart.zip) |
 |6|Channel and group tab with SSO quick-start| Sample channel and group tab with SSO hello world app.        |[View][group-tab-sso-quickstart#csharp]|[View][group-tab-sso-quickstart#ts]|[View][group-tab-sso-quickstart#js]
 |7|SPFx Tab | Sample app showing Microsoft Teams tabs using SharePoint Framework                                    |   | [View][group-channel-tab#ts#spfx] |
 |8|Tab SSO               | Microsoft Teams sample app for tabs Azure AD SSO                                      | | [View][tab-sso#ts] ,[Teams Toolkit](https://docs.microsoft.com/microsoftteams/platform/toolkit/visual-studio-code-tab-sso)
-|9|Config Tab Authentication               | Microsoft Teams sample app for config tabs Azure AD authentication | [View]()                       | | 
+|9|Config Tab Authentication               | Microsoft Teams sample app for config tabs Azure AD authentication | [View][tab-channel-group=config-csharp]                      | | |[View](/samples/tab-channel-group-config-page-auth/csharp/demo-manifest/tab-channel-group-config-page-auth.zip)
 |10|Deep Link consuming Subentity ID      | Microsoft Teams sample app for demonstrating deeplink from Bot chat to Tab consuming Subentity ID | [View][tab-deeplink#csharp]                       | | [View][tab-deeplink#nodejs]|
 |11|Integrate graph toolkit component in teams tab      | Microsoft Teams tab sample app for demonstrating graph toolkit component |[View][tab-graph-toolkit#csharp]|[View][tab-graph-toolkit#js]|
-|12|Device permissions      | Microsoft Teams tab sample app for demonstrating device permissions |                      | [View][tab-device-permissions#js]|
-|13|Build tabs with Adaptive Cards | Microsoft Teams tab sample code which demonstrates how to [Build tabs with Adaptive Cards](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs) | [View][tab-adaptive-cards#csharp]|| [View][tab-adaptive-cards#js]|
-|14|Tab in stage view   | Microsoft Teams tab sample app for demonstrating tab in stage view |[View][tab-stage-view#csharp] |          | [View][tab-stage-view#js] |
-|15|Create Conversational tab     | Microsoft Teams tab sample app for demonstrating create conversation tab | [View][tab-conversation#csharp]          |           |[View][tab-conversation#nodejs]
-|16| Product inspection | Demonstrating a feature where user can scan a product and mark it as approved/rejected. |[View][tab-product-inspection#csharp]|[View][productinspection#nodejs]|
-|17| Staggered Permission | This sample demos to get staggered graph api permissions. |[View][tab-staggered-permission#csharp]|[View][tab-staggered-permission#nodejs]|
-|18| Tab people picker | This is an tab app which shows the feature of client sdk people picker. |[View][tab-people-picker#csharp]|[View][tab-people-picker#nodejs]|
+|12|Device permissions      | Microsoft Teams tab sample app for demonstrating device permissions |                      | [View][tab-device-permissions#js]||[View](/samples/tab-device-permissions/nodejs/demo-manifest/tab-device-permissions.zip)|
+|13|Build tabs with Adaptive Cards | Microsoft Teams tab sample code which demonstrates how to [Build tabs with Adaptive Cards](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/build-adaptive-card-tabs) | [View][tab-adaptive-cards#csharp]|| [View][tab-adaptive-cards#js]|[View](/samples/tab-adaptive-cards/csharp/demo-manifest/tab-adaptive-card.zip)|
+|14|Tab in stage view   | Microsoft Teams tab sample app for demonstrating tab in stage view |[View][tab-stage-view#csharp] |          | [View][tab-stage-view#js] |[View](/samples/tab-stage-view/csharp/demo-manifest/tab-stage-view.zip)|
+|15|Create Conversational tab     | Microsoft Teams tab sample app for demonstrating create conversation tab | [View][tab-conversation#csharp]          |           |[View][tab-conversation#nodejs]|[View](/samples/tab-conversations/csharp/demo-manifest/tab-conversations.zip)
+|16| Product inspection | Demonstrating a feature where user can scan a product and mark it as approved/rejected. |[View][tab-product-inspection#csharp]| |[View][productinspection#nodejs]|[View](/samples/tab-product-inspection/csharp/demo-manifest/Tab-Product-Inspection.zip)
+|17| Staggered Permission | This sample demos to get staggered graph api permissions. |[View][tab-staggered-permission#csharp]||[View][tab-staggered-permission#nodejs]|[View](/samples/tab-staggered-permission/csharp/demo-manifest/tab-staggered-permission.zip)
+|18| Tab people picker | This is an tab app which shows the feature of client sdk people picker. |[View][tab-people-picker#csharp]||[View][tab-people-picker#nodejs]|[View](/samples/tab-people-picker/csharp/demo-manifest/Tab-People-Picker.zip)
 |19| Tab channel context | This sample shows the contents of tab context object in a private and shared channel. ||[View][tab-channel-context#nodejs]|
 |20| Tab meeting context | This sample shows the contents of meeting tab context object. ||[View][tab-meeting-context#nodejs]|
 |21| Tab app monetization | This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk. ||[View][tab-app-monetization#nodejs]|
@@ -129,32 +129,33 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 >NOTE:
 >Visit the [Bot Framework Samples repository][botframework] to view Microsoft Bot Framework v4 SDK task-focused samples for C#, JavaScript, TypeScript, and Python.
 
-|    | Sample Name | Description | .NET Core | JavaScript | Python | Java |
-|:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|:-------------|:-------------|
+|    | Sample Name | Description | .NET | JavaScript | Python | Java | Manifest
+|:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|:-------------|:-------------|:-------------|
 |1| Teams Conversation Bot quick-start | Messaging and conversation event handling hello world. | | [View][bot-conversation-quickstart#js]| | |
 |2| Teams Conversation Bot SSO quick-start | Messaging and conversation event handling hello world with SSO. | [View][bot-conversation-sso-quickstart#csharp_dotnetcore] | [View][bot-conversation-sso-quickstart#js]| | |
-|3| Teams Conversation Bot | Messaging and conversation event handling. | [View][bot-conversation#cs]| [View][bot-conversation#js]| [View][bot-conversation#python] | [View][bot-conversation#java] |
-|4| Message Reactions | Demonstrates how to create a simple bot that responds to Message Reactions | [View][bot-message-reaction#cs] |  [View][bot-message-reaction#js] | | [View][bot-message-reaction#java]|
-|5| Authentication with OAuthPrompt| Authentication and basic messaging in Bot Framework v4. | [View][bot-teams-authentication#cs]| [View][bot-conversation-sso-quickstart#js] | [View][bot-teams-authentication#python] | [View][bot-teams-authentication#java]|
-|6| Teams File Upload | Exchanging files with a bot in a one-to-one conversation. | [View][bot-file-upload#cs] | [View][bot-file-upload#js] | [View][bot-file-upload#python] | [View][bot-file-upload#java]|
-|7| Task Module | Demonstrating how to retrieve a Task Module and values from cards in it, for a Messaging Extension. | [View][bot-task-module#cs] | [View][bot-task-module#js] | [View][bot-task-module#python] | [View][bot-task-module#java]|
-|8| Start new thread in a channel | Demonstrating how to create a new thread in a channel. | [View][bot-initiate-thread-in-channel#cs] | [View][bot-initiate-thread-in-channel#js] | [View][bot-initiate-thread-in-channel#python] | [View][bot-initiate-thread-in-channel#java] |
+|3| Teams Conversation Bot | Messaging and conversation event handling. | [View][bot-conversation#cs]| [View][bot-conversation#js]| [View][bot-conversation#python] | [View][bot-conversation#java] |[View](/samples/bot-conversation/csharp/demo-manifest/bot-conversation.zip)
+|4| Message Reactions | Demonstrates how to create a simple bot that responds to Message Reactions | [View][bot-message-reaction#cs] |  [View][bot-message-reaction#js] | | [View][bot-message-reaction#java]|[View](/samples/bot-message-reaction/csharp/demo-manifest/bot-message-reaction.zip)
+|5| Authentication with OAuthPrompt| Authentication and basic messaging in Bot Framework v4. | [View][bot-teams-authentication#cs]| [View][bot-conversation-sso-quickstart#js] | [View][bot-teams-authentication#python] | [View][bot-teams-authentication#java]|[View](/samples/bot-teams-authentication/csharp/demo-manifest/bot-teams-authentication.zip)
+|6| Teams File Upload | Exchanging files with a bot in a one-to-one conversation. | [View][bot-file-upload#cs] | [View][bot-file-upload#js] | [View][bot-file-upload#python] | [View][bot-file-upload#java]|[View](/samples/bot-file-upload/csharp/demo-manifest/bot-file-upload.zip)
+|7| Task Module | Demonstrating how to retrieve a Task Module and values from cards in it, for a Messaging Extension. | [View][bot-task-module#cs] | [View][bot-task-module#js] | [View][bot-task-module#python] | [View][bot-task-module#java]|[View](/samples/bot-task-module/csharp/demo-manifest/bot-task-module.zip)
+|8| Start new thread in a channel | Demonstrating how to create a new thread in a channel. | [View][bot-initiate-thread-in-channel#cs] | [View][bot-initiate-thread-in-channel#js] | [View][bot-initiate-thread-in-channel#python] | [View][bot-initiate-thread-in-channel#java] |[View](/samples/bot-initiate-thread-in-channel/csharp/demo-manifest/bot-initiate-thread-in-channel.zip)
 |9| Universal bots  | Teams catering bot demonstrating how to use Universal bots in Teams | [View](samples/bot-teams-catering/csharp) |  | | |
-|10| Sequential workflow adaptive cards | Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot. | [View][sequential#workflow#csharp] | [View][sequential#workflow#js]
-|11| Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. | [View][messageswithrsc#csharp] |[View][messageswithrsc#js]
+|10| Sequential workflow adaptive cards | Demonstrating on how to implement sequential flow, user specific view and upto date adaptive cards in bot. | [View][sequential#workflow#csharp] | [View][sequential#workflow#js]| | |[View](/samples/bot-sequential-flow-adaptive-cards/csharp/demo-manifest/bot-adaptivecards-user-specific-views.zip)
+|11| Channel messages with RSC permissions | Demonstrating on how a bot can receive all channel messages with RSC without @mention. | [View][messageswithrsc#csharp] |[View][messageswithrsc#js] | | |[View](/samples/bot-receive-channel-messages-withRSC/csharp/demo-manifest/Bot-RSC.zip)
 |12| Bot with SharePoint file to view in Teams file viewer | This sample demos a bot with capability to upload files to SharePoint site and same files can be viewed in Teams file viewer. |[View][botwithsharepointfileviewer#csharp]|[View][botfileviewer#js]
-|13|  Type ahead search control on Adaptive Cards | This sample shows the feature of type ahead search (static and dynamic) control in Adaptive Cards. |[View][typeaheadsearch#csharp]|[View][typeaheadsearchonadaptivecard#js]
-|14|  People picker control in Adaptive Cards | This sample shows the feature of people picker control in Adaptive Cards. |[View][peoplepickeronadaptivecard#csharp]|[View][peoplepickeronadaptivecard#js]
+|13|  Type ahead search control on Adaptive Cards | This sample shows the feature of type ahead search (static and dynamic) control in Adaptive Cards. |[View][typeaheadsearch#csharp]|[View][typeaheadsearchonadaptivecard#js]| | |[View](/samples/bot-type-ahead-search-adaptive-cards/csharp/demo-manifest/Typeahead-search-adaptive-cards.zip)
+|14|  People picker control in Adaptive Cards | This sample shows the feature of people picker control in Adaptive Cards. |[View][peoplepickeronadaptivecard#csharp]|[View][peoplepickeronadaptivecard#js]| | |[View](/samples/bot-people-picker-adaptive-card/csharp/demo-manifest/People-picker-adaptive-card.zip)
 |15|  Proactive Messaging sample | This sample shows how to save user's conversation reference information to send proactive reminder message using Bots. This uses Teams toolkit for Visual Studio Code to provide scaffolding experience. ||[View][bot-proactive-msg-teamsfx#js]
 |16|  Proactive Tab Conversations | Using a bot to create and store conversations that can be later used inside a sub-entity, tab conversation. This sample includes the details required to proactively message a channel from a bot, set-up and store details for channel tab conversations, and viewing channel conversations from a personal app. |[View][bot-tab-conversations#csharp]|
-|17|  Suggested Actions Bot | This sample shows the feature where user can send suggested actions using bot. |[View][suggestedactionsbot#csharp]|[View][suggestedactionsbot#nodejs]
+|17|  Suggested Actions Bot | This sample shows the feature where user can send suggested actions using bot. |[View][suggestedactionsbot#csharp]|[View][suggestedactionsbot#nodejs]| | |[View](/samples/bot-suggested-actions/csharp/demo-manifest/bot-suggested-actions.zip)
 |18| Adaptive Card Actions Bot | This sample shows the feature where user can send adaptive card with different actions using bot. |[View][AdaptiveCardActions#csharp]|[View][AdaptiveCardActions#nodejs]
-|19| Different types of cards | This sample shows the feature where user can interact with different types of cards using bot like Adaptive, hero, list, Office 365 Connector, receipt, sign in, and thumbnail cards and card collections.|[View][TypesCards#csharp]
-|20| Different types of cards using bot | This sample shows the feature where user can send different types of cards using bot. ||[View][BotTypesOfCards#nodejs]
+|19| Different formatting on cards | This sample feature shows how to use different formatting on cards using bot. |[View][BotFormattingCards#csharp]|[View][BotFormattingCards#nodejs]
+|20| Different types of cards | This sample shows the feature where user can interact with different types of cards using bot like Adaptive, hero, list, Office 365 Connector, receipt, sign in, and thumbnail cards and card collections.|[View][TypesCards#csharp]
+|21| Different types of cards using bot | This sample shows the feature where user can send different types of cards using bot. ||[View][BotTypesOfCards#nodejs]
 
 #### Additional samples
 
-|    | Sample Name | Description | .NET Core | JavaScript | 
+|    | Sample Name | Description | .NET | JavaScript | 
 |:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|
 |1|Proactive Messaging   | Sample to highlight solutions to two challenges with building proactive messaging apps in Microsoft Teams.                                      |[View][bot-proactive-msg#cs]        |
 |2| Sharepoint List Bot| This sample app shows the interaction between teams bot and SharePoint List, Bot saves the specified details in SharePoint List as back-end| [View][bot-sharepoint-list#cs] |  |  |
@@ -164,20 +165,20 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 >NOTE:
 >Visit the [Bot Framework Samples repository][botframework] to view Microsoft Bot Framework v4 SDK task-focused samples for C#, JavaScript, TypeScript, and Python.
 
-|    | Sample Name | Description | .NET Core | JavaScript | Python| Java |
-|:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|:-------------|:-------------|
-|1|Messaging extensions - search quick-start | Hello world Messaging Extension that accepts search requests and returns results. | | [View][msgext-search-quickstart#js] | |
-|2|Messaging extensions - search | Messaging Extension that accepts search requests and returns results. | [View][msgext-search#cs] | [View][msgext-search#js] | [View][msgext-search#python] | [View][msgext-search#java]|
-|3|Messaging extensions - action quick-start | Hello world Messaging Extension that accepts parameters and returns a card. Also, how to receive a forwarded message as a parameter in a Messaging Extension. | | [View][msgext-action-quickstart#js] | |
-|4|Messaging extensions - action | Messaging Extension that accepts parameters and returns a card. Also, how to receive a forwarded message as a parameter in a Messaging Extension. | [View][msgext-action#cs] | [View][msgext-action#js] | [View][msgext-action#python] | [View][msgext-action#java]|
-|5|Messaging extensions - auth and config | Messaging Extension that has a configuration page, accepts search requests and returns results after the user has signed in. | [View][msgext-search-auth-config#cs] | [View][msgext-search-sso-config#js] |
+|    | Sample Name | Description | .NET | JavaScript | Python| Java | Manifest|
+|:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|:-------------|:-------------|:-------------
+|1|Messaging extensions - search quick-start | Hello world Messaging Extension that accepts search requests and returns results. | | [View][msgext-search-quickstart#js] | ||[View](/samples/msgext-search-quickstart/js/demo-manifest/msgext-search-quickstart.zip)
+|2|Messaging extensions - search | Messaging Extension that accepts search requests and returns results. | [View][msgext-search#cs] | [View][msgext-search#js] | [View][msgext-search#python] | [View][msgext-search#java]|[View](/samples/msgext-search/csharp/demo-manifest/msgext-search.zip)
+|3|Messaging extensions - action quick-start | Hello world Messaging Extension that accepts parameters and returns a card. Also, how to receive a forwarded message as a parameter in a Messaging Extension. | | [View][msgext-action-quickstart#js] | | |[View](/samples/msgext-action-quickstart/js/demo-manifest/msgext-action-quickstart.zip)
+|4|Messaging extensions - action | Messaging Extension that accepts parameters and returns a card. Also, how to receive a forwarded message as a parameter in a Messaging Extension. | [View][msgext-action#cs] | [View][msgext-action#js] | [View][msgext-action#python] | [View][msgext-action#java]|[View](/samples/msgext-action/csharp/demo-manifest/msgext-action.zip)
+|5|Messaging extensions - auth and config | Messaging Extension that has a configuration page, accepts search requests and returns results after the user has signed in. | [View][msgext-search-auth-config#cs] | [View][msgext-search-sso-config#js] | [View][msgext-search-auth-config#python]| |[View](/samples/msgext-search-auth-config/csharp/demo-manifest/msgext-search-auth-config.zip)
 |6|Messaging extensions - auth and config | Messaging Extension that has a configuration page, accepts search requests and returns results with SSO. |     | [View][msgext-search-sso-config#js] |
-|7|Messaging extensions - action preview | Demonstrates how to create a Preview and Edit flow for a Messaging Extension. | [View][msgext-action-preview#cs] | [View][msgext-action-preview#js] | [View][msgext-action-preview#python] |[View][msgext-action-preview#java]|
-|8|Link unfurling | Messaging Extension that performs link unfurling. | [View][msgext-link-unfurling#cs] | [View][msgext-link-unfurling#js] | [View][msgext-link-unfurling#python] | [View][msgext-link-unfurling#java]|
+|7|Messaging extensions - action preview | Demonstrates how to create a Preview and Edit flow for a Messaging Extension. | [View][msgext-action-preview#cs] | [View][msgext-action-preview#js] | [View][msgext-action-preview#python] |[View][msgext-action-preview#java]|[View](/samples/msgext-action-preview/csharp/demo-manifest/msgext-action-preview.zip)
+|8|Link unfurling | Messaging Extension that performs link unfurling. | [View][msgext-link-unfurling#cs] | [View][msgext-link-unfurling#js] | [View][msgext-link-unfurling#python] | [View][msgext-link-unfurling#java]|[View](/samples/msgext-link-unfurling/csharp/demo-manifest/msgext-link-unfurling.zip)
 
 #### Additional samples
 
-|    | Sample Name | Description | .NET Core | JavaScript | Python |
+|    | Sample Name | Description | .NET | JavaScript | Python |
 |:--:|:-------------------|:---------------------------------------------------------------------------------|:--------|:-------------|:-------------|
 |1|Link unfurling demo of Reddit        | Messaging Extension with Link Unfurling Samples for Reddit Links                              |[View][msgext-link-unfurl#cs]        |
 |2|Link unfurling - setup a meeting     | This sample illustrates a common scenario where a user shares a link to a resource with a group of users, and they collaborate to review it in a meeting.                              |[View][msgext-link-unfurl-meeting#cs]        |
@@ -194,15 +195,15 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 ## [Graph APIs](https://docs.microsoft.com/graph/teams-concept-overview)
 
-|    | Sample Name        | Description                                                                      | C#    | JavaScript   |
-|:--:|:-------------------|:-------------------------------------------------------------------------------------------------|:--------|:-------------|
-|1|Resource Specific Consent (RSC) | This sample illustrates how you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs. .                              |[View][graph#rsc#cs]       | [View][graph#rsc#js]
+|    | Sample Name        | Description                                                                      | C#    | JavaScript   | Manifest
+|:--:|:-------------------|:-------------------------------------------------------------------------------------------------|:--------|:-------------|:-------------|
+|1|Resource Specific Consent (RSC) | This sample illustrates how you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs. .                              |[View][graph#rsc#cs]       | [View][graph#rsc#js]|[View](/samples/graph-rsc/csharp/demo-manifest/graph-rsc.zip)
 |2|Graph API Channel Life Cycle | This sample illustrates how you can use [Graph API Channel Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-beta) to call Graph APIs. .                              |[View][graph#lifecycle#cs]       | [View][graph#lifecycle#js]
 |3|Graph API Teams App Installation Life Cycle | This sample illustrates how you can use [Teams App Installation Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/teamsappinstallation?view=graph-rest-1.0) by calling Microsoft Graph APIs. .                              |[View][graph#instllationlifecycle#cs]       |[View][graph#instllationlifecycle#js] |
-|4|Graph API Teams App Catalog Life Cycle | This sample illustrates how you programmatically manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs.                               |[View][graph#appctaloglifecycle#cs]       | [View][graph#appcataloglifecycle#js]
+|4|Graph API Teams App Catalog Life Cycle | This sample illustrates how you programmatically manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs. .                               |[View][graph#appctaloglifecycle#cs]       | [View][graph#appcataloglifecycle#js]
 |5|Graph API Chat Life Cycle | This sample illustrates how you can use [Teams App Chat Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/chat?view=graph-rest-1.0) by calling Microsoft Graph APIs. .                              |[View][graph#chatlifecyle#cs]      |[View][graph#chatlifecycle#js]
 |6|Activity Feed Notification  | Microsoft Teams sample app for Sending Activity feed notification using Graph API in a Teams Tab. | [View][graph-activity-feed#cs]                       | [View][graph-activity-feed#js]| 
-|7|Proactive installation of App and sending proactive notifications | This sample illustrates how you can use [Proactive installation of app for user and send proactive notification](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages?tabs=csharp) by calling Microsoft Graph APIs.                              |[View][graph#graphproactiveinstallation#cs]       |[View][graph#graphproactiveinstallation#js]
+|7|Proactive installation of App and sending proactive notifications | This sample illustrates how you can use [Proactive installation of app for user and send proactive notification](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages?tabs=csharp) by calling Microsoft Graph APIs.                              |[View][graph#graphproactiveinstallation#cs]       |[View][graph#graphproactiveinstallation#js]|[View](/samples/graph-proactive-installation/csharp/demo-manifest/graph-proactive-installation.zip)
 |8|Change Notification  | This sample app demonstrates sending change notifications to user presence in Teams based on user presence status. | [View][graph-change-notification#cs]                        |[View][graph-change-notification#js]
 |9|Graph Pinned Message  | This is a sample application which demonstrates how to pin messages in chat using Graph api. | [View][graph-pinned-message#cs]|[View][graph-pinned-message#js]|
 |10|Graph Bulk Meetings  | This is an sample application which shows how to create Teams meetings in bulk using Graph api. | [View][graph-bulk-meetings#cs]|[View][graph-bulk-meetings#js]|
@@ -222,30 +223,30 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 
 ## Scenario specific samples
 
-|    | Sample Name       | Description                                                                      | C#    | JavaScript   |
-|:--:|:------------------|:---------------------------------------------------------------------------------------------------|:--------|:-------------|
-|1|Task Modules          | Sample app showing off the Teams Task Module, a way to invoke custom code from a bot, a tab, or both! |[View][bot-task-module#cs]     |[View][app-task-module#ts]
+|    | Sample Name       | Description                                                                      | C#    | JavaScript   | Manifest |
+|:--:|:------------------|:---------------------------------------------------------------------------------------------------|:-------------|:-------------|:-------------|
+|1|Task Modules          | Sample app showing off the Teams Task Module, a way to invoke custom code from a bot, a tab, or both! |[View][bot-task-module#cs]     |[View][app-task-module#ts]|[View](/samples/bot-task-module/csharp/demo-manifest/bot-task-module.zip)
 |2|Authentication        | Sample illustrating seamless inline authentication for Microsoft Teams apps.                      | | [View][app-auth#ts]
 |3|Complete Samples      | Sample covering multiple scenarios - dialogs, ME, and facebook auth.                                      |[View][app-complete#cs]        |[View][app-complete#ts]
 |4|Meetings Extensibility | Microsoft Teams meeting extensibility sample: token passing |[View][meetings-token-app#cs]     |[View][meetings-token-app#js]
-|5|Meetings  Notification Bot|This Teams app demonstrating Microsoft Teams meeting extensibility iteracting with in-meeting notifications. |[View][meetings-notification#cs]    |[View][meetings-notification#js]
+|5|Meetings Content Bubble Bot | Microsoft Teams meeting extensibility sample for iteracting with Content Bubble Bot in-meeting |[View][meetings-content-bubble#cs]    |[View][meetings-content-bubble#js]
 |6|Meetings SidePanel | Microsoft Teams meeting extensibility sample for iteracting with Side Panel in-meeting |[View][meetings-sidepanel#cs]     | [View][meetings-sidepanel#js]
-|7|Region Selection App | This app contains a bot and Tab which is helpful to set the region |[View][region-selection-app#cs]     |
-|8|App Localization | Microsoft Teams app localization using Bot and Tab |[View][app-localization#cs]  | [View][app-localization#js]
-|9|Details Tab in Meetings | Microsoft Teams meeting extensibility sample for iteracting with Details Tab in-meeting |[View][meetings-details-tab#cs]  |[View][meetings-details-tab#js]
-|10|App SSO | Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl |[View][app-sso#cs] |[View][app-sso#js] 
+|7|Region Selection App | This app contains a bot and Tab which is helpful to set the region |[View][region-selection-app#cs]     ||[View](/samples/app-region-selection/csharp/demo-manifest/app-region-selection.zip)
+|8|App Localization | Microsoft Teams app localization using Bot and Tab |[View][app-localization#cs]  | [View][app-localization#js]|[View](/samples/app-localization/csharp/demo-manifest/app-localization.zip)
+|9|Details Tab in Meetings | Microsoft Teams meeting extensibility sample for iteracting with Details Tab in-meeting |[View][meetings-details-tab#cs]  |[View][meetings-details-tab#js]|[View](/samples/meetings-details-tab/csharp/demo-manifest/meetings-details-tab.zip)
+|10|App SSO | Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl |[View][app-sso#cs] |[View][app-sso#js]|[View](/samples/app-sso/csharp/demo-manifest/App-SSO.zip)
 |11|Meetings Stage View | Enable and configure your apps for Teams meetings to use in stage view |[View][meetings-stage-view#cs] |[View][meetings-stage-view#js]|
-|12|Meeting Events | Get real time meeting events  |[View][meetings-events#cs] | [View][meetings-events#js] |
-|13|Meeting Recruitment App | Sample app showing meeting app experience for interview scenario.|[View][meeting-recruitment-app#cs] |[View][meeting-recruitment-app#js]|
+|12|Meeting Events | Get real time meeting events  |[View][meetings-events#cs] | [View][meetings-events#js] |[View](/samples/meetings-events/csharp/demo-manifest/Meetings-Events.zip)
+|13|Meeting Recruitment App | Sample app showing meeting app experience for interview scenario.|[View][meeting-recruitment-app#cs] |[View][meeting-recruitment-app#js]|[View](/samples/meeting-recruitment-app/csharp/demo-manifest/Meeting-Recruitment-App.zip)
 |14|Meeting Transcript App | This is a sample application which demonstrates how to get Transcript using Graph API and show it in the task module.|[View][meetings-transcription-app#cs] |[View][meetings-transcription-app#nodejs]|
-|15| App Installtion  using QR code |This sample demos app installation using QR code of application's app id | [View][qrappinstallation#csharp] | [View][qrappinstallation#nodejs]
+|15| App Installtion  using QR code |This sample demos app installation using QR code of application's app id | [View][qrappinstallation#csharp] | [View][qrappinstallation#nodejs]|[View](/samples/app-installation-using-qr-code/csharp/demo-manifest/App-Installation-Using-QR.zip)
 |16| Archive groupchat messages | Demonstrating on how a bot can archive groupchat messages and send it to user as a file. | [View][fetchgroupchatmessages#csharp] |[View][fetchgroupchatmessages#nodejs]|
-|17| App check in location | Demonstrating feature where user can checkin with current location and view all previous checkins. | [View][appcheckinlocation#csharp] |[View][checkinlocation#nodejs]|
-|18| Message reminder setup through messaging extension | Demonstrating a feature where user can schedule a task from messaging extension action command and get a reminder card at a scheduled time |[View][memessagereminder#csharp]|[View][msgext-message-reminder#nodejs]|
-|19| Bot daily task reminder | This sample demos a feature where user can schedule a recurring task and get a reminder on the scheduled time |[View][botdailytaskreminder#csharp] |[View][bottaskreminder#nodejs]|
-|20| Tab request approval | Demonstrating a feature where user can raise the requests and manager will be notified about the requests and manager will be redirected to approve/reject the request from received notification. |[View][tab-request-approval#csharp]|[View][tab-request-approval#nodejs]|
-|21| Bot request approval | Demonstrating a feature where user can send task request to his manager using universal adaptive card and manager can approve/reject the request. |[View][bot-request-approval#csharp]|[View][bot-request-approval#nodejs]|
-|22| Join the Team using QR code |This sample demos a feature where user can join a team using QR code containing the team's id. |[View][qrjointeam#csharp]|[View][qrjointeam#nodejs]
+|17| App check in location | Demonstrating feature where user can checkin with current location and view all previous checkins. | [View][appcheckinlocation#csharp] |[View][checkinlocation#nodejs]|[View](/samples/app-checkin-location/csharp/demo-manifest/App-checkin-location.zip)
+|18| Message reminder setup through messaging extension | Demonstrating a feature where user can schedule a task from messaging extension action command and get a reminder card at a scheduled time |[View][memessagereminder#csharp]|[View][msgext-message-reminder#nodejs]|[View](/samples/msgext-message-reminder/csharp/demo-manifest/msgext-message-reminder.zip)
+|19| Bot daily task reminder | This sample demos a feature where user can schedule a recurring task and get a reminder on the scheduled time |[View][botdailytaskreminder#csharp] |[View][bottaskreminder#nodejs]|[View](/samples/bot-daily-task-reminder/csharp/demo-manifest/Bot-Daily-Task-Reminder.zip)
+|20| Tab request approval | Demonstrating a feature where user can raise the requests and manager will be notified about the requests and manager will be redirected to approve/reject the request from received notification. |[View][tab-request-approval#csharp]|[View][tab-request-approval#nodejs]|[View](/samples/tab-request-approval/csharp/demo-manifest/Tab-Request-Approval.zip)
+|21| Bot request approval | Demonstrating a feature where user can send task request to his manager using universal adaptive card and manager can approve/reject the request. |[View][bot-request-approval#csharp]|[View][bot-request-approval#nodejs]|[View](/samples/bot-request-approval/csharp/demo-manifest/Bot-Request-Approval.zip)
+|22| Join the Team using QR code |This sample demos a feature where user can join a team using QR code containing the team's id. |[View][qrjointeam#csharp]|[View][qrjointeam#nodejs]|[View](/samples/bot-join-team-using-qr-code/csharp/demo-manifest/Bot-Join-Team-By-QR.zip)
 |23| Activity feed broadcast |Demonstrating a feature to notify any message to all members of the organisation using activity feed notification .|[View][graph-activity-feed-broadcast#csharp]|[View][graph-activity-feed-broadcast#js]|
 |24|App complete auth|This sample demos authentication feature in bot,tab and messaging extension.|[View][app-complete-auth#cs]|
 |25|App identity linking with sso|This sample demos mapping with aad id, facebook, and google account of user in bot, ME and tab.||[View][app-identity-link-with-sso#nodejs]|
@@ -284,6 +285,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [tab-device-permissions#js]:samples/tab-device-permissions/nodejs
 [tab-conversation#csharp]:samples/tab-conversations/csharp
 [app-complete-auth#cs]:samples/app-complete-auth/csharp
+[app-complete-auth#nodejs]:samples/app-complete-auth/nodejs
 
 [tab-conversation#nodejs]:samples/tab-conversations/nodejs
 [tab-adaptive-cards#csharp]:samples/tab-adaptive-cards/csharp
@@ -293,8 +295,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [tab-product-inspection#csharp]:samples/tab-product-inspection/csharp
 [tab-staggered-permission#csharp]:samples/tab-staggered-permission/csharp
 [tab-people-picker#csharp]:samples/tab-people-picker/csharp
+[tab-channel-group=config-csharp]:samples/tab-channel-group-config-page-auth/csharp
 [tab-channel-context#nodejs]:samples/tab-channel-context/nodejs
-[tab-meeting-context#nodejs]:samples/tab-meeting-context/nodejs
 [tab-app-monetization#nodejs]:samples/tab-app-monetization/nodejs
 [app-cache-meetings#nodejs]:samples/app-cache-meetings/nodejs
 [tab-request-approval#nodejs]:samples/tab-request-approval/nodejs
@@ -357,7 +359,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [meetings-notification#cs]:samples/meetings-notification/csharp
 [meetings-sidepanel#cs]:samples/meetings-sidepanel/csharp
 [meetings-sidepanel#js]:samples/meetings-sidepanel/nodejs
-[meetings-notification#js]:samples/meetings-notification/nodejs
+[meetings-content-bubble#js]:samples/meetings-content-bubble/nodejs
 [messageswithrsc#csharp]:samples/bot-receive-channel-messages-withRSC/csharp
 [messageswithrsc#js]:samples/bot-receive-channel-messages-withRSC/nodejs
 [app-in-meeting#cs]:samples/app-in-meeting/csharp
@@ -378,6 +380,9 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [suggestedactionsbot#csharp]:samples/bot-suggested-actions/csharp
 [suggestedactionsbot#nodejs]:samples/bot-suggested-actions/nodejs
 [AdaptiveCardActions#csharp]:samples/bot-adaptive-card-actions/csharp
+[AdaptiveCardActions#nodejs]:samples/bot-adaptive-card-actions/nodejs  
+[BotFormattingCards#csharp]:samples/bot-formatting-cards/csharp
+[BotFormattingCards#nodejs]:samples/bot-formatting-cards/nodejs  
 [AdaptiveCardActions#nodejs]:samples/bot-adaptive-card-actions/nodejs
 [TypesCards#csharp]:samples/bot-all-cards/csharp
 [BotTypesOfCards#nodejs]:samples/bot-types-of-cards/nodejs
@@ -402,6 +407,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [qrjointeam#csharp]:samples/bot-join-team-using-qr-code/csharp
 [qrjointeam#nodejs]:samples/bot-join-team-using-qr-code/nodejs
 [incoming-webhook#nodejs]:samples/incoming-webhook/nodejs
+[meetingtabs#csharp]:samples/meeting-tabs/csharp
+[meetingtabs#nodejs]:samples/meeting-tabs/nodejs
 
 [graph#rsc#cs]:samples/graph-rsc/csharp
 [graph#rsc#js]:samples/graph-rsc/nodeJs

@@ -14,17 +14,22 @@ urlFragment: officedev-microsoft-teams-samples-app-localization-csharp
 ---
 
 # Teams App Localization
-This sample illustrates how to implement [Localization for Microsoft Teams apps](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/apps-localization).
+This sample illustrates how to implement [Localization for Microsoft Teams apps](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/apps-localization).
 
-## Interaction with app.
+## Interaction with app
 
 ![Preview Image](Images/Preview.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant; [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading).).
+
+**App Localization:** [Manifest](/samples/app-localization/csharp/demo-manifest/app-localization.zip)
 
 ## Prerequisites
 
 Verify you have the right account for building Teams apps and install some recommended development tools.
 
-- You need a Teams account that allows [custom app sideloading](https://docs.microsoft.com/en-us/microsoftteams/platform/build-your-first-app/build-first-app-overview#set-up-your-development-account).
+- You need a Teams account that allows [custom app sideloading](https://docs.microsoft.com/microsoftteams/platform/build-your-first-app/build-first-app-overview#set-up-your-development-account).
 - [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 - [ngrok](https://ngrok.com/download) or equivalent tunnelling solution
 
@@ -34,8 +39,8 @@ Verify you have the right account for building Teams apps and install some recom
 
 2. Setup for Bot
 	
-	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0)
-	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0)
+	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 	- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
 3. Setup NGROK
@@ -54,7 +59,7 @@ Verify you have the right account for building Teams apps and install some recom
     ```
   - Modify the `/appsettings.json` and fill in the following details:
   - `{{MicrosoftAppId}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
-  - `{{ClientSecret}}` - Generated from Step 1, also referred to as Client secret 
+  - `{{ClientSecret}}` - Generated from Step 1, also referred to as Client secret
 
 - Run the bot from a terminal or from Visual Studio:
 
@@ -80,12 +85,12 @@ In Teams, Once the app is successfully installed, you can interact with tab and 
 
 #### To change language in Teams
 To change the language in Microsoft Teams, please click your profile picture at the top of the app, then select Settings -> General and go to the Language section. Choose the preferred language and restart to apply the change. This sample supports en-US, fr-CA, hi-IN and es-MX.
-1. **Installation**: You should see your app installation screen content in selected language. 
+1. **Installation**: You should see your app installation screen content in selected language.
 ![image](Images/Upload.png)
 
-1. **Bot**: send any message to see localized 
+1. **Bot**: send any message to see localized
 ![image](Images/Reply.png)
-1. **Tab**: click on tab to see localized info.  
+1. **Tab**: click on tab to see localized info.
 ![image](Images/Hindi.png)
 
 ## Outlook on the web
@@ -122,8 +127,8 @@ To change the language in Microsoft Teams, please click your profile picture at 
 
 #### To Add more languages for localization in Teams through Code.
  
- Add Resource files for the respective languages, Check culture fallback behaviour and how to add other cultures refer [Globalization and localization Fundamentals](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/localization?view=aspnetcore-5.0). 
+ Add Resource files for the respective languages, Check culture fallback behaviour and how to add other cultures refer [Globalization and localization Fundamentals](https://docs.microsoft.com/aspnet/core/fundamentals/localization?view=aspnetcore-5.0). 
 
+## Further reading
 
-  
-
+- [Localize your app](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/apps-localization)

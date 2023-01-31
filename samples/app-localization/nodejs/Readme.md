@@ -14,17 +14,22 @@ urlFragment: officedev-microsoft-teams-samples-app-localization-nodejs
 ---
 
 # Teams App Localization Node.js
-This sample illustrates how to implement [Localization for Microsoft Teams apps](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/apps-localization).
+This sample illustrates how to implement [Localization for Microsoft Teams apps](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/apps-localization).
 
 ## Interaction with app
 ![image](Images/appLocalizationModule.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant; [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading).).
+
+**App Localization:** [Manifest](/samples/app-localization/csharp/demo-manifest/app-localization.zip)
 
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
 - To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
 - [ngrok](https://ngrok.com/download) or equivalent tunneling solution
-- [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
+- [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
    appropriate permissions to install an app.
 
 ## Setup
@@ -33,8 +38,8 @@ This sample illustrates how to implement [Localization for Microsoft Teams apps]
 
 2. Setup for Bot
 	
-	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 	- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
     > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
@@ -96,7 +101,6 @@ This sample illustrates how to implement [Localization for Microsoft Teams apps]
     npm start
     ```
 
-
 ## Interacting with the app in Teams
 In Teams, Once the app is successfully installed, you can interact with tab and bot in your preferred language.
 
@@ -146,11 +150,8 @@ To change the language in Microsoft Teams, please click your profile picture at 
 
 #### To Add more languages for localization in Teams through Code.
  
- Add Resource files for the respective languages, Check culture fallback behaviour and how to add other cultures refer [Globalization and localization Fundamentals](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/localization?view=aspnetcore-5.0).
+ Add Resource files for the respective languages, Check culture fallback behaviour and how to add other cultures refer [Globalization and localization Fundamentals](https://docs.microsoft.com/aspnet/core/fundamentals/localization?view=aspnetcore-5.0).
 
-## Further Reading
-[Localization for Microsoft Teams apps](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/apps-localization).
+## Further reading
 
-
-  
-
+- [Localize your app](https://learn.microsoft.com/microsoftteams/platform/concepts/build-and-test/apps-localization)

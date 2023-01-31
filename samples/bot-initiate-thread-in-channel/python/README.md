@@ -11,7 +11,6 @@ extensions:
  contentType: samples
  createdDate: "12-12-2019 13:38:25"
 urlFragment: officedev-microsoft-teams-samples-bot-initiate-thread-in-channel-python
-
 ---
 
 # Teams Starting Thread In Team
@@ -27,12 +26,13 @@ how to incorporate basic conversational flow into a Teams application. It also i
 - [Python SDK](https://www.python.org/downloads/) min version 3.6
 - [ngrok](https://ngrok.com/) or equivalent tunnelling solution
 
-## Concepts introduced in this sample
+- **Interaction with bot**
 ![TeamsThread](Images/TeamsThread.gif)
 
-![AddInTeam](Images/AddInTeam.PNG)
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-![NewThread](Images/NewThread.PNG)
+**Start Thread In A Specific Channel of a Team:** [Manifest](/samples/bot-initiate-thread-in-channel/csharp/demo-manifest/bot-initiate-thread-in-channel.zip)
 
 ## To try this sample
 
@@ -51,10 +51,10 @@ the Teams service needs to call into the bot.
     ngrok http --host-header=rewrite 3978
     ```
 
-1) Create [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration) in Azure
+1) Create [Bot Framework registration resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration) in Azure
     - Use the current `https` URL you were given by running ngrok. Append with the path `/api/messages` used by this sample
-    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-    - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
+    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+    - __*If you don't have an Azure account*__ you can use this [Bot Framework registration](https://docs.microsoft.com/microsoftteams/platform/bots/how-to/create-a-bot-for-teams#register-your-web-service-with-the-bot-framework)
 
 1) In a terminal, go to `samples\python\58.teams-start-thread-in-channel`
 
@@ -71,9 +71,15 @@ the Teams service needs to call into the bot.
 
 1) Run your bot with `python app.py`
 
-## Interacting with the bot
+## Running the sample
 
 You can interact with this bot by sending it a message. It will respond by creating a new thread within the channel and replying to the new thread it just started.
+
+**Adding the bot to a team's channel :**
+![AddInTeam](Images/AddInTeam.PNG)
+
+![NewThread](Images/NewThread.PNG)
+
 
 ## Deploy the bot to Azure
 
@@ -81,5 +87,9 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 # Further reading
 
-- [How Microsoft Teams bots work](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-basics-teams?view=azure-bot-service-4.0&tabs=javascript)
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
+- [Get Channel Details](https://learn.microsoft.com/en-us/microsoftteams/platform/bots/how-to/get-teams-context?tabs=dotnet#get-the-list-of-channels-in-a-team)
 

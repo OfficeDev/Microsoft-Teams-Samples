@@ -20,6 +20,11 @@ Using this C# sample, you can check authenticate in bot,tab and messaging extent
 - **Interaction with app**
 ![app-complete-auth-sample ](AppCompleteAuth/Images/app-complete-auth.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**App Complete Auth:** [Manifest](/samples/app-complete-auth/csharp/demo-manifest/App-Complete-Auth.zip)
+
 
 ## Prerequisites
 
@@ -283,5 +288,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Authentication basics](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/authentication/authentication)
-- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
+- [Authentication basics](https://docs.microsoft.com/microsoftteams/platform/concepts/authentication/authentication)
+- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)
+- [Create facebook app for development](https://developers.facebook.com/docs/development/create-an-app/)

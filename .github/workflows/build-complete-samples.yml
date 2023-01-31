@@ -415,6 +415,14 @@ jobs:
             - project_path: 'samples/bot-adaptive-card-actions/csharp/AdaptiveCardActions/AdaptiveCardActions.csproj'
               name: 'bot-adaptive-card-actions'
               version: '6.0.x'
+            
+            - project_path: 'samples/bot-formatting-cards/csharp/BotFormattingCards/BotFormattingCards.csproj'
+              name: 'bot-formatting-cards'
+              version: '6.0.x'
+
+            - project_path: 'samples/meeting-tabs/csharp/MeetingTabs/MeetingTabs.csproj'
+              name: 'meeting-tabs'
+              version: '6.0.x'
 
 
             - project_path: 'samples/tab-deeplink-features/csharp/DeeplinkFeatures/DeeplinkFeatures.csproj'
@@ -851,6 +859,14 @@ jobs:
             - project_path: 'samples/tab-navbar-menu/ts'
               name: 'tab-navbar-menu'
               version: '16.x'
+            
+            - project_path: 'samples/bot-formatting-cards/nodejs'
+              name: 'bot-formatting-cards'
+              version: '18.x'
+
+            - project_path: 'samples/meeting-tabs/nodejs'
+              name: 'meeting-tabs'
+              version: '18.x'
 
             - project_path: 'samples/tab-deeplink-features/nodejs'
               name: 'tab-deeplink-features'
@@ -863,6 +879,7 @@ jobs:
             - project_path: 'samples/app-cache-meetings/nodejs'
               name: 'app-cache-meetings'
               version: '18.x'
+             
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs

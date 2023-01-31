@@ -20,6 +20,11 @@ Using this csharp sample, you can check how to get staggered graph api permissio
 ## Interaction with app
 
 ![Staggered Module](StaggeredPermission/Images/StaggeredModule.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Staggered Permission sample:** [Manifest](/samples/tab-staggered-permission/csharp/demo-manifest/tab-staggered-permission.zip)
  
 ## Prerequisites
 
@@ -76,7 +81,7 @@ Using this csharp sample, you can check how to get staggered graph api permissio
     * Select **Single Page Application**.
     * Enter the **redirect URI** for the app in the following format: `https://{Base_Url}/auth-end`.
  - Navigate to the **Certificates & secrets**. In the Client secrets section, click on "+ New client secret". Add a description(Name of the secret) for the secret and select “Never” for Expires. Click "Add". Once the client secret is created, copy its value, it need to be placed in the appsettings.json. 
-- Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- Ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
 2. Setup NGROK
 
@@ -180,7 +185,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Authentication basics](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/authentication/authentication)
-- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
+- [Tabs](https://learn.microsoft.com/microsoftteams/platform/tabs/what-are-tabs)
+- [Authentication basics](https://docs.microsoft.com/microsoftteams/platform/concepts/authentication/authentication)
+- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)

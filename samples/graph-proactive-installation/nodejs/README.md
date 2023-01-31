@@ -20,6 +20,11 @@ This sample app illustrates the proactive installation of app using Graph API an
 - **Interaction with bot**
 ![graph-proactive-installation ](Images/graph-proactive-installation.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Proactive Installation Sample App:** [Manifest](/samples/graph-proactive-installation/csharp/demo-manifest/graph-proactive-installation.zip)
+
 ## Prerequisites
 - Microsoft Teams is installed and you have an account
 - [NodeJS](https://nodejs.org/en/) version 10.14 or higher
@@ -71,12 +76,12 @@ Click on Add Permissions to commit your changes.
 
 ## Setup Bot Service
 
-1. In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration)
+1. In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration)
 2. Select Type of App as "Multi Tenant"
 3.  Select Creation type as "Use existing app registration"
 4. Use the copied App Id and Client secret from above step and fill in App Id and App secret respectively.
 5. Click on 'Create' on the Azure bot.   
-6. Go to the created resource, ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+6. Go to the created resource, ensure that you've [enabled the Teams Channel](https://learn.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 7. In Settings/Configuration/Messaging endpoint, enter the current `https` URL you have given by running ngrok. Append with the path `/api/messages`
 
 ###  Setup NGROK
@@ -107,7 +112,7 @@ the Teams service needs to call into the bot.
     ```
 
 4) Go to .env file  and add `MicrosoftAppId` ,  `MicrosoftAppPassword` and `AppCatalogTeamAppId` information. 
-    - To get `AppCatalogTeamAppId` navigate to following link in your browser [Get TeamsAppCatalogId](https://developer.microsoft.com/en-us/graph/graph-explorer?request=appCatalogs%2FteamsApps%3F%24filter%3DdistributionMethod%20eq%20'organization'&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) from Microsoft Graph explorer.
+    - To get `AppCatalogTeamAppId` navigate to following link in your browser [Get TeamsAppCatalogId](https://developer.microsoft.com/graph/graph-explorer?request=appCatalogs%2FteamsApps%3F%24filter%3DdistributionMethod%20eq%20'organization'&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) from Microsoft Graph explorer.
     And then search with app name or based on Manifest App id in Graph Explorer response and copy the `Id` [i.e teamApp.Id]
     ![GetAppCatalogTeamAppId ](Images/GetAppCatalogTeamAppId.PNG)
 
@@ -138,8 +143,10 @@ the Teams service needs to call into the bot.
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 
-## Further Reading
+## Further reading
 
+- [Proactive App Installation using Graph API](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages?tabs=node)
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Proactive App Installation using Graph API](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages?tabs=node)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)

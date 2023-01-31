@@ -21,12 +21,17 @@ This sample app demonstrate a feature where user can scan a product, capture a i
 
 ![Preview Image](Images/Preview.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Product Inspection:** [Manifest](/samples/tab-product-inspection/csharp/demo-manifest/Tab-Product-Inspection.zip)
+
 ## Prerequisites
 
 - Microsoft Teams is installed and you have an account (not a guest account)
 - To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
 - [ngrok](https://ngrok.com/download) or equivalent tunneling solution
-- [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
+- [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
 
 ## Setup
 
@@ -126,7 +131,6 @@ Interact with Product Inspection by clicking on the App icon.
 
 ## Further Reading
 
-[Product inspection](https://learn.microsoft.com/en-us/power-apps/teams/inspection)
+[Product inspection](https://learn.microsoft.com/power-apps/teams/inspection)
 
-[Extend Teams apps across Microsoft 365](https://learn.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview)
-
+[Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)

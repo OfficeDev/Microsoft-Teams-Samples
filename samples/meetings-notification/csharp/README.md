@@ -18,7 +18,12 @@ urlFragment: officedev-microsoft-teams-samples-meetings-notification-csharp
 This sample illustrates how to implement [Targeted In-Meeting Notification](https://review.learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-7615&tabs=dotnet#targeted-meeting-notification-api)  In-Meeting Experience.
 ## Interaction with app
 
-![Targeted In-Meeting Notification](TargetedNotifications/Images/ContentBubbleModule.gif)
+![Targeted In-Meeting Notification](TargetedNotifications/Images/MeetingNotification.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Meetings Content Bubble:** [Manifest](/samples/meetings-notification/csharp/demo-manifest/meetings-notification.zip)
 
 ## Prerequisites
 
@@ -31,8 +36,8 @@ This sample illustrates how to implement [Targeted In-Meeting Notification](http
 1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
 2. Setup for Bot	
-	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 	- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
     > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
@@ -58,8 +63,8 @@ This sample illustrates how to implement [Targeted In-Meeting Notification](http
 - If you are using Visual Studio
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples\meetings-content-bubble\csharp` folder
-  - Select `ContentBubbleBot.sln` file
+  - Navigate to `samples\meetings-notification\csharp` folder
+  - Select `TargetedNotifications.sln` file
 
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
@@ -100,4 +105,7 @@ Message the Bot by @ mentioning to interact with the content bubble.
 
 ## Further Reading
 
-- [Meetings-content-bubble](https://techcommunity.microsoft.com/t5/microsoft-teams/introducing-chat-bubbles-in-microsoft-teams-meetings/m-p/2447271)
+- [Meeting apps APIs](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?tabs=dotnet)
+- [Meeting content bubble](https://learn.microsoft.com/microsoftteams/platform/sbs-meeting-content-bubble)
+- [Build tabs for meeting](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/build-tabs-for-meeting?tabs=desktop)
+- [Build in-meeting notification for Teams meeting](https://learn.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/in-meeting-notification-for-meeting)

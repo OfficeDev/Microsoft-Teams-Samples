@@ -14,28 +14,33 @@ urlFragment: officedev-microsoft-teams-samples-graph-app-installation-lifecycle-
 ---
 # App Installation
 
-This sample app demonstarte the installation lifecycle for Teams [Apps](https://docs.microsoft.com/en-us/graph/api/resources/teamsappinstallation?view=graph-rest-1.0) which includes create, update delete Apps
+This sample app demonstarte the installation lifecycle for Teams [Apps](https://docs.microsoft.com/graph/api/resources/teamsappinstallation?view=graph-rest-1.0) which includes create, update delete Apps
 
 # Interaction with app
 
-   ![](Images/GraphAppInstallationLifecycleGif.gif)
+![](Images/GraphAppInstallationLifecycleGif.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**App Installation:** [Manifest](/samples/graph-app-installation-lifecycle/csharp/demo-manifest/graph-app-installation-lifecycle.zip)
 
 ## Prerequisites
 - Microsoft Teams is installed and you have an account (not a guest account)
 - To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
 - [ngrok](https://ngrok.com/download) or equivalent tunneling solution
-- [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
+- [M365 developer account](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the 
 
 ## Setup
  1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
  
-    - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/en-us/graph/auth-register-app-v2).
+    - Your app must be registered in the Azure AD portal to integrate with the Microsoft identity platform and call Microsoft Graph APIs. See [Register an application with the Microsoft identity platform](https://docs.microsoft.com/graph/auth-register-app-v2).
     - You need to add following permissions mentioned in the below screenshots to call respective Graph   API
 ![](https://user-images.githubusercontent.com/50989436/116188975-e155a300-a745-11eb-9ce5-7f467007e243.png) 
  
  2. Setup for Bot
-- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 **NOTE:** When you create app registration, you will create an App ID and App password - make sure you keep these for later.
 
@@ -97,5 +102,10 @@ This sample app demonstarte the installation lifecycle for Teams [Apps](https://
 
     ![](Images/AppDeleteSuccess.png)
  
-## Further Reading
-[Graph-app-installation](https://learn.microsoft.com/en-us/microsoftteams/plan-teams-lifecycle)
+## Further reading
+
+- [Graph-app-installation](https://learn.microsoft.com/microsoftteams/plan-teams-lifecycle)
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)

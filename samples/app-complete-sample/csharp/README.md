@@ -24,6 +24,11 @@ Sample that shows how to build a bot for Microsoft Teams in C#.
 
 ![ Module ](template-bot-master-csharp/Images/Sample.gif)
 
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Microsoft Teams Bot:** [Manifest](/samples/app-complete-sample/csharp/demo-manifest/Complete-Sample.zip)
+
 ## Prerequisites
 
 * Install Git for windows: https://git-for-windows.github.io/
@@ -46,8 +51,8 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
 
 2. Setup for Bot
 	- Register a AAD aap registration in Azure portal.
-	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 	- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
     > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
@@ -79,7 +84,7 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
 		<add key="FBConnectionName" value="connectionname" />
 		<add key="FBProfileUrl" value="profileurl" />
 		
-6. To test facebook auth flow [create a facebookapp](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-facebook?view=azure-bot-service-4.0) and get client id and secret for facebook app.
+6. To test facebook auth flow [create a facebookapp](https://docs.microsoft.com/azure/bot-service/bot-service-channel-connect-facebook?view=azure-bot-service-4.0) and get client id and secret for facebook app.
     Now go to your bot channel registartion -> configuration -> Add OAuth connection string
    - Provide connection Name : for eg `FBConnectionName`
    - Provide FBProfileUrl: for eg `FBProfileUrl`
@@ -227,14 +232,6 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Azure Portal](https://portal.azure.com)
-- [Add Authentication to Your Bot Via Azure Bot Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp)
-- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
-- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
-- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
-- [.NET Core CLI tools](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x)
-- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
-- [Azure Portal](https://portal.azure.com)
-- [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
-- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
-- [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
+- [Authentication basics](https://docs.microsoft.com/microsoftteams/platform/concepts/authentication/authentication)
+- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)
+- [Create facebook app for development](https://developers.facebook.com/docs/development/create-an-app/)

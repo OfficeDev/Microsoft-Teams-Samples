@@ -18,12 +18,17 @@ urlFragment: officedev-microsoft-teams-samples-tab-channel-group-spfx
 Starting with the SharePoint Framework v1.8, you can implement your Microsoft Teams tabs using SharePoint Framework. Using SharePoint Framework significantly simplifies Teams tab development process as Teams tabs can be automatically hosted within SharePoint without any need for external services.
 
 **Interaction with Sharepoint Teams Tab Application**
-![Teams-Tab-SPFX](images/teams-tab-spfx.gif) 
+![Teams-Tab-SPFX](images/teams-tab-spfx.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Channel and group tabs in ASP.NET Core with MVC:** [Manifest](/samples/tab-channel-group/mvc-csharp/demo-manifest/tab-channel-group.zip)
 
 ## Prerequisites
-- [App Catalog site](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant#create-app-catalog-site)
+- [App Catalog site](https://docs.microsoft.com/sharepoint/dev/spfx/set-up-your-developer-tenant#create-app-catalog-site)
 - [Node.js](https://nodejs.org/en/download/releases/) version 10.X
-- Install [glup](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-development-environment#install-gulp)
+- Install [glup](https://docs.microsoft.com/sharepoint/dev/spfx/set-up-your-development-environment#install-gulp)
 
 ### Setup 
 
@@ -157,11 +162,9 @@ You can now sync your new version to Microsoft Teams.
 
 ## Further reading
 For more information about getting started with Teams-sharepoint, please review the following resources:
-- [Build Microsoft Teams Tab Using Sharepoint](https://learn.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/using-web-part-as-ms-teams-tab)
-- [Getting started with SharePoint Framework](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant)
-- [Building for Microsoft teams](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/build-for-teams-overview)
-- [Use Microsoft Graph in your solution](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/using-microsoft-graph-apis)
-- [Publish SharePoint Framework applications to the Marketplace](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/publish-to-marketplace-overview)
+- [Build Microsoft Teams Tab Using Sharepoint](https://learn.microsoft.com/sharepoint/dev/spfx/web-parts/get-started/using-web-part-as-ms-teams-tab)
+- [Getting started with SharePoint Framework](https://docs.microsoft.com/sharepoint/dev/spfx/set-up-your-developer-tenant)
+- [Building for Microsoft teams](https://docs.microsoft.com/sharepoint/dev/spfx/build-for-teams-overview)
+- [Use Microsoft Graph in your solution](https://docs.microsoft.com/sharepoint/dev/spfx/web-parts/get-started/using-microsoft-graph-apis)
+- [Publish SharePoint Framework applications to the Marketplace](https://docs.microsoft.com/sharepoint/dev/spfx/publish-to-marketplace-overview)
 - [Microsoft 365 Patterns and Practices](https://aka.ms/m365pnp) - Guidance, tooling, samples and open-source controls for your Microsoft 365 development
-
-
