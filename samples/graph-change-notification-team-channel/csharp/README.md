@@ -112,6 +112,8 @@ To include resource data of graph notifications, this Graph API require self-sig
 
 - Add the app to personal/team/groupChat scope (Supported scopes)
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-change-notification-team-channel/csharp/ChangeNotification/AdapterWithErrorHandler.cs#L27) line and put your debugger for local debug.
+
 ## Running the sample
 
 You can interact with Teams Tab by subscribing the teams/channel for notifications.

@@ -72,6 +72,8 @@ Verify you have the right account for building Teams apps and install some recom
 
 **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/Manifest_Hub` folder with the required values.
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-localization/csharp/Localization/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
+
 # Running the sample
 
 In Teams, Once the app is successfully installed, you can interact with tab and bot in your preferred language.

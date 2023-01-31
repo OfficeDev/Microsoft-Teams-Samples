@@ -84,6 +84,8 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the bot to personal/team/groupChat scope (Supported scopes)
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msgext-action/nodejs/index.js#L47) line and put your debugger for local debug.
+
 ## Running the sample
 
 > Note this `manifest.json` specified that the bot will be called from both the `compose` and `message` areas of Teams. Please refer to Teams documentation for more details.

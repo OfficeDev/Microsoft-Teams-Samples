@@ -23,6 +23,7 @@ You can find the Teams app manifest in `templates/appPackage` folder. The folder
 
 Both files contain template arguments with `{...}` statements which will be replaced at build time. You can hover the prepoerties to see the actual value or preview the manifest. You may add any extra properties or permissions you require to this file. See the [schema reference](https://docs.microsoft.com/en-us/microsoftteams/platform/resources/schema/manifest-schema) for more information.
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-proactive-messaging-teamsfx/bot/index.js#L28) line and put your debugger for local debug.
 
 > Important Notes! This sample is under upgrading, please expect errors if you attempted to provision and deploy the app to cloud.
 > Once the sample complete upgrading, this notice will be removed. And the sample will be ready to be deployed to cloud by then.

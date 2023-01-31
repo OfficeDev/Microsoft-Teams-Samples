@@ -75,6 +75,8 @@ The app uses the Teams extensibility features described on the following pages:
 - [Create apps for Teams meetings](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?tabs=json)
 - [Tab single sign-on](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso) to get the identity of the user accessing the tab, in a way that can be verified in the server APIs
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-token-app/nodejs/server/api/botController.js#L25) line and put your debugger for local debug.
+
 ## Running the sample
 
 ### Step 1: Register Azure AD applications

@@ -73,6 +73,8 @@ This sample shows the feature of typeahead search (static and dynamic) control i
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app in personal/groupchat/team scope (supported scopes)
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-type-ahead-search-adaptive-cards/nodejs/index.js#L44) line and put your debugger for local debug.
+
 ## Running the sample
 
 Use the bot command `staticsearch` to get the card with static typeahead search control and use bot command `dynamicsearch` to get the card with dynamic typeahead search control.

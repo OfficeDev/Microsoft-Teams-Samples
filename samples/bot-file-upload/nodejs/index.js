@@ -42,6 +42,9 @@ adapter.onTurnError = async (context, error) => {
         'TurnError'
     );
 
+    // Uncomment below commented line for local debugging..
+    // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
+
     // Note: Since this Messaging Extension does not have the messageTeamMembers permission
     // in the manifest, the bot will not be allowed to message users.
 };

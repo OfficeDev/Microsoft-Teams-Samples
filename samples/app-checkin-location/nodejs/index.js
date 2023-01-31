@@ -34,6 +34,7 @@ adapter.onTurnError = async (context, error) => {
     //       application insights. See https://aka.ms/bottelemetry for telemetry 
     //       configuration instructions.
     console.error(`\n [onTurnError] unhandled error: ${error}`);
+  
 
     // Send a trace activity, which will be displayed in Bot Framework Emulator
     await context.sendTraceActivity(
@@ -43,11 +44,9 @@ adapter.onTurnError = async (context, error) => {
         'TurnError'
     );
 
-    // Send a message to the user
-    await context.sendActivity('The bot encountered an error or bug.');
-    await context.sendActivity('To continue to run this bot, please fix the bot source code.');
+    // Uncomment below commented line for local debugging.
+    // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
 };
-
 // Create the bot that will handle incoming messages.
 const bot = new TeamsBot();
 

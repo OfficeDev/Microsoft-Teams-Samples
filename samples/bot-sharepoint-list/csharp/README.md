@@ -111,6 +111,8 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 - Enter the values in Adaptive Card and click on Save button.
 - Bot will save the card data in SharePoint List.
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-sharepoint-list/csharp/SPListBot/AdapterWithErrorHandler.cs#L26) line and put your debugger for local debug.
+
 ### Screenshots
 **Upload the custom app in Teams**
 
