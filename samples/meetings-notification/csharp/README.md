@@ -18,12 +18,12 @@ urlFragment: officedev-microsoft-teams-samples-meetings-notification-csharp
 This sample illustrates how to implement [Targeted In-Meeting Notification](https://review.learn.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/meeting-apps-apis?branch=pr-en-us-7615&tabs=dotnet#targeted-meeting-notification-api)  In-Meeting Experience.
 ## Interaction with app
 
-![Targeted In-Meeting Notification](TargetedNotifications/Images/ContentBubbleModule.gif)
+![Targeted In-Meeting Notification](TargetedNotifications/Images/MeetingNotification.gif)
 
 ## Try it yourself - experience the App in your Microsoft Teams client
 Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-**Meetings Content Bubble:** [Manifest](/samples/meetings-notification/csharp/demo-manifest/meetings-content-bubble.zip)
+**Meetings Content Bubble:** [Manifest](/samples/meetings-notification/csharp/demo-manifest/meetings-notification.zip)
 
 ## Prerequisites
 
@@ -63,8 +63,8 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - If you are using Visual Studio
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `samples\meetings-content-bubble\csharp` folder
-  - Select `ContentBubbleBot.sln` file
+  - Navigate to `samples\meetings-notification\csharp` folder
+  - Select `TargetedNotifications.sln` file
 
 5. Setup Manifest for Teams
 - __*This step is specific to Teams.*__
