@@ -81,8 +81,10 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |53|Graph API Teams App Installation Life Cycle|This sample illustrates how you can use Teams App Installation Life Cycle by calling Microsoft Graph APIs.|[View](/demo%20manifest/graph-app-installation-lifecycle.zip) |
 |54|App SSO|Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl.|[View](/demo%20manifest/App-SSO.zip) |
 |55|Tabs with Adaptive Cards|Microsoft Teams tab sample code which demonstrates how to Build tabs with Adaptive Cards.|[View](/demo%20manifest/tab-adaptive-card.zip) |
-|56|Graph API Teams App Catalog Life Cycle|This sample illustrates how you programmatically manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs.|[View](/demo%20manifest/graph-appcatalog-lifecycle.zip) |
-|57|Meetings Stage View|Enable and configure your apps for Teams meetings to use in stage view.|[View](/demo%20manifest/Meeting-stage-view.zip) |
+|56|Different types of cards|This sample shows the feature where user can interact with different types of cards using bot like Adaptive, hero, list, Office 365 Connector, receipt, sign in, and thumbnail cards and card collections. |[View](/demo%20manifest/bot-all-cards.zip) |
+|57|Graph API Teams App Catalog Life Cycle|This sample illustrates how you programmatically manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs.|[View](/demo%20manifest/graph-appcatalog-lifecycle.zip) |
+|58|Meetings Stage View|Enable and configure your apps for Teams meetings to use in stage view.|[View](/demo%20manifest/Meeting-stage-view.zip) |
+
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 
 The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDevApp.ms-teams-vscode-extension) is an extension on Visual Studio Code and Visual Studio. It enable Teams developers to create and deploy Teams apps with integrated identity, access to cloud storage, data from Microsoft Graph, and other services in Azure and M365 with a "zero-configuration" approach to the developer experience. And [Sample Apps](https://github.com/OfficeDev/TeamsFx-Samples) are provided in Teams Toolkit. Download and try it by today! [Learn more about Teams Toolkit](https://docs.microsoft.com/en-us/microsoftteams/platform/toolkit/visual-studio-code-overview).
@@ -145,7 +147,9 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |16|  Proactive Tab Conversations | Using a bot to create and store conversations that can be later used inside a sub-entity, tab conversation. This sample includes the details required to proactively message a channel from a bot, set-up and store details for channel tab conversations, and viewing channel conversations from a personal app. |[View][bot-tab-conversations#csharp]|
 |17|  Suggested Actions Bot | This sample shows the feature where user can send suggested actions using bot. |[View][suggestedactionsbot#csharp]|[View][suggestedactionsbot#nodejs]
 |18| Adaptive Card Actions Bot | This sample shows the feature where user can send adaptive card with different actions using bot. |[View][AdaptiveCardActions#csharp]|[View][AdaptiveCardActions#nodejs]
-|19| Different types of cards using bot | This sample shows the feature where user can send different types of cards using bot. ||[View][BotTypesOfCards#nodejs]
+|19| Different types of cards | This sample shows the feature where user can interact with different types of cards using bot like Adaptive, hero, list, Office 365 Connector, receipt, sign in, and thumbnail cards and card collections.|[View][TypesCards#csharp]
+|20| Different types of cards using bot | This sample shows the feature where user can send different types of cards using bot. ||[View][BotTypesOfCards#nodejs]
+
 #### Additional samples
 
 |    | Sample Name | Description | .NET Core | JavaScript | 
@@ -371,6 +375,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [suggestedactionsbot#nodejs]:samples/bot-suggested-actions/nodejs
 [AdaptiveCardActions#csharp]:samples/bot-adaptive-card-actions/csharp
 [AdaptiveCardActions#nodejs]:samples/bot-adaptive-card-actions/nodejs
+[TypesCards#csharp]:samples/bot-all-cards/csharp
 [BotTypesOfCards#nodejs]:samples/bot-types-of-cards/nodejs
 
 [app-localization#cs]:samples/app-localization/csharp
