@@ -86,6 +86,9 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), f
     - **Upload** the `manifest.zip` to Teams (In Teams Apps/Manage your apps click "Upload an app". Browse to and Open the .zip file. At the next dialog, click the Add button.)
     - Add the app to personal/team/groupChat scope (Supported scopes)
 
+
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-region-selection/csharp/RegionSectionApp/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
+
 ## Running the sample
 
 Install the Region Selection App manifest in Microsoft Teams. @mention the region selection bot to start the conversation.

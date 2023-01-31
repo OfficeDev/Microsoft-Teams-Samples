@@ -88,6 +88,8 @@ This feature shown in this sample is currently available in Public Developer Pre
          - Then select **Upload a custom app** from the lower right corner.
          - Then select the `manifest.zip` file from `AppManifest`, and then select **Add** to add the bot to your selected team.
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-receive-channel-messages-withRSC/csharp/ReceiveMessagesWithRSC/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
+
 ## Interacting with the bot in Teams
 
 Select a channel and enter a message in the channel for your bot.

@@ -59,7 +59,7 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |31|Messaging extensions - action preview|This sample app demonstrate how to use action preview in Messaging Extensions using Bot Framework v4 |[View](/demo%20manifest/msgext-action-preview.zip) |
 |32|Proactive installation of App and sending proactive notifications|This Teams app demonstrating how you can use [Proactive installation of app for user and send proactive notification](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages?tabs=csharp) by calling Microsoft Graph APIs. |[View](/demo%20manifest/graph-proactive-installation.zip) |
 |33|Meetings Extensibility|This Teams app demonstrating Microsoft Teams meeting extensibility sample: token passing. |[View](/demo%20manifest/meetings-token-app.zip) |
-|34|Meetings Content Bubble Bot|This Teams app demonstrating Microsoft Teams meeting extensibility iteracting with Content Bubble Bot in-meeting. |[View](/demo%20manifest/meetings-content-bubble.zip) |
+34|Meetings Content Bubble Bot|This Teams app demonstrating Microsoft Teams meeting extensibility iteracting with Content Bubble Bot in-meeting. |[View](/demo%20manifest/meetings-content-bubble.zip) |
 |35|Live coding interview using Shared meeting stage|This Teams app demonstrating a live coding in a Teams meeting stage. |[View](/demo%20manifest/meetings-live-code-interview.zip) |
 |36|App Localization|This Teams Microsoft Teams app localization using Bot and Tab.|[View](/demo%20manifest/app-localization.zip) |
 |37|Region Selection App|This app show Microsoft Teams app show end user region selection using Bot and Tab. |[View](/demo%20manifest/app-region-selection.zip) |
@@ -81,6 +81,9 @@ Here are all the samples which are deployed on Microsoft Azure and you can try i
 |53|Graph API Teams App Installation Life Cycle|This sample illustrates how you can use Teams App Installation Life Cycle by calling Microsoft Graph APIs.|[View](/demo%20manifest/graph-app-installation-lifecycle.zip) |
 |54|App SSO|Microsoft Teams app SSO for Tab, Bot, ME - search, action, linkunfurl.|[View](/demo%20manifest/App-SSO.zip) |
 |55|Tabs with Adaptive Cards|Microsoft Teams tab sample code which demonstrates how to Build tabs with Adaptive Cards.|[View](/demo%20manifest/tab-adaptive-card.zip) |
+|56|Different types of cards|This sample shows the feature where user can interact with different types of cards using bot like Adaptive, hero, list, Office 365 Connector, receipt, sign in, and thumbnail cards and card collections. |[View](/demo%20manifest/bot-all-cards.zip) |
+|57|Graph API Teams App Catalog Life Cycle|This sample illustrates how you programmatically manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs.|[View](/demo%20manifest/graph-appcatalog-lifecycle.zip) |
+|58|Meetings Stage View|Enable and configure your apps for Teams meetings to use in stage view.|[View](/demo%20manifest/Meeting-stage-view.zip) |
 
 ## [Samples built using new generation of Teams development tool - Teams Toolkit](https://github.com/OfficeDev/TeamsFx-Samples)
 
@@ -117,7 +120,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |19| Tab channel context | This sample shows the contents of tab context object in a private and shared channel. ||[View][tab-channel-context#nodejs]|
 |20| Tab meeting context | This sample shows the contents of meeting tab context object. ||[View][tab-meeting-context#nodejs]|
 |21| Tab app monetization | This sample shows how to open purchase dialog and trigger purchase flow using teams-js sdk. ||[View][tab-app-monetization#nodejs]|
-|22| Personal Tab with Nav-Bar menu | Add multiple actions to the upper right in Nav-Bar and build an overflow menu for extra actions in an app. ||[View][tab-navbar-menu#ts]|
+|22| App Caching in Meetings | This sample shows how to improve the subsequent loading time of an App. |||[View][app-cache-meetings#nodejs]|
+|23| Personal Tab with Nav-Bar menu | Add multiple actions to the upper right in Nav-Bar and build an overflow menu for extra actions in an app. ||[View][tab-navbar-menu#ts]|
 
 ## [Bots samples](https://docs.microsoft.com/microsoftteams/platform/bots/what-are-bots) (using the v4 SDK)
 >NOTE:
@@ -143,6 +147,9 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |16|  Proactive Tab Conversations | Using a bot to create and store conversations that can be later used inside a sub-entity, tab conversation. This sample includes the details required to proactively message a channel from a bot, set-up and store details for channel tab conversations, and viewing channel conversations from a personal app. |[View][bot-tab-conversations#csharp]|
 |17|  Suggested Actions Bot | This sample shows the feature where user can send suggested actions using bot. |[View][suggestedactionsbot#csharp]|[View][suggestedactionsbot#nodejs]
 |18| Adaptive Card Actions Bot | This sample shows the feature where user can send adaptive card with different actions using bot. |[View][AdaptiveCardActions#csharp]|[View][AdaptiveCardActions#nodejs]
+|19| Different types of cards | This sample shows the feature where user can interact with different types of cards using bot like Adaptive, hero, list, Office 365 Connector, receipt, sign in, and thumbnail cards and card collections.|[View][TypesCards#csharp]
+|20| Different types of cards using bot | This sample shows the feature where user can send different types of cards using bot. ||[View][BotTypesOfCards#nodejs]
+
 #### Additional samples
 
 |    | Sample Name | Description | .NET Core | JavaScript | 
@@ -190,7 +197,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |1|Resource Specific Consent (RSC) | This sample illustrates how you can use [Resource Specific Consent (RSC)](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/rsc/resource-specific-consent) to call Graph APIs. .                              |[View][graph#rsc#cs]       | [View][graph#rsc#js]
 |2|Graph API Channel Life Cycle | This sample illustrates how you can use [Graph API Channel Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/channel?view=graph-rest-beta) to call Graph APIs. .                              |[View][graph#lifecycle#cs]       | [View][graph#lifecycle#js]
 |3|Graph API Teams App Installation Life Cycle | This sample illustrates how you can use [Teams App Installation Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/teamsappinstallation?view=graph-rest-1.0) by calling Microsoft Graph APIs. .                              |[View][graph#instllationlifecycle#cs]       |[View][graph#instllationlifecycle#js] |
-|4|Graph API Teams App Catalog Life Cycle | This sample illustrates how you programmatically manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs. .                               |[View][graph#appctaloglifecycle#cs]       | [View][graph#appcataloglifecycle#js]
+|4|Graph API Teams App Catalog Life Cycle | This sample illustrates how you programmatically manage lifecycle for your teams App in catalog by calling Microsoft Graph APIs.                               |[View][graph#appctaloglifecycle#cs]       | [View][graph#appcataloglifecycle#js]
 |5|Graph API Chat Life Cycle | This sample illustrates how you can use [Teams App Chat Life Cycle](https://docs.microsoft.com/en-us/graph/api/resources/chat?view=graph-rest-1.0) by calling Microsoft Graph APIs. .                              |[View][graph#chatlifecyle#cs]      |[View][graph#chatlifecycle#js]
 |6|Activity Feed Notification  | Microsoft Teams sample app for Sending Activity feed notification using Graph API in a Teams Tab. | [View][graph-activity-feed#cs]                       | [View][graph-activity-feed#js]| 
 |7|Proactive installation of App and sending proactive notifications | This sample illustrates how you can use [Proactive installation of app for user and send proactive notification](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages?tabs=csharp) by calling Microsoft Graph APIs.                              |[View][graph#graphproactiveinstallation#cs]       |[View][graph#graphproactiveinstallation#js]
@@ -219,7 +226,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 |2|Authentication        | Sample illustrating seamless inline authentication for Microsoft Teams apps.                      | | [View][app-auth#ts]
 |3|Complete Samples      | Sample covering multiple scenarios - dialogs, ME, and facebook auth.                                      |[View][app-complete#cs]        |[View][app-complete#ts]
 |4|Meetings Extensibility | Microsoft Teams meeting extensibility sample: token passing |[View][meetings-token-app#cs]     |[View][meetings-token-app#js]
-|5|Meetings Content Bubble Bot | Microsoft Teams meeting extensibility sample for iteracting with Content Bubble Bot in-meeting |[View][meetings-content-bubble#cs]    |[View][meetings-content-bubble#js]
+|5|Meetings  Notification Bot|This Teams app demonstrating Microsoft Teams meeting extensibility iteracting with in-meeting notifications. |[View][meetings-notification#cs]    |[View][meetings-notification#js]
 |6|Meetings SidePanel | Microsoft Teams meeting extensibility sample for iteracting with Side Panel in-meeting |[View][meetings-sidepanel#cs]     | [View][meetings-sidepanel#js]
 |7|Region Selection App | This app contains a bot and Tab which is helpful to set the region |[View][region-selection-app#cs]     |
 |8|App Localization | Microsoft Teams app localization using Bot and Tab |[View][app-localization#cs]  | [View][app-localization#js]
@@ -288,6 +295,7 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [tab-channel-context#nodejs]:samples/tab-channel-context/nodejs
 [tab-meeting-context#nodejs]:samples/tab-meeting-context/nodejs
 [tab-app-monetization#nodejs]:samples/tab-app-monetization/nodejs
+[app-cache-meetings#nodejs]:samples/app-cache-meetings/nodejs
 [tab-request-approval#nodejs]:samples/tab-request-approval/nodejs
 [bot-request-approval#nodejs]:samples/bot-request-approval/nodejs
 [tab-navbar-menu#ts]:samples/tab-navbar-menu/ts
@@ -343,10 +351,10 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [apps-in-meeting#cs]:samples/apps-in-meeting/csharp
 [meetings-token-app#js]:samples/meetings-token-app/nodejs
 [region-selection-app#cs]: samples/app-region-selection/csharp  
-[meetings-content-bubble#cs]:samples/meetings-content-bubble/csharp
+[meetings-notification#cs]:samples/meetings-notification/csharp
 [meetings-sidepanel#cs]:samples/meetings-sidepanel/csharp
 [meetings-sidepanel#js]:samples/meetings-sidepanel/nodejs
-[meetings-content-bubble#js]:samples/meetings-content-bubble/nodejs
+[meetings-notification#js]:samples/meetings-notification/nodejs
 [messageswithrsc#csharp]:samples/bot-receive-channel-messages-withRSC/csharp
 [messageswithrsc#js]:samples/bot-receive-channel-messages-withRSC/nodejs
 [app-in-meeting#cs]:samples/app-in-meeting/csharp
@@ -368,6 +376,8 @@ The [Teams Toolkit](https://marketplace.visualstudio.com/items?itemName=TeamsDev
 [suggestedactionsbot#nodejs]:samples/bot-suggested-actions/nodejs
 [AdaptiveCardActions#csharp]:samples/bot-adaptive-card-actions/csharp
 [AdaptiveCardActions#nodejs]:samples/bot-adaptive-card-actions/nodejs
+[TypesCards#csharp]:samples/bot-all-cards/csharp
+[BotTypesOfCards#nodejs]:samples/bot-types-of-cards/nodejs
 
 [app-localization#cs]:samples/app-localization/csharp
 [app-localization#js]:samples/app-localization/nodejs

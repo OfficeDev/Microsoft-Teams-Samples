@@ -111,6 +111,8 @@ Please follow link [Add authentication to your bot](https://docs.microsoft.com/e
  - **Note**
  Kindly add the app/bot in personal scope and login there, afterwards add the app/bot in any Teams channel.
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-installation-using-qr-code/csharp/QRAppInstallation/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
+
 ## Running the sample
 
 - **Desktop View**

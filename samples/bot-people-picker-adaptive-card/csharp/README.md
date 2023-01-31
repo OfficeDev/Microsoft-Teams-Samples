@@ -76,6 +76,8 @@ In Azure portal, create a [Azure Bot resource](https://docs.microsoft.com/en-us/
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-people-picker-adaptive-card/csharp/PeoplePicker/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
    
 ## Running the sample
 

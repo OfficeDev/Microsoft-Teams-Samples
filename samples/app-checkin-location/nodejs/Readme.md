@@ -69,6 +69,7 @@ This sample shows feature where user can checkin with current location and view 
     ```bash
     npm start
     ```
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-checkin-location/nodejs/index.js#L48) line and put your debugger for local debug.
 
 ### 4. Setup Manifest for Teams
 
