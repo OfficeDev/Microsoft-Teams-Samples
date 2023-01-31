@@ -91,6 +91,8 @@ This sample shows creating poll in meeting , where memebers of the meeting can a
    - Go to your project directory, the ./Manifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-details-tab/csharp/DetailsTab/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
+
 ## Running the sample
 
 Interact with Details Tab in Meeting.

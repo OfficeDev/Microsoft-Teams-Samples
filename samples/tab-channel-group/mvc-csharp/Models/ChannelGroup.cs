@@ -8,13 +8,13 @@ namespace ChannelGroupTabMVC.Models
 
         public string GetRed()
         {
-            Message = "ChannelGroup.cs says: 'You chose Red!";
+            Message = "ChannelGroup.cs says: 'You chose Red! - Testing YMAL";
             return Message;
         }
 
         public string GetGray()
         {
-            Message = "ChannelGroup.cs says: 'You chose Gray!";
+            Message = "ChannelGroup.cs says: 'You chose Gray! - Testing YMAL";
             return Message;
         }
 

@@ -103,6 +103,8 @@ Also update `BaseUrl` according to your code runtime environment.
          - Go to your project directory, the ./Manifest folder, select the zip folder, and choose Open.
          - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/tab-stage-view/nodejs/server/api/botController.js#L24) line and put your debugger for local debug..
+
 ## Running the sample
 - In the navigation bar located at the far left in Teams, select the ellipses ●●● and choose your app from the list.
 

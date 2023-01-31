@@ -94,6 +94,7 @@ This sample shows the contents of meeting tab context object in a meeting tab an
 - Add the app in meeting.
 
  **NOTE:** Only accounts with admin access can create private/shared channels in team.
+ - If you are facing any issue in your app,  please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-context-app/csharp/MeetingContextApp/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
     
 
 ## Running the sample
@@ -119,4 +120,3 @@ This sample shows the contents of meeting tab context object in a meeting tab an
 - [Azure Portal](https://portal.azure.com)
 - [Get-context-for-tabs](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/access-teams-context#retrieve-context-in-private-channels)
 - [Meeting API reference](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/api-references?tabs=dotnet)
-

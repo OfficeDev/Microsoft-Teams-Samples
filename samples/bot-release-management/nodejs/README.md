@@ -147,6 +147,8 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 - Zip up the contents of the `/appPackage` folder to create a `manifest.zip`
 - Upload the manifest.zip to Teams (in the Apps view click "Upload an app to your org's app catalog")
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-release-management/nodejs/index.js#L52) line and put your debugger for local debug.
+
 ## Running the sample
 
 **Upload an app to your org's app catalog:**

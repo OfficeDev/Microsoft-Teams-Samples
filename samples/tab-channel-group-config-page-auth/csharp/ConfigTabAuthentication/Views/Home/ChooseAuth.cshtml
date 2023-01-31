@@ -12,18 +12,11 @@
 </div>
 <div style="height: 30px">
 </div>
-<div>
-    <button id="btnLogin" onclick="simpleLogin()">Login to Simple Azure AD</button>
-</div>
 
 <script type="text/javascript">
 
         function silentLogin() {
             window.location.href = "@Url.Action("SilentConfigureTab", "Home")";
-        }
-
-        function simpleLogin() {
-            window.location.href = "@Url.Action("SimpleConfigureTab", "Home")";
         }
 
 </script>

@@ -102,6 +102,8 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
 
 - [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-events/nodejs/server/api/botController.js#L24) line and put your debugger for local debug.
+
 ## Running the sample
 
 **MeetingEvents command interaction:**  

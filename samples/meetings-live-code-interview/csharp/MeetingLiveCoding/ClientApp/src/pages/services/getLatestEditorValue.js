@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
 // API call to get latest value of editor.
 export function getLatestEditorValue(questionId,meetingId) {

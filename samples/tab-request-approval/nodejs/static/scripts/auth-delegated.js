@@ -4,7 +4,7 @@
     // Get auth token
     // Ask Teams to get us a token from AAD
     function getClientSideToken() {
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
         return new Promise((resolve, reject) => {
             microsoftTeams.authentication.getAuthToken({
                 successCallback: (result) => {
@@ -48,7 +48,6 @@
                         else {
                             const serverSideToken = responseJson;
                             localStorage.setItem("accessToken", serverSideToken);
-                            console.log("Token is" + serverSideToken);
                             resolve(serverSideToken);
                         }
                     });
@@ -64,9 +63,7 @@
                 width: 600,
                 height: 535,
                 successCallback: (result) => {
-                    let data = localStorage.getItem(result);
-                    localStorage.removeItem(result);
-                    resolve(data);
+                    resolve(result);
                 },
                 failureCallback: (reason) => {
                     reject(JSON.stringify(reason));
@@ -86,9 +83,10 @@
                 // Display in-line button so user can consent
                 requestConsent()
                     .then((result) => {
-                        // Consent succeeded - use the token we got back
-                        let accessToken = JSON.parse(result).accessToken;
-                        console.log(`Received access token ${accessToken}`);
+                        getClientSideToken()
+                        .then((clientSideToken) => {
+                            return getServerSideToken(clientSideToken);
+                        })
                     })
                     .catch((error) => {
                         console.log(`ERROR ${error}`);
