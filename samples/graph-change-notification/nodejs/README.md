@@ -110,6 +110,7 @@ This sample app demonstrates sending notifications to users when presence status
    - Go to your project directory, the ./Manifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-change-notification/nodejs/index.js#L42) line and put your debugger for local debug.
 
 ## Running with sample
 - After sucessfully installation of app you will get a sign in button. When sign in is complete then you get your current status in adapative card

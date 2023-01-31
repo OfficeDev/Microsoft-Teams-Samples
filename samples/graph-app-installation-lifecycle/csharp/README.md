@@ -93,6 +93,8 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 - [Upload app manifest file](https://docs.microsoft.com/microsoftteams/platform/concepts/deploy-and-publish/apps-upload#load-your-package-into-teams) (zip file) to your team
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-appcatalog-lifecycle/nodejs/index.js#L45) line and put your debugger for local debug.
+
 ## Running the sample
 
 ![](AppInstallation/Images/Install.png)

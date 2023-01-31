@@ -34,6 +34,8 @@ This application also shows the implementation of Live Share SDK to update the d
 
  ![config_page](Images/config_page.png)
 
+ ![chat_page](Images/chat_meeting_tab.png)
+
  ![pre_meeting_tab](Images/pre_meeting_tab.png)
 
  ![side_panel_tab](Images/side_panel_tab.png)
@@ -78,6 +80,8 @@ The app uses the Teams extensibility features described on the following pages:
 - [Apps in Teams meetings](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings)
 - [Create apps for Teams meetings](https://docs.microsoft.com/microsoftteams/platform/apps-in-teams-meetings/create-apps-for-teams-meetings?tabs=json)
 - [Tab single sign-on](https://docs.microsoft.com/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso) to get the identity of the user accessing the tab, in a way that can be verified in the server APIs
+
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-token-app/nodejs/server/api/botController.js#L25) line and put your debugger for local debug.
 
 ## Setup
 
@@ -129,6 +133,8 @@ You can build and run the project from the command line or an IDE:
 
 ### Step 5: Enable developer preview in your desktop Teams client
 Follow [these instructions](https://docs.microsoft.com/microsoftteams/platform/resources/dev-preview/developer-preview-intro#enable-developer-preview) to enable developer preview. Note that Developer preview mode must be enabled on each Teams client app or browser.
+
+Note: Open the meeting chat section and type @MeetingTokenApp Hello (It will send back the required information to you).
 
 > In-meeting tabs are only available in the Teams desktop client. They will not be visible when you run Teams in a web browser.
 

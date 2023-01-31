@@ -4,10 +4,8 @@
 import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
 import { Text, Button,  Image } from '@fluentui/react-components'
-import { Card, CardPreview, CardHeader, CardFooter } from "@fluentui/react-components/unstable"
-import { CardBody, Label, CarouselCaption, CarouselProps} from 'reactstrap';
-import Swiper, { Navigation, Pagination } from 'swiper';
-import { SliderThumb } from '@mui/material';
+import { Card, CardHeader } from "@fluentui/react-components/unstable"
+import { CardBody} from 'reactstrap';
 import { Carousel } from 'rsuite';
 
 /**
@@ -16,7 +14,7 @@ import { Carousel } from 'rsuite';
  */
 
 const CaptureImage = () => {
-  const [capturedImage, setCapturedImage] = useState('');
+  const [capturedImage] = useState('');
   const [capturedImages, setCapturedImages] = useState<any[]>([]);
 
   useEffect(() => {
@@ -56,7 +54,7 @@ const CaptureImage = () => {
         // creating selected images array to show preview 
         const imageArray: any[] = attachments.map((item, index) => {         
           return (
-                <img
+                <img alt='img'
                   src={"data:" + item.mimeType + ";base64," + item.preview}  
                 />
               )

@@ -1,13 +1,15 @@
-﻿let accessToken;
+﻿let idToken;
+let accessToken;
 
 $(document).ready(function () {
     microsoftTeams.app.initialize();
-   
+
     getClientSideToken()
-        .then((clientSideToken) => {           
+        .then((clientSideToken) => {
             return getServerSideToken(clientSideToken);
         })
         .catch((error) => {
+            console.log(error);
             if (error === "invalid_grant") {
                 // Display in-line button so user can consent
                 $("#divError").text("Error while exchanging for Server token - invalid_grant - User or admin consent is required.");
@@ -29,7 +31,10 @@ function requestConsent() {
         .then(data => {
             $("#consent").hide();
             $("#divError").hide();
-            accessToken = data.accessToken;
+            getClientSideToken()
+                .then((clientSideToken) => {
+                    return getServerSideToken(clientSideToken);
+                })
         });
 }
 
@@ -38,29 +43,33 @@ function getToken() {
         microsoftTeams.authentication.authenticate({
             url: window.location.origin + "/Auth/Start",
             width: 600,
-            height: 535
-        }).then(result => {
-            resolve(result);
-        }).catch(reason => {
-            reject(reason);
+            height: 535,
+            successCallback: result => {
+                resolve(result);
+            },
+            failureCallback: reason => {
+                reject(reason);
+            }
         });
     });
 }
 
 function getClientSideToken() {
-
     return new Promise((resolve, reject) => {
-        microsoftTeams.authentication.getAuthToken().then(result => {
-            resolve(result);
-        }).catch(error => {
-            reject("Error getting token: " + error);
+        microsoftTeams.authentication.getAuthToken({
+            successCallback: (result) => {
+                resolve(result);
+            },
+            failureCallback: function (error) {
+                reject("Error getting token: " + error);
+            }
         });
     });
 }
 
 function getServerSideToken(clientSideToken) {
     return new Promise((resolve, reject) => {
-        microsoftTeams.app.getContext().then((context) => {
+         microsoftTeams.app.getContext().then((context) => {
             var scopes = ["https://graph.microsoft.com/User.Read"];
             fetch('/GetUserAccessToken', {
                 method: 'get',
@@ -70,22 +79,22 @@ function getServerSideToken(clientSideToken) {
                 },
                 cache: 'default'
             })
-            .then((response) => {
-                if (response.ok) {
-                    return response.text();
-                } else {
-                    reject(response.error);
-                }
-            })
-            .then((responseJson) => {
-                if (IsValidJSONString(responseJson)) {
-                    if (JSON.parse(responseJson).error)
-                        reject(JSON.parse(responseJson).error);
-                } else if (responseJson) {
-                    accessToken = responseJson;
-                    localStorage.setItem("accessToken", accessToken);
-                }
-            });
+                .then((response) => {
+                    if (response.ok) {
+                        return response.text();
+                    } else {
+                        reject(response.error);
+                    }
+                })
+                .then((responseJson) => {
+                    if (IsValidJSONString(responseJson)) {
+                        if (JSON.parse(responseJson).error)
+                            reject(JSON.parse(responseJson).error);
+                    } else if (responseJson) {
+                        accessToken = responseJson;
+                        localStorage.setItem("accessToken", accessToken);
+                    }
+                });
         });
     });
 }

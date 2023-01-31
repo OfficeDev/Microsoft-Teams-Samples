@@ -85,6 +85,8 @@ Run ngrok - point to port 3978
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-people-picker-adaptive-card/nodejs/index.js#L44) line and put your debugger for local debug.
+
 ## Running the sample
 
 **Peoplepickercard command interaction:**

@@ -89,6 +89,9 @@ This sample displays how to consume SubEntity Id to [DeepLink](https://docs.micr
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./Manifest folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/tab-deeplink/nodejs/index.js#L62) line and put your debugger for local debug.
+
 ## Interacting with the bot
 
 Enter text in the emulator.  The text will be echoed back by the bot.

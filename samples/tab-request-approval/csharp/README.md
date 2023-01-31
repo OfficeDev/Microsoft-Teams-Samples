@@ -86,9 +86,16 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
     - `ChatMessage.Send`
     - `Chat.ReadWrite`
     - `TeamsActivity.Send`
-    - `TeamsAppInstallation.ReadForUser.All`.
+    - `TeamsAppInstallation.ReadWriteForUser`
+    - `TeamsAppInstallation.ReadWriteSelfForUser`
+    - `TeamsAppInstallation.ReadForUser`.
 
-**Note** Your need to add `TeamsActivity.Send` and `Directory.Read.All` as Application level permissions too.
+-   Select Microsoft Graph -\> Application permissions.
+    - `TeamsActivity.Send`
+    - `Directory.Read.All`
+    - `TeamsAppInstallation.ReadWriteForUser.All`
+    - `TeamsAppInstallation.ReadWriteSelfForUser.All`
+    - `TeamsAppInstallation.ReadForUser.All`.
 
 -   Click on Add permissions. Please make sure to grant the admin consent for the required permissions.
 13. Navigate to **Authentication**
@@ -141,6 +148,8 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.    
 
 **Note:** App should be installed for user's manager also to get task approval notification.
+
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/tab-request-approval/csharp/TabRequestApproval/AdapterWithErrorHandler.cs#L26) line and put your debugger for local debug.
 
 ## Running the sample
 

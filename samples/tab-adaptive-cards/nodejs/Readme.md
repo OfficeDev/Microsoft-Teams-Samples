@@ -110,6 +110,8 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
          - Go to your project directory, the ./appPackage folder, select the zip folder, and choose Open.
          - Select Add in the pop-up dialog box. Your tab is uploaded to Teams.
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/tab-adaptive-cards/nodejs/server/api/botController.js#L24) line and put your debugger for local debug.
+
 ## Running the sample
 
 You can use this tab by following the below steps:

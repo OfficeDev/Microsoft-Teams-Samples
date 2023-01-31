@@ -9,7 +9,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using Microsoft.Bot.Builder;
-using Microsoft.Bot.Builder.Integration.AspNet.Core;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Bot.Schema;
@@ -18,7 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using AdaptiveCards.Templating;
 using Newtonsoft.Json;
-using AdaptiveCards;
+using Microsoft.Bot.Builder.Integration.AspNet.Core;
 
 namespace Microsoft.BotBuilderSamples.Bots
 {
@@ -46,15 +45,15 @@ namespace Microsoft.BotBuilderSamples.Bots
                 await MentionAdaptiveCardActivityAsync(turnContext, cancellationToken);
             else if (text.Contains("mention"))
                 await MentionActivityAsync(turnContext, cancellationToken);
-            else if(text.Contains("who"))
+            else if (text.Contains("who"))
                 await GetSingleMemberAsync(turnContext, cancellationToken);
-            else if(text.Contains("update"))
+            else if (text.Contains("update"))
                 await CardActivityAsync(turnContext, true, cancellationToken);
-            else if(text.Contains("message"))
+            else if (text.Contains("message"))
                 await MessageAllMembersAsync(turnContext, cancellationToken);
-            else if(text.Contains("immersivereader"))
+            else if (text.Contains("immersivereader"))
                 await SendImmersiveReaderCardAsync(turnContext, cancellationToken);
-            else if(text.Contains("delete"))
+            else if (text.Contains("delete"))
                 await DeleteCardActivityAsync(turnContext, cancellationToken);
             else
                 await CardActivityAsync(turnContext, false, cancellationToken);
@@ -391,6 +390,27 @@ namespace Microsoft.BotBuilderSamples.Bots
                 var replyActivity = MessageFactory.Text(newReaction);
                 await turnContext.SendActivityAsync(replyActivity, cancellationToken);
             }
+        }
+
+        // This method is invoked when message sent by user is updated in chat.
+        protected override async Task OnTeamsMessageEditAsync(ITurnContext<IMessageUpdateActivity> turnContext, CancellationToken cancellationToken)
+        {
+            var replyActivity = MessageFactory.Text("Message is updated");
+            await turnContext.SendActivityAsync(replyActivity, cancellationToken);
+        }
+
+        // This method is invoked when message sent by user is undeleted in chat.
+        protected override async Task OnTeamsMessageUndeleteAsync(ITurnContext<IMessageUpdateActivity> turnContext, CancellationToken cancellationToken)
+        {
+            var replyActivity = MessageFactory.Text("Message is undeleted");
+            await turnContext.SendActivityAsync(replyActivity, cancellationToken);
+        }
+
+        // This method is invoked when message sent by user is soft deleted in chat.
+        protected override async Task OnTeamsMessageSoftDeleteAsync(ITurnContext<IMessageDeleteActivity> turnContext, CancellationToken cancellationToken)
+        {
+            var replyActivity = MessageFactory.Text("Message is soft deleted");
+            await turnContext.SendActivityAsync(replyActivity, cancellationToken);
         }
     }
 }

@@ -20,8 +20,9 @@ adapter.onTurnError = async (context, error) => {
         'TurnError'
     );
 
-    // Send a message to the user
-    await context.sendActivity('The bot encountered an error or bug, please fix the bot source code.');
+     // Uncomment below commented line for local debugging.
+     // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
+
 };
 
 // Define state store for your bot.

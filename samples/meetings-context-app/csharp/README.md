@@ -99,6 +99,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - Add the app in meeting.
 
  **NOTE:** Only accounts with admin access can create private/shared channels in team.
+ - If you are facing any issue in your app,  please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-context-app/csharp/MeetingContextApp/AdapterWithErrorHandler.cs#L24) line and put your debugger for local debug.
     
 
 ## Running the sample

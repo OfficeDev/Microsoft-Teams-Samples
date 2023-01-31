@@ -61,7 +61,7 @@ The app uses the Teams extensibility features described on the following pages:
 ## Setup
 **This app will work in developer preview only**
 
-1. Register a new application in the [Azure Active Directory � App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
+1. Register a new application in the [Azure Active Directory   App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
 2. Setup for Bot
   - Register a AAD aap registration in Azure portal.
@@ -135,9 +135,13 @@ The app uses the Teams extensibility features described on the following pages:
 - Enable developer preview in your desktop Teams client
 Follow [these instructions](https://docs.microsoft.com/microsoftteams/platform/resources/dev-preview/developer-preview-intro#enable-developer-preview) to enable developer preview. Note that Developer preview mode must be enabled on each Teams client app or browser.
 
+Note: Open the meeting chat section and type @MeetingTokenApp Hello (It will send back the required information to you).
+
 > In-meeting tabs are only available in the Teams desktop client. They will not be visible when you run Teams in a web browser.
 
-- Sideload the app in a Teams desktop client
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-token-app/csharp/AdapterWithErrorHandler.cs#L32) line and put your debugger for local debug.
+  
+-- Sideload the app in a Teams desktop client
     1. Create a meeting with few test participants, ideally with a mix of Presenters and Attendees.
     1. Once meeting is created, go to the meeting details page and click on the "Add tab" (+) button.
     1. In the pop-up that opens, click on "Manage apps".
@@ -156,6 +160,8 @@ Follow [these instructions](https://docs.microsoft.com/microsoftteams/platform/r
  - Skip the current token for the organizer of the meeting
 
  ![config_page](Images/config_page.png)
+
+ ![chat_page](Images/chat_meeting_tab.png)
 
  ![pre_meeting_tab](Images/pre_meeting_tab.png)
 
