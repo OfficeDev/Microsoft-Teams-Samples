@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: This sample demonstrates the use of different formatting on cards
+description: This sample shows how to use different formatting on adaptive card.
 products:
 - office-teams
 - office
