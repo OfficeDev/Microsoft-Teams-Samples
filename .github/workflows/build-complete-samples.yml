@@ -415,6 +415,10 @@ jobs:
             - project_path: 'samples/bot-adaptive-card-actions/csharp/AdaptiveCardActions/AdaptiveCardActions.csproj'
               name: 'bot-adaptive-card-actions'
               version: '6.0.x'
+            
+            - project_path: 'samples/bot-formatting-cards/csharp/BotFormattingCards/BotFormattingCards.csproj'
+              name: 'bot-formatting-cards'
+              version: '6.0.x'
 
             - project_path: 'samples/bot-all-cards/csharp/BotAllCards/BotAllCards.csproj'
               name: 'bot-all-cards'
@@ -846,6 +850,10 @@ jobs:
             - project_path: 'samples/tab-navbar-menu/ts'
               name: 'tab-navbar-menu'
               version: '16.x'
+            
+            - project_path: 'samples/bot-formatting-cards/nodejs'
+              name: 'bot-formatting-cards'
+              version: '18.x'
 
             - project_path: 'samples/bot-types-of-cards/nodejs'
               name: 'bot-types-of-cards'
