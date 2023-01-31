@@ -62,7 +62,7 @@ class TeamsConversationBot(TeamsActivityHandler):
         return
 
     async def _mention_adaptive_card_activity(self, turn_context: TurnContext):
-        TeamsChannelAccount: member = None
+        member: TeamsChannelAccount = None
         try:
             member = await TeamsInfo.get_member(
                 turn_context, turn_context.activity.from_property.id
@@ -156,7 +156,7 @@ class TeamsConversationBot(TeamsActivityHandler):
         await turn_context.update_activity(updated_activity)
 
     async def _get_member(self, turn_context: TurnContext):
-        TeamsChannelAccount: member = None
+        member: TeamsChannelAccount = None
         try:
             member = await TeamsInfo.get_member(
                 turn_context, turn_context.activity.from_property.id
