@@ -161,6 +161,7 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
    - Go to your project directory, the ./TabNotificationApp folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-activity-feed/csharp/ActivityFeedNotification/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
 
 ## Setting up activity types in manifest
 Teams Activity feed notification API uses activity to which user want a notification which we specify in app manifest, Add following activity type in your manifest for task creation.

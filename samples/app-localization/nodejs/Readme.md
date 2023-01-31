@@ -87,6 +87,8 @@ This sample illustrates how to implement [Localization for Microsoft Teams apps]
 	
   **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/Manifest_Hub` folder with the required values.
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-localization/nodejs/server/api/botController.js#L24) line and put your debugger for local debug.
+
 7. Run your app.
 - Start the bot
 

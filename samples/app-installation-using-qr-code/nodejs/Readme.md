@@ -90,6 +90,8 @@ The user can Generate a new QR code (contains app id information) and then use I
 
     > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-installation-using-qr-code/nodejs/index.js#L48) line and put your debugger for local debug.
+
 ## Running the sample
 
 - **Desktop View**

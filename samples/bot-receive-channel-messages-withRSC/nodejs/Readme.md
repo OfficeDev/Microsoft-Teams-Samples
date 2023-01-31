@@ -109,6 +109,8 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
          - Then select **Upload a custom app** from the lower right corner.
          - Then select the `manifest.zip` file from `appPackage`, and then select **Add** to add the bot to your selected team.
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-receive-channel-messages-withRSC/nodejs/server/api/botController.js#L24) line and put your debugger for local debug.
+
 ## Running the sample
 
 **Adding bot UI:**

@@ -92,6 +92,8 @@ Modify the `manifest.json` in the `/AppPackage` folder and replace the following
          - Then select the `manifest.zip` file from `AppPackage`.
          - [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-events/csharp/MeetingEvents/AdapterWithErrorHandler.cs#L25) line and put your debugger for local debug.
+
 ## Running the sample
 Once the meeting where the bot is added starts or ends, real-time updates are posted in the chat.
 

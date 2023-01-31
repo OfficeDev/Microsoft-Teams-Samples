@@ -94,6 +94,8 @@ Make sure you've downloaded and installed Ngrok on your local machine. ngrok wil
          - Then select the `manifest.zip` file from `teamsAppManifest`.
          - [Install the App in Teams Meeting](https://docs.microsoft.com/en-us/microsoftteams/platform/apps-in-teams-meetings/teams-apps-in-meetings?view=msteams-client-js-latest#meeting-lifecycle-scenarios)
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-content-bubble/nodejs/index.js#L45) line and put your debugger for local debug.
+
 ## Running the sample
 
 **Hello command interaction:**

@@ -420,6 +420,10 @@ jobs:
               name: 'meeting-tabs'
               version: '6.0.x'
 
+            - project_path: 'samples/bot-all-cards/csharp/BotAllCards/BotAllCards.csproj'
+              name: 'bot-all-cards'
+              version: '6.0.x'
+
       fail-fast: false
     name: Build All "${{ matrix.name }}" csharp
     steps:
@@ -849,6 +853,10 @@ jobs:
 
             - project_path: 'samples/meeting-tabs/nodejs'
               name: 'meeting-tabs'
+              version: '18.x'
+
+            - project_path: 'samples/bot-types-of-cards/nodejs'
+              name: 'bot-types-of-cards'
               version: '18.x'
 
             - project_path: 'samples/app-cache-meetings/nodejs'

@@ -167,7 +167,9 @@ Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-S
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip` or `Manifest_Hub` 
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
-> Note: This `manifest.json` specified that the bot will be installed in a "personal" scope only. Please refer to Teams documentation for more details.
+**Note**: This `manifest.json` specified that the bot will be installed in a "personal" scope only. Please refer to Teams documentation for more details.
+
+- If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-sso/nodejs/server/api/botController.js#L32) line and put your debugger for local debug.
 
 ## Running the sample
 

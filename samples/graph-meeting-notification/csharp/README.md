@@ -110,6 +110,8 @@ This is a sample application which demonstrates use of online meeting subscripti
    
 Follow this documentation to get more information on custom apps and uploading them into Teams - [Manage custom apps](https://docs.microsoft.com/en-us/microsoftteams/custom-app-overview) and [Upload an app package](https://docs.microsoft.com/en-us/microsoftteams/upload-custom-apps)
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-meeting-notification/csharp/MeetingNotification/AdapterWithErrorHandler.cs#L27) line and put your debugger for local debug.
+
 ## Running the sample
 ![Welcome Card](MeetingNotification/Images/WelcomeCard.png)
 
