@@ -45,6 +45,10 @@ This feature shown in this sample is currently available in Public Developer Pre
    - User consent display name: Teams can access your profile and make requests on your behalf.
    - User consent description: Teams can call this app’s APIs with the same rights as you have.
    
+   *In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
+    * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
+    * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
+
    ### Instruction on setting connection string for bot authentication on the behalf of user
 
    - In the Azure portal, select your resource group from the dashboard.
@@ -67,11 +71,17 @@ This feature shown in this sample is currently available in Public Developer Pre
     ![Permissions](FetchGroupChatMessages/Images/permissions.png)
 
    ### Under left menu, select  **Authentication**  under  **Manage**  section
-   
+      
     - Select 'Accounts in any organizational directory (Any Azure AD directory - Multitenant)' under Supported account types and click "+Add a platform".
     -  On the flyout menu, Select "Web"    
     -  Add  `https://token.botframework.com/.auth/web/redirect`  under Redirect URLs and click Configure button.
     -  Once the flyout menu close, scroll bottom to section 'Implicit Grant' and select check boxes "Access tokens" and "ID tokens" and click "Save" at the top bar.
+    
+    - Set a redirect URI:
+      * Select **Add a platform**.
+      * Select **Single-page application**.
+      * Enter the **redirect URI** for the app in the following format: 
+      1) https://%ngrokDomain%.ngrok.io/Auth/End
 
 2. Setup for Bot
 	
@@ -126,6 +136,10 @@ This feature shown in this sample is currently available in Public Developer Pre
 	   - From the lower left corner, choose Upload a custom App
 	   - Go to your project directory, the ./manifest folder, select the zip folder, and choose Open.
 	   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+
+6.In the **Authorized client applications** section, identify the applications that you want to authorize for your app’s web application. Each of the following IDs needs to be entered:
+    * `1fec8e78-bce4-4aaf-ab1b-5451cc387264` (Teams mobile/desktop application)
+    * `5e3ce6c0-2b1f-4285-8d4b-75ee78787346` (Teams web application)
     
 ## Running the Sample
 
