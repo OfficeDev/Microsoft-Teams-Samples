@@ -416,7 +416,7 @@ jobs:
               name: 'bot-adaptive-card-actions'
               version: '6.0.x'
 
-            - project_path: 'samples/meeting-tabs/csharp/AppInMeeting/AppInMeeting.csproj'
+            - project_path: 'samples/meeting-tabs/csharp/MeetingTabs/MeetingTabs.csproj'
               name: 'meeting-tabs'
               version: '6.0.x'
 

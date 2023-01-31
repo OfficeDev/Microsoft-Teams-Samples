@@ -16,7 +16,7 @@ env:
     #Change the webapp package path. This will contain the code to be published after build
     #Change the project path to your project file path.
     AZURE_WEBAPP_PACKAGE_PATH: 'samples/meeting-tabs/csharp/published'    # set this to the path to your web app project, defaults to the repository root
-    PROJECT_PATH: 'samples/meeting-tabs/csharp/AppInMeeting/AppInMeeting.csproj'
+    PROJECT_PATH: 'samples/meeting-tabs/csharp/MeetingTabs/MeetingTabs.csproj'
     AZURE_WEBAPP_NAME: 'meeting-tabs'  # set this to your application's name
     DOTNET_VERSION: '6.0.x'           # set this to the dot net version to use
 jobs:
