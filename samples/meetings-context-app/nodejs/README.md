@@ -114,6 +114,7 @@ Register your application with Azure AD
 2. **Meeting Details :** In this user can track the detials of meeting start time, end time, joining url and other details respectively.
 ![meeting context](Images/Meeting-Details.png) 
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/meetings-context-app/nodejs/server/index.js#L44) line and put your debugger for local debug.
 
 ## Further reading
 - [Tab Basics](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/create-channel-group-tab?pivots=node-java-script)

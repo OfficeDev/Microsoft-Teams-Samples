@@ -75,6 +75,8 @@ This sample shows a feature where user can schedule a recurring task and get the
       - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
       - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-daily-task-reminder/csharp/BotDailyTaskReminder/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
+
 ## Running the sample
 
 - Use command `create-reminder` to get card with action `Schedule task`.

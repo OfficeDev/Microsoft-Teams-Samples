@@ -2,10 +2,10 @@
 
 $(document).ready(function () {
     microsoftTeams.app.initialize();
-    getclientsidetoken()
+    getClientSideToken()
        .then((clientsidetoken) => {
            console.log("clientsidetoken: " + clientsidetoken);
-           return getserversidetoken(clientsidetoken);
+           return getServerSideToken(clientsidetoken);
        })
        .catch((error) => {
            console.log(error);
@@ -29,6 +29,9 @@ function requestConsent() {
                 .then((clientSideToken) => {
                     return getServerSideToken(clientSideToken);
                 })
+                .catch((error) => {
+                    console.log(error);
+                });
         });
 }
 

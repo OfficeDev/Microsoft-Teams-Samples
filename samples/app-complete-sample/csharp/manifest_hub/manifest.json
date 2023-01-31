@@ -1,0 +1,65 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.13",
+  "version": "1.5",
+  "id": "{{Microsoft-App-Id}}",
+  "packageName": "com.skype.teams.samples.sampleapp",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.microsoft.com",
+    "privacyUrl": "https://www.microsoft.com/privacy",
+    "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
+  },
+  "name": {
+    "short": "Sample-App-csharp",
+    "full": "Sample-App-csharp"
+  },
+  "description": {
+    "short": "This is a small sample app we made for you!",
+    "full": "This is a small sample app we made for you! This app has samples of all capabilities MS Teams supports."
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#3F487F",
+  "staticTabs": [
+    {
+      "contentUrl": "https://{{domain-name}}/BotInfo",
+      "entityId": "statictab",
+      "name": "Bot Info",
+      "scopes": [
+        "team",
+        "personal"
+      ]
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "{{Microsoft-App-Id}}",
+      "canUpdateConfiguration": true,
+      "commands": [
+        {
+          "id": "search123",
+          "description": "Find a card",
+          "title": "Search",
+          "initialRun": true,
+          "parameters": [
+            {
+              "title": "query123",
+              "name": "query",
+              "description": "Search string"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "{{domain-name}}"
+  ]
+}

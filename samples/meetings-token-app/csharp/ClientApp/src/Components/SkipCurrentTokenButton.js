@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from '@fluentui/react-northstar';
 import { withMeetingTokenService } from '../Context/MeetingServiceProvider';
-import { async } from 'regenerator-runtime';
 
 class SkipCurrentTokenButton extends Component {
     constructor(props) {

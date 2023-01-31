@@ -55,6 +55,8 @@ The external content will be redirected to the respective web pages
 ## ![BingSearch](Documentation/BingSearch.png)
 ## ![BingSearchResult](Documentation/BingSearchResult.png)
 
+**Note**: If you are facing any issue in your app, [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msteams-application-resourcehub/Source/microsoft-teams-apps-selfhelp/Bot/AdapterWithErrorHandler.cs#L26) and put your debugger for local debug.
+
 #Video
 Click the title of video link a task module will open and have a video in the task module which user can play.
 

@@ -1,8 +1,8 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.Localization.schema.json",
-  "name.short": "Localizaci髇",
-  "name.full": "Aplicaci髇 de localizaci髇",
-  "description.short": "Aplicaci髇 de localizaci髇 para Microsoft Teams",
-  "description.full": "Esta aplicaci髇 de muestra proporciona una aplicaci髇 de localizaci髇 muy sencilla. Puede ampliar esto para agregar m醩 contenido y capacidades.",
+  "name.short": "Localizaci贸n",
+  "name.full": "Aplicaci贸n de localizaci贸n",
+  "description.short": "Aplicaci贸n de localizaci贸n para Microsoft Teams",
+  "description.full": "Esta aplicaci贸n de muestra proporciona una aplicaci贸n de localizaci贸n muy sencilla. Puede ampliar esto para agregar m谩s contenido y capacidades.",
   "staticTabs[0].name": "Spanish"
 }

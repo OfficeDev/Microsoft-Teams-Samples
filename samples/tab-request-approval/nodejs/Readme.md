@@ -130,6 +130,8 @@ This sample has been created using [Microsoft Graph](https://docs.microsoft.com/
 
 **Note:** App should be installed for user's manager also to get task approval notification.
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/msteams-application-resourcehub/Source/microsoft-teams-apps-selfhelp/Bot/AdapterWithErrorHandler.cs#L26) line and put your debugger for local debug.
+
 ## Running the sample
 
 This sample shows a feature where:

@@ -96,6 +96,8 @@ Language Used : C#
 
    ![Proactive installation](ProactiveAppInstallation/Images/sendmessage.png)
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-proactive-installation/csharp/ProactiveAppInstallation/AdapterWithErrorHandler.cs#L27) line and put your debugger for local debug.
+
 
 ## Further Reading
 

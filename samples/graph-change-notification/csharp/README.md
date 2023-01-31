@@ -171,6 +171,8 @@ Modify the `appsettings.json` file with the following details:
     - **Zip** up the contents of the `teamsAppManifest` folder to create a `manifest.zip`
     - **Upload** the `manifest.zip` to Teams (in the Apps view click "Upload a custom app")
 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-change-notification/csharp/ChangeNotification/AdapterWithErrorHandler.cs#L28) line and put your debugger for local debug.
+
 ## Running the sample
 - After sucessfully installation of app you will get a sign in button. When sign in is complete then you get your current status in adapative card
 ![image](https://user-images.githubusercontent.com/85864414/122000447-741cd080-cdcc-11eb-9833-54f87cd7567f.PNG)

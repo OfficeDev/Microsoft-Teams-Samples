@@ -5,6 +5,7 @@ using template_bot_master_csharp;
 using Microsoft.Teams.TemplateBotCSharp.utility;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Options;
+using Bot.Builder.Community.Dialogs.FormFlow;
 
 namespace Microsoft.Teams.TemplateBotCSharp.Utility
 {
@@ -109,12 +110,15 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
             }
 
             // this is a sitaution where the user's preferences have not been set up yet
-            if (userData.ComposeExtensionCardType == null)
+            if (userData.ComposeExtensionCardType == null && userData.ChannelId == DialogMatches.MsteamsChannelId)
             {
                 composeExtensionResponse = GetConfig();
                 return composeExtensionResponse;
             }
-
+            else // This is for multi hub support (outlook and office)
+            {
+                userData.ComposeExtensionCardType = DialogMatches.MultiHubComposeExtensionCardType;
+            }
             /**
             // this is the situation where the user has entered the word 'reset' and wants
             // to clear his/her settings
@@ -301,7 +305,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
         }
         public MessagingExtensionResponse GetSignin()
         {
-            string configUrl = this.azureSettings.Value.BaseUri + " /Page/composeExtensionSettings.html";
+            string configUrl = this.azureSettings.Value.BaseUri + "/Page/composeExtensionSettings.html";
             CardAction configExp = new CardAction(ActionTypes.OpenUrl, "Config", null, configUrl);
             List<CardAction> cardActions = new List<CardAction>();
             cardActions.Add(configExp);
@@ -344,7 +348,7 @@ namespace Microsoft.Teams.TemplateBotCSharp.Utility
         }
         public MessagingExtensionResponse GetConfig()
         {
-            string configUrl = this.azureSettings.Value.BaseUri + " /Page/composeExtensionSettings.html";
+            string configUrl = this.azureSettings.Value.BaseUri + "/Page/composeExtensionSettings.html";
             CardAction configExp = new CardAction(ActionTypes.OpenUrl, "Config", null, null, null, configUrl);
             List<CardAction> cardActions = new List<CardAction>();
             cardActions.Add(configExp);
