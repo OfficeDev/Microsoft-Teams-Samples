@@ -13,7 +13,7 @@ extensions:
 urlFragment: officedev-microsoft-teams-samples-bot-formatting-cards-nodejs
 
 ---
-# Different Formatting Cards
+## Different Formatting Cards
 
 This sample shows the feature where user can use different formatting on adaptive cards using bot.
 
@@ -43,7 +43,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 - While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
-	**NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
+**NOTE:** When you create your bot you will create an App ID and App password - make sure you keep these for later.
 
 3. Setup NGROK  
 Run ngrok - point to port 3978
