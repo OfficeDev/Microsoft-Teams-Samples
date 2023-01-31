@@ -14,7 +14,6 @@ urlFragment: officedev-microsoft-teams-samples-tab-deeplink-features-csharp
 
 ---
  ## Deep-Link Features
-
  This sample app for demonstrating for deep-link features using tab.
 
 - **Interaction with App**
