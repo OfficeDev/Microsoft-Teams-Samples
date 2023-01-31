@@ -1,6 +1,6 @@
 ﻿{
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.14",
+  "manifestVersion": "1.15",
   "version": "1.0.0",
   "id": "{{Microsoft-App-Id}}",
   "packageName": "com.microsoft.teams.differentformattingcards",
@@ -11,12 +11,12 @@
     "termsOfUseUrl": "https://www.microsoft.com/termsofuse"
   },
   "name": {
-    "short": "Different Formatting Cards",
-    "full": "Different Formatting Cards"
+    "short": "Cards Formatting",
+    "full": "Cards Formatting"
   },
   "description": {
-    "short": "Different Formatting Cards",
-    "full": "This sample demonstrates the use of different formatting on Cards."
+    "short": "This sample shows how to use different formatting on cards.",
+    "full": "This sample shows how to use different formatting on Adaptive Cards."
   },
   "icons": {
     "outline": "outline.png",

@@ -27,7 +27,7 @@ class BotFormattingCards extends ActivityHandler {
             const text = context.activity.text;
 
             // Create an array with the valid card options.
-            const adaptiveFormatCards = ['MentionSupport', 'InfoMasking', 'SampleCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji'];
+            const adaptiveFormatCards = ['MentionSupport', 'InfoMasking', 'FullWidthCard', 'StageViewImages', 'OverflowMenu', 'HTMLConnector', 'CardWithEmoji'];
 
             // If the `text` is in the Array, a valid card was selected and sends.
             if (adaptiveFormatCards.includes(text)) {
@@ -41,8 +41,8 @@ class BotFormattingCards extends ActivityHandler {
                         await context.sendActivity({ attachments: [this.sendInfoMasking()] });
                         break;
 
-                    case "SampleCard":
-                        await context.sendActivity({ attachments: [this.sendSampleAdaptiveCard()] });
+                    case "FullWidthCard":
+                        await context.sendActivity({ attachments: [this.SendfullWidthCard()] });
                         break;
 
                     case "StageViewImages":
@@ -101,9 +101,9 @@ class BotFormattingCards extends ActivityHandler {
     }
 
     /**
-    * Sends Sample AdaptiveCard with full width
+    * Sends Sample Adaptive Card With Full Width
     */
-    sendSampleAdaptiveCard() {
+    SendfullWidthCard() {
         return CardFactory.adaptiveCard(SampleAdaptiveCard);
     }
 
@@ -160,8 +160,8 @@ class BotFormattingCards extends ActivityHandler {
             },
             {
                 type: ActionTypes.ImBack,
-                title: 'SampleCard',
-                value: 'SampleCard'
+                title: 'FullWidthCard',
+                value: 'FullWidthCard'
             },
             {
                 type: ActionTypes.ImBack,

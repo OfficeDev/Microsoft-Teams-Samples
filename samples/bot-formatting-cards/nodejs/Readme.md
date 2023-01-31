@@ -15,11 +15,16 @@ urlFragment: officedev-microsoft-teams-samples-bot-formatting-cards-nodejs
 ---
 # Different Formatting Cards
 
-This sample shows the feature where user can send different formatting on cards using bot.
+This sample shows the feature where user can use different formatting on adaptive cards using bot.
 
 ## Interaction with app
 
 ![Types Of Cards](Images/DifferentFormattingCards.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Send different formatting on cards:** [Manifest](/samples/bot-formatting-cards/nodejs/demo-manifest/bot-formatting-cards.zip)
 
 ## Prerequisites
 
@@ -56,6 +61,39 @@ Run ngrok - point to port 3978
 
   - In a terminal, navigate to `samples/bot-formatting-cards/nodejs`
   - Update the `.env` configuration file and replace with placeholder `{{Microsoft-App-Id}}` and `{{Microsoft-App-Password}}`. (Note the MicrosoftAppId is the AppId created in step 1 (Setup AAD app registration in your Azure portal), the MicrosoftAppPassword is referred to as the "client secret" in step 1 (Setup for Bot) and you can always create a new client secret anytime.)
+
+**Update mentionSupport json**
+- Bots support user mention with the Azure AD Object ID and UPN, in addition to the existing IDs. The support for two new IDs is available in bots for text messages, Adaptive Cards body, and message extension response. Bots support the mention IDs in conversation and invoke scenarios. The user gets activity feed notification when being @mentioned with the IDs.
+
+   - Navigate to samples\bot-formatting-cards\nodejs\resources\mentionSupport.json
+      1) On line 14, replace {{new-Ids}}  
+      2) On line 23, replace {{Email-Id}}
+      3) On line 31, replace {{Microsoft-App-Id}}
+        - E.g. 
+        ```
+        "text": "Hi <at>Adele UPN</at>, <at>Adele Azure AD</at>"
+            }
+        ],
+        "msteams": {
+            "entities": [
+            {
+                "type": "mention",
+                "text": "<at>Adele UPN</at>",
+                "mentioned": {
+                "id": "AdeleV@contoso.onmicrosoft.com",
+                "name": "Adele Vance"
+                }
+            },
+            {
+                "type": "mention",
+                "text": "<at>Adele Azure AD</at>",
+                "mentioned": {
+                "id": "87d349ed-44d7-43e1-9a83-5f2406dee5bd",
+                "name": "Adele Vance"
+                }
+            }
+            ]
+        ```
 
 > In `index.js` file at line number 40, uncomment commented line for local debugging.
 
