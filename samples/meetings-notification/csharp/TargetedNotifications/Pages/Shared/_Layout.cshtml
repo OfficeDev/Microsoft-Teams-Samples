@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Microsoft Teams Targeted Meeting Notification Sample</title>
+
+    <script src="https://res.cdn.office.net/teams-js/2.7.1/js/MicrosoftTeams.min.js"
+            integrity="sha384-4Gy2G+qxzDVdrdemcVqKVQvaSK1Ghg3x6xcsaMLPc/pw7KPtiogHGM97LTWF2PWg"
+            crossorigin="anonymous"></script>
+
+    @RenderSection("scripts", required: false)
+</head>
+<body class="theme-light">
+    <div class="surface">
+        <div class="panel">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

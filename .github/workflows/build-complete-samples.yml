@@ -128,8 +128,8 @@ jobs:
               name: 'meeting-recruitment-app'
               version: '6.0.x'
 
-            - project_path: 'samples/meetings-content-bubble/csharp/ContentBubble/Content Bubble Bot.csproj'
-              name: 'meetings-content-bubble'
+            - project_path: 'samples/meetings-notification/csharp/TargetedNotifications/Targeted Meeting Notification Bot.csproj'
+              name: 'meetings-notification'
               version: '6.0.x'
 
             - project_path: 'samples/meetings-details-tab/csharp/DetailsTab/DetailsTab.csproj'
@@ -575,8 +575,8 @@ jobs:
               name: 'graph-rsc'
               version: '14.x'
 
-            - project_path: 'samples/meetings-content-bubble/nodejs'
-              name: 'meetings-content-bubblek'
+            - project_path: 'samples/meetings-notification/nodejs'
+              name: 'meetings-notification'
               version: '14.x'
 
             - project_path: 'samples/meetings-events/nodejs'
@@ -709,7 +709,7 @@ jobs:
 
             - project_path: 'samples/bot-proactive-messaging-teamsfx'
               name: 'bot-proactive-messaging-teamsfx'
-              version: '14.x'              
+              version: '18.x'              
 
             - project_path: 'samples/app-auth/nodejs'
               name: 'app-auth'
@@ -849,7 +849,12 @@ jobs:
 
             - project_path: 'samples/meeting-tabs/nodejs'
               name: 'meeting-tabs'
-              version: '16.x'
+              version: '18.x'
+
+            - project_path: 'samples/app-cache-meetings/nodejs'
+              name: 'app-cache-meetings'
+              version: '18.x'
+             
 
       fail-fast: false
     name: Build all "${{ matrix.name }}" nodejs

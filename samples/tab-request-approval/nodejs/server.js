@@ -35,13 +35,13 @@ app.get('/UserNotification', function (req, res) {
 // Pop-up dialog to ask for additional permissions, redirects to AAD page
 app.get('/auth/auth-start', function (req, res) {
   var clientId = process.env.ClientId;
-  res.render('./views/auth-start', { clientId: clientId });
+  res.render('./views/auth-start', { clientId: JSON.stringify(clientId) });
 });
 
 // End of the pop-up dialog auth flow, returns the results back to parent window
 app.get('/auth/auth-end', function (req, res) {
   var clientId = process.env.ClientId;
-  res.render('./views/auth-end', { clientId: clientId });
+  res.render('./views/auth-end', { clientId: JSON.stringify(clientId) });
 });
 
 app.get('/tabAuth', function (req, res) {

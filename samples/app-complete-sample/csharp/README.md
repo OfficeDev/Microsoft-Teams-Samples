@@ -101,16 +101,18 @@ NOTE: Teams does not work nor render things exactly like the Bot Emulator, but i
 
 7. Setup Manifest for Teams
 	- __*This step is specific to Teams.*__
-	    - **Edit** the `manifest.json` contained in the ./manifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+	    - **Edit** the `manifest.json` contained in the ./manifest or ./manifest_hub folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
 	    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
-	    - **Zip** up the contents of the `manifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+	    - **Zip** up the contents of the `manifest` or 'manifest_hub.json' folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
 	- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
 	   - Go to Microsoft Teams. From the lower left corner, select Apps
 	   - From the lower left corner, choose Upload a custom App
 	   - Go to your project directory, the ./manifest folder, select the zip folder, and choose Open.
 	   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
-   
+   		
+  **Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/manifest_hub` folder with the required values.
+
 Congratulations!!! You have just created and sideloaded your first Microsoft Teams app! Try adding a configurable tab, at-mentioning your bot by its registered name, or viewing your static tabs.<br><br>
 NOTE: Most of this sample app's functionality will now work. The only limitations are the authentication examples because your app is not registered with AAD nor Visual Studio Team Services.
 
@@ -158,15 +160,51 @@ This directory holds utility functions for the project.
 
 ## Running the sample.
 
-![ Hello ](template-bot-master-csharp/Images/Hello.png)
+![ Hello ](Images/Hello.png)
 
-![ Dilaog ](template-bot-master-csharp/Images/dialog.png)
+![ Dilaog ](Images/dialog.png)
 
-![ Quiz1 ](template-bot-master-csharp/Images/Quiz1.png)
+![ Quiz1 ](Images/Quiz1.png)
 
-![ Quiz2 ](template-bot-master-csharp/Images/Quiz2.png)
+![ Quiz2 ](Images/Quiz2.png)
 
-![ Tab ](template-bot-master-csharp/Images/static-tab.png)
+![ Tab ](Images/static-tab.png)
+
+## Outlook on the web
+
+- To view your app in Outlook on the web.
+
+- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
+
+**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+
+![InstallOutlook](Images/InstallOutlook.png)
+
+**Select your app icon to launch and preview your app running in Outlook on the web**
+
+![AppOutlook](Images/AppOutlook.png)
+
+**Select your app icon from message extension and find ward, it will show all options**
+
+![AppOutlook](Images/AppOutlook_msgext.png)
+
+**Note:** Similarly, you can test your application in the Outlook desktop app as well.
+
+## Office on the web
+
+- To preview your app running in Office on the web.
+
+- Log into office.com with test tenant credentials
+
+**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+
+![InstallOffice](Images/InstallOffice.png)
+
+**Select your app icon to launch your app in Office on the web**
+
+![AppOffice](Images/AppOffice.png) 
+
+**Note:** Similarly, you can test your application in the Office 365 desktop app as well.
 
 ## Contributing
 
