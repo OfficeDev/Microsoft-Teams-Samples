@@ -98,10 +98,23 @@ function onSchedulingDialogClick() {
             startTime: startTimeInput.value,
             subject: subjectInput.value.trim(),
         };
+        
+   // Open a scheduling dialog from your tab
+    if(calendar.isSupported()) {
 
-        microsoftTeams.app.openLink(`https://teams.microsoft.com/l/meeting/new?subject=${meetingDetails.subject}&startTime=${meetingDetails.startTime}&endTime=${meetingDetails.endTime}&content=${meetingDetails.content}&attendees=${meetingDetails.attendees}`)
+        const calendarPromise = calendar.composeMeeting({
+        attendees: meetingDetails.subject,
+        content: meetingDetails.startTime,
+        endTime: meetingDetails.endTime,
+        startTime: meetingDetails.content,
+        subject: meetingDetails.attendees});
+        calendarPromise.
+        then((result) => {/*Successful operation*/}).
+        catch((error) => {/*Unsuccessful operation*/});
     }
-}
+    else { /* handle case where capability isn't supported */ }
+        }
+    }
 
 // function to navigate chat with application
 function navigateToChatWithApplication() {

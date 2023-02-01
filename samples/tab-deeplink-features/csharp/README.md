@@ -111,6 +111,5 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
  ## Further reading
 
-- [Deep link to an application](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-link-application?tabs=teamsjs-v2)
-- [Deep link to Teams chat](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-link-teams)
+- [Create Deep link](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-links)
 

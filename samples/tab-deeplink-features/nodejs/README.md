@@ -68,7 +68,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
         ```bash
         npm install
         ```
-    - Navigate to `env.js` file and update MicrosoftAppID at placeholer `<<Microsoft-App-ID>>` which you have generated in Step 1 (App Registration creation) and update your AppId at placeholder `<<App-ID>>` (You can get it manually frrm [teams admin portal](https://admin.teams.microsoft.com/).
+    - Navigate to `env.js` file and update MicrosoftAppID at placeholer `<<Microsoft-App-ID>>` which you have generated in Step 1 (App Registration creation) and update your AppId at placeholder `<<App-ID>>` (You can get it manually from [teams admin portal](https://admin.teams.microsoft.com/).
     - [TeamsAdminPortal-AppID](Images/11.TeamsAdminPortal.png)
 
     - Run the App
@@ -118,6 +118,4 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
  ## Further reading
 
-- [Deep link to an application](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-link-application?tabs=teamsjs-v2)
-- [Deep link to Teams chat](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-link-teams)
-
+- [Create Deep link](https://learn.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/deep-links)
