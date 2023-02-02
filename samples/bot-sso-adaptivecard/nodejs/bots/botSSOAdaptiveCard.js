@@ -70,6 +70,7 @@ class BotSSOAdativeCard extends TeamsActivityHandler {
 
             var authentication = null;
 
+            // When adaptiveCard / action invoke activity from teams contains token in response to sso flow from earlier invoke.
             if (value["authentication"] != null) {
                 authentication = value["authentication"];
             }
@@ -78,15 +79,17 @@ class BotSSOAdativeCard extends TeamsActivityHandler {
                 // authToken and state are absent, handle verb
                 switch (verb) {
                     case "initiateSSO":
-                        //when token is absent in the invoke. We can initiate SSO in response to the invoke
+                        //when token is absent in the invoke.
                         return this.getInitialAdaptiveCard();
                 }
             }
             else {
-                // when token is present, send object authentication.
+                // when token is present, send authentication token.
                 return this.createAdaptiveCardInvokeResponseAsync(authentication, context);
             }
         }
+
+        return null;
     }
 
     /**
