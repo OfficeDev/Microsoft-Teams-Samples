@@ -17,7 +17,7 @@ const restify = require('restify');
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
 const { BotFrameworkAdapter } = require('botbuilder');
-const { ContentBubbleBot } = require('./bots/contentBubbleBot');
+const { TargetedInMeetingNotificationBot } = require('./bots/targetedMeetingNotificationBot');
 
 // Create adapter.
 // See https://aka.ms/about-bot-adapter to learn more about adapters.
@@ -47,7 +47,7 @@ adapter.onTurnError = async (context, error) => {
 };
 
 // Create the bot that will handle incoming messages.
-const bot = new ContentBubbleBot();
+const bot = new TargetedInMeetingNotificationBot();
 
 // Create HTTP server.
 var server = restify.createServer();
@@ -72,4 +72,3 @@ server.set("views", __dirname + "/views");
 server.engine('html',require('ejs').renderFile); 
 server.use(bodyParser.urlencoded({ extended:false}));
 server.get('/', (req,res)=>{res.render('index.html',{question: contentBubbleTitles.contentQuestion})});
-
