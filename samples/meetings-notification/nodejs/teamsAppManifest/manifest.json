@@ -20,7 +20,7 @@
   },
   "description": {
     "short": "Targeted In-Meeting Notification demo",
-    "full": " Sample app to demo how to send in meeting targeted notifications."
+    "full": "This sample app shows how to send in meeting targeted notifications."
   },
   "accentColor": "#FFFFFF",
   "bots": [
