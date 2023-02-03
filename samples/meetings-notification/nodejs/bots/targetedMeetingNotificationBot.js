@@ -52,6 +52,7 @@ class TargetedInMeetingNotificationBot extends TeamsActivityHandler {
       else {
         var json = JSON.stringify(context.activity.value);
         var out = JSON.parse(json);
+        
         if (out.action == 'inputselector') {
           contentBubbleTitles.contentQuestion = out.myReview;
           await this.contentBubble(context);
@@ -60,6 +61,7 @@ class TargetedInMeetingNotificationBot extends TeamsActivityHandler {
           await context.sendActivity(context.activity.from.name + " : " + "**" + out.myReview + "**" + " for " + "'" + out.action + "'");
         }
       }
+
       await next();
     });
   };
@@ -142,11 +144,13 @@ class TargetedInMeetingNotificationBot extends TeamsActivityHandler {
   createQuestionAdaptiveCard(myText) {
     var templatePayload = templateJson;
     var template = new ACData.Template(templatePayload);
+    
     var cardPayload = template.expand({
       $root: {
         name: myText
       }
     });
+
     return CardFactory.adaptiveCard(cardPayload);
   }
 
@@ -154,11 +158,13 @@ class TargetedInMeetingNotificationBot extends TeamsActivityHandler {
   createMembersAdaptiveCard(members) {
     var templatePayload = notificationCardJson;
     var template = new ACData.Template(templatePayload);
+
     var cardPayload = template.expand({
       $root: {
         members: members
       }
     });
+
     return CardFactory.adaptiveCard(cardPayload);
   }
 }
