@@ -59,7 +59,7 @@ class TeamsBot extends TeamsActivityHandler {
                             "type": "tab/tabInfoAction",
                             "tabInfo": {
                                 "contentUrl":  process.env.ApplicationBaseUrl + "/tab?openInTeams=true",
-                                "websiteUrl": process.env.ApplicationBaseUrl + "/tab?openInTeams=false",
+                                "websiteUrl": process.env.ApplicationBaseUrl + "/tab?openInTeams=true",
                                 "name": "Stage view",
                                 "entityId": "entityId"
                              }
