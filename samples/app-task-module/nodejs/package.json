@@ -37,6 +37,7 @@
     "request": "^2.88.0",
     "serve-favicon": "^2.5.0",
     "stjs": "0.0.5",
+    "tsify": "^5.0.4",
     "winston": "^2.4.4"
   },
   "devDependencies": {

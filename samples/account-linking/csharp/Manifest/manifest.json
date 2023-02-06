@@ -1,0 +1,95 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "version": "1.0.0",
+  "manifestVersion": "1.12",
+  "id": "19b5d434-5d4b-47a8-800f-446b6a010ba2",
+  "name": {
+    "short": "GitHub account linking sample",
+    "full": "GitHub account linking sample"
+  },
+  "developer": {
+    "name": "Contoso",
+    "mpnId": "",
+    "websiteUrl": "https://contoso.com",
+    "privacyUrl": "https://contoso.com/privacy",
+    "termsOfUseUrl": "https://contoso.com/tou"
+  },
+  "description": {
+    "short": "An example of linking a user's M365 identity with a GitHub identity",
+    "full": "An example of linking a user's M365 identity with a GitHub identity so they only need to log in once across features (bot/messaging extension/tab) and devices"
+  },
+  "icons": {
+    "outline": "outline.png",
+    "color": "color.png"
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+    {
+      "entityId": "conversations",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "entityId": "f8ccc905-6e42-47d4-a488-52b20ba2c8be",
+      "name": "Personal Tab",
+      "contentUrl": "{{ Base Url }}",
+      "websiteUrl": "{{ Base Url }}",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "entityId": "about",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "bots": [
+    {
+      "botId": "{{ Bot Id here }}",
+      "scopes": [
+        "personal"
+      ],
+      "isNotificationOnly": false,
+      "supportsCalling": false,
+      "supportsVideo": false,
+      "supportsFiles": false
+    }
+  ],
+  "composeExtensions": [
+    {
+      "botId": "{{ Bot Id here }}",
+      "commands": [
+        {
+          "id": "search",
+          "type": "query",
+          "title": "Search",
+          "description": "Search",
+          "initialRun": true,
+          "fetchTask": false,
+          "context": [
+            "commandBox",
+            "compose"
+          ],
+          "parameters": [
+            {
+              "name": "param1",
+              "title": "parameterTitle",
+              "description": "parameterDescription",
+              "inputType": "Text"
+            }
+          ]
+        }
+      ],
+      "canUpdateConfiguration": true,
+      "messageHandlers": []
+    }
+  ],
+  "validDomains": [{{Base Url Domain}}],
+  "webApplicationInfo": {
+    "id": "{{ Azure Ad Application here }}",
+    "resource": "api://{{ Tab domain here }}/botid-{{ Bot Id here }}"
+  }
+}

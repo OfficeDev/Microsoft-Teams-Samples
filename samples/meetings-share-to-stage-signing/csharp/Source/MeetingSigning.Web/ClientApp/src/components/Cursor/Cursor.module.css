@@ -1,0 +1,14 @@
+.cursor {
+  position: absolute;
+  z-index: 9999;
+  display: flex;
+}
+
+.cursorText {
+  color: #A33D2A;
+  max-width: 10rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: bold;
+}

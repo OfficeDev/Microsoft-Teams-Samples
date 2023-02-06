@@ -2,33 +2,33 @@
     'use strict';
 
     // Call the initialize API first
-    microsoftTeams.initialize();
-
-    // Check the initial theme user chose and respect it
-    microsoftTeams.getContext(function (context) {
-        if (context && context.theme) {
-            setTheme(context.theme);
-        }
-    });
-
-    // Handle theme changes
-    microsoftTeams.registerOnThemeChangeHandler(function (theme) {
-        setTheme(theme);
-    });
-
-    // Save configuration changes
-    microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
-        // Let the Microsoft Teams platform know what you want to load based on
-        // what the user configured on this page
-        microsoftTeams.settings.setSettings({
-            contentUrl: createTabUrl(), // Mandatory parameter
-            entityId: createTabUrl() // Mandatory parameter
+    microsoftTeams.app.initialize().then(() => {
+        // Check the initial theme user chose and respect it
+        microsoftTeams.app.getContext().then((context) => {
+            if (context && context.app.theme) {
+                setTheme(context.app.theme);
+            }
         });
 
-        // Tells Microsoft Teams platform that we are done saving our settings. Microsoft Teams waits
-        // for the app to call this API before it dismisses the dialog. If the wait times out, you will
-        // see an error indicating that the configuration settings could not be saved.
-        saveEvent.notifySuccess();
+        // Handle theme changes
+        microsoftTeams.app.registerOnThemeChangeHandler(function (theme) {
+            setTheme(theme);
+        });
+
+        // Save configuration changes
+        microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+            // Let the Microsoft Teams platform know what you want to load based on
+            // what the user configured on this page
+            microsoftTeams.pages.config.setConfig({
+                contentUrl: createTabUrl(), // Mandatory parameter
+                entityId: createTabUrl() // Mandatory parameter
+            });
+
+            // Tells Microsoft Teams platform that we are done saving our settings. Microsoft Teams waits
+            // for the app to call this API before it dismisses the dialog. If the wait times out, you will
+            // see an error indicating that the configuration settings could not be saved.
+            saveEvent.notifySuccess();
+        });
     });
 
     // Logic to let the user configure what they want to see in the tab being loaded
@@ -39,7 +39,7 @@
                 var selectedDomain = this[this.selectedIndex].value;
                 // This API tells Microsoft Teams to enable the 'Save' button. Since Microsoft Teams always assumes
                 // an initial invalid state, without this call the 'Save' button will never be enabled.
-                microsoftTeams.settings.setValidityState(selectedDomain !== '' && selectedDomain !== null && selectedDomain!==undefined);
+                microsoftTeams.pages.config.setValidityState(selectedDomain !== '' && selectedDomain !== null && selectedDomain!==undefined);
             };
         }
     });

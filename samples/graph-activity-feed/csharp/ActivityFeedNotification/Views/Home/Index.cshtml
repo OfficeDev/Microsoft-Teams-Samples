@@ -10,14 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/index.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <script src="@("https://unpkg.com/@microsoft/teams-js@1.4.1/dist/MicrosoftTeams.min.js")"></script>
     @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">*@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-    <script src="https://statics.teams.microsoft.com/sdk/v1.5.2/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
@@ -51,7 +49,6 @@
         });
 
         function SendNotificationToUser() {
-            debugger;
             var isValid = true;
             $('#title,#description').each(function () {
                 if ($.trim($(this).val()) == '') {
@@ -68,7 +65,6 @@
                 }
             });
             if (isValid == false) {
-                debugger;
                 e.preventDefault();
                 return false;
             }
@@ -90,7 +86,6 @@
             return true;
         };
         function customTopicNotification() {
-            // debugger;
             var isValid = true;
 
             $('#DeployementTitle,#DeploymentDescription').each(function () {
@@ -108,7 +103,6 @@
                 }
             });
             if (isValid == false) {
-                debugger;
                 e.preventDefault();
                 return false;
             }

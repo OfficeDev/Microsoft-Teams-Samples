@@ -3,7 +3,9 @@
 
 import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Card, Flex, Text, Button, CardHeader, CardBody, Image, Layout, Carousel } from '@fluentui/react-northstar'
+import { Text, Button} from '@fluentui/react-components'
+import { Card, CardHeader } from "@fluentui/react-components/unstable"
+import { CardBody } from 'reactstrap';
 
 /**
  * The 'GetLocationDesktop' component
@@ -15,14 +17,13 @@ const GetLocationDesktop = () => {
 
     useEffect(() => {
         // initializing microsoft teams sdk
-        microsoftTeams.initialize()
+        microsoftTeams.app.initialize()
     })
 
     // Method to validate before capturing media
-    function getCurrentLocation() {
-        debugger;
+    function getCurrentLocation() {        
         navigator.permissions.query({ name: 'geolocation' }).then(function (result) {
-            if (result.state == 'denied') {
+            if (result.state === 'denied') {
                 setShowComments(true);
             }
             else {
@@ -43,40 +44,39 @@ const GetLocationDesktop = () => {
     return (
         <>
             {/* Card for capturing single image */}
-            <Flex gap="gap.large">
-                <Card>
-                    <CardHeader>
-                        <Text content="Get Location" weight="bold" />
-                    </CardHeader>
+            <Card>
+                <div>
+                <Text weight='bold' as="h1">Get Location</Text>
+                  
                     <CardBody>
-                        <Flex column gap="gap.small">
-                            <Text content="You need to enable these permissions using App permissions icon at the top for these permissions to take effect" />
-                            <Text content="After you change the app's device permissions, you will be prompted to reload the application in Teams." />
-                            <Text content="SDK used: " weight="semibold" />
-                            <Text content="navigator, microsoftTeams" />
-                            <Text content="Method: " weight="semibold" />
-                            <Text content="navigator.geolocation.getCurrentPosition, teams.location" />
-                            <Button content="Get Location" onClick={() => getCurrentLocation()} disabled={showComments} />
-                        </Flex>
+                        <div className='flex columngap'>
+                            <Text>You need to enable these permissions using App permissions icon at the top for these permissions to take effect</Text>
+                            <Text>After you change the app's device permissions, you will be prompted to reload the application in Teams.</Text>
+                            <Text weight="semibold">SDK used:</Text>
+                            <Text> navigator, microsoftTeams</Text>
+                            <Text weight="semibold">Method</Text>
+                            <Text>navigator.geolocation.getCurrentPosition, teams.location</Text>
+                            <Button onClick={() => getCurrentLocation()} disabled={showComments}>Get Location</Button>
+                        </div>
                     </CardBody>
                     {geoLocationValue !== '' &&
-                        <Text styles={{ "word-wrap": "break-word" }} content={geoLocationValue}></Text>}
-                </Card>
+                        <Text> {geoLocationValue}</Text>}
+                </div>
                 {showComments &&
-                    <Card>
+                    <div>
                         <CardHeader>
-                            <Text content="Please note:" weight="bold" />
+                            <Text weight="bold">Please Note</Text>
                         </CardHeader>
                         <CardBody>
-                            <Flex column gap="gap.small">
-                                <Text error content="For us to fetch your location, we will need to enable location permission in Teams." />
-                                <Text error content="For Personal apps and task module dialogs, the App permissions option is available in the upper-right corner of the page." />
-                                <Text error content="For Chats, channel, or meeting tabs, the App permissions option is available in the dropdown of the tab." />
-                            </Flex>
+                            <div>
+                                <Text>For us to fetch your location, we will need to enable location permission in Teams.</Text>
+                                <Text>For Personal apps and task module dialogs, the App permissions option is available in the upper-right corner of the page.</Text>
+                                <Text>For Chats, channel, or meeting tabs, the App permissions option is available in the dropdown of the tab.</Text>
+                            </div>
                         </CardBody>
-                    </Card>
+                    </div>
                 }
-            </Flex>
+            </Card>
         </>
     );
 }

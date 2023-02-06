@@ -1,7 +1,6 @@
 import axios from "axios";
 import AuthService from "./Auth";
 import ContextService from "./Context";
-
 const defaultOptions = {
     timeout: 10000,
 }
@@ -62,9 +61,9 @@ export default class MeetingTokenService {
                 console.log(context);
                 return axios.get('/api/meeting/summary', {
                     params: {
-                        meetingId: context.meetingId,
-                        tenantId: context.tid,
-                        userId: context.userObjectId
+                        meetingId: context.meeting.id,
+                        tenantId: context.user.tenant.id,
+                        userId: context.user.id
                     },
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -92,9 +91,9 @@ export default class MeetingTokenService {
             .then(([token, context]) => {
                 return axios.get('/api/me', {
                     params: {
-                        meetingId: context.meetingId,
-                        tenantId: context.tid,
-                        userId: context.userObjectId
+                        meetingId: context.meeting.id,
+                        tenantId: context.user.tenant.id,
+                        userId: context.user.id
                     },
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -121,9 +120,9 @@ export default class MeetingTokenService {
             .then(([token, context]) => {
                 return axios.post('/api/me/ack-token', {}, {
                     params: {
-                        meetingId: context.meetingId,
-                        tenantId: context.tid,
-                        userId: context.userObjectId
+                        meetingId: context.meeting.id,
+                        tenantId: context.user.tenant.id,
+                        userId: context.user.id
                     },
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -150,9 +149,9 @@ export default class MeetingTokenService {
             .then(([token, context]) => {
                 return axios.post('/api/user/skip', {}, {
                     params: {
-                        meetingId: context.meetingId,
-                        tenantId: context.tid,
-                        userId: context.userObjectId
+                        meetingId: context.meeting.id,
+                        tenantId: context.user.tenant.id,
+                        userId: context.user.id
                     },
                     headers: {
                         Authorization: `Bearer ${token}`

@@ -37,6 +37,7 @@ namespace TabRequestApproval.Controllers
         /// <returns>current View</returns
         public IActionResult End()
         {
+            ViewBag.AzureClientId = _configuration["AzureAd:MicrosoftAppId"];
             return View();
         }
     }

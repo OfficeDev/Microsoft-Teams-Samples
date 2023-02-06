@@ -18,8 +18,8 @@ namespace AppCompleteAuth.Dialogs
         public BotSsoAuthDialog(string configuration, ConcurrentDictionary<string, Token> token) : base(nameof(BotSsoAuthDialog), configuration)
         {
             _Token = token;
-            AddDialog(new TokenExchangeOAuthPrompt(
-                 nameof(TokenExchangeOAuthPrompt),
+            AddDialog(new OAuthPrompt(
+                 nameof(OAuthPrompt),
                  new OAuthPromptSettings
                  {
                      ConnectionName = ConnectionName,
@@ -43,7 +43,7 @@ namespace AppCompleteAuth.Dialogs
 
         private async Task<DialogTurnResult> PromptStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            return await stepContext.BeginDialogAsync(nameof(TokenExchangeOAuthPrompt), null, cancellationToken);
+            return await stepContext.BeginDialogAsync(nameof(OAuthPrompt), null, cancellationToken);
         }
 
         // Invoked after success of prompt step async.

@@ -6,12 +6,10 @@ import reportWebVitals from "./report-web-vitals";
 import { HashRouter } from "react-router-dom";
 
 // Initialize the Microsoft Teams SDK
-microsoftTeams.initialize();
+microsoftTeams.app.initialize();
 
 ReactDOM.render(
-  <HashRouter>
-    <App />
-  </HashRouter>,
+    <App />,
   document.getElementById("root")
 );
 

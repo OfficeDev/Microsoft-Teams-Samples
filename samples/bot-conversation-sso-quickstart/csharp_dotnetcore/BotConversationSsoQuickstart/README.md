@@ -1,0 +1,94 @@
+---
+page_type: sample
+description: Messaging and conversation event handling hello world with SSO.
+products:
+- office-teams
+- office
+- office-365
+languages:
+- csharp
+extensions:
+ contentType: samples
+ createdDate: "07-07-2021 13:38:26"
+urlFragment: officedev-microsoft-teams-samples-bot-conversation-sso-quickstart-csharp_dotnetcore
+---
+
+# Teams Conversation Bot SSO quick-start
+
+Teams Bot with SSO using Bot Framework v4.
+
+This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to get started with SSO in a bot for Microsoft Teams.
+
+The focus of this sample is how to use the Bot Framework support for OAuth SSO in your bot. Teams behaves slightly differently than other channels in this regard. Specifically an Invoke Activity is sent to the bot rather than the Event Activity used by other channels. _This Invoke Activity must be forwarded to the dialog if the OAuthPrompt is being used._ This is done by subclassing the ActivityHandler and this sample includes a reusable TeamsActivityHandler. This class is a candidate for future inclusion in the Bot Framework SDK.
+
+The sample uses the bot authentication capabilities in [Azure Bot Service](https://docs.botframework.com), providing features to make it easier to develop a bot that authenticates users to various identity providers such as Azure AD (Azure Active Directory), GitHub, Uber, etc. The OAuth token is then used to make basic Microsoft Graph queries.
+
+> IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
+
+## Interaction with app
+
+![Teams Conversation Bot SSO Sample](Images/BotConversationSsoQuickStart.gif)
+
+## Prerequisites
+
+-  Microsoft Teams is installed and you have an account (not a guest account)
+-  [.Net](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) version 6.0
+-  [ngrok](https://ngrok.com/download) or equivalent tunneling solution
+-  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+
+## Setup
+
+> Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
+> the Teams service needs to call into the bot.
+
+1. Setup for Bot SSO
+
+Refer to [Bot SSO Setup document](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/BotSSOSetup.md).
+
+2. Setup NGROK
+      - Run ngrok - point to port 3978
+
+	```bash
+	# ngrok http -host-header=rewrite 3978
+	```   
+3. Setup for code
+
+  - Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+   - Modify the `/appsettings.json` and fill in the following details:
+     - `{{TODO: MicrosoftAppId}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
+     - `{{ TODO: ClientSecret}}` - Generated from Step 1, also referred to as Client secret
+     - `{{ TODO: ConnectionName}}` - Generated from Step 1, Connection Setting.
+  
+  - If you are using Visual Studio
+    - Launch Visual Studio
+    - File -> Open -> Project/Solution
+    - Navigate to `samples/bot-conversation-sso-quickstart/csharp_dotnetcore` folder
+    - Select `BotConversationSsoQuickstart.sln` file and open it in Visual Studio
+    - Press `F5` to run this project
+    
+4.  Manually update the manifest.json
+    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `appsettings.json` file) *everywhere* you see the place holder string `{TODO: MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`). The `ConnectionName` is the name of OAuth Connection you configured in step3.
+    - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
+    - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
+
+**Note**: If you are facing any issue in your app, [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/csharp_dotnetcore/BotConversationSsoQuickstart/AdapterWithErrorHandler.cs#L37) and put your debugger for local debug.
+
+
+## Running the sample
+
+![bot signin card](Images/BotSignInCard.png)
+
+![user details card](Images/UserDetailsCard.png)
+
+![token](Images/Token.png)
+
+## Further reading
+
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Azure Portal](https://portal.azure.com)
+- [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MessageBar, MessageBarType } from '@fluentui/react/lib/MessageBar';
+import { Text } from '@fluentui/react-components';
 import { withMeetingTokenService } from '../context/MeetingServiceProvider';
 
 class ErrorMessageBar extends Component {
@@ -9,8 +9,7 @@ class ErrorMessageBar extends Component {
         }
         return (
             <div >
-                <MessageBar messageBarType={MessageBarType.error} className="error-bar" >{this.props.msg}</MessageBar>
-                
+                <Text error className="error-bar" >{this.props.msg}</Text>
             </div>
         );
     }

@@ -17,23 +17,23 @@
             <div class="header-inner-container">
                 <div style="display: flex; align-content: center;font-size: 18px;">Press save to continue</div>
             </div>
-            <script src="https://unpkg.com/@microsoft/teams-js/dist/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
             <link rel="stylesheet" type="text/css" href="../Styles/config.css">
         </header>
-        <script src="https://statics.teams.microsoft.com/sdk/v1.7.0/js/MicrosoftTeams.min.js"></script>
+        <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"></script>
         <script>
-            microsoftTeams.initialize();        
-            microsoftTeams.appInitialization.notifySuccess();
-            microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
-                microsoftTeams.settings.setSettings({
-                    entityID: "Rsc demo",
-                    contentUrl: `${window.location.origin}/rscdemo?tenantId={tid}`,
-                    suggestedTabName: "Rsc demo",
-                    websiteUrl: `${window.location.origin}/rscdemo?tenantId={tid}`,
+            microsoftTeams.app.initialize().then(() => {
+                microsoftTeams.app.notifySuccess();
+                microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+                    microsoftTeams.pages.config.setConfig({
+                        entityID: "Rsc demo",
+                        contentUrl: `${window.location.origin}/rscdemo?tenantId={tid}`,
+                        suggestedTabName: "Rsc demo",
+                        websiteUrl: `${window.location.origin}/rscdemo?tenantId={tid}`,
+                    });
+                    saveEvent.notifySuccess();               
                 });
-                saveEvent.notifySuccess();               
+                microsoftTeams.pages.config.setValidityState(true);
             });
-            microsoftTeams.settings.setValidityState(true);        
         </script>
 </body>
 

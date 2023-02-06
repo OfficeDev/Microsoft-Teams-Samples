@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import * as microsoftTeams from "@microsoft/teams-js";
+import { app } from "@microsoft/teams-js";
 import { Flex, Button, Text, Input } from '@fluentui/react-northstar'
 import { SendIcon } from '@fluentui/react-icons-northstar'
 import "./configure-message.css"
@@ -10,7 +10,7 @@ import Editor from '@monaco-editor/react';
 const ConfigureMessage = () => {
 
     React.useEffect(() => {
-        microsoftTeams.initialize();
+        app.initialize();
     }, [])
 
     const [url, setUrl] = React.useState("");

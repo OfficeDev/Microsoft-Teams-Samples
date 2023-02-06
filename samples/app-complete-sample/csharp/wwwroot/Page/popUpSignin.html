@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>    
+</head>
+<!--Purpose of this login html page is to show fake authentication when user clicks on SignIn Action -->
+<!--This login page will do nothing, except when user will click on Login page it will post back to Main controller -->
+<body>
+    <div>
+        User Name : <input type="text" />
+    </div>
+    <br />
+    <div>
+        Password : <input type="password" />
+    </div>
+
+    <button onClick="submit()">Login</button> 
+
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        microsoftTeams.app.initialize();
+        function submit()
+        {
+            microsoftTeams.authentication.notifySuccess('PopUpSignInAuthenticationSuccess');
+        }
+    </script>
+</body>
+</html>

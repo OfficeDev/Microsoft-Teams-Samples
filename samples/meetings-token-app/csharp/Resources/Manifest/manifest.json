@@ -1,12 +1,12 @@
 {
-  "$schema": "https://raw.githubusercontent.com/OfficeDev/microsoft-teams-app-schema/preview/DevPreview/MicrosoftTeams.schema.json",
-  "manifestVersion": "devPreview",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
   "version": "1.0.0",
   "id": "[MicrosoftAppId]",
   "packageName": "com.microsoft.teams.sample.meetingtoken",
   "webApplicationInfo": {
     "id": "[MicrosoftAppId]",
-    "resource": "api://[WebAppDomain]"
+    "resource": "api://[WebAppDomain]/[MicrosoftAppId]"
   },
   "developer": {
     "name": "[companyName]",
@@ -28,7 +28,7 @@
   "accentColor": "#ffffff",
   "configurableTabs": [
     {
-      "configurationUrl": "https://[WebAppDomain]/configure.html",
+      "configurationUrl": "https://[WebAppDomain]/config",
       "canUpdateConfiguration": true,
       "scopes": [
         "groupchat"
@@ -70,5 +70,27 @@
         }
       ]
     }
-  ]
+  ],
+  "authorization": {
+    "permissions": {
+      "resourceSpecific": [
+        {
+          "name": "MeetingStage.Write.Chat",
+          "type": "Delegated"
+        },
+        {
+          "name": "ChannelMeetingStage.Write.Group",
+          "type": "Delegated"
+        },
+        {
+          "name": "LiveShareSession.ReadWrite.Chat",
+          "type": "Delegated"
+        },
+        {
+          "name": "LiveShareSession.ReadWrite.Group",
+          "type": "Delegated"
+        }
+      ]
+    }
+  }
 }

@@ -1,0 +1,21 @@
+{
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "Input.Toggle",
+      "title": "I confirm that I am ${name}",
+      "value": "${name}",
+      "isRequired": true,
+      "id": "confirmation",
+      "valueOn": "${name}"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.Submit",
+      "title": "Done"
+    }
+  ],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4"
+}

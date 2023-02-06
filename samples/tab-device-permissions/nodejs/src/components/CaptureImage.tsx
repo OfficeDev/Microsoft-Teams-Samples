@@ -3,26 +3,29 @@
 
 import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Card, Flex, Text, Button, CardHeader, CardBody, Image, Layout, Carousel } from '@fluentui/react-northstar'
+import { Text, Button,  Image } from '@fluentui/react-components'
+import { Card, CardHeader } from "@fluentui/react-components/unstable"
+import { CardBody} from 'reactstrap';
+import { Carousel } from 'rsuite';
 
 /**
  * The 'CaptureImage' component
  * of your app.
  */
+
 const CaptureImage = () => {
-  const [capturedImage, setCapturedImage] = useState('');
+  const [capturedImage] = useState('');
   const [capturedImages, setCapturedImages] = useState<any[]>([]);
 
   useEffect(() => {
     // initializing microsoft teams sdk
-    microsoftTeams.initialize()
+    microsoftTeams.app.initialize()
   })
 
   // Method to validate before capturing media
   function captureMultipleImages(mediaCount: number) {
     // Method to ask for image capture permission and then select media
-
-    let imageProp: microsoftTeams.media.ImageProps = {
+       let imageProp: microsoftTeams.media.ImageProps = {
       sources: [microsoftTeams.media.Source.Camera, microsoftTeams.media.Source.Gallery],
       startMode: microsoftTeams.media.CameraStartMode.Photo,
       ink: false,
@@ -31,12 +34,13 @@ const CaptureImage = () => {
       enableFilter: true,
     };
 
+   
     let mediaInput: microsoftTeams.media.MediaInputs = {
       mediaType: microsoftTeams.media.MediaType.Image,
       maxMediaCount: mediaCount,
       imageProps: imageProp
     };
-
+    
     microsoftTeams.media.selectMedia(mediaInput, (error: microsoftTeams.SdkError, attachments: microsoftTeams.media.Media[]) => {
       // If there's any error, an alert shows the error message/code
       if (error) {
@@ -48,21 +52,12 @@ const CaptureImage = () => {
       } else if (attachments) {
 
         // creating selected images array to show preview 
-        const imageArray: any[] = attachments.map((item, index) => {
+        const imageArray: any[] = attachments.map((item, index) => {         
           return (
-            {
-              key: index,
-              id: index,
-              content: (
-                <Image
-                  src={"data:" + item.mimeType + ";base64," + item.preview}
-                  fluid
-                  alt={'image'}
+                <img alt='img'
+                  src={"data:" + item.mimeType + ";base64," + item.preview}  
                 />
-              ),
-              'aria-label': "images",
-            }
-          )
+              )
         })
         setCapturedImages(imageArray);
       }
@@ -73,49 +68,39 @@ const CaptureImage = () => {
     <>
       {/* Card for capturing single image */}
       <Card>
-        <CardHeader>
-          <Text content="Capture Image" weight="bold" />
-        </CardHeader>
+        
+          <Text weight="bold">Capture Image</Text>
+        
         <CardBody>
-          <Flex column gap="gap.small">
-            <Text content="Checks for permission before capturing image." />
-            <Button content="Capture Image" onClick={() => captureMultipleImages(1)} />
-          </Flex>
+          <div className='columngap'>
+            <Text>Checks for permission before capturing image.</Text>
+            <Button onClick={() => captureMultipleImages(1)} >Capture Image</Button>
+          </div>
         </CardBody>
         {capturedImage !== '' &&
-          <Layout styles={{ maxWidth: '150px', }}
-            renderMainArea={() => (
-              <Image
-                fluid
+          <div className="wrapper">
+          
+          <div className="box2"> renderMainArea={() => (
+              <Image                
                 src={"data:image/png;base64," + capturedImage}
               />
-            )} />}
+            )}</div>          
+        </div>
+        }
       </Card>
-
       {/* Card for showing multiple images */}
       <Card>
         <CardHeader>
-          <Text content="Capture Multiple Image (Mobile Only)" weight="bold" />
+          <Text weight="bold">Capture Multiple Image (Mobile Only)</Text>
         </CardHeader>
         <CardBody>
-          <Flex column gap="gap.small">
-            <Button content="Capture multiple images" onClick={() => captureMultipleImages(2)} />
-          </Flex>
-          {capturedImages.length !== 0 &&
-            <Carousel
-              ariaRoleDescription="carousel"
-              ariaLabel="Selected images"
-              navigation={{
-                'aria-label': 'selected images',
-                items: capturedImages.map((item, index) => ({
-                  key: index,
-                  'aria-controls': item.id,
-                  content: item.thumbnail,
-                })),
-              }}
-              items={capturedImages}
-              getItemPositionText={(index, size) => `${index + 1} of ${size}`}
-            />
+          <div>
+            <Button onClick={() => captureMultipleImages(2)}>Capture multiple images</Button>
+          </div>           
+          {capturedImages.length !== 0 &&             
+            <Carousel className="custom-slider">             
+            {capturedImages}
+          </Carousel>
           }
         </CardBody>
       </Card>

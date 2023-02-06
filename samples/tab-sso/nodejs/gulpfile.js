@@ -9,7 +9,7 @@ gulp.task('clean', function(done) {
 });
 
 gulp.task('generate-manifest', function(done) {
-    gulp.src(['src/static/images/contoso*', 'src/manifest.json'])
+    gulp.src(['src/images/outline*', 'src/images/color*', 'src/manifest.json'])
         .pipe(zip('aadSsoTabSample.zip'))
         .pipe(gulp.dest('manifest'), done);
     done();

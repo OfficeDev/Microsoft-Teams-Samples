@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tab people picker</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script
+      src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"
+      integrity="sha384-QtTBFeFlfRDZBfwHJHYQp7MdLJ2C3sfAEB1Qpy+YblvjavBye+q87TELpTnvlXw4"
+      crossorigin="anonymous">
+    </script>
+    <script>
+        microsoftTeams.app.initialize().then(() => {
+                microsoftTeams.app.notifySuccess();
+                microsoftTeams.pages.config.registerOnSaveHandler(function (saveEvent) {
+                    microsoftTeams.pages.config.setConfig({
+                        entityID: "Tab",
+                        contentUrl: `${window.location.origin}/index`,
+                        suggestedTabName: "Tab",
+                        websiteUrl: `${window.location.origin}/index`,
+                    }).then(() => {
+                        saveEvent.notifySuccess();
+                    });
+                });
+                microsoftTeams.pages.config.setValidityState(true);
+            });
+    </script>
+</head>
+<body>
+    <div class="font-semibold font-title" id="textConfiguration"></div>
+    <p>
+        <div>
+            Please select save to add the tab.
+        </div>
+    </p>
+</body>
+</html>

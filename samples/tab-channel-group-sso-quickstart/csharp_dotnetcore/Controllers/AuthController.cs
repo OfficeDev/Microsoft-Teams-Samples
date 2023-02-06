@@ -34,6 +34,7 @@ namespace TeamsTabSSO.Controllers
         /// <returns>current View</returns>
         public IActionResult End()
         {
+            ViewBag.AzureClientId = _configuration["AzureAd:ClientId"];
             return View();
         }
     }

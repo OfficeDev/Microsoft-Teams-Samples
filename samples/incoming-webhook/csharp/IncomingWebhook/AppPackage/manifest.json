@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.11",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+ "manifestVersion": "1.12",
   "version": "1.0.1",
   "id": "{{Manifest-id}}",
   "packageName": "com.teams.incomingwebhook",
@@ -27,8 +27,8 @@
     {
       "entityId": "incomingwebhook",
       "name": "Incoming webhook",
-      "contentUrl": "https://{{Domain Name}}/configure-message",
-      "websiteUrl": "https://{{Domain Name}}/configure-message",
+      "contentUrl": "https://{{Domain-Name}}/configure-message",
+      "websiteUrl": "https://{{Domain-Name}}/configure-message",
       "scopes": [
         "personal"
       ]
@@ -40,6 +40,6 @@
   ],
   "validDomains": [
     "*.ngrok.io",
-    "<<Domain Name>>"
+    "<<Domain-Name>>"
   ]
 }

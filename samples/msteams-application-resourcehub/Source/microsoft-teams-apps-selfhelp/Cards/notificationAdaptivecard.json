@@ -1,0 +1,625 @@
+{
+  "type": "AdaptiveCard",
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.0",
+  "body": [
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "${CardTitle}",
+          "wrap": true,
+          "weight": "Bolder",
+          "size": "Large"
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 0}",
+          "items": [
+            {
+              "size": "Medium",
+              "type": "Image",
+              "url": "${learningEntity[0].TileImageLink}",
+              "$when": "${Count > 0}"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 0}",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${learningEntity[0].Title}",
+              "weight": "Bolder",
+              "wrap": true,
+              "$when": "${Count > 0}"
+            },
+            {
+              "type": "TextBlock",
+              "spacing": "None",
+              "text": "${learningEntity[0].ItemType}",
+              "isSubtle": true,
+              "wrap": true,
+              "$when": "${Count > 0}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 1}",
+          "items": [
+            {
+              "size": "Medium",
+              "type": "Image",
+              "url": "${learningEntity[1].TileImageLink}",
+              "$when": "${Count > 1}"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 1}",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${learningEntity[1].Title}",
+              "weight": "Bolder",
+              "wrap": true,
+              "$when": "${Count > 1}"
+            },
+            {
+              "type": "TextBlock",
+              "spacing": "None",
+              "text": "${learningEntity[1].ItemType}",
+              "isSubtle": true,
+              "wrap": true,
+              "$when": "${Count > 1}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 2}",
+          "items": [
+            {
+              "size": "Medium",
+              "type": "Image",
+              "url": "${learningEntity[2].TileImageLink}",
+              "$when": "${Count > 2}"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${learningEntity[2].Title}",
+              "weight": "Bolder",
+              "wrap": true,
+              "$when": "${Count > 2}"
+            },
+            {
+              "type": "TextBlock",
+              "spacing": "None",
+              "text": "${learningEntity[2].ItemType}",
+              "isSubtle": true,
+              "wrap": true,
+              "$when": "${Count > 2}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 3}",
+          "items": [
+            {
+              "size": "Medium",
+              "type": "Image",
+              "url": "${learningEntity[3].TileImageLink}",
+              "$when": "${Count > 3}"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 3}",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${learningEntity[3].Title}",
+              "weight": "Bolder",
+              "wrap": true,
+              "$when": "${Count > 3}"
+            },
+            {
+              "type": "TextBlock",
+              "spacing": "None",
+              "text": "${learningEntity[3].ItemType}",
+              "isSubtle": true,
+              "wrap": true,
+              "$when": "${Count > 3}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 4}",
+          "items": [
+            {
+              "size": "Medium",
+              "type": "Image",
+              "url": "${learningEntity[4].TileImageLink}",
+              "$when": "${Count > 4}"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 4}",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${learningEntity[4].Title}",
+              "weight": "Bolder",
+              "wrap": true,
+              "$when": "${Count > 4}"
+            },
+            {
+              "type": "TextBlock",
+              "spacing": "None",
+              "text": "${learningEntity[4].ItemType}",
+              "isSubtle": true,
+              "wrap": true,
+              "$when": "${Count > 4}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 5}",
+          "items": [
+            {
+              "size": "Medium",
+              "type": "Image",
+              "url": "${learningEntity[5].TileImageLink}",
+              "$when": "${Count > 5}"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 5}",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${learningEntity[5].Title}",
+              "weight": "Bolder",
+              "wrap": true,
+              "$when": "${Count > 5}"
+            },
+            {
+              "type": "TextBlock",
+              "spacing": "None",
+              "text": "${learningEntity[5].ItemType}",
+              "isSubtle": true,
+              "wrap": true,
+              "$when": "${Count > 5}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 6}",
+          "items": [
+            {
+              "size": "Medium",
+              "type": "Image",
+              "url": "${learningEntity[6].TileImageLink}",
+              "$when": "${Count > 6}"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 6}",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${learningEntity[6].Title}",
+              "weight": "Bolder",
+              "wrap": true,
+              "$when": "${Count > 6}"
+            },
+            {
+              "type": "TextBlock",
+              "spacing": "None",
+              "text": "${learningEntity[6].ItemType}",
+              "isSubtle": true,
+              "wrap": true,
+              "$when": "${Count > 6}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 7}",
+          "items": [
+            {
+              "size": "Medium",
+              "type": "Image",
+              "url": "${learningEntity[7].TileImageLink}",
+              "$when": "${Count > 7}"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 7}",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${learningEntity[7].Title}",
+              "weight": "Bolder",
+              "wrap": true,
+              "$when": "${Count > 7}"
+            },
+            {
+              "type": "TextBlock",
+              "spacing": "None",
+              "text": "${learningEntity[7].ItemType}",
+              "isSubtle": true,
+              "wrap": true,
+              "$when": "${Count > 7}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 8}",
+          "items": [
+            {
+              "size": "Medium",
+              "type": "Image",
+              "url": "${learningEntity[8].TileImageLink}",
+              "$when": "${Count > 8}"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 8}",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${learningEntity[8].Title}",
+              "weight": "Bolder",
+              "wrap": true,
+              "$when": "${Count > 8}"
+            },
+            {
+              "type": "TextBlock",
+              "spacing": "None",
+              "text": "${learningEntity[8].ItemType}",
+              "isSubtle": true,
+              "wrap": true,
+              "$when": "${Count > 8}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 9}",
+          "items": [
+            {
+              "size": "Medium",
+              "type": "Image",
+              "url": "${learningEntity[9].TileImageLink}",
+              "$when": "${Count > 9}"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 9}",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${learningEntity[9].Title}",
+              "weight": "Bolder",
+              "wrap": true,
+              "$when": "${Count > 9}"
+            },
+            {
+              "type": "TextBlock",
+              "spacing": "None",
+              "text": "${learningEntity[9].ItemType}",
+              "isSubtle": true,
+              "wrap": true,
+              "$when": "${Count > 9}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 10}",
+          "items": [
+            {
+              "size": "Medium",
+              "type": "Image",
+              "url": "${learningEntity[10].TileImageLink}",
+              "$when": "${Count > 10}"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 10}",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${learningEntity[10].Title}",
+              "weight": "Bolder",
+              "wrap": true,
+              "$when": "${Count > 10}"
+            },
+            {
+              "type": "TextBlock",
+              "spacing": "None",
+              "text": "${learningEntity[10].ItemType}",
+              "isSubtle": true,
+              "wrap": true,
+              "$when": "${Count > 10}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 11}",
+          "items": [
+            {
+              "size": "Medium",
+              "type": "Image",
+              "url": "${learningEntity[11].TileImageLink}",
+              "$when": "${Count > 11}"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 11}",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${learningEntity[11].Title}",
+              "weight": "Bolder",
+              "wrap": true,
+              "$when": "${Count > 11}"
+            },
+            {
+              "type": "TextBlock",
+              "spacing": "None",
+              "text": "${learningEntity[11].ItemType}",
+              "isSubtle": true,
+              "wrap": true,
+              "$when": "${Count > 11}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 12}",
+          "items": [
+            {
+              "size": "Medium",
+              "type": "Image",
+              "url": "${learningEntity[12].TileImageLink}",
+              "$when": "${Count > 12}"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 12}",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${learningEntity[12].Title}",
+              "weight": "Bolder",
+              "wrap": true,
+              "$when": "${Count > 12}"
+            },
+            {
+              "type": "TextBlock",
+              "spacing": "None",
+              "text": "${learningEntity[12].ItemType}",
+              "isSubtle": true,
+              "wrap": true,
+              "$when": "${Count > 12}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 13}",
+          "items": [
+            {
+              "size": "Medium",
+              "type": "Image",
+              "url": "${learningEntity[13].TileImageLink}",
+              "$when": "${Count > 13}"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 13}",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${learningEntity[13].Title}",
+              "weight": "Bolder",
+              "wrap": true,
+              "$when": "${Count > 13}"
+            },
+            {
+              "type": "TextBlock",
+              "spacing": "None",
+              "text": "${learningEntity[13].ItemType}",
+              "isSubtle": true,
+              "wrap": true,
+              "$when": "${Count > 13}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 14}",
+          "items": [
+            {
+              "size": "Medium",
+              "type": "Image",
+              "url": "${learningEntity[14].TileImageLink}",
+              "$when": "${Count > 14}"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "auto",
+          "$when": "${Count > 14}",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "${learningEntity[14].Title}",
+              "weight": "Bolder",
+              "wrap": true,
+              "$when": "${Count > 14}"
+            },
+            {
+              "type": "TextBlock",
+              "spacing": "None",
+              "text": "${learningEntity[14].ItemType}",
+              "isSubtle": true,
+              "wrap": true,
+              "$when": "${Count > 14}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Know more",
+      "url": "${KnowMoreLink}"
+    }
+  ]
+}

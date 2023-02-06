@@ -2,7 +2,7 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
     "name": "teams-tab-spfx-client-side-solution",
-    "id": "98060c68-8451-4d2c-b545-5ba50ad61542",
+    "id": "61940025-e349-4358-b113-a90016156554",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
@@ -12,8 +12,27 @@
       "websiteUrl": "",
       "privacyUrl": "",
       "termsOfUseUrl": "",
-      "mpnId": ""
-    }
+      "mpnId": "Undefined-1.15.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "teams-tab-spfx description"
+      },
+      "longDescription": {
+        "default": "teams-tab-spfx description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "teams-tab-spfx Feature",
+        "description": "The feature that activates elements of the teams-tab-spfx solution.",
+        "id": "7297905a-752f-46e0-9e52-4babfe18b308",
+        "version": "1.0.0.0"
+      }
+    ]
   },
   "paths": {
     "zippedPackage": "solution/teams-tab-spfx.sppkg"

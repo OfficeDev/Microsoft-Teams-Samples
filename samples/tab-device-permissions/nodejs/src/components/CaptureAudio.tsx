@@ -3,8 +3,9 @@
 
 import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Card, Flex, Text, Button, CardHeader, CardBody, Video } from '@fluentui/react-northstar'
-
+import {  Text, Button} from '@fluentui/react-components'
+import { Card } from "@fluentui/react-components/unstable"
+import { CardBody } from 'reactstrap';
 /**
  * The 'CaptureAudio' component
  * of your app.
@@ -14,7 +15,7 @@ const CaptureAudio = () => {
 
   useEffect(() => {
     // initializing microsoft teams sdk
-    microsoftTeams.initialize()
+    microsoftTeams.app.initialize()
   })
 
   // Method to capture media
@@ -40,22 +41,20 @@ const CaptureAudio = () => {
 
   return (
     <>
-      {/* Card for showing Video/Audio */}
+      {/* Card for showing Video/Audio */}      
       <Card>
-        <CardHeader>
-          <Text content="Media" weight="bold" />
-        </CardHeader>
-        <CardBody>
-          <Flex column gap="gap.small">
-            <Text content="Checks for permission to use media input" />
-            <Text content="SDK used: " weight="semibold" />
-            <Text content="navigator, microsoftTeams" />
-            <Text content="Method: " weight="semibold" />
-            <Text content="navigator.mediaDevices.getUserMedia, teams.getmedia" />
-            <Button content="Capture audio" onClick={captureMedia} />
-          </Flex>
-          {audio !== '' && <Video src={audio} variables={{ height: '50px', width: '100%', }} />}
-        </CardBody>
+      <Text weight='bold' as="h1">Media</Text>  
+       <CardBody>          
+          <div className='flex columngap'>
+            <Text>Checks for permission to use media input Testing YMAL</Text>
+            <Text weight='medium'>SDK used</Text>
+            <Text>navigator, microsoftTeams</Text>
+            <Text weight='medium'>Method:</Text>
+            <Text>navigator.mediaDevices.getUserMedia, teams.getmedia</Text>                   
+              <Button onClick={captureMedia}>Capture audio</Button>
+          </div> 
+          <audio controls src={audio} />    
+      </CardBody>
       </Card>
     </>
   );

@@ -1,18 +1,18 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-
 import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Card, Flex, Text, Button, CardHeader, CardBody } from '@fluentui/react-northstar'
-
+import { Text, Button} from '@fluentui/react-components'
+import { Card} from "@fluentui/react-components/unstable"
+import { CardBody } from 'reactstrap';
 /**
  * The 'GetGeoLocation' component
  * of your app.
  */
 const GetGeoLocation = () => {
-  const [geoLocationValue, setGeoLocationValue] = useState('');
+  const [geoLocationValue, setGeoLocationValue] = useState<microsoftTeams.location.Location>({} as microsoftTeams.location.Location);
   useEffect(() => {
-    microsoftTeams.initialize()
+    microsoftTeams.app.initialize()
   })
 
   // Method to get current user's geo location
@@ -21,17 +21,18 @@ const GetGeoLocation = () => {
   // If the value of showMap is false, the current location is fetched without displaying the map. 
   // showMap is ignored if allowChooseLocation is set to true.
   function getLocation() {
-    microsoftTeams.location.getLocation({ allowChooseLocation: true, showMap: true }, (error: microsoftTeams.SdkError, location: microsoftTeams.location.Location) => {
-      setGeoLocationValue(JSON.stringify(location))
+    microsoftTeams.geoLocation.getCurrentLocation().then((location) => {     
+      setGeoLocationValue(location)
+    }).catch((error) => {    
+      console.error(error);
     });
   }
 
   // Method to show geo location for given latitude and longitude values.
+  // Method to show geo location for given latitude and longitude values.
   function showLocation() {
-    // The method will show location based on latitude and longitute values provided.    
-    let location = { "latitude": 28.704059, "longitude": 77.10249 };
     // Methos to ask for permission and then show current user location
-    microsoftTeams.location.showLocation(location, (error: microsoftTeams.SdkError, result: boolean) => {
+    microsoftTeams.geoLocation.map.showLocation(geoLocationValue).catch((error) => {
       // If there's any error, an alert shows the error message/code
       if (error) {
         if (error.message) {
@@ -47,21 +48,19 @@ const GetGeoLocation = () => {
   return (
     <>
       {/* Card for Get/Show Geo-Location */}
-      <Card>
-        <CardHeader>
-          <Text content="Get Location" weight="bold" />
-        </CardHeader>
+      <Card>        
+          <Text weight="bold">Get Location</Text>       
         <CardBody>
-          <Flex column gap="gap.small">
-            <Text content="SDK used: " weight="semibold" />
-            <Text content="navigator, microsoftTeams" />
-            <Text content="Method: " weight="semibold" />
-            <Text content="navigator.geolocation.getCurrentPosition, teams.location" />
-            <Button content="Get Location" onClick={getLocation} />
-            {geoLocationValue !== '' &&
-              <Text styles={{ "word-wrap": "break-word" }} content={geoLocationValue}></Text>}
-            <Button content="Show Location" onClick={showLocation} />
-          </Flex>
+        <div className='flex columngap'>
+            <Text weight="semibold">SDK used:</Text>
+            <Text>navigator, microsoftTeams</Text>
+            <Text weight="semibold">Method</Text>
+            <Text>navigator.geolocation.getCurrentPosition, teams.location</Text>
+            <Button onClick={getLocation} >Get Location</Button>
+            {JSON.stringify(geoLocationValue) !== '{}' &&
+              <Text>{geoLocationValue}</Text>}               
+            <Button  onClick={showLocation}>Show Location</Button>
+        </div>
         </CardBody>
       </Card>
     </>

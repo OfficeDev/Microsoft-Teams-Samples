@@ -1,48 +1,42 @@
-﻿@model object
-
-@{ ViewBag.Title = "title";
-                Layout = "_Layout"; }
+﻿@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
 
 @section scripts{
-    <script type="text/javascript">
-        microsoftTeams.initialize();
-        localStorage.removeItem("simple.error");
-        let hashParams = getHashParameters();
-        if (hashParams["error"]) {
-            // Authentication/authorization failed
-            localStorage.setItem("simple.error", JSON.stringify(hashParams));
-            microsoftTeams.authentication.notifyFailure(hashParams["error"]);
-        } else if (hashParams["access_token"]) {
-            // Get the stored state parameter and compare with incoming state
-            let expectedState = localStorage.getItem("simple.state");
-            if (expectedState !== hashParams["state"]) {
-                // State does not match, report error
-                localStorage.setItem("simple.error", JSON.stringify(hashParams));
-                microsoftTeams.authentication.notifyFailure("StateDoesNotMatch");
-            } else {
-                // Success -- return token information to the parent page
-                microsoftTeams.authentication.notifySuccess({
-                    idToken: hashParams["id_token"],
-                    accessToken: hashParams["access_token"],
-                    tokenType: hashParams["token_type"],
-                    expiresIn: hashParams["expires_in"]
-                });
-            }
-        } else {
-            // Unexpected condition: hash does not contain error or access_token parameter
-            localStorage.setItem("simple.error", JSON.stringify(hashParams));
-            microsoftTeams.authentication.notifyFailure("UnexpectedFailure");
-        }
-        // Parse hash parameters into key-value pairs
-        function getHashParameters() {
-            let hashParams = {};
-            location.hash.substr(1).split("&").forEach(function (item) {
-                let s = item.split("="),
-                    k = s[0],
-                    v = s[1] && decodeURIComponent(s[1]);
-                hashParams[k] = v;
+     <script src="https://res.cdn.office.net/teams-js/2.5.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+     <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+     <script type="text/javascript">
+        let clientId = '@ViewBag.AzureClientId';
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.app.getContext().then(async (context) => {
+                const msalConfig = {
+                    auth: {
+                        clientId: clientId,
+                        authority: `https://login.microsoftonline.com/${context.tid}`,
+                        navigateToLoginRequestUrl: false
+                    },
+                    cache: {
+                        cacheLocation: "sessionStorage",
+                    },
+                };
+				
+            const msalInstance = new msal.PublicClientApplication(msalConfig);
+			
+                msalInstance.handleRedirectPromise()
+                    .then((tokenResponse) => {
+                        if (tokenResponse !== null) {
+                            microsoftTeams.authentication.notifySuccess("Authentication succedded");
+                        } else {
+                            microsoftTeams.authentication.notifyFailure("Get empty response.");
+                        }
+                    })
+                    .catch((error) => {
+                        microsoftTeams.authentication.notifyFailure(JSON.stringify(error));
+                    });
             });
-            return hashParams;
-        }
+        });
     </script>
 }

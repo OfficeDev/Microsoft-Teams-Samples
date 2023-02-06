@@ -1,18 +1,18 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.8/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.8",
-  "id": "{{APPLICATION_ID}}",
-  "version": "{{VERSION}}",
-  "packageName": "{{PACKAGE_NAME}}",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "id": "{{GUID_ID}}",
+  "version": "1.0.0",
+  "packageName": "com.teams.tabuitemplates",
   "developer": {
-    "name": "Alexander Katrukhin",
+    "name": "microsoft",
     "websiteUrl": "https://{{HOSTNAME}}",
     "privacyUrl": "https://{{HOSTNAME}}/privacy.html",
     "termsOfUseUrl": "https://{{HOSTNAME}}/tou.html"
   },
   "name": {
-    "short": "Teams Sample App",
-    "full": "Teams Sample App"
+    "short": "Tab UI Templates",
+    "full": "Tab UI Templates"
   },
   "description": {
     "short": "Experience how Teams apps should look and behave in common scenarios.",
@@ -23,38 +23,31 @@
     "color": "icon-color.png"
   },
   "accentColor": "#D85028",
-  "configurableTabs": [],
   "staticTabs": [
     {
       "entityId": "sample.app.welcome",
       "name": "Welcome",
       "contentUrl": "https://{{HOSTNAME}}/welcome",
-      "scopes": ["personal"]
+      "scopes": [ "personal" ]
     },
     {
       "entityId": "sample.app.dashboard",
       "name": "Dashboard",
       "contentUrl": "https://{{HOSTNAME}}/dashboard",
-      "scopes": ["personal"]
+      "scopes": [ "personal" ]
     },
     {
       "entityId": "sample.app.list",
       "name": "List",
       "contentUrl": "https://{{HOSTNAME}}/list",
-      "scopes": ["personal"]
+      "scopes": [ "personal" ]
     },
     {
       "entityId": "sample.app.boards",
       "name": "Task boards",
       "contentUrl": "https://{{HOSTNAME}}/board",
-      "scopes": ["personal"]
+      "scopes": [ "personal" ]
     }
   ],
-  "bots": [],
-  "connectors": [],
-  "composeExtensions": [],
-  "permissions": ["identity", "messageTeamMembers"],
-  "validDomains": ["{{HOSTNAME}}"],
-  "showLoadingIndicator": true,
-  "isFullScreen": true
+  "validDomains": [ "{{HOSTNAME}}" ]
 }

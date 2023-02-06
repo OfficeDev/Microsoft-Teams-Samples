@@ -6,9 +6,11 @@ const path = require('path');
 const dotenv = require('dotenv');
 // Import required bot configuration.
 const ENV_FILE = path.join(__dirname, '.env');
+
 dotenv.config({ path: ENV_FILE });
 
-const restify = require('restify');
+const express = require('express');
+const cors = require('cors');
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
@@ -19,7 +21,13 @@ const { BotFrameworkAdapter } = require('botbuilder');
 const  DeepLinkTabsnode  = require('./Bots/DeepLinkTabsnode');
 
 // Create HTTP server
-const server = restify.createServer();
+const server = express();
+server.use(cors());
+server.use(express.json());
+server.use(express.urlencoded({
+    extended: true
+}));
+
 server.listen(process.env.port || process.env.PORT || 3978, () => {
     console.log(`\n${ server.name } listening to ${ server.url }`);
     console.log('\nGet Bot Framework Emulator: https://aka.ms/botframework-emulator');
@@ -50,9 +58,8 @@ const onTurnErrorHandler = async (context, error) => {
         'TurnError'
     );
 
-    // Send a message to the user
-    await context.sendActivity('The bot encountered an error or bug.');
-    await context.sendActivity('To continue to run this bot, please fix the bot source code.');
+    // Uncomment below commented line for local debugging.
+    // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);
 };
 
 // Set the onTurnError for the singleton BotFrameworkAdapter.
@@ -86,11 +93,13 @@ server.on('upgrade', (req, socket, head) => {
     });
 });
 
-server.get('/*', restify.plugins.serveStatic({
+server.get('/api/getAppId', (req, res) => {
+    res.send({microsoftAppId: process.env.MicrosoftAppId});
+});
 
-      directory: './pages'
 
-}));
+// Static Middleware
+server.use(express.static(path.join(__dirname, './pages')));
 
 
 

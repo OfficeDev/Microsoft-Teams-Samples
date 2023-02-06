@@ -1,0 +1,203 @@
+{
+  "courses": {
+    "courses": [
+      {
+        "id": "09b3fe49-a8d9-4cbf-8863-3323f9b77f3a",
+        "teamAadObjectId": "4100674e-bf69-4280-91ba-77a89ebf737a",
+        "teamId": "e4203ce5-e6a9-45d8-a0d4-46ce2af7a73c",
+        "defaultTutorialGroupId": "f3be453f-870b-4326-b5a7-3429cdb1a842",
+        "displayName": "Rustic Metal Chicken",
+        "hasMultipleTutorialGroups": true,
+        "iconUrl": "https://fabricweb.azureedge.net/fabric-website/assets/images/avatar/large/kristy.png"
+      },
+      {
+        "id": "79d23227-15bf-40cb-b1e3-1b8b90f3443a",
+        "teamAadObjectId": "1108e0ad-cf4b-4921-879f-ce953f73ef7f",
+        "teamId": "bc7abd74-dd39-4c0f-9d2c-ff7c70a45626",
+        "defaultTutorialGroupId": "d436813f-16d9-4f5f-8e6c-556146c3e250",
+        "displayName": "Tasty Metal Chair",
+        "hasMultipleTutorialGroups": true,
+        "iconUrl": "https://fabricweb.azureedge.net/fabric-website/assets/images/avatar/small/ade.jpg"
+      },
+      {
+        "id": "8c42e141-aac3-466c-8dd6-b14429074747",
+        "teamAadObjectId": "78a7bd46-6d28-4c10-ab3c-dca4251904e5",
+        "teamId": "23c7e0bc-7178-4e47-96f2-a70c688282aa",
+        "defaultTutorialGroupId": "482562f2-22e9-4817-ae17-cbe61e6b7b95",
+        "displayName": "Handmade Soft Chair",
+        "hasMultipleTutorialGroups": false,
+        "iconUrl": "https://fabricweb.azureedge.net/fabric-website/assets/images/avatar/small/matt.jpg"
+      }
+    ]
+  },
+  "members": {
+    "members": [
+      {
+        "courseId": "09b3fe49-a8d9-4cbf-8863-3323f9b77f3a",
+        "tutorialGroupId": "f3be453f-870b-4326-b5a7-3429cdb1a842",
+        "role": "Tutor",
+        "userId": "9396fea7-596e-4b10-baaa-2352c5955907"
+      },
+      {
+        "courseId": "09b3fe49-a8d9-4cbf-8863-3323f9b77f3a",
+        "tutorialGroupId": "f3be453f-870b-4326-b5a7-3429cdb1a842",
+        "role": "Student",
+        "userId": "097b0074-f154-471b-9e6e-13b99d488e1e"
+      },
+      {
+        "courseId": "09b3fe49-a8d9-4cbf-8863-3323f9b77f3a",
+        "tutorialGroupId": "f3be453f-870b-4326-b5a7-3429cdb1a842",
+        "role": "Student",
+        "userId": "efa77dfb-14cd-466a-a395-efb9ba88f3a6"
+      },
+      {
+        "courseId": "09b3fe49-a8d9-4cbf-8863-3323f9b77f3a",
+        "tutorialGroupId": "f3be453f-870b-4326-b5a7-3429cdb1a842",
+        "role": "Educator",
+        "userId": "b711e5b7-fd2e-4d02-8921-cddc692601fb"
+      },
+      {
+        "courseId": "79d23227-15bf-40cb-b1e3-1b8b90f3443a",
+        "tutorialGroupId": "f1d17051-339d-4080-86a1-840394c26071",
+        "role": "Educator",
+        "userId": "89bd9d8d-69a6-474e-8f46-7cc8796ed151"
+      },
+      {
+        "courseId": "79d23227-15bf-40cb-b1e3-1b8b90f3443a",
+        "tutorialGroupId": "f1d17051-339d-4080-86a1-840394c26071",
+        "role": "Student",
+        "userId": "9396fea7-596e-4b10-baaa-2352c5955907"
+      },
+      {
+        "courseId": "79d23227-15bf-40cb-b1e3-1b8b90f3443a",
+        "tutorialGroupId": "f1d17051-339d-4080-86a1-840394c26071",
+        "role": "Educator",
+        "userId": "097b0074-f154-471b-9e6e-13b99d488e1e"
+      },
+      {
+        "courseId": "79d23227-15bf-40cb-b1e3-1b8b90f3443a",
+        "tutorialGroupId": "d436813f-16d9-4f5f-8e6c-556146c3e250",
+        "role": "Educator",
+        "userId": "efa77dfb-14cd-466a-a395-efb9ba88f3a6"
+      },
+      {
+        "courseId": "79d23227-15bf-40cb-b1e3-1b8b90f3443a",
+        "tutorialGroupId": "d436813f-16d9-4f5f-8e6c-556146c3e250",
+        "role": "Tutor",
+        "userId": "b711e5b7-fd2e-4d02-8921-cddc692601fb"
+      },
+      {
+        "courseId": "8c42e141-aac3-466c-8dd6-b14429074747",
+        "tutorialGroupId": "482562f2-22e9-4817-ae17-cbe61e6b7b95",
+        "role": "Educator",
+        "userId": "89bd9d8d-69a6-474e-8f46-7cc8796ed151"
+      },
+      {
+        "courseId": "8c42e141-aac3-466c-8dd6-b14429074747",
+        "tutorialGroupId": "482562f2-22e9-4817-ae17-cbe61e6b7b95",
+        "role": "Tutor",
+        "userId": "9396fea7-596e-4b10-baaa-2352c5955907"
+      },
+      {
+        "courseId": "8c42e141-aac3-466c-8dd6-b14429074747",
+        "tutorialGroupId": "482562f2-22e9-4817-ae17-cbe61e6b7b95",
+        "role": "Educator",
+        "userId": "097b0074-f154-471b-9e6e-13b99d488e1e"
+      },
+      {
+        "courseId": "8c42e141-aac3-466c-8dd6-b14429074747",
+        "tutorialGroupId": "482562f2-22e9-4817-ae17-cbe61e6b7b95",
+        "role": "Tutor",
+        "userId": "efa77dfb-14cd-466a-a395-efb9ba88f3a6"
+      }
+    ]
+  },
+  "tutorialGroups": {
+    "tutorialGroups": [
+      {
+        "courseId": "09b3fe49-a8d9-4cbf-8863-3323f9b77f3a",
+        "displayName": "Default",
+        "id": "f3be453f-870b-4326-b5a7-3429cdb1a842",
+        "shortName": "Default"
+      },
+      {
+        "courseId": "09b3fe49-a8d9-4cbf-8863-3323f9b77f3a",
+        "displayName": "Chair time-frame",
+        "shortName": "q8100",
+        "id": "789fd871-f99d-4d2e-bd12-1aa6f1e674bd"
+      },
+      {
+        "courseId": "79d23227-15bf-40cb-b1e3-1b8b90f3443a",
+        "displayName": "Default",
+        "id": "d436813f-16d9-4f5f-8e6c-556146c3e250",
+        "shortName": "Default"
+      },
+      {
+        "courseId": "79d23227-15bf-40cb-b1e3-1b8b90f3443a",
+        "displayName": "deliver as",
+        "shortName": "j6100",
+        "id": "f1d17051-339d-4080-86a1-840394c26071"
+      },
+      {
+        "courseId": "8c42e141-aac3-466c-8dd6-b14429074747",
+        "displayName": "Default",
+        "id": "482562f2-22e9-4817-ae17-cbe61e6b7b95",
+        "shortName": "Default"
+      }
+    ]
+  },
+  "users": {
+    "users": [
+      {
+        "id": "89bd9d8d-69a6-474e-8f46-7cc8796ed151",
+        "aadId": "a05dfc2d-df7c-4c78-8a1b-a928fc816742",
+        "name": "Tamara Emmerich",
+        "upn": "Brianne61@yahoo.com",
+        "iconUrl": "https://fabricweb.azureedge.net/fabric-website/assets/images/avatar/small/elliot.jpg"
+      },
+      {
+        "id": "9396fea7-596e-4b10-baaa-2352c5955907",
+        "aadId": "aff1a3a2-fa94-4677-b925-1aa52c3f5ad0",
+        "name": "Mr. Paulette Pacocha",
+        "upn": "Weston_Thiel@hotmail.com",
+        "iconUrl": "https://fabricweb.azureedge.net/fabric-website/assets/images/avatar/small/nom.jpg"
+      },
+      {
+        "id": "097b0074-f154-471b-9e6e-13b99d488e1e",
+        "aadId": "91e450ad-2abd-4442-a980-2d502a94bb4f",
+        "name": "Guillermo Mayer",
+        "upn": "Larissa_Tremblay@yahoo.com",
+        "iconUrl": "https://fabricweb.azureedge.net/fabric-website/assets/images/avatar/small/elliot.jpg"
+      },
+      {
+        "id": "efa77dfb-14cd-466a-a395-efb9ba88f3a6",
+        "aadId": "6997074b-a446-49b6-a214-1959890afa56",
+        "name": "Kathy Hilll Sr.",
+        "upn": "Wilton80@yahoo.com",
+        "iconUrl": "https://fabricweb.azureedge.net/fabric-website/assets/images/avatar/small/nan.jpg"
+      },
+      {
+        "id": "b711e5b7-fd2e-4d02-8921-cddc692601fb",
+        "aadId": "576b0d5f-0d30-4c5f-bb25-87053202c73d",
+        "name": "Patti Mohr",
+        "upn": "Lauryn.Bartoletti50@hotmail.com",
+        "iconUrl": "https://fabricweb.azureedge.net/fabric-website/assets/images/avatar/small/matt.jpg"
+      }
+    ]
+  },
+  "teams": {
+    "isLoading": "false",
+    "locale": "en-us",
+    "entityId": "entityId",
+    "theme": "default"
+  },
+  "router": {
+    "location": {
+      "pathname": "/",
+      "search": "",
+      "state": {},
+      "hash": ""
+    },
+    "action": "PUSH"
+  }
+}

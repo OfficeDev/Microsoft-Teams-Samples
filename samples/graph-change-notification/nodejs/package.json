@@ -16,16 +16,16 @@
         "url": "https://github.com/Microsoft/BotBuilder-Samples.git"
     },
     "dependencies": {
-        "@microsoft/microsoft-graph-client": "^2.2.1",
+        "@microsoft/microsoft-graph-client": "^3.0.4",
         "axios": "^0.21.1",
-        "botbuilder": "~4.13.6",
-        "botbuilder-dialogs": "~4.13.6",
+        "botbuilder": "~4.18.0",
+        "botbuilder-dialogs": "^4.18.0",
         "dotenv": "^10.0.0",
         "express": "^4.17.1",
         "isomorphic-fetch": "^3.0.0",
         "jszip": "^3.6.0",
         "lodash": "^4.17.21",
-        "restify": "~8.5.1",
+        "restify": "^10.0.0",
         "restler": "^3.4.0"
     },
     "devDependencies": {

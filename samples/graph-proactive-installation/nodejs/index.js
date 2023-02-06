@@ -43,9 +43,8 @@ adapter.onTurnError = async (context, error) => {
         'TurnError'
     );
 
-    // Send a message to the user
-    await context.sendActivity('The bot encountered an error or bug.');
-    await context.sendActivity('To continue to run this bot, please fix the bot source code.');
+    // Uncomment below commented line for local debugging.
+    // await context.sendActivity(`Sorry, it looks like something went wrong. Exception Caught: ${error}`);    
 };
 
 // Create the main dialog.
@@ -61,10 +60,11 @@ server.listen(process.env.port || process.env.PORT || 3978, function () {
 });
 
 // Listen for incoming activities and route them to your bot main dialog.
-server.post('/api/messages', (req, res) => {
+server.post('/api/messages', (req, res, next) => {
     adapter.processActivity(req, res, async (turnContext) => {
         // route to main dialog.
         await bot.run(turnContext);
+        return next();
     });
 });
 

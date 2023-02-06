@@ -1,0 +1,357 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Tab Authorization",
+  "steps": [
+    {
+      "file": "Source/wwwroot/index.html",
+      "description": "This is a tour of account linking from the Tab. \r\n\r\nAt a high level, this uses our backend as a proxy for the [GitHub List Repos API](https://docs.github.com/en/rest/reference/repos#list-repositories-for-a-user) that exchanges a user's Azure AD access token for their GitHub access token. It optimisically tries to get the repositories and if the backend indicates we need to link the accounts it raises the authorization popup.\r\n\r\n![Screenshot of JSON payload of GitHub repositories in a Microsoft Teams Personal Tab](./Docs/Images/TabScreenshot.jpg)",
+      "line": 12
+    },
+    {
+      "file": "Source/wwwroot/tab.js",
+      "description": "When the tab first loads, we immediately attempt to perform the 'login' action we also bind to the \"login\" button.",
+      "line": 158
+    },
+    {
+      "file": "Source/wwwroot/tab.js",
+      "description": "We first attempt to get the user's AzureAd access token for our backend with Teams Tab SSO.\r\n\r\nIf the user hasn't consented to the application yet, they will see the \"almost there\" screen\r\n\r\n![Screenshot of the almost there popup for Teams SSO](https://docs.microsoft.com/de-de/microsoftteams/platform/assets/images/tabs/tabs-sso-prompt.png)",
+      "line": 118,
+      "selection": {
+        "start": {
+          "line": 118,
+          "character": 3
+        },
+        "end": {
+          "line": 118,
+          "character": 46
+        }
+      }
+    },
+    {
+      "file": "Source/wwwroot/tab.js",
+      "description": "We then attach the access token as a bearer token and attempt to get the list of repositories from our backend. ",
+      "line": 125,
+      "selection": {
+        "start": {
+          "line": 120,
+          "character": 3
+        },
+        "end": {
+          "line": 125,
+          "character": 6
+        }
+      }
+    },
+    {
+      "file": "Source/Controllers/GitHubController.cs",
+      "description": "The backend then gets the users Azure Ad identity using the claims in the token. \r\n\r\nIt is important for tabs to use the Azure Ad tokens as the user information returned from the tab's `context` has no authenticity guaruntees. ",
+      "line": 36,
+      "selection": {
+        "start": {
+          "line": 35,
+          "character": 1
+        },
+        "end": {
+          "line": 36,
+          "character": 69
+        }
+      }
+    },
+    {
+      "file": "Source/Controllers/GitHubController.cs",
+      "description": "We then attempt to get a token from our token storage. Since the user hasn't logged in yet, we will get a response telling us the user needs to authorize this application to access GitHub.",
+      "line": 48,
+      "selection": {
+        "start": {
+          "line": 46,
+          "character": 9
+        },
+        "end": {
+          "line": 48,
+          "character": 66
+        }
+      }
+    },
+    {
+      "file": "Source/Controllers/GitHubController.cs",
+      "description": "We send back an easily identified response `HTTP 412/Precondition Failed` so that the tab knows to raise the GitHub authorization page. \r\n\r\nWe include a link to the authorization start page so the tab knows what url to load. ",
+      "line": 56,
+      "selection": {
+        "start": {
+          "line": 50,
+          "character": 13
+        },
+        "end": {
+          "line": 56,
+          "character": 15
+        }
+      }
+    },
+    {
+      "file": "Source/wwwroot/tab.js",
+      "description": "Back in the tab, we see the `HTTP 412/Precondition Failed` response and start the GitHub consent flow.",
+      "line": 131,
+      "selection": {
+        "start": {
+          "line": 127,
+          "character": 3
+        },
+        "end": {
+          "line": 131,
+          "character": 58
+        }
+      }
+    },
+    {
+      "file": "Source/wwwroot/tab.js",
+      "description": "We generate a pair of codes, the `codeVerifier` and `codeChallenge` to secure this login. This is the same as the [PKCE Code Challenge](https://datatracker.ietf.org/doc/html/rfc7636).",
+      "line": 67,
+      "selection": {
+        "start": {
+          "line": 67,
+          "character": 3
+        },
+        "end": {
+          "line": 67,
+          "character": 67
+        }
+      }
+    },
+    {
+      "file": "Source/wwwroot/tab.js",
+      "description": "We then take the start url and attach two parameters for security purposes\r\n\r\n- `state` is used for us to prevent CSRF attacks\r\n- `code_challenge` is used for us to verify we are the client that started this auth flow. \r\n\r\nThe details of _why_ we do this is out of scope for this tour, for more information see the RFC for PKCE.",
+      "line": 70,
+      "selection": {
+        "start": {
+          "line": 69,
+          "character": 3
+        },
+        "end": {
+          "line": 71,
+          "character": 58
+        }
+      }
+    },
+    {
+      "file": "Source/wwwroot/tab.js",
+      "description": "We then open the auth popup. This is a convenience wrapper around the `microsoftTeams.authentication.authenticate` call.\r\n\r\nThis will open a popup with the OAuthController's `start` action from our backend.",
+      "line": 71,
+      "selection": {
+        "start": {
+          "line": 12,
+          "character": 49
+        },
+        "end": {
+          "line": 12,
+          "character": 91
+        }
+      }
+    },
+    {
+      "file": "Source/Controllers/OAuthController.cs",
+      "description": "The start action pulls the `state` and `codeChallenge` and encodes them into a tamper-evident token. This will be passed along as the `state` during the GitHub authorization flow. \r\n\r\n",
+      "line": 55,
+      "selection": {
+        "start": {
+          "line": 52,
+          "character": 1
+        },
+        "end": {
+          "line": 55,
+          "character": 12
+        }
+      }
+    },
+    {
+      "file": "Source/Controllers/OAuthController.cs",
+      "description": "We then craft the url for the GitHub authorization wiht the `client_id` we registered with GitHub, the encoded `state` from earlier, and the final redirection to the `end` action on this same controller. ",
+      "line": 66,
+      "selection": {
+        "start": {
+          "line": 58,
+          "character": 1
+        },
+        "end": {
+          "line": 66,
+          "character": 11
+        }
+      }
+    },
+    {
+      "file": "Source/Controllers/OAuthController.cs",
+      "description": "We then send back a redirection to the authorization popup to load the GitHub authorization page. \r\n\r\n![Image of the GitHub authorization page in a Teams tab popup](./Docs/Images/TabAuthPopup.jpg)",
+      "line": 69,
+      "selection": {
+        "start": {
+          "line": 69,
+          "character": 9
+        },
+        "end": {
+          "line": 69,
+          "character": 48
+        }
+      }
+    },
+    {
+      "file": "Source/Controllers/OAuthController.cs",
+      "description": "After the user completes the authorization flow, GitHub will redirect the popup back to the `end` action.",
+      "line": 73
+    },
+    {
+      "file": "Source/Controllers/OAuthController.cs",
+      "description": "We then add the `code` returned from GitHub to the `state` we built earlier (renamed accountLinkingState here).",
+      "line": 95,
+      "selection": {
+        "start": {
+          "line": 93,
+          "character": 1
+        },
+        "end": {
+          "line": 95,
+          "character": 70
+        }
+      }
+    },
+    {
+      "file": "Source/Controllers/OAuthController.cs",
+      "description": "We then formulate the rediction back to the `authEnd.html` page. \r\n\r\nThe first parameter we need is the `state` value we need to give back to the tab.",
+      "line": 102,
+      "selection": {
+        "start": {
+          "line": 97,
+          "character": 1
+        },
+        "end": {
+          "line": 102,
+          "character": 47
+        }
+      }
+    },
+    {
+      "file": "Source/Controllers/OAuthController.cs",
+      "description": "The second parameter is a `code` which for us is the tamper-evident state value that now _includes_ the oauth code that GitHub returned to us. ",
+      "line": 103,
+      "selection": {
+        "start": {
+          "line": 103,
+          "character": 1
+        },
+        "end": {
+          "line": 104,
+          "character": 1
+        }
+      }
+    },
+    {
+      "file": "Source/Controllers/OAuthController.cs",
+      "description": "We then redirect the auth popup back to the `authEnd.html` page",
+      "line": 111,
+      "selection": {
+        "start": {
+          "line": 111,
+          "character": 1
+        },
+        "end": {
+          "line": 111,
+          "character": 48
+        }
+      }
+    },
+    {
+      "file": "Source/wwwroot/authEnd.html",
+      "description": "The auth end page is an empty page for launching the `authEnd.js` script",
+      "line": 8
+    },
+    {
+      "file": "Source/wwwroot/authEnd.js",
+      "description": "In the auth end script we parse out the `state` and `code` values and then call `notifySuccess` which will resolve the call in the tab.",
+      "line": 17,
+      "selection": {
+        "start": {
+          "line": 13,
+          "character": 10
+        },
+        "end": {
+          "line": 17,
+          "character": 84
+        }
+      }
+    },
+    {
+      "file": "Source/wwwroot/tab.js",
+      "description": "Back in the tab, we then parse out the code and state again",
+      "line": 72,
+      "selection": {
+        "start": {
+          "line": 71,
+          "character": 3
+        },
+        "end": {
+          "line": 72,
+          "character": 48
+        }
+      }
+    },
+    {
+      "file": "Source/wwwroot/tab.js",
+      "description": "And verify the `state` is what we expected. This is important to prevent cross site request forgery attacks. ",
+      "line": 77,
+      "selection": {
+        "start": {
+          "line": 73,
+          "character": 1
+        },
+        "end": {
+          "line": 77,
+          "character": 4
+        }
+      }
+    },
+    {
+      "file": "Source/wwwroot/tab.js",
+      "description": "We then make a final call to link together the user's Azure AD account and their GitHub account. \r\n\r\nWe first get the user's access token so we have a verifiable M365 identity for the user and attach it as the bearer token. \r\n\r\nWe then attach the `code` we got back from the authentication flow and the `code_verifier` we generated at the beginning. ",
+      "line": 91,
+      "selection": {
+        "start": {
+          "line": 80,
+          "character": 1
+        },
+        "end": {
+          "line": 91,
+          "character": 7
+        }
+      }
+    },
+    {
+      "file": "Source/Controllers/AccountLinkingController.cs",
+      "description": "for the `link` action we pull the identity for the user. ",
+      "line": 34,
+      "selection": {
+        "start": {
+          "line": 33,
+          "character": 9
+        },
+        "end": {
+          "line": 34,
+          "character": 69
+        }
+      }
+    },
+    {
+      "file": "Source/Controllers/AccountLinkingController.cs",
+      "description": "Then we 'claim' the code that we gave to the client which will complete the OAuth2.0 code flow for GitHub.",
+      "line": 50,
+      "selection": {
+        "start": {
+          "line": 50,
+          "character": 9
+        },
+        "end": {
+          "line": 54,
+          "character": 59
+        }
+      }
+    }
+  ],
+  "ref": "nibeauli/account-linking-sample"
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+        "type": "TextBlock",
+        "text": "${message}",
+        "wrap": true
+    },
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.Submit",
+          "title": "${selectAnswer}",
+          "data": {
+            "msteams": {
+              "type": "task/fetch"
+            },
+            "questionId": "${questionId}",
+            "id":  "selectAnswer"
+          }
+        }
+      ]
+    }
+  ]
+}

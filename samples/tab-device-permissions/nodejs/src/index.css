@@ -11,3 +11,37 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.Grid
+{
+  width: 30%;
+  display: grid;
+  float: left;
+  margin-inline: 15px
+}
+
+.columngap
+{
+  column-gap: 0.625rem;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex > :not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 100px 100px;
+  gap: 10px;
+}
+
+.box2 {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}

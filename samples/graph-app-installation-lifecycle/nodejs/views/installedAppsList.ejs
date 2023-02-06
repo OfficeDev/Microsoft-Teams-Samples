@@ -7,9 +7,7 @@
     <title>App installed demo</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://statics.teams.cdn.office.net/sdk/v1.6.0/js/MicrosoftTeams.min.js"
-        integrity="sha384-mhp2E+BLMiZLe7rDIzj19WjgXJeI32NkPvrvvZBrMi5IvWup/1NUfS5xuYN5S3VT"
-        crossorigin="anonymous"></script>
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -90,11 +88,12 @@
     <script>
         var token =  <%-token%>
             $(document).ready(function () {
-                microsoftTeams.initialize();
-                microsoftTeams.getContext(function (context) {
-                    var tenantId = context.tid;
-                    var teamId = context.groupId;
-                    getAppsList(token, teamId, false);
+                microsoftTeams.app.initialize().then(() => {
+                    microsoftTeams.app.getContext().then((context) => {
+                        var tenantId = context.user.tenant.id;
+                        var teamId = context.team.groupId;
+                        getAppsList(token, teamId, false);
+                    });
                 });
             })
 
@@ -159,9 +158,9 @@
 
         // show the list of all apps installed in a team 
         function showAllApp() {
-            microsoftTeams.getContext(function (context) {
-                var tenantId = context.tid;
-                var teamId = context.groupId;
+            microsoftTeams.app.getContext().then((context) => {
+                var tenantId = context.user.tenant.id;
+                var teamId = context.team.groupId;
                 getAppsList(token, teamId, true);
             });
             document.getElementById('showAllApp').style.display = "none";
@@ -169,9 +168,9 @@
 
         // add polly app to team
         $("#btnAddApp").on('click', function (e) {
-            microsoftTeams.getContext(function (context) {
-                var tenantId = context.tid;
-                var teamId = context.groupId;
+            microsoftTeams.app.getContext().then((context) => {
+                var tenantId = context.user.tenant.id;
+                var teamId = context.team.groupId;
                 const pollyAppId = {
                     "teamsApp@odata.bind": "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/1542629c-01b3-4a6d-8f76-1938b779e48d"
                 };
@@ -206,9 +205,9 @@
         // get the information of a app
         function getAppInfo(e) {
             var appId = $(e.currentTarget).attr('data-app-itemid');
-            microsoftTeams.getContext(function (context) {
-                var tenantId = context.tid;
-                var teamId = context.groupId;
+            microsoftTeams.app.getContext().then((context) => {
+                var tenantId = context.user.tenant.id;
+                var teamId = context.team.groupId;
                 e.preventDefault();
                 $.ajax({
                     url: "https://graph.microsoft.com/v1.0/teams/" + teamId + "/installedApps/" + appId + "?$expand=teamsAppDefinition",
@@ -234,9 +233,9 @@
         // upgrade the app installed in a team
         function upgradeApp(e) {
             var appId = $(e.currentTarget).attr('data-app-itemid');
-            microsoftTeams.getContext(function (context) {
-                var tenantId = context.tid;
-                var teamId = context.groupId;
+            microsoftTeams.app.getContext().then((context) => {
+                var tenantId = context.user.tenant.id;
+                var teamId = context.team.groupId;
                 e.preventDefault();
                 $.ajax({
                     url: "https://graph.microsoft.com/v1.0/teams/" + teamId + "/installedApps/" + appId + "/upgrade",
@@ -270,32 +269,33 @@
         }
 
         $("#btndelApp").on('click', function (e) {
-            microsoftTeams.initialize();
-            microsoftTeams.getContext(function (context) {
-                var tenantId = context.tid;
-                var teamId = context.groupId;
-                $.ajax({
-                    url: "https://graph.microsoft.com/v1.0/teams/" + teamId + "/installedApps/" + teamAppInstallationId,
-                    type: "DELETE",
-                    data: { appId: teamAppInstallationId },
-                    beforeSend: function (request) {
-                        request.setRequestHeader("Authorization", "Bearer " + token);
-                    },
-                    success: function () {
-                        console.log("App deleted succesfully!");
-                        $("#getAppModal").modal('show');
-                        var html = `<span> App deleted successfully</span> </br>`;
-                        $("#modalbody").html(html);
+            microsoftTeams.app.initialize().then(() => {
+                microsoftTeams.app.getContext().then((context) => {
+                    var tenantId = context.user.tenant.id;
+                    var teamId = context.team.groupId;
+                    $.ajax({
+                        url: "https://graph.microsoft.com/v1.0/teams/" + teamId + "/installedApps/" + teamAppInstallationId,
+                        type: "DELETE",
+                        data: { appId: teamAppInstallationId },
+                        beforeSend: function (request) {
+                            request.setRequestHeader("Authorization", "Bearer " + token);
+                        },
+                        success: function () {
+                            console.log("App deleted succesfully!");
+                            $("#getAppModal").modal('show');
+                            var html = `<span> App deleted successfully</span> </br>`;
+                            $("#modalbody").html(html);
 
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        $("#getAppModal").modal('show');
-                        var html = `<span> Cannot delete this app this app is installed by default.</span> </br>`;
-                        $("#modalbody").html(html);
-                        console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
-                    },
-                });
-            })
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            $("#getAppModal").modal('show');
+                            var html = `<span> Cannot delete this app this app is installed by default.</span> </br>`;
+                            $("#modalbody").html(html);
+                            console.log("textStatus: " + textStatus + ", errorThrown:" + errorThrown);
+                        },
+                    });
+                })
+            });
         });
     </script>
 </body>

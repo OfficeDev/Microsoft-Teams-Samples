@@ -16,10 +16,9 @@ using System.Threading.Tasks;
 using ActivityFeedBroadcast.Helpers;
 using ActivityFeedBroadcast.Model;
 using System.Net.Http.Headers;
-using Polly;
-using System.Net;
 using Newtonsoft.Json;
 using System.Text;
+using TabActivityFeed.Helpers;
 
 namespace ActivityFeedBroadcast.Controllers
 {
@@ -29,6 +28,10 @@ namespace ActivityFeedBroadcast.Controllers
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ConcurrentDictionary<string, List<BroadcastInfo>> _taskList;
+
+        const int recipientPartitionSize = 85;
+
+        const int partitionCount = 5;
 
         public HomeController(
             IConfiguration configuration,
@@ -110,19 +113,56 @@ namespace ActivityFeedBroadcast.Controllers
                                    .GetAsync();
 
                 // Get app id using app display name.
-                var appId = installedAppsForCurrentUser.Where(id => id.TeamsAppDefinition.DisplayName == "Activity feed broadcast").Select(x => x.TeamsAppDefinition.TeamsAppId);
+                var appId = installedAppsForCurrentUser.Where(id => id.TeamsAppDefinition.DisplayName == _configuration["AppName"]).Select(x => x.TeamsAppDefinition.TeamsAppId);
+                var count = usersList.Count;
+                var counter = 0;
+                var recipientsList = new List<Dictionary<string, string>>();
 
-                Parallel.ForEach (usersList, async users =>
-                {
-                    var installedApp = await graphClient.Users[users.Id].Teamwork.InstalledApps
+                await UtilityHelper.ForEachAsync(usersList, partitionCount, async users => {
+                    try
+                    {
+                        var installedApp = await graphClient.Users[users.Id].Teamwork.InstalledApps
                                              .Request()
                                              .Expand("teamsApp")
                                              .GetAsync();
 
-                    var response = new HttpResponseMessage();
-                    var installationId = installedApp.Where(id => id.TeamsApp.DisplayName == "Activity feed broadcast").Select(x => x.TeamsApp.Id);
-                    var client = new HttpClient();
-                    var url = "https://teams.microsoft.com/l/entity/" + appId.ToList()[0] + "/broadcast?context={\"subEntityId\":\"" + taskInfo.taskId + "\"}";
+                        var response = new HttpResponseMessage();
+                        var installationId = installedApp.Where(id => id.TeamsApp.DisplayName == _configuration["AppName"]).Select(x => x.TeamsApp.Id);
+
+                        if (installationId.ToList().Count == 0)
+                        {
+                            var userScopeTeamsAppInstallation = new UserScopeTeamsAppInstallation
+                            {
+                                AdditionalData = new Dictionary<string, object>()
+                            {
+                                {"teamsApp@odata.bind", "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/"+appId.ToList()[0]}
+                            }
+                            };
+
+                            await graphClient.Users[users.Id].Teamwork.InstalledApps
+                                                .Request()
+                                                .AddAsync(userScopeTeamsAppInstallation);
+                        }
+                        counter++;
+                        recipientsList.Add(new Dictionary<string, string>
+                        {
+                            {"@odata.type", "microsoft.graph.aadUserNotificationRecipient"},
+                            {"userId", users.Id}
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Installation failed for " + users.DisplayName);
+                    }
+                });
+
+                var url = "https://teams.microsoft.com/l/entity/" + appId.ToList()[0] + "/broadcast?context={\"subEntityId\":\"" + taskInfo.taskId + "\"}";
+                var client = new HttpClient();
+
+                var recipientsChunks = UtilityHelper.SplitIntoChunks(recipientsList, recipientPartitionSize);
+
+                foreach (var recipientList in recipientsChunks)
+                {
                     var postData = new
                     {
                         topic = new TeamworkActivityTopic()
@@ -137,79 +177,22 @@ namespace ActivityFeedBroadcast.Controllers
                             Content = $"Message By:"
                         },
                         templateParameters = new List<Microsoft.Graph.KeyValuePair>()
-                        {
-                            new Microsoft.Graph.KeyValuePair
                             {
-                                Name = "approvalTaskId",
-                                Value = taskInfo.title
-                            }
-                        }
+                                new Microsoft.Graph.KeyValuePair
+                                {
+                                    Name = "approvalTaskId",
+                                    Value = taskInfo.title
+                                }
+                            },
+                        recipients = recipientList
                     };
 
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", taskInfo.access_token);
                     var data = new StringContent(JsonConvert.SerializeObject(postData), Encoding.UTF8, "application/json");
 
-                    if (installationId.ToList().Count == 0)
-                    {
-                        var userScopeTeamsAppInstallation = new UserScopeTeamsAppInstallation
-                        {
-                            AdditionalData = new Dictionary<string, object>()
-                            {
-                                {"teamsApp@odata.bind", "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/"+appId.ToList()[0]}
-                            }
-                        };
-
-                        await graphClient.Users[users.Id].Teamwork.InstalledApps
-                                            .Request()
-                                            .AddAsync(userScopeTeamsAppInstallation);
-
-                        client.DefaultRequestHeaders.Authorization =
-                           new AuthenticationHeaderValue("Bearer", taskInfo.access_token);
-                        await client.PostAsync($"https://graph.microsoft.com/v1.0/users/{users.Id}/teamwork/sendActivityNotification", data);
-                    }
-                    else
-                    {
-                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", taskInfo.access_token);
-                        response = await client.PostAsync($"https://graph.microsoft.com/v1.0/users/{users.Id}/teamwork/sendActivityNotification", data);
-                    }
-
-                    if (response.StatusCode == HttpStatusCode.TooManyRequests)
-                    {
-                        await Policy
-                        .Handle<HttpRequestException>()
-                        .OrResult<HttpResponseMessage>(response => response.StatusCode == HttpStatusCode.TooManyRequests ||
-                                                            response.StatusCode == HttpStatusCode.ServiceUnavailable)
-                        .WaitAndRetryAsync(3,
-                            sleepDurationProvider: (retryCount, response, context) =>
-                            {
-                                var delay = TimeSpan.FromSeconds(0);
-                                // if an exception was thrown, this will be null
-                                if (response.Result != null)
-                                {
-                                    if (!response.Result.Headers.TryGetValues("Retry-After", out IEnumerable<string> values))
-                                        return delay;
-
-                                    if (int.TryParse(values.First(), out int delayInSeconds))
-                                        delay = TimeSpan.FromSeconds(delayInSeconds);
-                                }
-                                else
-                                {
-                                    var exponentialBackoff = Math.Pow(2, retryCount);
-                                    var delayInSeconds = exponentialBackoff * 10000;
-                                    delay = TimeSpan.FromMilliseconds(delayInSeconds);
-                                }
-
-                                return delay;
-                            },
-                            onRetryAsync: async (response, timespan, retryCount, context) =>
-                            {
-                            }
-                          ).ExecuteAsync(async () =>
-                          {
-                              return await client.PostAsync($"https://graph.microsoft.com/v1.0/users/{users.Id}/teamwork/sendActivityNotification", data);
-                          }
-                        );
-                    }
-                });       
+                    // Sending acitivity feed notification in bulk
+                    await client.PostAsync($"https://graph.microsoft.com/beta/teamwork/sendActivityNotificationToRecipients", data);
+                }
             }
             catch (Exception ex)
             {

@@ -6,7 +6,7 @@
         "@fluentui/react-northstar": "^0.49.0",
         "@microsoft/mgt": "^2.2.0",
         "@microsoft/mgt-react": "^2.2.0",
-        "@microsoft/teams-js": "^1.10.0",
+        "@microsoft/teams-js": "^2.0.0",
         "@testing-library/jest-dom": "^5.11.6",
         "@testing-library/react": "^11.2.2",
         "@testing-library/user-event": "^12.6.0",

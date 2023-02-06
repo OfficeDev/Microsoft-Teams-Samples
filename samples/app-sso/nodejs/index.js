@@ -20,13 +20,13 @@ server.use(express.json());
 server.use(express.urlencoded({
     extended: true
 }));
-server.use(express.static(path.resolve(__dirname, '../client/build')));
+server.use(express.static(path.resolve(__dirname, './client/build')));
 
 // Listen for incoming requests.
 server.use('/api', require('./server/api'));
 
 server.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
 });
 
 server.listen(PORT, () => {

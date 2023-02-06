@@ -8,8 +8,9 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:26"
+ contentType: samples
+ createdDate: "07/07/2021 01:38:26 PM"
+urlFragment: officedev-microsoft-teams-samples-bot-sharepoint-list-csharp
 ---
 
 # Sharepoint List Bot
@@ -20,7 +21,7 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   ```bash
   # determine dotnet version
@@ -109,6 +110,8 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 - Bot will send an Adaptive card having two fields name and address.
 - Enter the values in Adaptive Card and click on Save button.
 - Bot will save the card data in SharePoint List.
+
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-sharepoint-list/csharp/SPListBot/AdapterWithErrorHandler.cs#L26) line and put your debugger for local debug.
 
 ### Screenshots
 **Upload the custom app in Teams**

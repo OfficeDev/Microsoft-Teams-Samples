@@ -1,45 +1,45 @@
 {
-    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.7/MicrosoftTeams.schema.json",
-    "manifestVersion": "1.7",
-    "version": "2.0.0",
-    "id": "<<YourAppId>>",
-    "packageName": "teams.catering.bot",
-    "developer": {
-        "name": "Microsoft Corp.",
-        "websiteUrl": "https://www.microsoft.com/",
-        "privacyUrl": "https://privacy.microsoft.com/en-US/privacystatement",
-        "termsOfUseUrl": "https://aka.ms/ActionsPlatform/Poll/TermsOfUse"
-    },
-    "icons": {
-        "color": "color.png",
-        "outline": "outline.png"
-    },
-    "name": {
-        "short": "Teams Catering Bot",
-        "full": "Teams Catering Bot"
-    },
-    "description": {
-        "short": "Catering bot helps you place orders using adaptive cards",
-        "full": "It uses adaptive cards to place food and drinks order"
-    },
-    "accentColor": "#FFFFFF",
-    "bots": [
-        {
-            "botId": "<<YourBotId>>",
-            "scopes": [
-                "personal",
-                "team",
-                "groupchat"
-            ],
-            "supportsFiles": true,
-            "isNotificationOnly": false
-        }
-    ],
-    "permissions": [
-        "identity",
-        "messageTeamMembers"
-    ],
-    "validDomains": [
-        "*.*.ngrok.io"
-    ]
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "2.0.0",
+  "id": "<<YourAppId>>",
+  "packageName": "teams.catering.bot",
+  "developer": {
+    "name": "Microsoft Corp.",
+    "websiteUrl": "https://www.microsoft.com/",
+    "privacyUrl": "https://privacy.microsoft.com/en-US/privacystatement",
+    "termsOfUseUrl": "https://aka.ms/ActionsPlatform/Poll/TermsOfUse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Teams Catering Bot",
+    "full": "Teams Catering Bot"
+  },
+  "description": {
+    "short": "Catering bot helps you place orders using adaptive cards",
+    "full": "It uses adaptive cards to place food and drinks order"
+  },
+  "accentColor": "#FFFFFF",
+  "bots": [
+    {
+      "botId": "<<YourBotId>>",
+      "scopes": [
+        "personal",
+        "team",
+        "groupchat"
+      ],
+      "supportsFiles": true,
+      "isNotificationOnly": false
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.*.ngrok.io"
+  ]
 }

@@ -1,0 +1,13 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5",
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Transcript not found for this meeting.",
+      "weight": "Bolder",
+      "size": "Large"
+    }
+  ]
+}

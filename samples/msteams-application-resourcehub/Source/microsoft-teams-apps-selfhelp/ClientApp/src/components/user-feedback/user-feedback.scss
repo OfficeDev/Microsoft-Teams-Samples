@@ -1,0 +1,438 @@
+﻿.feedback-success-button {
+    margin-right: 4rem;
+    margin-top: 1rem;
+}
+
+.feedback-success-message {
+    margin-top: 1rem;
+}
+
+.default-container .feedback-container {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    background: #ffffff;
+}
+
+.dark-container .feedback-container {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    background: #292929;
+}
+
+.high-contrast-container .feedback-container {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    background: black;
+}
+
+.default-container .feedback-heading {
+    padding-top: 1rem;
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    color: #252423;
+
+    .ui-text {
+        margin-left: 1.5rem !important;
+    }
+}
+
+.whatCanimprove {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: #616161;
+}
+
+.textArea {
+    background: #F0F0F0;
+    border-radius: 3px;
+}
+
+.dark-container .feedback-heading {
+    padding-top: 1rem;
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    color: #ffffff;
+
+    .ui-text {
+        margin-left: 1.5rem !important;
+    }
+}
+
+.high-contrast-container .feedback-heading {
+    padding-top: 1rem;
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    color: #ffffff;
+
+    .ui-text {
+        margin-left: 1.5rem !important;
+    }
+}
+
+.feedback-button-text {
+    width: 150px;
+    height: 19px;
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #242424;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.feedback-button-textColor {
+    width: 150px;
+    height: 19px;
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.starIcon {
+    padding-left: 5px;
+}
+
+.feedback-left {
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 33px 0px 0px;
+    width: 215px;
+    height: 32px;
+    /* 🌕 Light Theme/Rest/Background/Default Background */
+
+    background: #FFFFFF;
+    /* 🌕 Light Theme/Rest/Border/Default Border */
+
+    border: 1px solid #D1D1D1;
+    border-radius: 4px;
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.feedback-leftColor {
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 33px 0px 0px;
+    width: 215px;
+    height: 32px;
+    /* 🌕 Light Theme/Rest/Background/Default Background */
+
+
+    background: #6264A7;
+    /* 🌕 Light Theme/Rest/Border/Default Border */
+
+    border: 1px solid #D1D1D1;
+    border-radius: 4px;
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.feedback-right {
+    width: 100%;
+    margin-left: 2.5rem;
+}
+
+.radioButton_Click {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #252423;
+}
+
+.emojiIcon {
+    padding: 2px;
+}
+
+.appContainer {
+    background: #ffffff !important;
+}
+
+.overallRating {
+    width: 85px;
+    height: 20px;
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    color: #252423;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin-top: 0.5rem !important;
+}
+
+.feedback-button-text {
+    white-space: nowrap;
+    word-break: keep-all;
+}
+
+.label1 {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.thank-you-image {
+    height: 135px;
+    width: 135px;
+    padding-top: 5px;
+}
+
+.thank-you-close {
+    position: absolute;
+    z-index: 0;
+    margin-left: 36rem;
+    margin-top: 20rem;
+}
+
+.thank-you-closeMobile {
+    position: absolute;
+    z-index: 0;
+    margin-left: 23rem;
+    margin-top: 29rem;
+}
+
+.dark-container #form-label-2 {
+    color: white;
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.dark-container .overallRating {
+    color: white;
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.dark-container .whatCanimprove {
+    color: white;
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.default-container #form-label-2 {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.default-container .overallRating {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.default-container .whatCanimprove {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.high-contrast-container #form-label-2 {
+    color: white;
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.high-contrast-container .overallRating {
+    color: white;
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.high-contrast-container .whatCanimprove {
+    color: white;
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.default-container .containerFeedback-Content {
+    background: #FFFFFF !important;
+}
+
+.dark-container .containerFeedback-Content {
+    background: #292929;
+}
+
+.high-contrast-container .containerFeedback-Content {
+    background: black !important;
+}
+
+.default-container .icon-Color {
+    color: black !important;
+}
+
+.dark-container .icon-Color {
+    color: #201F1F !important;
+}
+
+.high-contrast-container .icon-Color {
+    color: black !important;
+}
+
+.default-container .star-icon {
+    color: black !important;
+    min-width: 0px !important;
+}
+
+.dark-container .star-icon {
+    color: #FFFFFF !important;
+    min-width: 0px !important;
+}
+
+.high-contrast-container .star-icon {
+    color: #FFFFFF !important;
+    min-width: 0px !important;
+}
+
+.start-icon-Gold {
+    color: #FED248;
+    min-width: 0px !important;
+}
+
+.star-ButtonIcon {
+    min-width: 0px !important;
+
+    .ui-button {
+        min-width: 0px !important;
+
+        .hm {
+            min-width: 0px !important;
+        }
+    }
+}
+
+.default-container .feedback-headingMobile {
+    padding-top: 1rem;
+    padding-bottom: 10px;
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    color: #252423;
+
+    .ui-text {
+        margin-left: 1rem !important;
+    }
+}
+
+.dark-container .feedback-headingMobile {
+    padding-top: 1rem;
+    padding-bottom: 10px;
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    color: #ffffff;
+
+    .ui-text {
+        margin-left: 1rem !important;
+    }
+}
+
+.high-contrast-container .feedback-headingMobile {
+    padding-top: 1rem;
+    padding-bottom: 10px;
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    color: #ffffff;
+
+    .ui-text {
+        margin-left: 1rem !important;
+    }
+}
+
+.feedback-rightMobile {
+    width: 100%;
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+
+.default-container .feedback-containerMobile {
+    margin-left: 1rem;
+    background: #ffffff;
+}
+
+.dark-container .feedback-containerMobile {
+    margin-left: 1rem;
+    background: #292929;
+}
+
+.high-contrast-container .feedback-containerMobile {
+    margin-left: 1rem;
+    background: black;
+}
+
+.dark-container .feedback-radio-text {
+    color:white;
+}
+
+.high-contrast-container .feedback-radio-text {
+    color: white;
+}

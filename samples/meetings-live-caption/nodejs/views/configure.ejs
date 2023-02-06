@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configure Page</title>
+    <style>
+        body {
+            font-family: "Segoe UI", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Web";
+        }
+
+        .config-container {
+            padding: 0.5rem;
+        }
+    </style>
+    <script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.pages.config.registerOnSaveHandler((saveEvent) => {
+                var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+
+                var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: JSON.stringify({
+                        CartUrl: document.getElementById("cart-url").value
+                    })
+                };
+
+                fetch(`${window.location.origin}/api/meeting/SaveCARTUrl`, requestOptions)
+                    .then(response => {
+                        if (response.status == 200) {
+                            microsoftTeams.pages.config.setConfig({
+                                entityId: 'caption-tab',
+                                contentUrl: window.location.origin + "/Home/Index",
+                                suggestedDisplayName: "Meeting Live Caption"
+                            });
+                            saveEvent.notifySuccess();
+                        }
+                        else {
+                            saveEvent.notifyFailure("");
+                        }
+                    })
+                    .catch(error => saveEvent.notifyFailure(error));
+            });
+        });
+
+        function onCARTInputChange(url) {
+            var errorSpan = document.getElementById("error_messsage");
+
+            if (url != null && url.trim() !== "" && url.includes("meetingid") && url.includes("token")) {
+                microsoftTeams.pages.config.setValidityState(true);
+                errorSpan.innerHTML = "";
+                document.getElementById("success_messsage").hidden = false;
+            }
+            else {
+                microsoftTeams.pages.config.setValidityState(false);
+                document.getElementById("success_messsage").hidden = true;
+                errorSpan.innerHTML = "Please enter a valid CART URL.";
+            }
+        }
+
+        function onBackSpace() {
+            let key = window.event.keyCode;
+
+            // If the user has pressed enter
+            if (key === 8) {
+                onCARTInputChange();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="config-container">
+        <h2>
+            Please enter CART URL of the meeting to proceed:
+        </h2>
+        Click on this link to know <a target="_blank"
+            href="https://support.microsoft.com/office/use-cart-captions-in-a-microsoft-teams-meeting-human-generated-captions-2dd889e8-32a8-4582-98b8-6c96cf14eb47">how
+            to get Meeting CART URL.</a>
+        <input style="width:96%;" type="text" id="cart-url" onkeypress="onBackSpace(this.value)"
+            oninput="onCARTInputChange(this.value)" /><span id="error_messsage"
+            style="color:red;margin-left:1rem;"></span>
+        <p style="color:green" id="success_messsage" hidden>Click on save to configure the tab.</p>
+    </div>
+</body>
+
+</html>

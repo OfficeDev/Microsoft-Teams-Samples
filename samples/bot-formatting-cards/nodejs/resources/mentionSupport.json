@@ -1,0 +1,37 @@
+﻿{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.5",
+  "type": "AdaptiveCard",
+  "body": [
+    {
+      "type": "TextBlock",
+      "weight": "bolder",
+      "size": "large",
+      "text": "Mention Support Card"
+    },
+    {
+      "type": "TextBlock",
+      "text": "Hi <at>{{New-Ids}}</at>, <at>{{New-Ids}}</at>"
+    }
+  ],
+  "msteams": {
+    "entities": [
+      {
+        "type": "mention",
+        "text": "<at>{{New-Ids}}</at>",
+        "mentioned": {
+          "id": "{{Email-Id}}",
+          "name": "{{New-Ids}}"
+        }
+      },
+      {
+        "type": "mention",
+        "text": "<at>{{New-Ids}}</at>",
+        "mentioned": {
+          "id": "{{Microsoft-App-Id}}", 
+          "name": "{{New-Ids}}"
+        }
+      }
+    ]
+  }
+}

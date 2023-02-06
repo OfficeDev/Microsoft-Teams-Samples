@@ -1,7 +1,7 @@
 {
     "name": "teams-bot",
     "version": "1.0.0",
-    "description": "Bot Builder v4 Bot Teams sample",
+    "description": "Bot conversation sso quickstart js sample",
     "author": "Microsoft",
     "license": "MIT",
     "main": "index.js",
@@ -16,20 +16,20 @@
         "url": "https://github.com/Microsoft/BotBuilder-Samples.git"
     },
     "dependencies": {
-        "@microsoft/microsoft-graph-client": "^2.2.1",
-        "botbuilder": "~4.11.0",
-        "botbuilder-dialogs": "~4.11.0",
-        "dotenv": "^8.2.0",
+        "@microsoft/microsoft-graph-client": "^3.0.4",
+        "botbuilder": "^4.18.0",
+        "botbuilder-dialogs": "^4.18.0",
+        "dotenv": "^8.6.0",
         "isomorphic-fetch": "^3.0.0",
-        "restify": "~8.5.1"
+        "restify": "^10.0.0"
     },
     "devDependencies": {
-        "eslint": "^7.0.0",
+        "eslint": "^7.32.0",
         "eslint-config-standard": "^14.1.1",
-        "eslint-plugin-import": "^2.20.2",
+        "eslint-plugin-import": "^2.26.0",
         "eslint-plugin-node": "^11.1.0",
-        "eslint-plugin-promise": "^4.2.1",
+        "eslint-plugin-promise": "^4.3.1",
         "eslint-plugin-standard": "^4.0.1",
-        "nodemon": "~2.0.4"
+        "nodemon": "^2.0.19"
     }
 }

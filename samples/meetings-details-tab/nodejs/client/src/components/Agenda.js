@@ -11,26 +11,30 @@ const Agenda = ({title, option1, option2, Id, IsSend, taskList}) => {
                 body: JSON.stringify({taskInfo, taskList}),
             })
     };
-    const submitHandler = (err, result) => {
+    const submitHandler = (dialogResponse) => {
         return true;
-        };
+    };
+    
     const openResultModule = () => {
         const baseUrl = `https://${window.location.hostname}:${window.location.port}`;
         let taskInfo = {
             title: null,
-            height: null,
-            width: null,
+            size: null,
             url: null,
-            card: null,
             fallbackUrl: null,
-            completionBotId: null,
         };
-            taskInfo.url = baseUrl +"/Result?id="+Id;
-            taskInfo.title = "Result";
-            taskInfo.height = "250";
-            taskInfo.width = "500";
-            taskInfo.fallbackUrl = taskInfo.url
-        microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+
+        taskInfo.url = baseUrl +"/Result?id="+Id;
+        taskInfo.title = "Result";
+        taskInfo.size = {
+            height: 250,
+            width: 500,
+        };
+        taskInfo.fallbackUrl = taskInfo.url
+
+        microsoftTeams.app.initialize().then(() => {
+            microsoftTeams.dialog.open(taskInfo, submitHandler);
+        });
     }
     if(!IsSend){
     return (

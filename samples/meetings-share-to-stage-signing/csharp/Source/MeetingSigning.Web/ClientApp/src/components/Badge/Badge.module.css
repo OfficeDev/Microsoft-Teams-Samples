@@ -1,0 +1,19 @@
+.badge {
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 10rem;
+    padding: 0.125rem 1rem 0.25rem;
+    line-height: 150%;
+    color: #fff;
+    display: inline-block;
+}
+
+.rectangular {
+    border-radius: 0.25rem;
+    padding: 0.125rem 0.25rem 0.25rem;
+}
+
+.small {
+    font-size: 0.7rem;
+}

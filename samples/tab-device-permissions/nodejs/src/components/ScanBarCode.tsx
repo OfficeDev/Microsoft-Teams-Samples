@@ -3,7 +3,9 @@
 
 import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Card, Flex, Text, Button, CardHeader, CardBody } from '@fluentui/react-northstar'
+import {Text, Button } from '@fluentui/react-components'
+import { Card} from "@fluentui/react-components/unstable"
+import { CardBody } from 'reactstrap';
 
 /**
  * The 'ScanBarCode'
@@ -12,7 +14,7 @@ import { Card, Flex, Text, Button, CardHeader, CardBody } from '@fluentui/react-
 const ScanBarCode = () => {
   const [barCodeValue, setBarCodeValue] = useState('');
   useEffect(() => {
-    microsoftTeams.initialize()
+    microsoftTeams.app.initialize()
   })
 
   // Method to scan barcode
@@ -39,19 +41,17 @@ const ScanBarCode = () => {
   return (
     <>
       {/* Card for Barcode Scanner */}
-      <Card>
-        <CardHeader>
-          <Text content="Scan Barcode (Mobile Only)" weight="bold" />
-        </CardHeader>
+      <Card>       
+          <Text weight="bold">Scan Barcode (Mobile Only) </Text>       
         <CardBody>
-          <Flex column gap="gap.small">
-            <Text content="Scan any barcode to get information related to it" />
-            <Text content="SDK used: " weight="semibold" />
-            <Text content="microsoftTeams" />
-            <Text content="Method: " weight="semibold" />
-            <Text content="teams.media" />
-            <Button content="Scan Barcode" onClick={scanBarCode} />
-          </Flex>
+          <div className='flex columngap'>
+            <Text>Scan any barcode to get information related to it</Text>
+            <Text weight="semibold">SDK used:</Text>
+            <Text>microsoftTeams</Text>
+            <Text weight="semibold" >Method:</Text>
+            <Text>teams.media</Text>
+            <Button onClick={scanBarCode} >Scan Barcode</Button>
+          </div>
         </CardBody>
         {barCodeValue !== '' && <Text>Scanned Text: {barCodeValue}</Text>}
       </Card>

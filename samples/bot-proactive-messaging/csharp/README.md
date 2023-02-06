@@ -7,7 +7,10 @@ products:
 - office
 - office-365
 description: "Two samples to highlight solutions to two challenges with building proactive messaging apps in Microsoft Teams"
-urlFragment: "msteams-samples-proactive-messaging"
+extensions:
+ contentType: samples
+ createdDate: "05/17/2022 01:48:56 AM"
+urlFragment: officedev-microsoft-teams-samples-bot-proactive-messaging-csharp
 ---
 
 # Teams Proactive Messaging Samples
@@ -33,11 +36,15 @@ Two samples to highlight solutions to two challenges with building proactive mes
 | `CHANGELOG.md`       | List of changes to the sample.                                              |
 | `CONTRIBUTING.md`    | Guidelines for contributing to the sample.                                  |
 | `README.md`          | This README file.                                                           |
-| `LICENSE`            | The license for the sample.                                                 |
+| `LICENSE`            | The license for the sample. 
+
+## Interaction with app
+
+ ![Broadcast from user](coordinate-logger/Images/ProactivemessageGIF.gif)
 
 ## Prerequisites
 - Microsoft Teams account
-- [.NET Core 3.x SDK](https://dotnet.microsoft.com/download)
+- [.NET SDK](https://dotnet.microsoft.com/download) version 6.0
 - Publicly addressable https url or tunnel such as [ngrok](https://ngrok.com/) or [Tunnel Relay](https://github.com/OfficeDev/microsoft-teams-tunnelrelay) 
 
 ## Setup
@@ -46,20 +53,20 @@ Two samples to highlight solutions to two challenges with building proactive mes
 # ngrok http -host-header=rewrite 5000
 ```
 
-2. Create a Bot Registration
-Either through [App Studio](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/app-studio-overview) or the Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration). (The 'Bot' tab in App Studio).
+2. Create a AAD app registration and Azure Bot in Azure portal: [Azure Bot registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration).
 
 - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+- configure the messaging endpoint in Azure bot with your application domain URL and append `/api/messages` like: `https://111xxx.ngrok.io/api/messages`
 
-3. Modify the `manifest.json` in the `/teamsAppManifest` folder and replace the `{{BOT-ID}}` with the id from step 2.
+3. Modify the `manifest.json` in the `/teamsAppManifest` folder and replace the `{{BOT-ID}}` with the id received while doing AAD app registration in previous steps and also update the `<<App Domain>>` with your application domain like ngrok domain: `111xxx.ngrok.io` excluding http/https.
 
 4. Zip the contents of `teamsAppManifest` into a `manifest.zip`.
 
-5. Modify the `/coordinate-logger/appsettings.local.json` and fill in the `{{ Bot Id }}` and `{{ Bot Password }}` with the id from step 2.
+5. Modify the `/coordinate-logger/appsettings.local.json` file and fill in the `{{ Bot Id }}` and `{{ Bot Password }}` with the id's received while doing AAD app registration in previous steps.
 
-## Running the samples
 
-### Coordinate Logger
+**Coordinate Logger**
+
 ***Note this is a noisy application, it is recommended you not run this in shared teams where you would disturb other users!***
 
 1. Start the application
@@ -81,7 +88,7 @@ Either through [App Studio](https://docs.microsoft.com/en-us/microsoftteams/plat
     - Select `Upload a custom app` and select the manifest.json file
     - Click the `Add` Button on the consent screen
 
-    The coordinates of the user should be in the console window
+    The coordinates of the user should be log in the console window(refer above image)
 
 3. Install the app to a Team
     - Go to the `Apps` in the left rail
@@ -90,9 +97,9 @@ Either through [App Studio](https://docs.microsoft.com/en-us/microsoftteams/plat
     - Select a Team to install to. 
 
     The app will send a message to each channel in the Team & log the coordinates
-    for each new thread to the console window.
+    for each new thread to the console window.(refer above image)
 
-## Proactive CMD
+**Proactive CMD**
 
 1. Send a message to a user
     Using the values from the Coordinate Logger for a User's conversation coordinates & Bot registration fill in the parameters to the following command.
@@ -111,6 +118,24 @@ Either through [App Studio](https://docs.microsoft.com/en-us/microsoftteams/plat
     ```
 
     This will send a message to the thread
+    
+## Running the sample.
+
+**User Conversation log info**
+![Conversation details](coordinate-logger/Images/ConversationDetails.png)
+
+**Channel Conversation log info**
+![Conversation details](coordinate-logger/Images/ConversationDetails_Channel.png)
+
+**Proactive message**
+![Proactive message](coordinate-logger/Images/ProactiveMessage.png)
+
+**Team name in which message will post**
+![Proactive message](coordinate-logger/Images/TeamInfo.png)
+
+**Meesages in other Team**
+![Proactive message](coordinate-logger/Images/Teammessage.png)
+
 
 ## Key concepts
 

@@ -8,8 +8,9 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:26"
+ contentType: samples
+ createdDate: "07/07/2021 01:38:26 PM"
+urlFragment: officedev-microsoft-teams-samples-graph-proactive-installation-csharp
 ---
 
 # Proactive Installation Sample App
@@ -18,57 +19,95 @@ This sample app illustartes the proactive installation of app using Graph API an
 
 Language Used : C#
 
+## Interaction with app
+![Proactive Installtion Module](ProactiveAppInstallation/Images/ProactiveInstallation.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Proactive Installation Sample App:** [Manifest](/samples/graph-proactive-installation/csharp/demo-manifest/graph-proactive-installation.zip)
+
 ## Prerequisites
-### Tools
 
 - Microsoft Teams is installed and you have an account
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
-- [ngrok](https://ngrok.com/) or equivalent tunnelling solution
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
+- [ngrok](https://ngrok.com/download) or equivalent tunnelling solution
 
-## To try this sample
+## Setup
 
-- Register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
-- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
-    > NOTE: When you create your bot you will create an App ID and App password - make sure you keep these for later.
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
-1. Clone the repository
-   ```bash
-    git clone https://github.com/OfficeDev/microsoft-teams-samples.git
+  - Required Microsoft graph Application level permissions to run this sample app
+     - TeamsAppInstallation.ReadWriteForUser.All
+  - [Get consent for the Application permissions](https://docs.microsoft.com/graph/auth-v2-service?context=graph%2Fapi%2F1.0&view=graph-rest-1.0#3-get-administrator-consent) by following steps mentioned here.
+
+2. Setup for Bot
+	- Register a AAD aap registration in Azure portal.
+	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+	- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+
+    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
+
+3. Setup NGROK
+      - Run ngrok - point to port 3978
+
+	```bash
+	# ngrok http -host-header=rewrite 3978
+	```   
+4. Setup for code
+
+  - Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
     ```
-2. Run the bot from a terminal or from Visual Studio:
+  - Modify the `/appsettings.json` and fill in the following details:
+    - `{{YOUR-MICROSOFT-APP-ID}}` - Generated from Step 1 while doing AAd app registration in Azure portal.
+    - `{{ YOUR-MICROSOFT-APP-PASSWORD}}` - Generated from Step 1, also referred to as Client secret
+    - `{{ YOUR-APPCATALOG-TEAM-ID }}` - To get `TeamsappcatalogAppId` you first navigate to following link in your browser [Get TeamsAppCatalogId](https://developer.microsoft.com/graph/graph-explorer?request=appCatalogs%2FteamsApps%3F%24filter%3DdistributionMethod%20eq%20'organization'&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) from Microsoft Graph explorer. Then search with app name or based on Manifest App id  in Graph Explorer response and copy the `Id` [i.e teamApp.Id]
+  
+  - Run the bot from Visual Studio:
+  
     - Launch Visual Studio
     - File -> Open -> Project/Solution  
     - Navigate to `samples/graph-proactive-installation/csharp` folder
     - Select `ProactiveAppInstallation.sln` file
     - Press `F5` to run the project
-3. Run ngrok to point to port 3978
-   ```bash
-   ngrok http -host-header=rewrite 3978
-    ```
-4. Update the manifest.json file with `Microsoft-App-ID` value and to get TeamsAppCatalogId upload your     Manifest  for my Organization.
-![image](https://user-images.githubusercontent.com/85157377/122389115-38c9ff80-cf8e-11eb-8cda-0a836cb26b34.png)
-5. Go to appsettings.json and update `MicrosoftAppId` ,  `MicrosoftAppPassword`, `TeamsappcatalogAppId` information. 
-   - To get `TeamsappcatalogAppId` you first navigate to following link in your browser [Get TeamsAppCatalogId](https://developer.microsoft.com/en-us/graph/graph-explorer?request=appCatalogs%2FteamsApps%3F%24filter%3DdistributionMethod%20eq%20'organization'&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) from Microsoft Graph explorer. Then search with app name or based on Manifest App id  in Graph Explorer response and copy the `Id` [i.e teamApp.Id]
-6. Required Microsoft graph Application level permissions to run this sample app
-     - TeamsAppInstallation.ReadWriteForUser.All
-7. [Get consent for the Application permissions](https://docs.microsoft.com/en-us/graph/auth-v2-service?context=graph%2Fapi%2F1.0&view=graph-rest-1.0#3-get-administrator-consent) by following steps mentioned here.
-8. Run your app, either from Visual Studio with ```F5``` or using ```dotnet run``` in the appropriate folder.
+    
+4) Setup Manifest for Teams
+- __*This step is specific to Teams.*__
+    - **Edit** the `manifest.json` contained in the ./TeamsAppManifest folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)   
+    - **Zip** up the contents of the `TeamsAppManifest` folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
 
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+   - Go to Microsoft Teams. From the lower left corner, select Apps
+   - From the lower left corner, choose Upload a custom App
+   - Go to your project directory, the ./TeamsAppManifest folder, select the zip folder, and choose Open.
+   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
+## Running the sample
 
 ### Interacting with the Proactive installation App in Teams
+
 - Install the Proactive App Installation demo in a Team or GroupChat.
-     ![image](https://user-images.githubusercontent.com/31851992/122173819-cd096900-ce9f-11eb-93a1-8028e6b1a46e.png)
 
-- **Team Scope**: Run Check and install to pro-actively installs the App for all the users in team. After installation send 'Send message' command to send proactive message.
-     ![image](https://user-images.githubusercontent.com/31851992/122173110-0ee5df80-ce9f-11eb-8037-4257afa95406.png)
+    ![Proactive installation](ProactiveAppInstallation/Images/addtoteams.png)
+
+- **Team Scope**: Run Check and install to pro-actively installs the App for all the users in team. 
+    ![Proactive installation](ProactiveAppInstallation/Images/CheckandInstall.png)
+
 - **Group Chat**:  Run Check and install to pro-actively installs the App for all the users in team. After installation send 'Send message' command to send proactive message.
-    ![image](https://user-images.githubusercontent.com/31851992/122173594-83208300-ce9f-11eb-9100-7e9373d2a531.png)
+
+   ![Proactive installation](ProactiveAppInstallation/Images/sendmessage.png)
+
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/graph-proactive-installation/csharp/ProactiveAppInstallation/AdapterWithErrorHandler.cs#L27) line and put your debugger for local debug.
 
 
-## Further Reading
+## Further reading
 
+- [Proactive App Installation using Graph API](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages?tabs=Csharp)
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Proactive App Installation using Graph API](https://docs.microsoft.com/en-us/microsoftteams/platform/graph-api/proactive-bots-and-messages/graph-proactive-bots-and-messages?tabs=Csharp)
+- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
+- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)

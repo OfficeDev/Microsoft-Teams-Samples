@@ -5,52 +5,36 @@ html
     title Auth End Page
 
   body
-    script(src="https://unpkg.com/@microsoft/teams-js@1.5.0/dist/MicrosoftTeams.min.js", crossorigin="anonymous")
-    script(src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.15/js/adal.min.js", integrity="sha384-lIk8T3uMxKqXQVVfFbiw0K/Nq+kt1P3NtGt/pNexiDby2rKU6xnDY8p16gIwKqgI", crossorigin="anonymous")
+    script(src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js", crossorigin="anonymous")
+    script(type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js")
 
     script.
-        microsoftTeams.initialize();
+         microsoftTeams.app.initialize().then(() => {
+         microsoftTeams.app.getContext().then(async (context) => {
+          const msalConfig = {
+            auth: {
+              clientId: "#{clientId}",
+              authority: `https://login.microsoftonline.com/${context.tid}`,
+              navigateToLoginRequestUrl: false
+            },
+            cache: {
+              cacheLocation: "sessionStorage",
+            },
+          }
 
-        localStorage.removeItem("auth.error");
-        let hashParams = getHashParameters();
-
-        if (hashParams["error"]) {
-            // Authentication/authorization failed
-            localStorage.setItem("auth.error", JSON.stringify(hashParams));
-            microsoftTeams.authentication.notifyFailure(hashParams["error"]);
-        } else if (hashParams["access_token"]) {
-            // Get the stored state parameter and compare with incoming state
-            let expectedState = localStorage.getItem("auth.state");
-            if (expectedState !== hashParams["state"]) {
-                // State does not match, report error
-                localStorage.setItem("auth.error", JSON.stringify(hashParams));
-                microsoftTeams.authentication.notifyFailure("StateDoesNotMatch");
-            } else {
-                // Success -- return token information to the parent page.
-                // Use localStorage to avoid passing the token via notifySuccess; instead we send the item key.
-                let key = "auth.result";
-                // TODO: not sure why this isn't being set
-                localStorage.setItem(key, JSON.stringify({
-                    idToken: hashParams["id_token"],
-                    accessToken: hashParams["access_token"],
-                    tokenType: hashParams["token_type"],
-                    expiresIn: hashParams["expires_in"]
+          const msalInstance = new window.msal.PublicClientApplication(msalConfig);
+          msalInstance.handleRedirectPromise()
+            .then((tokenResponse) => {
+              if (tokenResponse !== null) {
+                microsoftTeams.authentication.notifySuccess(JSON.stringify({
+                  sessionStorage: sessionStorage
                 }));
-                microsoftTeams.authentication.notifySuccess(key);
-            }
-        } else {
-            // Unexpected condition: hash does not contain error or access_token parameter
-            localStorage.setItem("auth.error", JSON.stringify(hashParams));
-            microsoftTeams.authentication.notifyFailure("UnexpectedFailure");
-        }
-        // Parse hash parameters into key-value pairs
-        function getHashParameters() {
-            let hashParams = {};
-            location.hash.substr(1).split("&").forEach(function(item) {
-                let s = item.split("="),
-                k = s[0],
-                v = s[1] && decodeURIComponent(s[1]);
-                hashParams[k] = v;
+              } else {
+                microsoftTeams.authentication.notifyFailure("Get empty response.");
+              }
+            })
+            .catch((error) => {
+              microsoftTeams.authentication.notifyFailure(JSON.stringify(error));
             });
-            return hashParams;
-        }
+        });
+      });

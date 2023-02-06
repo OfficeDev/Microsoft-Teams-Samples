@@ -41,9 +41,6 @@ namespace JoinTeamByQR
             // Create a global hashset for our Roster and notes information
             services.AddSingleton<ConcurrentDictionary<string, string>>();
 
-            // Dialog Manager handles initiating the Dialog Stack, saving state, etc.
-            services.AddSingleton<DialogManager>();
-
             // The Dialog that will be run by the bot.
             services.AddSingleton<MainDialog>();
 

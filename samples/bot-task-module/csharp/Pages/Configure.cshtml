@@ -1,0 +1,49 @@
+﻿@page
+@using Microsoft.Teams.Samples.TaskModule.Web.Helper;
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+    ViewData["Title"] = "Configure";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="font-semibold font-title">Configure your app here</div>
+<form>
+    <p>
+        <label for="tabChoice">Select the tab you would like to see: </label>
+        <div>
+            <input type="radio" name="tabType" value="tasks" onclick="onClick()">Task Module<br>
+            <input type="radio" name="tabType" value="helloworld" onclick="onClick()"> Hello World
+        </div>
+    </p>
+</form>
+<script type="text/javascript">
+    microsoftTeams.initialize();
+    microsoftTeams.settings.registerOnSaveHandler(function (saveEvent) {
+     
+        var radios = document.getElementsByName("tabType");
+
+        if (radios[0].checked) {
+            microsoftTeams.settings.setSettings({
+                entityId: "tasks",
+                contentUrl: @Json.Serialize(Configuration["BaseUrl"])+"/tasks",
+                suggestedDisplayName: "Task Module CSharp",
+                websiteUrl: @Json.Serialize(Configuration["BaseUrl"])+"/tasks"
+            });
+        } else {
+            microsoftTeams.settings.setSettings({
+                entityId: "helloworld",
+                contentUrl: @Json.Serialize(Configuration["BaseUrl"]) +"/helloworld",
+                suggestedDisplayName: "Hello World",
+                websiteUrl: @Json.Serialize(Configuration["BaseUrl"]) +"/helloworld"
+            });
+        }
+
+        saveEvent.notifySuccess();
+    });
+
+    function onClick() {
+        microsoftTeams.settings.setValidityState(true);
+    }
+
+</script>

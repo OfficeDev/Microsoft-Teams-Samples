@@ -169,9 +169,7 @@ namespace TabActivityFeed.Controllers
             TaskHelper.AddTaskToFeed(taskInfo);
             var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
             var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["AzureAd:MicrosoftAppId"], _configuration["AzureAd:MicrosoftAppPassword"], _configuration["AzureAd:TenantId"]);
-            var user = await graphClient.Users[taskInfo.userName]
-                      .Request()
-                      .GetAsync();
+             
             if (taskInfo.taskInfoAction == "customTopic")
             {
                 ChatMessageHelper chatMessage = new ChatMessageHelper(_configuration);
@@ -187,11 +185,12 @@ namespace TabActivityFeed.Controllers
                 var CustomPreviewText = new ItemBody
                 {
                     Content = "Deployment requires your approval"
-                };
-                var customRecipient = new AadUserNotificationRecipient
+                }; 
+                var customRecipient = new ChatMembersNotificationRecipient
                 {
-                    UserId = user.Id
+                    ChatId = taskInfo.chatId
                 };
+
                 var CustomTemplateParameters = new List<Microsoft.Graph.KeyValuePair>()
                  {
                  new Microsoft.Graph.KeyValuePair
@@ -225,20 +224,20 @@ namespace TabActivityFeed.Controllers
                 var previewText = new ItemBody
                 {
                     Content = "Hello:"
-                };
-                var recipient = new AadUserNotificationRecipient
+                }; 
+                var recipient = new ChatMembersNotificationRecipient
                 {
-                    UserId = user.Id
+                    ChatId = taskInfo.chatId
                 };
 
                 var templateParameters = new List<Microsoft.Graph.KeyValuePair>()
-            {
-            new Microsoft.Graph.KeyValuePair
-            {
-              Name = "taskName",
-              Value =taskInfo.title
-             }
-           };
+                {
+                    new Microsoft.Graph.KeyValuePair
+                    {
+                      Name = "taskName",
+                      Value =taskInfo.title
+                     }
+               };
                 try
                 {
                     await graphClientApp.Chats[taskInfo.chatId]
@@ -261,9 +260,6 @@ namespace TabActivityFeed.Controllers
             TaskHelper.AddTaskToFeed(taskInfo);
             var graphClient = SimpleGraphClient.GetGraphClient(taskInfo.access_token);
             var graphClientApp = SimpleGraphClient.GetGraphClientforApp(_configuration["AzureAd:MicrosoftAppId"], _configuration["AzureAd:MicrosoftAppPassword"], _configuration["AzureAd:TenantId"]);
-            var user = await graphClient.Users[taskInfo.userName]
-                      .Request()
-                      .GetAsync();
             if (taskInfo.taskInfoAction == "customTopic")
             {
                 ChatMessageHelper chatMessage = new ChatMessageHelper(_configuration);
@@ -281,9 +277,9 @@ namespace TabActivityFeed.Controllers
                 {
                     Content = "New deployment requires your approval"
                 };
-                var customRecipient = new AadUserNotificationRecipient
+                var customRecipient = new TeamMembersNotificationRecipient
                 {
-                    UserId = user.Id
+                    TeamId = taskInfo.teamId
                 };
                 var CustomTemplateParameters = new List<Microsoft.Graph.KeyValuePair>()
                  {
@@ -326,25 +322,24 @@ namespace TabActivityFeed.Controllers
                 var previewText = new ItemBody
                 {
                     Content = "Your Reservation Updated:"
-                };
-                var recipient = new AadUserNotificationRecipient
+                }; 
+                var recipient = new TeamMembersNotificationRecipient
                 {
-                    UserId = user.Id
+                    TeamId = taskInfo.teamId
                 };
-
                 var templateParameters = new List<Microsoft.Graph.KeyValuePair>()
-            {
-            new Microsoft.Graph.KeyValuePair
-            {
-              Name = "reservationId",
-              Value =taskInfo.reservationId
-             },
-              new Microsoft.Graph.KeyValuePair
-            {
-              Name = "currentSlot",
-              Value =taskInfo.currentSlot
-             }
-           };
+                {
+                new Microsoft.Graph.KeyValuePair
+                {
+                  Name = "reservationId",
+                  Value =taskInfo.reservationId
+                 },
+                  new Microsoft.Graph.KeyValuePair
+                {
+                  Name = "currentSlot",
+                  Value =taskInfo.currentSlot
+                 }
+               };
                 try
                 {
                     await graphClientApp.Teams[taskInfo.teamId]
@@ -374,11 +369,10 @@ namespace TabActivityFeed.Controllers
                 {
                     Content = "These are the count of pending request pending request:"
                 };
-                var recipient = new AadUserNotificationRecipient
+                var recipient = new TeamMembersNotificationRecipient
                 {
-                    UserId = user.Id
+                    TeamId = taskInfo.teamId
                 };
-
                 var templateParameters = new List<Microsoft.Graph.KeyValuePair>()
             {
             new Microsoft.Graph.KeyValuePair

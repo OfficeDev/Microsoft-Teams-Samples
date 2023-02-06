@@ -1,0 +1,54 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
+  "version": "1.0.0",
+  "id": "{{Manifest-id}}",
+  "packageName": "com.microsoft.teams.tabpeoplepicker",
+  "developer": {
+    "name": "Microsoft",
+    "websiteUrl": "https://www.teams.com",
+    "privacyUrl": "https://www.teams.com/privacy",
+    "termsOfUseUrl": "https://www.teams.com/termsofuse"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Tab people picker",
+    "full": "People picker functionality in tab."
+  },
+  "description": {
+    "short": "This sample shows tab capability with the feature of client sdk people picker.",
+    "full": "This sample shows tab capability with the feature of client sdk people picker."
+  },
+  "accentColor": "#235EA5",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://{{base-url}}/configure",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team",
+        "groupchat"
+      ]
+    }
+  ],
+  "staticTabs": [
+    {
+      "entityId": "peoplepickertab",
+      "name": "Tab",
+      "contentUrl": "https://{{base-url}}/tab",
+      "websiteUrl": "https://{{base-url}}/tab",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.ngrok.io"
+  ]
+}

@@ -1,0 +1,27 @@
+.signature-input {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.signature-input input {
+  background-color: #d9f1fc;
+  color: black;
+  border-radius: 0.25em;
+  padding: 0.3125em 2.1875em 0.3125em 0.75em;
+  border-bottom-width: 0.125em;
+}
+
+.signature-input input:disabled {
+  background-color: #e9e9e9;
+}
+
+.signature-input:last-child {
+  margin-top: 0 !important;
+}
+
+.signature-list {
+  max-width: fit-content;
+  justify-content: space-between !important;
+  height: auto !important;
+}

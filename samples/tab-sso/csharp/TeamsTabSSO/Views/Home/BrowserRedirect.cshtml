@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<head>
+    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
+
+    <script>
+        const authService = new MsalAuthService("@ViewBag.clientId", "@ViewBag.applicationIdURI");
+
+        $(document).ready(function() {
+            
+            authService
+                .isCallback()
+                .then((isCallback) => {
+                    if (!isCallback) {
+                        authService
+                            .getUser()
+                            .then((user) => {
+                                // Signed in the user automatically; we're ready to go
+                                console.log(user);
+                            })
+                            .catch(() => {
+                                // Failed to sign in the user automatically; show login screen
+                                console.log("Failed")
+                            });
+                    }
+                })
+                .catch((error) => {
+                    // Encountered error during redirect login flow; show error screen
+                    console.log(error);
+                });
+        });
+    </script>
+</head>

@@ -1,5 +1,6 @@
-(function () {
+function ssoAuth() {
     'use strict';
+    microsoftTeams.app.initialize();
 
     // 1. Get auth token
     // Ask Teams to get us a token from AAD
@@ -7,14 +8,13 @@
 
         return new Promise((resolve, reject) => {
             display("1. Get auth token from Microsoft Teams");
-            microsoftTeams.authentication.getAuthToken({
-                successCallback: (result) => {
-                    display(result)
-                    resolve(result);
-                },
-                failureCallback: function (error) {
-                    reject("Error getting token: " + error);
-                }
+            
+            microsoftTeams.authentication.getAuthToken().then((result) => {
+                display(result);
+
+                resolve(result);
+            }).catch((error) => {
+                reject("Error getting token: " + error);
             });
         });
     }
@@ -23,14 +23,14 @@
     //    using the web service (see /auth/token handler in app.js)
     function getServerSideToken(clientSideToken) {
         return new Promise((resolve, reject) => {
-            microsoftTeams.getContext((context) => {
+            microsoftTeams.app.getContext().then((context) => {
                 fetch('/getProfileOnBehalfOf', {
                     method: 'post',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        'tid': context.tid,
+                        'tid': context.user.tenant.id,
                         'token': clientSideToken
                     }),
                     mode: 'cors',
@@ -48,6 +48,7 @@
                         reject(responseJson.error);
                     } else {
                         const profile = responseJson;
+
                         resolve(profile);
                     }
                 });
@@ -69,15 +70,13 @@
             microsoftTeams.authentication.authenticate({
                 url: window.location.origin + "/auth-start",
                 width: 600,
-                height: 535,
-                successCallback: (result) => {
-                    let data = localStorage.getItem(result);
-                    localStorage.removeItem(result);
-                    resolve(data);
-                },
-                failureCallback: (reason) => {
-                    reject(JSON.stringify(reason));
-                }
+                height: 535
+            })
+            .then((result) => {
+                let tokenData = result;
+                resolve(tokenData);
+            }).catch((reason) => {
+                reject(JSON.stringify(reason));
             });
         });
     }
@@ -93,41 +92,49 @@
     }
 
     // In-line code
-    getClientSideToken()
-        .then((clientSideToken) => {
-            return getServerSideToken(clientSideToken);
-        })
-        .then((profile) => {
-            return useServerSideToken(profile);
-        })
-        .catch((error) => {
-            if (error === "invalid_grant") {
-                display(`Error: ${error} - user or admin consent required`);
-                // Display in-line button so user can consent
-                let button = display("Consent", "button");
-                button.onclick = (() => {
-                    requestConsent()
-                        .then((result) => {
-                             // Consent succeeded
-                             display(`Consent succeeded`);
-                            
-                             // offer to refresh the page
-                             button.disabled = true;
-                             let refreshButton = display("Refresh page", "button");
-                             refreshButton.onclick = (() => { window.location.reload(); });
-                        })
-                        .catch((error) => {
-                            display(`ERROR ${error}`);
-                            // Consent failed - offer to refresh the page
-                            button.disabled = true;
-                            let refreshButton = display("Refresh page", "button");
-                            refreshButton.onclick = (() => { window.location.reload(); });
-                        });
-                });
-            } else {
-                // Something else went wrong
-                display(`Error from web service: ${error}`);
-            }
-        });
+    $(document).ready(function () {
+        microsoftTeams.app.initialize().then(() => {
+            getClientSideToken()
+                .then((clientSideToken) => {
+                    return getServerSideToken(clientSideToken);
+                })
+                .then((profile) => {
+                    return useServerSideToken(profile);
+                })
+                .catch((error) => {
+                    if (error === "invalid_grant") {
+                        display(`Error: ${error} - user or admin consent required`);
 
-})();
+                        // Display in-line button so user can consent
+                        let button = display("Consent", "button");
+                        button.onclick = (() => {
+                            requestConsent()
+                                .then((result) => {
+                                    // Consent succeeded
+                                    display(`Consent succeeded`);
+
+                                    // offer to refresh the page
+                                    button.disabled = true;
+                                    let refreshButton = display("Refresh page", "button");
+                                    refreshButton.onclick = (() => { window.location.reload(); });
+                                })
+                                .catch((error) => {
+                                    display(`ERROR ${error}`);
+
+                                    // Consent failed - offer to refresh the page
+                                    button.disabled = true;
+                                    let refreshButton = display("Refresh page", "button");
+                                    refreshButton.onclick = (() => { window.location.reload(); });
+                                });
+                        });
+                    } else {
+                        // Something else went wrong
+                        display(`Error from web service: ${error}`);
+                    }
+                });
+        }).catch((error) => {
+            console.error(error);
+        });
+    });
+
+}

@@ -1,12 +1,12 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.11",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+ "manifestVersion": "1.12",
   "version": "1.0.0",
-  "id": "<<Microsoft-App-Id>>",
+  "id": "{{Microsoft-App-Id}}",
   "packageName": "com.microsoft.teams.appcompleteauth",
   "webApplicationInfo": {
-    "id": "<<Microsoft-App-Id>>",
-    "resource": "api://<<base-url>>/botid-<<Microsoft-App-Id>>"
+    "id": "{{Microsoft-App-Id}}",
+    "resource": "api://{Base_URL_Domain}/botid-{{Microsoft-App-Id}}"
   },
   "developer": {
     "name": "Microsoft",
@@ -15,8 +15,8 @@
     "termsOfUseUrl": "https://example.azurewebsites.net/termsofuse"
   },
   "icons": {
-    "color": "icon-color.png",
-    "outline": "icon-outline.png"
+    "color": "color.png",
+    "outline": "outline.png"
   },
   "name": {
     "short": "App complete auth"
@@ -28,7 +28,7 @@
   "accentColor": "#FFFFFF",
   "staticTabs": [
     {
-      "contentUrl": "https://<<base-url>>/tab",
+      "contentUrl": "https://{Base_URL_Domain}/tab",
       "entityId": "Auth",
       "name": "Auth",
       "scopes": [
@@ -38,15 +38,36 @@
   ],
   "bots": [
     {
-      "botId": "<<Microsoft-App-Id>>",
+      "botId": "{{Microsoft-App-Id}}",
       "scopes": [
         "personal"
+      ],
+      "commandLists": [
+        {
+          "scopes": [
+            "personal"
+          ],
+          "commands": [
+            {
+              "title": "sso",
+              "description": "For AAD SSO authentication"
+            },
+            {
+              "title": "facebooklogin",
+              "description": "For Facebook signin"
+            },
+            {
+              "title": "usingcredentials",
+              "description": "For User Id/Password signin"
+            }
+          ]
+        }
       ]
     }
   ],
   "composeExtensions": [
     {
-      "botId": "<<Microsoft-App-Id>>",
+      "botId": "{{Microsoft-App-Id}}",
       "canUpdateConfiguration": true,
       "commands": [
         {
@@ -109,7 +130,8 @@
           "type": "link",
           "value": {
             "domains": [
-              "*.botframework.com"
+              "*.botframework.com",
+              "{Base_URL_Domain}"
             ]
           }
         }
@@ -121,7 +143,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.botframework.com",
-    "<<Domain-name>>"
+    "token.botframework.com",
+    "{Base_URL_Domain}"
   ]
 }

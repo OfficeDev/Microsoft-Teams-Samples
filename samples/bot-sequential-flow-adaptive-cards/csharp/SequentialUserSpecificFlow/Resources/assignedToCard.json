@@ -24,10 +24,10 @@
               "type": "Column",
               "items": [
                 {
-                  "type": "Image",
-                  "url": "https://adaptivecards.io/content/pending.png",
-                  "altText": "www.microsoft.com",
-                  "height": "30px"
+                  "type": "TextBlock",
+                  "size": "Medium",
+                  "weight": "Bolder",
+                  "text": "Pending"
                 }
               ],
               "width": "auto"
@@ -88,7 +88,8 @@
             "Category": "${category}",
             "SubCategory": "${subCategory}",
             "AssignedToName": "${assignedToName}",
-            "UserMRI": "${userMRI}"
+            "UserMRI": "${userMRI}",
+            "IncidentId": "${incidentId}"
           }
         },
         {
@@ -102,7 +103,8 @@
             "Category": "${category}",
             "SubCategory": "${subCategory}",
             "AssignedToName": "${assignedToName}",
-            "UserMRI": "${userMRI}"
+            "UserMRI": "${userMRI}",
+            "IncidentId": "${incidentId}"
           }
         }
       ]

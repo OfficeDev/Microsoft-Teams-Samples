@@ -8,85 +8,85 @@ products:
 languages:
 - csharp
 extensions:
-contentType: samples
-createdDate: "11-10-2021 23:35:25"
+ contentType: samples
+ createdDate: "10/11/2021 23:35:25 PM"
+urlFragment: officedev-microsoft-teams-samples-app-installation-using-qr-code-csharp
 ---
 
 # Install app using barcode sample
 
 This sample demos app installation using QR code.
 
-The user can Generate a new QR code (contains app id information) and then use Install action to scan and install the app.
+The user can Generate a new QR code (contains app id information) and then use Install action to scan and then install the app.
 
-`Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients`
+`Currently, Microsoft Teams support for QR or barcode scanner capability is only available for mobile clients`.
 
-![Card](QRAppInstallation/Images/CardWithButtons.png)
+**Interaction with bot - Desktop View**
 
-![QR Code](QRAppInstallation/Images/QRCode.png)
+![App Installation Using QRCodeDesktopGif](QRAppInstallation/Images/AppInstallationUsingQRCodeDesktop.gif)
 
-![Install App](QRAppInstallation/Images/AppInstallation.png)
+**Interaction with bot - Mobile View**
+
+![App Installation Using QRCodeGif](QRAppInstallation/Images/AppInstallationUsingQRCode.gif)
+
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
+
+**Install app using barcode sample:** [Manifest](/samples/app-installation-using-qr-code/csharp/demo-manifest/App-Installation-Using-QR.zip)
 
 ## Prerequisites
 
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
   determine dotnet version
   ```bash
   dotnet --version
   ```
 - [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
-  
-  run ngrok locally
-  ```bash
-  ngrok http -host-header=localhost 3978
-  ```
+
 - [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
 
-## To try this sample
+## Setup
 
-1) Create a Bot Registration
-   In Azure portal, create a [Bot Framework registration resource](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-authentication?view=azure-bot-service-4.0&tabs=csharp%2Caadv2).
+1) Setup for Bot SSO
+- Refer to [Bot SSO Setup document](../BotSSOSetup.md)
 
-   - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-   
-   Also add following permission in app registration. (used for App installation in a team)
-   
-   ![Permission](QRAppInstallation/Images/Permission.png)
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-2) Clone the repository
+- While registering the Azure bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+    
+    > NOTE: When you create your app registration in Azure portal, you will create an App ID and App password - make sure you keep these for later.
+
+2) Setup NGROK
+- Run ngrok - point to port 3978
+
+    ```bash
+    ngrok http -host-header=rewrite 3978
+    ```
+
+3) Setup for code
+- Clone the repository
    ```bash
    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
    ```
    
-3) In a terminal, navigate to `samples/app-installation-using-qr-code/csharp`
+- In a terminal, navigate to `samples/app-installation-using-qr-code/csharp`
 
     change into project folder
     ```bash
     cd # QRAppInstallation
     ```
-    
-4) Run ngrok - point to port 3978
-
-    ```bash
-    # ngrok http -host-header=rewrite 3978
-    ```
  
-5) Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
-  - `{{Microsoft-App-Id}}` with Application id generated from Step 1
-  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `1234.ngrok.io`
-
-6) Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams using step 9.
-
-7) Modify the `/appsettings.json` and fill in the following details:
-  - `{{Microsoft-App-Id}}` - Generated from Step 1 is the application app id
-  - `{{ Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
-  - `{{Connection Name}}` - The OAuthConnection setting 
+- Modify the `/appsettings.json` and fill in the following details:
+  - `{{Microsoft-App-Id}}` - Generated from Step 1 from AAD app registration in Azure portal
+  - `{{Microsoft-App-Password}}` - Generated from Step 1, also referred to as Client secret
   - `{{ Application Base Url }}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
+  - `{{ Auth Connection Name }}` - The OAuthConnection setting from step 1, from Azure Bot SSO setup
 
-    The `Connection Name` referred to is the name that we provide while adding OAuth connection setting in the Bot channel registration.
-    Please follow link [Add authentication to your bot](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2) to see how we can add the setting.
-  
-8) Run the bot from a terminal or from Visual Studio, choose option A or B.
+The `Connection Name` referred to is the name that we provide while adding OAuth connection setting in the Bot channel registration.
+Please follow link [Add authentication to your bot](https://docs.microsoft.com/microsoftteams/platform/bots/how-to/authentication/add-authentication?tabs=dotnet%2Cdotnet-sample#azure-ad-v2) to see how we can add the setting.
+ 
+- Run the bot from a terminal or from Visual Studio, choose option A or B.
  
    A) From a terminal
      ```bash
@@ -101,25 +101,58 @@ The user can Generate a new QR code (contains app id information) and then use I
      - Select `QRAppInstallation.csproj` file
      - Press `F5` to run the project 
 
-9) Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+- Modify the `manifest.json` in the `/AppPackage` folder and replace the following details:
+  - `{{Microsoft-App-Id}}` with AAD app registration Application id, generated from Step 1
+  - `{{domain-name}}` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+
+- Zip the contents of `AppPackage` folder into a `manifest.zip`, and use the `manifest.zip` to deploy in app store or add to Teams.
+
+- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
    - Go to Microsoft Teams. From the lower left corner, select Apps
    - From the lower left corner, choose Upload a custom App
    - Go to your project directory, the ./AppPackage folder, select the zip folder, and choose Open.
    - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
 
-## Features of this sample
+ - **Note**
+ Kindly add the app/bot in personal scope and login there, afterwards add the app/bot in any Teams channel.
 
-- Card with actions `Generate QR code` and `Install App`. 
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-installation-using-qr-code/csharp/QRAppInstallation/AdapterWithErrorHandler.cs#L30) line and put your debugger for local debug.
+
+## Running the sample
+
+- **Desktop View**
+**Card with actions Generate QR code and Install App:**
 
 ![Card](QRAppInstallation/Images/CardWithButtons.png)
 
-- `Generate QR code` is used to generate a QR code by selecting the app.
+**Generate QR code is used to generate a QR code by selecting the app:**
 
 ![QR Code](QRAppInstallation/Images/QRCode.png)
 
-- `Install App` is used to Scan the QR code and it then installs the app.
+**Install App is used to Scan the QR code and it then installs the app:**
 
 ![Install App](QRAppInstallation/Images/AppInstallation.png)
+
+-  **Mobile View**
+**Hey command interaction:**
+
+![CardWithButtonsMobile](QRAppInstallation/Images/CardWithButtonsMobile.png)
+
+**Permission UI:**
+
+![Permission](QRAppInstallation/Images/Permission.png)
+
+**QR Code:**
+
+![QRCodeMobile](QRAppInstallation/Images/QRCodeMobile.png)
+
+**App added:**
+
+![AppAddedMobile](QRAppInstallation/Images/AppAddedMobile.png)
+
+**Polly App Install:**
+
+![AppInstallationMobile](QRAppInstallation/Images/AppInstallationMobile.png)
 
 ## Deploy the bot to Azure
 
@@ -129,12 +162,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 - [Bot Framework Documentation](https://docs.botframework.com)
 - [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
 - [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
-- [.NET Core CLI tools](https://docs.microsoft.com/en-us/dotnet/core/tools/?tabs=netcore2x)
-- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
-- [Azure Portal](https://portal.azure.com)
-- [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
-- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
-
+- [Integrate media Capabilities inside your app](https://learn.microsoft.com/microsoftteams/platform/concepts/device-capabilities/media-capabilities?tabs=mobile)

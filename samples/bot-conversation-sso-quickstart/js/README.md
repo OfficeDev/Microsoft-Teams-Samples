@@ -9,8 +9,9 @@ languages:
 - javascript
 - nodejs
 extensions:
-contentType: samples
-createdDate: "07-07-2021 13:38:26"
+ contentType: samples
+ createdDate: "07/07/2021 13:38:26 PM"
+urlFragment: officedev-microsoft-teams-samples-bot-conversation-sso-quickstart-js
 ---
 # Teams Conversation Bot SSO quick-start
 
@@ -24,41 +25,91 @@ The sample uses the bot authentication capabilities in [Azure Bot Service](https
 
 > IMPORTANT: The manifest file in this app adds "token.botframework.com" to the list of `validDomains`. This must be included in any bot that uses the Bot Framework OAuth flow.
 
+## Interaction with app
+
+![Bot Conversation SSO QuickstartGif](sso_media/BotConversationSSOQuickstart.gif)
+
 ## Prerequisites
 
-- Microsoft Teams is installed and you have an account (not a guest account)
--  [NodeJS](https://nodejs.org/en/)
+-  Microsoft Teams is installed and you have an account (not a guest account)
+-  To test locally, [NodeJS](https://nodejs.org/en/download/) must be installed on your development machine (version 16.14.2  or higher)
 -  [ngrok](https://ngrok.com/) or equivalent tunneling solution
 -  [M365 developer account](https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant) or access to a Teams account with the appropriate permissions to install an app.
+- To test locally, you'll need [Ngrok](https://ngrok.com/) installed on your development machine.
+    Make sure you've downloaded and installed Ngrok on your local machine. ngrok will tunnel requests from the Internet to your local computer and terminate the SSL connection from Teams.
 
-## To try this sample
+## Setup
 
 > Note these instructions are for running the sample on your local machine, the tunnelling solution is required because
 > the Teams service needs to call into the bot.
 
-### 1. Setup for Bot SSO
-Refer to [Bot SSO Setup document](../BotSSOSetup.md).
-### 2. Configure bot sample
+1) Setup for Bot SSO
+- Refer to [Bot SSO Setup document](../BotSSOSetup.md)
 
-   Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the Bot Framework registration. (Note the MicrosoftAppId is the AppId created in step 1.1, the MicrosoftAppPassword is referred to as the "client secret" in step1.2 and you can always create a new client secret anytime.)
+- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
 
-### 3. Run your bot sample
-Under the root of this sample folder, build and run by commands:
-- `npm install`
-- `npm start`
+- While registering the Azure bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
+    
+    > NOTE: When you create your app registration in Azure portal, you will create an App ID and App password - make sure you keep these for later.
 
-### 4. Configure and run the Teams app
-- **Using App Studio**
-    - Open your app in App Studio's manifest editor.
-    - Open the *Bots* page under *Capabilities*.
-    - Choose *Setup*, then choose the existing bot option. Enter your AAD app registration ID from step 1.1. Select any of the scopes you wish to have the bot be installed.
-    - Open *Domains and permissions* from under *Finish*. Enter the same ID from the step above in *AAD App ID*, then and append it to "api://botid-" and enter the URI into *Single-Sign-On*.
-    - Open *Test and distribute*, then select *Install*.
+2) Setup NGROK  
+- Run ngrok - point to port 3978
 
-- **Manually update the manifest.json**
-    - Edit the `manifest.json` contained in the  `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{TODO: MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+    ```bash
+    ngrok http -host-header=rewrite 3978
+    ```
+
+3) Setup for code
+- Clone the repository
+
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+
+- In a terminal, navigate to `samples/bot-conversation-sso-quickstart/js`
+
+- Install modules
+
+    ```bash
+    npm install
+    ```
+
+- Update the `.env` configuration for the bot to use the Microsoft App Id and App Password from the step 1 (AAD app registration in Azure portal or from Bot Framework registration. (Note the MicrosoftAppId is the AppId created in step 1, the MicrosoftAppPassword is referred to as the "client secret" in step1 and you can always create a new client secret anytime.)
+    Also, update `connectionName` as the name of your Azure Bot connection created in step 1.
+
+- Run your bot at the command line:
+
+    ```bash
+    npm start
+    ```
+
+4) Setup Manifest for Teams
+
+- **This step is specific to Teams.**
+    - Edit the `manifest.json` contained in the `appPackage/` folder to replace with your MicrosoftAppId (that was created in step1.1 and is the same value of MicrosoftAppId in `.env` file) *everywhere* you see the place holder string `{MicrosoftAppId}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+        `<<DOMAIN-NAME>>` with base Url domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
     - Zip up the contents of the `appPackage/` folder to create a `manifest.zip`
     - Upload the `manifest.zip` to Teams (in the left-bottom *Apps* view, click "Upload a custom app")
+
+**Note**: If you are facing any issue in your app, [please uncomment this line](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/bot-conversation-sso-quickstart/js/index.js#L60) and put your debugger for local debug.
+
+## Running the sample
+
+**Adding bot UI:**
+
+![Install](sso_media/Install.png)
+
+**Welcome to teamsBot:**
+
+![BotSigninCard](sso_media/BotSignInCard.png)
+
+**Login command interaction:**
+
+![UserDetailsCard](sso_media/UserDetailsCard.png)
+
+**View your token:**
+
+![Token](sso_media/Token.png)
 
 You can interact with this bot by sending it a message. The bot will respond by asking for your consent, by this consent the Bot will exchange an SSO token, then making a call to the Graph API on your behalf and returning the results. It will keep you loggined unless you send a message "logout". 
 
@@ -77,4 +128,3 @@ You can interact with this bot by sending it a message. The bot will respond by 
 - [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
 - [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
 - [Microsoft Teams Developer Platform](https://docs.microsoft.com/en-us/microsoftteams/platform/)
-

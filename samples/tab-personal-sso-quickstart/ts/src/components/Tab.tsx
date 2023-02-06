@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 import React from 'react';
 import './App.css';
-import * as microsoftTeams from "@microsoft/teams-js";
-import { Avatar, Loader } from '@fluentui/react-northstar'
+import { app, authentication } from "@microsoft/teams-js";
+import { Avatar, Spinner } from '@fluentui/react-components';
 /**
  * This tab component renders the main tab content
  * of your app.
@@ -11,7 +11,7 @@ import { Avatar, Loader } from '@fluentui/react-northstar'
 export interface ITabProps {
 }
 interface ITabState {
-  context?: microsoftTeams.Context;
+  context?: app.Context;
   ssoToken: string;
   consentRequired: boolean;
   consentProvided: boolean;
@@ -44,17 +44,19 @@ class Tab extends React.Component<ITabProps, ITabState> {
   //Learn more: https://reactjs.org/docs/react-component.html#componentdidmount
   componentDidMount(){
     // Initialize the Microsoft Teams SDK
-    microsoftTeams.initialize();
+    app.initialize();
     // Get the user context from Teams and set it in the state
-    microsoftTeams.getContext((context: microsoftTeams.Context) => {
+    app.getContext().then((context: app.Context) => {
       this.setState({context:context});
     });
-    //Perform Azure AD single sign-on authentication
-    let authTokenRequestOptions = {
-      successCallback: (result: string) => { this.ssoLoginSuccess(result) }, //The result variable is the SSO token.
-      failureCallback: (error: string) => {this.ssoLoginFailure(error)}
-    };
-    microsoftTeams.authentication.getAuthToken(authTokenRequestOptions);
+
+
+    authentication.getAuthToken().then((result)=>{
+      this.ssoLoginSuccess(result)
+    }).catch((error) => {
+      this.ssoLoginFailure(error)
+    });
+    
   }  
   ssoLoginSuccess = async (result: string) => {
     this.setState({ssoToken:result});
@@ -67,7 +69,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
   //Exchange the SSO access token for a Graph access token
   //Learn more: https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow
   exchangeClientTokenForServerToken = async (token: string) => {
-    let serverURL = `${process.env.REACT_APP_BASE_URL}/getGraphAccessToken?ssoToken=${token}&upn=${this.state.context?.upn}`;
+    let serverURL = `${process.env.REACT_APP_BASE_URL}/getGraphAccessToken?ssoToken=${token}&upn=${this.state.context?.user?.userPrincipalName}`;
     console.log('here ' + serverURL);
     let response = await fetch(serverURL).catch(this.unhandledFetchError); //This calls getGraphAccessToken route in /api-server/app.js
     if (response) {
@@ -91,12 +93,14 @@ class Tab extends React.Component<ITabProps, ITabState> {
   //Show a popup dialogue prompting the user to consent to the required API permissions. This opens ConsentPopup.js.
   //Learn more: https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/authentication/auth-tab-aad#initiate-authentication-flow
   showConsentDialog(){ 
-    microsoftTeams.authentication.authenticate({
+    authentication.authenticate({
       url: window.location.origin + "/auth-start",
       width: 600,
-      height: 535,
-      successCallback: (result) => {this.consentSuccess(result ?? "")},
-      failureCallback: (reason) => {this.consentFailure(reason ?? "")}
+      height: 535
+    }).then((result)=>{
+      this.consentSuccess(result)
+    }).catch((error) => {
+      this.consentFailure(error)
     });
   }
   //Callback function for a successful authorization
@@ -122,7 +126,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
   // Fetch the user's profile photo from Graph using the access token retrieved either from the server 
   // or microsoftTeams.authentication.authenticate
   callGraphFromClient = async () => {
-    let upn = this.state.context?.upn;
+    let upn = this.state.context?.user?.userPrincipalName;
     let graphPhotoEndpoint = `https://graph.microsoft.com/v1.0/users/${upn}/photo/$value`;
     let graphRequestParams = {
       method: 'GET',
@@ -137,7 +141,8 @@ class Tab extends React.Component<ITabProps, ITabState> {
         console.error("ERROR: ", response);
         this.setState({error:true});
       }
-      let imageBlog = await response.blob().catch(this.unhandledFetchError); //Get image data as raw binary data
+      let imageBlog = await response.blob(); //Get image data as raw binary data
+      
       this.setState({
         photo: URL.createObjectURL(imageBlog) //Convert binary data to an image URL and set the url in state
       })
@@ -150,16 +155,14 @@ class Tab extends React.Component<ITabProps, ITabState> {
   }
   render() {
       let title = this.state.context && Object.keys(this.state.context).length > 0 ?
-        'Congratulations ' + this.state.context['upn'] + '! This is your tab' : <Loader/>;
+        'Congratulations ' + this.state.context?.user?.userPrincipalName + '! This is your tab' : <Spinner/>;
       let ssoMessage = this.state.ssoToken === "" ?
-        <Loader label='Performing Azure AD single sign-on authentication...'/>: null;
+        <Spinner label='Performing Azure AD single sign-on authentication...'/>: null;
       let serverExchangeMessage = (this.state.ssoToken !== "") && (!this.state.consentRequired) && (this.state.photo==="") ?
-        <Loader label='Exchanging SSO access token for Graph access token...'/> : null;
+        <Spinner label='Exchanging SSO access token for Graph access token...'/> : null;
       let consentMessage = (this.state.consentRequired && !this.state.consentProvided) ?
-        <Loader label='Consent required.'/> : null;
-      let avatar = this.state.photo !== "" ?
-        <Avatar image={this.state.photo} size='largest'/> : null;
-      let content;
+        <Spinner label='Consent required.'/> : null;
+          let content;
       if(this.state.error){
         content = <h1>ERROR: Please ensure pop-ups are allowed for this website and retry</h1>
       } else {
@@ -169,7 +172,7 @@ class Tab extends React.Component<ITabProps, ITabState> {
             <h3>{ssoMessage}</h3>
             <h3>{serverExchangeMessage}</h3>          
             <h3>{consentMessage}</h3>
-            <h1>{avatar}</h1>
+            <img src={this.state.photo} width="200" />
           </div>
       }
       return (

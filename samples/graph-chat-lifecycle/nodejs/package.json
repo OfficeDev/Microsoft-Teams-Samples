@@ -18,12 +18,12 @@
   },
   "homepage": "https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-nodejs",
   "dependencies": {
-    "@microsoft/microsoft-graph-client": "^2.2.1",
-    "@microsoft/teams-js": "^1.10.0",
-    "adaptivecards-templating": "^2.1.0",
+    "@microsoft/microsoft-graph-client": "^3.0.4",
+    "@microsoft/teams-js": "^2.5.0",
+    "adaptivecards-templating": "^2.3.1",
     "body-parser": "^1.19.0",
-    "botbuilder": "^4.13.4",
-    "config": "^1.28.1",
+    "botbuilder": "^4.18.0",
+    "config": "^3.3.8",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "faker": "^4.1.0",
@@ -31,12 +31,12 @@
     "isomorphic-fetch": "^3.0.0",
     "node-fetch": "^2.1.2",
     "nodemon": "^2.0.7",
-    "pug": "^2.0.0-rc.4",
+    "pug": "^3.0.2",
     "restify": "^8.5.1"
   },
   "devDependencies": {
     "del": "^3.0.0",
-    "gulp": "^4.0.2",
+    "gulp": "^3.9.1",
     "gulp-zip": "^4.0.0"
   }
 }

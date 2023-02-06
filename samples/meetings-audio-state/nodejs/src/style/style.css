@@ -1,0 +1,32 @@
+.container {
+    padding: 1rem;
+}
+
+.audio {
+    margin-right: 5px;
+    background-color: #5b5fc7;
+}
+
+.tag-container {
+    margin: 0.5rem;
+    margin-right: 20px;
+    border-radius: 8px;
+    padding: 0.9rem;
+    
+}
+
+.manage-icons {
+    cursor: pointer;
+}
+
+.text-fields-label {
+    width: 130px;
+}
+
+.input-fields-label {
+    width: 160px;
+}
+
+.break {
+    margin-top: 10px;
+}

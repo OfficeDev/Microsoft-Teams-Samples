@@ -10,112 +10,117 @@ extensions:
   technologies:
   - Tabs
   - Microsoft Bot Framework v4
-  createdDate: 9/22/2017 5:54:09 PM
+  createdDate: "09/22/2017 05:54:09 PM"
   updateDate: 9/15/2021 
 description: "Sample that shows how to build a bot for Microsoft Teams in C# with bot framework v4."
+urlFragment: officedev-microsoft-teams-samples-app-complete-sample-csharp
 ---
 
 # Microsoft Teams Bot in C#
 
 Sample that shows how to build a bot for Microsoft Teams in C#. 
 
-## Features of this sample
+## Interaction with app
 
-![ Dilaog ](template-bot-master-csharp/Images/dialog.png)
+![ Module ](template-bot-master-csharp/Images/Sample.gif)
 
-![ Tab ](template-bot-master-csharp/Images/static-tab.png)
+## Try it yourself - experience the App in your Microsoft Teams client
+Please find below demo manifest which is deployed on Microsoft Azure and you can try it yourself by uploading the app package (.zip file link below) to your teams and/or as a personal app. (Sideloading must be enabled for your tenant, [see steps here](https://docs.microsoft.com/microsoftteams/platform/concepts/build-and-test/prepare-your-o365-tenant#enable-custom-teams-apps-and-turn-on-custom-app-uploading)).
 
-![ ME](template-bot-master-csharp/Images/messaging-extension.png)
+**Microsoft Teams Bot:** [Manifest](/samples/app-complete-sample/csharp/demo-manifest/Complete-Sample.zip)
 
 ## Prerequisites
 
 * Install Git for windows: https://git-for-windows.github.io/
 
-* Clone this repo:<br>
-    ```bash
-    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
-    ```
-* In a terminal, navigate to samples/app-complete-sample/csharp
+- [.NET Core SDK](https://dotnet.microsoft.com/download) version 6.0
 
-* Install Visual Studio and launch it as an administrator
-
-* Build the solution to download all configured NuGet packages
-
-* (Only needed if wanting to run in Microsoft Teams)<br>
-Install some sort of tunnelling service. These instructions assume you are using ngrok: https://ngrok.com/
-
-* (Only needed if wanting to run in the Bot Emulator)<br>
-Install the Bot Emulator - click on "Bot Framework Emulator (Mac and Windows)": https://docs.botframework.com/en-us/downloads/#navtitle  
-    * NOTE: make sure to pin the emulator to your task bar because it can sometimes be difficult to find again 
-
-## Steps to see the bot running in the Bot Emulator
+  determine dotnet version
+  ```bash
+  dotnet --version
+  ```
+- [Ngrok](https://ngrok.com/download) (For local environment testing) Latest (any other tunneling software can also be used)
+  
+- [Teams](https://teams.microsoft.com) Microsoft Teams is installed and you have an account
+    
+## Setup
 
 NOTE: Teams does not work nor render things exactly like the Bot Emulator, but it is a quick way to see if your bot is running and functioning correctly.
 
-1. Open the template-bot-master-csharp.sln solution with Visual Studio
+1. Register a new application in the [Azure Active Directory – App Registrations](https://go.microsoft.com/fwlink/?linkid=2083908) portal.
 
-2. In Visual Studio click the play button (should be defaulted to running the Microsoft Edge configuration) 
+2. Setup for Bot
+	- Register a AAD aap registration in Azure portal.
+	- Also, register a bot with Azure Bot Service, following the instructions [here](https://docs.microsoft.com/azure/bot-service/bot-service-quickstart-registration?view=azure-bot-service-3.0).
+	- Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
+	- While registering the bot, use `https://<your_ngrok_url>/api/messages` as the messaging endpoint.
 
-3. Once the code is running, connect with the Bot Emulator to the default endpoint, "http://localhost:3979/api/messages", leaving "Microsoft App ID" and "Microsoft App Password" blank
+    > NOTE: When you create your app registration, you will create an App ID and App password - make sure you keep these for later.
 
-Congratulations!!! You can now chat with the bot in the Bot Emulator!
+3. Setup NGROK
+      - Run ngrok - point to port 3978
 
-## Steps to see the full app in Microsoft Teams
+	```bash
+	 ngrok http -host-header=rewrite 3978
+	```   
+4. Setup for code
 
-1. Begin your tunnelling service to get an https endpoint. 
+  - Clone the repository
 
-	* Open a new **Command Prompt** window. 
-
-	* Change to the directory that contains the ngrok.exe application. 
-
-	* Run the command `ngrok http [port] --host-header=localhost` (you'll need the https endpoint for the bot registration) e.g.<br>
-		```
-		ngrok http 3979 --host-header=localhost
-		```
-
-	* The ngrok application will fill the entire prompt window. Make note of the Forwarding address using https. This address is required in the next step. 
-
-	* Minimize the ngrok Command Prompt window. It is no longer referenced in this lab, but it must remain running.
-
-
-    
-2. Register a new bot (or update an existing one) with Bot Framework by using the https endpoint started by ngrok and the extension "/api/messages" as the full endpoint for the bot's "Messaging endpoint". e.g. "https://####abcd.ngrok.io/api/messages" - Bot registration is here (open in a new browser tab): https://dev.botframework.com/bots/new. Ignore the warning about migrating to Azure, it is not necessary for Teams-only bots. You can however safely migrate your bot to Azure if you so choose, or use the Azure portal to create your bot.
-
-    > **NOTE**: When you create your bot you will create an App ID and App password - make sure you keep these for later.
-
-    - Ensure that you've [enabled the Teams Channel](https://docs.microsoft.com/en-us/azure/bot-service/channel-connect-teams?view=azure-bot-service-4.0)
-
-3. You project needs to run with a configuration that matches your registered bot's configuration. To do this, you will need to update the web.config file:
-
-	* In Visual Studio, open the Web.config file. Locate the `<appSettings>` section. 
- 
-	* Enter the BotId value. The BotId is the **Bot handle** from the **Configuration** section of the bot registration. 
- 
-	* Enter the MicrosoftAppId. The MicrosoftAppId is the app ID from the **Configuration** section of the bot registration. 
- 
-	* Enter the MicrosoftAppPassword. The MicrosoftAppPassword is the auto-generated app password displayed in the pop-up during bot registration.
-	
-	* Enter the BaseUri. The BaseUri is the https endpoint generated from ngrok.
+    ```bash
+    git clone https://github.com/OfficeDev/Microsoft-Teams-Samples.git
+    ```
+5. Modify the `/appsettings.json` and fill in the following details:
+  - `{{BotId}}` - Generated from Step 1 is the application app id
+  - `{{MicrosoftAppId}}` - Generated from Step 1 is the application app id
+  - `{{MicrosoftAppPassword}}` - Generated from Step 1, also referred to as Client secret
+  - `{{BaseUri}}` - Your application's base url. E.g. https://12345.ngrok.io if you are using ngrok.
 
 	Here is an example for reference:
-	
 		<add key="BotId" value="Bot_Handle_Here" />
 		<add key="MicrosoftAppId" value="88888888-8888-8888-8888-888888888888" />
 		<add key="MicrosoftAppPassword" value="aaaa22229999dddd0000999" />
 		<add key="BaseUri" value="https://#####abc.ngrok.io" />
-
-4. In Visual Studio click the play button (should be defaulted to running the Microsoft Edge configuration)
-
-5. Once the app is running, a manifest file is needed:
-    * On the solution explorer of Visual Studio, navigate to the file, manifest/manifest.json - change:
-        * <<REGISTERED_BOT_ID>> (there are 3) change to your registered bot's app ID
-        * <<BASE_URI>> (there are 2) change to your https endpoint from ngrok
-        * <<BASE_URI_DOMAIN>> (there is 1) change to your https endpoint from ngrok excluding the "https://" part
+		<add key="FBConnectionName" value="connectionname" />
+		<add key="FBProfileUrl" value="profileurl" />
 		
-    * Save the file and zip this file and the bot_blue.png file (located next to it) together to create a manifest.zip file
+6. To test facebook auth flow [create a facebookapp](https://docs.microsoft.com/azure/bot-service/bot-service-channel-connect-facebook?view=azure-bot-service-4.0) and get client id and secret for facebook app.
+    Now go to your bot channel registartion -> configuration -> Add OAuth connection string
+   - Provide connection Name : for eg `FBConnectionName`
+   - Provide FBProfileUrl: for eg `FBProfileUrl`
+   
+6. Run the bot from a terminal or from Visual Studio:
 
-6. Once complete, sideload your zipped manifest to a team as described here (open in a new browser tab): https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/deploy-and-publish/apps-upload
+    A) From a terminal, navigate to `samples/app-checkin-location/csharp`
 
+	  ```bash
+	  # run the bot
+	  dotnet run
+	  ```
+	  Or from Visual Studio
+	     - Launch Visual Studio
+	     - File -> Open -> Project/Solution
+	     - Navigate to `app-complete-sample` folder
+	     - Select `template-bot-master-csharp.sln` file
+	     - Press `F5` to run the project
+
+7. Setup Manifest for Teams
+	- __*This step is specific to Teams.*__
+	    - **Edit** the `manifest.json` contained in the ./manifest or ./manifest_hub folder to replace your Microsoft App Id (that was created when you registered your app registration earlier) *everywhere* you see the place holder string `{{Microsoft-App-Id}}` (depending on the scenario the Microsoft App Id may occur multiple times in the `manifest.json`)
+	    - **Edit** the `manifest.json` for `validDomains` and replace `{{domain-name}}` with base Url of your domain. E.g. if you are using ngrok it would be `https://1234.ngrok.io` then your domain-name will be `1234.ngrok.io`.
+	    - **Zip** up the contents of the `manifest` or 'manifest_hub.json' folder to create a `manifest.zip` (Make sure that zip file does not contains any subfolder otherwise you will get error while uploading your .zip package)
+
+	- Upload the manifest.zip to Teams (in the Apps view click "Upload a custom app")
+	   - Go to Microsoft Teams. From the lower left corner, select Apps
+	   - From the lower left corner, choose Upload a custom App
+	   - Go to your project directory, the ./manifest folder, select the zip folder, and choose Open.
+	   - Select Add in the pop-up dialog box. Your app is uploaded to Teams.
+   		
+**Note:** If you want to test your app across multi hub like: Outlook/Office.com, please update the `manifest.json` in the `/manifest_hub` folder with the required values.
+
+
+**Note**: If you are facing any issue in your app, please uncomment [this](https://github.com/OfficeDev/Microsoft-Teams-Samples/blob/main/samples/app-complete-sample/csharp/AdapterWithErrorHandler.cs#L23) line and put your debugger for local debug.
+   
 Congratulations!!! You have just created and sideloaded your first Microsoft Teams app! Try adding a configurable tab, at-mentioning your bot by its registered name, or viewing your static tabs.<br><br>
 NOTE: Most of this sample app's functionality will now work. The only limitations are the authentication examples because your app is not registered with AAD nor Visual Studio Team Services.
 
@@ -140,8 +145,8 @@ This directory holds the skeleton of a manifest.json file that can be altered in
 * **middleware**<br><br>
 This directory holds the stripping at mention for channel class and Invoke message processing.
 
-* **public**<br><br>
-This directory holds static html, image, and javascript files used by the tabs and bot.  This is not the only public directory that is used for the tabs, though.  This directory holds the html and javascript used for the configuration page of the configurable tab.  The main content of the static and configurable comes from the static files placed in /public/tab/tabConfig.
+* **Views**<br><br>
+The main content of the static comes from the static files placed in /Views/BotInfo/BotInfo.cshtml.
 
 * **src**<br><br>
 This directory holds all the code files, which run the entire application.
@@ -149,23 +154,65 @@ This directory holds all the code files, which run the entire application.
 * **utility**<br><br>
 This directory holds utility functions for the project.
 
-* **web.config**<br><br>
-This file is a configuration file that can be used to update the config keys globally used in Application.
-
 ## Steps included in migration of Bot framework from v3 to V4
 1. Updated the following packages:
   * Microsoft.Bot.Builder.Azure and Microsoft.Bot.Builder.Integration.AspNet.WebApi
   * Autofac.WebApi2
   * Bot.Builder.Community.Dialogs.Formflow
 
-2. Updated the Global.asax.cs file
+2. Updated messageController.cs
 
-3. Updated messageController.cs
+3. Added dilaogBot.cs. DialogExtension.cs, AdapterWithErrorHandler.cs
 
-4. Added dilaogBot.cs. DialogExtension.cs, AdapterWithErrorHandler.cs
+4. Updated Dialog files into waterfall model dialog.
 
-5. Updated Dialog files into waterfall model dialog.
+## Running the sample.
 
+![ Hello ](Images/Hello.png)
+
+![ Dilaog ](Images/dialog.png)
+
+![ Quiz1 ](Images/Quiz1.png)
+
+![ Quiz2 ](Images/Quiz2.png)
+
+![ Tab ](Images/static-tab.png)
+
+## Outlook on the web
+
+- To view your app in Outlook on the web.
+
+- Go to [Outlook on the web](https://outlook.office.com/mail/)and sign in using your dev tenant account.
+
+**On the side bar, select More Apps. Your sideloaded app title appears among your installed apps**
+
+![InstallOutlook](Images/InstallOutlook.png)
+
+**Select your app icon to launch and preview your app running in Outlook on the web**
+
+![AppOutlook](Images/AppOutlook.png)
+
+**Select your app icon from message extension and find ward, it will show all options**
+
+![AppOutlook](Images/AppOutlook_msgext.png)
+
+**Note:** Similarly, you can test your application in the Outlook desktop app as well.
+
+## Office on the web
+
+- To preview your app running in Office on the web.
+
+- Log into office.com with test tenant credentials
+
+**Select the Apps icon on the side bar. Your sideloaded app title appears among your installed apps**
+
+![InstallOffice](Images/InstallOffice.png)
+
+**Select your app icon to launch your app in Office on the web**
+
+![AppOffice](Images/AppOffice.png) 
+
+**Note:** Similarly, you can test your application in the Office 365 desktop app as well.
 
 ## Contributing
 
@@ -180,3 +227,11 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+## Further reading
+
+- [Bot Framework Documentation](https://docs.botframework.com)
+- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
+- [Authentication basics](https://docs.microsoft.com/microsoftteams/platform/concepts/authentication/authentication)
+- [Extend Teams apps across Microsoft 365](https://learn.microsoft.com/microsoftteams/platform/m365-apps/overview)
+- [Create facebook app for development](https://developers.facebook.com/docs/development/create-an-app/)

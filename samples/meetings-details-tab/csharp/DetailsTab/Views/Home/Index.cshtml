@@ -72,29 +72,31 @@
         }
     }
 }
-<script src="https://statics.teams.cdn.office.net/sdk/v1.9.0/js/MicrosoftTeams.min.js"></script>
+<script src="https://res.cdn.office.net/teams-js/2.0.0/js/MicrosoftTeams.min.js"></script>
 <script type="text/javascript">
-        microsoftTeams.initialize();
+        
 
-        submitHandler = (err, result) => {
-            DisplayAgenda(result);
+        submitHandler = (dialogResponse) => {
+            DisplayAgenda(dialogResponse.result);
         };
         $("#btnAddAgenda").click(function () {
             let taskInfo = {
                 title: null,
-                height: null,
-                width: null,
+                size: null,
                 url: null,
-                card: null,
                 fallbackUrl: null,
-                completionBotId: null,
             };
-                taskInfo.url = "@Model.baseUrl" +"/Detail";
-                taskInfo.title = "Add a Poll";
-                taskInfo.height = "250";
-                taskInfo.width = "500";
-                taskInfo.fallbackUrl = taskInfo.url
-            microsoftTeams.tasks.startTask(taskInfo, submitHandler);
+            taskInfo.url = "@Model.baseUrl" +"/Detail";
+            taskInfo.title = "Add a Poll";
+            taskInfo.size = {
+                height: 250,
+                width: 500,
+            };
+
+            taskInfo.fallbackUrl = taskInfo.url
+            microsoftTeams.app.initialize().then(() => {
+                microsoftTeams.dialog.open(taskInfo, submitHandler);
+            });
         });
 
         function DisplayAgenda (result) {

@@ -1,8 +1,8 @@
 ﻿{
-  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.11/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.11",
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+ "manifestVersion": "1.12",
   "version": "1.0.0",
-  "id": "<<manifest-Id>>",
+  "id": "<<Manifest-Id>>",
   "packageName": "com.microsoft.teams.samples.todoconnectorapp",
   "developer": {
     "name": "Microsoft",
@@ -26,7 +26,7 @@
   "connectors": [
     {
       "connectorId": "<<connector-Id>>",
-      "configurationUrl": "https://<<base-url>>/SetupAuth",
+      "configurationUrl": "https://<<App-Domain>>/SetupAuth",
       "scopes": [
         "team"
       ]
@@ -37,6 +37,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "<<appDomain>>"
+    "<<App-Domain>>"
   ]
 }

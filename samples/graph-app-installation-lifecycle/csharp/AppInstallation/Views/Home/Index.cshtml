@@ -1,7 +1,7 @@
 ﻿@model AppInstallation.Models.AppViewModel
 <link rel="stylesheet" href="../Styles/index.css" />
 
-<button type="button" class="btn btn-outline-info" id="btngetUserApps">Get User Apps</button>
+<button type="button" class="btn btn-outline-info" id="btngetUserApps">Get User Apps - Testing YMAL</button>
 <button type="button" class="btn btn-outline-info" id="btnAddApp">Add Polly App</button>
 
 <div class="modal fade" id="getAppModal" tabindex="-1" role="dialog" aria-labelledby="getAppModalLabel" aria-hidden="true">
@@ -86,7 +86,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        microsoftTeams.initialize();
+        microsoftTeams.app.initialize();
         var teamAppInstallationId = '';
 
             $(".btngetApp").on('click', function (e) {
@@ -109,9 +109,9 @@
             });
 
             $("#btngetUserApps").on('click', function (e) {
-                microsoftTeams.getContext(function (context) {
-                    var tenantId = context.tid;
-                    var userId = context.userObjectId;
+                microsoftTeams.app.getContext().then((context) => {
+                    var tenantId = context.user.tenant.id;
+                    var userId = context.user.id;
                     e.preventDefault();
                     $.ajax({
                         url: '@Url.Action("UserIndex", "Home")',
@@ -235,9 +235,9 @@
                 });
 
                 $(".btnUserUpgradeApp").on('click', function (e) {
-                microsoftTeams.getContext(function (context) {
-                    var tenantId = context.tid;
-                    var userId = context.userObjectId;
+                microsoftTeams.app.getContext().then((context) => {
+                    var tenantId = context.user.tenant.id;
+                    var userId = context.user.id;
                     e.preventDefault();
                     var appId = $(e.currentTarget).attr('data-app-itemid');
                     $.ajax({

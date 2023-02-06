@@ -1,6 +1,6 @@
 {
-  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
-  "manifestVersion": "1.9",
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.12/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.12",
   "version": "1.0.1",
   "id": "<<YOUR-MICROSOFT-APP-ID>>",
   "packageName": "com.contoso.chatlifecycle",
@@ -27,7 +27,7 @@
     {
       "entityId": "com.contoso.chatlifecycle.static",
       "name": "Chat Lifecycle",
-      "contentUrl": "<<YOUR-BASE-URL>>/chatLifecycle",
+      "contentUrl": "https://<<YOUR-BASE-URL>>/chatLifecycle",
       "scopes": [
         "personal"
       ]
@@ -35,7 +35,7 @@
   ],
   "configurableTabs": [
     {
-      "configurationUrl": "<<YOUR-BASE-URL>>/configure",
+      "configurationUrl": "https://<<YOUR-BASE-URL>>/configure",
       "canUpdateConfiguration": true,
       "scopes": [
         "team"
@@ -47,7 +47,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "<<BASE-URL-DOMAIN>>"
+    "<<YOUR-BASE-URL>>"
   ],
   "webApplicationInfo": {
     "id": "<<YOUR-MICROSOFT-APP-ID>>",

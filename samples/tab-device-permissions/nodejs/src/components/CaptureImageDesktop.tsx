@@ -3,8 +3,10 @@
 
 import { useEffect, useState } from 'react';
 import * as microsoftTeams from "@microsoft/teams-js";
-import { Card, Flex, Text, Button, CardHeader, CardBody, Image } from '@fluentui/react-northstar'
-
+import { Text, Button, Image } from '@fluentui/react-components'
+import CheckAndAlertForCameraPermission from '../NavigatorPermission';
+import { Card } from "@fluentui/react-components/unstable";
+import { CardBody } from 'reactstrap';
 /**
  * The 'CaptureImageDesktop' component
  * of your app.
@@ -12,29 +14,15 @@ import { Card, Flex, Text, Button, CardHeader, CardBody, Image } from '@fluentui
 const CaptureImageDesktop = () => {
     var imageCapture: ImageCapture;
     const [capturedImage, setCapturedImage] = useState('');
-    const [capturedImages, setCapturedImages] = useState<any[]>([]);
 
     useEffect(() => {
         // initializing microsoft teams sdk
-        microsoftTeams.initialize()
-    })
-
-    // var imageCapture: ImageCapture;
-
+        microsoftTeams.app.initialize()
+    }) 
     // Method to validate before capturing media
     function captureMedia() {
         // Method to ask for image capture permission and then select media
-
-        navigator.permissions.query({ name: 'camera' }).then(function (result) {
-            if (result.state == 'denied') {
-                alert("failed");
-            }
-            else {
-                console.log("result is" + result);
-                alert("success");
-            }
-        });
-
+        CheckAndAlertForCameraPermission();
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(mediaStream => {
                 const track = mediaStream.getVideoTracks()[0];
@@ -51,22 +39,21 @@ const CaptureImageDesktop = () => {
         <>
             {/* Card for capturing single image */}
             <Card>
-                <CardHeader>
-                    <Text content="Capture Image" weight="bold" />
-                </CardHeader>
+              <Text weight='bold' as="h1">Capture Image</Text>
                 <CardBody>
-                    <Flex column gap="gap.small">
-                        <Text content="Checks for permission before capturing image." />
-                        <Text content="SDK used: " weight="semibold"/>
-                        <Text content="navigator, microsoftTeams" />
-                        <Text content="Method: " weight="semibold"/>
-                        <Text content="navigator.mediaDevices.getUserMedia, teams.getmedia" />
-                        <Button content="Capture image" onClick={captureMedia} />
+                    <div className='flex columngap'>
+                    <Text>Checks for permission before capturing image.</Text>
+
+                        <Text weight='medium'>SDK used: </Text>
+                        <Text>navigator, microsoftTeams </Text>
+                        <Text weight='medium'>Method: </Text>
+                        <Text>navigator.mediaDevices.getUserMedia, teams.getmedia</Text>                   
+                        <Button onClick={captureMedia}>Capture image</Button>
                         <Image
-                            fluid
+                            
                             src={capturedImage}
                         />
-                    </Flex>
+                    </div>
                 </CardBody>
             </Card>
         </>

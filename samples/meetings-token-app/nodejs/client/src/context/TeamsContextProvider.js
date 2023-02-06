@@ -19,18 +19,18 @@ class TeamsContextProvider extends Component {
         const { PreMeeting, SidePanel } = Constants.Surfaces;
         this.getContext()
             .then((context = {}) => {
-                const frameContext = context.frameContext || "";
+                const frameContext = context.page.frameContext || "";
                 if ([PreMeeting, SidePanel].includes(frameContext)) {
                     this.setState({
                         teamsContext: context,
                     })
-                    microsoftTeams.appInitialization.notifySuccess();
+                    microsoftTeams.app.notifySuccess();
                     return;
                 }
                 return Promise.reject("Error: Please make sure to run the app within teams as a tab app");
             })
             .catch(msg => {
-                microsoftTeams.appInitialization.notifyFailure(msg);
+                microsoftTeams.app.notifyFailure(msg);
                 this.setState({
                     error: {
                         status: true,

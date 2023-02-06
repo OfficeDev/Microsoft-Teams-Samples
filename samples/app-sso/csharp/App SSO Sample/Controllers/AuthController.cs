@@ -9,7 +9,7 @@ namespace TeamsTabSSO.Controllers
         private readonly IConfiguration _configuration;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HomeController"/> class.
+        /// Initializes a new instance of the <see cref="AuthController"/> class.
         /// </summary>
         /// <param name="configuration">IConfiguration instance.</param>
         public AuthController(
@@ -34,6 +34,7 @@ namespace TeamsTabSSO.Controllers
         /// <returns>current View</returns>
         public IActionResult End()
         {
+            ViewBag.AzureClientId = _configuration["AzureAd:ClientId"];
             return View();
         }
 

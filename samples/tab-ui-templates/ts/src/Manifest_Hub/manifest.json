@@ -1,0 +1,53 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.13",
+  "id": "{{GUID_ID}}",
+  "version": "1.0.0",
+  "packageName": "com.teams.tabuitemplates",
+  "developer": {
+    "name": "microsoft",
+    "websiteUrl": "https://{{HOSTNAME}}",
+    "privacyUrl": "https://{{HOSTNAME}}/privacy.html",
+    "termsOfUseUrl": "https://{{HOSTNAME}}/tou.html"
+  },
+  "name": {
+    "short": "Tab UI Templates",
+    "full": "Tab UI Templates"
+  },
+  "description": {
+    "short": "Experience how Teams apps should look and behave in common scenarios.",
+    "full": "The Teams Sample App includes interactive content to help you better understand how your app should look and behave in Teams. Try out forms, dashboards, and other UI templates that meet Teams design standards."
+  },
+  "icons": {
+    "outline": "icon-outline.png",
+    "color": "icon-color.png"
+  },
+  "accentColor": "#D85028",
+  "staticTabs": [
+    {
+      "entityId": "sample.app.welcome",
+      "name": "Welcome",
+      "contentUrl": "https://{{HOSTNAME}}/welcome",
+      "scopes": [ "personal" ]
+    },
+    {
+      "entityId": "sample.app.dashboard",
+      "name": "Dashboard",
+      "contentUrl": "https://{{HOSTNAME}}/dashboard",
+      "scopes": [ "personal" ]
+    },
+    {
+      "entityId": "sample.app.list",
+      "name": "List",
+      "contentUrl": "https://{{HOSTNAME}}/list",
+      "scopes": [ "personal" ]
+    },
+    {
+      "entityId": "sample.app.boards",
+      "name": "Task boards",
+      "contentUrl": "https://{{HOSTNAME}}/board",
+      "scopes": [ "personal" ]
+    }
+  ],
+  "validDomains": [ "{{HOSTNAME}}" ]
+}

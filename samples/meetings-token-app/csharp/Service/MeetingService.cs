@@ -66,9 +66,10 @@ namespace TokenApp.Service
             using var getRoleResponse = await this.httpClient.SendAsync(getRoleRequest);
             getRoleResponse.EnsureSuccessStatusCode();
 
+            var userRole = await getRoleResponse.Content.ReadAsStringAsync();
             var response = new UserMeetingRoleServiceResponse
             {
-                UserRole = JsonConvert.DeserializeObject<Models.UserRole>(await getRoleResponse.Content.ReadAsStringAsync()),
+                UserRole = JsonConvert.DeserializeObject<Models.UserRole>(userRole),
             };
             return response;
         }
